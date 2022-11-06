@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9389c51b84da394b9b4cc4c62f7ecf1, type: 3}
+  m_Name: InvSO
+  m_EditorClassIdentifier: 
+  emptySlot: {fileID: 21300000, guid: 6aea4c572159ede41bcdf1485bf985f7, type: 3}
+  filledSlot: {fileID: 21300000, guid: 54a029bdb8ab539429d9232662ea6d62, type: 3}
+  epicSlot: {fileID: 21300000, guid: 4f3aedf977dd6154f9fb811c0ad516cb, type: 3}
+  folkloricSlot: {fileID: 21300000, guid: 0f0244702555e534a8afe1c20153240e, type: 3}
+  sagaicSlot: {fileID: 21300000, guid: 294b9933778b6dc458bed9439f2a3482, type: 3}
+  poeticSlot: {fileID: 21300000, guid: 2b8c2b535844975418919d099d8315ce, type: 3}
+  relicSlot: {fileID: 21300000, guid: 617bb94cce96ab5438ce249f21fefaf4, type: 3}
+  hendiadicSlot: {fileID: 21300000, guid: 447ac2b7e4a688845b41a3aabaf81090, type: 3}
+  allPotions:
+  - {fileID: 11400000, guid: 5e3ae03d78d80e74ea82a9dbeba7c5e9, type: 2}
+  - {fileID: 11400000, guid: e3720cffe244b5541b314736e538bb9e, type: 2}
+  - {fileID: 11400000, guid: 8575d22f3bdfea84c80df48b4b166043, type: 2}
+  - {fileID: 11400000, guid: 46ab84f16cae0c840a414226e3ecf634, type: 2}
+  - {fileID: 11400000, guid: 448a09af8ffa39941b2f25b2237d0799, type: 2}
+  - {fileID: 11400000, guid: b948e745836ae3c40a27f4ed7ad3c8c1, type: 2}
+  - {fileID: 11400000, guid: c62e61063b03abc45b6096c72ffc820e, type: 2}
+  - {fileID: 11400000, guid: 5a37495401282a644b3374c7861ab7ac, type: 2}
+  - {fileID: 11400000, guid: 3640437956df9374db6fa5a66db606d7, type: 2}
+  - {fileID: 11400000, guid: b4eebf11dd418f941888aaedbbe8a88e, type: 2}
+  - {fileID: 11400000, guid: 69f3a9ed17d86ee4d8db5c3ba2319f50, type: 2}
+  - {fileID: 11400000, guid: 58eaf0beea86b9146b8634e74a929a31, type: 2}
+  allGems:
+  - {fileID: 11400000, guid: 6379b9a098accca48a6dfe3e3074ab1f, type: 2}
+  - {fileID: 11400000, guid: a4b66020c788f4e42bf30b02729b3c28, type: 2}
+  - {fileID: 11400000, guid: 890c1a9b6ada83b469c511094bf32fed, type: 2}
+  - {fileID: 11400000, guid: ad486f298134c3e43abb2d9861112fb7, type: 2}
+  - {fileID: 11400000, guid: 7ef29d0553907fa4f88f765e49fcedaa, type: 2}
+  - {fileID: 11400000, guid: aa44f5959e9c359408e5a8b2f71e53d2, type: 2}
+  - {fileID: 11400000, guid: bca8981fbe1b20441aac49ec08f714fc, type: 2}
+  - {fileID: 11400000, guid: 631dec5547234cf4e92cd80785552909, type: 2}
+  - {fileID: 11400000, guid: dc38c30614b96c241a7f632a05079f79, type: 2}
+  - {fileID: 11400000, guid: 1cdb8eed7424af446ba45dd7b82731a1, type: 2}
+  allItemStr:
+  - itemActions: 1
+    itemStr: Equipable
+  - itemActions: 2
+    itemStr: Consumable
+  - itemActions: 3
+    itemStr: Disposable
+  - itemActions: 4
+    itemStr: Sellable
+  - itemActions: 5
+    itemStr: Purchaseable
+  - itemActions: 6
+    itemStr: Craftable
+  itemImgPrefab: {fileID: 2561249727629156307, guid: fd0deb7eea02e044bab3aa79aa71f4d5,
+    type: 3}

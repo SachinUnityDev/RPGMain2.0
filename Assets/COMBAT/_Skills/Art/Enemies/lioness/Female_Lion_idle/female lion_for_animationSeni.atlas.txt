@@ -1,0 +1,111 @@
+
+female lion_for_animationSeni.png
+size: 3118,3118
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Back
+  rotate: false
+  xy: 0, 1730
+  size: 571, 517
+  orig: 585, 534
+  offset: 3, 10
+  index: -1
+Body
+  rotate: false
+  xy: 0, 2249
+  size: 1153, 641
+  orig: 1153, 731
+  offset: 0, 87
+  index: -1
+Head
+  rotate: true
+  xy: 573, 1864
+  size: 383, 449
+  orig: 387, 450
+  offset: 0, 1
+  index: -1
+L_Arm_01
+  rotate: false
+  xy: 2850, 1941
+  size: 268, 449
+  orig: 279, 470
+  offset: 4, 7
+  index: -1
+L_Hand
+  rotate: true
+  xy: 2160, 1846
+  size: 274, 597
+  orig: 644, 859
+  offset: 116, 16
+  index: -1
+L_Leg_01
+  rotate: true
+  xy: 2234, 2753
+  size: 365, 820
+  orig: 368, 824
+  offset: 0, 1
+  index: -1
+Mouth
+  rotate: false
+  xy: 1968, 2746
+  size: 222, 144
+  orig: 223, 148
+  offset: 1, 4
+  index: -1
+R_Arm_01
+  rotate: true
+  xy: 2192, 2440
+  size: 311, 716
+  orig: 320, 732
+  offset: 8, 15
+  index: -1
+R_Arm_02
+  rotate: false
+  xy: 1968, 1929
+  size: 190, 609
+  orig: 194, 770
+  offset: 3, 12
+  index: -1
+R_Foot
+  rotate: false
+  xy: 2910, 2392
+  size: 192, 359
+  orig: 195, 359
+  offset: 2, 0
+  index: -1
+R_Hand
+  rotate: false
+  xy: 1968, 2540
+  size: 219, 204
+  orig: 237, 459
+  offset: 1, 0
+  index: -1
+R_Leg_01
+  rotate: true
+  xy: 2160, 2122
+  size: 316, 688
+  orig: 333, 693
+  offset: 1, 3
+  index: -1
+R_Leg_02
+  rotate: false
+  xy: 2759, 1608
+  size: 336, 331
+  orig: 367, 353
+  offset: 28, 0
+  index: -1
+shadow
+  rotate: false
+  xy: 0, 2892
+  size: 2232, 226
+  orig: 2232, 226
+  offset: 0, 0
+  index: -1
+tail
+  rotate: true
+  xy: 1155, 2103
+  size: 787, 811
+  orig: 799, 836
+  offset: 12, 7
+  index: -1

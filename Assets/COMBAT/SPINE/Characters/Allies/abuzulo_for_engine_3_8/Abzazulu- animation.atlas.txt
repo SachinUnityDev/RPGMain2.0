@@ -1,0 +1,249 @@
+
+Abzazulu- animation.png
+size: 2014,2038
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+cloth
+  rotate: true
+  xy: 491, 503
+  size: 402, 746
+  orig: 412, 753
+  offset: 5, 6
+  index: -1
+clothes2
+  rotate: true
+  xy: 505, 988
+  size: 394, 458
+  orig: 397, 481
+  offset: 1, 22
+  index: -1
+ear
+  rotate: true
+  xy: 1312, 1878
+  size: 158, 269
+  orig: 162, 272
+  offset: 1, 1
+  index: -1
+ear2
+  rotate: true
+  xy: 728, 1938
+  size: 98, 206
+  orig: 109, 219
+  offset: 3, 9
+  index: -1
+foot
+  rotate: false
+  xy: 1344, 1276
+  size: 334, 307
+  orig: 340, 375
+  offset: 2, 1
+  index: -1
+hair
+  rotate: false
+  xy: 864, 1655
+  size: 317, 239
+  orig: 321, 242
+  offset: 2, 1
+  index: -1
+hang_chains_1
+  rotate: true
+  xy: 415, 1973
+  size: 63, 311
+  orig: 65, 315
+  offset: 1, 3
+  index: -1
+hang_chains_2
+  rotate: true
+  xy: 124, 1980
+  size: 56, 289
+  orig: 58, 291
+  offset: 1, 1
+  index: -1
+head
+  rotate: true
+  xy: 2, 635
+  size: 479, 487
+  orig: 531, 602
+  offset: 2, 114
+  index: -1
+hide_eyelash
+  rotate: false
+  xy: 936, 1921
+  size: 149, 115
+  orig: 151, 122
+  offset: 1, 6
+  index: -1
+hide_eyelash2
+  rotate: true
+  xy: 2, 1986
+  size: 50, 120
+  orig: 52, 123
+  offset: 1, 2
+  index: -1
+hide_eyelash_v_2
+  rotate: false
+  xy: 1087, 1896
+  size: 223, 140
+  orig: 225, 145
+  offset: 1, 4
+  index: -1
+left_arm2
+  rotate: false
+  xy: 1680, 1259
+  size: 332, 324
+  orig: 372, 373
+  offset: 28, 5
+  index: -1
+left_arm_1
+  rotate: true
+  xy: 1491, 787
+  size: 470, 485
+  orig: 506, 518
+  offset: 34, 3
+  index: -1
+left_hand
+  rotate: false
+  xy: 368, 1463
+  size: 315, 269
+  orig: 317, 273
+  offset: 1, 2
+  index: -1
+left_hand2
+  rotate: false
+  xy: 1583, 1877
+  size: 248, 159
+  orig: 251, 163
+  offset: 1, 3
+  index: -1
+left_horn
+  rotate: false
+  xy: 1018, 1348
+  size: 324, 271
+  orig: 329, 294
+  offset: 1, 22
+  index: -1
+left_leg
+  rotate: false
+  xy: 965, 907
+  size: 524, 367
+  orig: 540, 443
+  offset: 1, 66
+  index: -1
+left_leg2
+  rotate: false
+  xy: 1523, 1585
+  size: 290, 290
+  orig: 292, 341
+  offset: 1, 1
+  index: -1
+left_leg3
+  rotate: false
+  xy: 249, 1775
+  size: 278, 196
+  orig: 286, 214
+  offset: 6, 1
+  index: -1
+necklace
+  rotate: true
+  xy: 1833, 1809
+  size: 227, 178
+  orig: 229, 182
+  offset: 1, 2
+  index: -1
+right_horn
+  rotate: false
+  xy: 2, 1116
+  size: 501, 345
+  orig: 771, 352
+  offset: 1, 6
+  index: -1
+rigth_arm1
+  rotate: true
+  xy: 2, 2
+  size: 499, 833
+  orig: 506, 837
+  offset: 4, 2
+  index: -1
+rigth_arm2
+  rotate: false
+  xy: 1239, 288
+  size: 531, 497
+  orig: 546, 533
+  offset: 1, 2
+  index: -1
+rigth_hand
+  rotate: false
+  xy: 1183, 1621
+  size: 338, 255
+  orig: 341, 257
+  offset: 1, 1
+  index: -1
+tail
+  rotate: false
+  xy: 2, 1811
+  size: 245, 167
+  orig: 277, 211
+  offset: 30, 1
+  index: -1
+tail1
+  rotate: false
+  xy: 2, 1511
+  size: 364, 262
+  orig: 402, 303
+  offset: 5, 40
+  index: -1
+tail2
+  rotate: false
+  xy: 685, 1384
+  size: 331, 269
+  orig: 364, 278
+  offset: 32, 5
+  index: -1
+tail3
+  rotate: true
+  xy: 529, 1734
+  size: 202, 333
+  orig: 207, 342
+  offset: 4, 1
+  index: -1
+
+Abzazulu- animation2.png
+size: 1552,1647
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+armor
+  rotate: true
+  xy: 755, 876
+  size: 769, 795
+  orig: 818, 834
+  offset: 20, 25
+  index: -1
+chest
+  rotate: true
+  xy: 2, 2
+  size: 872, 1107
+  orig: 876, 1111
+  offset: 1, 3
+  index: -1
+right_leg
+  rotate: true
+  xy: 2, 1027
+  size: 618, 751
+  orig: 620, 754
+  offset: 1, 1
+  index: -1
+
+Abzazulu- animation3.png
+size: 1942,935
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+axe
+  rotate: false
+  xy: 2, 2
+  size: 1938, 931
+  orig: 2011, 949
+  offset: 4, 2
+  index: -1

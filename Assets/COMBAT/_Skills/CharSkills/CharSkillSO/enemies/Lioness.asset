@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a4a1798b88f0f43a32928e5ebf9320, type: 3}
+  m_Name: Lioness
+  m_EditorClassIdentifier: 
+  charName: 28
+  combatPose: {fileID: 21300000, guid: d51e17a9a7337634b8dbe5e1620074dd, type: 3}
+  combatFX:
+    loc: 0
+    skillSprite: {fileID: 0}
+  defendPose: {fileID: 21300000, guid: d4c73ac7d86bed44ba7268e75897beff, type: 3}
+  defendFX:
+    loc: 0
+    skillSprite: {fileID: 0}
+  passiveSkills:
+  - passiveSkillName: 19
+    passiveSprite: {fileID: 21300000, guid: 7ec2fd6d0a8ddc644899d22dbdd565dc, type: 3}
+  - passiveSkillName: 33
+    passiveSprite: {fileID: 21300000, guid: cd24f30914aecf444a942d6910822494, type: 3}
+  allSkills:
+  - skillName: 113
+    charName: 28
+    skillID: 0
+    skillIconSprite: {fileID: 21300000, guid: 9c06eb3f947616041b3f98f902a1e1c1, type: 3}
+    skillPose: {fileID: 21300000, guid: 814cb0a3bdce24c4bb5d021d4050f0b8, type: 3}
+    skillTransitionPose: {fileID: 0}
+    skillType: 1
+    skillUnLockStatus: 1
+    skillDesc: 
+    damageMod: 100
+    skillLvl: 0
+    skillSelState: 1
+    cd: 0
+    attackType: 1
+    dmgType: 010000000f000000
+    castPos: 010000000200000003000000
+    targetPos: []
+    staminareq: 6
+    castTime: 0
+    timeFrame: 0
+    maxUsagePerCombat: 0
+    skillIncli: 1
+    baseWeight: 10
+    isActive: 0
+    allPerkHexes:
+    - perkChain: 00000000
+      hexName: 070000000c0000000b000000
+    allSkillFXs: []
+  - skillName: 114
+    charName: 28
+    skillID: 0
+    skillIconSprite: {fileID: 21300000, guid: 750dd56f21c354943a943fb3d2eff288, type: 3}
+    skillPose: {fileID: 21300000, guid: 05d6ce0d7032f04468808394d4442409, type: 3}
+    skillTransitionPose: {fileID: 0}
+    skillType: 2
+    skillUnLockStatus: 1
+    skillDesc: 
+    damageMod: 120
+    skillLvl: 0
+    skillSelState: 1
+    cd: 2
+    attackType: 1
+    dmgType: 010000000e000000
+    castPos: 01000000020000000300000004000000050000000600000007000000
+    targetPos: []
+    staminareq: 8
+    castTime: 2
+    timeFrame: 1
+    maxUsagePerCombat: 0
+    skillIncli: 1
+    baseWeight: 30
+    isActive: 0
+    allPerkHexes:
+    - perkChain: 00000000
+      hexName: 02000000240000000b000000
+    allSkillFXs: []
+  - skillName: 115
+    charName: 28
+    skillID: 0
+    skillIconSprite: {fileID: 21300000, guid: fde87c39c0a8ae447a58d4fc5b4a5292, type: 3}
+    skillPose: {fileID: 21300000, guid: b04d8ac06231c2841a32cca9a90bde94, type: 3}
+    skillTransitionPose: {fileID: 0}
+    skillType: 3
+    skillUnLockStatus: 1
+    skillDesc: 
+    damageMod: 0
+    skillLvl: 0
+    skillSelState: 1
+    cd: 3
+    attackType: 0
+    dmgType: 0a000000
+    castPos: 010000000200000003000000
+    targetPos: []
+    staminareq: 6
+    castTime: 2
+    timeFrame: 1
+    maxUsagePerCombat: 0
+    skillIncli: 4
+    baseWeight: 15
+    isActive: 0
+    allPerkHexes:
+    - perkChain: 00000000
+      hexName: 070000000b00000003000000
+    allSkillFXs: []

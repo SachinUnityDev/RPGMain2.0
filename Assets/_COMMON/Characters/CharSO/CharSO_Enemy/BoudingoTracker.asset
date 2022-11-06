@@ -1,0 +1,187 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3108039f6456f440bbe925b6c103a06, type: 3}
+  m_Name: BoudingoTracker
+  m_EditorClassIdentifier: 
+  charID: 0
+  charName: 16
+  charPrefab: {fileID: 0}
+  charSprite: {fileID: 0}
+  charHexPortrait: {fileID: 0}
+  dialoguePortrait: {fileID: 0}
+  charMode: 0
+  orgCharMode: 0
+  expPoints: 0
+  raceType: 0
+  cultType: 0
+  classType: 0
+  heroType: 0
+  tameAnimalsStrength: 0
+  fleeBehaviour: 0
+  canBeAmbushed: 0
+  canBeCaught: 0
+  potions: 0
+  gems: 0
+  startLevel: 0
+  staminaRegen: 2
+  StatsList:
+  - statsName: 1
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 100
+  - statsName: 2
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 100
+  - statsName: 3
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: -30
+    maxLimit: 30
+  - statsName: 4
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 100
+  - statsName: 5
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 100
+  - statsName: 6
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 100
+  - statsName: 7
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 100
+  - statsName: 8
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 12
+    maxLimit: 96
+  - statsName: 9
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 12
+  - statsName: 10
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 12
+  - statsName: 11
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 12
+  - statsName: 12
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 100
+  - statsName: 13
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 100
+  - statsName: 14
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 100
+  - statsName: 15
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 100
+  - statsName: 16
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 90
+  - statsName: 17
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 90
+  - statsName: 18
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 90
+  - statsName: 19
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 90
+  - statsName: 20
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 60
+  - statsName: 21
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 60
+  charOccupies: 0
+  posPriority: 
+  charLvl: 0
+  skillLvl: 0

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
+  m_Name: Taunt_shadow_Atlas
+  m_EditorClassIdentifier: 
+  atlasFile: {fileID: 4900000, guid: 2e655b7f9ff0e9c46a7e5238fcd0288c, type: 3}
+  materials:
+  - {fileID: 2100000, guid: 052ebb0cf7c6cf7478b92a4481a4aff5, type: 2}
+  - {fileID: 2100000, guid: 79b4585d36d1ca641bfb67b2544e33db, type: 2}
+  - {fileID: 2100000, guid: 05cca0e94584ad14a87afc5a5357a1d5, type: 2}

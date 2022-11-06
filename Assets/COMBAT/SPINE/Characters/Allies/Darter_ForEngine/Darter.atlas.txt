@@ -1,0 +1,167 @@
+
+Darter.png
+size: 1691,1691
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Arm_L
+  rotate: true
+  xy: 1490, 214
+  size: 403, 171
+  orig: 404, 171
+  offset: 1, 0
+  index: -1
+Arm_R
+  rotate: true
+  xy: 481, 857
+  size: 352, 197
+  orig: 352, 198
+  offset: 0, 0
+  index: -1
+Capsule
+  rotate: true
+  xy: 730, 18
+  size: 78, 127
+  orig: 80, 129
+  offset: 1, 1
+  index: -1
+Capsule2
+  rotate: true
+  xy: 859, 25
+  size: 58, 138
+  orig: 61, 141
+  offset: 1, 2
+  index: -1
+Cloth
+  rotate: false
+  xy: 481, 222
+  size: 163, 633
+  orig: 163, 634
+  offset: 0, 0
+  index: -1
+Cloth2
+  rotate: false
+  xy: 2, 1211
+  size: 690, 478
+  orig: 690, 478
+  offset: 0, 0
+  index: -1
+Cloth3
+  rotate: true
+  xy: 2, 252
+  size: 473, 438
+  orig: 474, 439
+  offset: 0, 1
+  index: -1
+Dart
+  rotate: true
+  xy: 1199, 1224
+  size: 465, 450
+  orig: 465, 450
+  offset: 0, 0
+  index: -1
+Earring_L
+  rotate: true
+  xy: 595, 2
+  size: 94, 133
+  orig: 96, 135
+  offset: 1, 1
+  index: -1
+Earring_R
+  rotate: true
+  xy: 480, 86
+  size: 134, 113
+  orig: 137, 115
+  offset: 1, 1
+  index: -1
+Foot_L
+  rotate: false
+  xy: 289, 25
+  size: 189, 225
+  orig: 189, 225
+  offset: 0, 0
+  index: -1
+Foot_R
+  rotate: false
+  xy: 2, 13
+  size: 285, 237
+  orig: 297, 237
+  offset: 12, 0
+  index: -1
+Forearm_L
+  rotate: false
+  xy: 1205, 14
+  size: 233, 145
+  orig: 235, 147
+  offset: 1, 1
+  index: -1
+Forearm_R
+  rotate: false
+  xy: 908, 85
+  size: 295, 108
+  orig: 295, 108
+  offset: 0, 0
+  index: -1
+Hand_L
+  rotate: false
+  xy: 1199, 1029
+  size: 411, 193
+  orig: 413, 195
+  offset: 1, 1
+  index: -1
+Hand_R
+  rotate: true
+  xy: 1490, 32
+  size: 180, 167
+  orig: 182, 169
+  offset: 1, 1
+  index: -1
+Head
+  rotate: false
+  xy: 2, 727
+  size: 477, 482
+  orig: 477, 482
+  offset: 0, 0
+  index: -1
+Leg_L
+  rotate: false
+  xy: 1205, 161
+  size: 283, 456
+  orig: 283, 457
+  offset: 0, 0
+  index: -1
+Leg_R
+  rotate: false
+  xy: 680, 649
+  size: 558, 360
+  orig: 558, 360
+  offset: 0, 0
+  index: -1
+Shin_L
+  rotate: false
+  xy: 646, 98
+  size: 260, 549
+  orig: 261, 549
+  offset: 1, 0
+  index: -1
+Shin_R
+  rotate: false
+  xy: 1240, 619
+  size: 364, 408
+  orig: 364, 410
+  offset: 0, 1
+  index: -1
+Skull
+  rotate: true
+  xy: 908, 195
+  size: 452, 295
+  orig: 452, 295
+  offset: 0, 0
+  index: -1
+Torso
+  rotate: false
+  xy: 694, 1011
+  size: 503, 678
+  orig: 503, 678
+  offset: 0, 0
+  index: -1

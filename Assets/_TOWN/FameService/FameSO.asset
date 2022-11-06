@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf465610e42e38b4abc0df4f6ea5ecee, type: 3}
+  m_Name: FameSO
+  m_EditorClassIdentifier: 
+  allFameBehaviorMaps:
+  - fameBehavior: 1
+    allAntiFameTypes: 0300000006000000
+  - fameBehavior: 2
+    allAntiFameTypes: 0200000003000000
+  - fameBehavior: 3
+    allAntiFameTypes: 00000000
+  - fameBehavior: 4
+    allAntiFameTypes: 06000000
+  - fameBehavior: 5
+    allAntiFameTypes: 040000000500000006000000
+  - fameBehavior: 6
+    allAntiFameTypes: 0500000006000000
+  allFameRangeData:
+  - FameType: 7
+    rangeStart: -30
+    rangeEnd: 30
+  - FameType: 1
+    rangeStart: 30
+    rangeEnd: 60
+  - FameType: 2
+    rangeStart: 60
+    rangeEnd: 120
+  - FameType: 3
+    rangeStart: 120
+    rangeEnd: 120
+  - FameType: 4
+    rangeStart: -30
+    rangeEnd: -60
+  - FameType: 5
+    rangeStart: -60
+    rangeEnd: -120
+  - FameType: 6
+    rangeStart: -120
+    rangeEnd: -120
+  allFameStrData:
+  - fameType: 1
+    fameStr: Respectable
+  - fameType: 2
+    fameStr: Honorable
+  - fameType: 3
+    fameStr: Hero
+  - fameType: 4
+    fameStr: Despicable
+  - fameType: 5
+    fameStr: Notorious
+  - fameType: 6
+    fameStr: Villain
+  - fameType: 7
+    fameStr: Unknown
+  allfameBehaviorDesc:
+  - famebehavior: 1
+    desc: Won't join if Fame Hero or Villain.
+  - famebehavior: 2
+    desc: Won't join if Fame Honorable or better.
+  - famebehavior: 3
+    desc: No Fame limitation.
+  - famebehavior: 4
+    desc: Won't join if Fame Villain.
+  - famebehavior: 5
+    desc: Won't join if Fame Despicable or worse.
+  - famebehavior: 6
+    desc: Won't join if Fame Notorious or worse.

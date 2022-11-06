@@ -1,0 +1,278 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3108039f6456f440bbe925b6c103a06, type: 3}
+  m_Name: Baran
+  m_EditorClassIdentifier: 
+  charID: 102
+  charName: 2
+  charPrefab: {fileID: 8420103901130551636, guid: a40e99f6ec2103049ba46b7ad8c3eb37,
+    type: 3}
+  charSprite: {fileID: 21300000, guid: d34de3d2ed0683d4a9b1445fadf53d77, type: 3}
+  charHexPortrait: {fileID: 21300000, guid: 7f210713637e38d41bf058a232c109b5, type: 3}
+  dialoguePortraitClicked: {fileID: 21300000, guid: a76bf619350b6514bb5bfc0c73d4db71,
+    type: 3}
+  dialoguePortraitUnClicked: {fileID: 21300000, guid: f7905d490f7147046a2c0df5cd7769f0,
+    type: 3}
+  bpPortraitUnLocked: {fileID: 21300000, guid: 0d7153d108ab4ab418d04cf6614da57f, type: 3}
+  bpPortraitUnAvail: {fileID: 21300000, guid: 7012d88be3a775144836db9cad521fe7, type: 3}
+  charMode: 1
+  orgCharMode: 1
+  expPoints: 90
+  jobExp: 0
+  skillPts: 0
+  charLvl: 2
+  charNameStr: Baran
+  availOfChar: 1
+  stateOfChar: 2
+  fameBehavior: 1
+  baseCharLoc: 1
+  raceType: 2
+  raceTypeHero: 6
+  cultType: 1
+  classType: 1
+  heroType: 2
+  tameAnimalsStrength: 1
+  fleeBehaviour: 3
+  canBeAmbushed: 0
+  canBeCaught: 0
+  provisionItems:
+  - itemType: 0
+    ItemName: 1
+  earningsItems:
+  - itemType: 4
+    ItemName: 9
+  earningShare: 0.4
+  CompanionPreReqOpt1:
+  - itemType: 4
+    ItemName: 2
+  - itemType: 4
+    ItemName: 2
+  CompanionPreReqOpt2:
+  - itemType: 4
+    ItemName: 9
+  - itemType: 4
+    ItemName: 9
+  startLevel: 0
+  staminaRegen: 2
+  StatsList:
+  - statsName: 1
+    currValue: 48
+    baseValue: 0
+    desc: Health is health, you know it...
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 48
+    isClamped: 0
+  - statsName: 2
+    currValue: 30
+    baseValue: 0
+    desc: Resource to use skills.
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 30
+    isClamped: 0
+  - statsName: 3
+    currValue: 0
+    baseValue: 0
+    desc: Be among those who dare to dare!
+    minRange: 0
+    maxRange: 0
+    minLimit: -30
+    maxLimit: 30
+    isClamped: 0
+  - statsName: 4
+    currValue: 0
+    baseValue: 0
+    desc: Start losing Health once Hunger is 100%.
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 100
+    isClamped: 0
+  - statsName: 5
+    currValue: 0
+    baseValue: 0
+    desc: Start losing Stamina once Thirst is 100%.
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 100
+    isClamped: 0
+  - statsName: 6
+    currValue: 0
+    baseValue: 0
+    desc: Base value for Physical and Magical attacks.
+    minRange: 6
+    maxRange: 11
+    minLimit: 0
+    maxLimit: 100
+    isClamped: 0
+  - statsName: 7
+    currValue: 5
+    baseValue: 0
+    desc: Chance to land Physical attack to a target.
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 15
+    isClamped: 0
+  - statsName: 8
+    currValue: 2
+    baseValue: 0
+    desc: Determinant value for hitting correct target by Magical attacks or Misfire.
+    minRange: 0
+    maxRange: 0
+    minLimit: 12
+    maxLimit: 96
+    isClamped: 0
+  - statsName: 9
+    currValue: 5
+    baseValue: 0
+    desc: Determinant value for Critical and Feeble hits.
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 12
+    isClamped: 0
+  - statsName: 10
+    currValue: 6
+    baseValue: 0
+    desc: Determinant value for extra action or pass action.
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 12
+    isClamped: 0
+  - statsName: 11
+    currValue: 8
+    baseValue: 0
+    desc: Main determinant for turn order. Increases chance to keep action after
+      using Move.
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 12
+    isClamped: 0
+  - statsName: 12
+    currValue: 12
+    baseValue: 0
+    desc: Determinant value for base Health. Increases chance to withstand Hunger.
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 100
+    isClamped: 0
+  - statsName: 13
+    currValue: 10
+    baseValue: 0
+    desc: Determinant value for base Stamina. Increases chance to withstand Thirst.
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 100
+    isClamped: 0
+  - statsName: 14
+    currValue: 0
+    baseValue: 0
+    desc: Value to mitigate incoming Physical damage.
+    minRange: 1
+    maxRange: 4
+    minLimit: 0
+    maxLimit: 100
+    isClamped: 0
+  - statsName: 15
+    currValue: 1
+    baseValue: 0
+    desc: Chance to evade a Physical attack.
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 100
+    isClamped: 0
+  - statsName: 16
+    currValue: 0
+    baseValue: 0
+    desc: Percentage value to mitigate incoming Fire damage.
+    minRange: 0
+    maxRange: 0
+    minLimit: -60
+    maxLimit: 90
+    isClamped: 0
+  - statsName: 17
+    currValue: 25
+    baseValue: 0
+    desc: Percentage value to mitigate incoming Earth damage.
+    minRange: 0
+    maxRange: 0
+    minLimit: -60
+    maxLimit: 90
+    isClamped: 0
+  - statsName: 18
+    currValue: 20
+    baseValue: 0
+    desc: Percentage value to mitigate incoming Water damage.
+    minRange: 0
+    maxRange: 0
+    minLimit: -60
+    maxLimit: 90
+    isClamped: 0
+  - statsName: 19
+    currValue: 0
+    baseValue: 0
+    desc: Percentage value to mitigate incoming Air damage.
+    minRange: 0
+    maxRange: 0
+    minLimit: -60
+    maxLimit: 90
+    isClamped: 0
+  - statsName: 20
+    currValue: 0
+    baseValue: 0
+    desc: Percentage value to mitigate incoming Light damage.
+    minRange: 0
+    maxRange: 0
+    minLimit: -30
+    maxLimit: 60
+    isClamped: 0
+  - statsName: 22
+    currValue: 2
+    baseValue: 0
+    desc: Percentage value to mitigate incoming Light damage.
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+    isClamped: 0
+  - statsName: 23
+    currValue: 0
+    baseValue: 0
+    desc: Percentage value to mitigate incoming Light damage.
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+    isClamped: 0
+  - statsName: 21
+    currValue: 0
+    baseValue: 0
+    desc: Percentage value to mitigate incoming Dark damage.
+    minRange: 0
+    maxRange: 0
+    minLimit: -30
+    maxLimit: 60
+    isClamped: 0
+  charOccupies: 0
+  posPriority: 0100000002000000
+  armorType: 1
+  enchantableGem4Weapon: 2

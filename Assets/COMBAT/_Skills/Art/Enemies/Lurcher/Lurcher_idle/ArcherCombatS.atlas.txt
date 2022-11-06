@@ -1,0 +1,153 @@
+
+ArcherCombatS.png
+size: 2079,2079
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Arm band
+  rotate: false
+  xy: 0, 19
+  size: 152, 62
+  orig: 165, 67
+  offset: 9, 2
+  index: -1
+Arrows
+  rotate: false
+  xy: 1428, 343
+  size: 181, 678
+  orig: 184, 682
+  offset: 2, 3
+  index: -1
+Bag
+  rotate: false
+  xy: 956, 35
+  size: 242, 207
+  orig: 312, 228
+  offset: 2, 19
+  index: -1
+Band
+  rotate: false
+  xy: 0, 339
+  size: 537, 623
+  orig: 544, 623
+  offset: 3, 0
+  index: -1
+Body
+  rotate: false
+  xy: 392, 1049
+  size: 578, 736
+  orig: 578, 736
+  offset: 0, 0
+  index: -1
+Bow
+  rotate: true
+  xy: 392, 1787
+  size: 292, 1205
+  orig: 304, 1210
+  offset: 3, 2
+  index: -1
+Chest
+  rotate: false
+  xy: 851, 442
+  size: 575, 595
+  orig: 579, 595
+  offset: 4, 0
+  index: -1
+Head
+  rotate: true
+  xy: 1611, 482
+  size: 525, 468
+  orig: 531, 468
+  offset: 0, 0
+  index: -1
+Hip
+  rotate: true
+  xy: 972, 1039
+  size: 746, 547
+  orig: 847, 1020
+  offset: 0, 46
+  index: -1
+L_Arm_01
+  rotate: true
+  xy: 1627, 1009
+  size: 269, 417
+  orig: 279, 420
+  offset: 10, 3
+  index: -1
+L_Arm_02
+  rotate: false
+  xy: 1611, 317
+  size: 439, 163
+  orig: 463, 173
+  offset: 24, 6
+  index: -1
+L_Leg_01
+  rotate: true
+  xy: 1599, 1836
+  size: 243, 475
+  orig: 243, 475
+  offset: 0, 0
+  index: -1
+L_Leg_02
+  rotate: true
+  xy: 0, 83
+  size: 254, 646
+  orig: 254, 646
+  offset: 0, 0
+  index: -1
+Neck
+  rotate: true
+  xy: 1200, 86
+  size: 156, 255
+  orig: 162, 258
+  offset: 4, 3
+  index: -1
+R_Arm_01
+  rotate: false
+  xy: 648, 69
+  size: 306, 339
+  orig: 306, 340
+  offset: 0, 0
+  index: -1
+R_Arm_02
+  rotate: false
+  xy: 956, 244
+  size: 368, 196
+  orig: 368, 196
+  offset: 0, 0
+  index: -1
+R_Hand
+  rotate: false
+  xy: 1457, 206
+  size: 106, 135
+  orig: 109, 138
+  offset: 0, 3
+  index: -1
+R_Leg_01
+  rotate: false
+  xy: 1627, 1280
+  size: 392, 554
+  orig: 392, 554
+  offset: 0, 0
+  index: -1
+R_Leg_02
+  rotate: false
+  xy: 539, 410
+  size: 310, 637
+  orig: 310, 637
+  offset: 0, 0
+  index: -1
+arrow
+  rotate: true
+  xy: 1521, 1023
+  size: 762, 104
+  orig: 778, 112
+  offset: 1, 2
+  index: -1
+string
+  rotate: false
+  xy: 0, 964
+  size: 390, 1115
+  orig: 433, 1143
+  offset: 34, 19
+  index: -1

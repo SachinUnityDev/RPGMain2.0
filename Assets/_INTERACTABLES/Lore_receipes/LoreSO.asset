@@ -1,0 +1,302 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d1906708bd9d6d498db03d3f934167e, type: 3}
+  m_Name: LoreSO
+  m_EditorClassIdentifier: 
+  allLoreData:
+  - loreName: 6
+    isLocked: 0
+    allSubData:
+    - subLoreNames: 1
+      Loretxt: "There is a common confusion regarding the name Elamia itself. It
+        is known as the peninsula in the south of Shargad that lies to the west of
+        Kujmar and east of Safrima \u2013 between Sea of Sides and Swallowing Sea.
+        The peninsula contains various other lands such as Macanegheri in the west,
+        Greenhearth in the east and some part of Kugharia in the north. But the most
+        important one is Ancient Elamia, a peninsula of its own to the south of the
+        main peninsula, which is the main source of the confusion. Some say, it is
+        the cradle of civizilation. \r\n\r\nAncient Elamia is the only piece of land
+        in Shargad where Humans are not the rulers despite of being the majority
+        of the population. Elamians, or the Elami as some may refer to, are mix of
+        many different ethnicities of the ancient Human tribes. They are called as
+        \u201CSmallheads\u201D by the Aqrabulu, a half human half scorpio race who
+        are the rulers of Elamia for a long long time. So many local lodges and cults
+        are run by Aqrabulu sheikhs in the land and the supreme ruler of Anicent
+        Elamia is called \u201Cthe Lughal\u201D who is always choosen from the Aqrabulu
+        race without exception and supported by the High Council which is a group
+        of ministers to help Lughal in his rule. Lughal, also known as God-king resides
+        in desert city of Nabil Sha\u2019ar, also known as Wonderous City for its
+        capability to survive in the middle of desert and being the largest city
+        in Shargad. He rules the nation from his ziggurat, sitting in his large throne
+        constructed to perfectly fit the lower body of an Aqrabulu. However, it is
+        rumoured that there is a greater force beyond the reaches of God-king and
+        the High Council which makes the ultimate decisions for the land.\r\n"
+    - subLoreNames: 2
+      Loretxt: 
+    - subLoreNames: 3
+      Loretxt: "Westernmost island of Shargad. The island normally is known as Shamrock
+        Island. The humans of the land prefer to call it Galmartu, after the ancient
+        human tribes which has settled on the land while elves prefer the name Shamrock.\r\n\r\nThis
+        is a land famous with the heavy rains, greenery, lakes and rivers. The northwest
+        side of the island is ruled by Forest Elves and has thousands of lakes. Most
+        travelers say the region is a natural wonder by default but hard place to
+        live. Not so hard for the tree-shaping skilled\r\nelves though. Their city
+        is named Hazel Grove.\r\n\r\nDwarves are another skilled folk of the region
+        who live underground \u2013in the city of Madder\u2019adder- and known as
+        either Deep Dwarves or Madder Dwarves. Otso \u2013 the werebears are the
+        third non-human folk in the land. They live in the forest in the hidden city
+        named as Torula, close to center of the island.\r\n\r\nThere are two baronies
+        who possess the main power of the land, who are constantly in conflict not
+        only among themselves but other races as well. The Barony of Water Horse
+        call themselves Highlanders and the Barony of Teal Seal Lowlanders. City
+        of the former is called Dun Creagach, a castle set right near the cliffs
+        and the later is Caermirddyn. The free city of Saor is the last city on the
+        island which is set up on the coast and mostly run by thieves, pirates and
+        outlaws. \r\n"
+    - subLoreNames: 4
+      Loretxt: "The large island in the southwestern side of Shargad. Major part
+        of the population are Galuneros; the human ethnicities famous with their
+        street music and dance called \u201Cpajarillo\u201D. They have bronze skin
+        and brunette hair, much alike with Dorians, the southerners of the land,
+        whom they share the same blood but different cultures and tongue. Galuneros
+        call Dorians as \u201Cthe Mountain People\u201D or \u201Csoutherners\u201D,
+        while Dorians call Galuneros as \u201CThigganos\u201D - a made up word used
+        just to insult them.\r\n\r\nAround the main island there are hundreds of
+        small islands and some bigger group of islands, most famous one being the
+        Robin Islands, the group of isles on the Immortal Sea between Galunas and
+        Safrima. The large range of islands starting from Robin Islands reaching
+        to the other side of Galunas through the north of island, are known as Alerion
+        colonies which were main ports of trade ruled by wealthy merchants who call
+        themselves as Sons of Alerion. They don\u2019t accept themselves as Galuneros
+        and they claim to take their roots from a distinct and superior ethnicity
+        of Humans. Some historians found traces of cultural familiarity and kinship
+        between them and the Blackbirds. \r\n\r\nApart from the Human groups there
+        are also minority of other races in Galunas. Orcs of the Desert are the largest
+        group of folks with dark yellow skin who lives in the southwestern part of
+        the island in a semi desert landscape. Dune Goblins are the tricky folk some
+        of whom live in the cities together with Galuneros while others are notorious
+        of being the bandits of region. Ipotans are the third minority who live in
+        region of Doria, in a coastal town called Pillion. They don\u2019t leave
+        the town and mix with Humans much and try to remain neutral in their relations
+        with them as there is an obvious tension between Humans and Orcs of the Desert.
+        \r\n\r\nOrcs of the Valley who lives in the Iron Valley across the Immortal
+        Sea, are less conservative than their kin of the desert and doesn\u2019t
+        limit themselves to live in their hometown as they travel across cities of
+        Galunas in order to work or trade. Most become servants and guards to royal
+        houses, while some work as Smiths, Carpenters and other professions which
+        require physical prowess. \r\n\r\nOn top of all of that, not only orcs but
+        a diversity of races and cultures travel to Galunas in hopes of becoming
+        an athlete, a competer in the arenas of Galunas and rising to glory. Arena
+        battles between various houses constitute the center of entertainment culture
+        in Galunas while some dreamers claim this mere savagery has to be stopped
+        immediately. A secret cult known as the Inquisitors has another idea: anyone
+        whose race is not called Human must either serve as a slave or die!\r\n"
+    - subLoreNames: 5
+      Loretxt: "A vast area covering east and northeastern side of Shargad mainland
+        which is surrounded by natural landscapes such as mountains, taigas and tundras.
+        Not to mention the Icy Lake which is the largest lake in Shargad.\r\n\r\nIn
+        the ancient times, only some tribes of Kugharians were known to be the inhabitants
+        of this land. Later the Gornskiy, a human culture who are descendants of
+        some Idmyrish tribes have immigrated to Gornia and taken over the land \u2013
+        and supposedly named as Gornskiy after.\r\nThere are 4 large cities in the
+        land that is occupied by Tsardom of Gornia: Torhov, Nefrad, Olegfurt and
+        Ibirsk.\r\n\r\nEach city is pretty far to each other as compared to cities
+        in other countries or parts of Shargad.\r\nApart from humans (majorly Gornskiy,
+        some Kugharian and few Kujmari) some other races and cultures live in Gornia
+        as well. Ohto \u2013 the white bear-folk make up loyal guards and servants
+        of lords and boyars in the land. The Ormsliki are the shapeshifters who can
+        convert into dragon-man in cold seasons. Their human form is also pretty
+        recognizable with thin and sharp pupils and yellowish sclera.\r\nOrcs of
+        the Tundra are a mysterious culture living in the open tundra after Gornia
+        but they rarely come across with other races. Such as the snow lynx-folk
+        who are said to live hidden in taigas after their escape from Kujmar following
+        the last battle between Caracalaki and Kujmari.\r"
+    - subLoreNames: 6
+      Loretxt: "Land of the Abzazulues. A very green place spreading across the eastern
+        shores of Elamia. Dense cedar trees, rivers, lakes and hills are common landscapes
+        of the region. \r\n\r\nApart from various small towns and villages there
+        are two large settlements in Greenhearth. One of them is named Afarcity by
+        the Abzazulues just because it is far from the mainland. The other city is
+        Greenhearth. The problem is; people tend to mistake Greenhearth the city
+        with Greenhearth the mainland. But that is not a problem for Abzazulues who
+        are known with their distinct logic. They are like no other man, no other
+        folk, they are just the proud water buffalo-folk of the peninsula of Elamia.
+        Though their ruler is the Sultan, they don\u2019t mention their land as the
+        Sultanate very often but just Greenhearth.\r\n\r\nThe Mount Opalescent is
+        the peak of a large mountain range which acts as a border between south of
+        Greenhearth and eastern side of Ancient Elamia. The mountain range is home
+        to various gemstones most famous one being Oltu, a black support gem which
+        is mined only in this region in Shargad and is known with its power to ward
+        off negative energy.\r\n\r\nThe Doomdoom Catacombs is another point of interest
+        which is nearby the mysterious village of Tufanch, a home to many famous
+        Abzazulu mages in the history. Legends say that the catacombs itself is not
+        only a magical place but a gateway to the mysteries of Underearth.\r\n"
+    - subLoreNames: 7
+      Loretxt: 
+    - subLoreNames: 8
+      Loretxt: "Spreading across the vast steppes in the east of Shargad, Kugharia
+        now possesses a smaller scale of territory \u2013 western part of the steps
+        and northern side of Elamian peninsula. Ruled by the khan and his 10 bannerlords,
+        leaders of 10 clans known as the buduns, Kugharia takes a significant part
+        in the history of Shargad. However, they started to lose its power against
+        their sworn rivals, Kingdom of Galsa for more than a decade.\r\n\r\nAs a
+        result of their expansion strategies in the history, they are now surrounded
+        by unfriendly countries all around: Gornia Tsardom in the east, the Blackbirds
+        ruled by the Atabei in the southeast, Vilta Duchy in the north. Constraints
+        are set to their expansion possibilities by all those nations and yet, never
+        halted their ongoing battles with Macalakies. \r\nKugharians make up the
+        majority of population in the khanate, the human culture who had more distinctive
+        features (such as slanted eyes) in the past but had been losing them through
+        the mix of different human ethnicities in capital city of Aruk \u2013 the
+        second largest city in whole Shargad.\r\n\r\nSecond biggest city under control
+        of the khanate is Crimson Hill. A conservative city at the head of the vast
+        Kugharian steppe. The city has a very different architecture than Aruk and
+        is regarded as the real hometown of Kugharians with its look rather as a
+        nomadic camp surrounded by walls than a well developed city. Important matters
+        such as coronation ceremonies or Kurultai meetings take place here.\r\n\r\nThe
+        last city belongs to Kugharia is Lempung. The coastal city famous with its
+        greenery, rice terraces and fertile lands had been a home to Macalakies for
+        centuries. Very recently captured by Kugharians, Lempung now is an important
+        base for the khanate of trade with Safriman town Maghile and free city of
+        Caldor.\r\n"
+    - subLoreNames: 9
+      Loretxt: "Land of the brown skinned and skinny ethnicity of humans who live
+        in the southeast of Shargad. They control the origin of biggest trade route
+        in Shargad: the Medira route. So many spices, gems, weapons and armors are
+        delivered to many different locations of Shargad starting from Medira, the
+        biggest city of Kujmar. There are so many stop on the trade route in Kujmar,
+        which are called \u201Csarai\u201D and they are small compact towns that
+        includes a tavern, a marketplace, workshop and couple of buildings that serves
+        as a bastion for visitors to stay and merchants to trade. \r\n\r\nThe biggest
+        Mage Academies of Shargad are too situated in this land, holding three separate
+        factions; Fire, Air and Earth. Each faction is associated with the three
+        city-states Kujmar has; Medira, Nilapur and Raktapur. Each state has been
+        ruled by dynasties throughout the ages and each dynasty was found by a mage
+        who is a godly figure in Kujmari culture. Rudri, Shankara and Rohini (wife
+        of Chandra). \r\n\r\nRakshasas, the Spiritbinders are known as the driving
+        force behind Kujmari people resisting the invasion of Nagas ages ago, when
+        the actual home of Kujmari people was the Serpentine Islands in the Sea of
+        the Eternal Song. After survivng in the battle against the serpent folk,
+        they then migrated to the land of Caracalakies, which is now known as Kujmar.
+        \r\nThey were pointed out as an ungrateful nation by Caracalakies, invading
+        their land, and ages later becoming the overpowering faction in the land.
+        Just a few years ago, the two nations had a clash and with the support of
+        Gornias Caracalakies, the caracal-human folk is exterminated from earth.
+        Rumors say that spirit of a fallen warrior started to hunt some boyars and
+        rajas, startling the rest of the powerful lords in both nations. \r\n"
+    - subLoreNames: 10
+      Loretxt: 
+    - subLoreNames: 11
+      Loretxt: "Land of the Macalaki in the western side of Elamia. It\u2019s known
+        with its green scenery in the capital city of Jimba and the surrounding villages.
+        Targos Mountains split the region into half and the villages on the other
+        side of Targos Mountains however, resembles a different face of the land
+        being less green, more arid. \r\n\r\nFormerly there ruled the Princedom of
+        Macalaki in these lands. But in the last century things have shifted a bit.
+        In the ongoing wars with Kugharians, prince has been killed and now the ruler
+        of the country is known with the \u201CCommander\u201D title who has both
+        administrative and military duties.\r\n\r\nSetajau Forest that resides in
+        the southern part of Macanegheri, is an important piece of land in the defense
+        of the region with its dense trees and swampy soil. Centuries ago the tiger-folk
+        defended the region successfully thanks to this harsh landscape. \r\n\r\nThe
+        worshipping island that many Macalaki pilgrims visit which has the avatar
+        of Usmu and pagodas reside in the Coral Reefs \u2013 a region known with
+        its natural beauty that is in the southern border of Macanegheri. \r\n\r\nMost
+        important settlement on the north \u2013 after Lempung is lost to Kugharians
+        is the town of Ediri. It is the bastion and training center of secret force
+        of Macalakies known as the Jango. Jangos go through excessive and inhumanly
+        trails in the town which holds Targos mountains on its rear and the large
+        Ediri lake in front.\r\n"
+    - subLoreNames: 12
+      Loretxt: 
+    - subLoreNames: 13
+      Loretxt: "Previously called Idikum. The peninsula that lies in the south of
+        Shargad. Rainforests, jungles, deserts and savannahs are some common landscapes
+        to be found in the land. In addition to those, there is some part of the
+        large Hawkwing Mountain Range. \r\n\r\nA wide variety of climates are present
+        in the land. It is populated mostly by humans known as Safrimans. Safrimans
+        are brown or dark skinned humans who teach their kids about the lore and
+        history of Shargad from a younger age. \r\n\r\nSafrimans are a mix of three
+        different human ethnicities: Elamians who immigrated from the other side
+        of Sea of Tides, Galtians who came from Radu Mare in small numbers (they
+        were mostly pariahs) and Idikummians who are the true natives of Safrima
+        since ancient times. They are black skinned folk who prefer to live in tribes
+        in the rural areas and deep forests of Safrima. There is also another race
+        living deep in the Sanga Jungle: Mngwas, the black leopard-folk and shapeshifters.  
+        \r\n\r\nApart from Safrimans and Mngwas, it is possible to see other races
+        in the land such as Desert Elves. They live in the city of Barlaew, in the
+        very south of Safrima. Some of the Desert Elves (who left the city of Barlaew
+        a long time ago and became the Bedouins of the desert) live in region of
+        Merania, to the south of Nekkisari, in the small city they named Bluetown.
+        Unlike their kin from Barlaew, they live as a matriarchial society ruled
+        by the female leader known as \u201CQueen of the Desert\u201D. What makes
+        Bedouin Elves, the people of Bluetown mysterious is neither their blue colored
+        buildings and clothes, nor the cults of Enchantresses and Sanddiggers that
+        are centered there - rather their unusual relation with Wyverns.\r\n\r\nBoudingos
+        are the next important race in Safrima. They are shapeshifters who live in
+        hideouts in many different spots in the peninsula and they are known as the
+        bandits of the land. They can use their human form to be seen as decent citizens
+        of big cities why by night they rob and steal from the people the form of
+        werehyenas. They are known to be manipulated easily by wielders of Dark Magic.\r\n\r\nThere
+        are 5 cities in the peninsula: Goma \u2013 the largest city and capital,
+        Nekkisari and Smaeru, two coastal cities (especially the latter one blessed
+        with sea trading routes), Biskar, which became a large wasteland not long
+        ago (it is said that the king\u2019s witch has converted the land with dark
+        magic) and Barlaew, the remote city of Desert Elves. Bluetown, although regarded
+        as a city by its own inhabitants, is not officially mentioned as one in the
+        records.  \r\n"
+    - subLoreNames: 14
+      Loretxt: 
+  - loreName: 1
+    isLocked: 1
+    allSubData: []
+  - loreName: 2
+    isLocked: 1
+    allSubData: []
+  - loreName: 3
+    isLocked: 1
+    allSubData: []
+  - loreName: 4
+    isLocked: 1
+    allSubData: []
+  - loreName: 5
+    isLocked: 1
+    allSubData: []
+  - loreName: 6
+    isLocked: 0
+    allSubData: []
+  - loreName: 7
+    isLocked: 1
+    allSubData: []
+  - loreName: 8
+    isLocked: 1
+    allSubData: []
+  allLoreStrData:
+  - loreName: 1
+    loreNameStr: Elements of Shargad
+  - loreName: 2
+    loreNameStr: Gods Of Shargad
+  - loreName: 3
+    loreNameStr: Guilds Of Shargad
+  - loreName: 4
+    loreNameStr: Heroes Of Shargad
+  - loreName: 5
+    loreNameStr: History Of Shargad
+  - loreName: 6
+    loreNameStr: Lands Of Shargad
+  - loreName: 7
+    loreNameStr: Races Of Shargad
+  - loreName: 8
+    loreNameStr: Universe Of Shargad
+  loreLockImg: {fileID: 21300000, guid: 2142cf691f9d84b4a880894c16efedd6, type: 3}
+  loreUnLockedN: {fileID: 21300000, guid: c798ba2fa46829145b233b2f82b48965, type: 3}
+  loreUnLockedHL: {fileID: 21300000, guid: 57b1c17dc41829e4480934d4ad28d538, type: 3}

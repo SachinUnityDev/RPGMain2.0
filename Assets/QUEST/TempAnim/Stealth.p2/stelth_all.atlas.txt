@@ -1,0 +1,523 @@
+
+stelth_all.png
+size: 2025,2039
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+herbalist/back arm/arm_lower_l
+  rotate: true
+  xy: 645, 1470
+  size: 163, 190
+  orig: 164, 190
+  offset: 1, 0
+  index: -1
+herbalist/back arm/arm_upper_l
+  rotate: true
+  xy: 278, 1939
+  size: 98, 208
+  orig: 98, 208
+  offset: 0, 0
+  index: -1
+herbalist/back arm/hand
+  rotate: true
+  xy: 665, 1931
+  size: 106, 147
+  orig: 108, 149
+  offset: 1, 1
+  index: -1
+warden/back arm/hand
+  rotate: true
+  xy: 665, 1931
+  size: 106, 147
+  orig: 108, 149
+  offset: 1, 1
+  index: -1
+herbalist/back leg/foot
+  rotate: false
+  xy: 1296, 1911
+  size: 198, 126
+  orig: 200, 128
+  offset: 1, 1
+  index: -1
+herbalist/back leg/mid
+  rotate: true
+  xy: 1297, 1445
+  size: 169, 403
+  orig: 169, 403
+  offset: 0, 0
+  index: -1
+herbalist/back leg/top
+  rotate: true
+  xy: 683, 336
+  size: 281, 354
+  orig: 284, 357
+  offset: 1, 2
+  index: -1
+herbalist/belt
+  rotate: false
+  xy: 2, 1951
+  size: 274, 86
+  orig: 274, 86
+  offset: 0, 0
+  index: -1
+herbalist/cape_front_l
+  rotate: true
+  xy: 1496, 1911
+  size: 126, 146
+  orig: 129, 150
+  offset: 1, 2
+  index: -1
+herbalist/cape_front_r
+  rotate: false
+  xy: 690, 1635
+  size: 322, 149
+  orig: 322, 149
+  offset: 0, 0
+  index: -1
+herbalist/front arm/arm_lower_r
+  rotate: true
+  xy: 814, 1929
+  size: 108, 136
+  orig: 109, 136
+  offset: 0, 0
+  index: -1
+herbalist/front arm/arm_upper_r
+  rotate: false
+  xy: 710, 1089
+  size: 296, 190
+  orig: 296, 190
+  offset: 0, 0
+  index: -1
+herbalist/front arm/hand
+  rotate: true
+  xy: 713, 1791
+  size: 136, 168
+  orig: 136, 168
+  offset: 0, 0
+  index: -1
+herbalist/front leg/foot
+  rotate: true
+  xy: 567, 1797
+  size: 132, 144
+  orig: 134, 146
+  offset: 1, 1
+  index: -1
+herbalist/front leg/mid
+  rotate: true
+  xy: 148, 1807
+  size: 126, 417
+  orig: 126, 417
+  offset: 0, 0
+  index: -1
+herbalist/front leg/top
+  rotate: true
+  xy: 1159, 832
+  size: 226, 377
+  orig: 229, 379
+  offset: 2, 1
+  index: -1
+herbalist/head
+  rotate: true
+  xy: 1674, 1034
+  size: 222, 258
+  orig: 225, 261
+  offset: 1, 2
+  index: -1
+warden/head
+  rotate: true
+  xy: 1674, 1034
+  size: 222, 258
+  orig: 225, 261
+  offset: 1, 2
+  index: -1
+herbalist/neck
+  rotate: true
+  xy: 505, 1648
+  size: 147, 183
+  orig: 149, 185
+  offset: 1, 1
+  index: -1
+herbalist/tambor
+  rotate: true
+  xy: 1538, 804
+  size: 228, 336
+  orig: 228, 336
+  offset: 0, 0
+  index: -1
+herbalist/things
+  rotate: true
+  xy: 1696, 1258
+  size: 181, 263
+  orig: 181, 263
+  offset: 0, 0
+  index: -1
+herbalist/torso
+  rotate: true
+  xy: 350, 2
+  size: 332, 472
+  orig: 332, 472
+  offset: 0, 0
+  index: -1
+herbalist/wand
+  rotate: true
+  xy: 800, 1281
+  size: 171, 256
+  orig: 174, 259
+  offset: 1, 1
+  index: -1
+hunter/axe
+  rotate: true
+  xy: 2, 1331
+  size: 169, 426
+  orig: 175, 431
+  offset: 1, 2
+  index: -1
+hunter/back arm/arm_lower_l
+  rotate: true
+  xy: 225, 1122
+  size: 207, 203
+  orig: 207, 203
+  offset: 0, 0
+  index: -1
+hunter/back arm/arm_upper_l
+  rotate: true
+  xy: 1438, 1616
+  size: 152, 282
+  orig: 152, 282
+  offset: 0, 0
+  index: -1
+hunter/back arm/hand
+  rotate: true
+  xy: 2, 1822
+  size: 127, 144
+  orig: 127, 144
+  offset: 0, 0
+  index: -1
+hunter/back leg/foot_hunter
+  rotate: false
+  xy: 1221, 1771
+  size: 204, 138
+  orig: 206, 141
+  offset: 1, 1
+  index: -1
+hunter/back leg/mid_hunter
+  rotate: true
+  xy: 696, 859
+  size: 218, 461
+  orig: 218, 461
+  offset: 0, 0
+  index: -1
+hunter/back leg/top_hunter
+  rotate: true
+  xy: 2, 656
+  size: 235, 390
+  orig: 238, 393
+  offset: 1, 1
+  index: -1
+hunter/back_cape
+  rotate: false
+  xy: 1482, 545
+  size: 339, 257
+  orig: 342, 259
+  offset: 1, 1
+  index: -1
+hunter/belt
+  rotate: false
+  xy: 1644, 1911
+  size: 379, 126
+  orig: 379, 126
+  offset: 0, 0
+  index: -1
+hunter/cape_front_l
+  rotate: false
+  xy: 2, 1140
+  size: 221, 189
+  orig: 221, 189
+  offset: 0, 0
+  index: -1
+hunter/cape_front_r
+  rotate: false
+  xy: 1423, 235
+  size: 308, 308
+  orig: 308, 308
+  offset: 0, 0
+  index: -1
+hunter/front arm/arm_lower_r
+  rotate: true
+  xy: 1014, 1623
+  size: 156, 187
+  orig: 158, 190
+  offset: 1, 1
+  index: -1
+hunter/front arm/arm_upper_r
+  rotate: false
+  xy: 829, 619
+  size: 307, 238
+  orig: 309, 242
+  offset: 1, 1
+  index: -1
+hunter/front arm/hand
+  rotate: true
+  xy: 2, 1662
+  size: 143, 174
+  orig: 145, 176
+  offset: 1, 1
+  index: -1
+hunter/front leg/foot_hunter
+  rotate: false
+  xy: 178, 1660
+  size: 145, 145
+  orig: 145, 146
+  offset: 0, 1
+  index: -1
+hunter/front leg/mid_hunter
+  rotate: true
+  xy: 1008, 1079
+  size: 189, 440
+  orig: 189, 440
+  offset: 0, 0
+  index: -1
+hunter/front leg/top_hunter
+  rotate: true
+  xy: 394, 621
+  size: 236, 433
+  orig: 236, 433
+  offset: 0, 0
+  index: -1
+hunter/head
+  rotate: true
+  xy: 2, 895
+  size: 225, 258
+  orig: 229, 260
+  offset: 1, 1
+  index: -1
+hunter/head_pelt
+  rotate: true
+  xy: 1702, 1441
+  size: 170, 198
+  orig: 172, 200
+  offset: 1, 1
+  index: -1
+hunter/neck
+  rotate: true
+  xy: 883, 1786
+  size: 137, 181
+  orig: 139, 187
+  offset: 1, 4
+  index: -1
+hunter/skirt_back
+  rotate: false
+  xy: 262, 893
+  size: 432, 212
+  orig: 432, 212
+  offset: 0, 0
+  index: -1
+hunter/trophy
+  rotate: true
+  xy: 1203, 1619
+  size: 150, 233
+  orig: 156, 233
+  offset: 3, 0
+  index: -1
+warden/Belt
+  rotate: false
+  xy: 430, 1298
+  size: 368, 170
+  orig: 368, 170
+  offset: 0, 0
+  index: -1
+warden/back arm/arm_lower_l
+  rotate: true
+  xy: 1450, 1060
+  size: 208, 222
+  orig: 208, 222
+  offset: 0, 0
+  index: -1
+warden/back arm/arm_upper_l
+  rotate: true
+  xy: 1080, 1920
+  size: 117, 214
+  orig: 119, 216
+  offset: 1, 1
+  index: -1
+warden/back leg/foot
+  rotate: false
+  xy: 1749, 1767
+  size: 207, 142
+  orig: 207, 142
+  offset: 0, 0
+  index: -1
+warden/back leg/mid
+  rotate: true
+  xy: 1058, 1272
+  size: 171, 381
+  orig: 171, 381
+  offset: 0, 0
+  index: -1
+warden/back leg/top
+  rotate: true
+  xy: 2, 382
+  size: 272, 356
+  orig: 274, 359
+  offset: 1, 2
+  index: -1
+warden/back_cape
+  rotate: false
+  xy: 2, 60
+  size: 346, 320
+  orig: 348, 324
+  offset: 1, 2
+  index: -1
+warden/bot_armor
+  rotate: true
+  xy: 837, 1454
+  size: 163, 458
+  orig: 163, 458
+  offset: 0, 0
+  index: -1
+warden/cape_front_l
+  rotate: true
+  xy: 1441, 1270
+  size: 173, 253
+  orig: 173, 253
+  offset: 0, 0
+  index: -1
+warden/cape_front_r
+  rotate: false
+  xy: 360, 343
+  size: 321, 276
+  orig: 321, 276
+  offset: 0, 0
+  index: -1
+warden/front arm/arm_lower_r
+  rotate: true
+  xy: 488, 1935
+  size: 102, 175
+  orig: 104, 178
+  offset: 1, 2
+  index: -1
+warden/front arm/arm_upper_r
+  rotate: false
+  xy: 430, 1107
+  size: 278, 189
+  orig: 281, 191
+  offset: 1, 1
+  index: -1
+warden/front arm/hand
+  rotate: true
+  xy: 1581, 1770
+  size: 139, 166
+  orig: 141, 168
+  offset: 1, 1
+  index: -1
+warden/front leg/foot
+  rotate: true
+  xy: 1066, 1781
+  size: 137, 153
+  orig: 137, 154
+  offset: 0, 1
+  index: -1
+warden/front leg/mid
+  rotate: true
+  xy: 2, 1502
+  size: 156, 431
+  orig: 156, 431
+  offset: 0, 0
+  index: -1
+warden/front leg/top
+  rotate: true
+  xy: 1138, 582
+  size: 248, 342
+  orig: 248, 342
+  offset: 0, 0
+  index: -1
+warden/gold_metal
+  rotate: false
+  xy: 952, 1925
+  size: 126, 112
+  orig: 128, 114
+  offset: 1, 1
+  index: -1
+warden/leather_left
+  rotate: true
+  xy: 1722, 1613
+  size: 152, 211
+  orig: 152, 211
+  offset: 0, 0
+  index: -1
+warden/leather_right
+  rotate: true
+  xy: 435, 1484
+  size: 162, 208
+  orig: 162, 208
+  offset: 0, 0
+  index: -1
+warden/neck
+  rotate: true
+  xy: 325, 1660
+  size: 145, 178
+  orig: 147, 182
+  offset: 1, 3
+  index: -1
+warden/pelt
+  rotate: true
+  xy: 1427, 1771
+  size: 138, 152
+  orig: 140, 154
+  offset: 1, 1
+  index: -1
+warden/torso
+  rotate: true
+  xy: 1039, 283
+  size: 297, 382
+  orig: 299, 384
+  offset: 1, 1
+  index: -1
+
+stelth_all2.png
+size: 1994,1141
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+herbalist/cape_back
+  rotate: false
+  xy: 1387, 377
+  size: 494, 762
+  orig: 494, 765
+  offset: 0, 3
+  index: -1
+herbalist/skirt
+  rotate: false
+  xy: 2, 14
+  size: 521, 358
+  orig: 521, 358
+  offset: 0, 0
+  index: -1
+hunter/skirt
+  rotate: false
+  xy: 1050, 2
+  size: 488, 370
+  orig: 488, 370
+  offset: 0, 0
+  index: -1
+hunter/torso
+  rotate: true
+  xy: 525, 21
+  size: 351, 523
+  orig: 351, 523
+  offset: 0, 0
+  index: -1
+hunter/weapon
+  rotate: true
+  xy: 1540, 43
+  size: 332, 452
+  orig: 334, 455
+  offset: 1, 1
+  index: -1
+warden/weapon
+  rotate: true
+  xy: 2, 374
+  size: 765, 1383
+  orig: 767, 1386
+  offset: 1, 1
+  index: -1

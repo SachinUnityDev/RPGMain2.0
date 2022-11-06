@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dbde13171f9d834c8c62bd6d33f5bce, type: 3}
+  m_Name: FortitudePotion
+  m_EditorClassIdentifier: 
+  potionName: 3
+  potionAddict: 4
+  inventoryStack: 6
+  cost:
+    silver: 0
+    bronze: 16
+  fluctuation: 40
+  timeFrame: 5
+  minCastTime: 1
+  maxCastTime: 1
+  maxWorldInstance: 9
+  iconSprite: {fileID: 21300000, guid: a8fb696fbfb7f8543baf25a4a8869a24, type: 3}
+  allLines:
+  - +22-30<style="Fortitude"> Fortitude </style>
+  - -2<style="Fortitude"> Fortitude Org. </style>until EOQ
+  - Slight chance for "Potion Addict"

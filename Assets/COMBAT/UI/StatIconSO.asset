@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b64ab6807ba0094cacda92ecc24e9eb, type: 3}
+  m_Name: StatIconSO
+  m_EditorClassIdentifier: 
+  allSpriteData:
+  - statName: 6
+    statSprite: {fileID: 21300000, guid: fabc4d0030e5d244b9d196a745e5ceda, type: 3}
+    statSpriteLit: {fileID: 21300000, guid: 86ea186671fbf6b4f8f5caf4033b9724, type: 3}
+  - statName: 7
+    statSprite: {fileID: 21300000, guid: c7e38a28a3e9e3a42bb27cbafa609087, type: 3}
+    statSpriteLit: {fileID: 21300000, guid: 7aa3cd5ff89e5c845a47ab1ceeff71d3, type: 3}
+  - statName: 8
+    statSprite: {fileID: 21300000, guid: bb509a0f6b1f57d4ca7594355e33eac4, type: 3}
+    statSpriteLit: {fileID: 21300000, guid: 982b1913ed807e44189da2e82b0a15ab, type: 3}
+  - statName: 9
+    statSprite: {fileID: 21300000, guid: 8a1e31b8eec744a4b85f3244d4690858, type: 3}
+    statSpriteLit: {fileID: 21300000, guid: 7456a7e077d9aac46ae3f6ad194b7c28, type: 3}
+  - statName: 10
+    statSprite: {fileID: 21300000, guid: e37c0e24ec64b3344b4d713e5415d9b2, type: 3}
+    statSpriteLit: {fileID: 21300000, guid: 237f80fc207cef645a080a73493c6a13, type: 3}
+  - statName: 11
+    statSprite: {fileID: 21300000, guid: 0639c083d077dd14086f7c2d668da016, type: 3}
+    statSpriteLit: {fileID: 21300000, guid: cc9810065b094ba4abbdfb2900400e15, type: 3}
+  - statName: 12
+    statSprite: {fileID: 21300000, guid: 4677a0caec5d9d5459cf600b88282fe0, type: 3}
+    statSpriteLit: {fileID: 21300000, guid: d39587186f572db43baf8c7373adc728, type: 3}
+  - statName: 13
+    statSprite: {fileID: 21300000, guid: c0588ed0deae20b4c985765fa97ca120, type: 3}
+    statSpriteLit: {fileID: 21300000, guid: d25190b2ad9cc544db7ffccfa8c3ac22, type: 3}
+  - statName: 14
+    statSprite: {fileID: 21300000, guid: 0f544698fe634d54981f6c3144eb0c3c, type: 3}
+    statSpriteLit: {fileID: 21300000, guid: d05ee55ad5eeeb248be310ac5c1da177, type: 3}
+  - statName: 15
+    statSprite: {fileID: 21300000, guid: 38058e2fd36fde64aa59af7548d5d554, type: 3}
+    statSpriteLit: {fileID: 21300000, guid: 3e0ebf9a482678d4b96a54b6e4cb0b15, type: 3}
+  - statName: 16
+    statSprite: {fileID: 21300000, guid: 313c6cae07b79074b820f5d2c67c5913, type: 3}
+    statSpriteLit: {fileID: 21300000, guid: 059c8ce66679f7c4fafcb37be617ee01, type: 3}
+  - statName: 17
+    statSprite: {fileID: 21300000, guid: e324177767306f946a06eaef87f4ff45, type: 3}
+    statSpriteLit: {fileID: 21300000, guid: db3fe7b4970e0d04c977ed6622b556a6, type: 3}
+  - statName: 18
+    statSprite: {fileID: 21300000, guid: 11e100ccf4cf6384d9a7949b9527f38e, type: 3}
+    statSpriteLit: {fileID: 21300000, guid: baf9020405062754481ae4fb43bcb116, type: 3}
+  - statName: 19
+    statSprite: {fileID: 21300000, guid: 73a7d2d2e33545f4d84992366f5d67c6, type: 3}
+    statSpriteLit: {fileID: 21300000, guid: 00727a4509f265c48bdb53d0f90bffc2, type: 3}
+  - statName: 20
+    statSprite: {fileID: 21300000, guid: d17db97095c4cf243ad5931a5709d8d8, type: 3}
+    statSpriteLit: {fileID: 21300000, guid: 126ca65852a8d4d4f92b825d60d00f6b, type: 3}
+  - statName: 21
+    statSprite: {fileID: 21300000, guid: 8c6b752176d10794daca6263fafd3caf, type: 3}
+    statSpriteLit: {fileID: 21300000, guid: 34057d5d9fef0e943aedbd68f4316d94, type: 3}

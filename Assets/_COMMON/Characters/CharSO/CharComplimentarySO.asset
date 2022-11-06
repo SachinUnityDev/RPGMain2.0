@@ -1,0 +1,190 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f60124aadb3c3d4481995410ea98e5b, type: 3}
+  m_Name: CharComplimentarySO
+  m_EditorClassIdentifier: 
+  allRaceSprites:
+  - raceType: 1
+    raceSpriteN: {fileID: 21300000, guid: 425e5830906281f429a03a1c4437424e, type: 3}
+    raceSpriteLit: {fileID: 21300000, guid: eea92587459a5604bbf69241707989a0, type: 3}
+  - raceType: 2
+    raceSpriteN: {fileID: 21300000, guid: 4363371fa2b2d9146905e39d6dbb6ef8, type: 3}
+    raceSpriteLit: {fileID: 21300000, guid: 9302df2c4f1599e43b6da127dfe20a98, type: 3}
+  - raceType: 3
+    raceSpriteN: {fileID: 21300000, guid: 5284b5bef1915d84f8ec761143b765d4, type: 3}
+    raceSpriteLit: {fileID: 21300000, guid: 6c04f3c5814aa2046b871562b0aef11c, type: 3}
+  - raceType: 4
+    raceSpriteN: {fileID: 21300000, guid: d2662f71f9f9390419b2105973670708, type: 3}
+    raceSpriteLit: {fileID: 21300000, guid: e7e0f6819ba398044abf6be605b802c9, type: 3}
+  - raceType: 5
+    raceSpriteN: {fileID: 21300000, guid: 67bfc7578ac66c144bb32785f407f8b1, type: 3}
+    raceSpriteLit: {fileID: 21300000, guid: ec64f7b224d76e548b9d938135a895d0, type: 3}
+  - raceType: 6
+    raceSpriteN: {fileID: 21300000, guid: d5d291749c228a84a8cb55d40590f93c, type: 3}
+    raceSpriteLit: {fileID: 21300000, guid: 480e78c5a86abce47a1d5fd9137a1ac1, type: 3}
+  - raceType: 7
+    raceSpriteN: {fileID: 21300000, guid: c775c4439f9d0dc4694cbc53047d7798, type: 3}
+    raceSpriteLit: {fileID: 21300000, guid: 22072413ea9bc334594e97100fd35fdf, type: 3}
+  - raceType: 8
+    raceSpriteN: {fileID: 21300000, guid: 75a98f30dcecd7f459ae3d63caad6094, type: 3}
+    raceSpriteLit: {fileID: 21300000, guid: 9ee2262afa1d7bf43bc8b7922051458c, type: 3}
+  - raceType: 9
+    raceSpriteN: {fileID: 21300000, guid: b3a49300093500f449566688c624fe2a, type: 3}
+    raceSpriteLit: {fileID: 21300000, guid: 750417afc56178444997b75d5b6ac415, type: 3}
+  - raceType: 10
+    raceSpriteN: {fileID: 21300000, guid: 40a08bbe2d1c5d5458a8be075806c428, type: 3}
+    raceSpriteLit: {fileID: 21300000, guid: f68eab047fdeaeb448ea66e7621dd35b, type: 3}
+  - raceType: 11
+    raceSpriteN: {fileID: 21300000, guid: e48967ab0f14bac409d952e4467136fc, type: 3}
+    raceSpriteLit: {fileID: 21300000, guid: 74d65de29cf04334fb4d59e4a20e5a8e, type: 3}
+  - raceType: 12
+    raceSpriteN: {fileID: 21300000, guid: a78abcc3f38f4b146b06c320e49fcb95, type: 3}
+    raceSpriteLit: {fileID: 21300000, guid: 0b8b9a8ddc2d7ef4082b9503707ed4ba, type: 3}
+  - raceType: 13
+    raceSpriteN: {fileID: 21300000, guid: f2c6da96a6f6de7408d888e02b950560, type: 3}
+    raceSpriteLit: {fileID: 21300000, guid: a8d83d5e37be949459597a14f00e6be4, type: 3}
+  allCultureSprites:
+  - cultureType: 1
+    cultureBanner: {fileID: 21300000, guid: 1a804531ad9ef8441aaf33a39590399c, type: 3}
+  - cultureType: 2
+    cultureBanner: {fileID: 0}
+  - cultureType: 3
+    cultureBanner: {fileID: 0}
+  - cultureType: 4
+    cultureBanner: {fileID: 0}
+  - cultureType: 5
+    cultureBanner: {fileID: 0}
+  - cultureType: 6
+    cultureBanner: {fileID: 21300000, guid: cca6650a29db31f40adf8e9e199bb933, type: 3}
+  - cultureType: 7
+    cultureBanner: {fileID: 21300000, guid: 33bc64b210b072140b7d97b4fb993474, type: 3}
+  - cultureType: 8
+    cultureBanner: {fileID: 21300000, guid: b095dd79368fd1b449bb421659f12964, type: 3}
+  - cultureType: 9
+    cultureBanner: {fileID: 0}
+  - cultureType: 10
+    cultureBanner: {fileID: 21300000, guid: 0a4c0861591b3d840929afac62e614ea, type: 3}
+  - cultureType: 11
+    cultureBanner: {fileID: 0}
+  - cultureType: 12
+    cultureBanner: {fileID: 21300000, guid: e1f9692c733324746b57fcdc92f5270f, type: 3}
+  - cultureType: 13
+    cultureBanner: {fileID: 0}
+  - cultureType: 14
+    cultureBanner: {fileID: 21300000, guid: 2f7517946db1ca94ea26b2a09263f35f, type: 3}
+  - cultureType: 15
+    cultureBanner: {fileID: 0}
+  - cultureType: 16
+    cultureBanner: {fileID: 0}
+  - cultureType: 17
+    cultureBanner: {fileID: 0}
+  - cultureType: 18
+    cultureBanner: {fileID: 0}
+  - cultureType: 19
+    cultureBanner: {fileID: 0}
+  - cultureType: 20
+    cultureBanner: {fileID: 0}
+  - cultureType: 21
+    cultureBanner: {fileID: 0}
+  - cultureType: 22
+    cultureBanner: {fileID: 0}
+  - cultureType: 23
+    cultureBanner: {fileID: 0}
+  - cultureType: 24
+    cultureBanner: {fileID: 0}
+  - cultureType: 25
+    cultureBanner: {fileID: 0}
+  - cultureType: 26
+    cultureBanner: {fileID: 0}
+  - cultureType: 27
+    cultureBanner: {fileID: 0}
+  - cultureType: 28
+    cultureBanner: {fileID: 0}
+  - cultureType: 29
+    cultureBanner: {fileID: 0}
+  - cultureType: 30
+    cultureBanner: {fileID: 0}
+  - cultureType: 31
+    cultureBanner: {fileID: 0}
+  - cultureType: 32
+    cultureBanner: {fileID: 0}
+  - cultureType: 33
+    cultureBanner: {fileID: 0}
+  - cultureType: 34
+    cultureBanner: {fileID: 0}
+  - cultureType: 35
+    cultureBanner: {fileID: 0}
+  allCharStoryPara:
+  - charName: 3
+    allParastr:
+    - "Safrima\r CAHYO\nPreviously called Idikum. The peninsula that lies in the
+      south of Shargad. Rainforests, jungles, deserts and savannahs are some common
+      landscapes to be found in the land. In addition to those, there is some part
+      of the large Hawkwing Mountain Range. \r\n"
+    unLockedIndex: 0
+  - charName: 2
+    allParastr:
+    - "Safrima\r BARAN\nPreviously called Idikum. The peninsula that lies in the
+      south of Shargad. Rainforests, jungles, deserts and savannahs are some common
+      landscapes to be found in the land. In addition to those, there is some part
+      of the large Hawkwing Mountain Range. \r\n"
+    unLockedIndex: 0
+  - charName: 7
+    allParastr:
+    - "Safrima\r  RAYYAN\nPreviously called Idikum. The peninsula that lies in the
+      south of Shargad. Rainforests, jungles, deserts and savannahs are some common
+      landscapes to be found in the land. In addition to those, there is some part
+      of the large Hawkwing Mountain Range. \r\n"
+    unLockedIndex: 0
+  - charName: 4
+    allParastr:
+    - "Safrima\r EKWUEME\nPreviously called Idikum. The peninsula that lies in the
+      south of Shargad. Rainforests, jungles, deserts and savannahs are some common
+      landscapes to be found in the land. In addition to those, there is some part
+      of the large Hawkwing Mountain Range. \r\n"
+    unLockedIndex: 0
+  - charName: 6
+    allParastr: []
+    unLockedIndex: 0
+  - charName: 9
+    allParastr: []
+    unLockedIndex: 0
+  - charName: 5
+    allParastr: []
+    unLockedIndex: 0
+  - charName: 8
+    allParastr: []
+    unLockedIndex: 0
+  allHexBgData:
+  - charType: 1
+    orgCharMode: 1
+    HexBG: {fileID: 21300000, guid: 0d205d4e6d7f9614eba023a22b411c56, type: 3}
+  - charType: 1
+    orgCharMode: 2
+    HexBG: {fileID: 21300000, guid: b7efa5c2c41e89d448eb8f41b5f4889e, type: 3}
+  - charType: 2
+    orgCharMode: 0
+    HexBG: {fileID: 21300000, guid: 06504694276aa3a40ba53d53a1721370, type: 3}
+  PreReqToolTip: "You will have to give either of the prereq items to companion before
+    venturing on a quest.\r"
+  ProvisionToolTip: "The potion that shows up in the provision slot. Only given hero
+    can use this. Replenishes upon arrival to any settlement.\r"
+  earningsToolTip: "The items and money that will be lost in quest. (Think it as
+    a gift.) Money equals to % of Abbas' gain.\r"
+  BGUnavail: {fileID: 21300000, guid: 448213c107e26064381a3f533440ad0e, type: 3}
+  BGAvailUnClicked: {fileID: 21300000, guid: a44b434c0e2bd68489fbda4f8a7770a8, type: 3}
+  BGAvailClicked: {fileID: 21300000, guid: afcabb4e61446574cae55b07cca2b3fa, type: 3}
+  frameUnavail: {fileID: 21300000, guid: 928508fe453c25a48a5404010ede4559, type: 3}
+  frameAvail: {fileID: 21300000, guid: dd136fbab7207094b9749a5f8e1106f7, type: 3}
+  lvlbarUnAvail: {fileID: 21300000, guid: f69585fc7e9075949876fc5829efcf41, type: 3}
+  lvlBarAvail: {fileID: 21300000, guid: 7b215f5bbf9f1614985b4f03332e3fd6, type: 3}
+  GhostlyBG: {fileID: 21300000, guid: f171070bf4f080d4ba6d4470d5993a65, type: 3}

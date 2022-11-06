@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dbde13171f9d834c8c62bd6d33f5bce, type: 3}
+  m_Name: PotionOfHeroism
+  m_EditorClassIdentifier: 
+  potionName: 9
+  potionAddict: 7
+  inventoryStack: 6
+  cost:
+    silver: 0
+    bronze: 31
+  fluctuation: 10
+  timeFrame: 1
+  minCastTime: 16
+  maxCastTime: 20
+  maxWorldInstance: 6
+  iconSprite: {fileID: 21300000, guid: b6d28322ad0a00c42ad042e5e38e3601, type: 3}
+  allLines:
+  - +2-4<style="Attributes"> Morale </style>
+  - -(2-2)<style="Attributes"> Armor </style>
+  - Slight chance for "Potion Addict"

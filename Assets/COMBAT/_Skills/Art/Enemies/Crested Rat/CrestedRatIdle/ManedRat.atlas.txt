@@ -1,0 +1,111 @@
+
+ManedRat.png
+size: 3397,1410
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Body
+  rotate: true
+  xy: 1865, 39
+  size: 1369, 910
+  orig: 1369, 918
+  offset: 0, 3
+  index: -1
+Head
+  rotate: true
+  xy: 2777, 972
+  size: 436, 459
+  orig: 436, 463
+  offset: 0, 0
+  index: -1
+arm lower
+  rotate: false
+  xy: 2777, 54
+  size: 139, 223
+  orig: 142, 226
+  offset: 1, 0
+  index: -1
+arm_R
+  rotate: true
+  xy: 2777, 279
+  size: 273, 320
+  orig: 287, 321
+  offset: 11, 0
+  index: -1
+feet
+  rotate: false
+  xy: 3238, 1055
+  size: 147, 175
+  orig: 150, 185
+  offset: 3, 5
+  index: -1
+feet_R
+  rotate: false
+  xy: 3238, 1232
+  size: 149, 176
+  orig: 153, 185
+  offset: 4, 5
+  index: -1
+hand
+  rotate: false
+  xy: 3238, 946
+  size: 144, 107
+  orig: 149, 109
+  offset: 0, 0
+  index: -1
+jaw
+  rotate: true
+  xy: 2918, 62
+  size: 215, 113
+  orig: 215, 123
+  offset: 0, 5
+  index: -1
+leg
+  rotate: true
+  xy: 3099, 103
+  size: 310, 296
+  orig: 317, 296
+  offset: 5, 0
+  index: -1
+leg_R
+  rotate: true
+  xy: 3118, 635
+  size: 309, 277
+  orig: 323, 280
+  offset: 11, 3
+  index: -1
+poison sprites
+  rotate: true
+  xy: 2, 2
+  size: 1406, 1019
+  orig: 1504, 1050
+  offset: 39, 31
+  index: -1
+spikes
+  rotate: true
+  xy: 1023, 29
+  size: 1379, 840
+  orig: 1379, 925
+  offset: 0, 5
+  index: -1
+thight
+  rotate: false
+  xy: 2777, 763
+  size: 339, 207
+  orig: 339, 208
+  offset: 0, 1
+  index: -1
+thight_R
+  rotate: false
+  xy: 2777, 554
+  size: 338, 207
+  orig: 342, 208
+  offset: 4, 1
+  index: -1
+upper arm
+  rotate: false
+  xy: 3117, 415
+  size: 274, 218
+  orig: 275, 254
+  offset: 1, 36
+  index: -1

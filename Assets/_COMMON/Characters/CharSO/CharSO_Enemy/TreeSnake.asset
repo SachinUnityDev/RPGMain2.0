@@ -1,0 +1,180 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3108039f6456f440bbe925b6c103a06, type: 3}
+  m_Name: TreeSnake
+  m_EditorClassIdentifier: 
+  charID: 201
+  charName: 37
+  charPrefab: {fileID: 0}
+  charMode: 2
+  expPoints: 0
+  raceType: 1
+  cultType: 22
+  classType: 0
+  heroType: 0
+  tameAnimalsStrength: 0
+  fleeBehaviour: 0
+  canBeAmbushed: 0
+  canBeCaught: 0
+  potions: 0
+  gems: 0
+  startLevel: 0
+  StatsList:
+  - statsName: 1
+    baseValue: 28
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 2
+    baseValue: 24
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 3
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 4
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 5
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 6
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 7
+    baseValue: 20
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 8
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 9
+    baseValue: 7
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 10
+    baseValue: 6
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 11
+    baseValue: 8
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 12
+    baseValue: 7
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 13
+    baseValue: 8
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 14
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 15
+    baseValue: 5
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 16
+    baseValue: 40
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 17
+    baseValue: 40
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 18
+    baseValue: 20
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 19
+    baseValue: 10
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 20
+    baseValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 21
+    baseValue: 40
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  charOccupies: 0
+  posPriority: 

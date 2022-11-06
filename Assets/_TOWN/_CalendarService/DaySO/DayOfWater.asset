@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dde803e0b61b5e459459593c6edfc28, type: 3}
+  m_Name: DayOfWater
+  m_EditorClassIdentifier: 
+  orderInSeq: 3
+  dayName: 3
+  dayName2: 3
+  dayNameStr: Day Of Water
+  dayDescription: 
+  tipOfTheDayList:
+  - Long reads of NPCs are really boring. However, your patience might be rewarded
+    at times.
+  - Rainforests have some rainy days. This means both your party and the enemy party
+    will be soaked during the time. Some companions like the Water Mage might act
+    more powerful in such condition.

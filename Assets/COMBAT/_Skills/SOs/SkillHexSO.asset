@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28ea1bd9e0d2da547950c176f4f4c846, type: 3}
+  m_Name: SkillHexSO
+  m_EditorClassIdentifier: 
+  skillIconNSprite: {fileID: 0}
+  skillIconHLSprite: {fileID: 0}
+  txtPrefab: {fileID: 3954342278731253490, guid: 76aa4721df9be6143ba2c9cb74feaf72,
+    type: 3}
+  allSkillIncli:
+  - SkillIncliType: 0
+    SkillIncliSprite: {fileID: 21300000, guid: f772b450d88e25842a07da376e9b3281, type: 3}
+    SkillIncliBG: {fileID: 21300000, guid: 8741339c350c7bf4ab65cf299b7bf7fd, type: 3}
+  - SkillIncliType: 1
+    SkillIncliSprite: {fileID: 21300000, guid: 596c6e94cb877384b915b1ec0c76a95c, type: 3}
+    SkillIncliBG: {fileID: 21300000, guid: 8741339c350c7bf4ab65cf299b7bf7fd, type: 3}
+  - SkillIncliType: 2
+    SkillIncliSprite: {fileID: 21300000, guid: 617487d495e8ca349a9c0f220394b382, type: 3}
+    SkillIncliBG: {fileID: 21300000, guid: 6e55cdcff27b5da4f878ae0e8cbe7855, type: 3}
+  - SkillIncliType: 3
+    SkillIncliSprite: {fileID: 21300000, guid: fed73b3c6a57cb046b809166933f559e, type: 3}
+    SkillIncliBG: {fileID: 21300000, guid: f4cbd43f853f39f4b8b5fe794ba59421, type: 3}
+  - SkillIncliType: 4
+    SkillIncliSprite: {fileID: 21300000, guid: 52505fdc685fd014095d5576e218b451, type: 3}
+    SkillIncliBG: {fileID: 21300000, guid: 6e55cdcff27b5da4f878ae0e8cbe7855, type: 3}
+  - SkillIncliType: 5
+    SkillIncliSprite: {fileID: 21300000, guid: 379a0a47fdfa21d42b22cfe7549cbd85, type: 3}
+    SkillIncliBG: {fileID: 21300000, guid: 8741339c350c7bf4ab65cf299b7bf7fd, type: 3}
+  - SkillIncliType: 6
+    SkillIncliSprite: {fileID: 21300000, guid: 16241fd3c92a91c41b60c3815cd98860, type: 3}
+    SkillIncliBG: {fileID: 21300000, guid: 6e55cdcff27b5da4f878ae0e8cbe7855, type: 3}
+  - SkillIncliType: 7
+    SkillIncliSprite: {fileID: 21300000, guid: 693393287fd191644afa24da7415995a, type: 3}
+    SkillIncliBG: {fileID: 21300000, guid: f4cbd43f853f39f4b8b5fe794ba59421, type: 3}
+  - SkillIncliType: 8
+    SkillIncliSprite: {fileID: 21300000, guid: 693393287fd191644afa24da7415995a, type: 3}
+    SkillIncliBG: {fileID: 21300000, guid: f4cbd43f853f39f4b8b5fe794ba59421, type: 3}
+  - SkillIncliType: 9
+    SkillIncliSprite: {fileID: 21300000, guid: 693393287fd191644afa24da7415995a, type: 3}
+    SkillIncliBG: {fileID: 21300000, guid: f4cbd43f853f39f4b8b5fe794ba59421, type: 3}
+  - SkillIncliType: 10
+    SkillIncliSprite: {fileID: 21300000, guid: 693393287fd191644afa24da7415995a, type: 3}
+    SkillIncliBG: {fileID: 21300000, guid: f4cbd43f853f39f4b8b5fe794ba59421, type: 3}
+  allAttacksSprites:
+  - attackType: 0
+    attackTypeSprite: {fileID: 21300000, guid: f772b450d88e25842a07da376e9b3281, type: 3}
+    attackTypeBG: {fileID: 21300000, guid: 8741339c350c7bf4ab65cf299b7bf7fd, type: 3}
+  - attackType: 1
+    attackTypeSprite: {fileID: 21300000, guid: 67bad438c198d054a885f8b449570f78, type: 3}
+    attackTypeBG: {fileID: 21300000, guid: 8741339c350c7bf4ab65cf299b7bf7fd, type: 3}
+  - attackType: 2
+    attackTypeSprite: {fileID: 21300000, guid: 52e4bc99aa81b7249b05beb3d4ab43e1, type: 3}
+    attackTypeBG: {fileID: 21300000, guid: 1959e008b5323a1428f51ae1d1580f99, type: 3}
+  - attackType: 3
+    attackTypeSprite: {fileID: 21300000, guid: 5115b820be7072e448e9d064ed63db93, type: 3}
+    attackTypeBG: {fileID: 21300000, guid: 1959e008b5323a1428f51ae1d1580f99, type: 3}
+  allHexes:
+  - hexName: 0
+    hexSprite: {fileID: 0}
+  - hexName: 1
+    hexSprite: {fileID: 21300000, guid: 9a2b824f3b966ad418ca9bf7d0ccc85d, type: 3}
+  - hexName: 2
+    hexSprite: {fileID: 21300000, guid: 5658a914653c7894a8f39bd293857c73, type: 3}
+  - hexName: 3
+    hexSprite: {fileID: 21300000, guid: fe4436e2744692c4580ab2101963f593, type: 3}
+  - hexName: 4
+    hexSprite: {fileID: 21300000, guid: fd7f0353030f28048aa9d5364c8a81ad, type: 3}
+  - hexName: 5
+    hexSprite: {fileID: 21300000, guid: 9d1c9b619d17aa940a02e6055bf2fdab, type: 3}
+  - hexName: 6
+    hexSprite: {fileID: 21300000, guid: 62e8849763253ca49a820eb9067ba647, type: 3}
+  - hexName: 7
+    hexSprite: {fileID: 21300000, guid: f11a825ac244490488f9a85ecde6f9fd, type: 3}
+  - hexName: 8
+    hexSprite: {fileID: 21300000, guid: 83c5022dc2914b748b646e7ea7db5c12, type: 3}
+  - hexName: 9
+    hexSprite: {fileID: 21300000, guid: 573635f967e784d4b979da6e94e9e10e, type: 3}
+  - hexName: 10
+    hexSprite: {fileID: 21300000, guid: 1a1dc2dd37ee10d45b213f77de6b6ab4, type: 3}
+  - hexName: 11
+    hexSprite: {fileID: 21300000, guid: 1527f7658536d1f44872b5165dc18973, type: 3}
+  - hexName: 12
+    hexSprite: {fileID: 21300000, guid: 33ff5788c3769c645bfa6275bc46d847, type: 3}
+  - hexName: 13
+    hexSprite: {fileID: 21300000, guid: 5273e7358807a184094fd396295d507c, type: 3}
+  - hexName: 14
+    hexSprite: {fileID: 21300000, guid: 753e864bc638d6548b7e79325b13e006, type: 3}
+  - hexName: 15
+    hexSprite: {fileID: 21300000, guid: d91f2c7bbd68cf948813740a14ebb28f, type: 3}
+  - hexName: 16
+    hexSprite: {fileID: 21300000, guid: 45c00600a67f06e44bbac245e0ccaef8, type: 3}
+  - hexName: 17
+    hexSprite: {fileID: 21300000, guid: f98b5ad584c48ff4a9f52534cfab1d2c, type: 3}
+  - hexName: 18
+    hexSprite: {fileID: 21300000, guid: bc7a755287917b4408c75fda927c7502, type: 3}
+  - hexName: 19
+    hexSprite: {fileID: 21300000, guid: ea5ee2dc4ed2e0a44ab2d880615e61dc, type: 3}
+  - hexName: 20
+    hexSprite: {fileID: 21300000, guid: 908aaa5bc4fef56479823e31f2166157, type: 3}
+  - hexName: 21
+    hexSprite: {fileID: 21300000, guid: 9102715f54b9b794b8e00f369844432f, type: 3}
+  - hexName: 22
+    hexSprite: {fileID: 21300000, guid: 36ee28433cd8c384aafc0a19a997d2c9, type: 3}
+  - hexName: 23
+    hexSprite: {fileID: 21300000, guid: 9d38bf6b00a880840ae0fe367e126537, type: 3}
+  - hexName: 24
+    hexSprite: {fileID: 21300000, guid: ad8c48f1a7c90d9439019abb5c96bbf7, type: 3}
+  - hexName: 25
+    hexSprite: {fileID: 21300000, guid: 757a15e9ddcd02b4c9460d18ab2b6b6b, type: 3}
+  - hexName: 26
+    hexSprite: {fileID: 21300000, guid: 214b7e2efa51d594bba7bc0dde874765, type: 3}
+  - hexName: 27
+    hexSprite: {fileID: 21300000, guid: 7afcbffeb9bf80944b1a9a3472d53d53, type: 3}
+  - hexName: 28
+    hexSprite: {fileID: 21300000, guid: ff2354ba891507b4cadd14533d9e54a5, type: 3}
+  - hexName: 29
+    hexSprite: {fileID: 21300000, guid: b32f5251c266a75438a3a0435080aa51, type: 3}
+  - hexName: 31
+    hexSprite: {fileID: 21300000, guid: daa405ca0dd513a4097dd115bc395696, type: 3}
+  - hexName: 30
+    hexSprite: {fileID: 21300000, guid: f3aa1ea2b4db5f04da0ccb7a883700dd, type: 3}
+  - hexName: 33
+    hexSprite: {fileID: 21300000, guid: b494af63da92023478901e11c41d523d, type: 3}
+  - hexName: 32
+    hexSprite: {fileID: 21300000, guid: dd1e94c19667ef042b661d9aec424408, type: 3}
+  - hexName: 34
+    hexSprite: {fileID: 21300000, guid: d20e2cbd9183c43448f7602880c7171f, type: 3}
+  - hexName: 35
+    hexSprite: {fileID: 21300000, guid: ed96e2d186bbd5d488511d656bed2dd5, type: 3}
+  - hexName: 36
+    hexSprite: {fileID: 21300000, guid: 767c2123ad5f94943b74054612c0e101, type: 3}
+  - hexName: 37
+    hexSprite: {fileID: 21300000, guid: 1c7162557fc346e4eb207d0f51e999e7, type: 3}
+  - hexName: 38
+    hexSprite: {fileID: 21300000, guid: 1c7162557fc346e4eb207d0f51e999e7, type: 3}
+  SkillSelectFrame: {fileID: 21300000, guid: 4010adaec116b7844a54f7b053b119a4, type: 3}
+  SkillNormalFrame: {fileID: 21300000, guid: e728f03bd1627754088a1c2bcd701772, type: 3}

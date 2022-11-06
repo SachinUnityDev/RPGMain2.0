@@ -1,0 +1,118 @@
+
+KingRatSmaller.png
+size: 4040,857
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Foot_L
+  rotate: true
+  xy: 3099, 288
+  size: 135, 440
+  orig: 136, 442
+  offset: 1, 2
+  index: -1
+Leg_L
+  rotate: false
+  xy: 1610, 19
+  size: 247, 566
+  orig: 251, 566
+  offset: 1, 0
+  index: -1
+Leg_R
+  rotate: false
+  xy: 2609, 391
+  size: 488, 464
+  orig: 488, 464
+  offset: 0, 0
+  index: -1
+Shin_L
+  rotate: false
+  xy: 3812, 124
+  size: 226, 258
+  orig: 238, 264
+  offset: 2, 2
+  index: -1
+back arm
+  rotate: false
+  xy: 2609, 2
+  size: 330, 387
+  orig: 339, 390
+  offset: 6, 3
+  index: -1
+back arm copy
+  rotate: true
+  xy: 3560, 384
+  size: 195, 431
+  orig: 201, 431
+  offset: 2, 0
+  index: -1
+back arm copy 2
+  rotate: true
+  xy: 3541, 142
+  size: 240, 269
+  orig: 245, 270
+  offset: 4, 0
+  index: -1
+back leg
+  rotate: false
+  xy: 3560, 581
+  size: 440, 274
+  orig: 440, 275
+  offset: 0, 1
+  index: -1
+hands
+  rotate: false
+  xy: 3236, 20
+  size: 256, 266
+  orig: 256, 266
+  offset: 0, 0
+  index: -1
+hips
+  rotate: false
+  xy: 1951, 313
+  size: 656, 542
+  orig: 700, 567
+  offset: 44, 1
+  index: -1
+jaw
+  rotate: false
+  xy: 1859, 35
+  size: 358, 276
+  orig: 360, 277
+  offset: 1, 1
+  index: -1
+lower arm
+  rotate: true
+  xy: 2941, 8
+  size: 278, 293
+  orig: 278, 311
+  offset: 0, 0
+  index: -1
+tail
+  rotate: false
+  xy: 837, 50
+  size: 771, 535
+  orig: 771, 535
+  offset: 0, 0
+  index: -1
+torso
+  rotate: false
+  xy: 2, 29
+  size: 833, 556
+  orig: 833, 556
+  offset: 0, 0
+  index: -1
+upper
+  rotate: false
+  xy: 3099, 425
+  size: 459, 430
+  orig: 460, 432
+  offset: 0, 1
+  index: -1
+upper arm
+  rotate: true
+  xy: 2219, 52
+  size: 259, 357
+  orig: 271, 371
+  offset: 12, 1
+  index: -1

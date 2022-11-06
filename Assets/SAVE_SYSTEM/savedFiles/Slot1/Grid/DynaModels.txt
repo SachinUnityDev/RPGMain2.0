@@ -1,0 +1,1 @@
+{"charMode":1,"charID":1,"charName":2,"currPos":1}|{"charMode":1,"charID":2,"charName":7,"currPos":7}|{"charMode":1,"charID":3,"charName":3,"currPos":2}|{"charMode":2,"charID":4,"charName":18,"currPos":1}|{"charMode":2,"charID":5,"charName":18,"currPos":3}|{"charMode":2,"charID":6,"charName":19,"currPos":2}|

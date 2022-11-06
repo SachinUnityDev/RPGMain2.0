@@ -1,0 +1,120 @@
+
+Gate night2.png
+size: 3844,3273
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 2, 955
+  size: 3442, 936
+  orig: 3833, 1866
+  offset: 390, 929
+  index: -1
+2
+  rotate: true
+  xy: 2, 2793
+  size: 478, 812
+  orig: 499, 857
+  offset: 4, 29
+  index: -1
+Camada 26
+  rotate: false
+  xy: 2, 2
+  size: 3840, 951
+  orig: 3842, 1067
+  offset: 1, 1
+  index: -1
+Mountain
+  rotate: false
+  xy: 2, 1893
+  size: 3840, 898
+  orig: 3842, 901
+  offset: 1, 2
+  index: -1
+
+Gate night22.png
+size: 3844,3592
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+4
+  rotate: false
+  xy: 2, 2
+  size: 1710, 1590
+  orig: 2353, 1791
+  offset: 116, 1
+  index: -1
+Stars
+  rotate: false
+  xy: 2, 2593
+  size: 3840, 997
+  orig: 3842, 1000
+  offset: 1, 2
+  index: -1
+Stars 2
+  rotate: false
+  xy: 2, 1594
+  size: 3840, 997
+  orig: 3842, 1000
+  offset: 1, 2
+  index: -1
+
+Gate night23.png
+size: 3844,3637
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+3
+  rotate: false
+  xy: 2, 2
+  size: 2335, 1851
+  orig: 2759, 1924
+  offset: 271, 10
+  index: -1
+Camada 32
+  rotate: false
+  xy: 2, 1855
+  size: 3840, 1780
+  orig: 3842, 1782
+  offset: 1, 1
+  index: -1
+
+Gate night24.png
+size: 3844,2002
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Sky
+  rotate: false
+  xy: 2, 2
+  size: 3840, 1998
+  orig: 3842, 2025
+  offset: 1, 26
+  index: -1
+
+Gate night25.png
+size: 3844,2024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Enten
+  rotate: false
+  xy: 2, 2
+  size: 3840, 2020
+  orig: 3842, 2022
+  offset: 1, 1
+  index: -1
+
+Gate night26.png
+size: 3841,2160
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Camada 23
+  rotate: false
+  xy: 2, 2
+  size: 3837, 2156
+  orig: 3839, 2158
+  offset: 1, 1
+  index: -1

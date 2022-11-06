@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2692663d20923c47ac3614534339102, type: 3}
+  m_Name: CodexSO
+  m_EditorClassIdentifier: 
+  headingArrowN: {fileID: 21300000, guid: edf6521876c3bf64697e9446ab051df6, type: 3}
+  spriteHeaderN: {fileID: 21300000, guid: e0758ec58d93b984a84655c4d1e55131, type: 3}
+  spriteHeaderHover: {fileID: 21300000, guid: 63a018f844b516d4a96a7dac59a99949, type: 3}
+  spriteHeaderHL: {fileID: 21300000, guid: 4eccf2f6eb36a8d43b169a70f56cdb53, type: 3}
+  spriteSubN: {fileID: 21300000, guid: 9c7e2b224987a084f8083de3560f540d, type: 3}
+  spriteSubHL: {fileID: 21300000, guid: 7e8f29a2c97d46842b7c10682aea2651, type: 3}
+  subHeaderBtnPrefab: {fileID: 8879869132370904480, guid: 5c8d3f32e22b7cb4c9465b8b3007cf16,
+    type: 3}
+  allHeaderData:
+  - codexHeader: 1
+    allHeaderSprites:
+    - pageNum: 1
+      pageSprite: {fileID: 21300000, guid: 36a32e93ed4322243be9a8aa1e953334, type: 3}
+    allSubHeaders:
+    - codexSubHeader: 1
+      allSubHeaderSprites:
+      - pageNum: 2
+        pageSprite: {fileID: 21300000, guid: 22f39da7095ab2d4dbb77bc1798016fc, type: 3}
+    - codexSubHeader: 2
+      allSubHeaderSprites:
+      - pageNum: 3
+        pageSprite: {fileID: 21300000, guid: 22f39da7095ab2d4dbb77bc1798016fc, type: 3}
+  - codexHeader: 2
+    allHeaderSprites: []
+    allSubHeaders:
+    - codexSubHeader: 1
+      allSubHeaderSprites:
+      - pageNum: 3
+        pageSprite: {fileID: 21300000, guid: 36a32e93ed4322243be9a8aa1e953334, type: 3}
+      - pageNum: 232
+        pageSprite: {fileID: 21300000, guid: 22f39da7095ab2d4dbb77bc1798016fc, type: 3}
+    - codexSubHeader: 4
+      allSubHeaderSprites:
+      - pageNum: 0
+        pageSprite: {fileID: 0}
+  - codexHeader: 3
+    allHeaderSprites: []
+    allSubHeaders:
+    - codexSubHeader: 3
+      allSubHeaderSprites:
+      - pageNum: 0
+        pageSprite: {fileID: 0}
+  - codexHeader: 4
+    allHeaderSprites: []
+    allSubHeaders: []
+  - codexHeader: 5
+    allHeaderSprites: []
+    allSubHeaders: []
+  - codexHeader: 6
+    allHeaderSprites: []
+    allSubHeaders: []
+  - codexHeader: 7
+    allHeaderSprites: []
+    allSubHeaders: []
+  - codexHeader: 8
+    allHeaderSprites: []
+    allSubHeaders: []
+  - codexHeader: 9
+    allHeaderSprites: []
+    allSubHeaders: []
+  - codexHeader: 10
+    allHeaderSprites: []
+    allSubHeaders: []
+  - codexHeader: 11
+    allHeaderSprites: []
+    allSubHeaders: []
+  - codexHeader: 12
+    allHeaderSprites: []
+    allSubHeaders: []

@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b8903aa815f732499f63ce61ed83ccf, type: 3}
+  m_Name: LvlNExpSO
+  m_EditorClassIdentifier: 
+  allLvlExpData:
+  - charLvl: 1
+    deltaExpPts: 0
+    totalExpPts: 9
+  - charLvl: 2
+    deltaExpPts: 60
+    totalExpPts: 69
+  - charLvl: 3
+    deltaExpPts: 90
+    totalExpPts: 159
+  - charLvl: 4
+    deltaExpPts: 120
+    totalExpPts: 279
+  - charLvl: 5
+    deltaExpPts: 180
+    totalExpPts: 459
+  - charLvl: 6
+    deltaExpPts: 240
+    totalExpPts: 699
+  - charLvl: 7
+    deltaExpPts: 300
+    totalExpPts: 999
+  - charLvl: 8
+    deltaExpPts: 390
+    totalExpPts: 1389
+  - charLvl: 9
+    deltaExpPts: 480
+    totalExpPts: 1869
+  - charLvl: 10
+    deltaExpPts: 570
+    totalExpPts: 2439
+  - charLvl: 11
+    deltaExpPts: 700
+    totalExpPts: 3139
+  - charLvl: 12
+    deltaExpPts: 850
+    totalExpPts: 3989

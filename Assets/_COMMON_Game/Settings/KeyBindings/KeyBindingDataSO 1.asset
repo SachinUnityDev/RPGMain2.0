@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0ebe5fe120518641bad3c5cd709ea58, type: 3}
+  m_Name: KeyBindingDataSO 1
+  m_EditorClassIdentifier: 
+  allKeyBindingData:
+  - gameState: 1
+    keyfunc: 9
+    keyPressed: 102
+  - gameState: 1
+    keyfunc: 6
+    keyPressed: 101
+  - gameState: 1
+    keyfunc: 15
+    keyPressed: 105
+  - gameState: 1
+    keyfunc: 16
+    keyPressed: 106
+  - gameState: 1
+    keyfunc: 21
+    keyPressed: 112
+  - gameState: 1
+    keyfunc: 26
+    keyPressed: 114
+  - gameState: 1
+    keyfunc: 18
+    keyPressed: 109
+  - gameState: 1
+    keyfunc: 7
+    keyPressed: 118
+  - gameState: 1
+    keyfunc: 4
+    keyPressed: 116
+  - gameState: 1
+    keyfunc: 12
+    keyPressed: 103
+  - gameState: 1
+    keyfunc: 35
+    keyPressed: 115
+  - gameState: 1
+    keyfunc: 3
+    keyPressed: 98
+  - gameState: 1
+    keyfunc: 17
+    keyPressed: 108
+  - gameState: 3
+    keyfunc: 5
+    keyPressed: 111
+  - gameState: 3
+    keyfunc: 39
+    keyPressed: 9
+  - gameState: 3
+    keyfunc: 40
+    keyPressed: 32
+  - gameState: 3
+    keyfunc: 38
+    keyPressed: 104
+  - gameState: 3
+    keyfunc: 19
+    keyPressed: 116
+  - gameState: 3
+    keyfunc: 2
+    keyPressed: 8
+  - gameState: 3
+    keyfunc: 10
+    keyPressed: 102
+  - gameState: 3
+    keyfunc: 27
+    keyPressed: 49
+  - gameState: 3
+    keyfunc: 28
+    keyPressed: 50
+  - gameState: 3
+    keyfunc: 29
+    keyPressed: 51
+  - gameState: 3
+    keyfunc: 30
+    keyPressed: 52
+  - gameState: 3
+    keyfunc: 31
+    keyPressed: 53
+  - gameState: 3
+    keyfunc: 32
+    keyPressed: 54
+  - gameState: 3
+    keyfunc: 33
+    keyPressed: 55
+  - gameState: 3
+    keyfunc: 34
+    keyPressed: 56
+  - gameState: 3
+    keyfunc: 42
+    keyPressed: 113
+  - gameState: 2
+    keyfunc: 23
+    keyPressed: 111
+  - gameState: 2
+    keyfunc: 22
+    keyPressed: 113
+  - gameState: 2
+    keyfunc: 15
+    keyPressed: 105
+  - gameState: 2
+    keyfunc: 18
+    keyPressed: 109
+  - gameState: 2
+    keyfunc: 37
+    keyPressed: 97
+  - gameState: 2
+    keyfunc: 41
+    keyPressed: 100
+  - gameState: 2
+    keyfunc: 41
+    keyPressed: 275
+  - gameState: 2
+    keyfunc: 1
+    keyPressed: 110
+  - gameState: 2
+    keyfunc: 14
+    keyPressed: 32
+  - gameState: 0
+    keyfunc: 8
+    keyPressed: 27
+  - gameState: 0
+    keyfunc: 13
+    keyPressed: 282
+  - gameState: 0
+    keyfunc: 25
+    keyPressed: 286
+  - gameState: 0
+    keyfunc: 24
+    keyPressed: 290
+  - gameState: 0
+    keyfunc: 20
+    keyPressed: 284
+  - gameState: 0
+    keyfunc: 11
+    keyPressed: 99

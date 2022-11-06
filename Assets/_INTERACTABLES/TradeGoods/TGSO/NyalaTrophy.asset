@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6f8eeaa1c3e8a24eb4295f495bcc135, type: 3}
+  m_Name: NyalaTrophy
+  m_EditorClassIdentifier: 
+  tgName: 12
+  maxInventoryStack: 1
+  cost:
+    silver: 4
+    bronze: 8
+  fluctuation: 20
+  maxWorldInstance: 4
+  allNPCModData:
+  - npcName: 3
+    modVal: 2
+  - npcName: 1
+    modVal: 3
+  desc: Trade item. Might look good on the Tavern wall.
+  iconSprite: {fileID: 21300000, guid: 7fa2d85dd4eadce48952e1b770a813ac, type: 3}
+  allLines: []

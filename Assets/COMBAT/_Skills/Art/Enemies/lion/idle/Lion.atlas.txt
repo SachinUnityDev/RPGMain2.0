@@ -1,0 +1,131 @@
+
+Lion.png
+size: 2346,1938
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Arm_L
+  rotate: true
+  xy: 1705, 414
+  size: 397, 536
+  orig: 397, 536
+  offset: 0, 0
+  index: -1
+Hand_L
+  rotate: false
+  xy: 1480, 585
+  size: 223, 525
+  orig: 240, 525
+  offset: 17, 0
+  index: -1
+Layer 154
+  rotate: true
+  xy: 2, 281
+  size: 1655, 772
+  orig: 1655, 787
+  offset: 0, 15
+  index: -1
+Shadow
+  rotate: false
+  xy: 2, 2
+  size: 2250, 277
+  orig: 2275, 409
+  offset: 0, 68
+  index: -1
+hair
+  rotate: true
+  xy: 776, 1112
+  size: 824, 941
+  orig: 904, 986
+  offset: 64, 24
+  index: -1
+hand R
+  rotate: true
+  xy: 1719, 813
+  size: 349, 625
+  orig: 604, 1285
+  offset: 157, 348
+  index: -1
+head
+  rotate: false
+  xy: 1719, 1164
+  size: 554, 772
+  orig: 689, 795
+  offset: 0, 12
+  index: -1
+mouth
+  rotate: true
+  xy: 1480, 347
+  size: 236, 220
+  orig: 251, 220
+  offset: 6, 0
+  index: -1
+tail
+  rotate: false
+  xy: 776, 380
+  size: 702, 730
+  orig: 721, 740
+  offset: 0, 10
+  index: -1
+
+Lion2.png
+size: 1968,422
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Foot_L
+  rotate: false
+  xy: 1724, 203
+  size: 223, 217
+  orig: 223, 217
+  offset: 0, 0
+  index: -1
+Foot_L_01
+  rotate: false
+  xy: 1280, 27
+  size: 206, 393
+  orig: 288, 752
+  offset: 82, 0
+  index: -1
+Foot_R
+  rotate: false
+  xy: 1724, 2
+  size: 242, 199
+  orig: 243, 200
+  offset: 0, 0
+  index: -1
+L_Leg_01
+  rotate: false
+  xy: 469, 13
+  size: 292, 407
+  orig: 292, 407
+  offset: 0, 0
+  index: -1
+L_Leg_02
+  rotate: true
+  xy: 2, 88
+  size: 332, 465
+  orig: 332, 486
+  offset: 0, 0
+  index: -1
+R_Foot_01
+  rotate: false
+  xy: 1488, 78
+  size: 234, 342
+  orig: 234, 344
+  offset: 0, 0
+  index: -1
+R_Leg_01
+  rotate: false
+  xy: 763, 35
+  size: 265, 385
+  orig: 265, 385
+  offset: 0, 0
+  index: -1
+R_Leg_02
+  rotate: false
+  xy: 1030, 41
+  size: 248, 379
+  orig: 248, 379
+  offset: 0, 0
+  index: -1

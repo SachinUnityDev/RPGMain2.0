@@ -1,0 +1,1319 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd481ed51306a844b87c2e7d0b8ecbc3, type: 3}
+  m_Name: LevelUpCompSO
+  m_EditorClassIdentifier: 
+  allCharLvlUpData:
+  - heroType: 1
+    allLvldataComp:
+    - level: 1
+      allStatDataAuto:
+      - statsName: 15
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 12
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 13
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 2
+      allStatDataAuto:
+      - statsName: 7
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 7
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 15
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 3
+      allStatDataAuto:
+      - statsName: 9
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 9
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 11
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 4
+      allStatDataAuto:
+      - statsName: 6
+        currValue: 0
+        baseValue: 0
+        desc: 
+        minRange: 1
+        maxRange: 2
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 6
+        currValue: 0
+        baseValue: 0
+        desc: 
+        minRange: 1
+        maxRange: 2
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 14
+        currValue: 0
+        baseValue: 0
+        desc: 
+        minRange: 1
+        maxRange: 1
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 5
+      allStatDataAuto:
+      - statsName: 11
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 7
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 9
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 6
+      allStatDataAuto:
+      - statsName: 7
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      - statsName: 15
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 15
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 11
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 7
+      allStatDataAuto:
+      - statsName: 9
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 8
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 14
+        currValue: 0
+        baseValue: 0
+        desc: 
+        minRange: 1
+        maxRange: 1
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 8
+      allStatDataAuto:
+      - statsName: 22
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 12
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 13
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 9
+      allStatDataAuto:
+      - statsName: 10
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 9
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 10
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 10
+      allStatDataAuto:
+      - statsName: 6
+        currValue: 0
+        baseValue: 0
+        desc: 
+        minRange: 1
+        maxRange: 2
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 11
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 13
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 11
+      allStatDataAuto:
+      - statsName: 8
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 8
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 12
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 12
+      allStatDataAuto:
+      - statsName: 7
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      - statsName: 15
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      - statsName: 13
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 7
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      - statsName: 15
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 14
+        currValue: 0
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 1
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      - statsName: 23
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+  - heroType: 2
+    allLvldataComp:
+    - level: 1
+      allStatDataAuto:
+      - statsName: 14
+        currValue: 0
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 1
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 12
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 13
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 2
+      allStatDataAuto:
+      - statsName: 12
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 10
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 11
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 3
+      allStatDataAuto:
+      - statsName: 11
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 6
+        currValue: 0
+        baseValue: 0
+        desc: 
+        minRange: 1
+        maxRange: 2
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 14
+        currValue: 0
+        baseValue: 0
+        desc: 
+        minRange: 1
+        maxRange: 1
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 4
+      allStatDataAuto:
+      - statsName: 6
+        currValue: 0
+        baseValue: 0
+        desc: 
+        minRange: 1
+        maxRange: 2
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 7
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 15
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 5
+      allStatDataAuto:
+      - statsName: 10
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 12
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 8
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 6
+      allStatDataAuto:
+      - statsName: 14
+        currValue: 0
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 1
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      - statsName: 12
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 9
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 11
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 7
+      allStatDataAuto:
+      - statsName: 15
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 10
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 24
+        currValue: 2
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 8
+      allStatDataAuto:
+      - statsName: 7
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 12
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 14
+        currValue: 0
+        baseValue: 0
+        desc: 
+        minRange: 1
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 9
+      allStatDataAuto:
+      - statsName: 23
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 10
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 11
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 10
+      allStatDataAuto:
+      - statsName: 24
+        currValue: 2
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 23
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 22
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 11
+      allStatDataAuto:
+      - statsName: 12
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 18
+        currValue: 5
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      - statsName: 17
+        currValue: 5
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 16
+        currValue: 5
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      - statsName: 19
+        currValue: 5
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 12
+      allStatDataAuto:
+      - statsName: 14
+        currValue: 0
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 1
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      - statsName: 6
+        currValue: 0
+        baseValue: 0
+        desc: 
+        minRange: 1
+        maxRange: 1
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      - statsName: 12
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 6
+        currValue: 0
+        baseValue: 0
+        desc: 
+        minRange: 1
+        maxRange: 2
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      - statsName: 14
+        currValue: 0
+        baseValue: 0
+        desc: 
+        minRange: 1
+        maxRange: 1
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 13
+        currValue: 2
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      - statsName: 12
+        currValue: 2
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+  - heroType: 3
+    allLvldataComp:
+    - level: 1
+      allStatDataAuto:
+      - statsName: 13
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 12
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 13
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 2
+      allStatDataAuto:
+      - statsName: 6
+        currValue: 0
+        baseValue: 0
+        desc: 
+        minRange: 1
+        maxRange: 1
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 8
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 9
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 3
+      allStatDataAuto:
+      - statsName: 8
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 11
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 10
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 4
+      allStatDataAuto:
+      - statsName: 21
+        currValue: 4
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      - statsName: 20
+        currValue: 4
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 21
+        currValue: 6
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 20
+        currValue: 6
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 5
+      allStatDataAuto:
+      - statsName: 11
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 12
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 13
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 6
+      allStatDataAuto:
+      - statsName: 13
+        currValue: 2
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 24
+        currValue: 2
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 8
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 7
+      allStatDataAuto:
+      - statsName: 9
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 18
+        currValue: 6
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      - statsName: 17
+        currValue: 6
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 16
+        currValue: 6
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      - statsName: 19
+        currValue: 6
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 8
+      allStatDataAuto:
+      - statsName: 10
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 15
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 13
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 9
+      allStatDataAuto:
+      - statsName: 22
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 11
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 10
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 10
+      allStatDataAuto:
+      - statsName: 12
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 21
+        currValue: 8
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 20
+        currValue: 8
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 11
+      allStatDataAuto:
+      - statsName: 8
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 8
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 12
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+    - level: 12
+      allStatDataAuto:
+      - statsName: 6
+        currValue: 0
+        baseValue: 0
+        desc: 
+        minRange: 1
+        maxRange: 2
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      - statsName: 13
+        currValue: 1
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption1:
+      - statsName: 18
+        currValue: 6
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      - statsName: 17
+        currValue: 6
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      - statsName: 21
+        currValue: 6
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      allStatDataOption2:
+      - statsName: 16
+        currValue: 6
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      - statsName: 19
+        currValue: 6
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+      - statsName: 20
+        currValue: 6
+        baseValue: 0
+        desc: 
+        minRange: 0
+        maxRange: 0
+        minLimit: 0
+        maxLimit: 0
+        isClamped: 0
+  lvlPlusSprite: {fileID: 21300000, guid: ec228ab86ceb0a24697ce8f59e2c1b2f, type: 3}
+  lvlMinusSprite: {fileID: 21300000, guid: 547fb6938a5b25a4cb7ded2e2a61087f, type: 3}

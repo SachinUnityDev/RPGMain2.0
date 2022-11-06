@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a715d30bd539e8643868499728170ee4, type: 3}
+  m_Name: PauldonsOfSwiftness
+  m_EditorClassIdentifier: 
+  prefixName: 0
+  gewgawName: 8
+  suffixName: 7
+  gewgawSlotType: 1
+  maxWorldInstance: 3
+  classRestrictions: 
+  cultureRestrictions: 
+  raceRestrictions: 0500000003000000
+  cost:
+    silver: 0
+    bronze: 65
+  desc: 
+  iconSprite: {fileID: 21300000, guid: 2d5ea37619a67ad48aa0f087d97ad323, type: 3}

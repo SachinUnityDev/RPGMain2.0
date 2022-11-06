@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fadd238d242a85438165bd862660add, type: 3}
+  m_Name: GridModelSO
+  m_EditorClassIdentifier: 
+  allyTiles:
+  - {fileID: 11400000, guid: 66f3df8fca9869947b4fd2bf92422768, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: a6b7c036817ba9341bde4fead6388b1b, type: 2}
+  enemyTiles:
+  - {fileID: 11400000, guid: 63726965c6baaf64bb8349d3578959e7, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 1522f1c516fea3c4590195413680fc91, type: 2}
+  posHL:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  allyOnTurnHL: {fileID: 131060, guid: 0cf8b69f523437349a65357a1b490b5b, type: 3}
+  enemyOnTurnHL: {fileID: 173872, guid: bcb37dc98ec88994398901edf4c0a254, type: 3}

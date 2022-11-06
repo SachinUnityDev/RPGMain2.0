@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
+  m_Name: Abzazulu- animation_Atlas
+  m_EditorClassIdentifier: 
+  atlasFile: {fileID: 4900000, guid: bfc09d31ab58473448bd0493f0256f4c, type: 3}
+  materials:
+  - {fileID: 2100000, guid: f903254b0782fec45822d679450f43e0, type: 2}
+  - {fileID: 2100000, guid: 87fa9e1e999ae064b8c95a32567cbce7, type: 2}
+  - {fileID: 2100000, guid: 61b70fbab9f9e0c42964f5904e84cf68, type: 2}

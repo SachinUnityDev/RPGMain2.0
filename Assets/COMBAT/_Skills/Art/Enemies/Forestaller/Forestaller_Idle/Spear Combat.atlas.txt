@@ -1,0 +1,139 @@
+
+Spear Combat.png
+size: 2185,2185
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Chest
+  rotate: false
+  xy: 1084, 1430
+  size: 604, 755
+  orig: 858, 1334
+  offset: 181, 541
+  index: -1
+Head
+  rotate: false
+  xy: 1835, 296
+  size: 275, 332
+  orig: 276, 333
+  offset: 1, 0
+  index: -1
+Hip
+  rotate: false
+  xy: 1084, 928
+  size: 685, 500
+  orig: 685, 500
+  offset: 0, 0
+  index: -1
+L_Arm_01
+  rotate: false
+  xy: 1834, 630
+  size: 276, 425
+  orig: 284, 427
+  offset: 8, 2
+  index: -1
+L_Arm_02
+  rotate: false
+  xy: 604, 281
+  size: 501, 234
+  orig: 508, 390
+  offset: 6, 1
+  index: -1
+L_Leg_01
+  rotate: true
+  xy: 553, 31
+  size: 248, 484
+  orig: 248, 484
+  offset: 0, 0
+  index: -1
+L_Leg_02
+  rotate: true
+  xy: 1170, 335
+  size: 261, 663
+  orig: 261, 664
+  offset: 0, 0
+  index: -1
+L_Leg_item
+  rotate: false
+  xy: 1771, 1057
+  size: 351, 403
+  orig: 353, 403
+  offset: 2, 0
+  index: -1
+LeopardsU
+  rotate: false
+  xy: 0, 33
+  size: 551, 421
+  orig: 601, 425
+  offset: 14, 2
+  index: -1
+Neck
+  rotate: false
+  xy: 1500, 31
+  size: 164, 127
+  orig: 166, 128
+  offset: 0, 1
+  index: -1
+R_Arm_01
+  rotate: true
+  xy: 1830, 67
+  size: 227, 347
+  orig: 508, 347
+  offset: 0, 0
+  index: -1
+R_Arm_02
+  rotate: false
+  xy: 1500, 160
+  size: 328, 173
+  orig: 328, 173
+  offset: 0, 0
+  index: -1
+R_Leg_01
+  rotate: true
+  xy: 604, 517
+  size: 400, 564
+  orig: 400, 564
+  offset: 0, 0
+  index: -1
+R_Leg_02
+  rotate: true
+  xy: 1170, 598
+  size: 328, 662
+  orig: 384, 742
+  offset: 11, 8
+  index: -1
+R_Leg_item
+  rotate: true
+  xy: 1107, 30
+  size: 303, 391
+  orig: 303, 391
+  offset: 0, 0
+  index: -1
+SKirt
+  rotate: true
+  xy: 1690, 1462
+  size: 723, 429
+  orig: 723, 429
+  offset: 0, 0
+  index: -1
+Shield,
+  rotate: false
+  xy: 604, 919
+  size: 478, 1266
+  orig: 483, 1304
+  offset: 1, 6
+  index: -1
+ShieldStick
+  rotate: false
+  xy: 2121, 1958
+  size: 64, 227
+  orig: 77, 255
+  offset: 4, 18
+  index: -1
+spear
+  rotate: false
+  xy: 0, 456
+  size: 602, 1729
+  orig: 637, 1824
+  offset: 4, 12
+  index: -1

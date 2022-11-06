@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c785db28e34d58b48955e27dceb5fd0e, type: 3}
+  m_Name: MeetKhalid
+  m_EditorClassIdentifier: 
+  DiaID: 102
+  dialogueName: 1
+  npcName: 10
+  charName: 0
+  gameState: 3
+  charInDialogue: 01000000
+  NPCinDialogue: 
+  locationName: 1
+  dialogueAsset: {fileID: 4900000, guid: e9460e61adbcc34418ef472a0d3d8624, type: 3}
+  interactSprites:
+  - interactionNo: 1
+    allSprites:
+    - {fileID: 21300000, guid: ac8a4488079be0b45a020c2205562bc0, type: 3}
+    - {fileID: 21300000, guid: 65735e6d7859a964198498115b3edc15, type: 3}
+    - {fileID: 21300000, guid: 10675cbd689f6894f8aaa3709a2634e8, type: 3}

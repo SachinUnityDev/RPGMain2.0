@@ -1,0 +1,188 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3108039f6456f440bbe925b6c103a06, type: 3}
+  m_Name: Hyena
+  m_EditorClassIdentifier: 
+  charID: 201
+  charName: 22
+  charPrefab: {fileID: 748874926565004192, guid: d151465f0c8e80945ac0b38606a546a0,
+    type: 3}
+  charSprite: {fileID: 21300000, guid: 1bccbb03b2f1aa64d9dfc73f6e2b3607, type: 3}
+  charHexPortrait: {fileID: 21300000, guid: 5269995015997fa46923f0e903c90f91, type: 3}
+  dialoguePortrait: {fileID: 21300000, guid: c7e8baf391d7e804e8863cf0a02aee3f, type: 3}
+  charMode: 2
+  orgCharMode: 2
+  expPoints: 0
+  raceType: 1
+  cultType: 18
+  classType: 0
+  heroType: 0
+  tameAnimalsStrength: 0
+  fleeBehaviour: 0
+  canBeAmbushed: 0
+  canBeCaught: 0
+  potions: 0
+  gems: 0
+  startLevel: 0
+  staminaRegen: 2
+  StatsList:
+  - statsName: 1
+    currValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 2
+    currValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 3
+    currValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 4
+    currValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 5
+    currValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 6
+    currValue: 0
+    desc: 
+    minRange: 5
+    maxRange: 7
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 7
+    currValue: 8
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 8
+    currValue: -5
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 9
+    currValue: 7
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 10
+    currValue: 6
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 11
+    currValue: 5
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 12
+    currValue: 7
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 13
+    currValue: 8
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 14
+    currValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 2
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 15
+    currValue: 4
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 16
+    currValue: 10
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 17
+    currValue: 10
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 18
+    currValue: 10
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 19
+    currValue: 20
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 20
+    currValue: 0
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  - statsName: 21
+    currValue: 10
+    desc: 
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+  charOccupies: 1
+  posPriority: 
+  charLvl: 0
+  skillLvl: 0

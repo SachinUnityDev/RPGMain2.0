@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be7e75e44b310b9449753244ac4d24af, type: 3}
+  m_Name: RosterSO
+  m_EditorClassIdentifier: 
+  rosterPanelPrefab: {fileID: 0}
+  charPortPreFab: {fileID: 2262034105070544415, guid: 788c51824837ec64c9c3f40169a94cee,
+    type: 3}
+  allAvailStateStr:
+  - availOfChar: 1
+    availStateHeaderStr: Available
+    availStateDescStr: Available to join the party
+  - availOfChar: 2
+    availStateHeaderStr: Available
+    availStateDescStr: Not Available
+  - availOfChar: 3
+    availStateHeaderStr: Available
+    availStateDescStr: Not Available
+  - availOfChar: 4
+    availStateHeaderStr: Available
+    availStateDescStr: Not Available
+  - availOfChar: 5
+    availStateHeaderStr: Already In Party
+    availStateDescStr: Not Available
+  - availOfChar: 0
+    availStateHeaderStr: 
+    availStateDescStr: 

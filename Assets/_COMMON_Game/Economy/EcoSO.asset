@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faea58b7b4a2f584381ef4fabf1a7f57, type: 3}
+  m_Name: EcoSO
+  m_EditorClassIdentifier: 
+  moneyInStash:
+    silver: 10
+    bronze: 4
+  moneyInInv:
+    silver: 40
+    bronze: 9
+  moneyNet:
+    silver: 51
+    bronze: 1
+  allNPCMoneyData:
+  - npcName: 13
+    money:
+      silver: 10
+      bronze: 10
+  - npcName: 3
+    money:
+      silver: 10
+      bronze: 10
+  - npcName: 17
+    money:
+      silver: 10
+      bronze: 10

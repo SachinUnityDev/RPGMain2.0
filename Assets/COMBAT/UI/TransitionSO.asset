@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83444316184e6fa4abf5911b3a635f9a, type: 3}
+  m_Name: TransitionSO
+  m_EditorClassIdentifier: 
+  SOCDayMidSprite: {fileID: 21300000, guid: bd97b89cdb08eee41884f0808a8ff01f, type: 3}
+  SOCNightMidSprite: {fileID: 21300000, guid: 2ad0a8790ee6f114bbbc24bf378aa689, type: 3}
+  SOCDayTopSprites:
+  - {fileID: 21300000, guid: 4394edf6650ec994b8bd46527b567e4c, type: 3}
+  - {fileID: 21300000, guid: 0568eae60d1d7964091d2626646d8ceb, type: 3}
+  - {fileID: 21300000, guid: 9f733ae97f746464cb4d4f4f00c4017b, type: 3}
+  SOCNightTopSprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  mainAnimTime: 1

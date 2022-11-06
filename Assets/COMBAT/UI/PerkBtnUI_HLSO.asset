@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecad8d842a950b940acb395dda96f68d, type: 3}
+  m_Name: PerkBtnUI_HLSO
+  m_EditorClassIdentifier: 
+  UIElementType: 1
+  clickableSprite: {fileID: 21300000, guid: b9f3ccf130a38f74a9a1d4a177db2dab, type: 3}
+  clickedSprite: {fileID: 21300000, guid: 204c7aa2ca35ea0479f0b3a91dddd94e, type: 3}
+  UnclickableSprite: {fileID: 21300000, guid: 425954cf5cbe1ef43a592cc478624b48, type: 3}
+  clickedColor: {r: 0.98039216, g: 0.8352941, b: 0.6039216, a: 1}
+  clickableColor: {r: 0.78039217, g: 0.67058825, b: 0.54509807, a: 1}
+  unClickableColor: {r: 0.74509805, g: 0.7411765, b: 0.7372549, a: 1}

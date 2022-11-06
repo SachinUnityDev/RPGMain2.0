@@ -1,0 +1,30 @@
+fileFormatVersion: 2
+guid: 5043d9d77de97254494b9760484f106e
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Zachar
+  fontNames:
+  - Zachar
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 4c5a3fe08d58ee44cbcc2a3505006786, type: 3}
+  - {fileID: 12800000, guid: 1e8dc2540d04bd84ba69bc120b6c5028, type: 3}
+  - {fileID: 12800000, guid: 0457d4e4da8543d4496fa2c0758706f4, type: 3}
+  - {fileID: 12800000, guid: 8020cc3607a33cb41bada51316a84c84, type: 3}
+  - {fileID: 12800000, guid: 10f489a97ca7e4344a423cc6fbf304c6, type: 3}
+  - {fileID: 12800000, guid: 051d5eca1de51924182ead29208fbf5a, type: 3}
+  - {fileID: 12800000, guid: 96ea220b752a06043b27d6ddeab699a6, type: 3}
+  - {fileID: 12800000, guid: 4271919daabc0e84895e63a5e156a610, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

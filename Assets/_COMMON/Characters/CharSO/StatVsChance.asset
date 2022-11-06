@@ -1,0 +1,261 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddd9598b1c2cf8944840c6d09f9a759e, type: 3}
+  m_Name: StatVsChance
+  m_EditorClassIdentifier: 
+  allStatChanceData:
+  - statName: 1
+    allStatsNChances: []
+    minLimit: 0
+    maxLimit: 100
+  - statName: 2
+    allStatsNChances: []
+    minLimit: 0
+    maxLimit: 100
+  - statName: 3
+    allStatsNChances: []
+    minLimit: -30
+    maxLimit: 30
+  - statName: 4
+    allStatsNChances: []
+    minLimit: 0
+    maxLimit: 60
+  - statName: 5
+    allStatsNChances: []
+    minLimit: 0
+    maxLimit: 60
+  - statName: 6
+    allStatsNChances: []
+    minLimit: 0
+    maxLimit: 100
+  - statName: 7
+    allStatsNChances:
+    - statValue: 0
+      statChance: 12
+    - statValue: 1
+      statChance: 66
+    - statValue: 2
+      statChance: 72
+    - statValue: 3
+      statChance: 78
+    - statValue: 4
+      statChance: 84
+    - statValue: 5
+      statChance: 90
+    - statValue: 6
+      statChance: 96
+    - statValue: 7
+      statChance: 102
+    - statValue: 8
+      statChance: 108
+    - statValue: 9
+      statChance: 114
+    - statValue: 10
+      statChance: 120
+    - statValue: 11
+      statChance: 126
+    - statValue: 12
+      statChance: 132
+    - statValue: 13
+      statChance: 138
+    - statValue: 14
+      statChance: 144
+    - statValue: 15
+      statChance: 150
+    minLimit: 0
+    maxLimit: 30
+  - statName: 8
+    allStatsNChances:
+    - statValue: 0
+      statChance: 0
+    - statValue: 1
+      statChance: 8
+    - statValue: 2
+      statChance: 16
+    - statValue: 3
+      statChance: 24
+    - statValue: 4
+      statChance: 32
+    - statValue: 5
+      statChance: 40
+    - statValue: 6
+      statChance: 48
+    - statValue: 7
+      statChance: 56
+    - statValue: 8
+      statChance: 64
+    - statValue: 9
+      statChance: 72
+    - statValue: 10
+      statChance: 80
+    - statValue: 11
+      statChance: 88
+    - statValue: 12
+      statChance: 96
+    minLimit: 0
+    maxLimit: 12
+  - statName: 9
+    allStatsNChances:
+    - statValue: 0
+      statChance: 54
+    - statValue: 1
+      statChance: 45
+    - statValue: 2
+      statChance: 36
+    - statValue: 3
+      statChance: 27
+    - statValue: 4
+      statChance: 18
+    - statValue: 5
+      statChance: 9
+    - statValue: 6
+      statChance: 0
+    - statValue: 7
+      statChance: 6
+    - statValue: 8
+      statChance: 12
+    - statValue: 9
+      statChance: 18
+    - statValue: 10
+      statChance: 24
+    - statValue: 11
+      statChance: 30
+    - statValue: 12
+      statChance: 36
+    minLimit: 0
+    maxLimit: 12
+  - statName: 10
+    allStatsNChances:
+    - statValue: 0
+      statChance: 54
+    - statValue: 1
+      statChance: 45
+    - statValue: 2
+      statChance: 36
+    - statValue: 3
+      statChance: 27
+    - statValue: 4
+      statChance: 18
+    - statValue: 5
+      statChance: 9
+    - statValue: 6
+      statChance: 0
+    - statValue: 7
+      statChance: 6
+    - statValue: 8
+      statChance: 12
+    - statValue: 9
+      statChance: 18
+    - statValue: 10
+      statChance: 24
+    - statValue: 11
+      statChance: 30
+    - statValue: 12
+      statChance: 36
+    minLimit: 0
+    maxLimit: 12
+  - statName: 11
+    allStatsNChances:
+    - statValue: 0
+      statChance: 0
+    - statValue: 1
+      statChance: 1
+    - statValue: 2
+      statChance: 2
+    - statValue: 3
+      statChance: 3
+    - statValue: 4
+      statChance: 4
+    - statValue: 5
+      statChance: 5
+    - statValue: 6
+      statChance: 6
+    - statValue: 7
+      statChance: 7
+    - statValue: 8
+      statChance: 8
+    - statValue: 9
+      statChance: 9
+    - statValue: 10
+      statChance: 10
+    - statValue: 11
+      statChance: 11
+    - statValue: 12
+      statChance: 12
+    minLimit: 0
+    maxLimit: 12
+  - statName: 12
+    allStatsNChances: []
+    minLimit: -1
+    maxLimit: -1
+  - statName: 13
+    allStatsNChances: []
+    minLimit: -1
+    maxLimit: -1
+  - statName: 14
+    allStatsNChances: []
+    minLimit: 0
+    maxLimit: 100
+  - statName: 15
+    allStatsNChances:
+    - statValue: 0
+      statChance: 4
+    - statValue: 1
+      statChance: 4
+    - statValue: 2
+      statChance: 8
+    - statValue: 3
+      statChance: 12
+    - statValue: 4
+      statChance: 16
+    - statValue: 5
+      statChance: 20
+    - statValue: 6
+      statChance: 24
+    - statValue: 7
+      statChance: 28
+    - statValue: 8
+      statChance: 32
+    - statValue: 9
+      statChance: 36
+    - statValue: 10
+      statChance: 40
+    - statValue: 11
+      statChance: 44
+    - statValue: 12
+      statChance: 48
+    minLimit: 0
+    maxLimit: 12
+  - statName: 16
+    allStatsNChances: []
+    minLimit: 0
+    maxLimit: 90
+  - statName: 17
+    allStatsNChances: []
+    minLimit: 0
+    maxLimit: 90
+  - statName: 18
+    allStatsNChances: []
+    minLimit: 0
+    maxLimit: 90
+  - statName: 19
+    allStatsNChances: []
+    minLimit: 0
+    maxLimit: 90
+  - statName: 20
+    allStatsNChances: []
+    minLimit: 0
+    maxLimit: 60
+  - statName: 21
+    allStatsNChances: []
+    minLimit: 0
+    maxLimit: 60

@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a4a1798b88f0f43a32928e5ebf9320, type: 3}
+  m_Name: Hyena
+  m_EditorClassIdentifier: 
+  charName: 22
+  combatPose: {fileID: 21300000, guid: 1bccbb03b2f1aa64d9dfc73f6e2b3607, type: 3}
+  combatFX:
+    loc: 0
+    skillSprite: {fileID: 0}
+  defendPose: {fileID: 21300000, guid: f0793ea1139531444b1422e4690bcdab, type: 3}
+  defendFX:
+    loc: 0
+    skillSprite: {fileID: 0}
+  passiveSkills:
+  - passiveSkillName: 8
+    passiveSprite: {fileID: 21300000, guid: 5e4cccef3b11f5a47922e3a2a94d4c67, type: 3}
+  - passiveSkillName: 7
+    passiveSprite: {fileID: 21300000, guid: 38a6a0f96ed8a6344b0f1fe2ef901632, type: 3}
+  allSkills:
+  - skillName: 116
+    charName: 22
+    skillID: 0
+    skillIconSprite: {fileID: 21300000, guid: fcc24b95a5caa294cb830079bb401cf0, type: 3}
+    skillPose: {fileID: 21300000, guid: e9f2036f9d7e2e44896b8df701216a15, type: 3}
+    skillTransitionPose: {fileID: 0}
+    skillType: 1
+    skillUnLockStatus: 1
+    skillDesc: 
+    damageMod: 100
+    skillLvl: 0
+    skillSelState: 1
+    cd: -5
+    attackType: 1
+    dmgType: 010000000f000000
+    castPos: 01000000020000000300000004000000050000000600000007000000
+    targetPos: []
+    staminareq: 4
+    castTime: 0
+    timeFrame: 0
+    maxUsagePerCombat: 0
+    skillIncli: 1
+    baseWeight: 10
+    isActive: 0
+    allPerkHexes:
+    - perkChain: 00000000
+      hexName: 020000000c0000000b000000
+    allSkillFXs: []
+  - skillName: 117
+    charName: 22
+    skillID: 0
+    skillIconSprite: {fileID: 21300000, guid: e278e5dbcbd6e8648ac94c7ca0ada2ed, type: 3}
+    skillPose: {fileID: 21300000, guid: 05d6ce0d7032f04468808394d4442409, type: 3}
+    skillTransitionPose: {fileID: 0}
+    skillType: 2
+    skillUnLockStatus: 1
+    skillDesc: 
+    damageMod: 100
+    skillLvl: 0
+    skillSelState: 1
+    cd: 2
+    attackType: 1
+    dmgType: 010000000f0000000b000000
+    castPos: 01000000020000000300000004000000050000000600000007000000
+    targetPos: []
+    staminareq: 8
+    castTime: 2
+    timeFrame: 1
+    maxUsagePerCombat: 0
+    skillIncli: 1
+    baseWeight: 30
+    isActive: 0
+    allPerkHexes:
+    - perkChain: 00000000
+      hexName: 02000000100000000b000000
+    allSkillFXs: []
+  - skillName: 118
+    charName: 22
+    skillID: 0
+    skillIconSprite: {fileID: 21300000, guid: 0dcc22d0e199f484aa7089ab190fcdaa, type: 3}
+    skillPose: {fileID: 21300000, guid: ecab395da8238f04dbd3edb11abb7ba4, type: 3}
+    skillTransitionPose: {fileID: 0}
+    skillType: 3
+    skillUnLockStatus: 1
+    skillDesc: 
+    damageMod: 0
+    skillLvl: 0
+    skillSelState: 1
+    cd: 3
+    attackType: 0
+    dmgType: 0a000000
+    castPos: 01000000020000000300000004000000050000000600000007000000
+    targetPos: []
+    staminareq: 6
+    castTime: 2
+    timeFrame: 1
+    maxUsagePerCombat: 0
+    skillIncli: 4
+    baseWeight: 20
+    isActive: 0
+    allPerkHexes:
+    - perkChain: 00000000
+      hexName: 190000000b0000000b000000
+    allSkillFXs: []

@@ -1,0 +1,687 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5504cd8186df6754e891b741b3b3c87f, type: 3}
+  m_Name: CharStatesModelSO
+  m_EditorClassIdentifier: 
+  allCharStatesModels:
+  - charStateName: 1
+    charStateSprite: {fileID: 21300000, guid: 38a5403db0a2dca439043471c512a962, type: 3}
+    charStateType: 1
+    stateFor: 1
+    charStateClass: 13
+    timeFrame: 2
+    castTime: 1
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 2
+    charStateSprite: {fileID: 21300000, guid: ac9607ae4c48401479a1d11ec9ffb6c7, type: 3}
+    charStateType: 1
+    stateFor: 0
+    charStateClass: 1
+    timeFrame: 0
+    castTime: 2
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 3
+    charStateSprite: {fileID: 21300000, guid: ac9607ae4c48401479a1d11ec9ffb6c7, type: 3}
+    charStateType: 1
+    stateFor: 0
+    charStateClass: 1
+    timeFrame: 0
+    castTime: 2
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 4
+    charStateSprite: {fileID: 21300000, guid: ac9607ae4c48401479a1d11ec9ffb6c7, type: 3}
+    charStateType: 1
+    stateFor: 0
+    charStateClass: 1
+    timeFrame: 0
+    castTime: 2
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 5
+    charStateSprite: {fileID: 21300000, guid: efc1161df168b2a40b575144db83425b, type: 3}
+    charStateType: 1
+    stateFor: 0
+    charStateClass: 5
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 6
+    charStateSprite: {fileID: 21300000, guid: 67819ac1ee6b999408bbb12359b57970, type: 3}
+    charStateType: 1
+    stateFor: 0
+    charStateClass: 1
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 7
+    charStateSprite: {fileID: 21300000, guid: 67819ac1ee6b999408bbb12359b57970, type: 3}
+    charStateType: 1
+    stateFor: 0
+    charStateClass: 1
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 8
+    charStateSprite: {fileID: 21300000, guid: 67819ac1ee6b999408bbb12359b57970, type: 3}
+    charStateType: 1
+    stateFor: 0
+    charStateClass: 1
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 9
+    charStateSprite: {fileID: 21300000, guid: 3816e2332d9a0d94cb9d9abdc5d7dec2, type: 3}
+    charStateType: 0
+    stateFor: 0
+    charStateClass: 14
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 10
+    charStateSprite: {fileID: 21300000, guid: ecd2aeb3004319a47ac9475565726d06, type: 3}
+    charStateType: 0
+    stateFor: 0
+    charStateClass: 6
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 11
+    charStateSprite: {fileID: 21300000, guid: 455b26020349bf045b5a0aa13d01ee7b, type: 3}
+    charStateType: 0
+    stateFor: 0
+    charStateClass: 6
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 12
+    charStateSprite: {fileID: 21300000, guid: f64d3c31a3f3fd04790fb895e719b4e9, type: 3}
+    charStateType: 0
+    stateFor: 1
+    charStateClass: 16
+    timeFrame: 2
+    castTime: 1
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 13
+    charStateSprite: {fileID: 21300000, guid: 929eadf14c6e1504f80a2ca62ca03819, type: 3}
+    charStateType: 0
+    stateFor: 0
+    charStateClass: 3
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 14
+    charStateSprite: {fileID: 21300000, guid: d632e72d6932bd748a3b0938540fba9a, type: 3}
+    charStateType: 1
+    stateFor: 0
+    charStateClass: 4
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 15
+    charStateSprite: {fileID: 21300000, guid: 971aedefb975c3a43a91b590c744a52c, type: 3}
+    charStateType: 1
+    stateFor: 0
+    charStateClass: 14
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 16
+    charStateSprite: {fileID: 21300000, guid: cf8c685b16a11f147b1490a0dd6fb436, type: 3}
+    charStateType: 1
+    stateFor: 0
+    charStateClass: 4
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 17
+    charStateSprite: {fileID: 21300000, guid: f6e418cd84f1aa841a453bd382410988, type: 3}
+    charStateType: 1
+    stateFor: 1
+    charStateClass: 12
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 18
+    charStateSprite: {fileID: 0}
+    charStateType: 0
+    stateFor: 1
+    charStateClass: 8
+    timeFrame: 1
+    castTime: 2
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 19
+    charStateSprite: {fileID: 21300000, guid: 6cf0ef1339989ea48b4cf3fbf3268e39, type: 3}
+    charStateType: 0
+    stateFor: 0
+    charStateClass: 6
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 20
+    charStateSprite: {fileID: 21300000, guid: c14e792fbd8aa2c48bd38bbc71e5e6d0, type: 3}
+    charStateType: 0
+    stateFor: 1
+    charStateClass: 8
+    timeFrame: 1
+    castTime: 2
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 21
+    charStateSprite: {fileID: 21300000, guid: 92002f3c218c3f2438212911cafcd4cf, type: 3}
+    charStateType: 1
+    stateFor: 1
+    charStateClass: 9
+    timeFrame: 1
+    castTime: 2
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 22
+    charStateSprite: {fileID: 21300000, guid: 5dade46a963b34f4da14c89e23ff81b5, type: 3}
+    charStateType: 1
+    stateFor: 0
+    charStateClass: 4
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 23
+    charStateSprite: {fileID: 21300000, guid: 7f4656f5a5aa1ff4ea5c7d1dc0d06196, type: 3}
+    charStateType: 0
+    stateFor: 1
+    charStateClass: 10
+    timeFrame: 2
+    castTime: 1
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 24
+    charStateSprite: {fileID: 21300000, guid: 032294aae85b7924e8a7fe61d2e6d74d, type: 3}
+    charStateType: 0
+    stateFor: 0
+    charStateClass: 6
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 25
+    charStateSprite: {fileID: 0}
+    charStateType: 0
+    stateFor: 1
+    charStateClass: 8
+    timeFrame: 1
+    castTime: 2
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 26
+    charStateSprite: {fileID: 21300000, guid: 0ac076f632611e04c9bf7c76b9c04f96, type: 3}
+    charStateType: 0
+    stateFor: 0
+    charStateClass: 15
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 27
+    charStateSprite: {fileID: 21300000, guid: 32128c34223016f46ac1016e4a0cc8f8, type: 3}
+    charStateType: 1
+    stateFor: 0
+    charStateClass: 15
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 28
+    charStateSprite: {fileID: 21300000, guid: 8f3d0a6f86ffd8d4c9e9e25b61efa61b, type: 3}
+    charStateType: 1
+    stateFor: 0
+    charStateClass: 5
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 29
+    charStateSprite: {fileID: 21300000, guid: 5d4cf8fe61c51464a83ab60775b244a8, type: 3}
+    charStateType: 0
+    stateFor: 0
+    charStateClass: 3
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 30
+    charStateSprite: {fileID: 21300000, guid: 727fd6d734442a047b2ce4d70939f084, type: 3}
+    charStateType: 0
+    stateFor: 0
+    charStateClass: 15
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 31
+    charStateSprite: {fileID: 0}
+    charStateType: 1
+    stateFor: 1
+    charStateClass: 11
+    timeFrame: 5
+    castTime: 1
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 32
+    charStateSprite: {fileID: 21300000, guid: e65bec3d577bbac4bb1f57d085d37371, type: 3}
+    charStateType: 1
+    stateFor: 1
+    charStateClass: 9
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 33
+    charStateSprite: {fileID: 21300000, guid: c713f5cc4b1debb43b35874beb428457, type: 3}
+    charStateType: 1
+    stateFor: 1
+    charStateClass: 9
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 34
+    charStateSprite: {fileID: 21300000, guid: fb3db3ab97d253d42ba9968fd517d0bb, type: 3}
+    charStateType: 1
+    stateFor: 1
+    charStateClass: 9
+    timeFrame: 2
+    castTime: 1
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 35
+    charStateSprite: {fileID: 21300000, guid: 645b923d49f820f4a9f89e69352075cc, type: 3}
+    charStateType: 0
+    stateFor: 0
+    charStateClass: 3
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 36
+    charStateSprite: {fileID: 21300000, guid: 631697acb78739c4f8013df8e867aca8, type: 3}
+    charStateType: 0
+    stateFor: 0
+    charStateClass: 6
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 37
+    charStateSprite: {fileID: 21300000, guid: de647753926ec2f4f95f9a1776be58f1, type: 3}
+    charStateType: 0
+    stateFor: 0
+    charStateClass: 3
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 38
+    charStateSprite: {fileID: 21300000, guid: c8a913bdd933f5c44ab927422ddcfe8f, type: 3}
+    charStateType: 1
+    stateFor: 0
+    charStateClass: 1
+    timeFrame: 0
+    castTime: 2
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 39
+    charStateSprite: {fileID: 21300000, guid: c8a913bdd933f5c44ab927422ddcfe8f, type: 3}
+    charStateType: 1
+    stateFor: 0
+    charStateClass: 1
+    timeFrame: 0
+    castTime: 2
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 40
+    charStateSprite: {fileID: 21300000, guid: c8a913bdd933f5c44ab927422ddcfe8f, type: 3}
+    charStateType: 1
+    stateFor: 0
+    charStateClass: 1
+    timeFrame: 0
+    castTime: 2
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 41
+    charStateSprite: {fileID: 21300000, guid: f1e96100363967940992e8209b21b5ee, type: 3}
+    charStateType: 0
+    stateFor: 0
+    charStateClass: 6
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 42
+    charStateSprite: {fileID: 21300000, guid: 68d136d46c9009242a3cad57051fe08c, type: 3}
+    charStateType: 1
+    stateFor: 0
+    charStateClass: 4
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 43
+    charStateSprite: {fileID: 21300000, guid: 69b0d06807d984d4fb20be7705107213, type: 3}
+    charStateType: 0
+    stateFor: 1
+    charStateClass: 7
+    timeFrame: 2
+    castTime: 1
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 44
+    charStateSprite: {fileID: 21300000, guid: 91186864f16d28749b9de2e8c66033f8, type: 3}
+    charStateType: 1
+    stateFor: 0
+    charStateClass: 2
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 45
+    charStateSprite: {fileID: 21300000, guid: 35e158ce87ad3564d91a3410d48e6cc6, type: 3}
+    charStateType: 1
+    stateFor: 0
+    charStateClass: 2
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 46
+    charStateSprite: {fileID: 21300000, guid: cdfa2042701d9eb4ebec0ad45fd05868, type: 3}
+    charStateType: 0
+    stateFor: 0
+    charStateClass: 15
+    timeFrame: 0
+    castTime: 0
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 47
+    charStateSprite: {fileID: 0}
+    charStateType: 1
+    stateFor: 1
+    charStateClass: 11
+    timeFrame: 5
+    castTime: 1
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0
+  - charStateName: 48
+    charStateSprite: {fileID: 21300000, guid: 2eac12e50b006f94e9fbcde9bd45bfad, type: 3}
+    charStateType: 0
+    stateFor: 1
+    charStateClass: 7
+    timeFrame: 2
+    castTime: 1
+    CharStateFX: {fileID: 0}
+    timeRemaining: 0
+    startRound: 0
+    effectedChar: 0
+    effectedCharID: 0
+    charStateCardStrs: []
+    charStateID: 0

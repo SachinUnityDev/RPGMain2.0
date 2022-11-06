@@ -1,0 +1,167 @@
+
+MacalakiExile.png
+size: 3233,3233
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Arm_L
+  rotate: true
+  xy: 355, 84
+  size: 224, 471
+  orig: 226, 471
+  offset: 2, 0
+  index: -1
+Arm_R
+  rotate: false
+  xy: 1993, 1327
+  size: 557, 511
+  orig: 559, 512
+  offset: 2, 1
+  index: -1
+Armor
+  rotate: true
+  xy: 2002, 549
+  size: 776, 751
+  orig: 782, 752
+  offset: 6, 1
+  index: -1
+Belt
+  rotate: true
+  xy: 869, 2066
+  size: 534, 1312
+  orig: 534, 1312
+  offset: 0, 0
+  index: -1
+Body
+  rotate: false
+  xy: 388, 963
+  size: 825, 1013
+  orig: 825, 1014
+  offset: 0, 0
+  index: -1
+CL_L
+  rotate: false
+  xy: 2755, 528
+  size: 416, 387
+  orig: 416, 387
+  offset: 0, 0
+  index: -1
+CL_R
+  rotate: false
+  xy: 2183, 1840
+  size: 800, 619
+  orig: 813, 627
+  offset: 13, 1
+  index: -1
+CL_back
+  rotate: false
+  xy: 2240, 2461
+  size: 990, 770
+  orig: 990, 771
+  offset: 0, 0
+  index: -1
+Foot_L
+  rotate: false
+  xy: 2715, 92
+  size: 437, 434
+  orig: 437, 436
+  offset: 0, 2
+  index: -1
+Foot_R
+  rotate: true
+  xy: 2002, 329
+  size: 218, 508
+  orig: 218, 509
+  offset: 0, 0
+  index: -1
+Forearm_L
+  rotate: false
+  xy: 2755, 917
+  size: 356, 441
+  orig: 356, 442
+  offset: 0, 1
+  index: -1
+Forearm_R
+  rotate: false
+  xy: 2985, 1861
+  size: 226, 598
+  orig: 228, 599
+  offset: 2, 1
+  index: -1
+Hand_L
+  rotate: true
+  xy: 828, 125
+  size: 183, 394
+  orig: 184, 397
+  offset: 1, 2
+  index: -1
+Hand_R
+  rotate: false
+  xy: 869, 2602
+  size: 1369, 629
+  orig: 1372, 629
+  offset: 3, 0
+  index: -1
+Head
+  rotate: false
+  xy: 2552, 1360
+  size: 394, 478
+  orig: 394, 480
+  offset: 0, 0
+  index: -1
+Leg_L
+  rotate: true
+  xy: 388, 310
+  size: 651, 879
+  orig: 651, 879
+  offset: 0, 0
+  index: -1
+Leg_R
+  rotate: false
+  xy: 1215, 1104
+  size: 776, 960
+  orig: 776, 964
+  offset: 0, 4
+  index: -1
+Shadow
+  rotate: true
+  xy: 2, 351
+  size: 1625, 384
+  orig: 1695, 468
+  offset: 18, 10
+  index: -1
+Shin_L
+  rotate: true
+  xy: 2002, 2
+  size: 325, 330
+  orig: 325, 339
+  offset: 0, 3
+  index: -1
+Shin_R
+  rotate: false
+  xy: 2, 4
+  size: 351, 345
+  orig: 351, 345
+  offset: 0, 0
+  index: -1
+head piece
+  rotate: true
+  xy: 2512, 278
+  size: 269, 201
+  orig: 269, 203
+  offset: 0, 2
+  index: -1
+kris dagger
+  rotate: true
+  xy: 1269, 265
+  size: 837, 731
+  orig: 840, 734
+  offset: 0, 2
+  index: -1
+tail
+  rotate: false
+  xy: 2, 1978
+  size: 865, 1253
+  orig: 867, 1253
+  offset: 2, 0
+  index: -1

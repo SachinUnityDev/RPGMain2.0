@@ -253,7 +253,7 @@ namespace Combat
 
         }
 
-
+        // COMBAT CHAR MODEL WILL CONTAIN STRIKEDATA, DMGDATA,
         float GetDamageMod(AttackType attackType, DamageType damageType)
         {
             float damageMod = 0f;
@@ -264,6 +264,8 @@ namespace Combat
                     break;
                 case AttackType.Melee:
                     damageMod += charController.charModel.meleeAttackTypeMod;
+                    // MOVE THIS TO COMBAT CHAR MODEL
+                    
                     break;
                 case AttackType.Ranged:
                     damageMod += charController.charModel.rangedAttackTypeMod;
@@ -283,15 +285,25 @@ namespace Combat
                     damageMod += charController.charModel.physicalSIMod;
                     break;
                 case DamageType.StaminaDmg:
+                    damageMod += charController.charModel.physicalSIMod;
+
                     break;
                 case DamageType.Air:
+                    damageMod += charController.charModel.physicalSIMod;
+
 
                     break;
                 case DamageType.Water:
+                    damageMod += charController.charModel.physicalSIMod;
+
                     break;
                 case DamageType.Earth:
+                    damageMod += charController.charModel.physicalSIMod;
+
                     break;
                 case DamageType.Fire:
+                    damageMod += charController.charModel.physicalSIMod;
+
                     break;
                 case DamageType.Light:
                     break;

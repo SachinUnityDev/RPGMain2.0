@@ -10,9 +10,9 @@ namespace Combat
         // instantiate char, control the movement 
         // initiate FX //
         public DynamicPosData selectedLoc;
-        public DynamicPosData TargetLoc; 
-        
+        public DynamicPosData TargetLoc;
 
+        //public CombatCharModel combatCharModel; 
 
         void Start()
         {

@@ -5,8 +5,8 @@ using Common;
 
 namespace Combat
 {
-    [System.Serializable]
-    //public class StrikeModel
+
+    //public class StrikeModel  //  Deprecated 
     //{
     //    public CharController striker;
     //    public DynamicPosData target;
@@ -30,6 +30,7 @@ namespace Combat
     //    }
     //}
 
+    [System.Serializable]
     public class StatChgData
     {
         public StatsName statName;
@@ -47,12 +48,21 @@ namespace Combat
 
         CharController charController;
         List<DynamicPosData> otherTargetDynas;
+        public StrikeCharModel strikeCharModel; 
+
 
         float dmgMin, dmgMax; 
         private void Start()
         {
             charController = GetComponent<CharController>();
             otherTargetDynas = new List<DynamicPosData>(); 
+        }
+
+
+        public void Init()
+        {
+            strikeCharModel = new StrikeCharModel();
+
         }
 
         public bool FocusCheck()// Magical only .. 
@@ -76,7 +86,6 @@ namespace Combat
             } 
 
         }
-
 
         public void MisFireApply()
         {
@@ -141,6 +150,28 @@ namespace Combat
                 return accChance.GetChance();
             }           
         }
+
+
+#region THORNS RELATED
+        public void ApplyThornsFx()
+        {
+            //brows
+
+
+        }
+
+        public void AddThornsFX()
+        {
+
+        }
+        public void RemoveThornsFx()
+        {
+
+
+        }
+      
+
+        #endregion
     }
 
 }

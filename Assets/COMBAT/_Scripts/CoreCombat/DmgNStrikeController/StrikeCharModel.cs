@@ -14,6 +14,7 @@ namespace Combat
         public DamageType DamageType;  // damage attackers will be reverted by
         public float thornsMin;
         public float thornsMax;
+        public int rdCount;
 
         public ThornsDmgData(int thornID,  AttackType attackType, DamageType damageType, float thornsMin, float thornsMax)
         {
@@ -30,7 +31,7 @@ namespace Combat
     // if you are struck you revert back with thorns damage
     public class StrikeCharModel
     {
-        List<ThornsDmgData> allThornsData = new List<ThornsDmgData>();
+        public List<ThornsDmgData> allThornsData = new List<ThornsDmgData>();
         public int index = -1; 
         public int AddThornsDamage(AttackType attackType, DamageType damageType
             , float minVal, float maxVal)

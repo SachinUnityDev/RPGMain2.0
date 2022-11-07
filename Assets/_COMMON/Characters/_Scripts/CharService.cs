@@ -113,11 +113,11 @@ namespace Common
         }
         public CharController GetCharCtrlWithName(CharNames charName)
         {
-            for (int i = 0; i < charsInPlayControllers.Count; i++)
-            {
-                Debug.Log("NAMES" +charsInPlayControllers[i].charModel.charName);
+            //for (int i = 0; i < charsInPlayControllers.Count; i++)
+            //{
+            //    Debug.Log("NAMES" +charsInPlayControllers[i].charModel.charName);
 
-            }
+            //}
             CharController charCtrl = charsInPlayControllers.Find(x => x.charModel.charName == charName);
             if (charCtrl != null)
                 return charCtrl;

@@ -144,62 +144,14 @@ namespace Common
         public void PopulatePortrait()
         {
             charScrollGO.transform.GetChild(0)
-                .GetComponent<CharScrollSlotController>().PopulatePortrait();
-            //charSO = CharService.Instance.GetCharSO(unLockedChars[index]);
-            //charCompSO = CharService.Instance.charComplimentarySO;
-
-            //string charNameStr = RosterService.Instance.currCharModel.charNameStr;
-            //scrollName.text = charNameStr.CreateSpace();
-
-            //if (RosterService.Instance.currCharModel.availOfChar == AvailOfChar.Available)
-            //{
-            //    CharPortraitGO.transform.GetChild(1).gameObject.SetActive(true);
-            //    CharPortraitGO.transform.GetChild(2).gameObject.SetActive(true);
-
-            //    CharPortraitGO.transform.GetChild(1).GetComponent<Image>().sprite
-            //                                                    = charSO.bpPortraitUnLocked;
-            //    CharPortraitGO.transform.GetChild(2).GetComponent<Image>().sprite
-            //                                   = charCompSO.frameAvail;
-            //    CharPortraitGO.transform.GetChild(2).GetChild(0).GetComponent<Image>().sprite
-            //        = CharService.Instance.charComplimentarySO.lvlBarAvail;
-
-            //    BGUnClicked = CharService.Instance.charComplimentarySO.BGAvailUnClicked;
-            //    BGClicked = CharService.Instance.charComplimentarySO.BGAvailClicked;
-            //    CharPortraitGO.transform.GetChild(0).gameObject.SetActive(true);
-            //    CharPortraitGO.transform.GetChild(0).GetComponent<Image>().sprite
-            //                    = BGUnClicked;
-
-
-            //}
-            //else
-            //{
-            //    CharPortraitGO.transform.GetChild(0).gameObject.SetActive(false);
-
-            //    CharPortraitGO.transform.GetChild(1).GetComponent<Image>().sprite
-            //                                                   = charSO.bpPortraitUnAvail;
-            //    CharPortraitGO.transform.GetChild(2).GetComponent<Image>().sprite
-            //                                  = charCompSO.frameUnavail;
-
-            //    // SIDE BARS LVL
-            //    CharPortraitGO.transform.GetChild(2).GetChild(0).GetComponent<Image>().sprite
-            //                = CharService.Instance.charComplimentarySO.lvlbarUnAvail;
-
-            //}
-            //CharPortraitGO.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text
-            //                = RosterService.Instance.currCharModel.classType.ToString().CreateSpace();           
+                .GetComponent<CharScrollSlotController>().PopulatePortrait();           
         }
-
-        // create a duplicate in the list always if its available .. drag only the top one 
-
         void PopulateSidePlank()
-        {
-            // pass data values here get strings from roster model/ roster SO 
+        {         
             if (RosterService.Instance.scrollSelectCharModel.availOfChar == AvailOfChar.Available)
             {
                 SidePlankTrans.GetChild(0).GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>().text
-                    = "Available";
-              //  SidePlankTrans.GetChild(0).GetComponent<SidePanelPtrEvents>().descStr
-              //= "Available to join your Party"; 
+                    = "Available";           
             } else
             {
                 SidePlankTrans.GetChild(0).GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>().text
@@ -210,8 +162,6 @@ namespace Common
             //FameBehavior fameBehavior = RosterService.Instance.currCharModel.fameBehavior;
             //SidePlankTrans.GetChild(1).GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>().text
             //       = fameBehavior.ToString().CreateSpace();
-
-           
 
             SidePlankTrans.GetChild(2).GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>().text
                  = RosterService.Instance.scrollSelectCharModel.currCharLoc.ToString();
@@ -239,10 +189,7 @@ namespace Common
         public void Init()
         {
 
-            Load();
-            // PopulateSidepanel(); 
-            // code the call function; 
-            //
+            Load();          
         }
     }
 

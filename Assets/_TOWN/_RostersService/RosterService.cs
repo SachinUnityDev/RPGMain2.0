@@ -57,7 +57,11 @@ namespace Common
 
         public bool AddChar2Party(CharNames charNames)
         {
-            
+            CharController charController = CharService.Instance.GetCharCtrlWithName(charNames);
+            CharService.Instance.allCharsInParty.Add(charController);
+            // Apply party restrictions here 
+
+
             return true; 
         }
         public void On_PortraitDragResult(bool result)// connect this to doMove and

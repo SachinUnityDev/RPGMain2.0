@@ -25,13 +25,16 @@ namespace Common
         public CharModel charModel;
         [SerializeField] Sprite BGUnClicked;
         [SerializeField] Sprite BGClicked;
-       
+
+        [Header("not to be ref")]
+        [SerializeField] Transform nameContainer;
+        [SerializeField] TextMeshProUGUI scrollName;
         [Header("To be ref")]
         public Transform portTransGO; 
         public int slotID => -1;
         public RosterSlotType slotType => RosterSlotType.CharScrollSlot;
         public CharNames charInSlot { get; set; }
-
+        void start() { }
         public void OnDrop(PointerEventData eventData)
         {
             GameObject draggedGO = eventData.pointerDrag;
@@ -62,11 +65,6 @@ namespace Common
             }
         }
 
-        void Start()
-        {
-          
-        }
-
         public void SetIPortraitValues()
         {
             iPortrait IPortrait = portTransGO.GetComponent<iPortrait>(); 
@@ -83,12 +81,14 @@ namespace Common
         public void PopulatePortrait()
         {
            charModel = RosterService.Instance.scrollSelectCharModel;
-           charInSlot = charModel.charName;
+           charInSlot = charModel.charName; 
             CharacterSO charSO = CharService.Instance.GetCharSO(charModel);
             CharComplimentarySO charCompSO = CharService.Instance.charComplimentarySO;
 
+            nameContainer = transform.parent.GetChild(1);
+            scrollName = nameContainer.GetChild(2).GetComponent<TextMeshProUGUI>();
             string charNameStr = RosterService.Instance.scrollSelectCharModel.charNameStr;
-           // scrollName.text = charNameStr.CreateSpace();
+            scrollName.text = charNameStr.CreateSpace();
 
             if (charModel.availOfChar == AvailOfChar.Available)
             {

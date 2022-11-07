@@ -24,7 +24,7 @@ namespace Common
             draggedGO = eventData.pointerDrag;
             Debug.Log("I drop handler triggered" + draggedGO);
 
-            portraitDragNDrop = draggedGO.GetComponent<PortraitDragNDrop>();
+            portraitDragNDrop = draggedGO.GetComponent<PortraitDragNDrop>();            
             if (portraitDragNDrop != null)
             {
                 bool isDropSuccess = RosterService.Instance
@@ -41,10 +41,6 @@ namespace Common
                     // RosterService.Instance.On_PortraitDragResult(isDropSuccess);
                     SetIPortraitValues();
                     portraitDragNDrop.parentTransform = transform;
-
-                    // add to party charService
-
-
                 }                  
                 else
                 {
@@ -57,9 +53,9 @@ namespace Common
             iPortrait IPortrait = draggedGO.GetComponent<iPortrait>();
             if (IPortrait != null)
             {
-                IPortrait.IRosterSlot = this;
-                Debug.Log("PRINT PARTY SLOT"+IPortrait.IRosterSlot.charInSlot);
-                //Debug.Log("PRINT SLOT ID" + IPortrait.IRosterSlot.slotID);
+                charInSlot = IPortrait.IRosterSlot.charInSlot; 
+                IPortrait.IRosterSlot = this;               
+                //Debug.Log("PRINT CHAR IN SLOT"+IPortrait.IRosterSlot.charInSlot);                
             }
             else
             {

@@ -55,6 +55,8 @@ namespace Common
         public int expPoints;
         public int jobExp;
         public int skillPts;
+        public int expBonusModPercent = 0;
+        public int expBonusModVal = 0;
 
         [Header("LEVELS")]
         public int charLvl =0;
@@ -86,8 +88,11 @@ namespace Common
         [Header("Gift")]
         // money and Item 
         public List<ItemData> earningsItems = new List<ItemData>();
-        public float earningsShare;
 
+        [Header("Money Share")]
+        public float earningsShare;   // Money
+        public float earningShareBonus_percent; 
+        
         [Header("Companion PreReq")]
         public List<ItemData> CompanionPreReqOpt1 = new List<ItemData>();
         public List<ItemData> CompanionPreReqOpt2 = new List<ItemData>();
@@ -106,13 +111,13 @@ namespace Common
         public List<int> _posPriority;
 
 
-        [Header("Damage Modifier")]
-        public float meleeAttackTypeMod = 0f;
-        public float rangedAttackTypeMod = 0f;
-        public float remoteAttackTypeMod = 0f;
+        //[Header("Damage Modifier")]
+        //public float meleeAttackTypeMod = 0f;
+        //public float rangedAttackTypeMod = 0f;
+        //public float remoteAttackTypeMod = 0f;
 
-        public float physicalSIMod = 0f;
-        public float magicalSIMod = 0f;
+        //public float physicalSIMod = 0f;
+        //public float magicalSIMod = 0f;
          
         
         [Header("IMMUNITY LIST")]

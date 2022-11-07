@@ -15,9 +15,6 @@ namespace Common
 
     public class RosterViewController : MonoBehaviour, IPanel
     {
-   
-
-
         [Header("TO BE REF")]
         [SerializeField] Button closeBtn; 
         [SerializeField] GameObject charScrollGO;
@@ -103,6 +100,7 @@ namespace Common
             if (Time.time - prevRightClick < 0.3f) return;
             if (index >= unLockedChars.Count-1)
             {
+              //  index = 0;
                 index = unLockedChars.Count-1;
             }
             else
@@ -139,6 +137,7 @@ namespace Common
             index = 
             unLockedChars.FindIndex(t => t.charName == charName);                
             PopulateCharScroll();
+            PopulateSidePlank();
         }
         // change index here 
         public void PopulatePortrait()
@@ -147,17 +146,17 @@ namespace Common
                 .GetComponent<CharScrollSlotController>().PopulatePortrait();           
         }
         void PopulateSidePlank()
-        {         
-            if (RosterService.Instance.scrollSelectCharModel.availOfChar == AvailOfChar.Available)
-            {
-                SidePlankTrans.GetChild(0).GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>().text
-                    = "Available";           
-            } else
-            {
-                SidePlankTrans.GetChild(0).GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>().text
-                    = "Not Available";
-          
-            }
+        {
+            TextMeshProUGUI availabilityTxt = SidePlankTrans.GetChild(0)
+                        .GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>();
+            CharModel charModel = RosterService.Instance.scrollSelectCharModel;
+            if (charModel.availOfChar == AvailOfChar.Available)
+                availabilityTxt.text = "Available";
+            else if (charModel.availOfChar == AvailOfChar.UnAvailable_InParty)
+                availabilityTxt.text = "Already In Party";
+            else
+                availabilityTxt.text = "UnAvailable";           
+            
             // Fame Behavior
             //FameBehavior fameBehavior = RosterService.Instance.currCharModel.fameBehavior;
             //SidePlankTrans.GetChild(1).GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>().text

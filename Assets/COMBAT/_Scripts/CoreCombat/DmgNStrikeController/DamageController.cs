@@ -62,6 +62,10 @@ namespace Combat
             charController = GetComponent<CharController>();
         }
 
+        public void Init()
+        {
+            
+        }
         public bool HitChance()  // only for physical 
         {
             // Wrong Hit apply same damage to wrong target           
@@ -258,76 +262,79 @@ namespace Combat
         {
             float damageMod = 0f;
 
-            switch (attackType)
-            {
-                case AttackType.None:
-                    break;
-                case AttackType.Melee:
-                    damageMod += charController.charModel.meleeAttackTypeMod;
-                    // MOVE THIS TO COMBAT CHAR MODEL
+             // multi race n culture flexibility is must
+
+
+            //switch (attackType)
+            //{
+            //    case AttackType.None:
+            //        break;
+            //    case AttackType.Melee:
+            //        damageMod += charController.charModel.meleeAttackTypeMod;
+            //        // MOVE THIS TO COMBAT CHAR MODEL
                     
-                    break;
-                case AttackType.Ranged:
-                    damageMod += charController.charModel.rangedAttackTypeMod;
-                    break;
-                case AttackType.Remote:
-                    damageMod += charController.charModel.remoteAttackTypeMod;
-                    break;
-                default:
-                    break;
-            }
+            //        break;
+            //    case AttackType.Ranged:
+            //        damageMod += charController.charModel.rangedAttackTypeMod;
+            //        break;
+            //    case AttackType.Remote:
+            //        damageMod += charController.charModel.remoteAttackTypeMod;
+            //        break;
+            //    default:
+            //        break;
+            //}
 
-            switch (damageType)
-            {
-                case DamageType.None:
-                    break;
-                case DamageType.Physical:
-                    damageMod += charController.charModel.physicalSIMod;
-                    break;
-                case DamageType.StaminaDmg:
-                    damageMod += charController.charModel.physicalSIMod;
+            //switch (damageType)
+            //{
+            //    case DamageType.None:
+            //        break;
+            //    case DamageType.Physical:
+            //        damageMod += charController.charModel.physicalSIMod;
+            //        break;
+            //    case DamageType.StaminaDmg:
+            //        damageMod += charController.charModel.physicalSIMod;
 
-                    break;
-                case DamageType.Air:
-                    damageMod += charController.charModel.physicalSIMod;
+            //        break;
+            //    case DamageType.Air:
+            //        damageMod += charController.charModel.physicalSIMod;
 
 
-                    break;
-                case DamageType.Water:
-                    damageMod += charController.charModel.physicalSIMod;
+            //        break;
+            //    case DamageType.Water:
+            //        damageMod += charController.charModel.physicalSIMod;
 
-                    break;
-                case DamageType.Earth:
-                    damageMod += charController.charModel.physicalSIMod;
+            //        break;
+            //    case DamageType.Earth:
+            //        damageMod += charController.charModel.physicalSIMod;
 
-                    break;
-                case DamageType.Fire:
-                    damageMod += charController.charModel.physicalSIMod;
+            //        break;
+            //    case DamageType.Fire:
+            //        damageMod += charController.charModel.physicalSIMod;
 
-                    break;
-                case DamageType.Light:
-                    break;
-                case DamageType.Dark:
-                    break;
-                case DamageType.Pure:
-                    break;
-                case DamageType.Buff:
-                    break;
-                case DamageType.Debuff:
-                    break;
-                case DamageType.Guard:
-                    break;
-                case DamageType.Heal:
-                    break;
-                case DamageType.FortitudeDmg:
-                    break;
-                case DamageType.DOT:
-                    break;
-                case DamageType.Move:
-                    break;
-                default:
-                    break;
-            }
+            //        break;
+            //    case DamageType.Light:
+            //        break;
+            //    case DamageType.Dark:
+            //        break;
+            //    case DamageType.Pure:
+            //        break;
+            //    case DamageType.Buff:
+            //        break;
+            //    case DamageType.Debuff:
+            //        break;
+            //    case DamageType.Guard:
+            //        break;
+            //    case DamageType.Heal:
+            //        break;
+            //    case DamageType.FortitudeDmg:
+            //        break;
+            //    case DamageType.DOT:
+            //        break;
+            //    case DamageType.Move:
+            //        break;
+            //    default:
+            //        break;
+            //}
 
             return damageMod;
 

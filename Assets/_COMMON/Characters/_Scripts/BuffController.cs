@@ -48,9 +48,9 @@ namespace Combat
 
     public class BuffController : MonoBehaviour
     {
-        public List<BuffData> allBuffs = new List<BuffData>();  
-        public List<BuffData> allDaybuffs = new List<BuffData>();
-        public List <BuffData> allNightbuffs = new List<BuffData>();
+         List<BuffData> allBuffs = new List<BuffData>();  
+         List<BuffData> allDaybuffs = new List<BuffData>();
+         List <BuffData> allNightbuffs = new List<BuffData>();
 
 
         // use array here for the index to work 

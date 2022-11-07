@@ -13,9 +13,10 @@ namespace Common
         RosterSlotType slotType { get;  }
         bool isSlotFull();
         CharNames charInSlot { get; set; }
+
+        bool AddChar2UnlockedList(GameObject go);        
         void RemoveCharFrmUnlockedList();
-        bool AddChar2RosterUnLockedList(GameObject go);
-        void CloseRightClickOpts();
+        void RightClickOpts(); 
     }
 
     public class CharScrollSlotController : MonoBehaviour, IDropHandler, iRosterSlot
@@ -27,12 +28,7 @@ namespace Common
        
         [Header("To be ref")]
         public Transform portTransGO; 
-
-        //[Header("Not to be ref")]
-        //[SerializeField] Transform nameContainer;
-        //[SerializeField] TextMeshProUGUI scrollName;
-
-        public int slotID => 1;
+        public int slotID => -1;
         public RosterSlotType slotType => RosterSlotType.CharScrollSlot;
         public CharNames charInSlot { get; set; }
 
@@ -47,9 +43,22 @@ namespace Common
             {
                 draggedGO.transform.SetParent(gameObject.transform);
                 draggedGO.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
-                iPortrait IPortrait = portTransGO.GetComponent<iPortrait>();
-                SetIPortraitValues();
+                iPortrait IPortrait = draggedGO.GetComponent<iPortrait>();
+                CharNames draggedChar = IPortrait.IRosterSlot.charInSlot; 
+
+                //SetIPortraitValues();
                 portraitDragNDrop.parentTransform = transform;
+
+                CharController charController = CharService.Instance.GetCharCtrlWithName(draggedChar);                
+
+                CharModel charModel = charController.charModel;
+                charModel.availOfChar = AvailOfChar.Available;
+                RosterViewController rosterViewController = RosterService.Instance.rosterViewController;
+                rosterViewController.PopulatePortrait2_Char(draggedChar);
+              
+                CharService.Instance.allCharsInParty.Remove(charController);
+                Destroy(draggedGO.gameObject);
+
             }
         }
 
@@ -63,24 +72,25 @@ namespace Common
             iPortrait IPortrait = portTransGO.GetComponent<iPortrait>(); 
             if(IPortrait != null)
             {
-                IPortrait.IRosterSlot = this;               
+                IPortrait.IRosterSlot = this;
+              //  Debug.Log("PRINT SLOT ID CHAR SLOT" + IPortrait.IRosterSlot.slotID); 
             }
             else
             {
                 Debug.Log("IPortrait Not found");
             }
         }
-        public void PopulatePortrait(CharModel charModel)
+        public void PopulatePortrait()
         {
-            charInSlot = charModel.charName; 
-          
+           charModel = RosterService.Instance.scrollSelectCharModel;
+           charInSlot = charModel.charName;
             CharacterSO charSO = CharService.Instance.GetCharSO(charModel);
             CharComplimentarySO charCompSO = CharService.Instance.charComplimentarySO;
 
             string charNameStr = RosterService.Instance.scrollSelectCharModel.charNameStr;
            // scrollName.text = charNameStr.CreateSpace();
 
-            if (RosterService.Instance.scrollSelectCharModel.availOfChar == AvailOfChar.Available)
+            if (charModel.availOfChar == AvailOfChar.Available)
             {
                 transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
                 transform.GetChild(0).GetChild(2).gameObject.SetActive(true);
@@ -114,6 +124,7 @@ namespace Common
             }
             portTransGO.GetChild(3).GetComponent<TextMeshProUGUI>().text
                             = RosterService.Instance.scrollSelectCharModel.classType.ToString().CreateSpace();
+            
             SetIPortraitValues();
         }
 
@@ -127,19 +138,20 @@ namespace Common
 
         public void RemoveCharFrmUnlockedList()
         {
-          
-        }
 
-        public bool AddChar2RosterUnLockedList(GameObject go)
+        }
+        public bool AddChar2UnlockedList(GameObject go)
         {
             portTransGO = go.transform;
             return true;
         }
 
-        public void CloseRightClickOpts()
+        public void RightClickOpts()
         {
-            
+   
         }
+
+   
     }
 
 

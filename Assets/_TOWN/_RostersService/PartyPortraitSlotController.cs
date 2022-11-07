@@ -58,7 +58,8 @@ namespace Common
             if (IPortrait != null)
             {
                 IPortrait.IRosterSlot = this;
-                Debug.Log("PRINT SLOT TYPE "+IPortrait.IRosterSlot.slotType);
+                Debug.Log("PRINT PARTY SLOT"+IPortrait.IRosterSlot.charInSlot);
+                //Debug.Log("PRINT SLOT ID" + IPortrait.IRosterSlot.slotID);
             }
             else
             {
@@ -83,19 +84,19 @@ namespace Common
                 return false;             
         }
 
+        public bool AddChar2UnlockedList(GameObject go)
+        {
+           return false;
+        }
+
         public void RemoveCharFrmUnlockedList()
         {
            
         }
 
-        public bool AddChar2RosterUnLockedList(GameObject go)
+        public void RightClickOpts()
         {
-            return false; 
-        }
-
-        public void CloseRightClickOpts()
-        {
-           
+          
         }
     }
 }

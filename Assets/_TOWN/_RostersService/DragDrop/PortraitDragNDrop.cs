@@ -52,7 +52,7 @@ namespace Common
             if(IRosterSlot.slotType == RosterSlotType.CharScrollSlot)
             {               
                 CreateCharPortClone(IRosterSlot.charInSlot);
-                IRosterSlot.AddChar2RosterUnLockedList(clone);
+               bool hasAdded=  IRosterSlot.AddChar2UnlockedList(clone);
 
                 GameObject viewGO = RosterService.Instance.rosterViewController.gameObject;
                 transform.SetParent(viewGO.transform);  // to keep draged object on top 
@@ -66,10 +66,7 @@ namespace Common
                 transform.SetParent(viewGO.transform);  // to keep draged object on top 
                 RosterService.Instance.draggedGO = gameObject;
                 canvasGroup.blocksRaycasts = false;
-
-
             }
-
         }
         #endregion
 
@@ -108,8 +105,7 @@ namespace Common
                 clone.transform.GetChild(1).gameObject.SetActive(true);
                 clone.transform.GetChild(2).gameObject.SetActive(true);
                 RosterService.Instance.rosterViewController.PopulatePortrait();
-            }          
-           
+            } 
             canvasGroup.blocksRaycasts = true;
         }
     }

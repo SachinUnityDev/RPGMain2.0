@@ -9,9 +9,6 @@ using TMPro;
 
 namespace Common
 {
-
-
-
     public class PartyPortraitSlotController : MonoBehaviour, IDropHandler
                                                 ,IPointerClickHandler, iRosterSlot
     {

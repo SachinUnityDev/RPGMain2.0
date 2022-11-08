@@ -2,33 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Common;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 
 namespace Combat
 {
 
-    //public class StrikeModel  //  Deprecated 
-    //{
-    //    public CharController striker;
-    //    public DynamicPosData target;
-    //    public SkillNames skillUsed;
-    //    public DamageType dmgType;
-    //    public CharStateName charStateName;
-    //    public float dmgValue;
-    //    public StrikeModel()
-    //    {
-
-    //    }
-    //    public StrikeModel(CharController striker, DynamicPosData target, SkillNames skillUsed,
-    //        DamageType dmgType, float dmgValue, CharStateName charStateName)
-    //    {
-    //        this.striker = striker;
-    //        this.target = target;
-    //        this.skillUsed = skillUsed;
-    //        this.dmgType = dmgType;
-    //        this.dmgValue = dmgValue;
-    //        this.charStateName = charStateName;
-    //    }
-    //}
+    public class StrikeMadeData  //  DEPRECATED  
+    {
+        public CharController striker;
+        public List<DynamicPosData> targets; // to decide to keep or remove
+        public List<CharController> targetControllers;
+        public SkillNames skillUsed;
+        public DamageType dmgType;
+        public float dmgValue;
+        public CharStateName charStateName;
+        
+        
+        public StrikeMadeData(CharController striker, List<DynamicPosData> targets, SkillNames skillUsed,
+            DamageType dmgType, float dmgValue, CharStateName charStateName)
+        {
+            this.striker = striker;
+            this.targets = targets;
+            this.skillUsed = skillUsed;
+            this.dmgType = dmgType;
+            this.dmgValue = dmgValue;
+            this.charStateName = charStateName;
+        }
+    }
 
     [System.Serializable]
     public class StatChgData
@@ -48,14 +48,18 @@ namespace Combat
 
         CharController charController;
         List<DynamicPosData> otherTargetDynas;
-        public StrikeCharModel strikeCharModel; 
+        public StrikeCharModel strikeCharModel;
+
+        [Header("Thorns Damage related")]
+        public int thornID =-1;
 
 
         float dmgMin, dmgMax; 
         private void Start()
         {
             charController = GetComponent<CharController>();
-            otherTargetDynas = new List<DynamicPosData>(); 
+            otherTargetDynas = new List<DynamicPosData>();
+            CombatEventService.Instance.OnDmgDelivered += OnDmgDeliveredTick;
         }
 
 
@@ -155,21 +159,48 @@ namespace Combat
 #region THORNS RELATED
         public void ApplyThornsFx()
         {
-            //brows
+            // when ever attacked do this
 
 
         }
 
-        public void AddThornsFX()
+        public void AddThornsFXBuff(AttackType attackType, DamageType damageType, float thornsMin, float thornsMax)
         {
+            thornID++;
+            ThornsDmgData thornsDmgData = new ThornsDmgData(thornID, attackType, damageType, thornsMin, thornsMax);
 
+            strikeCharModel.AddThornsDamage(thornsDmgData);
+
+            //int currRd = CombatService.Instance.currentRound;
+            //buffIndex++;
+            //BuffData buffData = new BuffData(buffIndex, isBuff, currRd, timeFrame, netTime,
+            //                                                      charModVal, directStr);
+
+            //allBuffs.Add(buffData);
+            //return buffIndex;
         }
-        public void RemoveThornsFx()
+        public void RemoveThornsFx(int thornID)
         {
+            strikeCharModel.RemoveThornDamage(thornID);
+        }
 
+        void OnDmgDeliveredTick(DmgData dmgData)
+        {             
+            foreach (ThornsDmgData thornData in strikeCharModel.allThornsData )
+            {
+                if(thornData.attackType == dmgData.attackType)
+                {
+                    float dmgPercentValue = UnityEngine.Random.Range(thornData.thornsMin, thornData.thornsMax);
+                    dmgData.striker.GetComponent<DamageController>()
+                        .ApplyDamage(charController, CauseType.ThornsAttack, -1, thornData.damageType, dmgPercentValue, false);
+                }
+            }
 
         }
-      
+
+        // remove thorns that are time based 
+
+
 
         #endregion
     }

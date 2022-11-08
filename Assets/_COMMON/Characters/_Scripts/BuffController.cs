@@ -55,7 +55,7 @@ namespace Combat
 
         // use array here for the index to work 
 
-        CharController charController;
+        CharController charController; // ref to char Controller 
         [SerializeField]List<string> buffStrs = new List<string>();
         [SerializeField]List<string> deDuffStrs = new List<string>();
 

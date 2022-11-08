@@ -5,7 +5,7 @@ using Common;
 
 namespace Combat
 {
-    public class DmgData
+    public class DmgData  // Dmg Delivered data
     {
 
         public CharController targetController;

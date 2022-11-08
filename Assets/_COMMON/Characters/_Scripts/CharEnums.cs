@@ -26,6 +26,7 @@ public enum CauseType
     FeebleStrike,
     CombatOver, 
     QuestOver, 
+    ThornsAttack,
     
 
 

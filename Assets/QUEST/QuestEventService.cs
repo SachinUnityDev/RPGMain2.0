@@ -17,13 +17,10 @@ namespace Common
         public event Action<CharController> OnDeathInQuest;
         public event Action<List<CharController>> OnPartySet; 
 
-
-
-
         // Quest => town it should reset the QuestCombatMode to NONE 
         LandscapeNames prevPartyLoc;
         public TimeState questTimeState;
-        public DayNightController dayNightController; 
+       // public DayNightController dayNightController; Dep 
 
 
     // Start is called before the first frame update
@@ -31,24 +28,18 @@ namespace Common
         {            
             prevPartyLoc = LandscapeNames.None; 
             gameObject.AddComponent<QuestController>();
-            dayNightController = gameObject.GetComponent<DayNightController>();
+         //   dayNightController = gameObject.GetComponent<DayNightController>();
         }
 
         public void ChangePartyLoc(LandscapeNames _partyLoc)
         {
-            OnPartyLocChange?.Invoke(_partyLoc);
-           
+            OnPartyLocChange?.Invoke(_partyLoc);           
         } 
 
         public void ChangeQCMode(QuestCombatMode qcMode)
         {
             OnQuestModeChange?.Invoke(qcMode); 
-
-
         }
-
-
-
         public void On_DeathInQuest(CharController charController)
         {
             OnDeathInQuest?.Invoke(charController); 

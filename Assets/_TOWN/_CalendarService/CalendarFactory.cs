@@ -42,7 +42,6 @@ namespace Common
     {
         public Dictionary<WeekName, Type> AllWeekEvents = new Dictionary<WeekName, Type>();
 
-        // Start is called before the first frame update
         void Start()
         {
             InitWeekEvents(); 
@@ -74,9 +73,7 @@ namespace Common
                 Debug.Log("Event Added " + weekInst.weekName); 
                 go.AddComponent(weekInst.GetType());
             }
-
         }
-
     }
 
 

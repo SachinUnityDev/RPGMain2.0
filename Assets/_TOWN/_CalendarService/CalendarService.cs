@@ -15,21 +15,20 @@ namespace Common
     public class CalendarService : MonoSingletonGeneric<CalendarService>
     {
         public event Action<DayName> OnCalendarDayStart;
-        public event Action<TimeState> OnTimeStateChg; 
-        
 
 
+        [Header("CURRENT TIME STATE ")]
+        public TimeState timeState;
 
         [SerializeField] Button endday; 
         [SerializeField] int dayInGame;
         [SerializeField] int dayInYear; 
         [SerializeField] int weekCounter;
-        [Header("Calendar Service owneership ")]
-        public TimeState timeState; 
+    
 
         // does not reset with week / Month
         [SerializeField] DayName gameStartDay; 
-        [SerializeField] DayName currentDay;
+        [SerializeField] DayName currDayName;
         [SerializeField] WeekName currentWeek;
         [SerializeField] MonthName currentMonth;
         [SerializeField] MonthName scrollMonth; 
@@ -38,7 +37,7 @@ namespace Common
         [SerializeField] List<MonthSO> allMonthSOs; 
         
          
-        DayNightController dayNightController;
+       // DayNightController dayNightController;
         CalendarUIController calendarUIController;
         void Start()
         {
@@ -55,14 +54,12 @@ namespace Common
             //calendarUIController.UpdateWeekPanel(currentWeek);
             calendarUIController.UpdateMonthPanel(currentMonth, gameStartDay, dayInYear);
 
-
             // UpdateMonth();
-
         }
 
         public void Init()
         {
-       
+            // define what date and time the game will start by default 
         }
         public MonthSO GetMonthSO(MonthName _monthName)
         {
@@ -90,12 +87,16 @@ namespace Common
             calendarUIController.ToggleDayNightUI();
             if (timeState == TimeState.Night)
             {
+                // start of the day 
+                CalendarEventService.Instance.On_StartOfTheDay(dayInGame); 
                 timeState = TimeState.Day;
                 endday.GetComponentInChildren<TextMeshProUGUI>().text = "End the Day?";
                 UpdateDay();
             }
             else
             {
+                // start of the night
+                CalendarEventService.Instance.On_StartOftheNight();
                 endday.GetComponentInChildren<TextMeshProUGUI>().text = "End the Night?";
                 timeState = TimeState.Night;
             }
@@ -112,7 +113,8 @@ namespace Common
 
         public void UpdateDay()
         {
-            currentDay++; dayInGame++; dayInYear++;
+            currDayName++; dayInGame++; dayInYear++;
+           
             calendarUIController.UpdateDayPanel(dayInYear, gameStartDay);
             UpdateWeek();
             UpdateMonth();
@@ -128,10 +130,9 @@ namespace Common
             calendarUIController.UpdateMonthPanel(scrollMonth, gameStartDay, dayInYear);
         }
         
-
         public void UpdateWeek()
         { 
-            if ((int)currentDay % 7 == 1)
+            if ((int)currDayName % 7 == 1)
             {
                 currentWeek++; weekCounter++; 
 
@@ -139,7 +140,7 @@ namespace Common
                 if ((int)currentWeek >= noOfWeeks) currentWeek = (WeekName)1;  
                 
                 calendarUIController.UpdateWeekPanel(currentWeek); 
-                currentDay = (DayName)1;              
+                currDayName = (DayName)1;              
             }
         }
         public void UpdateMonth()

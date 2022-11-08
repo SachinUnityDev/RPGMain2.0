@@ -157,13 +157,9 @@ namespace Combat
 
 
 #region THORNS RELATED
-        public void ApplyThornsFx()
-        {
-            // when ever attacked do this
+  
 
-
-        }
-
+        // INIFINITE CAST TIME THORNS FX 
         public void AddThornsFXBuff(AttackType attackType, DamageType damageType, float thornsMin, float thornsMax)
         {
             thornID++;
@@ -178,6 +174,15 @@ namespace Combat
 
             //allBuffs.Add(buffData);
             //return buffIndex;
+        }
+        // TIME BASED THORN FX 
+        public void AddThornsFXBuff(TimeFrame timeFrame, int currentTime, int thornID
+            , AttackType attackType, DamageType damageType, float thornsMin, float thornsMax)
+        {
+            thornID++;
+            ThornsDmgData thornsDmgData = new ThornsDmgData(timeFrame, currentTime,thornID, attackType, damageType, thornsMin, thornsMax);
+
+            strikeCharModel.AddThornsDamage(thornsDmgData);
         }
         public void RemoveThornsFx(int thornID)
         {

@@ -20,8 +20,9 @@ namespace Common
             charController = _charController; 
 
             QuestEventService.Instance.OnQuestModeChange += IncAccINStealth;
-            QuestEventService.Instance.dayNightController.ONStartOfNight += IncAccInNight;
-            QuestEventService.Instance.dayNightController.ONStartOfDay += IncAccInNight;
+            // TO BE FIXED ON REVISION WITH SEMIH 
+            //QuestEventService.Instance.dayNightController.ONStartOfNight += IncAccInNight;
+            //QuestEventService.Instance.dayNightController.ONStartOfDay += IncAccInNight;
 
         }
 

@@ -46,13 +46,13 @@ namespace Interactables
 
             val22 = 2;
             index =
-                charController.buffController.ApplyBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
+                charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
                         , charController.charModel.charID, StatsName.morale, val22, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
             val23 = -1;
             index =
-                charController.buffController.ApplyBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
+                charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
                         , charController.charModel.charID, StatsName.haste, val23, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
@@ -68,13 +68,13 @@ namespace Interactables
 
             val32 = 3;
             index =
-                charController.buffController.ApplyBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
+                charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
                         , charController.charModel.charID, StatsName.morale, val32, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
             val33 = -1;
             index =
-                charController.buffController.ApplyBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
+                charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
                         , charController.charModel.charID, StatsName.haste, val33, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }

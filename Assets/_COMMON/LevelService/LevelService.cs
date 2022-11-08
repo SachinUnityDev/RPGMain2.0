@@ -130,7 +130,7 @@ namespace Common
         void AutoLvlUpByOneEnemy(Levels finalLvl)
         {
             List<StatData> lvlUpStats = levelUpSO.GetLvlUpIncr4Stats(charModel, finalLvl);
-
+            Debug.Log("Lvl up stat error" + lvlUpStats.Count);
             foreach (StatData stat in lvlUpStats)
             {
                 if (stat.statsName == StatsName.damage || stat.statsName == StatsName.armor)

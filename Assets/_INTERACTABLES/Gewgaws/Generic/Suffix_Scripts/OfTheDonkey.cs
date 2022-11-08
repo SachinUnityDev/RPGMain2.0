@@ -38,13 +38,13 @@ namespace Interactables
 
             val21 = 2;
             int index =
-                  charController.buffController.ApplyBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
+                  charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
                           , charController.charModel.charID, StatsName.willpower, val21, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
             val22 = 2;
             index =
-                charController.buffController.ApplyBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
+                charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
                         , charController.charModel.charID, StatsName.vigor, val22, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }
@@ -53,13 +53,13 @@ namespace Interactables
           //  3 vigor at day + 3 wp at day
             val31 = 3;
             int index =
-                  charController.buffController.ApplyBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
+                  charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
                           , charController.charModel.charID, StatsName.willpower, val31, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
             val32 = 3;
             index =
-                charController.buffController.ApplyBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
+                charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
                         , charController.charModel.charID, StatsName.vigor, val32, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }

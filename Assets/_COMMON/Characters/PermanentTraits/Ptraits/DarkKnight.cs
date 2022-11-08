@@ -18,19 +18,23 @@ namespace Common
         public override void ApplyTrait(CharController _charController)
         {
             charController = _charController;
-            QuestEventService.Instance.dayNightController.ONStartOfNight += AddInit;
-            QuestEventService.Instance.dayNightController.ONStartOfDay += AddInit;
-            QuestEventService.Instance.dayNightController.ONStartOfNight += NoAmbush;
-            QuestEventService.Instance.dayNightController.ONStartOfDay += NoAmbush;
+            //CalendarEventService.Instance.OnStartOfTheNight += AddInitNight;
+            //CalendarEventService.Instance.OnStartOfTheDay += AddInitDay;
+            // TO BE FIXED ON REVISION WITH SEMIH 
+
+            //QuestEventService.Instance.dayNightController.ONStartOfDay += AddInit;
+            //QuestEventService.Instance.dayNightController.ONStartOfNight += NoAmbush;
+            //QuestEventService.Instance.dayNightController.ONStartOfDay += NoAmbush;
             charID = charController.charModel.charID;
         }
 
-        void AddInit(TimeState _timeState)
+        void AddInitNight()
         {
-            if (_timeState == TimeState.Night)
-                charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, StatsName.haste, 2);
-            else
-                charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, StatsName.haste, -2);
+            charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, StatsName.haste, 2);
+        }
+        void AddInitDay()
+        {
+            charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, StatsName.haste, -2);
         }
 
         void NoAmbush(TimeState _timeState)

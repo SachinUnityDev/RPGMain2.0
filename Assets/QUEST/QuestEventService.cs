@@ -11,8 +11,7 @@ namespace Common
         public event Action OnSOQ; 
         public event Action OnEOQ; 
         
-        public event Action<LandscapeNames> OnPartyLocChange;
-        public event Action OnDayChange;
+        public event Action<LandscapeNames> OnPartyLocChange;       
         public event Action<QuestCombatMode> OnQuestModeChange;
         public event Action<CharController> OnFleeInQuest;
         public event Action<CharController> OnDeathInQuest;
@@ -48,12 +47,7 @@ namespace Common
 
         }
 
-        public void DayChange()
-        {
 
-            OnDayChange?.Invoke(); 
-
-        }
 
         public void On_DeathInQuest(CharController charController)
         {

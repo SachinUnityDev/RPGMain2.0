@@ -66,6 +66,9 @@ namespace Combat
             charController = GetComponent<CharController>();
             CombatEventService.Instance.OnEOR +=RoundTick;
             CombatEventService.Instance.OnEOC += EOCTick; 
+
+            QuestEventService.Instance.OnDayChange
+
         }
 #region  APPLY_BUFFS 
         public int ApplyBuff(CauseType causeType, int causeName, int causeByCharID
@@ -111,8 +114,6 @@ namespace Combat
 #endregion
 
 #region REMOVE BUFFS 
-
-
         public void RemoveBuff(int buffID)
         {
             int index = allBuffs.FindIndex(t => t.buffID == buffID); 
@@ -207,6 +208,14 @@ namespace Combat
             allBuffs.Add(buffData);
             allDaybuffs.Add(buffData);  
             return buffIndex;
+        }
+
+        void ToggleDayNightBuff(TimeState timeState)
+        {
+            if(timeState == TimeState.Day)
+            {
+
+            }
         }
 
         public void RemoveBuffOnDay(BuffData buffData)

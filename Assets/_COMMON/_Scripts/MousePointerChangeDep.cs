@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MousePointerChangeDep : MonoBehaviour
+public class MousePointerChangeDep : MonoBehaviour   //
 {
    
         public Texture2D cursorTexture;

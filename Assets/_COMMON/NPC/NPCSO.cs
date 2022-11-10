@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Interactables;
 
 namespace Common
 {
@@ -17,14 +17,13 @@ namespace Common
         public Sprite dialoguePortraitClicked;
         public Sprite dialoguePortraitUnClicked;
 
-
         [Header("Interaction related")]
         public string InteractHeading; 
         public List<string> InteractionOptions = new List<string>();
 
-
-
-
+        [Header("Items purchaseAble by NPC")]
+        public List<ItemType> itemTypesAccepted = new List<ItemType>();
+        
         //[Header("DEFAULT PROVISION")]
         //public List<ItemData> provisionItems = new List<ItemData>();
 

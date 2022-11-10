@@ -28,7 +28,7 @@ namespace Interactables
         public Currency cost;
 
         [Header("Fluctuation rate")]
-        public float fluctuationRate = 0f; 
+        public float fluctuationRate = 20f; 
         [Header("Desc")]
         public string desc = "";
 
@@ -39,7 +39,7 @@ namespace Interactables
         private void Awake()
         {
            
-            fluctuationRate = 20f; 
+          
         }
 
 

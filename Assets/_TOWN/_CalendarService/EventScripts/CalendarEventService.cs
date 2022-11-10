@@ -10,6 +10,13 @@ namespace Common
     {
         public event Action<int> OnStartOfTheDay;
         public event Action OnStartOfTheNight;
+
+        public event Action<MonthName> OnStartOfTheMonth;
+        public event Action<WeekName> OnStartOfTheWeek;
+        public event Action<DayName, WeekName, MonthName> OnStartOfTheGame; 
+
+
+
         /// <summary>
         /// This class to be used for monthly weekly and daily events
         /// </summary>

@@ -20,6 +20,20 @@ namespace Common
         }
     }
     [System.Serializable]
+    public class BronzifiedRange
+    {
+        public float bronzeValMin;
+        public float bronzeValMax;
+
+        public BronzifiedRange(float bronzeValMin, float bronzeValMax)
+        {
+            this.bronzeValMin = bronzeValMin;
+            this.bronzeValMax = bronzeValMax;
+        }
+    }
+
+
+    [System.Serializable]
     public class EconoModel
     {
         public Currency moneyInStash = new Currency();

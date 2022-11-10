@@ -1,3 +1,4 @@
+using Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +30,7 @@ namespace Interactables
         [Header("COST")]
         public Currency cost;
         public float fluctuation;
+        public BronzifiedRange currPrchPrice;
 
         [Header("Max Instance")]
         public int maxWorldInstance;
@@ -62,6 +64,7 @@ namespace Interactables
             //this.allLines = gewgawSO..DeepClone();
         }
 
+    
         void SetMaxInstance(GenGewgawQ genGewgawQ)
         {
             // sagaic its 1, epic 3 , folklyric =6 , lyric =6 , poetic = 3, 

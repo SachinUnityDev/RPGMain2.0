@@ -37,6 +37,21 @@ namespace Interactables
         public Sprite iconSprite;
         [TextArea(5, 10)]
         public List<string> allLines = new List<string>();
+
+        public Currency GetNPCSalePriceWithoutFluctuation(NPCNames nPCName)
+        {
+            NPCModData nPCModData = 
+                            allNPCModData.Find(t=>t.npcName == nPCName);
+            if(nPCModData == null) return null;
+            
+            Currency SPCurrency = new Currency((int)nPCModData.modVal * cost.silver, (int)nPCModData.modVal * cost.bronze);
+
+            return SPCurrency;
+            // fluctuation to be a number between say
+            //  30 +20%*30, -20%*30
+
+        }
+
     }
 }
 

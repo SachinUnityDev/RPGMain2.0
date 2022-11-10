@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Interactables;
 using TMPro;
+using Common;
 
 namespace Town
 {
@@ -30,6 +31,24 @@ namespace Town
 
             return ratCurrency; 
         }
+
+        public static int BronzifyCurrency(this Currency currency)
+        {
+            int bronzeCurr = currency.bronze + currency.silver * 12; 
+            return bronzeCurr;
+        }
+
+        public static BronzifiedRange ApplyCurrencyFluctation(this Currency cost, float flucRate)
+        {
+            int bronzeVal = cost.BronzifyCurrency(); 
+            int bronzeMax = (int)(bronzeVal * (100 + flucRate) / 100f);
+            int bronzeMin = (int)(bronzeVal * (100 - flucRate) / 100f);
+
+            BronzifiedRange bronzifiedRange = new BronzifiedRange(bronzeMin, bronzeMax);
+            return bronzifiedRange;
+        }
+
+
 
     }
 

@@ -2,6 +2,7 @@ using Common;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Policy;
+using Town;
 using UnityEngine;
 
 
@@ -57,14 +58,25 @@ namespace Interactables
                 Debug.Log("GengewGaw MODEL NOT FOUND");
             return null;
         }
-    
+        public BronzifiedRange GetPurchasePrice4GewGawNPC(GenGewgawNames genGewgawName)
+        {
+            GenGewgawModel genGewgawModel = GetGenGewgawModel(genGewgawName);
+            return genGewgawModel.currPrchPrice;
+        }
         #endregion
 
         #region Setters
 
         #endregion
 
-
+        // START OF EVERY WEEK 
+        public BronzifiedRange SetPurchasePriceRange4GewGaw4Week(GenGewgawNames genGewgawName)
+        {
+            GenGewgawModel genGewgawModel = GetGenGewgawModel(genGewgawName);
+            genGewgawModel.currPrchPrice = genGewgawModel
+                                        .cost.ApplyCurrencyFluctation(genGewgawModel.fluctuation);
+            return genGewgawModel.currPrchPrice;
+        }
         public void InitGewgaw2CommonInv(CharController _charController, GenGewgawNames genGewgawName
           , GenGewgawQ genGewgawQ , CharController causedby, CauseType causeType, int causeID)
         {

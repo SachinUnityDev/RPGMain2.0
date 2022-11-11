@@ -398,11 +398,11 @@ RectTransform:
   m_Father: {fileID: 6932302636255570292}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.3154297, y: 86.5892}
-  m_SizeDelta: {x: 173.32, y: 20.332}
-  m_Pivot: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.01970005, y: -0.017799377}
+  m_SizeDelta: {x: 143.5268, y: -143.9013}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6932302636247102510
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -433,8 +433,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: EXILE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 13f3ffa21186e2b4a8a4b4abf7df760b, type: 2}
-  m_sharedMaterial: {fileID: -5577768806547497733, guid: 13f3ffa21186e2b4a8a4b4abf7df760b,
+  m_fontAsset: {fileID: 11400000, guid: 6c26e5b59e185d14daa51ef5b9a30953, type: 2}
+  m_sharedMaterial: {fileID: -5021163164158994115, guid: 6c26e5b59e185d14daa51ef5b9a30953,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -459,11 +459,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22
+  m_fontSize: 20.95
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 22
+  m_fontSizeMin: 20
   m_fontSizeMax: 30
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -495,7 +495,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0.07835389, y: 0, z: -0.111099735, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -535,8 +535,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 79.16846, y: 3.9040985}
-  m_SizeDelta: {x: 20.9628, y: 167.6838}
+  m_AnchoredPosition: {x: 79.16846, y: 3.2879028}
+  m_SizeDelta: {x: 20.9628, y: 164.8561}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6932302636713888983
 GameObject:
@@ -642,6 +642,7 @@ MonoBehaviour:
     charMode: 0
     orgCharMode: 0
     raceType: 0
+    raceTypeHero: 0
     cultType: 0
     heroType: 0
     classType: 0
@@ -649,18 +650,42 @@ MonoBehaviour:
     stateOfChar: 0
     availOfChar: 0
     fameBehavior: 0
+    baseCharLoc: 0
     currCharLoc: 0
     expPoints: 0
     jobExp: 0
     skillPts: 0
+    expBonusModPercent: 0
+    expBonusModVal: 0
     charLvl: 0
+    PrevLvlrec: 
     tameAnimalsStrength: 0
     fleeBehaviour: 0
     canBeAmbushed: 0
     canBeCaught: 0
     provisionItems: []
+    beltSlot1:
+      itemType: 0
+      ItemName: 0
+    beltSlot2:
+      itemType: 0
+      ItemName: 0
+    provisionSlot:
+      itemType: 0
+      ItemName: 0
+    gewgawSlot1:
+      itemType: 0
+      ItemName: 0
+    gewgawSlot2:
+      itemType: 0
+      ItemName: 0
+    gewgawSlot3:
+      itemType: 0
+      ItemName: 0
+    netPotionAddictChance: 0
     earningsItems: []
     earningsShare: 0
+    earningShareBonus_percent: 0
     CompanionPreReqOpt1: []
     CompanionPreReqOpt2: []
     startLevel: 0
@@ -689,11 +714,6 @@ MonoBehaviour:
     permanentTraitList: 
     _charOccupies: 0
     _posPriority: 
-    meleeAttackTypeMod: 0
-    rangedAttackTypeMod: 0
-    remoteAttackTypeMod: 0
-    physicalSIMod: 0
-    magicalSIMod: 0
     Immune2TraitsList: 
     Immune2StatChangeList: 
     Immune2CharStateList: 

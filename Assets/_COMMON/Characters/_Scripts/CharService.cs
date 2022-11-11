@@ -122,7 +122,7 @@ namespace Common
             if (charCtrl != null)
                 return charCtrl;
             else
-                Debug.LogError("CharController not found" + charName);
+                Debug.Log("CharController not found" + charName);
             return null;
         }
 

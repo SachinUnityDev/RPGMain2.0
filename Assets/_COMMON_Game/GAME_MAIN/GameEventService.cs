@@ -52,7 +52,7 @@ namespace Common
            
             BestiaryService.Instance.Init();
             FameService.Instance.Init();
-
+            LevelService.Instance.Init();
             OnTownEnter?.Invoke(locationName);
         }
 

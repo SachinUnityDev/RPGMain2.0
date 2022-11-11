@@ -64,6 +64,7 @@ namespace Common
             this.charModel = charModel;
             LvlStackData lvlStackData = 
                     LevelService.Instance.lvlModel.GetLvlStackData(charModel.charName);
+            
             if (lvlStackData.allOptionsPending.Count <= 0)
             {
                 Debug.Log("No options are available");

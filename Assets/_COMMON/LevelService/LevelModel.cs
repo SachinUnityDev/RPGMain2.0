@@ -46,8 +46,11 @@ namespace Common
         public LvlStackData GetLvlStackData(CharNames charName)
         {
             LvlStackData lvlStackData = allCharLvlUpData.Find(t => t.charName == charName);
-
-            return lvlStackData;
+            if (lvlStackData != null)
+                return lvlStackData;
+            else
+                Debug.Log("CHARNAME LVL DATA MISSING" + charName);
+            return null;
         }
 
         public void AddOptions2ChosenStack(CharNames charName, List<StatData> allStatData, Levels lvl)

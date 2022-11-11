@@ -114,10 +114,7 @@ namespace Common
             List<StatData> option2 = lvlDataComp.allStatDataOption2;
 
             lvlModel.AddOptions2PendingStack(charName, option1, option2, finalLvl);
-
         }
-
-
         void AutoLvlUpEnemies(Levels initLvl, Levels finalLvl)
         {
            
@@ -129,8 +126,23 @@ namespace Common
 
         void AutoLvlUpByOneEnemy(Levels finalLvl)
         {
+            if (charModel == null)
+            {
+                Debug.Log("CharModel found null " + finalLvl);
+                return;
+            }
+            
             List<StatData> lvlUpStats = levelUpSO.GetLvlUpIncr4Stats(charModel, finalLvl);
-            Debug.Log("Lvl up stat error" + lvlUpStats.Count);
+           if(lvlUpStats == null)
+            {
+                Debug.Log("charName " + charModel.charName);
+                Debug.Log("Lvl up stat error" + lvlUpStats.Count);
+                return;
+            }
+                
+            
+            
+         
             foreach (StatData stat in lvlUpStats)
             {
                 if (stat.statsName == StatsName.damage || stat.statsName == StatsName.armor)

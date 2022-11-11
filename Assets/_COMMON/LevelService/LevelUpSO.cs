@@ -64,7 +64,7 @@ namespace Common
                     //    Debug.Log("Target group " + targetLvl + "group " + grp);
                     //    return null;
                     //}                    
-
+                    Debug.Log("Group data" + grpData);
                     return null;
                 }
             }

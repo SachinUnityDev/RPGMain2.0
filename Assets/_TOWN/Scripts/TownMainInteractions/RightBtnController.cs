@@ -90,6 +90,7 @@ namespace Town
         void OnMapBtnClick()
         {
             MapService.Instance.mapIntViewPanel.SetActive(true);
+          
         }
         void OnEventBtnClick()
         {

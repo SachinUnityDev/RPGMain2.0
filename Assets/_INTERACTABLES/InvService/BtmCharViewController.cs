@@ -41,6 +41,7 @@ namespace Interactables
             //    allAvailableChars.Add(c.charModel);
             //}
             allAvailableChars.Clear();
+            rightsChars.Clear();leftChars.Clear();
             foreach (CharModel c in CharService.Instance.allAvailCharsModels)
             {
                 allAvailableChars.Add(c);
@@ -101,6 +102,7 @@ namespace Interactables
             portGO.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
             portGO.transform.DOLocalMoveX(0, 0.15f);
             SortChars();
+           
         }
         
       
@@ -108,7 +110,7 @@ namespace Interactables
         {
             index = 0; int midCount = 0;             
             midCount = (allAvailableChars.Count-1) / 2;
-            
+            leftChars.Clear();rightsChars.Clear();
             for (int i = 0; i < allAvailableChars.Count; i++)
             {
                 if(allAvailableChars[i].charName != charSelect.charName)
@@ -125,10 +127,25 @@ namespace Interactables
             }
         }
 
+        void ClearPanels()
+        {
+            int count = leftCharsGO.Count;
+            for (int i = 0; i < count; i++)
+            {
+                Destroy(leftCharsGO[i]); 
+            }
+            count = rightCharsGO.Count;
+            for (int i = 0; i < count; i++)
+            {
+                Destroy(rightCharsGO[i]);
+            }
+            leftCharsGO.Clear(); rightCharsGO.Clear();
+        }
         void PopulatePortPanels( )
         {
-            leftCharsGO.Clear(); rightCharsGO.Clear();
-            
+            ClearPanels();
+
+
             if (leftChars.Count >= 1)
             {
                 foreach (CharModel charModel in leftChars)
@@ -199,6 +216,7 @@ namespace Interactables
 
         public void Load()
         {
+            Init();
         }
 
         public void UnLoad()

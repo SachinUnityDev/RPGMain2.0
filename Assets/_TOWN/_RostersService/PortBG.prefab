@@ -173,9 +173,8 @@ MonoBehaviour:
   canvas: {fileID: 0}
   canvasGroup: {fileID: 0}
   charDragged: 0
-  slotParent: {fileID: 0}
-  charScrollSlot: {fileID: 0}
   clone: {fileID: 0}
+  parentTransform: {fileID: 0}
 --- !u!225 &8598658345781170621
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -485,8 +484,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: BUCCANEER
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5447f54311c3a074583aab7e95e6966a, type: 2}
-  m_sharedMaterial: {fileID: -1283144925744203529, guid: 5447f54311c3a074583aab7e95e6966a,
+  m_fontAsset: {fileID: 11400000, guid: 6c26e5b59e185d14daa51ef5b9a30953, type: 2}
+  m_sharedMaterial: {fileID: -5021163164158994115, guid: 6c26e5b59e185d14daa51ef5b9a30953,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -511,7 +510,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25.4
+  m_fontSize: 26
   m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 1

@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 using UnityEngine.UI;
 using TMPro;
-using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Common
 {

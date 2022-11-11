@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9869bcfeba99bfc4aab9618eed431ec3, type: 3}
   m_Name: WeaponSO
   m_EditorClassIdentifier: 
+  emptySlot: {fileID: 0}
   allWeaponSprites:
   - charName: 1
-    weaponSprite: {fileID: 21300000, guid: ff3c71aa4ca44ff46bcac579736f99ac, type: 3}
+    weaponSprite: {fileID: 21300000, guid: 2c2434491e44a374b804e8d0c73461da, type: 3}
   - charName: 43
     weaponSprite: {fileID: 21300000, guid: b4af40a6aafbbfb4f9364b564a1b9c5d, type: 3}
   - charName: 2

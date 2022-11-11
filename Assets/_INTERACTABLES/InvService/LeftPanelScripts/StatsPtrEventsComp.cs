@@ -1,64 +1,62 @@
+using Common;
+using Interactables;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using Common;
 using TMPro;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Interactables
 {
-    public class AttribPtrEventsComp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+
+    public class StatsPtrEventsComp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] StatsName statName;
         [SerializeField] bool isOnLeft = false;
 
         [SerializeField] GameObject desc;
         [SerializeField] StatData statData;
-        AttribPanelViewComp attribPanelViewComp;
-        BtmCharViewController btmCharViewController; 
+        public CharModel charModel;
+        Transform PanelTrans; 
+
 
         void Start()
         {
-            desc = transform.GetChild(3).gameObject;
+            desc = transform.GetChild(2).gameObject;
             desc.SetActive(false);
-            attribPanelViewComp =
-                    transform.GetComponentInParent<AttribPanelViewComp>();
-
-            //btmCharViewController =
-            //    attribPanelViewComp.transform.parent.parent
-            //                    .GetChild(2).GetComponent<BtmCharViewController>();
-
+        
             InvService.Instance.OnCharSelectInPanel += PopulateData;
+            PanelTrans = transform.parent;
 
-
-            // init on town init 
+            // need to check if needed
             CharService.Instance.allCharsInParty.ForEach(t => t.OnStatCurrValSet
              += (CharModData charModData) => PopulateData(CharService.Instance.GetCharCtrlWithCharID
-             (charModData.effectedCharNameID).charModel)); 
-            
-                
+             (charModData.effectedCharNameID).charModel));
+
+
         }
 
         public void PopulateData(CharModel charModel)
         {
-            transform.GetChild(2).GetComponent<TextMeshProUGUI>().text
+            transform.GetChild(1).GetComponent<TextMeshProUGUI>().text
                                                     = GetStatValue(charModel);
         }
 
         string GetStatValue(CharModel charModel)
         {
             string str = "";
+
             if (charModel == null)
             {
                 return str;
             }
             else
             {
+                this.charModel = charModel;
                 statData = charModel.statsList.Find(t => t.statsName == statName);
                 PopulateDesc();
                 if (statName == StatsName.armor || statName == StatsName.damage)
                 {
-
                     str = statData.minRange + "-" + statData.maxRange;
                 }
                 else
@@ -71,6 +69,7 @@ namespace Interactables
 
         void PopulateDesc()
         {
+            Debug.Log("StatName" + statName + "Char" + charModel.charName);
             desc.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text
                             = statData.statsName.ToString().CreateSpace();
             desc.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text
@@ -79,7 +78,8 @@ namespace Interactables
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            transform.parent.SetAsLastSibling();
+            // attribPanelViewComp.ToggleLRPanel(isOnLeft);
+            PanelTrans.SetAsLastSibling();
             desc.SetActive(true);
         }
 
@@ -87,9 +87,5 @@ namespace Interactables
         {
             desc.SetActive(false);
         }
-
-
     }
-
-
 }

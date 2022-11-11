@@ -112,6 +112,8 @@ namespace Town
 
         void Start()
         {           
+            
+
             centerTrans = transform;
             sideTrans = transform.parent.GetChild(0);
             topTrans = transform.parent.GetChild(1);
@@ -124,8 +126,7 @@ namespace Town
             jobsBtn.onClick.AddListener(OnJobBtnClick);
             rostersBtn.onClick.AddListener(OnRostersBtnClick);
 
-            nametxt = transform.parent.GetChild(3).GetComponent<TextMeshProUGUI>();
-           
+            nametxt = transform.parent.GetChild(3).GetComponent<TextMeshProUGUI>();           
             nametxt.gameObject.SetActive(false);
            
 

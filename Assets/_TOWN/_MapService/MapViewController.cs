@@ -1,3 +1,4 @@
+using Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Town
 {
-    public class MapViewController : MonoBehaviour
+    public class MapViewController : MonoBehaviour, IPanel
     {
         [SerializeField] Button nekkisariBtn;
         [SerializeField] Button muraboBtn;
@@ -35,6 +36,8 @@ namespace Town
             toggleTownBtn.onClick.AddListener(OnToggleTownPressed);
             ToggleTxt(true, true);
             townsInWorldMapGO.SetActive(true);
+            closeBtn.onClick.AddListener(OnCloseBtnPressed);
+
         }
 
         void OnToggleTownPressed()
@@ -99,7 +102,24 @@ namespace Town
             istownMapOpen = !istownMapOpen;
         }
 
+        void OnCloseBtnPressed()
+        {
+            UnLoad();
+        }
+        public void Load()
+        {
+            gameObject.SetActive(true);
+        }
 
+        public void UnLoad()
+        {
+           gameObject.SetActive(false);
+        }
+
+        public void Init()
+        {
+          
+        }
     }
 
 }

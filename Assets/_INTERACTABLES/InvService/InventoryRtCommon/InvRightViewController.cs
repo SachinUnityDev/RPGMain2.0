@@ -60,6 +60,7 @@ namespace Interactables
         {
             InvPanel = gameObject.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
             InvService.Instance.OnDragResult += OnDragResult;
+            gewgawsActiveInvPanel.SetActive(false);
         }
 
         public void Init()

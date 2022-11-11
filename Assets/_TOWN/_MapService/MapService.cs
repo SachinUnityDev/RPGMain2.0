@@ -5,8 +5,11 @@ using UnityEngine;
 
 namespace Town
 {
-    public class MapService : MonoBehaviour
-    {        
+    public class MapService : MonoSingletonGeneric<MapService>
+    {
+        public GameObject mapIntViewPanel; 
+
+
         void Start()
         {
 

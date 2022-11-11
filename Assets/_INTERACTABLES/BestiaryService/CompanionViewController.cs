@@ -81,6 +81,7 @@ namespace Interactables
                     selectComp.Add(c.charModel);
                 }
             }
+            
             lockBtn.GetComponent<LockBtnPtrEvents>().Init(this);
             PopulateScollData();
             raceBtnAnim.Init(selectComp[index], this);

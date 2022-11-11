@@ -14,6 +14,8 @@ namespace Town
         [SerializeField] Transform sideTrans;
         [SerializeField] Transform topTrans;
 
+
+        [Header("To be ref")]
         [SerializeField] Button questScrollBtn;
         [SerializeField] Button eventBtn;
         [SerializeField] Button mapBtn;
@@ -87,7 +89,7 @@ namespace Town
         }
         void OnMapBtnClick()
         {
-
+            MapService.Instance.mapIntViewPanel.SetActive(true);
         }
         void OnEventBtnClick()
         {

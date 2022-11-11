@@ -19,6 +19,7 @@ namespace Interactables
         [Header("TO BE REF")]
         public InvSO InvSO; // all items SO 
         public GameObject invPanelPrefab;
+        public GameObject invXLPanel;
 
         [Header("InvMainModel")]
         public InvMainModel invMainModel;

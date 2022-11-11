@@ -49,7 +49,7 @@ namespace Common
             }
             else
             {
-                AutoLvlUpEnemies(initLvl, finalLvl);
+               // AutoLvlUpEnemies(initLvl, finalLvl);  // enemies should not level up untill spawned
             }
         }
         public bool ChkLvlUp(CharModel charModel, int expNeeded)

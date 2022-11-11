@@ -21,8 +21,8 @@ namespace Interactables
         {
             desc = transform.GetChild(3).gameObject;
             desc.SetActive(false);
-            attribPanelViewComp =
-                    transform.GetComponentInParent<AttribPanelViewComp>();
+            //attribPanelViewComp =
+            //        transform.GetComponentInParent<AttribPanelViewComp>();
 
             //btmCharViewController =
             //    attribPanelViewComp.transform.parent.parent

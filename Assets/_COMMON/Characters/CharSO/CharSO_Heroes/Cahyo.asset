@@ -248,6 +248,33 @@ MonoBehaviour:
     minLimit: 0
     maxLimit: 0
     isClamped: 0
+  - statsName: 22
+    currValue: 2
+    baseValue: 2
+    desc: Stamina gain per round
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+    isClamped: 0
+  - statsName: 23
+    currValue: 0
+    baseValue: 0
+    desc: 'Health gain per round '
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+    isClamped: 0
+  - statsName: 24
+    currValue: 0
+    baseValue: 0
+    desc: 'Value Fortitude resets to after each combat '
+    minRange: 0
+    maxRange: 0
+    minLimit: 0
+    maxLimit: 0
+    isClamped: 0
   charOccupies: 0
   posPriority: 01000000020000000300000004000000
   armorType: 3

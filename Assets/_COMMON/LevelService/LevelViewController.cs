@@ -60,11 +60,13 @@ namespace Common
 
         void PopulateOptionPendingList(CharModel charModel)
         {
+            if (charModel == null) return;
             charName = charModel.charName;
             this.charModel = charModel;
             LvlStackData lvlStackData = 
                     LevelService.Instance.lvlModel.GetLvlStackData(charModel.charName);
-            
+            if(lvlStackData == null) return;
+
             if (lvlStackData.allOptionsPending.Count <= 0)
             {
                 Debug.Log("No options are available");

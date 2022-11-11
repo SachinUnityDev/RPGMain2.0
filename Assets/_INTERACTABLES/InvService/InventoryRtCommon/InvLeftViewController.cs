@@ -26,20 +26,19 @@ namespace Interactables
         private void Start()
         {
             invRightViewController = transform.GetChild(0).GetComponent<InvRightViewController>();
-            levelViewController = transform.GetChild(0).GetComponent<LevelViewController>();
+            levelViewController = transform.GetChild(1).GetComponent<LevelViewController>();
             btmCharViewController = transform.GetChild(2).GetComponent<BtmCharViewController>();
+            InvService.Instance.OnCharSelectInPanel += OnCharSelected; 
         }
 
-        public void OnCharSelected()
+        public void OnCharSelected(CharModel charModel)
         {
 
 
         }
         void PopulateStatsPanel()
         {
-            // get stats of the select char. 
-            // fill in one by one
-
+            
 
 
         }
@@ -56,7 +55,7 @@ namespace Interactables
 
         public void Load()
         {
-           // transform.parent.gameObject.SetActive(true);
+            transform.parent.gameObject.SetActive(true);
         }
 
         public void UnLoad()
@@ -67,8 +66,8 @@ namespace Interactables
         public void Init()
         {
             invRightViewController.Init();
-            //btmCharViewController.Init();
-            //levelViewController.Init();
+            btmCharViewController.Init();
+            levelViewController.Init();
 
         }
     }

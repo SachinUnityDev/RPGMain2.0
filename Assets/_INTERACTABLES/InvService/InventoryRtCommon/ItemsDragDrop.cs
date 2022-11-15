@@ -9,8 +9,7 @@ using DG.Tweening;
 namespace Interactables
 {
     public class ItemsDragDrop : MonoBehaviour,  IBeginDragHandler
-        , IEndDragHandler, IDragHandler
-        
+                                , IEndDragHandler, IDragHandler        
     {
 
         [Header("Pointer related")]
@@ -112,7 +111,6 @@ namespace Interactables
                 if(clone.GetComponent<CanvasGroup>() != null)  // check for empty slot 
                     clone.GetComponent<CanvasGroup>().blocksRaycasts = true;
             }
-
         }
 
         #endregion

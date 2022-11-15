@@ -26,7 +26,7 @@ namespace Common
     [System.Serializable]
     public class CharLvlUpdata
     {
-        public HeroType heroType;
+        public ArcheType heroType;
         public List<LvlDataComp> allLvldataComp = new List<LvlDataComp>(); 
     }
 
@@ -39,7 +39,7 @@ namespace Common
         public Sprite lvlPlusSprite;
         public Sprite lvlMinusSprite;
 
-        public LvlDataComp GetLvlData(HeroType heroType, Levels lvl)
+        public LvlDataComp GetLvlData(ArcheType heroType, Levels lvl)
         {
             foreach (CharLvlUpdata lvlUpData in allCharLvlUpData)
             {

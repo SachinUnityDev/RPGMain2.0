@@ -26,21 +26,13 @@ namespace Interactables
         public bool isRightClicked = false;
         public void OnDrop(PointerEventData eventData)
         {
+            // cannot drag and drop an item on provision slot
             draggedGO = eventData.pointerDrag;
             itemsDragDrop = draggedGO.GetComponent<ItemsDragDrop>();
             if (itemsDragDrop != null)
             {
-                bool isDropSuccess = AddItem(itemsDragDrop.itemDragged);
-                if (!isDropSuccess)
-                    InvService.Instance.On_DragResult(isDropSuccess, itemsDragDrop);
-                else
-                {
-
-
-
-                    InvService.Instance.On_DragResult(isDropSuccess, itemsDragDrop);
-                    Destroy(draggedGO);
-                }
+                InvService.Instance.On_DragResult(false, itemsDragDrop);
+                //Destroy(draggedGO);
             }
         }
 
@@ -50,7 +42,6 @@ namespace Interactables
             isRightClicked = false;
             InvService.Instance.invViewController.CloseRightClickOpts();
         }
-
         public void ClearSlot()
         {
             ItemsInSlot.Clear();
@@ -150,6 +141,7 @@ namespace Interactables
             RefreshSlotTxt();
         }
 
+#region POPULATE Slot Methods 
         void RefreshImg(Iitems item)
         {
             for (int i = 0; i < gameObject.transform.GetChild(0).childCount - 1; i++)
@@ -187,6 +179,7 @@ namespace Interactables
             return null;
         }
 
+#endregion
         public void CloseRightClickOpts()
         {
             if (isRightClicked)

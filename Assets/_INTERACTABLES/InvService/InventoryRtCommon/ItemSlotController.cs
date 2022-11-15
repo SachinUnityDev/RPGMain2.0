@@ -17,6 +17,7 @@ namespace Interactables
         List<InvData> ItemsInSlot { get; set;  }
         void RemoveItem();
         bool AddItem(Iitems item);
+        void ClearSlot(); 
         void CloseRightClickOpts(); 
     }
 

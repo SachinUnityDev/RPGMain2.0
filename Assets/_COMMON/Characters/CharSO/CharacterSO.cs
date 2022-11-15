@@ -49,7 +49,7 @@ namespace Common
         public RaceTypeHero raceTypeHero; 
         public CultureType cultType;     // play part in trails only 
         public ClassType classType;
-        public HeroType heroType;
+        public ArcheType archeType;
         [Header("MISC STATS")]
         public float tameAnimalsStrength;
         public FleeBehaviour fleeBehaviour;

@@ -50,11 +50,13 @@ namespace Interactables
         {
             PotionsBase potionBase = allPotionBase.Find(t => t.potionName == _potionName);
             if (potionBase != null)
-                            return potionBase;            
-            else            
-                Debug.Log("POTION BASE NOT FOUND");
-                return null;
-            
+                            return potionBase;
+            else
+            {
+                Debug.Log("POTION BASE NEW CREATED");
+                PotionsBase potionBaseNew = potionFactory.GetPotionBase(_potionName);
+                return potionBaseNew;
+            }            
         }
         public PotionModel GetPotionModel(PotionName _potionName)
         {
@@ -76,10 +78,7 @@ namespace Interactables
         public void InitPotion2CommonInv(CharNames charName, PotionName _potionName, CharController causedby
           , CauseType causeType, int causeID)
         {
-
-            // Init a potion.. 
-            // Add to common Inv.. 
-
+          
             PotionsBase potionBase = potionFactory.GetPotionBase(_potionName);            
             
             PotionSO potionSO = GetPotionModelSO(_potionName);
@@ -88,6 +87,7 @@ namespace Interactables
 
            Iitems item = potionBase as Iitems;
            item.invType = SlotType.CommonInv;
+
             CharModel charModel = CharService.Instance.GetAllyCharModel(charName);
             if(charModel != null)
             {
@@ -100,42 +100,17 @@ namespace Interactables
             }                      
         }
 
-        public void InitPotion2ActiveInv(CharNames charName,PotionName _potionName)
+        public void InitPotion2ActiveInv(CharNames charName, PotionsBase potionbase)
         {
-            //init potion 
-            // Equip to char Name
 
-            //PotionsBase potionBase = potionFactory.GetPotionBase(_potionName);
-            //AddPotion2Char(potionBase);  // potion init here too and then added.
 
-            //Iitems item = potionBase as Iitems;
-            //item.invType = SlotType.CommonInv;
-            //CharModel charModel = CharService.Instance.GetAllyCharModel(charName);
-            //if (charModel != null)
-            //{
-            //    InvData invData = new InvData(charModel.charName, item);
-            //    InvService.Instance.invMainModel.AddItem2CommInv(invData);
-            //}
-            //else
-            //{
-            //    Debug.Log("CharModel is null" + charName);
-            //}
         }
+        
+        public void AddPotion2ActiveInv(CharNames charName, PotionsBase potionsBase)
+        {
+            // update in char Model
 
-
-
-
-        //void LocChange(PotionName potionName, InvType invType)
-        //{
-        //    if (GetPotionModel(potionName) != null)
-        //        GetPotionModel(potionName).potionLoc = invType;
-
-        //    PotionsBase potionbase = GetPotionBase(potionName);
-        //    Iitems item = potionbase as Iitems;
-        //    item.invType = invType; 
-
-        //}
-    
+        }
 
         private void Update()
         {

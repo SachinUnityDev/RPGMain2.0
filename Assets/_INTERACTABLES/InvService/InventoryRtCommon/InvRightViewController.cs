@@ -208,7 +208,7 @@ namespace Interactables
             for (int i = 0; i < potionActiveInvPanel.transform.childCount; i++)
             {
                 Transform child = potionActiveInvPanel.transform.GetChild(i);
-                child.gameObject.GetComponent<PotionSlotController>().ClearSlot();
+                child.gameObject.GetComponent<PotionSlotViewController>().ClearSlot();
             }
         }
 

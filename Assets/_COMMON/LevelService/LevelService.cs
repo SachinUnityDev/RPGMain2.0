@@ -80,7 +80,7 @@ namespace Common
 
         void AutoLvlUpByOne(Levels finalLvl)
         {
-            HeroType heroType = charModel.heroType;
+            ArcheType heroType = charModel.heroType;
             LvlDataComp lvlDataComp = lvlUpCompSO.GetLvlData(heroType, finalLvl);
             Add2ManPendingStack(finalLvl);
 

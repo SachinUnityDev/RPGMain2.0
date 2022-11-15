@@ -254,7 +254,7 @@ public enum StatsName
     fortOrg, 
 }
 
-public enum RaceTypeHero
+public enum RaceTypeHero  // only for inv segregation 
 {
     None,
     Human,
@@ -325,12 +325,13 @@ public enum CultureType
     Fleshly,
     IndigenElf,
 }
-public enum HeroType
+public enum ArcheType
 {
     None,
-    Hunter,
     Warrior,
+    Hunter, 
     Mage,
+
 };
 
 

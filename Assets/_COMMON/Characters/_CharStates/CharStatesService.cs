@@ -11,13 +11,13 @@ using Combat;
 namespace Common
 {
 
-    public class CharStateData  
+    public class CharStateData  // braodcast data 
     {
        public CharNames causeByCharName;
        public int causeCharID; 
        public CauseType causeType; 
        public int causeID;
-       public CharStateModel charStateModel;
+       public CharStateModel charStateModel; // effected char Inside this model
 
         public CharStateData(CharNames causeByCharName, int causeCharID, CauseType causeType, int causeID
            , CharStateModel charStateModel)
@@ -113,7 +113,7 @@ namespace Common
                 charBase.StateApplyFX();
                 charBase.StateApplyVFX();
                 charController.charStateController.allCharBases.Add(charBase);
-                charController.charModel.InCharStatesList.Add(_charStateName);
+                charController.charModel.InCharStatesList.Add(_charStateName);  // this is to shifted locally 
 
             }
             CharStateModel charStateModelReload = GetCharStateModel(_charStateName);

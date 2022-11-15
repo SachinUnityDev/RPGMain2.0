@@ -104,7 +104,9 @@ namespace Common
            if(charController.charModel.InCharStatesList.Any(t => t == charStateName))
            {
                 charController.charModel.InCharStatesList.Remove(charStateName);
+                // should also delete the char State base from the base list
            }
+           
         }
 
 

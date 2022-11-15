@@ -19,7 +19,6 @@ namespace Interactables
 
         public void InitPotions()
         {
-
             if (allPotions.Count > 0) return;
 
             var getAllPotions = Assembly.GetAssembly(typeof(PotionsBase)).GetTypes()

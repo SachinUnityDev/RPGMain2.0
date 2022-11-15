@@ -36,7 +36,7 @@ namespace Common
         public RaceType raceType;
         public RaceTypeHero raceTypeHero;
         public CultureType cultType;
-        public HeroType heroType;
+        public ArcheType heroType;
         public ClassType classType;
         public string charNameStr; 
 
@@ -188,7 +188,7 @@ namespace Common
             raceType =_charSO.raceType;
             raceTypeHero = _charSO.raceTypeHero;
             cultType = _charSO.cultType;
-            heroType = _charSO.heroType;
+            heroType = _charSO.archeType;
             classType = _charSO.classType;
             charNameStr = _charSO.charNameStr;
 

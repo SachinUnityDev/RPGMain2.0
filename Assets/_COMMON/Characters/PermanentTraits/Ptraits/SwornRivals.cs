@@ -37,7 +37,7 @@ namespace Common
             {
                 if (c.charModel.charID != _charChanged.charModel.charID) // other than myself
                 {
-                    if (c.charModel.cultType == CultureType.Khugarian)
+                    if (c.charModel.cultType == CultureType.Kugharian)
                     {
                         c.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, StatsName.morale, -4);
                     }
@@ -52,7 +52,7 @@ namespace Common
             {
                 if (c.charModel.charID != _charChanged.charModel.charID)
                 {
-                    if (c.charModel.cultType == CultureType.Khugarian)
+                    if (c.charModel.cultType == CultureType.Kugharian)
                     {
                         c.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID,StatsName.morale, 4);
                     }
@@ -68,7 +68,7 @@ namespace Common
             {
                 if (c.charModel.charID != charController.charModel.charID)   
                 {
-                    if (c.charModel.cultType == CultureType.Khugarian)
+                    if (c.charModel.cultType == CultureType.Kugharian)
                     {
                         c.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID,StatsName.morale, -4); 
                     }

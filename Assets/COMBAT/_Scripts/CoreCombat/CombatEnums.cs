@@ -117,9 +117,10 @@ namespace Combat
     public enum StrikeType
     {
         None,
-        Feeble,
-        Crit,
+        Feeble,// crit and feeble for both magical and Physical
+        Crit,//
         Normal,
+        MissedHit,// is only for physical attack 
     }
 
     public enum StaticTargetMode

@@ -5,6 +5,8 @@ using System;
 using Combat;
 using DG.Tweening;
 using Interactables;
+using System.Windows.Forms.DataVisualization.Charting;
+
 namespace Common
 {   
 
@@ -14,7 +16,7 @@ namespace Common
         public event Action<CharModData> OnStatChg; // return the current modified value 
         public event Action<CharModData> OnStatCurrValSet;  // curr values 
         public event Action<CharModData> OnBaseValueChg;
-
+        public event Action<float> OnExpGainedOrLoss;
 
         public CharModel charModel;     
 
@@ -407,7 +409,10 @@ namespace Common
         }
         public void ExpPtsLoss(int val) 
         {
-            charModel.expPoints -= val;
+            float addExp = charModel.expBonusModPercent * val;           
+            float valNew = val + addExp; 
+
+            charModel.expPoints -= (int)valNew;
             int prevlvl = charModel.charLvl--;
             int totalExpPts = CharService.Instance.lvlNExpSO.GetTotalExpPts4Lvl(prevlvl);
             if (charModel.expPoints < totalExpPts)
@@ -417,7 +422,10 @@ namespace Common
         }
         public void ExpPtsGain(int val)
         {
-            charModel.expPoints += val;
+            float addExp = charModel.expBonusModPercent * val;
+            float valNew = val + addExp;
+
+            charModel.expPoints += (int)valNew;
             int nextlvl = charModel.charLvl++; 
             int totalExpPts = CharService.Instance.lvlNExpSO.GetTotalExpPts4Lvl(nextlvl); 
             if(charModel.expPoints > totalExpPts)

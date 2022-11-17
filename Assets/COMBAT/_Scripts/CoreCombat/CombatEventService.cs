@@ -18,7 +18,7 @@ namespace Combat
         public event Action OnCombatInit;
         public event Action OnQuestInit; 
         public event Action OnEOC;      
-        public event Action<FleeData> OnFleeInCombat;
+        public event Action<CharController> OnFleeInCombat;
         public event Action<CharController> OnDeathInCombat;
         public event Action<CharController> OnCombatRejoin;
         public event Action<StrikeData> OnStrikeFired;

@@ -56,7 +56,7 @@ namespace Common
         public int jobExp;
         public int skillPts;
         public int expBonusModPercent = 0;
-        public int expBonusModVal = 0;
+        
 
         [Header("LEVELS")]
         public int charLvl =0;

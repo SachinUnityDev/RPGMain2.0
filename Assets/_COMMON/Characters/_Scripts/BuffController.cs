@@ -111,12 +111,13 @@ namespace Combat
 #endregion
 
 #region REMOVE BUFFS 
-        public void RemoveBuff(int buffID)
+        public bool RemoveBuff(int buffID)
         {
-            int index = allBuffs.FindIndex(t => t.buffID == buffID); 
+            int index = allBuffs.FindIndex(t => t.buffID == buffID);
+            if (index == -1) return false; 
             BuffData buffData = allBuffs[index];
             RemoveBuffData(buffData);
-
+            return true;
         }
         public void RemoveBuffData(BuffData buffData)
         {

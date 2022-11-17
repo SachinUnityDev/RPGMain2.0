@@ -6,7 +6,7 @@ using System;
 namespace Combat
 {
 
-    public class DmgAppliedData
+    public class DmgAppliedData   /// Data broadcasted by target on being hit
     {
         public CharController striker;
         public CauseType causeType; 
@@ -43,7 +43,7 @@ namespace Combat
     public class DamageController : MonoBehaviour
     {
         public event Action<DmgAppliedData> OnDamageApplied;
-
+        
 
         const float hitChanceMin = 30f;
 
@@ -135,8 +135,6 @@ namespace Combat
             if (strikeType == StrikeType.Crit)
             {
                 dmgNew = dmg * 1.6f;
-
-
             }
             else if (strikeType == StrikeType.Feeble)
             {
@@ -251,8 +249,6 @@ namespace Combat
                 default:
                     break;
             }
-
-
             OnDamageApplied?.Invoke(new DmgAppliedData(striker, causeType, causeName, _dmgType, dmgPercentVal, strikeType, charController));
 
         }

@@ -9,6 +9,8 @@ namespace Common
 {
     public class CharService : MonoSingletonGeneric<CharService>, ISaveableService
     {
+        public event Action<CharNames> OnCharAddedToParty; 
+
 
         [Header("Character Scriptables")]
         public List<CharacterSO> allAllySO = new List<CharacterSO>();
@@ -255,6 +257,12 @@ namespace Common
             //}
             //return charCtrl;
             return charController; 
+        }
+
+        public void On_CharAddToParty(CharController charController)
+        {
+            allCharsInParty.Add(charController);
+            OnCharAddedToParty?.Invoke(charController.charModel.charName);
         }
 
         public void LoadCharControllers(CharModel charModel)

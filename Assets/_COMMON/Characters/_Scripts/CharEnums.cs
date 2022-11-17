@@ -27,7 +27,7 @@ public enum CauseType
     CombatOver, 
     QuestOver, 
     ThornsAttack,
-    
+    SagaicGewgaw,
 
 
 }
@@ -296,7 +296,7 @@ public enum CultureType
     Galtian,
     Galunero,
     Idikummian,
-    Khugarian,
+    Kugharian,
     Kujmari,
     Macalaki,
     MeadowDwarf,

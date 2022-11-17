@@ -49,11 +49,11 @@ namespace Common
 
         //1 morale for each other Safriman in party
         //+1 focus for each other Safriman in party
-        void DecMorNFoc4Safriman(FleeData fleeData)
+        void DecMorNFoc4Safriman(CharController charController)
         {
             foreach (CharController c in CharService.Instance.allyInPlayControllers)
             {
-                if (c.charModel.charID != fleeData.charController.charModel.charID) // other than myself
+                if (c.charModel.charID != charController.charModel.charID) // other than myself
                 {
                     if (c.charModel.cultType == CultureType.Safriman)
                     {

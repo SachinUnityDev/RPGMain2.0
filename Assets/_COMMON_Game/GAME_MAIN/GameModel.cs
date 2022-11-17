@@ -14,7 +14,7 @@ namespace Common
         public GameDifficulty gameDifficulty;
         public GameMode gameMode;
         public LocationName locationName;
-
+        public LandscapeNames landscapeNames = LandscapeNames.None;// quest has a landscape
 
         public GameModel( GameState currGameState
                 , GameDifficulty gameDifficulty, GameMode gameMode, LocationName locationName)

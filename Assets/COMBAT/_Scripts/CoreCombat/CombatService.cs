@@ -11,6 +11,9 @@ namespace Combat
         public CombatState combatState; 
 
         public List<EnemyPacksSO> allEnemyPacks = new List<EnemyPacksSO>();
+        public List<CharController> allEnemiesInCombat = new List<CharController>();
+        public List<CharController> allAlliesInCombat = new List<CharController>();
+
         public CharController currCharOnTurn;
         public CharController currCharClicked;
         public CharController currCharHovered;

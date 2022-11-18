@@ -10,6 +10,7 @@ namespace Combat
 
     }
 
+
     public enum CombatState
     {
         None, 

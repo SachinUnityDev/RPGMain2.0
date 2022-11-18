@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Common;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
+using System.Linq;
 
 namespace Combat
 {
@@ -51,10 +52,10 @@ namespace Combat
         public StrikeCharModel strikeCharModel;
 
         [Header("Thorns Damage related")]
-        public int thornID =-1;
+        public int thornID = -1;
 
 
-        float dmgMin, dmgMax; 
+        float dmgMin, dmgMax;
         private void Start()
         {
             charController = GetComponent<CharController>();
@@ -66,7 +67,8 @@ namespace Combat
         public void Init()
         {
             strikeCharModel = new StrikeCharModel();
-
+            CombatEventService.Instance.OnEOC += EOCTick;
+            CombatEventService.Instance.OnEOR += EORTick;
         }
 
         public bool FocusCheck()// Magical only .. 
@@ -78,16 +80,16 @@ namespace Combat
             float focusChance = 100f - charController.GetStatChance(StatsName.focus, focusVal);
 
             if (focusVal == 0)
-            {   
+            {
                 // GOT CONFUSED .. to be put in HERE .. 
-                CharStatesService.Instance.ApplyCharState(gameObject,  CharStateName.Confused
+                CharStatesService.Instance.ApplyCharState(gameObject, CharStateName.Confused
                                      , charController, CauseType.StatChange, (int)StatsName.focus);
                 return false;  // MIsfire ..hit the wrong target .. 
             }
             else
             {
                 return focusChance.GetChance();
-            } 
+            }
 
         }
 
@@ -96,21 +98,21 @@ namespace Combat
             // SKIP AKILL APPLY DMG 
             SkillController skillController = SkillService.Instance.currSkillController;
 
-            StrikeTargetNos strikeNos = skillController.allSkillBases.Find(t => t.skillName 
+            StrikeTargetNos strikeNos = skillController.allSkillBases.Find(t => t.skillName
                                                 == SkillService.Instance.currSkillName).strikeNos;
-            if (strikeNos == StrikeTargetNos.Single)  
+            if (strikeNos == StrikeTargetNos.Single)
             {
                 int netTargetCount = CombatService.Instance.mainTargetDynas.Count;
                 if (netTargetCount > 1)
                 {
-                    CombatService.Instance.mainTargetDynas.Remove(SkillService.Instance.currentTargetDyna);                 
+                    CombatService.Instance.mainTargetDynas.Remove(SkillService.Instance.currentTargetDyna);
                     int random = UnityEngine.Random.Range(0, netTargetCount - 1);
-                    SkillService.Instance.currentTargetDyna  = CombatService.Instance.mainTargetDynas[random]; 
+                    SkillService.Instance.currentTargetDyna = CombatService.Instance.mainTargetDynas[random];
                 }
                 else
                 {
                     ReduceDmgPercent();
-                    SkillService.Instance.PostSkillApply += RevertDamageRange; 
+                    SkillService.Instance.PostSkillApply += RevertDamageRange;
                 }
             }
             else
@@ -124,12 +126,12 @@ namespace Combat
         {
             int charID = charController.charModel.charID;
             StatData dmg = charController.GetStat(StatsName.damage);
-             dmgMin = dmg.minRange;
-             dmgMax = dmg.maxRange;
+            dmgMin = dmg.minRange;
+            dmgMax = dmg.maxRange;
             float chgMin = 0.2f * dmgMin;
             float chgMax = 0.2f * dmgMax;
             charController.ChangeStatRange(CauseType.StatChecks, (int)StatChecks.FocusCheck, charID
-                , StatsName.damage,chgMin, chgMax); 
+                , StatsName.damage, chgMin, chgMax);
         }
         void RevertDamageRange()
         {
@@ -144,7 +146,7 @@ namespace Combat
 
             if (accVal == 0)
             { // self inflicted
-               
+
                 CharStatesService.Instance.ApplyCharState(gameObject, CharStateName.Blinded
                                      , charController, CauseType.StatChange, (int)StatsName.acc);
                 return false;// miss the target .. i.e not going to hit/FX anyone.. 
@@ -152,12 +154,12 @@ namespace Combat
             else
             {
                 return accChance.GetChance();
-            }           
+            }
         }
 
 
-#region THORNS RELATED
-  
+        #region THORNS RELATED
+
 
         // INIFINITE CAST TIME THORNS FX 
         public void AddThornsFXBuff(AttackType attackType, DamageType damageType, float thornsMin, float thornsMax)
@@ -180,7 +182,7 @@ namespace Combat
             , AttackType attackType, DamageType damageType, float thornsMin, float thornsMax)
         {
             thornID++;
-            ThornsDmgData thornsDmgData = new ThornsDmgData(timeFrame, currentTime,thornID, attackType, damageType, thornsMin, thornsMax);
+            ThornsDmgData thornsDmgData = new ThornsDmgData(timeFrame, currentTime, thornID, attackType, damageType, thornsMin, thornsMax);
 
             strikeCharModel.AddThornsDamage(thornsDmgData);
         }
@@ -190,10 +192,10 @@ namespace Combat
         }
 
         void OnDmgDeliveredTick(DmgData dmgData)
-        {             
-            foreach (ThornsDmgData thornData in strikeCharModel.allThornsData )
+        {
+            foreach (ThornsDmgData thornData in strikeCharModel.allThornsData)
             {
-                if(thornData.attackType == dmgData.attackType)
+                if (thornData.attackType == dmgData.attackType)
                 {
                     float dmgPercentValue = UnityEngine.Random.Range(thornData.thornsMin, thornData.thornsMax);
                     dmgData.striker.GetComponent<DamageController>()
@@ -208,7 +210,124 @@ namespace Combat
 
 
         #endregion
+
+
+        #region DAMAGE BUFF ALTERER
+
+        public List<DmgBuffData> allDmgBuffData = new List<DmgBuffData>();
+
+        int dmgBuffID = 0;
+        public int ApplyDmgAltBuff(float valPercent, CauseType causeType, int causeName, int causeByCharID,
+             TimeFrame timeFrame, int netTime, bool isBuff,
+            AttackType attackType = AttackType.None, DamageType dmgType = DamageType.None,
+            CultureType cultType = CultureType.None, RaceType raceType = RaceType.None)
+        {
+
+            DmgAltData dmgAltData = new DmgAltData(valPercent, attackType, dmgType, cultType, raceType);
+            int startRoundNo = CombatService.Instance.currentRound;
+            dmgBuffID++;
+
+            DmgBuffData dmgBuffData = new DmgBuffData(dmgBuffID, isBuff, startRoundNo, timeFrame
+                            , netTime, dmgAltData);
+
+            allDmgBuffData.Add(dmgBuffData);
+            return dmgBuffID;
+        }
+        public void EOCTick()
+        {
+            foreach (DmgBuffData dmgBuffData in allDmgBuffData.ToList())
+            {
+                if (dmgBuffData.timeFrame == TimeFrame.EndOfCombat)
+                {
+                    RemoveDmgBuffData(dmgBuffData);
+                }
+            }
+        }
+
+        public void EORTick()  // to be completed
+        {
+            foreach (DmgBuffData dmgBuffData in allDmgBuffData.ToList())
+            {
+                if (dmgBuffData.timeFrame == TimeFrame.EndOfRound)
+                {
+                    if (dmgBuffData.buffCurrentTime >= dmgBuffData.buffedNetTime)
+                    {
+                        RemoveDmgBuffData(dmgBuffData);
+                    }
+                    dmgBuffData.buffCurrentTime++;
+                }
+            }
+        }
+
+        public void RemoveDmgBuffData(DmgBuffData dmgBuffData)
+        {
+            allDmgBuffData.Remove(dmgBuffData);
+        }
+        public bool RemoveDmgBuff(int dmgBuffID)
+        {
+            int index = allDmgBuffData.FindIndex(t => t.dmgBuffID == dmgBuffID);
+            if (index == -1) return false;
+            DmgBuffData dmgBuffData = allDmgBuffData[index];
+            RemoveDmgBuffData(dmgBuffData);
+            return true;
+        }
+
+        public float GetDmgAlt(CharModel targetModel, AttackType attackType = AttackType.None
+            , DamageType damageType = DamageType.None)
+        {
+            // 20% physical attack against beastmen
+            // first categories and then search in dmg alt buff List
+            // do not cover 2 tier cases cover only direct cases that's it ! 
+
+
+
+            return 0f;
+        }
+        #endregion
     }
+
+    public class DmgBuffData
+    {
+        public int dmgBuffID;
+        public bool isBuff;   // true if BUFF and false if DEBUFF
+        public int startRoundNo;
+        public TimeFrame timeFrame;
+        public int buffedNetTime;
+        public int buffCurrentTime;
+        public DmgAltData altData;  // contains value for the buff        
+
+        public DmgBuffData(int dmgBuffID, bool isBuff, int startRoundNo, TimeFrame timeFrame
+                            , int buffedNetTime, DmgAltData altData)
+        {
+            this.dmgBuffID = dmgBuffID;
+            this.isBuff = isBuff;
+            this.startRoundNo = startRoundNo;
+            this.timeFrame = timeFrame;
+            this.buffedNetTime = buffedNetTime;
+            this.buffCurrentTime = 0;// time counter for the dmgBuff
+            this.altData = altData;
+        }
+    }
+
+    public class DmgAltData
+    {
+        public AttackType attackType = AttackType.None;
+        public DamageType damageType = DamageType.None;
+        public CultureType cultType = CultureType.None;
+        public RaceType raceType = RaceType.None;
+        public float valPercent = 0f;
+
+        public DmgAltData(float valPercent, AttackType attackType, DamageType damageType, CultureType cultType, RaceType raceType)
+        {
+            this.attackType = attackType;
+            this.damageType = damageType;
+            this.cultType = cultType;
+            this.raceType = raceType;
+            this.valPercent = valPercent;
+        }
+
+    }
+
 
 }
 

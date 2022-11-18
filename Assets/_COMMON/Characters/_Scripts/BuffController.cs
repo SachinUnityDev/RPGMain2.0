@@ -310,14 +310,7 @@ namespace Combat
             allBuffs.Remove(buffData);
             allDaybuffs.Remove(buffData);
         }
-        // DEPRECATED.. 
-        //void ApplyBuffOnStartOfDay()
-        //{
-        //    foreach (BuffData buffData in allDaybuffs)
-        //    {
-        //        ApplyBuffDay(buffData);
-        //    }
-        //}
+ 
         void RemoveBuffOnEndofDay()
         {
             foreach (BuffData buffData in allDaybuffs)

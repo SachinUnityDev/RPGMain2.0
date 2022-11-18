@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+public enum Combi
+{
+    None, 
+    OR, 
+    AND, 
+}
+
 public enum CauseType
 {
     None, 

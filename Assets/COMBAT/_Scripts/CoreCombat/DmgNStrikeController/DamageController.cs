@@ -5,6 +5,7 @@ using Common;
 using System;
 using System.Security.Policy;
 using Spine;
+using System.Linq;
 
 namespace Combat
 {
@@ -43,70 +44,8 @@ namespace Combat
         //}
     }
 
-    public class DmgBuffData
-    {
-        public int dmgBuffID;
-        public bool isBuff;   // true if BUFF and false if DEBUFF
-        public int startRoundNo;
-        public TimeFrame timeFrame;
-        public int buffedNetTime;
-        public int buffCurrentTime;
-        public DmgAltData altData;  // contains value for the buff        
-
-        public DmgBuffData(int dmgBuffID, bool isBuff, int startRoundNo, TimeFrame timeFrame
-                            , int buffedNetTime,  DmgAltData altData)
-        {
-            this.dmgBuffID = dmgBuffID;
-            this.isBuff = isBuff;
-            this.startRoundNo = startRoundNo;
-            this.timeFrame = timeFrame;
-            this.buffedNetTime = buffedNetTime;
-            this.buffCurrentTime = 0;// time counter for the dmgBuff
-            this.altData = altData;
-        }
-    }
-    public class DmgAltData
-    {
-        public AttackType attackType = AttackType.None;
-        public DamageType damageType = DamageType.None;
-        public CultureType cultType = CultureType.None;
-        public RaceType raceType = RaceType.None;
-        public float valPercent =0f;
-
-        public DmgAltData(float valPercent, AttackType attackType, DamageType damageType, CultureType cultType, RaceType raceType )
-        {
-            this.attackType = attackType;
-            this.damageType = damageType;
-            this.cultType = cultType;
-            this.raceType = raceType;
-            this.valPercent = valPercent;
-        }
-
-        //public DmgAltData(AttackType attackType, float valPercent)
-        //{
-        //    this.attackType = attackType; 
-        //    this.valPercent = valPercent;   
-        //} 
-        //public DmgAltData(DamageType damageType, float valPercent)
-        //{
-        //    this.damageType = damageType;
-        //    this.valPercent = valPercent;
-        //}
-        //public DmgAltData(CultureType cultType, float valPercent)
-        //{
-        //    this.cultType = cultType;
-        //    this.valPercent = valPercent;
-        //}
-        //public DmgAltData(RaceType raceType, float valPercent)
-        //{
-        //    this.raceType = raceType;
-        //    this.valPercent = valPercent;
-        //}
-
-    }
-
-
-
+ 
+   
     public class DamageController : MonoBehaviour
     {
         public event Action<DmgAppliedData> OnDamageApplied;
@@ -133,6 +72,7 @@ namespace Combat
         public void Init()
         {
             dmgModel = new DmgModel();
+         
         }
         public bool HitChance()  // only for physical 
         {
@@ -224,9 +164,13 @@ namespace Combat
             this.striker = striker;
             AttackType attackType =
                             SkillService.Instance.GetSkillAttackType((SkillNames)causeName);
-            float DamageModChg = ApplyDmgAltBuff(attackType, _dmgType);
+
+            // ask strike controller do you have a extra dmg buff against me 
+            float damageAlt = striker.GetComponent<StrikeController>()
+                .GetDmgAlt(charController.charModel, attackType, _dmgType ); 
+                
             StatData dmgSD = striker.GetStat(StatsName.damage);
-            float percentDmg = dmgPercentVal + DamageModChg; // copy of Dmg value for magical and physical + Dmg modifiers 
+            float percentDmg = dmgPercentVal + damageAlt; // copy of Dmg value for magical and physical + Dmg modifiers 
 
             float dmg = (float)(UnityEngine.Random.Range(dmgSD.minRange, dmgSD.maxRange) * (percentDmg / 100f));
             int strikerID = striker.charModel.charID;
@@ -325,124 +269,6 @@ namespace Combat
         // COMBAT CHAR MODEL WILL CONTAIN STRIKEDATA, DMGDATA,
 
 
- #region DAMAGE BUFF CONTROLLER
-
-
-        public List<DmgBuffData> allDmgBuffData = new List<DmgBuffData>();
-
-        int dmgBuffID = 0; 
-        int ApplyDmgAltBuff(float valPercent, CauseType causeType, int causeName, int causeByCharID, 
-             TimeFrame timeFrame, int netTime, bool isBuff,
-            AttackType attackType = AttackType.None, DamageType dmgType = DamageType.None,
-            CultureType cultType = CultureType.None, RaceType raceType = RaceType.None)
-        {           
-            DmgAltData dmgAltData = new DmgAltData(valPercent, attackType, dmgType, cultType, raceType);
-            int startRoundNo = CombatService.Instance.currentRound;
-            dmgBuffID++; 
-            
-            DmgBuffData dmgBuffData = new DmgBuffData(dmgBuffID, isBuff,startRoundNo, timeFrame
-                            , netTime, dmgAltData);
-
-            allDmgBuffData.Add(dmgBuffData);
-
-            return dmgBuffID;
-        }
-        public void EOCTick()
-        {
-            foreach (DmgBuffData dmgBuffData in allDmgBuffData)
-            {
-                if (dmgBuffData.timeFrame == TimeFrame.EndOfCombat)
-                {
-                   // RemoveBuffData(buffData);
-                }
-            }
-        }
-        //{
-        //    //float damageMod = 0f;
-
-
-
-
-        //    // multi race n culture flexibility is must
-        //     // add the damage Mod for this race 
-        //     // add the damage mod for this cult 
-
-
-        //    //switch (attackType)
-        //    //{
-        //    //    case AttackType.None:
-        //    //        break;
-        //    //    case AttackType.Melee:
-        //    //        damageMod += charController.charModel.meleeAttackTypeMod;
-        //    //        // MOVE THIS TO COMBAT CHAR MODEL
-
-        //    //        break;
-        //    //    case AttackType.Ranged:
-        //    //        damageMod += charController.charModel.rangedAttackTypeMod;
-        //    //        break;
-        //    //    case AttackType.Remote:
-        //    //        damageMod += charController.charModel.remoteAttackTypeMod;
-        //    //        break;
-        //    //    default:
-        //    //        break;
-        //    //}
-
-        //    //switch (damageType)
-        //    //{
-        //    //    case DamageType.None:
-        //    //        break;
-        //    //    case DamageType.Physical:
-        //    //        damageMod += charController.charModel.physicalSIMod;
-        //    //        break;
-        //    //    case DamageType.StaminaDmg:
-        //    //        damageMod += charController.charModel.physicalSIMod;
-
-        //    //        break;
-        //    //    case DamageType.Air:
-        //    //        damageMod += charController.charModel.physicalSIMod;
-
-
-        //    //        break;
-        //    //    case DamageType.Water:
-        //    //        damageMod += charController.charModel.physicalSIMod;
-
-        //    //        break;
-        //    //    case DamageType.Earth:
-        //    //        damageMod += charController.charModel.physicalSIMod;
-
-        //    //        break;
-        //    //    case DamageType.Fire:
-        //    //        damageMod += charController.charModel.physicalSIMod;
-
-        //    //        break;
-        //    //    case DamageType.Light:
-        //    //        break;
-        //    //    case DamageType.Dark:
-        //    //        break;
-        //    //    case DamageType.Pure:
-        //    //        break;
-        //    //    case DamageType.Buff:
-        //    //        break;
-        //    //    case DamageType.Debuff:
-        //    //        break;
-        //    //    case DamageType.Guard:
-        //    //        break;
-        //    //    case DamageType.Heal:
-        //    //        break;
-        //    //    case DamageType.FortitudeDmg:
-        //    //        break;
-        //    //    case DamageType.DOT:
-        //    //        break;
-        //    //    case DamageType.Move:
-        //    //        break;
-        //    //    default:
-        //    //        break;
-        //    //}
-
-        //    return damageMod;
-
-        //}
-#endregion
         void FortChgOnStrikingCritNFeeble()
         {
             if (strikeType == StrikeType.Normal)

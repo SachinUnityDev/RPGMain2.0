@@ -17,6 +17,7 @@ namespace Interactables
         public override List<int> buffIndex { get; set; }
         public override List<string> displayStrs { get; set; }
 
+        
         public override void GewGawInit()
         {
 

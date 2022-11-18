@@ -20,6 +20,7 @@ namespace Combat
         public CharModData charModData;
         public string directString;    
 
+
         //public BuffData(int buffID, bool isBuff, int startRoundNo, TimeFrame timeFrame, 
         //          int buffedNetTime, CharModData charModData)  // deprecated 
         //{
@@ -73,11 +74,9 @@ namespace Combat
         public int ApplyBuff(CauseType causeType, int causeName, int causeByCharID
                                 , StatsName statName, float value, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
         {
-
             // Actual buff application 
             CharModData charModVal =  charController.ChangeStat( causeType,  causeName, causeByCharID
                                             ,  statName,  value, true);
-
             int currRd = CombatService.Instance.currentRound;
             buffIndex++;
             BuffData buffData = new BuffData(buffIndex,isBuff, currRd, timeFrame, netTime,

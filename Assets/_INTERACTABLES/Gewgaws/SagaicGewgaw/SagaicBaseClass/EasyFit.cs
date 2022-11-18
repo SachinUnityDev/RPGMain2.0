@@ -15,8 +15,8 @@ namespace Interactables
         public override CharController charController { get; set; }
         public override List<int> buffIndex { get; set; }
         public override List<string> displayStrs { get; set; }
+        //+2 Wp and Vigor Upon Dodge: +1 Stamina and Hp Regen, 3 rds
 
-  
         int dmgChgVal;
 
         public override void GewGawInit()

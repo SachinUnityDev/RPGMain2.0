@@ -259,18 +259,18 @@ namespace Common
             }
             if (statName == StatsName.vigor)
             {
-                CharModData charModDataBase = new CharModData(turn, CauseType.StatChecks
-                    , (int)statName, charModData.causeByCharID, charModData.effectedCharNameID,
-                    StatsName.health, modCurrValue * 4f); 
+                //CharModData charModDataBase = new CharModData(turn, CauseType.StatChecks
+                //    , (int)statName, charModData.causeByCharID, charModData.effectedCharNameID,
+                //    StatsName.health, modCurrValue * 4f); 
 
-                SetBaseValue(charModDataBase); 
+                SetMaxValue(StatsName.health, modCurrValue*4); 
             }
             if (statName == StatsName.willpower)
             {
-                CharModData charModDataBase = new CharModData(turn, CauseType.StatChecks
-                   , (int)statName, charModData.causeByCharID, charModData.effectedCharNameID,
-                   StatsName.stamina, modCurrValue * 3f);
-                SetBaseValue(charModDataBase); 
+                //CharModData charModDataBase = new CharModData(turn, CauseType.StatChecks
+                //   , (int)statName, charModData.causeByCharID, charModData.effectedCharNameID,
+                //   StatsName.stamina, modCurrValue * 3f);
+                SetMaxValue(StatsName.stamina, modCurrValue*3); 
             }
             // TBD: Following to be made event based 
             if(GameService.Instance.gameModel.gameState == GameState.InCombat)
@@ -282,18 +282,28 @@ namespace Common
             return charModData; 
         }
 
-        public void SetBaseValue(CharModData charModData)
-        {
-            StatData statData = GetStat(charModData.statModified);
-            float orgValue = statData.baseValue;
-            float diffAmt = charModData.baseVal - statData.baseValue;
+        //public void SetBaseValue(StatsName statName, float val)
+        //{
+        //    //StatData statData = GetStat(charModData.statModified);
+        //    //float orgValue = statData.baseValue;
+        //    //float diffAmt = charModData.baseVal - statData.baseValue;
             
-            statData.currValue += diffAmt;
+        //    //statData.currValue += diffAmt;
 
-            statData.baseValue = charModData.baseVal; 
+        //    //statData.baseValue = charModData.baseVal; 
+            
+        //}
+
+        public void SetMaxValue(StatsName statName, float val)
+        {
+            StatData statData = GetStat(statName);
+            Debug.Log("MAX VALUE changed" + statName +"to " + val); 
+            statData.maxLimit = val; 
+
         }
 
-        
+
+
         void CheckHealth()
         {       
             StatData StatHP = GetStat(StatsName.health); 

@@ -51,6 +51,7 @@ namespace Combat
         FortitudeDmg, 
         DOT,
         Move,
+        Any,
        // HealthDmg,
     }
 

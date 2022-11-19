@@ -30,22 +30,8 @@ namespace Combat
             this.strikeType = strikeType;
             this.targetController = targetController; 
         }
-
-        //public DmgAppliedData(CharController striker, CauseType causeType, int causeName, DamageType dmgType
-        //    , float dmgValue, StrikeType strikeType, AttackType attackType) 
-        //{
-        //    this.striker = striker;
-        //    this.causeType = causeType;
-        //    this.causeName = causeName;
-        //    this.dmgType = dmgType;
-        //    this.dmgValue = dmgValue;
-        //    this.strikeType = strikeType;
-        //    this.attackType = attackType;
-        //}
     }
 
- 
-   
     public class DamageController : MonoBehaviour
     {
         public event Action<DmgAppliedData> OnDamageApplied;
@@ -176,7 +162,7 @@ namespace Combat
 
             // ask strike controller do you have a extra dmg buff against me 
             float damageAlt = striker.GetComponent<StrikeController>()
-                .GetDmgAlt(charController.charModel, attackType, _dmgType ); 
+                        .GetDmgAlt(charController.charModel, attackType, _dmgType ); 
                 
             StatData dmgSD = striker.GetStat(StatsName.damage);
             float percentDmg = dmgPercentVal + damageAlt; // copy of Dmg value for magical and physical + Dmg modifiers 
@@ -255,14 +241,12 @@ namespace Combat
 
                     break;
                 case DamageType.Guard:
-
                     break;
                 case DamageType.Heal:
                     charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatsName.health, dmgPercentVal);
                     break;
                 case DamageType.FortitudeDmg:
                     charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatsName.fortitude, -dmgPercentVal);
-
                     break;
                 //case DamageType.HealthDmg:
                 //    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatsName.health, -dmgPercentVal);

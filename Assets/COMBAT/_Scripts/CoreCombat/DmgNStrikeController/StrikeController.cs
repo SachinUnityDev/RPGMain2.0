@@ -202,7 +202,6 @@ namespace Combat
                         .ApplyDamage(charController, CauseType.ThornsAttack, -1, thornData.damageType, dmgPercentValue, false);
                 }
             }
-
         }
 
         // remove thorns that are time based 
@@ -275,11 +274,65 @@ namespace Combat
         public float GetDmgAlt(CharModel targetModel, AttackType attackType = AttackType.None
             , DamageType damageType = DamageType.None)
         {
-            // 20% physical attack against beastmen
-            // first categories and then search in dmg alt buff List
-            // do not cover 2 tier cases cover only direct cases that's it ! 
+            // 20% physical attack against beastmen            
+            foreach (DmgBuffData dmgBuffData in allDmgBuffData.ToList())
+            {
+                DmgAltData dmgAltData = dmgBuffData.altData;
+                if (dmgAltData.damageType != DamageType.None && dmgAltData.damageType == damageType)
+                {
+                    float val = 0;
+                    if (dmgAltData.raceType != RaceType.None
+                        && dmgAltData.raceType == targetModel.raceType
+                                && dmgAltData.cultType != CultureType.None
+                                && dmgAltData.cultType == targetModel.cultType)
+                    {
 
+                        val = dmgAltData.valPercent; // COMBO RACE AND CULT
 
+                    }
+                    else   // NOT A COMBO OF RACE AND CULT
+                    {
+                        if (dmgAltData.raceType != RaceType.None
+                                  && dmgAltData.raceType == targetModel.raceType)
+                        {
+                            val = dmgAltData.valPercent;
+                        }
+                        if (dmgAltData.cultType != CultureType.None
+                                        && dmgAltData.cultType == targetModel.cultType)
+                        {
+                            val = dmgAltData.valPercent;
+                        }
+                    }
+                    return val; 
+                }
+                else if (dmgAltData.attackType != AttackType.None && dmgAltData.attackType == attackType)
+                {
+                    float val = 0;
+                    if (dmgAltData.raceType != RaceType.None
+                        && dmgAltData.raceType == targetModel.raceType
+                                && dmgAltData.cultType != CultureType.None
+                                && dmgAltData.cultType == targetModel.cultType)
+                    {
+
+                        val = dmgAltData.valPercent; // COMBO RACE AND CULT
+
+                    }
+                    else   // NOT A COMBO OF RACE AND CULT
+                    {
+                        if (dmgAltData.raceType != RaceType.None
+                                  && dmgAltData.raceType == targetModel.raceType)
+                        {
+                            val = dmgAltData.valPercent;
+                        }
+                        if (dmgAltData.cultType != CultureType.None
+                                        && dmgAltData.cultType == targetModel.cultType)
+                        {
+                            val = dmgAltData.valPercent;
+                        }
+                    }
+                    return val;
+                }
+            }
 
             return 0f;
         }

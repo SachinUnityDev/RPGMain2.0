@@ -37,7 +37,7 @@ MonoBehaviour:
   raceTypeHero: 1
   cultType: 7
   classType: 4
-  heroType: 1
+  archeType: 0
   tameAnimalsStrength: 1
   fleeBehaviour: 1
   canBeAmbushed: 0
@@ -84,7 +84,7 @@ MonoBehaviour:
     minRange: 0
     maxRange: 0
     minLimit: 0
-    maxLimit: 0
+    maxLimit: 100
     isClamped: 0
   - statsName: 5
     currValue: 0

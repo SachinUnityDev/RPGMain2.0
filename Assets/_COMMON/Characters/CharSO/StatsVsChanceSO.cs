@@ -43,11 +43,11 @@ namespace Common
                         break;
                     case StatsName.health:
                         statChanceData.minLimit = 0f;  // char Specific 
-                        statChanceData.maxLimit = 100f; 
+                        statChanceData.maxLimit = 100f; // this is not used
                         break;
                     case StatsName.stamina:
                         statChanceData.minLimit = 0f; // char specific
-                        statChanceData.maxLimit = 100f;
+                        statChanceData.maxLimit = 100f; // this is not used
                         break;
                     case StatsName.fortitude:
                         statChanceData.minLimit = -30f;
@@ -55,11 +55,11 @@ namespace Common
 
                     case StatsName.hunger:
                         statChanceData.minLimit = 0f;
-                        statChanceData.maxLimit = 60f; break;
+                        statChanceData.maxLimit = 100f; break;
 
                     case StatsName.thirst:
                         statChanceData.minLimit = 0f;
-                        statChanceData.maxLimit = 60f; break;
+                        statChanceData.maxLimit = 100f; break;
 
                     case StatsName.damage:
                         statChanceData.minLimit = 0f;
@@ -67,8 +67,8 @@ namespace Common
 
                     case StatsName.acc:
                         statChanceData.minLimit = 0f;
-                        statChanceData.maxLimit = 30f;
-                        FillLinearChanceValues(12, 66, 1, 15, 6, statChanceData.allStatsNChances);
+                        statChanceData.maxLimit = 12f;
+                        FillLinearChanceValues(12, 66, 1, 12, 6, statChanceData.allStatsNChances);
                         break;
                     case StatsName.focus:
                         statChanceData.minLimit = 0f;
@@ -109,30 +109,41 @@ namespace Common
                     case StatsName.dodge:
                         statChanceData.minLimit = 0f;
                         statChanceData.maxLimit = 12f; 
-                        FillLinearChanceValues(4, 4,1, 12,4, statChanceData.allStatsNChances);
+                        FillLinearChanceValues(0, 6,1, 12,6, statChanceData.allStatsNChances);
                         break;
                     case StatsName.fireRes:
-                        statChanceData.minLimit = 0f;
+                        statChanceData.minLimit = -30f;
                         statChanceData.maxLimit = 90f; break;
 
                     case StatsName.earthRes:
-                        statChanceData.minLimit = 0f;
+                        statChanceData.minLimit = -30f;
                         statChanceData.maxLimit = 90f; break;
                     case StatsName.waterRes:
-                        statChanceData.minLimit = 0f;
+                        statChanceData.minLimit = -30f;
                         statChanceData.maxLimit = 90f; break;
 
                     case StatsName.airRes:
-                        statChanceData.minLimit = 0f;
+                        statChanceData.minLimit = -30f;
                         statChanceData.maxLimit = 90f; break;
 
                     case StatsName.lightRes:
-                        statChanceData.minLimit = 0f;
+                        statChanceData.minLimit = -20f;
                         statChanceData.maxLimit = 60f; break;
 
                     case StatsName.darkRes:
-                        statChanceData.minLimit = 0f;
+                        statChanceData.minLimit = -20f;
                         statChanceData.maxLimit = 60f; break;
+
+                    case StatsName.fortOrg:
+                        statChanceData.minLimit = -20f;
+                        statChanceData.maxLimit = 20f; break;
+                    case StatsName.hpRegen:
+                        statChanceData.minLimit = -2f;
+                        statChanceData.maxLimit = 6f; break;
+                    case StatsName.staminaRegen:
+                        statChanceData.minLimit = 0f;
+                        statChanceData.maxLimit = 6f; break;
+
 
                     default:
                         break;

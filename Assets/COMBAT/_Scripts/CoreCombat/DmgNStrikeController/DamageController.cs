@@ -52,7 +52,7 @@ namespace Combat
 
         const float hitChanceMin = 30f;
 
-        const float hitChanceMax = 90f;
+        const float hitChanceMax = 93f;
         CharController charController;
         CharController striker;
         StrikeType strikeType = StrikeType.Normal;
@@ -85,15 +85,16 @@ namespace Combat
             float dodge = charController.GetStatChance(StatsName.dodge, dodgeVal);
 
             // Performer
-            GameObject performerGO = CombatService.Instance.currCharOnTurn.gameObject;
+            GameObject strikerGO = CombatService.Instance.currCharOnTurn.gameObject;
             float accVal = CombatService.Instance.currCharOnTurn.GetStat(StatsName.acc).currValue;
             float acc = CombatService.Instance.currCharOnTurn.GetStatChance(StatsName.acc, accVal);
 
-            hitChance = 60f + 6 * (acc - dodge);
+        
+            hitChance = (acc - dodge);
             // create a helper function in CharService to get stat specific data 
             //  GetComponent data and perform operation here 
             // outliers to be discussed here 
-
+          
             if (hitChance < hitChanceMin)
             {
                 hitChance = hitChanceMin;
@@ -103,10 +104,11 @@ namespace Combat
                 hitChance = hitChanceMax;
             }
 
-            if (CharStatesService.Instance.HasCharState(performerGO, CharStateName.Blinded))
+            if (CharStatesService.Instance.HasCharState(strikerGO, CharStateName.Blinded))
             {
-                hitChance = 12f;
+                hitChance= 12f;
             }
+
             return hitChance.GetChance();
         }
         void LuckCheck()
@@ -164,6 +166,13 @@ namespace Combat
             this.striker = striker;
             AttackType attackType =
                             SkillService.Instance.GetSkillAttackType((SkillNames)causeName);
+            // is dodge 
+            if(_dmgType == DamageType.Physical && HitChance())
+            {
+                strikeType = StrikeType.Dodged; 
+                OnDamageApplied?.Invoke(new DmgAppliedData(striker, causeType, causeName, _dmgType, 0f, strikeType, charController));
+                return; 
+            }
 
             // ask strike controller do you have a extra dmg buff against me 
             float damageAlt = striker.GetComponent<StrikeController>()

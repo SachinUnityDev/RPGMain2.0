@@ -37,7 +37,7 @@ MonoBehaviour:
   raceTypeHero: 6
   cultType: 10
   classType: 5
-  heroType: 2
+  archeType: 0
   tameAnimalsStrength: 1
   fleeBehaviour: 2
   canBeAmbushed: 0
@@ -82,8 +82,8 @@ MonoBehaviour:
     desc: Be among those who dare to dare!
     minRange: 0
     maxRange: 0
-    minLimit: 0
-    maxLimit: 0
+    minLimit: -30
+    maxLimit: 30
     isClamped: 0
   - statsName: 4
     currValue: 0
@@ -92,7 +92,7 @@ MonoBehaviour:
     minRange: 0
     maxRange: 0
     minLimit: 0
-    maxLimit: 0
+    maxLimit: 100
     isClamped: 0
   - statsName: 5
     currValue: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
     minRange: 0
     maxRange: 0
     minLimit: 0
-    maxLimit: 0
+    maxLimit: 100
     isClamped: 0
   - statsName: 6
     currValue: 0
@@ -251,7 +251,7 @@ MonoBehaviour:
   - statsName: 22
     currValue: 2
     baseValue: 2
-    desc: Stamina gain per round
+    desc: Percentage value to mitigate incoming Dark damage.
     minRange: 0
     maxRange: 0
     minLimit: 0
@@ -260,7 +260,7 @@ MonoBehaviour:
   - statsName: 23
     currValue: 0
     baseValue: 0
-    desc: 'Health gain per round '
+    desc: Percentage value to mitigate incoming Dark damage.
     minRange: 0
     maxRange: 0
     minLimit: 0
@@ -269,7 +269,7 @@ MonoBehaviour:
   - statsName: 24
     currValue: 0
     baseValue: 0
-    desc: 'Value Fortitude resets to after each combat '
+    desc: Percentage value to mitigate incoming Dark damage.
     minRange: 0
     maxRange: 0
     minLimit: 0

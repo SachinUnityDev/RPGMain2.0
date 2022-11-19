@@ -372,7 +372,6 @@ namespace Common
                 ChangeStat(CauseType.StatChecks, (int)StatsName.fortOrg
                         , charModel.charID, StatsName.fortitude, fortOrgData.currValue);
             }
-
         }
 
         public void RegenStamina()  // for ally and enemies stamina regen is 2 

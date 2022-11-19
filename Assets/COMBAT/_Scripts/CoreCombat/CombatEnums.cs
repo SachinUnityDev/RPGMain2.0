@@ -121,7 +121,8 @@ namespace Combat
         Feeble,// crit and feeble for both magical and Physical
         Crit,//
         Normal,
-        MissedHit,// is only for physical attack 
+        Dodged,// is only for physical attack 
+        
     }
 
     public enum StaticTargetMode

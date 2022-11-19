@@ -418,11 +418,8 @@ namespace Common
         }
         public void ExpPtsLoss(int val) 
         {
-            float addExp = charModel.expBonusModPercent * val;           
-            float valNew = val + addExp; 
-
-            charModel.expPoints -= (int)valNew;
-            int prevlvl = charModel.charLvl--;
+            charModel.expPoints -= (int)val;
+            int prevlvl = charModel.charLvl-1;
             int totalExpPts = CharService.Instance.lvlNExpSO.GetTotalExpPts4Lvl(prevlvl);
             if (charModel.expPoints < totalExpPts)
             {
@@ -435,7 +432,7 @@ namespace Common
             float valNew = val + addExp;
 
             charModel.expPoints += (int)valNew;
-            int nextlvl = charModel.charLvl++; 
+            int nextlvl = charModel.charLvl+1; 
             int totalExpPts = CharService.Instance.lvlNExpSO.GetTotalExpPts4Lvl(nextlvl); 
             if(charModel.expPoints > totalExpPts)
             {

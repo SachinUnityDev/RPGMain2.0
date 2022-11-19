@@ -44,10 +44,8 @@ namespace Common
             
         }
         public void Init()
-        {
-           
+        {           
             //save Service implementation pending here
-
         }
         
         public bool IsCharAvailable()
@@ -60,8 +58,6 @@ namespace Common
             CharController charController = CharService.Instance.GetCharCtrlWithName(charNames);
             CharService.Instance.On_CharAddToParty(charController); 
             // Apply party restrictions here 
-
-
             return true; 
         }
         public void On_PortraitDragResult(bool result)// connect this to doMove and

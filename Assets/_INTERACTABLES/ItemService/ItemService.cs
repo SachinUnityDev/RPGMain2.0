@@ -11,6 +11,9 @@ namespace Interactables
     {
         public List<ItemController> allItemControllers = new List<ItemController>();
         
+        public ItemCardViewController cardViewController;
+
+
         void Start()
         {
 
@@ -31,6 +34,8 @@ namespace Interactables
             }
         }
 
+
+#region GET ITEM CONTROLLERS AND MODELS
         public ItemController GetItemController(CharNames charName)
         {
            ItemController itemController =
@@ -47,6 +52,8 @@ namespace Interactables
         }
 
 
+
+#endregion
     }
 
 

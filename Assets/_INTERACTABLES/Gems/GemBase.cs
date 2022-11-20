@@ -93,6 +93,13 @@ namespace Interactables
             return gemModel;
 
         } // depending on the name copy and Init the params         
+
+        public bool IsDisposable(GameState _State)
+        {
+            return true; 
+        }
+
+       
         public abstract float singleBoost { get; set; }  // if divine gem support gem will provide a boost
         public abstract float doubleBoost { get; set; }        
 

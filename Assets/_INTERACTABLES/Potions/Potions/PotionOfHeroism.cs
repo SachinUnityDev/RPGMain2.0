@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class PotionOfHeroism : PotionsBase, IEquipAble, IConsumable, IDisposable, ISellable , Iitems
+    public class PotionOfHeroism : PotionsBase, IEquipAble, IConsumable, IItemDisposable, ISellable , Iitems
     {
         public override PotionName potionName => PotionName.PotionOfHeroism;
         public override CharNames charName { get; set; }

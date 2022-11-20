@@ -145,7 +145,7 @@ namespace Interactables
 
         public bool IsItemDispoable(Iitems item)
         {
-            IDisposable iDisposable = item as IDisposable;
+            IItemDisposable iDisposable = item as IItemDisposable;
             if (iDisposable == null)
                 return false;
             return true;

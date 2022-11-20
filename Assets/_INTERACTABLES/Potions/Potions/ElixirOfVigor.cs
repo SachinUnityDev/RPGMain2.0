@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class ElixirOfVigor : PotionsBase, IEquipAble, IConsumable, IDisposable, ISellable, Iitems
+    public class ElixirOfVigor : PotionsBase, IEquipAble, IConsumable, IItemDisposable, ISellable, Iitems
     {
         public override PotionName potionName => PotionName.ElixirOfVigor; 
 

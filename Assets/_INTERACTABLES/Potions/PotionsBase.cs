@@ -27,10 +27,9 @@ namespace Interactables
     public interface IEquipAble   // stored in active inventory in combat 
     {
         bool IsEquipAble(GameState _state); 
-
     }
 
-    public interface IDisposable
+    public interface IItemDisposable
     {
         bool IsDisposable(GameState _State);  // probably state can be removed
         void ApplyDisposable(); 

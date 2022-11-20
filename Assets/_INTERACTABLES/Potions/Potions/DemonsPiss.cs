@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class DemonsPiss : PotionsBase, IEquipAble, IConsumable, IDisposable, ISellable, Iitems
+    public class DemonsPiss : PotionsBase, IEquipAble, IConsumable, IItemDisposable, ISellable, Iitems
     {
         public ItemType itemType => ItemType.Potions; 
 

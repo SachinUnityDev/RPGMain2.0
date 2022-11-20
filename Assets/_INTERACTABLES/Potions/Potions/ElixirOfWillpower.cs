@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class ElixirOfWillpower : PotionsBase, IEquipAble, IConsumable, IDisposable, ISellable, Iitems
+    public class ElixirOfWillpower : PotionsBase, IEquipAble, IConsumable, IItemDisposable, ISellable, Iitems
     {
         public override PotionName potionName => PotionName.ElixirOfWillpower;
 

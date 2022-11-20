@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class PotionOfNimbleness : PotionsBase, IEquipAble, IConsumable, IDisposable, ISellable, Iitems
+    public class PotionOfNimbleness : PotionsBase, IEquipAble, IConsumable, IItemDisposable, ISellable, Iitems
     {
         public override PotionName potionName => PotionName.PotionOfNimbleness; 
 

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class FortitudePotion : PotionsBase, IEquipAble, IConsumable, IDisposable,ISellable,Iitems
+    public class FortitudePotion : PotionsBase, IEquipAble, IConsumable, IItemDisposable,ISellable,Iitems
     {
         public override PotionName potionName => PotionName.FortitudePotion;
         public override CharNames charName { get; set; }

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class StaminaPotion : PotionsBase, Iitems, IEquipAble, IConsumable, IDisposable, ISellable 
+    public class StaminaPotion : PotionsBase, Iitems, IEquipAble, IConsumable, IItemDisposable, ISellable 
     {
         public override PotionName potionName => PotionName.StaminaPotion; 
 

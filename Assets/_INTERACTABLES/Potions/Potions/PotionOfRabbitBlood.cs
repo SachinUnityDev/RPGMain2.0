@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class PotionOfRabbitBlood : PotionsBase, Iitems, IEquipAble, IConsumable, IDisposable, ISellable 
+    public class PotionOfRabbitBlood : PotionsBase, Iitems, IEquipAble, IConsumable, IItemDisposable, ISellable 
     {
         public override PotionName potionName => PotionName.PotionOfRabbitblood; 
 

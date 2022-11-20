@@ -12,10 +12,9 @@ namespace Interactables
     {
         [Header("CharSelect")]
         public CharController charSelect;
-
-        [Header("Generic gewgaws")]
+        [Header("Generic gewgaws SO")]
         public List<GenGewgawSO> allGenGewgawSO = new List<GenGewgawSO>();
- 
+
         public List<GenGewgawBase> allGenGewgawbase = new List<GenGewgawBase>();
         public List<GenGewgawModel> allGenGewgawModel = new List<GenGewgawModel>(); 
 

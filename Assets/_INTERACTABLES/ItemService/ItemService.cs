@@ -13,7 +13,8 @@ namespace Interactables
         
         public ItemCardViewController cardViewController;
 
-
+        [Header("Generic gewgaws SO")]
+        public List<GenGewgawSO> allGenGewgawSO = new List<GenGewgawSO>();
         void Start()
         {
 
@@ -50,11 +51,30 @@ namespace Interactables
                 return null;
             }
         }
+        #endregion
+
+        #region GET SCRIPTABLES 
+
+        public GenGewgawSO GetGewgawSO(GenGewgawNames genGewgawName)
+        {
+            foreach (GenGewgawSO genGewgaw in allGenGewgawSO)
+            {
+                if (genGewgaw.genGewgawName == genGewgawName)
+                {
+                    return genGewgaw;
+                }
+            }
+            Debug.Log("GenGewGawSO not found");
+            return null;
+        }
 
 
-
-#endregion
+        #endregion 
     }
+
+
+
+
 
 
 

@@ -119,6 +119,10 @@ namespace Interactables
         Gems,  
         Alcohol,  // to be deleted 
         Meals,// to be added .. only needed in the camp
+        SagaicGewgaws, 
+        PoeticGewgaws,
+        
+
     }
 
 

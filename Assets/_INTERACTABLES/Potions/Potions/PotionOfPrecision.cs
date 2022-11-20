@@ -6,7 +6,7 @@ using Combat;
 
 namespace Interactables
 {
-    public class PotionOfPrecision : PotionsBase, IEquipAble, IConsumable, IDisposable, ISellable , Iitems
+    public class PotionOfPrecision : PotionsBase, IEquipAble, IConsumable, IItemDisposable, ISellable , Iitems
     {
         public override PotionName potionName => PotionName.PotionOfPrecision;
 

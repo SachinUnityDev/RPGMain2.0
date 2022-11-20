@@ -29,7 +29,7 @@ namespace Interactables
         public override void PotionApplyFX1()
         {
             charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                     , StatsName.vigor, +1, TimeFrame.Infinity, potionModel.castTime, true);  // Not a buff 
+                     , StatsName.vigor, +1, TimeFrame.Infinity, -1, true);  // Not a buff 
         }
 
         public override void PotionApplyFX2()

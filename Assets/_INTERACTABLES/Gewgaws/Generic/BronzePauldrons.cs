@@ -20,7 +20,9 @@ namespace Interactables
 
         public void OnHoverItem()
         {
-
+            // get So from the item service using item name 
+            // populate the card using just the SO 
+            // as string s are not dynamic
         }    
 
         public override GenGewgawModel GenGewgawInit(GenGewgawSO genericGewgawSO, GenGewgawQ genGewgawQ)

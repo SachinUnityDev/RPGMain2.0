@@ -21,6 +21,8 @@ MonoBehaviour:
   maxWorldInstance: 12
   HpRegenVal: 1
   bufftimeInRds: 5
-  desc: Helps cure certain sicknesses\n Can be used as an ingredient
+  desc: 
   iconSprite: {fileID: 21300000, guid: 350aa47efc399f649b405391d8ef2227, type: 3}
-  allLines: []
+  allLines:
+  - Helps cure certain sicknesses
+  - Can be used as an Ingredient

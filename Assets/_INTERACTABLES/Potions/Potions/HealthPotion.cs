@@ -28,7 +28,7 @@ namespace Interactables
         public override void PotionApplyFX1()
         {
             charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                                , StatsName.vigor, -1, TimeFrame.EndOfNight, potionModel.castTime, true);
+                                , StatsName.vigor, -2, TimeFrame.EndOfRound, potionModel.castTime, true);
         }
 
         public override void PotionApplyFX2()

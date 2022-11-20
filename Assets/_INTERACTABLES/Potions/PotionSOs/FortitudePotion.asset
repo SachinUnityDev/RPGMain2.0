@@ -23,8 +23,9 @@ MonoBehaviour:
   minCastTime: 1
   maxCastTime: 1
   maxWorldInstance: 9
+  desc: 
   iconSprite: {fileID: 21300000, guid: a8fb696fbfb7f8543baf25a4a8869a24, type: 3}
   allLines:
-  - +22-30<style="Fortitude"> Fortitude </style>
-  - -2<style="Fortitude"> Fortitude Org. </style>until EOQ
+  - Gain 22-30<style="Fortitude"> Fortitude </style>
+  - -2<style="Fortitude"> Fort Origin, </style>until eoq
   - Slight chance for "Potion Addict"

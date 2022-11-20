@@ -29,20 +29,20 @@ namespace Interactables
         }
         public override void PotionApplyFX1()
         {
-            charController.GetComponent<CharStateController>().ApplyImmunityBuff(); // TO BE FILLED 
+            charController.GetComponent<CharStateController>().ApplyImmunityBuff(CharStateName.Soaked); // TO BE FILLED 
             // immune to soaked 
         }
 
         public override void PotionApplyFX2()
         {
             charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                       , StatsName.waterRes, Random.Range(24f, 36f), TimeFrame.EndOfRound, potionModel.castTime, true);
+                       , StatsName.waterRes, Random.Range(24f, 37f), TimeFrame.EndOfRound, potionModel.castTime, true);
         }
 
         public override void PotionApplyFX3()
         {
             charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                    , StatsName.fireRes, Random.Range(-12f, -18f), TimeFrame.EndOfRound, potionModel.castTime, true);
+                    , StatsName.fireRes, Random.Range(-12f, -19f), TimeFrame.EndOfRound, potionModel.castTime, true);
         }
 
         public override void PotionEndFX()

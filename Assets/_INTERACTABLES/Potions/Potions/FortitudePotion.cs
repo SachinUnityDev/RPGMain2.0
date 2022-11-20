@@ -27,13 +27,13 @@ namespace Interactables
             float value = Random.Range(22f, 28f); 
 
             charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                        , StatsName.fortitude, value, TimeFrame.Infinity, potionModel.castTime, true);
+                        , StatsName.fortitude, value, TimeFrame.Infinity, -1, true);
         }
 
         public override void PotionApplyFX2()
         {
             charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                        , StatsName.fortOrg, -2, TimeFrame.EndOfQuest, potionModel.castTime, true); 
+                        , StatsName.fortOrg, -2, TimeFrame.EndOfQuest, 1, true); 
         }
 
         public override void PotionApplyFX3()

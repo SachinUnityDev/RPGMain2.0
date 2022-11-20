@@ -19,12 +19,13 @@ MonoBehaviour:
     silver: 0
     bronze: 12
   fluctuation: 20
-  timeFrame: 4
-  minCastTime: 0
-  maxCastTime: 1
+  timeFrame: 1
+  minCastTime: 30
+  maxCastTime: 40
   maxWorldInstance: 999
+  desc: 
   iconSprite: {fileID: 21300000, guid: b3c1f16d0fe8ef148856f79d60359ea6, type: 3}
   allLines:
-  - Heals 40-60% of<style="Health"> Health </style>
-  - -1 <style="Attributes"> Vigor </style>
+  - Heals 40%-60% of<style="Health"> Health </style>
+  - -2 <style="Attributes"> Vigor </style>
   - Slight chance for "Potion Addict"

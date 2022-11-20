@@ -19,12 +19,13 @@ MonoBehaviour:
     silver: 0
     bronze: 12
   fluctuation: 20
-  timeFrame: 4
-  minCastTime: 0
-  maxCastTime: 1
+  timeFrame: 1
+  minCastTime: 30
+  maxCastTime: 40
   maxWorldInstance: 999
+  desc: 
   iconSprite: {fileID: 21300000, guid: 4eecbc24f1768ff48aad845b263bc4e0, type: 3}
   allLines:
-  - Heals 80-100% of<style="Stamina"> Stamina </style>
-  - -1 <style="Attributes"> Willpower </style>
+  - Heals 80%-100% of<style="Stamina"> Stamina </style>
+  - -1 <style="Attributes">Willpower </style>
   - Slight chance for "Potion Addict"

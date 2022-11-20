@@ -65,7 +65,7 @@ namespace Common
 
         }
 
-        public void ApplyImmunityBuff()
+        public void ApplyImmunityBuff(CharStateName charStateName) // immunity buff for this char State
         {
             // add immunity and remove after the cast time 
 

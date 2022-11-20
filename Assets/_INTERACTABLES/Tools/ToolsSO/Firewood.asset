@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Firewood
   m_EditorClassIdentifier: 
   toolName: 3
-  interactableCurios: 0000000000000000
   inventoryStack: 4
   cost:
     silver: 0
     bronze: 8
   fluctuation: 30
   maxWorldInstance: 100
-  desc: 'Provides fire in camp decreasing chance to get sick. '
+  desc: 
   iconSprite: {fileID: 21300000, guid: acb32a70323d5474c8ab78fcc551c8ae, type: 3}
-  allLines: []
+  allLines:
+  - Provides fire in camp decreasing chance to get sick.

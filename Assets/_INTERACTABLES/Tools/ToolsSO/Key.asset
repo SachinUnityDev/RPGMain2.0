@@ -19,6 +19,8 @@ MonoBehaviour:
     bronze: 6
   fluctuation: 30
   maxWorldInstance: 100
-  desc: Interacts with some quest objects. May be broken.
+  desc: 
   iconSprite: {fileID: 21300000, guid: 66d6ac00767c20a4dab255d1ec2fac8c, type: 3}
-  allLines: []
+  allLines:
+  - Interacts with certain quest objects.
+  - Can be broken.

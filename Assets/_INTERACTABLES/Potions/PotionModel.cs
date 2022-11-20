@@ -14,14 +14,14 @@ namespace Interactables
         public int charID;
         public int potionID; 
         public float potionAddict = 0f;      
-        public int inventoryStack;
-        public Currency cost = new Currency();
+        public int inventoryStack;  // SO data
+        public Currency cost = new Currency();// SO data
         public float fluctuation;
         public int castTime;
-        public int currWorldInstance; 
+        public int currWorldInstance; // to be in item model 
         public int maxWorldInstance;  // max number this potion can have in the game 
-        public List<string> allLines = new List<string>();
-        public SlotType potionLoc = SlotType.None;
+        public List<string> allLines = new List<string>(); // not needed 
+        public SlotType potionLoc = SlotType.None; // store in item model 
 
         public PotionModel(PotionSO potionSO)
         {

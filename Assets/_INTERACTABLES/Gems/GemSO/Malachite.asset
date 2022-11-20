@@ -20,8 +20,10 @@ MonoBehaviour:
     bronze: 72
   fluctuation: 0
   maxWorldInstance: 12
-  desc: Possesses divine essence of Earth
+  minSpecrange: 0
+  maxSpecRange: 0
+  desc: 
   iconSprite: {fileID: 21300000, guid: 45e89863093fcc24eaa5448a96def745, type: 3}
   allLines:
-  - Can be enchanted on certain weapons
-  - +8-12<style="Earth"> Earth Res </style> upon socketing
+  - 'On Socket: +8-12<style="Earth"> Earth Res </style>'
+  - Can be enchanted on certain weapons.

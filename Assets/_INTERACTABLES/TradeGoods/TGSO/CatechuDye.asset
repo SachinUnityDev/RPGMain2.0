@@ -24,6 +24,7 @@ MonoBehaviour:
     modVal: 2
   - npcName: 1
     modVal: 0.6
-  desc: Trade item. HIgh price fluctuation between NPCs.
+  desc: 
   iconSprite: {fileID: 21300000, guid: 9df9a4e98442efd40b50a2884f0828f8, type: 3}
-  allLines: []
+  allLines:
+  - Trade item. HIgh price fluctuation between NPCs.

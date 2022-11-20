@@ -24,6 +24,7 @@ MonoBehaviour:
     modVal: 2
   - npcName: 1
     modVal: 3
-  desc: Trade item. Might look good on the Tavern wall.
+  desc: 
   iconSprite: {fileID: 21300000, guid: 7fa2d85dd4eadce48952e1b770a813ac, type: 3}
-  allLines: []
+  allLines:
+  - Trade item. Might look good on the Tavern wall.

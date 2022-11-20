@@ -12,7 +12,7 @@ namespace Interactables
         public int maxWorldInstace = 0; // Set for all items on init 
     }
 
-    public class ItemModel
+    public class ItemModel  // all the items held by chars
     {
         public CharNames charName;
         List<ItemData> allItems = new List<ItemData> ();
@@ -22,6 +22,10 @@ namespace Interactables
 
         [Header("INV RELATED RECORD")]       
         public SlotType potionLoc = SlotType.None; // store in item model 
+
+
+        PotionModel potionModel;
+
 
         public void AddItem2Ls(Iitems Iitems)
         {

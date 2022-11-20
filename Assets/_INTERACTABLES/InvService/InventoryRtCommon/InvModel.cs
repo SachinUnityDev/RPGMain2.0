@@ -9,7 +9,7 @@ namespace Interactables
     [System.Serializable]
     public class ItemData
     {
-        public ItemType itemType;
+        public ItemType itemType;// should have a item ID for better control
         public int ItemName;
 
         public ItemData(ItemType itemType, int itemName)
@@ -18,9 +18,6 @@ namespace Interactables
             ItemName = itemName;
         }
     }
-
-
-
 
     [System.Serializable]
     public class InvModel   // Deprecated 

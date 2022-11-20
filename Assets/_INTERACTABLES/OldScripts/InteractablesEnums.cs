@@ -121,6 +121,7 @@ namespace Interactables
         Meals,// to be added .. only needed in the camp
         SagaicGewgaws, 
         PoeticGewgaws,
+        RelicGewgaws,
         
 
     }

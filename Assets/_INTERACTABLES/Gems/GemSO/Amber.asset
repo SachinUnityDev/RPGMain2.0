@@ -20,8 +20,10 @@ MonoBehaviour:
     bronze: 48
   fluctuation: 30
   maxWorldInstance: 18
-  desc: Touch and feel the positive energy
+  minSpecrange: 0
+  maxSpecRange: 0
+  desc: 
   iconSprite: {fileID: 21300000, guid: 00c358cc7533e64479bd27158f398b4f, type: 3}
   allLines:
-  - +1<style="Health"> HP Regen </style> at day
-  - Increases potency of Carnelian,  Meranite and Rutele.
+  - 'On Socket: +1<style="Health"> Hp Regen </style> at day.'
+  - Increases potency of Carnelian, Meranite and Rutele.

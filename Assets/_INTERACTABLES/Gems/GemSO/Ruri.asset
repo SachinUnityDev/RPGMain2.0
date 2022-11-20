@@ -20,8 +20,10 @@ MonoBehaviour:
     bronze: 72
   fluctuation: 0
   maxWorldInstance: 12
+  minSpecrange: 0
+  maxSpecRange: 0
   desc: Possesses divine essence of Water
   iconSprite: {fileID: 21300000, guid: 1dd774bea0acc2d4b888878f653aa54e, type: 3}
   allLines:
-  - Can be enchanted on certain weapons
-  - +8-12<style="Water"> Water Res </style> upon socketing
+  - 'On Socket: +8-12<style="Water"> Water Res </style>'
+  - Can be enchanted on certain weapons.

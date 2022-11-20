@@ -20,7 +20,10 @@ MonoBehaviour:
     bronze: 120
   fluctuation: 30
   maxWorldInstance: 4
-  desc: A precious gem. Who knows what emotion it may arouse?
+  minSpecrange: 0
+  maxSpecRange: 0
+  desc: 
   iconSprite: {fileID: 21300000, guid: 4210fbb780c0d984187bb3f38384dda7, type: 3}
   allLines:
-  - "Can be merged with Simple Rings into Gewgaws.\r"
+  - "Merges with Simple Rings/Amulets into Gewgaws.\r"
+  - <i>They say Emerald arouses the feeling of Gluttony.</i>

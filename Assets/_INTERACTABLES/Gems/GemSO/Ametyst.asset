@@ -20,7 +20,10 @@ MonoBehaviour:
     bronze: 160
   fluctuation: 20
   maxWorldInstance: 4
-  desc: A precious gem. Who knows what emotion it may arouse?
+  minSpecrange: 0
+  maxSpecRange: 0
+  desc: 
   iconSprite: {fileID: 21300000, guid: 3d9f647a24dcc4444a5cc16a728627c4, type: 3}
   allLines:
-  - "Can be merged with Simple Rings into Gewgaws.\r"
+  - "Merges with Simple Rings/Amulets into Gewgaws.\r"
+  - <i>They say Ametyst arouses the feeling of Pride.</i>

@@ -20,8 +20,10 @@ MonoBehaviour:
     bronze: 72
   fluctuation: 0
   maxWorldInstance: 12
-  desc: Possesses divine essence of Darkness
+  minSpecrange: 0
+  maxSpecRange: 0
+  desc: 
   iconSprite: {fileID: 21300000, guid: cae7f95a670fdba469db7f725c26966a, type: 3}
   allLines:
-  - Can be enchanted on certain weapons
-  - +6-10<style="Dark"> Dark Res </style>upon socketing
+  - 'On Socket: +6-10<style="Dark"> Dark Res </style>'
+  - Can be enchanted on certain weapons.

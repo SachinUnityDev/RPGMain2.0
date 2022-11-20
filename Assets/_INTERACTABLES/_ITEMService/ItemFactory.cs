@@ -56,11 +56,11 @@ namespace Interactables
             switch (itemType)
             {
                 case ItemType.Potions:
-                    return GetNewPotionItem((PotionName)itemName); 
+                    return GetNewPotionItem((PotionName)itemName);
                 case ItemType.GenGewgaws:
-                    return GetGenGewgaws((GenGewgawNames)itemName);                    
+                    return GetGenGewgaws((GenGewgawNames)itemName);
                 case ItemType.Herbs:
-                    return GetNewHerbItem((HerbNames)itemName);                    
+                    return GetNewHerbItem((HerbNames)itemName);
                 case ItemType.Foods:
                     break;
                 case ItemType.Fruits:
@@ -75,18 +75,22 @@ namespace Interactables
                     break;
                 case ItemType.Tools:
                     break;
-                case ItemType.Teas:
+                case ItemType.Teas: // not in demo 
                     break;
-                case ItemType.Soups:
+                case ItemType.Soups:// not in demo 
                     break;
                 case ItemType.Gems:
-                    return GetNewGemItem((GemName)itemName);                
-                case ItemType.Alcohol:
+                    return GetNewGemItem((GemName)itemName);
+                case ItemType.Alcohol:// not in demo 
                     break;
-                case ItemType.Meals:
+                case ItemType.Meals:// not in demo 
                     break;
                 case ItemType.SagaicGewgaws:
-                    return GetNewSagaicGewgaw((SagaicGewgawNames)itemName);                    
+                    return GetNewSagaicGewgaw((SagaicGewgawNames)itemName);
+                case ItemType.PoeticGewgaws:
+                    break;
+                case ItemType.RelicGewgaws: // not in demo 
+                    break;
                 default:
                     break;
             }

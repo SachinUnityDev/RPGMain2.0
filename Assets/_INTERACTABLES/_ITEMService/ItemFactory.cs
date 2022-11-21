@@ -30,14 +30,20 @@ namespace Interactables
         Dictionary<HerbNames, Type> allHerbs = new Dictionary<HerbNames, Type>();
 
         [Header("TOOLS")]
-        Dictionary<ToolNames, Type> allToolNames = new Dictionary<ToolNames, Type>();
+        Dictionary<ToolNames, Type> allTools = new Dictionary<ToolNames, Type>();
+
+        [Header("Ingredient")]
+        Dictionary<IngredNames, Type> allIngreds = new Dictionary<IngredNames, Type>(); 
+
+
 
         [SerializeField] int gemsCount = 0;
         [SerializeField] int genGewgawCount = 0;
         [SerializeField] int sagaicGewgawCount = 0;
         [SerializeField] int potionCount = 0;
         [SerializeField] int herbCount = 0;
-        [SerializeField] int toolCount = 0; 
+        [SerializeField] int toolCount = 0;
+        [SerializeField] int ingredCount = 0;
         void Start()
         {
             ItemInit();
@@ -50,6 +56,7 @@ namespace Interactables
             HerbsInit();
             GemsInit();
             SagaicGewgawInit();
+            IngredInit();
         }
         public Iitems GetNewItem(ItemType itemType, int itemName)
         {
@@ -66,7 +73,8 @@ namespace Interactables
                 case ItemType.Fruits:
                     break;
                 case ItemType.Ingredients:
-                    break;
+                    return GetNewIngredItem((IngredNames)itemName);
+                 
                 case ItemType.Recipes:
                     break;
                 case ItemType.Scrolls:
@@ -327,7 +335,38 @@ namespace Interactables
         #endregion
 
 
+        #region INGREDIENTS
+        public void IngredInit()
+        {
+            if (allIngreds.Count > 0) return;
+            var getIngreds = Assembly.GetAssembly(typeof(IngredBase)).GetTypes()
+                                   .Where(myType => myType.IsClass
+                                   && !myType.IsAbstract && myType.IsSubclassOf(typeof(IngredBase)));
 
+            foreach (var getIngred in getIngreds)
+            {
+                var t = Activator.CreateInstance(getIngred) as IngredBase;
+
+                allIngreds.Add(t.ingredName, getIngred);
+            }
+            ingredCount = allIngreds.Count;
+        }
+
+        public Iitems GetNewIngredItem(IngredNames ingredName)
+        {
+            foreach (var ingred in allIngreds)
+            {
+                if (ingred.Key == ingredName)
+                {
+                    var t = Activator.CreateInstance(ingred.Value) as Iitems;
+                    return t;
+                }
+            }
+            Debug.Log("Herb base class Not found" + ingredName);
+            return null;
+        }
+
+        #endregion
 
 
     }

@@ -23,7 +23,7 @@ namespace Interactables
         public int itemName => (int)GemName.Ametyst; 
 
         public int maxInvStackSize { get; set; }
-        public SlotType invType { get; set; }
+        public SlotType invSlotType { get; set; }
 
         public override GemModel GemInit(GemSO gemSO, CharController charController)
         {

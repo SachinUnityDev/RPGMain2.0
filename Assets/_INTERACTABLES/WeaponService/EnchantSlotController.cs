@@ -112,7 +112,7 @@ namespace Interactables
         }
         void AddItemOnSlot(InvData invData)
         {
-            invData.item.invType = SlotType.CommonInv;
+            invData.item.invSlotType = SlotType.CommonInv;
             ItemsInSlot.Add(invData);
             InvService.Instance.invMainModel.commonInvItems.Add(invData);
 

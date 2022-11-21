@@ -7,18 +7,33 @@ using Combat;
 
 namespace Interactables
 {
-    public abstract class HerbBase
+    public interface IhealingHerb
     {
-        public HerbNames herbName { get;  }        
-     
 
-        protected CharController charController;
-        public abstract CharNames charName { get; set; }
-        public abstract int charID { get; set; }
-        public abstract HerbModel herbModel { get; set; }
-        public virtual HerbModel HerbInit(HerbSO herbSO, CharController charController)
+    }
+    public interface IIngredient
+    {
+
+    }
+    public interface IConsumableByAbzazulu
+    {
+
+    }
+
+    public abstract class HerbBase 
+    {
+        public abstract HerbNames herbName { get;  } 
+
+        protected  CharController charController;
+        public virtual CharNames charName { get; set; }
+        public  virtual int charID { get; set; }
+        public  virtual HerbModel herbModel { get; set; }
+
+        // item name and charController
+        public virtual HerbModel HerbInit(HerbNames herbName, CharController charController)
         {
             Iitems item = this as Iitems;
+            HerbSO herbSO = ItemService.Instance.GetHerbSO(herbName);
             item.maxInvStackSize = herbSO.maxInventoryStack;
             // CONTROLLERS AND MODELS
             this.charController = charController;
@@ -29,13 +44,16 @@ namespace Interactables
             return herbModel;
 
         }
-
-        public int maxInvStackSize { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public SlotType invType { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        //public int maxInvStackSize { get; set; }
+        //public SlotType invSlotType { get; set; }
         // apply fx method=> remove sickNess after a timedelay
         // herb model cost,inventory slot  and herb .. no max world instance
         // 
-
-
+        public virtual void OnConsumedByAbzazuluFX()
+        {
+            charController.buffController.ApplyBuff(CauseType.Herb, (int)herbName, charID
+            , StatsName.hpRegen, herbModel.HpRegenVal, TimeFrame.EndOfRound, herbModel.bufftimeInRds, true);
+        } 
+      
     }
 }

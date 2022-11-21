@@ -10,11 +10,14 @@ namespace Interactables
   
     public interface Iitems  // Apply this to derived class of all ITEMS
     {
-        ItemType itemType { get;  }
+        ItemType itemType { get; }
         int itemName { get; }
-        int maxInvStackSize { get; set;  }
-        SlotType invType { get; set; }
+        int maxInvStackSize { get; set; }
+        SlotType invSlotType { get; set; }
+
+      //public abstract void InitItem();
         public abstract void OnHoverItem();
+        
     }
 
 
@@ -46,6 +49,9 @@ namespace Interactables
     {
         void ApplyPurchaseable();
     }
+
+
+
     public abstract class PotionsBase 
     {
         public abstract PotionName potionName { get; }

@@ -25,7 +25,7 @@ namespace Interactables
         public int itemName => (int)GemName.Meranite;
 
         public int maxInvStackSize { get; set; }
-        public SlotType invType { get; set; }
+        public SlotType invSlotType { get; set; }
 
         public void EnchantGemFX()
         {

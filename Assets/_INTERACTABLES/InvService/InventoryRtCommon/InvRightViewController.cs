@@ -233,7 +233,7 @@ namespace Interactables
 
         public void OnDragResult(bool result, ItemsDragDrop itemsDragDrop)
         {
-            if (!result && itemsDragDrop.itemDragged.invType == SlotType.CommonInv)
+            if (!result && itemsDragDrop.itemDragged.invSlotType == SlotType.CommonInv)
             {
                 Debug.Log(result + " Drag fail result Invoked ");
                 Transform slotParent = itemsDragDrop.slotParent;

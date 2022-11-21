@@ -14,7 +14,7 @@ namespace Interactables
         public override PotionModel potionModel { get; set ; }
         public ItemType itemType => ItemType.Potions;
         public int itemName => (int)PotionName.PotionOfHeroism;
-        public SlotType invType { get; set; }
+        public SlotType invSlotType { get; set; }
         public int maxInvStackSize { get ; set ; }
         public void OnHoverItem()
         {

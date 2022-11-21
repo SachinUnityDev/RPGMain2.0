@@ -186,7 +186,7 @@ namespace Interactables
         Cucumber,
         Mangosteen,
     }
-    public enum Ingredient  // Can only be ingredient in receipe and cannot be food pr fruits
+    public enum IngredNames  // Can only be ingredient in receipe and cannot be food pr fruits
     {
         None,
         Cardamom =1,
@@ -198,6 +198,17 @@ namespace Interactables
         Pepper,
         Thyme,
         Yeast,
+        SpiderEgg,
+        BatEar,
+        DragonflyWings,
+        FelineHeart,
+        Hoof, 
+        HumanEar, 
+        RatFang, 
+        RatKingScales, 
+        Wheat, 
+        
+
     }
     public enum TGType
     {

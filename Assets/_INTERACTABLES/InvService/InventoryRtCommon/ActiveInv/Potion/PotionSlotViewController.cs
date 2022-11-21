@@ -155,7 +155,7 @@ namespace Interactables
         }
         void AddItemOnSlot(InvData invData)
         {
-            invData.item.invType = SlotType.PotionsActiveInv;
+            invData.item.invSlotType = SlotType.PotionsActiveInv;
             ItemsInSlot.Add(invData);
             activInvPotionViewController.allPotionActiveInvList.Add(invData);
             RefreshImg(invData.item);

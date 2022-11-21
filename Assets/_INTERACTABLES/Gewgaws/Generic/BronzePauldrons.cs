@@ -12,7 +12,7 @@ namespace Interactables
         public int itemName => (int)GenGewgawNames.BronzePauldrons;
 
         public int maxInvStackSize { get; set; }
-        public SlotType invType { get; set; }
+        public SlotType invSlotType { get; set; }
         public override GenGewgawNames genGewgawNames => GenGewgawNames.BronzePauldrons;
 
         public override SuffixBase suffixBase { get; set; }
@@ -29,7 +29,7 @@ namespace Interactables
         {
             GenGewgawModel genGewgawModel = new GenGewgawModel(genericGewgawSO, genGewgawQ);
             genGewgawModel.invType = SlotType.CommonInv;
-            invType = genGewgawModel.invType;
+            invSlotType = genGewgawModel.invType;
             return genGewgawModel;
         }
         public override void EquipGenGewgawFX(CharController charController)

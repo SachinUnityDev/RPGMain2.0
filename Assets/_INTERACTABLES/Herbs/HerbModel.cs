@@ -14,7 +14,6 @@ namespace Interactables
         public int maxInventoryStack = 0;
         public Currency cost;
         public float fluctuation;
-        public int maxWorldInstance;
 
         [Header("Buff on Abzazulus Consumption")]
         public int HpRegenVal;
@@ -24,12 +23,10 @@ namespace Interactables
         {
             charName = charController.charModel.charName;
             charID = charController.charModel.charID;
-
             herbName = herbSO.herbName;
             maxInventoryStack = herbSO.maxInventoryStack;
-            cost = herbSO.cost;
-            fluctuation = herbSO.fluctuation;
-            maxWorldInstance = herbSO.maxWorldInstance;
+            cost = herbSO.cost;    
+            // Only for ABzazulu , he can only consume and will get these buffs
             HpRegenVal = herbSO.HpRegenVal;
             bufftimeInRds = herbSO.bufftimeInRds;
         }

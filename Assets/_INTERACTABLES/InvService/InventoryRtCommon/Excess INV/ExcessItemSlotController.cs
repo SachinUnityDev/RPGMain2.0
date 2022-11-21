@@ -104,7 +104,7 @@ namespace Interactables
         public bool AddItem(Iitems item)
         {
             CharNames charName = InvService.Instance.charSelect;
-            item.invType = SlotType.ExcessInv;
+            item.invSlotType = SlotType.ExcessInv;
             InvData invData = new InvData(charName, item);
 
             if (IsEmpty())
@@ -135,7 +135,7 @@ namespace Interactables
         }
         void AddItemOnSlot(InvData invData)
         {
-            invData.item.invType = SlotType.ExcessInv;
+            invData.item.invSlotType = SlotType.ExcessInv;
             ItemsInSlot.Add(invData);
           
             InvService.Instance.invMainModel.excessInvItems.Add(invData); 

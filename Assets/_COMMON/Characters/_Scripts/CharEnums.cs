@@ -35,7 +35,7 @@ public enum CauseType
     QuestOver, 
     ThornsAttack,
     SagaicGewgaw,
-
+    Herb,
 
 }
 

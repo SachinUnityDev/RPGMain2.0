@@ -86,7 +86,7 @@ namespace Interactables
             allPotionModel.Add(potionModel);
 
            Iitems item = potionBase as Iitems;
-           item.invType = SlotType.CommonInv;
+           item.invSlotType = SlotType.CommonInv;
 
             CharModel charModel = CharService.Instance.GetAllyCharModel(charName);
             if(charModel != null)

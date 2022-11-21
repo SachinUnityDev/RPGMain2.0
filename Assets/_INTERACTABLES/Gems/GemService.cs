@@ -99,7 +99,7 @@ namespace Interactables
 
             GemBase gembase = GetGemBase(_gemName);
             Iitems item = gembase as Iitems;
-            item.invType = _invType;
+            item.invSlotType = _invType;
         }
         public void AddGem2Char(GemBase gemBase)
         {

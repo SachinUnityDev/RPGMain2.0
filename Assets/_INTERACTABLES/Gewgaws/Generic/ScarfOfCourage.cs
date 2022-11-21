@@ -14,7 +14,7 @@ namespace Interactables
         public int itemName => (int)GenGewgawNames.ScarfOfCourage;
 
         public int maxInvStackSize { get; set; }
-        public SlotType invType { get; set; }
+        public SlotType invSlotType { get; set; }
 
         public void OnHoverItem()
         {
@@ -35,7 +35,7 @@ namespace Interactables
 
             GenGewgawModel genGewgawModel = new GenGewgawModel(genericGewgawSO, genGewgawQ);
             genGewgawModel.invType = SlotType.CommonInv;
-            invType = genGewgawModel.invType;
+            invSlotType = genGewgawModel.invType;
 
             return genGewgawModel;
         }

@@ -19,7 +19,7 @@ namespace Interactables
 
         public int itemName => (int) PotionName.PotionOfRabbitblood;
 
-        public SlotType invType { get; set; }
+        public SlotType invSlotType { get; set; }
 
         public int maxInvStackSize { get; set ; }
 

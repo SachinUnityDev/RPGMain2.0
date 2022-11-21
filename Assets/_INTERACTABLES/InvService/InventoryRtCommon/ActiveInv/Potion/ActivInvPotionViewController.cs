@@ -122,7 +122,7 @@ namespace Interactables
 
         public void OnDragResult2PotionActiveInv(bool result, ItemsDragDrop itemsDragDrop)
         {
-            if (!result && itemsDragDrop.itemDragged.invType == SlotType.PotionsActiveInv)
+            if (!result && itemsDragDrop.itemDragged.invSlotType == SlotType.PotionsActiveInv)
             {
                 Debug.Log(result + " Drag fail result Invoked ");
                 Transform slotParent = itemsDragDrop.slotParent;

@@ -76,7 +76,7 @@ namespace Interactables
             AddHerb2Char(herbBase);  // Herb init here too and then added.
                                      // LocChange(_herbName, InvType.CommonInv);
             Iitems item = herbBase as Iitems;
-            item.invType = SlotType.CommonInv; 
+            item.invSlotType = SlotType.CommonInv; 
             InvData invData = new InvData(_charController.charModel.charName
                                                         , herbBase as Iitems);
             InvService.Instance.invMainModel.AddItem2CommInv(invData);
@@ -92,7 +92,7 @@ namespace Interactables
 
             HerbBase herbbase = GetHerbBase(herbName);
             Iitems item = herbbase as Iitems;
-            item.invType = invType;
+            item.invSlotType = invType;
         }
         public void AddHerb2Char(HerbBase herbBase)
         {
@@ -103,7 +103,7 @@ namespace Interactables
 
             HerbNames herbName = herbBase.herbName; 
             HerbSO herbSO = GetHerbModelSO(herbName);
-            HerbModel herbModel = herbBase.HerbInit(herbSO, selectCharCtrl);
+            HerbModel herbModel = herbBase.HerbInit(herbName,selectCharCtrl);
             allHerbModels.Add(herbModel);
         }
 

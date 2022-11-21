@@ -115,7 +115,7 @@ namespace Interactables
         }
         void AddItemOnSlot(InvData invData)
         {
-            invData.item.invType = SlotType.GewgawsActiveInv;
+            invData.item.invSlotType = SlotType.GewgawsActiveInv;
             ItemsInSlot.Add(invData);
             RefreshImg(invData.item);
             if (ItemsInSlot.Count > 1)

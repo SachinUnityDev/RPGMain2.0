@@ -41,7 +41,7 @@ namespace Interactables
                                             .Where(t => t.charName == invData.charName).ToList();
                 if (!InvService.Instance.IsCommInvFull())
                 {
-                    invData.item.invType = SlotType.CommonInv;
+                    invData.item.invSlotType = SlotType.CommonInv;
                     commonInvItems.Add(invData);
                     InvService.Instance.invViewController.AddItem2InVView(invData);
                     return true;
@@ -87,7 +87,7 @@ namespace Interactables
         public bool AddItem2Excess(InvData invData)
         {
 
-            invData.item.invType = SlotType.ExcessInv;
+            invData.item.invSlotType = SlotType.ExcessInv;
             // excess inv drag and drop can be opened whereever inv is open
             return false;
         }

@@ -14,17 +14,26 @@ namespace Interactables
 
     public class ItemModel  // all the items held by chars
     {
+
+        // add remove items here .. depending upon type add to respective list 
+        // do this locally here rather than spreading the process around inv , stash , excess 
+        // oeprations
         public CharNames charName;
         List<ItemData> allItems = new List<ItemData> ();
 
         [Header("POTION RELATED RECORD")]
+        public List<PotionModel> potionModel = new List<PotionModel> ();
+        public List<GemModel> allGemModel = new List<GemModel> ();
+        public List<GenGewgawModel> allGenGewgawModel = new List<GenGewgawModel> ();
+
+
         public float potionAddict = 0f;
 
         [Header("INV RELATED RECORD")]       
         public SlotType potionLoc = SlotType.None; // store in item model 
 
 
-        PotionModel potionModel;
+    
 
 
         public void AddItem2Ls(Iitems Iitems)

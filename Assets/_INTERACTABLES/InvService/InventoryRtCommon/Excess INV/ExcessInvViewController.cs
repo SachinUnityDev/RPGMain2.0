@@ -138,7 +138,7 @@ namespace Interactables
 
         public void OnDragResult2Excess(bool result, ItemsDragDrop itemsDragDrop )
         {
-            if (!result && itemsDragDrop.itemDragged.invType == SlotType.ExcessInv)
+            if (!result && itemsDragDrop.itemDragged.invSlotType == SlotType.ExcessInv)
             {
                 Debug.Log(result + " Drag fail result Invoked ");
                 Transform slotParent = itemsDragDrop.slotParent;

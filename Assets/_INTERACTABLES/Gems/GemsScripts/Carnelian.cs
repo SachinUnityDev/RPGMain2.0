@@ -21,7 +21,7 @@ namespace Interactables
         public ItemType itemType => ItemType.Gems;
         public int itemName => (int)GemName.Carnelian;
         public int maxInvStackSize { get; set; }
-        public SlotType invType { get; set; }
+        public SlotType invSlotType { get; set; }
         public void OnHoverItem()
         {
         }

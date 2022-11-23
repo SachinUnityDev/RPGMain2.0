@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85722c4c77645a844808e050790d57ea, type: 3}
+  m_Name: FlaskOfWater
+  m_EditorClassIdentifier: 
+  foodName: 6
+  shelfLife: 0
+  hpHealMin: 2
+  hpHealMax: 3
+  hungerReliefMin: 0
+  hungerReliefMax: 0
+  thirstReliefMin: 24
+  thirstReliefMax: 36
+  inventoryStack: 4
+  cost:
+    silver: 0
+    bronze: 4
+  fluctuation: 20
+  maxWorldInstance: 100
+  timeFrame: 1
+  castTime: -1
+  iconSprite: {fileID: 21300000, guid: bf29b0befff774e45be99d71c00838ab, type: 3}
+  allLines:
+  - Decent Thirst relief
+  - Slight heal

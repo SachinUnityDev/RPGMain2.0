@@ -31,7 +31,7 @@ namespace Interactables
 
         #region Getters
 
-        public TGSO GetTGSO(TgNames tgName)
+        public TGSO GetTGSO(TGNames tgName)
         {
             foreach (TGSO tg in allTgSOs)
             {
@@ -43,7 +43,7 @@ namespace Interactables
             Debug.Log("trade goods SO Not found");
             return null;
         }
-        public TradeGoodBase GetTgBase(TgNames _tgName)
+        public TradeGoodBase GetTgBase(TGNames _tgName)
         {
             TradeGoodBase tgBase = allTgBases.Find(t => t.tgName == _tgName);
             if (tgBase != null)

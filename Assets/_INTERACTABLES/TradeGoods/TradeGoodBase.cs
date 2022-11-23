@@ -8,6 +8,6 @@ namespace Interactables
 {
     public class TradeGoodBase
     {
-        public TgNames tgName { get; } 
+        public TGNames tgName { get; } 
     }
 }

@@ -9,10 +9,10 @@ namespace Interactables
 {
     public class TradeGoodsFactory : MonoBehaviour
     {
-        public Dictionary<TgNames, Type> allTGs;
+        public Dictionary<TGNames, Type> allTGs;
         void Start()
         {
-            allTGs = new Dictionary<TgNames, Type>();
+            allTGs = new Dictionary<TGNames, Type>();
             InitTradeGoods();  // ON GAME START 
         }
 
@@ -32,7 +32,7 @@ namespace Interactables
             }
         }
 
-        public TradeGoodBase GetTGBase(TgNames _tgName)
+        public TradeGoodBase GetTGBase(TGNames _tgName)
         {
             foreach (var tg in allTGs)
             {

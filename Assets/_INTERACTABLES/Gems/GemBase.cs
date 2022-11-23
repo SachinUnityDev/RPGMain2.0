@@ -66,7 +66,7 @@ namespace Interactables
     }
     public interface IPreciousGem
     {
-        List<TgNames> supportedTradeGoods { get; set; }         
+        List<TGNames> supportedTradeGoods { get; set; }         
 
 
 

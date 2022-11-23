@@ -15,15 +15,10 @@ namespace Interactables
         public float fluctuation;
         public int maxWorldInstance;
 
-        [Header("Desc")]
-        public string desc = "";
-
         [Header("Sprites")]
         public Sprite iconSprite;
         [TextArea(5, 10)]
         public List<string> allLines = new List<string>();
     }
-
-
 }
 

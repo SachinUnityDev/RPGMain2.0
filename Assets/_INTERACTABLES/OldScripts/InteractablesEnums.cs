@@ -167,8 +167,9 @@ namespace Interactables
         Beef,
         Poultry,
         Fish,
-        PieceOfBread,
+        Bread,
         FlaskOfWater,
+        RottenFood,
 
     }
 
@@ -210,14 +211,14 @@ namespace Interactables
         
 
     }
-    public enum TGType
+    public enum TavernSlotType
     {
         None, 
         Pelt, 
         Trophy,
     }
 
-    public enum TgNames
+    public enum TGNames
     {
         None,
         CatechuDye,
@@ -464,6 +465,7 @@ namespace Interactables
         ShrineOfRuru,
         TreeTrunk,
         Whetstone,
+        Any,
     }
 
     public enum LoreNames

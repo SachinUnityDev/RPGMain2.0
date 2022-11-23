@@ -23,15 +23,13 @@ namespace Interactables
     [CreateAssetMenu(fileName = "TradeGoodSO", menuName = "Interactable/TradeGoodSO")]
     public class TGSO : ScriptableObject
     {
-        public TgNames tgName;
+        public TGNames tgName;
         public int maxInventoryStack = 0;
         public Currency cost;
         public float fluctuation;
         public int maxWorldInstance;
         public List<NPCModData> allNPCModData = new List<NPCModData>();
 
-        [Header("Desc")]
-        public string desc = "";
 
         [Header("Sprites")]
         public Sprite iconSprite;

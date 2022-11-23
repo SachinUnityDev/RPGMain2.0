@@ -16,7 +16,7 @@ namespace Interactables
         public ArmorType armorType { get; }
         public WeaponType weaponType { get; }
         public int currCharge { get; set; }
-        public List<TgNames> supportedTradeGoods { get; set; }
+        public List<TGNames> supportedTradeGoods { get; set; }
 
         public ItemType itemType => ItemType.Gems;
 
@@ -27,8 +27,8 @@ namespace Interactables
 
         public override GemModel GemInit(GemSO gemSO, CharController charController)
         {
-            supportedTradeGoods = new List<TgNames>();
-            supportedTradeGoods.Add(TgNames.SimpleRing);
+            supportedTradeGoods = new List<TGNames>();
+            supportedTradeGoods.Add(TGNames.SimpleRing);
 
             Iitems item = this as Iitems;
             item.maxInvStackSize = gemSO.inventoryStack;

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85722c4c77645a844808e050790d57ea, type: 3}
+  m_Name: Venison
+  m_EditorClassIdentifier: 
+  foodName: 1
+  shelfLife: 3
+  hpHealMin: 2
+  hpHealMax: 5
+  hungerReliefMin: 20
+  hungerReliefMax: 30
+  thirstReliefMin: 0
+  thirstReliefMax: 0
+  inventoryStack: 5
+  cost:
+    silver: 0
+    bronze: 7
+  fluctuation: 20
+  maxWorldInstance: 100
+  timeFrame: 1
+  castTime: 12
+  iconSprite: {fileID: 21300000, guid: e0a5d13fdb654d448bc46121b5ddf0f8, type: 3}
+  allLines:
+  - Decent Hunger relief
+  - Slight Heal
+  - Chance to get Haste buff
+  - Might be poisonous

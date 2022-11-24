@@ -25,13 +25,13 @@ namespace Common
                 if (c.charModel.charID != charController.charModel.charID)
                 {
                     Debug.Log("Applied buff Once");
-                    c.charStateController.ApplyBuff(CauseType.CharState, (int)charStateName
+                    c.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                         , charID, StatsName.focus, 1, charStateModel.timeFrame, charStateModel.castTime, true);
                 }
             }
             if (charController != null)
             {
-                charController.charStateController.ApplyBuff(CauseType.CharState, (int)charStateName
+                charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                           , charID, StatsName.morale, -1, charStateModel.timeFrame, charStateModel.castTime, true);
                 charController.SetCurrStat(CauseType.CharState, (int)charStateName, charID,
                     StatsName.focus, 12, true);

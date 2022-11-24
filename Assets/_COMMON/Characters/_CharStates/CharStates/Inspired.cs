@@ -20,12 +20,12 @@ namespace Common
             {
                 if (c != charController)
                 {
-                    c.charStateController.ApplyBuff(CauseType.CharState, (int)charStateName
+                    c.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                         , charID, StatsName.morale, 1, charStateModel.timeFrame, charStateModel.castTime, true);
                 }
             }
 
-            charController.charStateController.ApplyBuff(CauseType.CharState, (int)charStateName
+            charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                        , charID, StatsName.focus, -1, charStateModel.timeFrame, charStateModel.castTime, true);
 
             CharStatesService.Instance.AddImmunity(charController.gameObject, CharStateName.Despaired);

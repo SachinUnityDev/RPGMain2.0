@@ -19,7 +19,7 @@ namespace Common
             // -2 acc .... -3 fortitude regen ...Immune to concentrated
             // ...50% chance to hit friendly targets...50% chance to misfire 
             
-            charController.charStateController.ApplyBuff(CauseType.CharState, (int)charStateName
+            charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                        , charID, StatsName.acc, -2, charStateModel.timeFrame, charStateModel.castTime, true);
 
             CharStatesService.Instance.AddImmunity(charController.gameObject, CharStateName.Concentrated);

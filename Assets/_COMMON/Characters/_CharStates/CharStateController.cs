@@ -7,16 +7,90 @@ using System.Linq;
 
 namespace Common
 {
+    public class CharStateModData  // broadCast Data 
+    {       
+        public CauseType causeType;  // add cause name here 
+        public int causeName;
+        public int causeByCharID;
+        public int effectedCharID;
+        public CharStateName charStateName;
+        public bool isImmunity; 
+
+        public CharStateModData(CauseType causeType, int causeName, int causeByCharID
+                                    , int effectedCharID, CharStateName charStateName, bool isImmunity= false)
+        {
+            this.causeType = causeType;
+            this.causeName = causeName;
+            this.causeByCharID = causeByCharID;
+            this.effectedCharID = effectedCharID;
+            this.charStateName = charStateName;
+            this.isImmunity = isImmunity;
+        }
+    }
+
+    public class CharStateBuffData
+    {
+        public int buffID;
+        public bool isBuff;   // true if BUFF and false if DEBUFF
+        public int startRoundNo;
+        public TimeFrame timeFrame;
+        public int buffedNetTime;
+        public int buffCurrentTime;
+        public CharStateModData charStateModData;
+        public string directString;
+
+        public CharStateBuffData(int buffID, bool isBuff, int startRoundNo, TimeFrame timeFrame, int buffedNetTime
+                                    , CharStateModData charStateModData, string directString="")
+        {
+            this.buffID = buffID;
+            this.isBuff = isBuff;
+            this.startRoundNo = startRoundNo;
+            this.timeFrame = timeFrame;
+            this.buffedNetTime = buffedNetTime;
+            this.buffCurrentTime = 0;
+            this.charStateModData = charStateModData;
+            this.directString = directString;
+        }
+    }
+
+    public class ImmunityBuffData   
+    {
+        public int buffID;
+        public bool isBuff;   // true if BUFF and false if DEBUFF
+        public int startRoundNo;
+        public TimeFrame timeFrame;
+        public int buffedNetTime;
+        public int buffCurrentTime;
+        public CharStateModData charStateModData;
+        public string directString;
+
+        public ImmunityBuffData(int buffID, bool isBuff, int startRoundNo, TimeFrame timeFrame, int buffedNetTime
+                                    , CharStateModData charStateModData, string directString = "")
+        {
+            this.buffID = buffID;
+            this.isBuff = isBuff;
+            this.startRoundNo = startRoundNo;
+            this.timeFrame = timeFrame;
+            this.buffedNetTime = buffedNetTime;
+            this.buffCurrentTime = 0;
+            this.charStateModData = charStateModData;
+            this.directString = directString;
+        }
+    }
+
+
     public class CharStateController : MonoBehaviour
     {
-        public List<BuffData> allBuffs = new List<BuffData>();
-
+        public List<CharStateBuffData> allCharStateBuffs = new List<CharStateBuffData>();
+        public List<ImmunityBuffData> allImmunityBuffs = new List<ImmunityBuffData>();
         CharController charController;
         [SerializeField] List<string> buffStrs = new List<string>();
         [SerializeField] List<string> deDuffStrs = new List<string>();
 
-        public List<CharStatesBase> allCharBases = new List<CharStatesBase>(); 
+        public List<CharStatesBase> allCharBases = new List<CharStatesBase>();
         
+
+        int buffID;
         void Start()
         {
             charController = GetComponent<CharController>();
@@ -25,50 +99,37 @@ namespace Common
 
         }
     #region BUFF & DEBUFF
-        public void ApplyBuff(CauseType causeType, int causeName, int causeByCharID
-                                , StatsName statName, float value, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
+        public void ApplyCharStateBuff(CauseType causeType, int causeName, int causeByCharID
+                                , CharStateName charStateName, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
         {
-            //CharModData charModVal = charController.ChangeStat(causeType, causeName, causeByCharID
-            //                                , statName, value, true);
+            int effectedCharID = charController.charModel.charID;
 
-            //int currRd = CombatService.Instance.currentRound;
+            int currRd = CombatService.Instance.currentRound;
+            CharStateModData charStateModData = new CharStateModData(causeType, causeName, causeByCharID
+                                                                    , effectedCharID, charStateName); 
 
-            //BuffData buffData = new BuffData(isBuff, currRd, timeFrame, netTime,
-            //                                                  charModVal, directStr);
-            //allBuffs.Add(buffData);
+
+            CharStateBuffData charStateBuffData = new CharStateBuffData(buffID, isBuff, currRd, timeFrame, netTime
+                                                                        , charStateModData); 
+
+            allCharStateBuffs.Add(charStateBuffData);
 
         }
 
-        //public void ApplyStaminaRegenBuff(CauseType causeType, int causeName, int causeByCharID,
-        //    StatsName statName, float StaminaChg, TimeFrame timeFrame, int netTime, bool isBuff)
-        //{
-
-
-        //    CharModData charModVal = charController.ChangeStat(causeType, causeName, causeByCharID,
-        //                                statName, StaminaChg); 
-
-        //    int currRd = CombatService.Instance.currentRound;
-
-        //    //BuffData buffData = new BuffData(isBuff, currRd, timeFrame, netTime,
-        //    //                                                  charModVal, directStr);
-
-
-
-        //}
-
-        public void ApplyHealthRegenBuff(CauseType causeType, int causeName, int causeByCharID, float HpChg
-            ,  TimeFrame timeFrame, int netTime, bool isBuff)
+        public void ApplyImmunityBuff(CauseType causeType, int causeName, int causeByCharID
+                                , CharStateName charStateName, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "") // immunity buff for this char State
         {
-            // Should be in the buff controller 
-            
+            int effectedCharID = charController.charModel.charID;
+
+            int currRd = CombatService.Instance.currentRound;
+            CharStateModData charStateModData = new CharStateModData(causeType, causeName, causeByCharID
+                                                                    , effectedCharID, charStateName, true);
 
 
-        }
+            ImmunityBuffData immunityBuffData = new ImmunityBuffData(buffID, isBuff, currRd, timeFrame, netTime
+                                                                        , charStateModData);
 
-        public void ApplyImmunityBuff(CharStateName charStateName) // immunity buff for this char State
-        {
-            // add immunity and remove after the cast time 
-
+            allImmunityBuffs.Add(immunityBuffData);
 
         }
 
@@ -114,12 +175,12 @@ namespace Common
                                      buffData.charModData.causeName, buffData.charModData.causeByCharID
                                      , buffData.charModData.statModified, buffData.charModData.modCurrVal, true);
             }
-            allBuffs.Remove(buffData);
+            allCharStateBuffs.Remove(buffData);
         }
 
         public List<string> GetBuffList()
         {
-            foreach (BuffData buffData in allBuffs)
+            foreach (BuffData buffData in allCharStateBuffs)
             {
                 if (buffData.isBuff)
                 {
@@ -130,7 +191,7 @@ namespace Common
         }
         public List<string> GetDeBuffList()
         {
-            foreach (BuffData buffData in allBuffs)
+            foreach (BuffData buffData in allCharStateBuffs)
             {
                 if (!buffData.isBuff)
                 {
@@ -141,7 +202,7 @@ namespace Common
         }
         public void RoundTick()
         {
-            foreach (BuffData buffData in allBuffs)
+            foreach (BuffData buffData in allCharStateBuffs)
             {
                 if (buffData.timeFrame == TimeFrame.EndOfRound)
                 {
@@ -156,7 +217,7 @@ namespace Common
 
         public void EOCTick()
         {
-            foreach (BuffData buffData in allBuffs)
+            foreach (BuffData buffData in allCharStateBuffs)
             {
                 if (buffData.timeFrame == TimeFrame.EndOfCombat)
                 {
@@ -170,7 +231,7 @@ namespace Common
 
         public void RemoveCharState(CharStateName _charStateName)
         {
-            foreach (BuffData buffData in allBuffs.ToList())
+            foreach (BuffData buffData in allCharStateBuffs.ToList())
             {
                 if (buffData.charModData.causeName == (int)_charStateName)
                 {
@@ -181,7 +242,7 @@ namespace Common
 
         public void UpdateBuffData(CharStateName charStateName)
         {  
-            foreach (BuffData buffData in allBuffs)
+            foreach (BuffData buffData in allCharStateBuffs)
             {
                 if(buffData.charModData.causeType == CauseType.CharSkill)
                 {

@@ -18,13 +18,13 @@ namespace Common
         {
         
             //-2 morale.... immune to burning...	+24 fire res....-40 air res
-            charController.charStateController.ApplyBuff(CauseType.CharState, (int)charStateName
+            charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                        , charID, StatsName.morale, -2, charStateModel.timeFrame, charStateModel.castTime, true);
 
-            charController.charStateController.ApplyBuff(CauseType.CharState, (int)charStateName
+            charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                      , charID, StatsName.fireRes, +24, charStateModel.timeFrame, charStateModel.castTime, true);
 
-            charController.charStateController.ApplyBuff(CauseType.CharState, (int)charStateName
+            charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                      , charID, StatsName.airRes, -40, charStateModel.timeFrame, charStateModel.castTime, true);
 
 

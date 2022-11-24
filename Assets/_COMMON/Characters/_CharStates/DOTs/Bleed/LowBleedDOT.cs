@@ -27,10 +27,10 @@ namespace Common
                 dmgPerRound = 3 + (strikerLvl / 4);
                 ApplyFX(); 
                 CombatEventService.Instance.OnSOT += ApplyFX;
-                charController.charStateController.ApplyBuff(CauseType.CharState, (int)charStateName
+                charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                         , charID, StatsName.dodge, -2, charStateModel.timeFrame, charStateModel.castTime, true);
                 // Stamina regen add to buff controller
-                charController.charStateController.ApplyBuff(CauseType.CharState, (int)charStateName
+                charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                       , charID, StatsName.staminaRegen, -2, charStateModel.timeFrame, charStateModel.castTime, true);
             }
             else if (CharStatesService.Instance.HasCharDOTState(charController.gameObject, CharStateName.PoisonedLowDOT))

@@ -61,10 +61,10 @@ namespace Common
         void ApplyBurn()
         {
 
-            charController.charStateController.ApplyBuff(CauseType.CharState, (int)charStateName
+            charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                         , charID, StatsName.dodge, +2, charStateModel.timeFrame, charStateModel.castTime, true);
 
-            charController.charStateController.ApplyBuff(CauseType.CharState, (int)charStateName
+            charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                     , charID, StatsName.waterRes, +24, charStateModel.timeFrame, charStateModel.castTime, true);
 
 

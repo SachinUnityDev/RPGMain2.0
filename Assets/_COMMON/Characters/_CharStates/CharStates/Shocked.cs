@@ -20,13 +20,13 @@ namespace Common
             //-3 Focus.... immune to Poison...	+24 earth res....+1-2 armor....
             //.Cannot use move skill Incli
 
-            charController.charStateController.ApplyBuff(CauseType.CharState, (int)charStateName
+            charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                        , charID, StatsName.focus, -3, charStateModel.timeFrame, charStateModel.castTime, true);
 
-            charController.charStateController.ApplyBuff(CauseType.CharState, (int)charStateName
+            charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                      , charID, StatsName.earthRes, +24, charStateModel.timeFrame, charStateModel.castTime, true);
 
-            charController.charStateController.ApplyBuffOnRange(CauseType.CharState, (int)charStateName
+            charController.buffController.ApplyBuffOnRange(CauseType.CharState, (int)charStateName
                        , charID, StatsName.armor, +1, +2, charStateModel.timeFrame, charStateModel.castTime, true);
                 
 

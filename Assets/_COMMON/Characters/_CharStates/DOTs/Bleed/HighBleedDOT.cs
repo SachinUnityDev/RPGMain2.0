@@ -26,7 +26,7 @@ namespace Common
                // CombatEventService.Instance.OnEOR += ApplyFX;
                 ApplyFX();
                 CombatEventService.Instance.OnSOT += ApplyFX;
-                charController.charStateController.ApplyBuff(CauseType.CharState, (int)charStateName
+                charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                         , charID, StatsName.dodge, -2, charStateModel.timeFrame, charStateModel.castTime, true);
 
                 // stamina regen -1 

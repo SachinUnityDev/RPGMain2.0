@@ -54,14 +54,14 @@ namespace Common
         void ApplyPoison()
         {
 
-            charController.charStateController.ApplyBuff(CauseType.CharState, (int)charStateName
+            charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                         , charID, StatsName.haste, -2, charStateModel.timeFrame, charStateModel.castTime, true);
 
-            charController.charStateController.ApplyBuff(CauseType.CharState, (int)charStateName
+            charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                     , charID, StatsName.fireRes, -30, charStateModel.timeFrame, charStateModel.castTime, true);
 
 
-            charController.charStateController.ApplyBuff(CauseType.CharState, (int)charStateName
+            charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                     , charID, StatsName.airRes, +20, charStateModel.timeFrame, charStateModel.castTime, true);
 
             CharStatesService.Instance.AddImmunity(charController.gameObject, CharStateName.Shocked);

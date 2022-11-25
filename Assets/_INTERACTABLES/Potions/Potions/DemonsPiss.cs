@@ -28,9 +28,15 @@ namespace Interactables
         }
         public override void PotionApplyFX1()
         {
-            charController.GetComponent<CharStateController>().ApplyImmunityBuff(CharStateName.BurnHighDOT); // TO BE FILLED 
-            charController.GetComponent<CharStateController>().ApplyImmunityBuff(CharStateName.BurnMedDOT);
-            charController.GetComponent<CharStateController>().ApplyImmunityBuff(CharStateName.BurnLowDOT);           
+
+            charController.GetComponent<CharStateController>().ApplyImmunityBuff(CauseType.Potions, (int)potionName, charID
+                                , CharStateName.BurnHighDOT, TimeFrame.Infinity, -1, true); 
+
+            charController.GetComponent<CharStateController>().ApplyImmunityBuff(CauseType.Potions, (int)potionName, charID
+                                , CharStateName.BurnLowDOT, TimeFrame.Infinity, -1, true);
+
+            charController.GetComponent<CharStateController>().ApplyImmunityBuff(CauseType.Potions, (int)potionName, charID
+                                , CharStateName.BurnMedDOT, TimeFrame.Infinity, -1, true);
         }
 
         public override void PotionApplyFX2()

@@ -31,6 +31,13 @@ namespace Interactables
         [Header("All Tools SO")]
         public List<ToolsSO> allToolsSO = new List<ToolsSO>();
 
+        [Header("All Food SO")]
+        public List<FoodSO> allFoodSO = new List<FoodSO>();
+
+        [Header("All Fruit SO")]
+        public List<FruitSO> allFruitSO = new List<FruitSO>();   
+
+
         public CharController selectCharCtrl;
 
 
@@ -102,8 +109,24 @@ namespace Interactables
                 Debug.Log("genGewGaw SO  not found");
             return null;
         }
-
-
+        public FoodSO GetFoodSO(FoodNames foodName)
+        {
+            FoodSO foodSO = allFoodSO.Find(t => t.foodName == foodName);
+            if (foodSO != null)
+                return foodSO;
+            else
+                Debug.Log("foodSO  not found");
+            return null;
+        }
+        public FruitSO GetFruitSO(FruitNames fruitName)
+        {
+            FruitSO fruitSO = allFruitSO.Find(t => t.fruitName == fruitName);
+            if (fruitSO != null)
+                return fruitSO;
+            else
+                Debug.Log("fruitSO  not found");
+            return null;
+        }
 
         #endregion
         // game reload or item found in the game

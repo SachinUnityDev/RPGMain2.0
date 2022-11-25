@@ -1,3 +1,4 @@
+using Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,14 +15,22 @@ namespace Interactables
         public void OnHoverItem()
         {
 
-        }
-        public override void ApplyFX1()
+        } 
+        public override void ApplyFX()
         {
-
-        }
-        public override void ApplyFX2()
-        {
-
+            float chance = 25f;
+            if (chance.GetChance())
+            {
+                charController.buffController.ApplyBuff(CauseType.Food, (int)foodName,
+                 charController.charModel.charID, StatsName.focus, 1, foodSO.timeFrame
+                 , foodSO.castTime, true);
+            }
+            float chance1 = 40f;
+            if (chance1.GetChance())
+            {
+                charController.charStateController.ApplyCharStateBuff(CauseType.Food, (int)foodName
+                    , charController.charModel.charID, CharStateName.PoisonedLowDOT, TimeFrame.Infinity, -1, false);
+            }
         }
     }
 }

@@ -40,7 +40,7 @@ namespace Common
         public virtual void ResetState()
         {
             startRound = CombatService.Instance.currentRound; 
-            charController.charStateController.UpdateBuffData(charStateName); 
+            charController.charStateController.ResetCharStateBuff(charStateName); 
         }
         
         public virtual void StateInit(CharStateModel charStateModel, CharController charController,
@@ -99,7 +99,7 @@ namespace Common
 
         public virtual void EndState()
         {
-           charController.charStateController.RemoveCharState(charStateName);
+           //charController.charStateController.RemoveCharState(charStateName);
 
            if(charController.charModel.InCharStatesList.Any(t => t == charStateName))
            {

@@ -102,18 +102,19 @@ namespace Common
         public void ApplyCharStateBuff(CauseType causeType, int causeName, int causeByCharID
                                 , CharStateName charStateName, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
         {
+            // check immunity list 
             int effectedCharID = charController.charModel.charID;
 
             int currRd = CombatService.Instance.currentRound;
             CharStateModData charStateModData = new CharStateModData(causeType, causeName, causeByCharID
-                                                                    , effectedCharID, charStateName); 
-
+                                                                    , effectedCharID, charStateName);
+            buffID++;
 
             CharStateBuffData charStateBuffData = new CharStateBuffData(buffID, isBuff, currRd, timeFrame, netTime
                                                                         , charStateModData); 
 
             allCharStateBuffs.Add(charStateBuffData);
-
+            // add Char State Buffs FX 
         }
 
         public void ApplyImmunityBuff(CauseType causeType, int causeName, int causeByCharID
@@ -128,81 +129,43 @@ namespace Common
 
             ImmunityBuffData immunityBuffData = new ImmunityBuffData(buffID, isBuff, currRd, timeFrame, netTime
                                                                         , charStateModData);
-
             allImmunityBuffs.Add(immunityBuffData);
-
         }
 
 
-
-        public void ApplyBuffOnRange(CauseType causeType, int causeName, int causeByCharID, StatsName statName
-            , float minChgR, float maxChgR, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
-        {
-            //CharModData charModData = charController.ChangeStatRange(causeType, causeName, causeByCharID
-            //                               , statName, minChgR, maxChgR, true);
-
-            //int currRd = CombatService.Instance.currentRound;
-
-            //BuffData buffData = new BuffData(isBuff, currRd, timeFrame, netTime,
-            //           charModData, directStr);
-
-            //allBuffs.Add(buffData);
+        public void RemoveBuffData(CharStateBuffData charStateBuffData)
+        {          
+          
+            // remove buff FX
+            allCharStateBuffs.Remove(charStateBuffData);
         }
 
-        bool IsRangeChange(BuffData buffData)
+        public List<string> GetCharStateBuffList()
         {
-            if (buffData.charModData.modChgMinR == 0 &&
-                buffData.charModData.modChgMaxR == 0)
-                return false;
-            else
-                return true;
-        }
-
-        public void RemoveBuffData(BuffData buffData)
-        {
-            if (IsRangeChange(buffData))
+            foreach (CharStateBuffData charStateBuffData in allCharStateBuffs)
             {
-
-                charController.ChangeStatRange(buffData.charModData.causeType,
-                                     buffData.charModData.causeName, buffData.charModData.causeByCharID
-                                     , buffData.charModData.statModified
-                                     , buffData.charModData.modChgMinR, buffData.charModData.modChgMinR, true);
-
-            }
-            else
-            {
-                charController.ChangeStat(buffData.charModData.causeType,
-                                     buffData.charModData.causeName, buffData.charModData.causeByCharID
-                                     , buffData.charModData.statModified, buffData.charModData.modCurrVal, true);
-            }
-            allCharStateBuffs.Remove(buffData);
-        }
-
-        public List<string> GetBuffList()
-        {
-            foreach (BuffData buffData in allCharStateBuffs)
-            {
-                if (buffData.isBuff)
+                if (charStateBuffData.isBuff)
                 {
-                    buffStrs.Add(buffData.directString);
+                   // buffStrs.Add(.directString);//// get strings from SO
                 }
             }
             return buffStrs;
         }
-        public List<string> GetDeBuffList()
+        public List<string> GetImmunityList()
         {
-            foreach (BuffData buffData in allCharStateBuffs)
+            foreach (ImmunityBuffData immunityBuffData in allImmunityBuffs)
             {
-                if (!buffData.isBuff)
-                {
-                    deDuffStrs.Add(buffData.directString);
-                }
+                // get immunitylist 
+                //if (!buffData.isBuff)
+                //{
+                //    deDuffStrs.Add(buffData.directString);
+                //}
             }
             return deDuffStrs;
         }
         public void RoundTick()
         {
-            foreach (BuffData buffData in allCharStateBuffs)
+            foreach (CharStateBuffData buffData in allCharStateBuffs)
             {
                 if (buffData.timeFrame == TimeFrame.EndOfRound)
                 {
@@ -217,7 +180,7 @@ namespace Common
 
         public void EOCTick()
         {
-            foreach (BuffData buffData in allCharStateBuffs)
+            foreach (CharStateBuffData buffData in allCharStateBuffs)
             {
                 if (buffData.timeFrame == TimeFrame.EndOfCombat)
                 {
@@ -228,34 +191,23 @@ namespace Common
 
 #endregion
 
-
-        public void RemoveCharState(CharStateName _charStateName)
-        {
-            foreach (BuffData buffData in allCharStateBuffs.ToList())
-            {
-                if (buffData.charModData.causeName == (int)_charStateName)
-                {
-                    RemoveBuffData(buffData);
-                }
-            }
-        }
-
-        public void UpdateBuffData(CharStateName charStateName)
+   
+        public void ResetCharStateBuff(CharStateName charStateName)
         {  
-            foreach (BuffData buffData in allCharStateBuffs)
+            foreach (CharStateBuffData buffData in allCharStateBuffs)
             {
-                if(buffData.charModData.causeType == CauseType.CharSkill)
-                {
-                    if(buffData.charModData.causeName == (int)charStateName)
+                //if(buffData.charStateModData.causeType == CauseType.CharSkill)
+                //{
+                    if(buffData.charStateModData.causeName == (int)charStateName)
                     {
                         buffData.buffCurrentTime = 0;
                     }
-                }
+                //}
             }
         }
 
 
-        public CharStatesBase GetCharStateBase(CharStateName _charStateName)
+        public CharStatesBase GetCurrCharStateBase(CharStateName _charStateName)
         {
             if (allCharBases.Any(t=>t.charStateName == _charStateName))
             {

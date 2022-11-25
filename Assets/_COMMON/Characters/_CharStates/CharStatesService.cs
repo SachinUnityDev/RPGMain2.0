@@ -98,7 +98,7 @@ namespace Common
             if (HasCharState(_charGOEffected, _charStateName))  // increase casttime
             {
                 CharStateModel charStateModel = GetCharStateModel(_charStateName);  // from all charStatemodel list
-                CharStatesBase charStateBase = charController.charStateController.GetCharStateBase(_charStateName);
+                CharStatesBase charStateBase = charController.charStateController.GetCurrCharStateBase(_charStateName);
                 if(charStateModel.timeFrame == TimeFrame.EndOfRound)
                 {                    
                     charStateBase.ResetState();
@@ -148,7 +148,7 @@ namespace Common
         public void RemoveCharState(GameObject _charGO, CharStateName _charStateName)
         {
             CharController charController = _charGO.GetComponent<CharController>();
-            CharStatesBase charStateBase = charController.charStateController.GetCharStateBase(_charStateName);
+            CharStatesBase charStateBase = charController.charStateController.GetCurrCharStateBase(_charStateName);
             if (HasCharState(_charGO, _charStateName))
             {
                 charStateBase.EndState();                 

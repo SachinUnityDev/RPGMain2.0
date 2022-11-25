@@ -20,7 +20,7 @@ namespace Interactables
         {
 
         }
-        public override void ApplyFX2()
+        public override void ApplyFX()
         {
 
         }

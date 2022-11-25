@@ -29,7 +29,8 @@ namespace Interactables
         }
         public override void PotionApplyFX1()
         {
-            charController.GetComponent<CharStateController>().ApplyImmunityBuff(CharStateName.Soaked); // TO BE FILLED 
+            charController.GetComponent<CharStateController>().ApplyImmunityBuff(CauseType.Potions, (int)potionName, charID
+                                , CharStateName.Soaked, TimeFrame.Infinity , -1, true); // TO BE FILLED 
             // immune to soaked 
         }
 

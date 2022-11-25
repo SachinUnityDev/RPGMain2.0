@@ -36,6 +36,8 @@ public enum CauseType
     ThornsAttack,
     SagaicGewgaw,
     Herb,
+    Food, 
+    Fruit,
 
 }
 

@@ -21,6 +21,8 @@ namespace Interactables
         public SlotType invSlotType { get; set; }
 
         public int maxInvStackSize { get; set; }
+        public ItemController itemController { get; set; }
+        public void InitItem() { }
         public void OnHoverItem()
         {
 

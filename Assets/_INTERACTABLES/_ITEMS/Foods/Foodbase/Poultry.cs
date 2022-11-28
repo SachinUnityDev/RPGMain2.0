@@ -12,11 +12,13 @@ namespace Interactables
         public int itemName => (int)FoodNames.Poultry;
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
+        public ItemController itemController { get; set; }
+        public void InitItem() { }
         public void OnHoverItem()
         {
 
         }  
-        public override void ApplyFX()
+        public override void ApplyFX2()
         {
             float chance = 20f;
             if (chance.GetChance())

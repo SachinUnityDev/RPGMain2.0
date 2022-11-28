@@ -17,7 +17,8 @@ namespace Interactables
 
         public override SuffixBase suffixBase { get; set; }
         public override PrefixBase prefixBase { get; set; }
-
+        public ItemController itemController { get; set; }
+        public int itemId { get; set; }
         public void OnHoverItem()
         {
             // get So from the item service using item name 

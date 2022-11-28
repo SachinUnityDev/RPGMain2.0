@@ -20,11 +20,14 @@ namespace Interactables
         public int currCharge { get; set; }
 
         public ItemType itemType => ItemType.Gems;
-
+        public int itemId { get; set; }
         public int itemName => (int)GemName.BlueOnyx;
 
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
+
+        public ItemController itemController { get; set; }
+
         public void OnHoverItem()
         {
 

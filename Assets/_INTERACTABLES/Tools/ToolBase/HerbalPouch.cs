@@ -13,6 +13,8 @@ namespace Interactables
         public int itemName => (int)ToolNames.HerbalPouch;
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
+        public ItemController itemController { get; set; }
+        public void InitItem() { }
         public void OnHoverItem()
         {
 

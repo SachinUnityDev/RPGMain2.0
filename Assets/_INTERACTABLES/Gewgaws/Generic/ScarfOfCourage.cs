@@ -10,20 +10,17 @@ namespace Interactables
     public class ScarfOfCourage : GenGewgawBase, Iitems 
     {
         public ItemType itemType => ItemType.GenGewgaws;
-
         public int itemName => (int)GenGewgawNames.ScarfOfCourage;
-
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
-
+        public ItemController itemController { get; set; }
+        public int itemId { get; set; }
         public void OnHoverItem()
         {
             // get item data here.. 
             // get hold of item cards here 
 
         }
-
-
         public override GenGewgawNames genGewgawNames => GenGewgawNames.ScarfOfCourage;
 
         public override SuffixBase suffixBase { get; set; }

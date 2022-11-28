@@ -24,7 +24,8 @@ namespace Interactables
 
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
-
+        public ItemController itemController { get; set; }
+        public int itemId { get; set; }
         public override GemModel GemInit(GemSO gemSO, CharController charController)
         {
             supportedTradeGoods = new List<TGNames>();

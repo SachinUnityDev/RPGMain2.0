@@ -17,13 +17,17 @@ namespace Interactables
         public ArmorType armorType { get; }
         public WeaponType weaponType { get; }
         public int currCharge { get ; set ; }
-
+        
+      
         public ItemType itemType => ItemType.Gems;
 
         public int itemName => (int)GemName.Amber; 
 
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
+        public ItemController itemController { get; set; }
+        public int itemId { get; set; }
+
         public void OnHoverItem()
         {
 
@@ -45,7 +49,7 @@ namespace Interactables
         {
         }
 
-    
+     
     }
 
 

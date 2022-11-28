@@ -11,6 +11,11 @@ namespace Interactables
     {
         public List<ItemController> allItemControllers = new List<ItemController>();
         
+        public List<Iitems> allItemsInGame = new List<Iitems>();
+
+        [Header("Curr CharSelected")]
+        public CharController selectChar; 
+
         public ItemCardViewController cardViewController;
 
         [Header("Generic gewgaws SO")]

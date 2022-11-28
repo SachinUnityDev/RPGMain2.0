@@ -69,8 +69,6 @@ namespace Interactables
            // InitPotionActiveInv(); 
         }
 
-
-
         public void ShowRightClickList(ItemSlotController itemSlotController)
         {
             int i = 0; 

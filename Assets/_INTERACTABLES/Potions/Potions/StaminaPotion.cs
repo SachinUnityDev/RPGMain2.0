@@ -10,19 +10,15 @@ namespace Interactables
     public class StaminaPotion : PotionsBase, Iitems, IEquipAble, IConsumable, IItemDisposable, ISellable 
     {
         public override PotionName potionName => PotionName.StaminaPotion; 
-
         public override CharNames charName { get; set; }
-
         public override int charID { get; set; }
-
         public override PotionModel potionModel { get ; set ; }
-
         public ItemType itemType => ItemType.Potions; 
-
         public int itemName => (int) PotionName.StaminaPotion;
         public SlotType invSlotType { get; set; }
-
         public int maxInvStackSize { get; set; }
+        public ItemController itemController { get; set; }
+        public void InitItem() { }
         public void OnHoverItem()
         {
 

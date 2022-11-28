@@ -21,10 +21,11 @@ namespace Interactables
 
         public ItemType itemType => ItemType.Gems;
 
-        public int itemName => (int)GemName.Oltu; 
-
+        public int itemName => (int)GemName.Oltu;
+        public int itemId { get; set; }
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
+        public ItemController itemController { get; set; }
 
         public void OnHoverItem()
         {

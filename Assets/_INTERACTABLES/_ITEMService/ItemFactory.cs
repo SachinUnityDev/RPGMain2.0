@@ -33,9 +33,9 @@ namespace Interactables
         Dictionary<ToolNames, Type> allTools = new Dictionary<ToolNames, Type>();
 
         [Header("Ingredient")]
-        Dictionary<IngredNames, Type> allIngreds = new Dictionary<IngredNames, Type>(); 
+        Dictionary<IngredNames, Type> allIngreds = new Dictionary<IngredNames, Type>();
 
-
+        [SerializeField] int itemId = -1; 
 
         [SerializeField] int gemsCount = 0;
         [SerializeField] int genGewgawCount = 0;
@@ -46,6 +46,7 @@ namespace Interactables
         [SerializeField] int ingredCount = 0;
         void Start()
         {
+            itemId =-1;
             ItemInit();
         }
 
@@ -293,6 +294,10 @@ namespace Interactables
                 if (potion.Key == _PotionName)
                 {
                     var t = Activator.CreateInstance(potion.Value) as Iitems;
+                    // itemID 
+                    // slotypeto be updated on call pos
+                    // max stack size to be updated there itself 
+
                     return t;
                 }
             }

@@ -22,6 +22,8 @@ namespace Interactables
 
         public override PotionModel potionModel { get ; set ; }
         public SlotType invSlotType { get ; set; }
+        public ItemController itemController { get; set; }
+        public void InitItem() { }
         public void OnHoverItem()
         {
 

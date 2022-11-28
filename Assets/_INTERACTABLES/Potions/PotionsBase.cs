@@ -10,12 +10,18 @@ namespace Interactables
   
     public interface Iitems  // Apply this to derived class of all ITEMS
     {
+        int itemId { get; set; } 
         ItemType itemType { get; }
         int itemName { get; }
         int maxInvStackSize { get; set; }
+        //above is import for direct inv interation// SO ref hard to find for every click 
         SlotType invSlotType { get; set; }
-
-      //public abstract void InitItem();
+        public virtual void InitItem(int itemId)
+        { 
+            this.itemId =itemId;            
+            
+        } // item controller to be set on init 
+        //charController and CharID to be also set here  
         public abstract void OnHoverItem();
         
     }

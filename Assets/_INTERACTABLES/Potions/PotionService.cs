@@ -7,7 +7,6 @@ using Common;
 namespace Interactables
 {
     
-
     public class PotionService : MonoSingletonGeneric<PotionService>
     {
         [Header("SOs")]

@@ -173,6 +173,25 @@ namespace Interactables
 
     }
 
+    public enum ScrollName
+    {
+        None,
+        ScrollOfWater, 
+        ScrollOfFire,
+        ScrollOfAir,
+        ScrollOfEarth,
+        ScrollOfMoss,
+        ScrollOfDark,
+        ScrollOfLight,
+        Lorescroll,
+    }
+    public enum ScrollType
+    {
+        None, 
+        Enchantment,
+        Lore, 
+    }
+
     public enum FruitNames
     {
         None,

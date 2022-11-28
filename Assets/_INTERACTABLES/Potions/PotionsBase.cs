@@ -14,14 +14,13 @@ namespace Interactables
         ItemType itemType { get; }
         int itemName { get; }
         int maxInvStackSize { get; set; }
-        //above is import for direct inv interation// SO ref hard to find for every click 
+        //above is import for direct inv interation
+        // SO ref hard to find for every click 
         SlotType invSlotType { get; set; }
         public virtual void InitItem(int itemId)
         { 
-            this.itemId =itemId;            
-            
-        } // item controller to be set on init 
-        //charController and CharID to be also set here  
+            this.itemId =itemId;       
+        } 
         public abstract void OnHoverItem();
         
     }

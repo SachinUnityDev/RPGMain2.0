@@ -8,7 +8,6 @@ namespace Interactables
     public class ItemController : MonoBehaviour
     {
 
-
         public CharController charController; 
         public ItemModel itemModel;
 
@@ -25,18 +24,21 @@ namespace Interactables
 
         }
 
-        public void AddItemToActiveInvLs(Iitems Iitem)
-        {
-            if(Iitem.itemType == ItemType.Potions)
-            {
-                itemsInPotionActiveInv.Add(Iitem);
+
+
+
+        //public void AddItemToActiveInvLs(Iitems Iitem)
+        //{
+        //    if(Iitem.itemType == ItemType.Potions)
+        //    {
+        //        itemsInPotionActiveInv.Add(Iitem);
                 
-            }else
-            {
-                itemInGewgawActiveInv.Add(Iitem);   
-            }
-            itemModel.AddItem2Ls(Iitem);
-        }
+        //    }else
+        //    {
+        //        itemInGewgawActiveInv.Add(Iitem);   
+        //    }
+          
+        //}
     }
 }
 

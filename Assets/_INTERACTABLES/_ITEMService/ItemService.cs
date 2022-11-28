@@ -9,15 +9,19 @@ namespace Interactables
 {
     public class ItemService : MonoSingletonGeneric<ItemService>
     {
-        public List<ItemController> allItemControllers = new List<ItemController>();
-        
+        public List<ItemController> allItemControllers = new List<ItemController>();        
         public List<Iitems> allItemsInGame = new List<Iitems>();
+            
 
         [Header("Curr CharSelected")]
         public CharController selectChar; 
 
+        ItemFactory itemFactory;    
+
+
         public ItemCardViewController cardViewController;
 
+#region SO LIST REFERNCES 
         [Header("Generic gewgaws SO")]
         public List<GenGewgawSO> allGenGewgawSO = new List<GenGewgawSO>();
 
@@ -40,10 +44,9 @@ namespace Interactables
         public List<FoodSO> allFoodSO = new List<FoodSO>();
 
         [Header("All Fruit SO")]
-        public List<FruitSO> allFruitSO = new List<FruitSO>();   
+        public List<FruitSO> allFruitSO = new List<FruitSO>();
 
-
-        public CharController selectCharCtrl;
+        #endregion
 
 
         void Start()
@@ -135,9 +138,16 @@ namespace Interactables
 
         #endregion
         // game reload or item found in the game
-        public void InitItemToInv(SlotType slotType, CharNames charName, ItemType itemType, int itemName,
+        public void InitItemToInv(SlotType slotType, ItemType itemType, int itemName,
                                      CauseType causeType, int causeID)
         {
+            Iitems iitems = itemFactory.GetNewItem(itemType, itemName); 
+
+            iitems.invSlotType = slotType;
+
+            // inventory Data
+
+
 
              // get items form item factory                
             // iitems init=> give slot type, inv location ,  

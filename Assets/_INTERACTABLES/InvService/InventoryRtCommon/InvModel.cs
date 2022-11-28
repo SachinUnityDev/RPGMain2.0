@@ -7,7 +7,7 @@ using Common;
 namespace Interactables
 {
     [System.Serializable]
-    public class ItemData
+    public class ItemData  
     {
         public ItemType itemType;// should have a item ID for better control
         public int ItemName;

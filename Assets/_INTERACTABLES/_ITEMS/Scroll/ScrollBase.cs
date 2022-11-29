@@ -10,7 +10,7 @@ namespace Interactables
     public abstract class ScrollBase
     {
         public abstract ScrollName scrollName { get; }
-        public CharController CharController;         
+        public CharController charController;         
         public ScrollSO scrollSO { get; set; }       
     }
 

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollName: 6
   scrollType: 1
+  enchantmentGemName: 5
   inventoryStack: 6
   cost:
     silver: 0

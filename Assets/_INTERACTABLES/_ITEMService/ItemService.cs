@@ -2,7 +2,7 @@ using Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 
 
 namespace Interactables
@@ -33,6 +33,9 @@ namespace Interactables
 
         [Header("All Gems SO")]
         public List<GemSO> allGemsSO = new List<GemSO>();
+
+        [Header("All Scroll SO")]
+        public List<ScrollSO> allScrollSO = new List<ScrollSO>();   
 
         [Header("All Herbs SO ")]
         public List<HerbSO> allHerbSO = new List<HerbSO>();
@@ -98,7 +101,26 @@ namespace Interactables
                 Debug.Log("GemSO  not found");
             return null;
         }
+        public ScrollSO GetScrollSO(ScrollName scrollName)
+        {
+            ScrollSO scrollSO = allScrollSO.Find(t => t.scrollName == scrollName);
+            if (scrollSO != null)
+                return scrollSO;
+            else
+                Debug.Log("scrollSO  not found");
+            return null;
+        }
+        public ScrollSO GetScrollSOFrmGem(GemName gemName)
+        {
+            ScrollSO scrollSO = allScrollSO.Find(t=>t.enchantmentGemName == gemName);
+            if (scrollSO != null)
+                return scrollSO;
+            else
+                Debug.Log("scrollSO  not found");
+            return null;
 
+
+        }
         public SagaicGewgawSO GetSagaicGewgawSO(SagaicGewgawNames sagaicNames)
         {
             SagaicGewgawSO sagaicSO = sagaicGewgawSOs.Find(t => t.sagaicGewgawName == sagaicNames);
@@ -138,12 +160,32 @@ namespace Interactables
 
         #endregion
         // game reload or item found in the game
+        public bool CanEnchantGemThruScroll(CharController charController, GemName gemName)
+        {
+            // get corresponding gem
+            ScrollSO scrollSO = GetScrollSOFrmGem(gemName); 
+            ItemController itemController = charController.gameObject.GetComponent<ItemController>();
+            if(itemController.allScrollConsumed
+                            .Any(t => t.scrollName == scrollSO.scrollName))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public void InitItemToInv(SlotType slotType, ItemType itemType, int itemName,
                                      CauseType causeType, int causeID)
         {
             Iitems iitems = itemFactory.GetNewItem(itemType, itemName); 
 
             iitems.invSlotType = slotType;
+
+
+            // iitem can be missed all together there is nothing go init in an item
+
 
             // inventory Data
 

@@ -13,6 +13,7 @@ namespace Interactables
     {
         public ScrollName scrollName;
         public ScrollType scrollType;
+        public GemName enchantmentGemName;
 
         public int inventoryStack = 0;
         public Currency cost;

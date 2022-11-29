@@ -9,6 +9,33 @@ namespace Interactables
 
     // item charge data , 
     // it
+    public class ScrollConsumedData
+    {
+        public ScrollName scrollName;
+        public int activeDaysRemaining;
+        public int activeDaysNet;
+
+        public ScrollConsumedData(ScrollName scrollName,int activeDaysNet)
+        {
+            this.scrollName = scrollName;            
+            this.activeDaysNet = activeDaysNet;
+            this.activeDaysRemaining = 0;
+        }
+    }
+
+    public class GemChargeData
+    {
+        public GemName gemName;
+        public int chargeRemaining;
+        public int chargeNet;
+
+        public GemChargeData(GemName gemName)
+        {
+            this.gemName = gemName;
+            this.chargeRemaining = 0;
+            this.chargeNet = 12;
+        }
+    }
 
 
     public class ItemModel  // all the items held by chars
@@ -20,7 +47,7 @@ namespace Interactables
         public List<Iitems> itemsEnchanted = new List<Iitems>(); 
         
         public List<Iitems> potionsConsumed = new List<Iitems>();
-
+        public GemChargeData gemChargeData;
         #region 
 
         public void CanItemBeSocketed()

@@ -15,7 +15,10 @@ namespace Common
     public class CalendarService : MonoSingletonGeneric<CalendarService>
     {
         public event Action<DayName> OnCalendarDayStart;
-
+        public event Action<DayName> OnStartOfDay;// can broadcast day, week  and month too here
+        public event Action<DayName> OnStartOfNight;
+        public event Action<WeekName> OnStartOfTheWeek;
+        public event Action<MonthName> OnStartOfTheMonth;
 
         [Header("CURRENT TIME STATE ")]
         public TimeState timeState;
@@ -24,14 +27,18 @@ namespace Common
         [SerializeField] int dayInGame;
         [SerializeField] int dayInYear; 
         [SerializeField] int weekCounter;
-    
+
 
         // does not reset with week / Month
+        [Header("CURRENT DAY WEEK AND MONTH")]
         [SerializeField] DayName gameStartDay; 
         [SerializeField] DayName currDayName;
         [SerializeField] WeekName currentWeek;
         [SerializeField] MonthName currentMonth;
-        [SerializeField] MonthName scrollMonth; 
+        [SerializeField] MonthName scrollMonth;
+
+
+        [Header("DAY,WEEK AND MONTH SOs")]
         [SerializeField] List<DaySO> allDaySOs;
         [SerializeField] List<WeekSO> allWeekSOs;
         [SerializeField] List<MonthSO> allMonthSOs; 
@@ -160,7 +167,27 @@ namespace Common
                 calendarUIController.UpdateMonthPanel(currentMonth, gameStartDay, dayInYear );
                     scrollMonth = currentMonth; // TIE IN POINT 
  
-        }  
+        }
+        #region DAY WEEK AND MONTH EVENT TRIGGERS
+        public void On_StartOfTheDay(DayName dayName)
+        {
+            OnStartOfDay?.Invoke(dayName);
+        }
+        public void On_StartOfTheNight(DayName dayName)
+        {
+            OnStartOfNight?.Invoke(dayName);
+        }
 
+        public void On_StartOfTheWeek(WeekName weekName)
+        {
+            OnStartOfTheWeek?.Invoke(weekName);
+        }
+
+        public void On_StartOfTheMonth(MonthName monthName)
+        {
+            OnStartOfTheMonth?.Invoke(monthName);
+        }
+
+        #endregion
     }
 }

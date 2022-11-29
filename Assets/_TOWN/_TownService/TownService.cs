@@ -17,6 +17,10 @@ namespace Town
         [Header("BUILDING CONTROLLERS")]
         public TempleController templeController;
 
+
+        [Header("TOWN LOCATION")]
+        public BuildingNames selectBuildingName;
+
         void Start()
         {
             townController = GetComponent<TownController>(); 

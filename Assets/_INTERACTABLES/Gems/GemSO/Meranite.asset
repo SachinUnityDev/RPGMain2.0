@@ -14,14 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gemName: 3
   gemType: 0
+  allCharsThatCanBeEnchanted: 
   inventoryStack: 3
   cost:
     silver: 0
     bronze: 72
   fluctuation: 0
   maxWorldInstance: 12
-  minSpecrange: 0
-  maxSpecRange: 0
   desc: 
   iconSprite: {fileID: 21300000, guid: 35c8710e41ebd114da3b6ceec24ae3de, type: 3}
   allLines:

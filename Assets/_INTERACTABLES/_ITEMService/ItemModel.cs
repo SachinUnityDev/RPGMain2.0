@@ -9,13 +9,13 @@ namespace Interactables
 
     // item charge data , 
     // it
-    public class ScrollConsumedData
+    public class ScrollReadData
     {
         public ScrollName scrollName;
         public int activeDaysRemaining;
         public int activeDaysNet;
 
-        public ScrollConsumedData(ScrollName scrollName,int activeDaysNet)
+        public ScrollReadData(ScrollName scrollName,int activeDaysNet)
         {
             this.scrollName = scrollName;            
             this.activeDaysNet = activeDaysNet;
@@ -43,7 +43,8 @@ namespace Interactables
         // item charge saveable format 
 
         public CharNames charName;
-        public List<Iitems> itemsSocketed = new List<Iitems> ();
+        public List<Iitems> divItemsSocketed = new List<Iitems> ();
+        public Iitems supportItemSocketed = null;
         public List<Iitems> itemsEnchanted = new List<Iitems>(); 
         
         public List<Iitems> potionsConsumed = new List<Iitems>();
@@ -52,13 +53,17 @@ namespace Interactables
 
         public void CanItemBeSocketed()
         {
-        
+           //if     
 
         }
-        public void OnItemBeEnchanted()
+        public bool OnItemBeEnchanted(GemBase gemBase)
         {
+            // add gemcharge data if new
+            // recharge new only if charge is zero otherwise it return false; 
+            // save as iitems to enchanted list... remove from Inv List 
+            
 
-
+            return false; 
         }
         
 

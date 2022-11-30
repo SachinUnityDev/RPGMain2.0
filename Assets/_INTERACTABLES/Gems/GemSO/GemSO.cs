@@ -9,13 +9,14 @@ namespace Interactables
     public class GemSO : ScriptableObject
     {
         public GemName gemName;
-        public GemType gemType; 
+        public GemType gemType;
+        public List<CharNames> allCharsThatCanBeEnchanted;         
         public int inventoryStack =0;
         public Currency cost;
         public float fluctuation;
         public int maxWorldInstance;
-        public int minSpecrange = 0;
-        public int maxSpecRange = 0; 
+        //public int minSpecrange = 0;
+        //public int maxSpecRange = 0; 
 
         [Header("Desc")]
         public string desc = "";     

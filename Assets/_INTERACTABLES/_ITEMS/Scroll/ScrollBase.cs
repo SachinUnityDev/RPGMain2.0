@@ -14,9 +14,9 @@ namespace Interactables
         public ScrollSO scrollSO { get; set; }       
     }
 
-    public interface iEnchantmentScroll
+    public interface iReadScroll
     {
-        void ApplyEnchantmenFX();
+        void ApplyScrollReadFX();
         // if weapon is already is enchanted u have option to recharge only AT 0 
         // other wise its wasted 
     }

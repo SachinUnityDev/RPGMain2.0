@@ -110,8 +110,8 @@ namespace Interactables
             GemName gemName = gemBase.gemName;             
             GemSO gemSO = GetGemSO(gemName);
 
-            GemModel gemModel = gemBase.GemInit(gemSO, selectCharCtrl);
-            allGemModels.Add(gemModel);
+            //GemModel gemModel = gemBase.GemInit(gemSO, selectCharCtrl);
+            //allGemModels.Add(gemModel);
         }
 
 

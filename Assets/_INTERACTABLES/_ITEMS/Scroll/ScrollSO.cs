@@ -23,6 +23,8 @@ namespace Interactables
         public TimeFrame timeFrame;
         public int castTime;
 
+        public int rechargeExpMin; 
+        public int rechargeExpMax;
 
         [Header("Sprites")]
         public Sprite iconSprite;
@@ -35,7 +37,10 @@ namespace Interactables
             timeFrame = TimeFrame.EndOfDay;
             inventoryStack = 6;
             fluctuation = 30;
-            maxWorldInstance = 12; 
+            maxWorldInstance = 12;
+            rechargeExpMax = 10; 
+            rechargeExpMin = 5;
+
         }
     }
 }

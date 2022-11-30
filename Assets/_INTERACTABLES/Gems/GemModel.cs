@@ -45,7 +45,7 @@ namespace Interactables
             this.fluctuation = gemSO.fluctuation;
             this.maxWorldInstance = gemSO.maxWorldInstance;
             this.allLines = gemSO.allLines.DeepClone();
-            this.rangeVal = Random.Range(gemSO.minSpecrange, gemSO.maxSpecRange);
+           // this.rangeVal = Random.Range(gemSO.minSpecrange, gemSO.maxSpecRange);
             this.charName = charController.charModel.charName;
             // write algo to find range style here and replace or add RangeVal here 
 

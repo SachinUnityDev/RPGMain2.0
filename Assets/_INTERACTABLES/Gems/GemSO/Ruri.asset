@@ -14,14 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gemName: 4
   gemType: 0
+  allCharsThatCanBeEnchanted: 0700000004000000
   inventoryStack: 3
   cost:
     silver: 0
     bronze: 72
   fluctuation: 0
   maxWorldInstance: 12
-  minSpecrange: 0
-  maxSpecRange: 0
   desc: Possesses divine essence of Water
   iconSprite: {fileID: 21300000, guid: 1dd774bea0acc2d4b888878f653aa54e, type: 3}
   allLines:

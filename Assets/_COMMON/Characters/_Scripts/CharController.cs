@@ -29,7 +29,11 @@ namespace Common
         [Header("Common Controller")]
         public BuffController buffController;
         public CharStateController charStateController;
-       
+
+        [Header("Item Controller")]
+        public ItemController itemController;
+
+
         float prevHPVal = 0f;
         float prevStaminaVal = 0f; 
 
@@ -38,10 +42,15 @@ namespace Common
            // charController = gameObject?.GetComponent<CharController>(); // deprecated 
             buffController=  gameObject.AddComponent<BuffController>();
             charStateController = gameObject.AddComponent<CharStateController>();
-            
+            itemController = gameObject.AddComponent<ItemController>();
+
+
             // CombatEventService.Instance.OnSOT += ()=> PopulateOverCharBars(false); 
             CombatEventService.Instance.OnEOC += FortitudeReset2FortOrg;
             CombatEventService.Instance.OnSOTactics += AddControllerOnCombatStart; 
+
+
+
         }
         public CharModel InitiatizeController(CharacterSO _charSO)
         {
@@ -50,7 +59,6 @@ namespace Common
                 charModel = new CharModel(_charSO);
                 CharService.Instance.lastCharID++;
                 charModel.charID = CharService.Instance.lastCharID; 
-
             }
             else
             {

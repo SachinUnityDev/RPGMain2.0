@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 
 namespace Interactables
 {
     public class ItemService : MonoSingletonGeneric<ItemService>
     {
+        public event Action<CharController, GemName> OnGemSocketed; 
+
         public List<ItemController> allItemControllers = new List<ItemController>();        
         public List<Iitems> allItemsInGame = new List<Iitems>();
             
@@ -158,14 +161,32 @@ namespace Interactables
             return null;
         }
 
+
+
         #endregion
+
+        #region GETTERS 
+        
+        public GemType GetGemType(GemName gemName)
+        {
+            GemType gemType =
+                        allGemsSO.Find(t => t.gemName == gemName).gemType;
+            if (gemType != 0)
+                return gemType;
+            else
+                Debug.Log("GemType Not found");
+            return 0; 
+        }
+
+        #endregion
+
         // game reload or item found in the game
         public bool CanEnchantGemThruScroll(CharController charController, GemName gemName)
         {
             // get corresponding gem
             ScrollSO scrollSO = GetScrollSOFrmGem(gemName); 
             ItemController itemController = charController.gameObject.GetComponent<ItemController>();
-            if(itemController.allScrollConsumed
+            if(itemController.allScrollRead
                             .Any(t => t.scrollName == scrollSO.scrollName))
             {
                 return true;

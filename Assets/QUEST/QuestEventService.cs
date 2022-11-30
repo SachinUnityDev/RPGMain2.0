@@ -10,10 +10,7 @@ namespace Common
     {
         public event Action OnSOQ; 
         public event Action OnEOQ;
-        public event Action <DayName> OnStartOfDay;// can broadcast day, week  and month too here
-        public event Action <DayName> OnStartOfNight;
-        public event Action<WeekName> OnStartOfTheWeek;
-        public event Action<MonthName> OnStartOfTheMonth;
+
 
 
         public event Action<LandscapeNames> OnPartyLocChange;       
@@ -59,24 +56,7 @@ namespace Common
             allyPartyList.ForEach(t => CharService.Instance.SpawnCompanions(t)); 
         }
 
-        public void On_StartOfTheDay(DayName dayName)
-        {
-            OnStartOfDay?.Invoke(dayName); 
-        }
-        public void On_StartOfTheNight(DayName dayName)
-        {
-            OnStartOfNight?.Invoke(dayName);
-        }
-
-        public void On_StartOfTheWeek(WeekName weekName)
-        {
-            OnStartOfTheWeek?.Invoke(weekName); 
-        }
-
-        public void On_StartOfTheMonth(MonthName monthName)
-        {
-            OnStartOfTheMonth?.Invoke(monthName);
-        }
+  
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Q))

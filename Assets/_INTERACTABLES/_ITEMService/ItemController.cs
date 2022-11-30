@@ -6,6 +6,7 @@ using Combat;
 using System.Linq;
 using UnityEditor;
 using Town;
+using UnityEditor.ShaderGraph.Internal;
 
 namespace Interactables
 {
@@ -18,8 +19,9 @@ namespace Interactables
         public List<Iitems> itemsInPotionActiveInv = new List<Iitems>();
         public List<Iitems> itemInGewgawActiveInv = new List<Iitems>();
 
-        public List<ScrollConsumedData> allScrollConsumed= new List<ScrollConsumedData>();
+        public List<ScrollReadData> allScrollRead= new List<ScrollReadData>();
 
+        public float multFx = 1f; 
 
         public void Init()
         {
@@ -28,21 +30,24 @@ namespace Interactables
 
         void Start()
         {
-            CalendarService.Instance.OnStartOfDay += (DayName dayName)=>OnDayTick(); 
+            CalendarService.Instance.OnStartOfDay += (DayName dayName)=>OnDayTickOnScroll(); 
         }
 
-        public void OnScrollConsumed(ScrollName scrollName)
+        public void OnScrollRead(ScrollName scrollName)
         {
             ScrollSO scrollSO = ItemService.Instance.GetScrollSO(scrollName);
-            ScrollConsumedData scrollConsumedData = new ScrollConsumedData(scrollName
+            ScrollReadData scrollReadData = new ScrollReadData(scrollName
                                                     , scrollSO.castTime); 
-            allScrollConsumed.Add(scrollConsumedData);  
+            allScrollRead.Add(scrollReadData);  
         }
 
-        public bool EnchantTheWeaponThruScroll(GemName gemName)
-        {         
+        public bool EnchantTheWeaponThruScroll(GemBase gemBase)
+        {
+            GemName gemName = gemBase.gemName; 
+
             if(ItemService.Instance.CanEnchantGemThruScroll(charController, gemName))
             {
+               // itemModel.itemsEnchanted.Add()
                 itemModel.gemChargeData = new GemChargeData(gemName);
                 return true;
             }
@@ -54,16 +59,71 @@ namespace Interactables
             // to be linked to the town scene 
             return false; 
         }
-        void OnDayTick()
+        void OnDayTickOnScroll()
         {
-            foreach (ScrollConsumedData scrollData in allScrollConsumed.ToList())
+            foreach (ScrollReadData scrollData in allScrollRead.ToList())
             {                
                 if (scrollData.activeDaysRemaining >= scrollData.activeDaysNet)
                 {
-                    allScrollConsumed.Remove(scrollData); 
+                    allScrollRead.Remove(scrollData); 
                 }
                 scrollData.activeDaysRemaining++; 
             }
+        }
+
+        public void OnSocketSupportGem(GemBase gemBase)
+        {
+            Iitems item = gemBase as Iitems;
+            itemModel.supportItemSocketed = item;
+            if(itemModel.divItemsSocketed.Count == 0) return;
+            UpdateMultValue();
+
+            //APPLY FX on divine gem
+            foreach (var divGems in itemModel.divItemsSocketed)
+            {
+               IDivGem gem = divGems as IDivGem;
+                gem.ClearSocketBuffs();
+                gem.SocketedFX(multFx);
+            }
+        }
+        public void OnSocketDivineGem(GemBase gemBase)
+        {
+            Iitems item = gemBase as Iitems;
+            itemModel.divItemsSocketed.Add(item);
+            UpdateMultValue();
+            foreach (var divGems in itemModel.divItemsSocketed)
+            {
+                IDivGem gem = divGems as IDivGem;
+                gem.ClearSocketBuffs();
+                gem.SocketedFX(multFx);
+            }
+        }
+
+        void UpdateMultValue()
+        {
+            int count = 0;
+            if (itemModel.supportItemSocketed == null) return;
+
+            ISupportGem supportGem = itemModel.supportItemSocketed as ISupportGem;
+            foreach (Iitems item in itemModel.divItemsSocketed)
+            {
+                foreach(GemName gemName in supportGem.divineGemsSupported)
+                {
+                    if(item.itemName == (int)gemName)
+                    {
+                        count++; 
+                    }
+                }
+            }
+            if (count == 0)
+                multFx = 1f;
+            else if (count == 1)
+                multFx = 1.3f;
+            else if (itemModel.divItemsSocketed[0].itemName 
+                            == itemModel.divItemsSocketed[1].itemName)
+                multFx = 1.6f;
+            else if (count == 2)
+                multFx = 1.3f;
         }
 
         //public void AddItemToActiveInvLs(Iitems Iitem)

@@ -110,8 +110,8 @@ namespace Interactables
                 iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>(); 
                 if(iSlotable.ItemsInSlot.Count > 0)
                 {
-                    if (iSlotable.ItemsInSlot[0].item.itemName == item.itemName
-                        && iSlotable.ItemsInSlot[0].item.itemType == item.itemType)
+                    if (iSlotable.ItemsInSlot[0].itemName == item.itemName
+                        && iSlotable.ItemsInSlot[0].itemType == item.itemType)
                     {
                         if (iSlotable.AddItem(item))
                         {

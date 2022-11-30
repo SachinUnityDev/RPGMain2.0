@@ -63,7 +63,7 @@ namespace Interactables
             {
                 CreateClone();
             }
-            itemDragged = iSlotable.ItemsInSlot[0].item;
+            itemDragged = iSlotable.ItemsInSlot[0];
             iSlotable.RemoveItem();
            
             canvasGroup.blocksRaycasts = false;

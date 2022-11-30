@@ -79,7 +79,7 @@ namespace Interactables
             item.invSlotType = SlotType.CommonInv; 
             InvData invData = new InvData(_charController.charModel.charName
                                                         , herbBase as Iitems);
-            InvService.Instance.invMainModel.AddItem2CommInv(invData);
+            InvService.Instance.invMainModel.AddItem2CommInv(herbBase as Iitems);
         }
 
 

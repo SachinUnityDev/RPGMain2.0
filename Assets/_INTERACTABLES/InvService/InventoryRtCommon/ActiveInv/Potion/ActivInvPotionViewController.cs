@@ -22,7 +22,7 @@ namespace Interactables
         [SerializeField] CharNames charSelect;
 
         // get and set items
-        public List<InvData> allPotionActiveInvList = new List<InvData>();
+        public List<Iitems> allPotionActiveInvList = new List<Iitems>();
 
         public Transform rightClickOpts;
 

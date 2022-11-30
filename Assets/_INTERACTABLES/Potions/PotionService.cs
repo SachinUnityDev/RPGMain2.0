@@ -91,7 +91,7 @@ namespace Interactables
             if(charModel != null)
             {
                 InvData invData = new InvData(charModel.charName, item);
-                InvService.Instance.invMainModel.AddItem2CommInv(invData);
+                InvService.Instance.invMainModel.AddItem2CommInv(item);
             }
             else
             {

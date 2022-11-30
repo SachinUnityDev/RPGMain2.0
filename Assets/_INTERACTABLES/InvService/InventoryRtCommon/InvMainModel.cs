@@ -22,17 +22,17 @@ namespace Interactables
     [System.Serializable]
     public class InvMainModel 
     {
-        public List<InvData> commonInvItems = new List<InvData>();
+        public List<Iitems> commonInvItems = new List<Iitems>();
         // Abbas 3 X 6,  each added Companion has 2X6 (Locked)(Town, QuestPrepPhase, in camp, in MapInteraction)
         //public List<Iitems> persCommInvItems = new List<Iitems>(); 
 
         public List<Iitems> stashInvIntems = new List<Iitems>();
         // 6 X 6 behaves like a common Inventory (Open Town/House) 
 
-        public List<InvData> excessInvItems = new List<InvData>();
+        public List<Iitems> excessInvItems = new List<Iitems>();
         // 4X6 Behaves like a Excess Inv inv ()        
 
-        public bool AddItem2CommInv(InvData invData)
+        public bool AddItem2CommInv(Iitems item)
         {
             //if (invData.charName == CharNames.Abbas_Skirmisher)
             //{
@@ -41,9 +41,9 @@ namespace Interactables
                 //                            .Where(t => t.charName == invData.charName).ToList();
                 if (!InvService.Instance.IsCommInvFull())
                 {
-                    invData.item.invSlotType = SlotType.CommonInv;
-                    commonInvItems.Add(invData);
-                    InvService.Instance.invViewController.AddItem2InVView(invData.item);
+                    item.invSlotType = SlotType.CommonInv;
+                    commonInvItems.Add(item);
+                    InvService.Instance.invViewController.AddItem2InVView(item);
                     return true;
                 }
                 else
@@ -69,7 +69,7 @@ namespace Interactables
 
         public bool RemoveItem2CommInv(InvData invData)
         {
-            commonInvItems.Remove(invData);
+            commonInvItems.Remove(invData.item);
             return false;
         }
 
@@ -81,11 +81,11 @@ namespace Interactables
             }
         }
 
-        public bool AddItem2Excess(InvData invData)
+        public bool AddItem2Excess(Iitems item)
         {
 
-            invData.item.invSlotType = SlotType.ExcessInv;
-            excessInvItems.Add(invData);
+            item.invSlotType = SlotType.ExcessInv;
+            excessInvItems.Add(item);
             // excess inv drag and drop can be opened whereever inv is open
             return false;
         }

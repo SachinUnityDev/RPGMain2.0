@@ -13,7 +13,7 @@ namespace Interactables
     public class PotionSlotViewController : MonoBehaviour, IDropHandler, IPointerClickHandler, iSlotable
     {
         public int slotID { get; set; }
-        public List<InvData> ItemsInSlot { get; set; } = new List<InvData>();
+        public List<Iitems> ItemsInSlot { get; set; } = new List<Iitems>();
         public SlotType slotType => SlotType.PotionsActiveInv;
 
         [Header("Daddy")]
@@ -96,8 +96,8 @@ namespace Interactables
 
         public bool HasSameItem(Iitems item)
         {
-            if (ItemsInSlot[0].item.itemName == item.itemName
-                && ItemsInSlot[0].item.itemType == item.itemType)
+            if (ItemsInSlot[0].itemName == item.itemName
+                && ItemsInSlot[0].itemType == item.itemType)
                 return true;
             else
                 return false;
@@ -105,7 +105,7 @@ namespace Interactables
 
         public bool isSlotFull()
         {
-            if (ItemsInSlot.Count <= ItemsInSlot[0].item.maxInvStackSize) return false;
+            if (ItemsInSlot.Count <= ItemsInSlot[0].maxInvStackSize) return false;
             return true;
         }
 
@@ -129,7 +129,7 @@ namespace Interactables
 
             if (IsEmpty())
             {
-                AddItemOnSlot(invData);
+                AddItemOnSlot(item);
                 return true;
             }
             else
@@ -138,7 +138,7 @@ namespace Interactables
                 {
                     if (ItemsInSlot.Count < item.maxInvStackSize)  // SLOT STACK SIZE 
                     {
-                        AddItemOnSlot(invData);
+                        AddItemOnSlot(item);
                         return true;
                     }
                     else
@@ -153,12 +153,12 @@ namespace Interactables
                 }
             }
         }
-        void AddItemOnSlot(InvData invData)
+        void AddItemOnSlot(Iitems item)
         {
-            invData.item.invSlotType = SlotType.PotionsActiveInv;
-            ItemsInSlot.Add(invData);
-            activInvPotionViewController.allPotionActiveInvList.Add(invData);
-            RefreshImg(invData.item);
+            item.invSlotType = SlotType.PotionsActiveInv;
+            ItemsInSlot.Add(item);
+            activInvPotionViewController.allPotionActiveInvList.Add(item);
+            RefreshImg(item);
             if (ItemsInSlot.Count > 1)
                 RefreshSlotTxt();
         }
@@ -170,12 +170,12 @@ namespace Interactables
                 ClearSlot();
                 return;
             }
-            InvData invData = ItemsInSlot[0];
-            ItemsInSlot.Remove(invData);
-            activInvPotionViewController.allPotionActiveInvList.Remove(invData);
+            Iitems item = ItemsInSlot[0];
+            ItemsInSlot.Remove(item);
+            activInvPotionViewController.allPotionActiveInvList.Remove(item);
             if (ItemsInSlot.Count >= 1)
             {
-                RefreshImg(invData.item);
+                RefreshImg(item);
             }
             else if (IsEmpty())  // After Item is removed
             {

@@ -90,7 +90,7 @@ namespace Interactables
             LocChange(_gemName, SlotType.CommonInv);
             InvData invData = new InvData(_charController.charModel.charName
                                                         , gemBase as Iitems);
-            InvService.Instance.invMainModel.AddItem2CommInv(invData);
+            InvService.Instance.invMainModel.AddItem2CommInv(gemBase as Iitems);
         }
         void LocChange(GemName _gemName, SlotType _invType)
         {

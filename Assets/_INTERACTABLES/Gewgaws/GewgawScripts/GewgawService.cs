@@ -86,7 +86,7 @@ namespace Interactables
            // LocChange(_potionName, InvType.CommonInv);
             InvData invData = new InvData(_charController.charModel.charName
                                                                 , genGewgawBase as Iitems);
-            InvService.Instance.invMainModel.AddItem2CommInv(invData);
+            InvService.Instance.invMainModel.AddItem2CommInv(genGewgawBase as Iitems);
         }
 
         public void EquipGewgaw2Char(GenGewgawBase genGewgawbase, GenGewgawQ genGewgawQ)

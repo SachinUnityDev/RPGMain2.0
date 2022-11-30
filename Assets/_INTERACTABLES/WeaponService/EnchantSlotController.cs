@@ -14,7 +14,7 @@ namespace Interactables
     public class EnchantSlotController : MonoBehaviour, IDropHandler, IPointerClickHandler, iSlotable
     {
         public int slotID { get; set; }
-        public List<InvData> ItemsInSlot { get; set; } = new List<InvData>();
+        public List<Iitems> ItemsInSlot { get; set; } = new List<Iitems>();
 
         public SlotType slotType => SlotType.EnchantSlot;
 
@@ -59,8 +59,8 @@ namespace Interactables
 
         public bool HasSameItem(Iitems item)
         {
-            if (ItemsInSlot[0].item.itemName == item.itemName
-                && ItemsInSlot[0].item.itemType == item.itemType)
+            if (ItemsInSlot[0].itemName == item.itemName
+                && ItemsInSlot[0].itemType == item.itemType)
                 return true;
             else
                 return false;
@@ -68,7 +68,7 @@ namespace Interactables
 
         public bool isSlotFull()
         {
-            if (ItemsInSlot.Count <= ItemsInSlot[0].item.maxInvStackSize) return false;
+            if (ItemsInSlot.Count <= ItemsInSlot[0].maxInvStackSize) return false;
             return true;
         }
 
@@ -82,11 +82,11 @@ namespace Interactables
 
         public bool AddItem(Iitems item)
         {
-            CharNames charName = InvService.Instance.charSelect;
-            InvData invData = new InvData(charName, item);
+           // CharNames charName = InvService.Instance.charSelect;
+           // InvData invData = new InvData(charName, item);
             if (IsEmpty())
             {
-                AddItemOnSlot(invData);
+                AddItemOnSlot(item);
                 return true;
             }
             else
@@ -95,7 +95,7 @@ namespace Interactables
                 {
                     if (ItemsInSlot.Count < item.maxInvStackSize)  // SLOT STACK SIZE 
                     {
-                        AddItemOnSlot(invData);
+                        AddItemOnSlot(item);
                         return true;
                     }
                     else
@@ -110,13 +110,13 @@ namespace Interactables
                 }
             }
         }
-        void AddItemOnSlot(InvData invData)
+        void AddItemOnSlot(Iitems item)
         {
-            invData.item.invSlotType = SlotType.CommonInv;
-            ItemsInSlot.Add(invData);
-            InvService.Instance.invMainModel.commonInvItems.Add(invData);
+            item.invSlotType = SlotType.CommonInv;
+            ItemsInSlot.Add(item);
+            InvService.Instance.invMainModel.commonInvItems.Add(item);
 
-            RefreshImg(invData.item);
+            RefreshImg(item);
             if (ItemsInSlot.Count > 1)
                 RefreshSlotTxt();
         }
@@ -128,11 +128,11 @@ namespace Interactables
                 ClearSlot();
                 return;
             }
-            InvData invData = ItemsInSlot[0];
-            ItemsInSlot.Remove(invData);
+            Iitems item = ItemsInSlot[0];
+            ItemsInSlot.Remove(item);
             if (ItemsInSlot.Count >= 1)
             {
-                RefreshImg(invData.item);
+                RefreshImg(item);
             }
             else if (IsEmpty())  // After Item is removed
             {
@@ -191,7 +191,7 @@ namespace Interactables
 
         void PopulateRightClickList()
         {
-            Iitems item = ItemsInSlot[0].item;
+            Iitems item = ItemsInSlot[0];
             if (isRightClicked)
             {
                 InvService.Instance.invViewController.CloseRightClickOpts();

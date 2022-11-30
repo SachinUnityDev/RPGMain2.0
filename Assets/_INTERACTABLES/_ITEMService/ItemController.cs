@@ -30,7 +30,7 @@ namespace Interactables
 
         void Start()
         {
-            CalendarService.Instance.OnStartOfDay += (DayName dayName)=>OnDayTickOnScroll(); 
+            CalendarService.Instance.OnStartOfDay += (int day)=>OnDayTickOnScroll(); 
         }
 
         public void OnScrollRead(ScrollName scrollName)
@@ -47,7 +47,7 @@ namespace Interactables
 
             if(ItemService.Instance.CanEnchantGemThruScroll(charController, gemName))
             {
-               // itemModel.itemsEnchanted.Add()
+                itemModel.itemsEnchanted.Add(gemBase as Iitems);
                 itemModel.gemChargeData = new GemChargeData(gemName);
                 return true;
             }

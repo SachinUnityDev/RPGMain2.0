@@ -15,8 +15,8 @@ namespace Common
     public class CalendarService : MonoSingletonGeneric<CalendarService>
     {
         public event Action<DayName> OnCalendarDayStart;
-        public event Action<DayName> OnStartOfDay;// can broadcast day, week  and month too here
-        public event Action<DayName> OnStartOfNight;
+        public event Action<int> OnStartOfDay;// can broadcast day, week  and month too here
+        public event Action<int> OnStartOfNight;
         public event Action<WeekName> OnStartOfTheWeek;
         public event Action<MonthName> OnStartOfTheMonth;
 
@@ -95,7 +95,7 @@ namespace Common
             if (timeState == TimeState.Night)
             {
                 // start of the day 
-                CalendarEventService.Instance.On_StartOfTheDay(dayInGame); 
+                OnStartOfDay.Invoke(dayInGame); 
                 timeState = TimeState.Day;
                 endday.GetComponentInChildren<TextMeshProUGUI>().text = "End the Day?";
                 UpdateDay();
@@ -103,7 +103,9 @@ namespace Common
             else
             {
                 // start of the night
-                CalendarEventService.Instance.On_StartOftheNight();
+               //
+               //CalendarEventService.Instance.On_StartOftheNight();
+               On_StartOfNight(dayInGame);
                 endday.GetComponentInChildren<TextMeshProUGUI>().text = "End the Night?";
                 timeState = TimeState.Night;
             }
@@ -169,13 +171,13 @@ namespace Common
  
         }
         #region DAY WEEK AND MONTH EVENT TRIGGERS
-        public void On_StartOfTheDay(DayName dayName)
+        public void On_StartOfDay(int day)
         {
-            OnStartOfDay?.Invoke(dayName);
+            OnStartOfDay?.Invoke(day);
         }
-        public void On_StartOfTheNight(DayName dayName)
+        public void On_StartOfNight(int day)
         {
-            OnStartOfNight?.Invoke(dayName);
+            OnStartOfNight?.Invoke(day);
         }
 
         public void On_StartOfTheWeek(WeekName weekName)

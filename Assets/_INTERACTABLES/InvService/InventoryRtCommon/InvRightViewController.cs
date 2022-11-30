@@ -46,7 +46,7 @@ namespace Interactables
         [SerializeField] GameObject InvPanel;
         //public InvModel currInvModel;
         public int currCommonInvSize;
-        public List<InvData> allCommonInvList = new List<InvData>();
+        public List<Iitems> allCommonInvList = new List<Iitems>();
         public Transform rightClickOpts;
 
         [Header("Active Inv")]
@@ -101,7 +101,7 @@ namespace Interactables
 
         #region TO_INV_FILL
         // ACTUAL ADDITION // will return false if inv is FULL
-        public bool AddItem2InVView(InvData invData) 
+        public bool AddItem2InVView(Iitems item) 
          {
             bool slotFound = false;
             for (int i = 0; i < InvPanel.transform.childCount; i++)
@@ -110,9 +110,10 @@ namespace Interactables
                 iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>(); 
                 if(iSlotable.ItemsInSlot.Count > 0)
                 {
-                    if (iSlotable.ItemsInSlot[0].item.itemName == invData.item.itemName)
+                    if (iSlotable.ItemsInSlot[0].item.itemName == item.itemName
+                        && iSlotable.ItemsInSlot[0].item.itemType == item.itemType)
                     {
-                        if (iSlotable.AddItem(invData.item))
+                        if (iSlotable.AddItem(item))
                         {
                             slotFound = true;
                             break;
@@ -126,7 +127,7 @@ namespace Interactables
                 {
                     Transform child = InvPanel.transform.GetChild(i);
                     iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
-                    if (iSlotable.AddItem(invData.item))
+                    if (iSlotable.AddItem(item))
                     {
                         slotFound = true;
                         break;
@@ -135,7 +136,7 @@ namespace Interactables
             }
             if (slotFound)
             {
-                allCommonInvList.Add(invData); // local list 
+                allCommonInvList.Add(item); // local list 
                
             }
             return slotFound; 
@@ -161,7 +162,7 @@ namespace Interactables
             //allCommonInvList.AddRange(InvService.Instance.invMainModel.commonInvItems);  // local list
             foreach (InvData invData in InvService.Instance.invMainModel.commonInvItems)
             {
-                AddItem2InVView(invData);
+                AddItem2InVView(invData.item);
             }
         }
 

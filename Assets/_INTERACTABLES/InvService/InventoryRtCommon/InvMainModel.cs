@@ -34,37 +34,37 @@ namespace Interactables
 
         public bool AddItem2CommInv(InvData invData)
         {
-            if (invData.charName == CharNames.Abbas_Skirmisher)
-            {
+            //if (invData.charName == CharNames.Abbas_Skirmisher)
+            //{
                 // check 3 X 6 limitation  
-                List<InvData> abbasInv = InvService.Instance.invMainModel.commonInvItems
-                                            .Where(t => t.charName == invData.charName).ToList();
+                //List<InvData> abbasInv = InvService.Instance.invMainModel.commonInvItems
+                //                            .Where(t => t.charName == invData.charName).ToList();
                 if (!InvService.Instance.IsCommInvFull())
                 {
                     invData.item.invSlotType = SlotType.CommonInv;
                     commonInvItems.Add(invData);
-                    InvService.Instance.invViewController.AddItem2InVView(invData);
+                    InvService.Instance.invViewController.AddItem2InVView(invData.item);
                     return true;
                 }
                 else
                 {
-                    Debug.Log("Abbas inv Size is full");
+                    Debug.Log("Inv Size is full");
                     return false;
                 }
-            }
-            else
-            {
-                List<InvData> charInv = commonInvItems
-                                        .Where(t => t.charName == invData.charName).ToList();
+           // }
+            //else
+            //{
+            //    List<InvData> charInv = commonInvItems
+            //                            .Where(t => t.charName == invData.charName).ToList();
 
-                if (InvService.Instance.IsCommInvFull())
-                {
-                    commonInvItems.Add(invData);
-                    InvService.Instance.invViewController.AddItem2InVView(invData);
-                    return true;
-                }
-            }
-            return false;
+            //    if (InvService.Instance.IsCommInvFull())
+            //    {
+            //        commonInvItems.Add(invData);
+            //        InvService.Instance.invViewController.AddItem2InVView(invData.item);
+            //        return true;
+            //    }
+            //}
+            //return false;
         }
 
         public bool RemoveItem2CommInv(InvData invData)
@@ -77,10 +77,7 @@ namespace Interactables
         {
             foreach (InvData invData in commonInvItems)
             {
-                if (invData.charName == charName)
-                {
-
-                }
+               
             }
         }
 
@@ -88,6 +85,7 @@ namespace Interactables
         {
 
             invData.item.invSlotType = SlotType.ExcessInv;
+            excessInvItems.Add(invData);
             // excess inv drag and drop can be opened whereever inv is open
             return false;
         }

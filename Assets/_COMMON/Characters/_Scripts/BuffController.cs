@@ -65,8 +65,8 @@ namespace Combat
             // should have feature of printing some data from skills directly
             charController = GetComponent<CharController>();
             CombatEventService.Instance.OnEOR +=RoundTick;
-            CombatEventService.Instance.OnEOC += EOCTick; 
-
+            CombatEventService.Instance.OnEOC += EOCTick;
+            CalendarService.Instance.OnStartOfDay += ( int dayName) => ToggleBuffsOnStartOfTheDay();
           //  QuestEventService.Instance.OnDayChange
 
         }
@@ -223,7 +223,7 @@ namespace Combat
             foreach (BuffData buffData in allDaybuffs)
             {
                 CharModData charModData = buffData.charModData; 
-                if(charModData.modChgMinR == 0 || charModData.modChgMaxR == 0)
+                if(charModData.modChgMinR == 0 || charModData.modChgMaxR == 0)// are non range buffs
                 {
                     charController.ChangeStat(charModData.causeType, charModData.causeName
                    , charModData.causeByCharID, charModData.statModified, charModData.modCurrVal
@@ -240,7 +240,7 @@ namespace Combat
             foreach (BuffData buffData in allNightbuffs)
             {
                 CharModData charModData = buffData.charModData;
-                if (charModData.modChgMinR == 0 || charModData.modChgMaxR == 0)
+                if (charModData.modChgMinR == 0 || charModData.modChgMaxR == 0)  // are non range buffs
                 {
                     charController.ChangeStat(charModData.causeType, charModData.causeName
                    , charModData.causeByCharID, charModData.statModified, -charModData.modCurrVal

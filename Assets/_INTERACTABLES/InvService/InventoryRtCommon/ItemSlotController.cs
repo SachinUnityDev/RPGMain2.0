@@ -14,7 +14,7 @@ namespace Interactables
         int slotID { get; set; }
         SlotType slotType { get; }
         bool isSlotFull();
-        List<InvData> ItemsInSlot { get; set;  }
+        List<Iitems> ItemsInSlot { get; set;  }
         void RemoveItem();
         bool AddItem(Iitems item);
         void ClearSlot(); 
@@ -24,7 +24,7 @@ namespace Interactables
     public class ItemSlotController : MonoBehaviour, IDropHandler, IPointerClickHandler, iSlotable
     {
         public  int slotID { get; set; }
-        public List<InvData> ItemsInSlot { get; set; } = new List<InvData>();
+        public List<Iitems> ItemsInSlot { get; set; } = new List<Iitems>();
         public SlotType slotType => SlotType.CommonInv;
 
         [Header("FOR DROP CONTROLS")]
@@ -111,8 +111,8 @@ namespace Interactables
 
         public bool AddItem(Iitems item)
         {
-            CharNames charName = InvService.Instance.charSelect;                
-            InvData invData = new InvData(charName, item); 
+            //CharNames charName = InvService.Instance.charSelect;                
+           // InvData invData = new InvData(charName, item); 
             if (IsEmpty())
             {
                 AddItemOnSlot(invData);               
@@ -139,9 +139,9 @@ namespace Interactables
                 }
             }
         }
-        void AddItemOnSlot(InvData invData)
+        void AddItemOnSlot(Iitems item)
         {
-            invData.item.invSlotType = SlotType.CommonInv;
+            item.invSlotType = SlotType.CommonInv;
             ItemsInSlot.Add(invData);           
             InvService.Instance.invMainModel.commonInvItems.Add(invData);
 

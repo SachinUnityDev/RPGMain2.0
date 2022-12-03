@@ -19,7 +19,7 @@ namespace Interactables
             charController.ExpPtsGain(expVal);
 
             // Unlock a Locked Lore Scroll 
-            LoreService.Instance.UnLockRanLockedLore(); 
+            LoreService.Instance.UnLockRandomSubLore(LoreNames.LandsOfShargad); 
             
 
 

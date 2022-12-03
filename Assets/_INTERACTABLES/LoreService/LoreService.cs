@@ -25,28 +25,35 @@ namespace Interactables
             loreController = GetComponent<LoreController>();
             Init(); 
         }
-
         public void Init()
         {
             loreModel = new LoreModel(loreSO);
            // OpenLoreView();
 
         }
-        public void UnLockRanLockedLore()
+        public void UnLockRandomSubLore(LoreNames _loreName)
         {
-            List<LoreData> UnlockedLoreData = new List<LoreData>(); 
-            
-            UnlockedLoreData = loreModel.allLoreData.Where(t => t.isLocked == false).ToList(); 
-            int loreIndex = UnityEngine.Random.Range(0, UnlockedLoreData.Count);
-
-            LoreNames loreName = UnlockedLoreData[loreIndex].loreName;
-            UnLockLore(loreName);
+            LoreData loreData = GetLoreData(_loreName);
+            if (IsLoreLocked(_loreName))
+            {
+                loreData.isLocked = false;
+                int i = UnityEngine.Random.Range(0, loreData.allSubLore.Count);
+                loreData.allSubLore[i].isLocked = false; 
+            }
+            else
+            {
+                foreach (LoreSubData subData in loreData.allSubLore)
+                {
+                    if (subData.isLocked)
+                    {
+                        subData.isLocked = false;
+                        break;
+                    }                        
+                }
+            }
         }
-
         public List<LoreSubData> GetUnLockedSubLores(LoreNames loreName)
         {
-            //loop thru the model and find unlocked sublores 
-
             LoreData loreData = GetLoreData(loreName);
             List<LoreSubData> unlockedSubLore 
                 = loreData.allSubLore.Where(t => t.isLocked == false).ToList();
@@ -58,15 +65,12 @@ namespace Interactables
             return null;
         }
 
-
         public LoreData GetLoreData(LoreNames loreName)
         {
             LoreData loreData = 
                     loreModel.allLoreData.Find(t => t.loreName == loreName);
             return loreData ;
         }
-
-
 
         public List<Sprite> GetLoreSprite(LoreNames LoreName, SubLores subloreName)
         {
@@ -83,12 +87,6 @@ namespace Interactables
             }
         }
 
-        public void UnLockLore(LoreNames loreName)
-        {
-            loreModel.allLoreData
-                          .Find(t => t.loreName == loreName).isLocked = false; 
-        }
-
         public bool IsLoreLocked(LoreNames loreName)
         {
             bool status = loreModel.allLoreData
@@ -97,14 +95,11 @@ namespace Interactables
             return status;
         }
 
-
-
         public string GetLoreString(LoreNames loreName)
         {
             string str = loreModel.allLoreStrData.Find(t => t.loreName == loreName).loreNameStr; 
             return str; 
-        }
-        
+        }        
         public void OpenLoreView()
         {
             if(lorePanel == null)
@@ -125,6 +120,14 @@ namespace Interactables
         {
 
             lorePanel.SetActive(false);
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                UnLockRandomSubLore(LoreNames.LandsOfShargad);
+            }
         }
 
     }

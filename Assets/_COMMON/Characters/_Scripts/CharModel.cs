@@ -132,7 +132,6 @@ namespace Common
         public List<TempTraitName> InTempTraitList = new List<TempTraitName>();
 
         [Header("Armor Socket  and WeaponEnchantment")]
-
         public GemName enchantableGem4Weapon = GemName.None;
         public bool isGemEnchantableIdentified = false;  // to be deprecated
 

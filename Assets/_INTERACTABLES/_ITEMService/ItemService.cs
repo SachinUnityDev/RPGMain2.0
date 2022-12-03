@@ -38,7 +38,10 @@ namespace Interactables
         public List<GemSO> allGemsSO = new List<GemSO>();
 
         [Header("All Scroll SO")]
-        public List<ScrollSO> allScrollSO = new List<ScrollSO>();   
+        public List<ScrollSO> allScrollSO = new List<ScrollSO>();
+
+        [Header("Lore Scroll SO")]
+        public LoreScrollSO loreScrollSO;
 
         [Header("All Herbs SO ")]
         public List<HerbSO> allHerbSO = new List<HerbSO>();

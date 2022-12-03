@@ -182,15 +182,15 @@ namespace Interactables
         ScrollOfEarth,
         ScrollOfMoss,
         ScrollOfDark,
-        ScrollOfLight,
-        Lorescroll,
+        ScrollOfLight,        
     }
-    public enum ScrollType
+
+    public enum LoreScrollName
     {
         None, 
-        Enchantment,
-        Lore, 
+        LoreScroll,
     }
+
 
     public enum FruitNames
     {

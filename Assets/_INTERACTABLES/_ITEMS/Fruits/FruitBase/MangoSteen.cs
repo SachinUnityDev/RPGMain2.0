@@ -15,6 +15,7 @@ namespace Interactables
         public SlotType invSlotType { get; set; }
         public ItemController itemController { get; set; }
         public int itemId { get; set; }
+        public List<int> allBuffs { get; set; }
         public void OnHoverItem()
         {
         }
@@ -31,8 +32,6 @@ namespace Interactables
             {
                 charController.tempTraitController.ClearTempTrait(TempTraitName.Diarrhea);
             }
-            
-
         }
     }
 }

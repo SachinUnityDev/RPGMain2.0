@@ -38,13 +38,11 @@ namespace Common
                 ApplyRoundFX();
                 CombatEventService.Instance.OnSOT += ApplyRoundFX;
                 ApplyBurn();
-
             }
 
             if (isBleeding)
             {
-                CharStatesService.Instance.ClearDOT(charController.gameObject, CharStateName.BleedLowDOT);                   
-
+                CharStatesService.Instance.ClearDOT(charController.gameObject, CharStateName.BleedLowDOT);  
             }
             if (isPoisoned && !isBurning)
             {

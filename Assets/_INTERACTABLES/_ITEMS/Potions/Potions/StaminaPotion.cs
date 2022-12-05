@@ -12,34 +12,32 @@ namespace Interactables
         public override PotionName potionName => PotionName.StaminaPotion; 
         public override CharNames charName { get; set; }
         public override int charID { get; set; }
-        public override PotionModel potionModel { get ; set ; }
+      //  public override PotionModel potionModel { get ; set ; }
         public ItemType itemType => ItemType.Potions; 
         public int itemName => (int) PotionName.StaminaPotion;
         public SlotType invSlotType { get; set; }
-        public int maxInvStackSize { get; set; }
-        public ItemController itemController { get; set; }
+        public int maxInvStackSize { get; set; }       
         public int itemId { get; set; }
+        public List<int> allBuffs { get; set; }
         public void OnHoverItem()
         {
 
         }
-        public override void PotionApplyFX1()
+        public override void PotionApplyFX()
         {
-            charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                            , StatsName.willpower, -1, TimeFrame.EndOfRound, potionModel.castTime, true);
-        }
+            PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionName)itemName);
+            int charID = charController.charModel.charID;
+            int castTime = (int)UnityEngine.Random.Range(potionSO.minCastTime, potionSO.maxCastTime);
 
-        public override void PotionApplyFX2()
-        {
+            int buffID = 
+                    charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
+                            , StatsName.willpower, -1, TimeFrame.EndOfRound, castTime, true);
+            allBuffs.Add(buffID);
+
             StatData staminaData = charController.GetStat(StatsName.stamina);
             float val = (Random.Range(80f, 100f) * staminaData.maxLimit) / 100f;
-            int charID = charController.charModel.charID;
-            charController.ChangeStat(CauseType.Potions, (int)potionName, charID, StatsName.stamina, val); 
-        }
-
-        public override void PotionApplyFX3()
-        {
            
+            charController.ChangeStat(CauseType.Potions, (int)potionName, charID, StatsName.stamina, val);
         }
 
         public override void PotionEndFX()
@@ -58,8 +56,8 @@ namespace Interactables
 
         public void ApplyConsumableFX()
         {
-            PotionApplyFX1();
-            PotionApplyFX2();
+            PotionApplyFX();
+          
         }
         //   **************************CONSUMABLE ***************
 
@@ -73,15 +71,9 @@ namespace Interactables
 
         }
         //   ************************** EQUIPABLE ***************
-        public bool IsEquipAble(GameState _state)
-        {
-            return false;
-        }
+
         //   ************************** SELLABLE ***************
-        public bool IsSellable(GameState _state)
-        {
-            return false;
-        }
+  
 
         public void ApplySellable()
         {

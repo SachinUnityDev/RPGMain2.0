@@ -11,7 +11,7 @@ namespace Interactables
         public GemName gemName;
         public GemType gemType;
         public List<CharNames> allCharsThatCanBeEnchanted;         
-        public int inventoryStack =0;
+        public int maxInvStackSize;
         public Currency cost;
         public float fluctuation;
         public int maxWorldInstance;
@@ -26,6 +26,10 @@ namespace Interactables
         [TextArea(5, 10)]
         public List<string> allLines = new List<string>();
 
+        private void Awake()
+        {
+            maxInvStackSize = 2;
+        }
         // min and max range is defined to modify the spec range 
 
     }

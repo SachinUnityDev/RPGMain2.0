@@ -13,7 +13,7 @@ namespace Interactables
         public int itemName => (int) TGNames.NyalaPelt;
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
-        public ItemController itemController { get; set; }
+        public List<int> allBuffs { get; set; }
         public int itemId { get; set; }
         public void OnHoverItem()
         {

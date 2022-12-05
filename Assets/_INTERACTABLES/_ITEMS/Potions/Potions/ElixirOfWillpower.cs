@@ -6,14 +6,14 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class ElixirOfWillpower : PotionsBase, IEquipAble, IConsumable, IItemDisposable, ISellable, Iitems
+    public class ElixirOfWillpower : PotionsBase, Iitems, IEquipAble, IConsumable, IItemDisposable, ISellable
     {
         public override PotionName potionName => PotionName.ElixirOfWillpower;
 
         public override CharNames charName { get; set; }
         public override int charID { get; set; }
 
-        public override PotionModel potionModel { get ; set ; }
+        //public override PotionModel potionModel { get ; set ; }
 
         public ItemType itemType => ItemType.Potions;
 
@@ -22,27 +22,31 @@ namespace Interactables
         public int maxInvStackSize { get; set; }
         public ItemController itemController { get; set; }
         public int itemId { get; set; }
+        public List<int> allBuffs { get; set; }
 
-        public override void PotionApplyFX1()
+        public override void PotionApplyFX()
         {
+
+            PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionName)itemName);
+            int castTime = (int)UnityEngine.Random.Range(potionSO.minCastTime, potionSO.maxCastTime);
+
             charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
                      , StatsName.willpower, +1, TimeFrame.Infinity, -1, true);  // Not a buff 
-        }
 
-        public override void PotionApplyFX2()
-        {
             if (GameService.Instance.gameModel.gameMode == GameMode.Taunt)
             {
                 charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                   , StatsName.morale, -3, TimeFrame.EndOfNight, potionModel.castTime, true);
+                   , StatsName.morale, -3, TimeFrame.EndOfNight, castTime, true);
             }
+
+              charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
+              , StatsName.willpower, -3, TimeFrame.EndOfNight, castTime, true);
+
         }
 
-        public override void PotionApplyFX3()
-        {
-            charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                  , StatsName.willpower, -3, TimeFrame.EndOfNight, potionModel.castTime, true);
-        }
+        
+
+        
 
         public override void PotionEndFX()
         {

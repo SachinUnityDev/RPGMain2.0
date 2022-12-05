@@ -17,11 +17,11 @@ namespace Interactables
         public float multFX { get; set; }
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
-        public List<int> allBuffIDs { get; set; }
+        public List<int> allBuffs { get; set; }
 
         public void ClearSocketBuffs()
         {
-            foreach (int buffID in allBuffIDs)
+            foreach (int buffID in allBuffs)
             {
                 charController.buffController.RemoveBuff(buffID);
             }
@@ -49,7 +49,7 @@ namespace Interactables
             fxVal1 = (int)(Random.Range(8f, 12f) * multFX);
             int buffID = charController.buffController.ApplyBuff(CauseType.Gems, (int)gemName, charID
                     , StatsName.waterRes, fxVal1, TimeFrame.Infinity, 1, true);
-            allBuffIDs.Add(buffID);
+            allBuffs.Add(buffID);
         }
     }
 }

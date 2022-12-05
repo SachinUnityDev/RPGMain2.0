@@ -16,6 +16,7 @@ namespace Interactables
         public TGNames compatibleTg => TGNames.SimpleRing;
         public GenGewgawNames pdtGenGewgawName => GenGewgawNames.RubyRing;
         public NPCNames mergeManagerNPC => NPCNames.AmishTheMerchant;
+        public List<int> allBuffs { get; set; }
 
         public void OnCombineWithTgFX()
         {

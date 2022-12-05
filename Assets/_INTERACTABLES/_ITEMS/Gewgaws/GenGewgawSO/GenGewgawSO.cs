@@ -16,7 +16,7 @@ namespace Interactables
 
         public GewgawSlotType gewgawSlotType;
        // public int maxWorldInstance;.. cannot be defined here Dep 
-      
+        public int maxInvStackSize; 
 
         [Header("RESTRICTIONS")]  // ONLY THE BELOW GIVEN CLASS CULTURE AND RACE TYPE CAN HAVE IT 
         // ONLY ONE RESTRICTION CAN BE APPLIED AS IN EITHER CLASS OR CULTURE OR RACE
@@ -38,7 +38,7 @@ namespace Interactables
 
         private void Awake()
         {
-           
+            maxInvStackSize = 1;
           
         }
 

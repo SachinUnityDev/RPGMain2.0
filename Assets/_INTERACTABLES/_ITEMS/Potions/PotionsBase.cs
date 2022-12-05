@@ -12,29 +12,31 @@ namespace Interactables
     {
         int itemId { get; set; } 
         ItemType itemType { get; }
-        int itemName { get; }
+        int itemName { get;  }
         int maxInvStackSize { get; set; }
         //above is import for direct inv interation
         // SO ref hard to find for every click 
         SlotType invSlotType { get; set; }
-        public virtual void InitItem(int itemId)
+        public virtual void InitItem(int itemId, int maxInvStackSize)
         { 
-            this.itemId =itemId;       
+            this.itemId =itemId;
+            this.maxInvStackSize = maxInvStackSize; 
         } 
-        public abstract void OnHoverItem();
-        
+        abstract void OnHoverItem();
+        List<int> allBuffs  { get; set; }
+
     }
 
 
     public interface IConsumable
     {
-        bool IsConsumable(GameState _state);
+      //  bool IsConsumable(GameState _state);
         void ApplyConsumableFX(); 
     }
 
     public interface IEquipAble   // stored in active inventory in combat 
     {
-        bool IsEquipAble(GameState _state); 
+      
     }
 
     public interface IItemDisposable
@@ -45,8 +47,6 @@ namespace Interactables
 
     public interface ISellable
     {
-        bool IsSellable(GameState _state);  // may be add NPC Name to it
-
         void ApplySellable(); 
     }
 
@@ -63,39 +63,36 @@ namespace Interactables
         public int potionInstanceCount = 0; 
 
         protected CharController charController;
-        protected PotionController potionController; 
+       // protected PotionController potionController; 
         public abstract CharNames charName { get; set; }
         public abstract int charID { get; set; }
-        public abstract PotionModel potionModel { get; set; }
-        public virtual PotionModel PotionInit(PotionSO potionSO) 
-        {
-            // IiTEMS ....
-            potionModel = new PotionModel(potionSO);            
-            Iitems item = this as Iitems;
-            item.maxInvStackSize = potionSO.inventoryStack;
+        //public abstract PotionModel potionModel { get; set; }
+        //public virtual PotionModel PotionInit(PotionSO potionSO) // this is fine as it has to from specific SO
+        //{
+        //    // IiTEMS ....
+        //    potionModel = new PotionModel(potionSO);            
+        //    Iitems item = this as Iitems;
+        //    item.maxInvStackSize = potionSO.inventoryStack;
            
-            return potionModel; 
+        //    return potionModel; 
 
-            //potionController = charController.gameObject.GetComponent<PotionController>();
-            //if (potionController != null)
-            //    potionController.allPotionModelsInInv.Add(potionModel);
+        //    //potionController = charController.gameObject.GetComponent<PotionController>();
+        //    //if (potionController != null)
+        //    //    potionController.allPotionModelsInInv.Add(potionModel);
                 
-        } // depending on the name copy and Init the params 
+        //} // depending on the name copy and Init the params 
 
-        public virtual PotionModel PotionEquip(CharController charController)
+        public virtual void  PotionEquip(CharController charController)
         {
             this.charController = charController;
             charName = charController.charModel.charName;
             charID = charController.charModel.charID;
-
             // check if potion Model auto updates 
-            potionModel.charName = charName;
-            return potionModel;
+           // potionModel.charName = charName;
+           
         }
 
-        public abstract void PotionApplyFX1();
-        public abstract void PotionApplyFX2();
-        public abstract void PotionApplyFX3();
+        public abstract void PotionApplyFX();
         public abstract void PotionEndFX(); 
 
     }

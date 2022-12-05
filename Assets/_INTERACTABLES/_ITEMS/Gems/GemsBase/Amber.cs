@@ -20,12 +20,12 @@ namespace Interactables
         public List<GemName> divineGemsSupported =>
                                 new List<GemName> { GemName.Carnelian, GemName.Meranite, GemName.Rutele };
 
-        public List<int> allBuffIDs { get; set; }
+        public List<int> allBuffs { get; set; }
 
 
         public void ClearSocketBuffs()
         {
-            foreach (int buffID in allBuffIDs)
+            foreach (int buffID in allBuffs)
             {
                 charController.buffController.RemoveBuff(buffID);
             }
@@ -49,7 +49,7 @@ namespace Interactables
             charController.buffController.
                    ApplyNInitBuffOnDay(CauseType.Gems, (int)itemName, charController.charModel.charID,
                                StatsName.hpRegen, 1, TimeFrame.Infinity, -1, true);
-            allBuffIDs.Add(buffID);
+            allBuffs.Add(buffID);
         }
 
 

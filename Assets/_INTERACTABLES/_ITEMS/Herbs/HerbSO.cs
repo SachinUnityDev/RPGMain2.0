@@ -11,7 +11,7 @@ namespace Interactables
     public class HerbSO : ScriptableObject
      {
         public HerbNames herbName;       
-        public int maxInventoryStack = 0;
+        public int maxInvStackSize = 1;
         public Currency cost;
         public float fluctuation;
         public int maxWorldInstance;
@@ -27,6 +27,11 @@ namespace Interactables
         public Sprite iconSprite;
         [TextArea(5, 10)]
         public List<string> allLines = new List<string>();
+
+        private void Awake()
+        {
+            maxInvStackSize = 1;
+        }
 
     }
 }

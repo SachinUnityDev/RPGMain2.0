@@ -23,8 +23,8 @@ namespace Interactables
         public float fluctuation =20f;  // same for all the sagaic gewgaws
 
         [HideInInspector]   // WILL BE FILLED AS PER ALGO 
-        public int maxWorldInstance =1; // sagaic its 1, epic 3 , folklyric =6 , lyric =6 , poetic = 3, 
-
+        public int maxWorldInstance; // sagaic its 1, epic 3 , folklyric =6 , lyric =6 , poetic = 3, 
+        public int maxInvStackSize; 
         //[Header("Desc")]
         //public string desc = "";
 
@@ -34,5 +34,10 @@ namespace Interactables
         [TextArea(5, 10)]       
         // to be filled using code // factory fo
         public List<string> allLines = new List<string>();
+        private void Awake()
+        {
+            maxWorldInstance = 1; 
+            maxInvStackSize = 1;
+        }
     }
 }

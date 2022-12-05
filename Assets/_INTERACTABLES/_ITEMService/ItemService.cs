@@ -55,6 +55,11 @@ namespace Interactables
         [Header("All Fruit SO")]
         public List<FruitSO> allFruitSO = new List<FruitSO>();
 
+        [Header("All Ingredient SO")]
+        public List<IngredSO> allIngredSO = new List<IngredSO>(); 
+
+
+
         #endregion
 
 
@@ -164,7 +169,15 @@ namespace Interactables
             return null;
         }
 
-
+        public IngredSO GetIngredSO(IngredNames ingredName)
+        {
+            IngredSO ingredSO = allIngredSO.Find(t => t.ingredName == ingredName);
+            if (ingredSO != null)
+                return ingredSO;
+            else
+                Debug.Log("ingredSO  not found");
+            return null;
+        }
 
         #endregion
 

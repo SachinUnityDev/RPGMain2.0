@@ -40,7 +40,7 @@ namespace Interactables
         {
             this.gemName = gemSO.gemName;
             this.gemtype = gemSO.gemType; 
-            this.inventoryStack = gemSO.inventoryStack;
+            this.inventoryStack = gemSO.maxInvStackSize;
             this.cost = gemSO.cost;
             this.fluctuation = gemSO.fluctuation;
             this.maxWorldInstance = gemSO.maxWorldInstance;

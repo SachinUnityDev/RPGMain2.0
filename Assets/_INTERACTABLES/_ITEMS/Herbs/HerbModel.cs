@@ -24,7 +24,7 @@ namespace Interactables
             charName = charController.charModel.charName;
             charID = charController.charModel.charID;
             herbName = herbSO.herbName;
-            maxInventoryStack = herbSO.maxInventoryStack;
+            maxInventoryStack = herbSO.maxInvStackSize;
             cost = herbSO.cost;    
             // Only for ABzazulu , he can only consume and will get these buffs
             HpRegenVal = herbSO.HpRegenVal;

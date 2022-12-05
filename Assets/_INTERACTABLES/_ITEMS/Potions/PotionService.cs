@@ -81,8 +81,8 @@ namespace Interactables
             PotionsBase potionBase = potionFactory.GetPotionBase(_potionName);            
             
             PotionSO potionSO = GetPotionModelSO(_potionName);
-            PotionModel potionModel = potionBase.PotionInit(potionSO);
-            allPotionModel.Add(potionModel);
+           // PotionModel potionModel = potionBase.PotionInit(potionSO);
+          //  allPotionModel.Add(potionModel);
 
            Iitems item = potionBase as Iitems;
            item.invSlotType = SlotType.CommonInv;

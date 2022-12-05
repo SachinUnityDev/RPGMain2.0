@@ -12,41 +12,35 @@ namespace Interactables
 
         public override CharNames charName { get; set; }
         public override int charID { get; set; }
-
-        public override PotionModel potionModel { get ; set; }
-
         public ItemType itemType => ItemType.Potions;
-
         public int itemName => (int)PotionName.ElixirOfVigor;
-
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
-        public ItemController itemController { get; set; }
+        public List<int> allBuffs { get; set; }
         public int itemId { get; set; }
-
         public void OnHoverItem()
         {
 
         }
-        public override void PotionApplyFX1()
+        public override void PotionApplyFX()
         {
-            charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                     , StatsName.vigor, +1, TimeFrame.Infinity, -1, true);  // Not a buff 
-        }
+            charController.ChangeStat(CauseType.Potions, (int)potionName, charID
+                                        , StatsName.vigor, +1);  // Not a buff 
 
-        public override void PotionApplyFX2()
-        {
-            if(GameService.Instance.gameModel.gameMode == GameMode.Stealth)
+            PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionName)itemName);
+            int castTime = (int)UnityEngine.Random.Range(potionSO.minCastTime, potionSO.maxCastTime);
+
+            int buffID = -1;
+            if (GameService.Instance.gameModel.gameMode == GameMode.Stealth)
             {
-                charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                   , StatsName.morale, -3, TimeFrame.EndOfNight, potionModel.castTime, true);
-            }
-        }
+                     buffID = charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
+                   , StatsName.morale, -3, TimeFrame.EndOfNight, castTime, true);
 
-        public override void PotionApplyFX3()
-        {
-            charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                  , StatsName.vigor, -3, TimeFrame.EndOfNight, potionModel.castTime, true);
+                allBuffs.Add(buffID);   
+            }
+            buffID = charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
+             , StatsName.vigor, -3, TimeFrame.EndOfNight, castTime, true);
+            allBuffs.Add(buffID);
         }
 
         public override void PotionEndFX()

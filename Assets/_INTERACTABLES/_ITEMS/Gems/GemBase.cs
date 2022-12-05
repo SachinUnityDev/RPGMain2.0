@@ -58,7 +58,7 @@ namespace Interactables
         void SocketedFX(float multFx);
         void ClearSocketBuffs(); 
 
-        List<int> allBuffIDs { get; set; }
+        //List<int> allBuffIDs { get; set; }
     }
 
     public interface ISupportGem
@@ -67,7 +67,7 @@ namespace Interactables
         void OnSocketed();
         void SocketedFX();
         void ClearSocketBuffs();
-        List<int> allBuffIDs { get; set; }
+       // List<int> allBuffIDs { get; set; }
     }
 
     public interface IPreciousGem

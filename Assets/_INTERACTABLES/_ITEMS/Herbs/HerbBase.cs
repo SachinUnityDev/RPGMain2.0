@@ -34,7 +34,7 @@ namespace Interactables
         {
             Iitems item = this as Iitems;
             HerbSO herbSO = ItemService.Instance.GetHerbSO(herbName);
-            item.maxInvStackSize = herbSO.maxInventoryStack;
+            item.maxInvStackSize = herbSO.maxInvStackSize;
             // CONTROLLERS AND MODELS
             this.charController = charController;
             charName = charController.charModel.charName;

@@ -9,7 +9,7 @@ namespace Interactables
 {
     public class ItemFactory : MonoBehaviour
     {
-
+    
         Dictionary<Iitems, Type> allItems = new Dictionary<Iitems, Type>();
        
         [Header("GEMS")]
@@ -29,6 +29,12 @@ namespace Interactables
         [Header("HERBS")]
         Dictionary<HerbNames, Type> allHerbs = new Dictionary<HerbNames, Type>();
 
+        [Header("FOODS")]
+        Dictionary<FoodNames, Type> allFoods = new Dictionary<FoodNames, Type>();
+
+        [Header("FRUITS")]
+        Dictionary<FruitNames, Type> allFruits = new Dictionary<FruitNames, Type>();
+
         [Header("TOOLS")]
         Dictionary<ToolNames, Type> allTools = new Dictionary<ToolNames, Type>();
 
@@ -42,6 +48,8 @@ namespace Interactables
         [SerializeField] int sagaicGewgawCount = 0;
         [SerializeField] int potionCount = 0;
         [SerializeField] int herbCount = 0;
+        [SerializeField] int fruitCount = 0;
+        [SerializeField] int foodCount = 0; 
         [SerializeField] int toolCount = 0;
         [SerializeField] int ingredCount = 0;
         void Start()
@@ -54,7 +62,9 @@ namespace Interactables
         {
             PotionInit();           
             GenGewGawInit();
-            HerbsInit();
+            HerbsInit();            
+            FoodInit();
+            FruitInit();
             GemsInit();
             SagaicGewgawInit();
             IngredInit();
@@ -64,18 +74,32 @@ namespace Interactables
             switch (itemType)
             {
                 case ItemType.Potions:
-                    return GetNewPotionItem((PotionName)itemName);
+                    Iitems itemPotion = GetNewPotionItem((PotionName)itemName);
+                    PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionName)itemName);
+                    itemPotion.InitItem(itemId, potionSO.maxInvStackSize);
+                    return itemPotion;
                 case ItemType.GenGewgaws:
-                    return GetGenGewgaws((GenGewgawNames)itemName);
+                    Iitems itemGengewgaw = GetGenGewgaws((GenGewgawNames)itemName);                     
+                    GenGewgawSO genGewgawSO = ItemService.Instance.GetGenGewgawSO((GenGewgawNames)itemName);
+                    itemGengewgaw.InitItem(itemId, genGewgawSO.maxInvStackSize);
+                    return itemGengewgaw;
                 case ItemType.Herbs:
-                    return GetNewHerbItem((HerbNames)itemName);
+                    Iitems itemHerbs = GetNewHerbItem((HerbNames)itemName);
+                    HerbSO herbSO = ItemService.Instance.GetHerbSO((HerbNames)itemName);
+                    itemHerbs.InitItem(itemId, herbSO.maxInvStackSize);
+                    return itemHerbs;
                 case ItemType.Foods:
-                    break;
+                    Iitems itemFoods = GetNewFoodItem((FoodNames)itemName);
+                    FoodSO foodSO = ItemService.Instance.GetFoodSO((FoodNames)itemName);
+                    itemFoods.InitItem(itemId, foodSO.maxInvStackSize);
+                    return itemFoods;
                 case ItemType.Fruits:
                     break;
                 case ItemType.Ingredients:
-                    return GetNewIngredItem((IngredNames)itemName);
-                 
+                    Iitems itemIngred = GetNewIngredItem((IngredNames)itemName);
+                    IngredSO ingredSO = ItemService.Instance.GetIngredSO((IngredNames)itemName);
+                    itemIngred.InitItem(itemId, ingredSO.maxInvStackSize);
+                    return itemIngred;
                 case ItemType.Recipes:
                     break;
                 case ItemType.Scrolls:
@@ -89,13 +113,20 @@ namespace Interactables
                 case ItemType.Soups:// not in demo 
                     break;
                 case ItemType.Gems:
-                    return GetNewGemItem((GemName)itemName);
+                    Iitems itemGems = GetNewGemItem((GemName)itemName);
+                    GemSO gemSO = ItemService.Instance.GetGemSO((GemName)itemName);
+                    itemGems.InitItem(itemId, gemSO.maxInvStackSize);
+                    return itemGems;
                 case ItemType.Alcohol:// not in demo 
                     break;
                 case ItemType.Meals:// not in demo 
                     break;
                 case ItemType.SagaicGewgaws:
-                    return GetNewSagaicGewgaw((SagaicGewgawNames)itemName);
+                    Iitems sagaicGewgaw = GetNewSagaicGewgaw((SagaicGewgawNames)itemName);
+                    SagaicGewgawSO sagaicGewgawSO = ItemService.Instance
+                                                    .GetSagaicGewgawSO((SagaicGewgawNames)itemName);
+                    sagaicGewgaw.InitItem(itemId, sagaicGewgawSO.maxInvStackSize);
+                    return sagaicGewgaw;                    
                 case ItemType.PoeticGewgaws:
                     break;
                 case ItemType.RelicGewgaws: // not in demo 
@@ -339,6 +370,70 @@ namespace Interactables
 
         #endregion
 
+        #region FOODS
+        public void FoodInit()
+        {
+            if (allFoods.Count > 0) return;
+            var getFoods = Assembly.GetAssembly(typeof(Foodbase)).GetTypes()
+                                   .Where(myType => myType.IsClass
+                                   && !myType.IsAbstract && myType.IsSubclassOf(typeof(Foodbase)));
+
+            foreach (var getFood in getFoods)
+            {
+                var t = Activator.CreateInstance(getFood) as Foodbase;
+
+                allFoods.Add(t.foodName, getFood);
+            }
+            foodCount = allFoods.Count;
+        }
+
+        public Iitems GetNewFoodItem(FoodNames _foodName)
+        {
+            foreach (var food in allFoods)
+            {
+                if (food.Key == _foodName)
+                {
+                    var t = Activator.CreateInstance(food.Value) as Iitems;
+                    return t;
+                }
+            }
+            Debug.Log("Food base class Not found" + _foodName);
+            return null;
+        }
+        #endregion
+
+        #region FRUITS
+        public void FruitInit()
+        {
+            if (allFruits.Count > 0) return;
+            var getFruits = Assembly.GetAssembly(typeof(FruitBase)).GetTypes()
+                                   .Where(myType => myType.IsClass
+                                   && !myType.IsAbstract && myType.IsSubclassOf(typeof(FruitBase)));
+
+            foreach (var getFruit in getFruits)
+            {
+                var t = Activator.CreateInstance(getFruit) as FruitBase;
+
+                allFruits.Add(t.fruitName, getFruit);
+            }
+            fruitCount = allFruits.Count;
+        }
+
+        public Iitems GetNewFruitItem(FruitNames _fruitName)
+        {
+            foreach (var fruit in allFruits)
+            {
+                if (fruit.Key == _fruitName)
+                {
+                    var t = Activator.CreateInstance(fruit.Value) as Iitems;
+                    return t;
+                }
+            }
+            Debug.Log("Food base class Not found" + _fruitName);
+            return null;
+        }
+
+        # endregion
 
         #region INGREDIENTS
         public void IngredInit()

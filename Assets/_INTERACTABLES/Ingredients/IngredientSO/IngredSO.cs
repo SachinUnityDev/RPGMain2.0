@@ -9,7 +9,7 @@ namespace Interactables
     public class IngredSO : ScriptableObject
     {
         public IngredNames ingredName;
-        public int maxInventoryStack = 0;
+        public int maxInvStackSize = 0;
         public Currency cost;
         public float fluctuation;
         public int maxWorldInstance;

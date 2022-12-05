@@ -11,34 +11,30 @@ namespace Interactables
         public override PotionName potionName => PotionName.PotionOfHeroism;
         public override CharNames charName { get; set; }
         public override int charID { get; set; }
-        public override PotionModel potionModel { get; set ; }
         public ItemType itemType => ItemType.Potions;
         public int itemName => (int)PotionName.PotionOfHeroism;
         public SlotType invSlotType { get; set; }
         public int maxInvStackSize { get ; set ; }
-        public ItemController itemController { get; set; }
+        public List<int> allBuffs { get; set; }
         public int itemId { get; set; }
         public void OnHoverItem()
         {
 
         }
-        public override void PotionApplyFX1()
+        public override void PotionApplyFX()
         {
+            PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionName)itemName);
+            int castTime = (int)UnityEngine.Random.Range(potionSO.minCastTime, potionSO.maxCastTime);
+            int buffID =     
             charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                       , StatsName.morale, Random.Range(2,5), TimeFrame.EndOfRound, potionModel.castTime, true);
-        }
-
-        public override void PotionApplyFX2()
-        {
+                       , StatsName.morale, Random.Range(2,5), TimeFrame.EndOfRound, castTime, true);
+            allBuffs.Add(buffID);
+            buffID =
             charController.buffController.ApplyBuffOnRange(CauseType.Potions, (int)potionName, charID
-                      , StatsName.armor, -2f, -2f, TimeFrame.EndOfRound, potionModel.castTime, true);
+                     , StatsName.armor, -2f, -2f, TimeFrame.EndOfRound, castTime, true);
+
+            allBuffs.Add(buffID);
         }
-
-        public override void PotionApplyFX3()
-        {
-
-        }
-
         public override void PotionEndFX()
         {
 

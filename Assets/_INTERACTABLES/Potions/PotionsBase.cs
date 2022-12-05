@@ -104,9 +104,9 @@ namespace Interactables
     {
         //data
         float OcWt { get;}
-        TempTraitName TempTraitName { get; }
-        
-        bool CheckOC();// this write to OCData in item Model 
+        TempTraitName TempTraitName { get; }        
+        void CheckNApplyOC();// this write to OCData in item Model 
+        // tap in itemController and check data in itemModel
         void ApplyOC_FX(); 
     }
 

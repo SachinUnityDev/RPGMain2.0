@@ -126,6 +126,23 @@ namespace Interactables
                 multFx = 1.3f;
         }
 
+        public void ChecknApplyOC(OCData ocData, TempTraitName temptraitName, IOverConsume ocBase)
+        {
+            if (charController.tempTraitController.HasTempTrait(temptraitName))            
+                return;
+
+            float wt = itemModel.AddOCData(ocData); 
+            if (wt !=0)
+            {
+                if (wt.GetChance())
+                {
+                    ocBase.ApplyOC_FX();
+                }
+            }
+        }
+
+
+
         //public void AddItemToActiveInvLs(Iitems Iitem)
         //{
         //    if(Iitem.itemType == ItemType.Potions)

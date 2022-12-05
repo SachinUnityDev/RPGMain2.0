@@ -69,20 +69,20 @@ namespace Interactables
         public GemChargeData gemChargeData;
         #region 
 
-        
-        public void AddOCData(ItemData itemData, float weight)
+        public float AddOCData(OCData ocData)
         {
-            int index = allOCData.FindIndex(t => t.itemName == itemData.ItemName
-                                        && t.itemType == itemData.itemType); 
+            int index = allOCData.FindIndex(t => t.itemName == ocData.itemName
+                                        && t.itemType == ocData.itemType); 
             if (index == -1)
-            {
-                OCData ocData = new OCData(itemData.itemType, itemData.ItemName, weight); 
+            {              
                 allOCData.Add(ocData);
+                index = allOCData.Count - 1; 
             }
             else
             {
-                allOCData[index].weight+=weight;
+                allOCData[index].weight += ocData.weight;
             }
+            return allOCData[index].weight;
         }
 
         public void ClearAllOCData()

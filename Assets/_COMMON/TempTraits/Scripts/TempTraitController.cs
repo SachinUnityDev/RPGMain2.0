@@ -2,6 +2,7 @@ using Combat;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -167,6 +168,10 @@ namespace Common
             return true;
         }
 
+        public bool HasTempTrait(TempTraitName tempTraitName)
+        {
+            return alltempTraitBuffs.Any(t => t.tempTraitModData.tempTraitName == tempTraitName);
+        }
 
         public List<string> GetCharStateBuffList()
         {

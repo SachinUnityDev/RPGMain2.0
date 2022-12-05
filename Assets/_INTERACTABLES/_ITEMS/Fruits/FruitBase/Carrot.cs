@@ -19,6 +19,12 @@ namespace Interactables
         }
         public override void ApplyBuffFX()
         {
+            float chance = 40f;
+            if (chance.GetChance())
+            {
+                charController.buffController.ApplyBuff(CauseType.Fruit, (int)fruitName,
+                 charController.charModel.charID, StatsName.acc, 1, fruitSO.timeFrame, fruitSO.castTime, true);
+            }
         }
     }
 }

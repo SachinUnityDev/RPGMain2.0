@@ -20,7 +20,6 @@ namespace Interactables
     }
 
     [System.Serializable]
-
     public class LoreData
     {
         public LoreNames loreName;

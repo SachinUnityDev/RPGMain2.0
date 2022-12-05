@@ -18,8 +18,8 @@ namespace Interactables
         public LoreModel loreModel;
 
 
-        public LoreNames currLoreActive;
-        public SubLores currSubLoreActive; 
+        //public LoreNames currLoreActive;
+        //public SubLores currSubLoreActive; 
         void Start()
         {
             loreController = GetComponent<LoreController>();
@@ -72,10 +72,14 @@ namespace Interactables
             return loreData ;
         }
 
-        public List<Sprite> GetLoreSprite(LoreNames LoreName, SubLores subloreName)
+        public List<Sprite> GetLoreSprite(LoreNames _loreName, SubLores subloreName)
         {
-            List<LoreSubData> allLoreSub = loreSO.allLoreData.Find(t => t.isLocked == false).allSubLore;
-            List<Sprite> loreSprites =  allLoreSub.Find(t => t.isLocked == false).pics;
+
+            LoreData loreData = loreSO.allLoreData.Find(t => (t.loreName ==_loreName) && (t.isLocked == false));
+
+            List<Sprite> loreSprites =  loreData.allSubLore.Find(t => t.isLocked == false 
+                                                                        && t.subLoreNames == subloreName).pics;
+
             if(loreSprites.Count != 0)
             {
                 return loreSprites;

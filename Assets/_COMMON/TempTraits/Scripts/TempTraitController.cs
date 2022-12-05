@@ -135,12 +135,38 @@ namespace Common
             allTempTraitImmunityBuffs.Add(immunityBuffData);
         }
 
+        public void ClearTempTrait(TempTraitName tempTraitName)
+        {
+            int tobeClearedBuffId = -1; 
+            foreach (TempTraitBuffData tempTrait in alltempTraitBuffs)
+            {
+                if(tempTrait.tempTraitModData.tempTraitName == tempTraitName)
+                {
+                    tempTrait.buffID = tobeClearedBuffId;   
+                }   
+            }
+            if(tobeClearedBuffId != -1)
+            {
+                RemoveBuff(tobeClearedBuffId);
+            }
+        }
+
         public void RemoveBuffData(TempTraitBuffData tempTraitBuffData)
         {
 
             // remove buff FX
             alltempTraitBuffs.Remove(tempTraitBuffData);
         }
+
+        public bool RemoveBuff(int _buffID)
+        {
+            int index = alltempTraitBuffs.FindIndex(t => t.buffID == _buffID);
+            if (index == -1) return false;
+            TempTraitBuffData buffData = alltempTraitBuffs[index];
+            RemoveBuffData(buffData);
+            return true;
+        }
+
 
         public List<string> GetCharStateBuffList()
         {

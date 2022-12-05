@@ -1,3 +1,4 @@
+using Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,16 @@ namespace Interactables
         }
         public override void ApplyBuffFX()
         {
+            float chance1 = 30f;
+            if (chance1.GetChance())
+            {
+                charController.charStateController.ApplyDOTImmunityBuff(CauseType.Food
+                    , (int)fruitName, charController.charModel.charID, CharStateName.PoisonedLowDOT, TimeFrame.Infinity, -1, false);
+
+            }
+
+
+
         }
     }
 }

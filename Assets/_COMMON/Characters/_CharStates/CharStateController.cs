@@ -133,6 +133,32 @@ namespace Common
         }
 
 
+        public void ApplyDOTImmunityBuff(CauseType causeType, int causeName, int causeByCharID
+                                , CharStateName charStateName, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
+        {
+            if (charStateName == CharStateName.BleedLowDOT || charStateName == CharStateName.BleedMedDOT
+                                                            || charStateName == CharStateName.BleedHighDOT)
+            {
+                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BleedLowDOT, timeFrame, netTime, false);
+                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BleedMedDOT, timeFrame, netTime, false);
+                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BleedHighDOT, timeFrame, netTime, false);
+            }
+            if (charStateName == CharStateName.PoisonedHighDOT || charStateName == CharStateName.PoisonedMedDOT
+                                                              || charStateName == CharStateName.PoisonedLowDOT)
+            {
+                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.PoisonedHighDOT, timeFrame, netTime, false);
+                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.PoisonedMedDOT, timeFrame, netTime, false);
+                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.PoisonedLowDOT, timeFrame, netTime, false);
+            }
+            if (charStateName == CharStateName.BurnHighDOT || charStateName == CharStateName.BurnMedDOT
+                                                            || charStateName == CharStateName.BurnLowDOT)
+            {
+                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BurnHighDOT, timeFrame, netTime, false);
+                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BurnMedDOT, timeFrame, netTime, false);
+                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BurnLowDOT, timeFrame, netTime, false);
+            }
+        }
+
         public void RemoveBuffData(CharStateBuffData charStateBuffData)
         {          
           

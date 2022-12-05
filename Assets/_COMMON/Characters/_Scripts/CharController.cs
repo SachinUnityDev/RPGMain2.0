@@ -29,9 +29,13 @@ namespace Common
         [Header("Common Controller")]
         public BuffController buffController;
         public CharStateController charStateController;
+        public TempTraitController tempTraitController;
 
         [Header("Item Controller")]
         public ItemController itemController;
+
+
+
 
 
         float prevHPVal = 0f;

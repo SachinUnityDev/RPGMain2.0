@@ -1,3 +1,4 @@
+using Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,12 @@ namespace Interactables
         }
         public override void ApplyBuffFX()
         {
-         
+            float chance = 40f;
+            if (chance.GetChance())
+            {
+                charController.buffController.ApplyBuffOnRange(CauseType.Fruit, (int)fruitName,
+                 charController.charModel.charID, StatsName.damage, 0,1, fruitSO.timeFrame, fruitSO.castTime, true);
+            }
         }
     }
 }

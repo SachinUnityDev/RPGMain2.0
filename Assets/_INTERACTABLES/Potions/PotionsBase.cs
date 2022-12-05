@@ -99,5 +99,16 @@ namespace Interactables
         public abstract void PotionEndFX(); 
 
     }
+
+    public interface IOverConsume
+    {
+        //data
+        float OcWt { get;}
+        TempTraitName TempTraitName { get; }
+        
+        bool CheckOC();// this write to OCData in item Model 
+        void ApplyOC_FX(); 
+    }
+
 }
 

@@ -27,7 +27,7 @@ MonoBehaviour:
   inventoryStack: 5
   cost:
     silver: 0
-    bronze: 5
+    bronze: 4
   fluctuation: 20
   maxWorldInstance: 100
   timeFrame: 1

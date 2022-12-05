@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Common;
 using System.Security.Policy;
+using System.Linq;
 
 namespace Interactables
 { 
@@ -37,6 +38,21 @@ namespace Interactables
         }
     }
 
+    [System.Serializable]
+    public class OCData
+    {
+        public ItemType itemType;
+        public int itemName;
+        public float weight;
+
+        public OCData(ItemType itemType, int itemName, float weight)
+        {
+            this.itemType = itemType;
+            this.itemName = itemName;
+            this.weight = weight;
+        }
+    }
+
 
     public class ItemModel  // all the items held by chars
     {
@@ -48,9 +64,41 @@ namespace Interactables
         public List<Iitems> itemsEnchanted = new List<Iitems>(); 
         
         public List<Iitems> potionsConsumed = new List<Iitems>();
+        public List<OCData> allOCData = new List<OCData> ();   
+
         public GemChargeData gemChargeData;
         #region 
 
+        
+        public void AddOCData(ItemData itemData, float weight)
+        {
+            int index = allOCData.FindIndex(t => t.itemName == itemData.ItemName
+                                        && t.itemType == itemData.itemType); 
+            if (index == -1)
+            {
+                OCData ocData = new OCData(itemData.itemType, itemData.ItemName, weight); 
+                allOCData.Add(ocData);
+            }
+            else
+            {
+                allOCData[index].weight+=weight;
+            }
+        }
+
+        public void ClearAllOCData()
+        {
+            allOCData.Clear();  
+        }
+
+        public void ClearOCData(ItemData itemData)
+        {
+            int index = allOCData.FindIndex(t => t.itemName == itemData.ItemName
+                                       && t.itemType == itemData.itemType);
+            if(index != -1)
+            {
+                allOCData.RemoveAt(index);
+            }
+        }
         public void CanItemBeSocketed()
         {
            //if     

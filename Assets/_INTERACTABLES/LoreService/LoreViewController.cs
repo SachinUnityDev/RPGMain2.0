@@ -26,21 +26,25 @@ namespace Interactables
         [SerializeField] TextMeshProUGUI subLoreNametxt;
         [SerializeField] Button leftBtn;
         [SerializeField] Button rightBtn;
+
         //[SerializeField] TextMeshProUGUI mainLoreTxt;
 
         [SerializeField] Image pageImg;
         [SerializeField] Button refreshBtn; // go back to the main panel 
-
+        [SerializeField] Button pageTurnBtn;
 
         [Header("Global Var")]
         [SerializeField] LoreData currLoredata; // once lore Selection is clicked Populate this 
         [SerializeField] List<LoreSubData> currUnLockedSubLore; 
-        [SerializeField] int index; 
+        [SerializeField] int index;
+        [SerializeField] int pageInd = 0;
+        [SerializeField] List<Sprite> currLoreSprites; 
         void Start()
         {
             leftBtn.onClick.AddListener(OnLeftBtnPressed);
             rightBtn.onClick.AddListener(OnRightBtnPressed);
             refreshBtn.onClick.AddListener(OnRefreshBtnPressed); 
+            pageTurnBtn.onClick.AddListener(OnPageTurnBtnPressed);  
         }
         public void OnLoreSelectBtnPressed(LoreNames loreName)
         {
@@ -53,6 +57,7 @@ namespace Interactables
         {         
             PopulateLoreSelection();
         }
+     
         void PopulateLoreScroll(LoreNames loreName)
         {
             currLoredata = LoreService.Instance.GetLoreData(loreName);
@@ -60,7 +65,6 @@ namespace Interactables
             List<LoreSubData> allSubLores = new List<LoreSubData>();
             currUnLockedSubLore = 
                 LoreService.Instance.GetUnLockedSubLores(loreName); 
-
             index = 0;
             PopulateSubLore(); 
         }
@@ -73,8 +77,22 @@ namespace Interactables
             LoreNames currLoreName = currLoredata.loreName;
             SubLores currSubLoreName = currUnLockedSubLore[index].subLoreNames;
             subLoreNametxt.text = currSubLoreName.ToString();
-            List<Sprite> sprites = LoreService.Instance.GetLoreSprite(currLoreName, currSubLoreName);
-            pageImg.sprite = sprites[0];
+            currLoreSprites = LoreService.Instance.GetLoreSprite(currLoreName, currSubLoreName);
+            pageInd = 0;
+            pageImg.sprite = currLoreSprites[pageInd];
+        }
+        void OnPageTurnBtnPressed()
+        {
+            pageInd++; 
+            if (pageInd < currLoreSprites.Count && pageInd > 0)
+            {
+                pageImg.sprite = currLoreSprites[pageInd];
+            }
+            else if(pageInd == currLoreSprites.Count)
+            {
+                pageInd = 0; 
+                pageImg.sprite = currLoreSprites[pageInd];
+            }
         }
         void OnLeftBtnPressed()
         {

@@ -10,27 +10,7 @@ using System.Linq;
 namespace Combat
 {
 
-    public class DmgAppliedData   /// Data broadcasted by target on being hit
-    {
-        public CharController striker;
-        public CauseType causeType; 
-        public int  causeName;
-        public DamageType dmgType;
-        public float dmgValue;
-        public  StrikeType strikeType;
-        public CharController targetController;       
-        public DmgAppliedData(CharController striker, CauseType causeType, int causeName, DamageType dmgType, float dmgValue
-                            , StrikeType strikeType, CharController targetController)
-        {
-            this.striker = striker;
-            this.causeType = causeType;
-            this.causeName = causeName;
-            this.dmgType = dmgType;
-            this.dmgValue = dmgValue;
-            this.strikeType = strikeType;
-            this.targetController = targetController; 
-        }
-    }
+ 
 
     public class DamageController : MonoBehaviour
     {
@@ -341,6 +321,31 @@ namespace Combat
     
     }
 
+
+    #region DATA CLASSES
+    public class DmgAppliedData   /// Data broadcasted by target on being hit
+    {
+        public CharController striker;
+        public CauseType causeType;
+        public int causeName;
+        public DamageType dmgType;
+        public float dmgValue;
+        public StrikeType strikeType;
+        public CharController targetController;
+        public DmgAppliedData(CharController striker, CauseType causeType, int causeName, DamageType dmgType, float dmgValue
+                            , StrikeType strikeType, CharController targetController)
+        {
+            this.striker = striker;
+            this.causeType = causeType;
+            this.causeName = causeName;
+            this.dmgType = dmgType;
+            this.dmgValue = dmgValue;
+            this.strikeType = strikeType;
+            this.targetController = targetController;
+        }
+    }
+
+    #endregion
 }
 
 

@@ -194,6 +194,93 @@ namespace Common
             }
             return deDuffStrs;
         }
+
+        public bool HasCharDOTState(CharStateName _charStateName)
+        {
+            if (_charStateName == CharStateName.BurnHighDOT
+               || _charStateName == CharStateName.BurnMedDOT
+               || _charStateName == CharStateName.BurnLowDOT)
+            {
+                return (HasCharState( CharStateName.BurnHighDOT)
+                  || HasCharState( CharStateName.BurnMedDOT)
+                  || HasCharState( CharStateName.BurnLowDOT));
+            }
+
+            if (_charStateName == CharStateName.BleedHighDOT
+              || _charStateName == CharStateName.BleedMedDOT
+              || _charStateName == CharStateName.BleedLowDOT)
+            {
+                return (HasCharState( CharStateName.BleedHighDOT)
+                   || HasCharState( CharStateName.BleedMedDOT)
+                   || HasCharState( CharStateName.BleedLowDOT));
+            }
+
+            if (_charStateName == CharStateName.PoisonedHighDOT
+              || _charStateName == CharStateName.PoisonedMedDOT
+              || _charStateName == CharStateName.PoisonedLowDOT)
+            {
+                return (HasCharState( CharStateName.PoisonedHighDOT)
+                 || HasCharState( CharStateName.PoisonedMedDOT)
+                 || HasCharState( CharStateName.PoisonedLowDOT));
+            }
+            return false;
+        }
+
+        public bool HasCharState(CharStateName _charStateName)
+        {
+            foreach (CharStateBuffData buffData in allCharStateBuffs)
+            {
+                if(buffData.charStateModData.charStateName == _charStateName)
+                {
+                    return true; 
+                }
+            }
+            return false;
+        }
+
+        public bool HasDOTImmunity(CharStateName _charStateName)
+        {
+            if (_charStateName == CharStateName.BurnHighDOT
+               || _charStateName == CharStateName.BurnMedDOT
+               || _charStateName == CharStateName.BurnLowDOT)
+            {
+                return (HasImmunity(CharStateName.BurnHighDOT)
+                        || HasImmunity(CharStateName.BurnMedDOT)
+                        || HasImmunity(CharStateName.BurnLowDOT)); 
+            }
+
+            if (_charStateName == CharStateName.BleedHighDOT
+              || _charStateName == CharStateName.BleedMedDOT
+              || _charStateName == CharStateName.BleedLowDOT)
+            {
+                return (HasImmunity(CharStateName.BleedHighDOT)
+                        || HasImmunity(CharStateName.BleedMedDOT)
+                        || HasImmunity(CharStateName.BleedLowDOT));
+            }
+
+            if (_charStateName == CharStateName.PoisonedHighDOT
+              || _charStateName == CharStateName.PoisonedMedDOT
+              || _charStateName == CharStateName.PoisonedLowDOT)
+            {
+                return (HasImmunity(CharStateName.PoisonedHighDOT)
+                         || HasImmunity(CharStateName.PoisonedMedDOT)
+                         || HasImmunity(CharStateName.PoisonedLowDOT));
+            }
+            return false; 
+        }
+
+        public bool HasImmunity(CharStateName charStateName)
+        {
+            foreach (ImmunityBuffData immunityBuffData in allImmunityBuffs)
+            {
+                if(immunityBuffData.charStateModData.charStateName == charStateName)
+                {
+                    return true;
+                }
+            }
+            return false; 
+        }
+
         public void RoundTick()
         {
             foreach (CharStateBuffData buffData in allCharStateBuffs)
@@ -220,8 +307,48 @@ namespace Common
             }
         }
 
+
+
+
+
 #endregion
 
+        public void ClearDOT(CharStateName _charStateName)
+        {
+            if (_charStateName == CharStateName.BurnHighDOT
+         || _charStateName == CharStateName.BurnMedDOT
+         || _charStateName == CharStateName.BurnLowDOT)
+            {
+                RemoveCharState(CharStateName.BurnHighDOT);
+                RemoveCharState(CharStateName.BurnMedDOT);
+                RemoveCharState(CharStateName.BurnLowDOT);
+            }
+
+            if (_charStateName == CharStateName.BleedHighDOT
+              || _charStateName == CharStateName.BleedMedDOT
+              || _charStateName == CharStateName.BleedLowDOT)
+            {
+                RemoveCharState(CharStateName.BleedHighDOT);
+                RemoveCharState(CharStateName.BleedMedDOT);
+                RemoveCharState(CharStateName.BleedLowDOT);
+            }
+
+            if (_charStateName == CharStateName.PoisonedHighDOT
+              || _charStateName == CharStateName.PoisonedMedDOT
+              || _charStateName == CharStateName.PoisonedLowDOT)
+            {
+                RemoveCharState(CharStateName.PoisonedHighDOT);
+                RemoveCharState(CharStateName.PoisonedMedDOT);
+                RemoveCharState(CharStateName.PoisonedLowDOT);
+            }
+        }
+
+        public void RemoveCharState(CharStateName charStateName)
+        {            
+            int index = allCharBases.FindIndex(t => t.charStateName == charStateName);
+            allCharBases[index].EndState();   // all related buffs to be cleared from here
+            allCharBases.RemoveAt(index);
+        }
    
         public void ResetCharStateBuff(CharStateName charStateName)
         {  

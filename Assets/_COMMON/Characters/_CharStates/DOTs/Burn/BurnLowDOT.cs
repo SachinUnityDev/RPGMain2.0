@@ -25,14 +25,31 @@ namespace Common
             int strikerLvl = strikerController.charModel.charLvl;
             dmgPerRound = 4 + (strikerLvl / 4);
 
-            bool isBleeding = CharStatesService.Instance.HasCharDOTState(charController.gameObject, CharStateName.BleedLowDOT);
-            bool isPoisoned = CharStatesService.Instance.HasCharDOTState(charController.gameObject, CharStateName.PoisonedLowDOT);
-            bool isBurning = CharStatesService.Instance.HasCharDOTState(charController.gameObject, CharStateName.BurnLowDOT);
+            bool isBleeding = charController.charStateController.HasCharDOTState(CharStateName.BleedLowDOT);
+            bool isPoisoned = charController.charStateController.HasCharDOTState(CharStateName.PoisonedLowDOT);
+            bool isBurning = charController.charStateController.HasCharDOTState(CharStateName.BurnLowDOT);
 
+            if (isPoisoned && !isBurning)
+            {
+                castTime++;
+            }
+            if (isBleeding)
+            {
+                charController.charStateController.ClearDOT(CharStateName.BleedHighDOT);
+            }
+            if (isPoisoned && isBurning)
+            {
+                OverLapRuleBurning();
+            }
             if (isBurning)
             {
                 // deal 4 - 8 fire dmg(instant)
                 // +deal 4 - 8 Fortitude dmg(instnat)
+                charController.damageController.ApplyDamage(charController, CauseType.CharState, (int)charStateName
+                             , DamageType.Fire, UnityEngine.Random.Range(4,9), false);
+
+                charController.damageController.ApplyDamage(charController, CauseType.CharState, (int)charStateName
+                             , DamageType.FortitudeDmg, UnityEngine.Random.Range(4, 9), false);
 
             }
             else
@@ -40,38 +57,27 @@ namespace Common
                 ApplyRoundFX();
                 CombatEventService.Instance.OnSOT += ApplyRoundFX;
                 ApplyBurn();
-
-            }
-
-            if (isBleeding)
-            {
-                CharStatesService.Instance.ClearDOT(charController.gameObject, CharStateName.BleedLowDOT);
-
-            }
-            if (isPoisoned && !isBurning)
-            {
-                castTime++;
-            }
-            if (isPoisoned && isBurning)
-            {
-                OverLapRuleBurning();
             }
         }
 
         void ApplyBurn()
         {
-
+            int buffID = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                         , charID, StatsName.dodge, +2, charStateModel.timeFrame, charStateModel.castTime, true);
+            allBuffs.Add(buffID);
 
+            buffID= 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                     , charID, StatsName.waterRes, +24, charStateModel.timeFrame, charStateModel.castTime, true);
+            allBuffs.Add(buffID);
 
-
-
-            CharStatesService.Instance.AddImmunity(charController.gameObject, CharStateName.Soaked);
-            CharStatesService.Instance.AddImmunity(charController.gameObject, CharStateName.BleedLowDOT);
-
+            // change to buff 
+            charController.charStateController.ApplyImmunityBuff(CauseType.CharState, (int)charStateName, charID
+               , CharStateName.Soaked, TimeFrame.Infinity, 1, true);            
+            charController.charStateController.ApplyDOTImmunityBuff(CauseType.CharState, (int)charStateName, charID
+               , CharStateName.BleedLowDOT, TimeFrame.Infinity, 1, true);
+            
         }
 
         void ApplyRoundFX()
@@ -118,7 +124,6 @@ namespace Common
             base.EndState();
             CombatEventService.Instance.OnSOT -= ApplyRoundFX;
             CharStatesService.Instance.RemoveImmunity(charController.gameObject, CharStateName.Soaked);
-
             CharStatesService.Instance.RemoveImmunity(charController.gameObject, CharStateName.BleedLowDOT);
         }
         void OverLapRuleBurning()

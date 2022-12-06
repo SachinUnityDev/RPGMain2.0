@@ -20,10 +20,9 @@ namespace Common
         protected CharStateData CharStateData = new CharStateData(); // broadcasting data
 
         protected string str0, str1, str2, str3, str4, str5; 
-        public abstract StateFor stateFor { get; }
-        
+        public abstract StateFor stateFor { get; }        
         public abstract int castTime { get; protected set; }
-
+        public List<int> allBuffs { get; set; }
         public virtual void SetCastTime(int value)
         {
             if(value > 0)
@@ -74,7 +73,8 @@ namespace Common
             {
                 CombatEventService.Instance.OnEOR += CombatTick;
             }           
-            charStateModel.startRound = CombatService.Instance.currentRound;         
+            charStateModel.startRound = CombatService.Instance.currentRound;   
+            allBuffs.Clear();
         }
         public abstract void StateDisplay();
         public abstract void StateApplyFX();
@@ -100,13 +100,19 @@ namespace Common
         public virtual void EndState()
         {
            //charController.charStateController.RemoveCharState(charStateName);
-
+           // to be updated 
            if(charController.charModel.InCharStatesList.Any(t => t == charStateName))
            {
                 charController.charModel.InCharStatesList.Remove(charStateName);
                 // should also delete the char State base from the base list
            }
-           
+
+
+            foreach(int buffID in allBuffs)
+            {
+                charController.buffController.RemoveBuff(buffID);
+            }  
+            
         }
 
 

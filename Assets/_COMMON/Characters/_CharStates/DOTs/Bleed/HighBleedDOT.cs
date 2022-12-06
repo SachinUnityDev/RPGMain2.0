@@ -14,26 +14,33 @@ namespace Common
         public override StateFor stateFor => StateFor.Mutual;
         public override int castTime { get; protected set; }
 
-        public CharController strikerController; 
+        public CharController strikerController;
+     
+
 
         public override void StateApplyFX()
         {
             strikerController = CombatService.Instance.currCharOnTurn;
             int strikerLvl = strikerController.charModel.charLvl; 
-             if(!CharStatesService.Instance.HasCharDOTState(charController.gameObject, CharStateName.BurnLowDOT))
+             if(!charController.charStateController.HasCharDOTState(CharStateName.BurnHighDOT))
              {             
                 dmgPerRound = 3 + (strikerLvl / 4);
-               // CombatEventService.Instance.OnEOR += ApplyFX;
-                ApplyFX();
+                ApplyFX();                
                 CombatEventService.Instance.OnSOT += ApplyFX;
-                charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                        , charID, StatsName.dodge, -2, charStateModel.timeFrame, charStateModel.castTime, true);
-
-                // stamina regen -1 
-
-
-            }
-             if (CharStatesService.Instance.HasCharDOTState(charController.gameObject, CharStateName.PoisonedLowDOT))
+                if (!charController.charStateController.HasCharDOTState(charStateName))   // already has bleed following FX will not stack up 
+                {
+                    int buffID = 
+                    charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+                            , charID, StatsName.dodge, -2, charStateModel.timeFrame, charStateModel.castTime, true);
+                    allBuffs.Add(buffID);
+                    buffID= 
+                    // stamina regen -1 
+                    charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+                            , charID, StatsName.staminaRegen, -1, charStateModel.timeFrame, charStateModel.castTime, true);
+                    allBuffs.Add(buffID);
+                }
+             }
+             else if (charController.charStateController.HasCharDOTState(CharStateName.PoisonedLowDOT))
              {
                 OverLapRulePoison(); 
              }
@@ -82,14 +89,14 @@ namespace Common
         void OverLapRulePoison()
         {
 
-            if (CharStatesService.Instance.HasCharState(charController.gameObject, CharStateName.PoisonedHighDOT))
+            if (charController.charStateController.HasCharState(CharStateName.PoisonedHighDOT))
             {
                 int castTime = charController.charStateController.allCharBases
                                     .Find(t => t.charStateName == CharStateName.PoisonedHighDOT).castTime ;
                 charController.charStateController.allCharBases
                                     .Find(t => t.charStateName == CharStateName.PoisonedHighDOT).SetCastTime(castTime + 1); 
             }
-            if (CharStatesService.Instance.HasCharState(charController.gameObject, CharStateName.PoisonedLowDOT))
+            if (charController.charStateController.HasCharState(CharStateName.PoisonedLowDOT))
             {
                 int castTime = charController.charStateController.allCharBases
                                     .Find(t => t.charStateName == CharStateName.PoisonedLowDOT).castTime;

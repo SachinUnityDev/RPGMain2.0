@@ -22,18 +22,25 @@ namespace Common
         {
             strikerController = CombatService.Instance.currCharOnTurn;
             int strikerLvl = strikerController.charModel.charLvl;
-            if (CharStatesService.Instance.HasCharDOTState(charController.gameObject, CharStateName.BurnLowDOT))
+            if (!charController.charStateController.HasCharDOTState(CharStateName.BurnHighDOT))
             {
                 dmgPerRound = 3 + (strikerLvl / 4);
                 ApplyFX(); 
                 CombatEventService.Instance.OnSOT += ApplyFX;
-                charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+                if (!charController.charStateController.HasCharDOTState(charStateName))   // already has bleed following FX will not stack up 
+                {
+                    int buffID = 
+                    charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                         , charID, StatsName.dodge, -2, charStateModel.timeFrame, charStateModel.castTime, true);
-                // Stamina regen add to buff controller
-                charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                      , charID, StatsName.staminaRegen, -2, charStateModel.timeFrame, charStateModel.castTime, true);
+                    allBuffs.Add(buffID);
+                    // Stamina regen add to buff controller
+                    buffID = 
+                    charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+                          , charID, StatsName.staminaRegen, -2, charStateModel.timeFrame, charStateModel.castTime, true);
+                    allBuffs.Add(buffID);
+                }
             }
-            else if (CharStatesService.Instance.HasCharDOTState(charController.gameObject, CharStateName.PoisonedLowDOT))
+            else if (charController.charStateController.HasCharDOTState(CharStateName.PoisonedLowDOT))
             {
                 OverLapRulePoison();
             }
@@ -50,7 +57,7 @@ namespace Common
             else
                 charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.health, -Mathf.RoundToInt(dmgPerRound));
 
-            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.fortitude, -2); 
+             charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.fortitude, -2); 
 
         }
 

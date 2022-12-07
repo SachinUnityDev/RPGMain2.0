@@ -25,11 +25,7 @@ namespace Interactables
             {
                 charController.charStateController.ApplyDOTImmunityBuff(CauseType.Food
                     , (int)fruitName, charController.charModel.charID, CharStateName.PoisonedLowDOT, TimeFrame.Infinity, -1, false);
-
             }
-
-
-
         }
     }
 }

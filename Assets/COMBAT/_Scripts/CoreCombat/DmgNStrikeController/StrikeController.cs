@@ -332,7 +332,6 @@ namespace Combat
                     return val;
                 }
             }
-
             return 0f;
         }
         #endregion

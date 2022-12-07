@@ -32,7 +32,6 @@ namespace Common
                     charStateModel.castTime = value; 
             }
         }
-
         public virtual int startRound { get; set; }
         public virtual float dmgPerRound { get; set; }
 

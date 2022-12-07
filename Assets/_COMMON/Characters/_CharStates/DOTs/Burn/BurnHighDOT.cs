@@ -24,16 +24,29 @@ namespace Common
             int strikerLvl = strikerController.charModel.charLvl;
             dmgPerRound = 6 + (strikerLvl / 3);
 
-            bool isBleeding = CharStatesService.Instance.HasCharDOTState(charController.gameObject, CharStateName.BleedLowDOT);
-            bool isPoisoned = CharStatesService.Instance.HasCharDOTState(charController.gameObject, CharStateName.PoisonedLowDOT);
-            bool isBurning = CharStatesService.Instance.HasCharDOTState(charController.gameObject, CharStateName.BurnLowDOT);
+            bool isBleeding = charController.charStateController.HasCharDOTState(CharStateName.BleedLowDOT);
+            bool isPoisoned = charController.charStateController.HasCharDOTState(CharStateName.PoisonedLowDOT);               
+            bool isBurning = charController.charStateController.HasCharDOTState(CharStateName.BurnHighDOT);
+
+            if (isPoisoned && !isBurning)
+            {
+                castTime++;
+            }
+            if (isPoisoned && isBurning)
+            {
+                OverLapRuleBurning();
+            }
+
 
             if (isBurning)
             {
-                // deal 4 - 8 fire dmg(instant)
-                // +deal 4 - 8 Fortitude dmg(instnat)
-               
-            }else
+                charController.damageController.ApplyDamage(charController, CauseType.CharState, (int)charStateName
+                           , DamageType.Fire, UnityEngine.Random.Range(4, 9), false);
+
+                charController.damageController.ApplyDamage(charController, CauseType.CharState, (int)charStateName
+                             , DamageType.FortitudeDmg, UnityEngine.Random.Range(4, 9), false);
+            }
+            else
             {
                 ApplyRoundFX();
                 CombatEventService.Instance.OnSOT += ApplyRoundFX;
@@ -42,32 +55,27 @@ namespace Common
 
             if (isBleeding)
             {
-                CharStatesService.Instance.ClearDOT(charController.gameObject, CharStateName.BleedLowDOT);  
+                charController.charStateController.ClearDOT(CharStateName.BleedLowDOT);  
             }
-            if (isPoisoned && !isBurning)
-            {
-                castTime++; 
-            }
-            if (isPoisoned && isBurning)
-            {
-                OverLapRuleBurning(); 
-            }
+         
         }
 
         void ApplyBurn()
         {
-
+            int buffID = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                         , charID, StatsName.dodge, +2, charStateModel.timeFrame, charStateModel.castTime, true);
-
+            allBuffs.Add(buffID);
+            buffID = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                     , charID, StatsName.waterRes, +24, charStateModel.timeFrame, charStateModel.castTime, true);
+            allBuffs.Add(buffID);
 
 
-
-            CharStatesService.Instance.AddImmunity(charController.gameObject, CharStateName.Soaked);
-            CharStatesService.Instance.AddImmunity(charController.gameObject, CharStateName.BleedLowDOT);
-
+            charController.charStateController.ApplyImmunityBuff(CauseType.CharState, (int)charStateName, charID
+                    , CharStateName.Soaked, TimeFrame.Infinity, 1, true);
+            charController.charStateController.ApplyDOTImmunityBuff(CauseType.CharState, (int)charStateName, charID
+                    , CharStateName.BleedLowDOT, TimeFrame.Infinity, 1, true);
         }
 
         void ApplyRoundFX()
@@ -113,6 +121,8 @@ namespace Common
         {
             base.EndState();
             CombatEventService.Instance.OnSOT -= ApplyRoundFX;
+
+            // to be modified
             CharStatesService.Instance.RemoveImmunity(charController.gameObject, CharStateName.Soaked);
 
             CharStatesService.Instance.RemoveImmunity(charController.gameObject, CharStateName.BleedLowDOT);
@@ -120,14 +130,14 @@ namespace Common
         void OverLapRuleBurning()
         {
 
-            if (CharStatesService.Instance.HasCharState(charController.gameObject, CharStateName.BurnHighDOT))
+            if (charController.charStateController.HasCharState(CharStateName.BurnHighDOT))                
             {
                 int castTime = charController.charStateController.allCharBases
                                     .Find(t => t.charStateName == CharStateName.BurnHighDOT).castTime;
                 charController.charStateController.allCharBases
                                     .Find(t => t.charStateName == CharStateName.BurnHighDOT).SetCastTime(castTime + 1);
             }
-            if (CharStatesService.Instance.HasCharState(charController.gameObject, CharStateName.BurnLowDOT))
+            if (charController.charStateController.HasCharState(CharStateName.BurnLowDOT))
             {
                 int castTime = charController.charStateController.allCharBases
                                     .Find(t => t.charStateName == CharStateName.BurnLowDOT).castTime;

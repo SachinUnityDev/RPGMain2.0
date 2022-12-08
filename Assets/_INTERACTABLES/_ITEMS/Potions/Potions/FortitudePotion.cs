@@ -6,11 +6,9 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class FortitudePotion : PotionsBase, IEquipAble, IConsumable, ISellable,Iitems
+    public class FortitudePotion : PotionsBase, Iitems, IEquipAble, IConsumable
     {
         public override PotionName potionName => PotionName.FortitudePotion;
-        public override CharNames charName { get; set; }
-        public override int charID { get; set; }
         public ItemType itemType => ItemType.Potions;
         public int itemName => (int)PotionName.FortitudePotion;
         public SlotType invSlotType { get; set; }
@@ -37,30 +35,18 @@ namespace Interactables
             allBuffs.Add(buffId);
         }
 
-        public override void PotionEndFX()
-        {
-
-        }
-
-        //   **************************CONSUMABLE ***************
-  
-
         public void ApplyConsumableFX()
         {
         }
-        //   **************************CONSUMABLE ***************
-
-        public void ApplyDisposable()
-        {
-
-        }
-   
-        public void ApplySellable()
+        public void ApplyEquipableFX()
         {
 
         }
 
-      
+        public void RemoveEquipableFX()
+        {
+
+        }
     }
 
 

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class Apple : FruitBase, Iitems
+    public class Apple : FruitBase, Iitems, IConsumable
     {
         public override FruitNames fruitName => FruitNames.Apple;
         public ItemType itemType => ItemType.Fruits;
@@ -26,6 +26,13 @@ namespace Interactables
                 charController.charStateController.ApplyDOTImmunityBuff(CauseType.Food
                     , (int)fruitName, charController.charModel.charID, CharStateName.PoisonedLowDOT, TimeFrame.Infinity, -1, false);
             }
+        }
+
+        public void ApplyConsumableFX()
+        {
+           ApplyInitNHPStaminaRegenFX();
+           ApplyHungerThirstRegenFX();
+           ApplyBuffFX();
         }
     }
 }

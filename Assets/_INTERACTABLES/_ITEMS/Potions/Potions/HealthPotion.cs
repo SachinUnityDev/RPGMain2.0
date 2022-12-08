@@ -6,11 +6,9 @@ using Combat;
 
 namespace Interactables
 {
-    public class HealthPotion : PotionsBase, Iitems,IConsumable, IItemDisposable, IEquipAble, ISellable
+    public class HealthPotion : PotionsBase, Iitems,IConsumable, IEquipAble
     {
         public override PotionName potionName => PotionName.HealthPotion; 
-        public override CharNames charName { get; set; }
-        public override int charID { get; set; }
         public ItemType itemType => ItemType.Potions;
         public int itemName => (int)PotionName.HealthPotion;
         public SlotType invSlotType { get; set; }
@@ -37,50 +35,18 @@ namespace Interactables
                 .ApplyDamage(charController, CauseType.Potions, (int)potionName, DamageType.Heal, val, false);
 
         }
-
-        public override void PotionEndFX()
-        {
-           
-        }
-
-        //   **************************CONSUMABLE ***************
-        public bool IsConsumable(GameState _state)
-        {
-            return true;
-        }
-
         public void ApplyConsumableFX()
         {
-            PotionApplyFX();
         }
-        //   **************************CONSUMABLE ***************
-
-        public bool IsDisposable(GameState _State)
-        {
-            return true; 
-        }
-
-        public void ApplyDisposable()
+        public void ApplyEquipableFX()
         {
 
         }
-        //   ************************** EQUIPABLE ***************
-        public bool IsEquipAble(GameState _state)
-        {
-            return false; 
-        }
-        //   ************************** SELLABLE ***************
-        public bool IsSellable(GameState _state)
-        {
-            return false; 
-        }
 
-        public void ApplySellable()
+        public void RemoveEquipableFX()
         {
-            
-        }
 
-        
+        }
     }
 
 

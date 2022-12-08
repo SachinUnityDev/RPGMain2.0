@@ -6,7 +6,7 @@ using Common;
 
 namespace Interactables
 {
-    public class MangoSteen : FruitBase, Iitems
+    public class MangoSteen : FruitBase, Iitems, IConsumable
     {
         public override FruitNames fruitName => FruitNames.Mangosteen;
         public ItemType itemType => ItemType.Fruits;
@@ -32,6 +32,13 @@ namespace Interactables
             {
                 charController.tempTraitController.ClearTempTrait(TempTraitName.Diarrhea);
             }
+        }
+
+        public void ApplyConsumableFX()
+        {
+            ApplyInitNHPStaminaRegenFX();
+            ApplyHungerThirstRegenFX();
+            ApplyBuffFX();
         }
     }
 }

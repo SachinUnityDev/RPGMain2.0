@@ -29,43 +29,29 @@ namespace Interactables
 
 
     public interface IConsumable
-    {
-      //  bool IsConsumable(GameState _state);
+    {      
         void ApplyConsumableFX(); 
     }
 
     public interface IEquipAble   // stored in active inventory in combat 
     {
-      
-    }
+        void ApplyEquipableFX();
+        void RemoveEquipableFX();
 
-    public interface IItemDisposable
-    {
-        bool IsDisposable(GameState _State);  // probably state can be removed
-        void ApplyDisposable(); 
     }
-
-    public interface ISellable
-    {
-        void ApplySellable(); 
-    }
-
     public interface IPurchaseable
     {
         void ApplyPurchaseable();
     }
-
-
-
     public abstract class PotionsBase 
     {
         public abstract PotionName potionName { get; }
         public int potionInstanceCount = 0; 
+        protected CharController charController;        
+        protected CharNames charName;
+        protected int charID;
 
-        protected CharController charController;
-       // protected PotionController potionController; 
-        public abstract CharNames charName { get; set; }
-        public abstract int charID { get; set; }
+
         //public abstract PotionModel potionModel { get; set; }
         //public virtual PotionModel PotionInit(PotionSO potionSO) // this is fine as it has to from specific SO
         //{
@@ -82,26 +68,20 @@ namespace Interactables
                 
         //} // depending on the name copy and Init the params 
 
-        public virtual void  PotionEquip(CharController charController)
+        public virtual void  PotionEquip()
         {
-            this.charController = charController;
+            charController = CharService.Instance.GetCharCtrlWithName(InvService.Instance.charSelect); 
             charName = charController.charModel.charName;
-            charID = charController.charModel.charID;
-            // check if potion Model auto updates 
-           // potionModel.charName = charName;
-           
+            charID = charController.charModel.charID;           
         }
-
-        public abstract void PotionApplyFX();
-        public abstract void PotionEndFX(); 
-
+        public abstract void PotionApplyFX();  
     }
 
     public interface IOverConsume
     {
         //data
-        float OcWt { get;}
-        TempTraitName TempTraitName { get; }        
+        float OcWt { get; set; }
+        TempTraitName tempTraitName { get; set; }        
         void CheckNApplyOC();// this write to OCData in item Model 
         // tap in itemController and check data in itemModel
         void ApplyOC_FX(); 

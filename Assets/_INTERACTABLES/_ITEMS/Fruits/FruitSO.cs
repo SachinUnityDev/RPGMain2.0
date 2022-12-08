@@ -31,7 +31,7 @@ namespace Interactables
 
 
         [Header("SICKNESS AND ITS WEIGHTS")]
-        public TempTraitName traitName;
+        public TempTraitName tempTraitName;
         public int weightOfSickeness;
 
         [Header("ITEM VARIABLES")]

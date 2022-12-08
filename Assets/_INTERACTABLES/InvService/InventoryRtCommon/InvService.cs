@@ -131,23 +131,23 @@ namespace Interactables
 
             return false;
         }
-        public bool IsItemSellable(Iitems item)
-        {
-            ISellable iSellable = item as ISellable;
-            if (iSellable == null)
-                return false;
-            // can be sold only in townState 
-            // NPC Service will match the NPC who can buy the given item
+        //public bool IsItemSellable(Iitems item)
+        //{
+        //    ISellable iSellable = item as ISellable;
+        //    if (iSellable == null)
+        //        return false;
+        //    // can be sold only in townState 
+        //    // NPC Service will match the NPC who can buy the given item
 
 
-            return false;
-        }
+        //    return false;
+        //}
 
         public bool IsItemDispoable(Iitems item)
         {
-            IItemDisposable iDisposable = item as IItemDisposable;
-            if (iDisposable == null)
-                return false;
+            //IItemDisposable iDisposable = item as IItemDisposable;
+            //if (iDisposable == null)
+            //    return false;
             return true;
         }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class Bread : Foodbase, Iitems
+    public class Bread : Foodbase, Iitems, IConsumable
     {
         public override FoodNames foodName => FoodNames.Bread;
         public ItemType itemType => ItemType.Foods;
@@ -21,6 +21,12 @@ namespace Interactables
         public override void ApplyFX2()
         {
 
+        }
+
+        public void ApplyConsumableFX()
+        {
+            ApplyInitNFX();
+            ApplyFX2();
         }
     }
 }

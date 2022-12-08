@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class FlaskOfWater : Foodbase, Iitems
+    public class FlaskOfWater : Foodbase, Iitems,IConsumable
     {
         public override FoodNames foodName => FoodNames.FlaskOfWater;
         public ItemType itemType => ItemType.Foods;
@@ -22,6 +22,11 @@ namespace Interactables
         public override void ApplyFX2()
         {
 
+        }
+
+        public void ApplyConsumableFX()
+        {
+            ApplyInitNFX();// some thirst relief here           
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class Kiwano : FruitBase, Iitems
+    public class Kiwano : FruitBase, Iitems, IConsumable, IOverConsume
     {
         public override FruitNames fruitName => FruitNames.Kiwano;
         public ItemType itemType => ItemType.Fruits;
@@ -14,6 +14,9 @@ namespace Interactables
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; }
         public int itemId { get; set; }
+        public float OcWt { get; set; }
+        public TempTraitName tempTraitName { get; set; }
+
         public void OnHoverItem()
         {
         }
@@ -27,7 +30,25 @@ namespace Interactables
 
             }
         }
+        public void CheckNApplyOC()
+        {
+            tempTraitName = fruitSO.tempTraitName;
+            OcWt = fruitSO.weightOfSickeness;
+            OCData ocData = new OCData(itemType, itemName, OcWt);
+            charController.itemController.ChecknApplyOC(ocData, tempTraitName, this);
+        }
 
+        public void ApplyOC_FX()
+        {
+            charController.tempTraitController.ApplyTempTraitBuff(CauseType.Fruit, (int)itemName, charID
+                               , tempTraitName, TimeFrame.Infinity, 1, true);
+        }
+        public void ApplyConsumableFX()
+        {
+            ApplyInitNHPStaminaRegenFX();
+            ApplyHungerThirstRegenFX();
+            CheckNApplyOC();
+        }
     }
 }
 

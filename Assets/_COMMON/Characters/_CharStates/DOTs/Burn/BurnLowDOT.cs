@@ -21,8 +21,12 @@ namespace Common
 
         public override void StateApplyFX()
         {
-            strikerController = CombatService.Instance.currCharOnTurn;
-            int strikerLvl = strikerController.charModel.charLvl;
+            int strikerLvl = 0;
+            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            {
+                strikerController = CombatService.Instance.currCharOnTurn;
+                strikerLvl = strikerController.charModel.charLvl;
+            }
             dmgPerRound = 4 + (strikerLvl / 4);
 
             bool isBleeding = charController.charStateController.HasCharDOTState(CharStateName.BleedLowDOT);

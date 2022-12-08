@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class AssegaiFruit : FruitBase, Iitems
+    public class AssegaiFruit : FruitBase, Iitems, IConsumable
     {
         public override FruitNames fruitName => FruitNames.AssegaiFruit;
         public ItemType itemType => ItemType.Fruits;
@@ -27,6 +27,13 @@ namespace Interactables
                 charController.buffController.ApplyBuffOnRange(CauseType.Fruit, (int)fruitName,
                  charController.charModel.charID, StatsName.damage, 0,1, fruitSO.timeFrame, fruitSO.castTime, true);
             }
+        }
+
+        public void ApplyConsumableFX()
+        {
+            ApplyInitNHPStaminaRegenFX();
+            ApplyHungerThirstRegenFX();            
+            ApplyBuffFX();
         }
     }
 }

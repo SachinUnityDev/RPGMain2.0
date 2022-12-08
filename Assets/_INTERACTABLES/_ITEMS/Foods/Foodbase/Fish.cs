@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class Fish : Foodbase, Iitems
+    public class Fish : Foodbase, Iitems, IConsumable
     {
         public override FoodNames foodName => FoodNames.Fish;
         public ItemType itemType => ItemType.Foods;
@@ -33,6 +33,12 @@ namespace Interactables
                 charController.charStateController.ApplyCharStateBuff(CauseType.Food, (int)foodName
                     , charController.charModel.charID, CharStateName.PoisonedLowDOT, TimeFrame.Infinity, -1, false);
             }
+        }
+
+        public void ApplyConsumableFX()
+        {
+            ApplyInitNFX();
+            ApplyFX2();
         }
     }
 }

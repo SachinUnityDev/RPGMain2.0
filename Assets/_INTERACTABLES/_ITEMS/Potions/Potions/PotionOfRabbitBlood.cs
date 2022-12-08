@@ -6,14 +6,9 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class PotionOfRabbitBlood : PotionsBase, Iitems, IEquipAble, IConsumable, IItemDisposable, ISellable 
+    public class PotionOfRabbitBlood : PotionsBase, Iitems, IEquipAble, IConsumable
     {
-        public override PotionName potionName => PotionName.PotionOfRabbitblood; 
-        public override CharNames charName { get ; set ; }
-        public override int charID { get; set; }
-
-       // public override PotionModel potionModel { get ; set ; }
-
+        public override PotionName potionName => PotionName.PotionOfRabbitblood;  
         public ItemType itemType => ItemType.Potions; 
         public int itemName => (int) PotionName.PotionOfRabbitblood;
         public SlotType invSlotType { get; set; }
@@ -36,40 +31,20 @@ namespace Interactables
                       , StatsName.dodge, -2f, TimeFrame.EndOfRound, castTime, true);
         }
 
-        public override void PotionEndFX()
-        {
-
-        }
-
-        //   **************************CONSUMABLE ***************
-        
-
         public void ApplyConsumableFX()
         {
         }
-        //   **************************CONSUMABLE ***************
 
-        public void ApplyDisposable()
-        {
-
-        }
-        //   ************************** EQUIPABLE ***************
-        
-        //   ************************** SELLABLE ***************
-        public bool IsSellable(GameState _state)
-        {
-            return false;
-        }
-
-        public void ApplySellable()
+        public void ApplyEquipableFX()
         {
 
         }
 
-        public bool IsDisposable(GameState _State)
+        public void RemoveEquipableFX()
         {
-            return false;
+
         }
+
     }
 
 

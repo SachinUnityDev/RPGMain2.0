@@ -1,3 +1,4 @@
+using Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class Carrot : FruitBase, Iitems
+    public class Carrot : FruitBase, Iitems,IConsumable,IOverConsume
     {
         public override FruitNames fruitName => FruitNames.Carrot;
         public ItemType itemType => ItemType.Fruits;
@@ -14,6 +15,9 @@ namespace Interactables
         public SlotType invSlotType { get; set; }        
         public int itemId { get; set; }
         public List<int> allBuffs { get; set; }
+        public float OcWt { get; set; }
+        public TempTraitName tempTraitName { get; set; }
+
         public void OnHoverItem()
         {
         }
@@ -25,6 +29,27 @@ namespace Interactables
                 charController.buffController.ApplyBuff(CauseType.Fruit, (int)fruitName,
                  charController.charModel.charID, StatsName.acc, 1, fruitSO.timeFrame, fruitSO.castTime, true);
             }
+        }
+
+        public void CheckNApplyOC()
+        {
+            tempTraitName = fruitSO.tempTraitName;
+            OcWt = fruitSO.weightOfSickeness;
+            OCData ocData = new OCData(itemType, itemName, OcWt);
+            charController.itemController.ChecknApplyOC(ocData, tempTraitName, this);
+        }
+
+        public void ApplyOC_FX()
+        {
+            charController.tempTraitController.ApplyTempTraitBuff(CauseType.Fruit, (int)itemName, charID
+                                             , tempTraitName, TimeFrame.Infinity, 1, true);
+        }
+
+        public void ApplyConsumableFX()
+        {
+            ApplyInitNHPStaminaRegenFX();
+            ApplyHungerThirstRegenFX();
+            CheckNApplyOC();
         }
     }
 }

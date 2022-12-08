@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Interactables
 {
 
-    public class Beet : FruitBase, Iitems
+    public class Beet : FruitBase, Iitems, IConsumable
     {
         public override FruitNames fruitName => FruitNames.Beet;
         public ItemType itemType => ItemType.Fruits;
@@ -15,7 +15,7 @@ namespace Interactables
         public SlotType invSlotType { get; set; }
         public ItemController itemController { get; set; }
         public int itemId { get; set; }
-        public List<int> allBuffs { get; set; }
+        public List<int> allBuffs { get; set; }  
 
         public void OnHoverItem()
         {
@@ -27,8 +27,13 @@ namespace Interactables
             {
                 charController.charStateController.ApplyDOTImmunityBuff(CauseType.Food
                     , (int)fruitName, charController.charModel.charID, CharStateName.BleedLowDOT, TimeFrame.Infinity, -1, false);
-
             }
+        }     
+
+        public void ApplyConsumableFX()
+        {
+            ApplyInitNHPStaminaRegenFX();
+            ApplyHungerThirstRegenFX();          
         }
     }
 }

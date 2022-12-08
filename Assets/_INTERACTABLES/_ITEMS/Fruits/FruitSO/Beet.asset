@@ -22,8 +22,8 @@ MonoBehaviour:
   hungerReliefMax: 6
   thirstReliefMin: 3
   thirstReliefMax: 5
-  traitName: 12
-  weightOfSickeness: 5
+  tempTraitName: 0
+  weightOfSickeness: 0
   inventoryStack: 3
   cost:
     silver: 0
@@ -37,4 +37,3 @@ MonoBehaviour:
   - 1 Stamina Regen, 6 rds
   - Slight Hunger and Thirst relief
   - Chance to receive Bleed Immunity buff
-  - May cure Diarrhea

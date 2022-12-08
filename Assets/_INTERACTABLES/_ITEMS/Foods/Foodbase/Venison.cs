@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class Venison : Foodbase, Iitems
+    public class Venison : Foodbase, Iitems, IConsumable
     {
         public override FoodNames foodName => FoodNames.Venison;
         public ItemType itemType => ItemType.Foods;
@@ -36,6 +36,12 @@ namespace Interactables
                 charController.charStateController.ApplyCharStateBuff(CauseType.Food, (int)foodName
                     , charController.charModel.charID, CharStateName.PoisonedLowDOT, TimeFrame.Infinity, -1, false);
             }
+        }
+
+        public void ApplyConsumableFX()
+        {
+            ApplyInitNFX();
+            ApplyFX2();
         }
     }
 }

@@ -6,12 +6,9 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class ElixirOfVigor : PotionsBase, IEquipAble, IConsumable, IItemDisposable, ISellable, Iitems
+    public class ElixirOfVigor : PotionsBase, Iitems, IEquipAble, IConsumable
     {
         public override PotionName potionName => PotionName.ElixirOfVigor; 
-
-        public override CharNames charName { get; set; }
-        public override int charID { get; set; }
         public ItemType itemType => ItemType.Potions;
         public int itemName => (int)PotionName.ElixirOfVigor;
         public int maxInvStackSize { get; set; }
@@ -43,46 +40,20 @@ namespace Interactables
             allBuffs.Add(buffID);
         }
 
-        public override void PotionEndFX()
-        {
-
-        }
-
-        //   **************************CONSUMABLE ***************
-        public bool IsConsumable(GameState _state)
-        {
-            return false;
-        }
-
         public void ApplyConsumableFX()
         {
         }
-        //   **************************CONSUMABLE ***************
 
-        public bool IsDisposable(GameState _State)
-        {
-            return false;
-        }
-
-        public void ApplyDisposable()
+        public void ApplyEquipableFX()
         {
 
         }
-        //   ************************** EQUIPABLE ***************
-        public bool IsEquipAble(GameState _state)
-        {
-            return false;
-        }
-        //   ************************** SELLABLE ***************
-        public bool IsSellable(GameState _state)
-        {
-            return false;
-        }
 
-        public void ApplySellable()
+        public void RemoveEquipableFX()
         {
 
         }
+
 
 
     }

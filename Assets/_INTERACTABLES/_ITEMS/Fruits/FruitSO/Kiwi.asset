@@ -22,7 +22,7 @@ MonoBehaviour:
   hungerReliefMax: 2
   thirstReliefMin: 6
   thirstReliefMax: 8
-  traitName: 29
+  tempTraitName: 29
   weightOfSickeness: 4
   inventoryStack: 10
   cost:

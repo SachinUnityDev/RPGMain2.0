@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class RottenFood : Foodbase, Iitems
+    public class RottenFood : Foodbase, Iitems, IConsumable
     {
         public override FoodNames foodName => FoodNames.RottenFood;
         public ItemType itemType => ItemType.Foods;
@@ -35,5 +35,11 @@ namespace Interactables
                     , charController.charModel.charID, CharStateName.PoisonedHighDOT, TimeFrame.Infinity, -1, false);
             }
         }
+        public void ApplyConsumableFX()
+        {
+            ApplyInitNFX();
+            ApplyFX2();
+        }
+
     }
 }

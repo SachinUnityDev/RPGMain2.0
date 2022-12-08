@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class Cucumber : FruitBase, Iitems
+    public class Cucumber : FruitBase, Iitems, IConsumable
     {
         public override FruitNames fruitName => FruitNames.Cucumber;
         public ItemType itemType => ItemType.Fruits;
@@ -18,6 +18,12 @@ namespace Interactables
         }
         public override void ApplyBuffFX()
         {
+        }
+
+        public void ApplyConsumableFX()
+        {
+            ApplyInitNHPStaminaRegenFX();
+            ApplyHungerThirstRegenFX();            
         }
     }
 }

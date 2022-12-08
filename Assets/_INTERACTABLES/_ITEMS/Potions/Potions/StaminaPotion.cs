@@ -7,12 +7,9 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class StaminaPotion : PotionsBase, Iitems, IEquipAble, IConsumable, IItemDisposable, ISellable 
+    public class StaminaPotion : PotionsBase, Iitems, IEquipAble, IConsumable 
     {
         public override PotionName potionName => PotionName.StaminaPotion; 
-        public override CharNames charName { get; set; }
-        public override int charID { get; set; }
-      //  public override PotionModel potionModel { get ; set ; }
         public ItemType itemType => ItemType.Potions; 
         public int itemName => (int) PotionName.StaminaPotion;
         public SlotType invSlotType { get; set; }
@@ -40,49 +37,19 @@ namespace Interactables
             charController.ChangeStat(CauseType.Potions, (int)potionName, charID, StatsName.stamina, val);
         }
 
-        public override void PotionEndFX()
-        {
-           
-        }
-
-        //   **************************CONSUMABLE ***************
-        public bool IsConsumable(GameState _state)
-        {
-            if (_state == GameState.InCombat || _state == GameState.InQuest)
-                return true;
-            else
-                return false; 
-        }
-
         public void ApplyConsumableFX()
         {
-            PotionApplyFX();
-          
-        }
-        //   **************************CONSUMABLE ***************
-
-        public bool IsDisposable(GameState _State)
-        {
-            return false;
         }
 
-        public void ApplyDisposable()
-        {
-
-        }
-        //   ************************** EQUIPABLE ***************
-
-        //   ************************** SELLABLE ***************
-  
-
-        public void ApplySellable()
+        public void ApplyEquipableFX()
         {
 
         }
 
-        
+        public void RemoveEquipableFX()
+        {
+
+        }
     }
-
-
 }
 

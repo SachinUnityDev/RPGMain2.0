@@ -6,11 +6,9 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class PotionOfNimbleness : PotionsBase, IEquipAble, IConsumable, ISellable, Iitems
+    public class PotionOfNimbleness : PotionsBase, Iitems, IEquipAble, IConsumable
     {
         public override PotionName potionName => PotionName.PotionOfNimbleness; 
-        public override CharNames charName { get; set; }
-        public override int charID { get; set; }
         public ItemType itemType => ItemType.Potions;
         public int itemName => (int) PotionName.PotionOfNimbleness;
         public SlotType invSlotType { get; set; }
@@ -37,45 +35,20 @@ namespace Interactables
 
 
         }
-        public override void PotionEndFX()
-        {
-
-        }
-
-        //   **************************CONSUMABLE ***************
-        public bool IsConsumable(GameState _state)
-        {
-            return false;
-        }
 
         public void ApplyConsumableFX()
         {
         }
-        //   **************************CONSUMABLE ***************
 
-        public bool IsDisposable(GameState _State)
-        {
-            return false;
-        }
-
-
-        //   ************************** EQUIPABLE ***************
-        public bool IsEquipAble(GameState _state)
-        {
-            return false;
-        }
-        //   ************************** SELLABLE ***************
-        public bool IsSellable(GameState _state)
-        {
-            return false;
-        }
-
-        public void ApplySellable()
+        public void ApplyEquipableFX()
         {
 
         }
 
-    
+        public void RemoveEquipableFX()
+        {
+
+        }
     }
 
 

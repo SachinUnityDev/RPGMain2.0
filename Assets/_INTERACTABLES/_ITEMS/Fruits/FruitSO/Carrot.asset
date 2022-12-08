@@ -22,7 +22,7 @@ MonoBehaviour:
   hungerReliefMax: 8
   thirstReliefMin: 0
   thirstReliefMax: 0
-  traitName: 10
+  tempTraitName: 10
   weightOfSickeness: 3
   inventoryStack: 4
   cost:
@@ -36,5 +36,5 @@ MonoBehaviour:
   allLines:
   - 1 Hp Regen, 4 rds
   - Slight Hunger relief
-  - Chance to receive Haste buff
+  - Chance to receive Accuracy buff
   - May cause Constipation

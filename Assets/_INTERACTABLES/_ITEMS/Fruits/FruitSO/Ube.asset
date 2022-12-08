@@ -22,8 +22,8 @@ MonoBehaviour:
   hungerReliefMax: 3
   thirstReliefMin: 3
   thirstReliefMax: 5
-  traitName: 12
-  weightOfSickeness: 4
+  tempTraitName: 12
+  weightOfSickeness: 5
   inventoryStack: 8
   cost:
     silver: 0

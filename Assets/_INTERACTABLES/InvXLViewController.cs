@@ -17,7 +17,7 @@ namespace Interactables
 
         [SerializeField] GameObject bestiaryPanel;
         [SerializeField] GameObject skillPanel;
-        [SerializeField] GameObject lorePanel;
+        [SerializeField] GameObject loreParentPanel;
         [SerializeField] GameObject invPanel;
 
         [Header("Not to be ref")]
@@ -26,10 +26,16 @@ namespace Interactables
         [SerializeField] Button loreBtn;
         [SerializeField] Button invBtn;
 
-        [SerializeField] Button invXLClose; 
+        [SerializeField] Button invXLClose;
 
-       
 
+        private void Awake()
+        {
+             bestiaryPanel.SetActive(true); 
+             skillPanel.SetActive(true);
+             loreParentPanel.SetActive(true);
+             invPanel.SetActive(true);
+        }
         void Start()
         {
             beastiaryBtn =  ToggleBtnParent.transform.GetChild(0).GetComponent<Button>();
@@ -61,37 +67,32 @@ namespace Interactables
         public void Init()
         {
             //start with the inv panel display
-            UIControlServiceGeneral.Instance.TogglePanelOnInGrp(invPanel, true,4);
+            UIControlServiceGeneral.Instance.TogglePanelOnInGrp(invPanel, true);
             // init all four panels and their subpanels here 
             bestiaryPanel.GetComponent<IPanel>().Init();
             skillPanel.GetComponent<IPanel>().Init();
-            lorePanel.GetComponent<IPanel>().Init();
+            loreParentPanel.GetComponent<IPanel>().Init();
             foreach (IPanel panel in invPanel.GetComponentsInChildren<IPanel>())
             {
                 panel.Init();
             }
-
         }
-
-
         void OnBeastiaryPressed()
         {
-            UIControlServiceGeneral.Instance.TogglePanelOnInGrp(bestiaryPanel, true,4);
+            UIControlServiceGeneral.Instance.TogglePanelOnInGrp(bestiaryPanel, true);
         }
         void OnSkillBtnPressed()
         {
-            UIControlServiceGeneral.Instance.TogglePanelOnInGrp(skillPanel, true,4);
+            UIControlServiceGeneral.Instance.TogglePanelOnInGrp(skillPanel, true);
         }
         void OnLoreBtnPressed()
         {            
-            UIControlServiceGeneral.Instance.TogglePanelOnInGrp(lorePanel, true,4);
-
+            UIControlServiceGeneral.Instance.TogglePanelOnInGrp(loreParentPanel, true);
         }
         void OnInvBtnPressed()
         {
-            UIControlServiceGeneral.Instance.TogglePanelOnInGrp(invPanel, true,4);
+            UIControlServiceGeneral.Instance.TogglePanelOnInGrp(invPanel, true);
         }
-
     }
 
 

@@ -121,11 +121,44 @@ namespace Interactables
         Meals,// to be added .. only needed in the camp
         SagaicGewgaws, 
         PoeticGewgaws,
-        RelicGewgaws,
+        RelicGewgaws,        
         
 
     }
 
+    public enum AlcoholNames
+    {
+        None, 
+        Beer, 
+        Cider,
+    }
+    public enum TeaNames
+    {
+        None, 
+        PurpleTea, 
+        ThymeTea, 
+        HoneyBushTea, 
+        EchinaceaTea,
+    }
+    public enum Soup
+    {
+        None, 
+        LentilSoup, 
+        VegetableSoup, 
+        MushroomSoup, 
+    }
+    public enum MealsNames
+    {
+        None,
+        FishSteak,
+        SeasonedVenison, 
+        MuttonStew,
+        BeefStew, 
+        CookedFish, 
+        CookedMeat,
+        CookedHam,
+        RoastedChicken, 
+    }
 
     public enum PotionName
     {

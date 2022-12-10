@@ -34,11 +34,11 @@ namespace Interactables
 
     public interface IEnchantable    // ONLY IN THE TEMPLE // ONLY DIVINE GEM ENCHANT 
     {
-        GemName gemName { get; }
-      //  WeaponType weaponType { get; }
-        bool EnchantGemFX();   // only one socket... unlocks a skills 
-      //  bool IsEnchantable();      
-       // int currCharge { get; set; } // 12 
+      //  GemName gemName { get; }
+      ////  WeaponType weaponType { get; }
+      //  bool EnchantGemFX();   // only one socket... unlocks a skills 
+      ////  bool IsEnchantable();      
+      // // int currCharge { get; set; } // 12 
     }
 
     public interface ICraftable  // ONLY PRECIOUS GEMS ARE CRAFTABLE 
@@ -50,8 +50,7 @@ namespace Interactables
     public interface IDivGem
     {
         int fxVal1 { get; set; } 
-        int fxVal2 { get; set; }
-        
+        int fxVal2 { get; set; }        
         float multFX { get; set;}
         void OnEnchantedFX();
         void OnSocketed();

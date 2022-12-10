@@ -22,7 +22,6 @@ namespace Interactables
 
         }
 
-
         #region CHECKS 
 
         #endregion
@@ -62,11 +61,9 @@ namespace Interactables
         }
         #endregion
 
-
         #region Setters
 
         #endregion
-
 
         public void InitHerb2CommonInv(CharController _charController, HerbNames _herbName, CharController causedby
           , CauseType causeType, int causeID)

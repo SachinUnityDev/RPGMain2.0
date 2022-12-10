@@ -124,9 +124,10 @@ namespace Common
             AddPanel2OpenList(go); 
         }
 
-        public void TogglePanelOnInGrp(GameObject go, bool turnON, int panelCount)
+        public void TogglePanelOnInGrp(GameObject go, bool turnON)
         {
             Transform goParent = go.transform.parent;
+            int  panelCount = goParent.childCount; 
             for (int i =0; i<panelCount; i++)
             {
                 TogglePanel(goParent.GetChild(i).gameObject, false); 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
-
+using System.Web.UI.Design;
 
 namespace Interactables
 {
@@ -19,7 +19,7 @@ namespace Interactables
         [Header("Curr CharSelected")]
         public CharController selectChar; 
 
-        ItemFactory itemFactory;    
+        [SerializeField] ItemFactory itemFactory;    
 
 
         public ItemCardViewController cardViewController;
@@ -65,7 +65,7 @@ namespace Interactables
 
         void Start()
         {
-
+            itemFactory = gameObject.GetComponent<ItemFactory>();
         }
 
         // distributed 
@@ -220,12 +220,10 @@ namespace Interactables
 
             iitems.invSlotType = slotType;
 
+            InvService.Instance.invMainModel.AddItem2CommInv(iitems);   
 
-            // iitem can be missed all together there is nothing go init in an item
-
-
-            // inventory Data
-
+            //create  item
+            //add to inv with slot type
 
 
              // get items form item factory                
@@ -257,6 +255,8 @@ namespace Interactables
         #region GET ITEM CONTROLLERS AND MODELS
         public ItemController GetItemController(CharNames charName)
         {
+            // all charController in party
+
            ItemController itemController =
                         allItemControllers.Find(t => t.itemModel.charName == charName); 
             if (itemController != null)
@@ -273,21 +273,21 @@ namespace Interactables
 
         #region GET SCRIPTABLES 
 
-        public GenGewgawSO GetGewgawSO(GenGewgawNames genGewgawName)
+
+
+
+        #endregion
+
+        private void Update()
         {
-            foreach (GenGewgawSO genGewgaw in allGenGewgawSO)
+            if (Input.GetKeyDown(KeyCode.H))
             {
-                if (genGewgaw.genGewgawName == genGewgawName)
-                {
-                    return genGewgaw;
-                }
+                InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionName.HealthPotion,
+                                     CauseType.Items, 2); 
+        
             }
-            Debug.Log("GenGewGawSO not found");
-            return null;
         }
 
-
-        #endregion 
     }
 
 

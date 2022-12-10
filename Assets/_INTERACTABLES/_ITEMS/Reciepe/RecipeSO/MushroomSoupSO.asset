@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10e305cc638fb06418df98c90a2114b2, type: 3}
+  m_Name: MushroomSoupSO
+  m_EditorClassIdentifier: 
+  mealName: 0
+  soupName: 3
+  teaName: 0
+  slotData:
+  - IngredName: 20
+    FruitName: 0
+    FoodName: 0
+    HerbName: 0
+    quantity: 5
+  - IngredName: 6
+    FruitName: 0
+    FoodName: 0
+    HerbName: 0
+    quantity: 1
+  - IngredName: 8
+    FruitName: 0
+    FoodName: 0
+    HerbName: 0
+    quantity: 3
+  - IngredName: 0
+    FruitName: 0
+    FoodName: 6
+    HerbName: 0
+    quantity: 3
+  toolName: 2
+  pdtSprite: {fileID: 21300000, guid: 5bc31bbc2bba1e041bae9262b5d4f16d, type: 3}

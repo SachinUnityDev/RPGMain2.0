@@ -104,6 +104,7 @@ namespace Interactables
     }
     public enum ItemType
     {
+        None,
         Potions,
         GenGewgaws,
         Herbs,
@@ -140,23 +141,26 @@ namespace Interactables
         HoneyBushTea, 
         EchinaceaTea,
     }
-    public enum Soup
+    public enum SoupNames
     {
         None, 
         LentilSoup, 
         VegetableSoup, 
         MushroomSoup, 
+        FishSoup, 
     }
     public enum MealsNames
     {
         None,
-        FishSteak,
+        BeefSteak, 
+        FishStew,
         SeasonedVenison, 
         MuttonStew,
         BeefStew, 
-        CookedFish, 
-        CookedMeat,
+        CookedFish=6, 
+        CookedVenison,
         CookedHam,
+        CookedMutton,
         RoastedChicken, 
     }
 
@@ -203,6 +207,9 @@ namespace Interactables
         Bread,
         FlaskOfWater,
         RottenFood,
+        Ham, 
+        Mutton,
+        
 
     }
 
@@ -248,10 +255,10 @@ namespace Interactables
         Ginger,
         JuniperBerries,
         Onion,
-        Pepper,
+        RedPepper,
         Thyme,
         Yeast,
-        SpiderEgg,
+        SpiderEgg =10,
         BatEar,
         DragonflyWings,
         FelineHeart,
@@ -260,6 +267,12 @@ namespace Interactables
         RatFang, 
         RatKingScales, 
         Wheat, 
+        Skull,
+        WhiteMushroom =20, 
+        HyenaEar, 
+        Lentils,
+
+
         
 
     }
@@ -478,7 +491,7 @@ namespace Interactables
     {
         None,
         Chalice,
-        CookingTools,
+        CookingPot,
         Firewood,
         FrostBandage,
         Key,
@@ -489,8 +502,10 @@ namespace Interactables
         Shovel,
         Trap,
         HerbalPouch,
+        Fermentor, 
     }
     
+
     public enum CurioNames
     {
         None,

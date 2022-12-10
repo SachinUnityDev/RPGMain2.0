@@ -32,7 +32,7 @@ namespace Interactables
         public List<Iitems> excessInvItems = new List<Iitems>();
         // 4X6 Behaves like a Excess Inv inv ()        
 
-        public bool AddItem2CommInv(Iitems item)
+        public bool AddItem2CommInv(Iitems item)   // KEY POINT OF ADDITION OF ITEM 
         {
             //if (invData.charName == CharNames.Abbas_Skirmisher)
             //{

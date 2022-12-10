@@ -71,6 +71,7 @@ namespace Interactables
         }
         public Iitems GetNewItem(ItemType itemType, int itemName)
         {
+            itemId++;
             switch (itemType)
             {
                 case ItemType.Potions:
@@ -218,7 +219,7 @@ namespace Interactables
         }
         public Iitems GetGenGewgaws(GenGewgawNames genGewgawName)
         {
-            GenGewgawSO genGewgawSO = ItemService.Instance.GetGewgawSO(genGewgawName);
+            GenGewgawSO genGewgawSO = ItemService.Instance.GetGenGewgawSO(genGewgawName);
 
             SuffixNames suffixName = genGewgawSO.suffixName;
             PrefixNames prefixName = genGewgawSO.prefixName;

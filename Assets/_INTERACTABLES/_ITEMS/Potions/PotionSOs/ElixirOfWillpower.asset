@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   potionName: 12
   potionAddict: 12
-  inventoryStack: 3
+  maxInvStackSize: 1
   cost:
     silver: 0
     bronze: 96

@@ -20,7 +20,11 @@ namespace Interactables
         {
 
         }
-     
+        public void InitItem(int itemId, int maxInvStackSize)
+        {
+            this.itemId = itemId;
+            this.maxInvStackSize = maxInvStackSize;
+        }
         public override void ApplyFX2()
         {
             float chance = 20f;

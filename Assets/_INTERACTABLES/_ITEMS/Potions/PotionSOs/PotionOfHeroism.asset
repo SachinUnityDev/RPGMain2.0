@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   potionName: 9
   potionAddict: 7
-  inventoryStack: 6
+  maxInvStackSize: 3
   cost:
     silver: 0
     bronze: 31
@@ -23,6 +23,7 @@ MonoBehaviour:
   minCastTime: 16
   maxCastTime: 20
   maxWorldInstance: 6
+  desc: 
   iconSprite: {fileID: 21300000, guid: b6d28322ad0a00c42ad042e5e38e3601, type: 3}
   allLines:
   - +2-4<style="Attributes"> Morale </style>

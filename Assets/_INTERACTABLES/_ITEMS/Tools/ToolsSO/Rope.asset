@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rope
   m_EditorClassIdentifier: 
   toolName: 9
-  inventoryStack: 3
+  maxInvStackSize: 3
   cost:
     silver: 0
     bronze: 12
@@ -21,4 +21,4 @@ MonoBehaviour:
   maxWorldInstance: 100
   iconSprite: {fileID: 21300000, guid: 6fdff462f5b273b4fb85abf0161d7dec, type: 3}
   allLines:
-  - Interacts with certain quest objects.
+  - Interacts with certain quest objects

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eadd4b0e87ab6674eb8e58438e62fdcf, type: 3}
+  m_Name: Thyme
+  m_EditorClassIdentifier: 
+  herbName: 12
+  maxInvStackSize: 6
+  cost:
+    silver: 0
+    bronze: 5
+  fluctuation: 20
+  maxWorldInstance: 12
+  HpRegenVal: 1
+  bufftimeInRds: 5
+  desc: 
+  iconSprite: {fileID: 21300000, guid: 78ff19df0c2ecbd43958cd260a01dc80, type: 3}
+  allLines:
+  - Helps cure certain sicknesses
+  - Can be used as an Ingredient

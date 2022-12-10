@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ginger
   m_EditorClassIdentifier: 
   ingredName: 4
-  maxInventoryStack: 8
+  maxInvStackSize: 8
   cost:
     silver: 0
     bronze: 6
@@ -21,4 +21,4 @@ MonoBehaviour:
   maxWorldInstance: 100
   iconSprite: {fileID: 21300000, guid: fd9424e234ca0314d9cf793a6894c666, type: 3}
   allLines:
-  - May be used as an ingredient for Meals, Soups and Teas.
+  - May be used as an ingredient for Meals, Soups and Teas

@@ -10,18 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a715d30bd539e8643868499728170ee4, type: 3}
-  m_Name: CamelLeatherGlovesOfTheScholar
+  m_Name: CamelLeatherGlovesOftheScholar
   m_EditorClassIdentifier: 
+  genGewgawName: 13
   prefixName: 3
   gewgawName: 6
   suffixName: 19
   gewgawSlotType: 3
-  maxWorldInstance: 3
+  maxInvStackSize: 1
   classRestrictions: 
   cultureRestrictions: 0e00000019000000
   raceRestrictions: 
   cost:
     silver: 0
     bronze: 80
+  fluctuationRate: 20
   desc: 
   iconSprite: {fileID: 21300000, guid: 46713bc57689d7b4aaeb5a5f93c97e75, type: 3}

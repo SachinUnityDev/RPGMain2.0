@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Myrsine
   m_EditorClassIdentifier: 
   herbName: 8
-  maxInventoryStack: 6
+  maxInvStackSize: 6
   cost:
     silver: 0
     bronze: 6

@@ -195,6 +195,7 @@ namespace Interactables
         PoisonIvy,
         PurpleTeaLeaf,
         TambotiFruit,
+        Thyme, 
     }
 
     public enum FoodNames
@@ -256,7 +257,7 @@ namespace Interactables
         JuniperBerries,
         Onion,
         RedPepper,
-        Thyme,
+        xxxx,
         Yeast,
         SpiderEgg =10,
         BatEar,
@@ -503,6 +504,7 @@ namespace Interactables
         Trap,
         HerbalPouch,
         Fermentor, 
+        Mortar,
     }
     
 

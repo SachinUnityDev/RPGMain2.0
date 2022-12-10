@@ -10,7 +10,7 @@ namespace Interactables
     public class ToolsSO : ScriptableObject
     {
         public ToolNames toolName;    
-        public int inventoryStack;
+        public int maxInvStackSize;
         public Currency cost;
         public float fluctuation;
         public int maxWorldInstance;

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cardomon
   m_EditorClassIdentifier: 
   ingredName: 1
-  maxInventoryStack: 8
+  maxInvStackSize: 8
   cost:
     silver: 0
     bronze: 6
@@ -21,4 +21,4 @@ MonoBehaviour:
   maxWorldInstance: 100
   iconSprite: {fileID: 21300000, guid: 190cd2d813a575f4990940e15e89d144, type: 3}
   allLines:
-  - May be used as an ingredient for Meals, Soups and Teas.
+  - May be used as an ingredient for Meals, Soups and Teas

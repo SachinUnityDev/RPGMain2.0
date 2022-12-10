@@ -18,7 +18,15 @@ namespace Interactables
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; }
+        public void OnHoverItem()
+        {
 
+        }
+        public void InitItem(int itemId, int maxInvStackSize)
+        {
+            this.itemId = itemId;
+            this.maxInvStackSize = maxInvStackSize;
+        }
         public void ClearSocketBuffs()
         {
             foreach (int buffID in allBuffs)
@@ -32,11 +40,7 @@ namespace Interactables
             
         }
 
-        public void OnHoverItem()
-        {
-            
-        }
-
+      
         public void OnSocketed()
         {
             charController = ItemService.Instance.selectChar;

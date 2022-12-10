@@ -22,7 +22,11 @@ namespace Interactables
 
         public List<int> allBuffs { get; set; }
 
-
+        public void InitItem(int itemId, int maxInvStackSize)
+        {
+            this.itemId = itemId;
+            this.maxInvStackSize = maxInvStackSize;
+        }
         public void ClearSocketBuffs()
         {
             foreach (int buffID in allBuffs)

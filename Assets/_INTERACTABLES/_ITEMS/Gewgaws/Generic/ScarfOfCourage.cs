@@ -21,6 +21,11 @@ namespace Interactables
             // get hold of item cards here 
 
         }
+        public void InitItem(int itemId, int maxInvStackSize)
+        {
+            this.itemId = itemId;
+            this.maxInvStackSize = maxInvStackSize;
+        }
         public override GenGewgawNames genGewgawNames => GenGewgawNames.ScarfOfCourage;
 
         public override SuffixBase suffixBase { get; set; }

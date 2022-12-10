@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RatKingScales
   m_EditorClassIdentifier: 
   ingredName: 17
-  maxInventoryStack: 2
+  maxInvStackSize: 2
   cost:
     silver: 0
     bronze: 40
@@ -21,4 +21,4 @@ MonoBehaviour:
   maxWorldInstance: 100
   iconSprite: {fileID: 21300000, guid: ac85cca29cc95224cb790e40166aaa72, type: 3}
   allLines:
-  - May be used as an ingredient to craft potions.
+  - May be used as an ingredient to craft potions

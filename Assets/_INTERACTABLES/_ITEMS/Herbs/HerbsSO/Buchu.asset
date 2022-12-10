@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Buchu
   m_EditorClassIdentifier: 
   herbName: 2
-  maxInventoryStack: 6
+  maxInvStackSize: 6
   cost:
     silver: 0
     bronze: 4

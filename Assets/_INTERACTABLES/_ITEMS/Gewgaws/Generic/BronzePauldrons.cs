@@ -24,8 +24,12 @@ namespace Interactables
             // get So from the item service using item name 
             // populate the card using just the SO 
             // as string s are not dynamic
-        }    
-
+        }
+        public void InitItem(int itemId, int maxInvStackSize)
+        {
+            this.itemId = itemId;
+            this.maxInvStackSize = maxInvStackSize;
+        }
         public override GenGewgawModel GenGewgawInit(GenGewgawSO genericGewgawSO, GenGewgawQ genGewgawQ)
         {
             GenGewgawModel genGewgawModel = new GenGewgawModel(genericGewgawSO, genGewgawQ);

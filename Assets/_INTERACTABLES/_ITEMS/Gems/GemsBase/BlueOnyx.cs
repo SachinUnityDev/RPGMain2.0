@@ -18,6 +18,20 @@ namespace Interactables
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; }
+
+
+        public void OnHoverItem()
+        {
+            // talk to itemService... itemviewService .... item cards populate
+            // using the data from the SO
+        }
+        public void InitItem(int itemId, int maxInvStackSize)
+        {
+            this.itemId = itemId;
+            this.maxInvStackSize = maxInvStackSize;
+        }
+
+
         public void ClearSocketBuffs()
         {
             foreach (int buffID in allBuffs)
@@ -34,11 +48,7 @@ namespace Interactables
             itemController.EnchantTheWeaponThruScroll(this);
         }
 
-        public void OnHoverItem()
-        {
-            // talk to itemService... itemviewService .... item cards populate
-            // using the data from the SO
-        }
+
 
         public void OnSocketed()
         {

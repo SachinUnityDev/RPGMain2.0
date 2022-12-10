@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: HerbalPouch
   m_EditorClassIdentifier: 
   toolName: 12
-  inventoryStack: 1
+  maxInvStackSize: 1
   cost:
     silver: 0
     bronze: 18
   fluctuation: 20
   maxWorldInstance: 3
-  desc: 
   iconSprite: {fileID: 21300000, guid: 0cb44107aa1a24548adb23f353abc6f2, type: 3}
   allLines:
-  - Opens up extra inventory for herbs.
+  - Opens up extra inventory for herbs

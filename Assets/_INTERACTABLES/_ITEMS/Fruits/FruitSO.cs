@@ -35,7 +35,7 @@ namespace Interactables
         public int weightOfSickeness;
 
         [Header("ITEM VARIABLES")]
-        public int inventoryStack = 0;
+        public int maxInvStackSize ;
         public Currency cost;
         public float fluctuation;
         public int maxWorldInstance;

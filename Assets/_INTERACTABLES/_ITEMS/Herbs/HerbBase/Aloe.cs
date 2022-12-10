@@ -19,7 +19,12 @@ namespace Interactables
 
         public void OnHoverItem()
         {
-            // find view controller and name and type 
+
+        }
+        public void InitItem(int itemId, int maxInvStackSize)
+        {
+            this.itemId = itemId;
+            this.maxInvStackSize = maxInvStackSize;
         }
     }
 }

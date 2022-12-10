@@ -16,9 +16,17 @@ namespace Interactables
         public List<int> allBuffs { get; set; }
         public TempTraitName tempTraitName { get; set; }
         public float OcWt { get; set; }
+
         public void OnHoverItem()
         {
+
         }
+        public void InitItem(int itemId, int maxInvStackSize)
+        {
+            this.itemId = itemId;
+            this.maxInvStackSize = maxInvStackSize;
+        }
+
         public override void ApplyBuffFX()
         {
             float chance1 = 25f;

@@ -24,7 +24,7 @@ MonoBehaviour:
   thirstReliefMax: 5
   tempTraitName: 12
   weightOfSickeness: 5
-  inventoryStack: 8
+  maxInvStackSize: 7
   cost:
     silver: 0
     bronze: 5

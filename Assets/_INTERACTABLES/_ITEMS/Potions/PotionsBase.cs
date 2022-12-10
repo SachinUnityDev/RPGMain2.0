@@ -17,14 +17,13 @@ namespace Interactables
         //above is import for direct inv interation
         // SO ref hard to find for every click 
         SlotType invSlotType { get; set; }
-        public virtual void InitItem(int itemId, int maxInvStackSize)
-        { 
-            this.itemId =itemId;
-            this.maxInvStackSize = maxInvStackSize; 
-        } 
+        abstract void InitItem(int itemId, int maxInvStackSize); 
+        //{ 
+        //    this.itemId =itemId;
+        //    this.maxInvStackSize = maxInvStackSize; 
+        //} 
         abstract void OnHoverItem();
         List<int> allBuffs  { get; set; }
-
     }
 
 

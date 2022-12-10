@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hoof
   m_EditorClassIdentifier: 
   ingredName: 14
-  maxInventoryStack: 1
+  maxInvStackSize: 1
   cost:
     silver: 0
     bronze: 32
@@ -21,4 +21,4 @@ MonoBehaviour:
   maxWorldInstance: 100
   iconSprite: {fileID: 21300000, guid: de77d5871a0f4c742abddfa4fce7bee7, type: 3}
   allLines:
-  - May be used as an ingredient to craft potions.
+  - May be used as an ingredient to craft potions

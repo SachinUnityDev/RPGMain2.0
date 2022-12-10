@@ -22,9 +22,9 @@ MonoBehaviour:
   hungerReliefMax: 5
   thirstReliefMin: 4
   thirstReliefMax: 7
-  traitName: 0
+  tempTraitName: 0
   weightOfSickeness: 0
-  inventoryStack: 4
+  maxInvStackSize: 4
   cost:
     silver: 0
     bronze: 4

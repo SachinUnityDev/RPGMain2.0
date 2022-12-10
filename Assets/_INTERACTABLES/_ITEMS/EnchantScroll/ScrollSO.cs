@@ -14,7 +14,7 @@ namespace Interactables
        public ScrollName scrollName;      
         public GemName enchantmentGemName;
 
-        public int inventoryStack = 0;
+        public int maxInvStackSize = 0;
         public Currency cost;
         public float fluctuation;
         public int maxWorldInstance;
@@ -34,7 +34,7 @@ namespace Interactables
         private void Awake()
         {
             timeFrame = TimeFrame.EndOfDay;
-            inventoryStack = 6;
+            maxInvStackSize = 6;
             fluctuation = 30;
             maxWorldInstance = 12;
             rechargeExpMax = 10; 

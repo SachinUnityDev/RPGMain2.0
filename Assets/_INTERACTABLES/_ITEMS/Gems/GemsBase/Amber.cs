@@ -9,16 +9,16 @@ namespace Interactables
 {
     public class Amber : GemBase , Iitems, ISupportGem
     {
-        public override GemName gemName => GemName.Amber;
+        public override GemNames gemName => GemNames.Amber;
         public ItemType itemType => ItemType.Gems;
 
-        public int itemName => (int)GemName.Amber;
+        public int itemName => (int)GemNames.Amber;
         public int itemId { get; set; }
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }  
 
-        public List<GemName> divineGemsSupported =>
-                                new List<GemName> { GemName.Carnelian, GemName.Meranite, GemName.Rutele };
+        public List<GemNames> divineGemsSupported =>
+                                new List<GemNames> { GemNames.Carnelian, GemNames.Meranite, GemNames.Rutele };
 
         public List<int> allBuffs { get; set; }
 

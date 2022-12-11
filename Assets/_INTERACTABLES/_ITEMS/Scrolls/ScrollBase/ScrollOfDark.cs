@@ -6,10 +6,24 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class ScrollOfDark : EnchantScrollBase, iReadScroll
+    public class ScrollOfDark : EnchantScrollBase, Iitems
     {
-        public override ScrollName scrollName => ScrollName.ScrollOfDark;
+        public override ScrollNames scrollName => ScrollNames.ScrollOfDark;
+        public ItemType itemType => ItemType.Scrolls;
+        public int itemName => (int)ScrollNames.ScrollOfDark;
+        public int maxInvStackSize { get; set; }
+        public SlotType invSlotType { get; set; }
+        public List<int> allBuffs { get; set; }
+        public int itemId { get; set; }
+        public void OnHoverItem()
+        {
 
+        }
+        public void InitItem(int itemId, int maxInvStackSize)
+        {
+            this.itemId = itemId;
+            this.maxInvStackSize = maxInvStackSize;
+        }
         public void ApplyScrollReadFX()
         {
             scrollSO = ItemService.Instance.GetScrollSO(scrollName);

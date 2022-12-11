@@ -10,10 +10,10 @@ namespace Interactables
     public class PotionFactory : MonoBehaviour
     {
    
-        public Dictionary<PotionName, Type> allPotions;
+        public Dictionary<PotionNames, Type> allPotions;
         void Start()
         {
-            allPotions = new Dictionary<PotionName, Type>();
+            allPotions = new Dictionary<PotionNames, Type>();
             InitPotions();  // ON GAME START 
         }
 
@@ -32,7 +32,7 @@ namespace Interactables
             }
         }
 
-        public PotionsBase GetPotionBase(PotionName _PotionName)
+        public PotionsBase GetPotionBase(PotionNames _PotionName)
         {
             foreach (var potion in allPotions)
             {

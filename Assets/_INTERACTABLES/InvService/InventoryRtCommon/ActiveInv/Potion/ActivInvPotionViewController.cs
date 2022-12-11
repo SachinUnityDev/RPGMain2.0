@@ -98,7 +98,7 @@ namespace Interactables
             {
 
                 PotionsBase potionbase = PotionService.Instance
-                                        .GetPotionBase((PotionName)(int)itemData.ItemName); 
+                                        .GetPotionBase((PotionNames)(int)itemData.ItemName); 
                 
                 Iitems item = potionbase as Iitems;
                 InvData invData = new InvData(charSelect, item);

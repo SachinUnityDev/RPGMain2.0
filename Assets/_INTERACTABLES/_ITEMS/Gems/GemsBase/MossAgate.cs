@@ -7,9 +7,9 @@ namespace Interactables
 {
     public class MossAgate :GemBase, Iitems, IDivGem
     {
-        public override GemName gemName => GemName.MossAgate;
+        public override GemNames gemName => GemNames.MossAgate;
         public ItemType itemType => ItemType.Gems;
-        public int itemName => (int)GemName.MossAgate;
+        public int itemName => (int)GemNames.MossAgate;
         public int itemId { get; set; }
         public int fxVal1 { get; set; }
         public int fxVal2 { get; set; }

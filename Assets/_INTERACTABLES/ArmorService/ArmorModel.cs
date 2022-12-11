@@ -8,16 +8,16 @@ namespace Interactables
     public class CharSocketData
     {
         public CharNames charName;
-        public GemName gemDivineSocket1;
-        public GemName gemDivineSocket2;
-        public GemName gemSupportSocket3;
+        public GemNames gemDivineSocket1;
+        public GemNames gemDivineSocket2;
+        public GemNames gemSupportSocket3;
 
         public CharSocketData(CharNames charName)
         {
             this.charName = charName;
-            this.gemDivineSocket1 = GemName.None;
-            this.gemDivineSocket2 = GemName.None;
-            this.gemSupportSocket3 = GemName.None;
+            this.gemDivineSocket1 = GemNames.None;
+            this.gemDivineSocket2 = GemNames.None;
+            this.gemSupportSocket3 = GemNames.None;
         }
     }
 

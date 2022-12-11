@@ -9,9 +9,9 @@ namespace Interactables
 {
     public class SnowLeopardsBreath : PotionsBase, Iitems,IEquipAble, IConsumable 
     {
-        public override PotionName potionName => PotionName.SnowLeopardsBreath; 
+        public override PotionNames potionName => PotionNames.SnowLeopardsBreath; 
         public ItemType itemType => ItemType.Potions;
-        public int itemName => (int)PotionName.SnowLeopardsBreath;        
+        public int itemName => (int)PotionNames.SnowLeopardsBreath;        
         public int maxInvStackSize { get ; set ; }
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; }
@@ -28,7 +28,7 @@ namespace Interactables
         public override void PotionApplyFX()
         {
 
-            PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionName)itemName);
+            PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionNames)itemName);
             int castTime = (int)UnityEngine.Random.Range(potionSO.minCastTime, potionSO.maxCastTime);
             int buffID=
             charController.GetComponent<CharStateController>().ApplyImmunityBuff(CauseType.Potions, (int)potionName, charID

@@ -9,7 +9,7 @@ namespace Interactables
 {
     public class GemsFactory : MonoBehaviour
     {
-        Dictionary<GemName, Type> allGems = new Dictionary<GemName, Type>();
+        Dictionary<GemNames, Type> allGems = new Dictionary<GemNames, Type>();
         [SerializeField] int count = 0;
         void Start()
         {
@@ -31,7 +31,7 @@ namespace Interactables
             count = allGems.Count;
         }
 
-        public GemBase GetGemBase(GemName _gemName)
+        public GemBase GetGemBase(GemNames _gemName)
         {
             foreach (var gem in allGems)
             {

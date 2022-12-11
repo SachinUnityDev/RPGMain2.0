@@ -178,6 +178,8 @@ namespace Interactables
             {
                 Destroy(gameObject.transform.GetChild(0).GetChild(i).gameObject);
             }
+            transform.GetComponent<Image>().sprite = GetBGSprite(item); 
+
             Transform ImgTrans = gameObject.transform.GetChild(0).GetChild(0);
             ImgTrans.GetComponent<Image>().sprite = GetSprite(item);
             ImgTrans.gameObject.SetActive(true);
@@ -209,6 +211,16 @@ namespace Interactables
                 return null;            
         }
 
+        Sprite GetBGSprite(Iitems item)
+        {
+            Sprite sprite = InvService.Instance.InvSO.GetBGSprite(item);
+            if (sprite != null)
+                return sprite;
+            else
+                Debug.Log("SPRITE NOT FOUND");
+            return null;
+
+        }
         public void CloseRightClickOpts()
         {
             if (isRightClicked)

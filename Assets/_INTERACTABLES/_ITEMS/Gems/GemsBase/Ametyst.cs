@@ -7,10 +7,10 @@ namespace Interactables
     public class Ametyst : GemBase, Iitems, IPreciousGem
     {
        
-        public override GemName gemName => GemName.Ametyst;
+        public override GemNames gemName => GemNames.Ametyst;
         public int itemId { get; set; }
         public ItemType itemType => ItemType.Gems; 
-        public int itemName => (int)GemName.Ametyst;
+        public int itemName => (int)GemNames.Ametyst;
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
         public TGNames compatibleTg => TGNames.SimpleRing;

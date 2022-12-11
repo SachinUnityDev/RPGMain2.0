@@ -7,10 +7,10 @@ namespace Interactables
 {
     public class Ruby : GemBase, Iitems, IPreciousGem   
     {
-        public override GemName gemName => GemName.Ruby;
+        public override GemNames gemName => GemNames.Ruby;
         public int itemId { get; set; }
         public ItemType itemType => ItemType.Gems;
-        public int itemName => (int)GemName.Ruby;
+        public int itemName => (int)GemNames.Ruby;
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
         public TGNames compatibleTg => TGNames.SimpleRing;

@@ -23,7 +23,7 @@ namespace Interactables
 
 
 #region POTION ADDICT
-        public float GetPotionAddictChance(PotionName potionName)
+        public float GetPotionAddictChance(PotionNames potionName)
         {
             PotionSO potionSO = PotionService.Instance.GetPotionModelSO(potionName);
             float chance = potionSO.potionAddict;

@@ -8,9 +8,9 @@ namespace Interactables
 {
     public class FortitudePotion : PotionsBase, Iitems, IEquipAble, IConsumable
     {
-        public override PotionName potionName => PotionName.FortitudePotion;
+        public override PotionNames potionName => PotionNames.FortitudePotion;
         public ItemType itemType => ItemType.Potions;
-        public int itemName => (int)PotionName.FortitudePotion;
+        public int itemName => (int)PotionNames.FortitudePotion;
         public SlotType invSlotType { get; set; }
         public int maxInvStackSize { get; set; }
         public int itemId { get; set; }

@@ -9,9 +9,9 @@ namespace Interactables
 {
     public class StaminaPotion : PotionsBase, Iitems, IEquipAble, IConsumable 
     {
-        public override PotionName potionName => PotionName.StaminaPotion; 
+        public override PotionNames potionName => PotionNames.StaminaPotion; 
         public ItemType itemType => ItemType.Potions; 
-        public int itemName => (int) PotionName.StaminaPotion;
+        public int itemName => (int) PotionNames.StaminaPotion;
         public SlotType invSlotType { get; set; }
         public int maxInvStackSize { get; set; }       
         public int itemId { get; set; }
@@ -27,7 +27,7 @@ namespace Interactables
         }
         public override void PotionApplyFX()
         {
-            PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionName)itemName);
+            PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionNames)itemName);
             int charID = charController.charModel.charID;
             int castTime = (int)UnityEngine.Random.Range(potionSO.minCastTime, potionSO.maxCastTime);
 

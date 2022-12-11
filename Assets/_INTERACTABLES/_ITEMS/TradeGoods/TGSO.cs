@@ -24,7 +24,7 @@ namespace Interactables
     public class TGSO : ScriptableObject
     {
         public TGNames tgName;
-        public int maxInventoryStack = 0;
+        public int maxInvStackSize = 0;
         public Currency cost;
         public float fluctuation;
         public int maxWorldInstance;

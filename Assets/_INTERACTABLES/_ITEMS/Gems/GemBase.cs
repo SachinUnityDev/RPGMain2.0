@@ -62,7 +62,7 @@ namespace Interactables
 
     public interface ISupportGem
     { 
-        List<GemName> divineGemsSupported { get; }
+        List<GemNames> divineGemsSupported { get; }
         void OnSocketed();
         void SocketedFX();
         void ClearSocketBuffs();
@@ -96,7 +96,7 @@ namespace Interactables
     //}
     public abstract class GemBase 
     {
-        public abstract GemName gemName { get; }      
+        public abstract GemNames gemName { get; }      
 
         protected CharController charController;
         public ItemController itemController;

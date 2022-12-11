@@ -10,7 +10,7 @@ namespace Interactables
 
     [CreateAssetMenu(fileName = "RecipeSO", menuName = "Item Service/RecipeSO")]
 
-    public class RecipeSO : ScriptableObject
+    public class CookingRecipeSO : ScriptableObject
     {
         [Header("Product Item")]
         public MealsNames mealName;

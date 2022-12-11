@@ -77,7 +77,7 @@ namespace Interactables
         {
             return null;
         }
-        public override void RemoveFX()
+        public override void EndFx()
         {
             CharStatesService.Instance.OnCharStateStart -= OnCharStateChg;
             CombatEventService.Instance.OnSOC -= OnStartOfCombat;

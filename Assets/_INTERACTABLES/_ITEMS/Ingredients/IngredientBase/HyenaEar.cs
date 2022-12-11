@@ -8,9 +8,9 @@ namespace Interactables
 
     public class HyenaEar : IngredBase, IIngredient, Iitems
     {
-        public override IngredNames ingredName => IngredNames.WhiteMushroom;
+        public override IngredNames ingredName => IngredNames.HyenaEar;
         public ItemType itemType => ItemType.Ingredients;
-        public int itemName => (int)IngredNames.WhiteMushroom;
+        public int itemName => (int)IngredNames.HyenaEar;
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
         public ItemController itemController { get; set; }

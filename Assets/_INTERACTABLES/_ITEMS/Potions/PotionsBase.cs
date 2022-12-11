@@ -44,7 +44,7 @@ namespace Interactables
     }
     public abstract class PotionsBase 
     {
-        public abstract PotionName potionName { get; }
+        public abstract PotionNames potionName { get; }
         public int potionInstanceCount = 0; 
         protected CharController charController;        
         protected CharNames charName;

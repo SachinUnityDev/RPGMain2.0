@@ -8,15 +8,15 @@ namespace Interactables
 {
     public class Oltu : GemBase, Iitems, ISupportGem    
     {
-        public override GemName gemName => GemName.Oltu;
+        public override GemNames gemName => GemNames.Oltu;
         public ItemType itemType => ItemType.Gems;
 
-        public int itemName => (int)GemName.Oltu;
+        public int itemName => (int)GemNames.Oltu;
         public int itemId { get; set; }
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
-        public List<GemName> divineGemsSupported =>
-                                new List<GemName> { GemName.Ruri, GemName.Malachite, GemName.BlueOnyx };
+        public List<GemNames> divineGemsSupported =>
+                                new List<GemNames> { GemNames.Ruri, GemNames.Malachite, GemNames.BlueOnyx };
 
         public List<int> allBuffs { get; set; }
 

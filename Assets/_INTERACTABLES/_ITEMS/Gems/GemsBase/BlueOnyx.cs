@@ -8,9 +8,9 @@ namespace Interactables
 {
     public class BlueOnyx : GemBase, Iitems, IDivGem   
     {
-        public override GemName gemName => GemName.BlueOnyx;
+        public override GemNames gemName => GemNames.BlueOnyx;
         public ItemType itemType => ItemType.Gems;
-        public int itemName => (int)GemName.BlueOnyx;
+        public int itemName => (int)GemNames.BlueOnyx;
         public int itemId { get; set; }
         public int fxVal1 { get; set; }
         public int fxVal2 { get; set; }

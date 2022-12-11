@@ -8,7 +8,7 @@ namespace Interactables
     [CreateAssetMenu(fileName = "GemSO", menuName = "Item Service/GemSO")]
     public class GemSO : ScriptableObject
     {
-        public GemName gemName;
+        public GemNames gemName;
         public GemType gemType;
         public List<CharNames> allCharsThatCanBeEnchanted;         
         public int maxInvStackSize;

@@ -8,9 +8,9 @@ namespace Interactables
 {
     public class PotionOfRabbitBlood : PotionsBase, Iitems, IEquipAble, IConsumable
     {
-        public override PotionName potionName => PotionName.PotionOfRabbitblood;  
+        public override PotionNames potionName => PotionNames.PotionOfRabbitblood;  
         public ItemType itemType => ItemType.Potions; 
-        public int itemName => (int) PotionName.PotionOfRabbitblood;
+        public int itemName => (int) PotionNames.PotionOfRabbitblood;
         public SlotType invSlotType { get; set; }
         public int maxInvStackSize { get; set ; }
         public List<int> allBuffs { get; set; }
@@ -27,7 +27,7 @@ namespace Interactables
         }
         public override void PotionApplyFX()
         {
-            PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionName)itemName);
+            PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionNames)itemName);
             int castTime = (int)UnityEngine.Random.Range(potionSO.minCastTime, potionSO.maxCastTime); 
 
             charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID

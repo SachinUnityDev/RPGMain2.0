@@ -12,11 +12,11 @@ namespace Interactables
     // it
     public class ScrollReadData
     {
-        public ScrollName scrollName;
+        public ScrollNames scrollName;
         public int activeDaysRemaining;
         public int activeDaysNet;
 
-        public ScrollReadData(ScrollName scrollName,int activeDaysNet)
+        public ScrollReadData(ScrollNames scrollName,int activeDaysNet)
         {
             this.scrollName = scrollName;            
             this.activeDaysNet = activeDaysNet;
@@ -26,11 +26,11 @@ namespace Interactables
 
     public class GemChargeData
     {
-        public GemName gemName;
+        public GemNames gemName;
         public int chargeRemaining;
         public int chargeNet;
 
-        public GemChargeData(GemName gemName)
+        public GemChargeData(GemNames gemName)
         {
             this.gemName = gemName;
             this.chargeRemaining = 0;

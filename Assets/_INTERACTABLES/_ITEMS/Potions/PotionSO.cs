@@ -11,7 +11,7 @@ namespace Interactables
     public class PotionSO : ScriptableObject
     {
 
-        public PotionName potionName;
+        public PotionNames potionName;
         public float potionAddict = 0f;
         public int maxInvStackSize;
         public Currency cost; 

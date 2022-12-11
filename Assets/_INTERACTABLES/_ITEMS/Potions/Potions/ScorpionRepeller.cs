@@ -8,9 +8,9 @@ namespace Interactables
 {
     public class ScorpionRepeller : PotionsBase, Iitems, IEquipAble, IConsumable
     {
-        public override PotionName potionName => PotionName.ScorpionRepeller;
+        public override PotionNames potionName => PotionNames.ScorpionRepeller;
         public ItemType itemType => ItemType.Potions;
-        public int itemName => (int)PotionName.ScorpionRepeller;
+        public int itemName => (int)PotionNames.ScorpionRepeller;
         public SlotType invSlotType { get; set; }
         public int maxInvStackSize { get ; set ; }
         public int itemId { get; set; }
@@ -27,7 +27,7 @@ namespace Interactables
         public override void PotionApplyFX()
         {
             
-            PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionName)itemName);
+            PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionNames)itemName);
             int castTime = (int)UnityEngine.Random.Range(potionSO.minCastTime, potionSO.maxCastTime);
 
             int buffID = 

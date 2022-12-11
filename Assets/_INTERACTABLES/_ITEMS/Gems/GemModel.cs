@@ -12,7 +12,7 @@ namespace Interactables
     public class GemModel
     {
         // to be init at the time of Gem Creation in inventory  
-        public GemName gemName ;
+        public GemNames gemName ;
         public GemType gemtype;
 
         public CharNames charName;

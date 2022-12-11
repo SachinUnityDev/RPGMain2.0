@@ -9,7 +9,7 @@ namespace Interactables
 {
     public abstract class EnchantScrollBase
     {
-        public abstract ScrollName scrollName { get; }
+        public abstract ScrollNames scrollName { get; }
         public CharController charController;         
         public ScrollSO scrollSO { get; set; }       
     }

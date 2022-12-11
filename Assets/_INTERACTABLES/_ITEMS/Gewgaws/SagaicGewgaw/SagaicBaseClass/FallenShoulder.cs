@@ -54,7 +54,7 @@ namespace Interactables
 
     
 
-        public override void RemoveFX()
+        public override void EndFx()
         {
             CombatEventService.Instance.OnFleeInCombat += OnCombatFleeNDead;
             CombatEventService.Instance.OnCharDeath += OnCombatFleeNDead;

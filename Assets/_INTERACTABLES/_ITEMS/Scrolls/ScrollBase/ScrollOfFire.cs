@@ -5,10 +5,26 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class ScrollOfEarth : EnchantScrollBase, iReadScroll
-    {
-        public override ScrollName scrollName => ScrollName.ScrollOfEarth;
 
+
+    public class ScrollOfFire : EnchantScrollBase, Iitems
+    {
+        public override ScrollNames scrollName => ScrollNames.ScrollOfFire;
+        public ItemType itemType => ItemType.Scrolls;
+        public int itemName => (int)ScrollNames.ScrollOfFire;
+        public int maxInvStackSize { get; set; }
+        public SlotType invSlotType { get; set; }
+        public List<int> allBuffs { get; set; }
+        public int itemId { get; set; }
+        public void OnHoverItem()
+        {
+
+        }
+        public void InitItem(int itemId, int maxInvStackSize)
+        {
+            this.itemId = itemId;
+            this.maxInvStackSize = maxInvStackSize;
+        }
         public void ApplyScrollReadFX()
         {
             scrollSO = ItemService.Instance.GetScrollSO(scrollName);
@@ -21,6 +37,4 @@ namespace Interactables
             charController.ExpPtsGain(expGained);
         }
     }
-
 }
-

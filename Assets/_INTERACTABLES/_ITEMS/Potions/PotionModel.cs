@@ -9,7 +9,7 @@ namespace Interactables
     [System.Serializable]
     public class PotionModel // potion attached to a char 
     {
-        public PotionName potionName;
+        public PotionNames potionName;
         public CharNames charName;  // owned by 
         public NPCNames npcName;
         public int itemID;

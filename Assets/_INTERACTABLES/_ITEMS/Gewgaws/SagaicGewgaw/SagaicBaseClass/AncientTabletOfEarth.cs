@@ -49,7 +49,7 @@ namespace Interactables
             return null;
         }
      
-        public override void RemoveFX()
+        public override void EndFx()
         {
             
         }

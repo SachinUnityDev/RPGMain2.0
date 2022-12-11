@@ -9,9 +9,9 @@ namespace Interactables
 {
     public class Rutele : GemBase, Iitems, IDivGem
     {
-        public override GemName gemName => GemName.Rutele;
+        public override GemNames gemName => GemNames.Rutele;
         public ItemType itemType => ItemType.Gems;
-        public int itemName => (int)GemName.Rutele;
+        public int itemName => (int)GemNames.Rutele;
         public int itemId { get; set; }
         public int fxVal1 { get; set; }
         public int fxVal2 { get; set; }

@@ -8,9 +8,9 @@ namespace Interactables
 {
     public class ElixirOfVigor : PotionsBase, Iitems, IEquipAble, IConsumable
     {
-        public override PotionName potionName => PotionName.ElixirOfVigor; 
+        public override PotionNames potionName => PotionNames.ElixirOfVigor; 
         public ItemType itemType => ItemType.Potions;
-        public int itemName => (int)PotionName.ElixirOfVigor;
+        public int itemName => (int)PotionNames.ElixirOfVigor;
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; }
@@ -29,7 +29,7 @@ namespace Interactables
             charController.ChangeStat(CauseType.Potions, (int)potionName, charID
                                         , StatsName.vigor, +1);  // Not a buff 
 
-            PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionName)itemName);
+            PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionNames)itemName);
             int castTime = (int)UnityEngine.Random.Range(potionSO.minCastTime, potionSO.maxCastTime);
 
             int buffID = -1;

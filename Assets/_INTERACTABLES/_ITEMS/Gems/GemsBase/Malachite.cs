@@ -8,9 +8,9 @@ namespace Interactables
 {
     public class Malachite : GemBase, Iitems, IDivGem
     {
-        public override GemName gemName => GemName.Malachite;
+        public override GemNames gemName => GemNames.Malachite;
         public ItemType itemType => ItemType.Gems;
-        public int itemName => (int)GemName.Malachite;
+        public int itemName => (int)GemNames.Malachite;
         public int itemId { get; set; }
         public int fxVal1 { get; set; }
         public int fxVal2 { get; set; }

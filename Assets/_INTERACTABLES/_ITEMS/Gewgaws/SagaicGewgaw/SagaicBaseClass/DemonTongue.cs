@@ -58,7 +58,7 @@ namespace Interactables
         {
             return null;
         }
-        public override void RemoveFX()
+        public override void EndFx()
         {
             CharStatesService.Instance.OnCharStateStart -= OnCharStateChg;
             foreach (int i in buffIndex)

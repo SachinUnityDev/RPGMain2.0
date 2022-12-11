@@ -11,8 +11,8 @@ namespace Interactables
 
     public class ScrollSO : ScriptableObject
     {
-       public ScrollName scrollName;      
-        public GemName enchantmentGemName;
+       public ScrollNames scrollName;      
+        public GemNames enchantmentGemName;
 
         public int maxInvStackSize = 0;
         public Currency cost;

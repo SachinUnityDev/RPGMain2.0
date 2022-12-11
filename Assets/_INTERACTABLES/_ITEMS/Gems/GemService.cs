@@ -35,7 +35,7 @@ namespace Interactables
 
         #region Getters
 
-        public GemSO GetGemSO(GemName gemName)
+        public GemSO GetGemSO(GemNames gemName)
         {
             foreach (GemSO gemSO in allGemSO)
             {
@@ -47,7 +47,7 @@ namespace Interactables
             Debug.Log("GemSO Not found");
             return null;
         }
-        public GemBase GetGemBase(GemName _gemName)
+        public GemBase GetGemBase(GemNames _gemName)
         {
             GemBase gemBase = allGemBase.Find(t => t.gemName == _gemName);
             if (gemBase != null)
@@ -57,7 +57,7 @@ namespace Interactables
             return null;
 
         }
-        public GemModel GetGemModel(GemName _gemName)
+        public GemModel GetGemModel(GemNames _gemName)
         {
             GemModel gemModel = allGemModels.Find(t => t.gemName == _gemName);
             if (gemModel != null)
@@ -73,7 +73,7 @@ namespace Interactables
         public void DisposeGem(GemBase gemBase)
         {
            allGemBase.Remove(gemBase);
-           GemName gemName = gemBase.gemName;
+           GemNames gemName = gemBase.gemName;
             int index = allGemModels.FindIndex(t => t.gemName == gemName);
             allGemModels.RemoveAt(index); 
         }
@@ -81,7 +81,7 @@ namespace Interactables
 
         #endregion
 
-        public void InitGem2CommonInv(CharController _charController, GemName _gemName, CharController causedby
+        public void InitGem2CommonInv(CharController _charController, GemNames _gemName, CharController causedby
           , CauseType causeType, int causeID)
         {
             GemBase gemBase = gemsFactory.GetGemBase(_gemName);
@@ -92,7 +92,7 @@ namespace Interactables
                                                         , gemBase as Iitems);
             InvService.Instance.invMainModel.AddItem2CommInv(gemBase as Iitems);
         }
-        void LocChange(GemName _gemName, SlotType _invType)
+        void LocChange(GemNames _gemName, SlotType _invType)
         {
             if (GetGemModel(_gemName) != null)
                 GetGemModel(_gemName).invLoc = _invType;
@@ -107,7 +107,7 @@ namespace Interactables
             selectCharCtrl = CharService.Instance.GetCharCtrlWithName(charName);
             allGemBase.Add(gemBase);
 
-            GemName gemName = gemBase.gemName;             
+            GemNames gemName = gemBase.gemName;             
             GemSO gemSO = GetGemSO(gemName);
 
             //GemModel gemModel = gemBase.GemInit(gemSO, selectCharCtrl);
@@ -121,7 +121,7 @@ namespace Interactables
             if (Input.GetKeyDown(KeyCode.I))
             {
                 CharController charController = CharService.Instance.charsInPlayControllers[0];
-                InitGem2CommonInv(charController, GemName.Ametyst, charController
+                InitGem2CommonInv(charController, GemNames.Ametyst, charController
                                         , CauseType.CharSkill, 2);
             }
             //if (Input.GetKeyDown(KeyCode.U))

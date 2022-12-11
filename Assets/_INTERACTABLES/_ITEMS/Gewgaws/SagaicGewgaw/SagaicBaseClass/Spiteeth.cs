@@ -104,7 +104,7 @@ namespace Interactables
 
       
 
-        public override void RemoveFX()  // on removal from the slot 
+        public override void EndFx()  // on removal from the slot 
         {
             CombatEventService.Instance.OnSOC -= OnStartOfCombat;
             foreach (int i in buffIndex)

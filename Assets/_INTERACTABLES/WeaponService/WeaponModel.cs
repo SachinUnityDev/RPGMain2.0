@@ -8,11 +8,11 @@ namespace Interactables
     public class WeaponEnchantData
     {
         public CharNames charName;
-        public GemName gemName; 
+        public GemNames gemName; 
         public int chargeRemaining = 0;
         public int noOfRechargeDone = 0;
 
-        public WeaponEnchantData(CharNames charName, GemName gemName)
+        public WeaponEnchantData(CharNames charName, GemNames gemName)
         {
             this.charName = charName;
             this.gemName = gemName;

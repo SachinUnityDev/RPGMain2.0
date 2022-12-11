@@ -23,10 +23,10 @@ namespace Interactables
 
         }
 
-        public bool IsGemEnchantable(CharNames charName, GemName gemName)
+        public bool IsGemEnchantable(CharNames charName, GemNames gemName)
         {
             CharModel charModel = CharService.Instance.GetAllyCharModel(charName);
-            GemName charGemName = 
+            GemNames charGemName = 
                         charModel.enchantableGem4Weapon;
             if (gemName != charGemName)
                 return false;
@@ -34,7 +34,7 @@ namespace Interactables
                 return true;
         }
         
-        public bool EnchantWeapon(GemName gemName)
+        public bool EnchantWeapon(GemNames gemName)
         {
             CharNames charName = InvService.Instance.charSelect;
             if (IsGemEnchantable(charName, gemName))

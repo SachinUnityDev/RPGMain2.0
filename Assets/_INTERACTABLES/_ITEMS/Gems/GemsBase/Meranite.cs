@@ -9,9 +9,9 @@ namespace Interactables
 {
     public class Meranite : GemBase, Iitems, IDivGem   
     {
-        public override GemName gemName => GemName.Meranite;
+        public override GemNames gemName => GemNames.Meranite;
         public ItemType itemType => ItemType.Gems;
-        public int itemName => (int)GemName.Meranite;
+        public int itemName => (int)GemNames.Meranite;
         public int itemId { get; set; }
         public int fxVal1 { get; set; }
         public int fxVal2 { get; set; }

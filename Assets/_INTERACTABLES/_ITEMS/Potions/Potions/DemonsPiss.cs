@@ -9,9 +9,9 @@ namespace Interactables
     public class DemonsPiss : PotionsBase, Iitems, IEquipAble, IConsumable
     {
         public ItemType itemType => ItemType.Potions; 
-        public int itemName => (int)PotionName.DemonsPiss;
+        public int itemName => (int)PotionNames.DemonsPiss;
         public int maxInvStackSize { get; set; }
-        public override PotionName potionName => PotionName.DemonsPiss; 
+        public override PotionNames potionName => PotionNames.DemonsPiss; 
         public SlotType invSlotType { get ; set; }     
         public int itemId { get; set; }
         public List<int> allBuffs { get; set; }
@@ -28,7 +28,7 @@ namespace Interactables
         public override void PotionApplyFX()
         {          
             
-            PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionName)itemName);
+            PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionNames)itemName);
             int castTime = (int)UnityEngine.Random.Range(potionSO.minCastTime, potionSO.maxCastTime);
             
            charController.GetComponent<CharStateController>().ApplyImmunityBuff(CauseType.Potions, (int)potionName, charID

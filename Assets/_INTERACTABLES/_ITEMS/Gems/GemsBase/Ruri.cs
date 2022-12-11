@@ -8,9 +8,9 @@ namespace Interactables
 {
     public class Ruri : GemBase, Iitems, IDivGem   
     {
-        public override GemName gemName => GemName.Ruri;
+        public override GemNames gemName => GemNames.Ruri;
         public ItemType itemType => ItemType.Gems;
-        public int itemName => (int)GemName.Ruri;
+        public int itemName => (int)GemNames.Ruri;
         public int itemId { get; set; }
         public int fxVal1 { get; set; }
         public int fxVal2 { get; set; }

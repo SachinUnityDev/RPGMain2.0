@@ -33,7 +33,7 @@ namespace Interactables
             CalendarService.Instance.OnStartOfDay += (int day)=>OnDayTickOnScroll(); 
         }
 
-        public void OnScrollRead(ScrollName scrollName)
+        public void OnScrollRead(ScrollNames scrollName)
         {
             ScrollSO scrollSO = ItemService.Instance.GetScrollSO(scrollName);
             ScrollReadData scrollReadData = new ScrollReadData(scrollName
@@ -43,7 +43,7 @@ namespace Interactables
 
         public bool EnchantTheWeaponThruScroll(GemBase gemBase)
         {
-            GemName gemName = gemBase.gemName; 
+            GemNames gemName = gemBase.gemName; 
 
             if(ItemService.Instance.CanEnchantGemThruScroll(charController, gemName))
             {
@@ -107,7 +107,7 @@ namespace Interactables
             ISupportGem supportGem = itemModel.supportItemSocketed as ISupportGem;
             foreach (Iitems item in itemModel.divItemsSocketed)
             {
-                foreach(GemName gemName in supportGem.divineGemsSupported)
+                foreach(GemNames gemName in supportGem.divineGemsSupported)
                 {
                     if(item.itemName == (int)gemName)
                     {

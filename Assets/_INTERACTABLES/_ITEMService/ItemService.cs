@@ -10,7 +10,7 @@ namespace Interactables
 {
     public class ItemService : MonoSingletonGeneric<ItemService>
     {
-        public event Action<CharController, GemName> OnGemSocketed; 
+        public event Action<CharController, GemNames> OnGemSocketed; 
 
         public List<ItemController> allItemControllers = new List<ItemController>();        
         public List<Iitems> allItemsInGame = new List<Iitems>();
@@ -56,9 +56,10 @@ namespace Interactables
         public List<FruitSO> allFruitSO = new List<FruitSO>();
 
         [Header("All Ingredient SO")]
-        public List<IngredSO> allIngredSO = new List<IngredSO>(); 
+        public List<IngredSO> allIngredSO = new List<IngredSO>();
 
-
+        [Header("All Trade goods SO")]
+        public List<TGSO> allTGSO = new List<TGSO>();
 
         #endregion
 
@@ -94,7 +95,7 @@ namespace Interactables
                 Debug.Log("herbSO  not found");
             return null;
         }
-        public PotionSO GetPotionSO(PotionName potionName)
+        public PotionSO GetPotionSO(PotionNames potionName)
         {
             PotionSO potionSO = allPotionSO.Find(t => t.potionName == potionName);
             if (potionSO != null)
@@ -103,7 +104,7 @@ namespace Interactables
                 Debug.Log("potionSO  not found");
             return null;
         }
-        public GemSO GetGemSO(GemName gemName)
+        public GemSO GetGemSO(GemNames gemName)
         {
             GemSO gemSO = allGemsSO.Find(t => t.gemName == gemName);
             if (gemSO != null)
@@ -112,7 +113,7 @@ namespace Interactables
                 Debug.Log("GemSO  not found");
             return null;
         }
-        public ScrollSO GetScrollSO(ScrollName scrollName)
+        public ScrollSO GetScrollSO(ScrollNames scrollName)
         {
             ScrollSO scrollSO = allScrollSO.Find(t => t.scrollName == scrollName);
             if (scrollSO != null)
@@ -121,7 +122,7 @@ namespace Interactables
                 Debug.Log("scrollSO  not found");
             return null;
         }
-        public ScrollSO GetScrollSOFrmGem(GemName gemName)
+        public ScrollSO GetScrollSOFrmGem(GemNames gemName)
         {
             ScrollSO scrollSO = allScrollSO.Find(t=>t.enchantmentGemName == gemName);
             if (scrollSO != null)
@@ -168,7 +169,6 @@ namespace Interactables
                 Debug.Log("fruitSO  not found");
             return null;
         }
-
         public IngredSO GetIngredSO(IngredNames ingredName)
         {
             IngredSO ingredSO = allIngredSO.Find(t => t.ingredName == ingredName);
@@ -178,12 +178,29 @@ namespace Interactables
                 Debug.Log("ingredSO  not found");
             return null;
         }
-
+        public TGSO  GetTradeGoodsSO(TGNames tgName)
+        {
+            TGSO tgSO = allTGSO.Find(t => t.tgName == tgName);
+            if (tgSO != null)
+                return tgSO;
+            else
+                Debug.Log("Trade goods SO  not found");
+            return null;
+        }
+        public ToolsSO GetToolSO(ToolNames toolName)
+        {
+            ToolsSO toolsSO = allToolsSO.Find(t => t.toolName == toolName);
+            if (toolsSO != null)
+                return toolsSO;
+            else
+                Debug.Log("Trade goods SO  not found");
+            return null;
+        }
         #endregion
 
         #region GETTERS 
-        
-        public GemType GetGemType(GemName gemName)
+
+        public GemType GetGemType(GemNames gemName)
         {
             GemType gemType =
                         allGemsSO.Find(t => t.gemName == gemName).gemType;
@@ -197,7 +214,7 @@ namespace Interactables
         #endregion
 
         // game reload or item found in the game
-        public bool CanEnchantGemThruScroll(CharController charController, GemName gemName)
+        public bool CanEnchantGemThruScroll(CharController charController, GemNames gemName)
         {
             // get corresponding gem
             ScrollSO scrollSO = GetScrollSOFrmGem(gemName); 
@@ -214,19 +231,34 @@ namespace Interactables
         }
 
         public void InitItemToInv(SlotType slotType, ItemType itemType, int itemName,
-                                     CauseType causeType, int causeID)
+                                     CauseType causeType, int causeID, GenGewgawQ gQuality = GenGewgawQ.None)
         {
-            Iitems iitems = itemFactory.GetNewItem(itemType, itemName); 
+           
+            if(gQuality == GenGewgawQ.None)  
+            {
 
-            iitems.invSlotType = slotType;
+                Iitems iitems = itemFactory.GetNewItem(itemType, itemName);
+                iitems.invSlotType = slotType;
+                InvService.Instance.invMainModel.AddItem2CommInv(iitems);
+            }
+            else  //  its a Generic gewgaw
+            {
+                Iitems iitems = itemFactory.GetNewGenGewgaw((GenGewgawNames)itemName, gQuality);
+                iitems.invSlotType = slotType;
+                InvService.Instance.invMainModel.AddItem2CommInv(iitems);
 
-            InvService.Instance.invMainModel.AddItem2CommInv(iitems);   
+                // item factory get new gengewgaw, 
+                // init base as per gengewgaw , =>  creates and init prefix and suffix class
+                // => for the gewgaw and assigns them to the gewgaw+
+                //
+
+            }
 
             //create  item
             //add to inv with slot type
 
 
-             // get items form item factory                
+            // get items form item factory                
             // iitems init=> give slot type, inv location ,  
             // add to common, excess , potion slot , stash .. excess 
 
@@ -282,7 +314,7 @@ namespace Interactables
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionName.HealthPotion,
+                InitItemToInv(SlotType.CommonInv, ItemType.Gems, (int)GemNames.Amber,
                                      CauseType.Items, 2); 
         
             }

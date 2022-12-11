@@ -17,7 +17,7 @@ namespace Interactables
         public abstract void GewGawInit();  // connect the charController and other things
         public abstract void ApplyGewGawFX(CharController charController);
         public abstract List<string> DisplayStrings();
-        public abstract void RemoveFX();
+        public abstract void EndFx();
     }
 
 

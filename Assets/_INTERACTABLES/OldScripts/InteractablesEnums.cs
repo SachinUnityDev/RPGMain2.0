@@ -62,7 +62,7 @@ namespace Interactables
         Socketed,        
     }
 
-    public enum GemName
+    public enum GemNames
     {
         None,
         Carnelian,
@@ -164,7 +164,7 @@ namespace Interactables
         RoastedChicken, 
     }
 
-    public enum PotionName
+    public enum PotionNames
     {
         None,
         HealthPotion =1,
@@ -214,7 +214,7 @@ namespace Interactables
 
     }
 
-    public enum ScrollName
+    public enum ScrollNames
     {
         None,
         ScrollOfWater, 
@@ -307,6 +307,7 @@ namespace Interactables
     }
     public enum GenGewgawQ
     {
+        None,
         Lyric,
         Folkloric,
         Epic,

@@ -9,9 +9,9 @@ namespace Interactables
     public class Carnelian : GemBase, Iitems, IDivGem
    
     {
-        public override GemName gemName => GemName.Carnelian;
+        public override GemNames gemName => GemNames.Carnelian;
         public ItemType itemType => ItemType.Gems;
-        public int itemName => (int)GemName.Carnelian;
+        public int itemName => (int)GemNames.Carnelian;
         public int itemId { get; set; }
         public int fxVal1 { get; set; }
         public int fxVal2 { get; set; }

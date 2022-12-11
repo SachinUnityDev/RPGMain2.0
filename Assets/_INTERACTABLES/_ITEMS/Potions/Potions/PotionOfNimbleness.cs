@@ -8,9 +8,9 @@ namespace Interactables
 {
     public class PotionOfNimbleness : PotionsBase, Iitems, IEquipAble, IConsumable
     {
-        public override PotionName potionName => PotionName.PotionOfNimbleness; 
+        public override PotionNames potionName => PotionNames.PotionOfNimbleness; 
         public ItemType itemType => ItemType.Potions;
-        public int itemName => (int) PotionName.PotionOfNimbleness;
+        public int itemName => (int) PotionNames.PotionOfNimbleness;
         public SlotType invSlotType { get; set; }
         public int maxInvStackSize { get ; set; }
         public List<int> allBuffs { get; set; }
@@ -26,7 +26,7 @@ namespace Interactables
         }
         public override void PotionApplyFX()
         {
-            PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionName)itemName);
+            PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionNames)itemName);
             int castTime = (int)UnityEngine.Random.Range(potionSO.minCastTime, potionSO.maxCastTime);
             int buffID =
             charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID

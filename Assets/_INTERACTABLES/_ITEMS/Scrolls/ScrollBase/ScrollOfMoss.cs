@@ -2,14 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace Interactables
 {
 
-
-    public class ScrollOfFire : EnchantScrollBase, iReadScroll
+    public class ScrollOfMoss : EnchantScrollBase, Iitems
     {
-        public override ScrollName scrollName => ScrollName.ScrollOfFire;
+        public override ScrollNames scrollName => ScrollNames.ScrollOfMoss;
+        public ItemType itemType => ItemType.Scrolls;
+        public int itemName => (int)ScrollNames.ScrollOfMoss;
+        public int maxInvStackSize { get; set; }
+        public SlotType invSlotType { get; set; }
+        public List<int> allBuffs { get; set; }
+        public int itemId { get; set; }
+        public void OnHoverItem()
+        {
+
+        }
+        public void InitItem(int itemId, int maxInvStackSize)
+        {
+            this.itemId = itemId;
+            this.maxInvStackSize = maxInvStackSize;
+        }
 
         public void ApplyScrollReadFX()
         {

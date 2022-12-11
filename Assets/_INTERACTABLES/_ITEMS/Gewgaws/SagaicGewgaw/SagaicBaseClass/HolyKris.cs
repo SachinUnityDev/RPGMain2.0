@@ -37,7 +37,7 @@ namespace Interactables
 
      
 
-        public override void RemoveFX()
+        public override void EndFx()
         {
             foreach (int i in buffIndex)
             {

@@ -8,9 +8,9 @@ namespace Interactables
 {
     public class ElixirOfWillpower : PotionsBase, Iitems, IEquipAble, IConsumable
     {
-        public override PotionName potionName => PotionName.ElixirOfWillpower;      
+        public override PotionNames potionName => PotionNames.ElixirOfWillpower;      
         public ItemType itemType => ItemType.Potions;
-        public int itemName => (int)PotionName.ElixirOfWillpower;
+        public int itemName => (int)PotionNames.ElixirOfWillpower;
         public SlotType invSlotType { get; set; }
         public int maxInvStackSize { get; set; }
         public ItemController itemController { get; set; }
@@ -28,7 +28,7 @@ namespace Interactables
         public override void PotionApplyFX()
         {
 
-            PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionName)itemName);
+            PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionNames)itemName);
             int castTime = (int)UnityEngine.Random.Range(potionSO.minCastTime, potionSO.maxCastTime);
 
             charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID

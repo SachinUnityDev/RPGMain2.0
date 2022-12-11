@@ -33,7 +33,7 @@ namespace Interactables
 
         #region Getters
 
-        public PotionSO GetPotionModelSO(PotionName potionName)
+        public PotionSO GetPotionModelSO(PotionNames potionName)
         {
             foreach (PotionSO potion in allPotionSOs)
             {
@@ -45,7 +45,7 @@ namespace Interactables
             Debug.Log("Char State Model Not found");
             return null;
         }
-        public PotionsBase GetPotionBase(PotionName _potionName)
+        public PotionsBase GetPotionBase(PotionNames _potionName)
         {
             PotionsBase potionBase = allPotionBase.Find(t => t.potionName == _potionName);
             if (potionBase != null)
@@ -57,7 +57,7 @@ namespace Interactables
                 return potionBaseNew;
             }            
         }
-        public PotionModel GetPotionModel(PotionName _potionName)
+        public PotionModel GetPotionModel(PotionNames _potionName)
         {
             PotionModel potionModel = allPotionModel.Find(t => t.potionName == _potionName);
             if (potionModel != null)
@@ -74,7 +74,7 @@ namespace Interactables
         #endregion
 
 
-        public void InitPotion2CommonInv(CharNames charName, PotionName _potionName, CharController causedby
+        public void InitPotion2CommonInv(CharNames charName, PotionNames _potionName, CharController causedby
           , CauseType causeType, int causeID)
         {
           
@@ -117,7 +117,7 @@ namespace Interactables
             {
                 CharController charController = CharService.Instance.charsInPlayControllers[0];
 
-                InitPotion2CommonInv(CharNames.Abbas_Skirmisher, PotionName.HealthPotion, charController
+                InitPotion2CommonInv(CharNames.Abbas_Skirmisher, PotionNames.HealthPotion, charController
                                         , CauseType.CharSkill, 2); 
             }
             if (Input.GetKeyDown(KeyCode.O))

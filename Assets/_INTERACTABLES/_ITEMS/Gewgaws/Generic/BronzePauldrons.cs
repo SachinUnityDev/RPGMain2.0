@@ -15,7 +15,7 @@ namespace Interactables
         public SlotType invSlotType { get; set; }
         public override GenGewgawNames genGewgawNames => GenGewgawNames.BronzePauldrons;
 
-        public override SuffixBase suffixBase { get; set; }
+        public override SuffixBase suffixBase { get; set; } 
         public override PrefixBase prefixBase { get; set; }
         public List<int> allBuffs { get; set; }
         public int itemId { get; set; }
@@ -30,28 +30,23 @@ namespace Interactables
             this.itemId = itemId;
             this.maxInvStackSize = maxInvStackSize;
         }
-        public override GenGewgawModel GenGewgawInit(GenGewgawSO genericGewgawSO, GenGewgawQ genGewgawQ)
+        //public override GenGewgawModel GenGewgawInit(GenGewgawSO genericGewgawSO, GenGewgawQ genGewgawQ)
+        //{
+        //    GenGewgawModel genGewgawModel = new GenGewgawModel(genericGewgawSO, genGewgawQ);
+        //    genGewgawModel.invType = SlotType.CommonInv;
+        //    invSlotType = genGewgawModel.invType;
+        //    return genGewgawModel;
+        //}
+        public override void EquipGenGewgawFX()
         {
-            GenGewgawModel genGewgawModel = new GenGewgawModel(genericGewgawSO, genGewgawQ);
-            genGewgawModel.invType = SlotType.CommonInv;
-            invSlotType = genGewgawModel.invType;
-            return genGewgawModel;
-        }
-        public override void EquipGenGewgawFX(CharController charController)
-        {
-            genGewgawModel.charName = charController.charModel.charName;
+            charController = CharService.Instance.GetCharCtrlWithName(InvService.Instance.charSelect); 
             prefixBase?.ApplyPrefix(charController);
         }
 
-        public override void DisposeGenGewgawFX()
-        {
-
-        }
 
         public override void UnEquipGenGewgawFX()
         {
-            prefixBase?.RemoveFX(); 
-           
+            prefixBase?.EndFX();            
         }
     }
 }

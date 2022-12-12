@@ -243,6 +243,10 @@ namespace Interactables
             }
             else  //  its a Generic gewgaw
             {
+                // get SO
+                // if a given quality is not available in both suffix a
+                // nd prefix then only that Item can exist of the given quality 
+
                 Iitems iitems = itemFactory.GetNewGenGewgaw((GenGewgawNames)itemName, gQuality);
                 iitems.invSlotType = slotType;
                 InvService.Instance.invMainModel.AddItem2CommInv(iitems);
@@ -314,8 +318,8 @@ namespace Interactables
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Gems, (int)GemNames.Amber,
-                                     CauseType.Items, 2); 
+                InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.BronzePauldrons,
+                                     CauseType.Items, 2, GenGewgawQ.Epic); 
         
             }
         }

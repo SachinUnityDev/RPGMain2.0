@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Spice
   m_EditorClassIdentifier: 
   tgName: 16
-  maxInventoryStack: 3
+  maxInvStackSize: 3
   cost:
     silver: 5
     bronze: 6
@@ -24,7 +24,6 @@ MonoBehaviour:
     modVal: 0.4
   - npcName: 1
     modVal: 2
-  desc: 
   iconSprite: {fileID: 21300000, guid: 1cc6623217970c6469bdd0922ed8cb00, type: 3}
   allLines:
   - Trade item. HIgh price fluctuation between NPCs.

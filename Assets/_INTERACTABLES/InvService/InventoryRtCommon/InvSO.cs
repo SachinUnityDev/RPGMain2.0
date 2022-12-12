@@ -61,7 +61,7 @@ namespace Interactables
 
                 PrefixBase prefixBase = genGewgawbase.prefixBase;
                 if (prefixBase != null)
-                    prefixQuality = suffixBase.genGewgawQ;
+                    prefixQuality = prefixBase.genGewgawQ;
 
                 if(suffixQuality == GenGewgawQ.Lyric|| prefixQuality == GenGewgawQ.Lyric)
                 {

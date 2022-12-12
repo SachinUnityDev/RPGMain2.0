@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShinyBoots
   m_EditorClassIdentifier: 
   tgName: 14
-  maxInventoryStack: 1
+  maxInvStackSize: 1
   cost:
     silver: 4
     bronze: 8
@@ -24,7 +24,6 @@ MonoBehaviour:
     modVal: 2
   - npcName: 1
     modVal: 1
-  desc: 
   iconSprite: {fileID: 21300000, guid: a4082191ad08a694eb79939d1e947f29, type: 3}
   allLines:
   - Trade item. HIgh price fluctuation between NPCs.

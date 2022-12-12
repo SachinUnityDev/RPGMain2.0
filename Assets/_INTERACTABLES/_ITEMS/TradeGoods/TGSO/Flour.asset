@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Flour
   m_EditorClassIdentifier: 
   tgName: 4
-  maxInventoryStack: 4
+  maxInvStackSize: 4
   cost:
     silver: 2
     bronze: 4
@@ -24,7 +24,6 @@ MonoBehaviour:
     modVal: 0.6
   - npcName: 1
     modVal: 1.4
-  desc: 
   iconSprite: {fileID: 21300000, guid: 6f12bb5da98f1fc488b966522b010840, type: 3}
   allLines:
   - Trade item. HIgh price fluctuation between NPCs.

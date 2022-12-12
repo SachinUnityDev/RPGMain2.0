@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LionPelt
   m_EditorClassIdentifier: 
   tgName: 9
-  maxInventoryStack: 2
+  maxInvStackSize: 2
   cost:
     silver: 3
     bronze: 6
@@ -24,7 +24,6 @@ MonoBehaviour:
     modVal: 0.8
   - npcName: 3
     modVal: 2.5
-  desc: 
   iconSprite: {fileID: 21300000, guid: 524f35f098cb1634b8738d578efe1a9a, type: 3}
   allLines:
   - Trade item. Might look good on the Tavern wall.

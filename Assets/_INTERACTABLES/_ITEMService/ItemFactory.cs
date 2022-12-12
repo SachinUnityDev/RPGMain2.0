@@ -270,9 +270,11 @@ namespace Interactables
                     // is mutated as gengewgawBase as prefix and Suffix are to be allocated
 
                     t.suffixBase = GetSuffixBase(suffixName);
-                    t.prefixBase = GetPrefixBase(prefixName);                    
-                    t.suffixBase.genGewgawQ = genGewgawQ;
-                    t.prefixBase.genGewgawQ = genGewgawQ;
+                    t.prefixBase = GetPrefixBase(prefixName);   
+                    if(t.suffixBase != null)
+                    t.suffixBase.SuffixInit(genGewgawQ);
+                    if (t.prefixBase != null)
+                        t.prefixBase.PrefixInit(genGewgawQ);
 
                     return t as Iitems;
                 }

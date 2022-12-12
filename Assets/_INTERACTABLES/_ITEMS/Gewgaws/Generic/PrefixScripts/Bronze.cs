@@ -20,8 +20,10 @@ namespace Interactables
 
         int val1, val2, val3;
         string str1, str2, str3;
-        public override void InitPrefix(GenGewgawQ genGewgawQ)
+        public override void PrefixInit(GenGewgawQ genGewgawQ)
         {
+            val1 = -1;
+            val2 = -1;
             this.genGewgawQ = genGewgawQ;
         }
         public override void ApplyPrefix(CharController charController)
@@ -31,7 +33,7 @@ namespace Interactables
         }
         protected override void ApplyFXLyric()
         {
-            val1 = -1;
+           
             StatsName statsName = GetRandomUtilityStat();
 
             int index =
@@ -42,7 +44,7 @@ namespace Interactables
         }
         protected override void ApplyFXFolkloric()
         {
-            val2 = -1;
+         
             StatsName statsName = GetRandomUtilityStat();
 
             int index =
@@ -59,7 +61,7 @@ namespace Interactables
         }
       
       
-        public override void RemoveFX()
+        public override void EndFX()
         {
             buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
             buffIndex.Clear();

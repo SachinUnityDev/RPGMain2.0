@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NyalaPelt
   m_EditorClassIdentifier: 
   tgName: 17
-  maxInventoryStack: 2
+  maxInvStackSize: 2
   cost:
     silver: 3
     bronze: 6
@@ -24,7 +24,6 @@ MonoBehaviour:
     modVal: 1.6
   - npcName: 1
     modVal: 2
-  desc: 
   iconSprite: {fileID: 21300000, guid: f61e2a407fb387a4f94de7d292fd4b8d, type: 3}
   allLines:
   - Trade item. Might look good on the Tavern wall.

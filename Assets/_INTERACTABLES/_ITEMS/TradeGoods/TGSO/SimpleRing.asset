@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SimpleRing
   m_EditorClassIdentifier: 
   tgName: 15
-  maxInventoryStack: 1
+  maxInvStackSize: 1
   cost:
     silver: 2
     bronze: 3
@@ -24,7 +24,6 @@ MonoBehaviour:
     modVal: 2
   - npcName: 1
     modVal: 1
-  desc: 
   iconSprite: {fileID: 21300000, guid: 8ea64c052fc3bf843b400dece9275778, type: 3}
   allLines:
   - Trade item. Can be merged with Precious Gems.

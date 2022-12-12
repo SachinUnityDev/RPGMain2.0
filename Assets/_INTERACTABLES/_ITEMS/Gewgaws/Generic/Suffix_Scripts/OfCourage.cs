@@ -19,6 +19,8 @@ namespace Interactables
         string  str1, str2, str3; 
         public override void SuffixInit(GenGewgawQ genGewgawQ)
         {
+            val2 = Random.Range(3, 6);
+            val3 = Random.Range(6, 10);
             this.genGewgawQ = genGewgawQ;
         }
         public override void ApplySuffixFX(CharController charController)
@@ -33,7 +35,7 @@ namespace Interactables
         }
         protected override void ApplyFXFolkloric()
         {
-             val2 = Random.Range(3, 6); 
+      
 
             int index = 
             charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
@@ -43,9 +45,7 @@ namespace Interactables
         }
 
         protected override void ApplyFXEpic()
-        {
-             val3 = Random.Range(6, 10);
-
+        {     
             int index = 
             charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
                 , charController.charModel.charID, StatsName.fortOrg, val3, TimeFrame.Infinity, -1, true);

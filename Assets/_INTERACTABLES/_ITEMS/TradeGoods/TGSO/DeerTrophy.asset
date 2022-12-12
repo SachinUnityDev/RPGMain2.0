@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DeerTrophy
   m_EditorClassIdentifier: 
   tgName: 3
-  maxInventoryStack: 1
+  maxInvStackSize: 1
   cost:
     silver: 3
     bronze: 2
@@ -24,7 +24,6 @@ MonoBehaviour:
     modVal: 1
   - npcName: 1
     modVal: 1.6
-  desc: Trade item. Might look good on the Tavern wall.
   iconSprite: {fileID: 21300000, guid: ff1097dde229c1a42862051e1d9d5702, type: 3}
   allLines:
   - Trade item. Might look good on the Tavern wall.

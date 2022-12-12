@@ -22,7 +22,7 @@ namespace Interactables
 
         int val31, val32;
         string str3;
-        public override void InitPrefix(GenGewgawQ genGewgawQ)
+        public override void PrefixInit(GenGewgawQ genGewgawQ)
         {
             this.genGewgawQ = genGewgawQ;
         }
@@ -57,7 +57,7 @@ namespace Interactables
         }
 
 
-        public override void RemoveFX()
+        public override void EndFX()
         {
             buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
             buffIndex.Clear();

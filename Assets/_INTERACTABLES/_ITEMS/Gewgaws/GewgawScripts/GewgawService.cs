@@ -89,6 +89,8 @@ namespace Interactables
             InvService.Instance.invMainModel.AddItem2CommInv(genGewgawBase as Iitems);
         }
 
+
+        // to be migrated to item controller 
         public void EquipGewgaw2Char(GenGewgawBase genGewgawbase, GenGewgawQ genGewgawQ)
         {
             CharNames charName = InvService.Instance.charSelect;
@@ -98,19 +100,19 @@ namespace Interactables
             GenGewgawNames genGewgawName = genGewgawbase.genGewgawNames;
             GenGewgawSO genGewgawSO = GetGewgawSO(genGewgawName);
 
-            GenGewgawModel genGewgawModel = genGewgawbase.GenGewgawInit(genGewgawSO, genGewgawQ); 
-            allGenGewgawModel.Add(genGewgawModel);
+           // GenGewgawModel genGewgawModel = genGewgawbase.GenGewgawInit(genGewgawSO, genGewgawQ); 
+           // allGenGewgawModel.Add(genGewgawModel);
         }
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                CharController charController = CharService.Instance.charsInPlayControllers[0];
-                InitGewgaw2CommonInv(charController, GenGewgawNames.GoldenBelt, 
-                                    GenGewgawQ.Lyric, charController, CauseType.Items, 3); 
+            //if (Input.GetKeyDown(KeyCode.G))
+            //{
+            //    CharController charController = CharService.Instance.charsInPlayControllers[0];
+            //    InitGewgaw2CommonInv(charController, GenGewgawNames.GoldenBelt, 
+            //                        GenGewgawQ.Lyric, charController, CauseType.Items, 3); 
               
-            }
+            //}
             
 
         }

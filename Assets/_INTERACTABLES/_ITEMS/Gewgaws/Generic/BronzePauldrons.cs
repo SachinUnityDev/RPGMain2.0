@@ -15,10 +15,9 @@ namespace Interactables
         public SlotType invSlotType { get; set; }
         public override GenGewgawNames genGewgawNames => GenGewgawNames.BronzePauldrons;
 
-        public override SuffixBase suffixBase { get; set; } 
-        public override PrefixBase prefixBase { get; set; }
-        public List<int> allBuffs { get; set; }
         public int itemId { get; set; }
+        public List<int> allBuffs { get; set; }
+
         public void OnHoverItem()
         {
             // get So from the item service using item name 
@@ -40,13 +39,13 @@ namespace Interactables
         public override void EquipGenGewgawFX()
         {
             charController = CharService.Instance.GetCharCtrlWithName(InvService.Instance.charSelect); 
-            prefixBase?.ApplyPrefix(charController);
+            //prefixBase?.ApplyPrefix();
         }
 
 
         public override void UnEquipGenGewgawFX()
         {
-            prefixBase?.EndFX();            
+           // prefixBase?.EndFX();            
         }
     }
 }

@@ -52,14 +52,15 @@ namespace Combat
          List<BuffData> allBuffs = new List<BuffData>();  
          List<BuffData> allDaybuffs = new List<BuffData>(); 
          List <BuffData> allNightbuffs = new List<BuffData>();  
-
+        List<BuffData> allExpModBuffs = new List<BuffData>();
+            
         // use array here for the index to work 
 
         CharController charController; // ref to char Controller 
         [SerializeField]List<string> buffStrs = new List<string>();
         [SerializeField]List<string> deDuffStrs = new List<string>();
 
-        public int buffIndex = 0; 
+        public int buffIndex = 0;  
         void Start()
         {
             // should have feature of printing some data from skills directly
@@ -70,11 +71,15 @@ namespace Combat
           //  QuestEventService.Instance.OnDayChange
 
         }
+
+
+
+
 #region  APPLY_BUFFS 
         public int ApplyBuff(CauseType causeType, int causeName, int causeByCharID
                                 , StatsName statName, float value, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
         {
-            // Actual buff application 
+           
             CharModData charModVal =  charController.ChangeStat( causeType,  causeName, causeByCharID
                                             ,  statName,  value, true);
             int currRd = CombatService.Instance.currentRound;
@@ -99,6 +104,21 @@ namespace Combat
             return buffIndex; 
         }
 
+
+
+        public int ApplyExpBuff(CauseType causeType, int causeName, int causeByCharID
+                 , int value, TimeFrame timeFrame, int netTime, bool isBuff)
+        {
+            // when mod the modifier and keep track here
+          
+            charController.charModel.expBonusModPercent += (int)value;            
+            int currRd = CombatService.Instance.currentRound;
+            buffIndex++;
+            BuffData buffData = new BuffData(buffIndex, isBuff, currRd, timeFrame, netTime,
+                                                                 null , "");
+            allExpModBuffs.Add(buffData);
+            return buffIndex;
+        }
         bool IsRangeChange(BuffData buffData)
         {
             if (buffData.charModData.modChgMinR == 0 &&
@@ -112,11 +132,48 @@ namespace Combat
 #region REMOVE BUFFS 
         public bool RemoveBuff(int buffID)
         {
+            BuffData buffData = null; 
             int index = allBuffs.FindIndex(t => t.buffID == buffID);
-            if (index == -1) return false; 
-            BuffData buffData = allBuffs[index];
-            RemoveBuffData(buffData);
-            return true;
+            if (index == -1)
+            {
+                index = allDaybuffs.FindIndex(t => t.buffID == buffID); 
+                if(index == -1)
+                {
+                    index = allNightbuffs.FindIndex(t => t.buffID == buffID);
+                    if(index == -1)
+                    {
+                        index = allExpModBuffs.FindIndex(t => t.buffID == buffID);
+                        if (index != -1)
+                        {
+                            buffData = allExpModBuffs[index]; 
+                            allExpModBuffs.Remove(buffData);
+                            return true; 
+                        }
+                        else
+                        {
+                            return false; 
+                        }
+                    }           
+                    else // remove night buff
+                    {
+                        buffData = allNightbuffs[index];
+                        allNightbuffs.Remove(buffData);
+                        return true; 
+                    }
+                }
+                else // remove day buff
+                {
+                    buffData = allDaybuffs[index];
+                    allDaybuffs.Remove(buffData);
+                    return true; 
+                } 
+            }
+            else
+            {
+                buffData = allBuffs[index];
+                RemoveBuffData(buffData);
+                return true; 
+            }                
         }
         public void RemoveBuffData(BuffData buffData)
         {
@@ -127,12 +184,13 @@ namespace Combat
                                      , buffData.charModData.statModified
                                      , -buffData.charModData.modChgMinR, -buffData.charModData.modChgMinR,true);
 
-            }else
+            }else 
             {
                 charController.ChangeStat(buffData.charModData.causeType,
                                      buffData.charModData.causeName, buffData.charModData.causeByCharID
                                      , buffData.charModData.statModified, -buffData.charModData.modCurrVal, true);
             }
+            
             allBuffs.Remove(buffData);
         }
 

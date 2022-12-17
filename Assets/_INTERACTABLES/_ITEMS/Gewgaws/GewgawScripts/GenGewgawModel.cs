@@ -11,7 +11,7 @@ namespace Interactables
         [Header("Fundamentals")]
         public GenGewgawNames genGewgawName;
         public PrefixNames prefixName;
-        public GenGewgawMidNames gewgawName;
+        public GewgawMidNames gewgawName;
         public SuffixNames suffixName;
 
         public GenGewgawState genGewgawState = GenGewgawState.None;

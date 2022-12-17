@@ -10,23 +10,22 @@ namespace Interactables
 {
     public class EasyFit : SagaicGewgawBase
     {
-        public override SagaicGewgawNames sagaicgewgawName => SagaicGewgawNames.EasyFit;
+        public override SagaicGewgawNames sagaicGewgawName => SagaicGewgawNames.EasyFit;
 
-        public override CharController charController { get; set; }
-        public override List<int> buffIndex { get; set; }
-        public override List<string> displayStrs { get; set; }
-        //+2 Wp and Vigor Upon Dodge: +1 Stamina and Hp Regen, 3 rds
+        //+2 Wp and Vigor ....Upon Dodge: +1 Stamina and Hp Regen, 3 rds
 
         int dmgChgVal;
 
-        public override void GewGawInit()
+        public override void GewGawSagaicInit()
         {
+
+            charController = InvService.Instance.charSelectController;
             dmgChgVal = UnityEngine.Random.Range(36, 46);
         }
 
-        public override void ApplyGewGawFX(CharController charController)
+        public  void ApplyGewGawFX()
         {
-            this.charController = charController;
+            
             if (CharStatesService.Instance.HasCharState(charController.gameObject, CharStateName.Unslakable))
             {
                 ApplyIfUnslackableFx();
@@ -41,11 +40,11 @@ namespace Interactables
                 {
                     //+1 Morale and Luck
                     int buffID = c.buffController.ApplyBuff(CauseType.SagaicGewgaw, charController.charModel.charID,
-                                (int)sagaicgewgawName, StatsName.morale, 1, TimeFrame.Infinity, -1, true);
+                                (int)sagaicGewgawName, StatsName.morale, 1, TimeFrame.Infinity, -1, true);
                     buffIndex.Add(buffID);
 
                     buffID = c.buffController.ApplyBuff(CauseType.SagaicGewgaw, charController.charModel.charID,
-                            (int)sagaicgewgawName, StatsName.luck, 1, TimeFrame.Infinity, -1, true);
+                            (int)sagaicGewgawName, StatsName.luck, 1, TimeFrame.Infinity, -1, true);
                     buffIndex.Add(buffID);
                 }
             }
@@ -55,7 +54,7 @@ namespace Interactables
         void OnStartOfCombat()
         {
             CharStatesService.Instance.ApplyCharState(charController.gameObject, CharStateName.Soaked,
-                 charController, CauseType.SagaicGewgaw, (int)sagaicgewgawName, TimeFrame.EndOfRound, 3);
+                 charController, CauseType.SagaicGewgaw, (int)sagaicGewgawName, TimeFrame.EndOfRound, 3);
         }
 
         void OnCharStateChg(CharStateData charStateData)
@@ -69,20 +68,17 @@ namespace Interactables
             float dmgMult = dmgChgVal / 100f;
             int buffID = charController.buffController.ApplyBuffOnRange
                 (CauseType.SagaicGewgaw, charController.charModel.charID,
-                  (int)sagaicgewgawName, StatsName.damage, (int)statData.maxRange * dmgMult,
+                  (int)sagaicGewgawName, StatsName.damage, (int)statData.maxRange * dmgMult,
                   (int)statData.minRange * dmgMult, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
         }
 
-
-
-        public override List<string> DisplayStrings()
+        public override void EquipGewgawSagaic()
         {
-            return null;
+            ApplyGewGawFX(); 
         }
 
-
-        public override void EndFx()
+        public override void UnEquipSagaic()
         {
             CharStatesService.Instance.OnCharStateStart -= OnCharStateChg;
             CombatEventService.Instance.OnSOC -= OnStartOfCombat;

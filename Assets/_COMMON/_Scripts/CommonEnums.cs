@@ -108,6 +108,7 @@ namespace Common
         EndOfNight,       
         EndOfQuest,
         Infinity,
+        Permanent,
     }
 
     public enum QuestCombatMode

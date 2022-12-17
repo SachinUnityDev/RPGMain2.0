@@ -52,26 +52,27 @@ namespace Interactables
         {
             if(item.itemType == ItemType.GenGewgaws)
             {
-                GenGewgawQ suffixQuality = GenGewgawQ.None;
-                GenGewgawQ prefixQuality = GenGewgawQ.None; 
+                //GenGewgawQ suffixQuality = GenGewgawQ.None;
+                //GenGewgawQ prefixQuality = GenGewgawQ.None; 
                 GenGewgawBase genGewgawbase = (GenGewgawBase)item;
                 SuffixBase suffixBase = genGewgawbase.suffixBase;
-                if(suffixBase != null)
-                 suffixQuality= suffixBase.genGewgawQ;
+                //if(suffixBase != null)
+                // suffixQuality= suffixBase.genGewgawQ;
 
-                PrefixBase prefixBase = genGewgawbase.prefixBase;
-                if (prefixBase != null)
-                    prefixQuality = prefixBase.genGewgawQ;
+                //PrefixBase prefixBase = genGewgawbase.prefixBase;
+                //if (prefixBase != null)
+                //    prefixQuality = prefixBase.genGewgawQ;
+                GenGewgawQ genGewgawQ = genGewgawbase.genGewgawQ;  
 
-                if(suffixQuality == GenGewgawQ.Lyric|| prefixQuality == GenGewgawQ.Lyric)
+                if(genGewgawQ == GenGewgawQ.Lyric)
                 {
                     return filledSlot; 
                 }
-                if (suffixQuality == GenGewgawQ.Folkloric || prefixQuality == GenGewgawQ.Folkloric)
+                if (genGewgawQ == GenGewgawQ.Folkloric)
                 {
                     return folkloricSlot; 
                 }
-                if (suffixQuality == GenGewgawQ.Epic || prefixQuality == GenGewgawQ.Epic)
+                if (genGewgawQ == GenGewgawQ.Epic)
                 {
                     return epicSlot;
                 }

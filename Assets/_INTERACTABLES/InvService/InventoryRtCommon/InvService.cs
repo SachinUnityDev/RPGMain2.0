@@ -14,7 +14,9 @@ namespace Interactables
 
         public event Action<bool, ItemsDragDrop> OnDragResult;
         public event Action<CharModel> OnCharSelectInPanel;       // int here is charID 
-        public CharNames charSelect; 
+        public CharNames charSelect;
+        public CharController charSelectController; 
+
 
         [Header("TO BE REF")]
         public InvSO InvSO; // all items SO 
@@ -88,11 +90,9 @@ namespace Interactables
         public void On_CharSelectInv(CharModel charModel)
         {
             charSelect = charModel.charName;
+            charSelectController = CharService.Instance.GetCharCtrlWithName(charModel.charName);
             OnCharSelectInPanel?.Invoke(charModel);
         }
-
-
-    
 
 
         #region ITEM_ACTIONS CHECKS

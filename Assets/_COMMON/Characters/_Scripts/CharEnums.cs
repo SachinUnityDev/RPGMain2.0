@@ -260,7 +260,7 @@ public enum StatsName
     darkRes,
     staminaRegen,
     hpRegen, 
-    fortOrg, 
+    fortOrg,     
 }
 
 public enum RaceTypeHero  // only for inv segregation 

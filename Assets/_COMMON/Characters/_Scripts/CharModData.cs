@@ -14,7 +14,7 @@ namespace Common
         public int causeName;
         public int causeByCharID;
         public int effectedCharNameID;
-        public StatsName statModified;
+        public StatsName statModified;       
 
         public float modCurrVal = 0f;
         public float baseVal = 0f;  

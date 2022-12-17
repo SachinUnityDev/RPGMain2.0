@@ -6,97 +6,71 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class OfTheRat: SuffixBase
+    public class OfTheRat: SuffixBase, IFolkloric, IEpic
     {
         public override SuffixNames suffixName => SuffixNames.OfTheRat;
-        public override GenGewgawQ genGewgawQ { get; set; }
-        public override CharController charController { get; set; }
-        public override List<int> buffIndex { get; set; }
-        public override List<string> displayStrs { get; set; }
 
-        //NA	1 dodge + 1-2 haste	2 dodge, + 2-3 haste
+        //NA	1 dodge + 1-2 haste,  	2 dodge + 2-3 haste
         int val21, val22, val31, val32;
-        string str2, str3;
-       
 
-        public override void SuffixInit(GenGewgawQ genGewgawQ)
+        public void FolkloricInit()
         {
-            this.genGewgawQ = genGewgawQ;
+            val21 = 1; val22 = UnityEngine.Random.Range(1, 3);
+            string str = $"+{val21} Dodge";
+             displayStrs.Add(str);
+            str = $"+{val22} Haste";
+            displayStrs.Add(str);
         }
-        public override void ApplySuffixFX(CharController charController)
+        public void ApplyFXFolkloric()
         {
-            this.charController = charController;
-            buffIndex = new List<int>();
-        }
-        protected override void ApplyFXLyric()
-        {
+            charController = InvService.Instance.charSelectController;
 
-        }
-        protected override void ApplyFXFolkloric()
-        {
             //1 dodge + 1 - 2 haste
-
-            val21 = 1;
             int index =
                   charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
                           , charController.charModel.charID, StatsName.dodge, val21, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
-            val22 = UnityEngine.Random.Range(1, 3);
+       
             index =
                 charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
                         , charController.charModel.charID, StatsName.haste, val22, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }
-        protected override void ApplyFXEpic()
+        public void EpicInit()
         {
+            val31 = 2; val32 = UnityEngine.Random.Range(2, 4);
+            string str = $"+{val31} Dodge";
+            displayStrs.Add(str);
+            str = $"+{val32} Haste";
+            displayStrs.Add(str);
+        }
+        public void ApplyFXEpic()
+        {
+            charController = InvService.Instance.charSelectController;
+
             //2 dodge, +2 - 3 haste
-            val31 = 2;
+
             int index =
                   charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
                           , charController.charModel.charID, StatsName.dodge, val31, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
-            val32 = UnityEngine.Random.Range(2, 4);
+         
             index =
                 charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
                         , charController.charModel.charID, StatsName.haste, val32, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }
-
-        public override List<string> DisplayStrings()
-        {
-            displayStrs.Clear();
-            switch (genGewgawQ)
-            {
-                case GenGewgawQ.Lyric:
-                    //str1 = $"+{val1} {statsName1}";
-                    //displayStrs.Add(str1);
-                    break;
-                case GenGewgawQ.Folkloric:
-                    str2 = $"+{val21} Dodge";
-                    displayStrs.Add(str2);
-                    str2 = $"+{val22} Haste";
-                    displayStrs.Add(str2);
-                    break;
-                case GenGewgawQ.Epic:
-                    str3 = $"+{val31} Dodge";
-                    displayStrs.Add(str3);
-                    str3 = $"+{val32} Haste";
-                    displayStrs.Add(str3);
-                    break;
-                default:
-                    break;
-            }
-            return displayStrs;
-        }
-
-        public override void RemoveFX()
+        public void RemoveFXFolkloric()
         {
             buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
             buffIndex.Clear();
         }
-
-
+        public void RemoveFXEpic()
+        {
+            buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
+            buffIndex.Clear();
+        }
     }
 }

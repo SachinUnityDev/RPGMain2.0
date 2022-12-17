@@ -6,127 +6,100 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class OfEndurance : SuffixBase
+    public class OfEndurance : SuffixBase, ILyric, IFolkloric, IEpic
     {
         public override SuffixNames suffixName => SuffixNames.OfEndurance;
-        public override GenGewgawQ genGewgawQ { get; set; }
-        public override CharController charController { get; set; }
-        public override List<int> buffIndex { get; set; }
-        public override List<string> displayStrs { get; set; }
+ 
+        //1 vigor or 1 willpower	2 vigor or 2 willpower	3-4 vigor or 3-4 willpower
+        int valLyric, valFolk, valEpic;
       
-        //1 vigor or 1 willpower	2 vigor or 2 willpower	3-4 vigor or 3-4 willpower
-        int val1, val2, val3;
-        string str1, str2, str3;
         StatsName statsName1, statsName2, statsName3;
-
-        public override void SuffixInit(GenGewgawQ genGewgawQ)
+        public void LyricInit()
         {
-            this.genGewgawQ = genGewgawQ;
-        }
-        public override void ApplySuffixFX(CharController charController)
-        {
-            this.charController = charController;
-            buffIndex = new List<int>();
-        }
-
-
-        protected override void ApplyFXLyric()
-        {
-            int index = 0; 
+            valLyric = 1;
             if (true.TheToss())
             {
-                val1 = 1;
                 statsName1 = StatsName.vigor;
-                index =
-                    charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                            ,charController.charModel.charID, statsName1, val1, TimeFrame.Infinity, -1, true);
             }
             else
             {
-                val1 = 1;
                 statsName1 = StatsName.willpower;
-                index =
+            }
+            string str = $"+{valLyric} {statsName1}";
+             displayStrs.Add(str);
+        }
+        public void ApplyFXLyric()
+        {
+            charController = InvService.Instance.charSelectController;
+
+            int index =              
                     charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                        , charController.charModel.charID, statsName1, val1, TimeFrame.Infinity, -1, true);
-            }           
+                            ,charController.charModel.charID, statsName1, valLyric, TimeFrame.Infinity, -1, true);       
             buffIndex.Add(index);
         }
-        protected override void ApplyFXFolkloric()
+        public void FolkloricInit()
         {
-            int index = 0;
+           
+
+            valFolk = 2;
             if (true.TheToss())
             {
-                val2 = 2;
                 statsName2 = StatsName.vigor;
-                index =
-                    charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                            , charController.charModel.charID, statsName2, val2, TimeFrame.Infinity, -1, true);
             }
             else
             {
-                val2 = 2;
                 statsName2 = StatsName.willpower;
-                index =
-                    charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                        , charController.charModel.charID, statsName2, val2, TimeFrame.Infinity, -1, true);
             }
+            string str = $"+{valFolk} {statsName2}";
+            displayStrs.Add(str);
+        }
+        public void ApplyFXFolkloric()
+        {
+            charController = InvService.Instance.charSelectController;
+            int index =
+                   charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
+                            , charController.charModel.charID, statsName2, valFolk, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }
-        protected override void ApplyFXEpic()
+        public void EpicInit()
         {
-            int index = 0;
+            valEpic = UnityEngine.Random.Range(3, 5);
             if (true.TheToss())
             {
-                val3 = UnityEngine.Random.Range(3, 5);
                 statsName3 = StatsName.vigor;
-                index =
-                    charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                            , charController.charModel.charID, statsName3, val3, TimeFrame.Infinity, -1, true);
             }
             else
             {
-                val3 = UnityEngine.Random.Range(3, 5);
                 statsName3 = StatsName.willpower;
-                index =
-                    charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                        , charController.charModel.charID, statsName3, val3, TimeFrame.Infinity, -1, true);
             }
+            string str = $"+{valEpic} {statsName3}";
+            displayStrs.Add(str);
+        }
+        public void ApplyFXEpic()
+        {
+            charController = InvService.Instance.charSelectController;
+            int index =
+                    charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
+                            , charController.charModel.charID, statsName3, valEpic, TimeFrame.Infinity, -1, true);
+            
             buffIndex.Add(index);
         }
         //1 vigor or 1 willpower	2 vigor or 2 willpower	3-4 vigor or 3-4 willpower
-
-        public override List<string> DisplayStrings()
-        {
-            displayStrs.Clear();
-            switch (genGewgawQ)
-            {
-                case GenGewgawQ.Lyric:
-                    str1 = $"+{val1} {statsName1}";
-                    displayStrs.Add(str1);
-                    break;
-                case GenGewgawQ.Folkloric:
-                    str2 = $"+{val2} {statsName2}";
-                    displayStrs.Add(str2);
-                    break;
-                case GenGewgawQ.Epic:
-                    str3 = $"+{val3} {statsName3}";
-                    displayStrs.Add(str3);
-                    break;
-                default:
-                    break;
-            }
-            return displayStrs;
-        }
-
-        public override void RemoveFX()
+        public void RemoveFXLyric()
         {
             buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
             buffIndex.Clear();
         }
-
-
-
-
+        public void RemoveFXFolkloric()
+        {
+            buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
+            buffIndex.Clear();
+        }
+        public void RemoveFXEpic()
+        {
+            buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
+            buffIndex.Clear();
+        }
     }
 }
 

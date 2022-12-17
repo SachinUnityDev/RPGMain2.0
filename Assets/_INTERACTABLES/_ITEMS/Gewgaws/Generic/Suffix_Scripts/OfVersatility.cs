@@ -7,42 +7,35 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class OfVersatility : SuffixBase
+    public class OfVersatility : SuffixBase, IFolkloric, IEpic
     {
         public override SuffixNames suffixName => SuffixNames.OfVersatility;
-        public override GenGewgawQ genGewgawQ { get; set; }
-        public override CharController charController { get; set; }
-        public override List<int> buffIndex { get; set; }
-        public override List<string> displayStrs { get; set; }
 
       //  NA	+1 (two random utility stats)	+2 (two random utility stats)
-        int val1, val2, val3;
-        string str1, str2, str3, str4;
+        int  val2, val3;
+       
         StatsName statsName21, statsName22, statsName31, statsName32;
 
-        public override void SuffixInit(GenGewgawQ genGewgawQ)
+        public void FolkloricInit()
         {
-            this.genGewgawQ = genGewgawQ;
+            statsName21 = GetRandUtilStat(StatsName.None);
+            statsName22 = GetRandUtilStat(statsName21);
+            val2 = 1;
+
+            string str = $"+{val2} {statsName21}";
+            displayStrs.Add(str);
+            str = $"+{val2} {statsName22}";
+            displayStrs.Add(str);
         }
-        public override void ApplySuffixFX(CharController charController)
+        public void ApplyFXFolkloric()
         {
-            this.charController = charController;
-            buffIndex = new List<int>();
-        }
-        protected override void ApplyFXLyric()
-        {
-          
-        }
-        protected override void ApplyFXFolkloric()
-        {
-            statsName21 = GetRandUtilStat(StatsName.None);             
-             val2 = 1;                
-              int index =
+            charController = InvService.Instance.charSelectController;
+            int index =
                     charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
                             , charController.charModel.charID, statsName21, val2, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
-            statsName22 = GetRandUtilStat(statsName21); 
+          
             index =
                 charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
                         , charController.charModel.charID, statsName22, val2, TimeFrame.Infinity, -1, true);
@@ -50,16 +43,27 @@ namespace Interactables
 
             buffIndex.Add(index);
         }
-        protected override void ApplyFXEpic()
+
+        public void EpicInit()
         {
             statsName31 = GetRandUtilStat(StatsName.None);
+            statsName32 = GetRandUtilStat(statsName31);
             val3 = 2;
+            string str = $"+{val3} {statsName31}";
+            displayStrs.Add(str);
+            str = $"+{val3} {statsName32}";
+            displayStrs.Add(str);
+        }
+
+        public void ApplyFXEpic()
+        {
+            charController = InvService.Instance.charSelectController;
             int index =
                   charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
                           , charController.charModel.charID, statsName31, val3, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
-            statsName32 = GetRandUtilStat(statsName31);
+         
             index =
                 charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
                         , charController.charModel.charID, statsName32, val3, TimeFrame.Infinity, -1, true);
@@ -68,40 +72,6 @@ namespace Interactables
             buffIndex.Add(index);
         }
       //  NA	+1 (two random utility stats)	+2 (two random utility stats)
-
-        public override List<string> DisplayStrings()
-        {
-            displayStrs.Clear();
-            switch (genGewgawQ)
-            {
-                case GenGewgawQ.Lyric:
-                    //str1 = $"+{val1} {statsName1}";
-                    //displayStrs.Add(str1);
-                    break;
-                case GenGewgawQ.Folkloric:
-                    str2 = $"+{val2} {statsName21}";
-                    displayStrs.Add(str2);
-                    str2 = $"+{val2} {statsName22}";
-                    displayStrs.Add(str2);
-                    break;
-                case GenGewgawQ.Epic:
-                    str3 = $"+{val3} {statsName31}";
-                    displayStrs.Add(str3);
-                    str3 = $"+{val3} {statsName32}";
-                    displayStrs.Add(str3);
-                    break;
-                default:
-                    break;
-            }
-            return displayStrs;
-        }
-
-        public override void RemoveFX()
-        {
-            buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
-            buffIndex.Clear();
-        }
-
         StatsName GetRandUtilStat(StatsName _statsName)
         {
             StatsName statsName = StatsName.None;
@@ -134,6 +104,20 @@ namespace Interactables
 
         }
 
+
+        public void RemoveFXFolkloric()
+        {
+            buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
+            buffIndex.Clear();
+        }
+
+  
+
+        public void RemoveFXEpic()
+        {
+            buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
+            buffIndex.Clear();
+        }
     }
 
 

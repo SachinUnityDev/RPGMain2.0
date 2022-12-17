@@ -6,80 +6,73 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class OfMirth: SuffixBase
+    public class OfMirth: SuffixBase, ILyric, IFolkloric, IEpic
     {
         public override SuffixNames suffixName => SuffixNames.OfMirth;
-        public override GenGewgawQ genGewgawQ { get; set; }
-        public override CharController charController { get; set; }
-        public override List<int> buffIndex { get; set; }
-        public override List<string> displayStrs { get; set; }
+  
         // 1 Morale 	2 Morale	3 Morale
-        int val1, val2, val3;
-        string str1, str2, str3;
-        public override void SuffixInit(GenGewgawQ genGewgawQ)
+        int valLyric, valFolk, valEpic;
+        public void LyricInit()
         {
-            this.genGewgawQ = genGewgawQ;
+            valLyric = 1;
+            string str = $"+{valLyric} Morale";
+            displayStrs.Add(str);
         }
-        public override void ApplySuffixFX(CharController charController)
+        public void ApplyFXLyric()
         {
-            this.charController = charController;
-            buffIndex = new List<int>();
-        }
-        protected override void ApplyFXLyric()
-        {
-            val1 = 1;
-            int index =
-            charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                , charController.charModel.charID, StatsName.morale, val1, TimeFrame.Infinity, -1, true);
-
-            buffIndex.Add(index);
-        }
-        protected override void ApplyFXFolkloric()
-        {
-            val2 = 2;
+            charController = InvService.Instance.charSelectController;
 
             int index =
             charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                , charController.charModel.charID, StatsName.morale, val2, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, StatsName.morale, valLyric, TimeFrame.Infinity, -1, true);
 
             buffIndex.Add(index);
         }
-        protected override void ApplyFXEpic()
+        public void FolkloricInit()
         {
-            val3 = 3;
+            valFolk = 2;
+            string str = $"+{valFolk} Morale";
+            displayStrs.Add(str);
+        }
+        public void ApplyFXFolkloric()
+        {
+            charController = InvService.Instance.charSelectController;
 
             int index =
             charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                , charController.charModel.charID, StatsName.morale, val3, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, StatsName.morale, valFolk, TimeFrame.Infinity, -1, true);
 
             buffIndex.Add(index);
         }
-
-
-        public override List<string> DisplayStrings()
+        public void EpicInit()
         {
-            displayStrs.Clear();
-            switch (genGewgawQ)
-            {
-                case GenGewgawQ.Lyric:
-                    str1 = $"+{val1} Morale";
-                    displayStrs.Add(str1);
-                    break;
-                case GenGewgawQ.Folkloric:
-                    str2 = $"+{val2} Morale";
-                    displayStrs.Add(str2);
-                    break;
-                case GenGewgawQ.Epic:
-                    str3 = $"+{val3} Morale";
-                    displayStrs.Add(str3);
-                    break;
-                default:
-                    break;
-            }
-            return displayStrs;
+            valEpic = 3;
+            string str = $"+{valEpic} Morale";
+            displayStrs.Add(str);
         }
+        public void ApplyFXEpic()
+        {
+            charController = InvService.Instance.charSelectController;
 
-        public override void RemoveFX()
+            valEpic = 3;
+
+            int index =
+            charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
+                , charController.charModel.charID, StatsName.morale, valEpic, TimeFrame.Infinity, -1, true);
+
+            buffIndex.Add(index);
+        }
+        public void RemoveFXLyric()
+        {
+            buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
+            buffIndex.Clear();
+        }
+        public void RemoveFXFolkloric()
+        {
+            buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
+            buffIndex.Clear();
+        }
+        public void RemoveFXEpic()
         {
             buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
             buffIndex.Clear();

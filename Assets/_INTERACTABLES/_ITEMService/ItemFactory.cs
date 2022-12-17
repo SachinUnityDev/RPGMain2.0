@@ -7,6 +7,21 @@ using System.Linq;
 
 namespace Interactables
 {
+    [System.Serializable]
+    public class GenGewgawData
+    {
+        public GenGewgawNames genGewgawName;
+        public GenGewgawQ genGewgawQ;
+        public Type type;
+
+        public GenGewgawData(GenGewgawNames genGewgawName, GenGewgawQ genGewgawQ, Type type)
+        {
+            this.genGewgawName = genGewgawName;
+            this.genGewgawQ = genGewgawQ;
+            this.type = type;
+        }
+    }
+
     public class ItemFactory : MonoBehaviour
     {
     
@@ -16,7 +31,7 @@ namespace Interactables
         Dictionary<GemNames, Type> allGems = new Dictionary<GemNames, Type>();
 
         [Header("GENERIC GEWGAWS")]
-        Dictionary<GenGewgawNames, Type> allGenGewgaws = new Dictionary<GenGewgawNames, Type>();
+        public List<GenGewgawData> allGenGewgawData = new List<GenGewgawData>();
         public Dictionary<PrefixNames, Type> allPrefixes = new Dictionary<PrefixNames, Type>();
         public Dictionary<SuffixNames, Type> allSuffixes = new Dictionary<SuffixNames, Type>();
 
@@ -74,9 +89,7 @@ namespace Interactables
         void ItemInit()
         {
             PotionInit();           
-            GenGewGawInit();
-            InitPrefixes();
-            InitSuffixes();     
+            GenGewGawInit();              
             HerbsInit();            
             FoodInit();
             FruitInit();
@@ -213,7 +226,9 @@ namespace Interactables
         #region GENERIC GEWGAWS 
         public void GenGewGawInit()
         {
-            if (allGenGewgaws.Count > 0) return;
+            //if (allGenGewgaws.Count > 0) return;
+            InitPrefixes();
+            InitSuffixes();
 
             var getallGenGewgaws = Assembly.GetAssembly(typeof(GenGewgawBase)).GetTypes()
                                      .Where(myType => myType.IsClass
@@ -222,13 +237,51 @@ namespace Interactables
             foreach (var genGewgaws in getallGenGewgaws)
             {
                 var t = Activator.CreateInstance(genGewgaws) as GenGewgawBase;
-                allGenGewgaws.Add(t.genGewgawNames, genGewgaws);
+                
+                GenGewgawSO genGewgawSO = ItemService.Instance.GetGenGewgawSO(t.genGewgawNames);                
+                SuffixNames suffixName = genGewgawSO.suffixName;
+                PrefixNames prefixName = genGewgawSO.prefixName;
+
+                SuffixBase suffixBase = GetSuffixBase(suffixName);
+                PrefixBase prefixBase = GetPrefixBase(prefixName);
+
+                IEpic epic1 = suffixBase as IEpic;
+                IEpic epic2 = prefixBase as IEpic;
+                if(epic1 != null || epic2 != null)
+                {
+                    var x = Activator.CreateInstance(genGewgaws) as GenGewgawBase;
+                    x.GenGewgawInit(GenGewgawQ.Epic);
+                    GenGewgawData genGewgawData 
+                                    = new GenGewgawData(x.genGewgawNames, GenGewgawQ.Epic, genGewgaws);
+                    allGenGewgawData.Add(genGewgawData);
+                }
+                
+                IFolkloric folkLoric1 = suffixBase as IFolkloric;
+                IFolkloric folkLoric2 = prefixBase as IFolkloric;
+                if (folkLoric1 != null || folkLoric2 != null)
+                {
+                    var y = Activator.CreateInstance(genGewgaws) as GenGewgawBase;  
+                    y.GenGewgawInit(GenGewgawQ.Folkloric);
+                    GenGewgawData genGewgawData 
+                                    = new GenGewgawData(y.genGewgawNames, GenGewgawQ.Folkloric, genGewgaws);
+                    allGenGewgawData.Add(genGewgawData);
+                }
+                ILyric lyric1 = suffixBase as ILyric;
+                ILyric lyric2 = prefixBase as ILyric;
+                if (lyric1 != null || lyric2 != null)
+                {
+                    var z = Activator.CreateInstance(genGewgaws) as GenGewgawBase;
+                    z.GenGewgawInit(GenGewgawQ.Lyric);
+                    GenGewgawData genGewgawData 
+                                = new GenGewgawData(z.genGewgawNames, GenGewgawQ.Lyric, genGewgaws);
+                    allGenGewgawData.Add(genGewgawData);
+                }
             }
-            genGewgawCount = allGenGewgaws.Count; 
+            genGewgawCount = allGenGewgawData.Count; 
         }
         public void InitSuffixes()
         {
-            if (allSuffixes.Count > 0) return;
+           // if (allSuffixes.Count > 0) return;
 
             var getallsuffixes = Assembly.GetAssembly(typeof(SuffixBase)).GetTypes()
                                  .Where(myType => myType.IsClass
@@ -243,7 +296,7 @@ namespace Interactables
         }
         public void InitPrefixes()
         {
-            if (allPrefixes.Count > 0) return;
+           // if (allPrefixes.Count > 0) return;
 
             var getallPrefixes = Assembly.GetAssembly(typeof(PrefixBase)).GetTypes()
                                  .Where(myType => myType.IsClass
@@ -256,26 +309,12 @@ namespace Interactables
             }
         }
         public Iitems GetGenGewgaws(GenGewgawNames genGewgawName, GenGewgawQ genGewgawQ)
-        {
-            GenGewgawSO genGewgawSO = ItemService.Instance.GetGenGewgawSO(genGewgawName);
-
-            SuffixNames suffixName = genGewgawSO.suffixName;
-            PrefixNames prefixName = genGewgawSO.prefixName;
-
-            foreach (var gewgaw in allGenGewgaws)
+        {         
+            foreach (var gewgaw in allGenGewgawData)
             {
-                if (gewgaw.Key == genGewgawName)
+                if (gewgaw.genGewgawName == genGewgawName && gewgaw.genGewgawQ == genGewgawQ)
                 {
-                    var t = Activator.CreateInstance(gewgaw.Value) as GenGewgawBase;
-                    // is mutated as gengewgawBase as prefix and Suffix are to be allocated
-
-                    t.suffixBase = GetSuffixBase(suffixName);
-                    t.prefixBase = GetPrefixBase(prefixName);   
-                    if(t.suffixBase != null)
-                    t.suffixBase.SuffixInit(genGewgawQ);
-                    if (t.prefixBase != null)
-                        t.prefixBase.PrefixInit(genGewgawQ);
-
+                    var t = Activator.CreateInstance(gewgaw.type) as GenGewgawBase;
                     return t as Iitems;
                 }
             }
@@ -325,7 +364,7 @@ namespace Interactables
             foreach (var getSagaic in getSagaicGewgaws)
             {
                 var t = Activator.CreateInstance(getSagaic) as SagaicGewgawBase;
-                allSagaicGewgaws.Add(t.sagaicgewgawName, getSagaic);               
+                allSagaicGewgaws.Add(t.sagaicGewgawName, getSagaic);               
             }
             sagaicGewgawCount = allSagaicGewgaws.Count;
         }

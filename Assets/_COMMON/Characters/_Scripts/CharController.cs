@@ -247,7 +247,6 @@ namespace Common
             float currVal = statData.currValue;
             float preConstrainedValue = currVal + value;
 
-         
             if (statData.isClamped)
             {
                 Debug.Log("Value is clamped");  // due to some charstate or trait
@@ -294,6 +293,9 @@ namespace Common
             return charModData; 
         }
 
+        
+
+
         //public void SetBaseValue(StatsName statName, float val)
         //{
         //    //StatData statData = GetStat(charModData.statModified);
@@ -314,7 +316,13 @@ namespace Common
 
         }
 
+        public void ChangeBaseValue(CauseType causeType, int name, int causeByCharID, StatsName statName
+            , float maxChgR, bool toInvoke = true)
+        {
 
+
+
+        }
 
         void CheckHealth()
         {       
@@ -410,7 +418,7 @@ namespace Common
         }
 
 
-#region   LVL AND EXPERIENCE CONTROLS
+        #region   LVL AND EXPERIENCE CONTROLS
         public void ChgLevelUp(int finalLvl)
         {
             charModel.skillPts++;
@@ -428,6 +436,9 @@ namespace Common
 
 
         }
+
+
+
         public void ExpPtsLoss(int val) 
         {
             charModel.expPoints -= (int)val;
@@ -440,7 +451,7 @@ namespace Common
         }
         public void ExpPtsGain(int val)
         {
-            float addExp = charModel.expBonusModPercent * val;
+            float addExp = (1+(charModel.expBonusModPercent/100)) * val;
             float valNew = val + addExp;
 
             charModel.expPoints += (int)valNew;
@@ -452,7 +463,36 @@ namespace Common
             }
         }
 
-#endregion
+
+
+        #endregion
+
+        #region HUNGER AND THRIST
+
+        public CharModData ChangeHungerNThirst(CauseType causeType, int name, int causeByCharID, StatsName statName
+            , float val, bool toInvoke = true)
+        {
+            if(statName == StatsName.hunger)
+            {
+                float hungerVal = charModel.hungerMod + val;
+                CharModData charModData = 
+                    ChangeStat(causeType, name, causeByCharID, StatsName.hunger, hungerVal);
+                return charModData; 
+            }
+            if (statName == StatsName.thirst)
+            {
+                float thirstVal = charModel.thirstMod + val;
+                CharModData charModData =
+                  ChangeStat(causeType, name, causeByCharID, StatsName.thirst, thirstVal);
+                return charModData;
+            }
+
+            return null; 
+        }
+
+
+        #endregion
+
 
         void PopulateOverCharBars(StatsName statName)
         {

@@ -316,7 +316,7 @@ namespace Interactables
         //Relic,
     }
 
-    public enum GenGewgawMidNames
+    public enum GewgawMidNames
     {
         None,
         Amulet,
@@ -330,7 +330,9 @@ namespace Interactables
         Ring,
         Scarf,
         Shinbone,
-        Tiara
+        Tiara, 
+        ThrowingKnife, 
+        RaffiaTrap,
     }
 
   
@@ -363,8 +365,6 @@ namespace Interactables
         RubyRing, 
         EmeraldRing, 
         AmetystRing, 
-
-
     }
 
     public enum SagaicGewgawNames
@@ -425,6 +425,27 @@ namespace Interactables
         Disposed, 
     }
 
+    public enum PoeticSetNames
+    {
+        None, 
+        LegacyOfTheSpida,
+        PoachersToolset, 
+        FirstHuntersArsenal, 
+    }
+    public enum PoeticGewgawNames
+    {
+        None,
+        RingLegacyOfTheSpida,
+        GlovesLegacyOfTheSpida,
+        BeltLegacyOfTheSpida,
+        BracersPoachersToolset,
+        CloakPoachersToolset,
+        BeltPoachersToolset,
+        NecklaceFirstHuntersArsenal,
+        ThrowingKnifeFirstHuntersArsenal,
+        RaffiaTrapFirstHuntersArsenal,
+    }
+
     public enum GenGewgawState
     {
         None, 
@@ -481,7 +502,7 @@ namespace Interactables
     {
         None,
         Back,
-        Belt,
+        Belly,
         Hands,
         Finger,
         Neck,

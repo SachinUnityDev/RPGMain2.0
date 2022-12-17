@@ -148,7 +148,7 @@ namespace Interactables
             if (genGewgawSO != null)
                 return genGewgawSO;
             else
-                Debug.Log("genGewGaw SO  not found");
+                Debug.Log(genGewgawName+ "genGewGaw SO  not found");
             return null;
         }
         public FoodSO GetFoodSO(FoodNames foodName)

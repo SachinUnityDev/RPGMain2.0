@@ -10,53 +10,40 @@ namespace Interactables
 {
     public class BrassHandProtectors : SagaicGewgawBase
     {
-        public override SagaicGewgawNames sagaicgewgawName => SagaicGewgawNames.BrassHandProtectors;
-
-        public override CharController charController { get; set; }
-        public override List<int> buffIndex { get; set; }
-        public override List<string> displayStrs { get; set; }
+        public override SagaicGewgawNames sagaicGewgawName => SagaicGewgawNames.BrassHandProtectors;
 
         //-6-10 Air Res +8-12 Earth Res
         //	+1-2 armor
+       
         //	Returned Regards perk doesnt cost stamina.And applicable to all alies, not just adjacent.
         //	Hone Blades has 2 rds cast time
 
         int valAir, valEarth; 
-        public override void GewGawInit()
+        public override void GewGawSagaicInit()
         {
             valAir = UnityEngine.Random.Range(6, 11);
             valEarth = UnityEngine.Random.Range(8, 13);
             // 
         }
-        public override void ApplyGewGawFX(CharController charController)
+        public override void EquipGewgawSagaic()
         {
-            this.charController = charController;
+            charController = InvService.Instance.charSelectController;
             int buffID = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw, charController.charModel.charID,
-                   (int)sagaicgewgawName, StatsName.airRes, valAir, TimeFrame.Infinity, -1, true);
+                   (int)sagaicGewgawName, StatsName.airRes, valAir, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw, charController.charModel.charID,
-                        (int)sagaicgewgawName, StatsName.earthRes, valEarth, TimeFrame.Infinity, -1, true);
+                        (int)sagaicGewgawName, StatsName.earthRes, valEarth, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
 
             buffID = charController.buffController.ApplyBuffOnRange(CauseType.SagaicGewgaw, charController.charModel.charID,
-                        (int)sagaicgewgawName, StatsName.armor, 1,2, TimeFrame.Infinity, -1, true);
+                        (int)sagaicGewgawName, StatsName.armor, 1, 2, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
         }
 
-        public override List<string> DisplayStrings()
+        public override void UnEquipSagaic()
         {
-            return null;
-        }
-
-
-
-        public override void EndFx()
-        {
-            foreach (int i in buffIndex)
-            {
-                charController.buffController.RemoveBuff(i);
-            }
+            
         }
     }
 }

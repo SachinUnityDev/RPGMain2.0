@@ -11,33 +11,28 @@ namespace Interactables
 {
     public class HornsAndBalls : SagaicGewgawBase
     {
-        public override SagaicGewgawNames sagaicgewgawName => SagaicGewgawNames.HornsAndBalls;
+        public override SagaicGewgawNames sagaicGewgawName => SagaicGewgawNames.HornsAndBalls;
 
-        public override CharController charController { get;set; }
-        public override List<int> buffIndex { get; set; }
-        public override List<string> displayStrs { get; set; }
-
-        
-        public override void GewGawInit()
+        public override void GewGawSagaicInit()
         {
 
         }
         //   +4 vigor when Starving(buff)  
         //    Gain +2 Acc until eoc upon Crit(buff) 
         //    Gains 4-6 Fortitude upon No Patience(instant buff)
-        public override void ApplyGewGawFX(CharController charController)
+  
+        public override void EquipGewgawSagaic()
         {
-            CharStatesService.Instance.OnCharStateStart += OnCharStateStart; 
+            CharStatesService.Instance.OnCharStateStart += OnCharStateStart;
             CharStatesService.Instance.OnCharStateEnd += OnCharStateEnd;
             charController.damageController.OnDamageApplied += OnCritHit;
             SkillService.Instance.OnSkillUsed += OnSkillUsed;
         }
-
         void OnCharStateStart(CharStateData charStateData)
         {
             if (charStateData.charStateModel.charStateName != CharStateName.Starving) return;
              int buffID =   charController.buffController.ApplyBuff(CauseType.SagaicGewgaw,
-                             (int)sagaicgewgawName, charStateData.causeCharID,StatsName.vigor,
+                             (int)sagaicGewgawName, charStateData.causeCharID,StatsName.vigor,
                              +4, TimeFrame.Infinity, -1, true); 
             buffIndex.Add(buffID);
         }
@@ -51,7 +46,7 @@ namespace Interactables
         {
             if(dmgAppliedData.strikeType != StrikeType.Crit) return;
             int buffID = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw,
-                             (int)sagaicgewgawName, charController.charModel.charID, StatsName.acc,
+                             (int)sagaicGewgawName, charController.charModel.charID, StatsName.acc,
                              +2, TimeFrame.EndOfCombat, 1, true);
             buffIndex.Add(buffID); // id # 1 
         }
@@ -62,20 +57,16 @@ namespace Interactables
             if (skillEventData.strikerController != charController.strikeController) return; 
             if(skillEventData.skillModel.skillName  == SkillNames.NoPatience)
             {
-                charController.ChangeStat(CauseType.SagaicGewgaw, (int)sagaicgewgawName, charController.charModel.charID
+                charController.ChangeStat(CauseType.SagaicGewgaw, (int)sagaicGewgawName, charController.charModel.charID
                     , StatsName.fortitude, UnityEngine.Random.Range(4,6),true); 
             }
         }
 
-        public override List<string> DisplayStrings()
-        {
+ 
 
+   
 
-
-            return null;
-        }
-
-        public override void EndFx()
+        public override void UnEquipSagaic()
         {
             CharStatesService.Instance.OnCharStateStart -= OnCharStateStart;
             CharStatesService.Instance.OnCharStateEnd -= OnCharStateEnd;
@@ -84,7 +75,6 @@ namespace Interactables
 
             SkillService.Instance.OnSkillUsed -= OnSkillUsed;
             charController.buffController.RemoveBuff(buffIndex[0]);// vigor buff // no other buff sticks  
-
         }
     }
 

@@ -51,6 +51,10 @@ namespace Common
         public LocationName baseCharLoc; 
         public LocationName currCharLoc;
 
+        [Header("Hunger and Thirst")]
+        public int hungerMod;
+        public int thirstMod; 
+
         [Header("Experience points")]
         public int expPoints;
         public int jobExp;

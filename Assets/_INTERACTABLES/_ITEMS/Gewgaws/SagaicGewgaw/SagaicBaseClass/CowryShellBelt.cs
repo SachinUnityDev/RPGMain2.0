@@ -11,49 +11,65 @@ namespace Interactables
         //Gain +5 Vigor when Feebleminded, Confused, Despaired, Rooted	
         //-10% Thirst and +10% Hunger	
         //+3 Morale when Starving, -2 Morale when Unslakable
-        public override SagaicGewgawNames sagaicgewgawName => SagaicGewgawNames.CowryShellBelt;
-
-        public override CharController charController {  get; set; }
-        public override List<int> buffIndex { get; set; }
-        public override List<string> displayStrs { get; set; }
-        public override void GewGawInit()
+        public override SagaicGewgawNames sagaicGewgawName => SagaicGewgawNames.CowryShellBelt;
+        bool charStateFX1Applied; 
+        public override void GewGawSagaicInit()
         {
+            charStateFX1Applied = false; 
+        }
 
-        }
-        public override void ApplyGewGawFX(CharController charController)
+        public override void EquipGewgawSagaic()
         {
-            this.charController = charController;
-            CharStatesService.Instance.OnCharStateStart += OnCharStateStart;
-            CharStatesService.Instance.OnCharStateEnd += OnCharStateEnd;
+            charController = InvService.Instance.charSelectController;
+            CharStatesService.Instance.OnCharStateStart += OnCharStateStartFX1;
+            CharStatesService.Instance.OnCharStateEnd += OnCharStateEndFX1;
+
+            CharStatesService.Instance.OnCharStateStart += OnCharStateStartFX2;
+            CharStatesService.Instance.OnCharStateEnd += OnCharStateEndFX2;
         }
-        void OnCharStateStart(CharStateData charStateData)
+
+        public override void UnEquipSagaic()
+        {
+            buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
+            buffIndex.Clear();
+        }
+
+        void OnCharStateStartFX1(CharStateData charStateData)
         {
             if (charStateData.charStateModel.charStateName != CharStateName.Feebleminded
                 || charStateData.charStateModel.charStateName != CharStateName.Confused
                 || charStateData.charStateModel.charStateName != CharStateName.Despaired
                 || charStateData.charStateModel.charStateName != CharStateName.Rooted
                 ) return;
+            if (charStateFX1Applied) return; 
             int buffID = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw,
-                            (int)sagaicgewgawName, charStateData.causeCharID, StatsName.vigor,
-                            +4, TimeFrame.Infinity, -1, true);
+                            (int)sagaicGewgawName, charStateData.causeCharID, StatsName.vigor,
+                            +5, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
+            charStateFX1Applied = true; 
         }
 
-        void OnCharStateEnd(CharStateData charStateData)
+        void OnCharStateEndFX1(CharStateData charStateData)
         {
-            charController.buffController.RemoveBuff(buffIndex[0]);// vigor buff  
+            if (charStateData.charStateModel.charStateName == CharStateName.Feebleminded
+               ^ charStateData.charStateModel.charStateName == CharStateName.Confused
+               ^ charStateData.charStateModel.charStateName == CharStateName.Despaired
+               ^ charStateData.charStateModel.charStateName == CharStateName.Rooted
+               ) return; 
+
+                charController.buffController.RemoveBuff(buffIndex[0]);// vigor buff  
         }
 
-        public override List<string> DisplayStrings()
+        void OnCharStateStartFX2(CharStateData charStateData)
         {
-            return null;
+            //+3 Morale when Starving, -2 Morale when Unslakable
+
+
+
         }
-
-    
-
-        public override void EndFx()
+        void OnCharStateEndFX2(CharStateData charStateData)
         {
-            
+
         }
     }
 }

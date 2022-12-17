@@ -28,8 +28,7 @@ namespace Interactables
         }
         public override GenGewgawNames genGewgawNames => GenGewgawNames.ScarfOfCourage;
 
-        public override SuffixBase suffixBase { get; set; }
-        public override PrefixBase prefixBase { get; set; }
+     
 
         //public override GenGewgawModel GenGewgawInit(GenGewgawSO genericGewgawSO
         //                                                 , GenGewgawQ genGewgawQ)
@@ -45,12 +44,12 @@ namespace Interactables
         public override void EquipGenGewgawFX()
         {
             charController = CharService.Instance.GetCharCtrlWithName(InvService.Instance.charSelect);
-            suffixBase?.ApplySuffixFX(charController); 
+           // suffixBase?.ApplySuffixFX(charController); 
         }
 
         public override void UnEquipGenGewgawFX()
         {
-            suffixBase?.RemoveFX();
+           // suffixBase?.RemoveFX();
         }
 
         

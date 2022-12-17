@@ -11,7 +11,7 @@ namespace Interactables
     {
         public GenGewgawNames genGewgawName;
         public PrefixNames prefixName;
-        public GenGewgawMidNames gewgawName;
+        public GewgawMidNames gewgawName;
         public SuffixNames suffixName;
 
         public GewgawSlotType gewgawSlotType;

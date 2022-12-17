@@ -7,81 +7,59 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class OfCourage : SuffixBase
+    public class OfCourage : SuffixBase, IFolkloric, IEpic
     {       
         public override SuffixNames suffixName => SuffixNames.OfCourage;
-        public override GenGewgawQ genGewgawQ { get; set; }
-        public override List<int> buffIndex { get; set; }
-        public override CharController charController { get; set; }
-        public override List<string> displayStrs { get; set; }
-        //of Courage    NA	3-5 fortitude org	6-9 fortitude orign
-        int val1, val2, val3;
-        string  str1, str2, str3; 
-        public override void SuffixInit(GenGewgawQ genGewgawQ)
+
+        //of Courage    NA	3-5 fortitude org	6-9 fortitude origin
+        int valFolk, valEpic;
+
+        public void FolkloricInit()
         {
-            val2 = Random.Range(3, 6);
-            val3 = Random.Range(6, 10);
-            this.genGewgawQ = genGewgawQ;
+            valFolk = Random.Range(3, 6);
+            string str = $"+{valFolk} Fortitude Origin";
+            displayStrs.Add(str);
         }
-        public override void ApplySuffixFX(CharController charController)
+
+        public void ApplyFXFolkloric()
         {
-           
-            this.charController = charController; 
-            buffIndex = new List<int>();
-        }
-        protected override void ApplyFXLyric()
-        {
-            //NA	
-        }
-        protected override void ApplyFXFolkloric()
-        {
-      
+            charController = InvService.Instance.charSelectController;     
 
             int index = 
             charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                , charController.charModel.charID, StatsName.fortOrg, val2, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, StatsName.fortOrg, valFolk, TimeFrame.Infinity, -1, true);
+
+            buffIndex.Add(index);
+        }
+        public void EpicInit()
+        {
+            valEpic = Random.Range(6, 10);
+            string str = $"+{valEpic} Fortitude Origin";
+            displayStrs.Add(str);
+        }
+
+        public void  ApplyFXEpic()
+        {
+            charController = InvService.Instance.charSelectController;
+            int index = 
+            charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
+                , charController.charModel.charID, StatsName.fortOrg, valEpic, TimeFrame.Infinity, -1, true);
 
             buffIndex.Add(index);
         }
 
-        protected override void ApplyFXEpic()
-        {     
-            int index = 
-            charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                , charController.charModel.charID, StatsName.fortOrg, val3, TimeFrame.Infinity, -1, true);
-
-            buffIndex.Add(index);
-        }
-
-        public override void RemoveFX()
+        public void RemoveFXFolkloric()
         {
-            buffIndex.ForEach(t => charController.buffController.RemoveBuff(t)); 
+            buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
             buffIndex.Clear();
         }
 
-        public override List<string> DisplayStrings()
+    
+        public void RemoveFXEpic()
         {
-            displayStrs.Clear();
-            switch (genGewgawQ)
-            {
-                case GenGewgawQ.Lyric:
-                  
-                    break;
-                case GenGewgawQ.Folkloric:
-                    str2 = $"+{val2} Fortitude Origin"; 
-                    displayStrs.Add(str2);
-                    break;
-                case GenGewgawQ.Epic:
-                    str3 = $"+{val3} Fortitude Origin";
-                    displayStrs.Add(str3);
-                    break;
-                default:
-                    break; 
-            }
-            
-            return displayStrs;
+            buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
+            buffIndex.Clear();
         }
-
 
     }
 

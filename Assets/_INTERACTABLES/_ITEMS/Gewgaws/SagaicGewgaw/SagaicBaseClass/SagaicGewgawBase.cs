@@ -9,15 +9,14 @@ namespace Interactables
 {
     public abstract class SagaicGewgawBase
     {
-        public abstract SagaicGewgawNames sagaicgewgawName { get; }
-        
-        public abstract CharController charController { get; set; }
-        public abstract List<int> buffIndex { get; set; }
-        public abstract List<string> displayStrs { get; set; }
-        public abstract void GewGawInit();  // connect the charController and other things
-        public abstract void ApplyGewGawFX(CharController charController);
-        public abstract List<string> DisplayStrings();
-        public abstract void EndFx();
+        public abstract SagaicGewgawNames sagaicGewgawName { get; }        
+        public  CharController charController { get; set; }
+        public  List<int> buffIndex { get; set; }
+        public List<int> expIndex { get; set; }
+        public  List<string> displayStrs { get; set; }
+        public abstract void GewGawSagaicInit();  // connect the charController and other things
+        public abstract void EquipGewgawSagaic();
+        public  abstract void UnEquipSagaic();
     }
 
 

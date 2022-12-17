@@ -315,7 +315,17 @@ namespace Interactables
         //Poetic,
         //Relic,
     }
-
+    public enum GewgawSlotType
+    {
+        None,
+        Back,
+        Belly,
+        Hands,
+        Finger,
+        Neck,
+        Head,
+        Misc,
+    } // has restrictions for race  and cultures 
     public enum GewgawMidNames
     {
         None,
@@ -401,7 +411,7 @@ namespace Interactables
     public enum PoeticSetName
     {
         None,
-        SpidasClutch,
+        LegacyOfTheSpida,
         PoachersToolset,
         FirstHuntersArsenal,
     }
@@ -498,17 +508,7 @@ namespace Interactables
 
     }
 
-    public enum GewgawSlotType    
-    {
-        None,
-        Back,
-        Belly,
-        Hands,
-        Finger,
-        Neck,
-        Head,
-        Misc,
-    } // has restrictions for race  and cultures 
+ 
 
     public enum ToolNames
     {

@@ -7,17 +7,18 @@ using UnityEngine;
 
 namespace Interactables
 {
-    [CreateAssetMenu(fileName = "PoeticGewgawSO", menuName = "Interactable/PoeticGewgawSO")]
+ 
+
+    [CreateAssetMenu(fileName = "PoeticGewgawSO", menuName = "Item Service/PoeticGewgawSO")]
     public class PoeticGewgawSO : ScriptableObject
     {
         // unique feature 
-        public GenGewgawNames genGewgawName;
-        public PrefixNames prefixName;
-        public GewgawMidNames gewgawName;
-        public SuffixNames suffixName;
-
+        public PoeticGewgawNames poeticGewgawName;
+        public PoeticSetName poeticSetName; 
+        public GewgawMidNames gewgawMidName;
+        
         public GewgawSlotType gewgawSlotType;
-        // public int maxWorldInstance;.. cannot be defined here Dep 
+       
         public int maxInvStackSize;
 
         [Header("RESTRICTIONS")]  // ONLY THE BELOW GIVEN CLASS CULTURE AND RACE TYPE CAN HAVE IT 
@@ -31,20 +32,15 @@ namespace Interactables
 
         [Header("Fluctuation rate")]
         public float fluctuationRate = 20f;
-        [Header("Desc")]
-        public string desc = "";
-
+        
         [Header("Sprites")]
         public Sprite iconSprite;
 
 
+     
         private void Awake()
         {
             maxInvStackSize = 1;
-
         }
-
-
-
     }
 }

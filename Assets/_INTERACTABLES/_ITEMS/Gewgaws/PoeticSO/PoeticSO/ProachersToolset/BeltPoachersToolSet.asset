@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6f7933d5d2e9a4c8c137f1d0f1e469, type: 3}
+  m_Name: BeltPoachersToolSet
+  m_EditorClassIdentifier: 
+  poeticGewgawName: 6
+  poeticSetName: 2
+  gewgawMidName: 2
+  gewgawSlotType: 2
+  maxInvStackSize: 1
+  classRestrictions: 110000001700000007000000
+  cultureRestrictions: 
+  raceRestrictions: 
+  cost:
+    silver: 0
+    bronze: 46
+  fluctuationRate: 20
+  iconSprite: {fileID: 21300000, guid: fe25828b63758354d818bcec5dc0325c, type: 3}

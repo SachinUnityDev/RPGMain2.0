@@ -31,9 +31,7 @@ namespace Common
 
         public void Init()
         {
-            gameModel = new GameModel(GameState.InTown, GameDifficulty.Easy, GameMode.Stealth
-                        , LocationName.Nekkisari);
-
+            gameModel = new GameModel(GameState.InTown, GameDifficulty.Easy, LocationName.Nekkisari);
 
             GameEventService.Instance.On_TownEnter(LocationName.Nekkisari); 
             // Load scene say here we start with the town scene
@@ -46,8 +44,6 @@ namespace Common
             // list of Common Service to init 
             // charService
             // beastiary service 
-         
-
         }
 
         public void RestoreState()

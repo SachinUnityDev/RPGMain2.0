@@ -19,12 +19,7 @@ namespace Common
         InMapInteraction, 
         
     };
-    public enum GameMode
-    {
-        Exploration,
-        Stealth,
-        Taunt,
-    }
+    
     public enum GameDifficulty
     {
         Easy, // KIWI
@@ -111,13 +106,7 @@ namespace Common
         Permanent,
     }
 
-    public enum QuestCombatMode
-    {
-        None,
-        Stealth,
-        Exploration,
-        Taunt,
-    }
+
 
     //public enum DOTType
     //{

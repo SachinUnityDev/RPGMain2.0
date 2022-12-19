@@ -15,6 +15,9 @@ namespace Combat
     public class DamageController : MonoBehaviour
     {
         public event Action<DmgAppliedData> OnDamageApplied;
+        
+
+
 
         const float hitChanceMin = 30f;
 
@@ -124,7 +127,6 @@ namespace Combat
             FortChgOnGettingCritNFeeble();
             return dmgNew;
         }
-
 
         public void ApplyDamage(CharController striker, CauseType causeType, int causeName
                             , DamageType _dmgType, float dmgPercentVal, bool ignoreArmor = false)

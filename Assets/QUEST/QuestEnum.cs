@@ -16,7 +16,13 @@ namespace Common
         QuestPrep, 
         QuestMain, 
     }
-
+    public enum QuestMode
+    {
+        None,
+        Stealth,
+        Exploration,
+        Taunt,
+    }
 
     public enum QuestNames
     {

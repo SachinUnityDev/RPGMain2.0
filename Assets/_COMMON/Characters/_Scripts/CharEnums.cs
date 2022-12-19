@@ -38,6 +38,8 @@ public enum CauseType
     Herb,
     Food, 
     Fruit,
+    PoeticGewgaw, 
+    PoeticSetGewgaw, 
 
 }
 

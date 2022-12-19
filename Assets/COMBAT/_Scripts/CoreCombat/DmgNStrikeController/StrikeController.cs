@@ -63,6 +63,14 @@ namespace Combat
             CombatEventService.Instance.OnDmgDelivered += OnDmgDeliveredTick;
         }
 
+        /// <summary>
+        ///  Whenever you execute a move skill you get a haste check if its positive then 
+        ///  then you get one extra move on the grid
+        /// </summary>
+        void HasteCheck()
+        {
+
+        }
 
         public void Init()
         {

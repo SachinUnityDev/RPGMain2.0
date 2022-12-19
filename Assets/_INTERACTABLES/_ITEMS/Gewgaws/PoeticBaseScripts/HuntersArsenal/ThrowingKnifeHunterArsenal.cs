@@ -8,7 +8,7 @@ namespace Interactables
     public class ThrowingKnifeHunterArsenal : PoeticGewgawBase
     {
         public override PoeticGewgawNames poeticGewgawName => PoeticGewgawNames.ThrowingKnifeFirstHuntersArsenal;
-        public override void GewGawSagaicInit()
+        public override void PoeticInit()
         {
 
         }
@@ -20,9 +20,6 @@ namespace Interactables
         {
 
         }
-        public override void BonusSpec()
-        {
 
-        }
     }
 }

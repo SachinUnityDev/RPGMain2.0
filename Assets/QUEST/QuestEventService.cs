@@ -12,9 +12,8 @@ namespace Common
         public event Action OnEOQ;
 
 
-
         public event Action<LandscapeNames> OnPartyLocChange;       
-        public event Action<QuestCombatMode> OnQuestModeChange;
+        public event Action<QuestMode> OnQuestModeChange;
         public event Action<CharController> OnFleeInQuest;
         public event Action<CharController> OnDeathInQuest;
         public event Action<List<CharController>> OnPartySet; 
@@ -38,7 +37,7 @@ namespace Common
             OnPartyLocChange?.Invoke(_partyLoc);           
         } 
 
-        public void ChangeQCMode(QuestCombatMode qcMode)
+        public void ChangeQCMode(QuestMode qcMode)
         {
             OnQuestModeChange?.Invoke(qcMode); 
         }

@@ -26,7 +26,21 @@ namespace Combat
         public event Action<GameObject> OnCharRightClicked;
         public event Action<CharController> OnCharOnTurnSet;
         public event Action<bool> OnCombatLoot;
-        public event Action OnCombatEnd; 
+        public event Action OnCombatEnd;
+
+        public event Action<CharController> OnDodge; // from target perspective
+        public event Action<CharController> OnMisfire; // from striker perspective
+
+        public event Action<CharController> OnReceivingCrit;
+        public event Action<CharController> OnDeliveringCrit; 
+
+        public event Action<CharController> OnReceivingFeeble;
+        public event Action<CharController> OnDeliveringFeeble;
+
+        public event Action<CharController> OnMoraleAction;
+        public event Action<CharController> OnLosingAction;
+
+        public event Action<CharController> OnHasteCheck; 
 
 
 

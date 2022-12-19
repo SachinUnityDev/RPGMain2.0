@@ -9,7 +9,7 @@ namespace Interactables
     public class NecklaceHunterArsenal : PoeticGewgawBase
     {
         public override PoeticGewgawNames poeticGewgawName => PoeticGewgawNames.NecklaceFirstHuntersArsenal;
-        public override void GewGawSagaicInit()
+        public override void PoeticInit()
         {
 
         }
@@ -20,10 +20,6 @@ namespace Interactables
         public override void UnEquipPoetic()
         {
 
-        }
-        public override void BonusSpec()
-        {
-
-        }
+        } 
     }
 }

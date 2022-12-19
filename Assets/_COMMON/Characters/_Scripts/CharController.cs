@@ -474,14 +474,14 @@ namespace Common
         {
             if(statName == StatsName.hunger)
             {
-                float hungerVal = charModel.hungerMod + val;
+                float hungerVal = ((100 + charModel.hungerMod)/100) + val;
                 CharModData charModData = 
                     ChangeStat(causeType, name, causeByCharID, StatsName.hunger, hungerVal);
                 return charModData; 
             }
             if (statName == StatsName.thirst)
             {
-                float thirstVal = charModel.thirstMod + val;
+                float thirstVal = ((100 + charModel.thirstMod) / 100) + val;
                 CharModData charModData =
                   ChangeStat(causeType, name, causeByCharID, StatsName.thirst, thirstVal);
                 return charModData;

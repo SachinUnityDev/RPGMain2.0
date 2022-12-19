@@ -1,4 +1,5 @@
 using Common;
+using Quest;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,7 +35,7 @@ namespace Interactables
             charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
                      , StatsName.willpower, +1, TimeFrame.Infinity, -1, true);  // Not a buff 
 
-            if (GameService.Instance.gameModel.gameMode == GameMode.Taunt)
+            if (QuestService.Instance.questMode == QuestMode.Taunt)
             {
                 charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
                    , StatsName.morale, -3, TimeFrame.EndOfNight, castTime, true);

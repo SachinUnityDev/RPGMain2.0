@@ -11,7 +11,7 @@ namespace Common
         //+6 acc if both Night and Stealth
         CharController charController;
 
-        QuestCombatMode prevQCMode = QuestCombatMode.None;
+        QuestMode prevQCMode = QuestMode.None;
         public override TraitBehaviour traitBehaviour => TraitBehaviour.Positive;
 
         public override PermanentTraitName permTraitName => PermanentTraitName.HiddenClaw;
@@ -26,16 +26,16 @@ namespace Common
 
         }
 
-        void IncAccINStealth(QuestCombatMode qcMode)
+        void IncAccINStealth(QuestMode qcMode)
         {
  
-            if (prevQCMode == QuestCombatMode.Stealth && qcMode != QuestCombatMode.Stealth)
+            if (prevQCMode == QuestMode.Stealth && qcMode != QuestMode.Stealth)
                 charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, StatsName.acc, -3.0f);
 
-            if (qcMode == QuestCombatMode.Stealth)
+            if (qcMode == QuestMode.Stealth)
             {
                 charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, StatsName.acc, 3.0f);
-                prevQCMode = QuestCombatMode.Stealth; 
+                prevQCMode = QuestMode.Stealth; 
             }
 
         }

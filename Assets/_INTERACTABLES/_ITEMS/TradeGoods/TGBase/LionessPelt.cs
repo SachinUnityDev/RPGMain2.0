@@ -28,6 +28,21 @@ namespace Interactables
         {
 
         }
+
+        public void TrophyInit()
+        {
+           
+        }
+
+        public void OnTrophyWalled()
+        {
+           
+        }
+
+        public void OnTrophyRemoved()
+        {
+            
+        }
     }
 }
 

@@ -11,29 +11,16 @@ namespace Common
    
     public class FameData
     {
-        public FameLoc fameClass;
+      
         public FameType fameType;
         public float fameVal; 
-
-
-        public FameData(FameLoc fameClass, FameType fameType, float fameVal)
-        {
-            this.fameClass = fameClass;
+        public FameData(FameType fameType, float fameVal)
+        {           
             this.fameType = fameType;
             this.fameVal = fameVal;
         }
     }
 
-
-    public enum FameLoc
-    {
-        FameGlobal, //0 
-        FameNekkisari,//1
-        FameBluetown, //2
-        FameSmaeru, //3   
-    }
-    
-    
     public enum FameType
     {        
         None,
@@ -61,18 +48,17 @@ namespace Common
 
     [System.Serializable]
     public class FameChgData
-    {
-        public FameLoc fameLoc; 
+    { 
         public int scoreAdded;
         public string changeDesc;
         public MonthName monthName;
 
-        public FameChgData(int _scoreAdded, string _changedesc, MonthName _monthName, FameLoc _fameLoc)
+        public FameChgData(int _scoreAdded, string _changedesc, MonthName _monthName)
         {
             scoreAdded = _scoreAdded;
             changeDesc = _changedesc;
             monthName = _monthName;
-            fameLoc = _fameLoc; 
+            
         }
     }
 
@@ -135,7 +121,7 @@ namespace Common
         public void RunTestBtn()
         {
             FameChgData fcD1 = new FameChgData(-30, "Sacrificed a friend in altar"
-                                        , MonthName.HunchOfTheCamel, FameLoc.FameGlobal);
+                                        , MonthName.HunchOfTheCamel);
 
             FameService.Instance.FameScoreUpdate(fcD1); 
             //FameChgData fcD2 = new FameChgData(6, "Bought drinks in the fest", MonthName.AntlersOfTheDeer);
@@ -151,7 +137,7 @@ namespace Common
     
         public void DisplayFamePanel()
         {
-            List<FameChgData> fameList = FameService.Instance.GetFameChgList((FameLoc)currPage);
+            List<FameChgData> fameList = FameService.Instance.GetFameChgList();
 
             if (fameList.Count < 1) return; 
             pagetext.text = currPage.ToString(); 

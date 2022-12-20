@@ -272,16 +272,12 @@ namespace Interactables
         WhiteMushroom =20, 
         HyenaEar, 
         Lentils,
-
-
-        
-
     }
-    public enum TavernSlotType
+    public enum TavernSlotType   // two slots on tavern wall one for pelt and one for the trophy
     {
         None, 
-        Pelt, 
-        Trophy,
+        Pelt, // animal skin hung on the wall 
+        Trophy, 
     }
 
     public enum TGNames

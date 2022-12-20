@@ -36,17 +36,7 @@ namespace Common
 
         public int GetFameValue(int currPage)
         {
-            switch (currPage)
-            {
-                case 0:
-                    return (int)fameModel.currGlobalFame; 
-                    
-                case 1:
-                    return (int)fameModel.currNekkisariFame;
-                    
-                default:
-                    return 0; 
-            }
+            return (int)fameModel.currGlobalFame;
 
         }
 
@@ -69,42 +59,42 @@ namespace Common
         // used to update score from outside Services 
         public void FameScoreUpdate(FameChgData _fameChgData)
         {
-            List<FameChgData> currList = GetFameChgList(_fameChgData.fameLoc);
-            currList.Add(_fameChgData);
-            switch (_fameChgData.fameLoc)
-            {
-                case FameLoc.FameGlobal:
-                    fameModel.currGlobalFame += _fameChgData.scoreAdded * fameMultiplier;
-                    break;
-                case FameLoc.FameNekkisari:
-                    fameModel.currNekkisariFame += _fameChgData.scoreAdded * fameMultiplier;
-                    break;
-                case FameLoc.FameBluetown:
-                    break;
-                case FameLoc.FameSmaeru:
-                    break;
-                default:
-                    break;
-            }
+           
+            fameModel.currGlobalFame += _fameChgData.scoreAdded * fameMultiplier;
+            fameModel.globalfameDataAll.Add(_fameChgData);
+            //switch (_fameChgData.fameLoc)
+            //{
+            //    case FameLoc.FameGlobal:
+                  
+            //        break;
+                //case FameLoc.FameNekkisari:
+                //    fameModel.currNekkisariFame += _fameChgData.scoreAdded * fameMultiplier;
+                //    break;
+                //case FameLoc.FameBluetown:
+                //    break;
+                //case FameLoc.FameSmaeru:
+                //    break;
+                //default:
+                //    break;
+           // }
         }
 
         // fetch fame chg list for local use and view Controller
-        public List<FameChgData> GetFameChgList(FameLoc fameLoc)
+        public List<FameChgData> GetFameChgList()
         {
-            switch (fameLoc)
-            {
-                case FameLoc.FameGlobal:
-                    return fameModel.globalfameDataAll;
-                    
-                case FameLoc.FameNekkisari:
-                    return fameModel.nekkisarifameDataAll;
-                case FameLoc.FameBluetown:
-                    return null;                     
-                case FameLoc.FameSmaeru:
-                    return null; 
-                default:
-                    return null;
-            }
+            return fameModel.globalfameDataAll;
+            //switch (fameLoc)
+            //{
+            //    case FameLoc.FameGlobal:
+            //    case FameLoc.FameNekkisari:
+            //        return fameModel.nekkisarifameDataAll;
+            //    case FameLoc.FameBluetown:
+            //        return null;                     
+            //    case FameLoc.FameSmaeru:
+            //        return null; 
+            //    default:
+            //        return null;
+            //}
         }
         public void RestoreState()
         {

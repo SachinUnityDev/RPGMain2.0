@@ -64,8 +64,10 @@ namespace Combat
         }
 
         /// <summary>
-        ///  Whenever you execute a move skill you get a haste check if its positive then 
-        ///  then you get one extra move on the grid
+        /// to be checked only when move skill are used 
+        /// Whenever you execute a move skill you get a haste check if its positive then 
+        ///  then you get a chance to use another skill..(including move skill)
+        /// 
         /// </summary>
         void HasteCheck()
         {

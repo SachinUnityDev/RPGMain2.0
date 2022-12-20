@@ -19,8 +19,10 @@ namespace Common
 
         [Header("Modifier values")]
         public float globalFameMod;
-        public float nekkisariFameMod; 
+        public float nekkisariFameMod;
 
+        
+        
         [Header("FAME")]
         public List<FameChgData> globalfameDataAll = new List<FameChgData>();
         public List<FameChgData> nekkisarifameDataAll = new List<FameChgData>();

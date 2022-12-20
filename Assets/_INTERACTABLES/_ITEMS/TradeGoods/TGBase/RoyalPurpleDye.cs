@@ -22,10 +22,7 @@ namespace Interactables
             this.itemId = itemId;
             this.maxInvStackSize = maxInvStackSize;
         }
-        public override void ApplyFXOnSlot()
-        {
-
-        }
+  
     }
 }
 

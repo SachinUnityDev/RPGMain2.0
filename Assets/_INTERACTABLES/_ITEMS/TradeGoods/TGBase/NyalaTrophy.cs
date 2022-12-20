@@ -1,6 +1,8 @@
+using Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 
 namespace Interactables
@@ -19,15 +21,14 @@ namespace Interactables
         {
 
         }
+        //+2 WP and -1 Luck on Field
+        //-2 Fame Yield"
         public void InitItem(int itemId, int maxInvStackSize)
         {
             this.itemId = itemId;
             this.maxInvStackSize = maxInvStackSize;
         }
-        public override void ApplyFXOnSlot()
-        {
-
-        }
+  
 
         public void TrophyInit()
         {
@@ -35,7 +36,19 @@ namespace Interactables
 
         public void OnTrophyWalled()
         {
-           
+            int index =
+            charController.landscapeController.ApplyLandscapeBuff(CauseType.TradeGoods, (int)tgName, LandscapeNames.Field
+                , StatsName.luck, -1);
+            allLandscapeIndex.Add(index);
+
+             index =
+                charController.landscapeController.ApplyLandscapeBuff(CauseType.TradeGoods, (int)tgName, LandscapeNames.Field
+                , StatsName.willpower, 2);
+            allLandscapeIndex.Add(index);
+
+            index = FameService.Instance.fameController.ApplyFameModBuff(CauseType.TradeGoods, (int)tgName
+                , -2, TimeFrame.Infinity, 1);
+            allFameIndex.Add(index);
         }
 
         public void OnTrophyRemoved()

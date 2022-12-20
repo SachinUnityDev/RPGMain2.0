@@ -40,7 +40,7 @@ public enum CauseType
     Fruit,
     PoeticGewgaw, 
     PoeticSetGewgaw, 
-
+    TradeGoods,
 }
 
 public enum StatChecks

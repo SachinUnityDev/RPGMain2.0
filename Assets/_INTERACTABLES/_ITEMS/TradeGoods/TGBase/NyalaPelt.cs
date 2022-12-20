@@ -1,6 +1,8 @@
+using Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 
 namespace Interactables
@@ -24,19 +26,24 @@ namespace Interactables
             this.itemId = itemId;
             this.maxInvStackSize = maxInvStackSize;
         }
-        public override void ApplyFXOnSlot()
-        {
-          
-        }
-
+  
+//        "Abbas only: +1 Haste on Field
+//-1 Fame Yield"
         public void TrophyInit()
         {
-          
+            // define charController as abbas
         }
 
         public void OnTrophyWalled()
         {
-           
+            int index = 
+            charController.landscapeController.ApplyLandscapeBuff(CauseType.TradeGoods, (int)tgName, LandscapeNames.Field
+                , StatsName.haste, 1);
+            allLandscapeIndex.Add(index);
+
+            index = FameService.Instance.fameController.ApplyFameModBuff(CauseType.TradeGoods, (int)tgName
+                , -1, TimeFrame.Infinity, 1);
+            allFameIndex.Add(index); 
         }
 
         public void OnTrophyRemoved()

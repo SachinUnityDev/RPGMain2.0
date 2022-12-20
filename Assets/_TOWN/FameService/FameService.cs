@@ -19,7 +19,8 @@ namespace Common
 
         public FameModel fameModel;
         public FameSO fameSO;
-        public 
+        public FameController fameController;
+        public FameViewController fameViewController;
         
       
         void Start()
@@ -43,17 +44,18 @@ namespace Common
 
         public int GetFameModValue(int currPage)
         {
-            switch (currPage)
-            {
-                case 0:
-                    return (int)fameModel.globalFameMod;
+            return (int)fameModel.globalFameMod;
+            //switch (currPage)
+            //{
+            //    case 0:
+                   
 
-                case 1:
-                    return (int)fameModel.nekkisariFameMod;
+            //    case 1:
+            //        return (int)fameModel.nekkisariFameMod;
 
-                default:
-                    return 0;
-            }
+            //    default:
+            //        return 0;
+            //}
         }
 
         // used to update score from outside Services 

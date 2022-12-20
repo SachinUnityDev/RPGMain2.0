@@ -5,7 +5,9 @@ using System;
 using Combat;
 using DG.Tweening;
 using Interactables;
-using System.Windows.Forms.DataVisualization.Charting;
+using Quest; 
+
+
 
 namespace Common
 {   
@@ -34,8 +36,8 @@ namespace Common
         [Header("Item Controller")]
         public ItemController itemController;
 
-
-
+        [Header("LanscapeController")]
+        public LandscapeController landscapeController;
 
 
         float prevHPVal = 0f;

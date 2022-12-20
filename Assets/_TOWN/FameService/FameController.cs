@@ -8,16 +8,27 @@ namespace Common
 {
     public class FameController : MonoBehaviour
     {
-        string in_die_Rules;
+        public int index; 
         void Start()
         {
-            in_die_Rules =
-
-             "PLAY HARD....PLAY TOGETHER ";                                                       
+                                                           
         }
 
-       
 
+        public int ApplyFameModBuff(CauseType causeType, int causeName, float val
+                                                                , TimeFrame timeFrame, int timeValue) 
+        {
+            return index; 
+        }
+        
+        // mostly instant value no buff like isssues give back  ... etc 
+        public void ApplyFameBuff(CauseType causeType, int causeName, float val
+                                                                , TimeFrame timeFrame, int timeValue)
+        {
+
+
+
+        }
 
         public bool IsFameBehaviorMatching(CharController charController)
         {
@@ -27,7 +38,7 @@ namespace Common
 
             return false; 
         }
-        string in_die_Rolle;
+        
     }
 
 

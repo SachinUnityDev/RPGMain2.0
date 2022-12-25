@@ -12,16 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a715d30bd539e8643868499728170ee4, type: 3}
   m_Name: RubyRing
   m_EditorClassIdentifier: 
+  genGewgawName: 24
   prefixName: 9
   gewgawName: 9
   suffixName: 0
   gewgawSlotType: 4
-  maxWorldInstance: 3
+  maxInvStackSize: 1
   classRestrictions: 
   cultureRestrictions: 
   raceRestrictions: 05000000070000000b000000
   cost:
     silver: 0
     bronze: 150
+  fluctuationRate: 20
   desc: 
   iconSprite: {fileID: 21300000, guid: a7c2f1888e966d94997270287159c849, type: 3}

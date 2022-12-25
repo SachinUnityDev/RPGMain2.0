@@ -12,16 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a715d30bd539e8643868499728170ee4, type: 3}
   m_Name: BeltOfSerenity
   m_EditorClassIdentifier: 
+  genGewgawName: 3
   prefixName: 0
   gewgawName: 2
   suffixName: 6
   gewgawSlotType: 2
-  maxWorldInstance: 3
+  maxInvStackSize: 1
   classRestrictions: 0b000000090000000d00000018000000
   cultureRestrictions: 
   raceRestrictions: 
   cost:
     silver: 0
     bronze: 70
+  fluctuationRate: 20
   desc: 
   iconSprite: {fileID: 21300000, guid: bc3f8ca8f3f11e149992e83f04ac930e, type: 3}

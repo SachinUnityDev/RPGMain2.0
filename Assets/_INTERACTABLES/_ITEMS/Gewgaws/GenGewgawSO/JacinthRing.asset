@@ -12,16 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a715d30bd539e8643868499728170ee4, type: 3}
   m_Name: JacinthRing
   m_EditorClassIdentifier: 
+  genGewgawName: 28
   prefixName: 6
   gewgawName: 9
   suffixName: 0
   gewgawSlotType: 4
-  maxWorldInstance: 3
+  maxInvStackSize: 1
   classRestrictions: 
   cultureRestrictions: 
   raceRestrictions: 05000000070000000b000000
   cost:
     silver: 0
     bronze: 180
+  fluctuationRate: 20
   desc: 
   iconSprite: {fileID: 21300000, guid: 7cc4303b4b61061489cae3d39ac6a84e, type: 3}

@@ -12,16 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a715d30bd539e8643868499728170ee4, type: 3}
   m_Name: ShinBoneOfTheDonkey
   m_EditorClassIdentifier: 
+  genGewgawName: 30
   prefixName: 0
   gewgawName: 11
   suffixName: 9
   gewgawSlotType: 7
-  maxWorldInstance: 3
+  maxInvStackSize: 1
   classRestrictions: 
   cultureRestrictions: 
   raceRestrictions: 020000000b000000
   cost:
     silver: 0
     bronze: 60
+  fluctuationRate: 20
   desc: 
   iconSprite: {fileID: 21300000, guid: e55791c9fe91fa849a62d21eb6a6a03c, type: 3}

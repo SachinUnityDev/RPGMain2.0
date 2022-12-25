@@ -12,16 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a715d30bd539e8643868499728170ee4, type: 3}
   m_Name: GoldenBelt
   m_EditorClassIdentifier: 
+  genGewgawName: 7
   prefixName: 5
   gewgawName: 2
   suffixName: 0
   gewgawSlotType: 2
-  maxWorldInstance: 3
+  maxInvStackSize: 1
   classRestrictions: 
   cultureRestrictions: 
   raceRestrictions: 0500000007000000
   cost:
     silver: 0
     bronze: 170
+  fluctuationRate: 20
   desc: 
   iconSprite: {fileID: 21300000, guid: 4c5965ad009979d4b8601d669d3247cd, type: 3}

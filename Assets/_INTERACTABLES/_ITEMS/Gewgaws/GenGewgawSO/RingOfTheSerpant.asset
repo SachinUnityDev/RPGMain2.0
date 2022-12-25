@@ -12,16 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a715d30bd539e8643868499728170ee4, type: 3}
   m_Name: RingOfTheSerpant
   m_EditorClassIdentifier: 
+  genGewgawName: 20
   prefixName: 0
   gewgawName: 9
   suffixName: 13
   gewgawSlotType: 4
-  maxWorldInstance: 3
+  maxInvStackSize: 1
   classRestrictions: 
   cultureRestrictions: 
   raceRestrictions: 05000000030000000c000000
   cost:
     silver: 0
     bronze: 80
+  fluctuationRate: 20
   desc: 
   iconSprite: {fileID: 21300000, guid: a939797ed45f15a4eaeda131ad389704, type: 3}

@@ -12,16 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a715d30bd539e8643868499728170ee4, type: 3}
   m_Name: BeltOfTheSerpant
   m_EditorClassIdentifier: 
+  genGewgawName: 6
   prefixName: 0
   gewgawName: 2
   suffixName: 13
   gewgawSlotType: 2
-  maxWorldInstance: 3
+  maxInvStackSize: 1
   classRestrictions: 04000000170000000c0000001a0000000200000007000000
   cultureRestrictions: 
   raceRestrictions: 
   cost:
     silver: 0
     bronze: 60
+  fluctuationRate: 20
   desc: 
   iconSprite: {fileID: 21300000, guid: f82c0f8a21cb25845a38be85c06d5bec, type: 3}

@@ -387,6 +387,11 @@ namespace Interactables
         RubyRing, 
         EmeraldRing, 
         AmetystRing, 
+        HideGlovesOfTheDonkey, // added from here
+        JacinthRing,
+        SapphireRing,
+        ShinBoneOfTheDonkey,
+        TopazRing, 
     }
 
     public enum SagaicGewgawNames

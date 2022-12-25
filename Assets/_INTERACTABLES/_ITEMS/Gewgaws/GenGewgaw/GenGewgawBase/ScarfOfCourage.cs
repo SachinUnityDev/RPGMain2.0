@@ -9,6 +9,7 @@ namespace Interactables
 {
     public class ScarfOfCourage : GenGewgawBase, Iitems 
     {
+        public override GenGewgawNames genGewgawNames => GenGewgawNames.ScarfOfCourage;
         public ItemType itemType => ItemType.GenGewgaws;
         public int itemName => (int)GenGewgawNames.ScarfOfCourage;
         public int maxInvStackSize { get; set; }
@@ -17,8 +18,7 @@ namespace Interactables
         public int itemId { get; set; }
         public void OnHoverItem()
         {
-            // get item data here.. 
-            // get hold of item cards here 
+         
 
         }
         public void InitItem(int itemId, int maxInvStackSize)
@@ -26,32 +26,15 @@ namespace Interactables
             this.itemId = itemId;
             this.maxInvStackSize = maxInvStackSize;
         }
-        public override GenGewgawNames genGewgawNames => GenGewgawNames.ScarfOfCourage;
 
-     
-
-        //public override GenGewgawModel GenGewgawInit(GenGewgawSO genericGewgawSO
-        //                                                 , GenGewgawQ genGewgawQ)
-        //{
-
-        //    GenGewgawModel genGewgawModel = new GenGewgawModel(genericGewgawSO, genGewgawQ);
-        //    genGewgawModel.invType = SlotType.CommonInv;
-        //    invSlotType = genGewgawModel.invType;
-
-        //    return genGewgawModel;
-        //}
 
         public override void EquipGenGewgawFX()
-        {
+        {            
             charController = CharService.Instance.GetCharCtrlWithName(InvService.Instance.charSelect);
-           // suffixBase?.ApplySuffixFX(charController); 
+            base.EquipGenGewgawFX();
         }
 
-        public override void UnEquipGenGewgawFX()
-        {
-           // suffixBase?.RemoveFX();
-        }
-
+       
         
     }
 

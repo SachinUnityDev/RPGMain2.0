@@ -145,11 +145,7 @@ namespace Interactables
                     IngredSO ingredSO = ItemService.Instance.GetIngredSO((IngredNames)itemName);
                     itemIngred.InitItem(itemId, ingredSO.maxInvStackSize);
                     return itemIngred;
-                case ItemType.XXX:
-              
-
-
-
+                case ItemType.XXX:     
                     break;
                 case ItemType.Scrolls:
                     Iitems itemScrolls = GetNewScrollItem((ScrollNames)itemName);
@@ -178,6 +174,8 @@ namespace Interactables
                     itemGems.InitItem(itemId, gemSO.maxInvStackSize);
                     return itemGems;
                 case ItemType.Alcohol:// not in demo 
+
+
                     break;
                 case ItemType.Meals:// not in demo 
                     break;

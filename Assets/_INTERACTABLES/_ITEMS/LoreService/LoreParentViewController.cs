@@ -11,7 +11,7 @@ namespace Interactables
         [SerializeField] Transform receipePanel;
 
         public LoreViewController loreViewController; 
-        public ReceipeViewController receipeViewController;
+        public RecipeViewController receipeViewController;
         void Awake()
         {
             lorePanel = transform.GetChild(0);
@@ -19,7 +19,7 @@ namespace Interactables
             lorePanel.gameObject.SetActive(true);
             receipePanel.gameObject.SetActive(true);
             loreViewController = lorePanel.GetComponent<LoreViewController>(); 
-            receipeViewController = receipePanel.GetComponent<ReceipeViewController>();
+            receipeViewController = receipePanel.GetComponent<RecipeViewController>();
 
         }
         public void Init()

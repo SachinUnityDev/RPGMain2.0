@@ -60,8 +60,10 @@ namespace Interactables
         Dictionary<ScrollNames, Type> allScrolls = new Dictionary<ScrollNames, Type>();
 
         [Header("Trade goods")]
-        Dictionary<TGNames, Type> allTradeGoods = new Dictionary<TGNames, Type>(); 
+        Dictionary<TGNames, Type> allTradeGoods = new Dictionary<TGNames, Type>();
 
+        [Header("Recipe Factory")]
+        Dictionary<ItemData, Type> allRecipes = new Dictionary<ItemData, Type>();
 
 
         LoreScroll loreScroll; 
@@ -79,7 +81,8 @@ namespace Interactables
         [SerializeField] int toolCount = 0;
         [SerializeField] int ingredCount = 0;
         [SerializeField] int scrollCount = 0;
-        [SerializeField] int TgCount = 0; 
+        [SerializeField] int TgCount = 0;
+        [SerializeField] int recipeCount = 0; 
         void Start()
         {
             itemId =-1;
@@ -99,7 +102,7 @@ namespace Interactables
             EnchantmentScrollsInit();
             TradeGoodsInit();
             ToolsInit();
-
+           // RecipeInit(); 
         }
         public Iitems GetNewGenGewgaw(GenGewgawNames genGewgawNames, GenGewgawQ genGewgawQ)
         {
@@ -142,7 +145,11 @@ namespace Interactables
                     IngredSO ingredSO = ItemService.Instance.GetIngredSO((IngredNames)itemName);
                     itemIngred.InitItem(itemId, ingredSO.maxInvStackSize);
                     return itemIngred;
-                case ItemType.Recipes:
+                case ItemType.XXX:
+              
+
+
+
                     break;
                 case ItemType.Scrolls:
                     Iitems itemScrolls = GetNewScrollItem((ScrollNames)itemName);
@@ -550,6 +557,43 @@ namespace Interactables
         }
 
         #endregion
+        #region RECIPES
+        //public void RecipeInit()
+        //{
+        //    if (allRecipes.Count > 0) return;
+        //    var getRecipes = Assembly.GetAssembly(typeof(IRecipe)).GetTypes()
+        //                           .Where(myType => myType.IsClass
+        //                           && !myType.IsAbstract && myType.IsSubclassOf(typeof(RecipeBase)));
+
+        //    foreach (var getRecipe in getRecipes)
+        //    {
+        //        var t = Activator.CreateInstance(getRecipe) as RecipeBase;
+
+        //       allRecipes.Add(new ItemData(t.pdtType, t.pdtName), getRecipe);
+        //    }
+        //    recipeCount = allRecipes.Count;
+        //}
+
+        public Iitems GetNewRecipe(ItemData pdtData)
+        {
+            foreach (var recipe in allRecipes)
+            {
+                if (recipe.Key.ItemName == pdtData.ItemName 
+                    && recipe.Key.itemType == pdtData.itemType)
+                {
+                    var t = Activator.CreateInstance(recipe.Value) as Iitems;
+                    return t;
+                }
+            }
+            Debug.Log("Herb base class Not found" + pdtData.itemType);
+            return null;
+        }
+
+
+
+        # endregion
+
+
 
         #region SCROLLS 
         public void EnchantmentScrollsInit()

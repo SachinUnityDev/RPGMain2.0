@@ -8,12 +8,11 @@ namespace Interactables
 
     public class RecipeController : MonoBehaviour
     {
-
         void Start()
         {
 
         }
 
-
+        
     }
 }

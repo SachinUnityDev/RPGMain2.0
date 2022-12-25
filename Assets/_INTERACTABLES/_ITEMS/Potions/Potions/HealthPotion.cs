@@ -6,7 +6,7 @@ using Combat;
 
 namespace Interactables
 {
-    public class HealthPotion : PotionsBase, Iitems,IConsumable, IEquipAble
+    public class HealthPotion : PotionsBase,IRecipe,  Iitems,IConsumable, IEquipAble
     {
         public override PotionNames potionName => PotionNames.HealthPotion; 
         public ItemType itemType => ItemType.Potions;
@@ -15,6 +15,8 @@ namespace Interactables
         public int maxInvStackSize { get; set; }
         public List<int> allBuffs { get; set; }
         public int itemId { get; set; }
+        public ItemData toolData { get; set; }
+        public List<IngredData> allIngredData { get; set; }
 
         public void OnHoverItem()
         {
@@ -51,6 +53,20 @@ namespace Interactables
         public void RemoveEquipableFX()
         {
 
+        }
+
+        public void RecipeInit()
+        {
+            toolData = new ItemData(ItemType.Tools, (int)ToolNames.Mortar);
+
+            ItemData ingred1 = new ItemData(ItemType.Ingredients, (int)IngredNames.FelineHeart);
+            allIngredData.Add(new IngredData(ingred1, 1));
+
+            ItemData ingred2 = new ItemData(ItemType.Ingredients, (int)IngredNames.HumanEar);
+            allIngredData.Add(new IngredData(ingred2, 1));
+
+            ItemData ingred3 = new ItemData(ItemType.Herbs, (int)HerbNames.Aloe);
+            allIngredData.Add(new IngredData(ingred3, 1));
         }
     }
 

@@ -116,7 +116,7 @@ namespace Interactables
                 case ItemType.Ingredients:
                     sprite = ItemService.Instance.GetIngredSO((IngredNames)itemName).iconSprite;
                     break;
-                case ItemType.Recipes:
+                case ItemType.XXX:
                    // sprite = ItemService.Instance.GetCookingRecipeSO(itemName).iconSprite;
                     break;
                 case ItemType.Scrolls:

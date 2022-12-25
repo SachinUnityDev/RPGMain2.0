@@ -111,7 +111,7 @@ namespace Interactables
         Foods,
         Fruits,
         Ingredients,
-        Recipes,  // list to be created
+        XXX,  // list to be created
         Scrolls,// to be added
         TradeGoods, 
         Tools,
@@ -122,9 +122,16 @@ namespace Interactables
         Meals,// to be added .. only needed in the camp
         SagaicGewgaws, 
         PoeticGewgaws,
-        RelicGewgaws,        
+        RelicGewgaws, 
+        Pouches,
         
 
+    }
+
+    public enum Pouches
+    {
+        None, 
+        HerbalPouch, 
     }
 
     public enum AlcoholNames
@@ -246,6 +253,15 @@ namespace Interactables
         Carrot,
         Cucumber,
         Mangosteen,
+        Citrus,
+    }
+    public enum RecipeType
+    {
+        None, 
+        Cooking, 
+        Brewing, 
+        Crafting, 
+        Merging, 
     }
     public enum IngredNames  // Can only be ingredient in receipe and cannot be food pr fruits
     {
@@ -501,7 +517,6 @@ namespace Interactables
         OfWarding,
         OfEndurance,
         OfTheScholar,
-
     }
 
  

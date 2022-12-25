@@ -41,8 +41,6 @@ namespace Interactables
                    , charController.charModel.charID, StatsName.willpower, 3, TimeFrame.Infinity, -1, true);
                         buffIndex.Add(index);
             }
-
-
         }
 
         public override void RemoveBonusFX()

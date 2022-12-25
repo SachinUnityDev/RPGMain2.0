@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class PotionOfNimbleness : PotionsBase, Iitems, IEquipAble, IConsumable
+    public class PotionOfNimbleness : PotionsBase, Iitems, IRecipe, IEquipAble, IConsumable
     {
         public override PotionNames potionName => PotionNames.PotionOfNimbleness; 
         public ItemType itemType => ItemType.Potions;
@@ -15,6 +15,21 @@ namespace Interactables
         public int maxInvStackSize { get ; set; }
         public List<int> allBuffs { get; set; }
         public int itemId { get; set; }
+        public ItemData toolData { get; set; }
+        public List<IngredData> allIngredData { get; set; }
+        public void RecipeInit()
+        {
+            toolData = new ItemData(ItemType.Tools, (int)ToolNames.Mortar);
+
+            ItemData ingred1 = new ItemData(ItemType.Ingredients, (int)IngredNames.DragonflyWings);
+            allIngredData.Add(new IngredData(ingred1, 1));
+
+            ItemData ingred2 = new ItemData(ItemType.Ingredients, (int)IngredNames.BatEar);
+            allIngredData.Add(new IngredData(ingred2, 1));
+
+            ItemData ingred3 = new ItemData(ItemType.Herbs, (int)HerbNames.PurpleTeaLeaf);
+            allIngredData.Add(new IngredData(ingred3, 1));
+        }
         public void OnHoverItem()
         {
 
@@ -54,6 +69,8 @@ namespace Interactables
         {
 
         }
+
+      
     }
 
 

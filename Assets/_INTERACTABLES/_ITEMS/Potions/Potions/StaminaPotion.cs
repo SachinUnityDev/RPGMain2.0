@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class StaminaPotion : PotionsBase, Iitems, IEquipAble, IConsumable 
+    public class StaminaPotion : PotionsBase, Iitems,IRecipe, IEquipAble, IConsumable 
     {
         public override PotionNames potionName => PotionNames.StaminaPotion; 
         public ItemType itemType => ItemType.Potions; 
@@ -16,6 +16,9 @@ namespace Interactables
         public int maxInvStackSize { get; set; }       
         public int itemId { get; set; }
         public List<int> allBuffs { get; set; }
+        public ItemData toolData { get; set; }
+        public List<IngredData> allIngredData { get; set; }
+
         public void OnHoverItem()
         {
 
@@ -54,6 +57,20 @@ namespace Interactables
         public void RemoveEquipableFX()
         {
 
+        }
+
+        public void RecipeInit()
+        {
+            toolData = new ItemData(ItemType.Tools, (int)ToolNames.Mortar);
+
+            ItemData ingred1 = new ItemData(ItemType.Ingredients, (int)IngredNames.Hoof);
+            allIngredData.Add(new IngredData(ingred1, 1));
+
+            ItemData ingred2 = new ItemData(ItemType.Ingredients, (int)IngredNames.HyenaEar);
+            allIngredData.Add(new IngredData(ingred2, 1));
+
+            ItemData ingred3 = new ItemData(ItemType.Herbs, (int)HerbNames.Echinacea);
+            allIngredData.Add(new IngredData(ingred3, 1));
         }
     }
 }

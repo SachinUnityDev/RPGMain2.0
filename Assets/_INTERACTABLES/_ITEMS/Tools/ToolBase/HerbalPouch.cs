@@ -6,11 +6,10 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class HerbalPouch : ToolBase, Iitems
-    {
-        public override ToolNames toolName => ToolNames.HerbalPouch;
-        public ItemType itemType => ItemType.Tools;
-        public int itemName => (int)ToolNames.HerbalPouch;
+    public class HerbalPouch :  Iitems
+    {     
+        public ItemType itemType => ItemType.Pouches;
+        public int itemName => (int)Pouches.HerbalPouch;
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; }

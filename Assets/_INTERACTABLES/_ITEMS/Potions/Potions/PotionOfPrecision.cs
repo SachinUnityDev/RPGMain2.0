@@ -6,7 +6,7 @@ using Combat;
 
 namespace Interactables
 {
-    public class PotionOfPrecision : PotionsBase,Iitems, IEquipAble, IConsumable
+    public class PotionOfPrecision : PotionsBase,IRecipe, Iitems, IEquipAble, IConsumable
     {
         public override PotionNames potionName => PotionNames.PotionOfPrecision;
         public ItemType itemType => ItemType.Potions;
@@ -15,9 +15,12 @@ namespace Interactables
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; }
         public int itemId { get; set; }
+        public ItemData toolData { get; set; }
+        public List<IngredData> allIngredData { get; set; }
+
         public void OnHoverItem()
         {
-
+            // hoverrr
         }
         public void InitItem(int itemId, int maxInvStackSize)
         {
@@ -49,6 +52,20 @@ namespace Interactables
         public void RemoveEquipableFX()
         {
 
+        }
+
+        public void RecipeInit()
+        {
+            toolData = new ItemData(ItemType.Tools, (int)ToolNames.Mortar);
+
+            ItemData ingred1 = new ItemData(ItemType.Ingredients, (int)IngredNames.RatFang);
+            allIngredData.Add(new IngredData(ingred1, 1));
+
+            ItemData ingred2 = new ItemData(ItemType.Ingredients, (int)IngredNames.HyenaEar);
+            allIngredData.Add(new IngredData(ingred2, 1));
+
+            ItemData ingred3 = new ItemData(ItemType.Herbs, (int)HerbNames.Buchu);
+            allIngredData.Add(new IngredData(ingred3, 1));
         }
     }
 

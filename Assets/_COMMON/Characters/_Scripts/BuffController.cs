@@ -60,15 +60,20 @@ namespace Combat
         [SerializeField]List<string> buffStrs = new List<string>();
         [SerializeField]List<string> deDuffStrs = new List<string>();
 
-        public int buffIndex = 0;  
+        public int buffIndex = 0;
+
+        private void Awake()
+        {
+            CombatEventService.Instance.OnEOR += RoundTick;
+            CombatEventService.Instance.OnEOC += EOCTick;
+            CalendarService.Instance.OnStartOfDay += (int dayName) => ToggleBuffsOnStartOfTheDay();
+            //  QuestEventService.Instance.OnDayChange
+        }
         void Start()
         {
             // should have feature of printing some data from skills directly
             charController = GetComponent<CharController>();
-            CombatEventService.Instance.OnEOR +=RoundTick;
-            CombatEventService.Instance.OnEOC += EOCTick;
-            CalendarService.Instance.OnStartOfDay += ( int dayName) => ToggleBuffsOnStartOfTheDay();
-          //  QuestEventService.Instance.OnDayChange
+            
 
         }
 
@@ -140,26 +145,28 @@ namespace Combat
                 if(index == -1)
                 {
                     index = allNightbuffs.FindIndex(t => t.buffID == buffID);
-                    if(index == -1)
-                    {
-                        index = allExpModBuffs.FindIndex(t => t.buffID == buffID);
-                        if (index != -1)
-                        {
-                            buffData = allExpModBuffs[index]; 
-                            allExpModBuffs.Remove(buffData);
-                            return true; 
-                        }
-                        else
-                        {
-                            return false; 
-                        }
-                    }           
-                    else // remove night buff
-                    {
-                        buffData = allNightbuffs[index];
-                        allNightbuffs.Remove(buffData);
-                        return true; 
-                    }
+                    buffData = allNightbuffs[index];
+                    allNightbuffs.Remove(buffData);
+                    return true;
+
+                    //if (index == -1)
+                    //{
+                    //    //index = allExpModBuffs.FindIndex(t => t.buffID == buffID);
+                    //    //if (index != -1)
+                    //    //{
+                    //    //    buffData = allExpModBuffs[index]; 
+                    //    //    allExpModBuffs.Remove(buffData);
+                    //    //    return true; 
+                    //    //}
+                    //    //else
+                    //    //{
+                    //    //    return false; 
+                    //    //}
+                    //}           
+                    //else // remove night buff
+                    //{
+                       
+                    //}
                 }
                 else // remove day buff
                 {

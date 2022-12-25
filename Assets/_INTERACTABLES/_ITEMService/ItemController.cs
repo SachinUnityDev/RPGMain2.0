@@ -126,6 +126,9 @@ namespace Interactables
                 multFx = 1.3f;
         }
 
+        /// <summary>
+        /// OC data is the potions OC data
+        /// <summary>
         public void ChecknApplyOC(OCData ocData, TempTraitName temptraitName, IOverConsume ocBase)
         {
             if (charController.tempTraitController.HasTempTrait(temptraitName))            

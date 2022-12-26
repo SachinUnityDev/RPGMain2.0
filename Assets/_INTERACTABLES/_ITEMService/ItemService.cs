@@ -234,28 +234,17 @@ namespace Interactables
                                      CauseType causeType, int causeID, GenGewgawQ gQuality = GenGewgawQ.None)
         {
            
-            if(gQuality == GenGewgawQ.None)  
+            if(gQuality == GenGewgawQ.None)  //Items apart from genGewgaw
             {
-
                 Iitems iitems = itemFactory.GetNewItem(itemType, itemName);
                 iitems.invSlotType = slotType;
                 InvService.Instance.invMainModel.AddItem2CommInv(iitems);
             }
             else  //  its a Generic gewgaw
             {
-                // get SO
-                // if a given quality is not available in both suffix a
-                // nd prefix then only that Item can exist of the given quality 
-
                 Iitems iitems = itemFactory.GetNewGenGewgaw((GenGewgawNames)itemName, gQuality);
                 iitems.invSlotType = slotType;
                 InvService.Instance.invMainModel.AddItem2CommInv(iitems);
-
-                // item factory get new gengewgaw, 
-                // init base as per gengewgaw , =>  creates and init prefix and suffix class
-                // => for the gewgaw and assigns them to the gewgaw+
-                //
-
             }
 
             //create  item
@@ -318,8 +307,8 @@ namespace Interactables
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.BronzePauldrons,
-                                     CauseType.Items, 2, GenGewgawQ.Epic); 
+                InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionNames.FortitudePotion,
+                                     CauseType.Items, 2); 
         
             }
         }

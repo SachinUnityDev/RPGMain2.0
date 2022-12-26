@@ -12,7 +12,10 @@ namespace Interactables
 {
     public class ItemController : MonoBehaviour
     {
-
+        /// <summary>
+        /// Item controller distrubted controller  i.e. each party member has its own on quest 
+        /// performs all item related actions i.e socket, enchant, equip, unequip 
+        /// </summary>
         public CharController charController; 
         public ItemModel itemModel;
 
@@ -53,7 +56,6 @@ namespace Interactables
             }
             return false;
         }
-
         public bool EnchantInTemple()
         {
             // to be linked to the town scene 
@@ -70,7 +72,6 @@ namespace Interactables
                 scrollData.activeDaysRemaining++; 
             }
         }
-
         public void OnSocketSupportGem(GemBase gemBase)
         {
             Iitems item = gemBase as Iitems;
@@ -144,20 +145,34 @@ namespace Interactables
             }
         }
 
+        #region  GEWGAW ACTIONS 
+        public void OnGewgawEquip()
+        {
 
 
-        //public void AddItemToActiveInvLs(Iitems Iitem)
-        //{
-        //    if(Iitem.itemType == ItemType.Potions)
-        //    {
-        //        itemsInPotionActiveInv.Add(Iitem);
-                
-        //    }else
-        //    {
-        //        itemInGewgawActiveInv.Add(Iitem);   
-        //    }
-          
-        //}
+        }
+
+        public void OnGewGawUnQEquip()
+        {
+
+
+        }
+
+        #endregion
+
+
     }
 }
 
+//public void AddItemToActiveInvLs(Iitems Iitem)
+//{
+//    if(Iitem.itemType == ItemType.Potions)
+//    {
+//        itemsInPotionActiveInv.Add(Iitem);
+
+//    }else
+//    {
+//        itemInGewgawActiveInv.Add(Iitem);   
+//    }
+
+//}

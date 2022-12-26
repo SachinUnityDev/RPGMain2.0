@@ -38,8 +38,11 @@ namespace Interactables
         }
     }
 
+    /// <summary>
+    /// OCData logs and tracks overconsumption of the asset
+    /// </summary>
     [System.Serializable]
-    public class OCData
+    public class OCData // Over consumptions data 
     {
         public ItemType itemType;
         public int itemName;

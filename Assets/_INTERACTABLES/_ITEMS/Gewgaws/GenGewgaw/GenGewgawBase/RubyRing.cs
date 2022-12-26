@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Interactables
 {
 
-    public class RubyRing : GenGewgawBase, Iitems, IRecipe
+    public class RubyRing : GenGewgawBase, Iitems, IRecipe, IEquipAble
     {
         public override GenGewgawNames genGewgawNames => GenGewgawNames.RubyRing;
         public int itemId { get; set; }
@@ -31,11 +31,21 @@ namespace Interactables
 
         public void InitItem(int itemId, int maxInvStackSize)
         {
-
+            this.itemId = itemId;
+            this.maxInvStackSize = maxInvStackSize;
         }
         public void OnHoverItem()
         {
 
+        }
+        public void ApplyEquipableFX()
+        {
+            EquipGenGewgawFX();
+        }
+
+        public void RemoveEquipableFX()
+        {
+            UnEquipGenGewgawFX();
         }
     }
 }

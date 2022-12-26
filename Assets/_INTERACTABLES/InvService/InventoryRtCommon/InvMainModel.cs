@@ -67,10 +67,10 @@ namespace Interactables
             //return false;
         }
 
-        public bool RemoveItem2CommInv(InvData invData)
+        public bool RemoveItem2CommInv(Iitems item)
         {
-            commonInvItems.Remove(invData.item);
-            return false;
+            commonInvItems.Remove(item);
+            return true;
         }
 
         public void MoveItems2Stash(CharNames charName)

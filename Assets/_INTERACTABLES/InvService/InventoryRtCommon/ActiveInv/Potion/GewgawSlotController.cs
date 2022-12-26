@@ -197,8 +197,6 @@ namespace Interactables
                 RemoveItem();
             }
         }
-
-
     }
 }
 

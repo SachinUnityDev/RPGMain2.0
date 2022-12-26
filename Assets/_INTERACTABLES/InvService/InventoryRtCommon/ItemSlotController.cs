@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System;
 using TMPro;
 using System.Linq;
+using System.ComponentModel;
 
 namespace Interactables
 {
@@ -14,16 +15,42 @@ namespace Interactables
         int slotID { get; set; }
         SlotType slotType { get; }
         bool isSlotFull();
-        List<Iitems> ItemsInSlot { get; set;  }
+        List<Iitems> ItemsInSlot { get; set; }
         void RemoveItem();
         bool AddItem(Iitems item);
-        void ClearSlot(); 
-        void CloseRightClickOpts(); 
+        void ClearSlot();
+        void CloseRightClickOpts();
     }
 
-    public class ItemSlotController : MonoBehaviour, IDropHandler, IPointerClickHandler, iSlotable
+    public interface IComInvActions
     {
-        public  int slotID { get; set; }
+        bool IsConsumable();
+        void Consume();
+        bool IsEnchantable();
+        void Enchant();
+
+        bool IsSocketable();
+        void Socket();
+        bool IsEquipable();
+        void Equip();
+        void Dispose();
+        bool IsSellable();
+        void Sell();
+    }
+
+    public interface IExcessInvActions
+    {
+        bool Dispose();
+        bool Sell();
+    }
+
+
+
+
+    public class ItemSlotController : MonoBehaviour, IDropHandler, IPointerClickHandler
+                                      , iSlotable, IComInvActions
+    {
+        public int slotID { get; set; }
         public List<Iitems> ItemsInSlot { get; set; } = new List<Iitems>();
         public SlotType slotType => SlotType.CommonInv;
 
@@ -38,7 +65,7 @@ namespace Interactables
         {
             draggedGO = eventData.pointerDrag;
             itemsDragDrop = draggedGO.GetComponent<ItemsDragDrop>();
-            if(itemsDragDrop != null)
+            if (itemsDragDrop != null)
             {
                 bool isDropSuccess = AddItem(itemsDragDrop.itemDragged);
                 if (!isDropSuccess)
@@ -46,31 +73,31 @@ namespace Interactables
                 else
                 {
                     iSlotable islot = itemsDragDrop.iSlotable;
-                    
-                    if (islot != null 
+
+                    if (islot != null
                          && (islot.slotType == SlotType.CommonInv ||
                                     islot.slotType == SlotType.ExcessInv)
                                             && islot.ItemsInSlot.Count > 0)
-                            {                 
-                                int count = islot.ItemsInSlot.Count; 
-                                for (int i = 0; i < count ; i++)
-                                {
-                                    if (AddItem(islot.ItemsInSlot[0])) // size of list changes with every item removal 
-                                    {
-                                        islot.RemoveItem();
-                                    }
-                                    else
-                                    {
-                                        break; // as soon as you cannot add a item just break 
-                                    }
-                                }
+                    {
+                        int count = islot.ItemsInSlot.Count;
+                        for (int i = 0; i < count; i++)
+                        {
+                            if (AddItem(islot.ItemsInSlot[0])) // size of list changes with every item removal 
+                            {
+                                islot.RemoveItem();
                             }
+                            else
+                            {
+                                break; // as soon as you cannot add a item just break 
+                            }
+                        }
+                    }
                     InvService.Instance.On_DragResult(isDropSuccess, itemsDragDrop);
                     Destroy(draggedGO);
                 }
             }
         }
-       
+
         private void Start()
         {
             slotID = transform.GetSiblingIndex();
@@ -78,17 +105,19 @@ namespace Interactables
             InvService.Instance.invViewController.CloseRightClickOpts();
         }
 
+        #region SLOT ITEM HANDLING ..ADD/REMOVE/REFRESH
+
         public void ClearSlot()
         {
-            ItemsInSlot.Clear();         
+            ItemsInSlot.Clear();
             Transform ImgTrans = gameObject.transform.GetChild(0).GetChild(0);
             ImgTrans.gameObject.SetActive(false);
-            gameObject.GetComponent<Image>().sprite = InvService.Instance.InvSO.emptySlot;             
+            gameObject.GetComponent<Image>().sprite = InvService.Instance.InvSO.emptySlot;
         }
 
         public bool HasSameItem(Iitems item)
         {
-            if (ItemsInSlot[0].itemName == item.itemName 
+            if (ItemsInSlot[0].itemName == item.itemName
                 && ItemsInSlot[0].itemType == item.itemType)
                 return true;
             else
@@ -96,9 +125,9 @@ namespace Interactables
         }
 
         public bool isSlotFull()
-        {          
-            if (ItemsInSlot.Count <= ItemsInSlot[0].maxInvStackSize) return false; 
-            return true; 
+        {
+            if (ItemsInSlot.Count <= ItemsInSlot[0].maxInvStackSize) return false;
+            return true;
         }
 
         public bool IsEmpty()
@@ -108,14 +137,13 @@ namespace Interactables
             else
                 return true;
         }
-
         public bool AddItem(Iitems item)
         {
             //CharNames charName = InvService.Instance.charSelect;                
-           // InvData invData = new InvData(charName, item); 
+            // InvData invData = new InvData(charName, item); 
             if (IsEmpty())
             {
-                AddItemOnSlot(item);               
+                AddItemOnSlot(item);
                 return true;
             }
             else
@@ -124,7 +152,7 @@ namespace Interactables
                 {
                     if (ItemsInSlot.Count < item.maxInvStackSize)  // SLOT STACK SIZE 
                     {
-                        AddItemOnSlot(item);                       
+                        AddItemOnSlot(item);
                         return true;
                     }
                     else
@@ -142,7 +170,7 @@ namespace Interactables
         void AddItemOnSlot(Iitems item)
         {
             item.invSlotType = SlotType.CommonInv;
-            ItemsInSlot.Add(item);           
+            ItemsInSlot.Add(item);
             InvService.Instance.invMainModel.commonInvItems.Add(item);
 
             RefreshImg(item);
@@ -157,34 +185,34 @@ namespace Interactables
                 ClearSlot();
                 return;
             }
-           // InvData invData =  ItemsInSlot[0];
-           Iitems item = ItemsInSlot[0];
+            // InvData invData =  ItemsInSlot[0];
+            Iitems item = ItemsInSlot[0];
             ItemsInSlot.Remove(item);
             if (ItemsInSlot.Count >= 1)
             {
                 RefreshImg(item);
             }
-            else if(IsEmpty())  // After Item is removed
+            else if (IsEmpty())  // After Item is removed
             {
                 ClearSlot();
             }
-           // COUNTER = ItemsInSlot.Count;
+            // COUNTER = ItemsInSlot.Count;
             RefreshSlotTxt();
         }
-        
+
         void RefreshImg(Iitems item)
         {
             for (int i = 0; i < gameObject.transform.GetChild(0).childCount - 1; i++)
             {
                 Destroy(gameObject.transform.GetChild(0).GetChild(i).gameObject);
             }
-            transform.GetComponent<Image>().sprite = GetBGSprite(item); 
+            transform.GetComponent<Image>().sprite = GetBGSprite(item);
 
             Transform ImgTrans = gameObject.transform.GetChild(0).GetChild(0);
             ImgTrans.GetComponent<Image>().sprite = GetSprite(item);
             ImgTrans.gameObject.SetActive(true);
             // clear Extra GO
-          
+
         }
         void RefreshSlotTxt()
         {
@@ -206,9 +234,9 @@ namespace Interactables
             Sprite sprite = InvService.Instance.InvSO.GetSprite(item.itemName, item.itemType);
             if (sprite != null)
                 return sprite;
-            else            
+            else
                 Debug.Log("SPRITE NOT FOUND");
-                return null;            
+            return null;
         }
 
         Sprite GetBGSprite(Iitems item)
@@ -221,6 +249,11 @@ namespace Interactables
             return null;
 
         }
+
+        #endregion
+
+        #region RIGHT CLICK ACTIONS ON INV RELATED
+
         public void CloseRightClickOpts()
         {
             if (isRightClicked)
@@ -238,44 +271,38 @@ namespace Interactables
             {
                 InvService.Instance.invViewController.CloseRightClickOpts();
                 isRightClicked = !isRightClicked;
-                return; 
+                return;
             }
             else
             {
                 InvService.Instance.invViewController.OpenRightClickOpts();
                 isRightClicked = !isRightClicked;
             }
-            
-            // get frame from and Buttons frame from InvSO
-            // populate button name from the Item Actions..Inv SO strings
-            bool isEquipable = InvService.Instance.IsItemEquipable(item);
-            bool isConsumable = InvService.Instance.IsItemConsumable(item);
-            bool isDisposable = InvService.Instance.IsItemDispoable(item);
-            // bool isSellable = InvService.Instance.IsItemDispoable(item);
-            // bool isPurchaseable = InvService.Instance.IsItemDispoable(item);
+
+            //bool isEquipable = InvService.Instance.IsItemEquipable(item, slotType);
+            //bool isConsumable = InvService.Instance.IsItemConsumable(item, slotType);
+            //bool isDisposable = InvService.Instance.IsItemDisposable(item, slotType);
 
             rightClickActions.Clear();
-            if (isEquipable)
+            if (IsEquipable())
             {
-                if(!rightClickActions.Any(t=>t == ItemActions.Equipable))
-                        rightClickActions.Add(ItemActions.Equipable);
+                if (!rightClickActions.Any(t => t == ItemActions.Equipable))
+                    rightClickActions.Add(ItemActions.Equipable);
 
             }
-            if (isConsumable)
+            if (IsConsumable())
             {
                 if (!rightClickActions.Any(t => t == ItemActions.Consumable))
                     rightClickActions.Add(ItemActions.Consumable);
             }
-            if (isDisposable)
+            if (true) // disposable
             {
                 if (!rightClickActions.Any(t => t == ItemActions.Disposable))
                     rightClickActions.Add(ItemActions.Disposable);
             }
-
-            InvService.Instance.invViewController.ShowRightClickList(this);  
+            InvService.Instance.invViewController.ShowRightClickList(this);
 
         }
-
         public void OnPointerClick(PointerEventData eventData)
         {
             if (eventData.button == PointerEventData.InputButton.Right)
@@ -284,6 +311,77 @@ namespace Interactables
             }
         }
 
-    }
-}
 
+        #endregion
+
+        #region ITEM ACTIONS 
+        /// <summary>
+        ///  TO BE CALLED ONLY ON BUTTON CLICK
+        ///  assumed Actions will be available here i.e IConsume , I equip etc etc
+        /// </summary>
+        public bool IsConsumable()
+        {
+            IConsumable iConsumable = ItemsInSlot[0] as IConsumable;
+            if (iConsumable == null)
+                return false;
+            return true;
+        }
+        public void Consume()
+        {
+            IConsumable iconsume = ItemsInSlot[0] as IConsumable;
+            iconsume.ApplyConsumableFX();
+        }
+        public bool IsEnchantable()
+        {
+            // base it on the div and support gem argument 
+
+           // if div gems etc 
+           //  = ItemsInSlot[0] as 
+            //if (iEnchant == null)
+            //    return false;
+            return true;
+        
+        }
+        public void Enchant()
+        {
+
+        }
+        public bool IsEquipable()
+        {
+            // item type ..or slot type 
+            return true;
+        }
+
+        public void Equip()
+        {
+            IEquipAble iEquip = ItemsInSlot[0] as IEquipAble;
+            iEquip.ApplyEquipableFX(); 
+
+
+        }
+
+        public void Dispose()
+        {
+            InvService.Instance.invMainModel.RemoveItem2CommInv(ItemsInSlot[0]);
+            RemoveItem();
+        }
+        public bool IsSellable()
+        {
+            return false;
+        }
+        public void Sell()
+        {
+
+        }
+        public bool IsSocketable()
+        {
+            return false;
+        }
+        public void Socket()
+        {
+
+        }
+
+        #endregion
+    }
+} 

@@ -55,11 +55,7 @@ namespace Interactables
                 img.sprite = spriteN;
         }
 
-        void Start()
-        {
-
-        }
-
+ 
     }
 
 }

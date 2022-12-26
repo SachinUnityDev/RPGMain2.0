@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Interactables
 {
 
-    public class ShinBoneOfTheDonkey : GenGewgawBase, Iitems
+    public class ShinBoneOfTheDonkey : GenGewgawBase, Iitems, IEquipAble
     {
         public override GenGewgawNames genGewgawNames => GenGewgawNames.ShinBoneOfTheDonkey;
         public ItemType itemType => ItemType.GenGewgaws;
@@ -29,6 +29,15 @@ namespace Interactables
         {
             charController = CharService.Instance.GetCharCtrlWithName(InvService.Instance.charSelect);
             base.EquipGenGewgawFX();
+        }
+        public void ApplyEquipableFX()
+        {
+            EquipGenGewgawFX();
+        }
+
+        public void RemoveEquipableFX()
+        {
+            UnEquipGenGewgawFX();
         }
     }
 }

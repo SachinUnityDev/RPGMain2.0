@@ -27,7 +27,7 @@ namespace Interactables
              , charController.charModel.charID, StatsName.focus, -2, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
-            //recieve 12 % more damage
+            Debug.Log("recieve 12 % more damage");
             // buff physical and magical 
 
         }
@@ -43,6 +43,7 @@ namespace Interactables
             displayStrs.Add(str);
             str = $"Recieve 12% more damage";
             displayStrs.Add(str);
+            
         }
 
         public void RemoveFXEpic()

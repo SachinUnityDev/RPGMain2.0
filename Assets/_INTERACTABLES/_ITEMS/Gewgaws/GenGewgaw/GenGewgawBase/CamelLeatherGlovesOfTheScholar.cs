@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class CamelLeatherGlovesOfTheScholar : GenGewgawBase, Iitems
+    public class CamelLeatherGlovesOfTheScholar : GenGewgawBase, Iitems, IEquipAble
     {
         public override GenGewgawNames genGewgawNames => GenGewgawNames.CamelleatherGlovesOfTheScholar;
         public ItemType itemType => ItemType.GenGewgaws;
@@ -30,6 +30,15 @@ namespace Interactables
             charController = CharService.Instance.GetCharCtrlWithName(InvService.Instance.charSelect);
             base.EquipGenGewgawFX();
 
+        }
+        public void ApplyEquipableFX()
+        {
+            EquipGenGewgawFX();
+        }
+
+        public void RemoveEquipableFX()
+        {
+            UnEquipGenGewgawFX();
         }
     }
 }

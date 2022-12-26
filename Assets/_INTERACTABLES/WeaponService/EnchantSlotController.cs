@@ -15,7 +15,6 @@ namespace Interactables
     {
         public int slotID { get; set; }
         public List<Iitems> ItemsInSlot { get; set; } = new List<Iitems>();
-
         public SlotType slotType => SlotType.EnchantSlot;
 
         [Header("FOR DROP CONTROLS")]
@@ -191,46 +190,48 @@ namespace Interactables
 
         void PopulateRightClickList()
         {
-            Iitems item = ItemsInSlot[0];
-            if (isRightClicked)
-            {
-                InvService.Instance.invViewController.CloseRightClickOpts();
-                isRightClicked = !isRightClicked;
-                return;
-            }
-            else
-            {
-                InvService.Instance.invViewController.OpenRightClickOpts();
-                isRightClicked = !isRightClicked;
-            }
+            ///FOLLOWING CODE FOR INV SLOT NOT APPLICABLE HERE
 
-            // get frame from and Buttons frame from InvSO
-            // populate button name from the Item Actions..Inv SO strings
-            bool isEquipable = InvService.Instance.IsItemEquipable(item);
-            bool isConsumable = InvService.Instance.IsItemConsumable(item);
-            bool isDisposable = InvService.Instance.IsItemDispoable(item);
-            // bool isSellable = InvService.Instance.IsItemDispoable(item);
-            // bool isPurchaseable = InvService.Instance.IsItemDispoable(item);
+            //Iitems item = ItemsInSlot[0];
+            //if (isRightClicked)
+            //{
+            //    InvService.Instance.invViewController.CloseRightClickOpts();
+            //    isRightClicked = !isRightClicked;
+            //    return;
+            //}
+            //else
+            //{
+            //    InvService.Instance.invViewController.OpenRightClickOpts();
+            //    isRightClicked = !isRightClicked;
+            //}
 
-            rightClickActions.Clear();
-            if (isEquipable)
-            {
-                if (!rightClickActions.Any(t => t == ItemActions.Equipable))
-                    rightClickActions.Add(ItemActions.Equipable);
+            //// get frame from and Buttons frame from InvSO
+            //// populate button name from the Item Actions..Inv SO strings
+            //bool isEquipable = InvService.Instance.IsItemEquipable(item);
+            //bool isConsumable = InvService.Instance.IsItemConsumable(item);
+            //bool isDisposable = InvService.Instance.IsItemDispoable(item);
+            //// bool isSellable = InvService.Instance.IsItemDispoable(item);
+            //// bool isPurchaseable = InvService.Instance.IsItemDispoable(item);
 
-            }
-            if (isConsumable)
-            {
-                if (!rightClickActions.Any(t => t == ItemActions.Consumable))
-                    rightClickActions.Add(ItemActions.Consumable);
-            }
-            if (isDisposable)
-            {
-                if (!rightClickActions.Any(t => t == ItemActions.Disposable))
-                    rightClickActions.Add(ItemActions.Disposable);
-            }
+            //rightClickActions.Clear();
+            //if (isEquipable)
+            //{
+            //    if (!rightClickActions.Any(t => t == ItemActions.Equipable))
+            //        rightClickActions.Add(ItemActions.Equipable);
 
-            //InvService.Instance.invViewController.ShowRightClickList(this);
+            //}
+            //if (isConsumable)
+            //{
+            //    if (!rightClickActions.Any(t => t == ItemActions.Consumable))
+            //        rightClickActions.Add(ItemActions.Consumable);
+            //}
+            //if (isDisposable)
+            //{
+            //    if (!rightClickActions.Any(t => t == ItemActions.Disposable))
+            //        rightClickActions.Add(ItemActions.Disposable);
+            //}
+
+            ////InvService.Instance.invViewController.ShowRightClickList(this);
 
         }
 
@@ -241,10 +242,6 @@ namespace Interactables
                 PopulateRightClickList();
             }
         }
-
-
-
-
     }
 }
 

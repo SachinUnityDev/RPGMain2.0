@@ -30,5 +30,15 @@ namespace Interactables
             charController = CharService.Instance.GetCharCtrlWithName(InvService.Instance.charSelect);
             base.EquipGenGewgawFX();
         }
+        public void ApplyEquipableFX()
+        {
+            EquipGenGewgawFX();
+        }
+
+        public void RemoveEquipableFX()
+        {
+            UnEquipGenGewgawFX();
+        }
+
     }
 }

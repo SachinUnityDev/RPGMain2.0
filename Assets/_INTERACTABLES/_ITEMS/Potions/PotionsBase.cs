@@ -18,10 +18,7 @@ namespace Interactables
         // SO ref hard to find for every click 
         SlotType invSlotType { get; set; }
         abstract void InitItem(int itemId, int maxInvStackSize); 
-        //{ 
-        //    this.itemId =itemId;
-        //    this.maxInvStackSize = maxInvStackSize; 
-        //} 
+     
         abstract void OnHoverItem();
         List<int> allBuffs  { get; set; }
     }
@@ -49,24 +46,6 @@ namespace Interactables
         protected CharController charController;        
         protected CharNames charName;
         protected int charID;
-
-
-        //public abstract PotionModel potionModel { get; set; }
-        //public virtual PotionModel PotionInit(PotionSO potionSO) // this is fine as it has to from specific SO
-        //{
-        //    // IiTEMS ....
-        //    potionModel = new PotionModel(potionSO);            
-        //    Iitems item = this as Iitems;
-        //    item.maxInvStackSize = potionSO.inventoryStack;
-           
-        //    return potionModel; 
-
-        //    //potionController = charController.gameObject.GetComponent<PotionController>();
-        //    //if (potionController != null)
-        //    //    potionController.allPotionModelsInInv.Add(potionModel);
-                
-        //} // depending on the name copy and Init the params 
-
         public virtual void  PotionEquip()
         {
             charController = CharService.Instance.GetCharCtrlWithName(InvService.Instance.charSelect); 

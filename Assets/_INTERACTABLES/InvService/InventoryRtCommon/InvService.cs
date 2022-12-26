@@ -44,44 +44,6 @@ namespace Interactables
             invMainModel = new InvMainModel();
         }
 
-        void OnEnable()
-        {
-            // attach Inventory Controller as  soon as Game Start 
-            // for now make it start of combat 
-            // CombatEventService.Instance.OnSOC += InitInventoryService; 
-            
-            //  InitInventoryService(); 
-        }
-        public bool IsCommInvFull()
-        {
-
-            return false; 
-        }
-        public bool IsStashInvFull()
-        {
-            return false; 
-        }
-        public bool IsExcessInvFull()
-        {
-            return false;
-        }
-        public void OpenInvView()
-        {
-            if (invPanel == null)
-            {
-                invPanel = Instantiate(invPanelPrefab);
-            }
-            UIControlServiceGeneral.Instance.SetMaxSibling2Canvas(invPanel);
-            invPanel.SetActive(true);
-            invViewController = invPanel.GetComponent<InvRightViewController>();
-            invViewController.GetComponent<IPanel>().Init();
-        }
-        public void CloseInvView()
-        {
-            invViewController.GetComponent<IPanel>().UnLoad();
-        }
-
-
         public void On_DragResult(bool result, ItemsDragDrop itemsDragDrop)
         {
             OnDragResult?.Invoke(result,itemsDragDrop); 
@@ -95,76 +57,42 @@ namespace Interactables
         }
 
 
-        #region ITEM_ACTIONS CHECKS
-        public bool IsItemEquipable(Iitems item)
-        {
-            IEquipAble iequipable = item as IEquipAble;
-            if (iequipable == null)
-                return false;
-            // check with the Active Inv View Controller 
-            return true;
-        }
+       
 
-        public bool IsItemConsumable(Iitems item)
-        {
-            IConsumable iConsumable = item as IConsumable;
-            if (iConsumable == null)
-                return false;
-            // will depend on gameState and SubState 
-            // will depend on ItemType 
 
-            return true;
-        }
+        #region INV CHECKS
 
-        public bool IsEnchantable(Iitems item)
+        public bool IsCommInvFull()
         {
-            // temple NPC only 
-            // X days after reading Enchantment Scroll .. Town and QuestPrep Scene
-            // check with WeaponViewController / EnchantController for recharging or new Enchantment 
 
             return false;
         }
-        public bool IsSocketable(Iitems item)
+        public bool IsStashInvFull()
         {
-            // Town and Quest prep Scene // no other conditions needed 
-            // check with Armorview Controller for sockets slots available 
-
             return false;
         }
-        //public bool IsItemSellable(Iitems item)
-        //{
-        //    ISellable iSellable = item as ISellable;
-        //    if (iSellable == null)
-        //        return false;
-        //    // can be sold only in townState 
-        //    // NPC Service will match the NPC who can buy the given item
-
-
-        //    return false;
-        //}
-
-        public bool IsItemDispoable(Iitems item)
+        public bool IsExcessInvFull()
         {
-            //IItemDisposable iDisposable = item as IItemDisposable;
-            //if (iDisposable == null)
-            //    return false;
-            return true;
-        }
-
-        public bool IsItemPurchaseable(Iitems item)
-        {
-            IPurchaseable iPurchaseable = item as IPurchaseable;
-            if (iPurchaseable == null)
-                return false;
-
-            // NPC service will provide whether NPC has item to sell
-            // 
-
             return false;
         }
+        public void OpenInvView()  // dont know where to use // Deprecated 
+        {
+            if (invPanel == null)
+            {
+                invPanel = Instantiate(invPanelPrefab);
+            }
+            UIControlServiceGeneral.Instance.SetMaxSibling2Canvas(invPanel);
+            invPanel.SetActive(true);
+            invViewController = invPanel.GetComponent<InvRightViewController>();
+            invViewController.GetComponent<IPanel>().Init();
+        }
+        public void CloseInvView() // don t know where to use  // Deprecated
+        {
+            invViewController.GetComponent<IPanel>().UnLoad();
+        }
 
+        #endregion
 
-#endregion
 
     }
 }
@@ -202,4 +130,17 @@ namespace Interactables
 
 
 //    //}
+//}
+
+//****************************************************************************************************
+//public bool IsItemSellable(Iitems item)
+//{
+//    ISellable iSellable = item as ISellable;
+//    if (iSellable == null)
+//        return false;
+//    // can be sold only in townState 
+//    // NPC Service will match the NPC who can buy the given item
+
+
+//    return false;
 //}

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class ScarfOfCourage : GenGewgawBase, Iitems 
+    public class ScarfOfCourage : GenGewgawBase, Iitems , IEquipAble
     {
         public override GenGewgawNames genGewgawNames => GenGewgawNames.ScarfOfCourage;
         public ItemType itemType => ItemType.GenGewgaws;
@@ -33,9 +33,17 @@ namespace Interactables
             charController = CharService.Instance.GetCharCtrlWithName(InvService.Instance.charSelect);
             base.EquipGenGewgawFX();
         }
+        public void ApplyEquipableFX()
+        {
+            EquipGenGewgawFX();
+        }
 
-       
-        
+        public void RemoveEquipableFX()
+        {
+            UnEquipGenGewgawFX();
+        }
+
+
     }
 
 

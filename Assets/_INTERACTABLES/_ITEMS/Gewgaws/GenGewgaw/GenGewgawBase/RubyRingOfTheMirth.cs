@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class RubyRingOfTheMirth : GenGewgawBase, Iitems
+    public class RubyRingOfTheMirth : GenGewgawBase, Iitems, IEquipAble
     {
         public override GenGewgawNames genGewgawNames => GenGewgawNames.RubyRingOfMirth;
         public ItemType itemType => ItemType.GenGewgaws;
@@ -28,6 +28,15 @@ namespace Interactables
             charController = CharService.Instance.GetCharCtrlWithName(InvService.Instance.charSelect);
             base.EquipGenGewgawFX();
 
+        }
+        public void ApplyEquipableFX()
+        {
+            EquipGenGewgawFX();
+        }
+
+        public void RemoveEquipableFX()
+        {
+            UnEquipGenGewgawFX();
         }
     }
 }

@@ -56,6 +56,7 @@ namespace Interactables
 
         public void ApplyConsumableFX()
         {
+            Debug.Log("Fortitude potion Consumed");
         }
         public void ApplyEquipableFX()
         {

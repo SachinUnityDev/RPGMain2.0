@@ -8,7 +8,7 @@ namespace Interactables
 
 
 
-    public class EmeraldRing : GenGewgawBase, IRecipe, Iitems
+    public class EmeraldRing : GenGewgawBase, IRecipe, Iitems, IEquipAble
     {
         public override GenGewgawNames genGewgawNames => GenGewgawNames.EmeraldRing;
         public int itemId { get; set; }
@@ -38,6 +38,15 @@ namespace Interactables
         public void OnHoverItem()
         {
 
+        }
+        public void ApplyEquipableFX()
+        {
+            EquipGenGewgawFX();
+        }
+
+        public void RemoveEquipableFX()
+        {
+            UnEquipGenGewgawFX();
         }
     }
 }

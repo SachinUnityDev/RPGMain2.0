@@ -69,7 +69,7 @@ namespace Interactables
 
         void PopulateDesc()
         {
-            Debug.Log("StatName" + statName + "Char" + charModel.charName);
+           // Debug.Log("StatName" + statName + "Char" + charModel.charName);
             desc.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text
                             = statData.statsName.ToString().CreateSpace();
             desc.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text

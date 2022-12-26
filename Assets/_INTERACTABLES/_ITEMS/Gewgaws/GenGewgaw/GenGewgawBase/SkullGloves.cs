@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class SkullGloves : GenGewgawBase, Iitems
+    public class SkullGloves : GenGewgawBase, Iitems, IEquipAble
     {
         public override GenGewgawNames genGewgawNames => GenGewgawNames.SkullGloves;
         public ItemType itemType => ItemType.GenGewgaws;
@@ -28,6 +28,15 @@ namespace Interactables
         {
             charController = CharService.Instance.GetCharCtrlWithName(InvService.Instance.charSelect);
             base.EquipGenGewgawFX();
+        }
+        public void ApplyEquipableFX()
+        {
+            EquipGenGewgawFX();
+        }
+
+        public void RemoveEquipableFX()
+        {
+            UnEquipGenGewgawFX();
         }
     }
 }

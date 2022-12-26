@@ -39,13 +39,15 @@ namespace Interactables
         // Populate items in the slots as per Inventory Model
         public int MAX_ABBAS_INVSLOT_SIZE = 18;
         public int MAX_CHAR_INVSLOT_SIZE = 12;
+        public int currCommonInvSize;
 
-        [Header("Canvas NTBR")]
+
+
+        [Header("Canvas Not To Be Ref")]
         [SerializeField] Canvas canvas; 
         [Header("Inv Panel Ref")]
-        [SerializeField] GameObject InvPanel;
-        //public InvModel currInvModel;
-        public int currCommonInvSize;
+        [SerializeField] GameObject InvPanel;        
+        
         public List<Iitems> allCommonInvList = new List<Iitems>();
         public Transform rightClickOpts;
 
@@ -77,7 +79,7 @@ namespace Interactables
                 Transform btn = rightClickOpts.GetChild(i); 
                 btn.GetComponentInChildren<TextMeshProUGUI>().text
                     = InvService.Instance.InvSO.GetItemActionStrings(itemAction);
-                btn.GetComponent<ItemActionPtrController>().Init(itemAction);
+                btn.GetComponent<ItemActionPtrController>().Init(itemAction, itemSlotController);
                 i++;
             }
             for (int j = i; j < rightClickOpts.childCount; j++)

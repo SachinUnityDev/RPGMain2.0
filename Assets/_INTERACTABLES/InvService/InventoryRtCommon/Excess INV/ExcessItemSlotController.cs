@@ -200,6 +200,8 @@ namespace Interactables
             return null;
         }
 
+        #region RIGHT CLICK ACTIONS ON INV RELATED
+
         public void CloseRightClickOpts()
         {
             if (isRightClicked)
@@ -227,34 +229,38 @@ namespace Interactables
 
             // get frame from and Buttons frame from InvSO
             // populate button name from the Item Actions..Inv SO strings
-            bool isEquipable = InvService.Instance.IsItemEquipable(item);
-            bool isConsumable = InvService.Instance.IsItemConsumable(item);
-            bool isDisposable = InvService.Instance.IsItemDispoable(item);
-            // bool isSellable = InvService.Instance.IsItemDispoable(item);
-            // bool isPurchaseable = InvService.Instance.IsItemDispoable(item);
+            //bool isEquipable = InvService.Instance.IsItemEquipable(item, slotType);
+            //bool isConsumable = InvService.Instance.IsItemConsumable(item, slotType);
+            //bool isDisposable = InvService.Instance.IsItemDisposable(item, slotType);
+         
 
-            rightClickActions.Clear();
-            if (isEquipable)
-            {
-                if (!rightClickActions.Any(t => t == ItemActions.Equipable))
-                    rightClickActions.Add(ItemActions.Equipable);
+            //rightClickActions.Clear();
+            //if (isEquipable)
+            //{
+            //    if (!rightClickActions.Any(t => t == ItemActions.Equipable))
+            //        rightClickActions.Add(ItemActions.Equipable);
 
-            }
-            if (isConsumable)
-            {
-                if (!rightClickActions.Any(t => t == ItemActions.Consumable))
-                    rightClickActions.Add(ItemActions.Consumable);
-            }
-            if (isDisposable)
-            {
-                if (!rightClickActions.Any(t => t == ItemActions.Disposable))
-                    rightClickActions.Add(ItemActions.Disposable);
-            }
+            //}
+            //if (isConsumable)
+            //{
+            //    if (!rightClickActions.Any(t => t == ItemActions.Consumable))
+            //        rightClickActions.Add(ItemActions.Consumable);
+            //}
+            //if (isDisposable)
+            //{
+            //    if (!rightClickActions.Any(t => t == ItemActions.Disposable))
+            //        rightClickActions.Add(ItemActions.Disposable);
+            //}
 
             // get the excess view controller
           //  InvService.Instance.invViewController.ShowRightClickList(this);
 
         }
+
+
+
+        #endregion
+
 
         public void OnPointerClick(PointerEventData eventData)
         {
@@ -263,9 +269,6 @@ namespace Interactables
                 PopulateRightClickList();
             }
         }
-
-
-
     }
 
 

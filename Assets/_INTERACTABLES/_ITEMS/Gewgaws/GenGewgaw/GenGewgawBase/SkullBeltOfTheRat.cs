@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class SkullBeltOfTheRat : GenGewgawBase, Iitems
+    public class SkullBeltOfTheRat : GenGewgawBase, Iitems, IEquipAble
     {
         public override GenGewgawNames genGewgawNames => GenGewgawNames.SkullBeltOfTheRat;
         public ItemType itemType => ItemType.GenGewgaws;
@@ -30,6 +30,15 @@ namespace Interactables
             charController = CharService.Instance.GetCharCtrlWithName(InvService.Instance.charSelect);
             base.EquipGenGewgawFX();
 
+        }
+        public void ApplyEquipableFX()
+        {
+            EquipGenGewgawFX();
+        }
+
+        public void RemoveEquipableFX()
+        {
+            UnEquipGenGewgawFX();
         }
     }
 }

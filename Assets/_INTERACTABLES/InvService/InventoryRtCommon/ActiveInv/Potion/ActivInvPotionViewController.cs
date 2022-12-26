@@ -46,7 +46,8 @@ namespace Interactables
                 Transform btn = rightClickOpts.GetChild(i);
                 btn.GetComponentInChildren<TextMeshProUGUI>().text
                     = InvService.Instance.InvSO.GetItemActionStrings(itemAction);
-                btn.GetComponent<ItemActionPtrController>().Init(itemAction);
+               // this will have a diff class 
+               // btn.GetComponent<ItemActionPtrController>().Init(itemAction);
                 i++;
             }
             for (int j = i; j < rightClickOpts.childCount; j++)

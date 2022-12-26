@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Interactables
 {
 
-    public class RubyTiaraOfSwiftness : GenGewgawBase, Iitems
+    public class RubyTiaraOfSwiftness : GenGewgawBase, Iitems, IEquipAble
     {
         public override GenGewgawNames genGewgawNames => GenGewgawNames.RubyTiaraOfSwiftness;
         public ItemType itemType => ItemType.GenGewgaws;
@@ -30,6 +30,15 @@ namespace Interactables
         {
             charController = CharService.Instance.GetCharCtrlWithName(InvService.Instance.charSelect);
             base.EquipGenGewgawFX();
+        }
+        public void ApplyEquipableFX()
+        {
+            EquipGenGewgawFX();
+        }
+
+        public void RemoveEquipableFX()
+        {
+            UnEquipGenGewgawFX();
         }
     }
 }

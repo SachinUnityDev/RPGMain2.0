@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class AmetystRing : GenGewgawBase, IRecipe, Iitems
+    public class AmetystRing : GenGewgawBase, IRecipe, Iitems, IEquipAble
     {
         public override GenGewgawNames genGewgawNames => GenGewgawNames.AmetystRing;
         public int itemId { get; set; }
@@ -32,11 +32,25 @@ namespace Interactables
 
         public void InitItem(int itemId, int maxInvStackSize)
         {
+            this.itemId = itemId;
+            this.maxInvStackSize = maxInvStackSize;
 
+            GenGewgawInit(genGewgawQ);
+          
         }
         public void OnHoverItem()
         {
 
+        }
+
+        public void ApplyEquipableFX()
+        {
+            EquipGenGewgawFX(); 
+        }
+
+        public void RemoveEquipableFX()
+        {
+            UnEquipGenGewgawFX();
         }
     }
 }

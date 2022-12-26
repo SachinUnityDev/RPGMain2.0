@@ -10,11 +10,11 @@ namespace Interactables
 
     public class GemService : MonoSingletonGeneric<GemService>
     {
-       
+
         //public List<GemSO> allGemSO = new List<GemSO>();
         //public List<GemModel> allGemModels = new List<GemModel>(); // gem models with char Data 
-        //public List<GemBase> allGemBase = new List<GemBase>(); 
-         
+        //public List<GemBase> allGemBase = new List<GemBase>();
+
 
         //public GemController gemController;
         //public GemsFactory gemsFactory;
@@ -131,7 +131,7 @@ namespace Interactables
         //    //                              , CauseType.CharSkill, 2);
 
         //    //}
-          
+
         //}
 
 

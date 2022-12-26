@@ -13,16 +13,37 @@ namespace Interactables
         [SerializeField] Color colorN;
         [SerializeField] Color colorHL;
         [SerializeField] Color colorUnClickable;
+        IComInvActions iComInvActions; 
 
         public bool isClickable = true; 
-        public void Init(ItemActions itemActions)
+        public void Init(ItemActions itemActions, IComInvActions iComInvAction) 
         {
             this.itemActions = itemActions;
+            this.iComInvActions = iComInvAction;    
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-
+            
+            switch (itemActions)
+            {
+                case ItemActions.None:
+                    break;
+                case ItemActions.Equipable:
+                    iComInvActions.Equip(); 
+                    break;
+                case ItemActions.Consumable:
+                    iComInvActions.Consume();
+                    break;
+                case ItemActions.Disposable:
+                    iComInvActions.Dispose();
+                    break;
+                case ItemActions.Sellable:
+                    iComInvActions.Dispose();
+                    break;                
+                default:
+                    break;
+            }        
         }
 
         public void OnPointerEnter(PointerEventData eventData)

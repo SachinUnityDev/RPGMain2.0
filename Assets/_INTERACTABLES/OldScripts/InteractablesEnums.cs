@@ -94,6 +94,7 @@ namespace Interactables
         ExcessInv,
         EnchantSlot,
         SocketSlot, 
+        NPCSlots, 
 
     }
     public enum GemType

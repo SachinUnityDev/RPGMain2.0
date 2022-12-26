@@ -246,37 +246,7 @@ namespace Interactables
                 iitems.invSlotType = slotType;
                 InvService.Instance.invMainModel.AddItem2CommInv(iitems);
             }
-
-            //create  item
-            //add to inv with slot type
-
-
-            // get items form item factory                
-            // iitems init=> give slot type, inv location ,  
-            // add to common, excess , potion slot , stash .. excess 
-
-            //PotionSO potionSO = GetPotionModelSO(_potionName);
-            //PotionModel potionModel = potionBase.PotionInit(potionSO);
-            //allPotionModel.Add(potionModel);
-
-            //Iitems item = potionBase as Iitems;
-            //item.invType = SlotType.CommonInv;
-
-            //CharModel charModel = CharService.Instance.GetAllyCharModel(charName);
-            //if (charModel != null)
-            //{
-            //    InvData invData = new InvData(charModel.charName, item);
-            //    InvService.Instance.invMainModel.AddItem2CommInv(invData);
-            //}
-            //else
-            //{
-            //    Debug.Log("CharModel is null" + charName);
-            //}
         }
-
-
-
-
         #region GET ITEM CONTROLLERS AND MODELS
         public ItemController GetItemController(CharNames charName)
         {
@@ -298,28 +268,42 @@ namespace Interactables
 
         #region GET SCRIPTABLES 
 
-
-
-
         #endregion
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionNames.FortitudePotion,
-                                     CauseType.Items, 2); 
+                InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.AmetystRing,
+                                     CauseType.Items, 2, GenGewgawQ.Epic); 
         
             }
         }
 
     }
-
-
-
-
-
-
-
 }
+//create  item
+//add to inv with slot type
 
+
+// get items form item factory                
+// iitems init=> give slot type, inv location ,  
+// add to common, excess , potion slot , stash .. excess 
+
+//PotionSO potionSO = GetPotionModelSO(_potionName);
+//PotionModel potionModel = potionBase.PotionInit(potionSO);
+//allPotionModel.Add(potionModel);
+
+//Iitems item = potionBase as Iitems;
+//item.invType = SlotType.CommonInv;
+
+//CharModel charModel = CharService.Instance.GetAllyCharModel(charName);
+//if (charModel != null)
+//{
+//    InvData invData = new InvData(charModel.charName, item);
+//    InvService.Instance.invMainModel.AddItem2CommInv(invData);
+//}
+//else
+//{
+//    Debug.Log("CharModel is null" + charName);
+//}

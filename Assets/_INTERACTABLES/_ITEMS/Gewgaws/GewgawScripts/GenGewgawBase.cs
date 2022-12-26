@@ -25,51 +25,34 @@ namespace Interactables
 
         IEpic epicSuffix = null;
         IEpic epicPrefix = null;
-        public virtual bool GenGewgawInit(GenGewgawQ genGewgawQ)
+        public virtual void GenGewgawInit(GenGewgawQ genGewgawQ)
         {
 
             switch (genGewgawQ)
             {
                 case GenGewgawQ.None:
-                    return false;                     
+                    break;             
                 case GenGewgawQ.Lyric:
                      lyricSuffix = suffixBase as ILyric;
-                     lyricPrefix = prefixBase as ILyric;
-                    if (lyricSuffix != null && lyricPrefix != null)  
-                    {
-                        lyricSuffix.LyricInit(); 
-                        lyricPrefix.LyricInit();
-                        this.genGewgawQ = genGewgawQ;
-                        return true;
-                    }                        
-                    else
-                        return false;                     
+                     lyricPrefix = prefixBase as ILyric;                   
+                        lyricSuffix?.LyricInit(); 
+                        lyricPrefix?.LyricInit();
+                    break;   
                 case GenGewgawQ.Folkloric:
                      folkLoricSuffix = suffixBase as IFolkloric;
-                     folkLoricPrefix = prefixBase as IFolkloric;
-                    if (folkLoricSuffix != null && folkLoricPrefix != null)
-                    {
-                        folkLoricSuffix.FolkloricInit();
-                        folkLoricPrefix.FolkloricInit();
-                        this.genGewgawQ = genGewgawQ;
-                        return true;
-                    }                        
-                    else
-                        return false;                    
+                     folkLoricPrefix = prefixBase as IFolkloric;                    
+                        folkLoricSuffix?.FolkloricInit();
+                        folkLoricPrefix?.FolkloricInit();
+                    break; 
+                     
                 case GenGewgawQ.Epic:
                      epicSuffix = suffixBase as IEpic;
-                     epicPrefix = prefixBase as IEpic;
-                    if (epicSuffix != null && epicPrefix != null)
-                    {
-                        epicSuffix.EpicInit();
-                        epicPrefix.EpicInit();
-                        this.genGewgawQ = genGewgawQ;
-                        return true;
-                    }   
-                    else
-                        return false;                    
+                     epicPrefix = prefixBase as IEpic;                 
+                        epicSuffix?.EpicInit();
+                        epicPrefix?.EpicInit();
+                    break;                    
                 default:
-                    return false;                    
+                    break;
             }
 
         }
@@ -82,15 +65,15 @@ namespace Interactables
                     Debug.LogError("FALSE gewgaws created"); 
                     break;
                 case GenGewgawQ.Lyric:
-                    lyricPrefix.ApplyFXLyric(); 
-                    lyricSuffix.ApplyFXLyric();
+                    lyricPrefix?.ApplyFXLyric(); 
+                    lyricSuffix?.ApplyFXLyric();
                     break;
                 case GenGewgawQ.Folkloric:
-                    folkLoricPrefix.ApplyFXFolkloric(); 
-                    folkLoricSuffix.ApplyFXFolkloric();
+                    folkLoricPrefix?.ApplyFXFolkloric(); 
+                    folkLoricSuffix?.ApplyFXFolkloric();
                     break;
                 case GenGewgawQ.Epic:
-                    epicPrefix.ApplyFXEpic();
+                    epicPrefix?.ApplyFXEpic();
                     epicSuffix?.ApplyFXEpic();
                     break;
                 default:

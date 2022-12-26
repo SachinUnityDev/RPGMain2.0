@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Interactables
 {
 
-    public class CamelLeatherBeltOfEvasion : GenGewgawBase ,Iitems
+    public class CamelLeatherBeltOfEvasion : GenGewgawBase ,Iitems, IEquipAble
     {
         public override GenGewgawNames genGewgawNames => GenGewgawNames.CamelLeatherBeltOfEvasion;
         public ItemType itemType => ItemType.GenGewgaws;
@@ -34,6 +34,15 @@ namespace Interactables
             charController = CharService.Instance.GetCharCtrlWithName(InvService.Instance.charSelect);
             base.EquipGenGewgawFX();
 
+        }
+        public void ApplyEquipableFX()
+        {
+            EquipGenGewgawFX();
+        }
+
+        public void RemoveEquipableFX()
+        {
+            UnEquipGenGewgawFX();
         }
     }
 }

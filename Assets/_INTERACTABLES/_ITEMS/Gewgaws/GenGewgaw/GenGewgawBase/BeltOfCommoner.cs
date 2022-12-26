@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class BeltOfCommoner : GenGewgawBase, Iitems
+    public class BeltOfCommoner : GenGewgawBase, Iitems, IEquipAble
     {
         public override GenGewgawNames genGewgawNames => GenGewgawNames.BeltOfTheCommoner;
         public ItemType itemType => ItemType.GenGewgaws;
@@ -31,6 +31,16 @@ namespace Interactables
             charController = CharService.Instance.GetCharCtrlWithName(InvService.Instance.charSelect);
             base.EquipGenGewgawFX();
 
+        }
+
+        public void ApplyEquipableFX()
+        {
+            EquipGenGewgawFX();
+        }
+
+        public void RemoveEquipableFX()
+        {
+            UnEquipGenGewgawFX();
         }
     }
 }

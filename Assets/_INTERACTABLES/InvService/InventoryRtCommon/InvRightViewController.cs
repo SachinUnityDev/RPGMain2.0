@@ -11,24 +11,24 @@ using UnityEngine.UI;
 
 namespace Interactables
 {
-    public class ItemSlotData
-    {
-        public Iitems item;
-        public int currentStackSize;
-        public int slotNum;
-        public ItemSlotData(Iitems item, int currentStackSize, int slotNum)
-        {
-            this.item = item;
-            this.currentStackSize = currentStackSize;
-            this.slotNum = slotNum;
-        }
-    }
+    //public class ItemSlotData
+    //{
+    //    public Iitems item;
+    //    public int currentStackSize;
+    //    public int slotNum;
+    //    //public ItemSlotData(Iitems item, int currentStackSize, int slotNum)
+    //    //{
+    //    //    this.item = item;
+    //    //    this.currentStackSize = currentStackSize;
+    //    //    this.slotNum = slotNum;
+    //    //}
+    //}
 
-    public class InvModelView
-    {
-        public List<ItemSlotData> allItemSlotData = new List<ItemSlotData>();
-        public int currInvSize; 
-    }
+    //public class InvModelView
+    //{
+    //    public List<ItemSlotData> allItemSlotData = new List<ItemSlotData>();
+    //    public int currInvSize; 
+    //}
 
     // to be attached to inventory Panel... 
     public class InvRightViewController : MonoBehaviour
@@ -54,10 +54,7 @@ namespace Interactables
         [Header("Active Inv")]
         public GameObject potionActiveInvPanel;
         public GameObject gewgawsActiveInvPanel;
-
-
-       
-
+        
         void Start()
         {
             InvPanel = gameObject.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
@@ -168,42 +165,42 @@ namespace Interactables
             }
         }
 
-        void InitPotionActiveInv()
-        {
-            ClearPotionActiveInv();
-            CharNames charSelect = InvService.Instance.charSelect;
-            CharModel charModel = CharService.Instance.GetAllyCharModel(charSelect);
+        //void InitPotionActiveInv()
+        //{
+        //    ClearPotionActiveInv();
+        //    CharNames charSelect = InvService.Instance.charSelect;
+        //    CharModel charModel = CharService.Instance.GetAllyCharModel(charSelect);
 
-            for (int i = 0; i < potionActiveInvPanel.transform.childCount; i++)
-            {
-                Transform child = potionActiveInvPanel.transform.GetChild(i);
-                // get item in belt slot 1  
-                ItemData itemData; 
-                switch (i)
-                {
-                    case 0:
-                       itemData = charModel.potionSlot1;
-                        break;
-                    case 1:
-                        itemData = charModel.potionSlot2;
-                        break;
-                    case 2:
-                        itemData = charModel.provisionSlot;
-                        break;
-                    default:
-                        break;
-                }
+        //    for (int i = 0; i < potionActiveInvPanel.transform.childCount; i++)
+        //    {
+        //        Transform child = potionActiveInvPanel.transform.GetChild(i);
+        //        // get item in belt slot 1  
+        //        ItemData itemData; 
+        //        switch (i)
+        //        {
+        //            case 0:
+        //               itemData = charModel.potionSlot1;
+        //                break;
+        //            case 1:
+        //                itemData = charModel.potionSlot2;
+        //                break;
+        //            case 2:
+        //                itemData = charModel.provisionSlot;
+        //                break;
+        //            default:
+        //                break;
+        //        }
                
-                //child.gameObject.GetComponent<PotionSlotController>().AddItem()
-            }
+        //        //child.gameObject.GetComponent<PotionSlotController>().AddItem()
+        //    }
 
-            // clearinv 
-            // get data from charService belt values 
-            // populate data 
-            // set potion slot on active 
+        //    // clearinv 
+        //    // get data from charService belt values 
+        //    // populate data 
+        //    // set potion slot on active 
 
 
-        }
+        //}
         void ClearPotionActiveInv()
         {
             for (int i = 0; i < potionActiveInvPanel.transform.childCount; i++)

@@ -76,15 +76,15 @@ namespace Common
         [Header("DEFAULT PROVISION")]
         public List<ItemData> provisionItems = new List<ItemData>();
 
-        [Header("ACTIVE INV POTIONS")]
-        public ItemData potionSlot1;
-        public ItemData potionSlot2;
-        public ItemData provisionSlot;
+        //[Header("ACTIVE INV POTIONS")]
+        //public ItemData potionSlot1;
+        //public ItemData potionSlot2;
+        //public ItemData provisionSlot;
 
-        [Header("ACTIVE INV GEWGAWS")]
-        public ItemData gewgawSlot1;
-        public ItemData gewgawSlot2;
-        public ItemData gewgawSlot3;
+        //[Header("ACTIVE INV GEWGAWS")]
+        //public ItemData gewgawSlot1;
+        //public ItemData gewgawSlot2;
+        //public ItemData gewgawSlot3;
 
         [Header("ITEM STATS")]
         public int netPotionAddictChance = 0; 
@@ -159,38 +159,7 @@ namespace Common
             return barRatio;
         }
 
-        #region ACTIVE INV SLOT
-        public void AddItemToPotionSlot(Iitems item, int slotID)
-        {
-            ItemData itemData = new ItemData(item.itemType, item.itemName);
-            if (slotID == 0)
-            {
-                potionSlot1 = itemData;
-            }else if (slotID == 1)
-            {
-                potionSlot2 = itemData; 
-            }else if (slotID == 2)
-            {
-                provisionSlot = itemData; 
-            }            
-        }
-        public void RemoveItmFrmPotionSlot(int slotID)
-        {          
-            if (slotID == 0)
-            {
-                potionSlot1 = null; 
-            }
-            else if (slotID == 1)
-            {
-                potionSlot2 = null;
-            }
-            else if (slotID == 2)
-            {
-                provisionSlot = null;
-            }
-        }
 
-        #endregion 
 
         #region SAVE AND LOAD 
         public void SaveModel()
@@ -313,7 +282,38 @@ namespace Common
 }
 
 
+//#region ACTIVE INV SLOT
+//public void AddItemToPotionSlot(Iitems item, int slotID)
+//{
+//    ItemData itemData = new ItemData(item.itemType, item.itemName);
+//    if (slotID == 0)
+//    {
+//        potionSlot1 = itemData;
+//    }else if (slotID == 1)
+//    {
+//        potionSlot2 = itemData; 
+//    }else if (slotID == 2)
+//    {
+//        provisionSlot = itemData; 
+//    }            
+//}
+//public void RemoveItmFrmPotionSlot(int slotID)
+//{          
+//    if (slotID == 0)
+//    {
+//        potionSlot1 = null; 
+//    }
+//    else if (slotID == 1)
+//    {
+//        potionSlot2 = null;
+//    }
+//    else if (slotID == 2)
+//    {
+//        provisionSlot = null;
+//    }
+//}
 
+//#endregion 
 
 
 

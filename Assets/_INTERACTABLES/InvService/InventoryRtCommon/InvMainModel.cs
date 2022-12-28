@@ -25,10 +25,13 @@ namespace Interactables
         public CharNames CharName; 
         public List<Iitems> potionActivInv = new List<Iitems>();
         public List<Iitems> gewgawActivInv = new List<Iitems>();
-
+        public int potionCount; 
+        public int gewgawCount;
         public ActiveInvData(CharNames charName)
         {
             CharName = charName;
+            potionCount = 0;
+            gewgawCount = 0;    
         }
     }
 
@@ -75,41 +78,52 @@ namespace Interactables
         }
         #endregion
 
+        public ActiveInvData GetActiveInvData(CharNames charName)
+        {
+            ActiveInvData invData = allActiveInvData.Find(t => t.CharName == charName);
+            if (invData != null)
+                return invData;
+            else
+                Debug.Log("Potion Active Inv Data Not found" + charName);
+            return null;
+        }
         #region  ACTIVE INV POTION  
-
 
         public void AddItem2PotionActInv(Iitems item, int slotID) // key point of addition
                                                                   // SAVE and LOAD Active slot here
         {
-            CharController charController = InvService.Instance.charSelectController;
-            charController.charModel.AddItemToPotionSlot(item, slotID);
+            CharController charController = InvService.Instance.charSelectController;          
             CharNames charName = charController.charModel.charName;
 
             ActiveInvData activeInvData = allActiveInvData.Find(t => t.CharName == charName); 
             if(activeInvData != null)
             {
                 activeInvData.potionActivInv.Add(item);
+                activeInvData.potionCount++;
             }
             else
             {
                 ActiveInvData activeInvDataNew = new ActiveInvData(charName);
                 activeInvDataNew.potionActivInv.Add(item);
+                activeInvDataNew.potionCount++; 
                 allActiveInvData.Add(activeInvDataNew); 
             }
 
-            InvService.Instance.invViewController
-                .potionActiveInvPanel.GetComponent<PotionViewControllerParent>()
-                .AddItemtoActiveSlot(item, slotID); 
+            //InvService.Instance.invViewController
+            //    .potionActiveInvPanel.GetComponent<PotionViewControllerParent>()
+            //    .AddItemtoActiveSlotView(item, slotID); 
 
         }
-        public bool RemoveItemFromPotionActInv(CharController charController, Iitems Item)
+        public bool RemoveItemFromPotionActInv( Iitems Item)
         {
+            CharController charController = InvService.Instance.charSelectController;
             CharNames charName = charController.charModel.charName;
 
             ActiveInvData activeInvData = allActiveInvData.Find(t => t.CharName == charName);
             if(activeInvData != null)
             {
                 activeInvData.potionActivInv.Remove(Item); 
+                activeInvData.potionCount--;
             }
             else
             {
@@ -119,6 +133,8 @@ namespace Interactables
             return false; 
         }
 
+       
+
         #endregion
 
         #region  ACTIVE INV GEWGAWS  
@@ -127,8 +143,7 @@ namespace Interactables
         public void AddItem2GewgawsActInv(Iitems item, int slotID) // key point of addition
                                                                   // SAVE and LOAD Active slot here
         {
-            CharController charController = InvService.Instance.charSelectController;
-            charController.charModel.AddItemToPotionSlot(item, slotID);
+            CharController charController = InvService.Instance.charSelectController;  
             CharNames charName = charController.charModel.charName;
 
             ActiveInvData activeInvData = allActiveInvData.Find(t => t.CharName == charName);
@@ -159,12 +174,12 @@ namespace Interactables
             }
             else
             {
-                Debug.Log("char active slot data not found");
+                Debug.Log("char active slot data not found" + charController.charModel.charName);
             }
             // remove from char
             return false;
         }
-
+    
         #endregion
 
 

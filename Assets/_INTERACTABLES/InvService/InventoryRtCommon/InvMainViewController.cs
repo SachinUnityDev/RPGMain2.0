@@ -6,7 +6,7 @@ using Common;
 
 namespace Interactables
 {
-    public class InvLeftViewController : MonoBehaviour, IPanel
+    public class InvMainViewController : MonoBehaviour, IPanel
     {
         [Header("PARENT VIEW CONTROLLER")]
         public InvRightViewController invRightViewController;
@@ -20,9 +20,8 @@ namespace Interactables
         public CharNames selectchar;
 
         [Header("Manual Level Up")]
-        [SerializeField] GameObject levelUpPanel; 
-        
-    
+        [SerializeField] GameObject levelUpPanel;
+
         private void Start()
         {
             invRightViewController = transform.GetChild(0).GetComponent<InvRightViewController>();
@@ -56,11 +55,13 @@ namespace Interactables
         public void Load()
         {
             transform.parent.gameObject.SetActive(true);
+            InvService.Instance.isInvPanelOpen = true;
         }
 
         public void UnLoad()
         {
             transform.parent.gameObject.SetActive(false);
+            InvService.Instance.isInvPanelOpen = false; 
         }
 
         public void Init()

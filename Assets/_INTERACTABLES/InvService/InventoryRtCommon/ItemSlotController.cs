@@ -17,9 +17,10 @@ namespace Interactables
         SlotType slotType { get; }
         bool isSlotFull();
         List<Iitems> ItemsInSlot { get; set; }
-        void RemoveItem();
-        bool AddItem(Iitems item);
-        void ClearSlot();
+        void RemoveItem();// remove item from the inv Main  Model
+        bool AddItem(Iitems item);// add item to the inv Main Model 
+        void ClearSlot(); // only clear the display 
+        void LoadSlot(Iitems item); // only add to display in view 
         void CloseRightClickOpts();
     }
 
@@ -113,10 +114,17 @@ namespace Interactables
 
         public void ClearSlot()
         {
-            ItemsInSlot.Clear();
-            Transform ImgTrans = gameObject.transform.GetChild(0).GetChild(0);
-            ImgTrans.gameObject.SetActive(false);
-            gameObject.GetComponent<Image>().sprite = InvService.Instance.InvSO.emptySlot;
+            if (!IsEmpty())
+            {
+                Iitems item = ItemsInSlot[0];
+                ItemsInSlot.Remove(item);
+            }
+            else
+            {
+                Transform ImgTrans = gameObject.transform.GetChild(0).GetChild(0);
+                ImgTrans.gameObject.SetActive(false);
+                gameObject.GetComponent<Image>().sprite = InvService.Instance.InvSO.emptySlot;
+            }
         }
 
         public bool HasSameItem(Iitems item)
@@ -133,7 +141,6 @@ namespace Interactables
             if (ItemsInSlot.Count <= ItemsInSlot[0].maxInvStackSize) return false;
             return true;
         }
-
         public bool IsEmpty()
         {
             if (ItemsInSlot.Count > 0)
@@ -175,13 +182,21 @@ namespace Interactables
         {
             item.invSlotType = SlotType.CommonInv;
             ItemsInSlot.Add(item);
+
             InvService.Instance.invMainModel.commonInvItems.Add(item);
 
             RefreshImg(item);
             if (ItemsInSlot.Count > 1)
                 RefreshSlotTxt();
         }
-
+        public void LoadSlot(Iitems item)
+        {
+            item.invSlotType = SlotType.CommonInv;
+            ItemsInSlot.Add(item);
+            RefreshImg(item);
+            if (ItemsInSlot.Count > 1)
+                RefreshSlotTxt();
+        }
         public void RemoveItem()   // controller by Item DragDrop
         {
             if (IsEmpty())
@@ -189,9 +204,9 @@ namespace Interactables
                 ClearSlot();
                 return;
             }
-            // InvData invData =  ItemsInSlot[0];
             Iitems item = ItemsInSlot[0];
-            ItemsInSlot.Remove(item);
+            ClearSlot();
+            InvService.Instance.invMainModel.RemoveItem2CommInv(item);  // ITEM REMOVED FROM INV MAIN MODEL HERE
             if (ItemsInSlot.Count >= 1)
             {
                 RefreshImg(item);
@@ -200,7 +215,6 @@ namespace Interactables
             {
                 ClearSlot();
             }
-            // COUNTER = ItemsInSlot.Count;
             RefreshSlotTxt();
         }
 
@@ -369,21 +383,31 @@ namespace Interactables
             {
                 CharController charController = InvService.Instance.charSelectController;
                 ItemData itemData = new ItemData(ItemsInSlot[0].itemType
-                                                    , ItemsInSlot[0].itemName); 
-                if(charController.charModel.potionSlot1 == null)
-                {
-                    charController.charModel.potionSlot1 = itemData;
+                                                    , ItemsInSlot[0].itemName);
 
+                PotionViewControllerParent parentView =  InvService.Instance.invViewController.potionActiveInvPanel
+                                                        .GetComponent<PotionViewControllerParent>();
 
-                }else if (charController.charModel.potionSlot2 == null)
-                {
-
+                if (parentView.Equip2PotionSlot(ItemsInSlot[0]))
+                {// equiped to a slot 
+                    
+                    RemoveItem(); 
                 }
-                else
-                {
+
+                //if(charController.charModel.potionSlot1 == null)
+                //{
+                //    charController.charModel.potionSlot1 = itemData;
 
 
-                }
+                //}else if (charController.charModel.potionSlot2 == null)
+                //{
+
+                //}
+                //else
+                //{
+
+
+                //}
                 
             }
 
@@ -414,6 +438,8 @@ namespace Interactables
         {
 
         }
+
+    
 
         #endregion
     }

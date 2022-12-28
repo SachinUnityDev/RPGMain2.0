@@ -197,5 +197,10 @@ namespace Interactables
                 RemoveItem();
             }
         }
+
+        public void LoadSlot(Iitems item)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

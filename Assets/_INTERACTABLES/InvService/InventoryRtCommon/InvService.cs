@@ -20,8 +20,8 @@ namespace Interactables
 
         [Header("TO BE REF")]
         public InvSO InvSO; // all items SO 
-        public GameObject invPanelPrefab;
-        public GameObject invXLPanel;
+        public GameObject invPanelPrefab;// Inv main panel
+        public GameObject invXLPanel;  // lore + beastiary+ skills+ invPanel .. parent
 
         [Header("InvMainModel")]
         public InvMainModel invMainModel;
@@ -30,10 +30,11 @@ namespace Interactables
         [Header("Not to be referenced")]
         public InvRightViewController invViewController; // ref
         public GameObject invPanel;
-        
+        public bool isInvPanelOpen; 
 
         [Header("House View Controller Not to be ref")]
         public StashInvViewController stashInvViewController;
+        
 
         [Header("EXCESS INV Panel")]       
         public ExcessInvViewController excessInvViewController;
@@ -42,6 +43,7 @@ namespace Interactables
         private void Start()
         {
             invMainModel = new InvMainModel();
+            isInvPanelOpen = false; 
         }
 
         public void On_DragResult(bool result, ItemsDragDrop itemsDragDrop)
@@ -51,6 +53,7 @@ namespace Interactables
 
         public void On_CharSelectInv(CharModel charModel)
         {
+            if (!isInvPanelOpen) return; 
             charSelect = charModel.charName;
             charSelectController = CharService.Instance.GetCharCtrlWithName(charModel.charName);
             OnCharSelectInvPanel?.Invoke(charModel);

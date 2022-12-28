@@ -16,34 +16,71 @@ namespace Interactables
         [Header("Canvas Not to be ref")]
         [SerializeField] Canvas canvas;
 
-        [SerializeField] CharNames charSelect;
+     //   [SerializeField] CharNames charSelect;
         [SerializeField] int slotNum; 
         // get and set items
         public List<Iitems> allPotionActiveInvList = new List<Iitems>();
 
         public Transform rightClickOpts;
 
+        [Header("Slot results")]        
+        [SerializeField] bool slot1result;
+        [SerializeField] bool slot2result;
+
+
         void Start()
         {
             canvas = FindObjectOfType<Canvas>();
             InvService.Instance.OnDragResult += OnDragResult2PotionActiveInv;
-            InvService.Instance.OnCharSelectInvPanel += PopulateActiveInvSlots; 
+            InvService.Instance.OnCharSelectInvPanel += LoadActiveInvSlots; 
 
             slotNum = transform.GetSiblingIndex();
         }
-        public void LoadActiveInvPotions()
+
+        void LoadActiveInvSlots(CharModel charModel)
         {
-           
+            
+            ClearInv();
+
+            CharController charController = InvService.Instance.charSelectController;
+            if (charController == null) return;
+            ActiveInvData activeInvData = InvService.Instance.invMainModel
+                                            .GetActiveInvData(charController.charModel.charName);
+            if (activeInvData == null) return; 
+            for (int i = 0; i < activeInvData.potionActivInv.Count; i++)
+            {
+                Transform child = transform.GetChild(i);
+                child.gameObject.GetComponent<iSlotable>().LoadSlot(activeInvData.potionActivInv[i]);
+            }
         }
 
-        void PopulateActiveInvSlots(CharModel charModel)
-        {
-            // get item from Inv main Model 
-            // add the....
+        #region EQUIP TO VIEW 
 
-            // on inv Char Select
+        public bool Equip2PotionSlot(Iitems item, bool isload = false)
+        {
+            // try equip to slot 1 then 2 
+            // and if both fails then remove from slot 1 
+            if (!isload)
+            {
+                slot1result = false; slot2result = false;
+                slot1result = AddItemtoActiveSlotView(item, 0);
+                if (!slot1result) // try slot 2 
+                {
+                    slot2result = AddItemtoActiveSlotView(item, 1);
+                    if (slot2result)
+                        return true;
+                    else
+                        //swap here with first
+                        return false;
+                }
+                return true;
+            }
+            return true;
+
         }
-        public bool AddItemtoActiveSlot(Iitems item,int slotID)  // NEW ITEM ADDED
+        #endregion
+
+        public bool AddItemtoActiveSlotView(Iitems item,int slotID)  // NEW ITEM ADDED
         {
             Transform child = transform.GetChild(slotID);
             iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
@@ -59,7 +96,7 @@ namespace Interactables
         void ClearInv()
         {
             allPotionActiveInvList.Clear();// local list
-            for (int i = 0; i<=3; i++)
+            for (int i = 0; i<3; i++)
             {
                 Transform child = transform.GetChild(i); 
                 child.gameObject.GetComponent<iSlotable>().ClearSlot();

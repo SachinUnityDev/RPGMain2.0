@@ -17,10 +17,6 @@ namespace Interactables
         public List<Iitems> ItemsInSlot { get; set; } = new List<Iitems>();
         public SlotType slotType => SlotType.PotionsActiveInv;
 
-        [Header("Daddy")]
-        public PotionViewControllerParent activInvPotionViewController;
-
-
         [Header("FOR DROP CONTROLS")]
         [SerializeField] GameObject draggedGO;
         [SerializeField] ItemsDragDrop itemsDragDrop;
@@ -39,8 +35,7 @@ namespace Interactables
                     InvService.Instance.On_DragResult(isDropSuccess, itemsDragDrop);
                 else
                 {
-                    //Add2Service(itemsDragDrop.itemDragged); 
-                    Add2InvMainModel(itemsDragDrop.itemDragged);
+                    //Add2Service(itemsDragDrop.itemDragged);                    
                     InvService.Instance.On_DragResult(isDropSuccess, itemsDragDrop);
                     Destroy(draggedGO);
                 }
@@ -51,39 +46,28 @@ namespace Interactables
         {
             slotID = transform.GetSiblingIndex();
             isRightClicked = false;
-            InvService.Instance.invViewController.CloseRightClickOpts();
-            activInvPotionViewController = transform.parent.GetComponent<PotionViewControllerParent>();
+            InvService.Instance.invViewController.CloseRightClickOpts();          
         }
 
-
-        public void Add2InvMainModel(Iitems item)
+        public void LoadSlot(Iitems item)
         {
-            InvService.Instance.invMainModel.AddItem2PotionActInv(item, slotID);
+            if (ItemsInSlot.Count > 1)
+                return; 
+            item.invSlotType = SlotType.PotionsActiveInv;
+            ItemsInSlot.Add(item);
+            RefreshImg(item);            
         }
-        //public void Add2Service(Iitems item)
-        //{
-        //    ItemData itemData = new ItemData(item.itemType, item.itemName);
-        //    CharNames charName = InvService.Instance.charSelect;
-        //    CharModel charModel = CharService.Instance.GetAllyCharModel(charName);
-        //    switch (slotID)
-        //    {
-        //        case 0:
-        //            charModel.potionSlot1 = itemData; break; 
-        //        case 1:
-        //            charModel.potionSlot2 = itemData; break;
-        //        case 2:
-        //            charModel.provisionSlot = itemData; break;
-        //        default:
-        //            break;
-        //    }
-        //}
+
 
         public void ClearSlot()
         {
+            
             ItemsInSlot.Clear();
             Transform ImgTrans = gameObject.transform.GetChild(0).GetChild(0);
             ImgTrans.gameObject.SetActive(false);
             gameObject.GetComponent<Image>().sprite = InvService.Instance.InvSO.emptySlot;
+            
+            
         }
 
         public bool HasSameItem(Iitems item)
@@ -124,32 +108,16 @@ namespace Interactables
                 AddItemOnSlot(item);
                 return true;
             }
-            else
-            {
-                if (HasSameItem(item))  // SAME ITEM IN SLOT 
-                {
-                    if (ItemsInSlot.Count < item.maxInvStackSize)  // SLOT STACK SIZE 
-                    {
-                        AddItemOnSlot(item);
-                        return true;
-                    }
-                    else
-                    {
-                        Debug.Log("Slot full");
-                        return false;
-                    }
-                }
-                else   // DIFF ITEM IN SLOT 
-                {
-                    return false;
-                }
-            }
+            return false;
+     
         }
         void AddItemOnSlot(Iitems item)
         {
             item.invSlotType = SlotType.PotionsActiveInv;
             ItemsInSlot.Add(item);
-            activInvPotionViewController.allPotionActiveInvList.Add(item);
+
+            InvService.Instance.invMainModel.AddItem2PotionActInv(item, slotID); 
+            
             RefreshImg(item);
             if (ItemsInSlot.Count > 1)
                 RefreshSlotTxt();
@@ -164,7 +132,8 @@ namespace Interactables
             }
             Iitems item = ItemsInSlot[0];
             ItemsInSlot.Remove(item);
-            activInvPotionViewController.allPotionActiveInvList.Remove(item);
+
+            InvService.Instance.invMainModel.RemoveItemFromPotionActInv(item); 
             if (ItemsInSlot.Count >= 1)
             {
                 RefreshImg(item);
@@ -174,7 +143,7 @@ namespace Interactables
                 ClearSlot();
             }          
             RefreshSlotTxt();
-            RemoveFrmInvMainModel(item); 
+           
         }
         void RefreshImg(Iitems item)
         {
@@ -213,11 +182,7 @@ namespace Interactables
             return null;
         }
 
-        void RemoveFrmInvMainModel(Iitems item)
-        {
-            CharController charController = InvService.Instance.charSelectController;
-            InvService.Instance.invMainModel.RemoveItemFromPotionActInv(charController, item);
-        }
+       
 
         public void CloseRightClickOpts()
         {
@@ -237,10 +202,54 @@ namespace Interactables
                 //RemoveItem(); 
             }
         }
+
+    
     }
 
 
 }
+//public void Add2Service(Iitems item)
+//{
+//    ItemData itemData = new ItemData(item.itemType, item.itemName);
+//    CharNames charName = InvService.Instance.charSelect;
+//    CharModel charModel = CharService.Instance.GetAllyCharModel(charName);
+//    switch (slotID)
+//    {
+//        case 0:
+//            charModel.potionSlot1 = itemData; break; 
+//        case 1:
+//            charModel.potionSlot2 = itemData; break;
+//        case 2:
+//            charModel.provisionSlot = itemData; break;
+//        default:
+//            break;
+//    }
+//}
+
+//#################################################
+
+// CODE TO STACK UP ON INV SLOT 
+//else   // Bu
+//{
+//    if (HasSameItem(item))  // SAME ITEM IN SLOT 
+//    {
+//        if (ItemsInSlot.Count < item.maxInvStackSize)  // SLOT STACK SIZE 
+//        {
+//            AddItemOnSlot(item);
+//            return true;
+//        }
+//        else
+//        {
+//            Debug.Log("Slot full");
+//            return false;
+//        }
+//    }
+//    else   // DIFF ITEM IN SLOT 
+//    {
+//        return false;
+//    }
+//}
+
 //public void RemoveItemFrmModelData()
 //{            
 //    CharNames charName = InvService.Instance.charSelect;

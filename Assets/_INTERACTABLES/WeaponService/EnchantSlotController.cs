@@ -242,6 +242,11 @@ namespace Interactables
                 PopulateRightClickList();
             }
         }
+
+        public void LoadSlot(Iitems item)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

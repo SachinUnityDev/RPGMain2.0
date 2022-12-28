@@ -20,15 +20,7 @@ namespace Interactables
                     draggedGO.GetComponent<RectTransform>().anchoredPosition
                         = gameObject.GetComponent<RectTransform>().anchoredPosition;
                 }
-
-
-
-                
-
-
             }
-
-
         }
 
        

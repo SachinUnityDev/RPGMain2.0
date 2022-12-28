@@ -12,7 +12,7 @@ namespace Interactables
         void Start()
         {
             nametxt = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-            InvService.Instance.OnCharSelectInPanel += PrintName; 
+            InvService.Instance.OnCharSelectInvPanel += PrintName; 
            
         }
 

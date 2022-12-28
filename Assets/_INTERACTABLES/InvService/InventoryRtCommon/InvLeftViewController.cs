@@ -28,7 +28,7 @@ namespace Interactables
             invRightViewController = transform.GetChild(0).GetComponent<InvRightViewController>();
             levelViewController = transform.GetChild(1).GetComponent<LevelViewController>();
             btmCharViewController = transform.GetChild(2).GetComponent<BtmCharViewController>();
-            InvService.Instance.OnCharSelectInPanel += OnCharSelected; 
+            InvService.Instance.OnCharSelectInvPanel += OnCharSelected; 
         }
 
         public void OnCharSelected(CharModel charModel)

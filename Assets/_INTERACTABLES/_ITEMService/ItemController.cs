@@ -19,8 +19,8 @@ namespace Interactables
         public CharController charController; 
         public ItemModel itemModel;
 
-        public List<Iitems> itemsInPotionActiveInv = new List<Iitems>();
-        public List<Iitems> itemInGewgawActiveInv = new List<Iitems>();
+        //public List<Iitems> itemsInPotionActiveInv = new List<Iitems>();
+        //public List<Iitems> itemInGewgawActiveInv = new List<Iitems>();
 
         public List<ScrollReadData> allScrollRead= new List<ScrollReadData>();
 

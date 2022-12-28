@@ -25,7 +25,7 @@ namespace Interactables
             desc = transform.GetChild(2).gameObject;
             desc.SetActive(false);
         
-            InvService.Instance.OnCharSelectInPanel += PopulateData;
+            InvService.Instance.OnCharSelectInvPanel += PopulateData;
             PanelTrans = transform.parent;
 
             // need to check if needed

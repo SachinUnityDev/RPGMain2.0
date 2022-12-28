@@ -18,7 +18,7 @@ namespace Interactables
         public SlotType slotType => SlotType.PotionsActiveInv;
 
         [Header("Daddy")]
-        public ActivInvPotionViewController activInvPotionViewController;
+        public PotionViewControllerParent activInvPotionViewController;
 
 
         [Header("FOR DROP CONTROLS")]
@@ -39,7 +39,8 @@ namespace Interactables
                     InvService.Instance.On_DragResult(isDropSuccess, itemsDragDrop);
                 else
                 {
-                    Add2Service(itemsDragDrop.itemDragged); 
+                    //Add2Service(itemsDragDrop.itemDragged); 
+                    Add2InvMainModel(itemsDragDrop.itemDragged);
                     InvService.Instance.On_DragResult(isDropSuccess, itemsDragDrop);
                     Destroy(draggedGO);
                 }
@@ -51,42 +52,32 @@ namespace Interactables
             slotID = transform.GetSiblingIndex();
             isRightClicked = false;
             InvService.Instance.invViewController.CloseRightClickOpts();
-            activInvPotionViewController = transform.parent.GetComponent<ActivInvPotionViewController>();
+            activInvPotionViewController = transform.parent.GetComponent<PotionViewControllerParent>();
         }
-        public void Add2Service(Iitems item)
-        {
-            ItemData itemData = new ItemData(item.itemType, item.itemName);
-            CharNames charName = InvService.Instance.charSelect;
-            CharModel charModel = CharService.Instance.GetAllyCharModel(charName);
-            switch (slotID)
-            {
-                case 0:
-                    charModel.potionSlot1 = itemData; break; 
-                case 1:
-                    charModel.potionSlot2 = itemData; break;
-                case 2:
-                    charModel.provisionSlot = itemData; break;
-                default:
-                    break;
-            }
-        }
-        public void RemoveItemFrmModelData()
-        {            
-            CharNames charName = InvService.Instance.charSelect;
-            CharModel charModel = CharService.Instance.GetAllyCharModel(charName);
-            switch (slotID)
-            {
-                case 0:
-                    charModel.potionSlot1 = null; break;
-                case 1:
-                    charModel.potionSlot2 = null; break;
-                case 2:
-                    charModel.provisionSlot = null; break;
-                default:
-                    break;
-            }
 
+
+        public void Add2InvMainModel(Iitems item)
+        {
+            InvService.Instance.invMainModel.AddItem2PotionActInv(item, slotID);
         }
+        //public void Add2Service(Iitems item)
+        //{
+        //    ItemData itemData = new ItemData(item.itemType, item.itemName);
+        //    CharNames charName = InvService.Instance.charSelect;
+        //    CharModel charModel = CharService.Instance.GetAllyCharModel(charName);
+        //    switch (slotID)
+        //    {
+        //        case 0:
+        //            charModel.potionSlot1 = itemData; break; 
+        //        case 1:
+        //            charModel.potionSlot2 = itemData; break;
+        //        case 2:
+        //            charModel.provisionSlot = itemData; break;
+        //        default:
+        //            break;
+        //    }
+        //}
+
         public void ClearSlot()
         {
             ItemsInSlot.Clear();
@@ -121,7 +112,7 @@ namespace Interactables
         public bool AddItem(Iitems item)
         {
             CharNames charName = InvService.Instance.charSelect;           
-            InvData invData = new InvData(charName, item);
+           // InvData invData = new InvData(charName, item);
 
             if(item.itemType != ItemType.Potions || ItemsInSlot.Count > 0)
             {
@@ -181,12 +172,10 @@ namespace Interactables
             else if (IsEmpty())  // After Item is removed
             {
                 ClearSlot();
-            }
-          
+            }          
             RefreshSlotTxt();
-            RemoveItemFrmModelData();
+            RemoveFrmInvMainModel(item); 
         }
-
         void RefreshImg(Iitems item)
         {
             for (int i = 0; i < gameObject.transform.GetChild(0).childCount - 1; i++)
@@ -224,6 +213,12 @@ namespace Interactables
             return null;
         }
 
+        void RemoveFrmInvMainModel(Iitems item)
+        {
+            CharController charController = InvService.Instance.charSelectController;
+            InvService.Instance.invMainModel.RemoveItemFromPotionActInv(charController, item);
+        }
+
         public void CloseRightClickOpts()
         {
             if (isRightClicked)
@@ -246,3 +241,20 @@ namespace Interactables
 
 
 }
+//public void RemoveItemFrmModelData()
+//{            
+//    CharNames charName = InvService.Instance.charSelect;
+//    CharModel charModel = CharService.Instance.GetAllyCharModel(charName);
+//    switch (slotID)
+//    {
+//        case 0:
+//            charModel.potionSlot1 = null; break;
+//        case 1:
+//            charModel.potionSlot2 = null; break;
+//        case 2:
+//            charModel.provisionSlot = null; break;
+//        default:
+//            break;
+//    }
+
+//}

@@ -20,7 +20,6 @@ namespace Interactables
 
         [SerializeField] ItemFactory itemFactory;    
 
-
         public ItemCardViewController cardViewController;
 
 #region SO LIST REFERNCES 
@@ -232,19 +231,23 @@ namespace Interactables
         public void InitItemToInv(SlotType slotType, ItemType itemType, int itemName,
                                      CauseType causeType, int causeID, GenGewgawQ gQuality = GenGewgawQ.None)
         {
-           
-            if(gQuality == GenGewgawQ.None)  //Items apart from genGewgaw
+            if(slotType == SlotType.CommonInv)
             {
-                Iitems iitems = itemFactory.GetNewItem(itemType, itemName);
-                iitems.invSlotType = slotType;
-                InvService.Instance.invMainModel.AddItem2CommInv(iitems);
+                if (gQuality == GenGewgawQ.None)  //Items apart from genGewgaw
+                {
+                    Iitems iitems = itemFactory.GetNewItem(itemType, itemName);
+                    iitems.invSlotType = slotType;
+                    InvService.Instance.invMainModel.AddItem2CommInv(iitems);
+                }
+                else  //  its a Generic gewgaw
+                {
+                    Iitems iitems = itemFactory.GetNewGenGewgaw((GenGewgawNames)itemName, gQuality);
+                    iitems.invSlotType = slotType;
+                    InvService.Instance.invMainModel.AddItem2CommInv(iitems);
+                }
             }
-            else  //  its a Generic gewgaw
-            {
-                Iitems iitems = itemFactory.GetNewGenGewgaw((GenGewgawNames)itemName, gQuality);
-                iitems.invSlotType = slotType;
-                InvService.Instance.invMainModel.AddItem2CommInv(iitems);
-            }
+            
+
         }
         #region GET ITEM CONTROLLERS AND MODELS
         public ItemController GetItemController(CharNames charName)

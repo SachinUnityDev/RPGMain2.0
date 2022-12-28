@@ -28,7 +28,7 @@ namespace Interactables
             //    attribPanelViewComp.transform.parent.parent
             //                    .GetChild(2).GetComponent<BtmCharViewController>();
 
-            InvService.Instance.OnCharSelectInPanel += PopulateData;
+            InvService.Instance.OnCharSelectInvPanel += PopulateData;
 
 
             // init on town init 

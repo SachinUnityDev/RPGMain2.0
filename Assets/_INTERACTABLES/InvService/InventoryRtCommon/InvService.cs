@@ -13,7 +13,7 @@ namespace Interactables
         public int MAX_SIZE_COMM_INV = 0; 
 
         public event Action<bool, ItemsDragDrop> OnDragResult;
-        public event Action<CharModel> OnCharSelectInPanel;       // int here is charID 
+        public event Action<CharModel> OnCharSelectInvPanel;       // int here is charID 
         public CharNames charSelect;
         public CharController charSelectController; 
 
@@ -53,7 +53,7 @@ namespace Interactables
         {
             charSelect = charModel.charName;
             charSelectController = CharService.Instance.GetCharCtrlWithName(charModel.charName);
-            OnCharSelectInPanel?.Invoke(charModel);
+            OnCharSelectInvPanel?.Invoke(charModel);
         }
 
 

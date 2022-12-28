@@ -12,7 +12,7 @@ namespace Interactables
      
         void Start()
         {
-            InvService.Instance.OnCharSelectInPanel += PopulateArmorPanel;
+            InvService.Instance.OnCharSelectInvPanel += PopulateArmorPanel;
             UnLoad();
         }
         void OnEnable()

@@ -20,8 +20,23 @@ namespace Interactables
     }
 
     [System.Serializable]
+    public class ActiveInvData
+    {
+        public CharNames CharName; 
+        public List<Iitems> potionActivInv = new List<Iitems>();
+        public List<Iitems> gewgawActivInv = new List<Iitems>();
+
+        public ActiveInvData(CharNames charName)
+        {
+            CharName = charName;
+        }
+    }
+
+    [System.Serializable]
     public class InvMainModel 
     {
+        #region DECLARATIONS
+
         public List<Iitems> commonInvItems = new List<Iitems>();
         // Abbas 3 X 6,  each added Companion has 2X6 (Locked)(Town, QuestPrepPhase, in camp, in MapInteraction)
         //public List<Iitems> persCommInvItems = new List<Iitems>(); 
@@ -30,26 +45,27 @@ namespace Interactables
         // 6 X 6 behaves like a common Inventory (Open Town/House) 
 
         public List<Iitems> excessInvItems = new List<Iitems>();
-        // 4X6 Behaves like a Excess Inv inv ()        
+        // 4X6 Behaves like a Excess Inv inv ()       
 
-        public List<InvData> potionActivInv = new List<InvData>();
-        public List<InvData> gewgawActivInv = new List<InvData>();
+        public List<ActiveInvData> allActiveInvData = new List<ActiveInvData>();
+
+        #endregion 
 
         #region COMMON INV
         public bool AddItem2CommInv(Iitems item)   // KEY POINT OF ADDITION OF ITEM // Add to model => view
         {          
-                if (!InvService.Instance.IsCommInvFull())
-                {
-                    item.invSlotType = SlotType.CommonInv;
-                    commonInvItems.Add(item);
-                    InvService.Instance.invViewController.AddItem2InVView(item);
-                    return true;
-                }
-                else
-                {
-                    Debug.Log("Inv Size is full");
-                    return false;
-                }         
+            if (!InvService.Instance.IsCommInvFull())
+            {
+                item.invSlotType = SlotType.CommonInv;
+                commonInvItems.Add(item);
+                InvService.Instance.invViewController.AddItem2InVView(item);
+                return true;
+            }
+            else
+            {
+                Debug.Log("Inv Size is full");
+                return false;
+            }         
         }
 
         public bool RemoveItem2CommInv(Iitems item) // view=> model 
@@ -59,44 +75,97 @@ namespace Interactables
         }
         #endregion
 
+        #region  ACTIVE INV POTION  
 
-        #region  ACTIVE INV 
 
-        public bool AddItem2PotionActInv(Iitems item)
+        public void AddItem2PotionActInv(Iitems item, int slotID) // key point of addition
+                                                                  // SAVE and LOAD Active slot here
         {
+            CharController charController = InvService.Instance.charSelectController;
+            charController.charModel.AddItemToPotionSlot(item, slotID);
+            CharNames charName = charController.charModel.charName;
 
+            ActiveInvData activeInvData = allActiveInvData.Find(t => t.CharName == charName); 
+            if(activeInvData != null)
+            {
+                activeInvData.potionActivInv.Add(item);
+            }
+            else
+            {
+                ActiveInvData activeInvDataNew = new ActiveInvData(charName);
+                activeInvDataNew.potionActivInv.Add(item);
+                allActiveInvData.Add(activeInvDataNew); 
+            }
 
-            return false; 
+            InvService.Instance.invViewController
+                .potionActiveInvPanel.GetComponent<PotionViewControllerParent>()
+                .AddItemtoActiveSlot(item, slotID); 
+
         }
-        public bool RemoveItem2ActInv(Iitems Item)
+        public bool RemoveItemFromPotionActInv(CharController charController, Iitems Item)
         {
+            CharNames charName = charController.charModel.charName;
 
+            ActiveInvData activeInvData = allActiveInvData.Find(t => t.CharName == charName);
+            if(activeInvData != null)
+            {
+                activeInvData.potionActivInv.Remove(Item); 
+            }
+            else
+            {
+                Debug.Log("char active slot data not found"); 
+            }
+            // remove from char
             return false; 
         }
 
         #endregion
 
+        #region  ACTIVE INV GEWGAWS  
 
 
+        public void AddItem2GewgawsActInv(Iitems item, int slotID) // key point of addition
+                                                                  // SAVE and LOAD Active slot here
+        {
+            CharController charController = InvService.Instance.charSelectController;
+            charController.charModel.AddItemToPotionSlot(item, slotID);
+            CharNames charName = charController.charModel.charName;
 
+            ActiveInvData activeInvData = allActiveInvData.Find(t => t.CharName == charName);
+            if (activeInvData != null)
+            {
+                activeInvData.gewgawActivInv.Add(item); 
+            }
+            else
+            {
+                ActiveInvData activeInvDataNew = new ActiveInvData(charName);
+                activeInvDataNew.gewgawActivInv.Add(item);
+                allActiveInvData.Add(activeInvData);
+            }
 
+            InvService.Instance.invViewController
+                .potionActiveInvPanel.GetComponent<GewgawSlotViewControllerParent>()
+                .AddItemtoActiveSlot(item, slotID);
 
+        }
+        public bool RemoveItemFromGewgawActInv(CharController charController, Iitems Item)
+        {
+            CharNames charName = charController.charModel.charName;
 
+            ActiveInvData activeInvData = allActiveInvData.Find(t => t.CharName == charName);
+            if (activeInvData != null)
+            {
+                activeInvData.gewgawActivInv.Remove(Item);
+            }
+            else
+            {
+                Debug.Log("char active slot data not found");
+            }
+            // remove from char
+            return false;
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        #endregion
 
 
 

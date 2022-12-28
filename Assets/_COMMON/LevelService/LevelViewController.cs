@@ -50,7 +50,7 @@ namespace Common
             btmCharViewController = 
             transform.parent.GetChild(2).GetComponent<BtmCharViewController>(); 
            
-            InvService.Instance.OnCharSelectInPanel += PopulateOptionPendingList;
+            InvService.Instance.OnCharSelectInvPanel += PopulateOptionPendingList;
 
             lvlUpBtn.onClick.AddListener(OnLevelUpBtnPressed);
             opt1Btn.onClick.AddListener(OnOptBtn1Pressed);

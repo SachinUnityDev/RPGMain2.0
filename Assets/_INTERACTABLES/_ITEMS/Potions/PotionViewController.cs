@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 namespace Interactables
 {
-    public class PotionViewController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class PotionViewController : MonoBehaviour
     {
 
         // Potions card control on hovering upon the inventory or Combat 
@@ -23,23 +23,23 @@ namespace Interactables
 
 
 
-        public void OnPointerClick(PointerEventData eventData)
-        {
-        }
+        //public void OnPointerClick(PointerEventData eventData)
+        //{
+        //}
 
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-        }
+        //public void OnPointerEnter(PointerEventData eventData)
+        //{
+        //}
 
-        public void OnPointerExit(PointerEventData eventData)
-        {
-        }
+        //public void OnPointerExit(PointerEventData eventData)
+        //{
+        //}
 
 
-        void Start()
-        {
+        //void Start()
+        //{
 
-        }
+        //}
 
      
     }

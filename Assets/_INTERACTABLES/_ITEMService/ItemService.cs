@@ -29,6 +29,9 @@ namespace Interactables
         [Header("All sagaic Gewgaws SO ")]
         public List<SagaicGewgawSO> sagaicGewgawSOs = new List<SagaicGewgawSO>();
 
+        [Header("All Poetic Gewgaw SO")]
+        public List<PoeticGewgawSO> allPoeticGewgawSO = new List<PoeticGewgawSO>(); 
+
         [Header("All Potions SO")]
         public List<PotionSO> allPotionSO = new List<PotionSO>();
 
@@ -149,6 +152,16 @@ namespace Interactables
                 Debug.Log(genGewgawName+ "genGewGaw SO  not found");
             return null;
         }
+        public PoeticGewgawSO GetPoeticGewgawSO(PoeticGewgawNames poeticGewgawName)
+        {
+            PoeticGewgawSO poeticGewgawSO = allPoeticGewgawSO.Find(t => t.poeticGewgawName == poeticGewgawName);
+            if (poeticGewgawSO != null)
+                return poeticGewgawSO;
+            else
+                Debug.Log(poeticGewgawName + "poeticGewgawSO   not found");
+            return null;
+        }
+
         public FoodSO GetFoodSO(FoodNames foodName)
         {
             FoodSO foodSO = allFoodSO.Find(t => t.foodName == foodName);

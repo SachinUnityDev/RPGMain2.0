@@ -200,7 +200,11 @@ namespace Interactables
 
         public void LoadSlot(Iitems item)
         {
-            throw new NotImplementedException();
+            if (ItemsInSlot.Count > 1)
+                return;
+            item.invSlotType = SlotType.GewgawsActiveInv;
+            ItemsInSlot.Add(item);
+            RefreshImg(item);
         }
     }
 }

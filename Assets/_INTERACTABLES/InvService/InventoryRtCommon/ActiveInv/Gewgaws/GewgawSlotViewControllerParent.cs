@@ -31,9 +31,11 @@ namespace Interactables
         public Iitems item2; 
         public Iitems item3;
 
-
+        public SlotType slotType1;
+        public SlotType slotType2;
+        public SlotType slotType3;
         // get and set items
-      //  public List<Iitems> allPotionActiveInvList = new List<Iitems>();
+        //  public List<Iitems> allPotionActiveInvList = new List<Iitems>();
 
         public Transform rightClickOpts;
 
@@ -51,28 +53,51 @@ namespace Interactables
             slotNum = transform.GetSiblingIndex();
         }
 
-        void SlotRule()
+        bool SlotRuleCheck()
         {
+            //get SO and thereby figure out the
 
 
-
+            return false; 
         }
-
+        GewgawSlotType GetSlotType(Iitems item)
+        {
+            if (item.itemType == ItemType.GenGewgaws)
+            {
+                GenGewgawSO gengewgawSO =
+                    ItemService.Instance.GetGenGewgawSO((GenGewgawNames)item.itemName);
+                GewgawSlotType slotType = gengewgawSO.gewgawSlotType;
+                return slotType;
+            }
+            if(item.itemType == ItemType.SagaicGewgaws)
+            {
+                SagaicGewgawSO sagaicSO = 
+                    ItemService.Instance.GetSagaicGewgawSO((SagaicGewgawNames)item.itemName);
+                GewgawSlotType slotType = sagaicSO.gewgawSlotType;
+                return slotType;
+            }
+            if (item.itemType == ItemType.PoeticGewgaws)
+            {
+                PoeticGewgawSO poeticSO =
+                    ItemService.Instance.GetPoeticGewgawSO((PoeticGewgawNames)(item.itemName));                    
+                GewgawSlotType slotType = poeticSO.gewgawSlotType;
+                return slotType;
+            }
+            return 0; 
+        }
 
         void LoadActiveInvSlots(CharModel charModel)
         {
-
             ClearInv();
-
             CharController charController = InvService.Instance.charSelectController;
             if (charController == null) return;
             ActiveInvData activeInvData = InvService.Instance.invMainModel
                                             .GetActiveInvData(charController.charModel.charName);
             if (activeInvData == null) return;
-            for (int i = 0; i < activeInvData.potionActivInv.Count; i++)
+            for (int i = 0; i < activeInvData.gewgawActivInv.Count; i++)
             {
                 Transform child = transform.GetChild(i);
-                child.gameObject.GetComponent<iSlotable>().LoadSlot(activeInvData.potionActivInv[i]);
+                child.gameObject.GetComponent<iSlotable>().LoadSlot(activeInvData.gewgawActivInv[i]);
             }
         }
 

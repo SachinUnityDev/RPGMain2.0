@@ -149,9 +149,7 @@ namespace Interactables
                 return true;
         }
         public bool AddItem(Iitems item)
-        {
-            //CharNames charName = InvService.Instance.charSelect;                
-            // InvData invData = new InvData(charName, item); 
+        {         
             if (IsEmpty())
             {
                 AddItemOnSlot(item);
@@ -182,7 +180,6 @@ namespace Interactables
         {
             item.invSlotType = SlotType.CommonInv;
             ItemsInSlot.Add(item);
-
             InvService.Instance.invMainModel.commonInvItems.Add(item);
 
             RefreshImg(item);
@@ -378,39 +375,35 @@ namespace Interactables
         public void Equip()
         {
             IEquipAble iEquip = ItemsInSlot[0] as IEquipAble;
-            iEquip.ApplyEquipableFX();
+           
+            CharController charController = InvService.Instance.charSelectController;
+            ItemData itemData = new ItemData(ItemsInSlot[0].itemType
+                                                , ItemsInSlot[0].itemName);
             if (ItemsInSlot[0].itemType == ItemType.Potions)
             {
-                CharController charController = InvService.Instance.charSelectController;
-                ItemData itemData = new ItemData(ItemsInSlot[0].itemType
-                                                    , ItemsInSlot[0].itemName);
-
-                PotionViewControllerParent parentView =  InvService.Instance.invViewController.potionActiveInvPanel
-                                                        .GetComponent<PotionViewControllerParent>();
+                PotionViewControllerParent parentView =  InvService.Instance.invViewController
+                                            .potionActiveInvPanel.GetComponent<PotionViewControllerParent>();
 
                 if (parentView.Equip2PotionSlot(ItemsInSlot[0]))
                 {// equiped to a slot 
-                    
+                    iEquip.ApplyEquipableFX();
                     RemoveItem(); 
                 }
-
-                //if(charController.charModel.potionSlot1 == null)
-                //{
-                //    charController.charModel.potionSlot1 = itemData;
-
-
-                //}else if (charController.charModel.potionSlot2 == null)
-                //{
-
-                //}
-                //else
-                //{
-
-
-                //}
-                
+               
             }
+            if (ItemsInSlot[0].itemType == ItemType.GenGewgaws 
+                || ItemsInSlot[0].itemType == ItemType.SagaicGewgaws 
+                || ItemsInSlot[0].itemType == ItemType.PoeticGewgaws)
+            {
+                GewgawSlotViewControllerParent parentView = InvService.Instance.invViewController
+                                            .gewgawsActiveInvPanel.GetComponent<GewgawSlotViewControllerParent>();
 
+                if (parentView.Equip2GewgawSlot(ItemsInSlot[0]))
+                {// equiped to a slot 
+
+                    RemoveItem();
+                }
+            }
 
 
         }

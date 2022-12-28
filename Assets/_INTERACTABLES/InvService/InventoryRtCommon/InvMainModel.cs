@@ -108,11 +108,6 @@ namespace Interactables
                 activeInvDataNew.potionCount++; 
                 allActiveInvData.Add(activeInvDataNew); 
             }
-
-            //InvService.Instance.invViewController
-            //    .potionActiveInvPanel.GetComponent<PotionViewControllerParent>()
-            //    .AddItemtoActiveSlotView(item, slotID); 
-
         }
         public bool RemoveItemFromPotionActInv( Iitems Item)
         {
@@ -132,14 +127,9 @@ namespace Interactables
             // remove from char
             return false; 
         }
-
-       
-
         #endregion
 
         #region  ACTIVE INV GEWGAWS  
-
-
         public void AddItem2GewgawsActInv(Iitems item, int slotID) // key point of addition
                                                                   // SAVE and LOAD Active slot here
         {
@@ -157,11 +147,6 @@ namespace Interactables
                 activeInvDataNew.gewgawActivInv.Add(item);
                 allActiveInvData.Add(activeInvData);
             }
-
-            InvService.Instance.invViewController
-                .potionActiveInvPanel.GetComponent<GewgawSlotViewControllerParent>()
-                .AddItemtoActiveSlot(item, slotID);
-
         }
         public bool RemoveItemFromGewgawActInv(CharController charController, Iitems Item)
         {

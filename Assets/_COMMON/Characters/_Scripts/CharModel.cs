@@ -77,8 +77,8 @@ namespace Common
         public List<ItemData> provisionItems = new List<ItemData>();
 
         [Header("ACTIVE INV POTIONS")]
-        public ItemData beltSlot1;
-        public ItemData beltSlot2;
+        public ItemData potionSlot1;
+        public ItemData potionSlot2;
         public ItemData provisionSlot;
 
         [Header("ACTIVE INV GEWGAWS")]
@@ -143,7 +143,56 @@ namespace Common
 
         [Header("Stats")]
         public List<StatData> statsList = new List<StatData>();
-      
+
+        public float GetDeltaRatio()
+        {
+            List<LvlExpData> allLvlExpData =
+                    CharService.Instance.lvlNExpSO.allLvlExpData;
+            float barRatio = 0f;
+            if (charLvl > 0)
+            {
+                int delta =
+                 allLvlExpData.Find(t => t.charLvl == (charLvl + 1)).deltaExpPts;
+                int expPts = allLvlExpData.Find(t => t.charLvl == charLvl).totalExpPts;
+                barRatio = (float)Mathf.Abs(expPoints - expPts) / delta;
+            }
+            return barRatio;
+        }
+
+        #region ACTIVE INV SLOT
+        public void AddItemToPotionSlot(Iitems item, int slotID)
+        {
+            ItemData itemData = new ItemData(item.itemType, item.itemName);
+            if (slotID == 0)
+            {
+                potionSlot1 = itemData;
+            }else if (slotID == 1)
+            {
+                potionSlot2 = itemData; 
+            }else if (slotID == 2)
+            {
+                provisionSlot = itemData; 
+            }            
+        }
+        public void RemoveItmFrmPotionSlot(int slotID)
+        {          
+            if (slotID == 0)
+            {
+                potionSlot1 = null; 
+            }
+            else if (slotID == 1)
+            {
+                potionSlot2 = null;
+            }
+            else if (slotID == 2)
+            {
+                provisionSlot = null;
+            }
+        }
+
+        #endregion 
+
+        #region SAVE AND LOAD 
         public void SaveModel()
         {
            string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelect.ToString()
@@ -165,20 +214,10 @@ namespace Common
             
         }
 
-        public float GetDeltaRatio()
-        {
-            List<LvlExpData> allLvlExpData = 
-                    CharService.Instance.lvlNExpSO.allLvlExpData;
-            float barRatio = 0f; 
-            if(charLvl > 0)
-            {
-                int delta =
-                 allLvlExpData.Find(t => t.charLvl == (charLvl + 1)).deltaExpPts;
-                int expPts = allLvlExpData.Find(t => t.charLvl == charLvl).totalExpPts;
-                barRatio = (float)Mathf.Abs(expPoints - expPts) / delta;
-            }        
-            return barRatio; 
-        }
+        #endregion  
+
+        #region  CHARMODEL INIT FROM SO 
+
         public CharModel(CharacterSO _charSO)
         {
 
@@ -268,7 +307,7 @@ namespace Common
                 statsList.Add(statdata);
             }
         }
-
+        #endregion
 
     }
 }

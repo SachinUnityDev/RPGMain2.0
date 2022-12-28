@@ -182,10 +182,10 @@ namespace Interactables
                 switch (i)
                 {
                     case 0:
-                       itemData = charModel.beltSlot1;
+                       itemData = charModel.potionSlot1;
                         break;
                     case 1:
-                        itemData = charModel.beltSlot2;
+                        itemData = charModel.potionSlot2;
                         break;
                     case 2:
                         itemData = charModel.provisionSlot;

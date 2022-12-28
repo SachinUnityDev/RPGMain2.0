@@ -10,7 +10,8 @@ using Common;
 
 namespace Interactables
 {
-    public class PotionSlotViewController : MonoBehaviour, IDropHandler, IPointerClickHandler, iSlotable
+    public class PotionSlotViewController : MonoBehaviour, IDropHandler
+                                                , IPointerClickHandler, iSlotable
     {
         public int slotID { get; set; }
         public List<Iitems> ItemsInSlot { get; set; } = new List<Iitems>();
@@ -60,9 +61,9 @@ namespace Interactables
             switch (slotID)
             {
                 case 0:
-                    charModel.beltSlot1 = itemData; break; 
+                    charModel.potionSlot1 = itemData; break; 
                 case 1:
-                    charModel.beltSlot2 = itemData; break;
+                    charModel.potionSlot2 = itemData; break;
                 case 2:
                     charModel.provisionSlot = itemData; break;
                 default:
@@ -76,9 +77,9 @@ namespace Interactables
             switch (slotID)
             {
                 case 0:
-                    charModel.beltSlot1 = null; break;
+                    charModel.potionSlot1 = null; break;
                 case 1:
-                    charModel.beltSlot2 = null; break;
+                    charModel.potionSlot2 = null; break;
                 case 2:
                     charModel.provisionSlot = null; break;
                 default:

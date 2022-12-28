@@ -148,7 +148,11 @@ namespace Interactables
         #region  GEWGAW ACTIONS 
         public void OnGewgawEquip()
         {
+            CharController charController = InvService.Instance.charSelectController; 
+            
+            // remove gew gaw from the inv slot 
 
+            // add to active gewslot of the char Select in the inv 
 
         }
 

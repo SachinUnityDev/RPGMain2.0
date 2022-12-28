@@ -14,7 +14,6 @@ namespace Interactables
 
         public List<ItemController> allItemControllers = new List<ItemController>();        
         public List<Iitems> allItemsInGame = new List<Iitems>();
-            
 
         [Header("Curr CharSelected")]
         public CharController selectChar; 
@@ -274,8 +273,8 @@ namespace Interactables
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.AmetystRing,
-                                     CauseType.Items, 2, GenGewgawQ.Epic); 
+                InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionNames.HealthPotion,
+                                     CauseType.Items,2); 
         
             }
         }

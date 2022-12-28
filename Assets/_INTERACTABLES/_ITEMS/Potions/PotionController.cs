@@ -12,39 +12,39 @@ namespace Interactables
         // check on Potions addictions 
         // max world instance 
         // set world instance
-        CharController charController;
-        public int netPotionAddictChance =0; 
+//        CharController charController;
+//        public int netPotionAddictChance =0; 
         
 
-        void Start()
-        {
+//        void Start()
+//        {
           
-        }
+//        }
 
 
-#region POTION ADDICT
-        public float GetPotionAddictChance(PotionNames potionName)
-        {
-            PotionSO potionSO = PotionService.Instance.GetPotionModelSO(potionName);
-            float chance = potionSO.potionAddict;
-            return chance; 
-        }
+//#region POTION ADDICT
+//        public float GetPotionAddictChance(PotionNames potionName)
+//        {
+//            PotionSO potionSO = PotionService.Instance.GetPotionModelSO(potionName);
+//            float chance = potionSO.potionAddict;
+//            return chance; 
+//        }
 
  
 
-        public bool PotionAddictCheck()
-        {
+//        public bool PotionAddictCheck()
+//        {
             
 
-            return false; 
-        }
+//            return false; 
+//        }
 
-        public void ApplyPotionAddict()
-        {
+//        public void ApplyPotionAddict()
+//        {
 
 
-        }
-#endregion
+//        }
+//#endregion
 
 
 

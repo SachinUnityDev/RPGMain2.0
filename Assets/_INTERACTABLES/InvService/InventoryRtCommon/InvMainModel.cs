@@ -32,13 +32,12 @@ namespace Interactables
         public List<Iitems> excessInvItems = new List<Iitems>();
         // 4X6 Behaves like a Excess Inv inv ()        
 
-        public bool AddItem2CommInv(Iitems item)   // KEY POINT OF ADDITION OF ITEM 
-        {
-            //if (invData.charName == CharNames.Abbas_Skirmisher)
-            //{
-                // check 3 X 6 limitation  
-                //List<InvData> abbasInv = InvService.Instance.invMainModel.commonInvItems
-                //                            .Where(t => t.charName == invData.charName).ToList();
+        public List<InvData> potionActivInv = new List<InvData>();
+        public List<InvData> gewgawActivInv = new List<InvData>();
+
+        #region COMMON INV
+        public bool AddItem2CommInv(Iitems item)   // KEY POINT OF ADDITION OF ITEM // Add to model => view
+        {          
                 if (!InvService.Instance.IsCommInvFull())
                 {
                     item.invSlotType = SlotType.CommonInv;
@@ -50,29 +49,58 @@ namespace Interactables
                 {
                     Debug.Log("Inv Size is full");
                     return false;
-                }
-           // }
-            //else
-            //{
-            //    List<InvData> charInv = commonInvItems
-            //                            .Where(t => t.charName == invData.charName).ToList();
-
-            //    if (InvService.Instance.IsCommInvFull())
-            //    {
-            //        commonInvItems.Add(invData);
-            //        InvService.Instance.invViewController.AddItem2InVView(invData.item);
-            //        return true;
-            //    }
-            //}
-            //return false;
+                }         
         }
 
-        public bool RemoveItem2CommInv(Iitems item)
+        public bool RemoveItem2CommInv(Iitems item) // view=> model 
         {
             commonInvItems.Remove(item);
             return true;
         }
+        #endregion
 
+
+        #region  ACTIVE INV 
+
+        public bool AddItem2PotionActInv(Iitems item)
+        {
+
+
+            return false; 
+        }
+        public bool RemoveItem2ActInv(Iitems Item)
+        {
+
+            return false; 
+        }
+
+        #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #region STASH
         public void MoveItems2Stash(CharNames charName)
         {
             foreach (InvData invData in commonInvItems)
@@ -81,15 +109,20 @@ namespace Interactables
             }
         }
 
+        #endregion
+
+
+
+
+        #region EXCESS INV
         public bool AddItem2Excess(Iitems item)
         {
-
             item.invSlotType = SlotType.ExcessInv;
             excessInvItems.Add(item);
             // excess inv drag and drop can be opened whereever inv is open
             return false;
         }
-
+        #endregion 
         //
         // TO DO : 
         // update this with every addition and deletion and 

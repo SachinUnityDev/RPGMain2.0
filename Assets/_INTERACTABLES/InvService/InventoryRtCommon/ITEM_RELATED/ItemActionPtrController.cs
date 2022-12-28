@@ -43,7 +43,9 @@ namespace Interactables
                     break;                
                 default:
                     break;
-            }        
+            }
+            InvService.Instance.invViewController.CloseRightClickOpts();
+
         }
 
         public void OnPointerEnter(PointerEventData eventData)

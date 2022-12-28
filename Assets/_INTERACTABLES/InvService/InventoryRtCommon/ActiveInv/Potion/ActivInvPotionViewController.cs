@@ -1,5 +1,6 @@
 using Common;
 using DG.Tweening;
+using Spine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,16 +12,11 @@ namespace Interactables
 {
     public class ActivInvPotionViewController : MonoBehaviour
     {
-
-        // 2 belts slots and provision slots to be populated as per charsselect In Main inv 
-        // on drop fail eveent to be linked here 
-
-
         [Header("Canvas Not to be ref")]
         [SerializeField] Canvas canvas;
 
         [SerializeField] CharNames charSelect;
-
+        [SerializeField] int slotNum; 
         // get and set items
         public List<Iitems> allPotionActiveInvList = new List<Iitems>();
 
@@ -30,6 +26,7 @@ namespace Interactables
         {
             canvas = FindObjectOfType<Canvas>();
             InvService.Instance.OnDragResult += OnDragResult2PotionActiveInv;
+            slotNum = transform.GetSiblingIndex();
         }
 
         public void Init()
@@ -71,45 +68,33 @@ namespace Interactables
 
         public void LoadActiveInvPotions()
         {
-           // 
+           
         }
         
         public void InitActiveInvPotions()
         {
-            ClearInv();
-
-            // go to each of the belts as per the char Select
+            ClearInv();            
             charSelect = InvService.Instance.charSelect;
-            CharModel charModel = CharService.Instance.GetAllyCharModel(charSelect);           
-            InitPotion2ActiveInvSlot(charModel.beltSlot1, 0);
-            InitPotion2ActiveInvSlot(charModel.beltSlot2, 1);
-            InitPotion2ActiveInvSlot(charModel.provisionSlot, 2);
+            CharModel charModel = CharService.Instance.GetAllyCharModel(charSelect);
+            ItemController itemController = ItemService.Instance
+                                                .GetItemController(charModel.charName);
+            for (int i = 0; i < itemController.itemInGewgawActiveInv.Count; i++)
+            {
+                InitItemtoActiveSlot(itemController.itemInGewgawActiveInv[i], i); 
+            }         
         }
-
-        public bool InitPotion2ActiveInvSlot(ItemData itemData, int slotID)  // ACTUAL ADDITION 
+        bool InitItemtoActiveSlot(Iitems item,int slotID)
         {
             Transform child = transform.GetChild(slotID);
             iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
-            if (iSlotable.ItemsInSlot.Count > 0)
+            if (iSlotable.ItemsInSlot.Count == 0)
             {
-                Debug.Log("Slot already has item");  // swap
+                ItemService.Instance.InitItemToInv(SlotType.PotionsActiveInv
+                    , item.itemType, (int)item.itemName,CauseType.Items, 2);
+                return true; 
+            }
                 return false;
-            }
-            else
-            {
-
-                PotionsBase potionbase = PotionService.Instance
-                                        .GetPotionBase((PotionNames)(int)itemData.ItemName); 
-                
-                Iitems item = potionbase as Iitems;
-                InvData invData = new InvData(charSelect, item);
-                iSlotable.AddItem(item);                
-                return true;
-            }
         }
-
-
-
         void ClearInv()
         {
             allPotionActiveInvList.Clear();// local list
@@ -119,7 +104,8 @@ namespace Interactables
                 child.gameObject.GetComponent<iSlotable>().ClearSlot();
             }
         }
-  
+
+
 
         public void OnDragResult2PotionActiveInv(bool result, ItemsDragDrop itemsDragDrop)
         {
@@ -147,12 +133,6 @@ namespace Interactables
         public void UnLoad()
         {
         }
-
-
-
-
-
-
 
     }
 

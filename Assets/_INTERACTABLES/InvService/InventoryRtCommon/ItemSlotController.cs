@@ -7,6 +7,7 @@ using System;
 using TMPro;
 using System.Linq;
 using System.ComponentModel;
+using Common;
 
 namespace Interactables
 {
@@ -50,6 +51,7 @@ namespace Interactables
     public class ItemSlotController : MonoBehaviour, IDropHandler, IPointerClickHandler
                                       , iSlotable, IComInvActions
     {
+        #region DECLARATIONS
         public int slotID { get; set; }
         public List<Iitems> ItemsInSlot { get; set; } = new List<Iitems>();
         public SlotType slotType => SlotType.CommonInv;
@@ -97,6 +99,8 @@ namespace Interactables
                 }
             }
         }
+
+        #endregion
 
         private void Start()
         {
@@ -266,6 +270,12 @@ namespace Interactables
 
         void PopulateRightClickList()
         {
+            if (ItemsInSlot.Count == 0)
+            {
+                InvService.Instance.invViewController.CloseRightClickOpts();
+                return;
+            }
+            
             Iitems item = ItemsInSlot[0];
             if (isRightClicked)
             {
@@ -351,14 +361,37 @@ namespace Interactables
             // item type ..or slot type 
             return true;
         }
-
         public void Equip()
         {
             IEquipAble iEquip = ItemsInSlot[0] as IEquipAble;
-            iEquip.ApplyEquipableFX(); 
+            iEquip.ApplyEquipableFX();
+            if (ItemsInSlot[0].itemType == ItemType.Potions)
+            {
+                CharController charController = InvService.Instance.charSelectController;
+                ItemData itemData = new ItemData(ItemsInSlot[0].itemType
+                                                    , ItemsInSlot[0].itemName); 
+                if(charController.charModel.potionSlot1 == null)
+                {
+                    charController.charModel.potionSlot1 = itemData;
+
+
+                }else if (charController.charModel.potionSlot2 == null)
+                {
+
+                }
+                else
+                {
+
+
+                }
+                
+            }
+
 
 
         }
+
+
 
         public void Dispose()
         {

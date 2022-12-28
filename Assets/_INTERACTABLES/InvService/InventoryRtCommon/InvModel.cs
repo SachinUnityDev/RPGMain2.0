@@ -36,10 +36,6 @@ namespace Interactables
             charID = charModel.charID;
             charName = charModel.charName;
         }
-
-
-
-
        public int GetInvSize()
         {
             int charInPlay = CharService.Instance.allyInPlay.Count;

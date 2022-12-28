@@ -92,15 +92,15 @@ namespace Interactables
                     Debug.LogError("FALSE gewgaws created");
                     break;
                 case GenGewgawQ.Lyric:
-                    lyricPrefix.RemoveFXLyric(); 
-                    lyricSuffix.RemoveFXLyric();
+                    lyricPrefix?.RemoveFXLyric(); 
+                    lyricSuffix?.RemoveFXLyric();
                     break;
                 case GenGewgawQ.Folkloric:
-                    folkLoricPrefix.RemoveFXFolkloric();
-                    folkLoricSuffix.RemoveFXFolkloric();
+                    folkLoricPrefix?.RemoveFXFolkloric();
+                    folkLoricSuffix?.RemoveFXFolkloric();
                     break;
                 case GenGewgawQ.Epic:
-                    epicPrefix.RemoveFXEpic();
+                    epicPrefix?.RemoveFXEpic();
                     epicSuffix?.RemoveFXEpic();
                     break;
                 default:

@@ -9,126 +9,126 @@ namespace Interactables
     
     public class PotionService : MonoSingletonGeneric<PotionService>
     {
-        [Header("SOs")]
-        public List<PotionSO> allPotionSOs = new List<PotionSO>();
+    //    [Header("SOs")]
+    //    public List<PotionSO> allPotionSOs = new List<PotionSO>();
 
-        [SerializeField] PotionFactory potionFactory;
-        public PotionController allPotionController; 
+    //    [SerializeField] PotionFactory potionFactory;
+    //    public PotionController allPotionController; 
 
-        public List<PotionsBase> allPotionBase = new List<PotionsBase>();
-        public List<PotionModel> allPotionModel = new List<PotionModel>();
+    //    public List<PotionsBase> allPotionBase = new List<PotionsBase>();
+    //    public List<PotionModel> allPotionModel = new List<PotionModel>();
         
-        public CharController selectCharCtrl; 
+    //    public CharController selectCharCtrl; 
 
 
-        void Start()
-        {
+    //    void Start()
+    //    {
           
-        }
+    //    }
 
 
-        #region CHECKS 
+    //    #region CHECKS 
        
-        #endregion
+    //    #endregion
 
-        #region Getters
+    //    #region Getters
 
-        public PotionSO GetPotionModelSO(PotionNames potionName)
-        {
-            foreach (PotionSO potion in allPotionSOs)
-            {
-                if (potion.potionName == potionName)
-                {
-                    return potion;
-                }
-            }
-            Debug.Log("Char State Model Not found");
-            return null;
-        }
-        public PotionsBase GetPotionBase(PotionNames _potionName)
-        {
-            PotionsBase potionBase = allPotionBase.Find(t => t.potionName == _potionName);
-            if (potionBase != null)
-                            return potionBase;
-            else
-            {
-                Debug.Log("POTION BASE NEW CREATED");
-                PotionsBase potionBaseNew = potionFactory.GetPotionBase(_potionName);
-                return potionBaseNew;
-            }            
-        }
-        public PotionModel GetPotionModel(PotionNames _potionName)
-        {
-            PotionModel potionModel = allPotionModel.Find(t => t.potionName == _potionName);
-            if (potionModel != null)
-                return potionModel;
-            else
-                Debug.Log("POTION MODEL NOT FOUND");
-            return null;
-        }
-        #endregion
-
-
-        #region Setters
-
-        #endregion
+    //    public PotionSO GetPotionModelSO(PotionNames potionName)
+    //    {
+    //        foreach (PotionSO potion in allPotionSOs)
+    //        {
+    //            if (potion.potionName == potionName)
+    //            {
+    //                return potion;
+    //            }
+    //        }
+    //        Debug.Log("Char State Model Not found");
+    //        return null;
+    //    }
+    //    public PotionsBase GetPotionBase(PotionNames _potionName)
+    //    {
+    //        PotionsBase potionBase = allPotionBase.Find(t => t.potionName == _potionName);
+    //        if (potionBase != null)
+    //                        return potionBase;
+    //        else
+    //        {
+    //            Debug.Log("POTION BASE NEW CREATED");
+    //            PotionsBase potionBaseNew = potionFactory.GetPotionBase(_potionName);
+    //            return potionBaseNew;
+    //        }            
+    //    }
+    //    public PotionModel GetPotionModel(PotionNames _potionName)
+    //    {
+    //        PotionModel potionModel = allPotionModel.Find(t => t.potionName == _potionName);
+    //        if (potionModel != null)
+    //            return potionModel;
+    //        else
+    //            Debug.Log("POTION MODEL NOT FOUND");
+    //        return null;
+    //    }
+    //    #endregion
 
 
-        public void InitPotion2CommonInv(CharNames charName, PotionNames _potionName, CharController causedby
-          , CauseType causeType, int causeID)
-        {
+    //    #region Setters
+
+    //    #endregion
+
+
+    //    public void InitPotion2CommonInv(CharNames charName, PotionNames _potionName, CharController causedby
+    //      , CauseType causeType, int causeID)
+    //    {
           
-            PotionsBase potionBase = potionFactory.GetPotionBase(_potionName);            
+    //        PotionsBase potionBase = potionFactory.GetPotionBase(_potionName);            
             
-            PotionSO potionSO = GetPotionModelSO(_potionName);
-           // PotionModel potionModel = potionBase.PotionInit(potionSO);
-          //  allPotionModel.Add(potionModel);
+    //        PotionSO potionSO = GetPotionModelSO(_potionName);
+    //       // PotionModel potionModel = potionBase.PotionInit(potionSO);
+    //      //  allPotionModel.Add(potionModel);
 
-           Iitems item = potionBase as Iitems;
-           item.invSlotType = SlotType.CommonInv;
+    //       Iitems item = potionBase as Iitems;
+    //       item.invSlotType = SlotType.CommonInv;
 
-            CharModel charModel = CharService.Instance.GetAllyCharModel(charName);
-            if(charModel != null)
-            {
-                InvData invData = new InvData(charModel.charName, item);
-                InvService.Instance.invMainModel.AddItem2CommInv(item);
-            }
-            else
-            {
-                Debug.Log("CharModel is null" + charName);
-            }                      
-        }
+    //        CharModel charModel = CharService.Instance.GetAllyCharModel(charName);
+    //        if(charModel != null)
+    //        {
+    //            InvData invData = new InvData(charModel.charName, item);
+    //            InvService.Instance.invMainModel.AddItem2CommInv(item);
+    //        }
+    //        else
+    //        {
+    //            Debug.Log("CharModel is null" + charName);
+    //        }                      
+    //    }
 
-        public void InitPotion2ActiveInv(CharNames charName, PotionsBase potionbase)
-        {
+    //    public void InitPotion2ActiveInv(CharNames charName, PotionsBase potionbase)
+    //    {
 
 
-        }
+    //    }
         
-        public void AddPotion2ActiveInv(CharNames charName, PotionsBase potionsBase)
-        {
-            // update in char Model
+    //    public void AddPotion2ActiveInv(CharNames charName, PotionsBase potionsBase)
+    //    {
+    //        // update in char Model
 
-        }
+    //    }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                CharController charController = CharService.Instance.charsInPlayControllers[0];
+    //    private void Update()
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.P))
+    //        {
+    //            CharController charController = CharService.Instance.charsInPlayControllers[0];
 
-                InitPotion2CommonInv(CharNames.Abbas_Skirmisher, PotionNames.HealthPotion, charController
-                                        , CauseType.CharSkill, 2); 
-            }
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                //CharController charController = CharService.Instance.CharsInPlayControllers[0];
-                //InitPotion2CommonInv(charController, PotionName.StaminaPotion, charController
-                //    , CauseType.CharSkill, 2);
+    //            InitPotion2CommonInv(CharNames.Abbas_Skirmisher, PotionNames.HealthPotion, charController
+    //                                    , CauseType.CharSkill, 2); 
+    //        }
+    //        if (Input.GetKeyDown(KeyCode.O))
+    //        {
+    //            //CharController charController = CharService.Instance.CharsInPlayControllers[0];
+    //            //InitPotion2CommonInv(charController, PotionName.StaminaPotion, charController
+    //            //    , CauseType.CharSkill, 2);
 
-            }
+    //        }
 
-        }
+    //    }
 
 
     }

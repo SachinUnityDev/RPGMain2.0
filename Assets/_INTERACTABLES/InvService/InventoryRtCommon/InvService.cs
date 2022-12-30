@@ -59,10 +59,6 @@ namespace Interactables
             OnCharSelectInvPanel?.Invoke(charModel);
         }
 
-
-       
-
-
         #region INV CHECKS
 
         public bool IsCommInvFull()

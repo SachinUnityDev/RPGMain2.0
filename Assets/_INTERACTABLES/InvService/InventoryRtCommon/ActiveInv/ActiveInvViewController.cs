@@ -44,9 +44,21 @@ namespace Interactables
         void OnPotionBtnPressed()
         {
             potionBtnPtrEvents.isClicked = !potionBtnPtrEvents.isClicked;
-            TogglePanel(potionActivePanel);
-            ToggleBtn(PanelNameActInv.PotionPanel);
-       
+            if (!potionBtnPtrEvents.isClicked)
+            {
+                TogglePanel(gewgawsActivePanel);
+                ToggleBtn(PanelNameActInv.gewgawPanel);
+            }
+            else
+            {
+                TogglePanel(potionActivePanel);
+                ToggleBtn(PanelNameActInv.PotionPanel);
+                //  ArmorService.Instance.OpenArmorPanel();
+            }
+
+
+
+
         }
         void OnGewgawBtnPressed()
         {
@@ -75,8 +87,8 @@ namespace Interactables
             armorBtnPtrEvents.isClicked = !armorBtnPtrEvents.isClicked;
             if (!armorBtnPtrEvents.isClicked)
             {
-                TogglePanel(potionActivePanel);
-                ToggleBtn(PanelNameActInv.PotionPanel);
+                TogglePanel(gewgawsActivePanel);
+                ToggleBtn(PanelNameActInv.gewgawPanel);
             }                
             else
             {
@@ -91,7 +103,8 @@ namespace Interactables
             weaponBtnPtrEvents.isClicked = !weaponBtnPtrEvents.isClicked;
             if (!weaponBtnPtrEvents.isClicked)
             {
-                TogglePanel(potionActivePanel);                
+                TogglePanel(gewgawsActivePanel);
+                ToggleBtn(PanelNameActInv.gewgawPanel);
             }
             else
             {

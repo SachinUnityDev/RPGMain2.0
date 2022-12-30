@@ -19,11 +19,6 @@ namespace Interactables
         public CharController charController; 
         public ItemModel itemModel;
 
-        //public List<Iitems> itemsInPotionActiveInv = new List<Iitems>();
-        //public List<Iitems> itemInGewgawActiveInv = new List<Iitems>();
-
-        public List<ScrollReadData> allScrollRead= new List<ScrollReadData>();
-
         public float multFx = 1f; 
 
         public void Init()
@@ -33,45 +28,41 @@ namespace Interactables
 
         void Start()
         {
-            CalendarService.Instance.OnStartOfDay += (int day)=>OnDayTickOnScroll(); 
+           
         }
-
-        public void OnScrollRead(ScrollNames scrollName)
-        {
-            ScrollSO scrollSO = ItemService.Instance.GetScrollSO(scrollName);
-            ScrollReadData scrollReadData = new ScrollReadData(scrollName
-                                                    , scrollSO.castTime); 
-            allScrollRead.Add(scrollReadData);  
-        }
-
+        #region GEM, ENCHANT AND REMOVE
         public bool EnchantTheWeaponThruScroll(GemBase gemBase)
         {
             GemNames gemName = gemBase.gemName; 
-
             if(ItemService.Instance.CanEnchantGemThruScroll(charController, gemName))
             {
-                itemModel.itemsEnchanted.Add(gemBase as Iitems);
+                itemModel.gemEnchanted.Add(gemBase as Iitems);
                 itemModel.gemChargeData = new GemChargeData(gemName);
                 return true;
             }
             return false;
         }
+        public void WeaponSkillUsed()        // On Weapon Skills used 
+        {
+            itemModel.gemChargeData.chargeRemaining--; 
+            if(itemModel.gemChargeData.chargeRemaining <= 0)
+            {
+                itemModel.gemChargeData.chargeRemaining = 0;
+            }
+        }       
+        public void RemoveGemEnchanted()
+        {
+            itemModel.gemEnchanted.Clear();
+            itemModel.gemChargeData = null; 
+        }
         public bool EnchantInTemple()
         {
             // to be linked to the town scene 
-            return false; 
+            return false;
         }
-        void OnDayTickOnScroll()
-        {
-            foreach (ScrollReadData scrollData in allScrollRead.ToList())
-            {                
-                if (scrollData.activeDaysRemaining >= scrollData.activeDaysNet)
-                {
-                    allScrollRead.Remove(scrollData); 
-                }
-                scrollData.activeDaysRemaining++; 
-            }
-        }
+        #endregion
+
+        #region 
         public void OnSocketSupportGem(GemBase gemBase)
         {
             Iitems item = gemBase as Iitems;
@@ -126,7 +117,7 @@ namespace Interactables
             else if (count == 2)
                 multFx = 1.3f;
         }
-
+        # endregion 
         /// <summary>
         /// OC data is the potions OC data
         /// <summary>

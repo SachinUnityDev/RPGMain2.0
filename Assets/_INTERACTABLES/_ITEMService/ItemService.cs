@@ -64,10 +64,11 @@ namespace Interactables
 
         #endregion
 
-
+        public List<ScrollReadData> allScrollRead = new List<ScrollReadData>();
         void Start()
         {
             itemFactory = gameObject.GetComponent<ItemFactory>();
+            CalendarService.Instance.OnStartOfDay += (int day) => OnDayTickOnScroll();
         }
 
         // distributed 
@@ -211,6 +212,47 @@ namespace Interactables
 
         #region GETTERS 
 
+     
+
+        #endregion
+
+        // game reload or item found in the game
+
+
+        # region GEMS, ENCHANTMENT AND  SCROLLS
+        public bool CanEnchantGemThruScroll(CharController charController, GemNames gemName)
+        {
+            // get corresponding gem
+            ScrollSO scrollSO = GetScrollSOFrmGem(gemName); 
+            ItemController itemController = charController.gameObject.GetComponent<ItemController>();
+            if (!allScrollRead.Any(t => t.scrollName == scrollSO.scrollName))            
+                return false;
+            if (!itemController.itemModel.IsNotEnchanted())
+                return false; 
+
+            if (charController.charModel.enchantableGem4Weapon == gemName)
+                return true; 
+            else
+                return false; 
+        }
+        void OnDayTickOnScroll()
+        {
+            foreach (ScrollReadData scrollData in allScrollRead.ToList())
+            {
+                if (scrollData.activeDaysRemaining >= scrollData.activeDaysNet)
+                {
+                    allScrollRead.Remove(scrollData);
+                }
+                scrollData.activeDaysRemaining++;
+            }
+        }
+        public void OnScrollRead(ScrollNames scrollName)
+        {
+            ScrollSO scrollSO = ItemService.Instance.GetScrollSO(scrollName);
+            ScrollReadData scrollReadData = new ScrollReadData(scrollName
+                                                    , scrollSO.castTime);
+            allScrollRead.Add(scrollReadData);
+        }
         public GemType GetGemType(GemNames gemName)
         {
             GemType gemType =
@@ -219,27 +261,9 @@ namespace Interactables
                 return gemType;
             else
                 Debug.Log("GemType Not found");
-            return 0; 
+            return 0;
         }
-
         #endregion
-
-        // game reload or item found in the game
-        public bool CanEnchantGemThruScroll(CharController charController, GemNames gemName)
-        {
-            // get corresponding gem
-            ScrollSO scrollSO = GetScrollSOFrmGem(gemName); 
-            ItemController itemController = charController.gameObject.GetComponent<ItemController>();
-            if(itemController.allScrollRead
-                            .Any(t => t.scrollName == scrollSO.scrollName))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
 
         public void InitItemToInv(SlotType slotType, ItemType itemType, int itemName,
                                      CauseType causeType, int causeID, GenGewgawQ gQuality = GenGewgawQ.None)
@@ -289,7 +313,7 @@ namespace Interactables
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionNames.HealthPotion,
+                InitItemToInv(SlotType.CommonInv, ItemType.Scrolls, (int)ScrollNames.ScrollOfEarth,
                                      CauseType.Items,2); 
         
             }

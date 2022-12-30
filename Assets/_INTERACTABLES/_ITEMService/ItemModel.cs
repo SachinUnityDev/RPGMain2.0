@@ -61,16 +61,20 @@ namespace Interactables
     {
         // item charge saveable format 
 
+
+        [Header("Gem Socketing")]
         public CharNames charName;
         public List<Iitems> divItemsSocketed = new List<Iitems> ();
         public Iitems supportItemSocketed = null;
-        public List<Iitems> itemsEnchanted = new List<Iitems>(); 
-        
-        public List<Iitems> potionsConsumed = new List<Iitems>();
-        public List<OCData> allOCData = new List<OCData> ();   
 
+        [Header("Potion Overconsumption")]
+        public List<Iitems> potionsConsumed = new List<Iitems>();
+        public List<OCData> allOCData = new List<OCData> ();
+
+        [Header("Enchantment")]
+        public List<Iitems> gemEnchanted = new List<Iitems>();
         public GemChargeData gemChargeData;
-        #region 
+        #region  OverConsumption Data 
 
         public float AddOCData(OCData ocData)
         {
@@ -102,10 +106,16 @@ namespace Interactables
                 allOCData.RemoveAt(index);
             }
         }
-        public void CanItemBeSocketed()
-        {
-           //if     
+        #endregion
 
+        #region GEMS, ENCHANTMENT AND SCROLLS 
+      
+        public bool IsNotEnchanted()
+        {
+            if (gemEnchanted.Count != 0)
+                return true; 
+            else 
+                return false;
         }
         public bool OnItemBeEnchanted(GemBase gemBase)
         {
@@ -113,45 +123,58 @@ namespace Interactables
             // recharge new only if charge is zero otherwise it return false; 
             // save as iitems to enchanted list... remove from Inv List 
             
+            gemEnchanted.Add(gemBase as Iitems);
 
-            return false; 
+            return false;
         }
+        # endregion
+
+
+
+
         
-
-
-        #endregion 
-
-
-        //[Header("POTION RELATED RECORD")]
-        //public List<PotionModel> potionModel = new List<PotionModel> ();
-        //public List<GemModel> allGemModel = new List<GemModel> ();
-        //public List<GenGewgawModel> allGenGewgawModel = new List<GenGewgawModel> ();
-
-
-        //public float potionAddict = 0f;
-
-        //[Header("INV RELATED RECORD")]       
-        //public SlotType potionLoc = SlotType.None; // store in item model 
-
-
-
-
-
-        //public void AddItem2Ls(Iitems Iitems)
-        //{
-        //    ItemData itemData = new ItemData(Iitems.itemType, Iitems.itemName); 
-        //    allItems.Add(itemData);
-        //}
-        //public void RemoveItemFrmLs(Iitems Iitems)
-        //{
-        //    ItemData itemData = 
-        //        allItems.Find(t=>t.itemType==Iitems.itemType
-        //                    && t.ItemName == Iitems.itemName);
-        //    if(itemData != null)
-        //        allItems.Remove(itemData);
-
-        //}
-
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+//[Header("POTION RELATED RECORD")]
+//public List<PotionModel> potionModel = new List<PotionModel> ();
+//public List<GemModel> allGemModel = new List<GemModel> ();
+//public List<GenGewgawModel> allGenGewgawModel = new List<GenGewgawModel> ();
+
+
+//public float potionAddict = 0f;
+
+//[Header("INV RELATED RECORD")]       
+//public SlotType potionLoc = SlotType.None; // store in item model 
+
+
+
+
+
+//public void AddItem2Ls(Iitems Iitems)
+//{
+//    ItemData itemData = new ItemData(Iitems.itemType, Iitems.itemName); 
+//    allItems.Add(itemData);
+//}
+//public void RemoveItemFrmLs(Iitems Iitems)
+//{
+//    ItemData itemData = 
+//        allItems.Find(t=>t.itemType==Iitems.itemType
+//                    && t.ItemName == Iitems.itemName);
+//    if(itemData != null)
+//        allItems.Remove(itemData);
+
+//}

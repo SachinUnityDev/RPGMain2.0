@@ -31,9 +31,8 @@ namespace Interactables
         public Iitems item2; 
         public Iitems item3;
 
-        public SlotType slotType1;
-        public SlotType slotType2;
-        public SlotType slotType3;
+        public List<SlotType> allSlotTypes;
+    
         // get and set items
         //  public List<Iitems> allPotionActiveInvList = new List<Iitems>();
 
@@ -49,14 +48,15 @@ namespace Interactables
             canvas = FindObjectOfType<Canvas>();
             InvService.Instance.OnDragResult += OnDragResult2GewgawActiveInv;
             InvService.Instance.OnCharSelectInvPanel += LoadActiveInvSlots;
-
             slotNum = transform.GetSiblingIndex();
+            for (int i = 0; i < 3; i++)
+            {
+                allSlotTypes.Add(SlotType.None); 
+            }
         }
 
         bool SlotRuleCheck()
         {
-            //get SO and thereby figure out the
-
 
             return false; 
         }
@@ -101,8 +101,7 @@ namespace Interactables
             }
         }
 
-        #region EQUIP TO VIEW 
-
+        #region EQUIP TO VIEW from selection MENU
         public bool Equip2GewgawSlot(Iitems item)
         {
             // try equip to slot 1 then 2 

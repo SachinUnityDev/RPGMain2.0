@@ -13,6 +13,12 @@ namespace Interactables
         [SerializeField] Button armorBtn;
         [SerializeField] Button weaponBtn;
 
+        ActiveIntBtnPtrEvents gewgawBtnPtrEvents; 
+        ActiveIntBtnPtrEvents potionBtnPtrEvents;   
+        ActiveIntBtnPtrEvents armorBtnPtrEvents;
+        ActiveIntBtnPtrEvents weaponBtnPtrEvents;
+
+
         [SerializeField] GameObject potionActivePanel;
         [SerializeField] GameObject gewgawsActivePanel;
         [SerializeField] GameObject weaponPanel;
@@ -27,27 +33,71 @@ namespace Interactables
             armorBtn.onClick.AddListener(OnArmorBtnPressed);
             weaponBtn.onClick.AddListener(OnWeaponBtnPressed);
             panels = new List<GameObject>() 
-                    { potionActivePanel, gewgawsActivePanel, weaponPanel, armorPanel }; 
+                    { potionActivePanel, gewgawsActivePanel, weaponPanel, armorPanel };
+            
+            gewgawBtnPtrEvents = gewGawBtn.GetComponent<ActiveIntBtnPtrEvents>();   
+            potionBtnPtrEvents = potionBtn.GetComponent<ActiveIntBtnPtrEvents>();
+            armorBtnPtrEvents = armorBtn.GetComponent<ActiveIntBtnPtrEvents>(); 
+            weaponBtnPtrEvents = weaponBtn.GetComponent<ActiveIntBtnPtrEvents>();
         }
 
         void OnPotionBtnPressed()
-        {          
-            TogglePanel(potionActivePanel); 
-
+        {
+            potionBtnPtrEvents.isClicked = !potionBtnPtrEvents.isClicked;
+            TogglePanel(potionActivePanel);
+            ToggleBtn(PanelNameActInv.PotionPanel);
+       
         }
         void OnGewgawBtnPressed()
-        {          
-            TogglePanel(gewgawsActivePanel);             
+        {
+            gewgawBtnPtrEvents.isClicked = !gewgawBtnPtrEvents.isClicked;
+            TogglePanel(gewgawsActivePanel);
+            ToggleBtn(PanelNameActInv.gewgawPanel); 
+  
         }
-        
+        void ToggleBtn(PanelNameActInv panelName)
+        {
+            foreach (Transform child in gewGawBtn.gameObject.transform.parent)
+            {
+                if(child.GetSiblingIndex() == (int)panelName)
+                {
+                    child.GetComponent<ActiveIntBtnPtrEvents>().ClickState();
+                }
+                else
+                {
+                    child.GetComponent<ActiveIntBtnPtrEvents>().UnClickState();
+                }
+            }
+
+        }
         void OnArmorBtnPressed()
-        {          
-            TogglePanel(armorPanel);
-            ArmorService.Instance.OpenArmorPanel();
+        {
+            armorBtnPtrEvents.isClicked = !armorBtnPtrEvents.isClicked;
+            if (!armorBtnPtrEvents.isClicked)
+            {
+                TogglePanel(potionActivePanel);
+                ToggleBtn(PanelNameActInv.PotionPanel);
+            }                
+            else
+            {
+                TogglePanel(armorPanel);
+                ToggleBtn(PanelNameActInv.ArmorPanel);
+                //  ArmorService.Instance.OpenArmorPanel();
+            }
+           
         }
         void OnWeaponBtnPressed()
-        {           
-            TogglePanel(weaponPanel);
+        {
+            weaponBtnPtrEvents.isClicked = !weaponBtnPtrEvents.isClicked;
+            if (!weaponBtnPtrEvents.isClicked)
+            {
+                TogglePanel(potionActivePanel);                
+            }
+            else
+            {
+                TogglePanel(weaponPanel);
+                ToggleBtn(PanelNameActInv.weaponPanel);
+            }
         }
 
         void TogglePanel(GameObject PanelOn)
@@ -94,6 +144,15 @@ namespace Interactables
                     }
                 }
             }
+
+        }
+        public enum PanelNameActInv
+        {
+            
+            gewgawPanel, 
+            PotionPanel,
+            ArmorPanel,
+            weaponPanel, 
 
         }
       

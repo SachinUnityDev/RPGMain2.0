@@ -390,8 +390,7 @@ namespace Interactables
                     RemoveItem(); 
                 }
                
-            }
-            if (ItemsInSlot[0].itemType == ItemType.GenGewgaws 
+            }else if (ItemsInSlot[0].itemType == ItemType.GenGewgaws 
                 || ItemsInSlot[0].itemType == ItemType.SagaicGewgaws 
                 || ItemsInSlot[0].itemType == ItemType.PoeticGewgaws)
             {

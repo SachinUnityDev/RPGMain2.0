@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Interactables
 {
-    public class WeaponViewController : MonoBehaviour
+    public class WeaponViewController : MonoBehaviour, IPanel
     {
         [SerializeField] CharNames charSelect;
 
@@ -38,7 +38,7 @@ namespace Interactables
         {
             Sprite sprite = WeaponService.Instance.weaponSO.GetSprite(charSelect);
             transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite
-                            = sprite;
+                                                                  = sprite;
         }
         public void UnLoad()
         {

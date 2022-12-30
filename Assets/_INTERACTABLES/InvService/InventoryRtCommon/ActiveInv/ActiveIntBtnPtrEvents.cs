@@ -21,7 +21,7 @@ namespace Interactables
         [SerializeField] float scaleHL; 
 
 
-        public bool isClicked = false; 
+        public bool isClicked= false; 
         public void OnPointerEnter(PointerEventData eventData)
         {
             img.color = colorHL;
@@ -34,29 +34,32 @@ namespace Interactables
         {
             if (isClicked)
             {
-                Click(); 
+                ClickState(); 
             }
             else
             {
-                UnClick();
+                UnClickState();
             }
             txt.gameObject.SetActive(false);
         }
-        public void Click()
+        public void ClickState()
         {
-            foreach (Transform child in transform.parent)
-            {
-                ActiveIntBtnPtrEvents ptrEvents = child.GetComponent<ActiveIntBtnPtrEvents>();
-                ptrEvents.UnClick(); 
-            }
-            isClicked = true; 
+            //foreach (Transform child in transform.parent)
+            //{
+            //    ActiveIntBtnPtrEvents ptrEvents = child.GetComponent<ActiveIntBtnPtrEvents>();
+            //    ptrEvents.UnClickState(); 
+            //}
+           // isClicked = !isClicked;
+            //if (!isClicked)
+            //    UnClick();
+            isClicked = true;
             img.color = colorHL;
             transform.DOScale(scaleHL, 0.1f);
         }
 
-        public void UnClick()
+        public void UnClickState()
         {
-            isClicked = false; 
+            isClicked = false;
             img.color = colorN;
             transform.DOScale(1, 0.1f);
         }
@@ -68,12 +71,12 @@ namespace Interactables
             txt.text = descTxt;
             txt.gameObject.SetActive(false);
             img = gameObject.GetComponent<Image>();
-            UnClick();           
+            UnClickState();           
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {        
-            isClicked = !isClicked; 
+           // isClicked = !isClicked; 
         }
     }
 

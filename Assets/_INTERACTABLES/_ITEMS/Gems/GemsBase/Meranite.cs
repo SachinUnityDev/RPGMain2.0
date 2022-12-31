@@ -49,10 +49,12 @@ namespace Interactables
 
         public void SocketedFX(float multFx)
         {
-            fxVal1 = (int)(Random.Range(8f, 12f) * multFX);
+            fxVal1 = (int)(Random.Range(6f, 10f) * multFX);
             int buffID = charController.buffController.ApplyBuff(CauseType.Gems, (int)gemName, charID
                     , StatsName.airRes, fxVal1, TimeFrame.Infinity, 1, true);
             allBuffs.Add(buffID);
+            string str = $"+{fxVal1} Air Res";
+            allDisplayStr.Add(str);
         }
     }
 }

@@ -14,16 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gemName: 6
   gemType: 2
-  inventoryStack: 6
+  allCharsThatCanBeEnchanted: 
+  maxInvStackSize: 2
   cost:
     silver: 0
     bronze: 48
   fluctuation: 30
   maxWorldInstance: 18
-  minSpecrange: 0
-  maxSpecRange: 0
   desc: 
   iconSprite: {fileID: 21300000, guid: f75b46f022163b648b546acae40709bd, type: 3}
   allLines:
-  - 'On Socket: +1<style="Health"> Hp Regen </style> at night.'
-  - "Increases potency of Ruri, Malachite, Blue Onyx and Moss Agate.\r"
+  - 'On Socket: +1<style="Health"> Hp Regen </style> at night'
+  - Increases potency of Ruri, Malachite, Blue Onyx and Moss Agate

@@ -37,7 +37,7 @@ MonoBehaviour:
   raceTypeHero: 1
   cultType: 7
   classType: 2
-  heroType: 1
+  archeType: 0
   tameAnimalsStrength: 1
   fleeBehaviour: 1
   canBeAmbushed: 0
@@ -243,4 +243,5 @@ MonoBehaviour:
   charOccupies: 0
   posPriority: 02000000030000000500000006000000
   armorType: 4
+  armorTypeStr: Cloth
   enchantableGem4Weapon: 4

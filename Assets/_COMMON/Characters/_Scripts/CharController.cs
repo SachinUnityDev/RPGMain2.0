@@ -34,7 +34,7 @@ namespace Common
         public TempTraitController tempTraitController;
 
         [Header("Item Controller")]
-        public ItemController itemController;
+        public ItemController  itemController;
 
         [Header("LanscapeController")]
         public LandscapeController landscapeController;

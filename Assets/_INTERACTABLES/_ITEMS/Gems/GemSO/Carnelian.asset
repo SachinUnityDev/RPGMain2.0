@@ -14,16 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gemName: 1
   gemType: 0
-  inventoryStack: 3
+  allCharsThatCanBeEnchanted: 
+  maxInvStackSize: 2
   cost:
     silver: 0
     bronze: 72
   fluctuation: 0
   maxWorldInstance: 12
-  minSpecrange: 0
-  maxSpecRange: 0
   desc: 
   iconSprite: {fileID: 21300000, guid: 56a5eb3de40bec649811c73b8f2105a6, type: 3}
   allLines:
-  - 'On Socket: +8-12<style="Fire"> Fire Res </style>'
+  - 'On Socket: +6-10 <style="Fire"> Fire Res </style>'
   - Can be enchanted on certain weapons

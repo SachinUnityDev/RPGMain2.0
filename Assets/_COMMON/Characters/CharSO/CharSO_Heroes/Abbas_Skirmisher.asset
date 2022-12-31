@@ -39,7 +39,7 @@ MonoBehaviour:
   raceTypeHero: 1
   cultType: 14
   classType: 7
-  heroType: 1
+  archeType: 0
   tameAnimalsStrength: 1
   fleeBehaviour: 0
   canBeAmbushed: 0
@@ -247,7 +247,7 @@ MonoBehaviour:
   - statsName: 22
     currValue: 2
     baseValue: 2
-    desc: Stamina gain per round
+    desc: Percentage value to mitigate incoming Dark damage.
     minRange: 0
     maxRange: 0
     minLimit: 0
@@ -256,7 +256,7 @@ MonoBehaviour:
   - statsName: 23
     currValue: 0
     baseValue: 0
-    desc: Health gain per round
+    desc: Percentage value to mitigate incoming Dark damage.
     minRange: 0
     maxRange: 0
     minLimit: 0
@@ -265,7 +265,7 @@ MonoBehaviour:
   - statsName: 24
     currValue: 0
     baseValue: 0
-    desc: Value Fortitude resets to after each combat
+    desc: Percentage value to mitigate incoming Dark damage.
     minRange: 0
     maxRange: 0
     minLimit: 0
@@ -274,4 +274,5 @@ MonoBehaviour:
   charOccupies: 0
   posPriority: 0400000005000000060000000200000003000000
   armorType: 2
+  armorTypeStr: Hide
   enchantableGem4Weapon: 2

@@ -35,8 +35,6 @@ namespace Interactables
         public GameObject itemImgPrefab; 
         private void Awake()
         {
- 
-
         }
         public string GetItemActionStrings(ItemActions itemActions)
         {
@@ -89,8 +87,6 @@ namespace Interactables
                 return filledSlot;
             }
             return emptySlot;// if empty pass item no
-
-
         }
 
         public Sprite GetSprite(int itemName, ItemType itemType)

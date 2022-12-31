@@ -10,8 +10,8 @@ namespace Interactables
 {
     public class ItemService : MonoSingletonGeneric<ItemService>
     {
-        public event Action<CharController, GemNames> OnGemSocketed; 
-
+        public event Action<CharController, GemNames> OnGemSocketed;
+        public event Action<CharController> OnGemEnchanted; 
         public List<ItemController> allItemControllers = new List<ItemController>();        
         public List<Iitems> allItemsInGame = new List<Iitems>();
 
@@ -22,7 +22,10 @@ namespace Interactables
 
         public ItemCardViewController cardViewController;
 
-#region SO LIST REFERNCES 
+        // CASE FOR ITEM MAIN MODEL 
+        public List<ScrollReadData> allScrollRead = new List<ScrollReadData>();
+
+        #region SO LIST REFERNCES 
         [Header("Generic gewgaws SO")]
         public List<GenGewgawSO> allGenGewgawSO = new List<GenGewgawSO>();
 
@@ -64,7 +67,7 @@ namespace Interactables
 
         #endregion
 
-        public List<ScrollReadData> allScrollRead = new List<ScrollReadData>();
+       
         void Start()
         {
             itemFactory = gameObject.GetComponent<ItemFactory>();
@@ -227,13 +230,23 @@ namespace Interactables
             ItemController itemController = charController.gameObject.GetComponent<ItemController>();
             if (!allScrollRead.Any(t => t.scrollName == scrollSO.scrollName))            
                 return false;
-            if (!itemController.itemModel.IsNotEnchanted())
+            if (itemController.itemModel.IsAlreadyEnchanted())
                 return false; 
 
             if (charController.charModel.enchantableGem4Weapon == gemName)
-                return true; 
+            {
+                On_GemEnchanted(charController); 
+                return true;
+            }
+                
             else
                 return false; 
+        }
+        public void OnScrollRead(ScrollNames scrollName)
+        {
+            ScrollSO scrollSO = GetScrollSO(scrollName);
+            ScrollReadData scrollReadData = new ScrollReadData(scrollName, scrollSO.castTime);
+            allScrollRead.Add(scrollReadData);
         }
         void OnDayTickOnScroll()
         {
@@ -246,23 +259,22 @@ namespace Interactables
                 scrollData.activeDaysRemaining++;
             }
         }
-        public void OnScrollRead(ScrollNames scrollName)
+        
+        public void On_GemEnchanted(CharController charController)
         {
-            ScrollSO scrollSO = ItemService.Instance.GetScrollSO(scrollName);
-            ScrollReadData scrollReadData = new ScrollReadData(scrollName
-                                                    , scrollSO.castTime);
-            allScrollRead.Add(scrollReadData);
+            OnGemEnchanted?.Invoke(charController); 
         }
-        public GemType GetGemType(GemNames gemName)
-        {
-            GemType gemType =
-                        allGemsSO.Find(t => t.gemName == gemName).gemType;
-            if (gemType != 0)
-                return gemType;
-            else
-                Debug.Log("GemType Not found");
-            return 0;
-        }
+
+        //public GemType GetGemType(GemNames gemName)
+        //{
+        //    GemType gemType =
+        //                allGemsSO.Find(t => t.gemName == gemName).gemType;
+        //    if (gemType != 0)
+        //        return gemType;
+        //    else
+        //        Debug.Log("GemType Not found");
+        //    return 0;
+        //}
         #endregion
 
         public void InitItemToInv(SlotType slotType, ItemType itemType, int itemName,
@@ -313,10 +325,17 @@ namespace Interactables
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Scrolls, (int)ScrollNames.ScrollOfEarth,
+                InitItemToInv(SlotType.CommonInv, ItemType.Gems, (int)GemNames.Ruri,
                                      CauseType.Items,2); 
         
             }
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                InitItemToInv(SlotType.CommonInv, ItemType.Scrolls, (int)ScrollNames.ScrollOfWater,
+                                     CauseType.Items, 2);
+
+            }
+
         }
 
     }

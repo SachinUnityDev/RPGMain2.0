@@ -4,12 +4,11 @@ using UnityEngine;
 using Common;
 using System.Security.Policy;
 using System.Linq;
+using System;
 
 namespace Interactables
-{ 
-
-    // item charge data , 
-    // it
+{
+    [Serializable]
     public class ScrollReadData
     {
         public ScrollNames scrollName;
@@ -23,7 +22,7 @@ namespace Interactables
             this.activeDaysRemaining = 0;
         }
     }
-
+    [Serializable]
     public class GemChargeData
     {
         public GemNames gemName;
@@ -56,7 +55,7 @@ namespace Interactables
         }
     }
 
-
+    [Serializable]
     public class ItemModel  // all the items held by chars
     {
         // item charge saveable format 
@@ -72,8 +71,9 @@ namespace Interactables
         public List<OCData> allOCData = new List<OCData> ();
 
         [Header("Enchantment")]
-        public List<Iitems> gemEnchanted = new List<Iitems>();
-        public GemChargeData gemChargeData;
+        public Iitems gemEnchanted; 
+        public GemChargeData gemChargeData; 
+        
         #region  OverConsumption Data 
 
         public float AddOCData(OCData ocData)
@@ -110,21 +110,19 @@ namespace Interactables
 
         #region GEMS, ENCHANTMENT AND SCROLLS 
       
-        public bool IsNotEnchanted()
+        public bool IsAlreadyEnchanted()
         {
-            if (gemEnchanted.Count != 0)
-                return true; 
+            if (gemEnchanted == null)
+                return false; 
             else 
-                return false;
+                return true;
         }
         public bool OnItemBeEnchanted(GemBase gemBase)
         {
             // add gemcharge data if new
             // recharge new only if charge is zero otherwise it return false; 
             // save as iitems to enchanted list... remove from Inv List 
-            
-            gemEnchanted.Add(gemBase as Iitems);
-
+            gemEnchanted = gemBase as Iitems;
             return false;
         }
         # endregion

@@ -51,6 +51,9 @@ namespace Interactables
                    ApplyBuffOnNight(CauseType.Gems, (int)itemName, charController.charModel.charID,
                                StatsName.hpRegen, 1, TimeFrame.Infinity, -1, true);
             allBuffs.Add(buffID);
+
+            string str = $"+1 Hp Regen at night";
+            allDisplayStr.Add(str);
         }
 
 

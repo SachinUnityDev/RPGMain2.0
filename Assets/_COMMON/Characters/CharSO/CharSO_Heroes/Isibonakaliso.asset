@@ -243,4 +243,5 @@ MonoBehaviour:
   charOccupies: 0
   posPriority: 04000000050000000600000007000000
   armorType: 5
+  armorTypeStr: Skull
   enchantableGem4Weapon: 2

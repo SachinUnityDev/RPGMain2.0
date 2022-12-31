@@ -211,7 +211,7 @@ namespace Combat
         {
             foreach (Action del in OnSOR.GetInvocationList())
             {
-                Debug.Log("SOR Subs" + del.Method.Name);               
+                Debug.Log("SOR Subs" + del.Method.Name);
             }
         }
 
@@ -219,44 +219,44 @@ namespace Combat
         void Update()
         {
          
-            if (Input.GetKeyDown(KeyCode.L))
-            {
-                On_CombatInit();
-                Debug.Log("ON COmbat Init");
-            }
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                On_SOTactics();
-                Debug.Log("SOTactics");
-            }
+            //if (Input.GetKeyDown(KeyCode.L))
+            //{
+            //    On_CombatInit();
+            //    Debug.Log("ON COmbat Init");
+            //}
+            //if (Input.GetKeyDown(KeyCode.S))
+            //{
+            //    On_SOTactics();
+            //    Debug.Log("SOTactics");
+            //}
 
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                On_SOC();
-                Debug.Log("SOC");
+            //if (Input.GetKeyDown(KeyCode.C))
+            //{
+            //    On_SOC();
+            //    Debug.Log("SOC");
 
-            }
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                Debug.Log("SOR");
-                On_SOR();
-            }
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                Debug.Log("SOT");
-                On_SOT();
-            }
+            //}
+            //if (Input.GetKeyDown(KeyCode.R))
+            //{
+            //    Debug.Log("SOR");
+            //    On_SOR();
+            //}
+            //if (Input.GetKeyDown(KeyCode.T))
+            //{
+            //    Debug.Log("SOT");
+            //    On_SOT();
+            //}
 
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                Debug.Log("EOT");
-                On_EOT();
-            }
+            //if (Input.GetKeyDown(KeyCode.Y))
+            //{
+            //    Debug.Log("EOT");
+            //    On_EOT();
+            //}
 
-            if (Input.GetKeyDown(KeyCode.J))
-            {
-                IsActionSubcribed();
-            }
+            //if (Input.GetKeyDown(KeyCode.J))
+            //{
+            //    IsActionSubcribed();
+            //}
 
 
 

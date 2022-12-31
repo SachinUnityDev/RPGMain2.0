@@ -55,7 +55,7 @@ namespace Interactables
         void OnEnchantedFX();
         void OnSocketed();
         void SocketedFX(float multFx);
-        void ClearSocketBuffs(); 
+        void ClearSocketBuffs();       
 
         //List<int> allBuffIDs { get; set; }
     }
@@ -101,9 +101,9 @@ namespace Interactables
         protected CharController charController;
         public ItemController itemController;
         public CharNames charName = CharNames.None;
-        public int charID; 
-            
+        public int charID;
 
+        public List<string> allDisplayStr; 
     }
 
     //Divine, // enchanted(Weapon) and socketed(Armor)

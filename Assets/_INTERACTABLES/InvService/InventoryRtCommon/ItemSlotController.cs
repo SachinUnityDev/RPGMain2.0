@@ -38,6 +38,11 @@ namespace Interactables
         void Dispose();
         bool IsSellable();
         void Sell();
+        bool IsReadable();
+        void Read();
+
+        bool IsRechargeable(); 
+        void RechargeGem(); 
     }
 
     public interface IExcessInvActions
@@ -316,6 +321,17 @@ namespace Interactables
                 if (!rightClickActions.Any(t => t == ItemActions.Consumable))
                     rightClickActions.Add(ItemActions.Consumable);
             }
+            if (IsReadable())
+            {
+                if (!rightClickActions.Any(t => t == ItemActions.Readable))
+                    rightClickActions.Add(ItemActions.Readable);
+            }
+            if (IsEnchantable())
+            {
+                if (!rightClickActions.Any(t => t == ItemActions.Enchantable))
+                    rightClickActions.Add(ItemActions.Enchantable);
+            }
+
             if (true) // disposable
             {
                 if (!rightClickActions.Any(t => t == ItemActions.Disposable))
@@ -355,21 +371,29 @@ namespace Interactables
         public bool IsEnchantable()
         {
             // base it on the div and support gem argument 
-
-           // if div gems etc 
-           //  = ItemsInSlot[0] as 
-            //if (iEnchant == null)
-            //    return false;
-            return true;
-        
+            CharController charController = InvService.Instance.charSelectController;
+            IDivGem gem = ItemsInSlot[0] as IDivGem;
+            if (gem == null)
+                return false;
+            if (ItemService.Instance
+                .CanEnchantGemThruScroll(charController, (GemNames)ItemsInSlot[0].itemName))
+            {
+                return true; 
+            }
+            return false; 
         }
         public void Enchant()
         {
-
+            CharController charController = InvService.Instance.charSelectController;
+            charController.itemController.EnchantTheWeaponThruScroll((GemBase)ItemsInSlot[0]);
+            RemoveItem(); 
         }
+
         public bool IsEquipable()
         {
-            // item type ..or slot type 
+            IEquipAble isEquipable = ItemsInSlot[0] as IEquipAble;
+            if (isEquipable == null)
+                return false;
             return true;
         }
         public void Equip()
@@ -406,9 +430,6 @@ namespace Interactables
 
 
         }
-
-
-
         public void Dispose()
         {
             InvService.Instance.invMainModel.RemoveItem2CommInv(ItemsInSlot[0]);
@@ -431,7 +452,31 @@ namespace Interactables
 
         }
 
-    
+        public bool IsReadable()
+        {
+           EnchantScrollBase enchantScrollBase = ItemsInSlot[0] as EnchantScrollBase;
+            if (enchantScrollBase != null)
+                return true;
+            else
+                return false; 
+        }
+
+        public void Read()
+        {
+            EnchantScrollBase enchantScrollBase = ItemsInSlot[0] as EnchantScrollBase;
+            ScrollNames scrollName = enchantScrollBase.scrollName;
+            ItemService.Instance.OnScrollRead(scrollName);
+            RemoveItem();
+        }
+
+        public bool IsRechargeable()
+        {
+            return false; 
+        }
+        public void RechargeGem()
+        {
+
+        }
 
         #endregion
     }

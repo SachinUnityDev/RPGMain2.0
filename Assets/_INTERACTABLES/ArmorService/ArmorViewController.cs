@@ -9,9 +9,15 @@ namespace Interactables
     public class ArmorViewController : MonoBehaviour, IPanel
     {
         [SerializeField] CharNames charSelect;
+        [SerializeField] List<Transform> socketSlots; 
+
      
         void Start()
         {
+            for (int i = 1; i < transform.childCount; i++)
+            {
+                socketSlots.Add(transform.GetChild(i)); 
+            }
             InvService.Instance.OnCharSelectInvPanel += PopulateArmorPanel;
             UnLoad();
         }
@@ -19,14 +25,12 @@ namespace Interactables
         {
             Load(); 
         }
-
-
         #region Load UnLoad
         public void Load()
         {
             UIControlServiceGeneral.Instance.TogglePanel(this.gameObject, true);
-            Init();
-            PopulateArmorPanel(); 
+            PopulateArmorPanel(InvService.Instance.charSelectController.charModel); 
+           
         }
         public void UnLoad()
         {
@@ -35,7 +39,7 @@ namespace Interactables
 
         public void Init()
         {
-            charSelect = InvService.Instance.charSelect;
+           
         }
 
         #endregion
@@ -48,13 +52,9 @@ namespace Interactables
             Sprite sprite = ArmorService.Instance.armorSO.GetSprite(charSelect);
             transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite
                 = sprite;
+            PopulateGemSocketed();
         }
-        void PopulateArmorPanel()
-        {
-            Sprite sprite = ArmorService.Instance.armorSO.GetSprite(charSelect);
-            transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite
-                = sprite;
-        }
+       
 
         #endregion
 
@@ -63,18 +63,45 @@ namespace Interactables
         #endregion
 
 
-        #region OnDragged and Drop 
 
-        // gemservice on panel update
-
-
-        #endregion
 
         #region Socket Controls
-        // is socketable with the divine and support gems 
-        // 
-        // if socketed inform to the Gem Service 
 
+        void PopulateGemSocketed()
+        {
+            CharController charController = InvService.Instance.charSelectController;
+            ItemModel itemModel = charController.itemController.itemModel;
+            List<Iitems> divGemSocketed = itemModel.divItemsSocketed; 
+            Iitems supportGemSocketed = itemModel.supportItemSocketed;
+            GemSO gemSO; 
+            if(supportGemSocketed != null)
+            {
+                gemSO =
+                ItemService.Instance.GetGemSO((GemNames)supportGemSocketed.itemName);
+                socketSlots[2].GetChild(0).GetComponent<Image>().sprite = gemSO.iconSprite;
+            }
+            if (divGemSocketed.Count == 0) {
+
+                socketSlots[0].GetChild(0).GetComponent<Image>().sprite = null;
+                socketSlots[1].GetChild(0).GetComponent<Image>().sprite = null;
+                return; 
+            }
+            if(divGemSocketed.Count == 1)
+            {
+                gemSO = ItemService.Instance.GetGemSO((GemNames)divGemSocketed[0].itemName);
+                socketSlots[0].GetChild(0).GetComponent<Image>().sprite = gemSO.iconSprite;
+                socketSlots[1].GetChild(0).GetComponent<Image>().sprite = null;
+                return; 
+            }
+            if (divGemSocketed.Count == 1)
+            {
+                gemSO = ItemService.Instance.GetGemSO((GemNames)divGemSocketed[0].itemName);
+                socketSlots[0].GetChild(0).GetComponent<Image>().sprite = gemSO.iconSprite;
+                gemSO = ItemService.Instance.GetGemSO((GemNames)divGemSocketed[1].itemName);
+                socketSlots[1].GetChild(0).GetComponent<Image>().sprite = gemSO.iconSprite;
+                return;
+            }
+        }
         #endregion 
 
 

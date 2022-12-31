@@ -443,6 +443,9 @@ namespace Interactables
         Sellable, 
         Purchaseable,
         Craftable, 
+        Readable,
+        Enchantable,
+        Rechargeable,
     }
 
     public enum PotionState  // To be discussed with Semih

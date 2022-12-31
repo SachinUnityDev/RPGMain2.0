@@ -17,8 +17,7 @@ namespace Interactables
         //above is import for direct inv interation
         // SO ref hard to find for every click 
         SlotType invSlotType { get; set; }
-        abstract void InitItem(int itemId, int maxInvStackSize); 
-     
+        abstract void InitItem(int itemId, int maxInvStackSize);      
         abstract void OnHoverItem();
         List<int> allBuffs  { get; set; }
     }

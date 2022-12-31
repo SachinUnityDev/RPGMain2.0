@@ -19,16 +19,18 @@ namespace Interactables
         public CharController charController; 
         public ItemModel itemModel;
 
-        public float multFx = 1f; 
-
+        public float multFx = 1f;
+        List<string> displayStrs; 
         public void Init()
         {
-           itemModel = new ItemModel();
+            itemModel = new ItemModel();
+            charController = gameObject.GetComponent<CharController>(); 
         }
 
         void Start()
         {
-           
+            displayStrs = new List<string>();
+            Init(); 
         }
         #region GEM, ENCHANT AND REMOVE
         public bool EnchantTheWeaponThruScroll(GemBase gemBase)
@@ -36,7 +38,7 @@ namespace Interactables
             GemNames gemName = gemBase.gemName; 
             if(ItemService.Instance.CanEnchantGemThruScroll(charController, gemName))
             {
-                itemModel.gemEnchanted.Add(gemBase as Iitems);
+                itemModel.gemEnchanted = (Iitems)gemBase; 
                 itemModel.gemChargeData = new GemChargeData(gemName);
                 return true;
             }
@@ -49,12 +51,8 @@ namespace Interactables
             {
                 itemModel.gemChargeData.chargeRemaining = 0;
             }
-        }       
-        public void RemoveGemEnchanted()
-        {
-            itemModel.gemEnchanted.Clear();
-            itemModel.gemChargeData = null; 
-        }
+        }     
+        
         public bool EnchantInTemple()
         {
             // to be linked to the town scene 
@@ -62,7 +60,7 @@ namespace Interactables
         }
         #endregion
 
-        #region 
+        #region  SOCKET RELATED 
         public void OnSocketSupportGem(GemBase gemBase)
         {
             Iitems item = gemBase as Iitems;
@@ -90,7 +88,6 @@ namespace Interactables
                 gem.SocketedFX(multFx);
             }
         }
-
         void UpdateMultValue()
         {
             int count = 0;

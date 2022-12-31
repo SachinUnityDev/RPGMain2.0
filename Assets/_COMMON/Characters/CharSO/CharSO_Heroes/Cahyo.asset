@@ -278,4 +278,5 @@ MonoBehaviour:
   charOccupies: 0
   posPriority: 01000000020000000300000004000000
   armorType: 3
+  armorTypeStr: Brass
   enchantableGem4Weapon: 0

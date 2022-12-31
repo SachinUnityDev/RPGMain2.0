@@ -6,7 +6,6 @@ namespace Interactables
 {
     public class Ametyst : GemBase, Iitems, IPreciousGem
     {
-       
         public override GemNames gemName => GemNames.Ametyst;
         public int itemId { get; set; }
         public ItemType itemType => ItemType.Gems; 

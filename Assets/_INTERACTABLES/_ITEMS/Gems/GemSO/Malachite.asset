@@ -15,7 +15,7 @@ MonoBehaviour:
   gemName: 2
   gemType: 0
   allCharsThatCanBeEnchanted: 010000002b0000000500000002000000
-  inventoryStack: 3
+  maxInvStackSize: 2
   cost:
     silver: 0
     bronze: 72
@@ -24,5 +24,5 @@ MonoBehaviour:
   desc: 
   iconSprite: {fileID: 21300000, guid: 45e89863093fcc24eaa5448a96def745, type: 3}
   allLines:
-  - 'On Socket: +8-12<style="Earth"> Earth Res </style>'
-  - Can be enchanted on certain weapons.
+  - 'On Socket: +6-10 <style="Earth"> Earth Res </style>'
+  - Can be enchanted on certain weapons

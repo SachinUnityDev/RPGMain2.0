@@ -40,7 +40,16 @@ namespace Interactables
                     break;
                 case ItemActions.Sellable:
                     iComInvActions.Dispose();
-                    break;                
+                    break;
+                case ItemActions.Readable:
+                    iComInvActions.Read();
+                    break;
+                case ItemActions.Enchantable:
+                    iComInvActions.Enchant();
+                    break;
+                case ItemActions.Rechargeable:
+                    iComInvActions.RechargeGem();
+                    break;
                 default:
                     break;
             }

@@ -59,10 +59,12 @@ namespace Interactables
 
         public void SocketedFX(float multFx)
         {
-            fxVal1 = (int)(Random.Range(5f, 10f) * multFX);
+            fxVal1 = (int)(Random.Range(5f, 8f) * multFX);
             int buffID = charController.buffController.ApplyBuff(CauseType.Gems, (int)gemName, charID
                     , StatsName.darkRes, fxVal1, TimeFrame.Infinity, 1, true);
             allBuffs.Add(buffID);
+            string str = $"+{fxVal1} Dark Res";
+            allDisplayStr.Add(str);
         }
 
 

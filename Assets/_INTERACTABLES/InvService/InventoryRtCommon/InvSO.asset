@@ -46,16 +46,22 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1cdb8eed7424af446ba45dd7b82731a1, type: 2}
   allItemStr:
   - itemActions: 1
-    itemStr: Equipable
+    itemStr: Equip
   - itemActions: 2
-    itemStr: Consumable
+    itemStr: Consume
   - itemActions: 3
-    itemStr: Disposable
+    itemStr: Dispose
   - itemActions: 4
-    itemStr: Sellable
+    itemStr: Sell
   - itemActions: 5
-    itemStr: Purchaseable
+    itemStr: Purchase
   - itemActions: 6
-    itemStr: Craftable
+    itemStr: Craft
+  - itemActions: 7
+    itemStr: Read
+  - itemActions: 8
+    itemStr: Enchant
+  - itemActions: 9
+    itemStr: Recharge
   itemImgPrefab: {fileID: 2561249727629156307, guid: fd0deb7eea02e044bab3aa79aa71f4d5,
     type: 3}

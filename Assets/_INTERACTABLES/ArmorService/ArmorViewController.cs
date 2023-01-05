@@ -78,7 +78,7 @@ namespace Interactables
             {
                 gemSO =
                 ItemService.Instance.GetGemSO((GemNames)supportGemSocketed.itemName);
-                socketSlots[2].GetChild(0).GetComponent<Image>().sprite = gemSO.iconSprite;
+                 socketSlots[2].GetChild(0).GetComponent<Image>().sprite = gemSO.iconSprite;
             }
             if (divGemSocketed.Count == 0) {
 

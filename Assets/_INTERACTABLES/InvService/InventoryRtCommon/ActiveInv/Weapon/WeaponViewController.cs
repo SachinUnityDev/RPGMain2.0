@@ -43,7 +43,7 @@ namespace Interactables
         void PopulateGemEnchanted()
         {          
             CharController charController = InvService.Instance.charSelectController;
-            
+            if (charController == null) return;
             ItemModel itemModel = charController.itemController.itemModel;
             GemChargeData charge = itemModel.gemChargeData; 
             if(charge == null)

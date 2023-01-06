@@ -55,7 +55,7 @@ namespace Interactables
 
 
     public class ItemSlotController : MonoBehaviour, IDropHandler, IPointerClickHandler
-                                      , iSlotable, IComInvActions
+                                                , iSlotable, IComInvActions
     {
         #region DECLARATIONS
         public int slotID { get; set; }
@@ -209,6 +209,7 @@ namespace Interactables
             Iitems item = ItemsInSlot[0];
             ClearSlot();
             InvService.Instance.invMainModel.RemoveItem2CommInv(item);  // ITEM REMOVED FROM INV MAIN MODEL HERE
+            ItemsInSlot.Remove(item);
             if (ItemsInSlot.Count >= 1)
             {
                 RefreshImg(item);
@@ -459,14 +460,7 @@ namespace Interactables
 
             if(div != null)
             {
-                if (itemModel.CanSocketDivGem(ItemsInSlot[0]) !=-1)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false; 
-                }
+                return itemModel.CanSocketDivGem(ItemsInSlot[0]);          
             }
             else if(support != null)
             {
@@ -503,7 +497,6 @@ namespace Interactables
             }
             RemoveItem();
         }
-
         public bool IsReadable()
         {
            EnchantScrollBase enchantScrollBase = ItemsInSlot[0] as EnchantScrollBase;
@@ -512,7 +505,6 @@ namespace Interactables
             else
                 return false; 
         }
-
         public void Read()
         {
             EnchantScrollBase enchantScrollBase = ItemsInSlot[0] as EnchantScrollBase;
@@ -520,7 +512,6 @@ namespace Interactables
             ItemService.Instance.OnScrollRead(scrollName);
             RemoveItem();
         }
-
         public bool IsRechargeable()
         {
             return false; 

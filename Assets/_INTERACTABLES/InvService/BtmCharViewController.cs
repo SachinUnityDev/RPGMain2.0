@@ -15,8 +15,10 @@ namespace Interactables
         [SerializeField] List<CharModel> allAvailableChars = new List<CharModel>();
         [SerializeField] List<CharModel> rightsChars = new List<CharModel>();
         [SerializeField] List<CharModel> leftChars = new List<CharModel>();
+
         [SerializeField] List<GameObject> leftCharsGO = new List<GameObject>();
         [SerializeField] List<GameObject> rightCharsGO = new List<GameObject>();
+
         [SerializeField] GameObject leftPanelGO;
         [SerializeField] GameObject rightPanelGO;
         [SerializeField] GameObject centerPanelGO;
@@ -50,8 +52,9 @@ namespace Interactables
             charSelect = allAvailableChars[0];
             InvService.Instance.On_CharSelectInv(charSelect);
 
-            SortChars();
-            PopulatePortPanels();
+            //  SortChars();
+            PlayCloseAnim();
+           
         }
         public void CharSelected(CharModel charModel, GameObject portGO, bool isRight)
         {
@@ -96,26 +99,25 @@ namespace Interactables
             centerPanelGO.transform.GetChild(0).GetComponent<CharPortraitPtrEvents>().SetPanel(isRight);
             centerPanelGO.transform.GetChild(0).SetParent(panel);
         
-               
-
             portGO.transform.SetParent(centerPanelGO.transform);
             portGO.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
             portGO.transform.DOLocalMoveX(0, 0.15f);
             SortChars();
            
         }
-        
-      
         void SortChars()
         {
-            index = 0; int midCount = 0;             
-            midCount = (allAvailableChars.Count-1) / 2;
+            index = 0; int midCount = 0;
+            if(allAvailableChars.Count%2 !=0)
+                midCount = (allAvailableChars.Count-1) / 2;
+            else
+                midCount = (allAvailableChars.Count) / 2;
             leftChars.Clear();rightsChars.Clear();
             for (int i = 0; i < allAvailableChars.Count; i++)
             {
                 if(allAvailableChars[i].charName != charSelect.charName)
                 {
-                    if (i <= midCount)
+                    if (i < midCount)
                     {
                         leftChars.Add(allAvailableChars[i]);
                     }
@@ -144,9 +146,9 @@ namespace Interactables
         void PopulatePortPanels( )
         {
             ClearPanels();
+            SortChars();
 
-
-            if (leftChars.Count >= 1)
+            if (leftChars.Count > 0)
             {
                 foreach (CharModel charModel in leftChars)
                 {
@@ -159,7 +161,7 @@ namespace Interactables
                     leftCharsGO.Add(portChar);
                 }
             }
-            if(rightsChars.Count >= 1)
+            if(rightsChars.Count > 0)
             {
                 foreach (CharModel charModel in rightsChars)
                 {
@@ -179,7 +181,7 @@ namespace Interactables
             portCharC.GetComponent<RectTransform>().localScale = Vector3.one;
             portCharC.GetComponent<CharPortraitPtrEvents>().Init(charSelect, this, false);
 
-            PlayCloseAnim();
+            
         }
 
         public void PlayOpenAnim()
@@ -203,6 +205,7 @@ namespace Interactables
 
         public void PlayCloseAnim()
         {
+            PopulatePortPanels();
             for (int i = 0; i < leftCharsGO.Count; i++)
             {
                 leftCharsGO[i].transform.DOLocalMoveX(0, 0.15f);

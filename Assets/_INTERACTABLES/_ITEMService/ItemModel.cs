@@ -134,13 +134,11 @@ namespace Interactables
                 return true;
             return false;
         }
-        public int CanSocketDivGem(Iitems item)
+        public bool CanSocketDivGem(Iitems item)
         {
-            if (divItemsSocketed[0] == null)
-                return 0;
-            else if (divItemsSocketed[1] == null)
-                return 1;
-            else return -1; 
+            if (divItemsSocketed[0] == null || divItemsSocketed[1] == null)
+                return true;
+            return false;
         }
 
         public void SocketItem2Armor(Iitems item, GemType gemType)

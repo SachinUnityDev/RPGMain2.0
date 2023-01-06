@@ -63,33 +63,33 @@ namespace Interactables
         #region  SOCKET RELATED 
         public void OnSocketSupportGem(GemBase gemBase)
         {
-            Iitems item = gemBase as Iitems;
-            itemModel.supportItemSocketed = item;
-            if (itemModel.divItemsSocketed[0] == null &&
-                itemModel.divItemsSocketed[1] == null) return;
+      
             UpdateMultValue();
+                
+               ISupportGem supportGem = gemBase as ISupportGem;                
+                supportGem.ClearSocketBuffs();
+                supportGem.SocketedFX();
+            if (itemModel.divItemsSocketed[0] == null && itemModel.divItemsSocketed[1] == null)
+                return;
 
-            //APPLY FX on divine gem
             foreach (var divGems in itemModel.divItemsSocketed)
             {
-               IDivGem gem = divGems as IDivGem;
+                IDivGem gem = divGems as IDivGem;
+                if (gem == null) continue;
                 gem.ClearSocketBuffs();
                 gem.SocketedFX(multFx);
             }
+
         }
         public void OnSocketDivineGem(GemBase gemBase)
         {
             Iitems item = gemBase as Iitems;
 
-            if (itemModel.divItemsSocketed[0] == null)
-                itemModel.divItemsSocketed[0] = item;
-            else if (itemModel.divItemsSocketed[1] == null)
-                itemModel.divItemsSocketed[1] = item;
-
             UpdateMultValue();
             foreach (var divGems in itemModel.divItemsSocketed)
-            {
+            {                
                 IDivGem gem = divGems as IDivGem;
+                if (gem == null) continue;
                 gem.ClearSocketBuffs();
                 gem.SocketedFX(multFx);
             }

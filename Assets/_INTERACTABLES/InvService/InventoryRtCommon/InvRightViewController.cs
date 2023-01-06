@@ -70,19 +70,32 @@ namespace Interactables
 
         public void ShowRightClickList(ItemSlotController itemSlotController)
         {
-            int i = 0; 
+            int i = 0;
+           
             foreach (ItemActions itemAction in itemSlotController.rightClickActions)
             {
+
                 Transform btn = rightClickOpts.GetChild(i); 
                 btn.GetComponentInChildren<TextMeshProUGUI>().text
                     = InvService.Instance.InvSO.GetItemActionStrings(itemAction);
                 btn.GetComponent<ItemActionPtrController>().Init(itemAction, itemSlotController);
                 i++;
-            }
-            for (int j = i; j < rightClickOpts.childCount; j++)
+            }        
+            foreach (Transform child in rightClickOpts)
             {
-                rightClickOpts.GetChild(j).gameObject.SetActive(false);
+                if(child.GetComponent<ItemActionPtrController>().itemActions == ItemActions.None)
+                {
+                    child.gameObject.SetActive(false);
+                }
+                else
+                {
+                    child.gameObject.SetActive(true);
+                }
+                
             }
+
+
+            Debug.Log("VALUE of" + i +" value of " + itemSlotController.rightClickActions); 
             Transform slotTrans = itemSlotController.gameObject.transform;
             Vector3 offset = new Vector3(100/2f, 130/2f, 0f)* canvas.scaleFactor;  
 
@@ -95,7 +108,12 @@ namespace Interactables
         }
         public void CloseRightClickOpts()
         {
-            rightClickOpts.gameObject.SetActive(false); 
+            rightClickOpts.gameObject.SetActive(false);
+
+            foreach (Transform child in rightClickOpts)
+            {
+                child.GetComponent<ItemActionPtrController>().ResetItemAction();
+            }
         }
 
         #region TO_INV_FILL

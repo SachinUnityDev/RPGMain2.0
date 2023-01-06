@@ -13,17 +13,14 @@ namespace Interactables
 
      
         void Start()
-        {
-            //for (int i = 1; i < transform.childCount; i++)
-            //{
-            //    socketSlots.Add(transform.GetChild(i)); 
-            //}
+        {        
             InvService.Instance.OnCharSelectInvPanel += PopulateArmorPanel;
             UnLoad();
         }
         void OnEnable()
         {
-            Load(); 
+            if(InvService.Instance.isInvPanelOpen)
+                Load(); 
         }
         #region Load UnLoad
         public void Load()
@@ -59,9 +56,7 @@ namespace Interactables
 
         #endregion
 
-        #region Populate Gem Content
-
-        #endregion
+  
 
 
 
@@ -79,25 +74,34 @@ namespace Interactables
             {
                 gemSO =
                 ItemService.Instance.GetGemSO((GemNames)supportGemSocketed.itemName);
+                socketSlots[2].GetChild(0).gameObject.SetActive(true); 
                  socketSlots[2].GetChild(0).GetComponent<Image>().sprite = gemSO.iconSprite;
             }
+            else
+            {
+                socketSlots[2].GetChild(0).gameObject.SetActive(false);
+            }
+
             if (itemModel.divItemsSocketed[0] != null)
             {               
                 gemSO = ItemService.Instance.GetGemSO((GemNames)itemModel.divItemsSocketed[0].itemName);
+                socketSlots[0].GetChild(0).gameObject.SetActive(true);
                 socketSlots[0].GetChild(0).GetComponent<Image>().sprite = gemSO.iconSprite;
             }
             else
             {
-                socketSlots[0].GetChild(0).GetComponent<Image>().sprite = null;
+                socketSlots[0].GetChild(0).gameObject.SetActive(false);
             }
+
             if (itemModel.divItemsSocketed[1] != null)
             {
                 gemSO = ItemService.Instance.GetGemSO((GemNames)itemModel.divItemsSocketed[1].itemName);
+                socketSlots[1].GetChild(0).gameObject.SetActive(true);
                 socketSlots[1].GetChild(0).GetComponent<Image>().sprite = gemSO.iconSprite;
             }
             else
             {
-                socketSlots[1].GetChild(0).GetComponent<Image>().sprite = null;
+                socketSlots[1].GetChild(0).gameObject.SetActive(false);
             }
         }
         #endregion 

@@ -22,9 +22,13 @@ namespace Interactables
             this.iComInvActions = iComInvAction;    
         }
 
+        public void ResetItemAction()
+        {
+            itemActions = ItemActions.None;
+        }
         public void OnPointerClick(PointerEventData eventData)
         {
-            
+            Debug.Log("CLICKED" + itemActions);
             switch (itemActions)
             {
                 case ItemActions.None:
@@ -57,7 +61,7 @@ namespace Interactables
                     break;
             }
             InvService.Instance.invViewController.CloseRightClickOpts();
-
+            ResetItemAction(); 
         }
 
         public void OnPointerEnter(PointerEventData eventData)

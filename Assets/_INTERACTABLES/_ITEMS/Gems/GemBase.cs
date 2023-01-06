@@ -103,7 +103,7 @@ namespace Interactables
         public CharNames charName = CharNames.None;
         public int charID;
 
-        public List<string> allDisplayStr; 
+        public List<string> allDisplayStr = new List<string>(); 
     }
 
     //Divine, // enchanted(Weapon) and socketed(Armor)

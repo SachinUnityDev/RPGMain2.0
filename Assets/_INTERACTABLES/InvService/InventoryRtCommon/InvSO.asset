@@ -63,5 +63,7 @@ MonoBehaviour:
     itemStr: Enchant
   - itemActions: 9
     itemStr: Recharge
+  - itemActions: 10
+    itemStr: Socket
   itemImgPrefab: {fileID: 2561249727629156307, guid: fd0deb7eea02e044bab3aa79aa71f4d5,
     type: 3}

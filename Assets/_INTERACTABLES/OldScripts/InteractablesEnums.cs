@@ -446,6 +446,7 @@ namespace Interactables
         Readable,
         Enchantable,
         Rechargeable,
+        Socketable,
     }
 
     public enum PotionState  // To be discussed with Semih

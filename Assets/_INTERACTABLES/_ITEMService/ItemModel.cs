@@ -58,12 +58,10 @@ namespace Interactables
     [Serializable]
     public class ItemModel  // all the items held by chars
     {
-        // item charge saveable format 
-
 
         [Header("Gem Socketing")]
         public CharNames charName;
-        public List<Iitems> divItemsSocketed = new List<Iitems> ();
+        public Iitems[] divItemsSocketed = new Iitems[2];
         public Iitems supportItemSocketed = null;
 
         [Header("Potion Overconsumption")]
@@ -72,8 +70,11 @@ namespace Interactables
 
         [Header("Enchantment")]
         public Iitems gemEnchanted; 
-        public GemChargeData gemChargeData; 
-        
+        public GemChargeData gemChargeData;
+
+        [SerializeField] int gemSocketedDiv = 0;
+        [SerializeField] int gemSocketedSupport = 0; 
+
         #region  OverConsumption Data 
 
         public float AddOCData(OCData ocData)
@@ -127,8 +128,52 @@ namespace Interactables
         }
         # endregion
 
+        public bool CanSocketSupportGem(Iitems item)
+        {
+            if(supportItemSocketed == null)
+                return true;
+            return false;
+        }
+        public int CanSocketDivGem(Iitems item)
+        {
+            if (divItemsSocketed[0] == null)
+                return 0;
+            else if (divItemsSocketed[1] == null)
+                return 1;
+            else return -1; 
+        }
 
+        public void SocketItem2Armor(Iitems item, GemType gemType)
+        {
+            if (gemType == GemType.Divine) 
+            {
+                gemSocketedDiv++;
+                if (divItemsSocketed[0] == null)
+                {
+                    divItemsSocketed[0] = item; 
+                    IDivGem div = item as IDivGem;
+                    div.OnSocketed();
+                    return ; 
+                }                   
+                else if (divItemsSocketed[1] == null)
+                {
+                    divItemsSocketed[1] = item;
+                    IDivGem div = item as IDivGem;
+                    div.OnSocketed();
+                    return;
+                }
+               
+            }
 
+            if (gemType == GemType.Support)
+            {
+                gemSocketedDiv++;
+                supportItemSocketed = item;
+                ISupportGem support = item as ISupportGem;
+                support.OnSocketed();
+                return;
+            }
+        }
 
         
     }

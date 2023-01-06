@@ -13,8 +13,9 @@ namespace Interactables
         public ArmorModel armorModel;
         public GameObject armorPanel;
 
-        [Header("Not TBR")]
+      
         public ArmorViewController armorViewController;
+        [Header("Not TBR")]
         public ArmorController armorController;
         public void Init()
         {

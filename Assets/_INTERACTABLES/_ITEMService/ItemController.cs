@@ -65,7 +65,8 @@ namespace Interactables
         {
             Iitems item = gemBase as Iitems;
             itemModel.supportItemSocketed = item;
-            if(itemModel.divItemsSocketed.Count == 0) return;
+            if (itemModel.divItemsSocketed[0] == null &&
+                itemModel.divItemsSocketed[1] == null) return;
             UpdateMultValue();
 
             //APPLY FX on divine gem
@@ -79,7 +80,12 @@ namespace Interactables
         public void OnSocketDivineGem(GemBase gemBase)
         {
             Iitems item = gemBase as Iitems;
-            itemModel.divItemsSocketed.Add(item);
+
+            if (itemModel.divItemsSocketed[0] == null)
+                itemModel.divItemsSocketed[0] = item;
+            else if (itemModel.divItemsSocketed[1] == null)
+                itemModel.divItemsSocketed[1] = item;
+
             UpdateMultValue();
             foreach (var divGems in itemModel.divItemsSocketed)
             {

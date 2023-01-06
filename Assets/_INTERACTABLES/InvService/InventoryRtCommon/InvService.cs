@@ -39,11 +39,10 @@ namespace Interactables
         [Header("EXCESS INV Panel")]       
         public ExcessInvViewController excessInvViewController;
       
-
         private void Start()
         {
             invMainModel = new InvMainModel();
-            isInvPanelOpen = false; 
+            isInvPanelOpen = false;            
         }
 
         public void On_DragResult(bool result, ItemsDragDrop itemsDragDrop)

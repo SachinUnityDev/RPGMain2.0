@@ -316,6 +316,12 @@ namespace Interactables
                     rightClickActions.Add(ItemActions.Equipable);
 
             }
+            if (IsSocketable())
+            {
+                if (!rightClickActions.Any(t => t == ItemActions.Socketable))
+                    rightClickActions.Add(ItemActions.Socketable);
+
+            }
             if (IsConsumable())
             {
                 if (!rightClickActions.Any(t => t == ItemActions.Consumable))
@@ -330,8 +336,7 @@ namespace Interactables
             {
                 if (!rightClickActions.Any(t => t == ItemActions.Enchantable))
                     rightClickActions.Add(ItemActions.Enchantable);
-            }
-
+            }        
             if (true) // disposable
             {
                 if (!rightClickActions.Any(t => t == ItemActions.Disposable))
@@ -445,11 +450,58 @@ namespace Interactables
         }
         public bool IsSocketable()
         {
-            return false;
+            // item Service item  itemModel is socket socket available
+            CharController charController = InvService.Instance.charSelectController;
+            ItemController itemController = charController.itemController;
+            ItemModel itemModel = itemController.itemModel;
+            IDivGem div = ItemsInSlot[0] as IDivGem;
+            ISupportGem support = ItemsInSlot[0] as ISupportGem;
+
+            if(div != null)
+            {
+                if (itemModel.CanSocketDivGem(ItemsInSlot[0]) !=-1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false; 
+                }
+            }
+            else if(support != null)
+            {
+               if(itemModel.CanSocketSupportGem(ItemsInSlot[0]))
+                {
+                    return true; 
+                }
+                else
+                {
+                    return false; 
+                }
+            }
+            else
+            {
+                return false; 
+            }
+            
         }
         public void Socket()
         {
+            CharController charController = InvService.Instance.charSelectController;
+            ItemController itemController = charController.itemController;
+            ItemModel itemModel = itemController.itemModel;
 
+            IDivGem idivGem = ItemsInSlot[0] as IDivGem;
+            if(idivGem != null)
+            {
+                itemModel.SocketItem2Armor(ItemsInSlot[0], GemType.Divine);                
+            }
+            else
+            {
+                itemModel.SocketItem2Armor(ItemsInSlot[0], GemType.Support);
+                
+            }
+            RemoveItem();
         }
 
         public bool IsReadable()

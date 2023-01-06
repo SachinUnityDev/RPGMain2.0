@@ -18,7 +18,7 @@ namespace Interactables
         public List<IngredData> allIngredData { get; set; }
         public void RecipeInit()
         {
-            toolData = new ItemData(ItemType.Tools, (int)ToolNames.CookingPot);
+            toolData = new ItemData(ItemType.Tools, (int)ToolNames.Fermentor);
 
             ItemData ingred1 = new ItemData(ItemType.Fruits, (int)FruitNames.Apple);
             allIngredData.Add(new IngredData(ingred1, 1));

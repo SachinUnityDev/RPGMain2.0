@@ -50,6 +50,9 @@ namespace Interactables
                 case ItemActions.Rechargeable:
                     iComInvActions.RechargeGem();
                     break;
+                case ItemActions.Socketable:
+                    iComInvActions.Socket();
+                    break;
                 default:
                     break;
             }

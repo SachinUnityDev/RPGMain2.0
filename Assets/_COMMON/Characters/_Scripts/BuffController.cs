@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Common;
-using System.Linq; 
-
+using System.Linq;
+using common;
 
 namespace Combat
 {
@@ -87,7 +87,7 @@ namespace Combat
            
             CharModData charModVal =  charController.ChangeStat( causeType,  causeName, causeByCharID
                                             ,  statName,  value, true);
-            int currRd = CombatService.Instance.currentRound;
+            int currRd = GameSupportService.Instance.currentRound;
             buffIndex++;
             BuffData buffData = new BuffData(buffIndex,isBuff, currRd, timeFrame, netTime,
                                                                   charModVal, directStr);                
@@ -101,7 +101,7 @@ namespace Combat
             CharModData charModData = charController.ChangeStatRange(causeType, causeName, causeByCharID
                                            , statName, minChgR, maxChgR,  true);
 
-            int currRd = CombatService.Instance.currentRound;
+            int currRd = GameSupportService.Instance.currentRound;
             buffIndex++;
             BuffData buffData = new BuffData(buffIndex, isBuff, currRd, timeFrame, netTime,
                                                             charModData, directStr);            
@@ -117,7 +117,7 @@ namespace Combat
             // when mod the modifier and keep track here
           
             charController.charModel.expBonusModPercent += (int)value;            
-            int currRd = CombatService.Instance.currentRound;
+            int currRd = GameSupportService.Instance.currentRound;
             buffIndex++;
             BuffData buffData = new BuffData(buffIndex, isBuff, currRd, timeFrame, netTime,
                                                                  null , "");
@@ -145,6 +145,8 @@ namespace Combat
                 if(index == -1)
                 {
                     index = allNightbuffs.FindIndex(t => t.buffID == buffID);
+                    if (index == -1)
+                        return false;
                     buffData = allNightbuffs[index];
                     allNightbuffs.Remove(buffData);
                     return true;
@@ -251,7 +253,7 @@ namespace Combat
                                                         , statName, -value, true);  
             }
 
-            int currRd = CombatService.Instance.currentRound;
+            int currRd = GameSupportService.Instance.currentRound;
             buffIndex++;
             BuffData buffData = new BuffData(buffIndex, isBuff, currRd, timeFrame, netTime,
                                                                   charModVal, directStr);
@@ -274,7 +276,7 @@ namespace Combat
                 charController.ChangeStatRange(causeType, causeName, causeByCharID
                                             , statName, -minChgR, -maxChgR, true);
             }
-            int currRd = CombatService.Instance.currentRound;
+            int currRd = GameSupportService.Instance.currentRound;
             buffIndex++;
             BuffData buffData = new BuffData(buffIndex,isBuff, currRd, timeFrame, netTime,
                                                             charModData, directStr);
@@ -427,7 +429,7 @@ namespace Combat
             CharModData charModVal = charController.ChangeStat(causeType, causeName, causeByCharID
                                             , statName, value, true);
 
-            int currRd = CombatService.Instance.currentRound;
+            int currRd = GameSupportService.Instance.currentRound;
             buffIndex++;
             BuffData buffData = new BuffData(buffIndex,isBuff, currRd, timeFrame, netTime,
                                                                   charModVal, directStr);
@@ -445,7 +447,7 @@ namespace Combat
             CharModData charModData = charController.ChangeStatRange(causeType, causeName, causeByCharID
                                            , statName, minChgR, maxChgR, true);
 
-            int currRd = CombatService.Instance.currentRound;
+            int currRd = GameSupportService.Instance.currentRound;
             buffIndex++;
             BuffData buffData = new BuffData(buffIndex,isBuff, currRd, timeFrame, netTime,
                                                             charModData, directStr);

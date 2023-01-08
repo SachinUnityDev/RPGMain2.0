@@ -15,8 +15,10 @@ namespace Interactables
         public event Action<bool, ItemsDragDrop> OnDragResult;
         public event Action<CharModel> OnCharSelectInvPanel;       // int here is charID 
         public CharNames charSelect;
-        public CharController charSelectController; 
+        public CharController charSelectController;
+        [Header("Char SKILLS RELATED")]
 
+        public AllSkillSO allSkillSO; 
 
         [Header("TO BE REF")]
         public InvSO InvSO; // all items SO 
@@ -101,9 +103,6 @@ namespace Interactables
 //{
 //    // integrate with the save system.... 
 //    // char in Play.... 
-
-
-
 
 //    //foreach (GameObject charGO in CharService.Instance.charsInPlay)
 //    //{

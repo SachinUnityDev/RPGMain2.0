@@ -352,7 +352,25 @@ namespace Interactables
             {
                 PopulateRightClickList();
             }
+
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                if(Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl))
+                {
+                    if (ItemsInSlot.Count == 0) return;
+                    Iitems item = ItemsInSlot[0];
+                    if (item != null)
+                    {
+                        if (InvService.Instance.invMainModel.AddItem2ExcessInv(item))
+                        {
+                            RemoveItem();
+                        }
+                    }
+
+                }
+            }
         }
+
 
 
         #endregion
@@ -492,8 +510,7 @@ namespace Interactables
             }
             else
             {
-                itemModel.SocketItem2Armor(ItemsInSlot[0], GemType.Support);
-                
+                itemModel.SocketItem2Armor(ItemsInSlot[0], GemType.Support);                
             }
             RemoveItem();
         }

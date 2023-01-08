@@ -1,6 +1,7 @@
 using Common;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -18,7 +19,7 @@ namespace Interactables
         public float multFX { get; set; }
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
-        public List<int> allBuffs { get; set; }
+        public List<int> allBuffs { get; set; } = new List<int>();
 
         public void ClearSocketBuffs()
         {

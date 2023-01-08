@@ -51,8 +51,7 @@ namespace Interactables
             
             charSelect = allAvailableChars[0];
             InvService.Instance.On_CharSelectInv(charSelect);
-
-            //  SortChars();
+            
             PlayCloseAnim();
            
         }

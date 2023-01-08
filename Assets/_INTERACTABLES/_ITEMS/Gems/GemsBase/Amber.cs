@@ -20,7 +20,7 @@ namespace Interactables
         public List<GemNames> divineGemsSupported =>
                                 new List<GemNames> { GemNames.Carnelian, GemNames.Meranite, GemNames.Rutele };
 
-        public List<int> allBuffs { get; set; }
+        public List<int> allBuffs { get; set; } = new List<int>();
 
         public void InitItem(int itemId, int maxInvStackSize)
         {
@@ -42,19 +42,19 @@ namespace Interactables
 
         public void OnSocketed()
         {
-            charController = ItemService.Instance.selectChar;
+            charController = InvService.Instance.charSelectController;
             itemController = charController.itemController;
             itemController.OnSocketSupportGem(this);
-            SocketedFX();
+           // SocketedFX();
         }
         public void SocketedFX()
         {
-          int buffID =
-            charController.buffController.
-                   ApplyNInitBuffOnDay(CauseType.Gems, (int)itemName, charController.charModel.charID,
-                               StatsName.hpRegen, 1, TimeFrame.Infinity, -1, true);
+            int buffID =
+              charController.buffController.
+                     ApplyNInitBuffOnDay(CauseType.Gems, (int)itemName, charController.charModel.charID,
+                                 StatsName.hpRegen, 1, TimeFrame.Infinity, -1, true);
             allBuffs.Add(buffID);
-            string str = $"+1 Hp Regen";
+            string str = $"+1 Hp Regen at day";
             allDisplayStr.Add(str);
         }
 

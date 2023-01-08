@@ -78,6 +78,34 @@ namespace Interactables
         }
         #endregion
 
+
+        #region EXCESS INV 
+        public bool AddItem2ExcessInv(Iitems item)   // KEY POINT OF ADDITION OF ITEM // Add to model => view
+        {
+            if (!InvService.Instance.IsExcessInvFull())
+            {
+                item.invSlotType = SlotType.ExcessInv;
+                excessInvItems.Add(item);
+                InvService.Instance.excessInvViewController.AddItem2InVView(item);
+                return true;
+            }
+            else
+            {
+                Debug.Log("Inv Size is full");
+                return false;
+            }
+        }
+
+        public bool RemoveItem2ExcessInv(Iitems item) // view=> model 
+        {
+            excessInvItems.Remove(item);
+            return true;
+        }
+
+
+        #endregion 
+
+
         public ActiveInvData GetActiveInvData(CharNames charName)
         {
             ActiveInvData invData = allActiveInvData.Find(t => t.CharName == charName);

@@ -19,7 +19,7 @@ namespace Interactables
         public void Load()
         {
            UIControlServiceGeneral.Instance.TogglePanel(excessInvPanel, true);
-            excessInvPanel.GetComponent<IPanel>().Init();
+            excessInvPanel.GetComponent<IPanel>().Load();
         }
         public void UnLoad()
         {

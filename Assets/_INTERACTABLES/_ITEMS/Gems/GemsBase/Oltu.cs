@@ -18,7 +18,7 @@ namespace Interactables
         public List<GemNames> divineGemsSupported =>
                                 new List<GemNames> { GemNames.Ruri, GemNames.Malachite, GemNames.BlueOnyx };
 
-        public List<int> allBuffs { get; set; }
+        public List<int> allBuffs { get; set; } = new List<int>();
 
         public void OnHoverItem()
         {
@@ -38,10 +38,10 @@ namespace Interactables
         }
         public void OnSocketed()
         {
-            charController = ItemService.Instance.selectChar;
+            charController = InvService.Instance.charSelectController;
             itemController = charController.itemController;
             itemController.OnSocketSupportGem(this);
-            SocketedFX(); 
+            //SocketedFX(); 
         }
         public void SocketedFX()
         {         

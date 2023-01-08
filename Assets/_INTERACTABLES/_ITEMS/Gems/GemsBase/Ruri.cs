@@ -26,6 +26,7 @@ namespace Interactables
             {
                 charController.buffController.RemoveBuff(buffID);
             }
+            allDisplayStr.Clear();
         }
 
         public void OnEnchantedFX()
@@ -44,18 +45,20 @@ namespace Interactables
         }
         public void OnSocketed()
         {
+            fxVal1 = (int)Random.Range(6f, 10f);
             charController = InvService.Instance.charSelectController;
             itemController = charController.itemController;
             itemController.OnSocketDivineGem(this);
-            fxVal1 = (int)Random.Range(6f, 10f); 
+           
         }
 
         public void SocketedFX(float multFx)
         {
-            fxVal1 = (int)(fxVal1* multFX);
-            //int buffID = charController.buffController.ApplyBuff(CauseType.Gems, (int)gemName, charID
-            //        , StatsName.waterRes, fxVal1, TimeFrame.Infinity, 1, true);
-            //allBuffs.Add(buffID);
+          
+            fxVal1 = Mathf.RoundToInt(fxVal1* multFx);
+            int buffID = charController.buffController.ApplyBuff(CauseType.Gems, (int)gemName, charID
+                    , StatsName.waterRes, fxVal1, TimeFrame.Infinity, 1, true);
+            allBuffs.Add(buffID);
             string str = $"+{fxVal1} Water Res";
             allDisplayStr.Add(str);
         }

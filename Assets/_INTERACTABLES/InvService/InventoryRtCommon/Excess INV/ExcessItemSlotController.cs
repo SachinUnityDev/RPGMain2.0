@@ -146,20 +146,22 @@ namespace Interactables
         {
             if (IsEmpty())
             {
-                ClearSlot();
-                return;
+                ClearSlot();                
             }
-            Iitems item = ItemsInSlot[0];
-            ItemsInSlot.Remove(item);
-            if (ItemsInSlot.Count >= 1)
+            else
             {
-                RefreshImg(item);
+                Iitems item = ItemsInSlot[0];
+                ItemsInSlot.Remove(item);
+                InvService.Instance.invMainModel.RemoveItem2ExcessInv(item);
+                if (ItemsInSlot.Count >= 1)
+                {
+                    RefreshImg(item);
+                }
+                else if (IsEmpty())  // After Item is removed
+                {
+                    ClearSlot();
+                }
             }
-            else if (IsEmpty())  // After Item is removed
-            {
-                ClearSlot();
-            }
-            // COUNTER = ItemsInSlot.Count;
             RefreshSlotTxt();
         }
 
@@ -172,8 +174,6 @@ namespace Interactables
             Transform ImgTrans = gameObject.transform.GetChild(0).GetChild(0);
             ImgTrans.GetComponent<Image>().sprite = GetSprite(item);
             ImgTrans.gameObject.SetActive(true);
-            // clear Extra GO
-
         }
         void RefreshSlotTxt()
         {
@@ -188,7 +188,6 @@ namespace Interactables
             {
                 txttrans.gameObject.SetActive(false);
             }
-
         }
         Sprite GetSprite(Iitems item)
         {
@@ -202,60 +201,6 @@ namespace Interactables
 
         #region RIGHT CLICK ACTIONS ON INV RELATED
 
-        public void CloseRightClickOpts()
-        {
-            if (isRightClicked)
-            {
-                InvService.Instance.invViewController.CloseRightClickOpts();
-                isRightClicked = !isRightClicked;
-                return;
-            }
-        }
-
-        void PopulateRightClickList()
-        {
-            Iitems item = ItemsInSlot[0];
-            if (isRightClicked)
-            {
-                InvService.Instance.invViewController.CloseRightClickOpts();
-                isRightClicked = !isRightClicked;
-                return;
-            }
-            else
-            {
-                InvService.Instance.invViewController.OpenRightClickOpts();
-                isRightClicked = !isRightClicked;
-            }
-
-            // get frame from and Buttons frame from InvSO
-            // populate button name from the Item Actions..Inv SO strings
-            //bool isEquipable = InvService.Instance.IsItemEquipable(item, slotType);
-            //bool isConsumable = InvService.Instance.IsItemConsumable(item, slotType);
-            //bool isDisposable = InvService.Instance.IsItemDisposable(item, slotType);
-         
-
-            //rightClickActions.Clear();
-            //if (isEquipable)
-            //{
-            //    if (!rightClickActions.Any(t => t == ItemActions.Equipable))
-            //        rightClickActions.Add(ItemActions.Equipable);
-
-            //}
-            //if (isConsumable)
-            //{
-            //    if (!rightClickActions.Any(t => t == ItemActions.Consumable))
-            //        rightClickActions.Add(ItemActions.Consumable);
-            //}
-            //if (isDisposable)
-            //{
-            //    if (!rightClickActions.Any(t => t == ItemActions.Disposable))
-            //        rightClickActions.Add(ItemActions.Disposable);
-            //}
-
-            // get the excess view controller
-          //  InvService.Instance.invViewController.ShowRightClickList(this);
-
-        }
 
 
 
@@ -266,13 +211,25 @@ namespace Interactables
         {
             if (eventData.button == PointerEventData.InputButton.Right)
             {
-                PopulateRightClickList();
+                Iitems item = ItemsInSlot[0];
+                if (item != null)
+                {
+                    if (InvService.Instance.invMainModel.AddItem2CommInv(item))
+                    {
+                        RemoveItem();
+                    }
+                }
             }
         }
 
         public void LoadSlot(Iitems item)
         {
-            throw new NotImplementedException();
+            
+        }
+
+        public void CloseRightClickOpts()
+        {
+            
         }
     }
 

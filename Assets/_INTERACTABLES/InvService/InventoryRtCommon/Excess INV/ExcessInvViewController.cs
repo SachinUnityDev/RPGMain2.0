@@ -6,32 +6,58 @@ using DG.Tweening;
 using UnityEngine.UI;
 using Common;
 using TMPro;
+using System.Linq;
 
 namespace Interactables
 {
     public class ExcessInvViewController : MonoBehaviour, IPanel
     {
-    
+
+        [Header("Inv Sell & Dispose Buttons")]
+
+        [SerializeField] Button disposeAllBtn;
+        [SerializeField] Button sellAllBtn; 
+
         [Header("Canvas NTBR")]
         [SerializeField] Canvas canvas;
 
         [Header("Excess Panel Ref")]                    
         public int currExcessInvSize;
 
-        public List<InvData> allExcessInvList = new List<InvData>();
+       // public List<InvData> allExcessInvList = new List<InvData>();
 
         public Transform rightClickOpts;
 
         void Start()
         {
             InvService.Instance.OnDragResult += OnDragResult2Excess;
+            disposeAllBtn.onClick.AddListener(OnDisposeAllPressed); 
+            sellAllBtn.onClick.AddListener(OnSellAllPressed);   
+
+            Init();
         }
 
-        public void Init()
+
+        void OnDisposeAllPressed()
         {
-            InitExcessInv();
+            // remove all 
+            ClearInv();
+            for (int i = 0; i < transform.GetChild(0).childCount; i++)
+            {
+                Transform child = transform.GetChild(0).GetChild(i);  // go
+                child.gameObject.GetComponent<ExcessItemSlotController>().RemoveItem();
+            }
+            InvService.Instance.invMainModel.excessInvItems.Clear(); 
         }
 
+        void OnSellAllPressed()
+        {
+            // iitem get SO or directly get price
+
+
+        }
+
+        #region SLOT RELATED 
         public void ShowRightClickList(ItemSlotController itemSlotController)
         {
           
@@ -62,9 +88,27 @@ namespace Interactables
         {
             rightClickOpts.gameObject.SetActive(false);
         }
+        public void OnDragResult2Excess(bool result, ItemsDragDrop itemsDragDrop)
+        {
+            if (!result && itemsDragDrop.itemDragged.invSlotType == SlotType.ExcessInv)
+            {
+                Debug.Log(result + " Drag fail result Invoked ");
+                Transform slotParent = itemsDragDrop.slotParent;
+                itemsDragDrop.transform.DOMove(slotParent.position, 0.1f);
+
+                itemsDragDrop.transform.SetParent(slotParent);
+                RectTransform cloneRect = itemsDragDrop.GetComponent<RectTransform>();
+                cloneRect.anchoredPosition = Vector3.zero;
+                cloneRect.localScale = Vector3.one;
+
+                itemsDragDrop.iSlotable.AddItem(itemsDragDrop.itemDragged);
+            }
+        }
+
+        #endregion
 
         #region TO_INV_FILL
-        public bool AddItem2InVView(InvData invData)  // ACTUAL ADDITION 
+        public bool AddItem2InVView(Iitems item)  // ACTUAL ADDITION 
         {
             bool slotFound = false;
             for (int i = 0; i < transform.GetChild(0).childCount; i++)
@@ -73,9 +117,9 @@ namespace Interactables
                 iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
                 if (iSlotable.ItemsInSlot.Count > 0)
                 {
-                    if (iSlotable.ItemsInSlot[0].itemName == invData.item.itemName)
+                    if (iSlotable.ItemsInSlot[0].itemName == item.itemName)
                     {
-                        if (iSlotable.AddItem(invData.item))
+                        if (iSlotable.AddItem(item))
                         {
                             slotFound = true;
                             break;
@@ -89,15 +133,14 @@ namespace Interactables
                 {
                     Transform child = transform.GetChild(0).GetChild(i);
                     iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
-                    if (iSlotable.AddItem(invData.item))
+                    if (iSlotable.AddItem(item))
                     {
                         slotFound = true;
                         break;
                     }
                 }
             }
-            if (slotFound)
-                allExcessInvList.Add(invData);  // local list 
+          
 
             return slotFound;
         }
@@ -119,15 +162,14 @@ namespace Interactables
         {
             ClearInv();
   
-            foreach (InvData invData in InvService.Instance.invMainModel.excessInvItems)
-            {
-                AddItem2InVView(invData);
-            }
+            //foreach (var item in InvService.Instance.invMainModel.excessInvItems.ToList())
+            //{
+            //    //AddItem2InVView(item);
+            //}
         }
 
         void ClearInv()
-        {
-            allExcessInvList.Clear();// local list
+        {           
             for (int i = 0; i < transform.GetChild(0).childCount; i++)
             {
                 Transform child = transform.GetChild(0).GetChild(i);  // go
@@ -136,30 +178,23 @@ namespace Interactables
         }
         #endregion
 
-        public void OnDragResult2Excess(bool result, ItemsDragDrop itemsDragDrop )
+     
+        #region INIT, LOAD, and UNLOAD
+        public void Init()
         {
-            if (!result && itemsDragDrop.itemDragged.invSlotType == SlotType.ExcessInv)
-            {
-                Debug.Log(result + " Drag fail result Invoked ");
-                Transform slotParent = itemsDragDrop.slotParent;
-                itemsDragDrop.transform.DOMove(slotParent.position, 0.1f);
-
-                itemsDragDrop.transform.SetParent(slotParent);
-                RectTransform cloneRect = itemsDragDrop.GetComponent<RectTransform>();
-                cloneRect.anchoredPosition = Vector3.zero;
-                cloneRect.localScale = Vector3.one;
-
-                itemsDragDrop.iSlotable.AddItem(itemsDragDrop.itemDragged);
-            }
+            ClearInv();
+            InitExcessInv();
         }
-
         public void Load()
         {
+           
         }
 
         public void UnLoad()
         {
         }
+
+        #endregion
     }
 
 }

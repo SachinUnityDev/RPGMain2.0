@@ -91,6 +91,9 @@ namespace Interactables
 
         #region ITEM SO GETTERS
 
+
+
+
         public HerbSO GetHerbSO(HerbNames herbname)
         {
             HerbSO herbSO = allHerbSO.Find(t => t.herbName == herbname);
@@ -213,9 +216,78 @@ namespace Interactables
         }
         #endregion
 
-        #region GETTERS 
+        #region PRICE GETTERS  
 
-     
+        public CostData GetPrice(ItemType itemType, int itemName)
+        {
+            CostData costData = null; 
+            switch (itemType)
+            {
+                case ItemType.None:
+                    break;
+                case ItemType.Potions:
+                    PotionSO potionSO = GetPotionSO((PotionNames)itemName);
+                    costData = new CostData(potionSO.cost, potionSO.fluctuation);
+                    break; 
+                case ItemType.GenGewgaws:
+                    GenGewgawSO genGewgawSO = GetGenGewgawSO((GenGewgawNames)itemName);
+                    costData = new CostData(genGewgawSO.cost, genGewgawSO.fluctuationRate);
+                    break; 
+                case ItemType.Herbs:
+                    HerbSO herbSO = GetHerbSO((HerbNames)itemName);
+                    costData = new CostData(herbSO.cost, herbSO.fluctuation);
+                    break; 
+                case ItemType.Foods:
+                    FoodSO foodSO = GetFoodSO((FoodNames)itemName);
+                    costData=new CostData(foodSO.cost, foodSO.fluctuation);
+                    break;
+                case ItemType.Fruits:
+                    FruitSO fruitSO = GetFruitSO((FruitNames)itemName);
+                    costData = new CostData(fruitSO.cost, fruitSO.fluctuation);
+                    break;                    
+                case ItemType.Ingredients:
+                    IngredSO ingredSO = GetIngredSO((IngredNames)itemName); 
+                    costData = new CostData(ingredSO.cost, ingredSO.fluctuation);
+                    break;
+                case ItemType.XXX:
+                    break;
+                case ItemType.Scrolls:
+                    ScrollSO scrollSO = GetScrollSO((ScrollNames)itemName);
+                    costData = new CostData(scrollSO.cost, scrollSO.fluctuation);   
+                    break;
+                case ItemType.TradeGoods:
+                    TGSO tgSO = GetTradeGoodsSO((TGNames)itemName);
+                    costData = new CostData(tgSO.cost, tgSO.fluctuation);   
+                    break;
+                case ItemType.Tools:
+                   // ToolsSO 
+                    break;
+                case ItemType.Teas:
+                    break;
+                case ItemType.Soups:
+                    break;
+                case ItemType.Gems:
+                    break;
+                case ItemType.Alcohol:
+                    break;
+                case ItemType.Meals:
+                    break;
+                case ItemType.SagaicGewgaws:
+                    break;
+                case ItemType.PoeticGewgaws:
+                    break;
+                case ItemType.RelicGewgaws:
+                    break;
+                case ItemType.Pouches:
+                    break;
+                default:
+                    break;
+
+            }
+            return costData;
+        }
+
+
 
         #endregion
 
@@ -335,10 +407,28 @@ namespace Interactables
                                      CauseType.Items, 2);
 
             }
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                InitItemToInv(SlotType.CommonInv, ItemType.Gems, (int)GemNames.Oltu,
+                                     CauseType.Items, 2);
 
+            }
         }
 
     }
+
+    public class CostData
+    {
+        public Currency cost;
+        public float fluctuation;
+
+        public CostData(Currency cost, float fluctuation)
+        {
+            this.cost = cost;
+            this.fluctuation = fluctuation;
+        }
+    }
+
 }
 //create  item
 //add to inv with slot type

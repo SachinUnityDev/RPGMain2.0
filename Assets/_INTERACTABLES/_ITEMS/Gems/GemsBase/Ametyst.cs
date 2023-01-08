@@ -15,7 +15,7 @@ namespace Interactables
         public TGNames compatibleTg => TGNames.SimpleRing;
         public GenGewgawNames pdtGenGewgawName => GenGewgawNames.AmetystRing;
         public NPCNames mergeManagerNPC => NPCNames.AmishTheMerchant;
-        public List<int> allBuffs { get; set; }
+        public List<int> allBuffs { get; set; } = new List<int>();
         public void InitItem(int itemId, int maxInvStackSize)
         {
             this.itemId = itemId;

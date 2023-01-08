@@ -98,12 +98,15 @@ namespace Interactables
         {
             int count = 0;
             if (itemModel.supportItemSocketed == null) return;
-
+            if (itemModel.divItemsSocketed[0] == null && itemModel.divItemsSocketed[1] == null)
+                return;
             ISupportGem supportGem = itemModel.supportItemSocketed as ISupportGem;
+          
             foreach (Iitems item in itemModel.divItemsSocketed)
             {
                 foreach(GemNames gemName in supportGem.divineGemsSupported)
                 {
+                    if (item == null) continue;
                     if(item.itemName == (int)gemName)
                     {
                         count++; 

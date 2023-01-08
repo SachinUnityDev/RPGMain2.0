@@ -48,7 +48,7 @@ namespace Interactables
         [Header("Inv Panel Ref")]
         [SerializeField] GameObject InvPanel;        
         
-        public List<Iitems> allCommonInvList = new List<Iitems>();
+       // public List<Iitems> allCommonInvList = new List<Iitems>();
         public Transform rightClickOpts;
 
         [Header("Active Inv")]
@@ -151,11 +151,12 @@ namespace Interactables
                     }
                 }
             }
-            if (slotFound)
-            {
-                allCommonInvList.Add(item); // local list 
+            //if (slotFound)
+            //{
+            //    if(slotType == SlotType)
+            //    allCommonInvList.Add(item); // local list 
                
-            }
+            //}
             return slotFound; 
          }
 
@@ -237,8 +238,7 @@ namespace Interactables
             }
         }
         void ClearInv()
-        {
-            allCommonInvList.Clear();
+        {          
             for (int i = 0; i < InvPanel.transform.childCount; i++)
             {
                 Transform child = InvPanel.transform.GetChild(i);

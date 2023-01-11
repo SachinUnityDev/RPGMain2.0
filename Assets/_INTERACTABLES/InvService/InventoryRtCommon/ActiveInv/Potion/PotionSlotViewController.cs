@@ -203,7 +203,10 @@ namespace Interactables
             }
         }
 
-    
+        public void RemoveAllItems()
+        {
+           
+        }
     }
 
 

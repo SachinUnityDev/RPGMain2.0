@@ -15,7 +15,7 @@ MonoBehaviour:
   gemName: 5
   gemType: 0
   allCharsThatCanBeEnchanted: 0600000009000000
-  maxInvStackSize: 2
+  maxInvStackSize: 3
   cost:
     silver: 0
     bronze: 72

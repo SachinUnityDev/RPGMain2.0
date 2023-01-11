@@ -68,6 +68,7 @@ namespace Interactables
             InvService.Instance.invViewController.CloseRightClickOpts();
         }
 
+        #region I-SLOTABLE 
         public void ClearSlot()
         {
             ItemsInSlot.Clear();
@@ -199,6 +200,8 @@ namespace Interactables
             return null;
         }
 
+        #endregion
+
         #region RIGHT CLICK ACTIONS ON INV RELATED
 
 
@@ -230,6 +233,15 @@ namespace Interactables
         public void CloseRightClickOpts()
         {
             
+        }
+
+        public void RemoveAllItems()
+        {
+            int count = ItemsInSlot.Count;
+            for (int i = 0; i < count; i++)
+            {
+                RemoveItem();                
+            }
         }
     }
 

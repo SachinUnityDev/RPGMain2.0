@@ -200,7 +200,12 @@ namespace Interactables
 
         public void LoadSlot(Iitems item)
         {
-            throw new NotImplementedException();
+           
+        }
+
+        public void RemoveAllItems()
+        {
+          
         }
     }
 }

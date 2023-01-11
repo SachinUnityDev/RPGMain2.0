@@ -206,6 +206,11 @@ namespace Interactables
             ItemsInSlot.Add(item);
             RefreshImg(item);
         }
+
+        public void RemoveAllItems()
+        {
+            
+        }
     }
 }
 

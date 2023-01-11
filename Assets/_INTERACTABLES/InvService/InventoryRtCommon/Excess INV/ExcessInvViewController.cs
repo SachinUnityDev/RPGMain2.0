@@ -41,11 +41,11 @@ namespace Interactables
         void OnDisposeAllPressed()
         {
             // remove all 
-            ClearInv();
+           // ClearInv();
             for (int i = 0; i < transform.GetChild(0).childCount; i++)
             {
                 Transform child = transform.GetChild(0).GetChild(i);  // go
-                child.gameObject.GetComponent<ExcessItemSlotController>().RemoveItem();
+                child.gameObject.GetComponent<ExcessItemSlotController>().RemoveAllItems(); 
             }
             InvService.Instance.invMainModel.excessInvItems.Clear(); 
         }
@@ -53,6 +53,28 @@ namespace Interactables
         void OnSellAllPressed()
         {
             // iitem get SO or directly get price
+            for (int i = 0; i < transform.GetChild(0).childCount; i++)
+            {
+                Transform child = transform.GetChild(0).GetChild(i);  // go
+                iSlotable iSlot = child.gameObject.GetComponent<iSlotable>(); 
+                if (!child.gameObject.GetComponent<ExcessItemSlotController>().IsEmpty())
+                {
+                    int count = iSlot.ItemsInSlot.Count;
+                    Iitems item = iSlot.ItemsInSlot[0]; 
+                    if (count > 0)
+                    {
+                        CostData costData = 
+                        ItemService.Instance.GetCostData(item.itemType, item.itemName); 
+                    //    int silver =                   
+                       // costData.cost.silver
+                        
+                    }
+
+                }
+
+            }
+
+            //EcoServices.Instance.PayMoney2Player(); 
 
 
         }

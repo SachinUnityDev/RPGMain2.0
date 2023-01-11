@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Interactables;
-
-
+using Town;
 
 namespace Common
 {
@@ -51,9 +50,10 @@ namespace Common
 
             this.allNPCMoneyData = ecoSO.allNPCMoneyData.DeepClone();
         }
+    
     }
 
-
+ 
 
 }
 

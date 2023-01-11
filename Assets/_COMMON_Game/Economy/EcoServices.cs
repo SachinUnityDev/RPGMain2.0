@@ -22,7 +22,7 @@ namespace Common
             return npcMoney;
         }
 
-        public Currency GetMoneyInAct4Player()
+        public Currency GetMoneyValueNetPlayer()
         {
             return econoModel.moneyNet; 
         }

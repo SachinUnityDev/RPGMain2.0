@@ -116,7 +116,7 @@ namespace Town
 
         void DisplayPlayerMoney()
         {
-            playerMoney = EcoServices.Instance.GetMoneyInAct4Player();
+            playerMoney = EcoServices.Instance.GetMoneyValueNetPlayer();
             playerMoneyGO.FillCurrencyUI(playerMoney);
         }
         void PopulateCharData()

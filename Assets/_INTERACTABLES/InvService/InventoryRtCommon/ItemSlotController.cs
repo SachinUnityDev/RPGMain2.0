@@ -18,6 +18,7 @@ namespace Interactables
         bool isSlotFull();
         List<Iitems> ItemsInSlot { get; set; }
         void RemoveItem();// remove item from the inv Main  Model
+        void RemoveAllItems(); 
         bool AddItem(Iitems item);// add item to the inv Main Model 
         void ClearSlot(); // only clear the display 
         void LoadSlot(Iitems item); // only add to display in view 
@@ -141,6 +142,14 @@ namespace Interactables
                 return false;
         }
 
+        public void RemoveAllItems()
+        {
+            int count = ItemsInSlot.Count;
+            for (int i = 0; i < count; i++)
+            {            
+             RemoveItem();              
+            }
+        }
         public bool isSlotFull()
         {
             if (ItemsInSlot.Count <= ItemsInSlot[0].maxInvStackSize) return false;
@@ -366,12 +375,40 @@ namespace Interactables
                             RemoveItem();
                         }
                     }
-
                 }
             }
+
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                if (Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.LeftShift))
+                {
+                    bool slotfound = false; 
+                    if (ItemsInSlot.Count <= 1) return;
+                    Iitems item = ItemsInSlot[0];
+                    Transform parentTrans = transform.parent; 
+                    for (int i = 0; i < parentTrans.childCount; i++)
+                    {
+                        Transform child = parentTrans.GetChild(i);
+                        iSlotable iSlotable = child.GetComponent<iSlotable>();
+                        if (iSlotable.AddItem(item))
+                        {
+                            slotfound = true;
+                            break; 
+                        }
+                    }
+                    if (slotfound)
+                    {
+                        RemoveItem(); 
+                    }
+                }
+            }
+
         }
 
-
+        //if (InvService.Instance.invMainModel.AddItem2CommInv(item))
+        //{
+        //  RemoveItem();
+        //}
 
         #endregion
 
@@ -537,6 +574,8 @@ namespace Interactables
         {
 
         }
+
+ 
 
         #endregion
     }

@@ -314,16 +314,16 @@ namespace Combat
 
         public void Init()
         {
-            perkSelPanel = gameObject;
-            //= GameObject.FindGameObjectWithTag("PerkSelectionPanel");
-            allPerkInSkill = new List<PerkModelData>();
-            displaySubPanel = perkSelPanel.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(1);
-            skillPanel = displaySubPanel.GetChild(0);
-            weaponPanel = displaySubPanel.GetChild(1);
-            campingPanel = displaySubPanel.GetChild(2);
-            skillPtsDisplay = displaySubPanel.GetChild(3);
-            skilltxt = skillPtsDisplay.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
-            rightSkillBtns = new Button[4];
+            //perkSelPanel = gameObject;
+            ////= GameObject.FindGameObjectWithTag("PerkSelectionPanel");
+            //allPerkInSkill = new List<PerkModelData>();
+            //displaySubPanel = perkSelPanel.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(1);
+            //skillPanel = displaySubPanel.GetChild(0);
+            //weaponPanel = displaySubPanel.GetChild(1);
+            //campingPanel = displaySubPanel.GetChild(2);
+            //skillPtsDisplay = displaySubPanel.GetChild(3);
+            //skilltxt = skillPtsDisplay.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
+            //rightSkillBtns = new Button[4];
         }
     }
 }

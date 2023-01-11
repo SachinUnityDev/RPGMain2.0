@@ -218,7 +218,7 @@ namespace Interactables
 
         #region PRICE GETTERS  
 
-        public CostData GetPrice(ItemType itemType, int itemName)
+        public CostData GetCostData(ItemType itemType, int itemName)
         {
             CostData costData = null; 
             switch (itemType)

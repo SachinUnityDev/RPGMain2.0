@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Common;
-using System.Linq; 
-
+using System.Linq;
+using Interactables;
 namespace Combat
 {
     [System.Serializable]
@@ -17,7 +17,7 @@ namespace Combat
         public virtual int charID { get; set; }
         protected CharController targetController;
         protected CharController charController;
-        protected SkillController skillController;
+        protected SkillController1 skillController;
         protected DynamicPosData myDyna; 
 
         protected SkillData skillData = new SkillData();
@@ -33,7 +33,7 @@ namespace Combat
         #endregion
 
         #region APPLY and HOVER
-        public virtual void SkillInit(SkillController _skillController) 
+        public virtual void SkillInit(SkillController1 _skillController) 
         {
             //if (SkillService.Instance.allSkillModels
             //    .Any(t => t.skillName == skillName && t.charName == charName 
@@ -47,8 +47,8 @@ namespace Combat
             skillData = skillDataSO.allSkills.Find(t => t.skillName == skillName);
            
             skillModel = new SkillModel(skillData);
-            skillModel.skillID = skillController.skillID;
-            skillModel.charID = skillController.charID;
+            //skillModel.skillID = skillController.skillID;
+            skillModel.charID = charID; 
             //SkillService.Instance.allSkillModels.Add(skillModel);
             skillController.allSkillModels.Add(skillModel);
             charGO = skillController.gameObject;

@@ -54,6 +54,7 @@ namespace Interactables
 
         public void Load()
         {
+            btmCharViewController.gameObject.transform.SetParent(transform);
             transform.parent.gameObject.SetActive(true);
             InvService.Instance.isInvPanelOpen = true;
         }
@@ -69,6 +70,7 @@ namespace Interactables
             invRightViewController.Init();
             btmCharViewController.Init();
             levelViewController.Init();
+            btmCharViewController.gameObject.transform.SetParent(transform);
 
         }
     }

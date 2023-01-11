@@ -19,6 +19,8 @@ namespace Interactables
         [SerializeField] GameObject skillPanel;
         [SerializeField] GameObject loreParentPanel;
         [SerializeField] GameObject invPanel;
+        [SerializeField] GameObject BtmCharPanel; 
+
 
         [Header("Not to be ref")]
         [SerializeField] Button beastiaryBtn;

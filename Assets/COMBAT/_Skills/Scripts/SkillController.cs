@@ -21,11 +21,13 @@ namespace Combat
 
     public class SkillController : MonoBehaviour   // mananges Skill for one character
     {
-       
+        [Header("CHARACTER RELATED")]        
         [SerializeField] CharMode charMode;
         CharController charController;
         public CharNames charName;
         public int charID;  
+
+
         public int currSkillID;
         // SKILLS
         public List<SkillNames> allSkillInChar = new List<SkillNames>();        
@@ -53,7 +55,8 @@ namespace Combat
             charName = charController.charModel.charName; 
             charMode = charController.charModel.charMode;
             charID = charController.charModel.charID;
-            PopulateSkillList1();
+            CharService.Instance.OnCharAddedToParty += PopulateSkillList1; 
+            //PopulateSkillList1();
             PopulatePerkList();
             CombatEventService.Instance.OnSOR += CheckNUpdateSkillState;
             CombatEventService.Instance.OnEOR += PopulatePerkList;
@@ -73,7 +76,7 @@ namespace Combat
 
         #region Skill and Perk Init
 
-        public void PopulateSkillList1()
+        public void PopulateSkillList1(CharNames charName)
         {
             SkillDataSO = SkillService.Instance.GetSkillSO(charName);
             foreach (SkillData skill in SkillDataSO.allSkills)

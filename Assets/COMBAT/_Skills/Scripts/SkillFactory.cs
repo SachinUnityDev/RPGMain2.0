@@ -12,11 +12,11 @@ namespace Combat
     {
 
         Dictionary<SkillNames, Type> allSkills = new Dictionary<SkillNames, Type>();
-
+        [SerializeField] int skillCount; 
         void Start()
         {
-           // CombatEventService.Instance.OnSOC += SkillsInit; 
-
+            // CombatEventService.Instance.OnSOC += SkillsInit; 
+            CharService.Instance.OnCharAddedToParty += (CharNames charName) =>SkillsInit();
         }
 
         #region SKILL_INIT
@@ -32,8 +32,8 @@ namespace Combat
                     var t = Activator.CreateInstance(getSkill) as SkillBase;
                     if(t.skillLvl == SkillLvl.Level0)
                          allSkills.Add(t.skillName, getSkill);
-                }           
-      
+                }
+            skillCount = allSkills.Count;
             InitPerks();
         }
     
@@ -92,7 +92,7 @@ namespace Combat
                      , P1.skillLvl, P1.preReqList, PerkSelectState.Clickable);
             
                 SkillService.Instance.allSkillPerksData.Add(skillPerkData);
-            
+                
             }
         }
 

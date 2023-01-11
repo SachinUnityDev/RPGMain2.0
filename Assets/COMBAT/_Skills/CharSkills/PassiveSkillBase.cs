@@ -37,13 +37,12 @@ namespace Combat
 
         public virtual void SkillInit(SkillNames skillName, int charID)
         {
-            skillController = SkillService.Instance.GetSkillController(charID);
-            skillModel = skillController?.allSkillModels.Find(t => t.skillName == skillName);
-
             charController = CharService.Instance.GetCharCtrlWithCharID(charID);
             charGO = SkillService.Instance.GetGO4SkillCtrller(charName);
             currDyna = GridService.Instance.GetDyna4GO(charGO);
 
+            skillController = SkillService.Instance.GetSkillController(charController);
+            skillModel = skillController?.allSkillModels.Find(t => t.skillName == skillName);
             AddTargetPos();
         }
         public virtual void SkillSelected()

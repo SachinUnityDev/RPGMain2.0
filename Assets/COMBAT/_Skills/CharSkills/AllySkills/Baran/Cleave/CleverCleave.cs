@@ -35,16 +35,16 @@ namespace Combat
         {
             base.BaseApply();
 
-            foreach (PerkModelData perkModel in SkillService.Instance.allSkillPerksData)
+            foreach (SkillPerkData skillModelData in skillController.allSkillPerkData)
             {
-                if (perkModel.state == PerkSelectState.Clicked && perkModel.perkName == PerkNames.EdgyAxe)
+                if (skillModelData.state == PerkSelectState.Clicked && skillModelData.perkName == PerkNames.EdgyAxe)
                 {
                     skillController.allPerkBases.Find(t => t.skillName == skillName
                                                            && t.skillLvl == SkillLvl.Level1
                                                            && t.state == PerkSelectState.Clicked).chance = 60f;
 
                 }
-                if (perkModel.state == PerkSelectState.Clicked && perkModel.perkName == PerkNames.Pusher)
+                if (skillModelData.state == PerkSelectState.Clicked && skillModelData.perkName == PerkNames.Pusher)
                 {
                     //chance = skillController.allPerkBases.Find(t => t.skillName == skillName
                     //                                        && t.skillLvl == SkillLvl.Level1

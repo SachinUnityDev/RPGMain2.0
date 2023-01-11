@@ -42,10 +42,7 @@ namespace Common
            
         }
 
-        void PopulateLeftSkillPanel()
-        {
-
-        }
+        
 
 
 

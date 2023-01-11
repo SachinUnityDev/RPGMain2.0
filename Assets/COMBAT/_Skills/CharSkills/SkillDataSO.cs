@@ -24,7 +24,7 @@ namespace Combat
 
 
     [CreateAssetMenu(fileName = "SkillDataSO", menuName = "Skill Service/SkillDataSO")]
-    public class SkillDataSO : ScriptableObject
+    public class SkillDataSO : ScriptableObject  // each char has one Skill SO and  allSkillInside this SO
     {
         public CharNames charName;
         public Sprite combatPose;
@@ -76,6 +76,9 @@ namespace Combat
                 }
             }
         }
+
+
+
     }
 
 

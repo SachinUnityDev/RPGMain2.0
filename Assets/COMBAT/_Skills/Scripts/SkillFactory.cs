@@ -9,34 +9,43 @@ using Common;
 namespace Combat
 {
     [Serializable]
-    public class PerkModelData
+    public class PerkBaseData
     {
-        public PerkSelectState state;
-        public SkillNames skillName;
-        public Type perkBase;
+        //public PerkSelectState state;
+        public SkillNames skillName;      
         public PerkNames perkName;
-        public PerkType perkType;
-        public SkillLvl perkLvl;
-        public List<PerkNames> preReqList = new List<PerkNames>();
+        public Type perkBase;
 
-        public PerkModelData(Type _perkBase, SkillNames _skillName, PerkNames _perkName,
-            PerkType _perkType, SkillLvl _perkLvl, List<PerkNames> _preReqList, PerkSelectState _state)
+        public PerkBaseData(SkillNames skillName, PerkNames perkName, Type perkBase)
         {
-            state = _state;
-            skillName = _skillName;
-            perkName = _perkName;
-            perkType = _perkType;
-            perkLvl = _perkLvl;
-            perkBase = _perkBase;
-            preReqList = _preReqList;
+            this.skillName = skillName;
+            this.perkName = perkName;
+            this.perkBase = perkBase;
         }
+
+
+        //public PerkType perkType;
+        //public SkillLvl perkLvl;
+        //public List<PerkNames> preReqList = new List<PerkNames>();
+
+        //public PerkModelData(Type _perkBase, SkillNames _skillName, PerkNames _perkName,
+        //    PerkType _perkType, SkillLvl _perkLvl, List<PerkNames> _preReqList, PerkSelectState _state)
+        //{
+        //   // state = _state;
+        //    skillName = _skillName;
+        //    perkName = _perkName;
+        //    //perkType = _perkType;
+        //    //perkLvl = _perkLvl;
+        //    //perkBase = _perkBase;
+        //    //preReqList = _preReqList;
+        //}
 
     }
     public class SkillFactory : MonoBehaviour
     {
 
         Dictionary<SkillNames, Type> allSkills = new Dictionary<SkillNames, Type>();
-        public List<PerkModelData> allSkillPerksData = new List<PerkModelData>(); 
+        public List<PerkBaseData> allSkillPerksData = new List<PerkBaseData>(); 
 
         [SerializeField] int skillCount; 
         void Start()
@@ -105,18 +114,16 @@ namespace Combat
             {
                 var P1 = Activator.CreateInstance(perk) as PerkBase;
 
-                PerkModelData skillPerkData = new PerkModelData(perk, P1.skillName, P1.perkName, P1.perkType
-                     , P1.skillLvl, P1.preReqList, PerkSelectState.Clickable);
-            
+                PerkBaseData skillPerkData = new PerkBaseData(P1.skillName, P1.perkName, perk);            
                 allSkillPerksData.Add(skillPerkData);                
             }
         }
 
         public PerkBase GetPerkBase(SkillNames skillName, PerkNames perkName)
         {
-            List<PerkModelData> skillPerkData = allSkillPerksData.Where(t => t.skillName == skillName).ToList();
+            List<PerkBaseData> skillPerkData = allSkillPerksData.Where(t => t.skillName == skillName).ToList();
 
-            foreach (PerkModelData perkData in skillPerkData)
+            foreach (PerkBaseData perkData in skillPerkData)
             {
                 var P1 = Activator.CreateInstance(perkData.perkBase) as PerkBase;
 
@@ -126,9 +133,9 @@ namespace Combat
             return null; 
         }
        
-        public List<PerkModelData> GetSkillPerkData(SkillNames _skillName)
+        public List<PerkBaseData> GetSkillPerkData(SkillNames _skillName)
         {
-            List<PerkModelData> skillPerkData = SkillService.Instance.skillFactory.allSkillPerksData
+            List<PerkBaseData> skillPerkData = SkillService.Instance.skillFactory.allSkillPerksData
                                                   .Where(t => t.skillName == _skillName).ToList();
             if(skillPerkData.Count > 0)
             return skillPerkData;

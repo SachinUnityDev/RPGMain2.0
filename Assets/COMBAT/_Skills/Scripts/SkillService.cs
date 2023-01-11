@@ -419,21 +419,21 @@ namespace Combat
         }
         public void PerkUnLock(PerkNames _perkName, GameObject btn)
         {       
-               
+           // shifted to the skillController    
                          
                
         }
-        public void ChangePerkState(PerkNames _perkName, PerkSelectState _state)
-        {
-            allSkillPerksData.Find(t => t.perkName == _perkName).state = _state;
-        }
+        //public void ChangePerkState(PerkNames _perkName, PerkSelectState _state)
+        //{
+        //    allSkillPerksData.Find(t => t.perkName == _perkName).state = _state;
+        //}
 
         #endregion
         #region GETTERS and SETTERS
 
-        public SkillController GetSkillController(int _charID)
+        public SkillController1 GetSkillController(CharController _charController)
         {
-            SkillController skillController = allSkillControllers.Find(t => t.charID == _charID);
+            SkillController1 skillController = allSkillControllers.Find(t => t.charController == _charController);
             if (skillController != null)
                 return skillController; 
             else
@@ -503,8 +503,6 @@ namespace Combat
             return 0;
         }
 
-
-
         public SkillModel GetSkillModel(int _charID, SkillNames _skillName)
         {
 
@@ -531,38 +529,32 @@ namespace Combat
             GameObject go = allSkillControllers.Find(t => t.charName == _charName).gameObject;
             return go;
         }
-        public List<PerkModelData> GetAllPerkdata(SkillNames _skillName)
+        public List<PerkBaseData> GetAllPerkdata(SkillNames _skillName)
         {
-            List<PerkModelData> perks = allSkillPerksData.Where(t => t.skillName == _skillName).ToList();
-            Debug.Log("INSIDE GET PERK DATA "); 
-            Dictionary<PerkType, PerkModelData> perkDataMap = new Dictionary<PerkType, PerkModelData>();
-                
-            for(int i = 1; i < (perks.Count+1); i++)  //Enum.GetNames(typeof(PerkType)).Length
-            {
-                perkDataMap.Add((PerkType)i, perks.Find(t => t.perkType == (PerkType)i));
-               // Debug.Log(perkDataMap); 
-                //Debug.Log("PERK TYPES" + (PerkType)i + "PERK NAME" + 
-                //    perks.Find(t => t.perkType == (PerkType)i).perkName); 
-            }
-           // perkDataMap.Values.ToList().ForEach(t => Debug.Log("List" + t.perkName)); 
-            return   perkDataMap.Values.ToList();           
-        }
-        public List<PerkModelData> GetClickedPerkChain(SkillNames _skillName)
-        {
-            List<PerkModelData> perks = allSkillPerksData.Where(t => t.skillName == _skillName).ToList();
-            List<PerkModelData> perksClicked = perks.Where(t => t.state == PerkSelectState.Clicked).ToList();
+            // List<PerkBaseData> perks = .Where(t => t.skillName == _skillName).ToList();
+            // Debug.Log("INSIDE GET PERK DATA "); 
+            // Dictionary<PerkType, PerkBaseData> perkDataMap = new Dictionary<PerkType, PerkBaseData>();
 
-            perksClicked.ForEach(t => Debug.Log(t.perkName + "type" + t.perkType)); 
-            return perksClicked; 
+            // for(int i = 1; i < (perks.Count+1); i++)  //Enum.GetNames(typeof(PerkType)).Length
+            // {
+            //     perkDataMap.Add((PerkType)i, perks.Find(t => t.perkType == (PerkType)i));
+            //    // Debug.Log(perkDataMap); 
+            //     //Debug.Log("PERK TYPES" + (PerkType)i + "PERK NAME" + 
+            //     //    perks.Find(t => t.perkType == (PerkType)i).perkName); 
+            // }
+            //// perkDataMap.Values.ToList().ForEach(t => Debug.Log("List" + t.perkName)); 
+            // return   perkDataMap.Values.ToList();           
+            return null; 
         }
-        public PerkModelData GetPerkData(PerkNames _perkName)
-        {
-            return allSkillPerksData.Find(t => t.perkName == _perkName); 
-        }
-        public void SetPerkState(PerkNames _perkName, PerkSelectState state)
-        {
-            allSkillPerksData.Find(t => t.perkName == _perkName).state = state; 
-        }
+      
+        //public PerkBaseData GetPerkData(PerkNames _perkName)
+        //{
+        //   // return allSkillPerksData.Find(t => t.perkName == _perkName); 
+        //}
+        //public void SetPerkState(PerkNames _perkName, PerkSelectState state)
+        //{
+        //  //  allSkillPerksData.Find(t => t.perkName == _perkName).state = state; 
+        //}
         
 
         #endregion

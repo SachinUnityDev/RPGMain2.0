@@ -21,7 +21,7 @@ namespace Common
         
 
         [Header("Skill Perk Data")]
-        List<PerkModelData> allSkillPerkData = new List<PerkModelData>(); // contains perkType
+        public List<SkillPerkData> allSkillPerkData = new List<SkillPerkData>();
 
         [Header("All Skill and UnLocked Skill list")]
         public List<SkillNames> allSkillInChar = new List<SkillNames>();
@@ -71,18 +71,21 @@ namespace Common
         {
             foreach (SkillNames _skillName in unLockedSkills)
             {
-                List<PerkModelData> skillPerkData =   
+                List<PerkBaseData> skillPerkData =   
                          SkillService.Instance.skillFactory.GetSkillPerkData(_skillName);
                 
-                foreach (PerkModelData perkData in skillPerkData)
+                foreach (PerkBaseData perkData in skillPerkData)
                 {
 
                     PerkBase P1 = SkillService.Instance.skillFactory
                                 .GetPerkBase(perkData.skillName, perkData.perkName); 
-                    allPerkBases.Add(P1);
+                    allPerkBases.Add(P1);// perk bases
                     P1.SkillInit(this);
+
+                    SkillPerkData skillModelData = new SkillPerkData(P1.skillName, P1.perkName, P1.state,
+                        P1.perkType, P1.skillLvl, P1.preReqList);
+                    allSkillPerkData.Add(skillModelData);  // model data captures state and lvl
                 }
-                allSkillPerkData.AddRange(skillPerkData);
             }
 
         }
@@ -96,7 +99,7 @@ namespace Common
 
             allSkillBases.Find(t => t.skillName == _skillName).SkillHovered();
 
-            List<PerkModelData> clickedPerkList = allSkillPerkData
+            List<SkillPerkData> clickedPerkList = allSkillPerkData
                 .Where(t => t.skillName == _skillName && t.state == PerkSelectState.Clicked).ToList();
 
             clickedPerkList.ForEach(t => SkillServiceView.Instance.skillCardData.perkChain.Add(t.perkType));
@@ -109,7 +112,7 @@ namespace Common
         {
             allSkillBases.Find(t => t.skillName == _skillName).SkillSelected();
 
-            List<PerkModelData> clickedPerkList = allSkillPerkData
+            List<SkillPerkData> clickedPerkList = allSkillPerkData
                 .Where(t => t.skillName == _skillName && t.state == PerkSelectState.Clicked).ToList();
 
 
@@ -160,26 +163,52 @@ namespace Common
 
         #endregion 
 
-        public void OnPerkUnlock(PerkNames _perkName)
+        public SkillPerkData GetSkillModelData(SkillNames _skillName)
         {
-            if (currSkillPts > 0)
-                currSkillPts--;
-            else return;
-            Debug.Log("inside perk unlocked" + btn.name);
-            PerkModelData snp = allSkillPerkData.Find(t => t.perkName == _perkName);
-          //  CharNames charName = GetChar4Skill(snp.skillName);
-            //allSkillControllers.Find(t => t.charName == charName).UpdatePerkState(_perkName, PerkSelectState.Clicked);
-
-            snp.state = PerkSelectState.Clicked;
-
-            UIControlServiceCombat.Instance.TogglePerkSelectState(UIElementType.PerkButton,
-                                                        btn, PerkSelectState.Clicked);
-            // update skill pts and UI 
-            // perk view Controller
-            //perkSelectionController.UpdateSkillPts();
+            SkillPerkData skillPerkData = 
+                    allSkillPerkData.Find(t => t.skillName == _skillName);
+            if(skillPerkData != null)
+                return skillPerkData;
+            else
+            {
+                Debug.Log("Skill Perk data not found"+ _skillName);
+            }
+            return null; 
         }
 
 
+
+        public void OnPerkUnlock(PerkNames _perkName)
+        {
+            if (charController.charModel.skillPts > 0)
+                charController.charModel.skillPts--;
+            else return;
+        
+            UpdatePerkState(_perkName, PerkSelectState.Clicked);
+            //SkillViewService.. Update skillBtn State.. skill points in view 
+         
+
+        }
+        void UpdatePerkState(PerkNames _perkName, PerkSelectState _state)
+        {
+            foreach (var perkbase in allPerkBases)
+            {
+                if (perkbase.perkName == _perkName)
+                {
+                    perkbase.state = _state;
+                }
+            }
+           allSkillPerkData.Find(t => t.perkName == _perkName).state = PerkSelectState.Clicked;
+        }
+        public List<SkillPerkData> GetClickedPerkChain(SkillNames _skillName)
+        {
+            List<PerkBaseData> perks = new List<PerkBaseData>(); 
+              
+            List<SkillPerkData> allPerks = allSkillPerkData.Where(t => t.skillName == _skillName 
+                                                        && t.state ==PerkSelectState.Clicked).ToList();
+            
+            return allPerks;
+        }
 
         #region  SKILL SELECTION AI 
         public void StartAISkillInController()

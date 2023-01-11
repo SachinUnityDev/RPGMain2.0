@@ -57,7 +57,7 @@ namespace Combat
             // Do a Skill Init at the start of the combat.. 
              
             PopulateTargetPos();
-            return skillModel; 
+           
         }
 
         //public void SetState(SkillSelectState _skillState)

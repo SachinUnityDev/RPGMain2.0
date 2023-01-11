@@ -98,10 +98,10 @@ namespace Combat
             foreach (SkillNames _skillName in unLockedSkills)
             {
                
-                List<PerkModelData> skillPerkData = SkillService.Instance.skillFactory.allSkillPerksData
+                List<PerkBaseData> skillPerkData = SkillService.Instance.skillFactory.allSkillPerksData
                                                     .Where(t => t.skillName == _skillName).ToList();
              
-                foreach (PerkModelData perkData in skillPerkData)
+                foreach (PerkBaseData perkData in skillPerkData)
                 {                  
                     
                    // P1.state = SkillService.Instance.allSkillPerksData.Find(t => t.perkName == P1.perkName).state;
@@ -133,28 +133,28 @@ namespace Combat
    
         public void SkillSelect(SkillNames _skillName)
         {
-            allSkillBases.Find(t => t.skillName == _skillName).SkillSelected();
+           // allSkillBases.Find(t => t.skillName == _skillName).SkillSelected();
           
-            List<PerkModelData> clickedPerkList = SkillService.Instance.allSkillPerksData
-                .Where(t => t.skillName == _skillName && t.state == PerkSelectState.Clicked).ToList();
+           // List<PerkBaseData> clickedPerkList = SkillService.Instance.allSkillPerksData
+           //     .Where(t => t.skillName == _skillName && t.state == PerkSelectState.Clicked).ToList();
 
-           // clickedPerkList.ForEach(t => Debug.Log("CLCIKED PERK " + t.perkName));
+           //// clickedPerkList.ForEach(t => Debug.Log("CLCIKED PERK " + t.perkName));
 
-            foreach (var skillPerkdata in SkillService.Instance.allSkillPerksData)
-            {
-                if ((skillPerkdata.skillName == _skillName) && (skillPerkdata.state == PerkSelectState.Clicked))
-                {
-                    foreach (var perkbase in allPerkBases)
-                    {
-                        if(perkbase.perkName == skillPerkdata.perkName)
-                        {
-                            clickedPerkList.ForEach(t => Debug.Log(t.perkName + "PERK BASE CLICKED"));
-                           // perkbase.SkillInit(this);
-                            perkbase.SkillSelected();                             
-                        }
-                    }
-                }
-            }      
+           // foreach (var skillPerkdata in SkillService.Instance.allSkillPerksData)
+           // {
+           //     if ((skillPerkdata.skillName == _skillName) && (skillPerkdata.state == PerkSelectState.Clicked))
+           //     {
+           //         foreach (var perkbase in allPerkBases)
+           //         {
+           //             if(perkbase.perkName == skillPerkdata.perkName)
+           //             {
+           //                 clickedPerkList.ForEach(t => Debug.Log(t.perkName + "PERK BASE CLICKED"));
+           //                // perkbase.SkillInit(this);
+           //                 perkbase.SkillSelected();                             
+           //             }
+           //         }
+           //     }
+           // }      
 
         }    
 

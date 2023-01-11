@@ -100,13 +100,12 @@ namespace Combat
             {
                 return focusChance.GetChance();
             }
-
         }
 
         public void MisFireApply()
         {
             // SKIP AKILL APPLY DMG 
-            SkillController skillController = SkillService.Instance.currSkillController;
+            SkillController1 skillController = SkillService.Instance.currSkillController;
 
             StrikeTargetNos strikeNos = skillController.allSkillBases.Find(t => t.skillName
                                                 == SkillService.Instance.currSkillName).strikeNos;

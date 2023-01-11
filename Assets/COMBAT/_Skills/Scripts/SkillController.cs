@@ -9,15 +9,6 @@ using DG.Tweening;
 
 namespace Combat
 {
-    //[Serializable]
-    //public class SkillAIPercent
-    //{
-    //    SkillNames
-
-
-
-    //}
-
 
     public class SkillController : MonoBehaviour   // mananges Skill for one character
     {
@@ -97,7 +88,7 @@ namespace Combat
                                                   // allSkillBases.ForEach(t => Debug.Log("SKILLBASES INIT" + t.skillName));
                 allSkillBases.Add(skillbase);
                 skillID++;  // could use random generation here 
-                skillbase.SkillInit(this); // pass in all the params when all skills are coded
+               // skillbase.SkillInit(this); // pass in all the params when all skills are coded
 
             }
         }
@@ -107,16 +98,16 @@ namespace Combat
             foreach (SkillNames _skillName in unLockedSkills)
             {
                
-                List<PerkModelData> skillPerkData = SkillService.Instance.allSkillPerksData
+                List<PerkModelData> skillPerkData = SkillService.Instance.skillFactory.allSkillPerksData
                                                     .Where(t => t.skillName == _skillName).ToList();
              
                 foreach (PerkModelData perkData in skillPerkData)
                 {                  
-                    var P1 = Activator.CreateInstance(perkData.perkBase) as PerkBase;
-                    P1.state = SkillService.Instance.allSkillPerksData.Find(t => t.perkName == P1.perkName).state;
-                   // Debug.Log("PERK BASE ADDED .... " + P1.charName);
-                    allPerkBases.Add(P1);
-                    P1.SkillInit(this); 
+                    
+                   // P1.state = SkillService.Instance.allSkillPerksData.Find(t => t.perkName == P1.perkName).state;
+                   //// Debug.Log("PERK BASE ADDED .... " + P1.charName);
+                   // allPerkBases.Add(P1);
+                   //// P1.SkillInit(this); 
                 }
             }      
 
@@ -125,18 +116,18 @@ namespace Combat
 
         public void SkillHovered(SkillNames _skillName)
         {
-            SkillServiceView.Instance.skillCardData.perkChain.Clear();
-            SkillServiceView.Instance.skillCardData.descLines.Clear();
+            //SkillServiceView.Instance.skillCardData.perkChain.Clear();
+            //SkillServiceView.Instance.skillCardData.descLines.Clear();
             
-            allSkillBases.Find(t => t.skillName == _skillName).SkillHovered();
+            //allSkillBases.Find(t => t.skillName == _skillName).SkillHovered();
 
-            List<PerkModelData> clickedPerkList = SkillService.Instance.allSkillPerksData
-                .Where(t => t.skillName == _skillName && t.state == PerkSelectState.Clicked).ToList();
+            //List<PerkModelData> clickedPerkList = SkillService.Instance.allSkillPerksData
+            //    .Where(t => t.skillName == _skillName && t.state == PerkSelectState.Clicked).ToList();
 
-            clickedPerkList.ForEach(t => SkillServiceView.Instance.skillCardData.perkChain.Add(t.perkType));
+            //clickedPerkList.ForEach(t => SkillServiceView.Instance.skillCardData.perkChain.Add(t.perkType));
            
-            clickedPerkList.ForEach(t => allPerkBases.Find(x => x.perkName == t.perkName).SkillInit(this));
-            clickedPerkList.ForEach(t => allPerkBases.Find(x => x.perkName == t.perkName).SkillHovered()); 
+            //clickedPerkList.ForEach(t => allPerkBases.Find(x => x.perkName == t.perkName).SkillInit(this));
+            //clickedPerkList.ForEach(t => allPerkBases.Find(x => x.perkName == t.perkName).SkillHovered()); 
         }
 
    

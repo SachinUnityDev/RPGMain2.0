@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
 namespace Combat
 {
     public class DefaultMove : SkillBase
@@ -23,25 +22,25 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        public override void SkillInit(SkillController _skillController)
+        public override void SkillInit(SkillController1 _skillController)
         {           
-            
-            charName = _skillController.charName;
+            base.SkillInit(skillController);
+            //charName = _skillController.charName;
 
-            Debug.Log("XXXXXXXX Default Move Init for  " + charName);
+            //Debug.Log("XXXXXXXX Default Move Init for  " + charName);
 
-            SkillDataSO skillDataSO = SkillService.Instance.GetSkillSO(charName);
-            skillController = _skillController;
-            charController = skillController.gameObject.GetComponent<CharController>();
+            //SkillDataSO skillDataSO = SkillService.Instance.GetSkillSO(charName);
+            //skillController = _skillController;
+            //charController = skillController.gameObject.GetComponent<CharController>();
 
-            skillData = skillDataSO.allSkills.Find(t => t.skillName == skillName);
+            //skillData = skillDataSO.allSkills.Find(t => t.skillName == skillName);
 
-            skillModel = new SkillModel(skillData);
-            skillModel.skillID = skillController.skillID;
-            skillModel.charID = skillController.charID;
+            //skillModel = new SkillModel(skillData);
+            //// skillModel.skillID = skillController.skillID;
+            //skillModel.charID = charID; 
          
-            skillController.allSkillModels.Add(skillModel);
-            charGO = skillController.gameObject;  
+            //skillController.allSkillModels.Add(skillModel);
+            //charGO = skillController.gameObject;  
                 
                 //SkillService.Instance.GetGO4SkillCtrller(charName);
             myDyna = GridService.Instance.GetDyna4GO(charGO);         

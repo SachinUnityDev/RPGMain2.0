@@ -40,7 +40,7 @@ namespace Common
         public LandscapeController landscapeController;
 
         [Header("SkillController")]
-        public SkillController skillController;
+        public SkillController1 skillController;
 
         float prevHPVal = 0f;
         float prevStaminaVal = 0f; 
@@ -51,7 +51,7 @@ namespace Common
             buffController=  gameObject.AddComponent<BuffController>();
             charStateController = gameObject.AddComponent<CharStateController>();
             itemController = gameObject.AddComponent<ItemController>();
-            skillController = gameObject.AddComponent<SkillController>();
+            skillController = gameObject.AddComponent<SkillController1>();
 
             // CombatEventService.Instance.OnSOT += ()=> PopulateOverCharBars(false); 
             CombatEventService.Instance.OnEOC += FortitudeReset2FortOrg;

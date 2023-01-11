@@ -16,7 +16,7 @@ namespace Combat
         public virtual int charID { get; set;  }
         protected CharController targetController;
         protected CharController charController;
-        protected SkillController skillController;  // ?? to be checked when it init
+        protected SkillController1 skillController;  // ?? to be checked when it init
         protected DynamicPosData currDyna;
 
         protected SkillData skillData;
@@ -39,7 +39,7 @@ namespace Combat
 
         #region APPLY and HOVER
 
-        public virtual void SkillInit(SkillController _skillController) 
+        public virtual void SkillInit(SkillController1 _skillController) 
         {          
             skillModel = skillController?.allSkillModels.Find(t => t.skillName == skillName);
             skillController = _skillController;

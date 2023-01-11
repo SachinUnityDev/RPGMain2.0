@@ -8,10 +8,36 @@ using Common;
 
 namespace Combat
 {
+    [Serializable]
+    public class PerkModelData
+    {
+        public PerkSelectState state;
+        public SkillNames skillName;
+        public Type perkBase;
+        public PerkNames perkName;
+        public PerkType perkType;
+        public SkillLvl perkLvl;
+        public List<PerkNames> preReqList = new List<PerkNames>();
+
+        public PerkModelData(Type _perkBase, SkillNames _skillName, PerkNames _perkName,
+            PerkType _perkType, SkillLvl _perkLvl, List<PerkNames> _preReqList, PerkSelectState _state)
+        {
+            state = _state;
+            skillName = _skillName;
+            perkName = _perkName;
+            perkType = _perkType;
+            perkLvl = _perkLvl;
+            perkBase = _perkBase;
+            preReqList = _preReqList;
+        }
+
+    }
     public class SkillFactory : MonoBehaviour
     {
 
         Dictionary<SkillNames, Type> allSkills = new Dictionary<SkillNames, Type>();
+        public List<PerkModelData> allSkillPerksData = new List<PerkModelData>(); 
+
         [SerializeField] int skillCount; 
         void Start()
         {
@@ -67,15 +93,6 @@ namespace Combat
         #endregion
 
 
-        //public void InitLvl1Perks()
-        //{
-        //    var Perks = Assembly.GetAssembly(typeof(PerkBase)).GetTypes()
-        //                       .Where(myType => myType.IsClass
-        //                       && !myType.IsAbstract && myType.IsSubclassOf(typeof(PerkBase)));
-
-
-
-        //}
 
 
         public void InitPerks()
@@ -91,16 +108,49 @@ namespace Combat
                 PerkModelData skillPerkData = new PerkModelData(perk, P1.skillName, P1.perkName, P1.perkType
                      , P1.skillLvl, P1.preReqList, PerkSelectState.Clickable);
             
-                SkillService.Instance.allSkillPerksData.Add(skillPerkData);
-                
+                allSkillPerksData.Add(skillPerkData);                
             }
         }
 
+        public PerkBase GetPerkBase(SkillNames skillName, PerkNames perkName)
+        {
+            List<PerkModelData> skillPerkData = allSkillPerksData.Where(t => t.skillName == skillName).ToList();
+
+            foreach (PerkModelData perkData in skillPerkData)
+            {
+                var P1 = Activator.CreateInstance(perkData.perkBase) as PerkBase;
+
+                return P1;  
+            }
+            Debug.Log("Perk base not found" + skillName + "PerkName" + perkName);            
+            return null; 
+        }
        
+        public List<PerkModelData> GetSkillPerkData(SkillNames _skillName)
+        {
+            List<PerkModelData> skillPerkData = SkillService.Instance.skillFactory.allSkillPerksData
+                                                  .Where(t => t.skillName == _skillName).ToList();
+            if(skillPerkData.Count > 0)
+            return skillPerkData;
+            else
+            {
+                Debug.Log("Perk Data Not found"+ _skillName);
+                return null; 
+            }
+        }
     }
 }
 
 
+//public void InitLvl1Perks()
+//{
+//    var Perks = Assembly.GetAssembly(typeof(PerkBase)).GetTypes()
+//                       .Where(myType => myType.IsClass
+//                       && !myType.IsAbstract && myType.IsSubclassOf(typeof(PerkBase)));
+
+
+
+//}
 //public SkillBase PopulateSkillBase(SkillNames skillName)
 //{
 //    foreach (var skillType in SkillService.Instance.allSkills)

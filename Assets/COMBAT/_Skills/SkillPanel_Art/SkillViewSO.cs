@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Interactables
+namespace Common
 {
     [CreateAssetMenu(fileName = "SkillViewSO", menuName = "Skill Service/SkillViewSO")]
     public class SkillViewSO : ScriptableObject

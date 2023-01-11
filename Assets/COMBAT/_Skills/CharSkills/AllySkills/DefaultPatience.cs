@@ -25,23 +25,23 @@ namespace Combat
 
 
 
-        public override void SkillInit(SkillController _skillController)
+        public override void SkillInit(SkillController1 _skillController)
         {
-            //base.SkillInit(Skill);
+            base.SkillInit(_skillController);
             
-            charName = _skillController.charName;
-            SkillDataSO skillDataSO = SkillService.Instance.GetSkillSO(charName);
-            skillController = _skillController;
-            charController = skillController.gameObject.GetComponent<CharController>();
-            charID = charController.charModel.charID;
-            skillData = skillDataSO.allSkills.Find(t => t.skillName == skillName);
+            //charName = _skillController.charName;
+            //SkillDataSO skillDataSO = SkillService.Instance.GetSkillSO(charName);
+            //skillController = _skillController;
+            //charController = skillController.gameObject.GetComponent<CharController>();
+            //charID = charController.charModel.charID;
+            //skillData = skillDataSO.allSkills.Find(t => t.skillName == skillName);
 
-            skillModel = new SkillModel(skillData);
-            skillModel.skillID = skillController.skillID;
-            skillModel.charID = skillController.charID;
-            //SkillService.Instance.allSkillModels.Add(skillModel);
-            skillController.allSkillModels.Add(skillModel);
-            charGO = SkillService.Instance.GetGO4SkillCtrller(charName);
+            //skillModel = new SkillModel(skillData);
+            //skillModel.skillID = skillController.skillID;
+            //skillModel.charID = skillController.charID;
+            ////SkillService.Instance.allSkillModels.Add(skillModel);
+            //skillController.allSkillModels.Add(skillModel);
+            //charGO = SkillService.Instance.GetGO4SkillCtrller(charName);
             myDyna = GridService.Instance.GetDyna4GO(charGO);
             // Debug.Log("INSIDE SKILL INIT" + skillName);
             // Do a Skill Init at the start of the combat.. 

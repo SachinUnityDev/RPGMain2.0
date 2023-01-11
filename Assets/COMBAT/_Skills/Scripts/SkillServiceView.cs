@@ -51,7 +51,7 @@ namespace Combat
         public int index;
         GameObject SkillCard; 
         public SkillCardData skillCardData; 
-        public SkillController skillManager;
+        public SkillController1 skillController;
         //public SkillBase skillBase;
 
 #endregion

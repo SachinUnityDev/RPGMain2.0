@@ -16,7 +16,7 @@ namespace Combat
 
         protected CharController targetController;
         protected CharController charController;
-        protected SkillController skillController;  // ?? to be checked when it init
+        protected SkillController1 skillController;  // ?? to be checked when it init
         protected DynamicPosData currDyna;
 
         protected SkillData skillData;

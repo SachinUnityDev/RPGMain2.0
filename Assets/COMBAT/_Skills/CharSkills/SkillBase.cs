@@ -33,7 +33,7 @@ namespace Combat
         #endregion
 
         #region APPLY and HOVER
-        public virtual void SkillInit(SkillController1 _skillController) 
+        public virtual void  SkillInit(SkillController1 _skillController) 
         {
             //if (SkillService.Instance.allSkillModels
             //    .Any(t => t.skillName == skillName && t.charName == charName 
@@ -50,13 +50,14 @@ namespace Combat
             //skillModel.skillID = skillController.skillID;
             skillModel.charID = charID; 
             //SkillService.Instance.allSkillModels.Add(skillModel);
-            skillController.allSkillModels.Add(skillModel);
+            skillController.allSkillModels.Add(skillModel);   // skillModel for ref
             charGO = skillController.gameObject;
             myDyna =  GridService.Instance.GetDyna4GO(charGO);
             // Debug.Log("INSIDE SKILL INIT" + skillName);
             // Do a Skill Init at the start of the combat.. 
              
-            PopulateTargetPos(); 
+            PopulateTargetPos();
+            return skillModel; 
         }
 
         //public void SetState(SkillSelectState _skillState)

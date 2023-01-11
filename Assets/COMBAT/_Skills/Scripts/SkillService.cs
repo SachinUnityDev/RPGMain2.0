@@ -10,44 +10,10 @@ using TMPro;
 
 namespace Combat
 {
-    [Serializable]
-    public class PerkModelData
-    {
-        public PerkSelectState state ;
-        public SkillNames skillName;
-        public Type perkBase;
-        public PerkNames perkName;
-        public PerkType perkType;
-        public SkillLvl perkLvl; 
-        public List<PerkNames> preReqList = new List<PerkNames>(); 
-        
-        public PerkModelData(Type _perkBase, SkillNames _skillName, PerkNames _perkName, 
-            PerkType _perkType, SkillLvl _perkLvl, List<PerkNames> _preReqList , PerkSelectState _state)
-        {
-            state = _state;
-            skillName = _skillName;
-            perkName = _perkName;
-            perkType = _perkType;
-            perkLvl = _perkLvl;
-            perkBase = _perkBase;
-            preReqList = _preReqList; 
-        }
 
-    }
-    [Serializable]
-    //public class SkillModelData
-    //{
-    //    public SkillNames skillName;
-    //    public Type skillBase;
-    //    public SkillSelectState skillstate;
-    //    public SkillModelData(Type _skillBase, SkillNames _skillName, SkillSelectState _skillState)
-    //    {
-    //        skillBase = _skillBase;
-    //        skillName = _skillName;
-    //        skillstate = _skillState; 
-    //    }
-    //}
 
+
+     [Serializable]
     public class SkillEventData
     {
         public CharController strikerController;
@@ -72,16 +38,14 @@ namespace Combat
 
         #region Initializers
 
-        [HideInInspector]
-        public SkillFactory skillFactory;
-       // public Dictionary<SkillNames, Type> allSkills;
+        [Header("SKill Factory NTBR")]
+        public SkillFactory skillFactory;       
 
         [Header("ALL SO")]
         public List<SkillDataSO> allCharSkillSO = new List<SkillDataSO>();
         [Header("ALL SKILL MANAGER")]
-        public List<SkillController> allSkillControllers = new List<SkillController>();
-     //   public List<SkillModel> allSkillModels = new List<SkillModel>();   //DEPRECATED
-        public SkillController currSkillController = new SkillController();
+        public List<SkillController1> allSkillControllers = new List<SkillController1>();   
+        public SkillController1 currSkillController = new SkillController1();
 
         [Header("ALL CTRL AI RELATED")]
        // public List<SkillAIController> allSKillAIControllers = new List<SkillAIController>();
@@ -115,8 +79,9 @@ namespace Combat
         public SkillNames currSkillHovered;
 
         SkillServiceView skillServiceView;
+
         [Header("ALL SKILL PERK DATA")]
-        public List<PerkModelData> allSkillPerksData;
+      
       
         public int currSkillPts =10;
 
@@ -148,8 +113,6 @@ namespace Combat
         }
 
 
-
-
         protected override void Awake()
         {
             base.Awake();
@@ -160,10 +123,12 @@ namespace Combat
             //move and FX controller 
             skillFXMoveController = gameObject.GetComponent<SkillFxMoveController>();
             // skillFXController = gameObject.GetComponent<SkillFXController>();
-            skillFactory.SkillsInit(); 
+            skillFactory.SkillsInit();
+            skillFactory.InitPerks();
+            InitSkillControllers(); 
            // CombatEventService.Instance.OnCombatInit += skillFactory.SkillsInit;
            // CombatEventService.Instance.OnCombatInit += skillFactory.InitPerks; 
-            CombatEventService.Instance.OnCombatInit += InitSkillControllers;
+          //  CombatEventService.Instance.OnCombatInit += InitSkillControllers;
             CombatEventService.Instance.OnCharOnTurnSet += PopulateSkillTargets;
 
             
@@ -172,7 +137,7 @@ namespace Combat
         }
         void Start()
         {
-            allSkillPerksData = new List<PerkModelData>();
+           
 
             // Cn be later Set to the start of Combat Event
             CombatEventService.Instance.OnSOT += SetDefaultSkillForChar;
@@ -219,12 +184,12 @@ namespace Combat
            // CombatService.Instance.AddCombatControllers();
             foreach (var character in CharService.Instance.charsInPlay)
             {
-                if (character.GetComponent<SkillController>() == null)
+                if (character.GetComponent<SkillController1>() == null)
                 {
-                    SkillController skillController = character.gameObject.AddComponent<SkillController>();
+                    SkillController1 skillController = character.gameObject.AddComponent<SkillController1>();
                     allSkillControllers.Add(skillController);
 
-                    skillController.PopulatePerkList(); 
+                    skillController.InitPerkDataList(); 
                    
 
                     //SkillAIController skillAIController = character.gameObject.AddComponent<SkillAIController>();
@@ -251,7 +216,7 @@ namespace Combat
 
             Debug.Log("INIT SKILL CONTROLLER >>>>>>>>>>>>");
             currSkillController = CombatService.Instance.currCharOnTurn
-                                    .gameObject.GetComponent<SkillController>();
+                                    .gameObject.GetComponent<SkillController1>();
      
             if (currSkillController != null)
             {
@@ -455,20 +420,7 @@ namespace Combat
         public void PerkUnLock(PerkNames _perkName, GameObject btn)
         {       
                
-                if (currSkillPts > 0)
-                    currSkillPts--;
-                else return;
-                Debug.Log("inside perk unlocked" + btn.name);
-                PerkModelData snp = allSkillPerksData.Find(t => t.perkName == _perkName);
-                CharNames charName = GetChar4Skill(snp.skillName);
-                allSkillControllers.Find(t => t.charName == charName).UpdatePerkState(_perkName, PerkSelectState.Clicked);  
-           
-                snp.state = PerkSelectState.Clicked;
-                
-                UIControlServiceCombat.Instance.TogglePerkSelectState(UIElementType.PerkButton,
-                btn, PerkSelectState.Clicked);
-                // update skill pts and UI 
-                perkSelectionController.UpdateSkillPts();                
+                         
                
         }
         public void ChangePerkState(PerkNames _perkName, PerkSelectState _state)
@@ -674,7 +626,7 @@ namespace Combat
             temptxt.text =  currSkillName.ToString();
             if (Input.GetKeyDown(KeyCode.B))
             {
-                foreach (SkillController skillController in allSkillControllers)
+                foreach (SkillController1 skillController in allSkillControllers)
                 {
                     CharModel charModel = skillController.gameObject.GetComponent<CharController>().charModel; 
 
@@ -749,4 +701,18 @@ namespace Combat
 //        }
 //    }
 //    return null;             
+//}
+
+
+//public class SkillModelData
+//{
+//    public SkillNames skillName;
+//    public Type skillBase;
+//    public SkillSelectState skillstate;
+//    public SkillModelData(Type _skillBase, SkillNames _skillName, SkillSelectState _skillState)
+//    {
+//        skillBase = _skillBase;
+//        skillName = _skillName;
+//        skillstate = _skillState; 
+//    }
 //}

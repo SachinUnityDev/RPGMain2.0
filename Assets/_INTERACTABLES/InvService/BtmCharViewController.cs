@@ -44,9 +44,9 @@ namespace Interactables
             //}
             allAvailableChars.Clear();
             rightsChars.Clear();leftChars.Clear();
-            foreach (CharModel c in CharService.Instance.allAvailCharsModels)
+            foreach (CharController c in CharService.Instance.allCharsInParty)
             {
-                allAvailableChars.Add(c);
+                allAvailableChars.Add(c.charModel);
             }
             
             charSelect = allAvailableChars[0];

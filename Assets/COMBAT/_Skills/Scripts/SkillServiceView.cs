@@ -118,7 +118,6 @@ namespace Combat
             SkillService.Instance.On_SkillSelected
                 (CombatService.Instance.currCharOnTurn.charModel.charName);
         }
-
       
         public SkillSelectState UpdateSkillState(SkillModel _skillModel)
         {
@@ -169,8 +168,7 @@ namespace Combat
                 return true; 
             }
             return false; 
-        }
-    
+        }    
 
         bool NoTargetsInRange(SkillModel _skillModel)
         {          

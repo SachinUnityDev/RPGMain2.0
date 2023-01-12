@@ -76,6 +76,8 @@ namespace Common
             {
                 SpawnCompanions(charName);
             }
+            CharController abbas = charsInPlayControllers.Find(t => t.charModel.charName == CharNames.Abbas_Skirmisher); 
+            On_CharAddToParty(abbas);
 
             //CreateAllAlliesCtrls();
         }

@@ -156,7 +156,9 @@ namespace Common
                     allyInPlayControllers.Add(charCtrl);
                     charsInPlayControllers.Add(charCtrl);
                     allyInPlay.Add(charGO);    
-                    charsInPlay.Add(charGO); 
+                    charsInPlay.Add(charGO);
+                
+
                     if(c.availOfChar == AvailOfChar.Available)
                     {
                         allAvailCharsModels.Add(charCtrl.charModel);                               

@@ -34,6 +34,7 @@ namespace Common
         void Start()
         {
             RosterModel rosterModel = new RosterModel();
+
         }
 
         public void On_ScrollSelectCharModel(CharModel charModel)

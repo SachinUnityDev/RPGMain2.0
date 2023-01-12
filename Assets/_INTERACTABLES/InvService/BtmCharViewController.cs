@@ -185,21 +185,29 @@ namespace Interactables
 
         public void PlayOpenAnim()
         {
-            float wide = leftCharsGO[0].GetComponent<RectTransform>().rect.width; 
-            for (int i = 0; i < leftCharsGO.Count; i++)
+            float wide = 0f; 
+            if(leftCharsGO.Count != 0)
             {
-                float moveto = (wide ) * (i+1);
-             //   Debug.Log("Index value" + i + "NAME" + leftCharsGO[i].name);
-                leftCharsGO[i].transform.DOLocalMoveX(-moveto, 0.15f);
-                leftCharsGO[i].transform.SetSiblingIndex(0);
+                 wide = leftCharsGO[0].GetComponent<RectTransform>().rect.width;
+                for (int i = 0; i < leftCharsGO.Count; i++)
+                {
+                    float moveto = (wide) * (i + 1);
+                    //   Debug.Log("Index value" + i + "NAME" + leftCharsGO[i].name);
+                    leftCharsGO[i].transform.DOLocalMoveX(-moveto, 0.15f);
+                    leftCharsGO[i].transform.SetSiblingIndex(0);
+                }
             }
-            for (int i = 0; i < rightCharsGO.Count; i++)
+            if(rightCharsGO.Count != 0)
             {
-                float moveto = (wide ) * (i+1);
-               // Debug.Log("Index value" + i + "NAME" + rightCharsGO[i].name);
-                rightCharsGO[i].transform.DOLocalMoveX(moveto, 0.15f);
-                rightCharsGO[i].transform.SetAsFirstSibling();
-            }
+                wide = rightCharsGO[0].GetComponent<RectTransform>().rect.width;
+                for (int i = 0; i < rightCharsGO.Count; i++)
+                {
+                    float moveto = (wide) * (i + 1);
+                    // Debug.Log("Index value" + i + "NAME" + rightCharsGO[i].name);
+                    rightCharsGO[i].transform.DOLocalMoveX(moveto, 0.15f);
+                    rightCharsGO[i].transform.SetAsFirstSibling();
+                }
+            }            
         }
 
         public void PlayCloseAnim()

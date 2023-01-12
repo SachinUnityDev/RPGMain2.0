@@ -211,7 +211,7 @@ namespace Combat
         WebbySpit,
         SelfDefense,
         Respire, // equivalent to patience
-       
+        Telekinesis,//uzu abbas
 
 
     }

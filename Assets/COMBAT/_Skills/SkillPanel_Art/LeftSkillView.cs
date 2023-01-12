@@ -14,17 +14,28 @@ namespace Common
         SkillController1 selectSkillController;
         SkillDataSO skillDataSO;
 
+        [Header("Skill Button")]
+        [SerializeField] Button skillPlusBtn;  
+        
         [Header("NTBR")]
         [SerializeField] Transform charNameTrans;
         [SerializeField] Transform iconContainerTrans;
+        [SerializeField] Transform skillPtsTrans; 
+
 
         private void Start()
         {
             charNameTrans = transform.GetChild(0); 
             iconContainerTrans = transform.GetChild(1);
-            InvService.Instance.OnCharSelectInvPanel += PopulateLeftSkillPanel;    
+            InvService.Instance.OnCharSelectInvPanel += PopulateLeftSkillPanel;
+            skillPlusBtn.onClick.AddListener(OnSkillPlusBtnPressed); 
         }
+            
+        void OnSkillPlusBtnPressed()
+        {
 
+
+        }
         void PopulateLeftSkillPanel(CharModel charModel)
         {
             charController = InvService.Instance.charSelectController;

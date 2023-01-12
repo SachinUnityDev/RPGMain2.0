@@ -71,7 +71,7 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $"<style=States> Confused </style>, {skillModel.castTime} rds ";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str0);
+            SkillService.Instance.skillCardData.descLines.Add(str0);
         }
 
         public override void DisplayFX2()

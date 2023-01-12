@@ -41,8 +41,12 @@ namespace Combat
            // if (SkillService.Instance.allSkillModels.Any(t => t.skillID == _skillID)) return;
 
             SkillDataSO skillDataSO = SkillService.Instance.GetSkillSO(charName);
-            skillController = _skillController;
-            charController = skillController.gameObject.GetComponent<CharController>();
+            Debug.Log("SKILLNAME........" + skillName);
+
+            
+         
+            charController = CharService.Instance.GetCharCtrlWithName(skillDataSO.charName);
+            skillController = charController.GetComponent<SkillController1>();
             charID = charController.charModel.charID; 
             skillData = skillDataSO.allSkills.Find(t => t.skillName == skillName);
            
@@ -52,11 +56,15 @@ namespace Combat
             //SkillService.Instance.allSkillModels.Add(skillModel);
             skillController.allSkillModels.Add(skillModel);   // skillModel for ref
             charGO = skillController.gameObject;
-            myDyna =  GridService.Instance.GetDyna4GO(charGO);
-            // Debug.Log("INSIDE SKILL INIT" + skillName);
-            // Do a Skill Init at the start of the combat.. 
-             
-            PopulateTargetPos();
+            if(GameService.Instance.gameModel.gameState == GameState.InCombat)
+            {
+                myDyna = GridService.Instance.GetDyna4GO(charGO);
+                // Debug.Log("INSIDE SKILL INIT" + skillName);
+                // Do a Skill Init at the start of the combat.. 
+
+                PopulateTargetPos();
+            }
+           
            
         }
 
@@ -86,8 +94,8 @@ namespace Combat
         public abstract void PopulateTargetPos(); 
      
         public virtual void SkillHovered()
-        { 
-            SkillServiceView.Instance.skillCardData.skillModel = skillModel;
+        {
+            SkillService.Instance.skillCardData.skillModel = skillModel;
             SkillService.Instance.SkillHovered += DisplayFX1;
             SkillService.Instance.SkillHovered += DisplayFX2;
             SkillService.Instance.SkillHovered += DisplayFX3;

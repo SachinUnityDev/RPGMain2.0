@@ -65,7 +65,7 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $"30 % chance, <style=States>Confused</style>, {skillModel.castTime} rd ";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str0);
+            SkillService.Instance.skillCardData.descLines.Add(str0);
         }
 
         public override void DisplayFX2()

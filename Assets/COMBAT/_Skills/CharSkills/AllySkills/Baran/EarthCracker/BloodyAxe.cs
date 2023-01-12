@@ -75,7 +75,7 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $"50%<style=Physical> Physical </style>on Bleeding target";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str0);
+            SkillService.Instance.skillCardData.descLines.Add(str0);
 
         }
 

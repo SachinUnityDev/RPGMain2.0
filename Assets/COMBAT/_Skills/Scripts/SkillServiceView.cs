@@ -50,7 +50,7 @@ namespace Combat
         [SerializeField] Vector2 posOffset;
         public int index;
         GameObject SkillCard; 
-        public SkillCardData skillCardData; 
+      
         public SkillController1 skillController;
         //public SkillBase skillBase;
 

@@ -71,7 +71,10 @@ namespace Common
             if(IPortrait != null)
             {
                 IPortrait.IRosterSlot = this;
-              //  Debug.Log("PRINT SLOT ID CHAR SLOT" + IPortrait.IRosterSlot.slotID); 
+                portTransGO.GetComponent<PortraitDragNDrop>().charDragged = IPortrait.IRosterSlot.charInSlot; 
+
+
+                Debug.Log("PRINT SLOT ID CHAR SLOT" + IPortrait.IRosterSlot.charInSlot); 
             }
             else
             {

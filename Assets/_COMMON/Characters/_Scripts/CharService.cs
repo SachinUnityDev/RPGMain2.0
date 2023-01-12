@@ -261,6 +261,7 @@ namespace Common
 
         public void On_CharAddToParty(CharController charController)
         {
+            Debug.Log("On Char Added" + charController.charModel.charName);
             allCharsInParty.Add(charController);
             OnCharAddedToParty?.Invoke(charController.charModel.charName);
         }

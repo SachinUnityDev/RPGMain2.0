@@ -78,19 +78,19 @@ namespace Combat
         public override void DisplayFX1()
         {           
             str1 = $"<style=States>Invunerable</style>, {skillModel.castTime} rds";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillCardData.descLines.Add(str1);
         }
 
         public override void DisplayFX2()
         {
             str2 = $"-4 <style=Attributes>Haste</style>, {skillModel.castTime} rds";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str2);
+            SkillService.Instance.skillCardData.descLines.Add(str2);
         }
 
         public override void DisplayFX3()
         {
             str3 = $"-50%<style=Heal> Healing </style>recieved until eoc";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str3);
+            SkillService.Instance.skillCardData.descLines.Add(str3);
         }
 
         public override void DisplayFX4()

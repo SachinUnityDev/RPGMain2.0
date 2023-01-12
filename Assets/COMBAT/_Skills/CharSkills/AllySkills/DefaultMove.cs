@@ -38,14 +38,17 @@ namespace Combat
             //skillModel = new SkillModel(skillData);
             //// skillModel.skillID = skillController.skillID;
             //skillModel.charID = charID; 
-         
+
             //skillController.allSkillModels.Add(skillModel);
             //charGO = skillController.gameObject;  
-                
-                //SkillService.Instance.GetGO4SkillCtrller(charName);
-            myDyna = GridService.Instance.GetDyna4GO(charGO);         
 
-            PopulateTargetPos();
+            //SkillService.Instance.GetGO4SkillCtrller(charName);
+            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            {
+                myDyna = GridService.Instance.GetDyna4GO(charGO);
+
+                PopulateTargetPos();
+            }
         }
 
 
@@ -101,13 +104,13 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"<style=Move>Move</style> to adj tile";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillCardData.descLines.Add(str1);
         }
 
         public override void DisplayFX2()
         {
             str2 = $"Chance to keep your turn depending on Haste";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str2);
+            SkillService.Instance.skillCardData.descLines.Add(str2);
         }
 
         public override void DisplayFX3()

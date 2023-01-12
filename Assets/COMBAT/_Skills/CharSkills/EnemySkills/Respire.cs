@@ -61,13 +61,13 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"Regain 25% of<style=Stamina> Max Stamina </style>";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillCardData.descLines.Add(str1);
         }
 
         public override void DisplayFX2()
         {
             str2 = $"-2<style=Attributes> Haste </style>";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str2);
+            SkillService.Instance.skillCardData.descLines.Add(str2);
         }
 
         public override void DisplayFX3()

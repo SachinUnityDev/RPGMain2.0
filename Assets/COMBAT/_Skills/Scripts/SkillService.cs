@@ -39,7 +39,11 @@ namespace Combat
         #region Initializers
 
         [Header("SKill Factory NTBR")]
-        public SkillFactory skillFactory;       
+        public SkillFactory skillFactory;
+
+        [Header("SkillCard Data")]
+        public SkillCardData skillCardData;
+
 
         [Header("ALL SO")]
         public List<SkillDataSO> allCharSkillSO = new List<SkillDataSO>();
@@ -71,7 +75,7 @@ namespace Combat
         [Header("curr Char UPDATES")]
         public CharMode currCharMode;
        // public CharNames currCharName;
-        public SkillNames currSkillName;
+        public SkillNames currSkillName = SkillNames.None;
         public DynamicPosData currentTargetDyna = new DynamicPosData();
         public DynamicPosData currStrikerDyna = new DynamicPosData(); 
         public SkillNames defaultSkillName;
@@ -90,8 +94,8 @@ namespace Combat
 
 
 
-        [Header("TEMP text display")]
-        public TextMeshProUGUI temptxt;
+        //[Header("TEMP text display")]
+        //public TextMeshProUGUI temptxt;
         private event Action _SkillApply = null;
         public event Action SkillApply
         {
@@ -125,35 +129,39 @@ namespace Combat
             // skillFXController = gameObject.GetComponent<SkillFXController>();
             skillFactory.SkillsInit();
             skillFactory.InitPerks();
-            InitSkillControllers(); 
+           
            // CombatEventService.Instance.OnCombatInit += skillFactory.SkillsInit;
            // CombatEventService.Instance.OnCombatInit += skillFactory.InitPerks; 
-          //  CombatEventService.Instance.OnCombatInit += InitSkillControllers;
-            CombatEventService.Instance.OnCharOnTurnSet += PopulateSkillTargets;
+           //  CombatEventService.Instance.OnCombatInit += InitSkillControllers;
 
-            
+           
 
             //CombatEventService.Instance.OnSOR += InitSkillManagers; // for enemies
         }
         void Start()
         {
-           
-
+            InitSkillControllers();
             // Cn be later Set to the start of Combat Event
-            CombatEventService.Instance.OnSOT += SetDefaultSkillForChar;
+          
+            SkillApply += SkillEventtest;
+            GameEventService.Instance.OnCombatBegin += OnStartOfCombat; 
+            // CombatService.Instance.GetComponent<RoundController>().OnCharOnTurnSet += PopulateSkillTargets; 
+        }
+
+        void OnStartOfCombat()
+        {
+              CombatEventService.Instance.OnSOT += SetDefaultSkillForChar;
             CombatEventService.Instance.OnCharOnTurnSet += InitEnemySkillSelection; 
             CombatEventService.Instance.OnTargetClicked += TargetIsSelected;
             PostSkillApply += GridService.Instance.ClearOldTargets;// to be decided later to DEL or MOVE 
+            CombatEventService.Instance.OnCharOnTurnSet += PopulateSkillTargets;
 
-            SkillApply += SkillEventtest; 
-            
-            // CombatService.Instance.GetComponent<RoundController>().OnCharOnTurnSet += PopulateSkillTargets; 
         }
 
         void SkillDisplay()  // some reference is there for SKILL DISPLAY ON TOP
         {
             
-            temptxt.text = "SkillName" + currSkillName; 
+          //  temptxt.text = "SkillName" + currSkillName; 
         }
 
         #endregion
@@ -377,10 +385,10 @@ namespace Combat
             skillServiceView.PopulateSkillClickedState(-1);
         }
 
-        public void On_SkillHovered(CharNames _charName)
+        public void On_SkillHovered(CharNames _charName, SkillNames skillName)
         {
-            SkillHovered = null; SkillWipe = null; 
-
+            SkillHovered = null; SkillWipe = null;
+            currSkillHovered = skillName; 
             currSkillController = allSkillControllers.FirstOrDefault(t => t.charName == _charName);
             currSkillController.SkillHovered(currSkillHovered);
             if(SkillWipe != null)
@@ -615,21 +623,22 @@ namespace Combat
 
         private void Update()
         {
-            temptxt.text =  currSkillName.ToString();
-            if (Input.GetKeyDown(KeyCode.B))
-            {
-                foreach (SkillController1 skillController in allSkillControllers)
-                {
-                    CharModel charModel = skillController.gameObject.GetComponent<CharController>().charModel; 
+          //  temptxt.text =  currSkillName.ToString();
+            //if (Input.GetKeyDown(KeyCode.B))
+            //{
+            //    foreach (SkillController1 skillController in allSkillControllers)
+            //    {
+            //        CharModel charModel = skillController.gameObject.GetComponent<CharController>().charModel; 
 
-                    int charID  = charModel.charID;
-                    Debug.Log("CHAR ID " + charID  +"Char NAME " + charModel.charName); 
+            //        int charID  = charModel.charID;
+            //        Debug.Log("CHAR ID " + charID  +"Char NAME " + charModel.charName); 
 
-                }
-            }
+            //    }
+            //}
 
             // NOT TO BE ERASED 
-            if (CombatService.Instance.combatState == CombatState.INCombat_InSkillSelected)
+          //  if (CombatService.Instance.combatState == CombatState.INCombat_InSkillSelected)
+            if(GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
                 if (Input.GetMouseButtonDown(1))
                 {

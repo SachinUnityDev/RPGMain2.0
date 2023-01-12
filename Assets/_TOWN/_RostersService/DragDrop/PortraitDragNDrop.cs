@@ -14,7 +14,7 @@ namespace Common
 
     }
     public class PortraitDragNDrop : MonoBehaviour, IDragHandler, IBeginDragHandler
-                                                    , IEndDragHandler, iPortrait
+                                                            , IEndDragHandler, iPortrait
     {
         [Header("Pointer related")]
         RectTransform rectTransform;
@@ -50,7 +50,8 @@ namespace Common
             rectTransform = GetComponent<RectTransform>();
            
             if(IRosterSlot.slotType == RosterSlotType.CharScrollSlot)
-            {               
+            {
+                Debug.Log("CHAR NAME.... " + IRosterSlot.charInSlot); 
                 CreateCharPortClone(IRosterSlot.charInSlot);
                bool hasAdded=  IRosterSlot.AddChar2UnlockedList(clone);
 
@@ -75,7 +76,7 @@ namespace Common
             // here is the end 
             GameObject cloneGO = RosterService.Instance.rosterSO.charPortPreFab;
             Debug.Log("Clone Created");
-            clone = Instantiate(cloneGO);
+            clone = Instantiate(cloneGO);          
             clone.transform.SetParent(transform.parent);
             RectTransform cloneRect = clone.GetComponent<RectTransform>();
             cloneRect.anchoredPosition = Vector3.zero;

@@ -87,10 +87,10 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $"<style=Heal>Heal</style> 6-12";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str0);
+            SkillService.Instance.skillCardData.descLines.Add(str0);
 
             str1 = $"If <style=Attribute>Morale</style> 12, <style=Heal>Heal</style> 12-24";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillCardData.descLines.Add(str1);
         }
 
         public override void DisplayFX2()

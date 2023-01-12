@@ -79,13 +79,13 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"+20<style=Fire> Fire Res </style>, {skillModel.castTime} rds";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillCardData.descLines.Add(str1);
         }
 
         public override void DisplayFX2()
         {
             str2 = $"Attackers with Fire Skills recieve +60<style=Water> Water </style>";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str2);
+            SkillService.Instance.skillCardData.descLines.Add(str2);
         }
 
         public override void DisplayFX3()

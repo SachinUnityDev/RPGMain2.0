@@ -58,6 +58,10 @@ namespace Combat
         public Sprite SkillSelectFrame;
         public Sprite SkillNormalFrame;
 
+        [Header("Skill Card Prefab")]
+        public GameObject skillCardPrefab; 
+
+
         private void Awake()
         {
             if (allHexes.Count < 1)

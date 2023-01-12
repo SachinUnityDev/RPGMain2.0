@@ -66,13 +66,13 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $"<style=Performer> +40<style=Water> Water Res </style>and<style=Earth> Earth Res </style>, 2 rds";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str0);
+            SkillService.Instance.skillCardData.descLines.Add(str0);
         }
 
         public override void DisplayFX2()
         {
             str1 = $"<style=Performer> Clear DoT";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillCardData.descLines.Add(str1);
         }
 
         public override void DisplayFX3()

@@ -43,7 +43,7 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"{skillModel.damageMod}% <style=Physical>Physical </style>";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillCardData.descLines.Add(str1);
         }
 
         public override void ApplyFX2()
@@ -57,7 +57,7 @@ namespace Combat
         public override void DisplayFX2()
         {
             str2 = $" <style=Bleed>High Bleed</style>, 30%";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str2);
+            SkillService.Instance.skillCardData.descLines.Add(str2);
         }
 
 
@@ -72,7 +72,7 @@ namespace Combat
         public override void DisplayFX3()
         {
             str3 = $"<style=Move>Pull </style> self";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str3);
+            SkillService.Instance.skillCardData.descLines.Add(str3);
         }
 
         public override void DisplayFX4()

@@ -71,7 +71,7 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $"75%<style=Earth> Earth </style>to adj targets";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str0);
+            SkillService.Instance.skillCardData.descLines.Add(str0);
         }
 
         public override void DisplayFX2()

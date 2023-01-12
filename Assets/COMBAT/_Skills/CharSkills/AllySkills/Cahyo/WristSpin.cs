@@ -49,15 +49,15 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = "<margin=1.2em>Melee";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str0);
+            SkillService.Instance.skillCardData.descLines.Add(str0);
             str1 = $"{skillModel.damageMod}% <style=Physical>Physical</style>";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillCardData.descLines.Add(str1);
         }
 
         public override void DisplayFX2()
         {
             str2 = $"50% <style=Bleed>Low Bleed</style> ";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str2);
+            SkillService.Instance.skillCardData.descLines.Add(str2);
         }
 
 

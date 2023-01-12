@@ -68,7 +68,7 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"{chance}% <style=Bleed>High Bleed </style>";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillCardData.descLines.Add(str1);
         }
 
         public override void DisplayFX2()

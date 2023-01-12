@@ -63,14 +63,15 @@ namespace Combat
             SkillServiceView.Instance.index = index;
             // UPDATE SKILL SERVICE 
             if (skillSO != null && index < skillSO.allSkills.Count)
-                SkillService.Instance.currSkillHovered = skillSO.allSkills[index].skillName;
+                SkillService.Instance.On_SkillHovered(CombatService.Instance.currCharClicked.charModel.charName,
+                            skillSO.allSkills[index].skillName);
             else { Debug.Log("Skill SO is null " + index);return;  } 
 
            // SkillService.Instance.currCharName = CombatService.Instance.currCharClicked.charModel.charName;
 
-            SkillService.Instance.On_SkillHovered(CombatService.Instance.currCharClicked.charModel.charName);
 
-            skillCardData = SkillServiceView.Instance.skillCardData;
+
+            skillCardData = SkillService.Instance.skillCardData;
 
             //float htSkillIcon = gameObject.GetComponent<RectTransform>().rect.height;          
 

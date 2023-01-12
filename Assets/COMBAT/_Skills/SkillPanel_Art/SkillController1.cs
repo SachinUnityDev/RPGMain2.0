@@ -94,15 +94,15 @@ namespace Common
 
         public void SkillHovered(SkillNames _skillName)
         {
-            SkillServiceView.Instance.skillCardData.perkChain.Clear();
-            SkillServiceView.Instance.skillCardData.descLines.Clear();
+            SkillService.Instance.skillCardData.perkChain.Clear();
+            SkillService.Instance.skillCardData.descLines.Clear();
 
             allSkillBases.Find(t => t.skillName == _skillName).SkillHovered();
 
             List<SkillPerkData> clickedPerkList = allSkillPerkData
                 .Where(t => t.skillName == _skillName && t.state == PerkSelectState.Clicked).ToList();
 
-            clickedPerkList.ForEach(t => SkillServiceView.Instance.skillCardData.perkChain.Add(t.perkType));
+            clickedPerkList.ForEach(t => SkillService.Instance.skillCardData.perkChain.Add(t.perkType));
 
             clickedPerkList.ForEach(t => allPerkBases.Find(x => x.perkName == t.perkName).SkillInit(this));
             clickedPerkList.ForEach(t => allPerkBases.Find(x => x.perkName == t.perkName).SkillHovered());

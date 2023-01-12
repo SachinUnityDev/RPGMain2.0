@@ -52,7 +52,7 @@ namespace Common
             charStateController = gameObject.AddComponent<CharStateController>();
             itemController = gameObject.AddComponent<ItemController>();
             skillController = gameObject.AddComponent<SkillController1>();
-
+            SkillService.Instance.allSkillControllers.Add(skillController);
             // CombatEventService.Instance.OnSOT += ()=> PopulateOverCharBars(false); 
             CombatEventService.Instance.OnEOC += FortitudeReset2FortOrg;
             CombatEventService.Instance.OnSOTactics += AddControllerOnCombatStart; 

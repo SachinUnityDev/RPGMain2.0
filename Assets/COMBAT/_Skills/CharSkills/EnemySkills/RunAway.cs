@@ -54,13 +54,13 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"Move back 2";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillCardData.descLines.Add(str1);
         }
 
         public override void DisplayFX2()
         {
             str2 = $"+3 Dodge, {skillModel.castTime} rd";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str2);
+            SkillService.Instance.skillCardData.descLines.Add(str2);
         }
 
         public override void DisplayFX3()

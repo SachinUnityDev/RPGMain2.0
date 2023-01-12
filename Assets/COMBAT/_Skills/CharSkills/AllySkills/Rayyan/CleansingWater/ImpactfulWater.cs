@@ -69,7 +69,7 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"<style=Enemy>{skillModel.damageMod}%<style=Water> Water </style>on adj targets";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillCardData.descLines.Add(str1);
         }
 
         public override void ApplyFX2()
@@ -103,7 +103,7 @@ namespace Combat
         public override void DisplayFX2()
         {
             str2 = $"<style=Enemy> +3 Fortitude for every target hit";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str2);
+            SkillService.Instance.skillCardData.descLines.Add(str2);
         }
 
         public override void DisplayFX3()

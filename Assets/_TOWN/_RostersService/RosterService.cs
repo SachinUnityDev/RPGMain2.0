@@ -55,6 +55,7 @@ namespace Common
 
         public bool AddChar2Party(CharNames charNames)
         {
+            
             CharController charController = CharService.Instance.GetCharCtrlWithName(charNames);
             CharService.Instance.On_CharAddToParty(charController); 
             // Apply party restrictions here 

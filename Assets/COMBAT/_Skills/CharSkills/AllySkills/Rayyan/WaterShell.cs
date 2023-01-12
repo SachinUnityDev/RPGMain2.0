@@ -117,27 +117,27 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $"2 -3 <style=Attributes>Stamina regen</style>, {skillModel.castTime} rd ";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str0);
+            SkillService.Instance.skillCardData.descLines.Add(str0);
         }
 
         public override void DisplayFX2()
         {
             str1 = $"-3 <style=Attributes>Haste</style>, {skillModel.castTime} rd ";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillCardData.descLines.Add(str1);
         }
 
         public override void DisplayFX3()
         {
             str2 = $"4-10 <style=Attributes>Heal</style>, {skillModel.castTime} rd ";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str2);
+            SkillService.Instance.skillCardData.descLines.Add(str2);
             str3 = $"+14 <style=Attributes>Elemental Res</style>, {skillModel.castTime} rd ";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str3);
+            SkillService.Instance.skillCardData.descLines.Add(str3);
         }
 
         public override void DisplayFX4()
         {
             str0 = $"Ignore <style=Attributes>Stamina Dmg</style>, {skillModel.castTime} rd ";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str0);
+            SkillService.Instance.skillCardData.descLines.Add(str0);
         }
 
   

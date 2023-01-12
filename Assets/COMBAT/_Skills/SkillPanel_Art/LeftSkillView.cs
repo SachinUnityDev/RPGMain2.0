@@ -53,6 +53,7 @@ namespace Common
                 //mainSkillTrans.GetChild(i).GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = 
                 //                lvl.ToString(); 
 
+                mainSkillTrans.GetChild(i).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO, skillData); 
             }
 
         }
@@ -64,14 +65,21 @@ namespace Common
             utilitySkillTrans.GetChild(0).GetComponent<Image>().sprite =
                                                        skillData.skillIconSprite;
 
+            utilitySkillTrans.GetChild(0).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO, skillData); 
+
              skillData = skillDataSO.allSkills.Find(t => t.skillType == SkillTypeCombat.Patience);
              utilitySkillTrans.GetChild(1).GetComponent<Image>().sprite =
                                                        skillData.skillIconSprite;
+
+            utilitySkillTrans.GetChild(0).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO, skillData);
+
             skillData = skillDataSO.allSkills.Find(t => t.skillType == SkillTypeCombat.Weapon);
             if(skillData != null)
             {
                 utilitySkillTrans.GetChild(2).gameObject.SetActive(true); 
                 utilitySkillTrans.GetChild(2).GetComponent<Image>().sprite = skillData.skillIconSprite;
+
+                utilitySkillTrans.GetChild(0).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO, skillData);
             }                
             else
                 utilitySkillTrans.GetChild(2).gameObject.SetActive(false);           

@@ -95,15 +95,15 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $"If full HP,+80% <style=Attributes> Armor </style>, {skillModel.castTime} rds";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str0);
+            SkillService.Instance.skillCardData.descLines.Add(str0);
             str1 = $"If full HP, +40%<style=Water> Water Res </style>and +40%<style=Earth> Earth Res </style>, {skillModel.castTime} rds";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillCardData.descLines.Add(str1);
         }
 
         public override void DisplayFX2()
         {
             str2 = $"If Morale 12, +40%<style=Water> Water Res </style> and +20%<style=Earth> Earth Res </style>, until eoq";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str2);      
+            SkillService.Instance.skillCardData.descLines.Add(str2);      
         }
         public override void ApplyFX2()
         {

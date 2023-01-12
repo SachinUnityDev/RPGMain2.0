@@ -95,13 +95,13 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $"<style=Move> Shuffle </style>";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str0);
+            SkillService.Instance.skillCardData.descLines.Add(str0);
         }
 
         public override void DisplayFX2()
         {
             str1 = $" -2 <style=Attributes>Focus</style>, {skillModel.castTime} rd ";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillCardData.descLines.Add(str1);
         }
 
         public override void DisplayFX3()

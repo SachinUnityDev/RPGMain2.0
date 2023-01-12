@@ -17,7 +17,7 @@ namespace Combat
 
         private CharNames _charName;
         public override CharNames charName { get => _charName; set => _charName = value; }
-        public override string desc => "this is defualt patience";
+        public override string desc => "this is default patience";
 
      
         private float _chance = 0f;
@@ -28,7 +28,7 @@ namespace Combat
         public override void SkillInit(SkillController1 _skillController)
         {
             base.SkillInit(_skillController);
-            
+
             //charName = _skillController.charName;
             //SkillDataSO skillDataSO = SkillService.Instance.GetSkillSO(charName);
             //skillController = _skillController;
@@ -42,11 +42,15 @@ namespace Combat
             ////SkillService.Instance.allSkillModels.Add(skillModel);
             //skillController.allSkillModels.Add(skillModel);
             //charGO = SkillService.Instance.GetGO4SkillCtrller(charName);
-            myDyna = GridService.Instance.GetDyna4GO(charGO);
-            // Debug.Log("INSIDE SKILL INIT" + skillName);
-            // Do a Skill Init at the start of the combat.. 
+            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            {
 
-            PopulateTargetPos();
+                myDyna = GridService.Instance.GetDyna4GO(charGO);
+                // Debug.Log("INSIDE SKILL INIT" + skillName);
+                // Do a Skill Init at the start of the combat.. 
+
+                PopulateTargetPos();
+            }
         }
 
         public override void PopulateTargetPos()
@@ -90,19 +94,19 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"Wait 1 turn";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillCardData.descLines.Add(str1);
         }
 
         public override void DisplayFX2()
         {
             str2 = $"+2<style=Stamina> Stamina Regen </style>, {skillModel.castTime} rds";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str2);
+            SkillService.Instance.skillCardData.descLines.Add(str2);
         }
 
         public override void DisplayFX3()
         {
             str3 = $"-2<style=Attribute> Haste </style>, 2 rds";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str3);
+            SkillService.Instance.skillCardData.descLines.Add(str3);
         }
 
         public override void DisplayFX4()

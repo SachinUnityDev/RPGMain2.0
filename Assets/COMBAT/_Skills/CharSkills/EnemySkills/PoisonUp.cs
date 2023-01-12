@@ -83,7 +83,7 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"Adds 70%<style=Poison> High Poison </style>chance to ally Rat Bite skill, {skillModel.castTime} rds";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillCardData.descLines.Add(str1);
         }
 
         public override void DisplayFX2()

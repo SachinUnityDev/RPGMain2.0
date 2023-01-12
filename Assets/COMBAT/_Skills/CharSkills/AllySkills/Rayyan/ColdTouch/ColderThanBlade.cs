@@ -72,7 +72,7 @@ namespace Combat
         {
             str1 = $"+20% Physical Skills, {skillModel.castTime} rds";
 
-            SkillServiceView.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillCardData.descLines.Add(str1);
         }
 
         public override void DisplayFX2()

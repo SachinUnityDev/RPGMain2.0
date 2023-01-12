@@ -91,13 +91,13 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $"Ignore<style=Attributes> Armor </style>on main target";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str0);          
+            SkillService.Instance.skillCardData.descLines.Add(str0);          
         }
 
         public override void DisplayFX2()
         {
             str1 = $"-40<style=Earth> Earth res </style>on col targets";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillCardData.descLines.Add(str1);
         }
 
         public override void DisplayFX3()

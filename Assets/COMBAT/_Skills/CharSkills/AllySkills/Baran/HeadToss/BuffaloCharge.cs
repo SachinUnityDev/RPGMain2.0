@@ -100,20 +100,20 @@ namespace Combat
         {
            
             str1 = $"{skillModel.damageMod}%<style=Physical> Physical </style>";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillCardData.descLines.Add(str1);
         }
 
         public override void DisplayFX2()
         {
             str2 = $"+40%<style=Physical> Physical </style>on targets back row";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str2);
+            SkillService.Instance.skillCardData.descLines.Add(str2);
 
         }
 
         public override void DisplayFX3()
         {
             str3 = $"<style=Move> Move </style>forward 2";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str3);
+            SkillService.Instance.skillCardData.descLines.Add(str3);
         }
 
         public override void DisplayFX4()

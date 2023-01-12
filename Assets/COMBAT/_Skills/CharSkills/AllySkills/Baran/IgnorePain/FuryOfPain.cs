@@ -98,17 +98,17 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $"+6<style=Attributes> Acc </style>";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str0);
+            SkillService.Instance.skillCardData.descLines.Add(str0);
 
             str1 = $"If Luck 12, +2<style=Attributes> Fort org </style>, until eoq";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillCardData.descLines.Add(str1);
 
         }
 
         public override void DisplayFX2()
         {
             str2 = $"If self HP < 40%<style=States> Enraged </style>,{skillModel.castTime} rds";
-            SkillServiceView.Instance.skillCardData.descLines.Add(str2);
+            SkillService.Instance.skillCardData.descLines.Add(str2);
         }
 
         public override void DisplayFX3()

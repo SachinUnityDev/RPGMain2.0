@@ -161,9 +161,10 @@ namespace Common
             }
         }
 
-        #endregion 
+        #endregion
 
-        public SkillPerkData GetSkillModelData(SkillNames _skillName)
+        #region GETTERS skillmodel, skillbase, skillPerkData, perkBase
+        public SkillPerkData GetSkillPerkData(SkillNames _skillName)
         {
             SkillPerkData skillPerkData = 
                     allSkillPerkData.Find(t => t.skillName == _skillName);
@@ -175,9 +176,48 @@ namespace Common
             }
             return null; 
         }
+        public SkillModel GetSkillModel(SkillNames skillName)
+        {
+            SkillModel skillModel = allSkillModels.Find(t => t.skillName == skillName); 
+            if(skillModel != null)
+            {
+                return skillModel;
+            }
+            else
+            {
+                Debug.Log("SkillModel No found !" + skillName);
+                return null;
+            }
+        }
 
-
-
+        public SkillBase GetSkillBase(SkillNames skillName)
+        {
+            SkillBase skillBase = allSkillBases.Find(t => t.skillName == skillName);
+            if (skillBase != null)
+            {
+                return skillBase;
+            }
+            else
+            {
+                Debug.Log("SkillModel No found !" + skillName);
+                return null;
+            }
+        }
+        public PerkBase GetPerkBase(SkillNames skillName, PerkNames perkName)
+        {
+            PerkBase perkBase = allPerkBases.Find(t => t.skillName == skillName 
+                                                  && t.perkName == perkName);
+            if (perkBase != null)
+            {
+                return perkBase;
+            }
+            else
+            {
+                Debug.Log("SkillModel No found !" + skillName);
+                return null;
+            }
+        }
+        #endregion
         public void OnPerkUnlock(PerkNames _perkName)
         {
             if (charController.charModel.skillPts > 0)

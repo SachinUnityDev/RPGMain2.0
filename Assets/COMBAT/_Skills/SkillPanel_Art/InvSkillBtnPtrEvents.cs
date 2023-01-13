@@ -8,7 +8,7 @@ using Combat;
 using TMPro;
 using System.Linq;
 using System;
-
+using Interactables;
 
 namespace Common
 {
@@ -21,7 +21,7 @@ namespace Common
         
 
         [SerializeField] GameObject skillCard;
-        //[SerializeField] int index = -1;
+        [SerializeField] int index = -1;
 
 
         public SkillCardData skillCardData;
@@ -38,13 +38,16 @@ namespace Common
 
 
         [Header("Key Skill ref SET UP ON INIT")]
-        public SkillData skillData;
-        public SkillDataSO skillDataSO; 
+        public SkillModel skillModel;
+        public SkillDataSO skillDataSO;
 
+        public SkillNames skillName;
+        [SerializeField] Transform skillPtsTrans; 
         void Start()
         {
             prevSkillHovered = SkillNames.None;
             skillCard = skillHexSO.skillCardPrefab;
+           // skillPtsTrans = transform.GetChild(2);
         }
         #region  POINTER EVENTS
         public void OnPointerClick(PointerEventData eventData)
@@ -65,30 +68,44 @@ namespace Common
         }
         #endregion
 
-        public void Init(SkillDataSO _skillDataSO, SkillData _skillData)
+        public void Init(SkillDataSO _skillDataSO, SkillNames _skillName)
         {
-            skillDataSO = _skillDataSO; 
-            skillData = _skillData;
+            skillDataSO = _skillDataSO;
+            skillName = _skillName;
+            index = _skillDataSO.allSkills.FindIndex(t => t.skillName == _skillName); 
+            
+            SkillController1 skillController = InvService.Instance.charSelectController.skillController; 
+            skillModel = skillController.GetSkillModel(skillName);
+
+            transform.GetComponent<Image>().sprite =
+                                    skillDataSO.allSkills[index].skillIconSprite;
+
+            //if (skillModel == null) return;
+            //    int skilllvlInt = (int)skillModel.skillLvl; 
+            //if(skillPtsTrans != null)
+            //skillPtsTrans.GetChild(0).GetComponent<TextMeshProUGUI>().text = skilllvlInt.ToString();
         }
+
+
         void ShowSkillCard()
         {
-            skillCard.SetActive(true);
+            //skillCard.SetActive(true);
            // SkillServiceView.Instance.pointerOnSkillIcon = true;  // to be checked
             //SkillDataSO skillSO = SkillService.Instance
             //           .GetSkillSO(CombatService.Instance.currCharClicked.charModel.charName);
             //index = gameObject.transform.GetSiblingIndex();
             //SkillServiceView.Instance.index = index;
             // UPDATE SKILL SERVICE 
-            if (skillDataSO!= null && skillData != null)
-            {
-                SkillService.Instance.On_SkillHovered(skillDataSO.charName,
-                                                            skillData.skillName);
-            }                
-            else 
-            {
-                Debug.Log("Skill SO is null "); return; 
-            }
-            skillCardData = SkillService.Instance.skillCardData;
+            //if (skillDataSO!= null && skillData != null)
+            //{
+            //    SkillService.Instance.On_SkillHovered(skillDataSO.charName,
+            //                                                skillData.skillName);
+            //}                
+            //else 
+            //{
+            //    Debug.Log("Skill SO is null "); return; 
+            //}
+            //skillCardData = SkillService.Instance.skillCardData;
         }
 
 

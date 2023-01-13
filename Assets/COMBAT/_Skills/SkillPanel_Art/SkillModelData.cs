@@ -16,7 +16,7 @@ namespace Common
         public PerkSelectState state;
         public PerkType perkType;
         public SkillLvl perkLvl;
-        public List<PerkNames> preReqList = new List<PerkNames>();
+        public List<PerkNames> preReqList = new List<PerkNames>();        
 
         public SkillPerkData(SkillNames skillName, PerkNames perkName
                                     , PerkSelectState state, PerkType perkType, SkillLvl perkLvl

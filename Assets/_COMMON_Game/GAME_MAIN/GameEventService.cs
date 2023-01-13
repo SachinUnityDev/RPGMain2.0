@@ -48,12 +48,13 @@ namespace Common
             TownService.Instance.Init(locationName);
             CalendarService.Instance.Init();
             CharService.Instance.Init();
-            // sound Service init;
-           
+            
             BestiaryService.Instance.Init();
             FameService.Instance.Init();
             LevelService.Instance.Init();
+
             OnTownEnter?.Invoke(locationName);
+
         }
 
         public void On_TownExit(LocationName locationName)

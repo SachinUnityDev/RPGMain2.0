@@ -47,7 +47,7 @@ namespace Common
                                                                 charModel.charNameStr;
             PopulateTheMainSkills();
             PopulateTheUtilitySkills();
-            PopulateTheCampingSkills();
+            PopulateTheCampingSkillsAndUzu();
             // get skill SO from the skillService
             // get skillController
             // skillModelData
@@ -57,62 +57,73 @@ namespace Common
             Transform mainSkillTrans = iconContainerTrans.GetChild(0).GetChild(1);
             for (int i = 0; i < 4; i++)
             {
-                mainSkillTrans.GetChild(i).GetComponent<Image>().sprite =
-                                        skillDataSO.allSkills[i].skillIconSprite;
-                SkillData skillData = skillDataSO.allSkills[i];
+                //mainSkillTrans.GetChild(i).GetComponent<Image>().sprite =
+                //                        skillDataSO.allSkills[i].skillIconSprite;
+                // SkillData skillData = skillDataSO.allSkills[i];
                 //int lvl = (int)(selectSkillController.GetSkillModelData(skillData.skillName).perkLvl); 
                 //mainSkillTrans.GetChild(i).GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = 
                 //                lvl.ToString(); 
-
-                mainSkillTrans.GetChild(i).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO, skillData); 
+                SkillNames skillName = skillDataSO.allSkills[i].skillName; 
+                mainSkillTrans.GetChild(i).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO, skillName); 
             }
 
         }
         void PopulateTheUtilitySkills()
         {
             Transform utilitySkillTrans = iconContainerTrans.GetChild(1).GetChild(1);
-            SkillData skillData = skillDataSO.allSkills.Find(t => t.skillType == SkillTypeCombat.Move);
+            SkillNames skillname = skillDataSO.allSkills.Find(t => t.skillType == SkillTypeCombat.Move).skillName;
+                      
 
-            utilitySkillTrans.GetChild(0).GetComponent<Image>().sprite =
-                                                       skillData.skillIconSprite;
+            utilitySkillTrans.GetChild(0).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO, skillname);
+            skillname = skillDataSO.allSkills.Find(t => t.skillType == SkillTypeCombat.Patience).skillName;
 
-            utilitySkillTrans.GetChild(0).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO, skillData); 
 
-             skillData = skillDataSO.allSkills.Find(t => t.skillType == SkillTypeCombat.Patience);
-             utilitySkillTrans.GetChild(1).GetComponent<Image>().sprite =
-                                                       skillData.skillIconSprite;
+            utilitySkillTrans.GetChild(1).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO, skillname);
+            int i = skillDataSO.allSkills.FindIndex(t => t.skillType == SkillTypeCombat.Weapon); // to prevent null error 
 
-            utilitySkillTrans.GetChild(0).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO, skillData);
-
-            skillData = skillDataSO.allSkills.Find(t => t.skillType == SkillTypeCombat.Weapon);
-            if(skillData != null)
+            if (i != -1)
             {
-                utilitySkillTrans.GetChild(2).gameObject.SetActive(true); 
-                utilitySkillTrans.GetChild(2).GetComponent<Image>().sprite = skillData.skillIconSprite;
-
-                utilitySkillTrans.GetChild(0).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO, skillData);
-            }                
-            else
-                utilitySkillTrans.GetChild(2).gameObject.SetActive(false);           
-
-
-        }
-        void PopulateTheCampingSkills()
-        {
-            Transform campSkillTrans = iconContainerTrans.GetChild(2).GetChild(1);
-            SkillData skillData = skillDataSO.allSkills.Find(t => t.skillType == SkillTypeCombat.Uzu);
-            if(skillData != null)
-            {
-                campSkillTrans.GetChild(2).gameObject.SetActive(true);
-                campSkillTrans.GetChild(2).GetComponent<Image>().sprite = skillData.skillIconSprite;
+                utilitySkillTrans.parent.GetChild(0).GetChild(1).gameObject.SetActive(true);// weapon heading
+                utilitySkillTrans.GetChild(2).gameObject.SetActive(true);             
+                utilitySkillTrans.GetChild(2).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO
+                                                                , skillDataSO.allSkills[i].skillName);
             }
             else
             {
+                utilitySkillTrans.parent.GetChild(0).GetChild(1).gameObject.SetActive(false); // weapon heading
+                utilitySkillTrans.GetChild(2).gameObject.SetActive(false);
+            }
+                
+        }
+        void PopulateTheCampingSkillsAndUzu()
+        {
+
+            Transform campSkillTrans = iconContainerTrans.GetChild(2).GetChild(1);
+            int i = skillDataSO.allSkills.FindIndex(t => t.skillType == SkillTypeCombat.Uzu);
+
+            if (i != -1)
+            {
+                campSkillTrans.parent.GetChild(0).GetChild(1).gameObject.SetActive(true);
+                campSkillTrans.GetChild(2).gameObject.SetActive(true);
+                campSkillTrans.GetChild(2).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO
+                    , skillDataSO.allSkills[i].skillName);
+            }
+            else
+            {
+                campSkillTrans.parent.GetChild(0).GetChild(1).gameObject.SetActive(false);// Uzu heading 
                 campSkillTrans.GetChild(2).gameObject.SetActive(false);
             }
-
-
-
+      
+            //SkillData skillData = skillDataSO.allSkills.Find(t => t.skillType == SkillTypeCombat.Uzu);
+            //if(skillData != null)
+            //{
+            //    campSkillTrans.GetChild(2).gameObject.SetActive(true);
+            //    campSkillTrans.GetChild(2).GetComponent<Image>().sprite = skillData.skillIconSprite;
+            //}
+            //else
+            //{
+            //    campSkillTrans.GetChild(2).gameObject.SetActive(false);
+            //}
         }
         void PopulateTheSkillPoints()
         {

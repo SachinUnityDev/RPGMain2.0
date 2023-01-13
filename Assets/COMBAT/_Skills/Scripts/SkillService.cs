@@ -84,7 +84,7 @@ namespace Combat
 
         SkillServiceView skillServiceView;
 
-        [Header("ALL SKILL PERK DATA")]
+
       
       
         public int currSkillPts =10;

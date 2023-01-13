@@ -127,8 +127,7 @@ namespace Combat
             //move and FX controller 
             skillFXMoveController = gameObject.GetComponent<SkillFxMoveController>();
             // skillFXController = gameObject.GetComponent<SkillFXController>();
-            skillFactory.SkillsInit();
-            skillFactory.InitPerks();
+   
            
            // CombatEventService.Instance.OnCombatInit += skillFactory.SkillsInit;
            // CombatEventService.Instance.OnCombatInit += skillFactory.InitPerks; 

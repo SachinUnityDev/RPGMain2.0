@@ -31,10 +31,8 @@ namespace Common
         public List<GameObject> allyInPlay;       
         public List<GameObject> charsInPlay; // 
 
-
        // only for Quest  and Combat
         
-   
         [Header("represents all the chars in the game")]
         // all Char In Game this service + bestiary 
         public List<CharController> charsInPlayControllers;
@@ -77,7 +75,7 @@ namespace Common
                 SpawnCompanions(charName);
             }
             CharController abbas = charsInPlayControllers.Find(t => t.charModel.charName == CharNames.Abbas_Skirmisher); 
-            On_CharAddToParty(abbas);
+            
 
             //CreateAllAlliesCtrls();
         }
@@ -172,37 +170,7 @@ namespace Common
             }
         }
 
-       // public CharController CreateCharsCtrl(CharNames charName)  // LATEST ONE 
-     //   {
-            //CharController charCtrl = new CharController();
-            //foreach (CharacterSO c in allAllySO)
-            //{
-            //    if (charName == c.charName)
-            //    {        
-            //        charCtrl.InitiatizeController(c);
-
-            //        CharMode charMode = charCtrl.charModel.charMode;
-            //        if (charMode == CharMode.Ally)
-            //        {
-            //            allyInPlayControllers.Add(charCtrl);
-                      
-            //        }
-            //        //if (charMode == CharMode.Enemy)
-            //        //{
-            //        //    enemyInPlayControllers.Add(charCtrl);
-            //        //    enemyInPlay.Add(go);
-            //        //    //  CombatService.Instance.enemyInCombat.Add(charCtrl); 
-
-            //        //}
-            //        charsInPlayControllers.Add(charCtrl);
-            //        charsInPlay.Add(go);
-            //        LevelService.Instance.LevelUpInit(charCtrl);
-
-            //    }
-            //}
-           // return charCtrl;
-      //  }
-
+     
         public CharController SpawnCompanions(CharNames charName)  // character factory 
         {
            // CharController charController = GetCharCtrlWithName(charName);
@@ -262,7 +230,13 @@ namespace Common
             //return charCtrl;
             return charController; 
         }
-
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                On_CharAddToParty(GetCharCtrlWithName(CharNames.Abbas_Skirmisher)); 
+            }
+        }
         public void On_CharAddToParty(CharController charController)
         {
             Debug.Log("On Char Added" + charController.charModel.charName);
@@ -495,3 +469,37 @@ namespace Common
 
 
 }
+
+
+
+// public CharController CreateCharsCtrl(CharNames charName)  // LATEST ONE 
+//   {
+//CharController charCtrl = new CharController();
+//foreach (CharacterSO c in allAllySO)
+//{
+//    if (charName == c.charName)
+//    {        
+//        charCtrl.InitiatizeController(c);
+
+//        CharMode charMode = charCtrl.charModel.charMode;
+//        if (charMode == CharMode.Ally)
+//        {
+//            allyInPlayControllers.Add(charCtrl);
+
+//        }
+//        //if (charMode == CharMode.Enemy)
+//        //{
+//        //    enemyInPlayControllers.Add(charCtrl);
+//        //    enemyInPlay.Add(go);
+//        //    //  CombatService.Instance.enemyInCombat.Add(charCtrl); 
+
+//        //}
+//        charsInPlayControllers.Add(charCtrl);
+//        charsInPlay.Add(go);
+//        LevelService.Instance.LevelUpInit(charCtrl);
+
+//    }
+//}
+// return charCtrl;
+//  }
+

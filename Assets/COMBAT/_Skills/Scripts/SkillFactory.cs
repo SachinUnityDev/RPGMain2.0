@@ -51,6 +51,8 @@ namespace Combat
         void Start()
         {
             // CombatEventService.Instance.OnSOC += SkillsInit; 
+            SkillsInit();
+            InitPerks();
             CharService.Instance.OnCharAddedToParty += (CharNames charName) =>SkillsInit();
         }
 
@@ -82,7 +84,7 @@ namespace Combat
                         return t;
                     }
                 }
-                Debug.Log("SKILL NOT FOUND !");
+                Debug.Log("SKILL NOT FOUND !" +_skillName);
                 return null;
         }
 

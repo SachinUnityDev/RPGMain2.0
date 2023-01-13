@@ -97,6 +97,7 @@ namespace Interactables
             compCharParaView.SetPara(selectComp[index].charName);
             CharacterSO charSO =
                     CharService.Instance.GetAllySO(selectComp[index].charName);
+
             charPortraitGO.GetComponent<Image>().sprite = charSO.charSprite;
 
             selectCult = selectComp[index].cultType;

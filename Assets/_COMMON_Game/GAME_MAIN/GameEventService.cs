@@ -48,7 +48,7 @@ namespace Common
             TownService.Instance.Init(locationName);
             CalendarService.Instance.Init();
             CharService.Instance.Init();
-            
+
             BestiaryService.Instance.Init();
             FameService.Instance.Init();
             LevelService.Instance.Init();
@@ -64,7 +64,9 @@ namespace Common
 
         public void On_GameStart()
         {
-            OnGameStart?.Invoke(); 
+            OnGameStart?.Invoke();
+           
+
         }
         public void On_GameEnd()
         {

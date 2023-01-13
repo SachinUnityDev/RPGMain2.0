@@ -63,7 +63,7 @@ namespace Combat
         }
         public void On_CombatInit()
         {
-            CharService.Instance.Init();
+            //CharService.Instance.Init();
             OnCombatInit?.Invoke(); 
         }
 

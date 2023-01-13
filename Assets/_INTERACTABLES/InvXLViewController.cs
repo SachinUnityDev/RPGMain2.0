@@ -70,6 +70,7 @@ namespace Interactables
         {
             //start with the inv panel display
             UIControlServiceGeneral.Instance.TogglePanelOnInGrp(invPanel, true);
+
             // init all four panels and their subpanels here 
             bestiaryPanel.GetComponent<IPanel>().Init();
             skillPanel.GetComponent<IPanel>().Init();

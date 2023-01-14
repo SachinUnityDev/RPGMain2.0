@@ -57,6 +57,7 @@ namespace Combat
         [Header("Skill Btn Related Sprites")]
         public Sprite SkillSelectFrame;
         public Sprite SkillNormalFrame;
+        public Sprite skillSelectFrame2;
 
         [Header("Skill Card Prefab")]
         public GameObject skillCardPrefab; 

@@ -15,8 +15,11 @@ namespace Common
         SkillDataSO skillDataSO;
 
         [Header("Skill Button")]
-        [SerializeField] Button skillPlusBtn;  
-        
+        [SerializeField] Button skillPlusBtn;
+
+        [Header("Inv Skill Main Panel")]
+        public InvSkillViewMain skillViewMain;
+
         [Header("NTBR")]
         [SerializeField] Transform charNameTrans;
         [SerializeField] Transform iconContainerTrans;
@@ -45,6 +48,10 @@ namespace Common
 
             charNameTrans.GetChild(0).GetComponent<TextMeshProUGUI>().text =
                                                                 charModel.charNameStr;
+
+            transform.GetComponent<Image>().sprite = skillDataSO.leftInvSkillPanelBG;
+
+
             PopulateTheMainSkills();
             PopulateTheUtilitySkills();
             PopulateTheCampingSkillsAndUzu();
@@ -56,13 +63,7 @@ namespace Common
         {
             Transform mainSkillTrans = iconContainerTrans.GetChild(0).GetChild(1);
             for (int i = 0; i < 4; i++)
-            {
-                //mainSkillTrans.GetChild(i).GetComponent<Image>().sprite =
-                //                        skillDataSO.allSkills[i].skillIconSprite;
-                // SkillData skillData = skillDataSO.allSkills[i];
-                //int lvl = (int)(selectSkillController.GetSkillModelData(skillData.skillName).perkLvl); 
-                //mainSkillTrans.GetChild(i).GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = 
-                //                lvl.ToString(); 
+            {        
                 SkillNames skillName = skillDataSO.allSkills[i].skillName; 
                 mainSkillTrans.GetChild(i).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO, skillName); 
             }

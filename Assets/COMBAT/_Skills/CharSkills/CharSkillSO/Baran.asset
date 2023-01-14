@@ -21,6 +21,10 @@ MonoBehaviour:
   defendFX:
     loc: 0
     skillSprite: {fileID: 0}
+  leftInvSkillPanelBG: {fileID: 21300000, guid: 650a52a4f5c3bd041ac54f86d67646f1,
+    type: 3}
+  rightInvSkillPanelBG: {fileID: 21300000, guid: 06c26f8c6ad1c2b478566bbf3cd52a23,
+    type: 3}
   passiveSkills: []
   allSkills:
   - skillName: 140
@@ -74,6 +78,7 @@ MonoBehaviour:
       colMainFX: {fileID: 0}
       selfFX: {fileID: 6148754506158781688, guid: 14cafda68f5afe54eb839d472668ef20,
         type: 3}
+    allLines: []
   - skillName: 141
     charName: 2
     skillID: 141
@@ -123,6 +128,7 @@ MonoBehaviour:
       colMainFX: {fileID: 0}
       selfFX: {fileID: 1943563886778379370, guid: 05c186dac36793b4ca8560046e1117c5,
         type: 3}
+    allLines: []
   - skillName: 142
     charName: 2
     skillID: 142
@@ -170,6 +176,7 @@ MonoBehaviour:
     - perkChain: 020000000400000006000000
       hexName: 1a000000180000000b000000
     allSkillFXs: []
+    allLines: []
   - skillName: 143
     charName: 2
     skillID: 143
@@ -211,6 +218,7 @@ MonoBehaviour:
       colMainFX: {fileID: 0}
       selfFX: {fileID: 7607998311695135919, guid: 59e5c276ee0087549a65779eced913c4,
         type: 3}
+    allLines: []
   - skillName: 144
     charName: 2
     skillID: 144
@@ -247,6 +255,7 @@ MonoBehaviour:
       mainSkillFX: {fileID: 0}
       colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
+    allLines: []
   - skillName: 2
     charName: 2
     skillID: 144
@@ -276,6 +285,7 @@ MonoBehaviour:
     - perkChain: 00000000
       hexName: 020000000b0000000b000000
     allSkillFXs: []
+    allLines: []
   - skillName: 145
     charName: 2
     skillID: 146
@@ -303,3 +313,4 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes: []
     allSkillFXs: []
+    allLines: []

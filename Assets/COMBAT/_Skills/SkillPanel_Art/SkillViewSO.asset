@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3adcd6a834e274b8ba1e4a0ac4709d, type: 3}
   m_Name: SkillViewSO
   m_EditorClassIdentifier: 
-  skillPtsPlus: {fileID: 21300000, guid: 6880a9f9cf742164dac2876b378ddd46, type: 3}
-  skillPtsPressed: {fileID: 21300000, guid: 1d292733f43e8954cbb95409b1131ce6, type: 3}
+  skillPlusN: {fileID: 21300000, guid: 6880a9f9cf742164dac2876b378ddd46, type: 3}
+  skillPlusClicked: {fileID: 21300000, guid: 1d292733f43e8954cbb95409b1131ce6, type: 3}
   perkBtnNormal: {fileID: 21300000, guid: 2913019297aa33b4abbd030ec10cf047, type: 3}
   perkBtnSelect: {fileID: 21300000, guid: ee83b554898868b41b2040ca5c414313, type: 3}
   perkBtnUnSelectable: {fileID: 21300000, guid: 216bbadd5ed34f9498c1da23e2bbf0d0,

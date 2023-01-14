@@ -11,6 +11,7 @@ namespace Combat
     public class AllSkillSO : ScriptableObject
     {
 
+
         public List<SkillDataSO> allSkillDataSO = new List<SkillDataSO>();
 
     }

@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.PeerToPeer;
 using UnityEngine;
 
 
@@ -11,6 +12,7 @@ namespace Common
 {
     public class SkillController1 : MonoBehaviour
     {
+
 
         [SerializeField] CharMode charMode;
         public CharController charController;
@@ -21,7 +23,7 @@ namespace Common
         
 
         [Header("Skill Perk Data")]
-        public List<SkillPerkData> allSkillPerkData = new List<SkillPerkData>();
+        public List<PerkData> allSkillPerkData = new List<PerkData>();
 
         [Header("All Skill and UnLocked Skill list")]
         public List<SkillNames> allSkillInChar = new List<SkillNames>();
@@ -34,6 +36,8 @@ namespace Common
         [Header("Skill and Perk Bases")]
         public List<SkillBase> allSkillBases = new List<SkillBase>();
         public List<PerkBase> allPerkBases = new List<PerkBase>();
+        [SerializeField] int skillbaseCount =-1;
+        [SerializeField] int perkBaseCount = -1;
 
         SkillDataSO skillDataSO;
         private void Start()
@@ -45,7 +49,9 @@ namespace Common
         }
         public void InitSkillList(CharNames _charName)
         {
-            if (charName != _charName) return; 
+            if (charName != _charName) return;
+            // stop double run
+            if (allSkillInChar.Count > 0) return;    
             skillDataSO = SkillService.Instance.GetSkillSO(charName);
             foreach (SkillData skill in skillDataSO.allSkills)
             {
@@ -66,6 +72,8 @@ namespace Common
               
                 skillbase.SkillInit(this); // pass in all the params when all skills are coded
             }
+            skillbaseCount = allSkillBases.Count; 
+            InitPerkDataList();
         }
         public void InitPerkDataList()
         {
@@ -73,20 +81,25 @@ namespace Common
             {
                 List<PerkBaseData> skillPerkData =   
                          SkillService.Instance.skillFactory.GetSkillPerkData(_skillName);
-                
-                foreach (PerkBaseData perkData in skillPerkData)
+                if (skillPerkData != null)
                 {
+                    foreach (PerkBaseData perkData in skillPerkData)
+                    {
+                        PerkBase P1 = SkillService.Instance.skillFactory
+                                    .GetPerkBase(perkData.skillName, perkData.perkName);
 
-                    PerkBase P1 = SkillService.Instance.skillFactory
-                                .GetPerkBase(perkData.skillName, perkData.perkName); 
-                    allPerkBases.Add(P1);// perk bases
-                    P1.SkillInit(this);
+                        Debug.Log("PERKANME..." + P1.perkName);
+                        allPerkBases.Add(P1);// perk bases
+                        P1.SkillInit(this);
 
-                    SkillPerkData skillModelData = new SkillPerkData(P1.skillName, P1.perkName, P1.state,
-                        P1.perkType, P1.skillLvl, P1.preReqList);
-                    allSkillPerkData.Add(skillModelData);  // model data captures state and lvl
+                        PerkData perkModel = new PerkData(P1.skillName, P1.perkName, P1.state,
+                            P1.perkType, P1.skillLvl, P1.preReqList);
+                        allSkillPerkData.Add(perkModel);  // model data captures state and lvl
+                      //  SetPerkState(perkModel);
+                    }
                 }
             }
+            perkBaseCount = allPerkBases.Count;
 
         }
 
@@ -99,7 +112,7 @@ namespace Common
 
             allSkillBases.Find(t => t.skillName == _skillName).SkillHovered();
 
-            List<SkillPerkData> clickedPerkList = allSkillPerkData
+            List<PerkData> clickedPerkList = allSkillPerkData
                 .Where(t => t.skillName == _skillName && t.state == PerkSelectState.Clicked).ToList();
 
             clickedPerkList.ForEach(t => SkillService.Instance.skillCardData.perkChain.Add(t.perkType));
@@ -112,7 +125,7 @@ namespace Common
         {
             allSkillBases.Find(t => t.skillName == _skillName).SkillSelected();
 
-            List<SkillPerkData> clickedPerkList = allSkillPerkData
+            List<PerkData> clickedPerkList = allSkillPerkData
                 .Where(t => t.skillName == _skillName && t.state == PerkSelectState.Clicked).ToList();
 
 
@@ -164,12 +177,12 @@ namespace Common
         #endregion
 
         #region GETTERS skillmodel, skillbase, skillPerkData, perkBase
-        public SkillPerkData GetSkillPerkData(SkillNames _skillName)
+        public List<PerkData> GetSkillPerkData(SkillNames _skillName)
         {
-            SkillPerkData skillPerkData = 
-                    allSkillPerkData.Find(t => t.skillName == _skillName);
-            if(skillPerkData != null)
-                return skillPerkData;
+            List<PerkData> allPerkData = 
+                    allSkillPerkData.Where(t => t.skillName == _skillName).ToList();
+            if(allPerkData.Count >  0)
+                return allPerkData;
             else
             {
                 Debug.Log("Skill Perk data not found"+ _skillName);
@@ -218,19 +231,99 @@ namespace Common
             }
         }
         #endregion
-        public void OnPerkUnlock(PerkNames _perkName)
-        {
-            if (charController.charModel.skillPts > 0)
-                charController.charModel.skillPts--;
-            else return;
-        
-            UpdatePerkState(_perkName, PerkSelectState.Clicked);
+        public void OnPerkClicked(PerkData ClickedPerkData)
+        {   
+
+
+            if(ClickedPerkData != null)
+            {
+               if(ClickedPerkData.state == PerkSelectState.Clickable)
+                {
+                    if (IsPrevLvlClicked(ClickedPerkData))
+                        UpdateDataPerkState(ClickedPerkData.perkName, PerkSelectState.Clicked);
+                    else return;
+
+                    //if (charController.charModel.skillPts > 0)
+                    //    charController.charModel.skillPts--;
+                    //else return;
+                    SetPerkState(ClickedPerkData);
+                    
+                }
+            }
             //SkillViewService.. Update skillBtn State.. skill points in view 
          
 
         }
-        void UpdatePerkState(PerkNames _perkName, PerkSelectState _state)
+        
+        void SetSameLvlPerkUnClickable(PerkData perkData)
         {
+           // List<PerkData> list = GetClickedPerks(perkData.skillName);
+            foreach (PerkData perk in allSkillPerkData)
+            {
+                if(perk.perkName != perkData.perkName)
+                {
+                    if(perk.perkLvl == perkData.perkLvl)
+                    {
+                        UpdateDataPerkState(perk.perkName, PerkSelectState.UnClickable);
+                    }
+                }
+            }
+        }
+        void SetPerkState(PerkData clickedPerkData) //  on perk clicked extn
+        {
+            if (clickedPerkData.state == PerkSelectState.Clicked)
+            {
+                SetSameLvlPerkUnClickable(clickedPerkData);
+            }
+            
+            foreach (PerkData perk in allSkillPerkData)
+            {
+                SkillLvl nextlvl = clickedPerkData.perkLvl + 1;
+                if ((int)nextlvl > 3) continue;
+                if (perk.perkLvl == nextlvl)
+                {
+                    foreach (PerkNames perkName in perk.preReqList)
+                    {
+                        if (perkName == PerkNames.None || perkName == clickedPerkData.perkName
+                            || GetPerkData(perkName).state == PerkSelectState.Clicked)
+                        {
+                            UpdateDataPerkState(perk.perkName, PerkSelectState.Clickable);//update
+                        }
+                        else 
+                        {
+                            UpdateDataPerkState(perk.perkName, PerkSelectState.UnClickable);
+
+                        }
+                    }
+                }
+            }
+            foreach (PerkData perk in allSkillPerkData)
+            {
+                SkillLvl nextlvl = clickedPerkData.perkLvl + 2;
+                if ((int)nextlvl > 3) continue;
+                if (perk.perkLvl == nextlvl)
+                {
+                    foreach (PerkNames perkName in perk.preReqList)
+                    {
+                        if (perkName == PerkNames.None 
+                            || GetPerkData(perkName).state == PerkSelectState.Clickable
+                            || GetPerkData(perkName).state == PerkSelectState.Clicked)
+                        {
+                            UpdateDataPerkState(perk.perkName, PerkSelectState.Clickable);//update
+                        }
+                        else
+                        {
+                            UpdateDataPerkState(perk.perkName, PerkSelectState.UnClickable);
+
+                        }
+                    }
+                }
+            }
+        }
+
+        void UpdateDataPerkState(PerkNames _perkName, PerkSelectState _state)
+        {
+            if (_perkName == PerkNames.None) return;
             foreach (var perkbase in allPerkBases)
             {
                 if (perkbase.perkName == _perkName)
@@ -238,18 +331,41 @@ namespace Common
                     perkbase.state = _state;
                 }
             }
-           allSkillPerkData.Find(t => t.perkName == _perkName).state = PerkSelectState.Clicked;
+            PerkData perkData = GetPerkData(_perkName);
+            perkData.state = _state;
+            SkillService.Instance.On_PerkStateChg(perkData);
         }
-        public List<SkillPerkData> GetClickedPerkChain(SkillNames _skillName)
+       
+        public PerkData GetPerkData(PerkNames _perkName)
+        {
+            if (_perkName == PerkNames.None) return null;   
+            PerkData perkData = 
+                    allSkillPerkData.Find(t => t.perkName == _perkName);
+            if (perkData != null)
+                return perkData;
+            else
+                Debug.Log("perk data not found" + _perkName);
+            return null; 
+        }
+        public List<PerkData> GetClickedPerks(SkillNames _skillName)
         {
             List<PerkBaseData> perks = new List<PerkBaseData>(); 
               
-            List<SkillPerkData> allPerks = allSkillPerkData.Where(t => t.skillName == _skillName 
+            List<PerkData> allPerks = allSkillPerkData.Where(t => t.skillName == _skillName 
                                                         && t.state ==PerkSelectState.Clicked).ToList();
             
             return allPerks;
         }
+        bool IsPrevLvlClicked(PerkData perkData)
+        {
 
+            SkillLvl perkLvl = perkData.perkLvl;
+            if (perkLvl == SkillLvl.Level1) return true; 
+            List<PerkData> clickedPerks = GetClickedPerks(perkData.skillName);
+            if (clickedPerks.Any(t => t.perkLvl < perkLvl))
+                return true; 
+            else return false;  
+        }
         #region  SKILL SELECTION AI 
         public void StartAISkillInController()
         {
@@ -300,7 +416,6 @@ namespace Common
             int random = UnityEngine.Random.Range(0, ClickableSkills.Count);
             return ClickableSkills[random];// to remove error 
         }
-
         bool GetSkillModelByBaseWtChance(float NetWt, int i)
         {
             float skillchance = (ClickableSkills[i].baseWeight / NetWt) * 100f;

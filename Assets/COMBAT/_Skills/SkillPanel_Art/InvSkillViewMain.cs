@@ -2,7 +2,9 @@ using Combat;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Interactables; 
+using Interactables;
+using System.Security.Policy;
+using System;
 
 namespace Common
 {
@@ -11,6 +13,10 @@ namespace Common
 
         // get reference to all skill SO 
         // get ref to skill service
+        public event Action<SkillNames> OnSkillSelectedInPanel;
+
+        public bool isPerkClickAvail = false; 
+
         [Header("To be ref")] 
         public AllSkillSO allSkillSO; 
         public SkillViewSO skillViewSO;
@@ -42,7 +48,10 @@ namespace Common
            
         }
 
-        
+        public void On_SkillSelectedInPanel(SkillNames skillName)
+        {
+            OnSkillSelectedInPanel.Invoke(skillName);
+        }
 
 
 

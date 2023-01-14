@@ -45,14 +45,15 @@ namespace Combat
     {
 
         Dictionary<SkillNames, Type> allSkills = new Dictionary<SkillNames, Type>();
-        public List<PerkBaseData> allSkillPerksData = new List<PerkBaseData>(); 
+        public List<PerkBaseData> allPerksBaseData = new List<PerkBaseData>(); 
 
-        [SerializeField] int skillCount; 
+        [SerializeField] int skillCount;
+        [SerializeField] int perkCount; 
         void Start()
         {
             // CombatEventService.Instance.OnSOC += SkillsInit; 
-            SkillsInit();
-            InitPerks();
+            //SkillsInit();
+          
             CharService.Instance.OnCharAddedToParty += (CharNames charName) =>SkillsInit();
         }
 
@@ -103,9 +104,6 @@ namespace Combat
 
         #endregion
 
-
-
-
         public void InitPerks()
         {
             var Perks = Assembly.GetAssembly(typeof(PerkBase)).GetTypes()
@@ -117,19 +115,22 @@ namespace Combat
                 var P1 = Activator.CreateInstance(perk) as PerkBase;
 
                 PerkBaseData skillPerkData = new PerkBaseData(P1.skillName, P1.perkName, perk);            
-                allSkillPerksData.Add(skillPerkData);                
+                allPerksBaseData.Add(skillPerkData);                
             }
+            perkCount = allPerksBaseData.Count;
         }
 
         public PerkBase GetPerkBase(SkillNames skillName, PerkNames perkName)
         {
-            List<PerkBaseData> skillPerkData = allSkillPerksData.Where(t => t.skillName == skillName).ToList();
+            List<PerkBaseData> skillPerkData = allPerksBaseData.Where(t => t.skillName == skillName).ToList();
 
             foreach (PerkBaseData perkData in skillPerkData)
             {
-                var P1 = Activator.CreateInstance(perkData.perkBase) as PerkBase;
-
-                return P1;  
+                if(perkData.perkName == perkName)
+                {
+                    var P1 = Activator.CreateInstance(perkData.perkBase) as PerkBase;
+                    return P1;
+                }
             }
             Debug.Log("Perk base not found" + skillName + "PerkName" + perkName);            
             return null; 
@@ -137,7 +138,7 @@ namespace Combat
        
         public List<PerkBaseData> GetSkillPerkData(SkillNames _skillName)
         {
-            List<PerkBaseData> skillPerkData = SkillService.Instance.skillFactory.allSkillPerksData
+            List<PerkBaseData> skillPerkData = SkillService.Instance.skillFactory.allPerksBaseData
                                                   .Where(t => t.skillName == _skillName).ToList();
             if(skillPerkData.Count > 0)
             return skillPerkData;

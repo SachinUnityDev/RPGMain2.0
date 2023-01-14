@@ -35,7 +35,7 @@ namespace Combat
     {
         public float combatSpeed = 1f;
 
-
+        public event Action<PerkData> OnPerkStateChg; 
         #region Initializers
 
         [Header("SKill Factory NTBR")]
@@ -156,7 +156,10 @@ namespace Combat
             CombatEventService.Instance.OnCharOnTurnSet += PopulateSkillTargets;
 
         }
-
+        public void On_PerkStateChg(PerkData perkData)
+        {
+            OnPerkStateChg?.Invoke(perkData);
+        }
         void SkillDisplay()  // some reference is there for SKILL DISPLAY ON TOP
         {
             
@@ -188,21 +191,21 @@ namespace Combat
 
         public void InitSkillControllers()
         {
-           // CombatService.Instance.AddCombatControllers();
-            foreach (var character in CharService.Instance.charsInPlay)
-            {
-                if (character.GetComponent<SkillController1>() == null)
-                {
-                    SkillController1 skillController = character.gameObject.AddComponent<SkillController1>();
-                    allSkillControllers.Add(skillController);
+            // CombatService.Instance.AddCombatControllers();
+            //foreach (var character in CharService.Instance.charsInPlay)
+            //{
+            //    if (character.GetComponent<SkillController1>() == null)
+            //    {
+            //        SkillController1 skillController = character.gameObject.AddComponent<SkillController1>();
+            //        allSkillControllers.Add(skillController);
 
-                    skillController.InitPerkDataList(); 
-                   
+            //        skillController.InitPerkDataList();
 
-                    //SkillAIController skillAIController = character.gameObject.AddComponent<SkillAIController>();
-                    //allSKillAIControllers.Add(skillAIController); 
-                }
-            }
+
+            //        //SkillAIController skillAIController = character.gameObject.AddComponent<SkillAIController>();
+            //        //allSKillAIControllers.Add(skillAIController); 
+            //    }
+            //}
         }
 
 

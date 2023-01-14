@@ -21,6 +21,10 @@ MonoBehaviour:
   defendFX:
     loc: 0
     skillSprite: {fileID: 0}
+  leftInvSkillPanelBG: {fileID: 21300000, guid: 532af26531ed7e5449be98e73831c1fc,
+    type: 3}
+  rightInvSkillPanelBG: {fileID: 21300000, guid: 4d9925ca7b595c34f80de515908853ed,
+    type: 3}
   passiveSkills: []
   allSkills:
   - skillName: 170
@@ -84,6 +88,7 @@ MonoBehaviour:
         type: 3}
       colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
+    allLines: []
   - skillName: 171
     charName: 7
     skillID: 0
@@ -157,6 +162,7 @@ MonoBehaviour:
       mainSkillFX: {fileID: 0}
       colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
+    allLines: []
   - skillName: 172
     charName: 7
     skillID: 0
@@ -208,6 +214,7 @@ MonoBehaviour:
       mainSkillFX: {fileID: 0}
       colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
+    allLines: []
   - skillName: 173
     charName: 7
     skillID: 173
@@ -249,6 +256,7 @@ MonoBehaviour:
       colMainFX: {fileID: 0}
       selfFX: {fileID: 5558889293018098868, guid: 5b774a4eb621acc4bbe648740deaba54,
         type: 3}
+    allLines: []
   - skillName: 106
     charName: 7
     skillID: 0
@@ -286,6 +294,7 @@ MonoBehaviour:
       colMainFX: {fileID: 0}
       selfFX: {fileID: 229825020943521155, guid: 8a86e869f4374a043abf301812ef7e09,
         type: 3}
+    allLines: []
   - skillName: 2
     charName: 7
     skillID: 0
@@ -322,3 +331,4 @@ MonoBehaviour:
       mainSkillFX: {fileID: 0}
       colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
+    allLines: []

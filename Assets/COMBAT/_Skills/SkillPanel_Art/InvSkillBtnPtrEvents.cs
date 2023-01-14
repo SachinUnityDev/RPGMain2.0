@@ -80,10 +80,10 @@ namespace Common
             transform.GetComponent<Image>().sprite =
                                     skillDataSO.allSkills[index].skillIconSprite;
 
-            //if (skillModel == null) return;
-            //    int skilllvlInt = (int)skillModel.skillLvl; 
-            //if(skillPtsTrans != null)
-            //skillPtsTrans.GetChild(0).GetComponent<TextMeshProUGUI>().text = skilllvlInt.ToString();
+            if (skillModel == null) return;
+            int skilllvlInt = (int)skillModel.skillLvl;
+            //if (skillPtsTrans != null)
+            //    skillPtsTrans.GetComponent<TextMeshProUGUI>().text = skilllvlInt.ToString();
         }
 
 

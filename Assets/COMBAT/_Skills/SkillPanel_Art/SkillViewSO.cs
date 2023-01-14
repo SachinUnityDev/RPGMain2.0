@@ -9,8 +9,8 @@ namespace Common
     public class SkillViewSO : ScriptableObject
     {
         [Header("Plus Sign")]
-        public Sprite skillPtsPlus;
-        public Sprite skillPtsPressed;
+        public Sprite skillPlusN;
+        public Sprite skillPlusClicked;
 
 
         [Header("Perk Buttons")]

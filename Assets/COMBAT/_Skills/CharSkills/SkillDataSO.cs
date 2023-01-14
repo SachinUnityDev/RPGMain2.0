@@ -32,6 +32,10 @@ namespace Combat
         public Sprite defendPose;
         public FXSpriteData defendFX; // TO BE CHECKED 
 
+        [Header("Background Sprite")]
+        public Sprite leftInvSkillPanelBG; 
+        public Sprite rightInvSkillPanelBG;
+
         public List<PassiveSkillData> passiveSkills = new List<PassiveSkillData>();
 
         public List<SkillData> allSkills = new List<SkillData>();

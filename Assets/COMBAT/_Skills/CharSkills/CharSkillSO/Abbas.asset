@@ -21,6 +21,10 @@ MonoBehaviour:
   defendFX:
     loc: 0
     skillSprite: {fileID: 0}
+  leftInvSkillPanelBG: {fileID: 21300000, guid: 7aec4bbc00ab4ee46bf6fb5b92cfb95c,
+    type: 3}
+  rightInvSkillPanelBG: {fileID: 21300000, guid: 1871627c88c9e2e4385a735cc60280b4,
+    type: 3}
   passiveSkills: []
   allSkills:
   - skillName: 100

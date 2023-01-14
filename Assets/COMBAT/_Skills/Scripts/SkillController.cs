@@ -98,7 +98,7 @@ namespace Combat
             foreach (SkillNames _skillName in unLockedSkills)
             {
                
-                List<PerkBaseData> skillPerkData = SkillService.Instance.skillFactory.allSkillPerksData
+                List<PerkBaseData> skillPerkData = SkillService.Instance.skillFactory.allPerksBaseData
                                                     .Where(t => t.skillName == _skillName).ToList();
              
                 foreach (PerkBaseData perkData in skillPerkData)

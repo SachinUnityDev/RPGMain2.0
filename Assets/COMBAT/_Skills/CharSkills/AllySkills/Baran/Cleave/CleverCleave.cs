@@ -35,7 +35,7 @@ namespace Combat
         {
             base.BaseApply();
 
-            foreach (SkillPerkData skillModelData in skillController.allSkillPerkData)
+            foreach (PerkData skillModelData in skillController.allSkillPerkData)
             {
                 if (skillModelData.state == PerkSelectState.Clicked && skillModelData.perkName == PerkNames.EdgyAxe)
                 {

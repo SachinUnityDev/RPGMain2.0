@@ -47,8 +47,11 @@ namespace Combat
             charController = skillController.gameObject.GetComponent<CharController>();
             charID = charController.charModel.charID;
             charGO = skillController.gameObject;
-            currDyna = GridService.Instance.GetDyna4GO(charGO);
-            AddTargetPos();
+            if(GameService.Instance.gameModel.gameState == GameState.InCombat)
+            {
+                currDyna = GridService.Instance.GetDyna4GO(charGO);
+                AddTargetPos();
+            }
         }
         public virtual void SkillSelected()
         {

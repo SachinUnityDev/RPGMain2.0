@@ -13,7 +13,7 @@ namespace Common
 
         // get reference to all skill SO 
         // get ref to skill service
-        public event Action<SkillNames> OnSkillSelectedInPanel;
+        public event Action<SkillModel> OnSkillSelectedInPanel;
 
         public bool isPerkClickAvail = false; 
 
@@ -48,9 +48,9 @@ namespace Common
            
         }
 
-        public void On_SkillSelectedInPanel(SkillNames skillName)
+        public void On_SkillSelectedInPanel(SkillModel skillModel)
         {
-            OnSkillSelectedInPanel.Invoke(skillName);
+            OnSkillSelectedInPanel.Invoke(skillModel);
         }
 
 

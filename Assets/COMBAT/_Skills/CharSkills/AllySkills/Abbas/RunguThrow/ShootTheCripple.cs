@@ -1,26 +1,27 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace Combat
 {
-    public class ConfuseThem : PerkBase
+    public class ShootTheCripple : PerkBase
     {
-        public override PerkNames perkName => PerkNames.ConfuseThem;
+        public override PerkNames perkName => PerkNames.ShootTheCripple;
 
-        public override PerkType perkType => PerkType.A1;
+        public override PerkType perkType => PerkType.A2;
 
         public override PerkSelectState state { get; set; }
 
-        public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.None };
+        public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.ConfuseThem };
 
-        public override string desc => "this is Confuse them ";
+        public override string desc => "this is shoot the cripple  ";
 
         public override CharNames charName => CharNames.Abbas_Skirmisher;
 
         public override SkillNames skillName => SkillNames.RunguThrow;
 
-        public override SkillLvl skillLvl => SkillLvl.Level1;
+        public override SkillLvl skillLvl => SkillLvl.Level2;
 
         public override float chance { get; set; }
 
@@ -60,5 +61,4 @@ namespace Combat
         {
         }
     }
-
 }

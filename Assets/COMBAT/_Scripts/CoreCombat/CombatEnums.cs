@@ -343,7 +343,7 @@ namespace Combat
         CrackTheNose,
         CagedInWeb,
         CanReachFar,
-        CheatDeath,
+        ICheatDeath,
         CleverCleave,
         ColderThanBlade,
         ComeHere,
@@ -366,7 +366,7 @@ namespace Combat
         EdgyAxe,
         EdgyHatchet,
         EnemyOfFire,
-        EnjoyTrap,
+        EnjoyTheTrap,
         ExhaustTarget,
         ExtendingHook,
         ExterminateTheAnemic,
@@ -379,7 +379,7 @@ namespace Combat
         FeelOfImpact,
         FindTheWeakSpot,
         FinishingTouch,
-        FirstTarget,
+        UnLimitedAmo,
         FoulFour,
         FreeMove,
         Frigidify,
@@ -427,7 +427,7 @@ namespace Combat
         NoMagicTolerance,
         NoMatterWhoYouAre,
         NoMercy,
-        NoMercyForTheCripple,
+        ShootTheCripple,
         NoMercyForVenomous,
         NoMercyToEntangled,
         NooneCanReveal,
@@ -508,8 +508,12 @@ namespace Combat
         FlayTheSkin,
         TrapOfTheWild,
         Surprise,
-
-
+        TheHunter,
+        TheGrabber,
+        TheTrickster,
+        Pulsator,
+        Twister,
+        Wapper,
     }
 
 

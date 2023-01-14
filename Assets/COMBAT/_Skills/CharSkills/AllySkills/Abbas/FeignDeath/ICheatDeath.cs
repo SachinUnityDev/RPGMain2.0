@@ -1,12 +1,15 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace Combat
 {
-    public class ConfuseThem : PerkBase
+
+
+    public class ICheatDeath : PerkBase
     {
-        public override PerkNames perkName => PerkNames.ConfuseThem;
+        public override PerkNames perkName => PerkNames.ICheatDeath;
 
         public override PerkType perkType => PerkType.A1;
 
@@ -14,11 +17,11 @@ namespace Combat
 
         public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.None };
 
-        public override string desc => "this is Confuse them ";
+        public override string desc => "this is I cheat Death";
 
         public override CharNames charName => CharNames.Abbas_Skirmisher;
 
-        public override SkillNames skillName => SkillNames.RunguThrow;
+        public override SkillNames skillName => SkillNames.FeignDeath;
 
         public override SkillLvl skillLvl => SkillLvl.Level1;
 
@@ -60,5 +63,4 @@ namespace Combat
         {
         }
     }
-
 }

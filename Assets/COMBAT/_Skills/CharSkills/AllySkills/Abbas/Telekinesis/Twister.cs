@@ -1,26 +1,30 @@
-﻿using System.Collections;
+using Combat;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace Combat
 {
-    public class ConfuseThem : PerkBase
-    {
-        public override PerkNames perkName => PerkNames.ConfuseThem;
 
-        public override PerkType perkType => PerkType.A1;
+
+    public class Twister : PerkBase
+    {
+        public override PerkNames perkName => PerkNames.Twister;
+
+        public override PerkType perkType => PerkType.B2;
 
         public override PerkSelectState state { get; set; }
 
         public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.None };
 
-        public override string desc => "this is Confuse them ";
+        public override string desc => "this is the twister";
 
         public override CharNames charName => CharNames.Abbas_Skirmisher;
 
-        public override SkillNames skillName => SkillNames.RunguThrow;
+        public override SkillNames skillName => SkillNames.Telekinesis;
 
-        public override SkillLvl skillLvl => SkillLvl.Level1;
+        public override SkillLvl skillLvl => SkillLvl.Level2;
 
         public override float chance { get; set; }
 
@@ -60,5 +64,4 @@ namespace Combat
         {
         }
     }
-
 }

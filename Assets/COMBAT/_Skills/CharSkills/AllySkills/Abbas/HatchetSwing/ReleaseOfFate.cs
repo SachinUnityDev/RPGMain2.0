@@ -12,8 +12,7 @@ namespace Combat
 
         public override PerkSelectState state { get; set; }
 
-        public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.EdgyHatchet
-                                                        , PerkNames.ThrowAndPick };
+        public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.EdgyHatchet };
 
         public override string desc => "this is release of Fate";
 

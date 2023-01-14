@@ -4,7 +4,8 @@ using UnityEngine;
 using Combat;
 using Interactables;
 using TMPro;
-using UnityEngine.UI; 
+using UnityEngine.UI;
+using System.Linq;
 
 namespace Common
 {
@@ -33,15 +34,17 @@ namespace Common
         [SerializeField] Button leftBtn;
         [SerializeField] Button rightBtn;
         [SerializeField] Transform skillScrollTrans;
-        [SerializeField] Transform perkBtnContainer; 
+        [SerializeField] Transform perkBtnContainer;
 
-
+        [SerializeField] List<SkillModel> scrollList = new List<SkillModel>();  
         private void Start()
         {
+            
             InvService.Instance.OnCharSelectInvPanel += PopulateRightSkillPanel;
             leftBtn.onClick.AddListener(OnLeftBtnPressed);
             rightBtn.onClick.AddListener(OnRightBtnPressed);
             skillViewMain.OnSkillSelectedInPanel += PopulateSkillScroll; 
+
 
         }
         void PopulateRightSkillPanel(CharModel charModel)
@@ -52,7 +55,19 @@ namespace Common
                     SkillService.Instance.GetSkillSO(charController.charModel.charName);
 
             CharBGImg.sprite = skillDataSO.rightInvSkillPanelBG;
-            PopulateSkillScroll(skillDataSO.allSkills[0].skillName); 
+            scrollList.Clear(); 
+            for (int i = 0; i < 4; i++)
+            {
+                scrollList.Add(selectSkillController.allSkillModels[i]); 
+            }
+            if(charController.charModel.charName == CharNames.Abbas_Skirmisher)
+            {
+                SkillModel skillModel = selectSkillController.allSkillModels
+                                        .Find(t => t.skillType == SkillTypeCombat.Uzu); 
+                scrollList.Add(skillModel);
+            }
+
+            PopulateSkillScroll(scrollList[0]); 
 
             //PopulateTheMainSkills();
             //PopulateTheUtilitySkills();
@@ -65,44 +80,42 @@ namespace Common
         void OnLeftBtnPressed()
         {
             if (Time.time - prevLeftClick < 0.3f) return;
-            if (index <= 0)
+            --index;
+            if (index < 0)
             {
                 index = 0;
             }
             else
             {
-                --index; skillViewMain.On_SkillSelectedInPanel(selectSkillController.allSkillBases[index].skillName);
+                skillViewMain.On_SkillSelectedInPanel(scrollList[index]);
             }
             prevLeftClick = Time.time;
         }
         void OnRightBtnPressed()
         {
-            if (Time.time - prevRightClick < 0.3f) return;
-            if (index >= selectSkillController.allSkillBases.Count - 1)
-            {
-                //  index = 0;
-                index = selectSkillController.allSkillBases.Count - 1;
+            if (Time.time - prevRightClick < 0.3f) return;  
+            ++index;
+            if (index >= scrollList.Count)
+            {                
+                index = scrollList.Count;
             }
             else
             {
-                ++index; skillViewMain.On_SkillSelectedInPanel(selectSkillController.allSkillBases[index].skillName);
+                skillViewMain.On_SkillSelectedInPanel(scrollList[index]);          
             }
             prevRightClick = Time.time;
         }
 
-        void PopulateSkillScroll(SkillNames _skillName)
+        void PopulateSkillScroll(SkillModel skillModel)
         {
 
-            // getskillModel and print name
-            SkillModel skillModel =
-            selectSkillController.allSkillModels.Find(t => t.skillName == _skillName);
             if(skillModel != null)
             {
                 skillScrollTrans.GetChild(0).GetComponent<TextMeshProUGUI>().text
                                             = skillModel.skillName.ToString();
             }
             // get skillPerkData and Print PerkPanel 
-            List<PerkData> allPerkData = selectSkillController.GetSkillPerkData(_skillName);
+            List<PerkData> allPerkData = selectSkillController.GetSkillPerkData(skillModel.skillName);
             int i = 0;
             if (allPerkData == null) return;
             foreach (PerkData perkData in allPerkData)

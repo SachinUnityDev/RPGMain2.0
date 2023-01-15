@@ -21,7 +21,7 @@ namespace Common
         public AllSkillSO allSkillSO; 
         public SkillViewSO skillViewSO;
         public LeftSkillView leftSkillView;
-        public RightSkilllView rightSkillView;
+        public RightSkillView rightSkillView;
 
         public BtmCharViewController BtmCharViewController;
         [Header("Not to be ref")]

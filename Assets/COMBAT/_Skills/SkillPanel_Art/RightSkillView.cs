@@ -10,7 +10,7 @@ using System.Linq;
 namespace Common
 {
 
-    public class RightSkilllView : MonoBehaviour
+    public class RightSkillView : MonoBehaviour
     {
         CharController charController;
         SkillController1 selectSkillController;
@@ -30,7 +30,7 @@ namespace Common
         [Header("SkillScroll related")]
         float prevLeftClick = 0f; 
         float prevRightClick = 0f;
-        int index = -1;
+        [SerializeField]int index = -1;
         [SerializeField] Button leftBtn;
         [SerializeField] Button rightBtn;
         [SerializeField] Transform skillScrollTrans;
@@ -80,13 +80,14 @@ namespace Common
         void OnLeftBtnPressed()
         {
             if (Time.time - prevLeftClick < 0.3f) return;
-            --index;
-            if (index < 0)
+    
+            if (index <= 0)
             {
                 index = 0;
             }
             else
             {
+                --index;
                 skillViewMain.On_SkillSelectedInPanel(scrollList[index]);
             }
             prevLeftClick = Time.time;
@@ -94,13 +95,14 @@ namespace Common
         void OnRightBtnPressed()
         {
             if (Time.time - prevRightClick < 0.3f) return;  
-            ++index;
-            if (index >= scrollList.Count)
+   
+            if (index >= scrollList.Count-1)
             {                
-                index = scrollList.Count;
+                index = scrollList.Count-1;
             }
             else
             {
+                ++index;
                 skillViewMain.On_SkillSelectedInPanel(scrollList[index]);          
             }
             prevRightClick = Time.time;

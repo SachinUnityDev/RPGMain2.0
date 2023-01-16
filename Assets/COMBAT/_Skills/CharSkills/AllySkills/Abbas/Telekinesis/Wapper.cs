@@ -9,7 +9,7 @@ namespace Combat
     {
         public override PerkNames perkName => PerkNames.Wapper;
 
-        public override PerkType perkType => PerkType.A3;
+        public override PerkType perkType => PerkType.B3;
 
         public override PerkSelectState state { get; set; }
 

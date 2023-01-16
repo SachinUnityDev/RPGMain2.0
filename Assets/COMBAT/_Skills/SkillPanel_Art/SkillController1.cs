@@ -231,10 +231,10 @@ namespace Common
             }
         }
         #endregion
+
+        #region PERK CLICK AND PERK STATE CHANGE
         public void OnPerkClicked(PerkData ClickedPerkData)
         {   
-
-
             if(ClickedPerkData != null)
             {
                if(ClickedPerkData.state == PerkSelectState.Clickable)
@@ -257,20 +257,23 @@ namespace Common
         
         void SetSameLvlPerkUnClickable(PerkData perkData)
         {
-           // List<PerkData> list = GetClickedPerks(perkData.skillName);
+            SkillNames skillName = perkData.skillName;
             foreach (PerkData perk in allSkillPerkData)
             {
+                if (perk.skillName != skillName) continue;
                 if(perk.perkName != perkData.perkName)
                 {
                     if(perk.perkLvl == perkData.perkLvl)
                     {
                         UpdateDataPerkState(perk.perkName, PerkSelectState.UnClickable);
+                       // UpdatePerkRel(perk);
                     }
                 }
             }
         }
         void SetPerkState(PerkData clickedPerkData) //  on perk clicked extn
         {
+            SkillNames skillName = clickedPerkData.skillName;
             if (clickedPerkData.state == PerkSelectState.Clicked)
             {
                 SetSameLvlPerkUnClickable(clickedPerkData);
@@ -278,8 +281,11 @@ namespace Common
             
             foreach (PerkData perk in allSkillPerkData)
             {
+                if (perk.skillName != skillName) continue; 
                 SkillLvl nextlvl = clickedPerkData.perkLvl + 1;
                 if ((int)nextlvl > 3) continue;
+
+
                 if (perk.perkLvl == nextlvl)
                 {
                     foreach (PerkNames perkName in perk.preReqList)
@@ -288,17 +294,19 @@ namespace Common
                             || GetPerkData(perkName).state == PerkSelectState.Clicked)
                         {
                             UpdateDataPerkState(perk.perkName, PerkSelectState.Clickable);//update
+                            
                         }
                         else 
                         {
                             UpdateDataPerkState(perk.perkName, PerkSelectState.UnClickable);
-
+                          
                         }
                     }
                 }
             }
             foreach (PerkData perk in allSkillPerkData)
             {
+                if (perk.skillName != skillName) continue;
                 SkillLvl nextlvl = clickedPerkData.perkLvl + 2;
                 if ((int)nextlvl > 3) continue;
                 if (perk.perkLvl == nextlvl)
@@ -310,14 +318,19 @@ namespace Common
                             || GetPerkData(perkName).state == PerkSelectState.Clicked)
                         {
                             UpdateDataPerkState(perk.perkName, PerkSelectState.Clickable);//update
+                           
                         }
                         else
                         {
                             UpdateDataPerkState(perk.perkName, PerkSelectState.UnClickable);
-
+                           
                         }
                     }
                 }
+            }
+            foreach (PerkData perk in allSkillPerkData)
+            {
+                UpdatePerkRel(perk);
             }
         }
 
@@ -333,9 +346,205 @@ namespace Common
             }
             PerkData perkData = GetPerkData(_perkName);
             perkData.state = _state;
+         
             SkillService.Instance.On_PerkStateChg(perkData);
         }
-       
+
+        #endregion 
+
+        public void UpdatePerkRel(PerkData clickedPerkData)
+        {
+            SkillNames skillName = clickedPerkData.skillName;
+            foreach (PerkData perk in allSkillPerkData)
+            {
+                if (perk.skillName != skillName) continue;
+               
+                for(int i = 1; i <= 2; i++)
+                {
+                    SkillLvl nextlvl = clickedPerkData.perkLvl + i;
+                    if ((int)nextlvl > 3) continue;
+                    //NEXT LVL
+                    if (perk.perkLvl == nextlvl)
+                    {
+                        if (perk.perkType == PerkType.A2 || perk.perkType == PerkType.B2)
+                        {
+                            if (clickedPerkData.state == PerkSelectState.Clicked)
+                            {
+                                switch (perk.state)
+                                {
+                                    case PerkSelectState.Clickable:
+                                        if (perk.perkType == PerkType.A2)
+                                            clickedPerkData.pipeRel[0] = 1;
+                                        if (perk.perkType == PerkType.B2)
+                                            clickedPerkData.pipeRel[1] = 1;
+                                        break;
+                                    case PerkSelectState.Clicked:
+                                        if (perk.perkType == PerkType.A2)
+                                            clickedPerkData.pipeRel[0] = 2;
+                                        if (perk.perkType == PerkType.B2)
+                                            clickedPerkData.pipeRel[1] = 2;
+                                        break;
+                                    case PerkSelectState.UnClickable:
+                                        if (perk.perkType == PerkType.A2)
+                                            clickedPerkData.pipeRel[0] = 3;
+                                        if (perk.perkType == PerkType.B2)
+                                            clickedPerkData.pipeRel[1] = 3;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (clickedPerkData.state == PerkSelectState.Clickable)
+                            {
+                                switch (perk.state)
+                                {
+                                    case PerkSelectState.Clickable:
+                                        if (perk.perkType == PerkType.A2)
+                                            clickedPerkData.pipeRel[0] = 1;
+                                        if (perk.perkType == PerkType.B2)
+                                            clickedPerkData.pipeRel[1] = 1;
+                                        break;
+                                    //case PerkSelectState.Clicked:
+                                    //    if (perk.perkType == PerkType.A2)
+                                    //        clickedPerkData.pipeRel[0] = 2;
+                                    //    if (perk.perkType == PerkType.B2)
+                                    //        clickedPerkData.pipeRel[1] = 2;
+                                    //    break;
+                                    case PerkSelectState.UnClickable:
+                                        if (perk.perkType == PerkType.A2)
+                                            clickedPerkData.pipeRel[0] = 3;
+                                        if (perk.perkType == PerkType.B2)
+                                            clickedPerkData.pipeRel[1] = 3;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (clickedPerkData.state == PerkSelectState.UnClickable)
+                            {
+                                switch (perk.state)
+                                {
+                                    case PerkSelectState.Clickable:
+                                        if (perk.perkType == PerkType.A2)
+                                            clickedPerkData.pipeRel[0] = 3;
+                                        if (perk.perkType == PerkType.B2)
+                                            clickedPerkData.pipeRel[1] = 3;
+                                        break;
+                                    //case PerkSelectState.Clicked:
+                                    //    if (perk.perkType == PerkType.A2)
+                                    //        clickedPerkData.pipeRel[0] = 2;
+                                    //    if (perk.perkType == PerkType.B2)
+                                    //        clickedPerkData.pipeRel[1] = 2;
+                                    //    break;
+                                    case PerkSelectState.UnClickable:
+                                        if (perk.perkType == PerkType.A2)
+                                            clickedPerkData.pipeRel[0] = 3;
+                                        if (perk.perkType == PerkType.B2)
+                                            clickedPerkData.pipeRel[1] = 3;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                        }
+                        if (perk.perkType == PerkType.A3 || perk.perkType == PerkType.B3)
+                        {
+                            if (clickedPerkData.state == PerkSelectState.Clicked)
+                            {
+                                switch (perk.state)
+                                {
+                                    case PerkSelectState.Clickable:
+                                        if (perk.perkType == PerkType.A3)
+                                            clickedPerkData.pipeRel[0] = 1;
+                                        if (perk.perkType == PerkType.B3)
+                                            clickedPerkData.pipeRel[1] = 1;
+                                        break;
+                                    case PerkSelectState.Clicked:
+                                        if (perk.perkType == PerkType.A3)
+                                            clickedPerkData.pipeRel[0] = 2;
+                                        if (perk.perkType == PerkType.B3)
+                                            clickedPerkData.pipeRel[1] = 2;
+                                        break;
+                                    case PerkSelectState.UnClickable:
+                                        if (perk.perkType == PerkType.A3)
+                                            clickedPerkData.pipeRel[0] = 3;
+                                        if (perk.perkType == PerkType.B3)
+                                            clickedPerkData.pipeRel[1] = 3;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (clickedPerkData.state == PerkSelectState.Clickable)
+                            {
+                                switch (perk.state)
+                                {
+                                    case PerkSelectState.Clickable:
+                                        if (perk.perkType == PerkType.A3)
+                                            clickedPerkData.pipeRel[0] = 1;
+                                        if (perk.perkType == PerkType.B3)
+                                            clickedPerkData.pipeRel[1] = 1;
+                                        break;
+                                    //case PerkSelectState.Clicked:
+                                    //    if (perk.perkType == PerkType.A2)
+                                    //        clickedPerkData.pipeRel[0] = 2;
+                                    //    if (perk.perkType == PerkType.B2)
+                                    //        clickedPerkData.pipeRel[1] = 2;
+                                    //    break;
+                                    case PerkSelectState.UnClickable:
+                                        if (perk.perkType == PerkType.A3)
+                                            clickedPerkData.pipeRel[0] = 3;
+                                        if (perk.perkType == PerkType.B3)
+                                            clickedPerkData.pipeRel[1] = 3;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            if (clickedPerkData.state == PerkSelectState.UnClickable)
+                            {
+                                switch (perk.state)
+                                {
+                                    case PerkSelectState.Clickable:
+                                        if (perk.perkType == PerkType.A3)
+                                            clickedPerkData.pipeRel[0] = 3;
+                                        if (perk.perkType == PerkType.B3)
+                                            clickedPerkData.pipeRel[1] = 3;
+                                        break;
+                                    //case PerkSelectState.Clicked:
+                                    //    if (perk.perkType == PerkType.A2)
+                                    //        clickedPerkData.pipeRel[0] = 2;
+                                    //    if (perk.perkType == PerkType.B2)
+                                    //        clickedPerkData.pipeRel[1] = 2;
+                                    //    break;
+                                    case PerkSelectState.UnClickable:
+                                        if (perk.perkType == PerkType.A3)
+                                            clickedPerkData.pipeRel[0] = 3;
+                                        if (perk.perkType == PerkType.B3)
+                                            clickedPerkData.pipeRel[1] = 3;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                }
+           
+            }
+
+        }
+
+        public void SetPipeData(PerkData perk, int rel)
+        {
+
+        }
+
+
+
+
+        #region GET PerkData, clickedPerksList, isPreLvlClickedCheck, 
+
         public PerkData GetPerkData(PerkNames _perkName)
         {
             if (_perkName == PerkNames.None) return null;   
@@ -366,6 +575,8 @@ namespace Common
                 return true; 
             else return false;  
         }
+        #endregion
+
         #region  SKILL SELECTION AI 
         public void StartAISkillInController()
         {

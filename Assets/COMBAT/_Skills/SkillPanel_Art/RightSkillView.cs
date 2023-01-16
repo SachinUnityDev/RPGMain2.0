@@ -15,7 +15,11 @@ namespace Common
         CharController charController;
         SkillController1 selectSkillController;
 
-        
+        [Header("Pipe View Main")]
+        public Transform BGPipe1; 
+        public Transform BGPipe2;
+
+
         [SerializeField] SkillDataSO skillDataSO;
 
         [Header("SKill View SO to be ref")]
@@ -69,12 +73,7 @@ namespace Common
 
             PopulateSkillScroll(scrollList[0]); 
 
-            //PopulateTheMainSkills();
-            //PopulateTheUtilitySkills();
-            //PopulateTheCampingSkillsAndUzu();
-            //// get skill SO from the skillService
-            // get skillController
-            // skillModelData
+    
         }
 
         void OnLeftBtnPressed()
@@ -124,34 +123,30 @@ namespace Common
             {
                 PerkType perkType = perkData.perkType;
                 i = (int)perkType - 1;
-
+                perkBtnContainer.GetChild(i).gameObject.SetActive(true);    
                 perkBtnContainer.GetChild(i).GetComponent<PerkBtnPtrEvents>().Init(perkData, skillViewMain);               
 
             }
+            if(allPerkData.Count <= 2)
+            {
+              BGPipe1.gameObject.SetActive(false);
+                BGPipe2.gameObject.SetActive(false);    
+            }
+            else if(allPerkData.Count <=4)
+            {                
+                BGPipe2.gameObject.SetActive(false);
+            }
+            else
+            {
+                BGPipe1.gameObject.SetActive(true);
+                BGPipe2.gameObject.SetActive(true);
+            }
+            for (int j = allPerkData.Count; j < 6; j++)
+            {
+                perkBtnContainer.GetChild(j).gameObject.SetActive(false);
 
 
-            //for (int i = 0; i < perkBtnContainer.childCount; i++)
-            //{
-            //    PerkType perkType = (PerkType)(i + 1);
-            //    PerkData skillPerkData = allPerkData.Find(t => t.perkType == perkType);
-            //    if (skillPerkData != null)
-            //    {
-            //        perkBtnContainer.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text
-            //                                = skillPerkData.perkName.ToString();
-            //        SetPerkBtnImage(perkBtnContainer.GetChild(i), skillPerkData.state);
-            //    }
-            //}
-
-
-            //RosterService.Instance.On_ScrollSelectCharModel(unLockedChars[index]);
-            //if (RosterService.Instance.scrollSelectCharModel.charName == CharNames.Abbas_Skirmisher)
-            //{
-            //    index++;
-            //    RosterService.Instance.scrollSelectCharModel = unLockedChars[index];
-            //}
-            //Debug.Log("RosterService" + RosterService.Instance.scrollSelectCharModel.charName);
-            //PopulatePortrait();
-            //PopulateSidePlank();
+            }
         }
 
     

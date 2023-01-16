@@ -14,23 +14,29 @@ namespace Combat
     public class PerkBtnPtrEvents : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] InvSkillViewMain skillViewMain;
-        [SerializeField]CharController charController;
-        [SerializeField]SkillController1 skillController;
+        [SerializeField] CharController charController;
+        [SerializeField] SkillController1 skillController;
         SkillViewSO skillViewSO;
-        [SerializeField]PerkData perkData;
+        [SerializeField] PerkData perkData = new PerkData();
+
+        [SerializeField] Transform BGPipe1; 
+        [SerializeField] Transform BGPipe2;  
         private void Start()
         {
             InvService.Instance.OnCharSelectInvPanel += OnCharSelect;
-            SkillService.Instance.OnPerkStateChg += OnPerkStateChg;
+            SkillService.Instance.OnPerkStateChg += OnPerkStateChg;      
         }
+
+      
         void OnPerkStateChg(PerkData _perkData)
         {
             if(perkData.perkName == _perkData.perkName)
             {
                 perkData.state =_perkData.state;
-                SetPerkBtnImage(_perkData.state);
+                SetPerkBtnState(_perkData.state);
             }
         }
+        #region INIT
         public void Init(PerkData _perkData, InvSkillViewMain _skillViewMain)
         {
             perkData = _perkData;
@@ -39,7 +45,9 @@ namespace Combat
             // fill in name and btn image
             transform.GetComponentInChildren<TextMeshProUGUI>().text
                                                      = perkData.perkName.ToString();
-            SetPerkBtnImage(perkData.state);
+            SetPerkBtnState(perkData.state);
+            BGPipe1 = skillViewMain.rightSkillView.BGPipe1; 
+            BGPipe2 = skillViewMain.rightSkillView.BGPipe2;
         }
 
         void OnCharSelect(CharModel charModel)
@@ -47,7 +55,100 @@ namespace Combat
             this.charController = InvService.Instance.charSelectController;
             skillController = charController.skillController;
         }
-        
+        #endregion
+
+        void UpdatePerkData(PerkData _perkData)
+        {
+            perkData = _perkData; 
+        }
+        #region PIPES RELATIONS
+
+        void ShowPipeRelations()
+        {
+            PerkData _perkData =
+                        skillController.GetPerkData(perkData.perkName); 
+            UpdatePerkData(_perkData);
+
+            if (_perkData.perkType == PerkType.A1 || _perkData.perkType == PerkType.B1)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    if (perkData.pipeRel[i] == 0)
+                    {
+                        BGPipe1.GetChild(i).gameObject.SetActive(false);
+                    }
+                    else //1,2 or 3
+                    {
+                        BGPipe1.GetChild(i).gameObject.SetActive(true);
+                        if (perkData.pipeRel[i] == 1 || perkData.pipeRel[i] == 2)
+                        {
+                            if (i == 0)
+                                BGPipe1.GetChild(i).GetComponent<Image>().sprite =
+                                        skillViewSO.GetPerkPipe(perkData.perkType, PerkType.A2, 1);
+                            else
+                                BGPipe1.GetChild(i).GetComponent<Image>().sprite =
+                                   skillViewSO.GetPerkPipe(perkData.perkType, PerkType.B2, 1);
+                        }
+                        else
+                        {
+                            if (i == 0)
+                                BGPipe1.GetChild(i).GetComponent<Image>().sprite =
+                                        skillViewSO.GetPerkPipe(perkData.perkType, PerkType.A2, 3);
+                            else
+                                BGPipe1.GetChild(i).GetComponent<Image>().sprite =
+                                   skillViewSO.GetPerkPipe(perkData.perkType, PerkType.B2, 3);
+                        }
+                    }
+                }
+            }
+
+            if (_perkData.perkType == PerkType.A2 || _perkData.perkType == PerkType.B2)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    if (perkData.pipeRel[i] == 0)
+                    {
+                        BGPipe2.GetChild(i).gameObject.SetActive(false);
+                    }
+                    else //1,2 or 3
+                    {
+                        BGPipe2.GetChild(i).gameObject.SetActive(true);
+                        if (perkData.pipeRel[i] == 1 || perkData.pipeRel[i] == 2)
+                        {
+                            if (i == 0)
+                                BGPipe2.GetChild(i).GetComponent<Image>().sprite =
+                                        skillViewSO.GetPerkPipe(perkData.perkType, PerkType.A3, 1);
+                            else
+                                BGPipe2.GetChild(i).GetComponent<Image>().sprite =
+                                   skillViewSO.GetPerkPipe(perkData.perkType, PerkType.B3, 1);
+                        }
+                        else
+                        {
+                            if (i == 0)
+                                BGPipe2.GetChild(i).GetComponent<Image>().sprite =
+                                        skillViewSO.GetPerkPipe(perkData.perkType, PerkType.A3, 3);
+                            else
+                                BGPipe2.GetChild(i).GetComponent<Image>().sprite =
+                                   skillViewSO.GetPerkPipe(perkData.perkType, PerkType.B3, 3);
+                        }
+                    }
+                }
+            }
+        }
+        void HidePipeRelations()
+        {
+            foreach (Transform pipeTrans in BGPipe1)
+            {
+                pipeTrans.gameObject.SetActive(false);
+            }
+            foreach (Transform pipeTrans in BGPipe2)
+            {
+                pipeTrans.gameObject.SetActive(false);
+            }
+
+        }
+
+        #endregion
         public void OnPointerClick(PointerEventData eventData)
         {
             if (skillViewMain.isPerkClickAvail)
@@ -62,14 +163,14 @@ namespace Combat
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            
+            ShowPipeRelations();
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            
+            HidePipeRelations();
         }
-        void SetPerkBtnImage(PerkSelectState _state)
+        void SetPerkBtnState(PerkSelectState _state)
         {
             switch (_state)
             {

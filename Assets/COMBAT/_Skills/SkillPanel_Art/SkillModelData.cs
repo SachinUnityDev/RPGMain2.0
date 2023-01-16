@@ -17,7 +17,7 @@ namespace Common
         public PerkType perkType;
         public SkillLvl perkLvl;
         public List<PerkNames> preReqList = new List<PerkNames>();
-
+        public int[] pipeRel = new int[2];
         public PerkData(SkillNames skillName, PerkNames perkName, PerkSelectState state
             , PerkType perkType, SkillLvl perkLvl, List<PerkNames> preReqList)
         {
@@ -27,6 +27,12 @@ namespace Common
             this.perkType = perkType;
             this.perkLvl = perkLvl;
             this.preReqList = preReqList;
+            pipeRel[0] = 0; 
+            pipeRel[1] = 0;
+        }
+        public PerkData()
+        {
+
         }
     }
 }

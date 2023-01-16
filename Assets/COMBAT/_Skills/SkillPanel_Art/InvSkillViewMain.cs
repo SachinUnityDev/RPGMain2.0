@@ -23,6 +23,9 @@ namespace Common
         public LeftSkillView leftSkillView;
         public RightSkillView rightSkillView;
 
+
+
+
         public BtmCharViewController BtmCharViewController;
         [Header("Not to be ref")]
         public InvXLViewController invXLViewController;

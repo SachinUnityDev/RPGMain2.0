@@ -23,6 +23,21 @@ namespace Common
 
         public List<PerkSpriteData> perkSprites = new List<PerkSpriteData>();
     
+        public Sprite GetPerkPipe(PerkType startPerk, PerkType endPerk, int select)
+        {
+            int index 
+                = perkSprites.FindIndex(t=>t.startPerk ==startPerk && t.endPerk ==endPerk);
+            if(index != -1)
+            {
+                if (select == 1 || select == 2)
+                    return perkSprites[index].pipeSpriteSelect;
+                if (select == 3)
+                    return perkSprites[index].pipeSpriteUnSelect;
+            }
+            Debug.Log("Sprite not found"); 
+            return null; 
+        }
+
     }
 
     [System.Serializable]

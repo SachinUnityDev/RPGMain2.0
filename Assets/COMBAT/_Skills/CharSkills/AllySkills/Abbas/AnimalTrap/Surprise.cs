@@ -1,10 +1,12 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 namespace Combat
 {
+
+
     public class Surprise : PerkBase
     {
         public override PerkNames perkName => PerkNames.Surprise;
@@ -13,10 +15,9 @@ namespace Combat
 
         public override PerkSelectState state { get; set; }
 
-        public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.HuntingSeason,
-                                                                            PerkNames.EnjoyTheTrap};
+        public override List<PerkNames> preReqList => new List<PerkNames>() {PerkNames.EnjoyTheTrap, PerkNames.HuntingSeason };
 
-        public override string desc => "this is hunting season";
+        public override string desc => "this is enjoy th etrap";
 
         public override CharNames charName => CharNames.Abbas_Skirmisher;
 
@@ -61,8 +62,5 @@ namespace Combat
         public override void DisplayFX4()
         {
         }
-
     }
-
 }
-

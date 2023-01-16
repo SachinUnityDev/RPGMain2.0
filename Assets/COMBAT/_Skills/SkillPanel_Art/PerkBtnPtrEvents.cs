@@ -44,7 +44,7 @@ namespace Combat
             skillViewSO = skillViewMain.skillViewSO;
             // fill in name and btn image
             transform.GetComponentInChildren<TextMeshProUGUI>().text
-                                                     = perkData.perkName.ToString();
+                                                     = perkData.perkName.ToString().CreateSpace();
             SetPerkBtnState(perkData.state);
             BGPipe1 = skillViewMain.rightSkillView.BGPipe1; 
             BGPipe2 = skillViewMain.rightSkillView.BGPipe2;
@@ -71,38 +71,50 @@ namespace Combat
 
             if (_perkData.perkType == PerkType.A1 || _perkData.perkType == PerkType.B1)
             {
-                for (int i = 0; i < 2; i++)
-                {
-                    if (perkData.pipeRel[i] == 0)
-                    {
-                        BGPipe1.GetChild(i).gameObject.SetActive(false);
-                    }
-                    else //1,2 or 3
-                    {
-                        BGPipe1.GetChild(i).gameObject.SetActive(true);
-                        if (perkData.pipeRel[i] == 1 || perkData.pipeRel[i] == 2)
-                        {
-                            if (i == 0)
-                                BGPipe1.GetChild(i).GetComponent<Image>().sprite =
-                                        skillViewSO.GetPerkPipe(perkData.perkType, PerkType.A2, 1);
-                            else
-                                BGPipe1.GetChild(i).GetComponent<Image>().sprite =
-                                   skillViewSO.GetPerkPipe(perkData.perkType, PerkType.B2, 1);
-                        }
-                        else
-                        {
-                            if (i == 0)
-                                BGPipe1.GetChild(i).GetComponent<Image>().sprite =
-                                        skillViewSO.GetPerkPipe(perkData.perkType, PerkType.A2, 3);
-                            else
-                                BGPipe1.GetChild(i).GetComponent<Image>().sprite =
-                                   skillViewSO.GetPerkPipe(perkData.perkType, PerkType.B2, 3);
-                        }
-                    }
-                }
+                ShowLevel1N2();
+                ShowLevel2N3();
             }
 
             if (_perkData.perkType == PerkType.A2 || _perkData.perkType == PerkType.B2)
+            {
+                ShowLevel2N3(); 
+            }
+        }
+        void ShowLevel1N2()
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                if (perkData.pipeRel[i] == 0)
+                {
+                    BGPipe1.GetChild(i).gameObject.SetActive(false);
+                }
+                else //1,2 or 3
+                {
+                    BGPipe1.GetChild(i).gameObject.SetActive(true);
+                    if (perkData.pipeRel[i] == 1 || perkData.pipeRel[i] == 2)
+                    {
+                        if (i == 0)
+                            BGPipe1.GetChild(i).GetComponent<Image>().sprite =
+                                    skillViewSO.GetPerkPipe(perkData.perkType, PerkType.A2, 1);
+                        else
+                            BGPipe1.GetChild(i).GetComponent<Image>().sprite =
+                               skillViewSO.GetPerkPipe(perkData.perkType, PerkType.B2, 1);
+                    }
+                    else
+                    {
+                        if (i == 0)
+                            BGPipe1.GetChild(i).GetComponent<Image>().sprite =
+                                    skillViewSO.GetPerkPipe(perkData.perkType, PerkType.A2, 3);
+                        else
+                            BGPipe1.GetChild(i).GetComponent<Image>().sprite =
+                               skillViewSO.GetPerkPipe(perkData.perkType, PerkType.B2, 3);
+                    }
+                }
+            }
+        }
+        void ShowLevel2N3()
+        {
+            if (perkData.perkType == PerkType.A2 || perkData.perkType == PerkType.B2)
             {
                 for (int i = 0; i < 2; i++)
                 {
@@ -156,7 +168,6 @@ namespace Combat
                 if(perkData.state== PerkSelectState.Clickable)
                 {
                     skillController.OnPerkClicked(perkData);
-                 
                 }
             }
         }
@@ -168,6 +179,7 @@ namespace Combat
 
         public void OnPointerExit(PointerEventData eventData)
         {
+          //  if(perkData.state != PerkSelectState.Clicked)
             HidePipeRelations();
         }
         void SetPerkBtnState(PerkSelectState _state)

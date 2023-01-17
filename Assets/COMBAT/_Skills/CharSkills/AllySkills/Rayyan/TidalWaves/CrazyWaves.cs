@@ -99,13 +99,13 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $"{skillModel.damageMod}% <style=Water> Water </style>";
-            SkillService.Instance.skillCardData.descLines.Add(str0);
+            SkillService.Instance.skillModelHovered.descLines.Add(str0);
         }
 
         public override void DisplayFX2()
         {
             str1 = $"<style=Move> Shuffle </style>";
-            SkillService.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
 
         public override void DisplayFX3()

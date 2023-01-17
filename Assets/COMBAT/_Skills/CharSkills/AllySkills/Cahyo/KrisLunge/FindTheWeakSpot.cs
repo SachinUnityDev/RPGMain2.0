@@ -82,7 +82,7 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"<style=Enemy><style=Bleed> Bleed</style> High {percent}%";
-            SkillService.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
 
 
@@ -103,7 +103,7 @@ namespace Combat
         public override void DisplayFX2()
         {
             str2 = $"<style=Enemy> Morale,+3 self";
-            SkillService.Instance.skillCardData.descLines.Add(str2);
+            SkillService.Instance.skillModelHovered.descLines.Add(str2);
         }
         public override void ApplyFX3()
         {

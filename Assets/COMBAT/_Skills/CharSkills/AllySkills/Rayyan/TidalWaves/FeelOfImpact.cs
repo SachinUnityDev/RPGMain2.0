@@ -58,7 +58,7 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"+50%<style=Water> Water </style>on pos 4";
-            SkillService.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
 
         public override void DisplayFX2()

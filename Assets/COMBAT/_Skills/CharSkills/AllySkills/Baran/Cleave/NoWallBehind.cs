@@ -101,7 +101,7 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"<style=Enemy>If Can't <style=Move>Push,</style> apply<style=States> Rooted </style>, {skillModel.castTime} rds";
-            SkillService.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
 
         public override void DisplayFX2()

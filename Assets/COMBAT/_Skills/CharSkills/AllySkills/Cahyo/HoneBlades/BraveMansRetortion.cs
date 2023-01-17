@@ -67,7 +67,7 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"<style=Enemy> self gain +3 fort for every retaliation";
-            SkillService.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
         void RetaliatedAdjHitWithMelee(DmgData _dmgData)
         {

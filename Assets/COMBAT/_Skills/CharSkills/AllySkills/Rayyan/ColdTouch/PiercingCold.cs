@@ -80,7 +80,7 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"+70%<style=Water> Water </style>on Ally Physical Melee attacks";
-            SkillService.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
 
         public override void DisplayFX2()

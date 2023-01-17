@@ -45,7 +45,7 @@ namespace Combat
         //[Header("SkillCard Data")]
         //public SkillCardData skillCardData;
         [Header("CURR SKILLMODEL")]
-        public SkillModel skillModel;
+        public SkillModel skillModelHovered;
 
         [Header("ALL SO")]
         public List<SkillDataSO> allCharSkillSO = new List<SkillDataSO>();

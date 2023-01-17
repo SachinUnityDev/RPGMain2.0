@@ -36,12 +36,12 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"cd increased 3 rd";
-            SkillService.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
         public override void DisplayFX2()
         {
             str2 = $"<style=Enemy>half<style=Stamina> Stamina</style>";
-            SkillService.Instance.skillCardData.descLines.Add(str2);
+            SkillService.Instance.skillModelHovered.descLines.Add(str2);
         }
         public override void ApplyFX1()
         {
@@ -55,7 +55,7 @@ namespace Combat
         public override void DisplayFX3()
         {
             str3 = $"<style=Enemy><style=Fortitude> fortitude</style>, +6-8";
-            SkillService.Instance.skillCardData.descLines.Add(str3);
+            SkillService.Instance.skillModelHovered.descLines.Add(str3);
         }
         public override void ApplyFX2()
         {

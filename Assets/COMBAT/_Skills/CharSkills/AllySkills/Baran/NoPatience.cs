@@ -90,19 +90,19 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $"+1<style=Attributes> Willpower </style>until eoc, stacks up to 3";
-            SkillService.Instance.skillCardData.descLines.Add(str0);
+            SkillService.Instance.skillModelHovered.descLines.Add(str0);
         }
 
         public override void DisplayFX2()
         {
             str1 = $"+5 <style=Attributes>Fortitude</style>";
-            SkillService.Instance.skillCardData.descLines.Add(str1);           
+            SkillService.Instance.skillModelHovered.descLines.Add(str1);           
         }
 
         public override void DisplayFX3()
         {
             str2 = $"<style=Move> Move </style>to pos 1";
-            SkillService.Instance.skillCardData.descLines.Add(str2);
+            SkillService.Instance.skillModelHovered.descLines.Add(str2);
         }
 
         public override void DisplayFX4()

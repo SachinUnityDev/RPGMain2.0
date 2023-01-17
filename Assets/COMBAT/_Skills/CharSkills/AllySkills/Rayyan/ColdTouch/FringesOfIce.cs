@@ -70,7 +70,7 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"Melee attackers recieve 40%<style=States> Water </style>back, {skillModel.castTime} rds";
-            SkillService.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
 
         public override void DisplayFX2()

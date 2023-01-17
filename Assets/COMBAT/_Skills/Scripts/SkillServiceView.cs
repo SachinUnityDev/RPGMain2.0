@@ -284,7 +284,7 @@ namespace Combat
                                     skillModel.SetSkillState(SkillSelectState.Clicked);
                                     Change2ClickedFrame(skillIconTranform); 
                             }
-                            skillBtn.skillCardData.skillModel = skillModel;
+                            skillBtn.skillCardData = skillModel;
                             skillBtn.RefreshIconAsPerState();
                         }
                     }
@@ -332,7 +332,7 @@ namespace Combat
                             SkillBtnsPointerEvents skillBtn = skillIconTranform.GetComponent<SkillBtnsPointerEvents>();
 
                             // Debug.Log("SkillModel Updates" + skillModel.GetSkillState()); 
-                            skillBtn.skillCardData.skillModel = skillModel;
+                            skillBtn.skillCardData = skillModel;
 
                             skillBtn.RefreshIconAsPerState();
 

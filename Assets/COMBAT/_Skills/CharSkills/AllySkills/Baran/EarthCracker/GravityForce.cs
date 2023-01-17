@@ -83,19 +83,19 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $"<style=States> Rooted </style>on main target, {skillModel.castTime} rds";
-            SkillService.Instance.skillCardData.descLines.Add(str0);
+            SkillService.Instance.skillModelHovered.descLines.Add(str0);
         }
 
         public override void DisplayFX2()
         {
             str1 = $"+50%<style=Physical> Physical </style>on main target if already rooted";
-            SkillService.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
 
         public override void DisplayFX3()
         {
             str2 = $"-1<style=Attributes> Luck </style>on col targets, {skillModel.castTime} rds";
-            SkillService.Instance.skillCardData.descLines.Add(str2);
+            SkillService.Instance.skillModelHovered.descLines.Add(str2);
         }
 
         public override void DisplayFX4()

@@ -59,7 +59,7 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"<style=Heal>Heal</style> adj targets  6-9 ";
-            SkillService.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
 
         public override void DisplayFX2()

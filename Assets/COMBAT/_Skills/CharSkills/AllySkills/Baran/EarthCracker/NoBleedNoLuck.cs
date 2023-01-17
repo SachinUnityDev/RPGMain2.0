@@ -55,7 +55,7 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $"If Crit on Bleeding target, gain +1<style=Attributes> Luck </style>until EOQ (Stacks up to 6)";
-            SkillService.Instance.skillCardData.descLines.Add(str0);
+            SkillService.Instance.skillModelHovered.descLines.Add(str0);
         }
 
         public override void DisplayFX2()

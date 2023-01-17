@@ -90,11 +90,11 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $"60% <style=Bleed>High Bleed</style>";
-            SkillService.Instance.skillCardData.descLines.Add(str0);
+            SkillService.Instance.skillModelHovered.descLines.Add(str0);
 
 
             str1 = $"+1 <style=Fort>Fortitude Org.</style> until EOQ, per pushed enemy(Stacks up to 8)";
-            SkillService.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.descLines.Add(str1);
 
         }
 

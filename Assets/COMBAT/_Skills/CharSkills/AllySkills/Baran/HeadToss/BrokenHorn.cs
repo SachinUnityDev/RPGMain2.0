@@ -75,14 +75,14 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"Hits with +6<style=Attributes> Luck </style> on Bleeding targets";
-            SkillService.Instance.skillCardData.descLines.Add(str1); 
+            SkillService.Instance.skillModelHovered.descLines.Add(str1); 
         }
 
         public override void DisplayFX2()
         {
 
             str2 = $"+6<style=Attributes> Acc </style>if self HP < 40%";
-            SkillService.Instance.skillCardData.descLines.Add(str2);
+            SkillService.Instance.skillModelHovered.descLines.Add(str2);
 
         }
 

@@ -77,7 +77,7 @@ namespace Combat
 
         public virtual void SkillHovered()
         {
-            SkillService.Instance.skillCardData.skillModel = skillModel;
+            SkillService.Instance.skillModelHovered = skillModel;
             SkillService.Instance.SkillHovered += DisplayFX1;
             SkillService.Instance.SkillHovered += DisplayFX2;
             SkillService.Instance.SkillHovered += DisplayFX3;

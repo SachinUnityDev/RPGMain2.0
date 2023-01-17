@@ -109,20 +109,20 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"+60% Armor, {skillModel.castTime} rd";
-            SkillService.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.descLines.Add(str1);
 
         }
 
         public override void DisplayFX2()
         {
             str2 = $"+20 <style=Fire>Fire res</style>, {skillModel.castTime} rd";
-            SkillService.Instance.skillCardData.descLines.Add(str2);
+            SkillService.Instance.skillModelHovered.descLines.Add(str2);
         }
 
         public override void DisplayFX3()
         {
             str3 = $"+12% <style=Heal>Heal</style> recieved until EOC, stack up to 36%";
-            SkillService.Instance.skillCardData.descLines.Add(str3);
+            SkillService.Instance.skillModelHovered.descLines.Add(str3);
         }
 
         public override void DisplayFX4()

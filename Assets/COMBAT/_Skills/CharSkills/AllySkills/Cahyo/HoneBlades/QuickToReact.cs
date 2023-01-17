@@ -57,7 +57,7 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"<style=Allies> cd now {skillModel.cd} rd";
-            SkillService.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
 
 

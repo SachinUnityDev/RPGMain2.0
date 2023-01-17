@@ -104,13 +104,13 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"110%<style=Earth> Earth</style>";
-            SkillService.Instance.skillCardData.descLines.Add(str1);
+            SkillService.Instance.skillModel.descLines.Add(str1);
         }
 
         public override void DisplayFX2()
         {
             str2 = $"50%<style=Poison> Low Poison</style>";
-            SkillService.Instance.skillCardData.descLines.Add(str2);
+            SkillService.Instance.skillModel.descLines.Add(str2);
         }
 
         public override void DisplayFX3()

@@ -1,16 +1,7 @@
 fileFormatVersion: 2
-guid: d3ef43232a28a764b801e417262ca810
+guid: 659957157343d684a8ecb76801fca765
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 5208482192620634895
-    second: skillcardIcons_blue_0
-  - first:
-      213: 4075446986614293369
-    second: skillcardIcons_blue_1
-  - first:
-      213: 8575463367341080918
-    second: skillcardIcons_blue_2
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -51,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -134,19 +125,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Lumin
-    maxTextureSize: 8192
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
+    buildTarget: Server
     maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
@@ -159,70 +138,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: skillcardIcons_blue_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 136
-        height: 136
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f03c91e55fe384840800000000000000
-      internalID: 5208482192620634895
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: skillcardIcons_blue_1
-      rect:
-        serializedVersion: 2
-        x: 136
-        y: 0
-        width: 136
-        height: 136
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 973c4121175ee8830800000000000000
-      internalID: 4075446986614293369
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: skillcardIcons_blue_2
-      rect:
-        serializedVersion: 2
-        x: 272
-        y: 0
-        width: 136
-        height: 136
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6518db27f7a220770800000000000000
-      internalID: 8575463367341080918
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -233,10 +149,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      skillcardIcons_blue_1: 4075446986614293369
-      skillcardIcons_blue_0: 5208482192620634895
-      skillcardIcons_blue_2: 8575463367341080918
+    nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

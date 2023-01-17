@@ -8,7 +8,7 @@ namespace Combat
 {
     public class WhirlDance : PerkBase
     {
-        public override PerkNames perkName => PerkNames.WhirlDance;
+        public override PerkNames perkName => PerkNames.Whirldance;
 
         public override PerkType perkType => PerkType.A3;
 

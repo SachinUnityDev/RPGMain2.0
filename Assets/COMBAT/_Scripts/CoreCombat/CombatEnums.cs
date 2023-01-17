@@ -500,7 +500,7 @@ namespace Combat
         WaterBuffalo,
         WebIsWet,
         WebTide,
-        WhirlDance,
+        Whirldance,
         WhoStoleMyMoney,
         WideSwing,
         CutTheKnee,

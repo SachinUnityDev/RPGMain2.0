@@ -61,6 +61,7 @@ namespace Combat
         {
             perkData = _perkData; 
         }
+        
         #region PIPES RELATIONS
 
         void ShowPipeRelations()
@@ -161,6 +162,7 @@ namespace Combat
         }
 
         #endregion
+
         public void OnPointerClick(PointerEventData eventData)
         {
             if (skillViewMain.isPerkClickAvail)

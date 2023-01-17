@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 
 namespace Common
 {
+    [System.Serializable]
     public class GameModel
     {
         public GameState gameState;

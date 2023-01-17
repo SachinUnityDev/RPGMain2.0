@@ -7,6 +7,7 @@ using DG.Tweening;
 using Common;
 using UnityEngine.UI;
 using TMPro;
+using System.Security.Policy;
 
 namespace Combat
 {
@@ -41,9 +42,10 @@ namespace Combat
         [Header("SKill Factory NTBR")]
         public SkillFactory skillFactory;
 
-        [Header("SkillCard Data")]
-        public SkillCardData skillCardData;
-
+        //[Header("SkillCard Data")]
+        //public SkillCardData skillCardData;
+        [Header("CURR SKILLMODEL")]
+        public SkillModel skillModel;
 
         [Header("ALL SO")]
         public List<SkillDataSO> allCharSkillSO = new List<SkillDataSO>();

@@ -24,7 +24,7 @@ namespace Common
         [SerializeField] int index = -1;
 
 
-        public SkillCardData skillCardData;
+       // public SkillCardData skillCardData;
         public SkillSelectState skillState;
         public SkillNames prevSkillHovered;
 

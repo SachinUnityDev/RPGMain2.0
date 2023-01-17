@@ -35,7 +35,8 @@ namespace Combat
         // // EXTRA Parameters
         public int lastUsedInRound =-5;
         public List<PerkHexData> allPerkHexes = new List<PerkHexData>();
-      
+        public List<PerkType> perkChain = new List<PerkType>();
+        public List<string> descLines = new List<string>();
         public SkillSelectState GetSkillState()
         {
             return skillSelState; 

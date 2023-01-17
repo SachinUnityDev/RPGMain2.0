@@ -10,14 +10,13 @@ using TMPro;
 using Common;
 
 namespace Combat
-{ 
-    [System.Serializable]
-    public class SkillCardData
-    {
-        public SkillModel skillModel;
-        public List<PerkType> perkChain = new List<PerkType>();
-        public List<string> descLines = new List<string>(); 
-    }
+{
+    //[System.Serializable]
+    //public class SkillCardData
+    //{
+    //    public SkillModel skillModel;
+
+    //}
 
     public class SkillServiceView : MonoSingletonGeneric<SkillServiceView>
     {

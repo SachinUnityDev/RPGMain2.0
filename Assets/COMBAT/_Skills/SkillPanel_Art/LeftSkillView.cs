@@ -54,10 +54,7 @@ namespace Common
 
             PopulateTheMainSkills();
             PopulateTheUtilitySkills();
-            PopulateTheCampingSkillsAndUzu();
-            // get skill SO from the skillService
-            // get skillController
-            // skillModelData
+            PopulateTheCampingSkillsAndUzu();    
         }
         void PopulateTheMainSkills()
         {
@@ -65,7 +62,7 @@ namespace Common
             for (int i = 0; i < 4; i++)
             {        
                 SkillNames skillName = skillDataSO.allSkills[i].skillName; 
-                mainSkillTrans.GetChild(i).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO, skillName); 
+                mainSkillTrans.GetChild(i).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO, skillName, this); 
             }
 
         }
@@ -75,11 +72,11 @@ namespace Common
             SkillNames skillname = skillDataSO.allSkills.Find(t => t.skillType == SkillTypeCombat.Move).skillName;
                       
 
-            utilitySkillTrans.GetChild(0).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO, skillname);
+            utilitySkillTrans.GetChild(0).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO, skillname, this);
             skillname = skillDataSO.allSkills.Find(t => t.skillType == SkillTypeCombat.Patience).skillName;
 
 
-            utilitySkillTrans.GetChild(1).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO, skillname);
+            utilitySkillTrans.GetChild(1).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO, skillname, this);
             int i = skillDataSO.allSkills.FindIndex(t => t.skillType == SkillTypeCombat.Weapon); // to prevent null error 
 
             if (i != -1)
@@ -87,7 +84,7 @@ namespace Common
                 utilitySkillTrans.parent.GetChild(0).GetChild(1).gameObject.SetActive(true);// weapon heading
                 utilitySkillTrans.GetChild(2).gameObject.SetActive(true);             
                 utilitySkillTrans.GetChild(2).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO
-                                                                , skillDataSO.allSkills[i].skillName);
+                                                                , skillDataSO.allSkills[i].skillName, this);
             }
             else
             {
@@ -107,7 +104,7 @@ namespace Common
                 campSkillTrans.parent.GetChild(0).GetChild(1).gameObject.SetActive(true);
                 campSkillTrans.GetChild(2).gameObject.SetActive(true);
                 campSkillTrans.GetChild(2).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO
-                    , skillDataSO.allSkills[i].skillName);
+                    , skillDataSO.allSkills[i].skillName, this);
             }
             else
             {
@@ -126,6 +123,19 @@ namespace Common
             //    campSkillTrans.GetChild(2).gameObject.SetActive(false);
             //}
         }
+        #region CLICKED UNSKILLED STATE
+
+        // if one is clicked .. unclick all others
+        public void UnClickAllSkillState()
+        {
+            foreach(var child in transform.GetComponentsInChildren<InvSkillBtnPtrEvents>())
+            {
+                child.SetUnClick(); 
+            }
+        }
+
+
+        #endregion 
         void PopulateTheSkillPoints()
         {
 

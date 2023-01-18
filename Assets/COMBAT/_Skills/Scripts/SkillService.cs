@@ -49,6 +49,8 @@ namespace Combat
 
         [Header("ALL SO")]
         public List<SkillDataSO> allCharSkillSO = new List<SkillDataSO>();
+        public GameObject skillCardGO; 
+
         [Header("ALL SKILL MANAGER")]
         public List<SkillController1> allSkillControllers = new List<SkillController1>();   
         public SkillController1 currSkillController = new SkillController1();

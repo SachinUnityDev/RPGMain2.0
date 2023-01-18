@@ -36,9 +36,9 @@ namespace Combat
     [CreateAssetMenu(fileName = "SkillHexSO", menuName = "Skill Service/SkillHexSO")]
     public class SkillHexSO : ScriptableObject
     {
-        [Header("MISC SPRITES")]
-        public Sprite skillIconNSprite;
-        public Sprite skillIconHLSprite;
+        [Header("Frame SPRITES")]
+        public Sprite skillIconFrameN;
+        public Sprite skillIconFrameHL;
 
         [Header("Prefabs")]
         public GameObject txtPrefab;  

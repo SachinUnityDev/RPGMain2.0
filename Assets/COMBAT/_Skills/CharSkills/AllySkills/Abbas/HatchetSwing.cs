@@ -131,36 +131,7 @@ namespace Combat
         {
         }
 
-        public override void PostApplyFX()
-        {
-          ///  appliedOnce = false;
-
-        }
-
-        public override void PreApplyFX()
-        {
-          //  appliedOnce = true;
-
-        }
-
-        public override void RemoveFX1()
-        {
-            SkillService.Instance.SkillApply -= ApplyFX1;
-
-        }
-
-        public override void RemoveFX2()
-        {
-            SkillService.Instance.SkillApply -= ApplyFX2;
-
-        }
-
-        public override void RemoveFX3()
-        {
-            SkillService.Instance.SkillApply -= ApplyFX3;
-
-        }
-
+    
     
         public override void SkillEnd()
         {
@@ -169,28 +140,6 @@ namespace Combat
 
 
         public override void Tick()
-        {
-        }
-
-        public override void WipeFX1()
-        {
-            SkillService.Instance.SkillHovered -= DisplayFX1;
-
-        }
-
-        public override void WipeFX2()
-        {
-            SkillService.Instance.SkillHovered -= DisplayFX2;
-
-        }
-
-        public override void WipeFX3()
-        {
-            SkillService.Instance.SkillHovered -= DisplayFX3;
-
-        }
-
-        public override void WipeFX4()
         {
         }
 

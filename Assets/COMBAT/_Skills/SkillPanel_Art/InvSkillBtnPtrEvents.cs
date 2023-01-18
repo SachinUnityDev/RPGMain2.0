@@ -9,22 +9,27 @@ using TMPro;
 using System.Linq;
 using System;
 using Interactables;
+using DG.Tweening;
 
 namespace Common
 {
     public class InvSkillBtnPtrEvents : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        [Header("Const")]
+        public bool IsClicked; 
+
+        [Header("Skill card Dimensions")]
         [SerializeField] int expBeyondLineNo = 3;
         [SerializeField] Vector2 skillCardBaseDim = new Vector2(328f, 325f);
-        public SkillHexSO skillHexSO;
-        
 
-        [SerializeField] GameObject skillCard;
+        [Header("Skill Card positioning")]
+        [SerializeField] Vector3 offset = new Vector3(148, 60,0);
+
+        [Header("Skill HEX SO")] // contain skill card SO 
+        public SkillHexSO skillHexSO;
+
+       // [SerializeField] GameObject skillCard;
         [SerializeField] int index = -1;
 
-
-       // public SkillCardData skillCardData;
         public SkillSelectState skillState;
         public SkillNames prevSkillHovered;
 
@@ -41,34 +46,57 @@ namespace Common
         public SkillModel skillModel;
         public SkillDataSO skillDataSO;
 
+        [Header("Global Var")]
+        [SerializeField] GameObject skillCardGO;        
+        [SerializeField] Transform skillPtsTrans;
         public SkillNames skillName;
-        [SerializeField] Transform skillPtsTrans; 
+        LeftSkillView leftSkillView; 
+
         void Start()
         {
+            IsClicked = false;
             prevSkillHovered = SkillNames.None;
-            skillCard = skillHexSO.skillCardPrefab;
+          //  skillCard = skillHexSO.skillCardPrefab;
            // skillPtsTrans = transform.GetChild(2);
         }
         #region  POINTER EVENTS
         public void OnPointerClick(PointerEventData eventData)
         {
-          
+            IsClicked = !IsClicked;             
+            
+            if (IsClicked)
+            {
+                leftSkillView.UnClickAllSkillState();       // add frame
+                IsClicked = true;
+                transform.GetChild(1).GetComponent<Image>().sprite = skillHexSO.skillIconFrameHL; 
+                ShowSkillcardInInv();
+            }
+            else
+            {
+                SetUnClick(); 
+            }
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            // populate the skillCard Data as per the skills 
-            //if (skillCardData.skillModel.skillName == SkillNames.None) return;
-            ShowSkillCard();
+            ShowSkillcardInInv();
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-           
+           // if(!IsClicked)
+                HideSkillCard(); 
         }
         #endregion
 
-        public void Init(SkillDataSO _skillDataSO, SkillNames _skillName)
+        public void SetUnClick()
+        {
+            IsClicked = false;
+            transform.GetChild(1).GetComponent<Image>().sprite = skillHexSO.SkillNormalFrame;
+          //  HideSkillCard();
+        }
+
+        public void Init(SkillDataSO _skillDataSO, SkillNames _skillName, LeftSkillView leftSkillView)
         {
             skillDataSO = _skillDataSO;
             skillName = _skillName;
@@ -82,33 +110,55 @@ namespace Common
 
             if (skillModel == null) return;
             int skilllvlInt = (int)skillModel.skillLvl;
+            this.leftSkillView = leftSkillView;
+
+            skillCardGO = SkillService.Instance.skillCardGO;
             //if (skillPtsTrans != null)
             //    skillPtsTrans.GetComponent<TextMeshProUGUI>().text = skilllvlInt.ToString();
         }
 
-
-        void ShowSkillCard()
+        void HideSkillCard()
         {
-            //skillCard.SetActive(true);
+          
+            skillCardGO.gameObject.SetActive(false);
+        }
+        void ShowSkillcardInInv()
+        {
+            if (GameService.Instance.gameModel.gameState != GameState.InTown)
+                return; 
+
+           // skillCard.SetActive(true);
            // SkillServiceView.Instance.pointerOnSkillIcon = true;  // to be checked
-            //SkillDataSO skillSO = SkillService.Instance
-            //           .GetSkillSO(CombatService.Instance.currCharClicked.charModel.charName);
+            skillDataSO = SkillService.Instance
+                                    .GetSkillSO(InvService.Instance.charSelectController.charModel.charName); 
+                       
             //index = gameObject.transform.GetSiblingIndex();
             //SkillServiceView.Instance.index = index;
-            // UPDATE SKILL SERVICE 
-            //if (skillDataSO!= null && skillData != null)
-            //{
-            //    SkillService.Instance.On_SkillHovered(skillDataSO.charName,
-            //                                                skillData.skillName);
-            //}                
-            //else 
-            //{
-            //    Debug.Log("Skill SO is null "); return; 
-            //}
-            //skillCardData = SkillService.Instance.skillCardData;
+            //UPDATE SKILL SERVICE
+            if (skillDataSO != null)
+            {
+                SkillService.Instance.On_SkillHovered(skillDataSO.charName,skillName);
+            }
+            else
+            {
+                Debug.Log("Skill SO is null "); return;
+            }
+            skillModel = SkillService.Instance.skillModelHovered;
+            PosSkillCard(); 
+
         }
 
-
+        void PosSkillCard()
+        {
+            float width = skillCardGO.GetComponent<RectTransform>().rect.width;
+            float height = skillCardGO.GetComponent<RectTransform>().rect.height;
+            GameObject Canvas = GameObject.FindWithTag("MainCanvas");
+            Canvas canvasObj = Canvas.GetComponent<Canvas>();
+            Vector3 offSetFinal = (offset + new Vector3(width / 2, -height / 2, 0))*canvasObj.scaleFactor; 
+            Vector3 pos = transform.position + offSetFinal;
+            skillCardGO.GetComponent<Transform>().DOMove(pos, 0.1f); 
+            skillCardGO.SetActive(true); 
+        }
 
     }
 }

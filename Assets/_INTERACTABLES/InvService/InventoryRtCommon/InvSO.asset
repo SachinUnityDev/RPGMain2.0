@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emptySlot: {fileID: 21300000, guid: 6aea4c572159ede41bcdf1485bf985f7, type: 3}
   filledSlot: {fileID: 21300000, guid: 54a029bdb8ab539429d9232662ea6d62, type: 3}
-  epicSlot: {fileID: 21300000, guid: 4f3aedf977dd6154f9fb811c0ad516cb, type: 3}
+  epicSlot: {fileID: 21300000, guid: 294b9933778b6dc458bed9439f2a3482, type: 3}
   folkloricSlot: {fileID: 21300000, guid: 0f0244702555e534a8afe1c20153240e, type: 3}
-  sagaicSlot: {fileID: 21300000, guid: 294b9933778b6dc458bed9439f2a3482, type: 3}
+  sagaicSlot: {fileID: 21300000, guid: 4f3aedf977dd6154f9fb811c0ad516cb, type: 3}
   poeticSlot: {fileID: 21300000, guid: 2b8c2b535844975418919d099d8315ce, type: 3}
   relicSlot: {fileID: 21300000, guid: 617bb94cce96ab5438ce249f21fefaf4, type: 3}
   hendiadicSlot: {fileID: 21300000, guid: 447ac2b7e4a688845b41a3aabaf81090, type: 3}

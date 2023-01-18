@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ea1bd9e0d2da547950c176f4f4c846, type: 3}
   m_Name: SkillHexSO
   m_EditorClassIdentifier: 
-  skillIconNSprite: {fileID: 0}
-  skillIconHLSprite: {fileID: 0}
+  skillIconFrameN: {fileID: 21300000, guid: e728f03bd1627754088a1c2bcd701772, type: 3}
+  skillIconFrameHL: {fileID: 21300000, guid: fb884b62a6d41d542938dd10e2b78e68, type: 3}
   txtPrefab: {fileID: 3954342278731253490, guid: 76aa4721df9be6143ba2c9cb74feaf72,
     type: 3}
   allSkillIncli:
@@ -144,5 +144,6 @@ MonoBehaviour:
     hexSprite: {fileID: 21300000, guid: 1c7162557fc346e4eb207d0f51e999e7, type: 3}
   SkillSelectFrame: {fileID: 21300000, guid: 4010adaec116b7844a54f7b053b119a4, type: 3}
   SkillNormalFrame: {fileID: 21300000, guid: e728f03bd1627754088a1c2bcd701772, type: 3}
+  skillSelectFrame2: {fileID: 0}
   skillCardPrefab: {fileID: 1646855469622427499, guid: 26ffe1c4ee87cb748895e1640e2e4ab6,
     type: 3}

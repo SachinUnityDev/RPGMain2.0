@@ -36,18 +36,27 @@ namespace Combat
 
         public override void DisplayFX1()
         {
+            str1 = $"<style=Allies> <style=Heal>Heal,</style> 4-7";
+            SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
 
         public override void DisplayFX2()
         {
+            str1 = $"<style=Allies> <style=Heal>Heal,</style> 4-7";
+            SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
 
         public override void DisplayFX3()
         {
+            str1 = $"<style=Allies> <style=Heal>Heal,</style> 4-7";
+            SkillService.Instance.skillModelHovered.descLines.Add(str1);
+
         }
 
         public override void DisplayFX4()
         {
+            str1 = $"<style=Allies> <style=Heal>Heal,</style> 4-7";
+            SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
 
         public override void PostApplyFX()

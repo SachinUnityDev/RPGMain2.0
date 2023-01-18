@@ -20,7 +20,12 @@ namespace Combat
         [SerializeField] PerkData perkData = new PerkData();
 
         [SerializeField] Transform BGPipe1; 
-        [SerializeField] Transform BGPipe2;  
+        [SerializeField] Transform BGPipe2;
+
+        [SerializeField] Color colorClickable;
+        [SerializeField] Color colorClicked;
+        [SerializeField] Color colorUnClickable;
+
         private void Start()
         {
             InvService.Instance.OnCharSelectInvPanel += OnCharSelect;
@@ -190,12 +195,15 @@ namespace Combat
             {
                 case PerkSelectState.Clickable:
                     transform.GetComponent<Image>().sprite = skillViewSO.perkBtnNormal;
+                    transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = colorClickable;
                     break;
                 case PerkSelectState.Clicked:
                     transform.GetComponent<Image>().sprite = skillViewSO.perkBtnSelect;
+                    transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = colorClicked;
                     break;
                 case PerkSelectState.UnClickable:
                     transform.GetComponent<Image>().sprite = skillViewSO.perkBtnUnSelectable;
+                    transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = colorUnClickable;
                     break;
                 default:
                     break;

@@ -65,7 +65,7 @@ namespace Common
             foreach (var skillSO in skillDataSO.allSkills)
             {
                 SkillBase skillbase = SkillService.Instance.skillFactory.GetSkill(skillSO.skillName);
-
+                Debug.Log("skill base" + skillSO.skillName);
                 skillbase.charName = skillDataSO.charName;
               
                 allSkillBases.Add(skillbase);

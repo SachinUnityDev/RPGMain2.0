@@ -52,9 +52,6 @@ namespace Interactables
         bool Sell();
     }
 
-
-
-
     public class ItemSlotController : MonoBehaviour, IDropHandler, IPointerClickHandler
                                                 , iSlotable, IComInvActions
     {

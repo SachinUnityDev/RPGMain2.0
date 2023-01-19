@@ -118,8 +118,7 @@ namespace Common
         }
 
         void HideSkillCard()
-        {
-          
+        { 
             skillCardGO.gameObject.SetActive(false);
         }
         void ShowSkillcardInInv()

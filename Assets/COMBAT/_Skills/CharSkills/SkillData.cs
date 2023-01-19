@@ -50,7 +50,7 @@ namespace Combat
     public class PerkHexData
     {
         public List<PerkType> perkChain = new List<PerkType>();
-        public HexNames[] hexName = new HexNames[3]; 
+        public HexNames[] hexNames = new HexNames[3]; 
     }
     [System.Serializable]
     public class SkillPerkFXData

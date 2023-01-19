@@ -61,7 +61,7 @@ namespace Combat
                     HexNames[] hexName = new HexNames[3] {HexNames.ally_anyoneNcast_anyone, HexNames.base_hex, HexNames.base_hex };
                     List<PerkType> perkChain = new List<PerkType>() { PerkType.None };
                     PerkHexData perkHexdata= new PerkHexData();
-                    perkHexdata.hexName = hexName;
+                    perkHexdata.hexNames = hexName;
                     perkHexdata.perkChain = perkChain;
                     skillData.allPerkHexes.Clear(); 
                     skillData.allPerkHexes.Add(perkHexdata); 
@@ -73,7 +73,7 @@ namespace Combat
                     HexNames[] hexName = new HexNames[3] { HexNames.self_any, HexNames.base_hex, HexNames.base_hex };
                     List<PerkType> perkChain = new List<PerkType>() { PerkType.None };
                     PerkHexData perkHexdata = new PerkHexData();
-                    perkHexdata.hexName = hexName;
+                    perkHexdata.hexNames = hexName;
                     perkHexdata.perkChain = perkChain;
                     skillData.allPerkHexes.Clear();
                     skillData.allPerkHexes.Add(perkHexdata);
@@ -94,6 +94,25 @@ namespace Combat
                 return null; 
             }
         }
+
+        public PerkHexData GetPerkHexData(List<PerkType> perkChain, SkillNames skillName)
+        {
+            SkillData skillData = GetSkillData(skillName);
+            if(perkChain.Count == 0)
+            {
+                return skillData.allPerkHexes.Find(t => t.perkChain[0] == PerkType.None); 
+            }
+            foreach (PerkHexData perk in skillData.allPerkHexes)
+            {
+                if (perk.perkChain.Equals(perkChain))
+                {
+                    return perk;  
+                }
+            }
+            Debug.Log("Perk Hex data not found" + skillName);
+            return null; 
+        }
+
     }
 
 

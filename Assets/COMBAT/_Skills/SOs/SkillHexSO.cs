@@ -12,7 +12,6 @@ namespace Combat
     {
         public HexNames hexName; 
         public Sprite hexSprite; 
-
     }
 
     [Serializable]
@@ -111,7 +110,6 @@ namespace Combat
                 Debug.Log("SkillIncli not found" + allSkillIncli);
                 return null; 
             }
-
         }
 
         public Sprite GetSkillAttackType(AttackType attackType)
@@ -124,6 +122,20 @@ namespace Combat
             else
             {
                 Debug.Log("attack sprite not found" + attackType);
+                return null;
+            }
+        }
+
+        public Sprite GetHexSprite(HexNames hexName)
+        {
+            int index = allHexes.FindIndex(t=>t.hexName == hexName);    
+            if(index != -1)
+            {
+                return allHexes[index].hexSprite; 
+            }
+            else
+            {
+                Debug.Log("hex sprite not found" + hexName);
                 return null;
             }
         }

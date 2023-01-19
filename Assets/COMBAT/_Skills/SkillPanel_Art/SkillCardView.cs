@@ -3,6 +3,7 @@ using Interactables;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -53,14 +54,30 @@ namespace Combat
             
             skillHexSO = SkillService.Instance.skillHexSO;
             skillViewSO = SkillService.Instance.skillViewSO; 
-
+            // skill Incli...
             topTrans.GetChild(0).GetChild(0).GetComponent<Image>().sprite
                     =    skillHexSO.GetSkillIncliSprite(skillIncli);
+            // attack type...
             AttackType attackType = skillData.attackType;
             topTrans.GetChild(1).GetChild(0).GetComponent<Image>().sprite
-                = skillHexSO.GetSkillAttackType(attackType);   
+                = skillHexSO.GetSkillAttackType(attackType);
 
+            // skill name.. 
+            topTrans.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text
+                    = skillName.ToString().CreateSpace(); 
 
+            // hexes ... 
+            // for three hexes get 
+            List<PerkType> perkChain = skillModel.perkChain; 
+            PerkHexData perkHexData = skillDataSO.GetPerkHexData(perkChain, skillName);
+            
+            int i = 0; 
+            foreach(HexNames perkHex in perkHexData.hexNames)
+            {
+                topTrans.GetChild(3).GetChild(i).GetComponent<Image>().sprite =
+                skillHexSO.GetHexSprite(perkHex);
+                i++; 
+            }
 
         }
         void PopulateMidTrans()

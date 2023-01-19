@@ -39,7 +39,7 @@ MonoBehaviour:
     skillDesc: 
     damageMod: 100
     skillLvl: 0
-    skillSelState: 0
+    skillSelState: 1
     cd: 0
     attackType: 1
     dmgType: 01000000
@@ -49,22 +49,22 @@ MonoBehaviour:
     castTime: 5
     timeFrame: 0
     maxUsagePerCombat: 0
-    skillIncli: 0
+    skillIncli: 1
     baseWeight: 0
     isActive: 0
     allPerkHexes:
     - perkChain: 
-      hexName: 
+      hexNames: 000000000000000000000000
     - perkChain: 
-      hexName: 
+      hexNames: 000000000000000000000000
     - perkChain: 
-      hexName: 
+      hexNames: 000000000000000000000000
     - perkChain: 
-      hexName: 
+      hexNames: 000000000000000000000000
     - perkChain: 
-      hexName: 
+      hexNames: 000000000000000000000000
     - perkChain: 
-      hexName: 
+      hexNames: 000000000000000000000000
     allSkillFXs: []
     allLines: []
   - skillName: 101
@@ -89,7 +89,7 @@ MonoBehaviour:
     castTime: 2
     timeFrame: 1
     maxUsagePerCombat: 4
-    skillIncli: 0
+    skillIncli: 2
     baseWeight: 0
     isActive: 0
     allPerkHexes: []
@@ -117,7 +117,7 @@ MonoBehaviour:
     castTime: 2
     timeFrame: 1
     maxUsagePerCombat: 4
-    skillIncli: 0
+    skillIncli: 5
     baseWeight: 0
     isActive: 0
     allPerkHexes: []
@@ -145,7 +145,7 @@ MonoBehaviour:
     castTime: 2
     timeFrame: 2
     maxUsagePerCombat: 4
-    skillIncli: 0
+    skillIncli: 5
     baseWeight: 0
     isActive: 0
     allPerkHexes: []
@@ -173,12 +173,12 @@ MonoBehaviour:
     castTime: 2
     timeFrame: 2
     maxUsagePerCombat: 4
-    skillIncli: 0
+    skillIncli: 4
     baseWeight: 0
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexName: 190000000b0000000b000000
+      hexNames: 000000000000000000000000
     allSkillFXs: []
     allLines: []
   - skillName: 2
@@ -208,7 +208,7 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexName: 020000000b0000000b000000
+      hexNames: 000000000000000000000000
     allSkillFXs: []
     allLines: []
   - skillName: 105

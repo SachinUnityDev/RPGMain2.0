@@ -186,17 +186,17 @@ namespace Combat
                 if (SCperkChain.Count == 0)  // none case 
                 {
                     sprite1 = skillHexSO.allHexes.Find(t => t.hexName
-                            == skillCardData.allPerkHexes[0].hexName[0]).hexSprite;
+                            == skillCardData.allPerkHexes[0].hexNames[0]).hexSprite;
                     sprite2 = skillHexSO.allHexes.Find(t => t.hexName
-                          == skillCardData.allPerkHexes[0].hexName[1]).hexSprite;
+                          == skillCardData.allPerkHexes[0].hexNames[1]).hexSprite;
                     sprite3 = skillHexSO.allHexes.Find(t => t.hexName
-                          == skillCardData.allPerkHexes[0].hexName[2]).hexSprite;
+                          == skillCardData.allPerkHexes[0].hexNames[2]).hexSprite;
                 }
                 else if (SCperkChain.SequenceEqual(LSPerkChain))
                 {
-                    sprite1 = skillHexSO.allHexes.Find(t => t.hexName == ls.hexName[0]).hexSprite;
-                    sprite2 = skillHexSO.allHexes.Find(t => t.hexName == ls.hexName[1]).hexSprite;
-                    sprite3 = skillHexSO.allHexes.Find(t => t.hexName == ls.hexName[2]).hexSprite;
+                    sprite1 = skillHexSO.allHexes.Find(t => t.hexName == ls.hexNames[0]).hexSprite;
+                    sprite2 = skillHexSO.allHexes.Find(t => t.hexName == ls.hexNames[1]).hexSprite;
+                    sprite3 = skillHexSO.allHexes.Find(t => t.hexName == ls.hexNames[2]).hexSprite;
                 }
 
                 Transform hexParent = skillCard.transform.GetChild(0);

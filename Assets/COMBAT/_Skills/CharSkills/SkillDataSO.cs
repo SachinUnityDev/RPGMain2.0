@@ -81,8 +81,19 @@ namespace Combat
             }
         }
 
-
-
+        public SkillData GetSkillData(SkillNames skillName)
+        {
+            int index = allSkills.FindIndex(t=>t.skillName == skillName);
+            if(index != -1)
+            {
+                return allSkills[index];
+            }
+            else
+            {
+                Debug.Log("Skilldata Not found" + skillName);
+                return null; 
+            }
+        }
     }
 
 

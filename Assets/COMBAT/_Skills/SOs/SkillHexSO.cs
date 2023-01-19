@@ -99,12 +99,34 @@ namespace Combat
 
         }
 
+        public Sprite GetSkillIncliSprite(SkillInclination skillIncli)
+        {
+            int index = allSkillIncli.FindIndex(t => t.SkillIncliType == skillIncli); 
+            if(index != -1)
+            {
+                return allSkillIncli[index].SkillIncliSprite; 
+            }
+            else
+            {
+                Debug.Log("SkillIncli not found" + allSkillIncli);
+                return null; 
+            }
 
+        }
 
-
-
-
-
+        public Sprite GetSkillAttackType(AttackType attackType)
+        {
+            int index = allAttacksSprites.FindIndex(t => t.attackType == attackType); 
+            if(index != -1)
+            {
+                return allAttacksSprites[index].attackTypeSprite; 
+            }
+            else
+            {
+                Debug.Log("attack sprite not found" + attackType);
+                return null;
+            }
+        }
     }
 
     public enum HexNames

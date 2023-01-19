@@ -7,26 +7,37 @@ using UnityEngine.EventSystems;
 namespace Combat
 {
     public class OverSkillCardController : MonoBehaviour
-        //, IPointerEnterHandler, IPointerExitHandler
+        , IPointerEnterHandler, IPointerExitHandler
     {
-        //public void OnPointerEnter(PointerEventData eventData)
-        //{
-        //    SkillServiceView.Instance.pointerOnSkillCard = true; 
-        //    gameObject.SetActive(true); 
-        //}
+        [SerializeField] bool isHovered; 
 
-        //public void OnPointerExit(PointerEventData eventData)
-        //{
-        //    SkillServiceView.Instance.pointerOnSkillCard = false;
-        //    gameObject.SetActive(false);
-        //}
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            SkillServiceView.Instance.pointerOnSkillCard = true;
+            gameObject.SetActive(true);
+        }
 
-        //void Start()
-        //{
+        public void OnPointerExit(PointerEventData eventData)
+        {
+         
+            SkillServiceView.Instance.pointerOnSkillCard = false;
+            if(!isHovered)
+            gameObject.SetActive(false);
+        }
 
-        //}
+        void Start()
+        {
+            gameObject.SetActive(false);
+            isHovered = false;
+        }
 
- 
+        private void Update()
+        {
+           if(Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+            {
+                isHovered = true; 
+            }      
+        }
     }
 
 

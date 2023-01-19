@@ -100,7 +100,12 @@ namespace Combat
             SkillData skillData = GetSkillData(skillName);
             if(perkChain.Count == 0)
             {
-                return skillData.allPerkHexes.Find(t => t.perkChain[0] == PerkType.None); 
+                PerkHexData perkHexData = 
+                 skillData.allPerkHexes.Find(t => t.perkChain[0] == PerkType.None);
+                if (perkHexData != null)
+                    return perkHexData;
+                else
+                    return null; 
             }
             foreach (PerkHexData perk in skillData.allPerkHexes)
             {

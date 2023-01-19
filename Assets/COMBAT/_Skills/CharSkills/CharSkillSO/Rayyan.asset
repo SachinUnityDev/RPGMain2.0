@@ -55,21 +55,21 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexName: 020000000b00000002000000
+      hexNames: 120000001200000014000000
     - perkChain: 01000000
-      hexName: 020000000c00000002000000
+      hexNames: 1a0000001b0000001d000000
     - perkChain: 02000000
-      hexName: 020000000b00000002000000
+      hexNames: 000000000000000000000000
     - perkChain: 0100000003000000
-      hexName: 020000000c00000002000000
+      hexNames: 000000000000000000000000
     - perkChain: 0200000004000000
-      hexName: 020000000c00000002000000
+      hexNames: 190000001a0000001c000000
     - perkChain: 010000000300000005000000
-      hexName: 020000000c00000002000000
+      hexNames: 000000000000000000000000
     - perkChain: 010000000300000006000000
-      hexName: 020000000c00000002000000
+      hexNames: 000000000000000000000000
     - perkChain: 020000000400000006000000
-      hexName: 020000000b00000002000000
+      hexNames: 000000000000000000000000
     allSkillFXs:
     - charMode: 1
       perkType: 0
@@ -116,19 +116,19 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexName: 0a000000110000000b000000
+      hexNames: 000000000000000000000000
     - perkChain: 01000000
-      hexName: 0a0000000f0000000b000000
+      hexNames: 000000000000000000000000
     - perkChain: 02000000
-      hexName: 0a000000130000000b000000
+      hexNames: 000000000000000000000000
     - perkChain: 0100000003000000
-      hexName: 0a0000000f00000007000000
+      hexNames: 000000000000000000000000
     - perkChain: 0200000004000000
-      hexName: 0a000000130000000b000000
+      hexNames: 000000000000000000000000
     - perkChain: 010000000300000005000000
-      hexName: 0a0000000f00000007000000
+      hexNames: 000000000000000000000000
     - perkChain: 020000000400000006000000
-      hexName: 1c000000130000000b000000
+      hexNames: 000000000000000000000000
     allSkillFXs:
     - charMode: 2
       perkType: 0
@@ -190,21 +190,21 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexName: 020000000b00000002000000
+      hexNames: 000000000000000000000000
     - perkChain: 01000000
-      hexName: 020000000b00000002000000
+      hexNames: 000000000000000000000000
     - perkChain: 02000000
-      hexName: 020000000b00000002000000
+      hexNames: 000000000000000000000000
     - perkChain: 0100000003000000
-      hexName: 020000000b00000002000000
+      hexNames: 000000000000000000000000
     - perkChain: 0200000004000000
-      hexName: 020000000b00000002000000
+      hexNames: 000000000000000000000000
     - perkChain: 010000000300000005000000
-      hexName: 020000000b00000002000000
+      hexNames: 000000000000000000000000
     - perkChain: 020000000400000006000000
-      hexName: 020000000b00000002000000
+      hexNames: 000000000000000000000000
     - perkChain: 020000000400000005000000
-      hexName: 020000000b00000002000000
+      hexNames: 000000000000000000000000
     allSkillFXs:
     - charMode: 1
       perkType: 0
@@ -242,11 +242,11 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexName: 020000000f0000000b000000
+      hexNames: 000000000000000000000000
     - perkChain: 02000000
-      hexName: 020000000c0000000b000000
+      hexNames: 000000000000000000000000
     - perkChain: 01000000
-      hexName: 190000000f00000003000000
+      hexNames: 000000000000000000000000
     allSkillFXs:
     - charMode: 1
       perkType: 0
@@ -284,7 +284,7 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexName: 190000000b0000000b000000
+      hexNames: 190000000b0000000b000000
     allSkillFXs:
     - charMode: 1
       perkType: 0
@@ -322,7 +322,7 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexName: 020000000b0000000b000000
+      hexNames: 020000000b0000000b000000
     allSkillFXs:
     - charMode: 0
       perkType: 0
@@ -359,7 +359,7 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexName: 020000000b0000000b000000
+      hexNames: 000000000000000000000000
     allSkillFXs:
     - charMode: 0
       perkType: 0

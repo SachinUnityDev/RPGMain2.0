@@ -1,5 +1,6 @@
 using Common;
 using Interactables;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -45,6 +46,8 @@ namespace Combat
                 skillName = skillModel.skillName;
            }
            PopulateTopTrans();
+            PopulateMidTrans();    
+            PopulateBtmTrans();
         }
         void PopulateTopTrans()
         {
@@ -70,23 +73,46 @@ namespace Combat
             // for three hexes get 
             List<PerkType> perkChain = skillModel.perkChain; 
             PerkHexData perkHexData = skillDataSO.GetPerkHexData(perkChain, skillName);
-            
-            int i = 0; 
-            foreach(HexNames perkHex in perkHexData.hexNames)
+
+            int i = 0;
+            foreach (HexNames perkHex in perkHexData.hexNames)
             {
                 topTrans.GetChild(3).GetChild(i).GetComponent<Image>().sprite =
-                skillHexSO.GetHexSprite(perkHex);
-                i++; 
+                                                        skillHexSO.GetHexSprite(perkHex);
+                i++;
+                if (i > 3)
+                {
+                   // expand the skillcard ..
+                   // Expand the mid card by some val as height of text go 
+                   // setactive => true....
+                } 
             }
-
         }
         void PopulateMidTrans()
-        {
-
+        {            
+            for (int i = 0; i < skillModel.descLines.Count; i++)
+            {
+                midTrans.GetChild(i).GetComponent<TextMeshProUGUI>().text
+                                                   = skillModel.descLines[i]; 
+            }  
+            
         }
         void PopulateBtmTrans()
         {
-
+            // skillModel has it 
+            btmTrans.GetChild(0).GetComponent<TextMeshProUGUI>().text
+                = skillModel.staminaReq + "\n" + "Stm";
+            btmTrans.GetChild(1).GetComponent<TextMeshProUGUI>().text
+                = skillModel.cd + "\n" + "Rds";
+            string dmgTypeStr = ""; 
+            foreach (DamageType dmg in skillModel.dmgType)
+            {
+                dmgTypeStr += dmg.ToString()+ ", ";    
+            }
+            dmgTypeStr = dmgTypeStr.Substring(dmgTypeStr.Length - 2);
+            btmTrans.GetChild(3).GetComponent<TextMeshProUGUI>().text
+             = dmgTypeStr;
+           
         }
     }
 }

@@ -53,7 +53,7 @@ MonoBehaviour:
     baseWeight: 0
     isActive: 0
     allPerkHexes:
-    - perkChain: 
+    - perkChain: 00000000
       hexNames: 000000000000000000000000
     - perkChain: 
       hexNames: 000000000000000000000000
@@ -178,7 +178,7 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexNames: 000000000000000000000000
+      hexNames: 190000000b0000000b000000
     allSkillFXs: []
     allLines: []
   - skillName: 2
@@ -208,7 +208,7 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexNames: 000000000000000000000000
+      hexNames: 020000000b0000000b000000
     allSkillFXs: []
     allLines: []
   - skillName: 105

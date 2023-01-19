@@ -84,7 +84,7 @@ namespace Common
 
         public void OnPointerExit(PointerEventData eventData)
         {
-           // if(!IsClicked)
+            if(!IsClicked)
                 HideSkillCard(); 
         }
         #endregion

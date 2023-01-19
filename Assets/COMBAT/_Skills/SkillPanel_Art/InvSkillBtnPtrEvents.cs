@@ -109,7 +109,7 @@ namespace Common
                                     skillDataSO.allSkills[index].skillIconSprite;
 
             if (skillModel == null) return;
-            int skilllvlInt = (int)skillModel.skillLvl;
+            int skilllvlInt = (int)skillModel.skillLvl;  // skillmodel req here for this
             this.leftSkillView = leftSkillView;
 
             skillCardGO = SkillService.Instance.skillCardGO;

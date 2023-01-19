@@ -11,9 +11,6 @@ using System.Security.Policy;
 
 namespace Combat
 {
-
-
-
      [Serializable]
     public class SkillEventData
     {
@@ -49,6 +46,8 @@ namespace Combat
 
         [Header("ALL SO")]
         public List<SkillDataSO> allCharSkillSO = new List<SkillDataSO>();
+        public SkillViewSO skillViewSO; 
+        public SkillHexSO skillHexSO;   
         public GameObject skillCardGO; 
 
         [Header("ALL SKILL MANAGER")]

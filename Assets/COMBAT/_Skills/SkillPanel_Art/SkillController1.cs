@@ -293,12 +293,13 @@ namespace Common
                         if (perkName == PerkNames.None || perkName == clickedPerkData.perkName
                             || GetPerkData(perkName).state == PerkSelectState.Clicked)
                         {
-                            UpdateDataPerkState(perk.perkName, PerkSelectState.Clickable);//update                            
+                            UpdateDataPerkState(perk.perkName, PerkSelectState.Clickable);//update
+                                                                                          //
                         }
                         else 
                         {
                             UpdateDataPerkState(perk.perkName, PerkSelectState.UnClickable);
-                          
+                            break; // if either of pre reqs not there perk is unclickable
                         }
                     }
                 }

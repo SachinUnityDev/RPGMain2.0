@@ -17,7 +17,7 @@ namespace Combat
 
         public override List<PerkNames> preReqList => new List<PerkNames>() {PerkNames.EnjoyTheTrap, PerkNames.HuntingSeason };
 
-        public override string desc => "this is enjoy th etrap";
+        public override string desc => "this is enjoy the etrap";
 
         public override CharNames charName => CharNames.Abbas_Skirmisher;
 

@@ -13,14 +13,14 @@ namespace Combat
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            SkillServiceView.Instance.pointerOnSkillCard = true;
+           // SkillServiceView.Instance.pointerOnSkillCard = true;
             gameObject.SetActive(true);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
          
-            SkillServiceView.Instance.pointerOnSkillCard = false;
+           // SkillServiceView.Instance.pointerOnSkillCard = false;
             if(!isHovered)
             gameObject.SetActive(false);
         }

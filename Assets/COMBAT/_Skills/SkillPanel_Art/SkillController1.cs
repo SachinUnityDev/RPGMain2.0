@@ -293,8 +293,7 @@ namespace Common
                         if (perkName == PerkNames.None || perkName == clickedPerkData.perkName
                             || GetPerkData(perkName).state == PerkSelectState.Clicked)
                         {
-                            UpdateDataPerkState(perk.perkName, PerkSelectState.Clickable);//update
-                            
+                            UpdateDataPerkState(perk.perkName, PerkSelectState.Clickable);//update                            
                         }
                         else 
                         {
@@ -309,6 +308,7 @@ namespace Common
                 if (perk.skillName != skillName) continue;
                 SkillLvl nextlvl = clickedPerkData.perkLvl + 2;
                 if ((int)nextlvl > 3) continue;
+                bool isClickable = false; 
                 if (perk.perkLvl == nextlvl)
                 {
                     foreach (PerkNames perkName in perk.preReqList)
@@ -317,14 +317,18 @@ namespace Common
                             || GetPerkData(perkName).state == PerkSelectState.Clickable
                             || GetPerkData(perkName).state == PerkSelectState.Clicked)
                         {
-                            UpdateDataPerkState(perk.perkName, PerkSelectState.Clickable);//update
-                           
+                            isClickable = true;
                         }
                         else
                         {
+                            isClickable = false; 
                             UpdateDataPerkState(perk.perkName, PerkSelectState.UnClickable);
                            
                         }
+                    }
+                    if (isClickable)
+                    {
+                        UpdateDataPerkState(perk.perkName, PerkSelectState.Clickable);//update
                     }
                 }
             }

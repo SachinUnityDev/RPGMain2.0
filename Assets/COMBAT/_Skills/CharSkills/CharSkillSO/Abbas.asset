@@ -42,29 +42,35 @@ MonoBehaviour:
     skillSelState: 1
     cd: 0
     attackType: 1
-    dmgType: 01000000
+    dmgType: 010000000f000000
     castPos: 01000000020000000300000004000000050000000600000007000000
     targetPos: []
-    staminareq: 0
-    castTime: 5
-    timeFrame: 0
-    maxUsagePerCombat: 0
+    staminareq: 5
+    castTime: 1
+    timeFrame: 1
+    maxUsagePerCombat: -1
     skillIncli: 1
     baseWeight: 0
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexNames: 000000000000000000000000
-    - perkChain: 
-      hexNames: 000000000000000000000000
-    - perkChain: 
-      hexNames: 000000000000000000000000
-    - perkChain: 
-      hexNames: 000000000000000000000000
-    - perkChain: 
-      hexNames: 000000000000000000000000
-    - perkChain: 
-      hexNames: 000000000000000000000000
+      hexNames: 25000000180000000b000000
+    - perkChain: 01000000
+      hexNames: 250000000c0000000b000000
+    - perkChain: 02000000
+      hexNames: 25000000180000000b000000
+    - perkChain: 0100000003000000
+      hexNames: 250000000c0000000b000000
+    - perkChain: 0200000004000000
+      hexNames: 25000000230000000b000000
+    - perkChain: 0200000003000000
+      hexNames: 25000000180000000b000000
+    - perkChain: 010000000300000005000000
+      hexNames: 250000000c0000000b000000
+    - perkChain: 020000000400000006000000
+      hexNames: 25000000100000000b000000
+    - perkChain: 020000000300000006000000
+      hexNames: 25000000180000000b000000
     allSkillFXs: []
     allLines: []
   - skillName: 101
@@ -79,20 +85,40 @@ MonoBehaviour:
     skillDesc: Rungu Throw
     damageMod: 140
     skillLvl: 0
-    skillSelState: 0
+    skillSelState: 1
     cd: 0
     attackType: 2
     dmgType: 010000000b000000
-    castPos: 01000000020000000300000004000000050000000600000007000000
+    castPos: 020000000300000004000000050000000600000007000000
     targetPos: []
     staminareq: 7
     castTime: 2
     timeFrame: 1
-    maxUsagePerCombat: 4
-    skillIncli: 2
+    maxUsagePerCombat: 3
+    skillIncli: 1
     baseWeight: 0
     isActive: 0
-    allPerkHexes: []
+    allPerkHexes:
+    - perkChain: 00000000
+      hexNames: 25000000230000000b000000
+    - perkChain: 01000000
+      hexNames: 25000000230000000b000000
+    - perkChain: 02000000
+      hexNames: 25000000230000000b000000
+    - perkChain: 0100000003000000
+      hexNames: 25000000230000000b000000
+    - perkChain: 0200000004000000
+      hexNames: 25000000230000000b000000
+    - perkChain: 0100000004000000
+      hexNames: 25000000230000000b000000
+    - perkChain: 010000000300000005000000
+      hexNames: 25000000230000000b000000
+    - perkChain: 020000000400000006000000
+      hexNames: 25000000230000000b000000
+    - perkChain: 010000000300000006000000
+      hexNames: 25000000230000000b000000
+    - perkChain: 010000000400000006000000
+      hexNames: 25000000230000000b000000
     allSkillFXs: []
     allLines: []
   - skillName: 102
@@ -107,20 +133,40 @@ MonoBehaviour:
     skillDesc: Animal Trap
     damageMod: 120
     skillLvl: 0
-    skillSelState: 0
+    skillSelState: 1
     cd: 0
-    attackType: 2
-    dmgType: 01000000
-    castPos: 01000000020000000300000004000000050000000600000007000000
+    attackType: 3
+    dmgType: 010000000b000000
+    castPos: 04000000050000000600000007000000
     targetPos: []
     staminareq: 5
     castTime: 2
     timeFrame: 1
     maxUsagePerCombat: 4
-    skillIncli: 5
+    skillIncli: 1
     baseWeight: 0
     isActive: 0
-    allPerkHexes: []
+    allPerkHexes:
+    - perkChain: 00000000
+      hexNames: 0a000000260000000b000000
+    - perkChain: 01000000
+      hexNames: 02000000260000000b000000
+    - perkChain: 02000000
+      hexNames: 0a000000260000000b000000
+    - perkChain: 0100000003000000
+      hexNames: 02000000260000000b000000
+    - perkChain: 0200000004000000
+      hexNames: 0a000000260000000b000000
+    - perkChain: 0200000003000000
+      hexNames: 0a000000260000000b000000
+    - perkChain: 010000000300000005000000
+      hexNames: 02000000260000000b000000
+    - perkChain: 020000000400000006000000
+      hexNames: 0a000000260000000b000000
+    - perkChain: 020000000300000005000000
+      hexNames: 0a000000260000000b000000
+    - perkChain: 020000000400000005000000
+      hexNames: 0a000000260000000b000000
     allSkillFXs: []
     allLines: []
   - skillName: 103
@@ -135,20 +181,26 @@ MonoBehaviour:
     skillDesc: Feign Death
     damageMod: 140
     skillLvl: 0
-    skillSelState: 0
+    skillSelState: 1
     cd: 0
     attackType: 0
-    dmgType: 0a0000000b000000
-    castPos: 01000000020000000300000004000000050000000600000007000000
+    dmgType: 0a000000
+    castPos: 020000000300000004000000050000000600000007000000
     targetPos: []
-    staminareq: 7
+    staminareq: 10
     castTime: 2
-    timeFrame: 2
-    maxUsagePerCombat: 4
-    skillIncli: 5
+    timeFrame: 1
+    maxUsagePerCombat: 1
+    skillIncli: 4
     baseWeight: 0
     isActive: 0
-    allPerkHexes: []
+    allPerkHexes:
+    - perkChain: 00000000
+      hexNames: 250000000b0000000b000000
+    - perkChain: 01000000
+      hexNames: 250000000b0000000b000000
+    - perkChain: 02000000
+      hexNames: 250000000b0000000b000000
     allSkillFXs: []
     allLines: []
   - skillName: 104
@@ -164,21 +216,21 @@ MonoBehaviour:
     damageMod: 140
     skillLvl: 0
     skillSelState: 0
-    cd: 0
+    cd: 3
     attackType: 0
     dmgType: 0a0000000b000000
-    castPos: 01000000020000000300000004000000050000000600000007000000
+    castPos: 04000000050000000600000007000000
     targetPos: []
-    staminareq: 7
+    staminareq: 0
     castTime: 2
-    timeFrame: 2
-    maxUsagePerCombat: 4
-    skillIncli: 4
+    timeFrame: 1
+    maxUsagePerCombat: -1
+    skillIncli: 7
     baseWeight: 0
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexNames: 190000000b0000000b000000
+      hexNames: 0a0000000b0000000b000000
     allSkillFXs: []
     allLines: []
   - skillName: 2
@@ -193,17 +245,17 @@ MonoBehaviour:
     skillDesc: Default Move
     damageMod: 0
     skillLvl: 0
-    skillSelState: 0
-    cd: 0
+    skillSelState: 1
+    cd: 1
     attackType: 0
-    dmgType: 0a0000000b000000
+    dmgType: 10000000
     castPos: 01000000020000000300000004000000050000000600000007000000
     targetPos: []
-    staminareq: 7
-    castTime: 2
-    timeFrame: 2
-    maxUsagePerCombat: 4
-    skillIncli: 0
+    staminareq: 2
+    castTime: -1
+    timeFrame: 1
+    maxUsagePerCombat: -1
+    skillIncli: 10
     baseWeight: 0
     isActive: 0
     allPerkHexes:
@@ -219,24 +271,26 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 7
-    skillUnLockStatus: 1
+    skillUnLockStatus: 0
     skillDesc: Feign Death
-    damageMod: 140
+    damageMod: 110
     skillLvl: 0
     skillSelState: 0
-    cd: 0
-    attackType: 0
-    dmgType: 0a0000000b000000
-    castPos: 01000000020000000300000004000000050000000600000007000000
+    cd: 3
+    attackType: 2
+    dmgType: 050000000f000000
+    castPos: 04000000050000000600000007000000
     targetPos: []
     staminareq: 7
-    castTime: 2
-    timeFrame: 2
-    maxUsagePerCombat: 4
-    skillIncli: 0
+    castTime: -1
+    timeFrame: 1
+    maxUsagePerCombat: -1
+    skillIncli: 2
     baseWeight: 0
     isActive: 0
-    allPerkHexes: []
+    allPerkHexes:
+    - perkChain: 00000000
+      hexNames: 0a000000240000000b000000
     allSkillFXs: []
     allLines: []
   - skillName: 129
@@ -247,23 +301,53 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 8
-    skillUnLockStatus: 1
+    skillUnLockStatus: 0
     skillDesc: Telekinesis
     damageMod: 140
     skillLvl: 0
     skillSelState: 0
-    cd: 0
-    attackType: 0
-    dmgType: 0a0000000b000000
+    cd: -1
+    attackType: 2
+    dmgType: 0900000010000000
     castPos: 01000000020000000300000004000000050000000600000007000000
     targetPos: []
-    staminareq: 7
-    castTime: 2
-    timeFrame: 2
-    maxUsagePerCombat: 4
-    skillIncli: 0
+    staminareq: 4
+    castTime: 1
+    timeFrame: 1
+    maxUsagePerCombat: 3
+    skillIncli: 3
     baseWeight: 0
     isActive: 0
-    allPerkHexes: []
+    allPerkHexes:
+    - perkChain: 00000000
+      hexNames: 02000000230000000b000000
+    - perkChain: 01000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 02000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 0100000003000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 0200000004000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 0100000004000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 0200000003000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 010000000300000005000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 020000000400000006000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 010000000300000006000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 010000000400000006000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 010000000400000005000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 020000000400000005000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 020000000300000005000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 020000000300000006000000
+      hexNames: 02000000240000000b000000
     allSkillFXs: []
     allLines: []

@@ -22,7 +22,7 @@ namespace Common
         [SerializeField] Vector2 skillCardBaseDim = new Vector2(328f, 325f);
 
         [Header("Skill Card positioning")]
-        [SerializeField] Vector3 offset = new Vector3(148, 60,0);
+        [SerializeField] Vector3 offset = new Vector3(150, 60,0);
 
         [Header("Skill HEX SO")] // contain skill card SO 
         public SkillHexSO skillHexSO;

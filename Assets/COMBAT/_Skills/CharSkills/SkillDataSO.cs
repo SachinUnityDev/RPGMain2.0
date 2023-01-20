@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Common;
-
+using System.Linq;
 
 namespace Combat
 {
@@ -97,6 +97,7 @@ namespace Combat
 
         public PerkHexData GetPerkHexData(List<PerkType> perkChain, SkillNames skillName)
         {
+            perkChain = perkChain.OrderBy(t=>t).ToList(); 
             SkillData skillData = GetSkillData(skillName);
             if(perkChain.Count == 0)
             {
@@ -109,12 +110,13 @@ namespace Combat
             }
             foreach (PerkHexData perk in skillData.allPerkHexes)
             {
-                if (perk.perkChain.Equals(perkChain))
+            
+                if (perk.perkChain.SequenceEqual(perkChain))
                 {
                     return perk;  
                 }
             }
-            Debug.Log("Perk Hex data not found" + skillName);
+            Debug.Log("Perk Hex data not found" + skillName + perkChain[0]);
             return null; 
         }
 

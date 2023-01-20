@@ -48,7 +48,7 @@ namespace Common
             leftBtn.onClick.AddListener(OnLeftBtnPressed);
             rightBtn.onClick.AddListener(OnRightBtnPressed);
             //skillViewMain.OnSkillSelectedInPanel += PopulateSkillScroll; // invalid .. not needed 
-            SkillService.Instance.On_SkillSelectedInInv += PopulateSkillScroll; 
+            SkillService.Instance.OnSkillSelectInInv += PopulateSkillScroll; 
 
         }
         void PopulateRightSkillPanel(CharModel charModel)

@@ -183,6 +183,7 @@ namespace Combat
         enemy_fulllane_same,
         ally234567NCast234567,
         anyTile,
+        self234567,
     }
 
 

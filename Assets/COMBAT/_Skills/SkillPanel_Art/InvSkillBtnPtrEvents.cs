@@ -70,7 +70,7 @@ namespace Common
                 IsClicked = true;
                 transform.GetChild(1).GetComponent<Image>().sprite = skillHexSO.skillIconFrameHL; 
                 ShowSkillcardInInv();
-                
+                SkillService.Instance.On_SkillSelectedInInv(skillModel);
             }
             else
             {
@@ -85,7 +85,7 @@ namespace Common
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            if(!IsClicked)
+            //if(!IsClicked)
                 HideSkillCard(); 
         }
         #endregion

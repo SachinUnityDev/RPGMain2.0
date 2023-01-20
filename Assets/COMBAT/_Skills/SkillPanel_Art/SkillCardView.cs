@@ -106,8 +106,17 @@ namespace Combat
             // skillModel has it 
             btmTrans.GetChild(0).GetComponent<TextMeshProUGUI>().text
                 = skillModel.staminaReq + "\n" + "Stm";
-            btmTrans.GetChild(1).GetComponent<TextMeshProUGUI>().text
+            if (skillModel.cd > 0)
+            {
+                btmTrans.GetChild(1).GetComponent<TextMeshProUGUI>().text
                 = skillModel.cd + "\n" + "Rds";
+            }
+            else
+            {
+                btmTrans.GetChild(1).GetComponent<TextMeshProUGUI>().text
+                = "";
+            }
+            
             string dmgTypeStr = ""; 
             foreach (DamageType dmg in skillModel.dmgType)
             {

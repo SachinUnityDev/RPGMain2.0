@@ -33,7 +33,8 @@ namespace Combat
     {
         public float combatSpeed = 1f;
 
-        public event Action<PerkData> OnPerkStateChg; 
+        public event Action<PerkData> OnPerkStateChg;
+        public event Action<SkillModel> OnSkillSelectInInv; 
         #region Initializers
 
         [Header("SKill Factory NTBR")]
@@ -43,6 +44,7 @@ namespace Combat
         //public SkillCardData skillCardData;
         [Header("CURR SKILLMODEL")]
         public SkillModel skillModelHovered;
+        public SkillModel skillModelSelect; 
 
         [Header("ALL SO")]
         public List<SkillDataSO> allCharSkillSO = new List<SkillDataSO>();
@@ -162,6 +164,12 @@ namespace Combat
         public void On_PerkStateChg(PerkData perkData)
         {
             OnPerkStateChg?.Invoke(perkData);
+        }
+
+        public void On_SkillSelectedInInv(SkillModel skillModel)
+        {
+            skillModelSelect = skillModel;
+            OnSkillSelectInInv?.Invoke(skillModel); 
         }
         void SkillDisplay()  // some reference is there for SKILL DISPLAY ON TOP
         {
@@ -363,14 +371,20 @@ namespace Combat
 
         }
 
-        public void On_SkillSelected(CharNames _charName)  // Ally Skill and perk "Skill Select" 
-        {      
-            ClearPrevData();          
+        public void On_SkillSelected(CharNames _charName, SkillNames skillName)  // Ally Skill and perk "Skill Select" 
+        {
 
             currSkillController = allSkillControllers.FirstOrDefault(t => t.charName == _charName);
             Debug.Log("SKILL IS SELECTED" + currSkillController.name);
-            currSkillController.SkillSelect(currSkillName);                   
-            SkillSelect?.Invoke(_charName, currSkillName);  // message broadcaster 
+            currSkillController.SkillSelect(skillName);
+
+            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            {
+                ClearPrevData();
+
+                SkillSelect?.Invoke(_charName, skillName);  // message broadcaster 
+            }
+          
         }
 
         public void ClearPrevSkillData()

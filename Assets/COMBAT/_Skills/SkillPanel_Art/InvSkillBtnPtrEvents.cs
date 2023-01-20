@@ -70,6 +70,7 @@ namespace Common
                 IsClicked = true;
                 transform.GetChild(1).GetComponent<Image>().sprite = skillHexSO.skillIconFrameHL; 
                 ShowSkillcardInInv();
+                
             }
             else
             {

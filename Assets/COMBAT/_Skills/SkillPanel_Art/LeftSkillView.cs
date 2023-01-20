@@ -14,8 +14,7 @@ namespace Common
         SkillController1 selectSkillController;
         SkillDataSO skillDataSO;
 
-        [Header("Skill Button")]
-        [SerializeField] Button skillPlusBtn;
+     
 
         [Header("Inv Skill Main Panel")]
         public InvSkillViewMain skillViewMain;
@@ -31,14 +30,9 @@ namespace Common
             charNameTrans = transform.GetChild(0); 
             iconContainerTrans = transform.GetChild(1);
             InvService.Instance.OnCharSelectInvPanel += PopulateLeftSkillPanel;
-            skillPlusBtn.onClick.AddListener(OnSkillPlusBtnPressed); 
+     
         }
-            
-        void OnSkillPlusBtnPressed()
-        {
-
-
-        }
+        #region POPULATE SKILL BTNS and Panel Content
         void PopulateLeftSkillPanel(CharModel charModel)
         {
             charController = InvService.Instance.charSelectController;
@@ -64,7 +58,6 @@ namespace Common
                 SkillNames skillName = skillDataSO.allSkills[i].skillName; 
                 mainSkillTrans.GetChild(i).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO, skillName, this); 
             }
-
         }
         void PopulateTheUtilitySkills()
         {
@@ -123,6 +116,9 @@ namespace Common
             //    campSkillTrans.GetChild(2).gameObject.SetActive(false);
             //}
         }
+
+        #endregion
+
         #region CLICKED UNSKILLED STATE
 
         // if one is clicked .. unclick all others

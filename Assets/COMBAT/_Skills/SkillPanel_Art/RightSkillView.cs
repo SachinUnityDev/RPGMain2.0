@@ -47,8 +47,8 @@ namespace Common
             InvService.Instance.OnCharSelectInvPanel += PopulateRightSkillPanel;
             leftBtn.onClick.AddListener(OnLeftBtnPressed);
             rightBtn.onClick.AddListener(OnRightBtnPressed);
-            skillViewMain.OnSkillSelectedInPanel += PopulateSkillScroll; 
-
+            //skillViewMain.OnSkillSelectedInPanel += PopulateSkillScroll; // invalid .. not needed 
+            SkillService.Instance.On_SkillSelectedInInv += PopulateSkillScroll; 
 
         }
         void PopulateRightSkillPanel(CharModel charModel)
@@ -87,7 +87,7 @@ namespace Common
             else
             {
                 --index;
-                skillViewMain.On_SkillSelectedInPanel(scrollList[index]);
+                PopulateSkillScroll(scrollList[index]);
             }
             prevLeftClick = Time.time;
         }
@@ -102,7 +102,7 @@ namespace Common
             else
             {
                 ++index;
-                skillViewMain.On_SkillSelectedInPanel(scrollList[index]);          
+               PopulateSkillScroll(scrollList[index]);          
             }
             prevRightClick = Time.time;
         }
@@ -148,8 +148,6 @@ namespace Common
 
             }
         }
-
-    
 
         void PopulatePerksPanel(SkillNames skillName)
         {

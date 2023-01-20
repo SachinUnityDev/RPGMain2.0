@@ -8,7 +8,7 @@ namespace Common
 {
     public class SkillPtsBtnPtrEvents : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        [Header("TO BRE REF")]
+        [Header("TO BE REF")]
         [SerializeField] InvSkillViewMain InvSkillViewMain;
 
         [SerializeField] bool isClicked;

@@ -115,7 +115,7 @@ namespace Combat
             }
             PopulateSkillClickedState(index);        
             SkillService.Instance.On_SkillSelected
-                (CombatService.Instance.currCharOnTurn.charModel.charName);
+                (CombatService.Instance.currCharOnTurn.charModel.charName, SkillService.Instance.currSkillName);
         }
       
         public SkillSelectState UpdateSkillState(SkillModel _skillModel)

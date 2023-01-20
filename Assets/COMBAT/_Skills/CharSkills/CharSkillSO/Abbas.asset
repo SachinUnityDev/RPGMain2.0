@@ -219,7 +219,7 @@ MonoBehaviour:
     cd: 3
     attackType: 0
     dmgType: 0a0000000b000000
-    castPos: 04000000050000000600000007000000
+    castPos: 01000000020000000300000004000000050000000600000007000000
     targetPos: []
     staminareq: 0
     castTime: 2
@@ -230,7 +230,7 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexNames: 0a0000000b0000000b000000
+      hexNames: 190000000b0000000b000000
     allSkillFXs: []
     allLines: []
   - skillName: 2
@@ -301,7 +301,7 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 8
-    skillUnLockStatus: 0
+    skillUnLockStatus: 1
     skillDesc: Telekinesis
     damageMod: 140
     skillLvl: 0

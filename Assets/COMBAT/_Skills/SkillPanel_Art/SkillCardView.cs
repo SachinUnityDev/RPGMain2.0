@@ -31,7 +31,11 @@ namespace Combat
 
         [Header("Skill Hex SO & SkillView SO ")]
         SkillHexSO skillHexSO;
-        SkillViewSO skillViewSO; 
+        SkillViewSO skillViewSO;
+        private void Awake()
+        {
+            gameObject.SetActive(false);
+        }
         private void OnEnable()
         {
              OnSkillHovered();     

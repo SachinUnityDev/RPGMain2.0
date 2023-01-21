@@ -55,7 +55,6 @@ namespace Interactables
                     ItemImgData itemImgData = new ItemImgData();
                     itemImgData.itemType = itemType;
                     allItemImgData.Add(itemImgData);
-
                 }
             }
       

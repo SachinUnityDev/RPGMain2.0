@@ -109,7 +109,6 @@ namespace Common
 
         void PopulateSkillScroll(SkillModel skillModel)
         {
-
             if(skillModel != null)
             {
                 skillScrollTrans.GetChild(0).GetComponent<TextMeshProUGUI>().text
@@ -134,11 +133,10 @@ namespace Common
                 i = (int)perkType - 1;
                 perkBtnContainer.GetChild(i).gameObject.SetActive(true);    
                 perkBtnContainer.GetChild(i).GetComponent<PerkBtnPtrEvents>().Init(perkData, skillViewMain);               
-
             }
             if(allPerkData.Count <= 2)
             {
-              BGPipe1.gameObject.SetActive(false);
+                BGPipe1.gameObject.SetActive(false);
                 BGPipe2.gameObject.SetActive(false);    
             }
             else if(allPerkData.Count <=4)
@@ -153,8 +151,6 @@ namespace Common
             for (int j = allPerkData.Count; j < 6; j++)
             {
                 perkBtnContainer.GetChild(j).gameObject.SetActive(false);
-
-
             }
         }
 

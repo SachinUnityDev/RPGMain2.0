@@ -333,10 +333,11 @@ namespace Common
                     }
                 }
             }
-            foreach (PerkData perk in allSkillPerkData)
-            {
-                UpdatePerkRel(perk);
-            }
+            //foreach (PerkData perk in allSkillPerkData)
+            //{
+            //    UpdatePerkRel(perk);
+            //}
+            UpdatePipeRel();
         }
 
         void UpdateDataPerkState(PerkNames _perkName, PerkSelectState _state)
@@ -356,6 +357,50 @@ namespace Common
         }
 
         #endregion 
+
+        public void UpdatePipeRel()
+        {
+            // loop in
+            List<PerkData> allHachet = allSkillPerkData.Where(t => t.skillName == SkillNames.HatchetSwing).ToList();
+            foreach (PerkData perk1 in allHachet)
+            {
+               
+                if (perk1.perkLvl == SkillLvl.Level3) continue; 
+
+                foreach (PerkData perk2 in allHachet)
+                {
+                   // if(perk2.perkLvl == perk1.perkLvl) continue;
+                    if(perk2.perkLvl == perk1.perkLvl + 1)
+                    {
+                        switch (perk2.state)
+                        {
+                            case PerkSelectState.Clickable:
+                                if (perk2.perkType == PerkType.A2)
+                                    perk1.pipeRel[0] = 1;
+                                if (perk2.perkType == PerkType.B2)
+                                    perk1.pipeRel[1] = 1;
+                                break;
+                            case PerkSelectState.Clicked:
+                                if (perk2.perkType == PerkType.A2)
+                                    perk1.pipeRel[0] = 2;
+                                if (perk2.perkType == PerkType.B2)
+                                    perk1.pipeRel[1] = 2;
+                                break;
+                            case PerkSelectState.UnClickable:
+                                if (perk2.perkType == PerkType.A2)
+                                    perk1.pipeRel[0] = 3;
+                                if (perk2.perkType == PerkType.B2)
+                                    perk1.pipeRel[1] = 3;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+
+
 
         public void UpdatePerkRel(PerkData clickedPerkData)
         {
@@ -539,13 +584,6 @@ namespace Common
             }
 
         }
-
-        public void SetPipeData(PerkData perk, int rel)
-        {
-
-        }
-
-
 
 
         #region GET PerkData, clickedPerksList, isPreLvlClickedCheck, 

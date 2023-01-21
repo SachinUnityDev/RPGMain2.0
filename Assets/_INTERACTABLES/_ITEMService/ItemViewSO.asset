@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adac323db098bf54aaaeb8d9ef826da5, type: 3}
+  m_Name: ItemViewSO
+  m_EditorClassIdentifier: 
+  allSlotImgData:
+  - slotType: 1
+    slotBG: {fileID: 21300000, guid: f728a25fbeae5964e905b75ebfd7cbb5, type: 3}
+  - slotType: 2
+    slotBG: {fileID: 21300000, guid: 8479156bc0d5def46a56a0c4af75d3c1, type: 3}
+  - slotType: 3
+    slotBG: {fileID: 21300000, guid: df305c0ead138fb4e97eb88c66710bbd, type: 3}
+  - slotType: 4
+    slotBG: {fileID: 21300000, guid: 85c723dc37f2b954b8de7cf3be455be3, type: 3}
+  - slotType: 5
+    slotBG: {fileID: 21300000, guid: f3f857d6b1b70134fb46ab7b0c37c17e, type: 3}
+  - slotType: 6
+    slotBG: {fileID: 21300000, guid: b18674436fc604e46823920678889199, type: 3}
+  - slotType: 7
+    slotBG: {fileID: 21300000, guid: 117a62b25bf71c540970f5bcf1674d5c, type: 3}
+  allItemImgData:
+  - itemType: 1
+    BGSprite: {fileID: 21300000, guid: df172e088050d4e4e8e205d042033b82, type: 3}
+    FilterIconN: {fileID: 0}
+    FilterIconHL: {fileID: 0}
+  - itemType: 2
+    BGSprite: {fileID: 21300000, guid: df172e088050d4e4e8e205d042033b82, type: 3}
+    FilterIconN: {fileID: 0}
+    FilterIconHL: {fileID: 0}
+  - itemType: 3
+    BGSprite: {fileID: 21300000, guid: df172e088050d4e4e8e205d042033b82, type: 3}
+    FilterIconN: {fileID: 0}
+    FilterIconHL: {fileID: 0}
+  - itemType: 4
+    BGSprite: {fileID: 0}
+    FilterIconN: {fileID: 0}
+    FilterIconHL: {fileID: 0}
+  - itemType: 5
+    BGSprite: {fileID: 0}
+    FilterIconN: {fileID: 0}
+    FilterIconHL: {fileID: 0}
+  - itemType: 6
+    BGSprite: {fileID: 0}
+    FilterIconN: {fileID: 0}
+    FilterIconHL: {fileID: 0}
+  - itemType: 7
+    BGSprite: {fileID: 0}
+    FilterIconN: {fileID: 0}
+    FilterIconHL: {fileID: 0}
+  - itemType: 8
+    BGSprite: {fileID: 0}
+    FilterIconN: {fileID: 0}
+    FilterIconHL: {fileID: 0}
+  - itemType: 9
+    BGSprite: {fileID: 0}
+    FilterIconN: {fileID: 0}
+    FilterIconHL: {fileID: 0}
+  - itemType: 10
+    BGSprite: {fileID: 0}
+    FilterIconN: {fileID: 0}
+    FilterIconHL: {fileID: 0}
+  - itemType: 11
+    BGSprite: {fileID: 0}
+    FilterIconN: {fileID: 0}
+    FilterIconHL: {fileID: 0}
+  - itemType: 12
+    BGSprite: {fileID: 0}
+    FilterIconN: {fileID: 0}
+    FilterIconHL: {fileID: 0}
+  - itemType: 13
+    BGSprite: {fileID: 0}
+    FilterIconN: {fileID: 0}
+    FilterIconHL: {fileID: 0}
+  - itemType: 14
+    BGSprite: {fileID: 0}
+    FilterIconN: {fileID: 0}
+    FilterIconHL: {fileID: 0}
+  - itemType: 15
+    BGSprite: {fileID: 0}
+    FilterIconN: {fileID: 0}
+    FilterIconHL: {fileID: 0}
+  - itemType: 16
+    BGSprite: {fileID: 0}
+    FilterIconN: {fileID: 0}
+    FilterIconHL: {fileID: 0}
+  - itemType: 17
+    BGSprite: {fileID: 0}
+    FilterIconN: {fileID: 0}
+    FilterIconHL: {fileID: 0}
+  - itemType: 18
+    BGSprite: {fileID: 0}
+    FilterIconN: {fileID: 0}
+    FilterIconHL: {fileID: 0}
+  - itemType: 19
+    BGSprite: {fileID: 0}
+    FilterIconN: {fileID: 0}
+    FilterIconHL: {fileID: 0}
+  - itemType: 0
+    BGSprite: {fileID: 0}
+    FilterIconN: {fileID: 0}
+    FilterIconHL: {fileID: 0}

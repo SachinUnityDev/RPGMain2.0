@@ -33,15 +33,6 @@ namespace Common
         public SkillSelectState skillState;
         public SkillNames prevSkillHovered;
 
-        [SerializeField] List<string> alliesDesc = new List<string>();
-        [SerializeField] List<string> enemyDesc = new List<string>();
-        [SerializeField] List<string> bothAllyNEnemy = new List<string>();
-        [SerializeField] List<string> attackTypeLs = new List<string>();
-        [SerializeField] List<string> damageTypeLS = new List<string>();
-        [SerializeField] List<string> sunStrReturn = new List<string>();
-        [SerializeField] List<string> finalDesc = new List<string>();
-
-
         [Header("Key Skill ref SET UP ON INIT")]
         public SkillModel skillModel;
         public SkillDataSO skillDataSO;
@@ -56,8 +47,6 @@ namespace Common
         {
             IsClicked = false;
             prevSkillHovered = SkillNames.None;
-          //  skillCard = skillHexSO.skillCardPrefab;
-           // skillPtsTrans = transform.GetChild(2);
         }
         #region  POINTER EVENTS
         public void OnPointerClick(PointerEventData eventData)
@@ -68,7 +57,7 @@ namespace Common
             {
                 leftSkillView.UnClickAllSkillState();       // add frame
                 IsClicked = true;
-                transform.GetChild(1).GetComponent<Image>().sprite = skillHexSO.skillIconFrameHL; 
+                transform.GetChild(0).GetComponent<Image>().sprite = skillHexSO.skillIconFrameHL; 
                 ShowSkillcardInInv();
                 SkillService.Instance.On_SkillSelectedInInv(skillModel);
             }
@@ -84,17 +73,15 @@ namespace Common
         }
 
         public void OnPointerExit(PointerEventData eventData)
-        {
-            //if(!IsClicked)
-                HideSkillCard(); 
+        {         
+           HideSkillCard(); 
         }
         #endregion
 
         public void SetUnClick()
         {
             IsClicked = false;
-            transform.GetChild(1).GetComponent<Image>().sprite = skillHexSO.SkillNormalFrame;
-          //  HideSkillCard();
+            transform.GetChild(0).GetComponent<Image>().sprite = skillHexSO.SkillNormalFrame;
         }
 
         public void Init(SkillDataSO _skillDataSO, SkillNames _skillName, LeftSkillView leftSkillView)
@@ -114,6 +101,7 @@ namespace Common
             this.leftSkillView = leftSkillView;
 
             skillCardGO = SkillService.Instance.skillCardGO;
+         
             //if (skillPtsTrans != null)
             //    skillPtsTrans.GetComponent<TextMeshProUGUI>().text = skilllvlInt.ToString();
         }

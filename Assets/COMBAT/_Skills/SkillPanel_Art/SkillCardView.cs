@@ -117,15 +117,19 @@ namespace Combat
                 = "";
             }
             
-            string dmgTypeStr = ""; 
+            string dmgTypeStr = "";
+            string dmgPrint = "";
+            if(skillModel.dmgType.Count != 0)
             foreach (DamageType dmg in skillModel.dmgType)
             {
-                dmgTypeStr += dmg.ToString()+ ", ";    
+                dmgTypeStr = dmgTypeStr + dmg.ToString()+ ", ";    
             }
-            dmgTypeStr = dmgTypeStr.Substring(dmgTypeStr.Length - 2);
+            if (dmgTypeStr.Length > 2)
+            {
+                dmgPrint = dmgTypeStr.Substring(0,dmgTypeStr.Length - 2); 
+            }
             btmTrans.GetChild(3).GetComponent<TextMeshProUGUI>().text
-             = dmgTypeStr;
-           
+                                                             = dmgPrint;
         }
     }
 }

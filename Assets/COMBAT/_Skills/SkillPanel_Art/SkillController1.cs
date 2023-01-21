@@ -333,11 +333,11 @@ namespace Common
                     }
                 }
             }
-            //foreach (PerkData perk in allSkillPerkData)
-            //{
-            //    UpdatePerkRel(perk);
-            //}
-            UpdatePipeRel();
+            foreach (PerkData perk in allSkillPerkData)
+            {
+                UpdatePerkRel(perk);
+            }
+            //UpdatePipeRel();
         }
 
         void UpdateDataPerkState(PerkNames _perkName, PerkSelectState _state)
@@ -360,13 +360,13 @@ namespace Common
 
         public void UpdatePipeRel()
         {
-            // loop in
+            // go reverse // sort each perk using linq into separate lvl 
+            // mark status as 1,2,3 ... handle display in  perk btn ptr events 
+
             List<PerkData> allHachet = allSkillPerkData.Where(t => t.skillName == SkillNames.HatchetSwing).ToList();
             foreach (PerkData perk1 in allHachet)
-            {
-               
+            {               
                 if (perk1.perkLvl == SkillLvl.Level3) continue; 
-
                 foreach (PerkData perk2 in allHachet)
                 {
                    // if(perk2.perkLvl == perk1.perkLvl) continue;

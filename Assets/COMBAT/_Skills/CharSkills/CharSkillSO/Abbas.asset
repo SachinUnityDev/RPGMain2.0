@@ -271,7 +271,7 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 7
-    skillUnLockStatus: 0
+    skillUnLockStatus: 1
     skillDesc: Feign Death
     damageMod: 110
     skillLvl: 0

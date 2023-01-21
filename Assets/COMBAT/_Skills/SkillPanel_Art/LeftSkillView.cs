@@ -27,7 +27,7 @@ namespace Common
 
         private void Start()
         {
-            charNameTrans = transform.GetChild(0); 
+            //charNameTrans = transform.GetChild(0); 
             iconContainerTrans = transform.GetChild(1);
             InvService.Instance.OnCharSelectInvPanel += PopulateLeftSkillPanel;
      
@@ -40,8 +40,7 @@ namespace Common
             skillDataSO =
                     SkillService.Instance.GetSkillSO(charController.charModel.charName);
 
-            charNameTrans.GetChild(0).GetComponent<TextMeshProUGUI>().text =
-                                                                charModel.charNameStr;
+          
 
             transform.GetComponent<Image>().sprite = skillDataSO.leftInvSkillPanelBG;
 

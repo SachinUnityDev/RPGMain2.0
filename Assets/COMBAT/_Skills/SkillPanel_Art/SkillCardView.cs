@@ -106,10 +106,10 @@ namespace Combat
             // skillModel has it 
             btmTrans.GetChild(0).GetComponent<TextMeshProUGUI>().text
                 = skillModel.staminaReq + "\n" + "Stm";
-            if (skillModel.cd > 0)
+            if (skillModel.castTime > 0)
             {
                 btmTrans.GetChild(1).GetComponent<TextMeshProUGUI>().text
-                = skillModel.cd + "\n" + "Rds";
+                = skillModel.castTime + "\n" + "Rds";
             }
             else
             {

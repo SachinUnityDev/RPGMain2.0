@@ -184,6 +184,7 @@ namespace Combat
         ally234567NCast234567,
         anyTile,
         self234567,
+        enemy123,
     }
 
 

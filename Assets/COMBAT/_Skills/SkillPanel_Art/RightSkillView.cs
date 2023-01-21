@@ -118,7 +118,16 @@ namespace Common
             // get skillPerkData and Print PerkPanel 
             List<PerkData> allPerkData = selectSkillController.GetSkillPerkData(skillModel.skillName);
             int i = 0;
-            if (allPerkData == null) return;
+            if (allPerkData == null)
+            {
+                for (int j = 0; j < 6; j++)
+                {
+                    perkBtnContainer.GetChild(j).gameObject.SetActive(false);
+                    BGPipe1.gameObject.SetActive(false);
+                    BGPipe2.gameObject.SetActive(false);
+                }
+                return; 
+            }
             foreach (PerkData perkData in allPerkData)
             {
                 PerkType perkType = perkData.perkType;

@@ -21,48 +21,45 @@ MonoBehaviour:
     SkillIncliSprite: {fileID: 21300000, guid: f772b450d88e25842a07da376e9b3281, type: 3}
     SkillIncliBG: {fileID: 21300000, guid: 8741339c350c7bf4ab65cf299b7bf7fd, type: 3}
   - SkillIncliType: 1
-    SkillIncliSprite: {fileID: 21300000, guid: 596c6e94cb877384b915b1ec0c76a95c, type: 3}
-    SkillIncliBG: {fileID: 21300000, guid: 8741339c350c7bf4ab65cf299b7bf7fd, type: 3}
+    SkillIncliSprite: {fileID: 21300000, guid: cc268e256988c534a82934a851b86d95, type: 3}
+    SkillIncliBG: {fileID: 21300000, guid: 523692408381aed4ea1213f1a2c70c1b, type: 3}
   - SkillIncliType: 2
-    SkillIncliSprite: {fileID: 21300000, guid: 617487d495e8ca349a9c0f220394b382, type: 3}
-    SkillIncliBG: {fileID: 21300000, guid: 6e55cdcff27b5da4f878ae0e8cbe7855, type: 3}
+    SkillIncliSprite: {fileID: 21300000, guid: a00af68817af56642aa9f4d4c4b86015, type: 3}
+    SkillIncliBG: {fileID: 21300000, guid: 1ca15edb27925e04aadbe73e347fb292, type: 3}
   - SkillIncliType: 3
     SkillIncliSprite: {fileID: 21300000, guid: fed73b3c6a57cb046b809166933f559e, type: 3}
-    SkillIncliBG: {fileID: 21300000, guid: f4cbd43f853f39f4b8b5fe794ba59421, type: 3}
+    SkillIncliBG: {fileID: 21300000, guid: 81078ddadeb48514b9fd4a07c6b12a4c, type: 3}
   - SkillIncliType: 4
-    SkillIncliSprite: {fileID: 21300000, guid: 52505fdc685fd014095d5576e218b451, type: 3}
-    SkillIncliBG: {fileID: 21300000, guid: 6e55cdcff27b5da4f878ae0e8cbe7855, type: 3}
+    SkillIncliSprite: {fileID: 21300000, guid: 8aa42f8c4b3dc844dba1c49595f817be, type: 3}
+    SkillIncliBG: {fileID: 21300000, guid: b1c00a23b9ef9d745876d9ee3ffd4941, type: 3}
   - SkillIncliType: 5
-    SkillIncliSprite: {fileID: 21300000, guid: 379a0a47fdfa21d42b22cfe7549cbd85, type: 3}
-    SkillIncliBG: {fileID: 21300000, guid: 8741339c350c7bf4ab65cf299b7bf7fd, type: 3}
+    SkillIncliSprite: {fileID: 21300000, guid: 9f5383b18d90ca64f93d157602abc522, type: 3}
+    SkillIncliBG: {fileID: 21300000, guid: b1c00a23b9ef9d745876d9ee3ffd4941, type: 3}
   - SkillIncliType: 6
-    SkillIncliSprite: {fileID: 21300000, guid: 16241fd3c92a91c41b60c3815cd98860, type: 3}
-    SkillIncliBG: {fileID: 21300000, guid: 6e55cdcff27b5da4f878ae0e8cbe7855, type: 3}
+    SkillIncliSprite: {fileID: 21300000, guid: c098036b4e538634198df2d852dacbae, type: 3}
+    SkillIncliBG: {fileID: 21300000, guid: 679e288f6dd2db849b87b27e46d37e9c, type: 3}
   - SkillIncliType: 7
-    SkillIncliSprite: {fileID: 21300000, guid: 693393287fd191644afa24da7415995a, type: 3}
-    SkillIncliBG: {fileID: 21300000, guid: f4cbd43f853f39f4b8b5fe794ba59421, type: 3}
-  - SkillIncliType: 8
-    SkillIncliSprite: {fileID: 21300000, guid: 693393287fd191644afa24da7415995a, type: 3}
-    SkillIncliBG: {fileID: 21300000, guid: f4cbd43f853f39f4b8b5fe794ba59421, type: 3}
+    SkillIncliSprite: {fileID: 21300000, guid: f7950f345d1c4994ea5f8ef60080295f, type: 3}
+    SkillIncliBG: {fileID: 21300000, guid: 1ca15edb27925e04aadbe73e347fb292, type: 3}
   - SkillIncliType: 9
-    SkillIncliSprite: {fileID: 21300000, guid: 693393287fd191644afa24da7415995a, type: 3}
-    SkillIncliBG: {fileID: 21300000, guid: f4cbd43f853f39f4b8b5fe794ba59421, type: 3}
+    SkillIncliSprite: {fileID: 21300000, guid: 9f94a58872da1a1498324b17b5837053, type: 3}
+    SkillIncliBG: {fileID: 21300000, guid: 1ca15edb27925e04aadbe73e347fb292, type: 3}
   - SkillIncliType: 10
-    SkillIncliSprite: {fileID: 21300000, guid: 693393287fd191644afa24da7415995a, type: 3}
-    SkillIncliBG: {fileID: 21300000, guid: f4cbd43f853f39f4b8b5fe794ba59421, type: 3}
+    SkillIncliSprite: {fileID: 21300000, guid: 07b1e0b78d6b38c48a81144728998565, type: 3}
+    SkillIncliBG: {fileID: 21300000, guid: 523692408381aed4ea1213f1a2c70c1b, type: 3}
   allAttacksSprites:
   - attackType: 0
     attackTypeSprite: {fileID: 21300000, guid: f772b450d88e25842a07da376e9b3281, type: 3}
-    attackTypeBG: {fileID: 21300000, guid: 8741339c350c7bf4ab65cf299b7bf7fd, type: 3}
+    attackTypeBG: {fileID: 21300000, guid: b1c00a23b9ef9d745876d9ee3ffd4941, type: 3}
   - attackType: 1
-    attackTypeSprite: {fileID: 21300000, guid: 67bad438c198d054a885f8b449570f78, type: 3}
-    attackTypeBG: {fileID: 21300000, guid: 8741339c350c7bf4ab65cf299b7bf7fd, type: 3}
+    attackTypeSprite: {fileID: 21300000, guid: a38e6c9b3bd127d4bb43d934f6b5e0da, type: 3}
+    attackTypeBG: {fileID: 21300000, guid: 523692408381aed4ea1213f1a2c70c1b, type: 3}
   - attackType: 2
-    attackTypeSprite: {fileID: 21300000, guid: 52e4bc99aa81b7249b05beb3d4ab43e1, type: 3}
-    attackTypeBG: {fileID: 21300000, guid: 1959e008b5323a1428f51ae1d1580f99, type: 3}
+    attackTypeSprite: {fileID: 21300000, guid: 3caeaf75f239ce44ab5e98b95e3a03f5, type: 3}
+    attackTypeBG: {fileID: 21300000, guid: 1ca15edb27925e04aadbe73e347fb292, type: 3}
   - attackType: 3
-    attackTypeSprite: {fileID: 21300000, guid: 5115b820be7072e448e9d064ed63db93, type: 3}
-    attackTypeBG: {fileID: 21300000, guid: 1959e008b5323a1428f51ae1d1580f99, type: 3}
+    attackTypeSprite: {fileID: 21300000, guid: a18d9b24ff9725345b62441c12974697, type: 3}
+    attackTypeBG: {fileID: 21300000, guid: 679e288f6dd2db849b87b27e46d37e9c, type: 3}
   allHexes:
   - hexName: 0
     hexSprite: {fileID: 0}
@@ -141,7 +138,11 @@ MonoBehaviour:
   - hexName: 37
     hexSprite: {fileID: 21300000, guid: 1c7162557fc346e4eb207d0f51e999e7, type: 3}
   - hexName: 38
-    hexSprite: {fileID: 21300000, guid: 1c7162557fc346e4eb207d0f51e999e7, type: 3}
+    hexSprite: {fileID: 21300000, guid: edaf6ad90d3c88444a2b2fb5b5738547, type: 3}
+  - hexName: 39
+    hexSprite: {fileID: 21300000, guid: 4aea1f54defde7f4699e309d7ec62d6a, type: 3}
+  - hexName: 40
+    hexSprite: {fileID: 21300000, guid: 76418ad8490efc04a8c064f495157c2a, type: 3}
   SkillSelectFrame: {fileID: 21300000, guid: 4010adaec116b7844a54f7b053b119a4, type: 3}
   SkillNormalFrame: {fileID: 21300000, guid: e728f03bd1627754088a1c2bcd701772, type: 3}
   skillSelectFrame2: {fileID: 0}

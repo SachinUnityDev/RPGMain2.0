@@ -41,7 +41,7 @@ MonoBehaviour:
     damageMod: 0
     skillLvl: 0
     skillSelState: 1
-    cd: -5
+    cd: -1
     attackType: 2
     dmgType: 0d0000000a0000000b000000
     castPos: 01000000020000000300000004000000050000000600000007000000
@@ -49,27 +49,25 @@ MonoBehaviour:
     staminareq: 5
     castTime: 1
     timeFrame: 1
-    maxUsagePerCombat: 0
-    skillIncli: 2
+    maxUsagePerCombat: -1
+    skillIncli: 6
     baseWeight: 0
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexNames: 120000001200000014000000
+      hexNames: 020000000b00000002000000
     - perkChain: 01000000
-      hexNames: 1a0000001b0000001d000000
+      hexNames: 020000000c00000002000000
     - perkChain: 02000000
-      hexNames: 000000000000000000000000
+      hexNames: 020000000b00000002000000
     - perkChain: 0100000003000000
-      hexNames: 000000000000000000000000
+      hexNames: 020000000c00000002000000
     - perkChain: 0200000004000000
-      hexNames: 190000001a0000001c000000
+      hexNames: 020000000b00000002000000
     - perkChain: 010000000300000005000000
-      hexNames: 000000000000000000000000
-    - perkChain: 010000000300000006000000
-      hexNames: 000000000000000000000000
+      hexNames: 020000000c00000002000000
     - perkChain: 020000000400000006000000
-      hexNames: 000000000000000000000000
+      hexNames: 020000000b00000002000000
     allSkillFXs:
     - charMode: 1
       perkType: 0
@@ -107,28 +105,28 @@ MonoBehaviour:
     dmgType: 040000000b000000
     castPos: 04000000050000000600000007000000
     targetPos: []
-    staminareq: 6
+    staminareq: 7
     castTime: 1
     timeFrame: 1
-    maxUsagePerCombat: 0
+    maxUsagePerCombat: -1
     skillIncli: 2
     baseWeight: 0
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexNames: 000000000000000000000000
+      hexNames: 0a000000110000000b000000
     - perkChain: 01000000
-      hexNames: 000000000000000000000000
+      hexNames: 0a0000000f0000000b000000
     - perkChain: 02000000
-      hexNames: 000000000000000000000000
+      hexNames: 0a000000110000000b000000
     - perkChain: 0100000003000000
-      hexNames: 000000000000000000000000
+      hexNames: 0a0000000f00000001000000
     - perkChain: 0200000004000000
-      hexNames: 000000000000000000000000
+      hexNames: 0a000000110000000b000000
     - perkChain: 010000000300000005000000
-      hexNames: 000000000000000000000000
+      hexNames: 0a0000000f00000001000000
     - perkChain: 020000000400000006000000
-      hexNames: 000000000000000000000000
+      hexNames: 1c000000110000000b000000
     allSkillFXs:
     - charMode: 2
       perkType: 0
@@ -184,27 +182,27 @@ MonoBehaviour:
     staminareq: 4
     castTime: 2
     timeFrame: 1
-    maxUsagePerCombat: 0
-    skillIncli: 0
+    maxUsagePerCombat: -1
+    skillIncli: 4
     baseWeight: 0
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexNames: 000000000000000000000000
+      hexNames: 020000000b00000002000000
     - perkChain: 01000000
-      hexNames: 000000000000000000000000
+      hexNames: 020000000b00000002000000
     - perkChain: 02000000
-      hexNames: 000000000000000000000000
+      hexNames: 020000000b00000002000000
     - perkChain: 0100000003000000
-      hexNames: 000000000000000000000000
+      hexNames: 020000000b00000002000000
     - perkChain: 0200000004000000
-      hexNames: 000000000000000000000000
+      hexNames: 020000000b00000002000000
     - perkChain: 010000000300000005000000
-      hexNames: 000000000000000000000000
+      hexNames: 020000000b00000002000000
     - perkChain: 020000000400000006000000
-      hexNames: 000000000000000000000000
-    - perkChain: 020000000400000005000000
-      hexNames: 000000000000000000000000
+      hexNames: 020000000b00000002000000
+    - perkChain: 010000000400000005000000
+      hexNames: 020000000b00000002000000
     allSkillFXs:
     - charMode: 1
       perkType: 0
@@ -228,25 +226,25 @@ MonoBehaviour:
     damageMod: 180
     skillLvl: 0
     skillSelState: 1
-    cd: -5
+    cd: -1
     attackType: 2
-    dmgType: 04000000
+    dmgType: 040000000b000000
     castPos: 01000000020000000300000004000000050000000600000007000000
     targetPos: []
     staminareq: 12
-    castTime: 4
+    castTime: 3
     timeFrame: 1
-    maxUsagePerCombat: 0
+    maxUsagePerCombat: 1
     skillIncli: 2
     baseWeight: 0
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexNames: 000000000000000000000000
-    - perkChain: 02000000
-      hexNames: 000000000000000000000000
+      hexNames: 020000000f0000000b000000
     - perkChain: 01000000
-      hexNames: 000000000000000000000000
+      hexNames: 020000000f00000003000000
+    - perkChain: 02000000
+      hexNames: 020000000c0000000b000000
     allSkillFXs:
     - charMode: 1
       perkType: 0
@@ -269,16 +267,16 @@ MonoBehaviour:
     skillDesc: 
     damageMod: 0
     skillLvl: 0
-    skillSelState: 0
+    skillSelState: 1
     cd: 3
     attackType: 0
-    dmgType: 
+    dmgType: 0a0000000b000000
     castPos: 01000000020000000300000004000000050000000600000007000000
     targetPos: []
     staminareq: 0
     castTime: 2
-    timeFrame: 0
-    maxUsagePerCombat: 0
+    timeFrame: 1
+    maxUsagePerCombat: -1
     skillIncli: 7
     baseWeight: 0
     isActive: 0
@@ -308,15 +306,15 @@ MonoBehaviour:
     damageMod: 0
     skillLvl: 0
     skillSelState: 0
-    cd: 0
+    cd: 1
     attackType: 0
     dmgType: 
     castPos: 01000000020000000300000004000000050000000600000007000000
     targetPos: []
-    staminareq: 0
-    castTime: 0
-    timeFrame: 0
-    maxUsagePerCombat: 0
+    staminareq: 2
+    castTime: -1
+    timeFrame: 1
+    maxUsagePerCombat: -1
     skillIncli: 0
     baseWeight: 1
     isActive: 0
@@ -345,21 +343,21 @@ MonoBehaviour:
     damageMod: 0
     skillLvl: 0
     skillSelState: 1
-    cd: 0
-    attackType: 0
-    dmgType: 
-    castPos: 01000000020000000300000004000000050000000600000007000000
+    cd: -1
+    attackType: 2
+    dmgType: 0400000010000000
+    castPos: 04000000050000000600000007000000
     targetPos: []
-    staminareq: 0
-    castTime: 0
-    timeFrame: 0
-    maxUsagePerCombat: 0
-    skillIncli: 0
+    staminareq: 9
+    castTime: -1
+    timeFrame: 1
+    maxUsagePerCombat: 1
+    skillIncli: 2
     baseWeight: 1
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexNames: 000000000000000000000000
+      hexNames: 0a0000000f0000000b000000
     allSkillFXs:
     - charMode: 0
       perkType: 0

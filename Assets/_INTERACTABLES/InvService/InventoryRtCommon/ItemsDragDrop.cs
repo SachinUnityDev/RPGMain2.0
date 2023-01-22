@@ -9,9 +9,9 @@ using DG.Tweening;
 namespace Interactables
 {
     public class ItemsDragDrop : MonoBehaviour,  IBeginDragHandler
-                                , IEndDragHandler, IDragHandler        
+                                , IEndDragHandler, IDragHandler,  IPointerEnterHandler, IPointerExitHandler        
     {
-
+        #region Drag and Drop Decalaration 
         [Header("Pointer related")]
         RectTransform rectTransform;
         [SerializeField] Canvas canvas;
@@ -22,7 +22,13 @@ namespace Interactables
         public Iitems itemDragged;
         public Transform slotParent;
 
-        GameObject clone; 
+        GameObject clone;
+
+        [Header("Item Card related")]
+        [SerializeField] GameObject itemCardGO; 
+
+        #endregion
+
         void Start()
         {
             iSlotable = transform.parent.parent.GetComponent<iSlotable>();
@@ -34,10 +40,44 @@ namespace Interactables
                 canvasGroup = gameObject.GetComponent<CanvasGroup>();
 
             canvas = GetComponentInParent<Canvas>();
+            itemCardGO = ItemService.Instance.itemCardGO; 
         }
 
 
-        #region POINTER METHODS 
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            Debug.Log("Item Enter .. " + iSlotable.ItemsInSlot[0]);
+            ShowItemCard();
+        }
+    
+   
+      
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+           // Debug.Log("Item Exit .. " + itemDragged.itemName);
+        }
+        void ShowItemCard()
+        {
+            itemCardGO.GetComponent<ItemCardView>().ShowItemCard(iSlotable.ItemsInSlot[0]);
+            PosItemCard();
+        }
+
+        void PosItemCard()
+        {
+            float width = itemCardGO.GetComponent<RectTransform>().rect.width;
+            float height = itemCardGO.GetComponent<RectTransform>().rect.height;
+            GameObject Canvas = GameObject.FindWithTag("MainCanvas");
+            Canvas canvasObj = Canvas.GetComponent<Canvas>();
+            //Vector3 offSetFinal = (offset + new Vector3(width / 2, -height / 2, 0)) * canvasObj.scaleFactor;
+            //Vector3 pos = transform.position + offSetFinal;
+            itemCardGO.GetComponent<Transform>().DOMove(transform.position, 0.1f);
+            itemCardGO.SetActive(true);
+        }
+
+
+        #region DRAG N DROP POINTER METHODS 
         void ClearSlotParent()
         {
             foreach (Transform child in slotParent)
@@ -112,6 +152,8 @@ namespace Interactables
                     clone.GetComponent<CanvasGroup>().blocksRaycasts = true;
             }
         }
+
+
 
         #endregion
     }

@@ -30,81 +30,80 @@ MonoBehaviour:
   allItemImgData:
   - itemType: 1
     BGSprite: {fileID: 21300000, guid: df172e088050d4e4e8e205d042033b82, type: 3}
-    FilterIconN: {fileID: 0}
-    FilterIconHL: {fileID: 0}
+    FilterIconN: {fileID: 21300000, guid: d6b45bf37dd671a459a4782878130d25, type: 3}
+    FilterIconHL: {fileID: 21300000, guid: 6ce7377407a8af54397a2dd7d31fd8ad, type: 3}
   - itemType: 2
     BGSprite: {fileID: 21300000, guid: df172e088050d4e4e8e205d042033b82, type: 3}
-    FilterIconN: {fileID: 0}
-    FilterIconHL: {fileID: 0}
+    FilterIconN: {fileID: 21300000, guid: f77d4e33e1cef08439a7c069982ba6cf, type: 3}
+    FilterIconHL: {fileID: 21300000, guid: e6b63bea692de8d40b4d2f22f527aa6d, type: 3}
   - itemType: 3
     BGSprite: {fileID: 21300000, guid: df172e088050d4e4e8e205d042033b82, type: 3}
-    FilterIconN: {fileID: 0}
-    FilterIconHL: {fileID: 0}
+    FilterIconN: {fileID: 21300000, guid: b01747fce3b45e84c991cc08378cfb10, type: 3}
+    FilterIconHL: {fileID: 21300000, guid: 5e5bfca99c3e0394897d949621b4ca7b, type: 3}
   - itemType: 4
-    BGSprite: {fileID: 0}
-    FilterIconN: {fileID: 0}
-    FilterIconHL: {fileID: 0}
+    BGSprite: {fileID: 21300000, guid: df172e088050d4e4e8e205d042033b82, type: 3}
+    FilterIconN: {fileID: 21300000, guid: 2680f1d4ef6551c4cb82f8c776bb3b2e, type: 3}
+    FilterIconHL: {fileID: 21300000, guid: e6593bde3b2c27a498c43d36ec3ed0a5, type: 3}
   - itemType: 5
-    BGSprite: {fileID: 0}
-    FilterIconN: {fileID: 0}
-    FilterIconHL: {fileID: 0}
+    BGSprite: {fileID: 21300000, guid: df172e088050d4e4e8e205d042033b82, type: 3}
+    FilterIconN: {fileID: 21300000, guid: 719112ccf61d3cf4ba09e6a894452bce, type: 3}
+    FilterIconHL: {fileID: 21300000, guid: c27de46e47d5a534bb3cb0e4feeae502, type: 3}
   - itemType: 6
-    BGSprite: {fileID: 0}
-    FilterIconN: {fileID: 0}
-    FilterIconHL: {fileID: 0}
+    BGSprite: {fileID: 21300000, guid: df172e088050d4e4e8e205d042033b82, type: 3}
+    FilterIconN: {fileID: 21300000, guid: b01747fce3b45e84c991cc08378cfb10, type: 3}
+    FilterIconHL: {fileID: 21300000, guid: 5e5bfca99c3e0394897d949621b4ca7b, type: 3}
   - itemType: 7
-    BGSprite: {fileID: 0}
+    BGSprite: {fileID: 21300000, guid: df172e088050d4e4e8e205d042033b82, type: 3}
     FilterIconN: {fileID: 0}
     FilterIconHL: {fileID: 0}
   - itemType: 8
-    BGSprite: {fileID: 0}
-    FilterIconN: {fileID: 0}
-    FilterIconHL: {fileID: 0}
+    BGSprite: {fileID: 21300000, guid: df172e088050d4e4e8e205d042033b82, type: 3}
+    FilterIconN: {fileID: 21300000, guid: 102b9037c0ac46c489e63d8538799add, type: 3}
+    FilterIconHL: {fileID: 21300000, guid: 6169eeed69a923e44b434cbbcd258413, type: 3}
   - itemType: 9
-    BGSprite: {fileID: 0}
-    FilterIconN: {fileID: 0}
-    FilterIconHL: {fileID: 0}
+    BGSprite: {fileID: 21300000, guid: df172e088050d4e4e8e205d042033b82, type: 3}
+    FilterIconN: {fileID: 21300000, guid: 5b7f085d1cbcd42418c43c61add9a989, type: 3}
+    FilterIconHL: {fileID: 21300000, guid: 275b8be43c8239648ad2b166885cd2f7, type: 3}
   - itemType: 10
-    BGSprite: {fileID: 0}
-    FilterIconN: {fileID: 0}
-    FilterIconHL: {fileID: 0}
+    BGSprite: {fileID: 21300000, guid: df172e088050d4e4e8e205d042033b82, type: 3}
+    FilterIconN: {fileID: 21300000, guid: 47a104369fba3fd4ea729526441c6e05, type: 3}
+    FilterIconHL: {fileID: 21300000, guid: 01f272652b2be6d4f85c7f56551b6e7a, type: 3}
   - itemType: 11
-    BGSprite: {fileID: 0}
+    BGSprite: {fileID: 21300000, guid: df172e088050d4e4e8e205d042033b82, type: 3}
     FilterIconN: {fileID: 0}
     FilterIconHL: {fileID: 0}
   - itemType: 12
-    BGSprite: {fileID: 0}
+    BGSprite: {fileID: 21300000, guid: df172e088050d4e4e8e205d042033b82, type: 3}
     FilterIconN: {fileID: 0}
     FilterIconHL: {fileID: 0}
   - itemType: 13
-    BGSprite: {fileID: 0}
-    FilterIconN: {fileID: 0}
-    FilterIconHL: {fileID: 0}
+    BGSprite: {fileID: 21300000, guid: df172e088050d4e4e8e205d042033b82, type: 3}
+    FilterIconN: {fileID: 21300000, guid: 96398bdbeb80c084e9ed7f2f4aa4c749, type: 3}
+    FilterIconHL: {fileID: 21300000, guid: e31ce82e63497eb42bff4cde91e263d9, type: 3}
   - itemType: 14
-    BGSprite: {fileID: 0}
+    BGSprite: {fileID: 21300000, guid: df172e088050d4e4e8e205d042033b82, type: 3}
     FilterIconN: {fileID: 0}
     FilterIconHL: {fileID: 0}
   - itemType: 15
-    BGSprite: {fileID: 0}
+    BGSprite: {fileID: 21300000, guid: df172e088050d4e4e8e205d042033b82, type: 3}
     FilterIconN: {fileID: 0}
     FilterIconHL: {fileID: 0}
   - itemType: 16
-    BGSprite: {fileID: 0}
-    FilterIconN: {fileID: 0}
-    FilterIconHL: {fileID: 0}
+    BGSprite: {fileID: 21300000, guid: 04e88f52dd2cae44693717948c66efe1, type: 3}
+    FilterIconN: {fileID: 21300000, guid: f77d4e33e1cef08439a7c069982ba6cf, type: 3}
+    FilterIconHL: {fileID: 21300000, guid: e6b63bea692de8d40b4d2f22f527aa6d, type: 3}
   - itemType: 17
-    BGSprite: {fileID: 0}
-    FilterIconN: {fileID: 0}
-    FilterIconHL: {fileID: 0}
+    BGSprite: {fileID: 21300000, guid: 57b50213a03853c4887a7e6ff2586112, type: 3}
+    FilterIconN: {fileID: 21300000, guid: f77d4e33e1cef08439a7c069982ba6cf, type: 3}
+    FilterIconHL: {fileID: 21300000, guid: e6b63bea692de8d40b4d2f22f527aa6d, type: 3}
   - itemType: 18
-    BGSprite: {fileID: 0}
-    FilterIconN: {fileID: 0}
-    FilterIconHL: {fileID: 0}
+    BGSprite: {fileID: 21300000, guid: ac7728da07778774ca0befef5700677b, type: 3}
+    FilterIconN: {fileID: 21300000, guid: f77d4e33e1cef08439a7c069982ba6cf, type: 3}
+    FilterIconHL: {fileID: 21300000, guid: e6b63bea692de8d40b4d2f22f527aa6d, type: 3}
   - itemType: 19
-    BGSprite: {fileID: 0}
-    FilterIconN: {fileID: 0}
-    FilterIconHL: {fileID: 0}
-  - itemType: 0
-    BGSprite: {fileID: 0}
-    FilterIconN: {fileID: 0}
-    FilterIconHL: {fileID: 0}
+    BGSprite: {fileID: 21300000, guid: df172e088050d4e4e8e205d042033b82, type: 3}
+    FilterIconN: {fileID: 21300000, guid: 080b03d0278d4cb4aa2d538cd93c0476, type: 3}
+    FilterIconHL: {fileID: 21300000, guid: 02d1c33b6ba20db4d8dfaeabe3ca9162, type: 3}
+  lyricBG: {fileID: 21300000, guid: df172e088050d4e4e8e205d042033b82, type: 3}
+  folkoricBG: {fileID: 21300000, guid: 72a11e8c505ce5040a4bce2033951a63, type: 3}
+  epicBG: {fileID: 21300000, guid: 779d8d8b1b95d564ca881768944721c3, type: 3}

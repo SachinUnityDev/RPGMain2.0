@@ -13,7 +13,7 @@ namespace Interactables
         public CharController charController { get; protected set; }
         public List<int> buffIndex { get; set; }
         public List<int> dmgAltBuffIndex { get; set; }
-        public List<string> displayStrs { get; set; }  
+        public List<string> displayStrs { get; set; } = new List<string>(); 
     }
 }
 

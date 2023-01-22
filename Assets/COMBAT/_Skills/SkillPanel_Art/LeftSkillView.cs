@@ -55,7 +55,8 @@ namespace Common
             for (int i = 0; i < 4; i++)
             {        
                 SkillNames skillName = skillDataSO.allSkills[i].skillName; 
-                mainSkillTrans.GetChild(i).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO, skillName, this); 
+                mainSkillTrans.GetChild(i).GetComponent<InvSkillBtnPtrEvents>()
+                                        .Init(skillDataSO, skillName, this, true); 
             }
         }
         void PopulateTheUtilitySkills()
@@ -64,19 +65,21 @@ namespace Common
             SkillNames skillname = skillDataSO.allSkills.Find(t => t.skillType == SkillTypeCombat.Move).skillName;
                       
 
-            utilitySkillTrans.GetChild(0).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO, skillname, this);
+            utilitySkillTrans.GetChild(0).GetComponent<InvSkillBtnPtrEvents>()
+                                            .Init(skillDataSO, skillname, this, false);
             skillname = skillDataSO.allSkills.Find(t => t.skillType == SkillTypeCombat.Patience).skillName;
 
 
-            utilitySkillTrans.GetChild(1).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO, skillname, this);
+            utilitySkillTrans.GetChild(1).GetComponent<InvSkillBtnPtrEvents>()
+                                            .Init(skillDataSO, skillname, this, false);
             int i = skillDataSO.allSkills.FindIndex(t => t.skillType == SkillTypeCombat.Weapon); // to prevent null error 
 
             if (i != -1)
             {
                 utilitySkillTrans.parent.GetChild(0).GetChild(1).gameObject.SetActive(true);// weapon heading
                 utilitySkillTrans.GetChild(2).gameObject.SetActive(true);             
-                utilitySkillTrans.GetChild(2).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO
-                                                                , skillDataSO.allSkills[i].skillName, this);
+                utilitySkillTrans.GetChild(2).GetComponent<InvSkillBtnPtrEvents>()
+                    .Init(skillDataSO, skillDataSO.allSkills[i].skillName, this, false);
             }
             else
             {
@@ -95,8 +98,8 @@ namespace Common
             {
                 campSkillTrans.parent.GetChild(0).GetChild(1).gameObject.SetActive(true);
                 campSkillTrans.GetChild(2).gameObject.SetActive(true);
-                campSkillTrans.GetChild(2).GetComponent<InvSkillBtnPtrEvents>().Init(skillDataSO
-                    , skillDataSO.allSkills[i].skillName, this);
+                campSkillTrans.GetChild(2).GetComponent<InvSkillBtnPtrEvents>()
+                    .Init(skillDataSO, skillDataSO.allSkills[i].skillName, this, false);
             }
             else
             {

@@ -108,7 +108,10 @@ namespace Interactables
         {
             Iitems itemGengewgaw = GetGenGewgaws(genGewgawNames, genGewgawQ);
             GenGewgawSO genGewgawSO = ItemService.Instance.GetGenGewgawSO(genGewgawNames);
-            GenGewgawBase genGewgawBase = itemGengewgaw as GenGewgawBase; 
+            GenGewgawBase genGewgawBase = itemGengewgaw as GenGewgawBase;
+
+            genGewgawBase.prefixBase = GetPrefixBase(genGewgawSO.prefixName); 
+            genGewgawBase.suffixBase = GetSuffixBase(genGewgawSO.suffixName);
             genGewgawBase.genGewgawQ = genGewgawQ;
             itemGengewgaw.InitItem(itemId, genGewgawSO.maxInvStackSize);
             return itemGengewgaw;

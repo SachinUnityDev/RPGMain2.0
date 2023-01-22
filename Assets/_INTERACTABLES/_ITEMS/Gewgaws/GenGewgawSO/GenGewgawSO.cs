@@ -35,6 +35,54 @@ namespace Interactables
         [Header("Sprites")]
         public Sprite iconSprite;
 
+        [SerializeField] string resLs = ""; 
+        public string GetRestrictionsType()
+        {
+            string resStr = ""; 
+            if(classRestrictions.Count > 0)
+            {
+                resStr = "Class Res"; 
+            }
+            if(cultureRestrictions.Count > 0)
+            {
+                resStr = "Culture Res";
+            }
+            if(raceRestrictions.Count > 0)
+            {
+                resStr = "Race Res";
+            }
+            return resStr; 
+        }
+
+        public string GetRestrictionLs()
+        {
+            string resStrLS = "";
+            string finalStr = "";
+            if (classRestrictions.Count > 0)
+            {
+                foreach (var cl  in classRestrictions)
+                {
+                    resStrLS = resStrLS  + cl.ToString() + ", "; 
+                }                
+            }
+            if (cultureRestrictions.Count > 0)
+            {
+                foreach (var cult in cultureRestrictions)
+                {
+                    resStrLS = resStrLS + cult.ToString() + ", ";
+                }
+            }
+            if (raceRestrictions.Count > 0)
+            {
+                foreach (var race in raceRestrictions)
+                {
+                    resStrLS = resStrLS + race.ToString() + ", ";
+                }
+            }
+            if(resStrLS.Length >2)
+           finalStr = resStrLS.Substring(0,resStrLS.Length - 2);
+            return finalStr; 
+        }
 
         private void Awake()
         {

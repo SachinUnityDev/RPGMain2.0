@@ -60,5 +60,37 @@ namespace Interactables
       
         }
 
+        public ItemImgData GetItemTypeImgData(ItemType itemType)
+        {
+           int index = allItemImgData.FindIndex(t=>t.itemType == itemType);
+            if(index != -1)
+            {
+                return allItemImgData[index];
+            }
+            else
+            {
+                Debug.Log("Filter IconNot found" + itemType); 
+                return null;
+            }
+        }
+        public Sprite GetBGSprite(GenGewgawQ genQ)
+        {
+            switch (genQ)
+            {
+                case GenGewgawQ.None:
+                    break;
+                case GenGewgawQ.Lyric:
+                    return lyricBG;                    
+                case GenGewgawQ.Folkloric:
+                    return folkoricBG;                     
+                case GenGewgawQ.Epic:
+                    return epicBG;                    
+                default:
+                    break;
+                    
+            }
+            return lyricBG;
+        }
+
     }
 }

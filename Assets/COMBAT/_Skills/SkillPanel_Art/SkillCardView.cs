@@ -64,10 +64,16 @@ namespace Combat
             // skill Incli...
             topTrans.GetChild(0).GetChild(0).GetComponent<Image>().sprite
                     =    skillHexSO.GetSkillIncliSprite(skillIncli);
+
+            topTrans.GetChild(0).GetComponent<Image>().sprite
+                    = skillHexSO.GetSkillIncliSpriteBG(skillIncli);
             // attack type...
             AttackType attackType = skillData.attackType;
             topTrans.GetChild(1).GetChild(0).GetComponent<Image>().sprite
-                = skillHexSO.GetSkillAttackType(attackType);
+                             = skillHexSO.GetSkillAttackType(attackType);
+            topTrans.GetChild(1).GetComponent<Image>().sprite
+                             = skillHexSO.GetSkillAttackTypeBG(attackType);
+
 
             // skill name.. 
             topTrans.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text

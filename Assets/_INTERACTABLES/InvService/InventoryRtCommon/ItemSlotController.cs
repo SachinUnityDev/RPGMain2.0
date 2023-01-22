@@ -290,7 +290,6 @@ namespace Interactables
                 return;
             }
         }
-
         void PopulateRightClickList()
         {
             if (ItemsInSlot.Count == 0)
@@ -571,7 +570,6 @@ namespace Interactables
         {
 
         }
-
  
 
         #endregion

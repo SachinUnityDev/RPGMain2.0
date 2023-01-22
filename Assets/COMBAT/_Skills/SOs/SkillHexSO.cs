@@ -112,6 +112,19 @@ namespace Combat
                 return null; 
             }
         }
+        public Sprite GetSkillIncliSpriteBG(SkillInclination skillIncli)
+        {
+            int index = allSkillIncli.FindIndex(t => t.SkillIncliType == skillIncli);
+            if (index != -1)
+            {
+                return allSkillIncli[index].SkillIncliBG;
+            }
+            else
+            {
+                Debug.Log("SkillIncli not found" + allSkillIncli);
+                return null;
+            }
+        }
 
         public Sprite GetSkillAttackType(AttackType attackType)
         {
@@ -126,6 +139,20 @@ namespace Combat
                 return null;
             }
         }
+        public Sprite GetSkillAttackTypeBG(AttackType attackType)
+        {
+            int index = allAttacksSprites.FindIndex(t => t.attackType == attackType);
+            if (index != -1)
+            {
+                return allAttacksSprites[index].attackTypeBG;
+            }
+            else
+            {
+                Debug.Log("attack sprite BG not found" + attackType);
+                return null;
+            }
+        }
+
 
         public Sprite GetHexSprite(HexNames hexName)
         {

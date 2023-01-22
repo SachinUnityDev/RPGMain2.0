@@ -26,6 +26,9 @@ namespace Interactables
         public List<ScrollReadData> allScrollRead = new List<ScrollReadData>();
 
         #region SO LIST REFERNCES 
+        [Header("Item View SO ")]
+        public ItemViewSO itemViewSO;
+
         [Header("Generic gewgaws SO")]
         public List<GenGewgawSO> allGenGewgawSO = new List<GenGewgawSO>();
 
@@ -67,7 +70,8 @@ namespace Interactables
 
         #endregion
 
-       
+        [Header("Item card")]
+        public GameObject itemCardGO; 
         void Start()
         {
             itemFactory = gameObject.GetComponent<ItemFactory>();
@@ -90,9 +94,6 @@ namespace Interactables
         }
 
         #region ITEM SO GETTERS
-
-
-
 
         public HerbSO GetHerbSO(HerbNames herbname)
         {
@@ -217,7 +218,6 @@ namespace Interactables
         #endregion
 
         #region PRICE GETTERS  
-
         public CostData GetCostData(ItemType itemType, int itemName)
         {
             CostData costData = null; 
@@ -290,9 +290,6 @@ namespace Interactables
 
 
         #endregion
-
-        // game reload or item found in the game
-
 
         # region GEMS, ENCHANTMENT AND  SCROLLS
         public bool CanEnchantGemThruScroll(CharController charController, GemNames gemName)
@@ -388,23 +385,18 @@ namespace Interactables
             }
         }
         #endregion
-
-        #region GET SCRIPTABLES 
-
-        #endregion
-
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Gems, (int)GemNames.Ruri,
+                InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionNames.HealthPotion,
                                      CauseType.Items,2); 
         
             }
             if (Input.GetKeyDown(KeyCode.J))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Scrolls, (int)ScrollNames.ScrollOfWater,
-                                     CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.AmetystRing,
+                                     CauseType.Items, 2, GenGewgawQ.Epic);
 
             }
             if (Input.GetKeyDown(KeyCode.G))

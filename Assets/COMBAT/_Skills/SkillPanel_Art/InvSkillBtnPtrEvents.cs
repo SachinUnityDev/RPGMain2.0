@@ -27,7 +27,7 @@ namespace Common
         [Header("Skill HEX SO")] // contain skill card SO 
         public SkillHexSO skillHexSO;
 
-       // [SerializeField] GameObject skillCard;
+      
         [SerializeField] int index = -1;
 
         public SkillSelectState skillState;
@@ -47,6 +47,8 @@ namespace Common
         {
             IsClicked = false;
             prevSkillHovered = SkillNames.None;
+           
+
         }
         #region  POINTER EVENTS
         public void OnPointerClick(PointerEventData eventData)
@@ -84,7 +86,8 @@ namespace Common
             transform.GetChild(0).GetComponent<Image>().sprite = skillHexSO.SkillNormalFrame;
         }
 
-        public void Init(SkillDataSO _skillDataSO, SkillNames _skillName, LeftSkillView leftSkillView)
+        public void Init(SkillDataSO _skillDataSO, SkillNames _skillName    
+                                            , LeftSkillView leftSkillView, bool haslvl)
         {
             skillDataSO = _skillDataSO;
             skillName = _skillName;
@@ -101,9 +104,13 @@ namespace Common
             this.leftSkillView = leftSkillView;
 
             skillCardGO = SkillService.Instance.skillCardGO;
-         
-            //if (skillPtsTrans != null)
-            //    skillPtsTrans.GetComponent<TextMeshProUGUI>().text = skilllvlInt.ToString();
+
+            if (haslvl)
+            {
+                skillPtsTrans = transform.GetChild(1).GetChild(0); 
+                skillPtsTrans.GetComponent<TextMeshProUGUI>().text = skilllvlInt.ToString();
+            }
+                
         }
 
         void HideSkillCard()
@@ -115,14 +122,9 @@ namespace Common
             if (GameService.Instance.gameModel.gameState != GameState.InTown)
                 return; 
 
-           // skillCard.SetActive(true);
-           // SkillServiceView.Instance.pointerOnSkillIcon = true;  // to be checked
             skillDataSO = SkillService.Instance
                                     .GetSkillSO(InvService.Instance.charSelectController.charModel.charName); 
-                       
-            //index = gameObject.transform.GetSiblingIndex();
-            //SkillServiceView.Instance.index = index;
-            //UPDATE SKILL SERVICE
+            
             if (skillDataSO != null)
             {
                 SkillService.Instance.On_SkillHovered(skillDataSO.charName,skillName);

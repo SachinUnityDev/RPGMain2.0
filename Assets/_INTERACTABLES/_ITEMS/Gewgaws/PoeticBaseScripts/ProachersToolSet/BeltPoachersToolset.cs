@@ -10,10 +10,17 @@ namespace Interactables
 
 
 
-    public class BeltPoachersToolset : PoeticGewgawBase
+    public class BeltPoachersToolset : PoeticGewgawBase, Iitems, IEquipAble
     {
         // -12-18% Hunger mod
         public override PoeticGewgawNames poeticGewgawName => PoeticGewgawNames.BeltPoachersToolset;
+        public ItemType itemType => ItemType.PoeticGewgaws;
+        public int itemName => (int)PoeticGewgawNames.BeltPoachersToolset;
+        public int maxInvStackSize { get; set; }
+        public SlotType invSlotType { get; set; }
+        public List<int> allBuffs { get; set; }
+        public int itemId { get; set; }
+
         int valHunger; 
 
         public override void PoeticInit()
@@ -37,5 +44,24 @@ namespace Interactables
             charController.charModel.hungerMod -= valHunger;
         }
 
+        public void InitItem(int itemId, int maxInvStackSize)
+        {
+           
+        }
+
+        public void OnHoverItem()
+        {
+          
+        }
+
+        public void ApplyEquipableFX()
+        {
+            
+        }
+
+        public void RemoveEquipableFX()
+        {
+           
+        }
     }
 }

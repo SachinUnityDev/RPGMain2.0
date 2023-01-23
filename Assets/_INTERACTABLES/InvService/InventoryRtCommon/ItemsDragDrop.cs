@@ -25,12 +25,13 @@ namespace Interactables
         GameObject clone;
 
         [Header("Item Card related")]
-        [SerializeField] GameObject itemCardGO; 
-
+        [SerializeField] GameObject itemCardGO;
+        [SerializeField] Vector3 offset; 
         #endregion
 
         void Start()
         {
+            
             iSlotable = transform.parent.parent.GetComponent<iSlotable>();
             if (iSlotable == null)
                 Debug.Log("ERROR Item Slot Controller Not found");
@@ -51,12 +52,10 @@ namespace Interactables
             ShowItemCard();
         }
     
-   
-      
-
         public void OnPointerExit(PointerEventData eventData)
         {
-           // Debug.Log("Item Exit .. " + itemDragged.itemName);
+            // Debug.Log("Item Exit .. " + itemDragged.itemName);
+           // itemCardGO.SetActive(true);
         }
         void ShowItemCard()
         {
@@ -70,9 +69,23 @@ namespace Interactables
             float height = itemCardGO.GetComponent<RectTransform>().rect.height;
             GameObject Canvas = GameObject.FindWithTag("MainCanvas");
             Canvas canvasObj = Canvas.GetComponent<Canvas>();
+            // get slot index based on slot index adjust the offset
+           Transform slotTrans = transform.parent.parent;
+            int slotIndex = slotTrans.GetSiblingIndex() % 6;
+            Vector3 offsetFinal; 
+            if(slotIndex <= 2)
+            {
+                offset = new Vector3(100, 70,0);
+                offsetFinal = (offset + new Vector3(width / 2, -height / 2, 0)) * canvasObj.scaleFactor;
+            }
+            else
+            {
+                offset = new Vector3(-100, 70,0);
+                offsetFinal = (offset + new Vector3(-width / 2, -height / 2, 0)) * canvasObj.scaleFactor;
+            }
             //Vector3 offSetFinal = (offset + new Vector3(width / 2, -height / 2, 0)) * canvasObj.scaleFactor;
-            //Vector3 pos = transform.position + offSetFinal;
-            itemCardGO.GetComponent<Transform>().DOMove(transform.position, 0.1f);
+            Vector3 pos = transform.position + offsetFinal;
+            itemCardGO.GetComponent<Transform>().DOMove(pos, 0.1f);
             itemCardGO.SetActive(true);
         }
 

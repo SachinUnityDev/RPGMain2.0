@@ -139,7 +139,13 @@ namespace Interactables
                 case ItemType.Meals:  // cannot be carried in inv
                     //sprite = ItemService.Instance.GetPotionSO((PotionName)itemName).iconSprite;
                     break;
-              
+                case ItemType.SagaicGewgaws:
+                    sprite = ItemService.Instance.GetSagaicGewgawSO((SagaicGewgawNames)itemName).iconSprite;
+                    break;
+                case ItemType.PoeticGewgaws:
+                    sprite = ItemService.Instance.GetPoeticGewgawSO((PoeticGewgawNames)itemName).iconSprite;
+                    break;
+
                 default:
                     break;
 

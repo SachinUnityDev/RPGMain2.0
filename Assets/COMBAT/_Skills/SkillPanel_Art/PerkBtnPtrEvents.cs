@@ -26,10 +26,14 @@ namespace Combat
         [SerializeField] Color colorClicked;
         [SerializeField] Color colorUnClickable;
 
+        [Header("Perk Info Panel")]
+        [SerializeField] GameObject perkSelectPanel; 
+
         private void Start()
         {
             InvService.Instance.OnCharSelectInvPanel += OnCharSelect;
             SkillService.Instance.OnPerkStateChg += OnPerkStateChg;      
+
         }
 
       
@@ -209,5 +213,14 @@ namespace Combat
                     break;
             }
         }
+
+        void ShowPerkSelectPanel()
+        {
+            // perkdata 
+        
+
+        }
+
+
     }
 }

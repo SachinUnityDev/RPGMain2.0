@@ -6,10 +6,16 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class SoftAndTenacious : SagaicGewgawBase
+    public class SoftAndTenacious : SagaicGewgawBase, Iitems, IEquipAble
     {
         public override SagaicGewgawNames sagaicGewgawName => SagaicGewgawNames.SoftAndTenacious;
 
+        public ItemType itemType => ItemType.SagaicGewgaws;
+        public int itemName => (int)SagaicGewgawNames.SoftAndTenacious;
+        public int maxInvStackSize { get; set; }
+        public SlotType invSlotType { get; set; }
+        public List<int> allBuffs { get; set; }
+        public int itemId { get; set; }
 
         //When Unslakable: +36-45% Dmg(attribute)
         //First 3 rds of combat: Soaked	
@@ -80,6 +86,26 @@ namespace Interactables
             {
                 charController.buffController.RemoveBuff(i);
             }
+        }
+
+        public void InitItem(int itemId, int maxInvStackSize)
+        {
+           
+        }
+
+        public void OnHoverItem()
+        {
+          
+        }
+
+        public void ApplyEquipableFX()
+        {
+            
+        }
+
+        public void RemoveEquipableFX()
+        {
+           
         }
     }
 }

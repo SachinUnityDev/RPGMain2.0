@@ -10,7 +10,7 @@ namespace Interactables
     public class LegacyOfSpida : PoeticSetBase
     {
         public override PoeticSetName poeticSetName => PoeticSetName.LegacyOfTheSpida;
-    
+
         public override void BonusFx()
         {
             charController = InvService.Instance.charSelectController;

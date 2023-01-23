@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Diagnostics.Contracts;
+using DG.Tweening;
 
 namespace Interactables
 {
@@ -33,7 +34,8 @@ namespace Interactables
         public Sprite lyricBG;
         public Sprite folkoricBG;
         public Sprite epicBG;
-
+        public Sprite sagaicBG;
+        public Sprite poeticBG; 
         private void Awake()
         {
             if (allSlotImgData.Count == 0)

@@ -390,20 +390,22 @@ namespace Interactables
             if (Input.GetKeyDown(KeyCode.H))
             {
                 InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionNames.HealthPotion,
-                                     CauseType.Items,2); 
-        
+                                     CauseType.Items,2);         
             }
             if (Input.GetKeyDown(KeyCode.J))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.AmetystRing,
-                                     CauseType.Items, 2, GenGewgawQ.Epic);
-
+                InitItemToInv(SlotType.CommonInv, ItemType.Scrolls, (int)ScrollNames.ScrollOfFire,
+                                     CauseType.Items, 2, GenGewgawQ.None);
             }
             if (Input.GetKeyDown(KeyCode.G))
             {
                 InitItemToInv(SlotType.CommonInv, ItemType.Gems, (int)GemNames.Oltu,
-                                     CauseType.Items, 2);
-
+                                    CauseType.Items, 2);
+            }
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.AmetystRing,
+                                     CauseType.Items, 2, GenGewgawQ.Epic);
             }
         }
 

@@ -191,6 +191,10 @@ namespace Interactables
                     sagaicGewgaw.InitItem(itemId, sagaicGewgawSO.maxInvStackSize);
                     return sagaicGewgaw;                    
                 case ItemType.PoeticGewgaws:
+                    //Iitems poeticGewgaw = GetNewSagaicGewgaw((SagaicGewgawNames)itemName);
+                    //SagaicGewgawSO sagaicGewgawSO = ItemService.Instance
+                    //                                .GetSagaicGewgawSO((SagaicGewgawNames)itemName);
+                    //sagaicGewgaw.InitItem(itemId, sagaicGewgawSO.maxInvStackSize);
                     break;
                 case ItemType.RelicGewgaws: // not in demo 
                     break;

@@ -107,3 +107,5 @@ MonoBehaviour:
   lyricBG: {fileID: 21300000, guid: df172e088050d4e4e8e205d042033b82, type: 3}
   folkoricBG: {fileID: 21300000, guid: 72a11e8c505ce5040a4bce2033951a63, type: 3}
   epicBG: {fileID: 21300000, guid: 779d8d8b1b95d564ca881768944721c3, type: 3}
+  sagaicBG: {fileID: 21300000, guid: 04e88f52dd2cae44693717948c66efe1, type: 3}
+  poeticBG: {fileID: 21300000, guid: 57b50213a03853c4887a7e6ff2586112, type: 3}

@@ -36,11 +36,10 @@ namespace Interactables
         [SerializeField] Transform itemSlotTrans;
         [SerializeField] Transform currTrans;
 
-        //[Header("Crown top")]
-        //[SerializeField] TextMeshProUGUI headingTxt;
-        //[SerializeField] TextMeshProUGUI restrictionsList; 
+   
         void Start()
         {
+            gameObject.SetActive(false);
             crownTrans = transform.GetChild(0);
             topTrans = transform.GetChild(1);   
             midTrans = transform.GetChild(2);
@@ -133,12 +132,12 @@ namespace Interactables
                         transform.GetComponent<Image>().sprite = itemViewSO.GetBGSprite(genQ);
                        //mid
                        List<string> allLines = new List<string>();
-                        if (genGewgawBase.prefixBase != null)
+                        if (genGewgawBase?.prefixBase != null)
                         {
                             if (genGewgawBase.prefixBase.displayStrs.Count > 0)
                                 allLines.AddRange(genGewgawBase.prefixBase.displayStrs);
                         }
-                        if (genGewgawBase.suffixBase != null)
+                        if (genGewgawBase?.suffixBase != null)
                         {
                             if (genGewgawBase.suffixBase.displayStrs.Count > 0)
                                 allLines.AddRange(genGewgawBase.suffixBase.displayStrs);
@@ -148,33 +147,176 @@ namespace Interactables
                         //btm
                         itemSlotTrans.gameObject.SetActive(false);
                         currTrans.GetComponent<DisplayCurrency>().Display(genGewgawSO.cost);
-
                     }
-
-
                     // subtypes 
                     break;
                 case ItemType.Herbs:
+                    HerbSO herbSO = ItemService.Instance.GetHerbSO((HerbNames)item.itemName);
+                    if (herbSO != null)
+                    {
+                        transform.GetComponent<Image>().sprite = itemViewSO.lyricBG;
+                        crownTrans.gameObject.SetActive(false);
+                        // top
+                        itemNametxt.text = herbSO.herbName.ToString().CreateSpace();
+                        itemTypetxt.text = "Herb";
+                        itemFilterImg.sprite = itemViewSO.GetItemTypeImgData(item.itemType).FilterIconN;
+                        itemImg.sprite = herbSO.iconSprite;
+                        itemSubTypeTrans.gameObject.SetActive(false);
+                        //mid
+                        FillMid(herbSO.allLines);
+                        //btm
+                        itemSlotTrans.gameObject.SetActive(false);
+                        currTrans.GetComponent<DisplayCurrency>().Display(herbSO.cost);
+
+                    }
                     break;
                 case ItemType.Foods:
+                    FoodSO foodSO = ItemService.Instance.GetFoodSO((FoodNames)item.itemName);
+                    if (foodSO != null)
+                    {
+                        transform.GetComponent<Image>().sprite = itemViewSO.lyricBG;
+                        crownTrans.gameObject.SetActive(false);
+                        // top
+                        itemNametxt.text = foodSO.foodName.ToString().CreateSpace();
+                        itemTypetxt.text = "Food";
+                        itemFilterImg.sprite = itemViewSO.GetItemTypeImgData(item.itemType).FilterIconN;
+                        itemImg.sprite = foodSO.iconSprite;
+                        itemSubTypeTrans.gameObject.SetActive(false);
+                        //mid
+                        FillMid(foodSO.allLines);
+                        //btm
+                        itemSlotTrans.gameObject.SetActive(false);
+                        currTrans.GetComponent<DisplayCurrency>().Display(foodSO.cost);
+                    }
                     break;
                 case ItemType.Fruits:
+                    FruitSO fruitSO = ItemService.Instance.GetFruitSO((FruitNames)item.itemName);
+                    if (fruitSO != null)
+                    {
+                        transform.GetComponent<Image>().sprite = itemViewSO.lyricBG;
+                        crownTrans.gameObject.SetActive(false);
+                        // top
+                        itemNametxt.text = fruitSO.fruitName.ToString().CreateSpace();
+                        itemTypetxt.text = "Fruit";
+                        itemFilterImg.sprite = itemViewSO.GetItemTypeImgData(item.itemType).FilterIconN;
+                        itemImg.sprite = fruitSO.iconSprite;
+                        itemSubTypeTrans.gameObject.SetActive(false);
+                        //mid
+                        FillMid(fruitSO.allLines);
+                        //btm
+                        itemSlotTrans.gameObject.SetActive(false);
+                        currTrans.GetComponent<DisplayCurrency>().Display(fruitSO.cost);
+
+                    }
                     break;
                 case ItemType.Ingredients:
+                    IngredSO ingredSO = ItemService.Instance.GetIngredSO((IngredNames)item.itemName);
+                    if (ingredSO != null)
+                    {
+                        transform.GetComponent<Image>().sprite = itemViewSO.lyricBG;
+                        crownTrans.gameObject.SetActive(false);
+                        // top
+                        itemNametxt.text = ingredSO.ingredName.ToString().CreateSpace();
+                        itemTypetxt.text = "Ingredient";
+                        itemFilterImg.sprite = itemViewSO.GetItemTypeImgData(item.itemType).FilterIconN;
+                        itemImg.sprite = ingredSO.iconSprite;
+                        itemSubTypeTrans.gameObject.SetActive(false);
+                        //mid
+                        FillMid(ingredSO.allLines);
+                        //btm
+                        itemSlotTrans.gameObject.SetActive(false);
+                        currTrans.GetComponent<DisplayCurrency>().Display(ingredSO.cost);
+                    }
                     break;
                 case ItemType.XXX:
                     break;
                 case ItemType.Scrolls:
+                    ScrollSO scrollSO = ItemService.Instance.GetScrollSO((ScrollNames)item.itemName);
+                    if (scrollSO != null)
+                    {
+                        transform.GetComponent<Image>().sprite = itemViewSO.lyricBG;
+                        crownTrans.gameObject.SetActive(false);
+                        // top
+                        itemNametxt.text = scrollSO.scrollName.ToString().CreateSpace();
+                        itemTypetxt.text = "Scroll";
+                        itemFilterImg.sprite = itemViewSO.GetItemTypeImgData(item.itemType).FilterIconN;
+                        itemImg.sprite = scrollSO.iconSprite;
+                        itemSubTypeTrans.gameObject.SetActive(false);
+                        //mid
+                        FillMid(scrollSO.allLines);
+                        //btm
+                        itemSlotTrans.gameObject.SetActive(false);
+                        currTrans.GetComponent<DisplayCurrency>().Display(scrollSO.cost);
+                    }
                     break;
-                case ItemType.TradeGoods:
+                case ItemType.TradeGoods:  // start from here
+                    TGSO tgSO = ItemService.Instance.GetTradeGoodsSO((TGNames)item.itemName);
+                    if (tgSO != null)
+                    {
+                        transform.GetComponent<Image>().sprite = itemViewSO.lyricBG;
+                        crownTrans.gameObject.SetActive(false);
+                        // top
+                        itemNametxt.text = tgSO.tgName.ToString().CreateSpace();
+                        itemTypetxt.text = " Trade Goods";
+                        itemFilterImg.sprite = itemViewSO.GetItemTypeImgData(item.itemType).FilterIconN;
+                        itemImg.sprite = tgSO.iconSprite;
+                        itemSubTypeTrans.gameObject.SetActive(false);
+                        //mid
+                        FillMid(tgSO.allLines);
+                        //btm
+                        itemSlotTrans.gameObject.SetActive(false);
+                        currTrans.GetComponent<DisplayCurrency>().Display(tgSO.cost);
+
+                    }
                     break;
                 case ItemType.Tools:
+                    ToolsSO toolSO = ItemService.Instance.GetToolSO((ToolNames)item.itemName);
+                    if (toolSO != null)
+                    {
+                        transform.GetComponent<Image>().sprite = itemViewSO.lyricBG;
+                        crownTrans.gameObject.SetActive(false);
+                        // top
+                        itemNametxt.text = toolSO.toolName.ToString().CreateSpace();
+                        itemTypetxt.text = " Tools";
+                        itemFilterImg.sprite = itemViewSO.GetItemTypeImgData(item.itemType).FilterIconN;
+                        itemImg.sprite = toolSO.iconSprite;
+                        itemSubTypeTrans.gameObject.SetActive(false);
+                        //mid
+                        FillMid(toolSO.allLines);
+                        //btm
+                        itemSlotTrans.gameObject.SetActive(false);
+                        currTrans.GetComponent<DisplayCurrency>().Display(toolSO.cost);
+                    }
                     break;
                 case ItemType.Teas:
                     break;
                 case ItemType.Soups:
                     break;
                 case ItemType.Gems:
+                    GemSO gemSO = ItemService.Instance.GetGemSO((GemNames)item.itemName);
+                    if (gemSO != null)
+                    {
+                        crownTrans.gameObject.SetActive(false);                 
+
+                        // top
+                        itemNametxt.text = gemSO.gemName.ToString().CreateSpace();
+                        itemTypetxt.text = "Gem";
+                        itemFilterImg.sprite = itemViewSO.GetItemTypeImgData(item.itemType).FilterIconN;
+                        itemImg.sprite = gemSO.iconSprite;
+                        itemSubTypeTrans.gameObject.SetActive(true);
+
+                        itemSubTypeTrans.GetChild(0).GetComponent<TextMeshProUGUI>().text
+                                                                    = gemSO.gemType.ToString().CreateSpace();
+
+
+                        transform.GetComponent<Image>().sprite = itemViewSO.lyricBG; 
+                        //mid                       
+                 
+                        FillMid(gemSO.allLines);
+                        //btm
+                        itemSlotTrans.gameObject.SetActive(false);
+                        currTrans.GetComponent<DisplayCurrency>().Display(gemSO.cost);
+                    }
                     // sub types 
                     break;
                 case ItemType.Alcohol:
@@ -182,9 +324,54 @@ namespace Interactables
                 case ItemType.Meals:
                     break;
                 case ItemType.SagaicGewgaws:
-                    // write sagaic
+                    SagaicGewgawSO sagaicGewgawSO = ItemService.Instance.GetSagaicGewgawSO((SagaicGewgawNames)item.itemName);
+                    if (sagaicGewgawSO != null)
+                    {
+                        crownTrans.gameObject.SetActive(false);                      
+
+                        // top
+                        itemNametxt.text = sagaicGewgawSO.sagaicGewgawName.ToString().CreateSpace();
+                        itemTypetxt.text = "Gewgaw";
+                        itemFilterImg.sprite = itemViewSO.GetItemTypeImgData(item.itemType).FilterIconN;
+                        itemImg.sprite = sagaicGewgawSO.iconSprite;
+
+                        itemSubTypeTrans.gameObject.SetActive(true);
+                        itemSubTypeTrans.GetChild(0).GetComponent<TextMeshProUGUI>().text
+                                                                    = "Sagaic";
+
+                        transform.GetComponent<Image>().sprite = itemViewSO.sagaicBG;
+                        //mid
+                        FillMid(sagaicGewgawSO.allLines);
+
+                        //btm
+                        itemSlotTrans.gameObject.SetActive(false);
+                        currTrans.GetComponent<DisplayCurrency>().Display(sagaicGewgawSO.cost);
+                    }
                     break;
                 case ItemType.PoeticGewgaws:
+                    PoeticGewgawSO poeticGewgawSO = ItemService.Instance.GetPoeticGewgawSO((PoeticGewgawNames)item.itemName);
+                    if (poeticGewgawSO != null)
+                    {
+                        crownTrans.gameObject.SetActive(false);
+
+                        // top
+                        itemNametxt.text = poeticGewgawSO.poeticGewgawName.ToString().CreateSpace();
+                        itemTypetxt.text = "Gewgaw";
+                        itemFilterImg.sprite = itemViewSO.GetItemTypeImgData(item.itemType).FilterIconN;
+                        itemImg.sprite = poeticGewgawSO.iconSprite;
+
+                        itemSubTypeTrans.gameObject.SetActive(true);
+                        itemSubTypeTrans.GetChild(0).GetComponent<TextMeshProUGUI>().text
+                                                                    = "Poetic";
+
+                        transform.GetComponent<Image>().sprite = itemViewSO.epicBG;
+                        //mid
+                        //FillMid(poeticGewgawSO.allLines);
+
+                        //btm
+                        itemSlotTrans.gameObject.SetActive(false);
+                        currTrans.GetComponent<DisplayCurrency>().Display(poeticGewgawSO.cost);
+                    }
                     // write Poetic
                     break;
                 case ItemType.RelicGewgaws:

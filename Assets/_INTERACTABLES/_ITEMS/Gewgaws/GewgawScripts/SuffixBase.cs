@@ -12,7 +12,7 @@ namespace Interactables
         public abstract SuffixNames suffixName { get; }
         public  CharController charController { get; set; } 
         public List<int> buffIndex { get; set; }
-        public List<string> displayStrs { get; set; }
+        public List<string> displayStrs { get; set; } = new List<string>(); 
         
 
     }

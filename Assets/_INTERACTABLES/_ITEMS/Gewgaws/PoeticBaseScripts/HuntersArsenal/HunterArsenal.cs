@@ -10,10 +10,11 @@ namespace Interactables
     public class HunterArsenal : PoeticSetBase
     {
         public override PoeticSetName poeticSetName => PoeticSetName.FirstHuntersArsenal;
-        
+
         //"when Hungry: +3 vigor,when Thirsty: +3 Wp"	
         //+1 Morale per Animal in enemy party	
         //Enemy Party: Animals: First 3 rds of combat: -4 Haste
+
 
         public override void BonusFx()
         {
@@ -24,8 +25,6 @@ namespace Interactables
 
         void OnTempTraitSpec(TempTraitData tempTraitData)
         {
-           
-
             if (tempTraitData.tempTraitName  == TempTraitName.Hungry)
             {
               

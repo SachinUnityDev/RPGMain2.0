@@ -9,9 +9,16 @@ namespace Interactables
 {
 
 
-    public class GlovesLegacyOfSpida : PoeticGewgawBase
+    public class GlovesLegacyOfSpida : PoeticGewgawBase, Iitems, IEquipAble 
     {
         public override PoeticGewgawNames poeticGewgawName => PoeticGewgawNames.GlovesLegacyOfTheSpida;
+        public ItemType itemType => ItemType.PoeticGewgaws;
+        public int itemName => (int)PoeticGewgawNames.GlovesLegacyOfTheSpida;
+        public int maxInvStackSize { get; set; }
+        public SlotType invSlotType { get; set; }
+        public List<int> allBuffs { get; set; }
+        public int itemId { get; set; }
+
         // +2-3 Dodge
         int valDodge; 
         public override void PoeticInit()
@@ -33,6 +40,24 @@ namespace Interactables
         {
             buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
         }
-    
+
+        public void InitItem(int itemId, int maxInvStackSize)
+        {
+
+        }
+
+        public void OnHoverItem()
+        {
+
+        }
+
+        public void ApplyEquipableFX()
+        {   
+            
+        }
+
+        public void RemoveEquipableFX()
+        {           
+        }
     }
 }

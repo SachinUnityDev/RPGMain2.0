@@ -14,23 +14,25 @@ namespace Interactables
         /// when u know the recipe you can make them at specific places 
         /// if you have the item in the inv 
         /// </summary>
-
-       
         public RecipeModel recipeModel; 
         public List<IRecipe> knownRecipes = new List<IRecipe>();  
-
+        
         void Start()
         {
-
+            Init();
         }
-
-        public IRecipe CreateRecipe(ItemData pdtName)
+        void Init()
         {
+            List<MealNames> defaultRecipes = new List<MealNames>() 
+                                            { MealNames.BeefSteak, MealNames.CookedFish
+                                            , MealNames.CookedVenison, MealNames.RoastedChicken
+                                            , MealNames.CookedHam, MealNames.CookedMutton};
 
-
-            return null; 
+            foreach (MealNames mealName in defaultRecipes)
+            {
+                recipeModel.allRecipeKnown.Add(new ItemData(ItemType.Meals, (int)mealName));
+            }
         }
-
 
         public bool AddRecipe2Known(ItemData itemData)
         {
@@ -43,7 +45,6 @@ namespace Interactables
             {
                 return false; 
             }
-            
         }
         public bool RemoveRecipeFrmKnown(ItemData itemData)
         {

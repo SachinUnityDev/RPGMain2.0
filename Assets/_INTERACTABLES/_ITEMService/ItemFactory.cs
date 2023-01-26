@@ -38,6 +38,10 @@ namespace Interactables
         [Header("SAGAIC GEWGAWS")]
         Dictionary<SagaicGewgawNames,  Type> allSagaicGewgaws = new Dictionary<SagaicGewgawNames, Type>();
 
+        [Header("Poetic GEWGAWS")]
+        Dictionary<PoeticGewgawNames, Type> allPoeticGewgaws = new Dictionary<PoeticGewgawNames, Type>();
+
+
         [Header("POTIONS")]
         Dictionary<PotionNames, Type> allPotions= new Dictionary<PotionNames, Type>();
 
@@ -65,6 +69,18 @@ namespace Interactables
         [Header("Recipe Factory")]
         Dictionary<ItemData, Type> allRecipes = new Dictionary<ItemData, Type>();
 
+        [Header("Meals")]
+        Dictionary<MealNames, Type> allMeals = new Dictionary<MealNames, Type>();
+
+        [Header("Alcohol")]
+        Dictionary<AlcoholNames, Type> allAcohols  = new Dictionary<AlcoholNames, Type>();
+
+        [Header("Soups")]
+        Dictionary<SoupNames, Type> allSoups = new Dictionary<SoupNames, Type>();
+        
+        [Header("Tea")]
+        Dictionary<TeaNames, Type> allTea = new Dictionary<TeaNames, Type>();
+
 
         LoreScroll loreScroll; 
 
@@ -74,6 +90,7 @@ namespace Interactables
         [SerializeField] int gemsCount = 0;
         [SerializeField] int genGewgawCount = 0;
         [SerializeField] int sagaicGewgawCount = 0;
+        [SerializeField] int poeticGewgawCount = 0;
         [SerializeField] int potionCount = 0;
         [SerializeField] int herbCount = 0;
         [SerializeField] int fruitCount = 0;
@@ -82,7 +99,13 @@ namespace Interactables
         [SerializeField] int ingredCount = 0;
         [SerializeField] int scrollCount = 0;
         [SerializeField] int TgCount = 0;
-        [SerializeField] int recipeCount = 0; 
+        [SerializeField] int recipeCount = 0;
+        [SerializeField] int mealCount = 0;
+        [SerializeField] int alcoholCount = 0;
+        [SerializeField] int soupCount = 0;
+        [SerializeField] int teaCount = 0; 
+
+
         void Start()
         {
             itemId =-1;
@@ -98,10 +121,13 @@ namespace Interactables
             FruitInit();
             GemsInit();
             SagaicGewgawInit();
+            PoeticGewgawInit();
             IngredInit();
             EnchantmentScrollsInit();
             TradeGoodsInit();
             ToolsInit();
+            MealsInit();
+            AlcoholInit();
            // RecipeInit(); 
         }
         public Iitems GetNewGenGewgaw(GenGewgawNames genGewgawNames, GenGewgawQ genGewgawQ)
@@ -125,8 +151,9 @@ namespace Interactables
             {
                 case ItemType.Potions:
                     Iitems itemPotion = GetNewPotionItem((PotionNames)itemName);
-                    PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionNames)itemName);
+                    PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionNames)itemName);                    
                     itemPotion.InitItem(itemId, potionSO.maxInvStackSize);
+                    ItemService.Instance.allItemsInGame.Add(itemPotion);    
                     return itemPotion;
                 //case ItemType.GenGewgaws:
                 //    //Iitems itemGengewgaw = GetGenGewgaws((GenGewgawNames)itemName);                     
@@ -135,13 +162,15 @@ namespace Interactables
                 //    //return itemGengewgaw;
                 case ItemType.Herbs:
                     Iitems itemHerbs = GetNewHerbItem((HerbNames)itemName);
-                    HerbSO herbSO = ItemService.Instance.GetHerbSO((HerbNames)itemName);
+                    HerbSO herbSO = ItemService.Instance.GetHerbSO((HerbNames)itemName);              
                     itemHerbs.InitItem(itemId, herbSO.maxInvStackSize);
+                    ItemService.Instance.allItemsInGame.Add(itemHerbs);
                     return itemHerbs;
                 case ItemType.Foods:
                     Iitems itemFoods = GetNewFoodItem((FoodNames)itemName);
                     FoodSO foodSO = ItemService.Instance.GetFoodSO((FoodNames)itemName);
                     itemFoods.InitItem(itemId, foodSO.maxInvStackSize);
+                    ItemService.Instance.allItemsInGame.Add(itemFoods);
                     return itemFoods;
                 case ItemType.Fruits:
                     break;
@@ -149,6 +178,7 @@ namespace Interactables
                     Iitems itemIngred = GetNewIngredItem((IngredNames)itemName);
                     IngredSO ingredSO = ItemService.Instance.GetIngredSO((IngredNames)itemName);
                     itemIngred.InitItem(itemId, ingredSO.maxInvStackSize);
+                    ItemService.Instance.allItemsInGame.Add(itemIngred);
                     return itemIngred;
                 case ItemType.XXX:     
                     break;
@@ -156,19 +186,22 @@ namespace Interactables
                     Iitems itemScrolls = GetNewScrollItem((ScrollNames)itemName);
                     ScrollSO scrollSO = ItemService.Instance.GetScrollSO((ScrollNames)itemName);
                     itemScrolls.InitItem(itemId, scrollSO.maxInvStackSize);
+                    ItemService.Instance.allItemsInGame.Add(itemScrolls);
                     return itemScrolls;
                     
                 case ItemType.TradeGoods:
                     Iitems itemTg = GetNewTgItem((TGNames)itemName);
                     TGSO tgSO = ItemService.Instance.GetTradeGoodsSO((TGNames)itemName);
                     itemTg.InitItem(itemId, tgSO.maxInvStackSize);
+                    ItemService.Instance.allItemsInGame.Add(itemTg);
                     return itemTg; 
                   
                 case ItemType.Tools:
-                    Iitems tool = GetNewToolItem((ToolNames)itemName);
+                    Iitems toolItem = GetNewToolItem((ToolNames)itemName);
                     ToolsSO toolSO = ItemService.Instance.GetToolSO((ToolNames)itemName);
-                    tool.InitItem(itemId, toolSO.maxInvStackSize);
-                    return tool;                    
+                    toolItem.InitItem(itemId, toolSO.maxInvStackSize);
+                    ItemService.Instance.allItemsInGame.Add(toolItem);
+                    return toolItem;                    
                 case ItemType.Teas: // not in demo 
                     break;
                 case ItemType.Soups:// not in demo 
@@ -177,25 +210,36 @@ namespace Interactables
                     Iitems itemGems = GetNewGemItem((GemNames)itemName);
                     GemSO gemSO = ItemService.Instance.GetGemSO((GemNames)itemName);
                     itemGems.InitItem(itemId, gemSO.maxInvStackSize);
+                    ItemService.Instance.allItemsInGame.Add(itemGems);
                     return itemGems;
                 case ItemType.Alcohol:// not in demo 
-
-
-                    break;
-                case ItemType.Meals:// not in demo 
-                    break;
+                    Iitems alcoholItem = GetNewAlcoholItem((AlcoholNames)itemName);
+                    AlcoholSO alcoholSO = ItemService.Instance
+                                                    .GetAlcoholSO((AlcoholNames)itemName);
+                    alcoholItem.InitItem(itemId, alcoholSO.maxInvStackSize);
+                    ItemService.Instance.allItemsInGame.Add(alcoholItem);
+                    return alcoholItem;
+                case ItemType.Meals:
+                    Iitems mealItem = GetNewMealItem((MealNames)itemName);
+                    MealsSO mealSO = ItemService.Instance
+                                                    .GetMealSO((MealNames)itemName);
+                    mealItem.InitItem(itemId, mealSO.maxInvStackSize);
+                    ItemService.Instance.allItemsInGame.Add(mealItem);
+                    return mealItem;
                 case ItemType.SagaicGewgaws:
                     Iitems sagaicGewgaw = GetNewSagaicGewgaw((SagaicGewgawNames)itemName);
                     SagaicGewgawSO sagaicGewgawSO = ItemService.Instance
                                                     .GetSagaicGewgawSO((SagaicGewgawNames)itemName);
                     sagaicGewgaw.InitItem(itemId, sagaicGewgawSO.maxInvStackSize);
+                    ItemService.Instance.allItemsInGame.Add(sagaicGewgaw);
                     return sagaicGewgaw;                    
                 case ItemType.PoeticGewgaws:
-                    //Iitems poeticGewgaw = GetNewSagaicGewgaw((SagaicGewgawNames)itemName);
-                    //SagaicGewgawSO sagaicGewgawSO = ItemService.Instance
-                    //                                .GetSagaicGewgawSO((SagaicGewgawNames)itemName);
-                    //sagaicGewgaw.InitItem(itemId, sagaicGewgawSO.maxInvStackSize);
-                    break;
+                    Iitems poeticGewgaw = GetNewPoeticGewgaw((PoeticGewgawNames)itemName);
+                    PoeticGewgawSO poeticGewgawSO = ItemService.Instance
+                                                    .GetPoeticGewgawSO((PoeticGewgawNames)itemName);
+                    poeticGewgaw.InitItem(itemId, poeticGewgawSO.maxInvStackSize);
+                    ItemService.Instance.allItemsInGame.Add(poeticGewgaw);
+                    return poeticGewgaw;                    
                 case ItemType.RelicGewgaws: // not in demo 
                     break;
                 default:
@@ -397,6 +441,40 @@ namespace Interactables
         }
         #endregion
 
+        #region POETIC GEWGAWS
+        public void PoeticGewgawInit()
+        {
+            if (allPoeticGewgaws.Count > 0) return;
+            var getPoeticGewgaws = Assembly.GetAssembly(typeof(PoeticGewgawBase)).GetTypes()
+                                   .Where(myType => myType.IsClass
+                                   && !myType.IsAbstract && myType.IsSubclassOf(typeof(PoeticGewgawBase)));
+
+            foreach (var getPoetic in getPoeticGewgaws)
+            {
+                var t = Activator.CreateInstance(getPoetic) as PoeticGewgawBase;
+                allPoeticGewgaws.Add(t.poeticGewgawName, getPoetic);
+            }
+            poeticGewgawCount = allPoeticGewgaws.Count;
+        }
+
+        public Iitems GetNewPoeticGewgaw(PoeticGewgawNames poeticName)
+        {
+            foreach (var poetic in allPoeticGewgaws)
+            {
+                if (poetic.Key == poeticName)
+                {
+                    var t = Activator.CreateInstance(poetic.Value) as Iitems;
+                    return t;
+                }
+            }
+            return null;
+        }
+
+
+        #endregion 
+
+
+
         #region POTIONS 
 
         public void PotionInit()
@@ -564,6 +642,75 @@ namespace Interactables
         }
 
         #endregion
+
+        #region MEALS
+
+        public void MealsInit()
+        {
+            if (allMeals.Count > 0) return;
+            var getMeals = Assembly.GetAssembly(typeof(MealBase)).GetTypes()
+                                   .Where(myType => myType.IsClass
+                                   && !myType.IsAbstract && myType.IsSubclassOf(typeof(MealBase)));
+
+            foreach (var getMeal in getMeals)
+            {
+                var t = Activator.CreateInstance(getMeal) as MealBase;
+
+                allMeals.Add(t.mealName, getMeal);
+            }
+            mealCount = allMeals.Count;
+        }
+
+        public Iitems GetNewMealItem(MealNames _mealName)
+        {
+            foreach (var meal in allMeals)
+            {
+                if (meal.Key == _mealName)
+                {
+                    var t = Activator.CreateInstance(meal.Value) as Iitems;
+                    return t;
+                }
+            }
+            Debug.Log("meal base class Not found" + _mealName);
+            return null;
+        }
+        #endregion
+
+        #region ALCOHOL
+        public void AlcoholInit()
+        {
+            if (allAcohols.Count > 0) return;
+            var getAlcohols = Assembly.GetAssembly(typeof(AlcoholBase)).GetTypes()
+                                   .Where(myType => myType.IsClass
+                                   && !myType.IsAbstract && myType.IsSubclassOf(typeof(AlcoholBase)));
+
+            foreach (var getAlcohol in getAlcohols)
+            {
+                var t = Activator.CreateInstance(getAlcohol) as AlcoholBase;
+
+                allAcohols.Add(t.alcoholName, getAlcohol);
+            }
+            alcoholCount = allAcohols.Count;
+        }
+
+        public Iitems GetNewAlcoholItem(AlcoholNames _alcoholNames)
+        {
+            foreach (var alcohol in allAcohols)
+            {
+                if (alcohol.Key == _alcoholNames)
+                {
+                    var t = Activator.CreateInstance(alcohol.Value) as Iitems;
+                    return t;
+                }
+            }
+            Debug.Log("alcohol base class Not found" + _alcoholNames);
+            return null;
+        }
+
+        #endregion
+
+
+
         #region RECIPES
         //public void RecipeInit()
         //{

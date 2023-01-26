@@ -1,4 +1,5 @@
 using Common;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -18,52 +19,133 @@ namespace Interactables
         [SerializeField] Button mergingBtn;
         [SerializeField] Button loreEnchantBtn;
 
+
+      
+
         [Header("page Turn Btn")]
-        [SerializeField] Button pageTurn; 
+        [SerializeField] Button pageBtn; 
 
         [Header("Containers")]
-        [SerializeField] Transform pageTrans;
+        [SerializeField] Transform pageContainer;
         [SerializeField] GameObject recipePrefab; 
 
-        [Header("Not to be ref")]
-        [SerializeField] TextMeshProUGUI titleTxt; 
+  
+
+        [Header("Recipe Type Selected")]
+        public RecipeType recipeTypeSelect;
+        [SerializeField] TextMeshProUGUI recipeTypeTxt; 
+        public List<ItemData> recipeLs = new List<ItemData>();
+
+        [Header("Recipe Pages")]
+        [SerializeField] int pageIndex;
+        [SerializeField]const int PANEL_PER_page = 5;
+        [SerializeField] int netPages = -1;
 
         void Start()
         {
-            titleTxt = pageTrans.GetChild(0).GetComponent<TextMeshProUGUI>();   
+            
+            pageContainer = transform.GetChild(1);
+            pageIndex = 1;
+            cookingBtn.onClick.AddListener(OnCookingBtnPressed); 
+            craftingBtn.onClick.AddListener(OnCraftingBtnPressed);  
+            mergingBtn.onClick.AddListener(OnMergingBtnPressed);
+            brewingBtn.onClick.AddListener(OnBrewingBtnPressed); 
 
+            pageBtn.onClick.AddListener(OnPageBtnPressed);
+
+            recipeTypeTxt = transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
         }
+        
         #region Button responses
         void OnCookingBtnPressed()
         {
-            // list allknown cooking recipes
-            // get item data from item data get SO and SO => list data
-
+            On_RecipeTypeSelect(RecipeType.Cooking); 
         }
-        void OnAlcoholBtnPressed()
+     
+        void OnBrewingBtnPressed()
         {
-
+            On_RecipeTypeSelect(RecipeType.Brewing);
         }
         void OnCraftingBtnPressed()
         {
-
+            On_RecipeTypeSelect(RecipeType.Crafting);
         }
         void OnMergingBtnPressed()
         {
-
+            On_RecipeTypeSelect(RecipeType.Merging);
         }
+
         void OnLoreEnchantBtnPressed()
         {
-
+            
         }
-
+        void On_RecipeTypeSelect(RecipeType recipeType)
+        {
+            recipeTypeSelect = recipeType;
+            recipeTypeTxt.text = recipeType.ToString();
+            
+            PopulateTheRecipe();
+        }
 
         #endregion 
 
-
-        public void Init()
+        void OnPageBtnPressed()
+        {            
+            PopulatePageScroll();  
+        }
+        void PopulateTheRecipe()
         {
-          
+            recipeLs.Clear();
+            recipeLs = RecipeService.Instance.recipeModel.GetRecipeTypeKnown(recipeTypeSelect);
+            int recipeCount = recipeLs.Count;
+
+            if (recipeCount % 5 == 0)
+                netPages = recipeCount / 5;
+            else
+                netPages = (recipeCount / 5) + 1;
+
+            int index = pageIndex * PANEL_PER_page;
+            int j = 0;
+            for (int i = index - 5; i < index; i++)
+            {
+                if (i < recipeLs.Count)
+                {
+                    Debug.Log("PAGE..." + pageContainer.GetChild(j).name);
+                    pageContainer.GetChild(j).gameObject.SetActive(true);
+                    pageContainer.GetChild(j).GetComponent<RecipePanelView>().Init(recipeLs[i]);
+                }
+                else
+                {
+                    pageContainer.GetChild(j).gameObject.SetActive(false);
+                }
+                j++;
+                if (j > 5)
+                    j = 0;
+
+            }
+        }
+
+        void PopulatePageScroll()
+        {
+            if (netPages > 0 && pageIndex < netPages)
+            {
+                pageIndex++;
+            }
+            else
+            {
+                pageIndex = 1;
+            }
+            PopulateTheRecipe();
+        }
+ 
+ 
+        
+        public void Init( )
+        {
+           
+
+           // RecipeService.Instance.
+           // get irecipe     
         }
 
         public void Load()

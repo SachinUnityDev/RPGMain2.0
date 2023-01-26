@@ -9,7 +9,7 @@ namespace Interactables
     [CreateAssetMenu(fileName = "MealSO", menuName = "Item Service/MealSO")]
     public class MealsSO : ScriptableObject
     {
-        public MealsNames mealName;
+        public MealNames mealName;
         public int maxInvStackSize; 
         public int maxWorldInstance;
 
@@ -18,6 +18,11 @@ namespace Interactables
         [TextArea(5, 10)]
         public List<string> allLines = new List<string>();
 
+        [Header("Recipe Info")]
+        public RecipeType recipeType;
+        public Sprite recipeSprite; 
+        public Currency recipePrice; 
+                
 
         private void Awake()
         {

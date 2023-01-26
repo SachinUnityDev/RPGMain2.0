@@ -22,7 +22,9 @@ using UnityEngine;
     {  
          ItemData toolData { get; set; }
          List<IngredData> allIngredData { get; set; }
+         //RecipeType type { get; set; }   
          void RecipeInit(); 
+        
     }
 }
 

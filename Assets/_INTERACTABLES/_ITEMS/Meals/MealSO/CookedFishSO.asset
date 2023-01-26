@@ -17,3 +17,8 @@ MonoBehaviour:
   maxWorldInstance: 100
   iconSprite: {fileID: 21300000, guid: a463609ccaecc394da85b64e7fa78f89, type: 3}
   allLines: []
+  recipeType: 1
+  recipeSprite: {fileID: 21300000, guid: 45200c1b0154beb4d807cd110d3f717a, type: 3}
+  recipePrice:
+    silver: 0
+    bronze: 0

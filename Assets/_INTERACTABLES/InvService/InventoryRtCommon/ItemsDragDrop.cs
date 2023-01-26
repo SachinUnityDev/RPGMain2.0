@@ -43,13 +43,13 @@ namespace Interactables
             canvas = GetComponentInParent<Canvas>();
             itemCardGO = ItemService.Instance.itemCardGO; 
         }
-
-
-
         public void OnPointerEnter(PointerEventData eventData)
-        {
-            Debug.Log("Item Enter .. " + iSlotable.ItemsInSlot[0]);
-            ShowItemCard();
+        {            
+            if(iSlotable.ItemsInSlot.Count != 0)
+            {
+                Debug.Log("Item Enter .. " + iSlotable.ItemsInSlot[0]);
+                ShowItemCard();
+            }
         }
     
         public void OnPointerExit(PointerEventData eventData)

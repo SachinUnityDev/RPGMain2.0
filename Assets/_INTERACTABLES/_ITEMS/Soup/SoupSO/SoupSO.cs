@@ -17,11 +17,15 @@ namespace Interactables
         [TextArea(5, 10)]
         public List<string> allLines = new List<string>();
 
-
+        [Header("Recipe Info")]
+        public RecipeType recipeType;
+        public Sprite recipeSprite;
+        public Currency recipePrice;
         private void Awake()
         {
             maxInvStackSize = 1;
             maxWorldInstance = 100;
+            recipePrice = new Currency(0, 20); 
         }
     }
 }

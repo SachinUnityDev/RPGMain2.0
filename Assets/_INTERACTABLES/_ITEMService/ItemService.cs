@@ -68,6 +68,12 @@ namespace Interactables
         [Header("All Trade goods SO")]
         public List<TGSO> allTGSO = new List<TGSO>();
 
+        [Header("All Meal SO ")]
+        public List<MealsSO> allMealsSO = new List<MealsSO>();
+
+        [Header("All Alcohol SO")]
+        public List<AlcoholSO> allAlcoholSO = new List<AlcoholSO>();
+
         #endregion
 
         [Header("Item card")]
@@ -92,6 +98,39 @@ namespace Interactables
 
             }
         }
+
+        #region ITEM BASE
+
+        public Iitems GetItemBase(ItemData itemData, GenGewgawQ genQ = GenGewgawQ.None)
+        {
+            int index = 
+            allItemsInGame.FindIndex(t => t.itemName == itemData.ItemName && t.itemType == itemData.itemType); 
+            if(index != -1)
+            {
+                return allItemsInGame[index];
+            }
+            else
+            {
+                return GetNewItem(itemData, genQ); // which slot to add this to ?? 
+            }
+        }
+
+        public Iitems GetNewItem(ItemData itemData , GenGewgawQ genQ = GenGewgawQ.None)
+        {
+            Iitems iitems; 
+            if(genQ == GenGewgawQ.None)
+            {
+                iitems = itemFactory.GetNewItem(itemData.itemType, itemData.ItemName);
+            }
+            else
+            {
+                iitems = itemFactory.GetNewGenGewgaw((GenGewgawNames)itemData.ItemName, genQ);
+            }
+            return iitems;
+        }
+        #endregion 
+
+
 
         #region ITEM SO GETTERS
 
@@ -176,7 +215,7 @@ namespace Interactables
             if (foodSO != null)
                 return foodSO;
             else
-                Debug.Log("foodSO  not found");
+                Debug.Log("foodSO  not found" + foodName);
             return null;
         }
         public FruitSO GetFruitSO(FruitNames fruitName)
@@ -215,6 +254,28 @@ namespace Interactables
                 Debug.Log("Trade goods SO  not found");
             return null;
         }
+
+        public MealsSO GetMealSO(MealNames mealName)
+        {
+            MealsSO mealSO = allMealsSO.Find(t => t.mealName == mealName);
+            if (mealSO != null)
+                return mealSO;
+            else
+                Debug.Log("meal  SO  not found" + mealName);
+            return null;
+        }
+
+        public AlcoholSO GetAlcoholSO(AlcoholNames alcoholName)
+        {
+            AlcoholSO alcoholSO = allAlcoholSO.Find(t => t.alcoholName == alcoholName);
+            if (alcoholSO != null)
+                return alcoholSO;
+            else
+                Debug.Log("alcohol SO  not found" + alcoholName);
+            return null;
+        }
+
+
         #endregion
 
         #region PRICE GETTERS  

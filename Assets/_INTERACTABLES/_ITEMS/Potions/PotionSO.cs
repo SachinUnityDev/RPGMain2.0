@@ -10,7 +10,6 @@ namespace Interactables
 
     public class PotionSO : ScriptableObject
     {
-
         public PotionNames potionName;
         public float potionAddict = 0f;
         public int maxInvStackSize;

@@ -129,6 +129,14 @@ namespace Interactables
 
     }
 
+    public enum RecipeType
+    {
+        None, 
+        Cooking, 
+        Crafting, 
+        Merging, 
+        Brewing, 
+    }
     public enum Pouches
     {
         None, 
@@ -157,7 +165,7 @@ namespace Interactables
         MushroomSoup, 
         FishSoup, 
     }
-    public enum MealsNames
+    public enum MealNames
     {
         None,
         BeefSteak, 
@@ -256,14 +264,7 @@ namespace Interactables
         Mangosteen,
         Citrus,
     }
-    public enum RecipeType
-    {
-        None, 
-        Cooking, 
-        Brewing, 
-        Crafting, 
-        Merging, 
-    }
+
     public enum IngredNames  // Can only be ingredient in receipe and cannot be food pr fruits
     {
         None,

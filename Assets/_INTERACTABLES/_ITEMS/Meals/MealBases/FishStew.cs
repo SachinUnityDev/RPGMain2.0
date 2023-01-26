@@ -4,16 +4,17 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class FishStew : IRecipe, Iitems
+    public class FishStew : MealBase,  IRecipe, Iitems
     {
+        public override MealNames mealName => MealNames.FishStew;
         public int itemId { get; set; }
         public ItemType itemType => ItemType.Meals;
-        public int itemName => (int)MealsNames.CookedVenison;
+        public int itemName => (int)MealNames.CookedVenison;
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; }
         public ItemData toolData { get; set; }
-        public List<IngredData> allIngredData { get; set; }
+        public List<IngredData> allIngredData { get; set; } = new List<IngredData>();
         public void RecipeInit()
         {
             toolData = new ItemData(ItemType.Tools, (int)ToolNames.CookingPot);
@@ -33,7 +34,9 @@ namespace Interactables
 
         public void InitItem(int itemId, int maxInvStackSize)
         {
-
+            RecipeInit();
+            this.itemId = itemId;
+            this.maxInvStackSize = maxInvStackSize;
         }
 
         public void OnHoverItem()

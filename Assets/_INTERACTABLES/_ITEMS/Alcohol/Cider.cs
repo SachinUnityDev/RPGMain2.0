@@ -6,8 +6,9 @@ using UnityEngine;
 namespace Interactables
 {
 
-    public class Cider : IRecipe, Iitems
+    public class Cider :AlcoholBase, IRecipe, Iitems
     {
+        public override AlcoholNames alcoholName => AlcoholNames.Cider;
         public int itemId { get; set; }
         public ItemType itemType => ItemType.Alcohol;
         public int itemName => (int)AlcoholNames.Cider;
@@ -33,6 +34,7 @@ namespace Interactables
         public void InitItem(int itemId, int maxInvStackSize)
         {
 
+          
         }
         public void OnHoverItem()
         {

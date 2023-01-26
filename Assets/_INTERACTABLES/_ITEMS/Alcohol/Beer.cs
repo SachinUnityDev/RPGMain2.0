@@ -7,9 +7,9 @@ using UnityEngine;
 namespace Interactables
 {
 
-    public class Beer : IRecipe, Iitems
+    public class Beer : AlcoholBase, IRecipe, Iitems
     {
-
+        public override AlcoholNames alcoholName => AlcoholNames.Beer;
         public int itemId { get; set; }
         public ItemType itemType => ItemType.Alcohol;
         public int itemName => (int)AlcoholNames.Beer;
@@ -18,6 +18,9 @@ namespace Interactables
         public List<int> allBuffs { get; set; }
         public ItemData toolData { get; set; }
         public List<IngredData> allIngredData { get; set; }
+
+
+
         public void RecipeInit()
         {
             toolData = new ItemData(ItemType.Tools, (int)ToolNames.Fermentor);

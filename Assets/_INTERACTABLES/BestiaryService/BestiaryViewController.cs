@@ -152,7 +152,7 @@ namespace Interactables
                 else
                 {
                     Debug.Log("Low Child count vs Racetype");
-                }            
+                }
             }
         }
 

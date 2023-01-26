@@ -66,7 +66,7 @@ namespace Interactables
                     transform.GetChild(0).GetChild(j).gameObject.SetActive(true);
                     transform.GetChild(0).GetChild(j).GetComponent<RecipeItemPtrEvents>().Init(ingredItem, allIngredData[i]);
                 }
-                for (int k = j+2; k <= 8; k++)
+                for (int k = j+1; k <= 8; k++)
                 {
                     transform.GetChild(0).GetChild(k).gameObject.SetActive(false);                    
                 }
@@ -89,12 +89,12 @@ namespace Interactables
                 case ItemType.Potions:
                     PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionNames)itemData.ItemName);                   
                     finalPdtTrans.GetComponent<Image>().sprite = potionSO.iconSprite;
-                    slotTitleTxt.text = potionSO.potionName.ToString();
+                    slotTitleTxt.text = potionSO.potionName.ToString().CreateSpace();
                     break;
                 case ItemType.GenGewgaws:
                     GenGewgawSO genSO = ItemService.Instance.GetGenGewgawSO((GenGewgawNames)itemData.ItemName);
                     finalPdtTrans.GetComponent<Image>().sprite = genSO.iconSprite;
-                    slotTitleTxt.text = genSO.genGewgawName.ToString();
+                    slotTitleTxt.text = genSO.genGewgawName.ToString().CreateSpace();
                     break;
                 case ItemType.Herbs:
                     break;
@@ -121,12 +121,12 @@ namespace Interactables
                 case ItemType.Alcohol:
                     AlcoholSO alcoholSO = ItemService.Instance.GetAlcoholSO((AlcoholNames)itemData.ItemName);
                     finalPdtTrans.GetComponent<Image>().sprite = alcoholSO.iconSprite;
-                    slotTitleTxt.text = alcoholSO.alcoholName.ToString();
+                    slotTitleTxt.text = alcoholSO.alcoholName.ToString().CreateSpace();
                     break;
                 case ItemType.Meals:
                     MealsSO mealSO = ItemService.Instance.GetMealSO((MealNames)itemData.ItemName);
                     finalPdtTrans.GetComponent<Image>().sprite = mealSO.iconSprite;
-                    slotTitleTxt.text = mealSO.mealName.ToString();
+                    slotTitleTxt.text = mealSO.mealName.ToString().CreateSpace();
                     break;
                 case ItemType.SagaicGewgaws:
                     break;

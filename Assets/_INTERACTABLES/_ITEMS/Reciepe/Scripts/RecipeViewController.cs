@@ -19,9 +19,6 @@ namespace Interactables
         [SerializeField] Button mergingBtn;
         [SerializeField] Button loreEnchantBtn;
 
-
-      
-
         [Header("page Turn Btn")]
         [SerializeField] Button pageBtn; 
 
@@ -142,10 +139,7 @@ namespace Interactables
         
         public void Init( )
         {
-           
-
-           // RecipeService.Instance.
-           // get irecipe     
+            On_RecipeTypeSelect(RecipeType.Cooking);
         }
 
         public void Load()

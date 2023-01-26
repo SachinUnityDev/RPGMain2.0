@@ -19,6 +19,6 @@ MonoBehaviour:
     bronze: 15
   fluctuation: 0
   maxWorldInstance: 3
-  iconSprite: {fileID: 21300000, guid: a81f857766ced32488d3e227a9f9e8e3, type: 3}
+  iconSprite: {fileID: 21300000, guid: 12d9d738feeb9f54daaf733062731cb1, type: 3}
   allLines:
   - Used for cooking meals, soups and teas

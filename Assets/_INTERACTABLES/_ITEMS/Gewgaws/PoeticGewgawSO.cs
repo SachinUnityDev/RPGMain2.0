@@ -36,7 +36,9 @@ namespace Interactables
         [Header("Sprites")]
         public Sprite iconSprite;
 
-
+        [Header("VerseDesc")]
+        public int setNumber; 
+        public string verseDesc="";
      
         private void Awake()
         {

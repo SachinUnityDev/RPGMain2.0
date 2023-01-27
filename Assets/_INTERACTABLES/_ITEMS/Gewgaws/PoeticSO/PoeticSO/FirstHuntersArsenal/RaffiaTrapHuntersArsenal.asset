@@ -25,3 +25,5 @@ MonoBehaviour:
     bronze: 50
   fluctuationRate: 20
   iconSprite: {fileID: 21300000, guid: 928d0f06c3878364eb394c7b007220d1, type: 3}
+  setNumber: 2
+  verseDesc: A tireless trapper, N'kundo was his name

@@ -25,3 +25,5 @@ MonoBehaviour:
     bronze: 42
   fluctuationRate: 20
   iconSprite: {fileID: 21300000, guid: ad72ec4e614d0e84790c764a49f6fa6c, type: 3}
+  setNumber: 2
+  verseDesc: 'Aim: Cover your tracks'

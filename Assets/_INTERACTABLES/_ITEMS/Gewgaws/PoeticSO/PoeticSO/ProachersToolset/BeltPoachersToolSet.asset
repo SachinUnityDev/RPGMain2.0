@@ -25,3 +25,5 @@ MonoBehaviour:
     bronze: 46
   fluctuationRate: 20
   iconSprite: {fileID: 21300000, guid: fe25828b63758354d818bcec5dc0325c, type: 3}
+  setNumber: 1
+  verseDesc: 'Ready: Withstand your voracity'

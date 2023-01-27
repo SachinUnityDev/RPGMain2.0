@@ -45,6 +45,7 @@ namespace Combat
         [Header("CURR SKILLMODEL")]
         public SkillModel skillModelHovered;
         public SkillModel skillModelSelect; 
+        public List<string> perkDescOnHover= new List<string>();
 
         [Header("ALL SO")]
         public List<SkillDataSO> allCharSkillSO = new List<SkillDataSO>();

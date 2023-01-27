@@ -25,5 +25,5 @@ MonoBehaviour:
     bronze: 60
   fluctuationRate: 20
   iconSprite: {fileID: 21300000, guid: 827f25d0570643442b7029c7ab3b7fe8, type: 3}
-  displayStr:
-  - +2-3 Dodge
+  setNumber: 2
+  verseDesc: Clutch it tight with your palpy

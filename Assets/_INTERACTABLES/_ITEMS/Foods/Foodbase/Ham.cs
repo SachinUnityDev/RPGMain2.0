@@ -31,19 +31,19 @@ namespace Interactables
 
         public override void ApplyFX2()
         {
-            //float chance = 25f;
-            //if (chance.GetChance())
-            //{
-            //    charController.buffController.ApplyBuff(CauseType.Food, (int)foodName,
-            //     charController.charModel.charID, StatsName.focus, 1, foodSO.timeFrame
-            //     , foodSO.castTime, true);
-            //}
-            //float chance1 = 40f;
-            //if (chance1.GetChance())
-            //{
-            //    charController.charStateController.ApplyCharStateBuff(CauseType.Food, (int)foodName
-            //        , charController.charModel.charID, CharStateName.PoisonedLowDOT, TimeFrame.Infinity, -1, false);
-            //}
+            float chance = 40f;
+            if (chance.GetChance())
+            {
+                charController.buffController.ApplyBuff(CauseType.Food, (int)foodName,
+                 charController.charModel.charID, StatsName.acc, 1, foodSO.timeFrame
+                 , foodSO.castTime, true);
+            }
+            float chance1 = 30f;
+            if (chance1.GetChance())
+            {
+                charController.charStateController.ApplyCharStateBuff(CauseType.Food, (int)foodName
+                    , charController.charModel.charID, CharStateName.PoisonedLowDOT, TimeFrame.Infinity, -1, false);
+            }
         }
 
         public void ApplyConsumableFX()

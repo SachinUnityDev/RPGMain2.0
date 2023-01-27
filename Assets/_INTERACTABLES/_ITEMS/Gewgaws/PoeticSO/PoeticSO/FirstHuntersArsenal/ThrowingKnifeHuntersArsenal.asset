@@ -25,3 +25,5 @@ MonoBehaviour:
     bronze: 78
   fluctuationRate: 20
   iconSprite: {fileID: 21300000, guid: c5475028d1fd96441b5bcf53da1d3d77, type: 3}
+  setNumber: 3
+  verseDesc: Shredded his foes, the ones he couldn't tame

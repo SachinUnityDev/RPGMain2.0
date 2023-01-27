@@ -42,7 +42,7 @@ namespace Interactables
 
         public void InitItem(int itemId, int maxInvStackSize)
         {
-    
+            PoeticInit();     
         }
 
         public void OnHoverItem()

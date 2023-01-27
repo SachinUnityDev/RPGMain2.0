@@ -186,6 +186,7 @@ namespace Combat
         public void OnPointerEnter(PointerEventData eventData)
         {
             ShowPipeRelations();
+            ShowPerkHoveredPanel();
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -214,12 +215,15 @@ namespace Combat
             }
         }
 
-        void ShowPerkSelectPanel()
+        void ShowPerkHoveredPanel()
         {
+            // get perkdata and pass to the panel view
+
             // perkdata 
-        
+                
 
         }
+
 
 
     }

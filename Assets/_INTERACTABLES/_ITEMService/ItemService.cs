@@ -20,7 +20,7 @@ namespace Interactables
 
         [SerializeField] ItemFactory itemFactory;    
 
-        public ItemCardViewController cardViewController;
+        //public ItemCardViewController cardViewController;
 
         // CASE FOR ITEM MAIN MODEL 
         public List<ScrollReadData> allScrollRead = new List<ScrollReadData>();
@@ -36,7 +36,10 @@ namespace Interactables
         public List<SagaicGewgawSO> sagaicGewgawSOs = new List<SagaicGewgawSO>();
 
         [Header("All Poetic Gewgaw SO")]
-        public List<PoeticGewgawSO> allPoeticGewgawSO = new List<PoeticGewgawSO>(); 
+        public List<PoeticGewgawSO> allPoeticGewgawSO = new List<PoeticGewgawSO>();
+
+        [Header("All Poetic Set SO")]
+        public List<PoeticSetSO> allPoeticSetSO = new List<PoeticSetSO>();
 
         [Header("All Potions SO")]
         public List<PotionSO> allPotionSO = new List<PotionSO>();
@@ -205,10 +208,18 @@ namespace Interactables
             if (poeticGewgawSO != null)
                 return poeticGewgawSO;
             else
-                Debug.Log(poeticGewgawName + "poeticGewgawSO   not found");
+                Debug.Log(poeticGewgawName + "poeticGewgawSO not found" + poeticGewgawName);
             return null;
         }
-
+        public PoeticSetSO GetPoeticSetSO(PoeticSetName poeticSetName)
+        {
+            PoeticSetSO poeticSetSO = allPoeticSetSO.Find(t => t.poeticSetName == poeticSetName);
+            if (poeticSetSO != null)
+                return poeticSetSO;
+            else
+                Debug.Log("poeticGewgawSO not found" + poeticSetName);
+            return null;
+        }
         public FoodSO GetFoodSO(FoodNames foodName)
         {
             FoodSO foodSO = allFoodSO.Find(t => t.foodName == foodName);
@@ -254,7 +265,6 @@ namespace Interactables
                 Debug.Log("Trade goods SO  not found");
             return null;
         }
-
         public MealsSO GetMealSO(MealNames mealName)
         {
             MealsSO mealSO = allMealsSO.Find(t => t.mealName == mealName);
@@ -264,7 +274,6 @@ namespace Interactables
                 Debug.Log("meal  SO  not found" + mealName);
             return null;
         }
-
         public AlcoholSO GetAlcoholSO(AlcoholNames alcoholName)
         {
             AlcoholSO alcoholSO = allAlcoholSO.Find(t => t.alcoholName == alcoholName);
@@ -274,7 +283,6 @@ namespace Interactables
                 Debug.Log("alcohol SO  not found" + alcoholName);
             return null;
         }
-
 
         #endregion
 
@@ -450,17 +458,17 @@ namespace Interactables
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionNames.HealthPotion,
-                                     CauseType.Items,2);         
+                InitItemToInv(SlotType.CommonInv, ItemType.PoeticGewgaws, (int)PoeticGewgawNames.RingLegacyOfTheSpida,
+                                     CauseType.Items, 2);
             }
             if (Input.GetKeyDown(KeyCode.J))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Scrolls, (int)ScrollNames.ScrollOfFire,
-                                     CauseType.Items, 2, GenGewgawQ.None);
+                InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.BeltOfTheCommoner,
+                                     CauseType.Items, 2, GenGewgawQ.Folkloric);
             }
             if (Input.GetKeyDown(KeyCode.G))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Gems, (int)GemNames.Oltu,
+                InitItemToInv(SlotType.CommonInv, ItemType.Gems, (int)SagaicGewgawNames.AncientTabletOfEarth,
                                     CauseType.Items, 2);
             }
             if (Input.GetKeyDown(KeyCode.K))

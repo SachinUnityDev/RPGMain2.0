@@ -36,6 +36,10 @@ namespace Interactables
         [SerializeField] Transform itemSlotTrans;
         [SerializeField] Transform currTrans;
 
+        [Header("Tail")]
+        [SerializeField] Transform tailTrans; 
+
+
    
         void Start()
         {
@@ -44,6 +48,7 @@ namespace Interactables
             topTrans = transform.GetChild(1);   
             midTrans = transform.GetChild(2);
             btmTrans = transform.GetChild(3);
+            tailTrans = transform.GetChild(4);
 
             // crown
             resHeading = crownTrans.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
@@ -59,6 +64,9 @@ namespace Interactables
             // btm     
             currTrans = btmTrans.GetChild(0);   
             itemSlotTrans = btmTrans.GetChild(1);   
+
+
+
             
         }
         void FillMid(List<string> allLines)
@@ -80,6 +88,7 @@ namespace Interactables
         }
         public void ShowItemCard(Iitems item)
         {
+            tailTrans.gameObject.SetActive(false);   
             itemViewSO = ItemService.Instance.itemViewSO; 
             switch (item.itemType)
             {
@@ -296,8 +305,7 @@ namespace Interactables
                     GemSO gemSO = ItemService.Instance.GetGemSO((GemNames)item.itemName);
                     if (gemSO != null)
                     {
-                        crownTrans.gameObject.SetActive(false);                 
-
+                        crownTrans.gameObject.SetActive(false);   
                         // top
                         itemNametxt.text = gemSO.gemName.ToString().CreateSpace();
                         itemTypetxt.text = "Gem";
@@ -355,22 +363,54 @@ namespace Interactables
                         crownTrans.gameObject.SetActive(false);
 
                         // top
-                        itemNametxt.text = poeticGewgawSO.poeticGewgawName.ToString().CreateSpace();
+                        itemNametxt.text = poeticGewgawSO.gewgawMidName.ToString().CreateSpace();
                         itemTypetxt.text = "Gewgaw";
                         itemFilterImg.sprite = itemViewSO.GetItemTypeImgData(item.itemType).FilterIconN;
                         itemImg.sprite = poeticGewgawSO.iconSprite;
 
                         itemSubTypeTrans.gameObject.SetActive(true);
                         itemSubTypeTrans.GetChild(0).GetComponent<TextMeshProUGUI>().text
-                                                                    = "Poetic";
+                                                                                 = "Poetic";
 
-                        transform.GetComponent<Image>().sprite = itemViewSO.epicBG;
-                        //mid
-                        //FillMid(poeticGewgawSO.allLines);
+                        transform.GetComponent<Image>().sprite = itemViewSO.poeticBG;
+                        // mid
+                        PoeticGewgawBase poeticBase = item as PoeticGewgawBase; 
+                        FillMid(poeticBase.displayStrs);
 
                         //btm
                         itemSlotTrans.gameObject.SetActive(false);
                         currTrans.GetComponent<DisplayCurrency>().Display(poeticGewgawSO.cost);
+
+                        //tail
+                        tailTrans.gameObject.SetActive(true);
+                        tailTrans.GetChild(0).GetComponent<TextMeshProUGUI>().text
+                                                = poeticGewgawSO.poeticSetName.ToString().CreateSpace();
+                        // get poetic SO Set and get strings 
+                        PoeticSetSO poeticSetSO = ItemService.Instance.GetPoeticSetSO(poeticGewgawSO.poeticSetName);
+                         
+                        for (int i = 0; i < poeticSetSO.bonusBuffStr.Count; i++)
+                        {                        
+                            tailTrans.GetChild(1).GetChild(i).GetComponent<TextMeshProUGUI>().text
+                                    = poeticSetSO.bonusBuffStr[i];
+                        }
+                        foreach (Transform child in tailTrans.GetChild(1))
+                        {
+                            int index = child.GetSiblingIndex(); 
+                            if(index < poeticSetSO.bonusBuffStr.Count)
+                            {
+                                child.gameObject.SetActive(true);
+                            }
+                            else
+                            {
+                                child.gameObject.SetActive(false);
+                            }
+                        }
+
+                        // TAIL verses
+                        int setNum = poeticGewgawSO.setNumber;
+                        tailTrans.GetChild(2).GetComponent<TextMeshProUGUI>().text
+                            = "Verse" + setNum + ": " + poeticGewgawSO.verseDesc;
+
                     }
                     // write Poetic
                     break;

@@ -55,7 +55,7 @@ namespace Interactables
         public void OnPointerExit(PointerEventData eventData)
         {
             // Debug.Log("Item Exit .. " + itemDragged.itemName);
-           // itemCardGO.SetActive(true);
+            // itemCardGO.SetActive(true);
         }
         void ShowItemCard()
         {

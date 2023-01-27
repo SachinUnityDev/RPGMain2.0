@@ -25,3 +25,5 @@ MonoBehaviour:
     bronze: 40
   fluctuationRate: 20
   iconSprite: {fileID: 21300000, guid: c8cefd62c1eb9a84eb7f002ee2ce48cc, type: 3}
+  setNumber: 3
+  verseDesc: 'Fire: Hit with your eyes closed'

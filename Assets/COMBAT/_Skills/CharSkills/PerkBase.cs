@@ -75,6 +75,17 @@ namespace Combat
 
         }
 
+        public virtual void PerkHovered()
+        {
+            DisplayFX1();
+            DisplayFX2(); 
+            DisplayFX3();   
+            DisplayFX4();
+            SkillService.Instance.perkDescOnHover.Add(str0);
+            SkillService.Instance.perkDescOnHover.Add(str1);
+            SkillService.Instance.perkDescOnHover.Add(str2);
+            SkillService.Instance.perkDescOnHover.Add(str3);
+        }
         public virtual void SkillHovered()
         {
             SkillService.Instance.skillModelHovered = skillModel;

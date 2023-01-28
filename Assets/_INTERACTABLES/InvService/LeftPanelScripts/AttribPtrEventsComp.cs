@@ -17,28 +17,25 @@ namespace Interactables
         AttribPanelViewComp attribPanelViewComp;
         BtmCharViewController btmCharViewController; 
 
-        void Start()
+        void Awake()
         {
             desc = transform.GetChild(3).gameObject;
             desc.SetActive(false);
+            InvService.Instance.OnCharSelectInvPanel += PopulateData;
             //attribPanelViewComp =
             //        transform.GetComponentInParent<AttribPanelViewComp>();
 
             //btmCharViewController =
             //    attribPanelViewComp.transform.parent.parent
             //                    .GetChild(2).GetComponent<BtmCharViewController>();
-
-            InvService.Instance.OnCharSelectInvPanel += PopulateData;
-
-
-            // init on town init 
-            CharService.Instance.allCharsInParty.ForEach(t => t.OnStatCurrValSet
-             += (CharModData charModData) => PopulateData(CharService.Instance.GetCharCtrlWithCharID
-             (charModData.effectedCharNameID).charModel)); 
-            
-                
         }
-
+        private void Start()
+        {
+            CharService.Instance.allCharsInParty.ForEach(t => t.OnStatCurrValSet
+               += (CharModData charModData) => PopulateData(CharService.Instance.GetCharCtrlWithCharID
+               (charModData.effectedCharNameID).charModel));
+         
+        }
         public void PopulateData(CharModel charModel)
         {
             transform.GetChild(2).GetComponent<TextMeshProUGUI>().text

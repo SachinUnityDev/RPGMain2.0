@@ -48,7 +48,7 @@ namespace Interactables
         [Header("Global Var")]
         [SerializeField] bool hasInitialized = false;
         [SerializeField] CompCharParaViewController compCharParaView; 
-        void Start()
+        void Awake()
         {
 
             nameTxt = scrollNameGO.GetChild(0).GetComponent<TextMeshProUGUI>();
@@ -93,6 +93,7 @@ namespace Interactables
         }
         void PopulateScollData()
         {
+            if (selectComp.Count == 0) return;
             nameTxt.text = selectComp[index].charName.ToString();
             compCharParaView.SetPara(selectComp[index].charName);
             CharacterSO charSO =

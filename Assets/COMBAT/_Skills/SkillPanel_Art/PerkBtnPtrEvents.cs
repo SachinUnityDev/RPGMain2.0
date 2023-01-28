@@ -29,7 +29,7 @@ namespace Combat
         [Header("Perk Info Panel")]
         [SerializeField] GameObject perkSelectPanel; 
 
-        private void Start()
+        private void Awake()
         {
             InvService.Instance.OnCharSelectInvPanel += OnCharSelect;
             SkillService.Instance.OnPerkStateChg += OnPerkStateChg;      

@@ -55,7 +55,7 @@ namespace Interactables
         public GameObject potionActiveInvPanel;
         public GameObject gewgawsActiveInvPanel;
         
-        void Start()
+        void Awake()
         {
             InvPanel = gameObject.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
             InvService.Instance.OnDragResult += OnDragResult;

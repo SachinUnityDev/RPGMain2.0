@@ -43,7 +43,7 @@ namespace Common
         public SkillNames skillName;
         LeftSkillView leftSkillView; 
 
-        void Start()
+        void Awake()
         {
             IsClicked = false;
             prevSkillHovered = SkillNames.None;

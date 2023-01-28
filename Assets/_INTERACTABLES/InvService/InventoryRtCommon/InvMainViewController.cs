@@ -22,7 +22,7 @@ namespace Interactables
         [Header("Manual Level Up")]
         [SerializeField] GameObject levelUpPanel;
 
-        private void Start()
+        private void Awake()
         {
             invRightViewController = transform.GetChild(1).GetComponent<InvRightViewController>();
             levelViewController = transform.GetChild(0).GetComponent<LevelViewController>();

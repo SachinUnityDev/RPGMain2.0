@@ -83,7 +83,7 @@ namespace Interactables
             BestiaryService.Instance.OnRaceSelect(RaceType.None);
         }
 
-        void Start()
+        void Awake()
         {
             Img = gameObject.GetComponent<Image>(); 
         }

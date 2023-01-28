@@ -20,22 +20,20 @@ namespace Interactables
         Transform PanelTrans; 
 
 
-        void Start()
+        void Awake()
         {
             desc = transform.GetChild(2).gameObject;
             desc.SetActive(false);
-        
-            InvService.Instance.OnCharSelectInvPanel += PopulateData;
             PanelTrans = transform.parent;
-
-            // need to check if needed
+            InvService.Instance.OnCharSelectInvPanel += PopulateData;
+        }
+        private void Start()
+        {
+        
             CharService.Instance.allCharsInParty.ForEach(t => t.OnStatCurrValSet
              += (CharModData charModData) => PopulateData(CharService.Instance.GetCharCtrlWithCharID
              (charModData.effectedCharNameID).charModel));
-
-
         }
-
         public void PopulateData(CharModel charModel)
         {
             transform.GetChild(1).GetComponent<TextMeshProUGUI>().text

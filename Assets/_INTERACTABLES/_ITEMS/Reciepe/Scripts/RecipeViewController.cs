@@ -38,7 +38,7 @@ namespace Interactables
         [SerializeField]const int PANEL_PER_page = 5;
         [SerializeField] int netPages = -1;
 
-        void Start()
+        void Awake()
         {
             
             pageContainer = transform.GetChild(1);

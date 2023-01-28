@@ -12,7 +12,7 @@ namespace Interactables
     {
 
         [SerializeField] TextMeshProUGUI itemName;
-        private void Start()
+        private void Awake()
         {
             itemName = transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>(); 
         }

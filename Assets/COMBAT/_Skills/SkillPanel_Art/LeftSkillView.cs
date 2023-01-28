@@ -25,7 +25,7 @@ namespace Common
         [SerializeField] Transform skillPtsTrans; 
 
 
-        private void Start()
+        private void Awake()
         {
             //charNameTrans = transform.GetChild(0); 
             iconContainerTrans = transform.GetChild(1);

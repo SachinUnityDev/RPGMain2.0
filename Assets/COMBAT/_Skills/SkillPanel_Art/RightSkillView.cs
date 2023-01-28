@@ -41,7 +41,7 @@ namespace Common
         [SerializeField] Transform perkBtnContainer;
 
         [SerializeField] List<SkillModel> scrollList = new List<SkillModel>();  
-        private void Start()
+        private void Awake()
         {
             
             InvService.Instance.OnCharSelectInvPanel += PopulateRightSkillPanel;

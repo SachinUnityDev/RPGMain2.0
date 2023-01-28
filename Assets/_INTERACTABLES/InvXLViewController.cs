@@ -50,7 +50,7 @@ namespace Interactables
             loreBtn.onClick.AddListener(OnLoreBtnPressed);
             invBtn.onClick.AddListener(OnInvBtnPressed);
             invXLClose.onClick.AddListener(UnLoad);
-          //  Init();
+         
         }
 
         

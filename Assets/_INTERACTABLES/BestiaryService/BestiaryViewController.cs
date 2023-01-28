@@ -42,13 +42,10 @@ namespace Interactables
 
 
         }
-
         public void PopulateOnRaceSelect(RaceType raceType)
         {          
             PopulateBestiaryScroll();
-        }
-
-        
+        }                
         void PopulateBestiaryScroll()
         {
             RaceType raceType = BestiaryService.Instance.currSelectRace; 
@@ -89,8 +86,7 @@ namespace Interactables
             }
             dropDown.GetComponent<CultDropDownEvents>().
                                          PopulateOptions(cultList, this); 
-        }
-      
+        }      
         void PopulateScollName()
         {
             if(index != -1)
@@ -104,7 +100,6 @@ namespace Interactables
             attributePanel.GetComponent<AttributeViewController>().PopulateAttribPanel();
 
         }
-
         public void Move2Index(CultureType cultType)
         {
             int i = selectBestiary.FindIndex(t => t.cultType == cultType);
@@ -156,6 +151,7 @@ namespace Interactables
             }
         }
 
+        #region IPANEL RELATED 
         public void Load()
         {
            // transform.parent.gameObject.SetActive(true);
@@ -174,6 +170,9 @@ namespace Interactables
             PopulateRaceBar();
             PopulateBestiaryScroll();
         }
+
+        #endregion 
+
     }
 }
 

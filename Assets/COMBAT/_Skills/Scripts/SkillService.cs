@@ -35,6 +35,7 @@ namespace Combat
 
         public event Action<PerkData> OnPerkStateChg;
         public event Action<SkillModel> OnSkillSelectInInv; 
+        public event Action<PerkNames> OnPerkHovered;
         #region Initializers
 
         [Header("SKill Factory NTBR")]

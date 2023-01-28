@@ -77,6 +77,7 @@ namespace Combat
 
         public virtual void PerkHovered()
         {
+            SkillService.Instance.perkDescOnHover.Clear();
             DisplayFX1();
             DisplayFX2(); 
             DisplayFX3();   

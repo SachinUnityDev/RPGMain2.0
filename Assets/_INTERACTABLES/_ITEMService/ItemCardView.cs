@@ -41,7 +41,7 @@ namespace Interactables
 
 
    
-        void Start()
+        void Awake()
         {
             gameObject.SetActive(false);
             crownTrans = transform.GetChild(0);
@@ -88,6 +88,7 @@ namespace Interactables
         }
         public void ShowItemCard(Iitems item)
         {
+            gameObject.SetActive(true);
             tailTrans.gameObject.SetActive(false);   
             itemViewSO = ItemService.Instance.itemViewSO; 
             switch (item.itemType)

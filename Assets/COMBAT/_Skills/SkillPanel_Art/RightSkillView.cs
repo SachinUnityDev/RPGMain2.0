@@ -15,6 +15,9 @@ namespace Common
         CharController charController;
         SkillController1 selectSkillController;
 
+        [Header("Perk Info Panel")]
+        public Transform perkInfoPanelTrans; // used by Perk btn info panel for info transfer
+
         [Header("Pipe View Main")]
         public Transform BGPipe1; 
         public Transform BGPipe2;
@@ -43,7 +46,8 @@ namespace Common
         [SerializeField] List<SkillModel> scrollList = new List<SkillModel>();  
         private void Awake()
         {
-            
+
+            perkInfoPanelTrans = transform.GetChild(4); 
             InvService.Instance.OnCharSelectInvPanel += PopulateRightSkillPanel;
             leftBtn.onClick.AddListener(OnLeftBtnPressed);
             rightBtn.onClick.AddListener(OnRightBtnPressed);

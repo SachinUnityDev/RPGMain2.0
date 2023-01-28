@@ -9,8 +9,6 @@ using Interactables;
 
 namespace Combat
 {
-
-
     public class PerkBtnPtrEvents : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] InvSkillViewMain skillViewMain;
@@ -27,16 +25,18 @@ namespace Combat
         [SerializeField] Color colorUnClickable;
 
         [Header("Perk Info Panel")]
-        [SerializeField] GameObject perkSelectPanel; 
+        [SerializeField] Transform perkHoveredTrans; 
 
         private void Awake()
         {
+           
+        }
+        private void Start()
+        {
             InvService.Instance.OnCharSelectInvPanel += OnCharSelect;
-            SkillService.Instance.OnPerkStateChg += OnPerkStateChg;      
+            SkillService.Instance.OnPerkStateChg += OnPerkStateChg;
 
         }
-
-      
         void OnPerkStateChg(PerkData _perkData)
         {
             if(perkData.perkName == _perkData.perkName)
@@ -72,7 +72,6 @@ namespace Combat
         }
         
         #region PIPES RELATIONS
-
         void ShowPipeRelations()
         {
             PerkData _perkData =
@@ -171,7 +170,6 @@ namespace Combat
         }
 
         #endregion
-
         public void OnPointerClick(PointerEventData eventData)
         {
             if (skillViewMain.isPerkClickAvail)
@@ -182,17 +180,16 @@ namespace Combat
                 }
             }
         }
-
         public void OnPointerEnter(PointerEventData eventData)
         {
             ShowPipeRelations();
             ShowPerkHoveredPanel();
         }
-
         public void OnPointerExit(PointerEventData eventData)
         {
           //  if(perkData.state != PerkSelectState.Clicked)
             HidePipeRelations();
+            perkHoveredTrans.gameObject.SetActive(false);
         }
         void SetPerkBtnState(PerkSelectState _state)
         {
@@ -218,11 +215,21 @@ namespace Combat
         void ShowPerkHoveredPanel()
         {
             // get perkdata and pass to the panel view
-
+           
             // perkdata 
-                
+            PerkBase perkBase =
+                     skillController.GetPerkBase(perkData.skillName, perkData.perkName);
+            perkBase.PerkHovered();
 
+            Transform rightSkillTrans = transform.parent.parent; 
+            RightSkillView rightSkillView = rightSkillTrans.GetComponent<RightSkillView>();          
+            perkHoveredTrans = rightSkillView.perkInfoPanelTrans;     
+            
+            perkHoveredTrans.GetComponent<PerkViewInfoPanel>()
+                                        .Init(perkData, perkBase, skillController);
+            perkHoveredTrans.gameObject.SetActive(true);
         }
+
 
 
 

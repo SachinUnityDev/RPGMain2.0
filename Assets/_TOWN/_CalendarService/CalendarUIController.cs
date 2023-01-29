@@ -117,7 +117,7 @@ namespace Common
 
             List<string> tipOftheDayList = CalendarService.Instance.GetDaySO(currentDay).tipOfTheDayList;
             int len = tipOftheDayList.Count;
-            if (CalendarService.Instance.timeState == TimeState.Day)
+            if (CalendarService.Instance.currtimeState == TimeState.Day)
             {
                 dayPanel.transform.GetChild(2).GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text = "Tip of the Day";                
             } else

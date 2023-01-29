@@ -124,7 +124,7 @@ namespace Common
             AddPanel2OpenList(go); 
         }
 
-        public void TogglePanelOnInGrp(GameObject go, bool turnON)
+        public void TogglePanelOnInGrp(GameObject go, bool turnON)  // deprecated ...slowly
         {
             Transform goParent = go.transform.parent;
             int  panelCount = goParent.childCount; 

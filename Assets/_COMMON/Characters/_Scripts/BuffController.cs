@@ -247,7 +247,7 @@ namespace Combat
            CharModData charModVal = charController.ChangeStat(causeType, causeName, causeByCharID
                                                         , statName, value, true);
            
-            if(CalendarService.Instance.timeState == TimeState.Night) // FOR NIGHT CORRECTION
+            if(CalendarService.Instance.currtimeState == TimeState.Night) // FOR NIGHT CORRECTION
             {
                 charController.ChangeStat(causeType, causeName, causeByCharID
                                                         , statName, -value, true);  
@@ -271,7 +271,7 @@ namespace Combat
             CharModData charModData = charController.ChangeStatRange(causeType, causeName, causeByCharID
                                            , statName, minChgR, maxChgR, true);
 
-            if (CalendarService.Instance.timeState == TimeState.Night) // FOR NIGHT CORRECTION
+            if (CalendarService.Instance.currtimeState == TimeState.Night) // FOR NIGHT CORRECTION
             {
                 charController.ChangeStatRange(causeType, causeName, causeByCharID
                                             , statName, -minChgR, -maxChgR, true);

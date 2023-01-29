@@ -8,7 +8,7 @@ namespace Town
     public class TownService : MonoSingletonGeneric<TownService>
     {        
         public FameViewController fameController;    
-        public BuildingIntViewController buildingIntViewController;
+        public BuildView buildView;
 
         public TownModel townModel;
         public TownController townController;
@@ -23,9 +23,9 @@ namespace Town
 
         void Start()
         {
-            townController = GetComponent<TownController>(); 
+            townController = GetComponent<TownController>();
             fameController = GetComponent<FameViewController>();
-            templeController = buildingIntViewController.templePanel.GetComponent<TempleController>();           
+            //templeController = buildingIntViewController.templePanel.GetComponent<TempleController>();           
         }
         public void Init(LocationName location)
         {  

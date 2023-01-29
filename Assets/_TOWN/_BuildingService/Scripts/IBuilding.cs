@@ -10,10 +10,7 @@ namespace Town
         BuildingNames buildingName { get;  }
         void Init(); 
         void Load();
-
         void UnLoad(); 
-
-
     }
 
 

@@ -29,12 +29,12 @@ namespace Combat
 
         private void Awake()
         {
-           
+            InvService.Instance.OnCharSelectInvPanel += OnCharSelect;
+            SkillService.Instance.OnPerkStateChg += OnPerkStateChg;
         }
         private void Start()
         {
-            InvService.Instance.OnCharSelectInvPanel += OnCharSelect;
-            SkillService.Instance.OnPerkStateChg += OnPerkStateChg;
+         
 
         }
         void OnPerkStateChg(PerkData _perkData)
@@ -214,17 +214,16 @@ namespace Combat
 
         void ShowPerkHoveredPanel()
         {
-            // get perkdata and pass to the panel view
-           
-            // perkdata 
+            // PERK hovered 
             PerkBase perkBase =
                      skillController.GetPerkBase(perkData.skillName, perkData.perkName);
             perkBase.PerkHovered();
 
+            // LOCATE trans 
             Transform rightSkillTrans = transform.parent.parent; 
             RightSkillView rightSkillView = rightSkillTrans.GetComponent<RightSkillView>();          
             perkHoveredTrans = rightSkillView.perkInfoPanelTrans;     
-            
+            // INIT Info Panel
             perkHoveredTrans.GetComponent<PerkViewInfoPanel>()
                                         .Init(perkData, perkBase, skillController);
             perkHoveredTrans.gameObject.SetActive(true);

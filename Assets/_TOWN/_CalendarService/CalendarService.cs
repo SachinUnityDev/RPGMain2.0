@@ -21,7 +21,7 @@ namespace Common
         public event Action<MonthName> OnStartOfTheMonth;
 
         [Header("CURRENT TIME STATE ")]
-        public TimeState timeState;
+        public TimeState currtimeState;
 
         [SerializeField] Button endday; 
         [SerializeField] int dayInGame;
@@ -55,7 +55,7 @@ namespace Common
             /// currentDay = gameStartDay;   to start here .. 
 
             scrollMonth = currentMonth;
-            timeState = TimeState.Day;
+            currtimeState = TimeState.Day;
             endday.onClick.AddListener(OnEndDayNightClick);
 
             //calendarUIController.UpdateWeekPanel(currentWeek);
@@ -92,11 +92,11 @@ namespace Common
         public void OnEndDayNightClick()
         {
             calendarUIController.ToggleDayNightUI();
-            if (timeState == TimeState.Night)
+            if (currtimeState == TimeState.Night)
             {
                 // start of the day 
                 OnStartOfDay.Invoke(dayInGame); 
-                timeState = TimeState.Day;
+                currtimeState = TimeState.Day;
                 endday.GetComponentInChildren<TextMeshProUGUI>().text = "End the Day?";
                 UpdateDay();
             }
@@ -107,7 +107,7 @@ namespace Common
                //CalendarEventService.Instance.On_StartOftheNight();
                On_StartOfNight(dayInGame);
                 endday.GetComponentInChildren<TextMeshProUGUI>().text = "End the Night?";
-                timeState = TimeState.Night;
+                currtimeState = TimeState.Night;
             }
 
 

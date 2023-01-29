@@ -62,7 +62,22 @@ namespace Interactables
 
         void FillMidDesc()
         {
-            
+            List<string> descStr = SkillService.Instance.perkDescOnHover;
+            foreach (Transform child in descTrans)
+            {
+                int index = child.GetSiblingIndex(); 
+                if(descStr.Count < 0)
+                {
+                    child.gameObject.SetActive(true);
+                    child.GetComponent<TextMeshProUGUI>().text = descStr[index].ToString();
+                }
+                else
+                {
+                    child.gameObject.SetActive(false);
+                }
+            }
+
+
         }
         void FillBtmPerkType()
         {

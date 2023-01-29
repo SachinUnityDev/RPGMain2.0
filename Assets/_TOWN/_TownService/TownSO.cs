@@ -6,7 +6,7 @@ using Common;
 namespace Town
 {   
 
-    [CreateAssetMenu(fileName = "BuildingSO", menuName = "Town Service/BuildingSO")]
+    [CreateAssetMenu(fileName = "TownSO", menuName = "Town Service/TownSO")]
     public class TownSO : ScriptableObject
     {
         public List<CharController> availableInTown = new List<CharController>();

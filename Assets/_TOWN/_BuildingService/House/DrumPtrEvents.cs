@@ -6,9 +6,9 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 
 
-namespace Common
+namespace Town
 {
-    public class ChestController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class DrumPtrEvents : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         Image btnImg;
         // [SerializeField] GameObject namePlank;
@@ -38,6 +38,7 @@ namespace Common
             btnImg.alphaHitTestMinimumThreshold = 0.1f;
             //  namePlank.GetComponent<RectTransform>().DOScale(0, 0.25f);
         }
+
 
     }
 }

@@ -6,9 +6,9 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 
 
-namespace Common
+namespace Town
 {
-    public class GuitarController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class GuitarPtrEvents : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         Image btnImg;
         // [SerializeField] GameObject namePlank;

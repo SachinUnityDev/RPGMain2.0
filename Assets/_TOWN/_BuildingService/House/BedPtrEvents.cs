@@ -5,9 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
-namespace Common
+namespace Town
 {
-    public class HouseBedController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class BedPtrEvents : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         Image btnImg;
        // [SerializeField] GameObject namePlank;

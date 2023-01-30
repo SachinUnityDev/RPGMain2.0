@@ -12,5 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b5e2eb5a4e73a74683a3af4d29d310b, type: 3}
   m_Name: StableSO
   m_EditorClassIdentifier: 
-  _allbuildingData: []
+  _allbuildingData:
+  - buildingName: 6
+    buildingState: 0
+    buildExtDayN: {fileID: 21300000, guid: 6a54b6af4370e8949b0bace88f97f39e, type: 3}
+    buildExtDayHL: {fileID: 21300000, guid: 81ee0efdd68d4aa46adc36154c7db832, type: 3}
+    buildExtNight: {fileID: 21300000, guid: 5607d7b0393135b49853f6c39ae981c5, type: 3}
+    buildExtNightHL: {fileID: 21300000, guid: e43784bae3cc84946ad66de7bdf2f2b5, type: 3}
+    buildIntDay: {fileID: 0}
+    buildIntNight: {fileID: 0}
+    charNames: 
+    npcData: []
+    buildIntType: []
+    statusLockedStr: 
+    statusUnAvailStr: 
   _itemInteraction: []

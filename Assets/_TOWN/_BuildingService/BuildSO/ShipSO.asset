@@ -25,9 +25,15 @@ MonoBehaviour:
     npcData:
     - nPCNames: 1
       nPCIntType: 1
-      isLocked: 0
+      isUnLocked: 0
     - nPCNames: 1
       nPCIntType: 2
-      isLocked: 0
-    buildIntType: 09000000
-  _itemInteraction: []
+      isUnLocked: 0
+    buildIntType:
+    - BuildIntType: 9
+      isUnLocked: 0
+    statusLockedStr: 
+    statusUnAvailStr: 
+  _itemInteraction:
+  - buildItem: 1
+    isUnlocked: 1

@@ -25,12 +25,16 @@ MonoBehaviour:
     npcData:
     - nPCNames: 13
       nPCIntType: 1
-      isLocked: 0
+      isUnLocked: 0
     - nPCNames: 13
       nPCIntType: 2
-      isLocked: 0
+      isUnLocked: 0
     - nPCNames: 13
       nPCIntType: 4
-      isLocked: 0
-    buildIntType: 04000000
+      isUnLocked: 0
+    buildIntType:
+    - BuildIntType: 4
+      isUnLocked: 0
+    statusLockedStr: 
+    statusUnAvailStr: 
   _itemInteraction: []

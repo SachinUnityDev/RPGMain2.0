@@ -25,36 +25,40 @@ MonoBehaviour:
     npcData:
     - nPCNames: 2
       nPCIntType: 1
-      isLocked: 0
+      isUnLocked: 0
     - nPCNames: 2
       nPCIntType: 2
-      isLocked: 0
+      isUnLocked: 0
     - nPCNames: 2
       nPCIntType: 6
-      isLocked: 0
+      isUnLocked: 0
     - nPCNames: 15
       nPCIntType: 1
-      isLocked: 0
+      isUnLocked: 0
     - nPCNames: 15
       nPCIntType: 2
-      isLocked: 0
+      isUnLocked: 0
     - nPCNames: 3
       nPCIntType: 1
-      isLocked: 0
+      isUnLocked: 0
     - nPCNames: 3
       nPCIntType: 2
-      isLocked: 0
+      isUnLocked: 0
     - nPCNames: 3
       nPCIntType: 8
-      isLocked: 0
+      isUnLocked: 0
     - nPCNames: 9
       nPCIntType: 1
-      isLocked: 0
+      isUnLocked: 0
     - nPCNames: 9
       nPCIntType: 2
-      isLocked: 0
+      isUnLocked: 0
     - nPCNames: 9
       nPCIntType: 5
-      isLocked: 0
-    buildIntType: 
-  _itemInteraction: []
+      isUnLocked: 0
+    buildIntType: []
+    statusLockedStr: 
+    statusUnAvailStr: 
+  _itemInteraction:
+  - buildItem: 0
+    isUnlocked: 0

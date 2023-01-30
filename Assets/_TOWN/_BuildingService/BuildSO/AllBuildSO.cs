@@ -1,0 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System; 
+namespace Town
+{
+
+
+    [CreateAssetMenu(fileName = "AllBuildSO", menuName = "Town Service/AllBuildSO")]
+    public class AllBuildSO : ScriptableObject
+    {
+
+        public List<InteractionSpriteData> allIntSprites = new List<InteractionSpriteData>();
+
+        public List<BuildingSO> allBuildSO = new List<BuildingSO> ();
+
+        private void Awake()
+        {
+            if (allIntSprites.Count < 1)   // patch fix to prevent recreation of fields 
+            {
+                for (int i = 1; i < Enum.GetNames(typeof(BuildIntType)).Length; i++)
+                {
+                    InteractionSpriteData iSData = new InteractionSpriteData();
+                    iSData.intType = (BuildIntType)i;
+                    allIntSprites.Add(iSData);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b5e2eb5a4e73a74683a3af4d29d310b, type: 3}
+  m_Name: BuildingSO
+  m_EditorClassIdentifier: 
+  allIntSprites:
+  - intType: 1
+    intTypeStr: Bounty
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 2
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 3
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 4
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 5
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 6
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 7
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 8
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 9
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 10
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 11
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 12
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 13
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 14
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 15
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 16
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 17
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 18
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 19
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  _allbuildingData:
+  - buildingName: 0
+    buildingState: 0
+    buildExtDayN: {fileID: 0}
+    buildExtHL: {fileID: 0}
+    buildExtNight: {fileID: 0}
+    buildExtNightHL: {fileID: 0}
+    buildIntDay: {fileID: 0}
+    buildIntNight: {fileID: 0}
+    charNames: 
+    npcNames: 
+    interactionType: 00000000
+  _buildItemData:
+  - buildItem: 0
+    buildItemDay: {fileID: 0}
+    buildItemDayHL: {fileID: 0}
+    buildItemNight: {fileID: 0}
+    buildItemNightHL: {fileID: 0}
+    isUnlocked: 0

@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b5e2eb5a4e73a74683a3af4d29d310b, type: 3}
+  m_Name: MarketplaceSO
+  m_EditorClassIdentifier: 
+  _allbuildingData:
+  - buildingName: 3
+    buildingState: 0
+    buildExtDayN: {fileID: 21300000, guid: 05e394ae76634a3428140fd6a5cd5fd7, type: 3}
+    buildExtDayHL: {fileID: 21300000, guid: 2d486dec7bc145c45967fc576a87dcdd, type: 3}
+    buildExtNight: {fileID: 21300000, guid: be70c205302de6f41914f0396423243b, type: 3}
+    buildExtNightHL: {fileID: 21300000, guid: 2ea1d4590caea2f4d8b5c6ee505ef15b, type: 3}
+    buildIntDay: {fileID: 21300000, guid: 07add727ec3750748b08c83c1fc0104b, type: 3}
+    buildIntNight: {fileID: 21300000, guid: 680238ab6e8d8e247ba093a7db84e994, type: 3}
+    charNames: 
+    npcData:
+    - nPCNames: 2
+      nPCIntType: 1
+      isLocked: 0
+    - nPCNames: 2
+      nPCIntType: 2
+      isLocked: 0
+    - nPCNames: 2
+      nPCIntType: 6
+      isLocked: 0
+    - nPCNames: 15
+      nPCIntType: 1
+      isLocked: 0
+    - nPCNames: 15
+      nPCIntType: 2
+      isLocked: 0
+    - nPCNames: 3
+      nPCIntType: 1
+      isLocked: 0
+    - nPCNames: 3
+      nPCIntType: 2
+      isLocked: 0
+    - nPCNames: 3
+      nPCIntType: 8
+      isLocked: 0
+    - nPCNames: 9
+      nPCIntType: 1
+      isLocked: 0
+    - nPCNames: 9
+      nPCIntType: 2
+      isLocked: 0
+    - nPCNames: 9
+      nPCIntType: 5
+      isLocked: 0
+    buildIntType: 
+  _itemInteraction: []

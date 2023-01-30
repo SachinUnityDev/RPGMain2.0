@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b5e2eb5a4e73a74683a3af4d29d310b, type: 3}
+  m_Name: ThievesGuildSO
+  m_EditorClassIdentifier: 
+  _allbuildingData:
+  - buildingName: 9
+    buildingState: 0
+    buildExtDayN: {fileID: 21300000, guid: ff2f0897d8715f043b02befa542ab233, type: 3}
+    buildExtDayHL: {fileID: 21300000, guid: 78d830baf151d3149a890bf5a3070edd, type: 3}
+    buildExtNight: {fileID: 21300000, guid: 33a67f569090ca24eb082e6464e91d6d, type: 3}
+    buildExtNightHL: {fileID: 21300000, guid: 78d830baf151d3149a890bf5a3070edd, type: 3}
+    buildIntDay: {fileID: 0}
+    buildIntNight: {fileID: 0}
+    charNames: 
+    npcData: []
+    buildIntType: 
+  _itemInteraction: []

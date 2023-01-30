@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b5e2eb5a4e73a74683a3af4d29d310b, type: 3}
+  m_Name: ShipSO
+  m_EditorClassIdentifier: 
+  _allbuildingData:
+  - buildingName: 5
+    buildingState: 0
+    buildExtDayN: {fileID: 21300000, guid: 7f92d7836d0675649a15acf007ee688e, type: 3}
+    buildExtDayHL: {fileID: 21300000, guid: 9adb2fd0760e9ea4c9d6ca1bef571733, type: 3}
+    buildExtNight: {fileID: 21300000, guid: 850e628c8fe2e3b408547576459cfb27, type: 3}
+    buildExtNightHL: {fileID: 21300000, guid: cb516f143cfbe7c43b2aa58e0856b4c3, type: 3}
+    buildIntDay: {fileID: 21300000, guid: 5abb5997cc0238e4ca818305e5a0b966, type: 3}
+    buildIntNight: {fileID: 21300000, guid: 0bfd4c0d253a8b244a54b6341dd5d0ba, type: 3}
+    charNames: 04000000
+    npcData:
+    - nPCNames: 1
+      nPCIntType: 1
+      isLocked: 0
+    - nPCNames: 1
+      nPCIntType: 2
+      isLocked: 0
+    buildIntType: 09000000
+  _itemInteraction: []

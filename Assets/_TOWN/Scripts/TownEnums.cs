@@ -31,33 +31,11 @@ namespace Town
         Stable,
         Tavern,
         Temple,
-        Thieves,
-        Guild,
+        ThievesGuild,
+      
     }
 
-    public enum IntType
-    {
-        None,
-        Bounty,
-        Buy,
-        Trade,
-        ChestUpgraded,
-        Chest,
-        ClearMind,
-        CraftPotion,
-        Enchant,
-        Fermentation,
-        FortifyArmor,
-        HealSickness,
-        LoanAndInvest,
-        Music,
-        Safekeep,
-        Serve,
-        Smuggle,
-        Talk,
-        Trophy,
-        WhetWeapon,
-    }
+
 }
 
 

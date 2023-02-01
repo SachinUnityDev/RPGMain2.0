@@ -98,7 +98,7 @@ namespace Common
                         SetLowTypeSpeed(currStrLen);
                     // toogle on Display String 
                     dialogueTxt.text = dialogueString;
-                    SpeakerTags();
+                    TogglePortraitWithSpeakerTags();
                     textRevealer.Reveal();
                     dialogueTxt.text = "";
                     //Debug.Log("INSIDE PRINT DIALOGUE");
@@ -106,6 +106,7 @@ namespace Common
                 else
                 {
                     Debug.Log("Dialogue is paused");
+                    // can disable dialogue screen here 
                 }
                 if (story.currentChoices.Count >= 1)
                     DisplayChoices();
@@ -246,7 +247,7 @@ namespace Common
                                         .ApplyChoices(choice.index, 2f);
 
             // can also be set from outside as in spritePanel
-            escapeCount += 2;
+                 escapeCount = 1;
                 RemoveListener();
                 DisplayStory();
 
@@ -298,7 +299,7 @@ namespace Common
 
             }
 
-            void SpeakerTags()
+            void TogglePortraitWithSpeakerTags()
             {
                 List<string> tags = story.currentTags;
 

@@ -18,8 +18,6 @@ namespace Common
         public Sprite dialoguePortraitUnClicked;
         public Sprite bpPortraitUnLocked;
         public Sprite bpPortraitUnAvail; 
-       
-
 
         public CharMode charMode;
         public CharMode orgCharMode;

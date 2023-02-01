@@ -15,17 +15,38 @@ namespace Town
         Close,
     }
     [Serializable]
+    public enum NPCState
+    {
+        Locked,
+        UnLocked,
+        Available,
+        UnAvaiable,
+    }
+
+    [Serializable]
+    public class CharInteractData
+    {
+        public CharNames compName;
+        public NPCIntType nPCIntType;
+        public NPCState nPCState;
+        public GameObject interactPrefab;
+
+    }
+
+    [Serializable]
     public class NPCDataInBuild
     {
         public NPCNames nPCNames;
         public NPCIntType nPCIntType;
-        public bool isUnLocked; 
+        public NPCState npcState; 
+        public GameObject interactPrefab;
 
     }
     [Serializable]
     public class BuildIntTypeData
     {
         public BuildIntType BuildIntType;
+        public GameObject interactPrefab;
         public bool isUnLocked = false; 
     }
 
@@ -47,13 +68,20 @@ namespace Town
         public Sprite buildIntDay;
         public Sprite buildIntNight; 
 
-        public List<CharNames> charNames = new List<CharNames>();
+        public List<CharInteractData> charNames = new List<CharInteractData>();
+        [Header("NPC Interactions")]
         public List<NPCDataInBuild> npcData = new List<NPCDataInBuild>();
+        // click on NPC portrait or sprite
 
+        [Header("Building Interactions")]
         public List<BuildIntTypeData> buildIntType = new List<BuildIntTypeData>();
+        // buttons at the bottom panel
 
-        public string statusLockedStr="";
-        public string statusUnAvailStr = "";
+        [Header("UnLocked and Unavailable")]
+        [TextArea (4,10)]
+        public List<string> statusLockedStr= new List<string>();
+        [TextArea(4, 10)]
+        public List<string> statusUnAvailStr = new List<string>(); 
     }
 
     [System.Serializable]

@@ -6,7 +6,9 @@ using Common;
 namespace Town
 {
     public class BuildingService : MonoSingletonGeneric<BuildingService>
-    {       
+    {
+
+        public AllBuildSO allBuildSO; 
         void Start()
         {
 

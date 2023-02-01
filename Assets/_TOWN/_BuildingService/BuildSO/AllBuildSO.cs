@@ -26,5 +26,13 @@ namespace Town
                 }
             }
         }
+
+        public BuildingSO GetBuildSO(BuildingNames _buildName)
+        {
+            //int index = allBuildSO.FindIndex(t=>t.)
+
+            return null; 
+        }
+
     }
 }

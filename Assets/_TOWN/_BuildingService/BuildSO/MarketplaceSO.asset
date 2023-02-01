@@ -13,52 +13,61 @@ MonoBehaviour:
   m_Name: MarketplaceSO
   m_EditorClassIdentifier: 
   _allbuildingData:
-  - buildingName: 3
-    buildingState: 0
+    buildingName: 3
+    buildingState: 1
     buildExtDayN: {fileID: 21300000, guid: 05e394ae76634a3428140fd6a5cd5fd7, type: 3}
     buildExtDayHL: {fileID: 21300000, guid: 2d486dec7bc145c45967fc576a87dcdd, type: 3}
     buildExtNight: {fileID: 21300000, guid: be70c205302de6f41914f0396423243b, type: 3}
     buildExtNightHL: {fileID: 21300000, guid: 2ea1d4590caea2f4d8b5c6ee505ef15b, type: 3}
     buildIntDay: {fileID: 21300000, guid: 07add727ec3750748b08c83c1fc0104b, type: 3}
-    buildIntNight: {fileID: 21300000, guid: 680238ab6e8d8e247ba093a7db84e994, type: 3}
-    charNames: 
+    buildIntNight: {fileID: 21300000, guid: 0d66f658e12d25442ae368f24697d592, type: 3}
+    charNames: []
     npcData:
-    - nPCNames: 2
-      nPCIntType: 1
-      isUnLocked: 0
-    - nPCNames: 2
-      nPCIntType: 2
-      isUnLocked: 0
-    - nPCNames: 2
-      nPCIntType: 6
-      isUnLocked: 0
-    - nPCNames: 15
-      nPCIntType: 1
-      isUnLocked: 0
-    - nPCNames: 15
-      nPCIntType: 2
-      isUnLocked: 0
-    - nPCNames: 3
-      nPCIntType: 1
-      isUnLocked: 0
-    - nPCNames: 3
-      nPCIntType: 2
-      isUnLocked: 0
-    - nPCNames: 3
-      nPCIntType: 8
-      isUnLocked: 0
     - nPCNames: 9
       nPCIntType: 1
-      isUnLocked: 0
+      npcState: 2
+      interactPrefab: {fileID: 0}
     - nPCNames: 9
       nPCIntType: 2
-      isUnLocked: 0
+      npcState: 2
+      interactPrefab: {fileID: 0}
     - nPCNames: 9
       nPCIntType: 5
-      isUnLocked: 0
+      npcState: 2
+      interactPrefab: {fileID: 0}
+    - nPCNames: 3
+      nPCIntType: 1
+      npcState: 2
+      interactPrefab: {fileID: 0}
+    - nPCNames: 3
+      nPCIntType: 2
+      npcState: 2
+      interactPrefab: {fileID: 0}
+    - nPCNames: 3
+      nPCIntType: 8
+      npcState: 2
+      interactPrefab: {fileID: 0}
+    - nPCNames: 2
+      nPCIntType: 1
+      npcState: 2
+      interactPrefab: {fileID: 0}
+    - nPCNames: 2
+      nPCIntType: 2
+      npcState: 2
+      interactPrefab: {fileID: 0}
+    - nPCNames: 2
+      nPCIntType: 6
+      npcState: 2
+      interactPrefab: {fileID: 0}
+    - nPCNames: 15
+      nPCIntType: 1
+      npcState: 2
+      interactPrefab: {fileID: 0}
+    - nPCNames: 15
+      nPCIntType: 2
+      npcState: 2
+      interactPrefab: {fileID: 0}
     buildIntType: []
-    statusLockedStr: 
-    statusUnAvailStr: 
-  _itemInteraction:
-  - buildItem: 0
-    isUnlocked: 0
+    statusLockedStr: []
+    statusUnAvailStr:
+    - 'Goods are packed. Everybody left.  '

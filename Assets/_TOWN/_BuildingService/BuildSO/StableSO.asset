@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StableSO
   m_EditorClassIdentifier: 
   _allbuildingData:
-  - buildingName: 6
+    buildingName: 6
     buildingState: 0
     buildExtDayN: {fileID: 21300000, guid: 6a54b6af4370e8949b0bace88f97f39e, type: 3}
     buildExtDayHL: {fileID: 21300000, guid: 81ee0efdd68d4aa46adc36154c7db832, type: 3}
@@ -21,9 +21,8 @@ MonoBehaviour:
     buildExtNightHL: {fileID: 21300000, guid: e43784bae3cc84946ad66de7bdf2f2b5, type: 3}
     buildIntDay: {fileID: 0}
     buildIntNight: {fileID: 0}
-    charNames: 
+    charNames: []
     npcData: []
     buildIntType: []
-    statusLockedStr: 
-    statusUnAvailStr: 
-  _itemInteraction: []
+    statusLockedStr: []
+    statusUnAvailStr: []

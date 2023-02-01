@@ -10,6 +10,7 @@ namespace Common
     public class DialogueFactory : MonoBehaviour
     {
         public Dictionary<DialogueNames, Type> allDialogueControllers;
+        [SerializeField] int dialogueCount = 0;
         void Start()
         {
             allDialogueControllers = new Dictionary<DialogueNames, Type>();
@@ -30,6 +31,7 @@ namespace Common
                 var t = Activator.CreateInstance(diaCtrl) as IDialogue;
                 allDialogueControllers.Add(t.dialogueNames, diaCtrl);
             }
+            dialogueCount = allDialogueControllers.Count;
         }
 
         public IDialogue GetDiaController(DialogueNames _dialogueNames)

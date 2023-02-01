@@ -11,7 +11,9 @@ namespace Town
     public class HouseViewController : MonoBehaviour, IBuilding
     {
         public BuildingNames buildingName => BuildingNames.House;
-   
+
+        [SerializeField] Transform btnContainer;
+             
         [SerializeField] Button intBtn1;
         [SerializeField] Button intBtn2;
         [SerializeField] Button intBtn3;
@@ -25,14 +27,15 @@ namespace Town
 
         public GameObject optionsPanel;
 
+        BuildingSO houseSO; 
         void Start()
         {
-       
+            
         }
         public void Init()
         {
             // get the interactions unlocked
-                
+            houseSO = BuildingService.Instance.allBuildSO.GetBuildSO(BuildingNames.House); 
 
         }
 

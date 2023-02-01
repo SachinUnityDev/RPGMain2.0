@@ -13,28 +13,31 @@ MonoBehaviour:
   m_Name: TempleSO
   m_EditorClassIdentifier: 
   _allbuildingData:
-  - buildingName: 8
+    buildingName: 8
     buildingState: 0
     buildExtDayN: {fileID: 21300000, guid: e47170b7fa046e043ba04b4fce532acb, type: 3}
     buildExtDayHL: {fileID: 21300000, guid: 34fa38842e2be2d4f9df14a1967bac55, type: 3}
     buildExtNight: {fileID: 21300000, guid: bacd7c3f4a994714ba70664e090cc829, type: 3}
     buildExtNightHL: {fileID: 21300000, guid: 31e5373e147e7ea49a8313904637716c, type: 3}
     buildIntDay: {fileID: 21300000, guid: a31bd9c9e3268ea488afe65b883e0e7d, type: 3}
-    buildIntNight: {fileID: 21300000, guid: a31bd9c9e3268ea488afe65b883e0e7d, type: 3}
-    charNames: 07000000
+    buildIntNight: {fileID: 0}
+    charNames:
+    - compName: 7
+      nPCIntType: 1
+      nPCState: 0
+      interactPrefab: {fileID: 0}
     npcData:
     - nPCNames: 13
       nPCIntType: 1
-      isUnLocked: 0
-    - nPCNames: 13
-      nPCIntType: 2
-      isUnLocked: 0
+      npcState: 2
+      interactPrefab: {fileID: 0}
     - nPCNames: 13
       nPCIntType: 4
-      isUnLocked: 0
+      npcState: 2
+      interactPrefab: {fileID: 0}
     buildIntType:
     - BuildIntType: 4
+      interactPrefab: {fileID: 0}
       isUnLocked: 0
-    statusLockedStr: 
-    statusUnAvailStr: 
-  _itemInteraction: []
+    statusLockedStr: []
+    statusUnAvailStr: []

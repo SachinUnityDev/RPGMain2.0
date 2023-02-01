@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TavernSO
   m_EditorClassIdentifier: 
   _allbuildingData:
-  - buildingName: 7
+    buildingName: 7
     buildingState: 0
     buildExtDayN: {fileID: 21300000, guid: 9a491638a7d20e245b06ac015fe41f58, type: 3}
     buildExtDayHL: {fileID: 21300000, guid: 4aed9e47bd6f09c4a80ca14102a34602, type: 3}
@@ -21,30 +21,44 @@ MonoBehaviour:
     buildExtNightHL: {fileID: 21300000, guid: 966b67cfad92cc14f91febf0d6789bcc, type: 3}
     buildIntDay: {fileID: 21300000, guid: 17dcca4ebefb8524996499b6f0064c04, type: 3}
     buildIntNight: {fileID: 21300000, guid: feda0c29c15a9c844b5ce8c0524fded3, type: 3}
-    charNames: 0300000002000000
+    charNames:
+    - compName: 0
+      nPCIntType: 1
+      nPCState: 0
+      interactPrefab: {fileID: 0}
+    - compName: 0
+      nPCIntType: 1
+      nPCState: 0
+      interactPrefab: {fileID: 0}
     npcData:
     - nPCNames: 7
       nPCIntType: 1
-      isUnLocked: 0
+      npcState: 2
+      interactPrefab: {fileID: 0}
     - nPCNames: 7
       nPCIntType: 2
-      isUnLocked: 0
+      npcState: 2
+      interactPrefab: {fileID: 0}
     - nPCNames: 5
       nPCIntType: 1
-      isUnLocked: 0
+      npcState: 0
+      interactPrefab: {fileID: 0}
     - nPCNames: 5
       nPCIntType: 10
-      isUnLocked: 0
-    - nPCNames: 12
-      nPCIntType: 1
-      isUnLocked: 0
+      npcState: 0
+      interactPrefab: {fileID: 0}
     buildIntType:
-    - BuildIntType: 10
+    - BuildIntType: 1
+      interactPrefab: {fileID: 0}
       isUnLocked: 1
     - BuildIntType: 8
+      interactPrefab: {fileID: 0}
       isUnLocked: 1
-    - BuildIntType: 1
+    - BuildIntType: 10
+      interactPrefab: {fileID: 0}
       isUnLocked: 1
-    statusLockedStr: 
-    statusUnAvailStr: 
-  _itemInteraction: []
+    - BuildIntType: 14
+      interactPrefab: {fileID: 0}
+      isUnLocked: 1
+    statusLockedStr: []
+    statusUnAvailStr: []

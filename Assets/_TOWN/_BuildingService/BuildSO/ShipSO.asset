@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShipSO
   m_EditorClassIdentifier: 
   _allbuildingData:
-  - buildingName: 5
+    buildingName: 5
     buildingState: 0
     buildExtDayN: {fileID: 21300000, guid: 7f92d7836d0675649a15acf007ee688e, type: 3}
     buildExtDayHL: {fileID: 21300000, guid: 9adb2fd0760e9ea4c9d6ca1bef571733, type: 3}
@@ -21,19 +21,25 @@ MonoBehaviour:
     buildExtNightHL: {fileID: 21300000, guid: cb516f143cfbe7c43b2aa58e0856b4c3, type: 3}
     buildIntDay: {fileID: 21300000, guid: 5abb5997cc0238e4ca818305e5a0b966, type: 3}
     buildIntNight: {fileID: 21300000, guid: 0bfd4c0d253a8b244a54b6341dd5d0ba, type: 3}
-    charNames: 04000000
+    charNames:
+    - compName: 0
+      nPCIntType: 1
+      nPCState: 0
+      interactPrefab: {fileID: 0}
     npcData:
     - nPCNames: 1
       nPCIntType: 1
-      isUnLocked: 0
+      npcState: 0
+      interactPrefab: {fileID: 0}
     - nPCNames: 1
       nPCIntType: 2
-      isUnLocked: 0
+      npcState: 0
+      interactPrefab: {fileID: 0}
     buildIntType:
     - BuildIntType: 9
+      interactPrefab: {fileID: 0}
       isUnLocked: 0
-    statusLockedStr: 
-    statusUnAvailStr: 
-  _itemInteraction:
-  - buildItem: 1
-    isUnlocked: 1
+    statusLockedStr:
+    - "That ship has sailed a while ago!\r"
+    statusUnAvailStr:
+    - "No decent ship in the docks!\r\r\n"

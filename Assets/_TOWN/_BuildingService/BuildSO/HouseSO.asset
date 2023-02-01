@@ -13,37 +13,45 @@ MonoBehaviour:
   m_Name: HouseSO
   m_EditorClassIdentifier: 
   _allbuildingData:
-  - buildingName: 2
-    buildingState: 1
+    buildingName: 2
+    buildingState: 0
     buildExtDayN: {fileID: 21300000, guid: bb82c7f59ebe4ed41b7c70d82bb4ea99, type: 3}
     buildExtDayHL: {fileID: 21300000, guid: 739db42d479874c419d4ae8b4fbab9e4, type: 3}
-    buildExtNight: {fileID: 21300000, guid: 1f044cb1a200a9f469737fab13e432a9, type: 3}
+    buildExtNight: {fileID: 21300000, guid: 77c7b77b55dddee4f838ec6772438ebe, type: 3}
     buildExtNightHL: {fileID: 21300000, guid: 2c45c9378beab3b429b26e1a991884fc, type: 3}
-    buildIntDay: {fileID: 21300000, guid: f41bb8e1699f93d4ba2d20f97e77ca10, type: 3}
-    buildIntNight: {fileID: 21300000, guid: b1e8ba239e451594a9d363725ce78568, type: 3}
-    charNames: 010000002b0000002a000000
+    buildIntDay: {fileID: 0}
+    buildIntNight: {fileID: 0}
+    charNames: []
     npcData:
     - nPCNames: 10
       nPCIntType: 1
-      isUnLocked: 0
+      npcState: 2
+      interactPrefab: {fileID: 0}
     - nPCNames: 10
       nPCIntType: 3
-      isUnLocked: 0
+      npcState: 2
+      interactPrefab: {fileID: 0}
     buildIntType:
-    - BuildIntType: 11
-      isUnLocked: 1
-    - BuildIntType: 3
-      isUnLocked: 1
     - BuildIntType: 2
-      isUnLocked: 1
+      interactPrefab: {fileID: 0}
+      isUnLocked: 0
     - BuildIntType: 12
-      isUnLocked: 1
+      interactPrefab: {fileID: 0}
+      isUnLocked: 0
+    - BuildIntType: 3
+      interactPrefab: {fileID: 0}
+      isUnLocked: 0
+    - BuildIntType: 14
+      interactPrefab: {fileID: 0}
+      isUnLocked: 0
     - BuildIntType: 5
-      isUnLocked: 0
+      interactPrefab: {fileID: 0}
+      isUnLocked: 1
     - BuildIntType: 6
-      isUnLocked: 0
+      interactPrefab: {fileID: 0}
+      isUnLocked: 1
     - BuildIntType: 13
-      isUnLocked: 0
-    statusLockedStr: 
-    statusUnAvailStr: 
-  _itemInteraction: []
+      interactPrefab: {fileID: 0}
+      isUnLocked: 1
+    statusLockedStr: []
+    statusUnAvailStr: []

@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charName: 0
   npcName: 10
-  clickedSprite: {fileID: 0}
-  unClickedSprite: {fileID: 0}
   allDialogueSOs:
   - {fileID: 11400000, guid: 0227cae8dcd6be9489fed70d3bbf580c, type: 2}
+  - {fileID: 11400000, guid: 45f774597ea105144940ecc533283311, type: 2}
   - {fileID: 11400000, guid: 45f774597ea105144940ecc533283311, type: 2}

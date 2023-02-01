@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CityHallSO
   m_EditorClassIdentifier: 
   _allbuildingData:
-  - buildingName: 1
+    buildingName: 1
     buildingState: 0
     buildExtDayN: {fileID: 21300000, guid: fecfb9dbf7952114680ccc61dd0d25eb, type: 3}
     buildExtDayHL: {fileID: 21300000, guid: 6d92a464b0d7a8e469922af5b705dc4a, type: 3}
@@ -21,9 +21,15 @@ MonoBehaviour:
     buildExtNightHL: {fileID: 21300000, guid: 45e090eda7abbaf4fa9ed2f99a979662, type: 3}
     buildIntDay: {fileID: 0}
     buildIntNight: {fileID: 0}
-    charNames: 
-    npcData: []
-    buildIntType: []
-    statusLockedStr: 
-    statusUnAvailStr: 
-  _itemInteraction: []
+    charNames: []
+    npcData:
+    - nPCNames: 0
+      nPCIntType: 0
+      interactPrefab: {fileID: 0}
+      isUnLocked: 0
+    buildIntType:
+    - BuildIntType: 0
+      interactPrefab: {fileID: 0}
+      isUnLocked: 0
+    statusLockedStr: []
+    statusUnAvailStr: []

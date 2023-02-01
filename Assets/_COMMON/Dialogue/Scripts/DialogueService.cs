@@ -153,6 +153,7 @@ namespace Common
             Sprite[] sprites = new Sprite[2];
             if (charName != CharNames.None)
             {
+                
                 sprites[0] = CharService.Instance.allAllySO                              
                     .Find(t => t.charName == charName).dialoguePortraitClicked;
                 sprites[1] = CharService.Instance.allAllySO

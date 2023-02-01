@@ -10,11 +10,9 @@
                 helloe
         *[Herbalist]
                 sword and gather 
+
+-[Gather here] 
                 
--gathre here 1
-
-hello there is tag break 
-
 #speaker:1:	Abbas		
 		So, tell me kAHLDI111, how may i help you?
 		
@@ -23,8 +21,8 @@ hello there is tag break
 	
 #customint:1:first
 *[Continue]
-        stay wheere u are 		
--
+
+-Gather after continue choice 	
 
 # interaction: 2: hello# define :1: option1 define # define :2: option2 define # define:3: option3 define
 
@@ -45,7 +43,7 @@ hello there is tag break
 # textbox:1:hello# define :1: option1 define # define :2: option2 define # define:3: option3 define
 		
 	*[Continue]
-		       hello abbas9 
+		       //hello abbas9 
 		       
 -> END
 		       

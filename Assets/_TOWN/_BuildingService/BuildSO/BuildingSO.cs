@@ -9,18 +9,16 @@ namespace Town
     [CreateAssetMenu(fileName = "BuildingSO", menuName = "Town Service/BuildingSO")]
     public class BuildingSO : ScriptableObject, IBuildSO
     {
-        
-        [SerializeField] List<BuildingData> _allbuildingData = new List<BuildingData>();
-        public List<BuildingData> allBuildingData
+
+        [SerializeField] BuildingData _allbuildingData; 
+
+        public BuildingData buildingData
         {
             get => _allbuildingData;
             set { _allbuildingData = value; }
         }
         
-        [SerializeField] List<ItemInteractionStatus> _itemInteraction = new List<ItemInteractionStatus>();   
-        public List<ItemInteractionStatus> ItemInteraction { get => _itemInteraction; 
-                                                                set  { _itemInteraction = value; } }
-
+       
         private void Awake()
         {
           
@@ -36,17 +34,15 @@ namespace Town
         Chest, 
     }
     [Serializable]
-    public class ItemInteractionStatus
+    public class BuildInteractData
     {
         public buildItem buildItem;
         public bool isUnlocked;
+      
     }
     public interface IBuildSO
     {
-         List<BuildingData> allBuildingData { get; set; }   
-        List<ItemInteractionStatus> ItemInteraction { get; set; }
-
-
+        BuildingData buildingData { get; set; }   
     }
 
 

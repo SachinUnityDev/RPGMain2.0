@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccc9f03223e50c74ebfb0487950fba1f, type: 3}
+  m_Name: AllBuildSO
+  m_EditorClassIdentifier: 
+  allIntSprites:
+  - intType: 1
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 2
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 3
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 4
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 5
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 6
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 7
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 8
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 9
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 10
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 11
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 12
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 13
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 14
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  - intType: 15
+    intTypeStr: 
+    spriteN: {fileID: 0}
+    spriteHL: {fileID: 0}
+  allBuildSO:
+  - {fileID: 11400000, guid: 6340a2f94fbdd6a4093eac27417485e1, type: 2}
+  - {fileID: 11400000, guid: 2527b9a8ff7bc6746a9a6e09f9fcd4f2, type: 2}
+  - {fileID: 11400000, guid: b73cc98825b3f7c4498cfdf508d376c3, type: 2}
+  - {fileID: 11400000, guid: e9b53c1c4dd362f4cb3ade85b3f7440f, type: 2}
+  - {fileID: 11400000, guid: 5146837c4569a16409745b512933a5f1, type: 2}
+  - {fileID: 11400000, guid: 8fb085b6046d9d34aaccd4f03d1ff076, type: 2}
+  - {fileID: 11400000, guid: b2594edd6ca4e78418c48ec1ae6b361b, type: 2}
+  - {fileID: 11400000, guid: bbed84bb11f473443a0829d6a758824c, type: 2}
+  - {fileID: 11400000, guid: ad225de94603c354b99d46798c57061c, type: 2}

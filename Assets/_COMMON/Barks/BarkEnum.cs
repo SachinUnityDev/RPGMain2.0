@@ -10,20 +10,9 @@ namespace Common
 
     }
 
+
+
     public enum BarkType
-    {
-        None,
-        Multiline_MultiChar, 
-        MultiOptions_SingleChar, 
-        MultiChar_MultiLines, 
-        // singular multi Options -----Minami 
-        // multichar and multiLines
-
-
-
-    }
-
-    public enum BarkTrigger
     {
         None,
         Quest_Barks,

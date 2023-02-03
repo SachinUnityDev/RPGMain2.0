@@ -11,8 +11,8 @@ namespace Town
     {
         Locked,
         UnLocked,
-        Open,
-        Close,
+        Available,
+        UnAvailable,
     }
     [Serializable]
     public enum NPCState

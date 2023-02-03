@@ -24,8 +24,8 @@ namespace Common
 
         void Start()
         {
-            gameController = GetComponent<GameController>();
-            gameModeController = GetComponent<GameModeController>(); 
+            //gameController = GetComponent<GameController>();
+            //gameModeController = GetComponent<GameModeController>(); 
             Init(); 
         }
 

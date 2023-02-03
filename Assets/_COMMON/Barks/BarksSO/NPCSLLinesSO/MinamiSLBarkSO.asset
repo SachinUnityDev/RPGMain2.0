@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 112cb87555371bf4c8cb331b516809b9, type: 3}
+  m_Name: MinamiSLBarkSO
+  m_EditorClassIdentifier: 
+  nPCName: 13
+  NPCBarkData:
+  - FameType: 7
+    interactType: 0
+    barkLines:
+    - "Shalulu salutes you!\r"
+    - "Come, clear your mind.\r"
+    - Welcome to our temple.
+    audioClips:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - FameType: 1
+    interactType: 0
+    barkLines:
+    - Your fame grows strong like the waves.
+    - Anata na ni oini keii hyo suru.
+    audioClips: []
+  - FameType: 2
+    interactType: 0
+    barkLines:
+    - "Shalulu salutes you!\r"
+    - Shalulu welcomes our honorable guest.
+    - You brought purity in our temple.
+    audioClips: []
+  - FameType: 3
+    interactType: 0
+    barkLines:
+    - Konichiwa wakai hero!
+    - This is a temple hero. Don't expect the same respect you get elsewhere.
+    audioClips: []
+  - FameType: 4
+    interactType: 0
+    barkLines:
+    - Itazura-kko kon'nichiwa!
+    - "Come, clear your mind.\r"
+    audioClips: []
+  - FameType: 5
+    interactType: 0
+    barkLines:
+    - Have you come to seek redemption?
+    - "Come, clear your mind.\r"
+    audioClips: []
+  - FameType: 6
+    interactType: 0
+    barkLines:
+    - You will not sack the temple right? Right?
+    audioClips: []
+  - FameType: 7
+    interactType: 1
+    barkLines:
+    - "Go with the waves\r!"
+    - "Goodbye!\r"
+    - May Shalulu watch over you!
+    audioClips: []
+  - FameType: 1
+    interactType: 1
+    barkLines:
+    - Your fame grows strong like the waves.
+    - "Go with the waves\r!"
+    audioClips: []
+  - FameType: 2
+    interactType: 1
+    barkLines:
+    - You are destined for greatness Abbas, do not forget!
+    - Goodbye!
+    audioClips: []
+  - FameType: 3
+    interactType: 1
+    barkLines:
+    - Sayonara erabareshimono!
+    - "Go with the waves\r!"
+    audioClips: []
+  - FameType: 4
+    interactType: 1
+    barkLines:
+    - You may act otherwise but you are pure in your soul!
+    - May Shalulu watch over you!
+    - Goodbye!
+    audioClips: []
+  - FameType: 5
+    interactType: 1
+    barkLines:
+    - Came as a wave, leaving as a Tsunami!
+    - May Shalulu watch over you!
+    audioClips: []
+  - FameType: 6
+    interactType: 1
+    barkLines:
+    - Don't succumb to the darkness inside you!
+    - May Shalulu watch over you!
+    audioClips: []
+  - FameType: 6
+    interactType: 1
+    barkLines:
+    - Don't succumb to the darkness inside you!
+    audioClips: []

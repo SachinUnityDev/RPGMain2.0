@@ -21,3 +21,7 @@ MonoBehaviour:
     type: 3}
   dialoguePortraitUnClicked: {fileID: 21300000, guid: 8fe79c548f545a642b4a460e60861609,
     type: 3}
+  InteractHeading: 
+  InteractionOptions:
+  - 
+  itemTypesAccepted: 

@@ -7,13 +7,15 @@ namespace Common
 {
     public class SettingService : MonoSingletonGeneric<SettingService>
     {
-
-        [SerializeField] GameObject settingsPanel; 
-
+        public KeyBindingSO keyBindingSO; 
+        [SerializeField] GameObject settingsPanel;
+        
         private void Start()
         {
             
         }
+
+
         public void OpenSettingPanel()
         {
             UIControlServiceGeneral.Instance.TogglePanel(settingsPanel, true); 

@@ -24,7 +24,7 @@ namespace Common
         //public BarkLines[] barkLines;   
 
         //BarkData 
-        public BarkTrigger barkTrigger; 
+        public BarkType barkTrigger; 
         public int barkID; 
         public float timeDelay;// time delay if nothing is clicked 
         public CharNames charInBark;

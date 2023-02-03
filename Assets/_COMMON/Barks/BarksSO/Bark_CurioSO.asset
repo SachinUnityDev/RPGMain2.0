@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10affff309e959542acd5ac0b862d6e1, type: 3}
+  m_Name: Bark_CurioSO
+  m_EditorClassIdentifier: 
+  CharName: 1
+  curioData:
+  - curioName: 3
+    barkline: Sadly, no beer.
+  - curioName: 9
+    barkline: Feels great to crash a crate.
+  - curioName: 12
+    barkline: What a fresh looking fountain!
+  - curioName: 8
+    barkline: Chest is the best.
+  - curioName: 16
+    barkline: Smells like shit.
+  - curioName: 17
+    barkline: Smells like shit.
+  - curioName: 16
+    barkline: Skulls of past brave warriors... Too brave!
+  - curioName: 10
+    barkline: Sticky as pit!
+  - curioName: 18
+    barkline: Fucking rats!
+  - curioName: 18
+    barkline: Fucking rats!
+  - curioName: 19
+    barkline: I wish it was a magic sack!

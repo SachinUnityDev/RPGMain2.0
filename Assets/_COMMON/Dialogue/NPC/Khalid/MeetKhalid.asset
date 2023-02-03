@@ -20,7 +20,7 @@ MonoBehaviour:
   charInDialogue: 01000000
   NPCinDialogue: 
   locationName: 1
-  dialogueAsset: {fileID: 4900000, guid: e9460e61adbcc34418ef472a0d3d8624, type: 3}
+  dialogueAsset: {fileID: 4900000, guid: a6c692d005029d64ea034d0f7cabb327, type: 3}
   interactSprites:
   - interactionNo: 1
     allSprites:

@@ -15,7 +15,7 @@ namespace Common
             // barkAudio controller to manager sound files 
         }
 
-        public void PlayBark( int BarkID, BarkTrigger barkTrigger, 
+        public void PlayBark( int BarkID, BarkType barkTrigger, 
             CharNames charName)
         {
             // Bark trigger .. who will carry the bark 
@@ -29,32 +29,32 @@ namespace Common
 
         }
         // method overloading... 
-        BarkSO GetbarkSO(BarkTrigger barkTrigger)
+        BarkSO GetbarkSO(BarkType barkTrigger)
         {
             switch (barkTrigger)
             {
-                case BarkTrigger.None:
+                case BarkType.None:
                     // generic barks to be owned by BarkModel  here 
                     break;
-                case BarkTrigger.Quest_Barks:
+                case BarkType.Quest_Barks:
                     // get from the quest model 
                     break;
-                case BarkTrigger.Prep_Quest_Barks:
+                case BarkType.Prep_Quest_Barks:
                     // get fromthe quest model 
                     break;
-                case BarkTrigger.dead_Barks:
+                case BarkType.dead_Barks:
                     // get from the charModels 
                     break;
-                case BarkTrigger.Curio_Barks:
+                case BarkType.Curio_Barks:
                     // get from the CurioModel
                     break;
-                case BarkTrigger.Town_Barks:
+                case BarkType.Town_Barks:
                     // get from the townModels
                     break;
-                case BarkTrigger.NPC_Barks:
+                case BarkType.NPC_Barks:
                     // get from the NPC models
                     break;
-                case BarkTrigger.Combat_Barks:
+                case BarkType.Combat_Barks:
                     // get from the CharCombatModels
          
                 default:

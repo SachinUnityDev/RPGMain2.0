@@ -121,7 +121,6 @@ namespace Common
             Transform choiceContainer = choiceParent.transform.GetChild(0);
             InteractTag();
 
-
             if (currentChoices.Count > 4)
             {
                 Debug.LogError("More choices were given than the UI can support. Number of choices given: "
@@ -247,7 +246,7 @@ namespace Common
                                         .ApplyChoices(choice.index, 2f);
 
             // can also be set from outside as in spritePanel
-                 escapeCount = 1;
+                 escapeCount = 1; 
                 RemoveListener();
                 DisplayStory();
 

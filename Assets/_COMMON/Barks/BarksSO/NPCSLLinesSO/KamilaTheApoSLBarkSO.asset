@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 112cb87555371bf4c8cb331b516809b9, type: 3}
+  m_Name: KamilaTheApoSLBarkSO
+  m_EditorClassIdentifier: 
+  nPCName: 9
+  NPCBarkData:
+  - FameType: 7
+    interactType: 0
+    barkLines:
+    - 'Hello!
+
+'
+    - 'Czesc!
+
+'
+    - I have herbs and potions... Come, see yourself.
+    audioClips: []
+  - FameType: 1
+    interactType: 0
+    barkLines:
+    - Happy to see such a respectable man in my shop!
+    - I have herbs and potions... Come, see yourself.
+    audioClips: []
+  - FameType: 2
+    interactType: 0
+    barkLines:
+    - I am honored to be at your service Abbas!
+    - I have herbs and potions... Come, see yourself.
+    audioClips: []
+  - FameType: 3
+    interactType: 0
+    barkLines:
+    - 'Let me be the healing hand of Ruru for you! '
+    - Czesc!
+    audioClips: []
+  - FameType: 4
+    interactType: 0
+    barkLines:
+    - 'Hello! '
+    - Czesc!
+    audioClips: []
+  - FameType: 5
+    interactType: 0
+    barkLines:
+    - Welcome you notorious scamp!
+    audioClips: []
+  - FameType: 6
+    interactType: 0
+    barkLines:
+    - Every dangerous man, needs a woman to tend to his wounds!
+    audioClips: []
+  - FameType: 6
+    interactType: 0
+    barkLines:
+    - Every dangerous man, needs a woman to tend to his wounds!
+    audioClips: []
+  - FameType: 6
+    interactType: 1
+    barkLines:
+    - "Next time!\r"
+    - 'May Ruru heal all your wounds!
+
+'
+    - Hope to see you again!
+    audioClips: []
+  - FameType: 1
+    interactType: 1
+    barkLines:
+    - Do zobaczenia!
+    audioClips: []
+  - FameType: 2
+    interactType: 1
+    barkLines:
+    - Do zobaczenia!
+    audioClips: []
+  - FameType: 3
+    interactType: 1
+    barkLines:
+    - May the gods be with you my hero!
+    audioClips: []
+  - FameType: 4
+    interactType: 1
+    barkLines:
+    - Do zobaczenia!
+    audioClips: []
+  - FameType: 5
+    interactType: 1
+    barkLines:
+    - Do zobaczenia!
+    audioClips: []
+  - FameType: 6
+    interactType: 1
+    barkLines:
+    - You are an eagle Abbas, that's why these serpents despise you!
+    audioClips: []

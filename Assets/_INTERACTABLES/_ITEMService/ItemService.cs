@@ -458,7 +458,7 @@ namespace Interactables
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.PoeticGewgaws, (int)PoeticGewgawNames.RingLegacyOfTheSpida,
+                InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionNames.StaminaPotion,
                                      CauseType.Items, 2);
             }
             if (Input.GetKeyDown(KeyCode.J))

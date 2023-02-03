@@ -23,15 +23,13 @@
          # define:3: unavailable for Demo
          
 		*[Warden]
-		    I was the Warden in my village. I don’t like bragging but people praised me for my physical prowess and polearm skills.
-		    ->OnClassChoiceCompleted
+		    ->DONE
+		    
         *[Skirmisher]
             I’m not really a warrior type, though I do have my hatchet to swing and my rungu to throw. I’ve been called as the Skirmisher in Adjholo.
             ->OnClassChoiceCompleted
         *[Herbalist]
-            I have been studying the art of Herbalism in my village since childhood. Praise to earth mother Ruru, I am a man of nature. Trees are my friends, animals are my brothers.
-            ->OnClassChoiceCompleted
-                
+            ->DONE    
 
 -> END
 

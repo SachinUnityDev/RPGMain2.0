@@ -96,7 +96,7 @@ namespace Common
             }
         }
 
-        void OnKeyBindFound(KeyBindingData keyData)
+        void OnKeyBindFound(KeyBindingData keyData)  // bind key action here
         {
             switch (keyData.keyfunc)
             {

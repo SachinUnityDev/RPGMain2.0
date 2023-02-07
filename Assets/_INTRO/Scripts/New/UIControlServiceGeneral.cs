@@ -120,8 +120,13 @@ namespace Common
                 canvasGrp.interactable = turnON;
                 canvasGrp.blocksRaycasts = turnON;
             }
-            if(turnON)
-            AddPanel2OpenList(go); 
+            if (turnON)
+            {
+                IPanel panel = go.GetComponentInChildren<IPanel>();
+                if (panel != null)
+                    panel.Load();
+            }
+           
         }
 
         public void TogglePanelOnInGrp(GameObject go, bool turnON)  // deprecated ...slowly

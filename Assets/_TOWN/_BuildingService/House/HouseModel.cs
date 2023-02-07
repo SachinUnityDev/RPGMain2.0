@@ -19,7 +19,31 @@ namespace Town
     [Serializable]
     public class HouseModel
     {
+        [Header("Interact: Buy Furniture")]
         public List<HousePurchaseOptsData> purchaseOpts = new List<HousePurchaseOptsData>();
+
+        [Header("Interact: Rest")]
+        public bool isBedUpgraded =false;
+
+        [Header("Interact: Provision")]
+        public Iitems item;
+
+        [Header("Interact: Stash")]
+        public List<Iitems> allItemsInStash = new List<Iitems>();
+        public bool isStashUpgraded = false; 
+
+        [Header("Interact:Fermentor")]
+        public bool isFermentorPurchased = false;
+
+        [Header("Interact: Dryer")]
+        public bool isDryerPurchased = false;
+
+        [Header("Interact: Cora")]
+        public bool isCoraPurchased = false;
+
+        [Header("Interact: Drums")]
+        public bool isDrumsPurchased = false;
+
 
     }
 }

@@ -11,15 +11,7 @@ namespace Town
 {
     public class HousePlankBtnEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
-        [SerializeField] Image plankBG;//get it from the SO
-        //public bool isPlankClicked;
-
-        //[Header("To be ref")]
-        //[SerializeField] TextMeshProUGUI itemNameTxt;
-        //[SerializeField] Button tickButton;
-        //[SerializeField] Transform currTrans;
-
-
+        [SerializeField] Image plankBG;  
 
         [Header("Plank BG to be ref")]
         [SerializeField] Sprite spriteBG_Purchased;
@@ -44,16 +36,8 @@ namespace Town
             currencyTrans = transform.GetChild(2);
             plankBG = GetComponent<Image>();
 
-
-            //isPlankClicked = false;
-
             statusImg.gameObject.SetActive(false);
 
-            //tickButton = GetComponentInChildren<Button>();
-            //tickButton.gameObject.SetActive(false);
-            //tickButton.onClick.AddListener(OnTickButtonPressed);
-            
-            
         }
 
         public void Init(HousePurchaseOptsData houseData, PurchaseFurnitureView purchaseFurnitureView)
@@ -69,23 +53,11 @@ namespace Town
             currencyTrans.GetComponent<CurrencyView>().Init(houseData.currency);
             statusImg.gameObject.SetActive(false);
             if (houseData.isPurchased)
-                OnPurchase(); 
+                OnPurchase();
+            else
+                OnDeSelect();
         }
-
-        //public void SetUnclickedState()
-        //{
-        //    if (houseData.isPurchased) return; 
-        //    isPlankClicked = false; 
-        //    plankBG.DOFade(0, 0.05f);
-        //   // tickButton.gameObject.SetActive(false);
-
-        //}
-
-        //void OnTickButtonPressed()
-        //{
-        //    Debug.Log("Purchase made");
-        //}
-
+    
         public void OnPointerEnter(PointerEventData eventData)
         {
             // if some is selected other will not be hoverable 
@@ -106,9 +78,10 @@ namespace Town
         {
             // update the parent
             if (houseData.isPurchased) return;
-            purchaseFurnitureView.selectInt = transform.GetSiblingIndex();
-            plankBG.sprite = spriteBG_Purchased;
+                purchaseFurnitureView.OnSlotSelect(transform.GetSiblingIndex());
+            plankBG.sprite = spriteBG_Purchaseable;
             plankBG.DOFade(1, 0.1f);
+            
         }
 
         public void OnPurchase()
@@ -125,76 +98,18 @@ namespace Town
         }
         public void OnCancelPurchase()
         {
+            if (houseData.isPurchased) return;
             plankBG.sprite = spriteBG_Purchaseable;
             plankBG.DOFade(0, 0.1f);
 
         }
 
-        //void ShowTick()
-        //{
-        //    if (isPlankClicked)  // Less money to purchase condition to be added later 
-        //    {
-        //        tickButton.gameObject.SetActive(true);
-        //    }
-        //}
-        //bool ChkOtherClickedStatus()
-        //{
-        //    Transform parentTrans = transform.parent;
-        //    foreach (Transform child in parentTrans)
-        //    {
-        //        if (child.gameObject == this.gameObject) continue;
-        //        HousePlankBtnEvents HPBEvent = child.GetComponent<HousePlankBtnEvents>();
-        //        if (HPBEvent.isPlankClicked)
-        //        {
-        //            return true; 
-        //        }
-        //    }
-        //    return false; 
-        //}
-
-        //void ChgOtherPlankStatus()
-        //{
-        //    //get parent .. loop thru all the scripts see if any oneelse is clicked
-        //    Transform parentTrans = transform.parent;
-        //    foreach (Transform child in parentTrans)
-        //    {
-        //        if (child.gameObject == this.gameObject) continue;
-        //        HousePlankBtnEvents HPBEvent = child.GetComponent<HousePlankBtnEvents>(); 
-        //        if (HPBEvent.isPlankClicked)
-        //        {   
-        //            HPBEvent.SetUnclickedState();
-        //        }
-        //    }
-        //}
-
-        //public void OnPointerClick(PointerEventData eventData)
-        //{
-        //    if (!isPlankClicked)
-        //    {
-        //        ChgOtherPlankStatus(); 
-        //        plankBG.DOFade(1, 0.05f);
-        //        isPlankClicked = true;
-        //        ShowTick();
-        //    }
-        //    else
-        //    {
-        //        SetUnclickedState();
-        //    }
-        //}
-
-        //public void OnPointerEnter(PointerEventData eventData)
-        //{
-        //    if(!ChkOtherClickedStatus())
-        //        plankBG.DOFade(1, 0.05f); 
-        //}
-
-        //public void OnPointerExit(PointerEventData eventData)
-        //{
-        //    if(!isPlankClicked)
-        //        plankBG.DOFade(0, 0.05f);
-        //}
-
-
+        public void OnDeSelect()
+        {
+            if (houseData.isPurchased) return;
+            plankBG.sprite = spriteBG_Purchaseable;
+            plankBG.DOFade(0, 0.1f);
+        }
     }
 
 

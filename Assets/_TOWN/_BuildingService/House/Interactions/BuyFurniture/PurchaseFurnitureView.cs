@@ -42,14 +42,24 @@ namespace Town
 
         public void Load()
         {
-            
+            FillSlots();
         }
 
         public void UnLoad()
         {
             
         }
-
+        public void OnSlotSelect(int index)
+        {
+            selectInt = index;
+            int i = 0;
+            foreach (Transform child in plankContainer)
+            {
+                if(i != index)
+                child.GetComponent<HousePlankBtnEvents>().OnDeSelect(); 
+                i++;
+            }
+        }
         void FillSlots()
         {
             houseModel = BuildingService.Instance.houseController.houseModel;
@@ -72,6 +82,7 @@ namespace Town
         }
         void OnNoPressed()
         {
+            if(selectInt == -1) return;
             plankContainer.GetChild(selectInt).GetComponent<HousePlankBtnEvents>().OnCancelPurchase();
             selectInt = -1;
         }

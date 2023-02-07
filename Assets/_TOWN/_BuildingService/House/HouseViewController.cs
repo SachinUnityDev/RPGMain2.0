@@ -38,9 +38,9 @@ namespace Town
         {
             // get the interactions unlocked
             houseSO = BuildingService.Instance.allBuildSO.GetBuildSO(BuildingNames.House);
-            timeState = CalendarService.Instance.currtimeState; 
+            timeState = CalendarService.Instance.currtimeState;
             // get house interaction unloacked from controller
-
+           
         }
 
         public void Load()

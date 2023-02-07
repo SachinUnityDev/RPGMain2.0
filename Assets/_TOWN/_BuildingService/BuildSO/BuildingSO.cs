@@ -26,20 +26,14 @@ namespace Town
 
     }
 
-    public enum buildItem
-    {
-        None, 
-        Bed, 
-        Guitar, 
-        Chest, 
-    }
-    [Serializable]
-    public class BuildInteractData
-    {
-        public buildItem buildItem;
-        public bool isUnlocked;
+  
+   // [Serializable]
+    //public class BuildInteractData
+    //{
+    //    public HouseItem buildItem;
+    //    public bool isUnlocked;
       
-    }
+    //}
     public interface IBuildSO
     {
         BuildingData buildingData { get; set; }   

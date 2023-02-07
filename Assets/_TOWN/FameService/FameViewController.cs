@@ -31,6 +31,7 @@ namespace Common
         Notorious,
         Villain,
         Unknown,
+        All,
     }
 
     public enum FameBehavior

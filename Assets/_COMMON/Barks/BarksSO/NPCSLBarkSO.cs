@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Town;
 using UnityEngine;
 
 [Serializable]
-public enum NPCInteractType
+public enum NPCTalkType
 {
     Welcome,
     Leave,
@@ -18,16 +19,30 @@ namespace Common
     public class NPCSLBarkData
     {
         public FameType FameType;
+        public NPCTalkType interactType;
+        public List<BarkLineData> barkLineData = new List<BarkLineData>();  
+    }
+
+    [Serializable]
+    public class BuildInteractBarkData
+    {       
+        public BuildInteractType interactType;  
+        public BarkLineData barkLine;
+    }
+    [Serializable]
+    public class NPCInteractBarkData
+    {
+        public TempTraitName tempTraitName;
         public NPCInteractType interactType;
-        [TextArea(3, 10)]
-        public List<string> barkLines = new List<string>();
-        public List<AudioClip> audioClips = new List<AudioClip>();
+        public BarkLineData barkLine;
     }
   
     [CreateAssetMenu(fileName = "NPCSLBarkSO", menuName = "Common/BarkService/NPCSLBarkSO")]
     public class NPCSLBarkSO : ScriptableObject
     {
         public NPCNames nPCName; 
-        public List<NPCSLBarkData> NPCBarkData = new List<NPCSLBarkData>(); 
+        public List<NPCSLBarkData> NPCBarkData = new List<NPCSLBarkData>();
+        public List<NPCInteractBarkData> allNPCInteractBarkData = new List<NPCInteractBarkData>();
+        public List<BuildInteractBarkData> allBuildInteractBarkData = new List<BuildInteractBarkData>();
     }
 }

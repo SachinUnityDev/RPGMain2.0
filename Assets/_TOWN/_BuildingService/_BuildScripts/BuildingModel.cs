@@ -27,7 +27,7 @@ namespace Town
     public class CharInteractData
     {
         public CharNames compName;
-        public NPCIntType nPCIntType;
+        public NPCInteractType nPCIntType;
         public NPCState nPCState;
         public GameObject interactPrefab;
 
@@ -37,7 +37,7 @@ namespace Town
     public class NPCDataInBuild
     {
         public NPCNames nPCNames;
-        public NPCIntType nPCIntType;
+        public NPCInteractType nPCIntType;
         public NPCState npcState; 
         public GameObject interactPrefab;
 
@@ -45,7 +45,7 @@ namespace Town
     [Serializable]
     public class BuildIntTypeData
     {
-        public BuildIntType BuildIntType;
+        public BuildInteractType BuildIntType;
         public GameObject interactPrefab;
         public bool isUnLocked = false; 
     }
@@ -87,7 +87,7 @@ namespace Town
     [System.Serializable]
     public class InteractionSpriteData
     {
-        public BuildIntType intType;
+        public BuildInteractType intType;
         public string intTypeStr =""; 
         public Sprite spriteN;
         public Sprite spriteHL;

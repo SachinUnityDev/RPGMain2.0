@@ -18,10 +18,10 @@ namespace Town
         {
             if (allIntSprites.Count < 1)   // patch fix to prevent recreation of fields 
             {
-                for (int i = 1; i < Enum.GetNames(typeof(BuildIntType)).Length; i++)
+                for (int i = 1; i < Enum.GetNames(typeof(BuildInteractType)).Length; i++)
                 {
                     InteractionSpriteData iSData = new InteractionSpriteData();
-                    iSData.intType = (BuildIntType)i;
+                    iSData.intType = (BuildInteractType)i;
                     allIntSprites.Add(iSData);
                 }
             }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.EventSystems;
-
+using Common;
 
 namespace Town
 {
@@ -27,7 +27,9 @@ namespace Town
 
         public GameObject optionsPanel;
 
-        BuildingSO houseSO; 
+        BuildingSO houseSO;
+        TimeState timeState; 
+
         void Start()
         {
             
@@ -35,7 +37,9 @@ namespace Town
         public void Init()
         {
             // get the interactions unlocked
-            houseSO = BuildingService.Instance.allBuildSO.GetBuildSO(BuildingNames.House); 
+            houseSO = BuildingService.Instance.allBuildSO.GetBuildSO(BuildingNames.House);
+            timeState = CalendarService.Instance.currtimeState; 
+            // get house interaction unloacked from controller
 
         }
 

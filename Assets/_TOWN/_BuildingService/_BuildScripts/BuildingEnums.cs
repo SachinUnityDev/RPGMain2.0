@@ -19,7 +19,7 @@ namespace Town
                         // as in certain days in a week cannot access the building         
     }
 
-    public enum NPCIntType
+    public enum NPCInteractType
     {
         None, // to be shown on NPC panel
         Talk, 
@@ -34,7 +34,7 @@ namespace Town
         Gamble,
         
     }
-    public enum BuildIntType
+    public enum BuildInteractType
     {
         None,
         Bounty, // tavern 
@@ -52,6 +52,18 @@ namespace Town
         DryFood, 
         Rest,
         Brawl, 
+        RechargeWeapon, 
     }
     
+    public enum HousePurchaseOpts
+    {        
+        
+        UpgradeBed,
+        UpgradeStash,
+        Fermentor,
+        Dryer,
+        Cora,
+        Drums,
+    }
+
 }

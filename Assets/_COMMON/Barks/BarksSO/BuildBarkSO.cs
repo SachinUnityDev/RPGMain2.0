@@ -18,6 +18,7 @@ namespace Common
         public TimeState timeState;
         [TextArea (2,10)]
         public string barkLine;
+        public BarkLineData barkLineData;
     }
 
     [CreateAssetMenu(fileName = "BuildBarkSO", menuName = "Common/BarkService/BuildingBark")]

@@ -5,9 +5,15 @@ using UnityEngine;
 
 namespace Town
 {
+
+
+
     public class HouseController : MonoBehaviour
     {
-        
+        public HouseModel houseModel; 
+
+
+
 
 
 

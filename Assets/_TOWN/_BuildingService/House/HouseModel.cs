@@ -1,18 +1,25 @@
+using Interactables;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HouseModel : MonoBehaviour
+
+namespace Town
 {
-    // Start is called before the first frame update
-    void Start()
+    [Serializable]
+    public class HousePurchaseOptsData
     {
-        
+        public HousePurchaseOpts houseOpts;
+        public Currency currency;
+        public bool isPurchased;
+        public bool isPurchaseAbleInDemo;
     }
 
-    // Update is called once per frame
-    void Update()
+    [Serializable]
+    public class HouseModel
     {
-        
+        public List<HousePurchaseOptsData> purchaseOpts = new List<HousePurchaseOptsData>();
+
     }
 }

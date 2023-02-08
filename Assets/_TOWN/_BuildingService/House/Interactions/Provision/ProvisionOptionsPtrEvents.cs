@@ -31,7 +31,7 @@ namespace Town
         {
             transform.DOScale(1.15f, 0.1f);           
             transform.GetComponent<TextMeshProUGUI>().DOColor(colorHL, 0.1f); 
-            provisionView.OnSelect(potionName);
+            provisionView.OnSelect(potionName, transform.GetSiblingIndex());
            
         }
         public void OnDeSelect(bool isClick = false)  

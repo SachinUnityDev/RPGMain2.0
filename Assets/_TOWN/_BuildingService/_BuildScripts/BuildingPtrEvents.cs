@@ -8,7 +8,7 @@ namespace Common
 {
     public class BuildingPtrEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
-        Image btnImg;
+       
         /// <summary>
         /// Button HL deprecate 
         /// get plank data directly from the BuildingSO 
@@ -18,30 +18,89 @@ namespace Common
         
 
         [SerializeField] BuildingNames buildingName;
-        [SerializeField] BuildingSO buildSO; 
+        [SerializeField] BuildingSO buildSO;
+        TownViewController townViewController;
+
+        [Header("Image")]
+        [SerializeField] Image buildImg;
+
+
+        [Header("Global Var")]
+        [SerializeField] TimeState timeState;
+        [SerializeField] bool isSelected; 
+        private void Awake()
+        {
+            buildImg = transform.GetComponent<Image>();
+        }
+        public void Init(TownViewController townViewController)
+        {
+            this.townViewController = townViewController;
+            buildSO = TownService.Instance.allbuildingSO.GetBuildSO(buildingName);
+            timeState = CalendarService.Instance.currtimeState;
+            SetSpriteNormal();     
+        }
+
+        void SetSpriteNormal()
+        {
+          //  Debug.LogError("Build name" + buildSO.buildingData.buildingName);
+                 
+            if (timeState == TimeState.Day)
+            {
+                buildImg.sprite = buildSO.buildingData.buildExtDayN;
+            }
+            else
+            {
+                buildImg.sprite = buildSO.buildingData.buildExtDayN;
+            }
+        }
+        void SetSpriteHL()
+        {
+            if (timeState == TimeState.Day)
+            {
+                buildImg.sprite = buildSO.buildingData.buildExtDayHL;
+            }
+            else
+            {
+                buildImg.sprite = buildSO.buildingData.buildExtDayHL;
+            }
+        }
+
+
+        public void OnSelect()
+        {
+
+            SetSpriteHL();
+        }
+        public void OnDeSelect()
+        {
+            isSelected = false; 
+        }
+
         public void OnPointerClick(PointerEventData eventData)
         {
-           
+            // select this build
+            int index = transform.GetSiblingIndex();
+            townViewController.OnBuildSelect(index); 
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            // HL the building
-            // incorporte day and night in one
-
+            if (townViewController == null) return;
+            if (townViewController.selectBuild != BuildingNames.None) return; 
+            SetSpriteHL();  
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-          
+            if (townViewController == null) return;
+            if (townViewController.selectBuild != BuildingNames.None) return;
+            SetSpriteNormal(); 
         }
 
         void Start()
         {
-            // loop thru 
-
-            btnImg = GetComponent<Image>();
-            btnImg.alphaHitTestMinimumThreshold = 0.1f;
+            buildImg = GetComponent<Image>();
+            buildImg.alphaHitTestMinimumThreshold = 0.1f;
         }
 
       

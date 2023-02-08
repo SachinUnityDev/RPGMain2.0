@@ -84,7 +84,7 @@ namespace Interactables
         void Start()
         {
             itemFactory = gameObject.GetComponent<ItemFactory>();
-            CalendarService.Instance.OnStartOfDay += (int day) => OnDayTickOnScroll();
+          
         }
 
         // distributed 
@@ -97,9 +97,8 @@ namespace Interactables
                             charController.gameObject.AddComponent<ItemController>();
                 itemController.Init();
                 allItemControllers.Add(itemController);
-                
-
             }
+            CalendarService.Instance.OnStartOfDay += (int day) => OnDayTickOnScroll();
         }
 
         #region ITEM BASE

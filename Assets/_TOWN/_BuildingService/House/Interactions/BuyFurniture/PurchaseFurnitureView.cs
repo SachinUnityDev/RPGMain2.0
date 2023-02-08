@@ -62,7 +62,7 @@ namespace Town
         }
         void FillSlots()
         {
-            houseModel = BuildingService.Instance.houseController.houseModel;
+            houseModel = BuildingIntService.Instance.houseController.houseModel;
             int i = 0; 
             foreach(Transform child in plankContainer)
             {

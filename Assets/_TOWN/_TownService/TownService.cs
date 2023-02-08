@@ -21,6 +21,9 @@ namespace Town
         [Header("TOWN LOCATION")]
         public BuildingNames selectBuildingName;
 
+
+        public AllBuildSO allbuildingSO;
+
         void Start()
         {
             townController = GetComponent<TownController>();
@@ -35,17 +38,14 @@ namespace Town
             townModel.currTown = location;
             townModel.allCharInTown 
                 = RosterService.Instance.rosterController.GetCharAvailableInTown(location);
+
+            townViewController.TownViewInit();
+
            // RosterService.Instance.OpenRosterView();
             // can instantiate prefab etc too here 
           //  townController.GetCharAvailableInTown(townModel.currTown);
 
         }
-
-        private void Update()
-        {
-         
-        }
-
 
     }
 

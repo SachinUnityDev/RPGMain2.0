@@ -7,7 +7,7 @@ namespace Interactables
 {
     public class ProvisionView : MonoBehaviour
     {
-        
+        // arrow interactions
         
 
     }

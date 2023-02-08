@@ -64,16 +64,17 @@ namespace Combat
 
         private void Awake()
         {
+            charController = GetComponent<CharController>();
             CombatEventService.Instance.OnEOR += RoundTick;
             CombatEventService.Instance.OnEOC += EOCTick;
-            CalendarService.Instance.OnStartOfDay += (int dayName) => ToggleBuffsOnStartOfTheDay();
+          
             //  QuestEventService.Instance.OnDayChange
         }
-        void Start()
+        void OnEnable()
         {
             // should have feature of printing some data from skills directly
-            charController = GetComponent<CharController>();
-            
+
+            CalendarService.Instance.OnStartOfDay += (int dayName) => ToggleBuffsOnStartOfTheDay();
 
         }
 

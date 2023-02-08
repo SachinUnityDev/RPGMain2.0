@@ -22,18 +22,43 @@ namespace Town
 
         [SerializeField] GameObject InteractionPanel;
 
-        [SerializeField] List<GameObject> allPanels = new List<GameObject>(); 
+        [SerializeField] List<GameObject> allPanels = new List<GameObject>();
+
+
+        public BuildingNames selectBuild;
+        [SerializeField] Transform buildContainer; 
+
 
         void Start()
         {
-            rosterBtn.onClick.AddListener(OnRosterBtnPressed);
-            jobBtn.onClick.AddListener(OnJobsBtnPressed);
-            inventoryBtn.onClick.AddListener(OnInvBtnPressed);
+            buildContainer = transform.GetChild(0);
+     
+            //rosterBtn.onClick.AddListener(OnRosterBtnPressed);
+            //jobBtn.onClick.AddListener(OnJobsBtnPressed);
+            //inventoryBtn.onClick.AddListener(OnInvBtnPressed);
 
-            eventBtn.onClick.AddListener(OnEventBtnPressed);
-            questScrollBtn.onClick.AddListener(OnQuestScrollBtnPressed);
-            mapBtn.onClick.AddListener(OnMapBtnPressed);
+            //eventBtn.onClick.AddListener(OnEventBtnPressed);
+            //questScrollBtn.onClick.AddListener(OnQuestScrollBtnPressed);
+            //mapBtn.onClick.AddListener(OnMapBtnPressed);
         }
+
+
+
+
+        public void OnBuildSelect(int index)
+        {
+            selectBuild = (BuildingNames)(index + 1); // correction for none
+        }
+        public void TownViewInit()
+        {
+
+            foreach (Transform child in buildContainer)
+            {
+               child.GetComponent<BuildingPtrEvents>().Init(this);
+            }
+        }
+
+
 
         void OnRosterBtnPressed()
         {

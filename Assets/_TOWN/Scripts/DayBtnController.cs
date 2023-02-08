@@ -22,7 +22,7 @@ public class DayBtnController: MonoBehaviour    // Calendar UI Day Btns controll
     [SerializeField] Sprite currentDaySprite;
     Image btnImg;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         dayBtnState = DayBtnState.Upcomingday;
         btnImg = GetComponent<Image>(); 

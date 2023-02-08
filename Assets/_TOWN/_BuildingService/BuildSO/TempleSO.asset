@@ -20,7 +20,7 @@ MonoBehaviour:
     buildExtNight: {fileID: 21300000, guid: bacd7c3f4a994714ba70664e090cc829, type: 3}
     buildExtNightHL: {fileID: 21300000, guid: 31e5373e147e7ea49a8313904637716c, type: 3}
     buildIntDay: {fileID: 21300000, guid: a31bd9c9e3268ea488afe65b883e0e7d, type: 3}
-    buildIntNight: {fileID: 0}
+    buildIntNight: {fileID: 21300000, guid: a31bd9c9e3268ea488afe65b883e0e7d, type: 3}
     charNames:
     - compName: 7
       nPCIntType: 1

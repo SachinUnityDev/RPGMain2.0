@@ -45,14 +45,16 @@ namespace Common
         public void On_TownEnter(LocationName locationName)
         {
 
-            TownService.Instance.Init(locationName);
+
             CalendarService.Instance.Init();
+
             CharService.Instance.Init();
 
             BestiaryService.Instance.Init();
+            ItemService.Instance.Init();
             FameService.Instance.Init();
             LevelService.Instance.Init();
-
+            TownService.Instance.Init(locationName);
             OnTownEnter?.Invoke(locationName);
 
         }

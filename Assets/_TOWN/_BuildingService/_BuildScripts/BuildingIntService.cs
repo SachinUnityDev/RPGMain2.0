@@ -26,13 +26,17 @@ namespace Town
     //    RechargeWeapon, 
 
     //}
+    /// <summary>
+    ///  To provide a as singleton for the interior interactions of the building
+    /// </summary>
 
-
-    public class BuildingService : MonoSingletonGeneric<BuildingService>
+    public class BuildingIntService : MonoSingletonGeneric<BuildingIntService>
     {
 
         public AllBuildSO allBuildSO; 
-        public HouseController houseController; 
+        public HouseController houseController;
+        public TavernController tavernController; 
+        public TempleController templeController;
         void Start()
         {
             houseController = GetComponent<HouseController>();

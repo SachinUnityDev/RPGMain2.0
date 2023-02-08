@@ -29,8 +29,13 @@ namespace Town
         public CharNames compName;
         public NPCInteractType nPCIntType;
         public NPCState nPCState;
+    }
+    [Serializable]
+    public class CharInteractPrefabData
+    {
+        public CharNames compName;
+        public NPCInteractType nPCIntType;        
         public GameObject interactPrefab;
-
     }
 
     [Serializable]
@@ -39,16 +44,28 @@ namespace Town
         public NPCNames nPCNames;
         public NPCInteractType nPCIntType;
         public NPCState npcState; 
+    }
+    [Serializable]
+    public class NPCInteractPrefabData
+    {
+        public NPCNames nPCNames;
+        public NPCInteractType nPCIntType;        
         public GameObject interactPrefab;
-
     }
     [Serializable]
     public class BuildIntTypeData
     {
-        public BuildInteractType BuildIntType;
-        public GameObject interactPrefab;
+        public BuildInteractType BuildIntType;        
         public bool isUnLocked = false; 
     }
+    [Serializable]
+    public class BuildIntTypePrefabData
+    {
+        public BuildInteractType BuildIntType;
+        public GameObject interactPrefab;
+        
+    }
+
 
     [System.Serializable]
     public class BuildingData
@@ -66,16 +83,20 @@ namespace Town
 
         [Header("Building Interior")]
         public Sprite buildIntDay;
-        public Sprite buildIntNight; 
+        public Sprite buildIntNight;
 
-        public List<CharInteractData> charNames = new List<CharInteractData>();
-        [Header("NPC Interactions")]
+        [Header("CharInteract")]
+        public List<CharInteractData> charInteractData = new List<CharInteractData>();
+        public List<CharInteractPrefabData> CharInteractPrefab = new List<CharInteractPrefabData>();
+
+        [Header("NPC Interactions")]        
         public List<NPCDataInBuild> npcData = new List<NPCDataInBuild>();
-        // click on NPC portrait or sprite
+        public List<NPCInteractPrefabData> npcDataPrefab = new List<NPCInteractPrefabData>();
+        
 
         [Header("Building Interactions")]
-        public List<BuildIntTypeData> buildIntType = new List<BuildIntTypeData>();
-        // buttons at the bottom panel
+        public List<BuildIntTypeData> buildIntTypes = new List<BuildIntTypeData>();
+        public List<BuildIntTypePrefabData> buildIntPrefab = new List<BuildIntTypePrefabData>();    
 
         [Header("UnLocked and Unavailable")]
         [TextArea (4,10)]
@@ -90,8 +111,6 @@ namespace Town
         public BuildInteractType intType;
         public string intTypeStr =""; 
         public Sprite spriteN;
-        public Sprite spriteHL;
-
     }
 
     //[System.Serializable]

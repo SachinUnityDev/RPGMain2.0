@@ -11,7 +11,7 @@ namespace Common
 {
     public class CalendarUIController : MonoBehaviour
     {
-        [SerializeField] GameObject TownCenterPanel;
+        [SerializeField] GameObject townCenterPanel;
 
         public GameObject famePanel;
         public GameObject monthPanel;
@@ -25,8 +25,9 @@ namespace Common
 
         public PanelInScene panelInScene; 
          void Start()
-         {  
+         {
             //START OF THE GAME
+            townCenterPanel.SetActive(true);
             GetMonthStartDay(MonthName.WingOfTheLocust, DayName.DayOfLight);
             allPanels = new List<GameObject>() { famePanel, monthPanel, weekPanel, dayPanel };
             CloseAllPanel();

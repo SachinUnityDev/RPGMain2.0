@@ -27,6 +27,20 @@ namespace Town
             }
         }
 
+        public InteractionSpriteData GetInteractData(BuildInteractType buildIntType)
+        {
+            int index = allIntSprites.FindIndex(t=>t.intType == buildIntType);  
+            if(index != -1)
+            {
+                return allIntSprites[index];
+            }
+            else
+            {
+                Debug.Log("build Interact data not found" + buildIntType);
+                return null;
+            }
+        }
+
         public BuildingSO GetBuildSO(BuildingNames _buildName)
         {
             int index = allBuildSO.FindIndex(t => t.buildingData.buildingName == _buildName); 
@@ -39,8 +53,6 @@ namespace Town
                 Debug.Log("buildSO not found"+ _buildName);
                 return null;
             }
-
-            
         }
 
     }

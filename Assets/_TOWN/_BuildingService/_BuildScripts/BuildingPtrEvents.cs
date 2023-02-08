@@ -27,10 +27,15 @@ namespace Common
 
         [Header("Global Var")]
         [SerializeField] TimeState timeState;
-        [SerializeField] bool isSelected; 
+        [SerializeField] bool isSelect = false; 
         private void Awake()
         {
             buildImg = transform.GetComponent<Image>();
+        }
+        void Start()
+        {
+            buildImg = GetComponent<Image>();
+            buildImg.alphaHitTestMinimumThreshold = 0.1f;
         }
         public void Init(TownViewController townViewController)
         {
@@ -41,9 +46,7 @@ namespace Common
         }
 
         void SetSpriteNormal()
-        {
-          //  Debug.LogError("Build name" + buildSO.buildingData.buildingName);
-                 
+        {        
             if (timeState == TimeState.Day)
             {
                 buildImg.sprite = buildSO.buildingData.buildExtDayN;
@@ -68,12 +71,14 @@ namespace Common
 
         public void OnSelect()
         {
-
+            isSelect = true; 
             SetSpriteHL();
         }
         public void OnDeSelect()
         {
-            isSelected = false; 
+            isSelect = false;
+            SetSpriteNormal();
+
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -81,6 +86,8 @@ namespace Common
             // select this build
             int index = transform.GetSiblingIndex();
             townViewController.OnBuildSelect(index); 
+            
+
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -97,11 +104,6 @@ namespace Common
             SetSpriteNormal(); 
         }
 
-        void Start()
-        {
-            buildImg = GetComponent<Image>();
-            buildImg.alphaHitTestMinimumThreshold = 0.1f;
-        }
 
       
     }

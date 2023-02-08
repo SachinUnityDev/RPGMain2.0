@@ -114,7 +114,7 @@ namespace Common
 
             go.SetActive(turnON);
             go.transform.DOScale(1f, 0.1f);
-            CanvasGroup canvasGrp = go.GetComponent<CanvasGroup>();
+            CanvasGroup canvasGrp = go?.GetComponent<CanvasGroup>();
             if (canvasGrp != null)
             {
                 canvasGrp.interactable = turnON;

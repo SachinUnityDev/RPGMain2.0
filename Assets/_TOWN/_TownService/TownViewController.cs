@@ -48,6 +48,13 @@ namespace Town
         public void OnBuildSelect(int index)
         {
             selectBuild = (BuildingNames)(index + 1); // correction for none
+            for (int i = 0; i < buildContainer.childCount; i++)
+            {                
+              buildContainer.GetChild(i).GetComponent<BuildingPtrEvents>().OnDeSelect();                
+            }
+            
+            
+            // get inside the building
         }
         public void TownViewInit()
         {

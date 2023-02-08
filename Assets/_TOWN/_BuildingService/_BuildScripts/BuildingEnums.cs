@@ -50,9 +50,9 @@ namespace Town
         EndDay, // house
         Provision, // ABbas changes provision in town... 
         DryFood, 
-        Rest,
+        XXX,
         Brawl, 
-        RechargeWeapon, 
+        XXXX, 
     }
     
     public enum HousePurchaseOpts

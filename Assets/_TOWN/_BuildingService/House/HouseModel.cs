@@ -44,6 +44,20 @@ namespace Town
         [Header("Interact: Drums")]
         public bool isDrumsPurchased = false;
 
+        public List<CharInteractData> charInteract = new List<CharInteractData>();
 
+        public List<NPCDataInBuild> npcData = new List<NPCDataInBuild>();   
+
+        public List<BuildIntTypeData> buildIntTypes = new List<BuildIntTypeData>();
+
+
+        public HouseModel(BuildingSO houseSO)
+        {
+           buildIntTypes = houseSO.buildingData.buildIntTypes.DeepClone();
+            npcData = houseSO.buildingData.npcData.DeepClone();
+            charInteract = houseSO.buildingData.charInteractData.DeepClone();
+            // buttons at the bottom panel
+
+        }
     }
 }

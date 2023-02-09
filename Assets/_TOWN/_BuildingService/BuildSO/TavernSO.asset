@@ -21,44 +21,51 @@ MonoBehaviour:
     buildExtNightHL: {fileID: 21300000, guid: 966b67cfad92cc14f91febf0d6789bcc, type: 3}
     buildIntDay: {fileID: 21300000, guid: 17dcca4ebefb8524996499b6f0064c04, type: 3}
     buildIntNight: {fileID: 21300000, guid: feda0c29c15a9c844b5ce8c0524fded3, type: 3}
-    charNames:
-    - compName: 0
+    charInteractData:
+    - compName: 3
       nPCIntType: 1
       nPCState: 0
-      interactPrefab: {fileID: 0}
-    - compName: 0
+    - compName: 2
       nPCIntType: 1
       nPCState: 0
-      interactPrefab: {fileID: 0}
+    CharInteractPrefab: []
     npcData:
     - nPCNames: 7
       nPCIntType: 1
       npcState: 2
-      interactPrefab: {fileID: 0}
     - nPCNames: 7
       nPCIntType: 2
       npcState: 2
-      interactPrefab: {fileID: 0}
     - nPCNames: 5
       nPCIntType: 1
       npcState: 0
-      interactPrefab: {fileID: 0}
     - nPCNames: 5
       nPCIntType: 10
       npcState: 0
+    npcDataPrefab:
+    - nPCNames: 7
+      nPCIntType: 2
       interactPrefab: {fileID: 0}
-    buildIntType:
+    - nPCNames: 5
+      nPCIntType: 10
+      interactPrefab: {fileID: 0}
+    buildIntTypes:
+    - BuildIntType: 1
+      isUnLocked: 0
+    - BuildIntType: 8
+      isUnLocked: 0
+    - BuildIntType: 10
+      isUnLocked: 0
+    - BuildIntType: 11
+      isUnLocked: 0
+    buildIntPrefab:
     - BuildIntType: 1
       interactPrefab: {fileID: 0}
-      isUnLocked: 1
     - BuildIntType: 8
       interactPrefab: {fileID: 0}
-      isUnLocked: 1
     - BuildIntType: 10
       interactPrefab: {fileID: 0}
-      isUnLocked: 1
-    - BuildIntType: 14
+    - BuildIntType: 11
       interactPrefab: {fileID: 0}
-      isUnLocked: 1
     statusLockedStr: []
     statusUnAvailStr: []

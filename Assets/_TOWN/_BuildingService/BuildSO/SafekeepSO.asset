@@ -21,22 +21,25 @@ MonoBehaviour:
     buildExtNightHL: {fileID: 21300000, guid: 1bb3f62b274ede14c871a52bc4ea1c25, type: 3}
     buildIntDay: {fileID: 21300000, guid: 3616f1b5ded00914dbb607267fd13c58, type: 3}
     buildIntNight: {fileID: 21300000, guid: 3616f1b5ded00914dbb607267fd13c58, type: 3}
-    charNames: []
+    charInteractData: []
+    CharInteractPrefab: []
     npcData:
     - nPCNames: 11
       nPCIntType: 1
       npcState: 2
-      interactPrefab: {fileID: 0}
     - nPCNames: 11
       nPCIntType: 7
       npcState: 2
+    npcDataPrefab:
+    - nPCNames: 11
+      nPCIntType: 7
       interactPrefab: {fileID: 0}
-    buildIntType:
+    buildIntTypes:
     - BuildIntType: 7
-      interactPrefab: {fileID: 0}
       isUnLocked: 0
+    buildIntPrefab: []
     statusLockedStr:
     - 'Come back when you got enough coins to spare!  '
     - 'Poor people are welcome, but not a dead broke!  '
     statusUnAvailStr:
-    - 'Closed at night!  '
+    - 'Closed at night! '

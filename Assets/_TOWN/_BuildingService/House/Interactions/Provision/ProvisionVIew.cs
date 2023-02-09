@@ -38,7 +38,6 @@ namespace Town
             Vector3 pos = 
             optContainer.GetChild(selectIndex).GetComponent<RectTransform>().position;
             arrowTrans.DOMoveY(pos.y, 0.1f); 
-
         }
 
         public void OnAdd2ProvisionSlot()

@@ -10,11 +10,15 @@ namespace Town
 
     public class HouseController : MonoBehaviour
     {
-        public HouseModel houseModel; 
+        public HouseModel houseModel;
 
 
 
-
+        private void Start()
+        {
+            BuildingSO houseSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.House);
+            houseModel = new HouseModel(houseSO);
+        }
 
 
     }

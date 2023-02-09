@@ -1,6 +1,7 @@
 using Interactables;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using UnityEngine;
 
 namespace Interactables
@@ -21,6 +22,10 @@ namespace Interactables
         public RecipeType recipeType;
         public Sprite recipeSprite;
         public Currency recipePrice;
+
+        [Header("Brewing time")]
+        public int minTime;
+        public int maxTime;
 
         private void Awake()
         {

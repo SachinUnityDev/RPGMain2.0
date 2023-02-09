@@ -13,8 +13,8 @@ namespace Town
 
         public void HouseIntInit(BuildIntTypeData buildData, InteractionSpriteData spriteData, HouseViewController houseView)
         {
-            transform.GetComponent<Image>().sprite = spriteData.spriteN; 
-
+            transform.GetComponent<Image>().sprite = spriteData.spriteN;
+            buildInteractType = buildData.BuildIntType;
 
         }
 

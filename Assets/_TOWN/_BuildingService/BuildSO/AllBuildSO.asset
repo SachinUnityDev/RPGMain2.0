@@ -15,64 +15,52 @@ MonoBehaviour:
   allIntSprites:
   - intType: 1
     intTypeStr: 
-    spriteN: {fileID: 0}
-    spriteHL: {fileID: 0}
+    spriteN: {fileID: 21300000, guid: 8d2e01c6e330cd448a99758062908fbe, type: 3}
   - intType: 2
     intTypeStr: 
-    spriteN: {fileID: 0}
-    spriteHL: {fileID: 0}
+    spriteN: {fileID: 21300000, guid: e9b6eca08bcba0d4ab78d600d95e5283, type: 3}
   - intType: 3
     intTypeStr: 
-    spriteN: {fileID: 0}
-    spriteHL: {fileID: 0}
+    spriteN: {fileID: 21300000, guid: 69eb5c05dc95c524abb82bd71f46d6b1, type: 3}
   - intType: 4
     intTypeStr: 
-    spriteN: {fileID: 0}
-    spriteHL: {fileID: 0}
+    spriteN: {fileID: 21300000, guid: ede5c6a9e336495448d56ce46bf6147c, type: 3}
   - intType: 5
     intTypeStr: 
-    spriteN: {fileID: 0}
-    spriteHL: {fileID: 0}
+    spriteN: {fileID: 21300000, guid: ca9186997050d654897682067bfbae35, type: 3}
   - intType: 6
     intTypeStr: 
-    spriteN: {fileID: 0}
-    spriteHL: {fileID: 0}
+    spriteN: {fileID: 21300000, guid: efe3d750f3ef4c84c9aaa08b10450f67, type: 3}
   - intType: 7
     intTypeStr: 
-    spriteN: {fileID: 0}
-    spriteHL: {fileID: 0}
+    spriteN: {fileID: 21300000, guid: 0321b64eb80e8314ab47b2fe094e05f1, type: 3}
   - intType: 8
     intTypeStr: 
-    spriteN: {fileID: 0}
-    spriteHL: {fileID: 0}
+    spriteN: {fileID: 21300000, guid: 539615737e1b6934bbad8f3dd447b95b, type: 3}
   - intType: 9
     intTypeStr: 
-    spriteN: {fileID: 0}
-    spriteHL: {fileID: 0}
+    spriteN: {fileID: 21300000, guid: 4d71cb7f49b99c546b750d7f4061a65f, type: 3}
   - intType: 10
     intTypeStr: 
-    spriteN: {fileID: 0}
-    spriteHL: {fileID: 0}
+    spriteN: {fileID: 21300000, guid: 7419a61235d51a6489a8c9ed51416802, type: 3}
   - intType: 11
     intTypeStr: 
-    spriteN: {fileID: 0}
-    spriteHL: {fileID: 0}
+    spriteN: {fileID: 21300000, guid: 261049618c7d3174fba2b377d5f514d5, type: 3}
   - intType: 12
     intTypeStr: 
-    spriteN: {fileID: 0}
-    spriteHL: {fileID: 0}
+    spriteN: {fileID: 21300000, guid: d13fba574177ad643850bb4622b558a3, type: 3}
   - intType: 13
     intTypeStr: 
-    spriteN: {fileID: 0}
-    spriteHL: {fileID: 0}
+    spriteN: {fileID: 21300000, guid: e149fee340c8628498200d9b782ed070, type: 3}
   - intType: 14
     intTypeStr: 
-    spriteN: {fileID: 0}
-    spriteHL: {fileID: 0}
+    spriteN: {fileID: 21300000, guid: 261049618c7d3174fba2b377d5f514d5, type: 3}
   - intType: 15
     intTypeStr: 
-    spriteN: {fileID: 0}
-    spriteHL: {fileID: 0}
+    spriteN: {fileID: 21300000, guid: 261049618c7d3174fba2b377d5f514d5, type: 3}
+  - intType: 16
+    intTypeStr: 
+    spriteN: {fileID: 21300000, guid: ede5c6a9e336495448d56ce46bf6147c, type: 3}
   allBuildSO:
   - {fileID: 11400000, guid: 6340a2f94fbdd6a4093eac27417485e1, type: 2}
   - {fileID: 11400000, guid: 2527b9a8ff7bc6746a9a6e09f9fcd4f2, type: 2}

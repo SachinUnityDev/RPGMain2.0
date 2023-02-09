@@ -21,24 +21,26 @@ MonoBehaviour:
     buildExtNightHL: {fileID: 21300000, guid: cb516f143cfbe7c43b2aa58e0856b4c3, type: 3}
     buildIntDay: {fileID: 21300000, guid: 5abb5997cc0238e4ca818305e5a0b966, type: 3}
     buildIntNight: {fileID: 21300000, guid: 0bfd4c0d253a8b244a54b6341dd5d0ba, type: 3}
-    charNames:
-    - compName: 0
+    charInteractData:
+    - compName: 4
       nPCIntType: 1
       nPCState: 0
-      interactPrefab: {fileID: 0}
+    CharInteractPrefab: []
     npcData:
     - nPCNames: 1
       nPCIntType: 1
       npcState: 0
-      interactPrefab: {fileID: 0}
     - nPCNames: 1
       nPCIntType: 2
       npcState: 0
+    npcDataPrefab:
+    - nPCNames: 1
+      nPCIntType: 2
       interactPrefab: {fileID: 0}
-    buildIntType:
+    buildIntTypes:
     - BuildIntType: 9
-      interactPrefab: {fileID: 0}
       isUnLocked: 0
+    buildIntPrefab: []
     statusLockedStr:
     - "That ship has sailed a while ago!\r"
     statusUnAvailStr:

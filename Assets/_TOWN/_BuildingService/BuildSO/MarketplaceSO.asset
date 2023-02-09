@@ -21,53 +21,67 @@ MonoBehaviour:
     buildExtNightHL: {fileID: 21300000, guid: 2ea1d4590caea2f4d8b5c6ee505ef15b, type: 3}
     buildIntDay: {fileID: 21300000, guid: 07add727ec3750748b08c83c1fc0104b, type: 3}
     buildIntNight: {fileID: 21300000, guid: 0d66f658e12d25442ae368f24697d592, type: 3}
-    charNames: []
+    charInteractData: []
+    CharInteractPrefab: []
     npcData:
     - nPCNames: 9
       nPCIntType: 1
       npcState: 2
-      interactPrefab: {fileID: 0}
     - nPCNames: 9
       nPCIntType: 2
       npcState: 2
-      interactPrefab: {fileID: 0}
     - nPCNames: 9
       nPCIntType: 5
       npcState: 2
-      interactPrefab: {fileID: 0}
     - nPCNames: 3
       nPCIntType: 1
       npcState: 2
-      interactPrefab: {fileID: 0}
     - nPCNames: 3
       nPCIntType: 2
       npcState: 2
-      interactPrefab: {fileID: 0}
     - nPCNames: 3
       nPCIntType: 8
       npcState: 2
-      interactPrefab: {fileID: 0}
     - nPCNames: 2
       nPCIntType: 1
       npcState: 2
-      interactPrefab: {fileID: 0}
     - nPCNames: 2
       nPCIntType: 2
       npcState: 2
-      interactPrefab: {fileID: 0}
     - nPCNames: 2
       nPCIntType: 6
       npcState: 2
-      interactPrefab: {fileID: 0}
     - nPCNames: 15
       nPCIntType: 1
       npcState: 2
-      interactPrefab: {fileID: 0}
     - nPCNames: 15
       nPCIntType: 2
       npcState: 2
+    npcDataPrefab:
+    - nPCNames: 9
+      nPCIntType: 2
       interactPrefab: {fileID: 0}
-    buildIntType: []
-    statusLockedStr: []
+    - nPCNames: 9
+      nPCIntType: 5
+      interactPrefab: {fileID: 0}
+    - nPCNames: 3
+      nPCIntType: 2
+      interactPrefab: {fileID: 0}
+    - nPCNames: 3
+      nPCIntType: 8
+      interactPrefab: {fileID: 0}
+    - nPCNames: 2
+      nPCIntType: 2
+      interactPrefab: {fileID: 0}
+    - nPCNames: 2
+      nPCIntType: 6
+      interactPrefab: {fileID: 0}
+    - nPCNames: 15
+      nPCIntType: 2
+      interactPrefab: {fileID: 0}
+    buildIntTypes: []
+    buildIntPrefab: []
+    statusLockedStr:
+    - 
     statusUnAvailStr:
-    - 'Goods are packed. Everybody left.  '
+    - 'Goods are packed. Everybody left. '

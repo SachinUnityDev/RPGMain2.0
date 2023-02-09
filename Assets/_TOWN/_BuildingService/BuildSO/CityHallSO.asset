@@ -21,15 +21,20 @@ MonoBehaviour:
     buildExtNightHL: {fileID: 21300000, guid: 45e090eda7abbaf4fa9ed2f99a979662, type: 3}
     buildIntDay: {fileID: 0}
     buildIntNight: {fileID: 0}
-    charNames: []
+    charInteractData: []
+    CharInteractPrefab: []
     npcData:
     - nPCNames: 0
       nPCIntType: 0
-      interactPrefab: {fileID: 0}
-      isUnLocked: 0
-    buildIntType:
+      npcState: 0
+    npcDataPrefab: []
+    buildIntTypes:
     - BuildIntType: 0
-      interactPrefab: {fileID: 0}
       isUnLocked: 0
-    statusLockedStr: []
-    statusUnAvailStr: []
+    - BuildIntType: 0
+      isUnLocked: 0
+    buildIntPrefab: []
+    statusLockedStr:
+    - Halt!
+    statusUnAvailStr:
+    - 

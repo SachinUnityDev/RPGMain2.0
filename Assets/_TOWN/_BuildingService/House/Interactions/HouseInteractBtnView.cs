@@ -19,7 +19,7 @@ namespace Town
             btnContainer = transform.GetChild(0);
         }
 
-        void InitInteractBtns(HouseViewController houseView)
+       public void InitInteractBtns(HouseViewController houseView)
         {
             this.houseView = houseView;
             houseModel = BuildingIntService.Instance.houseController.houseModel;
@@ -29,16 +29,17 @@ namespace Town
             {
                 if (buildData.isUnLocked)
                 {
-                    // get sprite from SO populate 
+                    btnContainer.GetChild(i).gameObject.SetActive(true); 
                     InteractionSpriteData interactSprite = allbuildSO.GetInteractData(buildData.BuildIntType);
-                    btnContainer.GetChild(i).GetComponent<HouseBtnPtrEvents>().HouseIntInit(buildData, interactSprite, houseView); 
+                    btnContainer.GetChild(i).GetComponent<HouseBtnPtrEvents>().HouseIntInit(buildData, interactSprite, houseView);
+                    i++;       
                 }
-
-
+            }
+            for (int j = i; j < btnContainer.childCount; j++)
+            {
+                btnContainer.GetChild(i).gameObject.SetActive(false);
             }
 
-            // house model get interact data for unlocked btns init them
-            // init to be done with panel prefab, houseview ref, 
 
         }
 

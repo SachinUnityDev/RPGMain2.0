@@ -92,8 +92,8 @@ namespace Town
         {
             int level = selectChar.charLvl;
             Currency moneyNeeded = new Currency(LEVEL_MULTIPLIER * level, 0);
-            EcoServices.Instance.PayMoney2NPC(moneyNeeded, NPCNames.MinamiTheSoothsayer);
-            EcoServices.Instance.DebitPlayerAct(moneyNeeded);
+            //EcoServices.Instance.PayMoney2NPC(moneyNeeded, NPCNames.MinamiTheSoothsayer);
+            EcoServices.Instance.DebitPlayerStash(moneyNeeded);
 
             //display updates
             moneyNeededGO.FillCurrencyUI(new Currency(0, 0));
@@ -110,13 +110,13 @@ namespace Town
         
         void DisplayMinamiMoney()
         {
-            minamiMoney = EcoServices.Instance.GetMoneyInAct(NPCNames.MinamiTheSoothsayer);
-            minamiMoneyGO.FillCurrencyUI(minamiMoney);
+            //minamiMoney = EcoServices.Instance.GetMoneyInAct(NPCNames.MinamiTheSoothsayer);
+            //minamiMoneyGO.FillCurrencyUI(minamiMoney);
         }
 
         void DisplayPlayerMoney()
         {
-            playerMoney = EcoServices.Instance.GetMoneyValueNetPlayer();
+            playerMoney = EcoServices.Instance.GetMoneyAmtInPlayerStash();
             playerMoneyGO.FillCurrencyUI(playerMoney);
         }
         void PopulateCharData()
@@ -134,8 +134,6 @@ namespace Town
 
         public void Init()
         {
-            Debug.Log(EcoServices.Instance.econoModel.moneyNet.silver);
-
             DisplayMinamiMoney(); 
             DisplayPlayerMoney();
             GetCharList4CM();

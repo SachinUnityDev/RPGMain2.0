@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Interactables;
 using UnityEngine.UI;
-using DG.Tweening; 
+using DG.Tweening;
+using Common;
+
 namespace Town
 {
-    public class ProvisionView : MonoBehaviour
+    public class ProvisionView : MonoBehaviour, IPanel
     {
         public int selectIndex;
-        public PotionNames potionName; 
+        public PotionNames potionName;
+
+        [Header(" to be ref")]
         [SerializeField] Button tickBtn;
         [SerializeField] Transform optContainer;
         [SerializeField] Transform arrowTrans; 
@@ -45,5 +49,17 @@ namespace Town
             //add to abbas provision slot here
         }
 
+        public void Load()
+        {
+        }
+
+        public void UnLoad()
+        {
+        }
+
+        public void Init()
+        {
+
+        }
     }
 }

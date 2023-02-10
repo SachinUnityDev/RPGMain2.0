@@ -129,7 +129,7 @@ namespace Common
            
         }
 
-        public void TogglePanelOnInGrp(GameObject go, bool turnON)  // deprecated ...slowly
+        public void TogglePanelOnInGrp(GameObject go, bool turnON)  
         {
             Transform goParent = go.transform.parent;
             int  panelCount = goParent.childCount; 
@@ -137,8 +137,7 @@ namespace Common
             {
                 TogglePanel(goParent.GetChild(i).gameObject, false); 
             }
-            TogglePanel(go, turnON);
-            // SetSibling2Count(go, panelCount);
+            TogglePanel(go, turnON);         
             go.transform.SetAsLastSibling();
             IPanel panel = go.GetComponentInChildren<IPanel>();
             if (panel != null)

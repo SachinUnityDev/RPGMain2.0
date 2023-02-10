@@ -10,10 +10,11 @@ namespace Town
     public class HouseInteractBtnView : MonoBehaviour
     {
         [SerializeField] Transform btnContainer;
-
+  
         [SerializeField] BuildInteractType buildInteractType;
-        public HouseViewController houseView;
-        public HouseModel houseModel; 
+         HouseViewController houseView;
+         HouseModel houseModel;
+        AllBuildSO allbuildSO;
         private void Awake()
         {
             btnContainer = transform.GetChild(0);
@@ -23,27 +24,29 @@ namespace Town
         {
             this.houseView = houseView;
             houseModel = BuildingIntService.Instance.houseController.houseModel;
-            AllBuildSO allbuildSO = BuildingIntService.Instance.allBuildSO;
-            int i = 0; 
+            allbuildSO = BuildingIntService.Instance.allBuildSO;
+            FillHouseBtns();
+        }
+
+        void FillHouseBtns()
+        {
+            int i = 0;
             foreach (BuildIntTypeData buildData in houseModel.buildIntTypes)
             {
                 if (buildData.isUnLocked)
                 {
-                    btnContainer.GetChild(i).gameObject.SetActive(true); 
+                    btnContainer.GetChild(i).gameObject.SetActive(true);
                     InteractionSpriteData interactSprite = allbuildSO.GetInteractData(buildData.BuildIntType);
                     btnContainer.GetChild(i).GetComponent<HouseBtnPtrEvents>().HouseIntInit(buildData, interactSprite, houseView);
-                    i++;       
+                    i++;
                 }
             }
             for (int j = i; j < btnContainer.childCount; j++)
             {
                 btnContainer.GetChild(i).gameObject.SetActive(false);
             }
-
-
         }
-
-
+    
 
     }
 }

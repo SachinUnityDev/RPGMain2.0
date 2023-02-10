@@ -11,7 +11,8 @@ namespace Town
     public class HouseController : MonoBehaviour
     {
         public HouseModel houseModel;
-
+        [Header("to be ref")]
+        public HouseViewController houseView; 
 
 
         private void Start()

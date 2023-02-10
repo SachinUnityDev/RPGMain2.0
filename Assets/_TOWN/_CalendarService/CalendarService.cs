@@ -24,9 +24,9 @@ namespace Common
         public TimeState currtimeState;
 
         [SerializeField] Button endday; 
-        [SerializeField] int dayInGame;
-        [SerializeField] int dayInYear; 
-        [SerializeField] int weekCounter;
+        public int dayInGame;
+        public int dayInYear; 
+        public int weekCounter;
 
 
         // does not reset with week / Month

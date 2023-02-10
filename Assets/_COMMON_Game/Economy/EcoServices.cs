@@ -22,38 +22,38 @@ namespace Common
             return npcMoney;
         }
 
-        public Currency GetMoneyValueNetPlayer()
+        public Currency GetMoneyAmtInPlayerStash()
         {
-            return econoModel.moneyNet; 
+            return econoModel.moneyInStash; 
         }
-
-        public void DebitPlayerAct(Currency amt)
+        public Currency GetMoneyAmtInPlayerInv()
         {
-            econoModel.moneyNet.SubMoney(amt);
-          
+            return econoModel.moneyInInv;
         }
-        public void PayMoney2Player (Currency amt)
+        public void DebitPlayerStash(Currency amt)
         {
-            econoModel.moneyNet.AddMoney(amt);
+            econoModel.moneyInStash.SubMoney(amt);          
         }
-        public void DebitNPCAct(Currency amt, NPCNames npcName)
+        public void DebitPlayerInv(Currency amt)
         {
-            econoModel.allNPCMoneyData.Find(t => t.npcName == npcName).money.SubMoney(amt);
+            econoModel.moneyInInv.SubMoney(amt);
         }
-        public void PayMoney2NPC(Currency amt, NPCNames npcName)
+        public void AddMoney2PlayerStash (Currency amt)
         {
-            econoModel.allNPCMoneyData.Find(t => t.npcName == npcName).money.AddMoney(amt) ; 
+            econoModel.moneyInStash.AddMoney(amt);
         }
-
-        public void ChgMoneyInStash() // stash is like a chest in the town
+        public void AddMoney2PlayerInv(Currency amt)
         {
-            // use curr stash value 
+            econoModel.moneyInInv.AddMoney(amt);
         }
-
-        public void ChgMoneyInInv()// Inv is mobile 
-        {
-
-        }
+        //public void DebitNPCAct(Currency amt, NPCNames npcName)
+        //{
+        //    econoModel.allNPCMoneyData.Find(t => t.npcName == npcName).money.SubMoney(amt);
+        //}
+        //public void PayMoney2NPC(Currency amt, NPCNames npcName)
+        //{
+        //    econoModel.allNPCMoneyData.Find(t => t.npcName == npcName).money.AddMoney(amt) ; 
+        //}
 
 
 

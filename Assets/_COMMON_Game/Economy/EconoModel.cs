@@ -37,7 +37,7 @@ namespace Common
     {
         public Currency moneyInStash = new Currency();
         public Currency moneyInInv = new Currency(); 
-        public Currency moneyNet = new Currency();
+
 
         public List<NPCMoneyData> allNPCMoneyData = new List<NPCMoneyData>(); 
 
@@ -45,10 +45,9 @@ namespace Common
         {
             // PLAYER MONEY 
             this.moneyInStash = ecoSO.moneyInStash.DeepClone();
-            this.moneyInInv = ecoSO.moneyInInv.DeepClone();
-            this.moneyNet = ecoSO.moneyNet.DeepClone();
+            this.moneyInInv = ecoSO.moneyInInv.DeepClone();          
 
-            this.allNPCMoneyData = ecoSO.allNPCMoneyData.DeepClone();
+          //  this.allNPCMoneyData = ecoSO.allNPCMoneyData.DeepClone();
         }
     
     }

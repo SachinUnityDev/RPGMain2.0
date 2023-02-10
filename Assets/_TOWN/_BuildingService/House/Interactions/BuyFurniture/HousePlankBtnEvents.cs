@@ -31,6 +31,7 @@ namespace Town
 
         void Awake()
         {
+            
             plankName = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
             statusImg = transform.GetChild(1).GetComponent<Image>();
             currencyTrans = transform.GetChild(2);

@@ -14,35 +14,33 @@ namespace Town
         [SerializeField] Transform plankContainer;
         [SerializeField] Button closeBtn;
 
-
+        [Header("To be ref")]
         [SerializeField] Button yesBtn;
-        [SerializeField] Button noBtn; 
+        [SerializeField] Button noBtn;
+        [SerializeField] Transform descTxt;
+        [SerializeField] Transform currencyTrans;
 
-        public int selectInt =-1;
 
-        HouseModel houseModel; 
-
+        [Header("global Variable")]
+        public int selectInt =-1;        
+        HouseModel houseModel;
+        Currency stashCurr;
         private void Awake()
         {
             yesBtn.onClick.AddListener(OnYesPressed); 
             noBtn.onClick.AddListener(OnNoPressed);
             closeBtn.onClick.AddListener(() => UIControlServiceGeneral.Instance.TogglePanel(gameObject,false));   
-            
         }
 
-
-        private void Start()
-        {
-            Init();
-        }
         public void Init()
         {
-            FillSlots();
+          
         }
 
         public void Load()
         {
             FillSlots();
+            FillStashMoney();   
         }
 
         public void UnLoad()
@@ -59,6 +57,12 @@ namespace Town
                 child.GetComponent<HousePlankBtnEvents>().OnDeSelect(); 
                 i++;
             }
+            AppearTxtNBtns();
+        }
+        void FillStashMoney()
+        {
+            stashCurr = EcoServices.Instance.GetMoneyAmtInPlayerStash();
+            currencyTrans.GetComponent<DisplayCurrency>().Display(stashCurr);
         }
         void FillSlots()
         {
@@ -66,20 +70,44 @@ namespace Town
             int i = 0; 
             foreach(Transform child in plankContainer)
             {
-                child.GetComponent<HousePlankBtnEvents>().Init(houseModel.purchaseOpts[i], this);
+                child.GetComponent<HousePlankBtnEvents>(). Init(houseModel.purchaseOpts[i], this);
                 i++; 
             }
         }
-
+        void AppearTxtNBtns()
+        {
+            yesBtn.gameObject.SetActive(true);
+            noBtn.gameObject.SetActive(true); 
+            descTxt.gameObject.SetActive(true); 
+        }
+        void DisappearTxtnBtns()
+        {
+            yesBtn.gameObject.SetActive(false);
+            noBtn.gameObject.SetActive(false);
+            descTxt.gameObject.SetActive(false);
+        }
         void OnYesPressed()  // purchase confirmed
         {
             if (selectInt == -1) return; 
             HousePurchaseOpts opts = (HousePurchaseOpts)selectInt;
             houseModel.purchaseOpts.Find(t => t.houseOpts == opts).isPurchased = true;
 
-            plankContainer.GetChild(selectInt).GetComponent<HousePlankBtnEvents>().OnPurchase();
-            selectInt = -1;    
+            plankContainer.GetChild(selectInt).GetComponent<HousePlankBtnEvents>().OnPurchase();// modified status on plank 
+            CompleteSale();
+            selectInt = -1;
+            DisappearTxtnBtns();
+     
         }
+        void CompleteSale()
+        {
+            HousePurchaseOpts opts = (HousePurchaseOpts)selectInt;
+            Currency purchaseValue = houseModel.purchaseOpts.Find(t=>t.houseOpts == opts).currency;
+            if(purchaseValue.BronzifyCurrency() < stashCurr.BronzifyCurrency())
+                EcoServices.Instance.DebitPlayerStash(purchaseValue);
+
+            FillStashMoney();
+        }
+
         void OnNoPressed()
         {
             if(selectInt == -1) return;

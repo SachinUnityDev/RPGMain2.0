@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: EcoSO
   m_EditorClassIdentifier: 
   moneyInStash:
-    silver: 10
-    bronze: 4
+    silver: 50
+    bronze: 10
   moneyInInv:
     silver: 40
     bronze: 9

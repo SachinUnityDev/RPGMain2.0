@@ -30,6 +30,11 @@ namespace Town
         public Transform stashPanel;
         public Transform brewingPanel;
 
+        [Header("Day and Night BG Sprites")]
+        [SerializeField] Sprite dayBG;
+        [SerializeField] Sprite nightBG; 
+
+
 
         [SerializeField] Button exit; 
 
@@ -51,6 +56,15 @@ namespace Town
         }
         public void FillHouseBG()
         {
+            if(CalendarService.Instance.currtimeState == TimeState.Night)
+            {
+                BGSpriteContainer.GetComponent<Image>().sprite = nightBG; 
+            }
+            else
+            {
+                BGSpriteContainer.GetComponent<Image>().sprite = dayBG;
+            }
+
             for (int i = 0; i < 4; i++)
             {
                 BGSpriteContainer.GetChild(i).GetComponent<HouseBaseEvents>().Init(this);  
@@ -60,7 +74,7 @@ namespace Town
         {
             foreach (Transform child in InteractPanelContainer)
             {
-                child.GetComponent<IPanel>().Init(); 
+                child.GetComponent<IPanel>().Init(); // interact panels initialized here 
             }
         }
 

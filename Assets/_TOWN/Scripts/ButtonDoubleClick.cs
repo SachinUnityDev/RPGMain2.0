@@ -17,14 +17,12 @@ namespace Common
             Debug.Log(eventData.clickCount);
             if (eventData.clickCount <= 1)
             {
-                CalendarService.Instance.OnDayChangeClick();
+                CalendarService.Instance.On_ChangeTimeState();
 
             }
             if (eventData.clickCount > 1)
             {
-
-                CalendarService.Instance.OnDayChangeDoubleClick();
-
+                CalendarService.Instance.On_EndTimeStateClick();
             }
         }
 

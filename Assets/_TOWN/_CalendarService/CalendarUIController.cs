@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
-using DG.Tweening; 
-
-
+using DG.Tweening;
+using Town;
 
 namespace Common
 {
@@ -57,17 +56,18 @@ namespace Common
 
         public void ToggleDayNightUI()
         {
-            OnPanelExit(dayPanel);
-            if (dayBGPanel.activeSelf)
-            {
-                nightBGPanel.SetActive(true);
-                dayBGPanel.SetActive(false);               
-            }
-            else
-            {
-                nightBGPanel.SetActive(false);
-                dayBGPanel.SetActive(true);
-            }
+           // dayBGPanel.GetComponent<TownViewController>().TownViewInit(); 
+            //OnPanelExit(dayPanel);
+            //if (dayBGPanel.activeSelf)
+            //{
+            //    nightBGPanel.SetActive(true);
+            //    dayBGPanel.SetActive(false);               
+            //}
+            //else
+            //{
+            //    nightBGPanel.SetActive(false);
+            //    dayBGPanel.SetActive(true);
+            //}
         }
 
 

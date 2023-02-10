@@ -46,24 +46,24 @@ namespace Common
         }
 
         void SetSpriteNormal()
-        {        
-            if (timeState == TimeState.Day)
+        {
+            if (timeState == TimeState.Night)
             {
-                buildImg.sprite = buildSO.buildingData.buildExtDayN;
+                buildImg.sprite = buildSO.buildingData.buildExtNight;
             }
             else
             {
-                buildImg.sprite = buildSO.buildingData.buildExtDayN;
+                buildImg.sprite = buildSO.buildingData.buildExtDayN;                
             }
         }
         void SetSpriteHL()
         {
-            if (timeState == TimeState.Day)
+            if (timeState == TimeState.Night)
             {
-                buildImg.sprite = buildSO.buildingData.buildExtDayHL;
+                buildImg.sprite = buildSO.buildingData.buildExtNightHL;
             }
             else
-            {
+            {                
                 buildImg.sprite = buildSO.buildingData.buildExtDayHL;
             }
         }
@@ -78,7 +78,6 @@ namespace Common
         {
             isSelect = false;
             SetSpriteNormal();
-
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -86,8 +85,6 @@ namespace Common
             // select this build
             int index = transform.GetSiblingIndex();
             townViewController.OnBuildSelect(index); 
-            
-
         }
 
         public void OnPointerEnter(PointerEventData eventData)

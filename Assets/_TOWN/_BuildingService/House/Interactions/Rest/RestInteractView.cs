@@ -1,9 +1,9 @@
-using Common;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
-using UnityEngine.UI; 
+using UnityEngine.UI;
+using Common;
 
 
 namespace Town
@@ -11,7 +11,7 @@ namespace Town
     public class RestInteractView : MonoBehaviour, IPanel
     {
         [SerializeField] Button endDayBtn;
-
+        [SerializeField] Button closeBtn;
 
         // on press close the day event in calendar
         string buffStr = "60% chance for Well Rested";
@@ -22,20 +22,16 @@ namespace Town
         void Awake()
         {
             endDayBtn.onClick.AddListener(OnEndDayPressed);
+            closeBtn.onClick.AddListener(OnClosePressed);
+
         }
 
         public void OnEndDayPressed()
         {
             timeState = CalendarService.Instance.currtimeState;
-            int day = CalendarService.Instance.dayInYear; 
-            if(timeState == TimeState.Day)
-            {
-                CalendarService.Instance.On_StartOfNight(day); 
-            }
-            else
-            {
-                CalendarService.Instance.On_StartOfDay(day);
-            }
+            int day = CalendarService.Instance.dayInYear;
+            CalendarService.Instance.On_EndTimeStateClick();
+        
             FillHouseView(); 
         }
         void FillHouseView()
@@ -59,6 +55,10 @@ namespace Town
            
         }
 
+        void OnClosePressed()
+        {
+          UIControlServiceGeneral.Instance.TogglePanel(gameObject,false);
+        }
         public void Init()
         {
            

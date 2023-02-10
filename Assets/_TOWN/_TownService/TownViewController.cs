@@ -26,25 +26,16 @@ namespace Town
 
 
         public BuildingNames selectBuild;
-        [SerializeField] Transform buildContainer; 
-
+        [SerializeField] Transform buildContainer;
+        [SerializeField] Image townBGImage; 
 
         void Start()
         {
             buildContainer = transform.GetChild(0);
-     
-            //rosterBtn.onClick.AddListener(OnRosterBtnPressed);
-            //jobBtn.onClick.AddListener(OnJobsBtnPressed);
-            //inventoryBtn.onClick.AddListener(OnInvBtnPressed);
-
-            //eventBtn.onClick.AddListener(OnEventBtnPressed);
-            //questScrollBtn.onClick.AddListener(OnQuestScrollBtnPressed);
-            //mapBtn.onClick.AddListener(OnMapBtnPressed);
+            townBGImage = transform.GetChild(0).GetComponent<Image>();
+            CalendarService.Instance.OnStartOfDay +=(int day)=> TownViewInit();
+            CalendarService.Instance.OnStartOfNight += (int day) => TownViewInit();
         }
-
-
-
-
         public void OnBuildSelect(int index)
         {
             selectBuild = (BuildingNames)(index + 1); // correction for none
@@ -52,51 +43,23 @@ namespace Town
             {                
               buildContainer.GetChild(i).GetComponent<BuildingPtrEvents>().OnDeSelect();                
             }
-            
-            
-            // get inside the building
         }
         public void TownViewInit()
         {
-
+            FillTownBG(); 
             foreach (Transform child in buildContainer)
             {
                child.GetComponent<BuildingPtrEvents>().Init(this);
             }
         }
-
-
-
-        void OnRosterBtnPressed()
+        void FillTownBG()
         {
-            RosterService.Instance.OpenRosterView(); 
+            if (CalendarService.Instance.currtimeState == TimeState.Night)
+                townBGImage.sprite = TownService.Instance.allbuildingSO.TownBGNight;
+            else
+                townBGImage.sprite = TownService.Instance.allbuildingSO.TownBGDay;
+            
         }
-        void OnJobsBtnPressed()
-        {
-
-        }
-        void OnInvBtnPressed()
-        {
-           // InventoryService.Instance.invViewController.
-
-        }
-
-        void OnEventBtnPressed()
-        {
-
-
-        }
-        void OnQuestScrollBtnPressed()
-        {
-
-        }
-        void OnMapBtnPressed()
-        {
-
-        }
-
-
-
     }
 
 

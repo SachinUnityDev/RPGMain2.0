@@ -14,6 +14,11 @@ namespace Town
 
         public List<BuildingSO> allBuildSO = new List<BuildingSO> ();
 
+        [Header("Town BG : to be ref")]
+        public Sprite TownBGDay;
+        public Sprite TownBGNight; 
+
+
         private void Awake()
         {
             if (allIntSprites.Count < 1)   // patch fix to prevent recreation of fields 

@@ -56,7 +56,7 @@ namespace Common
 
             scrollMonth = currentMonth;
             currtimeState = TimeState.Day;
-            endday.onClick.AddListener(OnEndDayNightClick);
+            endday.onClick.AddListener(On_EndTimeStateClick);
 
             //calendarUIController.UpdateWeekPanel(currentWeek);
             calendarUIController.UpdateMonthPanel(currentMonth, gameStartDay, dayInYear);
@@ -85,30 +85,32 @@ namespace Common
             return daySO;
         }
 
-        public void OnDayChangeClick()          // no change in 
+        public void On_ChangeTimeState()          // no change in 
         {
             calendarUIController.UpdateDayPanel(dayInYear, gameStartDay);
             calendarUIController.OnPanelEnter(calendarUIController.dayPanel, PanelInScene.Day); 
         }
-        public void OnEndDayNightClick()
+        public void On_EndTimeStateClick()
         {
-            calendarUIController.ToggleDayNightUI();
+          //  calendarUIController.ToggleDayNightUI();
             if (currtimeState == TimeState.Night)
             {
-                // start of the day 
-                OnStartOfDay.Invoke(dayInGame); 
+                // start of the day
                 currtimeState = TimeState.Day;
                 endday.GetComponentInChildren<TextMeshProUGUI>().text = "End the Day?";
-                UpdateDay();
+              
+                On_StartOfDay(dayInGame); 
+             
             }
             else
             {
                 // start of the night
-               //
-               //CalendarEventService.Instance.On_StartOftheNight();
-               On_StartOfNight(dayInGame);
+                //
+                //CalendarEventService.Instance.On_StartOftheNight();
                 endday.GetComponentInChildren<TextMeshProUGUI>().text = "End the Night?";
                 currtimeState = TimeState.Night;
+                On_StartOfNight(dayInGame);
+               
             }
 
 
@@ -116,11 +118,7 @@ namespace Common
         }
         // here logic needs to change ... 
 
-        public void OnDayChangeDoubleClick()   // end day btn click and toggle time 
-        {
-          //  UpdateDay();
-        }
-
+      
         public void UpdateDay()
         {
             currDayName++; dayInGame++; dayInYear++;
@@ -174,6 +172,8 @@ namespace Common
         #region DAY WEEK AND MONTH EVENT TRIGGERS
         public void On_StartOfDay(int day)
         {
+            Debug.Log("ENDDD Day");
+            UpdateDay();
             OnStartOfDay?.Invoke(day);
         }
         public void On_StartOfNight(int day)

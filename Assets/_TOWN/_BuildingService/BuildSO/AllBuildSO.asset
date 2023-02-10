@@ -71,3 +71,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b2594edd6ca4e78418c48ec1ae6b361b, type: 2}
   - {fileID: 11400000, guid: bbed84bb11f473443a0829d6a758824c, type: 2}
   - {fileID: 11400000, guid: ad225de94603c354b99d46798c57061c, type: 2}
+  TownBGDay: {fileID: 21300000, guid: e53a04d65ce4dea418fdabb03c1a8b56, type: 3}
+  TownBGNight: {fileID: 21300000, guid: e71d8cd982d201d41b5ac77676b1ce80, type: 3}

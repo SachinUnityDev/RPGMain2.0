@@ -18,7 +18,7 @@ namespace Interactables
         [Header("Curr CharSelected")]
         public CharController selectChar; 
 
-        [SerializeField] ItemFactory itemFactory;    
+        public ItemFactory itemFactory;    
 
         //public ItemCardViewController cardViewController;
 

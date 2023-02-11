@@ -25,6 +25,7 @@ namespace Town
         public int selectInt =-1;        
         HouseModel houseModel;
         Currency stashCurr;
+        Currency purchaseValue; 
         private void Awake()
         {
             yesBtn.onClick.AddListener(OnYesPressed); 
@@ -92,21 +93,30 @@ namespace Town
             HousePurchaseOpts opts = (HousePurchaseOpts)selectInt;
             houseModel.purchaseOpts.Find(t => t.houseOpts == opts).isPurchased = true;
 
+            purchaseValue = houseModel.purchaseOpts.Find(t => t.houseOpts == opts).currency;
+            if (purchaseValue.BronzifyCurrency() < stashCurr.BronzifyCurrency())
+                EcoServices.Instance.DebitPlayerStash(purchaseValue);
+            else
+            {
+                //change txt
+                return;
+            }
+                
+
+
             plankContainer.GetChild(selectInt).GetComponent<HousePlankBtnEvents>().OnPurchase();// modified status on plank 
-            CompleteSale();
+
+            FillStashMoney();
             selectInt = -1;
             DisappearTxtnBtns();
      
         }
-        void CompleteSale()
-        {
-            HousePurchaseOpts opts = (HousePurchaseOpts)selectInt;
-            Currency purchaseValue = houseModel.purchaseOpts.Find(t=>t.houseOpts == opts).currency;
-            if(purchaseValue.BronzifyCurrency() < stashCurr.BronzifyCurrency())
-                EcoServices.Instance.DebitPlayerStash(purchaseValue);
+        //void CompleteSale()
+        //{
+        //    HousePurchaseOpts opts = (HousePurchaseOpts)selectInt;
+         
 
-            FillStashMoney();
-        }
+        //}
 
         void OnNoPressed()
         {

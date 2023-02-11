@@ -16,7 +16,7 @@ namespace Interactables
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; }
         public ItemData toolData { get; set; }
-        public List<IngredData> allIngredData { get; set; }
+        public List<IngredData> allIngredData { get; set; } = new List<IngredData>();
         public void RecipeInit()
         {
             toolData = new ItemData(ItemType.Tools, (int)ToolNames.Fermentor);
@@ -33,8 +33,10 @@ namespace Interactables
 
         public void InitItem(int itemId, int maxInvStackSize)
         {
+            RecipeInit();
+            this.itemId = itemId;
+            this.maxInvStackSize = maxInvStackSize;
 
-          
         }
         public void OnHoverItem()
         {

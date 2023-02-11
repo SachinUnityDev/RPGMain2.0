@@ -9,6 +9,8 @@ namespace Town
 {
     public class StashInteractView : MonoBehaviour, IPanel
     {
+
+
         public void Init()
         {
          

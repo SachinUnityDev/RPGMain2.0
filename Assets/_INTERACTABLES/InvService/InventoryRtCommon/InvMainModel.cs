@@ -76,6 +76,14 @@ namespace Interactables
             commonInvItems.Remove(item);
             return true;
         }
+
+        public int GetItemNosInCommInv(ItemData itemData)
+        {
+            //commonInvItems
+            int quantity = commonInvItems.Count(t=>t.itemName == itemData.ItemName && t.itemType == itemData.itemType);
+            return quantity; 
+        }
+
         #endregion
 
 
@@ -101,7 +109,12 @@ namespace Interactables
             excessInvItems.Remove(item);
             return true;
         }
-
+        public int GetItemNosInExcessnv(ItemData itemData)
+        {
+            //commonInvItems
+            int quantity = excessInvItems.Count(t => t.itemName == itemData.ItemName && t.itemType == itemData.itemType);
+            return quantity;
+        }
 
         #endregion 
 
@@ -206,10 +219,35 @@ namespace Interactables
             }
         }
 
+        public bool AddItem2StashInv(Iitems item)   // KEY POINT OF ADDITION OF ITEM // Add to model => view
+        {
+            if (!InvService.Instance.IsStashInvFull())
+            {
+                item.invSlotType = SlotType.StashInv;
+                stashInvIntems.Add(item);
+                InvService.Instance.stashInvViewController.AddItem2InVView(item);
+                return true;
+            }
+            else
+            {
+                Debug.Log("Inv Size is full");
+                return false;
+            }
+        }
+
+        public bool RemoveItem2StashInv(Iitems item) // view=> model 
+        {
+            commonInvItems.Remove(item);
+            return true;
+        }
+
+        public int GetItemNosInStashInv(ItemData itemData)
+        {
+           // stash inv Items
+            int quantity = stashInvIntems.Count(t => t.itemName == itemData.ItemName && t.itemType == itemData.itemType);
+            return quantity;
+        }
         #endregion
-
-
-
 
         #region EXCESS INV
         public bool AddItem2Excess(Iitems item)

@@ -16,12 +16,13 @@ namespace Town
 
         [Header("To be ref")]
         [SerializeField] Transform btnContainer;
+        [SerializeField] Transform NPCInteractPanel;
 
         [Header("Not to be ref")]
         [SerializeField] Transform BGSpriteContainer;
 
         [Header("House Interact Panels: To be ref")]
-        [SerializeField] Transform InteractPanelContainer; 
+        [SerializeField] Transform BuildInteractPanel; 
 
         public Transform buyPanel;
         public Transform provisionPanel;
@@ -44,7 +45,7 @@ namespace Town
         void Start()
         {
             BGSpriteContainer = transform.GetChild(0);
-            Init(); // for test
+            exit.onClick.AddListener(UnLoad); 
         }
         public void Init()
         {            
@@ -72,7 +73,7 @@ namespace Town
         }
         void InitInteractPanels()
         {
-            foreach (Transform child in InteractPanelContainer)
+            foreach (Transform child in BuildInteractPanel)
             {
                 child.GetComponent<IPanel>().Init(); // interact panels initialized here 
             }
@@ -109,6 +110,15 @@ namespace Town
 
         public void UnLoad()
         {
+            UIControlServiceGeneral.Instance.TogglePanel(this.gameObject, false);
+        }
+        private void Update()
+        {
+          if(Input.GetKeyDown(KeyCode.S))
+            {
+                Init(); // for test
+
+            }      
         }
     }
 }

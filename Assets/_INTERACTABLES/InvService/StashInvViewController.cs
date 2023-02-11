@@ -1,3 +1,4 @@
+using Interactables;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,5 +15,11 @@ public class StashInvViewController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void AddItem2InVView(Iitems item)
+    {
+
+
     }
 }

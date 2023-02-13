@@ -173,7 +173,11 @@ namespace Interactables
                     ItemService.Instance.allItemsInGame.Add(itemFoods);
                     return itemFoods;
                 case ItemType.Fruits:
-                    break;
+                    Iitems itemFruits = GetNewFruitItem((FruitNames)itemName);
+                    FruitSO fruitSO = ItemService.Instance.GetFruitSO((FruitNames)itemName);
+                    itemFruits.InitItem(itemId, fruitSO.maxInvStackSize);
+                    ItemService.Instance.allItemsInGame.Add(itemFruits);
+                    return itemFruits;
                 case ItemType.Ingredients:
                     Iitems itemIngred = GetNewIngredItem((IngredNames)itemName);
                     IngredSO ingredSO = ItemService.Instance.GetIngredSO((IngredNames)itemName);
@@ -604,7 +608,7 @@ namespace Interactables
                     return t;
                 }
             }
-            Debug.Log("Food base class Not found" + _fruitName);
+            Debug.Log("Fruit base class Not found" + _fruitName);
             return null;
         }
 

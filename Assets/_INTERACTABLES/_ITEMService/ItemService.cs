@@ -457,23 +457,23 @@ namespace Interactables
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionNames.StaminaPotion,
+                InitItemToInv(SlotType.CommonInv, ItemType.Fruits, (int)FruitNames.Apple,
                                      CauseType.Items, 2);
             }
             if (Input.GetKeyDown(KeyCode.J))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.BeltOfTheCommoner,
-                                     CauseType.Items, 2, GenGewgawQ.Folkloric);
+                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.Yeast,
+                                     CauseType.Items, 2);
             }
             if (Input.GetKeyDown(KeyCode.G))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Gems, (int)SagaicGewgawNames.AncientTabletOfEarth,
-                                    CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.Cardamom,
+                                  CauseType.Items, 2);
             }
             if (Input.GetKeyDown(KeyCode.K))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.AmetystRing,
-                                     CauseType.Items, 2, GenGewgawQ.Epic);
+                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.Wheat,
+                                        CauseType.Items, 2);
             }
         }
 

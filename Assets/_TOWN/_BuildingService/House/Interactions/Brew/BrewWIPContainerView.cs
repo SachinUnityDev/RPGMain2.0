@@ -12,16 +12,15 @@ namespace Town
         BrewSlotView brewSlotView;
         private void Awake()
         {            
-            foreach (Transform child in transform)
-            {
-                child.GetComponent<BrewWIPPtrEvents>().InitBrewWIP();            
-            }
+           
         }
         public void InitBrewWIP(BrewSlotView brewSlotView)
         {
             this.brewSlotView = brewSlotView;
-
-
+            foreach (Transform child in transform)
+            {
+                child.GetComponent<BrewWIPPtrEvents>().InitBrewWIP();
+            }
         }
         public bool AllotBrewSlot()
         {

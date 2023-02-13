@@ -9,8 +9,8 @@ public class BrewSlotView : MonoBehaviour
 {
     [Header("to be ref")]
     [SerializeField] Transform recipeSlotTrans;    
-    [SerializeField] Transform brewSlotContainer;    
-
+    public Transform brewSlotContainer;
+    public Transform readySlotContainer; 
     [Header("Buttons Brew and Drink")]
     [SerializeField] Button brewBtn;
     [SerializeField] Button drinkBtn;
@@ -18,6 +18,7 @@ public class BrewSlotView : MonoBehaviour
 
     public AlcoholNames alcoholName;
     [SerializeField] Iitems item;
+    [SerializeField] IRecipe recipe;
     [SerializeField] AlcoholSO alcoholSO;
     [SerializeField] BrewView brewView;
 
@@ -37,12 +38,12 @@ public class BrewSlotView : MonoBehaviour
         item = ItemService.Instance.GetItemBase(itemData); 
         this.brewView = brewView;
         FillRecipeSlots();
-      //  brewSlotContainer.GetComponent<BrewWIPContainerView>().InitBrewWIP(this); // container view 
+        brewSlotContainer.GetComponent<BrewWIPContainerView>().InitBrewWIP(this); // container view 
     }
 
     void FillRecipeSlots()
     {
-        IRecipe recipe = item as IRecipe;
+        recipe = item as IRecipe;
            
             int j = 0; 
             for (int i = 0; i < recipeSlotTrans.childCount; i= i+2)
@@ -58,7 +59,7 @@ public class BrewSlotView : MonoBehaviour
                 }
                 IngredData ingred = recipe.allIngredData[j];       
                 int quantity =
-                    InvService.Instance.invMainModel.GetItemNosInStashInv(ingred.ItemData);
+                    InvService.Instance.invMainModel.GetItemNosInCommInv(ingred.ItemData);
                 quantity +=
                     InvService.Instance.invMainModel.GetItemNosInStashInv(ingred.ItemData);
 
@@ -70,33 +71,17 @@ public class BrewSlotView : MonoBehaviour
 
     void AreIngredSufficient()
     {
-
+        // loop thru ingred and return true only when all ingred are there 
     }
 
     void OnBrewBtnPressed()
     {
-       // recipe 
-
-        // if there are sufficient ingred.. slot status and fill it up
-        // loop thru slots if the staus returned as true we are good 
-
-        
-
-
+        brewSlotContainer.GetComponent<BrewWIPContainerView>().AllotBrewSlot();
     }
 
-    void StartTheBrewProcess()
-    {
-        // subtract the ingred from the slots and inventories
-        // 
-
-
-
-    }
-    
     void OnDrinkBtnPressed()
     {
-
+        readySlotContainer.GetChild(0).GetComponent<BrewReadySlotPtrEvents>().OnConsume(item);
     }
 
 

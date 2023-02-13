@@ -17,7 +17,7 @@ namespace Town
         [SerializeField] Image WIPImg;
         [SerializeField] Image fillImg;
         [SerializeField] TextMeshProUGUI daysRemaining;
-        [SerializeField] TextMeshProUGUI netDays;
+        [SerializeField] TextMeshProUGUI netDaysTxt;
         
         
         [Header("global var")]
@@ -25,6 +25,7 @@ namespace Town
         [SerializeField] int net_Days = 0;
         [SerializeField] int days_Remaining = 0; 
         [SerializeField] AlcoholSO alcoholSO;
+        [SerializeField] BrewSlotView brewSlotView; 
 
         [SerializeField] int startDay; 
         private void Awake()
@@ -32,21 +33,19 @@ namespace Town
             WIPImg = transform.GetChild(0).GetComponent<Image>();
             fillImg = transform.GetChild(1).GetComponent<Image>();
             daysRemaining = transform.GetChild(2).GetComponent<TextMeshProUGUI>();  
-            netDays = transform.GetChild(3).GetComponent<TextMeshProUGUI>();
+            netDaysTxt = transform.GetChild(3).GetComponent<TextMeshProUGUI>();
 
         }
         private void Start()
         {
-            InitBrewWIP();
+           // InitBrewWIP();
             CalendarService.Instance.OnStartOfDay += OnDayChange;
 
         }
         public void InitBrewWIP()
         {
-            WIPImg.gameObject.SetActive(false);
-            fillImg.gameObject.SetActive(false);
-            daysRemaining.gameObject.SetActive(false);
-            netDays.gameObject.SetActive(false);
+            if (isFilled) return;
+             EmptySlot();
         }
 
         public bool IsSlotFilled()
@@ -56,30 +55,58 @@ namespace Town
 
         public void StartBrewWIP(BrewSlotView brewSlotView)
         {
+            this.brewSlotView = brewSlotView; 
             alcoholName = brewSlotView.alcoholName; 
-            AlcoholSO alchoholSO = ItemService.Instance.GetAlcoholSO(alcoholName);
-            WIPImg.sprite = alchoholSO.iconSprite;
-            
-            fillImg.fillAmount = 0;
-            net_Days = Random.Range(alcoholSO.minTime, alchoholSO.maxTime+1);
-            days_Remaining = net_Days; 
-
-            daysRemaining.text = days_Remaining.ToString();
-            netDays.text = netDays.ToString();
-            startDay = CalendarService.Instance.dayInGame; 
-
+            alcoholSO = ItemService.Instance.GetAlcoholSO(alcoholName);
 
             WIPImg.gameObject.SetActive(true);
             fillImg.gameObject.SetActive(true);
             daysRemaining.gameObject.SetActive(true);
-            netDays.gameObject.SetActive(true);
+            netDaysTxt.gameObject.SetActive(true);
+
+            WIPImg.sprite = alcoholSO.iconSprite;
+            
+            fillImg.fillAmount = 0;      
+            net_Days = UnityEngine.Random.Range(alcoholSO.minTime, alcoholSO.maxTime+1);
+            days_Remaining = net_Days; 
+
+            daysRemaining.text = days_Remaining.ToString();
+            netDaysTxt.text = net_Days.ToString() +" days";
+            startDay = CalendarService.Instance.dayInGame; 
+            isFilled = true;
         }
 
         private void OnDayChange(int day)
-        {       
+        {
+            if (!isFilled) return;
             days_Remaining--;
-            daysRemaining.text = days_Remaining.ToString();
-            fillImg.fillAmount = days_Remaining / net_Days;
+            if(days_Remaining > 0 )
+            {
+                daysRemaining.text = days_Remaining.ToString();
+                fillImg.fillAmount =(1 - ((float)days_Remaining / net_Days));
+            }
+            else
+            {
+                EmptySlot();
+               
+                brewSlotView.readySlotContainer
+                        .GetChild(0).GetComponent<BrewReadySlotPtrEvents>().Add2Slot(alcoholSO);               
+            }
         }
+
+        void EmptySlot()
+        {
+            isFilled = false;
+            alcoholName = AlcoholNames.None; 
+            net_Days = 0;
+            days_Remaining= 0;
+            
+         
+            WIPImg.gameObject.SetActive(false);
+            fillImg.gameObject.SetActive(false);
+            daysRemaining.gameObject.SetActive(false);
+            netDaysTxt.gameObject.SetActive(false);
+        }
+
     }
 }

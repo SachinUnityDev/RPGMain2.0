@@ -13,7 +13,7 @@ namespace Interactables
         public int itemName => (int)FruitNames.Apple;
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
-        public List<int> allBuffs { get; set; }
+        public List<int> allBuffs { get; set; } = new List<int>();
         public int itemId { get; set; }
         public void OnHoverItem()
         {

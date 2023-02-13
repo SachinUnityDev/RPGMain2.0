@@ -178,9 +178,9 @@ namespace Interactables
         {
             ClearInv();
             //allCommonInvList.AddRange(InvService.Instance.invMainModel.commonInvItems);  // local list
-            foreach (InvData invData in InvService.Instance.invMainModel.commonInvItems.ToList())
+            foreach (Iitems item in InvService.Instance.invMainModel.commonInvItems.ToList())
             {
-                AddItem2InVView(invData.item);
+                AddItem2InVView(item);
             }
         }
 

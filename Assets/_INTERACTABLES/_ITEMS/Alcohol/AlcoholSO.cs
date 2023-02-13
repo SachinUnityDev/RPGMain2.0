@@ -24,8 +24,8 @@ namespace Interactables
         public Currency recipePrice;
 
         [Header("Brewing time")]
-        public int minTime;
-        public int maxTime;
+        public int minTime =0;
+        public int maxTime =0;
 
         private void Awake()
         {

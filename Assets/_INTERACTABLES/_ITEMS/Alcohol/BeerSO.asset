@@ -22,3 +22,5 @@ MonoBehaviour:
   recipePrice:
     silver: 0
     bronze: 24
+  minTime: 4
+  maxTime: 5

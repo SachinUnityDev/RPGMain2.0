@@ -27,6 +27,22 @@ namespace Common
         }
     }
 
+    public abstract class TempTraitBase
+    {
+        public abstract TempTraitName tempTraitName { get; }
+
+
+        public virtual  void Init(CharController charController)
+        {
+
+        }
+        
+        public abstract void OnApply();
+
+        public abstract void OnEnd();
+
+    }
+
 
     public abstract class TempTraitBase : MonoBehaviour
     {

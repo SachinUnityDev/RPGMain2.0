@@ -11,28 +11,60 @@ namespace Town
     {
         [SerializeField] Transform associatedPlus; 
 
-        [SerializeField] IngredData netIngred;
+        [SerializeField] IngredData ingredReq;
         [SerializeField] int quantity;
         [SerializeField] Image imgIngred;
         [SerializeField] TextMeshProUGUI txtTrans;
 
+        public bool hasSufficientIngred; 
+
         private void Awake()
         {
             imgIngred = transform.GetChild(0).GetComponent<Image>();
-            txtTrans = transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
+            txtTrans = transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
         }
-        public void InitBrewRecipe(IngredData netIngred, int quantity)
+        public void InitBrewRecipe(IngredData ingredReq, int quantity)
         {
-            this.netIngred = netIngred;  
+            this.ingredReq = ingredReq;  
             this.quantity = quantity;
             FillSlot(); 
         }
         
+        void SetQuantityStatus()
+        {
+            if(quantity > ingredReq.quantity)
+            {
+                hasSufficientIngred= true;
+            }
+            else
+            {
+                hasSufficientIngred= false;
+            }
+        }
+        public void SubtractIngredFrmSlot(IngredData subIngred)
+        {
+
+
+
+        }
+
+        public void DisableSlot()
+        {
+            if (associatedPlus != null)
+                associatedPlus.gameObject.SetActive(false);
+            gameObject.SetActive(false);
+        }
+        public void EnableSlot()
+        {
+            if (associatedPlus != null)
+                associatedPlus.gameObject.SetActive(true);
+            gameObject.SetActive(true);
+        }
         void FillSlot()
-        {       
-            Sprite itemSprite = GetSprite(netIngred.ItemData);
+        {             
+            Sprite itemSprite = GetSprite(ingredReq.ItemData);
             imgIngred.sprite = itemSprite;
-            txtTrans.text = quantity.ToString();
+            txtTrans.text = ingredReq.quantity.ToString();
         }
         Sprite GetSprite(ItemData itemData)
         {
@@ -43,22 +75,7 @@ namespace Town
                 Debug.Log("SPRITE NOT FOUND");
             return null;
         }
-        public void SubtractIngredFrmSlot(IngredData subIngred)
-        {
-
-
-
-        }
+    
     }
 }
 
-//if(quantity== 0)
-//{
-//    if (associatedPlus != null)
-//     associatedPlus.gameObject.SetActive(false);
-//    gameObject.SetActive(false);
-//    return;                 
-//}
-//if (associatedPlus != null)
-//    associatedPlus.gameObject.SetActive(true);
-//gameObject.SetActive(true);

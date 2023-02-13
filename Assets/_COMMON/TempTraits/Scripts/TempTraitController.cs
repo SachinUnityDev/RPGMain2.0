@@ -3,84 +3,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-
-
 
 namespace Common
 {
-    public class TempTraitModData  // broadCast Data 
-    {
-        public CauseType causeType;  // add cause name here 
-        public int causeName;
-        public int causeByCharID;
-        public int effectedCharID;
-        public TempTraitName tempTraitName;
-        public bool isImmunity;
-
-        public TempTraitModData(CauseType causeType, int causeName, int causeByCharID
-                                    , int effectedCharID, TempTraitName tempTraitName, bool isImmunity = false)
-        {
-            this.causeType = causeType;
-            this.causeName = causeName;
-            this.causeByCharID = causeByCharID;
-            this.effectedCharID = effectedCharID;
-            this.tempTraitName = tempTraitName;
-            this.isImmunity = isImmunity;
-        }
-    }
-
-    public class TempTraitBuffData
-    {
-        public int buffID;
-        public bool isBuff;   // true if BUFF and false if DEBUFF
-        public int startRoundNo;
-        public TimeFrame timeFrame;
-        public int buffedNetTime;
-        public int buffCurrentTime;
-        public TempTraitModData tempTraitModData;
-        public string directString;
-
-        public TempTraitBuffData(int buffID, bool isBuff, int startRoundNo, TimeFrame timeFrame, int buffedNetTime
-                                    , TempTraitModData tempTraitModData, string directString = "")
-        {
-            this.buffID = buffID;
-            this.isBuff = isBuff;
-            this.startRoundNo = startRoundNo;
-            this.timeFrame = timeFrame;
-            this.buffedNetTime = buffedNetTime;
-            this.buffCurrentTime = 0;
-            this.tempTraitModData = tempTraitModData;
-            this.directString = directString;
-        }
-    }
-
-    public class TempTraitImmunityData
-    {
-        public int buffID;
-        public bool isBuff;   // true if BUFF and false if DEBUFF
-        public int startRoundNo;
-        public TimeFrame timeFrame;
-        public int buffedNetTime;
-        public int buffCurrentTime;
-        public TempTraitModData tempTraitModData;
-        public string directString;
-
-        public TempTraitImmunityData(int buffID, bool isBuff, int startRoundNo, TimeFrame timeFrame, int buffedNetTime
-                                    , TempTraitModData tempTraitModData, string directString = "")
-        {
-            this.buffID = buffID;
-            this.isBuff = isBuff;
-            this.startRoundNo = startRoundNo;
-            this.timeFrame = timeFrame;
-            this.buffedNetTime = buffedNetTime;
-            this.buffCurrentTime = 0;
-            this.tempTraitModData = tempTraitModData;
-            this.directString = directString;
-        }
-    }
-
-
     public class TempTraitController : MonoBehaviour
     {
 
@@ -91,9 +18,17 @@ namespace Common
         [SerializeField] List<string> deDuffStrs = new List<string>();
 
         public List<TempTraitBase> allTempTraitBases = new List<TempTraitBase>();
-
-
         int buffID;
+
+//        You can have 3 sickness.If you trigger 1 more sickness when already have 3
+//        , you will become gravely ill.When you are gravely ill, you are immune to sickness
+//        .But you automatically die if you aren't healed in 3 days. (you receive G.ill in day 1, you die day 4.)				
+
+//      You can have 3 physical positive and 3 mental positive traits.first in first out 				
+				
+//      You can have 3 mental negative traits and 3 physical negative traits.If you trigger 1 more
+//      , you become Madness(for mental) or Weakness(for physical)
+
 
         void Start()
         {
@@ -101,11 +36,10 @@ namespace Common
             charController = GetComponent<CharController>();
             CombatEventService.Instance.OnEOR += RoundTick;
             CombatEventService.Instance.OnEOC += EOCTick;
-
         }
         #region BUFF & DEBUFF
         public void ApplyTempTraitBuff(CauseType causeType, int causeName, int causeByCharID
-                                , TempTraitName tempTraitName, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
+        , TempTraitName tempTraitName, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
         {
             // check immunity list 
             int effectedCharID = charController.charModel.charID;
@@ -225,7 +159,6 @@ namespace Common
 
         #endregion
 
-
         //public void ResetCharStateBuff(TempTraitName tempTraitName)
         //{
         //    foreach (TempTraitBuffData buffData in alltempTraitBuffs)
@@ -253,5 +186,76 @@ namespace Common
         //}
 
     }
+    public class TempTraitModData  // broadCast Data 
+    {
+        public CauseType causeType;  // add cause name here 
+        public int causeName;
+        public int causeByCharID;
+        public int effectedCharID;
+        public TempTraitName tempTraitName;
+        public bool isImmunity;
+
+        public TempTraitModData(CauseType causeType, int causeName, int causeByCharID
+                                    , int effectedCharID, TempTraitName tempTraitName, bool isImmunity = false)
+        {
+            this.causeType = causeType;
+            this.causeName = causeName;
+            this.causeByCharID = causeByCharID;
+            this.effectedCharID = effectedCharID;
+            this.tempTraitName = tempTraitName;
+            this.isImmunity = isImmunity;
+        }
+    }
+
+    public class TempTraitBuffData
+    {
+        public int buffID;
+        public bool isBuff;   // true if BUFF and false if DEBUFF
+        public int startRoundNo;
+        public TimeFrame timeFrame;
+        public int buffedNetTime;
+        public int buffCurrentTime;
+        public TempTraitModData tempTraitModData;
+        public string directString;
+
+        public TempTraitBuffData(int buffID, bool isBuff, int startRoundNo, TimeFrame timeFrame, int buffedNetTime
+                                    , TempTraitModData tempTraitModData, string directString = "")
+        {
+            this.buffID = buffID;
+            this.isBuff = isBuff;
+            this.startRoundNo = startRoundNo;
+            this.timeFrame = timeFrame;
+            this.buffedNetTime = buffedNetTime;
+            this.buffCurrentTime = 0;
+            this.tempTraitModData = tempTraitModData;
+            this.directString = directString;
+        }
+    }
+
+    public class TempTraitImmunityData
+    {
+        public int buffID;
+        public bool isBuff;   // true if BUFF and false if DEBUFF
+        public int startRoundNo;
+        public TimeFrame timeFrame;
+        public int buffedNetTime;
+        public int buffCurrentTime;
+        public TempTraitModData tempTraitModData;
+        public string directString;
+
+        public TempTraitImmunityData(int buffID, bool isBuff, int startRoundNo, TimeFrame timeFrame, int buffedNetTime
+                                    , TempTraitModData tempTraitModData, string directString = "")
+        {
+            this.buffID = buffID;
+            this.isBuff = isBuff;
+            this.startRoundNo = startRoundNo;
+            this.timeFrame = timeFrame;
+            this.buffedNetTime = buffedNetTime;
+            this.buffCurrentTime = 0;
+            this.tempTraitModData = tempTraitModData;
+            this.directString = directString;
+        }
+    }
+
 }
 

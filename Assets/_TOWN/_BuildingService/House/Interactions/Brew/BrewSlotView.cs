@@ -37,36 +37,50 @@ public class BrewSlotView : MonoBehaviour
         item = ItemService.Instance.GetItemBase(itemData); 
         this.brewView = brewView;
         FillRecipeSlots();
+      //  brewSlotContainer.GetComponent<BrewWIPContainerView>().InitBrewWIP(this); // container view 
     }
 
     void FillRecipeSlots()
     {
         IRecipe recipe = item as IRecipe;
-        if (recipe != null) 
-        {
-            int i = 0; int j = 0; 
-            foreach (IngredData ingred in recipe.allIngredData)
-            {             
+           
+            int j = 0; 
+            for (int i = 0; i < recipeSlotTrans.childCount; i= i+2)
+            {
+                if (j >= recipe.allIngredData.Count)
+                {
+                    recipeSlotTrans.GetChild(i).GetComponent<BrewRecipePtrEvents>().DisableSlot();
+                    break;
+                }
+                else
+                {
+                    recipeSlotTrans.GetChild(i).GetComponent<BrewRecipePtrEvents>().EnableSlot();
+                }
+                IngredData ingred = recipe.allIngredData[j];       
                 int quantity =
                     InvService.Instance.invMainModel.GetItemNosInStashInv(ingred.ItemData);
                 quantity +=
-                    InvService.Instance.invMainModel.GetItemNosInStashInv(ingred.ItemData);                
+                    InvService.Instance.invMainModel.GetItemNosInStashInv(ingred.ItemData);
 
-                    recipeSlotTrans.GetChild(j).GetComponent<BrewRecipePtrEvents>().InitBrewRecipe(ingred, quantity);
+                recipeSlotTrans.GetChild(i).GetComponent<BrewRecipePtrEvents>().InitBrewRecipe(ingred, quantity);                               
                 
-                i++; j = j + 2;
+                j++;
             }
-        }
     }
 
+    void AreIngredSufficient()
+    {
 
+    }
 
     void OnBrewBtnPressed()
     {
-        // if there are sufficient ingred.. slot status and fill it up
-        // 
-        // 
+       // recipe 
 
+        // if there are sufficient ingred.. slot status and fill it up
+        // loop thru slots if the staus returned as true we are good 
+
+        
 
 
     }

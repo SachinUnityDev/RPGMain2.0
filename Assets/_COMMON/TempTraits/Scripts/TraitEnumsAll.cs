@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Common
 {
-    public class TraitEnumsAll : MonoBehaviour
+    public class TraitEnumsAll
     {
-        // Start is called before the first frame update
+       
 
     }
 
@@ -31,6 +31,7 @@ namespace Common
     {
         Cultural,
         Class,
+        Race,
     }
     public enum TempTraitName
     {
@@ -90,8 +91,14 @@ namespace Common
         Weakness,
         WellRested,
         RatBiteFever,
-        
-
+        Thanatophobia,
+        Ailurophobia,
+        Restless,
+        Arachnophobia,
+        FearOfTheDead,
+        FastLearner,
+        Insane,
+        DesertFever,
     }
 
     public enum PermanentTraitName

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbfc1a043dc618b4c83cdd5b3f25e129, type: 3}
+  m_Name: ForestGumpSO
+  m_EditorClassIdentifier: 
+  tempTraitName: 17
+  tempTraitType: 1
+  temptraitBehavior: 2
+  minCastTime: 9
+  maxCastTime: 12
+  desc: 
+  iconSprite: {fileID: 0}
+  allLines:
+  - -3 Focus in forests

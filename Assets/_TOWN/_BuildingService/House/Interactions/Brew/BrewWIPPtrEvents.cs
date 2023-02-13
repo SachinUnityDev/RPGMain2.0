@@ -10,6 +10,10 @@ namespace Town
 {
     public class BrewWIPPtrEvents : MonoBehaviour
     {
+        [Header("WIP")]
+        public bool isFilled = false; 
+
+        [Header("Transform Not to be ref")]
         [SerializeField] Image WIPImg;
         [SerializeField] Image fillImg;
         [SerializeField] TextMeshProUGUI daysRemaining;
@@ -43,6 +47,11 @@ namespace Town
             fillImg.gameObject.SetActive(false);
             daysRemaining.gameObject.SetActive(false);
             netDays.gameObject.SetActive(false);
+        }
+
+        public bool IsSlotFilled()
+        {
+            return isFilled; 
         }
 
         public void StartBrewWIP(BrewSlotView brewSlotView)

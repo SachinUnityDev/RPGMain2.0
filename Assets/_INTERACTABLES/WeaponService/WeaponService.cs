@@ -10,6 +10,8 @@ namespace Interactables
     {
         // enchantemnet to be done in temple or thru scroll read 
 
+       
+
         public WeaponSO weaponSO;
         public WeaponModel weaponModel;
         public GameObject weaponPanel;

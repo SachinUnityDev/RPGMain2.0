@@ -57,8 +57,6 @@ namespace Common
             CombatEventService.Instance.OnEOC += FortitudeReset2FortOrg;
             CombatEventService.Instance.OnSOTactics += AddControllerOnCombatStart; 
 
-
-
         }
         public CharModel InitiatizeController(CharacterSO _charSO)
         {

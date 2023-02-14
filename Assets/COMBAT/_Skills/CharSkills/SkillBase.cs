@@ -8,7 +8,7 @@ using Interactables;
 namespace Combat
 {
     [System.Serializable]
-    public abstract class SkillBase : MonoBehaviour
+    public abstract class SkillBase 
     {
         #region Declarations
 

@@ -33,10 +33,10 @@ namespace Interactables
         }
         void PopulateWeaponPanel(CharModel charModel)
         {
-            charSelect = charModel.charName;
-            Sprite sprite = WeaponService.Instance.weaponSO.GetSprite(charSelect);
-            transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite
-                = sprite;
+            //charSelect = charModel.charName;
+            //Sprite sprite = WeaponService.Instance.weaponSO.GetSprite(charSelect);
+            //transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite
+            //    = sprite;
          
         }
 

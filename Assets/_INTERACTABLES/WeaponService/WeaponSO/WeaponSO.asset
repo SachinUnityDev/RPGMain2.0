@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9869bcfeba99bfc4aab9618eed431ec3, type: 3}
+  m_Name: WeaponSO
+  m_EditorClassIdentifier: 
+  emptySlot: {fileID: 21300000, guid: 64b6be9933c1f0f4d89f799ba501cd7e, type: 3}
+  allWeaponSprites:
+  - charName: 1
+    weaponSprite: {fileID: 21300000, guid: 2c2434491e44a374b804e8d0c73461da, type: 3}
+  - charName: 43
+    weaponSprite: {fileID: 21300000, guid: b4af40a6aafbbfb4f9364b564a1b9c5d, type: 3}
+  - charName: 2
+    weaponSprite: {fileID: 21300000, guid: ff3c71aa4ca44ff46bcac579736f99ac, type: 3}
+  - charName: 3
+    weaponSprite: {fileID: 21300000, guid: 7af8e49923aba904ea0b5657b442763a, type: 3}
+  - charName: 4
+    weaponSprite: {fileID: 21300000, guid: b4af40a6aafbbfb4f9364b564a1b9c5d, type: 3}
+  - charName: 5
+    weaponSprite: {fileID: 21300000, guid: f7b2bd41f6decdf4e879ac2b4fd61277, type: 3}
+  - charName: 6
+    weaponSprite: {fileID: 21300000, guid: 18e6d69c2d792c34fb471052c1adf168, type: 3}
+  - charName: 7
+    weaponSprite: {fileID: 21300000, guid: 9247d05589eeb5e4da207b7da64526a5, type: 3}
+  - charName: 8
+    weaponSprite: {fileID: 21300000, guid: 27dea4bfe2647f244aa957792cfc9bba, type: 3}
+  - charName: 9
+    weaponSprite: {fileID: 21300000, guid: aeecaa6444ef9134581e6c9fa913738e, type: 3}

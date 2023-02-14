@@ -24,15 +24,6 @@ namespace Town
         None, // to be shown on NPC panel
         Talk, 
         Trade,
-        HealSickness, 
-        ClearMind,
-        CraftPotion,
-        FortifyArmor,
-        LoanAndInvest,
-        MergeJewelery,
-        WhetWeapon, 
-        Gamble,
-        
     }
     public enum BuildInteractType
     {

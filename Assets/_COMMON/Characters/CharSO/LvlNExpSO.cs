@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq; 
-
+using System.Linq;
+using Interactables;
 
 namespace Common
 {
@@ -11,7 +11,8 @@ namespace Common
     {
         public int charLvl;
         public int deltaExpPts;
-        public int totalExpPts; 
+        public int totalExpPts;
+        public Currency clearMindCostAtThisLvl; 
     }
 
     [CreateAssetMenu(fileName = "LvlNExpSO", menuName = "Character Service/LvlNExpSO")]

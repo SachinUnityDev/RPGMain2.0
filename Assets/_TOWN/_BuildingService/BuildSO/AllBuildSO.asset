@@ -60,7 +60,7 @@ MonoBehaviour:
     spriteN: {fileID: 21300000, guid: 261049618c7d3174fba2b377d5f514d5, type: 3}
   - intType: 16
     intTypeStr: 
-    spriteN: {fileID: 21300000, guid: ede5c6a9e336495448d56ce46bf6147c, type: 3}
+    spriteN: {fileID: 21300000, guid: dce3f10c9d654a84593ed11e3f6f34d0, type: 3}
   allBuildSO:
   - {fileID: 11400000, guid: 6340a2f94fbdd6a4093eac27417485e1, type: 2}
   - {fileID: 11400000, guid: 2527b9a8ff7bc6746a9a6e09f9fcd4f2, type: 2}

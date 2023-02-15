@@ -20,15 +20,14 @@ namespace Interactables
         }
         void OnEnable()
         {
-            if(InvService.Instance.isInvPanelOpen)
-                Load(); 
+         //   if (InvService.Instance.isInvPanelOpen)
+             // Load();
         }
         #region Load UnLoad
         public void Load()
-        {
-            UIControlServiceGeneral.Instance.TogglePanel(this.gameObject, true);
-
-            PopulateArmorPanel(InvService.Instance.charSelectController.charModel); 
+        {          
+            CharModel charModel = InvService.Instance.charSelectController.charModel; 
+            PopulateArmorPanel(charModel); 
            
         }
         public void UnLoad()
@@ -38,7 +37,7 @@ namespace Interactables
 
         public void Init()
         {
-           
+            charSelect = InvService.Instance.charSelect;
         }
 
         #endregion

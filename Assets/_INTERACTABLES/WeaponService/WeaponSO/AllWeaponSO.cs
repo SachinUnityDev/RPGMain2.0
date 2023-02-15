@@ -17,5 +17,16 @@ namespace Interactables
         public Currency enchantValue;
         public Currency rechargeValue; 
 
+        public WeaponSO GetWeaponSO(CharNames charName)
+        {
+            int index = allWeaponSO.FindIndex(t=>t.charName == charName);
+            if(index != -1)            
+                return allWeaponSO[index];            
+            else            
+                Debug.Log("Weapon SO not found" + charName);                
+            return null; 
+        }
+
+
     }
 }

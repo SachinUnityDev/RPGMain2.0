@@ -1,4 +1,5 @@
 using Common;
+using Interactables;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,13 +7,19 @@ using UnityEngine;
 
 public class EnchantView : MonoBehaviour, IPanel
 {
+    /// <summary>
+    /// get details from the weapon panels
+    /// get weapon SO... for btns and weapon state update 
+    /// 
+    /// </summary>
 
-
-
+    WeaponSO weaponSO; 
 
     public void Init()
     {
-        
+        //    weaponSO = WeaponService.Instance.allWeaponSO.get
+
+
     }
 
     public void Load()

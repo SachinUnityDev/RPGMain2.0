@@ -110,7 +110,7 @@ namespace Town
 
         public void UnLoad()
         {
-            UIControlServiceGeneral.Instance.TogglePanel(this.gameObject, false);
+            UIControlServiceGeneral.Instance.TogglePanelOnInGrp(this.gameObject, false);
         }
         private void Update()
         {

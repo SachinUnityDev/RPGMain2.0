@@ -84,7 +84,6 @@ namespace Interactables
         void Start()
         {
             itemFactory = gameObject.GetComponent<ItemFactory>();
-          
         }
 
         // distributed 
@@ -472,7 +471,7 @@ namespace Interactables
             }
             if (Input.GetKeyDown(KeyCode.K))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.Wheat,
+                InitItemToInv(SlotType.CommonInv, ItemType.Gems, (int)GemNames.Ruri,
                                         CauseType.Items, 2);
             }
         }

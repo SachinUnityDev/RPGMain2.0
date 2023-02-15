@@ -107,6 +107,8 @@ namespace Common
 
         public void TogglePanel(GameObject go, bool turnON)
         {
+            if(turnON)
+                if (currOpenPanels.Any(t => t.gameObject.name == go.name)) return;
             if (turnON)
                 currOpenPanels.Add(go);
             else

@@ -21,13 +21,13 @@ namespace Interactables
             gemImg = transform.GetChild(1).GetChild(0).GetComponent<Image>();
 
         }
-        void OnEnable()
-        {
-            Load();
-        }
+        //void OnEnable()
+        //{
+        //    Load();
+        //}
         public void Load()
         {
-            UIControlServiceGeneral.Instance.TogglePanel(this.gameObject, true);
+          //  UIControlServiceGeneral.Instance.TogglePanel(this.gameObject, true);
             Init();           
             PopulateGemEnchanted(); 
         }

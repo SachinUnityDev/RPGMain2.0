@@ -11,7 +11,7 @@ namespace Interactables
         public AllWeaponSO allWeaponSO;
         public List<WeaponModel> allWeaponModel = new List<WeaponModel>();
         public List<WeaponController> allWeaponController = new List<WeaponController>();
-        public GameObject weaponPanel;
+        public GameObject weaponInvPanel;
 
         [Header("Not TBR")]
         public WeaponViewController weaponViewController;

@@ -160,7 +160,6 @@ namespace Interactables
                     div.OnSocketed();
                     return;
                 }
-               
             }
 
             if (gemType == GemType.Support)

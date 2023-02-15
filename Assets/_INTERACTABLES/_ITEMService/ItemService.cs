@@ -456,7 +456,7 @@ namespace Interactables
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Fruits, (int)FruitNames.Apple,
+                InitItemToInv(SlotType.CommonInv, ItemType.Gems, (int)GemNames.Amber,
                                      CauseType.Items, 2);
             }
             if (Input.GetKeyDown(KeyCode.J))

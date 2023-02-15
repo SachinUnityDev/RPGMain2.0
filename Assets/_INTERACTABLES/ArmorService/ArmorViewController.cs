@@ -38,6 +38,7 @@ namespace Interactables
         public void Init()
         {
             charSelect = InvService.Instance.charSelect;
+            Load(); 
         }
 
         #endregion
@@ -69,7 +70,7 @@ namespace Interactables
         {
             CharController charController = InvService.Instance.charSelectController;
             ItemModel itemModel = charController.itemController.itemModel;
-            //List<Iitems> divGemSocketed = itemModel.divItemsSocketed; 
+           // Iitems[] divGemSocketed = itemModel.divItemsSocketed; 
             Iitems supportGemSocketed = itemModel.supportItemSocketed;
             GemSO gemSO; 
             if(supportGemSocketed != null)

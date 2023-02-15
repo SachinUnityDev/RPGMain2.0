@@ -43,7 +43,7 @@ namespace Town
         DryFood, 
         XXX,
         Brawl, 
-        XXXX, 
+        ClearMind, 
     }
     
     public enum HousePurchaseOpts

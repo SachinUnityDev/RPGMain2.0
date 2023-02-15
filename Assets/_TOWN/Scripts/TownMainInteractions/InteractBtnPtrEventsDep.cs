@@ -6,21 +6,25 @@ using UnityEngine.EventSystems;
 
 namespace Town
 {
-    public class InteractBtnPtrEventsDep : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class InteractBtnPtrEventsDep : MonoBehaviour
     {
-        public string btnIntName = "";
-        [SerializeField] TempleController templeController; 
 
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            int index = gameObject.transform.GetSiblingIndex(); 
-            templeController.GetBtnName(index); 
-        }
+    
+        //, IPointerEnterHandler, IPointerExitHandler
+    //{
+    //    public string btnIntName = "";
+    //    [SerializeField] TempleController templeController; 
 
-        public void OnPointerExit(PointerEventData eventData)
-        {
+    //    public void OnPointerEnter(PointerEventData eventData)
+    //    {
+    //        int index = gameObject.transform.GetSiblingIndex(); 
+    //        //templeController.GetBtnName(index); 
+    //    }
 
-        }
+    //    public void OnPointerExit(PointerEventData eventData)
+    //    {
+
+    //    }
 
       
 

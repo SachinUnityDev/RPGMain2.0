@@ -40,6 +40,7 @@ namespace Town
         void Start()
         {
             houseController = GetComponent<HouseController>();
+            templeController = GetComponent<TempleController>();    
         }
         public void PopulateInteractBtns(BuildingNames buildingName)
         {

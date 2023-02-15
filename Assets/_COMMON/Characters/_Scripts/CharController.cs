@@ -42,6 +42,9 @@ namespace Common
         [Header("SkillController")]
         public SkillController1 skillController;
 
+        [Header("Weapon Controller")]
+        public WeaponController weaponController;
+
         float prevHPVal = 0f;
         float prevStaminaVal = 0f; 
 
@@ -52,6 +55,8 @@ namespace Common
             charStateController = gameObject.AddComponent<CharStateController>();
             itemController = gameObject.AddComponent<ItemController>();
             skillController = gameObject.AddComponent<SkillController1>();
+            weaponController= gameObject.AddComponent<WeaponController>();
+
             SkillService.Instance.allSkillControllers.Add(skillController);
             // CombatEventService.Instance.OnSOT += ()=> PopulateOverCharBars(false); 
             CombatEventService.Instance.OnEOC += FortitudeReset2FortOrg;

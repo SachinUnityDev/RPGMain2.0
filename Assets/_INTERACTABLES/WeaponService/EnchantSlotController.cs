@@ -53,7 +53,7 @@ namespace Interactables
             ItemsInSlot.Clear();
             Transform ImgTrans = transform.GetChild(0); // check this 
             ImgTrans.gameObject.SetActive(false);
-            gameObject.GetComponent<Image>().sprite = WeaponService.Instance.weaponSO.emptySlot;
+            gameObject.GetComponent<Image>().sprite = WeaponService.Instance.allWeaponSO.emptySlot;
         }
 
         public bool HasSameItem(Iitems item)
@@ -80,9 +80,7 @@ namespace Interactables
         }
 
         public bool AddItem(Iitems item)
-        {
-           // CharNames charName = InvService.Instance.charSelect;
-           // InvData invData = new InvData(charName, item);
+        {         
             if (IsEmpty())
             {
                 AddItemOnSlot(item);

@@ -38,8 +38,10 @@ MonoBehaviour:
       nPCIntType: 4
       interactPrefab: {fileID: 0}
     buildIntTypes:
-    - BuildIntType: 0
-      isUnLocked: 0
+    - BuildIntType: 4
+      isUnLocked: 1
+    - BuildIntType: 16
+      isUnLocked: 1
     buildIntPrefab: []
     statusLockedStr: []
     statusUnAvailStr: []

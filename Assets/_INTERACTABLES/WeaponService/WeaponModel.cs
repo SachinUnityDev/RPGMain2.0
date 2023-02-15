@@ -5,22 +5,9 @@ using UnityEngine;
 
 namespace Interactables
 {
-    //public class WeaponEnchantData
-    //{
-        
-
-    //    //public WeaponEnchantData(CharNames charName, GemNames gemName)
-    //    //{
-    //    //    this.charName = charName;
-    //    //    this.gemName = gemName;
-
-    //    //}
-    //}
-
+ 
     public class WeaponModel
-    {
-        //public List<WeaponEnchantData> allWeaponsEnchanted 
-        //                                = new List<WeaponEnchantData>();
+    {   
         public CharNames charName;
         public GemNames gemName;
         public WeaponState weaponState;
@@ -31,7 +18,7 @@ namespace Interactables
             this.charName = weaponSO.charName;
             this.gemName = weaponSO.gemName;
             this.weaponState = weaponSO.weaponState;
-            this.chargeRemaining = weaponSO.chargeRemaining;
+            chargeRemaining = 0; 
         }
     }
     public enum WeaponState

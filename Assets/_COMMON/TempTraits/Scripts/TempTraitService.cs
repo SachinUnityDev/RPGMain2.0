@@ -44,11 +44,7 @@ namespace Common
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-
-                Debug.Log("temptrait service in ues"); 
-            }
+       
         }
 
     }

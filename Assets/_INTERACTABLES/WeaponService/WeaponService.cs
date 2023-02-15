@@ -2,28 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Common;
-
+using System.Diagnostics.Contracts;
 
 namespace Interactables
 {
     public class WeaponService : MonoSingletonGeneric<WeaponService>
     {
-        // enchantemnet to be done in temple or thru scroll read 
-
-       
-
-        public WeaponSO weaponSO;
-        public WeaponModel weaponModel;
+        public AllWeaponSO allWeaponSO;
+        public List<WeaponModel> allWeaponModel = new List<WeaponModel>();
+        public List<WeaponController> allWeaponController = new List<WeaponController>();
         public GameObject weaponPanel;
 
         [Header("Not TBR")]
         public WeaponViewController weaponViewController;
-        public WeaponController weaponController;
-        
-        void Start()
-        {
 
-        }
 
         public bool IsGemEnchantable(CharNames charName, GemNames gemName)
         {

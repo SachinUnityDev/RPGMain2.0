@@ -16,7 +16,19 @@ namespace Interactables
         [Header("Not TBR")]
         public WeaponViewController weaponViewController;
 
-
+        public WeaponModel GetWeaponModel(CharNames charName)
+        {
+            int index = allWeaponModel.FindIndex(t=>t.charName == charName);    
+            if(index !=-1)           
+            {
+                return allWeaponModel[index];
+            }
+            else
+            {
+                Debug.Log("weapon model not found " + charName); 
+                return null;
+            }
+        }
         public bool IsGemEnchantable(CharNames charName, GemNames gemName)
         {
             CharModel charModel = CharService.Instance.GetAllyCharModel(charName);

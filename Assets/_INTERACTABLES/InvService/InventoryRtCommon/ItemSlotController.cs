@@ -356,6 +356,7 @@ namespace Interactables
             if (eventData.button == PointerEventData.InputButton.Right)
             {
                 PopulateRightClickList();
+                ItemService.Instance.itemCardGO.SetActive(false);
             }
 
             if (eventData.button == PointerEventData.InputButton.Left)
@@ -527,8 +528,7 @@ namespace Interactables
             else
             {
                 return false; 
-            }
-            
+            }            
         }
         public void Socket()
         {
@@ -537,11 +537,12 @@ namespace Interactables
             ItemModel itemModel = itemController.itemModel;
 
             IDivGem idivGem = ItemsInSlot[0] as IDivGem;
+            ISupportGem isupport = ItemsInSlot[0] as ISupportGem;
             if(idivGem != null)
             {
                 itemModel.SocketItem2Armor(ItemsInSlot[0], GemType.Divine);                
             }
-            else
+            else if(isupport != null)
             {
                 itemModel.SocketItem2Armor(ItemsInSlot[0], GemType.Support);                
             }

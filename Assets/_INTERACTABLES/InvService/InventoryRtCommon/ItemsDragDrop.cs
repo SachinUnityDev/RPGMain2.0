@@ -53,10 +53,20 @@ namespace Interactables
         }
     
         public void OnPointerExit(PointerEventData eventData)
-        {
-            // Debug.Log("Item Exit .. " + itemDragged.itemName);
-             itemCardGO.SetActive(false);
+        {         
+            itemCardGO.SetActive(false);
+            Sequence closeSeq = DOTween.Sequence();
+            closeSeq.PrependInterval(4f);
+            closeSeq.AppendCallback(() => InvService.Instance.invViewController.CloseRightClickOpts());
+            closeSeq.Play();
         }
+        //IEnumerator WaitForTime(float time)
+        //{
+        //    yield return new WaitForSeconds(time);
+        //    InvService.Instance.invViewController.CloseRightClickOpts();
+        //}
+
+
         void ShowItemCard()
         {
             itemCardGO.GetComponent<ItemCardView>().ShowItemCard(iSlotable.ItemsInSlot[0]);
@@ -165,9 +175,6 @@ namespace Interactables
                     clone.GetComponent<CanvasGroup>().blocksRaycasts = true;
             }
         }
-
-
-
         #endregion
     }
 

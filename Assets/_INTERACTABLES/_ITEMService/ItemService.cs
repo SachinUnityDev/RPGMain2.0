@@ -85,11 +85,8 @@ namespace Interactables
         {
             itemFactory = gameObject.GetComponent<ItemFactory>();
         }
-
-        // distributed 
         public void Init()
-        {
-            
+        {            
             foreach (CharController charController in CharService.Instance.allCharsInParty)
             {
                 ItemController itemController = 
@@ -130,8 +127,6 @@ namespace Interactables
             return iitems;
         }
         #endregion 
-
-
 
         #region ITEM SO GETTERS
 
@@ -489,7 +484,6 @@ namespace Interactables
             this.fluctuation = fluctuation;
         }
     }
-
 }
 //create  item
 //add to inv with slot type

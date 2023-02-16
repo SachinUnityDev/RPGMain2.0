@@ -46,26 +46,30 @@ namespace Interactables
             potionBtnPtrEvents.isClicked = !potionBtnPtrEvents.isClicked;
             if (!potionBtnPtrEvents.isClicked)
             {
-                TogglePanel(gewgawsActivePanel);
-                ToggleBtn(PanelNameActInv.gewgawPanel);
+                UIControlServiceGeneral.Instance.TogglePanelOnInGrp(potionActivePanel.gameObject, false);
             }
             else
             {
-                TogglePanel(potionActivePanel);
+                UIControlServiceGeneral.Instance.TogglePanelOnInGrp(potionActivePanel.gameObject, true);                
                 ToggleBtn(PanelNameActInv.PotionPanel);
                 //  ArmorService.Instance.OpenArmorPanel();
             }
-
-
-
-
         }
         void OnGewgawBtnPressed()
         {
             gewgawBtnPtrEvents.isClicked = !gewgawBtnPtrEvents.isClicked;
-            TogglePanel(gewgawsActivePanel);
-            ToggleBtn(PanelNameActInv.gewgawPanel); 
-  
+            //TogglePanel(gewgawsActivePanel);
+            //ToggleBtn(PanelNameActInv.gewgawPanel); 
+
+            if (!gewgawBtnPtrEvents.isClicked)
+            {
+                UIControlServiceGeneral.Instance.TogglePanelOnInGrp(gewgawsActivePanel.gameObject, false);
+            }
+            else
+            {
+                UIControlServiceGeneral.Instance.TogglePanelOnInGrp(gewgawsActivePanel.gameObject, true);
+                ToggleBtn(PanelNameActInv.gewgawPanel);          
+            }
         }
         void ToggleBtn(PanelNameActInv panelName)
         {
@@ -80,19 +84,18 @@ namespace Interactables
                     child.GetComponent<ActiveIntBtnPtrEvents>().UnClickState();
                 }
             }
-
         }
         void OnArmorBtnPressed()
         {
             armorBtnPtrEvents.isClicked = !armorBtnPtrEvents.isClicked;
             if (!armorBtnPtrEvents.isClicked)
             {
-                TogglePanel(gewgawsActivePanel);
+                UIControlServiceGeneral.Instance.TogglePanelOnInGrp(armorPanel.gameObject, false);
                 ToggleBtn(PanelNameActInv.gewgawPanel);
             }                
             else
             {
-                TogglePanel(armorPanel);
+                UIControlServiceGeneral.Instance.TogglePanelOnInGrp(armorPanel.gameObject, true);
                 ToggleBtn(PanelNameActInv.ArmorPanel);
                 //  ArmorService.Instance.OpenArmorPanel();
             }
@@ -103,12 +106,12 @@ namespace Interactables
             weaponBtnPtrEvents.isClicked = !weaponBtnPtrEvents.isClicked;
             if (!weaponBtnPtrEvents.isClicked)
             {
-                TogglePanel(gewgawsActivePanel);
+                UIControlServiceGeneral.Instance.TogglePanelOnInGrp(weaponPanel.gameObject, false);
                 ToggleBtn(PanelNameActInv.gewgawPanel);
             }
             else
             {
-                TogglePanel(weaponPanel);
+                UIControlServiceGeneral.Instance.TogglePanelOnInGrp(weaponPanel.gameObject, true);
                 ToggleBtn(PanelNameActInv.weaponPanel);
             }
         }
@@ -132,6 +135,7 @@ namespace Interactables
                     {
                         panel.SetActive(true);                
                         panel.GetComponent<CanvasGroup>().interactable = true;
+                        panel.GetComponent<IPanel>().Load();
                     }
                 }
             }
@@ -154,6 +158,7 @@ namespace Interactables
                     {
                         panel.SetActive(true);                 
                         panel.GetComponent<CanvasGroup>().interactable = true;
+                        panel.GetComponent<IPanel>().Load();
                     }
                 }
             }

@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.UI;
-using DG.Tweening; 
+using DG.Tweening;
+using Common;
 
 namespace Interactables
 {
@@ -18,7 +19,9 @@ namespace Interactables
 
 
         Image img; 
-        [SerializeField] float scaleHL; 
+        [SerializeField] float scaleHL;
+        [Header("Right inv View: to be ref")]
+        [SerializeField] InvRightViewController InvRightView; 
 
 
         public bool isClicked= false; 
@@ -76,7 +79,7 @@ namespace Interactables
 
         public void OnPointerClick(PointerEventData eventData)
         {        
-           // isClicked = !isClicked; 
+           // UIControlServiceGeneral.Instance.TogglePanelOnInGrp(InvRightView.)
         }
     }
 

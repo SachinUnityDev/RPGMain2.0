@@ -55,7 +55,6 @@ namespace Interactables
             PopulateMaterial(charModel);
             PopulateBuffStrings(); 
         }
-       
 
         #endregion
 

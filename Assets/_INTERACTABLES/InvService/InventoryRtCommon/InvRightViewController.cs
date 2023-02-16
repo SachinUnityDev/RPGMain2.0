@@ -108,6 +108,15 @@ namespace Interactables
         }
         public void CloseRightClickOpts()
         {
+            foreach (Transform child in rightClickOpts)
+            {
+                if (child.GetComponent<ItemActionPtrController>().isHovered)
+                {
+                    return;
+                }
+            }
+
+            
             rightClickOpts.gameObject.SetActive(false);
 
             foreach (Transform child in rightClickOpts)

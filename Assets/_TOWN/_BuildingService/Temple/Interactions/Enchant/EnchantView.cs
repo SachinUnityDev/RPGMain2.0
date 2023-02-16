@@ -3,7 +3,8 @@ using Interactables;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Interactables;
+using Town;
 
 public class EnchantView : MonoBehaviour, IPanel
 {
@@ -13,11 +14,11 @@ public class EnchantView : MonoBehaviour, IPanel
     /// 
     /// </summary>
 
-    WeaponSO weaponSO; 
-
+    [SerializeField] WeaponSO weaponSO;
+    [SerializeField] WeaponModel weaponModel;   
+    [SerializeField] CharNames charSelect; 
     public void Init()
     {
-        //    weaponSO = WeaponService.Instance.allWeaponSO.get
 
 
     }
@@ -33,15 +34,17 @@ public class EnchantView : MonoBehaviour, IPanel
         
     }
 
-    // Start is called before the first frame update
-    void Start()
+    void Populate()
     {
-        
+
+        charSelect = BuildingIntService.Instance.selectChar;
+        weaponSO = WeaponService.Instance.allWeaponSO.GetWeaponSO(charSelect);
+        weaponModel = WeaponService.Instance.GetWeaponModel(charSelect);
+        // get char sprite
+        // get weapon state
+
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

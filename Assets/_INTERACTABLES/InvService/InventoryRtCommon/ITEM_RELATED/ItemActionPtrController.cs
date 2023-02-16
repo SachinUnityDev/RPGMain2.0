@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
+using DG.Tweening;
 
 
 namespace Interactables
@@ -15,11 +16,14 @@ namespace Interactables
         [SerializeField] Color colorUnClickable;
         IComInvActions iComInvActions; 
 
-        public bool isClickable = true; 
+        public bool isClickable = true;
+        public bool isHovered = false; 
+
         public void Init(ItemActions itemActions, IComInvActions iComInvAction) 
         {
             this.itemActions = itemActions;
             this.iComInvActions = iComInvAction;    
+            isHovered = false;  
         }
 
         public void ResetItemAction()
@@ -66,6 +70,8 @@ namespace Interactables
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            transform.parent.gameObject.SetActive(true);
+            isHovered = true;// this will prevent itemdragNDrop from closing it 
             if(isClickable)
                 transform.GetChild(0).GetComponent<TextMeshProUGUI>().color
                             = colorHL; 
@@ -73,7 +79,11 @@ namespace Interactables
                 transform.GetChild(0).GetComponent<TextMeshProUGUI>().color
                            = colorUnClickable;
         }
-
+        //IEnumerator WaitForTime(float time)
+        //{
+        //    yield return new WaitForSeconds(time);
+        //    InvService.Instance.invViewController.CloseRightClickOpts();
+        //}
         public void OnPointerExit(PointerEventData eventData)
         {
             if (isClickable)
@@ -82,6 +92,12 @@ namespace Interactables
             else
                 transform.GetChild(0).GetComponent<TextMeshProUGUI>().color
                            = colorUnClickable;
+            isHovered= false;
+            Sequence closeSeq = DOTween.Sequence();
+            closeSeq.PrependInterval(1f);
+            closeSeq.AppendCallback(() => InvService.Instance.invViewController.CloseRightClickOpts());
+            closeSeq.Play();
+
         }
 
         void Start()

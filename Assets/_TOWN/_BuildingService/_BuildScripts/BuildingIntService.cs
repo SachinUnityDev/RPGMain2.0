@@ -33,6 +33,10 @@ namespace Town
     public class BuildingIntService : MonoSingletonGeneric<BuildingIntService>
     {
 
+        [Header("Char and NPC Select")]
+        public CharNames selectChar;
+        public NPCNames selectNpc; 
+
         public AllBuildSO allBuildSO; 
         public HouseController houseController;
         public TavernController tavernController; 
@@ -42,12 +46,7 @@ namespace Town
             houseController = GetComponent<HouseController>();
             templeController = GetComponent<TempleController>();    
         }
-        public void PopulateInteractBtns(BuildingNames buildingName)
-        {
-
-
-
-        }
+ 
     }
 }
 

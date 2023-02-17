@@ -329,6 +329,8 @@ namespace Interactables
                 case ItemType.Soups:
                     break;
                 case ItemType.Gems:
+                    GemSO gemSO = GetGemSO((GemNames)itemName);
+                    costData = new CostData(gemSO.cost.DeepClone(), gemSO.fluctuation);
                     break;
                 case ItemType.Alcohol:
                     break;
@@ -447,6 +449,13 @@ namespace Interactables
             }
         }
         #endregion
+
+        public void ItemDispose(Iitems item, SlotType slotype)
+        {
+            
+        }
+
+
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.H))

@@ -34,11 +34,11 @@ namespace Interactables
         public GameObject invPanel;
         public bool isInvPanelOpen; 
 
-        [Header("House View Controller Not to be ref")]
+        [Header("Stash Inv : to be ref")]
         public StashInvViewController stashInvViewController;
         
 
-        [Header("EXCESS INV Panel")]       
+        [Header("EXCESS INV Panel: to be ref")]       
         public ExcessInvViewController excessInvViewController;
       
         private void Start()

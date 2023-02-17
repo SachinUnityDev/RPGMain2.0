@@ -46,9 +46,8 @@ namespace Interactables
         [Header("Canvas Not To Be Ref")]
         [SerializeField] Canvas canvas; 
         [Header("Inv Panel Ref")]
-        [SerializeField] GameObject InvPanel;        
-        
-       // public List<Iitems> allCommonInvList = new List<Iitems>();
+        [SerializeField] GameObject InvPanel;                
+
         public Transform rightClickOpts;
 
         [Header("Active Inv")]
@@ -65,6 +64,7 @@ namespace Interactables
         public void Init()
         {           
             InitCommonInv();
+            InitExcessInv(); 
            // InitPotionActiveInv(); 
         }
 
@@ -157,13 +157,7 @@ namespace Interactables
                         return slotFound;
                     }
                 }
-            }
-            //if (slotFound)
-            //{
-            //    if(slotType == SlotType)
-            //    allCommonInvList.Add(item); // local list 
-               
-            //}
+            }       
             return slotFound; 
          }
 
@@ -183,50 +177,17 @@ namespace Interactables
 
         void InitCommonInv()
         {
-            ClearInv();
-            //allCommonInvList.AddRange(InvService.Instance.invMainModel.commonInvItems);  // local list
+            ClearInv();           
             foreach (Iitems item in InvService.Instance.invMainModel.commonInvItems.ToList())
             {
                 AddItem2InVView(item, false);
             }
         }
+        void InitExcessInv()
+        {
+            transform.GetChild(1).GetComponent<ExcessInvViewController>().Init();
+        }
 
-        //void InitPotionActiveInv()
-        //{
-        //    ClearPotionActiveInv();
-        //    CharNames charSelect = InvService.Instance.charSelect;
-        //    CharModel charModel = CharService.Instance.GetAllyCharModel(charSelect);
-
-        //    for (int i = 0; i < potionActiveInvPanel.transform.childCount; i++)
-        //    {
-        //        Transform child = potionActiveInvPanel.transform.GetChild(i);
-        //        // get item in belt slot 1  
-        //        ItemData itemData; 
-        //        switch (i)
-        //        {
-        //            case 0:
-        //               itemData = charModel.potionSlot1;
-        //                break;
-        //            case 1:
-        //                itemData = charModel.potionSlot2;
-        //                break;
-        //            case 2:
-        //                itemData = charModel.provisionSlot;
-        //                break;
-        //            default:
-        //                break;
-        //        }
-               
-        //        //child.gameObject.GetComponent<PotionSlotController>().AddItem()
-        //    }
-
-        //    // clearinv 
-        //    // get data from charService belt values 
-        //    // populate data 
-        //    // set potion slot on active 
-
-
-        //}
         void ClearPotionActiveInv()
         {
             for (int i = 0; i < potionActiveInvPanel.transform.childCount; i++)
@@ -278,73 +239,5 @@ namespace Interactables
         {
 
         }
-
-        // get iitems from InvModel of the given Char 
-        // inv controller of the char 
-        // inv Chars all list in InvService
-
-        // loop thur all the item slots // get hold of the parent GO and loop 
-        // add items with itemUIController that has ref to iItems on itemSlots 
-        // item slot controller to again have ref to iItems and drop functionalities asscociated 
-
     }
 }
-//public void AddItem2View(InvData invData)
-//{
-//    // return AddItem2InVView(invData);
-//}
-
-
-//bool AddItem2Slot(Iitems item, int slotID)
-//{
-
-//        Transform child = InvPanel.transform.GetChild(slotID);
-//        iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
-//    if (!iSlotable.isSlotFull())
-//        return true;
-//    else
-//        return false; 
-
-//}
-//currInvModel = invModel;
-//currCommonInvSize = currInvModel.GetInvSize();             
-//PopulateCommonInv();
-//PopulateActiveInv();
-//PopulateStashInv();
-
-
-//void InitCommonInvPanel()
-//{
-
-//    foreach (Transform child in InvPanel.transform)
-//    {
-//       if(child.GetComponent<ItemSlotController>() == null)
-//       {
-//            child.gameObject.AddComponent<ItemSlotController>(); 
-//       }
-//       // empty slot all inv slot are grey 
-
-//    }
-//}
-
-
-//void PopulateCommonInv()
-//{
-//    ClearInv();
-//    // get Inventory model of all charinPLay.. 
-//    //foreach (GameObject charGO in CharService.Instance.allyInPlay)
-//    //{
-//       // InvController invController = charGO.GetComponent<InvController>();
-//        allCommonInvList.AddRange(InvService.Instance.invMainModel.commonInvItems);
-//    //foreach (InvData invData in InventoryService.Instance.invMainModel.commonInvItems)
-//    //{
-//    //    //   if(allCommonInvList.Any(t=>t.invData)
-
-//    //}
-
-//    //}
-//    //foreach (var item in allCommonInvList)
-//    //{
-//    //    AddItem2InVView(item); 
-//    //}
-//}

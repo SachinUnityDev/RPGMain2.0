@@ -99,7 +99,8 @@ namespace Interactables
         {
            if(InvService.Instance.isInvPanelOpen && Input.GetKeyDown(KeyCode.Escape))
             {
-                UnLoad(); 
+                UnLoad();
+              //  Input.GetKeyDown(KeyCode.LeftControl)
             }     
         }
     }

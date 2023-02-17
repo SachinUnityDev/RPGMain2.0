@@ -207,5 +207,9 @@ namespace Interactables
         {
           
         }
+        public bool SplitItem2EmptySlot(Iitems item, bool onDrop = true)
+        {
+           return false; 
+        }
     }
 }

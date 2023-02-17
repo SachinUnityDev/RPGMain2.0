@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 
 using Common;
+using Town;
 
 namespace Interactables
 {
@@ -11,10 +12,11 @@ namespace Interactables
     {
         [SerializeField] bool isClicked = false;
 
-        [SerializeField] GameObject currencyPanel; 
+        [SerializeField] GameObject currencyPanel;
+
         public void Init()
         {
-
+          
         }
 
         public void Load()
@@ -39,8 +41,8 @@ namespace Interactables
 
         void PopulatePanel()
         {
-            Currency invMoney = EcoServices.Instance.econoModel.moneyInInv;
-            // silver
+            Currency invMoney = EcoServices.Instance.econoModel.moneyInInv.RationaliseCurrency();
+            
             currencyPanel.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text
                 = invMoney.silver.ToString();
             currencyPanel.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text
@@ -55,7 +57,7 @@ namespace Interactables
             isClicked = false;
             currencyPanel = transform.GetChild(0).gameObject;
             UnLoad();
-
+            EcoServices.Instance.OnInvMoneyChg += PopulatePanel;
         }
 
 

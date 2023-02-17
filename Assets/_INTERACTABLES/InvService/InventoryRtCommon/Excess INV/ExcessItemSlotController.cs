@@ -13,6 +13,7 @@ namespace Interactables
     {
         public int slotID { get; set; }
         public List<Iitems> ItemsInSlot { get; set; } = new List<Iitems>();
+        [SerializeField] int itemCount = 0; 
         public SlotType slotType => SlotType.ExcessInv;
 
         [Header("FOR DROP CONTROLS")]
@@ -72,11 +73,15 @@ namespace Interactables
         public void ClearSlot()
         {
             ItemsInSlot.Clear();
-            Transform ImgTrans = gameObject.transform.GetChild(0).GetChild(0);
-            ImgTrans.gameObject.SetActive(false);
-            gameObject.GetComponent<Image>().sprite = InvService.Instance.InvSO.emptySlot;
+            itemCount = 0;
+            if (IsEmpty())
+            {
+                Transform ImgTrans = gameObject.transform.GetChild(0).GetChild(0);
+                ImgTrans.gameObject.SetActive(false);
+                gameObject.GetComponent<Image>().sprite = InvService.Instance.InvSO.emptySlot;
+                RefreshSlotTxt();
+            }
         }
-
         public bool HasSameItem(Iitems item)
         {
             if (ItemsInSlot[0].itemName == item.itemName
@@ -91,7 +96,36 @@ namespace Interactables
             if (ItemsInSlot.Count <= ItemsInSlot[0].maxInvStackSize) return false;
             return true;
         }
-
+        public void RemoveItem()   // controller by Item DragDrop
+        {
+            ItemService.Instance.itemCardGO.SetActive(false);
+            if (IsEmpty())
+            {
+                ClearSlot();
+                return;
+            }
+            Iitems item = ItemsInSlot[0];
+            InvService.Instance.invMainModel.RemoveItemFrmExcessInv(item);  // ITEM REMOVED FROM INV MAIN MODEL HERE
+            ItemsInSlot.Remove(item);
+            itemCount--;
+            if (ItemsInSlot.Count >= 1)
+            {
+                RefreshImg(item);
+            }
+            else if (IsEmpty())  // After Item is removed
+            {
+                ClearSlot();
+            }
+            RefreshSlotTxt();
+        }
+        public void RemoveAllItems()
+        {
+            int count = ItemsInSlot.Count;
+            for (int i = 0; i < count; i++)
+            {
+                RemoveItem();
+            }
+        }
         public bool IsEmpty()
         {
             if (ItemsInSlot.Count > 0)
@@ -99,16 +133,11 @@ namespace Interactables
             else
                 return true;
         }
-
-        public bool AddItem(Iitems item, bool add2Model = false)
+        public bool AddItem(Iitems item, bool onDrop = true)
         {
-            CharNames charName = InvService.Instance.charSelect;
-            item.invSlotType = SlotType.ExcessInv;
-            InvData invData = new InvData(charName, item);
-
             if (IsEmpty())
             {
-                AddItemOnSlot(item);
+                AddItemOnSlot(item, onDrop);
                 return true;
             }
             else
@@ -117,7 +146,7 @@ namespace Interactables
                 {
                     if (ItemsInSlot.Count < item.maxInvStackSize)  // SLOT STACK SIZE 
                     {
-                        AddItemOnSlot(item);
+                        AddItemOnSlot(item, onDrop);
                         return true;
                     }
                     else
@@ -132,49 +161,29 @@ namespace Interactables
                 }
             }
         }
-        void AddItemOnSlot(Iitems item)
+        void AddItemOnSlot(Iitems item, bool onDrop)
         {
-            item.invSlotType = SlotType.ExcessInv;
             ItemsInSlot.Add(item);
-          
-            InvService.Instance.invMainModel.excessInvItems.Add(item); 
-            RefreshImg(item);
-            if (ItemsInSlot.Count > 1)
-                RefreshSlotTxt();
-        }
+            itemCount++;
+            if (onDrop)
+                InvService.Instance.invMainModel.excessInvItems.Add(item); // directly added to prevent stackoverflow
 
-        public void RemoveItem()   // controller by Item DragDrop
-        {
-            if (IsEmpty())
-            {
-                ClearSlot();                
-            }
-            else
-            {
-                Iitems item = ItemsInSlot[0];
-                ItemsInSlot.Remove(item);
-                InvService.Instance.invMainModel.RemoveItem2ExcessInv(item);
-                if (ItemsInSlot.Count >= 1)
-                {
-                    RefreshImg(item);
-                }
-                else if (IsEmpty())  // After Item is removed
-                {
-                    ClearSlot();
-                }
-            }
+            RefreshImg(item);
+            // if (ItemsInSlot.Count > 1 || onDrop)
             RefreshSlotTxt();
         }
-
+    
         void RefreshImg(Iitems item)
         {
             for (int i = 0; i < gameObject.transform.GetChild(0).childCount - 1; i++)
             {
                 Destroy(gameObject.transform.GetChild(0).GetChild(i).gameObject);
             }
+            transform.GetComponent<Image>().sprite = GetBGSprite(item);
+
             Transform ImgTrans = gameObject.transform.GetChild(0).GetChild(0);
             ImgTrans.GetComponent<Image>().sprite = GetSprite(item);
-            ImgTrans.gameObject.SetActive(true);
+            ImgTrans.gameObject.SetActive(true);        
         }
         void RefreshSlotTxt()
         {
@@ -199,50 +208,98 @@ namespace Interactables
                 Debug.Log("SPRITE NOT FOUND");
             return null;
         }
+        Sprite GetBGSprite(Iitems item)
+        {
+            Sprite sprite = InvService.Instance.InvSO.GetBGSprite(item);
+            if (sprite != null)
+                return sprite;
+            else
+                Debug.Log("SPRITE NOT FOUND");
+            return null;
 
+        }
         #endregion
 
         #region RIGHT CLICK ACTIONS ON INV RELATED
-
-
-
-
-        #endregion
-
-
         public void OnPointerClick(PointerEventData eventData)
         {
+            Iitems item = ItemsInSlot[0];
             if (eventData.button == PointerEventData.InputButton.Right)
             {
-                Iitems item = ItemsInSlot[0];
+                if (ItemsInSlot.Count == 0) return;
                 if (item != null)
                 {
-                    if (InvService.Instance.invMainModel.AddItem2CommInv(item))
+                    // sell one item 
+                }
+            }
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                if (Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl)
+                    && InvService.Instance.excessInvViewController.gameObject.activeInHierarchy)
+                {
+                    if (ItemsInSlot.Count == 0) return;
+
+                    if (item != null)
+                    {
+                        if (InvService.Instance.invMainModel.AddItem2CommInv(item))
+                        {
+                            RemoveItem();
+                        }
+                    }
+                }
+            }
+
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                if (Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.LeftShift))
+                {
+                    bool slotfound = false;
+                    if (ItemsInSlot.Count <= 1) return;
+                    Transform parentTrans = transform.parent;
+                    for (int i = 0; i < parentTrans.childCount; i++)
+                    {
+                        Transform child = parentTrans.GetChild(i);
+                        iSlotable iSlotable = child.GetComponent<iSlotable>();
+                        if (iSlotable.SplitItem2EmptySlot(item))
+                        {
+                            slotfound = true;
+                            break;
+                        }
+                    }
+                    if (slotfound)
                     {
                         RemoveItem();
                     }
                 }
             }
+
+
+
         }
 
         public void LoadSlot(Iitems item)
         {
-            
+
         }
 
         public void CloseRightClickOpts()
         {
-            
+
         }
 
-        public void RemoveAllItems()
+        public bool SplitItem2EmptySlot(Iitems item, bool onDrop = true)
         {
-            int count = ItemsInSlot.Count;
-            for (int i = 0; i < count; i++)
+            if (IsEmpty())
             {
-                RemoveItem();                
+                AddItemOnSlot(item, onDrop);
+                return true;
             }
+            return false;
         }
+        #endregion
+
+
+
     }
 
 

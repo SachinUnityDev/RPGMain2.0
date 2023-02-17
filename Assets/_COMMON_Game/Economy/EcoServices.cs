@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Interactables;
-using System.Linq; 
+using System.Linq;
+using System;
 
 namespace Common
 {
     public class EcoServices : MonoSingletonGeneric<EcoServices>, ISaveableService
     {
         public EconoModel econoModel;
-        public EcoSO ecoSO; 
-
+        public EcoSO ecoSO;
+        public event Action OnInvMoneyChg;
         void Start()
         {
             econoModel = new EconoModel(ecoSO);
@@ -45,6 +46,7 @@ namespace Common
         public void AddMoney2PlayerInv(Currency amt)
         {
             econoModel.moneyInInv.AddMoney(amt);
+            OnInvMoneyChg();
         }
         //public void DebitNPCAct(Currency amt, NPCNames npcName)
         //{

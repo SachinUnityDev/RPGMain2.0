@@ -24,9 +24,10 @@ namespace Town
             Currency ratCurrency = currency;
             
             if (currency.bronze > 12)
-            {
-                ratCurrency.bronze = currency.bronze % 12;
-                ratCurrency.silver += (int)(currency.bronze / 12); 
+            {                
+                int silverAdded = (int)(currency.bronze / 12);
+                ratCurrency.silver += silverAdded;
+                ratCurrency.bronze -= silverAdded * 12;
             }
 
             return ratCurrency; 

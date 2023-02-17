@@ -20,6 +20,7 @@ namespace Interactables
         void RemoveItem();// remove item from the inv Main  Model
         void RemoveAllItems(); 
         bool AddItem(Iitems item, bool onDrop =true);// add item to the inv Main Model 
+        bool SplitItem2EmptySlot(Iitems item, bool onDrop = true);
         void ClearSlot(); // only clear the display 
         void LoadSlot(Iitems item); // only add to display in view 
         void CloseRightClickOpts();
@@ -137,19 +138,20 @@ namespace Interactables
             else
                 return false;
         }
-        public void RemoveAllItems()
-        {
-            int count = ItemsInSlot.Count;
-            for (int i = 0; i < count; i++)
-            {            
-             RemoveItem();              
-            }
-        }
         public bool isSlotFull()
         {
             if (ItemsInSlot.Count <= ItemsInSlot[0].maxInvStackSize) return false;
             return true;
         }
+        public void RemoveAllItems()
+        {
+            int count = ItemsInSlot.Count;
+            for (int i = 0; i < count; i++)
+            {            
+                RemoveItem();              
+            }
+        }
+       
         public bool IsEmpty()
         {
             if (ItemsInSlot.Count > 0)
@@ -157,6 +159,17 @@ namespace Interactables
             else
                 return true;
         }
+
+        public bool SplitItem2EmptySlot(Iitems item, bool onDrop = true)
+        {
+            if (IsEmpty())
+            {
+                AddItemOnSlot(item, onDrop);
+                return true;
+            }
+            return false;          
+        }
+
         public bool AddItem(Iitems item, bool onDrop =true)
         {         
             if (IsEmpty())
@@ -206,13 +219,14 @@ namespace Interactables
         }
         public void RemoveItem()   // controller by Item DragDrop
         {
+            ItemService.Instance.itemCardGO.SetActive(false);
             if (IsEmpty())
             {
                 ClearSlot();
                 return;
             }
             Iitems item = ItemsInSlot[0];           
-            InvService.Instance.invMainModel.RemoveItem2CommInv(item);  // ITEM REMOVED FROM INV MAIN MODEL HERE
+            InvService.Instance.invMainModel.RemoveItemFrmCommInv(item);  // ITEM REMOVED FROM INV MAIN MODEL HERE
             ItemsInSlot.Remove(item);
             itemCount--;
             if (ItemsInSlot.Count >= 1)
@@ -223,7 +237,7 @@ namespace Interactables
             {
                 ClearSlot();
             }
-            RefreshSlotTxt();
+            RefreshSlotTxt();   
         }
 
         void RefreshImg(Iitems item)
@@ -253,7 +267,6 @@ namespace Interactables
             {
                 txttrans.gameObject.SetActive(false);
             }
-
         }
         Sprite GetSprite(Iitems item)
         {
@@ -273,9 +286,7 @@ namespace Interactables
             else
                 Debug.Log("SPRITE NOT FOUND");
             return null;
-
         }
-
         #endregion
 
         #region RIGHT CLICK ACTIONS ON INV RELATED
@@ -360,7 +371,8 @@ namespace Interactables
 
             if (eventData.button == PointerEventData.InputButton.Left)
             {
-                if(Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl))
+                if(Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl)
+                    && InvService.Instance.excessInvViewController.gameObject.activeInHierarchy)
                 {
                     if (ItemsInSlot.Count == 0) return;
                     Iitems item = ItemsInSlot[0];
@@ -376,7 +388,7 @@ namespace Interactables
 
             if (eventData.button == PointerEventData.InputButton.Left)
             {
-                if (Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.LeftShift))
+                if (Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.LeftShift))                                        
                 {
                     bool slotfound = false; 
                     if (ItemsInSlot.Count <= 1) return;
@@ -386,7 +398,7 @@ namespace Interactables
                     {
                         Transform child = parentTrans.GetChild(i);
                         iSlotable iSlotable = child.GetComponent<iSlotable>();
-                        if (iSlotable.AddItem(item))
+                        if (iSlotable.SplitItem2EmptySlot(item))
                         {
                             slotfound = true;
                             break; 
@@ -398,13 +410,7 @@ namespace Interactables
                     }
                 }
             }
-
         }
-
-        //if (InvService.Instance.invMainModel.AddItem2CommInv(item))
-        //{
-        //  RemoveItem();
-        //}
 
         #endregion
 
@@ -445,7 +451,6 @@ namespace Interactables
             charController.itemController.EnchantTheWeaponThruScroll((GemBase)ItemsInSlot[0]);
             RemoveItem(); 
         }
-
         public bool IsEquipable()
         {
             IEquipAble isEquipable = ItemsInSlot[0] as IEquipAble;
@@ -489,7 +494,7 @@ namespace Interactables
         }
         public void Dispose()
         {
-            InvService.Instance.invMainModel.RemoveItem2CommInv(ItemsInSlot[0]);
+            InvService.Instance.invMainModel.RemoveItemFrmCommInv(ItemsInSlot[0]);
             RemoveItem();
         }
         public bool IsSellable()
@@ -570,7 +575,9 @@ namespace Interactables
         {
 
         }
- 
+
+  
+
 
         #endregion
     }

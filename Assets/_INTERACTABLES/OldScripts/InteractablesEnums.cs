@@ -28,6 +28,7 @@ namespace Interactables
         {
             silver += curr.silver;
             bronze += curr.bronze; 
+
         }
         public void SubMoney(Currency curr)
         {

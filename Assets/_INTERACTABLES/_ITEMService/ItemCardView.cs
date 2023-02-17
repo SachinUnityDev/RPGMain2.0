@@ -110,8 +110,8 @@ namespace Interactables
                         //mid
                         FillMid(potionSO.allLines);
                         //btm
-                        itemSlotTrans.gameObject.SetActive(false);  
-                        currTrans.GetComponent<DisplayCurrency>().Display(potionSO.cost); 
+                        itemSlotTrans.gameObject.SetActive(false);                          
+                        currTrans.GetComponent<DisplayCurrency>().Display(potionSO.cost.DeepClone()); 
                        
                     }
                     break;
@@ -156,7 +156,7 @@ namespace Interactables
                         FillMid(allLines);
                         //btm
                         itemSlotTrans.gameObject.SetActive(false);
-                        currTrans.GetComponent<DisplayCurrency>().Display(genGewgawSO.cost);
+                        currTrans.GetComponent<DisplayCurrency>().Display(genGewgawSO.cost.DeepClone());
                     }
                     // subtypes 
                     break;
@@ -176,7 +176,7 @@ namespace Interactables
                         FillMid(herbSO.allLines);
                         //btm
                         itemSlotTrans.gameObject.SetActive(false);
-                        currTrans.GetComponent<DisplayCurrency>().Display(herbSO.cost);
+                        currTrans.GetComponent<DisplayCurrency>().Display(herbSO.cost.DeepClone());
 
                     }
                     break;
@@ -196,7 +196,7 @@ namespace Interactables
                         FillMid(foodSO.allLines);
                         //btm
                         itemSlotTrans.gameObject.SetActive(false);
-                        currTrans.GetComponent<DisplayCurrency>().Display(foodSO.cost);
+                        currTrans.GetComponent<DisplayCurrency>().Display(foodSO.cost.DeepClone());
                     }
                     break;
                 case ItemType.Fruits:
@@ -215,7 +215,7 @@ namespace Interactables
                         FillMid(fruitSO.allLines);
                         //btm
                         itemSlotTrans.gameObject.SetActive(false);
-                        currTrans.GetComponent<DisplayCurrency>().Display(fruitSO.cost);
+                        currTrans.GetComponent<DisplayCurrency>().Display(fruitSO.cost.DeepClone());
 
                     }
                     break;
@@ -235,7 +235,7 @@ namespace Interactables
                         FillMid(ingredSO.allLines);
                         //btm
                         itemSlotTrans.gameObject.SetActive(false);
-                        currTrans.GetComponent<DisplayCurrency>().Display(ingredSO.cost);
+                        currTrans.GetComponent<DisplayCurrency>().Display(ingredSO.cost.DeepClone());
                     }
                     break;
                 case ItemType.XXX:
@@ -256,7 +256,7 @@ namespace Interactables
                         FillMid(scrollSO.allLines);
                         //btm
                         itemSlotTrans.gameObject.SetActive(false);
-                        currTrans.GetComponent<DisplayCurrency>().Display(scrollSO.cost);
+                        currTrans.GetComponent<DisplayCurrency>().Display(scrollSO.cost.DeepClone());
                     }
                     break;
                 case ItemType.TradeGoods:  // start from here
@@ -275,7 +275,7 @@ namespace Interactables
                         FillMid(tgSO.allLines);
                         //btm
                         itemSlotTrans.gameObject.SetActive(false);
-                        currTrans.GetComponent<DisplayCurrency>().Display(tgSO.cost);
+                        currTrans.GetComponent<DisplayCurrency>().Display(tgSO.cost.DeepClone());
 
                     }
                     break;
@@ -295,7 +295,8 @@ namespace Interactables
                         FillMid(toolSO.allLines);
                         //btm
                         itemSlotTrans.gameObject.SetActive(false);
-                        currTrans.GetComponent<DisplayCurrency>().Display(toolSO.cost);
+                        Currency curr = toolSO.cost.DeepClone();
+                        currTrans.GetComponent<DisplayCurrency>().Display(curr);
                     }
                     break;
                 case ItemType.Teas:
@@ -323,8 +324,8 @@ namespace Interactables
                  
                         FillMid(gemSO.allLines);
                         //btm
-                        itemSlotTrans.gameObject.SetActive(false);
-                        currTrans.GetComponent<DisplayCurrency>().Display(gemSO.cost);
+                        itemSlotTrans.gameObject.SetActive(false);                      
+                        currTrans.GetComponent<DisplayCurrency>().Display(gemSO.cost.DeepClone());
                     }
                     // sub types 
                     break;
@@ -354,7 +355,7 @@ namespace Interactables
 
                         //btm
                         itemSlotTrans.gameObject.SetActive(false);
-                        currTrans.GetComponent<DisplayCurrency>().Display(sagaicGewgawSO.cost);
+                        currTrans.GetComponent<DisplayCurrency>().Display(sagaicGewgawSO.cost.DeepClone());
                     }
                     break;
                 case ItemType.PoeticGewgaws:
@@ -380,7 +381,7 @@ namespace Interactables
 
                         //btm
                         itemSlotTrans.gameObject.SetActive(false);
-                        currTrans.GetComponent<DisplayCurrency>().Display(poeticGewgawSO.cost);
+                        currTrans.GetComponent<DisplayCurrency>().Display(poeticGewgawSO.cost.DeepClone());
 
                         //tail
                         tailTrans.gameObject.SetActive(true);

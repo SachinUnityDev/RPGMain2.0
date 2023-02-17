@@ -7,6 +7,8 @@ using UnityEngine.UI;
 using Common;
 using TMPro;
 using System.Linq;
+using Combat;
+using Town;
 
 namespace Interactables
 {
@@ -24,20 +26,15 @@ namespace Interactables
         [Header("Excess Panel Ref")]                    
         public int currExcessInvSize;
 
-       // public List<InvData> allExcessInvList = new List<InvData>();
-
         public Transform rightClickOpts;
 
         void Start()
         {
             InvService.Instance.OnDragResult += OnDragResult2Excess;
             disposeAllBtn.onClick.AddListener(OnDisposeAllPressed); 
-            sellAllBtn.onClick.AddListener(OnSellAllPressed);   
-
-            Init();
+            sellAllBtn.onClick.AddListener(OnSellAllPressed);  
+            //Init();
         }
-
-
         void OnDisposeAllPressed()
         {
             // remove all 
@@ -64,19 +61,18 @@ namespace Interactables
                     if (count > 0)
                     {
                         CostData costData = 
-                        ItemService.Instance.GetCostData(item.itemType, item.itemName); 
-                    //    int silver =                   
-                       // costData.cost.silver
-                        
-                    }
+                        ItemService.Instance.GetCostData(item.itemType, item.itemName);
+                        // add to play Eco and dispose item
+                        int silver = (costData.cost.silver / 3) * count; 
+                        int bronze = (costData.cost.bronze / 3) * count;
+                        Currency itemSaleVal = new Currency(silver, bronze).RationaliseCurrency();
 
+                        EcoServices.Instance.AddMoney2PlayerInv(itemSaleVal); 
+                        iSlot.RemoveAllItems();
+                    }
                 }
 
             }
-
-            //EcoServices.Instance.PayMoney2Player(); 
-
-
         }
 
         #region SLOT RELATED 
@@ -141,10 +137,10 @@ namespace Interactables
                 {
                     if (iSlotable.ItemsInSlot[0].itemName == item.itemName)
                     {
-                        if (iSlotable.AddItem(item))
+                        if (iSlotable.AddItem(item, onDrop))
                         {
                             slotFound = true;
-                            break;
+                            return slotFound; 
                         }
                     }
                 }
@@ -155,10 +151,10 @@ namespace Interactables
                 {
                     Transform child = transform.GetChild(0).GetChild(i);
                     iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
-                    if (iSlotable.AddItem(item))
+                    if (iSlotable.AddItem(item, onDrop))
                     {
                         slotFound = true;
-                        break;
+                        return slotFound;
                     }
                 }
             }
@@ -183,11 +179,10 @@ namespace Interactables
         public void InitExcessInv()
         {
             ClearInv();
-  
-            //foreach (var item in InvService.Instance.invMainModel.excessInvItems.ToList())
-            //{
-            //    //AddItem2InVView(item);
-            //}
+            foreach (var item in InvService.Instance.invMainModel.excessInvItems.ToList())
+            {
+                AddItem2InVView(item, false);
+            }
         }
 
         void ClearInv()

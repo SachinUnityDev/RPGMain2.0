@@ -60,7 +60,7 @@ namespace Interactables
             if (!InvService.Instance.IsCommInvFull())
             {
                 item.invSlotType = SlotType.CommonInv;
-                commonInvItems.Add(item); //was error
+                commonInvItems.Add(item); 
                 InvService.Instance.invViewController.AddItem2InVView(item, false);// this adds to model list
                 commonInvCount++; 
                 return true;
@@ -72,9 +72,10 @@ namespace Interactables
             }         
         }
 
-        public bool RemoveItem2CommInv(Iitems item) // view=> model 
+        public bool RemoveItemFrmCommInv(Iitems item) // view=> model 
         {
             commonInvItems.Remove(item);
+            commonInvCount--; 
             return true;
         }
 
@@ -95,7 +96,7 @@ namespace Interactables
             {
                 item.invSlotType = SlotType.ExcessInv;
                 excessInvItems.Add(item);
-                InvService.Instance.excessInvViewController.AddItem2InVView(item);
+                InvService.Instance.excessInvViewController.AddItem2InVView(item, false);
                 excessInvCount++;
                 return true;
             }
@@ -106,9 +107,10 @@ namespace Interactables
             }
         }
 
-        public bool RemoveItem2ExcessInv(Iitems item) // view=> model 
+        public bool RemoveItemFrmExcessInv(Iitems item) // view=> model 
         {
             excessInvItems.Remove(item);
+            excessInvCount--;
             return true;
         }
         public int GetItemNosInExcessnv(ItemData itemData)

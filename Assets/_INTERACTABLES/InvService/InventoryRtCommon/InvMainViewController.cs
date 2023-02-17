@@ -60,7 +60,7 @@ namespace Interactables
         }
 
         public void UnLoad()
-        {
+        {   
             transform.parent.gameObject.SetActive(false);
             InvService.Instance.isInvPanelOpen = false; 
         }
@@ -73,6 +73,7 @@ namespace Interactables
             btmCharViewController.gameObject.transform.SetParent(transform);
 
         }
+     
     }
 
 

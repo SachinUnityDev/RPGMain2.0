@@ -130,7 +130,7 @@ namespace Interactables
         #endregion
 
         #region TO_INV_FILL
-        public bool AddItem2InVView(Iitems item)  // ACTUAL ADDITION 
+        public bool AddItem2InVView(Iitems item, bool onDrop = true)  // ACTUAL ADDITION 
         {
             bool slotFound = false;
             for (int i = 0; i < transform.GetChild(0).childCount; i++)

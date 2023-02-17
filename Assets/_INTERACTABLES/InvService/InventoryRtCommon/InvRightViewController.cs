@@ -93,8 +93,6 @@ namespace Interactables
                 }
                 
             }
-
-
             Debug.Log("VALUE of" + i +" value of " + itemSlotController.rightClickActions); 
             Transform slotTrans = itemSlotController.gameObject.transform;
             Vector3 offset = new Vector3(100/2f, 130/2f, 0f)* canvas.scaleFactor;  
@@ -127,7 +125,7 @@ namespace Interactables
 
         #region TO_INV_FILL
         // ACTUAL ADDITION // will return false if inv is FULL
-        public bool AddItem2InVView(Iitems item) 
+        public bool AddItem2InVView(Iitems item, bool onDrop = true) 
          {
             bool slotFound = false;
             for (int i = 0; i < InvPanel.transform.childCount; i++)
@@ -139,10 +137,10 @@ namespace Interactables
                     if (iSlotable.ItemsInSlot[0].itemName == item.itemName
                         && iSlotable.ItemsInSlot[0].itemType == item.itemType)
                     {
-                        if (iSlotable.AddItem(item))
+                        if (iSlotable.AddItem(item, onDrop))
                         {
                             slotFound = true;
-                            break;
+                            return slotFound;
                         }                    
                     }
                 }                    
@@ -153,10 +151,10 @@ namespace Interactables
                 {
                     Transform child = InvPanel.transform.GetChild(i);
                     iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
-                    if (iSlotable.AddItem(item))
+                    if (iSlotable.AddItem(item, onDrop))
                     {
                         slotFound = true;
-                        break;
+                        return slotFound;
                     }
                 }
             }
@@ -189,7 +187,7 @@ namespace Interactables
             //allCommonInvList.AddRange(InvService.Instance.invMainModel.commonInvItems);  // local list
             foreach (Iitems item in InvService.Instance.invMainModel.commonInvItems.ToList())
             {
-                AddItem2InVView(item);
+                AddItem2InVView(item, false);
             }
         }
 

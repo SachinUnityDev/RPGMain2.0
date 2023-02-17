@@ -56,7 +56,7 @@ namespace Interactables
         {         
             itemCardGO.SetActive(false);
             Sequence closeSeq = DOTween.Sequence();
-            closeSeq.PrependInterval(4f);
+            closeSeq.PrependInterval(2f);
             closeSeq.AppendCallback(() => InvService.Instance.invViewController.CloseRightClickOpts());
             closeSeq.Play();
         }

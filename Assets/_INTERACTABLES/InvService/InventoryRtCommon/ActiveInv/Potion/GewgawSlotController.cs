@@ -76,7 +76,7 @@ namespace Interactables
                 return true;
         }
 
-        public bool AddItem(Iitems item)
+        public bool AddItem(Iitems item, bool add2Model = false)
         {
             CharNames charName = InvService.Instance.charSelect;   
             

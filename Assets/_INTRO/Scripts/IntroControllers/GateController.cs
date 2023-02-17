@@ -13,20 +13,14 @@ namespace Common
     public interface IPanel
     {
         void Load();
-
         void UnLoad();
         void Init();
-
     }
 }
 
 
 namespace Intro
 {
-
-
-
-
     public class GateController : MonoBehaviour, IPanel
     {
 

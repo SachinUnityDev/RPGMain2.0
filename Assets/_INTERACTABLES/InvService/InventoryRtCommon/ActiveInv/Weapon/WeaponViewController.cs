@@ -11,7 +11,7 @@ namespace Interactables
     {
         [SerializeField] CharNames charSelect;
         [SerializeField] Image gemImg; 
-        void Start()
+        void Awake()
         {
             InvService.Instance.OnCharSelectInvPanel += PopulateWeaponPanel;
             ItemService.Instance.OnGemEnchanted += 

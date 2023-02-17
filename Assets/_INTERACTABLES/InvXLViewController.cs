@@ -57,13 +57,11 @@ namespace Interactables
         public void Load()
         {
             UIControlServiceGeneral.Instance.TogglePanel(invPanel, true);
-
         }
 
         public void UnLoad()
         {
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
-
         }
 
         public void Init()
@@ -95,6 +93,14 @@ namespace Interactables
         void OnInvBtnPressed()
         {
             UIControlServiceGeneral.Instance.TogglePanelOnInGrp(invPanel, true);
+        }
+
+        private void Update()
+        {
+           if(InvService.Instance.isInvPanelOpen && Input.GetKeyDown(KeyCode.Escape))
+            {
+                UnLoad(); 
+            }     
         }
     }
 

@@ -43,13 +43,13 @@ namespace Interactables
         public List<Iitems> commonInvItems = new List<Iitems>();
         // Abbas 3 X 6,  each added Companion has 2X6 (Locked)(Town, QuestPrepPhase, in camp, in MapInteraction)
         //public List<Iitems> persCommInvItems = new List<Iitems>(); 
-
+        public int commonInvCount = 0;
         public List<Iitems> stashInvIntems = new List<Iitems>();
         // 6 X 6 behaves like a common Inventory (Open Town/House) 
-
+        public int stashInvCount = 0;   
         public List<Iitems> excessInvItems = new List<Iitems>();
         // 4X6 Behaves like a Excess Inv inv ()       
-
+        public int excessInvCount = 0;  
         public List<ActiveInvData> allActiveInvData = new List<ActiveInvData>();
 
         #endregion 
@@ -60,8 +60,9 @@ namespace Interactables
             if (!InvService.Instance.IsCommInvFull())
             {
                 item.invSlotType = SlotType.CommonInv;
-                commonInvItems.Add(item);
-                InvService.Instance.invViewController.AddItem2InVView(item);
+                commonInvItems.Add(item); //was error
+                InvService.Instance.invViewController.AddItem2InVView(item, false);// this adds to model list
+                commonInvCount++; 
                 return true;
             }
             else
@@ -95,6 +96,7 @@ namespace Interactables
                 item.invSlotType = SlotType.ExcessInv;
                 excessInvItems.Add(item);
                 InvService.Instance.excessInvViewController.AddItem2InVView(item);
+                excessInvCount++;
                 return true;
             }
             else
@@ -226,6 +228,7 @@ namespace Interactables
                 item.invSlotType = SlotType.StashInv;
                 stashInvIntems.Add(item);
                 InvService.Instance.stashInvViewController.AddItem2InVView(item);
+                stashInvCount++;
                 return true;
             }
             else

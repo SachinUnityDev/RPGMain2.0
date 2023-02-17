@@ -19,7 +19,7 @@ namespace Interactables
         List<Iitems> ItemsInSlot { get; set; }
         void RemoveItem();// remove item from the inv Main  Model
         void RemoveAllItems(); 
-        bool AddItem(Iitems item);// add item to the inv Main Model 
+        bool AddItem(Iitems item, bool onDrop =true);// add item to the inv Main Model 
         void ClearSlot(); // only clear the display 
         void LoadSlot(Iitems item); // only add to display in view 
         void CloseRightClickOpts();
@@ -58,6 +58,7 @@ namespace Interactables
         #region DECLARATIONS
         public int slotID { get; set; }
         public List<Iitems> ItemsInSlot { get; set; } = new List<Iitems>();
+        [SerializeField] int itemCount = 0;
         public SlotType slotType => SlotType.CommonInv;
 
         [Header("FOR DROP CONTROLS")]
@@ -116,18 +117,16 @@ namespace Interactables
         #region SLOT ITEM HANDLING ..ADD/REMOVE/REFRESH
 
         public void ClearSlot()
-        {
-            if (!IsEmpty())
-            {
-                Iitems item = ItemsInSlot[0];
-                ItemsInSlot.Remove(item);
-            }
-            else
+        {   
+            ItemsInSlot.Clear();
+            itemCount= 0;
+            if (IsEmpty())
             {
                 Transform ImgTrans = gameObject.transform.GetChild(0).GetChild(0);
                 ImgTrans.gameObject.SetActive(false);
                 gameObject.GetComponent<Image>().sprite = InvService.Instance.InvSO.emptySlot;
-            }
+                RefreshSlotTxt();
+            }   
         }
 
         public bool HasSameItem(Iitems item)
@@ -138,7 +137,6 @@ namespace Interactables
             else
                 return false;
         }
-
         public void RemoveAllItems()
         {
             int count = ItemsInSlot.Count;
@@ -159,11 +157,11 @@ namespace Interactables
             else
                 return true;
         }
-        public bool AddItem(Iitems item)
+        public bool AddItem(Iitems item, bool onDrop =true)
         {         
             if (IsEmpty())
             {
-                AddItemOnSlot(item);
+                AddItemOnSlot(item, onDrop);
                 return true;
             }
             else
@@ -172,7 +170,7 @@ namespace Interactables
                 {
                     if (ItemsInSlot.Count < item.maxInvStackSize)  // SLOT STACK SIZE 
                     {
-                        AddItemOnSlot(item);
+                        AddItemOnSlot(item, onDrop);
                         return true;
                     }
                     else
@@ -187,14 +185,15 @@ namespace Interactables
                 }
             }
         }
-        void AddItemOnSlot(Iitems item)
-        {
-            item.invSlotType = SlotType.CommonInv;
+        void AddItemOnSlot(Iitems item, bool onDrop)
+        {            
             ItemsInSlot.Add(item);
-            InvService.Instance.invMainModel.commonInvItems.Add(item);
+            itemCount++;
+            if (onDrop)
+                InvService.Instance.invMainModel.commonInvItems.Add(item); // directly added to prevent stackoverflow
 
             RefreshImg(item);
-            if (ItemsInSlot.Count > 1)
+           // if (ItemsInSlot.Count > 1 || onDrop)
                 RefreshSlotTxt();
         }
         public void LoadSlot(Iitems item)
@@ -212,10 +211,10 @@ namespace Interactables
                 ClearSlot();
                 return;
             }
-            Iitems item = ItemsInSlot[0];
-            ClearSlot();
+            Iitems item = ItemsInSlot[0];           
             InvService.Instance.invMainModel.RemoveItem2CommInv(item);  // ITEM REMOVED FROM INV MAIN MODEL HERE
             ItemsInSlot.Remove(item);
+            itemCount--;
             if (ItemsInSlot.Count >= 1)
             {
                 RefreshImg(item);

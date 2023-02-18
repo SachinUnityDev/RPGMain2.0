@@ -15,9 +15,9 @@ namespace Interactables
         public int itemName => (int)GenGewgawNames.AmetystRing;
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
-        public List<int> allBuffs { get; set; }
+        public List<int> allBuffs { get; set; } = new List<int>();
         public ItemData toolData { get; set; }
-        public List<IngredData> allIngredData { get; set; }
+        public List<IngredData> allIngredData { get; set; } = new List<IngredData>();
 
         public void RecipeInit()
         {

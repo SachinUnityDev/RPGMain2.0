@@ -460,23 +460,23 @@ namespace Interactables
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Gems, (int)GemNames.Amber,
+                InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionNames.HealthPotion,
                                      CauseType.Items, 2);
             }
             if (Input.GetKeyDown(KeyCode.J))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.Yeast,
+                InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionNames.StaminaPotion,
                                      CauseType.Items, 2);
             }
             if (Input.GetKeyDown(KeyCode.G))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.Cardamom,
-                                  CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.AmetystRing,
+                                  CauseType.Items, 2, GenGewgawQ.Epic);
             }
             if (Input.GetKeyDown(KeyCode.K))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Gems, (int)GemNames.Ruri,
-                                        CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.BeltOfTheCommoner,
+                          CauseType.Items, 2, GenGewgawQ.Lyric);
             }
         }
 

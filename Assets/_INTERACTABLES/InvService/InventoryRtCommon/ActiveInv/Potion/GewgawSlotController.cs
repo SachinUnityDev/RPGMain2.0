@@ -76,15 +76,20 @@ namespace Interactables
                 return true;
         }
 
-        public bool AddItem(Iitems item, bool add2Model = false)
+        public bool AddItem(Iitems item, bool onDrop = false)
         {
-            CharNames charName = InvService.Instance.charSelect;   
-            
-            InvData invData = new InvData(charName, item);
-            
-            if (item.itemType != ItemType.GenGewgaws || ItemsInSlot.Count > 0)
-            {
+            CharNames charName = InvService.Instance.charSelect;         
+
+            if (item.itemType != ItemType.GenGewgaws)
                 return false;
+
+            if (ItemsInSlot.Count > 0)
+            {
+                Iitems currItem = ItemsInSlot[0];
+                RemoveItem();
+                // add to common inv
+                InvService.Instance.invMainModel.AddItem2CommInv(currItem);
+
             }
 
             if (IsEmpty())
@@ -92,26 +97,7 @@ namespace Interactables
                 AddItemOnSlot(item);
                 return true;
             }
-            else
-            {
-                if (HasSameItem(item))  // SAME ITEM IN SLOT 
-                {
-                    if (ItemsInSlot.Count < item.maxInvStackSize)  // SLOT STACK SIZE 
-                    {
-                        AddItemOnSlot(item);
-                        return true;
-                    }
-                    else
-                    {
-                        Debug.Log("Slot full");
-                        return false;
-                    }
-                }
-                else   // DIFF ITEM IN SLOT 
-                {
-                    return false;
-                }
-            }
+            return false;
         }
         void AddItemOnSlot(Iitems item)
         {
@@ -149,6 +135,8 @@ namespace Interactables
             {
                 Destroy(gameObject.transform.GetChild(0).GetChild(i).gameObject);
             }
+            transform.GetComponent<Image>().sprite = GetBGSprite(item);
+
             Transform ImgTrans = gameObject.transform.GetChild(0).GetChild(0);
             ImgTrans.GetComponent<Image>().sprite = GetSprite(item);
             ImgTrans.gameObject.SetActive(true);
@@ -179,7 +167,15 @@ namespace Interactables
                 Debug.Log("SPRITE NOT FOUND");
             return null;
         }
-
+        Sprite GetBGSprite(Iitems item)
+        {
+            Sprite sprite = InvService.Instance.InvSO.GetBGSprite(item);
+            if (sprite != null)
+                return sprite;
+            else
+                Debug.Log("SPRITE NOT FOUND");
+            return null;
+        }
         public void CloseRightClickOpts()
         {
             if (isRightClicked)

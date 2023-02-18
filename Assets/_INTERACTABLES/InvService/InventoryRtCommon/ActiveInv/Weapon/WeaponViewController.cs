@@ -17,7 +17,11 @@ namespace Interactables
             ItemService.Instance.OnGemEnchanted += 
                             (CharController charController)=>PopulateGemEnchanted();           
             gemImg = transform.GetChild(1).GetChild(0).GetComponent<Image>();
-            gameObject.SetActive(false); 
+           
+        }
+        private void Start()
+        {
+            gameObject.SetActive(false);
         }
         public void Load()
         {         

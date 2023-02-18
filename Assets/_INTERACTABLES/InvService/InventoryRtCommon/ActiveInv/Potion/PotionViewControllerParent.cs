@@ -54,7 +54,6 @@ namespace Interactables
         }
 
         #region EQUIP TO VIEW 
-
         public bool Equip2PotionSlot(Iitems item, bool isload = false)
         {
             // try equip to slot 1 then 2 

@@ -93,15 +93,22 @@ namespace Interactables
                 return true;
         }
 
-        public bool AddItem(Iitems item, bool add2Model = false)
+        public bool AddItem(Iitems item, bool onDrop = false)
         {
-            CharNames charName = InvService.Instance.charSelect;           
-           // InvData invData = new InvData(charName, item);
+            CharNames charName = InvService.Instance.charSelect;
+            // InvData invData = new InvData(charName, item);
 
-            if(item.itemType != ItemType.Potions || ItemsInSlot.Count > 0)
-            {
-                return false;
-            }
+            if (item.itemType != ItemType.Potions)
+                return false; 
+                
+             if(ItemsInSlot.Count > 0)
+             {
+                Iitems currItem = ItemsInSlot[0];
+                RemoveItem();
+                // add to common inv
+                InvService.Instance.invMainModel.AddItem2CommInv(currItem);
+                         
+             }
 
             if (IsEmpty())
             {
@@ -119,8 +126,8 @@ namespace Interactables
             InvService.Instance.invMainModel.AddItem2PotionActInv(item, slotID); 
             
             RefreshImg(item);
-            if (ItemsInSlot.Count > 1)
-                RefreshSlotTxt();
+            //if (ItemsInSlot.Count > 1)
+            //    RefreshSlotTxt();
         }
 
         public void RemoveItem()   // controller by Item DragDrop
@@ -151,11 +158,11 @@ namespace Interactables
             {
                 Destroy(gameObject.transform.GetChild(0).GetChild(i).gameObject);
             }
+            transform.GetComponent<Image>().sprite = GetBGSprite(item);
+
             Transform ImgTrans = gameObject.transform.GetChild(0).GetChild(0);
             ImgTrans.GetComponent<Image>().sprite = GetSprite(item);
-            ImgTrans.gameObject.SetActive(true);
-            // clear Extra GO
-
+            ImgTrans.gameObject.SetActive(true);            
         }
         void RefreshSlotTxt()
         {
@@ -181,9 +188,15 @@ namespace Interactables
                 Debug.Log("SPRITE NOT FOUND");
             return null;
         }
-
-       
-
+        Sprite GetBGSprite(Iitems item)
+        {
+            Sprite sprite = InvService.Instance.InvSO.GetBGSprite(item);
+            if (sprite != null)
+                return sprite;
+            else
+                Debug.Log("SPRITE NOT FOUND");
+            return null;
+        }
         public void CloseRightClickOpts()
         {
             if (isRightClicked)

@@ -203,7 +203,11 @@ namespace Interactables
             ItemsInSlot.Add(item);
             itemCount++;
             if (onDrop)
+            {
                 InvService.Instance.invMainModel.commonInvItems.Add(item); // directly added to prevent stackoverflow
+                InvService.Instance.invMainModel.commonInvCount++;
+            }
+                
 
             RefreshImg(item);
            // if (ItemsInSlot.Count > 1 || onDrop)

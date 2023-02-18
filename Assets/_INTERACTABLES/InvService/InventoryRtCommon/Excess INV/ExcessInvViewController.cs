@@ -38,12 +38,13 @@ namespace Interactables
         void OnDisposeAllPressed()
         {
             // remove all 
-           // ClearInv();
+           
             for (int i = 0; i < transform.GetChild(0).childCount; i++)
             {
                 Transform child = transform.GetChild(0).GetChild(i);  // go
                 child.gameObject.GetComponent<ExcessItemSlotController>().RemoveAllItems(); 
             }
+           // ClearInv();  
             InvService.Instance.invMainModel.excessInvItems.Clear(); 
         }
 

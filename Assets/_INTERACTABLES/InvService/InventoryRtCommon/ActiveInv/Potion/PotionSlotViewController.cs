@@ -95,19 +95,15 @@ namespace Interactables
 
         public bool AddItem(Iitems item, bool onDrop = false)
         {
-            CharNames charName = InvService.Instance.charSelect;
-            // InvData invData = new InvData(charName, item);
-
+            CharNames charName = InvService.Instance.charSelect;           
             if (item.itemType != ItemType.Potions)
                 return false; 
                 
              if(ItemsInSlot.Count > 0)
              {
                 Iitems currItem = ItemsInSlot[0];
-                RemoveItem();
-                // add to common inv
-                InvService.Instance.invMainModel.AddItem2CommInv(currItem);
-                         
+                RemoveItem();     
+                InvService.Instance.invMainModel.AddItem2CommInv(currItem);                         
              }
 
             if (IsEmpty())

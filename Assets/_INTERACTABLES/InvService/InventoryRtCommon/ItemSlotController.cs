@@ -150,8 +150,7 @@ namespace Interactables
             {            
                 RemoveItem();              
             }
-        }
-       
+        }       
         public bool IsEmpty()
         {
             if (ItemsInSlot.Count > 0)
@@ -159,7 +158,6 @@ namespace Interactables
             else
                 return true;
         }
-
         public bool SplitItem2EmptySlot(Iitems item, bool onDrop = true)
         {
             if (IsEmpty())
@@ -169,7 +167,6 @@ namespace Interactables
             }
             return false;          
         }
-
         public bool AddItem(Iitems item, bool onDrop =true)
         {         
             if (IsEmpty())

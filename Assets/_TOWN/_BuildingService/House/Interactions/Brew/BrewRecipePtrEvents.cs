@@ -63,6 +63,7 @@ namespace Town
         void FillSlot()
         {             
             Sprite itemSprite = GetSprite(ingredReq.ItemData);
+            Debug.Log("Ingred " + (IngredNames)ingredReq.ItemData.ItemName);
             imgIngred.sprite = itemSprite;
             txtTrans.text = ingredReq.quantity.ToString();
         }

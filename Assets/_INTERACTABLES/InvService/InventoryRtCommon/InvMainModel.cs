@@ -44,7 +44,7 @@ namespace Interactables
         // Abbas 3 X 6,  each added Companion has 2X6 (Locked)(Town, QuestPrepPhase, in camp, in MapInteraction)
         //public List<Iitems> persCommInvItems = new List<Iitems>(); 
         public int commonInvCount = 0;
-        public List<Iitems> stashInvIntems = new List<Iitems>();
+        public List<Iitems> stashInvIntItems = new List<Iitems>();
         // 6 X 6 behaves like a common Inventory (Open Town/House) 
         public int stashInvCount = 0;   
         public List<Iitems> excessInvItems = new List<Iitems>();
@@ -57,7 +57,7 @@ namespace Interactables
         #region COMMON INV
         public bool AddItem2CommInv(Iitems item)   // KEY POINT OF ADDITION OF ITEM // Add to model => view
         {          
-            if (!InvService.Instance.IsCommInvFull())
+            if (!InvService.Instance.IsCommInvFull(item))
             {
                 item.invSlotType = SlotType.CommonInv;
                 commonInvItems.Add(item); 
@@ -92,7 +92,7 @@ namespace Interactables
         #region EXCESS INV 
         public bool AddItem2ExcessInv(Iitems item)   // KEY POINT OF ADDITION OF ITEM // Add to model => view
         {
-            if (!InvService.Instance.IsExcessInvFull())
+            if (!InvService.Instance.IsExcessInvFull(item))
             {
                 item.invSlotType = SlotType.ExcessInv;
                 excessInvItems.Add(item);
@@ -120,9 +120,43 @@ namespace Interactables
             return quantity;
         }
 
-        #endregion 
+        #endregion
+            
 
+        #region STASH
 
+        public bool AddItem2StashInv(Iitems item)   // KEY POINT OF ADDITION OF ITEM // Add to model => view
+        {
+            if (!InvService.Instance.IsStashInvFull(item))
+            {
+                item.invSlotType = SlotType.StashInv;
+                stashInvIntItems.Add(item);
+                InvService.Instance.stashInvViewController.AddItem2InVView(item,false);
+                stashInvCount++;
+                return true;
+            }
+            else
+            {
+                Debug.Log("Inv Size is full");
+                return false;
+            }
+        }
+
+        public bool RemoveItem2StashInv(Iitems item) // view=> model 
+        {
+            commonInvItems.Remove(item);
+            return true;
+        }
+
+        public int GetItemNosInStashInv(ItemData itemData)
+        {
+           // stash inv Items
+            int quantity = stashInvIntItems.Count(t => t.itemName == itemData.ItemName && t.itemType == itemData.itemType);
+            return quantity;
+        }
+        #endregion
+
+        #region  ACTIVE INV POTION  
         public ActiveInvData GetActiveInvData(CharNames charName)
         {
             ActiveInvData invData = allActiveInvData.Find(t => t.CharName == charName);
@@ -132,16 +166,16 @@ namespace Interactables
                 Debug.Log("Potion Active Inv Data Not found" + charName);
             return null;
         }
-        #region  ACTIVE INV POTION  
+
 
         public void AddItem2PotionActInv(Iitems item, int slotID) // key point of addition
                                                                   // SAVE and LOAD Active slot here
         {
-            CharController charController = InvService.Instance.charSelectController;          
+            CharController charController = InvService.Instance.charSelectController;
             CharNames charName = charController.charModel.charName;
 
-            ActiveInvData activeInvData = allActiveInvData.Find(t => t.CharName == charName); 
-            if(activeInvData != null)
+            ActiveInvData activeInvData = allActiveInvData.Find(t => t.CharName == charName);
+            if (activeInvData != null)
             {
                 activeInvData.potionActivInv.Add(item);
                 activeInvData.potionCount++;
@@ -150,41 +184,41 @@ namespace Interactables
             {
                 ActiveInvData activeInvDataNew = new ActiveInvData(charName);
                 activeInvDataNew.potionActivInv.Add(item);
-                activeInvDataNew.potionCount++; 
-                allActiveInvData.Add(activeInvDataNew); 
+                activeInvDataNew.potionCount++;
+                allActiveInvData.Add(activeInvDataNew);
             }
         }
-        public bool RemoveItemFromPotionActInv( Iitems Item)
+        public bool RemoveItemFromPotionActInv(Iitems Item)
         {
             CharController charController = InvService.Instance.charSelectController;
             CharNames charName = charController.charModel.charName;
 
             ActiveInvData activeInvData = allActiveInvData.Find(t => t.CharName == charName);
-            if(activeInvData != null)
+            if (activeInvData != null)
             {
-                activeInvData.potionActivInv.Remove(Item); 
+                activeInvData.potionActivInv.Remove(Item);
                 activeInvData.potionCount--;
             }
             else
             {
-                Debug.Log("char active slot data not found"); 
+                Debug.Log("char active slot data not found");
             }
             // remove from char
-            return false; 
+            return false;
         }
         #endregion
 
         #region  ACTIVE INV GEWGAWS  
         public void AddItem2GewgawsActInv(Iitems item, int slotID) // key point of addition
-                                                                  // SAVE and LOAD Active slot here
+                                                                   // SAVE and LOAD Active slot here
         {
-            CharController charController = InvService.Instance.charSelectController;  
+            CharController charController = InvService.Instance.charSelectController;
             CharNames charName = charController.charModel.charName;
 
             ActiveInvData activeInvData = allActiveInvData.Find(t => t.CharName == charName);
             if (activeInvData != null)
             {
-                activeInvData.gewgawActivInv.Add(item); 
+                activeInvData.gewgawActivInv.Add(item);
             }
             else
             {
@@ -209,67 +243,8 @@ namespace Interactables
             // remove from char
             return false;
         }
-    
+
         #endregion
-
-
-
-        #region STASH
-        public void MoveItems2Stash(CharNames charName)
-        {
-            foreach (InvData invData in commonInvItems)
-            {
-               
-            }
-        }
-
-        public bool AddItem2StashInv(Iitems item)   // KEY POINT OF ADDITION OF ITEM // Add to model => view
-        {
-            if (!InvService.Instance.IsStashInvFull())
-            {
-                item.invSlotType = SlotType.StashInv;
-                stashInvIntems.Add(item);
-                InvService.Instance.stashInvViewController.AddItem2InVView(item);
-                stashInvCount++;
-                return true;
-            }
-            else
-            {
-                Debug.Log("Inv Size is full");
-                return false;
-            }
-        }
-
-        public bool RemoveItem2StashInv(Iitems item) // view=> model 
-        {
-            commonInvItems.Remove(item);
-            return true;
-        }
-
-        public int GetItemNosInStashInv(ItemData itemData)
-        {
-           // stash inv Items
-            int quantity = stashInvIntems.Count(t => t.itemName == itemData.ItemName && t.itemType == itemData.itemType);
-            return quantity;
-        }
-        #endregion
-
-        #region EXCESS INV
-        public bool AddItem2Excess(Iitems item)
-        {
-            item.invSlotType = SlotType.ExcessInv;
-            excessInvItems.Add(item);
-            // excess inv drag and drop can be opened whereever inv is open
-            return false;
-        }
-        #endregion 
-        //
-        // TO DO : 
-        // update this with every addition and deletion and 
-        // update stash/house Inv Items, excess/junk 
-        // 
-
-
     }
 }
 

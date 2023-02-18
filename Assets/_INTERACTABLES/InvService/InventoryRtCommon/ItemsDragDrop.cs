@@ -34,7 +34,7 @@ namespace Interactables
             
             iSlotable = transform.parent.parent.GetComponent<iSlotable>();
             if (iSlotable == null)
-                Debug.Log("ERROR Item Slot Controller Not found");
+                Debug.Log("ERROR Item Slot Controller Not found"+ gameObject.name);
             if (gameObject.GetComponent<CanvasGroup>() == null)
                 canvasGroup = gameObject.AddComponent<CanvasGroup>();
             else

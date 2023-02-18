@@ -428,9 +428,24 @@ namespace Interactables
                     InvService.Instance.invMainModel.AddItem2CommInv(iitems);
                 }
             }
-            
-
+            if (slotType == SlotType.StashInv)
+            {
+                if (gQuality == GenGewgawQ.None)  //Items apart from genGewgaw
+                {
+                    Iitems iitems = itemFactory.GetNewItem(itemType, itemName);
+                    iitems.invSlotType = slotType;
+                    InvService.Instance.invMainModel.AddItem2StashInv(iitems);
+                }
+                else  //  its a Generic gewgaw
+                {
+                    Iitems iitems = itemFactory.GetNewGenGewgaw((GenGewgawNames)itemName, gQuality);
+                    iitems.invSlotType = slotType;
+                    InvService.Instance.invMainModel.AddItem2StashInv(iitems);
+                }
+            }
         }
+
+
         #region GET ITEM CONTROLLERS AND MODELS
         public ItemController GetItemController(CharNames charName)
         {
@@ -460,22 +475,22 @@ namespace Interactables
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionNames.HealthPotion,
+                InitItemToInv(SlotType.StashInv, ItemType.Potions, (int)PotionNames.HealthPotion,
                                      CauseType.Items, 2);
             }
             if (Input.GetKeyDown(KeyCode.J))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionNames.StaminaPotion,
+                InitItemToInv(SlotType.StashInv, ItemType.Potions, (int)PotionNames.StaminaPotion,
                                      CauseType.Items, 2);
             }
             if (Input.GetKeyDown(KeyCode.G))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.AmetystRing,
+                InitItemToInv(SlotType.StashInv, ItemType.GenGewgaws, (int)GenGewgawNames.AmetystRing,
                                   CauseType.Items, 2, GenGewgawQ.Epic);
             }
             if (Input.GetKeyDown(KeyCode.K))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.BeltOfTheCommoner,
+                InitItemToInv(SlotType.StashInv, ItemType.GenGewgaws, (int)GenGewgawNames.BeltOfTheCommoner,
                           CauseType.Items, 2, GenGewgawQ.Lyric);
             }
         }

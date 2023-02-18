@@ -199,8 +199,7 @@ namespace Interactables
      
         #region INIT, LOAD, and UNLOAD
         public void Init()
-        {
-            ClearInv();
+        {           
             InitExcessInv();
         }
         public void Load()

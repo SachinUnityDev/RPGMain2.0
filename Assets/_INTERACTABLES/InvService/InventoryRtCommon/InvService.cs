@@ -4,7 +4,7 @@ using UnityEngine;
 using Combat;
 using Common;
 using System;
-using Spine;
+using Town; 
 
 namespace Interactables
 {
@@ -62,16 +62,17 @@ namespace Interactables
 
         #region INV CHECKS
 
-        public bool IsCommInvFull()
+        public bool IsCommInvFull(Iitems item)
+        {
+            // talk to view get info dpending on current item
+            return false;
+        }
+        public bool IsStashInvFull(Iitems item)
         {
 
             return false;
         }
-        public bool IsStashInvFull()
-        {
-            return false;
-        }
-        public bool IsExcessInvFull()
+        public bool IsExcessInvFull(Iitems item)
         {
             return false;
         }

@@ -226,10 +226,10 @@ namespace Interactables
         #region RIGHT CLICK ACTIONS ON INV RELATED
         public void OnPointerClick(PointerEventData eventData)
         {
+            if (ItemsInSlot.Count == 0) return;
             Iitems item = ItemsInSlot[0];
             if (eventData.button == PointerEventData.InputButton.Right)
-            {
-                if (ItemsInSlot.Count == 0) return;
+            {          
                 if (item != null)
                 {
                     // sell one item 

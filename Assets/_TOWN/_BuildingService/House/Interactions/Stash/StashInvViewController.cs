@@ -23,53 +23,24 @@ namespace Town
         public int currExcessInvSize;
         public Stack<Iitems> itemSent2CommInv = new Stack<Iitems>();
         [Header("to be ref")]
-        [SerializeField] Transform slotContainer; 
-        void Awake()
+        [SerializeField] Transform slotContainer;
+        [SerializeField] Button exitBtn;
+        [SerializeField] Transform currDisplay; 
+        
+
+        void Start()
         {
             InvService.Instance.OnDragResult += OnDragResult2Stash;
-           // reverseBtn.onClick.AddListener(OnReverseBtnPressed);
-
+            // reverseBtn.onClick.AddListener(OnReverseBtnPressed);
+            exitBtn.onClick.AddListener(() => UIControlServiceGeneral.Instance.TogglePanel(gameObject, false));
         }
-        void OnReverseBtnPressed()
+   
+        void FillStashCurrency()
         {
-
-
-            //for (int i = 0; i < transform.GetChild(0).childCount; i++)
-            //{
-            //    Transform child = transform.GetChild(0).GetChild(i);  // go
-            //    child.gameObject.GetComponent<ExcessItemSlotController>().RemoveAllItems();
-            //}
-            //// ClearInv();  
-            //InvService.Instance.invMainModel.excessInvItems.Clear();
+            Currency curr = EcoServices.Instance.GetMoneyAmtInPlayerStash();
+            currDisplay.GetComponent<DisplayCurrency>().Display(curr);
         }
 
-        void OnSellAllPressed()
-        {
-            //// iitem get SO or directly get price
-            //for (int i = 0; i < transform.GetChild(0).childCount; i++)
-            //{
-            //    Transform child = transform.GetChild(0).GetChild(i);  // go
-            //    iSlotable iSlot = child.gameObject.GetComponent<iSlotable>();
-            //    if (!child.gameObject.GetComponent<ExcessItemSlotController>().IsEmpty())
-            //    {
-            //        int count = iSlot.ItemsInSlot.Count;
-            //        Iitems item = iSlot.ItemsInSlot[0];
-            //        if (count > 0)
-            //        {
-            //            CostData costData =
-            //            ItemService.Instance.GetCostData(item.itemType, item.itemName);
-            //            // add to play Eco and dispose item
-            //            int silver = (costData.cost.silver / 3) * count;
-            //            int bronze = (costData.cost.bronze / 3) * count;
-            //            Currency itemSaleVal = new Currency(silver, bronze).RationaliseCurrency();
-
-            //            EcoServices.Instance.AddMoney2PlayerInv(itemSaleVal);
-            //            iSlot.RemoveAllItems();
-            //        }
-            //    }
-
-            //}
-        }
 
         #region SLOT RELATED 
         public void ShowRightClickList(ItemSlotController itemSlotController)
@@ -155,8 +126,7 @@ namespace Town
                 }
             }
             return slotFound;
-        }
-     
+        }     
         public bool IsStashInvFull()
         {
             for (int i = 0; i < slotContainer.childCount; i++)
@@ -178,7 +148,6 @@ namespace Town
                 AddItem2InVView(item, false);
             }
         }
-
         void ClearInv()
         {
             for (int i = 0; i < slotContainer.childCount; i++)
@@ -187,20 +156,18 @@ namespace Town
                 child.gameObject.GetComponent<StashSlotController>().ClearSlot();
             }
         }
-
         public void Load()
         {
-            
+            FillStashCurrency();
         }
-
         public void UnLoad()
         {
          
         }
-
         public void Init()
         {
             InitStashInv(); 
+            FillStashCurrency();
         }
 
 

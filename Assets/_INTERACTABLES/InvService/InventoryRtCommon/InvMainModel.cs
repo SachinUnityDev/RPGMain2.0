@@ -142,9 +142,9 @@ namespace Interactables
             }
         }
 
-        public bool RemoveItem2StashInv(Iitems item) // view=> model 
+        public bool RemoveItemFrmStashInv(Iitems item) // view=> model 
         {
-            commonInvItems.Remove(item);
+            stashInvIntItems.Remove(item);
             return true;
         }
 

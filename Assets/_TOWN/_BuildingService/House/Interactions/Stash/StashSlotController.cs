@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Town
 {
-    public class StashSlotController : MonoBehaviour, IDropHandler, iSlotable
+    public class StashSlotController : MonoBehaviour, IDropHandler, iSlotable, IPointerClickHandler
     {
         #region DECLARATIONS
         public int slotID { get; set; }
@@ -181,7 +181,7 @@ namespace Town
                 return;
             }
             Iitems item = ItemsInSlot[0];
-            InvService.Instance.invMainModel.RemoveItemFrmCommInv(item);  // ITEM REMOVED FROM INV MAIN MODEL HERE
+            InvService.Instance.invMainModel.RemoveItemFrmStashInv(item);  // ITEM REMOVED FROM INV MAIN MODEL HERE
             ItemsInSlot.Remove(item);
             itemCount--;
             if (ItemsInSlot.Count >= 1)
@@ -246,6 +246,49 @@ namespace Town
         public void CloseRightClickOpts()
         {
             
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (ItemsInSlot.Count == 0) return;
+            Iitems item = ItemsInSlot[0];
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                if (Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.LeftShift))
+                {
+                    bool slotfound = false;
+                    if (ItemsInSlot.Count <= 1) return;
+                    Transform parentTrans = transform.parent;
+                    for (int i = 0; i < parentTrans.childCount; i++)
+                    {
+                        Transform child = parentTrans.GetChild(i);
+                        iSlotable iSlotable = child.GetComponent<iSlotable>();
+                        if (iSlotable.SplitItem2EmptySlot(item))
+                        {
+                            slotfound = true;
+                            break;
+                        }
+                    }
+                    if (slotfound)
+                    {
+                        RemoveItem();
+                    }
+                }
+            }
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                if (Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl)
+                    && InvService.Instance.stashInvViewController.gameObject.activeInHierarchy)
+                {                 
+                    if (item != null)
+                    {
+                        if (InvService.Instance.invMainModel.AddItem2CommInv(item))
+                        {
+                            RemoveItem();
+                        }
+                    }
+                }
+            }
         }
         #endregion
     }

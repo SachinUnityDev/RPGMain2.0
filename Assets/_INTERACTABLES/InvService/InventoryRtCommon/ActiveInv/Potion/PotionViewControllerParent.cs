@@ -33,7 +33,6 @@ namespace Interactables
             canvas = FindObjectOfType<Canvas>();
             InvService.Instance.OnDragResult += OnDragResult2PotionActiveInv;
             InvService.Instance.OnCharSelectInvPanel += LoadActiveInvSlots; 
-
             slotNum = transform.GetSiblingIndex();
         }
 
@@ -92,7 +91,6 @@ namespace Interactables
                 return false;
         }
 
-        
         void ClearInv()
         {
             allPotionActiveInvList.Clear();// local list
@@ -102,9 +100,6 @@ namespace Interactables
                 child.gameObject.GetComponent<iSlotable>().ClearSlot();
             }
         }
-
-
-
         public void OnDragResult2PotionActiveInv(bool result, ItemsDragDrop itemsDragDrop)
         {
             if (!result && itemsDragDrop.itemDragged.invSlotType == SlotType.PotionsActiveInv)

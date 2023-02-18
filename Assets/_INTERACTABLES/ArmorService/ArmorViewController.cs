@@ -16,13 +16,9 @@ namespace Interactables
         void Start()
         {        
             InvService.Instance.OnCharSelectInvPanel += PopulateArmorPanel;
-            UnLoad();
+            gameObject.SetActive(false);
         }
-        void OnEnable()
-        {
-         //   if (InvService.Instance.isInvPanelOpen)
-             // Load();
-        }
+ 
         #region Load UnLoad
         public void Load()
         {          
@@ -32,7 +28,7 @@ namespace Interactables
         }
         public void UnLoad()
         {
-            UIControlServiceGeneral.Instance.TogglePanel(this.gameObject, false);
+      
         }
 
         public void Init()
@@ -57,11 +53,6 @@ namespace Interactables
         }
 
         #endregion
-
-  
-
-
-
 
         #region Socket Controls
 

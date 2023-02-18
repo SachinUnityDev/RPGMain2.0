@@ -10,7 +10,7 @@ using Common;
 namespace Interactables
 {
     public class ActiveIntBtnPtrEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
-                                                                , IPointerClickHandler
+                                                                
     {
         [SerializeField] string descTxt = "";
         [SerializeField] TextMeshProUGUI txt;
@@ -47,14 +47,7 @@ namespace Interactables
         }
         public void ClickState()
         {
-            //foreach (Transform child in transform.parent)
-            //{
-            //    ActiveIntBtnPtrEvents ptrEvents = child.GetComponent<ActiveIntBtnPtrEvents>();
-            //    ptrEvents.UnClickState(); 
-            //}
-           // isClicked = !isClicked;
-            //if (!isClicked)
-            //    UnClick();
+ 
             isClicked = true;
             img.color = colorHL;
             transform.DOScale(scaleHL, 0.1f);
@@ -77,10 +70,7 @@ namespace Interactables
             UnClickState();           
         }
 
-        public void OnPointerClick(PointerEventData eventData)
-        {        
-           // UIControlServiceGeneral.Instance.TogglePanelOnInGrp(InvRightView.)
-        }
+ 
     }
 
 

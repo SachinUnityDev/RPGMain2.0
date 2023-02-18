@@ -15,29 +15,20 @@ namespace Interactables
         {
             InvService.Instance.OnCharSelectInvPanel += PopulateWeaponPanel;
             ItemService.Instance.OnGemEnchanted += 
-                            (CharController charController)=>PopulateGemEnchanted(); 
-
-            UnLoad();
+                            (CharController charController)=>PopulateGemEnchanted();           
             gemImg = transform.GetChild(1).GetChild(0).GetComponent<Image>();
-
+            gameObject.SetActive(false); 
         }
-        //void OnEnable()
-        //{
-        //    Load();
-        //}
         public void Load()
-        {
-          //  UIControlServiceGeneral.Instance.TogglePanel(this.gameObject, true);
+        {         
             Init();           
             PopulateGemEnchanted(); 
         }
         void PopulateWeaponPanel(CharModel charModel)
         {
-            //charSelect = charModel.charName;
-            //Sprite sprite = WeaponService.Instance.weaponSO.GetSprite(charSelect);
-            //transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite
-            //    = sprite;
-         
+            charSelect = charModel.charName;
+            Sprite sprite = WeaponService.Instance.allWeaponSO.GetWeaponSO(charSelect).weaponSprite;                 
+            transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = sprite;
         }
 
         void PopulateGemEnchanted()
@@ -59,7 +50,7 @@ namespace Interactables
 
         public void UnLoad()
         {
-            UIControlServiceGeneral.Instance.TogglePanel(this.gameObject, false);
+           
         }
 
         public void Init()

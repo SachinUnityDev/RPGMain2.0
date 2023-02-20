@@ -45,7 +45,7 @@ namespace Common
         Clumsy,
         Cold,
         Confident,
-        Constipation,
+        Constipated,
         Daredevil,
         Diarrhea,
         Drunk,

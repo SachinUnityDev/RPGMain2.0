@@ -9,14 +9,7 @@ namespace Common
     {
         public int charID;
         public CharNames charName;
-
-        [Header("TraitNames....")]
-        public int maxArmortriggered;
-        public int minArmorTriggered;
-
-        // temp controller 
-        // controller is going to check for the start conditions by looping
-        // thru the temp trait condition init
+        
     }
 
     public class CombatModel

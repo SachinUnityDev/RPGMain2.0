@@ -27,39 +27,39 @@ namespace Common
         }
     }
 
-    //public abstract class TempTraitBase
-    //{
-    //    public abstract TempTraitName tempTraitName { get; }
-            
-            
-    //    public virtual  void Init(CharController charController)
-    //    {
-
-    //    }
-        
-    //    public abstract void OnApply();
-
-    //    public abstract void OnEnd();
-
-    //}
-
-
-    public abstract class TempTraitBase : MonoBehaviour
+    public abstract class TempTraitBase
     {
         public abstract TempTraitName tempTraitName { get; }
-        public abstract TempTraitType traitType { get;  }
-        public abstract TraitBehaviour traitBehaviour { get; }
+        public CharController charController; 
 
-        public abstract void ApplyTempTrait(CharController _charController);
+        public virtual void Init(CharController charController)
+        {
 
-        public abstract void RemoveTempTrait(CharController _charController);
+        }
 
-        public abstract void StartConditionCheck(CharController _charController);
+        public abstract void OnApply();
 
-        public abstract void EndConditionCheck(CharController _charController);
+        public abstract void OnEnd();
 
-        public abstract void ChkCharImmunityfromThis(CharController _charController);
     }
+
+
+    //public abstract class TempTraitBase : MonoBehaviour
+    //{
+    //    public abstract TempTraitName tempTraitName { get; }
+    //    public abstract TempTraitType traitType { get;  }
+    //    public abstract TraitBehaviour traitBehaviour { get; }
+
+    //    public abstract void ApplyTempTrait(CharController _charController);
+
+    //    public abstract void RemoveTempTrait(CharController _charController);
+
+    //    public abstract void StartConditionCheck(CharController _charController);
+
+    //    public abstract void EndConditionCheck(CharController _charController);
+
+    //    public abstract void ChkCharImmunityfromThis(CharController _charController);
+    //}
 
     public class TempTraitsFactory : MonoBehaviour
     {

@@ -46,7 +46,7 @@ namespace Interactables
         [Header("Canvas Not To Be Ref")]
         [SerializeField] Canvas canvas; 
         [Header("Inv Panel Ref")]
-        [SerializeField] GameObject InvPanel;                
+        [SerializeField] GameObject invContainer;                
 
         public Transform rightClickOpts;
 
@@ -56,11 +56,14 @@ namespace Interactables
         
         void Awake()
         {
-            InvPanel = gameObject.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
+      
+        }
+        private void Start()
+        {
+            invContainer = gameObject.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
             InvService.Instance.OnDragResult += OnDragResult;
             gewgawsActiveInvPanel.SetActive(false);
         }
-
         public void Init()
         {           
             InitCommonInv();
@@ -128,9 +131,9 @@ namespace Interactables
         public bool AddItem2InVView(Iitems item, bool onDrop = true) 
          {
             bool slotFound = false;
-            for (int i = 0; i < InvPanel.transform.childCount; i++)
+            for (int i = 0; i < invContainer.transform.childCount; i++)
             {
-                Transform child = InvPanel.transform.GetChild(i);
+                Transform child = invContainer.transform.GetChild(i);
                 iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>(); 
                 if(iSlotable.ItemsInSlot.Count > 0)
                 {
@@ -147,9 +150,9 @@ namespace Interactables
             }
             if (!slotFound)   // no other filled slot has same item 
             {
-                for (int i = 0; i < InvPanel.transform.childCount; i++)
+                for (int i = 0; i < invContainer.transform.childCount; i++)
                 {
-                    Transform child = InvPanel.transform.GetChild(i);
+                    Transform child = invContainer.transform.GetChild(i);
                     iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
                     if (iSlotable.AddItem(item, onDrop))
                     {
@@ -163,9 +166,9 @@ namespace Interactables
 
         public bool IsCommInvFull()
         {
-            for (int i = 0; i < InvPanel.transform.childCount; i++)
+            for (int i = 0; i < invContainer.transform.childCount; i++)
             {
-                Transform child = InvPanel.transform.GetChild(i);
+                Transform child = invContainer.transform.GetChild(i);
                 iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
                 if (!iSlotable.isSlotFull())
                 {
@@ -201,15 +204,15 @@ namespace Interactables
         {         
             for (int i = 0; i < gewgawsActiveInvPanel.transform.childCount; i++)
             {
-                Transform child = InvPanel.transform.GetChild(i);
+                Transform child = invContainer.transform.GetChild(i);
                 child.gameObject.GetComponent<GewgawSlotController>().ClearSlot();
             }
         }
         void ClearInv()
         {          
-            for (int i = 0; i < InvPanel.transform.childCount; i++)
+            for (int i = 0; i < invContainer.transform.childCount; i++)
             {
-                Transform child = InvPanel.transform.GetChild(i);
+                Transform child = invContainer.transform.GetChild(i);
                 child.gameObject.GetComponent<ItemSlotController>().ClearSlot();
             }
         }

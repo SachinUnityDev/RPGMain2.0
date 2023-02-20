@@ -19,12 +19,19 @@ namespace Common
 
         public TempTraitsFactory temptraitsFactory; 
         // Start is called before the first frame update
+        /// <summary>
+        /// get all temp trait controllers => temp traits controller to act as buff controller for temp traits
+        /// get all models here
+        /// 
+        /// </summary>
+
+
         void Start()
         {
            //TownEventService.Instance.OnQuestBegin += temptraitsFactory.InitTempTraits;       // working 
         }
 
-        // Update is called once per frame
+
         public void ApplyPermTraits(GameObject go)
         {
             CharController charController = go?.GetComponent<CharController>();
@@ -41,12 +48,6 @@ namespace Common
 
             return false; 
         }
-
-        private void Update()
-        {
-       
-        }
-
     }
 
 

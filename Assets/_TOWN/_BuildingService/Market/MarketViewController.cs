@@ -1,18 +1,30 @@
+using Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MarketViewController : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+
+namespace Town
+{
+    public class MarketViewController : MonoBehaviour, IPanel, IBuildName
     {
-        
+   
+        public BuildingNames BuildingName => BuildingNames.Marketplace;
+
+        public void Init()
+        {
+           
+        }
+
+        public void Load()
+        {
+          
+        }
+
+        public void UnLoad()
+        {
+           
+        }
     }
 }

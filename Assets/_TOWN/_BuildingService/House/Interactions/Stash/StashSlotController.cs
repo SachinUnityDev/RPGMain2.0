@@ -82,7 +82,6 @@ namespace Town
                 RefreshSlotTxt();
             }
         }
-
         public bool HasSameItem(Iitems item)
         {
             if (ItemsInSlot[0].itemName == item.itemName
@@ -104,7 +103,6 @@ namespace Town
                 RemoveItem();
             }
         }
-
         public bool IsEmpty()
         {
             if (ItemsInSlot.Count > 0)
@@ -112,7 +110,6 @@ namespace Town
             else
                 return true;
         }
-
         public bool SplitItem2EmptySlot(Iitems item, bool onDrop = true)
         {
             if (IsEmpty())

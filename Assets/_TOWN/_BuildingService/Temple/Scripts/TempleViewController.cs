@@ -8,10 +8,10 @@ using Common;
 using Interactables;
 namespace Town
 {
-    public class TempleViewController : MonoBehaviour
+    public class TempleViewController : MonoBehaviour, IPanel, IBuildName
     {
-        public BuildingNames buildingName => BuildingNames.Temple;
 
+        public BuildingNames BuildingName => BuildingNames.Temple;
         [Header("To be ref")]
         [SerializeField] Transform btnContainer;
         [SerializeField] Transform NPCInteractPanel;
@@ -28,15 +28,18 @@ namespace Town
 
         [SerializeField] Button exit;
 
-        BuildingSO templeSO;       
+        BuildingSO templeSO;
 
-        void Start()
+     
+
+        void Awake()
         {
             BGSpriteContainer = transform.GetChild(0);
             exit.onClick.AddListener(UnLoad);
         }
         public void Init()
         {
+            UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
             templeSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.Temple);           
             btnContainer.GetComponent<TempleInteractBtnView>().InitInteractBtns(this);
             FillTempleBG();

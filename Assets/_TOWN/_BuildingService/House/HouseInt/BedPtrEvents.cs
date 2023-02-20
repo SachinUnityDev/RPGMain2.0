@@ -16,6 +16,7 @@ namespace Town
         public void OnPointerClick(PointerEventData eventData)
         {
             // open Rest Panel
+            
             UIControlServiceGeneral.Instance.TogglePanelOnInGrp(houseView.restPanel.gameObject, true);
         }
     }

@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Common;
 
 namespace Town
 {
-    public class TavernController : MonoBehaviour, IBuilding, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class TavernController : MonoBehaviour, IPanel, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        public BuildingNames buildingName => BuildingNames.Tavern; 
-
         public void Init()
         {
            

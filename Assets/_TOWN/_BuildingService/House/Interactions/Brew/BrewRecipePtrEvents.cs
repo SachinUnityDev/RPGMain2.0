@@ -44,8 +44,6 @@ namespace Town
         public void SubtractIngredFrmSlot(IngredData subIngred)
         {
 
-
-
         }
 
         public void DisableSlot()

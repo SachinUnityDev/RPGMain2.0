@@ -29,6 +29,7 @@ namespace Interactables
                 return false;   
         }
 
+        // can be doen in temple or upon reading the scroll in inventory
         public bool EnchantWeapon(GemNames gemName)
         {           
             if (IsGemEnchantable(gemName))

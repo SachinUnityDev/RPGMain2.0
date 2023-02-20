@@ -10,9 +10,9 @@ using Interactables;
 namespace Town
 {
  
-    public class HouseViewController : MonoBehaviour, IBuilding
+    public class HouseViewController : MonoBehaviour, IPanel, IBuildName
     {
-        public BuildingNames buildingName => BuildingNames.House;
+        public BuildingNames BuildingName => BuildingNames.House;
 
         [Header("To be ref")]
         [SerializeField] Transform btnContainer;
@@ -40,20 +40,24 @@ namespace Town
         [SerializeField] Button exit; 
 
         BuildingSO houseSO;
-        TimeState timeState; 
+        TimeState timeState;
 
-        void Start()
+      
+
+        void Awake()
         {
             BGSpriteContainer = transform.GetChild(0);
             exit.onClick.AddListener(UnLoad); 
         }
         public void Init()
-        {            
+        {
+            UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
             houseSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.House);
             timeState = CalendarService.Instance.currtimeState;
             btnContainer.GetComponent<HouseInteractBtnView>().InitInteractBtns(this); 
             FillHouseBG();
             InitInteractPanels();
+
         }
         public void FillHouseBG()
         {
@@ -98,14 +102,11 @@ namespace Town
                 case BuildInteractType.Provision:
                     return provisionPanel; 
                 default:
-                    return null;
-                    
+                    return null;                    
             }
-
-
         }
         public void Load()
-        {
+        {            
         }
 
         public void UnLoad()

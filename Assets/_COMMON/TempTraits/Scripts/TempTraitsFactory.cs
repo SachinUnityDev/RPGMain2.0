@@ -30,8 +30,8 @@ namespace Common
     //public abstract class TempTraitBase
     //{
     //    public abstract TempTraitName tempTraitName { get; }
-
-
+            
+            
     //    public virtual  void Init(CharController charController)
     //    {
 

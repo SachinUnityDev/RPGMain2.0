@@ -18,11 +18,7 @@ namespace Town
 
         public bool hasSufficientIngred; 
 
-        private void Awake()
-        {
-            imgIngred = transform.GetChild(0).GetComponent<Image>();
-            txtTrans = transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
-        }
+      
         public void InitBrewRecipe(IngredData ingredReq, int quantity)
         {
             this.ingredReq = ingredReq;  
@@ -62,6 +58,8 @@ namespace Town
         {             
             Sprite itemSprite = GetSprite(ingredReq.ItemData);
             Debug.Log("Ingred " + (IngredNames)ingredReq.ItemData.ItemName);
+            imgIngred = transform.GetChild(0).GetComponent<Image>();
+            txtTrans = transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
             imgIngred.sprite = itemSprite;
             txtTrans.text = ingredReq.quantity.ToString();
         }

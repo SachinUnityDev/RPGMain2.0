@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using Common;
 using Interactables;
+using UnityEngine.Rendering;
+
 namespace Town
 {
     interface IBuildName
@@ -24,22 +26,28 @@ namespace Town
         [SerializeField] Button questScrollBtn;
         [SerializeField] Button mapBtn;
 
-        [SerializeField] GameObject InteractionPanel;
+        //[SerializeField] GameObject InteractionPanel;
 
-        [SerializeField] List<GameObject> allPanels = new List<GameObject>();
+        //[SerializeField] List<GameObject> allPanels = new List<GameObject>();
 
 
         public BuildingNames selectBuild;
+        [Header("NTBR")]
         [SerializeField] Transform buildContainer;
+        [SerializeField] Image townBGImage;
         [Header("TBR")]
         [SerializeField] Transform buildIntContainer; 
-        [SerializeField] Image townBGImage; 
+   
 
-        void Start()
+        void Awake()
         {
             buildContainer = transform.GetChild(0);
-            townBGImage = transform.GetChild(0).GetComponent<Image>();
-            CalendarService.Instance.OnStartOfDay +=(int day)=> TownViewInit();
+            townBGImage = transform.GetChild(0).GetComponent<Image>();            
+        }
+
+        private void Start()
+        {
+            CalendarService.Instance.OnStartOfDay += (int day) => TownViewInit();
             CalendarService.Instance.OnStartOfNight += (int day) => TownViewInit();
         }
         public void OnBuildSelect(BuildingNames buildName)
@@ -66,8 +74,6 @@ namespace Town
                     child.GetComponent<IPanel>().Init(); 
                 }
             }
-
-
         }
         public void TownViewInit()
         {

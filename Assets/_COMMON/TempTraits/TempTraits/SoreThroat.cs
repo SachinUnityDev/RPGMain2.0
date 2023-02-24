@@ -9,8 +9,9 @@ namespace Common
     {
         public override TempTraitName tempTraitName => TempTraitName.SoreThroat;
        // -2 Wp	-1 Morale	+15% Thirst
-        public override void OnApply()
+        public override void OnApply(CharController charController)
         {
+            this.charController = charController;
             int charID = charController.charModel.charID;
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
                                                          charID, StatsName.willpower, -2, TimeFrame.Infinity, -1, true);

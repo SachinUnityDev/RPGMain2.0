@@ -74,7 +74,7 @@ namespace Common
 
             
             charController.charStateController.ApplyImmunityBuff(CauseType.CharState, (int)charStateName, charID
-                    , CharStateName.Shocked, TimeFrame.Infinity, 1, true);
+                    , CharStateName.Shocked, TimeFrame.Infinity, 1);
          
         }
 

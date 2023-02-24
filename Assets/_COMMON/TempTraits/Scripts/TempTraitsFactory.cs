@@ -33,11 +33,7 @@ namespace Common
         public abstract TempTraitName tempTraitName { get; }
         public CharController charController; 
 
-        public virtual void Init(CharController charController)
-        {
-
-        }
-        public abstract void OnApply();
+        public abstract void OnApply(CharController charController);
 
         public abstract void OnEnd();
 

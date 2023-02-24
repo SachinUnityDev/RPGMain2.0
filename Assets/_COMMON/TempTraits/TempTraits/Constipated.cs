@@ -9,8 +9,10 @@ using UnityEngine;
     {
         public override TempTraitName tempTraitName => TempTraitName.Constipated; 
         //-3 Dodge	-2 Haste
-        public override void OnApply()
+        public override void OnApply(CharController charController)
         {
+
+            this.charController = charController;   
             int charID = charController.charModel.charID;
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
                                              charID, StatsName.dodge, -3, TimeFrame.Infinity, -1, true);

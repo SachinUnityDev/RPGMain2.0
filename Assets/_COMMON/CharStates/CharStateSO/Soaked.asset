@@ -12,14 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64e2f474acd7ee4a9484ddc12b4141f, type: 3}
   m_Name: Soaked
   m_EditorClassIdentifier: 
-  charStateName: 0
+  charStateName: 45
   stateFor: 0
   charStateType: 0
-  charStateBehavior: 0
-  timeFrame: 0
-  minCastTime: 0
-  maxCastTime: 0
-  CharStateNameStr: ' '
-  iconSprite: {fileID: 0}
-  allLines: []
+  charStateBehavior: 1
+  timeFrame: 1
+  minCastTime: -1
+  maxCastTime: -1
+  CharStateNameStr: Soaked
+  iconSprite: {fileID: 21300000, guid: 35e158ce87ad3564d91a3410d48e6cc6, type: 3}
+  allLines:
+  - Immune to Burning
+  - -2 Morale
+  - -40 Air res
+  - +24 Fire Res
   CharStateFX: {fileID: 0}

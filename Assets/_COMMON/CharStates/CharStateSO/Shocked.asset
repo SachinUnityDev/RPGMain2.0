@@ -12,14 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64e2f474acd7ee4a9484ddc12b4141f, type: 3}
   m_Name: Shocked
   m_EditorClassIdentifier: 
-  charStateName: 0
+  charStateName: 44
   stateFor: 0
   charStateType: 0
-  charStateBehavior: 0
-  timeFrame: 0
-  minCastTime: 0
-  maxCastTime: 0
-  CharStateNameStr: ' '
-  iconSprite: {fileID: 0}
-  allLines: []
+  charStateBehavior: 1
+  timeFrame: 1
+  minCastTime: -1
+  maxCastTime: -1
+  CharStateNameStr: Shocked
+  iconSprite: {fileID: 21300000, guid: 91186864f16d28749b9de2e8c66033f8, type: 3}
+  allLines:
+  - Immune to Poisoned
+  - -3 Focus
+  - 1-3 Armor
+  - +24 Earth Res
+  - Can't use Move skills
   CharStateFX: {fileID: 0}

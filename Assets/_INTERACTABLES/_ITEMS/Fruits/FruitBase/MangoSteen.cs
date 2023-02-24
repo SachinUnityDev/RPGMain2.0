@@ -36,7 +36,7 @@ namespace Interactables
             float chance1 = 20f;
             if (chance1.GetChance())
             {
-                charController.tempTraitController.ClearTempTrait(TempTraitName.Diarrhea);
+                charController.tempTraitController.RemoveTraitByName(TempTraitName.Diarrhea);
             }
         }
 

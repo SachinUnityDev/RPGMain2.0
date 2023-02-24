@@ -9,8 +9,9 @@ namespace Common
     {
         public override TempTraitName tempTraitName => TempTraitName.Spineless;
 
-        public override void OnApply()
+        public override void OnApply(CharController charController)
         {
+            this.charController = charController;
             //-3 Willpower
             int charID = charController.charModel.charID;
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,

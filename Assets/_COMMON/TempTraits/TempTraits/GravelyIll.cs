@@ -9,9 +9,9 @@ using UnityEngine;
     {
         public override TempTraitName tempTraitName => TempTraitName.GravelyIll;
 
-        public override void OnApply()
+        public override void OnApply(CharController charController)
         {
-            
+            this.charController = charController;
         }
 
         public override void OnEnd()

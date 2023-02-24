@@ -16,10 +16,13 @@ MonoBehaviour:
   stateFor: 0
   charStateType: 1
   charStateBehavior: 1
-  timeFrame: 0
-  minCastTime: 0
-  maxCastTime: 0
-  CharStateNameStr: ' '
-  iconSprite: {fileID: 0}
-  allLines: []
+  timeFrame: 1
+  minCastTime: 3
+  maxCastTime: 3
+  CharStateNameStr: ' Bleeding'
+  iconSprite: {fileID: 21300000, guid: ac9607ae4c48401479a1d11ec9ffb6c7, type: 3}
+  allLines:
+  - -1 Stamina Regen
+  - -2 Dodge
+  - -2 Fortitude per rd
   CharStateFX: {fileID: 0}

@@ -11,9 +11,9 @@ namespace Common
     {
         public override TempTraitName tempTraitName => TempTraitName.Ailurophobia;
 
-        public override void OnApply()
+        public override void OnApply(CharController charController)
         {
-            
+            this.charController = charController;
         }
 
         public override void OnEnd()

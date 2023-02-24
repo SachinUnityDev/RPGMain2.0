@@ -8,8 +8,9 @@ namespace Common
     {
         public override TempTraitName tempTraitName => TempTraitName.Scabies;
         //-2 Morale	-3 Focus	+10 Elemental Res
-        public override void OnApply()
+        public override void OnApply(CharController charController)
         {
+            this.charController = charController;
             int charID = charController.charModel.charID;
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
                                              charID, StatsName.morale, -2, TimeFrame.Infinity, -1, true);

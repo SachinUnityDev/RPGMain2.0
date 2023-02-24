@@ -12,14 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64e2f474acd7ee4a9484ddc12b4141f, type: 3}
   m_Name: FeebleMinded
   m_EditorClassIdentifier: 
-  charStateName: 0
+  charStateName: 22
   stateFor: 0
   charStateType: 0
-  charStateBehavior: 0
-  timeFrame: 0
-  minCastTime: 0
-  maxCastTime: 0
-  CharStateNameStr: ' '
-  iconSprite: {fileID: 0}
-  allLines: []
+  charStateBehavior: 1
+  timeFrame: 1
+  minCastTime: -1
+  maxCastTime: -1
+  CharStateNameStr: Feebleminded
+  iconSprite: {fileID: 21300000, guid: 5dade46a963b34f4da14c89e23ff81b5, type: 3}
+  allLines:
+  - Can't use Patience skills
+  - -20 Light Res
+  - Immune to Lucky Duck
   CharStateFX: {fileID: 0}

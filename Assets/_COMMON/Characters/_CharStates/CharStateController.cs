@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Combat;
-using System.Linq; 
-
+using System.Linq;
+using System;
 
 namespace Common
 {
+    [Serializable]
     public class CharStateModData  // broadCast Data 
     {       
         public CauseType causeType;  // add cause name here 
@@ -27,60 +28,55 @@ namespace Common
             this.isImmunity = isImmunity;
         }
     }
-
+    [Serializable]
     public class CharStateBuffData
     {
-        public int buffID;
-        public bool isBuff;   // true if BUFF and false if DEBUFF
+        public int stateID;
         public int startRoundNo;
         public TimeFrame timeFrame;
-        public int buffedNetTime;
-        public int buffCurrentTime;
+        public int netTime;
+        public int currentTime;
         public CharStateModData charStateModData;
-        public string directString;
 
-        public CharStateBuffData(int buffID, bool isBuff, int startRoundNo, TimeFrame timeFrame, int buffedNetTime
-                                    , CharStateModData charStateModData, string directString="")
+
+        public CharStateBuffData(int stateID,  int startRoundNo, TimeFrame timeFrame, int buffedNetTime
+                                    , CharStateModData charStateModData)
         {
-            this.buffID = buffID;
-            this.isBuff = isBuff;
+            this.stateID = stateID;
             this.startRoundNo = startRoundNo;
             this.timeFrame = timeFrame;
-            this.buffedNetTime = buffedNetTime;
-            this.buffCurrentTime = 0;
-            this.charStateModData = charStateModData;
-            this.directString = directString;
+            this.netTime = buffedNetTime;
+            this.currentTime = 0;
+            this.charStateModData = charStateModData;          
         }
     }
 
     public class ImmunityBuffData   
     {
-        public int buffID;
-        public bool isBuff;   // true if BUFF and false if DEBUFF
+        public int immunityID;
         public int startRoundNo;
         public TimeFrame timeFrame;
         public int buffedNetTime;
         public int buffCurrentTime;
         public CharStateModData charStateModData;
-        public string directString;
+       
 
-        public ImmunityBuffData(int buffID, bool isBuff, int startRoundNo, TimeFrame timeFrame, int buffedNetTime
-                                    , CharStateModData charStateModData, string directString = "")
+        public ImmunityBuffData(int immunityID,  int startRoundNo, TimeFrame timeFrame, int buffedNetTime
+                                    , CharStateModData charStateModData)
         {
-            this.buffID = buffID;
-            this.isBuff = isBuff;
+            this.immunityID = immunityID;          
             this.startRoundNo = startRoundNo;
             this.timeFrame = timeFrame;
             this.buffedNetTime = buffedNetTime;
             this.buffCurrentTime = 0;
-            this.charStateModData = charStateModData;
-            this.directString = directString;
+            this.charStateModData = charStateModData;         
         }
     }
 
 
     public class CharStateController : MonoBehaviour
     {
+        [Header("Char State FX data")]
         public List<CharStateBuffData> allCharStateBuffs = new List<CharStateBuffData>();
         public List<ImmunityBuffData> allImmunityBuffs = new List<ImmunityBuffData>();
         CharController charController;
@@ -89,9 +85,10 @@ namespace Common
 
         [SerializeField] List<int> allBuffIds = new List<int>(); 
         public List<CharStatesBase> allCharBases = new List<CharStatesBase>();
-        
 
-        int buffID;
+        [Header("CharState and Immunity ID s")]
+        [SerializeField]int stateID;
+        [SerializeField] int immunityID;  
         void Start()
         {
             charController = GetComponent<CharController>();
@@ -101,7 +98,7 @@ namespace Common
         }
     #region BUFF & DEBUFF
         public int ApplyCharStateBuff(CauseType causeType, int causeName, int causeByCharID
-                                , CharStateName charStateName, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
+                                , CharStateName charStateName, TimeFrame timeFrame, int netTime)
         {
             // check immunity list 
             int effectedCharID = charController.charModel.charID;
@@ -109,27 +106,28 @@ namespace Common
             int currRd = CombatService.Instance.currentRound;
             CharStateModData charStateModData = new CharStateModData(causeType, causeName, causeByCharID
                                                                     , effectedCharID, charStateName);
-            buffID++;
-            CharStateBuffData charStateBuffData = new CharStateBuffData(buffID, isBuff, currRd, timeFrame, netTime
+            stateID++;
+            allBuffIds.Add(stateID);
+            CharStateBuffData charStateBuffData = new CharStateBuffData(stateID, currRd, timeFrame, netTime
                                                                         , charStateModData); 
 
             allCharStateBuffs.Add(charStateBuffData);
             // add Char State Buffs FX 
-            return buffID;
+            return stateID;
         }
 
         public int ApplyImmunityBuff(CauseType causeType, int causeName, int causeByCharID
-                                , CharStateName charStateName, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "") // immunity buff for this char State
+                                , CharStateName charStateName, TimeFrame timeFrame, int netTime) // immunity buff for this char State
         {
             int effectedCharID = charController.charModel.charID;
             int currRd = CombatService.Instance.currentRound;
             CharStateModData charStateModData = new CharStateModData(causeType, causeName, causeByCharID
                                                                     , effectedCharID, charStateName, true);
-            buffID++; 
-            ImmunityBuffData immunityBuffData = new ImmunityBuffData(buffID, isBuff, currRd, timeFrame, netTime
+            stateID++; 
+            ImmunityBuffData immunityBuffData = new ImmunityBuffData(stateID,  currRd, timeFrame, netTime
                                                                         , charStateModData);
             allImmunityBuffs.Add(immunityBuffData);
-            return buffID;
+            return stateID;
         }
 
 
@@ -140,35 +138,34 @@ namespace Common
             if (charStateName == CharStateName.BleedLowDOT || charStateName == CharStateName.BleedMedDOT
                                                             || charStateName == CharStateName.BleedHighDOT)
             {   firstDOTBuffID =              
-                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BleedLowDOT, timeFrame, netTime, false);                
-                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BleedMedDOT, timeFrame, netTime, false);
-                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BleedHighDOT, timeFrame, netTime, false);
+                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BleedLowDOT, timeFrame, netTime);                
+                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BleedMedDOT, timeFrame, netTime);
+                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BleedHighDOT, timeFrame, netTime);
 
             }
             if (charStateName == CharStateName.PoisonedHighDOT || charStateName == CharStateName.PoisonedMedDOT
                                                               || charStateName == CharStateName.PoisonedLowDOT)
             {
                 firstDOTBuffID =
-                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.PoisonedHighDOT, timeFrame, netTime, false);
-                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.PoisonedMedDOT, timeFrame, netTime, false);
-                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.PoisonedLowDOT, timeFrame, netTime, false);
+                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.PoisonedHighDOT, timeFrame, netTime);
+                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.PoisonedMedDOT, timeFrame, netTime);
+                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.PoisonedLowDOT, timeFrame, netTime);
             }
             if (charStateName == CharStateName.BurnHighDOT || charStateName == CharStateName.BurnMedDOT
                                                             || charStateName == CharStateName.BurnLowDOT)
             {
                 firstDOTBuffID =
-                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BurnHighDOT, timeFrame, netTime, false);
-                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BurnMedDOT, timeFrame, netTime, false);
-                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BurnLowDOT, timeFrame, netTime, false);
+                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BurnHighDOT, timeFrame, netTime);
+                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BurnMedDOT, timeFrame, netTime);
+                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BurnLowDOT, timeFrame, netTime);
             }
             return firstDOTBuffID;
         }
 
-        public void RemoveBuffData(CharStateBuffData charStateBuffData)
-        {          
-          
-            // remove buff FX
-            allCharStateBuffs.Remove(charStateBuffData);
+        public void RemoveStateFX(CharStateBuffData charStateBuffData)
+        {   // remove buff FX
+            allCharStateBuffs.Remove(charStateBuffData); // list
+            RemoveCharState(charStateBuffData.charStateModData.charStateName); 
         }
 
         public List<string> GetCharStateBuffList()
@@ -283,34 +280,29 @@ namespace Common
 
         public void RoundTick()
         {
-            foreach (CharStateBuffData buffData in allCharStateBuffs)
+            foreach (CharStateBuffData stateData in allCharStateBuffs)
             {
-                if (buffData.timeFrame == TimeFrame.EndOfRound)
+                if (stateData.timeFrame == TimeFrame.EndOfRound)
                 {
-                    if (buffData.buffCurrentTime >= buffData.buffedNetTime)
+                    if (stateData.currentTime >= stateData.netTime)
                     {
-                        RemoveBuffData(buffData);
+                        RemoveStateFX(stateData);
                     }
-                    buffData.buffCurrentTime++;
+                    stateData.currentTime++;
                 }
             }
         }
 
         public void EOCTick()
         {
-            foreach (CharStateBuffData buffData in allCharStateBuffs)
+            foreach (CharStateBuffData stateData in allCharStateBuffs)
             {
-                if (buffData.timeFrame == TimeFrame.EndOfCombat)
+                if (stateData.timeFrame == TimeFrame.EndOfCombat)
                 {
-                    RemoveBuffData(buffData);
+                    RemoveStateFX(stateData);
                 }
             }
         }
-
-
-
-
-
 #endregion
 
         public void ClearDOT(CharStateName _charStateName)
@@ -358,12 +350,11 @@ namespace Common
                 //{
                     if(buffData.charStateModData.causeName == (int)charStateName)
                     {
-                        buffData.buffCurrentTime = 0;
+                        buffData.currentTime = 0;
                     }
                 //}
             }
         }
-
 
         public CharStatesBase GetCurrCharStateBase(CharStateName _charStateName)
         {
@@ -371,12 +362,9 @@ namespace Common
             {
                 return allCharBases.Find(t => t.charStateName == _charStateName); 
             }
-
             Debug.Log("Char State Base Not found"); 
             return null; 
         }
-
-
     }
 
 

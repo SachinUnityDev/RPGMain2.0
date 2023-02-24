@@ -8,9 +8,9 @@ namespace Common
     public class Beastophobia : TempTraitBase
     {
         public override TempTraitName tempTraitName => TempTraitName.Beastphobia;
-        public override void OnApply()
+        public override void OnApply(CharController charController)
         {
-            
+            this.charController = charController;
         }
         public override void OnEnd()
         {

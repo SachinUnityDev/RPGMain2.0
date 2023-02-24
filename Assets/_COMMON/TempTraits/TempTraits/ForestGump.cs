@@ -9,9 +9,10 @@ namespace Common
     {
         public override TempTraitName tempTraitName => TempTraitName.ForestGump;
 
-        public override void OnApply()
+        public override void OnApply(CharController charController)
         {
             //-3 Focus in Forest
+            this.charController = charController;
             charController.landscapeController.ApplyLandscapeBuff(CauseType.TempTrait, (int)tempTraitName,
                                                           LandscapeNames.Rainforest, StatsName.focus, -3);
         }

@@ -9,9 +9,9 @@ namespace Common
     {
         public override TempTraitName tempTraitName => TempTraitName.Strong;
        // Always triggers max Melee Dmg
-        public override void OnApply()
+        public override void OnApply(CharController charController)
         {
-            
+            this.charController = charController;
         }
 
         public override void OnEnd()

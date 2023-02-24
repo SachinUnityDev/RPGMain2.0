@@ -9,9 +9,10 @@ namespace Common
     {
         public override TempTraitName tempTraitName => TempTraitName.FatesChild;
 
-        public override void OnApply()
+        public override void OnApply(CharController charController)
         {
             //+2 Luck
+            this.charController = charController;
             int charID = charController.charModel.charID;
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
                                                        charID, StatsName.luck, 2, TimeFrame.Infinity, -1, true);

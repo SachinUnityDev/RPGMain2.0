@@ -27,14 +27,6 @@ namespace Common
 
         [TextArea(5, 10)]
         public List<string> allLines = new List<string>();
-
-        private void Awake()
-        {
-            if (CharStateNameStr == "")
-            {
-                CharStateNameStr = CharStateNameStr.ToString().CreateSpace();
-            }
-        }
         public GameObject CharStateFX;
     }
 }

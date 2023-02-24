@@ -11,10 +11,11 @@ namespace Common
     public class Thanatophobia : TempTraitBase
     {
         public override TempTraitName tempTraitName => TempTraitName.Thanatophobia; 
-        public override void OnApply()
+        public override void OnApply(CharController charController)
         {
-           // When Last Drop of Blood: -3 to Utility Stats
-          // if(CharStatesService.Instance)
+            this.charController = charController;
+            // When Last Drop of Blood: -3 to Utility Stats
+            // if(CharStatesService.Instance)
 
 
         }

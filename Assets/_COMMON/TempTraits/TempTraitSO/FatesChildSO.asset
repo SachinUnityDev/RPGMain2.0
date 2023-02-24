@@ -17,7 +17,7 @@ MonoBehaviour:
   temptraitBehavior: 1
   minCastTime: 4
   maxCastTime: 6
-  desc: 
+  traitNameStr: ' Fate''s Child'
   iconSprite: {fileID: 0}
   allLines:
   - +2 Luck

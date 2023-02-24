@@ -8,7 +8,7 @@ namespace Common
     public class Strong : TempTraitBase
     {
         public override TempTraitName tempTraitName => TempTraitName.Strong;
-
+       // Always triggers max Melee Dmg
         public override void OnApply()
         {
             

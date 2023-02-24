@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Interactables;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -36,39 +37,20 @@ namespace Common
         {
 
         }
-
         public abstract void OnApply();
 
         public abstract void OnEnd();
 
     }
 
-
-    //public abstract class TempTraitBase : MonoBehaviour
-    //{
-    //    public abstract TempTraitName tempTraitName { get; }
-    //    public abstract TempTraitType traitType { get;  }
-    //    public abstract TraitBehaviour traitBehaviour { get; }
-
-    //    public abstract void ApplyTempTrait(CharController _charController);
-
-    //    public abstract void RemoveTempTrait(CharController _charController);
-
-    //    public abstract void StartConditionCheck(CharController _charController);
-
-    //    public abstract void EndConditionCheck(CharController _charController);
-
-    //    public abstract void ChkCharImmunityfromThis(CharController _charController);
-    //}
-
     public class TempTraitsFactory : MonoBehaviour
     {
         Dictionary<TempTraitName, Type> allTempTraits;
-
+        [SerializeField] int tempCount = 0; 
         void Start()
         {
             allTempTraits = new Dictionary<TempTraitName, Type>();
-           // InitTempTraits();  to test all temp traits in use
+            InitTempTraits();//  to test all temp traits in use
         }
 
         public void InitTempTraits()
@@ -83,9 +65,9 @@ namespace Common
                 var p = Activator.CreateInstance(tempTrait) as TempTraitBase;
 
                 allTempTraits.Add(p.tempTraitName, tempTrait);
-
-                 gameObject.AddComponent(p.GetType()); 
+                tempCount++;
             }
+            
         }
 
         //ADD
@@ -101,9 +83,37 @@ namespace Common
             }
         }
 
-
+        public TempTraitBase GetNewTempTraitBase(TempTraitName tempTraitName)
+        {
+            foreach (var trait in allTempTraits)
+            {
+                if (trait.Key == tempTraitName)
+                {
+                    var t = Activator.CreateInstance(trait.Value) as TempTraitBase; 
+                    return t;
+                }
+            }
+            Debug.Log("temp trait base not found" + tempTraitName);
+            return null;
+        }
 
 
     }
 
 }
+//public abstract class TempTraitBase : MonoBehaviour
+//{
+//    public abstract TempTraitName tempTraitName { get; }
+//    public abstract TempTraitType traitType { get;  }
+//    public abstract TraitBehaviour traitBehaviour { get; }
+
+//    public abstract void ApplyTempTrait(CharController _charController);
+
+//    public abstract void RemoveTempTrait(CharController _charController);
+
+//    public abstract void StartConditionCheck(CharController _charController);
+
+//    public abstract void EndConditionCheck(CharController _charController);
+
+//    public abstract void ChkCharImmunityfromThis(CharController _charController);
+//}

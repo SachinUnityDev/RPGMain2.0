@@ -17,7 +17,7 @@ namespace Common
         public int maxCastTime;
 
         [Header("Description")]
-        public string desc = "";
+        public string traitNameStr = "";
 
         [Header("Sprites")]
         public Sprite iconSprite;
@@ -27,7 +27,10 @@ namespace Common
 
         private void Awake()
         {
-
+            if(traitNameStr == "")
+            {
+                traitNameStr = tempTraitName.ToString().CreateSpace();
+            }
 
         }
     }

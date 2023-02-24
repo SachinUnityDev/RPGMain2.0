@@ -17,8 +17,8 @@ MonoBehaviour:
   temptraitBehavior: 1
   minCastTime: 0
   maxCastTime: 0
-  desc: 
+  traitNameStr: ' Stout'
   iconSprite: {fileID: 0}
   allLines:
-  - when faithful; +4 vigor
-  - 'when faithful: +2 hp regen'
+  - 'when Faithful: +4 Vigor'
+  - 'When Faithful: +2 Hp Regen'

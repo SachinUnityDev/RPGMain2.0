@@ -17,7 +17,7 @@ MonoBehaviour:
   temptraitBehavior: 2
   minCastTime: 6
   maxCastTime: 10
-  desc: 
+  traitNameStr: ' Claustrophobia'
   iconSprite: {fileID: 0}
   allLines:
-  - Double fortitude loss in sewers, cave and subterranean
+  - +60% Fortitude loss in Sewers, Cave, Catacombs

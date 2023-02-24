@@ -48,8 +48,8 @@ namespace Interactables
 
         public void ApplyOC_FX()
         {
-            charController.tempTraitController.ApplyTempTraitBuff(CauseType.Fruit, (int)itemName, charID
-                                , tempTraitName, TimeFrame.Infinity, 1, true);
+            charController.tempTraitController.ApplyTempTrait(CauseType.Fruit, (int)itemName, charID
+                                  , tempTraitName);
 
         }
         public void ApplyConsumableFX()

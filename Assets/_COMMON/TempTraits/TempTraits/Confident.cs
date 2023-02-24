@@ -10,7 +10,10 @@ namespace Common
 
         public override void OnApply()
         {
-            
+            //  +2 Morale
+            int charID = charController.charModel.charID;
+            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+                                                       charID, StatsName.morale, 2, TimeFrame.Infinity, -1, true);
         }
         public override void OnEnd()
         {

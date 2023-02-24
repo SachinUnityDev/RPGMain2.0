@@ -17,8 +17,8 @@ MonoBehaviour:
   temptraitBehavior: 2
   minCastTime: 6
   maxCastTime: 10
-  desc: 
+  traitNameStr: ' Fear Of The Dead'
   iconSprite: {fileID: 0}
   allLines:
-  - "Double fortitude loss vs Half-dead\t-"
-  - 3 Acc vs Half-dead
+  - +60% Fortitude loss vs Half-dead
+  - -3 Acc vs Half-dead

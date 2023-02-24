@@ -41,7 +41,7 @@ namespace Common
         ArcaneSensitive,
         Beastphobia,
         Bloodthirsty,
-        Claustraphobia,
+        Claustrophobia,
         Clumsy,
         Cold,
         Confident,

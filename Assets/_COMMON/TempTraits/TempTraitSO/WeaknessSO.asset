@@ -17,7 +17,7 @@ MonoBehaviour:
   temptraitBehavior: 2
   minCastTime: -1
   maxCastTime: -1
-  desc: 
+  traitNameStr: ' Weakness'
   iconSprite: {fileID: 0}
   allLines:
   - Always triggers min Dmg

@@ -17,8 +17,8 @@ MonoBehaviour:
   temptraitBehavior: 1
   minCastTime: 4
   maxCastTime: 6
-  desc: 
+  traitNameStr: ' Stalwart'
   iconSprite: {fileID: 0}
   allLines:
-  - 'when Faithful: +4 Wp'
+  - 'When Faithful: +4 Wp'
   - 'When Faithful: +2 Stm Regen'

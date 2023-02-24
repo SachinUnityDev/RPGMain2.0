@@ -47,12 +47,13 @@ namespace Quest
 
         private void Awake()
         {
-            LandscapeService.Instance.OnLandScapeChg += OnLandscapeChg; 
+          
         }
 
         void Start()
         {
-            LandscapeService.Instance.OnLandScapeChg += OnLandscapeChg; 
+            LandscapeService.Instance.OnLandscapeEnter += OnLandscapeEnter;
+            LandscapeService.Instance.OnLandscapeExit += OnLandscapeExit; 
             charController = GetComponent<CharController> ();
         }
 
@@ -65,7 +66,7 @@ namespace Quest
 
             allLandBuffs.Add(landBuffData); 
             
-            if(LandscapeService.Instance.landscapeModel.landscapeName == landScapeName)
+            if(LandscapeService.Instance.currLandscape == landScapeName)
                 ApplyLandBuffFX(landBuffData);  
             
             return buffIndex;
@@ -96,7 +97,7 @@ namespace Quest
 
         }
 
-        void OnLandscapeChg(LandscapeNames landScapeName)  // connect to the landscape event
+        void OnLandscapeEnter(LandscapeNames landScapeName)  // connect to the landscape event
         {           
             foreach (LandBuffData land in allLandBuffs)
             {
@@ -106,6 +107,15 @@ namespace Quest
                 }
             }
         }
-
+        void OnLandscapeExit(LandscapeNames landScapeName)  // connect to the landscape event
+        {
+            foreach (LandBuffData land in allLandBuffs)
+            {
+                if (land.landscapeName == landScapeName)
+                {
+                    RemoveBuffFX(land);
+                }
+            }
+        }
     }
 }

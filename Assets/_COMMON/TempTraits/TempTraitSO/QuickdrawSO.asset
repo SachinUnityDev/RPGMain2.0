@@ -17,8 +17,8 @@ MonoBehaviour:
   temptraitBehavior: 1
   minCastTime: 3
   maxCastTime: 3
-  desc: 
+  traitNameStr: ' Quickdraw'
   iconSprite: {fileID: 0}
   allLines:
-  - 'when First Blood: +20% Dmg until eoc'
-  - 'when First Blood: +3 Acc until eoc'
+  - 'When First Blood: +20% Dmg until eoc'
+  - 'When First Blood: +3 Acc until eoc'

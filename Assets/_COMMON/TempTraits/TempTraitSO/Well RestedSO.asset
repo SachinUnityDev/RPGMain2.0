@@ -17,7 +17,7 @@ MonoBehaviour:
   temptraitBehavior: 2
   minCastTime: 1
   maxCastTime: 1
-  desc: 
+  traitNameStr: ' Well Rested'
   iconSprite: {fileID: 0}
   allLines:
-  - '+1 Utility stats '
+  - +1 Utility stats

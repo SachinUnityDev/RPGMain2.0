@@ -17,8 +17,8 @@ MonoBehaviour:
   temptraitBehavior: 2
   minCastTime: 6
   maxCastTime: 10
-  desc: 
+  traitNameStr: ' Arachnophobia'
   iconSprite: {fileID: 0}
   allLines:
-  - Double Fortitude loss vs Arachnids
+  - "+60% Fortitude loss vs Arachnids\t"
   - -3 Acc vs Arachnids

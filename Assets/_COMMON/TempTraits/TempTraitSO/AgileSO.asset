@@ -17,8 +17,8 @@ MonoBehaviour:
   temptraitBehavior: 1
   minCastTime: 3
   maxCastTime: 3
-  desc: 
+  traitNameStr: ' Agile'
   iconSprite: {fileID: 0}
   allLines:
-  - 2 Dodge
-  - 2 Acc
+  - +2 Dodge
+  - +2 Acc

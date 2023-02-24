@@ -17,8 +17,8 @@ MonoBehaviour:
   temptraitBehavior: 1
   minCastTime: 6
   maxCastTime: 6
-  desc: 
+  traitNameStr: ' Resilient'
   iconSprite: {fileID: 0}
   allLines:
-  - 'When Hp < 30%: +20 to All Res'
+  - 'When Hp < 30%: +16 to All Res'
   - 'When Hp < 30%: +30% Armor'

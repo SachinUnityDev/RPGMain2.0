@@ -17,7 +17,9 @@ MonoBehaviour:
   temptraitBehavior: 2
   minCastTime: -1
   maxCastTime: -1
-  desc: 
+  traitNameStr: ' Insane'
   iconSprite: {fileID: 0}
   allLines:
-  - 
+  - May act Insanely
+  - 'Physical Skills: +20% Dmg Mod'
+  - -50 All Res

@@ -17,7 +17,7 @@ MonoBehaviour:
   temptraitBehavior: 2
   minCastTime: 9
   maxCastTime: 12
-  desc: 
+  traitNameStr: ' Thanatophobia'
   iconSprite: {fileID: 0}
   allLines:
-  - 'When Last Drop of Blood: -3 to utility Stats'
+  - 'When Last Drop of Blood: -3 to Utility Stats'

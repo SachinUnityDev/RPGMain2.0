@@ -42,16 +42,16 @@ namespace Combat
             {
                 // clear old poison 
                 CharStatesService.Instance.ClearDOT(charController.gameObject, CharStateName.PoisonedLowDOT);
-               
+                // APPLY DAMAGE CONTROller 5-6 fortitude damage
+                charController.damageController.ApplyDamage(charController, CauseType.CharState, (int)charStateName
+                    , DamageType.FortitudeDmg, UnityEngine.Random.Range(5, 7), false);
             }
             
             ApplyRoundFX();
             CombatEventService.Instance.OnSOT += ApplyRoundFX;
             ApplyPoison();
 
-            // APPLY DAMAGE CONTROller 5-6 fortitude damage
-            charController.damageController.ApplyDamage(charController, CauseType.CharState, (int)charStateName
-                , DamageType.FortitudeDmg, UnityEngine.Random.Range(5, 7), false);
+    
             if (isBleeding)
             {
                 // 4-5 stamina Damage
@@ -128,7 +128,6 @@ namespace Combat
             base.EndState();
             CombatEventService.Instance.OnSOT -= ApplyRoundFX;
              
-
             // To be modified
 
             CharStatesService.Instance.RemoveImmunity(charController.gameObject, CharStateName.Shocked);

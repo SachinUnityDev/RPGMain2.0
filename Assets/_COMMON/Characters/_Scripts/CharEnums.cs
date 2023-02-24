@@ -123,30 +123,17 @@ public enum CharStateName
     Unslakable,
     Vanguard,
 }
-public enum CharStateType
+public enum CharStateBehavior
 {     
     Positive, 
     Negative, 
 }
-public enum CharStateClass
+public enum CharStateType
 {
     None,
-    Element_DoT,
-    Element_default,
-    Utility_pos,
-    Utility_neg,
-    Darklight_neg,
-    MaxRes,
-    Positioning,
-    HealthBars_full,
-    HealthBars_empty,
-    Rambo,
-    Survival,
-    BadHabit,
-    External,
-    Unstate,
-    SkillBased_se,
-    Skeletor,
+    BleedDOT,
+    BurnDOT,
+    PoisonDOT, 
 }
 
 public enum CharType

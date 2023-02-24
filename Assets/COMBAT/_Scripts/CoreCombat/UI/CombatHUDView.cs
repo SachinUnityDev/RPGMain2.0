@@ -190,8 +190,8 @@ namespace Combat
                 CharStateModel dataSO = charStateIconSO.allCharStatesModels.Find(x => x.charStateName == charInStates[i]);
                 CharStateModel charStateModel = CharStatesService.Instance.allCharStateModel
                                                 .Find(t => t.charStateName == charInStates[i]); 
-                CharStateType charStateType = CharStatesService.Instance.GetCharStateType(charInStates[i]);
-                k = (charStateType == CharStateType.Positive) ? 0 : 1;
+                CharStateBehavior charStateType = CharStatesService.Instance.GetCharStateType(charInStates[i]);
+                k = (charStateType == CharStateBehavior.Positive) ? 0 : 1;
 
                // Debug.Log("CHAR STATES " + data.charStateName);
                 if (i < 4)// level 1

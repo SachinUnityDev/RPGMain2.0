@@ -28,9 +28,9 @@ namespace Common
     {
         public CharStateName charStateName;
         public Sprite charStateSprite;
-        public CharStateType charStateType;
+        public CharStateBehavior charStatebehavior;
         public StateFor stateFor;
-        public CharStateClass charStateClass;
+        public CharStateType charStateClass;
         public TimeFrame timeFrame;
         public int castTime; //-5 for NA
         public GameObject CharStateFX;

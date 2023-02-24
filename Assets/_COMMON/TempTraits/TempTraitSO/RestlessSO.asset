@@ -17,7 +17,7 @@ MonoBehaviour:
   temptraitBehavior: 2
   minCastTime: 6
   maxCastTime: 10
-  desc: 
+  traitNameStr: ' Restless'
   iconSprite: {fileID: 0}
   allLines:
   - +2 Haste

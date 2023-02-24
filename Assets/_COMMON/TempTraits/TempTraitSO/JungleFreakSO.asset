@@ -17,7 +17,7 @@ MonoBehaviour:
   temptraitBehavior: 2
   minCastTime: 9
   maxCastTime: 12
-  desc: 
+  traitNameStr: ' Jungle Freak'
   iconSprite: {fileID: 0}
   allLines:
-  - -3 Morale in jungles
+  - -3 Morale in Jungle

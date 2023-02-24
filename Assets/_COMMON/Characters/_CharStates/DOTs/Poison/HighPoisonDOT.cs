@@ -33,16 +33,14 @@ namespace Common
 
             if (isPoisoned)
             {                
-                charController.charStateController.ClearDOT(CharStateName.PoisonedLowDOT); 
+                charController.charStateController.ClearDOT(CharStateName.PoisonedLowDOT);
+                charController.damageController.ApplyDamage(charController, CauseType.CharState, (int)charStateName
+                    , DamageType.FortitudeDmg, UnityEngine.Random.Range(5, 7), false);
             }
 
             ApplyRoundFX();
             CombatEventService.Instance.OnSOT += ApplyRoundFX;
-            ApplyPoison();
-
-            charController.damageController.ApplyDamage(charController, CauseType.CharState, (int)charStateName
-                      , DamageType.FortitudeDmg, UnityEngine.Random.Range(5, 7), false);
-
+            ApplyPoison();     
             if (isBleeding)
             {
                 // 4-5 stamina Damage

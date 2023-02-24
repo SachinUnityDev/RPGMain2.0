@@ -56,6 +56,8 @@ namespace Common
             itemController = gameObject.AddComponent<ItemController>();
             skillController = gameObject.AddComponent<SkillController1>();
             weaponController= gameObject.AddComponent<WeaponController>();
+            landscapeController= gameObject.AddComponent<LandscapeController>();    
+
 
             SkillService.Instance.allSkillControllers.Add(skillController);
             // CombatEventService.Instance.OnSOT += ()=> PopulateOverCharBars(false); 

@@ -17,7 +17,7 @@ MonoBehaviour:
   temptraitBehavior: 2
   minCastTime: 6
   maxCastTime: 10
-  desc: 
+  traitNameStr: ' Herpethophobia'
   iconSprite: {fileID: 0}
   allLines:
   - Double Fortitude loss vs Reptiles

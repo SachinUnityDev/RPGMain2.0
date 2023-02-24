@@ -17,8 +17,8 @@ MonoBehaviour:
   temptraitBehavior: 2
   minCastTime: 9
   maxCastTime: 12
-  desc: 
+  traitNameStr: ' Swampy Cramp'
   iconSprite: {fileID: 0}
   allLines:
-  - -2 Vigor in swamp
-  - -2 wp in swamp
+  - -2 Vigor in Swamp
+  - -2 Wp in Swamp

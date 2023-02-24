@@ -17,7 +17,9 @@ namespace Common
         public event Action<TempTraitData> OnTempTraitStart;
         public event Action<TempTraitData> OnTempTraitEnd;
 
-        public TempTraitsFactory temptraitsFactory; 
+        public TempTraitsFactory temptraitsFactory;
+
+        public AllTempTraitSO allTempTraitSO; 
         // Start is called before the first frame update
         /// <summary>
         /// get all temp trait controllers => temp traits controller to act as buff controller for temp traits

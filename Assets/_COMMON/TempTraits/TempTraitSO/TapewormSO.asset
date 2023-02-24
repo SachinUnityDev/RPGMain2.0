@@ -17,8 +17,8 @@ MonoBehaviour:
   temptraitBehavior: 2
   minCastTime: 6
   maxCastTime: 6
-  desc: 
+  traitNameStr: ' Tapeworm'
   iconSprite: {fileID: 0}
   allLines:
-  - "Upon consume Food: Half Hunger and Thirst relief\t"
+  - 'Upon consume Food: Half Hunger and Thirst relief'
   - -2 Vigor and Wp

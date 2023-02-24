@@ -17,8 +17,8 @@ MonoBehaviour:
   temptraitBehavior: 2
   minCastTime: -1
   maxCastTime: -1
-  desc: 
+  traitNameStr: ' Potion Addict'
   iconSprite: {fileID: 0}
   allLines:
-  - "+50% Hunger and Thirst\t\\"
-  - 'Upon consume Potion: -3 Hp'
+  - "+50% Hunger and Thirst\tUpon consume Potion: -3 Hp"
+  - 'If no Potion consumed for a quest: -2 Vigor for 1 day'

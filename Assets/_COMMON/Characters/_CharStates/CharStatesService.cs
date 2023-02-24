@@ -237,9 +237,9 @@ namespace Common
         }
 
         #region GETTERS
-        public CharStateType GetCharStateType(CharStateName _charStateName)  // Positive // negative
+        public CharStateBehavior GetCharStateType(CharStateName _charStateName)  // Positive // negative
         {
-            return charStateModelSO.allCharStatesModels.Find(t => t.charStateName == _charStateName).charStateType;
+            return charStateModelSO.allCharStatesModels.Find(t => t.charStateName == _charStateName).charStatebehavior;
         }
 
         #endregion

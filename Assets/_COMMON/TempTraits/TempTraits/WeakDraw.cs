@@ -8,8 +8,8 @@ namespace Common
 
     public class WeakDraw : TempTraitBase
     {
-        public override TempTraitName tempTraitName => TempTraitName.Weakdraw; 
-
+        public override TempTraitName tempTraitName => TempTraitName.Weakdraw;
+        //Always triggers min Ranged Physical Dmg
         public override void OnApply()
         {
             

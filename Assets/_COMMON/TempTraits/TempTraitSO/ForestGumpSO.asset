@@ -17,7 +17,7 @@ MonoBehaviour:
   temptraitBehavior: 2
   minCastTime: 9
   maxCastTime: 12
-  desc: 
+  traitNameStr: ' Forest Gump'
   iconSprite: {fileID: 0}
   allLines:
-  - -3 Focus in forests
+  - -3 Focus in Rainforest

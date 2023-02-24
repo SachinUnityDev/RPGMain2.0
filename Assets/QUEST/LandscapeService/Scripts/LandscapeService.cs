@@ -9,11 +9,14 @@ namespace Quest
 
     public class LandscapeService : MonoSingletonGeneric<LandscapeService>  
     {
-        public event Action<LandscapeNames> OnLandScapeChg; 
+        public event Action<LandscapeNames> OnLandscapeEnter;
+        public event Action<LandscapeNames> OnLandscapeExit;
 
-        public LandscapeModel landscapeModel; 
+        public LandscapeNames currLandscape; 
+
+        public List<LandscapeModel> allLandScapeModels = new List<LandscapeModel>();         
+        
         public List<LandscapeController> landscapeControllers; // distributed controller
         public LandScapeViewController LandScapeViewController; 
-
     }
 }

@@ -85,9 +85,10 @@ namespace Common
         void OnLeftBtnPressed()
         {
             if (Time.time - prevLeftClick < 0.3f) return; 
-            if (index <= 0)
+            if (index == 0)
             {
-                index = 0;
+                index = unLockedChars.Count-1;
+                PopulateCharScroll();
             }
             else
             {
@@ -98,10 +99,10 @@ namespace Common
         void OnRightBtnPressed()
         {
             if (Time.time - prevRightClick < 0.3f) return;
-            if (index >= unLockedChars.Count-1)
+            if (index == unLockedChars.Count-1)
             {
-              //  index = 0;
-                index = unLockedChars.Count-1;
+                index = 0; 
+                PopulateCharScroll();   
             }
             else
             {
@@ -125,10 +126,10 @@ namespace Common
 
         public int GetIndexOfChar(CharNames charName)
         {
-            int i = unLockedChars.FindIndex(t => t.charName == charName); 
-            if(i!= -1)
+            int i = unLockedChars.FindIndex(t => t.charName == charName);
+            if (i != -1)
                 return i;
-            else 
+            else
                 Debug.Log("CharIndex not found!");
             return 0;
         }
@@ -168,20 +169,20 @@ namespace Common
 
         public void Load()
         {
-            foreach (CharModel charModel in CharService.Instance.allyUnLockedCharModels)
+            foreach (CharModel charModel in CharService.Instance.allyUnLockedCompModels)
             {
                 CharService.Instance.GetCharCtrlWithName(charModel.charName); 
             }
            
             index = 0;
             gameObject.SetActive(true);
-            unLockedChars = CharService.Instance.allyUnLockedCharModels; 
+            unLockedChars = CharService.Instance.allyUnLockedCompModels; 
             PopulateCharScroll();
         }
 
         public void UnLoad()
         {
-            gameObject.SetActive(false);
+            UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
            
         }
 

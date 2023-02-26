@@ -15,37 +15,73 @@ MonoBehaviour:
   allLvlExpData:
   - charLvl: 1
     deltaExpPts: 0
-    totalExpPts: 9
+    totalExpPts: 0
+    clearMindCostAtThisLvl:
+      silver: 0
+      bronze: 0
   - charLvl: 2
     deltaExpPts: 60
-    totalExpPts: 69
+    totalExpPts: 60
+    clearMindCostAtThisLvl:
+      silver: 2
+      bronze: 3
   - charLvl: 3
     deltaExpPts: 90
-    totalExpPts: 159
+    totalExpPts: 150
+    clearMindCostAtThisLvl:
+      silver: 3
+      bronze: 6
   - charLvl: 4
     deltaExpPts: 120
-    totalExpPts: 279
+    totalExpPts: 270
+    clearMindCostAtThisLvl:
+      silver: 5
+      bronze: 0
   - charLvl: 5
     deltaExpPts: 180
-    totalExpPts: 459
+    totalExpPts: 450
+    clearMindCostAtThisLvl:
+      silver: 5
+      bronze: 10
   - charLvl: 6
     deltaExpPts: 240
-    totalExpPts: 699
+    totalExpPts: 690
+    clearMindCostAtThisLvl:
+      silver: 6
+      bronze: 6
   - charLvl: 7
     deltaExpPts: 300
-    totalExpPts: 999
+    totalExpPts: 990
+    clearMindCostAtThisLvl:
+      silver: 6
+      bronze: 6
   - charLvl: 8
     deltaExpPts: 390
-    totalExpPts: 1389
+    totalExpPts: 1380
+    clearMindCostAtThisLvl:
+      silver: 8
+      bronze: 0
   - charLvl: 9
     deltaExpPts: 480
-    totalExpPts: 1869
+    totalExpPts: 1860
+    clearMindCostAtThisLvl:
+      silver: 8
+      bronze: 4
   - charLvl: 10
     deltaExpPts: 570
-    totalExpPts: 2439
+    totalExpPts: 2430
+    clearMindCostAtThisLvl:
+      silver: 9
+      bronze: 0
   - charLvl: 11
     deltaExpPts: 700
-    totalExpPts: 3139
+    totalExpPts: 3130
+    clearMindCostAtThisLvl:
+      silver: 9
+      bronze: 0
   - charLvl: 12
     deltaExpPts: 850
-    totalExpPts: 3989
+    totalExpPts: 3980
+    clearMindCostAtThisLvl:
+      silver: 11
+      bronze: 0

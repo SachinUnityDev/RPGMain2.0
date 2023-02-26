@@ -78,7 +78,7 @@ namespace Common
 
             // change to buff 
             charController.charStateController.ApplyImmunityBuff(CauseType.CharState, (int)charStateName, charID
-               , CharStateName.Soaked, TimeFrame.Infinity, 1, true);            
+               , CharStateName.Soaked, TimeFrame.Infinity, 1);            
             charController.charStateController.ApplyDOTImmunityBuff(CauseType.CharState, (int)charStateName, charID
                , CharStateName.BleedLowDOT, TimeFrame.Infinity, 1, true);
             

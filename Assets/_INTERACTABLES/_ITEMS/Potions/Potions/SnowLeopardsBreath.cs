@@ -32,7 +32,7 @@ namespace Interactables
             int castTime = (int)UnityEngine.Random.Range(potionSO.minCastTime, potionSO.maxCastTime);
             int buffID=
             charController.GetComponent<CharStateController>().ApplyImmunityBuff(CauseType.Potions, (int)potionName, charID
-                                , CharStateName.Soaked, TimeFrame.EndOfRound , castTime, true); // TO BE FILLED 
+                                , CharStateName.Soaked, TimeFrame.EndOfRound , castTime); // TO BE FILLED 
             allBuffs.Add(buffID);
             // immune to soaked 
             buffID=

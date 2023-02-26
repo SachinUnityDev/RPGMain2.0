@@ -70,12 +70,12 @@ namespace Combat
           
             //  QuestEventService.Instance.OnDayChange
         }
-        void OnEnable()
+        void Start()
         {
             // should have feature of printing some data from skills directly
 
             CalendarService.Instance.OnStartOfDay += (int dayName) => ToggleBuffsOnStartOfTheDay();
-
+            CalendarService.Instance.OnStartOfDay += (int dayName) => ToggleBuffsOnStartOfTheNight();
         }
 
 

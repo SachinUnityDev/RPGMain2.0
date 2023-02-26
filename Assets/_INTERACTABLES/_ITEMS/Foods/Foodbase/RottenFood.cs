@@ -37,7 +37,7 @@ namespace Interactables
             if (chance1.GetChance())
             {
                 charController.charStateController.ApplyCharStateBuff(CauseType.Food, (int)foodName
-                    , charController.charModel.charID, CharStateName.PoisonedHighDOT, TimeFrame.Infinity, -1, false);
+                    , charController.charModel.charID, CharStateName.PoisonedHighDOT, TimeFrame.Infinity, -1);
             }
         }
         public void ApplyConsumableFX()

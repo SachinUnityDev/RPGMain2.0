@@ -32,7 +32,7 @@ namespace Interactables
 
             int buffID = 
             charController.GetComponent<CharStateController>().ApplyImmunityBuff(CauseType.Potions, (int)potionName, charID
-                                , CharStateName.PoisonedHighDOT, TimeFrame.EndOfRound, castTime, true);
+                                , CharStateName.PoisonedHighDOT, TimeFrame.EndOfRound, castTime);
             allBuffs.Add(buffID);
            
 

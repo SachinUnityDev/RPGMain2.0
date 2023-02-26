@@ -12,7 +12,7 @@ namespace Interactables
     {
         public CharNames charName;
         public GemNames gemName;
-        public WeaponState weaponState;       
+        public WeaponState weaponState;
 
         [Header("Weapon sprites")]
         public Sprite emptySlot;

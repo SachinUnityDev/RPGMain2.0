@@ -1,10 +1,20 @@
 using Interactables;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Management;
 using UnityEngine;
-
+using UnityEngine.UI; 
 namespace Interactables
 {
+    [Serializable]
+    public class WeaponStateImgNColor
+    {
+        public WeaponState weaponState;
+        public Sprite stateImg;
+        public Color stateColor; 
+    }
+
 
     [CreateAssetMenu(fileName = "AllWeaponSO", menuName = "Interactable/AllWeaponSO")]
     public class AllWeaponSO : ScriptableObject
@@ -15,7 +25,11 @@ namespace Interactables
 
         [Header("Enchant and Recharge Price")]
         public Currency enchantValue;
-        public Currency rechargeValue; 
+        public Currency rechargeValue;
+
+        [Header("Identify, enchant and recharge sprite")]
+        public List<WeaponStateImgNColor> allWeaponStateImgNColors = new List<WeaponStateImgNColor>();     
+
 
         public WeaponSO GetWeaponSO(CharNames charName)
         {
@@ -27,6 +41,16 @@ namespace Interactables
             return null; 
         }
 
-
+        public WeaponStateImgNColor GetWeaponStateSpecs(WeaponState weaponState)
+        {
+            int index =  allWeaponStateImgNColors.FindIndex(t=>t.weaponState== weaponState);
+            if(index != -1)
+                return allWeaponStateImgNColors[index];
+            else
+            {
+                Debug.Log("Weapon state specs not found"); 
+                return null;
+            }
+        }
     }
 }

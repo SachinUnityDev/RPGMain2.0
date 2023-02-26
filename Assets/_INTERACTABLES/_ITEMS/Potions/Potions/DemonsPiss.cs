@@ -32,7 +32,7 @@ namespace Interactables
             int castTime = (int)UnityEngine.Random.Range(potionSO.minCastTime, potionSO.maxCastTime);
             
            charController.GetComponent<CharStateController>().ApplyImmunityBuff(CauseType.Potions, (int)potionName, charID
-                               , CharStateName.BurnHighDOT, TimeFrame.EndOfRound, castTime, true);            
+                               , CharStateName.BurnHighDOT, TimeFrame.EndOfRound, castTime);            
 
             int buffId = charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
                      , StatsName.fireRes, Random.Range(24f, 37f), TimeFrame.EndOfRound, castTime, true);

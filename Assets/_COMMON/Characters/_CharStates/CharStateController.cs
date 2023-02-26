@@ -172,10 +172,8 @@ namespace Common
         {
             foreach (CharStateBuffData charStateBuffData in allCharStateBuffs)
             {
-                if (charStateBuffData.isBuff)
-                {
-                   // buffStrs.Add(.directString);//// get strings from SO
-                }
+
+
             }
             return buffStrs;
         }

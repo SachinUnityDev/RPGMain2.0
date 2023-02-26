@@ -32,12 +32,12 @@ namespace Common
 
         private void Awake()
         {
-            int accExp = 0; 
-            for (int i = 0; i < allLvlExpData.Count; i++)
-            {
-                accExp += allLvlExpData[i].deltaExpPts;
-                allLvlExpData[i].totalExpPts = accExp;
-            }
+            //int accExp = 0; 
+            //for (int i = 0; i < allLvlExpData.Count; i++)
+            //{
+            //    accExp += allLvlExpData[i].deltaExpPts;
+            //    allLvlExpData[i].totalExpPts = accExp;
+            //}
          
         }
     }

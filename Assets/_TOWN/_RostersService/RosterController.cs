@@ -16,7 +16,7 @@ namespace Common
         [SerializeField] List<CharModel> allCharUnLocked; 
         public List<CharModel> GetCharAvailableInTown(LocationName location)
         {
-            List<CharModel> allCharInTown = CharService.Instance.allyUnLockedCharModels 
+            List<CharModel> allCharInTown = CharService.Instance.allyUnLockedCompModels 
                         .Where(t => t.currCharLoc == location).ToList();
             return allCharInTown;
         }

@@ -24,3 +24,19 @@ MonoBehaviour:
   rechargeValue:
     silver: 1
     bronze: 9
+  allWeaponStateImgNColors:
+  - weaponState: 1
+    stateImg: {fileID: 21300000, guid: f094514505066d247ab07bb80e6cc866, type: 3}
+    stateColor: {r: 0.8156863, g: 0.75686276, b: 0.6862745, a: 1}
+  - weaponState: 2
+    stateImg: {fileID: 21300000, guid: ab99240b098dccc45811de339a3d378d, type: 3}
+    stateColor: {r: 1, g: 0.84313726, b: 0.6627451, a: 1}
+  - weaponState: 3
+    stateImg: {fileID: 21300000, guid: 09d632e10fc6ce647b098f53a92f9aff, type: 3}
+    stateColor: {r: 1, g: 0.5921569, b: 0.11372549, a: 1}
+  - weaponState: 4
+    stateImg: {fileID: 21300000, guid: a0696f9086e3263468589f597fdff466, type: 3}
+    stateColor: {r: 0.8156863, g: 0.5058824, b: 0.14901961, a: 1}
+  - weaponState: 0
+    stateImg: {fileID: 21300000, guid: 09d632e10fc6ce647b098f53a92f9aff, type: 3}
+    stateColor: {r: 0.67058825, g: 0.49411765, b: 0.5176471, a: 1}

@@ -39,8 +39,8 @@ namespace Common
 
         [Header("Specific Sub list of Chars/ Allies")]
         public List<CharController> allyInPlayControllers;
-        public List<CharModel> allyUnLockedCharModels;// char Unlocked in the game
-        public List<CharModel> allAvailCharsModels;
+        public List<CharModel> allyUnLockedCompModels;// char Unlocked in the game
+        public List<CharModel> allAvailCompModels;
         
         public List<CharController> allCharsInParty; // on party Locked and Set 
 
@@ -130,7 +130,7 @@ namespace Common
 
         public CharModel GetAllyCharModel(CharNames charName)
         {          
-            CharModel charModel = allyUnLockedCharModels
+            CharModel charModel = allyUnLockedCompModels
                             .Find(t => t.charName == charName);
             if (charModel != null)
                 return charModel;
@@ -155,15 +155,16 @@ namespace Common
                     charsInPlayControllers.Add(charCtrl);
                     allyInPlay.Add(charGO);    
                     charsInPlay.Add(charGO);
-                
+
+           
 
                     if(c.availOfChar == AvailOfChar.Available)
                     {
-                        allAvailCharsModels.Add(charCtrl.charModel);                               
+                        allAvailCompModels.Add(charCtrl.charModel);                               
                     }
                     if(c.stateOfChar == StateOfChar.UnLocked)
                     {
-                        allyUnLockedCharModels.Add(charCtrl.charModel);
+                        allyUnLockedCompModels.Add(charCtrl.charModel);
                     }
 
                     LevelService.Instance.LevelUpInit(charCtrl);              
@@ -187,14 +188,19 @@ namespace Common
             allyInPlayControllers.Add(charController);
             charsInPlay.Add(go);
             allyInPlay.Add(go);
-            if (charModel.availOfChar == AvailOfChar.Available)
+            if (charController.charModel.charName != CharNames.Abbas_Skirmisher)
             {
-                allAvailCharsModels.Add(charController.charModel);
+                if (charModel.availOfChar == AvailOfChar.Available)
+                {
+                    allAvailCompModels.Add(charController.charModel);
+                }
+                if (charModel.stateOfChar == StateOfChar.UnLocked)
+                {
+                    allyUnLockedCompModels.Add(charController.charModel);
+                }
             }
-            if (charModel.stateOfChar == StateOfChar.UnLocked)
-            {
-                allyUnLockedCharModels.Add(charController.charModel);
-            }
+              
+            
 
           //  LevelService.Instance.LevelUpInit(charController);
 

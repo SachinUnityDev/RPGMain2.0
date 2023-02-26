@@ -16,4 +16,4 @@ MonoBehaviour:
   gemName: 2
   weaponState: 1
   emptySlot: {fileID: 21300000, guid: ff3c71aa4ca44ff46bcac579736f99ac, type: 3}
-  weaponSprite: {fileID: 0}
+  weaponSprite: {fileID: 21300000, guid: ff3c71aa4ca44ff46bcac579736f99ac, type: 3}

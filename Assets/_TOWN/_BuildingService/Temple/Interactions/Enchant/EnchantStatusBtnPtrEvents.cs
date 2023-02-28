@@ -19,6 +19,8 @@ namespace Common
         //? => unidentified to identify
         // hand icon => indentify to enchant
         // lighting bolt => rechanrgeable to enchant 
+        EnchantView enchantView;
+
         [SerializeField] Image btnImg;
         [SerializeField] TextMeshProUGUI weaponStateTxt;
         [SerializeField] Transform rechargeCostTrans;
@@ -27,8 +29,9 @@ namespace Common
         [SerializeField] WeaponStateImgNColor weaponStateImgNColor; 
 
 
-       [SerializeField] CharNames charName;
+        [SerializeField] CharNames charName;
         [SerializeField] WeaponState weaponState;
+        [SerializeField] WeaponModel weaponModel;
         [SerializeField] Currency rechargeCost;
 
         private void Awake()
@@ -38,10 +41,12 @@ namespace Common
             rechargeCostTrans = transform.GetChild(2); 
             rechargeCostTxt =  rechargeCostTrans.GetChild(0).GetComponent<TextMeshProUGUI>();
         }
-
-        public void InitBtnEvents(CharNames charName, WeaponModel weaponModel)
+     
+        public void InitBtnEvents(CharNames charName, WeaponModel weaponModel, EnchantView enchantView)
         {
+            this.enchantView = enchantView;
             this.charName = charName;
+           this.weaponModel = weaponModel; 
             weaponState = weaponModel.weaponState;
             weaponStateImgNColor 
                 = WeaponService.Instance.allWeaponSO.GetWeaponStateSpecs(weaponModel.weaponState);
@@ -78,11 +83,49 @@ namespace Common
             rechargeCostTrans.GetChild(1).GetComponent<DisplayCurrency>().Display(rechargeCost);
         }
 
-        public void OnPointerClick(PointerEventData eventData)
+        void OnEnchantBtnPressed()
         {
+            int stashCurr = EcoServices.Instance.GetMoneyAmtInPlayerStash().DeepClone().BronzifyCurrency(); 
 
+            switch (weaponState)
+            {
+                case WeaponState.UnEnchantable:
+                    return; 
+                case WeaponState.Unidentified:
+                    if(stashCurr >= rechargeCost.BronzifyCurrency())
+                    {
+                        weaponModel.weaponState = WeaponState.Identified;
+                        enchantView.FillCharPlanks(); // check stack overflow here               
+                    }
+                    break;
+                case WeaponState.Identified:
+                    if (stashCurr > rechargeCost.BronzifyCurrency())
+                    {
+                        weaponModel.weaponState = WeaponState.Enchanted;
+                        EcoServices.Instance.DebitPlayerStash(rechargeCost);
+                        enchantView.FillCharPlanks();
+                    }
+                    break;
+                case WeaponState.Enchanted:
+                    break;
+                    
+                case WeaponState.Rechargeable:
+                    if (stashCurr > rechargeCost.BronzifyCurrency() && weaponModel.IsChargeZero())
+                    {
+                        weaponModel.weaponState = WeaponState.Enchanted;
+                        EcoServices.Instance.DebitPlayerStash(rechargeCost);
+                        enchantView.FillCharPlanks();
+                    }
+                    break;
+                default:
+                    break;                    
+            }
         }
 
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            OnEnchantBtnPressed();
+        }
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (weaponState == WeaponState.Enchanted) return;

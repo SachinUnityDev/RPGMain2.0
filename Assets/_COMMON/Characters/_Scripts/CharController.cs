@@ -52,12 +52,13 @@ namespace Common
         {          
            // charController = gameObject?.GetComponent<CharController>(); // deprecated 
             buffController=  gameObject.AddComponent<BuffController>();
-            charStateController = gameObject.AddComponent<CharStateController>();
+        
             itemController = gameObject.AddComponent<ItemController>();
             skillController = gameObject.AddComponent<SkillController1>();
             weaponController= gameObject.AddComponent<WeaponController>();
             landscapeController= gameObject.AddComponent<LandscapeController>();    
-
+            tempTraitController= gameObject.AddComponent<TempTraitController>();
+            charStateController = gameObject.AddComponent<CharStateController>();
 
             SkillService.Instance.allSkillControllers.Add(skillController);
             // CombatEventService.Instance.OnSOT += ()=> PopulateOverCharBars(false); 

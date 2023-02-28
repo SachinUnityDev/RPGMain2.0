@@ -48,12 +48,12 @@ namespace Combat
         void Start()
         {
           
-            // TEMP TRAITS 
-            TempTraitService.Instance.OnTempTraitStart += PrintTempTraitStart;
-            TempTraitService.Instance.OnTempTraitEnd += PrintTempTraitEnd;
+            //// TEMP TRAITS 
+            //TempTraitService.Instance.OnTempTraitStart += PrintTempTraitStart;
+            //TempTraitService.Instance.OnTempTraitEnd += PrintTempTraitEnd;
 
-            // PERMANENT TRAITS 
-            PermanentTraitsService.Instance.OnPermaTraitAdded += PrintPermaTraitAdded;
+            //// PERMANENT TRAITS 
+            //PermanentTraitsService.Instance.OnPermaTraitAdded += PrintPermaTraitAdded;
        
             // COMBAT EVENT START EVENTS
             CombatEventService.Instance.OnSOC += StartOfCombat;
@@ -241,18 +241,18 @@ namespace Combat
             RefreshCombatLogUI();
         }
 
-        void PrintPermaTraitAdded(PermaTraitData permaTraitData)
-        {
+        //void PrintPermaTraitAdded(PermaTraitData permaTraitData)
+        //{
 
-        }
-        void PrintTempTraitEnd(TempTraitData tempTraitData)
-        {
+        //}
+        //void PrintTempTraitEnd(TempTraitData tempTraitData)
+        //{
 
-        }
-        void PrintTempTraitStart(TempTraitData tempTraitData)
-        {
+        //}
+        //void PrintTempTraitStart(TempTraitData tempTraitData)
+        //{
 
-        }
+        //}
 
 
     }

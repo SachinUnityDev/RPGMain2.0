@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 
 namespace Interactables
 {
- 
+    [Serializable]
     public class WeaponModel
     {   
         public CharNames charName;
@@ -20,6 +21,14 @@ namespace Interactables
             this.weaponState = weaponSO.weaponState;
             chargeRemaining = 0; 
         }
+
+        public bool IsChargeZero()
+        {
+            if (chargeRemaining == 0)
+                return true;
+            else
+                return false; 
+        }
     }
     public enum WeaponState
     {
@@ -28,7 +37,6 @@ namespace Interactables
         Identified, 
         Enchanted, 
         Rechargeable, // 0 charge 
-
     }
   
 

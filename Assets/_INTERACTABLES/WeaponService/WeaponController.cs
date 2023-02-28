@@ -29,6 +29,18 @@ namespace Interactables
                 return false;   
         }
 
+        public void OnWeaponSkillUsed()
+        {
+            if (weaponModel.weaponState != WeaponState.Enchanted)
+                return; 
+
+            weaponModel.chargeRemaining--; 
+            if(weaponModel.chargeRemaining == 0)
+            {
+                weaponModel.weaponState= WeaponState.Rechargeable;
+            }
+        }
+
         // can be doen in temple or upon reading the scroll in inventory
         public bool EnchantWeapon(GemNames gemName)
         {           

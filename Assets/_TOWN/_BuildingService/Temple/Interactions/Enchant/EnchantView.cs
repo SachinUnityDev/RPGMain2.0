@@ -8,17 +8,10 @@ using Town;
 
 public class EnchantView : MonoBehaviour, IPanel
 {
-    /// <summary>
-    /// get details from the weapon panels
-    /// get weapon SO... for btns and weapon state update 
-    /// 
-    /// </summary>
-    /// 
     [Header("left right panels")]
     [SerializeField] Button leftBtn;
     [SerializeField] Button rightBtn;
-    //public Transform leftCharPanel;
-    //public Transform rightGemPanel;
+
 
     [SerializeField] Button closeBtn;
 
@@ -26,24 +19,17 @@ public class EnchantView : MonoBehaviour, IPanel
     [SerializeField] Transform centerTrans;
     [SerializeField] Transform enchantSlot;
 
-
     [Header("btm currency and status update btn")]
     [SerializeField] Transform statusBtn;
     [SerializeField] Transform stashCurrency;
 
-
     [Header("Curr Selects")]
-    [SerializeField] WeaponSO weaponSO;
-    [SerializeField] WeaponModel weaponModel;   
     [SerializeField] CharNames charSelect;
 
     [Header("char Scroll var")]
     [SerializeField] int index;
     [SerializeField] float prevLeftClick;
     [SerializeField] float prevRightClick;  
-
-    //public List<CharModel> allCharWithWeaponSkill = new List<CharModel>();
-     
     private void Start()
     {
         leftBtn.onClick.AddListener(OnLeftBtnPressed); 
@@ -56,7 +42,7 @@ public class EnchantView : MonoBehaviour, IPanel
         if (Time.time - prevLeftClick < 0.3f) return;   
         if (index == 0)
         {
-            index = CharService.Instance.allAvailCompModels.Count - 1;
+            index = CharService.Instance.allCharModels.Count - 1;
             FillCharPlanks(); 
         }
         else if(index > 0)
@@ -68,7 +54,7 @@ public class EnchantView : MonoBehaviour, IPanel
     void OnRightBtnPressed()
     {
         if (Time.time - prevRightClick < 0.3f) return;
-        if (index == CharService.Instance.allAvailCompModels.Count - 1)
+        if (index == CharService.Instance.allCharModels.Count - 1)
         {
             index = 0;
             FillCharPlanks();
@@ -80,9 +66,9 @@ public class EnchantView : MonoBehaviour, IPanel
         prevRightClick = Time.time;
     }
 
-    void FillCharPlanks()
+    public void FillCharPlanks()
     {
-        CharNames selectChar = CharService.Instance.allAvailCompModels[index].charName;
+        CharNames selectChar = CharService.Instance.allCharModels[index].charName;
         BuildingIntService.Instance.selectChar = selectChar; 
 
         CharController charController = CharService.Instance.GetCharCtrlWithName(selectChar);
@@ -90,8 +76,8 @@ public class EnchantView : MonoBehaviour, IPanel
         WeaponModel weaponModel = weaponController.weaponModel;
 
         centerTrans.GetComponent<EnchantWeaponView>().InitWeaponPanel(selectChar, weaponModel, this);      
-        statusBtn.GetComponent<EnchantStatusBtnPtrEvents>().InitBtnEvents(selectChar, weaponModel);
-       
+        statusBtn.GetComponent<EnchantStatusBtnPtrEvents>().InitBtnEvents(selectChar, weaponModel, this);
+        FillStashMoney();
     }
 
     void closeBtnPressed() 
@@ -102,43 +88,39 @@ public class EnchantView : MonoBehaviour, IPanel
     public void Init()
     {
         index = 0;
-        FillCharPlanks();
-        FillStashMoney();
-
+      
     }
 
     public void Load()
     {
-       Init();
-        
+        index = 0;
+        FillCharPlanks();
     }
     void FillStashMoney()
     {
-        Currency curr = EcoServices.Instance.GetMoneyAmtInPlayerStash().DeepClone(); 
-             
+        Currency curr = EcoServices.Instance.GetMoneyAmtInPlayerStash().DeepClone();              
         stashCurrency.GetComponent<DisplayCurrency>().Display(curr); 
     }
    
-
     public void UnLoad()
     {
-        
+        UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);    
     }
 
 
 
 
-    void Populate()
-    {
+    //void Populate()
+    //{
 
-        charSelect = BuildingIntService.Instance.selectChar;
-        weaponSO = WeaponService.Instance.allWeaponSO.GetWeaponSO(charSelect);
-        weaponModel = WeaponService.Instance.GetWeaponModel(charSelect);
-        // get char sprite
-        // get weapon state
+    //    charSelect = BuildingIntService.Instance.selectChar;
+    //    weaponSO = WeaponService.Instance.allWeaponSO.GetWeaponSO(charSelect);
+    //    weaponModel = WeaponService.Instance.GetWeaponModel(charSelect);
+    //    // get char sprite
+    //    // get weapon state
 
 
-    }
+    //}
 
     
 }

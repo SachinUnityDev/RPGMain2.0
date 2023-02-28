@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Town;
 using UnityEngine;
 
 namespace Interactables
@@ -32,8 +33,16 @@ namespace Interactables
         }
         public void SubMoney(Currency curr)
         {
-            silver -= curr.silver;
-            bronze -= curr.bronze;
+            int bronzifyCurr = curr.BronzifyCurrency(); 
+            int bronzifyStash = this.BronzifyCurrency();
+            int finalBronze = bronzifyStash- bronzifyCurr;
+            Currency finalCurr = new Currency(0, finalBronze); 
+            finalCurr= finalCurr.RationaliseCurrency();
+
+            this.silver = finalCurr.silver; 
+            this.bronze = finalCurr.bronze;
+            //silver -= curr.silver;
+            //bronze -= curr.bronze;
         }
     }
 

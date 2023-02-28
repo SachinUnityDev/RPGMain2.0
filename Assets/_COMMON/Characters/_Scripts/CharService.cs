@@ -9,10 +9,11 @@ namespace Common
 {
     public class CharService : MonoSingletonGeneric<CharService>, ISaveableService
     {
-        public event Action<CharNames> OnCharAddedToParty; 
+        public event Action<CharNames> OnCharAddedToParty;
 
 
         [Header("Character Scriptables")]
+        public AllCharSO allCharSO; 
         public List<CharacterSO> allAllySO = new List<CharacterSO>();
         public List<NPCSO> allNPCSO = new List<NPCSO>();
 
@@ -25,7 +26,7 @@ namespace Common
         public CharComplimentarySO charComplimentarySO;
 
         [Header("ALL Loaded char models")]
-        public List <CharModel> allLoadedCharModel = new List<CharModel>();// to be populated by charCtrl
+        public List <CharModel> allCharModels = new List<CharModel>();// to be populated by charCtrl
 
         [Header("GO list")]
         public List<GameObject> allyInPlay;       
@@ -142,34 +143,34 @@ namespace Common
 #endregion
 
        
-        public void CreateAllAlliesCtrls()
-        {
+        //public void CreateAllAlliesCtrls()
+        //{
             
-            foreach (CharacterSO c in allAllySO)
-            {
-                    GameObject charGO = new GameObject();
-                    CharController charCtrl = charGO.AddComponent<CharController>();
-                    charCtrl.InitiatizeController(c);
-                    Debug.Log("Name1 " +charCtrl.charModel.charName); 
-                    allyInPlayControllers.Add(charCtrl);
-                    charsInPlayControllers.Add(charCtrl);
-                    allyInPlay.Add(charGO);    
-                    charsInPlay.Add(charGO);
+        //    foreach (CharacterSO c in allAllySO)
+        //    {
+        //            GameObject charGO = new GameObject();
+        //            CharController charCtrl = charGO.AddComponent<CharController>();
+        //            charCtrl.InitiatizeController(c);
+        //            Debug.Log("Name1 " +charCtrl.charModel.charName); 
+        //            allyInPlayControllers.Add(charCtrl);
+        //            charsInPlayControllers.Add(charCtrl);
+        //            allyInPlay.Add(charGO);    
+        //            charsInPlay.Add(charGO);
 
            
 
-                    if(c.availOfChar == AvailOfChar.Available)
-                    {
-                        allAvailCompModels.Add(charCtrl.charModel);                               
-                    }
-                    if(c.stateOfChar == StateOfChar.UnLocked)
-                    {
-                        allyUnLockedCompModels.Add(charCtrl.charModel);
-                    }
+        //            if(c.availOfChar == AvailOfChar.Available)
+        //            {
+        //                allAvailCompModels.Add(charCtrl.charModel);                               
+        //            }
+        //            if(c.stateOfChar == StateOfChar.UnLocked)
+        //            {
+        //                allyUnLockedCompModels.Add(charCtrl.charModel);
+        //            }
 
-                    LevelService.Instance.LevelUpInit(charCtrl);              
-            }
-        }
+        //            LevelService.Instance.LevelUpInit(charCtrl);              
+        //    }
+        //}
 
      
         public CharController SpawnCompanions(CharNames charName)  // character factory 
@@ -186,17 +187,20 @@ namespace Common
             CharModel charModel = charController.InitiatizeController(charSO);
             charsInPlayControllers.Add(charController);
             allyInPlayControllers.Add(charController);
+            
             charsInPlay.Add(go);
             allyInPlay.Add(go);
-            if (charController.charModel.charName != CharNames.Abbas_Skirmisher)
+            allCharModels.Add(charModel);
+
+            if (charModel.charName != CharNames.Abbas_Skirmisher)
             {
                 if (charModel.availOfChar == AvailOfChar.Available)
                 {
-                    allAvailCompModels.Add(charController.charModel);
+                    allAvailCompModels.Add(charModel);
                 }
                 if (charModel.stateOfChar == StateOfChar.UnLocked)
                 {
-                    allyUnLockedCompModels.Add(charController.charModel);
+                    allyUnLockedCompModels.Add(charModel);
                 }
             }
               
@@ -282,7 +286,7 @@ namespace Common
 
         public void RestoreState()
         {
-            allLoadedCharModel.Clear();
+            allCharModels.Clear();
             string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelect.ToString()
                + "/Char/charModels.txt";
 
@@ -298,7 +302,7 @@ namespace Common
                     Debug.Log($"CHAR: {modelStr}");                   
                     if (String.IsNullOrEmpty(modelStr)) continue; // eliminate blank string
                       CharModel charModel = JsonUtility.FromJson<CharModel>(modelStr);
-                    allLoadedCharModel.Add(charModel);
+                    allCharModels.Add(charModel);
                    // LoadCharControllers(charModel);
                     Debug.Log(charModel.charName);    
                 }
@@ -311,7 +315,7 @@ namespace Common
 
         public CharModel LoadCharModel(CharNames charName)
         {
-            CharModel charModel = allLoadedCharModel.Find(t => t.charName == charName);
+            CharModel charModel = allCharModels.Find(t => t.charName == charName);
             if (charModel != null)
                 return charModel;
             else

@@ -10,6 +10,7 @@ namespace Town
 {
     public class EnchantWeaponView : MonoBehaviour,  IPointerEnterHandler, IPointerExitHandler
     {
+       
         [SerializeField] Image weaponImg; 
         
         EnchantView enchantView;
@@ -18,7 +19,10 @@ namespace Town
 
 
         [SerializeField] Transform leftCharPanel;
-        [SerializeField] Transform rightGemPanel; 
+        [SerializeField] Transform rightGemPanel;
+
+        [SerializeField] Transform weaponSlotTrans;
+
         private void Awake()
         {
             weaponImg = transform.GetChild(0).GetComponent<Image>();          
@@ -30,7 +34,17 @@ namespace Town
             this.selectChar = selectChar;
 
             WeaponSO weaponSO = WeaponService.Instance.allWeaponSO.GetWeaponSO(selectChar);
-            weaponImg.sprite = weaponSO.weaponSprite;           
+            weaponImg.sprite = weaponSO.weaponSprite;
+
+           if( weaponModel.weaponState == WeaponState.Enchanted || weaponModel.weaponState == WeaponState.Rechargeable)
+           {
+                weaponSlotTrans.GetChild(0).gameObject.SetActive(true);
+                GemSO gemSO = ItemService.Instance.GetGemSO(weaponModel.gemName); 
+                weaponSlotTrans.GetChild(0).GetComponent<Image>().sprite = gemSO.iconSprite;
+           }else
+           {
+                weaponSlotTrans.GetChild(0).gameObject.SetActive(false);
+           }
         }
 
         void ShowRightLeftPanel()

@@ -27,13 +27,15 @@ namespace Town
 
         [SerializeField] Button clearMindBtn; 
 
-
         [Header("char Scroll var")]
         [SerializeField] int index;
         [SerializeField] float prevLeftClick;
         [SerializeField] float prevRightClick;
         [SerializeField] Image charImg;
         [SerializeField] TextMeshProUGUI nameTxt;
+
+        [Header("Money requrired")]
+        [SerializeField] Transform currTrans; 
 
         [Header("Global var")]
         public List<TempTraitModel> posMentalTraits= new List<TempTraitModel>();
@@ -84,7 +86,6 @@ namespace Town
         {
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
         }
-
         public void OnClearMindPressed()
         {
             GetMentalTraits();
@@ -151,8 +152,6 @@ namespace Town
                         posTraitTrans.GetChild(i).gameObject.SetActive(false);
                     }
                 }
-            
-         
                 for (int i = 0; i < 3; i++)
                 {
                     if (i < negMentalTraits.Count)
@@ -175,8 +174,11 @@ namespace Town
         }
         void FillStashMoney()
         {
-            Currency curr = EcoServices.Instance.GetMoneyAmtInPlayerStash().DeepClone();
-          //  stashCurrency.GetComponent<DisplayCurrency>().Display(curr);
+            LvlNExpSO lvlExpSO = CharService.Instance.lvlNExpSO;
+            Currency amtReq = lvlExpSO
+                    .ClearMindMoneyNeeded(tempTraitController.charController.charModel.charLvl);
+
+            currTrans.GetChild(0).GetComponent<DisplayCurrency>().Display(amtReq);
         }
         public void Init()
         {

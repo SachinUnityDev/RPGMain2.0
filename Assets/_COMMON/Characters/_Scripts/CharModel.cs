@@ -206,7 +206,7 @@ namespace Common
             expPoints = _charSO.expPoints;             
             jobExp  = _charSO.jobExp;
             skillPts = _charSO.skillPts;
-
+            charLvl = _charSO.charLvl;
           
             // Fame behavior
             fameBehavior = _charSO.fameBehavior;

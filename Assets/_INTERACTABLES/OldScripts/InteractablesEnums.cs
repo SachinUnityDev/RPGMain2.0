@@ -31,6 +31,15 @@ namespace Interactables
             bronze += curr.bronze; 
 
         }
+        public bool IsMoneySufficent(Currency curr)
+        {
+            int bronzifyCurr = curr.BronzifyCurrency();
+            int bronifyStash = this.BronzifyCurrency(); 
+            if(bronifyStash >= bronzifyCurr)
+                return true;
+            else
+                return false; 
+        }
         public void SubMoney(Currency curr)
         {
             int bronzifyCurr = curr.BronzifyCurrency(); 
@@ -40,9 +49,7 @@ namespace Interactables
             finalCurr= finalCurr.RationaliseCurrency();
 
             this.silver = finalCurr.silver; 
-            this.bronze = finalCurr.bronze;
-            //silver -= curr.silver;
-            //bronze -= curr.bronze;
+            this.bronze = finalCurr.bronze;       
         }
     }
 

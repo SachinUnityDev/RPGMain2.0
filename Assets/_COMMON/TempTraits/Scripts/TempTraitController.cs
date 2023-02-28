@@ -18,7 +18,7 @@ namespace Common
         public List<TempTraitBase> allTempTraitAppliedBase = new List<TempTraitBase>();   
         [SerializeField] List<string> allTempTraitsStr = new List<string>();
       
-        CharController charController;
+        public CharController charController;
         int traitID =-1;
         /// <summary>
         ///  You can have 3 sickness.If you trigger 1 more sickness when already have 3

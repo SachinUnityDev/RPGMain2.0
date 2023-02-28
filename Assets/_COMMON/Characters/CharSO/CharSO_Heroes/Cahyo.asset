@@ -27,7 +27,7 @@ MonoBehaviour:
   expPoints: 50
   jobExp: 0
   skillPts: 0
-  charLvl: 1
+  charLvl: 2
   charNameStr: Cahyo
   availOfChar: 1
   stateOfChar: 2

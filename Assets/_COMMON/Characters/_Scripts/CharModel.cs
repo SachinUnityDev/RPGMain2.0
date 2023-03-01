@@ -108,7 +108,7 @@ namespace Common
         public int lootBonus = 0;
         public StatData staminaRegen = new StatData();
         public StatData HpRegen = new StatData(); 
-        public List<PermanentTraitName> permanentTraitList;
+        public List<PermTraitName> permanentTraitList;
 
         [Header("Grid related")]
         public CharOccupies _charOccupies;
@@ -131,7 +131,7 @@ namespace Common
 
 
         [Header("States & Traits _LIST")]
-        public List<PermanentTraitName> InPermaTraitList = new List<PermanentTraitName>();
+        public List<PermTraitName> InPermaTraitList = new List<PermTraitName>();
         public List<CharStateName> InCharStatesList = new List<CharStateName>();
         public List<TempTraitName> InTempTraitList = new List<TempTraitName>();
 

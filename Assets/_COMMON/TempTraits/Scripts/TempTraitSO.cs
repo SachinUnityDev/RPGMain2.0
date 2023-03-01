@@ -11,7 +11,7 @@ namespace Common
     {
         public TempTraitName tempTraitName;
         public TempTraitType tempTraitType;
-        public TraitBehaviour temptraitBehavior;
+        public traitBehaviour temptraitBehavior;
 
         public int minCastTime;
         public int maxCastTime;

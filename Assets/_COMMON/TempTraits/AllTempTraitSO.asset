@@ -60,3 +60,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ac4bd5c84ec98c741aad35afc823f406, type: 2}
   - {fileID: 11400000, guid: 9bd091bb48f94044fbec2e2f7ff87316, type: 2}
   - {fileID: 11400000, guid: 33e257c0c980f36468fd23acce769ce4, type: 2}
+  negTraitCardTop: {fileID: 21300000, guid: 4bae53aebaa2bc043a5f521404de38b7, type: 3}
+  negTraitCardBtm: {fileID: 21300000, guid: bf6201cd6337db941ab9c7b36cf6398a, type: 3}
+  posTraitCardTop: {fileID: 21300000, guid: daefc7c405ca1084ab938f21f7bbc89e, type: 3}
+  posTraitCardBtm: {fileID: 21300000, guid: 0630ff4c809db7048ae336f56be64e14, type: 3}
+  minusSign: {fileID: 21300000, guid: e7b4716e9f0edd340b5a73689975554d, type: 3}
+  plusSign: {fileID: 21300000, guid: 697b1eba83e06794b828a4f6ddc449d2, type: 3}

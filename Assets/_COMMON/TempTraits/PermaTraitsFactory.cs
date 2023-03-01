@@ -11,8 +11,8 @@ namespace Common
    
      public abstract class PermTraitBase : MonoBehaviour
     {
-        public virtual PermanentTraitName permTraitName { get; set; }
-        public virtual TraitBehaviour traitBehaviour { get; set; }
+        public virtual PermTraitName permTraitName { get; set; }
+        public virtual traitBehaviour traitBehaviour { get; set; }
 
         public virtual int charID { get; set; }
 
@@ -25,7 +25,7 @@ namespace Common
 
     public class PermaTraitsFactory : MonoBehaviour
     {
-        public Dictionary<PermanentTraitName, Type> allPermTraits = new Dictionary<PermanentTraitName, Type>();
+        public Dictionary<PermTraitName, Type> allPermTraits = new Dictionary<PermTraitName, Type>();
         public Dictionary<TempTraitName, Type> allTempTraits;
 
         void Awake()
@@ -57,7 +57,7 @@ namespace Common
         }
 
         //ADD
-        public void AddPermTrait(PermanentTraitName permaTraitName, GameObject go)
+        public void AddPermTrait(PermTraitName permaTraitName, GameObject go)
         {
             if (allPermTraits.ContainsKey(permaTraitName))
             {

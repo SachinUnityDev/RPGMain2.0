@@ -32,7 +32,7 @@ namespace Interactables
         [Header("Not to be referenced")]
         public InvRightViewController invViewController; // ref
         public GameObject invPanel;
-        public bool isInvPanelOpen; 
+        public bool isInvPanelOpen; // to track inv panel
 
         [Header("Stash Inv : to be ref")]
         public StashInvViewController stashInvViewController;

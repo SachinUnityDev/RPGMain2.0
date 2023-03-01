@@ -12,7 +12,7 @@ namespace Common
     }
 
 
-    public enum TraitBehaviour
+    public enum traitBehaviour
     {
         None,
         Positive,
@@ -101,7 +101,7 @@ namespace Common
         DesertFever,
     }
 
-    public enum PermanentTraitName
+    public enum PermTraitName
     {
         None,
         Beastmancer,
@@ -110,15 +110,15 @@ namespace Common
         CannotBeCaged,
         CatVision,
         CodesofHonour,
-        CrackedMind,
+        Shapeshifter,
         DarkKnight,
         DeepSearcher,
         Hale,
         HiddenClaw,
-        Impassable,
+        Vaward,
         Impenitent,
         JungleMan,
-        KillTheSnared,
+        SnaredSlayer,
         Looter,
         LoreReader,
         MasterSmuggler,
@@ -129,7 +129,7 @@ namespace Common
         QueenOfTheForest,
         Regeneration,
         Scout,
-        Selfish,
+        Selfcentred,
         SidedWithTheWeak,
         SmellsLikeHome,
         SwornRivals,
@@ -137,7 +137,8 @@ namespace Common
         Unmoved,
         Unwilling,
         WetAndHappy,
-        WhoDarestoDare,
+        Derring,
+        CenterOfAttention,
     }
 
 }

@@ -16,6 +16,8 @@ namespace Common
 
         public event Action<TempTraitData> OnTempTraitStart;
         public event Action<TempTraitData> OnTempTraitEnd;
+        public event Action<CharNames, TempTraitName> OnTempTraitHovered; 
+
 
         public TempTraitsFactory temptraitsFactory;
 

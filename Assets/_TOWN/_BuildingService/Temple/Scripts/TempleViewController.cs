@@ -19,12 +19,11 @@ namespace Town
         [Header("Not to be ref")]
         [SerializeField] Transform BGSpriteContainer;
 
-        [Header("House Interact Panels: To be ref")]
+        [Header("Temple Interact Panels: To be ref")]
         [SerializeField] Transform BuildInteractPanel;
 
         public Transform enchantPanel;
         public Transform clearMindPanel;
-
 
         [SerializeField] Button exit;
 
@@ -93,11 +92,11 @@ namespace Town
         }
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                Init(); // for test
+            //if (Input.GetKeyDown(KeyCode.S))
+            //{
+            //    Init(); // for test
 
-            }
+            //}
         }
 
 

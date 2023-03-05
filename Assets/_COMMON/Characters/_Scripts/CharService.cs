@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using Town; 
 namespace Common
 {
     public class CharService : MonoSingletonGeneric<CharService>, ISaveableService

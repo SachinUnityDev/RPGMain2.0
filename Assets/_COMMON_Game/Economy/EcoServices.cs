@@ -12,6 +12,7 @@ namespace Common
         public EconoModel econoModel;
         public EcoSO ecoSO;
         public event Action OnInvMoneyChg;
+        public event Action OnStashMoneyChg;
         void Start()
         {
             econoModel = new EconoModel(ecoSO);
@@ -33,20 +34,23 @@ namespace Common
         }
         public void DebitPlayerStash(Currency amt)
         {
-            econoModel.moneyInStash.SubMoney(amt);          
+            econoModel.moneyInStash.SubMoney(amt);
+            OnStashMoneyChg?.Invoke(); 
         }
         public void DebitPlayerInv(Currency amt)
         {
             econoModel.moneyInInv.SubMoney(amt);
+            OnInvMoneyChg?.Invoke(); 
         }
         public void AddMoney2PlayerStash (Currency amt)
         {
             econoModel.moneyInStash.AddMoney(amt);
+            OnStashMoneyChg?.Invoke();
         }
         public void AddMoney2PlayerInv(Currency amt)
         {
             econoModel.moneyInInv.AddMoney(amt);
-            OnInvMoneyChg();
+            OnInvMoneyChg?.Invoke(); 
         }
         //public void DebitNPCAct(Currency amt, NPCNames npcName)
         //{

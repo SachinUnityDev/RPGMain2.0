@@ -128,6 +128,26 @@ namespace Interactables
         }
         #endregion 
 
+        public int GetRandomItemExcpt(List<int> exceptionLs, int max)
+        {
+            int ran = GetRandom(max); 
+     
+            for(int i =0; i< max; i++)
+            {
+                if (ran == exceptionLs[i])
+                {
+                    ran = GetRandom(max);// get new random 
+                    i = 0; 
+                }
+            }
+            return ran; 
+        }
+        int GetRandom(int max)
+        {
+            int ran = UnityEngine.Random
+                    .Range(1, (max+1));
+            return ran;
+        }
         #region ITEM SO GETTERS
 
         public HerbSO GetHerbSO(HerbNames herbname)

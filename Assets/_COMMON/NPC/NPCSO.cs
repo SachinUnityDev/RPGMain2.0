@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Interactables;
+using Common;
+using System;
 
-namespace Common
+namespace Town
 {
-    [CreateAssetMenu(fileName = "NPCSO", menuName = "Character Service/NPCSO")]
+  
+
+    [CreateAssetMenu(fileName = "NPCSO", menuName = "Char Service/NPCSO")]
 
     public class NPCSO : ScriptableObject
     {
@@ -23,19 +27,23 @@ namespace Common
 
         [Header("Items purchaseAble by NPC")]
         public List<ItemType> itemTypesAccepted = new List<ItemType>();
-        
-        //[Header("DEFAULT PROVISION")]
-        //public List<ItemData> provisionItems = new List<ItemData>();
 
-        //[Header("Gift")]
-        //// money and Item 
-        //public List<ItemData> giftItems = new List<ItemData>();
-        //public Currency giftCurrencyShare = new Currency();
-
-        //[Header("Companion PreReq")]
-        //public List<ItemData> CompanionPreReq = new List<ItemData>();
-
-
+       
     }
+
+    [Serializable]
+    public class NPCWeeklyStockData
+    {
+        public int WeekInYear;
+        public List<ItemDataWithQty> allItemData = new List<ItemDataWithQty>();
+
+        public NPCWeeklyStockData(int weekInYear, List<ItemDataWithQty> allItemData)
+        {
+            WeekInYear = weekInYear;
+            this.allItemData = allItemData;
+        }
+    }
+
+
 }
 

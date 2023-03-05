@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Security.Policy;
+using Common;
 
 namespace Town
 {
@@ -22,13 +23,19 @@ namespace Town
         Available,
         UnAvaiable,
     }
-
+    [Serializable]
+    public class DialogueData
+    {
+        public DialogueNames dialogueName;
+        public bool isUnLocked; 
+    }
     [Serializable]
     public class CharInteractData
     {
         public CharNames compName;
         public NPCInteractType nPCIntType;
         public NPCState nPCState;
+        public List<DialogueData> allDialogueData = new List<DialogueData>();
     }
     [Serializable]
     public class CharInteractPrefabData
@@ -39,11 +46,12 @@ namespace Town
     }
 
     [Serializable]
-    public class NPCDataInBuild
+    public class NPCInteractData
     {
         public NPCNames nPCNames;
         public NPCInteractType nPCIntType;
-        public NPCState npcState; 
+        public NPCState npcState;
+        public List<DialogueData> allDialogueData = new List<DialogueData>();        
     }
     [Serializable]
     public class NPCInteractPrefabData
@@ -63,7 +71,6 @@ namespace Town
     {
         public BuildInteractType BuildIntType;
         public GameObject interactPrefab;
-        
     }
 
 
@@ -90,7 +97,7 @@ namespace Town
         public List<CharInteractPrefabData> CharInteractPrefab = new List<CharInteractPrefabData>();
 
         [Header("NPC Interactions")]        
-        public List<NPCDataInBuild> npcData = new List<NPCDataInBuild>();
+        public List<NPCInteractData> npcInteractData = new List<NPCInteractData>();
         public List<NPCInteractPrefabData> npcDataPrefab = new List<NPCInteractPrefabData>();
         
 
@@ -103,6 +110,9 @@ namespace Town
         public List<string> statusLockedStr= new List<string>();
         [TextArea(4, 10)]
         public List<string> statusUnAvailStr = new List<string>(); 
+
+       
+
     }
 
     [System.Serializable]

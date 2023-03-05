@@ -26,7 +26,7 @@ namespace Common
         public CharNames charName;
         //public Sprite clickedSprite;
         //public Sprite unClickedSprite;
-
+        public string dialogueTitle=""; 
 
         public GameState gameState;
         public List<CharNames> charInDialogue = new List<CharNames>();

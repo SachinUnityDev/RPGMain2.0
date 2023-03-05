@@ -16,19 +16,19 @@ namespace Interactables
         public int itemId { get; set; }
         public List<int> allBuffs { get; set; }
         public ItemData toolData { get; set; }
-        public List<IngredData> allIngredData { get; set; }
+        public List<ItemDataWithQty> allIngredData { get; set; }
         public void RecipeInit()
         {
             toolData = new ItemData(ItemType.Tools, (int)ToolNames.Mortar);
 
             ItemData ingred1 = new ItemData(ItemType.Ingredients, (int)IngredNames.FelineHeart);
-            allIngredData.Add(new IngredData(ingred1, 1));
+            allIngredData.Add(new ItemDataWithQty(ingred1, 1));
 
             ItemData ingred2 = new ItemData(ItemType.Ingredients, (int)IngredNames.BatEar);
-            allIngredData.Add(new IngredData(ingred2, 1));
+            allIngredData.Add(new ItemDataWithQty(ingred2, 1));
 
             ItemData ingred3 = new ItemData(ItemType.Herbs, (int)HerbNames.Hemp);
-            allIngredData.Add(new IngredData(ingred3, 1));
+            allIngredData.Add(new ItemDataWithQty(ingred3, 1));
         }
         public void OnHoverItem()
         {

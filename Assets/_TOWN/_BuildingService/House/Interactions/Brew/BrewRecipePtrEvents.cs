@@ -11,7 +11,7 @@ namespace Town
     {
         [SerializeField] Transform associatedPlus; 
 
-        [SerializeField] IngredData ingredReq;
+        [SerializeField] ItemDataWithQty ingredReq;
         [SerializeField] int quantity;
         [SerializeField] Image imgIngred;
         [SerializeField] TextMeshProUGUI txtTrans;
@@ -19,7 +19,7 @@ namespace Town
         public bool hasSufficientIngred; 
 
       
-        public void InitBrewRecipe(IngredData ingredReq, int quantity)
+        public void InitBrewRecipe(ItemDataWithQty ingredReq, int quantity)
         {
             this.ingredReq = ingredReq;  
             this.quantity = quantity;
@@ -37,7 +37,7 @@ namespace Town
                 hasSufficientIngred= false;
             }
         }
-        public void SubtractIngredFrmSlot(IngredData subIngred)
+        public void SubtractIngredFrmSlot(ItemDataWithQty subIngred)
         {
 
         }

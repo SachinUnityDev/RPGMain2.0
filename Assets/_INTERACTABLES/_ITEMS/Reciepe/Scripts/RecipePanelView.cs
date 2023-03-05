@@ -20,7 +20,7 @@ namespace Interactables
         [SerializeField] TextMeshProUGUI slotTitleTxt; 
 
         [Header("Ingred Data")]
-        List<IngredData> allIngredData = new List<IngredData>();
+        List<ItemDataWithQty> allIngredData = new List<ItemDataWithQty>();
         [Header("Tools Data")]
         [SerializeField] ItemData toolData; 
 

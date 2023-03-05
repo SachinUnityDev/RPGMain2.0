@@ -53,9 +53,9 @@ namespace Common
     public enum DialogueNames
     {
         None,
-        MeetKhalid,
-        RetrieveDebt,
-        DebtIsClear,
+        MeetKhalid,  // top panel 
+        RetrieveDebt, // 
+        DebtIsClear, // 
         AttendJob,
         GoVisitTemple,
         AltGoVisitTemple,        
@@ -69,8 +69,20 @@ namespace Common
         CityHallCalls,
         CityHallMeeting,
         Casualties,
-
-
+        StoryMinami, 
+        StoryRayyan, 
+        StoryCahyo, 
+        StoryBaran, 
+        StoryAmadi, 
+        StoryAmish, 
+        StoryKamila, 
+        StoryOmobolanle, 
+        StoryGreybrow,
+        StoryBelal, 
+        StoryAdalberto,   
+        MeetRayyan, 
+        MeetCahyo, 
+        MeetBaran,
     }
 
 }

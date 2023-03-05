@@ -25,6 +25,10 @@ namespace Town
         public Transform enchantPanel;
         public Transform clearMindPanel;
 
+        public Transform TradePanel;
+        public Transform TalkPanel; 
+
+
         [SerializeField] Button exit;
 
         BuildingSO templeSO;
@@ -62,6 +66,8 @@ namespace Town
                 child.GetComponent<TempleBaseEvents>().Init(this);
             }
         }
+
+
         void InitInteractPanels()
         {
             foreach (Transform child in BuildInteractPanel)
@@ -82,6 +88,23 @@ namespace Town
             Debug.Log("Building interaction panel not found" + buildInteract);
             return null; 
         }
+
+        public Transform GetNPCInteractPanel(NPCInteractType npcInteract)
+        {
+
+            switch (npcInteract)
+            {              
+                case NPCInteractType.Talk:
+                    return TalkPanel;                  
+                case NPCInteractType.Trade:
+                    return TradePanel;                  
+                default:
+                    break;
+            }
+            Debug.Log("Building interaction panel not found" + npcInteract);
+            return null;
+        }
+
         public void Load()
         {
         }

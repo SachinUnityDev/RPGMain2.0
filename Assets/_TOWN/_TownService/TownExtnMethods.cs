@@ -49,8 +49,6 @@ namespace Town
             return bronzifiedRange;
         }
 
-
-
     }
 
 

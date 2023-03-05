@@ -16,19 +16,19 @@ namespace Interactables
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; }
         public ItemData toolData { get; set; }
-        public List<IngredData> allIngredData { get; set; } = new List<IngredData>();
+        public List<ItemDataWithQty> allIngredData { get; set; } = new List<ItemDataWithQty>();
         public void RecipeInit()
         {
             toolData = new ItemData(ItemType.Tools, (int)ToolNames.Fermentor);
 
             ItemData ingred1 = new ItemData(ItemType.Fruits, (int)FruitNames.Apple);
-            allIngredData.Add(new IngredData(ingred1, 1));
+            allIngredData.Add(new ItemDataWithQty(ingred1, 1));
 
             ItemData ingred2 = new ItemData(ItemType.Ingredients, (int)IngredNames.Yeast);
-            allIngredData.Add(new IngredData(ingred2, 1));
+            allIngredData.Add(new ItemDataWithQty(ingred2, 1));
 
             ItemData ingred3 = new ItemData(ItemType.Ingredients, (int)IngredNames.Cardamom);
-            allIngredData.Add(new IngredData(ingred3, 1));
+            allIngredData.Add(new ItemDataWithQty(ingred3, 1));
         }
 
         public void InitItem(int itemId, int maxInvStackSize)

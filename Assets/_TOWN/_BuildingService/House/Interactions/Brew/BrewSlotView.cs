@@ -22,7 +22,7 @@ public class BrewSlotView : MonoBehaviour
     [SerializeField] AlcoholSO alcoholSO;
     [SerializeField] BrewView brewView;
 
-    [SerializeField] IngredData ingredData;
+    [SerializeField] ItemDataWithQty ingredData;
 
     void Awake()
     {
@@ -57,7 +57,7 @@ public class BrewSlotView : MonoBehaviour
                 {
                     recipeSlotTrans.GetChild(i).GetComponent<BrewRecipePtrEvents>().EnableSlot();
                 }
-                IngredData ingred = recipe.allIngredData[j];       
+                ItemDataWithQty ingred = recipe.allIngredData[j];       
                 int quantity =
                     InvService.Instance.invMainModel.GetItemNosInCommInv(ingred.ItemData);
                 quantity +=

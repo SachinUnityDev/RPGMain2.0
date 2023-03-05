@@ -17,7 +17,7 @@ namespace Interactables
             itemName = transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>(); 
         }
 
-        public void Init(Iitems item, IngredData ingredData = null)
+        public void Init(Iitems item, ItemDataWithQty ingredData = null)
         {
         
                 switch (item.itemType)

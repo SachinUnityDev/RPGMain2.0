@@ -17,7 +17,7 @@ namespace Interactables
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set;}
         public ItemData toolData { get; set; } 
-        public List<IngredData> allIngredData { get; set; } = new List<IngredData>();
+        public List<ItemDataWithQty> allIngredData { get; set; } = new List<ItemDataWithQty>();
 
   
 
@@ -26,7 +26,7 @@ namespace Interactables
             toolData = new ItemData(ItemType.Tools, (int)ToolNames.CookingPot);
 
             ItemData ingred1 = new ItemData(ItemType.Foods, (int)FoodNames.Beef);
-            IngredData ingredData = new IngredData(ingred1, 1);
+            ItemDataWithQty ingredData = new ItemDataWithQty(ingred1, 1);
 
             allIngredData.Add(ingredData);
         }

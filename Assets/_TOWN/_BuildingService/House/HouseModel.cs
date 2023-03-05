@@ -54,7 +54,7 @@ namespace Town
 
         public List<CharInteractData> charInteract = new List<CharInteractData>();
 
-        public List<NPCDataInBuild> npcData = new List<NPCDataInBuild>();   
+        public List<NPCInteractData> npcData = new List<NPCInteractData>();   
 
         public List<BuildIntTypeData> buildIntTypes = new List<BuildIntTypeData>();
 
@@ -62,7 +62,7 @@ namespace Town
         public HouseModel(BuildingSO houseSO)
         {
             buildIntTypes = houseSO.buildingData.buildIntTypes.DeepClone();
-            npcData = houseSO.buildingData.npcData.DeepClone();
+            npcData = houseSO.buildingData.npcInteractData.DeepClone();
             charInteract = houseSO.buildingData.charInteractData.DeepClone();
 
             HousePurchaseOptsData purchaseOpts1 = new HousePurchaseOptsData(HousePurchaseOpts.UpgradeBed, new Currency(18, 0), false, true);

@@ -1,0 +1,37 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using UnityEngine;
+
+
+namespace Town
+{
+    public class NPCInteractBtnView : MonoBehaviour
+    {
+        TempleViewController templeView;
+        TempleModel templeModel;
+        AllBuildSO allBuildSO;
+        private void Awake()
+        {
+                
+        }
+        public void InitInteractBtns(TempleViewController templeView)
+        {
+            this.templeView = templeView;
+            templeModel = BuildingIntService.Instance.templeController.templeModel;
+            allBuildSO = BuildingIntService.Instance.allBuildSO;
+            FillNPCInteractBtn(); 
+            FillCharInteactBtns();
+        }
+        void FillNPCInteractBtn()
+        {
+            // depending on char in the model/SO  fill here
+            // init tradeView and talkView from here for each unloaked NPC char 
+        }
+        void FillCharInteactBtns()
+        {
+
+        }
+
+    }
+}

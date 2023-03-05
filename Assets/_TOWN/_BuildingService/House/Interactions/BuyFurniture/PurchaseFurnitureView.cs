@@ -101,9 +101,6 @@ namespace Town
                 //change txt
                 return;
             }
-                
-
-
             plankContainer.GetChild(selectInt).GetComponent<HousePlankBtnEvents>().OnPurchase();// modified status on plank 
 
             FillStashMoney();

@@ -16,8 +16,9 @@ namespace Town
 
         [Header("Town BG : to be ref")]
         public Sprite TownBGDay;
-        public Sprite TownBGNight; 
+        public Sprite TownBGNight;
 
+        public GameObject npcInteractPrefab; 
 
         private void Awake()
         {

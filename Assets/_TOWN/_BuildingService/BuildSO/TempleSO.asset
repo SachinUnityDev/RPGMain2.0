@@ -40,7 +40,14 @@ MonoBehaviour:
         isUnLocked: 1
       - dialogueName: 8
         isUnLocked: 0
+    - nPCNames: 13
+      nPCIntType: 2
+      npcState: 0
+      allDialogueData: []
     npcDataPrefab:
+    - nPCNames: 13
+      nPCIntType: 1
+      interactPrefab: {fileID: 0}
     - nPCNames: 13
       nPCIntType: 1
       interactPrefab: {fileID: 0}
@@ -50,5 +57,6 @@ MonoBehaviour:
     - BuildIntType: 16
       isUnLocked: 1
     buildIntPrefab: []
-    statusLockedStr: []
+    statusLockedStr:
+    - 
     statusUnAvailStr: []

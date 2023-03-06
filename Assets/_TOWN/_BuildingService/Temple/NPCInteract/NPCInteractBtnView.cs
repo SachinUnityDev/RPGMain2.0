@@ -11,6 +11,7 @@ namespace Town
         TempleViewController templeView;
         TempleModel templeModel;
         AllBuildSO allBuildSO;
+        GameObject npcInteractPrefab; 
         private void Awake()
         {
                 
@@ -25,6 +26,18 @@ namespace Town
         }
         void FillNPCInteractBtn()
         {
+
+            BuildingSO templeSO = allBuildSO.GetBuildSO(BuildingNames.Temple);
+            foreach (NPCInteractData npcInteract in templeSO.buildingData.npcInteractData)
+            {
+
+                if(npcInteract.npcState == NPCState.UnLocked)
+                {
+
+                }
+            }
+
+
             // depending on char in the model/SO  fill here
             // init tradeView and talkView from here for each unloaked NPC char 
         }

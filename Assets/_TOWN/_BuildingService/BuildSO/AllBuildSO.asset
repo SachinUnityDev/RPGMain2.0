@@ -73,3 +73,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ad225de94603c354b99d46798c57061c, type: 2}
   TownBGDay: {fileID: 21300000, guid: e53a04d65ce4dea418fdabb03c1a8b56, type: 3}
   TownBGNight: {fileID: 21300000, guid: e71d8cd982d201d41b5ac77676b1ce80, type: 3}
+  npcInteractPrefab: {fileID: 8072419943674130190, guid: b1157cdab7be0e34ba6accb3043dbc27,
+    type: 3}

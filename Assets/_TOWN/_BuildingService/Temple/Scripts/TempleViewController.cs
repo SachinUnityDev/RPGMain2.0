@@ -10,7 +10,6 @@ namespace Town
 {
     public class TempleViewController : MonoBehaviour, IPanel, IBuildName
     {
-
         public BuildingNames BuildingName => BuildingNames.Temple;
         [Header("To be ref")]
         [SerializeField] Transform btnContainer;
@@ -32,9 +31,6 @@ namespace Town
         [SerializeField] Button exit;
 
         BuildingSO templeSO;
-
-     
-
         void Awake()
         {
             BGSpriteContainer = transform.GetChild(0);

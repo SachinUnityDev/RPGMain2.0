@@ -10,40 +10,41 @@ namespace Town
 {
     public class EndDayBtnEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-
-        [Header("Day Btns")]
-        [SerializeField] Sprite endDayNormal;
-        [SerializeField] Sprite endDayHL;
-
-        [Header("Night Btns")]
-        [SerializeField] Sprite endNightNormal;
-        [SerializeField] Sprite endNightHL;
-
         [SerializeField] TimeState timeState;
 
-        [SerializeField] Image btnImg; 
+        [SerializeField] Image btnImg;
+        CalendarSO calendarSO; 
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (timeState == TimeState.Day)
-                btnImg.sprite = endDayHL;
+                btnImg.sprite = calendarSO.endDayBtnNLit; 
             else if (timeState == TimeState.Night)
-                btnImg.sprite = endNightHL; 
+                btnImg.sprite = calendarSO.endNightBtnLit; 
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             if (timeState == TimeState.Day)
-                btnImg.sprite = endDayNormal;
-            else if (timeState == TimeState.Night)
-                btnImg.sprite = endNightNormal;
+                btnImg.sprite = calendarSO.endDayBtnN;
+            else 
+                btnImg.sprite = calendarSO.endNightBtnN;
         }
 
         void Start()
         {
             btnImg = GetComponent<Image>(); 
+            calendarSO = CalendarService.Instance.calendarSO;
+            timeState = CalendarService.Instance.currtimeState;
+            CalendarService.Instance.OnChangeTimeState += ChgBtnBg; 
         }
-
-
+        void ChgBtnBg(TimeState timeState)
+        {
+            this.timeState = timeState; 
+            if (timeState == TimeState.Day)
+                btnImg.sprite = calendarSO.endDayBtnN;
+            else if (timeState == TimeState.Night)
+                btnImg.sprite = calendarSO.endNightBtnN;
+        }
     }
 
 

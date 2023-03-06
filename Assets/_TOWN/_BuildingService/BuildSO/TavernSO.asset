@@ -19,35 +19,47 @@ MonoBehaviour:
     buildExtDayHL: {fileID: 21300000, guid: 4aed9e47bd6f09c4a80ca14102a34602, type: 3}
     buildExtNight: {fileID: 21300000, guid: 87192e68d33954d499f2c3a75ada86e7, type: 3}
     buildExtNightHL: {fileID: 21300000, guid: 966b67cfad92cc14f91febf0d6789bcc, type: 3}
-    buildIntDay: {fileID: 21300000, guid: 17dcca4ebefb8524996499b6f0064c04, type: 3}
-    buildIntNight: {fileID: 21300000, guid: feda0c29c15a9c844b5ce8c0524fded3, type: 3}
+    buildIntDay: {fileID: 21300000, guid: 8ff76a01191b8a74d9c1b930aec3b091, type: 3}
+    buildIntNight: {fileID: 21300000, guid: 57f075dca22e1954e981af231b07b76f, type: 3}
     charInteractData:
     - compName: 3
       nPCIntType: 1
       nPCState: 0
+      allDialogueData: []
     - compName: 2
       nPCIntType: 1
       nPCState: 0
+      allDialogueData: []
     CharInteractPrefab: []
-    npcData:
+    npcInteractData:
     - nPCNames: 7
       nPCIntType: 1
-      npcState: 2
+      npcState: 1
+      allDialogueData: []
     - nPCNames: 7
       nPCIntType: 2
-      npcState: 2
+      npcState: 1
+      allDialogueData: []
     - nPCNames: 5
       nPCIntType: 1
       npcState: 0
+      allDialogueData: []
     - nPCNames: 5
-      nPCIntType: 10
+      nPCIntType: 2
       npcState: 0
+      allDialogueData: []
     npcDataPrefab:
+    - nPCNames: 7
+      nPCIntType: 1
+      interactPrefab: {fileID: 0}
     - nPCNames: 7
       nPCIntType: 2
       interactPrefab: {fileID: 0}
     - nPCNames: 5
-      nPCIntType: 10
+      nPCIntType: 1
+      interactPrefab: {fileID: 0}
+    - nPCNames: 5
+      nPCIntType: 2
       interactPrefab: {fileID: 0}
     buildIntTypes:
     - BuildIntType: 1
@@ -58,12 +70,16 @@ MonoBehaviour:
       isUnLocked: 0
     - BuildIntType: 11
       isUnLocked: 0
+    - BuildIntType: 14
+      isUnLocked: 0
     buildIntPrefab:
     - BuildIntType: 1
       interactPrefab: {fileID: 0}
     - BuildIntType: 8
       interactPrefab: {fileID: 0}
     - BuildIntType: 10
+      interactPrefab: {fileID: 0}
+    - BuildIntType: 11
       interactPrefab: {fileID: 0}
     - BuildIntType: 11
       interactPrefab: {fileID: 0}

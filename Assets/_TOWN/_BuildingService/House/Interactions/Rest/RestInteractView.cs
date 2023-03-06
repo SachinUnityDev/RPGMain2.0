@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 using Common;
-
+using TMPro;
 
 namespace Town
 {
@@ -12,11 +11,13 @@ namespace Town
     {
         [SerializeField] Button endDayBtn;
         [SerializeField] Button closeBtn;
-
+        [SerializeField] TextMeshProUGUI buffTxt; 
         // on press close the day event in calendar
-        string buffStr = "60% chance for Well Rested";
-        
-      
+        string buffstrOnUpgrade = "60% chance for Well Rested upon resting";
+        string buffStrBase = "No Chance for buff upon resting";
+
+
+
         TimeState timeState; 
 
         void Awake()
@@ -30,24 +31,49 @@ namespace Town
         {
             timeState = CalendarService.Instance.currtimeState;
             int day = CalendarService.Instance.dayInYear;
-            CalendarService.Instance.On_EndTimeStateClick();
+            CalendarService.Instance.On_EndDayClick();
         
             FillHouseView(); 
         }
         void FillHouseView()
         {
             BuildingIntService.Instance.houseController.houseView.FillHouseBG();             
+            FillPanelBg();
         }
-
-        void ApplyBuff()
+        void FillPanelBg()
         {
-            // apply well rested trait to ABBAS 
-
+            if (CalendarService.Instance.currtimeState == TimeState.Day)
+            {// BG
+                transform.GetChild(0).GetComponent<Image>().sprite =
+                         CalendarService.Instance.calendarSO.restPanelDay;
+                
+            }
+            else
+            {
+                transform.GetChild(0).GetComponent<Image>().sprite =
+                    CalendarService.Instance.calendarSO.restPanelNight; ;
+            }
+                
         }
+        void FillTheBuffStr()
+        {
+            HousePurchaseOptsData houseData =
+             BuildingIntService.Instance.houseController
+             .houseModel.GetHouseOptsInteractData(HousePurchaseOpts.UpgradeBed);
+
+            if (houseData.isPurchased)
+            {
+                buffTxt.text = buffstrOnUpgrade;
+            }
+            else
+            {
+                buffTxt.text = buffStrBase;
+            }
+        }    
 
         public void Load()
         {
-            
+            FillTheBuffStr();
         }
 
         public void UnLoad()
@@ -57,7 +83,7 @@ namespace Town
 
         void OnClosePressed()
         {
-          UIControlServiceGeneral.Instance.TogglePanel(gameObject,false);
+            UIControlServiceGeneral.Instance.TogglePanel(gameObject,false);
         }
         public void Init()
         {

@@ -71,7 +71,7 @@ namespace Town
             int i = 0; 
             foreach(Transform child in plankContainer)
             {
-                child.GetComponent<HousePlankBtnEvents>(). Init(houseModel.purchaseOpts[i], this);
+                child.GetComponent<HousePlankBtnEvents>(). Init(houseModel.purchaseOpts[i], houseModel, this);
                 i++; 
             }
         }

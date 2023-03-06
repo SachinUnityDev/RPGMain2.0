@@ -41,6 +41,8 @@ public enum CauseType
     PoeticGewgaw, 
     PoeticSetGewgaw, 
     TradeGoods,
+    BuildingInterct, 
+    NPCInteract, 
 }
 
 public enum StatChecks

@@ -19,6 +19,7 @@ namespace Common
         public event Action<int> OnStartOfNight;
         public event Action<WeekName> OnStartOfTheWeek;
         public event Action<MonthName> OnStartOfTheMonth;
+        public event Action<TimeState> OnChangeTimeState; 
 
         [Header("CURRENT TIME STATE ")]
         public TimeState currtimeState;
@@ -41,8 +42,8 @@ namespace Common
         [Header("DAY,WEEK AND MONTH SOs")]
         [SerializeField] List<DaySO> allDaySOs;
         [SerializeField] List<WeekSO> allWeekSOs;
-        [SerializeField] List<MonthSO> allMonthSOs; 
-        
+        [SerializeField] List<MonthSO> allMonthSOs;
+        public CalendarSO calendarSO; 
          
        // DayNightController dayNightController;
         CalendarUIController calendarUIController;
@@ -56,12 +57,11 @@ namespace Common
 
             scrollMonth = currentMonth;
             currtimeState = TimeState.Day;
-            endday.onClick.AddListener(On_EndTimeStateClick);
+            endday.onClick.AddListener(On_EndDayClick);
 
-            //calendarUIController.UpdateWeekPanel(currentWeek);
             calendarUIController.UpdateMonthPanel(currentMonth, gameStartDay, dayInYear);
 
-            // UpdateMonth();
+           
         }
 
         public void Init()
@@ -85,40 +85,27 @@ namespace Common
             return daySO;
         }
 
-        public void On_ChangeTimeState()          // no change in 
+        public void DisplayTimeChgPanel()          // no change in 
         {
             calendarUIController.UpdateDayPanel(dayInYear, gameStartDay);
-            calendarUIController.OnPanelEnter(calendarUIController.dayPanel, PanelInScene.Day); 
+            calendarUIController.OnPanelEnter(calendarUIController.dayPanel, PanelInScene.Day);
         }
-        public void On_EndTimeStateClick()
-        {
-          //  calendarUIController.ToggleDayNightUI();
+        public void On_EndDayClick()
+        {          
             if (currtimeState == TimeState.Night)
             {
                 // start of the day
                 currtimeState = TimeState.Day;
-                endday.GetComponentInChildren<TextMeshProUGUI>().text = "End the Day?";
-              
-                On_StartOfDay(dayInGame); 
-             
+                endday.GetComponentInChildren<TextMeshProUGUI>().text = "End the Day?";              
+                On_StartOfDay(dayInGame);              
             }
             else
             {
-                // start of the night
-                //
-                //CalendarEventService.Instance.On_StartOftheNight();
                 endday.GetComponentInChildren<TextMeshProUGUI>().text = "End the Night?";
                 currtimeState = TimeState.Night;
                 On_StartOfNight(dayInGame);
-               
             }
-
-
-
         }
-        // here logic needs to change ... 
-
-      
         public void UpdateDay()
         {
             currDayName++; dayInGame++; dayInYear++;
@@ -152,8 +139,7 @@ namespace Common
             }
         }
         public void UpdateMonth()
-        {         
-
+        {     
             if ((int)dayInYear % 30 == 1 && dayInGame != 0 )
             {
                 currentMonth++;
@@ -163,24 +149,24 @@ namespace Common
 
                 calendarUIController.UpdateMonthPanel(currentMonth, gameStartDay, dayInYear );
             }
-           
                 Debug.Log("Current Month" + currentMonth); 
                 calendarUIController.UpdateMonthPanel(currentMonth, gameStartDay, dayInYear );
-                    scrollMonth = currentMonth; // TIE IN POINT 
- 
+                    scrollMonth = currentMonth; // TIE IN POINT  
         }
+
         #region DAY WEEK AND MONTH EVENT TRIGGERS
         public void On_StartOfDay(int day)
         {
-            Debug.Log("ENDDD Day");
+            Debug.Log("END Day");
             UpdateDay();
+            OnChangeTimeState(TimeState.Day);
             OnStartOfDay?.Invoke(day);
         }
         public void On_StartOfNight(int day)
         {
+            OnChangeTimeState(TimeState.Night);
             OnStartOfNight?.Invoke(day);
         }
-
         public void On_StartOfTheWeek(WeekName weekName)
         {
             OnStartOfTheWeek?.Invoke(weekName);

@@ -20,6 +20,7 @@ namespace Town
 
         [Header("house Data")]
         [SerializeField] HousePurchaseOptsData houseData;
+        [SerializeField] HouseModel houseModel;
 
         [Header("Parent")]
         [SerializeField] PurchaseFurnitureView purchaseFurnitureView;
@@ -41,8 +42,9 @@ namespace Town
 
         }
 
-        public void Init(HousePurchaseOptsData houseData, PurchaseFurnitureView purchaseFurnitureView)
+        public void Init(HousePurchaseOptsData houseData, HouseModel houseModel, PurchaseFurnitureView purchaseFurnitureView)
         {
+            this.houseModel= houseModel;    
             this.houseData = houseData;
             this.purchaseFurnitureView = purchaseFurnitureView; 
             FillPlank(); 
@@ -88,7 +90,9 @@ namespace Town
         public void OnPurchase()
         {
             houseData.isPurchased = true;
-            
+            BuildingIntService.Instance.houseController.OnPurchase(houseData); 
+
+
             plankBG.sprite = spriteBG_Purchased;
             plankBG.DOFade(1, 0.1f);
 

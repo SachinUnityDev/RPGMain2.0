@@ -22,6 +22,9 @@ namespace Town
             this.isPurchased = isPurchased;
             this.isPurchaseAbleInDemo = isPurchaseAbleInDemo;
         }
+
+   
+
     }
 
     [Serializable]
@@ -31,26 +34,28 @@ namespace Town
         public List<HousePurchaseOptsData> purchaseOpts = new List<HousePurchaseOptsData> ();
 
         [Header("Interact: Rest")]
-        public bool isBedUpgraded =false;
+       // public bool isBedUpgraded =false;
+        public float restChance = 0f;
+        public float restChanceOnUpgrade = 60f; 
 
         [Header("Interact: Provision")]
         public Iitems item;
 
         [Header("Interact: Stash")]
         public List<Iitems> allItemsInStash = new List<Iitems>();
-        public bool isStashUpgraded = false; 
+        //public bool isStashUpgraded = false; 
 
-        [Header("Interact:Fermentor")]
-        public bool isFermentorPurchased = false;
+        //[Header("Interact:Fermentor")]
+        //public bool isFermentorPurchased = false;
 
-        [Header("Interact: Dryer")]
-        public bool isDryerPurchased = false;
+        //[Header("Interact: Dryer")]
+        //public bool isDryerPurchased = false;
 
-        [Header("Interact: Cora")]
-        public bool isCoraPurchased = false;
+        //[Header("Interact: Cora")]
+        //public bool isCoraPurchased = false;
 
-        [Header("Interact: Drums")]
-        public bool isDrumsPurchased = false;
+        //[Header("Interact: Drums")]
+        //public bool isDrumsPurchased = false;
 
         public List<CharInteractData> charInteract = new List<CharInteractData>();
 
@@ -58,7 +63,17 @@ namespace Town
 
         public List<BuildIntTypeData> buildIntTypes = new List<BuildIntTypeData>();
 
-
+        public HousePurchaseOptsData GetHouseOptsInteractData(HousePurchaseOpts houseOpts)
+        {
+            int index = purchaseOpts.FindIndex(t=>t.houseOpts== houseOpts); 
+            if(index != -1)
+                return purchaseOpts[index];
+            else
+            {
+                Debug.Log("house options not found" + houseOpts);
+                return null; 
+            }
+        }
         public HouseModel(BuildingSO houseSO)
         {
             buildIntTypes = houseSO.buildingData.buildIntTypes.DeepClone();

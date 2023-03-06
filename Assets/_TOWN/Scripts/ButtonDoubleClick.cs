@@ -15,15 +15,14 @@ namespace Common
         public void OnPointerClick(PointerEventData eventData)
         {
             Debug.Log(eventData.clickCount);
-            if (eventData.clickCount <= 1)
-            {
-                CalendarService.Instance.On_ChangeTimeState();
-
-            }
             if (eventData.clickCount > 1)
             {
-                CalendarService.Instance.On_EndTimeStateClick();
+                CalendarService.Instance.On_EndDayClick();
+            }else if (eventData.clickCount == 1)
+            {
+                CalendarService.Instance.DisplayTimeChgPanel();
             }
+          
         }
 
         //public void OnPointerDown(PointerEventData data)

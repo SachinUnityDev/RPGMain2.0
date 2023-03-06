@@ -28,12 +28,13 @@ namespace Town
         {
 
             BuildingSO templeSO = allBuildSO.GetBuildSO(BuildingNames.Temple);
-            foreach (NPCInteractData npcInteract in templeSO.buildingData.npcInteractData)
+
+            foreach (NPCInteractData npcInteract in templeModel.allNPCInteractData)
             {
 
                 if(npcInteract.npcState == NPCState.UnLocked)
                 {
-
+                    // get npc
                 }
             }
 

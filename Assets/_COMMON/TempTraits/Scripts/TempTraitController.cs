@@ -154,6 +154,7 @@ namespace Common
         #endregion
         public void DayTick()
         {
+            if(alltempTraitApplied.Count == 0) return;  
             foreach (TempTraitModel traitData in alltempTraitApplied)
             {
                 if (traitData.timeFrame == TimeFrame.EndOfDay)

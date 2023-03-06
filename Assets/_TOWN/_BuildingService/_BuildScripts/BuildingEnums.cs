@@ -41,7 +41,7 @@ namespace Town
         EndDay, // house
         Provision, // ABbas changes provision in town... 
         DryFood, 
-        XXX,
+        Gamble,
         Brawl, 
         ClearMind, 
     }

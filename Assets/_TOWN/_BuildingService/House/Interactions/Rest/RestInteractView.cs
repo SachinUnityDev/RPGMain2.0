@@ -11,7 +11,9 @@ namespace Town
     {
         [SerializeField] Button endDayBtn;
         [SerializeField] Button closeBtn;
-        [SerializeField] TextMeshProUGUI buffTxt; 
+        [SerializeField] TextMeshProUGUI buffTxt;
+
+        [SerializeField] Image hourGlass; 
         // on press close the day event in calendar
         string buffstrOnUpgrade = "60% chance for Well Rested upon resting";
         string buffStrBase = "No Chance for buff upon resting";
@@ -46,12 +48,17 @@ namespace Town
             {// BG
                 transform.GetChild(0).GetComponent<Image>().sprite =
                          CalendarService.Instance.calendarSO.restPanelDay;
-                
+                // hour Glass
+                hourGlass.sprite =
+                    CalendarService.Instance.calendarSO.hourGlassDay;
+
             }
             else
             {
                 transform.GetChild(0).GetComponent<Image>().sprite =
                     CalendarService.Instance.calendarSO.restPanelNight; ;
+                hourGlass.sprite =
+                    CalendarService.Instance.calendarSO.hourGlassNight;
             }
                 
         }

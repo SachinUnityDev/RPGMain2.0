@@ -22,12 +22,11 @@ namespace Town
             isShown= false;
         }
 
-        public void InitPortraitPtrEvents(TempleViewController  templeView, CharNames charName, NPCNames npcName)
+        public void InitPortraitPtrEvents(TempleViewController  templeView, NPCInteractData npcInteractData)
         {
             this.templeView = templeView;
-            this.charName= charName;
-            this.npcNames= npcName;
-
+            
+            
             // init talk view and trade view 
 
         }

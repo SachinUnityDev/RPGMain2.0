@@ -101,6 +101,11 @@ namespace Town
             return null;
         }
 
+        public void InitNpcInteractPanel(NPCInteractData npcInteractData)
+        {
+
+        }
+
         public void Load()
         {
         }

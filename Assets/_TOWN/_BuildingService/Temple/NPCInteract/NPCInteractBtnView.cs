@@ -11,7 +11,7 @@ namespace Town
         TempleViewController templeView;
         TempleModel templeModel;
         AllBuildSO allBuildSO;
-        GameObject npcInteractPrefab; 
+        GameObject npcIntPortraitPrefab; 
         private void Awake()
         {
                 
@@ -31,10 +31,9 @@ namespace Town
 
             foreach (NPCInteractData npcInteract in templeModel.allNPCInteractData)
             {
-
                 if(npcInteract.npcState == NPCState.UnLocked)
                 {
-                    // get npc
+                        
                 }
             }
 

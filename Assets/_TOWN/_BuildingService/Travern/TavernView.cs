@@ -26,6 +26,7 @@ namespace Town
         [SerializeField] Sprite dayBG;
         [SerializeField] Sprite nightBG;
 
+        [Header("Build Interaction panel")]
         public Transform bountyBoard;
         public Transform buyDrink;
         public Transform trophy;

@@ -10,7 +10,7 @@ namespace Town
     {
         public void OnPointerClick(PointerEventData eventData)
         {
-           // UIControlServiceGeneral.Instance.TogglePanelOnInGrp(tavernView.bountyBoard.gameObject, true);
+           UIControlServiceGeneral.Instance.TogglePanelOnInGrp(tavernView.bountyBoard.gameObject, true);
         }
     }
 }

@@ -19,8 +19,8 @@ namespace Town
         }
 
         public void UnLoad()
-        { 
-
+        {
+            UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
         }
            
     }

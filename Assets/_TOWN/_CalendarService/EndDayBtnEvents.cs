@@ -26,10 +26,10 @@ namespace Town
         {
             if (timeState == TimeState.Day)
                 btnImg.sprite = calendarSO.endDayBtnN;
-            else 
+            else if (timeState == TimeState.Night)
                 btnImg.sprite = calendarSO.endNightBtnN;
         }
-
+   
         void Start()
         {
             btnImg = GetComponent<Image>(); 
@@ -37,6 +37,7 @@ namespace Town
             timeState = CalendarService.Instance.currtimeState;
             CalendarService.Instance.OnChangeTimeState += ChgBtnBg; 
         }
+
         void ChgBtnBg(TimeState timeState)
         {
             this.timeState = timeState; 

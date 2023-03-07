@@ -112,15 +112,20 @@ namespace Town
         public void UnLoad()
         {
             UIControlServiceGeneral.Instance.TogglePanelOnInGrp(this.gameObject, false);
-        }
-        private void Update()
-        {
-          if(Input.GetKeyDown(KeyCode.S))
+            foreach (Transform child in BuildInteractPanel)
             {
-                Init(); // for test
-
-            }      
+                child.GetComponent<IPanel>().UnLoad();  
+            }
+            
         }
+        //private void Update()
+        //{
+        //  if(Input.GetKeyDown(KeyCode.S))
+        //    {
+        //        Init(); // for test
+
+        //    }      
+        //}
     }
 }
 

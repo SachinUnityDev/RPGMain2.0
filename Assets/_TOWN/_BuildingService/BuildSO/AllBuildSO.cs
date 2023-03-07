@@ -18,6 +18,8 @@ namespace Town
         public Sprite TownBGDay;
         public Sprite TownBGNight;
 
+
+
         public GameObject npcInteractPrefab; 
 
         private void Awake()

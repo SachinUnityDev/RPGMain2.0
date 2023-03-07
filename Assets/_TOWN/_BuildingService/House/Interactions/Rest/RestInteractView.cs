@@ -26,15 +26,13 @@ namespace Town
         {
             endDayBtn.onClick.AddListener(OnEndDayPressed);
             closeBtn.onClick.AddListener(OnClosePressed);
-
+      
         }
-
         public void OnEndDayPressed()
         {
             timeState = CalendarService.Instance.currtimeState;
             int day = CalendarService.Instance.dayInYear;
-            CalendarService.Instance.On_EndDayClick();
-        
+            CalendarService.Instance.On_EndDayClick();                
             FillHouseView(); 
         }
         void FillHouseView()
@@ -80,12 +78,13 @@ namespace Town
 
         public void Load()
         {
+            FillHouseView();
             FillTheBuffStr();
         }
 
         public void UnLoad()
         {
-           
+            UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
         }
 
         void OnClosePressed()

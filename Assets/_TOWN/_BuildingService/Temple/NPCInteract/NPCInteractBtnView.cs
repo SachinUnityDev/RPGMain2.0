@@ -33,7 +33,7 @@ namespace Town
             {
                 if(npcInteract.npcState == NPCState.UnLocked)
                 {
-                        
+                  //  templeView.    
                 }
             }
 

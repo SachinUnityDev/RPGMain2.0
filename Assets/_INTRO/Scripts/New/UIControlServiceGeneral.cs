@@ -114,7 +114,7 @@ namespace Common
             else
                 currOpenPanels.Remove(go);
 
-            go.SetActive(turnON);
+            go.SetActive(turnON); 
             go.transform.DOScale(1f, 0.1f);
             CanvasGroup canvasGrp = go?.GetComponent<CanvasGroup>();
             if (canvasGrp != null)

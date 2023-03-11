@@ -9,17 +9,7 @@ using TMPro;
 namespace Common
 {
    
-    public class FameData
-    {
-      
-        public FameType fameType;
-        public float fameVal; 
-        public FameData(FameType fameType, float fameVal)
-        {           
-            this.fameType = fameType;
-            this.fameVal = fameVal;
-        }
-    }
+ 
 
     public enum FameType
     {        
@@ -31,7 +21,7 @@ namespace Common
         Notorious,
         Villain,
         Unknown,
-        All,
+        //All,
     }
 
     public enum FameBehavior
@@ -142,13 +132,14 @@ namespace Common
 
             if (fameList.Count < 1) return; 
             pagetext.text = currPage.ToString(); 
-            Debug.Log("*********" + GetFameNameStr(GetFameType()));
+            Debug.Log("*********" + GetFameNameStr(FameService.Instance.GetFameType()));
 
-            fameName.transform.GetComponentInChildren<TextMeshProUGUI>().text = GetFameNameStr(GetFameType());
+            fameName.transform.GetComponentInChildren<TextMeshProUGUI>().text 
+                                = GetFameNameStr(FameService.Instance.GetFameType());
             ChgFameSprite();
-            fameVal.text = FameService.Instance.GetFameValue(currPage).ToString();
-            fameModVal.text = FameService.Instance.GetFameModValue(currPage).ToString();
-            int currFameVal = FameService.Instance.GetFameValue(currPage); 
+            fameVal.text = FameService.Instance.GetFameValue().ToString();
+            fameModVal.text = FameService.Instance.GetFameYieldValue().ToString();
+            int currFameVal = FameService.Instance.GetFameValue(); 
             if (currFameVal >= 0)
             {
                 fameBar.transform.GetChild(0).GetComponent<Slider>().value = currFameVal;
@@ -213,7 +204,7 @@ namespace Common
        
         void ChgFameSprite()
         {
-            int currFameVal = FameService.Instance.GetFameValue(currPage); 
+            int currFameVal = FameService.Instance.GetFameValue(); 
             if(currFameVal < -29f)
             {
                 FameImg.sprite = negSprite; 
@@ -222,21 +213,6 @@ namespace Common
             {
                 FameImg.sprite = posSprite;
             }
-        }
-
-
-        public FameType GetFameType()
-        {
-            float currentFame = FameService.Instance.GetFameValue(currPage);  
-            //Debug.Log("fame" + currFameData.fameVal); 
-            if (currentFame >= 30 && currentFame < 60) return FameType.Respectable;
-            else if (currentFame >= 60 && currentFame < 120) return FameType.Honorable;
-            else if (currentFame >= 120) return FameType.Hero;
-            else if (currentFame > -60 && currentFame <= -30) return FameType.Despicable;
-            else if (currentFame > -120 && currentFame <=-60) return FameType.Notorious;
-            else if (currentFame <= -120) return FameType.Villain;
-            else if (currentFame > -30 && currentFame < 30) return FameType.Unknown;
-            else return FameType.None; 
         }
     
         public string GetFameNameStr(FameType _fameType)

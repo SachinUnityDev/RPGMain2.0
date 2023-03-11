@@ -12,9 +12,6 @@ namespace Common
     public class FameService : MonoSingletonGeneric<FameService>, ISaveableService
     {
 
-        public float fameModifier=1 ;
-
-        public FameData currentFame;
         public int fameMultiplier = 1;
 
         public FameModel fameModel;
@@ -32,71 +29,40 @@ namespace Common
         {
             // save service integration here pending
         }
-
-
-
-        public int GetFameValue(int currPage)
+        public FameType GetFameType()
         {
-            return (int)fameModel.currGlobalFame;
-
+            float currentFame = FameService.Instance.GetFameValue();
+            //Debug.Log("fame" + currFameData.fameVal); 
+            if (currentFame >= 30 && currentFame < 60) return FameType.Respectable;
+            else if (currentFame >= 60 && currentFame < 120) return FameType.Honorable;
+            else if (currentFame >= 120) return FameType.Hero;
+            else if (currentFame > -60 && currentFame <= -30) return FameType.Despicable;
+            else if (currentFame > -120 && currentFame <= -60) return FameType.Notorious;
+            else if (currentFame <= -120) return FameType.Villain;
+            else if (currentFame > -30 && currentFame < 30) return FameType.Unknown;
+            else return FameType.None;
         }
-
-
-        public int GetFameModValue(int currPage)
+        public int GetFameValue()
         {
-            return (int)fameModel.globalFameMod;
-            //switch (currPage)
-            //{
-            //    case 0:
-                   
-
-            //    case 1:
-            //        return (int)fameModel.nekkisariFameMod;
-
-            //    default:
-            //        return 0;
-            //}
+            return (int)fameModel.fameVal;
+        }
+        public int GetFameYieldValue()
+        {
+            return (int)fameModel.fameYield;          
         }
 
         // used to update score from outside Services 
         public void FameScoreUpdate(FameChgData _fameChgData)
         {
            
-            fameModel.currGlobalFame += _fameChgData.scoreAdded * fameMultiplier;
-            fameModel.globalfameDataAll.Add(_fameChgData);
-            //switch (_fameChgData.fameLoc)
-            //{
-            //    case FameLoc.FameGlobal:
-                  
-            //        break;
-                //case FameLoc.FameNekkisari:
-                //    fameModel.currNekkisariFame += _fameChgData.scoreAdded * fameMultiplier;
-                //    break;
-                //case FameLoc.FameBluetown:
-                //    break;
-                //case FameLoc.FameSmaeru:
-                //    break;
-                //default:
-                //    break;
-           // }
+            fameModel.fameVal += _fameChgData.scoreAdded * fameMultiplier;
+            fameModel.allFameData.Add(_fameChgData);        
         }
 
         // fetch fame chg list for local use and view Controller
         public List<FameChgData> GetFameChgList()
         {
-            return fameModel.globalfameDataAll;
-            //switch (fameLoc)
-            //{
-            //    case FameLoc.FameGlobal:
-            //    case FameLoc.FameNekkisari:
-            //        return fameModel.nekkisarifameDataAll;
-            //    case FameLoc.FameBluetown:
-            //        return null;                     
-            //    case FameLoc.FameSmaeru:
-            //        return null; 
-            //    default:
-            //        return null;
-            //}
+            return fameModel.allFameData;        
         }
         public void RestoreState()
         {

@@ -10,13 +10,16 @@ namespace Interactables
     public class NyalaPelt : TGBase, Iitems, ITrophyable
     {
         public override TGNames tgName => TGNames.NyalaPelt;
-        public TavernSlotType tgSlotType => TavernSlotType.Pelt;
+        public TavernSlotType tavernSlotType => TavernSlotType.Pelt;
         public ItemType itemType => ItemType.TradeGoods;
         public int itemName => (int) TGNames.NyalaPelt;
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; }
         public int itemId { get; set; }
+
+        public int fameYield => -1;
+
         public void OnHoverItem()
         {
 
@@ -25,6 +28,8 @@ namespace Interactables
         {
             this.itemId = itemId;
             this.maxInvStackSize = maxInvStackSize;
+            allDisplayStr.Add("+1 Haste on Field");
+
         }
   
 //        "Abbas only: +1 Haste on Field
@@ -42,7 +47,7 @@ namespace Interactables
             allLandscapeIndex.Add(index);
 
             index = FameService.Instance.fameController.ApplyFameModBuff(CauseType.TradeGoods, (int)tgName
-                , -1, TimeFrame.Infinity, 1);
+                , fameYield, TimeFrame.Infinity, 1);
             allFameIndex.Add(index); 
         }
 

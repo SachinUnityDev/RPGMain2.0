@@ -10,13 +10,15 @@ namespace Interactables
     public class DeerSkin : TGBase, Iitems, ITrophyable
     {
         public override TGNames tgName => TGNames.DeerSkin;
-        public TavernSlotType tgSlotType => TavernSlotType.Pelt;
+        public TavernSlotType tavernSlotType => TavernSlotType.Pelt;
         public ItemType itemType => ItemType.TradeGoods;
         public int itemName => (int)TGNames.DeerSkin;
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; }
         public int itemId { get; set; }
+        public int fameYield => 1;
+
         public void OnHoverItem()
         {
 
@@ -26,10 +28,14 @@ namespace Interactables
         {
             this.itemId = itemId;
             this.maxInvStackSize = maxInvStackSize;
+            //+1 Dodge on Field
+            //+1 Fame Yield"
+
+            allDisplayStr.Add("+1 Dodge on Field");
         }
         public void TrophyInit()
         {
-         
+            
         }
         //+1 Dodge on Field
         //+1 Fame Yield"
@@ -41,7 +47,7 @@ namespace Interactables
             allLandscapeIndex.Add(index);
 
             index = FameService.Instance.fameController.ApplyFameModBuff(CauseType.TradeGoods, (int)tgName
-                , 1, TimeFrame.Infinity, 1);
+                , fameYield, TimeFrame.Infinity, 1);
             allFameIndex.Add(index);
         }
 

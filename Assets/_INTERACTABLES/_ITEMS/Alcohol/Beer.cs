@@ -1,3 +1,4 @@
+using Common;
 using Interactables;
 using System.Collections;
 using System.Collections.Generic;
@@ -38,6 +39,17 @@ namespace Interactables
         }
         public void OnHoverItem()
         {
+
+        }
+
+        public override void OnDrink()
+        {
+            // +1 morale for one day 
+            float chance = 20f;
+            charController = CharService.Instance.GetCharCtrlWithName(CharNames.Abbas_Skirmisher);
+            if (chance.GetChance())
+                charController.buffController.ApplyBuff(CauseType.Items, (int)itemName, charController.charModel.charID
+                    , StatsName.morale, 1, TimeFrame.EndOfDay, 1, true); 
 
         }
     }

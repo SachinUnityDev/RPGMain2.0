@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Common; 
+using Common;
+using System;
+using Interactables;
 
 namespace Town
 { 
@@ -11,6 +13,9 @@ namespace Town
 
     public class BuildingIntService : MonoSingletonGeneric<BuildingIntService>
     {
+
+        public event Action<Iitems> OnTrophyableTavern; 
+
 
         [Header("Char and NPC Select")]
         public CharNames selectChar;
@@ -25,7 +30,18 @@ namespace Town
             houseController = GetComponent<HouseController>();
             templeController = GetComponent<TempleController>();    
         }
- 
+
+        #region 
+
+        public void On_TrophyableTavern(Iitems item)
+        {
+            OnTrophyableTavern?.Invoke(item);
+        }
+
+        #endregion 
+
+
+
     }
 }
 

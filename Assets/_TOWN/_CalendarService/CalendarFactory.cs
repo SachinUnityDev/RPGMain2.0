@@ -11,10 +11,8 @@ namespace Common
     {
         public virtual MonthName monthName { get; set; }
         public virtual string MonthShortName { get; set; }
-        public virtual void ApplyMonthSpecs(CharController charController)
-        {
-
-        }
+        public abstract void ApplyMonthSpecs(CharController charController); 
+        
     }
 
     public abstract class  WeekEventBase :MonoBehaviour
@@ -25,14 +23,12 @@ namespace Common
         public virtual void OnWeekExit(CharController charController) { }
         
     }
-    public abstract class DayEventBase : MonoBehaviour
+    public abstract class DayEventBase 
     {
-        public virtual DayName dayName { get; set; }
-        public virtual string dayStr { get; set; }
-        public virtual void ApplyDaySpecs(CharController charController)
-        {
-
-        }
+        public abstract DayName dayName { get; set; }
+        public abstract string dayStr { get; set; }
+        public abstract void ApplyDaySpecs(CharController charController); 
+     
     }
 
     #endregion

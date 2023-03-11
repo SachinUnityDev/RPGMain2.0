@@ -54,6 +54,19 @@ namespace Interactables
 
         #endregion 
 
+        public bool AddItem2CommORStash(Iitems item)
+        {
+            if (AddItem2CommInv(item))
+            {
+                return true; 
+            }else if (AddItem2StashInv(item))
+            {
+                return true; 
+            }
+            return false; 
+        }
+
+
         #region COMMON INV
         public bool AddItem2CommInv(Iitems item)   // KEY POINT OF ADDITION OF ITEM // Add to model => view
         {          
@@ -86,6 +99,12 @@ namespace Interactables
             return quantity; 
         }
 
+        public List<Iitems> GetItemsFrmCommonInv(ItemType itemType)
+        {
+            List<Iitems> allItems = new List<Iitems>();
+            allItems = commonInvItems.Where(t => t.itemType == itemType).ToList();
+            return allItems;
+        }
         #endregion
 
 
@@ -121,9 +140,16 @@ namespace Interactables
         }
 
         #endregion
-            
+
 
         #region STASH
+
+        public List<Iitems> GetItemsFrmStashInv(ItemType itemType)
+        {
+            List<Iitems> allItems = new List<Iitems>();
+            allItems = stashInvIntItems.Where(t => t.itemType == itemType).ToList();
+            return allItems;
+        }
 
         public bool AddItem2StashInv(Iitems item)   // KEY POINT OF ADDITION OF ITEM // Add to model => view
         {

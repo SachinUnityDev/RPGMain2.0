@@ -21,15 +21,14 @@ namespace Common
             OnWeekTick(charController);
         }
 
-        public override void OnWeekTick(CharController characterController)
+        public override void OnWeekTick(CharController charController)
         {
-            FameService.Instance.fameModifier = 2;
+            FameService.Instance.fameModel.fameYield = 2;
         }
 
         public override void OnWeekExit(CharController charController)
         {
-            FameService.Instance.fameModifier = 1;
-
+            FameService.Instance.fameModel.fameYield = 1;
         }
     }
 

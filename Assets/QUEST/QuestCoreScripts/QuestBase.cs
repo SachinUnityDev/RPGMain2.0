@@ -7,7 +7,7 @@ namespace Common
 {
     public abstract class QuestBase
     {
-        public QuestNames questName { get; }
+        public MainQuestNames questName { get; }
 
         public abstract void ApplyInteraction1();
         public abstract void ApplyInteraction2();

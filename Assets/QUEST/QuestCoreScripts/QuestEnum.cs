@@ -23,27 +23,28 @@ namespace Common
         Exploration,
         Taunt,
     }
+    public enum BountyQuest
+    {
+        None, 
+        HuntInTheWilderness,
+        CrewMemberNeeded, 
+    }
+    public enum SideQuest
+    {
+        None,
+        RatInfestation, 
+    }
+    public enum CompQuestNames
+    {
+        None, 
+    }
 
-    public enum QuestNames
+    public enum MainQuestNames
     {
         None, 
         LostMemory, 
-        ProofOfPower,
-        APlaceOfEvil,
-        CallToTheRealAdventure,
-        TheHuwawa,     
-        RatInfestation,
-        JungleTribes,
-        LostSister,
-        HuntInTheWilderness,
-        SmuggleGoods,
-        BanditsHideoutOrBoudingoDen,
-        BaranTheBrigand,
-        ExpertOfWaterMagic,
-        Tikitown,
-        ShipwreckOrNkamamba,
-        Promotion,
-        RobTheBank,
+        ThePowerWithin, 
+        APlaceOfEvil, 
     }
 
 

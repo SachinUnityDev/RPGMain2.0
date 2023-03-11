@@ -29,8 +29,8 @@ namespace Common
             bronzeTopBtn.onClick.AddListener(OnBronzeTopBtnPressed); 
             bronzeBtmBtn.onClick.AddListener(OnBronzeBtmBtnPressed);
             EcoServices.Instance.OnInvMoneyChg += 
-                () => transform.GetComponent<DisplayCurrency>()
-                .Display(EcoServices.Instance.GetMoneyAmtInPlayerInv());          
+                (Currency invMoney) => transform.GetComponent<DisplayCurrency>()
+                .Display(invMoney);          
         }
         public void FillTransactBox(Currency currTransactBox, CurrTransactState transactState)
         {

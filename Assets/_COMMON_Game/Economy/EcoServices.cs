@@ -11,8 +11,8 @@ namespace Common
     {
         public EconoModel econoModel;
         public EcoSO ecoSO;
-        public event Action OnInvMoneyChg;
-        public event Action OnStashMoneyChg;
+        public event Action<Currency> OnInvMoneyChg;
+        public event Action<Currency> OnStashMoneyChg;
         void Start()
         {
             econoModel = new EconoModel(ecoSO);
@@ -35,33 +35,23 @@ namespace Common
         public void DebitPlayerStash(Currency amt)
         {
             econoModel.moneyInStash.SubMoney(amt);
-            OnStashMoneyChg?.Invoke(); 
+            OnStashMoneyChg?.Invoke(econoModel.moneyInStash); 
         }
         public void DebitPlayerInv(Currency amt)
         {
             econoModel.moneyInInv.SubMoney(amt);
-            OnInvMoneyChg?.Invoke(); 
+            OnInvMoneyChg?.Invoke(econoModel.moneyInInv); 
         }
         public void AddMoney2PlayerStash (Currency amt)
         {
             econoModel.moneyInStash.AddMoney(amt);
-            OnStashMoneyChg?.Invoke();
+            OnStashMoneyChg?.Invoke(econoModel.moneyInStash);
         }
         public void AddMoney2PlayerInv(Currency amt)
         {
             econoModel.moneyInInv.AddMoney(amt);
-            OnInvMoneyChg?.Invoke(); 
+            OnInvMoneyChg?.Invoke(econoModel.moneyInInv); 
         }
-        //public void DebitNPCAct(Currency amt, NPCNames npcName)
-        //{
-        //    econoModel.allNPCMoneyData.Find(t => t.npcName == npcName).money.SubMoney(amt);
-        //}
-        //public void PayMoney2NPC(Currency amt, NPCNames npcName)
-        //{
-        //    econoModel.allNPCMoneyData.Find(t => t.npcName == npcName).money.AddMoney(amt) ; 
-        //}
-
-
 
 #region SAVE_LOAD SERVICES
         public void RestoreState()

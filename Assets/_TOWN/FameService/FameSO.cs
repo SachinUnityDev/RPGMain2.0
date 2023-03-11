@@ -42,6 +42,15 @@ namespace Common
 
         public List<fameBehaviorDescData> allfameBehaviorDesc = new List<fameBehaviorDescData>();
 
+        [Header("Fame pos neg sprites")]
+        public Sprite posFameSprite;
+        public Sprite negFameSprite;
+
+        public Color posFameColor;
+        public Color negFameColor;
+        public Color unknownFameColor; 
+
+
         public string GetFameBehaviorStr(FameBehavior fameBehavior)
         {
             string str = allfameBehaviorDesc.Find(t => t.famebehavior == fameBehavior).desc;
@@ -54,6 +63,47 @@ namespace Common
             return str;
         }
 
+        public Sprite GetFameTypeSprite(FameType fameType)         
+        {
+            if(fameType == FameType.Respectable || fameType == FameType.Honorable || fameType == FameType.Hero)
+            {
+                return posFameSprite;
+
+            }
+            else if(fameType == FameType.Despicable || fameType == FameType.Notorious 
+                            || fameType == FameType.Villain)
+            {
+                return negFameSprite;
+            }else if(fameType == FameType.Unknown)
+            {
+                return posFameSprite; 
+            }
+            Debug.Log("Fame type match not found "+ fameType.ToString());  
+
+            return null; 
+        }
+
+
+        public Color GetFameTypeColor(FameType fameType)
+        {
+            if (fameType == FameType.Respectable || fameType == FameType.Honorable || fameType == FameType.Hero)
+            {
+                return posFameColor; 
+
+            }
+            else if (fameType == FameType.Despicable || fameType == FameType.Notorious
+                            || fameType == FameType.Villain)
+            {
+                return negFameColor; 
+            }
+            else if (fameType == FameType.Unknown)
+            {
+                return unknownFameColor;
+            }
+            Debug.Log("Fame type match not found " + fameType.ToString());
+
+            return Color.white;
+        }
     }
 }
 

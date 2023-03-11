@@ -33,17 +33,15 @@ namespace Town
         public Transform rest;
 
 
-        [SerializeField] Button exit;
+        [SerializeField] Button exitBtn;
 
         BuildingSO tavernSO;
         TimeState timeState;
 
-
-
         void Awake()
         {
             BGSpriteContainer = transform.GetChild(0);
-           // exit.onClick.AddListener(UnLoad);
+           exitBtn.onClick.AddListener(UnLoad);
         }
         public void Init()
         {
@@ -90,7 +88,7 @@ namespace Town
                     return null;
                 case BuildInteractType.Bounty:
                     return bountyBoard;
-                case BuildInteractType.Serve:
+                case BuildInteractType.BuyDrink:
                     return buyDrink;
                 case BuildInteractType.Trophy:
                     return trophy;                
@@ -102,6 +100,7 @@ namespace Town
         }
         public void Load()
         {
+           
         }
 
         public void UnLoad()
@@ -113,13 +112,6 @@ namespace Town
             }
 
         }
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                Init(); // for test
-
-            }
-        }
+      
     }
 }

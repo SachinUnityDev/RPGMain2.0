@@ -10,13 +10,14 @@ namespace Interactables
     public class NyalaTrophy : TGBase, Iitems, ITrophyable
     {
         public override TGNames tgName => TGNames.NyalaTrophy;
-        public TavernSlotType tgSlotType => TavernSlotType.Trophy;
+        public TavernSlotType tavernSlotType => TavernSlotType.Trophy;
         public ItemType itemType => ItemType.TradeGoods;
         public int itemName => (int)TGNames.NyalaTrophy;
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; }
         public int itemId { get; set; }
+        public int fameYield => -2; 
         public void OnHoverItem()
         {
 
@@ -27,6 +28,8 @@ namespace Interactables
         {
             this.itemId = itemId;
             this.maxInvStackSize = maxInvStackSize;
+
+            allDisplayStr.Add("+2 Wp and -1 Luck on Field");
         }
   
 
@@ -47,7 +50,7 @@ namespace Interactables
             allLandscapeIndex.Add(index);
 
             index = FameService.Instance.fameController.ApplyFameModBuff(CauseType.TradeGoods, (int)tgName
-                , -2, TimeFrame.Infinity, 1);
+                , fameYield, TimeFrame.Infinity, 1);
             allFameIndex.Add(index);
         }
 

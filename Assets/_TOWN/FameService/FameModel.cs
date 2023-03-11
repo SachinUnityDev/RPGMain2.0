@@ -9,25 +9,20 @@ namespace Common
     public class FameModel
     {
         [Header("FAME VALUES")]
-        public float currGlobalFame;
-        public float currNekkisariFame;
+        public int fameVal;
+
 
         [Header("FameType")]
 
-        public FameType fametypGlobal;
-        public FameType fametypNekkisari;
+        public FameType fameType;
+       
 
         [Header("Modifier values")]
-        public float globalFameMod;
-        public float nekkisariFameMod;
+        public float fameYield = 1;
 
-        
         
         [Header("FAME")]
-        public List<FameChgData> globalfameDataAll = new List<FameChgData>();
-        public List<FameChgData> nekkisarifameDataAll = new List<FameChgData>();
-
-
+        public List<FameChgData> allFameData = new List<FameChgData>();
     }
 }
 

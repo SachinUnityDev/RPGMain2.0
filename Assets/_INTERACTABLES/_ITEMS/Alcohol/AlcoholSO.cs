@@ -16,6 +16,8 @@ namespace Interactables
         [Header("Sprites")]
         public Sprite iconSprite;
         [TextArea(5, 10)]
+        public List<string> preDrinkLines = new List<string>();
+        [TextArea(5, 10)]
         public List<string> allLines = new List<string>();
 
         [Header("Recipe Info")]

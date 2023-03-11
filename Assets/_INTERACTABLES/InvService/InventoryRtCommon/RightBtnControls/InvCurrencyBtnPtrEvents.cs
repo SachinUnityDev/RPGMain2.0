@@ -77,7 +77,7 @@ namespace Interactables
         public void Load()
         {
             UIControlServiceGeneral.Instance.TogglePanel(transform.GetChild(0).gameObject, true);
-            FillPanel();
+            FillPanel(EcoServices.Instance.GetMoneyAmtInPlayerInv());
             transactPanel.gameObject.SetActive(false);
         }
 
@@ -88,9 +88,8 @@ namespace Interactables
             transactPanel.gameObject.SetActive(false);
         }
 
-        void FillPanel()
-        {
-            Currency invMoney = EcoServices.Instance.econoModel.moneyInInv.RationaliseCurrency();            
+        void FillPanel(Currency invMoney)
+        {               
             invCurrency.GetComponent<DisplayCurrency>().Display(invMoney);
             
         }

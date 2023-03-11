@@ -35,7 +35,7 @@ namespace Town
         Fermentation,     // house          
         Music, // house
         Safekeep,// safekeeper ..Bank ??
-        Serve,// ship// tavern 
+        BuyDrink,// ship// tavern 
         Smuggle, // ship    
         Trophy,// tavern 
         EndDay, // house

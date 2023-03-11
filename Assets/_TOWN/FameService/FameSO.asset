@@ -75,3 +75,8 @@ MonoBehaviour:
     desc: Won't join if Fame Despicable or worse.
   - famebehavior: 6
     desc: Won't join if Fame Notorious or worse.
+  posFameSprite: {fileID: 21300000, guid: 886da53ea692b0a429ca222a754c4c8c, type: 3}
+  negFameSprite: {fileID: 21300000, guid: 951603f551e9ffd478bba65099a0bc8f, type: 3}
+  posFameColor: {r: 0.9372549, g: 0.45490196, b: 0.09411765, a: 1}
+  negFameColor: {r: 0.38039216, g: 0.5294118, b: 0.8509804, a: 1}
+  unknownFameColor: {r: 1, g: 0.7921569, b: 0.63529414, a: 1}

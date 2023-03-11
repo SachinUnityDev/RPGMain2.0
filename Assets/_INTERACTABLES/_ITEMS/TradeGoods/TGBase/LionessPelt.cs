@@ -10,13 +10,15 @@ namespace Interactables
     public class LionessPelt : TGBase, Iitems, ITrophyable
     {
         public override TGNames tgName => TGNames.LionessPelt;
-        public  TavernSlotType tgSlotType => TavernSlotType.Pelt;
+        public  TavernSlotType tavernSlotType => TavernSlotType.Pelt;
         public ItemType itemType => ItemType.TradeGoods;
         public int itemName => (int)TGNames.LionessPelt;
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; }
         public int itemId { get; set; }
+        public int fameYield => 1;
+
         public void OnHoverItem()
         {
 
@@ -25,9 +27,8 @@ namespace Interactables
         {
             this.itemId = itemId;
             this.maxInvStackSize = maxInvStackSize;
+            allDisplayStr.Add("+1 Morale on Savannah");
         }
- 
-
         public void TrophyInit()
         {
 
@@ -38,11 +39,11 @@ namespace Interactables
         {
             int index =
             charController.landscapeController.ApplyLandscapeBuff(CauseType.TradeGoods, (int)tgName, LandscapeNames.Savannah
-            , StatsName.haste, 1);
+            , StatsName.morale, 1);
             allLandscapeIndex.Add(index);
       
             index = FameService.Instance.fameController.ApplyFameModBuff(CauseType.TradeGoods, (int)tgName
-                , 1, TimeFrame.Infinity, 1);
+                , fameYield, TimeFrame.Infinity, 1);
             allFameIndex.Add(index);
         }
 

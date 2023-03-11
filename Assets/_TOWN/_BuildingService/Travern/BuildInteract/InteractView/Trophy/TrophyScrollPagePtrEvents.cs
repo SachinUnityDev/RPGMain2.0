@@ -1,0 +1,107 @@
+using Common;
+using Interactables;
+using UnityEngine;
+using UnityEngine.UI;
+using System;
+using System.Collections.Generic;
+
+namespace Town
+{
+
+
+    public class TrophyScrollPagePtrEvents : MonoBehaviour 
+    {
+        [Header("Select Container")]
+        [SerializeField] Transform selectContainer; 
+        
+        List<Iitems> allItems = new List<Iitems>();       
+        [SerializeField] Button leftBtn;
+        [SerializeField] Button rightBtn;
+
+        [SerializeField] float prevLeftClick = 0f;
+        [SerializeField] float prevRightClick = 0f;
+
+        [Header("Global var")]
+        [SerializeField] int index;
+        [SerializeField] int maxIndex; 
+        void Start()
+        {
+            leftBtn.onClick.AddListener(OnLeftBtnPressed);
+            rightBtn.onClick.AddListener(OnRightBtnPressed);
+        }
+        public void InitScrollPage(TavernSlotType tavernSlotType)
+        {
+            allItems.Clear();   
+            allItems.AddRange(InvService.Instance.invMainModel.GetItemsFrmCommonInv(ItemType.TradeGoods));
+            allItems.AddRange(InvService.Instance.invMainModel.GetItemsFrmStashInv(ItemType.TradeGoods));
+            List<Iitems> allSelect= new List<Iitems>();
+            foreach (Iitems item in allItems) 
+            {
+            
+                ITrophyable iTrophy = item as ITrophyable;
+                if(iTrophy.tavernSlotType == tavernSlotType)
+                {
+                    allSelect.Add(item);    
+                }
+            }
+            if(allItems.Count > 0)            
+            FillItemsinSlots();
+        }
+
+        void FillItemsinSlots()
+        {
+            if(allItems.Count% 3 == 0)
+                maxIndex = (allItems.Count/3)-1; // 0 factor in list    
+            else
+                maxIndex = (allItems.Count/3) ;
+            int startIndex = index * 3;
+            int endIndex = startIndex + 3;           
+            int j = 0; 
+            for (int i = startIndex; i < endIndex; i++)
+            {
+                TrophyScrollSlotController slotController
+                        = selectContainer.GetChild(j).GetComponent<TrophyScrollSlotController>();
+                slotController.ClearSlot();
+
+                if (i < allItems.Count)
+                    slotController.LoadSlot(allItems[startIndex]);                
+                j++; 
+            }
+
+        }
+        void OnLeftBtnPressed()
+        {
+            if (Time.time - prevLeftClick < 0.3f) return;
+            if (index == 0)
+            {
+                index = maxIndex; // to account for the 3 slots
+                FillItemsinSlots();
+            }
+            else
+            {
+                --index; FillItemsinSlots();
+            }
+            prevLeftClick = Time.time;
+        }
+        void OnRightBtnPressed()
+        {
+            if (Time.time - prevRightClick < 0.3f) return;
+            if (index == maxIndex)  // to account for the 3 slots 
+            {
+                index = 0;
+                FillItemsinSlots();
+            }
+            else
+            {
+                ++index; FillItemsinSlots();
+            }
+            prevRightClick = Time.time;
+        }
+        public void OnSlotClicked(Iitems item)
+        {
+            // subscribe to onslotselect
+            BuildingIntService.Instance.On_TrophyableTavern(item); 
+        }
+
+    }
+}

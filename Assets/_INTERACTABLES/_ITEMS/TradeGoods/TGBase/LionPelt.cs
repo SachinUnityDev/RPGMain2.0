@@ -11,13 +11,15 @@ namespace Interactables
     public class LionPelt : TGBase, Iitems, ITrophyable 
     {
         public override TGNames tgName => TGNames.LionPelt;
-        public  TavernSlotType tgSlotType => TavernSlotType.Pelt;
+        public  TavernSlotType tavernSlotType => TavernSlotType.Pelt;
         public ItemType itemType => ItemType.TradeGoods;
         public int itemName => (int)TGNames.LionPelt;
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; }
         public int itemId { get; set; }
+        public int fameYield => 2;
+
         public void OnHoverItem()
         {
 
@@ -26,27 +28,24 @@ namespace Interactables
         {
             this.itemId = itemId;
             this.maxInvStackSize = maxInvStackSize;
+            allDisplayStr.Add("+1 Vigor on Savannah");
         }
         public void TrophyInit()
         {
 
         }
-            //+1 Morale and +1 Vigor on Savannah
-            //+1 Fame Yield"
+            
+            //+1 Vigor on Savannah
+            
         public void OnTrophyWalled()
         {
             int index =
-           charController.landscapeController.ApplyLandscapeBuff(CauseType.TradeGoods, (int)tgName, LandscapeNames.Savannah
-               , StatsName.morale, 1);
-            allLandscapeIndex.Add(index);
-
-            index =
                charController.landscapeController.ApplyLandscapeBuff(CauseType.TradeGoods, (int)tgName, LandscapeNames.Savannah
                , StatsName.vigor, 1);
             allLandscapeIndex.Add(index);
 
             index = FameService.Instance.fameController.ApplyFameModBuff(CauseType.TradeGoods, (int)tgName
-                , 1, TimeFrame.Infinity, 1);
+                , fameYield, TimeFrame.Infinity,1);
             allFameIndex.Add(index);
         }
 

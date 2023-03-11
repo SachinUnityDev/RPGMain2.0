@@ -111,8 +111,9 @@ namespace Interactables
         ExcessInv,
         EnchantSlot,
         SocketSlot, 
-        NPCSlots, 
-
+        NPCSlot, 
+        TrophySelectSlot, 
+        TrophyScrollSlot, 
     }
     public enum GemType
     {
@@ -312,7 +313,7 @@ namespace Interactables
     {
         None, 
         Pelt, // animal skin hung on the wall 
-        Trophy, 
+        Trophy, // head of the animal 
     }
 
     public enum TGNames

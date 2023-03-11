@@ -495,24 +495,19 @@ namespace Interactables
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                InitItemToInv(SlotType.StashInv, ItemType.Potions, (int)PotionNames.HealthPotion,
+                InitItemToInv(SlotType.StashInv, ItemType.TradeGoods, (int)TGNames.DeerSkin,
                                      CauseType.Items, 2);
             }
             if (Input.GetKeyDown(KeyCode.J))
             {
-                InitItemToInv(SlotType.StashInv, ItemType.Potions, (int)PotionNames.StaminaPotion,
-                                     CauseType.Items, 2);
+                InitItemToInv(SlotType.StashInv, ItemType.TradeGoods, (int)TGNames.NyalaPelt,
+                                   CauseType.Items, 2);
             }
             if (Input.GetKeyDown(KeyCode.G))
             {
-                InitItemToInv(SlotType.StashInv, ItemType.GenGewgaws, (int)GenGewgawNames.AmetystRing,
-                                  CauseType.Items, 2, GenGewgawQ.Epic);
-            }
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                InitItemToInv(SlotType.StashInv, ItemType.GenGewgaws, (int)GenGewgawNames.BeltOfTheCommoner,
-                          CauseType.Items, 2, GenGewgawQ.Lyric);
-            }
+                InitItemToInv(SlotType.StashInv, ItemType.TradeGoods, (int)TGNames.NyalaTrophy,
+                                            CauseType.Items, 2);
+            }            
         }
 
     }

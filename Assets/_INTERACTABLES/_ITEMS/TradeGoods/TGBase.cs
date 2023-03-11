@@ -15,14 +15,18 @@ namespace Interactables
         public List<int> buffIndex { get; set; }
         public List<int> allLandscapeIndex { get; set; }        
         public List<int> allFameIndex { get; set; }
+
+        public List<string> allDisplayStr = new List<string>();
+
     }
 
     public interface ITrophyable
     {
-        public TavernSlotType tgSlotType { get; }
-        public abstract void TrophyInit();
-        public abstract void OnTrophyWalled(); 
-        public abstract void OnTrophyRemoved();
+        TavernSlotType tavernSlotType { get; }
+        int fameYield { get; }
+        abstract void TrophyInit();
+        abstract void OnTrophyWalled(); 
+        abstract void OnTrophyRemoved();
 
         
     }

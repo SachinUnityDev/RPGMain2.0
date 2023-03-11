@@ -4,14 +4,26 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Common;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Town
 {
     public class TavernController : MonoBehaviour, IPanel, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
+
+        public TavernModel tavernModel;
+
+        BuildingSO tavernSO;
+
+        void Start()
+        {
+            tavernSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.House);
+            tavernModel = new TavernModel(tavernSO);
+        }
+
         public void Init()
         {
-           
+               
         }
 
         public void Load()
@@ -24,8 +36,8 @@ namespace Town
            
         }
 
-        Image btnImg;
-        // [SerializeField] GameObject namePlank;
+       Image btnImg;
+       
 
         public void OnPointerClick(PointerEventData eventData)
         {
@@ -45,14 +57,6 @@ namespace Town
             //  namePlank.GetComponent<RectTransform>().DOScale(0, 0.25f);
 
         }
-
-        void Start()
-        {
-            btnImg = GetComponent<Image>();
-            btnImg.alphaHitTestMinimumThreshold = 0.1f;
-            //  namePlank.GetComponent<RectTransform>().DOScale(0, 0.25f);
-        }
-
 
     }
 

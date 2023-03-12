@@ -45,6 +45,7 @@ namespace Interactables
         }
         public void OnPointerEnter(PointerEventData eventData)
         {            
+            
             if(iSlotable.ItemsInSlot.Count != 0)
             {
                 Debug.Log("Item Enter .. " + iSlotable.ItemsInSlot[0]);

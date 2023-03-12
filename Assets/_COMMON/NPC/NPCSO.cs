@@ -9,7 +9,7 @@ namespace Town
 {
   
 
-    [CreateAssetMenu(fileName = "NPCSO", menuName = "Char Service/NPCSO")]
+    [CreateAssetMenu(fileName = "NPCSO", menuName = "Character Service/NPCSO")]
 
     public class NPCSO : ScriptableObject
     {
@@ -21,14 +21,8 @@ namespace Town
         public Sprite dialoguePortraitClicked;
         public Sprite dialoguePortraitUnClicked;
 
-        [Header("Interaction related")]
-        public string InteractHeading; 
-        public List<string> InteractionOptions = new List<string>();
-
         [Header("Items purchaseAble by NPC")]
         public List<ItemType> itemTypesAccepted = new List<ItemType>();
-
-       
     }
 
     [Serializable]

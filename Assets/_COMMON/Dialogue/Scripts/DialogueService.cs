@@ -163,9 +163,9 @@ namespace Common
             }
             else if (npcName != NPCNames.None)
             {
-                sprites[0] = CharService.Instance.allNPCSO
+                sprites[0] = CharService.Instance.allNPCSOls
                                             .Find(t => t.npcName == npcName).dialoguePortraitClicked;
-                sprites[1] = CharService.Instance.allNPCSO
+                sprites[1] = CharService.Instance.allNPCSOls
                                            .Find(t => t.npcName == npcName).dialoguePortraitUnClicked;
                 return sprites;
             }

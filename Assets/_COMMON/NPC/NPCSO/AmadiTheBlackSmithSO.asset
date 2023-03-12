@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6bc5893862d9b24e9f7d82b2f8fad3e, type: 3}
+  m_Name: AmadiTheBlackSmithSO
+  m_EditorClassIdentifier: 
+  npcID: 0
+  npcName: 2
+  npcPrefab: {fileID: 0}
+  npcSprite: {fileID: 21300000, guid: a44c953887e940a4ea8b7ccae397be22, type: 3}
+  npcHexPortrait: {fileID: 21300000, guid: a1c10c5073ae4704cbec1b4ab3c55fb7, type: 3}
+  dialoguePortraitClicked: {fileID: 21300000, guid: a44c953887e940a4ea8b7ccae397be22,
+    type: 3}
+  dialoguePortraitUnClicked: {fileID: 21300000, guid: 5b46af3018fa8804094b22cd986aa402,
+    type: 3}
+  itemTypesAccepted: 090000000a00000010000000110000001200000002000000

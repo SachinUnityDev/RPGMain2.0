@@ -8,7 +8,6 @@ namespace Town
 {
     public class TavernView : MonoBehaviour, IPanel, IBuildName
     {
- 
         public BuildingNames BuildingName => BuildingNames.Tavern;
 
         [Header("To be ref")]
@@ -52,7 +51,7 @@ namespace Town
             nightBG = tavernSO.buildingData.buildIntNight; 
 
             timeState = CalendarService.Instance.currtimeState;
-            //btnContainer.GetComponent<HouseInteractBtnView>().InitInteractBtns(this);
+            btnContainer.GetComponent<TavernBuildIntBtnView>().InitInteractBtns(this);
             FillHouseBG();
             InitInteractPanels();
         }

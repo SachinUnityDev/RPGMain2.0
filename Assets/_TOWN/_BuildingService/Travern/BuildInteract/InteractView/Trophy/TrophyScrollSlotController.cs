@@ -131,12 +131,41 @@ namespace Common
             }
             else
             {
-                // add item to the trophyable item in common inv
-                InvService.Instance.invMainModel.AddItem2CommORStash(ItemsInSlot[0]);
-                RemoveItem();
-                AddItemOnSlot(item, onDrop);
-                return true;
+                if (HasSameItem(item))  // SAME ITEM IN SLOT 
+                {
+                    if (ItemsInSlot.Count < item.maxInvStackSize)  // SLOT STACK SIZE 
+                    {
+                        InvService.Instance.invMainModel.AddItem2CommORStash(ItemsInSlot[0]);
+                        RemoveItem(); // to account for the scroll.. 
+                        AddItemOnSlot(item, onDrop);
+                        return true;
+                    }
+                    else
+                    {
+                        Debug.Log("Slot full");
+                        return false;
+                    }
+                }
+                else   // DIFF ITEM IN SLOT 
+                {
+                    return false;
+                }
             }
+
+
+            //if (IsEmpty())
+            //{
+            //    AddItemOnSlot(item, onDrop);
+            //    return true;
+            //}
+            //else
+            //{
+            //    // add item to the trophyable item in common inv
+            //    InvService.Instance.invMainModel.AddItem2CommORStash(ItemsInSlot[0]);
+            //    RemoveItem();
+            //    AddItemOnSlot(item, onDrop);
+            //    return true;
+            //}
         }
         void AddItemOnSlot(Iitems item, bool onDrop)
         {

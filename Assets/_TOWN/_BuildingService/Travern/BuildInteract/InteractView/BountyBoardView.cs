@@ -21,7 +21,7 @@ namespace Town
         }
         void OnExitBtnPressed()
         {
-
+            UnLoad();
         }
 
         void FillBountyBoardLs()

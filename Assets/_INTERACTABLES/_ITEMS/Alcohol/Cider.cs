@@ -37,7 +37,9 @@ namespace Interactables
             RecipeInit();
             this.itemId = itemId;
             this.maxInvStackSize = maxInvStackSize;
-
+            string str = $"+1 Focus for one day ";
+            Debug.Log("Cider init" + str);
+            allDisplayStr.Add(str);
         }
         public void OnHoverItem()
         {

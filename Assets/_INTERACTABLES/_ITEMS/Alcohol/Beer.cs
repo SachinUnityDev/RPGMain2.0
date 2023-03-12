@@ -36,6 +36,9 @@ namespace Interactables
             RecipeInit(); 
             this.itemId= itemId;    
             this.maxInvStackSize = maxInvStackSize;
+            string str = $"+1 morale for one day ";
+            Debug.Log("Beer  init" + str);
+            allDisplayStr.Add(str);
         }
         public void OnHoverItem()
         {

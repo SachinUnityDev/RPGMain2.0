@@ -12,29 +12,38 @@ namespace Town
     public class TrophyScrollPagePtrEvents : MonoBehaviour 
     {
         [Header("Select Container")]
-        [SerializeField] Transform selectContainer; 
+        [SerializeField] Transform selectContainer;
         
-        List<Iitems> allItems = new List<Iitems>();       
+        [Header("Page scroll related")]        
+        List<Iitems> allItems = new List<Iitems>();
+        List<Iitems> allSelect = new List<Iitems>();
         [SerializeField] Button leftBtn;
         [SerializeField] Button rightBtn;
 
         [SerializeField] float prevLeftClick = 0f;
         [SerializeField] float prevRightClick = 0f;
 
+        [Header("return btn")]
+        [SerializeField] Button returnBtn; 
+
         [Header("Global var")]
         [SerializeField] int index;
-        [SerializeField] int maxIndex; 
+        [SerializeField] int maxIndex;
+        TrophyView trophyView;
+   
         void Start()
         {
             leftBtn.onClick.AddListener(OnLeftBtnPressed);
             rightBtn.onClick.AddListener(OnRightBtnPressed);
+            returnBtn.onClick.AddListener(OnReturnBtnPressed);  
         }
-        public void InitScrollPage(TavernSlotType tavernSlotType)
+        public void InitScrollPage(TrophyView trophyView, TavernSlotType tavernSlotType)
         {
+            this.trophyView= trophyView;    
             allItems.Clear();   
             allItems.AddRange(InvService.Instance.invMainModel.GetItemsFrmCommonInv(ItemType.TradeGoods));
             allItems.AddRange(InvService.Instance.invMainModel.GetItemsFrmStashInv(ItemType.TradeGoods));
-            List<Iitems> allSelect= new List<Iitems>();
+          
             foreach (Iitems item in allItems) 
             {
             
@@ -50,10 +59,10 @@ namespace Town
 
         void FillItemsinSlots()
         {
-            if(allItems.Count% 3 == 0)
-                maxIndex = (allItems.Count/3)-1; // 0 factor in list    
+            if(allSelect.Count% 3 == 0)
+                maxIndex = (allSelect.Count/3)-1; // 0 factor in list    
             else
-                maxIndex = (allItems.Count/3) ;
+                maxIndex = (allSelect.Count/3) ;
             int startIndex = index * 3;
             int endIndex = startIndex + 3;           
             int j = 0; 
@@ -63,8 +72,8 @@ namespace Town
                         = selectContainer.GetChild(j).GetComponent<TrophyScrollSlotController>();
                 slotController.ClearSlot();
 
-                if (i < allItems.Count)
-                    slotController.LoadSlot(allItems[startIndex]);                
+                if (i < allSelect.Count)
+                    slotController.LoadSlot(allSelect[startIndex]);                
                 j++; 
             }
 
@@ -97,6 +106,12 @@ namespace Town
             }
             prevRightClick = Time.time;
         }
+
+        void OnReturnBtnPressed()
+        {
+            trophyView.DisplaySelectPage();
+        }
+
         public void OnSlotClicked(Iitems item)
         {
             // subscribe to onslotselect

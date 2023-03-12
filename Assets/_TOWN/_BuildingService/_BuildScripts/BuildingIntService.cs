@@ -28,7 +28,8 @@ namespace Town
         void Start()
         {
             houseController = GetComponent<HouseController>();
-            templeController = GetComponent<TempleController>();    
+            templeController = GetComponent<TempleController>();
+            tavernController = GetComponent<TavernController>();    
         }
 
         #region 

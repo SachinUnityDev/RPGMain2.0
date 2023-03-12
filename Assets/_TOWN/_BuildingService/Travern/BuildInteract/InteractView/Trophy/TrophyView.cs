@@ -23,7 +23,7 @@ namespace Town
         private void Start()
         {
             exitBtn.onClick.AddListener(OnExitBtnPressed);
-            tavernSlotType = TavernSlotType.Trophy; 
+            tavernSlotType = TavernSlotType.Pelt; 
         }
         void OnExitBtnPressed()
         {
@@ -32,7 +32,7 @@ namespace Town
         public void InitSelectPage(TavernSlotType tavernSlotType)
         {
             this.tavernSlotType = tavernSlotType;
-            scrollPageTrans.GetComponent<TrophyScrollPagePtrEvents>().InitScrollPage(tavernSlotType);
+            scrollPageTrans.GetComponent<TrophyScrollPagePtrEvents>().InitScrollPage(this, tavernSlotType);
         }
         void InitOptsPage()
         {
@@ -41,6 +41,16 @@ namespace Town
         void InitFameSelect()
         {
             fameTrans.GetComponent<DisplayFame>().Display(); 
+        }
+        public void DisplaySelectPage()
+        {
+            selectPageTrans.gameObject.SetActive(true);
+            scrollPageTrans.gameObject.SetActive(false); 
+        }
+        public void DisplayScrollPage()
+        {
+            selectPageTrans.gameObject.SetActive(false);
+            scrollPageTrans.gameObject.SetActive(true);
         }
         public void Init()
         {

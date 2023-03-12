@@ -254,7 +254,7 @@ namespace Interactables
         }
 
         #region GEMS 
-        public void GemsInit()
+         void GemsInit()
         {
             if (allGems.Count > 0) return;
             var getGems = Assembly.GetAssembly(typeof(GemBase)).GetTypes()
@@ -270,7 +270,7 @@ namespace Interactables
             gemsCount = allGems.Count;
         }
 
-        public Iitems GetNewGemItem(GemNames _gemName)
+         Iitems GetNewGemItem(GemNames _gemName)
         {
             foreach (var gem in allGems)
             {
@@ -286,7 +286,7 @@ namespace Interactables
         #endregion
 
         #region GENERIC GEWGAWS 
-        public void GenGewGawInit()
+         void GenGewGawInit()
         {
             //if (allGenGewgaws.Count > 0) return;
             InitPrefixes();
@@ -341,7 +341,7 @@ namespace Interactables
             }
             genGewgawCount = allGenGewgawData.Count; 
         }
-        public void InitSuffixes()
+         void InitSuffixes()
         {
            // if (allSuffixes.Count > 0) return;
 
@@ -356,7 +356,7 @@ namespace Interactables
                 allSuffixes.Add(t.suffixName, suffix);
             }
         }
-        public void InitPrefixes()
+         void InitPrefixes()
         {
            // if (allPrefixes.Count > 0) return;
 
@@ -370,7 +370,7 @@ namespace Interactables
                 allPrefixes.Add(t.prefixName, prefix);
             }
         }
-        public Iitems GetGenGewgaws(GenGewgawNames genGewgawName, GenGewgawQ genGewgawQ)
+         Iitems GetGenGewgaws(GenGewgawNames genGewgawName, GenGewgawQ genGewgawQ)
         {         
             foreach (var gewgaw in allGenGewgawData)
             {
@@ -385,7 +385,7 @@ namespace Interactables
 
         }
 
-        public SuffixBase GetSuffixBase(SuffixNames _suffixName)
+         SuffixBase GetSuffixBase(SuffixNames _suffixName)
         {
             foreach (var suffix in allSuffixes)
             {
@@ -400,7 +400,7 @@ namespace Interactables
         }
    
 
-        public PrefixBase GetPrefixBase(PrefixNames _prefixName)
+         PrefixBase GetPrefixBase(PrefixNames _prefixName)
         {
             foreach (var prefix in allPrefixes)
             {
@@ -416,7 +416,7 @@ namespace Interactables
         #endregion
 
         #region  SAGAIC GEWGAWS 
-        public void SagaicGewgawInit()
+         void SagaicGewgawInit()
         {
             if (allSagaicGewgaws.Count > 0) return;
             var getSagaicGewgaws = Assembly.GetAssembly(typeof(SagaicGewgawBase)).GetTypes()
@@ -431,7 +431,7 @@ namespace Interactables
             sagaicGewgawCount = allSagaicGewgaws.Count;
         }
 
-        public Iitems GetNewSagaicGewgaw(SagaicGewgawNames sagaicName)
+         Iitems GetNewSagaicGewgaw(SagaicGewgawNames sagaicName)
         {
             foreach (var sagaic in allSagaicGewgaws)
             {
@@ -446,7 +446,7 @@ namespace Interactables
         #endregion
 
         #region POETIC GEWGAWS
-        public void PoeticGewgawInit()
+         void PoeticGewgawInit()
         {
             if (allPoeticGewgaws.Count > 0) return;
             var getPoeticGewgaws = Assembly.GetAssembly(typeof(PoeticGewgawBase)).GetTypes()
@@ -461,7 +461,7 @@ namespace Interactables
             poeticGewgawCount = allPoeticGewgaws.Count;
         }
 
-        public Iitems GetNewPoeticGewgaw(PoeticGewgawNames poeticName)
+         Iitems GetNewPoeticGewgaw(PoeticGewgawNames poeticName)
         {
             foreach (var poetic in allPoeticGewgaws)
             {
@@ -481,7 +481,7 @@ namespace Interactables
 
         #region POTIONS 
 
-        public void PotionInit()
+         void PotionInit()
         {
             if (allPotions.Count > 0) return;
 
@@ -497,7 +497,7 @@ namespace Interactables
             potionCount = allPotions.Count;
         }
 
-        public Iitems GetNewPotionItem(PotionNames _PotionName)
+         Iitems GetNewPotionItem(PotionNames _PotionName)
         {
             foreach (var potion in allPotions)
             {
@@ -517,7 +517,7 @@ namespace Interactables
         #endregion
 
         #region HERBS
-        public void HerbsInit()
+         void HerbsInit()
         {
             if (allHerbs.Count > 0) return;
             var getHerbs = Assembly.GetAssembly(typeof(HerbBase)).GetTypes()
@@ -533,7 +533,7 @@ namespace Interactables
             herbCount = allHerbs.Count;
         }
 
-        public Iitems GetNewHerbItem(HerbNames _herbName)
+         Iitems GetNewHerbItem(HerbNames _herbName)
         {
             foreach (var herb in allHerbs)
             {
@@ -550,7 +550,7 @@ namespace Interactables
         #endregion
 
         #region FOODS
-        public void FoodInit()
+         void FoodInit()
         {
             if (allFoods.Count > 0) return;
             var getFoods = Assembly.GetAssembly(typeof(Foodbase)).GetTypes()
@@ -566,7 +566,7 @@ namespace Interactables
             foodCount = allFoods.Count;
         }
 
-        public Iitems GetNewFoodItem(FoodNames _foodName)
+         Iitems GetNewFoodItem(FoodNames _foodName)
         {
             foreach (var food in allFoods)
             {
@@ -582,7 +582,7 @@ namespace Interactables
         #endregion
 
         #region FRUITS
-        public void FruitInit()
+        void FruitInit()
         {
             if (allFruits.Count > 0) return;
             var getFruits = Assembly.GetAssembly(typeof(FruitBase)).GetTypes()
@@ -598,7 +598,7 @@ namespace Interactables
             fruitCount = allFruits.Count;
         }
 
-        public Iitems GetNewFruitItem(FruitNames _fruitName)
+        Iitems GetNewFruitItem(FruitNames _fruitName)
         {
             foreach (var fruit in allFruits)
             {
@@ -615,7 +615,7 @@ namespace Interactables
         # endregion
 
         #region INGREDIENTS
-        public void IngredInit()
+        void IngredInit()
         {
             if (allIngreds.Count > 0) return;
             var getIngreds = Assembly.GetAssembly(typeof(IngredBase)).GetTypes()
@@ -631,7 +631,7 @@ namespace Interactables
             ingredCount = allIngreds.Count;
         }
 
-        public Iitems GetNewIngredItem(IngredNames ingredName)
+        Iitems GetNewIngredItem(IngredNames ingredName)
         {
             foreach (var ingred in allIngreds)
             {
@@ -649,7 +649,7 @@ namespace Interactables
 
         #region MEALS
 
-        public void MealsInit()
+        void MealsInit()
         {
             if (allMeals.Count > 0) return;
             var getMeals = Assembly.GetAssembly(typeof(MealBase)).GetTypes()
@@ -665,7 +665,7 @@ namespace Interactables
             mealCount = allMeals.Count;
         }
 
-        public Iitems GetNewMealItem(MealNames _mealName)
+        Iitems GetNewMealItem(MealNames _mealName)
         {
             foreach (var meal in allMeals)
             {
@@ -681,7 +681,7 @@ namespace Interactables
         #endregion
 
         #region ALCOHOL
-        public void AlcoholInit()
+        void AlcoholInit()
         {
             if (allAcohols.Count > 0) return;
             var getAlcohols = Assembly.GetAssembly(typeof(AlcoholBase)).GetTypes()
@@ -697,7 +697,7 @@ namespace Interactables
             alcoholCount = allAcohols.Count;
         }
 
-        public Iitems GetNewAlcoholItem(AlcoholNames _alcoholNames)
+        Iitems GetNewAlcoholItem(AlcoholNames _alcoholNames)
         {
             foreach (var alcohol in allAcohols)
             {
@@ -712,8 +712,6 @@ namespace Interactables
         }
 
         #endregion
-
-
 
         #region RECIPES
         //public void RecipeInit()
@@ -751,10 +749,8 @@ namespace Interactables
 
         # endregion
 
-
-
         #region SCROLLS 
-        public void EnchantmentScrollsInit()
+        void EnchantmentScrollsInit()
         {
             if (allScrolls.Count > 0) return;
             var getScrolls = Assembly.GetAssembly(typeof(EnchantScrollBase)).GetTypes()
@@ -770,7 +766,7 @@ namespace Interactables
             scrollCount = allScrolls.Count;
         }
 
-        public Iitems GetNewScrollItem(ScrollNames scrollName)
+        Iitems GetNewScrollItem(ScrollNames scrollName)
         {
             foreach (var scroll in allScrolls)
             {
@@ -790,7 +786,7 @@ namespace Interactables
 
         #region LORE SCROLLS
 
-        public LoreScroll GetLoreScroll()
+        LoreScroll GetLoreScroll()
         {
             return loreScroll; 
         }
@@ -799,7 +795,7 @@ namespace Interactables
 
         #region TRADE GOODS
 
-        public void TradeGoodsInit()
+        void TradeGoodsInit()
         {
             if (allTradeGoods.Count > 0) return;
             var getTgs = Assembly.GetAssembly(typeof(TGBase)).GetTypes()
@@ -815,7 +811,7 @@ namespace Interactables
             TgCount = allTradeGoods.Count;  
         }
 
-        public Iitems GetNewTgItem(TGNames tgName)
+        Iitems GetNewTgItem(TGNames tgName)
         {
             foreach (var tg in allTradeGoods)
             {
@@ -832,7 +828,7 @@ namespace Interactables
         #endregion
 
         #region TOOLS 
-        public void ToolsInit()
+        void ToolsInit()
         {
             if (allTools.Count > 0) return;
             var getTools = Assembly.GetAssembly(typeof(ToolBase)).GetTypes()
@@ -848,7 +844,7 @@ namespace Interactables
             toolCount = allTools.Count;
         }
 
-        public Iitems GetNewToolItem(ToolNames toolName)
+        Iitems GetNewToolItem(ToolNames toolName)
         {
             foreach (var tool in allTools)
             {

@@ -16,7 +16,8 @@ namespace Common
         [Header("Character Scriptables")]
         public AllCharSO allCharSO; 
         public List<CharacterSO> allAllySO = new List<CharacterSO>();
-        public List<NPCSO> allNPCSO = new List<NPCSO>();
+        public List<NPCSO> allNPCSOls = new List<NPCSO>();
+        public AllNPCSO allNpcSO; 
 
         [Header("Load Strings ")]
         public List<string> allCharsJSONs = new List<string>();

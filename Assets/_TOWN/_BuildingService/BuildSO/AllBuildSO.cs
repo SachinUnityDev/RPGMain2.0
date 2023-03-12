@@ -19,6 +19,18 @@ namespace Town
         public Sprite TownBGNight;
 
 
+        [Header("TAVERN SPL DATA")]
+        [TextArea(5,10)]
+        public List<String> allTipStrs = new List<String>();
+         
+        public int everyOneDrinkMinVal = 5;
+        public int everyOneDrinkMaxVal = 10;
+
+        [Header("TAVERN: buy drinks")]
+        public Sprite OnTipable;
+        public Sprite OnTipableHL; 
+        public Sprite OnUnTipable;
+
 
         public GameObject npcInteractPrefab; 
 

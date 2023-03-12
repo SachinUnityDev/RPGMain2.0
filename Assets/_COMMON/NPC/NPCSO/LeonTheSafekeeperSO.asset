@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6bc5893862d9b24e9f7d82b2f8fad3e, type: 3}
+  m_Name: LeonTheSafekeeperSO
+  m_EditorClassIdentifier: 
+  npcID: 0
+  npcName: 11
+  npcPrefab: {fileID: 0}
+  npcSprite: {fileID: 21300000, guid: 2025dff2f9971894e83fdc063a477b54, type: 3}
+  npcHexPortrait: {fileID: 21300000, guid: abe5de195641ef849a8503b9149be8f9, type: 3}
+  dialoguePortraitClicked: {fileID: 21300000, guid: 2025dff2f9971894e83fdc063a477b54,
+    type: 3}
+  dialoguePortraitUnClicked: {fileID: 21300000, guid: f840f0fa11ae6974e9158bc52781daf4,
+    type: 3}
+  itemTypesAccepted: 

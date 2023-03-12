@@ -17,7 +17,9 @@ namespace Common
         public int slotID { get; set; }
         public List<Iitems> ItemsInSlot { get; set; } = new List<Iitems>();
         [SerializeField] int itemCount = 0;
-        public SlotType slotType => SlotType.CommonInv;
+
+
+        public SlotType slotType => SlotType.TrophySelectSlot;
 
         [Header("FOR DROP CONTROLS")]
         [SerializeField] GameObject draggedGO;

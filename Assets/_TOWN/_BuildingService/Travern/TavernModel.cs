@@ -1,4 +1,5 @@
 using Interactables;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ using UnityEngine;
 
 namespace Town
 {
+    [Serializable]
     public class TavernModel 
     {
 
@@ -13,7 +15,9 @@ namespace Town
         public Iitems trophyOnWall = null; 
         public Iitems peltOnWall = null;
 
-   
+        [Header("Buy Drinks")]
+        public int selfDrinks = 0;
+        public bool canOfferDrink = true; 
 
         public List<CharInteractData> charInteract = new List<CharInteractData>();
 
@@ -21,13 +25,11 @@ namespace Town
 
         public List<BuildIntTypeData> buildIntTypes = new List<BuildIntTypeData>();
 
-
         public TavernModel(BuildingSO tavernSO)
         {
             buildIntTypes = tavernSO.buildingData.buildIntTypes.DeepClone();
             npcData = tavernSO.buildingData.npcInteractData.DeepClone();
             charInteract = tavernSO.buildingData.charInteractData.DeepClone();
-
         }
     }
 }

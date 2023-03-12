@@ -118,14 +118,8 @@ namespace Town
             }
             
         }
-        //private void Update()
-        //{
-        //  if(Input.GetKeyDown(KeyCode.S))
-        //    {
-        //        Init(); // for test
+ 
 
-        //    }      
-        //}
     }
 }
 

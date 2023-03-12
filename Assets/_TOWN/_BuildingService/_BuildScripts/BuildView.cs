@@ -25,8 +25,6 @@ namespace Town
 
 
         [Header("Building Panels")]
-       
-
         [SerializeField] Transform housePanel;
         [SerializeField] Transform marketPanel;
         [SerializeField] Transform templePanel;
@@ -51,7 +49,6 @@ namespace Town
             if (CalendarService.Instance.currtimeState == TimeState.Day)
                 UIControlServiceGeneral.Instance.TogglePanel(templePanel.gameObject, true);
             //locked at night  
-              
         }
      
         void OnMarketBtnPressed()

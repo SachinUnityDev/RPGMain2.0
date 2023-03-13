@@ -12,7 +12,8 @@ namespace Town
         [Header("TBR")]
         [SerializeField] Transform beerTrans;
         [SerializeField] Transform ciderTrans;
-        [SerializeField] Button exitBtn; 
+        [SerializeField] Button exitBtn;
+        [SerializeField] Transform currTransform; 
 
         [Header("Global Var")]
         [SerializeField] BuyDrinksView buyDrinksView;
@@ -35,7 +36,7 @@ namespace Town
             this.buyDrinksView = buyDrinksView;
             beerTrans.GetComponent<AlcoholBtnPtrEvents>().InitAlcoholPtrEvents(buyDrinksView);
             ciderTrans.GetComponent<AlcoholBtnPtrEvents>().InitAlcoholPtrEvents(buyDrinksView);
-            
+            currTransform.GetComponent<DisplayCurrencyWithToggle>().InitCurrencyToggle(); 
         }
         void OnReturnBtnPressed()
         {

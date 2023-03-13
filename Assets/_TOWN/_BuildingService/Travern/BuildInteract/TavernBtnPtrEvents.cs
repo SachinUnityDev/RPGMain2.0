@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Town
 {
-    public class TavernBtnPtrEvents : MonoBehaviour
+    public class TavernBtnPtrEvents : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] BuildInteractType buildInteractType;
         [SerializeField] TavernView tavernView;

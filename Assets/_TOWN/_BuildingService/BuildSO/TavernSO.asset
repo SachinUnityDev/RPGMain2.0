@@ -63,13 +63,13 @@ MonoBehaviour:
       interactPrefab: {fileID: 0}
     buildIntTypes:
     - BuildIntType: 1
-      isUnLocked: 0
+      isUnLocked: 1
     - BuildIntType: 8
-      isUnLocked: 0
+      isUnLocked: 1
     - BuildIntType: 10
-      isUnLocked: 0
+      isUnLocked: 1
     - BuildIntType: 11
-      isUnLocked: 0
+      isUnLocked: 1
     - BuildIntType: 14
       isUnLocked: 0
     buildIntPrefab:

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Common;
 using System.Windows.Forms.DataVisualization.Charting;
+using Interactables;
 
 namespace Town
 {
@@ -14,11 +15,21 @@ namespace Town
         public TavernModel tavernModel;
 
         BuildingSO tavernSO;
-
+        [Header("to be ref")]
+        public TavernView tavernView;
         void Start()
         {
-            tavernSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.House);
+            tavernSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.Tavern);
             tavernModel = new TavernModel(tavernSO);
+        }
+
+        public void OnTrophySocketed(TGNames trophyName)
+        {
+
+        }
+        public void OnPeltSocketed(TGNames peltName)
+        {
+
         }
 
         public void Init()

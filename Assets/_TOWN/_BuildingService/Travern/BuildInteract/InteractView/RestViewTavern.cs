@@ -10,35 +10,31 @@ namespace Town
 {
     public class RestViewTavern : MonoBehaviour, IPanel
     {
-        //[SerializeField] Button endDayBtn;
-        //[SerializeField] Button closeBtn;
+        [SerializeField] Button endDayBtn;
+        [SerializeField] Button exitBtn;
         [SerializeField] TextMeshProUGUI buffTxt;
 
         [SerializeField] Image hourGlass;
         // on press close the day event in calendar
         string buffstrOnUpgrade = "60% chance for Well Rested upon resting";
         string buffStrBase = "No Chance for buff upon resting";
-
-
-
         TimeState timeState;
 
         void Awake()
         {
-            //endDayBtn.onClick.AddListener(OnEndDayPressed);
-            //closeBtn.onClick.AddListener(OnClosePressed);
-
+            endDayBtn.onClick.AddListener(OnEndDayPressed);
+            exitBtn.onClick.AddListener(OnExitBtnPressed);
         }
         public void OnEndDayPressed()
         {
             timeState = CalendarService.Instance.currtimeState;
             int day = CalendarService.Instance.dayInYear;
             CalendarService.Instance.On_EndDayClick();
-            FillHouseView();
+            FillTavernView();
         }
-        void FillHouseView()
+        void FillTavernView()
         {
-            BuildingIntService.Instance.houseController.houseView.FillHouseBG();
+            BuildingIntService.Instance.tavernController.tavernView.FillTavernBG();   
             FillPanelBg();
         }
         void FillPanelBg()
@@ -79,8 +75,8 @@ namespace Town
 
         public void Load()
         {
-            //FillHouseView();
-            //FillTheBuffStr();
+            FillTavernView();
+            FillTheBuffStr();
         }
 
         public void UnLoad()
@@ -88,7 +84,7 @@ namespace Town
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
         }
 
-        void OnClosePressed()
+        void OnExitBtnPressed()
         {
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
         }

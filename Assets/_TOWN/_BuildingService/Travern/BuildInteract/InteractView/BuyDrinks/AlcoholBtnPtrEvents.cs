@@ -26,8 +26,7 @@ namespace Common
           
         }
         public void InitAlcoholPtrEvents(BuyDrinksView buyDrinksView)
-        {
-          
+        { 
             this.buyDrinksView= buyDrinksView;
             if (alcoholName == AlcoholNames.Beer)
                 item = buyDrinksView.itemBeer;
@@ -39,6 +38,7 @@ namespace Common
         public void OnPointerEnter(PointerEventData eventData)
         {
             AlcoholBase alcoholBase = item as AlcoholBase;
+            buffTxt.text = "";
             foreach (string displayStr in alcoholBase.allDisplayStr)
             {
                 buffTxt.text += displayStr+"\n"; 

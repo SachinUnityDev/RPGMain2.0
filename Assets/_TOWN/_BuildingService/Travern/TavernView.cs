@@ -40,7 +40,7 @@ namespace Town
         void Awake()
         {
             BGSpriteContainer = transform.GetChild(0);
-           exitBtn.onClick.AddListener(UnLoad);
+            exitBtn.onClick.AddListener(UnLoad);
         }
         public void Init()
         {
@@ -52,10 +52,10 @@ namespace Town
 
             timeState = CalendarService.Instance.currtimeState;
             btnContainer.GetComponent<TavernBuildIntBtnView>().InitInteractBtns(this);
-            FillHouseBG();
+            FillTavernBG();
             InitInteractPanels();
         }
-        public void FillHouseBG()
+        public void FillTavernBG()
         {
             if (CalendarService.Instance.currtimeState == TimeState.Night)
             {
@@ -111,6 +111,14 @@ namespace Town
             }
 
         }
-      
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                Init(); // for test
+
+            }
+        }
+
     }
 }

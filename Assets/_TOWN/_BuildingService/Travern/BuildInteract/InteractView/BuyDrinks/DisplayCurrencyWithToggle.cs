@@ -21,27 +21,24 @@ namespace Town
         string stash_Txt = "In Stash"; 
         private void Awake()
         {
-           
-
             toggleBtn = transform.GetChild(2).GetComponent<Button>();
             moneyFrmTxt= transform.GetChild(2).GetComponent<TextMeshProUGUI>();
             toggleBtn.onClick.AddListener(OnToggleBtnPressed);
 
             isInvMoneySelect = true;
             moneyFrmTxt.text = inv_Txt;
-           
-        }
-        private void Start()
-        {
             EcoServices.Instance.OnInvMoneyChg += FillInvMoney;
             EcoServices.Instance.OnStashMoneyChg += FillStashMoney;
-            FillInvMoney(EcoServices.Instance.GetMoneyAmtInPlayerInv().DeepClone());
         }
         public void DisplayCurrency(Currency amt)
         {
             transform.GetComponent<DisplayCurrency>().Display(amt); 
         }
-
+        public void InitCurrencyToggle()
+        {
+           
+            FillInvMoney(EcoServices.Instance.GetMoneyAmtInPlayerInv().DeepClone());
+        }
         void OnToggleBtnPressed()
         {
             isInvMoneySelect = !isInvMoneySelect;

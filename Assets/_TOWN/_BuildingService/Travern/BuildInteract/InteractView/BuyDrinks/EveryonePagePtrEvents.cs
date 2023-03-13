@@ -12,14 +12,13 @@ namespace Town
 {
     public class EveryonePagePtrEvents : MonoBehaviour
     {
-
-        
         BuyDrinksView buyDrinksView;
 
         [Header("TBR")]
         [SerializeField] Button tickBtn; 
         [SerializeField] Button returnBtn;
         [SerializeField] Button exitBtn;
+        [SerializeField] Transform currTransform;
 
         [SerializeField] TextMeshProUGUI displayTxt;
         [SerializeField] int silver;
@@ -32,14 +31,13 @@ namespace Town
             tickBtn.onClick.AddListener(OnTickBtnPressed);
             silver = UnityEngine.Random.Range(5, 11);
             displayStr = $"Wanna spend {silver} silver denari to buy everyone beer?";
-            displayTxt.text = displayStr; 
+            displayTxt.text = displayStr;
+            CalendarService.Instance.OnChangeTimeState += ResetOnTimeStateChg;
         }
-        private void Start()
-        {
-            CalendarService.Instance.OnChangeTimeState += ResetOnTimeStateChg; 
-        }
+   
         void ResetOnTimeStateChg(TimeState timeState)
         {
+            if(tavernModel!= null) 
             tavernModel.canOfferDrink = true;
         }
         bool CanOfferDrink()
@@ -66,6 +64,7 @@ namespace Town
         {
             this.buyDrinksView= buyDrinksView;
             tavernModel = BuildingIntService.Instance.tavernController.tavernModel;
+            currTransform.GetComponent<DisplayCurrencyWithToggle>().InitCurrencyToggle();
         }
 
         void OnExitBtnPressed()

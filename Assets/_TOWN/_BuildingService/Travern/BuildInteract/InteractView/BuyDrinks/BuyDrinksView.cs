@@ -60,20 +60,13 @@ namespace Town
         }
         public void Load()
         {
-           
+            UIControlServiceGeneral.Instance.TogglePanelOnInGrp(buyDrinksMain.gameObject, true);
         }
 
         public void UnLoad()
         {
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
         }
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                Init(); // for test
-
-            }
-        }
+    
     }
 }

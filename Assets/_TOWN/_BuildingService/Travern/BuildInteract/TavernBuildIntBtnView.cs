@@ -15,7 +15,7 @@ namespace Town
 
         [SerializeField] BuildInteractType buildInteractType;
         TavernView tavernView;
-        TavernModel tavernModel;
+        [SerializeField] TavernModel tavernModel;
         AllBuildSO allbuildSO;
         private void Awake()
         {
@@ -27,10 +27,10 @@ namespace Town
             this.tavernView = tavernView;
             tavernModel = BuildingIntService.Instance.tavernController.tavernModel;
             allbuildSO = BuildingIntService.Instance.allBuildSO;
-            FillHouseBtns();
+            FillTavernBtns();
         }
 
-        void FillHouseBtns()
+        void FillTavernBtns()
         {
             int i = 0;
             foreach (BuildIntTypeData buildData in tavernModel.buildIntTypes)

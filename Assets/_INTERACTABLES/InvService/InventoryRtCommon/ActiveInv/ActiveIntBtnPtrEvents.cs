@@ -12,8 +12,8 @@ namespace Interactables
     public class ActiveIntBtnPtrEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                                                                 
     {
-        [SerializeField] string descTxt = "";
-        [SerializeField] TextMeshProUGUI txt;
+
+        [SerializeField] Transform title;
         [SerializeField] Color colorN;
         [SerializeField] Color colorHL;
 
@@ -29,8 +29,7 @@ namespace Interactables
         {
             img.color = colorHL;
             transform.DOScale(scaleHL, 0.1f); 
-            txt.gameObject.SetActive(true);
-
+            title.gameObject.SetActive(true);
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -43,7 +42,7 @@ namespace Interactables
             {
                 UnClickState();
             }
-            txt.gameObject.SetActive(false);
+            title.gameObject.SetActive(false);
         }
         public void ClickState()
         {
@@ -62,10 +61,10 @@ namespace Interactables
 
         void Start()
         {
-            scaleHL = 1.1f; 
-            txt = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-            txt.text = descTxt;
-            txt.gameObject.SetActive(false);
+            scaleHL = 1.1f;
+            title = transform.GetChild(0); 
+            
+            title.gameObject.SetActive(false);
             img = gameObject.GetComponent<Image>();
             UnClickState();           
         }

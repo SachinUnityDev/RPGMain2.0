@@ -10,10 +10,7 @@ namespace Town
 
     public class BuyDrinksPtrEvents : TavernBaseEvents, IPointerClickHandler
     {
-        BuyDrinksView buyDrinksView; 
-
-     
-
+        
         public void OnPointerClick(PointerEventData eventData)
         {
             UIControlServiceGeneral.Instance.TogglePanelOnInGrp(tavernView.buyDrink.gameObject, true);

@@ -1,35 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-
+using Common; 
 
 namespace Interactables
 {
-
-    [Serializable]
-    public class ArmorSpriteData
-    {
-        public CharNames charName;
-        public Sprite armorSprite;
-    }
+    
 
     [CreateAssetMenu(fileName = "ArmorSO", menuName = "Interactable/ArmorSO")]
+
     public class ArmorSO : ScriptableObject
     {
+        public ArmorType armorType;       
+        public Currency fortifyCost;
+        public string armorTypeStr = "";
+        public int minArmor; 
+        public int maxArmor;
 
-        public Sprite emptySlotSprite;
-
-        public List<ArmorSpriteData> allArmorSprites = new List<ArmorSpriteData>();
-        public Sprite GetSprite(CharNames charName)
-        {
-            if (charName == CharNames.None) return null; 
-            Sprite sprite = allArmorSprites?.Find(t => t.charName == charName).armorSprite;
-            if (sprite != null)
-                return sprite;
-            else
-                Debug.Log("Armor sprite is null");
-            return null; 
-        }
+        public int nosOfDays; 
+        [TextArea(5,10)]
+        public List<string> allLines=new List<string>();
     }
+
+
+
 }

@@ -302,3 +302,4 @@ MonoBehaviour:
   armorType: 4
   armorTypeStr: Cloth
   enchantableGem4Weapon: 4
+  armorSprite: {fileID: 21300000, guid: 88f3832cc8ccaa5499be3821eda7091f, type: 3}

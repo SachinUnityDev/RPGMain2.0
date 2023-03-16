@@ -10,7 +10,7 @@ namespace Interactables
         // socket rules two divine and one support 
         // Btn socket for the support gem
         
-        public ArmorSO armorSO; 
+        public AllArmorSO allArmorSO; 
         public ArmorModel armorModel;
         public GameObject armorPanel;
 

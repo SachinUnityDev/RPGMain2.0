@@ -28,19 +28,19 @@ namespace Town
         [SerializeField] BrewSlotView brewSlotView; 
 
         [SerializeField] int startDay; 
-        private void Awake()
+        void Awake()
         {
             WIPImg = transform.GetChild(0).GetComponent<Image>();
             fillImg = transform.GetChild(1).GetComponent<Image>();
-            daysRemaining = transform.GetChild(2).GetComponent<TextMeshProUGUI>();  
+            daysRemaining = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
             netDaysTxt = transform.GetChild(3).GetComponent<TextMeshProUGUI>();
 
         }
         private void Start()
         {
-           // InitBrewWIP();
+            // InitBrewWIP();
+     
             CalendarService.Instance.OnStartOfDay += OnDayChange;
-
         }
         public void InitBrewWIP()
         {

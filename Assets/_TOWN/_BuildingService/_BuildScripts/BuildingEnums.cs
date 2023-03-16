@@ -44,6 +44,8 @@ namespace Town
         Gamble,
         Brawl, 
         ClearMind, 
+        Fortify, 
+        CraftPotion,
     }
     
     public enum HousePurchaseOpts

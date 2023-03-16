@@ -280,3 +280,4 @@ MonoBehaviour:
   armorType: 3
   armorTypeStr: Brass
   enchantableGem4Weapon: 0
+  armorSprite: {fileID: 21300000, guid: b4a51a77ba366b045b3f1e6f812966c7, type: 3}

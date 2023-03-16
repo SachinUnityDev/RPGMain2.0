@@ -35,15 +35,10 @@ namespace Town
         [SerializeField] Sprite dayBG;
         [SerializeField] Sprite nightBG; 
 
-
-
         [SerializeField] Button exit; 
 
         BuildingSO houseSO;
         TimeState timeState;
-
-      
-
         void Awake()
         {
             BGSpriteContainer = transform.GetChild(0);

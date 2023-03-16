@@ -1,18 +1,23 @@
+using Interactables;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MarketModel : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+namespace Town
+{
+    public class MarketModel
     {
-        
+        [Header("Craft potion")]
+        public Iitems healthPotion;
+        public Iitems staminaPotion;
+        public Iitems fortPotion; 
+
+        public MarketModel(BuildingSO marketSO)
+        {
+
+        }
+
+
     }
 }

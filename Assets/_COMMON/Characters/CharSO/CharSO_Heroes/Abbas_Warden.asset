@@ -276,3 +276,4 @@ MonoBehaviour:
   armorType: 2
   armorTypeStr: Hide
   enchantableGem4Weapon: 2
+  armorSprite: {fileID: 21300000, guid: a8505d6037fef6e4cb82795ae35122b5, type: 3}

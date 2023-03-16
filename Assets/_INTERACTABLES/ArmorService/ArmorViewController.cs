@@ -44,7 +44,8 @@ namespace Interactables
         void PopulateArmorPanel(CharModel charModel)
         {
             charSelect = charModel.charName; 
-            Sprite sprite = ArmorService.Instance.armorSO.GetSprite(charSelect);
+            ArmorType armorType = charModel.armorType;
+            Sprite sprite = CharService.Instance.allCharSO.GetCharSO(charSelect).armorSprite;
             transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite
                 = sprite;
             PopulateGemSocketed();

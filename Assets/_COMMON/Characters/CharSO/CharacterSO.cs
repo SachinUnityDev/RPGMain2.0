@@ -80,7 +80,7 @@ namespace Common
         public ArmorType armorType;         // three gems with conditions can be socketed on armor 
         public string armorTypeStr; 
         public GemNames enchantableGem4Weapon;  // only one gem req for enchantmnet with weapon 
-                                            // few char have no weapon skill 
+        public Sprite armorSprite;              // few char have no weapon skill 
 
         private void Awake()
         {

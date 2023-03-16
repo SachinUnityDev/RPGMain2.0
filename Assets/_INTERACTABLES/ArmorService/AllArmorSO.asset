@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e67fca2992650f242ab3d7eaeda9f175, type: 3}
+  m_Name: AllArmorSO
+  m_EditorClassIdentifier: 
+  allArmorSO:
+  - {fileID: 11400000, guid: 5f986b78e7cb2424687ddcf274368fc5, type: 2}
+  - {fileID: 11400000, guid: 247373ef9ca9710438147f66c6543004, type: 2}
+  - {fileID: 11400000, guid: 5fbf4222aabf75544a6da935e9f1e29c, type: 2}
+  - {fileID: 11400000, guid: 7c1d4f443e2436f43a6ffa8e1f6c07cc, type: 2}

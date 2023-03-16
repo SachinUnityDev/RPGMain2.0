@@ -34,12 +34,28 @@ namespace Town
         public void InitSelectPage(TrophyView trophyView)
         {
             this.trophyView = trophyView;
-            //Iitems item =
-            //         BuildingIntService.Instance.tavernController.tavernModel.trophyOnWall; 
+            Iitems itemTrophy =
+                     BuildingIntService.Instance.tavernController.tavernModel.trophyOnWall;
+            Iitems itemPelt =
+                    BuildingIntService.Instance.tavernController.tavernModel.trophyOnWall;
 
-
-            
-        }  
+            if (itemTrophy != null)
+            {
+                // get item image and add to the tropy wall 
+            }
+            else
+            {
+               // put a empty slot 
+            }
+            if(itemPelt != null)
+            {
+                // get item image and add to the pelt on wall 
+            }
+            else
+            {
+                // put a empty slot 
+            }
+        }
         void FillTrophySlot(Iitems item)
         {
 

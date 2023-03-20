@@ -78,7 +78,7 @@ namespace Interactables
                 return allItems;    
             }
             Debug.Log("no Items of type found in comm inv" + itemType); 
-            return null; 
+            return allItems; 
         }
 
         public bool AddItem2CommInv(Iitems item)   // KEY POINT OF ADDITION OF ITEM // Add to model => view

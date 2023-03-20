@@ -41,11 +41,13 @@ namespace Town
                 ITrophyable iTrophy = item as ITrophyable; 
                 if(iTrophy.tavernSlotType == TavernSlotType.Trophy)
                 {
+                    if (trophyslot.ItemsInSlot[0] == null)
+                        continue; 
                     if (trophyslot.ItemsInSlot[0].itemName != item.itemName)    
-                    allTrophies.Add(item);  
+                        allTrophies.Add(item);  
                 }
             }
-            LoadScrollPage(allTrophies); 
+            LoadScrollPage(allTrophies, TavernSlotType.Trophy); 
         }
         
         void OnPeltBtnPressed()
@@ -59,16 +61,19 @@ namespace Town
                 ITrophyable iTrophy = item as ITrophyable;
                 if (iTrophy.tavernSlotType == TavernSlotType.Pelt)
                 {
-                    // same item dont populate in the scroll
+                    if (peltSlot.ItemsInSlot[0] == null)
+                        continue;
                     if (peltSlot.ItemsInSlot[0].itemName != item.itemName)                    
                     allPelts.Add(item);
                 }
             }
-            LoadScrollPage(allPelts);
+            LoadScrollPage(allPelts, TavernSlotType.Pelt);
         }
-        void LoadScrollPage(List<Iitems> allItems)
+        void LoadScrollPage(List<Iitems> slotItems, TavernSlotType tavernSlotType)
         {
-           // trophyView.scrollPageTrans.GetComponent<TrophyScrollPagePtrEvents>().; 
+            trophyView.scrollPageTrans.GetComponent<TrophyScrollPagePtrEvents>()
+                .InitScrollPage(trophyView,tavernSlotType, slotItems); 
+            trophyView.DisplayScrollPage();
         }
 
         public void InitSelectPage(TrophyView trophyView)

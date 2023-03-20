@@ -16,7 +16,7 @@ namespace Town
         
         [Header("Page scroll related")]        
         List<Iitems> allItems = new List<Iitems>();
-        List<Iitems> allSelect = new List<Iitems>();
+        List<Iitems> slotItems = new List<Iitems>();
         [SerializeField] Button leftBtn;
         [SerializeField] Button rightBtn;
 
@@ -38,19 +38,30 @@ namespace Town
             rightBtn.onClick.AddListener(OnRightBtnPressed);
             returnBtn.onClick.AddListener(OnReturnBtnPressed);  
         }
-        public void InitScrollPage(TrophyView trophyView, TavernSlotType tavernSlotType, List<Iitems> slotItems)
+        public void InitScrollPage(TrophyView trophyView, TavernSlotType tavernSlotType
+                                                                        , List<Iitems> slotItems)
         {   
             this.trophyView= trophyView;
             this.tavernSlotType = tavernSlotType;
-            allSelect = slotItems.DeepClone();
+            this.slotItems = slotItems.DeepClone();
             FillItemsinSlots();
         }
         void FillItemsinSlots()
         {
-            if(allSelect.Count% 3 == 0)
-                maxIndex = (allSelect.Count/3)-1; // 0 factor in list    
+            if(slotItems.Count == 0)
+            {
+                for (int k = 0; k < 3; k++)
+                {
+                    TrophyScrollSlotController slotController
+                       = selectContainer.GetChild(k).GetComponent<TrophyScrollSlotController>();
+                    slotController.ClearSlot();
+                }
+            }
+
+            if(slotItems.Count% 3 == 0)
+                maxIndex = (slotItems.Count/3)-1; // 0 factor in list    
             else
-                maxIndex = (allSelect.Count/3) ;
+                maxIndex = (slotItems.Count/3) ;
             int startIndex = index * 3;
             int endIndex = startIndex + 3;           
             int j = 0; 
@@ -60,8 +71,8 @@ namespace Town
                         = selectContainer.GetChild(j).GetComponent<TrophyScrollSlotController>();
                 slotController.ClearSlot();
 
-                if (i < allSelect.Count)
-                    slotController.LoadSlot(allSelect[startIndex]);                
+                if (i < slotItems.Count)
+                    slotController.LoadSlot(slotItems[startIndex]);                
                 j++; 
             }
         }

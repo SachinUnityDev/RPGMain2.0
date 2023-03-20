@@ -66,7 +66,13 @@ namespace Interactables
             return false; 
         }
 
-
+        public List<Iitems> GetAllItemsInCommOrStash(ItemType itemType)
+        {
+            List<Iitems> allItems = new List<Iitems>();
+            allItems.AddRange(commonInvItems);
+            allItems.AddRange(stashInvIntItems);
+            return allItems;
+        }
         #region COMMON INV
 
         public List<Iitems> GetAllItemsInCommOfType(ItemType itemType)

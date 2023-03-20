@@ -34,17 +34,22 @@ namespace Town
         { 
             allTGs.Clear(); 
             allTGs = 
-                InvService.Instance.invMainModel.GetAllItemsInCommOfType(ItemType.TradeGoods);
+                InvService.Instance.invMainModel.GetAllItemsInCommOrStash(ItemType.TradeGoods);
+
             allTrophies.Clear();
             foreach (Iitems item in allTGs)
             {
                 ITrophyable iTrophy = item as ITrophyable; 
                 if(iTrophy.tavernSlotType == TavernSlotType.Trophy)
                 {
-                    if (trophyslot.ItemsInSlot[0] == null)
-                        continue; 
-                    if (trophyslot.ItemsInSlot[0].itemName != item.itemName)    
-                        allTrophies.Add(item);  
+                    if (trophyslot.ItemsInSlot.Count == 0)
+                    {
+                        allTrophies.Add(item);
+                    }
+                    else if (trophyslot.ItemsInSlot[0].itemName != item.itemName)
+                    {
+                        allTrophies.Add(item);
+                    }
                 }
             }
             LoadScrollPage(allTrophies, TavernSlotType.Trophy); 
@@ -54,17 +59,21 @@ namespace Town
         {
             allTGs.Clear();
             allTGs =
-                InvService.Instance.invMainModel.GetAllItemsInCommOfType(ItemType.TradeGoods);
+                InvService.Instance.invMainModel.GetAllItemsInCommOrStash(ItemType.TradeGoods);
             allPelts.Clear();
             foreach (Iitems item in allTGs)
             {
                 ITrophyable iTrophy = item as ITrophyable;
                 if (iTrophy.tavernSlotType == TavernSlotType.Pelt)
                 {
-                    if (peltSlot.ItemsInSlot[0] == null)
-                        continue;
-                    if (peltSlot.ItemsInSlot[0].itemName != item.itemName)                    
-                    allPelts.Add(item);
+                    if (peltSlot.ItemsInSlot.Count == 0)
+                    {
+                        allPelts.Add(item);                     
+                    }
+                    else if (peltSlot.ItemsInSlot[0].itemName != item.itemName)
+                    {
+                        allPelts.Add(item);
+                    }
                 }
             }
             LoadScrollPage(allPelts, TavernSlotType.Pelt);

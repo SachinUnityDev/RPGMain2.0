@@ -43,7 +43,7 @@ namespace Town
         {   
             this.trophyView= trophyView;
             this.tavernSlotType = tavernSlotType;
-            this.slotItems = slotItems.DeepClone();
+            this.slotItems = slotItems;
             FillItemsinSlots();
         }
         void FillItemsinSlots()
@@ -56,6 +56,7 @@ namespace Town
                        = selectContainer.GetChild(k).GetComponent<TrophyScrollSlotController>();
                     slotController.ClearSlot();
                 }
+                return; 
             }
 
             if(slotItems.Count% 3 == 0)

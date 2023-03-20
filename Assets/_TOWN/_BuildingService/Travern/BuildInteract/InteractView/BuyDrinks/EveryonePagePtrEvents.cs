@@ -69,7 +69,7 @@ namespace Town
 
         void OnExitBtnPressed()
         {
-            buyDrinksView.UnLoad();
+            buyDrinksView.OnExitBtnPressed();
         }
         void OnReturnBtnPressed()
         {

@@ -26,12 +26,13 @@ namespace Town
             leftBoundary = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).x;
             rightBoundary = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x;
             imgWidth = GetComponent<RectTransform>().rect.width;
+          
         }
 
         public void WrapAround()
         {
-            transform.DOLocalMoveX(-imgWidth * 1.5f, 0.1f);
-            transform.SetAsFirstSibling();
+            transform.DOLocalMoveX(-imgWidth * 2f, 0.1f);
+           
         }
         void Update()
         {
@@ -44,6 +45,7 @@ namespace Town
                 {
                     Transform lasttrans = transform.parent.GetChild(2);                    
                     lasttrans.GetComponent<CloudParallax>().WrapAround();
+                    lasttrans.SetAsFirstSibling();
                 }
             }   
         }

@@ -68,6 +68,19 @@ namespace Interactables
 
 
         #region COMMON INV
+
+        public List<Iitems> GetAllItemsInCommOfType(ItemType itemType)
+        {
+            List<Iitems> allItems = new List<Iitems>();
+            allItems = commonInvItems.Where(t => t.itemType == itemType).ToList();
+            if(allItems.Count > 0)
+            {
+                return allItems;    
+            }
+            Debug.Log("no Items of type found in comm inv" + itemType); 
+            return null; 
+        }
+
         public bool AddItem2CommInv(Iitems item)   // KEY POINT OF ADDITION OF ITEM // Add to model => view
         {          
             if (!InvService.Instance.IsCommInvFull(item))
@@ -144,6 +157,17 @@ namespace Interactables
 
         #region STASH
 
+        public List<Iitems> GetAllItemsInStashofType(ItemType itemType)
+        {
+            List<Iitems> allItems = new List<Iitems>();
+            allItems = stashInvIntItems.Where(t => t.itemType == itemType).ToList();
+            if (allItems.Count > 0)
+            {
+                return allItems;
+            }
+            Debug.Log("no Items of type found in Stash inv" + itemType);
+            return null;
+        }
         public List<Iitems> GetItemsFrmStashInv(ItemType itemType)
         {
             List<Iitems> allItems = new List<Iitems>();

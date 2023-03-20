@@ -107,7 +107,7 @@ namespace Interactables
             {
                 if (i < recipeLs.Count)
                 {
-                    Debug.Log("PAGE..." + pageContainer.GetChild(j).name);
+                   // Debug.Log("PAGE..." + pageContainer.GetChild(j).name);
                     pageContainer.GetChild(j).gameObject.SetActive(true);
                     pageContainer.GetChild(j).GetComponent<RecipePanelView>().Init(recipeLs[i]);
                 }

@@ -1,6 +1,7 @@
 using Common;
 using Interactables;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
 
@@ -17,9 +18,9 @@ namespace Town
         [Header("Exit btn")]
         [SerializeField] Button exitBtn; 
 
-        [Header("Gloabl variables")]
+        [Header("Global variables")]
         [SerializeField] TavernSlotType tavernSlotType;
-
+        [SerializeField] TavernModel tavernModel; 
         private void Start()
         {
             exitBtn.onClick.AddListener(OnExitBtnPressed);
@@ -29,11 +30,12 @@ namespace Town
         {
             UnLoad();
         }
-        public void InitSelectPage(TavernSlotType tavernSlotType)
-        {
-            this.tavernSlotType = tavernSlotType;
-            scrollPageTrans.GetComponent<TrophyScrollPagePtrEvents>().InitScrollPage(this, tavernSlotType);
-        }
+        //public void InitSelectPage(TavernSlotType tavernSlotType)
+        //{
+        //    this.tavernSlotType = tavernSlotType;
+        //    tavernModel = BuildingIntService.Instance.tavernController.tavernModel; 
+        //    scrollPageTrans.GetComponent<TrophyScrollPagePtrEvents>().InitScrollPage(this, tavernSlotType);
+        //}
         void InitOptsPage()
         {
             selectPageTrans.GetComponent<SelectPagePtrEvents>().InitSelectPage(this); 
@@ -42,6 +44,14 @@ namespace Town
         {
             fameTrans.GetComponent<DisplayFame>().Display(); 
         }
+        public void OnScrollOptionSelected(TavernSlotType tavernSlotType, List<Iitems> itemInScroll)
+        {
+
+
+
+        }
+
+
         public void DisplaySelectPage()
         {
             selectPageTrans.gameObject.SetActive(true);
@@ -56,7 +66,7 @@ namespace Town
         {
             InitFameSelect();
             InitOptsPage();
-            InitSelectPage(tavernSlotType);
+          //  InitSelectPage(tavernSlotType);
         }
 
         public void Load()
@@ -69,13 +79,5 @@ namespace Town
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                Init(); // for test
-
-            }
-        }
     }
 }

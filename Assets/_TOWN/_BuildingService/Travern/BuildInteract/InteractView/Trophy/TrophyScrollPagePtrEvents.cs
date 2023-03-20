@@ -30,6 +30,7 @@ namespace Town
         [SerializeField] int index;
         [SerializeField] int maxIndex;
         TrophyView trophyView;
+        [SerializeField] TavernSlotType tavernSlotType; 
    
         void Start()
         {
@@ -37,26 +38,13 @@ namespace Town
             rightBtn.onClick.AddListener(OnRightBtnPressed);
             returnBtn.onClick.AddListener(OnReturnBtnPressed);  
         }
-        public void InitScrollPage(TrophyView trophyView, TavernSlotType tavernSlotType)
-        {
-            this.trophyView= trophyView;    
-            allItems.Clear();   
-            allItems.AddRange(InvService.Instance.invMainModel.GetItemsFrmCommonInv(ItemType.TradeGoods));
-            allItems.AddRange(InvService.Instance.invMainModel.GetItemsFrmStashInv(ItemType.TradeGoods));
-          
-            foreach (Iitems item in allItems) 
-            {
-            
-                ITrophyable iTrophy = item as ITrophyable;
-                if(iTrophy.tavernSlotType == tavernSlotType)
-                {
-                    allSelect.Add(item);    
-                }
-            }
-            if(allItems.Count > 0)            
+        public void InitScrollPage(TrophyView trophyView, TavernSlotType tavernSlotType, List<Iitems> slotItems)
+        {   
+            this.trophyView= trophyView;
+            this.tavernSlotType = tavernSlotType;
+            allSelect = slotItems.DeepClone();
             FillItemsinSlots();
         }
-
         void FillItemsinSlots()
         {
             if(allSelect.Count% 3 == 0)
@@ -76,7 +64,6 @@ namespace Town
                     slotController.LoadSlot(allSelect[startIndex]);                
                 j++; 
             }
-
         }
         void OnLeftBtnPressed()
         {
@@ -112,11 +99,25 @@ namespace Town
             trophyView.DisplaySelectPage();
         }
 
-        public void OnSlotClicked(Iitems item)
+        public void OnScrollSlotClicked(Iitems item)
         {
             // subscribe to onslotselect
-            BuildingIntService.Instance.On_TrophyableTavern(item); 
+            //   BuildingIntService.Instance.On_TrophyableTavern(item); 
         }
-
     }
 }
+
+//allItems.Clear();   
+//allItems.AddRange(InvService.Instance.invMainModel.GetItemsFrmCommonInv(ItemType.TradeGoods));
+//allItems.AddRange(InvService.Instance.invMainModel.GetItemsFrmStashInv(ItemType.TradeGoods));
+
+//foreach (Iitems item in allItems) 
+//{
+
+//    ITrophyable iTrophy = item as ITrophyable;
+//    if(iTrophy.tavernSlotType == tavernSlotType)
+//    {
+//        allSelect.Add(item);    
+//    }
+//}
+//if(allItems.Count > 0)       

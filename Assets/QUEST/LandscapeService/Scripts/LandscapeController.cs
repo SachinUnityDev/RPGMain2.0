@@ -80,7 +80,6 @@ namespace Quest
             if(landBuffData.isApplied)
                 RemoveBuffFX(landBuffData);
             allLandBuffs.Remove(landBuffData);
-
         }
 
         void ApplyLandBuffFX(LandBuffData landBuff)

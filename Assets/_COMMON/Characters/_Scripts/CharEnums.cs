@@ -43,6 +43,7 @@ public enum CauseType
     TradeGoods,
     BuildingInterct, 
     NPCInteract, 
+    Landscape, 
 }
 
 public enum StatChecks

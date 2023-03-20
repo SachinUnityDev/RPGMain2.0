@@ -21,8 +21,8 @@ namespace Town
         string stash_Txt = "In Stash"; 
         private void Awake()
         {
-            toggleBtn = transform.GetChild(2).GetComponent<Button>();
-            moneyFrmTxt= transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+            //toggleBtn = transform.GetChild(2).GetComponent<Button>();
+            //moneyFrmTxt= transform.GetChild(2).GetComponent<TextMeshProUGUI>();
             toggleBtn.onClick.AddListener(OnToggleBtnPressed);
 
             isInvMoneySelect = true;

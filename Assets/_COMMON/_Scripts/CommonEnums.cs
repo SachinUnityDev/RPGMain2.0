@@ -63,11 +63,11 @@ namespace Common
         Cave,
         Jungle,
         Rainforest,
-        Savannah,
-        Sewers,
+        Savannah, //demo
+        Sewers, // demo
         Subterranean,
         Swamp,
-        Coast, 
+        Coast, //demo
         Desert, 
         DesertCave,
         Highland,
@@ -75,7 +75,7 @@ namespace Common
         CoffeeForest, 
         Volcano,
         AcidLake,     
-        Field,        
+        Field, // demo        
     };
 
 

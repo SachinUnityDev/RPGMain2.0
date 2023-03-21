@@ -335,6 +335,12 @@ public enum ArcheType
 
 };
 
+public enum CharRole
+{
+    None, 
+    Hero, 
+    Companion, 
+}
 
 public enum ClassType {
 

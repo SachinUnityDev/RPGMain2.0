@@ -17,3 +17,10 @@ MonoBehaviour:
   allDialogueSOs:
   - {fileID: 11400000, guid: 6c0bce3fec63e1a4da5d94de54288737, type: 2}
   - {fileID: 11400000, guid: 6c0bce3fec63e1a4da5d94de54288737, type: 2}
+  allDialogueSO:
+  - dialogueSO: {fileID: 11400000, guid: 6c0bce3fec63e1a4da5d94de54288737, type: 2}
+    isLocked: 1
+    isRepeatable: 0
+  - dialogueSO: {fileID: 11400000, guid: cc03cb79abd176d48aa80c1300696f10, type: 2}
+    isLocked: 1
+    isRepeatable: 0

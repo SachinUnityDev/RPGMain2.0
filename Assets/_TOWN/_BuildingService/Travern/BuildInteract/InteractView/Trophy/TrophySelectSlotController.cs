@@ -143,15 +143,25 @@ namespace Common
         }
         void AddItemOnSlot(Iitems item, bool onDrop)
         {
-            ItemsInSlot.Add(item);
-            itemCount++;
-            if (onDrop)
+            if (item != null)
             {
-                ITrophyable trophyable = item as ITrophyable;   
-                if(trophyable.tavernSlotType == TavernSlotType.Trophy)
-                    BuildingIntService.Instance.tavernController.tavernModel.trophyOnWall = item;
+                ITrophyable trophyable = item as ITrophyable;
+                Iitems currentItem;
+                if (trophyable.tavernSlotType == TavernSlotType.Trophy)
+                    currentItem = BuildingIntService.Instance.tavernController.tavernModel.trophyOnWall; 
                 if (trophyable.tavernSlotType == TavernSlotType.Pelt)
                     BuildingIntService.Instance.tavernController.tavernModel.peltOnWall = item;
+                
+                ItemsInSlot.Add(item);
+                itemCount++;
+                if (onDrop)
+                {
+                    
+                    if (trophyable.tavernSlotType == TavernSlotType.Trophy)
+                        BuildingIntService.Instance.tavernController.tavernModel.trophyOnWall = item;
+                    if (trophyable.tavernSlotType == TavernSlotType.Pelt)
+                        BuildingIntService.Instance.tavernController.tavernModel.peltOnWall = item;
+                }
             }
             RefreshImg(item);
             // if (ItemsInSlot.Count > 1 || onDrop)

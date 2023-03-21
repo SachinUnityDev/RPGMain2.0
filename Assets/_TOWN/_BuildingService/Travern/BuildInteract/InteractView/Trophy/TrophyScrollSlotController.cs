@@ -263,7 +263,18 @@ namespace Common
 
         public void OnPointerClick(PointerEventData eventData)
         {
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                ITrophyable itrophy = ItemsInSlot[0] as ITrophyable;
+                BuildingIntService.Instance.On_ItemWalled(ItemsInSlot[0], itrophy.tavernSlotType);
+                RemoveItem(); // remove item from the slot and common inv
 
+                //if (itrophy.tavernSlotType == TavernSlotType.Trophy)
+                //BuildingIntService.Instance.tavernController.tavernModel.trophyOnWall = ItemsInSlot[0];
+                //if (itrophy.tavernSlotType == TavernSlotType.Pelt)
+                //    BuildingIntService.Instance.tavernController.tavernModel.peltOnWall = ItemsInSlot[0];
+
+            }
         }
 
         public void CloseRightClickOpts()

@@ -27,7 +27,9 @@ namespace Town
         void Start()
         {
             trophyBtn.onClick.AddListener(OnTrophyBtnPressed);
-            peltBtn.onClick.AddListener(OnPeltBtnPressed); 
+            peltBtn.onClick.AddListener(OnPeltBtnPressed);
+            BuildingIntService.Instance.OnItemWalled += (Iitems item, TavernSlotType tavernSlotType)
+                                        => FillSelectTrophyPeltSlot(); 
         }
 
         void OnTrophyBtnPressed()
@@ -88,30 +90,50 @@ namespace Town
         public void InitSelectPage(TrophyView trophyView)
         {
             this.trophyView = trophyView;
+            FillSelectTrophyPeltSlot();
+        }
+
+        void FillSelectTrophyPeltSlot()
+        {
             Iitems itemTrophy =
-                     BuildingIntService.Instance.tavernController.tavernModel.trophyOnWall;
+                    BuildingIntService.Instance.tavernController.tavernModel.trophyOnWall;
             Iitems itemPelt =
                      BuildingIntService.Instance.tavernController.tavernModel.peltOnWall;
 
-           trophyslot = trophyBtn.GetComponent<TrophySelectSlotController>();
-           peltSlot = peltBtn.GetComponent<TrophySelectSlotController>();   
+            trophyslot = trophyBtn.GetComponent<TrophySelectSlotController>();
+            peltSlot = peltBtn.GetComponent<TrophySelectSlotController>();
 
-            if (itemTrophy != null && trophyslot.ItemsInSlot[0].itemName != itemTrophy.itemName)
+            if (itemTrophy != null)
             {
-                trophyslot.AddItem(itemTrophy, true);                
+                if (trophyslot.ItemsInSlot.Count == 0)
+                {
+                    trophyslot.AddItem(itemTrophy, true);
+                }
+                else if (trophyslot.ItemsInSlot[0].itemName != itemTrophy.itemName)
+                {
+                    trophyslot.AddItem(itemTrophy, true);
+                }
             }
-            else if (itemTrophy == null)// trophy slot is emplty
+            else if (itemTrophy == null)// trophy slot is empty
             {
                 trophyslot.ClearSlot();
             }
-            if (itemPelt != null && peltSlot.ItemsInSlot[0].itemName != itemTrophy.itemName)
+            if (itemPelt != null)
             {
-                peltSlot.AddItem(itemPelt, true);
+                if (peltSlot.ItemsInSlot.Count == 0)
+                {
+                    peltSlot.AddItem(itemPelt, true);
+                }
+                else if (peltSlot.ItemsInSlot[0].itemName != itemPelt.itemName)
+                {
+                    peltSlot.AddItem(itemPelt, true);
+                }
             }
-            else if(itemPelt == null)
+            else if (itemPelt == null)
             {
                 peltSlot.ClearSlot();
             }
         }
+
     }
 }

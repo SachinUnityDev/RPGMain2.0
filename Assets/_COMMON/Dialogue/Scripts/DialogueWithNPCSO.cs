@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,8 +16,8 @@ namespace Common
         //public Sprite clickedSprite;
         //public Sprite unClickedSprite; 
 
-        public List<DialogueSO> allDialogueSOs = new List<DialogueSO>();
-
+        public List<DialogueSO> allDialogueSOs = new List<DialogueSO>();// to be removed 
+        public List<DialogueDataSO> allDialogueSO = new List<DialogueDataSO>();
         private void Awake()
         {
             foreach (DialogueSO diaSO in allDialogueSOs)
@@ -31,6 +32,14 @@ namespace Common
 
         }
 
+    }
+
+    [Serializable]
+    public class DialogueDataSO
+    {
+        public DialogueSO dialogueSO;
+        public bool isLocked;
+        public bool isRepeatable;
     }
 }
 

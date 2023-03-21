@@ -16,7 +16,7 @@ MonoBehaviour:
   dialogueName: 7
   npcName: 13
   charName: 0
-  dialogueTitle: Welcome to the temple of Shalulu!
+  dialogueTitle: This is the temple of water, right?
   gameState: 1
   charInDialogue: 01000000
   NPCinDialogue: 0d000000

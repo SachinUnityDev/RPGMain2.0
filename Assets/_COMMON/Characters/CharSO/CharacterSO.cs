@@ -41,8 +41,9 @@ namespace Common
 
         [Header("Location")]
         public LocationName baseCharLoc;
-   
+
         [Header("THE TYPES")]
+        public CharRole charRole;
         public RaceType raceType;
         public RaceTypeHero raceTypeHero; 
         public CultureType cultType;     // play part in trails only 

@@ -495,13 +495,13 @@ namespace Interactables
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                InitItemToInv(SlotType.StashInv, ItemType.TradeGoods, (int)TGNames.DeerSkin,
+                InitItemToInv(SlotType.CommonInv, ItemType.PoeticGewgaws, (int)PoeticGewgawNames.BeltLegacyOfTheSpida,
                                      CauseType.Items, 2);
             }
             if (Input.GetKeyDown(KeyCode.J))
             {
-                InitItemToInv(SlotType.StashInv, ItemType.TradeGoods, (int)TGNames.NyalaPelt,
-                                   CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.PoeticGewgaws, (int)PoeticGewgawNames.GlovesLegacyOfTheSpida,
+                                     CauseType.Items, 2);
             }
             if (Input.GetKeyDown(KeyCode.G))
             {

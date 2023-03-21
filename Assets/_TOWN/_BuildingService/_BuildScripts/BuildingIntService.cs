@@ -13,13 +13,14 @@ namespace Town
 
     public class BuildingIntService : MonoSingletonGeneric<BuildingIntService>
     {
-        public event Action<Iitems, TavernSlotType> OnTrophyableTavern; 
+        public event Action<Iitems, TavernSlotType> OnItemWalled; 
 
         [Header("Char and NPC Select")]
         public CharNames selectChar;
         public NPCNames selectNpc; 
 
         public AllBuildSO allBuildSO; 
+
         public HouseController houseController;
         public TavernController tavernController; 
         public TempleController templeController;
@@ -31,19 +32,31 @@ namespace Town
         }
 
         #region 
-        public void On_TrophyableTavern(Iitems item, TavernSlotType tavernSlotType)
+        //public bool CanItemBeWalled(Iitems item, TavernSlotType tavernSlotType)
+        //{
+        //    Iitems currItem = null;
+        //    if (tavernSlotType == TavernSlotType.Trophy)
+        //    {
+        //        currItem = tavernController.tavernModel.trophyOnWall;
+        //    }
+
+
+        //}
+
+        public void On_ItemWalled(Iitems item, TavernSlotType tavernSlotType)
         {
+            
             if (tavernSlotType == TavernSlotType.Trophy)
             {
-                // check if item need to be added 
-                tavernController.tavernModel.trophyOnWall = item;
+                tavernController.tavernModel.trophyOnWall = item; 
             }
+                
             if (tavernSlotType == TavernSlotType.Pelt)
             {
-                // check if item need to be added 
+                
                 tavernController.tavernModel.peltOnWall = item;
             }
-            OnTrophyableTavern?.Invoke(item, tavernSlotType);
+            OnItemWalled?.Invoke(item, tavernSlotType);
         }
 
         #endregion 
@@ -52,4 +65,3 @@ namespace Town
 
     }
 }
-

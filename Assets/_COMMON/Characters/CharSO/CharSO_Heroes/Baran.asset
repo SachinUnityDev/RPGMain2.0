@@ -35,11 +35,12 @@ MonoBehaviour:
   stateOfChar: 2
   fameBehavior: 1
   baseCharLoc: 1
+  charRole: 2
   raceType: 2
   raceTypeHero: 6
   cultType: 1
   classType: 1
-  archeType: 0
+  archeType: 1
   tameAnimalsStrength: 1
   fleeBehaviour: 3
   canBeAmbushed: 0

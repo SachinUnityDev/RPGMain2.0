@@ -54,11 +54,11 @@ namespace Common
     {
         None,
         MeetKhalid,  // top panel 
-        RetrieveDebt, // 
+        XX, // 
         DebtIsClear, // 
         AttendJob,
         GoVisitTemple,
-        AltGoVisitTemple,        
+        XXX,        
         MeetMinami,
         ProofOfPower,
         MeetElder,

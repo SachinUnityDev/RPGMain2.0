@@ -48,12 +48,14 @@ namespace Town
         }
         void FillItemsinSlots()
         {
-            if(slotItems.Count == 0)
+           
+
+            if (slotItems.Count == 0)
             {
                 for (int k = 0; k < 3; k++)
                 {
                     TrophyScrollSlotController slotController
-                       = selectContainer.GetChild(k).GetComponent<TrophyScrollSlotController>();
+                      = selectContainer.GetChild(k).GetComponent<TrophyScrollSlotController>();
                     slotController.ClearSlot();
                 }
                 return; 
@@ -70,10 +72,10 @@ namespace Town
             {
                 TrophyScrollSlotController slotController
                         = selectContainer.GetChild(j).GetComponent<TrophyScrollSlotController>();
-                slotController.ClearSlot();
+                            slotController.InitSlotView(trophyView);
 
                 if (i < slotItems.Count)
-                    slotController.LoadSlot(slotItems[startIndex]);                
+                    slotController.AddItem(slotItems[startIndex]);                
                 j++; 
             }
         }

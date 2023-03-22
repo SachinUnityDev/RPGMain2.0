@@ -127,6 +127,7 @@ namespace Common
         }
         public bool AddItem(Iitems item, bool onDrop = true)
         {
+
             if (IsEmpty())
             {
                 AddItemOnSlot(item, onDrop);
@@ -136,10 +137,10 @@ namespace Common
             {
                 // add item to the trophyable item in common inv
                 InvService.Instance.invMainModel.AddItem2CommORStash(ItemsInSlot[0]);
-                RemoveItem(); 
-                AddItemOnSlot(item, onDrop);   
+                RemoveItem();
+                AddItemOnSlot(item, onDrop);
                 return true;
-            }            
+            }
         }
         void AddItemOnSlot(Iitems item, bool onDrop)
         {

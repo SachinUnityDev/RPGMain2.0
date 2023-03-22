@@ -48,7 +48,8 @@ namespace Town
             
             if (tavernSlotType == TavernSlotType.Trophy)
             {
-                tavernController.tavernModel.trophyOnWall = item; 
+               tavernController.tavernModel.trophyOnWall = item; 
+
             }
                 
             if (tavernSlotType == TavernSlotType.Pelt)

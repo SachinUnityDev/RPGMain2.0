@@ -29,7 +29,7 @@ namespace Town
             trophyBtn.onClick.AddListener(OnTrophyBtnPressed);
             peltBtn.onClick.AddListener(OnPeltBtnPressed);
             BuildingIntService.Instance.OnItemWalled += (Iitems item, TavernSlotType tavernSlotType)
-                                        => FillSelectTrophyPeltSlot(); 
+                                        => FillSelectSlot(tavernSlotType); 
         }
 
         void OnTrophyBtnPressed()
@@ -41,8 +41,9 @@ namespace Town
             allTrophies.Clear();
             foreach (Iitems item in allTGs)
             {
-                ITrophyable iTrophy = item as ITrophyable; 
-                if(iTrophy.tavernSlotType == TavernSlotType.Trophy)
+                ITrophyable iTrophy = item as ITrophyable;
+                if (iTrophy == null) continue;
+                if (iTrophy.tavernSlotType == TavernSlotType.Trophy)
                 {
                     if (trophyslot.ItemsInSlot.Count == 0)
                     {
@@ -55,8 +56,7 @@ namespace Town
                 }
             }
             LoadScrollPage(allTrophies, TavernSlotType.Trophy); 
-        }
-        
+        }        
         void OnPeltBtnPressed()
         {
             allTGs.Clear();
@@ -66,9 +66,10 @@ namespace Town
             foreach (Iitems item in allTGs)
             {
                 ITrophyable iTrophy = item as ITrophyable;
+                if (iTrophy == null) continue; 
                 if (iTrophy.tavernSlotType == TavernSlotType.Pelt)
                 {
-                    if (peltSlot.ItemsInSlot.Count == 0)
+                    if (peltSlot.ItemsInSlot.Count == 0)  
                     {
                         allPelts.Add(item);                     
                     }
@@ -82,26 +83,33 @@ namespace Town
         }
         void LoadScrollPage(List<Iitems> slotItems, TavernSlotType tavernSlotType)
         {
+            ItemService.Instance.itemCardGO.SetActive(false);  // to eliminate item card bug
             trophyView.scrollPageTrans.GetComponent<TrophyScrollPagePtrEvents>()
                 .InitScrollPage(trophyView,tavernSlotType, slotItems); 
             trophyView.DisplayScrollPage();
         }
-
         public void InitSelectPage(TrophyView trophyView)
         {
             this.trophyView = trophyView;
-            FillSelectTrophyPeltSlot();
+            FillTrophySlot();
+            FillPeltSlot();
         }
-
-        void FillSelectTrophyPeltSlot()
+        void FillSelectSlot(TavernSlotType tavernSlotType)
+        {
+            if(tavernSlotType == TavernSlotType.Trophy)
+            {
+                FillTrophySlot(); 
+            }
+            if(tavernSlotType == TavernSlotType.Pelt)
+            {
+                FillPeltSlot();
+            }
+        }
+        void FillTrophySlot()
         {
             Iitems itemTrophy =
                     BuildingIntService.Instance.tavernController.tavernModel.trophyOnWall;
-            Iitems itemPelt =
-                     BuildingIntService.Instance.tavernController.tavernModel.peltOnWall;
-
             trophyslot = trophyBtn.GetComponent<TrophySelectSlotController>();
-            peltSlot = peltBtn.GetComponent<TrophySelectSlotController>();
 
             if (itemTrophy != null)
             {
@@ -118,6 +126,13 @@ namespace Town
             {
                 trophyslot.ClearSlot();
             }
+        }
+        void FillPeltSlot()
+        {
+            Iitems itemPelt =
+                     BuildingIntService.Instance.tavernController.tavernModel.peltOnWall;          
+            peltSlot = peltBtn.GetComponent<TrophySelectSlotController>();
+            
             if (itemPelt != null)
             {
                 if (peltSlot.ItemsInSlot.Count == 0)
@@ -134,6 +149,5 @@ namespace Town
                 peltSlot.ClearSlot();
             }
         }
-
     }
 }

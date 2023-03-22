@@ -25,14 +25,10 @@ namespace Town
         public Transform craftPotionPanel;
         public Transform fortifyPanel;
 
-        [Header("Day and Night BG Sprites")]
-        [SerializeField] Sprite dayBG;
-        [SerializeField] Sprite nightBG;
-
         [SerializeField] Button exit;
 
-        BuildingSO marketSO;
-        TimeState timeState;
+        [SerializeField] BuildingSO marketSO;
+        [SerializeField] TimeState timeState;
         void Awake()
         {
             BGSpriteContainer = transform.GetChild(0);
@@ -41,7 +37,7 @@ namespace Town
         public void Init()
         {
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
-            marketSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.House);
+            marketSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.Marketplace);
             timeState = CalendarService.Instance.currtimeState;
            // btnContainer.GetComponent<HouseInteractBtnView>().InitInteractBtns(this);
             FillMarketBG();
@@ -52,16 +48,16 @@ namespace Town
         {
             if (CalendarService.Instance.currtimeState == TimeState.Night)
             {
-                BGSpriteContainer.GetComponent<Image>().sprite = nightBG;
+                BGSpriteContainer.GetComponent<Image>().sprite = marketSO.buildingData.buildIntNight;
             }
             else
             {
-                BGSpriteContainer.GetComponent<Image>().sprite = dayBG;
+                BGSpriteContainer.GetComponent<Image>().sprite = marketSO.buildingData.buildIntDay;
             }
 
             for (int i = 0; i < 4; i++)
             {
-                //  BGSpriteContainer.GetChild(i).GetComponent<HouseBaseEvents>().Init(this);
+               // BGSpriteContainer.GetChild(i).GetComponent<HouseBaseEvents>().Init(this);
             }
         }
         void InitInteractPanels()

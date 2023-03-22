@@ -22,7 +22,7 @@ namespace Common
         [Header("FOR DROP CONTROLS")]
         [SerializeField] GameObject draggedGO;
         [SerializeField] ItemsDragDrop itemsDragDrop;
-
+        [SerializeField] TrophyView trophyView; 
         [Header("RIGHT CLICK CONTROLs")]
         public List<ItemActions> rightClickActions = new List<ItemActions>();
         public bool isRightClicked = false;
@@ -73,6 +73,13 @@ namespace Common
         }
 
         #region SLOT ITEM HANDLING ..ADD/REMOVE/REFRESH
+
+
+        public void InitSlotView(TrophyView trophyView)
+        {
+            this.trophyView= trophyView;
+            ClearSlot();
+        }
         public void ClearSlot()
         {
             ItemsInSlot.Clear();
@@ -135,8 +142,6 @@ namespace Common
                 {
                     if (ItemsInSlot.Count < item.maxInvStackSize)  // SLOT STACK SIZE 
                     {
-                        InvService.Instance.invMainModel.AddItem2CommORStash(ItemsInSlot[0]);
-                        RemoveItem(); // to account for the scroll.. 
                         AddItemOnSlot(item, onDrop);
                         return true;
                     }
@@ -151,6 +156,34 @@ namespace Common
                     return false;
                 }
             }
+
+            //if (IsEmpty())
+            //{
+            //    AddItemOnSlot(item, onDrop);
+            //    return true;
+            //}
+            //else
+            //{
+            //    if (HasSameItem(item))  // SAME ITEM IN SLOT 
+            //    {
+            //        if (ItemsInSlot.Count < item.maxInvStackSize)  // SLOT STACK SIZE 
+            //        {
+            //            InvService.Instance.invMainModel.AddItem2CommORStash(ItemsInSlot[0]);
+            //            RemoveItem(); // to account for the scroll.. 
+            //            AddItemOnSlot(item, onDrop);
+            //            return true;
+            //        }
+            //        else
+            //        {
+            //            Debug.Log("Slot full");
+            //            return false;
+            //        }
+            //    }
+            //    else   // DIFF ITEM IN SLOT 
+            //    {
+            //        return false;
+            //    }
+            //}
 
 
             //if (IsEmpty())
@@ -250,7 +283,6 @@ namespace Common
                 Debug.Log("SPRITE NOT FOUND");
             return null;
         }
-
         Sprite GetBGSprite(Iitems item)
         {
             Sprite sprite = InvService.Instance.InvSO.GetBGSprite(item);
@@ -268,7 +300,7 @@ namespace Common
                 ITrophyable itrophy = ItemsInSlot[0] as ITrophyable;
                 BuildingIntService.Instance.On_ItemWalled(ItemsInSlot[0], itrophy.tavernSlotType);
                 RemoveItem(); // remove item from the slot and common inv
-
+                trophyView.DisplayScrollPage();
                 //if (itrophy.tavernSlotType == TavernSlotType.Trophy)
                 //BuildingIntService.Instance.tavernController.tavernModel.trophyOnWall = ItemsInSlot[0];
                 //if (itrophy.tavernSlotType == TavernSlotType.Pelt)

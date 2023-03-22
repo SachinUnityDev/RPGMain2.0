@@ -55,9 +55,9 @@ namespace Town
                 BGSpriteContainer.GetComponent<Image>().sprite = marketSO.buildingData.buildIntDay;
             }
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < BGSpriteContainer.childCount; i++)
             {
-               // BGSpriteContainer.GetChild(i).GetComponent<HouseBaseEvents>().Init(this);
+                BGSpriteContainer.GetChild(i).GetComponent<MarketBaseEvents>().Init(this);
             }
         }
         void InitInteractPanels()

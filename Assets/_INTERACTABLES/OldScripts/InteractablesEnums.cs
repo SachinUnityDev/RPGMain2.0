@@ -118,6 +118,7 @@ namespace Interactables
         NPCSlot, 
         TrophySelectSlot, 
         TrophyScrollSlot, 
+        CraftSlot,
     }
     public enum GemType
     {

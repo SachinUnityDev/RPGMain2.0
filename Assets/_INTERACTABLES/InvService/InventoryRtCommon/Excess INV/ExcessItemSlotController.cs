@@ -275,9 +275,6 @@ namespace Interactables
                     }
                 }
             }
-
-
-
         }
 
         public void LoadSlot(Iitems item)

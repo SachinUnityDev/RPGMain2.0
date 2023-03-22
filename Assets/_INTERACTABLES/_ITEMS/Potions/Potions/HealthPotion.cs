@@ -13,10 +13,10 @@ namespace Interactables
         public int itemName => (int)PotionNames.HealthPotion;
         public SlotType invSlotType { get; set; }
         public int maxInvStackSize { get; set; }
-        public List<int> allBuffs { get; set; }
+        public List<int> allBuffs { get; set; } = new List<int>();
         public int itemId { get; set; }
-        public ItemData toolData { get; set; }
-        public List<ItemDataWithQty> allIngredData { get; set; }
+        public ItemData toolData { get; set; } 
+        public List<ItemDataWithQty> allIngredData { get; set; } = new List<ItemDataWithQty>();
 
         public void OnHoverItem()
         {
@@ -26,6 +26,7 @@ namespace Interactables
         {
             this.itemId = itemId;
             this.maxInvStackSize = maxInvStackSize;
+            RecipeInit(); 
         }
         public override void PotionApplyFX()
         {

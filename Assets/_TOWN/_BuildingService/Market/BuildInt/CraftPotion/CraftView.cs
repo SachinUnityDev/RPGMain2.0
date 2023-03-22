@@ -25,21 +25,38 @@ namespace Town
         private void Awake()
         {
             exitBtn.onClick.AddListener(OnExitBtnPressed); 
-            
         }
         void OnExitBtnPressed()
         {
             UnLoad();
         }
 
-        void InitPotionBtn()
+        void InitCraftView()
         {
-           
-        }
-        
-        void FillRecipeSlot()
-        {
+            potionOptsBtnContainer.GetComponent<PotionOptsBtnView>().InitPotionPtrEvents(this);
 
+        }
+
+        public void PotionSelect(int i)
+        {
+            Iitems item = GetPotionItem(i);
+            // get ingred// 
+            // pass ingred to the recipeSlot container 
+
+            recipeSlotContainer.GetComponent<RecipeContainerSlotView>().InitRecipeSlotView(this, item);
+        }
+        Iitems GetPotionItem(int i)
+        {
+            switch (i)
+            {
+                case 1:
+                    return healthPotion;                     
+                case 2:
+                    return staminaPotion;
+                case 3:
+                    return fortPotion;  
+            }
+            return null;
         }
 
         void CreatePotion()
@@ -67,13 +84,14 @@ namespace Town
     
         public void Init()
         {
-            CreatePotion();
-            potionSelect = PotionNames.None;
+            Load(); 
         }
 
         public void Load()
         {
-            
+            CreatePotion();
+            potionSelect = PotionNames.None;
+            InitCraftView();
         }
 
         public void UnLoad()

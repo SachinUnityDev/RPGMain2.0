@@ -66,6 +66,22 @@ namespace Interactables
             return false; 
         }
 
+        public bool HasItemInQtyCommOrStash(ItemDataWithQty itemDataWithQty)
+        {
+            int count = 0; 
+            List<Iitems> allItems = new List<Iitems>();
+            foreach (Iitems item in GetAllItemsInCommOrStash(itemDataWithQty.ItemData.itemType))
+            {
+                if(item.itemName == itemDataWithQty.ItemData.ItemName)
+                {
+                    count++; 
+                }
+            }
+            if (count >= itemDataWithQty.quantity)
+                return true; 
+            return false; 
+        }
+
         public List<Iitems> GetAllItemsInCommOrStash(ItemType itemType)
         {
             List<Iitems> allItems = new List<Iitems>();

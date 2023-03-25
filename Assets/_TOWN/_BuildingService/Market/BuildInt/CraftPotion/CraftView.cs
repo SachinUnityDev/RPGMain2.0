@@ -2,6 +2,7 @@ using Common;
 using Interactables;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,12 +35,15 @@ namespace Town
         void InitCraftView()
         {
             potionOptsBtnContainer.GetComponent<PotionOptsBtnView>().InitPotionPtrEvents(this);
-
+            costCurrtrans.GetChild(1).GetComponent<TextMeshProUGUI>().text =
+                BuildingIntService.Instance.marketController.marketModel.costOfCraftInBronze.ToString();
         }
 
         public void PotionSelect(int i)
         {
+
             Iitems item = GetPotionItem(i);
+            potionSelect = (PotionNames)item.itemName; 
             // get ingred// 
             // pass ingred to the recipeSlot container 
 

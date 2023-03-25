@@ -24,11 +24,13 @@ namespace Town
         public HouseController houseController;
         public TavernController tavernController; 
         public TempleController templeController;
+        public MarketController marketController; 
         void Start()
         {
             houseController = GetComponent<HouseController>();
             templeController = GetComponent<TempleController>();
             tavernController = GetComponent<TavernController>();    
+            marketController= GetComponent<MarketController>();
         }
 
         #region 

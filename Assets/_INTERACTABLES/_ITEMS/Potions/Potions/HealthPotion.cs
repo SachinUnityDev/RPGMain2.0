@@ -6,7 +6,7 @@ using Combat;
 
 namespace Interactables
 {
-    public class HealthPotion : PotionsBase,IRecipe,  Iitems,IConsumable, IEquipAble
+    public class HealthPotion : PotionsBase, IRecipe,  Iitems,IConsumable, IEquipAble
     {
         public override PotionNames potionName => PotionNames.HealthPotion; 
         public ItemType itemType => ItemType.Potions;

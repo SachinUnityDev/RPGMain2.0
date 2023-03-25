@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29939290b2efa2a4b8f12ff01b1a6a06, type: 3}
   m_Name: LeatherSO
   m_EditorClassIdentifier: 
+  charNames: 02000000
   armorType: 1
   fortifyCost:
     silver: 1
@@ -19,6 +20,10 @@ MonoBehaviour:
   armorTypeStr: Leather
   minArmor: 1
   maxArmor: 1
+  armorState: 1
+  allCharArmorData:
+  - charName: 2
+    armorSprite: {fileID: 21300000, guid: dd778cfe41dbb5446b8e6ef1dfcaca74, type: 3}
   nosOfDays: 1
   allLines:
   - Armor gained for 1 day

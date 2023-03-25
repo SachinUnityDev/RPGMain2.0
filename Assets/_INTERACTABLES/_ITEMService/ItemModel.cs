@@ -126,8 +126,9 @@ namespace Interactables
             gemEnchanted = gemBase as Iitems;
             return false;
         }
-        # endregion
+        #endregion
 
+        #region SOCKET AND UNSOCKET
         public bool CanSocketSupportGem(Iitems item)
         {
             if(supportItemSocketed == null)
@@ -172,7 +173,17 @@ namespace Interactables
             }
         }
 
-        
+        public bool IsUnSocketable()
+        {
+            if(supportItemSocketed == null && divItemsSocketed[0] == null
+                                           && divItemsSocketed[1] == null)
+                return true;
+            else
+                return false;
+        }
+
+        #endregion
+
     }
 }
 

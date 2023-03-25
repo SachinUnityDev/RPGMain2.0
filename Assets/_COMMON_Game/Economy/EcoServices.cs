@@ -4,25 +4,54 @@ using UnityEngine;
 using Interactables;
 using System.Linq;
 using System;
+using Town;
 
 namespace Common
 {
+    public enum PocketType
+    {     
+        Stash, 
+        Inv, 
+    }
+
     public class EcoServices : MonoSingletonGeneric<EcoServices>, ISaveableService
     {
         public EconoModel econoModel;
         public EcoSO ecoSO;
         public event Action<Currency> OnInvMoneyChg;
         public event Action<Currency> OnStashMoneyChg;
+        public event Action<PocketType> OnPocketSelected; 
         void Start()
         {
             econoModel = new EconoModel(ecoSO);
         }
-
-        public Currency GetMoneyInAct(NPCNames npcName)
+        public void On_PocketSelected(PocketType pocketType)
         {
-           Currency npcMoney=  econoModel.allNPCMoneyData.Find(t => t.npcName == npcName).money;
-            return npcMoney;
+            OnPocketSelected?.Invoke(pocketType); 
         }
+        public bool HasMoney(PocketType pocketType, Currency reqCurr)
+        {
+            bool hasMoney = false;           
+            switch (pocketType)
+            {
+              
+                case PocketType.Stash:
+                    hasMoney = GetMoneyAmtInPlayerStash().IsMoneySufficent(reqCurr);                    
+                    break;
+                case PocketType.Inv:
+                   hasMoney = GetMoneyAmtInPlayerInv().IsMoneySufficent(reqCurr);
+                    break;
+                default:
+                    break;
+            }
+            return hasMoney;
+        }
+
+        //public Currency GetMoneyInAct(NPCNames npcName)
+        //{
+        //   Currency npcMoney=  econoModel.allNPCMoneyData.Find(t => t.npcName == npcName).money;
+        //    return npcMoney;
+        //}
 
         public Currency GetMoneyAmtInPlayerStash()
         {

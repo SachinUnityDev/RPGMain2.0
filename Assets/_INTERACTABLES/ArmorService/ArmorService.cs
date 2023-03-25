@@ -10,22 +10,32 @@ namespace Interactables
         // socket rules two divine and one support 
         // Btn socket for the support gem
         
-        public AllArmorSO allArmorSO; 
-        public ArmorModel armorModel;
-        public GameObject armorPanel;
+        public AllArmorSO allArmorSO;
 
+        [Header("Not TBR")]
+        public ArmorModel armorModel;
+        public List<ArmorModel> allArmorModels = new List<ArmorModel>();
+        public List<ArmorController> allArmorController = new List<ArmorController>();
+        public GameObject armorPanel;
       
         public ArmorViewController armorViewController;
-        [Header("Not TBR")]
-        public ArmorController armorController;
         public void Init()
         {
                         
         }
+        public void OnArmorFortifyPressed(CharNames charSelect,ArmorModel armorModel)
+        {
+            // check if it can be fortified
+            // create armor base if not already there
+            // 
+
+
+        }
+
         private void Start()
         {
-            armorViewController = armorPanel.GetComponent<ArmorViewController>();
-          //  armorController = GetComponent<ArmorController>();
+            armorViewController = armorPanel.GetComponent<ArmorViewController>();      
+
         }
 
 #region Button Controls
@@ -38,10 +48,44 @@ namespace Interactables
         public void CloseArmorPanel()
         {
             armorViewController.GetComponent<IPanel>().UnLoad();
+        }
+        #endregion
+        public ArmorModel GetArmorModel(CharNames charName)
+        {
+            int index = allArmorModels.FindIndex(t => t.charName == charName);
+            if (index != -1)
+            {
+                return allArmorModels[index];
+            }
+            else
+            {
+                Debug.Log("armor model not found " + charName);
+                return null;
+            }
+        }
+        public bool IsArmorSocketable(CharNames charName, GemNames gemName)
+        {
+            CharModel charModel = CharService.Instance.GetAllyCharModel(charName);
+
+            return false; 
+        }
+
+        public bool SocketArmor(GemNames gemName)
+        {
+            CharNames charName = InvService.Instance.charSelect;
+            if (IsArmorSocketable(charName, gemName))
+            {
+                // get gembase enchant weapon 
+                // Unlock the weapon skill
+                return true;
+            }
+            else
+            {
+                // error message
+                return false;
+            }
 
         }
-#endregion
-
 
     }
 

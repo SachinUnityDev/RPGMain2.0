@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29939290b2efa2a4b8f12ff01b1a6a06, type: 3}
   m_Name: BrassSO
   m_EditorClassIdentifier: 
+  charNames: 03000000
   armorType: 3
   fortifyCost:
     silver: 2
@@ -19,6 +20,10 @@ MonoBehaviour:
   armorTypeStr: Brass
   minArmor: 0
   maxArmor: 2
+  armorState: 3
+  allCharArmorData:
+  - charName: 3
+    armorSprite: {fileID: 21300000, guid: b4a51a77ba366b045b3f1e6f812966c7, type: 3}
   nosOfDays: 1
   allLines:
   - Armor gained for 1 day

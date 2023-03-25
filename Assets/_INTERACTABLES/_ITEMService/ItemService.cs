@@ -495,18 +495,18 @@ namespace Interactables
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.LionessPelt,
+                InitItemToInv(SlotType.CommonInv, ItemType.Gems, (int)GemNames.Ruri,
                                      CauseType.Items, 2);
             }
             if (Input.GetKeyDown(KeyCode.J))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.LionPelt,
-                                   CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.Gems, (int)GemNames.Ametyst,
+                                    CauseType.Items, 2);
             }
             if (Input.GetKeyDown(KeyCode.G))
             {
-                InitItemToInv(SlotType.StashInv, ItemType.TradeGoods, (int)TGNames.NyalaTrophy,
-                                            CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.Gems, (int)GemNames.Amber,
+                            CauseType.Items, 2);
             }            
         }
 

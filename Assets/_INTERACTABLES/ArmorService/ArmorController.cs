@@ -1,18 +1,17 @@
+using Common;
+using Interactables;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ArmorController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public ArmorModel armorModel;
+    CharController charController;
+    private void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        charController = GetComponent<CharController>();
+        armorModel = new ArmorModel(ArmorService.Instance.allArmorSO
+                        .GetArmorSOWithCharName(charController.charModel.charName));
     }
 }

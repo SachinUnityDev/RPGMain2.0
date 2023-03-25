@@ -34,8 +34,8 @@ namespace Interactables
         public bool IsMoneySufficent(Currency curr)
         {
             int bronzifyCurr = curr.BronzifyCurrency();
-            int bronifyStash = this.BronzifyCurrency(); 
-            if(bronifyStash >= bronzifyCurr)
+            int bronifyPlayerAccount = this.BronzifyCurrency(); 
+            if(bronifyPlayerAccount >= bronzifyCurr)
                 return true;
             else
                 return false; 
@@ -46,8 +46,8 @@ namespace Interactables
                 return false; 
 
             int bronzifyCurr = curr.BronzifyCurrency(); 
-            int bronzifyStash = this.BronzifyCurrency();
-            int finalBronze = bronzifyStash- bronzifyCurr;
+            int bronzifyPlayerAccount = this.BronzifyCurrency();
+            int finalBronze = bronzifyPlayerAccount- bronzifyCurr;
             Currency finalCurr = new Currency(0, finalBronze); 
             finalCurr= finalCurr.RationaliseCurrency();
 
@@ -64,8 +64,8 @@ namespace Interactables
         Hide,
         Brass,
         Cloth,
-        Skull,
-        ScaleMail,
+        Bone,
+        Scale,
     }
 
     public enum WeaponType

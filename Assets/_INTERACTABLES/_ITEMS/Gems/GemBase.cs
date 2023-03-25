@@ -20,31 +20,31 @@ namespace Interactables
 
    
 
-    public interface ISocketable  //BLACKSMITH ONLY 
-    {
-        //GemName gemName { get; }
-        //ArmorType armorType {get; }
-        //bool IsSocketAble();
-        //void OnSocket(); //Can DO IN town+ quest prep scene + camp ...option not available in other states as in combat etc
-        //void OnUnSocket(); // gem to be Destroyed on UnSocket.. will not to common Inv....
-        //                   // ONLY BLACKSMIRTH CAN UNSOCKET A GEM 
-        //void SocketGemFX();   // three sockets 
+    //public interface ISocketable  //BLACKSMITH ONLY 
+    //{
+    //    //GemName gemName { get; }
+    //    //ArmorType armorType {get; }
+    //    //bool IsSocketAble();
+    //    //void OnSocket(); //Can DO IN town+ quest prep scene + camp ...option not available in other states as in combat etc
+    //    //void OnUnSocket(); // gem to be Destroyed on UnSocket.. will not to common Inv....
+    //    //                   // ONLY BLACKSMIRTH CAN UNSOCKET A GEM 
+    //    //void SocketGemFX();   // three sockets 
     
-    }
+    //}
 
-    public interface IEnchantable    // ONLY IN THE TEMPLE // ONLY DIVINE GEM ENCHANT 
-    {
-      //  GemName gemName { get; }
-      ////  WeaponType weaponType { get; }
-      //  bool EnchantGemFX();   // only one socket... unlocks a skills 
-      ////  bool IsEnchantable();      
-      // // int currCharge { get; set; } // 12 
-    }
+    //public interface IEnchantable    // ONLY IN THE TEMPLE // ONLY DIVINE GEM ENCHANT 
+    //{
+    //  //  GemName gemName { get; }
+    //  ////  WeaponType weaponType { get; }
+    //  //  bool EnchantGemFX();   // only one socket... unlocks a skills 
+    //  ////  bool IsEnchantable();      
+    //  // // int currCharge { get; set; } // 12 
+    //}
 
-    public interface ICraftable  // ONLY PRECIOUS GEMS ARE CRAFTABLE 
-    {
+    //public interface ICraftable  // ONLY PRECIOUS GEMS ARE CRAFTABLE 
+    //{
         
-    }
+    //}
 
 
     public interface IDivGem

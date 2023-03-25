@@ -45,7 +45,7 @@ namespace Interactables
         protected CharController charController;        
         protected CharNames charName;
         protected int charID;
-        public virtual void  PotionEquip()
+        public virtual void  PotionEquip()  
         {
             charController = CharService.Instance.GetCharCtrlWithName(InvService.Instance.charSelect); 
             charName = charController.charModel.charName;

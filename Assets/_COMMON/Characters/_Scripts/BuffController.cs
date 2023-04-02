@@ -96,11 +96,21 @@ namespace Combat
                 return buffIndex;         
         }
 
+        public void IncrBuffCastTime(int buffID, int incrBy)
+        {
+            foreach (BuffData buff in allBuffs)
+            {
+                if(buff.buffID == buffID)
+                {
+                    buff.buffedNetTime += incrBy; 
+                }
+            }
+        }
         public int ApplyBuffOnRange(CauseType causeType, int causeName, int causeByCharID, StatsName statName
             , float minChgR, float maxChgR, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
         {
             CharModData charModData = charController.ChangeStatRange(causeType, causeName, causeByCharID
-                                           , statName, minChgR, maxChgR,  true);
+                                                                    , statName, minChgR, maxChgR,  true);
 
             int currRd = GameSupportService.Instance.currentRound;
             buffIndex++;
@@ -110,7 +120,7 @@ namespace Combat
             return buffIndex; 
         }
 
-
+    
 
         public int ApplyExpBuff(CauseType causeType, int causeName, int causeByCharID
                  , int value, TimeFrame timeFrame, int netTime, bool isBuff)

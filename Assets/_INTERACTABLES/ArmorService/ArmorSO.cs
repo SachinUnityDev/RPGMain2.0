@@ -4,27 +4,48 @@ using UnityEngine;
 using Common;
 using Town;
 using System;
+using System.Security.Policy;
+using System.Windows.Forms;
+using UnityEditor.PackageManager;
 
 namespace Interactables
 {
-    
+    [Serializable]
+    public class ArmorDataVsLoc
+    {
+        public LocationName locationName;
+        public Currency currFortify;
+        public Currency currFortifyOnUpgrade; 
+        public Currency currSocketDiv;
+        public Currency currSocketSupport;
+        public ArmorState armorState; 
+    }
 
     [CreateAssetMenu(fileName = "ArmorSO", menuName = "Interactable/ArmorSO")]
 
     public class ArmorSO : ScriptableObject
     {
         public List<CharNames> charNames= new List<CharNames>();
-        public ArmorType armorType;       
-        public Currency fortifyCost;
+        public ArmorType armorType;
+
         public string armorTypeStr = "";
         public int minArmor; 
-        public int maxArmor;   
-        public ArmorState armorState;    
+        public int maxArmor;
+        public int minArmorUp; 
+        public int maxArmorUp;  
+   
         public List<CharArmorData> allCharArmorData = new List<CharArmorData>();
-        public int nosOfDays; 
+        public List<ArmorDataVsLoc> allArmorDataVsLoc = new List<ArmorDataVsLoc>();    
         [TextArea(5,10)]
         public List<string> allLines=new List<string>();
-
+        private void Awake()
+        {
+            if(allLines.Count == 0)
+            {
+                string str = $"Fortify to gain Armor buff"; 
+                allLines.Add(str);
+            }
+        }
         public Sprite GetArmorSprite(CharNames charName)
         {
             int index = allCharArmorData.FindIndex(t=>t.charName == charName);

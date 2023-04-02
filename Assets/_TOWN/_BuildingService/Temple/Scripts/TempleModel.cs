@@ -8,6 +8,10 @@ namespace Town
 {
     public class TempleModel
     {
+
+        [Header("UPGRADE")]
+        public bool isBuildingUpgraded = false;
+
         public List<BuildIntTypeData> buildIntTypes = new List<BuildIntTypeData>();
         public List<NPCInteractData> allNPCInteractData= new List<NPCInteractData>();
         public List<CharInteractData> allCharInteractData = new List<CharInteractData>();

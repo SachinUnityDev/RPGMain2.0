@@ -172,23 +172,23 @@ namespace Common
         {        // Jungle Freak.....//Swampy Cramp.....//Forest Gump
             if (Input.GetKeyDown(KeyCode.V)) 
             {
-                ApplyTempTrait(CauseType.CharState, (int)CharStateName.Ambushed, 1
+                ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
                                                              , TempTraitName.JungleFreak);
-                ApplyTempTrait(CauseType.CharState, (int)CharStateName.Ambushed, 1
+                ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
                                                             , TempTraitName.SwampyCramp);
-                ApplyTempTrait(CauseType.CharState, (int)CharStateName.Ambushed, 1
+                ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
                                                             , TempTraitName.ForestGump);
             }
         
             if (Input.GetKeyDown(KeyCode.C))
             {
-                ApplyTempTrait(CauseType.CharState, (int)CharStateName.Ambushed, 1
+                ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
                                                              , TempTraitName.Confident);
 
-                ApplyTempTrait(CauseType.CharState, (int)CharStateName.Ambushed, 1
+                ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
                                                              , TempTraitName.Unwavering);
 
-                ApplyTempTrait(CauseType.CharState, (int)CharStateName.Ambushed, 1
+                ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
                                                              , TempTraitName.Initiator); 
             }
         }

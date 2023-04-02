@@ -116,6 +116,9 @@ namespace Common
             return stateID;
         }
 
+
+        
+
         public int ApplyImmunityBuff(CauseType causeType, int causeName, int causeByCharID
                                 , CharStateName charStateName, TimeFrame timeFrame, int netTime) // immunity buff for this char State
         {
@@ -130,36 +133,53 @@ namespace Common
             return stateID;
         }
 
-
-        public int ApplyDOTImmunityBuff(CauseType causeType, int causeName, int causeByCharID
-                                , CharStateName charStateName, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
+        public void RemoveImmunityBuff(int immunityID)
         {
-            int firstDOTBuffID=0; 
+            foreach (ImmunityBuffData immunityBuffData in allImmunityBuffs)
+            {
+                if(immunityBuffData.immunityID == immunityID)
+                {
+                   allImmunityBuffs.Remove(immunityBuffData);
+                }
+            }
+        }
+        public List<int> ApplyDOTImmunityBuff(CauseType causeType, int causeName, int causeByCharID
+                                , CharStateName charStateName, TimeFrame timeFrame, int netTime, bool isBuff = true)
+        {
+            List<int> allImmuneBuffID = new List<int>();
             if (charStateName == CharStateName.BleedLowDOT || charStateName == CharStateName.BleedMedDOT
                                                             || charStateName == CharStateName.BleedHighDOT)
-            {   firstDOTBuffID =              
+            {   
+                int id = 
                 ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BleedLowDOT, timeFrame, netTime);                
-                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BleedMedDOT, timeFrame, netTime);
+               // ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BleedMedDOT, timeFrame, netTime);
+               allImmuneBuffID.Add(id);
                 ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BleedHighDOT, timeFrame, netTime);
-
+                allImmuneBuffID.Add(id);
             }
             if (charStateName == CharStateName.PoisonedHighDOT || charStateName == CharStateName.PoisonedMedDOT
                                                               || charStateName == CharStateName.PoisonedLowDOT)
             {
-                firstDOTBuffID =
+                int id =
                 ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.PoisonedHighDOT, timeFrame, netTime);
-                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.PoisonedMedDOT, timeFrame, netTime);
+                allImmuneBuffID.Add(id);
+                //ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.PoisonedMedDOT, timeFrame, netTime);
+                id =
                 ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.PoisonedLowDOT, timeFrame, netTime);
+                allImmuneBuffID.Add(id);   
             }
             if (charStateName == CharStateName.BurnHighDOT || charStateName == CharStateName.BurnMedDOT
                                                             || charStateName == CharStateName.BurnLowDOT)
             {
-                firstDOTBuffID =
+                int id = 
                 ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BurnHighDOT, timeFrame, netTime);
-                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BurnMedDOT, timeFrame, netTime);
+                allImmuneBuffID.Add(id);
+                //ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BurnMedDOT, timeFrame, netTime);
+                id = 
                 ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BurnLowDOT, timeFrame, netTime);
+                allImmuneBuffID.Add(id);   
             }
-            return firstDOTBuffID;
+            return allImmuneBuffID;
         }
 
         public void RemoveStateFX(CharStateBuffData charStateBuffData)
@@ -220,7 +240,7 @@ namespace Common
             }
             return false;
         }
-
+    
         public bool HasCharState(CharStateName _charStateName)
         {
             foreach (CharStateBuffData buffData in allCharStateBuffs)

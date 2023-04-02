@@ -2,11 +2,18 @@ using Common;
 using Interactables;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI; 
 
 namespace Town
 {
+    public enum UnsocketStatus
+    {
+        Socketed,
+        UnSocketed,
+    }
+
     public class UnSocketView : MonoBehaviour, IPanel
     {
 
@@ -25,7 +32,8 @@ namespace Town
 
         [Header("btm currency and status update btn")]
         [SerializeField] Transform statusBtn;
-        [SerializeField] Transform stashCurrency;
+        [SerializeField] Transform CurrTrans;
+        [SerializeField] TextMeshProUGUI statusTxt; 
 
         [Header("Curr Selects")]
         [SerializeField] CharNames charSelect;
@@ -83,7 +91,7 @@ namespace Town
             centerTrans.GetComponent<UnSocketViewCenter>().InitUnSocketCenter(selectChar, armorModel, this);
             statusBtn.GetComponent<UnSocketBtnPtrEvents>().InitUnSocketBtnPtrEvents(selectChar, armorModel, this);
 
-            FillStashMoney();
+            CurrTrans.GetComponent<DisplayCurrencyWithToggle>().InitCurrencyToggle();
         }
         void OnReverseBtnPressed()
         {
@@ -92,8 +100,26 @@ namespace Town
         public void InitUnSocketView(FortifyMainView fortifyMainView)
         {
             this.fortifyMainView = fortifyMainView;
+            CurrTrans.GetComponent<DisplayCurrencyWithToggle>().InitCurrencyToggle();
+
         }
 
+        public void StatusUpdate(UnsocketStatus unsocketStatus)
+        {
+            switch (unsocketStatus)
+            {
+                case UnsocketStatus.Socketed:
+                    statusTxt.text = "Socketed"; 
+                    break;
+                case UnsocketStatus.UnSocketed:
+                    statusTxt.text = "Unsocketed";
+                    break;           
+                default:
+                    break;
+            }
+
+
+        }
         public void Init()
         {
             index = 0;
@@ -105,11 +131,7 @@ namespace Town
             index = 0;
             FillCharPlanks();
         }
-        void FillStashMoney()
-        {
-            Currency curr = EcoServices.Instance.GetMoneyAmtInPlayerStash().DeepClone();
-            stashCurrency.GetComponent<DisplayCurrency>().Display(curr);
-        }
+    
 
         public void UnLoad()
         {

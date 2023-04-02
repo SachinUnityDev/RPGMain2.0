@@ -16,8 +16,6 @@ namespace Town
         Fortified,
         UnFortifiable,
     }
-
-
     public class FortifyView : MonoBehaviour, IPanel
     {
         FortifyMainView fortifyMainView; 
@@ -34,9 +32,9 @@ namespace Town
 
         [Header("btm currency and status update btn")]
         [SerializeField] Transform statusBtn;
-        [SerializeField] Transform stashCurrency;
-        [SerializeField] TextMeshProUGUI statustxt; 
-
+        [SerializeField] Transform currTrans;
+        [SerializeField] TextMeshProUGUI statustxt;
+        [SerializeField] TextMeshProUGUI buffTxt; 
 
         [Header("Curr Selects")]
         [SerializeField] CharNames charSelect;
@@ -45,6 +43,9 @@ namespace Town
         [SerializeField] int index;
         [SerializeField] float prevLeftClick;
         [SerializeField] float prevRightClick;
+
+
+
         private void Start()
         {
             leftBtn.onClick.AddListener(OnLeftBtnPressed);
@@ -92,9 +93,11 @@ namespace Town
             ArmorModel armorModel = armorController.armorModel;
 
             centerTrans.GetComponent<FortifyViewCenter>().InitFortifyPanel(selectChar, armorModel, this);
-            //statusBtn.GetComponent<EnchantStatusBtnPtrEvents>().InitBtnEvents(selectChar, weaponModel, this);
-            FillStashMoney();
-            statustxt.text = armorModel.armorState.ToString(); 
+            statusBtn.GetComponent<FortifyBtnPtrEvents>().InitFortifyBtn(selectChar, armorModel, this);
+
+            currTrans.GetComponent<DisplayCurrencyWithToggle>().InitCurrencyToggle();
+            LocationName locName = TownService.Instance.townModel.currTown; 
+            statustxt.text = armorModel.GetArmorDataVsLoc(locName).armorState.ToString(); 
 
         }
         void OnReverseBtnPressed()
@@ -103,7 +106,8 @@ namespace Town
         }
         public void InitFortifyView(FortifyMainView fortifyMainView)
         {
-            this.fortifyMainView = fortifyMainView; 
+            this.fortifyMainView = fortifyMainView;
+            currTrans.GetComponent<DisplayCurrencyWithToggle>().InitCurrencyToggle();
         }
 
         public void Init()
@@ -117,11 +121,7 @@ namespace Town
             index = 0;
             FillCharPlanks();
         }
-        void FillStashMoney()
-        {
-            Currency curr = EcoServices.Instance.GetMoneyAmtInPlayerStash().DeepClone();
-            stashCurrency.GetComponent<DisplayCurrency>().Display(curr);
-        }
+        
 
         public void UnLoad()
         {

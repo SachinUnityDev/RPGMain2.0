@@ -1,3 +1,5 @@
+using Common;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Policy;
@@ -7,48 +9,58 @@ using UnityEngine;
 
 namespace Interactables
 {
-    //public class CharSocketData
-    //{
-    //    public CharNames charName;
-    //    public GemNames gemDivineSocket1;
-    //    public GemNames gemDivineSocket2;
-    //    public GemNames gemSupportSocket3;
-
-    //    public CharSocketData(CharNames charName)
-    //    {
-    //        this.charName = charName;
-    //        this.gemDivineSocket1 = GemNames.None;
-    //        this.gemDivineSocket2 = GemNames.None;
-    //        this.gemSupportSocket3 = GemNames.None;
-    //    }
-    //}
-
+    [Serializable]
     public class ArmorModel
     {
         /// <summary>
         /// ARMOR SOCKETING IS CONTROLLED BY ITEM MODEL 
         /// </summary>
         public CharNames charName;
-        public ArmorType armorType;
-        public Currency fortifyCost;
+        public ArmorType armorType;        
         public string armorTypeStr = "";
         public int minArmor;
         public int maxArmor;
-        public int upMinArmor;
-        public int upMaxArmor;
-        public ArmorState armorState;
+        public int minArmorUp;
+        public int maxArmorUp;
 
-        public int nosOfDays;
+        public List<ArmorDataVsLoc> allArmorDataVsLoc = new List<ArmorDataVsLoc>();
 
         public ArmorModel(ArmorSO armorSO)
         {
-            armorType= armorSO.armorType;   
-            fortifyCost= armorSO.fortifyCost.DeepClone();
+            armorType= armorSO.armorType;               
             minArmor= armorSO.minArmor;
             maxArmor= armorSO.maxArmor;
-        
-            armorState= armorSO.armorState; 
+            minArmorUp = armorSO.minArmorUp; 
+            maxArmorUp =armorSO.maxArmorUp;
+            
+            allArmorDataVsLoc = armorSO.allArmorDataVsLoc;
+           
         }
+
+        public Currency GetFortifyCost(LocationName locName)
+        {
+            ArmorDataVsLoc armorData = GetArmorDataVsLoc(locName);
+            return armorData.currFortify;
+            
+        }
+
+        public Currency GetUnSocketCostDiv(LocationName locName)         
+        {
+            ArmorDataVsLoc armorData = GetArmorDataVsLoc(locName);           
+            return armorData.currSocketDiv;
+            
+        }
+
+        public ArmorDataVsLoc GetArmorDataVsLoc(LocationName locName)
+        {
+            int index = allArmorDataVsLoc.FindIndex(t=>t.locationName==locName); 
+            if(index != -1)
+                return allArmorDataVsLoc[index];
+            else
+                Debug.Log("armor data not found" + locName);
+            return null;
+        }
+
     }
 }
 

@@ -1,20 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Common;
+using Combat;
 
 
-namespace Combat
+namespace Common
 {
-
-
     //2 rds	2 dmg per round
-
-
-
     public class LowPoisonDOT : CharStatesBase
     {
-
         public override CharStateName charStateName => CharStateName.PoisonedLowDOT;
         public override CharStateModel charStateModel { get; set; }
         public override CharController charController { get; set; }
@@ -50,8 +44,6 @@ namespace Combat
             ApplyRoundFX();
             CombatEventService.Instance.OnSOT += ApplyRoundFX;
             ApplyPoison();
-
-    
             if (isBleeding)
             {
                 // 4-5 stamina Damage
@@ -65,7 +57,6 @@ namespace Combat
                 charController.damageController.ApplyDamage(charController, CauseType.CharState, (int)charStateName
                  , DamageType.Earth, UnityEngine.Random.Range(6, 10), false);
             }
-            
         }
 
         void ApplyPoison()
@@ -73,21 +64,19 @@ namespace Combat
             int buffID = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                         , charID, StatsName.haste, -2, charStateModel.timeFrame, charStateModel.castTime, true);
-            allBuffs.Add(buffID);
+            allBuffIds.Add(buffID);
             buffID =
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                     , charID, StatsName.fireRes, -30, charStateModel.timeFrame, charStateModel.castTime, true);
-            allBuffs.Add(buffID); 
+            allBuffIds.Add(buffID); 
 
             buffID = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                     , charID, StatsName.airRes, +20, charStateModel.timeFrame, charStateModel.castTime, true);
-            allBuffs.Add(buffID);
+            allBuffIds.Add(buffID);
 
             charController.charStateController.ApplyImmunityBuff(CauseType.CharState, (int)charStateName, charID
                   , CharStateName.Shocked, TimeFrame.Infinity, 1);
-
-
         }
 
         void ApplyRoundFX()
@@ -102,7 +91,7 @@ namespace Combat
                 charController.ChangeStat(CauseType.CharState, (int)charStateName, charID
                                                     , StatsName.health, -dmgPerRound);
         }
-
+ 
         public override void StateApplyVFX()
         {
 
@@ -126,133 +115,8 @@ namespace Combat
         public override void EndState()
         {
             base.EndState();
-            CombatEventService.Instance.OnSOT -= ApplyRoundFX;
-             
-            // To be modified
-
-            CharStatesService.Instance.RemoveImmunity(charController.gameObject, CharStateName.Shocked);
-
+            CombatEventService.Instance.OnSOT -= ApplyRoundFX;          
         }       
     }
 }
 
-
-
-
-//        int netDOT = 2;
-
-//        CharController charController; 
-
-//        public override int castTime { get => netDOT; set => base.castTime = value; }
-//        public override float dmgPerRound => 2.0f;
-//        public override CharStateName charStateName => CharStateName.PoisonedLowDOT;
-//        public override StateFor stateFor => StateFor.Mutual;
-//        public override int timeRemaining { get; set; }
-//        int timeElapsed = 0; 
-
-//        void Start()
-//        {
-//            charController = GetComponent<CharController>(); 
-//            CombatEventService.Instance.OnEOR += TickState;
-//            charID = charController.charModel.charID; 
-//            OverLapRule();
-
-
-//        }
-
-//        public override void SetCastTime(int value)
-//        {
-//            netDOT = value;
-//        }
-//        public void TickState()
-//        {
-
-//            timeElapsed++;
-//           // CharacterController charController = gameObject?.GetComponent<CharacterController>();
-
-
-//            StatData statData = charController.GetStat(StatsName.earthRes);
-
-//            if (statData.currValue > 60.0f)
-//                charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.health, Mathf.RoundToInt(-dmgPerRound / 2));
-//            else
-//                charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.health, -dmgPerRound);
-
-//            if (timeElapsed >= castTime)
-//            {
-//                Debug.Log("EndState Condition met");
-//                EndState();
-//            }
-//            timeRemaining = castTime - timeElapsed;
-//        }
-
-//        public override void EndState()
-//        {
-//            charController.charModel.InCharStatesList.Remove(charStateName);
-//            CombatEventService.Instance.OnEOR -= TickState;
-//            Destroy(this);
-//        }
-//        void OverLapRule()
-//        {
-//            //List<CharStatesBase> otherPoisonStates = new List<CharStatesBase>();
-//            //var allCharStates = this.gameObject.GetComponents<CharStatesBase>();
-//            //foreach (var charState in allCharStates)
-//            //{
-//            //    if ((charState.charStName == CharStateName.PoisonedLowDOT) || (charState.charStName == CharStateName.PoisonedMedDOT)
-//            //        || (charState.charStName == CharStateName.PoisonedHighDOT))
-//            //    {
-//            //        if (charState != this)
-//            //        {
-//            //            otherPoisonStates.Add(charState);
-//            //            if (charState.charStName == this.charStName)
-//            //            {
-//            //                charState.EndState(); 
-//            //                // Destroy(charState);    // replensis the cast time  
-
-//            //            }
-//            //            if (charState.charStName > this.charStName)  
-//            //            {
-//            //                if (charState.timeRemaining == 1)
-//            //                {
-//            //                    int temp = charState.castTime + this.castTime - 1; 
-//            //                    charState.SetCastTime(temp); 
-//            //                }
-
-//            //                this.EndState(); 
-//            //            }
-//            //            if (charState.charStName < this.charStName)
-//            //            {
-//            //                charState.EndState(); 
-//            //            }
-//            //        }
-//            //    }
-//            // }
-
-//        }
-//    }
-//}
-
-////CharStateName tempCharStateName = charState.charStName + 1;
-////CharStatesService.Instance.ApplyACharState(this.gameObject, tempCharStateName);
-
-
-////Debug.Log(charState.castTime);
-////int temp = charState.castTime + this.castTime;                           
-////charState.SetCastTime(temp);                            
-////Debug.Log(charState.castTime);
-
-
-
-////foreach (var poisonDOT in allPoisonStates)
-////{
-////    if (poisonDOT == highest)
-////    {
-////        poisonDOT.castTime = maxCastTime;
-
-////    }
-////    else if (poisonDOT != this)
-////    {
-////        Destroy(poisonDOT);
-////    }           
-
-////}

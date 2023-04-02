@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Common;
-
+using Town; 
 namespace Interactables
 {
     public class ArmorService : MonoSingletonGeneric<ArmorService>
@@ -16,8 +16,9 @@ namespace Interactables
         public ArmorModel armorModel;
         public List<ArmorModel> allArmorModels = new List<ArmorModel>();
         public List<ArmorController> allArmorController = new List<ArmorController>();
+        public List<ArmorBase> allArmorBases = new List<ArmorBase>();
         public GameObject armorPanel;
-      
+
         public ArmorViewController armorViewController;
         public void Init()
         {
@@ -25,13 +26,21 @@ namespace Interactables
         }
         public void OnArmorFortifyPressed(CharNames charSelect,ArmorModel armorModel)
         {
+            //ArmorBase armorBase = Get
+
+
             // check if it can be fortified
             // create armor base if not already there
             // 
 
 
         }
+        public bool CanArmorBeFortified(CharNames charSelect, ArmorModel armorModel)
+        {
 
+
+            return false; 
+        }
         private void Start()
         {
             armorViewController = armorPanel.GetComponent<ArmorViewController>();      
@@ -84,7 +93,6 @@ namespace Interactables
                 // error message
                 return false;
             }
-
         }
 
     }

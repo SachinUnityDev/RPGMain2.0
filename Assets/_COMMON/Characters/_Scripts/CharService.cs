@@ -242,6 +242,24 @@ namespace Common
             //return charCtrl;
             return charController; 
         }
+
+        public List<int> ApplyBuffOnPartyExceptSelf(CauseType causeType, int causeName, int causeByCharID,
+                                    StatsName statName, int value, TimeFrame timeFrame, int netTime, bool isBuff, CharMode charMode)
+        {
+            List<int> grpBuffIDs = new List<int>();
+            foreach (CharController charController in CharService.Instance.allCharsInParty)
+            {
+                if(charController.charModel.charMode== charMode && charController.charModel.charID != causeByCharID)
+                {
+                    int buffID = 
+                    charController.buffController.ApplyBuff(causeType, causeName, causeByCharID
+                                                  , statName, value, timeFrame, netTime, isBuff);
+                    grpBuffIDs.Add(buffID);
+                }   
+            }
+            return grpBuffIDs;
+        }
+    
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.T))

@@ -11,7 +11,10 @@ namespace Interactables
     public class ItemService : MonoSingletonGeneric<ItemService>
     {
         public event Action<CharController, GemNames> OnGemSocketed;
-        public event Action<CharController> OnGemEnchanted; 
+        public event Action<CharController> OnGemEnchanted;
+        public event Action<CharController, PotionNames> OnPotionConsumed; 
+
+
         public List<ItemController> allItemControllers = new List<ItemController>();        
         public List<Iitems> allItemsInGame = new List<Iitems>();
 

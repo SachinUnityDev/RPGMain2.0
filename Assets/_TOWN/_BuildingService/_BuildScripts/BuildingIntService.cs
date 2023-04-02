@@ -31,6 +31,7 @@ namespace Town
             templeController = GetComponent<TempleController>();
             tavernController = GetComponent<TavernController>();    
             marketController= GetComponent<MarketController>();
+
         }
 
         #region 

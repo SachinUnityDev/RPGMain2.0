@@ -72,7 +72,7 @@ namespace Combat
         // **********CHAR STATE
         void CharStateStart(CharStateData charStateData)
         {
-            CharNames charName = charStateData.charStateModel.effectedCharID;
+            CharNames charName = charStateData.charStateModel.effectedChar;
 
             string str = charName + " is now " + charStateData.charStateModel.charStateName +", "
                                  + charStateData.charStateModel.castTime + " rds";

@@ -30,6 +30,7 @@ namespace Town
     [Serializable]
     public class HouseModel
     {
+
         [Header("Interact: Buy Furniture")]
         public List<HousePurchaseOptsData> purchaseOpts = new List<HousePurchaseOptsData> ();
 

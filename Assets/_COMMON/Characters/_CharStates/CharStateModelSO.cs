@@ -40,7 +40,7 @@ namespace Common
         public int startRound = 0; 
         
         public CharNames effectedChar;
-        public CharNames effectedCharID;
+        public int effectedCharID;
         
         public List<string> charStateCardStrs = new List<string>();
         public int charStateID; 

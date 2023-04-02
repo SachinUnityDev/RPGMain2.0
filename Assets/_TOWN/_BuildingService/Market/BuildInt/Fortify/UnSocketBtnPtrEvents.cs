@@ -2,6 +2,7 @@ using Common;
 using Interactables;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI; 
@@ -31,7 +32,7 @@ namespace Town
         Currency currReq; 
 
         public void InitUnSocketBtnPtrEvents(CharNames charSelect
-            , ArmorModel armorModel, UnSocketView unSocketView)
+                        , ArmorModel armorModel, UnSocketView unSocketView)
         {
             this.charSelect = charSelect;
             this.armorModel = armorModel;
@@ -41,7 +42,13 @@ namespace Town
             this.unSocketView = unSocketView;
             SetSocketCount();
             SetCurrReq();
-         
+
+            if (itemModel.IsUnSocketable() ||
+                !EcoServices.Instance.HasMoney(PocketType.Inv, currReq))
+                unSocketView.StatusUpdate(UnsocketStatus.UnSocketed); 
+            else
+                unSocketView.StatusUpdate(UnsocketStatus.Socketed);
+            SetBtnState(PocketType.Inv);
         }
      
         void SetCurrReq()
@@ -99,7 +106,7 @@ namespace Town
         void SetBtnState(PocketType pocketType)
         {            
             if(itemModel.IsUnSocketable() || 
-                EcoServices.Instance.HasMoney(pocketType, currReq))
+                !EcoServices.Instance.HasMoney(pocketType, currReq))
             {
                 isDisabled= true;
                 btnImg.sprite = btnDisabled; 
@@ -110,9 +117,11 @@ namespace Town
             }
         }
 
-        private void Start()
+        private void Awake()
         {
             btnImg = transform.GetChild(0).GetComponent<Image>();
+            btnImg.sprite = btnN;
+
             EcoServices.Instance.OnPocketSelected += SetBtnState; 
         }
     }

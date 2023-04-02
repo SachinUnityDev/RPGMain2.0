@@ -14,10 +14,10 @@ namespace Common
         public CharStateType charStateType;
         public CharStateBehavior charStateBehavior;
 
-        [Header("CastTime")]
-        public TimeFrame timeFrame;
-        public int minCastTime;
-        public int maxCastTime;
+        //[Header("CastTime")]
+        //public TimeFrame timeFrame;
+        //public int minCastTime;
+        //public int maxCastTime;
 
         [Header("Description")]
         public string CharStateNameStr = "";

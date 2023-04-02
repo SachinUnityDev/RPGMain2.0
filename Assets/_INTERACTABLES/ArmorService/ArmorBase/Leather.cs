@@ -1,18 +1,24 @@
+using Common;
+using Interactables;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Leather : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+namespace Interactables
+{
+    public class Leather : ArmorBase
     {
-        
+        public override ArmorType armorType => ArmorType.Leather;
+
+        public override void OnArmorFortifyEnd()
+        {
+           
+        }
+
+        public override void OnArmorFortifyUpgraded()
+        {
+   
+        }
     }
 }

@@ -22,7 +22,8 @@ namespace Common
         protected string str0, str1, str2, str3, str4, str5; 
         public abstract StateFor stateFor { get; }        
         public abstract int castTime { get; protected set; }
-        public List<int> allBuffs { get; set; }
+        public List<int> allBuffIds { get; set; } = new List<int>();
+        public List<int> allImmunityBuffs { get; set; } = new List<int>();
         public virtual void SetCastTime(int value)
         {
             if(value > 0)
@@ -30,6 +31,14 @@ namespace Common
                 castTime = value;
                 if(charStateModel != null)
                     charStateModel.castTime = value; 
+            }
+        }
+        public virtual void IncrCastTime(int incrBy)
+        {
+            SetCastTime(castTime + incrBy);
+            foreach (int buffID in allBuffIds)
+            {
+                charController.buffController.IncrBuffCastTime(buffID, incrBy);
             }
         }
         public virtual int startRound { get; set; }
@@ -73,7 +82,7 @@ namespace Common
                 CombatEventService.Instance.OnEOR += CombatTick;
             }           
             charStateModel.startRound = CombatService.Instance.currentRound;   
-            allBuffs.Clear();
+            allBuffIds.Clear();
         }
         public abstract void StateDisplay();
         public abstract void StateApplyFX();
@@ -105,13 +114,18 @@ namespace Common
                 charController.charModel.InCharStatesList.Remove(charStateName);
                 // should also delete the char State base from the base list
            }
-
-
-            foreach(int buffID in allBuffs)
+            foreach(int buffID in allBuffIds)
             {
                 charController.buffController.RemoveBuff(buffID);
-            }  
-            
+            }
+            foreach (ImmunityBuffData immuneBuffData in charController.charStateController.allImmunityBuffs)
+            {
+
+                if(allImmunityBuffs.Any(t=>t == immuneBuffData.immunityID))
+                {
+                    charController.charStateController.RemoveImmunityBuff(immuneBuffData.immunityID); 
+                }
+            }
         }
 
 

@@ -15,16 +15,17 @@ namespace Common
         public override int castTime { get; protected set; }
 
         public CharController strikerController;
-     
 
 
+        bool fxApplied = false; 
         public override void StateApplyFX()
         {
-            int strikerLvl = 0; 
+            int strikerLvl = 0;
+          
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
                 strikerController = CombatService.Instance.currCharOnTurn;
-                strikerLvl = strikerController.charModel.charLvl;
+                strikerLvl = strikerController.charModel.charLvl;                
             }
        
              if(!charController.charStateController.HasCharDOTState(CharStateName.BurnHighDOT))
@@ -32,23 +33,33 @@ namespace Common
                 dmgPerRound = 3 + (strikerLvl / 4);
                 ApplyFX();                
                 CombatEventService.Instance.OnSOT += ApplyFX;
-                if (!charController.charStateController.HasCharDOTState(charStateName))   // already has bleed following FX will not stack up 
+          
+                CombatEventService.Instance.OnEOR += DOTTick;
+                if (charController.charStateController.HasCharDOTState(CharStateName.PoisonedLowDOT))
                 {
-                    int buffID = 
-                    charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                            , charID, StatsName.dodge, -2, charStateModel.timeFrame, charStateModel.castTime, true);
-                    allBuffs.Add(buffID);
-                    buffID= 
-                    // stamina regen -1 
-                    charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                            , charID, StatsName.staminaRegen, -1, charStateModel.timeFrame, charStateModel.castTime, true);
-                    allBuffs.Add(buffID);
+                    OverLapRulePoison();
                 }
              }
-             else if (charController.charStateController.HasCharDOTState(CharStateName.PoisonedLowDOT))
-             {
-                OverLapRulePoison(); 
-             }
+             
+        }
+
+        void DOTTick()
+        {
+            if (!charController.charStateController.HasCharDOTState(charStateName) && !fxApplied)
+             // already has bleed following FX will not stack up 
+            {
+                // -2 dodge 
+                charController.ChangeStat(CauseType.CharState, (int)charStateName
+                           , charID, StatsName.dodge, -2);
+
+                // stamina regen -1 
+                charController.ChangeStat(CauseType.CharState, (int)charStateName
+                          , charID, StatsName.staminaRegen, -1);
+                fxApplied= true;
+            }
+            // if some other bleed is not reducing fortitude a given round this will reduce it
+            if (!charController.charStateController.HasCharDOTState(charStateName))
+                charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.fortitude, -2);
         }
 
         void ApplyFX()
@@ -60,8 +71,7 @@ namespace Common
                 charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.health, Mathf.RoundToInt(-dmgPerRound*0.40f));
             else
                 charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.health, -dmgPerRound);
-
-            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.fortitude, -2);
+           
         }
  
         public override void StateApplyVFX()
@@ -71,7 +81,6 @@ namespace Common
 
         public override void StateDisplay()
         {
-
             int dmg = Mathf.RoundToInt(dmgPerRound);
             str0 = "<style=Bleed> Bleeding </style>";
             charStateModel.charStateCardStrs.Add(str0);
@@ -83,13 +92,22 @@ namespace Common
             charStateModel.charStateCardStrs.Add(str3);
             str4 = "-2<style=Attributes> Dodge </style>";
             charStateModel.charStateCardStrs.Add(str4);
-
         }
 
         public override void EndState()
         {
             base.EndState();
             CombatEventService.Instance.OnSOT -= ApplyFX;
+            CombatEventService.Instance.OnEOR += DOTTick;
+
+            // -2 dodge 
+            charController.ChangeStat(CauseType.CharState, (int)charStateName
+                        , charID, StatsName.dodge, -2);
+
+            // stamina regen -1 
+            charController.ChangeStat(CauseType.CharState, (int)charStateName
+                        , charID, StatsName.staminaRegen, -1);
+            fxApplied = false;            
         }
         void OverLapRulePoison()
         {
@@ -99,17 +117,16 @@ namespace Common
                 int castTime = charController.charStateController.allCharBases
                                     .Find(t => t.charStateName == CharStateName.PoisonedHighDOT).castTime ;
                 charController.charStateController.allCharBases
-                                    .Find(t => t.charStateName == CharStateName.PoisonedHighDOT).SetCastTime(castTime + 1); 
+                                    .Find(t => t.charStateName == CharStateName.PoisonedHighDOT).IncrCastTime(1); 
             }
             if (charController.charStateController.HasCharState(CharStateName.PoisonedLowDOT))
             {
                 int castTime = charController.charStateController.allCharBases
                                     .Find(t => t.charStateName == CharStateName.PoisonedLowDOT).castTime;
                 charController.charStateController.allCharBases
-                                    .Find(t => t.charStateName == CharStateName.PoisonedLowDOT).SetCastTime(castTime + 1);
+                                    .Find(t => t.charStateName == CharStateName.PoisonedLowDOT).IncrCastTime(1);
             }
         }
-
     }
 }
 

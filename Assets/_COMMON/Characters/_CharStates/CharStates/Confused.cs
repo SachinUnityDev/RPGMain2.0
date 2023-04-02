@@ -22,7 +22,9 @@ namespace Common
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                        , charID, StatsName.acc, -2, charStateModel.timeFrame, charStateModel.castTime, true);
 
-            CharStatesService.Instance.AddImmunity(charController.gameObject, CharStateName.Concentrated);
+            charController.charStateController
+              .ApplyImmunityBuff(CauseType.CharState, (int)charStateName
+                 , charID, CharStateName.Despaired, charStateModel.timeFrame, charStateModel.castTime);
 
         }
 
@@ -43,11 +45,6 @@ namespace Common
             charStateModel.charStateCardStrs.Add(str3);
         }
 
-        public override void EndState()
-        {
-            base.EndState();
-            CharStatesService.Instance.RemoveImmunity(charController.gameObject, CharStateName.Concentrated);
-        }
     }
 }
 

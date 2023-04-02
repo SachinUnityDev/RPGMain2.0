@@ -10,6 +10,7 @@ namespace Town
     [Serializable]
     public class TavernModel 
     {
+       
 
         [Header("Interact: Trophy")]
         public Iitems trophyOnWall = null; 

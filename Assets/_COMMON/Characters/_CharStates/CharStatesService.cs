@@ -60,6 +60,9 @@ namespace Common
         public event Action<CharStateName, CharController> OnStateHovered; 
 
 
+        public List<CharStateSO1> allCharStateSOs = new List<CharStateSO1>();
+
+
         public CharStatesFactory charStateFactory;
         public CharStateModelSO charStateModelSO; 
        // public List<CharStateInstance> allCharStates = new List<CharStateInstance>();// not used 
@@ -160,19 +163,38 @@ namespace Common
             return _charGO.GetComponent<CharController>().charModel.Immune2CharStateList.Any(t => t == _charStateName); 
         }
 
-        public void AddImmunity(GameObject _charGO, CharStateName _charStateName)
-        {
-            if(!_charGO.GetComponent<CharController>().charModel.Immune2CharStateList.Any(t => t == _charStateName))
-            {
-                _charGO.GetComponent<CharController>().charModel.Immune2CharStateList.Add(_charStateName); 
-            }
-        }
+ 
 
-        public void RemoveImmunity(GameObject _charGO, CharStateName _charStateName)
-        {
-            _charGO.GetComponent<CharController>().charModel.Immune2CharStateList.Remove(_charStateName);
-        }
-        
+        //public void RemoveImmunity(GameObject _charGO, CharStateName _charStateName)
+        //{
+        //    _charGO.GetComponent<CharController>().charModel.Immune2CharStateList.Remove(_charStateName);
+        //}
+        //public void RemoveImmunityDOT(GameObject _charGO, CharStateName _charStateName)
+        //{
+        //    if (_charStateName == CharStateName.BurnHighDOT
+        //       || _charStateName == CharStateName.BurnMedDOT
+        //       || _charStateName == CharStateName.BurnLowDOT)
+        //    {
+        //        RemoveImmunity(_charGO, CharStateName.BurnHighDOT);
+        //        RemoveImmunity(_charGO, CharStateName.BurnLowDOT);
+        //    }
+        //    if (_charStateName == CharStateName.BleedHighDOT
+        //      || _charStateName == CharStateName.BleedMedDOT
+        //      || _charStateName == CharStateName.BleedLowDOT)
+        //    {
+        //        RemoveImmunity(_charGO, CharStateName.BleedHighDOT);
+        //        RemoveImmunity(_charGO, CharStateName.BleedLowDOT);
+        //    }
+        //    if (_charStateName == CharStateName.PoisonedHighDOT
+        //      || _charStateName == CharStateName.PoisonedMedDOT
+        //      || _charStateName == CharStateName.PoisonedLowDOT)
+        //    {
+
+        //        RemoveImmunity(_charGO, CharStateName.PoisonedHighDOT);
+        //        RemoveImmunity(_charGO, CharStateName.PoisonedLowDOT);
+        //    }
+        //}
+     
         public void ClearDOT(GameObject _charGO, CharStateName _charStateName)
         {
             if (_charStateName == CharStateName.BurnHighDOT
@@ -250,90 +272,10 @@ namespace Common
 
         #endregion
 
-        private void Update()
-        {
-            //if (Input.GetKeyDown(KeyCode.M))
-            //{
-            ////    GameObject go = CharService.Instance.allyInPlay[0];
-
-            ////    ApplyCharState(go, CharStateName.LuckyDuck, go.GetComponent<CharController>()
-            ////    , CauseType.CharState, (int)CharStateName.LuckyDuck);
-            ////    ApplyCharState(go, CharStateName.Shocked, go.GetComponent<CharController>()
-            //// , CauseType.CharState, (int)CharStateName.LuckyDuck);
-            ////    ApplyCharState(go, CharStateName.Confused, go.GetComponent<CharController>()
-            //// , CauseType.CharState, (int)CharStateName.LuckyDuck);
-            ////    ApplyCharState(go, CharStateName.Despaired, go.GetComponent<CharController>()
-            //// , CauseType.CharState, (int)CharStateName.LuckyDuck);
-            ////    ApplyCharState(go, CharStateName.BleedLowDOT, go.GetComponent<CharController>()
-            ////, CauseType.CharState, (int)CharStateName.LuckyDuck);
-            ////    ApplyCharState(go, CharStateName.PoisonedLowDOT, go.GetComponent<CharController>()
-            ////, CauseType.CharState, (int)CharStateName.LuckyDuck);
-
-            //}
-
-            //if (Input.GetKeyDown(KeyCode.K))
-            //{
-            //    GameObject go = CharacterService.Instance.allyInPlay[1];
-            //    ApplyCharState(go, CharStateName.Concentrated, go.GetComponent<CharController>()
-            //    , CauseType.CharState, (int)CharStateName.Concentrated);
-
-            //}
-            //if (Input.GetKeyDown(KeyCode.N))
-            //{
-            //    GameObject go = CharacterService.Instance.allyInPlay[0];
-            //    CharController charController = go.GetComponent<CharController>();
-            //    int charID = charController.charStateController.GetCharStateBase(CharStateName.Concentrated).charID;
-            //    Debug.Log("CharName " + charID);
-            //}
-
-            //if (Input.GetKeyDown(KeyCode.J))
-            //{
-            //    GameObject go = CharacterService.Instance.allyInPlay[1];
-            //    CharController charController = go.GetComponent<CharController>();
-            //    int charID = charController.charStateController.GetCharStateBase(CharStateName.Concentrated).charID;
-            //    Debug.Log("CharName " + charID);
-            //}
-
-        }
+        
 
 
     }
 
 
 }
-
-
-//if (HasCharState( _charGOEffected,  _charStateName))
-//{
-//    int castTime = _charGOEffected.GetComponent<CharStatesBase>().castTime;
-//    _charGOEffected.GetComponent<CharStatesBase>().SetCastTime(castTime);
-//}
-//else
-//{
-//    CharController charController = _charGOEffected.GetComponent<CharController>();
-//    CharNames charNameEffect = charController.charModel.charName;
-//    int currRound = CombatService.Instance.currentRound;
-//    CharStatesBase charBase = charStateFactory.GetCharState(_charStateName);
-
-//    int castTime = charBase.castTime;
-//    charController.charModel.InCharStatesList.Add(_charStateName);
-
-//    // charBase .StateApply
-
-//    CharStateData charStateData = new CharStateData(charNameEffect, _charStateName, currRound, castTime);
-//    OnCharStateStart?.Invoke(charStateData);
-//} 
-
-//if (Input.GetKeyDown(KeyCode.Q))
-//{
-
-//  // GameObject charGOTEST = CharacterService.Instance.allyInPlay[0];
-//  //  CharController causeBy = CharacterService.Instance.allyInPlayControllers[1];
-
-
-//  //SetCharState(charGOTEST, causeBy,CharStateName.BleedHighDOT);
-//  // SetCharState(charGOTEST, causeBy, CharStateName.Soaked);
-//  //  SetCharState(charGOTEST, causeBy, CharStateName.SafeSpot);
-//  // SetCharState(charGOTEST, causeBy, CharStateName.BurnLowDOT);
-//   // causeBy.ChangeStat(CauseType.CharSkill, (int)SkillNames.AnimalTrap, causeBy, StatsName.health, +4);
-//}

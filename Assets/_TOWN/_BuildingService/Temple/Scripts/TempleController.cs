@@ -10,7 +10,6 @@ namespace Town
 {
     public class TempleController : MonoBehaviour
     {
-
         [Header("Temple Model")]
         public TempleModel templeModel;
 

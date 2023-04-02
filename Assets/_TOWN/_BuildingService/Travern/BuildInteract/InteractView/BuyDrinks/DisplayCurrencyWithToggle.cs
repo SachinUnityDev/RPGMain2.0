@@ -11,9 +11,7 @@ namespace Town
 
     public class DisplayCurrencyWithToggle : MonoBehaviour
     {
-
-        [SerializeField] Button toggleBtn;          
-
+        [SerializeField] Button toggleBtn;    
         [SerializeField] TextMeshProUGUI moneyFrmTxt;
 
         string inv_Txt = "In Inventory";
@@ -23,15 +21,14 @@ namespace Town
         {
             //toggleBtn = transform.GetChild(2).GetComponent<Button>();
             //moneyFrmTxt= transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-            toggleBtn.onClick.AddListener(OnToggleBtnPressed);
-            moneyFrmTxt.text = inv_Txt;
-            EcoServices.Instance.OnInvMoneyChg += FillInvMoney;
-            EcoServices.Instance.OnStashMoneyChg += FillStashMoney;           
+            toggleBtn.onClick.AddListener(OnToggleBtnPressed);            
+                 
         }
-        private void OnEnable()
+        private void Start()
         {
-        
-
+            EcoServices.Instance.OnInvMoneyChg += FillInvMoney;
+            EcoServices.Instance.OnStashMoneyChg += FillStashMoney;
+            InitCurrencyToggle();
         }
         public void DisplayCurrency(Currency amt)
         {
@@ -65,7 +62,7 @@ namespace Town
         void FillInvMoney(Currency amt)
         {
             moneyFrmTxt.text = inv_Txt;            
-            DisplayCurrency(amt); 
+            DisplayCurrency(amt);     
         }
         void FillStashMoney(Currency amt)
         {
@@ -74,3 +71,4 @@ namespace Town
         }
     }
 }
+

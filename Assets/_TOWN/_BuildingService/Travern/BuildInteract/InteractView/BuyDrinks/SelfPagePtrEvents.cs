@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using Common;
+using DG.Tweening;
 
 namespace Town
 {

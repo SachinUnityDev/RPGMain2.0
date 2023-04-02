@@ -45,13 +45,13 @@ namespace Common
             {
                 // 4-5 stamina Damage
                 charController.damageController.ApplyDamage(charController, CauseType.CharState, (int)charStateName
-                      , DamageType.StaminaDmg, UnityEngine.Random.Range(4, 5), false);       
+                      , DamageType.StaminaDmg, UnityEngine.Random.Range(4, 6), false);       
             }
             if (isBurning)
             {
-                //  6-8 earth damage 
+                //  6-9 earth damage 
                 charController.damageController.ApplyDamage(charController, CauseType.CharState, (int)charStateName
-                  , DamageType.Earth, UnityEngine.Random.Range(6, 9), false);
+                  , DamageType.Earth, UnityEngine.Random.Range(6, 10), false);
             }
         }
 
@@ -60,22 +60,23 @@ namespace Common
             int buffID = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                         , charID, StatsName.haste, -2, charStateModel.timeFrame, charStateModel.castTime, true);
-            allBuffs.Add(buffID);
+            allBuffIds.Add(buffID);
 
             buffID = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                     , charID, StatsName.fireRes, -30, charStateModel.timeFrame, charStateModel.castTime, true);
-            allBuffs.Add(buffID);
+            allBuffIds.Add(buffID);
 
             buffID = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                     , charID, StatsName.airRes, +20, charStateModel.timeFrame, charStateModel.castTime, true);
-            allBuffs.Add(buffID);
+            allBuffIds.Add(buffID);
 
-            
+            int immuneBuff = 
             charController.charStateController.ApplyImmunityBuff(CauseType.CharState, (int)charStateName, charID
                     , CharStateName.Shocked, TimeFrame.Infinity, 1);
          
+            allBuffIds.Add(immuneBuff); 
         }
 
         void ApplyRoundFX()
@@ -89,8 +90,6 @@ namespace Common
             else
                 charController.ChangeStat(CauseType.CharState, (int)charStateName, charID
                                                     , StatsName.health, -dmgPerRound);
-
-
         }
 
         public override void StateApplyVFX()
@@ -117,34 +116,7 @@ namespace Common
         {
             base.EndState();
             CombatEventService.Instance.OnSOT -= ApplyRoundFX;
-
-            // to be modified 
-            CharStatesService.Instance.RemoveImmunity(charController.gameObject, CharStateName.Shocked);
-
         }
 
     }
 }
-
-
-
-////CharStatesBase highest = this;
-//////int maxCastTime = this.castTime - timeElapsed;
-////if (otherPoisonStates.Count <= 2) return;
-
-////foreach (var poisonDOT in otherPoisonStates)   // they are all accessed as time remaining
-////{
-////    if (poisonDOT == this) continue; 
-
-////    if (poisonDOT.timeRemaining > this.timeRemaining)
-////        timeRemaining = poisonDOT.timeRemaining;
-////    if (poisonDOT.charStName > highest.charStName)
-////        highest = poisonDOT;
-////}
-
-
-////if (this != highest)
-////{
-////    Debug.Log("not highest destroy"); 
-////    Destroy(this);
-////}

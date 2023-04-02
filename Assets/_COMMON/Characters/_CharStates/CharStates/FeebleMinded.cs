@@ -16,83 +16,41 @@ namespace Common
         public override int castTime { get; protected set; }
 
         public override void StateApplyFX()
-        {  // ...Immune to LuckyDuck... cannot use Patience type of skills 
-           // ....curio related stuff to be done later  
-
-            CharStatesService.Instance.AddImmunity(charController.gameObject, CharStateName.LuckyDuck);
-
-        }
-
-        void EOQTick()
         {
-            // let char State Have this 
-        }
+            // Can't use Buff or Heal skills	
+            //	-20 Cold Res (water earth dark)	
+            // ...Immune to LuckyDuck...
 
+            int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+            , charID, StatsName.waterRes, -20, charStateModel.timeFrame, charStateModel.castTime, true);
+            allBuffIds.Add(buffID);
+
+            buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+            , charID, StatsName.earthRes, -20, charStateModel.timeFrame, charStateModel.castTime, true);
+            allBuffIds.Add(buffID);
+
+            buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+            , charID, StatsName.darkRes, -20, charStateModel.timeFrame, charStateModel.castTime, true);
+            allBuffIds.Add(buffID);
+
+            int immuneBuffID = charController.charStateController
+               .ApplyImmunityBuff(CauseType.CharState, (int)charStateName
+                  , charID, CharStateName.LuckyDuck, charStateModel.timeFrame, charStateModel.castTime);
+            allImmunityBuffs.Add(immuneBuffID); 
+        }
         public override void StateApplyVFX()
         {
 
         }
-
         public override void StateDisplay()
         {
-            str0 = "<style=States> FeebleMinded </style>";
-
-            str1 = "-5<style=Fortitude> Fortitude </style> per rd";
-
-            str2 = "-1<style=Fortitude> Fortitude Org </style>until EOQ";
-
-            str3 = "Immune to<style=States> Inspired </style>";
-        }
-
-
-        public override void EndState()
-        {
-            base.EndState();
-            CharStatesService.Instance.RemoveImmunity(charController.gameObject, CharStateName.LuckyDuck);
+            str0 = "Can't use Buff or Heal skills";
+            charStateModel.charStateCardStrs.Add(str0);
+            str1 = "-20 Cold Res";
+            charStateModel.charStateCardStrs.Add(str1);
+            str2 = "Immune to<style=States> Lucky Duck</style>";
+            charStateModel.charStateCardStrs.Add(str2);
         }
     }
 }
 
-
-//        public CharController charController;
-//        public override int castTime { get; set; }
-//        public override float dmgPerRound => 1.0f;
-//        public override CharStateName charStateName => CharStateName.Feebleminded;
-//        public override StateFor stateFor => StateFor.Mutual;
-//        public int timeElapsed { get; set; }
-
-//        void Start()
-//        {
-//            charController = gameObject.GetComponent<CharController>();
-
-//            if (charController.charModel.Immune2CharStateList.Contains(charStateName))
-//                Destroy(this);
-
-//            StateInit(-1, TimeFrame.None, null); 
-
-//        }
-
-//        public override void StateInit(int _castTime, TimeFrame timeFrame, GameObject charGO = null)
-//        {
-
-//            charController.OnStatChanged += Tick2; 
-
-//        }
-//       // T + S + Luck 0	ST + Luck increase
-
-//        void Tick2(CharModData charModData)
-//        {
-//            if (charModData.statModfified != StatsName.luck) return; 
-//            if (charController.GetStat(charModData.statModfified).currValue > 0)
-//            {
-//                EndState(); 
-//            }
-
-//        }
-
-//        public override void EndState()
-//        {            
-//            //charController.OnStatChanged -= Tick2;
-
-//            Destroy(this, 1f);   // remains for only one EOC ; 
-//        }

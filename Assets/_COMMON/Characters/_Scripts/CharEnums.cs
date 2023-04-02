@@ -44,6 +44,7 @@ public enum CauseType
     BuildingInterct, 
     NPCInteract, 
     Landscape, 
+    ArmorType,
 }
 
 public enum StatChecks
@@ -77,7 +78,7 @@ public enum CharMode
 public enum CharStateName
 {
     None,
-    Ambushed,
+    FlatFooted,
     BleedLowDOT,
     BleedMedDOT,
     BleedHighDOT,

@@ -5,8 +5,8 @@ using System;
 using Combat;
 using DG.Tweening;
 using Interactables;
-using Quest; 
-
+using Quest;
+using Town; 
 
 
 namespace Common

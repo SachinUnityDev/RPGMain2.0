@@ -25,24 +25,24 @@ namespace Interactables
 
             int index =
                   charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                          , charController.charModel.charID, StatsName.waterRes, val11, TimeFrame.Infinity, -1, true);
+                          , charController.charModel.charID, AttribName.waterRes, val11, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
             index =
                  charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                         , charController.charModel.charID, StatsName.fireRes, val11, TimeFrame.Infinity, -1, true);
-            buffIndex.Add(index);
-
-
-            index =
-                 charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                         , charController.charModel.charID, StatsName.earthRes, val11, TimeFrame.Infinity, -1, true);
+                         , charController.charModel.charID, AttribName.fireRes, val11, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
 
             index =
                  charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                         , charController.charModel.charID, StatsName.airRes, val11, TimeFrame.Infinity, -1, true);
+                         , charController.charModel.charID, AttribName.earthRes, val11, TimeFrame.Infinity, -1, true);
+            buffIndex.Add(index);
+
+
+            index =
+                 charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
+                         , charController.charModel.charID, AttribName.airRes, val11, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }
         public void FolkloricInit()
@@ -58,24 +58,24 @@ namespace Interactables
 
             int index =
                   charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                          , charController.charModel.charID, StatsName.waterRes, val21, TimeFrame.Infinity, -1, true);
+                          , charController.charModel.charID, AttribName.waterRes, val21, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
              index =
                   charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                          , charController.charModel.charID, StatsName.fireRes, val21, TimeFrame.Infinity, -1, true);
+                          , charController.charModel.charID, AttribName.fireRes, val21, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
 
              index =
                   charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                          , charController.charModel.charID, StatsName.earthRes, val21, TimeFrame.Infinity, -1, true);
+                          , charController.charModel.charID, AttribName.earthRes, val21, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
 
             index =
                  charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                         , charController.charModel.charID, StatsName.airRes, val21, TimeFrame.Infinity, -1, true);
+                         , charController.charModel.charID, AttribName.airRes, val21, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }
         public void EpicInit()
@@ -91,24 +91,24 @@ namespace Interactables
 
             int index =
                   charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                          , charController.charModel.charID, StatsName.waterRes, val31, TimeFrame.Infinity, -1, true);
+                          , charController.charModel.charID, AttribName.waterRes, val31, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
             index =
                  charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                         , charController.charModel.charID, StatsName.fireRes, val31, TimeFrame.Infinity, -1, true);
-            buffIndex.Add(index);
-
-
-            index =
-                 charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                         , charController.charModel.charID, StatsName.earthRes, val31, TimeFrame.Infinity, -1, true);
+                         , charController.charModel.charID, AttribName.fireRes, val31, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
 
             index =
                  charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                         , charController.charModel.charID, StatsName.airRes, val31, TimeFrame.Infinity, -1, true);
+                         , charController.charModel.charID, AttribName.earthRes, val31, TimeFrame.Infinity, -1, true);
+            buffIndex.Add(index);
+
+
+            index =
+                 charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
+                         , charController.charModel.charID, AttribName.airRes, val31, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }
         public void RemoveFXLyric()

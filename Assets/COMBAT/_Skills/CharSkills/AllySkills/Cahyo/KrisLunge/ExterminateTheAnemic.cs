@@ -69,7 +69,7 @@ namespace Combat
                  || CharStatesService.Instance.HasCharState(targetGO, CharStateName.BleedMedDOT)
                  || CharStatesService.Instance.HasCharState(targetGO, CharStateName.BleedLowDOT))
             {
-                if (targetController.GetStat(StatsName.health).baseValue < 35f)
+                if (targetController.GetStat(AttribName.health).baseValue < 35f)
                 {
                     // kill TARGET  !!!!!... exceptions are Kongomato 
                 }

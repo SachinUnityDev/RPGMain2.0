@@ -43,79 +43,79 @@ using System.Linq;
 
         }
 
-        public static string RealName(this StatsName statName)
+        public static string RealName(this AttribName statName)
         {
             string str = ""; 
             switch (statName)
             {
-                case StatsName.None:
+                case AttribName.None:
                     str = ""; 
                     break;
-                case StatsName.health:
+                case AttribName.health:
                     str = "Health"; 
                     break;
-                case StatsName.stamina:
+                case AttribName.stamina:
                     str = "Stamina"; 
                     break;
-                case StatsName.fortitude:
+                case AttribName.fortitude:
                     str = "Fortitude"; 
                     break;
-                case StatsName.hunger:
+                case AttribName.hunger:
                     str = "Hunger";
                     break;
-                case StatsName.thirst:
+                case AttribName.thirst:
                     str = "Thirst";
 
                     break;
-                case StatsName.damage:
+                case AttribName.damage:
                     str = "Damage";
                     break;
-                case StatsName.acc:
+                case AttribName.acc:
                     str = "Accuracy";
                     break;
-                case StatsName.focus:
+                case AttribName.focus:
                     str = "Focus";
                     break;
-                case StatsName.luck:
+                case AttribName.luck:
                     str = "Luck";
                     break;
-                case StatsName.morale:
+                case AttribName.morale:
                     str = "Morale";
 
                     break;
-                case StatsName.haste:
+                case AttribName.haste:
                     str = "Haste";
                     break;
-                case StatsName.vigor:
+                case AttribName.vigor:
                     str = "Vigor";
                     break;
-                case StatsName.willpower:
+                case AttribName.willpower:
                     str = "Willpower";
 
                     break;
-                case StatsName.armor:
+                case AttribName.armor:
                     str = "Armor";
                     break;
-                case StatsName.dodge:
+                case AttribName.dodge:
                     str = "Dodge";
                     break;
-                case StatsName.fireRes:
+                case AttribName.fireRes:
                     str = "Fire Resistance";
                     break;
-                case StatsName.earthRes:
+                case AttribName.earthRes:
                     str = "Earth Resistance";
                     break;
-                case StatsName.waterRes:
+                case AttribName.waterRes:
                     str = "Water Resistance";
                     break;
-                case StatsName.airRes:
+                case AttribName.airRes:
                     str = "Air Resistance";
                     break;
-                case StatsName.lightRes:
+                case AttribName.lightRes:
                     str = "Light Resistance";
 
                     break;
-                case StatsName.darkRes:
+                case AttribName.darkRes:
                     str = "Dark Resistance";
                     break;
                

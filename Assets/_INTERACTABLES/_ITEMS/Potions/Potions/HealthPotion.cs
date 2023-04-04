@@ -34,10 +34,10 @@ namespace Interactables
             int castTime = (int)UnityEngine.Random.Range(potionSO.minCastTime, potionSO.maxCastTime);
             int buffID= 
             charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                                , StatsName.vigor, -2, TimeFrame.EndOfRound, castTime, true);
+                                , AttribName.vigor, -2, TimeFrame.EndOfRound, castTime, true);
             allBuffs.Add(buffID);   
 
-            StatData hpData = charController.GetStat(StatsName.health);
+            AttribData hpData = charController.GetStat(AttribName.health);
             float val = (Random.Range(40f, 60f) * hpData.maxLimit) / 100f;
             charController.damageController
                 .ApplyDamage(charController, CauseType.Potions, (int)potionName, DamageType.Heal, val, false);

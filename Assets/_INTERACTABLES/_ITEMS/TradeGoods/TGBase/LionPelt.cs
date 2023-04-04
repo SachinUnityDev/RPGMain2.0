@@ -41,7 +41,7 @@ namespace Interactables
         {
             int index =
                charController.landscapeController.ApplyLandscapeBuff(CauseType.TradeGoods, (int)tgName, LandscapeNames.Savannah
-               , StatsName.vigor, 1);
+               , AttribName.vigor, 1);
             allLandscapeIndex.Add(index);
 
             index = FameService.Instance.fameController.ApplyFameModBuff(CauseType.TradeGoods, (int)tgName

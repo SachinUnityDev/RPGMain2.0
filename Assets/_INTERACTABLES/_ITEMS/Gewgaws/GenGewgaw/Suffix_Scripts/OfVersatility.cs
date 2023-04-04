@@ -14,11 +14,11 @@ namespace Interactables
       //  NA	+1 (two random utility stats)	+2 (two random utility stats)
         int  val2, val3;
        
-        StatsName statsName21, statsName22, statsName31, statsName32;
+        AttribName statsName21, statsName22, statsName31, statsName32;
 
         public void FolkloricInit()
         {
-            statsName21 = GetRandUtilStat(StatsName.None);
+            statsName21 = GetRandUtilStat(AttribName.None);
             statsName22 = GetRandUtilStat(statsName21);
             val2 = 1;
 
@@ -46,7 +46,7 @@ namespace Interactables
 
         public void EpicInit()
         {
-            statsName31 = GetRandUtilStat(StatsName.None);
+            statsName31 = GetRandUtilStat(AttribName.None);
             statsName32 = GetRandUtilStat(statsName31);
             val3 = 2;
             string str = $"+{val3} {statsName31}";
@@ -72,9 +72,9 @@ namespace Interactables
             buffIndex.Add(index);
         }
       //  NA	+1 (two random utility stats)	+2 (two random utility stats)
-        StatsName GetRandUtilStat(StatsName _statsName)
+        AttribName GetRandUtilStat(AttribName _statsName)
         {
-            StatsName statsName = StatsName.None;
+            AttribName statsName = AttribName.None;
 
             do
             {
@@ -82,16 +82,16 @@ namespace Interactables
                 switch (ran)
                 {
                     case 1:
-                        statsName = StatsName.focus;
+                        statsName = AttribName.focus;
                         break;
                     case 2:
-                        statsName = StatsName.morale;
+                        statsName = AttribName.morale;
                         break;
                     case 3:
-                        statsName = StatsName.haste;
+                        statsName = AttribName.haste;
                         break;
                     case 4:
-                        statsName = StatsName.luck;
+                        statsName = AttribName.luck;
                         break;
                     default:
                         break;

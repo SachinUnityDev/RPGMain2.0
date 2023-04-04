@@ -29,7 +29,7 @@ namespace Interactables
         public override void EquipGewgawPoetic()
         {
             int index = charController.buffController.ApplyBuff(CauseType.PoeticGewgaw, (int)poeticGewgawName
-                , charController.charModel.charID, StatsName.acc, valAcc, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, AttribName.acc, valAcc, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
         }

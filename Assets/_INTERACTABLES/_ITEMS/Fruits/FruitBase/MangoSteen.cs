@@ -31,7 +31,7 @@ namespace Interactables
             if (chance.GetChance())
             {
                 charController.buffController.ApplyBuff(CauseType.Fruit, (int)fruitName,
-                 charController.charModel.charID, StatsName.haste, 2, fruitSO.timeFrame, fruitSO.castTime, true);
+                 charController.charModel.charID, AttribName.haste, 2, fruitSO.timeFrame, fruitSO.castTime, true);
             }
             float chance1 = 20f;
             if (chance1.GetChance())

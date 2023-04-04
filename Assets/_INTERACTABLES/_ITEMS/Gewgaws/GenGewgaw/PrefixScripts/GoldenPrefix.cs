@@ -34,12 +34,12 @@ namespace Interactables
             charController = InvService.Instance.charSelectController;
             int index =
             charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
-                , charController.charModel.charID, StatsName.luck, -2, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, AttribName.luck, -2, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
             index =
             charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
-                , charController.charModel.charID, StatsName.lightRes, valLR, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, AttribName.lightRes, valLR, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
             index =

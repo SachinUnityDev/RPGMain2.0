@@ -50,27 +50,27 @@ namespace Common
             {
                 // -2 dodge 
                 charController.ChangeStat(CauseType.CharState, (int)charStateName
-                           , charID, StatsName.dodge, -2);
+                           , charID, AttribName.dodge, -2);
 
                 // stamina regen -1 
                 charController.ChangeStat(CauseType.CharState, (int)charStateName
-                          , charID, StatsName.staminaRegen, -1);
+                          , charID, AttribName.staminaRegen, -1);
                 fxApplied= true;
             }
             // if some other bleed is not reducing fortitude a given round this will reduce it
             if (!charController.charStateController.HasCharDOTState(charStateName))
-                charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.fortitude, -2);
+                charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, AttribName.fortitude, -2);
         }
 
         void ApplyFX()
         {
             if (CombatService.Instance.currCharOnTurn.charModel.charID != charID) return;
-            StatData statData = charController.GetStat(StatsName.armor);
+            AttribData statData = charController.GetStat(AttribName.armor);
 
             if (statData.currValue > 4)   // apply damage here
-                charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.health, Mathf.RoundToInt(-dmgPerRound*0.40f));
+                charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, AttribName.health, Mathf.RoundToInt(-dmgPerRound*0.40f));
             else
-                charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.health, -dmgPerRound);
+                charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, AttribName.health, -dmgPerRound);
            
         }
  
@@ -102,11 +102,11 @@ namespace Common
 
             // -2 dodge 
             charController.ChangeStat(CauseType.CharState, (int)charStateName
-                        , charID, StatsName.dodge, -2);
+                        , charID, AttribName.dodge, -2);
 
             // stamina regen -1 
             charController.ChangeStat(CauseType.CharState, (int)charStateName
-                        , charID, StatsName.staminaRegen, -1);
+                        , charID, AttribName.staminaRegen, -1);
             fxApplied = false;            
         }
         void OverLapRulePoison()

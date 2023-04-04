@@ -22,15 +22,15 @@ namespace Common
             // ...Immune to LuckyDuck...
 
             int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-            , charID, StatsName.waterRes, -20, charStateModel.timeFrame, charStateModel.castTime, true);
+            , charID, AttribName.waterRes, -20, charStateModel.timeFrame, charStateModel.castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-            , charID, StatsName.earthRes, -20, charStateModel.timeFrame, charStateModel.castTime, true);
+            , charID, AttribName.earthRes, -20, charStateModel.timeFrame, charStateModel.castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-            , charID, StatsName.darkRes, -20, charStateModel.timeFrame, charStateModel.castTime, true);
+            , charID, AttribName.darkRes, -20, charStateModel.timeFrame, charStateModel.castTime, true);
             allBuffIds.Add(buffID);
 
             int immuneBuffID = charController.charStateController

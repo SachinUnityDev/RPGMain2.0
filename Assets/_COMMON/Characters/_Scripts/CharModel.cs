@@ -9,9 +9,9 @@ namespace Common
 {
 
     [System.Serializable]
-    public class StatData
+    public class AttribData
     {
-        public StatsName statsName;
+        public AttribName AttribName;
         public float currValue;
         public float baseValue;   
         public string desc;
@@ -76,16 +76,6 @@ namespace Common
         [Header("DEFAULT PROVISION")]
         public List<ItemData> provisionItems = new List<ItemData>();
 
-        //[Header("ACTIVE INV POTIONS")]
-        //public ItemData potionSlot1;
-        //public ItemData potionSlot2;
-        //public ItemData provisionSlot;
-
-        //[Header("ACTIVE INV GEWGAWS")]
-        //public ItemData gewgawSlot1;
-        //public ItemData gewgawSlot2;
-        //public ItemData gewgawSlot3;
-
         [Header("ITEM STATS")]
         public int netPotionAddictChance = 0; 
 
@@ -106,27 +96,17 @@ namespace Common
         
         public int fortitudeOrg = 0;
         public int lootBonus = 0;
-        public StatData staminaRegen = new StatData();
-        public StatData HpRegen = new StatData(); 
+        public AttribData staminaRegen = new AttribData();
+        public AttribData HpRegen = new AttribData(); 
         public List<PermTraitName> permanentTraitList;
 
         [Header("Grid related")]
         public CharOccupies _charOccupies;
-        public List<int> _posPriority;
-
-
-        //[Header("Damage Modifier")]
-        //public float meleeAttackTypeMod = 0f;
-        //public float rangedAttackTypeMod = 0f;
-        //public float remoteAttackTypeMod = 0f;
-
-        //public float physicalSIMod = 0f;
-        //public float magicalSIMod = 0f;
-         
+        public List<int> _posPriority; 
         
         [Header("IMMUNITY LIST")]
         public List<TempTraitName> Immune2TraitsList = new List<TempTraitName>();
-        public List<StatsName> Immune2StatChangeList = new List<StatsName>();
+        public List<AttribName> Immune2StatChangeList = new List<AttribName>();
         public List<CharStateName> Immune2CharStateList = new List<CharStateName>();
 
 
@@ -142,7 +122,7 @@ namespace Common
         public ArmorType armorType; 
 
         [Header("Stats")]
-        public List<StatData> statsList = new List<StatData>();
+        public List<AttribData> statsList = new List<AttribData>();
 
         public float GetDeltaRatio()
         {
@@ -252,15 +232,15 @@ namespace Common
             enchantableGem4Weapon = _charSO.enchantableGem4Weapon;
             armorType = _charSO.armorType;
 
-            statsList = new List<StatData>();
+            statsList = new List<AttribData>();
             int listLength = _charSO.StatsList.Count;
 
             StatsVsChanceSO statsVsChanceSO = CharService.Instance.statChanceSO; 
             //Debug.Log("list length " + listLength);
             for (int i = 0; i < listLength; i++)
             {
-                StatData statdata = new StatData();
-                statdata.statsName = _charSO.StatsList[i].statsName;
+                AttribData statdata = new AttribData();
+                statdata.AttribName = _charSO.StatsList[i].AttribName;
                 statdata.currValue = _charSO.StatsList[i].currValue;
                 statdata.baseValue = statdata.currValue;
                 statdata.desc = _charSO.StatsList[i].desc;
@@ -268,7 +248,7 @@ namespace Common
                 statdata.maxRange = _charSO.StatsList[i].maxRange;
 
                 StatChanceData statChanceData = statsVsChanceSO.allStatChanceData
-                                    .Find(t => t.statName == _charSO.StatsList[i].statsName);
+                                    .Find(t => t.statName == _charSO.StatsList[i].AttribName);
                 statdata.minLimit = statChanceData.minLimit; 
                     //_charSO.StatsList[i].minLimit;  // get stat Chance and copy from there
                 statdata.maxLimit = statChanceData.maxLimit;

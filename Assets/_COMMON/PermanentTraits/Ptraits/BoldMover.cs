@@ -23,17 +23,17 @@ namespace Common
 
         void DodgeCheck(CharModData charModData)
         {
-            if (charModData.statModified == StatsName.dodge)
+            if (charModData.statModified == AttribName.dodge)
             {
                 // Gain 3 fortitude each dodge(6 when night)  
                 if (QuestEventService.Instance.questTimeState == TimeState.Night)
                 {
                     charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID
-                            , StatsName.fortitude, 6.0f, false);
+                            , AttribName.fortitude, 6.0f, false);
                    
                 }else            
                 {                  
-                    charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, StatsName.fortitude, 3.0f,false);
+                    charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.fortitude, 3.0f,false);
                 }
             }
         }
@@ -42,11 +42,11 @@ namespace Common
         {
             //Double fortitude gain at night(except the Fortitude potion)
             // to code except the fortitude potion or in fortitude potion add false
-            if (charModData.statModified == StatsName.fortitude)
+            if (charModData.statModified == AttribName.fortitude)
             {
                 if (QuestEventService.Instance.questTimeState == TimeState.Night)                
                     charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID
-                        , StatsName.fortitude, charModData.modCurrVal, false); 
+                        , AttribName.fortitude, charModData.modCurrVal, false); 
                 //sending only x1 as one increase would have taken place before
                 //reaching here
 

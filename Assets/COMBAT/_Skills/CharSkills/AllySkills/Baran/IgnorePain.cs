@@ -41,7 +41,7 @@ namespace Combat
                 if(dmgData.targetController == charController)
                 {
                     int healVal = (int)dmgData.dmgDelivered / 2;
-                    charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.health
+                    charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.health
                         , -healVal, false);
                 }               
            }
@@ -63,7 +63,7 @@ namespace Combat
 
         public override void ApplyFX3()
         {
-            targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, StatsName.haste
+            targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, AttribName.haste
                 , -4, TimeFrame.EndOfRound, skillModel.castTime, false );
         }
 

@@ -33,16 +33,16 @@ namespace Interactables
             int castTime = (int)UnityEngine.Random.Range(potionSO.minCastTime, potionSO.maxCastTime);
 
             charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                     , StatsName.willpower, +1, TimeFrame.Infinity, -1, true);  // Not a buff 
+                     , AttribName.willpower, +1, TimeFrame.Infinity, -1, true);  // Not a buff 
 
             if (QuestService.Instance.questMode == QuestMode.Taunt)
             {
                 charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                   , StatsName.morale, -3, TimeFrame.EndOfNight, castTime, true);
+                   , AttribName.morale, -3, TimeFrame.EndOfNight, castTime, true);
             }
 
               charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-              , StatsName.willpower, -3, TimeFrame.EndOfNight, castTime, true);
+              , AttribName.willpower, -3, TimeFrame.EndOfNight, castTime, true);
 
         }
         public void ApplyConsumableFX()

@@ -54,7 +54,7 @@ namespace Interactables
         {
             fxVal1 = (int)(Random.Range(5f, 8f) * multFX);
             int buffID = charController.buffController.ApplyBuff(CauseType.Gems, (int)gemName, charID
-                    , StatsName.lightRes, fxVal1, TimeFrame.Infinity, 1, true);
+                    , AttribName.lightRes, fxVal1, TimeFrame.Infinity, 1, true);
             allBuffs.Add(buffID);
             string str = $"+{fxVal1} Light Res";
             allDisplayStr.Add(str);

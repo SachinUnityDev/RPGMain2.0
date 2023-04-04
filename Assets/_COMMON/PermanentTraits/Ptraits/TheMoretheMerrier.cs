@@ -40,7 +40,7 @@ namespace Common
                 {
                     if (c.charModel.cultType == CultureType.Safriman)
                     {
-                        c.ChangeStat(CauseType.PermanentTrait,(int)permTraitName, charID, StatsName.haste, -1);
+                        c.ChangeStat(CauseType.PermanentTrait,(int)permTraitName, charID, AttribName.haste, -1);
 
                     }
                 }
@@ -57,8 +57,8 @@ namespace Common
                 {
                     if (c.charModel.cultType == CultureType.Safriman)
                     {
-                        c.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, StatsName.morale, -1);
-                        c.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, StatsName.focus, -1);
+                        c.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.morale, -1);
+                        c.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.focus, -1);
 
                     }
                 }
@@ -75,8 +75,8 @@ namespace Common
                 {
                     if (c.charModel.cultType == CultureType.Safriman)
                     {
-                        c.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID,StatsName.morale, +1);
-                        c.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, StatsName.focus, +1);
+                        c.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID,AttribName.morale, +1);
+                        c.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.focus, +1);
 
                     }
                 }

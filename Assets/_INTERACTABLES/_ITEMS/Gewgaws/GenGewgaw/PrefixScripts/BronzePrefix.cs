@@ -17,7 +17,7 @@ namespace Interactables
         public override PrefixNames prefixName => PrefixNames.Bronze;
 
         int valLyric, valFolkLyric;
-        StatsName statName1, statName2;
+        AttribName statName1, statName2;
 
         int dmgLyric, dmgFolkLyric;
         public void LyricInit()
@@ -32,7 +32,7 @@ namespace Interactables
         {
             charController = InvService.Instance.charSelectController;
 
-            StatsName statsName = GetRandomUtilityStat();
+            AttribName statsName = GetRandomUtilityStat();
             int index =
             charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
                 , charController.charModel.charID, statsName, valLyric, TimeFrame.Infinity, -1, true);
@@ -64,7 +64,7 @@ namespace Interactables
         {
             charController = InvService.Instance.charSelectController;
 
-            StatsName statsName = GetRandomUtilityStat();
+            AttribName statsName = GetRandomUtilityStat();
             int index =
                    charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
                     , charController.charModel.charID, statsName, valFolkLyric, TimeFrame.Infinity, -1, true);
@@ -83,11 +83,11 @@ namespace Interactables
             dmgAltBuffIndex.Add(index);
         }
 
-        StatsName GetRandomUtilityStat()
+        AttribName GetRandomUtilityStat()
         {
-            int beginInt = (int)StatsName.focus;
+            int beginInt = (int)AttribName.focus;
             int ran = Random.Range(beginInt, beginInt + 4);
-            return (StatsName)ran;
+            return (AttribName)ran;
         }
 
         public void RemoveFXLyric()

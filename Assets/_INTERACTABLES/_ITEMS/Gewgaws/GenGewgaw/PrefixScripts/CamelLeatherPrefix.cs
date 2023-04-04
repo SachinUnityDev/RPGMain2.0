@@ -28,12 +28,12 @@ namespace Interactables
 
             int index =
             charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
-                , charController.charModel.charID, StatsName.willpower, 1, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, AttribName.willpower, 1, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
             index =
             charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
-                , charController.charModel.charID, StatsName.fireRes, valLyric, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, AttribName.fireRes, valLyric, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }
         public void FolkloricInit()
@@ -49,12 +49,12 @@ namespace Interactables
             charController = InvService.Instance.charSelectController;
             int index =
             charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
-           , charController.charModel.charID, StatsName.willpower, 1, TimeFrame.Infinity, -1, true);
+           , charController.charModel.charID, AttribName.willpower, 1, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
             index =
             charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
-                , charController.charModel.charID, StatsName.fireRes, valfolk, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, AttribName.fireRes, valfolk, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }
         public void EpicInit()
@@ -71,12 +71,12 @@ namespace Interactables
 
             int index =
             charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
-           , charController.charModel.charID, StatsName.willpower, 1, TimeFrame.Infinity, -1, true);
+           , charController.charModel.charID, AttribName.willpower, 1, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
             index =
             charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
-                , charController.charModel.charID, StatsName.fireRes, valEpic, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, AttribName.fireRes, valEpic, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }
         public void RemoveFXEpic()

@@ -20,7 +20,7 @@ namespace Common
             // ...50% chance to hit friendly targets...50% chance to misfire 
             
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                       , charID, StatsName.acc, -2, charStateModel.timeFrame, charStateModel.castTime, true);
+                       , charID, AttribName.acc, -2, charStateModel.timeFrame, charStateModel.castTime, true);
 
             charController.charStateController
               .ApplyImmunityBuff(CauseType.CharState, (int)charStateName

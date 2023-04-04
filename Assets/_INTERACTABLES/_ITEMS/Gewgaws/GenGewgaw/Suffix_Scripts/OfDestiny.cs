@@ -25,7 +25,7 @@ namespace Interactables
            
             int index =
             charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                , charController.charModel.charID, StatsName.luck, valLyric, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, AttribName.luck, valLyric, TimeFrame.Infinity, -1, true);
 
             buffIndex.Add(index);
         }
@@ -41,7 +41,7 @@ namespace Interactables
             charController = InvService.Instance.charSelectController;
             int index =
             charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                , charController.charModel.charID, StatsName.luck, valFolk, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, AttribName.luck, valFolk, TimeFrame.Infinity, -1, true);
 
             buffIndex.Add(index);
         }
@@ -56,7 +56,7 @@ namespace Interactables
             charController = InvService.Instance.charSelectController;
             int index =
             charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                , charController.charModel.charID, StatsName.luck, valEpic, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, AttribName.luck, valEpic, TimeFrame.Infinity, -1, true);
 
             buffIndex.Add(index);
         }

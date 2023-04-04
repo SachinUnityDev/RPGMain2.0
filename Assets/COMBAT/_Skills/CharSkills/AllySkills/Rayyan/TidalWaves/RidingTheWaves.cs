@@ -59,11 +59,11 @@ namespace Combat
         {
             CombatService.Instance.mainTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>()
                     .buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                    , StatsName.morale, -3, TimeFrame.EndOfRound, skillModel.castTime, false));
+                    , AttribName.morale, -3, TimeFrame.EndOfRound, skillModel.castTime, false));
 
             CombatService.Instance.mainTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>()
                     .buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                    , StatsName.luck, -3, TimeFrame.EndOfRound, skillModel.castTime, false ));
+                    , AttribName.luck, -3, TimeFrame.EndOfRound, skillModel.castTime, false ));
         }
 
         public override void SkillEnd()

@@ -22,15 +22,15 @@ namespace Common
         public override void StateApplyFX()
         {
             int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                , charID, StatsName.focus, -2, charStateModel.timeFrame, charStateModel.castTime, true);
+                , charID, AttribName.focus, -2, charStateModel.timeFrame, charStateModel.castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                  , charID, StatsName.haste, +3, charStateModel.timeFrame, charStateModel.castTime, true);
+                  , charID, AttribName.haste, +3, charStateModel.timeFrame, charStateModel.castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-               , charID, StatsName.earthRes, -30, charStateModel.timeFrame, charStateModel.castTime, true);
+               , charID, AttribName.earthRes, -30, charStateModel.timeFrame, charStateModel.castTime, true);
             allBuffIds.Add(buffID);
 
             int immuneBuffID = charController.charStateController

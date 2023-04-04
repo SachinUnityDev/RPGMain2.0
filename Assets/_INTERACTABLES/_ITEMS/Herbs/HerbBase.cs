@@ -45,7 +45,7 @@ namespace Interactables
         public virtual void OnConsumedByAbzazuluFX()
         {
             charController.buffController.ApplyBuff(CauseType.Herb, (int)herbName, charID
-            , StatsName.hpRegen, herbSO.HpRegenVal, TimeFrame.EndOfRound, herbSO.bufftimeInRds, true);
+            , AttribName.hpRegen, herbSO.HpRegenVal, TimeFrame.EndOfRound, herbSO.bufftimeInRds, true);
         } 
       
     }

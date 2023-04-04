@@ -18,7 +18,7 @@ namespace Combat
         public override string desc => "Me solo you all ";        
         public override float chance { get; set; }
 
-        StatData initStatData;
+        AttribData initStatData;
         float dmgMinIncr, dmgMaxIncr, armourMinIncr, armourMaxIncr;
 
         //public override void SkillInit()

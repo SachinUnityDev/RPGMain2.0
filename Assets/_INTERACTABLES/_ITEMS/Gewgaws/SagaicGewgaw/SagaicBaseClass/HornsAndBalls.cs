@@ -32,7 +32,7 @@ namespace Interactables
         {
             if (charStateData.charStateModel.charStateName != CharStateName.Starving) return;
              int buffID =   charController.buffController.ApplyBuff(CauseType.SagaicGewgaw,
-                             (int)sagaicGewgawName, charStateData.causeCharID,StatsName.vigor,
+                             (int)sagaicGewgawName, charStateData.causeCharID,AttribName.vigor,
                              +4, TimeFrame.Infinity, -1, true); 
             buffIndex.Add(buffID);
         }
@@ -46,7 +46,7 @@ namespace Interactables
         {
             if(dmgAppliedData.strikeType != StrikeType.Crit) return;
             int buffID = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw,
-                             (int)sagaicGewgawName, charController.charModel.charID, StatsName.acc,
+                             (int)sagaicGewgawName, charController.charModel.charID, AttribName.acc,
                              +2, TimeFrame.EndOfCombat, 1, true);
             buffIndex.Add(buffID); // id # 1 
         }
@@ -58,7 +58,7 @@ namespace Interactables
             if(skillEventData.skillModel.skillName  == SkillNames.NoPatience)
             {
                 charController.ChangeStat(CauseType.SagaicGewgaw, (int)sagaicGewgawName, charController.charModel.charID
-                    , StatsName.fortitude, UnityEngine.Random.Range(4,6),true); 
+                    , AttribName.fortitude, UnityEngine.Random.Range(4,6),true); 
             }
         }
 

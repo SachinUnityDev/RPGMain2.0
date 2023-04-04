@@ -13,10 +13,10 @@ namespace Common
         {
             this.charController = charController;
             charController.landscapeController.ApplyLandscapeBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                              LandscapeNames.Swamp, StatsName.vigor, -2);
+                                                              LandscapeNames.Swamp, AttribName.vigor, -2);
 
             charController.landscapeController.ApplyLandscapeBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                              LandscapeNames.Swamp, StatsName.willpower, -2);
+                                                              LandscapeNames.Swamp, AttribName.willpower, -2);
         }
 
         public override void OnEnd()

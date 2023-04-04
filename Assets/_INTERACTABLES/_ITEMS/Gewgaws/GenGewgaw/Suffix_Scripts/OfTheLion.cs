@@ -30,19 +30,19 @@ namespace Interactables
 
             int index =
                   charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                          , charController.charModel.charID, StatsName.vigor, val21, TimeFrame.Infinity, -1, true);
+                          , charController.charModel.charID, AttribName.vigor, val21, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
           
             index =
                 charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
-                        , charController.charModel.charID, StatsName.morale, val22, TimeFrame.Infinity, -1, true);
+                        , charController.charModel.charID, AttribName.morale, val22, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
        
             index =
                 charController.buffController.ApplyBuffOnNight(CauseType.SuffixGenGewgaw, (int)suffixName
-                        , charController.charModel.charID, StatsName.haste, val23, TimeFrame.Infinity, -1, true);
+                        , charController.charModel.charID, AttribName.haste, val23, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
         }
@@ -63,19 +63,19 @@ namespace Interactables
 
             int index =
                   charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                          , charController.charModel.charID, StatsName.vigor, val31, TimeFrame.Infinity, -1, true);
+                          , charController.charModel.charID, AttribName.vigor, val31, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
          
             index =
                 charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
-                        , charController.charModel.charID, StatsName.morale, val32, TimeFrame.Infinity, -1, true);
+                        , charController.charModel.charID, AttribName.morale, val32, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
       
             index =
                 charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
-                        , charController.charModel.charID, StatsName.haste, val33, TimeFrame.Infinity, -1, true);
+                        , charController.charModel.charID, AttribName.haste, val33, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }
 

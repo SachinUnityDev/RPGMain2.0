@@ -57,7 +57,7 @@ namespace Interactables
           
             fxVal1 = Mathf.RoundToInt(fxVal1* multFx);
             int buffID = charController.buffController.ApplyBuff(CauseType.Gems, (int)gemName, charID
-                    , StatsName.waterRes, fxVal1, TimeFrame.Infinity, 1, true);
+                    , AttribName.waterRes, fxVal1, TimeFrame.Infinity, 1, true);
             allBuffs.Add(buffID);
             string str = $"+{fxVal1} Water Res";
             allDisplayStr.Add(str);

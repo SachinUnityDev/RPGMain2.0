@@ -46,7 +46,7 @@ namespace Combat
 
         public override void ApplyFX1()
         {
-            StatData hpStatData = charController.GetStat(StatsName.health);
+            AttribData hpStatData = charController.GetStat(AttribName.health);
             float hpPercent = hpStatData.currValue / hpStatData.maxLimit;
             if (hpPercent < 0.4f)
             {
@@ -63,7 +63,7 @@ namespace Combat
 
         public override void ApplyFX2()
         {
-            StatData luckStat = charController.GetStat(StatsName.luck);
+            AttribData luckStat = charController.GetStat(AttribName.luck);
             if (luckStat.currValue == 12 && !subscribed)
             {
                 charController.charModel.fortitudeOrg += 2; 

@@ -51,14 +51,14 @@ namespace Interactables
         {
             fxVal1 = (int)(Random.Range(4f, 7f) * multFX);
             int buffID = charController.buffController.ApplyBuff(CauseType.Gems, (int)gemName, charID
-                    , StatsName.waterRes, fxVal1, TimeFrame.Infinity, 1, true);
+                    , AttribName.waterRes, fxVal1, TimeFrame.Infinity, 1, true);
             allBuffs.Add(buffID);
             string str = $"+{fxVal1} Water Res";
             allDisplayStr.Add(str);
 
             fxVal2 = (int)(Random.Range(4f, 7f) * multFX);
             buffID = charController.buffController.ApplyBuff(CauseType.Gems, (int)gemName, charID
-                    , StatsName.earthRes, fxVal2, TimeFrame.Infinity, 1, true);
+                    , AttribName.earthRes, fxVal2, TimeFrame.Infinity, 1, true);
             allBuffs.Add(buffID);
             str = $"+{fxVal2} Earth Res";
             allDisplayStr.Add(str);

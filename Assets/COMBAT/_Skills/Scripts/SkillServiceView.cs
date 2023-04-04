@@ -159,7 +159,7 @@ namespace Combat
 
         public bool HasNoStamina(SkillModel _skillModel)
         {
-            StatData staminaData = CharService.Instance.GetCharCtrlWithCharID(_skillModel.charID).GetStat(StatsName.stamina);
+            AttribData staminaData = CharService.Instance.GetCharCtrlWithCharID(_skillModel.charID).GetStat(AttribName.stamina);
             float stamina = staminaData.currValue; 
 
             if (stamina < _skillModel.staminaReq)

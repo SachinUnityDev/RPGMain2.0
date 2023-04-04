@@ -103,31 +103,31 @@ namespace Common
                 return;
             }
             string str1 = "";
-            foreach (StatData stat in allPendingOptions[index].allStatDataOption1)
+            foreach (AttribData stat in allPendingOptions[index].allStatDataOption1)
             {
                
-                if (stat.statsName == StatsName.damage || stat.statsName == StatsName.armor)
+                if (stat.AttribName == AttribName.damage || stat.AttribName == AttribName.armor)
                 {
-                    str1 += stat.minRange+"-"+stat.maxRange + " "+ stat.statsName; 
+                    str1 += stat.minRange+"-"+stat.maxRange + " "+ stat.AttribName; 
                 }
                 else
                 {
-                    str1 += stat.currValue + " "+ stat.statsName; 
+                    str1 += stat.currValue + " "+ stat.AttribName; 
                 }
                 
             }
             opt1Btn.GetComponentInChildren<TextMeshProUGUI>().text = str1;
             string str2 = "";
-            foreach (StatData stat in allPendingOptions[index].allStatDataOption2)
+            foreach (AttribData stat in allPendingOptions[index].allStatDataOption2)
             {
                 
-                if (stat.statsName == StatsName.damage || stat.statsName == StatsName.armor)
+                if (stat.AttribName == AttribName.damage || stat.AttribName == AttribName.armor)
                 {
-                    str2 += stat.minRange + "-" + stat.maxRange + " "+stat.statsName;
+                    str2 += stat.minRange + "-" + stat.maxRange + " "+stat.AttribName;
                 }
                 else
                 {
-                    str2 += stat.currValue + " " + stat.statsName;
+                    str2 += stat.currValue + " " + stat.AttribName;
                 }                
             }
             opt2Btn.GetComponentInChildren<TextMeshProUGUI>().text = str2;

@@ -41,7 +41,7 @@ namespace Interactables
 
             int index =
             charController.buffController.ApplyBuffOnRange(CauseType.PrefixGenGewgaw, (int)prefixName
-                , charController.charModel.charID, StatsName.armor, val11,val12, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, AttribName.armor, val11,val12, TimeFrame.Infinity, -1, true);
 
             buffIndex.Add(index);
         }
@@ -50,7 +50,7 @@ namespace Interactables
             val21 = 2; val22 = 2;
             int index =
             charController.buffController.ApplyBuffOnRange(CauseType.PrefixGenGewgaw, (int)prefixName
-                , charController.charModel.charID, StatsName.armor, val21, val22, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, AttribName.armor, val21, val22, TimeFrame.Infinity, -1, true);
 
             buffIndex.Add(index);
         }
@@ -60,7 +60,7 @@ namespace Interactables
             val31 = 2; val32 = 3;
             int index =
             charController.buffController.ApplyBuffOnRange(CauseType.PrefixGenGewgaw, (int)prefixName
-                , charController.charModel.charID, StatsName.armor, val31, val32, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, AttribName.armor, val31, val32, TimeFrame.Infinity, -1, true);
 
             buffIndex.Add(index);
         }

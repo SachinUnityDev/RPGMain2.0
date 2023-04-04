@@ -12,7 +12,7 @@ namespace Combat
     public class PopUpAndHL : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
 
-        public StatsName statName;
+        public AttribName statName;
         public string desc = ""; 
 
         [Header("Sprite lit and Normal")]

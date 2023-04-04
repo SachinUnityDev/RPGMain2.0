@@ -52,7 +52,7 @@ namespace Interactables
             charController = CharService.Instance.GetCharCtrlWithName(CharNames.Abbas_Skirmisher);
             if (chance.GetChance())
                 charController.buffController.ApplyBuff(CauseType.Items, (int)itemName, charController.charModel.charID
-                    , StatsName.focus, 1, TimeFrame.EndOfDay, 1, true);
+                    , AttribName.focus, 1, TimeFrame.EndOfDay, 1, true);
         }
     }
 }

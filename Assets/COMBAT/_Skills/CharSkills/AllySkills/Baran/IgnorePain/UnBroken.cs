@@ -41,29 +41,29 @@ namespace Combat
 
         public override void ApplyFX1()
         {
-            StatData hpStat = charController.GetStat(StatsName.health);
-            StatData moraleStat = charController.GetStat(StatsName.morale);
+            AttribData hpStat = charController.GetStat(AttribName.health);
+            AttribData moraleStat = charController.GetStat(AttribName.morale);
             if (moraleStat.currValue == 12 && !subscribed)
             {
-                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.waterRes, 40f, false);
-                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.earthRes, 20f, false);
+                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.waterRes, 40f, false);
+                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.earthRes, 20f, false);
                 QuestEventService.Instance.OnEOQ += EndOnEOQ;
                 subscribed = true;
             }
             else if (hpStat.currValue == hpStat.maxLimit)
             {
-                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.waterRes, 40f, false);
-                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.earthRes, 20f, false);
+                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.waterRes, 40f, false);
+                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.earthRes, 20f, false);
 
              
-                    StatData statData = charController.GetStat(StatsName.armor);
+                    AttribData statData = charController.GetStat(AttribName.armor);
                     float armorMin = statData.minRange;
                     float armorMax = statData.maxRange;
                     chgMin = statData.minRange * 0.8f;
                     chgMax = statData.maxRange * 0.8f;
 
                     charController.ChangeStatRange(CauseType.CharSkill, (int)skillName, charID
-                                                    , StatsName.armor, chgMin, chgMax);
+                                                    , AttribName.armor, chgMin, chgMax);
                 
 
                 resIncr = true; 
@@ -72,8 +72,8 @@ namespace Combat
 
         void EndOnEOQ()
         {
-            charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.waterRes, -40f, false);
-            charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.earthRes, -20f, false);
+            charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.waterRes, -40f, false);
+            charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.earthRes, -20f, false);
             QuestEventService.Instance.OnEOQ -= EndOnEOQ;
 
             subscribed = false; 
@@ -84,10 +84,10 @@ namespace Combat
             base.SkillEnd();
             if (resIncr)
             {
-                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.waterRes, -40f, false);
-                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.earthRes, -20f, false);
+                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.waterRes, -40f, false);
+                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.earthRes, -20f, false);
                 targetController.ChangeStatRange(CauseType.CharSkill, (int)skillName, charID
-                                               , StatsName.armor, -chgMin, -chgMax);
+                                               , AttribName.armor, -chgMin, -chgMax);
 
                 resIncr = false;
             }

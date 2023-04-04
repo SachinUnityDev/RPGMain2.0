@@ -30,7 +30,7 @@ namespace Interactables
                                     == charController.charModel.charName)
                 {
                     int buffID = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw,
-                       (int)sagaicGewgawName, charController.charModel.charID, StatsName.staminaRegen,
+                       (int)sagaicGewgawName, charController.charModel.charID, AttribName.staminaRegen,
                        +2, TimeFrame.Infinity, -1, true);
                     buffIndex.Add(buffID);
 
@@ -42,7 +42,7 @@ namespace Interactables
         {
             charController = InvService.Instance.charSelectController;
             int buffID = charController.buffController.ApplyBuffOnRange(CauseType.SagaicGewgaw, charController.charModel.charID,
-                                 (int)sagaicGewgawName, StatsName.armor, 3, 3, TimeFrame.Infinity, -1, true);
+                                 (int)sagaicGewgawName, AttribName.armor, 3, 3, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
         }
 

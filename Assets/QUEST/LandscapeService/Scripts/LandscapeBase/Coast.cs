@@ -17,15 +17,15 @@ namespace Common
                 // change stat using buff controller
                 int charID = charCtrl.charModel.charID;
                 charCtrl.buffController.ApplyBuff(CauseType.Landscape, (int)LandscapeNames.Field
-                            , charID, StatsName.waterRes, -12, TimeFrame.Infinity, 1, false);
+                            , charID, AttribName.waterRes, -12, TimeFrame.Infinity, 1, false);
 
                 charID = charCtrl.charModel.charID;
                 charCtrl.buffController.ApplyBuff(CauseType.Landscape, (int)LandscapeNames.Field
-                            , charID, StatsName.earthRes, -12, TimeFrame.Infinity, 1, false);
+                            , charID, AttribName.earthRes, -12, TimeFrame.Infinity, 1, false);
 
                 charID = charCtrl.charModel.charID;
                 charCtrl.buffController.ApplyBuff(CauseType.Landscape, (int)LandscapeNames.Field
-                            , charID, StatsName.darkRes, -12, TimeFrame.Infinity, 1, false);
+                            , charID, AttribName.darkRes, -12, TimeFrame.Infinity, 1, false);
 
             }
         }

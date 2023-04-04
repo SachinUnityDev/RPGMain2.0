@@ -375,9 +375,9 @@ namespace Combat
         {
             List<string> strReturn = new List<string>();
 
-            for (int i = 1; i < Enum.GetNames(typeof(StatsName)).Length; i++)
+            for (int i = 1; i < Enum.GetNames(typeof(AttribName)).Length; i++)
             {
-                string str = ((StatsName)i).ToString();
+                string str = ((AttribName)i).ToString();
 
                 strReturn.AddRange(stringLS.Where(t => t.Contains(str)).ToList());
             }

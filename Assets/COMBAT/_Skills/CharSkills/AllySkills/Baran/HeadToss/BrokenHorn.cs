@@ -31,16 +31,16 @@ namespace Combat
             base.BaseApply();
             skillModel.staminaReq = 7;
 
-            StatData hpData = charController.GetStat(StatsName.health);
+            AttribData hpData = charController.GetStat(AttribName.health);
             float percentHP = hpData.currValue / hpData.maxLimit;
             if (percentHP < 0.4f)
             {
-                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.acc
+                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.acc
                     , +6, false);
             }
             if (CharStatesService.Instance.HasCharDOTState(targetGO, CharStateName.BleedLowDOT))
             {
-                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.luck
+                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.luck
                     , +6, false);
 
             }
@@ -98,9 +98,9 @@ namespace Combat
         public override void PostApplyFX()
         {
             base.PostApplyFX(); 
-            charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.acc
+            charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.acc
                      , -6, false);
-            charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.luck
+            charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.luck
                     , -6, false);
         }
 

@@ -24,20 +24,20 @@ namespace Common
             // Immune to Poisoned
             // Upon consume Elixir of Hardening: Gain 30 Hp and 12 Fortitude
             int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                  , charID, StatsName.luck, +3, charStateModel.timeFrame, charStateModel.castTime, true);
+                  , charID, AttribName.luck, +3, charStateModel.timeFrame, charStateModel.castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                  , charID, StatsName.haste, -2, charStateModel.timeFrame, charStateModel.castTime, true);
+                  , charID, AttribName.haste, -2, charStateModel.timeFrame, charStateModel.castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuffOnRange(CauseType.CharState, (int)charStateName
-                  , charID, StatsName.armor, 2,3,charStateModel.timeFrame, charStateModel.castTime, true);
+                  , charID, AttribName.armor, 2,3,charStateModel.timeFrame, charStateModel.castTime, true);
             allBuffIds.Add(buffID);
 
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                  , charID, StatsName.airRes, -30, charStateModel.timeFrame, charStateModel.castTime, true);
+                  , charID, AttribName.airRes, -30, charStateModel.timeFrame, charStateModel.castTime, true);
             allBuffIds.Add(buffID);
 
             List<int> immuneBuffIDs = charController.charStateController

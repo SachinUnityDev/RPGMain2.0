@@ -64,7 +64,7 @@ namespace Combat
         public override void ApplyFX2()
         {
             CombatService.Instance.colTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>()
-            .buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, StatsName.earthRes, -40
+            .buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, AttribName.earthRes, -40
             ,TimeFrame.EndOfRound, skillModel.castTime, false ));
 
         }

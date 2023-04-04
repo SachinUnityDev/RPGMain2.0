@@ -30,12 +30,12 @@ namespace Interactables
             charController = InvService.Instance.charSelectController;
 
             int buffID = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw, charController.charModel.charID,
-                   (int)sagaicGewgawName, StatsName.dodge, valDodge, TimeFrame.Infinity, -1, true);
+                   (int)sagaicGewgawName, AttribName.dodge, valDodge, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
 
 
             buffID = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw, charController.charModel.charID,
-                   (int)sagaicGewgawName, StatsName.willpower, valWp, TimeFrame.Infinity, -1, true);
+                   (int)sagaicGewgawName, AttribName.willpower, valWp, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
 
 

@@ -30,12 +30,12 @@ namespace Interactables
 
             int index =
                   charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                          , charController.charModel.charID, StatsName.acc, val21, TimeFrame.Infinity, -1, true);
+                          , charController.charModel.charID, AttribName.acc, val21, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
           
             index =
                 charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                        , charController.charModel.charID, StatsName.haste, val22, TimeFrame.Infinity, -1, true);
+                        , charController.charModel.charID, AttribName.haste, val22, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }
         public void EpicInit()
@@ -53,12 +53,12 @@ namespace Interactables
 
             int index =
                   charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                          , charController.charModel.charID, StatsName.acc, val31, TimeFrame.Infinity, -1, true);
+                          , charController.charModel.charID, AttribName.acc, val31, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
   
             index =
                 charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                        , charController.charModel.charID, StatsName.haste, val32, TimeFrame.Infinity, -1, true);
+                        , charController.charModel.charID, AttribName.haste, val32, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }
 

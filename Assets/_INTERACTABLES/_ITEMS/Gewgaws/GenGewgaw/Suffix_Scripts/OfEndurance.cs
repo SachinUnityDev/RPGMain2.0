@@ -13,17 +13,17 @@ namespace Interactables
         //1 vigor or 1 willpower	2 vigor or 2 willpower	3-4 vigor or 3-4 willpower
         int valLyric, valFolk, valEpic;
       
-        StatsName statsName1, statsName2, statsName3;
+        AttribName statsName1, statsName2, statsName3;
         public void LyricInit()
         {
             valLyric = 1;
             if (true.TheToss())
             {
-                statsName1 = StatsName.vigor;
+                statsName1 = AttribName.vigor;
             }
             else
             {
-                statsName1 = StatsName.willpower;
+                statsName1 = AttribName.willpower;
             }
             string str = $"+{valLyric} {statsName1}";
              displayStrs.Add(str);
@@ -44,11 +44,11 @@ namespace Interactables
             valFolk = 2;
             if (true.TheToss())
             {
-                statsName2 = StatsName.vigor;
+                statsName2 = AttribName.vigor;
             }
             else
             {
-                statsName2 = StatsName.willpower;
+                statsName2 = AttribName.willpower;
             }
             string str = $"+{valFolk} {statsName2}";
             displayStrs.Add(str);
@@ -66,11 +66,11 @@ namespace Interactables
             valEpic = UnityEngine.Random.Range(3, 5);
             if (true.TheToss())
             {
-                statsName3 = StatsName.vigor;
+                statsName3 = AttribName.vigor;
             }
             else
             {
-                statsName3 = StatsName.willpower;
+                statsName3 = AttribName.willpower;
             }
             string str = $"+{valEpic} {statsName3}";
             displayStrs.Add(str);

@@ -18,7 +18,7 @@ namespace Common
             {
                 int charID = charCtrl.charModel.charID;
                 charCtrl.buffController.ApplyBuff(CauseType.Landscape, (int)LandscapeNames.Field
-                            , charID, StatsName.morale, -1, TimeFrame.Infinity, 1, false);
+                            , charID, AttribName.morale, -1, TimeFrame.Infinity, 1, false);
             }
         }
 

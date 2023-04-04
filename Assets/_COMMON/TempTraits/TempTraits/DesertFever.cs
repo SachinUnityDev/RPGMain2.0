@@ -16,10 +16,10 @@ namespace Common
             this.charController = charController;
             int charID = charController.charModel.charID;
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                         charID, StatsName.willpower, -4, TimeFrame.Infinity, -1, true);
+                                                         charID, AttribName.willpower, -4, TimeFrame.Infinity, -1, true);
 
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, StatsName.morale, -2, TimeFrame.Infinity, -1, true);
+                                             charID, AttribName.morale, -2, TimeFrame.Infinity, -1, true);
         }
 
         public override void OnEnd()

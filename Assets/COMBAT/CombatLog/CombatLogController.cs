@@ -214,15 +214,15 @@ namespace Combat
         void PrintStatChanged(CharModData charModData)
         {
            
-            StatsName statName = charModData.statModified;
+            AttribName statName = charModData.statModified;
             string str = "";
             CharNames CharName = CharService.Instance.GetCharCtrlWithCharID(charModData.effectedCharNameID)
                                     .charModel.charName;
 
 
             if (charModData.modCurrVal == 0) return;                                                                               
-            if (statName == StatsName.health || statName == StatsName.stamina 
-                || statName == StatsName.fortitude)
+            if (statName == AttribName.health || statName == AttribName.stamina 
+                || statName == AttribName.fortitude)
             {
                 string str1 = charModData.modCurrVal > 0 ? "gains" : "loses";
                

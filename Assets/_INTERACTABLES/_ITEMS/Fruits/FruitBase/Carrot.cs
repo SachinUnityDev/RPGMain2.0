@@ -32,7 +32,7 @@ namespace Interactables
             if (chance.GetChance())
             {
                 charController.buffController.ApplyBuff(CauseType.Fruit, (int)fruitName,
-                 charController.charModel.charID, StatsName.acc, 1, fruitSO.timeFrame, fruitSO.castTime, true);
+                 charController.charModel.charID, AttribName.acc, 1, fruitSO.timeFrame, fruitSO.castTime, true);
             }
         }
 

@@ -37,13 +37,13 @@ namespace Interactables
 
             int buffID = 
                     charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                            , StatsName.willpower, -1, TimeFrame.EndOfRound, castTime, true);
+                            , AttribName.willpower, -1, TimeFrame.EndOfRound, castTime, true);
             allBuffs.Add(buffID);
 
-            StatData staminaData = charController.GetStat(StatsName.stamina);
+            AttribData staminaData = charController.GetStat(AttribName.stamina);
             float val = (Random.Range(80f, 100f) * staminaData.maxLimit) / 100f;
            
-            charController.ChangeStat(CauseType.Potions, (int)potionName, charID, StatsName.stamina, val);
+            charController.ChangeStat(CauseType.Potions, (int)potionName, charID, AttribName.stamina, val);
         }
 
         public void ApplyConsumableFX()

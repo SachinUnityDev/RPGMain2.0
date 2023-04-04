@@ -53,7 +53,7 @@ namespace Combat
             if (IsTargetMyEnemy())
             {
                 targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                            , StatsName.haste, -3, TimeFrame.EndOfRound, skillModel.castTime, false);
+                            , AttribName.haste, -3, TimeFrame.EndOfRound, skillModel.castTime, false);
                 GridService.Instance.gridMovement.MovebyRow(myDyna, MoveDir.Forward, 1);
             }
         }

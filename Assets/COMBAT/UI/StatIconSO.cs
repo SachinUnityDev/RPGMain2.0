@@ -15,10 +15,10 @@ namespace Combat
         {
             if (allSpriteData.Count > 1) return; 
             allSpriteData = new List<SpriteData>(); 
-            for(int i =6; i < Enum.GetNames(typeof(StatsName)).Length; i++)
+            for(int i =6; i < Enum.GetNames(typeof(AttribName)).Length; i++)
             {
                 SpriteData spriteData = new SpriteData();
-                spriteData.statName = (StatsName)i;
+                spriteData.statName = (AttribName)i;
                 allSpriteData.Add(spriteData); 
             }
         }
@@ -27,7 +27,7 @@ namespace Combat
     [System.Serializable]
     public class SpriteData
     {
-        public StatsName statName;
+        public AttribName statName;
         public Sprite statSprite;
         public Sprite statSpriteLit;  
     }

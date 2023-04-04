@@ -45,12 +45,12 @@ namespace Combat
         {
             if (IsTargetMyAlly())
             {
-                StatData statData = charController.GetStat(StatsName.armor);
+                AttribData statData = charController.GetStat(AttribName.armor);
                  minArmorChg = statData.minRange * 0.4f;
                  maxArmorChg = statData.maxRange * 0.4f;
 
                  targetController.buffController.ApplyBuffOnRange(CauseType.CharSkill, (int)skillName, charID
-                  , StatsName.armor, minArmorChg, maxArmorChg, TimeFrame.EndOfRound, skillModel.castTime, true);
+                  , AttribName.armor, minArmorChg, maxArmorChg, TimeFrame.EndOfRound, skillModel.castTime, true);
             }
         }
 
@@ -62,9 +62,9 @@ namespace Combat
                 //  , StatsName.armor, minArmorChg, maxArmorChg, TimeFrame.EndOfRound, skillModel.castTime, true);
 
                 charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                    , StatsName.waterRes, 20, TimeFrame.EndOfRound, skillModel.castTime, true);
+                    , AttribName.waterRes, 20, TimeFrame.EndOfRound, skillModel.castTime, true);
                 charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                   , StatsName.earthRes, 20, TimeFrame.EndOfRound, skillModel.castTime, true);
+                   , AttribName.earthRes, 20, TimeFrame.EndOfRound, skillModel.castTime, true);
 
             }
         }
@@ -133,7 +133,7 @@ namespace Combat
                 {
                     CharController targetCharCtrl = dyna.charGO.GetComponent<CharController>();
                    
-                    StatData hp = targetCharCtrl.GetStat(StatsName.health); 
+                    AttribData hp = targetCharCtrl.GetStat(AttribName.health); 
 
                     if(hp.currValue/hp.maxLimit < 0.4f)
                     {

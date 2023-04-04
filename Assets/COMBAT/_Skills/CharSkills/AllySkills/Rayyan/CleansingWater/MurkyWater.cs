@@ -72,7 +72,7 @@ namespace Combat
         {
             if (IsTargetEnemy())
                 targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                                , StatsName.haste, -2f, TimeFrame.EndOfRound, skillModel.castTime, false);
+                                , AttribName.haste, -2f, TimeFrame.EndOfRound, skillModel.castTime, false);
         }
         public override void DisplayFX2()
         {

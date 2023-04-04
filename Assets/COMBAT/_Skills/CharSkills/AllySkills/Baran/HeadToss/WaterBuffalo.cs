@@ -27,9 +27,9 @@ namespace Combat
         {
             if (targetController)
             {
-                charController.buffController.ApplyBuff(CauseType.CharSkill,(int)skillName, charID, StatsName.waterRes, +40f
+                charController.buffController.ApplyBuff(CauseType.CharSkill,(int)skillName, charID, AttribName.waterRes, +40f
                     , TimeFrame.EndOfRound, skillModel.castTime, true);
-                charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, StatsName.earthRes, +40f
+                charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, AttribName.earthRes, +40f
                    , TimeFrame.EndOfRound, skillModel.castTime, true);
 
             }

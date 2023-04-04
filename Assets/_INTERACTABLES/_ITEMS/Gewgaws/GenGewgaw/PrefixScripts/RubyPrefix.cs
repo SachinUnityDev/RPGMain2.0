@@ -23,7 +23,7 @@ namespace Interactables
             charController = InvService.Instance.charSelectController;
             int index =
             charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
-                , charController.charModel.charID, StatsName.focus, -2, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, AttribName.focus, -2, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }
 
@@ -37,7 +37,7 @@ namespace Interactables
             charController = InvService.Instance.charSelectController;
             int index =
             charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
-                , charController.charModel.charID, StatsName.focus, -2, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, AttribName.focus, -2, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }    
         public void RemoveFXFolkloric()

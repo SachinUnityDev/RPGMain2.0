@@ -21,7 +21,7 @@ namespace Common
             CombatEventService.Instance.OnSOT += ApplyRoundFX;
 
             int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                   , charID, StatsName.lightRes, -20, charStateModel.timeFrame, charStateModel.castTime, true);
+                   , charID, AttribName.lightRes, -20, charStateModel.timeFrame, charStateModel.castTime, true);
             allBuffIds.Add(buffID);
 
             int immuneBuffID = charController.charStateController
@@ -35,7 +35,7 @@ namespace Common
         {
             if (CombatService.Instance.currCharOnTurn.charModel.charID != charID) return;
             charController.ChangeStat(CauseType.CharState, (int)charStateName, charID
-                                                               , StatsName.fortitude, -5);
+                                                               , AttribName.fortitude, -5);
         }
 
         public override void StateApplyVFX()

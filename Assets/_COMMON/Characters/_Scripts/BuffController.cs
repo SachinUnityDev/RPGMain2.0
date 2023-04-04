@@ -83,7 +83,7 @@ namespace Combat
 
 #region  APPLY_BUFFS 
         public int ApplyBuff(CauseType causeType, int causeName, int causeByCharID
-                                , StatsName statName, float value, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
+                                , AttribName statName, float value, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
         {
            
             CharModData charModVal =  charController.ChangeStat( causeType,  causeName, causeByCharID
@@ -106,7 +106,7 @@ namespace Combat
                 }
             }
         }
-        public int ApplyBuffOnRange(CauseType causeType, int causeName, int causeByCharID, StatsName statName
+        public int ApplyBuffOnRange(CauseType causeType, int causeName, int causeByCharID, AttribName statName
             , float minChgR, float maxChgR, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
         {
             CharModData charModData = charController.ChangeStatRange(causeType, causeName, causeByCharID
@@ -251,7 +251,7 @@ namespace Combat
 
 #region DAY BUFF MGMT
         public int ApplyNInitBuffOnDay(CauseType causeType, int causeName, int causeByCharID
-                               , StatsName statName, float value, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
+                               , AttribName statName, float value, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
         {
             
             
@@ -275,7 +275,7 @@ namespace Combat
 
         }
 
-        public int ApplyNInitBuffOnDayRange(CauseType causeType, int causeName, int causeByCharID, StatsName statName
+        public int ApplyNInitBuffOnDayRange(CauseType causeType, int causeName, int causeByCharID, AttribName statName
             , float minChgR, float maxChgR, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
         {
 
@@ -433,7 +433,7 @@ namespace Combat
 
 #region NIGHT BUFF MGMT
         public int ApplyBuffOnNight(CauseType causeType, int causeName, int causeByCharID
-                               , StatsName statName, float value, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
+                               , AttribName statName, float value, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
         {
 
             // Actual buff application 
@@ -452,7 +452,7 @@ namespace Combat
 
         }
 
-        public int ApplyBuffOnNightRange(CauseType causeType, int causeName, int causeByCharID, StatsName statName
+        public int ApplyBuffOnNightRange(CauseType causeType, int causeName, int causeByCharID, AttribName statName
             , float minChgR, float maxChgR, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
         {
             CharModData charModData = charController.ChangeStatRange(causeType, causeName, causeByCharID

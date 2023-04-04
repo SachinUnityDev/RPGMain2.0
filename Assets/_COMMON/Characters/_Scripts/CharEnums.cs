@@ -222,11 +222,10 @@ public enum NPCNames
     VillageElder,
 
 }
-
-
-public enum StatsName
+public enum AttribName
 {
     None,
+    
     health,
     stamina,
     fortitude,

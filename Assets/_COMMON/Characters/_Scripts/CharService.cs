@@ -244,7 +244,7 @@ namespace Common
         }
 
         public List<int> ApplyBuffOnPartyExceptSelf(CauseType causeType, int causeName, int causeByCharID,
-                                    StatsName statName, int value, TimeFrame timeFrame, int netTime, bool isBuff, CharMode charMode)
+                                    AttribName statName, int value, TimeFrame timeFrame, int netTime, bool isBuff, CharMode charMode)
         {
             List<int> grpBuffIDs = new List<int>();
             foreach (CharController charController in CharService.Instance.allCharsInParty)
@@ -410,7 +410,7 @@ namespace Common
 
 
         #region GETTER
-        public CharController HasHighestStat(StatsName _statNames, CharMode _charMode)
+        public CharController HasHighestStat(AttribName _statNames, CharMode _charMode)
         {
             float maxValue = 0;
             CharController maxValChar = null; 
@@ -429,7 +429,7 @@ namespace Common
             return maxValChar; 
         }
 
-        public CharController HasLowestStat(StatsName _statNames, CharMode _charMode)
+        public CharController HasLowestStat(AttribName _statNames, CharMode _charMode)
         {
             float minValue = 0;
             CharController minValChar = null;

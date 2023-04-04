@@ -49,7 +49,7 @@ namespace Interactables
             int buffID =
             charController.buffController.
                    ApplyBuffOnNight(CauseType.Gems, (int)itemName, charController.charModel.charID,
-                               StatsName.hpRegen, 1, TimeFrame.Infinity, -1, true);
+                               AttribName.hpRegen, 1, TimeFrame.Infinity, -1, true);
             allBuffs.Add(buffID);
 
             string str = $"+1 Hp Regen at night";

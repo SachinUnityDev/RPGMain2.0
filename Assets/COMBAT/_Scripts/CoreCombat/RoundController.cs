@@ -23,7 +23,7 @@ namespace Combat
         public List<CharController> charTurnOrder = new List<CharController>();
         
         
-        List<StatsName> StatOrder = new List<StatsName>() { StatsName.haste, StatsName.focus, StatsName.morale, StatsName.luck };
+        List<AttribName> StatOrder = new List<AttribName>() { AttribName.haste, AttribName.focus, AttribName.morale, AttribName.luck };
 
         private void Start()
         {
@@ -88,11 +88,11 @@ namespace Combat
         }
         public void SetTurnOrder()
         {
-            OrderByRecursion2(StatsName.haste);
+            OrderByRecursion2(AttribName.haste);
             UpdateAllyEnemyList();          
         }
 
-        public void OrderByRecursion2(StatsName _statName)
+        public void OrderByRecursion2(AttribName _statName)
         {
             charTurnOrder = CharService.Instance.charsInPlayControllers.
                              OrderByDescending(x => x.GetStat(_statName).currValue).ToList();           

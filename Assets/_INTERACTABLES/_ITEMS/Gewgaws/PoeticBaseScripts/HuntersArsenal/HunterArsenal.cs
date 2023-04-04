@@ -30,14 +30,14 @@ namespace Interactables
               
                 int index =
                     charController.buffController.ApplyBuff(CauseType.PoeticSetGewgaw, (int)poeticSetName
-                    , charController.charModel.charID, StatsName.vigor, 3, TimeFrame.Infinity, -1, true);
+                    , charController.charModel.charID, AttribName.vigor, 3, TimeFrame.Infinity, -1, true);
                 buffIndex.Add(index);
             }
             if (tempTraitData.tempTraitName == TempTraitName.Thirsty)
             {
                 int index =
                    charController.buffController.ApplyBuff(CauseType.PoeticSetGewgaw, (int)poeticSetName
-                   , charController.charModel.charID, StatsName.willpower, 3, TimeFrame.Infinity, -1, true);
+                   , charController.charModel.charID, AttribName.willpower, 3, TimeFrame.Infinity, -1, true);
                         buffIndex.Add(index);
             }
         }

@@ -91,7 +91,7 @@ namespace Common
             damageController = gameObject.AddComponent<DamageController>();
             strikeController = gameObject.AddComponent<StrikeController>();
         }
-        public StatChanceData GetStatChanceData(StatsName _statName)
+        public StatChanceData GetStatChanceData(AttribName _statName)
         {
             foreach (StatChanceData statChanceData in CharService.Instance.statChanceSO.allStatChanceData)
             {
@@ -131,7 +131,7 @@ namespace Common
                 CombatEventService.Instance.On_CharHovered(gameObject);
             }
         }
-        public float GetStatChance(StatsName _statName, float _statValue)
+        public float GetStatChance(AttribName _statName, float _statValue)
         {
             foreach (StatChanceData  statChanceData in CharService.Instance.statChanceSO.allStatChanceData)
             {
@@ -161,20 +161,18 @@ namespace Common
             return -1f;  
         }        
 
-        public StatData GetStat(StatsName _statName)
+        public AttribData GetStat(AttribName _statName)
         {
-            List<StatData> st = charModel.statsList;
-            int index = st.FindIndex(x => x.statsName == _statName);           
+            List<AttribData> st = charModel.statsList;
+            int index = st.FindIndex(x => x.AttribName == _statName);           
             return st[index];
         }
-
-        // no change but directly setting value 
-        public void SetCurrStat(CauseType causeType, int causeName, int causeByCharID, StatsName _statName, float _newValue, bool toInvoke = true )
+        public void SetCurrStat(CauseType causeType, int causeName, int causeByCharID, AttribName _statName, float _newValue, bool toInvoke = true )
         {
             
-            StatData statData = charModel.statsList.Find(x => x.statsName == _statName);
+            AttribData statData = charModel.statsList.Find(x => x.AttribName == _statName);
             float currentVal = statData.currValue;
-            float modCurrValue = Constrain2Limit(statData.statsName, currentVal);
+            float modCurrValue = Constrain2Limit(statData.AttribName, currentVal);
             if (statData.isClamped) return;
             statData.currValue = modCurrValue;
             int turn = -1;
@@ -186,21 +184,21 @@ namespace Common
             }
                
         }
-        public bool IsClamped(StatsName statName)
+        public bool IsClamped(AttribName statName)
         {
-            StatData statData = GetStat(statName);
+            AttribData statData = GetStat(statName);
             if (statData.isClamped)
                 return true; 
             else 
                 return false;
         }
-        public void ClampStatToggle(StatsName statName, bool toClamp)
+        public void ClampStatToggle(AttribName statName, bool toClamp)
         {
-            StatData statData = charModel.statsList.Find(x => x.statsName == statName);
+            AttribData statData = charModel.statsList.Find(x => x.AttribName == statName);
             statData.isClamped = toClamp; 
         }
 
-        public float GetDisplayStat(StatsName _statName)
+        public float GetDisplayStat(AttribName _statName)
         {
             float actualVal = GetStat(_statName).currValue;
             float minL = GetStatChanceData(_statName).minLimit;
@@ -217,9 +215,9 @@ namespace Common
 
         // clamp stat to value
         public CharModData ClampStat(CauseType causeType, int CauseName, int causeByCharID
-                                                , StatsName statName, float value, bool toInvoke = true, bool isClamp =true)
+                                                , AttribName statName, float value, bool toInvoke = true, bool isClamp =true)
         {
-            StatData statData = GetStat(statName);
+            AttribData statData = GetStat(statName);
         
             if (isClamp)
                 statData.isClamped = true;
@@ -231,13 +229,13 @@ namespace Common
             return charModData; 
         }
 
-        public CharModData ChangeStat(CauseType causeType, int CauseName, int causeByCharID, StatsName statName
+        public CharModData ChangeStat(CauseType causeType, int CauseName, int causeByCharID, AttribName statName
                                                                                 , float value,  bool toInvoke = true) 
         {
             // COMBAT PATCH FIX BEGINS 
             int turn = -1;
             DynamicPosData dyna = null; 
-            StatData statData = GetStat(statName);
+            AttribData statData = GetStat(statName);
             Debug.Log("Game event" + GameEventService.Instance.isGame);
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
@@ -274,33 +272,33 @@ namespace Common
 
             float modCurrValue = Constrain2Limit(charModData.statModified, preConstrainedValue);
             // ACTUAL VALUE UPDATED HERE
-            charModel.statsList.Find(x => x.statsName == charModData.statModified).currValue
+            charModel.statsList.Find(x => x.AttribName == charModData.statModified).currValue
                                                                             = modCurrValue;
             charModData.modCurrVal = modCurrValue;              
             if (toInvoke)
             {
                 OnStatCurrValSet?.Invoke(charModData);// broadcast the final change              
             }
-            if (statName == StatsName.vigor)
+            if (statName == AttribName.vigor)
             {
                 //CharModData charModDataBase = new CharModData(turn, CauseType.StatChecks
                 //    , (int)statName, charModData.causeByCharID, charModData.effectedCharNameID,
                 //    StatsName.health, modCurrValue * 4f); 
 
-                SetMaxValue(StatsName.health, modCurrValue*4); 
+                SetMaxValue(AttribName.health, modCurrValue*4); 
             }
-            if (statName == StatsName.willpower)
+            if (statName == AttribName.willpower)
             {
                 //CharModData charModDataBase = new CharModData(turn, CauseType.StatChecks
                 //   , (int)statName, charModData.causeByCharID, charModData.effectedCharNameID,
                 //   StatsName.stamina, modCurrValue * 3f);
-                SetMaxValue(StatsName.stamina, modCurrValue*3); 
+                SetMaxValue(AttribName.stamina, modCurrValue*3); 
             }
             // TBD: Following to be made event based 
             if(GameService.Instance.gameModel.gameState == GameState.InCombat)
                 PopulateOverCharBars(statName);
            
-            if(statName == StatsName.health)
+            if(statName == AttribName.health)
                 CheckHealth();
 
             return charModData; 
@@ -321,15 +319,15 @@ namespace Common
             
         //}
 
-        public void SetMaxValue(StatsName statName, float val)
+        public void SetMaxValue(AttribName statName, float val)
         {
-            StatData statData = GetStat(statName);
+            AttribData statData = GetStat(statName);
             Debug.Log("MAX VALUE changed" + statName +"to " + val); 
             statData.maxLimit = val; 
 
         }
 
-        public void ChangeBaseValue(CauseType causeType, int name, int causeByCharID, StatsName statName
+        public void ChangeBaseValue(CauseType causeType, int name, int causeByCharID, AttribName statName
             , float maxChgR, bool toInvoke = true)
         {
 
@@ -339,7 +337,7 @@ namespace Common
 
         void CheckHealth()
         {       
-            StatData StatHP = GetStat(StatsName.health); 
+            AttribData StatHP = GetStat(AttribName.health); 
             if(StatHP.currValue <= 0)
             {
                 if(charModel.charMode == CharMode.Enemy)
@@ -357,7 +355,7 @@ namespace Common
                 }
             }
         }
-        public CharModData ChangeStatRange(CauseType causeType, int name, int causeByCharID, StatsName statName
+        public CharModData ChangeStatRange(CauseType causeType, int name, int causeByCharID, AttribName statName
             , float minChgR, float maxChgR, bool toInvoke = true)
         {
 
@@ -370,15 +368,15 @@ namespace Common
             CharModData charModData = new CharModData(turn, causeType, name, causeByCharID
                  , this.charModel.charID, statName,0,0 );
 
-            StatData statData = GetStat(statName);
+            AttribData statData = GetStat(statName);
             float minStatNet = statData.minRange + minChgR;
             float maxStatNet = statData.maxRange + maxChgR;
 
 
             charModData.modChgMinR = minStatNet;
             charModData.modChgMaxR = maxStatNet;
-            charModel.statsList.Find(x => x.statsName == statName).minRange = minStatNet;
-            charModel.statsList.Find(x => x.statsName == statName).maxRange = maxStatNet;
+            charModel.statsList.Find(x => x.AttribName == statName).minRange = minStatNet;
+            charModel.statsList.Find(x => x.AttribName == statName).maxRange = maxStatNet;
             if (toInvoke)
             {
                 // to be checked
@@ -390,10 +388,10 @@ namespace Common
 
         public void HPRegen()  // linked to charController as Stamina regen
         {
-            StatData statData = GetStat(StatsName.hpRegen); 
+            AttribData statData = GetStat(AttribName.hpRegen); 
             if(statData.currValue > 0)
             {
-                ChangeStat(CauseType.HealthRegen, (int)StatsName.hpRegen, charModel.charID, StatsName.health, statData.currValue); 
+                ChangeStat(CauseType.HealthRegen, (int)AttribName.hpRegen, charModel.charID, AttribName.health, statData.currValue); 
             }
         }
 
@@ -401,26 +399,26 @@ namespace Common
         {
             if(charModel.orgCharMode == CharMode.Ally)
             {
-                StatData fortOrgData = GetStat(StatsName.fortOrg);
-                ChangeStat(CauseType.StatChecks, (int)StatsName.fortOrg
-                        , charModel.charID, StatsName.fortitude, fortOrgData.currValue);
+                AttribData fortOrgData = GetStat(AttribName.fortOrg);
+                ChangeStat(CauseType.StatChecks, (int)AttribName.fortOrg
+                        , charModel.charID, AttribName.fortitude, fortOrgData.currValue);
             }
         }
 
         public void RegenStamina()  // for ally and enemies stamina regen is 2 
         {
             CharModData charModData;
-            StatData staminaData = charModel.staminaRegen; 
+            AttribData staminaData = charModel.staminaRegen; 
             int value = (int)staminaData.currValue;
             if (!staminaData.isClamped)
-                 charModData = ChangeStat(CauseType.StaminaRegen, 0, this.charModel.charID, StatsName.stamina, 2);
+                 charModData = ChangeStat(CauseType.StaminaRegen, 0, this.charModel.charID, AttribName.stamina, 2);
             else
                 Debug.Log("Stamina Clamped" + charModel.charName);
         }
-        public float Constrain2Limit(StatsName _statName,float _value )
+        public float Constrain2Limit(AttribName _statName,float _value )
         {
             float value = 0f; 
-            StatData statdata = GetStat(_statName);
+            AttribData statdata = GetStat(_statName);
             if (_value >= statdata.maxLimit)
                 value = statdata.maxLimit;
             else if (_value <= statdata.minLimit)
@@ -482,21 +480,21 @@ namespace Common
 
         #region HUNGER AND THRIST
 
-        public CharModData ChangeHungerNThirst(CauseType causeType, int name, int causeByCharID, StatsName statName
+        public CharModData ChangeHungerNThirst(CauseType causeType, int name, int causeByCharID, AttribName statName
             , float val, bool toInvoke = true)
         {
-            if(statName == StatsName.hunger)
+            if(statName == AttribName.hunger)
             {
                 float hungerVal = ((100 + charModel.hungerMod)/100) + val;
                 CharModData charModData = 
-                    ChangeStat(causeType, name, causeByCharID, StatsName.hunger, hungerVal);
+                    ChangeStat(causeType, name, causeByCharID, AttribName.hunger, hungerVal);
                 return charModData; 
             }
-            if (statName == StatsName.thirst)
+            if (statName == AttribName.thirst)
             {
                 float thirstVal = ((100 + charModel.thirstMod) / 100) + val;
                 CharModData charModData =
-                  ChangeStat(causeType, name, causeByCharID, StatsName.thirst, thirstVal);
+                  ChangeStat(causeType, name, causeByCharID, AttribName.thirst, thirstVal);
                 return charModData;
             }
 
@@ -507,7 +505,7 @@ namespace Common
         #endregion
 
 
-        void PopulateOverCharBars(StatsName statName)
+        void PopulateOverCharBars(AttribName statName)
         {
             Transform hpBarsTransform = gameObject.transform.GetChild(2);
 
@@ -516,12 +514,12 @@ namespace Common
 
             Transform HPBarImgOrange = hpBarsTransform.GetChild(0).GetChild(0);
             Transform StaminaBarImgOrange = hpBarsTransform.GetChild(1).GetChild(0);
-            StatData statData = GetStat(statName);
-            StatData willPowerSD = GetStat(StatsName.willpower);
-            StatData vigorSD = GetStat(StatsName.vigor);
+            AttribData statData = GetStat(statName);
+            AttribData willPowerSD = GetStat(AttribName.willpower);
+            AttribData vigorSD = GetStat(AttribName.vigor);
             //float barVal = statData.currValue / statData.maxLimit;
            
-            if (statName == StatsName.health)
+            if (statName == AttribName.health)
             {
                 float barVal = statData.currValue / (vigorSD.currValue * 4);
                 barVal = (barVal > 1) ? 1 : barVal; 
@@ -534,7 +532,7 @@ namespace Common
                 }
                 else return; 
 
-            }else if(statName == StatsName.stamina)
+            }else if(statName == AttribName.stamina)
             {
                 float barVal = statData.currValue / (willPowerSD.currValue * 3);
                 barVal = (barVal > 1) ? 1 : barVal;
@@ -547,12 +545,11 @@ namespace Common
                 else return;
 
 
-            }else if(statName == StatsName.fortitude)
+            }else if(statName == AttribName.fortitude)
             {
 
 
             }
-
             prevHPVal = statData.currValue;
             prevStaminaVal = statData.currValue;
         }        

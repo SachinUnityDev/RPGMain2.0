@@ -14,7 +14,7 @@ namespace Common
             //-3 Focus in Forest
             this.charController = charController;
             charController.landscapeController.ApplyLandscapeBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                          LandscapeNames.Rainforest, StatsName.focus, -3);
+                                                          LandscapeNames.Rainforest, AttribName.focus, -3);
         }
 
         public override void OnEnd()

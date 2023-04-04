@@ -28,7 +28,7 @@ namespace Interactables
         public override void PotionApplyFX()
         {
             charController.ChangeStat(CauseType.Potions, (int)potionName, charID
-                                        , StatsName.vigor, +1);  // Not a buff 
+                                        , AttribName.vigor, +1);  // Not a buff 
 
             PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionNames)itemName);
             int castTime = (int)UnityEngine.Random.Range(potionSO.minCastTime, potionSO.maxCastTime);
@@ -37,12 +37,12 @@ namespace Interactables
             if (QuestService.Instance.questMode == QuestMode.Stealth)
             {
                      buffID = charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                   , StatsName.morale, -3, TimeFrame.EndOfNight, castTime, true);
+                   , AttribName.morale, -3, TimeFrame.EndOfNight, castTime, true);
 
                 allBuffs.Add(buffID);   
             }
             buffID = charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-             , StatsName.vigor, -3, TimeFrame.EndOfNight, castTime, true);
+             , AttribName.vigor, -3, TimeFrame.EndOfNight, castTime, true);
             allBuffs.Add(buffID);
         }
 

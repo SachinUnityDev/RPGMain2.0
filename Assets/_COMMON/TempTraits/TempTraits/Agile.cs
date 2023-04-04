@@ -14,10 +14,10 @@ namespace Common
         {
             int charID = charController.charModel.charID;
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                         charID, StatsName.dodge, 2, TimeFrame.Infinity, -1, true);
+                                                         charID, AttribName.dodge, 2, TimeFrame.Infinity, -1, true);
            
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                         charID, StatsName.acc, 2, TimeFrame.Infinity, -1, true);
+                                                         charID, AttribName.acc, 2, TimeFrame.Infinity, -1, true);
 
         }
 

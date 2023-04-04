@@ -40,7 +40,7 @@ namespace Combat
             if (StackAmt >0 )
             {
                 charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID
-                                  , StatsName.willpower, -1 * StackAmt, false);
+                                  , AttribName.willpower, -1 * StackAmt, false);
                 StackAmt = 0; 
             }    
             CombatEventService.Instance.OnEOC -= NoPatienceWpIncrEnd;
@@ -52,7 +52,7 @@ namespace Combat
         public override void ApplyFX1()
         {
             //Gain 5 Fortitude
-            charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.fortitude, +5, false);
+            charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.fortitude, +5, false);
 
         }
 
@@ -74,7 +74,7 @@ namespace Combat
 
             if (StackAmt < 3)
             {
-                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.willpower, +1, false);
+                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.willpower, +1, false);
                 StackAmt++;
             }
         }

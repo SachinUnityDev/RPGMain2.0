@@ -87,17 +87,17 @@ namespace Common
             //int expNeeded = lvlNExpSO.GetTotalExpPts4Lvl((int)finalLvl);
             //if (ChkLvlUp(charModel, expNeeded))
             //{
-            foreach (StatData stat in lvlDataComp.allStatDataAuto)
+            foreach (AttribData stat in lvlDataComp.allStatDataAuto)
                 {
-                    if (stat.statsName == StatsName.damage || stat.statsName == StatsName.armor)
+                    if (stat.AttribName == AttribName.damage || stat.AttribName == AttribName.armor)
                     {
-                        charController.ChangeStatRange(CauseType.LevelUp, 1, 1, stat.statsName
+                        charController.ChangeStatRange(CauseType.LevelUp, 1, 1, stat.AttribName
                             , stat.minRange, stat.maxRange, true);
                         // stack it up in level up model
                     }
                     else
                     {
-                        charController.ChangeStat(CauseType.LevelUp, 1, 1, stat.statsName
+                        charController.ChangeStat(CauseType.LevelUp, 1, 1, stat.AttribName
                            , stat.currValue, true);
                     }
 
@@ -110,8 +110,8 @@ namespace Common
         {
             CharNames charName = charController.charModel.charName;
              LvlDataComp lvlDataComp = lvlUpCompSO.GetLvlData(charModel.heroType, finalLvl);
-            List<StatData> option1 = lvlDataComp.allStatDataOption1;
-            List<StatData> option2 = lvlDataComp.allStatDataOption2;
+            List<AttribData> option1 = lvlDataComp.allStatDataOption1;
+            List<AttribData> option2 = lvlDataComp.allStatDataOption2;
 
             lvlModel.AddOptions2PendingStack(charName, option1, option2, finalLvl);
         }
@@ -132,7 +132,7 @@ namespace Common
                 return;
             }
             
-            List<StatData> lvlUpStats = levelUpSO.GetLvlUpIncr4Stats(charModel, finalLvl);
+            List<AttribData> lvlUpStats = levelUpSO.GetLvlUpIncr4Stats(charModel, finalLvl);
            if(lvlUpStats == null)
             {
                 Debug.Log("charName " + charModel.charName);
@@ -143,17 +143,17 @@ namespace Common
             
             
          
-            foreach (StatData stat in lvlUpStats)
+            foreach (AttribData stat in lvlUpStats)
             {
-                if (stat.statsName == StatsName.damage || stat.statsName == StatsName.armor)
+                if (stat.AttribName == AttribName.damage || stat.AttribName == AttribName.armor)
                 {
-                    charController.ChangeStatRange(CauseType.LevelUp, 1, 1, stat.statsName
+                    charController.ChangeStatRange(CauseType.LevelUp, 1, 1, stat.AttribName
                         , stat.minRange, stat.maxRange, false);
                     // stack it up in level up model
                 }
                 else
                 {
-                    charController.ChangeStatRange(CauseType.LevelUp, 1, 1, stat.statsName
+                    charController.ChangeStatRange(CauseType.LevelUp, 1, 1, stat.AttribName
                         , stat.minRange, stat.maxRange, false);
                 }
             }
@@ -163,21 +163,21 @@ namespace Common
 
 
         // to be called from the view controller
-        public void ManLvlUp(CharNames charName, List<StatData> optionChosen)
+        public void ManLvlUp(CharNames charName, List<AttribData> optionChosen)
         {
             charController = CharService.Instance.GetCharCtrlWithName(charName);
             // apply to char Controller
-            foreach (StatData stat in optionChosen)
+            foreach (AttribData stat in optionChosen)
             {
-                if (stat.statsName == StatsName.damage || stat.statsName == StatsName.armor)
+                if (stat.AttribName == AttribName.damage || stat.AttribName == AttribName.armor)
                 {
-                    charController.ChangeStatRange(CauseType.LevelUp, 1, 1, stat.statsName
+                    charController.ChangeStatRange(CauseType.LevelUp, 1, 1, stat.AttribName
                         , stat.minRange, stat.maxRange, true);
                     // stack it up in level up model
                 }
                 else
                 {
-                    charController.ChangeStat(CauseType.LevelUp, 1, 1, stat.statsName
+                    charController.ChangeStat(CauseType.LevelUp, 1, 1, stat.AttribName
                        , stat.currValue, true);
                 }
             }

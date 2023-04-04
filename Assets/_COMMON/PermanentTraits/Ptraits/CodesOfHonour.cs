@@ -25,7 +25,7 @@ using Combat;
         void FortitudeLossReduced(CharModData charModData)
         {        //Lose half Fortitude(everything, including Fortitude diminishing attacks)  // for chagestat Fortitude  
 
-            if (charModData.statModified == StatsName.fortitude && charModData.modCurrVal < 0)
+            if (charModData.statModified == AttribName.fortitude && charModData.modCurrVal < 0)
                 charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID
                     , charModData.statModified, -(charModData.modCurrVal / 2));    // increase half the value , as value might be reduced on call
             //- minus added to increment by half value
@@ -42,7 +42,7 @@ using Combat;
         {
             if (CombatEventService.Instance.combatController.IsLastManInHeroes(charController))
             {
-                charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID,StatsName.dodge,3.0f); 
+                charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID,AttribName.dodge,3.0f); 
             } 
 
 

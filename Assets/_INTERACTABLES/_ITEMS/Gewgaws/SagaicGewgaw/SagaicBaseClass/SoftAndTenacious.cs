@@ -41,11 +41,11 @@ namespace Interactables
 
         void ApplyIfUnslackableFx()
         {
-            StatData statData = charController.GetStat(StatsName.damage);
+            AttribData statData = charController.GetStat(AttribName.damage);
             float dmgMult = dmgChgVal / 100f;
             int buffID = charController.buffController.ApplyBuffOnRange
                 (CauseType.SagaicGewgaw, charController.charModel.charID,
-                  (int)sagaicGewgawName, StatsName.damage, (int)statData.maxRange * dmgMult,
+                  (int)sagaicGewgawName, AttribName.damage, (int)statData.maxRange * dmgMult,
                   (int)statData.minRange * dmgMult, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
         }
@@ -68,11 +68,11 @@ namespace Interactables
                 {
                     //+1 Morale and Luck
                     int buffID = c.buffController.ApplyBuff(CauseType.SagaicGewgaw, charController.charModel.charID,
-                                (int)sagaicGewgawName, StatsName.morale, 1, TimeFrame.Infinity, -1, true);
+                                (int)sagaicGewgawName, AttribName.morale, 1, TimeFrame.Infinity, -1, true);
                     buffIndex.Add(buffID);
 
                     buffID = c.buffController.ApplyBuff(CauseType.SagaicGewgaw, charController.charModel.charID,
-                            (int)sagaicGewgawName, StatsName.luck, 1, TimeFrame.Infinity, -1, true);
+                            (int)sagaicGewgawName, AttribName.luck, 1, TimeFrame.Infinity, -1, true);
                     buffIndex.Add(buffID);
                 }
             }

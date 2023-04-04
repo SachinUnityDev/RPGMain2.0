@@ -13,28 +13,28 @@ namespace Common
             this.charController = charController;
             int charID = charController.charModel.charID;
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, StatsName.morale, -2, TimeFrame.Infinity, -1, true);
+                                             charID, AttribName.morale, -2, TimeFrame.Infinity, -1, true);
 
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, StatsName.focus, -3, TimeFrame.Infinity, -1, true);
+                                             charID, AttribName.focus, -3, TimeFrame.Infinity, -1, true);
 
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, StatsName.earthRes, +10, TimeFrame.Infinity, -1, true);
+                                             charID, AttribName.earthRes, +10, TimeFrame.Infinity, -1, true);
 
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, StatsName.airRes, +10, TimeFrame.Infinity, -1, true);
+                                             charID, AttribName.airRes, +10, TimeFrame.Infinity, -1, true);
 
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, StatsName.waterRes, +10, TimeFrame.Infinity, -1, true);
+                                             charID, AttribName.waterRes, +10, TimeFrame.Infinity, -1, true);
 
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, StatsName.fireRes, +10, TimeFrame.Infinity, -1, true);
+                                             charID, AttribName.fireRes, +10, TimeFrame.Infinity, -1, true);
 
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, StatsName.darkRes, +10, TimeFrame.Infinity, -1, true);
+                                             charID, AttribName.darkRes, +10, TimeFrame.Infinity, -1, true);
 
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, StatsName.lightRes, +10, TimeFrame.Infinity, -1, true);
+                                             charID, AttribName.lightRes, +10, TimeFrame.Infinity, -1, true);
 
         }
 

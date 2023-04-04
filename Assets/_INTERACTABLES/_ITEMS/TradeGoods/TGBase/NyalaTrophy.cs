@@ -41,12 +41,12 @@ namespace Interactables
         {
             int index =
             charController.landscapeController.ApplyLandscapeBuff(CauseType.TradeGoods, (int)tgName, LandscapeNames.Field
-                , StatsName.luck, -1);
+                , AttribName.luck, -1);
             allLandscapeIndex.Add(index);
 
              index =
                 charController.landscapeController.ApplyLandscapeBuff(CauseType.TradeGoods, (int)tgName, LandscapeNames.Field
-                , StatsName.willpower, 2);
+                , AttribName.willpower, 2);
             allLandscapeIndex.Add(index);
 
             index = FameService.Instance.fameController.ApplyFameModBuff(CauseType.TradeGoods, (int)tgName

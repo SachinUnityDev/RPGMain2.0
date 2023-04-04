@@ -9,7 +9,7 @@ namespace Common
     public class ManualOptData
     {
         public Levels lvl;
-        public List<StatData> allOptions = new List<StatData>();
+        public List<AttribData> allOptions = new List<AttribData>();
 
         public ManualOptData(Levels lvl)
         {
@@ -53,7 +53,7 @@ namespace Common
             return null;
         }
 
-        public void AddOptions2ChosenStack(CharNames charName, List<StatData> allStatData, Levels lvl)
+        public void AddOptions2ChosenStack(CharNames charName, List<AttribData> allStatData, Levels lvl)
         {
             int i = allCharLvlUpData.FindIndex(t => t.charName == charName);
             int j = allCharLvlUpData[i].allOptionsChosen.FindIndex(t => t.lvl == lvl);
@@ -81,8 +81,8 @@ namespace Common
         }
 
 
-        public void AddOptions2PendingStack(CharNames charName, List<StatData> allStatData1
-            ,List<StatData> allStatData2, Levels lvl)
+        public void AddOptions2PendingStack(CharNames charName, List<AttribData> allStatData1
+            ,List<AttribData> allStatData2, Levels lvl)
         {
             int i = allCharLvlUpData.FindIndex(t => t.charName == charName);
             if (i == -1)

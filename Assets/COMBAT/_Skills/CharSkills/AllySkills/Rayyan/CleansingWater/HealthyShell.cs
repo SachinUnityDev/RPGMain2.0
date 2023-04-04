@@ -40,14 +40,14 @@ namespace Combat
         {
             if (IsTargetAlly())
             {
-                StatData statData = targetController.GetStat(StatsName.armor);
+                AttribData statData = targetController.GetStat(AttribName.armor);
                 float armorMin = statData.minRange;
                 float armorMax = statData.maxRange;
                  chgMin = statData.minRange * 0.6f;
                  chgMax = statData.maxRange * 0.6f;
 
                 targetController.buffController.ApplyBuffOnRange(CauseType.CharSkill, (int)skillName, charID
-                                                     , StatsName.armor, chgMin, chgMax, TimeFrame.EndOfRound
+                                                     , AttribName.armor, chgMin, chgMax, TimeFrame.EndOfRound
                                                      , skillModel.castTime, true);
             }
         }
@@ -57,7 +57,7 @@ namespace Combat
             if (IsTargetAlly())
             {             
                 targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                    , StatsName.fireRes, 20, TimeFrame.EndOfRound, skillModel.castTime, true);
+                    , AttribName.fireRes, 20, TimeFrame.EndOfRound, skillModel.castTime, true);
             }
         }
 

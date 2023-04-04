@@ -29,7 +29,7 @@ namespace Interactables
             if (chance.GetChance())
             {
                 charController.buffController.ApplyBuff(CauseType.Food, (int)foodName,
-                 charController.charModel.charID, StatsName.luck, 1, foodSO.timeFrame
+                 charController.charModel.charID, AttribName.luck, 1, foodSO.timeFrame
                  , foodSO.castTime, true);
             }
             float chance1 = 30f;

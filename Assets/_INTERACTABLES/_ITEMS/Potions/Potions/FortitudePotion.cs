@@ -46,12 +46,12 @@ namespace Interactables
 
             int buffId =
                 charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                        , StatsName.fortitude, value, TimeFrame.Infinity, -1, true);           
+                        , AttribName.fortitude, value, TimeFrame.Infinity, -1, true);           
             allBuffs.Add(buffId);    
 
             buffId =
             charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                      , StatsName.fortOrg, -2, TimeFrame.EndOfQuest, 1, true);
+                      , AttribName.fortOrg, -2, TimeFrame.EndOfQuest, 1, true);
             allBuffs.Add(buffId);
         }
 

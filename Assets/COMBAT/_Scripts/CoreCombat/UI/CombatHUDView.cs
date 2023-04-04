@@ -13,7 +13,7 @@ namespace Combat
     [System.Serializable]
     public class StatDisplayData
     {
-        public StatsName statName;     
+        public AttribName statName;     
         public GameObject statDisplayGO;
         public bool isBuff = false;
         public bool isDebuff = false; 
@@ -332,8 +332,8 @@ namespace Combat
             Image HPBarImg = portraitBars.GetChild(0).GetChild(0).GetComponent<Image>();
             Image StaminaBarImg = portraitBars.GetChild(1).GetChild(0).GetComponent<Image>();
 
-            StatData HPData = charController.GetStat(StatsName.health);
-            StatData StaminaData = charController.GetStat(StatsName.stamina);
+            AttribData HPData = charController.GetStat(AttribName.health);
+            AttribData StaminaData = charController.GetStat(AttribName.stamina);
 
             // Change fill
             float HPbarValue = HPData.currValue / HPData.maxLimit;
@@ -345,7 +345,7 @@ namespace Combat
             if (charMode == CharMode.Ally)
             {
                 // fortitude
-                StatData fortData = charController.GetStat(StatsName.fortitude);
+                AttribData fortData = charController.GetStat(AttribName.fortitude);
                 Transform fortCircleTrans = PortraitPanelAlly.transform.GetChild(3);
 
                 // Fortitude Update 
@@ -422,21 +422,21 @@ namespace Combat
               
                 int index = i + 5;
                
-                SpriteData spriteData = statIconSO.allSpriteData.Find(x => x.statName == (StatsName)index); // img from SO 
-                StatData statData = charController.GetStat((StatsName)index);  // current stats from ctrller               
+                SpriteData spriteData = statIconSO.allSpriteData.Find(x => x.statName == (AttribName)index); // img from SO 
+                AttribData statData = charController.GetStat((AttribName)index);  // current stats from ctrller               
 
-                StatDisplayData statDisplayData = statDisplay.Find(x => x.statName == (StatsName)index); // reference list
+                StatDisplayData statDisplayData = statDisplay.Find(x => x.statName == (AttribName)index); // reference list
                 statDisplayData.statDisplayGO.GetComponentInChildren<Image>().sprite = spriteData.statSprite;
 
                 PopUpAndHL popUpAndHL = statDisplayData.statDisplayGO.GetComponent<PopUpAndHL>();
                 popUpAndHL.spriteNormal = spriteData.statSprite;
                 popUpAndHL.spriteLit = spriteData.statSpriteLit;
-                popUpAndHL.statName = (StatsName)index;
+                popUpAndHL.statName = (AttribName)index;
 
 
                 popUpAndHL.desc = statData.desc;
                 string statStr;
-                if ((StatsName)index == StatsName.damage || (StatsName)index == StatsName.armor)
+                if ((AttribName)index == AttribName.damage || (AttribName)index == AttribName.armor)
                 {
                     float minR = statData.minRange; float maxR = statData.maxRange;
                     statStr = minR + "-" + maxR;

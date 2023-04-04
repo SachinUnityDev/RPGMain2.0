@@ -24,7 +24,7 @@ namespace Interactables
             charController = InvService.Instance.charSelectController;
             int index =
             charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                , charController.charModel.charID, StatsName.focus, valLyric, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, AttribName.focus, valLyric, TimeFrame.Infinity, -1, true);
 
             buffIndex.Add(index);
         }
@@ -41,7 +41,7 @@ namespace Interactables
 
             int index =
             charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                , charController.charModel.charID, StatsName.focus, valFolk, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, AttribName.focus, valFolk, TimeFrame.Infinity, -1, true);
 
             buffIndex.Add(index);
         }
@@ -57,7 +57,7 @@ namespace Interactables
 
             int index =
             charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
-                , charController.charModel.charID, StatsName.focus, valEpic, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, AttribName.focus, valEpic, TimeFrame.Infinity, -1, true);
 
             buffIndex.Add(index);
         }

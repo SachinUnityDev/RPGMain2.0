@@ -108,7 +108,7 @@ namespace Combat
         {
             PopulateTargetPos();
             
-            CharController maxValChar = CharService.Instance.HasHighestStat(StatsName.health, CharMode.Enemy);
+            CharController maxValChar = CharService.Instance.HasHighestStat(AttribName.health, CharMode.Enemy);
             foreach (CellPosData cell in skillModel.targetPos)
             {
                 DynamicPosData dyna = GridService.Instance.GetDynaAtCellPos(cell.charMode, cell.pos);

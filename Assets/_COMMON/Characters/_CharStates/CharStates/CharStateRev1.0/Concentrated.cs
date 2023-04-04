@@ -21,10 +21,10 @@ namespace Common
         public override void StateApplyFX()
         {
             CharService.Instance.ApplyBuffOnPartyExceptSelf(CauseType.CharState, (int)charStateName
-                       , charID, StatsName.focus, +1, charStateModel.timeFrame, charStateModel.castTime, true, CharMode.Ally);
+                       , charID, AttribName.focus, +1, charStateModel.timeFrame, charStateModel.castTime, true, CharMode.Ally);
 
              charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                   , charID, StatsName.morale, -1, charStateModel.timeFrame, charStateModel.castTime, true);
+                   , charID, AttribName.morale, -1, charStateModel.timeFrame, charStateModel.castTime, true);
 
             charController.charStateController
                 .ApplyImmunityBuff(CauseType.CharState, (int)charStateName
@@ -34,11 +34,11 @@ namespace Common
 
         void Tick2(CharModData charModData)  //  change Stat subscribe 
         {
-            if (charModData.statModified != StatsName.focus)
+            if (charModData.statModified != AttribName.focus)
                 return;
 
-            float maxL = charController.GetStatChanceData(StatsName.focus).maxLimit;
-            if (charController.GetStat(StatsName.luck).currValue < maxL)  // Exit condition 
+            float maxL = charController.GetStatChanceData(AttribName.focus).maxLimit;
+            if (charController.GetStat(AttribName.luck).currValue < maxL)  // Exit condition 
             {
                 EndState();
             }

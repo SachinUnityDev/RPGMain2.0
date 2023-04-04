@@ -50,7 +50,7 @@ namespace Combat
 
         public override void ApplyFX1()
         {
-            StatData statData = charController.GetStat(StatsName.morale);
+            AttribData statData = charController.GetStat(AttribName.morale);
             if(statData.currValue < 12)
             {
                 allyGOs.ForEach(t => t.GetComponent<CharController>().damageController

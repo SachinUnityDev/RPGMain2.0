@@ -32,7 +32,7 @@ namespace Interactables
                 charController = InvService.Instance.charSelectController;   
                 int index =
                 charController.buffController.ApplyBuff(CauseType.PoeticGewgaw, (int)poeticGewgawName
-                , charController.charModel.charID, StatsName.dodge, valDodge, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, AttribName.dodge, valDodge, TimeFrame.Infinity, -1, true);
                  buffIndex.Add(index);
 
         }

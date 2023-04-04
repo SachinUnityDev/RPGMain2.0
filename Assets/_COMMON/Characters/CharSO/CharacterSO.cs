@@ -70,7 +70,7 @@ namespace Common
         public int startLevel;
         public int staminaRegen = 2;
 
-        public List<StatData> StatsList = new List<StatData>();
+        public List<AttribData> StatsList = new List<AttribData>();
 
         [Header("Grid related")]
         public CharOccupies charOccupies;
@@ -89,81 +89,81 @@ namespace Common
             if (StatsList.Count < 1)   // patch fix to prevent recreation of fields 
             {
                 StatsList.Clear();
-            for (int i = 1; i < Enum.GetNames(typeof(StatsName)).Length; i++)
+            for (int i = 1; i < Enum.GetNames(typeof(AttribName)).Length; i++)
             {
-                StatData s = new StatData();
-                s.statsName = (StatsName)i;
+                AttribData s = new AttribData();
+                s.AttribName = (AttribName)i;
                 Debug.Log("SO awake  function called");
-                switch (s.statsName)
+                switch (s.AttribName)
                 {
-                    case StatsName.None:
+                    case AttribName.None:
                         break;
-                    case StatsName.health:
+                    case AttribName.health:
                         s.minLimit = 0f;
                         s.maxLimit = 0;
                         break;
-                    case StatsName.stamina:
+                    case AttribName.stamina:
                         s.minLimit = 0f;
                         s.maxLimit = 0f;
                         break;
-                    case StatsName.fortOrg:
+                    case AttribName.fortOrg:
                         s.minLimit = -24f;
                         s.maxLimit = 24f; break;
-                    case StatsName.fortitude:
+                    case AttribName.fortitude:
                         s.minLimit = -30f;
                         s.maxLimit = 30f; break;
-                    case StatsName.hunger:
+                    case AttribName.hunger:
                         s.minLimit = 0f;
                         s.maxLimit = 100f; break;
-                    case StatsName.thirst:
+                    case AttribName.thirst:
                         s.minLimit = 0f;
                         s.maxLimit = 100f; break;
-                    case StatsName.damage:
+                    case AttribName.damage:
                         s.minLimit = 0f;
                         s.maxLimit = 100f; break;
-                    case StatsName.acc:
+                    case AttribName.acc:
                         s.minLimit = 0f;
                         s.maxLimit = 15; break;
-                    case StatsName.focus:
+                    case AttribName.focus:
                         s.minLimit = 12f;
                         s.maxLimit = 96f; break;
-                    case StatsName.luck:
+                    case AttribName.luck:
                         s.minLimit = 0f;
                         s.maxLimit = 12f; break;
-                    case StatsName.morale:
+                    case AttribName.morale:
                         s.minLimit = 0f;
                         s.maxLimit = 12f; break;
-                    case StatsName.haste:
+                    case AttribName.haste:
                         s.minLimit = 0f;
                         s.maxLimit = 12f; break;
-                    case StatsName.vigor:
+                    case AttribName.vigor:
                         s.minLimit = 0f;
                         s.maxLimit = 100f; break;
-                    case StatsName.willpower:
+                    case AttribName.willpower:
                         s.minLimit = 0f;
                         s.maxLimit = 100f; break;
-                    case StatsName.armor:
+                    case AttribName.armor:
                         s.minLimit = 0f;
                         s.maxLimit = 100f; break;
-                    case StatsName.dodge:
+                    case AttribName.dodge:
                         s.minLimit = 0f;
                         s.maxLimit = 100f; break;
-                    case StatsName.fireRes:
+                    case AttribName.fireRes:
                         s.minLimit = -60f;
                         s.maxLimit = 90f; break;
-                    case StatsName.earthRes:
+                    case AttribName.earthRes:
                         s.minLimit = -60f;
                         s.maxLimit = 90f; break;
-                    case StatsName.waterRes:
+                    case AttribName.waterRes:
                         s.minLimit = -60f;
                         s.maxLimit = 90f; break;
-                    case StatsName.airRes:
+                    case AttribName.airRes:
                         s.minLimit = -60f;
                         s.maxLimit = 90f; break;
-                    case StatsName.lightRes:
+                    case AttribName.lightRes:
                         s.minLimit = -30f;
                         s.maxLimit = 60f; break;
-                    case StatsName.darkRes:
+                    case AttribName.darkRes:
                         s.minLimit = -30f;
                         s.maxLimit = 60f; break;
                     default:
@@ -175,13 +175,13 @@ namespace Common
         else
         {
                 //Debug.Log("Updated vigor n willpower");
-                float healthMax = StatsList.Find(t => t.statsName == StatsName.vigor).currValue * 4;
-                StatsList.Find(t => t.statsName == StatsName.health).currValue = healthMax;
-                StatsList.Find(t => t.statsName == StatsName.health).maxLimit = healthMax; 
+                float healthMax = StatsList.Find(t => t.AttribName == AttribName.vigor).currValue * 4;
+                StatsList.Find(t => t.AttribName == AttribName.health).currValue = healthMax;
+                StatsList.Find(t => t.AttribName == AttribName.health).maxLimit = healthMax; 
 
-                float staminaMax = StatsList.Find(t => t.statsName == StatsName.willpower).currValue * 3;
-                StatsList.Find(t => t.statsName == StatsName.stamina).currValue = staminaMax;
-                StatsList.Find(t => t.statsName == StatsName.stamina).maxLimit  = staminaMax;
+                float staminaMax = StatsList.Find(t => t.AttribName == AttribName.willpower).currValue * 3;
+                StatsList.Find(t => t.AttribName == AttribName.stamina).currValue = staminaMax;
+                StatsList.Find(t => t.AttribName == AttribName.stamina).maxLimit  = staminaMax;
                 FillDesc();
         }
 
@@ -194,84 +194,84 @@ namespace Common
             for (int i = 0; i < StatsList.Count; i++)
             {
                 
-                switch (StatsList[i].statsName)
+                switch (StatsList[i].AttribName)
                 {
-                    case StatsName.None:
+                    case AttribName.None:
                         str = ""; 
                         break;
-                    case StatsName.health:
+                    case AttribName.health:
                         str= "Health is health, you know it..."; 
                         break;
-                    case StatsName.stamina:
+                    case AttribName.stamina:
                         str = "Resource to use skills."; 
                         break;
-                    case StatsName.fortitude:
+                    case AttribName.fortitude:
                         str = "Be among those who dare to dare!"; 
                         break;
-                    case StatsName.hunger:
+                    case AttribName.hunger:
                         str = "Start losing Health once Hunger is 100%."; 
                         break;
-                    case StatsName.thirst:
+                    case AttribName.thirst:
                         str = "Start losing Stamina once Thirst is 100%.";
                         break;
-                    case StatsName.damage:
+                    case AttribName.damage:
                        str = 
                             "Base value for Physical and Magical attacks."; 
                         break;
-                    case StatsName.acc:
+                    case AttribName.acc:
                        str =
                             "Chance to land Physical attack to a target."; 
                         break;
-                    case StatsName.focus:
+                    case AttribName.focus:
                         str = "Determinant value for hitting correct target by Magical attacks or Misfire."; 
                         break;
-                    case StatsName.luck:
+                    case AttribName.luck:
                         str=
                         "Determinant value for Critical and Feeble hits."; 
                         break;
-                    case StatsName.morale:
+                    case AttribName.morale:
                         str= "Determinant value for extra action or pass action.";
                         break;
-                    case StatsName.haste:
+                    case AttribName.haste:
                         str = 
                         "Main determinant for turn order. Increases chance to keep action after using Move."; 
                         break;
-                    case StatsName.vigor:
+                    case AttribName.vigor:
                         str =
                             "Determinant value for base Health. Increases chance to withstand Hunger.";
                         break;
-                    case StatsName.willpower:
+                    case AttribName.willpower:
                         str =
                         "Determinant value for base Stamina. Increases chance to withstand Thirst."; 
                         break;
-                    case StatsName.armor:
+                    case AttribName.armor:
                         str =
                             "Value to mitigate incoming Physical damage."; 
                         break;
-                    case StatsName.dodge:
+                    case AttribName.dodge:
                         str =
                             "Chance to evade a Physical attack."; 
                         break;
-                    case StatsName.fireRes:
+                    case AttribName.fireRes:
                         str =
                             "Percentage value to mitigate incoming Fire damage.";
                         break;
-                    case StatsName.earthRes:
+                    case AttribName.earthRes:
                         str =
                             "Percentage value to mitigate incoming Earth damage.";
                         break;
-                    case StatsName.waterRes:
+                    case AttribName.waterRes:
                         str = "Percentage value to mitigate incoming Water damage.";
                         break;
-                    case StatsName.airRes:
+                    case AttribName.airRes:
                         str =
                             "Percentage value to mitigate incoming Air damage.";
                         break;
-                    case StatsName.lightRes:
+                    case AttribName.lightRes:
                         str =
                         "Percentage value to mitigate incoming Light damage.";
                         break;
-                    case StatsName.darkRes:
+                    case AttribName.darkRes:
                         str = "Percentage value to mitigate incoming Dark damage.";
 
                         break;

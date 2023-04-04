@@ -32,7 +32,7 @@ namespace Interactables
 
             int index =
                 charController.buffController.ApplyBuff(CauseType.PoeticGewgaw, (int)poeticGewgawName
-                , charController.charModel.charID, StatsName.focus, valFocus, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, AttribName.focus, valFocus, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }
         public override void UnEquipPoetic()

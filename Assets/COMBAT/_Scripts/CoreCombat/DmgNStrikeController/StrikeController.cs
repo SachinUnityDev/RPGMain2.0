@@ -34,10 +34,10 @@ namespace Combat
     [System.Serializable]
     public class StatChgData
     {
-        public StatsName statName;
+        public AttribName statName;
         public float value;
 
-        public StatChgData(StatsName statName, float value)
+        public StatChgData(AttribName statName, float value)
         {
             this.statName = statName;
             this.value = value;
@@ -86,14 +86,14 @@ namespace Combat
             // get focus statChance Data of performers focus 
             // depending on that decide ..TO be decided 
 
-            float focusVal = charController.GetStat(StatsName.focus).currValue;
-            float focusChance = 100f - charController.GetStatChance(StatsName.focus, focusVal);
+            float focusVal = charController.GetStat(AttribName.focus).currValue;
+            float focusChance = 100f - charController.GetStatChance(AttribName.focus, focusVal);
 
             if (focusVal == 0)
             {
                 // GOT CONFUSED .. to be put in HERE .. 
                 CharStatesService.Instance.ApplyCharState(gameObject, CharStateName.Confused
-                                     , charController, CauseType.StatChange, (int)StatsName.focus);
+                                     , charController, CauseType.StatChange, (int)AttribName.focus);
                 return false;  // MIsfire ..hit the wrong target .. 
             }
             else
@@ -134,30 +134,30 @@ namespace Combat
         void ReduceDmgPercent()
         {
             int charID = charController.charModel.charID;
-            StatData dmg = charController.GetStat(StatsName.damage);
+            AttribData dmg = charController.GetStat(AttribName.damage);
             dmgMin = dmg.minRange;
             dmgMax = dmg.maxRange;
             float chgMin = 0.2f * dmgMin;
             float chgMax = 0.2f * dmgMax;
             charController.ChangeStatRange(CauseType.StatChecks, (int)StatChecks.FocusCheck, charID
-                , StatsName.damage, chgMin, chgMax);
+                , AttribName.damage, chgMin, chgMax);
         }
         void RevertDamageRange()
         {
-            charController.GetStat(StatsName.damage).minRange = dmgMin;
-            charController.GetStat(StatsName.damage).maxRange = dmgMax;
+            charController.GetStat(AttribName.damage).minRange = dmgMin;
+            charController.GetStat(AttribName.damage).maxRange = dmgMax;
         }
 
         public bool AccuracyCheck()// Physical 
         {
-            float accVal = charController.GetStat(StatsName.acc).currValue;
-            float accChance = charController.GetStatChance(StatsName.acc, accVal);
+            float accVal = charController.GetStat(AttribName.acc).currValue;
+            float accChance = charController.GetStatChance(AttribName.acc, accVal);
 
             if (accVal == 0)
             { // self inflicted
 
                 CharStatesService.Instance.ApplyCharState(gameObject, CharStateName.Blinded
-                                     , charController, CauseType.StatChange, (int)StatsName.acc);
+                                     , charController, CauseType.StatChange, (int)AttribName.acc);
                 return false;// miss the target .. i.e not going to hit/FX anyone.. 
             }
             else

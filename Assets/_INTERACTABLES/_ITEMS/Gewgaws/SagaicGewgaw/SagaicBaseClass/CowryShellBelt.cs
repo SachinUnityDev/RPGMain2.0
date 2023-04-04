@@ -43,7 +43,7 @@ namespace Interactables
                 ) return;
             if (charStateFX1Applied) return; 
             int buffID = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw,
-                            (int)sagaicGewgawName, charStateData.causeCharID, StatsName.vigor,
+                            (int)sagaicGewgawName, charStateData.causeCharID, AttribName.vigor,
                             +5, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
             charStateFX1Applied = true; 

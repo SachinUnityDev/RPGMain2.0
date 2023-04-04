@@ -31,18 +31,18 @@ namespace Combat
 
         public override void ApplyFX1()
         {
-            StatData willPowerSD = charController.GetStat(StatsName.willpower);
+            AttribData willPowerSD = charController.GetStat(AttribName.willpower);
             float maxStamina = willPowerSD.baseValue; 
 
             float value = 0.25f * maxStamina;
             charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID
-                                                            , StatsName.stamina, +value); 
+                                                            , AttribName.stamina, +value); 
         }
 
         public override void ApplyFX2()
         {
             charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                    , StatsName.stamina, -2, skillModel.timeFrame, skillModel.castTime, false );
+                    , AttribName.stamina, -2, skillModel.timeFrame, skillModel.castTime, false );
         }
 
         public override void ApplyFX3()

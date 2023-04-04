@@ -63,16 +63,16 @@ namespace Common
         {
             int buffID = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                        , charID, StatsName.haste, -2, charStateModel.timeFrame, charStateModel.castTime, true);
+                        , charID, AttribName.haste, -2, charStateModel.timeFrame, charStateModel.castTime, true);
             allBuffIds.Add(buffID);
             buffID =
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                    , charID, StatsName.fireRes, -30, charStateModel.timeFrame, charStateModel.castTime, true);
+                    , charID, AttribName.fireRes, -30, charStateModel.timeFrame, charStateModel.castTime, true);
             allBuffIds.Add(buffID); 
 
             buffID = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                    , charID, StatsName.airRes, +20, charStateModel.timeFrame, charStateModel.castTime, true);
+                    , charID, AttribName.airRes, +20, charStateModel.timeFrame, charStateModel.castTime, true);
             allBuffIds.Add(buffID);
 
             charController.charStateController.ApplyImmunityBuff(CauseType.CharState, (int)charStateName, charID
@@ -82,14 +82,14 @@ namespace Common
         void ApplyRoundFX()
         {
             if (CombatService.Instance.currCharOnTurn.charModel.charID != charID) return;
-            StatData statData = charController.GetStat(StatsName.earthRes);
+            AttribData statData = charController.GetStat(AttribName.earthRes);
 
             if (statData.currValue > 60f)   // apply damage here
                 charController.ChangeStat(CauseType.CharState, (int)charStateName
-                    , charID, StatsName.health, Mathf.RoundToInt(-dmgPerRound*0.50f));
+                    , charID, AttribName.health, Mathf.RoundToInt(-dmgPerRound*0.50f));
             else
                 charController.ChangeStat(CauseType.CharState, (int)charStateName, charID
-                                                    , StatsName.health, -dmgPerRound);
+                                                    , AttribName.health, -dmgPerRound);
         }
  
         public override void StateApplyVFX()

@@ -35,10 +35,10 @@ namespace Interactables
                                , CharStateName.BurnHighDOT, TimeFrame.EndOfRound, castTime);            
 
             int buffId = charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                     , StatsName.fireRes, Random.Range(24f, 37f), TimeFrame.EndOfRound, castTime, true);
+                     , AttribName.fireRes, Random.Range(24f, 37f), TimeFrame.EndOfRound, castTime, true);
             allBuffs.Add(buffId);
             buffId = charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                   , StatsName.waterRes, Random.Range(-12f, -19f), TimeFrame.EndOfRound, castTime, true);
+                   , AttribName.waterRes, Random.Range(-12f, -19f), TimeFrame.EndOfRound, castTime, true);
             allBuffs.Add(buffId);
         }
    

@@ -53,9 +53,9 @@ namespace Combat
 
         public override void ApplyFX2()
         {
-            StatData armorData = charController.GetStat(StatsName.armor);
+            AttribData armorData = charController.GetStat(AttribName.armor);
             armorChg = armorData.maxRange - armorData.currValue;
-            charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID,StatsName.armor
+            charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID,AttribName.armor
                 , armorChg, TimeFrame.EndOfRound, skillModel.castTime, true);
 
         }

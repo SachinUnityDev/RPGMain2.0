@@ -35,7 +35,7 @@ namespace Combat
             if(targetController != null  && IsTargetAlly())
             {
                 targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                    , StatsName.fireRes, 20f, TimeFrame.EndOfRound, skillModel.castTime, true); 
+                    , AttribName.fireRes, 20f, TimeFrame.EndOfRound, skillModel.castTime, true); 
             }
         }
 

@@ -45,7 +45,7 @@ namespace Combat
         {
             if (CharStatesService.Instance.HasCharState(targetGO, CharStateName.Rooted))
                 targetController
-                    .ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.luck, 2);
+                    .ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.luck, 2);
 
             if (chance.GetChance())
             CharStatesService.Instance.ApplyCharState(targetGO, CharStateName.Rooted
@@ -65,7 +65,7 @@ namespace Combat
         {
             colDynaCopy.ForEach(t => t.charGO.GetComponent<CharController>()
               .buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-              , StatsName.luck, 1, TimeFrame.EndOfRound, skillModel.castTime, true));
+              , AttribName.luck, 1, TimeFrame.EndOfRound, skillModel.castTime, true));
         }
 
         public override void ApplyFX3()

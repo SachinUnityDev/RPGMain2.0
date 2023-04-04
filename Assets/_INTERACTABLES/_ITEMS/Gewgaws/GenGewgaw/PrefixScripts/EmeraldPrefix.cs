@@ -24,7 +24,7 @@ namespace Interactables
 
             int index =
             charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
-                , charController.charModel.charID, StatsName.luck, 1, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, AttribName.luck, 1, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
         }
@@ -40,7 +40,7 @@ namespace Interactables
 
             int index =
             charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
-                , charController.charModel.charID, StatsName.luck, 2, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, AttribName.luck, 2, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
         }

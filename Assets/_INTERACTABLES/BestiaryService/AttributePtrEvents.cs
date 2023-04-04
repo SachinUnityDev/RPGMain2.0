@@ -9,11 +9,11 @@ namespace Interactables
 {
     public class AttributePtrEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        [SerializeField] StatsName statName;
+        [SerializeField] AttribName statName;
         [SerializeField] bool isOnLeft = false; 
 
         [SerializeField] GameObject desc; 
-        [SerializeField] StatData statData;
+        [SerializeField] AttribData statData;
         AttributeViewController attributeViewController; 
         void Start()
         {
@@ -43,9 +43,9 @@ namespace Interactables
             }
             else
             {
-                statData = charModel.statsList.Find(t => t.statsName == statName);
+                statData = charModel.statsList.Find(t => t.AttribName == statName);
                 PopulateDesc();
-                if (statName == StatsName.armor || statName == StatsName.damage)
+                if (statName == AttribName.armor || statName == AttribName.damage)
                 {
 
                     str = statData.minRange + "-" + statData.maxRange;
@@ -63,7 +63,7 @@ namespace Interactables
         void PopulateDesc()
         {
             desc.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text
-                            = statData.statsName.ToString().CreateSpace();
+                            = statData.AttribName.ToString().CreateSpace();
             desc.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text
                             = statData.desc; 
         }

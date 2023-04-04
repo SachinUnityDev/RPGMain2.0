@@ -20,11 +20,11 @@ namespace Interactables
             charController = InvService.Instance.charSelectController;
 
             int index = charController.buffController.ApplyNInitBuffOnDay(CauseType.PrefixGenGewgaw, (int)prefixName
-                            , charController.charModel.charID, StatsName.morale, 4, TimeFrame.Infinity, -1, true);
+                            , charController.charModel.charID, AttribName.morale, 4, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
             index = charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
-             , charController.charModel.charID, StatsName.focus, -2, TimeFrame.Infinity, -1, true);
+             , charController.charModel.charID, AttribName.focus, -2, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
             Debug.Log("recieve 12 % more damage");

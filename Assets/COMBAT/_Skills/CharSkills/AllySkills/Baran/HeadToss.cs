@@ -53,7 +53,7 @@ namespace Combat
             if (targetController)
             {
                 targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                    , StatsName.focus, -2, TimeFrame.EndOfRound, skillModel.castTime, false);
+                    , AttribName.focus, -2, TimeFrame.EndOfRound, skillModel.castTime, false);
 
                // focuschg = true;
             }

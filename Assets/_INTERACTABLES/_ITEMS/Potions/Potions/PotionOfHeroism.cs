@@ -30,11 +30,11 @@ namespace Interactables
             int castTime = (int)UnityEngine.Random.Range(potionSO.minCastTime, potionSO.maxCastTime);
             int buffID =     
             charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                       , StatsName.morale, Random.Range(2,5), TimeFrame.EndOfRound, castTime, true);
+                       , AttribName.morale, Random.Range(2,5), TimeFrame.EndOfRound, castTime, true);
             allBuffs.Add(buffID);
             buffID =
             charController.buffController.ApplyBuffOnRange(CauseType.Potions, (int)potionName, charID
-                     , StatsName.armor, -2f, -2f, TimeFrame.EndOfRound, castTime, true);
+                     , AttribName.armor, -2f, -2f, TimeFrame.EndOfRound, castTime, true);
 
             allBuffs.Add(buffID);
         }

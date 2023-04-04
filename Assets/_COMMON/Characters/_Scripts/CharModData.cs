@@ -14,7 +14,7 @@ namespace Common
         public int causeName;
         public int causeByCharID;
         public int effectedCharNameID;
-        public StatsName statModified;       
+        public AttribName statModified;       
 
         public float modCurrVal = 0f;
         public float baseVal = 0f;  
@@ -27,7 +27,7 @@ namespace Common
         
         // ON STAT RANGE MODIFIED 
         public CharModData(int turnNo, CauseType causeType, int causeName, int causedByCharID
-            , int effectedCharNameID, StatsName statModfified, float modChgMaxR, float modChgMinR, bool isRangeMod)
+            , int effectedCharNameID, AttribName statModfified, float modChgMaxR, float modChgMinR, bool isRangeMod)
         {
             this.turnNo = turnNo;
             this.causeType = causeType;
@@ -44,7 +44,7 @@ namespace Common
         // ON STAT MODIFIED 
 
         public CharModData(int turnNo, CauseType causeType, int causeName, int causedByCharID
-                                       , int effectedCharNameID, StatsName statModified,  float modCurrVal =-1, float baseVal =-1)
+                                       , int effectedCharNameID, AttribName statModified,  float modCurrVal =-1, float baseVal =-1)
         {
             this.turnNo = turnNo;
             this.causeType = causeType;

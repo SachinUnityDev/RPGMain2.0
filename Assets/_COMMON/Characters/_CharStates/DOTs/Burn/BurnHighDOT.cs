@@ -67,12 +67,12 @@ namespace Common
         {
             int buffID = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                        , charID, StatsName.dodge, +2, charStateModel.timeFrame, charStateModel.castTime, true);
+                        , charID, AttribName.dodge, +2, charStateModel.timeFrame, charStateModel.castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                    , charID, StatsName.waterRes, +24, charStateModel.timeFrame, charStateModel.castTime, true);
+                    , charID, AttribName.waterRes, +24, charStateModel.timeFrame, charStateModel.castTime, true);
             allBuffIds.Add(buffID);
 
             int immuneBuffID = 
@@ -89,17 +89,17 @@ namespace Common
         void ApplyRoundFX()
         {
             if (CombatService.Instance.currCharOnTurn.charModel.charID != charID) return;
-            StatData statData = charController.GetStat(StatsName.fireRes);
+            AttribData statData = charController.GetStat(AttribName.fireRes);
 
             if (statData.currValue > 60f)   // apply damage here
                 charController.ChangeStat(CauseType.CharState, (int)charStateName
-                    , charID, StatsName.health, Mathf.RoundToInt(-dmgPerRound * 0.50f));
+                    , charID, AttribName.health, Mathf.RoundToInt(-dmgPerRound * 0.50f));
             else
                 charController.ChangeStat(CauseType.CharState, (int)charStateName, charID
-                                                    , StatsName.health, -dmgPerRound);
+                                                    , AttribName.health, -dmgPerRound);
 
             charController.ChangeStat(CauseType.CharState, (int)charStateName, charID
-                                                                , StatsName.fortitude, -6);
+                                                                , AttribName.fortitude, -6);
 
         }
 

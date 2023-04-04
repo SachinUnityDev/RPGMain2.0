@@ -26,9 +26,9 @@ namespace Interactables
         {
             if(charStateData.charStateModel.charStateName == CharStateName.FirstBlood)
             {
-                StatData statData = charController.GetStat(StatsName.damage);
+                AttribData statData = charController.GetStat(AttribName.damage);
                 int buffID = charController.buffController.ApplyBuffOnRange(CauseType.SagaicGewgaw, charController.charModel.charID,
-               (int)sagaicGewgawName, StatsName.damage, statData.minRange*1.2f, statData.maxRange * 1.2f
+               (int)sagaicGewgawName, AttribName.damage, statData.minRange*1.2f, statData.maxRange * 1.2f
                , TimeFrame.Infinity, -1, true);
                 buffIndex.Add(buffID);
             }
@@ -41,12 +41,12 @@ namespace Interactables
                 if (c.charModel.cultType == CultureType.Kugharian)
                 {
                     int buffID = c.buffController.ApplyBuff(CauseType.SagaicGewgaw, charController.charModel.charID,
-                       (int)sagaicGewgawName, StatsName.morale, 2, TimeFrame.Infinity, -1, true);
+                       (int)sagaicGewgawName, AttribName.morale, 2, TimeFrame.Infinity, -1, true);
                     buffIndex.Add(buffID);
                 }
             }
             int buffID2 = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw, charController.charModel.charID,
-               (int)sagaicGewgawName, StatsName.airRes, valAir, TimeFrame.Infinity, -1, true);
+               (int)sagaicGewgawName, AttribName.airRes, valAir, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID2);
 
             CharStatesService.Instance.OnCharStateStart += OnCharStateStart;

@@ -110,7 +110,7 @@ namespace Combat
                 CombatEventService.Instance.OnEOR += Tick; 
             
             skillModel.lastUsedInRound = CombatService.Instance.currentRound;
-            charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.stamina, -skillModel.staminaReq);
+            charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.stamina, -skillModel.staminaReq);
            
            
         }  // actual Skill FX // container Skill Data

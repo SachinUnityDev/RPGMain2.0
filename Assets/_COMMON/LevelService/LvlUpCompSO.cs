@@ -9,9 +9,9 @@ namespace Common
     public class LvlDataComp
     {
         public Levels level;      
-        public List<StatData> allStatDataAuto = new List<StatData>();
-        public List<StatData> allStatDataOption1 = new List<StatData>();
-        public List<StatData> allStatDataOption2 = new List<StatData>();
+        public List<AttribData> allStatDataAuto = new List<AttribData>();
+        public List<AttribData> allStatDataOption1 = new List<AttribData>();
+        public List<AttribData> allStatDataOption2 = new List<AttribData>();
 
         public LvlDataComp()
         {

@@ -36,7 +36,6 @@ namespace Common
         Maghile,
         Bluetown, 
         Smaeru, 
-
     }
     public enum StateOfChar
     {
@@ -103,36 +102,12 @@ namespace Common
         EndOfNight,       
         EndOfQuest,
         Infinity,
-        Permanent,
     }
-
-
-
-    //public enum DOTType
-    //{
-    //    NotADOT,
-    //    IsDOT,
-    //    LowDOT,
-    //    MediumDOT,
-    //    HighDOT,
-    //}
-
     public enum StateFor   // char States
     {
-        Mutual,
-        Party,
+        Mutual, // Heroes + bestiary  
+        Heroes, // heroes only
     }
-
-    //public enum DialogueNames
-    //{
-    //    None,
-    //    KhalidFirst,
-    //    MeetKhalid,
-    //    RetrieveDebt, 
-
-
-
-    //}
 
     public enum Levels
     {

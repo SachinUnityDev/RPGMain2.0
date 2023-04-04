@@ -39,7 +39,7 @@ namespace Interactables
         public override void UnEquipPoetic()
         {
             charController.ChangeHungerNThirst(CauseType.PoeticGewgaw, (int)poeticGewgawName
-                , charController.charModel.charID, StatsName.hunger, valHunger, true);
+                , charController.charModel.charID, AttribName.hunger, valHunger, true);
 
             charController.charModel.hungerMod -= valHunger;
         }

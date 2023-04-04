@@ -19,10 +19,10 @@ namespace Common
         {
             allBuffIds.AddRange(
             CharService.Instance.ApplyBuffOnPartyExceptSelf(CauseType.CharState, (int)charStateName
-                         , charID, StatsName.luck, +1, charStateModel.timeFrame, charStateModel.castTime, true, CharMode.Ally));
+                         , charID, AttribName.luck, +1, charStateModel.timeFrame, charStateModel.castTime, true, CharMode.Ally));
             int buffId = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                  , charID, StatsName.haste, -1, charStateModel.timeFrame, charStateModel.castTime, true);
+                  , charID, AttribName.haste, -1, charStateModel.timeFrame, charStateModel.castTime, true);
             allBuffIds.Add(buffId); 
 
             int immuneBuffID =
@@ -51,11 +51,11 @@ namespace Common
 
         void Tick2(CharModData charModData)  //  change Stat subscribe 
         {
-            if (charModData.statModified != StatsName.luck)
+            if (charModData.statModified != AttribName.luck)
                 return;
 
-            float maxL = charController.GetStatChanceData(StatsName.luck).maxLimit;
-            if (charController.GetStat(StatsName.luck).currValue < maxL)  // Exit condition 
+            float maxL = charController.GetStatChanceData(AttribName.luck).maxLimit;
+            if (charController.GetStat(AttribName.luck).currValue < maxL)  // Exit condition 
             {
                 EndState();
             }

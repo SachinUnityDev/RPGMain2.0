@@ -26,12 +26,12 @@ namespace Interactables
             charController = InvService.Instance.charSelectController;
             int index =
               charController.buffController.ApplyBuffOnRange(CauseType.PrefixGenGewgaw, (int)prefixName
-               , charController.charModel.charID, StatsName.armor, 1,1, TimeFrame.Infinity, -1, true);
+               , charController.charModel.charID, AttribName.armor, 1,1, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
             index =
               charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
-               , charController.charModel.charID, StatsName.dodge, 1, TimeFrame.Infinity, -1, true);
+               , charController.charModel.charID, AttribName.dodge, 1, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }
         public void FolkloricInit()
@@ -46,12 +46,12 @@ namespace Interactables
             charController = InvService.Instance.charSelectController;
             int index =
               charController.buffController.ApplyBuffOnRange(CauseType.PrefixGenGewgaw, (int)prefixName
-               , charController.charModel.charID, StatsName.armor, 1, 2, TimeFrame.Infinity, -1, true);
+               , charController.charModel.charID, AttribName.armor, 1, 2, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
             index =
               charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
-               , charController.charModel.charID, StatsName.dodge, 2, TimeFrame.Infinity, -1, true);
+               , charController.charModel.charID, AttribName.dodge, 2, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }           
 
@@ -70,17 +70,17 @@ namespace Interactables
             charController = InvService.Instance.charSelectController;
             int index =
               charController.buffController.ApplyBuffOnRange(CauseType.PrefixGenGewgaw, (int)prefixName
-               , charController.charModel.charID, StatsName.armor, 2, 2, TimeFrame.Infinity, -1, true);
+               , charController.charModel.charID, AttribName.armor, 2, 2, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
             index =
               charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
-               , charController.charModel.charID, StatsName.dodge, 3, TimeFrame.Infinity, -1, true);
+               , charController.charModel.charID, AttribName.dodge, 3, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
             index =
              charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
-                , charController.charModel.charID, StatsName.earthRes, valER, TimeFrame.Infinity, -1, true);
+                , charController.charModel.charID, AttribName.earthRes, valER, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }
         public void RemoveFXEpic()

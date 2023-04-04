@@ -61,12 +61,12 @@ MonoBehaviour:
   StatsList:
   - statsName: 1
     currValue: 44
-    baseValue: 0
+    baseValue: 44
     desc: Health is health, you know it...
     minRange: 0
     maxRange: 0
     minLimit: 0
-    maxLimit: 44
+    maxLimit: 100
     isClamped: 0
   - statsName: 2
     currValue: 33

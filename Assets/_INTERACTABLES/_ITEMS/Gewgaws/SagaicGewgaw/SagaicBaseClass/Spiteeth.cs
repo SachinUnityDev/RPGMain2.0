@@ -43,17 +43,17 @@ namespace Interactables
             // If Ally: Spider: +4 Vigor and WP
             // If Ally: Spider: +1 Hp and Stamina Regen
            int buffID = spiderController.buffController.ApplyBuff(CauseType.SagaicGewgaw, spiderController.charModel.charID,
-                      (int)sagaicGewgawName, StatsName.vigor, 4, TimeFrame.Infinity, -1, true);
+                      (int)sagaicGewgawName, AttribName.vigor, 4, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
             buffID = spiderController.buffController.ApplyBuff(CauseType.SagaicGewgaw, spiderController.charModel.charID,
-                      (int)sagaicGewgawName, StatsName.willpower, 4, TimeFrame.Infinity, -1, true);
+                      (int)sagaicGewgawName, AttribName.willpower, 4, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
 
             buffID = spiderController.buffController.ApplyBuff(CauseType.SagaicGewgaw, spiderController.charModel.charID,
-                      (int)sagaicGewgawName, StatsName.staminaRegen, 1, TimeFrame.Infinity, -1, true);
+                      (int)sagaicGewgawName, AttribName.staminaRegen, 1, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
             buffID = spiderController.buffController.ApplyBuff(CauseType.SagaicGewgaw, spiderController.charModel.charID,
-                      (int)sagaicGewgawName, StatsName.hpRegen, 1, TimeFrame.Infinity, -1, true);
+                      (int)sagaicGewgawName, AttribName.hpRegen, 1, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
         }
         void OnStartOfCombat()
@@ -61,7 +61,7 @@ namespace Interactables
             foreach (CharController c in CombatService.Instance.allEnemiesInCombat)
             {
                 int buffID=   c.buffController.ApplyBuff(CauseType.SagaicGewgaw, charController.charModel.charID,
-                        (int)sagaicGewgawName, StatsName.haste, -2, TimeFrame.EndOfRound, 3, false);
+                        (int)sagaicGewgawName, AttribName.haste, -2, TimeFrame.EndOfRound, 3, false);
                         buffIndex.Add(buffID);
             }
         }
@@ -77,11 +77,11 @@ namespace Interactables
 
             // Dark and Earth 
             int buffID = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw, charController.charModel.charID,
-                        (int)sagaicGewgawName, StatsName.darkRes, valDark, TimeFrame.Infinity, -1, true);
+                        (int)sagaicGewgawName, AttribName.darkRes, valDark, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw, charController.charModel.charID,
-                        (int)sagaicGewgawName, StatsName.earthRes, valEarth, TimeFrame.Infinity, -1, true);
+                        (int)sagaicGewgawName, AttribName.earthRes, valEarth, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
 
             // if spider already there in party when gewgaw put in slot 

@@ -22,7 +22,7 @@ namespace Common
            //	Immune to Lightfooted
 
             int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-            , charID, StatsName.dodge, -6, charStateModel.timeFrame, charStateModel.castTime, true);
+            , charID, AttribName.dodge, -6, charStateModel.timeFrame, charStateModel.castTime, true);
             allBuffIds.Add(buffID);
 
             int immuneBuffID = charController.charStateController

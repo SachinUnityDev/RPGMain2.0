@@ -14,7 +14,7 @@ namespace Common
             this.charController = charController;
             // -3 Morale in Jungle
             charController.landscapeController.ApplyLandscapeBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                               LandscapeNames.Jungle , StatsName.morale, -3); 
+                                                               LandscapeNames.Jungle , AttribName.morale, -3); 
 
 
         }

@@ -65,7 +65,7 @@ namespace Combat
             {
                 dyna.charGO.GetComponent<CharController>()
                     .buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                    , StatsName.focus, -2, TimeFrame.EndOfRound, skillModel.castTime, false);
+                    , AttribName.focus, -2, TimeFrame.EndOfRound, skillModel.castTime, false);
             }
 
         }

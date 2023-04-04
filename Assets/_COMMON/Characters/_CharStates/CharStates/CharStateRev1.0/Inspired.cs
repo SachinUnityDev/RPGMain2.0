@@ -19,10 +19,10 @@ namespace Common
         {
             //+1 Morale on allies - 1 Focus on self    Immune to Despaired
             CharService.Instance.ApplyBuffOnPartyExceptSelf(CauseType.CharState, (int)charStateName
-                               , charID, StatsName.morale, +1, charStateModel.timeFrame, charStateModel.castTime, true, CharMode.Ally);
+                               , charID, AttribName.morale, +1, charStateModel.timeFrame, charStateModel.castTime, true, CharMode.Ally);
 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                  , charID, StatsName.focus, -1, charStateModel.timeFrame, charStateModel.castTime, true);
+                  , charID, AttribName.focus, -1, charStateModel.timeFrame, charStateModel.castTime, true);
 
             charController.charStateController
                 .ApplyImmunityBuff(CauseType.CharState, (int)charStateName
@@ -52,11 +52,11 @@ namespace Common
 
         void Tick2(CharModData charModData)  //  change Stat subscribe 
         {
-            if (charModData.statModified != StatsName.morale)
+            if (charModData.statModified != AttribName.morale)
                 return;
 
-            float maxL = charController.GetStatChanceData(StatsName.morale).maxLimit;
-            if (charController.GetStat(StatsName.morale).currValue < maxL)  // Exit condition 
+            float maxL = charController.GetStatChanceData(AttribName.morale).maxLimit;
+            if (charController.GetStat(AttribName.morale).currValue < maxL)  // Exit condition 
             {
                 EndState();
             }

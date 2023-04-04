@@ -15,7 +15,7 @@ namespace Common
                 {  
                     int charID = charCtrl.charModel.charID;
                     charCtrl.buffController.ApplyBuff(CauseType.Landscape, (int)LandscapeNames.Field
-                                , charID, StatsName.airRes, -12, TimeFrame.Infinity, 1, false); 
+                                , charID, AttribName.airRes, -12, TimeFrame.Infinity, 1, false); 
                 }
             }
             public override void TrapNegative()

@@ -48,7 +48,7 @@ namespace Combat
         public override void ApplyFX2()
         {
             targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName
-                , charID, StatsName.haste, -2, TimeFrame.EndOfRound, skillModel.castTime,false);
+                , charID, AttribName.haste, -2, TimeFrame.EndOfRound, skillModel.castTime,false);
         }
 
         public override void ApplyFX3()

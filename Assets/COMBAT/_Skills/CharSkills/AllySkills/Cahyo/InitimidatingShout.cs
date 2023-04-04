@@ -53,7 +53,7 @@ namespace Combat
 
 
             skillModel.lastUsedInRound = CombatService.Instance.currentRound;
-            charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.stamina, -skillModel.staminaReq);
+            charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.stamina, -skillModel.staminaReq);
         }
         public override void DisplayFX1()
         {
@@ -66,10 +66,10 @@ namespace Combat
         public override void ApplyFX1()
         {
 
-            charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, StatsName.acc, +3
+            charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, AttribName.acc, +3
                 , TimeFrame.EndOfRound, skillModel.castTime, true); 
              
-            charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, StatsName.dodge, +3
+            charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, AttribName.dodge, +3
                 , TimeFrame.EndOfRound, skillModel.castTime, true);
         }
 
@@ -84,7 +84,7 @@ namespace Combat
         
             foreach (var dyna in targetsDynas)
             {
-                dyna.charGO.GetComponent<CharController>().buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, StatsName.morale, -2
+                dyna.charGO.GetComponent<CharController>().buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, AttribName.morale, -2
                     , TimeFrame.EndOfRound, skillModel.castTime, true);
 
             }

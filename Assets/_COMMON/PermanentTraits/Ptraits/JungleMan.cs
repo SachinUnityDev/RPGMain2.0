@@ -26,9 +26,9 @@ namespace Common
         {
             if(_partyLoc  != LandscapeNames.Jungle && prevPartyLoc == LandscapeNames.Jungle)
             {
-                charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, StatsName.morale, -3);
+                charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.morale, -3);
 
-                charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, StatsName.luck, -3);
+                charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.luck, -3);
                 prevPartyLoc = _partyLoc;
 
 
@@ -37,9 +37,9 @@ namespace Common
 
             if (_partyLoc == LandscapeNames.Jungle)
             {
-                charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, StatsName.morale, 3);
+                charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.morale, 3);
 
-                charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, StatsName.luck, 3);
+                charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.luck, 3);
                 prevPartyLoc = _partyLoc; 
 
             }

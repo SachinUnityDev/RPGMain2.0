@@ -71,7 +71,7 @@ namespace Combat
 
         public override void ApplyFX2()
         {
-            charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.fortitude
+            charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.fortitude
                 ,+3 * chance);
         }
 

@@ -53,7 +53,7 @@ namespace Interactables
                 || GameService.Instance.gameModel.landscapeNames == LandscapeNames.Jungle)
             {
                 int buffID = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw, charController.charModel.charID,
-                    (int)sagaicGewgawName, StatsName.luck, valLuck, TimeFrame.EndOfRound, 3, true);
+                    (int)sagaicGewgawName, AttribName.luck, valLuck, TimeFrame.EndOfRound, 3, true);
                 buffIndex.Add(buffID);
             }
         }

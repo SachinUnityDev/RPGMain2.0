@@ -31,9 +31,9 @@ namespace Interactables
             int castTime = (int)UnityEngine.Random.Range(potionSO.minCastTime, potionSO.maxCastTime); 
 
             charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                       , StatsName.luck, Random.Range(2,5), TimeFrame.EndOfRound, castTime, true);
+                       , AttribName.luck, Random.Range(2,5), TimeFrame.EndOfRound, castTime, true);
             charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                      , StatsName.dodge, -2f, TimeFrame.EndOfRound, castTime, true);
+                      , AttribName.dodge, -2f, TimeFrame.EndOfRound, castTime, true);
         }
 
         public void ApplyConsumableFX()

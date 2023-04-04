@@ -16,7 +16,7 @@ namespace Quest
         public CauseType causeType;
         public int causeName;
         public LandscapeNames landscapeName;            
-        public StatsName statModified;        
+        public AttribName statModified;        
         public float val;
         public bool isBuff;
         public float minVal; 
@@ -24,7 +24,7 @@ namespace Quest
         public bool isApplied; 
 
         public LandBuffData(int buffID, CauseType causeType, int causeName, LandscapeNames landscapeName,
-                        StatsName statModified, float val, bool isBuff = true
+                        AttribName statModified, float val, bool isBuff = true
                         , float minVal =0, float maxVal=0, bool isApplied = false)
         {
             this.buffID = buffID;
@@ -58,7 +58,7 @@ namespace Quest
         }
 
         public int ApplyLandscapeBuff(CauseType causeType, int causeName
-            , LandscapeNames landScapeName, StatsName statName, float val)
+            , LandscapeNames landScapeName, AttribName statName, float val)
         {
             buffIndex++;
             LandBuffData landBuffData = new LandBuffData(buffIndex, causeType, causeName,

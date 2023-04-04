@@ -34,7 +34,7 @@ namespace Interactables
             allLines.Clear();
 
             charController.buffController.ApplyBuffOnRange(CauseType.ArmorType, (int)armorType
-            , charController.charModel.charID, StatsName.armor, armorSO.minArmor
+            , charController.charModel.charID, AttribName.armor, armorSO.minArmor
             , armorSO.maxArmor, TimeFrame.EndOfDay, 3, true);
 
             string str = $"{armorSO.minArmor}-{armorSO.maxArmor} Armor for 3 days";

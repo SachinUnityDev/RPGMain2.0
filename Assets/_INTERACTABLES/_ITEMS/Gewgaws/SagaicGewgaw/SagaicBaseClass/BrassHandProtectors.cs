@@ -29,15 +29,15 @@ namespace Interactables
         {
             charController = InvService.Instance.charSelectController;
             int buffID = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw, charController.charModel.charID,
-                   (int)sagaicGewgawName, StatsName.airRes, valAir, TimeFrame.Infinity, -1, true);
+                   (int)sagaicGewgawName, AttribName.airRes, valAir, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw, charController.charModel.charID,
-                        (int)sagaicGewgawName, StatsName.earthRes, valEarth, TimeFrame.Infinity, -1, true);
+                        (int)sagaicGewgawName, AttribName.earthRes, valEarth, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
 
             buffID = charController.buffController.ApplyBuffOnRange(CauseType.SagaicGewgaw, charController.charModel.charID,
-                        (int)sagaicGewgawName, StatsName.armor, 1, 2, TimeFrame.Infinity, -1, true);
+                        (int)sagaicGewgawName, AttribName.armor, 1, 2, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
         }
 

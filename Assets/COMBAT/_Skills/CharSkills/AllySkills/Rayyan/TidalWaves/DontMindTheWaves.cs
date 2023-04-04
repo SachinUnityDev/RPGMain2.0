@@ -76,12 +76,12 @@ namespace Combat
             foreach (DynamicPosData dyna in allAlliesINFront)
             {
                 dyna.charGO.GetComponent<CharController>().buffController.ApplyBuff(CauseType.CharSkill
-                    , (int)skillName, charID, StatsName.haste, 2, TimeFrame.EndOfRound, skillModel.castTime, true);
+                    , (int)skillName, charID, AttribName.haste, 2, TimeFrame.EndOfRound, skillModel.castTime, true);
             }
             foreach (DynamicPosData dyna in allEnemies)
             {
                 dyna.charGO.GetComponent<CharController>().buffController.ApplyBuff(CauseType.CharSkill, (int)skillName
-                    , charID, StatsName.haste, -2, TimeFrame.EndOfRound, skillModel.castTime, false);
+                    , charID, AttribName.haste, -2, TimeFrame.EndOfRound, skillModel.castTime, false);
             }
         }
 

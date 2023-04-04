@@ -52,7 +52,7 @@ namespace Combat
             StaminaIncr = UnityEngine.Random.Range(2, 4);
             CombatEventService.Instance.OnDmgDelivered += StaminaRes;
             charController.charModel.staminaRegen.currValue += StaminaIncr;
-            charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, StatsName.haste
+            charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, AttribName.haste
                 , -3f, TimeFrame.EndOfRound, skillModel.castTime, false);
             charController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName,
                                                             DamageType.Heal, UnityEngine.Random.Range(4f, 9f), false);
@@ -62,11 +62,11 @@ namespace Combat
         {
             //  +% 60 Armor, 
 
-            StatData statData = charController.GetStat(StatsName.armor);
+            AttribData statData = charController.GetStat(AttribName.armor);
              minArmor = statData.minRange * 0.6f;
              maxArmor = statData.maxRange * 0.6f;
             charController.buffController.ApplyBuffOnRange(CauseType.CharSkill, (int)skillName, charID
-                , StatsName.armor, minArmor, maxArmor, TimeFrame.EndOfRound, skillModel.castTime, true); 
+                , AttribName.armor, minArmor, maxArmor, TimeFrame.EndOfRound, skillModel.castTime, true); 
 
         }
 
@@ -74,8 +74,8 @@ namespace Combat
         {
             //+14 Elemental resistances(water, fire, earth, air), Ignore incoming stamina dmg
             charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, 
-                StatsName.waterRes, +14, TimeFrame.EndOfRound, skillModel.castTime, true);
-            charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, StatsName.fireRes, +14,
+                AttribName.waterRes, +14, TimeFrame.EndOfRound, skillModel.castTime, true);
+            charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, AttribName.fireRes, +14,
                 TimeFrame.EndOfRound, skillModel.castTime, true);
           
         }

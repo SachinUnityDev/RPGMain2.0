@@ -31,13 +31,13 @@ namespace Interactables
 
             int index =
                   charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
-                          , charController.charModel.charID, StatsName.willpower, val21, TimeFrame.Infinity, -1, true);
+                          , charController.charModel.charID, AttribName.willpower, val21, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
      
             index =
                 charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
-                        , charController.charModel.charID, StatsName.vigor, val22, TimeFrame.Infinity, -1, true);
+                        , charController.charModel.charID, AttribName.vigor, val22, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }
         public void EpicInit()
@@ -56,13 +56,13 @@ namespace Interactables
            
             int index =
                   charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
-                          , charController.charModel.charID, StatsName.willpower, val31, TimeFrame.Infinity, -1, true);
+                          , charController.charModel.charID, AttribName.willpower, val31, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
           
             index =
                 charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
-                        , charController.charModel.charID, StatsName.vigor, val32, TimeFrame.Infinity, -1, true);
+                        , charController.charModel.charID, AttribName.vigor, val32, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }
         public void RemoveFXFolkloric()

@@ -41,24 +41,24 @@ namespace Common
 
         }
 
-        void ApplyMagicalDmg(StatsName _statsName, float value)
+        void ApplyMagicalDmg(AttribName _statsName, float value)
         {
 
                 switch (_statsName)
                 {
                     
-                    case StatsName.fireRes:
+                    case AttribName.fireRes:
 
                         break;
-                    case StatsName.earthRes:
+                    case AttribName.earthRes:
                         break;
-                    case StatsName.waterRes:
+                    case AttribName.waterRes:
                         break;
-                    case StatsName.airRes:
+                    case AttribName.airRes:
                         break;
-                    case StatsName.lightRes:
+                    case AttribName.lightRes:
                         break;
-                    case StatsName.darkRes:
+                    case AttribName.darkRes:
                         break;
                     default:
                         break;

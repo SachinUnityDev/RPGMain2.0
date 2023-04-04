@@ -20,17 +20,17 @@ namespace Common
             //.Cannot use move skill Incli
 
            int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                       , charID, StatsName.focus, -3, charStateModel.timeFrame, charStateModel.castTime, true);
+                       , charID, AttribName.focus, -3, charStateModel.timeFrame, charStateModel.castTime, true);
             allBuffIds.Add(buffID);
             
             buffID = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                     , charID, StatsName.earthRes, +24, charStateModel.timeFrame, charStateModel.castTime, true);
+                     , charID, AttribName.earthRes, +24, charStateModel.timeFrame, charStateModel.castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = 
             charController.buffController.ApplyBuffOnRange(CauseType.CharState, (int)charStateName
-                       , charID, StatsName.armor, +1, +3, charStateModel.timeFrame, charStateModel.castTime, true);
+                       , charID, AttribName.armor, +1, +3, charStateModel.timeFrame, charStateModel.castTime, true);
             allBuffIds.Add(buffID);
 
             List<int> immuneBuffIDs = charController.charStateController

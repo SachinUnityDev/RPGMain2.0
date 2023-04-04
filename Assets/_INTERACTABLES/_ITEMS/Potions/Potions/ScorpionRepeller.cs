@@ -37,11 +37,11 @@ namespace Interactables
            
 
             buffID = charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                   , StatsName.earthRes, Random.Range(24f, 37f), TimeFrame.EndOfRound, castTime, true);
+                   , AttribName.earthRes, Random.Range(24f, 37f), TimeFrame.EndOfRound, castTime, true);
             allBuffs.Add(buffID);
 
             buffID= charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                    , StatsName.airRes, Random.Range(-12f, -19f), TimeFrame.EndOfRound, castTime, true);
+                    , AttribName.airRes, Random.Range(-12f, -19f), TimeFrame.EndOfRound, castTime, true);
             allBuffs.Add(buffID);
         }
 

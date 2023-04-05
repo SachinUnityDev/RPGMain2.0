@@ -24,7 +24,7 @@ namespace Interactables
             if(foodSO.hpHealMax >0 && foodSO.hpHealMin >0)  
              valHp = UnityEngine.Random.Range(foodSO.hpHealMin, foodSO.hpHealMax + 1);     
             if(valHp > 0)
-                charController.ChangeStat(CauseType.Food, (int)foodName, charID, AttribName.health, valHp);
+                charController.ChangeStat(CauseType.Food, (int)foodName, charID, StatName.health, valHp);
 
             // hunger and thirst to be added
 

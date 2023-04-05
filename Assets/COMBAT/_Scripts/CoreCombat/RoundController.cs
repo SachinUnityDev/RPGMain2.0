@@ -95,7 +95,7 @@ namespace Combat
         public void OrderByRecursion2(AttribName _statName)
         {
             charTurnOrder = CharService.Instance.charsInPlayControllers.
-                             OrderByDescending(x => x.GetStat(_statName).currValue).ToList();           
+                             OrderByDescending(x => x.GetAttrib(_statName).currValue).ToList();           
         }
 
     }

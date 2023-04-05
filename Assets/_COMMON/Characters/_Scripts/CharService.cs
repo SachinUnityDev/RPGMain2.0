@@ -410,7 +410,7 @@ namespace Common
 
 
         #region GETTER
-        public CharController HasHighestStat(AttribName _statNames, CharMode _charMode)
+        public CharController HasHighestStat(StatName _statNames, CharMode _charMode)
         {
             float maxValue = 0;
             CharController maxValChar = null; 
@@ -437,7 +437,7 @@ namespace Common
             {
                 if (c.charModel.charMode == _charMode)
                 {
-                    float currVal = c.GetStat(_statNames).currValue;
+                    float currVal = c.GetAttrib(_statNames).currValue;
                     if (currVal < minValue)
                     {
                         minValue = currVal;
@@ -496,40 +496,7 @@ namespace Common
 
 #endregion
     }
-
-
 }
 
 
-
-// public CharController CreateCharsCtrl(CharNames charName)  // LATEST ONE 
-//   {
-//CharController charCtrl = new CharController();
-//foreach (CharacterSO c in allAllySO)
-//{
-//    if (charName == c.charName)
-//    {        
-//        charCtrl.InitiatizeController(c);
-
-//        CharMode charMode = charCtrl.charModel.charMode;
-//        if (charMode == CharMode.Ally)
-//        {
-//            allyInPlayControllers.Add(charCtrl);
-
-//        }
-//        //if (charMode == CharMode.Enemy)
-//        //{
-//        //    enemyInPlayControllers.Add(charCtrl);
-//        //    enemyInPlay.Add(go);
-//        //    //  CombatService.Instance.enemyInCombat.Add(charCtrl); 
-
-//        //}
-//        charsInPlayControllers.Add(charCtrl);
-//        charsInPlay.Add(go);
-//        LevelService.Instance.LevelUpInit(charCtrl);
-
-//    }
-//}
-// return charCtrl;
-//  }
 

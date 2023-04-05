@@ -86,7 +86,7 @@ namespace Combat
             // get focus statChance Data of performers focus 
             // depending on that decide ..TO be decided 
 
-            float focusVal = charController.GetStat(AttribName.focus).currValue;
+            float focusVal = charController.GetAttrib(AttribName.focus).currValue;
             float focusChance = 100f - charController.GetStatChance(AttribName.focus, focusVal);
 
             if (focusVal == 0)
@@ -134,7 +134,7 @@ namespace Combat
         void ReduceDmgPercent()
         {
             int charID = charController.charModel.charID;
-            AttribData dmg = charController.GetStat(AttribName.damage);
+            AttribData dmg = charController.GetAttrib(AttribName.damage);
             dmgMin = dmg.minRange;
             dmgMax = dmg.maxRange;
             float chgMin = 0.2f * dmgMin;
@@ -144,13 +144,13 @@ namespace Combat
         }
         void RevertDamageRange()
         {
-            charController.GetStat(AttribName.damage).minRange = dmgMin;
-            charController.GetStat(AttribName.damage).maxRange = dmgMax;
+            charController.GetAttrib(AttribName.damage).minRange = dmgMin;
+            charController.GetAttrib(AttribName.damage).maxRange = dmgMax;
         }
 
         public bool AccuracyCheck()// Physical 
         {
-            float accVal = charController.GetStat(AttribName.acc).currValue;
+            float accVal = charController.GetAttrib(AttribName.acc).currValue;
             float accChance = charController.GetStatChance(AttribName.acc, accVal);
 
             if (accVal == 0)

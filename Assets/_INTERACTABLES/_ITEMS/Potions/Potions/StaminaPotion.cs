@@ -40,10 +40,10 @@ namespace Interactables
                             , AttribName.willpower, -1, TimeFrame.EndOfRound, castTime, true);
             allBuffs.Add(buffID);
 
-            AttribData staminaData = charController.GetStat(AttribName.stamina);
+            StatData staminaData = charController.GetStat(StatName.stamina);
             float val = (Random.Range(80f, 100f) * staminaData.maxLimit) / 100f;
            
-            charController.ChangeStat(CauseType.Potions, (int)potionName, charID, AttribName.stamina, val);
+            charController.ChangeStat(CauseType.Potions, (int)potionName, charID, StatName.stamina, val);
         }
 
         public void ApplyConsumableFX()

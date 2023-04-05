@@ -27,7 +27,7 @@ namespace Common
             charController.charStateController
                 .ApplyImmunityBuff(CauseType.CharState, (int)charStateName
                    , charID, CharStateName.Despaired, charStateModel.timeFrame, charStateModel.castTime);
-            charController.OnStatCurrValSet += Tick2;
+            charController.OnAttribCurrValSet += Tick2;
         }
 
         public override void StateApplyVFX()
@@ -50,13 +50,13 @@ namespace Common
             // relieve charController from string duty ...
         }
 
-        void Tick2(CharModData charModData)  //  change Stat subscribe 
+        void Tick2(AttribModData charModData)  //  change Stat subscribe 
         {
-            if (charModData.statModified != AttribName.morale)
+            if (charModData.attribModified != AttribName.morale)
                 return;
 
-            float maxL = charController.GetStatChanceData(AttribName.morale).maxLimit;
-            if (charController.GetStat(AttribName.morale).currValue < maxL)  // Exit condition 
+            float maxL = charController.GetAttrib(AttribName.morale).maxLimit;
+            if (charController.GetAttrib(AttribName.morale).currValue < maxL)  // Exit condition 
             {
                 EndState();
             }

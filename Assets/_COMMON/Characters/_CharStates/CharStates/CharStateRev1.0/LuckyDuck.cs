@@ -31,7 +31,7 @@ namespace Common
                        , charID, CharStateName.Feebleminded, charStateModel.timeFrame, charStateModel.castTime);
             allImmunityBuffs.Add(immuneBuffID);
 
-            charController.OnStatCurrValSet += Tick2;
+            charController.OnAttribCurrValSet += Tick2;
 
         }
 
@@ -49,13 +49,13 @@ namespace Common
             charStateModel.charStateCardStrs.Add(str2);  
         }
 
-        void Tick2(CharModData charModData)  //  change Stat subscribe 
+        void Tick2(AttribModData charModData)  //  change Stat subscribe 
         {
-            if (charModData.statModified != AttribName.luck)
+            if (charModData.attribModified != AttribName.luck)
                 return;
 
-            float maxL = charController.GetStatChanceData(AttribName.luck).maxLimit;
-            if (charController.GetStat(AttribName.luck).currValue < maxL)  // Exit condition 
+            float maxL = charController.GetAttrib(AttribName.luck).maxLimit;
+            if (charController.GetAttrib(AttribName.luck).currValue < maxL)  // Exit condition 
             {
                 EndState();
             }

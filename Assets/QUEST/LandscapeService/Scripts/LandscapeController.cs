@@ -84,14 +84,14 @@ namespace Quest
 
         void ApplyLandBuffFX(LandBuffData landBuff)
         {
-            charController.ChangeStat(landBuff.causeType, landBuff.causeName
+            charController.ChangeAttrib(landBuff.causeType, landBuff.causeName
              , charController.charModel.charID, landBuff.statModified, landBuff.val);
         }
 
         public void RemoveBuffFX(LandBuffData landBuff)
         {
             // remove the statchange caused by landscape
-            charController.ChangeStat(landBuff.causeType, landBuff.causeName
+            charController.ChangeAttrib(landBuff.causeType, landBuff.causeName
                 , charController.charModel.charID, landBuff.statModified, -landBuff.val); 
 
         }

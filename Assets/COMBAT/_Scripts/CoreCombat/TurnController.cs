@@ -20,29 +20,22 @@ namespace Combat
            
         }
 
-  
+        //public CharController GetCharWithMax(AttribName _StatName, List<CharController> charList)
+        //{
+        //    float maxValue= 0;
+        //    CharController maxValueChar = charList[0]; 
+        //    foreach (CharController charCtrl in charList)
+        //    {
+        //        AttribData statdata = charCtrl.GetAttrib(_StatName);
+        //        if (statdata.currValue > maxValue)
+        //        {
+        //            maxValue = statdata.currValue;
+        //            maxValueChar = charCtrl; 
+        //        }                    
+        //    }
 
-
-     
-
-       
-
-        public CharController GetCharWithMax(AttribName _StatName, List<CharController> charList)
-        {
-            float maxValue= 0;
-            CharController maxValueChar = charList[0]; 
-            foreach (CharController charCtrl in charList)
-            {
-                AttribData statdata = charCtrl.GetStat(_StatName);
-                if (statdata.currValue > maxValue)
-                {
-                    maxValue = statdata.currValue;
-                    maxValueChar = charCtrl; 
-                }                    
-            }
-
-            return maxValueChar; 
-        }
+        //    return maxValueChar; 
+        //}
 
 
     }

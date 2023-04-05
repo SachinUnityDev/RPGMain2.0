@@ -37,7 +37,7 @@ namespace Interactables
                                 , AttribName.vigor, -2, TimeFrame.EndOfRound, castTime, true);
             allBuffs.Add(buffID);   
 
-            AttribData hpData = charController.GetStat(AttribName.health);
+            StatData hpData = charController.GetStat(StatName.health);
             float val = (Random.Range(40f, 60f) * hpData.maxLimit) / 100f;
             charController.damageController
                 .ApplyDamage(charController, CauseType.Potions, (int)potionName, DamageType.Heal, val, false);

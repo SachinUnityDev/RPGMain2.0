@@ -28,7 +28,7 @@ namespace Common
                 .ApplyImmunityBuff(CauseType.CharState, (int)charStateName
                    , charID, CharStateName.Rooted, charStateModel.timeFrame, charStateModel.castTime);
             allImmunityBuffs.Add(immuneBuff);
-            charController.OnStatCurrValSet += Tick2;
+            charController.OnAttribCurrValSet += Tick2;
         }
 
      
@@ -49,13 +49,13 @@ namespace Common
             charStateModel.charStateCardStrs.Add(str2);
         }
 
-        void Tick2(CharModData charModData)  //  change Stat subscribe 
+        void Tick2(AttribModData charModData)  //  change Stat subscribe 
         {
-            if (charModData.statModified != AttribName.haste)
+            if (charModData.attribModified != AttribName.haste)
                 return;
 
-            float maxL = charController.GetStatChanceData(AttribName.haste).maxLimit;
-            if (charController.GetStat(AttribName.haste).currValue < maxL)  // Exit condition 
+            float maxL = charController.GetAttrib(AttribName.haste).maxLimit;
+            if (charController.GetAttrib(AttribName.haste).currValue < maxL)  // Exit condition 
             {
                 EndState();
             }

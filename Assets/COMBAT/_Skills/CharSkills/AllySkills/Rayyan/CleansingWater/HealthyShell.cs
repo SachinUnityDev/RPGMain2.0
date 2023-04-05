@@ -40,11 +40,11 @@ namespace Combat
         {
             if (IsTargetAlly())
             {
-                AttribData statData = targetController.GetStat(AttribName.armor);
-                float armorMin = statData.minRange;
-                float armorMax = statData.maxRange;
-                 chgMin = statData.minRange * 0.6f;
-                 chgMax = statData.maxRange * 0.6f;
+                AttribData attribData = targetController.GetAttrib(AttribName.armor);
+                float armorMin = attribData.minRange;
+                float armorMax = attribData.maxRange;
+                 chgMin = attribData.minRange * 0.6f;
+                 chgMax = attribData.maxRange * 0.6f;
 
                 targetController.buffController.ApplyBuffOnRange(CauseType.CharSkill, (int)skillName, charID
                                                      , AttribName.armor, chgMin, chgMax, TimeFrame.EndOfRound

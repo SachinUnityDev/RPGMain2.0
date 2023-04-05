@@ -26,7 +26,7 @@ namespace Interactables
         {
             if(charStateData.charStateModel.charStateName == CharStateName.FirstBlood)
             {
-                AttribData statData = charController.GetStat(AttribName.damage);
+                AttribData statData = charController.GetAttrib(AttribName.damage);
                 int buffID = charController.buffController.ApplyBuffOnRange(CauseType.SagaicGewgaw, charController.charModel.charID,
                (int)sagaicGewgawName, AttribName.damage, statData.minRange*1.2f, statData.maxRange * 1.2f
                , TimeFrame.Infinity, -1, true);

@@ -53,7 +53,7 @@ namespace Combat
 
 
             skillModel.lastUsedInRound = CombatService.Instance.currentRound;
-            charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.stamina, -skillModel.staminaReq);
+            charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatName.stamina, -skillModel.staminaReq);
         }
         public override void DisplayFX1()
         {

@@ -49,7 +49,7 @@ namespace Common
                     charStateData.charStateModel.charStateName == CharStateName.BurnHighDOT)
              
                     charController.ChangeStat(CauseType.CharState, (int)charStateName, charID
-                                                       , AttribName.fortitude, 12);
+                                                       , StatName.fortitude, 12);
         }
         public override void StateApplyVFX()
         {

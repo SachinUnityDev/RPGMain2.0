@@ -34,7 +34,7 @@ namespace Combat
 
             if (isTargetBleeding)
             {
-                targetController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.luck, +4, false); 
+                targetController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.luck, +4, false); 
             }
         }
 

@@ -43,7 +43,7 @@ namespace Interactables
             }
             else
             {
-                statData = charModel.statsList.Find(t => t.AttribName == statName);
+                statData = charModel.attribList.Find(t => t.AttribName == statName);
                 PopulateDesc();
                 if (statName == AttribName.armor || statName == AttribName.damage)
                 {

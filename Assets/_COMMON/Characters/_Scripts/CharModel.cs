@@ -21,6 +21,20 @@ namespace Common
         public float maxLimit; 
         public bool isClamped = false; 
     }
+    [System.Serializable]
+    public class StatData
+    {
+        public StatName statName;
+        public float currValue;        
+        public string desc;
+        public float minLimit;
+        public float maxLimit;
+        public bool isClamped = false;
+    }
+
+
+
+
 
     [System.Serializable]
     public class CharModel
@@ -96,8 +110,8 @@ namespace Common
         
         public int fortitudeOrg = 0;
         public int lootBonus = 0;
-        public AttribData staminaRegen = new AttribData();
-        public AttribData HpRegen = new AttribData(); 
+        //public AttribData staminaRegen = new AttribData();
+        //public AttribData HpRegen = new AttribData(); 
         public List<PermTraitName> permanentTraitList;
 
         [Header("Grid related")]
@@ -122,8 +136,8 @@ namespace Common
         public ArmorType armorType; 
 
         [Header("Stats")]
-        public List<AttribData> statsList = new List<AttribData>();
-
+        public List<AttribData> attribList = new List<AttribData>();
+        public List<StatData> statList = new List<StatData>();
         public float GetDeltaRatio()
         {
             List<LvlExpData> allLvlExpData =
@@ -220,8 +234,9 @@ namespace Common
             fortitudeOrg = 0;  // TBD 
             lootBonus = 0;
 
-            staminaRegen.currValue = 2;
-            HpRegen.currValue = 0; 
+
+            //staminaRegen.currValue = 2;
+            //HpRegen.currValue = 0; 
 
 
             // GRID Related
@@ -232,28 +247,28 @@ namespace Common
             enchantableGem4Weapon = _charSO.enchantableGem4Weapon;
             armorType = _charSO.armorType;
 
-            statsList = new List<AttribData>();
-            int listLength = _charSO.StatsList.Count;
+            attribList = new List<AttribData>();
+            int listLength = _charSO.AttribList.Count;
 
             StatsVsChanceSO statsVsChanceSO = CharService.Instance.statChanceSO; 
             //Debug.Log("list length " + listLength);
             for (int i = 0; i < listLength; i++)
             {
                 AttribData statdata = new AttribData();
-                statdata.AttribName = _charSO.StatsList[i].AttribName;
-                statdata.currValue = _charSO.StatsList[i].currValue;
+                statdata.AttribName = _charSO.AttribList[i].AttribName;
+                statdata.currValue = _charSO.AttribList[i].currValue;
                 statdata.baseValue = statdata.currValue;
-                statdata.desc = _charSO.StatsList[i].desc;
-                statdata.minRange = _charSO.StatsList[i].minRange;
-                statdata.maxRange = _charSO.StatsList[i].maxRange;
+                statdata.desc = _charSO.AttribList[i].desc;
+                statdata.minRange = _charSO.AttribList[i].minRange;
+                statdata.maxRange = _charSO.AttribList[i].maxRange;
 
-                StatChanceData statChanceData = statsVsChanceSO.allStatChanceData
-                                    .Find(t => t.statName == _charSO.StatsList[i].AttribName);
-                statdata.minLimit = statChanceData.minLimit; 
-                    //_charSO.StatsList[i].minLimit;  // get stat Chance and copy from there
-                statdata.maxLimit = statChanceData.maxLimit;
+                AttribChanceData statChanceData = statsVsChanceSO.allStatChanceData
+                                    .Find(t => t.attribName == _charSO.AttribList[i].AttribName);
+                statdata.minLimit = _charSO.AttribList[i].minLimit;
+                //_charSO.StatsList[i].minLimit;  // get stat Chance and copy from there
+                statdata.maxLimit = _charSO.AttribList[i].maxLimit;
 
-                statsList.Add(statdata);
+                attribList.Add(statdata);
             }
         }
         #endregion

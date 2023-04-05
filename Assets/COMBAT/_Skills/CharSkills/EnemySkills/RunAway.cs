@@ -27,7 +27,7 @@ namespace Combat
         }
         public override void ApplyFX1()
         {
-            charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID
+            charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID
                     , AttribName.dodge, 3);                 
         }
         public override void ApplyFX2()

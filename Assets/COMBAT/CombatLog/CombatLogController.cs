@@ -103,7 +103,10 @@ namespace Combat
         void StartOfCombat()
         {           
             CharService.Instance.charsInPlayControllers
-                        .ForEach(t => t.OnStatChg += PrintStatChanged);         
+                        .ForEach(t => t.OnAttribChg += PrintAttribChanged);
+
+            CharService.Instance.charsInPlayControllers.ForEach(t => t.OnStatChg += PrintStatChgAdded); 
+
             CharService.Instance.charsInPlayControllers
                         .ForEach(t => t.damageController.OnDamageApplied += PrintDamageApplied); 
 
@@ -211,35 +214,44 @@ namespace Combat
             // use word "ATTACK " Physical, magical(air, water bla bla ) , pure , stamina, fortitude             
         }
 
-        void PrintStatChanged(CharModData charModData)
+        void PrintAttribChanged(AttribModData attribModData)
         {
            
-            AttribName statName = charModData.statModified;
+            AttribName statName = attribModData.attribModified;
             string str = "";
-            CharNames CharName = CharService.Instance.GetCharCtrlWithCharID(charModData.effectedCharNameID)
-                                    .charModel.charName;
+            CharNames CharName = CharService.Instance.GetCharCtrlWithCharID(attribModData.effectedCharNameID)
+                                    .charModel.charName;           
 
+            if (attribModData.modCurrVal == 0) return;                                                                               
 
-            if (charModData.modCurrVal == 0) return;                                                                               
-            if (statName == AttribName.health || statName == AttribName.stamina 
-                || statName == AttribName.fortitude)
-            {
-                string str1 = charModData.modCurrVal > 0 ? "gains" : "loses";
-               
-                str = CharName + " " + str1 +" " +
-                            + Mathf.Abs((int)charModData.modCurrVal) + " " + charModData.statModified;
-            }
-            else
-            {
-                string sign = charModData.modCurrVal > 0 ? "+" : "-";
-                string str2 = charModData.modCurrVal > 0 ? "gains" : "suffers";
+                string sign = attribModData.modCurrVal > 0 ? "+" : "-";
+                string str2 = attribModData.modCurrVal > 0 ? "gains" : "suffers";
                 str = CharName + " " + str2 + " " + sign +
-                          + Mathf.Abs((int)charModData.modCurrVal) + " " + charModData.statModified;
-            }
+                          + Mathf.Abs((int)attribModData.modCurrVal) + " " + attribModData.attribModified;
 
             combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
             RefreshCombatLogUI();
         }
+
+        void PrintStatChgAdded(StatModData statModData)
+        {
+            StatName statName =statModData.statModified;
+            string str = "";
+            CharNames CharName = CharService.Instance.GetCharCtrlWithCharID(statModData.effectedCharNameID)
+                                    .charModel.charName;
+
+            if (statModData.modVal == 0) return;
+            
+            if (statName == StatName.health || statName == StatName.stamina
+                || statName == StatName.fortitude)
+            {
+                string str1 = statModData.modVal > 0 ? "gains" : "loses";
+
+                str = CharName + " " + str1 + " " +
+                            +Mathf.Abs((int)statModData.modVal) + " " + statModData.statModified;
+            }
+        }
+
 
         //void PrintPermaTraitAdded(PermaTraitData permaTraitData)
         //{

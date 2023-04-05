@@ -39,7 +39,7 @@ namespace Common
                 {
                     if (c.charModel.cultType == CultureType.Kugharian)
                     {
-                        c.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.morale, -4);
+                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.morale, -4);
                     }
                 }
             }
@@ -54,7 +54,7 @@ namespace Common
                 {
                     if (c.charModel.cultType == CultureType.Kugharian)
                     {
-                        c.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID,AttribName.morale, 4);
+                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permTraitName, charID,AttribName.morale, 4);
                     }
                 }
             }
@@ -70,7 +70,7 @@ namespace Common
                 {
                     if (c.charModel.cultType == CultureType.Kugharian)
                     {
-                        c.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID,AttribName.morale, -4); 
+                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permTraitName, charID,AttribName.morale, -4); 
                     }
                 }          
 

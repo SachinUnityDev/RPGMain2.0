@@ -48,7 +48,7 @@ namespace Combat
             {
                 foreach(var target in skillwt.targetInSight)
                 {
-                    if (target.charGO.GetComponent<CharController>().GetStat(AttribName.health).currValue < 20f)
+                    if (target.charGO.GetComponent<CharController>().GetStat(StatName.health).currValue < 20f)
                     {
                         skillwt.currentWeight +=   20;
 

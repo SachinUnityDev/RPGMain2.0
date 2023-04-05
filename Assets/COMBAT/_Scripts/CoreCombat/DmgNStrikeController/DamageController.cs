@@ -48,12 +48,12 @@ namespace Combat
             float hitChance = 0f;
             // this would not do calc chance
 
-            float dodgeVal = charController.GetStat(AttribName.dodge).currValue;
+            float dodgeVal = charController.GetAttrib(AttribName.dodge).currValue;
             float dodge = charController.GetStatChance(AttribName.dodge, dodgeVal);
 
             // Performer
             GameObject strikerGO = CombatService.Instance.currCharOnTurn.gameObject;
-            float accVal = CombatService.Instance.currCharOnTurn.GetStat(AttribName.acc).currValue;
+            float accVal = CombatService.Instance.currCharOnTurn.GetAttrib(AttribName.acc).currValue;
             float acc = CombatService.Instance.currCharOnTurn.GetStatChance(AttribName.acc, accVal);
 
         
@@ -80,7 +80,7 @@ namespace Combat
         }
         void LuckCheck()
         {
-            float luckVal = charController.GetStat(AttribName.luck).currValue;
+            float luckVal = charController.GetAttrib(AttribName.luck).currValue;
             float luckChance = charController.GetStatChance(AttribName.luck, luckVal);
 
             if (luckVal < 6)
@@ -144,7 +144,7 @@ namespace Combat
             float damageAlt = striker.GetComponent<StrikeController>()
                         .GetDmgAlt(charController.charModel, attackType, _dmgType ); 
                 
-            AttribData dmgSD = striker.GetStat(AttribName.damage);
+            AttribData dmgSD = striker.GetAttrib(AttribName.damage);
             float percentDmg = dmgPercentVal + damageAlt; // copy of Dmg value for magical and physical + Dmg modifiers 
 
             float dmg = (float)(UnityEngine.Random.Range(dmgSD.minRange, dmgSD.maxRange) * (percentDmg / 100f));
@@ -157,62 +157,62 @@ namespace Combat
                     break;
                 case DamageType.Physical:
                     float dmgVal = CritNFeebleApply(dmg);
-                    AttribData armorSD = charController.GetStat(AttribName.armor);
+                    AttribData armorSD = charController.GetAttrib(AttribName.armor);
                     float armor = UnityEngine.Random.Range(armorSD.minRange, armorSD.maxRange);
                     float chgValue = dmgVal - armor;
                     chgValue = chgValue < 0 ? 0 : chgValue;
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, AttribName.health, -chgValue);
+                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -chgValue);
                     break;
 
                 case DamageType.StaminaDmg: // no resistance, no armor etc ok no substractions for stamina , Fort and Pure
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, AttribName.stamina, -dmgPercentVal);
+                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.stamina, -dmgPercentVal);
 
                     break;
                 case DamageType.Air:
                     dmgVal = CritNFeebleApply(dmg);
-                    float airRes = charController.GetStat(AttribName.waterRes).currValue;
+                    float airRes = charController.GetAttrib(AttribName.waterRes).currValue;
                     float airDmg = dmgVal * (100 - airRes) / 100;
                     // airDmg = airDmg < 0 ? 0 : airDmg;
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, AttribName.health, -airDmg);
+                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -airDmg);
                     break;
                 case DamageType.Water:
                     dmgVal = CritNFeebleApply(dmg);
-                    float waterRes = charController.GetStat(AttribName.waterRes).currValue;
+                    float waterRes = charController.GetAttrib(AttribName.waterRes).currValue;
                     float waterDmg = dmgVal * ((100f - waterRes) / 100f);
                     // waterDmg = waterDmg < 0 ? 0 : waterDmg;
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, AttribName.health, -waterDmg);
+                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -waterDmg);
                     break;
                 case DamageType.Earth:
                     dmgVal = CritNFeebleApply(dmg);
-                    float earthRes = charController.GetStat(AttribName.earthRes).currValue;
+                    float earthRes = charController.GetAttrib(AttribName.earthRes).currValue;
                     float earthDmg = dmgVal * (100 - earthRes) / 100;
                     //  earthDmg = earthDmg < 0 ? 0 : earthDmg;
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, AttribName.health, -earthDmg);
+                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -earthDmg);
                     break;
                 case DamageType.Fire:
                     dmgVal = CritNFeebleApply(dmg);
-                    float fireRes = charController.GetStat(AttribName.fireRes).currValue;
+                    float fireRes = charController.GetAttrib(AttribName.fireRes).currValue;
                     float fireDmg = dmgVal * (100 - fireRes) / 100;
                     // fireDmg = fireDmg < 0 ? 0 : fireDmg;
 
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, AttribName.health, -fireDmg);
+                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -fireDmg);
                     break;
                 case DamageType.Light:
                     dmgVal = CritNFeebleApply(dmg);
-                    float lightRes = charController.GetStat(AttribName.lightRes).currValue;
+                    float lightRes = charController.GetAttrib(AttribName.lightRes).currValue;
                     float lightDmg = dmgVal * (100 - lightRes) / 100;
                     //   lightDmg = lightDmg < 0 ? 0 : lightDmg;
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, AttribName.health, -lightDmg);
+                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -lightDmg);
                     break;
                 case DamageType.Dark:
                     dmgVal = CritNFeebleApply(dmg);
-                    float darkRes = charController.GetStat(AttribName.darkRes).currValue;
+                    float darkRes = charController.GetAttrib(AttribName.darkRes).currValue;
                     float darkDmg = dmgVal * (100 - darkRes) / 100;
                     //   darkDmg = darkDmg < 0 ? 0 : darkDmg;
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, AttribName.health, -darkDmg);
+                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -darkDmg);
                     break;
                 case DamageType.Pure:
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, AttribName.health, -dmgPercentVal);
+                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -dmgPercentVal);
                     break;
                 case DamageType.Buff:
 
@@ -223,10 +223,10 @@ namespace Combat
                 case DamageType.Guard:
                     break;
                 case DamageType.Heal:
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, AttribName.health, dmgPercentVal);
+                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, dmgPercentVal);
                     break;
                 case DamageType.FortitudeDmg:
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, AttribName.fortitude, -dmgPercentVal);
+                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.fortitude, -dmgPercentVal);
                     break;
                 //case DamageType.HealthDmg:
                 //    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatsName.health, -dmgPercentVal);
@@ -251,13 +251,13 @@ namespace Combat
                 if (striker.charModel.charMode == CharMode.Ally)
                 {
                     if (striker.charModel.orgCharMode == CharMode.Ally)
-                        striker.ChangeStat(CauseType.CriticalStrike, 0, striker.charModel.charID, AttribName.fortitude, +6);
+                        striker.ChangeStat(CauseType.CriticalStrike, 0, striker.charModel.charID, StatName.fortitude, +6);
 
                     foreach (CharController c in CharService.Instance.charsInPlayControllers)
                     {
                         if (c.charModel.charID != striker.charModel.charID
                             && c.charModel.orgCharMode == CharMode.Ally)
-                            c.ChangeStat(CauseType.CriticalStrike, 0, striker.charModel.charID, AttribName.fortitude, +3);
+                            c.ChangeStat(CauseType.CriticalStrike, 0, striker.charModel.charID, StatName.fortitude, +3);
                     }
                 }
                
@@ -267,13 +267,13 @@ namespace Combat
                 if (striker.charModel.charMode == CharMode.Ally)
                 {
                     if (striker.charModel.orgCharMode == CharMode.Ally)
-                        striker.ChangeStat(CauseType.CriticalStrike, 0, striker.charModel.charID, AttribName.fortitude, -6);
+                        striker.ChangeStat(CauseType.CriticalStrike, 0, striker.charModel.charID, StatName.fortitude, -6);
 
                     foreach (CharController c in CharService.Instance.charsInPlayControllers)
                     {
                         if (c.charModel.charID != striker.charModel.charID
                             && c.charModel.orgCharMode == CharMode.Ally)
-                            c.ChangeStat(CauseType.CriticalStrike, 0, striker.charModel.charID, AttribName.fortitude, -3);
+                            c.ChangeStat(CauseType.CriticalStrike, 0, striker.charModel.charID, StatName.fortitude, -3);
                     }
                 }
             }
@@ -288,13 +288,13 @@ namespace Combat
                 if (charController.charModel.charMode == CharMode.Ally)
                 {
                     if (charController.charModel.orgCharMode == CharMode.Ally)
-                        charController.ChangeStat(CauseType.CriticalStrike, 0, striker.charModel.charID, AttribName.fortitude, -6);
+                        charController.ChangeStat(CauseType.CriticalStrike, 0, striker.charModel.charID, StatName.fortitude, -6);
 
                     foreach (CharController c in CharService.Instance.charsInPlayControllers)
                     {
                         if (c.charModel.charID != charController.charModel.charID
                             && c.charModel.orgCharMode == CharMode.Ally)
-                            c.ChangeStat(CauseType.CriticalStrike, 0, charController.charModel.charID, AttribName.fortitude, -3);
+                            c.ChangeStat(CauseType.CriticalStrike, 0, charController.charModel.charID, StatName.fortitude, -3);
                     }
                 }
                
@@ -304,13 +304,13 @@ namespace Combat
                 if (charController.charModel.charMode == CharMode.Ally)
                 {
                     if (charController.charModel.orgCharMode == CharMode.Ally)
-                        charController.ChangeStat(CauseType.CriticalStrike, 0, charController.charModel.charID, AttribName.fortitude, +6);
+                        charController.ChangeStat(CauseType.CriticalStrike, 0, charController.charModel.charID, StatName.fortitude, +6);
 
                     foreach (CharController c in CharService.Instance.charsInPlayControllers)
                     {
                         if (c.charModel.charID != charController.charModel.charID
                             && c.charModel.orgCharMode == CharMode.Ally)
-                            c.ChangeStat(CauseType.CriticalStrike, 0, striker.charModel.charID, AttribName.fortitude, +3);
+                            c.ChangeStat(CauseType.CriticalStrike, 0, striker.charModel.charID, StatName.fortitude, +3);
                     }
                 }
             }

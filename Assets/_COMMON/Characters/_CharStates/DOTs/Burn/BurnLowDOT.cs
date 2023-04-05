@@ -91,17 +91,17 @@ namespace Common
         void ApplyRoundFX()
         {
             if (CombatService.Instance.currCharOnTurn.charModel.charID != charID) return;
-            AttribData statData = charController.GetStat(AttribName.fireRes);
+            AttribData statData = charController.GetAttrib(AttribName.fireRes);
 
             if (statData.currValue > 60f)   // apply damage here
                 charController.ChangeStat(CauseType.CharState, (int)charStateName
-                    , charID, AttribName.health, Mathf.RoundToInt(-dmgPerRound * 0.50f));
+                    , charID, StatName.health, Mathf.RoundToInt(-dmgPerRound * 0.50f));
             else
                 charController.ChangeStat(CauseType.CharState, (int)charStateName, charID
-                                                    , AttribName.health, -dmgPerRound);
+                                                    , StatName.health, -dmgPerRound);
 
             charController.ChangeStat(CauseType.CharState, (int)charStateName, charID
-                                                                , AttribName.fortitude, -6);
+                                                                , StatName.fortitude, -6);
 
         }
 

@@ -82,14 +82,14 @@ namespace Common
         void ApplyRoundFX()
         {
             if (CombatService.Instance.currCharOnTurn.charModel.charID != charID) return;
-            AttribData statData = charController.GetStat(AttribName.earthRes);
+            AttribData statData = charController.GetAttrib(AttribName.earthRes);
 
             if (statData.currValue > 60f)   // apply damage here
                 charController.ChangeStat(CauseType.CharState, (int)charStateName
-                    , charID, AttribName.health, Mathf.RoundToInt(-dmgPerRound*0.50f));
+                    , charID, StatName.health, Mathf.RoundToInt(-dmgPerRound*0.50f));
             else
                 charController.ChangeStat(CauseType.CharState, (int)charStateName, charID
-                                                    , AttribName.health, -dmgPerRound);
+                                                    , StatName.health, -dmgPerRound);
         }
  
         public override void StateApplyVFX()

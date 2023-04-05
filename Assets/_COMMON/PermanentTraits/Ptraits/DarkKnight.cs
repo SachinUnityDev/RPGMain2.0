@@ -30,11 +30,11 @@ namespace Common
 
         void AddInitNight()
         {
-            charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.haste, 2);
+            charController.ChangeAttrib(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.haste, 2);
         }
         void AddInitDay()
         {
-            charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.haste, -2);
+            charController.ChangeAttrib(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.haste, -2);
         }
 
         void NoAmbush(TimeState _timeState)

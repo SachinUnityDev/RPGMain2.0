@@ -45,7 +45,7 @@ namespace Combat
         {
             if (CharStatesService.Instance.HasCharState(targetGO, CharStateName.Rooted))
                 targetController
-                    .ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.luck, 2);
+                    .ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.luck, 2);
 
             if (chance.GetChance())
             CharStatesService.Instance.ApplyCharState(targetGO, CharStateName.Rooted

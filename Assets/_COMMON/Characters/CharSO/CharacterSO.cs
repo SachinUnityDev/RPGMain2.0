@@ -67,11 +67,10 @@ namespace Common
         public List<ItemData> CompanionPreReqOpt1 = new List<ItemData>();
         public List<ItemData> CompanionPreReqOpt2 = new List<ItemData>();
 
-        public int startLevel;
-        public int staminaRegen = 2;
+        public int startLevel; 
 
-        public List<AttribData> StatsList = new List<AttribData>();
-
+        public List<AttribData> AttribList = new List<AttribData>();
+        public List<StatData> statList = new List<StatData>(); 
         [Header("Grid related")]
         public CharOccupies charOccupies;
         public List<int> posPriority = new List<int>();
@@ -86,10 +85,14 @@ namespace Common
         private void Awake()
         {
 
-            if (StatsList.Count < 1)   // patch fix to prevent recreation of fields 
+
+
+
+
+            if (AttribList.Count < 1)   // patch fix to prevent recreation of fields 
             {
-                StatsList.Clear();
-            for (int i = 1; i < Enum.GetNames(typeof(AttribName)).Length; i++)
+                AttribList.Clear();
+                for (int i = 1; i < Enum.GetNames(typeof(AttribName)).Length; i++)
             {
                 AttribData s = new AttribData();
                 s.AttribName = (AttribName)i;
@@ -97,27 +100,11 @@ namespace Common
                 switch (s.AttribName)
                 {
                     case AttribName.None:
-                        break;
-                    case AttribName.health:
-                        s.minLimit = 0f;
-                        s.maxLimit = 0;
-                        break;
-                    case AttribName.stamina:
-                        s.minLimit = 0f;
-                        s.maxLimit = 0f;
-                        break;
+                        break;        
                     case AttribName.fortOrg:
                         s.minLimit = -24f;
                         s.maxLimit = 24f; break;
-                    case AttribName.fortitude:
-                        s.minLimit = -30f;
-                        s.maxLimit = 30f; break;
-                    case AttribName.hunger:
-                        s.minLimit = 0f;
-                        s.maxLimit = 100f; break;
-                    case AttribName.thirst:
-                        s.minLimit = 0f;
-                        s.maxLimit = 100f; break;
+           
                     case AttribName.damage:
                         s.minLimit = 0f;
                         s.maxLimit = 100f; break;
@@ -169,51 +156,91 @@ namespace Common
                     default:
                         break;
                 }
-                StatsList.Add(s);
+                AttribList.Add(s);
             }
-        }
-        else
-        {
-                //Debug.Log("Updated vigor n willpower");
-                float healthMax = StatsList.Find(t => t.AttribName == AttribName.vigor).currValue * 4;
-                StatsList.Find(t => t.AttribName == AttribName.health).currValue = healthMax;
-                StatsList.Find(t => t.AttribName == AttribName.health).maxLimit = healthMax; 
+            for (int i = 1; i < Enum.GetNames(typeof(StatName)).Length; i++)
+            {
+                StatData s = new StatData();
+                s.statName = (StatName)i;
+                Debug.Log("SO awake  function called");
+                switch (s.statName)
+                {
+                    case StatName.None:
+                        break;
+                    case StatName.health:
+                        s.minLimit = 0;
+                        s.maxLimit = 100f; break;
+                        
+                    case StatName.stamina:
+                        s.minLimit = 0;
+                        s.maxLimit = 100f; break;
+                        
+                    case StatName.fortitude:
+                        s.minLimit =-24;
+                        s.maxLimit = 24f; break;
+                        
+                    case StatName.hunger:
+                        s.minLimit = 0;
+                        s.maxLimit = 100f; break;
+                        
+                    case StatName.thirst:
+                        s.minLimit = 0;
+                        s.maxLimit = 100f; break;                        
+                }
+                statList.Add(s);
+            }
 
-                float staminaMax = StatsList.Find(t => t.AttribName == AttribName.willpower).currValue * 3;
-                StatsList.Find(t => t.AttribName == AttribName.stamina).currValue = staminaMax;
-                StatsList.Find(t => t.AttribName == AttribName.stamina).maxLimit  = staminaMax;
+
+            }
+            else
+            {
+                Debug.Log("Updated vigor n willpower");
+                float healthMax = AttribList.Find(t => t.AttribName == AttribName.vigor).currValue * 4;
+                statList.Find(t => t.statName == StatName.health).currValue = healthMax;
+                statList.Find(t => t.statName == StatName.health).maxLimit = healthMax; 
+
+                float staminaMax = AttribList.Find(t => t.AttribName == AttribName.willpower).currValue * 3;
+                statList.Find(t => t.statName == StatName.stamina).currValue = staminaMax;
+                statList.Find(t => t.statName == StatName.stamina).maxLimit  = staminaMax;
                 FillDesc();
-        }
+            }
 
-    }
+        }
 
         #region CORE STATS RELATED
         void FillDesc()
         {
-            string str = ""; 
-            for (int i = 0; i < StatsList.Count; i++)
+            string str = "";
+            for (int i = 0; i < statList.Count; i++)
             {
-                
-                switch (StatsList[i].AttribName)
+
+                switch (statList[i].statName)
                 {
-                    case AttribName.None:
-                        str = ""; 
+                    case StatName.health:
+                        str = "Health is health, you know it...";
                         break;
-                    case AttribName.health:
-                        str= "Health is health, you know it..."; 
+                    case StatName.stamina:
+                        str = "Resource to use skills.";
                         break;
-                    case AttribName.stamina:
-                        str = "Resource to use skills."; 
+                    case StatName.fortitude:
+                        str = "Be among those who dare to dare!";
                         break;
-                    case AttribName.fortitude:
-                        str = "Be among those who dare to dare!"; 
+                    case StatName.hunger:
+                        str = "Start losing Health once Hunger is 100%.";
                         break;
-                    case AttribName.hunger:
-                        str = "Start losing Health once Hunger is 100%."; 
-                        break;
-                    case AttribName.thirst:
+                    case StatName.thirst:
                         str = "Start losing Stamina once Thirst is 100%.";
                         break;
+                }
+            }
+
+
+            for (int i = 0; i < AttribList.Count; i++)
+            {
+                
+                switch (AttribList[i].AttribName)
+                {
+                
                     case AttribName.damage:
                        str = 
                             "Base value for Physical and Magical attacks."; 
@@ -279,7 +306,7 @@ namespace Common
                     default:
                         break;
                 }
-                StatsList[i].desc = str; 
+                AttribList[i].desc = str; 
             }
 
 

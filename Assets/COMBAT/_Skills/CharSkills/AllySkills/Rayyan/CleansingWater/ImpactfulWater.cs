@@ -77,7 +77,7 @@ namespace Combat
             //Debug.Log("Target Hit" + targetHit);
             for (int i = 0; i <= targetHit; i++)
             {
-                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.fortitude, +3f);
+                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatName.fortitude, +3f);
             }
         }
 

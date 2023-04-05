@@ -51,7 +51,7 @@ namespace Combat
             //CharController charController = CombatService.Instance.currCharClicked;
             //string desc = charController.charModel.statsList.Find(t=>t.)
             attriCard.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text
-                        = statName.RealName(); 
+                        = statName.AttribStrName(); 
             attriCard.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text
                         = desc; 
         }

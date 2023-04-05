@@ -41,22 +41,22 @@ namespace Combat
 
         public override void ApplyFX1()
         {
-            AttribData hpStat = charController.GetStat(AttribName.health);
-            AttribData moraleStat = charController.GetStat(AttribName.morale);
+            StatData hpStat = charController.GetStat(StatName.health);
+            AttribData moraleStat = charController.GetAttrib(AttribName.morale);
             if (moraleStat.currValue == 12 && !subscribed)
             {
-                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.waterRes, 40f, false);
-                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.earthRes, 20f, false);
+                charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.waterRes, 40f, false);
+                charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.earthRes, 20f, false);
                 QuestEventService.Instance.OnEOQ += EndOnEOQ;
                 subscribed = true;
             }
             else if (hpStat.currValue == hpStat.maxLimit)
             {
-                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.waterRes, 40f, false);
-                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.earthRes, 20f, false);
+                charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.waterRes, 40f, false);
+                charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.earthRes, 20f, false);
 
              
-                    AttribData statData = charController.GetStat(AttribName.armor);
+                    AttribData statData = charController.GetAttrib(AttribName.armor);
                     float armorMin = statData.minRange;
                     float armorMax = statData.maxRange;
                     chgMin = statData.minRange * 0.8f;
@@ -72,8 +72,8 @@ namespace Combat
 
         void EndOnEOQ()
         {
-            charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.waterRes, -40f, false);
-            charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.earthRes, -20f, false);
+            charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.waterRes, -40f, false);
+            charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.earthRes, -20f, false);
             QuestEventService.Instance.OnEOQ -= EndOnEOQ;
 
             subscribed = false; 
@@ -84,8 +84,8 @@ namespace Combat
             base.SkillEnd();
             if (resIncr)
             {
-                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.waterRes, -40f, false);
-                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.earthRes, -20f, false);
+                charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.waterRes, -40f, false);
+                charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.earthRes, -20f, false);
                 targetController.ChangeStatRange(CauseType.CharSkill, (int)skillName, charID
                                                , AttribName.armor, -chgMin, -chgMax);
 
@@ -140,164 +140,4 @@ namespace Combat
 
     }
 }
-//public override CharNames charName => CharNames.Baran;
-
-//        public override SkillNames skillName => SkillNames.IgnorePain;
-
-//        public override SkillLvl skillLvl => SkillLvl.Level1;
-
-//        private PerkSelectState _state = PerkSelectState.Clickable;
-//        public override PerkSelectState skillState { get => _state; set => _state = value; }
-//        public override PerkNames perkName => PerkNames.NoPainForLife;
-
-//        public override PerkType perkType => PerkType.B1;
-
-//        public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.None };
-
-//        public override string desc => "";
-
-//        private float _chance = 0f;
-//        public override float chance { get => _chance; set => _chance = value; }
-
-
-//        public override void SkillInit()
-//        {
-//            skillModel = SkillService.Instance.allSkillModels
-//                                         .Find(t => t.skillName == skillName);
-//            charController = CharacterService.Instance.GetCharCtrlWithName(charName);
-//            skillController = SkillService.Instance.currSkillMgr;
-//            charGO = SkillService.Instance.GetGO4Skill(charName);
-//            // skillModel Updates
-//            skillModel.damageMod = 120f;
-//        }
-//        public override void SkillHovered()
-//        {
-//            SkillInit();
-//            SkillServiceView.Instance.skillCardData.skillModel = skillModel;
-//            Debug.Log("skill hovered" + perkName);
-//            SkillService.Instance.SkillHovered += DisplayFX1;
-//            SkillService.Instance.SkillHovered += DisplayFX2;
-//            SkillService.Instance.SkillHovered += DisplayFX3;
-
-//            SkillService.Instance.SkillWipe += skillController.allPerkBases.Find(t => t.skillName == skillName
-//            && t.skillLvl == SkillLvl.Level1 && t.state == PerkSelectState.Clicked).WipeFX1;
-//        }
-
-//        public override void SkillSelected()
-//        {
-//            SkillController skillController = SkillService.Instance.currSkillMgr;
-
-//            skillController.allPerkBases.Find(t => t.skillName == skillName && t.skillLvl == SkillLvl.Level1
-//            && t.state == PerkSelectState.Clicked).RemoveFX1();
-//            Debug.Log("pressurised water is selected" + skillController.allPerkBases.Find(t => t.skillName == skillName
-//                       && t.skillLvl == SkillLvl.Level1 && t.state == PerkSelectState.Clicked).perkName);
-
-//            SkillService.Instance.SkillApply += BaseApply;
-//            SkillService.Instance.SkillApply += ApplyFX1;
-//            SkillService.Instance.SkillApply += ApplyFX2;
-//            SkillService.Instance.SkillApply += ApplyFX3;
-//            SkillService.Instance.SkillApply += ApplyFX4;
-//        }
-//        public override void BaseApply()
-//        {
-//            CombatEventService.Instance.OnEOR += Tick;
-//            targetGO = SkillService.Instance.currentTargetDyna.charGO;
-//            targetController = targetGO.GetComponent<CharController>();
-//            skillModel.lastUsedInRound = CombatService.Instance.currentRound;
-//        }
-
-//        public override void ApplyFX1()
-//        {
-//            if (CkhNSetInCoolDown() || appliedOnce || IsTargetMyAlly()) return;
-//            targetController.dmgController.ApplyDamage(CharacterService.Instance.GetCharCtrlWithName(charName)
-//                             , DamageType.MagicalWater, 120f, false);
-//        }
-
-//        public override void ApplyFX2()
-//        {
-//        }
-
-//        public override void ApplyFX3()
-//        {
-//        }
-
-//        public override void ApplyFX4()
-//        {
-//        }
-
-
-//        public override void DisplayFX1()
-//        {
-//        }
-
-//        public override void DisplayFX2()
-//        {
-//        }
-
-//        public override void DisplayFX3()
-//        {
-//        }
-
-//        public override void DisplayFX4()
-//        {
-//        }
-
-//        public override void PostApplyFX()
-//        {
-//        }
-
-//        public override void PreApplyFX()
-//        {
-//        }
-
-//        public override void RemoveFX1()
-//        {
-//            SkillService.Instance.SkillApply -= ApplyFX1;
-
-//        }
-
-//        public override void RemoveFX2()
-//        {
-//            SkillService.Instance.SkillApply -= ApplyFX2;
-
-//        }
-
-//        public override void RemoveFX3()
-//        {
-//        }
-
-//        public override void RemoveFX4()
-//        {
-//        }
-
-//        public override void SkillEnd()
-//        {
-//        }
-
-
-
-//        public override void Tick()
-//        {
-//            if (roundEnd >= 2)
-//                SkillEnd();
-//            roundEnd++;
-//        }
-
-//        public override void WipeFX1()
-//        {
-
-//        }
-
-//        public override void WipeFX2()
-//        {
-//        }
-
-//        public override void WipeFX3()
-//        {
-//        }
-
-//        public override void WipeFX4()
-//        {
-//        }
-
 

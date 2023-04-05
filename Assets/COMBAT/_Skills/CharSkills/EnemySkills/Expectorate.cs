@@ -90,7 +90,7 @@ namespace Combat
                         SkillService.Instance.currentTargetDyna = dyna;
                         return; 
                     }
-                    else if (targetController.GetStat(AttribName.earthRes).currValue < 25f)
+                    else if (targetController.GetAttrib(AttribName.earthRes).currValue < 25f)
                     {
                         SkillService.Instance.currentTargetDyna = dyna;
                         return; 

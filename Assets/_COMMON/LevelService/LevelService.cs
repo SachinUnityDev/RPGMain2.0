@@ -97,7 +97,7 @@ namespace Common
                     }
                     else
                     {
-                        charController.ChangeStat(CauseType.LevelUp, 1, 1, stat.AttribName
+                        charController.ChangeAttrib(CauseType.LevelUp, 1, 1, stat.AttribName
                            , stat.currValue, true);
                     }
 
@@ -177,7 +177,7 @@ namespace Common
                 }
                 else
                 {
-                    charController.ChangeStat(CauseType.LevelUp, 1, 1, stat.AttribName
+                    charController.ChangeAttrib(CauseType.LevelUp, 1, 1, stat.AttribName
                        , stat.currValue, true);
                 }
             }

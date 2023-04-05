@@ -66,8 +66,10 @@ namespace Combat
         }
      
         public override void ApplyFX1()
-        {            
-            charController.charModel.staminaRegen.currValue += 2;
+        {
+            if (charController)
+                charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                    , AttribName.staminaRegen, 2, TimeFrame.EndOfRound, skillModel.castTime, false);
         }
 
         public override void ApplyFX2()
@@ -85,7 +87,7 @@ namespace Combat
         public override void SkillEnd()
         {
 
-            charController.charModel.staminaRegen.currValue -= 2;
+            //  charController.charModel.staminaRegen.currValue -= 2;
             //charController.ChangeStat(CauseType.CharSkill, (int)skillName, charController, StatsName.haste, 2);
 
         }

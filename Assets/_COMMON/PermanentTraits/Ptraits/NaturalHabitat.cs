@@ -28,14 +28,14 @@ namespace Common
         {
             if (_partyLoc == LandscapeNames.Jungle || _partyLoc == LandscapeNames.Rainforest)
             {
-                charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.morale, 2);
+                charController.ChangeAttrib(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.morale, 2);
                 prevPartyLocMatch = true;
             }
             else 
             {
                 if (prevPartyLocMatch)
                 {
-                    charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.morale, -2);
+                    charController.ChangeAttrib(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.morale, -2);
                     prevPartyLocMatch = false;
                 }
             }

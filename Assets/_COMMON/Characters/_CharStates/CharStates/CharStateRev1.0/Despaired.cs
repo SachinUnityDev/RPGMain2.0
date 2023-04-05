@@ -35,7 +35,7 @@ namespace Common
         {
             if (CombatService.Instance.currCharOnTurn.charModel.charID != charID) return;
             charController.ChangeStat(CauseType.CharState, (int)charStateName, charID
-                                                               , AttribName.fortitude, -5);
+                                                               , StatName.fortitude, -5);
         }
 
         public override void StateApplyVFX()

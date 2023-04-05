@@ -332,8 +332,8 @@ namespace Combat
             Image HPBarImg = portraitBars.GetChild(0).GetChild(0).GetComponent<Image>();
             Image StaminaBarImg = portraitBars.GetChild(1).GetChild(0).GetComponent<Image>();
 
-            AttribData HPData = charController.GetStat(AttribName.health);
-            AttribData StaminaData = charController.GetStat(AttribName.stamina);
+            StatData HPData = charController.GetStat(StatName.health);
+            StatData StaminaData = charController.GetStat(StatName.stamina);
 
             // Change fill
             float HPbarValue = HPData.currValue / HPData.maxLimit;
@@ -345,7 +345,7 @@ namespace Combat
             if (charMode == CharMode.Ally)
             {
                 // fortitude
-                AttribData fortData = charController.GetStat(AttribName.fortitude);
+                StatData fortData = charController.GetStat(StatName.fortitude);
                 Transform fortCircleTrans = PortraitPanelAlly.transform.GetChild(3);
 
                 // Fortitude Update 
@@ -366,7 +366,6 @@ namespace Combat
         public void UpdateTurnBtn()
         {
            charOnTurn.GetComponent<CharOnTurnBtn>().Check4DiffChar();
-
         }
         #endregion
 
@@ -377,10 +376,8 @@ namespace Combat
             if (portraitToggleState == StatPanelToggleState.OnlyAttributes)
                 portraitToggleState = StatPanelToggleState.None;
             else
-                portraitToggleState++;
-            
+                portraitToggleState++;            
             AttributePanelToggle(); 
-
         }
 
         public void AttributePanelToggle()
@@ -423,7 +420,7 @@ namespace Combat
                 int index = i + 5;
                
                 SpriteData spriteData = statIconSO.allSpriteData.Find(x => x.statName == (AttribName)index); // img from SO 
-                AttribData statData = charController.GetStat((AttribName)index);  // current stats from ctrller               
+                AttribData statData = charController.GetAttrib((AttribName)index);  // current stats from ctrller               
 
                 StatDisplayData statDisplayData = statDisplay.Find(x => x.statName == (AttribName)index); // reference list
                 statDisplayData.statDisplayGO.GetComponentInChildren<Image>().sprite = spriteData.statSprite;
@@ -523,58 +520,3 @@ namespace Combat
     }
 
 }
-
-
-
-
-
-
-//for (int i = 0; i < roundController.allyTurnOrder.Count; i++)
-//{
-//    allyInCombat[i].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite =
-//         roundController.allyTurnOrder[i].charModel.charHexSprite;
-//    allyInCombat[i].transform.GetChild(0).GetComponent<TopPanelEvents>().charGO
-//        = roundController.allyTurnOrder[i].gameObject;            
-//    allyInCombat[i].transform.GetChild(0).gameObject.SetActive(true);
-
-//    //Debug.Log("char in play" + i); 
-//}
-//for (int i = 0; i < roundController.enemyTurnOrder.Count; i++)
-//{
-//    enemyInCombat[i].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite =
-//         roundController.enemyTurnOrder[i].charModel.charHexSprite;
-//    enemyInCombat[i].transform.GetChild(0).GetComponent<TopPanelEvents>().charGO
-//      = roundController.enemyTurnOrder[i].gameObject;
-//    enemyInCombat[i].transform.GetChild(0).gameObject.SetActive(true);
-//}
-//portraitRect.anchorMin = new Vector2(0, 0);
-//portraitRect.anchorMax = new Vector2(0, 0);
-//portraitRect.pivot = new Vector2(0f, 0f);
-//portraitRectAlly.anchorMin = new Vector2(1, 0);
-//portraitRectAlly.anchorMax = new Vector2(1, 0);
-//portraitRectAlly.pivot = new Vector2(1f, 0f);
-//  fortTrans.gameObject.SetActive(false);
-// charOnTurn.gameObject.SetActive(false);
-
-
-// align the rect to left
-// enabled for btn 
-
-
-//for (int i = 0; i < CharacterService.Instance.allyInPlayControllers.Count; i++)
-//{                
-//    allyInCombat[i].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite =
-//         CharacterService.Instance.allyInPlayControllers[i].charModel.charHexSprite;
-//    allyInCombat[i].transform.GetChild(0).GetComponent<TopPanelEvents>().charGO
-//        = CharacterService.Instance.allyInPlayControllers[i].gameObject; 
-//    allyInCombat[i].transform.GetChild(0).gameObject.SetActive(true);
-//    //Debug.Log("char in play" + i); 
-//}
-//for (int i = 0; i < CharacterService.Instance.enemyInPlayControllers.Count; i++)
-//{
-//    enemyInCombat[i].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite =
-//         CharacterService.Instance.enemyInPlayControllers[i].charModel.charHexSprite;
-//    enemyInCombat[i].transform.GetChild(0).GetComponent<TopPanelEvents>().charGO
-//      = CharacterService.Instance.enemyInPlayControllers[i].gameObject;
-//    enemyInCombat[i].transform.GetChild(0).gameObject.SetActive(true);
-//}

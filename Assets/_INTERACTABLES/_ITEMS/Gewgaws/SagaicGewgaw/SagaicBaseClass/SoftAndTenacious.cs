@@ -41,7 +41,7 @@ namespace Interactables
 
         void ApplyIfUnslackableFx()
         {
-            AttribData statData = charController.GetStat(AttribName.damage);
+            AttribData statData = charController.GetAttrib(AttribName.damage);
             float dmgMult = dmgChgVal / 100f;
             int buffID = charController.buffController.ApplyBuffOnRange
                 (CauseType.SagaicGewgaw, charController.charModel.charID,

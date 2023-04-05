@@ -30,11 +30,11 @@ namespace Common
         {
  
             if (prevQCMode == QuestMode.Stealth && qcMode != QuestMode.Stealth)
-                charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.acc, -3.0f);
+                charController.ChangeAttrib(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.acc, -3.0f);
 
             if (qcMode == QuestMode.Stealth)
             {
-                charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.acc, 3.0f);
+                charController.ChangeAttrib(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.acc, 3.0f);
                 prevQCMode = QuestMode.Stealth; 
             }
 
@@ -43,9 +43,9 @@ namespace Common
         void  IncAccInNight(TimeState _timeState)
         {
             if (_timeState == TimeState.Night)
-                charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName,charID, AttribName.acc, 3);
+                charController.ChangeAttrib(CauseType.PermanentTrait, (int)permTraitName,charID, AttribName.acc, 3);
             else
-                charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.acc, -3);
+                charController.ChangeAttrib(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.acc, -3);
 
 
         }

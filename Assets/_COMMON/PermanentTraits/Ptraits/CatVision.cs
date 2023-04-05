@@ -24,8 +24,8 @@ namespace Common
 
             if (QuestEventService.Instance.questTimeState == TimeState.Night)
             {
-                charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.acc, 3f);
-                charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.luck, 2f);
+                charController.ChangeAttrib(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.acc, 3f);
+                charController.ChangeAttrib(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.luck, 2f);
             }
         }
 

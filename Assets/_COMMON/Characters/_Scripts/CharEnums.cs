@@ -222,16 +222,20 @@ public enum NPCNames
     VillageElder,
 
 }
-public enum AttribName
+
+public enum StatName
 {
     None,
-    
     health,
     stamina,
     fortitude,
     hunger,
     thirst,
+}
 
+public enum AttribName
+{
+    None,
     damage,
     acc,
     focus,

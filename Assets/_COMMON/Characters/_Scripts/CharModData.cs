@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Common
 {
     [Serializable]
-    public class CharModData   // data class to store the current changes in the game 
+    public class AttribModData   // data class to store the current changes in the game 
     {
 
         public int turnNo;
@@ -14,19 +14,16 @@ namespace Common
         public int causeName;
         public int causeByCharID;
         public int effectedCharNameID;
-        public AttribName statModified;       
+        public AttribName attribModified;       
 
         public float modCurrVal = 0f;
         public float baseVal = 0f;  
 
         public float modChgMaxR = 0f;
         public float modChgMinR = 0f;
-   
-
-
         
         // ON STAT RANGE MODIFIED 
-        public CharModData(int turnNo, CauseType causeType, int causeName, int causedByCharID
+        public AttribModData(int turnNo, CauseType causeType, int causeName, int causedByCharID
             , int effectedCharNameID, AttribName statModfified, float modChgMaxR, float modChgMinR, bool isRangeMod)
         {
             this.turnNo = turnNo;
@@ -35,7 +32,7 @@ namespace Common
             this.causeByCharID = causedByCharID;
             this.effectedCharNameID = effectedCharNameID;
 
-            this.statModified = statModfified;
+            this.attribModified = statModfified;
             this.modChgMaxR = modChgMaxR;
             this.modChgMinR = modChgMinR;
         }
@@ -43,7 +40,7 @@ namespace Common
 
         // ON STAT MODIFIED 
 
-        public CharModData(int turnNo, CauseType causeType, int causeName, int causedByCharID
+        public AttribModData(int turnNo, CauseType causeType, int causeName, int causedByCharID
                                        , int effectedCharNameID, AttribName statModified,  float modCurrVal =-1, float baseVal =-1)
         {
             this.turnNo = turnNo;
@@ -51,7 +48,7 @@ namespace Common
             this.causeName = causeName;
             this.causeByCharID = causedByCharID;
             this.effectedCharNameID = effectedCharNameID;
-            this.statModified = statModified;
+            this.attribModified = statModified;
             if(modCurrVal != -1)
                 this.modCurrVal = modCurrVal;
             if (baseVal != -1)
@@ -60,4 +57,32 @@ namespace Common
         }
 
     }
+
+    public class StatModData   // data class to store the current changes in the game 
+    {
+
+        public int turnNo;
+        public CauseType causeType;  // add cause name here 
+        public int causeName;
+        public int causeByCharID;
+        public int effectedCharNameID;
+        public StatName statModified;
+
+        public float modVal = 0f;
+
+        public StatModData(int turnNo, CauseType causeType, int causeName, int causedByCharID
+            , int effectedCharNameID, StatName statModfified, float modVal)
+        {
+            this.turnNo = turnNo;
+            this.causeType = causeType;
+            this.causeName = causeName;
+            this.causeByCharID = causedByCharID;
+            this.effectedCharNameID = effectedCharNameID;
+
+            this.statModified = statModfified;
+            this.modVal = modVal; 
+        }
+    
+    }
+
 }

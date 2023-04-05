@@ -29,16 +29,16 @@ namespace Common
             charController.charStateController
                 .ApplyImmunityBuff(CauseType.CharState, (int)charStateName
                    , charID, CharStateName.Confused,  charStateModel.timeFrame, charStateModel.castTime);
-            charController.OnStatCurrValSet += Tick2;
+            charController.OnAttribCurrValSet += Tick2;
         }
 
-        void Tick2(CharModData charModData)  //  change Stat subscribe 
+        void Tick2(AttribModData charModData)  //  change Stat subscribe 
         {
-            if (charModData.statModified != AttribName.focus)
+            if (charModData.attribModified != AttribName.focus)
                 return;
 
-            float maxL = charController.GetStatChanceData(AttribName.focus).maxLimit;
-            if (charController.GetStat(AttribName.luck).currValue < maxL)  // Exit condition 
+            float maxL = charController.GetAttrib(AttribName.focus).maxLimit;
+            if (charController.GetAttrib(AttribName.luck).currValue < maxL)  // Exit condition 
             {
                 EndState();
             }

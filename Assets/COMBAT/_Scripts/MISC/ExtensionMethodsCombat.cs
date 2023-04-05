@@ -43,30 +43,11 @@ using System.Linq;
 
         }
 
-        public static string RealName(this AttribName statName)
+        public static string AttribStrName(this AttribName statName)
         {
             string str = ""; 
             switch (statName)
-            {
-                case AttribName.None:
-                    str = ""; 
-                    break;
-                case AttribName.health:
-                    str = "Health"; 
-                    break;
-                case AttribName.stamina:
-                    str = "Stamina"; 
-                    break;
-                case AttribName.fortitude:
-                    str = "Fortitude"; 
-                    break;
-                case AttribName.hunger:
-                    str = "Hunger";
-                    break;
-                case AttribName.thirst:
-                    str = "Thirst";
-
-                    break;
+            {        
                 case AttribName.damage:
                     str = "Damage";
                     break;

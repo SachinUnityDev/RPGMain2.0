@@ -27,7 +27,7 @@ namespace Interactables
         }
         public override void PotionApplyFX()
         {
-            charController.ChangeStat(CauseType.Potions, (int)potionName, charID
+            charController.ChangeAttrib(CauseType.Potions, (int)potionName, charID
                                         , AttribName.vigor, +1);  // Not a buff 
 
             PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionNames)itemName);

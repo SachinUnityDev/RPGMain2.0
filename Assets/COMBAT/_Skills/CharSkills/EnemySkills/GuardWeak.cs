@@ -45,9 +45,9 @@ namespace Combat
         {
             if (IsTargetMyAlly())
             {
-                AttribData statData = charController.GetStat(AttribName.armor);
-                 minArmorChg = statData.minRange * 0.4f;
-                 maxArmorChg = statData.maxRange * 0.4f;
+                AttribData attribData = charController.GetAttrib(AttribName.armor);
+                 minArmorChg = attribData.minRange * 0.4f;
+                 maxArmorChg = attribData.maxRange * 0.4f;
 
                  targetController.buffController.ApplyBuffOnRange(CauseType.CharSkill, (int)skillName, charID
                   , AttribName.armor, minArmorChg, maxArmorChg, TimeFrame.EndOfRound, skillModel.castTime, true);
@@ -133,7 +133,7 @@ namespace Combat
                 {
                     CharController targetCharCtrl = dyna.charGO.GetComponent<CharController>();
                    
-                    AttribData hp = targetCharCtrl.GetStat(AttribName.health); 
+                    StatData hp = targetCharCtrl.GetStat(StatName.health); 
 
                     if(hp.currValue/hp.maxLimit < 0.4f)
                     {
@@ -156,7 +156,3 @@ namespace Combat
         }
     }
 }
-
-
-//CharController minValChar = CharacterService.Instance.HasLowestStat(StatsName.health
-//                                                                    , charController.charModel.charMode);

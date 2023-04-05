@@ -112,7 +112,7 @@ namespace Combat
             {
                 if(c.charModel.orgCharMode == CharMode.Ally)
                 {
-                    float fortOrg = c.GetStat(AttribName.fortOrg).currValue;                   
+                    float fortOrg = c.GetAttrib(AttribName.fortOrg).currValue;                   
 
                     c.SetCurrStat(CauseType.CombatOver, -1, c.charModel.charID,AttribName.fortOrg,0); 
                     

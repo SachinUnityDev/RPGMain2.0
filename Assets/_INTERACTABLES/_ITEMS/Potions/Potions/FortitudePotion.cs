@@ -44,12 +44,12 @@ namespace Interactables
         {
             float value = Random.Range(22f, 28f);
 
-            int buffId =
-                charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
-                        , AttribName.fortitude, value, TimeFrame.Infinity, -1, true);           
-            allBuffs.Add(buffId);    
+           
+                charController.ChangeStat(CauseType.Potions, (int)potionName, charID
+                        , StatName.fortitude, value);
+           
 
-            buffId =
+           int buffId =
             charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
                       , AttribName.fortOrg, -2, TimeFrame.EndOfQuest, 1, true);
             allBuffs.Add(buffId);

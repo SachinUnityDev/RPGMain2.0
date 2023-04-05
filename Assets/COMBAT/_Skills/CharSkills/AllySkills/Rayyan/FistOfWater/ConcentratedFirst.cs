@@ -36,7 +36,7 @@ namespace Combat
         public override void SkillSelected()
         {
             base.SkillSelected();
-            AttribData statData = charController.GetStat(AttribName.focus); 
+            AttribData statData = charController.GetAttrib(AttribName.focus); 
             if(statData.currValue == 12f)
             {
                 skillModel.damageMod = 280f;

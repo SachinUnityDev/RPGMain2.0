@@ -4,20 +4,12 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using UnityEngine.Events; 
 using DG.Tweening;
 using TMPro;
 using Common;
 
 namespace Combat
 {
-    //[System.Serializable]
-    //public class SkillCardData
-    //{
-    //    public SkillModel skillModel;
-
-    //}
-
     public class SkillServiceView : MonoSingletonGeneric<SkillServiceView>
     {
 #region Declarations
@@ -159,7 +151,7 @@ namespace Combat
 
         public bool HasNoStamina(SkillModel _skillModel)
         {
-            AttribData staminaData = CharService.Instance.GetCharCtrlWithCharID(_skillModel.charID).GetStat(AttribName.stamina);
+            StatData staminaData = CharService.Instance.GetCharCtrlWithCharID(_skillModel.charID).GetStat(StatName.stamina);
             float stamina = staminaData.currValue; 
 
             if (stamina < _skillModel.staminaReq)
@@ -356,42 +348,3 @@ namespace Combat
         }
     }
 }
-//for (int i = 0; i < 8; i++)
-//{
-//    Button btn = skillPanel.transform.GetChild(i).GetComponent<Button>();
-//    if (btn != null)
-//    {
-//        SkillBtns.Add(btn);
-//       // btn.onClick.AddListener(SkillBtnPressed);                        
-//    }
-//}    
-
-
-//public void UpdateSkillIconTxt(SkillNames skillName, int cdGap)
-//{
-//    // loop thru all the skill Icons.. if it matches the SkillName update txt
-
-
-//    string displayTxt = "";
-//    if (cdGap <= 0)
-//        displayTxt = "";
-//    else
-//        displayTxt = cdGap.ToString(); 
-
-
-//    for (int i = 0; i < skillBtnCount ; i++)
-//    {
-//        SkillDataSO skillSO = SkillService.Instance
-//                .GetSkillSO(CombatService.Instance.currentCharSelected.charModel.charName);
-//        if (skillSO != null && skillSO.allSkills[i].skillUnLockStatus !=-1) // Skill is not NA
-//        {
-//            Debug.Log("SKILL Index" + i); 
-//           if(skillName == skillSO.allSkills[i].skillName)
-//            {                       
-
-//                skillPanel.transform.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text
-//                                                            = displayTxt; 
-//            }
-//        }
-//    }
-//}

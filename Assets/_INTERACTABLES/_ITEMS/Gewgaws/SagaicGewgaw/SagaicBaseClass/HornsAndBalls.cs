@@ -58,14 +58,9 @@ namespace Interactables
             if(skillEventData.skillModel.skillName  == SkillNames.NoPatience)
             {
                 charController.ChangeStat(CauseType.SagaicGewgaw, (int)sagaicGewgawName, charController.charModel.charID
-                    , AttribName.fortitude, UnityEngine.Random.Range(4,6),true); 
+                    , StatName.fortitude, UnityEngine.Random.Range(4,6),true); 
             }
         }
-
- 
-
-   
-
         public override void UnEquipSagaic()
         {
             CharStatesService.Instance.OnCharStateStart -= OnCharStateStart;

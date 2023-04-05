@@ -41,7 +41,7 @@ namespace Combat
                 if(dmgData.targetController == charController)
                 {
                     int healVal = (int)dmgData.dmgDelivered / 2;
-                    charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, AttribName.health
+                    charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatName.health
                         , -healVal, false);
                 }               
            }

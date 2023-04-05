@@ -29,11 +29,11 @@ namespace Common
         {
             if (_prevPartyLoc == LandscapeNames.Sewers || _prevPartyLoc == LandscapeNames.Subterranean || _prevPartyLoc == LandscapeNames.Cave)
             {             
-                charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.morale, 2.0f, false);                
+                charController.ChangeAttrib(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.morale, 2.0f, false);                
             }
             if (_partyLoc == LandscapeNames.Sewers || _partyLoc == LandscapeNames.Subterranean || _partyLoc == LandscapeNames.Cave)
             {
-                charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.morale, -2.0f, false);
+                charController.ChangeAttrib(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.morale, -2.0f, false);
             }
             _prevPartyLoc = _partyLoc; 
         }

@@ -49,28 +49,28 @@ namespace Common
              // already has bleed following FX will not stack up 
             {
                 // -2 dodge 
-                charController.ChangeStat(CauseType.CharState, (int)charStateName
+                charController.ChangeAttrib(CauseType.CharState, (int)charStateName
                            , charID, AttribName.dodge, -2);
 
                 // stamina regen -1 
-                charController.ChangeStat(CauseType.CharState, (int)charStateName
+                charController.ChangeAttrib(CauseType.CharState, (int)charStateName
                           , charID, AttribName.staminaRegen, -1);
                 fxApplied= true;
             }
             // if some other bleed is not reducing fortitude a given round this will reduce it
             if (!charController.charStateController.HasCharDOTState(charStateName))
-                charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, AttribName.fortitude, -2);
+                charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatName.fortitude, -2);
         }
 
         void ApplyFX()
         {
             if (CombatService.Instance.currCharOnTurn.charModel.charID != charID) return;
-            AttribData statData = charController.GetStat(AttribName.armor);
+            AttribData statData = charController.GetAttrib(AttribName.armor);
 
             if (statData.currValue > 4)   // apply damage here
-                charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, AttribName.health, Mathf.RoundToInt(-dmgPerRound*0.40f));
+                charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatName.health, Mathf.RoundToInt(-dmgPerRound*0.40f));
             else
-                charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, AttribName.health, -dmgPerRound);
+                charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatName.health, -dmgPerRound);
            
         }
  
@@ -101,11 +101,11 @@ namespace Common
             CombatEventService.Instance.OnEOR += DOTTick;
 
             // -2 dodge 
-            charController.ChangeStat(CauseType.CharState, (int)charStateName
+            charController.ChangeAttrib(CauseType.CharState, (int)charStateName
                         , charID, AttribName.dodge, -2);
 
             // stamina regen -1 
-            charController.ChangeStat(CauseType.CharState, (int)charStateName
+            charController.ChangeAttrib(CauseType.CharState, (int)charStateName
                         , charID, AttribName.staminaRegen, -1);
             fxApplied = false;            
         }

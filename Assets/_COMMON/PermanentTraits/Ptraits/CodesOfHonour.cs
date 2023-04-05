@@ -22,34 +22,26 @@ using Combat;
             NeverFleesEvenFearFul();
             charID = charController.charModel.charID;
         }
-        void FortitudeLossReduced(CharModData charModData)
+        void FortitudeLossReduced(StatModData statModData)
         {        //Lose half Fortitude(everything, including Fortitude diminishing attacks)  // for chagestat Fortitude  
 
-            if (charModData.statModified == AttribName.fortitude && charModData.modCurrVal < 0)
+            if (statModData.statModified == StatName.fortitude && statModData.modVal < 0)
                 charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID
-                    , charModData.statModified, -(charModData.modCurrVal / 2));    // increase half the value , as value might be reduced on call
+                    , statModData.statModified, -(statModData.modVal / 2));    // increase half the value , as value might be reduced on call
             //- minus added to increment by half value
         }
-
 
         void NeverFleesEvenFearFul()
         {
             charController.charModel.fleeBehaviour = FleeBehaviour.NeverFlees; 
-
-        }
-         
+        }         
         void ExtraDodgeIfLastMan()
         {
             if (CombatEventService.Instance.combatController.IsLastManInHeroes(charController))
             {
-                charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID,AttribName.dodge,3.0f); 
+                charController.ChangeAttrib(CauseType.PermanentTrait, (int)permTraitName, charID,AttribName.dodge,3.0f); 
             } 
-
-
         }
-
-      
-
     }
 
 

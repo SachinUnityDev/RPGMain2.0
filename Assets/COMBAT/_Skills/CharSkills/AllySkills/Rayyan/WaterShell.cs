@@ -22,7 +22,7 @@ namespace Combat
 
         float minArmor, maxArmor = 0; 
 
-         int StaminaIncr = 0; 
+         int staminaIncr = 0; 
         public override void PopulateTargetPos()
         {
             skillModel.targetPos.Clear();
@@ -49,9 +49,11 @@ namespace Combat
         public override void ApplyFX1()
         {
 
-            StaminaIncr = UnityEngine.Random.Range(2, 4);
+            staminaIncr = UnityEngine.Random.Range(2, 4);
             CombatEventService.Instance.OnDmgDelivered += StaminaRes;
-            charController.charModel.staminaRegen.currValue += StaminaIncr;
+            charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, AttribName.staminaRegen
+                , staminaIncr, TimeFrame.EndOfRound, skillModel.castTime, false);
+
             charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, AttribName.haste
                 , -3f, TimeFrame.EndOfRound, skillModel.castTime, false);
             charController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName,
@@ -62,7 +64,7 @@ namespace Combat
         {
             //  +% 60 Armor, 
 
-            AttribData statData = charController.GetStat(AttribName.armor);
+            AttribData statData = charController.GetAttrib(AttribName.armor);
              minArmor = statData.minRange * 0.6f;
              maxArmor = statData.maxRange * 0.6f;
             charController.buffController.ApplyBuffOnRange(CauseType.CharSkill, (int)skillName, charID
@@ -84,7 +86,7 @@ namespace Combat
         public override void SkillEnd()
         {
             base.SkillEnd();
-            charController.charModel.staminaRegen.currValue -= StaminaIncr;
+           // charController.charModel.staminaRegen.currValue -= staminaIncr;
             //charController.ChangeStat(CauseType.CharSkill, (int)skillName, charController, StatsName.haste, 3f);
 
             //charController.ChangeStat(CauseType.CharSkill, (int)skillName, charController, StatsName.waterRes, -14);

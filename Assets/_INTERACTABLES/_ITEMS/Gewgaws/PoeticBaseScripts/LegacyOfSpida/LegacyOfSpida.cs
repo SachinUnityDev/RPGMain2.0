@@ -17,14 +17,14 @@ namespace Interactables
 
             CombatEventService.Instance.OnSOC += SOCHaste2Rds;
             CombatEventService.Instance.OnDodge += OnDodgeChar;
-            charController.ChangeStat(CauseType.PoeticGewgaw, (int)poeticSetName
+            charController.ChangeAttrib(CauseType.PoeticGewgaw, (int)poeticSetName
                  , charController.charModel.charID, AttribName.fortOrg, -2);
         }
         public override void RemoveBonusFX()
         {
             CombatEventService.Instance.OnSOC += SOCHaste2Rds;
             CombatEventService.Instance.OnDodge += OnDodgeChar;
-            charController.ChangeStat(CauseType.PoeticGewgaw, (int)poeticSetName
+            charController.ChangeAttrib(CauseType.PoeticGewgaw, (int)poeticSetName
                  , charController.charModel.charID, AttribName.fortOrg, 2);
         }
         void OnDodgeChar(CharController _charController)
@@ -32,7 +32,7 @@ namespace Interactables
             if (charController.charModel.charID == _charController.charModel.charID)
             {
                 charController.ChangeStat(CauseType.PoeticGewgaw, (int)poeticSetName
-                , charController.charModel.charID, AttribName.stamina, 8);
+                , charController.charModel.charID, StatName.stamina, 8);
             }
         }
         void SOCHaste2Rds()

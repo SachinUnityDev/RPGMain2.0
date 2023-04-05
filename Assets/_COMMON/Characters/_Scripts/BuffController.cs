@@ -120,7 +120,7 @@ namespace Combat
             return buffIndex; 
         }
 
-    
+        
 
         public int ApplyExpBuff(CauseType causeType, int causeName, int causeByCharID
                  , int value, TimeFrame timeFrame, int netTime, bool isBuff)

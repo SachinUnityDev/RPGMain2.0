@@ -43,13 +43,11 @@ namespace Common
         }
         public virtual int startRound { get; set; }
         public virtual float dmgPerRound { get; set; }
-
         public virtual void ResetState()
         {
             startRound = CombatService.Instance.currentRound; 
             charController.charStateController.ResetCharStateBuff(charStateName); 
-        }
-        
+        }        
         public virtual void StateInit(CharStateModel charStateModel, CharController charController,
             TimeFrame _timeframe, int _castTime)
         {

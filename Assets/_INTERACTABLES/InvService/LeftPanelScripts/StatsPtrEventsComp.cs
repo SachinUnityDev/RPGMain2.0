@@ -11,7 +11,7 @@ namespace Interactables
 
     public class StatsPtrEventsComp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        [SerializeField] AttribName statName;
+        [SerializeField] AttribName AttribName;
         [SerializeField] bool isOnLeft = false;
 
         [SerializeField] GameObject desc;
@@ -36,11 +36,12 @@ namespace Interactables
         }
         public void PopulateData(CharModel charModel)
         {
+
             transform.GetChild(1).GetComponent<TextMeshProUGUI>().text
-                                                    = GetStatValue(charModel);
+                                                    = GetStatAttribStr(charModel);
         }
 
-        string GetStatValue(CharModel charModel)
+        string GetStatAttribStr(CharModel charModel)
         {
             string str = "";
 
@@ -51,9 +52,9 @@ namespace Interactables
             else
             {
                 this.charModel = charModel;
-                statData = charModel.attribList.Find(t => t.AttribName == statName);
+                statData = charModel.attribList.Find(t => t.AttribName == AttribName);
                 PopulateDesc();
-                if (statName == AttribName.armor || statName == AttribName.damage)
+                if (AttribName == AttribName.armor || AttribName == AttribName.damage)
                 {
                     str = statData.minRange + "-" + statData.maxRange;
                 }

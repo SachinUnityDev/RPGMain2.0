@@ -1,104 +1,91 @@
-﻿//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
-//using Combat; 
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Combat;
 
-//namespace Common
-//{
-//    public class Fearful : CharStatesBase
-//    {
-//        CharController charController;
-//        public GameObject causedByGO;
-//        public override int castTime { get; set; }
-//        public override float dmgPerRound => 1.0f;
-//        public override CharStateName charStateName => CharStateName.Fearful;
-//        public override StateFor stateFor => StateFor.Mutual;
-//        public int timeElapsed { get; set; }
-
-//        private void Start()
-//        {
-//            charController = GetComponent<CharController>();
-//            charID = charController.charModel.charID;
-//            if (charController.charModel.Immune2CharStateList.Contains(charStateName))
-//                Destroy(this);
-//            if (charController.charModel.InCharStatesList.Contains(charStateName))
-//                return;
-//            timeElapsed = 0;
-//            StateInit(-1, TimeFrame.None, null);
-
-//        }
-//        //Immune to Fortitude attacks for 3 rds and after 3 rds go back to origin
-//        //-3 Focus, Init, Luck, Morale, Dodge ..... -(3-3) Armor,..... -30 resistances	/////-3 fort origin until eoq 
-//        //once per combat
-
-//        public override void StateInit(int _castTime, TimeFrame _timeFrame, GameObject _causedByChar = null)
-//        {
-//            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.focus, -3);
-//            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.haste,-3);
-//            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.luck, -3);
-//            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.morale, -3);
-//            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.dodge, -3);
-
-//            charController.ChangeStatRange(CauseType.CharState, (int)charStateName, charID, StatsName.armor,-3,-3);
-
-//            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.airRes, -30);
-//            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.waterRes, -30);
-//            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.fireRes, -30);
-//            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.earthRes, -30);
-//            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.lightRes, -30);
-//            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.darkRes, -30);
-
-//            charController.charModel.fortitudeOrg = -3; 
-//            CombatEventService.Instance.OnEOC += TickEOC;
-//            CombatEventService.Instance.OnEOC += TickEOR;
-//            charController.OnStatChanged += Immune2Fort; 
-//        }
-//        void Immune2Fort(CharModData charModData)
-//        {
-//            if (charModData.statModfified != StatsName.fortitude) return;
-
-//            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID
-//                , StatsName.fortitude, -charModData.modifiedVal, false); 
-//        }
-//        void TickEOC()
-//        {
-//            EndState(); 
-//        }
-
-//        void TickEOR()
-//        {
-//            timeElapsed++; 
-//            if (timeElapsed > 3)
-//            {
-//                EndState(); 
-//            }
-//        }
-   
-//        public override void EndState()
-//        {
-
-//            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.focus, 3);
-//            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.haste, 3);
-//            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.luck, 3);
-//            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.morale,3);
-//            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.dodge, 3);
-
-//            charController.ChangeStatRange(CauseType.CharState, (int)charStateName, charID, StatsName.armor, 3, 3);
-
-//            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.airRes, 30);
-//            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.waterRes, 30);
-//            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.fireRes, 30);
-//            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.earthRes, 30);
-//            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.lightRes, 30);
-//            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.darkRes, 30);
-
-//            charController.charModel.fortitudeOrg = 0;
-//            CombatEventService.Instance.OnEOC -= TickEOC;
-//            CombatEventService.Instance.OnEOC -= TickEOR;
-//            charController.OnStatChanged -= Immune2Fort;
+namespace Common
+{
+    public class Fearful : CharStatesBase
+    {
+        // Immune to Fortitude attacks for 2 rds and after 2 rds go back to origin
+        //	-3 utility stats, -3 Dodge and -(2-3) Armor, -30 resistances	
+        //	%60 flee, 40% nothing happens	
         
-//            charController.charModel.InCharStatesList.Remove(charStateName);  // added by charStateService 
-//            Destroy(this);
-//        }
-//    }
-//}
+        
+
+        public override CharStateName charStateName => CharStateName.Fearful;
+        public override CharStateModel charStateModel { get ; set; }
+        public override CharController charController { get; set; }
+        public override int charID { get; set; }
+        public override StateFor stateFor => StateFor.Heroes;
+        public override int castTime { get ; protected set; }
+
+        public override void StateApplyFX()
+        {
+            castTime = 2; 
+            int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+                   , charID, AttribName.focus, -3, charStateModel.timeFrame, charStateModel.castTime, true);
+            allBuffIds.Add(buffID);
+
+            buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+                , charID, AttribName.morale, -3, charStateModel.timeFrame, charStateModel.castTime, true);
+            allBuffIds.Add(buffID);
+
+            buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+                , charID, AttribName.luck, -3, charStateModel.timeFrame, charStateModel.castTime, true);
+            allBuffIds.Add(buffID);
+
+            buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+                , charID, AttribName.haste, -3, charStateModel.timeFrame, charStateModel.castTime, true);
+            allBuffIds.Add(buffID);
+
+            buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+          , charID, AttribName.dodge, -3, charStateModel.timeFrame, charStateModel.castTime, true);
+            allBuffIds.Add(buffID);
+
+            buffID = charController.buffController.ApplyBuffOnRange(CauseType.CharState, (int)charStateName
+            , charID, AttribName.armor, -2, -3, charStateModel.timeFrame, charStateModel.castTime, true);
+            allBuffIds.Add(buffID);
+
+            buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+                 , charID, AttribName.earthRes, -30, charStateModel.timeFrame, charStateModel.castTime, true);
+            allBuffIds.Add(buffID);
+
+            buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+                 , charID, AttribName.waterRes, -30, charStateModel.timeFrame, charStateModel.castTime, true);
+            allBuffIds.Add(buffID);
+
+            buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+                 , charID, AttribName.fireRes, -30, charStateModel.timeFrame, charStateModel.castTime, true);
+            allBuffIds.Add(buffID);
+
+            buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+                 , charID, AttribName.airRes, -30, charStateModel.timeFrame, charStateModel.castTime, true);
+            allBuffIds.Add(buffID);
+
+            charController.ClampStatToggle(StatName.fortitude, true);
+
+        }
+
+        public override void StateApplyVFX()
+        {
+            
+        }
+        public override void EndState()
+        {
+            base.EndState();
+            charController.ClampStatToggle(StatName.fortitude, false);
+        }
+        public override void StateDisplay()
+        {
+            str0 = "-3 Utility Stats,-3 Dodge";
+            charStateModel.charStateCardStrs.Add(str0);
+
+            str1 = "-(2-3) Armor, -30 Elemental Res";
+            charStateModel.charStateCardStrs.Add(str1);
+
+            str2 = "May Flee Combat";
+            charStateModel.charStateCardStrs.Add(str2);
+        }
+    }
+}

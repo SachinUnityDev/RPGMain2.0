@@ -93,7 +93,7 @@ namespace Common
             {
                 AttribList.Clear();
                 for (int i = 1; i < Enum.GetNames(typeof(AttribName)).Length; i++)
-            {
+                {
                 AttribData s = new AttribData();
                 s.AttribName = (AttribName)i;
                 Debug.Log("SO awake  function called");
@@ -157,40 +157,38 @@ namespace Common
                         break;
                 }
                 AttribList.Add(s);
-            }
-            for (int i = 1; i < Enum.GetNames(typeof(StatName)).Length; i++)
-            {
-                StatData s = new StatData();
-                s.statName = (StatName)i;
-                Debug.Log("SO awake  function called");
-                switch (s.statName)
-                {
-                    case StatName.None:
-                        break;
-                    case StatName.health:
-                        s.minLimit = 0;
-                        s.maxLimit = 100f; break;
-                        
-                    case StatName.stamina:
-                        s.minLimit = 0;
-                        s.maxLimit = 100f; break;
-                        
-                    case StatName.fortitude:
-                        s.minLimit =-24;
-                        s.maxLimit = 24f; break;
-                        
-                    case StatName.hunger:
-                        s.minLimit = 0;
-                        s.maxLimit = 100f; break;
-                        
-                    case StatName.thirst:
-                        s.minLimit = 0;
-                        s.maxLimit = 100f; break;                        
                 }
-                statList.Add(s);
-            }
-
-
+                for (int i = 1; i < Enum.GetNames(typeof(StatName)).Length; i++)
+                {
+                    StatData s = new StatData();
+                    s.statName = (StatName)i;
+                    Debug.Log("SO awake  function called");
+                    switch (s.statName)
+                    {
+                        case StatName.None:
+                            break;
+                        case StatName.health:
+                            s.minLimit = 0;
+                            s.maxLimit = 100f; break;
+                        
+                        case StatName.stamina:
+                            s.minLimit = 0;
+                            s.maxLimit = 100f; break;
+                        
+                        case StatName.fortitude:
+                            s.minLimit =-24;
+                            s.maxLimit = 24f; break;
+                        
+                        case StatName.hunger:
+                            s.minLimit = 0;
+                            s.maxLimit = 100f; break;
+                        
+                        case StatName.thirst:
+                            s.minLimit = 0;
+                            s.maxLimit = 100f; break;                        
+                    }
+                    statList.Add(s);
+                }
             }
             else
             {
@@ -202,8 +200,9 @@ namespace Common
                 float staminaMax = AttribList.Find(t => t.AttribName == AttribName.willpower).currValue * 3;
                 statList.Find(t => t.statName == StatName.stamina).currValue = staminaMax;
                 statList.Find(t => t.statName == StatName.stamina).maxLimit  = staminaMax;
-                FillDesc();
             }
+
+            FillDesc();
 
         }
 
@@ -232,15 +231,12 @@ namespace Common
                         str = "Start losing Stamina once Thirst is 100%.";
                         break;
                 }
+                statList[i].desc = str;
             }
-
-
             for (int i = 0; i < AttribList.Count; i++)
-            {
-                
+            {                
                 switch (AttribList[i].AttribName)
-                {
-                
+                {                
                     case AttribName.damage:
                        str = 
                             "Base value for Physical and Magical attacks."; 

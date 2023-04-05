@@ -194,12 +194,16 @@ namespace Common
             else 
                 return false;
         }
-        public void ClampStatToggle(AttribName statName, bool toClamp)
+        public void ClampAttribToggle(AttribName attribName, bool toClamp)
         {
-            AttribData statData = charModel.attribList.Find(x => x.AttribName == statName);
+            AttribData statData = charModel.attribList.Find(x => x.AttribName == attribName);
             statData.isClamped = toClamp; 
         }
-
+        public void ClampStatToggle(StatName statName, bool toClamp)
+        {
+            StatData statData = charModel.statList.Find(x => x.statName == statName);
+            statData.isClamped = toClamp;
+        }
         public float GetDisplayAttrib(AttribName _statName)
         {
             float actualVal = GetAttrib(_statName).currValue;

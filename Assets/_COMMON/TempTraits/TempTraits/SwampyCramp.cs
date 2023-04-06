@@ -19,7 +19,7 @@ namespace Common
                                                               LandscapeNames.Swamp, AttribName.willpower, -2);
         }
 
-        public override void OnEnd()
+        public override void OnTraitEnd()
         {
            
         }

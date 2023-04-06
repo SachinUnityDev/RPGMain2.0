@@ -34,8 +34,9 @@ namespace Interactables
                  charController, CauseType.SagaicGewgaw, (int)sagaicGewgawName, TimeFrame.EndOfRound, 3);
         }
 
-        void OnCharStateChg(CharStateData charStateData)
+        void OnCharStateChg(CharStateModData charStateModData)
         {
+            // TO BE REVIEWED 
             ApplyIfUnslackableFx();
         }
 

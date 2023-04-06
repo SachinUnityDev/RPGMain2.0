@@ -34,16 +34,16 @@ namespace Interactables
             buffIndex.Clear();
         }
 
-        void OnCharStateStartFX1(CharStateData charStateData)
+        void OnCharStateStartFX1(CharStateModData charStateModData)
         {
-            if (charStateData.charStateModel.charStateName != CharStateName.Feebleminded
-                || charStateData.charStateModel.charStateName != CharStateName.Confused
-                || charStateData.charStateModel.charStateName != CharStateName.Despaired
-                || charStateData.charStateModel.charStateName != CharStateName.Rooted
+            if (charStateModData.charStateName != CharStateName.Feebleminded
+                || charStateModData.charStateName != CharStateName.Confused
+                || charStateModData.charStateName != CharStateName.Despaired
+                || charStateModData.charStateName != CharStateName.Rooted
                 ) return;
             if (charStateFX1Applied) return; 
             int buffID = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw,
-                            (int)sagaicGewgawName, charStateData.causeCharID, AttribName.vigor,
+                            (int)sagaicGewgawName, charStateModData.causeByCharID, AttribName.vigor,
                             +5, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
             charStateFX1Applied = true; 
@@ -60,7 +60,7 @@ namespace Interactables
                 charController.buffController.RemoveBuff(buffIndex[0]);// vigor buff  
         }
 
-        void OnCharStateStartFX2(CharStateData charStateData)
+        void OnCharStateStartFX2(CharStateModData charStateModData)
         {
             //+3 Morale when Starving, -2 Morale when Unslakable
 

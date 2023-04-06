@@ -17,7 +17,7 @@ namespace Common
                                                           LandscapeNames.Rainforest, AttribName.focus, -3);
         }
 
-        public override void OnEnd()
+        public override void OnTraitEnd()
         {
             
         }

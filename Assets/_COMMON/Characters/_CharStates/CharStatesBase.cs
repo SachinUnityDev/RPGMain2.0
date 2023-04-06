@@ -84,14 +84,11 @@ namespace Common
         }
         public abstract void StateDisplay();
         public abstract void StateApplyFX();
-
         public abstract void StateApplyVFX();
-
         public virtual void PostCharStateApply()
         {
 
         }
-
         protected virtual void RoundTick()
         {
             int roundCounter = CombatService.Instance.currentRound - charStateModel.startRound;
@@ -100,6 +97,9 @@ namespace Common
         }
         protected virtual void CombatTick()
         {          
+            if(charStateName == CharStateName.BurnHighDOT || charStateName== CharStateName.BurnLowDOT ||
+               charStateName == CharStateName.BleedHighDOT || charStateName == CharStateName.BleedLowDOT ||
+               charStateName == CharStateName.PoisonedHighDOT || charStateName == CharStateName.PoisonedLowDOT)
             EndState(); 
         }
 
@@ -124,6 +124,9 @@ namespace Common
                     charController.charStateController.RemoveImmunityBuff(immuneBuffData.immunityID); 
                 }
             }
+
+            CombatEventService.Instance.OnEOR -= CombatTick;
+            CombatEventService.Instance.OnEOR -= RoundTick;
         }
 
 

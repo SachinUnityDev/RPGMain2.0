@@ -27,7 +27,7 @@ namespace Common
 
         }
 
-        public override void OnEnd()
+        public override void OnTraitEnd()
         {
             
         }

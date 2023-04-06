@@ -18,7 +18,7 @@ namespace Common
                                                        charID, AttribName.luck, 2, TimeFrame.Infinity, -1, true);
         }
 
-        public override void OnEnd()
+        public override void OnTraitEnd()
         {
             
         }

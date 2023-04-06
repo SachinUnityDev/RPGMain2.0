@@ -27,10 +27,7 @@ namespace Common
             this.causeType = causeType;
             this.causeID = causeID;
             this.charStateModel = charStateModel; 
-
-
         }
-
         public CharStateData()
         {
 
@@ -55,7 +52,7 @@ namespace Common
         // view control .. hover upon a Icon the scripts directs here with controller name and stateName
         // view controll logic easy access point 
 
-        public event Action<CharStateData> OnCharStateStart;  // events will drive the animations
+        public event Action<CharStateModData> OnCharStateStart;  // events will drive the animations
         public event Action<CharStateData> OnCharStateEnd;   
         public event Action<CharStateName, CharController> OnStateHovered; 
 
@@ -86,6 +83,12 @@ namespace Common
             Debug.Log("Char State Model Not found");
             return null; 
         }
+
+        public void On_CharStateStart(CharStateModData charStateModData)
+        {
+            OnCharStateStart?.Invoke(charStateModData); 
+        }
+
 
         public void ApplyCharState(GameObject _charGOEffected, CharStateName _charStateName, CharController causedby
                   , CauseType causeType, int causeID, TimeFrame timeFrame = TimeFrame.None, int castTime = -5)
@@ -124,7 +127,7 @@ namespace Common
             // broadcasting
             CharStateData charStateData = new CharStateData(causeCharName, causeByCharID, causeType, causeID
                                                        ,  charStateModelReload); 
-            OnCharStateStart?.Invoke(charStateData);
+         //   OnCharStateStart?.Invoke(charStateData);
         }
 
 
@@ -158,10 +161,10 @@ namespace Common
             }          
         }
 
-        public bool IsImmune(GameObject _charGO, CharStateName _charStateName)
-        {
-            return _charGO.GetComponent<CharController>().charModel.Immune2CharStateList.Any(t => t == _charStateName); 
-        }
+        //public bool IsImmune(GameObject _charGO, CharStateName _charStateName)
+        //{
+        //    return _charGO.GetComponent<CharController>().charModel.Immune2CharStateList.Any(t => t == _charStateName); 
+        //}
 
  
 

@@ -248,28 +248,44 @@ namespace Common
             armorType = _charSO.armorType;
 
             attribList = new List<AttribData>();
+            statList = new List<StatData>();
             int listLength = _charSO.AttribList.Count;
 
             StatsVsChanceSO statsVsChanceSO = CharService.Instance.statChanceSO; 
             //Debug.Log("list length " + listLength);
             for (int i = 0; i < listLength; i++)
             {
-                AttribData statdata = new AttribData();
-                statdata.AttribName = _charSO.AttribList[i].AttribName;
-                statdata.currValue = _charSO.AttribList[i].currValue;
-                statdata.baseValue = statdata.currValue;
-                statdata.desc = _charSO.AttribList[i].desc;
-                statdata.minRange = _charSO.AttribList[i].minRange;
-                statdata.maxRange = _charSO.AttribList[i].maxRange;
+                AttribData attribData = new AttribData();
+                attribData.AttribName = _charSO.AttribList[i].AttribName;
+                attribData.currValue = _charSO.AttribList[i].currValue;
+                attribData.baseValue = attribData.currValue;
+                attribData.desc = _charSO.AttribList[i].desc;
+                attribData.minRange = _charSO.AttribList[i].minRange;
+                attribData.maxRange = _charSO.AttribList[i].maxRange;
 
                 AttribChanceData statChanceData = statsVsChanceSO.allStatChanceData
                                     .Find(t => t.attribName == _charSO.AttribList[i].AttribName);
-                statdata.minLimit = _charSO.AttribList[i].minLimit;
+                attribData.minLimit = _charSO.AttribList[i].minLimit;
                 //_charSO.StatsList[i].minLimit;  // get stat Chance and copy from there
-                statdata.maxLimit = _charSO.AttribList[i].maxLimit;
+                attribData.maxLimit = _charSO.AttribList[i].maxLimit;
 
-                attribList.Add(statdata);
+                attribList.Add(attribData);
             }
+            for (int i = 0; i < _charSO.statList.Count; i++)
+            {
+                StatData statData = new StatData();
+                statData.statName = _charSO.statList[i].statName;
+                statData.currValue = _charSO.statList[i].currValue;            
+                statData.desc = _charSO.AttribList[i].desc;
+
+                statData.minLimit = _charSO.AttribList[i].minLimit;
+
+                statData.maxLimit = _charSO.AttribList[i].maxLimit;
+
+                statList.Add(statData);
+            }
+
+
         }
         #endregion
 

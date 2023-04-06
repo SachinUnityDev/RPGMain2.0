@@ -14,8 +14,8 @@ namespace Common
 {
     public class CalendarService : MonoSingletonGeneric<CalendarService>
     {
-        public event Action<DayName> OnCalendarDayStart;
-        public event Action<int> OnStartOfDay;// can broadcast day, week  and month too here
+        public event Action<DayName> OnCalendarDayStart;  // to be remove and incorported
+        public event Action<int> OnStartOfCalDay;// can broadcast day, week  and month too here
         public event Action<int> OnStartOfNight;
         public event Action<WeekName> OnStartOfTheWeek;
         public event Action<MonthName> OnStartOfTheMonth;
@@ -160,7 +160,7 @@ namespace Common
             Debug.Log("END Day");
             UpdateDay();
             OnChangeTimeState(TimeState.Day);
-            OnStartOfDay?.Invoke(day);
+            OnStartOfCalDay?.Invoke(day);
         }
         public void On_StartOfNight(int day)
         {

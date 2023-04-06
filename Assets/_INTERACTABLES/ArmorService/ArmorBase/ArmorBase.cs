@@ -24,7 +24,7 @@ namespace Interactables
         {
             this.charController = charController;
             armorSO = ArmorService.Instance.allArmorSO.GetArmorSOWithType(armorType);
-            CalendarService.Instance.OnStartOfDay += (int gameDay)=>DayTick(); 
+            CalendarService.Instance.OnStartOfCalDay += (int gameDay)=>DayTick(); 
 
 
         }

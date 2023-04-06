@@ -137,7 +137,7 @@ namespace Combat
             CombatEventService.Instance.OnCharClicked += SetCombatStatesDisplay;
             CharStatesPanelIconsClear();
             CharStatesService.Instance.OnCharStateStart += UpdateCharStateChg;
-            CharStatesService.Instance.OnCharStateEnd += UpdateCharStateChg;
+            // CharStatesService.Instance.OnCharStateEnd += UpdateCharStateChg;
 
         }
 
@@ -171,7 +171,7 @@ namespace Combat
         }
 
         #region CharBOTTOM_PANEL
-        void UpdateCharStateChg(CharStateData charStateData)
+        void UpdateCharStateChg(CharStateModData charStateModData)
         {
             SetCombatStatesDisplay(); 
         }

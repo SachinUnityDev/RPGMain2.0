@@ -19,8 +19,7 @@ namespace Common
         public CharNames charName;
         
 
-        public int currSkillID;
-        
+        public int currSkillID;        
 
         [Header("Skill Perk Data")]
         public List<PerkData> allSkillPerkData = new List<PerkData>();

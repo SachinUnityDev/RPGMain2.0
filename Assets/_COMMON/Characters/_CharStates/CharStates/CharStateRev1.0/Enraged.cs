@@ -42,11 +42,11 @@ namespace Common
             CharStatesService.Instance.OnCharStateStart += ApplyBurnFX; 
        
         }
-        void ApplyBurnFX(CharStateData charStateData)
+        void ApplyBurnFX(CharStateModData charStateModData)
         {
-            if(charController.charModel.charID == charStateData.charStateModel.effectedCharID)
-                if(charStateData.charStateModel.charStateName == CharStateName.BurnLowDOT ||
-                    charStateData.charStateModel.charStateName == CharStateName.BurnHighDOT)
+            if(charController.charModel.charID == charStateModData.effectedCharID)
+                if(charStateModData.charStateName == CharStateName.BurnLowDOT ||
+                    charStateModData.charStateName == CharStateName.BurnHighDOT)
              
                     charController.ChangeStat(CauseType.CharState, (int)charStateName, charID
                                                        , StatName.fortitude, 12);

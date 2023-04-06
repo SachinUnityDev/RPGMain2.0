@@ -33,9 +33,17 @@ namespace Common
         public abstract TempTraitName tempTraitName { get; }
         public CharController charController; 
 
+        public virtual void TempTraitInit()
+        {
+            // to be completed
+        }
+
         public abstract void OnApply(CharController charController);
 
-        public abstract void OnEnd();
+        public virtual void OnTraitEnd()
+        {
+
+        }
 
     }
 
@@ -97,19 +105,3 @@ namespace Common
     }
 
 }
-//public abstract class TempTraitBase : MonoBehaviour
-//{
-//    public abstract TempTraitName tempTraitName { get; }
-//    public abstract TempTraitType traitType { get;  }
-//    public abstract TraitBehaviour traitBehaviour { get; }
-
-//    public abstract void ApplyTempTrait(CharController _charController);
-
-//    public abstract void RemoveTempTrait(CharController _charController);
-
-//    public abstract void StartConditionCheck(CharController _charController);
-
-//    public abstract void EndConditionCheck(CharController _charController);
-
-//    public abstract void ChkCharImmunityfromThis(CharController _charController);
-//}

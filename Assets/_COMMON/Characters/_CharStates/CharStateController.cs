@@ -16,6 +16,7 @@ namespace Common
         public int effectedCharID;
         public CharStateName charStateName;
         public bool isImmunity; 
+        
 
         public CharStateModData(CauseType causeType, int causeName, int causeByCharID
                                     , int effectedCharID, CharStateName charStateName, bool isImmunity= false)
@@ -112,12 +113,13 @@ namespace Common
                                                                         , charStateModData); 
 
             allCharStateBuffs.Add(charStateBuffData);
+
+           
+            CharStatesService.Instance.On_CharStateStart(charStateModData);
+
             // add Char State Buffs FX 
             return stateID;
         }
-
-
-        
 
         public int ApplyImmunityBuff(CauseType causeType, int causeName, int causeByCharID
                                 , CharStateName charStateName, TimeFrame timeFrame, int netTime) // immunity buff for this char State
@@ -181,13 +183,7 @@ namespace Common
             }
             return allImmuneBuffID;
         }
-
-        public void RemoveStateFX(CharStateBuffData charStateBuffData)
-        {   // remove buff FX
-            allCharStateBuffs.Remove(charStateBuffData); // list
-            RemoveCharState(charStateBuffData.charStateModData.charStateName); 
-        }
-
+               
         public List<string> GetCharStateBuffList()
         {
             foreach (CharStateBuffData charStateBuffData in allCharStateBuffs)
@@ -304,7 +300,8 @@ namespace Common
                 {
                     if (stateData.currentTime >= stateData.netTime)
                     {
-                        RemoveStateFX(stateData);
+                        allCharStateBuffs.Remove(stateData); // list
+                        RemoveCharState(stateData.charStateModData.charStateName);
                     }
                     stateData.currentTime++;
                 }
@@ -317,7 +314,8 @@ namespace Common
             {
                 if (stateData.timeFrame == TimeFrame.EndOfCombat)
                 {
-                    RemoveStateFX(stateData);
+                    allCharStateBuffs.Remove(stateData); // list
+                    RemoveCharState(stateData.charStateModData.charStateName);
                 }
             }
         }

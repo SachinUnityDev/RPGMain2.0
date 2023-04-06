@@ -70,13 +70,15 @@ namespace Combat
         }
 #region  # COMBAT LOG BUILDERS 
         // **********CHAR STATE
-        void CharStateStart(CharStateData charStateData)
+        void CharStateStart(CharStateModData charStateModData)
         {
-            CharNames charName = charStateData.charStateModel.effectedChar;
 
-            string str = charName + " is now " + charStateData.charStateModel.charStateName +", "
-                                 + charStateData.charStateModel.castTime + " rds";
             
+            CharController charController = CharService.Instance.GetCharCtrlWithCharID(charStateModData.effectedCharID);
+            CharNames charName = charController.charModel.charName;
+            string str = charName + " is now " + charStateModData.charStateName + ", "; 
+                                 //+ charStateModData.castTime + " rds";
+
             combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
             RefreshCombatLogUI();
 

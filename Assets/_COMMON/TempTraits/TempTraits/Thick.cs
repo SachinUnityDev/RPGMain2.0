@@ -17,7 +17,7 @@ namespace Common
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
                                                          charID, AttribName.dodge, -3, TimeFrame.Infinity, -1, true);
         }
-        public override void OnEnd()
+        public override void OnTraitEnd()
         {
             
         }

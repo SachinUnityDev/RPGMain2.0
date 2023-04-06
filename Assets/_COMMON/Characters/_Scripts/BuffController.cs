@@ -74,8 +74,8 @@ namespace Combat
         {
             // should have feature of printing some data from skills directly
 
-            CalendarService.Instance.OnStartOfDay += (int dayName) => ToggleBuffsOnStartOfTheDay();
-            CalendarService.Instance.OnStartOfDay += (int dayName) => ToggleBuffsOnStartOfTheNight();
+            CalendarService.Instance.OnStartOfCalDay += (int dayName) => ToggleBuffsOnStartOfTheDay();
+            CalendarService.Instance.OnStartOfCalDay += (int dayName) => ToggleBuffsOnStartOfTheNight();
         }
 
 

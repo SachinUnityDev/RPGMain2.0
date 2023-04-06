@@ -47,7 +47,7 @@ namespace Town
 
         private void Start()
         {
-            CalendarService.Instance.OnStartOfDay += (int day) => TownViewInit();
+            CalendarService.Instance.OnStartOfCalDay += (int day) => TownViewInit();
             CalendarService.Instance.OnStartOfNight += (int day) => TownViewInit();
         }
         public void OnBuildSelect(BuildingNames buildName)

@@ -97,7 +97,7 @@ namespace Interactables
                 itemController.Init();
                 allItemControllers.Add(itemController);
             }
-            CalendarService.Instance.OnStartOfDay += (int day) => OnDayTickOnScroll();
+            CalendarService.Instance.OnStartOfCalDay += (int day) => OnDayTickOnScroll();
         }
 
         #region ITEM BASE

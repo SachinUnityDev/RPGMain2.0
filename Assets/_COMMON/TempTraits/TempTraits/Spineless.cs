@@ -18,7 +18,7 @@ namespace Common
                                                         charID, AttribName.willpower, -3, TimeFrame.Infinity, -1, true);
         }
 
-        public override void OnEnd()
+        public override void OnTraitEnd()
         {
             
         }

@@ -36,7 +36,7 @@ namespace Common
         {
             traitID = 0;
             charController = GetComponent<CharController>();
-            CalendarService.Instance.OnStartOfDay +=(int day)=> DayTick();          
+            CalendarService.Instance.OnStartOfCalDay +=(int day)=> DayTick();          
             charController = gameObject.GetComponent<CharController>(); 
         }
         #region TRAIT APPLY & REMOVE

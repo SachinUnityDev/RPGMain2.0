@@ -12,10 +12,12 @@ namespace Interactables
     public class StatsPtrEventsComp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] AttribName AttribName;
+        [SerializeField] StatName statName; 
         [SerializeField] bool isOnLeft = false;
 
         [SerializeField] GameObject desc;
-        [SerializeField] AttribData statData;
+        [SerializeField] AttribData attribData;
+        [SerializeField] StatData statData; 
         public CharModel charModel;
         Transform PanelTrans; 
 
@@ -28,15 +30,13 @@ namespace Interactables
             InvService.Instance.OnCharSelectInvPanel += PopulateData;
         }
         private void Start()
-        {
-        
+        {        
             CharService.Instance.allCharsInParty.ForEach(t => t.OnAttribCurrValSet
              += (AttribModData charModData) => PopulateData(CharService.Instance.GetCharCtrlWithCharID
              (charModData.effectedCharNameID).charModel));
         }
         public void PopulateData(CharModel charModel)
         {
-
             transform.GetChild(1).GetComponent<TextMeshProUGUI>().text
                                                     = GetStatAttribStr(charModel);
         }
@@ -52,27 +52,47 @@ namespace Interactables
             else
             {
                 this.charModel = charModel;
-                statData = charModel.attribList.Find(t => t.AttribName == AttribName);
-                PopulateDesc();
-                if (AttribName == AttribName.armor || AttribName == AttribName.damage)
+
+                if(AttribName != AttribName.None)
                 {
-                    str = statData.minRange + "-" + statData.maxRange;
+
+                    attribData = charModel.attribList.Find(t => t.AttribName == AttribName);
+                    PopulateDesc();
+                    if (AttribName == AttribName.armor || AttribName == AttribName.damage)
+                    {
+                        str = attribData.minRange + "-" + attribData.maxRange;
+                    }
+                    else
+                    {
+                        str = attribData.currValue.ToString();
+                    }
                 }
-                else
+                if (statName != StatName.None)
                 {
-                    str = statData.currValue.ToString();
+                    statData = charModel.statList.Find(t => t.statName == statName);
+                    PopulateDesc();                    
+                    str = attribData.currValue.ToString();                    
                 }
             }
             return str;
         }
 
         void PopulateDesc()
-        {
-           // Debug.Log("StatName" + statName + "Char" + charModel.charName);
-            desc.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text
-                            = statData.AttribName.ToString().CreateSpace();
-            desc.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text
-                            = statData.desc;
+        {          
+            if(AttribName != AttribName.None)
+            {
+                desc.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text
+                            = attribData.AttribName.ToString().CreateSpace();
+                desc.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text
+                                = attribData.desc;
+            }
+            if (statName != StatName.None)
+            {
+                desc.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text
+                            = statData.statName.ToString().CreateSpace();
+                desc.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text
+                                = statData.desc;
+            }
         }
 
         public void OnPointerEnter(PointerEventData eventData)

@@ -40,7 +40,7 @@ namespace Town
         {
             // InitBrewWIP();
      
-            CalendarService.Instance.OnStartOfDay += OnDayChange;
+            CalendarService.Instance.OnStartOfCalDay += OnDayChange;
         }
         public void InitBrewWIP()
         {

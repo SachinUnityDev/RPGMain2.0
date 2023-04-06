@@ -22,9 +22,9 @@ namespace Interactables
             valAir = UnityEngine.Random.Range(14 , 21);            
         }
 
-        void OnCharStateStart(CharStateData charStateData)
+        void OnCharStateStart(CharStateModData charStateModData)
         {
-            if(charStateData.charStateModel.charStateName == CharStateName.FirstBlood)
+            if(charStateModData.charStateName == CharStateName.FirstBlood)
             {
                 AttribData statData = charController.GetAttrib(AttribName.damage);
                 int buffID = charController.buffController.ApplyBuffOnRange(CauseType.SagaicGewgaw, charController.charModel.charID,

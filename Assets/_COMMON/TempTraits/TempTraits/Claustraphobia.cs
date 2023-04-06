@@ -14,7 +14,7 @@ namespace Common
             this.charController = charController;
             // +60% fortitude loss in the sewers 
         }
-        public override void OnEnd()
+        public override void OnTraitEnd()
         {
             // unsubscribe
         }

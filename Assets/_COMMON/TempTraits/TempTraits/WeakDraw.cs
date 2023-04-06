@@ -15,7 +15,7 @@ namespace Common
             this.charController = charController;
         }
 
-        public override void OnEnd()
+        public override void OnTraitEnd()
         {
             
         }

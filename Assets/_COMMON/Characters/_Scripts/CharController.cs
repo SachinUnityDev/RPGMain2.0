@@ -204,6 +204,13 @@ namespace Common
             StatData statData = charModel.statList.Find(x => x.statName == statName);
             statData.isClamped = toClamp;
         }
+        public void ClampStatToggle2Val(StatName statName, bool toClamp, float val)
+        {
+            StatData statData = charModel.statList.Find(x => x.statName == statName);
+            statData.currValue = val;
+            statData.isClamped = toClamp;
+        }
+
         public float GetDisplayAttrib(AttribName _statName)
         {
             float actualVal = GetAttrib(_statName).currValue;

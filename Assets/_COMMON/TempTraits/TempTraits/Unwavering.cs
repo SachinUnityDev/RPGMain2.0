@@ -17,7 +17,7 @@ namespace Common
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
                                                        charID, AttribName.focus, 2, TimeFrame.Infinity, -1, true);
         }
-        public override void OnEnd()
+        public override void OnTraitEnd()
         {
             
         }

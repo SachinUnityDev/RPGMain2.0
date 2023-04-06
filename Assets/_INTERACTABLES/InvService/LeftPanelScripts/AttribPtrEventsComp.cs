@@ -9,11 +9,11 @@ namespace Interactables
 {
     public class AttribPtrEventsComp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        [SerializeField] AttribName statName;
+        [SerializeField] AttribName attribName;
         [SerializeField] bool isOnLeft = false;
 
         [SerializeField] GameObject desc;
-        [SerializeField] AttribData statData;
+        [SerializeField] AttribData attribData;
         AttribPanelViewComp attribPanelViewComp;
         BtmCharViewController btmCharViewController; 
 
@@ -51,16 +51,16 @@ namespace Interactables
             }
             else
             {
-                statData = charModel.attribList.Find(t => t.AttribName == statName);
+                attribData = charModel.attribList.Find(t => t.AttribName == attribName);
                 PopulateDesc();
-                if (statName == AttribName.armor || statName == AttribName.damage)
+                if (attribName == AttribName.armor || attribName == AttribName.damage)
                 {
 
-                    str = statData.minRange + "-" + statData.maxRange;
+                    str = attribData.minRange + "-" + attribData.maxRange;
                 }
                 else
                 {
-                    str = statData.currValue.ToString();
+                    str = attribData.currValue.ToString();
                 }
             }
             return str;
@@ -69,9 +69,9 @@ namespace Interactables
         void PopulateDesc()
         {
             desc.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text
-                            = statData.AttribName.ToString().CreateSpace();
+                            = attribData.AttribName.ToString().CreateSpace();
             desc.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text
-                            = statData.desc;
+                            = attribData.desc;
         }
 
         public void OnPointerEnter(PointerEventData eventData)

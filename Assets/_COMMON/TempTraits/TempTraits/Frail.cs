@@ -18,7 +18,7 @@ using UnityEngine;
                                                          charID, AttribName.vigor, -3, TimeFrame.Infinity, -1, true);
         }
 
-        public override void OnEnd()
+        public override void OnTraitEnd()
         {
             
         }

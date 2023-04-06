@@ -1,0 +1,42 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Combat;
+
+namespace Common
+{
+
+    public class Flatfooted : CharStatesBase
+    {
+        //-3 Haste
+        public override CharStateName charStateName => CharStateName.FlatFooted; 
+
+        public override CharStateModel charStateModel { get ; set ; }
+        public override CharController charController { get; set; }
+        public override int charID { get; set; }
+        public override StateFor stateFor => StateFor.Mutual;
+
+        public override int castTime { get; protected set; }
+
+        public override void StateApplyFX()
+        {
+            int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+             , charID, AttribName.haste, -3, charStateModel.timeFrame, charStateModel.castTime, true);
+            allBuffIds.Add(buffID);
+        }
+
+        public override void StateApplyVFX()
+        {
+            
+        }
+
+        public override void StateDisplay()
+        {
+            str0 = "-3 Haste";
+            charStateModel.charStateCardStrs.Add(str0);
+
+            str1 = "No extra Move action";
+            charStateModel.charStateCardStrs.Add(str1);
+        }
+    }
+}

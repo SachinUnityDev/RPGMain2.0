@@ -28,11 +28,11 @@ namespace Interactables
             charController.damageController.OnDamageApplied += OnCritHit;
             SkillService.Instance.OnSkillUsed += OnSkillUsed;
         }
-        void OnCharStateStart(CharStateData charStateData)
+        void OnCharStateStart(CharStateModData charStateModData)
         {
-            if (charStateData.charStateModel.charStateName != CharStateName.Starving) return;
+            if (charStateModData.charStateName != CharStateName.Starving) return;
              int buffID =   charController.buffController.ApplyBuff(CauseType.SagaicGewgaw,
-                             (int)sagaicGewgawName, charStateData.causeCharID,AttribName.vigor,
+                             (int)sagaicGewgawName, charStateModData.causeByCharID,AttribName.vigor,
                              +4, TimeFrame.Infinity, -1, true); 
             buffIndex.Add(buffID);
         }

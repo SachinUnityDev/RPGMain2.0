@@ -48,10 +48,8 @@ namespace Combat
         {
             chance = 50f;
             if (chance.GetChance())
-                CharStatesService.Instance
-                    .ApplyCharState(targetGO, CharStateName.PoisonedLowDOT
-                                     , charController, CauseType.CharSkill, (int)skillName);
-
+                charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                       , charController.charModel.charID, CharStateName.PoisonedLowDOT); 
         }
 
         public override void ApplyFX3()
@@ -85,7 +83,7 @@ namespace Combat
 
                 if (dyna != null)
                 {
-                    if (CharStatesService.Instance.HasCharDOTState(charGO, CharStateName.BleedLowDOT))
+                    if (targetController.charStateController.HasCharDOTState(CharStateName.BleedLowDOT))
                     {
                         SkillService.Instance.currentTargetDyna = dyna;
                         return; 

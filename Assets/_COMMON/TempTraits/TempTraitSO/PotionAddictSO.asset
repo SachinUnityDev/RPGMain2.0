@@ -22,3 +22,11 @@ MonoBehaviour:
   allLines:
   - "+50% Hunger and Thirst\tUpon consume Potion: -3 Hp"
   - 'If no Potion consumed for a quest: -2 Vigor for 1 day'
+  sicknessData:
+    herb1:
+      herbName: 6
+      qty: 4
+    herb2:
+      herbName: 0
+      qty: 0
+    restTimeInday: 1

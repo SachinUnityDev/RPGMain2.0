@@ -38,8 +38,8 @@ namespace Town
         [SerializeField] Transform currTrans; 
 
         [Header("Global var")]
-        public List<TempTraitModel> posMentalTraits= new List<TempTraitModel>();
-        public List<TempTraitModel> negMentalTraits = new List<TempTraitModel>();
+        public List<TempTraitBuffData> posMentalTraits= new List<TempTraitBuffData>();
+        public List<TempTraitBuffData> negMentalTraits = new List<TempTraitBuffData>();
 
         TempTraitController tempTraitController; 
         private void Awake()
@@ -120,7 +120,7 @@ namespace Town
         {
             posMentalTraits.Clear(); 
             negMentalTraits.Clear();
-            foreach (TempTraitModel model in tempTraitController.alltempTraitApplied)
+            foreach (TempTraitBuffData model in tempTraitController.alltempTraitApplied)
             {
                 TempTraitSO tempSO = TempTraitService.Instance.allTempTraitSO.GetTempTraitSO(model.tempTraitName); 
                 if(tempSO.tempTraitType == TempTraitType.Mental)

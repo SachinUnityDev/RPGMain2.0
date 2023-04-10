@@ -74,8 +74,11 @@ namespace Combat
         {         
             if (_chance.GetChance())
             {
-                CharStatesService.Instance.ApplyCharState(targetGO, CharStateName.BleedLowDOT
-                                     , charController, CauseType.CharSkill, (int)skillName);
+            //    CharStatesService.Instance.ApplyCharState(targetGO, CharStateName.BleedLowDOT
+            //                         , charController, CauseType.CharSkill, (int)skillName);
+
+                 charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                    , charController.charModel.charID, CharStateName.BleedLowDOT);
             }
 
             //Debug.Log("Skill3" + desc);
@@ -117,21 +120,4 @@ namespace Combat
            // Debug.Log("Move FX" + desc);
         }
     }
-
 }
-
-//public override void SkillSelected()
-//{
-//    DynamicPosData currCharDyna = GridService.Instance.GetDyna4GO(charGO);
-
-//    if (!skillModel.castPos.Any(t => t == currCharDyna.currentPos))
-//        return;
-
-
-
-
-
-
-//    GridService.Instance.HLTargetTiles(skillModel.targetPos);
-
-//}

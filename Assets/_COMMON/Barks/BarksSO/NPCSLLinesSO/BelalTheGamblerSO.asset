@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nPCName: 5
   NPCBarkData:
-  - FameType: 8
+  - FameType: 7
     interactType: 0
     barkLineData:
     - barkline: "Come, let's gamble!\r"
@@ -22,4 +22,3 @@ MonoBehaviour:
     - barkline: Mayhaps it's your lucky day!
       barkAudio: {fileID: 0}
   allNPCInteractBarkData: []
-  allBuildInteractBarkData: []

@@ -31,6 +31,9 @@ namespace Town
     public class HouseModel
     {
 
+        [Header("Build State")]
+        public BuildingState buildState; 
+
         [Header("Interact: Buy Furniture")]
         public List<HousePurchaseOptsData> purchaseOpts = new List<HousePurchaseOptsData> ();
 
@@ -77,6 +80,8 @@ namespace Town
         }
         public HouseModel(BuildingSO houseSO)
         {
+            buildState = houseSO.buildingData.buildingState; 
+
             buildIntTypes = houseSO.buildingData.buildIntTypes.DeepClone();
             npcData = houseSO.buildingData.npcInteractData.DeepClone();
             charInteract = houseSO.buildingData.charInteractData.DeepClone();

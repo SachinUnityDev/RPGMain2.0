@@ -9,7 +9,6 @@ namespace Common
     public class Rooted : CharStatesBase
     {
         public override CharStateName charStateName => CharStateName.Rooted;
-        public override CharStateModel charStateModel { get; set; }
         public override CharController charController { get; set; }
         public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
@@ -22,12 +21,12 @@ namespace Common
            //	Immune to Lightfooted
 
             int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-            , charID, AttribName.dodge, -6, charStateModel.timeFrame, charStateModel.castTime, true);
+            , charID, AttribName.dodge, -6, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             int immuneBuffID = charController.charStateController
                 .ApplyImmunityBuff(CauseType.CharState, (int)charStateName
-                   , charID, CharStateName.Lightfooted, charStateModel.timeFrame, charStateModel.castTime);
+                   , charID, CharStateName.Lightfooted, timeFrame, castTime);
 
             allImmunityBuffs.Add(immuneBuffID);
 
@@ -40,16 +39,16 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "Can't use Move skills";
-            charStateModel.charStateCardStrs.Add(str0);
+            charStateCardStrs.Add(str0);
 
             str1 = "Melee attack limit: pos 1 -> pos 1";
-            charStateModel.charStateCardStrs.Add(str1);
+            charStateCardStrs.Add(str1);
 
             str2 = "-6 Dodge";
-            charStateModel.charStateCardStrs.Add(str2);
+            charStateCardStrs.Add(str2);
 
             str3 = "Immune to<style=States> Inspired </style>";
-            charStateModel.charStateCardStrs.Add(str3);
+            charStateCardStrs.Add(str3);
         }
     }
 }

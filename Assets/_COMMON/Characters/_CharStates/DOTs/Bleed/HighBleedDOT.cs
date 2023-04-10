@@ -8,7 +8,6 @@ namespace Common
     public class HighBleedDOT : CharStatesBase
     {
         public override CharStateName charStateName => CharStateName.BleedHighDOT;
-        public override CharStateModel charStateModel { get; set; }
         public override CharController charController { get; set; }
         public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
@@ -83,15 +82,15 @@ namespace Common
         {
             int dmg = Mathf.RoundToInt(dmgPerRound);
             str0 = "<style=Bleed> Bleeding </style>";
-            charStateModel.charStateCardStrs.Add(str0);
+            charStateCardStrs.Add(str0);
             str1 = $"-3<style=Bleed> Health </style>per rd";
-            charStateModel.charStateCardStrs.Add(str1);
+            charStateCardStrs.Add(str1);
             str2 = "-1<style=Stamina> Stamina Regen </style>";
-            charStateModel.charStateCardStrs.Add(str2);
+            charStateCardStrs.Add(str2);
             str3 = "-2<style=Fortitude> Fortitude </style>per rd";
-            charStateModel.charStateCardStrs.Add(str3);
+            charStateCardStrs.Add(str3);
             str4 = "-2<style=Attributes> Dodge </style>";
-            charStateModel.charStateCardStrs.Add(str4);
+            charStateCardStrs.Add(str4);
         }
 
         public override void EndState()

@@ -17,8 +17,16 @@ MonoBehaviour:
   temptraitBehavior: 2
   minCastTime: -1
   maxCastTime: -1
-  desc: 
+  traitNameStr: ' Rat Bite Fever'
   iconSprite: {fileID: 0}
   allLines:
   - -1 Utility stats
   - -20% Hunger and Thirst
+  sicknessData:
+    herb1:
+      herbName: 4
+      qty: 2
+    herb2:
+      herbName: 13
+      qty: 1
+    restTimeInday: 0

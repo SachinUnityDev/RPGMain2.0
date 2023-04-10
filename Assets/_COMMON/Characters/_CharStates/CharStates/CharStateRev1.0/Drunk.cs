@@ -11,8 +11,7 @@ namespace Common
         //can not cheat death -(cheat death chance is divded into die
         //and lose fortitude chances on Last Drop of Blood effects)
 
-        public override CharStateName charStateName => CharStateName.Drunk;
-        public override CharStateModel charStateModel { get; set; }
+        public override CharStateName charStateName => CharStateName.Drunk;       
         public override CharController charController { get; set; }
         public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Heroes;
@@ -22,19 +21,19 @@ namespace Common
 
             CalendarService.Instance.OnStartOfCalDay += OnEndofTheNight;
             int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-            , charID, AttribName.focus, -2, charStateModel.timeFrame, charStateModel.castTime, true);
+            , charID, AttribName.focus, -2, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                , charID, AttribName.acc, -2, charStateModel.timeFrame, charStateModel.castTime, true);
+                , charID, AttribName.acc, -2, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-               , charID, AttribName.dodge, -2, charStateModel.timeFrame, charStateModel.castTime, true);
+               , charID, AttribName.dodge, -2, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-               , charID, AttribName.fortOrg, 6, charStateModel.timeFrame, charStateModel.castTime, true);
+               , charID, AttribName.fortOrg, 6, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
 
@@ -58,10 +57,10 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "-2 Focus, -2 Acc, -2 Dodge";
-            charStateModel.charStateCardStrs.Add(str0);
+            charStateCardStrs.Add(str0);
 
             str1 = "+6 Fort Origin";
-            charStateModel.charStateCardStrs.Add(str1);
+            charStateCardStrs.Add(str1);
         }
     }
 }

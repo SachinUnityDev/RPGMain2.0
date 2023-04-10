@@ -45,9 +45,8 @@ namespace Combat
   
         public override void ApplyFX1()
         {
-            CharStatesService.Instance
-                .ApplyCharState(charGO, CharStateName.Soaked
-                                     , charController, CauseType.CharSkill, (int)skillName);
+            targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                    , charController.charModel.charID, CharStateName.Soaked); 
         }
 
         public override void ApplyFX2()
@@ -69,7 +68,7 @@ namespace Combat
         public override void SkillEnd()
         {
             base.SkillEnd();
-            CharStatesService.Instance.RemoveCharState(charGO,  CharStateName.Soaked);
+            targetController.charStateController.RemoveCharState(CharStateName.Soaked);
            // CombatService.Instance.mainTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>()
            //.ChangeStat(CauseType.CharSkill, (int)skillName, charController, StatsName.morale, 3));
 

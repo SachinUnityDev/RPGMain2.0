@@ -17,9 +17,17 @@ MonoBehaviour:
   temptraitBehavior: 2
   minCastTime: -1
   maxCastTime: -1
-  desc: 
+  traitNameStr: ' Diarrhea'
   iconSprite: {fileID: 0}
   allLines:
   - +2 Dodge
   - -4 Acc
   - -2 Focus
+  sicknessData:
+    herb1:
+      herbName: 8
+      qty: 2
+    herb2:
+      herbName: 2
+      qty: 2
+    restTimeInday: 1

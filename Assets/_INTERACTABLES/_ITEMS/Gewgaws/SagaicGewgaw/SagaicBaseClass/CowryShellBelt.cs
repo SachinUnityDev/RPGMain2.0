@@ -49,12 +49,12 @@ namespace Interactables
             charStateFX1Applied = true; 
         }
 
-        void OnCharStateEndFX1(CharStateData charStateData)
+        void OnCharStateEndFX1(CharStateModData  stateModData)
         {
-            if (charStateData.charStateModel.charStateName == CharStateName.Feebleminded
-               ^ charStateData.charStateModel.charStateName == CharStateName.Confused
-               ^ charStateData.charStateModel.charStateName == CharStateName.Despaired
-               ^ charStateData.charStateModel.charStateName == CharStateName.Rooted
+            if (stateModData.charStateName == CharStateName.Feebleminded
+               ^ stateModData.charStateName == CharStateName.Confused
+               ^ stateModData.charStateName == CharStateName.Despaired
+               ^ stateModData.charStateName == CharStateName.Rooted
                ) return; 
 
                 charController.buffController.RemoveBuff(buffIndex[0]);// vigor buff  
@@ -67,7 +67,7 @@ namespace Interactables
 
 
         }
-        void OnCharStateEndFX2(CharStateData charStateData)
+        void OnCharStateEndFX2(CharStateModData charStateModData)
         {
 
         }

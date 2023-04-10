@@ -10,10 +10,9 @@ namespace Town
     [System.Serializable]
     public enum BuildingState
     {
-        Locked,
-        UnLocked,
-        Available,
-        UnAvailable,
+        Locked,    // when you click that building it gives a notification box...locked bark        
+        Available,  // enter 
+        UnAvailable, // unavailable bark
     }
     [Serializable]
     public enum NPCState

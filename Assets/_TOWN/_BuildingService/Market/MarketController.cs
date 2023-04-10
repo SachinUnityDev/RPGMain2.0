@@ -14,6 +14,8 @@ namespace Town
         public MarketView marketView;
         void Start()
         {
+
+
             marketSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.Marketplace);
             marketModel = new MarketModel(marketSO);
         }

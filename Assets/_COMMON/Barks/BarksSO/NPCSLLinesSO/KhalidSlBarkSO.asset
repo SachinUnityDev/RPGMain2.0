@@ -13,51 +13,53 @@ MonoBehaviour:
   m_Name: KhalidSlBarkSO
   m_EditorClassIdentifier: 
   nPCName: 10
-  NPCBarkData: []
+  NPCBarkData:
+  - FameType: 0
+    interactType: 0
+    barkLineData: []
   allNPCInteractBarkData:
   - tempTraitName: 34
-    interactType: 3
+    buildIntType: 19
     barkLine:
       barkline: "I could respect you more if you got herpes.\r"
       barkAudio: {fileID: 0}
   - tempTraitName: 36
-    interactType: 3
+    buildIntType: 19
     barkLine:
       barkline: "I could respect you more if you got herpes.\r"
       barkAudio: {fileID: 0}
   - tempTraitName: 55
-    interactType: 3
+    buildIntType: 19
     barkLine:
       barkline: "I could respect you more if you got herpes.\r"
       barkAudio: {fileID: 0}
   - tempTraitName: 16
-    interactType: 3
+    buildIntType: 19
     barkLine:
       barkline: "What kind of a warrior would lie at home for this sickness, eh?\r"
       barkAudio: {fileID: 0}
   - tempTraitName: 29
-    interactType: 3
+    buildIntType: 19
     barkLine:
       barkline: "What kind of a warrior would lie at home for this sickness, eh?\r"
       barkAudio: {fileID: 0}
   - tempTraitName: 37
-    interactType: 3
+    buildIntType: 19
     barkLine:
       barkline: "What kind of a warrior would lie at home for this sickness, eh?\r"
       barkAudio: {fileID: 0}
   - tempTraitName: 10
-    interactType: 3
+    buildIntType: 19
     barkLine:
       barkline: "Don't worry, your ass is my ass, i will take care of it.\r"
       barkAudio: {fileID: 0}
   - tempTraitName: 12
-    interactType: 3
+    buildIntType: 19
     barkLine:
       barkline: "Don't worry, your ass is my ass, i will take care of it.\r"
       barkAudio: {fileID: 0}
   - tempTraitName: 21
-    interactType: 3
+    buildIntType: 19
     barkLine:
       barkline: Kid, are you playing Find the Dark with your life?
       barkAudio: {fileID: 0}
-  allBuildInteractBarkData: []

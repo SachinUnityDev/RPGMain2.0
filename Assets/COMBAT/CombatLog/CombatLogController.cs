@@ -83,10 +83,11 @@ namespace Combat
             RefreshCombatLogUI();
 
         }
-        void CharStateEnd(CharStateData charStateData)
+        void CharStateEnd(CharStateModData charStateModData)
         {
-            string str = charStateData.charStateModel.effectedChar + " state ENDS " + charStateData.charStateModel.charStateName + ", "
-                + charStateData.charStateModel.castTime + " rds";
+            string charNameStr = CharService.Instance.GetCharCtrlWithCharID(charStateModData.effectedCharID).charModel.charNameStr; 
+            string str = charNameStr + " state ENDS " + charStateModData.charStateName + "";
+               
             combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
             RefreshCombatLogUI();
 

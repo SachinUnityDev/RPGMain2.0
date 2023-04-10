@@ -38,7 +38,7 @@ namespace Combat
                 charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.acc
                     , +6, false);
             }
-            if (CharStatesService.Instance.HasCharDOTState(targetGO, CharStateName.BleedLowDOT))
+            if (targetController.charStateController.HasCharDOTState(CharStateName.BleedLowDOT))
             {
                 charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.luck
                     , +6, false);

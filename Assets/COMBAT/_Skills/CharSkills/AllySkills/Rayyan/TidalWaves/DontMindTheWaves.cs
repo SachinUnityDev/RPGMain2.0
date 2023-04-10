@@ -62,13 +62,13 @@ namespace Combat
 
         public override void ApplyFX1()  // Soak all in front enemy n allies 
         {
-            allEnemies.ForEach(t => CharStatesService.Instance
-                                .ApplyCharState(t.charGO, CharStateName.Soaked
-                                     , charController, CauseType.CharSkill, (int)skillName));
-            
-            allAlliesINFront.ForEach(t => CharStatesService.Instance
-                                    .ApplyCharState(t.charGO, CharStateName.Soaked
-                                     , charController, CauseType.CharSkill, (int)skillName));
+            allEnemies.ForEach(t => t.charGO.GetComponent<CharController>().charStateController.
+                                ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                       , charController.charModel.charID, CharStateName.Soaked));
+
+            allAlliesINFront.ForEach(t => t.charGO.GetComponent<CharController>().charStateController.
+                                ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                       , charController.charModel.charID, CharStateName.Soaked));
         }
 
         public override void ApplyFX2()  

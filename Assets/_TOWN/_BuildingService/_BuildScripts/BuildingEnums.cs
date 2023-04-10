@@ -46,6 +46,7 @@ namespace Town
         ClearMind, 
         Fortify, 
         CraftPotion,
+        CureSickness,
     }
     
     public enum HousePurchaseOpts

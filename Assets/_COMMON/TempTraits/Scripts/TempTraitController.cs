@@ -11,13 +11,14 @@ namespace Common
 {
     public class TempTraitController : MonoBehaviour
     {
-        public List<TempTraitModel> alltempTraitApplied = new List<TempTraitModel>();
-        public List<TempTraitModel> allTempTraitImmunities = new List<TempTraitModel>();
+       // Immunity 
+        public List<TempTraitBuffData> allTempTraitImmunities = new List<TempTraitBuffData>();
 
-
+        // Applied 
+        public List<TempTraitBuffData> alltempTraitApplied = new List<TempTraitBuffData>();
         public List<TempTraitBase> allTempTraitAppliedBase = new List<TempTraitBase>();   
-        [SerializeField] List<string> allTempTraitsStr = new List<string>();
-      
+
+
         public CharController charController;
         int traitID =-1;
         /// <summary>
@@ -61,8 +62,8 @@ namespace Common
             // mod data for record and string creation 
             TempTraitModData modData = new TempTraitModData(causeType, causeName, causeByCharID, netTime, tempTraitName);
 
-            TempTraitModel tempTraitAppliedData
-                             = new TempTraitModel(traitID, tempTraitName, startDay, netTime, modData);
+            TempTraitBuffData tempTraitAppliedData
+                             = new TempTraitBuffData(traitID, tempTraitName, startDay, netTime, modData);
 
             alltempTraitApplied.Add(tempTraitAppliedData);
             traitBase.OnApply(charController);
@@ -81,27 +82,30 @@ namespace Common
             }
         }
 
-        public void RemoveTraitFrmLs(TempTraitModel tempTraitBuffData)
-        {
-            alltempTraitApplied.Remove(tempTraitBuffData);
-        }
+        //public void RemoveTraitFrmLs(TempTraitModel tempTraitBuffData)
+        //{
+        //    alltempTraitApplied.Remove(tempTraitBuffData);
+        //}
 
         public bool RemoveTrait(int _traitID)
         {
             int index = alltempTraitApplied.FindIndex(t => t.traitID == _traitID);
             if (index == -1) return false;
-            TempTraitModel traitData = alltempTraitApplied[index];
-            RemoveTraitFrmLs(traitData);
+            TempTraitBuffData traitData = alltempTraitApplied[index];
+            alltempTraitApplied.Remove(traitData);
             int indexBase =
                     allTempTraitAppliedBase.FindIndex(t => t.tempTraitName == traitData.tempTraitName);
             if (indexBase != -1)
+            {
+                allTempTraitAppliedBase[indexBase].OnTraitEnd();
                 allTempTraitAppliedBase.RemoveAt(indexBase);
+            }                
             return true;
         }
 
         public void OnClearMindPressed()
         {
-            foreach (TempTraitModel model in alltempTraitApplied.ToList())
+            foreach (TempTraitBuffData model in alltempTraitApplied.ToList())
             {
                 TempTraitSO tempSO = TempTraitService.Instance.allTempTraitSO.GetTempTraitSO(model.tempTraitName);
                 if (tempSO.tempTraitType == TempTraitType.Mental)
@@ -125,7 +129,7 @@ namespace Common
             traitID++;
             TempTraitModData modData = new TempTraitModData(causeType,causeName, causeByCharID, netTime, tempTraitName, true); 
 
-            TempTraitModel immunityData = new TempTraitModel
+            TempTraitBuffData immunityData = new TempTraitBuffData
                                                     (traitID, tempTraitName, netTime, netTime, modData);
             allTempTraitImmunities.Add(immunityData);
         }
@@ -134,8 +138,7 @@ namespace Common
         {
             int index = allTempTraitImmunities.FindIndex(t => t.tempTraitName == traitName);
             if (index == -1) return false;
-            TempTraitModel traitData = alltempTraitApplied[index];
-            RemoveTraitFrmLs(traitData);
+            allTempTraitImmunities.RemoveAt(index);
             return true;    
         }
 
@@ -155,13 +158,13 @@ namespace Common
         public void DayTick()
         {
             if(alltempTraitApplied.Count == 0) return;  
-            foreach (TempTraitModel traitData in alltempTraitApplied)
+            foreach (TempTraitBuffData traitData in alltempTraitApplied)
             {
                 if (traitData.timeFrame == TimeFrame.EndOfDay)
                 {
                     if (traitData.currentTime >= traitData.netTime)
                     {
-                        RemoveTraitFrmLs(traitData);
+                       
                     }
                     traitData.currentTime++;
                 }
@@ -195,7 +198,7 @@ namespace Common
     }
 
     [Serializable]
-    public class TempTraitModel
+    public class TempTraitBuffData
     {
         public int traitID;
         public TempTraitName tempTraitName; 
@@ -205,7 +208,7 @@ namespace Common
         public int currentTime;
         public TempTraitModData modData; 
 
-        public TempTraitModel(int traitID, TempTraitName tempTraitName
+        public TempTraitBuffData(int traitID, TempTraitName tempTraitName
                                 , int startTime, int netTime, TempTraitModData modData)
         {
             this.traitID = traitID;

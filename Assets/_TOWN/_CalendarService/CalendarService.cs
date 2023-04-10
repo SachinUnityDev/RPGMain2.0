@@ -14,7 +14,7 @@ namespace Common
 {
     public class CalendarService : MonoSingletonGeneric<CalendarService>
     {
-        public event Action<DayName> OnCalendarDayStart;  // to be remove and incorported
+       // public event Action<DayName> OnCalendarDayStart;  // to be remove and incorported
         public event Action<int> OnStartOfCalDay;// can broadcast day, week  and month too here
         public event Action<int> OnStartOfNight;
         public event Action<WeekName> OnStartOfTheWeek;
@@ -33,10 +33,10 @@ namespace Common
         // does not reset with week / Month
         [Header("CURRENT DAY WEEK AND MONTH")]
         [SerializeField] DayName gameStartDay; 
-        [SerializeField] DayName currDayName;
-        [SerializeField] WeekName currentWeek;
-        [SerializeField] MonthName currentMonth;
-        [SerializeField] MonthName scrollMonth;
+        public DayName currDayName;
+        public WeekName currentWeek;
+        public MonthName currentMonth;
+        public MonthName scrollMonth;
 
 
         [Header("DAY,WEEK AND MONTH SOs")]

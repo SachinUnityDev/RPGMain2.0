@@ -8,7 +8,6 @@ namespace Common
     public class Confused : CharStatesBase
     {
         public override CharStateName charStateName => CharStateName.Confused;
-        public override CharStateModel charStateModel { get; set; }
         public override CharController charController { get; set; }
         public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
@@ -20,11 +19,11 @@ namespace Common
             // ...50% chance to hit friendly targets...50% chance to misfire 
             
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                       , charID, AttribName.acc, -2, charStateModel.timeFrame, charStateModel.castTime, true);
+                       , charID, AttribName.acc, -2, timeFrame, castTime, true);
 
             charController.charStateController
               .ApplyImmunityBuff(CauseType.CharState, (int)charStateName
-                 , charID, CharStateName.Despaired, charStateModel.timeFrame, charStateModel.castTime);
+                 , charID, CharStateName.Despaired, timeFrame, castTime);
 
         }
 
@@ -36,13 +35,13 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "<style=States> Confused </style>";
-            charStateModel.charStateCardStrs.Add(str0);
+            charStateCardStrs.Add(str0);
             str1 = $"-2<style=Attributes> Acc </style>";
-            charStateModel.charStateCardStrs.Add(str1);
+            charStateCardStrs.Add(str1);
             str2 = $"-3<style=Fortitude> Fortitude </style>per rd";
-            charStateModel.charStateCardStrs.Add(str2);
+            charStateCardStrs.Add(str2);
             str3 = "Immune to <style=States> Concentrated </style>";
-            charStateModel.charStateCardStrs.Add(str3);
+            charStateCardStrs.Add(str3);
         }
 
     }

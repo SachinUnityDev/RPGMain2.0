@@ -71,7 +71,7 @@ namespace Combat
                 hitChance = hitChanceMax;
             }
 
-            if (CharStatesService.Instance.HasCharState(strikerGO, CharStateName.Blinded))
+            if (charController.charStateController.HasCharState(CharStateName.Blinded))
             {
                 hitChance= 12f;
             }

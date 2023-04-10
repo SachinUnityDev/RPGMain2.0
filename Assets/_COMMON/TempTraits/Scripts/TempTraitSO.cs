@@ -1,6 +1,8 @@
 using Interactables;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Policy;
 using UnityEngine;
 
 namespace Common
@@ -25,6 +27,9 @@ namespace Common
         [TextArea(5, 10)]
         public List<string> allLines = new List<string>();
 
+        [Header("Sickness data")]
+        public SicknessData sicknessData= new SicknessData();
+
         private void Awake()
         {
             if(traitNameStr == "")
@@ -34,4 +39,20 @@ namespace Common
 
         }
     }
+    
+    [Serializable]
+    public class SicknessData
+    {
+        public HerbNQuantity herb1;
+        public HerbNQuantity herb2;
+        public int restTimeInday;  
+    }
+
+    [Serializable]
+    public class HerbNQuantity
+    {
+        public HerbNames herbName;
+        public int qty; 
+    }
+
 }

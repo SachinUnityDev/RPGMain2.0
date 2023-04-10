@@ -10,8 +10,6 @@ namespace Common
     {
         //-3 Haste
         public override CharStateName charStateName => CharStateName.FlatFooted; 
-
-        public override CharStateModel charStateModel { get ; set ; }
         public override CharController charController { get; set; }
         public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
@@ -21,7 +19,7 @@ namespace Common
         public override void StateApplyFX()
         {
             int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-             , charID, AttribName.haste, -3, charStateModel.timeFrame, charStateModel.castTime, true);
+             , charID, AttribName.haste, -3, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
         }
 
@@ -33,10 +31,10 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "-3 Haste";
-            charStateModel.charStateCardStrs.Add(str0);
+            charStateCardStrs.Add(str0);
 
             str1 = "No extra Move action";
-            charStateModel.charStateCardStrs.Add(str1);
+            charStateCardStrs.Add(str1);
         }
     }
 }

@@ -54,24 +54,21 @@ namespace Combat
         public override void ApplyFX1()
         {
             if (skillModel.targetPos.Count > 0)
-            {
+            { 
                 targetDynasCopy.ForEach(t => t.charGO.GetComponent<CharController>().damageController
                                         .ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Water
-                                                                                                    , skillModel.damageMod, true));
+                                                                                                    , skillModel.damageMod, true));            
             }
         }
 
         public override void ApplyFX2()
         {
-            targetDynasCopy.ForEach(t => CharStatesService.Instance
-                .ApplyCharState(t.charGO, CharStateName.Soaked
-                                     , charController, CauseType.CharSkill, (int)skillName));
+            targetDynasCopy.ForEach(t => t.charGO.GetComponent<CharController>().charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                    , charController.charModel.charID, CharStateName.Soaked));
         }
-
         public override void ApplyFX3()
         {
         }
-
         public override void ApplyVFx()
         {
             SkillService.Instance.skillFXMoveController.SingleTargetRangeStrike(PerkType.None);             
@@ -82,7 +79,7 @@ namespace Combat
         {
             if (targetDynasCopy.Count > 0)
             {
-                targetDynasCopy.ForEach(t => CharStatesService.Instance.RemoveCharState(t.charGO, CharStateName.Soaked));
+                targetDynasCopy.ForEach(t => t.charGO.GetComponent<CharStateController>().RemoveCharState(CharStateName.Soaked));
             }
 
         }

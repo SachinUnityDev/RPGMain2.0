@@ -11,7 +11,6 @@ namespace Common
     public class BurnLowDOT : CharStatesBase
     {
         public override CharStateName charStateName => CharStateName.BurnLowDOT;
-        public override CharStateModel charStateModel { get; set; }
         public override CharController charController { get; set; }
         public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
@@ -68,12 +67,12 @@ namespace Common
         {
             int buffID = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                        , charID, AttribName.dodge, +2, charStateModel.timeFrame, charStateModel.castTime, true);
+                        , charID, AttribName.dodge, +2, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             buffID= 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                    , charID, AttribName.waterRes, +24, charStateModel.timeFrame, charStateModel.castTime, true);
+                    , charID, AttribName.waterRes, +24, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             // change to buff 
@@ -114,17 +113,17 @@ namespace Common
         {
             int dmg = Mathf.RoundToInt(dmgPerRound);
             str0 = "<style=Burn> Burning </style>";
-            charStateModel.charStateCardStrs.Add(str0);
+            charStateCardStrs.Add(str0);
             str1 = $"-{dmg}<style=Burn> Health </style>per rd";
-            charStateModel.charStateCardStrs.Add(str1);
+            charStateCardStrs.Add(str1);
             str2 = "+2<style=Attributes> Dodge </style>";
-            charStateModel.charStateCardStrs.Add(str2);
+            charStateCardStrs.Add(str2);
             str3 = "+24<style=Water> Water Res </style>";
-            charStateModel.charStateCardStrs.Add(str3);
+            charStateCardStrs.Add(str3);
             str4 = "-6<style=Fortitude> Fortitude </style>per rd";
-            charStateModel.charStateCardStrs.Add(str4);
+            charStateCardStrs.Add(str4);
             str5 = "Immune to<style=Water> Soaked </style>and<style=Bleed> Bleeding </style>";
-            charStateModel.charStateCardStrs.Add(str5);
+            charStateCardStrs.Add(str5);
         }
 
         public override void EndState()
@@ -135,14 +134,14 @@ namespace Common
         void OverLapRuleBurning()
         {
 
-            if (CharStatesService.Instance.HasCharState(charController.gameObject, CharStateName.BurnHighDOT))
+            if (charController.charStateController.HasCharState(CharStateName.BurnHighDOT))
             {
                 int castTime = charController.charStateController.allCharBases
                                     .Find(t => t.charStateName == CharStateName.BurnHighDOT).castTime;
                 charController.charStateController.allCharBases
                                     .Find(t => t.charStateName == CharStateName.BurnHighDOT).SetCastTime(castTime + 1);
             }
-            if (CharStatesService.Instance.HasCharState(charController.gameObject, CharStateName.BurnLowDOT))
+            if (charController.charStateController.HasCharState(CharStateName.BurnLowDOT))
             {
                 int castTime = charController.charStateController.allCharBases
                                     .Find(t => t.charStateName == CharStateName.BurnLowDOT).castTime;

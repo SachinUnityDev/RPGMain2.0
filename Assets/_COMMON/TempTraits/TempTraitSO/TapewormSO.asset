@@ -22,3 +22,11 @@ MonoBehaviour:
   allLines:
   - 'Upon consume Food: Half Hunger and Thirst relief'
   - -2 Vigor and Wp
+  sicknessData:
+    herb1:
+      herbName: 9
+      qty: 2
+    herb2:
+      herbName: 1
+      qty: 2
+    restTimeInday: 1

@@ -8,7 +8,6 @@ namespace Common
     public class Despaired : CharStatesBase
     {
         public override CharStateName charStateName => CharStateName.Despaired;
-        public override CharStateModel charStateModel { get; set; }
         public override CharController charController { get; set; }
         public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
@@ -21,12 +20,12 @@ namespace Common
             CombatEventService.Instance.OnSOT += ApplyRoundFX;
 
             int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                   , charID, AttribName.lightRes, -20, charStateModel.timeFrame, charStateModel.castTime, true);
+                   , charID, AttribName.lightRes, -20, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             int immuneBuffID = charController.charStateController
                   .ApplyImmunityBuff(CauseType.CharState, (int)charStateName
-                     , charID, CharStateName.Inspired, charStateModel.timeFrame, charStateModel.castTime);
+                     , charID, CharStateName.Inspired, timeFrame, castTime);
 
             allImmunityBuffs.Add(immuneBuffID);
         }
@@ -50,16 +49,16 @@ namespace Common
         public override void StateDisplay()
         {          
             str0 = "-5<style=Fortitude> Fortitude </style> per rd";
-            charStateModel.charStateCardStrs.Add(str0);
+            charStateCardStrs.Add(str0);
 
             str1 = "-20 Light Res";
-            charStateModel.charStateCardStrs.Add(str1);
+            charStateCardStrs.Add(str1);
 
             //str2 = "30% chance to force use Patience";
             //charStateModel.charStateCardStrs.Add(str2);
 
             str2 = "Immune to<style=States> Inspired </style>";
-            charStateModel.charStateCardStrs.Add(str2);
+            charStateCardStrs.Add(str2);
         }
 
     }

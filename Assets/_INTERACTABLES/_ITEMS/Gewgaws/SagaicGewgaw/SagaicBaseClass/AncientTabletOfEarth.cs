@@ -30,14 +30,15 @@ namespace Interactables
         {
             charController = InvService.Instance.charSelectController;
             expFXAdded = false;
-            CalendarService.Instance.OnCalendarDayStart += ExpIncrBasedOnDay;
+            CalendarService.Instance.OnStartOfCalDay += ExpIncrBasedOnDay;
             LandScapeFX();
 
 
         }
 
-        void ExpIncrBasedOnDay(DayName dayName)
+        void ExpIncrBasedOnDay(int day)
         {
+            DayName dayName = CalendarService.Instance.currDayName; 
             if(dayName == DayName.DayOfEarth && !expFXAdded)
             {   
               int index =  charController.buffController.ApplyExpBuff(CauseType.SagaicGewgaw, (int)sagaicGewgawName

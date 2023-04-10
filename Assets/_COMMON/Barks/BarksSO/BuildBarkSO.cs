@@ -15,9 +15,7 @@ namespace Common
     public class BuildStateBarkData
     {
         public BuildingState buildState; 
-        public TimeState timeState;
-        [TextArea (2,10)]
-        public string barkLine;
+        public TimeState timeState;     
         public BarkLineData barkLineData;
     }
 

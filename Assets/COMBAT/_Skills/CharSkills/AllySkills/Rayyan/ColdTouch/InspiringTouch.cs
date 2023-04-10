@@ -29,16 +29,15 @@ namespace Combat
         {
             if (targetController && IsTargetAlly())
             {
-                CharStatesService.Instance
-                     .ApplyCharState(targetGO, CharStateName.Inspired
-                                     , charController, CauseType.CharSkill, (int)skillName);
+                charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                                , charController.charModel.charID, CharStateName.Inspired);
             }
         }
 
         public override void SkillEnd()
         {
             base.SkillEnd();
-            CharStatesService.Instance.RemoveCharState(targetGO, CharStateName.Inspired);
+            targetController.charStateController.RemoveCharState(CharStateName.Inspired);
         }
         public override void ApplyFX2()
         {

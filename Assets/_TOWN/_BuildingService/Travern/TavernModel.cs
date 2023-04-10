@@ -10,7 +10,10 @@ namespace Town
     [Serializable]
     public class TavernModel 
     {
-       
+
+        [Header("Build State")]
+        public BuildingState buildState;
+
 
         [Header("Interact: Trophy")]
         public Iitems trophyOnWall = null; 
@@ -28,6 +31,8 @@ namespace Town
 
         public TavernModel(BuildingSO tavernSO)
         {
+            buildState = tavernSO.buildingData.buildingState; 
+
             buildIntTypes = tavernSO.buildingData.buildIntTypes.DeepClone();
             npcData = tavernSO.buildingData.npcInteractData.DeepClone();
             charInteract = tavernSO.buildingData.charInteractData.DeepClone();

@@ -83,6 +83,7 @@ namespace Common
             // select this build
            // int index = transform.GetSiblingIndex();
             townViewController.OnBuildSelect(buildingName);
+            SetSpriteNormal();
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
@@ -99,6 +100,9 @@ namespace Common
         }
 
         #endregion
+
+
+
 
     }
 

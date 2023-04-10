@@ -50,15 +50,15 @@ namespace Combat
             float hpPercent = hpStatData.currValue / hpStatData.maxLimit;
             if (hpPercent < 0.4f)
             {
-                CharStatesService.Instance.ApplyCharState(targetGO, CharStateName.Enraged
-                                     , charController, CauseType.CharSkill, (int)skillName);
+                charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                                , charController.charModel.charID, CharStateName.Enraged);
             }
         }
 
         public override void SkillEnd()
         {
             base.SkillEnd();
-            CharStatesService.Instance.RemoveCharState(targetGO, CharStateName.Enraged);
+            charController.charStateController.RemoveCharState(CharStateName.Enraged);
         }
 
         public override void ApplyFX2()

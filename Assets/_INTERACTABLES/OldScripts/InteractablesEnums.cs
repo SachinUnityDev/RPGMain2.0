@@ -235,6 +235,7 @@ namespace Interactables
         PurpleTeaLeaf,
         TambotiFruit,
         Thyme, 
+        BitterAloe,
     }
 
     public enum FoodNames

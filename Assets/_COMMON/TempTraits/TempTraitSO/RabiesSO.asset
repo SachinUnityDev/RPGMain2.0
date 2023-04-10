@@ -17,9 +17,17 @@ MonoBehaviour:
   temptraitBehavior: 2
   minCastTime: -1
   maxCastTime: -1
-  desc: 
+  traitNameStr: ' Rabies'
   iconSprite: {fileID: 0}
   allLines:
   - +3 Haste
   - -3 Vigor
   - -20 All Res
+  sicknessData:
+    herb1:
+      herbName: 4
+      qty: 2
+    herb2:
+      herbName: 9
+      qty: 3
+    restTimeInday: 1

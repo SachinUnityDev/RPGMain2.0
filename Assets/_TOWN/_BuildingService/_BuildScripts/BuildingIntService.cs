@@ -25,14 +25,23 @@ namespace Town
         public TavernController tavernController; 
         public TempleController templeController;
         public MarketController marketController; 
+        public ShipController shipController;
+        public SafekeepController safekeepController;
+        public TavernController TavernController;   
         void Start()
         {
             houseController = GetComponent<HouseController>();
             templeController = GetComponent<TempleController>();
             tavernController = GetComponent<TavernController>();    
             marketController= GetComponent<MarketController>();
+            shipController= GetComponent<ShipController>();
+            tavernController= GetComponent<TavernController>(); 
+            safekeepController= GetComponent<SafekeepController>();
 
         }
+
+
+
 
         #region 
         //public bool CanItemBeWalled(Iitems item, TavernSlotType tavernSlotType)

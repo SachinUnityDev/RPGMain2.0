@@ -62,16 +62,15 @@ namespace Combat
         {
             if (targetController)
             {
-                CharStatesService.Instance.RemoveCharState(targetGO, CharStateName.Soaked);
+                targetController.charStateController.RemoveCharState(CharStateName.Soaked);
             }
         }
         public override void ApplyFX1()
         {
             if (targetController)
             {
-                CharStatesService.Instance
-                     .ApplyCharState(targetGO, CharStateName.Soaked
-                                     , charController, CauseType.CharSkill, (int)skillName);
+                charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                    , charController.charModel.charID, CharStateName.Soaked);
             }
         }
 

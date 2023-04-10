@@ -36,8 +36,9 @@ namespace Town
         [SerializeField] Transform buildContainer;
         [SerializeField] Image townBGImage;
         [Header("TBR")]
-        [SerializeField] Transform buildIntContainer; 
-   
+        [SerializeField] Transform buildIntContainer;
+        [Header("TBR : Build Bark container")]
+        public Transform buildBarkContainer; 
 
         void Awake()
         {

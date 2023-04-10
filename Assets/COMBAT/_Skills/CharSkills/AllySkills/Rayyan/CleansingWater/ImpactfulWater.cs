@@ -97,7 +97,7 @@ namespace Combat
         public override void SkillEnd()
         {
             if(IsTargetEnemy())
-                CharStatesService.Instance.RemoveCharState(targetGO, CharStateName.Confused);         
+                targetController.charStateController.RemoveCharState(CharStateName.Confused);         
         }
 
         public override void DisplayFX2()

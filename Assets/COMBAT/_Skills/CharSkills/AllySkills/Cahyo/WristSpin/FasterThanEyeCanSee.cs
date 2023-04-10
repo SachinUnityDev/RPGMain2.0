@@ -32,9 +32,8 @@ namespace Combat
              foreach (DynamicPosData dyna in CombatService.Instance.mainTargetDynas)
                 {
                     if(chance.GetChance())
-                    CharStatesService.Instance
-                        .ApplyCharState(targetGO, CharStateName.Confused
-                                     , charController, CauseType.CharSkill, (int)skillName);
+                    charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                                                , charController.charModel.charID, CharStateName.Confused);
             }
             
         }
@@ -43,7 +42,7 @@ namespace Combat
             base.SkillEnd();      
             foreach (DynamicPosData dyna in CombatService.Instance.mainTargetDynas)
             {
-                CharStatesService.Instance.RemoveCharState(targetGO, CharStateName.Confused);
+                charController.charStateController.RemoveCharState(CharStateName.Confused);
             }
         }
         public override void ApplyFX2()

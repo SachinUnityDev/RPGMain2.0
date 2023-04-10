@@ -87,9 +87,8 @@ namespace Combat
         {
             foreach (DynamicPosData dyna in CombatService.Instance.mainTargetDynas)
             {
-                CharStatesService.Instance
-                    .ApplyCharState(dyna.charGO, CharStateName.Soaked
-                                     , charController, CauseType.CharSkill, (int)skillName);
+                charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                       , charController.charModel.charID, CharStateName.Soaked);
             }
             Debug.Log("Apply FX3" + desc);
 
@@ -110,7 +109,7 @@ namespace Combat
         public override void SkillEnd()
         {
             base.SkillEnd(); 
-            CharStatesService.Instance.RemoveCharState(targetGO, CharStateName.Soaked);       
+            targetController.charStateController.RemoveCharState(CharStateName.Soaked);       
         }
 
         public override void DisplayFX4()

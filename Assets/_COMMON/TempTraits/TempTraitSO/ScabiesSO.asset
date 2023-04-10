@@ -17,9 +17,17 @@ MonoBehaviour:
   temptraitBehavior: 2
   minCastTime: -1
   maxCastTime: -1
-  desc: 
+  traitNameStr: ' Scabies'
   iconSprite: {fileID: 0}
   allLines:
   - -2 Morale
   - -3 Focus
   - +10 Elemental Res
+  sicknessData:
+    herb1:
+      herbName: 1
+      qty: 2
+    herb2:
+      herbName: 11
+      qty: 2
+    restTimeInday: 1

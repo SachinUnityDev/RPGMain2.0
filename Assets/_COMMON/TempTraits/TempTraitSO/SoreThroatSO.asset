@@ -17,9 +17,17 @@ MonoBehaviour:
   temptraitBehavior: 2
   minCastTime: -1
   maxCastTime: -1
-  desc: 
+  traitNameStr: ' Sore Throat'
   iconSprite: {fileID: 0}
   allLines:
   - -2 Wp
   - -1 Morale
   - +15% Thirst
+  sicknessData:
+    herb1:
+      herbName: 5
+      qty: 1
+    herb2:
+      herbName: 2
+      qty: 2
+    restTimeInday: 0

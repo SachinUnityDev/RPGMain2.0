@@ -10,8 +10,7 @@ namespace Common
     public class Concentrated : CharStatesBase
     {
         public override CharStateName charStateName => CharStateName.Concentrated;
-
-        public override CharStateModel charStateModel { get; set; }
+      
         public override CharController charController { get; set; }
         public override int charID { get; set; }
 
@@ -21,14 +20,14 @@ namespace Common
         public override void StateApplyFX()
         {
             CharService.Instance.ApplyBuffOnPartyExceptSelf(CauseType.CharState, (int)charStateName
-                       , charID, AttribName.focus, +1, charStateModel.timeFrame, charStateModel.castTime, true, CharMode.Ally);
+                       , charID, AttribName.focus, +1, timeFrame, castTime, true, CharMode.Ally);
 
              charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                   , charID, AttribName.morale, -1, charStateModel.timeFrame, charStateModel.castTime, true);
+                   , charID, AttribName.morale, -1, timeFrame, castTime, true);
 
             charController.charStateController
                 .ApplyImmunityBuff(CauseType.CharState, (int)charStateName
-                   , charID, CharStateName.Confused,  charStateModel.timeFrame, charStateModel.castTime);
+                   , charID, CharStateName.Confused,  timeFrame, castTime);
             charController.OnAttribCurrValSet += Tick2;
         }
 
@@ -53,10 +52,11 @@ namespace Common
         {
             //+1 Focus on allies .... - 1 Morale on self   Immune to Confused
             str0 = "+1 Focus on allies";
-
+            charStateCardStrs.Add(str0);
             str1 = "-1 Morale on self";
-
+            charStateCardStrs.Add(str1);
             str2 = "Immune to<style=States> Confused </style>";
+            charStateCardStrs.Add(str2);
         }
     }
 }

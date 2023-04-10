@@ -9,7 +9,7 @@ public enum NPCTalkType
 {
     Welcome,
     Leave,
-    Interact,
+    Interact,// on trade completed 
 }
 
 
@@ -23,17 +23,12 @@ namespace Common
         public List<BarkLineData> barkLineData = new List<BarkLineData>();  
     }
 
-    [Serializable]
-    public class BuildInteractBarkData
-    {       
-        public BuildInteractType interactType;  
-        public BarkLineData barkLine;
-    }
+ 
     [Serializable]
     public class NPCInteractBarkData
     {
         public TempTraitName tempTraitName;
-        public NPCInteractType interactType;
+        public BuildInteractType buildIntType;
         public BarkLineData barkLine;
     }
   
@@ -43,6 +38,6 @@ namespace Common
         public NPCNames nPCName; 
         public List<NPCSLBarkData> NPCBarkData = new List<NPCSLBarkData>();
         public List<NPCInteractBarkData> allNPCInteractBarkData = new List<NPCInteractBarkData>();
-        public List<BuildInteractBarkData> allBuildInteractBarkData = new List<BuildInteractBarkData>();
+       
     }
 }

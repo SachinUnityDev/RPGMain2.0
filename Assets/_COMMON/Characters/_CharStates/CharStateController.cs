@@ -81,6 +81,8 @@ namespace Common
         public List<CharStateBuffData> allCharStateBuffs = new List<CharStateBuffData>();
         public List<ImmunityBuffData> allImmunityBuffs = new List<ImmunityBuffData>();
         CharController charController;
+
+
         [SerializeField] List<string> buffStrs = new List<string>();
         [SerializeField] List<string> deDuffStrs = new List<string>();
 
@@ -99,7 +101,7 @@ namespace Common
         }
     #region BUFF & DEBUFF
         public int ApplyCharStateBuff(CauseType causeType, int causeName, int causeByCharID
-                                , CharStateName charStateName, TimeFrame timeFrame, int netTime)
+                                , CharStateName charStateName, TimeFrame timeFrame = TimeFrame.Infinity, int netTime =-1)
         {
             // check immunity list 
             int effectedCharID = charController.charModel.charID;

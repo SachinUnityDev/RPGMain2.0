@@ -13,7 +13,7 @@ namespace Common
     {
         [SerializeField] TempTraitController tempTraitController; 
         [SerializeField] CharController charController;
-        [SerializeField] TempTraitModel tempTraitModel; 
+        [SerializeField] TempTraitBuffData tempTraitModel; 
 
 
         [Header("Transform ref NTBR")]

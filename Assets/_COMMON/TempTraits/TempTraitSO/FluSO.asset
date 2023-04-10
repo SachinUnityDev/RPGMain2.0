@@ -17,8 +17,16 @@ MonoBehaviour:
   temptraitBehavior: 2
   minCastTime: 4
   maxCastTime: 6
-  desc: 
+  traitNameStr: ' Flu'
   iconSprite: {fileID: 0}
   allLines:
   - "-3 Vigor\t"
   - -3 Willpower
+  sicknessData:
+    herb1:
+      herbName: 5
+      qty: 2
+    herb2:
+      herbName: 2
+      qty: 2
+    restTimeInday: 1

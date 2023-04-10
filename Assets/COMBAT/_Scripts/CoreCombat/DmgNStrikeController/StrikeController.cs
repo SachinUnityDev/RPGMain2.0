@@ -91,9 +91,11 @@ namespace Combat
 
             if (focusVal == 0)
             {
-                // GOT CONFUSED .. to be put in HERE .. 
-                CharStatesService.Instance.ApplyCharState(gameObject, CharStateName.Confused
-                                     , charController, CauseType.StatChange, (int)AttribName.focus);
+                // GOT CONFUSED .. to be put in HERE ..                
+                int buffId = charController.charStateController.ApplyCharStateBuff(CauseType.CharState, (int)CharStateName.Confused
+                   , charController.charModel.charID, CharStateName.Confused, TimeFrame.Infinity, -1);
+
+
                 return false;  // MIsfire ..hit the wrong target .. 
             }
             else
@@ -156,8 +158,8 @@ namespace Combat
             if (accVal == 0)
             { // self inflicted
 
-                CharStatesService.Instance.ApplyCharState(gameObject, CharStateName.Blinded
-                                     , charController, CauseType.StatChange, (int)AttribName.acc);
+                int buffId = charController.charStateController.ApplyCharStateBuff(CauseType.CharState, (int)CharStateName.Confused
+                     , charController.charModel.charID, CharStateName.Blinded, TimeFrame.Infinity, -1);
                 return false;// miss the target .. i.e not going to hit/FX anyone.. 
             }
             else

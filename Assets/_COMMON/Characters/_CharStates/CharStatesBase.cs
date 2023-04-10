@@ -11,7 +11,7 @@ namespace Common
     public abstract class CharStatesBase 
     {
         public abstract CharStateName charStateName { get; }
-        public abstract CharStateModel charStateModel { get; set; }
+        public CharStateSO1 charStateSO { get; set; }
         public abstract CharController charController { get; set; } // set this  base apply 
 
         protected GameObject charGO;
@@ -19,9 +19,13 @@ namespace Common
 
         protected CharStateData CharStateData = new CharStateData(); // broadcasting data
 
-        protected string str0, str1, str2, str3, str4, str5; 
+        protected string str0, str1, str2, str3, str4, str5;
+
+        public List<string> charStateCardStrs = new List<string>();
         public abstract StateFor stateFor { get; }        
         public abstract int castTime { get; protected set; }
+
+        public  TimeFrame timeFrame;
         public List<int> allBuffIds { get; set; } = new List<int>();
         public List<int> allImmunityBuffs { get; set; } = new List<int>();
         public virtual void SetCastTime(int value)
@@ -29,8 +33,8 @@ namespace Common
             if(value > 0)
             {
                 castTime = value;
-                if(charStateModel != null)
-                    charStateModel.castTime = value; 
+                if(charStateSO != null)
+                    castTime = value; 
             }
         }
         public virtual void IncrCastTime(int incrBy)
@@ -48,38 +52,39 @@ namespace Common
             startRound = CombatService.Instance.currentRound; 
             charController.charStateController.ResetCharStateBuff(charStateName); 
         }        
-        public virtual void StateInit(CharStateModel charStateModel, CharController charController,
+        public virtual void StateInit(CharStateSO1 stateSO, CharController charController,
             TimeFrame _timeframe, int _castTime)
         {
-            this.charStateModel = charStateModel;
+            this.charStateSO = stateSO;
             this.charController = charController;
             this.charID = charController.charModel.charID;
             if (_timeframe != TimeFrame.None)   // applied time frame 
             {               
-              charStateModel.timeFrame = _timeframe;
+              timeFrame = _timeframe;
             }            
             if (_castTime > 0)
             {
                 SetCastTime(castTime);
-            }
-            charStateModel.charStateID = UnityEngine.Random.Range(1, 500);
-            charStateModel.charStateCardStrs.Clear();
-            StateDisplay(); 
-            CharStatesService.Instance.allCharStateModel.Add(charStateModel); 
-            
+            }            
+            StateDisplay();
+            StateBaseApply(); 
         }
         public virtual void StateBaseApply()
         {
-            if (charStateModel.timeFrame == TimeFrame.EndOfRound
-                && charStateModel.castTime > 0)
+            if (timeFrame == TimeFrame.EndOfRound
+                && castTime > 0)
             {
                 CombatEventService.Instance.OnEOR += RoundTick; 
             }
-            if (charStateModel.timeFrame == TimeFrame.EndOfCombat)
+            if (timeFrame == TimeFrame.EndOfCombat)
             {
-                CombatEventService.Instance.OnEOR += CombatTick;
-            }           
-            charStateModel.startRound = CombatService.Instance.currentRound;   
+                CombatEventService.Instance.OnEOC += CombatTick;
+            }
+            if(timeFrame== TimeFrame.Infinity)
+            {
+                castTime = 100; 
+            }
+            startRound = CombatService.Instance.currentRound;   
             allBuffIds.Clear();
         }
         public abstract void StateDisplay();
@@ -91,12 +96,13 @@ namespace Common
         }
         protected virtual void RoundTick()
         {
-            int roundCounter = CombatService.Instance.currentRound - charStateModel.startRound;
+            int roundCounter = CombatService.Instance.currentRound - startRound;
             if (roundCounter >= castTime)
                 EndState();
         }
         protected virtual void CombatTick()
         {          
+            // on EOC all DOT are destroyed
             if(charStateName == CharStateName.BurnHighDOT || charStateName== CharStateName.BurnLowDOT ||
                charStateName == CharStateName.BleedHighDOT || charStateName == CharStateName.BleedLowDOT ||
                charStateName == CharStateName.PoisonedHighDOT || charStateName == CharStateName.PoisonedLowDOT)
@@ -107,11 +113,11 @@ namespace Common
         {
            //charController.charStateController.RemoveCharState(charStateName);
            // to be updated 
-           if(charController.charModel.InCharStatesList.Any(t => t == charStateName))
-           {
-                charController.charModel.InCharStatesList.Remove(charStateName);
-                // should also delete the char State base from the base list
-           }
+           //if(charController.charModel.InCharStatesList.Any(t => t == charStateName))
+           //{
+           //     charController.charModel.InCharStatesList.Remove(charStateName);
+           //     // should also delete the char State base from the base list
+           //}
             foreach(int buffID in allBuffIds)
             {
                 charController.buffController.RemoveBuff(buffID);

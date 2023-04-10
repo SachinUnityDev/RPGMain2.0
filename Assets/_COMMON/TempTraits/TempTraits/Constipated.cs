@@ -7,7 +7,7 @@ using UnityEngine;
  {
     public class Constipated : TempTraitBase
     {
-        public override TempTraitName tempTraitName => TempTraitName.Constipated; 
+        public override TempTraitName tempTraitName => TempTraitName.Constipation; 
         //-3 Dodge	-2 Haste
         public override void OnApply(CharController charController)
         {

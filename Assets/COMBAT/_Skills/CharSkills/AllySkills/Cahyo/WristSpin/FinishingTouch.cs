@@ -30,7 +30,7 @@ namespace Combat
 
         public override void ApplyFX1()
         {
-            bool isTargetBleeding = CharStatesService.Instance.HasCharDOTState(targetGO, CharStateName.BleedLowDOT);
+            bool isTargetBleeding = targetController.charStateController.HasCharDOTState(CharStateName.BleedLowDOT);
 
             if (isTargetBleeding)
             {
@@ -41,8 +41,7 @@ namespace Combat
         public override void SkillEnd()
         {
             base.SkillEnd();
-            CharStatesService.Instance.RemoveCharState(targetGO, CharStateName.BleedLowDOT);
-
+           targetController.charStateController.RemoveCharState(CharStateName.BleedLowDOT);
         }
 
         public override void ApplyFX2()

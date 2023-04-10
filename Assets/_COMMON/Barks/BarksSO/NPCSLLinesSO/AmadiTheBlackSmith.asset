@@ -76,5 +76,9 @@ MonoBehaviour:
     barkLineData:
     - barkline: You are not welcome here my friend!
       barkAudio: {fileID: 0}
-  allNPCInteractBarkData: []
-  allBuildInteractBarkData: []
+  allNPCInteractBarkData:
+  - tempTraitName: 0
+    buildIntType: 17
+    barkLine:
+      barkline: Fortified! Just as you like.
+      barkAudio: {fileID: 0}

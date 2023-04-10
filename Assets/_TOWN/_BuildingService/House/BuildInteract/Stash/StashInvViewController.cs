@@ -158,6 +158,7 @@ namespace Town
         }
         public void Load()
         {
+            InitStashInv();
             FillStashCurrency();
         }
         public void UnLoad()
@@ -166,8 +167,7 @@ namespace Town
         }
         public void Init()
         {
-            InitStashInv(); 
-            FillStashCurrency();
+            Load();
         }
 
 

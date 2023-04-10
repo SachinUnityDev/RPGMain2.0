@@ -5,9 +5,13 @@ using UnityEngine;
 
 namespace Common
 {
-    public class BarkService : MonoBehaviour
+    public class BarkService : MonoSingletonGeneric<BarkService>
     {
         // Start is called before the first frame update
+        public AllBarkSO allBarkSO; 
+         
+        
+
         void Start()
         {
             // no controllers needed 

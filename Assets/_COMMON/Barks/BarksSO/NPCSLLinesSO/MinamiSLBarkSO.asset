@@ -16,14 +16,6 @@ MonoBehaviour:
   NPCBarkData:
   - FameType: 7
     interactType: 0
-    barkLines:
-    - "Shalulu salutes you!\r"
-    - "Come, clear your mind.\r"
-    - Welcome to our temple.
-    audioClips:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
     barkLineData:
     - barkline: "Shalulu salutes you!\r"
       barkAudio: {fileID: 0}
@@ -33,10 +25,6 @@ MonoBehaviour:
       barkAudio: {fileID: 0}
   - FameType: 1
     interactType: 0
-    barkLines:
-    - Your fame grows strong like the waves.
-    - Anata na ni oini keii hyo suru.
-    audioClips: []
     barkLineData:
     - barkline: Your fame grows strong like the waves.
       barkAudio: {fileID: 0}
@@ -44,11 +32,6 @@ MonoBehaviour:
       barkAudio: {fileID: 0}
   - FameType: 2
     interactType: 0
-    barkLines:
-    - "Shalulu salutes you!\r"
-    - Shalulu welcomes our honorable guest.
-    - You brought purity in our temple.
-    audioClips: []
     barkLineData:
     - barkline: "Shalulu salutes you!\r"
       barkAudio: {fileID: 0}
@@ -58,10 +41,6 @@ MonoBehaviour:
       barkAudio: {fileID: 0}
   - FameType: 3
     interactType: 0
-    barkLines:
-    - Konichiwa wakai hero!
-    - This is a temple hero. Don't expect the same respect you get elsewhere.
-    audioClips: []
     barkLineData:
     - barkline: Konichiwa wakai hero!
       barkAudio: {fileID: 0}
@@ -69,10 +48,6 @@ MonoBehaviour:
       barkAudio: {fileID: 0}
   - FameType: 4
     interactType: 0
-    barkLines:
-    - Itazura-kko kon'nichiwa!
-    - "Come, clear your mind.\r"
-    audioClips: []
     barkLineData:
     - barkline: Itazura-kko kon'nichiwa!
       barkAudio: {fileID: 0}
@@ -80,10 +55,6 @@ MonoBehaviour:
       barkAudio: {fileID: 0}
   - FameType: 5
     interactType: 0
-    barkLines:
-    - Have you come to seek redemption?
-    - "Come, clear your mind.\r"
-    audioClips: []
     barkLineData:
     - barkline: Have you come to seek redemption?
       barkAudio: {fileID: 0}
@@ -91,19 +62,11 @@ MonoBehaviour:
       barkAudio: {fileID: 0}
   - FameType: 6
     interactType: 0
-    barkLines:
-    - You will not sack the temple right? Right?
-    audioClips: []
     barkLineData:
     - barkline: You will not sack the temple right? Right?
       barkAudio: {fileID: 0}
   - FameType: 7
     interactType: 1
-    barkLines:
-    - "Go with the waves\r!"
-    - "Goodbye!\r"
-    - May Shalulu watch over you!
-    audioClips: []
     barkLineData:
     - barkline: "Go with the waves\r!"
       barkAudio: {fileID: 0}
@@ -113,10 +76,6 @@ MonoBehaviour:
       barkAudio: {fileID: 0}
   - FameType: 1
     interactType: 1
-    barkLines:
-    - Your fame grows strong like the waves.
-    - "Go with the waves\r!"
-    audioClips: []
     barkLineData:
     - barkline: Your fame grows strong like the waves.
       barkAudio: {fileID: 0}
@@ -124,10 +83,6 @@ MonoBehaviour:
       barkAudio: {fileID: 0}
   - FameType: 2
     interactType: 1
-    barkLines:
-    - You are destined for greatness Abbas, do not forget!
-    - Goodbye!
-    audioClips: []
     barkLineData:
     - barkline: You are destined for greatness Abbas, do not forget!
       barkAudio: {fileID: 0}
@@ -135,10 +90,6 @@ MonoBehaviour:
       barkAudio: {fileID: 0}
   - FameType: 3
     interactType: 1
-    barkLines:
-    - Sayonara erabareshimono!
-    - "Go with the waves\r!"
-    audioClips: []
     barkLineData:
     - barkline: Sayonara erabareshimono!
       barkAudio: {fileID: 0}
@@ -146,11 +97,6 @@ MonoBehaviour:
       barkAudio: {fileID: 0}
   - FameType: 4
     interactType: 1
-    barkLines:
-    - You may act otherwise but you are pure in your soul!
-    - May Shalulu watch over you!
-    - Goodbye!
-    audioClips: []
     barkLineData:
     - barkline: You may act otherwise but you are pure in your soul!
       barkAudio: {fileID: 0}
@@ -160,10 +106,6 @@ MonoBehaviour:
       barkAudio: {fileID: 0}
   - FameType: 5
     interactType: 1
-    barkLines:
-    - Came as a wave, leaving as a Tsunami!
-    - May Shalulu watch over you!
-    audioClips: []
     barkLineData:
     - barkline: Came as a wave, leaving as a Tsunami!
       barkAudio: {fileID: 0}
@@ -171,10 +113,6 @@ MonoBehaviour:
       barkAudio: {fileID: 0}
   - FameType: 6
     interactType: 1
-    barkLines:
-    - Don't succumb to the darkness inside you!
-    - May Shalulu watch over you!
-    audioClips: []
     barkLineData:
     - barkline: Don't succumb to the darkness inside you!
       barkAudio: {fileID: 0}
@@ -182,31 +120,27 @@ MonoBehaviour:
       barkAudio: {fileID: 0}
   - FameType: 6
     interactType: 1
-    barkLines:
-    - Don't succumb to the darkness inside you!
-    audioClips: []
     barkLineData:
     - barkline: Don't succumb to the darkness inside you!
       barkAudio: {fileID: 0}
   allNPCInteractBarkData:
-  - interactType: 4
+  - tempTraitName: 0
+    buildIntType: 16
     barkLine:
       barkline: "You are pure like a baby now.\r"
       barkAudio: {fileID: 0}
-  - interactType: 4
+  - tempTraitName: 0
+    buildIntType: 16
     barkLine:
       barkline: Your darkest memories faded away.
       barkAudio: {fileID: 0}
-  allBuildInteractBarkData:
-  - interactType: 4
-    barkLine:
-      barkline: "Your weapon has a soul now\r!"
-      barkAudio: {fileID: 0}
-  - interactType: 4
+  - tempTraitName: 0
+    buildIntType: 4
     barkLine:
       barkline: Enchanted!
       barkAudio: {fileID: 0}
-  - interactType: 16
+  - tempTraitName: 0
+    buildIntType: 4
     barkLine:
-      barkline: Here, it shines again.
+      barkline: Your weapon has a soul now!
       barkAudio: {fileID: 0}

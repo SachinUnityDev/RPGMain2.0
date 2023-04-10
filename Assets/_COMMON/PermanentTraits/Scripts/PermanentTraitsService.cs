@@ -30,7 +30,6 @@ namespace Common
         // ensure no traits are added twice 
         // apply trait to be controlled from here 
         // event raised on addition of change stat from done from here
-        public List<TraitsDataSO> allPermTraitsSO = new List<TraitsDataSO>();
         public List<PermaTraitData> allPermaTraitData = new List<PermaTraitData>(); 
         PermaTraitsFactory permaTraitsFactory;
         public event Action<PermaTraitData> OnPermaTraitAdded;
@@ -53,25 +52,25 @@ namespace Common
             permaTraitsFactory.InitPermTraits();  // timing thing 
 
             CharController charctrl = go.GetComponent<CharController>();
-            foreach (TraitsDataSO charptraits in allPermTraitsSO)   // list of sos
-            {
+            //foreach (TraitsDataSO charptraits in allPermTraitsSO)   // list of sos
+            //{
 
-                if (charctrl.charModel.cultType == charptraits.cultType)
-                {
-                    foreach (PermTraitsINChar traitvalue in charptraits.PermTraitsINCharList)
-                    {
-                        permaTraitsFactory.AddPermTrait(traitvalue.permanentTraitName, go);
+            //    if (charctrl.charModel.cultType == charptraits.cultType)
+            //    {
+            //        foreach (PermTraitsINChar traitvalue in charptraits.PermTraitsINCharList)
+            //        {
+            //            permaTraitsFactory.AddPermTrait(traitvalue.permanentTraitName, go);
 
-                        PermaTraitData permaTrait = new PermaTraitData(traitvalue.permanentTraitName
-                            , charctrl.charModel.charName, go.transform.position);
+            //            PermaTraitData permaTrait = new PermaTraitData(traitvalue.permanentTraitName
+            //                , charctrl.charModel.charName, go.transform.position);
 
-                        allPermaTraitData.Add(permaTrait); 
+            //            allPermaTraitData.Add(permaTrait); 
 
-                        OnPermaTraitAdded?.Invoke(permaTrait); 
+            //            OnPermaTraitAdded?.Invoke(permaTrait); 
 
-                    }
-                }
-            }
+            //        }
+            //    }
+            //}
             permaTraitsFactory.ApplyPermTraits(go);
 
         }

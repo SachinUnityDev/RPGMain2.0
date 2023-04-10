@@ -53,9 +53,8 @@ namespace Combat
         {
             if (_chance.GetChance())
             {
-                CharStatesService.Instance
-                    .ApplyCharState(targetGO, CharStateName.BleedHighDOT
-                                     , charController, CauseType.CharSkill, (int)skillName);
+                charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                                            , charController.charModel.charID, CharStateName.BleedHighDOT);
             }
         }
 

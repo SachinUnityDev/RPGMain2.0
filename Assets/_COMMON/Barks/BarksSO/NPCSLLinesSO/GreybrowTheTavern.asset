@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nPCName: 7
   NPCBarkData:
-  - FameType: 8
+  - FameType: 0
     interactType: 0
     barkLineData:
     - barkline: "How can i help?\r"
@@ -25,21 +25,11 @@ MonoBehaviour:
       barkAudio: {fileID: 0}
     - barkline: What have you got?
       barkAudio: {fileID: 0}
-  - FameType: 8
+  - FameType: 0
     interactType: 1
     barkLineData:
     - barkline: "Bye!\r"
       barkAudio: {fileID: 0}
     - barkline: Farewell my friend!
       barkAudio: {fileID: 0}
-  allNPCInteractBarkData:
-  - tempTraitName: 0
-    interactType: 2
-    barkLine:
-      barkline: Sold!
-      barkAudio: {fileID: 0}
-  allBuildInteractBarkData:
-  - interactType: 0
-    barkLine:
-      barkline: 
-      barkAudio: {fileID: 0}
+  allNPCInteractBarkData: []

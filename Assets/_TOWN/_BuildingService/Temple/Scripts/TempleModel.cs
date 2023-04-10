@@ -8,6 +8,8 @@ namespace Town
 {
     public class TempleModel
     {
+        [Header("Build State")]
+        public BuildingState buildState;
 
         [Header("UPGRADE")]
         public bool isBuildingUpgraded = false;
@@ -17,6 +19,10 @@ namespace Town
         public List<CharInteractData> allCharInteractData = new List<CharInteractData>();
         public TempleModel(BuildingSO templeSO)
         {
+            buildState = templeSO.buildingData.buildingState;
+
+
+
             buildIntTypes = templeSO.buildingData.buildIntTypes.DeepClone();
             allNPCInteractData = templeSO.buildingData.npcInteractData.DeepClone();
             allCharInteractData = templeSO.buildingData.charInteractData.DeepClone(); 

@@ -17,9 +17,17 @@ MonoBehaviour:
   temptraitBehavior: 2
   minCastTime: -1
   maxCastTime: -1
-  desc: 
+  traitNameStr: ' Desert Fever'
   iconSprite: {fileID: 0}
   allLines:
   - "-4 Wp\t"
   - "-2 Morale\t"
   - +10% Thirst
+  sicknessData:
+    herb1:
+      herbName: 3
+      qty: 2
+    herb2:
+      herbName: 0
+      qty: 0
+    restTimeInday: 1

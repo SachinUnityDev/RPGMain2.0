@@ -26,7 +26,7 @@ namespace Interactables
         public  void ApplyGewGawFX()
         {
             
-            if (CharStatesService.Instance.HasCharState(charController.gameObject, CharStateName.Unslakable))
+            if (charController.charStateController.HasCharState(CharStateName.Unslakable))
             {
                 ApplyIfUnslackableFx();
             }
@@ -53,8 +53,8 @@ namespace Interactables
 
         void OnStartOfCombat()
         {
-            CharStatesService.Instance.ApplyCharState(charController.gameObject, CharStateName.Soaked,
-                 charController, CauseType.SagaicGewgaw, (int)sagaicGewgawName, TimeFrame.EndOfRound, 3);
+            int buffId = charController.charStateController.ApplyCharStateBuff(CauseType.SagaicGewgaw, (int)sagaicGewgawName
+                  , charController.charModel.charID, CharStateName.Soaked, TimeFrame.EndOfRound, 3);
         }
 
         void OnCharStateChg(CharStateModData charStateModData)

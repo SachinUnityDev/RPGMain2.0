@@ -65,9 +65,7 @@ namespace Combat
         }
         public override void ApplyFX1()
         {
-            if (CharStatesService.Instance.HasCharState(targetGO, CharStateName.BleedHighDOT)
-                 || CharStatesService.Instance.HasCharState(targetGO, CharStateName.BleedMedDOT)
-                 || CharStatesService.Instance.HasCharState(targetGO, CharStateName.BleedLowDOT))
+            if (targetController.charStateController.HasCharState(CharStateName.BleedHighDOT))               
             {
                 if (targetController.GetStat(StatName.health).currValue < 35f)
                 {

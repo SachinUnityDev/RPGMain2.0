@@ -44,7 +44,7 @@ namespace Combat
         public override void BaseApply()
         {
             base.BaseApply();
-            if (CharStatesService.Instance.HasCharDOTState(targetGO, CharStateName.BleedHighDOT))
+            if (targetController.charStateController.HasCharDOTState(CharStateName.BleedHighDOT))
             {
                 targetController.damageController
                       .ApplyDamage(charController, CauseType.CharSkill, (int) skillName, DamageType.Physical, 50f, false);

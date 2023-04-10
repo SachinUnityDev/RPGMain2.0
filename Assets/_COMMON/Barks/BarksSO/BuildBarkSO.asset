@@ -17,19 +17,16 @@ MonoBehaviour:
     BuildStates:
     - buildState: 0
       timeState: 0
-      barkLine: That ship has sailed a while ago!
       barkLineData:
         barkline: That ship has sailed a while ago!
         barkAudio: {fileID: 0}
-    - buildState: 0
+    - buildState: 3
       timeState: 0
-      barkLine: No right ship in the docks!
       barkLineData:
         barkline: No right ship in the docks!
         barkAudio: {fileID: 0}
     - buildState: 3
       timeState: 0
-      barkLine: Expected to be back in a week or two!
       barkLineData:
         barkline: Expected to be back in a week or two!
         barkAudio: {fileID: 0}
@@ -39,13 +36,11 @@ MonoBehaviour:
     BuildStates:
     - buildState: 3
       timeState: 2
-      barkLine: It is late, goods are packed!
       barkLineData:
         barkline: It is late, goods are packed!
         barkAudio: {fileID: 0}
     - buildState: 3
       timeState: 1
-      barkLine: Shop owners are resting this day.
       barkLineData:
         barkline: Shop owners are resting this day.
         barkAudio: {fileID: 0}
@@ -53,13 +48,11 @@ MonoBehaviour:
     BuildStates:
     - buildState: 0
       timeState: 0
-      barkLine: Strangers are not allowed in this holy site!
       barkLineData:
         barkline: Strangers are not allowed in this holy site!
         barkAudio: {fileID: 0}
     - buildState: 3
       timeState: 2
-      barkLine: It's night. Leave the priests and nuns alone!
       barkLineData:
         barkline: It's night. Leave the priests and nuns alone!
         barkAudio: {fileID: 0}
@@ -67,7 +60,6 @@ MonoBehaviour:
     BuildStates:
     - buildState: 0
       timeState: 0
-      barkLine: Halt!
       barkLineData:
         barkline: Halt!
         barkAudio: {fileID: 0}
@@ -75,19 +67,16 @@ MonoBehaviour:
     BuildStates:
     - buildState: 0
       timeState: 0
-      barkLine: Go away!
       barkLineData:
         barkline: Go away!
         barkAudio: {fileID: 0}
     - buildState: 0
       timeState: 0
-      barkLine: This is not a place for you!
       barkLineData:
         barkline: This is not a place for you!
         barkAudio: {fileID: 0}
     - buildState: 0
       timeState: 0
-      barkLine: You are not welcome here!
       barkLineData:
         barkline: You are not welcome here!
         barkAudio: {fileID: 0}
@@ -95,19 +84,16 @@ MonoBehaviour:
     BuildStates:
     - buildState: 0
       timeState: 0
-      barkLine: Come back when you got enough coins to spare!
       barkLineData:
         barkline: Come back when you got enough coins to spare!
         barkAudio: {fileID: 0}
     - buildState: 0
       timeState: 0
-      barkLine: Poor people are welcome, but not a dead broke!
       barkLineData:
         barkline: Poor people are welcome, but not a dead broke!
         barkAudio: {fileID: 0}
     - buildState: 3
       timeState: 2
-      barkLine: Closed at night!
       barkLineData:
         barkline: Closed at night!
         barkAudio: {fileID: 0}

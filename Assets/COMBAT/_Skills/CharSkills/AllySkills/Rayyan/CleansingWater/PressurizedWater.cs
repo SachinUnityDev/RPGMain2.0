@@ -58,9 +58,8 @@ namespace Combat
             {
                 float percent = 15f;
                 if (percent.GetChance())
-                    CharStatesService.Instance
-                         .ApplyCharState(targetGO, CharStateName.Confused
-                                     , charController, CauseType.CharSkill, (int)skillName);
+                    charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                                               , charController.charModel.charID, CharStateName.Confused);
             }       
         }
         public override void ApplyFX3()
@@ -78,7 +77,6 @@ namespace Combat
             {
                 if (GridService.Instance.targetSelected != null)
                 {
-
                     GridService.Instance.gridMovement.MovebyRow(GridService.Instance.targetSelected
                         , MoveDir.Backward, 1);
                 }
@@ -89,7 +87,7 @@ namespace Combat
         {
             if (IsTargetEnemy())
             {
-                CharStatesService.Instance.RemoveCharState(targetGO, CharStateName.Confused);
+                targetController.charStateController.RemoveCharState(CharStateName.Confused);
             }           
         }
 

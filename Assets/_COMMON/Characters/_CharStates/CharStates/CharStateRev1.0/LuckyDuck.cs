@@ -9,7 +9,6 @@ namespace Common
     public class LuckyDuck : CharStatesBase
     {
         public override CharStateName charStateName => CharStateName.LuckyDuck;
-        public override CharStateModel charStateModel { get; set; }
         public override CharController charController { get; set; }
         public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
@@ -19,16 +18,16 @@ namespace Common
         {
             allBuffIds.AddRange(
             CharService.Instance.ApplyBuffOnPartyExceptSelf(CauseType.CharState, (int)charStateName
-                         , charID, AttribName.luck, +1, charStateModel.timeFrame, charStateModel.castTime, true, CharMode.Ally));
+                         , charID, AttribName.luck, +1, timeFrame, castTime, true, CharMode.Ally));
             int buffId = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                  , charID, AttribName.haste, -1, charStateModel.timeFrame, charStateModel.castTime, true);
+                  , charID, AttribName.haste, -1, timeFrame, castTime, true);
             allBuffIds.Add(buffId); 
 
             int immuneBuffID =
             charController.charStateController
                     .ApplyImmunityBuff(CauseType.CharState, (int)charStateName
-                       , charID, CharStateName.Feebleminded, charStateModel.timeFrame, charStateModel.castTime);
+                       , charID, CharStateName.Feebleminded, timeFrame, castTime);
             allImmunityBuffs.Add(immuneBuffID);
 
             charController.OnAttribCurrValSet += Tick2;
@@ -42,11 +41,11 @@ namespace Common
         public override void StateDisplay()
         {           
             str0 = "+1 Luck for allies";
-            charStateModel.charStateCardStrs.Add(str0);
+            charStateCardStrs.Add(str0);
             str1 = "-1 Haste for self";
-            charStateModel.charStateCardStrs.Add(str1);
+            charStateCardStrs.Add(str1);
             str2 = "Immune to<style=States> Feebleminded </style>";
-            charStateModel.charStateCardStrs.Add(str2);  
+            charStateCardStrs.Add(str2);  
         }
 
         void Tick2(AttribModData charModData)  //  change Stat subscribe 

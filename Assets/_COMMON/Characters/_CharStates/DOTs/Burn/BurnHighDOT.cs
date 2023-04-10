@@ -10,7 +10,6 @@ namespace Common
     public class BurnHighDOT : CharStatesBase
     {
         public override CharStateName charStateName => CharStateName.BurnHighDOT;
-        public override CharStateModel charStateModel { get; set; }
         public override CharController charController { get; set; }
         public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
@@ -67,12 +66,12 @@ namespace Common
         {
             int buffID = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                        , charID, AttribName.dodge, +2, charStateModel.timeFrame, charStateModel.castTime, true);
+                        , charID, AttribName.dodge, +2, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                    , charID, AttribName.waterRes, +24, charStateModel.timeFrame, charStateModel.castTime, true);
+                    , charID, AttribName.waterRes, +24, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             int immuneBuffID = 
@@ -112,15 +111,15 @@ namespace Common
         {
             int dmg = Mathf.RoundToInt(dmgPerRound);            
             str0 = $"-{dmg}<style=Burn> Health </style>per rd";
-            charStateModel.charStateCardStrs.Add(str0);
+            charStateCardStrs.Add(str0);
             str1 = "+2 Dodge";
-            charStateModel.charStateCardStrs.Add(str1);
+            charStateCardStrs.Add(str1);
             str2 = "+24<style=Water> Water Res</style>";
-            charStateModel.charStateCardStrs.Add(str2);
+            charStateCardStrs.Add(str2);
             str3 = "-6<style=Fortitude> Fortitude </style>per rd";
-            charStateModel.charStateCardStrs.Add(str3);
+            charStateCardStrs.Add(str3);
             str4 = "Immune to<style=Water> Soaked </style>and<style=Bleed> Bleeding </style>";
-            charStateModel.charStateCardStrs.Add(str4);
+            charStateCardStrs.Add(str4);
         }
 
         public override void EndState()

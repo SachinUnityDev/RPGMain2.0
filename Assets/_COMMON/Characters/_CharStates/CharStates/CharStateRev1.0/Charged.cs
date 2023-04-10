@@ -12,8 +12,7 @@ namespace Common
     //immune to shock
     public class Charged : CharStatesBase
     {
-        public override CharStateName charStateName => CharStateName.Charged;
-        public override CharStateModel charStateModel { get; set; }
+        public override CharStateName charStateName => CharStateName.Charged;       
         public override CharController charController { get; set; }
         public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
@@ -22,20 +21,20 @@ namespace Common
         public override void StateApplyFX()
         {
             int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                , charID, AttribName.focus, -2, charStateModel.timeFrame, charStateModel.castTime, true);
+                , charID, AttribName.focus, -2, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                  , charID, AttribName.haste, +3, charStateModel.timeFrame, charStateModel.castTime, true);
+                  , charID, AttribName.haste, +3, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-               , charID, AttribName.earthRes, -30, charStateModel.timeFrame, charStateModel.castTime, true);
+               , charID, AttribName.earthRes, -30, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             int immuneBuffID = charController.charStateController
                 .ApplyImmunityBuff(CauseType.CharState, (int)charStateName
-             , charID, CharStateName.Shocked, charStateModel.timeFrame, charStateModel.castTime);
+             , charID, CharStateName.Shocked, timeFrame, castTime);
             allImmunityBuffs.Add(immuneBuffID);
         }
 
@@ -47,16 +46,16 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "+3 Haste and -2 Focus";
-            charStateModel.charStateCardStrs.Add(str0);
+            charStateCardStrs.Add(str0);
 
             str1 = "-30 Earth Res";
-            charStateModel.charStateCardStrs.Add(str1);
+            charStateCardStrs.Add(str1);
 
             str2 = "Immune to <style=Air>Shocked</style>";
-            charStateModel.charStateCardStrs.Add(str2);
+            charStateCardStrs.Add(str2);
 
             str3 = "On melee attacker:<style=Air>Shocked</style>,1 rd and\n 1-7 <style=Air>Air</style> dmg";
-            charStateModel.charStateCardStrs.Add(str3);
+            charStateCardStrs.Add(str3);
         }
     }
 }

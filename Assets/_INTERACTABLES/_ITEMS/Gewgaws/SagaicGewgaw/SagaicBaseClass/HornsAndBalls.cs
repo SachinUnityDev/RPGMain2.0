@@ -37,7 +37,7 @@ namespace Interactables
             buffIndex.Add(buffID);
         }
 
-        void OnCharStateEnd(CharStateData charStateData)
+        void OnCharStateEnd(CharStateModData charStateData)
         {
             charController.buffController.RemoveBuff(buffIndex[0]);// vigor buff  
         }

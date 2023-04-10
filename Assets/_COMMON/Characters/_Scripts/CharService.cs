@@ -70,6 +70,8 @@ namespace Common
         {
             // get all so and Popyulate the list of controllers
             // if save slot is defined take from save slot other SO from here pass in charSO    
+
+          //  if(SaveService.Instance.)
             List<CharNames> chars2Spawn = new List<CharNames> {CharNames.Abbas_Skirmisher
                , CharNames.Baran, CharNames.Cahyo, CharNames.Rayyan };
 
@@ -130,7 +132,6 @@ namespace Common
                 Debug.Log("CharController not found" + charName);
             return null;
         }
-
         public CharModel GetAllyCharModel(CharNames charName)
         {          
             CharModel charModel = allyUnLockedCompModels
@@ -186,7 +187,10 @@ namespace Common
             }
             GameObject go = Instantiate(charSO.charPrefab, spawnPos, Quaternion.identity);
             CharController charController = go.AddComponent<CharController>();
-            CharModel charModel = charController.InitiatizeController(charSO);
+            //  
+             CharModel charModel = charController.InitiatizeController(charSO);
+
+
             charsInPlayControllers.Add(charController);
             allyInPlayControllers.Add(charController);
             
@@ -205,9 +209,6 @@ namespace Common
                     allyUnLockedCompModels.Add(charModel);
                 }
             }
-              
-            
-
           //  LevelService.Instance.LevelUpInit(charController);
 
 

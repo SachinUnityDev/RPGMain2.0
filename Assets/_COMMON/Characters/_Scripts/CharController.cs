@@ -25,7 +25,6 @@ namespace Common
         public CharModel charModel;     
 
         [Header("Combat Controllers")]
-
         public DamageController damageController;   
         public StrikeController strikeController;
 
@@ -395,7 +394,7 @@ namespace Common
             Debug.Log("MAX VALUE changed" + statName + "to " + val);
             statData.maxLimit = val;
         }
-        public void ChangeBaseValue(CauseType causeType, int name, int causeByCharID, AttribName statName
+        public void ChangeAttribBaseVal(CauseType causeType, int name, int causeByCharID, AttribName statName
             , float maxChgR, bool toInvoke = true)
         {
 

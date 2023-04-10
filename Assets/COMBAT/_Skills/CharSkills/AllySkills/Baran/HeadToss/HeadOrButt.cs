@@ -42,9 +42,8 @@ namespace Combat
         public override void ApplyFX1()
         {
           if(targetController)
-            CharStatesService.Instance
-                    .ApplyCharState(targetGO, CharStateName.Confused
-                                     , charController, CauseType.CharSkill, (int)skillName);
+            charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                                        , charController.charModel.charID, CharStateName.Confused);
         }
 
         public override void ApplyFX2()
@@ -54,7 +53,7 @@ namespace Combat
         {
             base.SkillEnd();
             if (targetController)
-                CharStatesService.Instance.RemoveCharState(targetGO, CharStateName.Confused);
+                charController.charStateController.RemoveCharState(CharStateName.Confused);
         }
         public override void ApplyFX3()
         {

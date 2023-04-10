@@ -95,7 +95,9 @@ namespace Town
                 case BuildInteractType.EndDay:
                     return restPanel; 
                 case BuildInteractType.Provision:
-                    return provisionPanel; 
+                    return provisionPanel;
+                case BuildInteractType.CureSickness:
+                    return healingPanel;
                 default:
                     return null;                    
             }

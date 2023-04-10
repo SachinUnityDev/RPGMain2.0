@@ -57,8 +57,8 @@ namespace Combat
 
         public override void ApplyFX2()
         {
-            CharStatesService.Instance.ApplyCharState(targetGO, CharStateName.Invulnerable
-                            , charController, CauseType.CharSkill, (int)skillName);
+            charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                                        , charController.charModel.charID, CharStateName.Invulnerable);
         }
 
         public override void ApplyFX3()
@@ -70,8 +70,7 @@ namespace Combat
         public override void SkillEnd()
         {
             base.SkillEnd();
-
-            CharStatesService.Instance.RemoveCharState(targetGO, CharStateName.Invulnerable);
+            charController.charStateController.RemoveCharState(CharStateName.Invulnerable);
          //   targetController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.haste, 4);
 
         }
@@ -99,9 +98,7 @@ namespace Combat
 
         public override void ApplyVFx()
         {
-
             SkillService.Instance.skillFXMoveController.SingleTargetRangeStrike(PerkType.None);
-
         }
 
 

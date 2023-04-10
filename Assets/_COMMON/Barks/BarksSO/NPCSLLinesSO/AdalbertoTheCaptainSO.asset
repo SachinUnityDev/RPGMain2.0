@@ -197,4 +197,3 @@ MonoBehaviour:
     - barkline: Come back again!
       barkAudio: {fileID: 0}
   allNPCInteractBarkData: []
-  allBuildInteractBarkData: []

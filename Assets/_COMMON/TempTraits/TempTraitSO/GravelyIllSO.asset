@@ -17,7 +17,15 @@ MonoBehaviour:
   temptraitBehavior: 2
   minCastTime: 6
   maxCastTime: 6
-  desc: 
+  traitNameStr: ' Gravely Ill'
   iconSprite: {fileID: 0}
   allLines:
   - May die if not healed timely
+  sicknessData:
+    herb1:
+      herbName: 3
+      qty: 3
+    herb2:
+      herbName: 1
+      qty: 9
+    restTimeInday: 3

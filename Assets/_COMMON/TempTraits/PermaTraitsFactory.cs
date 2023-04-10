@@ -26,17 +26,13 @@ namespace Common
     public class PermaTraitsFactory : MonoBehaviour
     {
         public Dictionary<PermTraitName, Type> allPermTraits = new Dictionary<PermTraitName, Type>();
-        public Dictionary<TempTraitName, Type> allTempTraits;
-
         void Awake()
         {
           
                 
            
         }
-        private void Start()
-        {
-        }
+ 
         #region PERMANENT_TRAITS
 
         // INIT

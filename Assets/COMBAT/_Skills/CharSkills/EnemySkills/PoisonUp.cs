@@ -50,12 +50,8 @@ namespace Combat
                     float percent = 70f;
                     if (percent.GetChance())
                     {
-                        CharStatesService.Instance
-                            .ApplyCharState(skillEventData.targetController.gameObject, CharStateName.PoisonedHighDOT
-                                     , charController, CauseType.CharSkill, (int)skillName);
-
-                        //.SetCharState(skillEventData.targetController.gameObject
-                        //, charController, CharStateName.PoisonedHighDOT);
+                        skillEventData.targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                       , charController.charModel.charID, CharStateName.PoisonedHighDOT);
                     }
                 } 
             }

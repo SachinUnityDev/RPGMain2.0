@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BushmansHat
   m_EditorClassIdentifier: 
   herbName: 3
-  maxInvStackSize: 2
+  maxInvStackSize: 1
   cost:
     silver: 0
     bronze: 10

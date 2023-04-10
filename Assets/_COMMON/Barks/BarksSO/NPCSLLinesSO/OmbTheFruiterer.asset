@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nPCName: 15
   NPCBarkData:
-  - FameType: 8
+  - FameType: 0
     interactType: 0
     barkLineData:
     - barkline: "What do you need?\r"
@@ -22,4 +22,3 @@ MonoBehaviour:
     - barkline: Hi.
       barkAudio: {fileID: 0}
   allNPCInteractBarkData: []
-  allBuildInteractBarkData: []

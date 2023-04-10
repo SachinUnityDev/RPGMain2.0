@@ -10,7 +10,6 @@ namespace Common
     public class LowPoisonDOT : CharStatesBase
     {
         public override CharStateName charStateName => CharStateName.PoisonedLowDOT;
-        public override CharStateModel charStateModel { get; set; }
         public override CharController charController { get; set; }
         public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
@@ -28,14 +27,14 @@ namespace Common
             }
             dmgPerRound = 2 + (strikerLvl / 4);
 
-            bool isBleeding = CharStatesService.Instance.HasCharDOTState(charController.gameObject, CharStateName.BleedLowDOT);
-            bool isPoisoned = CharStatesService.Instance.HasCharDOTState(charController.gameObject, CharStateName.PoisonedLowDOT);
-            bool isBurning = CharStatesService.Instance.HasCharDOTState(charController.gameObject, CharStateName.BurnLowDOT);
+            bool isBleeding = charController.charStateController.HasCharDOTState(CharStateName.BleedLowDOT);
+            bool isPoisoned = charController.charStateController.HasCharDOTState(CharStateName.PoisonedLowDOT);
+            bool isBurning = charController.charStateController.HasCharDOTState(CharStateName.BurnLowDOT);
 
             if (isPoisoned)
             {
                 // clear old poison 
-                CharStatesService.Instance.ClearDOT(charController.gameObject, CharStateName.PoisonedLowDOT);
+                charController.charStateController.ClearDOT(CharStateName.PoisonedLowDOT);
                 // APPLY DAMAGE CONTROller 5-6 fortitude damage
                 charController.damageController.ApplyDamage(charController, CauseType.CharState, (int)charStateName
                     , DamageType.FortitudeDmg, UnityEngine.Random.Range(5, 7), false);
@@ -63,16 +62,16 @@ namespace Common
         {
             int buffID = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                        , charID, AttribName.haste, -2, charStateModel.timeFrame, charStateModel.castTime, true);
+                        , charID, AttribName.haste, -2, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
             buffID =
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                    , charID, AttribName.fireRes, -30, charStateModel.timeFrame, charStateModel.castTime, true);
+                    , charID, AttribName.fireRes, -30, timeFrame, castTime, true);
             allBuffIds.Add(buffID); 
 
             buffID = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                    , charID, AttribName.airRes, +20, charStateModel.timeFrame, charStateModel.castTime, true);
+                    , charID, AttribName.airRes, +20, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             charController.charStateController.ApplyImmunityBuff(CauseType.CharState, (int)charStateName, charID
@@ -101,15 +100,15 @@ namespace Common
         {
             int dmg = Mathf.RoundToInt(dmgPerRound);
             str0 = "<style=Poison> Poisoned </style>";
-            charStateModel.charStateCardStrs.Add(str0);
+            charStateCardStrs.Add(str0);
             str1 = $"-2<style=Poison> Health </style>per rd";
-            charStateModel.charStateCardStrs.Add(str1);
+            charStateCardStrs.Add(str1);
             str2 = "-2<style=Attributes> Haste </style>";
-            charStateModel.charStateCardStrs.Add(str2);
+            charStateCardStrs.Add(str2);
             str3 = "-30<style=Fire> Fire Res </style>and +20<style=Air> Air Res </style>";
-            charStateModel.charStateCardStrs.Add(str3);
+            charStateCardStrs.Add(str3);
             str4 = "Immune to<style=Air> Shocked </style>";
-            charStateModel.charStateCardStrs.Add(str4);
+            charStateCardStrs.Add(str4);
         }
 
         public override void EndState()

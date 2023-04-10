@@ -50,9 +50,8 @@ namespace Combat
         public override void ApplyFX2()
         {
             if (chance.GetChance())
-                CharStatesService.Instance
-                         .ApplyCharState(targetGO, CharStateName.BleedLowDOT
-                                     , charController, CauseType.CharSkill, (int)skillName);
+                charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                                        , charController.charModel.charID, CharStateName.BleedLowDOT);
 
             //.SetCharState(targetGO, charController, CharStateName.BleedLowDOT);
         }
@@ -115,12 +114,12 @@ namespace Combat
                 
                 if (dyna != null)
                 {
-                    if (CharStatesService.Instance.HasCharDOTState(charGO, CharStateName.BleedLowDOT))
+                    if (targetController.charStateController.HasCharDOTState(CharStateName.BleedLowDOT))
                     {
                         tempDyna = dyna; 
                     }
-                    else if (TempTraitService.Instance.HasTempTraits(TempTraitName.Nausea) ||
-                            TempTraitService.Instance.HasTempTraits(TempTraitName.RatBiteFever))
+                    else if (targetController.tempTraitController.HasTempTrait(TempTraitName.Nausea) ||
+                            targetController.tempTraitController.HasTempTrait(TempTraitName.RatBiteFever))
                     {
                         tempDyna = dyna;
                     }else

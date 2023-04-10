@@ -38,7 +38,8 @@ namespace Combat
 
         [Header("Scriptable objects")]
         public StatIconSO statIconSO;
-        public CharStateModelSO charStateIconSO;
+        //public CharStateModelSO charStateIconSO;
+      // public AllCharStateSO allStatesSO; 
         public TransitionSO transitionSO;
 
         [Header("Buff Display")]
@@ -187,10 +188,13 @@ namespace Combat
 
             for (int i = 0; i < charInStates.Count; i++)
             {
-                CharStateModel dataSO = charStateIconSO.allCharStatesModels.Find(x => x.charStateName == charInStates[i]);
+                //CharStateModel stateSO = allStatesSO.GetCharStateSO(charInStates[i]);   
+                    
+                //    charStateIconSO.allCharStatesModels.Find(x => x.charStateName == charInStates[i]);
+                CharStateSO1 stateSO = CharStatesService.Instance.allCharStateSO.GetCharStateSO(charInStates[i]);
                 CharStateModel charStateModel = CharStatesService.Instance.allCharStateModel
-                                                .Find(t => t.charStateName == charInStates[i]); 
-                CharStateBehavior charStateType = CharStatesService.Instance.GetCharStateType(charInStates[i]);
+                                                .Find(t => t.charStateName == charInStates[i]);
+                CharStateBehavior charStateType = charStateModel.statebehavior; 
                 k = (charStateType == CharStateBehavior.Positive) ? 0 : 1;
 
                // Debug.Log("CHAR STATES " + data.charStateName);
@@ -198,7 +202,7 @@ namespace Combat
                 {
                     Transform ImgTrans = CharStatesPanel.transform.GetChild(k).GetChild(0).GetChild(i);
                     ImgTrans.gameObject.SetActive(true);
-                    ImgTrans.GetChild(0).GetComponent<Image>().sprite  = dataSO.charStateSprite;
+                    ImgTrans.GetChild(0).GetComponent<Image>().sprite  = stateSO.iconSprite;
                     ImgTrans.GetComponent<CharStatePanelEvents>().charStateModel = charStateModel; 
 
                 }
@@ -206,14 +210,14 @@ namespace Combat
                 {
                     Transform ImgTrans = CharStatesPanel.transform.GetChild(k).GetChild(0).GetChild(i - 4);
                     ImgTrans.gameObject.SetActive(true);
-                    ImgTrans.GetChild(0).GetComponent<Image>().sprite = dataSO.charStateSprite;
+                    ImgTrans.GetChild(0).GetComponent<Image>().sprite = stateSO.iconSprite;
                     ImgTrans.GetComponent<CharStatePanelEvents>().charStateModel = charStateModel;
                 }
                 if (i >= 7 && i < 9)
                 {
                     Transform ImgTrans = CharStatesPanel.transform.GetChild(k).GetChild(0).GetChild(i - 7);
                     ImgTrans.gameObject.SetActive(true);
-                    ImgTrans.GetChild(0).GetComponent<Image>().sprite = dataSO.charStateSprite;
+                    ImgTrans.GetChild(0).GetComponent<Image>().sprite = stateSO.iconSprite;
                     ImgTrans.GetComponent<CharStatePanelEvents>().charStateModel = charStateModel;
 
                 }

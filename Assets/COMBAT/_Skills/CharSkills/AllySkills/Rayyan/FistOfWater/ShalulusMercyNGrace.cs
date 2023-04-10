@@ -26,7 +26,7 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        public List<GameObject> allyGOs = new List<GameObject>();
+        public List<CharController> allCharControllers = new List<CharController>();
         public override void AddTargetPos()
         {
             if (skillModel == null) return;
@@ -37,7 +37,7 @@ namespace Combat
                     if (dyna != null)
                     {
                         skillModel.targetPos.Add(cellPosData);
-                        allyGOs.Add(dyna.charGO);
+                        allCharControllers.Add(dyna.charGO.GetComponent<CharController>());
                     }                
             }
         }
@@ -53,27 +53,25 @@ namespace Combat
             AttribData statData = charController.GetAttrib(AttribName.morale);
             if(statData.currValue < 12)
             {
-                allyGOs.ForEach(t => t.GetComponent<CharController>().damageController
+                allCharControllers.ForEach(t => t.damageController
                  .ApplyDamage(charController, CauseType.CharSkill, (int)SkillNames.FistOfWater, DamageType.Heal
                                                                     , UnityEngine.Random.Range(6, 12)));
             }else
             {
-                allyGOs.ForEach(t => t.GetComponent<CharController>().damageController
+                allCharControllers.ForEach(t => t.damageController
                         .ApplyDamage(charController, CauseType.CharSkill, (int)SkillNames.FistOfWater, DamageType.Heal
                                         , UnityEngine.Random.Range(12, 24)));
             }       
         }
         public override void ApplyFX2()
         {
-            allyGOs.ForEach(t => CharStatesService.Instance.ClearDOT(t, CharStateName.BurnLowDOT)); 
+            allCharControllers.ForEach(t => charController.charStateController.ClearDOT(CharStateName.BurnLowDOT)); 
         }
 
         public override void ApplyFX3()
         {
-            allyGOs.ForEach(t => CharStatesService.Instance
-             .ApplyCharState(t, CharStateName.Soaked
-                            , charController, CauseType.CharSkill, (int)skillName)
-                            );
+            allCharControllers.ForEach(t => t.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                       , charController.charModel.charID, CharStateName.Soaked));                            
         }
 
         public override void ApplyMoveFX()

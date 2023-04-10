@@ -11,8 +11,7 @@ namespace Common
     public class LastBreath : CharStatesBase  
     {
         // start condition stamina 0 
-        public override CharStateName charStateName => CharStateName.LastBreath;
-        public override CharStateModel charStateModel { get; set; }
+        public override CharStateName charStateName => CharStateName.LastBreath;      
         public override CharController charController { get; set; }
         public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Heroes; 
@@ -53,10 +52,10 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "Stamina gain blocked";
-            charStateModel.charStateCardStrs.Add(str0);
+            charStateCardStrs.Add(str0);
 
             str1 = "Lose Hp instead of Stm on skill use";
-            charStateModel.charStateCardStrs.Add(str1);
+            charStateCardStrs.Add(str1);
         }
     }
 }

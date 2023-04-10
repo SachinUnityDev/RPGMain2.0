@@ -9,7 +9,6 @@ namespace Common
     public class FeebleMinded : CharStatesBase
     {
         public override CharStateName charStateName => CharStateName.Feebleminded;
-        public override CharStateModel charStateModel { get; set; }
         public override CharController charController { get; set; }
         public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
@@ -22,20 +21,20 @@ namespace Common
             // ...Immune to LuckyDuck...
 
             int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-            , charID, AttribName.waterRes, -20, charStateModel.timeFrame, charStateModel.castTime, true);
+            , charID, AttribName.waterRes, -20, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-            , charID, AttribName.earthRes, -20, charStateModel.timeFrame, charStateModel.castTime, true);
+            , charID, AttribName.earthRes, -20, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-            , charID, AttribName.darkRes, -20, charStateModel.timeFrame, charStateModel.castTime, true);
+            , charID, AttribName.darkRes, -20, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             int immuneBuffID = charController.charStateController
                .ApplyImmunityBuff(CauseType.CharState, (int)charStateName
-                  , charID, CharStateName.LuckyDuck, charStateModel.timeFrame, charStateModel.castTime);
+                  , charID, CharStateName.LuckyDuck, timeFrame, castTime);
             allImmunityBuffs.Add(immuneBuffID); 
         }
         public override void StateApplyVFX()
@@ -45,11 +44,11 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "Can't use Buff or Heal skills";
-            charStateModel.charStateCardStrs.Add(str0);
+            charStateCardStrs.Add(str0);
             str1 = "-20 Cold Res";
-            charStateModel.charStateCardStrs.Add(str1);
+            charStateCardStrs.Add(str1);
             str2 = "Immune to<style=States> Lucky Duck</style>";
-            charStateModel.charStateCardStrs.Add(str2);
+            charStateCardStrs.Add(str2);
         }
     }
 }

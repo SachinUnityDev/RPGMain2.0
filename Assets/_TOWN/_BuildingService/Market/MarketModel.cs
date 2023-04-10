@@ -9,6 +9,9 @@ namespace Town
 {
     public class MarketModel
     {
+        [Header("Build State")]
+        public BuildingState buildState;
+
         [Header("Craft potion")]
         public Iitems healthPotion;
         public Iitems staminaPotion;
@@ -22,6 +25,8 @@ namespace Town
         public List<BuildIntTypeData> buildIntTypes = new List<BuildIntTypeData>();
         public MarketModel(BuildingSO marketSO)
         {
+            buildState = marketSO.buildingData.buildingState;
+
             buildIntTypes = marketSO.buildingData.buildIntTypes.DeepClone();
             npcData = marketSO.buildingData.npcInteractData.DeepClone();
             charInteract = marketSO.buildingData.charInteractData.DeepClone();

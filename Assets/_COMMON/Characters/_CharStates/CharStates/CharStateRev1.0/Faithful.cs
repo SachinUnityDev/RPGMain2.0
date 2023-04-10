@@ -9,11 +9,8 @@ namespace Common
     public class Faithful : CharStatesBase
     {
         public override CharStateName charStateName => CharStateName.Faithful;
-
-        public override CharStateModel charStateModel { get; set; }
         public override CharController charController { get; set; }
         public override int charID { get; set; }
-
         public override StateFor stateFor => StateFor.Heroes;
 
         public override int castTime { get; protected set;}
@@ -24,43 +21,43 @@ namespace Common
         {
             castTime = 2;
             int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                   , charID, AttribName.focus, 2, charStateModel.timeFrame, charStateModel.castTime, true);
+                   , charID, AttribName.focus, 2, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                , charID, AttribName.morale, 2, charStateModel.timeFrame, charStateModel.castTime, true);
+                , charID, AttribName.morale, 2, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                , charID, AttribName.luck, 2, charStateModel.timeFrame, charStateModel.castTime, true);
+                , charID, AttribName.luck, 2, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                , charID, AttribName.haste, 2, charStateModel.timeFrame, charStateModel.castTime, true);
+                , charID, AttribName.haste, 2, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-          , charID, AttribName.dodge, 2, charStateModel.timeFrame, charStateModel.castTime, true);
+          , charID, AttribName.dodge, 2, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuffOnRange(CauseType.CharState, (int)charStateName
-            , charID, AttribName.armor, 2, 2, charStateModel.timeFrame, charStateModel.castTime, true);
+            , charID, AttribName.armor, 2, 2, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                 , charID, AttribName.earthRes, 20, charStateModel.timeFrame, charStateModel.castTime, true);
+                 , charID, AttribName.earthRes, 20, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                 , charID, AttribName.waterRes, 20, charStateModel.timeFrame, charStateModel.castTime, true);
+                 , charID, AttribName.waterRes, 20, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                 , charID, AttribName.fireRes, 20, charStateModel.timeFrame, charStateModel.castTime, true);
+                 , charID, AttribName.fireRes, 20, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                 , charID, AttribName.airRes, 20, charStateModel.timeFrame, charStateModel.castTime, true);
+                 , charID, AttribName.airRes, 20, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             charController.ClampStatToggle(StatName.fortitude, true);
@@ -78,10 +75,10 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "2 Utility Stats, 2 Dodge";
-            charStateModel.charStateCardStrs.Add(str0);
+            charStateCardStrs.Add(str0);
 
             str1 = "2-2 Armor, 20 Elemental Res";
-            charStateModel.charStateCardStrs.Add(str1);
+            charStateCardStrs.Add(str1);
 
         }
     }

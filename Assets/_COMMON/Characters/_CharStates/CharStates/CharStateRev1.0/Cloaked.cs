@@ -12,8 +12,6 @@ namespace Common
 
 
         public override CharStateName charStateName => CharStateName.Cloaked;
-
-        public override CharStateModel charStateModel { get; set; }
         public override CharController charController { get; set; }
         public override int charID { get; set; }
 
@@ -24,7 +22,7 @@ namespace Common
         public override void StateApplyFX()
         {
             int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-          , charID, AttribName.darkRes, 14, charStateModel.timeFrame, charStateModel.castTime, true);
+          , charID, AttribName.darkRes, 14, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
         }
 
@@ -36,13 +34,13 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "Can't be single targeted";
-            charStateModel.charStateCardStrs.Add(str0);
+            charStateCardStrs.Add(str0);
 
             str1 = "+14 Dark Res";
-            charStateModel.charStateCardStrs.Add(str1);
+            charStateCardStrs.Add(str1);
 
             str2 = "Lost upon attacking";
-            charStateModel.charStateCardStrs.Add(str2);
+            charStateCardStrs.Add(str2);
         }
     }
 }

@@ -43,10 +43,11 @@ namespace Combat
         }
         public override void ApplyFX1()
         {
-            if (chance.GetChance())
-                CombatService.Instance.mainTargetDynas.ForEach(t => CharStatesService.Instance
-                .ApplyCharState(t.charGO, CharStateName.BleedHighDOT
-                                     , charController, CauseType.CharSkill, (int)skillName));
+            if (chance.GetChance())             
+                CombatService.Instance.mainTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>()
+                .charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                , charController.charModel.charID, CharStateName.BleedHighDOT, TimeFrame.Infinity, -1));
+
         }
 
         public override void ApplyFX2()

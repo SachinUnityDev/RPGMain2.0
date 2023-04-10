@@ -9,9 +9,7 @@ namespace Common
     public class Invulnerable : CharStatesBase
     {
         //Immune to Magical and Physical dmg(can suffer Pure, Stamina or Fortitude dmgs) -3 Haste
-        public override CharStateName charStateName => CharStateName.Invulnerable;
-
-        public override CharStateModel charStateModel { get; set; }
+        public override CharStateName charStateName => CharStateName.Invulnerable;     
         public override CharController charController { get; set; }
         public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
@@ -20,7 +18,7 @@ namespace Common
         public override void StateApplyFX()
         {
             int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-            , charID, AttribName.haste, -3, charStateModel.timeFrame, charStateModel.castTime, true);
+            , charID, AttribName.haste, -3, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             // dmg controller magic and physical block
@@ -34,10 +32,10 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "Immune to Magical and Physical Dmg";
-            charStateModel.charStateCardStrs.Add(str0);
+            charStateCardStrs.Add(str0);
 
             str1 = "-3 Haste";
-            charStateModel.charStateCardStrs.Add(str1);
+            charStateCardStrs.Add(str1);
         }
     }
 }

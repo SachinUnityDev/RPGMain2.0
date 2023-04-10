@@ -105,7 +105,7 @@ namespace Combat
             //if (targetController && IsTargetEnemy())
             //    targetController.ChangeStat(CauseType.CharSkill, (int)skillName, charController
             //                                                            , StatsName.haste, 2f);
-            CharStatesService.Instance.RemoveCharState(targetGO, CharStateName.Soaked);            
+            targetController.charStateController.RemoveCharState(CharStateName.Soaked);            
         }
         public override void DisplayFX4()
         {

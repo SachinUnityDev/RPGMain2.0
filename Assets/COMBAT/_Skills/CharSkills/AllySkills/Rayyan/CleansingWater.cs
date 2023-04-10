@@ -71,9 +71,8 @@ namespace Combat
 
         public override void ApplyFX3()
         {          
-            CharStatesService.Instance
-                 .ApplyCharState(targetGO, CharStateName.Soaked
-                                     , charController, CauseType.CharSkill, (int)skillName);
+            charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                                        , charController.charModel.charID, CharStateName.Soaked);
         }
         public override void DisplayFX3()
         {
@@ -96,7 +95,7 @@ namespace Combat
             base.SkillEnd(); 
             //if (IsTargetMyEnemy()) return;
             //targetController.ChangeStat(CauseType.CharSkill, (int)skillName, charController, StatsName.haste, -2);
-            CharStatesService.Instance.RemoveCharState(targetGO, CharStateName.Soaked);
+            targetController.charStateController.RemoveCharState(CharStateName.Soaked);
         }
         public override void PopulateAITarget()
         {

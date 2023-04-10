@@ -5,11 +5,10 @@ using UnityEngine;
 
 namespace Common
 {
-    public class KillTheSnared : PermTraitBase
-{
-        public override traitBehaviour traitBehaviour => traitBehaviour.Positive;
+    public class KillTheSnared : PermaTraitBase
+    {
 
-        public override PermTraitName permTraitName => PermTraitName.SnaredSlayer;
+        public override PermaTraitName permTraitName => PermaTraitName.SnaredSlayer;
         public override void ApplyTrait(CharController charController)
         {
 

@@ -5,16 +5,14 @@ using UnityEngine;
 
 namespace Common
 {
-    public class HiddenClaw : PermTraitBase
+    public class HiddenClaw : PermaTraitBase
     {
         //+3 acc in Stealth mode or night 
         //+6 acc if both Night and Stealth
         CharController charController;
 
         QuestMode prevQCMode = QuestMode.None;
-        public override traitBehaviour traitBehaviour => traitBehaviour.Positive;
-
-        public override PermTraitName permTraitName => PermTraitName.HiddenClaw;
+        public override PermaTraitName permTraitName => PermaTraitName.HiddenClaw;
         public override void ApplyTrait(CharController _charController)
         {
             charController = _charController; 

@@ -9,11 +9,11 @@ namespace Common
 
     public class PermaTraitData
     {
-        public PermTraitName permaName;
+        public PermaTraitName permaName;
         public CharNames effectedCharName;
         public Vector3 effectCharPos;
 
-        public PermaTraitData(PermTraitName permaName, CharNames effectedCharName
+        public PermaTraitData(PermaTraitName permaName, CharNames effectedCharName
                                 , Vector3 effectCharPos)
         {
             this.permaName = permaName;
@@ -33,6 +33,9 @@ namespace Common
         public List<PermaTraitData> allPermaTraitData = new List<PermaTraitData>(); 
         PermaTraitsFactory permaTraitsFactory;
         public event Action<PermaTraitData> OnPermaTraitAdded;
+
+        public AllPermaTraitSO allPermaTraitSO; 
+
 
         void Start()
         {
@@ -71,7 +74,7 @@ namespace Common
             //        }
             //    }
             //}
-            permaTraitsFactory.ApplyPermTraits(go);
+          //  permaTraitsFactory.ApplyPermTraits(go);
 
         }
 

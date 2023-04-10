@@ -4,17 +4,15 @@ using UnityEngine;
 
 namespace Common
 {
-    public class DarkKnight : PermTraitBase
+    public class DarkKnight : PermaTraitBase
     {
         // Can't be ambushed at night
 
         // +2 init at night
 
         // Start is called before the first frame update
-        CharController charController; 
-        public override traitBehaviour traitBehaviour => traitBehaviour.Positive;
-        
-        public override PermTraitName permTraitName => PermTraitName.DarkKnight;
+        CharController charController;         
+        public override PermaTraitName permTraitName => PermaTraitName.DarkKnight;
         public override void ApplyTrait(CharController _charController)
         {
             charController = _charController;

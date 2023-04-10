@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Common
 {
-    public class NeedSomeSpace : PermTraitBase
+    public class NeedSomeSpace : PermaTraitBase
     {
-        public override traitBehaviour traitBehaviour => traitBehaviour.Positive;
 
-        public override PermTraitName permTraitName => PermTraitName.NeedSomeSpace; 
+        public override PermaTraitName permTraitName => PermaTraitName.NeedSomeSpace; 
         public  override void ApplyTrait(CharController charController )
         {
 

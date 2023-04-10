@@ -5,16 +5,13 @@ using Combat;
 
 namespace Common
 {
-    public class TheMoretheMerrier : PermTraitBase
+    public class TheMoretheMerrier : PermaTraitBase
     {
         //1 morale for each other Safriman in party
         //+1 focus for each other Safriman in party
         CharController charController;
 
-
-        public override traitBehaviour traitBehaviour => traitBehaviour.Positive;
-
-        public override PermTraitName permTraitName => PermTraitName.TheMoreTheMerrier;
+        public override PermaTraitName permTraitName => PermaTraitName.TheMoreTheMerrier;
         public override void ApplyTrait(CharController _charController)
         {
             charController = _charController;

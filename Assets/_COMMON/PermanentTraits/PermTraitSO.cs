@@ -7,23 +7,18 @@ namespace Common
 {
     [CreateAssetMenu(fileName = "PermTraitSO", menuName = "Common/PermTraitSO")]
 
-    public class PermTraitSO : ScriptableObject
+    public class PermaTraitSO : ScriptableObject
     {
-        public PermTraitName permTraitName;
-        public traitBehaviour traitBehaviour;
+        public PermaTraitName permaTraitName;
+        public TraitBehaviour traitBehaviour;
         [Header("Class type")]
         public ClassType classType;
-
         [Header("culture ")]
         public CultureType cultureType;
-
         [Header("race ")]
-        public RaceType raceType;
-    
-
+        public RaceType raceType;  
         [Header("Description")]
         public string traitNameStr = "";
-
 
         [TextArea(5, 10)]
         public List<string> allLines = new List<string>();
@@ -32,9 +27,8 @@ namespace Common
         {
             if (traitNameStr == "")
             {
-                traitNameStr = permTraitName.ToString().CreateSpace();
+                traitNameStr = permaTraitName.ToString().CreateSpace();
             }
-
         }
     }
 

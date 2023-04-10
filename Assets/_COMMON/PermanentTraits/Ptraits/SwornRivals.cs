@@ -5,13 +5,11 @@ using Combat;
 
 namespace Common
 {
-    public class SwornRivals : PermTraitBase
+    public class SwornRivals : PermaTraitBase
     {
-        CharController charController; 
+        CharController charController;        
         
-        public override traitBehaviour traitBehaviour => traitBehaviour.Negative;
-        
-        public override PermTraitName permTraitName => PermTraitName.SwornRivals;
+        public override PermaTraitName permTraitName => PermaTraitName.SwornRivals;
         public override void ApplyTrait(CharController _charController)
         {
             charController = _charController;

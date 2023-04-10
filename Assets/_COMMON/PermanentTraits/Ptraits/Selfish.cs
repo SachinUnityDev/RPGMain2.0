@@ -5,12 +5,10 @@ using UnityEngine;
 
 namespace Common
 {
-    public class Selfish :PermTraitBase
+    public class Selfish :PermaTraitBase
     {
         // -3 morale if not single in row
-        public override traitBehaviour traitBehaviour => traitBehaviour.Negative;
-
-        public override PermTraitName permTraitName => PermTraitName.Selfcentred;
+        public override PermaTraitName permTraitName => PermaTraitName.Selfcentred;
         public override void ApplyTrait(CharController charController )
         {
 

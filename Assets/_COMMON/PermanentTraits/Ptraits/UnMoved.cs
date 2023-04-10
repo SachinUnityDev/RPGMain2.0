@@ -6,14 +6,12 @@ using Common;
 
 namespace Common
 {
-    public class UnMoved :PermTraitBase
+    public class UnMoved :PermaTraitBase
     {
 
-        CharController charController; 
-       
-        public override traitBehaviour traitBehaviour => traitBehaviour.Negative;
+        CharController charController;       
 
-        public override PermTraitName permTraitName => PermTraitName.Unmoved;
+        public override PermaTraitName permTraitName => PermaTraitName.Unmoved;
         public override void ApplyTrait(CharController _charController)
         {
             charController = _charController;

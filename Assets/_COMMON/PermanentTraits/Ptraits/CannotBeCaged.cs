@@ -7,16 +7,12 @@ namespace Common
 {
     //-2 morale in subterraneans, sewers, caves
 
-    public class CannotBeCaged : PermTraitBase
+    public class CannotBeCaged : PermaTraitBase
     {
 
         CharController charController;
         LandscapeNames _prevPartyLoc; 
-        public override PermTraitName permTraitName => PermTraitName.CannotBeCaged;
-       
-
-        public override traitBehaviour traitBehaviour => traitBehaviour.Negative;
-
+        public override PermaTraitName permTraitName => PermaTraitName.CannotBeCaged;
         public override void ApplyTrait(CharController _charController)
         {
             charController = _charController;

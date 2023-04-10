@@ -12,7 +12,7 @@ namespace Common
     }
 
 
-    public enum traitBehaviour
+    public enum TraitBehaviour
     {
         None,
         Positive,
@@ -101,10 +101,10 @@ namespace Common
         DesertFever,
     }
 
-    public enum PermTraitName
+    public enum PermaTraitName
     {
         None,
-        Beastmancer,
+        BeastTamer,
         BoldMover,
         BornRider,
         CannotBeCaged,

@@ -11,7 +11,8 @@ namespace Common
     public class CharService : MonoSingletonGeneric<CharService>, ISaveableService
     {
         public event Action<CharNames> OnCharAddedToParty;
-
+        public event Action OnPartyLocked; 
+        public event Action OnPartyUnlocked;
 
         [Header("Character Scriptables")]
         public AllCharSO allCharSO; 

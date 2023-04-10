@@ -5,15 +5,13 @@ using UnityEngine;
 
 namespace Common
 {
-    public class MasterSmuggler : PermTraitBase
+    public class MasterSmuggler : PermaTraitBase
     {
         //Can't get caught when smuggling items to merchant
         //1 more loot in coast 
         CharController charController;
         LandscapeNames prevPartyLoc;
-        public override traitBehaviour traitBehaviour => traitBehaviour.Positive;
-
-        public override PermTraitName permTraitName => PermTraitName.MasterSmuggler;
+        public override PermaTraitName permTraitName => PermaTraitName.MasterSmuggler;
         public override void ApplyTrait(CharController _charController )
         {
             prevPartyLoc = LandscapeNames.None; 

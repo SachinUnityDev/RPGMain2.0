@@ -5,14 +5,12 @@ using System;
 
 namespace Common
 {
-    public class BoldMover : PermTraitBase
+    public class BoldMover : PermaTraitBase
     {
         // Gain 3 fortitude each dodge(6 when night)  
         //Double fortitude gain at night(except the Fortitude potion)
-        CharController charController;
-        public override traitBehaviour traitBehaviour => traitBehaviour.Positive;
-        
-        public override PermTraitName permTraitName => PermTraitName.BoldMover;
+        CharController charController;        
+        public override PermaTraitName permTraitName => PermaTraitName.BoldMover;
         public override void ApplyTrait(CharController _charController)
         {
             charController = _charController;

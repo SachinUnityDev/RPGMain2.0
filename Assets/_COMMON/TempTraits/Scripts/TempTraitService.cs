@@ -39,8 +39,8 @@ namespace Common
         public void ApplyPermTraits(GameObject go)
         {
             CharController charController = go?.GetComponent<CharController>();
-            PermTraitBase[] tempTraits = go.GetComponents<PermTraitBase>();
-            foreach (PermTraitBase p in tempTraits)
+            PermaTraitBase[] tempTraits = go.GetComponents<PermaTraitBase>();
+            foreach (PermaTraitBase p in tempTraits)
             {
                 p.ApplyTrait(charController);
             }

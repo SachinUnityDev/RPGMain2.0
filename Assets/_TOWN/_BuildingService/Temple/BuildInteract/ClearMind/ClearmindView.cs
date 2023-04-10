@@ -125,11 +125,11 @@ namespace Town
                 TempTraitSO tempSO = TempTraitService.Instance.allTempTraitSO.GetTempTraitSO(model.tempTraitName); 
                 if(tempSO.tempTraitType == TempTraitType.Mental)
                 {
-                    if(tempSO.temptraitBehavior == traitBehaviour.Positive)
+                    if(tempSO.temptraitBehavior == TraitBehaviour.Positive)
                     {
                         posMentalTraits.Add(model);
                     }
-                    if (tempSO.temptraitBehavior == traitBehaviour.Negative)
+                    if (tempSO.temptraitBehavior == TraitBehaviour.Negative)
                     {
                         negMentalTraits.Add(model);
                     }

@@ -12,8 +12,7 @@ using Combat;
         //Lose half Fortitude(everything, including Fortitude diminishing attacks)  // for chagestat Fortitude  
         //+3 Dodge if he is last man standing in hero party
 
-        CharController charController;
-        public override PermaTraitName permTraitName => PermaTraitName.CodesofHonour;
+        public override PermaTraitName permaTraitName => PermaTraitName.CodesofHonour;
         public override void ApplyTrait(CharController _charController)
         {
             charController = _charController;
@@ -25,7 +24,7 @@ using Combat;
         {        //Lose half Fortitude(everything, including Fortitude diminishing attacks)  // for chagestat Fortitude  
 
             if (statModData.statModified == StatName.fortitude && statModData.modVal < 0)
-                charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID
+                charController.ChangeStat(CauseType.PermanentTrait, (int)permaTraitName, charID
                     , statModData.statModified, -(statModData.modVal / 2));    // increase half the value , as value might be reduced on call
             //- minus added to increment by half value
         }
@@ -38,7 +37,7 @@ using Combat;
         {
             if (CombatEventService.Instance.combatController.IsLastManInHeroes(charController))
             {
-                charController.ChangeAttrib(CauseType.PermanentTrait, (int)permTraitName, charID,AttribName.dodge,3.0f); 
+                charController.ChangeAttrib(CauseType.PermanentTrait, (int)permaTraitName, charID,AttribName.dodge,3.0f); 
             } 
         }
     }

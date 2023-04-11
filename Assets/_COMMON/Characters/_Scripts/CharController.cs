@@ -30,8 +30,12 @@ namespace Common
 
         [Header("Common Controller")]
         public BuffController buffController;
+        public CharTypeBuffController charTypeBuffController; 
+
         public CharStateController charStateController;
         public TempTraitController tempTraitController;
+        public PermaTraitController permaTraitController;
+
 
         [Header("Item Controller")]
         public ItemController  itemController;
@@ -54,12 +58,15 @@ namespace Common
         private void Start()
         {          
             buffController=  gameObject.AddComponent<BuffController>();
-        
+            charTypeBuffController= gameObject.AddComponent<CharTypeBuffController>();
             itemController = gameObject.AddComponent<ItemController>();
             skillController = gameObject.AddComponent<SkillController1>();
             weaponController= gameObject.AddComponent<WeaponController>();
             landscapeController= gameObject.AddComponent<LandscapeController>();    
+            
             tempTraitController= gameObject.AddComponent<TempTraitController>();
+            permaTraitController= gameObject.GetComponent<PermaTraitController>();  
+
             charStateController = gameObject.AddComponent<CharStateController>();
             armorController= gameObject.AddComponent<ArmorController>();
             SkillService.Instance.allSkillControllers.Add(skillController);

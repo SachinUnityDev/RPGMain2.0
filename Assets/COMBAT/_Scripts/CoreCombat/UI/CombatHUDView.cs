@@ -88,11 +88,6 @@ namespace Combat
         public Image charImg;
         public TextMeshProUGUI charName; 
 
-
-
-        //public List<GameObject> allyInCombat = new List<GameObject>();
-        //public List<GameObject> enemyInCombat = new List<GameObject>();
-
         public GameObject StatesPanel;
         public StatPanelToggleState portraitToggleState;
         #endregion
@@ -183,18 +178,18 @@ namespace Combat
 
             int k = 0;
 
-            List<CharStateName> charInStates = charController.charModel.InCharStatesList;
+            List<CharStatesBase> allCharStateBases = charController.charStateController.allCharBases;
             CharStatesPanelIconsClear();
 
-            for (int i = 0; i < charInStates.Count; i++)
+            for (int i = 0; i < allCharStateBases.Count; i++)
             {
                 //CharStateModel stateSO = allStatesSO.GetCharStateSO(charInStates[i]);   
                     
                 //    charStateIconSO.allCharStatesModels.Find(x => x.charStateName == charInStates[i]);
-                CharStateSO1 stateSO = CharStatesService.Instance.allCharStateSO.GetCharStateSO(charInStates[i]);
-                CharStateModel charStateModel = CharStatesService.Instance.allCharStateModel
-                                                .Find(t => t.charStateName == charInStates[i]);
-                CharStateBehavior charStateType = charStateModel.statebehavior; 
+                CharStateSO1 stateSO = CharStatesService.Instance.allCharStateSO.GetCharStateSO(allCharStateBases[i].charStateName);
+                //CharStateModel charStateModel = CharStatesService.Instance.allCharStateModel
+                //                                .Find(t => t.charStateName == charInStates[i].charStateName);
+                CharStateBehavior charStateType = stateSO.charStateBehavior; 
                 k = (charStateType == CharStateBehavior.Positive) ? 0 : 1;
 
                // Debug.Log("CHAR STATES " + data.charStateName);
@@ -203,7 +198,7 @@ namespace Combat
                     Transform ImgTrans = CharStatesPanel.transform.GetChild(k).GetChild(0).GetChild(i);
                     ImgTrans.gameObject.SetActive(true);
                     ImgTrans.GetChild(0).GetComponent<Image>().sprite  = stateSO.iconSprite;
-                    ImgTrans.GetComponent<CharStatePanelEvents>().charStateModel = charStateModel; 
+                    ImgTrans.GetComponent<CharStatePanelEvents>().statebase = allCharStateBases[i]; 
 
                 }
                 if (i >= 4 && i < 7)
@@ -211,14 +206,14 @@ namespace Combat
                     Transform ImgTrans = CharStatesPanel.transform.GetChild(k).GetChild(0).GetChild(i - 4);
                     ImgTrans.gameObject.SetActive(true);
                     ImgTrans.GetChild(0).GetComponent<Image>().sprite = stateSO.iconSprite;
-                    ImgTrans.GetComponent<CharStatePanelEvents>().charStateModel = charStateModel;
+                    ImgTrans.GetComponent<CharStatePanelEvents>().statebase = allCharStateBases[i];
                 }
                 if (i >= 7 && i < 9)
                 {
                     Transform ImgTrans = CharStatesPanel.transform.GetChild(k).GetChild(0).GetChild(i - 7);
                     ImgTrans.gameObject.SetActive(true);
                     ImgTrans.GetChild(0).GetComponent<Image>().sprite = stateSO.iconSprite;
-                    ImgTrans.GetComponent<CharStatePanelEvents>().charStateModel = charStateModel;
+                    ImgTrans.GetComponent<CharStatePanelEvents>().statebase = allCharStateBases[i];
 
                 }
     
@@ -236,15 +231,9 @@ namespace Combat
                     {
                         Transform stateIcons = lvls.GetChild(m);
                         stateIcons.gameObject.SetActive(false);
-
                     }
-
                 }
             }
-
-
-
-
         }
 
         #endregion
@@ -362,7 +351,7 @@ namespace Combat
                     fortCircleTrans.GetChild(0).GetChild(1).GetComponent<Image>().fillAmount = Mathf.Abs(fortData.currValue / fortData.maxLimit);
                 }
                 fortCircleTrans.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = fortData.currValue.ToString();
-                float fortOrg = charController.charModel.fortitudeOrg;
+                float fortOrg = charController.GetAttrib(AttribName.fortOrg).currValue; 
 
                 fortCircleTrans.DORotate(new Vector3(0, 0, -fortOrg * 6), 0.5f);
             }       

@@ -20,9 +20,9 @@ namespace Common
         public Action OnQuestBegin;
         public Action OnQuestEnd;
         public Action OnCombatBegin;  
-        public Action OnCombatEnd; 
+        public Action OnCombatEnd;
 
-
+        public event Action<GameMode> OnGameModeChg;
 
         public Action<GameState> OnStateStart;
         public bool isGame = true;

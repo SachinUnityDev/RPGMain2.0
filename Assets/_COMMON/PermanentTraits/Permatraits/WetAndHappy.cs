@@ -9,8 +9,7 @@ namespace Common
     {
         //Neglects negative specs of soaked status	
         //+3 morale when soaked
-
-        public override PermaTraitName permTraitName => PermaTraitName.WetAndHappy;
+        public override PermaTraitName permaTraitName => PermaTraitName.Unmoved;
         public override void ApplyTrait(CharController charController )
         {
 

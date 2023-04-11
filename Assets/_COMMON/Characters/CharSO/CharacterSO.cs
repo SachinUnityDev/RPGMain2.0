@@ -66,8 +66,12 @@ namespace Common
         [Header("Companion PreReq")]
         public List<ItemData> CompanionPreReqOpt1 = new List<ItemData>();
         public List<ItemData> CompanionPreReqOpt2 = new List<ItemData>();
+        
+        [Header("Char Start Lvl")]
+        public int startLevel;
 
-        public int startLevel; 
+        [Header("Perma Trait List")]
+        public List<PermaTraitName> permaTraitNames = new List<PermaTraitName>();    
 
         public List<AttribData> AttribList = new List<AttribData>();
         public List<StatData> statList = new List<StatData>(); 
@@ -84,11 +88,6 @@ namespace Common
 
         private void Awake()
         {
-
-
-
-
-
             if (AttribList.Count < 1)   // patch fix to prevent recreation of fields 
             {
                 AttribList.Clear();

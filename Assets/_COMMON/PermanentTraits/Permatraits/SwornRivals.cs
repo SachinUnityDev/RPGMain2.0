@@ -6,16 +6,13 @@ using Combat;
 namespace Common
 {
     public class SwornRivals : PermaTraitBase
-    {
-        CharController charController;        
-        
-        public override PermaTraitName permTraitName => PermaTraitName.SwornRivals;
-        public override void ApplyTrait(CharController _charController)
+    {   
+        public override PermaTraitName permaTraitName => PermaTraitName.SwornRivals;
+        public override void ApplyTrait(CharController charController)
         {
-            charController = _charController;
+            
 
-            //event flee or die quest or combat
-            charID = charController.charModel.charID;
+
             DecMoraleKhugarian();
 
             CombatEventService.Instance.OnDeathInCombat += IncMoraleKhugarian;
@@ -37,7 +34,7 @@ namespace Common
                 {
                     if (c.charModel.cultType == CultureType.Kugharian)
                     {
-                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.morale, -4);
+                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permaTraitName, charID, AttribName.morale, -4);
                     }
                 }
             }
@@ -52,7 +49,7 @@ namespace Common
                 {
                     if (c.charModel.cultType == CultureType.Kugharian)
                     {
-                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permTraitName, charID,AttribName.morale, 4);
+                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permaTraitName, charID,AttribName.morale, 4);
                     }
                 }
             }
@@ -68,7 +65,7 @@ namespace Common
                 {
                     if (c.charModel.cultType == CultureType.Kugharian)
                     {
-                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permTraitName, charID,AttribName.morale, -4); 
+                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permaTraitName, charID,AttribName.morale, -4); 
                     }
                 }          
 

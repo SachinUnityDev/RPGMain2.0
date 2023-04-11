@@ -1,23 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
- 
+
 
 namespace Common
 {
-    public class Selfish :PermaTraitBase
+    public class LoreReader :PermaTraitBase
     {
-        // -3 morale if not single in row
-        public override PermaTraitName permTraitName => PermaTraitName.Selfcentred;
+        // +30% exp from lorestones
+        public override PermaTraitName permaTraitName => PermaTraitName.LoreReader;
+
         public override void ApplyTrait(CharController charController )
         {
+
 
         }
 
 
-
     }
-
 
 
 }

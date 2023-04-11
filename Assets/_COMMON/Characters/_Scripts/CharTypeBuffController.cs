@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Policy;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 
 namespace Common
@@ -64,11 +65,8 @@ namespace Common
             this.effectedCharNameID = effectedCharNameID;
         }
     }
-
-
     public class CharTypeBuffController : MonoBehaviour
     {
-
         public List<CharTypeBuffData> allBuffData = new List<CharTypeBuffData>();
         CharController charController;
 
@@ -76,11 +74,18 @@ namespace Common
         {
             charController = GetComponent<CharController>();    
         }
-        public int ApplyRaceBuff(CauseData causeData, RaceType raceType, AttribName attribName, int valChg, bool isBuff)
+
+        public int ApplyRaceBuff(CauseType causeType, int causeName, CharController causeByCtrl, RaceType raceType, AttribName attribName, int valChg, bool isBuff)
         {
+            if (charController.charModel.raceType != raceType)
+                return -1;
+
+            int causeByCharID = causeByCtrl.charModel.charID;
+            CauseData causeData = new CauseData(causeType, causeName, causeByCharID, charController.charModel.charID);
+           
             int buffID = 
-            charController.buffController.ApplyBuff(causeData.causeType, causeData.causeName, causeData.causeByCharID,
-                attribName, valChg, TimeFrame.Infinity, -1, isBuff); 
+            charController.buffController.ApplyBuff(causeType, (int)causeName, causeByCharID,
+                                            attribName, valChg, TimeFrame.Infinity, -1, isBuff); 
            
 
             CharTypeBuffData charTypeBuffData = new CharTypeBuffData(causeData,buffID , raceType, attribName, valChg);
@@ -89,8 +94,15 @@ namespace Common
             return buffID;
         }
 
-        public int ApplyClassBuff(CauseData causeData, ClassType classType, AttribName attribName, int valChg, bool isBuff)
+        public int ApplyClassBuff(CauseType causeType, int causeName, CharController causeByCtrl,  ClassType classType, AttribName attribName, int valChg, bool isBuff)
         {
+            if (charController.charModel.classType != classType)
+                return -1;
+
+            int causeByCharID = causeByCtrl.charModel.charID;
+            CauseData causeData = new CauseData(causeType, causeName, causeByCharID, charController.charModel.charID);
+
+
             int buffID =
             charController.buffController.ApplyBuff(causeData.causeType, causeData.causeName, causeData.causeByCharID,
                 attribName, valChg, TimeFrame.Infinity, -1, isBuff);
@@ -101,8 +113,14 @@ namespace Common
             allBuffData.Add(charTypeBuffData);
             return buffID;
         }
-        public int ApplyCultBuff(CauseData causeData, CultureType cultType, AttribName attribName, int valChg, bool isBuff)
+        public int ApplyCultBuff(CauseType causeType, int causeName, CharController causeByCtrl, CultureType cultType, AttribName attribName, int valChg, bool isBuff)
         {
+            if (charController.charModel.cultType != cultType)
+                return -1;
+
+            int causeByCharID = causeByCtrl.charModel.charID;
+            CauseData causeData = new CauseData(causeType, causeName, causeByCharID, charController.charModel.charID);
+
             int buffID =
             charController.buffController.ApplyBuff(causeData.causeType, causeData.causeName, causeData.causeByCharID,
                 attribName, valChg, TimeFrame.Infinity, -1, isBuff);
@@ -113,8 +131,6 @@ namespace Common
             allBuffData.Add(charTypeBuffData);
             return buffID;
         }
-
-
         public void RemoveRaceBuff(RaceType raceType) 
         {
             foreach (CharTypeBuffData buff in allBuffData)

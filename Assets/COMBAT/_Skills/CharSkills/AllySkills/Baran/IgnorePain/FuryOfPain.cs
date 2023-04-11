@@ -66,9 +66,10 @@ namespace Combat
             AttribData luckStat = charController.GetAttrib(AttribName.luck);
             if (luckStat.currValue == 12 && !subscribed)
             {
-                charController.charModel.fortitudeOrg += 2; 
+                charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName,
+                            charID, AttribName.fortOrg, 2, TimeFrame.EndOfCombat, 1, true);
 
-               // charController.ChangeStat(CauseType.CharSkill, (int)skillName, charController, StatsName.fortitude, +2, false);
+                // charController.ChangeStat(CauseType.CharSkill, (int)skillName, charController, StatsName.fortitude, +2, false);
                 QuestEventService.Instance.OnEOQ += fortEOQ;
                 subscribed = true;
             }
@@ -77,7 +78,7 @@ namespace Combat
         void fortEOQ()
         {
             //  charController.ChangeStat(CauseType.CharSkill, (int)skillName, charController, StatsName.fortitude, -2, false);
-            charController.charModel.fortitudeOrg -= 2;
+           // charController.charModel.fortitudeOrg -= 2;
             QuestEventService.Instance.OnEOQ -= fortEOQ;
             subscribed = false;
         }

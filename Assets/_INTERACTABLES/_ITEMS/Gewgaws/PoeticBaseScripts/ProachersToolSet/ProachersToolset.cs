@@ -19,7 +19,7 @@ namespace Interactables
         public override void BonusFx()
         {
             QuestChange(QuestService.Instance.questMode);
-            QuestEventService.Instance.OnQuestModeChange += QuestChange; 
+            GameEventService.Instance.OnGameModeChg += QuestChange; 
         }
 
 
@@ -30,7 +30,7 @@ namespace Interactables
         } 
         
 
-        void QuestChange(QuestMode questMode)
+        void QuestChange(GameMode questMode)
         {
             int index =
                   charController.strikeController.ApplyDmgAltBuff(16, CauseType.PoeticSetGewgaw, (int)poeticSetName

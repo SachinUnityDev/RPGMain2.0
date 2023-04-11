@@ -9,9 +9,7 @@ namespace Common
     public class UnMoved :PermaTraitBase
     {
 
-        CharController charController;       
-
-        public override PermaTraitName permTraitName => PermaTraitName.Unmoved;
+        public override PermaTraitName permaTraitName => PermaTraitName.Unmoved;
         public override void ApplyTrait(CharController _charController)
         {
             charController = _charController;
@@ -38,7 +36,7 @@ namespace Common
                 {
                     if (c.charModel.cultType == CultureType.Safriman)
                     {
-                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.haste, -1);
+                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permaTraitName, charID, AttribName.haste, -1);
 
                     }
                 }
@@ -55,7 +53,7 @@ namespace Common
                 {
                     if (c.charModel.cultType == CultureType.Safriman)
                     {
-                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.haste, -1);
+                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permaTraitName, charID, AttribName.haste, -1);
 
                     }
                 }
@@ -72,7 +70,7 @@ namespace Common
                 {
                     if (c.charModel.cultType == CultureType.Safriman)
                     {
-                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permTraitName, charID, AttribName.haste, -1);                        
+                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permaTraitName, charID, AttribName.haste, -1);                        
 
                     }
                 }

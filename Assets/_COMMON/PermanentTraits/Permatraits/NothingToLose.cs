@@ -9,9 +9,9 @@ using UnityEngine;
     {
         //  immune to negative mental traits
 
-        CharController charController; 
-        public override PermaTraitName permTraitName => PermaTraitName.NothingToLose;
-        public override void ApplyTrait(CharController _charController)
+        public override PermaTraitName permaTraitName => PermaTraitName.NothingToLose;
+
+        public override void ApplyTrait(CharController charController)
         {
                 
 

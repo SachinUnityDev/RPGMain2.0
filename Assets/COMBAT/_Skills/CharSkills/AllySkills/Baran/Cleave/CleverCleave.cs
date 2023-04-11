@@ -53,7 +53,9 @@ namespace Combat
                     // per enemy pushed you get +1. UNTILL EOQ 
                     if(stack <= 8)
                     {
-                        charController.charModel.fortitudeOrg += 1;
+                        charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName,
+                            charID, AttribName.fortOrg, 1, TimeFrame.EndOfCombat, 1, true); 
+                        
                         stack++; 
                     }
 

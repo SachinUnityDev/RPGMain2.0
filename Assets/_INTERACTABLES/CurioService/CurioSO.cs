@@ -9,7 +9,7 @@ namespace Interactables
     [Serializable]
     public class CurioExpData
     {
-        public QuestMode gameMode;
+        public GameMode gameMode;
         public int chanceVal;
 
     }

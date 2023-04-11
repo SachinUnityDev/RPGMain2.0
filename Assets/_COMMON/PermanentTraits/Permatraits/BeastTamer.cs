@@ -10,13 +10,12 @@ namespace Common
     
     public class BeastTamer : PermaTraitBase
     {
-        public override PermaTraitName permTraitName => PermaTraitName.BeastTamer;
+        public override PermaTraitName permaTraitName => PermaTraitName.BeastTamer;
         public override void ApplyTrait(CharController charController)
         {
            CharModel _charModel =  charController.charModel;
             Debug.Log("perma trait applied beastmancer ");
 
-            _charModel.tameAnimalsStrength += 30.0f;
             CharService.Instance.OnPartyLocked += OnPartyLocked; 
         }
 

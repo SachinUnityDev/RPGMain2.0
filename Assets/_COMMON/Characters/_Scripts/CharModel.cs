@@ -81,7 +81,7 @@ namespace Common
         public List<int> PrevLvlrec = new List<int>(); // to record all the prev levels
 
         [Header("CHAR EXTD STATS")]
-        public float tameAnimalsStrength;
+       // public float tameAnimalsStrength;
         public FleeBehaviour fleeBehaviour;
         public bool canBeAmbushed;
         public bool canBeCaught;
@@ -108,7 +108,7 @@ namespace Common
         public int startLevel;
         
         
-        public int fortitudeOrg = 0;
+        //public int fortitudeOrg = 0;
         public int lootBonus = 0;
         //public AttribData staminaRegen = new AttribData();
         //public AttribData HpRegen = new AttribData(); 
@@ -118,16 +118,15 @@ namespace Common
         public CharOccupies _charOccupies;
         public List<int> _posPriority; 
         
-        [Header("IMMUNITY LIST")]
-        public List<TempTraitName> Immune2TraitsList = new List<TempTraitName>();
-        public List<AttribName> Immune2StatChangeList = new List<AttribName>();
-        public List<CharStateName> Immune2CharStateList = new List<CharStateName>();
-
-
+        [Header("Permanent Traits LIST")]
+        //public List<TempTraitName> Immune2TraitsList = new List<TempTraitName>();
+        //public List<AttribName> Immune2StatChangeList = new List<AttribName>();
+        //public List<CharStateName> Immune2CharStateList = new List<CharStateName>();
+        
         [Header("States & Traits _LIST")]
-        public List<PermaTraitName> InPermaTraitList = new List<PermaTraitName>();
-        public List<CharStateName> InCharStatesList = new List<CharStateName>();
-        public List<TempTraitName> InTempTraitList = new List<TempTraitName>();
+        public List<PermaTraitName> PermaTraitList = new List<PermaTraitName>();
+        //public List<CharStateName> InCharStatesList = new List<CharStateName>();
+        //public List<TempTraitName> InTempTraitList = new List<TempTraitName>();
 
         [Header("Armor Socket  and WeaponEnchantment")]
         public GemNames enchantableGem4Weapon = GemNames.None;
@@ -213,7 +212,7 @@ namespace Common
             stateOfChar = _charSO.stateOfChar;
             
             // MISC STATS
-            tameAnimalsStrength = _charSO.tameAnimalsStrength;
+            
             fleeBehaviour = _charSO.fleeBehaviour;
             canBeCaught = _charSO.canBeCaught;
             canBeAmbushed = _charSO.canBeAmbushed;
@@ -231,7 +230,7 @@ namespace Common
             CompanionPreReqOpt2 = _charSO.CompanionPreReqOpt2.DeepClone();
 
             startLevel = _charSO.startLevel;
-            fortitudeOrg = 0;  // TBD 
+         
             lootBonus = 0;
 
 

@@ -39,10 +39,33 @@ namespace Quest
             this.isApplied = isApplied; 
         }
     }
+    public class LandStateBuffData
+    {
+        public int buffID;
+        public CauseType causeType;
+        public int causeName;
+        public LandscapeNames landscapeName;
+        public CharStateName charStateName;
+        public bool isImmunity;
+
+        public LandStateBuffData(int buffID, CauseType causeType, int causeName, LandscapeNames landscapeName
+            , CharStateName charStateName, bool isImmunity)
+        {
+            this.buffID = buffID;
+            this.causeType = causeType;
+            this.causeName = causeName;
+            this.landscapeName = landscapeName;
+            this.charStateName = charStateName;
+            this.isImmunity = isImmunity;
+        }
+    }
+
+
     public class LandscapeController : MonoBehaviour
     {
-        int buffIndex;
+        int buffIndex =-1;
         List<LandBuffData> allLandBuffs = new List<LandBuffData> ();
+        List<LandStateBuffData> allLandStateBuffs = new List<LandStateBuffData>(); 
         CharController charController;
 
         private void Awake()
@@ -56,6 +79,48 @@ namespace Quest
             LandscapeService.Instance.OnLandscapeExit += OnLandscapeExit; 
             charController = GetComponent<CharController> ();
         }
+
+        public int ApplyLandscapeCharStateBuff(CauseType causeType, int causeName, int causeBuyCharID,
+            LandscapeNames landscapeName, CharStateName stateName, bool isImmunity = false)
+        {
+            int buffID = -1;
+
+            if (LandscapeService.Instance.currLandscape != landscapeName) return -1;
+
+            if (!isImmunity)
+            {
+                buffID = charController.charStateController.ApplyCharStateBuff(causeType, (int)causeName,
+                    causeBuyCharID, stateName, TimeFrame.Infinity, 100);
+
+            }
+            else
+            {
+                buffID = charController.charStateController.ApplyImmunityBuff(causeType, (int)causeName,
+                    causeBuyCharID, stateName, TimeFrame.Infinity, 100);
+
+            }
+            LandStateBuffData landStateBuff = new LandStateBuffData(buffID, causeType, causeName
+                , landscapeName, stateName, isImmunity);
+            allLandStateBuffs.Add(landStateBuff);
+
+            return buffID;
+        }
+
+        public void RemoveStateBuff(int buffID)
+        {
+            int i = allLandStateBuffs.FindIndex(t => t.buffID == buffID);
+            LandStateBuffData landStateBuffData = allLandStateBuffs[i];
+            if (!landStateBuffData.isImmunity)
+            {
+                charController.charStateController.RemoveCharState(landStateBuffData.charStateName);
+            }
+            else
+            {
+                charController.charStateController.RemoveImmunityBuff(buffID);
+            }
+            allLandStateBuffs.Remove(landStateBuffData);
+        }
+
 
         public int ApplyLandscapeBuff(CauseType causeType, int causeName
             , LandscapeNames landScapeName, AttribName statName, float val)

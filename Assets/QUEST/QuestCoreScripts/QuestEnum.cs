@@ -16,7 +16,7 @@ namespace Common
         QuestPrep, 
         QuestMain, 
     }
-    public enum QuestMode
+    public enum GameMode
     {
         None,
         Stealth,

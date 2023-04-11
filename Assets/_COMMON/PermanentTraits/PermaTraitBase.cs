@@ -1,6 +1,7 @@
 using Common;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Policy;
 using UnityEngine;
 
 
@@ -8,21 +9,33 @@ namespace Common
 {
 
 
-    public class PermaTraitBase : MonoBehaviour
+    public abstract class PermaTraitBase
     {
-
-        public virtual PermaTraitName permTraitName { get; set; }
+        protected CharController charController; 
+        public abstract PermaTraitName permaTraitName { get; }
         public PermaTraitSO permaTraitSO { get; set; }
+        public  int charID { get; set; }
+        public  List<int> allbuffID { get; set; } = new List<int>();
+        public List<int> allStateBuffId { get; set; } = new List<int>();
 
-        public virtual int charID { get; set; }
-
-        // protected CharModData charModData; 
         public virtual void ApplyTrait(CharController charController)
         {
             permaTraitSO =
-            PermanentTraitsService.Instance.allPermaTraitSO.GetPermaTraitSO(permTraitName);
-
+            PermaTraitsService.Instance.allPermaTraitSO.GetPermaTraitSO(permaTraitName);
+            this.charController = charController;
+            this.charID = charController.charModel.charID; 
+        }
+        
+        public virtual void EndTrait()
+        {
+            // when char Dies
+            // when char Flees quest or combat 
+            for (int i = 0; i < allbuffID.Count; i++)
+            {
+                charController.buffController.RemoveBuff(allbuffID[i]);
+            }
 
         }
+
     }
 }

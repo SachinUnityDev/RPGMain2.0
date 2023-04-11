@@ -6,7 +6,8 @@ namespace Common
     public class Hale : PermaTraitBase
     {
         // immune to sickness traits   suffers only low poison - not medium or high
-        public override PermaTraitName permTraitName => PermaTraitName.Hale; 
+        public override PermaTraitName permaTraitName => PermaTraitName.Hale;
+
         public override void ApplyTrait(CharController charController)
         {
 

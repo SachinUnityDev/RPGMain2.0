@@ -34,7 +34,7 @@ namespace Interactables
             int castTime = (int)UnityEngine.Random.Range(potionSO.minCastTime, potionSO.maxCastTime);
 
             int buffID = -1;
-            if (QuestService.Instance.questMode == QuestMode.Stealth)
+            if (QuestService.Instance.questMode == GameMode.Stealth)
             {
                      buffID = charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
                    , AttribName.morale, -3, TimeFrame.EndOfNight, castTime, true);

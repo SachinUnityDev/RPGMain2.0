@@ -12,11 +12,11 @@ namespace Common
     public class PermaTraitsFactory : MonoBehaviour
     {
         public Dictionary<PermaTraitName, Type> allPermTraits = new Dictionary<PermaTraitName, Type>();
-        void Awake()
+        void Start()
         {
           
                 
-           
+           InitPermTraits();
         }
  
 
@@ -32,23 +32,22 @@ namespace Common
             {
                 var p = Activator.CreateInstance(permTrait) as PermaTraitBase;
 
-                allPermTraits.Add(p.permTraitName, permTrait); 
+                allPermTraits.Add(p.permaTraitName, permTrait); 
             }
         }
-
-        //ADD
-        public void AddPermTrait(PermaTraitName permaTraitName, GameObject go)
+        public PermaTraitBase GetNewPermaTraitBase(PermaTraitName PermaTraitName)
         {
-            if (allPermTraits.ContainsKey(permaTraitName))
+            foreach (var trait in allPermTraits)
             {
-               // Debug.Log("permanet trait found");
-                Type permaTrait = allPermTraits[permaTraitName];
-                PermaTraitBase trait = Activator.CreateInstance(permaTrait) as PermaTraitBase;
-                go.AddComponent(trait.GetType());
+                if (trait.Key == PermaTraitName)
+                {
+                    var t = Activator.CreateInstance(trait.Value) as PermaTraitBase;
+                    return t;
+                }
             }
+            Debug.Log("Perma trait base not found" + PermaTraitName);
+            return null;
         }
-
-        //APPLY
     }
 }
 

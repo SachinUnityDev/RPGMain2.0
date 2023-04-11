@@ -74,18 +74,7 @@ namespace Common
             
         }
 
-        //ADD
-        //public void AddPermTrait(TempTraitName tempTraitName, GameObject go)
-        //{
-        //    if (allTempTraits.ContainsKey(tempTraitName))
-        //    {
-        //        // Debug.Log("permanet trait found");
-        //        // do the immunity check 
-        //        Type permaTrait = allTempTraits[tempTraitName];
-        //        PermTraitBase trait = Activator.CreateInstance(permaTrait) as PermTraitBase;
-        //        go.AddComponent(trait.GetType());
-        //    }
-        //}
+        
 
         public TempTraitBase GetNewTempTraitBase(TempTraitName tempTraitName)
         {

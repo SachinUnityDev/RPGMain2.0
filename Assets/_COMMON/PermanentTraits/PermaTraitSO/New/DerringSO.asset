@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee4354851aa27cc48b15424a41308b34, type: 3}
   m_Name: DerringSO
   m_EditorClassIdentifier: 
-  permTraitName: 34
+  permaTraitName: 34
   traitBehaviour: 1
   classType: 1
   cultureType: 0
   raceType: 0
   traitNameStr: ' None'
-  iconSprite: {fileID: 0}
   allLines:
   - 'On Taunt mode: +2 Morale'
   - More favorable Stampede event

@@ -12,11 +12,10 @@ namespace Common
         public event Action OnEOQ;
 
 
-        public event Action<LandscapeNames> OnPartyLocChange;       
-        public event Action<QuestMode> OnQuestModeChange;
+
+
         public event Action<CharController> OnFleeInQuest;
         public event Action<CharController> OnDeathInQuest;
-        public event Action<List<CharController>> OnPartySet; 
 
         // Quest => town it should reset the QuestCombatMode to NONE 
         LandscapeNames prevPartyLoc;
@@ -32,15 +31,6 @@ namespace Common
          //   dayNightController = gameObject.GetComponent<DayNightController>();
         }
 
-        public void ChangePartyLoc(LandscapeNames _partyLoc)
-        {
-            OnPartyLocChange?.Invoke(_partyLoc);           
-        } 
-
-        public void ChangeQCMode(QuestMode qcMode)
-        {
-            OnQuestModeChange?.Invoke(qcMode); 
-        }
         public void On_DeathInQuest(CharController charController)
         {
             OnDeathInQuest?.Invoke(charController); 

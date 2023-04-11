@@ -9,14 +9,11 @@ namespace Common
     {
         // Gain 3 fortitude each dodge(6 when night)  
         //Double fortitude gain at night(except the Fortitude potion)
-        CharController charController;        
-        public override PermaTraitName permTraitName => PermaTraitName.BoldMover;
+        public override PermaTraitName permaTraitName => PermaTraitName.BoldMover;
         public override void ApplyTrait(CharController _charController)
-        {
-            charController = _charController;
+        {         
             charController.OnAttribCurrValSet += DodgeCheck;
-            charController.OnStatChg += IncreaseFortitude;
-            charID = charController.charModel.charID;
+            charController.OnStatChg += IncreaseFortitude;         
         }
 
         void DodgeCheck(AttribModData charModData)
@@ -26,12 +23,12 @@ namespace Common
                 // Gain 3 fortitude each dodge(6 when night)  
                 if (QuestEventService.Instance.questTimeState == TimeState.Night)
                 {
-                    charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID
+                    charController.ChangeStat(CauseType.PermanentTrait, (int)permaTraitName, charID
                             , StatName.fortitude, 6.0f, false);
                    
                 }else            
                 {                  
-                    charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID, StatName.fortitude, 3.0f,false);
+                    charController.ChangeStat(CauseType.PermanentTrait, (int)permaTraitName, charID, StatName.fortitude, 3.0f,false);
                 }
             }
         }
@@ -43,7 +40,7 @@ namespace Common
             if (statModData.statModified == StatName.fortitude)
             {
                 if (QuestEventService.Instance.questTimeState == TimeState.Night)                
-                    charController.ChangeStat(CauseType.PermanentTrait, (int)permTraitName, charID
+                    charController.ChangeStat(CauseType.PermanentTrait, (int)permaTraitName, charID
                         , StatName.fortitude, statModData.modVal, false); 
                 //sending only x1 as one increase would have taken place before
                 //reaching here

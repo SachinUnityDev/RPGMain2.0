@@ -10,7 +10,7 @@ namespace Quest
     {
 
 
-        public QuestMode questMode; 
+        public GameMode questMode; 
         void Start()
         {
         }

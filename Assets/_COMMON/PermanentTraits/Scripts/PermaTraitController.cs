@@ -26,7 +26,7 @@ namespace Common
         }
         public void RemovePermaTraits()
         {
-
+            allPermaTraits.ForEach(t=>t.EndTrait());    
         }
 
     }

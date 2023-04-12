@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee4354851aa27cc48b15424a41308b34, type: 3}
   m_Name: MasterSmugglerSO
   m_EditorClassIdentifier: 
-  permTraitName: 18
+  permaTraitName: 18
   traitBehaviour: 1
   classType: 2
   cultureType: 0

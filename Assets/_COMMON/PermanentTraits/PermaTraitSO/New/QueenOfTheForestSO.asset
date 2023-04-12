@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee4354851aa27cc48b15424a41308b34, type: 3}
   m_Name: QueenOfTheForestSO
   m_EditorClassIdentifier: 
-  permTraitName: 23
+  permaTraitName: 23
   traitBehaviour: 1
   classType: 4
   cultureType: 0

@@ -31,11 +31,12 @@ namespace Common
     public abstract class TempTraitBase
     {
         public abstract TempTraitName tempTraitName { get; }
-        public CharController charController; 
+        public CharController charController;
+        public TempTraitSO tempTraitSO; 
 
-        public virtual void TempTraitInit()
+        public virtual void TempTraitInit(TempTraitSO tempTraitSO)
         {
-            // to be completed
+           this.tempTraitSO = tempTraitSO;
         }
 
         public abstract void OnApply(CharController charController);
@@ -83,6 +84,8 @@ namespace Common
                 if (trait.Key == tempTraitName)
                 {
                     var t = Activator.CreateInstance(trait.Value) as TempTraitBase; 
+                    TempTraitSO tempTraitSO = TempTraitService.Instance.allTempTraitSO.GetTempTraitSO(tempTraitName);
+                    t.TempTraitInit(tempTraitSO); 
                     return t;
                 }
             }

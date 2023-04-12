@@ -11,10 +11,11 @@ namespace Common
 {
     public class TempTraitController : MonoBehaviour
     {
-       // Immunity 
+        [Header("Immunity")]
         public List<TempTraitBuffData> allTempTraitImmunities = new List<TempTraitBuffData>();
+        public List<ImmunityFrmType> allImmunitiesFrmType = new List<ImmunityFrmType>();
 
-        // Applied 
+        [Header(" All Temp Trait Applied")] 
         public List<TempTraitBuffData> alltempTraitApplied = new List<TempTraitBuffData>();
         public List<TempTraitBase> allTempTraitAppliedBase = new List<TempTraitBase>();   
 
@@ -38,14 +39,14 @@ namespace Common
             traitID = 0;
             charController = GetComponent<CharController>();
             CalendarService.Instance.OnStartOfCalDay +=(int day)=> DayTick();          
-            charController = gameObject.GetComponent<CharController>(); 
         }
         #region TRAIT APPLY & REMOVE
         public void ApplyTempTrait(CauseType causeType, int causeName, int causeByCharID
                                                              ,TempTraitName tempTraitName)
         {
             // check immunity list 
-            if (HasTempTrait(tempTraitName) || HasImmunityFrmTrait(tempTraitName))
+            if (HasTempTrait(tempTraitName) || HasImmunityFrmTrait(tempTraitName) 
+                                            || HasImmunityFrmType(tempTraitName))
                 return;
 
             // get temp trait from the factory add to hashset 
@@ -60,7 +61,7 @@ namespace Common
             traitID++;
             int netTime = UnityEngine.Random.Range(tempTraitSO.minCastTime, tempTraitSO.maxCastTime+1);
             // mod data for record and string creation 
-            TempTraitModData modData = new TempTraitModData(causeType, causeName, causeByCharID, netTime, tempTraitName);
+            CauseData4Trait modData = new CauseData4Trait(causeType, causeName, causeByCharID, effectedCharID);
 
             TempTraitBuffData tempTraitAppliedData
                              = new TempTraitBuffData(traitID, tempTraitName, startDay, netTime, modData);
@@ -74,14 +75,13 @@ namespace Common
             int index = alltempTraitApplied.FindIndex(t => t.tempTraitName == tempTraitName);
             if (index != -1)
             {
-                RemoveTrait(alltempTraitApplied[index].traitID);
+                RemoveTrait(alltempTraitApplied[index].traitID);  // base etc removed here
             }
             else
             {
                 Debug.Log("trait not found" + tempTraitName);
             }
         }
-
         //public void RemoveTraitFrmLs(TempTraitModel tempTraitBuffData)
         //{
         //    alltempTraitApplied.Remove(tempTraitBuffData);
@@ -113,24 +113,24 @@ namespace Common
                         RemoveTraitByName(model.tempTraitName);                   
                 }
             }
-        }
-    
+        }    
         #endregion
 
         #region IMMUNITY APPLY & REMOVE
-
         public void ApplyImmunityBuff(CauseType causeType, int causeName, int causeByCharID
                                 , TempTraitName tempTraitName, TimeFrame timeFrame, int netTime) // immunity buff for this char State
         {
-            //int effectedCharID = charController.charModel.charID;
-            //int currRd = CombatService.Instance.currentRound;
+            int effectedCharID = charController.charModel.charID;
 
+            int currtime = 0;                
+            if (timeFrame == TimeFrame.EndOfDay)
+                currtime = CalendarService.Instance.dayInGame; 
         
             traitID++;
-            TempTraitModData modData = new TempTraitModData(causeType,causeName, causeByCharID, netTime, tempTraitName, true); 
+            CauseData4Trait causeData = new CauseData4Trait(causeType,causeName, causeByCharID, effectedCharID, true); 
 
             TempTraitBuffData immunityData = new TempTraitBuffData
-                                                    (traitID, tempTraitName, netTime, netTime, modData);
+                                                    (traitID, tempTraitName, currtime, netTime, causeData);
             allTempTraitImmunities.Add(immunityData);
         }
 
@@ -141,6 +141,33 @@ namespace Common
             allTempTraitImmunities.RemoveAt(index);
             return true;    
         }
+
+        public void ApplyTraitTypeImmunityBuff(CauseType causeType, int causeName, int causeByCharID
+                            , TempTraitType tempTraitType, TimeFrame timeFrame, int netTime) // immunity buff for this char State
+        {
+            int effectedCharID = charController.charModel.charID;
+            int currtime = -1;           
+            if (timeFrame == TimeFrame.EndOfDay)
+                currtime = CalendarService.Instance.dayInGame;
+
+            traitID++;
+            CauseData4Trait causeData = new CauseData4Trait(causeType, causeName, causeByCharID, effectedCharID, true);
+
+
+            ImmunityFrmType immunityFrmTypeData = new ImmunityFrmType(traitID, tempTraitType, timeFrame, netTime
+                                                                    , currtime, currtime, causeData); 
+
+            allImmunitiesFrmType.Add(immunityFrmTypeData); 
+        }
+        public bool RemoveTraitImmunityFrmType(TempTraitType tempTraitType)
+        {
+            int index = allImmunitiesFrmType.FindIndex(t => t.traitType == tempTraitType);
+            if (index == -1) return false;
+            allImmunitiesFrmType.RemoveAt(index);
+            return true;
+        }
+
+
 
         #endregion
 
@@ -154,17 +181,25 @@ namespace Common
             return allTempTraitImmunities.Any(t => t.tempTraitName == tempTraitName);
         }
 
+        public bool HasImmunityFrmType(TempTraitName traitName)
+        {
+            TempTraitSO tempSO = TempTraitService.Instance.allTempTraitSO.GetTempTraitSO(traitName);
+            TempTraitType traitType = tempSO.tempTraitType; 
+            return allImmunitiesFrmType.Any(t=>t.traitType== traitType);
+        }
         #endregion
         public void DayTick()
         {
             if(alltempTraitApplied.Count == 0) return;  
             foreach (TempTraitBuffData traitData in alltempTraitApplied)
             {
+                if (traitData.timeFrame == TimeFrame.Infinity)
+                    continue; 
                 if (traitData.timeFrame == TimeFrame.EndOfDay)
                 {
                     if (traitData.currentTime >= traitData.netTime)
                     {
-                       
+                        RemoveTrait(traitData.traitID);
                     }
                     traitData.currentTime++;
                 }
@@ -206,10 +241,10 @@ namespace Common
         public TimeFrame timeFrame;
         public int netTime;
         public int currentTime;
-        public TempTraitModData modData; 
+        public CauseData4Trait modData; 
 
         public TempTraitBuffData(int traitID, TempTraitName tempTraitName
-                                , int startTime, int netTime, TempTraitModData modData)
+                                , int startTime, int netTime, CauseData4Trait modData)
         {
             this.traitID = traitID;
             this.tempTraitName = tempTraitName;
@@ -221,51 +256,49 @@ namespace Common
         }
     }
 
-    //[Serializable]
-    //public class TempTraitImmunityData
-    //{
-    //    public int traitID;
-    //    public TempTraitName tempTraitName;       
-    //    public int startRoundNo;
-    //    public TimeFrame timeFrame;
-    //    public int netTime;
-    //    public int currentTime;
-    //    public TempTraitModData immunityModData;
-
-    //    public TempTraitImmunityData(int traitID, TempTraitName tempTraitName, int startTime, TimeFrame timeFrame, int netTime
-    //                                    , TempTraitModData immunityModData)
-    //    {
-    //        this.traitID = traitID;
-    //        this.tempTraitName = tempTraitName;
-    //        this.startRoundNo = startTime;
-    //        this.timeFrame = timeFrame;
-    //        this.netTime = netTime;
-    //        currentTime = startTime;
-    //        this.immunityModData = immunityModData.DeepClone();
-    //    }
-    //}
-
     [Serializable]
-    public class TempTraitModData  // broadCast Data 
+    public class CauseData4Trait  // broadCast Data 
     {
         public CauseType causeType;  // add cause name here 
         public int causeName;
         public int causeByCharID;
         public int effectedCharID;
-        public TempTraitName tempTraitName;
         public bool isImmunity;
 
-        public TempTraitModData(CauseType causeType, int causeName, int causeByCharID
-                                    , int effectedCharID, TempTraitName tempTraitName, bool isImmunity = false)
+        public CauseData4Trait(CauseType causeType, int causeName, int causeByCharID
+                                    , int effectedCharID, bool isImmunity = false)
         {
             this.causeType = causeType;
             this.causeName = causeName;
             this.causeByCharID = causeByCharID;
             this.effectedCharID = effectedCharID;
-            this.tempTraitName = tempTraitName;
             this.isImmunity = isImmunity;
         }
     }
+
+    public class ImmunityFrmType
+    {
+        public int traitID;
+        public TempTraitType traitType;        
+        public TimeFrame timeFrame;
+        public int netTime;
+        public int startTime;
+        public int currentTime;
+        public CauseData4Trait causeData; 
+
+        public ImmunityFrmType(int traitID, TempTraitType traitType, TimeFrame timeFrame, int netTime
+                                              , int startTime, int currentTime, CauseData4Trait causeData)
+        {
+            this.traitID = traitID;
+            this.traitType = traitType;
+            this.timeFrame = timeFrame;
+            this.netTime = netTime;
+            this.startTime = startTime;
+            this.currentTime = currentTime;
+            this.causeData = causeData;
+        }
+    }
+
 }
 
 

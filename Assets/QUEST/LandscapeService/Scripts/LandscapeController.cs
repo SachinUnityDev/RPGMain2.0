@@ -65,13 +65,8 @@ namespace Quest
     {
         int buffIndex =-1;
         List<LandBuffData> allLandBuffs = new List<LandBuffData> ();
-        List<LandStateBuffData> allLandStateBuffs = new List<LandStateBuffData>(); 
+        List<LandStateBuffData> allLandNStateBuffs = new List<LandStateBuffData>(); 
         CharController charController;
-
-        private void Awake()
-        {
-          
-        }
 
         void Start()
         {
@@ -79,7 +74,6 @@ namespace Quest
             LandscapeService.Instance.OnLandscapeExit += OnLandscapeExit; 
             charController = GetComponent<CharController> ();
         }
-
         public int ApplyLandscapeCharStateBuff(CauseType causeType, int causeName, int causeBuyCharID,
             LandscapeNames landscapeName, CharStateName stateName, bool isImmunity = false)
         {
@@ -91,25 +85,24 @@ namespace Quest
             {
                 buffID = charController.charStateController.ApplyCharStateBuff(causeType, (int)causeName,
                     causeBuyCharID, stateName, TimeFrame.Infinity, 100);
-
             }
             else
             {
                 buffID = charController.charStateController.ApplyImmunityBuff(causeType, (int)causeName,
                     causeBuyCharID, stateName, TimeFrame.Infinity, 100);
-
             }
-            LandStateBuffData landStateBuff = new LandStateBuffData(buffID, causeType, causeName
+            LandStateBuffData landNStateBuff = new LandStateBuffData(buffID, causeType, causeName
                 , landscapeName, stateName, isImmunity);
-            allLandStateBuffs.Add(landStateBuff);
+
+            allLandNStateBuffs.Add(landNStateBuff);
 
             return buffID;
         }
 
-        public void RemoveStateBuff(int buffID)
+        public void RemoveLandNStateBuff(int buffID)
         {
-            int i = allLandStateBuffs.FindIndex(t => t.buffID == buffID);
-            LandStateBuffData landStateBuffData = allLandStateBuffs[i];
+            int i = allLandNStateBuffs.FindIndex(t => t.buffID == buffID);
+            LandStateBuffData landStateBuffData = allLandNStateBuffs[i];
             if (!landStateBuffData.isImmunity)
             {
                 charController.charStateController.RemoveCharState(landStateBuffData.charStateName);
@@ -118,7 +111,7 @@ namespace Quest
             {
                 charController.charStateController.RemoveImmunityBuff(buffID);
             }
-            allLandStateBuffs.Remove(landStateBuffData);
+            allLandNStateBuffs.Remove(landStateBuffData);
         }
 
 

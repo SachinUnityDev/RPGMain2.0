@@ -18,10 +18,11 @@ namespace Common
         public  List<int> allbuffID { get; set; } = new List<int>();
         public List<int> allStateBuffId { get; set; } = new List<int>();
 
+        
         public virtual void ApplyTrait(CharController charController)
         {
             permaTraitSO =
-            PermaTraitsService.Instance.allPermaTraitSO.GetPermaTraitSO(permaTraitName);
+                    PermaTraitsService.Instance.allPermaTraitSO.GetPermaTraitSO(permaTraitName);
             this.charController = charController;
             this.charID = charController.charModel.charID; 
         }

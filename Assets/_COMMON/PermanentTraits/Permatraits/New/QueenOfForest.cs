@@ -28,11 +28,12 @@ namespace Common
                  charController.landscapeController
                  .ApplyLandscapeBuff(CauseType.PermanentTrait, (int)permaTraitName, landName
                  , AttribName.haste, 1);
-
-
-
-
             allbuffID.Add(buffID);
+
+            buffID =
+            charController.landscapeController.ApplyLandscapeCharStateBuff(CauseType.PermanentTrait,
+                (int)permaTraitName, charID, landName, CharStateName.FlatFooted, true); 
+            allStateBuffId.Add(buffID); 
         }
 
         public override void EndTrait()

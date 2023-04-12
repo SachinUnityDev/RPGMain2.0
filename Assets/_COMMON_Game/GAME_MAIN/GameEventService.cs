@@ -5,7 +5,7 @@ using System;
 using Combat;
 using Interactables;
 using Town;
-
+using Quest;
 namespace Common
 {
     public class GameEventService : MonoSingletonGeneric<GameEventService>
@@ -22,7 +22,7 @@ namespace Common
         public Action OnCombatBegin;  
         public Action OnCombatEnd;
 
-        public event Action<GameMode> OnGameModeChg;
+        public event Action<QuestMode> OnQuestModeChg;
 
         public Action<GameState> OnStateStart;
         public bool isGame = true;

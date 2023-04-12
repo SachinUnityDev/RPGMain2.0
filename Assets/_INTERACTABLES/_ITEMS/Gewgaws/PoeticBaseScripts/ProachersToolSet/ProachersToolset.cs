@@ -18,8 +18,8 @@ namespace Interactables
        //  +3 luck vs Rooted targets
         public override void BonusFx()
         {
-            QuestChange(QuestService.Instance.questMode);
-            GameEventService.Instance.OnGameModeChg += QuestChange; 
+            QuestChange(QuestMissionService.Instance.questMode);
+            GameEventService.Instance.OnQuestModeChg += QuestChange; 
         }
 
 
@@ -30,7 +30,7 @@ namespace Interactables
         } 
         
 
-        void QuestChange(GameMode questMode)
+        void QuestChange(QuestMode questMode)
         {
             int index =
                   charController.strikeController.ApplyDmgAltBuff(16, CauseType.PoeticSetGewgaw, (int)poeticSetName

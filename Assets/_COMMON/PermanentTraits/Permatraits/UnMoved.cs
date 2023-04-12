@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Combat;
-using Common; 
-
+using Common;
+using Quest;
 namespace Common
 {
     public class UnMoved :PermaTraitBase

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Common;
 using System.Linq;
+using Quest;
 
 namespace Combat
 {

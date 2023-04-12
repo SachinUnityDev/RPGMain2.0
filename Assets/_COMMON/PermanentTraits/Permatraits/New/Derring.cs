@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Quest;
 
 namespace Common
 {
@@ -11,11 +11,11 @@ namespace Common
         public override void ApplyTrait(CharController charController)
         {
             base.ApplyTrait(charController);
-            GameEventService.Instance.OnGameModeChg += ApplyOnGameModeChg; 
+            GameEventService.Instance.OnQuestModeChg += ApplyOnGameModeChg; 
         }
-        void ApplyOnGameModeChg(GameMode gameMode)
+        void ApplyOnGameModeChg(QuestMode questMode)
         {
-            if (gameMode != GameMode.Taunt)
+            if (questMode != QuestMode.Taunt)
                 return;
             int buffID= 
             charController.buffController.ApplyBuff(CauseType.PermanentTrait, (int)permaTraitName,
@@ -27,7 +27,7 @@ namespace Common
         public override void EndTrait()
         {
             base.EndTrait();          
-            GameEventService.Instance.OnGameModeChg += ApplyOnGameModeChg;
+            GameEventService.Instance.OnQuestModeChg += ApplyOnGameModeChg;
         }
 
     }

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Common;
 using System;
+using Quest;
 
 namespace Interactables
 { 
     [Serializable]
     public class CurioExpData
     {
-        public GameMode gameMode;
+        public QuestMode gameMode;
         public int chanceVal;
 
     }

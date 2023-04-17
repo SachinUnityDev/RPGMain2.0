@@ -62,6 +62,15 @@ namespace Quest
         InProgress, 
         Completed, 
     }
+
+    public enum CityEncounterNames
+    {
+        None,
+        StreetUrchin,
+        HotPriestess,
+        Woodstocker,
+    }
+
 }
 
 

@@ -25,8 +25,8 @@ namespace Quest
     // Start is called before the first frame update
         void Start()
         {            
-            prevPartyLoc = LandscapeNames.None; 
-            gameObject.AddComponent<QuestController>();
+            prevPartyLoc = LandscapeNames.None;
+         // gameObject.AddComponent<Common.QuestController>();
          //   dayNightController = gameObject.GetComponent<DayNightController>();
         }
 

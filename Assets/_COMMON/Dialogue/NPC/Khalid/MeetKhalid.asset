@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DiaID: 102
   dialogueName: 1
+  dialogueTitle: Meet Khalid
   npcName: 10
   charName: 0
+  isLocked: 0
+  isRepeatable: 0
   gameState: 3
   charInDialogue: 01000000
   NPCinDialogue: 

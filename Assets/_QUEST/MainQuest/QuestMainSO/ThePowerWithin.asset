@@ -13,5 +13,11 @@ MonoBehaviour:
   m_Name: ThePowerWithin
   m_EditorClassIdentifier: 
   qMainName: 2
-  objs: 05000000060000000700000008000000
-  qMainState: 1
+  QuestNameStr: The Power Within
+  questState: 1
+  allObjSO:
+  - {fileID: 11400000, guid: a6db4e2966c62124d8dbe38bbec484ba, type: 2}
+  - {fileID: 11400000, guid: d9aec6818dd12d24c878f96cae364d2f, type: 2}
+  - {fileID: 11400000, guid: 674c61badd7cef24f9460dc7936a67ff, type: 2}
+  - {fileID: 11400000, guid: 2b1ec216ede00e645a5cf79dbb91769b, type: 2}
+  questType: 1

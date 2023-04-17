@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 using UnityEngine.UI;
 using TMPro;
+using Quest;
+using Common;
 
 namespace Town
 {
@@ -84,8 +86,10 @@ namespace Town
 
         void OnQuestScrollBtnClick()
         {
-
-
+            if (QuestMissionService.Instance.QuestMissionView.gameObject.activeInHierarchy) 
+                QuestMissionService.Instance.QuestMissionView.GetComponent<IPanel>().UnLoad(); 
+            else
+                QuestMissionService.Instance.QuestMissionView.GetComponent<IPanel>().Load();
         }
         void OnMapBtnClick()
         {

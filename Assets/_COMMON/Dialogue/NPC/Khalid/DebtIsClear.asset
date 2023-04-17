@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DiaID: 0
   dialogueName: 3
+  dialogueTitle: So, how much did you say he owed you?
   npcName: 10
   charName: 0
-  dialogueTitle: So, how much did you say he owed you?
+  isLocked: 1
+  isRepeatable: 0
   gameState: 1
   charInDialogue: 00000000
   NPCinDialogue: 

@@ -9,18 +9,18 @@ namespace Common
 {
     public class DialogueFactory : MonoBehaviour
     {
-        public Dictionary<DialogueNames, Type> allDialogueControllers;
+        public Dictionary<DialogueNames, Type> allDialogBases;
         [SerializeField] int dialogueCount = 0;
         void Start()
         {
-            allDialogueControllers = new Dictionary<DialogueNames, Type>();
+            allDialogBases = new Dictionary<DialogueNames, Type>();
             InitDialogues();  // start of the game
         }
 
         public void InitDialogues()
         {
 
-            if (allDialogueControllers.Count > 0) return;
+            if (allDialogBases.Count > 0) return;
 
             var getDiaControllers = Assembly.GetAssembly(typeof(IDialogue)).GetTypes()
                                  .Where(myType => myType.IsClass && !myType.IsAbstract 
@@ -29,14 +29,14 @@ namespace Common
             foreach (var diaCtrl in getDiaControllers)
             {
                 var t = Activator.CreateInstance(diaCtrl) as IDialogue;
-                allDialogueControllers.Add(t.dialogueNames, diaCtrl);
+                allDialogBases.Add(t.dialogueNames, diaCtrl);
             }
-            dialogueCount = allDialogueControllers.Count;
+            dialogueCount = allDialogBases.Count;
         }
 
-        public IDialogue GetDiaController(DialogueNames _dialogueNames)
+        public IDialogue GetDialogBase(DialogueNames _dialogueNames)
         {
-            foreach (var diaCtrl in allDialogueControllers)
+            foreach (var diaCtrl in allDialogBases)
             {
                 if (diaCtrl.Key == _dialogueNames)
                 {

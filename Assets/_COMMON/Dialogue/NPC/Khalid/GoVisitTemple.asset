@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DiaID: 0
   dialogueName: 5
+  dialogueTitle: "Hey old man\u2026"
   npcName: 10
   charName: 0
-  dialogueTitle: "Hey old man\u2026"
+  isLocked: 1
+  isRepeatable: 0
   gameState: 1
   charInDialogue: 01000000
   NPCinDialogue: 

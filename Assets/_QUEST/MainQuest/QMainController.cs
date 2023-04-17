@@ -6,20 +6,17 @@ using Common;
 
 namespace Quest
 {
-    public class QMainController : MonoBehaviour
+    public class QuestController : MonoBehaviour
     {
         
-        QMainModel qMainModel;
         void Start()
         {
-
+            
         }
 
-        public void InitQMainController(QMainSO qMainSO)
+        public void InitQMainController(AllQuestSO allQuestMainSO)
         {
-            qMainModel = new QMainModel(qMainSO);
-
-
+         
         }
         
     }

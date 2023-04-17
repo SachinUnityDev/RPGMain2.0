@@ -9,13 +9,6 @@ namespace Quest
     {
         
     }
-
-    //public enum QuestState
-    //{
-    //    None,
-    //    QuestPrep, 
-    //    QuestMain, 
-    //}
     public enum QuestMode
     {
         None,
@@ -23,41 +16,44 @@ namespace Quest
         Exploration,
         Taunt,
     }
-    public enum BountyQuest
+    public enum QuestType
     {
         None, 
-        HuntInTheWilderness,
-        CrewMemberNeeded, 
-    }
-    public enum SideQuest
-    {
-        None,
-        RatInfestation, 
-    }
-    public enum CompQuestNames
-    {
-        None, 
+        Main, 
+        Side, 
+        Bounty, 
+        Companion, 
     }
 
-    public enum QMainNames
+    public enum QuestNames
     {
         None, 
-        LostMemory, 
-        ThePowerWithin, 
-        APlaceOfEvil, 
+        LostMemory, // main 
+        ThePowerWithin, // main
+        APlaceOfEvil,// main
+        RatInfestation,// side        
+        JungleTribes,// side        
+        HuntInTheWilderness,//Bounty
+        CrewMemberNeeded,// Bounty
     }
 
-    public enum QuestObj
+    public enum QuestObjNames
     {
         None, 
-        RetrieveTheDebt,
-        GoBackToKhalid,
-        AttendToJob,
-        VisitKhalid,
-        VisitTemple,
-        RequestRayyan,
-        CheckoutTheShips,
-        GoBackToSoothsayer,
+        RetrieveTheDebt, // main
+        GoBackToKhalid,// main
+        AttendToJob,// main
+        VisitKhalid,// main
+        VisitTemple,// main
+        RequestRayyan,// main
+        CheckoutTheShips,// main
+        GoBackToSoothsayer,// main
+        CleanseTheSewers,// side
+        ReturnBackToTavernkeeper,//side
+        TravelDeepInsideTheJungle,// side
+        DiscoverTheDeepdark,// side
+        BeatTheMngwaNightclaw,// side
+        TravelIntoTheWilderness,// Bounty
     }
     public enum QuestState
     {
@@ -66,8 +62,6 @@ namespace Quest
         InProgress, 
         Completed, 
     }
-
-
 }
 
 

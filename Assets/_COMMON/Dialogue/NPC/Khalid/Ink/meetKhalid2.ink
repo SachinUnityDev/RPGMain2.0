@@ -10,8 +10,6 @@
 # speaker : 1:	Abbas		
 		(sighs) Came all the way down for nothing. Look I don’t even have much left in my pocket to stay in the tavern for a night. And I walked down here from Adjholo. At least can i...
 
-		
-
 ->classchoice
 ->END
 === classchoice ===
@@ -20,16 +18,16 @@
 		
 		# define :1:  unavailable for Demo
 		# define :2: Hunter archetype. High dmg    , dodge but low armor.
-         # define:3: unavailable for Demo
+        # define:3: unavailable for Demo
          
 		*[Warden]
-		    ->DONE
+		    ->OnClassChoiceCompleted
 		    
         *[Skirmisher]
             I’m not really a warrior type, though I do have my hatchet to swing and my rungu to throw. I’ve been called as the Skirmisher in Adjholo.
             ->OnClassChoiceCompleted
         *[Herbalist]
-            ->DONE    
+            ->OnClassChoiceCompleted    
 
 -> END
 

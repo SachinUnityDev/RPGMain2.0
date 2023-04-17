@@ -25,8 +25,11 @@ namespace Common
     public class DialogueService : MonoSingletonGeneric<DialogueService>
     {
         [Header("SO s")]
-        public List<DialogueWithNPCSO> allDialogueWithNPCSOs = new List<DialogueWithNPCSO>();
-        public DialogueViewController1 dialogueViewController1; 
+        //public List<DialogueWithCharNPCSO> allDialogueWithNPCSOs = new List<DialogueWithCharNPCSO>();
+        public DialogueViewController1 dialogueViewController1;
+
+        public AllDialogueSO allDialogueSO; 
+        public List<DialogueModel> allDiaLogueModels = new List<DialogueModel>();
 
         [Header("Dia prefab related")]
         public GameObject dialoguePrefab;
@@ -52,8 +55,37 @@ namespace Common
 
         private void Start()
         {
-            dialogueFactory = GetComponent<DialogueFactory>();
+            dialogueFactory = GetComponent<DialogueFactory>();            
+            allDiaLogueModels.Clear();
+            foreach (DialogueSO dialogueSO in allDialogueSO.allDialogues)
+            {
+                DialogueModel diaModel = new DialogueModel(dialogueSO); 
+                allDiaLogueModels.Add(diaModel);
+            }
         }
+        public DialogueModel GetDialogueModel(DialogueNames dialogueName)
+        {
+            int  index = allDiaLogueModels.FindIndex(t=>t.dialogueName == dialogueName);    
+            if(index != -1)
+            {
+                return allDiaLogueModels[index];
+            }
+            Debug.Log("dialogue NOT FOUND" + dialogueName); return null;
+        }
+
+        public List<DialogueModel> GetDialogueModel4CharNPC(CharNames charName, NPCNames nPCNames)
+        {
+            List<DialogueModel> lsModels = new List<DialogueModel>(); 
+            foreach (DialogueModel diaModel in allDiaLogueModels)
+            {
+                if(diaModel.npcName == nPCNames && diaModel.charName == charName)
+                {
+                    lsModels.Add(diaModel);
+                }
+            }
+            return lsModels;
+        }
+
         public void ClearAllList()
         {
             allOptions.Clear();
@@ -75,22 +107,15 @@ namespace Common
             //dialogueViewController.StartStory(GetDialogueSO(101));
         }
 
-        public void SetCurrDiaController(DialogueNames dialogueNames)
+        public void SetCurrDiaBase(DialogueNames dialogueNames)
         {
-            currController = GetDiaController(dialogueNames);
+            currController = dialogueFactory.GetDialogBase(dialogueNames);
         }
 
-        public IDialogue GetDiaController(DialogueNames dialogueNames)
+        void InitDiaView()
         {
-            return dialogueFactory.GetDiaController(dialogueNames); 
-        }
-
-
-        public void StartDialogue(DialogueNames dialogueName)
-        {
-            DialogueSO diaSO = GetDialogueSO(dialogueName);
-
             diaGO = Instantiate(dialoguePrefab);
+
             dialogueViewController1 = diaGO.GetComponent<DialogueViewController1>();
             diaGO.transform.SetParent(canvas.transform);
             UIControlServiceGeneral.Instance.SetMaxSiblingIndex(diaGO);
@@ -102,18 +127,27 @@ namespace Common
             diaRect.localScale = Vector3.one;
             diaRect.offsetMin = new Vector2(0, 0); // new Vector2(left, bottom);
             diaRect.offsetMax = new Vector2(0, 0); // new Vector2(-right, -top);
+        }
 
+        public void StartDialogue(DialogueNames dialogueName)
+        {
+            InitDiaView();
+            DialogueSO diaSO = GetDialogueSO(dialogueName);
             if (diaSO != null)
             {
-                SetCurrDiaController(dialogueName);
+                SetCurrDiaBase(dialogueName);
                 dialogueViewController1.StartStory(diaSO);
             }
             else
-                Debug.Log("SO Not Found");
+            {
+                Debug.Log("Dia SO Not Found");
+            }   
         }
-
-      
-
+        public void ShowDialogueLs(CharNames charName, NPCNames npcName)
+        {
+            InitDiaView();
+            dialogueViewController1.ShowDialogueList(CharNames.None, NPCNames.KhalidTheHealer);
+        }
         public void OnDialogEnd()
         {
 
@@ -124,36 +158,13 @@ namespace Common
 
         public DialogueSO GetDialogueSO(DialogueNames dialogueName)
         {
-            foreach (DialogueWithNPCSO diaNPCSO in allDialogueWithNPCSOs)
-            {
-                foreach (DialogueSO diaSO in diaNPCSO.allDialogueSOs)
-                {
-                    if (diaSO.dialogueName == dialogueName)
-                        return diaSO;
-                }
-            }
-            return null;
+          return  allDialogueSO.GetDialogueWithName(dialogueName); 
         }
-
-        public DialogueSO GetDialogueSO(int diaID) 
-        {
-            foreach (DialogueWithNPCSO diaNPCSO in allDialogueWithNPCSOs)
-            {
-                foreach (DialogueSO diaSO in diaNPCSO.allDialogueSOs)
-                {
-                    if (diaSO.DiaID == diaID)
-                        return diaSO; 
-                }
-            }
-            return null; 
-        }
-
         public Sprite[] GetDialogueSprites(CharNames charName, NPCNames npcName)
         {
             Sprite[] sprites = new Sprite[2];
             if (charName != CharNames.None)
-            {
-                
+            {                
                 sprites[0] = CharService.Instance.allAllySO                              
                     .Find(t => t.charName == charName).dialoguePortraitClicked;
                 sprites[1] = CharService.Instance.allAllySO
@@ -163,10 +174,8 @@ namespace Common
             }
             else if (npcName != NPCNames.None)
             {
-                sprites[0] = CharService.Instance.allNPCSOls
-                                            .Find(t => t.npcName == npcName).dialoguePortraitClicked;
-                sprites[1] = CharService.Instance.allNPCSOls
-                                           .Find(t => t.npcName == npcName).dialoguePortraitUnClicked;
+                sprites[0] = CharService.Instance.allNpcSO.GetNPCSO(npcName).dialoguePortraitClicked; 
+                sprites[1] = CharService.Instance.allNpcSO.GetNPCSO(npcName).dialoguePortraitUnClicked;
                 return sprites;
             }
             return null;
@@ -177,15 +186,12 @@ namespace Common
             if (Input.GetKeyDown(KeyCode.N))
             {
                 StartDialogue(DialogueNames.MeetKhalid);
-
+            }
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                ShowDialogueLs(CharNames.None, NPCNames.KhalidTheHealer);
             }
         }
 
     }
-
-    // it will contain ref to all the SO , 
-    // contain methods that are needed to make interactions happen , 
-    // .. think more !!
-
-
 }

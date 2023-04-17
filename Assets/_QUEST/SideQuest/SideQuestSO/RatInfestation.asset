@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3288e2884a763834d9f5c8e897f06a67, type: 3}
+  m_Name: RatInfestation
+  m_EditorClassIdentifier: 
+  qMainName: 4
+  QuestNameStr: Rat Infestation
+  questState: 1
+  allObjSO:
+  - {fileID: 11400000, guid: 396aaa3267f6bd94b992e621e7cd3c81, type: 2}
+  - {fileID: 11400000, guid: 53053e23d72c27d44b1cc4647732dff6, type: 2}
+  questType: 2

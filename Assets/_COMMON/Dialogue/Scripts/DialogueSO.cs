@@ -20,13 +20,13 @@ namespace Common
         // inkle text asset       
         public int DiaID;   // on Click track this ID
         public DialogueNames dialogueName;
-      
+
+        public string dialogueTitle = "";
         [Header("Auto Fill")]
         public NPCNames npcName;
         public CharNames charName;
-        //public Sprite clickedSprite;
-        //public Sprite unClickedSprite;
-        public string dialogueTitle=""; 
+        public bool isLocked;
+        public bool isRepeatable;
 
         public GameState gameState;
         public List<CharNames> charInDialogue = new List<CharNames>();
@@ -36,13 +36,8 @@ namespace Common
         [Header("INKY text asset")]
         public TextAsset dialogueAsset; 
         
-
-
         [Header(" Interation sprites")]
         public List<InteractionSpriteData> interactSprites = new List<InteractionSpriteData>();
-
-        // public List<GameObject> InteractionPrefabs = new List<GameObject>();
-        // Can make it event driven trigger     
 
     }
 

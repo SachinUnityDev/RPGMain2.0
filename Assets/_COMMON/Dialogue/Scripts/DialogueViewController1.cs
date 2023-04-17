@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
 namespace Common
@@ -20,6 +21,9 @@ namespace Common
 
         const string DEFINE_TAG = "define";
 
+        [Header(" Tags")]
+        [SerializeField] List<string> tags; 
+
 
         [Header("Dialogue Panel Ref")]
         [SerializeField] GameObject LowerDialogueParent;
@@ -28,6 +32,11 @@ namespace Common
         [SerializeField] GameObject topOptions;
         [SerializeField] GameObject textBoxParent;
         [SerializeField] GameObject defineParent;
+        
+        [Header("Dialogue List")]
+        [SerializeField] GameObject dialogueList; 
+
+
 
         [SerializeField] TextMeshProUGUI charTxt;
 
@@ -66,11 +75,22 @@ namespace Common
         }
         public void StartStory(DialogueSO _dialogueSO)
         {
+            dialogueList.SetActive(false);
+            dialogueParent.SetActive(true);
             dialogueSO = _dialogueSO;
             story = new Story(dialogueSO.dialogueAsset.text);
             if (OnCreateStory != null) OnCreateStory(story);
             InitDialogueView();
             DisplayStory();
+        }
+
+        public void ShowDialogueList(CharNames charName, NPCNames nPCNames)
+        {
+            dialogueList.SetActive(true);
+            dialogueParent.SetActive(false);
+            List<DialogueModel> lsModel = 
+                        DialogueService.Instance.GetDialogueModel4CharNPC(charName, nPCNames);
+            dialogueList.GetComponent<DialogueListView>().InitDialogueView(lsModel);            
         }
 
         void InitDialogueView()
@@ -84,34 +104,36 @@ namespace Common
             if (story == null) return;
             if (story.canContinue)  // dialogue stops when a new tag is detected
             {
-
                 if (escapeCount > 0)
                 {
                     isInteracting = false; isTextBoxing = false;
                     string dialogueString = story.Continue();
-                    escapeCount--; // transistion cut
+                    escapeCount =0; // transistion cut
                     currStrLen = dialogueString.Length;
                     ToggleDialoguePanelOn(true);
-                    if (escapeCount > 1)
-                        SetHighTypeSpeed(currStrLen);
-                    else
+                    //if (escapeCount > 1)
+                    //    SetHighTypeSpeed(currStrLen);
+                    //else
                         SetLowTypeSpeed(currStrLen);
                     // toogle on Display String 
                     dialogueTxt.text = dialogueString;
                     TogglePortraitWithSpeakerTags();
                     textRevealer.Reveal();
                     dialogueTxt.text = "";
-                    //Debug.Log("INSIDE PRINT DIALOGUE");
+                    Debug.Log("INSIDE PRINT DIALOGUE");
                 }
                 else
                 {
                     Debug.Log("Dialogue is paused");
-                    // can disable dialogue screen here 
+                   
                 }
                 if (story.currentChoices.Count >= 1)
                     DisplayChoices();
-              //  CustomInteractTag();
+
             }
+          
+            
+            
         }
 
         void DisplayChoices()
@@ -163,40 +185,10 @@ namespace Common
                 choiceContainer.GetChild(i).gameObject.SetActive(false);
             }
         }
-        //void CustomInteractTag()
-        //{
-        //    List<string> tags = story.currentTags;
-
-        //    foreach (var tag in tags)
-        //    {
-        //        // get key and value 
-        //        string[] splitTag = tag.Split(':');
-        //        string keyTag = splitTag[0].Trim().ToLower();
-        //        string numTagStr = splitTag[1].Trim();
-        //        int numTag = int.Parse(numTagStr);
-        //        string valueTag = " ";
-        //        if (splitTag.Length > 2)
-        //            valueTag = splitTag[2].Trim();
-        //        TagData tagData = new TagData(keyTag, numTag, valueTag);
-        //        if (keyTag == CUSTOMINT_TAG)
-        //        {
-        //            DialogueService.Instance.currController
-        //                            .ApplyInteraction(1, 2f);
-        //            isTextBoxing = true;
-
-        //        }
-
-        //    }
-        //}
-            void CustomChoiceFX()
-            {
-
-            }
-
-
+    
             void InteractTag()
             {
-                List<string> tags = story.currentTags;
+              tags = story.currentTags;
 
                 foreach (var tag in tags)
                 {
@@ -346,12 +338,12 @@ namespace Common
                 DisplayStory();
             }
 
-            void SetHighTypeSpeed(int dist)
-            {
-                escapeCount--; // high speed cut
-                textRevealer.RevealTime = 0.1f;
-                isDialogueOnHighSpeed = true;
-            }
+            //void SetHighTypeSpeed(int dist)
+            //{
+            //    escapeCount--; // high speed cut
+            //    textRevealer.RevealTime = 0.1f;
+            //    isDialogueOnHighSpeed = true;
+            //}
             void SetLowTypeSpeed(int dist)
             {
                 textRevealer.RevealTime = slowRevealTime * dist / 100;
@@ -431,22 +423,16 @@ namespace Common
             {
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
                 {
-                    escapeCount++;
+                escapeCount = 1; 
                     if (!isDialoguePlaying)  // start a new dialogue only when its not playing
                         DisplayStory();
-                    else if (!isDialogueOnHighSpeed)
-                        SetHighTypeSpeed(currStrLen);
+                    //else if (!isDialogueOnHighSpeed)
+                    //    SetHighTypeSpeed(currStrLen);
 
                 }
                 if (story != null)
                     ChoicesLen = story.currentChoices.Count;
-
-
             }
-
-
-        
-
     }
 }
 

@@ -11,7 +11,6 @@ namespace Town
     {
         public override NPCNames nPCNames => NPCNames.GreybrowTheTavernkeeper; 
 
-        public override BuildingNames buildingNames => BuildingNames.Tavern;
 
         public override void NPCInit()
         {

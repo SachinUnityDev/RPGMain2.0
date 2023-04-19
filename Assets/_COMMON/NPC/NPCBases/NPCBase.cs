@@ -8,7 +8,6 @@ namespace Town
     public abstract class NPCBase
     {
         public abstract NPCNames nPCNames { get; }
-        public abstract BuildingNames buildingNames { get; }
         public abstract void NPCInit();
 
         [Header("NPC item in stock inv ")]

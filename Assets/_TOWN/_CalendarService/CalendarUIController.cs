@@ -15,9 +15,7 @@ namespace Common
         public GameObject famePanel;
         public GameObject monthPanel;
         public GameObject weekPanel;
-        public GameObject dayPanel;
-        //public GameObject currentPanel;
-        //public GameObject prevPanel;
+        public GameObject dayPanel;     
         [SerializeField] List<GameObject> allPanels = new List<GameObject>();
         public GameObject dayBGPanel;
         public GameObject nightBGPanel;
@@ -52,25 +50,6 @@ namespace Common
         {          
             OnPanelEnter(famePanel, PanelInScene.Fame);
         }
-
-
-        public void ToggleDayNightUI()
-        {
-           // dayBGPanel.GetComponent<TownViewController>().TownViewInit(); 
-            //OnPanelExit(dayPanel);
-            //if (dayBGPanel.activeSelf)
-            //{
-            //    nightBGPanel.SetActive(true);
-            //    dayBGPanel.SetActive(false);               
-            //}
-            //else
-            //{
-            //    nightBGPanel.SetActive(false);
-            //    dayBGPanel.SetActive(true);
-            //}
-        }
-
-
         public void OnPanelEnter(GameObject panel, PanelInScene _panelInScene)
         {
             if (panelInScene == _panelInScene) 

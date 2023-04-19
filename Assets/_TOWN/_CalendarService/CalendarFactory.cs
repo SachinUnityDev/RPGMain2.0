@@ -5,26 +5,14 @@ using System;
 using System.Reflection;
 using System.Linq;
 using Combat;
+using Town;
 
 namespace Common
 {
     #region Abstract_Definitions
-    public abstract class MonthEventBase : MonoBehaviour
-    {
-        public virtual MonthName monthName { get; set; }
-        public virtual string MonthShortName { get; set; }
-        public abstract void ApplyMonthSpecs(CharController charController); 
-        
-    }
 
-    public abstract class  WeekEventBase :MonoBehaviour
-    {
-        public virtual WeekEventsName weekName { get;  set; }
-        public virtual void OnWeekEnter(CharController charController) { }
-        public virtual void OnWeekTick(CharController characterController) { }
-        public virtual void OnWeekExit(CharController charController) { }
-        
-    }
+
+
     public abstract class DayEventBase 
     {
         public abstract DayName dayName { get; set; }

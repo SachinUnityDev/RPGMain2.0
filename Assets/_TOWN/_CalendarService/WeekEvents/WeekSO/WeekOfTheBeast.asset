@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb62b8420797af5469b0244eb8bb1854, type: 3}
   m_Name: WeekOfTheBeast
   m_EditorClassIdentifier: 
-  weekNo: 0
-  weekName: 4
+  orderInSeq: 040000000400000002000000
+  weekName: 2
+  weekCount: 0
+  weekNameStr: Week of Rejuvenation
   weekDesc: 
   WeekSpecs: []

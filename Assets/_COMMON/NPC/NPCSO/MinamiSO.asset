@@ -21,18 +21,9 @@ MonoBehaviour:
     type: 3}
   dialoguePortraitUnClicked: {fileID: 21300000, guid: eaf26d1a29676fb4a9fab625fdfbcdd4,
     type: 3}
-  InteractHeading: 
-  InteractionOptions:
-  - 
   itemTypesAccepted: 0d0000000800000002000000100000001100000012000000
-  allWeeklyStock:
-  - WeekInYear: 1
-    allItemData:
-    - ItemData:
-        itemType: 0
-        ItemName: 0
-      quantity: 0
-    - ItemData:
-        itemType: 0
-        ItemName: 0
-      quantity: 0
+  buildName: 8
+  allItemInWeek: []
+  weeklyItemInStock:
+    weekSeq: 0
+    itemDataLs: []

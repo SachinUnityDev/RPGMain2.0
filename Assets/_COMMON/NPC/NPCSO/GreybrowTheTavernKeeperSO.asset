@@ -22,3 +22,27 @@ MonoBehaviour:
   dialoguePortraitUnClicked: {fileID: 21300000, guid: 8b9dc4e371b9ab44282c0dc6b43a4dc7,
     type: 3}
   itemTypesAccepted: 0a0000000400000005000000080000001300000006000000
+  buildName: 7
+  allItemInWeek: []
+  weeklyItemInStock:
+    weekSeq: 1
+    itemDataLs:
+    - itemType: 4
+      itemName:
+        potionName: 0
+        HerbName: 0
+        foodName: 6
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+        pouchesName: 0
+      qty: 20

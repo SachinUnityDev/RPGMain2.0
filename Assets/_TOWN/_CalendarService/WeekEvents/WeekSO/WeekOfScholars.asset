@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb62b8420797af5469b0244eb8bb1854, type: 3}
   m_Name: WeekOfScholars
   m_EditorClassIdentifier: 
-  weekNo: 0
-  weekName: 7
+  orderInSeq: 010000000300000004000000
+  weekName: 3
+  weekCount: 0
+  weekNameStr: 
   weekDesc: 
   WeekSpecs: []

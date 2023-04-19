@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb62b8420797af5469b0244eb8bb1854, type: 3}
   m_Name: WeekOfHunters
   m_EditorClassIdentifier: 
-  orderInSeq: 0
-  weekName: 0
+  orderInSeq: 030000000200000001000000
+  weekName: 1
   weekCount: 0
   weekNameStr: 
   weekDesc: 

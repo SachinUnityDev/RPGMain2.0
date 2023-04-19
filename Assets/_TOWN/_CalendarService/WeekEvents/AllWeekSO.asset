@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df4dd6d88ef14814fac35f8251765de1, type: 3}
   m_Name: AllWeekSO
   m_EditorClassIdentifier: 
-  allWeekSO: []
+  allWeekSO:
+  - {fileID: 11400000, guid: 7aa34f56f139b3d4ebaf8c4d8e7c6ea2, type: 2}
+  - {fileID: 11400000, guid: d978a47be4013ca4cb181d00ad0a81d8, type: 2}
+  - {fileID: 11400000, guid: 851f99c4544035341aa00093be3c6c4f, type: 2}
+  - {fileID: 11400000, guid: 72cf81925d4a350439e4c8e5f7d1b345, type: 2}

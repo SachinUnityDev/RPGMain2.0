@@ -26,21 +26,20 @@ namespace Town
 
         public BuildingNames buildName;
 
-        public List<ItemDataWithQty> allItemInWeek = new List<ItemDataWithQty>();
-
-        public WeeklyItemStock weeklyItemStock; 
+        public List<WeeklyItemInStock> weeklyItemStock = new List<WeeklyItemInStock>();
     }
 
     [Serializable]
-    public class WeeklyItemStock
+    public class WeeklyItemInStock
     {
+        public int weekSeq;
         public List<ItemDataLs> itemDataLs = new List<ItemDataLs>();
     }
-
     [Serializable]
     public class AllItemNames
     {
         public PotionNames potionName;
+        public GenGewgawNames genGewgawNames;
         public HerbNames HerbName;
         public FoodNames foodName;
         public FruitNames fruitNames;
@@ -61,6 +60,7 @@ namespace Town
     [Serializable]
     public class ItemDataLs
     {
+
         public ItemType itemType;
         public AllItemNames itemName;
         public int qty; 

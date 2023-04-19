@@ -27,6 +27,20 @@ namespace Town
         public BuildingNames buildName;
 
         public List<WeeklyItemInStock> weeklyItemStock = new List<WeeklyItemInStock>();
+
+
+        private void Awake()
+        {
+            if(npcName == NPCNames.AmishTheMerchant)
+            {
+                //for (int i = 0; i < 4; i++)
+                //{
+                //    ItemDataLs itemDataLs = new ItemDataLs()
+                //}
+
+
+            }
+        }
     }
 
     [Serializable]
@@ -35,6 +49,10 @@ namespace Town
         public int weekSeq;
         public List<ItemDataLs> itemDataLs = new List<ItemDataLs>();
     }
+
+    
+
+
     [Serializable]
     public class AllItemNames
     {
@@ -63,6 +81,7 @@ namespace Town
 
         public ItemType itemType;
         public AllItemNames itemName;
+        public GenGewgawQ genGawgawQ = GenGewgawQ.None; 
         public int qty; 
     }
     [Serializable]

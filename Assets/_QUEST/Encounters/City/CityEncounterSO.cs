@@ -11,7 +11,7 @@ namespace Quest
     {
         public CityEncounterNames encounterName;
         public int encounterSeq;
-        public bool isLocked = false;
+        public CityEState state; 
 
         [TextArea(5,10)]
         public string descTxt;

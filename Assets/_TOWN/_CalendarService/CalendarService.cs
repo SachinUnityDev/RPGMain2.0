@@ -17,7 +17,7 @@ namespace Common
        // public event Action<DayName> OnCalendarDayStart;  // to be remove and incorported
         public event Action<int> OnStartOfCalDay;// can broadcast day, week  and month too here
         public event Action<int> OnStartOfNight;
-        public event Action<WeekName> OnStartOfTheWeek;
+        public event Action<WeekEventsName> OnStartOfTheWeek;
         public event Action<MonthName> OnStartOfTheMonth;
         public event Action<TimeState> OnChangeTimeState; 
 
@@ -34,7 +34,7 @@ namespace Common
         [Header("CURRENT DAY WEEK AND MONTH")]
         [SerializeField] DayName gameStartDay; 
         public DayName currDayName;
-        public WeekName currentWeek;
+        public WeekEventsName currentWeek;
         public MonthName currentMonth;
         public MonthName scrollMonth;
 
@@ -74,7 +74,7 @@ namespace Common
             MonthSO monthSO = allMonthSOs.Find(x => x.monthName == _monthName);
             return monthSO;
         }
-        public WeekSO GetWeekSO(WeekName _weekName)
+        public WeekSO GetWeekSO(WeekEventsName _weekName)
         {
             WeekSO weekSO = allWeekSOs.Find(x => x.weekName == _weekName);
             return weekSO;
@@ -131,8 +131,8 @@ namespace Common
             {
                 currentWeek++; weekCounter++; 
 
-                var noOfWeeks= Enum.GetNames(typeof(WeekName)).Length;                
-                if ((int)currentWeek >= noOfWeeks) currentWeek = (WeekName)1;  
+                var noOfWeeks= Enum.GetNames(typeof(WeekEventsName)).Length;                
+                if ((int)currentWeek >= noOfWeeks) currentWeek = (WeekEventsName)1;  
                 
                 calendarUIController.UpdateWeekPanel(currentWeek); 
                 currDayName = (DayName)1;              
@@ -167,7 +167,7 @@ namespace Common
             OnChangeTimeState(TimeState.Night);
             OnStartOfNight?.Invoke(day);
         }
-        public void On_StartOfTheWeek(WeekName weekName)
+        public void On_StartOfTheWeek(WeekEventsName weekName)
         {
             OnStartOfTheWeek?.Invoke(weekName);
         }

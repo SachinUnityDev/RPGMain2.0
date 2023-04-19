@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Common
 {
-    public enum WeekName
+    public enum WeekEventsName
 
     {
         None,
@@ -27,7 +27,8 @@ namespace Common
     public class WeekSO : ScriptableObject
     {
         public int orderInSeq;
-        public WeekName weekName;
+        public WeekEventsName weekName;
+        public int weekCount; 
         public string weekNameStr;
         public string weekDesc;
         public List<string> WeekSpecs = new List<string>();
@@ -38,22 +39,22 @@ namespace Common
 
         }
 
-            public string GetWeekNameStr(WeekName _weekName)
+            public string GetWeekNameStr(WeekEventsName _weekName)
             {  
                 switch (_weekName)
                 {
-                case WeekName.WeekOfTroubadors: return "Week of Troubadours";
-                case WeekName.WeekOfHunters: return "Week of Hunters";
-                case WeekName.SolarFestival: return "Solar Festival";
-                case WeekName.WeekOfTheBeast: return "Week of the Beast";
-                case WeekName.WeekOfFamine: return "Week of Famine";
-                case WeekName.WeekOfPirates: return "Week of Pirates";
-                case WeekName.WeekOfScholars: return "Week of Scholars";
-                case WeekName.WeekOfThieves: return "Week of Thieves";
-                case WeekName.WeekOfTraders: return "Week of Traders";
-                case WeekName.WeekOfRejuvenation: return "Week of Rejuvenation";
-                case WeekName.WeekOfMages: return "Week of Mages";
-                case WeekName.WeekOfWarriors: return "Week of Warriors";
+                case WeekEventsName.WeekOfTroubadors: return "Week of Troubadours";
+                case WeekEventsName.WeekOfHunters: return "Week of Hunters";
+                case WeekEventsName.SolarFestival: return "Solar Festival";
+                case WeekEventsName.WeekOfTheBeast: return "Week of the Beast";
+                case WeekEventsName.WeekOfFamine: return "Week of Famine";
+                case WeekEventsName.WeekOfPirates: return "Week of Pirates";
+                case WeekEventsName.WeekOfScholars: return "Week of Scholars";
+                case WeekEventsName.WeekOfThieves: return "Week of Thieves";
+                case WeekEventsName.WeekOfTraders: return "Week of Traders";
+                case WeekEventsName.WeekOfRejuvenation: return "Week of Rejuvenation";
+                case WeekEventsName.WeekOfMages: return "Week of Mages";
+                case WeekEventsName.WeekOfWarriors: return "Week of Warriors";
                 default: return "";
 
                 }

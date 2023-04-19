@@ -27,7 +27,7 @@ namespace Quest
             return false; 
         }
 
-        public override bool StartCondChk()
+        public override bool UnLockCondChk()
         {
             return false; 
         }

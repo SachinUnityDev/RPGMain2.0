@@ -27,7 +27,6 @@ namespace Town
         public MarketController marketController; 
         public ShipController shipController;
         public SafekeepController safekeepController;
-        public TavernController TavernController;   
         void Start()
         {
             houseController = GetComponent<HouseController>();
@@ -35,25 +34,11 @@ namespace Town
             tavernController = GetComponent<TavernController>();    
             marketController= GetComponent<MarketController>();
             shipController= GetComponent<ShipController>();
-            tavernController= GetComponent<TavernController>(); 
             safekeepController= GetComponent<SafekeepController>();
 
         }
 
-
-
-
-        #region 
-        //public bool CanItemBeWalled(Iitems item, TavernSlotType tavernSlotType)
-        //{
-        //    Iitems currItem = null;
-        //    if (tavernSlotType == TavernSlotType.Trophy)
-        //    {
-        //        currItem = tavernController.tavernModel.trophyOnWall;
-        //    }
-
-
-        //}
+        #region   
 
         public void On_ItemWalled(Iitems item, TavernSlotType tavernSlotType)
         {

@@ -20,9 +20,30 @@ namespace Town
         private void Start()
         {
             BuildingSO templeSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.Temple);
-            templeModel = new TempleModel(templeSO); 
-         
+            templeModel = new TempleModel(templeSO);
+            CalendarService.Instance.OnChangeTimeState += (TimeState timeStart) => UpdateBuildState();
+
         }
+        public void UpdateBuildState()
+        {
+            if (templeModel.buildState == BuildingState.Locked) return;
+            DayName dayName = CalendarService.Instance.currDayName;
+            TimeState timeState = CalendarService.Instance.currtimeState;
+
+            if (dayName == DayName.DayOfWater)
+            {
+                templeModel.buildState = BuildingState.UnAvailable;
+                return; 
+            }
+                
+            if(timeState == TimeState.Night)            
+                templeModel.buildState = BuildingState.UnAvailable;            
+            else            
+                templeModel.buildState = BuildingState.Available;
+            
+        }
+
+
         // [Header("Top Panel")]
         // [SerializeField] GameObject topPortraits;
 

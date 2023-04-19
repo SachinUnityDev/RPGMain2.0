@@ -71,6 +71,15 @@ namespace Quest
         Woodstocker,
     }
 
+    public enum CityEState
+    {
+        None, 
+        Locked, 
+        UnLockedNAvail,
+        UnAvailable, 
+        Solved,
+    }
+
 }
 
 

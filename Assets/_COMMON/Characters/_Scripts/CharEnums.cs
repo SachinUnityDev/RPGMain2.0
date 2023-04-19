@@ -45,6 +45,9 @@ public enum CauseType
     NPCInteract, 
     Landscape, 
     ArmorType,
+    CityEncounter,
+    QuestEncounter, 
+    MapEncounter,
 }
 
 public enum StatChecks

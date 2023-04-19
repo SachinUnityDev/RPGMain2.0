@@ -33,8 +33,7 @@ namespace Common
         {
             bool hasMoney = false;           
             switch (pocketType)
-            {
-              
+            {              
                 case PocketType.Stash:
                     hasMoney = GetMoneyAmtInPlayerStash().IsMoneySufficent(reqCurr);                    
                     break;

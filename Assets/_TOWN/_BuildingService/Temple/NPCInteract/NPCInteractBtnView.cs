@@ -30,7 +30,7 @@ namespace Town
 
             foreach (NPCInteractData npcInteract in templeModel.allNPCInteractData)
             {
-                if(npcInteract.npcState == NPCState.UnLocked)
+                if(npcInteract.npcState == NPCState.UnLockedNAvail)
                 {
                     
                 }

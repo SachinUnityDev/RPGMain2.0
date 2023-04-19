@@ -8,9 +8,6 @@ using TMPro;
 
 namespace Common
 {
-   
- 
-
     public enum FameType
     {        
         None,

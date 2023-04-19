@@ -20,6 +20,7 @@ namespace Town
             houseModel = new HouseModel(houseSO);
         }
 
+
         public void OnPurchase(HousePurchaseOptsData houseData)
         {
             switch (houseData.houseOpts)

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FlatFooted
   m_EditorClassIdentifier: 
   charStateName: 1
-  stateFor: 1
+  stateFor: 0
   charStateType: 0
   charStateBehavior: 1
   CharStateNameStr: Flatfooted

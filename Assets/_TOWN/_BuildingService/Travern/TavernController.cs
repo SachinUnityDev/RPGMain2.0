@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using Common;
-using System.Windows.Forms.DataVisualization.Charting;
 using Interactables;
+using System;
 
 namespace Town
 {
-    public class TavernController : MonoBehaviour, IPanel, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class TavernController : MonoBehaviour
     {
 
         public TavernModel tavernModel;
@@ -17,10 +16,14 @@ namespace Town
         BuildingSO tavernSO;
         [Header("to be ref")]
         public TavernView tavernView;
+        DayNTimeData UnAvailOn;  
         void Start()
         {
             tavernSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.Tavern);
             tavernModel = new TavernModel(tavernSO);
+            // tavern unavailable
+            UnAvailOn = new DayNTimeData(DayName.DayOfAir, TimeState.Night);
+            CalendarService.Instance.OnChangeTimeState += (TimeState timeStart)=> UpdateBuildState(); 
         }
 
         public void OnTrophySocketed(TGNames trophyName)
@@ -31,44 +34,28 @@ namespace Town
         {
 
         }
-
-        public void Init()
+        public void UpdateBuildState()
         {
-               
+            DayName dayName = CalendarService.Instance.currDayName;
+            TimeState timeState = CalendarService.Instance.currtimeState;
+            if (tavernModel.buildState == BuildingState.Locked) return; 
+            if(dayName== DayName.DayOfAir && timeState== TimeState.Night)            
+                tavernModel.buildState = BuildingState.UnAvailable;            
+            else
+                tavernModel.buildState = BuildingState.Available;
         }
+    }
 
-        public void Load()
-        {
-           
+    [Serializable]
+    public class DayNTimeData
+    {
+        public DayName dayName;
+        public TimeState timeState;
+        public DayNTimeData(DayName dayName, TimeState timeState)
+        { 
+            this.dayName = dayName;
+            this.timeState = timeState;
         }
-
-        public void UnLoad()
-        {
-           
-        }
-
-       Image btnImg;
-       
-
-        public void OnPointerClick(PointerEventData eventData)
-        {
-
-        }
-
-        // talk .. trade ...each interaction is unique ....
-
-
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            //   namePlank.GetComponent<RectTransform>().DOScale(1, 0.25f);
-        }
-
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            //  namePlank.GetComponent<RectTransform>().DOScale(0, 0.25f);
-
-        }
-
     }
 
 

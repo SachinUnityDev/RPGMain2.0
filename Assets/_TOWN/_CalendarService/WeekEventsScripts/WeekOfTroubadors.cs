@@ -8,7 +8,7 @@ namespace Common
     public class WeekOfTroubadors :  WeekEventBase
 {
 
-        public override WeekName weekName => WeekName.WeekOfTroubadors; 
+        public override WeekEventsName weekName => WeekEventsName.WeekOfTroubadors; 
 
         public string weekNameStr = "Week Of Troubadors";
         public string weekDesc = "Welcome Desciption";

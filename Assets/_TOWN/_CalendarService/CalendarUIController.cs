@@ -145,7 +145,7 @@ namespace Common
             }
         }
 
-        public void UpdateWeekPanel(WeekName currentWeek)
+        public void UpdateWeekPanel(WeekEventsName currentWeek)
         {
            // Debug.Log("WeekPanelUpdate" + weekPanel.transform.GetChild(0));
 
@@ -154,7 +154,7 @@ namespace Common
             Debug.Log(CalendarService.Instance.GetWeekSO(currentWeek));
 
             txtParent.GetChild(0).GetComponent<TextMeshProUGUI>().text = CalendarService.Instance.GetWeekSO(currentWeek).weekNameStr; 
-            txtParent.GetChild(1).GetComponent<TextMeshProUGUI>().text = CalendarService.Instance.GetWeekSO((WeekName)currentWeek).weekDesc;
+            txtParent.GetChild(1).GetComponent<TextMeshProUGUI>().text = CalendarService.Instance.GetWeekSO((WeekEventsName)currentWeek).weekDesc;
 
         }
 

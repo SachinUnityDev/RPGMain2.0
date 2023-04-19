@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f415af01e424194282aaab1f072bbda, type: 3}
+  m_Name: HotPriestess1
+  m_EditorClassIdentifier: 
+  encounterName: 2
+  encounterSeq: 1
+  isLocked: 1
+  descTxt: The priestess from the other day appeared in the marketplace and dragged
+    you into an isolated street. As she draw close to you, the heat of her body surrounds
+    you. The elven woman is like a walking ember. She is hot, literally hot!
+  choiceAStr: Try to kiss her
+  choiceBStr: Kindly ask your reward

@@ -83,6 +83,8 @@ namespace Common
         MeetRayyan, 
         MeetCahyo, 
         MeetBaran,
+        HotPriestess, 
+        WaterVsFire,
     }
 
 }

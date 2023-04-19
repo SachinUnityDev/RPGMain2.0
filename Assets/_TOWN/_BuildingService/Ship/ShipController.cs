@@ -19,6 +19,22 @@ namespace Town
             shipModel = new ShipModel(shipSO);
         }
 
-  
+        public void OnBuildUnLock()
+        {
+            shipModel.buildState = BuildingState.Available;
+            shipModel.unLockedOnDay = CalendarService.Instance.dayInGame;
+        }
+
+        public void UpdateBuildState()
+        {
+            if (shipModel.buildState == BuildingState.Locked) return;
+            // weekly name to be done .....
+
+
+
+         
+            shipModel.buildState = BuildingState.Available;
+        }
+
     }
 }

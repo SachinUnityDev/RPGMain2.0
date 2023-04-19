@@ -9,9 +9,17 @@ namespace Common
     public class FameController : MonoBehaviour
     {
         public int index; 
+
+        
+
         void Start()
         {
                                                            
+        }
+
+        public void ChgFame(CauseType causeType, int causeName, float val, string desc="")
+        {
+            
         }
 
 

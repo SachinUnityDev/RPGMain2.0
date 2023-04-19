@@ -13,7 +13,6 @@ namespace Common
         public override CharController charController { get; set; }
         public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
-
         public override int castTime { get; protected set; }
 
         public override void StateApplyFX()

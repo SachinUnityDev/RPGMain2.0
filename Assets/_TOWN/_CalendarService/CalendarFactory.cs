@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Reflection;
-using System.Linq; 
+using System.Linq;
+using Combat;
+
 namespace Common
 {
     #region Abstract_Definitions
@@ -17,7 +19,7 @@ namespace Common
 
     public abstract class  WeekEventBase :MonoBehaviour
     {
-        public virtual WeekName weekName { get;  set; }
+        public virtual WeekEventsName weekName { get;  set; }
         public virtual void OnWeekEnter(CharController charController) { }
         public virtual void OnWeekTick(CharController characterController) { }
         public virtual void OnWeekExit(CharController charController) { }
@@ -36,8 +38,8 @@ namespace Common
     
     public class CalendarFactory : MonoBehaviour
     {
-        public Dictionary<WeekName, Type> AllWeekEvents = new Dictionary<WeekName, Type>();
-
+        public Dictionary<WeekEventsName, Type> AllWeekEvents = new Dictionary<WeekEventsName, Type>();
+        [SerializeField] int weekEvents =0 ; 
         void Start()
         {
             InitWeekEvents(); 
@@ -58,9 +60,11 @@ namespace Common
                 AllWeekEvents.Add(p.weekName, weekEvent);
                 //Debug.Log("week events added" + getWeekEvents);
             }
+            weekEvents= AllWeekEvents.Count;
+
         }
 
-        public void AddWeekEvent(WeekName _weekName, GameObject go)
+        public void AddWeekEvent(WeekEventsName _weekName, GameObject go)
         {
             if (AllWeekEvents.ContainsKey(_weekName))
             {
@@ -74,132 +78,4 @@ namespace Common
 
 
 }
-
-
-
-//namespace Common
-//{
-//    public abstract class TempTraitBase : MonoBehaviour
-//    {
-//        public virtual TempTraitName tempTraitName { get; set; }
-//        public virtual void ApplyTrait(GameObject _charGO)
-//        {
-
-//        }
-//    }
-
-//    public abstract class PermTraitBase : MonoBehaviour
-//    {
-//        public virtual PermanentTraitName permTraitName { get; set; }
-//        public virtual TraitBehaviour traitBehaviour { get; set; }
-//        public virtual void ApplyTrait(CharacterController charController)
-//        {
-
-//        }
-//    }
-
-
-
-//    public class TraitsFactory : MonoSingletonGeneric<TraitsFactory>
-//    {
-//        public List<TraitsDataSO> allPermTraitsList;
-//        public Dictionary<PermanentTraitName, Type> allPermTraits = new Dictionary<PermanentTraitName, Type>();
-//        public Dictionary<TempTraitName, Type> allTempTraits;
-
-
-//        void Start()
-//        {
-//            InitTempTraits();
-
-//        }
-
-//        public void InitPermTraits()
-//        {
-//            if (allPermTraits.Count > 0) return;
-
-//            var getPermTraits = Assembly.GetAssembly(typeof(PermTraitBase)).GetTypes()
-//                                   .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(PermTraitBase)));
-
-//            foreach (var permTrait in getPermTraits)
-//            {
-
-//                var p = Activator.CreateInstance(permTrait) as PermTraitBase;
-//                allPermTraits.Add(p.permTraitName, permTrait);
-//            }
-//        }
-
-//        public void InitTempTraits()
-//        {
-//            allTempTraits = new Dictionary<TempTraitName, Type>();
-//            var getTempTraits = Assembly.GetAssembly(typeof(TempTraitBase)).GetTypes()
-//                                 .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(TempTraitBase)));
-
-//            foreach (var tempTrait in getTempTraits)
-//            {
-//                var t = Activator.CreateInstance(tempTrait) as TempTraitBase;
-//                allTempTraits.Add(t.tempTraitName, tempTrait);
-//            }
-//        }
-
-//        public void TempTraitsFactory(GameObject go, TempTraitName tempTraitName)
-//        {
-
-//            if (allTempTraits.ContainsKey(tempTraitName))
-//            {
-//                Type tempTrait = allTempTraits[tempTraitName];
-//                TempTraitBase trait = Activator.CreateInstance(tempTrait) as TempTraitBase;
-//                go.AddComponent(trait.GetType());
-
-//            }
-//        }
-
-//        public void PermTraitsFactory(GameObject go)
-//        {
-
-//            CharacterController charctrl = go.GetComponent<CharacterController>();
-//            foreach (TraitsDataSO charptraits in allPermTraitsList)   // list of sos
-//            {
-//                // Debug.Log("permanet trait found");
-//                if (charctrl.charModel.racetype == charptraits.racetype)
-//                {
-//                    foreach (PermTraitsINChar traitvalue in charptraits.PermTraitsINCharList)
-//                    {
-//                        AddPermTrait(traitvalue.permanentTraitName, go);
-//                    }
-//                }
-//            }
-
-//            ApplyPermTraits(go);
-//        }
-
-//        public void AddPermTrait(PermanentTraitName permaTraitName, GameObject go)
-//        {
-
-//            if (allPermTraits.ContainsKey(permaTraitName))
-//            {
-
-//                Type permaTrait = allPermTraits[permaTraitName];
-//                PermTraitBase trait = Activator.CreateInstance(permaTrait) as PermTraitBase;
-//                go.AddComponent(trait.GetType());
-
-
-//            }
-
-//        }
-
-//        public void ApplyPermTraits(GameObject go)
-//        {
-//            CharacterController charController = go?.GetComponent<CharacterController>();
-
-//            PermTraitBase[] permaTraits = go.GetComponents<PermTraitBase>();
-
-//            foreach (PermTraitBase p in permaTraits)
-//            {
-//                p.ApplyTrait(charController);
-//            }
-
-//        }
-
-//    }
-//}
 

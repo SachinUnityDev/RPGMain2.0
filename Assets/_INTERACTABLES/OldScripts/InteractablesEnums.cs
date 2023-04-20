@@ -381,6 +381,7 @@ namespace Interactables
         Tiara, 
         ThrowingKnife, 
         RaffiaTrap,
+        Tablet,
     }
 
   
@@ -418,6 +419,7 @@ namespace Interactables
         SapphireRing,
         ShinBoneOfTheDonkey,
         TopazRing, 
+        AncientTabletOfEarth,  // to be coded
     }
 
     public enum SagaicGewgawNames
@@ -527,7 +529,7 @@ namespace Interactables
         Silver,
         Skull,
         Topaz,
-
+        Ancient,
     }
 
     public enum SuffixNames
@@ -552,6 +554,7 @@ namespace Interactables
         OfWarding,
         OfEndurance,
         OfTheScholar,
+        OfEarth,
     }
 
  

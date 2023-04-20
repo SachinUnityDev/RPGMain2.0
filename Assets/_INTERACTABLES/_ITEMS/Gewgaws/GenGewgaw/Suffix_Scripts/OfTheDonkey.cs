@@ -6,13 +6,13 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class OfTheDonkey : SuffixBase, IFolkloric, IEpic
+    public class OfTheDonkey : SuffixBase, IFolkloric, IEpic, ILyric
     {
         public override SuffixNames suffixName => SuffixNames.OfTheDonkey;
 
 
         //of the Donkey NA	2 vigor at day + 2 wp at day	3 vigor at day  + 3 wp at day
-        int val21, val22, val31, val32;
+        int val21, val22, val31, val32, val11, val12;
 
         public void FolkloricInit()
         {
@@ -51,7 +51,6 @@ namespace Interactables
         public void ApplyFXEpic()
         {
             charController = InvService.Instance.charSelectController;
-
             //  3 vigor at day + 3 wp at day
            
             int index =
@@ -71,6 +70,38 @@ namespace Interactables
             buffIndex.Clear();
         }
         public void RemoveFXEpic()
+        {
+            buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
+            buffIndex.Clear();
+        }
+
+        public void LyricInit()
+        {
+            val11 = 1;
+            val12 = 1;
+            string str1 = $"+{val11} Willpower at day";
+            displayStrs.Add(str1);
+            string str2 = $"+{val12} Vigor at day";
+            displayStrs.Add(str2);
+        }
+
+        public void ApplyFXLyric()
+        {
+            charController = InvService.Instance.charSelectController;
+
+            int index =
+                  charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
+                          , charController.charModel.charID, AttribName.willpower, val11, TimeFrame.Infinity, -1, true);
+            buffIndex.Add(index);
+
+
+            index =
+                charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
+                        , charController.charModel.charID, AttribName.vigor, val12, TimeFrame.Infinity, -1, true);
+            buffIndex.Add(index);
+        }
+
+        public void RemoveFXLyric()
         {
             buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
             buffIndex.Clear();

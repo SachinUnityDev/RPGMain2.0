@@ -8,11 +8,13 @@ using UnityEngine;
 namespace Interactables
 {
 
-    public class SkullPrefix : PrefixBase, IFolkloric, IEpic
+    public class SkullPrefix : PrefixBase, IFolkloric, IEpic, ILyric
     {
 
-        //NA	, * melee attackers take 1-4 dark dmg"	.....
-        //"     * melee attackers take 2-6 dark dmg"
+        // lYric: -1 Attacker morale for 2 rounds
+        // folk: , * melee attackers take 1-4 dark dmg"	..... -1 Attacker morale for 2 rounds
+        //epic: * melee attackers take 2-6 dark dmg...-2 Attacker morale for 2 rounds"
+
         public override PrefixNames prefixName => PrefixNames.Skull;
     
         public void FolkloricInit()
@@ -40,6 +42,18 @@ namespace Interactables
         public void RemoveFXFolkloric()
         {
             
+        }
+
+        public void LyricInit()
+        {
+        }
+
+        public void ApplyFXLyric()
+        {
+        }
+
+        public void RemoveFXLyric()
+        {
         }
     }
 }

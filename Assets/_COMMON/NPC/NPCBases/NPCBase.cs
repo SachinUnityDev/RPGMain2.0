@@ -10,8 +10,6 @@ namespace Town
         public abstract NPCNames nPCNames { get; }
         public abstract void NPCInit();
 
-        [Header("NPC item in stock inv ")]
-        public List<NPCWeeklyStockData> allWeeklyStock = new List<NPCWeeklyStockData>(); 
 
     }
 }

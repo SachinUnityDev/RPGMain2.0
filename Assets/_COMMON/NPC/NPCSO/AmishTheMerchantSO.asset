@@ -22,7 +22,7 @@ MonoBehaviour:
   dialoguePortraitUnClicked: {fileID: 21300000, guid: fa29928a359bfcf4cae2c67176f973e0,
     type: 3}
   itemTypesAccepted: 0900000008000000020000001000000011000000120000000d00000013000000
-  buildName: 0
+  buildName: 3
   weeklyItemStock:
   - weekSeq: 1
     itemDataLs:
@@ -1078,7 +1078,7 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
-      genGawgawQ: 1
+      genGawgawQ: 2
       qty: 2
     - itemType: 2
       itemName:
@@ -1100,7 +1100,7 @@ MonoBehaviour:
         poeticName: 0
         pouchesName: 0
       genGawgawQ: 1
-      qty: 1
+      qty: 2
     - itemType: 2
       itemName:
         potionName: 0

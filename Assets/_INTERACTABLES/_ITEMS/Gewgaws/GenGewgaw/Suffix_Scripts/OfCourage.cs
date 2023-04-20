@@ -7,12 +7,11 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class OfCourage : SuffixBase, IFolkloric, IEpic
+    public class OfCourage : SuffixBase, IFolkloric, IEpic, ILyric
     {       
         public override SuffixNames suffixName => SuffixNames.OfCourage;
 
-        //of Courage    NA	3-5 fortitude org	6-9 fortitude origin
-        int valFolk, valEpic;
+        int valFolk, valEpic, valLyric; 
 
         public void FolkloricInit()
         {
@@ -61,6 +60,29 @@ namespace Interactables
             buffIndex.Clear();
         }
 
+        public void LyricInit()
+        {
+            valLyric = Random.Range(2, 4);
+            string str = $"+{valFolk} Fortitude Origin";
+            displayStrs.Add(str);
+        }
+
+        public void ApplyFXLyric()
+        {
+            charController = InvService.Instance.charSelectController;
+
+            int index =
+            charController.buffController.ApplyBuff(CauseType.SuffixGenGewgaw, (int)suffixName
+                , charController.charModel.charID, AttribName.fortOrg, valLyric, TimeFrame.Infinity, -1, true);
+
+            buffIndex.Add(index);
+        }
+
+        public void RemoveFXLyric()
+        {
+            buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
+            buffIndex.Clear();
+        }
     }
 
 

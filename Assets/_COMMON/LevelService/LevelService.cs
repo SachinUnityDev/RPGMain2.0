@@ -91,7 +91,7 @@ namespace Common
                 {
                     if (stat.AttribName == AttribName.damage || stat.AttribName == AttribName.armor)
                     {
-                        charController.ChangeStatRange(CauseType.LevelUp, 1, 1, stat.AttribName
+                        charController.ChangeAttribRange(CauseType.LevelUp, 1, 1, stat.AttribName
                             , stat.minRange, stat.maxRange, true);
                         // stack it up in level up model
                     }
@@ -147,13 +147,13 @@ namespace Common
             {
                 if (stat.AttribName == AttribName.damage || stat.AttribName == AttribName.armor)
                 {
-                    charController.ChangeStatRange(CauseType.LevelUp, 1, 1, stat.AttribName
+                    charController.ChangeAttribRange(CauseType.LevelUp, 1, 1, stat.AttribName
                         , stat.minRange, stat.maxRange, false);
                     // stack it up in level up model
                 }
                 else
                 {
-                    charController.ChangeStatRange(CauseType.LevelUp, 1, 1, stat.AttribName
+                    charController.ChangeAttribRange(CauseType.LevelUp, 1, 1, stat.AttribName
                         , stat.minRange, stat.maxRange, false);
                 }
             }
@@ -171,7 +171,7 @@ namespace Common
             {
                 if (stat.AttribName == AttribName.damage || stat.AttribName == AttribName.armor)
                 {
-                    charController.ChangeStatRange(CauseType.LevelUp, 1, 1, stat.AttribName
+                    charController.ChangeAttribRange(CauseType.LevelUp, 1, 1, stat.AttribName
                         , stat.minRange, stat.maxRange, true);
                     // stack it up in level up model
                 }

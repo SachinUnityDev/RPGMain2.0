@@ -405,8 +405,6 @@ namespace Common
             , float maxChgR, bool toInvoke = true)
         {
 
-
-
         }
 
         void CheckHealth()
@@ -429,7 +427,7 @@ namespace Common
                 }
             }
         }
-        public AttribModData ChangeStatRange(CauseType causeType, int name, int causeByCharID, AttribName statName
+        public AttribModData ChangeAttribRange(CauseType causeType, int name, int causeByCharID, AttribName attribName
             , float minChgR, float maxChgR, bool toInvoke = true)
         {
 
@@ -440,17 +438,17 @@ namespace Common
                 fwd = GridService.Instance.GetDyna4GO(gameObject).FwdtilePos;
             }
             AttribModData charModData = new AttribModData(turn, causeType, name, causeByCharID
-                 , this.charModel.charID, statName,0,0 );
+                 , this.charModel.charID, attribName,0,0 );
 
-            AttribData statData = GetAttrib(statName);
+            AttribData statData = GetAttrib(attribName);
             float minStatNet = statData.minRange + minChgR;
             float maxStatNet = statData.maxRange + maxChgR;
 
 
             charModData.modChgMinR = minStatNet;
             charModData.modChgMaxR = maxStatNet;
-            charModel.attribList.Find(x => x.AttribName == statName).minRange = minStatNet;
-            charModel.attribList.Find(x => x.AttribName == statName).maxRange = maxStatNet;
+            charModel.attribList.Find(x => x.AttribName == attribName).minRange = minStatNet;
+            charModel.attribList.Find(x => x.AttribName == attribName).maxRange = maxStatNet;
             if (toInvoke)
             {
                 // to be checked

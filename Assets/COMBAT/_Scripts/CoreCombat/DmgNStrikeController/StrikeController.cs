@@ -141,7 +141,7 @@ namespace Combat
             dmgMax = dmg.maxRange;
             float chgMin = 0.2f * dmgMin;
             float chgMax = 0.2f * dmgMax;
-            charController.ChangeStatRange(CauseType.StatChecks, (int)StatChecks.FocusCheck, charID
+            charController.ChangeAttribRange(CauseType.StatChecks, (int)StatChecks.FocusCheck, charID
                 , AttribName.damage, chgMin, chgMax);
         }
         void RevertDamageRange()

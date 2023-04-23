@@ -109,7 +109,7 @@ namespace Combat
         public int ApplyBuffOnRange(CauseType causeType, int causeName, int causeByCharID, AttribName statName
             , float minChgR, float maxChgR, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
         {
-            AttribModData charModData = charController.ChangeStatRange(causeType, causeName, causeByCharID
+            AttribModData charModData = charController.ChangeAttribRange(causeType, causeName, causeByCharID
                                                                     , statName, minChgR, maxChgR,  true);
 
             int currRd = GameSupportService.Instance.currentRound;
@@ -199,7 +199,7 @@ namespace Combat
         {
             if (IsRangeChange(buffData))
             { 
-                charController.ChangeStatRange(buffData.charModData.causeType,
+                charController.ChangeAttribRange(buffData.charModData.causeType,
                                      buffData.charModData.causeName, buffData.charModData.causeByCharID
                                      , buffData.charModData.attribModified
                                      , -buffData.charModData.modChgMinR, -buffData.charModData.modChgMinR,true);
@@ -279,12 +279,12 @@ namespace Combat
             , float minChgR, float maxChgR, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
         {
 
-            AttribModData charModData = charController.ChangeStatRange(causeType, causeName, causeByCharID
+            AttribModData charModData = charController.ChangeAttribRange(causeType, causeName, causeByCharID
                                            , statName, minChgR, maxChgR, true);
 
             if (CalendarService.Instance.currtimeState == TimeState.Night) // FOR NIGHT CORRECTION
             {
-                charController.ChangeStatRange(causeType, causeName, causeByCharID
+                charController.ChangeAttribRange(causeType, causeName, causeByCharID
                                             , statName, -minChgR, -maxChgR, true);
             }
             int currRd = GameSupportService.Instance.currentRound;
@@ -309,7 +309,7 @@ namespace Combat
                 }
                 else
                 {
-                    charController.ChangeStatRange(charModData.causeType, charModData.causeName
+                    charController.ChangeAttribRange(charModData.causeType, charModData.causeName
                    , charModData.causeByCharID, charModData.attribModified, charModData.modChgMinR
                    , charModData.modChgMaxR, true);
                 }
@@ -326,7 +326,7 @@ namespace Combat
                 }
                 else
                 {
-                    charController.ChangeStatRange(charModData.causeType, charModData.causeName
+                    charController.ChangeAttribRange(charModData.causeType, charModData.causeName
                    , charModData.causeByCharID, charModData.attribModified, -charModData.modChgMinR
                    , -charModData.modChgMaxR, true);
                 }
@@ -345,7 +345,7 @@ namespace Combat
                 }
                 else
                 {
-                    charController.ChangeStatRange(charModData.causeType, charModData.causeName
+                    charController.ChangeAttribRange(charModData.causeType, charModData.causeName
                    , charModData.causeByCharID, charModData.attribModified, charModData.modChgMinR
                    , charModData.modChgMaxR, true);
                 }
@@ -362,7 +362,7 @@ namespace Combat
                 }
                 else
                 {
-                    charController.ChangeStatRange(charModData.causeType, charModData.causeName
+                    charController.ChangeAttribRange(charModData.causeType, charModData.causeName
                    , charModData.causeByCharID, charModData.attribModified, -charModData.modChgMinR
                    , -charModData.modChgMaxR, true);
                 }
@@ -373,7 +373,7 @@ namespace Combat
         {
             if (IsRangeChange(buffData))
             {
-                charController.ChangeStatRange(buffData.charModData.causeType,
+                charController.ChangeAttribRange(buffData.charModData.causeType,
                                      buffData.charModData.causeName, buffData.charModData.causeByCharID
                                      , buffData.charModData.attribModified
                                      , -buffData.charModData.modChgMinR, -buffData.charModData.modChgMinR, true);
@@ -403,7 +403,7 @@ namespace Combat
 
             if (IsRangeChange(buffData))
             {
-                charController.ChangeStatRange(charModData.causeType, charModData.causeName, charModData.causeByCharID
+                charController.ChangeAttribRange(charModData.causeType, charModData.causeName, charModData.causeByCharID
                                         , charModData.attribModified, charModData.modChgMinR, charModData.modChgMaxR, true);
             }
             else
@@ -419,7 +419,7 @@ namespace Combat
 
             if (IsRangeChange(buffData))
             {
-                charController.ChangeStatRange(charModData.causeType, charModData.causeName, charModData.causeByCharID
+                charController.ChangeAttribRange(charModData.causeType, charModData.causeName, charModData.causeByCharID
                                         , charModData.attribModified, -charModData.modChgMinR, -charModData.modChgMaxR, true);
             }
             else
@@ -455,7 +455,7 @@ namespace Combat
         public int ApplyBuffOnNightRange(CauseType causeType, int causeName, int causeByCharID, AttribName statName
             , float minChgR, float maxChgR, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
         {
-            AttribModData charModData = charController.ChangeStatRange(causeType, causeName, causeByCharID
+            AttribModData charModData = charController.ChangeAttribRange(causeType, causeName, causeByCharID
                                            , statName, minChgR, maxChgR, true);
 
             int currRd = GameSupportService.Instance.currentRound;
@@ -471,7 +471,7 @@ namespace Combat
         {
             if (IsRangeChange(buffData))
             {
-                charController.ChangeStatRange(buffData.charModData.causeType,
+                charController.ChangeAttribRange(buffData.charModData.causeType,
                                      buffData.charModData.causeName, buffData.charModData.causeByCharID
                                      , buffData.charModData.attribModified
                                      , -buffData.charModData.modChgMinR, -buffData.charModData.modChgMinR, true);

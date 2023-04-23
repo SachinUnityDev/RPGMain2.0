@@ -10,7 +10,7 @@ namespace Town
 
     [CreateAssetMenu(fileName = "AllDaySO", menuName = "Calendar Service/AllDaySO")]
 
-    public class AllDaySO : MonoBehaviour
+    public class AllDaySO : ScriptableObject
     {
         public List<DaySO> allDaySO = new List<DaySO>();
 

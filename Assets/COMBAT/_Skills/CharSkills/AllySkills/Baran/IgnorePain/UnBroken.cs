@@ -63,7 +63,7 @@ namespace Combat
                     chgMin = statData.minRange * 0.8f;
                     chgMax = statData.maxRange * 0.8f;
 
-                    charController.ChangeStatRange(CauseType.CharSkill, (int)skillName, charID
+                    charController.ChangeAttribRange(CauseType.CharSkill, (int)skillName, charID
                                                     , AttribName.armor, chgMin, chgMax);
                 
 
@@ -87,7 +87,7 @@ namespace Combat
             {
                 charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.waterRes, -40f, false);
                 charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.earthRes, -20f, false);
-                targetController.ChangeStatRange(CauseType.CharSkill, (int)skillName, charID
+                targetController.ChangeAttribRange(CauseType.CharSkill, (int)skillName, charID
                                                , AttribName.armor, -chgMin, -chgMax);
 
                 resIncr = false;

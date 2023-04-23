@@ -10,7 +10,7 @@ using UnityEngine.Rendering;
 namespace Common
 {
 
-    public class CharTypeBuffData
+    public class DayBuffData
     {
         public CauseData causeData; 
         public int buffID;
@@ -20,7 +20,7 @@ namespace Common
         public ClassType classType;
         public CultureType cultureType;
 
-        public CharTypeBuffData(CauseData causeData, int buffID, RaceType raceType, AttribName attribName,
+        public DayBuffData(CauseData causeData, int buffID, RaceType raceType, AttribName attribName,
          int valChg)
         {
             this.attribName= attribName;
@@ -29,7 +29,7 @@ namespace Common
             this.buffID = buffID;
             this.raceType = raceType;
         }
-        public CharTypeBuffData(CauseData causeData, int buffID, CultureType cultureType, AttribName attribName,
+        public DayBuffData(CauseData causeData, int buffID, CultureType cultureType, AttribName attribName,
          int valChg)
         {
             this.attribName = attribName;
@@ -38,7 +38,7 @@ namespace Common
             this.buffID = buffID;
             this.cultureType = cultureType;
         }
-        public CharTypeBuffData(CauseData causeData, int buffID, ClassType classType, AttribName attribName,
+        public DayBuffData(CauseData causeData, int buffID, ClassType classType, AttribName attribName,
          int valChg)
         {
             this.attribName = attribName;
@@ -67,7 +67,7 @@ namespace Common
     }
     public class CharTypeBuffController : MonoBehaviour
     {
-        public List<CharTypeBuffData> allBuffData = new List<CharTypeBuffData>();
+        public List<DayBuffData> allBuffData = new List<DayBuffData>();
         CharController charController;
 
         private void Start()
@@ -88,7 +88,7 @@ namespace Common
                                             attribName, valChg, TimeFrame.Infinity, -1, isBuff); 
            
 
-            CharTypeBuffData charTypeBuffData = new CharTypeBuffData(causeData,buffID , raceType, attribName, valChg);
+            DayBuffData charTypeBuffData = new DayBuffData(causeData,buffID , raceType, attribName, valChg);
 
             allBuffData.Add(charTypeBuffData);
             return buffID;
@@ -108,7 +108,7 @@ namespace Common
                 attribName, valChg, TimeFrame.Infinity, -1, isBuff);
 
 
-            CharTypeBuffData charTypeBuffData = new CharTypeBuffData(causeData, buffID, classType, attribName, valChg);
+            DayBuffData charTypeBuffData = new DayBuffData(causeData, buffID, classType, attribName, valChg);
 
             allBuffData.Add(charTypeBuffData);
             return buffID;
@@ -126,14 +126,14 @@ namespace Common
                 attribName, valChg, TimeFrame.Infinity, -1, isBuff);
 
 
-            CharTypeBuffData charTypeBuffData = new CharTypeBuffData(causeData, buffID, cultType, attribName, valChg);
+            DayBuffData charTypeBuffData = new DayBuffData(causeData, buffID, cultType, attribName, valChg);
 
             allBuffData.Add(charTypeBuffData);
             return buffID;
         }
         public void RemoveRaceBuff(RaceType raceType) 
         {
-            foreach (CharTypeBuffData buff in allBuffData)
+            foreach (DayBuffData buff in allBuffData)
             {
                 if(buff.raceType == raceType)
                 {
@@ -143,7 +143,7 @@ namespace Common
         }
         public void RemoveClassBuff(ClassType classType)
         {
-            foreach (CharTypeBuffData buff in allBuffData)
+            foreach (DayBuffData buff in allBuffData)
             {
                 if (buff.classType == classType)
                 {
@@ -153,7 +153,7 @@ namespace Common
         }
         public void RemoveCultBuff(CultureType cultType)
         {
-            foreach (CharTypeBuffData buff in allBuffData)
+            foreach (DayBuffData buff in allBuffData)
             {
                 if (buff.cultureType == cultType)
                 {

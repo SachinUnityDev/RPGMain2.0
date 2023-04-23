@@ -26,10 +26,8 @@ namespace Town
         [SerializeField] Button questScrollBtn;
         [SerializeField] Button mapBtn;
 
-        //[SerializeField] GameObject InteractionPanel;
-
-        //[SerializeField] List<GameObject> allPanels = new List<GameObject>();
-
+        [Header("Cloud")]
+        [SerializeField] Transform cloudTrans; 
 
         public BuildingNames selectBuild;
         [Header("NTBR")]
@@ -48,8 +46,12 @@ namespace Town
 
         private void Start()
         {
-            CalendarService.Instance.OnChangeTimeState += (TimeState timeState)=>TownViewInit(); 
+            CalendarService.Instance.OnChangeTimeState += TownViewInit; 
+            
+
         }
+
+        
         public void OnBuildSelect(BuildingNames buildName)
         {
             selectBuild = buildName; // correction for none
@@ -75,13 +77,19 @@ namespace Town
                 }
             }
         }
-        public void TownViewInit()
+        public void TownViewInit(TimeState timeState)
         {
+
             FillTownBG(); 
             foreach (Transform child in buildContainer)
             {
                child.GetComponent<BuildBasePtrEvents>().Init(this);
             }
+            if(timeState == TimeState.Day)            
+                cloudTrans.gameObject.SetActive(true); 
+            else
+                cloudTrans.gameObject.SetActive(false);
+            
         }
         void FillTownBG()
         {

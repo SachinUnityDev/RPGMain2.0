@@ -5,7 +5,7 @@ using TMPro;
 using System;
 using DG.Tweening;
 using Town;
-
+using UnityEngine.UI; 
 namespace Common
 {
     public class CalendarUIController : MonoBehaviour
@@ -18,7 +18,10 @@ namespace Common
         public GameObject dayPanel;     
         [SerializeField] List<GameObject> allPanels = new List<GameObject>();
         public GameObject dayBGPanel;
-        public GameObject nightBGPanel;
+        //  public GameObject nightBGPanel;
+
+        [SerializeField] Button showMonthBtn;
+        [SerializeField] Button showWeekBtn;
 
         public PanelInScene panelInScene; 
          void Start()
@@ -28,22 +31,29 @@ namespace Common
             GetMonthStartDay(MonthName.WingOfTheLocust, DayName.DayOfLight);
             allPanels = new List<GameObject>() { famePanel, monthPanel, weekPanel, dayPanel };
             CloseAllPanel();
-         }
 
+            showMonthBtn.onClick.AddListener(OnShowWeekBtnPressed);
+            showWeekBtn.onClick.AddListener(OnShowMonthBtnPressed);
+        }
 
-
+        void OnShowWeekBtnPressed()
+        {
+            UpdateWeekPanel(CalendarService.Instance.currentWeek);
+            OnPanelEnter(weekPanel, PanelInScene.Week);
+        }
+        void OnShowMonthBtnPressed()
+        {   
+            OnPanelEnter(monthPanel, PanelInScene.Month);
+        }
         public void OnTownBannerClicked()
         {         
-            
             OnPanelEnter(monthPanel, PanelInScene.Month); 
-
         }
         public void OnMonthNWeekToggleClicked()
         {
             if (panelInScene == PanelInScene.Month)
                 OnPanelEnter(weekPanel, PanelInScene.Week);
             else OnPanelEnter(monthPanel, PanelInScene.Month); 
-
         }
 
         public void OnFameBtnClick()
@@ -60,16 +70,13 @@ namespace Common
             {
                 OnPanelExit(GetPanelInScene(panelInScene));
                 panelInScene = _panelInScene;
-                panel?.GetComponent<RectTransform>().DOLocalMove(new Vector3(0,0,0), 0.4f); 
-                //panel?.transform.DOLocalMoveY(614, 2).SetEase(Ease.OutQuint);
-                //Debug.Log("Entertween");
+                panel?.GetComponent<RectTransform>().DOLocalMove(new Vector3(0,0,0), 0.4f);     
             }            
         }
         public void OnPanelExit(GameObject panel)
         {
             panel?.transform.DOLocalMoveY(1200, 1).SetEase(Ease.OutQuint);
-            panelInScene = PanelInScene.None;
-           // Debug.Log("Exittween");
+            panelInScene = PanelInScene.None;        
         }
 
         void CloseAllPanel()
@@ -89,13 +96,13 @@ namespace Common
             Debug.Log("Current Day" + currentDay);
             
             dayPanel.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text 
-                       = CalendarService.Instance.GetDaySO(currentDay).dayName.ToString();
+                       = CalendarService.Instance.allDaySO.GetDaySO(currentDay).dayNameStr;
             Debug.Log(dayPanel.transform.GetChild(1).name);
             RectTransform[] allDayGO = dayPanel.transform.GetChild(1).GetComponentsInChildren<RectTransform>(true);
             
             ToggleBarPanel(allDayGO, (int)currentDay, 8);
 
-            List<string> tipOftheDayList = CalendarService.Instance.GetDaySO(currentDay).tipOfTheDayList;
+            List<string> tipOftheDayList = CalendarService.Instance.allDaySO.GetDaySO(currentDay).tipOfTheDayList; 
             int len = tipOftheDayList.Count;
             if (CalendarService.Instance.currtimeState == TimeState.Day)
             {
@@ -123,33 +130,25 @@ namespace Common
                 }
             }
         }
-
         public void UpdateWeekPanel(WeekEventsName currentWeek)
         {
-           // Debug.Log("WeekPanelUpdate" + weekPanel.transform.GetChild(0));
-
             Transform txtParent = weekPanel.transform.GetChild(0);
+            WeekModel weekModel = CalendarService.Instance.weekEventsController.GetWeekModels(currentWeek);
 
-            Debug.Log(CalendarService.Instance.GetWeekSO(currentWeek));
-
-            txtParent.GetChild(0).GetComponent<TextMeshProUGUI>().text = CalendarService.Instance.GetWeekSO(currentWeek).weekNameStr; 
-            txtParent.GetChild(1).GetComponent<TextMeshProUGUI>().text = CalendarService.Instance.GetWeekSO((WeekEventsName)currentWeek).weekDesc;
-
+            // week panel get week btn
+            weekPanel.GetComponent<WeekView>().InitWeeek(this, weekModel);
         }
 
         public void UpdateMonthPanel(MonthName _currentMonth, DayName _gameStartDay, int _currentdayInYr)
         {
-
             Transform yearNameParent = monthPanel.transform.GetChild(0);
-            yearNameParent.GetChild(0).GetComponent<TextMeshProUGUI>().text = "1339, Year of the Kudan Donkey";
+            yearNameParent.GetChild(1).GetComponent<TextMeshProUGUI>().text = "1339, Year of the Khudan Donkey";
             Transform monthNameParent = monthPanel.transform.GetChild(1).GetChild(0); 
             if(CalendarService.Instance?.GetMonthSO((MonthName)_currentMonth) != null)
                 monthNameParent.GetComponent<TextMeshProUGUI>().text = CalendarService.Instance?.GetMonthSO((MonthName)_currentMonth).monthNameStr;
              
-
             Transform daysPanel = monthPanel.transform.GetChild(2);
 
-            
             int childCount = daysPanel.childCount;
             int monthStartday = GetMonthStartDay(_currentMonth, _gameStartDay); 
 
@@ -190,8 +189,7 @@ namespace Common
                    
                     _dayBtnController.SetState(DayBtnState.Upcomingday, today);
                 }
-            }               
-           
+            }          
         }
         int GetMonthStartDay(MonthName _currentMonth,DayName _yearStartDay)
         {           
@@ -234,7 +232,6 @@ namespace Common
         Week, 
         Month, 
         Fame, 
-
     }
 }
 

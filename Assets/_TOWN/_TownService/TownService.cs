@@ -38,8 +38,8 @@ namespace Town
             townModel.currTown = location;
             townModel.allCharInTown 
                 = RosterService.Instance.rosterController.GetCharAvailableInTown(location);
-
-            townViewController.TownViewInit();
+            
+            townViewController.TownViewInit(CalendarService.Instance.currtimeState);
 
            // RosterService.Instance.OpenRosterView();
             // can instantiate prefab etc too here 

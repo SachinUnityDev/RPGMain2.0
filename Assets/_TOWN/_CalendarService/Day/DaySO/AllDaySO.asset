@@ -12,4 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6e988f4b7693b349b0e7a364d62d3ae, type: 3}
   m_Name: AllDaySO
   m_EditorClassIdentifier: 
-  allDaySO: []
+  allDaySO:
+  - {fileID: 11400000, guid: abb5e57681ff5884cbbff1b80852b573, type: 2}
+  - {fileID: 11400000, guid: d4411e0b9ed8cb64599a3aed93cde34d, type: 2}
+  - {fileID: 11400000, guid: cf983a7b01971164fae2e6381cc35b8b, type: 2}
+  - {fileID: 11400000, guid: 50b34a12fcfb619449009ad37ae70f5d, type: 2}
+  - {fileID: 11400000, guid: b2db9f15b4b15bd44b5108565ff3b72e, type: 2}
+  - {fileID: 11400000, guid: baf4c2e6be101d643ad51da9c1d875df, type: 2}
+  - {fileID: 11400000, guid: aa5cc48b67e8f0f478862822bd48a0df, type: 2}

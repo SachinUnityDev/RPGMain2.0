@@ -8,8 +8,15 @@ namespace Town
 {
     public abstract class DayEventsBase
     {
-        public abstract DayName dayName { get; }
-        public abstract void OnDayApply();
-        public virtual void OnDayEnd() { }
+        public abstract DayName dayName { get; }        
+        public DayModel dayModel;
+        public virtual void OnDayApply()
+        {
+            dayModel = CalendarService.Instance.dayEventsController.GetDayModel(dayName);          
+        }
+        public virtual void OnDayEnd() 
+        {
+           
+        }
     }
 }

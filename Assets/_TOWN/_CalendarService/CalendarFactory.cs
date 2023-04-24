@@ -5,34 +5,26 @@ using System;
 using System.Reflection;
 using System.Linq;
 using Combat;
-using Town;
+using Town; 
 
 namespace Common
-{
-    #region Abstract_Definitions
-
-
-
-    public abstract class DayEventBase 
-    {
-        public abstract DayName dayName { get; set; }
-        public abstract string dayStr { get; set; }
-        public abstract void ApplyDaySpecs(CharController charController); 
-     
-    }
-
-    #endregion
-   
-    
+{    
     public class CalendarFactory : MonoBehaviour
     {
         public Dictionary<WeekEventsName, Type> AllWeekEvents = new Dictionary<WeekEventsName, Type>();
-        [SerializeField] int weekEvents =0 ; 
-        void Start()
+        public Dictionary<DayName, Type> AllDayEvents = new Dictionary<DayName, Type>();   
+        
+        [SerializeField] int weekEvents = 0;
+        [SerializeField] int dayEvents = 0; 
+
+        void Awake()
         {
-            InitWeekEvents(); 
+            InitWeekEvents();
+            InitDayEvents();
         }
 
+
+        #region WEEK EVENTS
         public void InitWeekEvents()
         {
             
@@ -52,16 +44,48 @@ namespace Common
 
         }
 
-        public void AddWeekEvent(WeekEventsName _weekName, GameObject go)
+        public WeekEventBase GetWeekEvents(WeekEventsName _weekName)
         {
             if (AllWeekEvents.ContainsKey(_weekName))
             {
                 Type weekEvent = AllWeekEvents[_weekName];
-                WeekEventBase  weekInst = Activator.CreateInstance(weekEvent) as WeekEventBase;
-                Debug.Log("Event Added " + weekInst.weekName); 
-                go.AddComponent(weekInst.GetType());
+                WeekEventBase  weekbase = Activator.CreateInstance(weekEvent) as WeekEventBase;
+                return weekbase;
             }
+            Debug.Log("week events base" + _weekName);
+            return null;
         }
+        #endregion
+        #region
+        public void InitDayEvents()
+        {
+
+            if (AllDayEvents.Count > 0) return;
+            var getDayEvents = Assembly.GetAssembly(typeof(DayEventsBase)).GetTypes()
+                                   .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(DayEventsBase)));
+
+            foreach (var dayEvent in getDayEvents)
+            {
+                var p = Activator.CreateInstance(dayEvent) as DayEventsBase;
+                AllDayEvents.Add(p.dayName, dayEvent);                
+            }
+            dayEvents = AllDayEvents.Count; 
+        }
+
+        public DayEventsBase GetDayEvent(DayName dayName)
+        {
+            Debug.Log("Day Name" + dayName);
+            if (AllDayEvents.ContainsKey(dayName))
+            {
+                Type dayEvents = AllDayEvents[dayName];
+                DayEventsBase dayBase = Activator.CreateInstance(dayEvents) as DayEventsBase;
+                return dayBase;               
+            }
+            Debug.Log("Day event Not found" + dayName);
+            return null; 
+        }
+
+        #endregion
     }
 
 

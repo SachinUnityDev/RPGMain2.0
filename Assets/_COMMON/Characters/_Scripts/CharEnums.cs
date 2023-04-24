@@ -48,6 +48,8 @@ public enum CauseType
     CityEncounter,
     QuestEncounter, 
     MapEncounter,
+    DayEvents, 
+    WeekEvents, 
 }
 
 public enum StatChecks

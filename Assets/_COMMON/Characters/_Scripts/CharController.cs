@@ -28,14 +28,17 @@ namespace Common
         public DamageController damageController;   
         public StrikeController strikeController;
 
-        [Header("Common Controller")]
+        [Header("Buff Controller")]
         public BuffController buffController;
-        public CharTypeBuffController charTypeBuffController; 
+        public CharTypeBuffController charTypeBuffController;
+        public TimeBuffController timeBuffController;
 
+
+        [Header("States and traits controller")]
         public CharStateController charStateController;
         public TempTraitController tempTraitController;
         public PermaTraitController permaTraitController;
-
+ 
 
         [Header("Item Controller")]
         public ItemController  itemController;
@@ -59,6 +62,8 @@ namespace Common
         {          
             buffController=  gameObject.AddComponent<BuffController>();
             charTypeBuffController= gameObject.AddComponent<CharTypeBuffController>();
+            timeBuffController = gameObject.AddComponent<TimeBuffController>();
+
             itemController = gameObject.AddComponent<ItemController>();
             skillController = gameObject.AddComponent<SkillController1>();
             weaponController= gameObject.AddComponent<WeaponController>();

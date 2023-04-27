@@ -33,7 +33,9 @@ namespace Interactables
 
         public void OnHoverItem()
         {
-            
+            this.itemId = itemId;
+            this.maxInvStackSize = maxInvStackSize;
+            PoeticInit();
         }
 
         public void ApplyEquipableFX()

@@ -8,24 +8,37 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class EasyFit : SagaicGewgawBase
+    public class EasyFit : SagaicGewgawBase, Iitems
     {
         public override SagaicGewgawNames sagaicGewgawName => SagaicGewgawNames.EasyFit;
+
+        public int itemId { get; set; }
+
+        public ItemType itemType => ItemType.SagaicGewgaws;
+
+        public int itemName => (int)SagaicGewgawNames.EasyFit;
+
+        public int maxInvStackSize { get ;set; }
+        public SlotType invSlotType { get; set; }
+        public List<int> allBuffs { get; set; } = new List<int>();
 
         //+2 Wp and Vigor ....Upon Dodge: +1 Stamina and Hp Regen, 3 rds
 
         int dmgChgVal;
 
         public override void GewGawSagaicInit()
-        {
-
-            charController = InvService.Instance.charSelectController;
+        {   
             dmgChgVal = UnityEngine.Random.Range(36, 46);
+           
+            string str = "+2 Vigor and Wp";
+            displayStrs.Add(str);
+            str = "Upon Dodge: +1 Stm and Hp Regen, 3 rds";
+            displayStrs.Add(str);   
         }
 
         public  void ApplyGewGawFX()
         {
-            
+            charController = InvService.Instance.charSelectController;
             if (charController.charStateController.HasCharState(CharStateName.Unslakable))
             {
                 ApplyIfUnslackableFx();
@@ -86,6 +99,18 @@ namespace Interactables
             {
                 charController.buffController.RemoveBuff(i);
             }
+        }
+
+        public void InitItem(int itemId, int maxInvStackSize)
+        {
+           this.itemId = itemId;    
+           this.maxInvStackSize = maxInvStackSize;
+            GewGawSagaicInit();
+        }
+
+        public void OnHoverItem()
+        {
+           
         }
     }
 }

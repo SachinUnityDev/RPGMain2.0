@@ -503,12 +503,27 @@ namespace Interactables
             }
             if (Input.GetKeyDown(KeyCode.J))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Gems, (int)GemNames.Ametyst,
-                                    CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.PoeticGewgaws, (int)PoeticGewgawNames.GlovesLegacyOfTheSpida,
+     CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.SagaicGewgaws, (int)SagaicGewgawNames.Spiteeth,
+            CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.SagaicGewgaws, (int)SagaicGewgawNames.EasyFit,
+           CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.SagaicGewgaws, (int)SagaicGewgawNames.SoftAndTenacious,
+           CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.SagaicGewgaws, (int)SagaicGewgawNames.FallenShoulder,
+           CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.SagaicGewgaws, (int)SagaicGewgawNames.SharpshootersVest,
+           CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.SagaicGewgaws, (int)SagaicGewgawNames.HolyKris,
+           CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.SagaicGewgaws, (int)SagaicGewgawNames.HornsAndBalls,
+           CauseType.Items, 2);
+
             }
             if (Input.GetKeyDown(KeyCode.G))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Gems, (int)GemNames.Amber,
+                InitItemToInv(SlotType.CommonInv, ItemType.SagaicGewgaws, (int)SagaicGewgawNames.EasyFit,
                             CauseType.Items, 2);
             }            
         }

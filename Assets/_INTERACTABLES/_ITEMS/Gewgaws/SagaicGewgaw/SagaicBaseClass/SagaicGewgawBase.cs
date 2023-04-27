@@ -13,10 +13,11 @@ namespace Interactables
         public  CharController charController { get; set; }
         public  List<int> buffIndex { get; set; }
         public List<int> expIndex { get; set; }
-        public  List<string> displayStrs { get; set; }
+        public  List<string> displayStrs { get; set; } = new List<string>();
         public abstract void GewGawSagaicInit();  // connect the charController and other things
         public abstract void EquipGewgawSagaic();
         public  abstract void UnEquipSagaic();
+
     }
 
 

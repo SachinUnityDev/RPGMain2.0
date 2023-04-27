@@ -46,7 +46,8 @@ namespace Interactables
 
         public void InitItem(int itemId, int maxInvStackSize)
         {
-           
+           this.itemId = itemId;
+           this.maxInvStackSize = maxInvStackSize;
         }
 
         public void OnHoverItem()

@@ -10,10 +10,16 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class Spiteeth : SagaicGewgawBase
+    public class Spiteeth : SagaicGewgawBase, Iitems
     {
         public override SagaicGewgawNames sagaicGewgawName => SagaicGewgawNames.Spiteeth;
 
+        public ItemType itemType => ItemType.SagaicGewgaws;
+        public int itemName => (int)SagaicGewgawNames.Spiteeth;
+        public int maxInvStackSize { get; set; }
+        public SlotType invSlotType { get; set; }
+        public List<int> allBuffs { get; set; }
+        public int itemId { get; set; }
 
         // First 3 rds of combat: -2 Haste to enemy party	
         // +6-10 Dark Res and +6-10 Earth Res
@@ -24,9 +30,14 @@ namespace Interactables
         {
             valDark = UnityEngine.Random.Range(6, 10);
             valEarth = UnityEngine.Random.Range(6, 10);
-            // 
-
-
+            string str = "First 3 rds of combat: -2 Haste to enemy party";
+            displayStrs.Add(str);
+            str = $"+{valDark} Dark Res, +{valEarth} Earth Res";
+            displayStrs.Add(str);
+            str = "If Ally: Spider: +4 Vigor and Wp";
+            displayStrs.Add(str);
+            str = "If Ally: Spider: +1 Hp and Stm Regen";
+            displayStrs.Add(str);
         }
         void OnSpiderAddedToParty(CharNames charNames)
         {
@@ -106,5 +117,17 @@ namespace Interactables
                 charController.buffController.RemoveBuff(i);
             }
         }
+        public void InitItem(int itemId, int maxInvStackSize)
+        {
+            this.itemId = itemId;
+            this.maxInvStackSize = maxInvStackSize;
+            GewGawSagaicInit();
+        }
+
+        public void OnHoverItem()
+        {
+
+        }
+
     }
 }

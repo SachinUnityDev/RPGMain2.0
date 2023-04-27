@@ -6,20 +6,28 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class GreywargsHunger : SagaicGewgawBase
+    public class GreywargsHunger : SagaicGewgawBase, Iitems
     {
-        public override SagaicGewgawNames sagaicGewgawName => SagaicGewgawNames.GreyWargsHunger;        
+        public override SagaicGewgawNames sagaicGewgawName => SagaicGewgawNames.GreyWargsHunger;
 
         //+2 morale for each Kugharian in party(self included)
         //+30% Hunger	
         //+14- 20 Air Res	
         //+20% dmg until eoc when First Blood
 
+        public int itemId { get; set; }
+        public ItemType itemType => ItemType.SagaicGewgaws;
+        public int itemName => (int)SagaicGewgawNames.GreyWargsHunger;
+        public int maxInvStackSize { get; set; }
+        public SlotType invSlotType { get; set; }
+        public List<int> allBuffs { get; set; } = new List<int>();
         int valAir;
 
         public override void GewGawSagaicInit()
         {
-            valAir = UnityEngine.Random.Range(14 , 21);            
+            valAir = UnityEngine.Random.Range(14 , 21);
+
+          
         }
 
         void OnCharStateStart(CharStateModData charStateModData)
@@ -58,6 +66,17 @@ namespace Interactables
             {
                 charController.buffController.RemoveBuff(i);
             }
+        }
+
+        public void InitItem(int itemId, int maxInvStackSize)
+        {
+            this.itemId = itemId;
+            this.maxInvStackSize = maxInvStackSize;
+        }
+
+        public void OnHoverItem()
+        {
+           
         }
     }
 }

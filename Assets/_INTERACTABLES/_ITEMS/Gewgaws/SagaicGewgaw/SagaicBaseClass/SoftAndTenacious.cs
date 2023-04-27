@@ -21,10 +21,19 @@ namespace Interactables
         //First 3 rds of combat: Soaked	
         //+1 Morale and Luck per Beastmen in party
         int dmgChgVal;
-
+        int valFortorg; 
         public override void GewGawSagaicInit()
         {
-            dmgChgVal = UnityEngine.Random.Range(36, 46);
+            dmgChgVal = UnityEngine.Random.Range(36, 47);
+            valFortorg = UnityEngine.Random.Range(3, 6);
+            string str = $"When Unslakable: +36-46% Dmg";
+            displayStrs.Add(str);
+            str = $"First 3 rds of combat: Soaked";
+            displayStrs.Add(str);
+            str = "+1 Morale and Luck per Beastmen in party";
+            displayStrs.Add(str);
+            str = $"{valFortorg} Fort Org";
+            displayStrs.Add(str);
         }
 
  
@@ -44,7 +53,7 @@ namespace Interactables
         void ApplyIfUnslackableFx()
         {
             AttribData statData = charController.GetAttrib(AttribName.damage);
-            float dmgMult = dmgChgVal / 100f;
+            float dmgMult = 1+ (dmgChgVal / 100f);
             int buffID = charController.buffController.ApplyBuffOnRange
                 (CauseType.SagaicGewgaw, charController.charModel.charID,
                   (int)sagaicGewgawName, AttribName.damage, (int)statData.maxRange * dmgMult,
@@ -92,7 +101,9 @@ namespace Interactables
 
         public void InitItem(int itemId, int maxInvStackSize)
         {
-           
+            this.itemId = itemId;
+            this.maxInvStackSize = maxInvStackSize;
+            GewGawSagaicInit();
         }
 
         public void OnHoverItem()

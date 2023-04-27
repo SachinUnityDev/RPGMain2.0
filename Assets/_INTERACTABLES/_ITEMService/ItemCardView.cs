@@ -318,7 +318,6 @@ namespace Interactables
                         itemSubTypeTrans.GetChild(0).GetComponent<TextMeshProUGUI>().text
                                                                     = gemSO.gemType.ToString().CreateSpace();
 
-
                         transform.GetComponent<Image>().sprite = itemViewSO.lyricBG; 
                         //mid                       
                  
@@ -351,7 +350,8 @@ namespace Interactables
 
                         transform.GetComponent<Image>().sprite = itemViewSO.sagaicBG;
                         //mid
-                        FillMid(sagaicGewgawSO.allLines);
+                        SagaicGewgawBase sagaicBase = item as SagaicGewgawBase;
+                        FillMid(sagaicBase.displayStrs);
 
                         //btm
                         itemSlotTrans.gameObject.SetActive(false);

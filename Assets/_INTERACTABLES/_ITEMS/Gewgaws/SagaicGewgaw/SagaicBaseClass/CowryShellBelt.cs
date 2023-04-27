@@ -6,16 +6,35 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class CowryShellBelt : SagaicGewgawBase
+    public class CowryShellBelt : SagaicGewgawBase, Iitems
     {
         //Gain +5 Vigor when Feebleminded, Confused, Despaired, Rooted	
         //-10% Thirst and +10% Hunger	
         //+3 Morale when Starving, -2 Morale when Unslakable
         public override SagaicGewgawNames sagaicGewgawName => SagaicGewgawNames.CowryShellBelt;
+
+        public int itemId { get; set; }
+
+        public ItemType itemType => ItemType.SagaicGewgaws;
+
+        public int itemName => (int)SagaicGewgawNames.CowryShellBelt;
+
+        public int maxInvStackSize { get; set; }
+        public SlotType invSlotType { get; set; }
+        public List<int> allBuffs { get; set; } = new List<int>();
+
         bool charStateFX1Applied; 
         public override void GewGawSagaicInit()
         {
-            charStateFX1Applied = false; 
+            charStateFX1Applied = false;
+            string str = "When Feebleminded, Confused, Despaired, Rooted: +5 Vigor";
+            displayStrs.Add(str);
+            str = "When Starving: +3 Morale";
+            displayStrs.Add(str);
+            str = "When Unslakable: -2 Morale";
+            displayStrs.Add(str);
+            str = "+10% Hunger, -10% Thirst";
+            displayStrs.Add(str);
         }
 
         public override void EquipGewgawSagaic()
@@ -68,6 +87,19 @@ namespace Interactables
 
         }
         void OnCharStateEndFX2(CharStateModData charStateModData)
+        {
+
+        }
+
+        public void InitItem(int itemId, int maxInvStackSize)
+        {
+            this.itemId = itemId;
+            this.maxInvStackSize = maxInvStackSize;
+            GewGawSagaicInit();
+        }
+
+
+        public void OnHoverItem()
         {
 
         }

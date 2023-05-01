@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Policy;
 using UnityEngine;
 
 
@@ -9,21 +10,21 @@ namespace Common
     {
         public TrapMGModel trapMGModel;
         public TrapMGSO trapMGSO;
-        void Start()
-        {
-            trapMGModel = new TrapMGModel(trapMGSO); 
-        }
+        public TrapView trapView; 
+
+        public MGGameState trapGameState;
+
+        public int currLetterHL; 
+    
         public void InitGame()
         {
+            trapMGModel = new TrapMGModel(trapMGSO);
+            
+            trapGameState = MGGameState.Start;
+            trapView.StartSeq();
 
         }
-        public void OnSuccess()
-        {
 
-        }
-        public void OnFailed()
-        {
 
-        }
     }
 }

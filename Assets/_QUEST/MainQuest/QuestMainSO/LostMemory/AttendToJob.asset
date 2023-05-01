@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questObj: 3
   objName: Attend to Job and See Khalid after
-  objState: 1
+  objState: 3

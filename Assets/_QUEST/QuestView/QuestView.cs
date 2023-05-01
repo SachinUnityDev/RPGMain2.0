@@ -37,8 +37,7 @@ namespace Quest
         }
         public void UnLoad()
         {   
-            UIControlServiceGeneral.Instance.TogglePanel(this.gameObject, false);
-            objPanel.gameObject.SetActive(false);   
+            UIControlServiceGeneral.Instance.TogglePanel(this.gameObject, false);          
         }
     }
 }

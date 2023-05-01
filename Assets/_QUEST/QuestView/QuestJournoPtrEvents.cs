@@ -27,8 +27,9 @@ namespace Quest
                 txt.text = "";
             }
             else
-            {       
+            {   
                     txt.text = questModel.QuestNameStr;
+                    
                     if (questModel.questState == QuestState.Completed)
                         txt.fontStyle = FontStyles.Strikethrough;                
             }
@@ -37,15 +38,29 @@ namespace Quest
         {
             if (questModel == null || questModel.questName == QuestNames.None) return;
             questView.objPanel.gameObject.SetActive(true);
+            bool objTobeTaken = false; 
             Transform container = questView.objPanel.GetChild(1); 
             for (int i = 0; i < container.childCount; i++)
             {
-                if (i < questModel.allObjModel.Count)
-                    container.GetChild(i).GetComponent<TextMeshProUGUI>().text
-                        = $"{i+1}. " + questModel.allObjModel[i].objNameStr;
+                TextMeshProUGUI txt = container.GetChild(i).GetComponent<TextMeshProUGUI>();
+                txt.fontStyle = FontStyles.Normal;
+                if (i < questModel.allObjModel.Count && !objTobeTaken)
+                    if(questModel.allObjModel[i].objState == QuestState.ToBeTaken)
+                    {
+                        txt.text = $"{i + 1}. " + questModel.allObjModel[i].objNameStr;
+                        objTobeTaken = true;
+                    }                        
+                    else if(questModel.allObjModel[i].objState == QuestState.Completed)
+                    {
+                        txt.text = $"{i + 1}. " + questModel.allObjModel[i].objNameStr;
+                        txt.fontStyle = FontStyles.Strikethrough;
+                    }
+                    else
+                    {
+                        txt.text = ""; 
+                    }                        
                 else
-                    container.GetChild(i).GetComponent<TextMeshProUGUI>().text
-                        = "";
+                    txt.text = "";
             }
         }
 

@@ -63,7 +63,7 @@ namespace Quest
         Completed, 
     }
 
-    public enum CityEncounterNames
+    public enum CityENames
     {
         None,
         StreetUrchin,

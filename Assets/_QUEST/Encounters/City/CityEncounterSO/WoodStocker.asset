@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f415af01e424194282aaab1f072bbda, type: 3}
   m_Name: WoodStocker
   m_EditorClassIdentifier: 
-  encounterName: 3
+  cityEName: 3
   encounterSeq: 0
-  isLocked: 0
+  state: 0
   descTxt: 'A lordly looking man approached you - a look not very common in this
     district. He got some jewelry circled around his neck probably enough to buy
     a few houses in the Commoners'' District.

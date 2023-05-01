@@ -8,7 +8,7 @@ namespace Quest
 {
     public class StreetUrchin0 : CityEncounterBase
     {
-        public override CityEncounterNames encounterName => CityEncounterNames.StreetUrchin; 
+        public override CityENames encounterName => CityENames.StreetUrchin; 
         public override int seq => 0;
         public override void OnChoiceASelect()
         {
@@ -18,13 +18,17 @@ namespace Quest
             if (charModel.skillPts > 1)
                 charModel.skillPts--;
 
-            EncounterService.Instance.cityEController.CloseCityETree(encounterName, seq); 
+            EncounterService.Instance.cityEController.CloseCityETree(encounterName, seq);
+            resultStr = "Kid swore on your mother and ran away.";
+            strFX = "Abbas lost a skill point"; 
         }
 
         public override void OnChoiceBSelect()
         {
             EcoServices.Instance.DebitPlayerInv(new Currency(0, 6));
-            EncounterService.Instance.cityEController.UnLockNext(encounterName, seq);            
+            EncounterService.Instance.cityEController.UnLockNext(encounterName, seq);
+            resultStr = "Maybe you gained nothing, but you made a poor kid happy.";
+            strFX = "You lost 6 bronze coins";
         }
         public override bool PreReqChk()
         {

@@ -47,9 +47,8 @@ namespace Common
 
 
             CalendarService.Instance.Init();
-
+            EncounterService.Instance.EncounterInit();
             CharService.Instance.Init();
-
             BestiaryService.Instance.Init();
             ItemService.Instance.Init();
             FameService.Instance.Init();

@@ -7,7 +7,7 @@ namespace Quest
 {
     public class HotPriestess0 : CityEncounterBase
     {
-        public override CityEncounterNames encounterName => CityEncounterNames.HotPriestess; 
+        public override CityENames encounterName => CityENames.HotPriestess; 
 
         public override int seq => 0;
 
@@ -16,6 +16,8 @@ namespace Quest
         {
             onChoiceASelect= true;
             EncounterService.Instance.cityEController.UnLockNext(encounterName, seq);
+            resultStr = "Her voice is tempting. You can't resist but talk to such a nice and delicate lady.";
+            strFX = ""; 
         }
 
         public override void OnChoiceBSelect()
@@ -23,6 +25,8 @@ namespace Quest
             DialogueModel dialogueModel = DialogueService.Instance.GetDialogueModel(DialogueNames.WaterVsFire);
             dialogueModel.isLocked = false;
             EncounterService.Instance.cityEController.CloseCityETree(encounterName, seq);
+            resultStr = "I am not a pious man, you replied with a serious face. I guess i don't need any gods' blessing. Now get that clevage out of my sight woman!";
+            strFX = "";
         }
         public override bool PreReqChk()
         {

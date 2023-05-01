@@ -9,7 +9,7 @@ namespace Quest
     [CreateAssetMenu(fileName = "CityEncounterSO", menuName = "Quest/CityEncounterSO")]
     public class CityEncounterSO : ScriptableObject
     {
-        public CityEncounterNames encounterName;
+        public CityENames cityEName;
         public int encounterSeq;
         public CityEState state; 
 

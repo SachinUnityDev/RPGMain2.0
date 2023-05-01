@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f415af01e424194282aaab1f072bbda, type: 3}
   m_Name: HotPriestess1
   m_EditorClassIdentifier: 
-  encounterName: 2
+  cityEName: 2
   encounterSeq: 1
-  isLocked: 1
+  state: 0
   descTxt: The priestess from the other day appeared in the marketplace and dragged
     you into an isolated street. As she draw close to you, the heat of her body surrounds
     you. The elven woman is like a walking ember. She is hot, literally hot!

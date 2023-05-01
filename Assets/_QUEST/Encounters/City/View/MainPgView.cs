@@ -41,7 +41,7 @@ namespace Quest
         }
         void FillPage()
         {
-            heading.text = encounterModel.encounterName.ToString().CreateSpace();
+            heading.text = encounterModel.cityEName.ToString().CreateSpace();
             desc.text = encounterModel.descTxt; 
         }
     }

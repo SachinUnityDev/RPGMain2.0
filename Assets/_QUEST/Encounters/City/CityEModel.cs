@@ -7,7 +7,7 @@ namespace Quest
 {
     public class CityEModel
     {
-        public CityEncounterNames encounterName;
+        public CityENames cityEName;
         public int encounterSeq;
         public CityEState state;
 
@@ -19,7 +19,7 @@ namespace Quest
 
         public CityEModel(CityEncounterSO cityEncounterSO)
         {
-            encounterName= cityEncounterSO.encounterName;
+            cityEName= cityEncounterSO.cityEName;
             encounterSeq= cityEncounterSO.encounterSeq; 
             state= cityEncounterSO.state;
 
@@ -27,5 +27,8 @@ namespace Quest
             choiceAStr= cityEncounterSO.choiceAStr;
             choiceBStr= cityEncounterSO.choiceBStr; 
         }
+
+
+
     }
 }

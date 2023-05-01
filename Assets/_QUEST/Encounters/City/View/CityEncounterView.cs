@@ -25,9 +25,12 @@ namespace Quest
 
         }
 
-        public void ShowEncounter(CityEncounterNames encounterName, int seq)
+        public void ShowEncounter(CityENames encounterName, int seq)
         {
             cityBase = EncounterService.Instance.cityEFactory.GetCityEncounterBase(encounterName, seq);
+
+            mainPage.GetComponent<MainPgView>().InitMainPage(this, cityBase); 
+            resultPage.GetComponent<ResultPgView>().InitResultPage(this, cityBase);
         }
 
         public void UnLoad()

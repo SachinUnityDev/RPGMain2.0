@@ -1,14 +1,17 @@
 using Common;
 using Interactables;
 using System.Collections;
+using System.Diagnostics;
+using System.Windows.Forms;
 using UnityEngine;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 
 namespace Quest
 {
     public class StreetUrchin2 : CityEncounterBase
     {
-        public override CityEncounterNames encounterName => CityEncounterNames.StreetUrchin;
+        public override CityENames encounterName => CityENames.StreetUrchin;
 
         public override int seq => 2;
 
@@ -25,20 +28,34 @@ namespace Quest
             if (chance.GetChance())
             {
                 TempTraitController tempTraitController = charController.tempTraitController;
-                if(chance.GetChance()) 
-                    tempTraitController.ApplyTempTrait(CauseType.CityEncounter, (int)encounterName, charController.charModel.charID, TempTraitName.Frail); 
+                if(chance.GetChance())
+                {
+                    tempTraitController.ApplyTempTrait(CauseType.CityEncounter, (int)encounterName, charController.charModel.charID, TempTraitName.Frail);
+                    strFX = "Temporary Trait gained: Frail"; 
+                }
                 else
+                {
                     tempTraitController.ApplyTempTrait(CauseType.CityEncounter, (int)encounterName, charController.charModel.charID, TempTraitName.Spineless);
+                    strFX = "Temporary Trait gained: Spineless";
 
+                }
+                resultStr = "'Fucking urchins!' you have screamed as they scurried off. It is possible from now on, you will be known as the bully of the city!";
+                
             }
             else
             {
                 
                 charController.buffController.ApplyBuff(CauseType.CityEncounter, (int)encounterName, charController.charModel.charID,
-                      AttribName.luck, -2, TimeFrame.EndOfDay, 7, false); 
+                      AttribName.luck, -2, TimeFrame.EndOfDay, 7, false);
+                resultStr = "You gave them a clean beating, though can't help but feel whether the gods will curse you for this!";
+                strFX = "Debuff: -2 Luck for 7 days";
+
+
 
             }
-            FameService.Instance.fameController.ChgFame(CauseType.CityEncounter, (int)encounterName, UnityEngine.Random.Range(20, 30));
+            int famechg = UnityEngine.Random.Range(20, 30); 
+            FameService.Instance.fameController.ChgFame(CauseType.CityEncounter, (int)encounterName, famechg);
+            strFX += $"\n{famechg} Fame lost";
         }
 
         public override void OnChoiceBSelect()
@@ -48,12 +65,13 @@ namespace Quest
             float chance = 50f;
             if (chance.GetChance())
             {
-
+                resultStr = "Kids look forever grateful. The one who followed you since the beginning steps forward and says: \"You are a good man. Maybe too good for this city. We will share info about each NPC in this city so you will know what to expect from them and act carefully!";                
             }
             else
             {
-
+                resultStr = "Kids look forever grateful. The one who followed you since the beginning steps forward and says: \"You are a good man and we want to share some of the goods we stole today with you. Here take it. That fat merchant will not need them anyway!\"";
             }
+            strFX = "";
         }
 
         public override bool PreReqChk()

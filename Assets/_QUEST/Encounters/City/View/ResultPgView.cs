@@ -15,7 +15,7 @@ namespace Quest
         
         CityEncounterView cityEView;
         CityEncounterBase cityBase;
-        CityEModel encounterModel;
+        CityEModel cityEModel;
 
         void Start()
         {
@@ -31,15 +31,13 @@ namespace Quest
         {
             this.cityEView = cityEView;
             this.cityBase = cityBase;
-            encounterModel =
+            cityEModel =
                      EncounterService.Instance.cityEController.GetCityEModel(cityBase.encounterName);
             FillPage();
-
-
         }
         void FillPage()
         {
-            heading.text = encounterModel.encounterName.ToString().CreateSpace();
+            heading.text = cityEModel.cityEName.ToString().CreateSpace();
             desc.text = cityBase.resultStr; 
         }
         

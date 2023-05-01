@@ -10,11 +10,11 @@ namespace Quest
     [Serializable]
     public class CityEnCounterData
     {
-        public CityEncounterNames encounterName;
+        public CityENames encounterName;
         public int seq;
         public Type type;
 
-        public CityEnCounterData(CityEncounterNames encounterName, int seq, Type type)
+        public CityEnCounterData(CityENames encounterName, int seq, Type type)
         {
             this.encounterName = encounterName;
             this.seq = seq;
@@ -49,7 +49,7 @@ namespace Quest
             CityEncounterCount = allCityEncounterBases.Count;
         }
 
-        public CityEncounterBase GetCityEncounterBase(CityEncounterNames encounterName, int seq)
+        public CityEncounterBase GetCityEncounterBase(CityENames encounterName, int seq)
         {
             foreach (var encounterBase in allCityEncounterBases)
             {

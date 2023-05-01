@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f415af01e424194282aaab1f072bbda, type: 3}
   m_Name: HotPriestess0
   m_EditorClassIdentifier: 
-  encounterName: 2
+  cityEName: 2
   encounterSeq: 0
-  isLocked: 0
+  state: 0
   descTxt: A good looking woman with pointy ears and coffee skin just passed near
     you. You can feel the heat surging through her body. You realized she could be
     a priestess from the way she dressed. She approached you and started talking

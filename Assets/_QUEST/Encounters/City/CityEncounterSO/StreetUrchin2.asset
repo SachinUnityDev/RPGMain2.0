@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f415af01e424194282aaab1f072bbda, type: 3}
   m_Name: StreetUrchin2
   m_EditorClassIdentifier: 
-  encounterName: 1
+  cityEName: 1
   encounterSeq: 2
-  isLocked: 1
+  state: 0
   descTxt: Street urchin appeared by his gang and all of a sudden you are surrounded
     by many kids. They opened their hands as if each of them request some favor from
     you.

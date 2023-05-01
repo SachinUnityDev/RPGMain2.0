@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f415af01e424194282aaab1f072bbda, type: 3}
   m_Name: StreetUrchin1
   m_EditorClassIdentifier: 
-  encounterName: 1
+  cityEName: 1
   encounterSeq: 1
-  isLocked: 1
+  state: 0
   descTxt: The same kid you have seen the other day approached you again. This time
     he has two friends with him, asking for more coins.
   choiceAStr: Give him 6 bronze coins

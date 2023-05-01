@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class QuestSO : MonoBehaviour
 {
-    public CityEncounterNames encounterName;
+    public CityENames encounterName;
     public int encounterSeq;
     public CityEState state;
 

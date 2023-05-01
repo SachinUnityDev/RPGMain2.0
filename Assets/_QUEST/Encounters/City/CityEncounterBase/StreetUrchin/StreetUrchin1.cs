@@ -9,30 +9,35 @@ namespace Quest
 {
     public class StreetUrchin1 : CityEncounterBase
     {
-        public override CityEncounterNames encounterName => CityEncounterNames.StreetUrchin; 
-
+        public override CityENames encounterName => CityENames.StreetUrchin; 
         public override int seq => 1;
 
         public override void OnChoiceASelect()
         {
             CharModel charModel =
-            CharService.Instance.GetCharCtrlWithName(CharNames.Abbas_Skirmisher).charModel;
+                CharService.Instance.GetCharCtrlWithName(CharNames.Abbas_Skirmisher).charModel;
             float chance1 = 40f;
             if (chance1.GetChance())
             {
                 if (charModel.skillPts > 1)
                     charModel.skillPts--;
+                resultStr = "You turned to the kid and said Kid, take this and get lost!";
+                strFX = "Abbas lost a skill point"; 
             }
             else
             {                
-                 charModel.skillPts++;
+                charModel.skillPts++;
+                resultStr = "Don't take it for granted, you preach the kid, it is not easy to make some coins these days...";
+                strFX = "Abbas gained a skill point";
             }
-            EncounterService.Instance.cityEController.CloseCityETree(encounterName, seq);
+                EncounterService.Instance.cityEController.CloseCityETree(encounterName, seq);
         }
 
         public override void OnChoiceBSelect()
         {
             // nothing happens
+            resultStr = "It is good to make kids happy but maybe it's too much? You asked to yourself...";
+            strFX = "";
         }
 
         public override bool PreReqChk()

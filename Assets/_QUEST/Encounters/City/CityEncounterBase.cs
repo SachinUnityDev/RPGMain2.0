@@ -8,12 +8,14 @@ namespace Quest
 {
     public abstract class CityEncounterBase
     {        
-        public abstract CityEncounterNames encounterName { get; }
+        public abstract CityENames encounterName { get; }
         public abstract int seq { get; }
 
         public CityEModel cityEModel; 
 
         public string resultStr; 
+
+        public string strFX;
         public virtual void CityEInit()
         {
             cityEModel = EncounterService.Instance.cityEController.GetCityEModel(encounterName); 

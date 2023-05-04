@@ -76,9 +76,27 @@ namespace Quest
         None, 
         Locked, 
         UnLockedNAvail,
-        UnAvailable, 
-        Solved,
+        UnAvailable, // pre req not matched but start condition met(Unlocked)
+        Completed,
     }
+
+    public enum MapENames
+    {
+        None,
+        MigratoryBirds,
+        BandOfBanditsOne,
+        BandOfBanditsTwo,
+        BuffaloStampede,
+    }
+
+    public enum Nodes
+    {
+        Node1, 
+        Node2,
+        Node3,
+    }
+
+
 
 }
 

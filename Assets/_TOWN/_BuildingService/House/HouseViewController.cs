@@ -113,10 +113,8 @@ namespace Town
             {
                 child.GetComponent<IPanel>().UnLoad();  
             }
-            
+            TownService.Instance.townViewController.selectBuild = BuildingNames.None;
         }
- 
-
     }
 }
 

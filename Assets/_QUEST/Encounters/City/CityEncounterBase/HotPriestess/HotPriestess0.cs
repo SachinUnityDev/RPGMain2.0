@@ -8,7 +8,6 @@ namespace Quest
     public class HotPriestess0 : CityEncounterBase
     {
         public override CityENames encounterName => CityENames.HotPriestess; 
-
         public override int seq => 0;
 
         bool onChoiceASelect = false; 
@@ -22,11 +21,11 @@ namespace Quest
 
         public override void OnChoiceBSelect()
         {
-            DialogueModel dialogueModel = DialogueService.Instance.GetDialogueModel(DialogueNames.WaterVsFire);
-            dialogueModel.isLocked = false;
+            //DialogueModel dialogueModel = DialogueService.Instance.GetDialogueModel(DialogueNames.WaterVsFire);
+            //dialogueModel.isLocked = false;
             EncounterService.Instance.cityEController.CloseCityETree(encounterName, seq);
-            resultStr = "I am not a pious man, you replied with a serious face. I guess i don't need any gods' blessing. Now get that clevage out of my sight woman!";
-            strFX = "";
+            resultStr = "I am not a pious man, you replied with a serious face. I don't need no gods' blessing. Now get that clevage out of my sight woman!I am not a pious man, you replied with a serious face. I don't need no gods' blessing. Now get that clevage out of my sight woman!I am not a pious man, you replied with a serious face. I don't need no gods' blessing. Now get that clevage out of my sight woman!";
+            strFX = "Loot Gained";
         }
         public override bool PreReqChk()
         {
@@ -44,8 +43,8 @@ namespace Quest
         public override void CityEContinuePressed()
         {
             base.CityEContinuePressed();
-            if(onChoiceASelect)
-                DialogueService.Instance.StartDialogue(DialogueNames.HotPriestess); 
+            if (onChoiceASelect)
+                DialogueService.Instance.StartDialogue(DialogueNames.HotPriestess);
         }
     }
 }

@@ -73,7 +73,7 @@ namespace Town
             {
                 if(child.GetComponent<IBuildName>().BuildingName == selectBuild)
                 {
-                    child.GetComponent<IPanel>().Init(); 
+                    child.GetComponent<IPanel>().Init();                     
                 }
             }
         }

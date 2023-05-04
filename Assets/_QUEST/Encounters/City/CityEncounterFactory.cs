@@ -26,7 +26,7 @@ namespace Quest
     {
         public List<CityEnCounterData> allCityEncounterBases;
         [SerializeField] int CityEncounterCount = 0;
-        void Start()
+        void Awake()
         {
             allCityEncounterBases = new List<CityEnCounterData>();
             InitCityEncounter();  // start of the game

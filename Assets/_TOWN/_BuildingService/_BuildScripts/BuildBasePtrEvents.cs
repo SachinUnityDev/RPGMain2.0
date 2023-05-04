@@ -4,7 +4,8 @@ using System.Diagnostics.Contracts;
 using Town;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI; 
+using UnityEngine.UI;
+using DG.Tweening;
 namespace Common
 {
     public class BuildBasePtrEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
@@ -35,6 +36,7 @@ namespace Common
         {
             buildImg = GetComponent<Image>();
             buildImg.alphaHitTestMinimumThreshold = 0.1f;
+            Hidetxt();
         }
         public void Init(TownViewController townViewController)
         {
@@ -66,6 +68,18 @@ namespace Common
                 buildImg.sprite = buildSO.buildingData.buildExtDayHL;
             }
         }
+
+        void ShowTxt()
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+            transform.GetChild(0).DOScaleX(1, 0.1f); 
+        }
+        void Hidetxt()
+        {
+            transform.GetChild(0).DOScaleX(0, 0.1f);
+            transform.GetChild(0).gameObject.SetActive(false);
+            
+        }
         public void OnSelect()
         {
             isSelect = true; 
@@ -84,12 +98,14 @@ namespace Common
            // int index = transform.GetSiblingIndex();
             townViewController.OnBuildSelect(buildingName);
             SetSpriteNormal();
+            Hidetxt();
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (townViewController == null) return;
             if (townViewController.selectBuild != BuildingNames.None) return; 
             SetSpriteHL();  
+            ShowTxt();
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -97,6 +113,7 @@ namespace Common
             if (townViewController == null) return;
             if (townViewController.selectBuild != BuildingNames.None) return;
             SetSpriteNormal(); 
+            Hidetxt();
         }
 
         #endregion

@@ -113,6 +113,7 @@ namespace Town
         public void UnLoad()
         {
             UIControlServiceGeneral.Instance.TogglePanelOnInGrp(this.gameObject, false);
+            TownService.Instance.townViewController.selectBuild = BuildingNames.None;
         }
         private void Update()
         {

@@ -94,11 +94,14 @@ namespace Town
         void OnMapBtnClick()
         {
             MapService.Instance.mapIntViewPanel.SetActive(true);
-          
         }
         void OnEventBtnClick()
         {
-
+            GameObject panel = EncounterService.Instance.cityEController.cityEPanel.gameObject; 
+            if (panel.activeInHierarchy)
+                panel.GetComponent<IPanel>().UnLoad();
+            else               
+                panel.GetComponent<IPanel>().Load();    
         }
 
 #endregion

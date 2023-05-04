@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: StreetUrchin1
   m_EditorClassIdentifier: 
   cityEName: 1
+  cityENameStr: 
   encounterSeq: 1
   state: 0
+  locationName: 1
   descTxt: The same kid you have seen the other day approached you again. This time
     he has two friends with him, asking for more coins.
   choiceAStr: Give him 6 bronze coins

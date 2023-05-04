@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: StreetUrchin0
   m_EditorClassIdentifier: 
   cityEName: 1
+  cityENameStr: 
   encounterSeq: 0
-  state: 0
+  state: 3
+  locationName: 1
   descTxt: 'A street urchin approached you: "Sir, sir," he called you, grabbing your
     arm, "me and my brothers are very hungry. Can you spare some coins for us?"'
   choiceAStr: Slap and push him away

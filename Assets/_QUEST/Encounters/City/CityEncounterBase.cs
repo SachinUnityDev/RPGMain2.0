@@ -16,9 +16,10 @@ namespace Quest
         public string resultStr; 
 
         public string strFX;
-        public virtual void CityEInit()
+        public virtual void CityEInit(CityEModel cityEModel)
         {
-            cityEModel = EncounterService.Instance.cityEController.GetCityEModel(encounterName); 
+            this.cityEModel = cityEModel;
+            Debug.Log("On model assigned"+ cityEModel.cityENameStr );
         }
         public abstract bool UnLockCondChk();
         public abstract bool PreReqChk();
@@ -27,8 +28,19 @@ namespace Quest
 
         public virtual void CityEContinuePressed()
         {
-            cityEModel.state = CityEState.Solved;
-            cityEModel.dayEventTaken = CalendarService.Instance.dayInGame;
+          //  cityEModel = EncounterService.Instance.cityEController.GetCityEModel(encounterName,seq);
+
+
+            if (cityEModel != null)
+            {
+                Debug.Log("On continue pressed" + cityEModel.cityEName);
+                cityEModel.state = CityEState.Completed;
+                cityEModel.dayEventTaken = CalendarService.Instance.dayInGame;
+            }
+            else
+            {
+                Debug.Log("On null found");
+            }
         }
     }
 }

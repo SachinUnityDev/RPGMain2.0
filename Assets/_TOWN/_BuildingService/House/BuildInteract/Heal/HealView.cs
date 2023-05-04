@@ -21,7 +21,7 @@ namespace Town
 
         private void Awake()
         {
-            healBtn.onClick.AddListener(OnHealBtnPressed);
+           // healBtn.onClick.AddListener(OnHealBtnPressed);
         }
 
         void FillSicknessList()

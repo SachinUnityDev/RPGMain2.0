@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: HotPriestess0
   m_EditorClassIdentifier: 
   cityEName: 2
+  cityENameStr: 
   encounterSeq: 0
-  state: 0
+  state: 2
+  locationName: 1
   descTxt: A good looking woman with pointy ears and coffee skin just passed near
     you. You can feel the heat surging through her body. You realized she could be
     a priestess from the way she dressed. She approached you and started talking

@@ -10,6 +10,7 @@ namespace Quest
     {
         public override CityENames encounterName => CityENames.StreetUrchin; 
         public override int seq => 0;
+
         public override void OnChoiceASelect()
         {
             CharModel charModel = 

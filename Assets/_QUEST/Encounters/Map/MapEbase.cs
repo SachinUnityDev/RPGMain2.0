@@ -22,8 +22,7 @@ namespace Quest
            this.mapEModel= mapEModel;
         }
         public abstract void OnChoiceASelect();
-        public abstract void OnChoiceBSelect();
-
+        public abstract void OnChoiceBSelect();    
         public abstract void CityEContinuePressed(); 
         
     }

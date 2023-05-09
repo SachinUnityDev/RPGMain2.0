@@ -12,7 +12,7 @@ namespace Common
         //-12 Cold Res  .. water earth and dark/// landscape debuff
         public override void OnLandscapeInit()
         {
-            foreach (CharController charCtrl in CharService.Instance.allCharsInParty)
+            foreach (CharController charCtrl in CharService.Instance.allCharsInPartyLocked)
             {
                 // change stat using buff controller
                 int charID = charCtrl.charModel.charID;

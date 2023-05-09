@@ -11,7 +11,7 @@ namespace Common
             public override LandscapeNames landscapeName => LandscapeNames.Field;
             public override void OnLandscapeInit()
             {
-                foreach (CharController charCtrl in CharService.Instance.allCharsInParty)
+                foreach (CharController charCtrl in CharService.Instance.allCharsInPartyLocked)
                 {  
                     int charID = charCtrl.charModel.charID;
                     charCtrl.buffController.ApplyBuff(CauseType.Landscape, (int)LandscapeNames.Field

@@ -43,10 +43,20 @@ namespace Interactables
             //    allAvailableChars.Add(c.charModel);
             //}
             allAvailableChars.Clear();
-            rightsChars.Clear();leftChars.Clear();
-            foreach (CharController c in CharService.Instance.allCharsInParty)
+            rightsChars.Clear(); leftChars.Clear();
+            if (CharService.Instance.isPartyLocked)
             {
-                allAvailableChars.Add(c.charModel);
+                foreach (CharController c in CharService.Instance.allCharsInPartyLocked)
+                {
+                    allAvailableChars.Add(c.charModel);
+                }
+            }
+            else
+            {
+                foreach (CharController c in CharService.Instance.allyInPlayControllers)
+                {
+                    allAvailableChars.Add(c.charModel);
+                }
             }
             
             charSelect = allAvailableChars[0];

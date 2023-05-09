@@ -44,7 +44,7 @@ namespace Interactables
             if (charNames != CharNames.Spider_pet) return;
 
             CharController spiderController = 
-            CharService.Instance.allCharsInParty.Find(t => t.charModel.charName == charNames);
+            CharService.Instance.allCharsInPartyLocked.Find(t => t.charModel.charName == charNames);
             if(spiderController != null)
                 ApplyBuffOnSpider(spiderController); 
         }
@@ -96,9 +96,9 @@ namespace Interactables
             buffIndex.Add(buffID);
 
             // if spider already there in party when gewgaw put in slot 
-            if (CharService.Instance.allCharsInParty.Any(t => t.charModel.charName == CharNames.Spider_pet))
+            if (CharService.Instance.allCharsInPartyLocked.Any(t => t.charModel.charName == CharNames.Spider_pet))
             {
-                CharController spiderController = CharService.Instance.allCharsInParty
+                CharController spiderController = CharService.Instance.allCharsInPartyLocked
                                                     .Find(t => t.charModel.charName == CharNames.Spider_pet);
 
                 ApplyBuffOnSpider(spiderController);

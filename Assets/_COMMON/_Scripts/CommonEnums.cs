@@ -49,11 +49,12 @@ namespace Common
     {
         None,      
         Available, 
-        Unavailable_Fame, 
-        Unavailable_Loc, 
+        UnAvailable_Fame, 
+        UnAvailable_Loc, 
         UnAvailable_Prereq,
         UnAvailable_InParty,
-        Unavailable_WhereAboutsUnKnown, //is actually travelling 
+        UnAvailable_WhereAboutsUnKnown, //is actually travelling 
+        UnAvailable_Resting,
     }
 
     public enum LandscapeNames

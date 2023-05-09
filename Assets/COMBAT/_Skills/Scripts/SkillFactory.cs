@@ -54,7 +54,7 @@ namespace Combat
             // CombatEventService.Instance.OnSOC += SkillsInit; 
             //SkillsInit();
           
-            CharService.Instance.OnCharAddedToParty += (CharNames charName) =>SkillsInit();
+            CharService.Instance.OnCharInit += (CharNames charName) =>SkillsInit();
         }
 
         #region SKILL_INIT

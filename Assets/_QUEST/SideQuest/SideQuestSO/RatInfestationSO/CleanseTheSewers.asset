@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 815d4c2d789a9b64197fb0bcfa9f09a3, type: 3}
   m_Name: CleanseTheSewers
   m_EditorClassIdentifier: 
-  questObj: 9
-  objName: Cleanse The Sewers
+  objName: 9
+  objNameStr: Cleanse the sewers
   objState: 1
+  locationName: 1
+  landscapeName: 5
+  distanceInDays: 0
+  desc: Rats are swarming the sewers. Greybrow requested your help. He will allow
+    you to pass through his vault once you decide to get going.

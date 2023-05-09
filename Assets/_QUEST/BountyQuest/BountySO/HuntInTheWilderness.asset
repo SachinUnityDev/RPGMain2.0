@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3288e2884a763834d9f5c8e897f06a67, type: 3}
   m_Name: HuntInTheWilderness
   m_EditorClassIdentifier: 
-  qMainName: 6
-  QuestNameStr: Hunti in the Wilderness
+  questName: 6
+  questNameStr: Hunt in the wilderness
   questState: 1
   allObjSO:
   - {fileID: 11400000, guid: a97c89a9f74db6c4caaa6ed542bd08a0, type: 2}
   questType: 3
+  hasCamp: 0
+  questMode: 2

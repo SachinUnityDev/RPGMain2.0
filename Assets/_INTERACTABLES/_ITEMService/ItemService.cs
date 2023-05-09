@@ -90,7 +90,7 @@ namespace Interactables
         }
         public void Init()
         {            
-            foreach (CharController charController in CharService.Instance.allCharsInParty)
+            foreach (CharController charController in CharService.Instance.allCharsInPartyLocked)
             {
                 ItemController itemController = 
                             charController.gameObject.AddComponent<ItemController>();

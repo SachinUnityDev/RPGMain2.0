@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 815d4c2d789a9b64197fb0bcfa9f09a3, type: 3}
   m_Name: TravelIntoTheWilderness
   m_EditorClassIdentifier: 
-  questObj: 11
-  objName: Travel into the heart of the wilderness
+  objName: 14
+  objNameStr: Travel into the wilderness
   objState: 1
+  locationName: 1
+  landscapeName: 4
+  distanceInDays: 0.5
+  desc: Lots of ferocious animals roam in the wilderness. Venture there, check them
+    out and hunt them down - only if you got the courage to do so...

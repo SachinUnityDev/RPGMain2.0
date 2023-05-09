@@ -91,9 +91,9 @@ namespace Quest
 
     public enum Nodes
     {
-        Node1, 
-        Node2,
-        Node3,
+        RatInfest, 
+        ShipRats,
+        HuntWild,
     }
 
 

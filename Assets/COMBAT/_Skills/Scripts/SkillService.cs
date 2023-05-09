@@ -146,7 +146,7 @@ namespace Combat
         }
         void Start()
         {
-            InitSkillControllers();
+           // InitSkillControllers();
             // Cn be later Set to the start of Combat Event
           
             SkillApply += SkillEventtest;

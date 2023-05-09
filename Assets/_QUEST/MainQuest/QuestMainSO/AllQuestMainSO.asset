@@ -17,3 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 699c637eca7b0c74ab66e07b1638a4f6, type: 2}
   - {fileID: 11400000, guid: b8d615c2dd0ca7c48a3cb9b46d8eeb9e, type: 2}
   - {fileID: 11400000, guid: 21634ba5ad7a60b43acb875a17f1f782, type: 2}
+  mainQIcon: {fileID: 21300000, guid: 4e8bb3b64f2159d4b9a148766d3cf2e0, type: 3}
+  sideQIcon: {fileID: 21300000, guid: c4739b569ac88844699f4678bc8116ea, type: 3}
+  companionQIcon: {fileID: 21300000, guid: 8f62d42037846ce4990563831de47699, type: 3}
+  bountyQIcon: {fileID: 21300000, guid: e78fa90932abe0a42ada08b13f498a08, type: 3}

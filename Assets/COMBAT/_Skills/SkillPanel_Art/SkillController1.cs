@@ -43,8 +43,10 @@ namespace Common
         {
             charController = gameObject.GetComponent<CharController>();
             charName = charController.charModel.charName;
+            
+            CharService.Instance.OnCharInit += InitSkillList;
+           // CharService.Instance.OnCharAddedToParty += InitSkillList;
 
-            CharService.Instance.OnCharAddedToParty += InitSkillList;
         }
         public void InitSkillList(CharNames _charName)
         {

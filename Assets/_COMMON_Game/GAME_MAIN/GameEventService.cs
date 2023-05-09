@@ -44,18 +44,20 @@ namespace Common
         }
         public void On_TownEnter(LocationName locationName)
         {
-
-
+          
             CalendarService.Instance.Init();
             EncounterService.Instance.EncounterInit();
             CharService.Instance.Init();
+            UIControlServiceGeneral.Instance.InitUIGeneral();
+
+
             BestiaryService.Instance.Init();
             ItemService.Instance.Init();
             FameService.Instance.Init();
             LevelService.Instance.Init();
             TownService.Instance.Init(locationName);
             OnTownEnter?.Invoke(locationName);
-
+            QuestMissionService.Instance.InitQuestMission();    
         }
 
         public void On_TownExit(LocationName locationName)

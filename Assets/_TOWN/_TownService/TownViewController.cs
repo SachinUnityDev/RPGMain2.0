@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Common;
-using Interactables;
-using UnityEngine.Rendering;
+
 
 namespace Town
 {
@@ -19,7 +18,6 @@ namespace Town
         [SerializeField] Button rosterBtn;
         [SerializeField] Button jobBtn;
         [SerializeField] Button inventoryBtn;
-
 
         [Header("Right Town Btns")]
         [SerializeField] Button eventBtn;
@@ -47,8 +45,6 @@ namespace Town
         private void Start()
         {
             CalendarService.Instance.OnChangeTimeState += TownViewInit; 
-            
-
         }
 
         

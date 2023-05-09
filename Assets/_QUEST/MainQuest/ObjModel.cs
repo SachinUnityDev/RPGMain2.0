@@ -14,8 +14,8 @@ namespace Quest
 
         public ObjModel(ObjSO objSO)
         {
-           ObjName = objSO.questObj;
-           objNameStr = objSO.objName;
+           ObjName = objSO.objName;
+           objNameStr = objSO.objNameStr;
          
            objState = objSO.objState; 
         }

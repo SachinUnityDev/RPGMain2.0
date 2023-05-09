@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3288e2884a763834d9f5c8e897f06a67, type: 3}
   m_Name: RatInfestation
   m_EditorClassIdentifier: 
-  qMainName: 4
-  QuestNameStr: Rat Infestation
+  questName: 4
+  questNameStr: Rat Infestation
   questState: 1
   allObjSO:
   - {fileID: 11400000, guid: 396aaa3267f6bd94b992e621e7cd3c81, type: 2}
   - {fileID: 11400000, guid: 53053e23d72c27d44b1cc4647732dff6, type: 2}
   questType: 2
+  hasCamp: 0
+  questMode: 2

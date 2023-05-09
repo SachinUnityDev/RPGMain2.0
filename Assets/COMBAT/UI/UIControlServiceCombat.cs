@@ -6,6 +6,7 @@ using DG.Tweening;
 using System.Linq;
 using TMPro;
 using System;
+using Common;
 
 public enum UITransformState
 {
@@ -45,9 +46,9 @@ namespace Combat
         [SerializeField] UITransformState currentState;
         [SerializeField] List<UIElementsHLSO> allUIElementHLSO = new List<UIElementsHLSO>();
 
+   
 
-
-#region Scaling
+        #region SCALING
         public void ToggleUIStateScale(GameObject UIObject, UITransformState newState)
         {
 

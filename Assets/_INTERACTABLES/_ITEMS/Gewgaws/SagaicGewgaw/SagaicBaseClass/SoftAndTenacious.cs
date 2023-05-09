@@ -73,7 +73,7 @@ namespace Interactables
             CombatEventService.Instance.OnSOC += OnStartOfCombat;
 
             // Beastmen FX
-            foreach (CharController c in CharService.Instance.allCharsInParty)
+            foreach (CharController c in CharService.Instance.allCharsInPartyLocked)
             {
                 if (c.charModel.raceType == RaceType.Beastmen)
                 {

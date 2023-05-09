@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3288e2884a763834d9f5c8e897f06a67, type: 3}
   m_Name: LostMemory
   m_EditorClassIdentifier: 
-  qMainName: 1
-  QuestNameStr: Lost Memory
+  questName: 1
+  questNameStr: Lost Memory
   questState: 1
   allObjSO:
   - {fileID: 11400000, guid: 2881d2498347550468912da8f5a562b8, type: 2}
@@ -21,3 +21,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ee638308e9c00524dad61402622bc393, type: 2}
   - {fileID: 11400000, guid: 8829d630dbe000b41a94ca3898a95f35, type: 2}
   questType: 1
+  hasCamp: 0
+  questMode: 2

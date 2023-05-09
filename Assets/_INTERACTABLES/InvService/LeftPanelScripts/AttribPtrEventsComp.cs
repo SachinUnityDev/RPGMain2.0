@@ -31,7 +31,7 @@ namespace Interactables
         }
         private void Start()
         {
-            CharService.Instance.allCharsInParty.ForEach(t => t.OnAttribCurrValSet
+            CharService.Instance.allCharsInPartyLocked.ForEach(t => t.OnAttribCurrValSet
                += (AttribModData charModData) => PopulateData(CharService.Instance.GetCharCtrlWithCharID
                (charModData.effectedCharNameID).charModel));
          

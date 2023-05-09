@@ -14,21 +14,58 @@ namespace Quest
         
         [Header(" Q Main ")]
         public AllQuestSO allQuestMainSO;        
-        public QuestController qMainController;
+        public QuestController questController;
 
         [Header(" Quest View")]
         public Transform QuestMissionView;
+        public QuestEmbarkView questEmbarkView;
 
         public List<QuestModel> allQuestModels = new List<QuestModel>();
+        public List<QuestBase> allQuestBase = new List<QuestBase>();
+        [SerializeField] int questBaseCount = 0; 
+        public QuestFactory questFactory; 
 
         void Start()
         {
-            qMainController = gameObject.AddComponent<QuestController>();
-
-            InitAllQuest(); 
+            questFactory = GetComponent<QuestFactory>();
+            questController = GetComponent<QuestController>();  
         }
 
-        void InitAllQuest()
+        public void InitQuestMission()
+        {
+            InitAllQuestModel();
+            InitAllQuestbase();
+        }
+        public QuestBase GetQuestBase(QuestNames questName)
+        {
+            int index = allQuestBase.FindIndex(t=>t.questName == questName);
+            if(index != -1)
+            {
+                return allQuestBase[index];
+            }
+            else
+            {
+                Debug.Log("Quest base not found" + questName);
+                return null; 
+            }
+        }
+
+
+        public QuestModel GetQuestModel(QuestNames questName)
+        {
+            int index = allQuestModels.FindIndex(t=>t.questName == questName);
+            if(index != -1)
+            {
+                return allQuestModels[index];   
+            }
+            else
+            {
+                Debug.Log("Quest model not found" + questName); 
+            }
+            return null; 
+        }
+
+        void InitAllQuestModel()
         {
             foreach (QuestSO questSO in allQuestMainSO.allQuestSO)
             {
@@ -36,7 +73,16 @@ namespace Quest
                 allQuestModels.Add(questModel);
             }
         }
-
+        void InitAllQuestbase()
+        {
+            foreach (QuestModel quest in allQuestModels)
+            {
+                Debug.Log("Quest name" + quest.questName);
+                QuestBase qBase = questFactory.GetQuestBase(quest.questName); 
+                allQuestBase.Add(qBase);
+            }
+            questBaseCount = allQuestBase.Count; 
+        }
         public List<QuestModel> GetAllQuestModelsOfType(QuestType questType)
         {
             List<QuestModel> questModels = new List<QuestModel>();  

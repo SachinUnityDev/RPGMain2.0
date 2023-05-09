@@ -10,11 +10,15 @@ namespace Common
 {
     public class CharService : MonoSingletonGeneric<CharService>, ISaveableService
     {
+        public event Action<CharNames> OnCharInit;
         public event Action<CharNames> OnCharAddedToParty;
         public event Action OnPartyLocked; 
-        public event Action OnPartyUnlocked;
+        public event Action OnPartyDisbanded;
 
-        [Header("Character Scriptables")]
+
+        public bool isPartyLocked = false; 
+
+        [Header("Character SO")]
         public AllCharSO allCharSO; 
         public List<CharacterSO> allAllySO = new List<CharacterSO>();
        // public List<NPCSO> allNPCSOls = new List<NPCSO>();
@@ -46,7 +50,7 @@ namespace Common
         public List<CharModel> allyUnLockedCompModels;// char Unlocked in the game
         public List<CharModel> allAvailCompModels;
         
-        public List<CharController> allCharsInParty; // on party Locked and Set 
+        public List<CharController> allCharsInPartyLocked; // on party Locked and Set 
 
         public List<CharController> charDiedinLastTurn;
         [Header("Character Pos")]
@@ -61,7 +65,7 @@ namespace Common
 
         void Start()
         {
-            lastCharID = 0;         
+            lastCharID = 0;         isPartyLocked= false;
             CombatEventService.Instance.OnEOT += UpdateOnDeath;
        
             DontDestroyOnLoad(this.gameObject);
@@ -194,7 +198,7 @@ namespace Common
 
             charsInPlayControllers.Add(charController);
             allyInPlayControllers.Add(charController);
-            
+           
             charsInPlay.Add(go);
             allyInPlay.Add(go);
             allCharModels.Add(charModel);
@@ -244,12 +248,19 @@ namespace Common
             //return charCtrl;
             return charController; 
         }
-
+        public void On_CharInit()
+        {
+            foreach (var charController in charsInPlayControllers) 
+            {
+                OnCharInit?.Invoke(charController.charModel.charName);
+            }
+        
+        }
         public List<int> ApplyBuffOnPartyExceptSelf(CauseType causeType, int causeName, int causeByCharID,
                                     AttribName statName, int value, TimeFrame timeFrame, int netTime, bool isBuff, CharMode charMode)
         {
             List<int> grpBuffIDs = new List<int>();
-            foreach (CharController charController in CharService.Instance.allCharsInParty)
+            foreach (CharController charController in CharService.Instance.allCharsInPartyLocked)
             {
                 if(charController.charModel.charMode== charMode && charController.charModel.charID != causeByCharID)
                 {
@@ -268,11 +279,15 @@ namespace Common
             {
                 On_CharAddToParty(GetCharCtrlWithName(CharNames.Abbas_Skirmisher)); 
             }
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                On_CharInit();
+            }
         }
         public void On_CharAddToParty(CharController charController)
         {
             Debug.Log("On Char Added" + charController.charModel.charName);
-            allCharsInParty.Add(charController);
+            allCharsInPartyLocked.Add(charController);
             OnCharAddedToParty?.Invoke(charController.charModel.charName);
         }
 

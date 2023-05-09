@@ -22,7 +22,8 @@ namespace Common
         public GameObject rosterPanelPrefab;
         public GameObject charPortPreFab;
 
-        
+        public Sprite rosterLock; 
+        public Sprite rosterDisband; 
 
         public List<AvailOfCharStrData> allAvailStateStr = new List<AvailOfCharStrData>();
 

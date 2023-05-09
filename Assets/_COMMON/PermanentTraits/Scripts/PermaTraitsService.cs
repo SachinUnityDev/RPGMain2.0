@@ -26,7 +26,7 @@ namespace Common
 
         public void ApplyPermaTraits()
         {            
-            foreach (CharController charCtrl in CharService.Instance.allCharsInParty)
+            foreach (CharController charCtrl in CharService.Instance.allCharsInPartyLocked)
             {
                charCtrl.permaTraitController.ApplyPermaTraits();
             }

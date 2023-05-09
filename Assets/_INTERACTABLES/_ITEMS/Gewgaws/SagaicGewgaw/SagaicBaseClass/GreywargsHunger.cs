@@ -44,7 +44,7 @@ namespace Interactables
         public override void EquipGewgawSagaic()
         {
             charController = InvService.Instance.charSelectController;
-            foreach (CharController c in CharService.Instance.allCharsInParty)
+            foreach (CharController c in CharService.Instance.allCharsInPartyLocked)
             {
                 if (c.charModel.cultType == CultureType.Kugharian)
                 {

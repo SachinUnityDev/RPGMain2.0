@@ -16,8 +16,8 @@ namespace Quest
     [CreateAssetMenu(fileName = "QuestSO", menuName = "Quest/QuestSO")]
     public class QuestSO : ScriptableObject
     {
-        public QuestNames qMainName;
-        public string QuestNameStr;
+        public QuestNames questName;
+        public string questNameStr;
         public QuestState questState;
         public List<ObjSO> allObjSO = new List<ObjSO>();
         public QuestType questType;
@@ -26,7 +26,23 @@ namespace Quest
         public EmbarkInfo embarkInfo;
 
         public bool hasCamp;
-        public QuestMode questMode; 
+        public QuestMode questMode;
 
+        public ObjSO GetObjSO(QuestObjNames objName)
+        {
+            int index =
+                allObjSO.FindIndex(t => t.objName == objName); 
+
+            if(index != -1)
+            {
+               return allObjSO[index];
+            }
+            else
+            {
+                Debug.Log("Quest Obj SO not found" + objName); 
+            }
+            return null; 
+        }
+      
     }
 }

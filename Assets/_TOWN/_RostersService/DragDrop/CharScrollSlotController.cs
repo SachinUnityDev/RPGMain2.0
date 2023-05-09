@@ -59,7 +59,7 @@ namespace Common
                 RosterViewController rosterViewController = RosterService.Instance.rosterViewController;
                 rosterViewController.PopulatePortrait2_Char(draggedChar);
               
-                CharService.Instance.allCharsInParty.Remove(charController);
+                CharService.Instance.allCharsInPartyLocked.Remove(charController);
                 Destroy(draggedGO.gameObject);
 
             }

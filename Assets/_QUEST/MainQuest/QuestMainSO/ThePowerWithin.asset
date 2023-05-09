@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3288e2884a763834d9f5c8e897f06a67, type: 3}
   m_Name: ThePowerWithin
   m_EditorClassIdentifier: 
-  qMainName: 2
-  QuestNameStr: The Power Within
+  questName: 2
+  questNameStr: The Power within
   questState: 1
   allObjSO:
   - {fileID: 11400000, guid: a6db4e2966c62124d8dbe38bbec484ba, type: 2}
@@ -21,3 +21,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 674c61badd7cef24f9460dc7936a67ff, type: 2}
   - {fileID: 11400000, guid: 2b1ec216ede00e645a5cf79dbb91769b, type: 2}
   questType: 1
+  hasCamp: 0
+  questMode: 2

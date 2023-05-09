@@ -8,16 +8,20 @@ namespace Quest
 {
     public class QuestController : MonoBehaviour
     {
-        
-        void Start()
+        public QuestModel questModel;
+        public QuestSO questSO;
+        public QuestBase questBase;
+        public ObjModel objModel; 
+
+        public void ShowQuestEmbarkView(QuestNames questName, QuestObjNames objName)
         {
-            
+            questModel = QuestMissionService.Instance.GetQuestModel(questName);
+            questBase = QuestMissionService.Instance.GetQuestBase(questName);   
+            questSO= QuestMissionService.Instance.allQuestMainSO.GetQuestSO(questName);
+            objModel = questModel.GetObjModel(objName);
+            QuestMissionService.Instance.questEmbarkView.GetComponent<QuestEmbarkView>()
+                                .ShowQuestEmbarkView(questModel, questSO, questBase,objModel); 
         }
 
-        public void InitQMainController(AllQuestSO allQuestMainSO)
-        {
-         
-        }
-        
     }
 }

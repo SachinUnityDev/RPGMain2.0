@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 815d4c2d789a9b64197fb0bcfa9f09a3, type: 3}
   m_Name: VisitKhalid
   m_EditorClassIdentifier: 
-  questObj: 4
-  objName: Go back to Khalid
+  objName: 4
+  objNameStr: Visit Khalid
   objState: 1
+  locationName: 0
+  landscapeName: 0
+  distanceInDays: 0
+  desc: 

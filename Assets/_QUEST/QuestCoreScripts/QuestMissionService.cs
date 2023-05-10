@@ -17,7 +17,7 @@ namespace Quest
         public QuestController questController;
 
         [Header(" Quest View")]
-        public Transform QuestMissionView;
+        public Transform QuestView;
         public QuestEmbarkView questEmbarkView;
 
         public List<QuestModel> allQuestModels = new List<QuestModel>();

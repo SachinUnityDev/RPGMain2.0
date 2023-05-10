@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 815d4c2d789a9b64197fb0bcfa9f09a3, type: 3}
   m_Name: AttendToJob
   m_EditorClassIdentifier: 
-  questObj: 3
-  objName: Attend to Job and See Khalid after
+  objName: 3
+  objNameStr: Attend to Job and see Khalid after
   objState: 3
+  locationName: 0
+  landscapeName: 0
+  distanceInDays: 0
+  desc: 

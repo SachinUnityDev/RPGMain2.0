@@ -36,8 +36,8 @@ namespace Quest
 
         public void Load()
         {
+            UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(gameObject, true);
             InitCityEPanelView();
-            UIControlServiceGeneral.Instance.TogglePanel(gameObject, true); 
         }
 
         public void UnLoad()

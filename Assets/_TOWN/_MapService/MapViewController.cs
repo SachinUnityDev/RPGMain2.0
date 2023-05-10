@@ -37,7 +37,6 @@ namespace Town
             ToggleTxt(true, true);
             townsInWorldMapGO.SetActive(true);
             closeBtn.onClick.AddListener(OnCloseBtnPressed);
-
         }
 
         void OnToggleTownPressed()
@@ -80,9 +79,6 @@ namespace Town
             }
             
         }
-
-
-
         void OnToggleMapBtnPressed()
         {            
             if (istownMapOpen)
@@ -108,12 +104,12 @@ namespace Town
         }
         public void Load()
         {
-            gameObject.SetActive(true);
+            UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(this.gameObject, true); 
         }
 
         public void UnLoad()
         {
-           gameObject.SetActive(false);
+            UIControlServiceGeneral.Instance.TogglePanel(this.gameObject, false);
         }
 
         public void Init()

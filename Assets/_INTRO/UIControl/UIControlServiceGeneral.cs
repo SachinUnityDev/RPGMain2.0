@@ -58,11 +58,12 @@ namespace Common
         
 
         public void closeAllPanels()
-        {
+        {           
             foreach (GameObject go in currOpenPanels.ToList())
             {
-                TogglePanel(go, false); 
+               TogglePanel(go, false);
             }
+            currOpenPanels.Clear();
         }
         public void TogglePanels(GameObject go, List<GameObject> allPanels)
         {
@@ -114,11 +115,11 @@ namespace Common
 
         public void TogglePanelNCloseOthers(GameObject go, bool turnOn)
         {
+            if (turnOn)
+                if (currOpenPanels.Any(t => t.gameObject.name == go.name)) return;
             closeAllPanels();
             TogglePanel(go, turnOn);  
         }
-
-
         public void TogglePanel(GameObject go, bool turnON)
         {
             if(turnON)

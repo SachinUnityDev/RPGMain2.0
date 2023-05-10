@@ -42,7 +42,8 @@ namespace Common
 
             PortraitDragNDrop portraitDragNDrop 
                 = draggedGO.GetComponent<PortraitDragNDrop>();
-            if (portraitDragNDrop != null && draggedGO == RosterService.Instance.draggedGO)
+            if (portraitDragNDrop != null && draggedGO == RosterService.Instance.draggedGO
+                && !CharService.Instance.isPartyLocked)
             {
                 draggedGO.transform.SetParent(gameObject.transform);
                 draggedGO.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
@@ -62,6 +63,10 @@ namespace Common
                 CharService.Instance.allCharsInPartyLocked.Remove(charController);
                 Destroy(draggedGO.gameObject);
 
+            }
+            else
+            {
+                Debug.Log("CHAR SLOT REJECTION TRIGGER"); 
             }
         }
 

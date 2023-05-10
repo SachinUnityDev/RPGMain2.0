@@ -26,7 +26,7 @@ namespace Quest
 
         public void Load()
         {            
-            UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
+            UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(gameObject, true);
         }
         public void ShowMainPage()
         {

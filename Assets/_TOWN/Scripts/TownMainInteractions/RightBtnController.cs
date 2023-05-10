@@ -85,17 +85,13 @@ namespace Town
 #region BUTTON EVENTS 
 
         void OnQuestScrollBtnClick()
-        {
-            if (QuestMissionService.Instance.QuestMissionView.gameObject.activeInHierarchy) 
-                QuestMissionService.Instance.QuestMissionView.GetComponent<IPanel>().UnLoad(); 
-            else
-                QuestMissionService.Instance.QuestMissionView.GetComponent<IPanel>().Load();
+        { 
+                QuestMissionService.Instance.QuestView.GetComponent<IPanel>().Load();
         }
         void OnMapBtnClick()
         {
-            UIControlServiceGeneral.Instance
-                .TogglePanelNCloseOthers(MapService.Instance.mapIntViewPanel, true);
-           // MapService.Instance.mapIntViewPanel.SetActive(true);
+          MapService.Instance.mapIntViewPanel.GetComponent<IPanel>().Load();  
+          
         }
         void OnEventBtnClick()
         {

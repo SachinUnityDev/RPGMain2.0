@@ -43,22 +43,25 @@ namespace Quest
             for (int i = 0; i < container.childCount; i++)
             {
                 TextMeshProUGUI txt = container.GetChild(i).GetComponent<TextMeshProUGUI>();
-                txt.fontStyle = FontStyles.Normal;
+
                 if (i < questModel.allObjModel.Count && !objTobeTaken)
-                    if(questModel.allObjModel[i].objState == QuestState.ToBeTaken)
+                {
+                    if (questModel.allObjModel[i].objState == QuestState.Completed)
                     {
+                        txt.fontStyle = FontStyles.Strikethrough;
+                        txt.text = $"{i + 1}. " + questModel.allObjModel[i].objNameStr;
+                    }
+                    else if (questModel.allObjModel[i].objState == QuestState.ToBeTaken)
+                    {
+                        txt.fontStyle = FontStyles.Normal;
                         txt.text = $"{i + 1}. " + questModel.allObjModel[i].objNameStr;
                         objTobeTaken = true;
-                    }                        
-                    else if(questModel.allObjModel[i].objState == QuestState.Completed)
-                    {
-                        txt.text = $"{i + 1}. " + questModel.allObjModel[i].objNameStr;
-                        txt.fontStyle = FontStyles.Strikethrough;
                     }
                     else
                     {
-                        txt.text = ""; 
-                    }                        
+                        txt.text = "";
+                    }
+                }
                 else
                     txt.text = "";
             }

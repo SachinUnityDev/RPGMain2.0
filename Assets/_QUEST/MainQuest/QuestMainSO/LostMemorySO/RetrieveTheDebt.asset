@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 815d4c2d789a9b64197fb0bcfa9f09a3, type: 3}
   m_Name: RetrieveTheDebt
   m_EditorClassIdentifier: 
-  questObj: 1
-  objName: Retrieve the debt from the man in Tavern
+  objName: 1
+  objNameStr: Retrieve the debt from the man in Tavern
   objState: 1
+  locationName: 0
+  landscapeName: 0
+  distanceInDays: 0
+  desc: 

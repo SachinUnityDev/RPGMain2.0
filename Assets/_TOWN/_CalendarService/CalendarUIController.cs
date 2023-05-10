@@ -70,11 +70,21 @@ namespace Common
             {
                 OnPanelExit(GetPanelInScene(panelInScene));
                 panelInScene = _panelInScene;
-                panel?.GetComponent<RectTransform>().DOLocalMove(new Vector3(0,0,0), 0.4f);     
+                panel?.GetComponent<RectTransform>().DOLocalMove(new Vector3(0,0,0), 0.4f);
+                if(panel != null)
+                {
+                    Image Img = panel?.transform.parent.parent.GetComponent<Image>();
+                    Img.enabled = true;
+                }
             }            
         }
         public void OnPanelExit(GameObject panel)
-        {
+        {   
+            if(panel != null)
+            {
+                Image Img = panel?.transform.parent.parent.GetComponent<Image>();
+                Img.enabled = false;
+            }
             panel?.transform.DOLocalMoveY(1200, 1).SetEase(Ease.OutQuint);
             panelInScene = PanelInScene.None;        
         }
@@ -219,8 +229,8 @@ namespace Common
             return day; 
         }
 
-    
-        GameObject GetPanelInScene(PanelInScene _panelInScene)
+            
+       public GameObject GetPanelInScene(PanelInScene _panelInScene)
         {
             switch (_panelInScene)
             {
@@ -232,7 +242,16 @@ namespace Common
 
                 default: return null; 
             }
-        }      
+        }
+
+        private void Update()
+        {
+            if(Input.GetKey(KeyCode.Escape))
+            {
+                OnPanelExit(GetPanelInScene(panelInScene));
+            }
+        }
+
     }
     public enum PanelInScene
     {

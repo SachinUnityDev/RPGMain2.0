@@ -16,9 +16,9 @@ MonoBehaviour:
   questNameStr: Lost Memory
   questState: 1
   allObjSO:
-  - {fileID: 11400000, guid: 2881d2498347550468912da8f5a562b8, type: 2}
-  - {fileID: 11400000, guid: 77a924fcd4f7d014ca65c1597810f57c, type: 2}
   - {fileID: 11400000, guid: ee638308e9c00524dad61402622bc393, type: 2}
+  - {fileID: 11400000, guid: 77a924fcd4f7d014ca65c1597810f57c, type: 2}
+  - {fileID: 11400000, guid: 2881d2498347550468912da8f5a562b8, type: 2}
   - {fileID: 11400000, guid: 8829d630dbe000b41a94ca3898a95f35, type: 2}
   questType: 1
   hasCamp: 0

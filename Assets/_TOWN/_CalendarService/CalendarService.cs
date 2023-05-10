@@ -43,7 +43,7 @@ namespace Common
 
         [SerializeField] List<MonthSO> allMonthSOs;
         public CalendarSO calendarSO; 
-        [SerializeField]CalendarUIController calendarUIController;
+        public CalendarUIController calendarUIController;
 
         [Header("Calendar Factory")]
         public CalendarFactory calendarFactory; 

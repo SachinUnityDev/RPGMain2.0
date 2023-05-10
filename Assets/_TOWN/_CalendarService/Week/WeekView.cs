@@ -23,6 +23,8 @@ namespace Town
             this.calendarUIController = calendarUIController;
             this.weekModel = weekModel;
             FillWeekPanel();
+
+
         }
 
         void FillWeekPanel()

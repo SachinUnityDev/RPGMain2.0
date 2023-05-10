@@ -48,11 +48,22 @@ namespace Common
             }
             else
             {
-                if (!isEscOpen)
-                    TogglePanel(escPanel, true);
+                CalendarUIController calendarUIController = CalendarService.Instance.calendarUIController; 
+                if (GameService.Instance.gameModel.gameState == GameState.InTown
+                    && CalendarService.Instance.calendarUIController.panelInScene != PanelInScene.None)
+                {
+                    CalendarService.Instance.calendarUIController
+                        .OnPanelExit(calendarUIController.GetPanelInScene(calendarUIController.panelInScene));
+                }
                 else
-                    TogglePanel(escPanel, false);
-                isEscOpen = !isEscOpen; 
+                {
+                    if (!isEscOpen)
+                        TogglePanel(escPanel, true);
+                    else
+                        TogglePanel(escPanel, false);
+                    isEscOpen = !isEscOpen;
+                }
+              
             }
         }
         

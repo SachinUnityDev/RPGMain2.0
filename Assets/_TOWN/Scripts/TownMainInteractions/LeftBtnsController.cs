@@ -89,12 +89,12 @@ namespace Town
 
         void OnRostersBtnClick()
         {
-            UIControlServiceGeneral.Instance.TogglePanel(rosterPanel, true);
+            UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(rosterPanel, true);
             // init roster here
         }
         void OnJobBtnClick()
         {
-            UIControlServiceGeneral.Instance.TogglePanel(jobPanel, true);
+            UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(jobPanel, true);
             // init job here 
 
         }
@@ -102,7 +102,7 @@ namespace Town
         {
         
 
-            UIControlServiceGeneral.Instance.TogglePanel(invPanelXL, true);
+            UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(invPanelXL, true);
             invPanelXL.GetComponent<IPanel>().Init();
 
         }

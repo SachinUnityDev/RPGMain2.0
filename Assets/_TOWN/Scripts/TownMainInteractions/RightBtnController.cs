@@ -93,7 +93,9 @@ namespace Town
         }
         void OnMapBtnClick()
         {
-            MapService.Instance.mapIntViewPanel.SetActive(true);
+            UIControlServiceGeneral.Instance
+                .TogglePanelNCloseOthers(MapService.Instance.mapIntViewPanel, true);
+           // MapService.Instance.mapIntViewPanel.SetActive(true);
         }
         void OnEventBtnClick()
         {

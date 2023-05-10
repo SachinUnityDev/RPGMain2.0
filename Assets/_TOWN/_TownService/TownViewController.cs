@@ -14,15 +14,15 @@ namespace Town
     public class TownViewController : MonoBehaviour
     {
 
-        [Header("Left Town Btns")]
-        [SerializeField] Button rosterBtn;
-        [SerializeField] Button jobBtn;
-        [SerializeField] Button inventoryBtn;
+        //[Header("Left Town Btns")]
+        //[SerializeField] Button rosterBtn;
+        //[SerializeField] Button jobBtn;
+        //[SerializeField] Button inventoryBtn;
 
-        [Header("Right Town Btns")]
-        [SerializeField] Button eventBtn;
-        [SerializeField] Button questScrollBtn;
-        [SerializeField] Button mapBtn;
+        //[Header("Right Town Btns")]
+        //[SerializeField] Button eventBtn;
+        //[SerializeField] Button questScrollBtn;
+        //[SerializeField] Button mapBtn;
 
         [Header("Cloud")]
         [SerializeField] Transform cloudTrans; 

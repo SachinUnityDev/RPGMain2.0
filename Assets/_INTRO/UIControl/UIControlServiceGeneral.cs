@@ -55,9 +55,11 @@ namespace Common
                 isEscOpen = !isEscOpen; 
             }
         }
+        
+
         public void closeAllPanels()
         {
-            foreach (GameObject go in currOpenPanels)
+            foreach (GameObject go in currOpenPanels.ToList())
             {
                 TogglePanel(go, false); 
             }
@@ -109,6 +111,14 @@ namespace Common
             GO.transform.SetSiblingIndex(childCount);
 
         }
+
+        public void TogglePanelNCloseOthers(GameObject go, bool turnOn)
+        {
+            closeAllPanels();
+            TogglePanel(go, turnOn);  
+        }
+
+
         public void TogglePanel(GameObject go, bool turnON)
         {
             if(turnON)

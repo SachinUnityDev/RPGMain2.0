@@ -47,9 +47,9 @@ namespace Common
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            rectTransform = GetComponent<RectTransform>();
            
-            if(IRosterSlot.slotType == RosterSlotType.CharScrollSlot)
+            rectTransform = GetComponent<RectTransform>();
+            if (IRosterSlot.slotType == RosterSlotType.CharScrollSlot)
             {
                 Debug.Log("CHAR NAME.... " + IRosterSlot.charInSlot); 
                 CreateCharPortClone(IRosterSlot.charInSlot);
@@ -87,15 +87,21 @@ namespace Common
 
         public void OnDrag(PointerEventData eventData)
         {
+          
             rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
         }
         public void OnEndDrag(PointerEventData eventData)
         {
+           
             Debug.Log("Hello end drag" + eventData.pointerEnter.name);
             GameObject droppedOn = eventData.pointerEnter;
-            
-            if (droppedOn.GetComponent<IDropHandler>() == null
-                && droppedOn.transform.parent.GetComponent<IDropHandler>() == null)
+            if (CharService.Instance.isPartyLocked)
+            {
+                RosterService.Instance.rosterViewController.ReverseBack(this);
+                RosterService.Instance.On_PortraitDragResult(false);
+                
+            }else if (droppedOn.GetComponent<IDropHandler>() == null
+                && droppedOn.transform.parent.GetComponent<IDropHandler>() == null )                            
             {
                 Debug.Log("I drop handler NOT FOUND" + droppedOn.transform.name);
                 RosterService.Instance.rosterViewController.ReverseBack(this); 

@@ -19,17 +19,17 @@ namespace Common
         {
             if (CharService.Instance.isPartyLocked)
             {
-                notifyName = NotifyName.RosterDisband;
-                transform.GetChild(0)
-                    .GetComponent<NotifyBoxView>().OnShowNotifyBox(this, notifyName);
-                img.sprite = RosterService.Instance.rosterSO.rosterDisband; 
-            }
-            else
-            {
                 notifyName = NotifyName.RosterLock;
                 transform.GetChild(0)
                     .GetComponent<NotifyBoxView>().OnShowNotifyBox(this, notifyName);
-                img.sprite = RosterService.Instance.rosterSO.rosterLock;
+                img.sprite = RosterService.Instance.rosterSO.rosterLock; 
+            }
+            else
+            {
+                notifyName = NotifyName.RosterDisband;
+                transform.GetChild(0)
+                    .GetComponent<NotifyBoxView>().OnShowNotifyBox(this, notifyName);
+                img.sprite = RosterService.Instance.rosterSO.rosterDisband;
 
             }
         }

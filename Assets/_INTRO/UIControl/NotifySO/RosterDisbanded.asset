@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: RosterDisbanded
   m_EditorClassIdentifier: 
   NotifyName: 2
-  notifyStr: disbandeddddd
+  notifyStr: Your party will be locked
   isDontShowAgainTicked: 0

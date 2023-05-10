@@ -37,6 +37,7 @@ namespace Common
         void OnTogglePressed(bool toggle)
         {
             notifyModel.isDontShowAgainTicked = toggle;
+            
         }
         public void OnShowNotifyBox(INotify notify, NotifyName notifyName)
         {
@@ -68,6 +69,7 @@ namespace Common
 
         public void Load()
         {
+            toggleUI.isOn = false;
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
         }
 

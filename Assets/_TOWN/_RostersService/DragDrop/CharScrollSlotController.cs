@@ -88,8 +88,8 @@ namespace Common
         }
         public void PopulatePortrait()
         {
-           charModel = RosterService.Instance.scrollSelectCharModel;
-           charInSlot = charModel.charName; 
+            charModel = RosterService.Instance.scrollSelectCharModel;
+            charInSlot = charModel.charName; 
             CharacterSO charSO = CharService.Instance.GetCharSO(charModel);
             CharComplimentarySO charCompSO = CharService.Instance.charComplimentarySO;
 

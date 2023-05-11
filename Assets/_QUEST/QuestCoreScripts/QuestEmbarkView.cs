@@ -2,6 +2,7 @@ using Common;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Town;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,7 +24,9 @@ namespace Quest
         [SerializeField] QuestSO questSO;
         [SerializeField] QuestBase questBase;
         [SerializeField] ObjModel objModel;
-        [SerializeField] ObjSO objSO; 
+        [SerializeField] ObjSO objSO;
+        QuestNodePtrEvents nodePtrEvents; 
+
 
         void Awake()
         {
@@ -31,23 +34,29 @@ namespace Quest
             embarkBtn.onClick.AddListener(OnEmbarkBtnPressed);    
         }
 
-        public void ShowQuestEmbarkView(QuestModel questModel, QuestSO questSO, QuestBase questBase, ObjModel objModel) 
+        public void ShowQuestEmbarkView(QuestModel questModel, QuestSO questSO
+                                            , QuestBase questBase, ObjModel objModel, QuestNodePtrEvents nodePtrEvents) 
         {
             this.questModel = questModel;
             this.questSO = questSO;
             this.questBase= questBase;
             this.objModel = objModel;
-            this.objSO = questSO.GetObjSO(objModel.ObjName); 
+            this.objSO = questSO.GetObjSO(objModel.ObjName);
+            this.nodePtrEvents = nodePtrEvents;
             Load();
             FillQuestPanel(); 
         }
         void OnExitBtnPressed()
         {
-            UnLoad(); 
+            MapService.Instance.mapExpView.ExitNode(); 
+            UnLoad();
         }
         void OnEmbarkBtnPressed()
         {
-            // 
+            // move the head to pointer
+            // quest base Embark
+            UnLoad(); 
+           nodePtrEvents.MovePawnStone();
         }
         void FillQuestPanel()
         {

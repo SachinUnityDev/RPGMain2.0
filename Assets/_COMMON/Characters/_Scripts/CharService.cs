@@ -125,11 +125,7 @@ namespace Common
         }
         public CharController GetCharCtrlWithName(CharNames charName)
         {
-            //for (int i = 0; i < charsInPlayControllers.Count; i++)
-            //{
-            //    Debug.Log("NAMES" +charsInPlayControllers[i].charModel.charName);
-
-            //}
+       
             CharController charCtrl = charsInPlayControllers.Find(x => x.charModel.charName == charName);
             if (charCtrl != null)
                 return charCtrl;
@@ -148,12 +144,27 @@ namespace Common
             return null; 
         }
 
-#endregion
+        #endregion
 
-       
+        #region LOCK and UNLOCK
+
+        public void On_PartyLocked()
+        {
+            isPartyLocked= true;
+            OnPartyLocked?.Invoke(); 
+        }
+        public void On_PartyDisbanded()
+        {
+            isPartyLocked = false;
+            OnPartyDisbanded?.Invoke();
+        }
+
+        #endregion
+
+
         //public void CreateAllAlliesCtrls()
         //{
-            
+
         //    foreach (CharacterSO c in allAllySO)
         //    {
         //            GameObject charGO = new GameObject();
@@ -165,7 +176,7 @@ namespace Common
         //            allyInPlay.Add(charGO);    
         //            charsInPlay.Add(charGO);
 
-           
+
 
         //            if(c.availOfChar == AvailOfChar.Available)
         //            {
@@ -180,7 +191,7 @@ namespace Common
         //    }
         //}
 
-     
+
         public CharController SpawnCompanions(CharNames charName)  // character factory 
         {
            // CharController charController = GetCharCtrlWithName(charName);
@@ -290,7 +301,7 @@ namespace Common
             allCharsInPartyLocked.Add(charController);
             OnCharAddedToParty?.Invoke(charController.charModel.charName);
         }
-
+    
         public void LoadCharControllers(CharModel charModel)
         {
             //CharController charCtrl = null;

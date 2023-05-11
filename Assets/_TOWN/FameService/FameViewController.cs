@@ -51,8 +51,8 @@ namespace Common
 
     public class FameViewController : MonoBehaviour
     {
-        [SerializeField] FameModel fameModel;  
 
+        FameModel fameModel;
         [Header("Fame UI... to be ref")]
         [SerializeField] GameObject fameName;
         [SerializeField] GameObject fameBar;
@@ -107,9 +107,9 @@ namespace Common
         }
         public void RunTestBtn()
         {
-            FameChgData fcD1 = new FameChgData (CauseType.CharSkill, 2, 30);
+            FameChgData fcD1 = new FameChgData (CauseType.CharSkill, 2, -30);
 
-            FameService.Instance.fameController.ApplyFameChg(CauseType.CharSkill, 2, 12);
+            FameService.Instance.fameController.ApplyFameChg(CauseType.CharSkill, 2, -12);
             DisplayFamePanel();
         }
 
@@ -168,7 +168,7 @@ namespace Common
                 scoreTxt.color = new Color32(255, 204, 102, 255);
             } 
 
-                scoreTxt.text = preOperator + Mathf.Abs(_scoreAdded).ToString();
+            scoreTxt.text = preOperator + Mathf.Abs(_scoreAdded).ToString();
             string desc = "Fame gained" + causeType.ToString().CreateSpace();  
 
             plankPrefab.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = desc;
@@ -205,7 +205,6 @@ namespace Common
                 case FameType.None: return "";
             }
             return null;
-
         }
 
     }

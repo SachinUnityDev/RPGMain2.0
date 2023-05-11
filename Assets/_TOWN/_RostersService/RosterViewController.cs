@@ -20,6 +20,11 @@ namespace Common
         [SerializeField] GameObject charScrollGO;
         public GameObject CharPortraitGO;
 
+
+        [Header("Btm Char List")]
+        [SerializeField] Transform btmCharTrans;
+        [SerializeField] CharScrollSlotController charSlot; 
+
         [Header("TO BE REF IN SIDE PANEL")]
         [SerializeField] Transform SidePlankTrans;
         [SerializeField] Button inviteBtn; 
@@ -41,9 +46,14 @@ namespace Common
         [Header("Globals")]
       
         CharacterSO charSO;
-        CharComplimentarySO charCompSO; 
+        CharComplimentarySO charCompSO;
 
-
+        private void Start()
+        {
+            CharService.Instance.OnPartyDisbanded += OnPartyDisbandedFameBehMisMatchChk;
+            CharScrollSlotController charSlot = 
+                    charScrollGO.transform.GetChild(0).GetComponent<CharScrollSlotController>(); 
+        }
         void OnEnable()
         {
             closeBtn.onClick.AddListener(OnCloseBtnPressed);
@@ -57,7 +67,29 @@ namespace Common
 
             inviteBtn.onClick.AddListener(OnInviteBtnPressed); 
         }
-
+        void OnPartyDisbandedFameBehMisMatchChk()
+        {
+            // LOOP THRU TRANSFORMS IN btn char scroll 
+            // all unlocked char 
+            // load 
+            // 
+            for (int i = 1; i < btmCharTrans.childCount; i++)
+            {
+                PortraitDragNDrop port = btmCharTrans.GetChild(i).GetComponentInChildren<PortraitDragNDrop>(); 
+               if (port != null)
+                {
+                    CharController charController = CharService.Instance.GetCharCtrlWithName(port.charDragged);
+                    if (!FameService.Instance.fameController.IsFameBehaviorMatching(charController))
+                    {
+                        charController.charModel.availOfChar = AvailOfChar.UnAvailable_Fame;
+                       // CharService.Instance.allAvailCompModels.Add(charController.charModel);
+                        CharService.Instance.allCharsInPartyLocked.Remove(charController);
+                        Destroy(port.gameObject);       
+                        Load();
+                    }
+                }
+            }
+        }
         public void ReverseBack(PortraitDragNDrop portraitDragNDrop)
         {
             Transform slotParent = portraitDragNDrop.parentTransform;

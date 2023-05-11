@@ -44,7 +44,7 @@ namespace Common
                 }                  
                 else
                 {
-                    RosterService.Instance.On_PortraitDragResult(isDropSuccess);                
+                    RosterService.Instance.On_PortraitDragResult(isDropSuccess);                   
                 }
             }
         }

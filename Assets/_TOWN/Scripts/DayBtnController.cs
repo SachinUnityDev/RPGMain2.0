@@ -24,8 +24,6 @@ public class DayBtnController: MonoBehaviour    // Calendar UI Day Btns controll
     void Awake()
     {
         dayBtnState = DayBtnState.Upcomingday;
-       
-       
     }
 
     public void SetState(DayBtnState _dayBtnState, int _dayNo)

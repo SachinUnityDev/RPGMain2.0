@@ -36,14 +36,17 @@ namespace Common
     
         public void OnNotifyAnsPressed()
         {
-            CharService.Instance.isPartyLocked = !CharService.Instance.isPartyLocked;
-            if(CharService.Instance.isPartyLocked)
+           // CharService.Instance.isPartyLocked = !CharService.Instance.isPartyLocked;
+            if(!CharService.Instance.isPartyLocked)
             {
                 img.sprite = RosterService.Instance.rosterSO.rosterLock;
+                CharService.Instance.On_PartyLocked(); 
             }
             else
             {
-                img.sprite = RosterService.Instance.rosterSO.rosterDisband; 
+                img.sprite = RosterService.Instance.rosterSO.rosterDisband;
+                CharService.Instance.On_PartyDisbanded();
+
             }
         }
 

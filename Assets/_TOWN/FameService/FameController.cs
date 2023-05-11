@@ -19,7 +19,8 @@ namespace Common
         public void ApplyFameChg(CauseType causeType, int causeName, int val) 
         {
             FameChgData fameChgData = new FameChgData(causeType, causeName, val);
-            fameModel.fameVal += fameChgData.fameAdded;
+            fameModel.fameVal += val;
+            fameModel.fameType = FameService.Instance.GetFameType(); 
             fameModel.allFameData.Add(fameChgData);
         }
         public void ApplyFameYieldChg(CauseType causeType, int causeName, int val)

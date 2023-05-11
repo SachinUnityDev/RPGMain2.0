@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e1f4fc3e6a96bc488ddefd26792e757, type: 3}
   m_Name: Node21SO
   m_EditorClassIdentifier: 
-  startNode: 1
-  endNode: 0
+  startNode: 2
+  endNode: 1
   allMapTriggerData:
   - questMode: 1
     chanceData:

@@ -83,11 +83,8 @@ namespace Common
             cloneRect.localScale = Vector3.one;
             clone.GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
-
-
         public void OnDrag(PointerEventData eventData)
         {
-          
             rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
         }
         public void OnEndDrag(PointerEventData eventData)
@@ -95,8 +92,10 @@ namespace Common
            
             Debug.Log("Hello end drag" + eventData.pointerEnter.name);
             GameObject droppedOn = eventData.pointerEnter;
-            if (CharService.Instance.isPartyLocked)
-            {
+            if (CharService.Instance.isPartyLocked
+                || !FameService.Instance.fameController
+                .IsFameBehaviorMatching(CharService.Instance.GetCharCtrlWithName(charDragged)))
+            { 
                 RosterService.Instance.rosterViewController.ReverseBack(this);
                 RosterService.Instance.On_PortraitDragResult(false);
                 
@@ -119,43 +118,3 @@ namespace Common
 
 }
 
-
-//CharacterSO charSO;
-//public CharModel charModel;
-//[SerializeField] Sprite BGUnClicked;
-//[SerializeField] Sprite BGClicked;
-
-//[Header("Not to be ref")]
-//[SerializeField] Transform nameContainer;
-//[SerializeField] TextMeshProUGUI scrollName;
-
-//if(charSlotController != null)
-//{
-//if (!rosterSlot.isSlotFull())
-//{
-
-
-//}
-//RosterService.Instance.rosterViewController.CharPortraitGO = clone;
-
-
-
-//if (charSlotController.cloneCount <= 0)
-//// A clone is created and added to the slot
-//{
-//    CreateEmptyClone();                   
-//    charSlotController.cloneCount++;
-//}
-//else
-//{
-//    charSlotController.cloneCount--;
-//    if(charSlotController.cloneCount == 0)
-//    {
-//        CreateEmptyClone();
-//    }
-//        Debug.Log("Has Clone");
-//    //clone = gameObject.GetComponent<PortraitDragNDrop>().gameObject; 
-//}
-
-//}
-// update UI and State

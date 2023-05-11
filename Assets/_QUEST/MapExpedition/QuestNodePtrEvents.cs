@@ -34,14 +34,14 @@ namespace Quest
 
             Sequence seq = DOTween.Sequence();
             seq.AppendCallback(() => QuestMissionService.Instance
-                                    .questController.ShowQuestEmbarkView(questName, objName))
+                                    .questController.ShowQuestEmbarkView(questName, objName, this))
                                     .AppendCallback(QuestMarkDown);
             seq.Play(); 
         }
 
         public void MovePawnStone()
         {
-            pawnStone.DOMove(transform.position+ new Vector3(0,40f,0), 0.8f); 
+            pawnStone.DOMove(transform.position + new Vector3(0,10f,0), 0.8f); 
         }
 
         void QuestMarkDown()

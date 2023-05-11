@@ -35,9 +35,9 @@ namespace Quest
             AllQuestSO allQuestSO = QuestMissionService.Instance.allQuestMainSO;
 
             spriteLit =
-                        allQuestSO.GetQuestInfoSpriteLit(questModel.questMode);
+                        allQuestSO.GetQuestInfoSpriteLit(questMode);
             spriteN =
-                allQuestSO.GetQuestInfoSpriteN(questModel.questMode);            
+                        allQuestSO.GetQuestInfoSpriteN(questMode);            
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -49,11 +49,15 @@ namespace Quest
         public void OnPointerEnter(PointerEventData eventData)
         {
             infoImage.sprite= spriteLit;
+            transform.GetChild(1).gameObject.SetActive(true);
+            infoImage.transform.GetChild(0).gameObject.SetActive(true);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             infoImage.sprite = spriteN;
+            transform.GetChild(1).gameObject.SetActive(false);
+            infoImage.transform.GetChild(0).gameObject.SetActive(false);
         }
     }
 }

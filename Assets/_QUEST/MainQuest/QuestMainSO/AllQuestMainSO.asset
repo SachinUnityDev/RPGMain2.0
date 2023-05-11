@@ -21,3 +21,12 @@ MonoBehaviour:
   sideQIcon: {fileID: 21300000, guid: c4739b569ac88844699f4678bc8116ea, type: 3}
   companionQIcon: {fileID: 21300000, guid: 8f62d42037846ce4990563831de47699, type: 3}
   bountyQIcon: {fileID: 21300000, guid: e78fa90932abe0a42ada08b13f498a08, type: 3}
+  stealthInfo: {fileID: 21300000, guid: bcbe407748f6d7f41b7d3700e49a4f2b, type: 3}
+  explorationInfo: {fileID: 21300000, guid: eeda200503ba62b4e94167b4b0028e0e, type: 3}
+  tauntInfo: {fileID: 21300000, guid: 544194140a7feb94f89e8d3b9cbbca63, type: 3}
+  stealthInfoLit: {fileID: 21300000, guid: 7ec0158bdee91a540b7cf3fa5a0c3ca1, type: 3}
+  explorationInfoLit: {fileID: 21300000, guid: e0896ab4d47f88a42892825464294c4c, type: 3}
+  tauntInfoLit: {fileID: 21300000, guid: 16939ed15d01c8d4eb0658bcbd0fb5b8, type: 3}
+  stealthMode: {fileID: 21300000, guid: 0595ebaac266f294ca24d5c8f959fb62, type: 3}
+  explorationMode: {fileID: 21300000, guid: 185f105de53ce0046a4c9f194971e3dd, type: 3}
+  tauntMode: {fileID: 21300000, guid: 8d19921586c0acb46abe5737f198ddb7, type: 3}

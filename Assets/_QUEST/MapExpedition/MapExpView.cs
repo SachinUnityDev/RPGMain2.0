@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening; 
+using DG.Tweening;
+using Common;
 
 namespace Quest
 {
@@ -11,9 +12,28 @@ namespace Quest
         [SerializeField] Transform pawnStone;
 
         public Nodes nodeSelect;
+
         void Start()
         {
             MapExpInit();
+        }
+        public QuestNodePtrEvents GetQuestNodePtrEvents(Nodes nodeSelect)
+        {
+            foreach (Transform child in QuestNodeContainer)
+            {
+                if (child.GetComponent<QuestNodePtrEvents>().nodeName == nodeSelect)
+                     return child.GetComponent<QuestNodePtrEvents>();
+            }
+            return null; 
+        } 
+
+        public void ExitNode()
+        {
+            if(nodeSelect == Nodes.None) return;
+            QuestNodePtrEvents questNodePtrEvents = GetQuestNodePtrEvents(nodeSelect); 
+            questNodePtrEvents.QuestMarkUp();
+
+            nodeSelect = Nodes.None; 
         }
 
         public void MapExpInit()
@@ -24,9 +44,12 @@ namespace Quest
             }
         }
 
+
         public void OnNodeClicked(Nodes nodeSelect)
         {
-            this.nodeSelect = nodeSelect;           
+            ExitNode();// exit prev node 
+            this.nodeSelect = nodeSelect;
+        
         }
 
         public void MovePawnStone()

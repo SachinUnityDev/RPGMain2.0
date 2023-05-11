@@ -11,18 +11,20 @@ namespace Common
         [Header("FAME VALUES")]
         public int fameVal;
 
-
         [Header("FameType")]
-
-        public FameType fameType;
-       
+        public FameType fameType;       
 
         [Header("Modifier values")]
         public float fameYield = 1;
-
         
-        [Header("FAME")]
+        [Header("FAME Change")]
         public List<FameChgData> allFameData = new List<FameChgData>();
+        public FameModel(FameSO fameSO)
+        {
+            fameVal = fameSO.fameVal; 
+            fameType= fameSO.fameType;
+            fameYield = fameSO.FameYield; 
+        }
     }
 }
 

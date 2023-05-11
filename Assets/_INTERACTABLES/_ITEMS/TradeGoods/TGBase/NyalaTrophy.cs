@@ -2,7 +2,6 @@ using Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 
 namespace Interactables
@@ -49,9 +48,9 @@ namespace Interactables
                 , AttribName.willpower, 2);
             allLandscapeIndex.Add(index);
 
-            index = FameService.Instance.fameController.ApplyFameModBuff(CauseType.TradeGoods, (int)tgName
-                , fameYield, TimeFrame.Infinity, 1);
-            allFameIndex.Add(index);
+            FameService.Instance.fameController
+                .ApplyFameYieldChg(CauseType.TradeGoods, (int)tgName, fameYield);
+
         }
 
         public void OnTrophyRemoved()

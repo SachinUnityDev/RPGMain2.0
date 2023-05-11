@@ -20,7 +20,7 @@ namespace Town
         }
         public void Display()
         {
-             fameVal = FameService.Instance.fameModel.fameVal;  
+             fameVal = FameService.Instance.fameController.fameModel.fameVal;  
             fameType = FameService.Instance.GetFameType();
             fameSO = FameService.Instance.fameSO;
 

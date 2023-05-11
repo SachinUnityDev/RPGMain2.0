@@ -48,7 +48,15 @@ namespace Common
 
         public Color posFameColor;
         public Color negFameColor;
-        public Color unknownFameColor; 
+        public Color unknownFameColor;
+
+        [Header("Fame Type")]
+        public int fameVal;
+        public FameType fameType;
+        public int FameYield =0;
+
+        [Header("Prefab")]
+        public GameObject famePlank; 
 
 
         public string GetFameBehaviorStr(FameBehavior fameBehavior)
@@ -63,7 +71,7 @@ namespace Common
             return str;
         }
 
-        public Sprite GetFameTypeSprite(FameType fameType)         
+        public Sprite GetFameTypeSprite(FameType fameType)  
         {
             if(fameType == FameType.Respectable || fameType == FameType.Honorable || fameType == FameType.Hero)
             {
@@ -104,6 +112,10 @@ namespace Common
 
             return Color.white;
         }
+
+     
+
+
     }
 }
 

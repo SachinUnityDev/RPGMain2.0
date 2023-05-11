@@ -44,9 +44,8 @@ namespace Interactables
                      , LandscapeNames.Field, AttribName.acc, 1);
             allLandscapeIndex.Add(index);
 
-            index = FameService.Instance.fameController.ApplyFameModBuff(CauseType.TradeGoods, (int)tgName
-                , fameYield, TimeFrame.Infinity, 1);
-            allFameIndex.Add(index);
+            FameService.Instance.fameController.ApplyFameYieldChg(CauseType.TradeGoods, (int)tgName, fameYield);
+            
         }
 
         public void OnTrophyRemoved()

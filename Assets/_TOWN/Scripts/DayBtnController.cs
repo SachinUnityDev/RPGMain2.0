@@ -20,12 +20,11 @@ public class DayBtnController: MonoBehaviour    // Calendar UI Day Btns controll
     [SerializeField]Sprite passedDaySprite;
     [SerializeField] Sprite upcomingDaySprite;
     [SerializeField] Sprite currentDaySprite;
-    Image btnImg;
     // Start is called before the first frame update
     void Awake()
     {
         dayBtnState = DayBtnState.Upcomingday;
-        btnImg = GetComponent<Image>(); 
+       
        
     }
 
@@ -43,6 +42,7 @@ public class DayBtnController: MonoBehaviour    // Calendar UI Day Btns controll
 
      void ApplyBtnImage(DayBtnState daybtnState)
      {
+        Image btnImg = GetComponent<Image>();
         switch (daybtnState)
         {
             case DayBtnState.Upcomingday: btnImg.sprite = upcomingDaySprite; SetAlpha(1f); break;
@@ -55,6 +55,7 @@ public class DayBtnController: MonoBehaviour    // Calendar UI Day Btns controll
 
      void SetAlpha(float alpha)
      {
+        Image btnImg = GetComponent<Image>(); 
         var tempColor = btnImg.color;
         tempColor.a = alpha;
         btnImg.color = tempColor; 

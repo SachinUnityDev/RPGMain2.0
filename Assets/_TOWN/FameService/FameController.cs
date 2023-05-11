@@ -8,45 +8,43 @@ namespace Common
 {
     public class FameController : MonoBehaviour
     {
-        public int index; 
+        public int index;
+        public FameModel fameModel; 
 
-        
-
-        void Start()
+        public void InitFameController(FameSO fameSO)
         {
-                                                           
+            fameModel = new FameModel(fameSO); 
         }
 
-        public void ChgFame(CauseType causeType, int causeName, float val, string desc="")
+        public void ApplyFameChg(CauseType causeType, int causeName, int val) 
         {
-            
+            FameChgData fameChgData = new FameChgData(causeType, causeName, val);
+            fameModel.fameVal += fameChgData.fameAdded;
+            fameModel.allFameData.Add(fameChgData);
         }
-
-
-        public int ApplyFameModBuff(CauseType causeType, int causeName, float val
-                                                                , TimeFrame timeFrame, int timeValue) 
+        public void ApplyFameYieldChg(CauseType causeType, int causeName, int val)
         {
-            return index; 
+            FameChgData fameChgData = new FameChgData(causeType, causeName, val);
+            fameModel.fameYield += fameChgData.fameAdded;          
         }
-        
-        // mostly instant value no buff like isssues give back  ... etc 
-        public void ApplyFameBuff(CauseType causeType, int causeName, float val
-                                                                , TimeFrame timeFrame, int timeValue)
-        {
-
-
-
-        }
-
         public bool IsFameBehaviorMatching(CharController charController)
         {
-          //  FameService.Instance.fameModel.currGlobalFame
+            FameBehavior fameBehavior = charController.charModel.fameBehavior;
 
-
-
-            return false; 
+            foreach (FameBehaviorMap map in FameService.Instance.fameSO.allFameBehaviorMaps)
+            {
+                if(fameBehavior == map.fameBehavior) 
+                {
+                    foreach(FameType fameType in map.allAntiFameTypes)
+                    {
+                        if (fameModel.fameType == fameType)
+                            return false; 
+                    }
+                    return true; 
+                }
+            }
+            return true;
         }
-        
     }
 
 

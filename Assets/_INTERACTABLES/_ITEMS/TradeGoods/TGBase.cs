@@ -14,7 +14,6 @@ namespace Interactables
         public CharController charController { get; protected set; }
         public List<int> buffIndex { get; set; }
         public List<int> allLandscapeIndex { get; set; }        
-        public List<int> allFameIndex { get; set; }
 
         public List<string> allDisplayStr = new List<string>();
 

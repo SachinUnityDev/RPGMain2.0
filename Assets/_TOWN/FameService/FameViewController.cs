@@ -36,17 +36,16 @@ namespace Common
 
     [System.Serializable]
     public class FameChgData
-    { 
-        public int scoreAdded;
-        public string changeDesc;
-        public MonthName monthName;
+    {
+        public int fameAdded;
+        public CauseType causeType;
+        public int causeName;
 
-        public FameChgData(int _scoreAdded, string _changedesc, MonthName _monthName)
+        public FameChgData( CauseType causeType, int causeName, int fameAdded)
         {
-            scoreAdded = _scoreAdded;
-            changeDesc = _changedesc;
-            monthName = _monthName;
-            
+            this.fameAdded = fameAdded;
+            this.causeType = causeType;
+            this.causeName = causeName;
         }
     }
 
@@ -83,7 +82,7 @@ namespace Common
             // change the fame symbol with depending upon the fame
             // fame value to be shown on the right side with modifier 
             // scroll bar pages to be added (prefab)
-            fameModel = FameService.Instance.fameModel;
+            
             leftBtn.onClick.AddListener(OnLeftPageBtnPressed);
             rightBtn.onClick.AddListener(OnRightPageBtnPressed);
         }
@@ -108,17 +107,9 @@ namespace Common
         }
         public void RunTestBtn()
         {
-            FameChgData fcD1 = new FameChgData(-30, "Sacrificed a friend in altar"
-                                        , MonthName.HunchOfTheCamel);
+            FameChgData fcD1 = new FameChgData (CauseType.CharSkill, 2, 30);
 
-            FameService.Instance.FameScoreUpdate(fcD1); 
-            //FameChgData fcD2 = new FameChgData(6, "Bought drinks in the fest", MonthName.AntlersOfTheDeer);
-            //FameScoreUpdate(fcD2);
-            //FameChgData fcD3 = new FameChgData(3, "Completed Biloko quest", MonthName.AntlersOfTheDeer);
-            //FameScoreUpdate(fcD3);
-            //FameChgData fcD4 = new FameChgData(-24, "Dialogue with Ilona", MonthName.AntlersOfTheDeer);
-            //FameScoreUpdate(fcD4);
-
+            FameService.Instance.fameController.ApplyFameChg(CauseType.CharSkill, 2, 12);
             DisplayFamePanel();
         }
 
@@ -126,7 +117,7 @@ namespace Common
         public void DisplayFamePanel()
         {
             List<FameChgData> fameList = FameService.Instance.GetFameChgList();
-
+            fameModel = FameService.Instance.fameController.fameModel;
             if (fameList.Count < 1) return; 
             pagetext.text = currPage.ToString(); 
             Debug.Log("*********" + GetFameNameStr(FameService.Instance.GetFameType()));
@@ -151,27 +142,16 @@ namespace Common
 
             foreach ( FameChgData f in fameList)
             {
-                AddPlankPanel(f.scoreAdded, f.changeDesc, f.monthName); 
+                AddPlankPanel(f.fameAdded, f.causeType,  f.causeName); 
             }    
 
         }
 
-        //void ClearPlank()
-        //{
-        //    foreach (Transform child in ScrollViewFame.transform)
-        //    {
-        //       Destroy(child.gameObject);
-        //    }
-            
-        //}
-        public void AddPlankPanel(int _scoreAdded, string _displayStr, MonthName _monthName)
+        public void AddPlankPanel(int _scoreAdded, CauseType causeType, int causeName)
         {
             string preOperator;
 
-           // Debug.Log("scoreadd" + _scoreAdded + "abs" + Mathf.Abs(_scoreAdded));
-            string monthNameStr = CalendarService.Instance.GetMonthSO(_monthName).monthNameShort;  
-
-            if (!plankPrefab) return;
+            plankPrefab = FameService.Instance.fameSO.famePlank;            
             GameObject newPlank = Instantiate(plankPrefab, ScrollViewFame.transform.position , Quaternion.identity);
             newPlank.transform.SetParent(ScrollViewFame.transform, false);
 
@@ -189,14 +169,12 @@ namespace Common
             } 
 
                 scoreTxt.text = preOperator + Mathf.Abs(_scoreAdded).ToString();
-           
+            string desc = "Fame gained" + causeType.ToString().CreateSpace();  
 
-            plankPrefab.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _displayStr;
-            plankPrefab.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = monthNameStr;
+            plankPrefab.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = desc;
             float ht = plankPrefab.GetComponent<RectTransform>().rect.height; 
             RectTransform rt= ScrollViewFame.GetComponent<RectTransform>();
             rt.sizeDelta += new Vector2(0, ht+5f);  // its height, width :) 
-
         }
        
         void ChgFameSprite()

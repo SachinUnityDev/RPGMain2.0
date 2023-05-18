@@ -9,14 +9,14 @@ namespace Quest
     [Serializable]
     public class ObjModel
     {
-        public QuestObjNames ObjName;
+        public ObjNames objName;
         public string objNameStr;
         
         public QuestState objState;
 
         public ObjModel(ObjSO objSO)
         {
-           ObjName = objSO.objName;
+           objName = objSO.objName;
            objNameStr = objSO.objNameStr;
          
            objState = objSO.objState; 

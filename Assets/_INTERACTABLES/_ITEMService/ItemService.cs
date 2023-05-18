@@ -206,7 +206,7 @@ namespace Interactables
             if (sagaicSO != null)
                 return sagaicSO;
             else
-                Debug.Log("Sagaic SO  not found");
+                Debug.Log("Sagaic SO  not found" + sagaicNames);
             return null;
         }
         public GenGewgawSO GetGenGewgawSO(GenGewgawNames genGewgawName)
@@ -523,8 +523,8 @@ namespace Interactables
             }
             if (Input.GetKeyDown(KeyCode.G))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.SagaicGewgaws, (int)SagaicGewgawNames.EasyFit,
-                            CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.ScarfOfCourage,
+                            CauseType.Items, 2, GenGewgawQ.Folkloric);
             }            
         }
 

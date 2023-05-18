@@ -13,7 +13,7 @@ namespace Quest
 
         CharNames charJoined;
         Currency money2Lose; 
-        public override void CityEContinuePressed()
+        public override void MapEContinuePressed()
         {
 
         }

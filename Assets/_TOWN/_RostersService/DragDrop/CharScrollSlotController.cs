@@ -50,7 +50,6 @@ namespace Common
                 iPortrait IPortrait = draggedGO.GetComponent<iPortrait>();
                 CharNames draggedChar = IPortrait.IRosterSlot.charInSlot; 
 
-                //SetIPortraitValues();
                 portraitDragNDrop.parentTransform = transform;
 
                 CharController charController = CharService.Instance.GetCharCtrlWithName(draggedChar);                

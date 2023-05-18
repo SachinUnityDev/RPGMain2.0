@@ -9,7 +9,7 @@ namespace Quest
     {
         public override QuestNames qMainNames => QuestNames.RatInfestation;
 
-        public override QuestObjNames QObjNames => QuestObjNames.CleanseTheSewers; 
+        public override ObjNames QObjNames => ObjNames.CleanseTheSewers; 
         public override void Act1()
         {
             

@@ -25,8 +25,9 @@ namespace Quest
 
         public void OnContinueBtnPressed()
         {
+            EncounterService.Instance.mapEController.mapENodePtrEvents.OnMapEExit();
             mapEView.GetComponent<IPanel>().UnLoad();
-            mapEBase.CityEContinuePressed();
+            mapEBase.MapEContinuePressed();
         }
 
         public void InitResultPage(MapEView mapEView, MapEbase mapEBase, MapEModel mapEModel)

@@ -11,7 +11,7 @@ namespace Quest
     {
         public override QuestNames qMainNames => QuestNames.HuntInTheWilderness; 
 
-        public override QuestObjNames QObjNames => QuestObjNames.TravelIntoTheWilderness;
+        public override ObjNames QObjNames => ObjNames.TravelIntoTheWilderness;
 
         public override void Act1()
         {

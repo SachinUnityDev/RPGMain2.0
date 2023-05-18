@@ -13,15 +13,15 @@ namespace Quest
         {
             
         }     
-        public override void OnObj_Completed(QuestObjNames objNames)
+        public override void OnObj_Completed(ObjNames objNames)
         {
             
         }
-        public override void OnObj_Failed(QuestObjNames objNames)
+        public override void OnObj_Failed(ObjNames objNames)
         {
             
         }
-        public override void StartObj(QuestObjNames objName)
+        public override void StartObj(ObjNames objName)
         {
             
         }

@@ -9,7 +9,7 @@ namespace Quest
     [CreateAssetMenu(fileName = "ObjSO", menuName = "Quest/ObjSO")]
     public class ObjSO : ScriptableObject
     {
-        public QuestObjNames objName;
+        public ObjNames objName;
         [TextArea(5,10)]
         public string objNameStr;       
         public QuestState objState;

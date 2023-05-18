@@ -25,9 +25,10 @@ namespace Quest
         [SerializeField] QuestBase questBase;
         [SerializeField] ObjModel objModel;
         [SerializeField] ObjSO objSO;
-        QuestNodePtrEvents nodePtrEvents; 
+        QuestNodePtrEvents nodePtrEvents;
 
-
+        [Header("Start Node")]
+        [SerializeField] NodeData startNode; 
         void Awake()
         {
             exitBtn.onClick.AddListener(OnExitBtnPressed); 
@@ -35,28 +36,35 @@ namespace Quest
         }
 
         public void ShowQuestEmbarkView(QuestModel questModel, QuestSO questSO
-                                            , QuestBase questBase, ObjModel objModel, QuestNodePtrEvents nodePtrEvents) 
+                    , QuestBase questBase, ObjModel objModel, QuestNodePtrEvents nodePtrEvents, NodeData startNodeData) 
         {
             this.questModel = questModel;
             this.questSO = questSO;
             this.questBase= questBase;
             this.objModel = objModel;
-            this.objSO = questSO.GetObjSO(objModel.ObjName);
+            this.objSO = questSO.GetObjSO(objModel.objName);
             this.nodePtrEvents = nodePtrEvents;
+            startNode = startNodeData; 
             Load();
             FillQuestPanel(); 
         }
         void OnExitBtnPressed()
         {
-            MapService.Instance.mapExpView.ExitNode(); 
+            MapService.Instance.pathExpView.OnPathExit(); 
             UnLoad();
         }
         void OnEmbarkBtnPressed()
         {
             // move the head to pointer
             // quest base Embark
-            UnLoad(); 
-           nodePtrEvents.MovePawnStone();
+            UnLoad();
+            NodeData endNode = new NodeData(questModel.questName);
+            //MapExpTriggerSO mapExpTSO = MapService.Instance.allMapExpTriggerSO
+            //                            .GetMapETriggerSO(startNode, endNode);
+          
+            //MapENames mapEName = 
+            //        mapExpTSO.GetMapENameOnChanceCalc(questModel.questMode);
+            //nodePtrEvents.MovePawnStone();
         }
         void FillQuestPanel()
         {
@@ -91,7 +99,6 @@ namespace Quest
 
         public void Load()
         {
-
             UIControlServiceGeneral.Instance.TogglePanel(gameObject,  true); 
         }
 

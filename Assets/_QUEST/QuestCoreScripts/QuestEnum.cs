@@ -37,7 +37,7 @@ namespace Quest
         CrewMemberNeeded,// Bounty
     }
 
-    public enum QuestObjNames
+    public enum ObjNames
     {
         None, 
         RetrieveTheDebt, // main
@@ -96,8 +96,22 @@ namespace Quest
         ShipRats,
         HuntWild,
     }
+    public enum NodeType
+    {
+        None, 
+        TownNode, 
+        QuestNode,
+        MapENode,
+        CampNode,
+    }
+    // town  node.. time line completion for the quest 
+    // can have a quest node to travel or cannot .. is travellable 
+    // directly ////
 
 
+
+    // Map ENode ....can be node connection
+    // 
 
 }
 

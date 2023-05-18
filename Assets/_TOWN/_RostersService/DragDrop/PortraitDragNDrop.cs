@@ -22,38 +22,32 @@ namespace Common
         [SerializeField] CanvasGroup canvasGroup;
 
         public CharNames charDragged;
-        //public Transform slotParent;
-       // public CharScrollSlotController charSlotController;
-
+      
         [SerializeField] GameObject clone;
         public iRosterSlot IRosterSlot { get; set; }
         public Transform parentTransform;
   
         void Start()
         {
-
             if (gameObject.GetComponent<CanvasGroup>() == null)
                 canvasGroup = gameObject.AddComponent<CanvasGroup>();
             else
                 canvasGroup = gameObject.GetComponent<CanvasGroup>();
             canvas = GetComponentInParent<Canvas>();
-            //parentSlot = transform.parent.GetComponent<iRosterSlot>();
             parentTransform = transform.parent;
-            IRosterSlot = transform.parent.GetComponent<iRosterSlot>();
-            
+            IRosterSlot = transform.parent.GetComponent<iRosterSlot>();            
         }
 
         #region POINTER METHODS 
 
         public void OnBeginDrag(PointerEventData eventData)
-        {
-           
+        {           
             rectTransform = GetComponent<RectTransform>();
             if (IRosterSlot.slotType == RosterSlotType.CharScrollSlot)
             {
                 Debug.Log("CHAR NAME.... " + IRosterSlot.charInSlot); 
                 CreateCharPortClone(IRosterSlot.charInSlot);
-               bool hasAdded=  IRosterSlot.AddChar2UnlockedList(clone);
+                bool hasAdded=  IRosterSlot.AddChar2UnlockedList(clone);
 
                 GameObject viewGO = RosterService.Instance.rosterViewController.gameObject;
                 transform.SetParent(viewGO.transform);  // to keep draged object on top 

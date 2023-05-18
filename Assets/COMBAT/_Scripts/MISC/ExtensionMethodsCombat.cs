@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
-using System.Linq; 
+using System.Linq;
+using System.Security.Policy;
+using Quest;
 
-
-    public static class ExtensionMethodsCombat
+public static class ExtensionMethodsCombat
     {
 
         
@@ -137,8 +138,41 @@ using System.Linq;
             else return false; 
 
         }
+        public static int GetChanceFrmList(this List<float> chances)
+        {
+            int val = UnityEngine.Random.Range(0, 100);
+            chances.Insert(0, 0f);
+            for (int i = 1; i < chances.Count; i++)
+            {
+                if (val > chances[i - 1] && val <= chances[i])
+                    return i - 1; 
+            }
+            return 0; 
+        }
 
-        public static CharMode FlipCharMode(this CharMode _charMode)
+
+        public static bool IsNodeTimeDataMatch(this NodeTimeData nodeTimeData1, NodeTimeData nodeTimeData2)
+        {
+            if(nodeTimeData1.nodeData.nodeType == nodeTimeData2.nodeData.nodeType 
+               && nodeTimeData1.nodeData.questName == nodeTimeData2.nodeData.questName
+               && nodeTimeData1.nodeData.locName == nodeTimeData2.nodeData.locName
+               )
+             return true;
+            else
+             return false; 
+        }
+
+        public static bool IsNodeDataMatch(this NodeData nodeData1, NodeData nodeData2)
+        {
+            if (nodeData1.nodeType == nodeData2.nodeType
+               && nodeData1.questName == nodeData2.questName
+               && nodeData1.locName == nodeData2.locName
+               )
+                return true;
+            else
+                return false;
+        }
+    public static CharMode FlipCharMode(this CharMode _charMode)
         {
             if (_charMode == CharMode.Ally)
             {
@@ -150,9 +184,6 @@ using System.Linq;
             }
             return CharMode.None; 
         }
-
-
-
 
     }
 

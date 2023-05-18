@@ -11,7 +11,7 @@ namespace Quest
     {
         public override MapENames mapEName => MapENames.BuffaloStampede; 
 
-        public override void CityEContinuePressed()
+        public override void MapEContinuePressed()
         {
 
         }

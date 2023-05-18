@@ -28,7 +28,7 @@ namespace Quest
         public bool hasCamp;
         public QuestMode questMode;
 
-        public ObjSO GetObjSO(QuestObjNames objName)
+        public ObjSO GetObjSO(ObjNames objName)
         {
             int index =
                 allObjSO.FindIndex(t => t.objName == objName); 

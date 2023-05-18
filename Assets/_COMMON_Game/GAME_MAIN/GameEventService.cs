@@ -49,7 +49,7 @@ namespace Common
             EncounterService.Instance.EncounterInit();
             CharService.Instance.Init();
             UIControlServiceGeneral.Instance.InitUIGeneral();
-
+            MapService.Instance.InitMapService();   
 
             BestiaryService.Instance.Init();
             ItemService.Instance.Init();

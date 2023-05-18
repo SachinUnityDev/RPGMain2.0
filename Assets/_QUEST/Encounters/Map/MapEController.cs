@@ -10,6 +10,7 @@ namespace Quest
     {
         [Header("Map E view")]
         [SerializeField] MapEView mapEView;
+        public MapENodePtrEvents mapENodePtrEvents; // ref to node on map that triggered the MapE 
 
         public List<MapEModel> allMapEModels = new List<MapEModel>();
         public List<MapEbase> allMapEBases= new List<MapEbase>();
@@ -21,8 +22,9 @@ namespace Quest
         }
 
 
-        public void ShowMapE(MapENames mapEName)
+        public void ShowMapE(MapENodePtrEvents mapENodePtrEvents, MapENames mapEName)
         {
+            this.mapENodePtrEvents= mapENodePtrEvents;
             MapEModel mapEModel = GetMapEModel(mapEName); 
             mapEView.GetComponent<MapEView>().InitEncounter(mapEModel);
         }
@@ -72,7 +74,7 @@ namespace Quest
         {
             if (Input.GetKeyDown(KeyCode.C))
             {
-                ShowMapE(MapENames.BuffaloStampede);
+              //  ShowMapE(MapENames.BuffaloStampede);
             }
         }
 

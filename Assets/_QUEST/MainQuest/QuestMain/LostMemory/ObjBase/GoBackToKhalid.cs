@@ -11,7 +11,7 @@ namespace Quest
     {
         public override QuestNames qMainNames => QuestNames.LostMemory;
 
-        public override QuestObjNames QObjNames => QuestObjNames.GoBackToKhalid; 
+        public override ObjNames QObjNames => ObjNames.GoBackToKhalid; 
         // "Action 1:  (choose Profession.)debtisClear dialogue
         // Action 2: Unlock Marketplace
         // forcedAction -> End day"

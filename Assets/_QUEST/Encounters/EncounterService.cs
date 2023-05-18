@@ -16,7 +16,7 @@ namespace Quest
         public AllCityESO allCityESO;
 
         [Header("Map Encounter TBR")]
-        public AllMapETriggerSO allMapETriggerSO; 
+        public AllMapExpTriggerSO allMapETriggerSO; 
         public AllMapESO allMapESO;
 
         public MapEController mapEController;

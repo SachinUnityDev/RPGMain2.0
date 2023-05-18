@@ -9,7 +9,7 @@ namespace Quest
     public class ReturnBackToTavernkeeper : QuestObjBase
     {
         public override QuestNames qMainNames => QuestNames.RatInfestation;
-        public override QuestObjNames QObjNames => QuestObjNames.ReturnBackToTavernkeeper;
+        public override ObjNames QObjNames => ObjNames.ReturnBackToTavernkeeper;
 
         public override void Act1()
         {

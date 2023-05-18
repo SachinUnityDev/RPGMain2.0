@@ -9,7 +9,7 @@ namespace Quest
     {
         public override QuestNames qMainNames => QuestNames.ThePowerWithin; 
 
-        public override QuestObjNames QObjNames => QuestObjNames.RequestRayyan;
+        public override ObjNames QObjNames => ObjNames.RequestRayyan;
           
         //  Action 1: Talk to Rayyan
         //  meetRayyan dialogue"

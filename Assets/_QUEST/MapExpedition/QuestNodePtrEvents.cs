@@ -1,49 +1,31 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Town;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Quest
 {
-    public class QuestNodePtrEvents : MonoBehaviour, IPointerClickHandler
+    public class QuestNodePtrEvents : MapExpBasePtrEvents, IPointerClickHandler
     {
-
-        public Nodes nodeName;
-       // public MapENames mapEName;
+     
         public QuestNames questName;
-        public QuestObjNames objName; 
-        MapExpView mapExpView;
-
-        Transform pawnStone; 
-
-        void Start()
-        {
-
-        }
-
-        public void InitNodes(MapExpView mapExpView, Transform pawnStone)
-        {
-            this.mapExpView = mapExpView;
-            this.pawnStone= pawnStone;
-        }
-
+        public ObjNames objName;
+        public override NodeData nodeData => new NodeData(QuestNames.HuntInTheWilderness);  
+      
         public void OnPointerClick(PointerEventData eventData)
-        {
-            mapExpView.OnNodeClicked(nodeName);
-
+        {       
             Sequence seq = DOTween.Sequence();
-            seq.AppendCallback(() => QuestMissionService.Instance
-                                    .questController.ShowQuestEmbarkView(questName, objName, this))
-                                    .AppendCallback(QuestMarkDown);
-            seq.Play(); 
+                    seq.AppendCallback(QuestMarkDown)
+                        //.AppendCallback(()=>pathExpView
+                        //.MovePawnStone(this.transform.position,pathModel.endNode.time))
+                        .AppendCallback(pathBase.OnStartNodeExit)
+                        ;
+                                  
+            seq.Play();
+               
         }
-
-        public void MovePawnStone()
-        {
-            pawnStone.DOMove(transform.position + new Vector3(0,10f,0), 0.8f); 
-        }
-
         void QuestMarkDown()
         {
             transform.DORotate(new Vector3(0, 0, 181), 0.2f)
@@ -54,5 +36,16 @@ namespace Quest
             transform.DORotate(new Vector3(0, 0, 0), 0.2f);
         }
 
+        public override void OnNodeEnter()
+        {
+            QuestMissionService.Instance
+                                   .questController.ShowQuestEmbarkView(questName, objName, this);
+        }
+        public override void OnNodeExit()
+        {
+            QuestMarkUp();
+        }
+
+     
     }
 }

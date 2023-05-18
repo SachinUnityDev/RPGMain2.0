@@ -9,7 +9,7 @@ namespace Quest
     {
         public override QuestNames qMainNames => QuestNames.ThePowerWithin; 
 
-        public override QuestObjNames QObjNames => QuestObjNames.GoBackToSoothsayer;
+        public override ObjNames QObjNames => ObjNames.GoBackToSoothsayer;
         //  "Action  1: Talk to Minami
         //  proofofpower Dialogue"
         public override void Act1()

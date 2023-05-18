@@ -11,7 +11,7 @@ namespace Quest
     public abstract class QuestObjBase
     {
         public abstract QuestNames qMainNames { get; }
-        public abstract QuestObjNames QObjNames { get;  }
+        public abstract ObjNames QObjNames { get;  }
 
         public QuestState act1State;
         public QuestState act2State;

@@ -10,7 +10,7 @@ namespace Quest
     {
         public override QuestNames qMainNames => QuestNames.LostMemory; 
 
-        public override QuestObjNames QObjNames => QuestObjNames.AttendToJob;
+        public override ObjNames QObjNames => ObjNames.AttendToJob;
         //"Action 1: Go to your Job
         // Action 2: jobattended dia"
         public override void Act1()

@@ -15,7 +15,7 @@ namespace Quest
     {
         public override MapENames mapEName => MapENames.BandOfBanditsTwo;
         [SerializeField] Currency money2Lose; 
-        public override void CityEContinuePressed()
+        public override void MapEContinuePressed()
         {
 
         }

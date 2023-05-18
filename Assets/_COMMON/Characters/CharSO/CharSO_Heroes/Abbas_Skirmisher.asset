@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charID: 101
   charName: 1
-  charPrefab: {fileID: 8420103901130551636, guid: 6d09ae695c2d5bd489b095683b67ec93,
+  charPrefab: {fileID: 6114580909890694877, guid: 9bc421af9d7de054dac399de1cfd5fbb,
     type: 3}
   charSprite: {fileID: 21300000, guid: d6b2dd2a46abfd64899e252f3b4730f7, type: 3}
   charHexPortrait: {fileID: 21300000, guid: fe0e861cf1aaeeb4ab1ac7bf966f2eef, type: 3}
@@ -232,13 +232,13 @@ MonoBehaviour:
     currValue: 0
     desc: Health is health, you know it...
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 0
     isClamped: 0
   - statName: 2
     currValue: 0
     desc: Resource to use skills.
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 0
     isClamped: 0
   - statName: 3
     currValue: 0

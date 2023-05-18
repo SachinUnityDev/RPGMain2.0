@@ -93,9 +93,9 @@ namespace Common
         #region GETTERS
         public CharacterSO GetCharSO( CharNames charName)
         {            
-                CharacterSO charSO = allAllySO.Find(x => x.charName == charName);
-            if (charSO != null)
-                return charSO;
+            int  index = allAllySO.FindIndex(t=>t.charName== charName);     
+            if (index  == -1)
+                return allAllySO[index];
             else
                 Debug.LogError("Char SO not found" + charName);
             return null;
@@ -201,6 +201,7 @@ namespace Common
             {
                 charSO = BestiaryService.Instance.GetEnemySO(charName);// this one is pet
             }
+           
             GameObject go = Instantiate(charSO.charPrefab, spawnPos, Quaternion.identity);
             CharController charController = go.AddComponent<CharController>();
             //  

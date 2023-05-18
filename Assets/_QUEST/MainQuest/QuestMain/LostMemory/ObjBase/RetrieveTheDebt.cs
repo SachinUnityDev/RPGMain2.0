@@ -11,7 +11,7 @@ namespace Quest
     {
         public override QuestNames qMainNames => QuestNames.LostMemory; 
 
-        public override QuestObjNames QObjNames => QuestObjNames.RetrieveTheDebt;
+        public override ObjNames QObjNames => ObjNames.RetrieveTheDebt;
 //        "Trigger:  meetKhalid dialogue (choose CharClass)
 //Action 1: Unlock Tavern
 //Action 2: Talk to Greybrow: meetGreybrow

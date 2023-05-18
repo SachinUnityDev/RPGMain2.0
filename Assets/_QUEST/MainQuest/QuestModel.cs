@@ -29,9 +29,9 @@ namespace Quest
             }
         }
 
-        public ObjModel GetObjModel(QuestObjNames objName)
+        public ObjModel GetObjModel(ObjNames objName)
         {
-            int index = allObjModel.FindIndex(t=>t.ObjName== objName);
+            int index = allObjModel.FindIndex(t=>t.objName== objName);
             if (index != -1)
                 return allObjModel[index];
             else

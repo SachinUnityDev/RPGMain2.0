@@ -81,7 +81,7 @@ MonoBehaviour:
   negFameColor: {r: 0.38039216, g: 0.5294118, b: 0.8509804, a: 1}
   unknownFameColor: {r: 1, g: 0.7921569, b: 0.63529414, a: 1}
   fameVal: 0
-  fameType: 0
+  fameType: 7
   FameYield: 0
   famePlank: {fileID: 1074434103238415285, guid: a1fafe4edc8951646bca4f1786859f2a,
     type: 3}

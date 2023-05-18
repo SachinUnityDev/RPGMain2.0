@@ -14,9 +14,9 @@ namespace Quest
         {
             this.questModel = questModel;
         }
-        public abstract void StartObj(QuestObjNames objName);
-        public abstract void OnObj_Completed(QuestObjNames objNames);
-        public abstract void OnObj_Failed(QuestObjNames objNames);
+        public abstract void StartObj(ObjNames objName);
+        public abstract void OnObj_Completed(ObjNames objNames);
+        public abstract void OnObj_Failed(ObjNames objNames);
         public abstract void EndQuest(); 
     }
 }

@@ -8,7 +8,7 @@ namespace Quest
     public class CheckOutTheShips : QuestObjBase
     {
         public override QuestNames qMainNames => QuestNames.ThePowerWithin;
-        public override QuestObjNames QObjNames => QuestObjNames.CheckoutTheShips; 
+        public override ObjNames QObjNames => ObjNames.CheckoutTheShips; 
         //        "Action 1: Go to quest node of ""Power Within""
         //       (its direct combat) and Succeed Quest"
         public override void Act1()

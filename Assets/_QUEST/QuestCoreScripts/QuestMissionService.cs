@@ -10,6 +10,7 @@ namespace Quest
 {
     public class QuestMissionService : MonoSingletonGeneric<QuestMissionService>
     {
+        [Header("QuestMode")]
         public QuestMode questMode;
         
         [Header(" Q Main ")]
@@ -49,7 +50,6 @@ namespace Quest
                 return null; 
             }
         }
-
 
         public QuestModel GetQuestModel(QuestNames questName)
         {

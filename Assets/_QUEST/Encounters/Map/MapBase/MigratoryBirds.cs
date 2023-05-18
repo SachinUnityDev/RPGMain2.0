@@ -10,7 +10,7 @@ namespace Quest
     {
         public override MapENames mapEName => MapENames.MigratoryBirds;
 
-        public override void CityEContinuePressed()
+        public override void MapEContinuePressed()
         {
            
         }

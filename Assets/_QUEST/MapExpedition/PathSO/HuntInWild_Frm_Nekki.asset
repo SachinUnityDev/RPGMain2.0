@@ -29,10 +29,30 @@ MonoBehaviour:
         nodeType: 3
         questName: 0
         locName: 0
-      time: 0
+      time: 1.2
     allNodeChanceData:
-    - questMode: 0
+    - questMode: 1
       chanceData:
-      - chance: 0
-        mapEName: 0
+      - chance: 10
+        mapEName: 2
+      - chance: 60
+        mapEName: 1
+      - chance: 30
+        mapEName: 4
+    - questMode: 2
+      chanceData:
+      - chance: 30
+        mapEName: 2
+      - chance: 30
+        mapEName: 1
+      - chance: 40
+        mapEName: 4
+    - questMode: 3
+      chanceData:
+      - chance: 60
+        mapEName: 2
+      - chance: 10
+        mapEName: 1
+      - chance: 30
+        mapEName: 4
     isCrossed: 0

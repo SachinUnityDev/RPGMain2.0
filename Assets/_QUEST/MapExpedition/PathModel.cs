@@ -38,8 +38,7 @@ namespace Quest
         }
         public InterNodeData GetAnyUnCrossedInterNode()
         {
-            if (interNodes.Count == 0) return null;
-            Debug.Log("INTER NODE COUNT" + interNodes.Count);
+            if (interNodes.Count == 0) return null;          
             foreach (InterNodeData node in interNodes)
             {
                 if (!node.isCrossed)

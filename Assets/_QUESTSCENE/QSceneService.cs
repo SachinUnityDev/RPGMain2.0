@@ -11,6 +11,9 @@ namespace Quest
 
         public AllQNodeSO allQNodeSO;
 
+        public QRoomView qRoomView; 
+
+
        // public QSceneController QSceneController; 
 
     }

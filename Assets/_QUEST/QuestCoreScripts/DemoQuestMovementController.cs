@@ -44,13 +44,13 @@ public class DemoQuestMovementController : MonoBehaviour
 
         if (animState == AnimState.Idle)
         {
-            Debug.Log("IDLE Set");
+           // Debug.Log("IDLE Set");
             skeletonAnimation.AnimationName = "idle_standart"; 
            // SetAnimation(idle, true, 1f); 
         } 
         if (animState == AnimState.Walking)
         {
-            Debug.Log("Walk Set");
+            //Debug.Log("Walk Set");
             skeletonAnimation.AnimationName = "walk_standart";
 
 
@@ -65,7 +65,7 @@ public class DemoQuestMovementController : MonoBehaviour
         rb.velocity = new Vector2(movement * speed, rb.velocity.y); 
         if (movement != 0)
         {
-            Debug.Log("heelo ");
+        
             SetCharacterState(AnimState.Walking);
         }
         else

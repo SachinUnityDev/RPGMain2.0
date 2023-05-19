@@ -23,7 +23,7 @@ MonoBehaviour:
       locName: 1
     time: 2
   timeInCalday: 0.5
-  interNodes:
+  allInterNodes:
   - nodeTimeData:
       nodeData:
         nodeType: 3
@@ -49,3 +49,4 @@ MonoBehaviour:
         mapEName: 3
       - chance: 20
         mapEName: 0
+    isCrossed: 0

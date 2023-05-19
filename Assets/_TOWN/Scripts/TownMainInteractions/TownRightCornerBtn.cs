@@ -44,7 +44,6 @@ namespace Town
             centerBtn = transform.parent.GetChild(2).gameObject;
             rightBtnsController = centerBtn.GetComponent<RightBtnController>();
 
-          
             nameTxt = transform.parent.GetChild(3).GetComponent<TextMeshProUGUI>();
             nameTxt.gameObject.SetActive(false);
         }

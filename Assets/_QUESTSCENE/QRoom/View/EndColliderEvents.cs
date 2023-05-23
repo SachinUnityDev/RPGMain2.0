@@ -3,21 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EndColliderEvents : MonoBehaviour
+
+namespace Quest
 {
-        
-    void Start()
+    public class EndColliderEvents : MonoBehaviour
     {
-        
-    }
-
-
-    public void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log("Collider met");
-        QSceneService.Instance.qRoomView.OnEndColliderMet(); 
-
-
+        public void OnCollisionEnter2D(Collision2D collision)
+        {
+            Debug.Log("Collider met");
+            QSceneService.Instance.qRoomView.EndArrowShow();
+        }
     }
 }
-

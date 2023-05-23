@@ -73,6 +73,7 @@ namespace Common
                 panel?.GetComponent<RectTransform>().DOLocalMove(new Vector3(0,0,0), 0.4f);
                 if(panel != null)
                 {
+                    panel.SetActive(true);
                     Image Img = panel?.transform.parent.parent.GetComponent<Image>();
                     Img.enabled = true;
                 }
@@ -84,6 +85,7 @@ namespace Common
             {
                 Image Img = panel?.transform.parent.parent.GetComponent<Image>();
                 Img.enabled = false;
+                panel.SetActive(false);
             }
             panel?.transform.DOLocalMoveY(1200, 1).SetEase(Ease.OutQuint);
             panelInScene = PanelInScene.None;        

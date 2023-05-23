@@ -17,6 +17,8 @@ MonoBehaviour:
   charPrefab: {fileID: 6114580909890694877, guid: 9bc421af9d7de054dac399de1cfd5fbb,
     type: 3}
   charSprite: {fileID: 21300000, guid: fad77e3efe9f7c740af65e15ff9e5e9a, type: 3}
+  charSpriteUnClickedFlipped: {fileID: 21300000, guid: 06baefc432f46e649bebb5f9196aa9c2,
+    type: 3}
   charHexPortrait: {fileID: 21300000, guid: c4c5ae269686c5d4da034de30818ed9a, type: 3}
   dialoguePortraitClicked: {fileID: 21300000, guid: 0852efd898e7e9a4fa68467cd75aeacc,
     type: 3}
@@ -41,10 +43,8 @@ MonoBehaviour:
   cultType: 14
   classType: 9
   archeType: 3
-  tameAnimalsStrength: 1
   fleeBehaviour: 3
-  canBeAmbushed: 0
-  canBeCaught: 1
+  charFleeState: 0
   provisionItems:
   - itemType: 0
     ItemName: 2
@@ -240,13 +240,13 @@ MonoBehaviour:
     currValue: 0
     desc: Health is health, you know it...
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 0
     isClamped: 0
   - statName: 2
     currValue: 0
     desc: Resource to use skills.
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 0
     isClamped: 0
   - statName: 3
     currValue: 0

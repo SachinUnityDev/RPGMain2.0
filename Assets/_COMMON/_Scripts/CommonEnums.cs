@@ -10,22 +10,22 @@ namespace Common
     public enum GameState
     {
         None,
-        InTown,        
+        InTown,    
         InQuest,
         InCombat,
         InCamp,
         InJobs,
         InIntro,
-        InMapInteraction, 
-        
+        InMapInteraction,         
     };
-    
+
+
+
     public enum GameDifficulty
     {
         Easy, // KIWI
         Medium, // Kiwano
         Hard, // Mangosteen 
-
     }
 
     public enum LocationName
@@ -87,6 +87,13 @@ namespace Common
         NeverFlees,
         Hard,
     }
+     public enum CharFleeState
+     {
+        None,  
+        FledCombat, 
+        FledQuest, 
+     }
+
     public enum TimeState
     {
         None,

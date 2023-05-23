@@ -15,6 +15,7 @@ namespace Common
         public event Action OnPartyLocked; 
         public event Action OnPartyDisbanded;
 
+        public event Action<CharFleeState, CharNames> OnCharFlee; 
 
         public bool isPartyLocked = false; 
 
@@ -54,7 +55,7 @@ namespace Common
 
         public List<CharController> charDiedinLastTurn;
         [Header("Character Pos")]
-        public Vector3 spawnPos = new Vector3(0, 0, 0);
+        public Vector3 spawnPos = new Vector3(-100, 0, 0);
 
         [Header("Recordable Params")]
         public int lastCharID;
@@ -117,7 +118,6 @@ namespace Common
                                 && x.GetComponent<CharController>().charModel.charID == _charID);
             return charGO; 
         }
-
         public CharController GetCharCtrlWithCharID(int  _charID)
         {
             CharController charCtrl = charsInPlayControllers.Find(x => x.charModel.charID == _charID ); 
@@ -146,7 +146,7 @@ namespace Common
 
         #endregion
 
-        #region LOCK and UNLOCK
+        #region LOCK and UNLOCK and FLEE
 
         public void On_PartyLocked()
         {
@@ -158,6 +158,13 @@ namespace Common
             isPartyLocked = false;
             OnPartyDisbanded?.Invoke();
         }
+
+        public void On_CharFlee(CharFleeState charFleeState, CharController charController)
+        {
+            CharNames charName = charController.charModel.charName;
+            OnCharFlee?.Invoke(charFleeState, charName); 
+        }
+
 
         #endregion
 

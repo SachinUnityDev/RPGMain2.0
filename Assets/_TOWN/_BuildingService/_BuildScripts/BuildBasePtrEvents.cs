@@ -30,11 +30,11 @@ namespace Common
         [SerializeField] bool isSelect = false; 
         private void Awake()
         {
-            buildImg = transform.GetComponent<Image>();
+           // buildImg = GetComponent<Image>();
         }
         void Start()
         {
-            buildImg = GetComponent<Image>();
+          //  buildImg = GetComponent<Image>();
             buildImg.alphaHitTestMinimumThreshold = 0.1f;
             Hidetxt();
         }

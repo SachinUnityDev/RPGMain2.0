@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 
 namespace Quest
 {
-    public class AllQNodeRoomModel
+    [Serializable]
+    public class QNodeAllRoomModel
     {
         public QuestNames questName; 
         public ObjNames objNames;
         public Nodes node; 
         public List<QRoomModel> allQuestRoomModel = new List<QRoomModel>();
 
-        public AllQNodeRoomModel(QNodeAllRoomSO QNodeAllRoomSO)
+        public QNodeAllRoomModel(QNodeAllRoomSO QNodeAllRoomSO)
         {
             questName = QNodeAllRoomSO.questNames;
             objNames = QNodeAllRoomSO.objName; 
@@ -24,7 +25,6 @@ namespace Quest
                 allQuestRoomModel.Add(QRModel); 
             }
         }
-
         public QRoomModel GetQRoomModel(int qRoom)
         {
             int index =

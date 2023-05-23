@@ -25,7 +25,10 @@ namespace Quest
         public List<CurioNames> allCurio1 = new List<CurioNames>();
         public List<CurioNames> allCurio2 = new List<CurioNames>();
 
-        public Sprite prop1;
+        public Sprite prop;
+        [Header("Q Room map Portrait Cordinates")]
+        public Vector2 mapPortCord; 
+
 
     }
 

@@ -35,13 +35,7 @@ namespace Common
             charController.ChangeAttrib(CauseType.PermanentTrait, (int)permaTraitName, charID, AttribName.haste, -2);
         }
 
-        void NoAmbush(TimeState _timeState)
-        {
-            if (_timeState == TimeState.Night)
-                charController.charModel.canBeAmbushed = false; 
-            else
-                charController.charModel.canBeAmbushed = true;
-        }
+       
     }
 }
 

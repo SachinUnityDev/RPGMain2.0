@@ -1,3 +1,4 @@
+using Quest;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -12,6 +13,7 @@ namespace Common
     public class GameModel
     {
         public GameState gameState;
+       
         public GameDifficulty gameDifficulty;  
         public LocationName locationName;
         public LandscapeNames landscapeNames = LandscapeNames.None;// quest has a landscape

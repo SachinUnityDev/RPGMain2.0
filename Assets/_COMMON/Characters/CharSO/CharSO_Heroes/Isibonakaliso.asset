@@ -28,7 +28,7 @@ MonoBehaviour:
   jobExp: 0
   skillPts: 0
   charLvl: 1
-  charNameStr: 
+  charNameStr: Isibonakaliso
   availOfChar: 0
   stateOfChar: 0
   fameBehavior: 0
@@ -39,10 +39,7 @@ MonoBehaviour:
   cultType: 7
   classType: 4
   archeType: 2
-  tameAnimalsStrength: 1
   fleeBehaviour: 1
-  canBeAmbushed: 0
-  canBeCaught: 0
   provisionItems: []
   earningsItems: []
   earningShare: 0
@@ -228,13 +225,13 @@ MonoBehaviour:
     currValue: 0
     desc: Health is health, you know it...
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 0
     isClamped: 0
   - statName: 2
     currValue: 0
     desc: Resource to use skills.
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 0
     isClamped: 0
   - statName: 3
     currValue: 0

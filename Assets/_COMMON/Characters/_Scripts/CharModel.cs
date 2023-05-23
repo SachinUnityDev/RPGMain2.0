@@ -81,11 +81,8 @@ namespace Common
         public List<int> PrevLvlrec = new List<int>(); // to record all the prev levels
 
         [Header("CHAR EXTD STATS")]
-       // public float tameAnimalsStrength;
-        public FleeBehaviour fleeBehaviour;
-        public bool canBeAmbushed;
-        public bool canBeCaught;
-
+        public FleeBehaviour fleeBehaviour;  
+        public CharFleeState charFleeState; 
 
         [Header("DEFAULT PROVISION")]
         public List<ItemData> provisionItems = new List<ItemData>();
@@ -214,8 +211,7 @@ namespace Common
             // MISC STATS
             
             fleeBehaviour = _charSO.fleeBehaviour;
-            canBeCaught = _charSO.canBeCaught;
-            canBeAmbushed = _charSO.canBeAmbushed;
+            charFleeState = _charSO.charFleeState;
 
             // "DEFAULT PROVISION
             provisionItems = _charSO.provisionItems.DeepClone();

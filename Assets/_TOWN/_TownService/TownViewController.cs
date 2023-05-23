@@ -81,8 +81,10 @@ namespace Town
             {
                child.GetComponent<BuildBasePtrEvents>().Init(this);
             }
-            if(timeState == TimeState.Day)            
-                cloudTrans.gameObject.SetActive(true); 
+          
+            if (timeState == TimeState.Day 
+                && GameService.Instance.gameModel.gameState == GameState.InTown)
+                cloudTrans.gameObject.SetActive(true);
             else
                 cloudTrans.gameObject.SetActive(false);
             

@@ -13,6 +13,7 @@ namespace Common
         public CharNames charName;
         public GameObject charPrefab;  // change to prefab 
         public Sprite charSprite;
+        public Sprite charSpriteUnClickedFlipped;
         public Sprite charHexPortrait;
         public Sprite dialoguePortraitClicked;
         public Sprite dialoguePortraitUnClicked;
@@ -50,10 +51,8 @@ namespace Common
         public ClassType classType;
         public ArcheType archeType;
         [Header("MISC STATS")]
-        public float tameAnimalsStrength;
         public FleeBehaviour fleeBehaviour;
-        public bool canBeAmbushed;
-        public bool canBeCaught;
+        public CharFleeState charFleeState;
 
         [Header("DEFAULT PROVISION")]
         public List<ItemData> provisionItems = new List<ItemData>();

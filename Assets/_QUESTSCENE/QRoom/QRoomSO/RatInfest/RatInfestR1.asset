@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 258763e19aa87a64da06143f272adf98, type: 3}
+  m_Name: RatInfestR1
+  m_EditorClassIdentifier: 
+  questNames: 4
+  objName: 9
+  node: 1
+  roomNo: 1
+  upRoomNo: 3
+  downRoomNo: 2
+  allCurio1: 11000000
+  allCurio2: 0900000013000000
+  prop: {fileID: 21300000, guid: f7444512ef36adb43ae330bb253cd054, type: 3}
+  mapPortCord: {x: -243, y: 20}

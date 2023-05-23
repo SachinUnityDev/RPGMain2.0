@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Quest
 {
-    public class QuestEnum 
+    public class QuestEnum
     {
-        
+
     }
     public enum QuestMode
     {
@@ -18,16 +18,16 @@ namespace Quest
     }
     public enum QuestType
     {
-        None, 
-        Main, 
-        Side, 
-        Bounty, 
-        Companion, 
+        None,
+        Main,
+        Side,
+        Bounty,
+        Companion,
     }
 
     public enum QuestNames
     {
-        None, 
+        None,
         LostMemory, // main 
         ThePowerWithin, // main
         APlaceOfEvil,// main
@@ -39,7 +39,7 @@ namespace Quest
 
     public enum ObjNames
     {
-        None, 
+        None,
         RetrieveTheDebt, // main
         GoBackToKhalid,// main
         AttendToJob,// main
@@ -57,12 +57,18 @@ namespace Quest
     }
     public enum QuestState
     {
-        None, 
-        ToBeTaken, 
-        InProgress, 
-        Completed, 
+        None,
+        ToBeTaken,
+        InProgress,
+        Completed,
     }
+    public enum QRoomState
+    {
+        None, 
+        Prep, 
+        Walk,
 
+    }
     public enum CityENames
     {
         None,

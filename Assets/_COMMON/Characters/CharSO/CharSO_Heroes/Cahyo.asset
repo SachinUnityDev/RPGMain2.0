@@ -17,6 +17,8 @@ MonoBehaviour:
   charPrefab: {fileID: 6114580909890694877, guid: 9bc421af9d7de054dac399de1cfd5fbb,
     type: 3}
   charSprite: {fileID: 21300000, guid: 09fbee7bb1a33844c8258afa6d6a5a8f, type: 3}
+  charSpriteUnClickedFlipped: {fileID: 21300000, guid: 3480bfa96429c3c4da725d863117d830,
+    type: 3}
   charHexPortrait: {fileID: 21300000, guid: 1d9f6c52a2ca3274b827406510137d11, type: 3}
   dialoguePortraitClicked: {fileID: 0}
   dialoguePortraitUnClicked: {fileID: 0}
@@ -39,10 +41,8 @@ MonoBehaviour:
   cultType: 10
   classType: 5
   archeType: 1
-  tameAnimalsStrength: 1
   fleeBehaviour: 2
-  canBeAmbushed: 0
-  canBeCaught: 0
+  charFleeState: 0
   provisionItems:
   - itemType: 0
     ItemName: 3
@@ -187,7 +187,7 @@ MonoBehaviour:
     maxLimit: 90
     isClamped: 0
   - AttribName: 15
-    currValue: 0
+    currValue: 11
     baseValue: 0
     desc: Percentage value to mitigate incoming Light damage.
     minRange: 0
@@ -236,13 +236,13 @@ MonoBehaviour:
     currValue: 0
     desc: Health is health, you know it...
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 0
     isClamped: 0
   - statName: 2
     currValue: 0
     desc: Resource to use skills.
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 0
     isClamped: 0
   - statName: 3
     currValue: 0

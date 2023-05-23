@@ -17,6 +17,8 @@ MonoBehaviour:
   charPrefab: {fileID: 6114580909890694877, guid: 9bc421af9d7de054dac399de1cfd5fbb,
     type: 3}
   charSprite: {fileID: 21300000, guid: d6b2dd2a46abfd64899e252f3b4730f7, type: 3}
+  charSpriteUnClickedFlipped: {fileID: 21300000, guid: ef847069b9413c34db41d2a0cd4d32d8,
+    type: 3}
   charHexPortrait: {fileID: 21300000, guid: fe0e861cf1aaeeb4ab1ac7bf966f2eef, type: 3}
   dialoguePortraitClicked: {fileID: 21300000, guid: d6b2dd2a46abfd64899e252f3b4730f7,
     type: 3}
@@ -30,7 +32,7 @@ MonoBehaviour:
   jobExp: 0
   skillPts: 0
   charLvl: 1
-  charNameStr: Abbas
+  charNameStr: Abbas The Skirmisher
   availOfChar: 1
   stateOfChar: 2
   fameBehavior: 6
@@ -41,10 +43,8 @@ MonoBehaviour:
   cultType: 14
   classType: 7
   archeType: 2
-  tameAnimalsStrength: 1
   fleeBehaviour: 0
-  canBeAmbushed: 0
-  canBeCaught: 0
+  charFleeState: 0
   provisionItems:
   - itemType: 0
     ItemName: 1
@@ -56,7 +56,7 @@ MonoBehaviour:
   permaTraitNames: 
   AttribList:
   - AttribName: 1
-    currValue: 0
+    currValue: 11
     baseValue: 0
     desc: Base value for Physical and Magical attacks.
     minRange: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
     maxLimit: 100
     isClamped: 0
   - AttribName: 2
-    currValue: 0
+    currValue: 11
     baseValue: 0
     desc: Chance to land Physical attack to a target.
     minRange: 0
@@ -74,7 +74,7 @@ MonoBehaviour:
     maxLimit: 15
     isClamped: 0
   - AttribName: 3
-    currValue: 0
+    currValue: 15
     baseValue: 0
     desc: Determinant value for hitting correct target by Magical attacks or Misfire.
     minRange: 0
@@ -83,7 +83,7 @@ MonoBehaviour:
     maxLimit: 96
     isClamped: 0
   - AttribName: 4
-    currValue: 0
+    currValue: 5
     baseValue: 0
     desc: Determinant value for Critical and Feeble hits.
     minRange: 0
@@ -92,7 +92,7 @@ MonoBehaviour:
     maxLimit: 12
     isClamped: 0
   - AttribName: 5
-    currValue: 0
+    currValue: 5
     baseValue: 0
     desc: Determinant value for extra action or pass action.
     minRange: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
     maxLimit: 100
     isClamped: 0
   - AttribName: 8
-    currValue: 0
+    currValue: 5
     baseValue: 0
     desc: Determinant value for base Stamina. Increases chance to withstand Thirst.
     minRange: 0
@@ -147,7 +147,7 @@ MonoBehaviour:
     maxLimit: 100
     isClamped: 0
   - AttribName: 11
-    currValue: 0
+    currValue: 55
     baseValue: 0
     desc: Percentage value to mitigate incoming Fire damage.
     minRange: 0
@@ -165,7 +165,7 @@ MonoBehaviour:
     maxLimit: 90
     isClamped: 0
   - AttribName: 13
-    currValue: 0
+    currValue: 55
     baseValue: 0
     desc: Percentage value to mitigate incoming Water damage.
     minRange: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
     maxLimit: 90
     isClamped: 0
   - AttribName: 15
-    currValue: 0
+    currValue: 55
     baseValue: 0
     desc: Percentage value to mitigate incoming Light damage.
     minRange: 0
@@ -235,10 +235,10 @@ MonoBehaviour:
     maxLimit: 0
     isClamped: 0
   - statName: 2
-    currValue: 0
+    currValue: 15
     desc: Resource to use skills.
     minLimit: 0
-    maxLimit: 0
+    maxLimit: 15
     isClamped: 0
   - statName: 3
     currValue: 0

@@ -17,19 +17,21 @@ namespace Quest
         public List<QRoomSO> allQRoomSO = new List<QRoomSO>();
         
         public Sprite bGSprite;
-        public Sprite fGSprite; 
+        public Sprite fGSprite;
+
+        public Sprite mapSprite;
 
         //public Sprite GetCurio1(int roomNo)
         //{
-        //    int index = allQRoomSO.FindIndex(t=>t.roomNo == roomNo);
-        //    if(index == -1)
+        //    int index = allQRoomSO.FindIndex(t => t.roomNo == roomNo);
+        //    if (index == -1)
         //    {
-        //        return allQRoomSO[index].curio1;
+        //        return allQRoomSO[index].allCurio1;
         //    }
         //    else
         //    {
         //        Debug.Log("Curio 1 not found" + roomNo);
-        //        return null; 
+        //        return null;
         //    }
         //}
 
@@ -50,9 +52,9 @@ namespace Quest
         public Sprite GetProp(int roomNo)
         {
             int index = allQRoomSO.FindIndex(t => t.roomNo == roomNo);
-            if (index == -1)
+            if (index != -1)
             {
-                return allQRoomSO[index].prop1;
+                return allQRoomSO[index].prop;
             }
             else
             {
@@ -64,7 +66,7 @@ namespace Quest
         public QRoomSO GetQRoomSO(int roomNo)
         {
             int index = allQRoomSO.FindIndex(t => t.roomNo == roomNo);
-            if (index == -1)
+            if (index != -1)
             {
                 return allQRoomSO[index];
             }

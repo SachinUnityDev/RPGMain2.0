@@ -4,8 +4,6 @@ using UnityEngine;
 using DG.Tweening;
 using Common;
 using Town;
-using System.Security.Policy;
-
 namespace Quest
 {
     public class PathExpView : MonoBehaviour
@@ -66,7 +64,6 @@ namespace Quest
                 MapENodePtrEvents ptrE = node.GetComponent<MapENodePtrEvents>();
                 ptrE.InitMapEPtrEvents(this);
             }
-
         }
         public void OnPathExit()
         {

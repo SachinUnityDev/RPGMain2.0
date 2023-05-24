@@ -21,8 +21,7 @@ namespace Quest
         {
             startNode = pathSO.startNode;
             endNode = pathSO.endNode; 
-            timeInCalday = pathSO.timeInCalday;
-            
+            timeInCalday = pathSO.timeInCalday;            
             interNodes = pathSO.allInterNodes.DeepClone(); 
         }
    

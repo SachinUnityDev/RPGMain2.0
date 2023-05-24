@@ -23,8 +23,19 @@ namespace Interactables
         public ToolNames toolName2; 
         [TextArea(2,5)]
         public string openDesc = "";
+        [TextArea(2, 5)]
+        public string interactDesc = "";
 
-        public List<Currency> lootMoneyRange = new List<Currency>();     
+        public List<Currency> lootMoneyRange = new List<Currency>();
+
+        public Sprite curioN;
+        public Sprite curioHL;
+        public Sprite curioOpn;
+
+        [TextArea(2, 10)]
+        public string curioBark; 
+
+        
     }
 }
 

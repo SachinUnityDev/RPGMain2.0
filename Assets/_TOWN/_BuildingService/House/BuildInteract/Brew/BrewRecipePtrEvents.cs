@@ -57,7 +57,7 @@ namespace Town
         void FillSlot()
         {             
             Sprite itemSprite = GetSprite(ingredReq.ItemData);
-            Debug.Log("Ingred " + (IngredNames)ingredReq.ItemData.ItemName);
+            Debug.Log("Ingred " + (IngredNames)ingredReq.ItemData.itemName);
             imgIngred = transform.GetChild(0).GetComponent<Image>();
             txtTrans = transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
             imgIngred.sprite = itemSprite;
@@ -65,7 +65,7 @@ namespace Town
         }
         Sprite GetSprite(ItemData itemData)
         {
-            Sprite sprite = InvService.Instance.InvSO.GetSprite(itemData.ItemName, itemData.itemType);
+            Sprite sprite = InvService.Instance.InvSO.GetSprite(itemData.itemName, itemData.itemType);
             if (sprite != null)
                 return sprite;
             else

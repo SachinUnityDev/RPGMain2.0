@@ -150,7 +150,7 @@ namespace Interactables
         PoeticGewgaws,
         RelicGewgaws, 
         Pouches,
-        
+        LoreScroll,
 
     }
 
@@ -402,7 +402,7 @@ namespace Interactables
         BracersOfVersatility,
         CloakOfTheCommoner,
         LeatherhideGlovesOfTheDonkey,
-        CamelleatherGlovesOfTheScholar,
+        CamelLeatherGlovesOfTheScholar,
         SkullGloves,
         EmeraldNecklaceOfDestiny,
         SilverNecklaceOfWarding,

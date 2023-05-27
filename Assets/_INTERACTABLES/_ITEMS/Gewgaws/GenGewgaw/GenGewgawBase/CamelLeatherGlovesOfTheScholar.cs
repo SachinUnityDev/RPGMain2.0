@@ -8,9 +8,9 @@ namespace Interactables
 {
     public class CamelLeatherGlovesOfTheScholar : GenGewgawBase, Iitems, IEquipAble
     {
-        public override GenGewgawNames genGewgawNames => GenGewgawNames.CamelleatherGlovesOfTheScholar;
+        public override GenGewgawNames genGewgawNames => GenGewgawNames.CamelLeatherGlovesOfTheScholar;
         public ItemType itemType => ItemType.GenGewgaws;
-        public int itemName => (int)GenGewgawNames.CamelleatherGlovesOfTheScholar;
+        public int itemName => (int)GenGewgawNames.CamelLeatherGlovesOfTheScholar;
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
         public int itemId { get; set; }

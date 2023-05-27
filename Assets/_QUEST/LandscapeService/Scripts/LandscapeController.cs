@@ -2,10 +2,7 @@ using Combat;
 using Common;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
-
-
 
 namespace Quest
 {

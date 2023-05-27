@@ -6,6 +6,8 @@ using UnityEngine;
 
 namespace Interactables
 {
+ 
+
     public abstract class Foodbase
     {
         public abstract FoodNames foodName { get; }   
@@ -37,6 +39,9 @@ namespace Interactables
         // start life ... tick and turn to rotten food
         // As soon as added to common , excess, and stash start tick
         // connect to invController add to above three inv
+
+
+
 
     }
 }

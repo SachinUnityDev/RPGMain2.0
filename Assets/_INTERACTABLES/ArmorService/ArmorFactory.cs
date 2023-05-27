@@ -49,12 +49,12 @@ namespace Interactables
             return null;
         }
 
-        public ArmorBase GetNewArmorBase(CharController charController, ArmorType armorType)
-        {
-            ArmorBase armorBase = GetArmorBase(armorType);
-            armorBase.InitArmor(charController);
-            ArmorService.Instance.allArmorBases.Add(armorBase); 
-            return armorBase;
-        }
+        //public ArmorBase GetNewArmorBase(CharController charController, ArmorType armorType)
+        //{
+        //    ArmorBase armorBase = GetArmorBase(armorType);
+        //    armorBase.InitArmor(charController);
+        //    ArmorService.Instance.allArmorBases.Add(armorBase); 
+        //    return armorBase;
+        //}
     }
 }

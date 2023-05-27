@@ -39,7 +39,7 @@ namespace Town
 
                
                 ImgTrans.GetComponent<Image>().sprite = InvService.Instance
-                                                            .InvSO.GetSprite(itemData.ItemName, itemData.itemType);
+                                                            .InvSO.GetSprite(itemData.itemName, itemData.itemType);
                 ImgTrans.gameObject.SetActive(true);
             }
             else
@@ -47,7 +47,7 @@ namespace Town
                 transform.GetComponent<Image>().sprite = InvService.Instance.InvSO.emptySlot;
 
                 ImgTrans.GetComponent<Image>().sprite = InvService.Instance
-                                                            .InvSO.GetSprite(itemData.ItemName, itemData.itemType);
+                                                            .InvSO.GetSprite(itemData.itemName, itemData.itemType);
                 ImgTrans.gameObject.SetActive(true);
             }
         }

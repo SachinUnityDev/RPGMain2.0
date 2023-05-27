@@ -10,12 +10,18 @@ namespace Interactables
     public class ItemData  
     {
         public ItemType itemType;// should have a item ID for better control
-        public int ItemName;
-
+        public int itemName;
+        public GenGewgawQ gengewgawQ = GenGewgawQ.None;
         public ItemData(ItemType itemType, int itemName)
         {
             this.itemType = itemType;
-            ItemName = itemName;
+            this.itemName = itemName;
+        }
+        public ItemData(ItemType itemType, int itemName, GenGewgawQ gengewgawQ)
+        {
+            this.itemType = itemType;
+            this.itemName = itemName;
+            this.gengewgawQ = gengewgawQ; 
         }
     }
 

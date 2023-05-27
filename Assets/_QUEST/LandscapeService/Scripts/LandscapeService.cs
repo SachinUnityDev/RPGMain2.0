@@ -17,17 +17,10 @@ namespace Quest
         [Header("global variable")   ]
         public LandscapeNames currLandscape;
 
-        //[Header("AllLandscapeSOs")]
-
-
         [Header("Models")]
         public List<LandscapeModel> allLandScapeModels = new List<LandscapeModel>();         
         
         public LandscapeController landscapeControllers; // single controller
-        public LandScapeViewController LandScapeViewController; 
-
-
-
 
     }
 }

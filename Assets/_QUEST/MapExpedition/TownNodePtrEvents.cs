@@ -21,14 +21,11 @@ namespace Quest
 
         }
 
-        public override void OnNodeExit()
+        public override void OnNodeInteractCancel()
         {
             
         }
 
-        public override void OnNodeEnter()
-        {
-            
-        }
+    
     }
 }

@@ -10,8 +10,9 @@ namespace Common
     {
         public override LandscapeNames landscapeName => LandscapeNames.Coast; 
         //-12 Cold Res  .. water earth and dark/// landscape debuff
-        public override void OnLandscapeInit()
+        protected  override void OnLandscapeEnter(LandscapeNames landscapeName)
         {
+            if (this.landscapeName != landscapeName) return;
             foreach (CharController charCtrl in CharService.Instance.allCharsInPartyLocked)
             {
                 // change stat using buff controller
@@ -36,6 +37,27 @@ namespace Common
         public override void TrapPositive()
         {
             
+        }
+
+        protected override void OnLandscapeExit(LandscapeNames landscapeName)
+        {
+            if (this.landscapeName != landscapeName) return;
+            foreach (CharController charCtrl in CharService.Instance.allCharsInPartyLocked)
+            {
+                // change stat using buff controller
+                int charID = charCtrl.charModel.charID;
+                charCtrl.buffController.ApplyBuff(CauseType.Landscape, (int)LandscapeNames.Field
+                            , charID, AttribName.waterRes, -12, TimeFrame.Infinity, 1, false);
+
+                charID = charCtrl.charModel.charID;
+                charCtrl.buffController.ApplyBuff(CauseType.Landscape, (int)LandscapeNames.Field
+                            , charID, AttribName.earthRes, -12, TimeFrame.Infinity, 1, false);
+
+                charID = charCtrl.charModel.charID;
+                charCtrl.buffController.ApplyBuff(CauseType.Landscape, (int)LandscapeNames.Field
+                            , charID, AttribName.darkRes, -12, TimeFrame.Infinity, 1, false);
+
+            }
         }
     }
 }

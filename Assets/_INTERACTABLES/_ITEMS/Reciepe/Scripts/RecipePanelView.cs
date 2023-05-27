@@ -87,12 +87,12 @@ namespace Interactables
                 case ItemType.None:
                     break;
                 case ItemType.Potions:
-                    PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionNames)itemData.ItemName);                   
+                    PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionNames)itemData.itemName);                   
                     finalPdtTrans.GetComponent<Image>().sprite = potionSO.iconSprite;
                     slotTitleTxt.text = potionSO.potionName.ToString().CreateSpace();
                     break;
                 case ItemType.GenGewgaws:
-                    GenGewgawSO genSO = ItemService.Instance.GetGenGewgawSO((GenGewgawNames)itemData.ItemName);
+                    GenGewgawSO genSO = ItemService.Instance.GetGenGewgawSO((GenGewgawNames)itemData.itemName);
                     finalPdtTrans.GetComponent<Image>().sprite = genSO.iconSprite;
                     slotTitleTxt.text = genSO.genGewgawName.ToString().CreateSpace();
                     break;
@@ -119,12 +119,12 @@ namespace Interactables
                 case ItemType.Gems:
                     break;
                 case ItemType.Alcohol:
-                    AlcoholSO alcoholSO = ItemService.Instance.GetAlcoholSO((AlcoholNames)itemData.ItemName);
+                    AlcoholSO alcoholSO = ItemService.Instance.GetAlcoholSO((AlcoholNames)itemData.itemName);
                     finalPdtTrans.GetComponent<Image>().sprite = alcoholSO.iconSprite;
                     slotTitleTxt.text = alcoholSO.alcoholName.ToString().CreateSpace();
                     break;
                 case ItemType.Meals:
-                    MealsSO mealSO = ItemService.Instance.GetMealSO((MealNames)itemData.ItemName);
+                    MealsSO mealSO = ItemService.Instance.GetMealSO((MealNames)itemData.itemName);
                     finalPdtTrans.GetComponent<Image>().sprite = mealSO.iconSprite;
                     slotTitleTxt.text = mealSO.mealName.ToString().CreateSpace();
                     break;

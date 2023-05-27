@@ -15,13 +15,17 @@ namespace Quest
         public abstract NodeData nodeData { get; }
         public virtual void InitQuestNodePtrEvents(PathExpView pathExpView)
         {
-            this.pathExpView = pathExpView;
-            MapService.Instance.pathController.OnPathEndNodeSelect(this, nodeData); 
-            pathModel = MapService.Instance.pathController.pathModel; 
-            pathBase = MapService.Instance.pathController.pathBase; 
+            this.pathExpView = pathExpView;            
         }
-        public abstract void OnNodeExit();
-        public abstract void OnNodeEnter();
+
+        public virtual void OnEndNodeSelect()
+        {
+            MapService.Instance.pathController.OnPathEndNodeSelect(this, nodeData);
+            pathModel = MapService.Instance.pathController.pathModel;
+            pathBase = MapService.Instance.pathController.pathBase;
+        }
+        public abstract void OnNodeInteractCancel();
+       
     }
 
 

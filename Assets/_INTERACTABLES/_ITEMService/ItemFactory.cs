@@ -734,7 +734,7 @@ namespace Interactables
         {
             foreach (var recipe in allRecipes)
             {
-                if (recipe.Key.ItemName == pdtData.ItemName 
+                if (recipe.Key.itemName == pdtData.itemName 
                     && recipe.Key.itemType == pdtData.itemType)
                 {
                     var t = Activator.CreateInstance(recipe.Value) as Iitems;

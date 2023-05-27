@@ -20,15 +20,25 @@ namespace Quest
           
         }
 
-    
-
-        public override void OnStartNodeExit()
+        public override void OnEndNodeClicked(Transform endNode)
         {
+            
+
+
+        }
+
+
+        public override void OnEmbarkPressed()
+        {
+           
+
             MapService.Instance.pathController.CrossTheCurrNode();
 
             InterNodeData nextInterNodeData = pathModel.GetAnyUnCrossedInterNode();
             if (nextInterNodeData != null)
             {
+                
+
                 QuestMode questMode = QuestMissionService.Instance.questMode;
                 mapENames =
                  pathModel.GetMapENameAfterChanceChk(nextInterNodeData.nodeTimeData, questMode);
@@ -48,5 +58,7 @@ namespace Quest
                                                             , 0.4f);
             }
         }
+
+        
     }
 }

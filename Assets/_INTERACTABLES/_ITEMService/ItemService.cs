@@ -105,7 +105,7 @@ namespace Interactables
         public Iitems GetItemBase(ItemData itemData, GenGewgawQ genQ = GenGewgawQ.None)
         {
             int index = 
-            allItemsInGame.FindIndex(t => t.itemName == itemData.ItemName && t.itemType == itemData.itemType); 
+            allItemsInGame.FindIndex(t => t.itemName == itemData.itemName && t.itemType == itemData.itemType); 
             if(index != -1)
             {
                 return allItemsInGame[index];
@@ -121,11 +121,11 @@ namespace Interactables
             Iitems iitems; 
             if(genQ == GenGewgawQ.None)
             {
-                iitems = itemFactory.GetNewItem(itemData.itemType, itemData.ItemName);
+                iitems = itemFactory.GetNewItem(itemData.itemType, itemData.itemName);
             }
             else
             {
-                iitems = itemFactory.GetNewGenGewgaw((GenGewgawNames)itemData.ItemName, genQ);
+                iitems = itemFactory.GetNewGenGewgaw((GenGewgawNames)itemData.itemName, genQ);
             }
             return iitems;
         }
@@ -498,7 +498,7 @@ namespace Interactables
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Gems, (int)GemNames.Ruri,
+                InitItemToInv(SlotType.CommonInv, ItemType.Meals, (int)MealNames.BeefSteak,
                                      CauseType.Items, 2);
             }
             if (Input.GetKeyDown(KeyCode.J))

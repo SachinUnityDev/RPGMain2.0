@@ -19,8 +19,6 @@ namespace Interactables
         public ItemData toolData { get; set; } 
         public List<ItemDataWithQty> allIngredData { get; set; } = new List<ItemDataWithQty>();
 
-  
-
         public  void RecipeInit()
         {
             toolData = new ItemData(ItemType.Tools, (int)ToolNames.CookingPot);

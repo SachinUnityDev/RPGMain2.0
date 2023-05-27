@@ -15,7 +15,16 @@ namespace Quest
 
         MapENames mapENames = MapENames.None; 
 
-        public override void OnStartNodeExit()
+        public override void OnEndNodeEnter()
+        {
+            // pathmodel uncross all pathData
+            // pathController .. set data points endNode as null .. start node as current node
+            // pathSO asn pathmodel as none
+            // 
+
+        }
+
+        public override void OnEmbarkPressed()
         {
             MapService.Instance.pathController.CrossTheCurrNode();
 
@@ -29,27 +38,23 @@ namespace Quest
                 {
                     MapENodePtrEvents mapEPtrEvents =
                             MapService.Instance.pathExpView.FindNode(nextInterNodeData.nodeTimeData.nodeData);
-                    mapEPtrEvents.OnMapEChecked(nextInterNodeData, mapENames); 
+                    mapEPtrEvents.OnMapEChecked(nextInterNodeData, mapENames);
                     currNodeIndex++;
                 }
             }
             else
             {  // no uncross path 
-                PathController pathController = MapService.Instance.pathController; 
-                MapExpBasePtrEvents endPtr = pathController.mapExpBasePtrEvents;
-                MapService.Instance.pathExpView.MovePawnStone(endPtr.transform.position
-                                                            , 0.4f);
+               // PathController pathController = MapService.Instance.pathController;
+               // MapExpBasePtrEvents endPtr = pathController.mapExpBasePtrEvents;
+                MapService.Instance.pathExpView.MovePawnStone(endNodeTrans.position
+                                                                , 0.4f);
             }
         }
-        public override void OnEndNodeEnter()
-        {
-            // pathmodel uncross all pathData
-            // pathController .. set data points endNode as null .. start node as current node
-            // pathSO asn pathmodel as none
-            // 
 
+        public override void OnEndNodeClicked(Transform endNodeTrans)
+        {
+            this.endNodeTrans = endNodeTrans;
+           // QuestMissionService.Instance.questController.ShowQuestEmbarkView(questName, objName, this); 
         }
-       
-       
     }
 }

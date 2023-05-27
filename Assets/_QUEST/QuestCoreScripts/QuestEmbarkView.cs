@@ -35,6 +35,7 @@ namespace Quest
             embarkBtn.onClick.AddListener(OnEmbarkBtnPressed);    
         }
 
+        // to be called only from QuestController
         public void ShowQuestEmbarkView(QuestModel questModel, QuestSO questSO
                     , QuestBase questBase, ObjModel objModel, QuestNodePtrEvents nodePtrEvents, NodeData startNodeData) 
         {
@@ -55,16 +56,9 @@ namespace Quest
         }
         void OnEmbarkBtnPressed()
         {
-            // move the head to pointer
-            // quest base Embark
             UnLoad();
             NodeData endNode = new NodeData(questModel.questName);
-            //MapExpTriggerSO mapExpTSO = MapService.Instance.allMapExpTriggerSO
-            //                            .GetMapETriggerSO(startNode, endNode);
-          
-            //MapENames mapEName = 
-            //        mapExpTSO.GetMapENameOnChanceCalc(questModel.questMode);
-            //nodePtrEvents.MovePawnStone();
+            // Get PathBase
         }
         void FillQuestPanel()
         {

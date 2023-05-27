@@ -18,9 +18,10 @@ namespace Quest
         {       
             Sequence seq = DOTween.Sequence();
                     seq.AppendCallback(QuestMarkDown)
+                        .AppendCallback(OnEndNodeSelect)
                         //.AppendCallback(()=>pathExpView
                         //.MovePawnStone(this.transform.position,pathModel.endNode.time))
-                        .AppendCallback(pathBase.OnStartNodeExit)
+//.AppendCallback(pathBase.OnStartNodeExit)
                         ;
                                   
             seq.Play();
@@ -31,17 +32,18 @@ namespace Quest
             transform.DORotate(new Vector3(0, 0, 181), 0.2f)
                 .OnComplete(() => transform.DOShakeRotation(1.5f, new Vector3(0, 0, 40), 4, 20, true));
         }
-        public void QuestMarkUp()
+        void QuestMarkUp()
         {
             transform.DORotate(new Vector3(0, 0, 0), 0.2f);
         }
 
-        public override void OnNodeEnter()
+        public override void OnEndNodeSelect()
         {
+            base.OnEndNodeSelect();
             QuestMissionService.Instance
                                    .questController.ShowQuestEmbarkView(questName, objName, this);
         }
-        public override void OnNodeExit()
+        public override void OnNodeInteractCancel()
         {
             QuestMarkUp();
         }

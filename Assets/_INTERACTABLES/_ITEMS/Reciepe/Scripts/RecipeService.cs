@@ -36,7 +36,7 @@ namespace Interactables
 
         public bool AddRecipe2Known(ItemData itemData)
         {
-            if(!recipeModel.allRecipeKnown.Any(t=>t.itemType==itemData.itemType && t.ItemName == itemData.ItemName))
+            if(!recipeModel.allRecipeKnown.Any(t=>t.itemType==itemData.itemType && t.itemName == itemData.itemName))
             {
                 recipeModel.allRecipeKnown.Add(itemData);
                 return true;
@@ -48,7 +48,7 @@ namespace Interactables
         }
         public bool RemoveRecipeFrmKnown(ItemData itemData)
         {
-            if (recipeModel.allRecipeKnown.Any(t => t.itemType == itemData.itemType && t.ItemName == itemData.ItemName))
+            if (recipeModel.allRecipeKnown.Any(t => t.itemType == itemData.itemType && t.itemName == itemData.itemName))
             {
                 recipeModel.allRecipeKnown.Remove(itemData);
                 return true;

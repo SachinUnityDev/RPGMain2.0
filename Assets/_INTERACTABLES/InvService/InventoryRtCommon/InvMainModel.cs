@@ -72,7 +72,7 @@ namespace Interactables
             List<Iitems> allItems = new List<Iitems>();
             foreach (Iitems item in GetAllItemsInCommOrStash(itemDataWithQty.ItemData.itemType))
             {
-                if(item.itemName == itemDataWithQty.ItemData.ItemName)
+                if(item.itemName == itemDataWithQty.ItemData.itemName)
                 {
                     count++; 
                 }
@@ -130,7 +130,7 @@ namespace Interactables
         public int GetItemNosInCommInv(ItemData itemData)
         {
             //commonInvItems
-            int quantity = commonInvItems.Count(t=>t.itemName == itemData.ItemName && t.itemType == itemData.itemType);
+            int quantity = commonInvItems.Count(t=>t.itemName == itemData.itemName && t.itemType == itemData.itemType);
             return quantity; 
         }
 
@@ -170,7 +170,7 @@ namespace Interactables
         public int GetItemNosInExcessnv(ItemData itemData)
         {
             //commonInvItems
-            int quantity = excessInvItems.Count(t => t.itemName == itemData.ItemName && t.itemType == itemData.itemType);
+            int quantity = excessInvItems.Count(t => t.itemName == itemData.itemName && t.itemType == itemData.itemType);
             return quantity;
         }
 
@@ -223,7 +223,7 @@ namespace Interactables
         public int GetItemNosInStashInv(ItemData itemData)
         {
            // stash inv Items
-            int quantity = stashInvIntItems.Count(t => t.itemName == itemData.ItemName && t.itemType == itemData.itemType);
+            int quantity = stashInvIntItems.Count(t => t.itemName == itemData.itemName && t.itemType == itemData.itemType);
             return quantity;
         }
         #endregion

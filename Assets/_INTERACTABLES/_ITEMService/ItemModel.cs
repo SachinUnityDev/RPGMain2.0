@@ -100,7 +100,7 @@ namespace Interactables
 
         public void ClearOCData(ItemData itemData)
         {
-            int index = allOCData.FindIndex(t => t.itemName == itemData.ItemName
+            int index = allOCData.FindIndex(t => t.itemName == itemData.itemName
                                        && t.itemType == itemData.itemType);
             if(index != -1)
             {

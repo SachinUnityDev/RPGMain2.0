@@ -80,9 +80,9 @@ namespace Town
     {
 
         public ItemType itemType;
-        public AllItemNames itemName;
         public GenGewgawQ genGawgawQ = GenGewgawQ.None; 
         public int qty; 
+        public AllItemNames itemName;
     }
     [Serializable]
     public class NPCWeeklyStockData

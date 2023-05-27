@@ -59,16 +59,13 @@ namespace Common
 
         [Header("Recordable Params")]
         public int lastCharID;
-
-
         //public List<CharController> enemyInPlayControllers; // enemies to be dep 
         public List<GameObject> enemyInCombatPlay; // enemies to be dep 
 
         void Start()
         {
             lastCharID = 0;         isPartyLocked= false;
-            CombatEventService.Instance.OnEOT += UpdateOnDeath;
-       
+            CombatEventService.Instance.OnEOT += UpdateOnDeath;       
             DontDestroyOnLoad(this.gameObject);
         }
 

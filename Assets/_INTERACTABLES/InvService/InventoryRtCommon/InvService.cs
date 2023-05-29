@@ -76,6 +76,15 @@ namespace Interactables
         {
             return false;
         }
+
+        public bool IsCommNExcessInvFull(ItemData itemData)
+        {
+
+
+            return false;
+        }
+
+
         public void OpenInvView()  // dont know where to use // Deprecated 
         {
             if (invPanel == null)

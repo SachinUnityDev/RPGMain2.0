@@ -21,8 +21,8 @@ namespace Quest
 
 
         [Header("Loot All and Continue Btn")]
-        //[SerializeField] Button lootAllBtn;
-        //[SerializeField] Button continueBtn;
+        [SerializeField] LootAllBtnPtrEvents lootAllBtnPtrEvents;
+        [SerializeField] Button continueBtn;
 
         [Header("Canvas NTBR")]
         [SerializeField] Canvas canvas;
@@ -36,19 +36,24 @@ namespace Quest
         [SerializeField] float prevRightClick = 0f;
 
 
-        // testing
-        [SerializeField] int startPos;
-        [SerializeField] int endPos;
-        [SerializeField] int max; 
+        [Header("List trackers")]
+        [SerializeField] int startPos;      
+        [SerializeField] int max;
 
-
-
-        List<ItemDataWithQty> lootList = new List<ItemDataWithQty>();
+        [Header("loot list and Selected list")]
+        [SerializeField] List<ItemDataWithQty> lootList = new List<ItemDataWithQty>();
+        [SerializeField] List<ItemDataWithQty> selectedList = new List<ItemDataWithQty>();
+        void Start()
+        {
+            leftBtn.onClick.AddListener(OnLeftBtnPressed);
+            rightBtn.onClick.AddListener(OnRightBtnPressed);
+        }
         public void InitLootList(List<ItemDataWithQty> lootList)
         {
-            this.lootList.Clear();
+            this.lootList.Clear();this.selectedList.Clear();
             this.lootList = lootList.DeepClone();
-          
+            lootAllBtnPtrEvents.InitLootAllBtn(this);
+
             Load();
             max = (int)lootList.Count / 6;
             if (lootList.Count % 6 != 0)
@@ -65,18 +70,40 @@ namespace Quest
                 if (j <lootList.Count)
                 {
                     containerTrans.GetChild(i).GetComponent<LootSlotView>()
-                    .InitSlot(lootList[j]);
+                    .InitSlot(lootList[j], this);
                 }
                 else
                 {
                     containerTrans.GetChild(i).GetComponent<LootSlotView>()
-                  .InitSlot(null);
+                  .InitSlot(null,this);
                 }
                 
             }
         }
+        public bool IsItemSelected(ItemDataWithQty itemDataWithQty)
+        {
+            return selectedList.Any(t=>t == itemDataWithQty);            
+        }
 
+        public void OnLootAllSelected()
+        {
+            selectedList.Clear();
+            selectedList.AddRange(lootList);    
+            FillScrollSlots();
+        }
 
+        public bool IsAllSelected()
+        {
+            return (lootList.Count == selectedList.Count);
+        }
+        public void OnSlotSelected(ItemDataWithQty itemDataWithQty)
+        {
+            selectedList.Add(itemDataWithQty);
+        }
+        public void OnSlotDeSelected(ItemDataWithQty itemDataWithQty)        
+        { 
+            selectedList.Remove(itemDataWithQty);
+        }
         void OnLeftBtnPressed()
         {
             if (Time.time - prevLeftClick < 0.3f) return;
@@ -108,23 +135,6 @@ namespace Quest
             prevRightClick = Time.time;
         }
 
-        void Start()
-        {
-            leftBtn.onClick.AddListener(OnLeftBtnPressed);
-            rightBtn.onClick.AddListener(OnRightBtnPressed);
-        }
-        void OnLootAllPressed()
-        {
-            // remove all 
-
-            for (int i = 0; i < transform.GetChild(0).childCount; i++)
-            {
-                Transform child = transform.GetChild(0).GetChild(i);  // go
-               // child.gameObject.GetComponent<LootSlotView>().RemoveAllItems();// select all items
-            }
-        }
-
-   
         #region TO_INV_FILL
         void ClearLootFill()   
         {

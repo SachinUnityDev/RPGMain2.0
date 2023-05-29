@@ -8,10 +8,16 @@ namespace Quest
 {
     public class LootSlotView : MonoBehaviour, IPointerClickHandler
     {
+        LootView lootView; 
+
+        [Header("Trans references")]
         public int slotID;
         [SerializeField] Image itemImg;
         [SerializeField] Image itemBG;
         [SerializeField] Transform itemFrame;
+
+        [SerializeField] ItemDataWithQty itemDataWithQty;
+        [SerializeField] bool isSelected;
 
         private void Awake()
         {
@@ -19,19 +25,33 @@ namespace Quest
             itemImg = transform.GetChild(0).GetChild(0).GetComponent<Image>();  
             itemBG = transform.GetComponent<Image>();
             itemFrame = transform.GetChild(2);
+            // deSelect State...
+            isSelected = false;
+            itemFrame.gameObject.SetActive(false);
         }
-        public void InitSlot(ItemDataWithQty itemDataWithQty)
+        public void InitSlot(ItemDataWithQty itemDataWithQty, LootView lootView)
         {
             if(itemDataWithQty == null)
             {
                 transform.gameObject.SetActive(false);
                 return; 
             }
+            this.lootView= lootView;
+            this.itemDataWithQty = itemDataWithQty;
             transform.gameObject.SetActive(true);
             itemImg.gameObject.SetActive(true);
             itemImg.sprite = GetSprite(itemDataWithQty.ItemData.itemName, itemDataWithQty.ItemData.itemType);
-            itemBG.sprite = GetBGSprite(itemDataWithQty.ItemData); 
-
+            itemBG.sprite = GetBGSprite(itemDataWithQty.ItemData);
+            if (lootView.IsItemSelected(itemDataWithQty))
+            {
+                isSelected = true;
+                itemFrame.gameObject.SetActive(true);
+            }
+            else
+            {
+                isSelected = false;
+                itemFrame.gameObject.SetActive(false);
+            }
         }
 
         public void ClearSlot()
@@ -59,9 +79,28 @@ namespace Quest
             return null;
         }
 
+        public void OnSelected()
+        {
+            isSelected = true;
+            itemFrame.gameObject.SetActive(true);
+            lootView.OnSlotSelected(itemDataWithQty);
+        }
+        public void OnDeSelected()
+        {
+            isSelected= false;
+            itemFrame.gameObject.SetActive(false);
+            lootView.OnSlotDeSelected(itemDataWithQty);
+        }
         public void OnPointerClick(PointerEventData eventData)
         {
-           
+           if(!isSelected)
+            {
+                OnSelected();
+            }
+            else
+            {
+                OnDeSelected();
+            }
         }
     }
 }

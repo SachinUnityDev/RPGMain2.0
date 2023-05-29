@@ -119,7 +119,12 @@ namespace Town
             }
             return false;
         }
+        public bool CanAddItem(ItemData itemData)
+        {
 
+
+            return false; 
+        }
         public bool AddItem(Iitems item, bool onDrop = true)
         {
             if (IsEmpty())
@@ -287,6 +292,8 @@ namespace Town
                 }
             }
         }
+
+     
         #endregion
     }
 }

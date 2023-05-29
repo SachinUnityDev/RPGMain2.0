@@ -156,15 +156,15 @@ namespace Common
             PopulateSidePlank();
         }
 
-        public int GetIndexOfChar(CharNames charName)
-        {
-            int i = unLockedChars.FindIndex(t => t.charName == charName);
-            if (i != -1)
-                return i;
-            else
-                Debug.Log("CharIndex not found!");
-            return 0;
-        }
+        //public int GetIndexOfChar(CharNames charName)
+        //{
+        //    int i = unLockedChars.FindIndex(t => t.charName == charName);
+        //    if (i != -1)
+        //        return i;
+        //    else
+        //        Debug.Log("CharIndex not found!");
+        //    return 0;
+        //}
         public void PopulatePortrait2_Char(CharNames charName)
         {
             index = 

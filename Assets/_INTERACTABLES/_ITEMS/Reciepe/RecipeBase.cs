@@ -11,6 +11,7 @@ using UnityEngine;
         public ItemData ItemData;
         public int quantity;
 
+        public ItemDataWithQty() { }
         public ItemDataWithQty(ItemData itemData, int quantity)
         {
             ItemData = itemData;

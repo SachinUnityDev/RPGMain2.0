@@ -43,6 +43,7 @@ namespace Quest
                 if (loot.Key == landscapeName)
                 {
                     var t = Activator.CreateInstance(loot.Value) as LootBase;
+                    t.InitLootTable();
                     return t;
                 }
             }

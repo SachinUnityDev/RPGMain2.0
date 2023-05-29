@@ -1,4 +1,5 @@
 using Common;
+using Interactables;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,14 +7,14 @@ using UnityEngine;
 
 namespace Quest
 {
-
-
     public class LootService : MonoSingletonGeneric<LootService>
     {
-
         public LootController lootController;
 
         public LootFactory lootFactory;
+        public LootView lootView; 
+
+
         private void Start()
         {
             lootController= GetComponent<LootController>(); 
@@ -27,5 +28,18 @@ namespace Quest
             lootController.InitLootController(landscapeName);
         }
 
+
+
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.L))
+            {
+               
+                lootController.ShowLootTable(new List<ItemType>()
+                {ItemType.Potions, ItemType.GenGewgaws, ItemType.PoeticGewgaws, ItemType.Gems, ItemType.SagaicGewgaws,
+                ItemType.Fruits, ItemType.Foods, ItemType.Tools});
+                //
+            }
+        }
     }
 }

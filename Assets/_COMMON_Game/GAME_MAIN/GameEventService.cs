@@ -58,6 +58,9 @@ namespace Common
             TownService.Instance.Init(locationName);
             OnTownEnter?.Invoke(locationName);
             QuestMissionService.Instance.InitQuestMission();    
+
+
+            LootService.Instance.InitLootService();
         }
 
         public void On_TownExit(LocationName locationName)

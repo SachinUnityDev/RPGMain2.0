@@ -10,7 +10,6 @@ namespace Interactables
     {
         public ItemActions itemActions;
         public string itemStr; 
-
     }
 
     [CreateAssetMenu(fileName = "InvSO", menuName = "Inventory Service/InvSO")]
@@ -50,16 +49,7 @@ namespace Interactables
         {
             if(item.itemType == ItemType.GenGewgaws)
             {
-                //GenGewgawQ suffixQuality = GenGewgawQ.None;
-                //GenGewgawQ prefixQuality = GenGewgawQ.None; 
                 GenGewgawBase genGewgawbase = (GenGewgawBase)item;
-                SuffixBase suffixBase = genGewgawbase.suffixBase;
-                //if(suffixBase != null)
-                // suffixQuality= suffixBase.genGewgawQ;
-
-                //PrefixBase prefixBase = genGewgawbase.prefixBase;
-                //if (prefixBase != null)
-                //    prefixQuality = prefixBase.genGewgawQ;
                 GenGewgawQ genGewgawQ = genGewgawbase.genGewgawQ;  
 
                 if(genGewgawQ == GenGewgawQ.Lyric)
@@ -86,8 +76,40 @@ namespace Interactables
             {
                 return filledSlot;
             }
-            return emptySlot;// if empty pass item no
+            return emptySlot;
         }
+        public Sprite GetBGSprite(ItemData itemData)
+        {
+            if (itemData.itemType == ItemType.GenGewgaws)
+            {
+                if (itemData.genGewgawQ == GenGewgawQ.Lyric)
+                {
+                    return filledSlot;
+                }
+                if (itemData.genGewgawQ == GenGewgawQ.Folkloric)
+                {
+                    return folkloricSlot;
+                }
+                if (itemData.genGewgawQ == GenGewgawQ.Epic)
+                {
+                    return epicSlot;
+                }
+            }
+            else if (itemData.itemType == ItemType.SagaicGewgaws)
+            {
+                return sagaicSlot;
+            }
+            else if (itemData.itemType == ItemType.PoeticGewgaws)
+            {
+                return poeticSlot;
+            }
+            else
+            {
+                return filledSlot;
+            }
+            return emptySlot;
+        }
+
 
         public Sprite GetSprite(int itemName, ItemType itemType)
         {

@@ -78,39 +78,6 @@ namespace Interactables
             }
             return emptySlot;
         }
-        public Sprite GetBGSprite(ItemData itemData)
-        {
-            if (itemData.itemType == ItemType.GenGewgaws)
-            {
-                if (itemData.genGewgawQ == GenGewgawQ.Lyric)
-                {
-                    return filledSlot;
-                }
-                if (itemData.genGewgawQ == GenGewgawQ.Folkloric)
-                {
-                    return folkloricSlot;
-                }
-                if (itemData.genGewgawQ == GenGewgawQ.Epic)
-                {
-                    return epicSlot;
-                }
-            }
-            else if (itemData.itemType == ItemType.SagaicGewgaws)
-            {
-                return sagaicSlot;
-            }
-            else if (itemData.itemType == ItemType.PoeticGewgaws)
-            {
-                return poeticSlot;
-            }
-            else
-            {
-                return filledSlot;
-            }
-            return emptySlot;
-        }
-
-
         public Sprite GetSprite(int itemName, ItemType itemType)
         {
             Sprite sprite = null; 

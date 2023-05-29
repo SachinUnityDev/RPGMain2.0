@@ -26,17 +26,14 @@ namespace Quest
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            throw new System.NotImplementedException();
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            throw new System.NotImplementedException();
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            throw new System.NotImplementedException();
         }
     }
 }

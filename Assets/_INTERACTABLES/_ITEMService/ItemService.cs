@@ -102,30 +102,30 @@ namespace Interactables
 
         #region ITEM BASE
 
-        public Iitems GetItemBase(ItemData itemData, GenGewgawQ genQ = GenGewgawQ.None)
+        public Iitems GetItemBase(ItemData itemData)
         {
             int index = 
-            allItemsInGame.FindIndex(t => t.itemName == itemData.itemName && t.itemType == itemData.itemType); 
+                    allItemsInGame.FindIndex(t => t.itemName == itemData.itemName && t.itemType == itemData.itemType); 
             if(index != -1)
             {
                 return allItemsInGame[index];
             }
             else
             {
-                return GetNewItem(itemData, genQ); // which slot to add this to ?? 
+                return GetNewItem(itemData); // which slot to add this to ?? 
             }
         }
 
-        public Iitems GetNewItem(ItemData itemData , GenGewgawQ genQ = GenGewgawQ.None)
+        public Iitems GetNewItem(ItemData itemData)
         {
             Iitems iitems; 
-            if(genQ == GenGewgawQ.None)
+            if(itemData.genGewgawQ == GenGewgawQ.None)
             {
                 iitems = itemFactory.GetNewItem(itemData.itemType, itemData.itemName);
             }
             else
             {
-                iitems = itemFactory.GetNewGenGewgaw((GenGewgawNames)itemData.itemName, genQ);
+                iitems = itemFactory.GetNewGenGewgaw((GenGewgawNames)itemData.itemName, itemData.genGewgawQ);
             }
             return iitems;
         }

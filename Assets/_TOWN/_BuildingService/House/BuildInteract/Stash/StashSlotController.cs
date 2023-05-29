@@ -119,12 +119,15 @@ namespace Town
             }
             return false;
         }
-        public bool CanAddItem(ItemData itemData)
-        {
+        //public bool CanAddItem(ItemData itemData)
+        //{
+        //    if (IsEmpty())
+        //        return true; 
+        //    // get Item SO 
+        //   // ItemService.Instance.getItem
 
-
-            return false; 
-        }
+        //    return false; 
+        //}
         public bool AddItem(Iitems item, bool onDrop = true)
         {
             if (IsEmpty())

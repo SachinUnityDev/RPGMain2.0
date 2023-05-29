@@ -20,7 +20,7 @@ namespace Interactables
         void RemoveItem();// remove item from the inv Main  Model
         void RemoveAllItems(); 
         bool AddItem(Iitems item, bool onDrop =true);// add item to the inv Main Model 
-        bool CanAddItem(ItemData itemData); 
+       // bool CanAddItem(ItemData itemData); 
         bool SplitItem2EmptySlot(Iitems item, bool onDrop = true);
         void ClearSlot(); // only clear the display 
         void LoadSlot(Iitems item); // only add to display in view 

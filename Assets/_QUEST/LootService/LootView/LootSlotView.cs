@@ -16,7 +16,7 @@ namespace Quest
         [SerializeField] Image itemBG;
         [SerializeField] Transform itemFrame;
 
-        [SerializeField] ItemDataWithQty itemDataWithQty;
+        [SerializeField] ItemBaseWithQty itemBaseWithQty;
         [SerializeField] bool isSelected;
 
         private void Awake()
@@ -29,20 +29,20 @@ namespace Quest
             isSelected = false;
             itemFrame.gameObject.SetActive(false);
         }
-        public void InitSlot(ItemDataWithQty itemDataWithQty, LootView lootView)
+        public void InitSlot(ItemBaseWithQty itemBaseWithQty, LootView lootView)
         {
-            if(itemDataWithQty == null)
+            if(itemBaseWithQty == null)
             {
                 transform.gameObject.SetActive(false);
                 return; 
             }
             this.lootView= lootView;
-            this.itemDataWithQty = itemDataWithQty;
+            this.itemBaseWithQty = itemBaseWithQty;
             transform.gameObject.SetActive(true);
             itemImg.gameObject.SetActive(true);
-            itemImg.sprite = GetSprite(itemDataWithQty.ItemData.itemName, itemDataWithQty.ItemData.itemType);
-            itemBG.sprite = GetBGSprite(itemDataWithQty.ItemData);
-            if (lootView.IsItemSelected(itemDataWithQty))
+            itemImg.sprite = GetSprite(itemBaseWithQty.item.itemName, itemBaseWithQty.item.itemType);
+            itemBG.sprite = GetBGSprite(itemBaseWithQty.item);
+            if (lootView.IsItemSelected(itemBaseWithQty))
             {
                 isSelected = true;
                 itemFrame.gameObject.SetActive(true);
@@ -69,9 +69,9 @@ namespace Quest
                 Debug.Log("SPRITE NOT FOUND");
             return null;
         }
-        Sprite GetBGSprite(ItemData itemData)
+        Sprite GetBGSprite(Iitems item)
         {
-            Sprite sprite = InvService.Instance.InvSO.GetBGSprite(itemData);
+            Sprite sprite = InvService.Instance.InvSO.GetBGSprite(item);
             if (sprite != null)
                 return sprite;
             else
@@ -83,13 +83,13 @@ namespace Quest
         {
             isSelected = true;
             itemFrame.gameObject.SetActive(true);
-            lootView.OnSlotSelected(itemDataWithQty);
+            lootView.OnSlotSelected(itemBaseWithQty);
         }
         public void OnDeSelected()
         {
             isSelected= false;
             itemFrame.gameObject.SetActive(false);
-            lootView.OnSlotDeSelected(itemDataWithQty);
+            lootView.OnSlotDeSelected(itemBaseWithQty);
         }
         public void OnPointerClick(PointerEventData eventData)
         {

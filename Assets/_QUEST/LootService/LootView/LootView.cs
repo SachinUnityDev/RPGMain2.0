@@ -8,10 +8,23 @@ using UnityEngine.UI;
 using UnityEngine;
 using System.Linq;
 using Town;
+using System;
 
 namespace Quest
 {
+    [Serializable]
+    public class ItemBaseWithQty
+    {
+        public Iitems item;
+        public int qty; 
 
+        public ItemBaseWithQty(Iitems item, int qty) 
+        {
+            this.item = item;
+            this.qty = qty;
+        }
+
+    }
 
     public class LootView : MonoBehaviour, IPanel
     {
@@ -41,8 +54,8 @@ namespace Quest
         [SerializeField] int max;
 
         [Header("loot list and Selected list")]
-        [SerializeField] List<ItemDataWithQty> lootList = new List<ItemDataWithQty>();
-        [SerializeField] List<ItemDataWithQty> selectedList = new List<ItemDataWithQty>();
+        [SerializeField] List<ItemBaseWithQty> lootList = new List<ItemBaseWithQty>();
+        [SerializeField] List<ItemBaseWithQty> selectedList = new List<ItemBaseWithQty>();
         void Start()
         {
             leftBtn.onClick.AddListener(OnLeftBtnPressed);
@@ -51,7 +64,13 @@ namespace Quest
         public void InitLootList(List<ItemDataWithQty> lootList)
         {
             this.lootList.Clear();this.selectedList.Clear();
-            this.lootList = lootList.DeepClone();
+            foreach (ItemDataWithQty itemQty in lootList)
+            {
+                Iitems item = ItemService.Instance.GetNewItem(itemQty.ItemData);
+                ItemBaseWithQty itemBaseWithQty = new ItemBaseWithQty(item, itemQty.quantity);   
+                this.lootList.Add(itemBaseWithQty); 
+            }
+
             lootAllBtnPtrEvents.InitLootAllBtn(this);
 
             Load();
@@ -77,12 +96,11 @@ namespace Quest
                     containerTrans.GetChild(i).GetComponent<LootSlotView>()
                   .InitSlot(null,this);
                 }
-                
             }
         }
-        public bool IsItemSelected(ItemDataWithQty itemDataWithQty)
+        public bool IsItemSelected(ItemBaseWithQty itemBaseWithQty)
         {
-            return selectedList.Any(t=>t == itemDataWithQty);            
+            return selectedList.Any(t=>t == itemBaseWithQty);            
         }
 
         public void OnLootAllSelected()
@@ -96,13 +114,13 @@ namespace Quest
         {
             return (lootList.Count == selectedList.Count);
         }
-        public void OnSlotSelected(ItemDataWithQty itemDataWithQty)
+        public void OnSlotSelected(ItemBaseWithQty itemBaseWithQty)
         {
-            selectedList.Add(itemDataWithQty);
+            selectedList.Add(itemBaseWithQty);
         }
-        public void OnSlotDeSelected(ItemDataWithQty itemDataWithQty)        
+        public void OnSlotDeSelected(ItemBaseWithQty itemBaseWithQty)        
         { 
-            selectedList.Remove(itemDataWithQty);
+            selectedList.Remove(itemBaseWithQty);
         }
         void OnLeftBtnPressed()
         {

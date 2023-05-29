@@ -1,6 +1,7 @@
 using Common;
 using DG.Tweening;
 using Interactables;
+using Quest;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -127,13 +128,13 @@ namespace Town
             }
             return slotFound;
         }     
-        public bool IsStashInvFull()
+        public bool IsStashInvFull(ItemBaseWithQty itemBaseWithQty)
         {
             for (int i = 0; i < slotContainer.childCount; i++)
             {
                 Transform child = slotContainer.GetChild(i);
                 iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
-                if (!iSlotable.isSlotFull())
+                if (!iSlotable.isSlotFull(itemBaseWithQty.item, itemBaseWithQty.qty))
                 {
                     return false;
                 }

@@ -17,31 +17,6 @@ namespace Interactables
             
         }
 
-        //void RefreshCommonInv()
-        //{
-        //    InvService.Instance.invViewController.SetInventory(InvService.Instance.invMainModel);
-        //}
-
-        //public void RemoveItemFromCommonInv(Iitems item)
-        //{
-        //    invModel.commonInvItems.Remove(item); 
-        //}
-        //public void AddItem2ActiveInv(Iitems item)
-        //{
-        //    invModel.activeInvItems.Add(item);
-        //}
-
-
-
-
-
-        //public bool HasItem(Iitems item)
-        //{
-
-
-        //    return false; 
-        //}
-
 
     }
 

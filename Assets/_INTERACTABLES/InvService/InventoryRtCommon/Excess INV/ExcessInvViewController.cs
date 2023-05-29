@@ -9,6 +9,8 @@ using TMPro;
 using System.Linq;
 using Combat;
 using Town;
+using Quest;
+
 
 namespace Interactables
 {
@@ -164,13 +166,13 @@ namespace Interactables
             return slotFound;
         }
 
-        public bool IsExcessInvFull()
+        public bool IsExcessInvFull(ItemBaseWithQty itemBaseWithQty)
         {
             for (int i = 0; i < transform.GetChild(0).childCount; i++)
             {
                 Transform child = transform.GetChild(0).GetChild(i);
                 iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
-                if (!iSlotable.isSlotFull())
+                if (!iSlotable.isSlotFull(itemBaseWithQty.item, itemBaseWithQty.qty))
                 {
                     return false;
                 }

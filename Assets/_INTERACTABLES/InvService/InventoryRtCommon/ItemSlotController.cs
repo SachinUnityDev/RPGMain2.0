@@ -15,12 +15,11 @@ namespace Interactables
     {
         int slotID { get; set; }
         SlotType slotType { get; }
-        bool isSlotFull();
+        bool isSlotFull(Iitems item, int qty);
         List<Iitems> ItemsInSlot { get; set; }
         void RemoveItem();// remove item from the inv Main  Model
         void RemoveAllItems(); 
         bool AddItem(Iitems item, bool onDrop =true);// add item to the inv Main Model 
-       // bool CanAddItem(ItemData itemData); 
         bool SplitItem2EmptySlot(Iitems item, bool onDrop = true);
         void ClearSlot(); // only clear the display 
         void LoadSlot(Iitems item); // only add to display in view 
@@ -130,7 +129,6 @@ namespace Interactables
                 RefreshSlotTxt();
             }   
         }
-
         public bool HasSameItem(Iitems item)
         {
             if (ItemsInSlot[0].itemName == item.itemName
@@ -139,9 +137,14 @@ namespace Interactables
             else
                 return false;
         }
-        public bool isSlotFull()
+        public bool isSlotFull(Iitems item, int qty)
         {
-            if (ItemsInSlot.Count <= ItemsInSlot[0].maxInvStackSize) return false;
+            if (IsEmpty())
+                return false;
+            if (HasSameItem(item))
+            {
+                if ((ItemsInSlot.Count + qty) <= ItemsInSlot[0].maxInvStackSize) return false;
+            }
             return true;
         }
         public void RemoveAllItems()
@@ -578,7 +581,9 @@ namespace Interactables
 
         }
 
-  
+        
+
+
 
 
         #endregion

@@ -100,9 +100,14 @@ namespace Common
             else
                 return false;
         }
-        public bool isSlotFull()
+        public bool isSlotFull(Iitems item, int qty)
         {
-            if (ItemsInSlot.Count <= ItemsInSlot[0].maxInvStackSize) return false;
+            if (IsEmpty())
+                return false;
+            if (HasSameItem(item))
+            {
+                if ((ItemsInSlot.Count + qty) <= ItemsInSlot[0].maxInvStackSize) return false;
+            }
             return true;
         }
         public void RemoveAllItems()

@@ -8,6 +8,8 @@ using DG.Tweening;
 using System.Linq;
 using TMPro;
 using UnityEngine.UI;
+using Quest;
+using System.Windows.Forms;
 
 namespace Interactables
 {
@@ -164,18 +166,18 @@ namespace Interactables
             return slotFound; 
          }
 
-        public bool IsCommInvFull()
+        public bool IsCommInvFull(ItemBaseWithQty itemBaseWithQty)
         {
             for (int i = 0; i < invContainer.transform.childCount; i++)
             {
                 Transform child = invContainer.transform.GetChild(i);
                 iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
-                if (!iSlotable.isSlotFull())
+                if (!iSlotable.isSlotFull(itemBaseWithQty.item, itemBaseWithQty.qty))
                 {
-                    return false; 
+                    return false;
                 }
             }
-            return true; 
+            return true;
         }
 
         void InitCommonInv()

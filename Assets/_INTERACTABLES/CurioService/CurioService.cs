@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace Interactables
+namespace Quest
 {
     public class CurioService : MonoSingletonGeneric<CurioService>
     {
-        public List<CurioSO> allCurioSO = new List<CurioSO>();
+        public AllCurioSO allCurioSO;
         public List<CurioModel> allCurioModel = new List<CurioModel>();
 
         public CurioController curioController;
-        public CurioViewController curioViewController;
+        public CurioView curioView;
         
-
     }
 
 

@@ -9,7 +9,7 @@ namespace Interactables
     public class InvMainViewController : MonoBehaviour, IPanel
     {
         [Header("PARENT VIEW CONTROLLER")]
-        public InvRightViewController invRightViewController;
+        public InvRightViewController invCommViewController;
         public BtmCharViewController btmCharViewController;
         public LevelViewController levelViewController; 
 
@@ -24,7 +24,7 @@ namespace Interactables
 
         private void Awake()
         {
-            invRightViewController = transform.GetChild(1).GetComponent<InvRightViewController>();
+            invCommViewController = transform.GetChild(1).GetComponent<InvRightViewController>();
             levelViewController = transform.GetChild(0).GetComponent<LevelViewController>();
             btmCharViewController = transform.GetChild(2).GetComponent<BtmCharViewController>();
      
@@ -68,7 +68,7 @@ namespace Interactables
 
         public void Init()
         {
-            invRightViewController.Init();
+            invCommViewController.Init();
             btmCharViewController.Init();
             levelViewController.Init();
             btmCharViewController.gameObject.transform.SetParent(transform);

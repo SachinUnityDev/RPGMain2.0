@@ -29,8 +29,8 @@ namespace Interactables
         public InvMainModel invMainModel;
         public InvController invController; 
 
-        [Header("Not to be referenced")]
-        public InvRightViewController invViewController; // ref
+        [Header("Common Inv View NTBR")]
+        public InvRightViewController commInvViewController; // ref
         public GameObject invPanel;
         public bool isInvPanelOpen; // to track inv panel
 
@@ -44,7 +44,8 @@ namespace Interactables
         private void Start()
         {
             invMainModel = new InvMainModel();
-            isInvPanelOpen = false;            
+            isInvPanelOpen = false;         
+            invController = GetComponent<InvController>();  
         }
 
         public void On_DragResult(bool result, ItemsDragDrop itemsDragDrop)
@@ -93,12 +94,12 @@ namespace Interactables
             }
             UIControlServiceGeneral.Instance.SetMaxSibling2Canvas(invPanel);
             invPanel.SetActive(true);
-            invViewController = invPanel.GetComponent<InvRightViewController>();
-            invViewController.GetComponent<IPanel>().Init();
+            commInvViewController = invPanel.GetComponent<InvRightViewController>();
+            commInvViewController.GetComponent<IPanel>().Init();
         }
         public void CloseInvView() // don t know where to use  // Deprecated
         {
-            invViewController.GetComponent<IPanel>().UnLoad();
+            commInvViewController.GetComponent<IPanel>().UnLoad();
         }
 
         #endregion

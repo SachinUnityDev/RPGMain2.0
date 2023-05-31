@@ -52,7 +52,6 @@ namespace Common
         public List<CharModel> allAvailCompModels;
         
         public List<CharController> allCharsInPartyLocked; // on party Locked and Set 
-
         public List<CharController> charDiedinLastTurn;
         [Header("Character Pos")]
         public Vector3 spawnPos = new Vector3(-100, 0, 0);

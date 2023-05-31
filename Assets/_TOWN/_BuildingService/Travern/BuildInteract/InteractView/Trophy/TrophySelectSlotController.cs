@@ -71,7 +71,7 @@ namespace Common
         {
             slotID = transform.GetSiblingIndex();
             isRightClicked = false;
-            InvService.Instance.invViewController.CloseRightClickOpts();
+            InvService.Instance.commInvViewController.CloseRightClickOpts();
         }
 
         #region SLOT ITEM HANDLING ..ADD/REMOVE/REFRESH

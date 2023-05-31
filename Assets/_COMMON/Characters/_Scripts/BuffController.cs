@@ -51,9 +51,7 @@ namespace Combat
     {
          List<BuffData> allBuffs = new List<BuffData>();  
          List<BuffData> allDaybuffs = new List<BuffData>(); 
-         List <BuffData> allNightbuffs = new List<BuffData>();  
-        List<BuffData> allExpModBuffs = new List<BuffData>();
-            
+         List <BuffData> allNightbuffs = new List<BuffData>();              
         // use array here for the index to work 
 
         CharController charController; // ref to char Controller 
@@ -68,7 +66,7 @@ namespace Combat
             CombatEventService.Instance.OnEOR += RoundTick;
             CombatEventService.Instance.OnEOC += EOCTick;
           
-            //  QuestEventService.Instance.OnDayChange
+            
         }
         void Start()
         {
@@ -121,20 +119,19 @@ namespace Combat
         }
 
         
-
-        public int ApplyExpBuff(CauseType causeType, int causeName, int causeByCharID
-                 , int value, TimeFrame timeFrame, int netTime, bool isBuff)
-        {
-            // when mod the modifier and keep track here
+        //public int ApplyExpBuff(CauseType causeType, int causeName, int causeByCharID
+        //         , int value, TimeFrame timeFrame, int netTime, bool isBuff)
+        //{
+        //    // when mod the modifier and keep track here
           
-            charController.charModel.expBonusModPercent += (int)value;            
-            int currRd = GameSupportService.Instance.currentRound;
-            buffIndex++;
-            BuffData buffData = new BuffData(buffIndex, isBuff, currRd, timeFrame, netTime,
-                                                                 null , "");
-            allExpModBuffs.Add(buffData);
-            return buffIndex;
-        }
+        //    charController.charModel.expBonusModPercent += (int)value;            
+        //    int currRd = GameSupportService.Instance.currentRound;
+        //    buffIndex++;
+        //    BuffData buffData = new BuffData(buffIndex, isBuff, currRd, timeFrame, netTime,
+        //                                                         null , "");
+        //    allExpModBuffs.Add(buffData);
+        //    return buffIndex;
+        //}
         bool IsRangeChange(BuffData buffData)
         {
             if (buffData.charModData.modChgMinR == 0 &&
@@ -146,7 +143,7 @@ namespace Combat
 #endregion
 
 #region REMOVE BUFFS 
-        public bool RemoveBuff(int buffID)
+        public bool RemoveBuff(int buffID)   // to be revised
         {
             BuffData buffData = null; 
             int index = allBuffs.FindIndex(t => t.buffID == buffID);
@@ -488,7 +485,6 @@ namespace Combat
         }
 
 #endregion
-
         public int ApplyBuffExpExtra(CauseType causeType, int causeName, int causeByCharID
                                 , float valPercent, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
         {
@@ -497,10 +493,6 @@ namespace Combat
 
             return 0; 
         }
-
-
-
-
         public void EOCTick()
         {
             foreach (BuffData buffData in allBuffs.ToList())
@@ -511,7 +503,6 @@ namespace Combat
                 }
             }
         }
-
 
     }
 }

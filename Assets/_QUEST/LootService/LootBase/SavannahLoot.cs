@@ -76,6 +76,21 @@ namespace Quest
             itemDataLoot = new ItemLootData(ItemType.Herbs, (int)HerbNames.PurpleTeaLeaf, 3, 15);
             itemDataLs.Add(itemDataLoot);
 
+            // TRADE GOODS 
+            itemDataLoot = new ItemLootData(ItemType.TradeGoods, (int)TGNames.SimpleRing, 1, 16);
+            itemDataLs.Add(itemDataLoot);
+            itemDataLoot = new ItemLootData(ItemType.TradeGoods, (int)TGNames.NyalaPelt, 1, 5);
+            itemDataLs.Add(itemDataLoot);
+            itemDataLoot = new ItemLootData(ItemType.TradeGoods, (int)TGNames.DeerSkin, 1, 14);
+            itemDataLs.Add(itemDataLoot);
+            itemDataLoot = new ItemLootData(ItemType.TradeGoods, (int)TGNames.ShinyBoots, 1, 5);
+            itemDataLs.Add(itemDataLoot);
+            itemDataLoot = new ItemLootData(ItemType.TradeGoods, (int)TGNames.Flour, 1, 4);
+            itemDataLs.Add(itemDataLoot);
+            itemDataLoot = new ItemLootData(ItemType.TradeGoods, (int)TGNames.GoldenrodDye, 1, 4);
+            itemDataLs.Add(itemDataLoot);
+
+
             // TOOLS
             itemDataLoot = new ItemLootData(ItemType.Tools, (int)ToolNames.Shovel, 1, 5);
             itemDataLs.Add(itemDataLoot);

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace Interactables
+namespace Quest
 {
-    public class CurioViewController : MonoBehaviour
+    public class CurioView : MonoBehaviour
     {     
         void Start()
         {

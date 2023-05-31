@@ -58,7 +58,7 @@ namespace Interactables
             itemCardGO.SetActive(false);
             Sequence closeSeq = DOTween.Sequence();
             closeSeq.PrependInterval(2f);
-            closeSeq.AppendCallback(() => InvService.Instance.invViewController.CloseRightClickOpts());
+            closeSeq.AppendCallback(() => InvService.Instance.commInvViewController.CloseRightClickOpts());
             closeSeq.Play();
         }
         //IEnumerator WaitForTime(float time)

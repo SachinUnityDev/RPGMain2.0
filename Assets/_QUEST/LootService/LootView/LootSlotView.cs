@@ -15,6 +15,7 @@ namespace Quest
         [SerializeField] Image itemImg;
         [SerializeField] Image itemBG;
         [SerializeField] Transform itemFrame;
+        [SerializeField] TextMeshProUGUI qty; 
 
         [SerializeField] ItemBaseWithQty itemBaseWithQty;
         [SerializeField] bool isSelected;
@@ -25,6 +26,7 @@ namespace Quest
             itemImg = transform.GetChild(0).GetChild(0).GetComponent<Image>();  
             itemBG = transform.GetComponent<Image>();
             itemFrame = transform.GetChild(2);
+            qty = transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();    
             // deSelect State...
             isSelected = false;
             itemFrame.gameObject.SetActive(false);
@@ -42,6 +44,17 @@ namespace Quest
             itemImg.gameObject.SetActive(true);
             itemImg.sprite = GetSprite(itemBaseWithQty.item.itemName, itemBaseWithQty.item.itemType);
             itemBG.sprite = GetBGSprite(itemBaseWithQty.item);
+            if (itemBaseWithQty.qty > 1)
+            {
+                qty.transform.parent.gameObject.SetActive(true);
+                qty.text = itemBaseWithQty.qty.ToString();
+            }
+            else
+            {
+                qty.transform.parent.gameObject.SetActive(false);
+                qty.text = ""; 
+            }
+
             if (lootView.IsItemSelected(itemBaseWithQty))
             {
                 isSelected = true;
@@ -57,6 +70,9 @@ namespace Quest
         public void ClearSlot()
         {   
             transform.GetComponent<Image>().sprite = InvService.Instance.InvSO.emptySlot;
+            itemBaseWithQty= null;
+            isSelected = false;
+            itemFrame.gameObject.SetActive(false);
         }
     
   

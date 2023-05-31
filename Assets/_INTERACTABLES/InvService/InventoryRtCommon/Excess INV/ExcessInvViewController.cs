@@ -166,6 +166,36 @@ namespace Interactables
             return slotFound;
         }
 
+        public int EmptySlotCount()
+        {
+            int count = 0; 
+            for (int i = 0; i < transform.GetChild(0).childCount; i++)
+            {
+                Transform child = transform.GetChild(0).GetChild(i);
+                iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
+                if (iSlotable.IsEmpty())
+                {
+                    count++; 
+                }
+            }
+            return count; 
+        }
+        public void UpdateExcessInvDataBase()
+        {
+            InvService.Instance.invController.itemlsExcess.Clear();
+            for (int i = 0; i < transform.GetChild(0).transform.childCount; i++)
+            {
+                Transform child = transform.GetChild(0).GetChild(i);
+                iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
+              
+                if (iSlotable.ItemsInSlot.Count > 0)
+                {
+                    InvSlotDataBase invSlot = new InvSlotDataBase(iSlotable.ItemsInSlot[0]
+                                                                    , iSlotable.ItemsInSlot.Count);
+                    InvService.Instance.invController.itemlsExcess.Add(invSlot);
+                }
+            }
+        }
         public bool IsExcessInvFull(ItemBaseWithQty itemBaseWithQty)
         {
             for (int i = 0; i < transform.GetChild(0).childCount; i++)

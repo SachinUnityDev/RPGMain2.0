@@ -40,7 +40,7 @@ namespace Interactables
         {
             slotID = transform.GetSiblingIndex();
             isRightClicked = false;
-            InvService.Instance.invViewController.CloseRightClickOpts();
+            InvService.Instance.commInvViewController.CloseRightClickOpts();
         }
         public void ClearSlot()
         {
@@ -189,7 +189,7 @@ namespace Interactables
         {
             if (isRightClicked)
             {
-                InvService.Instance.invViewController.CloseRightClickOpts();
+                InvService.Instance.commInvViewController.CloseRightClickOpts();
                 isRightClicked = !isRightClicked;
                 return;
             }

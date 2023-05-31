@@ -41,6 +41,8 @@ namespace Interactables
         #region DECLARATIONS
 
         public List<Iitems> commonInvItems = new List<Iitems>();
+
+
         // Abbas 3 X 6,  each added Companion has 2X6 (Locked)(Town, QuestPrepPhase, in camp, in MapInteraction)
         //public List<Iitems> persCommInvItems = new List<Iitems>(); 
         public int commonInvCount = 0;
@@ -52,7 +54,15 @@ namespace Interactables
         public int excessInvCount = 0;  
         public List<ActiveInvData> allActiveInvData = new List<ActiveInvData>();
 
+
+        [Header("Inv max sizes")]
+        public int size_Comm = 24;
+        public int size_excess = 24;
+        public int size_Stash = 18;
         #endregion 
+
+
+
 
         public bool AddItem2CommORStash(Iitems item)
         {
@@ -109,7 +119,7 @@ namespace Interactables
             {
                 item.invSlotType = SlotType.CommonInv;
                 commonInvItems.Add(item); 
-                InvService.Instance.invViewController.AddItem2InVView(item, false);// this adds to model list
+                InvService.Instance.commInvViewController.AddItem2InVView(item, false);// this adds to model list
                 commonInvCount++; 
                 return true;
             }

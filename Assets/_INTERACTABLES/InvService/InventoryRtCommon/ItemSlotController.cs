@@ -16,6 +16,7 @@ namespace Interactables
         int slotID { get; set; }
         SlotType slotType { get; }
         bool isSlotFull(Iitems item, int qty);
+        bool IsEmpty();
         List<Iitems> ItemsInSlot { get; set; }
         void RemoveItem();// remove item from the inv Main  Model
         void RemoveAllItems(); 
@@ -112,7 +113,7 @@ namespace Interactables
         {
             slotID = transform.GetSiblingIndex();
             isRightClicked = false;
-            InvService.Instance.invViewController.CloseRightClickOpts();
+            InvService.Instance.commInvViewController.CloseRightClickOpts();
         }
 
         #region SLOT ITEM HANDLING ..ADD/REMOVE/REFRESH
@@ -300,7 +301,7 @@ namespace Interactables
         {
             if (isRightClicked)
             {
-                InvService.Instance.invViewController.CloseRightClickOpts();
+                InvService.Instance.commInvViewController.CloseRightClickOpts();
                 isRightClicked = !isRightClicked;
                 return;
             }
@@ -309,20 +310,20 @@ namespace Interactables
         {
             if (ItemsInSlot.Count == 0)
             {
-                InvService.Instance.invViewController.CloseRightClickOpts();
+                InvService.Instance.commInvViewController.CloseRightClickOpts();
                 return;
             }
             
             Iitems item = ItemsInSlot[0];
             if (isRightClicked)
             {
-                InvService.Instance.invViewController.CloseRightClickOpts();
+                InvService.Instance.commInvViewController.CloseRightClickOpts();
                 isRightClicked = !isRightClicked;
                 return;
             }
             else
             {
-                InvService.Instance.invViewController.OpenRightClickOpts();
+                InvService.Instance.commInvViewController.OpenRightClickOpts();
                 isRightClicked = !isRightClicked;
             }
 
@@ -363,7 +364,7 @@ namespace Interactables
                 if (!rightClickActions.Any(t => t == ItemActions.Disposable))
                     rightClickActions.Add(ItemActions.Disposable);
             }
-            InvService.Instance.invViewController.ShowRightClickList(this);
+            InvService.Instance.commInvViewController.ShowRightClickList(this);
 
         }
         public void OnPointerClick(PointerEventData eventData)
@@ -472,7 +473,7 @@ namespace Interactables
                                                 , ItemsInSlot[0].itemName);
             if (ItemsInSlot[0].itemType == ItemType.Potions)
             {
-                PotionViewControllerParent parentView =  InvService.Instance.invViewController
+                PotionViewControllerParent parentView =  InvService.Instance.commInvViewController
                                             .potionActiveInvPanel.GetComponent<PotionViewControllerParent>();
 
                 if (parentView.Equip2PotionSlot(ItemsInSlot[0]))
@@ -485,7 +486,7 @@ namespace Interactables
                 || ItemsInSlot[0].itemType == ItemType.SagaicGewgaws 
                 || ItemsInSlot[0].itemType == ItemType.PoeticGewgaws)
             {
-                GewgawSlotViewControllerParent parentView = InvService.Instance.invViewController
+                GewgawSlotViewControllerParent parentView = InvService.Instance.commInvViewController
                                             .gewgawsActiveInvPanel.GetComponent<GewgawSlotViewControllerParent>();
 
                 if (parentView.Equip2GewgawSlot(ItemsInSlot[0]))

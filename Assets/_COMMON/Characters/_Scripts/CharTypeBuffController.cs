@@ -84,8 +84,8 @@ namespace Common
             CauseData causeData = new CauseData(causeType, causeName, causeByCharID, charController.charModel.charID);
            
             int buffID = 
-            charController.buffController.ApplyBuff(causeType, (int)causeName, causeByCharID,
-                                            attribName, valChg, TimeFrame.Infinity, -1, isBuff); 
+                charController.buffController.ApplyBuff(causeType, (int)causeName, causeByCharID,
+                                                    attribName, valChg, TimeFrame.Infinity, -1, isBuff); 
            
 
             RaceCultClassBuffData charTypeBuffData = new RaceCultClassBuffData(causeData,buffID , raceType, attribName, valChg);
@@ -104,7 +104,7 @@ namespace Common
 
 
             int buffID =
-            charController.buffController.ApplyBuff(causeData.causeType, causeData.causeName, causeData.causeByCharID,
+                charController.buffController.ApplyBuff(causeData.causeType, causeData.causeName, causeData.causeByCharID,
                 attribName, valChg, TimeFrame.Infinity, -1, isBuff);
 
 

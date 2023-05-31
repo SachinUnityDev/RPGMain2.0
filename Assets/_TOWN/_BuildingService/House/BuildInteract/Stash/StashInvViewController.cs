@@ -141,6 +141,24 @@ namespace Town
             }
             return true;
         }
+
+        public void UpdateStashInvDatabase()
+        {
+            InvService.Instance.invController.itemlsStash.Clear();
+            for (int i = 0; i < slotContainer.childCount; i++)
+            {
+                Transform child = slotContainer.GetChild(i);
+                iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
+  
+                if (iSlotable.ItemsInSlot.Count > 0)
+                {
+                    InvSlotDataBase invSlot = new InvSlotDataBase(iSlotable.ItemsInSlot[0]
+                                                                    , iSlotable.ItemsInSlot.Count);
+                    InvService.Instance.invController.itemlsStash.Add(invSlot);
+                }
+            }
+        }
+
         public void InitStashInv()
         {
             ClearInv();

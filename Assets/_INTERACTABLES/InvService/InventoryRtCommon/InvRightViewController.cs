@@ -9,7 +9,6 @@ using System.Linq;
 using TMPro;
 using UnityEngine.UI;
 using Quest;
-using System.Windows.Forms;
 
 namespace Interactables
 {
@@ -69,8 +68,7 @@ namespace Interactables
         public void Init()
         {           
             InitCommonInv();
-            InitExcessInv(); 
-           // InitPotionActiveInv(); 
+            InitExcessInv();           
         }
 
         public void ShowRightClickList(ItemSlotController itemSlotController)
@@ -118,8 +116,6 @@ namespace Interactables
                     return;
                 }
             }
-
-            
             rightClickOpts.gameObject.SetActive(false);
 
             foreach (Transform child in rightClickOpts)
@@ -129,7 +125,7 @@ namespace Interactables
         }
 
         #region TO_INV_FILL
-        // ACTUAL ADDITION // will return false if inv is FULL
+       
         public bool AddItem2InVView(Iitems item, bool onDrop = true) 
          {
             bool slotFound = false;
@@ -178,6 +174,24 @@ namespace Interactables
                 }
             }
             return true;
+        }
+
+        public void UpdateCommInvDB()
+        {
+            InvService.Instance.invController.itemlsComm.Clear();
+            for (int i = 0; i < invContainer.transform.childCount; i++)
+            {
+                Transform child = invContainer.transform.GetChild(i);
+                iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
+               
+                if (iSlotable.ItemsInSlot.Count > 0)
+                {
+                    InvSlotDataBase invSlot = new InvSlotDataBase(iSlotable.ItemsInSlot[0]
+                                                                    , iSlotable.ItemsInSlot.Count);
+                    InvService.Instance.invController.itemlsComm.Add(invSlot);                    
+
+                }
+            }
         }
 
         void InitCommonInv()

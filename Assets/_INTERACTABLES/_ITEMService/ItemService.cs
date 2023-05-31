@@ -509,20 +509,19 @@ namespace Interactables
             {
                 InitItemToInv(SlotType.CommonInv, ItemType.PoeticGewgaws, (int)PoeticGewgawNames.GlovesLegacyOfTheSpida,
      CauseType.Items, 2);
-                InitItemToInv(SlotType.CommonInv, ItemType.SagaicGewgaws, (int)SagaicGewgawNames.Spiteeth,
-            CauseType.Items, 2);
-                InitItemToInv(SlotType.CommonInv, ItemType.SagaicGewgaws, (int)SagaicGewgawNames.EasyFit,
-           CauseType.Items, 2);
-                InitItemToInv(SlotType.CommonInv, ItemType.SagaicGewgaws, (int)SagaicGewgawNames.SoftAndTenacious,
-           CauseType.Items, 2);
-                InitItemToInv(SlotType.CommonInv, ItemType.SagaicGewgaws, (int)SagaicGewgawNames.FallenShoulder,
-           CauseType.Items, 2);
-                InitItemToInv(SlotType.CommonInv, ItemType.SagaicGewgaws, (int)SagaicGewgawNames.SharpshootersVest,
-           CauseType.Items, 2);
-                InitItemToInv(SlotType.CommonInv, ItemType.SagaicGewgaws, (int)SagaicGewgawNames.HolyKris,
-           CauseType.Items, 2);
-                InitItemToInv(SlotType.CommonInv, ItemType.SagaicGewgaws, (int)SagaicGewgawNames.HornsAndBalls,
-           CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionNames.HealthPotion,
+                    CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.Herbs, (int)HerbNames.Hemp,
+                    CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionNames.StaminaPotion,
+                    CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionNames.ScorpionRepeller,
+                    CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.Foods, (int)FoodNames.FlaskOfWater,
+                    CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.Herbs, (int)HerbNames.PoisonIvy,
+                   CauseType.Items, 2);
+
 
             }
             if (Input.GetKeyDown(KeyCode.G))

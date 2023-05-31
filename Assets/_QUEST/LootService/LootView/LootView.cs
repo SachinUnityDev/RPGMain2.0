@@ -35,7 +35,7 @@ namespace Quest
 
         [Header("Loot All and Continue Btn")]
         [SerializeField] LootAllBtnPtrEvents lootAllBtnPtrEvents;
-        [SerializeField] Button continueBtn;
+        [SerializeField] LootTickBtnPtrEvents lootTickPtrEvents;
 
         [Header("Canvas NTBR")]
         [SerializeField] Canvas canvas;
@@ -70,7 +70,7 @@ namespace Quest
                 ItemBaseWithQty itemBaseWithQty = new ItemBaseWithQty(item, itemQty.quantity);   
                 this.lootList.Add(itemBaseWithQty); 
             }
-
+            lootTickPtrEvents.InitLootTick(this);
             lootAllBtnPtrEvents.InitLootAllBtn(this);
 
             Load();
@@ -102,26 +102,66 @@ namespace Quest
         {
             return selectedList.Any(t=>t == itemBaseWithQty);            
         }
+        public bool IsAllSelected()
+        {
+            return (lootList.Count == selectedList.Count);
+        }
 
         public void OnLootAllSelected()
         {
             selectedList.Clear();
             selectedList.AddRange(lootList);    
             FillScrollSlots();
-        }
-
-        public bool IsAllSelected()
-        {
-            return (lootList.Count == selectedList.Count);
+            UpdateTickBtnStatus();
         }
         public void OnSlotSelected(ItemBaseWithQty itemBaseWithQty)
         {
             selectedList.Add(itemBaseWithQty);
+            UpdateTickBtnStatus();
         }
         public void OnSlotDeSelected(ItemBaseWithQty itemBaseWithQty)        
         { 
             selectedList.Remove(itemBaseWithQty);
+            UpdateTickBtnStatus();
         }
+        public void UpdateTickBtnStatus()
+        {
+            bool isClickable = InvService.Instance.invController.CheckIfLootCanBeAdded(selectedList);
+            lootTickPtrEvents.UpdateTickBtnState(isClickable);
+        }
+        public void AddLoot2Inv()
+        {
+            foreach (ItemBaseWithQty itemQty in selectedList)
+            {
+                if (itemQty.item.itemType != ItemType.GenGewgaws)
+                {
+                    for (int i = 0; i < itemQty.qty; i++)
+                    {
+                       ItemService.Instance.
+                        InitItemToInv(SlotType.CommonInv, itemQty.item.itemType, itemQty.item.itemName,
+                                           CauseType.Loot, 1);
+                    }
+                }
+                else
+                {
+                    GenGewgawQ genQ = 0; 
+                    GenGewgawBase genGewgawBase = itemQty.item as GenGewgawBase;
+                    if (genGewgawBase != null)
+                        genQ = genGewgawBase.genGewgawQ;  
+
+                    ItemService.Instance.
+                      InitItemToInv(SlotType.CommonInv, itemQty.item.itemType, itemQty.item.itemName,
+                                            CauseType.Loot, 1, genQ);
+                }
+            }
+            lootList.Clear();
+            selectedList.Clear();
+            UnLoad(); 
+
+        }
+
+      
+
         void OnLeftBtnPressed()
         {
             if (Time.time - prevLeftClick < 0.3f) return;

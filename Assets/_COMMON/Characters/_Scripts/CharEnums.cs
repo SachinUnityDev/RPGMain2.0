@@ -50,6 +50,7 @@ public enum CauseType
     MapEncounter,
     DayEvents, 
     WeekEvents, 
+    Loot,
     
 }
 

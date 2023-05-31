@@ -12,12 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74a5e39f94ba6244683a495a8edeef4f, type: 3}
   m_Name: RatNest
   m_EditorClassIdentifier: 
-  curioNames: 18
+  curioName: 18
   toolName: 10
   toolName2: 0
   openDesc: '"Only vermin may live in this shit hole"'
+  interactDesc: 
   lootMoneyRange:
   - silver: 3
     bronze: 0
   - silver: 6
     bronze: 0
+  curioN: {fileID: 0}
+  curioHL: {fileID: 0}
+  curioOpn: {fileID: 0}
+  curioBark: 

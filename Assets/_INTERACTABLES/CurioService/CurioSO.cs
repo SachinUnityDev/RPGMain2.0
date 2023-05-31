@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Common;
 using System;
-using Quest;
+using Interactables;
 
-namespace Interactables
+
+namespace Quest
 { 
     [Serializable]
     public class CurioExpData
@@ -15,16 +16,15 @@ namespace Interactables
 
     }
 
-    [CreateAssetMenu(fileName = "CurioSO", menuName = "Interactable/CurioSO")]
+    [CreateAssetMenu(fileName = "CurioSO", menuName = "Quest/CurioSO")]
     public class CurioSO : ScriptableObject
     {
-        public CurioNames curioNames;
+        public CurioNames curioName;
         public ToolNames toolName;
         public ToolNames toolName2; 
         [TextArea(2,5)]
         public string openDesc = "";
-        [TextArea(2, 5)]
-        public string interactDesc = "";
+  
 
         public List<Currency> lootMoneyRange = new List<Currency>();
 

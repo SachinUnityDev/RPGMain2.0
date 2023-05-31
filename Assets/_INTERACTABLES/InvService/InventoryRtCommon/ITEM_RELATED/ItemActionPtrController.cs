@@ -64,7 +64,7 @@ namespace Interactables
                 default:
                     break;
             }
-            InvService.Instance.invViewController.CloseRightClickOpts();
+            InvService.Instance.commInvViewController.CloseRightClickOpts();
             ResetItemAction(); 
         }
 
@@ -95,7 +95,7 @@ namespace Interactables
             isHovered= false;
             Sequence closeSeq = DOTween.Sequence();
             closeSeq.PrependInterval(1f);
-            closeSeq.AppendCallback(() => InvService.Instance.invViewController.CloseRightClickOpts());
+            closeSeq.AppendCallback(() => InvService.Instance.commInvViewController.CloseRightClickOpts());
             closeSeq.Play();
 
         }

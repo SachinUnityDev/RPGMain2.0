@@ -66,7 +66,7 @@ namespace Interactables
         {
             slotID = transform.GetSiblingIndex();
             isRightClicked = false;
-            InvService.Instance.invViewController.CloseRightClickOpts();
+            InvService.Instance.commInvViewController.CloseRightClickOpts();
         }
 
         #region I-SLOTABLE 

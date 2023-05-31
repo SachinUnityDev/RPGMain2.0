@@ -36,7 +36,34 @@ namespace Quest
         HuntInTheWilderness,//Bounty
         CrewMemberNeeded,// Bounty
     }
-
+    public enum CurioNames
+    {
+        None,
+        AnimalBones,
+        AnimalCarcass,
+        Barrel,
+        BatNest,
+        Bush,
+        Cactus,
+        Cart,
+        Chest,
+        Crate,
+        Cocoon,
+        DuneHole,
+        Fountain,
+        Hive,
+        Lorestone,
+        MineVein,
+        PileOfBones,
+        PileOfThrash,
+        RatNest,
+        Sack,
+        SacrificialAltar,
+        ShrineOfRuru,
+        TreeTrunk,
+        Whetstone,
+        Any,
+    }
     public enum ObjNames
     {
         None,

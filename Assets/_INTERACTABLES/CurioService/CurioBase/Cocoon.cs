@@ -20,7 +20,8 @@ namespace Quest
             float chance = Random.Range(0f, 100f);
             if (chance < 10f)
             {
-                //Nothing happens           
+                //Nothing happens
+                resultStr = "Spida had clutched it all and left nothing for you.";
             }
             else if (chance < 50f)
             {
@@ -56,6 +57,8 @@ namespace Quest
                                 , UnityEngine.Random.Range(-2, -4), TimeFrame.EndOfQuest, 1, false);
 
             }
+            resultStr = "The web might feel a bit itchy.";
+            
         }
         void Fx2()
         {
@@ -85,6 +88,8 @@ namespace Quest
                 lootTypes.Add(ItemType.Fruits);
             else
                 lootTypes.Add(ItemType.Foods);
+
+            resultStr = "Carefully woven web still holds bunch of items together.";
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Quest
         public QuestMode questMode;
 
         public List<ItemType> lootTypes = new List<ItemType>();
-        public string str1,str2, str3, str4;
+        public string resultStr ="";
         public abstract void InitCurio();        
         public abstract void CurioInteractWithTool();
         public abstract void CurioInteractWithoutTool();

@@ -21,58 +21,16 @@ namespace Quest
             float chance = Random.Range(0f, 100f);
             if (chance < 30f)
             {
-                //Nothing happens                
+                //Nothing happens
+                resultStr = "You couldn't open it with bare hands...";
             }
             else if (chance < 60f)
             {
-                foreach (CharController charCtrl in CharService.Instance.allCharsInPartyLocked)
-                {
-                    charCtrl.charStateController.ApplyCharStateBuff(CauseType.Curios, (int)curioName
-                                                , charCtrl.charModel.charID, CharStateName.Blinded, TimeFrame.EndOfRound, 12);
-                    charCtrl.charStateController.ApplyCharStateBuff(CauseType.Curios, (int)curioName
-                                                        , charCtrl.charModel.charID, CharStateName.BurnHighDOT);
-                }
+                Fx1();
             }
             else
             {
-                float chance2 = 50f;
-                lootTypes.Add(ItemType.GenGewgaws);
-                if (chance2.GetChance())
-                    lootTypes.Add(ItemType.Foods);
-                else
-                    lootTypes.Add(ItemType.Fruits);
-
-                if (chance2.GetChance())
-                    lootTypes.Add(ItemType.Potions);
-                else
-                    lootTypes.Add(ItemType.Herbs);
-
-                if (chance2.GetChance())
-                    lootTypes.Add(ItemType.Tools);
-                else
-                    lootTypes.Add(ItemType.Scrolls);
-
-                if (chance2.GetChance())
-                    lootTypes.Add(ItemType.PoeticGewgaws);
-                else
-                    lootTypes.Add(ItemType.GenGewgaws);
-
-                lootTypes.Add(ItemType.Gems);
-
-                if (chance2.GetChance())
-                    lootTypes.Add(ItemType.Foods);
-                else
-                    lootTypes.Add(ItemType.Potions);
-
-                if (chance2.GetChance())
-                    lootTypes.Add(ItemType.Fruits);
-                else
-                    lootTypes.Add(ItemType.Herbs);
-
-                if (chance2.GetChance())
-                    lootTypes.Add(ItemType.SagaicGewgaws);
-                else
-                    lootTypes.Add(ItemType.GenGewgaws);
+                Fx2();
             }
         }
         public override void CurioInteractWithTool()
@@ -80,52 +38,63 @@ namespace Quest
             float chance = 30f;
             if (chance.GetChance())
             {
-                foreach (CharController charCtrl in CharService.Instance.allCharsInPartyLocked)
-                {
-                    // Fire Res range 1-2
-                    charCtrl.ChangeAttrib(CauseType.Curios, (int)curioName, charCtrl.charModel.charID,AttribName.fireRes
-                                                ,UnityEngine.Random.Range(1,3));
-                    charCtrl.charStateController.ApplyCharStateBuff(CauseType.Curios, (int)curioName, charCtrl.charModel.charID
-                                                , CharStateName.Blinded, TimeFrame.EndOfRound, 12);
-                    charCtrl.charStateController.ApplyCharStateBuff(CauseType.Curios, (int)curioName
-                                                        , charCtrl.charModel.charID, CharStateName.BurnHighDOT);
-                }
+                Fx1();
             }
             else
             {
-                float chance2 = 50f;
-                lootTypes.Add(ItemType.GenGewgaws);
-                if (chance2.GetChance())
-                    lootTypes.Add(ItemType.Foods);
-                else
-                    lootTypes.Add(ItemType.Fruits);
-                if (chance2.GetChance())
-                    lootTypes.Add(ItemType.Potions);
-                else
-                    lootTypes.Add(ItemType.Herbs);
-                if (chance2.GetChance())
-                    lootTypes.Add(ItemType.Tools);
-                else
-                    lootTypes.Add(ItemType.Scrolls);
-                if (chance2.GetChance())
-                    lootTypes.Add(ItemType.PoeticGewgaws);
-                else
-                    lootTypes.Add(ItemType.GenGewgaws);
-                lootTypes.Add(ItemType.Gems);
-                if (chance2.GetChance())
-                    lootTypes.Add(ItemType.Foods);
-                else
-                    lootTypes.Add(ItemType.Potions);
-                if (chance2.GetChance())
-                    lootTypes.Add(ItemType.Fruits);
-                else
-                    lootTypes.Add(ItemType.Herbs);
-                if (chance2.GetChance())
-                    lootTypes.Add(ItemType.SagaicGewgaws);
-                else
-                    lootTypes.Add(ItemType.GenGewgaws);
+                Fx2();
             }
         }
+        void Fx1()
+        {
+            foreach (CharController charCtrl in CharService.Instance.allCharsInPartyLocked)
+            {
+                // Fire Res range 1-2
+                charCtrl.ChangeAttrib(CauseType.Curios, (int)curioName, charCtrl.charModel.charID, AttribName.fireRes
+                                            , UnityEngine.Random.Range(1, 3));
+                charCtrl.charStateController.ApplyCharStateBuff(CauseType.Curios, (int)curioName, charCtrl.charModel.charID
+                                            , CharStateName.Blinded, TimeFrame.EndOfRound, 12);
+                charCtrl.charStateController.ApplyCharStateBuff(CauseType.Curios, (int)curioName
+                                                    , charCtrl.charModel.charID, CharStateName.BurnHighDOT);
+            }
+            resultStr = "Explosion!";
+        }
 
+        void Fx2()
+        {
+            float chance2 = 50f;
+            lootTypes.Add(ItemType.GenGewgaws);
+            if (chance2.GetChance())
+                lootTypes.Add(ItemType.Foods);
+            else
+                lootTypes.Add(ItemType.Fruits);
+            if (chance2.GetChance())
+                lootTypes.Add(ItemType.Potions);
+            else
+                lootTypes.Add(ItemType.Herbs);
+            if (chance2.GetChance())
+                lootTypes.Add(ItemType.Tools);
+            else
+                lootTypes.Add(ItemType.Scrolls);
+            if (chance2.GetChance())
+                lootTypes.Add(ItemType.PoeticGewgaws);
+            else
+                lootTypes.Add(ItemType.GenGewgaws);
+            lootTypes.Add(ItemType.Gems);
+            if (chance2.GetChance())
+                lootTypes.Add(ItemType.Foods);
+            else
+                lootTypes.Add(ItemType.Potions);
+            if (chance2.GetChance())
+                lootTypes.Add(ItemType.Fruits);
+            else
+                lootTypes.Add(ItemType.Herbs);
+            if (chance2.GetChance())
+                lootTypes.Add(ItemType.SagaicGewgaws);
+            else
+                lootTypes.Add(ItemType.GenGewgaws);
+
+            resultStr = "What are chests for, eh?"; 
+        }
     }
 }

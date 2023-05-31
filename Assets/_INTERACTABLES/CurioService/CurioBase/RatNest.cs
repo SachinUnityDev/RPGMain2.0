@@ -13,13 +13,15 @@ namespace Quest
         public override void InitCurio()
         {
         }
-       
+
         public override void CurioInteractWithoutTool()
         {
             float chance = Random.Range(0f, 100f);
             if (chance < 10f)
             {
-                //Nothing happens           
+                //Nothing happens
+                resultStr = "Nothing but dead rats.";
+
             }
             else if (chance < 50f)
             {
@@ -52,6 +54,9 @@ namespace Quest
                 charCtrl.charStateController.ApplyCharStateBuff(CauseType.Curios, (int)curioName
                                                          , charCtrl.charModel.charID, CharStateName.PoisonedHighDOT);
             }
+            resultStr = "Well, no good would come out of vermins.";
+                
+
         }
         void Fx2()
         {
@@ -87,6 +92,8 @@ namespace Quest
                 lootTypes.Add(ItemType.Potions);
             else
                 lootTypes.Add(ItemType.Herbs);
+
+            resultStr = "Couple of valuable items hidden in this dirty nest.";
         }
     }
 }

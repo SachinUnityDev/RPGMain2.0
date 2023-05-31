@@ -18,7 +18,8 @@ namespace Quest
             float chance = 10f;
             if (chance.GetChance())
             {
-              // nothing happens 
+                // nothing happens 
+                resultStr = "Nothing inside the torn sack. Someone was quicker than you.";
             }
             else
             {
@@ -49,6 +50,8 @@ namespace Quest
                     lootTypes.Add(ItemType.Scrolls);
                 else
                     lootTypes.Add(ItemType.Gems);
+
+                resultStr = "Loot shines upon your face. Take them, all yours!";
             }
         }
         public override void CurioInteractWithTool()

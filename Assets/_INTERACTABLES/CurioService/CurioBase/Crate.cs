@@ -13,7 +13,7 @@ namespace Quest
     public class Crate : CurioBase
     {
         public override CurioNames curioName => CurioNames.Crate;
-       
+
         public override void InitCurio()
         {
 
@@ -33,6 +33,7 @@ namespace Quest
                     charCtrl.ChangeAttrib(CauseType.Curios, (int)curioName, charCtrl.charModel.charID,
                                         AttribName.vigor, 1);
                 }
+                resultStr = "Crate broke down into pieces and you ate the leftover food."; 
             }
             else
             {
@@ -61,6 +62,8 @@ namespace Quest
                     lootTypes.Add(ItemType.Herbs);
 
                 lootTypes.Add(ItemType.Gems);
+
+                resultStr = "Crate broke down into pieces and you found some loot.";
             }
         }
 

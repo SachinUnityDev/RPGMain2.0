@@ -52,6 +52,7 @@ namespace Quest
                 charCtrl.ChangeAttrib(CauseType.Curios, (int)curioName, charCtrl.charModel.charID,
                                    AttribName.fortOrg, 1);
             }
+            resultStr = "Only the bravest could drink this."; 
         }
         //Recover full stamina, Full Thirst relief,	+1 Willpower Permanently
         void Fx2()
@@ -62,6 +63,7 @@ namespace Quest
                                     AttribName.willpower, 1);
 
             }
+            resultStr = "Feels refreshing.";
         }
         //Recover full health Full Thirst relief	+1 Vigor Permanently
         void Fx3()
@@ -71,7 +73,7 @@ namespace Quest
                 charCtrl.ChangeAttrib(CauseType.Curios, (int)curioName, charCtrl.charModel.charID,
                                     AttribName.vigor, 1);
             }
-
+            resultStr = "Feels replenishing.";
         }
 
         //Receive Diarrhea %50 or Nausea    %80	Receive Low Poisoned     Gain Sickness Immunity until eoq
@@ -97,24 +99,22 @@ namespace Quest
                     charCtrl.charStateController.ApplyCharStateBuff(CauseType.Curios, (int)curioName
                                                     , charCtrl.charModel.charID, CharStateName.PoisonedLowDOT);
                 }
-            }
+            }  
 
             foreach (CharController charCtrl in CharService.Instance.allCharsInPartyLocked)
             {
-                // all sickeness Immunity buff
-                //charCtrl.charStateController.ApplyImmunityBuff(CauseType.Curios, (int)curioName
-                //                                , charCtrl.charModel.charID, CharStateName.);
+                charCtrl.tempTraitController.ApplyTraitTypeImmunityBuff(CauseType.Curios, (int)curioName,
+                charCtrl.charModel.charID, TempTraitType.Sickness, TimeFrame.EndOfQuest, 1); 
             }
-           
-
+            resultStr = "Dirty water makes you feel like vomit.";
         }
             
         public override void CurioInteractWithTool()
         {
             //% 30 Fort buff
-            //% 40 stamina
-            //% 40 Health
-            List<float> chances = new List<float>() { 30f, 40f, 40f };
+            //% 35 stamina
+            //% 35 Health
+            List<float> chances = new List<float>() { 30f, 35f, 35f };
 
             switch (chances.GetChanceFrmList())
             {

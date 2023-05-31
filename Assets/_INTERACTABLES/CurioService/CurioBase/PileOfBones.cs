@@ -16,12 +16,14 @@ namespace Quest
         //        %10 nothing happens 
         //        %30debuff -6 fort orign until eoq	Horrified until eoq	+1 Willpower Permanently			
         //      %60 loot 
+
         public override void CurioInteractWithoutTool()
         {
             float chance = Random.Range(0f, 100f);
             if (chance < 10f)
             {
-                //Nothing happens              
+                //Nothing happens
+                resultStr = "Useless skulls, nothing else...";
             }
             else if (chance < 40f)
             {
@@ -34,6 +36,9 @@ namespace Quest
                     charCtrl.buffController.ApplyBuff(CauseType.Curios, (int)curioName
                                             , charCtrl.charModel.charID, AttribName.fortOrg, -6, TimeFrame.EndOfQuest,1, false);
                 }
+                resultStr = "Bones… A reminder of death and evoker of fear."; 
+
+
             }
             else
             {
@@ -68,6 +73,8 @@ namespace Quest
                 lootTypes.Add(ItemType.Foods);
             else
                 lootTypes.Add(ItemType.Herbs);
+
+            resultStr = "Dead does not need loot, why not take it?";
         }
 
     }

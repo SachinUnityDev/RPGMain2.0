@@ -12,8 +12,10 @@ namespace Quest
     public class Barrel : CurioBase
     {
         public override CurioNames curioName => CurioNames.Barrel;
-       
 
+        //        "Empty barrel, waste of time."
+        //"Some like it hot!"
+        //"The night is dark and full of barrels!"
         public override void InitCurio()
         {
 
@@ -28,14 +30,15 @@ namespace Quest
             if (chances.GetChanceFrmList() ==0 ) 
             {
                 /// nothing happens
+                resultStr = "Empty barrel, waste of time.";
             }
             else if (chances.GetChanceFrmList() == 1)
             {
-                Fx1(); 
+                Fx1();                
             }
             else
             {
-                Fx2();
+                Fx2();                
             }
         }
 
@@ -73,6 +76,7 @@ namespace Quest
                                               , UnityEngine.Random.Range(-1,-3), TimeFrame.EndOfQuest,1,false);
 
             }
+            resultStr = "Some like it hot!";
         }
         //+1-2 dark res, +1-3 Water+Earth res permanently	-12-24 Thirst	-1-2 Willpower until eoq
         void Fx2()
@@ -94,6 +98,7 @@ namespace Quest
                                               , UnityEngine.Random.Range(-1, -3), TimeFrame.EndOfQuest, 1, false);
 
             }
+            resultStr = "The night is dark and full of barrels!";
         }
   
     }

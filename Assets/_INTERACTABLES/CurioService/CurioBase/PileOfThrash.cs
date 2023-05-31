@@ -21,7 +21,9 @@ namespace Quest
             float chance = Random.Range(0f, 100f);
             if (chance < 10f)
             {
-                //Nothing happens               
+                //Nothing happens
+                resultStr = "Just thrash that is."; 
+
             }
             else if (chance < 30f)
             {
@@ -42,7 +44,11 @@ namespace Quest
 
                     charCtrl.buffController.ApplyBuff(CauseType.Curios, (int)curioName
                                      , charCtrl.charModel.charID, AttribName.morale, -1, TimeFrame.EndOfQuest, 1, false);
+
+
                 }
+                resultStr = "The strong scent makes you nauseous.";
+
             }
             else
             {
@@ -71,6 +77,7 @@ namespace Quest
                 charCtrl.charStateController.ApplyImmunityBuff(CauseType.CharState, (int)curioName, charCtrl.charModel.charID
                                   , CharStateName.Despaired, TimeFrame.EndOfQuest, 1);
             }
+            resultStr = "The strong scent empowers you."; 
         }
         void Fx2()
         {
@@ -93,6 +100,8 @@ namespace Quest
                 lootTypes.Add(ItemType.GenGewgaws);
             lootTypes.Add(ItemType.Herbs);
             lootTypes.Add(ItemType.Scrolls);
+
+            resultStr = "So much stuff was left intact.";
 
         }
 

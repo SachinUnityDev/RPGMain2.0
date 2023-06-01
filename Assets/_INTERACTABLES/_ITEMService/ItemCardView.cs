@@ -177,7 +177,6 @@ namespace Interactables
                         //btm
                         itemSlotTrans.gameObject.SetActive(false);
                         currTrans.GetComponent<DisplayCurrency>().Display(herbSO.cost.DeepClone());
-
                     }
                     break;
                 case ItemType.Foods:
@@ -267,7 +266,7 @@ namespace Interactables
                         crownTrans.gameObject.SetActive(false);
                         // top
                         itemNametxt.text = tgSO.tgName.ToString().CreateSpace();
-                        itemTypetxt.text = " Trade Goods";
+                        itemTypetxt.text = "Trade Good";
                         itemFilterImg.sprite = itemViewSO.GetItemTypeImgData(item.itemType).FilterIconN;
                         itemImg.sprite = tgSO.iconSprite;
                         itemSubTypeTrans.gameObject.SetActive(false);
@@ -287,7 +286,7 @@ namespace Interactables
                         crownTrans.gameObject.SetActive(false);
                         // top
                         itemNametxt.text = toolSO.toolName.ToString().CreateSpace();
-                        itemTypetxt.text = " Tools";
+                        itemTypetxt.text = "Tool";
                         itemFilterImg.sprite = itemViewSO.GetItemTypeImgData(item.itemType).FilterIconN;
                         itemImg.sprite = toolSO.iconSprite;
                         itemSubTypeTrans.gameObject.SetActive(false);

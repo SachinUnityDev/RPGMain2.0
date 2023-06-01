@@ -31,7 +31,7 @@ namespace Quest
         private void Start()
         {
             qRoomController = GetComponent<QRoomController>();
-            On_QuestSceneStart(QuestNames.RatInfestation);
+          
         }
         public void On_QuestStateChg(QRoomState qRoomState)
         {
@@ -42,13 +42,15 @@ namespace Quest
         {
             InitQRooms(questName);
             OnStartOfQScene?.Invoke(questName);
+           
         }
         void InitQRooms(QuestNames questName)
         {
             QNodeAllRoomSO qNodeAllRoomSO = 
             allQNodeSO.GetQuestSceneSO(questName);
             ChangeRoomSprites(questName, 1);
-            qRoomController.InitQRoomController(qNodeAllRoomSO); 
+            qRoomController.InitQRoomController(qNodeAllRoomSO);
+            On_QuestStateChg(QRoomState.Prep);
         }
 
         public void ChangeRoomSprites(QuestNames questName, int roomNo)
@@ -67,10 +69,13 @@ namespace Quest
             prop.sortingOrder = 3;
         }
 
-     
-
-
-
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                On_QuestSceneStart(QuestNames.RatInfestation);
+            }
+        }
 
     }
 }

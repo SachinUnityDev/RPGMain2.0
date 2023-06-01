@@ -37,7 +37,7 @@ namespace Quest
                
                 lootController.ShowLootTable(new List<ItemType>()
                 {ItemType.Potions, ItemType.GenGewgaws, ItemType.PoeticGewgaws, ItemType.Gems, ItemType.SagaicGewgaws,
-                ItemType.Fruits, ItemType.Foods, ItemType.Tools});
+                ItemType.Fruits, ItemType.Foods, ItemType.TradeGoods});
                 //
             }
         }

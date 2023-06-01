@@ -16,6 +16,7 @@ namespace Quest
         {
             GameObject invPanelXL =
                             InvService.Instance.invXLPanel; 
+
             UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(invPanelXL, true);
             invPanelXL.GetComponent<IPanel>().Init();
         }

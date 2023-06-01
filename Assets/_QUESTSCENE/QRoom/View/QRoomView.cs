@@ -9,8 +9,9 @@ namespace Quest
     public class QRoomView : MonoBehaviour
     {
         [Header("Abbas Walk Anim GO")]
-        [SerializeField] GameObject abbasGO; 
-        
+        [SerializeField] GameObject abbasGO;
+        public QAbbasMovementController qAbbasMove; 
+
         [Header("ROOM END REF TBR")]
         [SerializeField] QRoomEndArrowW arrowW;
         [SerializeField] QRoomEndArrowS arrowS;
@@ -22,15 +23,21 @@ namespace Quest
         [Header("QWalk Panel")]
         public QWalkBtmView qWalkBtmView;
         public QPreReqView qPreReqView;
-        private void Awake()
+
+        [Header("Global var")]
+        [SerializeField] QuestNames questName; 
+
+        
+
+        void Awake()
         {
-          
+            qAbbasMove = abbasGO.GetComponent<QAbbasMovementController>();            
         }
 
-        void Start()
-        {  
-            StartQRoomScene();
-            QSceneService.Instance.OnStartOfQScene += (QuestNames questName)=>StartQRoomScene();
+        private void Start()
+        {
+            QSceneService.Instance.OnQRoomStateChg += StartQRoomPrepScene;
+            QSceneService.Instance.OnStartOfQScene += StartQRoomScene;
             QSceneService.Instance.OnQRoomStateChg += OnQRoomWalkStart;
         }
 
@@ -39,12 +46,20 @@ namespace Quest
             arrowS.GetComponent<Image>().DOFade(1, 0.1f);
             arrowW.GetComponent<Image>().DOFade(1, 0.1f);
         }
-        void StartQRoomScene()
+
+        void StartQRoomScene(QuestNames questName)
+        {
+            this.questName= questName;  
+        }
+
+        void StartQRoomPrepScene(QRoomState qRoomState)
         {
             qRoomEndArrow.gameObject.SetActive(true);
             qPreReqView.gameObject.SetActive(true);
             qWalkBtmView.gameObject.SetActive(false);
-            qPreReqView.InitQPreReqView(this); 
+            qPreReqView.InitQPreReqView(this);
+           
+
         }
 
         void OnQRoomWalkStart(QRoomState qRoomState)

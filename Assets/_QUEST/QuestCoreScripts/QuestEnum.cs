@@ -92,9 +92,9 @@ namespace Quest
     public enum QRoomState
     {
         None, 
-        Prep, 
+        Prep,         
+        AutoWalk,
         Walk,
-
     }
     public enum CityENames
     {

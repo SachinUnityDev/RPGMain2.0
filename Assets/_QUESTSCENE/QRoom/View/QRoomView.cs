@@ -16,7 +16,7 @@ namespace Quest
         [SerializeField] QRoomEndArrowW arrowW;
         [SerializeField] QRoomEndArrowS arrowS;
 
-        [SerializeField] QRoomPreReqEndPtrEvents qRoomEndArrow; 
+        [SerializeField] QRoomPreReqEndPtrEvents qRoomPrepEndArrow; 
 
         [SerializeField] Transform endCollider;
 
@@ -27,8 +27,6 @@ namespace Quest
         [Header("Global var")]
         [SerializeField] QuestNames questName; 
 
-        
-
         void Awake()
         {
             qAbbasMove = abbasGO.GetComponent<QAbbasMovementController>();            
@@ -36,9 +34,9 @@ namespace Quest
 
         private void Start()
         {
-            QSceneService.Instance.OnQRoomStateChg += StartQRoomPrepScene;
-            QSceneService.Instance.OnStartOfQScene += StartQRoomScene;
-            QSceneService.Instance.OnQRoomStateChg += OnQRoomWalkStart;
+
+            QSceneService.Instance.OnStartOfQScene += OnStartQRoomView;
+            QSceneService.Instance.OnQRoomStateChg += OnQRoomStateChgView;
         }
 
         public void EndArrowShow()
@@ -47,32 +45,38 @@ namespace Quest
             arrowW.GetComponent<Image>().DOFade(1, 0.1f);
         }
 
-        void StartQRoomScene(QuestNames questName)
+        void OnStartQRoomView(QuestNames questName)
         {
-            this.questName= questName;  
+            this.questName= questName;
         }
 
-        void StartQRoomPrepScene(QRoomState qRoomState)
-        {
-            qRoomEndArrow.gameObject.SetActive(true);
-            qPreReqView.gameObject.SetActive(true);
-            qWalkBtmView.gameObject.SetActive(false);
-            qPreReqView.InitQPreReqView(this);
-           
+    
 
-        }
-
-        void OnQRoomWalkStart(QRoomState qRoomState)
+        void OnQRoomStateChgView(QRoomState qRoomState)
         {
-            if (qRoomState == QRoomState.Walk)
+
+            if (qRoomState == QRoomState.Prep)
             {
+                qRoomPrepEndArrow.gameObject.SetActive(true);
+                qPreReqView.gameObject.SetActive(true);
+                qWalkBtmView.gameObject.SetActive(false);
+                qPreReqView.InitQPreReqView(this);
+            }
+            if (qRoomState == QRoomState.AutoWalk)
+            {
+                qRoomPrepEndArrow.gameObject.SetActive(false);
                 qWalkBtmView.gameObject.SetActive(true);
                 qPreReqView.gameObject.SetActive(false);
                 qWalkBtmView.QWalkInit(this);
             }
+            if (qRoomState == QRoomState.Walk)
+            {
+                qRoomPrepEndArrow.gameObject.SetActive(false);
+                //qWalkBtmView.gameObject.SetActive(true);
+                //qPreReqView.gameObject.SetActive(false);
+                //qWalkBtmView.QWalkInit(this);
+            }
+
         }
-
-
-
     }
 }

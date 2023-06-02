@@ -23,7 +23,7 @@ namespace Quest
     {
         [Header("Virtual Cam TBR")]
         [SerializeField] CinemachineVirtualCamera virtualCam;
-
+        [SerializeField] CinemachineBrain brain;
 
         [Header(" Skeleton Animation ref")]
         public SkeletonAnimation skeletonAnimation;
@@ -34,18 +34,15 @@ namespace Quest
         public Rigidbody2D rb;
         [SerializeField] string currentAnim;
 
-
         [Header("Entry collider")]
         [SerializeField] GameObject entryCollider;
         
 
-        // Start is called before the first frame update
         void Start()
         {
             rb = GetComponent<Rigidbody2D>();
             currentState = AnimState.Idle;
-
-            virtualCam.enabled = false;
+         
             QSceneService.Instance.OnQRoomStateChg += OnQRoomStateChg;
         }
         public void SetAnimation(AnimationReferenceAsset animRef, bool loop, float timeScale)
@@ -74,7 +71,9 @@ namespace Quest
 
         public void Move()
         {
-            if(QSceneService.Instance.qRoomState == QRoomState.Walk)
+            if (QSceneService.Instance.qRoomState == QRoomState.Prep) return;
+
+            if (QSceneService.Instance.qRoomState == QRoomState.Walk)
                 movement = Input.GetAxis("Horizontal");            
             rb.velocity = new Vector2(movement * speed, rb.velocity.y);
             if (movement != 0)
@@ -85,13 +84,6 @@ namespace Quest
             {
                 SetCharacterState(AnimState.Idle);
             }
-
-
-        }
-        public void CreateAbbasEntry()
-        {
-            virtualCam.enabled = false;
-            movement = 1;
         }
 
         public void OnCollisionEnter2D(Collision2D collision)
@@ -100,33 +92,29 @@ namespace Quest
             if (name == "EntryCollider")
             {
                 movement = 0;
-                SetCharacterState(AnimState.Idle);           
+                SetCharacterState(AnimState.Idle);
+                virtualCam.enabled = true;
+                entryCollider?.gameObject.SetActive(false);
+                QSceneService.Instance.On_QuestStateChg(QRoomState.Walk);
+                
             }
             if (name == "ArrowTrigger")
             {
-
+                QSceneService.Instance.qRoomView.EndArrowShow();
             }
         }
         public void OnQRoomStateChg(QRoomState qRoomState)
         {
-            if(qRoomState== QRoomState.Walk)
+            if(qRoomState== QRoomState.AutoWalk)
             {
-                virtualCam.enabled = true;
-                entryCollider?.gameObject.SetActive(false);
-            }
-
-            if (qRoomState == QRoomState.Prep)
-            {
-                virtualCam.enabled = false;
                 entryCollider?.gameObject.SetActive(true);
                 CreateAbbasEntry();
-
             }
-
-
-
         }
-
+        public void CreateAbbasEntry()
+        {
+            movement = 1;            
+        }
 
         void Update()
         {

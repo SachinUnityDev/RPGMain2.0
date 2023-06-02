@@ -79,7 +79,7 @@ namespace Quest
                     return null; 
             }
         }
-        public Sprite GetQuestInfoSpriteLit(QuestMode questMode)
+        public Sprite GetQInfoSpriteLit(QuestMode questMode)
         {
             switch (questMode)
             {

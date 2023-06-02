@@ -11,12 +11,11 @@ namespace Quest
                                                 , IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] TextMeshProUGUI heading;
+        [SerializeField] GameObject mapGO; 
+
         public void OnPointerClick(PointerEventData eventData)
         {
-            GameObject mapPanel =
-                            MapService.Instance.mapIntViewPanel;
-            UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(mapPanel, true);
-            mapPanel.GetComponent<IPanel>().Init();
+            mapGO.GetComponent<IPanel>().Load(); 
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -43,6 +42,7 @@ namespace Quest
         void Start()
         {
             heading = transform.parent.parent.GetChild(1).GetComponent<TextMeshProUGUI>();
+            heading.text = "";
         }
 
     }

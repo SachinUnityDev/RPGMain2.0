@@ -25,9 +25,11 @@ namespace Quest
         {
             this.roomNo = roomNo;
             qRoomModel = allQNodeRoomModel.GetQRoomModel(roomNo);
+            
+            //Is here bcoz sprites renderers not part of canvas .. can be easily controlled here 
             QSceneService.Instance.
-                        ChangeRoomSprites(qRoomModel.questNames, roomNo);
-
+                        On_RoomChg(qRoomModel.questNames, roomNo);
+            QSceneService.Instance.qRoomView.HideEndArrow(); 
         }
 
 

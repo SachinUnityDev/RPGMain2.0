@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: CoastSO
   m_EditorClassIdentifier: 
   landscapeNames: 8
-  allLines: []
+  hazardStr: -12 Cold Res
   spriteData:
     locationName: 1
     spriteBG_Q_day: {fileID: 0}
     spriteBG_Q_night: {fileID: 0}
     spriteBG_C_day: {fileID: 21300000, guid: bb4377dde118e844c9f7f80f41bfc947, type: 3}
     spriteBG_C_night: {fileID: 21300000, guid: 1ce5c2602a38bcd4ea2628698b0d6c9f, type: 3}
+  iconSprite: {fileID: 0}

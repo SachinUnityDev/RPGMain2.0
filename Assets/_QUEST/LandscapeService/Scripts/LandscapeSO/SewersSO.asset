@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: SewersSO
   m_EditorClassIdentifier: 
   landscapeNames: 5
-  allLines:
-  - -1 Morale
+  hazardStr: -1 Morale
   spriteData:
     locationName: 1
     spriteBG_Q_day: {fileID: 0}
     spriteBG_Q_night: {fileID: 0}
     spriteBG_C_day: {fileID: 21300000, guid: 14e3001b57bbc4f41a809b28b3d0be8c, type: 3}
     spriteBG_C_night: {fileID: 21300000, guid: 14e3001b57bbc4f41a809b28b3d0be8c, type: 3}
+  iconSprite: {fileID: 21300000, guid: 41d5419e4e9866e48bb7be0737477805, type: 3}

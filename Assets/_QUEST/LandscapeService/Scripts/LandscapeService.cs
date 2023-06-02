@@ -13,14 +13,31 @@ namespace Quest
         public event Action<LandscapeNames> OnLandscapeEnter;
         public event Action<LandscapeNames> OnLandscapeExit;
 
+        [Header(" All Land SO")]
+        public AllLandscapeSO allLandSO; 
 
         [Header("global variable")   ]
         public LandscapeNames currLandscape;
 
         [Header("Models")]
-        public List<LandscapeModel> allLandScapeModels = new List<LandscapeModel>();         
+        public List<LandscapeModel> allLandModels = new List<LandscapeModel>();         
         
         public LandscapeController landscapeControllers; // single controller
-
+        
+        private void Start()
+        {
+            currLandscape = LandscapeNames.Sewers; 
+        }
+        public void On_LandscapeEnter(LandscapeNames landName)
+        {
+            currLandscape= landName;
+            OnLandscapeEnter?.Invoke(landName);
+        }
+        public void On_LandscapeExit(LandscapeNames landName)
+        {
+            currLandscape = landName;
+            OnLandscapeExit?.Invoke(landName);
+        }
+        
     }
 }

@@ -16,8 +16,7 @@ namespace Quest
         public void InitQPreReqView(QRoomView qRoomView)
         {
             this.qRoomView = qRoomView;
-            //qRoomView.qPreReqView.gameObject.SetActive(true);
-            //qRoomView.qWalkBtmView.gameObject.SetActive(false);
+         
         }
 
  

@@ -35,7 +35,7 @@ namespace Interactables
             charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
                      , AttribName.willpower, +1, TimeFrame.Infinity, -1, true);  // Not a buff 
 
-            if (QuestMissionService.Instance.questMode == QuestMode.Taunt)
+            if (QuestMissionService.Instance.currQuestMode == QuestMode.Taunt)
             {
                 charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
                    , AttribName.morale, -3, TimeFrame.EndOfNight, castTime, true);

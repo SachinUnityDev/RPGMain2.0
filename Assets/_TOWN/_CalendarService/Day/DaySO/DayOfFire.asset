@@ -15,7 +15,7 @@ MonoBehaviour:
   orderInSeq: 1
   dayName: 1
   dayName2: 1
-  dayNameStr: Day Of Fire
+  dayNameStr: "Day of Fire\u0131_i_I_\u0130 "
   dayDescription: 
   tipOfTheDayList:
   - Macalakies are some brave bunch, they will never flee! Make sure you don't get

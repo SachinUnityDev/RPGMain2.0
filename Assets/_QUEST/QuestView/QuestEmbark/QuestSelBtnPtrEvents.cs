@@ -35,7 +35,7 @@ namespace Quest
             AllQuestSO allQuestSO = QuestMissionService.Instance.allQuestMainSO;
 
             spriteLit =
-                        allQuestSO.GetQuestInfoSpriteLit(questMode);
+                        allQuestSO.GetQInfoSpriteLit(questMode);
             spriteN =
                         allQuestSO.GetQuestInfoSpriteN(questMode);            
         }

@@ -1,4 +1,5 @@
 using Common;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,11 @@ namespace Quest
 {
     public class QuestMissionService : MonoSingletonGeneric<QuestMissionService>
     {
+        public Action<QuestMode> OnQuestModeChg; 
+
+
         [Header("QuestMode")]
-        public QuestMode questMode;
+        public QuestMode currQuestMode;
         
         [Header(" Q Main ")]
         public AllQuestSO allQuestMainSO;        
@@ -28,6 +32,7 @@ namespace Quest
 
         void Start()
         {
+            currQuestMode = QuestMode.Stealth; 
             questFactory = GetComponent<QuestFactory>();
             questController = GetComponent<QuestController>();  
         }
@@ -36,6 +41,12 @@ namespace Quest
         {
             InitAllQuestModel();
             InitAllQuestbase();
+        }
+        public void On_QuestModeChg(QuestMode questMode)
+        {
+            currQuestMode= questMode;
+            OnQuestModeChg?.Invoke(questMode);
+
         }
         public QuestBase GetQuestBase(QuestNames questName)
         {
@@ -89,5 +100,18 @@ namespace Quest
             questModels = allQuestModels.Where(t=>t.questType == questType).ToList();
             return questModels;
         }
+
+        public List<QuestMode> GetOtherQMode()
+        {
+            List<QuestMode> questModes = new List<QuestMode>(); 
+            for (int i = 1; i < Enum.GetNames(typeof(QuestMode)).Length; i++)
+            {
+                QuestMode questModeN = (QuestMode)i;
+                if(currQuestMode != questModeN)
+                        questModes.Add(questModeN);
+            }
+            return questModes;
+        }
+
     }
 }

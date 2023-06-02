@@ -8,6 +8,9 @@ namespace Quest
 {
     public class QRoomView : MonoBehaviour
     {
+        [Header(" Screen Fade")]
+        [SerializeField] Transform fadeScreen; 
+
         [Header("Abbas Walk Anim GO")]
         [SerializeField] GameObject abbasGO;
         public QAbbasMovementController qAbbasMove; 
@@ -24,6 +27,10 @@ namespace Quest
         public QWalkBtmView qWalkBtmView;
         public QPreReqView qPreReqView;
 
+        [Header("QLand")]
+        public QModeNLandView qModeNLandView;
+
+
         [Header("Global var")]
         [SerializeField] QuestNames questName; 
 
@@ -34,15 +41,31 @@ namespace Quest
 
         private void Start()
         {
-
             QSceneService.Instance.OnStartOfQScene += OnStartQRoomView;
             QSceneService.Instance.OnQRoomStateChg += OnQRoomStateChgView;
+            QSceneService.Instance.OnRoomChg += (QuestNames questName, int roomNo)=>OnRoomChg(); 
+        }
+        void OnRoomChg()
+        {
+            Sequence chgSeq = DOTween.Sequence();
+
+            chgSeq.Append(fadeScreen.GetComponent<Image>().DOFade(1f, 0.15f))
+                  .AppendInterval(0.5f)
+                  .Append(abbasGO.transform.DOLocalMoveX(10, 0.4f))
+                  .Append(fadeScreen.GetComponent<Image>().DOFade(0f, 1f))                  
+                  ;
         }
 
-        public void EndArrowShow()
+
+        public void ShowEndArrow()
         {
             arrowS.GetComponent<Image>().DOFade(1, 0.1f);
             arrowW.GetComponent<Image>().DOFade(1, 0.1f);
+        }
+        public void HideEndArrow()
+        {
+            arrowS.GetComponent<Image>().DOFade(0, 0.1f);
+            arrowW.GetComponent<Image>().DOFade(0, 0.1f);
         }
 
         void OnStartQRoomView(QuestNames questName)
@@ -50,10 +73,12 @@ namespace Quest
             this.questName= questName;
         }
 
-    
 
         void OnQRoomStateChgView(QRoomState qRoomState)
         {
+
+            qModeNLandView.InitQModeNLandView(); 
+
 
             if (qRoomState == QRoomState.Prep)
             {
@@ -72,9 +97,7 @@ namespace Quest
             if (qRoomState == QRoomState.Walk)
             {
                 qRoomPrepEndArrow.gameObject.SetActive(false);
-                //qWalkBtmView.gameObject.SetActive(true);
-                //qPreReqView.gameObject.SetActive(false);
-                //qWalkBtmView.QWalkInit(this);
+                
             }
 
         }

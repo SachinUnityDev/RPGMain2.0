@@ -12,7 +12,9 @@ namespace Quest
     {
 
         public event Action<QRoomState> OnQRoomStateChg;
-        public event Action<QuestNames> OnStartOfQScene; 
+        public event Action<QuestNames> OnStartOfQScene;
+        public event Action<QuestNames, int> OnRoomChg;
+
 
         [Header("Quest Room SO")]
         public AllQNodeSO allQNodeSO;
@@ -30,8 +32,7 @@ namespace Quest
 
         private void Start()
         {
-            qRoomController = GetComponent<QRoomController>();
-          
+            qRoomController = GetComponent<QRoomController>();          
         }
         public void On_QuestStateChg(QRoomState qRoomState)
         {
@@ -42,15 +43,20 @@ namespace Quest
         {
             InitQRooms(questName);
             OnStartOfQScene?.Invoke(questName);
-           
         }
         void InitQRooms(QuestNames questName)
         {
             QNodeAllRoomSO qNodeAllRoomSO = 
-            allQNodeSO.GetQuestSceneSO(questName);
+                      allQNodeSO.GetQuestSceneSO(questName);
             ChangeRoomSprites(questName, 1);
             qRoomController.InitQRoomController(qNodeAllRoomSO);
             On_QuestStateChg(QRoomState.Prep);
+        }
+
+        public void On_RoomChg(QuestNames questName, int roomNo)
+        {
+            ChangeRoomSprites(questName, roomNo);
+            OnRoomChg?.Invoke(questName, roomNo); 
         }
 
         public void ChangeRoomSprites(QuestNames questName, int roomNo)
@@ -67,14 +73,26 @@ namespace Quest
                         allRoomSO.GetQRoomSO(roomNo);
             prop.sprite = qRoomSO.prop;
             prop.sortingOrder = 3;
-        }
 
+
+        }
+        
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
                 On_QuestSceneStart(QuestNames.RatInfestation);
             }
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                foreach (CharController charCtrl in CharService.Instance.charsInPlayControllers)
+                {
+                    if(charCtrl.charModel.charName != CharNames.Abbas_Skirmisher)
+                    {
+                        CharService.Instance.allCharsInPartyLocked.Add(charCtrl);
+                    }
+                }
+            }            
         }
 
     }

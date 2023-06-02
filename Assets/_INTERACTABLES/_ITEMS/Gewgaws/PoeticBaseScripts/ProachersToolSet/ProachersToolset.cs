@@ -18,7 +18,7 @@ namespace Interactables
        //  +3 luck vs Rooted targets
         public override void BonusFx()
         {
-            QuestChange(QuestMissionService.Instance.questMode);
+            QuestChange(QuestMissionService.Instance.currQuestMode);
             GameEventService.Instance.OnQuestModeChg += QuestChange; 
         }
 

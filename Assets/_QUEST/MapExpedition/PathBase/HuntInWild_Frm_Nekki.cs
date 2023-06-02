@@ -39,7 +39,7 @@ namespace Quest
             {
                 
 
-                QuestMode questMode = QuestMissionService.Instance.questMode;
+                QuestMode questMode = QuestMissionService.Instance.currQuestMode;
                 mapENames =
                  pathModel.GetMapENameAfterChanceChk(nextInterNodeData.nodeTimeData, questMode);
                 if (mapENames != MapENames.None)

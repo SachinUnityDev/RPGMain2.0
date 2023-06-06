@@ -16,13 +16,12 @@ MonoBehaviour:
   toolName: 6
   toolName2: 0
   openDesc: '"Probably smells like a skunk or a dead cat."'
-  interactDesc: 
   lootMoneyRange:
   - silver: 1
     bronze: 0
   - silver: 2
     bronze: 6
-  curioN: {fileID: 0}
-  curioHL: {fileID: 0}
-  curioOpn: {fileID: 0}
+  curioN: {fileID: 21300000, guid: 77cb660607c0d0241b539cfe268ed54e, type: 3}
+  curioHL: {fileID: 21300000, guid: 3088bf9cc8890a1419a827ef316d86aa, type: 3}
+  curioOpn: {fileID: 21300000, guid: e20f54714bd31f644bfc30855d8679fe, type: 3}
   curioBark: 

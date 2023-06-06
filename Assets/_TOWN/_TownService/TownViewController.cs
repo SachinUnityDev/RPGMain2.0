@@ -92,9 +92,9 @@ namespace Town
         void FillTownBG()
         {
             if (CalendarService.Instance.currtimeState == TimeState.Night)
-                townBGImage.sprite = TownService.Instance.allbuildingSO.TownBGNight;
+                townBGImage.sprite = TownService.Instance.allbuildSO.TownBGNight;
             else
-                townBGImage.sprite = TownService.Instance.allbuildingSO.TownBGDay;
+                townBGImage.sprite = TownService.Instance.allbuildSO.TownBGDay;
             
         }
     }

@@ -22,7 +22,7 @@ namespace Town
         public BuildingNames selectBuildingName;
 
 
-        public AllBuildSO allbuildingSO;
+        public AllBuildSO allbuildSO;
 
         void Start()
         {

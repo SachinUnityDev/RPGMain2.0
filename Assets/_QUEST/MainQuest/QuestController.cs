@@ -26,5 +26,8 @@ namespace Quest
                                 .ShowQuestEmbarkView(questModel, questSO, questBase,objModel, nodePtrEvents, currNodeData); 
         }
 
+        
+
+
     }
 }

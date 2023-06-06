@@ -18,7 +18,7 @@ namespace Quest
         {       
             Sequence seq = DOTween.Sequence();
                     seq.AppendCallback(QuestMarkDown)
-                        .AppendCallback(OnEndNodeSelect)
+                        .AppendCallback(ShowNodeClick)
                         //.AppendCallback(()=>pathExpView
                         //.MovePawnStone(this.transform.position,pathModel.endNode.time))
 //.AppendCallback(pathBase.OnStartNodeExit)
@@ -37,9 +37,8 @@ namespace Quest
             transform.DORotate(new Vector3(0, 0, 0), 0.2f);
         }
 
-        public override void OnEndNodeSelect()
-        {
-            base.OnEndNodeSelect();
+        public  void ShowNodeClick()
+        {  
             QuestMissionService.Instance
                                    .questController.ShowQuestEmbarkView(questName, objName, this);
         }

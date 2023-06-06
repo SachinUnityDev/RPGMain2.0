@@ -14,6 +14,7 @@ namespace Quest
 
         [SerializeField] Image img;
         [SerializeField] int UpRoom =-1;
+
         public void OnPointerClick(PointerEventData eventData)
         {
             // get from the QRoomModel and base for actions
@@ -22,6 +23,7 @@ namespace Quest
             if (UpRoom!= -1)
             {
                 QSceneService.Instance.qRoomController.Move2Room(UpRoom); 
+
             }
 
         }

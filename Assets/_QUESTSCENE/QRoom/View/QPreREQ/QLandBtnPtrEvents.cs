@@ -23,7 +23,7 @@ namespace Quest
                 = LandscapeService.Instance.currLandscape;
             landSO = LandscapeService.Instance.allLandSO.GetLandSO(landName);
 
-            img.sprite = landSO.iconSprite;
+            img.sprite = landSO.iconSpriteDay;
            
 
         }

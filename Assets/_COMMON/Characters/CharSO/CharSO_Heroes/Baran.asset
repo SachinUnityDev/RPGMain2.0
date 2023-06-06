@@ -17,7 +17,7 @@ MonoBehaviour:
   charPrefab: {fileID: 6114580909890694877, guid: 9bc421af9d7de054dac399de1cfd5fbb,
     type: 3}
   charSprite: {fileID: 21300000, guid: d34de3d2ed0683d4a9b1445fadf53d77, type: 3}
-  charSpriteUnClickedFlipped: {fileID: 21300000, guid: a10262b729816aa499f920c5984b0a67,
+  charSpriteUnClickedFlipped: {fileID: 21300000, guid: d34de3d2ed0683d4a9b1445fadf53d77,
     type: 3}
   charHexPortrait: {fileID: 21300000, guid: 7f210713637e38d41bf058a232c109b5, type: 3}
   dialoguePortraitClicked: {fileID: 21300000, guid: a76bf619350b6514bb5bfc0c73d4db71,
@@ -47,21 +47,27 @@ MonoBehaviour:
   charFleeState: 2
   provisionItems:
   - itemType: 0
-    ItemName: 1
+    itemName: 0
+    genGewgawQ: 0
   earningsItems:
   - itemType: 4
-    ItemName: 9
+    itemName: 0
+    genGewgawQ: 0
   earningShare: 0.4
   CompanionPreReqOpt1:
   - itemType: 4
-    ItemName: 2
+    itemName: 0
+    genGewgawQ: 0
   - itemType: 4
-    ItemName: 2
+    itemName: 0
+    genGewgawQ: 0
   CompanionPreReqOpt2:
   - itemType: 4
-    ItemName: 9
+    itemName: 0
+    genGewgawQ: 0
   - itemType: 4
-    ItemName: 9
+    itemName: 0
+    genGewgawQ: 0
   startLevel: 0
   permaTraitNames: 
   AttribList:

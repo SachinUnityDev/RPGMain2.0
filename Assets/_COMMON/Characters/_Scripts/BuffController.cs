@@ -5,6 +5,7 @@ using System;
 using Common;
 using System.Linq;
 using common;
+using Quest;
 
 namespace Combat
 {
@@ -65,8 +66,7 @@ namespace Combat
             charController = GetComponent<CharController>();
             CombatEventService.Instance.OnEOR += RoundTick;
             CombatEventService.Instance.OnEOC += EOCTick;
-          
-            
+            QuestEventService.Instance.OnEOQ += EOQTick;
         }
         void Start()
         {
@@ -76,20 +76,17 @@ namespace Combat
             CalendarService.Instance.OnStartOfCalDay += (int dayName) => ToggleBuffsOnStartOfTheNight();
         }
 
-
-
-
-#region  APPLY_BUFFS 
+        #region  APPLY_BUFFS 
         public int ApplyBuff(CauseType causeType, int causeName, int causeByCharID
-                                , AttribName statName, float value, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
+                                , AttribName attribName, float value, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
         {
            
             AttribModData attribModVal =  charController.ChangeAttrib( causeType,  causeName, causeByCharID
-                                            ,  statName,  value, true);
+                                            ,  attribName,  value, true);
             int currRd = GameSupportService.Instance.currentRound;
             buffIndex++;
             BuffData buffData = new BuffData(buffIndex,isBuff, currRd, timeFrame, netTime,
-                                                                  attribModVal, directStr);                
+                                                                    attribModVal, directStr);                
                 allBuffs.Add(buffData);               
                 return buffIndex;         
         }
@@ -104,11 +101,11 @@ namespace Combat
                 }
             }
         }
-        public int ApplyBuffOnRange(CauseType causeType, int causeName, int causeByCharID, AttribName statName
+        public int ApplyBuffOnRange(CauseType causeType, int causeName, int causeByCharID, AttribName attribName
             , float minChgR, float maxChgR, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
         {
             AttribModData charModData = charController.ChangeAttribRange(causeType, causeName, causeByCharID
-                                                                    , statName, minChgR, maxChgR,  true);
+                                                                    , attribName, minChgR, maxChgR,  true);
 
             int currRd = GameSupportService.Instance.currentRound;
             buffIndex++;
@@ -119,30 +116,30 @@ namespace Combat
         }
 
         
-        //public int ApplyExpBuff(CauseType causeType, int causeName, int causeByCharID
-        //         , int value, TimeFrame timeFrame, int netTime, bool isBuff)
-        //{
-        //    // when mod the modifier and keep track here
+            //public int ApplyExpBuff(CauseType causeType, int causeName, int causeByCharID
+            //         , int value, TimeFrame timeFrame, int netTime, bool isBuff)
+            //{
+            //    // when mod the modifier and keep track here
           
-        //    charController.charModel.expBonusModPercent += (int)value;            
-        //    int currRd = GameSupportService.Instance.currentRound;
-        //    buffIndex++;
-        //    BuffData buffData = new BuffData(buffIndex, isBuff, currRd, timeFrame, netTime,
-        //                                                         null , "");
-        //    allExpModBuffs.Add(buffData);
-        //    return buffIndex;
-        //}
-        bool IsRangeChange(BuffData buffData)
-        {
-            if (buffData.charModData.modChgMinR == 0 &&
-                buffData.charModData.modChgMaxR == 0)
-                return false;
-            else
-                return true; 
-        }
-#endregion
+            //    charController.charModel.expBonusModPercent += (int)value;            
+            //    int currRd = GameSupportService.Instance.currentRound;
+            //    buffIndex++;
+            //    BuffData buffData = new BuffData(buffIndex, isBuff, currRd, timeFrame, netTime,
+            //                                                         null , "");
+            //    allExpModBuffs.Add(buffData);
+            //    return buffIndex;
+            //}
+            bool IsRangeChange(BuffData buffData)
+            {
+                if (buffData.charModData.modChgMinR == 0 &&
+                    buffData.charModData.modChgMaxR == 0)
+                    return false;
+                else
+                    return true; 
+            }
+        #endregion
 
-#region REMOVE BUFFS 
+        #region REMOVE BUFFS 
         public bool RemoveBuff(int buffID)   // to be revised
         {
             BuffData buffData = null; 
@@ -197,22 +194,20 @@ namespace Combat
             if (IsRangeChange(buffData))
             { 
                 charController.ChangeAttribRange(buffData.charModData.causeType,
-                                     buffData.charModData.causeName, buffData.charModData.causeByCharID
-                                     , buffData.charModData.attribModified
-                                     , -buffData.charModData.modChgMinR, -buffData.charModData.modChgMinR,true);
+                                        buffData.charModData.causeName, buffData.charModData.causeByCharID
+                                        , buffData.charModData.attribModified
+                                        , -buffData.charModData.modChgMinR, -buffData.charModData.modChgMinR,true);
 
             }else 
             {
                 charController.ChangeAttrib(buffData.charModData.causeType,
-                                     buffData.charModData.causeName, buffData.charModData.causeByCharID
-                                     , buffData.charModData.attribModified, -buffData.charModData.modCurrVal, true);
+                                        buffData.charModData.causeName, buffData.charModData.causeByCharID
+                                        , buffData.charModData.attribModified, -buffData.charModData.modCurrVal, true);
             }
             
             allBuffs.Remove(buffData);
         }
-
-
-#endregion
+        #endregion
         public List<string> GetBuffList()
         {  
             foreach (BuffData buffData in allBuffs)
@@ -245,8 +240,28 @@ namespace Combat
                 }
             }
         }
+        public void EOCTick()
+        {
+            foreach (BuffData buffData in allBuffs.ToList())
+            {
+                if (buffData.timeFrame == TimeFrame.EndOfCombat)
+                {
+                    RemoveBuffData(buffData);
+                }
+            }
+        }
+        public void EOQTick()
+        {
+            foreach (BuffData buffData in allBuffs.ToList())
+            {
+                if (buffData.timeFrame == TimeFrame.EndOfQuest)
+                {
+                    RemoveBuffData(buffData);
+                }
+            }
+        }
 
-#region DAY BUFF MGMT
+        #region DAY BUFF MGMT
         public int ApplyNInitBuffOnDay(CauseType causeType, int causeName, int causeByCharID
                                , AttribName statName, float value, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
         {
@@ -428,63 +443,66 @@ namespace Combat
 
         #endregion
 
-#region NIGHT BUFF MGMT
-        public int ApplyBuffOnNight(CauseType causeType, int causeName, int causeByCharID
-                               , AttribName statName, float value, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
-        {
+        #region NIGHT BUFF MGMT
+                public int ApplyBuffOnNight(CauseType causeType, int causeName, int causeByCharID
+                                       , AttribName statName, float value, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
+                {
 
-            // Actual buff application 
-            AttribModData charModVal = charController.ChangeAttrib(causeType, causeName, causeByCharID
-                                            , statName, value, true);
+                    // Actual buff application 
+                    AttribModData charModVal = charController.ChangeAttrib(causeType, causeName, causeByCharID
+                                                    , statName, value, true);
 
-            int currRd = GameSupportService.Instance.currentRound;
-            buffIndex++;
-            BuffData buffData = new BuffData(buffIndex,isBuff, currRd, timeFrame, netTime,
-                                                                  charModVal, directStr);
+                    int currRd = GameSupportService.Instance.currentRound;
+                    buffIndex++;
+                    BuffData buffData = new BuffData(buffIndex,isBuff, currRd, timeFrame, netTime,
+                                                                          charModVal, directStr);
 
 
-            allBuffs.Add(buffData);
-            allNightbuffs.Add(buffData);
-            return buffIndex;
+                    allBuffs.Add(buffData);
+                    allNightbuffs.Add(buffData);
+                    return buffIndex;
 
-        }
+                }
 
-        public int ApplyBuffOnNightRange(CauseType causeType, int causeName, int causeByCharID, AttribName statName
-            , float minChgR, float maxChgR, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
-        {
-            AttribModData charModData = charController.ChangeAttribRange(causeType, causeName, causeByCharID
-                                           , statName, minChgR, maxChgR, true);
+                public int ApplyBuffOnNightRange(CauseType causeType, int causeName, int causeByCharID, AttribName statName
+                    , float minChgR, float maxChgR, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
+                {
+                    AttribModData charModData = charController.ChangeAttribRange(causeType, causeName, causeByCharID
+                                                   , statName, minChgR, maxChgR, true);
 
-            int currRd = GameSupportService.Instance.currentRound;
-            buffIndex++;
-            BuffData buffData = new BuffData(buffIndex,isBuff, currRd, timeFrame, netTime,
-                                                            charModData, directStr);
-            allBuffs.Add(buffData);
-            allNightbuffs.Add(buffData);
-            return buffIndex;
-        }
+                    int currRd = GameSupportService.Instance.currentRound;
+                    buffIndex++;
+                    BuffData buffData = new BuffData(buffIndex,isBuff, currRd, timeFrame, netTime,
+                                                                    charModData, directStr);
+                    allBuffs.Add(buffData);
+                    allNightbuffs.Add(buffData);
+                    return buffIndex;
+                }
 
-        public void RemoveBuffOnNight(BuffData buffData)
-        {
-            if (IsRangeChange(buffData))
-            {
-                charController.ChangeAttribRange(buffData.charModData.causeType,
-                                     buffData.charModData.causeName, buffData.charModData.causeByCharID
-                                     , buffData.charModData.attribModified
-                                     , -buffData.charModData.modChgMinR, -buffData.charModData.modChgMinR, true);
+                public void RemoveBuffOnNight(BuffData buffData)
+                {
+                    if (IsRangeChange(buffData))
+                    {
+                        charController.ChangeAttribRange(buffData.charModData.causeType,
+                                             buffData.charModData.causeName, buffData.charModData.causeByCharID
+                                             , buffData.charModData.attribModified
+                                             , -buffData.charModData.modChgMinR, -buffData.charModData.modChgMinR, true);
 
-            }
-            else
-            {
-                charController.ChangeAttrib(buffData.charModData.causeType,
-                                     buffData.charModData.causeName, buffData.charModData.causeByCharID
-                                     , buffData.charModData.attribModified, -buffData.charModData.modCurrVal, true);
-            }
-            allBuffs.Remove(buffData);
-            allNightbuffs.Remove(buffData);
-        }
+                    }
+                    else
+                    {
+                        charController.ChangeAttrib(buffData.charModData.causeType,
+                                             buffData.charModData.causeName, buffData.charModData.causeByCharID
+                                             , buffData.charModData.attribModified, -buffData.charModData.modCurrVal, true);
+                    }
+                    allBuffs.Remove(buffData);
+                    allNightbuffs.Remove(buffData);
+                }
 
-#endregion
+        #endregion
+
+        #region EXP BUFFS 
+
         public int ApplyBuffExpExtra(CauseType causeType, int causeName, int causeByCharID
                                 , float valPercent, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
         {
@@ -493,33 +511,9 @@ namespace Combat
 
             return 0; 
         }
-        public void EOCTick()
-        {
-            foreach (BuffData buffData in allBuffs.ToList())
-            {
-                if (buffData.timeFrame == TimeFrame.EndOfCombat)
-                {                  
-                        RemoveBuffData(buffData);              
-                }
-            }
-        }
+
+
+        #endregion
 
     }
 }
-//string str = $"{buffData.charModData.modifiedVal} {buffData.charModData.statModfified}, {buffData.buffedNetTime}  rds";
-//buffStrs.Add(str);
-
-
-//string str = $"{buffData.charModData.modifiedVal} {buffData.charModData.statModfified}, {buffData.buffedNetTime}  rds";
-//deDuffStrs.Add(str);
-
-
-//if(directStr == "")
-//{
-//    BuffData buffData = new BuffData(isBuff, currRd, timeFrame, netTime,
-//                                                      charModVal);
-//    allBuffs.Add(buffData);
-//}
-//else
-//{
-//}

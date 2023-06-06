@@ -15,7 +15,8 @@ namespace Common
         [TextArea(5,10)]        
         public string hazardStr ="";
         public SpriteDataLandscape spriteData;
-        public Sprite iconSprite; 
+        public Sprite iconSpriteDay;
+        public Sprite iconSpriteNight;
     }
 
     [Serializable]

@@ -21,6 +21,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3e6375f4df7df094a9aa0164aca9e60f, type: 2}
   - {fileID: 11400000, guid: ce63762c0fcf4434ab6cfa3cf178e558, type: 2}
   - {fileID: 11400000, guid: 13013abf39e704f42b273dffacb519a6, type: 2}
-  bGSprite: {fileID: 21300000, guid: 880d559ba0aab5941814f97214868bb7, type: 3}
+  bGSprite: {fileID: 21300000, guid: 511d75831fa375b48a3edf187a8a5d8f, type: 3}
   fGSprite: {fileID: 21300000, guid: db7dd97a00b861243a36a5c2bfdecce3, type: 3}
   mapSprite: {fileID: 0}

@@ -16,13 +16,12 @@ MonoBehaviour:
   toolName: 0
   toolName2: 0
   openDesc: '"See what a dead peddler had owned."'
-  interactDesc: 
   lootMoneyRange:
   - silver: 3
     bronze: 0
   - silver: 6
     bronze: 0
-  curioN: {fileID: 0}
-  curioHL: {fileID: 0}
-  curioOpn: {fileID: 0}
+  curioN: {fileID: 21300000, guid: 18b05e560f26bc145911aa1295613a7f, type: 3}
+  curioHL: {fileID: 21300000, guid: a475ffbd068e74a4791a0af5e8b1fa0a, type: 3}
+  curioOpn: {fileID: 21300000, guid: b21430b8f75abfe4e8abeb054e5bd962, type: 3}
   curioBark: 

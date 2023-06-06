@@ -43,8 +43,6 @@ namespace Quest
         public void OnMapEExit()
         {
             MapService.Instance.pathController.pathBase.OnEmbarkPressed();
-
-
         }
     }
 }

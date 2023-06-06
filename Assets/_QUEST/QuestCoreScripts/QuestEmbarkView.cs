@@ -58,7 +58,7 @@ namespace Quest
         {
             UnLoad();
             NodeData endNode = new NodeData(questModel.questName);
-            // Get PathBase
+            nodePtrEvents.OnEndNodeSelect();
         }
         void FillQuestPanel()
         {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 namespace Quest
@@ -31,11 +32,30 @@ namespace Quest
             foreach (InterNodeData node in interNodes)
             {
                 if(!node.isCrossed)
-                    return false;
+                    return true;
             }
-            return true;
+            return false;
         }
-        public InterNodeData GetAnyUnCrossedInterNode()
+
+        public MapENames GetMapENameFromInterNodeBasedOnChance(InterNodeData interNodeData)
+        {
+            QuestMode questMode = QuestMissionService.Instance.currQuestMode;
+            List<float> chances = new List<float>();
+            
+            foreach (QModeChanceData chanceData in interNodeData.allNodeChanceData)
+            {
+                if(chanceData.questMode == questMode)
+                {
+                    chanceData.chanceData.ForEach(t => chances.Add(t.chance));
+                    int c = chances.GetChanceFrmList();
+                    return chanceData.chanceData[c].mapEName; 
+                }
+            }
+            return MapENames.None;
+
+        }
+
+        public InterNodeData GetNextUnCrossedInterNode()
         {
             if (interNodes.Count == 0) return null;          
             foreach (InterNodeData node in interNodes)

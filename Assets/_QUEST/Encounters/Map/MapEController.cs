@@ -24,10 +24,18 @@ namespace Quest
 
         public void ShowMapE(MapENodePtrEvents mapENodePtrEvents, MapENames mapEName)
         {
+            // get map EP Ptr events on the map
+
+
             this.mapENodePtrEvents= mapENodePtrEvents;
             MapEModel mapEModel = GetMapEModel(mapEName); 
             mapEView.GetComponent<MapEView>().InitEncounter(mapEModel);
         }
+        //public void ShowMapE(MapENames mapEName)
+        //{
+        //    MapEModel mapEModel = GetMapEModel(mapEName);
+        //    mapEView.GetComponent<MapEView>().InitEncounter(mapEModel);
+        //}
         public void InitMapE(AllMapESO allMapSO)
         {
             foreach (MapESO mapESO in allMapSO.allMapESO)

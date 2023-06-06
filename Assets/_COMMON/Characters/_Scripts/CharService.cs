@@ -22,7 +22,6 @@ namespace Common
         [Header("Character SO")]
         public AllCharSO allCharSO; 
         public List<CharacterSO> allAllySO = new List<CharacterSO>();
-       // public List<NPCSO> allNPCSOls = new List<NPCSO>();
         public AllNPCSO allNpcSO; 
 
         [Header("Load Strings ")]

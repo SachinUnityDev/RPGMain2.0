@@ -28,7 +28,7 @@ namespace Quest
         {
             MapService.Instance.pathController.CrossTheCurrNode();
 
-            InterNodeData nextInterNodeData = pathModel.GetAnyUnCrossedInterNode();
+            InterNodeData nextInterNodeData = pathModel.GetNextUnCrossedInterNode();
             if (nextInterNodeData != null)
             {
                 QuestMode questMode = QuestMissionService.Instance.questController.questModel.questMode;

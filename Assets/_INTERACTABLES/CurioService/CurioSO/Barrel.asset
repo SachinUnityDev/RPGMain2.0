@@ -16,13 +16,12 @@ MonoBehaviour:
   toolName: 1
   toolName2: 0
   openDesc: '"Some liquid lurks inside. Would it satiate your thirst though?"'
-  interactDesc: 
   lootMoneyRange:
   - silver: 0
     bronze: 0
   - silver: 0
     bronze: 0
-  curioN: {fileID: 0}
-  curioHL: {fileID: 0}
-  curioOpn: {fileID: 0}
+  curioN: {fileID: 21300000, guid: bcbde4b9f6481a942a118ed151020836, type: 3}
+  curioHL: {fileID: 21300000, guid: 9ead277ed9886a748b4d703fdf65a3ba, type: 3}
+  curioOpn: {fileID: 21300000, guid: f83564432af78b44182d032d04ce6d41, type: 3}
   curioBark: 

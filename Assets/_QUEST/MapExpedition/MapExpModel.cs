@@ -21,6 +21,7 @@ namespace Quest
         public virtual void OnEndNodeSelect()
         {
             MapService.Instance.pathController.OnPathEndNodeSelect(this, nodeData);
+            // Following are copied back from the path controller 
             pathModel = MapService.Instance.pathController.pathModel;
             pathBase = MapService.Instance.pathController.pathBase;
         }

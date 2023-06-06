@@ -41,7 +41,7 @@ namespace Common
         public void Init(TownViewController townViewController)
         {
             this.townViewController = townViewController;
-            buildSO = TownService.Instance.allbuildingSO.GetBuildSO(buildingName);
+            buildSO = TownService.Instance.allbuildSO.GetBuildSO(buildingName);
             timeState = CalendarService.Instance.currtimeState;
             SetSpriteNormal();     
         }

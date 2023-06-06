@@ -63,15 +63,26 @@ namespace Quest
         public void OnPathEndNodeSelect( MapExpBasePtrEvents mapExpBasePtrEvents, NodeData endNode)
         {
             this.endNode= endNode;
-          
+            
             this.mapExpBasePtrEvents = mapExpBasePtrEvents;
-            pathSO = MapService.Instance.allPathSO.GetPathSO(startNode, endNode); 
-           
+            pathSO = MapService.Instance.allPathSO.GetPathSO(startNode, endNode);
+            
             pathModel= GetPathModel(startNode, endNode);
             pathBase = GetPathBase(startNode, endNode);
+
+            if (pathModel.IsAnyUnCrossedInterNode())
+            {
+                InterNodeData interNodeData = pathModel.GetNextUnCrossedInterNode();
+                MapENames mapEName = pathModel.GetMapENameFromInterNodeBasedOnChance(interNodeData);
+                //seq
+
+
+            //    EncounterService.Instance.mapEController.ShowMapE(mapEName); 
+
+            }
+
         }
-     
-        
+
         public PathModel GetPathModel(NodeData startNode, NodeData endNode)
         {
             int index = allPathModel.FindIndex(t => t.startNode.IsNodeDataMatch(startNode)

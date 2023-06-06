@@ -14,6 +14,8 @@ namespace Town
 
         [Header("Controllers")]
         public PathController pathController;
+        public PathFactory pathFactory; 
+
 
         [Header(" All Path Nodes")]
         public AllPathSO allPathSO;
@@ -22,13 +24,15 @@ namespace Town
         void Start()
         {
             pathController= GetComponent<PathController>();
-
+            pathFactory = GetComponent<PathFactory>();
         }
         
         public void InitMapService()
         {          
+           
             pathController.InitPath(allPathSO);
             pathExpView.PathExpInit();
+
         }
 
 

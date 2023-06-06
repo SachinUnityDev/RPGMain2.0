@@ -100,7 +100,7 @@ namespace Quest
             }
             if (name == "ArrowTrigger")
             {
-                QSceneService.Instance.qRoomView.EndArrowShow();
+                QSceneService.Instance.qRoomView.ShowEndArrow();
             }
         }
         public void OnQRoomStateChg(QRoomState qRoomState)
@@ -114,6 +114,13 @@ namespace Quest
         public void CreateAbbasEntry()
         {
             movement = 1;            
+        }
+
+        public void ResetAbbas()
+        {
+
+
+
         }
 
         void Update()

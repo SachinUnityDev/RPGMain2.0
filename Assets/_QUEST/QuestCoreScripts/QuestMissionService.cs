@@ -113,5 +113,33 @@ namespace Quest
             return questModes;
         }
 
+        #region FLEE 
+        public void On_FleePressedInQuest()
+        {
+            // Abbas and whole party flee and Quest obj FAILS 
+            // Quest Fail result go back to town
+
+
+
+
+        }
+
+        #endregion
+        public void On_QuestResult(bool isSucccess)
+        {
+            // go to map 
+            if (isSucccess)
+            {
+                // map moves to the town and return journey begin with encounters as defined
+            }
+            else
+            {
+                // map head goes to town no further meetings
+            }
+            // time in quest return journey to be added 
+
+            // in town view for Quest failed return 
+        }
+
     }
 }

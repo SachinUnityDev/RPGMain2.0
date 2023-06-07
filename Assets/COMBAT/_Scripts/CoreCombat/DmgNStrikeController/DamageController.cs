@@ -144,12 +144,15 @@ namespace Combat
             float damageAlt = striker.GetComponent<StrikeController>()
                         .GetDmgAlt(charController.charModel, attackType, _dmgType ); 
                 
-            AttribData dmgSD = striker.GetAttrib(AttribName.damage);
+            AttribData dmgSDMin = striker.GetAttrib(AttribName.dmgMin);
+            AttribData dmgSDMax = striker.GetAttrib(AttribName.dmgMax);
             float percentDmg = dmgPercentVal + damageAlt; // copy of Dmg value for magical and physical + Dmg modifiers 
 
-            float dmg = (float)(UnityEngine.Random.Range(dmgSD.minRange, dmgSD.maxRange) * (percentDmg / 100f));
+
+
+            float dmg = (float)(UnityEngine.Random.Range(dmgSDMin.currValue, dmgSDMax.currValue) * (percentDmg / 100f));
             int strikerID = striker.charModel.charID;
-            Debug.Log("MIN AND MAX RANGE " + dmgSD.minRange + dmgSD.maxRange + "DAMAGE " + dmg);
+            Debug.Log("MIN AND MAX RANGE " + dmgSDMin.currValue + dmgSDMax.currValue + "DAMAGE " + dmg);
 
             switch (_dmgType)
             {
@@ -157,8 +160,10 @@ namespace Combat
                     break;
                 case DamageType.Physical:
                     float dmgVal = CritNFeebleApply(dmg);
-                    AttribData armorSD = charController.GetAttrib(AttribName.armor);
-                    float armor = UnityEngine.Random.Range(armorSD.minRange, armorSD.maxRange);
+                    AttribData armorSDMin = charController.GetAttrib(AttribName.armorMin);
+                    AttribData armorSDMax = charController.GetAttrib(AttribName.armorMax);
+
+                    float armor = UnityEngine.Random.Range(armorSDMin.currValue, armorSDMax.currValue);
                     float chgValue = dmgVal - armor;
                     chgValue = chgValue < 0 ? 0 : chgValue;
                     charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -chgValue);

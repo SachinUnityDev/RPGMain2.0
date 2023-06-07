@@ -136,18 +136,25 @@ namespace Combat
         void ReduceDmgPercent()
         {
             int charID = charController.charModel.charID;
-            AttribData dmg = charController.GetAttrib(AttribName.damage);
-            dmgMin = dmg.minRange;
-            dmgMax = dmg.maxRange;
-            float chgMin = 0.2f * dmgMin;
+            AttribData dmgMin1 = charController.GetAttrib(AttribName.dmgMin);
+            AttribData dmgMax1 = charController.GetAttrib(AttribName.dmgMax);
+            dmgMin = dmgMin1.currValue;
+            dmgMax = dmgMax1.currValue;
+            float chgMin = 0.2f * this.dmgMin;
             float chgMax = 0.2f * dmgMax;
-            charController.ChangeAttribRange(CauseType.StatChecks, (int)StatChecks.FocusCheck, charID
-                , AttribName.damage, chgMin, chgMax);
+
+            charController.ChangeAttrib(CauseType.StatChecks, (int)StatChecks.FocusCheck, charID
+                , AttribName.dmgMin, chgMin);
+            charController.ChangeAttrib(CauseType.StatChecks, (int)StatChecks.FocusCheck, charID
+                , AttribName.dmgMin, chgMax);
+
         }
         void RevertDamageRange()
         {
-            charController.GetAttrib(AttribName.damage).minRange = dmgMin;
-            charController.GetAttrib(AttribName.damage).maxRange = dmgMax;
+            // whats is this 
+
+            charController.GetAttrib(AttribName.dmgMin).currValue = dmgMin;
+            charController.GetAttrib(AttribName.dmgMin).currValue = dmgMax;
         }
 
         public bool AccuracyCheck()// Physical 

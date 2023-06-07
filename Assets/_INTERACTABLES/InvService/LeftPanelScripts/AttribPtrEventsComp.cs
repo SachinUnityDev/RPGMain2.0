@@ -4,6 +4,8 @@ using UnityEngine;
 using Common;
 using TMPro;
 using UnityEngine.EventSystems;
+using System.Runtime.InteropServices.ComTypes;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 
 namespace Interactables
 {
@@ -14,6 +16,7 @@ namespace Interactables
 
         [SerializeField] GameObject desc;
         [SerializeField] AttribData attribData;
+        [SerializeField] AttribData attribDataMax;
         AttribPanelViewComp attribPanelViewComp;
         BtmCharViewController btmCharViewController; 
 
@@ -53,10 +56,15 @@ namespace Interactables
             {
                 attribData = charModel.attribList.Find(t => t.AttribName == attribName);
                 PopulateDesc();
-                if (attribName == AttribName.armor || attribName == AttribName.damage)
+                if (attribName == AttribName.armorMin || attribName == AttribName.dmgMin)
                 {
+                    if (attribName == AttribName.armorMin)
+                        attribDataMax = charModel.attribList.Find(t => t.AttribName == AttribName.armorMax);
 
-                    str = attribData.minRange + "-" + attribData.maxRange;
+                    if (attribName == AttribName.dmgMin)
+                        attribDataMax = charModel.attribList.Find(t => t.AttribName == AttribName.dmgMax);
+
+                    str = attribData.currValue + "-" + attribDataMax.currValue;
                 }
                 else
                 {

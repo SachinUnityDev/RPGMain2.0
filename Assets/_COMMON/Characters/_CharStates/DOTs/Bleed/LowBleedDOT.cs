@@ -41,7 +41,7 @@ namespace Common
         {
             if (CombatService.Instance.currCharOnTurn.charModel.charID != charID) return; 
 
-            AttribData statData = charController.GetAttrib(AttribName.armor);
+            AttribData statData = charController.GetAttrib(AttribName.armorMin);
 
             if (statData.currValue >  4)
                 charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatName.health, -Mathf.RoundToInt(dmgPerRound *0.40f));

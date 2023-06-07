@@ -29,8 +29,11 @@ namespace Interactables
             float chance = 40f;
             if (chance.GetChance())
             {
-                charController.buffController.ApplyBuffOnRange(CauseType.Fruit, (int)fruitName,
-                 charController.charModel.charID, AttribName.damage, 0,1, fruitSO.timeFrame, fruitSO.castTime, true);
+                int buffID = 
+                charController.buffController.ApplyBuff(CauseType.Fruit, (int)fruitName,
+                 charController.charModel.charID, AttribName.dmgMax, 1, fruitSO.timeFrame, fruitSO.castTime, true);
+                allBuffs.Add(buffID);
+
             }
         }
 

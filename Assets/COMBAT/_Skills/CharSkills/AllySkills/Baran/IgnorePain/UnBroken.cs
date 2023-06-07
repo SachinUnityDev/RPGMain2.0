@@ -57,17 +57,19 @@ namespace Combat
                 charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.earthRes, 20f, false);
 
              
-                    AttribData statData = charController.GetAttrib(AttribName.armor);
-                    float armorMin = statData.minRange;
-                    float armorMax = statData.maxRange;
-                    chgMin = statData.minRange * 0.8f;
-                    chgMax = statData.maxRange * 0.8f;
+                    AttribData armorMin = charController.GetAttrib(AttribName.armorMin);
+                    AttribData armorMax = charController.GetAttrib(AttribName.armorMax);
+                    float armorMinVal = armorMin.currValue;
+                    float armorMaxVal = armorMin.currValue;
+                    chgMin = armorMinVal * 0.8f;
+                    chgMax = armorMaxVal * 0.8f; 
 
-                    charController.ChangeAttribRange(CauseType.CharSkill, (int)skillName, charID
-                                                    , AttribName.armor, chgMin, chgMax);
-                
+                    charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID
+                                                    , AttribName.armorMin, chgMin);
+                    charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID
+                                                    , AttribName.armorMax, chgMax);
 
-                resIncr = true; 
+                    resIncr = true; 
             }            
         }
 
@@ -87,9 +89,12 @@ namespace Combat
             {
                 charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.waterRes, -40f, false);
                 charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.earthRes, -20f, false);
-                targetController.ChangeAttribRange(CauseType.CharSkill, (int)skillName, charID
-                                               , AttribName.armor, -chgMin, -chgMax);
 
+                targetController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID
+                                                                , AttribName.armorMin, -chgMin);
+
+                targetController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID
+                                                                 , AttribName.armorMax, -chgMax);
                 resIncr = false;
             }
         }

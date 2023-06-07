@@ -432,36 +432,36 @@ namespace Common
                 }
             }
         }
-        public AttribModData ChangeAttribRange(CauseType causeType, int name, int causeByCharID, AttribName attribName
-            , float minChgR, float maxChgR, bool toInvoke = true)
-        {
+        //public AttribModData ChangeAttribRange(CauseType causeType, int name, int causeByCharID, AttribName attribName
+        //    , float minChgR, float maxChgR, bool toInvoke = true)
+        //{
 
-            int turn = -1; Vector3 fwd = Vector3.zero; 
-            if(GameService.Instance.gameModel.gameState == GameState.InCombat)
-            {
-                 turn = CombatService.Instance.currentTurn;
-                fwd = GridService.Instance.GetDyna4GO(gameObject).FwdtilePos;
-            }
-            AttribModData charModData = new AttribModData(turn, causeType, name, causeByCharID
-                 , this.charModel.charID, attribName,0,0 );
+        //    int turn = -1; Vector3 fwd = Vector3.zero; 
+        //    if(GameService.Instance.gameModel.gameState == GameState.InCombat)
+        //    {
+        //         turn = CombatService.Instance.currentTurn;
+        //        fwd = GridService.Instance.GetDyna4GO(gameObject).FwdtilePos;
+        //    }
+        //    AttribModData charModData = new AttribModData(turn, causeType, name, causeByCharID
+        //         , this.charModel.charID, attribName,0,0 );
 
-            AttribData statData = GetAttrib(attribName);
-            float minStatNet = statData.minRange + minChgR;
-            float maxStatNet = statData.maxRange + maxChgR;
+        //    AttribData statData = GetAttrib(attribName);
+        //    float minStatNet = statData.minRange + minChgR;
+        //    float maxStatNet = statData.maxRange + maxChgR;
 
 
-            charModData.modChgMinR = minStatNet;
-            charModData.modChgMaxR = maxStatNet;
-            charModel.attribList.Find(x => x.AttribName == attribName).minRange = minStatNet;
-            charModel.attribList.Find(x => x.AttribName == attribName).maxRange = maxStatNet;
-            if (toInvoke)
-            {
-                // to be checked
-                OnAttribChg?.Invoke(charModData);
-            }
+        //    charModData.modChgMinR = minStatNet;
+        //    charModData.modChgMaxR = maxStatNet;
+        //    charModel.attribList.Find(x => x.AttribName == attribName).minRange = minStatNet;
+        //    charModel.attribList.Find(x => x.AttribName == attribName).maxRange = maxStatNet;
+        //    if (toInvoke)
+        //    {
+        //        // to be checked
+        //        OnAttribChg?.Invoke(charModData);
+        //    }
 
-            return charModData;
-        }       
+        //    return charModData;
+        //}       
 
         public void HPRegen()  // linked to charController as Stamina regen
         {

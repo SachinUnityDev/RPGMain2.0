@@ -27,9 +27,6 @@ namespace Common
         {
             if (lvlModel == null)
                 lvlModel = new LevelModel(); 
-
-
-
         }
 
         public void LevelUpInit(CharController charController)
@@ -89,17 +86,29 @@ namespace Common
             //{
             foreach (AttribData stat in lvlDataComp.allStatDataAuto)
                 {
-                    if (stat.AttribName == AttribName.damage || stat.AttribName == AttribName.armor)
+                    if (stat.AttribName.IsAttribArmor())
                     {
-                        charController.ChangeAttribRange(CauseType.LevelUp, 1, 1, stat.AttribName
-                            , stat.minRange, stat.maxRange, true);
-                        // stack it up in level up model
-                    }
-                    else
-                    {
+                        charController.ChangeAttrib(CauseType.LevelUp, 1, 1, AttribName.armorMin
+                            , stat.currValue, true);
+                        
+                        charController.ChangeAttrib(CauseType.LevelUp, 1, 1, AttribName.armorMax
+                           , stat.currValue, true);
+                    // stack it up in level up model
+                     }
+                     else if(stat.AttribName.IsAttribDamage()) 
+                     {
+                        charController.ChangeAttrib(CauseType.LevelUp, 1, 1, AttribName.dmgMin
+                                , stat.currValue, true);
+
+                        charController.ChangeAttrib(CauseType.LevelUp, 1, 1, AttribName.dmgMax
+                           , stat.currValue, true);
+
+                     }
+                     else
+                     {
                         charController.ChangeAttrib(CauseType.LevelUp, 1, 1, stat.AttribName
                            , stat.currValue, true);
-                    }
+                     }
 
                 }
            // }
@@ -139,23 +148,10 @@ namespace Common
                 Debug.Log("Lvl up stat error" + lvlUpStats.Count);
                 return;
             }
-                
-            
-            
-         
-            foreach (AttribData stat in lvlUpStats)
-            {
-                if (stat.AttribName == AttribName.damage || stat.AttribName == AttribName.armor)
-                {
-                    charController.ChangeAttribRange(CauseType.LevelUp, 1, 1, stat.AttribName
-                        , stat.minRange, stat.maxRange, false);
-                    // stack it up in level up model
-                }
-                else
-                {
-                    charController.ChangeAttribRange(CauseType.LevelUp, 1, 1, stat.AttribName
-                        , stat.minRange, stat.maxRange, false);
-                }
+            foreach (AttribData attrib in lvlUpStats)
+            {               
+                charController.ChangeAttrib(CauseType.LevelUp, 1, 1, attrib.AttribName
+                    , attrib.currValue, false);
             }
             charModel.charLvl++;
 
@@ -167,19 +163,12 @@ namespace Common
         {
             charController = CharService.Instance.GetCharCtrlWithName(charName);
             // apply to char Controller
-            foreach (AttribData stat in optionChosen)
+            foreach (AttribData attrib in optionChosen)
             {
-                if (stat.AttribName == AttribName.damage || stat.AttribName == AttribName.armor)
-                {
-                    charController.ChangeAttribRange(CauseType.LevelUp, 1, 1, stat.AttribName
-                        , stat.minRange, stat.maxRange, true);
-                    // stack it up in level up model
-                }
-                else
-                {
-                    charController.ChangeAttrib(CauseType.LevelUp, 1, 1, stat.AttribName
-                       , stat.currValue, true);
-                }
+               
+                charController.ChangeAttrib(CauseType.LevelUp, 1, 1, attrib.AttribName
+                    , attrib.currValue, true);
+               
             }
             lvlModel.AddOptions2ChosenStack(charName, optionChosen, (Levels)charModel.charLvl); 
         }

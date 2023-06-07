@@ -27,17 +27,15 @@ namespace Interactables
         public void ApplyFXFolkloric()
         {
             charController = InvService.Instance.charSelectController;
-
-
             int index =
-                  charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
-                          , charController.charModel.charID, AttribName.willpower, val21, TimeFrame.Infinity, -1, true);
+                  charController.buffController.ApplyNInitBuffOnDayNNight(CauseType.SuffixGenGewgaw, (int)suffixName
+                          , charController.charModel.charID, AttribName.willpower, val21, TimeFrame.Infinity, -1, true, TimeState.Day);
             buffIndex.Add(index);
 
      
             index =
-                charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
-                        , charController.charModel.charID, AttribName.vigor, val22, TimeFrame.Infinity, -1, true);
+                charController.buffController.ApplyNInitBuffOnDayNNight(CauseType.SuffixGenGewgaw, (int)suffixName
+                        , charController.charModel.charID, AttribName.vigor, val22, TimeFrame.Infinity, -1, true, TimeState.Day);
             buffIndex.Add(index);
         }
         public void EpicInit()
@@ -54,14 +52,14 @@ namespace Interactables
             //  3 vigor at day + 3 wp at day
            
             int index =
-                  charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
-                          , charController.charModel.charID, AttribName.willpower, val31, TimeFrame.Infinity, -1, true);
+                  charController.buffController.ApplyNInitBuffOnDayNNight(CauseType.SuffixGenGewgaw, (int)suffixName
+                          , charController.charModel.charID, AttribName.willpower, val31, TimeFrame.Infinity, -1, true, TimeState.Day);
             buffIndex.Add(index);
 
           
             index =
-                charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
-                        , charController.charModel.charID, AttribName.vigor, val32, TimeFrame.Infinity, -1, true);
+                charController.buffController.ApplyNInitBuffOnDayNNight(CauseType.SuffixGenGewgaw, (int)suffixName
+                        , charController.charModel.charID, AttribName.vigor, val32, TimeFrame.Infinity, -1, true, TimeState.Day);
             buffIndex.Add(index);
         }
         public void RemoveFXFolkloric()
@@ -90,14 +88,14 @@ namespace Interactables
             charController = InvService.Instance.charSelectController;
 
             int index =
-                  charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
-                          , charController.charModel.charID, AttribName.willpower, val11, TimeFrame.Infinity, -1, true);
+                  charController.buffController.ApplyNInitBuffOnDayNNight(CauseType.SuffixGenGewgaw, (int)suffixName
+                          , charController.charModel.charID, AttribName.willpower, val11, TimeFrame.Infinity, -1, true, TimeState.Day);
             buffIndex.Add(index);
 
 
             index =
-                charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
-                        , charController.charModel.charID, AttribName.vigor, val12, TimeFrame.Infinity, -1, true);
+                charController.buffController.ApplyNInitBuffOnDayNNight(CauseType.SuffixGenGewgaw, (int)suffixName
+                        , charController.charModel.charID, AttribName.vigor, val12, TimeFrame.Infinity, -1, true, TimeState.Day);
             buffIndex.Add(index);
         }
 

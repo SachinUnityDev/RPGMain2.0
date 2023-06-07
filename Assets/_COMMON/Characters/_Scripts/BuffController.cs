@@ -18,24 +18,11 @@ namespace Combat
         public TimeFrame timeFrame;
         public int buffedNetTime;
         public int buffCurrentTime;  
-        public AttribModData charModData;
-        public string directString;    
-
-
-        //public BuffData(int buffID, bool isBuff, int startRoundNo, TimeFrame timeFrame, 
-        //          int buffedNetTime, CharModData charModData)  // deprecated 
-        //{
-        //    this.buffID = buffID;
-        //    this.isBuff = isBuff;   
-        //    this.startRoundNo = startRoundNo;
-        //    this.timeFrame = timeFrame;
-        //    this.buffCurrentTime = 0; 
-        //    this.buffedNetTime = buffedNetTime;
-        //    this.charModData = charModData.DeepClone();
-        //}
+        public AttribModData attribModData;
+        public TimeState timeState; 
 
         public BuffData(int buffID, bool isBuff, int startRoundNo, TimeFrame timeFrame,
-            int buffedNetTime, AttribModData charModData, string directString = "")
+            int buffedNetTime, AttribModData attribModData, TimeState timeState =  TimeState.None)
         {
             this.buffID = buffID;
             this.isBuff = isBuff;
@@ -43,18 +30,17 @@ namespace Combat
             this.timeFrame = timeFrame;
             this.buffedNetTime = buffedNetTime;
             this.buffCurrentTime = 0;
-            this.charModData = charModData;
-            this.directString = directString; 
+            this.attribModData = attribModData;
+            this.timeState = timeState; 
+           
         }
     }
 
     public class BuffController : MonoBehaviour
     {
          List<BuffData> allBuffs = new List<BuffData>();  
-         List<BuffData> allDaybuffs = new List<BuffData>(); 
-         List <BuffData> allNightbuffs = new List<BuffData>();              
-        // use array here for the index to work 
-
+         List<BuffData> allDayNightbuffs = new List<BuffData>(); 
+      
         CharController charController; // ref to char Controller 
         [SerializeField]List<string> buffStrs = new List<string>();
         [SerializeField]List<string> deDuffStrs = new List<string>();
@@ -67,18 +53,17 @@ namespace Combat
             CombatEventService.Instance.OnEOR += RoundTick;
             CombatEventService.Instance.OnEOC += EOCTick;
             QuestEventService.Instance.OnEOQ += EOQTick;
+            CalendarService.Instance.OnChangeTimeState += ToggleBuffsOnTimeStateChg;
         }
         void Start()
         {
-            // should have feature of printing some data from skills directly
-
-            CalendarService.Instance.OnStartOfCalDay += (int dayName) => ToggleBuffsOnStartOfTheDay();
-            CalendarService.Instance.OnStartOfCalDay += (int dayName) => ToggleBuffsOnStartOfTheNight();
+           
+          
         }
 
         #region  APPLY_BUFFS 
         public int ApplyBuff(CauseType causeType, int causeName, int causeByCharID
-                                , AttribName attribName, float value, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
+                                , AttribName attribName, float value, TimeFrame timeFrame, int netTime, bool isBuff)
         {
            
             AttribModData attribModVal =  charController.ChangeAttrib( causeType,  causeName, causeByCharID
@@ -86,7 +71,7 @@ namespace Combat
             int currRd = GameSupportService.Instance.currentRound;
             buffIndex++;
             BuffData buffData = new BuffData(buffIndex,isBuff, currRd, timeFrame, netTime,
-                                                                    attribModVal, directStr);                
+                                                                    attribModVal);                
                 allBuffs.Add(buffData);               
                 return buffIndex;         
         }
@@ -101,42 +86,18 @@ namespace Combat
                 }
             }
         }
-        public int ApplyBuffOnRange(CauseType causeType, int causeName, int causeByCharID, AttribName attribName
-            , float minChgR, float maxChgR, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
+   
+        bool IsDmgArmorChg(BuffData buffData)
         {
-            AttribModData charModData = charController.ChangeAttribRange(causeType, causeName, causeByCharID
-                                                                    , attribName, minChgR, maxChgR,  true);
-
-            int currRd = GameSupportService.Instance.currentRound;
-            buffIndex++;
-            BuffData buffData = new BuffData(buffIndex, isBuff, currRd, timeFrame, netTime,
-                                                            charModData, directStr);            
-            allBuffs.Add(buffData);           
-            return buffIndex; 
+            if (buffData.attribModData.attribModified == AttribName.dmgMin ||
+                buffData.attribModData.attribModified == AttribName.dmgMax ||
+                buffData.attribModData.attribModified == AttribName.armorMin||
+                buffData.attribModData.attribModified == AttribName.armorMax)
+                return true;
+            else
+                return false;                 
         }
 
-        
-            //public int ApplyExpBuff(CauseType causeType, int causeName, int causeByCharID
-            //         , int value, TimeFrame timeFrame, int netTime, bool isBuff)
-            //{
-            //    // when mod the modifier and keep track here
-          
-            //    charController.charModel.expBonusModPercent += (int)value;            
-            //    int currRd = GameSupportService.Instance.currentRound;
-            //    buffIndex++;
-            //    BuffData buffData = new BuffData(buffIndex, isBuff, currRd, timeFrame, netTime,
-            //                                                         null , "");
-            //    allExpModBuffs.Add(buffData);
-            //    return buffIndex;
-            //}
-            bool IsRangeChange(BuffData buffData)
-            {
-                if (buffData.charModData.modChgMinR == 0 &&
-                    buffData.charModData.modChgMaxR == 0)
-                    return false;
-                else
-                    return true; 
-            }
         #endregion
 
         #region REMOVE BUFFS 
@@ -146,39 +107,15 @@ namespace Combat
             int index = allBuffs.FindIndex(t => t.buffID == buffID);
             if (index == -1)
             {
-                index = allDaybuffs.FindIndex(t => t.buffID == buffID); 
+                index = allDayNightbuffs.FindIndex(t => t.buffID == buffID); 
                 if(index == -1)
                 {
-                    index = allNightbuffs.FindIndex(t => t.buffID == buffID);
-                    if (index == -1)
-                        return false;
-                    buffData = allNightbuffs[index];
-                    allNightbuffs.Remove(buffData);
-                    return true;
-
-                    //if (index == -1)
-                    //{
-                    //    //index = allExpModBuffs.FindIndex(t => t.buffID == buffID);
-                    //    //if (index != -1)
-                    //    //{
-                    //    //    buffData = allExpModBuffs[index]; 
-                    //    //    allExpModBuffs.Remove(buffData);
-                    //    //    return true; 
-                    //    //}
-                    //    //else
-                    //    //{
-                    //    //    return false; 
-                    //    //}
-                    //}           
-                    //else // remove night buff
-                    //{
-                       
-                    //}
+                    return false;
                 }
                 else // remove day buff
                 {
-                    buffData = allDaybuffs[index];
-                    allDaybuffs.Remove(buffData);
+                    buffData = allDayNightbuffs[index];
+                    allDayNightbuffs.Remove(buffData);
                     return true; 
                 } 
             }
@@ -190,40 +127,30 @@ namespace Combat
             }                
         }
         public void RemoveBuffData(BuffData buffData)
-        {
-            if (IsRangeChange(buffData))
-            { 
-                charController.ChangeAttribRange(buffData.charModData.causeType,
-                                        buffData.charModData.causeName, buffData.charModData.causeByCharID
-                                        , buffData.charModData.attribModified
-                                        , -buffData.charModData.modChgMinR, -buffData.charModData.modChgMinR,true);
-
-            }else 
-            {
-                charController.ChangeAttrib(buffData.charModData.causeType,
-                                        buffData.charModData.causeName, buffData.charModData.causeByCharID
-                                        , buffData.charModData.attribModified, -buffData.charModData.modCurrVal, true);
-            }
-            
-            allBuffs.Remove(buffData);
+        {        
+                charController.ChangeAttrib(buffData.attribModData.causeType,
+                                        buffData.attribModData.causeName, buffData.attribModData.causeByCharID
+                                        , buffData.attribModData.attribModified, -buffData.attribModData.modCurrVal, true);
+                   
+                allBuffs.Remove(buffData);
         }
         #endregion
         public List<string> GetBuffList()
         {  
-            foreach (BuffData buffData in allBuffs)
-            {  
-                if(buffData.isBuff)
-                    buffStrs.Add(buffData.directString);  
-            }
+            //foreach (BuffData buffData in allBuffs)
+            //{  
+            //    if(buffData.isBuff)
+            //        buffStrs.Add(buffData.directString);  
+            //}
             return buffStrs;            
         }
         public List<string> GetDeBuffList()
         {
-            foreach (BuffData buffData in allBuffs)
-            {
-                if (!buffData.isBuff)
-                    deDuffStrs.Add(buffData.directString); 
-            }
+            //foreach (BuffData buffData in allBuffs)
+            //{
+            //    if (!buffData.isBuff)
+            //        deDuffStrs.Add(buffData.directString); 
+            //}
             return deDuffStrs;          
         }
         public void RoundTick()
@@ -262,258 +189,53 @@ namespace Combat
         }
 
         #region DAY BUFF MGMT
-        public int ApplyNInitBuffOnDay(CauseType causeType, int causeName, int causeByCharID
-                               , AttribName statName, float value, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
+        public int ApplyNInitBuffOnDayNNight(CauseType causeType, int causeName, int causeByCharID
+                               , AttribName statName, float value, TimeFrame timeFrame, int netTime
+                                , bool isBuff, TimeState timeState)
         {
-            
-            
-           AttribModData charModVal = charController.ChangeAttrib(causeType, causeName, causeByCharID
+
+            AttribModData attribModVal = new AttribModData();
+
+            if (CalendarService.Instance.currtimeState == TimeState.Day) // FOR DAY CORRECTION
+            {
+                attribModVal = charController.ChangeAttrib(causeType, causeName, causeByCharID
                                                         , statName, value, true);
-           
+            }
             if(CalendarService.Instance.currtimeState == TimeState.Night) // FOR NIGHT CORRECTION
             {
-                charController.ChangeAttrib(causeType, causeName, causeByCharID
+                attribModVal = charController.ChangeAttrib(causeType, causeName, causeByCharID
                                                         , statName, -value, true);  
             }
-
             int currRd = GameSupportService.Instance.currentRound;
             buffIndex++;
             BuffData buffData = new BuffData(buffIndex, isBuff, currRd, timeFrame, netTime,
-                                                                  charModVal, directStr);
+                                                                  attribModVal, timeState);
 
-            allBuffs.Add(buffData);
-            allDaybuffs.Add(buffData);
-            return buffIndex;
-
-        }
-
-        public int ApplyNInitBuffOnDayRange(CauseType causeType, int causeName, int causeByCharID, AttribName statName
-            , float minChgR, float maxChgR, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
-        {
-
-            AttribModData charModData = charController.ChangeAttribRange(causeType, causeName, causeByCharID
-                                           , statName, minChgR, maxChgR, true);
-
-            if (CalendarService.Instance.currtimeState == TimeState.Night) // FOR NIGHT CORRECTION
-            {
-                charController.ChangeAttribRange(causeType, causeName, causeByCharID
-                                            , statName, -minChgR, -maxChgR, true);
-            }
-            int currRd = GameSupportService.Instance.currentRound;
-            buffIndex++;
-            BuffData buffData = new BuffData(buffIndex,isBuff, currRd, timeFrame, netTime,
-                                                            charModData, directStr);
-            allBuffs.Add(buffData);
-            allDaybuffs.Add(buffData);  
+           // allBuffs.Add(buffData);
+            allDayNightbuffs.Add(buffData);
             return buffIndex;
         }
 
-        void ToggleBuffsOnStartOfTheDay() // ON start of the day
+        void ToggleBuffsOnTimeStateChg(TimeState timeState) // ON start of the day
         {
-            foreach (BuffData buffData in allDaybuffs)
+            foreach (BuffData buffData in allDayNightbuffs)
             {
-                AttribModData charModData = buffData.charModData; 
-                if(charModData.modChgMinR == 0 || charModData.modChgMaxR == 0)// are non range buffs
-                {
-                    charController.ChangeAttrib(charModData.causeType, charModData.causeName
-                   , charModData.causeByCharID, charModData.attribModified, charModData.modCurrVal
-                   , true);
+                if (buffData.timeState == timeState)
+                {  // APPLY temporarily
+                    AttribModData attribModData = buffData.attribModData;
+                    charController.ChangeAttrib(attribModData.causeType, attribModData.causeName
+                    , attribModData.causeByCharID, attribModData.attribModified, attribModData.modCurrVal, true);
                 }
                 else
-                {
-                    charController.ChangeAttribRange(charModData.causeType, charModData.causeName
-                   , charModData.causeByCharID, charModData.attribModified, charModData.modChgMinR
-                   , charModData.modChgMaxR, true);
-                }
-            }
-
-            foreach (BuffData buffData in allNightbuffs)
-            {
-                AttribModData charModData = buffData.charModData;
-                if (charModData.modChgMinR == 0 || charModData.modChgMaxR == 0)  // are non range buffs
-                {
-                    charController.ChangeAttrib(charModData.causeType, charModData.causeName
-                   , charModData.causeByCharID, charModData.attribModified, -charModData.modCurrVal
-                   , true);
-                }
-                else
-                {
-                    charController.ChangeAttribRange(charModData.causeType, charModData.causeName
-                   , charModData.causeByCharID, charModData.attribModified, -charModData.modChgMinR
-                   , -charModData.modChgMaxR, true);
+                {  // REMOVE temporarily
+                    AttribModData attribModData = buffData.attribModData;
+                    charController.ChangeAttrib(attribModData.causeType, attribModData.causeName
+                    , attribModData.causeByCharID, attribModData.attribModified, -attribModData.modCurrVal, true);
                 }
             }
         }
-        void ToggleBuffsOnStartOfTheNight() // ON start of the Night
-        {
-            foreach (BuffData buffData in allNightbuffs)
-            {
-                AttribModData charModData = buffData.charModData;
-                if (charModData.modChgMinR == 0 || charModData.modChgMaxR == 0)
-                {
-                    charController.ChangeAttrib(charModData.causeType, charModData.causeName
-                   , charModData.causeByCharID, charModData.attribModified, charModData.modCurrVal
-                   , true);
-                }
-                else
-                {
-                    charController.ChangeAttribRange(charModData.causeType, charModData.causeName
-                   , charModData.causeByCharID, charModData.attribModified, charModData.modChgMinR
-                   , charModData.modChgMaxR, true);
-                }
-            }
-
-            foreach (BuffData buffData in allDaybuffs)
-            {
-                AttribModData charModData = buffData.charModData;
-                if (charModData.modChgMinR == 0 || charModData.modChgMaxR == 0)
-                {
-                    charController.ChangeAttrib(charModData.causeType, charModData.causeName
-                   , charModData.causeByCharID, charModData.attribModified, -charModData.modCurrVal
-                   ,  true);
-                }
-                else
-                {
-                    charController.ChangeAttribRange(charModData.causeType, charModData.causeName
-                   , charModData.causeByCharID, charModData.attribModified, -charModData.modChgMinR
-                   , -charModData.modChgMaxR, true);
-                }
-            }
-        }
-
-        public void RemoveBuffOnDay(BuffData buffData)
-        {
-            if (IsRangeChange(buffData))
-            {
-                charController.ChangeAttribRange(buffData.charModData.causeType,
-                                     buffData.charModData.causeName, buffData.charModData.causeByCharID
-                                     , buffData.charModData.attribModified
-                                     , -buffData.charModData.modChgMinR, -buffData.charModData.modChgMinR, true);
-
-            }
-            else
-            {
-                charController.ChangeAttrib(buffData.charModData.causeType,
-                                     buffData.charModData.causeName, buffData.charModData.causeByCharID
-                                     , buffData.charModData.attribModified, -buffData.charModData.modCurrVal, true);
-            }
-            allBuffs.Remove(buffData);
-            allDaybuffs.Remove(buffData);
-        }
- 
-        void RemoveBuffOnEndofDay()
-        {
-            foreach (BuffData buffData in allDaybuffs)
-            {
-                RemoveBuffDay(buffData);
-            }
-        }
-
-        void ApplyBuffDay(BuffData buffData)
-        {
-            AttribModData charModData = buffData.charModData;
-
-            if (IsRangeChange(buffData))
-            {
-                charController.ChangeAttribRange(charModData.causeType, charModData.causeName, charModData.causeByCharID
-                                        , charModData.attribModified, charModData.modChgMinR, charModData.modChgMaxR, true);
-            }
-            else
-            {
-                charController.ChangeAttrib(charModData.causeType, charModData.causeName, charModData.causeByCharID
-                                        , charModData.attribModified, charModData.modCurrVal, true);
-            }
-        }
-
-        void RemoveBuffDay(BuffData buffData)
-        {
-            AttribModData charModData = buffData.charModData;
-
-            if (IsRangeChange(buffData))
-            {
-                charController.ChangeAttribRange(charModData.causeType, charModData.causeName, charModData.causeByCharID
-                                        , charModData.attribModified, -charModData.modChgMinR, -charModData.modChgMaxR, true);
-            }
-            else
-            {
-                charController.ChangeAttrib(charModData.causeType, charModData.causeName, charModData.causeByCharID
-                                        , charModData.attribModified, -charModData.modCurrVal, true);
-            }
-        }
-
         #endregion
 
-        #region NIGHT BUFF MGMT
-                public int ApplyBuffOnNight(CauseType causeType, int causeName, int causeByCharID
-                                       , AttribName statName, float value, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
-                {
-
-                    // Actual buff application 
-                    AttribModData charModVal = charController.ChangeAttrib(causeType, causeName, causeByCharID
-                                                    , statName, value, true);
-
-                    int currRd = GameSupportService.Instance.currentRound;
-                    buffIndex++;
-                    BuffData buffData = new BuffData(buffIndex,isBuff, currRd, timeFrame, netTime,
-                                                                          charModVal, directStr);
-
-
-                    allBuffs.Add(buffData);
-                    allNightbuffs.Add(buffData);
-                    return buffIndex;
-
-                }
-
-                public int ApplyBuffOnNightRange(CauseType causeType, int causeName, int causeByCharID, AttribName statName
-                    , float minChgR, float maxChgR, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
-                {
-                    AttribModData charModData = charController.ChangeAttribRange(causeType, causeName, causeByCharID
-                                                   , statName, minChgR, maxChgR, true);
-
-                    int currRd = GameSupportService.Instance.currentRound;
-                    buffIndex++;
-                    BuffData buffData = new BuffData(buffIndex,isBuff, currRd, timeFrame, netTime,
-                                                                    charModData, directStr);
-                    allBuffs.Add(buffData);
-                    allNightbuffs.Add(buffData);
-                    return buffIndex;
-                }
-
-                public void RemoveBuffOnNight(BuffData buffData)
-                {
-                    if (IsRangeChange(buffData))
-                    {
-                        charController.ChangeAttribRange(buffData.charModData.causeType,
-                                             buffData.charModData.causeName, buffData.charModData.causeByCharID
-                                             , buffData.charModData.attribModified
-                                             , -buffData.charModData.modChgMinR, -buffData.charModData.modChgMinR, true);
-
-                    }
-                    else
-                    {
-                        charController.ChangeAttrib(buffData.charModData.causeType,
-                                             buffData.charModData.causeName, buffData.charModData.causeByCharID
-                                             , buffData.charModData.attribModified, -buffData.charModData.modCurrVal, true);
-                    }
-                    allBuffs.Remove(buffData);
-                    allNightbuffs.Remove(buffData);
-                }
-
-        #endregion
-
-        #region EXP BUFFS 
-
-        public int ApplyBuffExpExtra(CauseType causeType, int causeName, int causeByCharID
-                                , float valPercent, TimeFrame timeFrame, int netTime, bool isBuff, string directStr = "")
-        {
-
-
-
-            return 0; 
-        }
-
-
-        #endregion
 
     }
 }

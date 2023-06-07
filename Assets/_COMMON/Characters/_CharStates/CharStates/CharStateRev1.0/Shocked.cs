@@ -28,9 +28,15 @@ namespace Common
             allBuffIds.Add(buffID);
 
             buffID = 
-            charController.buffController.ApplyBuffOnRange(CauseType.CharState, (int)charStateName
-                       , charID, AttribName.armor, +1, +3, timeFrame, castTime, true);
+            charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+                       , charID, AttribName.armorMin, +1,  timeFrame, castTime, true);
             allBuffIds.Add(buffID);
+
+            buffID =
+           charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+                      , charID, AttribName.armorMax, +3, timeFrame, castTime, true);
+            allBuffIds.Add(buffID);
+
 
             List<int> immuneBuffIDs = charController.charStateController
                .ApplyDOTImmunityBuff(CauseType.CharState, (int)charStateName

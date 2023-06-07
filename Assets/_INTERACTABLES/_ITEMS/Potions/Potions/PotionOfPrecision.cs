@@ -35,9 +35,16 @@ namespace Interactables
             charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
                        , AttribName.acc, +3, TimeFrame.EndOfRound, castTime, true);
             allBuffs.Add(buffID);
+
             buffID = 
-            charController.buffController.ApplyBuffOnRange(CauseType.Potions, (int)potionName, charID
-                      , AttribName.damage, -1f, -1f, TimeFrame.EndOfRound, castTime, true);
+            charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
+                      , AttribName.dmgMin, -1f, TimeFrame.EndOfRound, castTime, true);
+            allBuffs.Add(buffID);
+
+
+            buffID =
+            charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
+                      , AttribName.dmgMax, -1f, TimeFrame.EndOfRound, castTime, true);
             allBuffs.Add(buffID);
         }
         public void ApplyConsumableFX()

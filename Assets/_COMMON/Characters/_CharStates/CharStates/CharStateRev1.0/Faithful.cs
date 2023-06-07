@@ -40,8 +40,12 @@ namespace Common
           , charID, AttribName.dodge, 2, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
-            buffID = charController.buffController.ApplyBuffOnRange(CauseType.CharState, (int)charStateName
-            , charID, AttribName.armor, 2, 2, timeFrame, castTime, true);
+            buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+            , charID, AttribName.armorMin, 2,timeFrame, castTime, true);
+            allBuffIds.Add(buffID);
+
+            buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+           , charID, AttribName.armorMax, 2, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName

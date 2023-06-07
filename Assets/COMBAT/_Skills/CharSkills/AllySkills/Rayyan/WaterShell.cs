@@ -63,13 +63,14 @@ namespace Combat
         public override void ApplyFX2()
         {
             //  +% 60 Armor, 
+            float statDataMin = charController.GetAttrib(AttribName.armorMin).currValue;
+            float statDataMax = charController.GetAttrib(AttribName.armorMax).currValue;
+         
+            charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                , AttribName.armorMin, statDataMin*0.6f, TimeFrame.EndOfRound, skillModel.castTime, true);
 
-            AttribData statData = charController.GetAttrib(AttribName.armor);
-             minArmor = statData.minRange * 0.6f;
-             maxArmor = statData.maxRange * 0.6f;
-            charController.buffController.ApplyBuffOnRange(CauseType.CharSkill, (int)skillName, charID
-                , AttribName.armor, minArmor, maxArmor, TimeFrame.EndOfRound, skillModel.castTime, true); 
-
+            charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                , AttribName.armorMin, statDataMax * 0.6f, TimeFrame.EndOfRound, skillModel.castTime, true);
         }
 
         public override void ApplyFX3()

@@ -1,5 +1,6 @@
 using Common;
 using Interactables;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -19,6 +20,7 @@ namespace Interactables
         [SerializeField] AttribData attribData;
         [SerializeField] StatData statData; 
         public CharModel charModel;
+        public CharController charController; 
         Transform PanelTrans; 
 
 
@@ -52,15 +54,25 @@ namespace Interactables
             else
             {
                 this.charModel = charModel;
-
+                this.charController = CharService.Instance.GetCharCtrlWithCharID(charModel.charID); 
                 if(AttribName != AttribName.None)
                 {
-
-                    attribData = charModel.attribList.Find(t => t.AttribName == AttribName);
+                    attribData = charController.GetAttrib(AttribName);
                     PopulateDesc();
-                    if (AttribName == AttribName.armor || AttribName == AttribName.damage)
+                    if (AttribName.IsAttribDamage())
                     {
-                        str = attribData.minRange + "-" + attribData.maxRange;
+                        float dmgMin = charController.GetAttrib(AttribName.dmgMin).currValue;
+                        float dmgMax = charController.GetAttrib(AttribName.dmgMax).currValue;
+
+                        str = dmgMin + "-" + dmgMax;
+                    }
+                    else if (AttribName.IsAttribArmor())
+                    {
+                        float armorMin = charController.GetAttrib(AttribName.armorMin).currValue;
+                        float armorMax = charController.GetAttrib(AttribName.armorMax).currValue;
+
+                        str = armorMin + "-" + armorMax;
+
                     }
                     else
                     {
@@ -96,8 +108,7 @@ namespace Interactables
         }
 
         public void OnPointerEnter(PointerEventData eventData)
-        {
-            // attribPanelViewComp.ToggleLRPanel(isOnLeft);
+        {         
             PanelTrans.SetAsLastSibling();
             desc.SetActive(true);
         }

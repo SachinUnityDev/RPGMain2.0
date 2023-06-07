@@ -55,8 +55,12 @@ namespace Interactables
                         (int)sagaicGewgawName, AttribName.earthRes, valEarth, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
 
-            buffID = charController.buffController.ApplyBuffOnRange(CauseType.SagaicGewgaw, charController.charModel.charID,
-                        (int)sagaicGewgawName, AttribName.armor, 1, 2, TimeFrame.Infinity, -1, true);
+            buffID = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw, charController.charModel.charID,
+                        (int)sagaicGewgawName, AttribName.armorMin, 1, TimeFrame.Infinity, -1, true);
+            buffIndex.Add(buffID);
+
+            buffID = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw, charController.charModel.charID,
+                  (int)sagaicGewgawName, AttribName.armorMax, 2, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
 
         }

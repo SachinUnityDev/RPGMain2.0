@@ -426,10 +426,19 @@ namespace Combat
 
                 popUpAndHL.desc = statData.desc;
                 string statStr;
-                if ((AttribName)index == AttribName.damage || (AttribName)index == AttribName.armor)
+                if (((AttribName)index).IsAttribDamage())
                 {
-                    float minR = statData.minRange; float maxR = statData.maxRange;
-                    statStr = minR + "-" + maxR;
+                    float dmgMin = charController.GetAttrib(AttribName.dmgMin).currValue;
+                    float dmgMax = charController.GetAttrib(AttribName.dmgMax).currValue;   
+
+                    statStr = dmgMin + "-" + dmgMax;
+                }else if (((AttribName)index).IsAttribArmor())
+                {
+                    float armorMin = charController.GetAttrib(AttribName.armorMin).currValue;
+                    float armorMax = charController.GetAttrib(AttribName.armorMax).currValue;
+
+                    statStr = armorMin + "-" + armorMax;
+
                 }
                 else
                 {

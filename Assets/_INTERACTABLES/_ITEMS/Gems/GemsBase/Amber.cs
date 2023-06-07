@@ -51,8 +51,8 @@ namespace Interactables
         {
             int buffID =
               charController.buffController.
-                     ApplyNInitBuffOnDay(CauseType.Gems, (int)itemName, charController.charModel.charID,
-                                 AttribName.hpRegen, 1, TimeFrame.Infinity, -1, true);
+                     ApplyNInitBuffOnDayNNight(CauseType.Gems, (int)itemName, charController.charModel.charID,
+                                 AttribName.hpRegen, 1, TimeFrame.Infinity, -1, true, TimeState.Day);
             allBuffs.Add(buffID);
             string str = $"+1 Hp Regen at day";
             allDisplayStr.Add(str);

@@ -34,10 +34,15 @@ namespace Interactables
         {
             if(charStateModData.charStateName == CharStateName.FirstBlood)
             {
-                AttribData statData = charController.GetAttrib(AttribName.damage);
-                int buffID = charController.buffController.ApplyBuffOnRange(CauseType.SagaicGewgaw, charController.charModel.charID,
-               (int)sagaicGewgawName, AttribName.damage, statData.minRange*1.2f, statData.maxRange * 1.2f
-               , TimeFrame.Infinity, -1, true);
+                AttribData attribDataMin = charController.GetAttrib(AttribName.dmgMin);
+                AttribData attribDataMax = charController.GetAttrib(AttribName.dmgMax);
+
+                int buffID = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw, charController.charModel.charID,
+                           (int)sagaicGewgawName, AttribName.dmgMin, attribDataMin.currValue*1.2f, TimeFrame.Infinity, -1, true);
+                buffIndex.Add(buffID);
+
+                buffID = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw, charController.charModel.charID,
+                   (int)sagaicGewgawName, AttribName.dmgMax, attribDataMax.currValue * 1.2f, TimeFrame.Infinity, -1, true);
                 buffIndex.Add(buffID);
             }
         }

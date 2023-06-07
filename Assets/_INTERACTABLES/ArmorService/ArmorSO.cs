@@ -4,9 +4,6 @@ using UnityEngine;
 using Common;
 using Town;
 using System;
-using System.Security.Policy;
-using System.Windows.Forms;
-using UnityEditor.PackageManager;
 
 namespace Interactables
 {

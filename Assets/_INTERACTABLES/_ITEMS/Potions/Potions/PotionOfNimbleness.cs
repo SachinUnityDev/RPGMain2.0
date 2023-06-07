@@ -49,10 +49,13 @@ namespace Interactables
             allBuffs.Add(buffID);
 
             buffID =
-            charController.buffController.ApplyBuffOnRange(CauseType.Potions, (int)potionName, charID
-                      , AttribName.armor, -1f, -1f, TimeFrame.EndOfRound, castTime, true);
+            charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
+                      , AttribName.armorMin, -1f, TimeFrame.EndOfRound, castTime, true);
             allBuffs.Add(buffID);
-
+            buffID =
+         charController.buffController.ApplyBuff(CauseType.Potions, (int)potionName, charID
+                   , AttribName.armorMax, -1f, TimeFrame.EndOfRound, castTime, true);
+            allBuffs.Add(buffID);
 
         }
 

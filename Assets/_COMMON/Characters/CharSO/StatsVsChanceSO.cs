@@ -36,7 +36,7 @@ namespace Common
                 attribChanceData.attribName = (AttribName)i;
                 switch ((AttribName)i)
                 {
-                    case AttribName.damage:
+                    case AttribName.dmgMin:
                         break;
                     case AttribName.acc:                       
                         FillLinearChanceValues(12, 66, 1, 12, 6, attribChanceData.allStatsNChances);
@@ -57,7 +57,7 @@ namespace Common
                         break; 
                     case AttribName.willpower:
                         break;
-                    case AttribName.armor:
+                    case AttribName.armorMin:
                         break; 
                     case AttribName.dodge:                         
                         FillLinearChanceValues(0, 6,1, 12,6, attribChanceData.allStatsNChances);

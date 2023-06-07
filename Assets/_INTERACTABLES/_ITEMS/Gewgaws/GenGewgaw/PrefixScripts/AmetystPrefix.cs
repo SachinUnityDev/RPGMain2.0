@@ -19,8 +19,8 @@ namespace Interactables
         {
             charController = InvService.Instance.charSelectController;
 
-            int index = charController.buffController.ApplyNInitBuffOnDay(CauseType.PrefixGenGewgaw, (int)prefixName
-                            , charController.charModel.charID, AttribName.morale, 4, TimeFrame.Infinity, -1, true);
+            int index = charController.buffController.ApplyNInitBuffOnDayNNight(CauseType.PrefixGenGewgaw, (int)prefixName
+                            , charController.charModel.charID, AttribName.morale, 4, TimeFrame.Infinity, -1, true, TimeState.Day);
             buffIndex.Add(index);
 
             index = charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName

@@ -45,12 +45,17 @@ namespace Combat
         {
             if (IsTargetMyAlly())
             {
-                AttribData attribData = charController.GetAttrib(AttribName.armor);
-                 minArmorChg = attribData.minRange * 0.4f;
-                 maxArmorChg = attribData.maxRange * 0.4f;
+                AttribData attribDataMin = charController.GetAttrib(AttribName.armorMin);
+                AttribData attribDataMax = charController.GetAttrib(AttribName.armorMax);
 
-                 targetController.buffController.ApplyBuffOnRange(CauseType.CharSkill, (int)skillName, charID
-                  , AttribName.armor, minArmorChg, maxArmorChg, TimeFrame.EndOfRound, skillModel.castTime, true);
+                minArmorChg = attribDataMin.currValue * 0.4f;
+                maxArmorChg = attribDataMax.currValue * 0.4f;
+
+                targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                  , AttribName.armorMin, minArmorChg,TimeFrame.EndOfRound, skillModel.castTime, true);
+
+                targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                 , AttribName.armorMax, maxArmorChg, TimeFrame.EndOfRound, skillModel.castTime, true);
             }
         }
 

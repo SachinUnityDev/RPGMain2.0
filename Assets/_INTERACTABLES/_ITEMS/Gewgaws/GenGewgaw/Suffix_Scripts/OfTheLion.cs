@@ -35,14 +35,14 @@ namespace Interactables
 
           
             index =
-                charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
-                        , charController.charModel.charID, AttribName.morale, val22, TimeFrame.Infinity, -1, true);
+                charController.buffController.ApplyNInitBuffOnDayNNight(CauseType.SuffixGenGewgaw, (int)suffixName
+                        , charController.charModel.charID, AttribName.morale, val22, TimeFrame.Infinity, -1, true, TimeState.Day);
             buffIndex.Add(index);
 
        
             index =
-                charController.buffController.ApplyBuffOnNight(CauseType.SuffixGenGewgaw, (int)suffixName
-                        , charController.charModel.charID, AttribName.haste, val23, TimeFrame.Infinity, -1, true);
+                charController.buffController.ApplyNInitBuffOnDayNNight(CauseType.SuffixGenGewgaw, (int)suffixName
+                        , charController.charModel.charID, AttribName.haste, val23, TimeFrame.Infinity, -1, true,TimeState.Night);
             buffIndex.Add(index);
 
         }
@@ -68,14 +68,14 @@ namespace Interactables
 
          
             index =
-                charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
-                        , charController.charModel.charID, AttribName.morale, val32, TimeFrame.Infinity, -1, true);
+                charController.buffController.ApplyNInitBuffOnDayNNight(CauseType.SuffixGenGewgaw, (int)suffixName
+                        , charController.charModel.charID, AttribName.morale, val32, TimeFrame.Infinity, -1, true, TimeState.Day);
             buffIndex.Add(index);
 
       
             index =
-                charController.buffController.ApplyNInitBuffOnDay(CauseType.SuffixGenGewgaw, (int)suffixName
-                        , charController.charModel.charID, AttribName.haste, val33, TimeFrame.Infinity, -1, true);
+                charController.buffController.ApplyNInitBuffOnDayNNight(CauseType.SuffixGenGewgaw, (int)suffixName
+                        , charController.charModel.charID, AttribName.haste, val33, TimeFrame.Infinity, -1, true, TimeState.Day);
             buffIndex.Add(index);
         }
 

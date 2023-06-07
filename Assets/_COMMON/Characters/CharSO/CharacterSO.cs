@@ -103,7 +103,7 @@ namespace Common
                         s.minLimit = -24f;
                         s.maxLimit = 24f; break;
            
-                    case AttribName.damage:
+                    case AttribName.dmgMin:
                         s.minLimit = 0f;
                         s.maxLimit = 100f; break;
                     case AttribName.acc:
@@ -127,7 +127,7 @@ namespace Common
                     case AttribName.willpower:
                         s.minLimit = 0f;
                         s.maxLimit = 100f; break;
-                    case AttribName.armor:
+                    case AttribName.armorMin:
                         s.minLimit = 0f;
                         s.maxLimit = 100f; break;
                     case AttribName.dodge:
@@ -235,7 +235,7 @@ namespace Common
             {                
                 switch (AttribList[i].AttribName)
                 {                
-                    case AttribName.damage:
+                    case AttribName.dmgMin:
                        str = 
                             "Base value for Physical and Magical attacks."; 
                         break;
@@ -265,7 +265,7 @@ namespace Common
                         str =
                         "Determinant value for base Stamina. Increases chance to withstand Thirst."; 
                         break;
-                    case AttribName.armor:
+                    case AttribName.armorMin:
                         str =
                             "Value to mitigate incoming Physical damage."; 
                         break;

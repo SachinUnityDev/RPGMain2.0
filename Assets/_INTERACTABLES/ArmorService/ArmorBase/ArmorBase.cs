@@ -33,9 +33,13 @@ namespace Interactables
            // if(armorState == Armor)
             allLines.Clear();
 
-            charController.buffController.ApplyBuffOnRange(CauseType.ArmorType, (int)armorType
-            , charController.charModel.charID, AttribName.armor, armorSO.minArmor
-            , armorSO.maxArmor, TimeFrame.EndOfDay, 3, true);
+            charController.buffController.ApplyBuff(CauseType.ArmorType, (int)armorType
+            , charController.charModel.charID, AttribName.armorMin, armorSO.minArmor,
+             TimeFrame.EndOfDay, 3, true);
+
+            charController.buffController.ApplyBuff(CauseType.ArmorType, (int)armorType
+          , charController.charModel.charID, AttribName.armorMax, armorSO.maxArmor,
+           TimeFrame.EndOfDay, 3, true);
 
             string str = $"{armorSO.minArmor}-{armorSO.maxArmor} Armor for 3 days";
             allLines.Add(str);

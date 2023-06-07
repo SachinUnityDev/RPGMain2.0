@@ -40,18 +40,27 @@ namespace Interactables
             val11 = 1; val12 = 2; 
 
             int index =
-            charController.buffController.ApplyBuffOnRange(CauseType.PrefixGenGewgaw, (int)prefixName
-                , charController.charModel.charID, AttribName.armor, val11,val12, TimeFrame.Infinity, -1, true);
-
+            charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
+                , charController.charModel.charID, AttribName.armorMin, val11, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
+
+            index =
+            charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
+              , charController.charModel.charID, AttribName.armorMax, val12, TimeFrame.Infinity, -1, true);
+            buffIndex.Add(index);
+
         }
         public void ApplyFXFolkloric()
         {        
             val21 = 2; val22 = 2;
             int index =
-            charController.buffController.ApplyBuffOnRange(CauseType.PrefixGenGewgaw, (int)prefixName
-                , charController.charModel.charID, AttribName.armor, val21, val22, TimeFrame.Infinity, -1, true);
+            charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
+                , charController.charModel.charID, AttribName.armorMin, val21, TimeFrame.Infinity, -1, true);
+            buffIndex.Add(index);
 
+            index = 
+                charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
+                , charController.charModel.charID, AttribName.armorMax, val22, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }
 
@@ -59,9 +68,13 @@ namespace Interactables
         {
             val31 = 2; val32 = 3;
             int index =
-            charController.buffController.ApplyBuffOnRange(CauseType.PrefixGenGewgaw, (int)prefixName
-                , charController.charModel.charID, AttribName.armor, val31, val32, TimeFrame.Infinity, -1, true);
+                charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
+                    , charController.charModel.charID, AttribName.armorMin, val31,  TimeFrame.Infinity, -1, true);
+            buffIndex.Add(index);
 
+            index =
+                charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
+                    , charController.charModel.charID, AttribName.armorMax, val32, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
         }
         public void LyricInit()

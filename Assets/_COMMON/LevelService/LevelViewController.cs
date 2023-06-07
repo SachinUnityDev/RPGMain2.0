@@ -105,12 +105,21 @@ namespace Common
             string str1 = "";
             foreach (AttribData stat in allPendingOptions[index].allStatDataOption1)
             {
-               
-                if (stat.AttribName == AttribName.damage || stat.AttribName == AttribName.armor)
+
+                if(stat.AttribName == AttribName.dmgMin)
                 {
-                    str1 += stat.minRange+"-"+stat.maxRange + " "+ stat.AttribName; 
+                    AttribData statMax = allPendingOptions[index]
+                        .allStatDataOption1.Find(t => t.AttribName == AttribName.dmgMax); 
+                    str1 = stat.currValue +"-"+statMax.currValue;
+
                 }
-                else
+                else if (stat.AttribName == AttribName.armorMin)
+                {
+                    AttribData statMax = allPendingOptions[index]
+                                    .allStatDataOption1.Find(t => t.AttribName == AttribName.armorMax);
+                    str1 = stat.currValue + "-" + statMax.currValue;
+                }
+                else if(!stat.AttribName.IsAttribDamage() || !stat.AttribName.IsAttribArmor())
                 {
                     str1 += stat.currValue + " "+ stat.AttribName; 
                 }
@@ -120,10 +129,18 @@ namespace Common
             string str2 = "";
             foreach (AttribData stat in allPendingOptions[index].allStatDataOption2)
             {
-                
-                if (stat.AttribName == AttribName.damage || stat.AttribName == AttribName.armor)
+
+                if (stat.AttribName == AttribName.dmgMin)
                 {
-                    str2 += stat.minRange + "-" + stat.maxRange + " "+stat.AttribName;
+                    AttribData statMax = allPendingOptions[index]
+                        .allStatDataOption1.Find(t => t.AttribName == AttribName.dmgMax);
+                    str1 = stat.currValue + "-" + statMax.currValue;
+                }
+                else if (stat.AttribName == AttribName.armorMin)
+                {
+                    AttribData statMax = allPendingOptions[index]
+                                    .allStatDataOption1.Find(t => t.AttribName == AttribName.armorMax);
+                    str1 = stat.currValue + "-" + statMax.currValue;
                 }
                 else
                 {

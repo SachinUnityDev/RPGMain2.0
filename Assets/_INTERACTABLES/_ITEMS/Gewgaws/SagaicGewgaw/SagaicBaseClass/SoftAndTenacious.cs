@@ -52,12 +52,22 @@ namespace Interactables
 
         void ApplyIfUnslackableFx()
         {
-            AttribData statData = charController.GetAttrib(AttribName.damage);
+            AttribData attribDmgMin = charController.GetAttrib(AttribName.dmgMin);
+            AttribData attribDmgMax = charController.GetAttrib(AttribName.dmgMax);
+
             float dmgMult = 1+ (dmgChgVal / 100f);
-            int buffID = charController.buffController.ApplyBuffOnRange
-                (CauseType.SagaicGewgaw, charController.charModel.charID,
-                  (int)sagaicGewgawName, AttribName.damage, (int)statData.maxRange * dmgMult,
-                  (int)statData.minRange * dmgMult, TimeFrame.Infinity, -1, true);
+
+            int buffID = charController.buffController.ApplyBuff
+                        (CauseType.SagaicGewgaw, charController.charModel.charID,
+                          (int)sagaicGewgawName, AttribName.dmgMin, (int)attribDmgMin.currValue * dmgMult,
+                         TimeFrame.Infinity, -1, true);
+            buffIndex.Add(buffID);
+
+
+            buffID = charController.buffController.ApplyBuff
+                        (CauseType.SagaicGewgaw, charController.charModel.charID,
+                          (int)sagaicGewgawName, AttribName.dmgMax, (int)attribDmgMax.currValue * dmgMult,
+                         TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
         }
 

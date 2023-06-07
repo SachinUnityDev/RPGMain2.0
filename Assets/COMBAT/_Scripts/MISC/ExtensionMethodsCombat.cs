@@ -49,7 +49,7 @@ public static class ExtensionMethodsCombat
             string str = ""; 
             switch (statName)
             {        
-                case AttribName.damage:
+                case AttribName.dmgMin:
                     str = "Damage";
                     break;
                 case AttribName.acc:
@@ -63,7 +63,6 @@ public static class ExtensionMethodsCombat
                     break;
                 case AttribName.morale:
                     str = "Morale";
-
                     break;
                 case AttribName.haste:
                     str = "Haste";
@@ -73,9 +72,8 @@ public static class ExtensionMethodsCombat
                     break;
                 case AttribName.willpower:
                     str = "Willpower";
-
                     break;
-                case AttribName.armor:
+                case AttribName.armorMin:
                     str = "Armor";
                     break;
                 case AttribName.dodge:
@@ -100,7 +98,21 @@ public static class ExtensionMethodsCombat
                 case AttribName.darkRes:
                     str = "Dark Resistance";
                     break;
-               
+                case AttribName.staminaRegen:
+                    str = "Stamina Regen";
+                    break;
+                case AttribName.fortOrg:
+                    str = "Fortitude Origin";
+                    break;
+                case AttribName.hpRegen:
+                    str = "HP Regen";
+                    break;
+                case AttribName.armorMax:
+                    str = "Armor";
+                break;
+                case AttribName.dmgMax:
+                    str = "Damage";
+                    break;
                 default:
                     break;
             }
@@ -172,7 +184,7 @@ public static class ExtensionMethodsCombat
             else
                 return false;
         }
-    public static CharMode FlipCharMode(this CharMode _charMode)
+        public static CharMode FlipCharMode(this CharMode _charMode)
         {
             if (_charMode == CharMode.Ally)
             {
@@ -185,5 +197,40 @@ public static class ExtensionMethodsCombat
             return CharMode.None; 
         }
 
+        public static AttribName GetCounterAttrib(this AttribName attribName)
+        {
+            if (attribName == AttribName.dmgMin)
+                return AttribName.dmgMax;
+            if (attribName == AttribName.dmgMax)
+                return AttribName.dmgMin;
+            if (attribName == AttribName.armorMax)
+                return AttribName.armorMin;
+            if (attribName == AttribName.armorMin)
+                return AttribName.armorMax;
+
+            return AttribName.None;
+        }
+    public static bool IsAttribDamage(this AttribName attribName)
+    {
+        if (attribName == AttribName.dmgMin)
+            return true;
+        if (attribName == AttribName.dmgMax)
+            return true;
+
+
+        return false;
     }
+    public static bool IsAttribArmor(this AttribName attribName)
+    {
+        if (attribName == AttribName.armorMin)
+            return true;
+        if (attribName == AttribName.armorMax)
+            return true;
+
+
+        return false;
+    }
+}
+
+
 

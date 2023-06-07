@@ -39,16 +39,19 @@ namespace Combat
         public override void ApplyFX1()
         {
             if (IsTargetAlly())
-            {
-                AttribData attribData = targetController.GetAttrib(AttribName.armor);
-                float armorMin = attribData.minRange;
-                float armorMax = attribData.maxRange;
-                 chgMin = attribData.minRange * 0.6f;
-                 chgMax = attribData.maxRange * 0.6f;
+            {             
+                float armorMin = targetController.GetAttrib(AttribName.armorMin).currValue;
+                float armorMax = targetController.GetAttrib(AttribName.armorMax).currValue;
+                chgMin = armorMin * 0.6f;
+                 chgMax = armorMax * 0.6f;
 
-                targetController.buffController.ApplyBuffOnRange(CauseType.CharSkill, (int)skillName, charID
-                                                     , AttribName.armor, chgMin, chgMax, TimeFrame.EndOfRound
+                targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                                                     , AttribName.armorMin, chgMin, TimeFrame.EndOfRound
                                                      , skillModel.castTime, true);
+                targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                                                   , AttribName.armorMin, chgMax, TimeFrame.EndOfRound
+                                                   , skillModel.castTime, true);
+
             }
         }
 

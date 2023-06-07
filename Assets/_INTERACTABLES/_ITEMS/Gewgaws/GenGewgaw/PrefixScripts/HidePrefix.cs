@@ -25,9 +25,15 @@ namespace Interactables
         {
             charController = InvService.Instance.charSelectController;
             int index =
-              charController.buffController.ApplyBuffOnRange(CauseType.PrefixGenGewgaw, (int)prefixName
-               , charController.charModel.charID, AttribName.armor, 1,1, TimeFrame.Infinity, -1, true);
+              charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
+               , charController.charModel.charID, AttribName.armorMin, 1, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
+
+            index =
+              charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
+               , charController.charModel.charID, AttribName.armorMax, 1, TimeFrame.Infinity, -1, true);
+            buffIndex.Add(index);
+
 
             index =
               charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
@@ -45,8 +51,13 @@ namespace Interactables
         {
             charController = InvService.Instance.charSelectController;
             int index =
-              charController.buffController.ApplyBuffOnRange(CauseType.PrefixGenGewgaw, (int)prefixName
-               , charController.charModel.charID, AttribName.armor, 1, 2, TimeFrame.Infinity, -1, true);
+              charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
+               , charController.charModel.charID, AttribName.armorMin, 1,TimeFrame.Infinity, -1, true);
+            buffIndex.Add(index);
+
+            index =
+                charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
+                    , charController.charModel.charID, AttribName.armorMax, 2, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
             index =
@@ -69,8 +80,13 @@ namespace Interactables
         {
             charController = InvService.Instance.charSelectController;
             int index =
-              charController.buffController.ApplyBuffOnRange(CauseType.PrefixGenGewgaw, (int)prefixName
-               , charController.charModel.charID, AttribName.armor, 2, 2, TimeFrame.Infinity, -1, true);
+              charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
+               , charController.charModel.charID, AttribName.armorMin, 2, TimeFrame.Infinity, -1, true);
+            buffIndex.Add(index);
+
+            index =
+              charController.buffController.ApplyBuff(CauseType.PrefixGenGewgaw, (int)prefixName
+               , charController.charModel.charID, AttribName.armorMax, 2, TimeFrame.Infinity, -1, true);
             buffIndex.Add(index);
 
             index =

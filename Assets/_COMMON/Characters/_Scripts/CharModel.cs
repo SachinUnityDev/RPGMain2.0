@@ -14,9 +14,7 @@ namespace Common
         public AttribName AttribName;
         public float currValue;
         public float baseValue;   
-        public string desc;
-        public float minRange;
-        public float maxRange;
+        public string desc;      
         public float minLimit; 
         public float maxLimit; 
         public bool isClamped = false; 
@@ -254,9 +252,7 @@ namespace Common
                 attribData.AttribName = _charSO.AttribList[i].AttribName;
                 attribData.currValue = _charSO.AttribList[i].currValue;
                 attribData.baseValue = attribData.currValue;
-                attribData.desc = _charSO.AttribList[i].desc;
-                attribData.minRange = _charSO.AttribList[i].minRange;
-                attribData.maxRange = _charSO.AttribList[i].maxRange;
+                attribData.desc = _charSO.AttribList[i].desc;             
 
                 AttribChanceData statChanceData = statsVsChanceSO.allStatChanceData
                                     .Find(t => t.attribName == _charSO.AttribList[i].AttribName);

@@ -167,7 +167,7 @@ namespace Common
             StatBuffData buffData = new StatBuffData(buffIndex, isBuff, currRd, timeFrame, netTime,
                                                                    statModData);
 
-            allBuffs.Add(buffData);
+            //allBuffs.Add(buffData);
             allDayNightbuffs.Add(buffData);
             return buffIndex;
 

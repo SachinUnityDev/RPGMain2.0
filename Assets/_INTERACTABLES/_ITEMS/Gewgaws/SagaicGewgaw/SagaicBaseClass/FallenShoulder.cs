@@ -59,8 +59,12 @@ namespace Interactables
         public override void EquipGewgawSagaic()
         {
             charController = InvService.Instance.charSelectController;
-            int buffID = charController.buffController.ApplyBuffOnRange(CauseType.SagaicGewgaw, charController.charModel.charID,
-                                 (int)sagaicGewgawName, AttribName.armor, 3, 3, TimeFrame.Infinity, -1, true);
+            int buffID = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw, charController.charModel.charID,
+                                 (int)sagaicGewgawName, AttribName.armorMin, 3,TimeFrame.Infinity, -1, true);
+            buffIndex.Add(buffID);
+
+            buffID = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw, charController.charModel.charID,
+                           (int)sagaicGewgawName, AttribName.armorMax, 3, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
         }
 

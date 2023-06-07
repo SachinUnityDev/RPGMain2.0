@@ -14,6 +14,7 @@ namespace Interactables
 
         [SerializeField] GameObject desc; 
         [SerializeField] AttribData statData;
+        [SerializeField] AttribData statDataMax; 
         AttributeViewController attributeViewController; 
         void Start()
         {
@@ -45,10 +46,15 @@ namespace Interactables
             {
                 statData = charModel.attribList.Find(t => t.AttribName == statName);
                 PopulateDesc();
-                if (statName == AttribName.armor || statName == AttribName.damage)
+                if (statName == AttribName.armorMin || statName == AttribName.dmgMin)
                 {
+                    if(statName == AttribName.armorMin)
+                    statDataMax = charModel.attribList.Find(t => t.AttribName == AttribName.armorMax);
 
-                    str = statData.minRange + "-" + statData.maxRange;
+                    if (statName == AttribName.dmgMin)
+                        statDataMax = charModel.attribList.Find(t => t.AttribName == AttribName.dmgMax);
+
+                    str = statData.currValue + "-" + statDataMax.currValue;
                 }
                 else
                 {

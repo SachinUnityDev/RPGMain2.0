@@ -244,7 +244,7 @@ public enum StatName
 public enum AttribName
 {
     None,
-    damage,
+    dmgMin,
     acc,
     focus,
     luck,
@@ -254,7 +254,7 @@ public enum AttribName
     vigor,
     willpower,
 
-    armor,
+    armorMin,
     dodge,
     fireRes,
     earthRes,
@@ -264,7 +264,10 @@ public enum AttribName
     darkRes,
     staminaRegen,
     hpRegen, 
-    fortOrg,     
+    fortOrg,
+    armorMax, 
+    dmgMax,
+    
 }
 
 public enum RaceTypeHero  // only for inv segregation 

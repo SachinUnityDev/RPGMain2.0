@@ -19,12 +19,14 @@ namespace Common
         public float modCurrVal = 0f;
         public float baseVal = 0f;  
 
-        public float modChgMaxR = 0f;
-        public float modChgMinR = 0f;
+        //public float modChgMaxR = 0f;
+        //public float modChgMinR = 0f;
         
         // ON STAT RANGE MODIFIED 
+
+        public AttribModData() { }
         public AttribModData(int turnNo, CauseType causeType, int causeName, int causedByCharID
-            , int effectedCharNameID, AttribName statModfified, float modChgMaxR, float modChgMinR, bool isRangeMod)
+            , int effectedCharNameID, AttribName statModfified)
         {
             this.turnNo = turnNo;
             this.causeType = causeType;
@@ -33,8 +35,8 @@ namespace Common
             this.effectedCharNameID = effectedCharNameID;
 
             this.attribModified = statModfified;
-            this.modChgMaxR = modChgMaxR;
-            this.modChgMinR = modChgMinR;
+            //this.modChgMaxR = modChgMaxR;
+            //this.modChgMinR = modChgMinR;
         }
 
 

@@ -182,7 +182,6 @@ namespace Common
         }
         public void SetCurrStat(CauseType causeType, int causeName, int causeByCharID, AttribName _statName, float _newValue, bool toInvoke = true )
         {
-            
             AttribData statData = charModel.attribList.Find(x => x.AttribName == _statName);
             float currentVal = statData.currValue;
             float modCurrValue = Constrain2LimitAttrib(statData.AttribName, currentVal);
@@ -194,8 +193,7 @@ namespace Common
             if (toInvoke)
             {
                 OnAttribCurrValSet?.Invoke(charModData);                
-            }
-               
+            }               
         }
         public bool IsClamped(AttribName attribName)
         {
@@ -257,7 +255,7 @@ namespace Common
             // COMBAT PATCH FIX BEGINS 
             int turn = -1;
             DynamicPosData dyna = null;
-            StatData StatData = GetStat(statName);
+            StatData statData = GetStat(statName);
             Debug.Log("Game event" + GameEventService.Instance.isGame);
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
@@ -277,10 +275,10 @@ namespace Common
             StatModData statModData = new StatModData(turn, causeType, CauseName, causeByCharID
                                                              , this.charModel.charID, statName, value);
 
-            float currVal = StatData.currValue;
+            float currVal = statData.currValue;
             float preConstrainedValue = currVal + value;
 
-            if (StatData.isClamped)
+            if (statData.isClamped)
             {
                 Debug.Log("Value is clamped");  // due to some charstate or trait
                 statModData.modVal = currVal;  // no change is executed 
@@ -290,8 +288,11 @@ namespace Common
             {   // IF NO CHANGE IN VALUE HAS HAPPENED DUE TO CLAMPING THIS NEEDS TO BE KEPT HERE
                 OnStatChg?.Invoke(statModData);
             }
-
-
+            if(statName == StatName.hunger || statName == StatName.thirst)
+            {// HUNGER AND THIRST SPECIAL CASE HANDLED HERE>>>>
+                return 
+                ChangeHungerNThirst(causeType, (int)CauseName, causeByCharID, statName, value); 
+            }
             float modCurrValue = Constrain2LimitStat(statModData.statModified, preConstrainedValue);
             // ACTUAL VALUE UPDATED HERE
             charModel.statList.Find(x => x.statName == statModData.statModified).currValue
@@ -380,24 +381,11 @@ namespace Common
 
             return charModData; 
         }
-        //public void SetBaseValue(StatsName statName, float val)
-        //{
-        //    //StatData statData = GetStat(charModData.statModified);
-        //    //float orgValue = statData.baseValue;
-        //    //float diffAmt = charModData.baseVal - statData.baseValue;
-            
-        //    //statData.currValue += diffAmt;
-
-        //    //statData.baseValue = charModData.baseVal; 
-            
-        //}
-
         public void SetMaxAttribValue(AttribName attribName, float val)
         {
             AttribData statData = GetAttrib(attribName);
             Debug.Log("MAX VALUE changed" + attribName +"to " + val); 
             statData.maxLimit = val; 
-
         }
 
         public void SetMaxStatValue(StatName statName, float val)
@@ -432,37 +420,7 @@ namespace Common
                 }
             }
         }
-        //public AttribModData ChangeAttribRange(CauseType causeType, int name, int causeByCharID, AttribName attribName
-        //    , float minChgR, float maxChgR, bool toInvoke = true)
-        //{
-
-        //    int turn = -1; Vector3 fwd = Vector3.zero; 
-        //    if(GameService.Instance.gameModel.gameState == GameState.InCombat)
-        //    {
-        //         turn = CombatService.Instance.currentTurn;
-        //        fwd = GridService.Instance.GetDyna4GO(gameObject).FwdtilePos;
-        //    }
-        //    AttribModData charModData = new AttribModData(turn, causeType, name, causeByCharID
-        //         , this.charModel.charID, attribName,0,0 );
-
-        //    AttribData statData = GetAttrib(attribName);
-        //    float minStatNet = statData.minRange + minChgR;
-        //    float maxStatNet = statData.maxRange + maxChgR;
-
-
-        //    charModData.modChgMinR = minStatNet;
-        //    charModData.modChgMaxR = maxStatNet;
-        //    charModel.attribList.Find(x => x.AttribName == attribName).minRange = minStatNet;
-        //    charModel.attribList.Find(x => x.AttribName == attribName).maxRange = maxStatNet;
-        //    if (toInvoke)
-        //    {
-        //        // to be checked
-        //        OnAttribChg?.Invoke(charModData);
-        //    }
-
-        //    return charModData;
-        //}       
-
+    
         public void HPRegen()  // linked to charController as Stamina regen
         {
             AttribData statData = GetAttrib(AttribName.hpRegen); 
@@ -562,22 +520,22 @@ namespace Common
 
         #region HUNGER AND THRIST
 
-        public StatModData ChangeHungerNThirst(CauseType causeType, int name, int causeByCharID, StatName statName
-            , float val, bool toInvoke = true)
+         StatModData ChangeHungerNThirst(CauseType causeType, int name, int causeByCharID, StatName statName
+            , float val)
         {
             if(statName == StatName.hunger)
             {
-                float hungerVal = ((100 + charModel.hungerMod)/100) + val;
-                StatModData charModData = 
+                float hungerVal = ((100 + charModel.hungerMod)/100) * val;
+                StatModData statModData = 
                     ChangeStat(causeType, name, causeByCharID, StatName.hunger, hungerVal);
-                return charModData; 
+                return statModData; 
             }
             if (statName == StatName.thirst)
             {
-                float thirstVal = ((100 + charModel.thirstMod) / 100) + val;
-                StatModData charModData =
+                float thirstVal = ((100 + charModel.thirstMod) / 100)  * val;
+                StatModData statModData =
                   ChangeStat(causeType, name, causeByCharID, StatName.thirst, thirstVal);
-                return charModData;
+                return statModData;
             }
 
             return null; 

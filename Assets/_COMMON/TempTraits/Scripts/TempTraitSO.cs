@@ -36,7 +36,6 @@ namespace Common
             {
                 traitNameStr = tempTraitName.ToString().CreateSpace();
             }
-
         }
     }
     

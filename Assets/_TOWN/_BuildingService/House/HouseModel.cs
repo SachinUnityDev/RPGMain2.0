@@ -38,7 +38,7 @@ namespace Town
         public List<HousePurchaseOptsData> purchaseOpts = new List<HousePurchaseOptsData> ();
 
         [Header("Interact: Rest")]
-       // public bool isBedUpgraded =false;
+        public bool isBedUpgraded =false;
         public float restChance = 0f;
         public float restChanceOnUpgrade = 60f; 
 
@@ -47,19 +47,19 @@ namespace Town
 
         [Header("Interact: Stash")]
         public List<Iitems> allItemsInStash = new List<Iitems>();
-        //public bool isStashUpgraded = false; 
+        public bool isStashUpgraded = false;
 
-        //[Header("Interact:Fermentor")]
-        //public bool isFermentorPurchased = false;
+        [Header("Interact:Fermentor")]
+        public bool isFermentorPurchased = false;
 
-        //[Header("Interact: Dryer")]
-        //public bool isDryerPurchased = false;
+        [Header("Interact: Dryer")]
+        public bool isDryerPurchased = false;
 
-        //[Header("Interact: Cora")]
-        //public bool isCoraPurchased = false;
+        [Header("Interact: Cora")]
+        public bool isCoraPurchased = false;
 
-        //[Header("Interact: Drums")]
-        //public bool isDrumsPurchased = false;
+        [Header("Interact: Drums")]
+        public bool isDrumsPurchased = false;
 
         public List<CharInteractData> charInteract = new List<CharInteractData>();
 

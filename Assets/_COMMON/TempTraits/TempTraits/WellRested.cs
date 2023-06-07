@@ -14,16 +14,16 @@ namespace Common
             this.charController = charController;
             int charID = charController.charModel.charID;
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                         charID, AttribName.focus, 1, TimeFrame.Infinity, -1, true);
+                                                charID, AttribName.focus, 1, TimeFrame.EndOfDay, castTime, true);
             
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                         charID, AttribName.haste, 1, TimeFrame.Infinity, -1, true);
+                                                charID, AttribName.haste, 1, TimeFrame.EndOfDay, castTime, true);
             
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                         charID, AttribName.morale, 1, TimeFrame.Infinity, -1, true);
+                                                charID, AttribName.morale, 1, TimeFrame.EndOfDay, castTime, true);
             
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                         charID, AttribName.luck, 1, TimeFrame.Infinity, -1, true);
+                                                charID, AttribName.luck, 1, TimeFrame.EndOfDay, castTime, true);
 
         }
 

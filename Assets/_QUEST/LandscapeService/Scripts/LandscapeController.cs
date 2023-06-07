@@ -65,11 +65,40 @@ namespace Quest
         List<LandStateBuffData> allLandNStateBuffs = new List<LandStateBuffData>(); 
         CharController charController;
 
+        [Header("Landscape Mod")]
+        [SerializeField] int currHungerMod;
+        [SerializeField] int currThirstMod;
+
+
         void Start()
         {
             LandscapeService.Instance.OnLandscapeEnter += OnLandscapeEnter;
-            LandscapeService.Instance.OnLandscapeExit += OnLandscapeExit; 
+            LandscapeService.Instance.OnLandscapeExit += OnLandscapeExit;
+            LandscapeService.Instance.OnLandscapeEnter += OnEnterHungerNThirstModChg;
+            LandscapeService.Instance.OnLandscapeExit += OnExitHungerNThirstModChg;
+
             charController = GetComponent<CharController> ();
+        }
+
+         void OnEnterHungerNThirstModChg(LandscapeNames land)
+         {
+            // get SO 
+            LandscapeSO landSO = LandscapeService.Instance.allLandSO.GetLandSO(land);
+            currHungerMod = landSO.hungerMod;
+            currThirstMod= landSO.thirstMod;    
+            foreach (CharController c in CharService.Instance.allCharsInPartyLocked)
+            {
+                c.charModel.hungerMod += currHungerMod;
+                c.charModel.thirstMod += currThirstMod;
+            }
+         }
+        void OnExitHungerNThirstModChg(LandscapeNames land)
+        {
+            foreach (CharController c in CharService.Instance.allCharsInPartyLocked)
+            {
+                c.charModel.hungerMod -= currHungerMod;
+                c.charModel.thirstMod -= currThirstMod;
+            }
         }
         public int ApplyLandscapeCharStateBuff(CauseType causeType, int causeName, int causeBuyCharID,
             LandscapeNames landscapeName, CharStateName stateName, bool isImmunity = false)

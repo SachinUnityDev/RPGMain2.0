@@ -32,11 +32,13 @@ namespace Common
     {
         public abstract TempTraitName tempTraitName { get; }
         public CharController charController;
-        public TempTraitSO tempTraitSO; 
+        public TempTraitSO tempTraitSO;
 
+        public int castTime; 
         public virtual void TempTraitInit(TempTraitSO tempTraitSO)
         {
            this.tempTraitSO = tempTraitSO;
+            castTime = UnityEngine.Random.Range(tempTraitSO.minCastTime, tempTraitSO.maxCastTime);  
         }
 
         public abstract void OnApply(CharController charController);

@@ -1,5 +1,3 @@
-using Common;
-using Interactables;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,9 +5,6 @@ using Common;
 
 namespace Interactables
 {
-
-
-
     public class BeltPoachersToolset : PoeticGewgawBase, Iitems, IEquipAble
     {
         // -12-18% Hunger mod
@@ -38,7 +33,7 @@ namespace Interactables
         }
         public override void UnEquipPoetic()
         {
-            charController.ChangeHungerNThirst(CauseType.PoeticGewgaw, (int)poeticGewgawName
+            charController.ChangeStat(CauseType.PoeticGewgaw, (int)poeticGewgawName
                 , charController.charModel.charID, StatName.hunger, valHunger, true);
 
             charController.charModel.hungerMod -= valHunger;

@@ -33,7 +33,10 @@ namespace Town
             timeState = CalendarService.Instance.currtimeState;
             int day = CalendarService.Instance.dayInYear;
             CalendarService.Instance.On_EndDayClick();                
-            FillHouseView(); 
+            FillHouseView();
+            // for upgraded bed ..chance and upgrade chk encapsulated 
+            BuildingIntService.Instance.houseController.UpgradedBedBuff();
+            
         }
         void FillHouseView()
         {

@@ -50,14 +50,20 @@ namespace Town
 
         void OnBedUpgraded()
         {
+            houseModel.isBedUpgraded= true;
+        }
+
+        public void UpgradedBedBuff()
+        {
+            if (!houseModel.isBedUpgraded) return; 
             if (houseModel.restChanceOnUpgrade.GetChance())
             {
-                CharController charController= 
+                CharController charController =
                         CharService.Instance.GetCharCtrlWithName(CharNames.Abbas_Skirmisher);
-                TempTraitController tempTraitController = charController.tempTraitController; 
+                TempTraitController tempTraitController = charController.tempTraitController;
                 tempTraitController
                         .ApplyTempTrait(CauseType.BuildingInterct, (int)BuildInteractType.Purchase
-                        , charController.charModel.charID, TempTraitName.WellRested); 
+                        , charController.charModel.charID, TempTraitName.WellRested);
             }
         }
         void OnStashUpgraded()

@@ -17,6 +17,10 @@ namespace Common
         public SpriteDataLandscape spriteData;
         public Sprite iconSpriteDay;
         public Sprite iconSpriteNight;
+
+        [Header("Hunger and Thirst")]
+        public int hungerMod = 0;
+        public int thirstMod = 0; 
     }
 
     [Serializable]

@@ -56,14 +56,16 @@ namespace Interactables
             {
                 attribData = charModel.attribList.Find(t => t.AttribName == attribName);
                 PopulateDesc();
-                if (attribName == AttribName.armorMin || attribName == AttribName.dmgMin)
+                if (attribName.IsAttribDamage())
                 {
-                    if (attribName == AttribName.armorMin)
-                        attribDataMax = charModel.attribList.Find(t => t.AttribName == AttribName.armorMax);
-
                     if (attribName == AttribName.dmgMin)
                         attribDataMax = charModel.attribList.Find(t => t.AttribName == AttribName.dmgMax);
 
+                    str = attribData.currValue + "-" + attribDataMax.currValue;
+                }else if(attribName.IsAttribArmor())
+                {
+                    if (attribName == AttribName.armorMin)
+                        attribDataMax = charModel.attribList.Find(t => t.AttribName == AttribName.armorMax);
                     str = attribData.currValue + "-" + attribDataMax.currValue;
                 }
                 else

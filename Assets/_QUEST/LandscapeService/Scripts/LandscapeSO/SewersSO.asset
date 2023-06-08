@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a709f6064ee43e4f87b2772cd304c87, type: 3}
   m_Name: SewersSO
   m_EditorClassIdentifier: 
-  landscapeNames: 5
+  landscapeName: 5
   hazardStr: -1 Morale
   spriteData:
     locationName: 1
@@ -22,3 +22,5 @@ MonoBehaviour:
     spriteBG_C_night: {fileID: 21300000, guid: 14e3001b57bbc4f41a809b28b3d0be8c, type: 3}
   iconSpriteDay: {fileID: 21300000, guid: 41d5419e4e9866e48bb7be0737477805, type: 3}
   iconSpriteNight: {fileID: 21300000, guid: 41d5419e4e9866e48bb7be0737477805, type: 3}
+  hungerMod: 0
+  thirstMod: 0

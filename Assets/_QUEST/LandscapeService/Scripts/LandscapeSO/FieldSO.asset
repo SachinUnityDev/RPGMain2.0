@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a709f6064ee43e4f87b2772cd304c87, type: 3}
   m_Name: FieldSO
   m_EditorClassIdentifier: 
-  landscapeNames: 16
+  landscapeName: 16
   hazardStr: -12 Air Res
   spriteData:
     locationName: 1
@@ -20,4 +20,7 @@ MonoBehaviour:
     spriteBG_Q_night: {fileID: 0}
     spriteBG_C_day: {fileID: 21300000, guid: d408c2bb2f7a08242a895c3dc3fd421a, type: 3}
     spriteBG_C_night: {fileID: 21300000, guid: ac194c9ca3bf0a34a8da10155f909697, type: 3}
-  iconSprite: {fileID: 0}
+  iconSpriteDay: {fileID: 21300000, guid: 41d5419e4e9866e48bb7be0737477805, type: 3}
+  iconSpriteNight: {fileID: 21300000, guid: 41d5419e4e9866e48bb7be0737477805, type: 3}
+  hungerMod: 0
+  thirstMod: 0

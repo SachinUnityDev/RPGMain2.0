@@ -19,8 +19,7 @@ namespace Quest
         public void InitLandBtn(QModeNLandView qModeNLandView)
         {
             this.qModeNLandView = qModeNLandView;
-           landName
-                = LandscapeService.Instance.currLandscape;
+           landName = LandscapeService.Instance.currLandscape;
             landSO = LandscapeService.Instance.allLandSO.GetLandSO(landName);
 
             img.sprite = landSO.iconSpriteDay;

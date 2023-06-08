@@ -19,8 +19,9 @@ namespace Common
         public Sprite iconSpriteNight;
 
         [Header("Hunger and Thirst")]
-        public int hungerMod = 0;
-        public int thirstMod = 0; 
+        public int hungerMod = 0;   
+        public int thirstMod = 0;
+   
     }
 
     [Serializable]

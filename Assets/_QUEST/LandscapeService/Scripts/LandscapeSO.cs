@@ -10,7 +10,7 @@ namespace Common
     [CreateAssetMenu(fileName = "LandscapeSO", menuName = "Common/LandscapeSO")]
     public class LandscapeSO : ScriptableObject
     {
-        public LandscapeNames landscapeNames;
+        public LandscapeNames landscapeName;
 
         [TextArea(5,10)]        
         public string hazardStr ="";

@@ -12,7 +12,7 @@ namespace Common
 
         public LandscapeSO GetLandSO(LandscapeNames landName)
         {
-            int index = alllandscapeSO.FindIndex(t => t.landscapeNames == landName); 
+            int index = alllandscapeSO.FindIndex(t => t.landscapeName == landName); 
             if(index != -1)
             {
                 return alllandscapeSO[index];

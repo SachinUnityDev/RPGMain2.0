@@ -12,7 +12,6 @@ namespace Quest
 
     public class LandscapeFactory : MonoBehaviour
     {
-
         [Header("Landscapes")]
         Dictionary<LandscapeNames, Type> allLandscapes = new Dictionary<LandscapeNames, Type>();
 
@@ -39,13 +38,13 @@ namespace Quest
             landscapeCount = allLandscapes.Count;
         }
 
-        public Iitems GetNewLandscape(LandscapeNames _landscapeName)
+        public LandscapeBase GetNewLandscape(LandscapeNames _landscapeName)
         {
             foreach (var landscape in allLandscapes)
             {
                 if (landscape.Key == _landscapeName)
                 {
-                    var t = Activator.CreateInstance(landscape.Value) as Iitems;
+                    var t = Activator.CreateInstance(landscape.Value) as LandscapeBase;
                     return t;
                 }
             }

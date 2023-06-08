@@ -31,15 +31,15 @@ namespace Common
             allbuffID.Add(buffID);
 
             buffID =
-            charController.landscapeController.ApplyLandscapeCharStateBuff(CauseType.PermanentTrait,
-                (int)permaTraitName, charID, landName, CharStateName.FlatFooted, true); 
-            allStateBuffId.Add(buffID); 
+                charController.landscapeController.ApplyNInitLandCharStateBuff(CauseType.PermanentTrait,
+                    (int)permaTraitName, charID, landName, CharStateName.FlatFooted, true); 
+                allStateBuffId.Add(buffID); 
         }
 
         public override void EndTrait()
         {
             base.EndTrait();
-            LandscapeService.Instance.OnLandscapeEnter += OnLandScapeEnter;
+            LandscapeService.Instance.OnLandscapeEnter -= OnLandScapeEnter;
         }
 
     }

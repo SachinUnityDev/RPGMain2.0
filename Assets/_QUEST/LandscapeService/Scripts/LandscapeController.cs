@@ -1,8 +1,12 @@
 using Combat;
 using Common;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
+using Town;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Quest
 {
@@ -36,7 +40,7 @@ namespace Quest
             this.isApplied = isApplied; 
         }
     }
-    public class LandStateBuffData
+    public class LandCharStateBuffData
     {
         public int buffID;
         public CauseType causeType;
@@ -45,7 +49,7 @@ namespace Quest
         public CharStateName charStateName;
         public bool isImmunity;
 
-        public LandStateBuffData(int buffID, CauseType causeType, int causeName, LandscapeNames landscapeName
+        public LandCharStateBuffData(int buffID, CauseType causeType, int causeName, LandscapeNames landscapeName
             , CharStateName charStateName, bool isImmunity)
         {
             this.buffID = buffID;
@@ -60,27 +64,69 @@ namespace Quest
 
     public class LandscapeController : MonoBehaviour
     {
-        int buffIndex =-1;
-        List<LandBuffData> allLandBuffs = new List<LandBuffData> ();
-        List<LandStateBuffData> allLandNStateBuffs = new List<LandStateBuffData>(); 
+        /*
+         PURPOSE IS: to act as buff controller on landscape enter and exit 
+
+        reduce code complexities to buff controller 
+        provides its own buffId s that is independent of buff controller
+         */
+        int buffIDStat =-1;
+        [SerializeField] List<LandBuffData> allLandBuffs = new List<LandBuffData> ();
+        [SerializeField] List<LandCharStateBuffData> allLandNStateBuffs = new List<LandCharStateBuffData>(); 
+        
         CharController charController;
 
         [Header("Landscape Mod")]
         [SerializeField] int currHungerMod;
         [SerializeField] int currThirstMod;
+        int buffIDCS = -1;
 
+        [Header("Land Model")]
+        public List<LandModel> allLandModel = new List<LandModel>(); 
+
+        [Header("Land Base")]
+        public List<LandscapeBase> allLandBase = new List<LandscapeBase>();
 
         void Start()
         {
+   
             LandscapeService.Instance.OnLandscapeEnter += OnLandscapeEnter;
             LandscapeService.Instance.OnLandscapeExit += OnLandscapeExit;
             LandscapeService.Instance.OnLandscapeEnter += OnEnterHungerNThirstModChg;
             LandscapeService.Instance.OnLandscapeExit += OnExitHungerNThirstModChg;
 
-            charController = GetComponent<CharController> ();
+            LandscapeService.Instance.OnLandscapeEnter += OnLandEnterCharStateBuff;
+            LandscapeService.Instance.OnLandscapeExit += OnLandExitCharStateBuff;
+
+            charController = GetComponent<CharController>();
         }
 
-         void OnEnterHungerNThirstModChg(LandscapeNames land)
+        public void InitLandController(AllLandscapeSO allLandSO)
+        {
+            // create model and factory
+            foreach (LandscapeSO landSO in allLandSO.alllandscapeSO)
+            {
+                LandModel landModel = new LandModel(landSO);
+                allLandModel.Add(landModel);
+            }
+            InitLandBase(); 
+        }
+        void InitLandBase()
+        {
+            foreach (LandModel landModel in allLandModel)
+            {
+                LandscapeBase landbase =
+                        LandscapeService.Instance.landFactory.GetNewLandscape(landModel.landscapeName);                
+                if (landbase != null)
+                {
+                    landbase.OnLandscapeInit(landModel);
+                    allLandBase.Add(landbase);  
+                }
+            }
+        }
+
+        #region HUNGER AND THIRST MOD 
+        void OnEnterHungerNThirstModChg(LandscapeNames land)
          {
             // get SO 
             LandscapeSO landSO = LandscapeService.Instance.allLandSO.GetLandSO(land);
@@ -100,35 +146,28 @@ namespace Quest
                 c.charModel.thirstMod -= currThirstMod;
             }
         }
-        public int ApplyLandscapeCharStateBuff(CauseType causeType, int causeName, int causeBuyCharID,
+
+        #endregion
+        public int ApplyNInitLandCharStateBuff(CauseType causeType, int causeName, int causeBuyCharID,
             LandscapeNames landscapeName, CharStateName stateName, bool isImmunity = false)
         {
-            int buffID = -1;
-
-            if (LandscapeService.Instance.currLandscape != landscapeName) return -1;
-
-            if (!isImmunity)
-            {
-                buffID = charController.charStateController.ApplyCharStateBuff(causeType, (int)causeName,
-                    causeBuyCharID, stateName, TimeFrame.Infinity, 100);
-            }
-            else
-            {
-                buffID = charController.charStateController.ApplyImmunityBuff(causeType, (int)causeName,
-                    causeBuyCharID, stateName, TimeFrame.Infinity, 100);
-            }
-            LandStateBuffData landNStateBuff = new LandStateBuffData(buffID, causeType, causeName
+            // CANNOT INIT APPLY A BUFF WHEN NOT IN Landscape
+            buffIDCS++; 
+            LandCharStateBuffData landNStateBuff = new LandCharStateBuffData(buffIDCS, causeType, causeName
                 , landscapeName, stateName, isImmunity);
 
             allLandNStateBuffs.Add(landNStateBuff);
 
-            return buffID;
+            if (landscapeName == LandscapeService.Instance.currLandscape)
+                ApplyLandCharStateFX(landNStateBuff); 
+
+            return buffIDCS;  // buff Ids used as ref by the source
         }
 
         public void RemoveLandNStateBuff(int buffID)
         {
             int i = allLandNStateBuffs.FindIndex(t => t.buffID == buffID);
-            LandStateBuffData landStateBuffData = allLandNStateBuffs[i];
+            LandCharStateBuffData landStateBuffData = allLandNStateBuffs[i];
             if (!landStateBuffData.isImmunity)
             {
                 charController.charStateController.RemoveCharState(landStateBuffData.charStateName);
@@ -139,13 +178,59 @@ namespace Quest
             }
             allLandNStateBuffs.Remove(landStateBuffData);
         }
+    
+
+        // use to toggle on and off between land scape enter and exit
+        void OnLandEnterCharStateBuff(LandscapeNames land)    // TOGGLES
+        {
+            foreach (LandCharStateBuffData buff in allLandNStateBuffs)
+            {
+                if (buff.landscapeName == land)
+                {
+                    ApplyLandCharStateFX(buff); 
+                }
+            }
+        }
+
+        void ApplyLandCharStateFX(LandCharStateBuffData buff)
+        {
+            if (!buff.isImmunity)
+            {
+                charController.charStateController.ApplyCharStateBuff(buff.causeType, (int)buff.landscapeName,
+                   1, buff.charStateName, TimeFrame.Infinity, 1);
+            }
+            else
+            {
+                charController.charStateController.ApplyImmunityBuff(buff.causeType, (int)buff.landscapeName,
+                   1, buff.charStateName, TimeFrame.Infinity, 1);
+            }
+        }
+
+        void OnLandExitCharStateBuff(LandscapeNames land)   // TOGGLES
+        {
+            foreach (LandCharStateBuffData buff in allLandNStateBuffs)
+            {
+                if (buff.landscapeName == land)
+                {
+                    if (!buff.isImmunity)
+                    {
+                        charController.charStateController.RemoveCharState(buff.charStateName);
+                    }
+                    else
+                    {
+                        charController.charStateController.RemoveImmunityByCharState(buff.charStateName);
+                    }
+                }
+            }
+        }
+
 
 
         public int ApplyLandscapeBuff(CauseType causeType, int causeName
-            , LandscapeNames landScapeName, AttribName statName, float val)
+                                    , LandscapeNames landScapeName, AttribName statName, float val)
         {
-            buffIndex++;
-            LandBuffData landBuffData = new LandBuffData(buffIndex, causeType, causeName,
+            buffIDStat++;
+            LandBuffData landBuffData = new LandBuffData(buffIDStat, causeType, causeName,
                 landScapeName, statName, val);
 
             allLandBuffs.Add(landBuffData); 
@@ -153,12 +238,12 @@ namespace Quest
             if(LandscapeService.Instance.currLandscape == landScapeName)
                 ApplyLandBuffFX(landBuffData);  
             
-            return buffIndex;
+            return buffIDStat;
         }
 
-        public void RemoveBuff(int buffID)
+        public void RemoveBuff(int buffIDStat)   // PERMANENT REMOVE FROM TOGGLE CYCLE LAND SCAPE BUFF
         {
-            int i = allLandBuffs.FindIndex(t => t.buffID == buffID);
+            int i = allLandBuffs.FindIndex(t => t.buffID == buffIDStat);
             LandBuffData landBuffData = allLandBuffs[i];
 
             if(landBuffData.isApplied)
@@ -166,7 +251,7 @@ namespace Quest
             allLandBuffs.Remove(landBuffData);
         }
 
-        void ApplyLandBuffFX(LandBuffData landBuff)
+        void ApplyLandBuffFX(LandBuffData landBuff)  // TOGGLE ON LAND ENTER
         {
             charController.ChangeAttrib(landBuff.causeType, landBuff.causeName
              , charController.charModel.charID, landBuff.statModified, landBuff.val);

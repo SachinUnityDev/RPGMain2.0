@@ -137,6 +137,19 @@ namespace Common
             return stateID;
         }
 
+        public void RemoveImmunityByCharState(CharStateName charStateName) 
+        {
+            foreach (ImmunityBuffData immunityBuffData in allImmunityBuffs)
+            {
+                if (immunityBuffData.charStateModData.charStateName == charStateName)
+                {
+                    allImmunityBuffs.Remove(immunityBuffData);
+                }
+            }
+        }
+
+
+
         public void RemoveImmunityBuff(int immunityID)
         {
             foreach (ImmunityBuffData immunityBuffData in allImmunityBuffs)

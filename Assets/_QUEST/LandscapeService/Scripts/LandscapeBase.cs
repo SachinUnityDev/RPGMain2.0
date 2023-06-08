@@ -12,18 +12,17 @@ namespace Common
     {
         public abstract LandscapeNames landscapeName { get; }
         protected List<int> buffID { get; set; }
-
-        public void OnLandscapeInit()
+        protected LandModel landModel { get; set;  }
+        public void OnLandscapeInit(LandModel landModel)
         {
             LandscapeService.Instance.OnLandscapeEnter += OnLandscapeEnter;
             LandscapeService.Instance.OnLandscapeExit += OnLandscapeExit; 
+            this.landModel = landModel;
         }
         protected abstract void OnLandscapeEnter(LandscapeNames landscapeName);        
         public virtual void TrapPositive()
         {
            
-                
-
         }
         public virtual void TrapNegative()
         {

@@ -19,15 +19,19 @@ namespace Quest
         [Header("global variable")   ]
         public LandscapeNames currLandscape;
 
-        [Header("Models")]
-        public List<LandscapeModel> allLandModels = new List<LandscapeModel>();         
-        
-        public LandscapeController landscapeControllers; // single controller
-        
+
+        public LandscapeController landscapeController; // single controller
+        public LandscapeFactory landFactory;
         private void Start()
         {
             currLandscape = LandscapeNames.Sewers; 
         }
+
+        public void InitLandscape()
+        {
+            landscapeController.InitLandController(allLandSO); 
+        }
+
         public void On_LandscapeEnter(LandscapeNames landName)
         {
             currLandscape= landName;

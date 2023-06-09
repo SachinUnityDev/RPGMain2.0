@@ -35,10 +35,6 @@ namespace Quest
 
             QRoomService.Instance.
                On_RoomChg(qRoomModel.questNames, roomNo);
-
-   
-
-   
         
             QRoomService.Instance.qRoomView.HideEndArrow(); 
         }

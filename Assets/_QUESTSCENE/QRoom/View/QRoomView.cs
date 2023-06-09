@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using Common; 
+using Common;
+using System.Diagnostics.Contracts;
+
 namespace Quest
 {
     public class QRoomView : MonoBehaviour
@@ -30,6 +32,9 @@ namespace Quest
 
         [Header("QLand")]
         public QModeNLandView qModeNLandView;
+
+        [Header("Q Room Map View")]
+        public QRoomMapView qRoomMapView;   
 
 
         [Header("Global var")]
@@ -74,13 +79,12 @@ namespace Quest
 
         void OnStartQRoomView(QuestNames questName)
         {
-            this.questName= questName;
+            this.questName= questName;           
         }
 
 
         void OnQRoomStateChgView(QRoomState qRoomState)
         {
-
             qModeNLandView.InitQModeNLandView();
            
             if (qRoomState == QRoomState.Prep)
@@ -105,5 +109,10 @@ namespace Quest
             }
 
         }
+        #region QUEST MAP VIEW  
+    
+
+        #endregion 
+
     }
 }

@@ -2,7 +2,6 @@ using Common;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Policy;
 using UnityEngine;
 
 
@@ -16,6 +15,7 @@ namespace Quest
 
 
         [Header("Quest Room SO")]
+        public QNodeAllRoomSO qNodeAllRoomSO; 
         public AllQNodeSO allQNodeSO;
         public QRoomView qRoomView;
 
@@ -46,7 +46,7 @@ namespace Quest
         }
         void InitQRooms(QuestNames questName)   // On 1st room Enter 
         {
-            QNodeAllRoomSO qNodeAllRoomSO = 
+            qNodeAllRoomSO = 
                       allQNodeSO.GetQuestSceneSO(questName);
             ChangeRoomSprites(questName, 1);
             qRoomController.InitQRoomController(qNodeAllRoomSO);

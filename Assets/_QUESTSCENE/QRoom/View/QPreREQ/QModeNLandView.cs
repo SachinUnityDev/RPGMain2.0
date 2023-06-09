@@ -22,7 +22,7 @@ namespace Quest
 
         private void Start()
         {
-            QSceneService.Instance.OnQRoomStateChg += OnQRoomStateChg;
+            QRoomService.Instance.OnQRoomStateChg += OnQRoomStateChg;
             QuestMissionService.Instance.OnQuestModeChg += (QuestMode questMode) => InitQModeNLandView(); 
         }
         void OnQRoomStateChg(QRoomState qRoomState)
@@ -70,7 +70,6 @@ namespace Quest
 
         public void ShowQModeDisplay()
         {
-
             qModeDispPtrEvents.gameObject.SetActive(true);
             qModeDispPtrEvents.InitQModeDisplay();
         }

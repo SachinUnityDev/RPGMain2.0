@@ -17,7 +17,7 @@ namespace Quest
         public List<QRoomSO> allQRoomSO = new List<QRoomSO>();
         
         public Sprite bGSprite;
-        public Sprite fGSprite;
+        //public Sprite fGSprite;
 
         public Sprite mapSprite;
 

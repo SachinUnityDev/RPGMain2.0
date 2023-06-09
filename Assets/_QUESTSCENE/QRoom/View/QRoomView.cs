@@ -13,7 +13,8 @@ namespace Quest
 
         [Header("Abbas Walk Anim GO")]
         [SerializeField] GameObject abbasGO;
-        public QAbbasMovementController qAbbasMove; 
+        public QAbbasMovementController qAbbasMove;
+        [SerializeField] float AbbasRoomInitPos = -8; 
 
         [Header("ROOM END REF TBR")]
         [SerializeField] QRoomEndArrowW arrowW;
@@ -41,26 +42,29 @@ namespace Quest
 
         private void Start()
         {
-            QSceneService.Instance.OnStartOfQScene += OnStartQRoomView;
-            QSceneService.Instance.OnQRoomStateChg += OnQRoomStateChgView;
-            QSceneService.Instance.OnRoomChg += (QuestNames questName, int roomNo)=>OnRoomChg(); 
+            QRoomService.Instance.OnStartOfQScene += OnStartQRoomView;
+            QRoomService.Instance.OnQRoomStateChg += OnQRoomStateChgView;
+            QRoomService.Instance.OnRoomChg += (QuestNames questName, int roomNo)=>OnRoomChg(); 
         }
         void OnRoomChg()
         {
             Sequence chgSeq = DOTween.Sequence();
 
-            chgSeq.Append(fadeScreen.GetComponent<Image>().DOFade(1f, 0.15f))
-                  .AppendInterval(0.5f)
-                  .Append(abbasGO.transform.DOLocalMoveX(10, 0.4f))
+            chgSeq.Append(fadeScreen.GetComponent<Image>().DOFade(1f, 0.15f))                 
+                  .Append(abbasGO.transform.DOLocalMoveX(AbbasRoomInitPos, 0.25f))
+                   .AppendInterval(0.5f)
                   .Append(fadeScreen.GetComponent<Image>().DOFade(0f, 1f))                  
                   ;
         }
-
+     
 
         public void ShowEndArrow()
         {
-            arrowS.GetComponent<Image>().DOFade(1, 0.1f);
-            arrowW.GetComponent<Image>().DOFade(1, 0.1f);
+            if(QRoomService.Instance.qRoomController.IsSArrowAvail())
+                arrowS.GetComponent<Image>().DOFade(1, 0.1f);            
+                
+            if (QRoomService.Instance.qRoomController.IsWArrowAvail())
+                arrowW.GetComponent<Image>().DOFade(1, 0.1f);
         }
         public void HideEndArrow()
         {
@@ -77,15 +81,15 @@ namespace Quest
         void OnQRoomStateChgView(QRoomState qRoomState)
         {
 
-            qModeNLandView.InitQModeNLandView(); 
-
-
+            qModeNLandView.InitQModeNLandView();
+           
             if (qRoomState == QRoomState.Prep)
             {
                 qRoomPrepEndArrow.gameObject.SetActive(true);
                 qPreReqView.gameObject.SetActive(true);
                 qWalkBtmView.gameObject.SetActive(false);
                 qPreReqView.InitQPreReqView(this);
+                AbbasRoomInitPos = -15f; 
             }
             if (qRoomState == QRoomState.AutoWalk)
             {
@@ -97,7 +101,7 @@ namespace Quest
             if (qRoomState == QRoomState.Walk)
             {
                 qRoomPrepEndArrow.gameObject.SetActive(false);
-                
+                AbbasRoomInitPos = -8f; 
             }
 
         }

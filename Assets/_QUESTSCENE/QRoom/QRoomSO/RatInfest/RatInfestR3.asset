@@ -16,9 +16,11 @@ MonoBehaviour:
   objName: 9
   node: 1
   roomNo: 3
+  hasQPrep: 1
   upRoomNo: -1
   downRoomNo: 5
   allCurio1: 1200000011000000
   allCurio2: 0c000000
   prop: {fileID: 21300000, guid: 60d5ba4284493b745811cc01c7dd05c8, type: 3}
+  fgSprite: {fileID: 21300000, guid: a869048beb64dcc468b42e5dacfc7c68, type: 3}
   mapPortCord: {x: -26.9, y: 60.7}

@@ -43,7 +43,7 @@ namespace Quest
             rb = GetComponent<Rigidbody2D>();
             currentState = AnimState.Idle;
          
-            QSceneService.Instance.OnQRoomStateChg += OnQRoomStateChg;
+            QRoomService.Instance.OnQRoomStateChg += OnQRoomStateChg;
         }
         public void SetAnimation(AnimationReferenceAsset animRef, bool loop, float timeScale)
         {
@@ -71,9 +71,9 @@ namespace Quest
 
         public void Move()
         {
-            if (QSceneService.Instance.qRoomState == QRoomState.Prep) return;
+            if (QRoomService.Instance.qRoomState == QRoomState.Prep) return;
 
-            if (QSceneService.Instance.qRoomState == QRoomState.Walk)
+            if (QRoomService.Instance.qRoomState == QRoomState.Walk)
                 movement = Input.GetAxis("Horizontal");            
             rb.velocity = new Vector2(movement * speed, rb.velocity.y);
             if (movement != 0)
@@ -95,12 +95,12 @@ namespace Quest
                 SetCharacterState(AnimState.Idle);
                 virtualCam.enabled = true;
                 entryCollider?.gameObject.SetActive(false);
-                QSceneService.Instance.On_QuestStateChg(QRoomState.Walk);
+                QRoomService.Instance.On_QuestStateChg(QRoomState.Walk);
                 
             }
             if (name == "ArrowTrigger")
             {
-                QSceneService.Instance.qRoomView.ShowEndArrow();
+                QRoomService.Instance.qRoomView.ShowEndArrow();
             }
         }
         public void OnQRoomStateChg(QRoomState qRoomState)

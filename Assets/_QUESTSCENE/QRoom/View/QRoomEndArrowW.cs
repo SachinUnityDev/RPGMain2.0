@@ -19,10 +19,17 @@ namespace Quest
         {
             // get from the QRoomModel and base for actions
             img.sprite = spriteHL;
-            UpRoom = QSceneService.Instance.qRoomController.qRoomModel.upRoomNo; 
-            if (UpRoom!= -1)
+            UpRoom = QRoomService.Instance.qRoomController.qRoomModel.upRoomNo; 
+            if (UpRoom!= -1 && UpRoom != -5)
+            {               
+                QRoomService.Instance.qRoomController.Move2Room(UpRoom); 
+
+            }else if (UpRoom == -5)
             {
-                QSceneService.Instance.qRoomController.Move2Room(UpRoom); 
+               
+            }
+            else
+            {
 
             }
 

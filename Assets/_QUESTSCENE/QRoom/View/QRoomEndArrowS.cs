@@ -18,10 +18,20 @@ namespace Quest
         {
             // get from the QRoomModel and base for actions
             img.sprite = spriteHL;
-            roomDOWN = QSceneService.Instance.qRoomController.qRoomModel.downRoomNo;
-            if (roomDOWN != -1)
+            roomDOWN = QRoomService.Instance.qRoomController.qRoomModel.downRoomNo;
+            if (roomDOWN != -1 && roomDOWN != -5)
+            {               
+                QRoomService.Instance.qRoomController.Move2Room(roomDOWN);
+            }
+            else if( roomDOWN == -5)
             {
-                QSceneService.Instance.qRoomController.Move2Room(roomDOWN);
+                // room end
+                Debug.Log("YOU ENTERED BOSS COMBAT"); 
+
+            }
+            else
+            {
+                Debug.Log("there is nothing here WORNG WAY");
             }
         }
 
@@ -29,18 +39,14 @@ namespace Quest
         {
             img.sprite = spriteHL;
         }
-
         public void OnPointerExit(PointerEventData eventData)
         {
             img.sprite = spriteN;
         }
-
         void Start()
         {
             img = GetComponent<Image>();
-           GetComponent<Image>().DOFade(0, 0.01f);
-           
-
+            GetComponent<Image>().DOFade(0, 0.01f);
         }
 
 

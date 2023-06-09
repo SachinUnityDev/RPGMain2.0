@@ -26,7 +26,7 @@ namespace Quest
         
         public void OnPointerClick(PointerEventData eventData)
         {
-            if(QSceneService.Instance.qRoomState == QRoomState.Prep)
+            if(QRoomService.Instance.qRoomState == QRoomState.Prep)
             {
                 qModeNLandView.TogglePanel();
             }

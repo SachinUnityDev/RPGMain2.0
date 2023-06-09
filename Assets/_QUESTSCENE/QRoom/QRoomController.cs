@@ -21,17 +21,39 @@ namespace Quest
             qRoomModel = allQNodeRoomModel.GetQRoomModel(roomNo); 
         }
 
+
+
         public void Move2Room(int roomNo)
         {
             this.roomNo = roomNo;
             qRoomModel = allQNodeRoomModel.GetQRoomModel(roomNo);
-            
-            //Is here bcoz sprites renderers not part of canvas .. can be easily controlled here 
-            QSceneService.Instance.
-                        On_RoomChg(qRoomModel.questNames, roomNo);
-            QSceneService.Instance.qRoomView.HideEndArrow(); 
+            //>>>qRoomModel state set and Invoke QRoom State and then Room Check 
+            if (qRoomModel.hasQPrep)
+                QRoomService.Instance.On_QuestStateChg(QRoomState.Prep);
+            else
+                QRoomService.Instance.On_QuestStateChg(QRoomState.Walk);
+
+            QRoomService.Instance.
+               On_RoomChg(qRoomModel.questNames, roomNo);
+
+   
+
+   
+        
+            QRoomService.Instance.qRoomView.HideEndArrow(); 
         }
 
-
+        public bool IsWArrowAvail()
+        {
+            if (qRoomModel.upRoomNo != -1)
+                return true;
+            return false;
+        }
+        public bool IsSArrowAvail()
+        {
+            if (qRoomModel.downRoomNo != -1)
+                return true;
+            return false;
+        }
     }
 }

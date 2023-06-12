@@ -50,7 +50,7 @@ namespace Common
             CharService.Instance.Init();
             UIControlServiceGeneral.Instance.InitUIGeneral();
             MapService.Instance.InitMapService();   
-
+            CurioService.Instance.InitCurioService();   
             BestiaryService.Instance.Init();
             ItemService.Instance.Init();
             FameService.Instance.Init();

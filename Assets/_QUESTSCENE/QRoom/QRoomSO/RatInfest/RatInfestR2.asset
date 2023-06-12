@@ -20,7 +20,7 @@ MonoBehaviour:
   upRoomNo: 3
   downRoomNo: 4
   allCurio1: 0a000000
-  allCurio2: 08000000
+  allCurio2: 0800000012000000
   prop: {fileID: 21300000, guid: b9ccbdd38c85c7b4a9cdc50c7e84f884, type: 3}
   fgSprite: {fileID: 21300000, guid: af91e61165c47b84aa663fafbfed9644, type: 3}
-  mapPortCord: {x: -144.7, y: -1.7}
+  mapPortCord: {x: -144.7, y: 4.3}

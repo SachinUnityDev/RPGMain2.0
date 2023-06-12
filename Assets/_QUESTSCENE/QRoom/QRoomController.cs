@@ -18,11 +18,9 @@ namespace Quest
             allQNodeRoomModel = new QNodeAllRoomModel(qNodeAllRoomSO);
             allQNodeAllRoomModel.Add(allQNodeRoomModel);
             roomNo = 1;
-            qRoomModel = allQNodeRoomModel.GetQRoomModel(roomNo); 
+            qRoomModel = allQNodeRoomModel.GetQRoomModel(roomNo);
+            CurioInit(qRoomModel); 
         }
-
-
-
         public void Move2Room(int roomNo)
         {
             this.roomNo = roomNo;
@@ -33,12 +31,11 @@ namespace Quest
             else
                 QRoomService.Instance.On_QuestStateChg(QRoomState.Walk);
 
-            QRoomService.Instance.
-               On_RoomChg(qRoomModel.questNames, roomNo);
-        
+            QRoomService.Instance.On_RoomChg(qRoomModel.questNames, roomNo);
+
+            CurioInit(qRoomModel);
             QRoomService.Instance.qRoomView.HideEndArrow(); 
         }
-
         public bool IsWArrowAvail()
         {
             if (qRoomModel.upRoomNo != -1)
@@ -51,5 +48,13 @@ namespace Quest
                 return true;
             return false;
         }
+        
+        public void CurioInit(QRoomModel qRoomModel)
+        {
+            QRoomService.Instance.curio1.GetComponent<CurioColEvents>().InitCurio(qRoomModel);
+            QRoomService.Instance.curio2.GetComponent<CurioColEvents>().InitCurio(qRoomModel);
+        }
     }
+
+
 }

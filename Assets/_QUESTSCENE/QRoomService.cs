@@ -28,8 +28,10 @@ namespace Quest
         public SpriteRenderer fgSprite;
         public SpriteRenderer curio1; 
         public SpriteRenderer curio2;
-        public SpriteRenderer prop; 
+        public SpriteRenderer prop;
 
+        [Header("Abbas")]
+        public bool canAbbasMove = true;
         private void Start()
         {
             qRoomController = GetComponent<QRoomController>();          
@@ -77,6 +79,9 @@ namespace Quest
 
         }
         
+
+
+
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.E))

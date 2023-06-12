@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using Common;
-using System.Diagnostics.Contracts;
+
 
 namespace Quest
 {
@@ -82,7 +82,6 @@ namespace Quest
             this.questName= questName;           
         }
 
-
         void OnQRoomStateChgView(QRoomState qRoomState)
         {
             qModeNLandView.InitQModeNLandView();
@@ -107,12 +106,16 @@ namespace Quest
                 qRoomPrepEndArrow.gameObject.SetActive(false);
                 AbbasRoomInitPos = -8f; 
             }
+        }
+
+        void OnCurioInit()
+        {
+            // get curio names from the Q ROOM model  
+            // pass on to individual CurioViews 
+
 
         }
-        #region QUEST MAP VIEW  
-    
 
-        #endregion 
-
+  
     }
 }

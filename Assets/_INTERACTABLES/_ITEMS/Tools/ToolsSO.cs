@@ -14,7 +14,8 @@ namespace Interactables
         public Currency cost;
         public float fluctuation;
         public int maxWorldInstance;
-
+        [Header("Uses")]
+        public int toolMaxUses =10; 
         [Header("Sprites")]
         public Sprite iconSprite;
         [TextArea(5, 10)]

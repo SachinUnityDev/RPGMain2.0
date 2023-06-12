@@ -19,8 +19,8 @@ MonoBehaviour:
   hasQPrep: 1
   upRoomNo: 3
   downRoomNo: 2
-  allCurio1: 11000000
+  allCurio1: 1100000008000000
   allCurio2: 0900000013000000
-  prop: {fileID: 21300000, guid: f7444512ef36adb43ae330bb253cd054, type: 3}
+  prop: {fileID: 21300000, guid: c811060f4bae01f4b88e26bdc93bee40, type: 3}
   fgSprite: {fileID: 21300000, guid: af91e61165c47b84aa663fafbfed9644, type: 3}
-  mapPortCord: {x: -254, y: 17.1}
+  mapPortCord: {x: -254, y: 23.1}

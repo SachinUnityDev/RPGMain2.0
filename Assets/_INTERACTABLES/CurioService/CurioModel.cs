@@ -1,4 +1,5 @@
 using Interactables;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ using UnityEngine;
 
 namespace Quest
 {
+    [Serializable]
     public class CurioModel
     {
         public CurioNames curioName;

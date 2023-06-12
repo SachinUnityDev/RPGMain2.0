@@ -22,4 +22,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ce63762c0fcf4434ab6cfa3cf178e558, type: 2}
   - {fileID: 11400000, guid: 13013abf39e704f42b273dffacb519a6, type: 2}
   bGSprite: {fileID: 21300000, guid: 659767b747e0b11479ab49ef3bc15451, type: 3}
-  mapSprite: {fileID: 0}
+  mapSprite: {fileID: 21300000, guid: 3fdb45b2cc84a004aab96f1195799b2b, type: 3}

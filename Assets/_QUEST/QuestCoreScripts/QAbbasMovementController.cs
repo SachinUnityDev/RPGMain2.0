@@ -72,11 +72,12 @@ namespace Quest
         public void Move()
         {
             if (QRoomService.Instance.qRoomState == QRoomState.Prep) return;
-
-            if (QRoomService.Instance.qRoomState == QRoomState.Walk)
+            bool canMove = QRoomService.Instance.canAbbasMove; 
+            if (QRoomService.Instance.qRoomState == QRoomState.Walk && canMove)
                 movement = Input.GetAxis("Horizontal");            
+
             rb.velocity = new Vector2(movement * speed, rb.velocity.y);
-            if (movement != 0)
+            if (movement != 0 && canMove)
             {
                 SetCharacterState(AnimState.Walking);
             }
@@ -88,6 +89,7 @@ namespace Quest
 
         public void OnCollisionEnter2D(Collision2D collision)
         {
+            QRoomService.Instance.canAbbasMove = false;
             string name = collision.gameObject.name;
             if (name == "EntryCollider")
             {
@@ -96,11 +98,11 @@ namespace Quest
                 virtualCam.enabled = true;
                 entryCollider?.gameObject.SetActive(false);
                 QRoomService.Instance.On_QuestStateChg(QRoomState.Walk);
-                
+                QRoomService.Instance.canAbbasMove = true;
             }
             if (name == "ArrowTrigger")
             {
-                QRoomService.Instance.qRoomView.ShowEndArrow();
+                QRoomService.Instance.qRoomView.ShowEndArrow();              
             }
         }
         public void OnQRoomStateChg(QRoomState qRoomState)

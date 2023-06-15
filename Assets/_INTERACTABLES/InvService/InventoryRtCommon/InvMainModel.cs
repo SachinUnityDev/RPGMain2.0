@@ -41,8 +41,6 @@ namespace Interactables
         #region DECLARATIONS
 
         public List<Iitems> commonInvItems = new List<Iitems>();
-
-
         // Abbas 3 X 6,  each added Companion has 2X6 (Locked)(Town, QuestPrepPhase, in camp, in MapInteraction)
         //public List<Iitems> persCommInvItems = new List<Iitems>(); 
         public int commonInvCount = 0;
@@ -61,9 +59,6 @@ namespace Interactables
         public int size_Stash = 18;
         #endregion 
 
-
-
-
         public bool AddItem2CommORStash(Iitems item)
         {
             if (AddItem2CommInv(item))
@@ -75,6 +70,8 @@ namespace Interactables
             }
             return false; 
         }
+
+
 
         public bool HasItemInQtyCommOrStash(ItemDataWithQty itemDataWithQty)
         {
@@ -142,6 +139,18 @@ namespace Interactables
             //commonInvItems
             int quantity = commonInvItems.Count(t=>t.itemName == itemData.itemName && t.itemType == itemData.itemType);
             return quantity; 
+        }
+
+        public Iitems GetItemFromCommInv(ItemType itemType, int itemName)
+        {
+            Iitems item =  commonInvItems.Find(t => t.itemType == itemType
+                                        && t.itemName == itemName);
+            if(item == null)
+            {
+                Debug.Log("Item Not FOUND"); return null;
+            }
+
+            return item; 
         }
 
         public List<Iitems> GetItemsFrmCommonInv(ItemType itemType)
@@ -327,6 +336,9 @@ namespace Interactables
         }
 
         #endregion
+
+
+
     }
 }
 

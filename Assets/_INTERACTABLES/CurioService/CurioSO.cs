@@ -24,9 +24,10 @@ namespace Quest
         public ToolNames toolName2; 
         [TextArea(2,5)]
         public string openDesc = "";
-  
 
-        public List<Currency> lootMoneyRange = new List<Currency>();
+
+        public Currency lootMoneyMin = new Currency(0, 0);
+        public Currency lootMoneyMax = new Currency(0, 0);
 
         public Sprite curioN;
         public Sprite curioHL;

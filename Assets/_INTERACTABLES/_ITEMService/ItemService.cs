@@ -153,10 +153,6 @@ namespace Interactables
         }
         #region ITEM SO GETTERS
 
-        
-
-
-
         public HerbSO GetHerbSO(HerbNames herbname)
         {
             HerbSO herbSO = allHerbSO.Find(t => t.herbName == herbname);
@@ -349,7 +345,8 @@ namespace Interactables
                     costData = new CostData(tgSO.cost, tgSO.fluctuation);   
                     break;
                 case ItemType.Tools:
-                   // ToolsSO 
+                    ToolsSO toolSO = GetToolSO((ToolNames)itemName); 
+                    costData = new CostData(toolSO.cost, toolSO.fluctuation);
                     break;
                 case ItemType.Teas:
                     break;
@@ -364,8 +361,12 @@ namespace Interactables
                 case ItemType.Meals:
                     break;
                 case ItemType.SagaicGewgaws:
+                    SagaicGewgawSO sagaicGewgawSO = GetSagaicGewgawSO((SagaicGewgawNames)itemName);
+                    costData = new CostData(sagaicGewgawSO.cost, sagaicGewgawSO.fluctuation);
                     break;
                 case ItemType.PoeticGewgaws:
+                   PoeticGewgawSO poeticGewgawSO = GetPoeticGewgawSO((PoeticGewgawNames)itemName);
+                    costData = new CostData(poeticGewgawSO.cost, poeticGewgawSO.fluctuationRate);
                     break;
                 case ItemType.RelicGewgaws:
                     break;
@@ -377,8 +378,6 @@ namespace Interactables
             }
             return costData;
         }
-
-
 
         #endregion
 
@@ -502,8 +501,14 @@ namespace Interactables
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Meals, (int)MealNames.BeefSteak,
+                InitItemToInv(SlotType.CommonInv, ItemType.Tools, (int)ToolNames.Chalice,
                                      CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.Tools, (int)ToolNames.Key,
+                                    CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.Tools, (int)ToolNames.PlagueMask,
+                                    CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.Tools, (int)ToolNames.Shovel,
+                                    CauseType.Items, 2);
             }
             if (Input.GetKeyDown(KeyCode.J))
             {

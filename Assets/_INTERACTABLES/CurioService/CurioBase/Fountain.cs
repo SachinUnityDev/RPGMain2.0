@@ -52,7 +52,8 @@ namespace Quest
                 charCtrl.ChangeAttrib(CauseType.Curios, (int)curioName, charCtrl.charModel.charID,
                                    AttribName.fortOrg, 1);
             }
-            resultStr = "Only the bravest could drink this."; 
+            resultStr = "Only the bravest could drink this.";
+            resultStr2 = "Fort Org buff, eoq\nFull Thirst relief\n+1 Fort Org";
         }
         //Recover full stamina, Full Thirst relief,	+1 Willpower Permanently
         void Fx2()
@@ -64,6 +65,7 @@ namespace Quest
 
             }
             resultStr = "Feels refreshing.";
+            resultStr2 = "Full Stamina gain\nFull Thirst Relief\n+1 Willpower";
         }
         //Recover full health Full Thirst relief	+1 Vigor Permanently
         void Fx3()
@@ -74,6 +76,7 @@ namespace Quest
                                     AttribName.vigor, 1);
             }
             resultStr = "Feels replenishing.";
+            resultStr2 = "Full Health gain\nFull Thirst Relief\n+1 Vigor";
         }
 
         //Receive Diarrhea %50 or Nausea    %80	Receive Low Poisoned     Gain Sickness Immunity until eoq
@@ -107,6 +110,7 @@ namespace Quest
                 charCtrl.charModel.charID, TempTraitType.Sickness, TimeFrame.EndOfQuest, 1); 
             }
             resultStr = "Dirty water makes you feel like vomit.";
+            resultStr2 = "Sickness gained\nPoison chance\nSickness immunity, eoq";
         }
             
         public override void CurioInteractWithTool()

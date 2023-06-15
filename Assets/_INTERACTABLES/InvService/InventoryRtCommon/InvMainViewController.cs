@@ -11,7 +11,7 @@ namespace Interactables
         [Header("PARENT VIEW CONTROLLER")]
         public InvRightViewController invCommViewController;
         public BtmCharViewController btmCharViewController;
-        public LevelViewController levelViewController; 
+        public LevelView levelViewController; 
 
 
        [SerializeField] GameObject AttributesPanel;
@@ -25,7 +25,7 @@ namespace Interactables
         private void Awake()
         {
             invCommViewController = transform.GetChild(1).GetComponent<InvRightViewController>();
-            levelViewController = transform.GetChild(0).GetComponent<LevelViewController>();
+            levelViewController = transform.GetChild(0).GetComponent<LevelView>();
             btmCharViewController = transform.GetChild(2).GetComponent<BtmCharViewController>();
      
             InvService.Instance.OnCharSelectInvPanel += OnCharSelected; 

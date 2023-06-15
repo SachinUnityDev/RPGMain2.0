@@ -24,7 +24,8 @@ namespace Quest
                 curioName = qRoomModel.GetCurio1Name();            
             else if(curioNo == 2)
                 curioName = qRoomModel.GetCurio2Name();
-            gameObject.GetComponent<BoxCollider2D>().enabled = true;
+
+            SetCollider();
             if (curioName == CurioNames.None)
             {
                 gameObject.SetActive(false);
@@ -35,6 +36,7 @@ namespace Quest
 
             curioSO = CurioService.Instance.allCurioSO.GetCurioSO(curioName);
             curioModel = CurioService.Instance.curioController.GetCurioModel(curioName);
+         
             SetSprite();
         }
         public void OnInteractBegin()
@@ -49,13 +51,33 @@ namespace Quest
             SetSprite();
         }
         public void OnContinue()
-        {
+        {         
+            SetSprite();
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
             QRoomService.Instance.canAbbasMove= true;  
+           
         }
+        void SetCollider()
+        {
+            if (curioNo == 1)
+            {
+                if (qRoomModel.curio1Chked)
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                else
+                    gameObject.GetComponent<BoxCollider2D>().enabled = true;
+            }
+            if (curioNo == 2)
+            {
+                if (qRoomModel.curio2Chked)
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                else
+                    gameObject.GetComponent<BoxCollider2D>().enabled = true;
+            }
+        }
+
         void SetSprite()
         {
-            if(curioNo == 1) // set collider here too 
+            if(curioNo == 1) 
             {
                 if(qRoomModel.curio1Chked)
                     gameObject.GetComponent<SpriteRenderer>().sprite = curioSO.curioOpn;

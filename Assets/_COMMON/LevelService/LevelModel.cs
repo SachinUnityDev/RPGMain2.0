@@ -9,7 +9,7 @@ namespace Common
     public class ManualOptData
     {
         public Levels lvl;
-        public List<AttribData> allOptions = new List<AttribData>();
+        public List<LvlData> allOptions = new List<LvlData>();
 
         public ManualOptData(Levels lvl)
         {
@@ -53,7 +53,7 @@ namespace Common
             return null;
         }
 
-        public void AddOptions2ChosenStack(CharNames charName, List<AttribData> allStatData, Levels lvl)
+        public void AddOptions2ChosenStack(CharNames charName, List<LvlData> allStatData, Levels lvl)
         {
             int i = allCharLvlUpData.FindIndex(t => t.charName == charName);
             int j = allCharLvlUpData[i].allOptionsChosen.FindIndex(t => t.lvl == lvl);
@@ -81,8 +81,8 @@ namespace Common
         }
 
 
-        public void AddOptions2PendingStack(CharNames charName, List<AttribData> allStatData1
-            ,List<AttribData> allStatData2, Levels lvl)
+        public void AddOptions2PendingStack(CharNames charName, List<LvlData> allStatData1
+            ,List<LvlData> allStatData2, Levels lvl)
         {
             int i = allCharLvlUpData.FindIndex(t => t.charName == charName);
             if (i == -1)
@@ -104,12 +104,20 @@ namespace Common
 
         }
 
-        public void RemoveOptions2PendingStack(CharNames charName, Levels lvl)
+        public void RemoveOptions2PendingStack(CharNames charName, Levels lvl, int opt)
         {
             int i = allCharLvlUpData.FindIndex(t => t.charName == charName);
             int j = allCharLvlUpData[i].allOptionsPending.FindIndex(t => t.level == lvl);
             if (allCharLvlUpData[i].allOptionsPending[j].allStatDataOption1.Count > 0)
             {
+                if(opt == 1)
+                {
+                    LevelService.Instance.ManLvlUp(charName, allCharLvlUpData[i].allOptionsPending[j].allStatDataOption1); 
+                }
+                if (opt == 2)
+                {
+                    LevelService.Instance.ManLvlUp(charName, allCharLvlUpData[i].allOptionsPending[j].allStatDataOption2);
+                }
                 allCharLvlUpData[i].allOptionsPending[j].allStatDataOption1.Clear();
                 allCharLvlUpData[i].allOptionsPending[j].allStatDataOption2.Clear();
             }

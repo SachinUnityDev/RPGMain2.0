@@ -12,7 +12,10 @@ namespace Quest
         public LootController lootController;
 
         public LootFactory lootFactory;
-        public LootView lootView; 
+        public LootView lootView;
+
+        [Header("Global Var")]
+        public bool isLootOpen = false;
 
 
         private void Start()
@@ -33,8 +36,7 @@ namespace Quest
         private void Update()
         {
             if(Input.GetKeyDown(KeyCode.L))
-            {
-               
+            {               
                 lootController.ShowLootTable(new List<ItemType>()
                 {ItemType.Potions, ItemType.GenGewgaws, ItemType.PoeticGewgaws, ItemType.Gems, ItemType.SagaicGewgaws,
                 ItemType.Fruits, ItemType.Foods, ItemType.TradeGoods});

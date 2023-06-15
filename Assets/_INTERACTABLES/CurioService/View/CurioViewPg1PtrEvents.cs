@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Common;
+using Interactables;
+
 namespace Quest
 {
 
@@ -13,8 +15,10 @@ namespace Quest
         [Header("TBR")]
         [SerializeField] TextMeshProUGUI curioNameTxt;
         [SerializeField] TextMeshProUGUI openDescTxt;
-        [SerializeField] Transform toolSlot1;
-        [SerializeField] Transform toolSlot2;
+
+
+        [Header("Tool Container")]
+        [SerializeField] ToolView toolView; 
         [SerializeField] Button interactBtn;
         [SerializeField] Button exitBtn; 
 
@@ -44,23 +48,30 @@ namespace Quest
         void FillCurio()
         {
             curioNameTxt.text= curioModel.curioName.ToString().CreateSpace();
-            openDescTxt.text = curioModel.openDesc.ToString().CreateSpace();    
+            openDescTxt.text = curioModel.openDesc.ToString().CreateSpace();
 
             // Fill Slots
-            // // get Tools as toolModels
-
+            // get Tools as toolModels
+            FillSlot();
         }
+
+        void FillSlot()
+        {
+            toolView.InitTootList(curioModel.toolName, curioModel.toolName2);             
+        }
+
 
         void OnInteractBtnPressed()
         {
             // open page 2 
-            curioView.ShowPage2();            
+            curioView.ShowPage2(toolView.toolSelect);            
             // change the sprite to open sprite
+            
             curioColEvents.OnInteractBegin();
         }
         void OnExitPressed()
         {
-            curioView.GetComponent<IPanel>().UnLoad();
+            curioView.UnLoad();
         }
         
 

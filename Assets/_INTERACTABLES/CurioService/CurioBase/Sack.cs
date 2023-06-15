@@ -23,7 +23,7 @@ namespace Quest
             }
             else
             {
-              
+                lootTypes.Clear();
                 float chance2 = 50f;
                 if (chance2.GetChance())
                     lootTypes.Add(ItemType.Potions);
@@ -52,10 +52,15 @@ namespace Quest
                     lootTypes.Add(ItemType.Gems);
 
                 resultStr = "Loot shines upon your face. Take them, all yours!";
+                resultStr2 = "Loot gained";
+
+                LootService.Instance.lootController.ShowLootTable(lootTypes);
+
             }
         }
         public override void CurioInteractWithTool()
         {
+
         }
 
 

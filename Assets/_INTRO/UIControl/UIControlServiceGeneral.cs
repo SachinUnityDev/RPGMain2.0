@@ -44,7 +44,7 @@ namespace Common
             int count = currOpenPanels.Count; 
             if (count > 0)
             {
-                TogglePanel(currOpenPanels[count - 1], false);
+                TogglePanel(currOpenPanels[count - 1], false);               
             }
             else
             {
@@ -154,7 +154,6 @@ namespace Common
                 if (panel != null)
                     panel.Load();
             }
-           
         }
 
         public void TogglePanelOnInGrp(GameObject go, bool turnON)  

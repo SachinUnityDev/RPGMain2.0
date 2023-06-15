@@ -256,7 +256,7 @@ namespace Common
             int turn = -1;
             DynamicPosData dyna = null;
             StatData statData = GetStat(statName);
-            Debug.Log("Game event" + GameEventService.Instance.isGame);
+        
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
                 turn = CombatService.Instance.currentTurn;
@@ -313,8 +313,7 @@ namespace Common
             // COMBAT PATCH FIX BEGINS 
             int turn = -1;
             DynamicPosData dyna = null; 
-            AttribData statData = GetAttrib(attribName);
-            Debug.Log("Game event" + GameEventService.Instance.isGame);
+            AttribData statData = GetAttrib(attribName);         
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
                 turn = CombatService.Instance.currentTurn;

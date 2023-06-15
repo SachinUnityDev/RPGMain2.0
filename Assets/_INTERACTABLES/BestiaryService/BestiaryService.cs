@@ -33,7 +33,6 @@ namespace Common
         {
           currSelectRace = RaceType.None;
         }
-
         public void Init()
         {
             foreach (CharacterSO charSO in allBestiarySO)
@@ -44,13 +43,11 @@ namespace Common
             }
             CreateAllBestiaryCtrls();
         }
-
         public void OnRaceSelect(RaceType raceType)
         {
             currSelectRace = raceType;
             bestiaryViewController.PopulateOnRaceSelect(raceType); 
         }
-
         public void CreateAllBestiaryCtrls()
         {
             CharController charCtrl = new CharController();
@@ -59,17 +56,15 @@ namespace Common
                 charCtrl.InitiatizeController(c);            
                 allBestiaryInGame.Add(charCtrl);
                 CharService.Instance.charsInPlayControllers.Add(charCtrl);
-                LevelService.Instance.LevelUpInit(charCtrl);
+               // LevelService.Instance.LevelUpInitAlly(charCtrl);
             }
         }
-
         public CharacterSO GetEnemySO(CharNames charName)
         {
             CharacterSO charSO = 
                     allBestiarySO.Find(t => t.charName == charName);
             return charSO;
         }
-
         public CharController SpawnBestiary(CharNames enemyName, int charID)
         {
             CharController charController = null;
@@ -78,7 +73,6 @@ namespace Common
             {
                 charController = CreateEnemyCtrl(enemyName);
                 charController.charModel.charID = charID;
-
             }
             else
             {
@@ -92,10 +86,8 @@ namespace Common
             }
             GameObject go = Instantiate(charSO.charPrefab, spawnPos, Quaternion.identity);
             go.AddComponent<CharController>();
-
             return charController;
         }
-
         public CharController GetCharControllerWithID(int charID)
         {
             CharController charController = allBestiaryInGame.Find(t=>t.charModel.charID == charID);
@@ -114,8 +106,8 @@ namespace Common
                 {
                     charCtrl.InitiatizeController(c);
                     allBestiaryInGame.Add(charCtrl);
-                    CharService.Instance.charsInPlayControllers.Add(charCtrl);                    
-                    LevelService.Instance.LevelUpInit(charCtrl);
+                    CharService.Instance.charsInPlayControllers.Add(charCtrl);
+                    LevelService.Instance.LevelUpInitBeastiary(charCtrl);
 
                 }
             }

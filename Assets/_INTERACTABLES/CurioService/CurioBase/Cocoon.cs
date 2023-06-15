@@ -58,10 +58,11 @@ namespace Quest
 
             }
             resultStr = "The web might feel a bit itchy.";
-            
+            resultStr2 = "Haste debuff, eoq\n+2-3 Earth Res";
         }
         void Fx2()
         {
+            lootTypes.Clear();
             float chance2 = 50f;
             lootTypes.Add(ItemType.GenGewgaws);
             if (chance2.GetChance())
@@ -90,6 +91,9 @@ namespace Quest
                 lootTypes.Add(ItemType.Foods);
 
             resultStr = "Carefully woven web still holds bunch of items together.";
+            resultStr2 = "Loot gained";
+            LootService.Instance.lootController.ShowLootTable(lootTypes);
+
         }
     }
 }

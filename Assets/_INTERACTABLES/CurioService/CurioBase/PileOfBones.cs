@@ -36,8 +36,8 @@ namespace Quest
                     charCtrl.buffController.ApplyBuff(CauseType.Curios, (int)curioName
                                             , charCtrl.charModel.charID, AttribName.fortOrg, -6, TimeFrame.EndOfQuest,1, false);
                 }
-                resultStr = "Bones… A reminder of death and evoker of fear."; 
-
+                resultStr = "Bones… A reminder of death and evoker of fear.";
+                resultStr2 = "Fort Org debuff, eoq\nHorrified, eoq\n+1 Willpower";
 
             }
             else
@@ -53,6 +53,7 @@ namespace Quest
 
         void Fx1()
         {
+            lootTypes.Clear();
             float chance2 = 50f;
             if (chance2.GetChance())
                 lootTypes.Add(ItemType.Potions);
@@ -75,6 +76,9 @@ namespace Quest
                 lootTypes.Add(ItemType.Herbs);
 
             resultStr = "Dead does not need loot, why not take it?";
+            resultStr2 = "Loot gained";
+            LootService.Instance.lootController.ShowLootTable(lootTypes);
+
         }
 
     }

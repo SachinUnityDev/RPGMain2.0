@@ -106,7 +106,11 @@ namespace Common
             // check immunity list 
             int effectedCharID = charController.charModel.charID;
 
-            int currRd = CombatService.Instance.currentRound;
+            int currRd = -1;
+            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            {
+                currRd = CombatService.Instance.currentRound;
+            }
             CharStateModData charStateModData = new CharStateModData(causeType, causeName, causeByCharID
                                                                     , effectedCharID, charStateName);
             stateID++;
@@ -127,7 +131,11 @@ namespace Common
                                 , CharStateName charStateName, TimeFrame timeFrame, int netTime) // immunity buff for this char State
         {
             int effectedCharID = charController.charModel.charID;
-            int currRd = CombatService.Instance.currentRound;
+            int currRd = -1;
+            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            {
+                currRd = CombatService.Instance.currentRound;
+            }
             CharStateModData charStateModData = new CharStateModData(causeType, causeName, causeByCharID
                                                                     , effectedCharID, charStateName, true);
             stateID++; 

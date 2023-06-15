@@ -29,26 +29,35 @@ namespace Common
                 lvlModel = new LevelModel(); 
         }
 
-        public void LevelUpInit(CharController charController)
+        public void LevelUpInitAlly(CharController charController)  // ALLY
         {
             charModel = charController.charModel;
             this.charController = charController;
-            
-           CharacterSO charSO = CharService.Instance.GetCharSO(charModel);
-            if (charSO == null)
-                charSO = BestiaryService.Instance.GetEnemySO(charController.charModel.charName);
-            
+
+            CharacterSO charSO = CharService.Instance.GetCharSO(charModel);
+
             Levels initLvl = (Levels)charModel.charLvl;
             Levels finalLvl = (Levels)charSO.charLvl;
             if (charModel.orgCharMode == CharMode.Ally)
             {
-                AutoLvlUpAlly(initLvl, finalLvl);                
-            }
-            else
-            {
-               // AutoLvlUpEnemies(initLvl, finalLvl);  // enemies should not level up untill spawned
+                AutoLvlUpAlly(initLvl, finalLvl);
             }
         }
+
+        // to be called from the view controller
+        public void ManLvlUp(CharNames charName, List<LvlData> optionChosen)
+        {
+            charController = CharService.Instance.GetCharCtrlWithName(charName);
+            // apply to char Controller
+            foreach (LvlData attrib in optionChosen)
+            {
+                charController.ChangeAttrib(CauseType.LevelUp, 1, 1, attrib.attribName
+                    , attrib.val, true);
+            }
+            lvlModel.AddOptions2ChosenStack(charName, optionChosen, (Levels)charModel.charLvl);
+        }
+
+        // connect to event on exp
         public bool ChkLvlUp(CharModel charModel, int expNeeded)
         {
             int currExp = charModel.expPoints;
@@ -84,46 +93,73 @@ namespace Common
             //int expNeeded = lvlNExpSO.GetTotalExpPts4Lvl((int)finalLvl);
             //if (ChkLvlUp(charModel, expNeeded))
             //{
-            foreach (AttribData stat in lvlDataComp.allStatDataAuto)
+            foreach (LvlData stat in lvlDataComp.allStatDataAuto)
                 {
-                    if (stat.AttribName.IsAttribArmor())
-                    {
-                        charController.ChangeAttrib(CauseType.LevelUp, 1, 1, AttribName.armorMin
-                            , stat.currValue, true);
+                    //if (stat.AttribName.IsAttribArmor())
+                    //{
+                    //    charController.ChangeAttrib(CauseType.LevelUp, 1, 1, AttribName.armorMin
+                    //        , stat.currValue, true);
                         
-                        charController.ChangeAttrib(CauseType.LevelUp, 1, 1, AttribName.armorMax
-                           , stat.currValue, true);
-                    // stack it up in level up model
-                     }
-                     else if(stat.AttribName.IsAttribDamage()) 
-                     {
-                        charController.ChangeAttrib(CauseType.LevelUp, 1, 1, AttribName.dmgMin
-                                , stat.currValue, true);
+                    //    charController.ChangeAttrib(CauseType.LevelUp, 1, 1, AttribName.armorMax
+                    //       , stat.currValue, true);
+                    //// stack it up in level up model
+                    // }
+                    // else if(stat.AttribName.IsAttribDamage()) 
+                    // {
+                    //    charController.ChangeAttrib(CauseType.LevelUp, 1, 1, AttribName.dmgMin
+                    //            , stat.currValue, true);
 
-                        charController.ChangeAttrib(CauseType.LevelUp, 1, 1, AttribName.dmgMax
-                           , stat.currValue, true);
+                    //    charController.ChangeAttrib(CauseType.LevelUp, 1, 1, AttribName.dmgMax
+                    //       , stat.currValue, true);
 
-                     }
-                     else
-                     {
-                        charController.ChangeAttrib(CauseType.LevelUp, 1, 1, stat.AttribName
-                           , stat.currValue, true);
-                     }
-
+                    // }
+                    // else
+                     //{
+                        charController.ChangeAttrib(CauseType.LevelUp, 1, 1, stat.attribName
+                           , stat.val, true);
+                     //}
                 }
            // }
             charModel.charLvl++; 
-           
         }
         void Add2ManPendingStack(Levels finalLvl)
         {
             CharNames charName = charController.charModel.charName;
              LvlDataComp lvlDataComp = lvlUpCompSO.GetLvlData(charModel.heroType, finalLvl);
-            List<AttribData> option1 = lvlDataComp.allStatDataOption1;
-            List<AttribData> option2 = lvlDataComp.allStatDataOption2;
+            List<LvlData> option1 = lvlDataComp.allStatDataOption1;
+            List<LvlData> option2 = lvlDataComp.allStatDataOption2;
 
             lvlModel.AddOptions2PendingStack(charName, option1, option2, finalLvl);
         }
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #region BEASTIARY 
+        public void LevelUpInitBeastiary(CharController charController)
+        {
+            charModel = charController.charModel;
+            this.charController = charController;
+            CharacterSO charSO = BestiaryService.Instance.GetEnemySO(charController.charModel.charName);
+
+            Levels initLvl = (Levels)charModel.charLvl;
+            Levels finalLvl = (Levels)charSO.charLvl;
+            AutoLvlUpEnemies(initLvl, finalLvl);  // enemies should not level up untill spawned
+        }
+
+
         void AutoLvlUpEnemies(Levels initLvl, Levels finalLvl)
         {
            
@@ -132,7 +168,7 @@ namespace Common
                 AutoLvlUpByOneEnemy((Levels)(i + 1));
             }
         }
-
+   
         void AutoLvlUpByOneEnemy(Levels finalLvl)
         {
             if (charModel == null)
@@ -156,22 +192,10 @@ namespace Common
             charModel.charLvl++;
 
         }
+        #endregion
 
 
-        // to be called from the view controller
-        public void ManLvlUp(CharNames charName, List<AttribData> optionChosen)
-        {
-            charController = CharService.Instance.GetCharCtrlWithName(charName);
-            // apply to char Controller
-            foreach (AttribData attrib in optionChosen)
-            {
-               
-                charController.ChangeAttrib(CauseType.LevelUp, 1, 1, attrib.AttribName
-                    , attrib.currValue, true);
-               
-            }
-            lvlModel.AddOptions2ChosenStack(charName, optionChosen, (Levels)charModel.charLvl); 
-        }
+
 
     
       

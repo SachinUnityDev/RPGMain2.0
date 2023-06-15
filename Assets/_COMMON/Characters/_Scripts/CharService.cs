@@ -206,7 +206,7 @@ namespace Common
            
             GameObject go = Instantiate(charSO.charPrefab, spawnPos, Quaternion.identity);
             CharController charController = go.AddComponent<CharController>();
-            //  
+          
              CharModel charModel = charController.InitiatizeController(charSO);
 
 
@@ -228,44 +228,13 @@ namespace Common
                     allyUnLockedCompModels.Add(charModel);
                 }
             }
-          //  LevelService.Instance.LevelUpInit(charController);
-
-
-            // add in combat Service rather than here
-
-            //CharController charCtrl = null; 
-            //foreach (CharacterSO c in allCharSO)
-            //{
-            //    if (charName == c.charName)
-            //    {
-            //        GameObject go = Instantiate(c.charPrefab, spawnPos, Quaternion.identity);
-            //        charCtrl = go.AddComponent<CharController>();
-
-            //        charCtrl.InitiatizeController(c, null, SaveSlot.New);
-
-            //        CharMode charMode = charCtrl.charModel.charMode; 
-            //        if (charMode == CharMode.Ally)
-            //        {
-            //            allyInCombatControllers.Add(charCtrl);
-            //            allyInPlay.Add(go);
-            //        }
-            //        if (charMode == CharMode.Enemy)
-            //        {
-            //            enemyInPlayControllers.Add(charCtrl); 
-            //            enemyInPlay.Add(go);
-            //          //  CombatService.Instance.enemyInCombat.Add(charCtrl); 
-            //        }
-            //        CharsInPlayControllers.Add(charCtrl);
-            //        charsInPlay.Add(go);
-            //    }
-            //}
-            //return charCtrl;
             return charController; 
         }
         public void On_CharInit()
         {
             foreach (var charController in charsInPlayControllers) 
             {
+
                 OnCharInit?.Invoke(charController.charModel.charName);
             }
         
@@ -290,12 +259,12 @@ namespace Common
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.T))
-            {
-                On_CharAddToParty(GetCharCtrlWithName(CharNames.Abbas_Skirmisher)); 
-            }
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                On_CharInit();
+            {              
+                foreach (CharController charCtrl in allyInPlayControllers)
+                {
+                    On_CharInit();
+                    On_CharAddToParty(GetCharCtrlWithName(charCtrl.charModel.charName)); 
+                }
             }
         }
         public void On_CharAddToParty(CharController charController)
@@ -484,7 +453,6 @@ namespace Common
         { 
            return charsInPlayControllers.Find(t => t.charModel.charName == _charName).charModel.charLvl;          
         }
-
 
         #endregion
 

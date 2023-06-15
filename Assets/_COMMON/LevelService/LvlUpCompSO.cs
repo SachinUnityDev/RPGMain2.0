@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,13 +6,19 @@ using UnityEngine;
 
 namespace Common
 {
-    [System.Serializable]
+    [Serializable]
+    public class LvlData
+    {
+        public AttribName attribName;
+        public int val; 
+    }
+    [Serializable]
     public class LvlDataComp
     {
         public Levels level;      
-        public List<AttribData> allStatDataAuto = new List<AttribData>();
-        public List<AttribData> allStatDataOption1 = new List<AttribData>();
-        public List<AttribData> allStatDataOption2 = new List<AttribData>();
+        public List<LvlData> allStatDataAuto = new List<LvlData>();
+        public List<LvlData> allStatDataOption1 = new List<LvlData>();
+        public List<LvlData> allStatDataOption2 = new List<LvlData>();
 
         public LvlDataComp()
         {

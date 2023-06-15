@@ -22,7 +22,7 @@ namespace Quest
         }
         public override void CurioInteractWithoutTool()
         {
-            //            20 % nothing happens
+            //20 % nothing happens
             //45 % buff 1
             //35 % buff 2
             List<float> chances = new List<float>() { 20f, 45f, 35f }; 
@@ -53,6 +53,7 @@ namespace Quest
             {
                 Fx2();
             }
+          
         }
 
 
@@ -77,28 +78,30 @@ namespace Quest
 
             }
             resultStr = "Some like it hot!";
+            resultStr2 = "Thirst relief\nWillpower debuff until eoq\nHot Res gain(perm)";
         }
         //+1-2 dark res, +1-3 Water+Earth res permanently	-12-24 Thirst	-1-2 Willpower until eoq
         void Fx2()
         {
             foreach (CharController charCtrl in CharService.Instance.allCharsInPartyLocked)
             {
-
+                val1 = UnityEngine.Random.Range(1, 3); 
                 charCtrl.ChangeAttrib(CauseType.Curios, (int)curioName, charCtrl.charModel.charID,
-                                    AttribName.darkRes, UnityEngine.Random.Range(1, 3));
-
+                                    AttribName.darkRes,val1);
+                val2 = UnityEngine.Random.Range(1, 3); 
                 charCtrl.ChangeAttrib(CauseType.Curios, (int)curioName, charCtrl.charModel.charID,
-                                   AttribName.waterRes, UnityEngine.Random.Range(1, 3));
-
+                                   AttribName.waterRes,val2);
+                val3 = UnityEngine.Random.Range(1, 3); 
                 charCtrl.ChangeAttrib(CauseType.Curios, (int)curioName, charCtrl.charModel.charID,
-                                   AttribName.earthRes, UnityEngine.Random.Range(1, 3));
-
+                                   AttribName.earthRes,val3);
+                val4 = UnityEngine.Random.Range(-1, -3); 
                 charCtrl.buffController.ApplyBuff(CauseType.Curios, (int)curioName
                                               , charCtrl.charModel.charID, AttribName.willpower
-                                              , UnityEngine.Random.Range(-1, -3), TimeFrame.EndOfQuest, 1, false);
+                                              , val4, TimeFrame.EndOfQuest, 1, false);
 
             }
             resultStr = "The night is dark and full of barrels!";
+            resultStr2 = "Thirst relief\nWillpower debuff until eoq\nCold Res gain(perm)";
         }
   
     }

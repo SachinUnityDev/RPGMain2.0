@@ -1,4 +1,5 @@
 using Common;
+using Interactables;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,9 @@ using UnityEngine;
 
 namespace Quest
 {
-    public class CurioView : MonoBehaviour, IPanel
+
+
+    public class CurioView : MonoBehaviour
     {
         [Header(" TBR")]
         [SerializeField] CurioViewPg1PtrEvents curioPg1; 
@@ -25,36 +28,36 @@ namespace Quest
            this.curioModel = curioModel;         
            this.curioColEvents= curioColEvents;
             curioBase = CurioService.Instance
-                        .curioController.GetCurioBase(curioModel.curioName); 
-           Load(); 
+                        .curioController.GetCurioBase(curioModel.curioName);           
             InitPage1();
+            Load();
         }
         void InitPage1()
-        {
-            curioPg1.InitPage1(this, curioModel, curioColEvents, curioNo);
-            curioPg2.InitPage2(this, curioModel, curioColEvents, curioNo);
+        {           
+            curioPg1.InitPage1(this, curioModel, curioColEvents, curioNo);            
             curioPg1.gameObject.SetActive(true);
             curioPg2.gameObject.SetActive(false);
         }
-        public void ShowPage2()
+        public void ShowPage2(Iitems item)
         {
+            curioPg2.InitPage2(this, curioModel, curioColEvents, curioNo, item);
             curioPg1.gameObject.SetActive(false);
             curioPg2.gameObject.SetActive(true);
+            // remove Item from player Comm inv
+            InvService.Instance.invMainModel.RemoveItemFrmCommInv(item);
         }
-
-        
         public void Load()
         {
-            UIControlServiceGeneral.Instance.TogglePanel(this.gameObject,true); 
+           gameObject.SetActive(true);
         }
         public void UnLoad()
         {
-            UIControlServiceGeneral.Instance.TogglePanel(this.gameObject, false);
-        }
-        public void Init()
-        {
+            curioColEvents.OnContinue();
+            gameObject.SetActive(false);
             
         }
+  
+     
     }
 }
 

@@ -58,10 +58,12 @@ namespace Quest
                                                     , charCtrl.charModel.charID, CharStateName.BurnHighDOT);
             }
             resultStr = "Explosion!";
+            resultStr2 = "Burning\nBlinded, 12 rds\n+1-2 Fire Res";
         }
 
         void Fx2()
         {
+            lootTypes.Clear();
             float chance2 = 50f;
             lootTypes.Add(ItemType.GenGewgaws);
             if (chance2.GetChance())
@@ -94,7 +96,10 @@ namespace Quest
             else
                 lootTypes.Add(ItemType.GenGewgaws);
 
-            resultStr = "What are chests for, eh?"; 
+            resultStr = "What are chests for, eh?";
+            resultStr2 = "Loot gained";
+
+            LootService.Instance.lootController.ShowLootTable(lootTypes); 
         }
     }
 }

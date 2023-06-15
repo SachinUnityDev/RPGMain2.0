@@ -48,7 +48,7 @@ namespace Quest
 
                 }
                 resultStr = "The strong scent makes you nauseous.";
-
+                resultStr2 = "Sickness gained\n-30% Hunger, eoq\n-1 Morale, eoq";
             }
             else
             {
@@ -77,10 +77,12 @@ namespace Quest
                 charCtrl.charStateController.ApplyImmunityBuff(CauseType.CharState, (int)curioName, charCtrl.charModel.charID
                                   , CharStateName.Despaired, TimeFrame.EndOfQuest, 1);
             }
-            resultStr = "The strong scent empowers you."; 
+            resultStr = "The strong scent empowers you.";
+            resultStr2 = "Immune to Despaired, eoq\n+1 Willpower";
         }
         void Fx2()
         {
+            lootTypes.Clear();
             float chance2 = 50f;
             if (chance2.GetChance())
                 lootTypes.Add(ItemType.Foods);
@@ -102,6 +104,8 @@ namespace Quest
             lootTypes.Add(ItemType.Scrolls);
 
             resultStr = "So much stuff was left intact.";
+            resultStr2 = "Loot gained";
+            LootService.Instance.lootController.ShowLootTable(lootTypes);
 
         }
 

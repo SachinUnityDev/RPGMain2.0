@@ -3,9 +3,6 @@ using Interactables;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
-
-
 namespace Quest
 {
 
@@ -33,11 +30,13 @@ namespace Quest
                     charCtrl.ChangeAttrib(CauseType.Curios, (int)curioName, charCtrl.charModel.charID,
                                         AttribName.vigor, 1);
                 }
-                resultStr = "Crate broke down into pieces and you ate the leftover food."; 
+                resultStr = "Crate broke down into pieces and you ate the leftover food.";
+                resultStr2 = "Full Hunger relief\nPoisoned\n+1 Vigor"; 
             }
             else
             {
                 //  Potion or Herb Food or Fruit Scroll or Tool Gewgaw Potion or Herb Gem
+                lootTypes.Clear();  
                 float chance2 = 50f;
                 if (chance2.GetChance())                
                     lootTypes.Add(ItemType.Potions);
@@ -64,6 +63,9 @@ namespace Quest
                 lootTypes.Add(ItemType.Gems);
 
                 resultStr = "Crate broke down into pieces and you found some loot.";
+                resultStr2 = "Loot gained";
+                LootService.Instance.lootController.ShowLootTable(lootTypes);
+
             }
         }
 

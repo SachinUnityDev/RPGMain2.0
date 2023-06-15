@@ -51,8 +51,12 @@ namespace Quest
         
         public void CurioInit(QRoomModel qRoomModel)
         {
+
             QRoomService.Instance.curio1.GetComponent<CurioColEvents>().InitCurio(qRoomModel);
             QRoomService.Instance.curio2.GetComponent<CurioColEvents>().InitCurio(qRoomModel);
+            CurioService.Instance.curioView.gameObject.SetActive(false); 
+                
+
         }
     }
 

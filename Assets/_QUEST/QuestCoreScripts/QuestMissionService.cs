@@ -41,6 +41,7 @@ namespace Quest
         {
             InitAllQuestModel();
             InitAllQuestbase();
+
         }
         public void On_QuestModeChg(QuestMode questMode)
         {

@@ -13,44 +13,27 @@ namespace Common
         public Action OnGameStart;
         public Action OnGameEnd;
 
-        public Action OnIntroBegin;
-        public Action OnIntroEnd; 
         public Action<LocationName> OnTownEnter;
         public Action<LocationName> OnTownExit;
-        public Action OnQuestBegin;
-        public Action OnQuestEnd;
-        public Action OnCombatBegin;  
-        public Action OnCombatEnd;
 
+        public Action<GameState> OnGameStateChg; 
         public event Action<QuestMode> OnQuestModeChg;
 
         public Action<GameState> OnStateStart;
-        public bool isGame = true;
+       
         void Start()
         {
-
+            OnGameStateChg += OnQuestStart; 
         }
-        public void On_IntroBegin()
-        {
-            // sound Service.init 
-            // Setting Service. init
-            // save service 
-
-            OnIntroBegin?.Invoke();
-        }
-        public void On_IntroEnd()
-        {
-            OnIntroEnd?.Invoke();
-        }
+        
         public void On_TownEnter(LocationName locationName)
-        {
-          
+        {          
             CalendarService.Instance.Init();
             EncounterService.Instance.EncounterInit();
             CharService.Instance.Init();
             UIControlServiceGeneral.Instance.InitUIGeneral();
             MapService.Instance.InitMapService();   
-            CurioService.Instance.InitCurioService();   
+            
             BestiaryService.Instance.Init();
             ItemService.Instance.Init();
             FameService.Instance.Init();
@@ -58,10 +41,17 @@ namespace Common
             TownService.Instance.Init(locationName);
             OnTownEnter?.Invoke(locationName);
             QuestMissionService.Instance.InitQuestMission();    
-
-
             LootService.Instance.InitLootService();
         }
+        void OnQuestStart(GameState gameState)
+        {
+            if(gameState == GameState.InQuest)
+            {
+                CurioService.Instance.InitCurioService();
+            }
+        }
+
+
 
         public void On_TownExit(LocationName locationName)
         {
@@ -71,36 +61,11 @@ namespace Common
         public void On_GameStart()
         {
             OnGameStart?.Invoke();
-           
-
         }
         public void On_GameEnd()
         {
             OnGameEnd?.Invoke(); 
         }
-     
-      
-     
-        public void On_QuestBegin()
-        {
-            OnQuestBegin?.Invoke(); 
-        }
-        public void On_QuestEnd()
-        {
-            OnQuestEnd?.Invoke(); 
-        }
-        public void On_CombatBegin()
-        {
-            OnCombatBegin?.Invoke(); 
-        }
-        public void On_CombatEnd()
-        {
-            OnCombatEnd?.Invoke();
-        }
-
-       
-
-
     }
 
 

@@ -55,11 +55,12 @@ namespace Quest
                                                          , charCtrl.charModel.charID, CharStateName.PoisonedHighDOT);
             }
             resultStr = "Well, no good would come out of vermins.";
-                
+            resultStr2 = "Sickness gained\n Poisoned";
 
         }
         void Fx2()
         {
+            lootTypes.Clear();
             float chance2 = 50f;
             if (chance2.GetChance())
                 lootTypes.Add(ItemType.Foods);
@@ -94,6 +95,9 @@ namespace Quest
                 lootTypes.Add(ItemType.Herbs);
 
             resultStr = "Couple of valuable items hidden in this dirty nest.";
+            resultStr2 = "Loot gained";
+            LootService.Instance.lootController.ShowLootTable(lootTypes);
+
         }
     }
 }

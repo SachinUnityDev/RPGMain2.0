@@ -28,6 +28,8 @@ namespace Quest
 
         public bool curio1Chked = false;
         public bool curio2Chked = false;
+        public CurioNames curio1Name;
+        public CurioNames curio2Name;
 
         public bool trigger1Chked = false;
         public bool trigger2Chked = false;
@@ -49,15 +51,19 @@ namespace Quest
         }
         public CurioNames GetCurio1Name()
         {
+            if(curio1Name != CurioNames.None) return curio1Name;
             if (allCurio1.Count == 0) return CurioNames.None;
             int index = GetCurioIndex(allCurio1);
-            return allCurio1[index]; 
+            curio1Name = allCurio1[index];
+            return curio1Name; 
         }
         public CurioNames GetCurio2Name()
         {
-            if(allCurio2.Count == 0) return CurioNames.None;
+            if (curio2Name != CurioNames.None) return curio2Name;
+            if (allCurio2.Count == 0) return CurioNames.None;
             int index = GetCurioIndex(allCurio2);
-            return allCurio2[index];
+            curio2Name = allCurio2[index];
+            return curio2Name;
         }
         public int GetCurioIndex(List<CurioNames> curioLs)
         {

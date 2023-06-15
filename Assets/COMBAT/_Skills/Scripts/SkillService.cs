@@ -150,12 +150,13 @@ namespace Combat
             // Cn be later Set to the start of Combat Event
           
             SkillApply += SkillEventtest;
-            GameEventService.Instance.OnCombatBegin += OnStartOfCombat; 
+            GameEventService.Instance.OnGameStateChg += OnStartOfCombat; 
             // CombatService.Instance.GetComponent<RoundController>().OnCharOnTurnSet += PopulateSkillTargets; 
         }
 
-        void OnStartOfCombat()
+        void OnStartOfCombat(GameState gameState)
         {
+            if (gameState != GameState.InCombat) return;
               CombatEventService.Instance.OnSOT += SetDefaultSkillForChar;
             CombatEventService.Instance.OnCharOnTurnSet += InitEnemySkillSelection; 
             CombatEventService.Instance.OnTargetClicked += TargetIsSelected;

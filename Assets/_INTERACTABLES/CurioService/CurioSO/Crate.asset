@@ -16,10 +16,11 @@ MonoBehaviour:
   toolName: 0
   toolName2: 0
   openDesc: '"Seems like a perfect object to crush."'
-  lootMoneyRange:
-  - silver: 3
+  lootMoneyMin:
+    silver: 3
     bronze: 0
-  - silver: 6
+  lootMoneyMax:
+    silver: 6
     bronze: 0
   curioN: {fileID: 21300000, guid: 40bbce6d3b2d01f48b278dc1e7b3b190, type: 3}
   curioHL: {fileID: 21300000, guid: 25ea727b3b176ac4b8ed079a3773ac29, type: 3}

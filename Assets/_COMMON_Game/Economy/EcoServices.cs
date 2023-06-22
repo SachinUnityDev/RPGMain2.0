@@ -5,6 +5,7 @@ using Interactables;
 using System.Linq;
 using System;
 using Town;
+using Quest;
 
 namespace Common
 {
@@ -20,11 +21,20 @@ namespace Common
         public EcoSO ecoSO;
         public event Action<Currency> OnInvMoneyChg;
         public event Action<Currency> OnStashMoneyChg;
-        public event Action<PocketType> OnPocketSelected; 
+        public event Action<PocketType> OnPocketSelected;
+
+        public EcoController ecoController; 
+
         void Start()
         {
-            econoModel = new EconoModel(ecoSO);
+            ecoController = transform.GetComponent<EcoController>();    
         }
+        public void InitEcoServices()
+        {
+            econoModel = new EconoModel(ecoSO);
+            ecoController.InitEcoController(econoModel); 
+        }
+
         public void On_PocketSelected(PocketType pocketType)
         {
             OnPocketSelected?.Invoke(pocketType); 
@@ -92,6 +102,12 @@ namespace Common
             econoModel.moneyInInv.AddMoney(amt);
             OnInvMoneyChg?.Invoke(econoModel.moneyInInv); 
         }
+        
+        public void AddMoney2PlayerQuest(Currency amt)
+        {
+            econoModel.moneyGainedInQ.AddMoney(amt);
+        }
+
 
 #region SAVE_LOAD SERVICES
         public void RestoreState()

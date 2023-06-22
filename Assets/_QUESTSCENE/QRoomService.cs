@@ -30,6 +30,12 @@ namespace Quest
         public SpriteRenderer curio2;
         public SpriteRenderer prop;
 
+        [Space(10)]
+        [Header("Interactions")]
+        public Transform interact1;
+        public Transform interact2;
+        public Transform interact3;
+
         [Header("Abbas")]
         public bool canAbbasMove = true;
         private void Start()

@@ -1,0 +1,181 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c011cab418f0ec041b77a645e2e15a64, type: 3}
+  m_Name: QBarkSO
+  m_EditorClassIdentifier: 
+  allBarkData:
+  - qBarkName: 1
+    InValidQMode: 01000000
+    charData:
+    - charName: 0
+      str: Rat squeak
+      audioSource: {fileID: 0}
+    - charName: 1
+      str: F.cking rats!
+      audioSource: {fileID: 0}
+  - qBarkName: 2
+    InValidQMode: 00000000
+    charData:
+    - charName: 0
+      str: Rat squeak
+      audioSource: {fileID: 0}
+    - charName: 1
+      str: Rats and bats and cats... I hate them all!
+      audioSource: {fileID: 0}
+    - charName: 3
+      str: Hey, don't be offensive!
+      audioSource: {fileID: 0}
+    - charName: 1
+      str: Sorry mate, forgot you are a catman!
+      audioSource: {fileID: 0}
+    - charName: 3
+      str: I'm not a catman, i am just a Macalaki!
+      audioSource: {fileID: 0}
+  - qBarkName: 3
+    InValidQMode: 00000000
+    charData:
+    - charName: 0
+      str: Rat squeak
+      audioSource: {fileID: 0}
+    - charName: 1
+      str: Rats and bats and cats... I hate them all!
+      audioSource: {fileID: 0}
+    - charName: 2
+      str: Is der any animal yu like?
+      audioSource: {fileID: 0}
+    - charName: 1
+      str: Yeah, you mate!
+      audioSource: {fileID: 0}
+    - charName: 2
+      str: Modershagger!
+      audioSource: {fileID: 0}
+  - qBarkName: 6
+    InValidQMode: 00000000
+    charData:
+    - charName: 0
+      str: Rat squeak
+      audioSource: {fileID: 0}
+    - charName: 1
+      str: Rats and bats and cats... I hate them all!
+      audioSource: {fileID: 0}
+    - charName: 7
+      str: I love rats, they are cute.
+      audioSource: {fileID: 0}
+    - charName: 1
+      str: Except when they bite!
+      audioSource: {fileID: 0}
+  - qBarkName: 6
+    InValidQMode: 00000000
+    charData:
+    - charName: 0
+      str: Rat squeak
+      audioSource: {fileID: 0}
+    - charName: 1
+      str: Rats and bats and cats... I hate them all!
+      audioSource: {fileID: 0}
+  - qBarkName: 7
+    InValidQMode: 00000000
+    charData:
+    - charName: 0
+      str: Rat squeak
+      audioSource: {fileID: 0}
+    - charName: 1
+      str: Rats and bats and cats... I hate them all!
+      audioSource: {fileID: 0}
+  - qBarkName: 8
+    InValidQMode: 00000000
+    charData:
+    - charName: 0
+      str: Bat squeak
+      audioSource: {fileID: 0}
+    - charName: 1
+      str: I got a bad feeling about this place...
+      audioSource: {fileID: 0}
+    - charName: 7
+      str: Me too!
+      audioSource: {fileID: 0}
+  - qBarkName: 12
+    InValidQMode: 00000000
+    charData:
+    - charName: 0
+      str: Bat squeak
+      audioSource: {fileID: 0}
+    - charName: 1
+      str: I got a bad feeling about this place.
+      audioSource: {fileID: 0}
+    - charName: 2
+      str: Yu superstichtous?
+      audioSource: {fileID: 0}
+    - charName: 1
+      str: No, i dont have stitches.
+      audioSource: {fileID: 0}
+    - charName: 2
+      str: Hgrrr! Shagger!
+      audioSource: {fileID: 0}
+  - qBarkName: 13
+    InValidQMode: 00000000
+    charData:
+    - charName: 0
+      str: Bat squeak
+      audioSource: {fileID: 0}
+    - charName: 1
+      str: I got a bad feeling about this place.
+      audioSource: {fileID: 0}
+    - charName: 3
+      str: Don't worry, you are not alone!
+      audioSource: {fileID: 0}
+    - charName: 1
+      str: You mean you got a bad feeling too?
+      audioSource: {fileID: 0}
+    - charName: 3
+      str: No! I am here to fight beside you!
+      audioSource: {fileID: 0}
+  - qBarkName: 14
+    InValidQMode: 00000000
+    charData:
+    - charName: 0
+      str: Bat squeak
+      audioSource: {fileID: 0}
+    - charName: 1
+      str: Fear is a tool, deftly wielded by the bats.
+      audioSource: {fileID: 0}
+  - qBarkName: 15
+    InValidQMode: 00000000
+    charData:
+    - charName: 0
+      str: Bat squeak
+      audioSource: {fileID: 0}
+    - charName: 1
+      str: Fear is a tool, deftly wielded by the bats.
+      audioSource: {fileID: 0}
+    - charName: 2
+      str: Ah no deaf! I hear yu!
+      audioSource: {fileID: 0}
+    - charName: 1
+      str: You are f.cking fool!
+      audioSource: {fileID: 0}
+    - charName: 2
+      str: Ah shag yur mama and she sayed same!
+      audioSource: {fileID: 0}
+  - qBarkName: 16
+    InValidQMode: 00000000
+    charData:
+    - charName: 1
+      str: Sewers, what a nice landscape! Smells like piss!
+      audioSource: {fileID: 0}
+  - qBarkName: 17
+    InValidQMode: 00000000
+    charData:
+    - charName: 1
+      str: Leave the shadows and confront me, you wretched vermins and nocturnal
+        scums!
+      audioSource: {fileID: 0}

@@ -33,7 +33,7 @@ namespace Common
             CharService.Instance.Init();
             UIControlServiceGeneral.Instance.InitUIGeneral();
             MapService.Instance.InitMapService();   
-            
+            EcoServices.Instance.InitEcoServices(); 
             BestiaryService.Instance.Init();
             ItemService.Instance.Init();
             FameService.Instance.Init();
@@ -42,6 +42,7 @@ namespace Common
             OnTownEnter?.Invoke(locationName);
             QuestMissionService.Instance.InitQuestMission();    
             LootService.Instance.InitLootService();
+            CurioService.Instance.InitCurioService();// test purpose only
         }
         void OnQuestStart(GameState gameState)
         {

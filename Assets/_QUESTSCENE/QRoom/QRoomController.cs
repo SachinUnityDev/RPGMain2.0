@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ServiceModel.Dispatcher;
 using UnityEngine;
 
 
@@ -19,7 +20,8 @@ namespace Quest
             allQNodeAllRoomModel.Add(allQNodeRoomModel);
             roomNo = 1;
             qRoomModel = allQNodeRoomModel.GetQRoomModel(roomNo);
-            CurioInit(qRoomModel); 
+            CurioInit(qRoomModel);
+            InteractInit(qRoomModel); 
         }
         public void Move2Room(int roomNo)
         {
@@ -55,9 +57,15 @@ namespace Quest
             QRoomService.Instance.curio1.GetComponent<CurioColEvents>().InitCurio(qRoomModel);
             QRoomService.Instance.curio2.GetComponent<CurioColEvents>().InitCurio(qRoomModel);
             CurioService.Instance.curioView.gameObject.SetActive(false); 
-                
-
         }
+        void InteractInit(QRoomModel qRoomModel)
+        {
+            QRoomService.Instance.interact1.GetComponent<InteractEColEvents>().InitInteract(qRoomModel);
+            QRoomService.Instance.interact2.GetComponent<InteractEColEvents>().InitInteract(qRoomModel);
+            QRoomService.Instance.interact3.GetComponent<InteractEColEvents>().InitInteract(qRoomModel);
+            //CurioService.Instance.curioView.gameObject.SetActive(false);
+        }
+
     }
 
 

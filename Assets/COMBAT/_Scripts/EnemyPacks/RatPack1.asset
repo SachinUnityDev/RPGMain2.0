@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e7574d4e9c9ba4ea4d1f111490aec1, type: 3}
   m_Name: RatPack1
   m_EditorClassIdentifier: 
-  enemyPack: 0
+  enemyPack: 1
   allEnemyDataInPack:
   - enemyName: 18
+    charID: 0
     preferredPos: 01000000
   - enemyName: 19
+    charID: 0
     preferredPos: 02000000
   - enemyName: 18
+    charID: 0
     preferredPos: 03000000
   loot:
     min: 3

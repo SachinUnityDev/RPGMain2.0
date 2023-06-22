@@ -21,6 +21,30 @@ MonoBehaviour:
   downRoomNo: 5
   allCurio1: 0300000009000000
   allCurio2: 1000000011000000
+  interact1:
+    stealthChance: 60
+    explorationChance: 60
+    tauntChance: 60
+    questEName: 0
+    allBarks: 0200000003000000070000000a0000000c0000000d0000000e00000011000000
+    enemyPack: 0
+    trapNames: 0
+  interact2:
+    stealthChance: 30
+    explorationChance: 60
+    tauntChance: 90
+    questEName: 0
+    allBarks: 
+    enemyPack: 6
+    trapNames: 0
+  interact3:
+    stealthChance: 50
+    explorationChance: 75
+    tauntChance: 100
+    questEName: 0
+    allBarks: 
+    enemyPack: 1
+    trapNames: 0
   prop: {fileID: 21300000, guid: b416e5ba9efdae340bfff214303703f4, type: 3}
   fgSprite: {fileID: 21300000, guid: a869048beb64dcc468b42e5dacfc7c68, type: 3}
   mapPortCord: {x: 57.4, y: -16.9}

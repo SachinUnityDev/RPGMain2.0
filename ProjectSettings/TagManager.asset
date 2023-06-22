@@ -9,6 +9,7 @@ TagManager:
   - SkillPanel
   - PerkSelectionPanel
   - Bullet
+  - QuestCanvas
   layers:
   - Default
   - TransparentFX

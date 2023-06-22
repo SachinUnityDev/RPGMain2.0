@@ -93,7 +93,7 @@ namespace Common
         public List<ItemData> earningsItems = new List<ItemData>();
 
         [Header("Money Share")]
-        public float earningsShare;   // Money
+        public int earningsShare;   // earning share (percent) out of 100
         public float earningShareBonus_percent; 
         
         [Header("Companion PreReq")]

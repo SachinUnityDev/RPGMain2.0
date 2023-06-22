@@ -14,7 +14,9 @@ namespace Quest
 
         public List<MapEModel> allMapEModels = new List<MapEModel>();
         public List<MapEbase> allMapEBases= new List<MapEbase>();
-        [SerializeField] int mapBaseCount = 0; 
+        [SerializeField] int mapBaseCount = 0;
+
+
 
         void Start()
         {

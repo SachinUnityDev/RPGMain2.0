@@ -2,7 +2,6 @@ using Common;
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-using System.Windows.Forms.DataVisualization.Charting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -31,7 +30,6 @@ namespace Quest
 
             headTrans.DOLocalMoveX(qRoomSO.mapPortCord.x, 0.1f);
             headTrans.DOLocalMoveY(qRoomSO.mapPortCord.y, 0.1f);
-
         }
 
 

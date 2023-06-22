@@ -8,6 +8,14 @@ namespace Common
     public class LevelService : MonoSingletonGeneric<LevelService>
     {
 
+        /// <summary>
+        /// move to ally and enemy controller
+        /// lvl Model allies to record and hold data in the proper format
+        /// 
+        /// 
+        /// </summary>
+
+
         public LevelUpSO levelUpSO;
         public LvlUpCompSO lvlUpCompSO;
         public LvlNExpSO lvlNExpSO;
@@ -92,34 +100,13 @@ namespace Common
 
             //int expNeeded = lvlNExpSO.GetTotalExpPts4Lvl((int)finalLvl);
             //if (ChkLvlUp(charModel, expNeeded))
-            //{
+            
             foreach (LvlData stat in lvlDataComp.allStatDataAuto)
-                {
-                    //if (stat.AttribName.IsAttribArmor())
-                    //{
-                    //    charController.ChangeAttrib(CauseType.LevelUp, 1, 1, AttribName.armorMin
-                    //        , stat.currValue, true);
-                        
-                    //    charController.ChangeAttrib(CauseType.LevelUp, 1, 1, AttribName.armorMax
-                    //       , stat.currValue, true);
-                    //// stack it up in level up model
-                    // }
-                    // else if(stat.AttribName.IsAttribDamage()) 
-                    // {
-                    //    charController.ChangeAttrib(CauseType.LevelUp, 1, 1, AttribName.dmgMin
-                    //            , stat.currValue, true);
-
-                    //    charController.ChangeAttrib(CauseType.LevelUp, 1, 1, AttribName.dmgMax
-                    //       , stat.currValue, true);
-
-                    // }
-                    // else
-                     //{
+                {                 
                         charController.ChangeAttrib(CauseType.LevelUp, 1, 1, stat.attribName
-                           , stat.val, true);
-                     //}
+                           , stat.val, true);                  
                 }
-           // }
+           
             charModel.charLvl++; 
         }
         void Add2ManPendingStack(Levels finalLvl)

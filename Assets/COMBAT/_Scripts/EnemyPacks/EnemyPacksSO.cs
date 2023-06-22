@@ -24,6 +24,7 @@ namespace Combat
 
     public enum EnemyPack
     {
+        None,
         RatPack1,
         RatPack2,
         RatPack3,

@@ -91,8 +91,8 @@ namespace Quest
     }
     public enum QRoomState
     {
-        None, 
-        Prep,         
+        None,
+        Prep,
         AutoWalk,
         Walk,
     }
@@ -106,8 +106,8 @@ namespace Quest
 
     public enum CityEState
     {
-        None, 
-        Locked, 
+        None,
+        Locked,
         UnLockedNAvail,
         UnAvailable, // pre req not matched but start condition met(Unlocked)
         Completed,
@@ -125,14 +125,14 @@ namespace Quest
     public enum Nodes
     {
         None,
-        RatInfest, 
+        RatInfest,
         ShipRats,
         HuntWild,
     }
     public enum NodeType
     {
-        None, 
-        TownNode, 
+        None,
+        TownNode,
         QuestNode,
         MapENode,
         CampNode,
@@ -145,6 +145,60 @@ namespace Quest
 
     // Map ENode ....can be node connection
     // 
+    public enum QuestENames
+    {
+        None,
+        Spidaboy,
+        RatArmy,
+    }
+
+    public enum QBarkNames
+    {
+        None,
+        Qbark_001,
+        Qbark_002,
+        Qbark_003,
+        Qbark_004,
+        Qbark_005,
+        Qbark_006,
+        Qbark_007,
+        Qbark_008,
+        Qbark_009,
+        Qbark_010,
+        Qbark_011,
+        Qbark_012,
+        Qbark_013,
+        Qbark_014,
+        Qbark_015,
+        Qbark_016,
+        Qbark_017,
+        Qbark_018,
+        Qbark_019,
+        Qbark_020,
+        Qbark_021,
+        Qbark_022,
+        Qbark_023,
+        Qbark_024,
+        Qbark_025,
+        Qbark_026,
+        Qbark_027,
+        Qbark_028,
+        Qbark_029,
+        Qbark_030,
+
+    }
+
+    public enum Traps
+    {
+        None, 
+        TrapSewers,  
+        TrapCave,
+        TrapJungle, 
+        TrapRainforest, 
+        TrapDesert, 
+        TrapSwamp, 
+
+    }
 
 }
 

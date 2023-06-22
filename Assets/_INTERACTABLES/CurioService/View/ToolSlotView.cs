@@ -26,7 +26,7 @@ namespace Quest
         private void Awake()
         {
             slotID = transform.GetSiblingIndex();
-            itemImg = transform.GetChild(0).GetChild(0).GetComponent<Image>();
+            itemImg = transform.GetChild(0).GetComponentInChildren<Image>();
             itemBG = transform.GetComponent<Image>();
             itemFrame = transform.GetChild(2);          
             // deSelect State...

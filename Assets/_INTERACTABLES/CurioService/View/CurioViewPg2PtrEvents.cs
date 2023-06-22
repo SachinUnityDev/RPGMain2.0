@@ -66,7 +66,7 @@ namespace Quest
             currTrans.GetComponent<DisplayCurrency>().Display(curr); 
 
             // ADD
-            EcoServices.Instance.AddMoney2PlayerInv(curr);
+            EcoServices.Instance.AddMoney2PlayerQuest(curr);
 
         }
     

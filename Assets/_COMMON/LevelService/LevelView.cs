@@ -60,6 +60,15 @@ namespace Common
             UnLoad();
         }
 
+        public void LevelViewInit()
+        {
+            // get abbas charModel on inv open
+            // make it work only for allies first
+            
+
+        }
+
+
         void PopulateOptionPendingList(CharModel charModel)
         {
             if (charModel == null) return;
@@ -106,48 +115,15 @@ namespace Common
             }
             string str1 = "";
             foreach (LvlData stat in allPendingOptions[index].allStatDataOption1)
-            {
-
-                //if(stat.attribName == AttribName.dmgMin)
-                //{
-                //    AttribData statMax = allPendingOptions[index]
-                //        .allStatDataOption1.Find(t => t.AttribName == AttribName.dmgMax); 
-                //    str1 = stat.currValue +"-"+statMax.currValue;
-
-                //}
-                //else if (stat.AttribName == AttribName.armorMin)
-                //{
-                //    AttribData statMax = allPendingOptions[index]
-                //                    .allStatDataOption1.Find(t => t.AttribName == AttribName.armorMax);
-                //    str1 = stat.currValue + "-" + statMax.currValue;
-                //}
-                //else if(!stat.AttribName.IsAttribDamage() || !stat.AttribName.IsAttribArmor())
-                //{
-                str1 += stat.val + " " + stat.attribName; 
-                //}
+            {       
+                str1 += stat.val + " " + stat.attribName;               
                 
             }
             opt1Btn.GetComponentInChildren<TextMeshProUGUI>().text = str1;
             string str2 = "";
             foreach (LvlData stat in allPendingOptions[index].allStatDataOption2)
             {
-
-                //if (stat.AttribName == AttribName.dmgMin)
-                //{
-                //    AttribData statMax = allPendingOptions[index]
-                //        .allStatDataOption1.Find(t => t.AttribName == AttribName.dmgMax);
-                //    str1 = stat.currValue + "-" + statMax.currValue;
-                //}
-                //else if (stat.AttribName == AttribName.armorMin)
-                //{
-                //    AttribData statMax = allPendingOptions[index]
-                //                    .allStatDataOption1.Find(t => t.AttribName == AttribName.armorMax);
-                //    str1 = stat.currValue + "-" + statMax.currValue;
-                //}
-                //else
-                //{
-                    str2 += stat.val + " " + stat.attribName;
-                //}                
+                    str2 += stat.val + " " + stat.attribName;                        
             }
             opt2Btn.GetComponentInChildren<TextMeshProUGUI>().text = str2;
         }
@@ -162,11 +138,8 @@ namespace Common
             index++;
             PopulateOptionsPanel();           
         }
-
-       
         void OnOptBtn2Pressed()
         {
-           
             currLvl = allPendingOptions[index].level;
             LevelService.Instance.lvlModel.RemoveOptions2PendingStack(charName, currLvl,2);
             LevelService.Instance.lvlModel.AddOptions2ChosenStack(charName
@@ -203,7 +176,6 @@ namespace Common
 
         public void Init()
         {
-       
             img = lvlUpBtn.GetComponent<Image>();
             img.sprite = spritePlus;
             UnLoad();

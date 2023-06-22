@@ -31,9 +31,10 @@ namespace Quest
         public CurioNames curio1Name;
         public CurioNames curio2Name;
 
-        public bool trigger1Chked = false;
-        public bool trigger2Chked = false;
-        public bool trigger3Chked = false;
+        [Header("Interact Data")]
+        public QRoomInteractData interact1Data;
+        public QRoomInteractData interact2Data;
+        public QRoomInteractData interact3Data;
 
         public QRoomModel(QRoomSO qRoomSO)
         {
@@ -45,6 +46,10 @@ namespace Quest
 
             allCurio1 = qRoomSO.allCurio1.DeepClone();
             allCurio2 = qRoomSO.allCurio2.DeepClone();
+
+            interact1Data= qRoomSO.interact1;
+            interact2Data = qRoomSO.interact2;
+            interact3Data = qRoomSO.interact3;
 
             upRoomNo = qRoomSO.upRoomNo;
             downRoomNo = qRoomSO.downRoomNo;
@@ -73,6 +78,21 @@ namespace Quest
                 return curioLs.Count-1;
         }
         
+        public QRoomInteractData GetInteractData(int i)
+        {
+            switch (i)
+            {
+                case 1:
+                    return interact1Data;
+                case 2:
+                    return interact2Data;
+                case 3:
+                    return interact3Data;
+                default: 
+                    return null;
+            }
+        }
+
 
     }
 }

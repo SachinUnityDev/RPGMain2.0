@@ -19,10 +19,16 @@ namespace Quest
         public AllMapExpTriggerSO allMapETriggerSO; 
         public AllMapESO allMapESO;
 
+        [Header("Map Encounter NTBR")]
         public MapEController mapEController;
-        public MapEFactory mapEFactory; 
+        public MapEFactory mapEFactory;
 
+        [Header("Quest Encounter NTBR")]
+        public QuestEFactory questEFactory;
+        public QuestEController questEController;
 
+        [Header("Quest Encounter TBR")]
+        public AllQuestESO allQuestESO;
 
 
         void Start()
@@ -33,13 +39,26 @@ namespace Quest
             mapEFactory= gameObject.GetComponent<MapEFactory>();
             mapEController= gameObject.GetComponent<MapEController>();
 
+            questEController= gameObject.GetComponent<QuestEController>();
+            questEFactory= gameObject.GetComponent<QuestEFactory>();    
+
         }
         public void EncounterInit()
         {
             cityEController.InitCityE(allCityESO);
             mapEController.InitMapE(allMapESO);
+            questEController.InitQuestE(allQuestESO);   
         }
-
+        private void Update()
+        {
+            if (questEController != null)
+            {
+                if (Input.GetKeyDown(KeyCode.C))
+                {
+                    questEController.ShowQuestE(null, QuestENames.Spidaboy); 
+                }
+            }
+        }
 
 
     }

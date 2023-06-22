@@ -12,7 +12,7 @@ namespace Quest
     {
         Dictionary<CurioNames, Type> allCurios;
         [SerializeField] int curioCount = 0;
-        void Start()
+        void Awake()
         {
             allCurios = new Dictionary<CurioNames, Type>();
             InitCurioBase();//  to test all temp traits in use

@@ -38,6 +38,8 @@ namespace Common
         public Currency moneyInStash = new Currency();
         public Currency moneyInInv = new Currency(); 
 
+        public Currency moneyGainedInQ= new Currency();
+
 
         public List<NPCMoneyData> allNPCMoneyData = new List<NPCMoneyData>(); 
 

@@ -60,7 +60,7 @@ namespace Common
         [Header("Earnings In Quest")]
         // money and Item 
         public List<ItemData> earningsItems = new List<ItemData>();
-        public float earningShare; 
+        public int earningShare; 
 
         [Header("Companion PreReq")]
         public List<ItemData> CompanionPreReqOpt1 = new List<ItemData>();

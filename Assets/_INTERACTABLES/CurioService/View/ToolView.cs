@@ -19,7 +19,7 @@ namespace Quest
         [SerializeField] Iitems toolSlot1 = null; 
         [SerializeField] Iitems toolSlot2 = null;
         public Iitems toolSelect = null;
-        public void InitTootList(ToolNames toolName1, ToolNames toolName2)
+        public void InitToolList(ToolNames toolName1, ToolNames toolName2)
         {
 
             if (toolName1 != ToolNames.None)

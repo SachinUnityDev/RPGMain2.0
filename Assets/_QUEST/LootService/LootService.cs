@@ -26,8 +26,9 @@ namespace Quest
 
         public void InitLootService()
         {
-            LandscapeNames landscapeName =
-                            LandscapeService.Instance.currLandscape; 
+            //LandscapeNames landscapeName =
+            //                LandscapeService.Instance.currLandscape; 
+            LandscapeNames landscapeName = LandscapeNames.Sewers; 
             lootController.InitLootController(landscapeName);
         }
 
@@ -37,9 +38,9 @@ namespace Quest
         {
             if(Input.GetKeyDown(KeyCode.L))
             {               
-                lootController.ShowLootTable(new List<ItemType>()
-                {ItemType.Potions, ItemType.GenGewgaws, ItemType.PoeticGewgaws, ItemType.Gems, ItemType.SagaicGewgaws,
-                ItemType.Fruits, ItemType.Foods, ItemType.TradeGoods});
+                //lootController.ShowLootTable(new List<ItemType>()
+                //{ItemType.Potions, ItemType.GenGewgaws, ItemType.PoeticGewgaws, ItemType.Gems, ItemType.SagaicGewgaws,
+                //ItemType.Fruits, ItemType.Foods, ItemType.TradeGoods});
                 //
             }
         }

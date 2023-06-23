@@ -77,7 +77,8 @@ namespace Quest
 
             resultStr = "Dead does not need loot, why not take it?";
             resultStr2 = "Loot gained";
-            LootService.Instance.lootController.ShowLootTable(lootTypes);
+            Transform curioViewTrans = CurioService.Instance.curioView.gameObject.transform;
+            LootService.Instance.lootController.ShowLootTable(lootTypes, curioViewTrans);
 
         }
 

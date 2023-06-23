@@ -64,7 +64,8 @@ namespace Quest
 
                 resultStr = "Crate broke down into pieces and you found some loot.";
                 resultStr2 = "Loot gained";
-                LootService.Instance.lootController.ShowLootTable(lootTypes);
+                Transform curioViewTrans = CurioService.Instance.curioView.gameObject.transform;
+                LootService.Instance.lootController.ShowLootTable(lootTypes, curioViewTrans);
 
             }
         }

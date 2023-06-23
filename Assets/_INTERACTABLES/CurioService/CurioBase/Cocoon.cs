@@ -92,7 +92,8 @@ namespace Quest
 
             resultStr = "Carefully woven web still holds bunch of items together.";
             resultStr2 = "Loot gained";
-            LootService.Instance.lootController.ShowLootTable(lootTypes);
+            Transform curioViewTrans = CurioService.Instance.curioView.gameObject.transform;
+            LootService.Instance.lootController.ShowLootTable(lootTypes, curioViewTrans); ;
 
         }
     }

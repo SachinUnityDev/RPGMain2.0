@@ -98,8 +98,8 @@ namespace Quest
 
             resultStr = "What are chests for, eh?";
             resultStr2 = "Loot gained";
-
-            LootService.Instance.lootController.ShowLootTable(lootTypes); 
+            Transform curioViewTrans = CurioService.Instance.curioView.gameObject.transform; 
+            LootService.Instance.lootController.ShowLootTable(lootTypes, curioViewTrans); 
         }
     }
 }

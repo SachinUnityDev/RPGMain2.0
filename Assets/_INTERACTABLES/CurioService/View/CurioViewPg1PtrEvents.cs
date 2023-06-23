@@ -57,7 +57,7 @@ namespace Quest
 
         void FillSlot()
         {
-            toolView.InitTootList(curioModel.toolName, curioModel.toolName2);             
+            toolView.InitToolList(curioModel.toolName, curioModel.toolName2);             
         }
 
 

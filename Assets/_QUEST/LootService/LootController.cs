@@ -15,14 +15,13 @@ namespace Quest
         {
 
         }
-        public void ShowLootTable(List<ItemType> allItemType)
+        public void ShowLootTable(List<ItemType> allItemType, Transform parentTrans)
         {
             LandscapeNames landscapeNames = LandscapeNames.Sewers;
             lootBase = LootService.Instance.lootFactory.GetLootBase(landscapeNames);
             List<ItemDataWithQty> itemLS = lootBase.GetLootList(allItemType);
 
-
-          LootService.Instance.lootView.InitLootList(itemLS);
+             LootService.Instance.lootView.InitLootList(itemLS, parentTrans);
         }
         public void InitLootController(LandscapeNames landscapeName)
         {

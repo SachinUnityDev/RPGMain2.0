@@ -54,8 +54,8 @@ namespace Quest
                 resultStr = "Loot shines upon your face. Take them, all yours!";
                 resultStr2 = "Loot gained";
 
-                LootService.Instance.lootController.ShowLootTable(lootTypes);
-
+                Transform curioViewTrans = CurioService.Instance.curioView.gameObject.transform;
+                LootService.Instance.lootController.ShowLootTable(lootTypes, curioViewTrans);
             }
         }
         public override void CurioInteractWithTool()

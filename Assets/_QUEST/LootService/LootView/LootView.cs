@@ -9,6 +9,7 @@ using UnityEngine;
 using System.Linq;
 using Town;
 using System;
+using DG.Tweening;
 
 namespace Quest
 {
@@ -61,7 +62,7 @@ namespace Quest
             leftBtn.onClick.AddListener(OnLeftBtnPressed);
             rightBtn.onClick.AddListener(OnRightBtnPressed);
         }
-        public void InitLootList(List<ItemDataWithQty> lootList)
+        public void InitLootList(List<ItemDataWithQty> lootList, Transform trans)
         {
             this.lootList.Clear();this.selectedList.Clear();
             foreach (ItemDataWithQty itemQty in lootList)
@@ -78,6 +79,17 @@ namespace Quest
             if (lootList.Count % 6 != 0)
                 max++;
             FillScrollSlots();
+            PosLootTable(trans);
+        }
+
+        void PosLootTable(Transform parentTrans)
+        {
+            //transform.SetParent(parentTrans);  
+            //Vector3 pos = transform.position;
+
+            //RectTransform rt = transform.GetComponent<RectTransform>();
+            //float x  = rt.sizeDelta.x/2 + pos.x;
+            //transform.DOLocalMove(new Vector3(x, pos.y, pos.z), 0.1f);
         }
         void FillScrollSlots()
         {  

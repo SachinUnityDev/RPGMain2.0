@@ -96,7 +96,8 @@ namespace Quest
 
             resultStr = "Couple of valuable items hidden in this dirty nest.";
             resultStr2 = "Loot gained";
-            LootService.Instance.lootController.ShowLootTable(lootTypes);
+            Transform curioViewTrans = CurioService.Instance.curioView.gameObject.transform;
+            LootService.Instance.lootController.ShowLootTable(lootTypes, curioViewTrans);
 
         }
     }

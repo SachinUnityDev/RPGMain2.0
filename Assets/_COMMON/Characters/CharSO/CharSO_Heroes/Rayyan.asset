@@ -53,7 +53,7 @@ MonoBehaviour:
   - itemType: 4
     itemName: 0
     genGewgawQ: 0
-  earningShare: 0.2
+  earningShare: 0
   CompanionPreReqOpt1:
   - itemType: 5
     itemName: 0
@@ -205,14 +205,14 @@ MonoBehaviour:
   - AttribName: 20
     currValue: 0
     baseValue: 0
-    desc: Armor Max
+    desc: Percentage value to mitigate incoming Dark damage.
     minLimit: 0
     maxLimit: 100
     isClamped: 0
   - AttribName: 21
     currValue: 0
     baseValue: 0
-    desc: Damage max
+    desc: Percentage value to mitigate incoming Dark damage.
     minLimit: 0
     maxLimit: 100
     isClamped: 0

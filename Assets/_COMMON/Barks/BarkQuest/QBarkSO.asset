@@ -14,168 +14,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allBarkData:
   - qBarkName: 1
-    InValidQMode: 01000000
-    charData:
-    - charName: 0
-      str: Rat squeak
-      audioSource: {fileID: 0}
-    - charName: 1
-      str: F.cking rats!
-      audioSource: {fileID: 0}
-  - qBarkName: 2
     InValidQMode: 00000000
-    charData:
+    allCharData:
     - charName: 0
       str: Rat squeak
-      audioSource: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: e4b9fbacc5f81484ea317ed1a0c4cf6d, type: 3}
     - charName: 1
-      str: Rats and bats and cats... I hate them all!
-      audioSource: {fileID: 0}
-    - charName: 3
-      str: Hey, don't be offensive!
-      audioSource: {fileID: 0}
-    - charName: 1
-      str: Sorry mate, forgot you are a catman!
-      audioSource: {fileID: 0}
-    - charName: 3
-      str: I'm not a catman, i am just a Macalaki!
-      audioSource: {fileID: 0}
-  - qBarkName: 3
-    InValidQMode: 00000000
-    charData:
-    - charName: 0
-      str: Rat squeak
-      audioSource: {fileID: 0}
-    - charName: 1
-      str: Rats and bats and cats... I hate them all!
-      audioSource: {fileID: 0}
+      str: I am abbas
+      audioClip: {fileID: 8300000, guid: cbb39a6437e1d15419c12b06e19570c1, type: 3}
     - charName: 2
-      str: Is der any animal yu like?
-      audioSource: {fileID: 0}
+      str: I am abbas
+      audioClip: {fileID: 8300000, guid: 03d3bd4a26cb2524e9ddd4300e44f93e, type: 3}
     - charName: 1
-      str: Yeah, you mate!
-      audioSource: {fileID: 0}
-    - charName: 2
-      str: Modershagger!
-      audioSource: {fileID: 0}
+      str: I am abbas
+      audioClip: {fileID: 8300000, guid: 0dcd7531bf96d154bbcc0229ba8021a9, type: 3}
   - qBarkName: 6
     InValidQMode: 00000000
-    charData:
-    - charName: 0
-      str: Rat squeak
-      audioSource: {fileID: 0}
+    allCharData:
     - charName: 1
-      str: Rats and bats and cats... I hate them all!
-      audioSource: {fileID: 0}
-    - charName: 7
-      str: I love rats, they are cute.
-      audioSource: {fileID: 0}
-    - charName: 1
-      str: Except when they bite!
-      audioSource: {fileID: 0}
+      str: Abbas
+      audioClip: {fileID: 8300000, guid: 26ef6a122b9b1e842a8a758f264834e8, type: 3}
+    - charName: 2
+      str: baran
+      audioClip: {fileID: 8300000, guid: 03d3bd4a26cb2524e9ddd4300e44f93e, type: 3}
   - qBarkName: 6
     InValidQMode: 00000000
-    charData:
-    - charName: 0
-      str: Rat squeak
-      audioSource: {fileID: 0}
-    - charName: 1
-      str: Rats and bats and cats... I hate them all!
-      audioSource: {fileID: 0}
+    allCharData: []
   - qBarkName: 7
     InValidQMode: 00000000
-    charData:
-    - charName: 0
-      str: Rat squeak
-      audioSource: {fileID: 0}
-    - charName: 1
-      str: Rats and bats and cats... I hate them all!
-      audioSource: {fileID: 0}
+    allCharData: []
   - qBarkName: 8
     InValidQMode: 00000000
-    charData:
-    - charName: 0
-      str: Bat squeak
-      audioSource: {fileID: 0}
-    - charName: 1
-      str: I got a bad feeling about this place...
-      audioSource: {fileID: 0}
-    - charName: 7
-      str: Me too!
-      audioSource: {fileID: 0}
+    allCharData: []
   - qBarkName: 12
     InValidQMode: 00000000
-    charData:
-    - charName: 0
-      str: Bat squeak
-      audioSource: {fileID: 0}
-    - charName: 1
-      str: I got a bad feeling about this place.
-      audioSource: {fileID: 0}
-    - charName: 2
-      str: Yu superstichtous?
-      audioSource: {fileID: 0}
-    - charName: 1
-      str: No, i dont have stitches.
-      audioSource: {fileID: 0}
-    - charName: 2
-      str: Hgrrr! Shagger!
-      audioSource: {fileID: 0}
+    allCharData: []
   - qBarkName: 13
     InValidQMode: 00000000
-    charData:
-    - charName: 0
-      str: Bat squeak
-      audioSource: {fileID: 0}
-    - charName: 1
-      str: I got a bad feeling about this place.
-      audioSource: {fileID: 0}
-    - charName: 3
-      str: Don't worry, you are not alone!
-      audioSource: {fileID: 0}
-    - charName: 1
-      str: You mean you got a bad feeling too?
-      audioSource: {fileID: 0}
-    - charName: 3
-      str: No! I am here to fight beside you!
-      audioSource: {fileID: 0}
+    allCharData: []
   - qBarkName: 14
     InValidQMode: 00000000
-    charData:
-    - charName: 0
-      str: Bat squeak
-      audioSource: {fileID: 0}
-    - charName: 1
-      str: Fear is a tool, deftly wielded by the bats.
-      audioSource: {fileID: 0}
+    allCharData: []
   - qBarkName: 15
     InValidQMode: 00000000
-    charData:
-    - charName: 0
-      str: Bat squeak
-      audioSource: {fileID: 0}
-    - charName: 1
-      str: Fear is a tool, deftly wielded by the bats.
-      audioSource: {fileID: 0}
-    - charName: 2
-      str: Ah no deaf! I hear yu!
-      audioSource: {fileID: 0}
-    - charName: 1
-      str: You are f.cking fool!
-      audioSource: {fileID: 0}
-    - charName: 2
-      str: Ah shag yur mama and she sayed same!
-      audioSource: {fileID: 0}
+    allCharData: []
   - qBarkName: 16
     InValidQMode: 00000000
-    charData:
-    - charName: 1
-      str: Sewers, what a nice landscape! Smells like piss!
-      audioSource: {fileID: 0}
+    allCharData: []
   - qBarkName: 17
     InValidQMode: 00000000
-    charData:
-    - charName: 1
-      str: Leave the shadows and confront me, you wretched vermins and nocturnal
-        scums!
-      audioSource: {fileID: 0}
+    allCharData: []

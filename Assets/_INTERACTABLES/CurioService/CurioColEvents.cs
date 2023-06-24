@@ -55,7 +55,6 @@ namespace Quest
             SetSprite();
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
             QRoomService.Instance.canAbbasMove= true;  
-           
         }
         void SetCollider()
         {
@@ -94,8 +93,11 @@ namespace Quest
         }
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            gameObject.GetComponent<SpriteRenderer>().sprite = curioSO.curioHL;
-            CurioService.Instance.curioView.InitCurioView(this, curioModel, curioNo);
+            if(collision.gameObject.tag == "Player")
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = curioSO.curioHL;
+                CurioService.Instance.curioView.InitCurioView(this, curioModel, curioNo);
+            }            
         }
     }
 }

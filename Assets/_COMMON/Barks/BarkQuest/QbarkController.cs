@@ -7,25 +7,31 @@ using UnityEngine;
 
 namespace Quest
 {
-
-
     public class QbarkController : MonoBehaviour
     {
         public QBarkSO qBarkSO;
         [SerializeField]List<BarkData> allBarkDataSelect = new List<BarkData>();
+
+        public QbarkView qbarkView; 
         void Start()
         {
 
         }
 
-        
+        public bool ShowBark(List<QBarkNames> barkNames, InteractEColEvents intColEvents)
+        {
+            GetBarkData(barkNames);
+            if (allBarkDataSelect.Count == 0)
+                return false; 
+            int index = UnityEngine.Random.Range(0,allBarkDataSelect.Count);
+            qbarkView.InitBark(allBarkDataSelect[index].allCharData, intColEvents); 
+            return true;
+        }
         public List<BarkData> GetBarkData(List<QBarkNames> qBarkNames)
         {
             allBarkDataSelect = qBarkSO.GetBarkData(qBarkNames);            
             RemoveOnQModeBasis();
             RemoveOnCharNameBasis();
-
-
             return allBarkDataSelect;
         }
 
@@ -33,7 +39,7 @@ namespace Quest
         {
             foreach (BarkData barkData in allBarkDataSelect.ToList())
             {
-                foreach (BarkCharData lineData in barkData.charData)
+                foreach (BarkCharData lineData in barkData.allCharData)
                 {
                     if (lineData.charName == CharNames.None)
                         continue;
@@ -64,9 +70,7 @@ namespace Quest
             {
                 GetBarkData(new List<QBarkNames>() { QBarkNames.Qbark_001
                     , QBarkNames.Qbark_003, QBarkNames.Qbark_006, QBarkNames.Qbark_007,
-                      QBarkNames.Qbark_012  });
-                
-
+                      QBarkNames.Qbark_012});
             }
         }
 

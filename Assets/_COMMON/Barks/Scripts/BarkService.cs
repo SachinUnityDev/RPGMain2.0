@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Quest;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,12 +9,13 @@ namespace Common
     public class BarkService : MonoSingletonGeneric<BarkService>
     {
         // Start is called before the first frame update
-        public AllBarkSO allBarkSO; 
-         
+        public AllBarkSO allBarkSO;
+        public QbarkController qbarkController; 
         
 
         void Start()
         {
+            qbarkController = gameObject.GetComponent<QbarkController>();
             // no controllers needed 
             // one line call to manage UI 
             // barkAudio controller to manager sound files 

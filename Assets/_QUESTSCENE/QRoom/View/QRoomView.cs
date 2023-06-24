@@ -55,11 +55,21 @@ namespace Quest
         {
             Sequence chgSeq = DOTween.Sequence();
 
-            chgSeq.Append(fadeScreen.GetComponent<Image>().DOFade(1f, 0.15f))                 
-                  .Append(abbasGO.transform.DOLocalMoveX(AbbasRoomInitPos, 0.25f))
-                   .AppendInterval(0.5f)
-                  .Append(fadeScreen.GetComponent<Image>().DOFade(0f, 1f))                  
+            chgSeq
+                 //.AppendCallback(() =>
+                 //{
+                 //    abbasGO.GetComponent<BoxCollider2D>().enabled = false;
+                 //  //  abbasGO.GetComponent<QAbbasMovementController>().movement = 0;
+                 //})
+
+                  .Append(fadeScreen.GetComponent<Image>().DOFade(1f, 0.15f))                 
+                  .Append(abbasGO.transform.DOLocalMoveX(AbbasRoomInitPos, 0.1f))
+                  //.OnComplete(()=> { abbasGO.GetComponent<BoxCollider2D>().enabled = true; })
+                  .AppendInterval(0.5f)
+                  .Append(fadeScreen.GetComponent<Image>().DOFade(0f, 1f))                 
                   ;
+
+            chgSeq.Play();    
         }
      
 
@@ -108,14 +118,7 @@ namespace Quest
             }
         }
 
-        void OnCurioInit()
-        {
-            // get curio names from the Q ROOM model  
-            // pass on to individual CurioViews 
-
-
-        }
-
+     
   
     }
 }

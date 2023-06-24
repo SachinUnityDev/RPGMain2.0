@@ -31,7 +31,7 @@ namespace Quest
     {
         public QBarkNames qBarkName;
         public List<QuestMode> InValidQMode = new List<QuestMode>();
-        public List<BarkCharData> charData = new List<BarkCharData>();
+        public List<BarkCharData> allCharData = new List<BarkCharData>();
     }
     [System.Serializable]
     public class BarkCharData
@@ -39,7 +39,7 @@ namespace Quest
         public CharNames charName;
         [TextArea(2,5)]
         public string str;
-        public AudioSource audioSource;      
+        public AudioClip audioClip;      
     }
 
   

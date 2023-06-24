@@ -36,6 +36,10 @@ namespace Quest
         public QRoomInteractData interact2Data;
         public QRoomInteractData interact3Data;
 
+        public bool interact1Chked = false;
+        public bool interact2Chked = false;
+        public bool interact3Chked = false;
+
         public QRoomModel(QRoomSO qRoomSO)
         {
             questNames = qRoomSO.questNames;

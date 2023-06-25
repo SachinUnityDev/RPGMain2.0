@@ -81,7 +81,6 @@ namespace Quest
             FillScrollSlots();
             PosLootTable(trans);
         }
-
         void PosLootTable(Transform parentTrans)
         {
             //transform.SetParent(parentTrans);  
@@ -106,7 +105,7 @@ namespace Quest
                 else
                 {
                     containerTrans.GetChild(i).GetComponent<LootSlotView>()
-                  .InitSlot(null,this);
+                    . InitSlot(null,this);
                 }
             }
         }
@@ -171,9 +170,6 @@ namespace Quest
             UnLoad(); 
 
         }
-
-      
-
         void OnLeftBtnPressed()
         {
             if (Time.time - prevLeftClick < 0.3f) return;
@@ -224,12 +220,16 @@ namespace Quest
         }
         public void Load()
         {
+            LootService.Instance.isLootOpen= true;  
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
         }
 
         public void UnLoad()
         {
+            index = 0; 
+            LootService.Instance.isLootOpen = false;
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
+            UIControlServiceGeneral.Instance.ToggleOffNotify();
         }
         #endregion
     }

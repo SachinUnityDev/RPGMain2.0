@@ -64,32 +64,43 @@ namespace Quest
         {
             lootTypes.Clear();
             float chance2 = 50f;
-            lootTypes.Add(ItemType.GenGewgaws);
-            if (chance2.GetChance())
-                lootTypes.Add(ItemType.Potions);
-            else
-                lootTypes.Add(ItemType.Herbs);
-            if (chance2.GetChance())
-                lootTypes.Add(ItemType.Foods);
-            else
-                lootTypes.Add(ItemType.Fruits);
-            if (chance2.GetChance())
-                lootTypes.Add(ItemType.Herbs);
-            else
-                lootTypes.Add(ItemType.Potions);
-            if (chance2.GetChance())
-                lootTypes.Add(ItemType.PoeticGewgaws);
-            else
-                lootTypes.Add(ItemType.GenGewgaws);
-            if (chance2.GetChance())
-                lootTypes.Add(ItemType.Tools);
-            else
-                lootTypes.Add(ItemType.Gems);
-            if (chance2.GetChance())
-                lootTypes.Add(ItemType.Fruits);
-            else
-                lootTypes.Add(ItemType.Foods);
-
+            questMode = QuestMissionService.Instance.currQuestMode;
+            if (questMode == QuestMode.Stealth || questMode == QuestMode.Exploration
+                                           || questMode == QuestMode.Taunt)
+            {
+                lootTypes.Add(ItemType.GenGewgaws); //1
+                if (chance2.GetChance())  //2
+                    lootTypes.Add(ItemType.Potions);
+                else
+                    lootTypes.Add(ItemType.Herbs);
+                if (chance2.GetChance()) //3
+                    lootTypes.Add(ItemType.Foods);
+                else
+                    lootTypes.Add(ItemType.Fruits);
+                if (chance2.GetChance()) //4
+                    lootTypes.Add(ItemType.Herbs);
+                else
+                    lootTypes.Add(ItemType.Potions);
+                if (chance2.GetChance()) //5
+                    lootTypes.Add(ItemType.PoeticGewgaws);
+                else
+                    lootTypes.Add(ItemType.GenGewgaws);
+            }
+            if (questMode == QuestMode.Exploration
+                                           || questMode == QuestMode.Taunt)
+            {
+                if (chance2.GetChance()) //6
+                    lootTypes.Add(ItemType.Tools);
+                else
+                    lootTypes.Add(ItemType.Gems);
+            }
+            if (questMode == QuestMode.Taunt)
+            {
+                if (chance2.GetChance()) //7
+                    lootTypes.Add(ItemType.Fruits);
+                else
+                    lootTypes.Add(ItemType.Foods);
+            }
             resultStr = "Carefully woven web still holds bunch of items together.";
             resultStr2 = "Loot gained";
             Transform curioViewTrans = CurioService.Instance.curioView.gameObject.transform;

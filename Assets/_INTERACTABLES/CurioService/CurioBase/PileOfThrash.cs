@@ -84,25 +84,36 @@ namespace Quest
         {
             lootTypes.Clear();
             float chance2 = 50f;
-            if (chance2.GetChance())
-                lootTypes.Add(ItemType.Foods);
-            else
-                lootTypes.Add(ItemType.Fruits);
-            if (chance2.GetChance())
-                lootTypes.Add(ItemType.Foods);
-            else
-                lootTypes.Add(ItemType.Herbs);
-            if (chance2.GetChance())
-                lootTypes.Add(ItemType.Foods);
-            else
-                lootTypes.Add(ItemType.Potions);
-            if (chance2.GetChance())
-                lootTypes.Add(ItemType.Foods);
-            else
-                lootTypes.Add(ItemType.GenGewgaws);
-            lootTypes.Add(ItemType.Herbs);
-            lootTypes.Add(ItemType.Scrolls);
-
+            questMode = QuestMissionService.Instance.currQuestMode;
+            if (questMode == QuestMode.Stealth || questMode == QuestMode.Exploration
+                                        || questMode == QuestMode.Taunt)
+            {
+                if (chance2.GetChance()) //1
+                    lootTypes.Add(ItemType.Foods);
+                else
+                    lootTypes.Add(ItemType.Fruits);
+                if (chance2.GetChance()) //2
+                    lootTypes.Add(ItemType.Foods);
+                else
+                    lootTypes.Add(ItemType.Herbs);
+                if (chance2.GetChance()) //3
+                    lootTypes.Add(ItemType.Foods);
+                else
+                    lootTypes.Add(ItemType.Potions);
+                if (chance2.GetChance()) //4
+                    lootTypes.Add(ItemType.Foods);
+                else
+                    lootTypes.Add(ItemType.GenGewgaws);
+            }
+            if (questMode == QuestMode.Exploration
+                                               || questMode == QuestMode.Taunt)
+            {
+                lootTypes.Add(ItemType.Herbs);//5
+            }
+            if (questMode == QuestMode.Taunt)
+            {
+                lootTypes.Add(ItemType.Scrolls); //6
+            }
             resultStr = "So much stuff was left intact.";
             resultStr2 = "Loot gained";
             Transform curioViewTrans = CurioService.Instance.curioView.gameObject.transform;

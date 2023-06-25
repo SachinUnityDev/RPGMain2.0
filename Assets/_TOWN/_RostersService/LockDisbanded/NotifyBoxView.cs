@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -31,7 +32,8 @@ namespace Common
         {
             continueBtn.onClick.AddListener(OnContinueBtnPressed); 
             exitBtn.onClick.AddListener(OnCloseBtnPressed);
-            toggleUI.onValueChanged.AddListener(OnTogglePressed); 
+            toggleUI.onValueChanged.AddListener(OnTogglePressed);
+            UnLoad();
         }
          
         void OnTogglePressed(bool toggle)
@@ -43,6 +45,7 @@ namespace Common
         {
             this.notify= notify;
             this.notifyName = notifyName;
+           
             notifyModel = UIControlServiceGeneral.Instance.notifyController.GetNotifyModel(notifyName);
             if (notifyModel.isDontShowAgainTicked)
             {
@@ -57,7 +60,7 @@ namespace Common
             notifytxt.text = notifyModel.notifyStr;
         }
 
-        void OnContinueBtnPressed()
+        public void OnContinueBtnPressed()
         {
             notify.OnNotifyAnsPressed();
             UnLoad(); 

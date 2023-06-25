@@ -141,7 +141,7 @@ namespace Common
                 currOpenPanels.Remove(go);
 
             go.SetActive(turnON); 
-            go.transform.DOScale(1f, 0.1f);
+            //go.transform.DOScale(1f, 0.01f);
             CanvasGroup canvasGrp = go?.GetComponent<CanvasGroup>();
             if (canvasGrp != null)
             {
@@ -155,7 +155,14 @@ namespace Common
                     panel.Load();
             }
         }
-
+        public void ToggleOffNotify()
+        {
+           // TogglePanel(go, turnOn);
+            int index =
+            currOpenPanels.FindIndex(t => t.GetComponent<NotifyBoxView>() != null);
+            if (index != -1)
+                currOpenPanels[index].GetComponent<NotifyBoxView>().UnLoad();
+        }
         public void TogglePanelOnInGrp(GameObject go, bool turnON)  
         {
             Transform goParent = go.transform.parent;

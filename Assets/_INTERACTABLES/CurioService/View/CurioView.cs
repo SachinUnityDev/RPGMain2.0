@@ -1,4 +1,5 @@
 using Common;
+using DG.Tweening;
 using Interactables;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace Quest
 {
 
 
-    public class CurioView : MonoBehaviour
+    public class CurioView : MonoBehaviour, INotify
     {
         [Header(" TBR")]
         [SerializeField] CurioViewPg1PtrEvents curioPg1; 
@@ -21,6 +22,10 @@ namespace Quest
         public CurioBase curioBase; 
         CurioColEvents curioColEvents;
 
+        [Header("Notify Box View")]
+        NotifyBoxView notifyBoxView; 
+        public NotifyName notifyName { get ; set; }
+        public bool isDontShowItAgainTicked { get; set; }
 
         public void InitCurioView(CurioColEvents curioColEvents, CurioModel curioModel, int curioNo)
         {
@@ -37,6 +42,7 @@ namespace Quest
             curioPg1.InitPage1(this, curioModel, curioColEvents, curioNo);            
             curioPg1.gameObject.SetActive(true);
             curioPg2.gameObject.SetActive(false);
+            notifyBoxView = transform.GetChild(2).GetComponent<NotifyBoxView>();
         }
         public void ShowPage2(Iitems item)
         {
@@ -53,11 +59,23 @@ namespace Quest
         public void UnLoad()
         {
             curioColEvents.OnContinue();
-            gameObject.SetActive(false);
-            
+            gameObject.SetActive(false);            
         }
-  
-     
+
+        public void OnNotifyAnsPressed()
+        {
+            LootService.Instance.lootView.UnLoad(); 
+            UnLoad();
+        }
+
+        public void LootNotifyBoxChk()
+        {          
+            NotifyName notifyName = NotifyName.LootTaken;
+            notifyBoxView.OnShowNotifyBox(this, notifyName);
+            //notifyBoxView.transform.DOScale(0.5f, 0.01f);
+            //notifyBoxView.transform.DOLocalMoveY(-100f, 0.01f);
+        }
+
     }
 }
 

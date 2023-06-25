@@ -71,8 +71,15 @@ namespace Quest
         }
     
         void OnContinueBtnPressed()
-        { 
-            curioView.UnLoad();
+        {
+            if (LootService.Instance.isLootOpen)
+            {
+                curioView.LootNotifyBoxChk();
+            }
+            else
+            {
+                curioView.UnLoad();
+            }
         }
         
     }

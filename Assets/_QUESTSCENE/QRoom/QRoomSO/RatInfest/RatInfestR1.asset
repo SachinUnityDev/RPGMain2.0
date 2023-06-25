@@ -26,7 +26,7 @@ MonoBehaviour:
     explorationChance: 60
     tauntChance: 90
     questEName: 0
-    allBarks: 
+    allBarks: 010000000200000003000000
     enemyPack: 0
     trapNames: 0
   interact2:

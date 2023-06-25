@@ -25,6 +25,7 @@ namespace Common
         RosterDisband, 
         UnSocket,
         Enchant, 
+        LootTaken, 
 
 
     }

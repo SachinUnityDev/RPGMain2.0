@@ -38,29 +38,43 @@ namespace Quest
                 //  Potion or Herb Food or Fruit Scroll or Tool Gewgaw Potion or Herb Gem
                 lootTypes.Clear();  
                 float chance2 = 50f;
-                if (chance2.GetChance())                
-                    lootTypes.Add(ItemType.Potions);
-                else 
-                    lootTypes.Add(ItemType.Herbs);
+                questMode = QuestMissionService.Instance.currQuestMode;
+                if (questMode == QuestMode.Stealth || questMode == QuestMode.Exploration
+                                      || questMode == QuestMode.Taunt)
+                {
+                    if (chance2.GetChance())//1                
+                        lootTypes.Add(ItemType.Potions);
+                    else
+                        lootTypes.Add(ItemType.Herbs);
 
-                if (chance2.GetChance())
-                    lootTypes.Add(ItemType.Foods);
-                else
-                    lootTypes.Add(ItemType.Fruits);
+                    if (chance2.GetChance()) //2
+                        lootTypes.Add(ItemType.Foods);
+                    else
+                        lootTypes.Add(ItemType.Fruits);
 
-                if (chance2.GetChance())
-                    lootTypes.Add(ItemType.Scrolls);
-                else
-                    lootTypes.Add(ItemType.Tools);
+                    if (chance2.GetChance())//3
+                        lootTypes.Add(ItemType.Scrolls);
+                    else
+                        lootTypes.Add(ItemType.Tools);
 
-                lootTypes.Add(ItemType.GenGewgaws);
+                    lootTypes.Add(ItemType.GenGewgaws);//4
+                }
+                if (questMode == QuestMode.Exploration
+                                     || questMode == QuestMode.Taunt)
+                {
+                    if (chance2.GetChance())//5
+                        lootTypes.Add(ItemType.Potions);
+                    else
+                        lootTypes.Add(ItemType.Herbs);
+                }
+                if (questMode == QuestMode.Taunt)
+                {
+                    lootTypes.Add(ItemType.Gems);//6
+                }
 
-                if (chance2.GetChance())
-                    lootTypes.Add(ItemType.Potions);
-                else
-                    lootTypes.Add(ItemType.Herbs);
 
-                lootTypes.Add(ItemType.Gems);
+
+                    
 
                 resultStr = "Crate broke down into pieces and you found some loot.";
                 resultStr2 = "Loot gained";

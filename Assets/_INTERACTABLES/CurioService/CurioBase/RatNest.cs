@@ -62,37 +62,49 @@ namespace Quest
         {
             lootTypes.Clear();
             float chance2 = 50f;
-            if (chance2.GetChance())
-                lootTypes.Add(ItemType.Foods);
-            else
-                lootTypes.Add(ItemType.Fruits);
+            questMode = QuestMissionService.Instance.currQuestMode;
+            if (questMode == QuestMode.Stealth || questMode == QuestMode.Exploration
+                                           || questMode == QuestMode.Taunt)
+            {
+                if (chance2.GetChance()) //1
+                    lootTypes.Add(ItemType.Foods);
+                else
+                    lootTypes.Add(ItemType.Fruits);
 
-            if (chance2.GetChance())
-                lootTypes.Add(ItemType.Potions);
-            else
-                lootTypes.Add(ItemType.Herbs);
+                if (chance2.GetChance()) //2
+                    lootTypes.Add(ItemType.Potions);
+                else
+                    lootTypes.Add(ItemType.Herbs);
 
-            lootTypes.Add(ItemType.GenGewgaws);
+                lootTypes.Add(ItemType.GenGewgaws);//3
 
-            if (chance2.GetChance())
-                lootTypes.Add(ItemType.Foods);
-            else
-                lootTypes.Add(ItemType.Gems);
+                if (chance2.GetChance()) //4
+                    lootTypes.Add(ItemType.Foods);
+                else
+                    lootTypes.Add(ItemType.Gems);
 
-            if (chance2.GetChance())
-                lootTypes.Add(ItemType.Tools);
-            else
-                lootTypes.Add(ItemType.Scrolls);
+                if (chance2.GetChance()) //5
+                    lootTypes.Add(ItemType.Tools);
+                else
+                    lootTypes.Add(ItemType.Scrolls);
+            }
+            if (questMode == QuestMode.Exploration
+                                               || questMode == QuestMode.Taunt)
+            {
+                if (chance2.GetChance()) //6
+                    lootTypes.Add(ItemType.GenGewgaws);
+                else
+                    lootTypes.Add(ItemType.SagaicGewgaws);
+            }
+            if (questMode == QuestMode.Taunt)
+            {
+                if (chance2.GetChance()) //7
+                    lootTypes.Add(ItemType.Potions);
+                else
+                    lootTypes.Add(ItemType.Herbs);
+            }
 
-            if (chance2.GetChance())
-                lootTypes.Add(ItemType.GenGewgaws);
-            else
-                lootTypes.Add(ItemType.SagaicGewgaws);
-            
-            if (chance2.GetChance())
-                lootTypes.Add(ItemType.Potions);
-            else
-                lootTypes.Add(ItemType.Herbs);
+                
 
             resultStr = "Couple of valuable items hidden in this dirty nest.";
             resultStr2 = "Loot gained";

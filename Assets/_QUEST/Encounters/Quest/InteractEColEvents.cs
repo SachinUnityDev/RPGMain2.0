@@ -17,8 +17,10 @@ namespace Quest
         /// </summary>
         [SerializeField] QRoomModel qRoomModel;
         [SerializeField] QRoomInteractData interactData;
-        [SerializeField] int interactNo; 
+        [SerializeField] int interactNo;
         // Start is called before the first frame update
+
+
         void Start()
         {
 
@@ -28,10 +30,13 @@ namespace Quest
             this.qRoomModel= qRoomModel;
             interactData = qRoomModel.GetInteractData(interactNo);
             SetCollider();
-        }
+        }        
         public void OnCollisionEnter2D(Collision2D collision)
         {
-            StartInteraction();
+            if (collision.gameObject.tag == "Player")
+            {
+                StartInteraction();
+            }
         }
 
         void SetCollider()
@@ -59,83 +64,74 @@ namespace Quest
             }
         }
 
+        
+
+
         void StartInteraction()
-        {
-            if (interactNo == 1)
-            {                
-                qRoomModel.interact1Chked = true;
-            }
-            else if (interactNo == 2)
-            {
-                qRoomModel.interact2Chked = true;
-            }else if(interactNo == 3)
-            {
-                qRoomModel.interact3Chked = true;
-            }
-
-
-            
-            QRoomService.Instance.canAbbasMove = false;
+        {   
             //if (!GetChanceVal().GetChance())
             //{
             //    OnContinue();
-              
+                    
+
             //}else
+
+
             if (interactData.questEName != QuestENames.None)
             {
                 Debug.Log("Detected: Q E ");
                 OnContinue();
+                OnPosChked();
             }
             else if(interactData.allBarks.Count != 0)
             {
                 Debug.Log("Detected: BARKS");
-                //List<QBarkNames> list = new List<QBarkNames>() { QBarkNames.Qbark_001, QBarkNames.Qbark_002
-                //, QBarkNames.Qbark_003, QBarkNames.Qbark_006, QBarkNames.Qbark_007};
-              bool result =   BarkService.Instance.qbarkController.ShowBark(interactData.allBarks, this);
-                if(!result)
-                    OnContinue();
+                      
+               BarkService.Instance.qbarkController.ShowBark(interactData.allBarks, this);
+                OnPosChked();               
+                OnContinue();
             }
             else if(interactData.enemyPack != EnemyPack.None)
             {
                 Debug.Log("Detected: Enemy Pack ");
+                OnPosChked();
                 OnContinue();
             }
             else
             {
                 // init trap game
                 Debug.Log("Detected: Traps ");
+                OnPosChked();
                 OnContinue();
             }
         }
 
-
-
-        float GetChanceVal()
-        {
-            QuestMode questMode = QuestMissionService.Instance.currQuestMode;
-            switch (questMode)
-            {
-                case QuestMode.None:
-                    break;
-                case QuestMode.Stealth:
-                    return interactData.stealthChance; 
-                case QuestMode.Exploration:
-                    return interactData.explorationChance; 
-                case QuestMode.Taunt:
-                    return interactData.tauntChance;
-                default:
-                    return 0f;                     
-            }
-            return 0f;
-        }
-
         public void OnContinue()
         {
+           StartCoroutine(WaitForSec());
+        }
+        IEnumerator WaitForSec()
+        {
+            yield return new WaitForSeconds(1);
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
             QRoomService.Instance.canAbbasMove = true;
-            
         }
 
+        void OnPosChked()
+        {
+            if (interactNo == 1)
+            {
+                qRoomModel.interact1Chked = true;
+            }
+            else if (interactNo == 2)
+            {
+                qRoomModel.interact2Chked = true;
+            }
+            else if (interactNo == 3)
+            {
+                qRoomModel.interact3Chked = true;
+            }
+        }
         private void Update()
         {
             if(Input.GetKeyDown(KeyCode.L))
@@ -144,8 +140,24 @@ namespace Quest
             }
         }
 
-
-
-
     }
 }
+
+//float GetChanceVal()
+//{
+//    QuestMode questMode = QuestMissionService.Instance.currQuestMode;
+//    switch (questMode)
+//    {
+//        case QuestMode.None:
+//            break;
+//        case QuestMode.Stealth:
+//            return interactData.stealthChance; 
+//        case QuestMode.Exploration:
+//            return interactData.explorationChance; 
+//        case QuestMode.Taunt:
+//            return interactData.tauntChance;
+//        default:
+//            return 0f;                     
+//    }
+//    return 0f;
+//}

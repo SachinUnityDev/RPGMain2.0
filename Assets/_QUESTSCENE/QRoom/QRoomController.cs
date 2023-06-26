@@ -36,6 +36,7 @@ namespace Quest
             QRoomService.Instance.On_RoomChg(qRoomModel.questNames, roomNo);
 
             CurioInit(qRoomModel);
+            InteractInit(qRoomModel);
             QRoomService.Instance.qRoomView.HideEndArrow(); 
         }
         public bool IsWArrowAvail()

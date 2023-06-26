@@ -19,12 +19,12 @@ namespace Quest
         public override void CurioInteractWithoutTool()
         {
             float chance = Random.Range(0f, 100f);
-            if (chance < 30f)
+            if (chance < 20f)
             {
                 //Nothing happens
                 resultStr = "You couldn't open it with bare hands...";
             }
-            else if (chance < 60f)
+            else if (chance < 50f)
             {
                 Fx1();
             }
@@ -35,7 +35,7 @@ namespace Quest
         }
         public override void CurioInteractWithTool()
         {
-            float chance = 30f;
+            float chance = 25f;
             if (chance.GetChance())
             {
                 Fx1();

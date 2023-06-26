@@ -88,8 +88,8 @@ namespace Quest
             }
             int index = chances.GetChanceFrmList();
             
-            ItemDataWithQty itemDataWithQqty = allItemLootData[index].GetItemDataWithQty();
-            return itemDataWithQqty;
+            ItemDataWithQty itemDataWithQty = allItemLootData[index].GetItemDataWithQty();
+            return itemDataWithQty;
 
 
 

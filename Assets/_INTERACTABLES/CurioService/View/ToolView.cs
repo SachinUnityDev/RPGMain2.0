@@ -33,7 +33,7 @@ namespace Quest
                          .GetItemFromCommInv(ItemType.Tools, (int)toolName2);
             else
                 toolSlot2 = null;
-            toolSelect = null; 
+            toolSelect = toolSlot1; 
             FillSlot(); 
         }
 

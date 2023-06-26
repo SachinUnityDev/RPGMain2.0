@@ -27,8 +27,7 @@ namespace Quest
 
         [Header(" Skeleton Animation ref")]
         public SkeletonAnimation skeletonAnimation;
-        public AnimationReferenceAsset idle, walking;
-        public AnimState currentState;
+        public AnimationReferenceAsset idle, walking;    
         public float speed;
         public float movement;
         public Rigidbody2D rb;
@@ -36,14 +35,14 @@ namespace Quest
 
         [Header("Entry collider")]
         [SerializeField] GameObject entryCollider;
-        
+        [SerializeField] bool canMove; 
 
         void Start()
         {
-            rb = GetComponent<Rigidbody2D>();
-            currentState = AnimState.Idle;
+            rb = GetComponent<Rigidbody2D>();           
          
             QRoomService.Instance.OnQRoomStateChg += OnQRoomStateChg;
+            
         }
         public void SetAnimation(AnimationReferenceAsset animRef, bool loop, float timeScale)
         {
@@ -72,12 +71,21 @@ namespace Quest
         public void Move()
         {
             if (QRoomService.Instance.qRoomState == QRoomState.Prep) return;
-            bool canMove = QRoomService.Instance.canAbbasMove; 
-            if (QRoomService.Instance.qRoomState == QRoomState.Walk && canMove)
-                movement = Input.GetAxis("Horizontal");            
-
-            rb.velocity = new Vector2(movement * speed, rb.velocity.y);
-            if (movement != 0 && canMove)
+            canMove = QRoomService.Instance.canAbbasMove;
+           
+            if (QRoomService.Instance.qRoomState == QRoomState.AutoWalk)
+            {
+                // Auto walk is prep to Walk State entry 
+                rb.velocity = new Vector2(movement * speed, rb.velocity.y);
+            }
+            if(QRoomService.Instance.qRoomState == QRoomState.Walk && canMove)
+            {
+                movement = Input.GetAxis("Horizontal");
+                rb.velocity = new Vector2(movement * speed, rb.velocity.y);
+              
+            }
+          
+            if(movement != 0 && canMove)
             {
                 SetCharacterState(AnimState.Walking);
             }
@@ -115,6 +123,7 @@ namespace Quest
         }
         public void CreateAbbasEntry()
         {
+            QRoomService.Instance.canAbbasMove = true;
             movement = 1;            
         }
 

@@ -12,7 +12,7 @@ namespace Quest
         public event Action<QRoomState> OnQRoomStateChg;
         public event Action<QuestNames> OnStartOfQScene;
         public event Action<QuestNames, int> OnRoomChg;
-
+        public event Action OnInteractComplete; 
 
         [Header("Quest Room SO")]
         public QNodeAllRoomSO qNodeAllRoomSO; 
@@ -85,7 +85,11 @@ namespace Quest
 
         }
         
-
+        public void On_InteractComplete()
+        {
+            canAbbasMove = true;
+            OnInteractComplete?.Invoke(); 
+        }
 
 
         private void Update()

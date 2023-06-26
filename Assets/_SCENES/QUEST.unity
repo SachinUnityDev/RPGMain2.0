@@ -410,7 +410,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7774936, y: 1}
+    m_SensorSize: {x: 1.7758064, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -4452,7 +4452,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 406599547}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.1101894, y: 3.007301, z: -10}
+  m_LocalPosition: {x: -2.119812, y: 3.0072696, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16889,8 +16889,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '"Treasure never comes without cost, they say..."'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e58e57e485755474997e74500e3af408, type: 2}
-  m_sharedMaterial: {fileID: 6994197057777709960, guid: e58e57e485755474997e74500e3af408,
+  m_fontAsset: {fileID: 11400000, guid: 5447f54311c3a074583aab7e95e6966a, type: 2}
+  m_sharedMaterial: {fileID: -1283144925744203529, guid: 5447f54311c3a074583aab7e95e6966a,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -16915,7 +16915,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12
+  m_fontSize: 12.15
   m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -18660,12 +18660,12 @@ MonoBehaviour:
   skeletonAnimation: {fileID: 2061443604}
   idle: {fileID: 0}
   walking: {fileID: 0}
-  currentState: 2
   speed: 40
   movement: 0
   rb: {fileID: 0}
   currentAnim: 
   entryCollider: {fileID: 1771998015}
+  canMove: 0
 --- !u!114 &2061443604
 MonoBehaviour:
   m_ObjectHideFlags: 0

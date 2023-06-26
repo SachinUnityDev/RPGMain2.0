@@ -19,14 +19,14 @@ MonoBehaviour:
   hasQPrep: 1
   upRoomNo: 3
   downRoomNo: 2
-  allCurio1: 1100000008000000
+  allCurio1: 0800000011000000
   allCurio2: 0900000013000000
   interact1:
     stealthChance: 30
     explorationChance: 60
     tauntChance: 90
     questEName: 0
-    allBarks: 010000000200000003000000
+    allBarks: 
     enemyPack: 0
     trapNames: 0
   interact2:

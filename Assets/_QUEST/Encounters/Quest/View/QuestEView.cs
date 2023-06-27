@@ -1,5 +1,4 @@
 using Common;
-using Quest;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,9 +12,10 @@ namespace Quest
 
         QuestEbase questEBase;
         [SerializeField]QuestEModel questEModel;
-        private void Awake()
+        public InteractEColEvents interactEColEvents; 
+        private void Start()
         {
-
+          
         }
         public void Init()
         {
@@ -37,11 +37,12 @@ namespace Quest
             page2Trans.gameObject.SetActive(true);
             page2Trans.GetComponent<QuestEResultView>().InitResultPage(this, questEBase, questEModel);
         }
-        public void InitEncounter(QuestEModel questEModel)
+        public void InitEncounter(QuestEModel questEModel, InteractEColEvents interactEColEvents)
         {
             this.questEModel = questEModel;
+            this.interactEColEvents= interactEColEvents;    
             questEBase = EncounterService.Instance.questEController
-                        .GetQuestEBase(questEModel.questEName);
+                            .GetQuestEBase(questEModel.questEName);
             page1Trans.GetComponent<QuestEMainPgView>().InitMainPage(this, questEBase, questEModel);
             ShowMainPage();
             Load();
@@ -50,6 +51,7 @@ namespace Quest
         public void UnLoad()
         {
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
+            Destroy(gameObject);
         }
     }
 }

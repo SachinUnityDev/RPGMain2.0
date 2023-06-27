@@ -16,7 +16,7 @@ MonoBehaviour:
   objName: 9
   node: 1
   roomNo: 2
-  hasQPrep: 1
+  hasQPrep: 0
   upRoomNo: 3
   downRoomNo: 4
   allCurio1: 0a000000

@@ -80,7 +80,7 @@ namespace Quest
             if (interactData.questEName != QuestENames.None)
             {
                 Debug.Log("Detected: Q E ");
-                OnContinue();
+                EncounterService.Instance.questEController.ShowQuestE(this, QuestENames.Spidaboy);
                 OnPosChked();
             }
             else if(interactData.allBarks.Count != 0)

@@ -24,8 +24,8 @@ namespace Quest
 
         public void OnContinueBtnPressed()
         {
-            EncounterService.Instance.mapEController.mapENodePtrEvents.OnMapEExit();
-            questEView.GetComponent<IPanel>().UnLoad();
+            questEView.interactEColEvents.OnContinue(); 
+            questEView.UnLoad();
             questEBase.QuestEContinuePressed();
         }
 

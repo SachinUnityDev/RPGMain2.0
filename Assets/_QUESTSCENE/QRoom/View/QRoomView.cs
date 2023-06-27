@@ -38,7 +38,10 @@ namespace Quest
 
 
         [Header("Global var")]
-        [SerializeField] QuestNames questName; 
+        [SerializeField] QuestNames questName;
+
+        [Header("TEST")]
+        [SerializeField] QuestEView questEView;
 
         void Awake()
         {

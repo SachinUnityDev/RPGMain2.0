@@ -51,13 +51,13 @@ namespace Quest
         }
         private void Update()
         {
-            if (questEController != null)
-            {
-                if (Input.GetKeyDown(KeyCode.C))
-                {
-                    questEController.ShowQuestE(null, QuestENames.Spidaboy); 
-                }
-            }
+            //if (questEController != null)
+            //{
+            //    if (Input.GetKeyDown(KeyCode.C))
+            //    {
+            //        questEController.ShowQuestE(null, QuestENames.Spidaboy); 
+            //    }
+            //}
         }
 
 

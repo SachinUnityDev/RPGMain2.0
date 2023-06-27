@@ -1,5 +1,4 @@
 using DG.Tweening;
-using Quest;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,14 +6,13 @@ using UnityEngine;
 
 namespace Quest
 {
-
-
     public class QuestEController : MonoBehaviour
     {
-        GameObject canvas; 
+        GameObject questCanvas;
         [Header("Quest E view TBR")]
-        [SerializeField] GameObject questEViewObj;
-         public InteractEColEvents questENodeColEvents; // ref to node on map that triggered the MapE 
+        [SerializeField]QuestEView questEView;
+
+        InteractEColEvents questENodeColEvents; // ref to node on map that triggered the MapE 
 
         public List<QuestEModel> allQuestEModels = new List<QuestEModel>();
         public List<QuestEbase> allQuestEBases = new List<QuestEbase>();
@@ -26,29 +24,19 @@ namespace Quest
 
         void Start()
         {
-            canvas = GameObject.FindWithTag("QuestCanvas"); 
+            questCanvas = GameObject.FindWithTag("QuestCanvas");          
         }
 
 
         public void ShowQuestE(InteractEColEvents questENodeCol, QuestENames questEName)
         {
-            // get your prefab spawn and make child in the current canvas
-            GameObject questEObj = 
-                        Instantiate(questEViewObj, new Vector3(0, 0, 0), Quaternion.identity);
-            questEObj.transform.SetParent(canvas.transform, true); 
-            
-            RectTransform rectTransform = questEObj.GetComponent<RectTransform>();  
-
-            rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
-            rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
-            rectTransform.DOScale(1, 0); 
-            // Set the position and size of the object within the canvas
-            rectTransform.anchoredPosition = new Vector2(0, 0);
-            rectTransform.sizeDelta = new Vector2(960, 540);
-
-            this.questENodeColEvents = questENodeCol;            
+         questEView =  
+            Instantiate(questEView, questCanvas.transform); 
+            questEView.gameObject.transform.SetParent(questCanvas.transform);
+            questEView.gameObject.SetActive(true);
+            this.questENodeColEvents = questENodeCol;
             QuestEModel questEModel = GetQuestEModel(questEName);
-            questEViewObj.GetComponent<QuestEView>().InitEncounter(questEModel);
+            questEView.InitEncounter(questEModel, questENodeCol);
         }
 
         public void InitQuestE(AllQuestESO allQuestESO)

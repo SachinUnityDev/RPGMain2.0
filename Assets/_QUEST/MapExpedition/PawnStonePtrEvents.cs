@@ -14,8 +14,13 @@ namespace Quest
 
         PathExpView mapExpView;
         [Header("Current Node Data")]
-        public NodeData nodeData; 
+        public NodeData nodeData;
 
+
+        [Header(" Pawn Path definition")]
+        [SerializeField] int index;
+        [SerializeField] List<Transform> allNodes = new List<Transform>();
+        
         public void InitPawnStoneInit(PathExpView mapExpView)
         {
             this.mapExpView = mapExpView;
@@ -28,8 +33,22 @@ namespace Quest
             transform.DOMove(targetTrans.position, endNodeData.time);    
             nodeData = endNodeData.nodeData;
         }
+        public void InitPawnMovement(List<Transform> allNodes)
+        {  
+            this.allNodes.Clear();
+            this.allNodes = allNodes;
+            index = -1; 
 
-
-
+        }
+       public void Move2Next()
+       {
+            index++;
+            transform.DOLocalMove(allNodes[index].position, 0.4f); 
+       }
+            
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            Debug.Log("TRIGGER 2");
+        }
     }
 }

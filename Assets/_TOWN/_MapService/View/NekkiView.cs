@@ -18,7 +18,7 @@ namespace Town
 
         [Header("Panels")]
         [SerializeField] Transform descTxtTrans;
-        [SerializeField] bool isDescTxtShown = false;
+        [SerializeField] bool isDescTxtShown = true;
 
         [Header("Global Var")]        
         MapView mapView;
@@ -26,6 +26,8 @@ namespace Town
 
         private void Start()
         {
+           isDescTxtShown = true;
+            descTxtTrans.gameObject.SetActive(true);
             descTxtBtn.onClick.AddListener(OnDescTxtBtnPressed); 
         }
         public void InitTown(MapView mapView)
@@ -39,6 +41,7 @@ namespace Town
                 descTxtTrans.gameObject.SetActive(false);
             else
                 descTxtTrans.gameObject.SetActive(true);
+            isDescTxtShown = !isDescTxtShown;
         }
     }
 }

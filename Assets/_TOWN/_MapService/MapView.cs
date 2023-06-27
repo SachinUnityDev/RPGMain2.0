@@ -36,15 +36,14 @@ namespace Town
         }
        
         void OnToggleMapBtnPressed()
-        {            
-            
-            if(index < maxIndex-1)
+        {
+            if (index < maxIndex - 1)
             {
                 index++;
             }
             else
             {
-                index = 0; 
+                index = 0;
             }
             for (int i = 0; i < maxIndex; i++)
             {
@@ -52,24 +51,6 @@ namespace Town
             }
             transform.GetChild(index).gameObject.SetActive(true);
         }
-
-        //void ShowWorldMap()
-        //{
-        //    Nekkisari_townMapGO.SetActive(false);
-        //    worldMapGO.SetActive(true);
-        //    ToggleTxt(false, true);
-        //    toggleTownBtn.gameObject.SetActive(true);
-          
-        //}
-
-        //void ShowNekkisariTown()
-        //{
-        //    Nekkisari_townMapGO.SetActive(true);
-        //    worldMapGO.SetActive(false);
-        //    ToggleTxt(true, false);
-        //    toggleTownBtn.gameObject.SetActive(false);
-        //}
-
         void OnCloseBtnPressed()
         {
             UnLoad();
@@ -77,6 +58,8 @@ namespace Town
         public void Load()
         {
             UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(this.gameObject, true); 
+            worldView.gameObject.SetActive(false);
+            nekkiView.gameObject.SetActive(true);   
         }
 
         public void UnLoad()
@@ -99,6 +82,7 @@ namespace Town
                     if(iloc.locationName== locationName)
                     {
                         transform.GetChild(i).gameObject.SetActive(true);
+                        index = i; 
                     }
                     else
                     {

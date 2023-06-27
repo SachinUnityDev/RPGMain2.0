@@ -1,0 +1,301 @@
+Standart_shadow.png
+size:2045,2010
+filter:Linear,Linear
+pma:true
+Tx_Shadow
+bounds:2,1478,887,530
+herbalist/BOT CLOTHES
+bounds:1674,806,364,527
+offsets:23,0,410,527
+herbalist/back arm/close_l
+bounds:1574,1400,113,91
+offsets:1,2,115,98
+rotate:90
+herbalist/back arm/open_l
+bounds:1453,446,105,149
+offsets:1,1,107,152
+rotate:90
+herbalist/back_cape
+bounds:1121,1294,451,714
+offsets:0,0,475,714
+herbalist/belt
+bounds:1574,1743,265,82
+offsets:10,0,285,82
+rotate:90
+herbalist/cape_front_r
+bounds:1570,1141,151,102
+offsets:1,0,152,102
+rotate:90
+herbalist/front arm/close_r
+bounds:456,929,116,110
+offsets:1,29,119,140
+rotate:90
+herbalist/neck
+bounds:1289,439,112,162
+offsets:5,2,122,167
+rotate:90
+herbalist/shadow
+bounds:1674,1335,673,306
+offsets:26,1,735,315
+rotate:90
+herbalist/stelth_leg/TOP
+bounds:336,439,227,377
+herbalist/torso
+bounds:2,1180,296,567
+offsets:3,7,301,582
+rotate:90
+hunter/BACK CLOTH
+bounds:1674,2,369,247
+hunter/BOT CLOTHES
+bounds:1121,895,397,447
+offsets:0,7,397,454
+rotate:90
+hunter/BOT CLOTHES 3
+bounds:571,517,409,288
+rotate:90
+hunter/RUNGU
+bounds:2,846,332,452
+offsets:1,1,334,455
+rotate:90
+hunter/back arm/close_l
+bounds:1574,1515,115,92
+offsets:1,1,117,97
+rotate:90
+hunter/front arm/close_r
+bounds:1574,1632,98,109
+offsets:1,29,101,139
+hunter/neck
+bounds:1121,437,114,166
+offsets:1,1,116,168
+rotate:90
+hunter/shadow
+bounds:838,39,834,394
+offsets:38,1,929,406
+hunter/torso
+bounds:1674,251,324,553
+warden/back arm/close_l
+bounds:456,818,113,109
+offsets:1,14,117,123
+warden/cape_front_r
+bounds:2,492,332,352
+warden/front leg/top
+bounds:571,928,245,548
+warden/gold_metal
+bounds:456,1047,131,105
+rotate:90
+warden/lance
+bounds:891,435,228,1573
+offsets:8,3,236,1576
+warden/shadow
+bounds:2,30,834,403
+offsets:38,8,929,422
+warden/torso
+bounds:1121,553,340,462
+offsets:0,1,340,463
+rotate:90
+
+Standart_shadow_2.png
+size:1973,1988
+filter:Linear,Linear
+pma:true
+herbalist/TAMBOR
+bounds:354,191,228,374
+herbalist/THINGS
+bounds:1406,707,182,263
+offsets:1,0,184,263
+herbalist/WAND
+bounds:1350,243,132,279
+offsets:1,1,134,281
+rotate:90
+herbalist/back arm/arm_lower_l
+bounds:1590,784,164,222
+offsets:1,1,167,224
+herbalist/back arm/arm_upper_l
+bounds:1633,1210,139,265
+rotate:90
+herbalist/back leg/feet
+bounds:597,2,202,117
+offsets:3,6,208,131
+rotate:90
+herbalist/back leg/mid
+bounds:471,747,159,395
+offsets:0,0,159,418
+herbalist/back leg/top
+bounds:214,567,178,422
+offsets:1,1,180,424
+rotate:90
+herbalist/cape_front_l
+bounds:1656,1681,305,315
+offsets:0,3,305,321
+rotate:90
+herbalist/front arm/arm_lower_r
+bounds:1633,1351,152,268
+offsets:0,1,152,270
+rotate:90
+herbalist/front arm/arm_upper_r
+bounds:1101,780,184,303
+offsets:0,0,184,304
+rotate:90
+herbalist/front arm/open_r
+bounds:575,1266,135,176
+offsets:3,1,141,178
+herbalist/front leg/foot
+bounds:1772,996,212,147
+rotate:90
+herbalist/front leg/mid
+bounds:1204,1812,174,450
+rotate:90
+herbalist/front leg/top
+bounds:255,1601,191,463
+rotate:90
+herbalist/head
+bounds:898,276,224,252
+offsets:1,1,229,254
+herbalist/stelth_leg/FEET
+bounds:1776,284,132,144
+herbalist/stelth_leg/MID
+bounds:720,1513,124,415
+rotate:90
+hunter/BOT CLOTHES 0
+bounds:1137,1488,371,148
+hunter/BOT CLOTHES1
+bounds:1635,1505,333,174
+offsets:2,2,337,177
+hunter/BOT CLOTHES2
+bounds:768,262,128,271
+offsets:2,1,132,274
+hunter/axe
+bounds:1204,1638,172,429
+offsets:1,1,176,433
+rotate:90
+hunter/bacc leg/foot
+bounds:716,3,201,130
+rotate:90
+hunter/bacc leg/mid
+bounds:2,567,210,456
+offsets:4,4,214,460
+hunter/bacc leg/top
+bounds:712,1338,173,409
+rotate:90
+hunter/back arm/arm_lower_l
+bounds:1350,377,148,276
+offsets:1,3,150,280
+rotate:90
+hunter/back arm/arm_upper_l
+bounds:354,2,187,241
+offsets:0,0,187,245
+rotate:90
+hunter/back arm/open_l
+bounds:170,5,120,154
+offsets:1,1,122,156
+rotate:90
+hunter/back_cape
+bounds:214,755,387,255
+offsets:3,2,390,257
+rotate:90
+hunter/cape_front_l
+bounds:1573,1008,197,200
+hunter/cape_front_r
+bounds:1101,966,290,291
+hunter/cape_head
+bounds:1558,56,173,185
+offsets:1,2,176,188
+hunter/front arm/arm_lower_r
+bounds:880,821,219,329
+offsets:5,0,224,329
+hunter/front arm/arm_upper_r
+bounds:900,530,197,289
+hunter/front arm/open_r
+bounds:1817,607,131,171
+offsets:1,1,134,173
+hunter/front leg/foot
+bounds:1124,140,216,146
+hunter/front leg/mid
+bounds:2,1518,251,468
+hunter/front leg/top
+bounds:741,1795,191,461
+rotate:90
+hunter/head
+bounds:1124,288,224,251
+offsets:1,2,229,255
+hunter/stelth_leg/FEET
+bounds:1631,284,143,144
+hunter/stelth_leg/MID
+bounds:2,127,187,438
+hunter/stelth_leg/TOP
+bounds:1123,1259,227,365
+rotate:90
+warden/back arm/arm_lower_l
+bounds:1633,572,182,206
+offsets:0,0,185,206
+warden/back arm/arm_upper_l
+bounds:584,206,182,327
+warden/back arm/open_l
+bounds:1733,3,125,161
+offsets:2,0,130,161
+rotate:90
+warden/back leg/foot
+bounds:1342,96,214,145
+warden/back leg/mid
+bounds:191,127,161,438
+offsets:0,15,161,453
+warden/back leg/top
+bounds:2,1025,210,491
+offsets:0,0,213,491
+warden/back_cape
+bounds:214,1144,359,298
+offsets:2,2,363,301
+warden/belt
+bounds:712,1152,352,184
+offsets:24,3,376,187
+warden/bot_armor
+bounds:255,1444,155,455
+offsets:1,0,156,464
+rotate:90
+warden/cape_front_l
+bounds:638,535,260,273
+offsets:0,0,261,273
+warden/front arm/arm_lower_r
+bounds:1353,527,178,278
+offsets:0,5,178,288
+rotate:90
+warden/front arm/arm_upper_r
+bounds:1393,972,178,285
+offsets:2,1,181,287
+warden/front arm/close_r
+bounds:1510,1511,125,121
+offsets:1,3,126,124
+rotate:90
+warden/front arm/open_r
+bounds:1122,2,136,181
+rotate:90
+warden/front leg/foot
+bounds:1756,780,214,162
+offsets:13,3,227,168
+rotate:90
+warden/front leg/mid
+bounds:255,1794,192,484
+offsets:7,6,199,490
+rotate:90
+warden/head
+bounds:1099,541,237,252
+rotate:90
+warden/leather_left
+bounds:898,112,162,222
+rotate:90
+warden/leather_right
+bounds:1490,1274,140,212
+warden/neck
+bounds:2,3,122,166
+offsets:0,0,122,167
+rotate:90
+warden/pelt
+bounds:1633,430,168,140
+offsets:1,3,169,147
+warden/stelth_leg/FEET
+bounds:1733,130,135,152
+warden/stelth_leg/MID
+bounds:741,1639,154,429
+rotate:90
+warden/stelth_leg/TOP
+bounds:632,810,246,340

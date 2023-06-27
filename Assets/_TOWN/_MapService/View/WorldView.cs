@@ -25,10 +25,12 @@ namespace Town
         {
             descTxtBtn.onClick.AddListener(OnDescTxtBtnPressed);
             showTwnsBtn.onClick.AddListener(OnShowTownBtnPressed); 
+            
         }
         public void InitTown(MapView mapView)
         {            
             this.mapView = mapView;
+          
             foreach (Transform child in transform)
             {
                 WorldMapBtnPtrEvents mapBtnPtrEvents = child.GetComponent<WorldMapBtnPtrEvents>();
@@ -38,15 +40,13 @@ namespace Town
                 }
             }
         }
-
-
-
         void OnDescTxtBtnPressed()
         {
             if(isDescTxtShown)
                 descTxtTrans.gameObject.SetActive(true);
             else
                 descTxtTrans.gameObject.SetActive(false);
+            isDescTxtShown =!isDescTxtShown;
         }
         void OnShowTownBtnPressed()
         {
@@ -54,6 +54,7 @@ namespace Town
                 townsTrans.gameObject.SetActive(true);
             else
                 townsTrans.gameObject.SetActive(false);
+            isTownTxtShown = !isTownTxtShown;
         }
 
 

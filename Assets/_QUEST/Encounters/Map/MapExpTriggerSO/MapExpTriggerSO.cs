@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Common;
 using System;
-using System.Security.Policy;
 
 namespace Quest
 {

@@ -9,7 +9,7 @@ namespace Town
 {
     public class WorldMapBtnPtrEvents : MonoBehaviour, IPointerClickHandler
     {
-        public LocationName locationName;
+        public LocationName locationName = LocationName.None;
         MapView mapView; 
         Image btnImg;
         void Start()

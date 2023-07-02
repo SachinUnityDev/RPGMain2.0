@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allPathSO:
   - {fileID: 11400000, guid: 4ac159eed518cc04f8b3af37722866e0, type: 2}
-  - {fileID: 11400000, guid: 65b6589d7575d07428bbe47ef722ecfd, type: 2}
+  - {fileID: 11400000, guid: 4c71a025ccdcad44892e84726e5e47df, type: 2}
+  - {fileID: 11400000, guid: bb60606ab702a70428e29e1be76607ca, type: 2}

@@ -202,8 +202,8 @@ public enum CharNames
     Viper,
     Zburator,
     All,
-    Abbas_Warden,
-    Abbas_Herbalist, 
+    //Abbas_Warden,
+    //Abbas_Herbalist, 
 }
 
 public enum NPCNames

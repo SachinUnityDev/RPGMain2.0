@@ -154,10 +154,17 @@ public static class ExtensionMethodsCombat
         {
             int val = UnityEngine.Random.Range(0, 100);
             chances.Insert(0, 0f);
-            chances.Insert(chances.Count, 100);
-            for (int i = 0; i <= chances.Count; i++)
+            List<float> cumulativeChances = new List<float>();
+            float cumChance = 0f;     
+            foreach (float chance in chances) 
+            { 
+                cumChance+= chance;
+                cumulativeChances.Add(cumChance);  
+            }
+            cumulativeChances.Insert(cumulativeChances.Count, 100);
+            for (int i = 0; i < cumulativeChances.Count; i++)
             {
-                if (val > chances[i] && val <= chances[i+1])
+                if (val > cumulativeChances[i] && val <= cumulativeChances[i+1])
                     return i; 
             }
             return 0; 

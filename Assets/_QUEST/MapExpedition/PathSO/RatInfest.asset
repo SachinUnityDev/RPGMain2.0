@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25fc5ccb60dad5241a9476935f1d8e5d, type: 3}
   m_Name: RatInfest
   m_EditorClassIdentifier: 
+  questName: 4
+  objName: 9
   startNode:
     nodeType: 1
-    questName: 0
+    questName: 4
     locName: 1
   endNode:
-    nodeData:
-      nodeType: 2
-      questName: 4
-      locName: 0
-    time: 0
-    timeInCalday: 0
-  interNodes: []
+    nodeType: 2
+    questName: 4
+    locName: 0
+  timeInCalday: 0
+  allInterNodes: []

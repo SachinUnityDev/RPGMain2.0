@@ -15,14 +15,58 @@ MonoBehaviour:
   questName: 6
   objName: 14
   startNode:
-    nodeType: 2
+    nodeType: 1
     questName: 6
     locName: 1
+  endNode:
+    nodeType: 2
+    questName: 6
+    locName: 0
   timeInCalday: 0.5
   allInterNodes:
   - allToNodeChanceData:
-    - questMode: 0
-      chanceData: []
-    allFrmNodeChanceData: []
+    - questMode: 1
+      chanceData:
+      - chance: 10
+        mapEName: 2
+      - chance: 60
+        mapEName: 1
+      - chance: 30
+        mapEName: 4
+    - questMode: 2
+      chanceData:
+      - chance: 30
+        mapEName: 2
+      - chance: 40
+        mapEName: 4
+      - chance: 30
+        mapEName: 1
+    - questMode: 3
+      chanceData:
+      - chance: 60
+        mapEName: 2
+      - chance: 30
+        mapEName: 4
+      - chance: 10
+        mapEName: 1
+    allFrmNodeChanceData:
+    - questMode: 1
+      chanceData:
+      - chance: 30
+        mapEName: 3
+      - chance: 70
+        mapEName: 0
+    - questMode: 1
+      chanceData:
+      - chance: 60
+        mapEName: 3
+      - chance: 40
+        mapEName: 0
+    - questMode: 1
+      chanceData:
+      - chance: 80
+        mapEName: 3
+      - chance: 20
+        mapEName: 0
     isToChked: 0
     isFrmChked: 0

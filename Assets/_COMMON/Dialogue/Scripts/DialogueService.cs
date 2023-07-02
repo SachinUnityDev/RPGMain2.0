@@ -57,9 +57,13 @@ namespace Common
         {
             dialogueFactory = GetComponent<DialogueFactory>();            
             allDiaLogueModels.Clear();
+          
+        }
+        public void InitDialogueService()
+        {
             foreach (DialogueSO dialogueSO in allDialogueSO.allDialogues)
             {
-                DialogueModel diaModel = new DialogueModel(dialogueSO); 
+                DialogueModel diaModel = new DialogueModel(dialogueSO);
                 allDiaLogueModels.Add(diaModel);
             }
         }
@@ -100,12 +104,12 @@ namespace Common
             allDefine = allDefine.OrderBy(t => t.numTag).ToList();
         }
 
-        public void OptionsClicked(TagData tagData)
-        {
-            //dialogueViewController.IsInteracting = false;
-            //dialogueViewController.DisplayStory(tagData.valueTag);
-            //dialogueViewController.StartStory(GetDialogueSO(101));
-        }
+        //public void OptionsClicked(TagData tagData)
+        //{
+        //    //dialogueViewController.IsInteracting = false;
+        //    //dialogueViewController.DisplayStory(tagData.valueTag);
+        //    //dialogueViewController.StartStory(GetDialogueSO(101));
+        //}
 
         public void SetCurrDiaBase(DialogueNames dialogueNames)
         {

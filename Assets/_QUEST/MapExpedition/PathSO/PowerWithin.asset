@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25fc5ccb60dad5241a9476935f1d8e5d, type: 3}
   m_Name: PowerWithin
   m_EditorClassIdentifier: 
+  questName: 2
+  objName: 7
   startNode:
+    nodeType: 1
+    questName: 2
+    locName: 1
+  endNode:
     nodeType: 2
     questName: 2
     locName: 0
-  endNode:
-    nodeData:
-      nodeType: 1
-      questName: 0
-      locName: 1
-    time: 0
-    timeInCalday: 0
-  interNodes: []
+  timeInCalday: 0
+  allInterNodes: []

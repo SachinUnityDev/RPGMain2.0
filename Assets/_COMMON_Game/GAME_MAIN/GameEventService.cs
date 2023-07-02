@@ -34,15 +34,16 @@ namespace Common
             UIControlServiceGeneral.Instance.InitUIGeneral();
             MapService.Instance.InitMapService();   
             EcoServices.Instance.InitEcoServices(); 
+            DialogueService.Instance.InitDialogueService(); 
             BestiaryService.Instance.Init();
             ItemService.Instance.Init();
             FameService.Instance.Init();
             LevelService.Instance.Init();
             TownService.Instance.Init(locationName);
             OnTownEnter?.Invoke(locationName);
-            QuestMissionService.Instance.InitQuestMission();    
-            LootService.Instance.InitLootService();
-            CurioService.Instance.InitCurioService();// test purpose only
+            //QuestMissionService.Instance.InitQuestMission();    
+            //LootService.Instance.InitLootService();
+            //CurioService.Instance.InitCurioService();// test purpose only
         }
         void OnQuestStart(GameState gameState)
         {

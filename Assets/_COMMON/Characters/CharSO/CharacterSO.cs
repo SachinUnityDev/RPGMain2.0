@@ -9,6 +9,11 @@ namespace Common
     [CreateAssetMenu(fileName = "MainCharacter", menuName = "Character Service/CharacterSO")]
     public class CharacterSO : ScriptableObject
     {
+
+        /// <summary>
+        ///  to adjust for abbas Class type make all portraits on get funcs 
+        ///  Get func will take care of "spl case Abbas the portraits and animation files" 
+        /// </summary>
         public int charID;
         public CharNames charName;
         public GameObject charPrefab;  // change to prefab 

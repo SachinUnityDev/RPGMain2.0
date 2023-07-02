@@ -14,13 +14,13 @@ namespace Quest
         
         public PathSO GetPathSO(NodeData startNode, NodeData endNode)
         {
-            int index = allPathSO.FindIndex(t=>t.startNode.IsNodeDataMatch(startNode)
-                            && t.endNode.nodeData.IsNodeDataMatch(endNode));
-            if(index !=-1)
-            {
-                return allPathSO[index];    
-            }
-            Debug.Log(" path so not found"); 
+            //int index = allPathSO.FindIndex(t=>t.startNode.IsNodeDataMatch(startNode)
+            //                && t.endNode.nodeData.IsNodeDataMatch(endNode));
+            //if(index !=-1)
+            //{
+            //    return allPathSO[index];    
+            //}
+            //Debug.Log(" path so not found"); 
             return null;
         }
     }

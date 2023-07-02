@@ -31,13 +31,16 @@ namespace Quest
             {
                 // start seq 
                 // get portrait charName
+                float time = 0; 
                 List<QRoomPortPtrEvents> portPtrEvents = transform
                                             .GetComponentsInChildren<QRoomPortPtrEvents>().ToList();
                 int index =
                     portPtrEvents.FindIndex(t => t.charName == allBarkData[i].charName);
-                float time = allBarkData[i].audioClip.length;
+               
+                    
                 if (allBarkData[i].audioClip != null)
                 {
+                    time = allBarkData[i].audioClip.length;
                     audioSource.clip = allBarkData[i].audioClip;
                     audioSource.Play();
                 }

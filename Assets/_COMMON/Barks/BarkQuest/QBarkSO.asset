@@ -20,47 +20,318 @@ MonoBehaviour:
       str: Rat squeak
       audioClip: {fileID: 8300000, guid: e4b9fbacc5f81484ea317ed1a0c4cf6d, type: 3}
     - charName: 1
-      str: I am abbas
+      str: F.ckuing rats!
       audioClip: {fileID: 8300000, guid: cbb39a6437e1d15419c12b06e19570c1, type: 3}
-    - charName: 2
-      str: I am abbas
+  - qBarkName: 2
+    InValidQMode: 00000000
+    allCharData:
+    - charName: 0
+      str: rat sq
+      audioClip: {fileID: 8300000, guid: 26ef6a122b9b1e842a8a758f264834e8, type: 3}
+    - charName: 1
+      str: Rats and bats and cats... I hate them all!
+      audioClip: {fileID: 8300000, guid: 03d3bd4a26cb2524e9ddd4300e44f93e, type: 3}
+    - charName: 3
+      str: Hey, don't be offensive!
       audioClip: {fileID: 8300000, guid: 03d3bd4a26cb2524e9ddd4300e44f93e, type: 3}
     - charName: 1
-      str: I am abbas
-      audioClip: {fileID: 8300000, guid: 0dcd7531bf96d154bbcc0229ba8021a9, type: 3}
+      str: Sorry mate, forgot you're a catman.
+      audioClip: {fileID: 8300000, guid: 03d3bd4a26cb2524e9ddd4300e44f93e, type: 3}
+    - charName: 3
+      str: I'm not a catman, i am just a Macalaki!
+      audioClip: {fileID: 8300000, guid: 03d3bd4a26cb2524e9ddd4300e44f93e, type: 3}
+  - qBarkName: 3
+    InValidQMode: 00000000
+    allCharData:
+    - charName: 0
+      str: rat sq
+      audioClip: {fileID: 8300000, guid: eafbfc5a3d9083044a1fa947ba89f8b0, type: 3}
+    - charName: 1
+      str: Rats and bats and cats... I hate them all!
+      audioClip: {fileID: 8300000, guid: eafbfc5a3d9083044a1fa947ba89f8b0, type: 3}
+    - charName: 2
+      str: Is der any animal yeh like?
+      audioClip: {fileID: 8300000, guid: 4c2b04d56c3bbb14e888bece78fdd310, type: 3}
+    - charName: 1
+      str: Yeah, you mate!
+      audioClip: {fileID: 8300000, guid: 03d3bd4a26cb2524e9ddd4300e44f93e, type: 3}
+    - charName: 2
+      str: Modershagger!
+      audioClip: {fileID: 8300000, guid: 4c2b04d56c3bbb14e888bece78fdd310, type: 3}
+  - qBarkName: 4
+    InValidQMode: 00000000
+    allCharData:
+    - charName: 0
+      str: rat sq
+      audioClip: {fileID: 8300000, guid: 4c2b04d56c3bbb14e888bece78fdd310, type: 3}
+    - charName: 1
+      str: Rats and bats and cats... I hate them all!
+      audioClip: {fileID: 8300000, guid: 4c2b04d56c3bbb14e888bece78fdd310, type: 3}
+    - charName: 5
+      str: Don't worry Abbas, we will trap them.
+      audioClip: {fileID: 8300000, guid: e4b9fbacc5f81484ea317ed1a0c4cf6d, type: 3}
+    - charName: 1
+      str: Unless, they trap us!
+      audioClip: {fileID: 8300000, guid: eafbfc5a3d9083044a1fa947ba89f8b0, type: 3}
+    - charName: 5
+      str: Croaker!
+      audioClip: {fileID: 8300000, guid: 03d3bd4a26cb2524e9ddd4300e44f93e, type: 3}
+  - qBarkName: 5
+    InValidQMode: 00000000
+    allCharData:
+    - charName: 0
+      str: rat sq
+      audioClip: {fileID: 0}
+    - charName: 1
+      str: Rats and bats and cats... I hate them all!
+      audioClip: {fileID: 0}
+    - charName: 4
+      str: Fish and drink and sea... I miss them all!
+      audioClip: {fileID: 0}
+    - charName: 1
+      str: What about woman?
+      audioClip: {fileID: 0}
+    - charName: 4
+      str: Women in the Eight Seas bring misfortune!
+      audioClip: {fileID: 0}
   - qBarkName: 6
     InValidQMode: 00000000
     allCharData:
+    - charName: 0
+      str: rat sq
+      audioClip: {fileID: 0}
     - charName: 1
-      str: Abbas
-      audioClip: {fileID: 8300000, guid: 26ef6a122b9b1e842a8a758f264834e8, type: 3}
-    - charName: 2
-      str: baran
-      audioClip: {fileID: 8300000, guid: 03d3bd4a26cb2524e9ddd4300e44f93e, type: 3}
-  - qBarkName: 6
-    InValidQMode: 00000000
-    allCharData: []
+      str: Rats and bats and cats... I hate them all!
+      audioClip: {fileID: 0}
+    - charName: 7
+      str: I love rats. They are cute!
+      audioClip: {fileID: 0}
+    - charName: 1
+      str: Except when they bite!
+      audioClip: {fileID: 0}
   - qBarkName: 7
-    InValidQMode: 00000000
-    allCharData: []
+    InValidQMode: 01000000
+    allCharData:
+    - charName: 0
+      str: rat sq
+      audioClip: {fileID: 0}
+    - charName: 1
+      str: Rats and bats and cats... I hate them all!
+      audioClip: {fileID: 0}
   - qBarkName: 8
+    InValidQMode: 03000000
+    allCharData:
+    - charName: 0
+      str: bat sq
+      audioClip: {fileID: 0}
+    - charName: 1
+      str: I got a bad feeling about this place!
+      audioClip: {fileID: 0}
+    - charName: 7
+      str: Me too!
+      audioClip: {fileID: 0}
+  - qBarkName: 9
+    InValidQMode: 03000000
+    allCharData:
+    - charName: 0
+      str: bat sq
+      audioClip: {fileID: 0}
+    - charName: 1
+      str: I got a bad feeling about this place!
+      audioClip: {fileID: 0}
+    - charName: 5
+      str: Don't be a croaker!
+      audioClip: {fileID: 0}
+  - qBarkName: 10
     InValidQMode: 00000000
-    allCharData: []
+    allCharData:
+    - charName: 0
+      str: bat sq
+      audioClip: {fileID: 0}
+    - charName: 1
+      str: I think, out of all the animals, i hate bats the most!
+      audioClip: {fileID: 0}
+  - qBarkName: 11
+    InValidQMode: 00000000
+    allCharData:
+    - charName: 0
+      str: bat sq
+      audioClip: {fileID: 0}
+    - charName: 3
+      str: You know once i have seen a batman in my village...
+      audioClip: {fileID: 0}
+    - charName: 1
+      str: Oh really?
+      audioClip: {fileID: 0}
+    - charName: 3
+      str: He came by te dark night, ten he has risen to sky at the dawn.
+      audioClip: {fileID: 0}
+    - charName: 1
+      str: A nice fairy tale!
+      audioClip: {fileID: 0}
+    - charName: 3
+      str: You don't believe me???
+      audioClip: {fileID: 0}
   - qBarkName: 12
     InValidQMode: 00000000
-    allCharData: []
+    allCharData:
+    - charName: 1
+      str: I can endure the rat bites, but this stench... It's unbearable.
+      audioClip: {fileID: 0}
+    - charName: 4
+      str: In a place like this, i miss the fresh smell of sea!
+      audioClip: {fileID: 0}
   - qBarkName: 13
     InValidQMode: 00000000
-    allCharData: []
+    allCharData:
+    - charName: 0
+      str: bat sq
+      audioClip: {fileID: 0}
+    - charName: 1
+      str: I got a bad feeling about this place!
+      audioClip: {fileID: 0}
+    - charName: 2
+      str: Yeh superstichtous?
+      audioClip: {fileID: 0}
+    - charName: 1
+      str: No, i dont have stitches.
+      audioClip: {fileID: 0}
+    - charName: 2
+      str: Hgrrr! Shagger!
+      audioClip: {fileID: 0}
   - qBarkName: 14
     InValidQMode: 00000000
-    allCharData: []
+    allCharData:
+    - charName: 0
+      str: bat sq
+      audioClip: {fileID: 0}
+    - charName: 1
+      str: I got a bad feeling about this place!
+      audioClip: {fileID: 0}
+    - charName: 3
+      str: You are not alone!
+      audioClip: {fileID: 0}
+    - charName: 1
+      str: You mean you got a bad feeling too?
+      audioClip: {fileID: 0}
+    - charName: 3
+      str: No! I am here to fight beside you!
+      audioClip: {fileID: 0}
   - qBarkName: 15
     InValidQMode: 00000000
-    allCharData: []
+    allCharData:
+    - charName: 0
+      str: bat sq
+      audioClip: {fileID: 0}
+    - charName: 1
+      str: Fear is a tool, deftly wielded by the bats.
+      audioClip: {fileID: 0}
   - qBarkName: 16
     InValidQMode: 00000000
-    allCharData: []
+    allCharData:
+    - charName: 0
+      str: bat sq
+      audioClip: {fileID: 0}
+    - charName: 1
+      str: Fear is a tool, deftly wielded by the bats.
+      audioClip: {fileID: 0}
+    - charName: 2
+      str: Ah not deft! I hear yeh!
+      audioClip: {fileID: 0}
+    - charName: 1
+      str: You are a f.cking fool!
+      audioClip: {fileID: 0}
+    - charName: 2
+      str: Ah shag yer mama and she sayed de same!
+      audioClip: {fileID: 0}
   - qBarkName: 17
+    InValidQMode: 03000000
+    allCharData:
+    - charName: 1
+      str: Sewers, what a nice landscape! Smells like piss!
+      audioClip: {fileID: 0}
+  - qBarkName: 18
+    InValidQMode: 0100000002000000
+    allCharData:
+    - charName: 0
+      str: bat sq
+      audioClip: {fileID: 0}
+    - charName: 1
+      str: Wretched vermins and nocturnal animals! Leave the shadows and confront
+        me!
+      audioClip: {fileID: 0}
+  - qBarkName: 19
     InValidQMode: 00000000
-    allCharData: []
+    allCharData:
+    - charName: 0
+      str: bat sq
+      audioClip: {fileID: 0}
+    - charName: 1
+      str: You might be hiding in the shadows. But you are not the shadows!
+      audioClip: {fileID: 0}
+  - qBarkName: 20
+    InValidQMode: 00000000
+    allCharData:
+    - charName: 0
+      str: baran burps
+      audioClip: {fileID: 0}
+    - charName: 2
+      str: Sorry!
+      audioClip: {fileID: 0}
+    - charName: 1
+      str: You are a f.cking beast!
+      audioClip: {fileID: 0}
+    - charName: 2
+      str: Yeh never burrp? Shagger...
+      audioClip: {fileID: 0}
+  - qBarkName: 21
+    InValidQMode: 03000000
+    allCharData:
+    - charName: 0
+      str: baran huaarrrggaaa
+      audioClip: {fileID: 0}
+    - charName: 1
+      str: Quiet, we are not playing games around here!
+      audioClip: {fileID: 0}
+    - charName: 2
+      str: Donnt boss me!
+      audioClip: {fileID: 0}
+    - charName: 1
+      str: Well, sadly im the boss here!
+      audioClip: {fileID: 0}
+    - charName: 2
+      str: Modershagger!
+      audioClip: {fileID: 0}
+  - qBarkName: 22
+    InValidQMode: 0100000002000000
+    allCharData:
+    - charName: 0
+      str: baran huaarrrggaaa
+      audioClip: {fileID: 0}
+    - charName: 1
+      str: Stop your crap. They might hear us!
+      audioClip: {fileID: 0}
+    - charName: 2
+      str: Das why ah do. So dey hear us!
+      audioClip: {fileID: 0}
+    - charName: 1
+      str: Fine. Let's keep taunting!
+      audioClip: {fileID: 0}
+  - qBarkName: 23
+    InValidQMode: 00000000
+    allCharData:
+    - charName: 7
+      str: My friends claim i have coffee skin. Am i that dark?
+      audioClip: {fileID: 0}
+    - charName: 2
+      str: No. Ye're darker. Like dookie dookie!
+      audioClip: {fileID: 0}
+    - charName: 7
+      str: What's that?
+      audioClip: {fileID: 0}
+    - charName: 2
+      str: Is shit! Huaahah!
+      audioClip: {fileID: 0}
+    - charName: 7
+      str: Such an animal!
+      audioClip: {fileID: 0}

@@ -11,22 +11,22 @@ namespace Quest
         public override QuestNames qMainNames => QuestNames.RatInfestation;
         public override ObjNames QObjNames => ObjNames.ReturnBackToTavernkeeper;
 
-        public override void Act1()
+        public override void Action1()
         {
             
         }
 
-        public override void Act2()
+        public override void Action2()
         {
             
         }
 
-        public override void Act3()
+        public override void Action3()
         {
             
         }
 
-        public override void Act4()
+        public override void Action4()
         {
             
         }

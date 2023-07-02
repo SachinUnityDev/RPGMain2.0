@@ -13,6 +13,7 @@ namespace Quest
         [TextArea(5,10)]
         public string objNameStr;       
         public QuestState objState;
+        public bool IsQNode = false; 
 
         [Header("LLD")]
         public LocationName locationName;

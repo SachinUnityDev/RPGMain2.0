@@ -13,15 +13,14 @@ namespace Quest
         public abstract QuestNames qMainNames { get; }
         public abstract ObjNames QObjNames { get;  }
 
-        public QuestState act1State;
-        public QuestState act2State;
-        public QuestState act3State;
-        public QuestState act4State;
-
-        public abstract void Act1(); 
-        public abstract void Act2();
-        public abstract void Act3();
-        public abstract void Act4();
+        public QuestState action1State;
+        public QuestState action2State;
+        public QuestState action3State;
+        public QuestState action4State;
+        public abstract void Action1(); 
+        public abstract void Action2();
+        public abstract void Action3();
+        public abstract void Action4();
 
 
     }

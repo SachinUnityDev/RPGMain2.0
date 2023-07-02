@@ -16,25 +16,25 @@ namespace Quest
 //Action 1: Unlock Tavern
 //Action 2: Talk to Greybrow: meetGreybrow
 //Action 3: retrieveDebt "
-        public override void Act1()
+        public override void Action1()
         {
             // unlock tavern
 
         }
 
-        public override void Act2()
+        public override void Action2()
         {
             // talk to greybrow: unlock Meet Abbas and GreyBrow(Dialogue)
 
         }
 
-        public override void Act3()
+        public override void Action3()
         {
             // retrieve Debt : Abbas and Tahir
 
         }
 
-        public override void Act4()
+        public override void Action4()
         {
             
         }

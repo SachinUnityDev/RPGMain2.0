@@ -20,8 +20,9 @@ namespace Quest
         public void InitQModeBtn(QModeNLandView qModeNLandView)
         {
             this.qModeNLandView= qModeNLandView;
-            qMode = QuestMissionService.Instance.currQuestMode;                 
-            img.sprite = QuestMissionService.Instance.allQuestMainSO.GetQuestModeSprite(qMode);
+            qMode = QuestMissionService.Instance.currQuestMode;      
+            if(qMode != QuestMode.None)
+                img.sprite = QuestMissionService.Instance.allQuestMainSO.GetQuestModeSprite(qMode);
         }
         
         public void OnPointerClick(PointerEventData eventData)

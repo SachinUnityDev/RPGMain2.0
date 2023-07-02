@@ -1,0 +1,301 @@
+Taunt_shadow.png
+size:2029,2026
+filter:Linear,Linear
+pma:true
+herbalist/TAMBOR
+bounds:996,434,229,385
+rotate:90
+herbalist/THINGS
+bounds:454,1117,183,262
+offsets:1,0,185,262
+rotate:90
+herbalist/WAND
+bounds:2,1656,138,276
+offsets:1,1,141,278
+rotate:90
+herbalist/back arm/arm_lower_l
+bounds:1558,1436,173,214
+offsets:1,1,175,216
+rotate:90
+herbalist/back arm/arm_upper_l
+bounds:880,1622,146,259
+offsets:1,1,149,261
+rotate:90
+herbalist/back arm/close_l
+bounds:520,1917,116,107
+offsets:1,10,120,118
+herbalist/back leg/feet
+bounds:1206,1900,206,124
+offsets:1,2,208,127
+herbalist/back leg/mid
+bounds:951,1460,155,388
+offsets:0,0,155,418
+rotate:90
+herbalist/back leg/top
+bounds:2,947,187,426
+rotate:90
+herbalist/belt
+bounds:2,1937,266,87
+offsets:9,0,284,87
+herbalist/cape_front_r
+bounds:638,1909,130,115
+offsets:36,0,166,115
+herbalist/front arm/arm_lower_r
+bounds:1523,1611,149,268
+offsets:0,1,149,271
+rotate:90
+herbalist/front arm/arm_upper_r
+bounds:1558,1050,186,303
+offsets:1,0,189,303
+rotate:90
+herbalist/front arm/close_r
+bounds:1722,1762,136,159
+offsets:1,15,139,175
+rotate:90
+herbalist/front arm/open_r
+bounds:905,1773,132,139
+rotate:90
+herbalist/front leg/foot
+bounds:1774,1418,197,179
+herbalist/front leg/mid
+bounds:2,2,260,433
+rotate:90
+herbalist/front leg/top
+bounds:1383,399,230,461
+rotate:90
+herbalist/head
+bounds:933,192,240,243
+rotate:90
+herbalist/neck
+bounds:1414,1900,124,167
+rotate:90
+herbalist/stelth_leg/FEET
+bounds:1046,1770,132,144
+rotate:90
+herbalist/stelth_leg/MID
+bounds:1583,1900,124,415
+rotate:90
+herbalist/stelth_leg/TOP
+bounds:250,499,227,377
+rotate:90
+hunter/BOT CLOTHES 0
+bounds:1141,1617,380,148
+hunter/BOT CLOTHES1
+bounds:924,1287,345,171
+hunter/BOT CLOTHES2
+bounds:632,1777,128,271
+offsets:2,1,132,274
+rotate:90
+hunter/axe
+bounds:1541,861,187,429
+offsets:2,1,190,432
+rotate:90
+hunter/bacc leg/foot
+bounds:1364,1767,202,131
+offsets:6,3,214,137
+hunter/bacc leg/mid
+bounds:2,1136,174,450
+offsets:0,4,174,458
+rotate:90
+hunter/bacc leg/top
+bounds:1606,1238,178,410
+offsets:5,0,188,410
+rotate:90
+hunter/back arm/arm_lower_l
+bounds:226,1475,153,292
+offsets:1,1,155,295
+rotate:90
+hunter/back arm/arm_upper_l
+bounds:2,742,203,247
+offsets:0,0,203,251
+rotate:90
+hunter/back arm/close_l
+bounds:1076,1904,128,120
+hunter/back_cape
+bounds:1520,142,400,255
+offsets:5,8,407,269
+hunter/cape_front_l
+bounds:430,924,191,197
+offsets:0,0,192,197
+rotate:90
+hunter/cape_head
+bounds:718,1110,199,190
+hunter/front arm/arm_lower_r
+bounds:691,696,210,330
+rotate:90
+hunter/front arm/arm_upper_r
+bounds:919,1101,184,283
+offsets:1,1,186,285
+rotate:90
+hunter/front arm/close_r
+bounds:146,1796,128,171
+offsets:1,11,131,183
+rotate:90
+hunter/front arm/open_r
+bounds:770,1907,117,140
+offsets:4,2,122,143
+rotate:90
+hunter/front leg/foot
+bounds:1793,1599,212,154
+hunter/front leg/top
+bounds:2,264,233,455
+offsets:2,1,236,457
+rotate:90
+hunter/head
+bounds:2,504,236,246
+rotate:90
+hunter/neck
+bounds:319,1788,129,157
+rotate:90
+hunter/stelth_leg/FEET
+bounds:1883,1755,143,144
+rotate:90
+hunter/stelth_leg/MID
+bounds:251,728,187,438
+rotate:90
+hunter/stelth_leg/TOP
+bounds:629,467,227,365
+rotate:90
+warden/back arm/arm_lower_l
+bounds:1516,638,221,245
+rotate:90
+warden/back arm/arm_upper_l
+bounds:1271,1263,171,333
+rotate:90
+warden/back arm/close_l
+bounds:270,1926,115,98
+warden/back arm/open_l
+bounds:478,1785,130,152
+rotate:90
+warden/back leg/foot
+bounds:446,1630,219,145
+warden/back leg/mid
+bounds:469,1302,162,453
+rotate:90
+warden/back leg/top
+bounds:1023,665,212,491
+offsets:0,0,215,491
+rotate:90
+warden/belt
+bounds:1204,1078,352,183
+offsets:25,2,377,187
+warden/bot_armor
+bounds:2,1312,161,465
+rotate:90
+warden/cape_front_l
+bounds:629,917,191,250
+rotate:90
+warden/front arm/arm_lower_r
+bounds:1200,879,197,339
+rotate:90
+warden/front arm/arm_upper_r
+bounds:881,908,191,317
+rotate:90
+warden/front arm/close_r
+bounds:2,1810,142,125
+warden/front arm/open_r
+bounds:1192,1768,130,170
+offsets:0,8,130,178
+rotate:90
+warden/front leg/foot
+bounds:1341,1444,215,165
+offsets:12,0,227,165
+warden/front leg/mid
+bounds:459,229,236,472
+offsets:0,14,236,490
+rotate:90
+warden/gold_metal
+bounds:387,1919,131,105
+warden/head
+bounds:1763,631,228,254
+rotate:90
+warden/leather_left
+bounds:2,1496,158,222
+rotate:90
+warden/leather_rright
+bounds:667,1629,146,211
+rotate:90
+warden/neck
+bounds:912,1907,117,162
+rotate:90
+warden/pelt
+bounds:280,1639,164,147
+warden/stelth_leg/FEET
+bounds:1568,1763,135,152
+rotate:90
+warden/stelth_leg/MID
+bounds:520,1466,154,429
+rotate:90
+warden/stelth_leg/TOP
+bounds:1178,151,246,340
+rotate:90
+
+Taunt_shadow_2.png
+size:1936,2045
+filter:Linear,Linear
+pma:true
+Tx_Shadow
+bounds:211,1513,887,530
+herbalist/BOT CLOTHES
+bounds:927,612,364,560
+offsets:27,2,418,565
+rotate:90
+herbalist/back_cape
+bounds:211,654,452,714
+offsets:0,0,477,714
+rotate:90
+herbalist/cape_front_l
+bounds:1611,957,284,316
+offsets:0,13,284,342
+herbalist/shadow
+bounds:1100,1275,787,372
+offsets:29,1,817,396
+herbalist/torso
+bounds:1047,978,295,562
+offsets:13,0,320,562
+rotate:90
+hunter/BOT CLOTHES
+bounds:1489,552,428,403
+offsets:0,19,428,422
+hunter/BOT CLOTHES 3
+bounds:2,3,431,318
+hunter/front leg/mid
+bounds:1341,265,285,458
+rotate:90
+hunter/shadow
+bounds:1100,1649,834,394
+offsets:38,1,929,406
+hunter/torso
+bounds:211,323,329,572
+offsets:0,0,329,582
+rotate:90
+warden/back_cape
+bounds:435,23,359,298
+offsets:2,2,363,301
+warden/front leg/top
+bounds:785,349,261,554
+rotate:90
+warden/lance
+bounds:2,468,207,1575
+warden/shadow
+bounds:211,1108,834,403
+offsets:38,8,929,422
+warden/torso
+bounds:796,2,345,450
+rotate:90
+
+Taunt_shadow_3.png
+size:728,681
+filter:Linear,Linear
+pma:true
+hunter/BACK CLOTH
+bounds:2,408,416,271
+hunter/RUNGU
+bounds:2,2,404,388
+offsets:1,1,408,391
+rotate:90
+hunter/cape_front_r
+bounds:420,383,290,296
+warden/cape_front_r
+bounds:392,46,334,335
+offsets:0,0,334,337

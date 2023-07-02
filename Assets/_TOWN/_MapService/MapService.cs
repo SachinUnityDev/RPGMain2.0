@@ -14,7 +14,7 @@ namespace Town
 
         [Header("Controllers")]
         public PathController pathController;
-        public PathFactory pathFactory;
+      //  public PathFactory pathFactory;
 
         [Header("Map Controllers")]
         public MapController mapController;
@@ -27,7 +27,7 @@ namespace Town
         void Start()
         {
             pathController= GetComponent<PathController>();
-            pathFactory = GetComponent<PathFactory>();
+          //  pathFactory = GetComponent<PathFactory>();
             mapController = GetComponent<MapController>();
         }
         

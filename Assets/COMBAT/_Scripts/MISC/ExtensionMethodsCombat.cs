@@ -154,25 +154,26 @@ public static class ExtensionMethodsCombat
         {
             int val = UnityEngine.Random.Range(0, 100);
             chances.Insert(0, 0f);
-            for (int i = 1; i < chances.Count; i++)
+            chances.Insert(chances.Count, 100);
+            for (int i = 0; i <= chances.Count; i++)
             {
-                if (val > chances[i - 1] && val <= chances[i])
-                    return i - 1; 
+                if (val > chances[i] && val <= chances[i+1])
+                    return i; 
             }
             return 0; 
         }
 
 
-        public static bool IsNodeTimeDataMatch(this NodeTimeData nodeTimeData1, NodeTimeData nodeTimeData2)
-        {
-            if(nodeTimeData1.nodeData.nodeType == nodeTimeData2.nodeData.nodeType 
-               && nodeTimeData1.nodeData.questName == nodeTimeData2.nodeData.questName
-               && nodeTimeData1.nodeData.locName == nodeTimeData2.nodeData.locName
-               )
-             return true;
-            else
-             return false; 
-        }
+        //public static bool IsNodeTimeDataMatch(this NodeTimeData nodeTimeData1, NodeTimeData nodeTimeData2)
+        //{
+        //    if(nodeTimeData1.nodeData.nodeType == nodeTimeData2.nodeData.nodeType 
+        //       && nodeTimeData1.nodeData.questName == nodeTimeData2.nodeData.questName
+        //       && nodeTimeData1.nodeData.locName == nodeTimeData2.nodeData.locName
+        //       )
+        //     return true;
+        //    else
+        //     return false; 
+        //}
 
         public static bool IsNodeDataMatch(this NodeData nodeData1, NodeData nodeData2)
         {

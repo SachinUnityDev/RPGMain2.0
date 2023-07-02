@@ -53,6 +53,7 @@ namespace Quest
         }    
         public Sprite GetQuestModeSprite(QuestMode questMode)
         {
+            Debug.Log("Quest mode" + questMode); 
             switch (questMode)
             {
                 case QuestMode.Stealth:

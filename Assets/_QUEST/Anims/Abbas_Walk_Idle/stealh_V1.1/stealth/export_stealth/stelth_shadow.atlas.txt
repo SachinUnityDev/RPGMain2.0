@@ -1,0 +1,232 @@
+stelth_shadow.png
+size:2048,2001
+filter:Linear,Linear
+pma:true
+herbalist/back arm/arm_lower_l
+bounds:2,1434,171,197
+rotate:90
+herbalist/back arm/arm_upper_l
+bounds:478,1751,138,269
+rotate:90
+herbalist/back arm/hand
+bounds:455,1896,103,153
+rotate:90
+herbalist/back leg/foot
+bounds:1245,1874,201,125
+herbalist/back leg/mid
+bounds:919,1410,164,444
+rotate:90
+herbalist/back leg/top
+bounds:1550,452,245,380
+rotate:90
+herbalist/belt
+bounds:2,1913,274,86
+herbalist/cape_front_l
+bounds:1448,1873,126,145
+rotate:90
+herbalist/cape_front_r
+bounds:373,1599,322,150
+offsets:2,11,326,172
+herbalist/front arm/arm_lower_r
+bounds:610,1891,108,136
+offsets:0,0,109,136
+rotate:90
+herbalist/front arm/arm_upper_r
+bounds:1721,1158,296,190
+herbalist/front arm/hand
+bounds:148,1759,136,169
+offsets:3,0,142,169
+rotate:90
+herbalist/front leg/foot
+bounds:1106,1732,175,140
+offsets:2,0,177,140
+herbalist/front leg/mid
+bounds:1212,975,212,437
+rotate:90
+herbalist/front leg/top
+bounds:1353,699,227,455
+rotate:90
+herbalist/head
+bounds:226,1025,224,257
+offsets:1,1,228,259
+rotate:90
+herbalist/neck
+bounds:319,1757,137,157
+offsets:0,1,137,159
+rotate:90
+herbalist/tambor
+bounds:1651,928,228,336
+rotate:90
+herbalist/things
+bounds:385,1251,181,263
+rotate:90
+herbalist/wand
+bounds:661,1421,171,256
+offsets:1,1,174,259
+rotate:90
+hunter/axe
+bounds:1365,1394,169,426
+offsets:1,2,175,431
+rotate:90
+hunter/back arm/arm_lower_l
+bounds:1512,1189,207,203
+hunter/back arm/arm_upper_l
+bounds:932,1578,152,282
+rotate:90
+hunter/back arm/hand
+bounds:2,1784,127,144
+rotate:90
+hunter/back leg/foot_hunter
+bounds:1283,1730,206,141
+hunter/back leg/mid_hunter
+bounds:436,792,218,461
+rotate:90
+hunter/back leg/top_hunter
+bounds:414,555,235,390
+offsets:1,1,238,393
+rotate:90
+hunter/back_cape
+bounds:2,316,342,259
+hunter/belt
+bounds:1595,1873,379,126
+hunter/cape_front_l
+bounds:650,1230,221,189
+hunter/cape_front_r
+bounds:1030,149,308,308
+hunter/front arm/arm_lower_r
+bounds:1429,1569,158,190
+rotate:90
+hunter/front arm/arm_upper_r
+bounds:1241,459,307,238
+offsets:1,1,309,242
+hunter/front arm/hand
+bounds:1879,1697,143,174
+offsets:1,1,145,176
+hunter/front leg/foot_hunter
+bounds:1491,1729,177,142
+offsets:3,0,180,142
+hunter/front leg/mid_hunter
+bounds:2,577,232,410
+rotate:90
+hunter/front leg/top_hunter
+bounds:806,516,236,433
+rotate:90
+hunter/head
+bounds:950,993,229,260
+rotate:90
+hunter/head_pelt
+bounds:1831,1525,170,198
+offsets:1,1,172,200
+rotate:90
+hunter/neck
+bounds:749,1746,139,187
+rotate:90
+hunter/skirt_back
+bounds:2,811,432,212
+hunter/trophy
+bounds:697,1594,150,233
+offsets:3,0,156,233
+rotate:90
+warden/Belt
+bounds:873,1224,357,184
+warden/back arm/arm_lower_l
+bounds:2,1051,208,222
+rotate:90
+warden/back arm/arm_upper_l
+bounds:1027,1880,119,216
+rotate:90
+warden/back arm/hand
+bounds:748,1891,108,149
+rotate:90
+warden/back leg/foot
+bounds:1670,1729,207,142
+warden/back leg/mid
+bounds:2,1261,171,381
+rotate:90
+warden/back leg/top
+bounds:346,279,274,359
+rotate:90
+warden/back_cape
+bounds:1340,126,348,324
+warden/bot_armor
+bounds:201,1434,163,458
+rotate:90
+warden/cape_front_l
+bounds:1793,1350,173,253
+rotate:90
+warden/cape_front_r
+bounds:707,238,321,276
+warden/front arm/arm_lower_r
+bounds:278,1897,102,175
+offsets:1,2,104,178
+rotate:90
+warden/front arm/arm_upper_r
+bounds:1232,1203,278,189
+offsets:1,1,281,191
+warden/front arm/hand
+bounds:938,1739,139,166
+offsets:1,1,141,168
+rotate:90
+warden/front leg/foot
+bounds:190,1607,148,181
+rotate:90
+warden/front leg/mid
+bounds:485,1012,210,463
+offsets:9,0,219,463
+rotate:90
+warden/front leg/top
+bounds:899,754,219,452
+offsets:12,0,248,528
+rotate:90
+warden/gold_metal
+bounds:899,1887,126,112
+offsets:1,1,128,114
+warden/leather_left
+bounds:1216,1576,152,211
+rotate:90
+warden/leather_right
+bounds:1621,1565,162,208
+rotate:90
+warden/pelt
+bounds:2,1611,146,186
+offsets:0,0,148,199
+rotate:90
+warden/torso
+bounds:1690,2,343,448
+
+stelth_shadow_2.png
+size:1607,1614
+filter:Linear,Linear
+pma:true
+Tx_Shadow
+bounds:2,1128,839,484
+offsets:24,23,887,530
+herbalist/cape_back
+bounds:843,1118,494,762
+offsets:0,3,494,765
+rotate:90
+herbalist/shadow_1
+bounds:427,20,509,396
+rotate:90
+herbalist/shadow_2
+bounds:2,740,612,386
+herbalist/skirt
+bounds:2,43,486,423
+offsets:0,4,486,427
+rotate:90
+herbalist/torso
+bounds:825,2,344,527
+offsets:0,0,344,550
+hunter/skirt
+bounds:1171,41,488,370
+rotate:90
+hunter/torso
+bounds:616,765,351,523
+rotate:90
+hunter/weapon
+bounds:1141,784,332,452
+offsets:1,1,334,455
+rotate:90
+warden/weapon
+bounds:2,531,207,1577
+rotate:90

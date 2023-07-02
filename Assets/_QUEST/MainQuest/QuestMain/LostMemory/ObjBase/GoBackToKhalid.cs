@@ -15,19 +15,19 @@ namespace Quest
         // "Action 1:  (choose Profession.)debtisClear dialogue
         // Action 2: Unlock Marketplace
         // forcedAction -> End day"
-        public override void Act1()
+        public override void Action1()
         {
             // debt is clear Dialogue
         }
-        public override void Act2()
+        public override void Action2()
         {
            // UnLock MarketPlace
         }
-        public override void Act3()
+        public override void Action3()
         {
             // Forced action -> End Day
         }
-        public override void Act4()
+        public override void Action4()
         {
             
         }

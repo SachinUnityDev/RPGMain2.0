@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Common;
-using UnityEngine.UI; 
+using UnityEngine.UI;
+using Town;
 
 namespace Quest
 {
@@ -28,6 +29,8 @@ namespace Quest
             EncounterService.Instance.mapEController.mapENodePtrEvents.OnMapEExit();
             mapEView.GetComponent<IPanel>().UnLoad();
             mapEBase.MapEContinuePressed();
+            MapService.Instance.pathController.GetPawnStone()
+                .GetComponent<PawnStonePtrEvents>().UnPause(); 
         }
 
         public void InitResultPage(MapEView mapEView, MapEbase mapEBase, MapEModel mapEModel)

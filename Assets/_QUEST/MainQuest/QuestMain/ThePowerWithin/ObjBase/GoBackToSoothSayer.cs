@@ -12,21 +12,21 @@ namespace Quest
         public override ObjNames QObjNames => ObjNames.GoBackToSoothsayer;
         //  "Action  1: Talk to Minami
         //  proofofpower Dialogue"
-        public override void Act1()
+        public override void Action1()
         {
             //Proof of Power (Dialogue)
         }
 
-        public override void Act2()
+        public override void Action2()
         {
             
         }
 
-        public override void Act3()
+        public override void Action3()
         {
             
         }
-        public override void Act4()
+        public override void Action4()
         {
             
         }

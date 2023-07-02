@@ -13,19 +13,19 @@ namespace Quest
           
         //  Action 1: Talk to Rayyan
         //  meetRayyan dialogue"
-        public override void Act1()
+        public override void Action1()
         {
             // Meet Rayyan Dialogue
         }
-        public override void Act2()
+        public override void Action2()
         {
             
         }
-        public override void Act3()
+        public override void Action3()
         {
             
         }
-        public override void Act4()
+        public override void Action4()
         {
             
         }

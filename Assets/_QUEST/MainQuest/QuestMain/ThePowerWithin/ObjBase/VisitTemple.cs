@@ -14,21 +14,21 @@ namespace Quest
         //  "Action 1: Visit temple, talk to Minami
         //  meetMinami Dialogue
         //  Action 2: UnlockRayyan"
-        public override void Act1()
+        public override void Action1()
         {
             // meetMinami Dialogue
         }
 
-        public override void Act2()
+        public override void Action2()
         {
             // UnLocking Rayyan // scroll roster 
         }
-        public override void Act3()
+        public override void Action3()
         {
 
         }
 
-        public override void Act4()
+        public override void Action4()
         {
 
         }

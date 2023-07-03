@@ -3,19 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Interactables;
-using System.Security.Policy;
 using System;
 
 namespace Common
 {
-    public class InvSkillViewMain : MonoBehaviour, IPanel
+    public class InvSkillViewMain : MonoBehaviour, IPanel, iHelp
     {
 
         // get reference to all skill SO 
         // get ref to skill service
         public event Action<SkillModel> OnSkillSelectedInPanel;
 
-        public bool isPerkClickAvail = false; 
+        public bool isPerkClickAvail = false;
+
+        [Header("help")]
+        [SerializeField] HelpName helpName;
+
 
         [Header("To be ref")] 
         public AllSkillSO allSkillSO; 
@@ -56,7 +59,10 @@ namespace Common
             OnSkillSelectedInPanel.Invoke(skillModel);
         }
 
-
+        public HelpName GetHelpName()
+        {
+            return helpName;
+        }
 
     }
 }

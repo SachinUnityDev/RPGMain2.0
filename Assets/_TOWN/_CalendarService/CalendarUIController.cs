@@ -5,7 +5,9 @@ using TMPro;
 using System;
 using DG.Tweening;
 using Town;
-using UnityEngine.UI; 
+using UnityEngine.UI;
+using Combat;
+
 namespace Common
 {
     public class CalendarUIController : MonoBehaviour
@@ -63,8 +65,8 @@ namespace Common
         public void OnPanelEnter(GameObject panel, PanelInScene _panelInScene)
         {
             if (panelInScene == _panelInScene) 
-            {
-                OnPanelExit(panel);                                 
+            {  
+                OnPanelExit(panel);
             }
             else
             {
@@ -73,11 +75,39 @@ namespace Common
                 panel?.GetComponent<RectTransform>().DOLocalMove(new Vector3(0,0,0), 0.4f);
                 if(panel != null)
                 {
-                    panel.SetActive(true);
+                    HelpPanelSetUp(panel, panelInScene);
+                    panel.SetActive(true);                
                     Image Img = panel?.transform.parent.parent.GetComponent<Image>();
                     Img.enabled = true;
                 }
             }            
+        }
+        void HelpPanelSetUp(GameObject panel, PanelInScene panelInScene)
+        {
+            HelpName helpName = HelpName.None;
+            switch (panelInScene)
+            {
+                
+                case PanelInScene.None:
+                    helpName = HelpName.None; 
+                    break;
+                case PanelInScene.Day:
+                    helpName = HelpName.EndDay;
+                    break;
+                case PanelInScene.Week:
+                    helpName = HelpName.WeeklyEvents;
+                    break;
+                case PanelInScene.Month:
+                    helpName = HelpName.CalendarPanel;
+                    break;
+                case PanelInScene.Fame:
+                    helpName = HelpName.Fame;
+                    break;
+                default:
+                    break;
+            }
+            UIControlServiceGeneral.Instance.helpName = helpName;
+
         }
         public void OnPanelExit(GameObject panel)
         {   

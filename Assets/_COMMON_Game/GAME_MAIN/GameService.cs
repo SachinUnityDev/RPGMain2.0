@@ -31,7 +31,7 @@ namespace Common
 
         public void Init()
         {
-            gameModel = new GameModel(GameState.InQuest, GameDifficulty.Easy, LocationName.Nekkisari);
+            gameModel = new GameModel(GameState.InTown, GameDifficulty.Easy, LocationName.Nekkisari);
 
             GameEventService.Instance.On_TownEnter(LocationName.Nekkisari);
             // Load scene say here we start with the town scene

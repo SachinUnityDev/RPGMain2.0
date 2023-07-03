@@ -5,11 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - TileMap
-  - MainCanvas
   - SkillPanel
   - PerkSelectionPanel
   - Bullet
   - QuestCanvas
+  - TownCanvas
   layers:
   - Default
   - TransparentFX

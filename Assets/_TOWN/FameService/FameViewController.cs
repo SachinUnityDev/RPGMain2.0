@@ -49,8 +49,9 @@ namespace Common
         }
     }
 
-    public class FameViewController : MonoBehaviour
+    public class FameViewController : MonoBehaviour, iHelp
     {
+        [SerializeField] HelpName helpName;
 
         FameModel fameModel;
         [Header("Fame UI... to be ref")]
@@ -207,6 +208,10 @@ namespace Common
             return null;
         }
 
+        public HelpName GetHelpName()
+        {
+            return helpName;
+        }
     }
 
 

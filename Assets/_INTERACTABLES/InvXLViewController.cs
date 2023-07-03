@@ -12,6 +12,7 @@ namespace Interactables
 
         public event Action<CharModel> OnCharSelected;
 
+
         [Header("To be ref")]
         [SerializeField] GameObject ToggleBtnParent;
 
@@ -103,6 +104,8 @@ namespace Interactables
               //  Input.GetKeyDown(KeyCode.LeftControl)
             }     
         }
+
+  
     }
 
 

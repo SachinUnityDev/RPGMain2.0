@@ -11,18 +11,11 @@ namespace Town
     {
         BuildingNames BuildingName { get; }    
     }
-    public class TownViewController : MonoBehaviour
+    public class TownViewController : MonoBehaviour, iHelp
     {
+        [Header("HelpName")]
+        [SerializeField] HelpName helpName; 
 
-        //[Header("Left Town Btns")]
-        //[SerializeField] Button rosterBtn;
-        //[SerializeField] Button jobBtn;
-        //[SerializeField] Button inventoryBtn;
-
-        //[Header("Right Town Btns")]
-        //[SerializeField] Button eventBtn;
-        //[SerializeField] Button questScrollBtn;
-        //[SerializeField] Button mapBtn;
 
         [Header("Cloud")]
         [SerializeField] Transform cloudTrans; 
@@ -87,7 +80,7 @@ namespace Town
                 cloudTrans.gameObject.SetActive(true);
             else
                 cloudTrans.gameObject.SetActive(false);
-            
+
         }
         void FillTownBG()
         {
@@ -96,6 +89,11 @@ namespace Town
             else
                 townBGImage.sprite = TownService.Instance.allbuildSO.TownBGDay;
             
+        }
+
+        public HelpName GetHelpName()
+        {
+            return helpName; 
         }
     }
 

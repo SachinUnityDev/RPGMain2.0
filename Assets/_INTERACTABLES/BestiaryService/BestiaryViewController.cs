@@ -9,8 +9,10 @@ using UnityEngine.UI;
 
 namespace Interactables
 {
-    public class BestiaryViewController : MonoBehaviour, IPanel
+    public class BestiaryViewController : MonoBehaviour, IPanel, iHelp
     {
+        [Header("help")]
+        [SerializeField] HelpName helpName;
 
         [SerializeField] Transform raceBar;
         [SerializeField] Transform scrollNameGO;
@@ -171,7 +173,11 @@ namespace Interactables
             PopulateBestiaryScroll();
         }
 
-        #endregion 
+        #endregion
+        public HelpName GetHelpName()
+        {
+            return helpName;
+        }
 
     }
 }

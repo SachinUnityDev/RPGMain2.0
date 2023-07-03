@@ -7,12 +7,17 @@ using UnityEngine.UI;
 
 namespace Common
 {
+    public interface iHelp
+    {
+        HelpName GetHelpName(); 
+    }
+
     public class HelpView : MonoBehaviour, IPanel
     {
         [Header("UI TBR ")]
         [SerializeField] TextMeshProUGUI headingTxt;
         [SerializeField] TextMeshProUGUI helpStr;
-        [SerializeField] Button pageBtn;
+        [SerializeField] GameObject pageBtn;
         [SerializeField] TextMeshProUGUI pageNum; 
 
         //[Space(5)]
@@ -22,18 +27,23 @@ namespace Common
         [SerializeField] int maxIndex;
         [SerializeField] HelpSO helpSO;
         [SerializeField] HelpName helpName;
+
+        HelpController helpController; 
+
         void Start()
         {
-            pageBtn.onClick.AddListener(OnPageTurnBtnPressed);
+            
         }
-        public void InitHelp(HelpName helpName, HelpSO helpSO)
+        public void InitHelp(HelpName helpName, HelpSO helpSO, HelpController helpController)
         {
             this.helpSO = helpSO;    
             this.helpName = helpName; 
+            this.helpController = helpController;   
             index = 0;
             maxIndex = helpSO.helpStrs.Count;
             Load(); 
             FillPage();
+            pageBtn.GetComponent<HelpScrollBtnPtrEvents>().InitScrollBtn(this);
         }
 
 
@@ -43,15 +53,23 @@ namespace Common
             helpStr.text = helpSO.helpStrs[index];
             // page number
             pageNum.text = "";
-                //$"{index + 1}" + "/" + $"{maxIndex}"; 
+                //$"{index + 1}" + "/" + $"{maxIndex}";     
+            if(maxIndex> 1)
+            {
+                pageBtn.gameObject.SetActive(true);
+            }
+            else
+            {
+                pageBtn.gameObject.SetActive(false);
+            }
         }
 
-        void OnPageTurnBtnPressed()
+        public void OnPageTurnBtnPressed()
         {
             if (Time.time - prevRightClick < 0.3f) return;
-            if (index == 0)
+            if (index == maxIndex - 1)
             {
-                index = maxIndex - 1;
+                index = 0;
                 FillPage();
             }
             else
@@ -69,6 +87,7 @@ namespace Common
         public void UnLoad()
         {
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
+            helpController.RemoveHelpView();
         }
 
         public void Init()

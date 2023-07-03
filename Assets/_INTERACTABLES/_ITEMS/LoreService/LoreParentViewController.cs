@@ -5,8 +5,11 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class LoreParentViewController : MonoBehaviour, IPanel
+    public class LoreParentViewController : MonoBehaviour, IPanel, iHelp
     {
+        [Header("help")]
+        [SerializeField] HelpName helpName;
+
         [SerializeField] Transform lorePanel;
         [SerializeField] Transform receipePanel;
 
@@ -40,6 +43,11 @@ namespace Interactables
             // unload both subPanels here
             loreViewController.GetComponent<IPanel>().UnLoad();
             receipeViewController.GetComponent<IPanel>().UnLoad();
+        }
+
+        public HelpName GetHelpName()
+        {
+            return helpName;
         }
     }
 }

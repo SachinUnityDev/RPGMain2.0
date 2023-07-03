@@ -11,14 +11,23 @@ namespace Common
 
     public class UIControlServiceGeneral : MonoSingletonGeneric<UIControlServiceGeneral>
     {
-        public GameObject mainCanvas;
+        public GameObject townCanvas;
         public List<GameObject> currOpenPanels = new List<GameObject>();
 
+        [Header("Escape related")]
+        [SerializeField] float lastEscClick = 0f; 
         [SerializeField] GameObject escPanel;
         [SerializeField] bool isEscOpen = false;
+        
         [Header("Notify SO")]
         public AllNotifySO allNotifySO;
         public NotifyController notifyController;
+        
+        [Header("HelpName")]
+        public HelpName helpName;
+
+
+
         public void InitUIGeneral()
         {
             notifyController = GetComponent<NotifyController>();
@@ -27,17 +36,17 @@ namespace Common
         }
         private void Start()
         {
-            mainCanvas = GameObject.FindWithTag("MainCanvas");
+            townCanvas = GameObject.FindWithTag("TownCanvas");
             TogglePanel(escPanel, false);
         }
 
-        public void AddPanel2OpenList(GameObject panel)
-        {
-            if(!currOpenPanels.Any(t=>t.name == panel.name))
-            {
-                currOpenPanels.Add(panel); 
-            }
-        }
+        //public void AddPanel2OpenList(GameObject panel)
+        //{
+        //    if(!currOpenPanels.Any(t=>t.name == panel.name))
+        //    {
+        //        currOpenPanels.Add(panel); 
+        //    }
+        //}
 
         public void CloselastPanel()
         {
@@ -102,8 +111,8 @@ namespace Common
      
         public void SetMaxSibling2Canvas(GameObject go)
         {
-            go.transform.SetParent(mainCanvas.transform);
-            int childCount = mainCanvas.transform.childCount - 1;
+            go.transform.SetParent(townCanvas.transform);
+            int childCount = townCanvas.transform.childCount - 1;
             go.transform.SetSiblingIndex(childCount);
             AddAnchorsToMaxExpansion(go);
         }
@@ -135,10 +144,20 @@ namespace Common
         {
             if(turnON)
                 if (currOpenPanels.Any(t => t.gameObject.name == go.name)) return;
+            iHelp help = go.GetComponent<iHelp>();
             if (turnON)
+            {
+                if (help != null)
+                    helpName = help.GetHelpName();
                 currOpenPanels.Add(go);
+            }
             else
+            {
+                if (help != null)
+                    helpName = GuideServices.Instance.GetDefaultHelp(); 
                 currOpenPanels.Remove(go);
+            }
+                
 
             go.SetActive(turnON); 
             //go.transform.DOScale(1f, 0.01f);
@@ -214,9 +233,12 @@ namespace Common
 
         private void Update()
         {
+           
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                CloselastPanel(); 
+                if (Time.time - lastEscClick < 2.5f) return;
+                CloselastPanel();
+                lastEscClick = Time.time;                
             }
         }
 

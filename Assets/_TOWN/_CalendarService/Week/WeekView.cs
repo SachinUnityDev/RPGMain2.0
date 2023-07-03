@@ -7,8 +7,10 @@ using UnityEngine;
 
 namespace Town
 {
-    public class WeekView : MonoBehaviour
+    public class WeekView : MonoBehaviour, iHelp
     {
+        [SerializeField] HelpName helpName; 
+
         [Header("TBR")]
         [SerializeField] TextMeshProUGUI weekName;
         [SerializeField] TextMeshProUGUI descTxt;
@@ -17,6 +19,11 @@ namespace Town
         [Header("Global Var")]
         CalendarUIController calendarUIController; 
         [SerializeField] WeekModel weekModel;
+
+        public HelpName GetHelpName()
+        {
+            return helpName; 
+        }
 
         public void InitWeeek(CalendarUIController calendarUIController, WeekModel weekModel)
         {

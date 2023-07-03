@@ -13,8 +13,9 @@ namespace Common
   
 
 
-    public class RosterViewController : MonoBehaviour, IPanel
+    public class RosterViewController : MonoBehaviour, IPanel, iHelp
     {
+        [SerializeField] HelpName helpName;
         [Header("TO BE REF")]
         [SerializeField] Button closeBtn; 
         [SerializeField] GameObject charScrollGO;
@@ -222,6 +223,11 @@ namespace Common
         {
 
             Load();          
+        }
+
+        public HelpName GetHelpName()
+        {
+            return helpName;
         }
     }
 

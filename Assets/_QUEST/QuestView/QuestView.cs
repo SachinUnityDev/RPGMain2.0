@@ -6,8 +6,9 @@ using UnityEngine;
 
 namespace Quest
 {
-    public class QuestView : MonoBehaviour, IPanel
+    public class QuestView : MonoBehaviour, IPanel, iHelp
     {
+        [SerializeField] HelpName helpName;
         public Transform headerTrans;
         public Transform questBtnTrans;
         public Transform questJournoTrans;
@@ -38,6 +39,11 @@ namespace Quest
         public void UnLoad()
         {   
             UIControlServiceGeneral.Instance.TogglePanel(this.gameObject, false);          
+        }
+
+        public HelpName GetHelpName()
+        {
+            return helpName;
         }
     }
 }

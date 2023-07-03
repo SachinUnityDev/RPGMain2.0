@@ -6,8 +6,9 @@ using UnityEngine.UI;
 
 namespace Town
 {
-    public class MapView : MonoBehaviour, IPanel
+    public class MapView : MonoBehaviour, IPanel, iHelp
     {
+        [SerializeField] HelpName helpName; 
         [SerializeField] Button nekkisariBtn;
         
         [Header("BUTTONS")]
@@ -98,6 +99,10 @@ namespace Town
 
         }
 
+        public HelpName GetHelpName()
+        {
+            return helpName;
+        }
     }
 
 }

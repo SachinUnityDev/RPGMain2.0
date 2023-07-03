@@ -39,15 +39,6 @@ namespace Common
             townCanvas = GameObject.FindWithTag("TownCanvas");
             TogglePanel(escPanel, false);
         }
-
-        //public void AddPanel2OpenList(GameObject panel)
-        //{
-        //    if(!currOpenPanels.Any(t=>t.name == panel.name))
-        //    {
-        //        currOpenPanels.Add(panel); 
-        //    }
-        //}
-
         public void CloselastPanel()
         {
             int count = currOpenPanels.Count; 
@@ -76,8 +67,7 @@ namespace Common
             }
         }
         
-
-        public void closeAllPanels()
+        public void CloseAllPanels()
         {           
             foreach (GameObject go in currOpenPanels.ToList())
             {
@@ -137,7 +127,7 @@ namespace Common
         {
             if (turnOn)
                 if (currOpenPanels.Any(t => t.gameObject.name == go.name)) return;
-            closeAllPanels();
+            CloseAllPanels();
             TogglePanel(go, turnOn);  
         }
         public void TogglePanel(GameObject go, bool turnON)
@@ -232,18 +222,14 @@ namespace Common
         }
 
         private void Update()
-        {
-           
+        {  
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (Time.time - lastEscClick < 2.5f) return;
+                if ((Time.time - lastEscClick) < 0.5f) return;
                 CloselastPanel();
                 lastEscClick = Time.time;                
             }
         }
-
-
-
     }
 
 }

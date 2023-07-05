@@ -10,8 +10,9 @@ using Interactables;
 namespace Town
 {
  
-    public class HouseViewController : MonoBehaviour, IPanel, IBuildName
+    public class HouseViewController : MonoBehaviour, IPanel, IBuildName, iHelp
     {
+        [SerializeField] HelpName helpName;
         public BuildingNames BuildingName => BuildingNames.House;
 
         [Header("To be ref")]
@@ -114,6 +115,11 @@ namespace Town
                 child.GetComponent<IPanel>().UnLoad();  
             }
             TownService.Instance.townViewController.selectBuild = BuildingNames.None;
+        }
+
+        public HelpName GetHelpName()
+        {
+            return helpName;
         }
     }
 }

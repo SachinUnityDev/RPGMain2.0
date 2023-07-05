@@ -3,16 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.Audio;
+using System.Security.Policy;
+using DG.Tweening;
+
 namespace Quest
 {
     public class QbarkView : MonoBehaviour
     {
+        [Header(" Interact bark Data")]
         [SerializeField] List<BarkCharData> allBarkData = new List<BarkCharData>();
-        AudioSource audioSource;
-        InteractEColEvents interactEColEvents; 
+        [SerializeField] AudioSource audioSourceVO;
+        [SerializeField] AudioSource audioSourceUI;
+        InteractEColEvents interactEColEvents;
+
+        [Header("Curio bark Data")]
+        BarkCharData barkCharData;
+        AudioClip UICurioAudio;
+        AudioClip BarkCurioAudio; 
+        CurioColEvents curioColEvents;
+
         void Start()
         {
-            audioSource= GetComponent<AudioSource>();
+          
         }
 
         public void InitBark(List<BarkCharData> allBarkCharData, InteractEColEvents interactEColEvents)
@@ -20,11 +32,30 @@ namespace Quest
             this.allBarkData = allBarkCharData;
             this.interactEColEvents= interactEColEvents;
             //this is sorted for quest mode and char in Quest 
-            StartCoroutine(StartBarkLine());
+            StartCoroutine(StartBarkLine(false));
         }
+        public void InitCurioBark(BarkCharData barkCharData, CurioColEvents curioColEvents
+                                                                        , AudioClip AudioUI)
+        {
+            this.curioColEvents= curioColEvents;
+            allBarkData.Clear();
+            allBarkData.Add(barkCharData);
+            float time = AudioUI.length;
+            Sequence seqUI = DOTween.Sequence();
+            seqUI
+                .AppendCallback(() => PlayCurioUI(AudioUI))
+                .AppendInterval(time)
+                .AppendCallback(() => StartCoroutine(StartBarkLine(true)))
+                ;
 
-
-        IEnumerator StartBarkLine()
+            seqUI.Play();
+        }
+        void PlayCurioUI(AudioClip audioClip)
+        {
+            audioSourceUI.clip= audioClip;
+            audioSourceUI.Play();
+        }
+        IEnumerator StartBarkLine(bool isCurio)
         {
             int i = 0;
             while (i < allBarkData.Count)
@@ -41,8 +72,8 @@ namespace Quest
                 if (allBarkData[i].audioClip != null)
                 {
                     time = allBarkData[i].audioClip.length;
-                    audioSource.clip = allBarkData[i].audioClip;
-                    audioSource.Play();
+                    audioSourceVO.clip = allBarkData[i].audioClip;
+                    audioSourceVO.Play();
                 }
                 if (index != -1)
                 {
@@ -57,7 +88,11 @@ namespace Quest
                
                 i++;
             }
-            interactEColEvents.OnContinue();
+            if (isCurio)
+                curioColEvents.OnContinue();
+            else
+               interactEColEvents.OnContinue();
+
             CloseAllBarks();
         }
     

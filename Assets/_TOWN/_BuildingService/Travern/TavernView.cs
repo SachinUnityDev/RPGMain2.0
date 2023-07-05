@@ -6,8 +6,9 @@ using UnityEngine.UI;
 
 namespace Town
 {
-    public class TavernView : MonoBehaviour, IPanel, IBuildName
+    public class TavernView : MonoBehaviour, IPanel, IBuildName, iHelp
     {
+        [SerializeField] HelpName helpName;
         public BuildingNames BuildingName => BuildingNames.Tavern;
 
         [Header("To be ref")]
@@ -120,5 +121,9 @@ namespace Town
             }
         }
 
+        public HelpName GetHelpName()
+        {
+           return helpName;
+        }
     }
 }

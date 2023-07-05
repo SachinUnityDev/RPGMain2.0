@@ -5,9 +5,9 @@ using Common;
 
 namespace Town
 {
-    public class ShipView : MonoBehaviour, IPanel, IBuildName
+    public class ShipView : MonoBehaviour, IPanel, IBuildName, iHelp
     {
-
+        [SerializeField] HelpName helpName;
         public BuildingNames BuildingName => BuildingNames.Ship;
 
         [Header("To be ref")]
@@ -96,6 +96,9 @@ namespace Town
             TownService.Instance.townViewController.selectBuild = BuildingNames.None;
         }
 
-
+        public HelpName GetHelpName()
+        {
+            return helpName;
+        }
     }
 }

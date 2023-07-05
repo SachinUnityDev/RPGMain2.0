@@ -35,7 +35,7 @@ namespace Intro
             UIControlServiceGeneral.Instance.SetMaxSiblingIndex(gameObject);
             transform.GetChild(0).gameObject.SetActive(true);// text revealer
             IntroServices.Instance.MoveEntenNEmesh();
-            SoundServices.Instance.PlayBGSound(BGAudioClipNames.PoetryMusic);
+            IntroAudioService.Instance.PlayBGSound(BGAudioClipNames.PoetryMusic);
         }
 
         public void UnLoad()

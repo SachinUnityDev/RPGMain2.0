@@ -39,7 +39,14 @@ namespace Quest
         public CharNames charName;
         [TextArea(2,5)]
         public string str;
-        public AudioClip audioClip;      
+        public AudioClip audioClip;
+
+        public BarkCharData(CharNames charName, string str, AudioClip audioClip)
+        {
+            this.charName = charName;
+            this.str = str;
+            this.audioClip = audioClip;
+        }
     }
 
   

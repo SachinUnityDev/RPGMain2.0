@@ -14,7 +14,8 @@ namespace Intro
 
         public void Init()
         {
-        
+           
+
         }
 
         public void Load()
@@ -24,8 +25,9 @@ namespace Intro
             UIControlServiceGeneral.Instance.ToggleInteractionsOnUI(this.gameObject, true);
             UIControlServiceGeneral.Instance.SetMaxSiblingIndex(gameObject);
             video.gameObject.SetActive(true);
-            SoundServices.Instance.StopAllBGSound(0.25f);
-            SoundServices.Instance.PlayBGSound(BGAudioClipNames.VideoDialogue);
+            video.time = 0f;
+            IntroAudioService.Instance.StopAllBGSound(0.25f);
+            IntroAudioService.Instance.PlayBGSound(BGAudioClipNames.VideoDialogue);
         }
 
         public void UnLoad()
@@ -35,7 +37,7 @@ namespace Intro
             UIControlServiceGeneral.Instance.ToggleInteractionsOnUI(this.gameObject, false);
 
             video.gameObject.SetActive(false);
-            SoundServices.Instance.StopAllBGSound(0.25f);
+            IntroAudioService.Instance.StopAllBGSound(0.25f);
             IntroServices.Instance.Fade(gameObject, 0.4f);
             IntroServices.Instance.LoadNext();
         }

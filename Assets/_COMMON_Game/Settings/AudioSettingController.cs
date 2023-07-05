@@ -6,22 +6,14 @@ using TMPro;
 
 namespace Common
 {
-
-
-
-    public class SoundSettingController : MonoBehaviour
+    public class AudioSettingController : MonoBehaviour
     {
         [SerializeField] GameObject soundPanel;
-
         [SerializeField] GameObject masterVol;
         [SerializeField] GameObject musicVol;
         [SerializeField] GameObject ambienceVol;
         [SerializeField] GameObject soundFxVol;
         [SerializeField] GameObject voiceVol; 
-
-
-
-     
         void Start()
         {
             masterVol = transform.GetChild(0).gameObject;  

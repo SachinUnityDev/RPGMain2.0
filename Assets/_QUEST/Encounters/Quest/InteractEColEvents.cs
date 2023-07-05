@@ -19,7 +19,7 @@ namespace Quest
         [SerializeField] QRoomInteractData interactData;
         [SerializeField] int interactNo;
         // Start is called before the first frame update
-
+        [SerializeField] bool hasInteraction = false; 
 
         void Start()
         {
@@ -28,7 +28,7 @@ namespace Quest
         public void InitInteract(QRoomModel qRoomModel)
         {
             this.qRoomModel= qRoomModel;
-            interactData = qRoomModel.GetInteractData(interactNo);
+            interactData = qRoomModel.GetInteractData(interactNo);            
             SetCollider();
         }        
         public void OnCollisionEnter2D(Collision2D collision)
@@ -43,21 +43,21 @@ namespace Quest
         {
             if (interactNo == 1)
             {
-                if (qRoomModel.interact1Chked)
+                if (qRoomModel.interact1Chked || !qRoomModel.interact1Data.HasInteraction())
                     gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 else
                     gameObject.GetComponent<BoxCollider2D>().enabled = true;
             }
             if (interactNo == 2)
             {
-                if (qRoomModel.interact2Chked)
+                if (qRoomModel.interact2Chked || !qRoomModel.interact2Data.HasInteraction())
                     gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 else
                     gameObject.GetComponent<BoxCollider2D>().enabled = true;
             }
             if (interactNo == 3)
             {
-                if (qRoomModel.interact3Chked)
+                if (qRoomModel.interact3Chked || !qRoomModel.interact3Data.HasInteraction())
                     gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 else
                     gameObject.GetComponent<BoxCollider2D>().enabled = true;

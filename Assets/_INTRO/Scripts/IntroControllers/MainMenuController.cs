@@ -55,7 +55,7 @@ namespace Intro
             UIControlServiceGeneral.Instance.SetMaxSiblingIndex(gameObject);
             IntroServices.Instance.FadeInEntenNEmesh(1.0f, 1f);
             IntroServices.Instance.AnimateEntenNEmesh();
-            SoundServices.Instance.PlayBGSound(BGAudioClipNames.ShargadMusic);
+            IntroAudioService.Instance.PlayBGSound(BGAudioClipNames.ShargadMusic);
         
         }
         public IEnumerator Wait(float time)

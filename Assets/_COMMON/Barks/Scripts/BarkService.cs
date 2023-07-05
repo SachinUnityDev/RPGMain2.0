@@ -10,12 +10,13 @@ namespace Common
     {
         // Start is called before the first frame update
         public AllBarkSO allBarkSO;
-        public QbarkController qbarkController; 
-        
+        public QbarkController qbarkController;
+        public CurioBarkController curioBarkController; 
 
         void Start()
         {
             qbarkController = gameObject.GetComponent<QbarkController>();
+            curioBarkController = GetComponent<CurioBarkController>();
             // no controllers needed 
             // one line call to manage UI 
             // barkAudio controller to manager sound files 

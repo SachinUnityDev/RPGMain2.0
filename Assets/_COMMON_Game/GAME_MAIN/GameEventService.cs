@@ -41,7 +41,7 @@ namespace Common
             LevelService.Instance.Init();
             TownService.Instance.Init(locationName);
             OnTownEnter?.Invoke(locationName);
-            QuestMissionService.Instance.InitQuestMission();    
+            //QuestMissionService.Instance.InitQuestMission();    
             //LootService.Instance.InitLootService();
             //CurioService.Instance.InitCurioService();// test purpose only
         }

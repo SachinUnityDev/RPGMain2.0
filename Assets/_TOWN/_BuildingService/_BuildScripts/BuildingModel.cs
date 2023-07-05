@@ -13,6 +13,7 @@ namespace Town
         Locked,    // when you click that building it gives a notification box...locked bark        
         Available,  // enter 
         UnAvailable, // unavailable bark
+        None,
     }
     [Serializable]
     public enum NPCState

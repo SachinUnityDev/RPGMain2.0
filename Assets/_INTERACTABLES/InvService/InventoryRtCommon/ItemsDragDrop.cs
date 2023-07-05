@@ -78,8 +78,13 @@ namespace Interactables
         {
             float width = itemCardGO.GetComponent<RectTransform>().rect.width;
             float height = itemCardGO.GetComponent<RectTransform>().rect.height;
-            GameObject Canvas = GameObject.FindWithTag("MainCanvas");
-            Canvas canvasObj = Canvas.GetComponent<Canvas>();
+            GameObject canvas =null; 
+            if(GameService.Instance.gameModel.gameState == GameState.InTown)
+                 canvas = GameObject.FindWithTag("TownCanvas");
+            if (GameService.Instance.gameModel.gameState == GameState.InQuest)
+                canvas = GameObject.FindWithTag("QuestCanvas");
+
+            Canvas canvasObj = canvas.GetComponent<Canvas>();
             // get slot index based on slot index adjust the offset
            Transform slotTrans = transform.parent.parent;
             int slotIndex = slotTrans.GetSiblingIndex() % 6;

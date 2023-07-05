@@ -8,8 +8,10 @@ using Common;
 using Interactables;
 namespace Town
 {
-    public class TempleViewController : MonoBehaviour, IPanel, IBuildName
+    public class TempleViewController : MonoBehaviour, IPanel, IBuildName, iHelp
     {
+        [SerializeField] HelpName helpName;
+
         public BuildingNames BuildingName => BuildingNames.Temple;
         [Header("To be ref")]
         [SerializeField] Transform btnContainer;
@@ -124,6 +126,9 @@ namespace Town
             //}
         }
 
-
+        public HelpName GetHelpName()
+        {
+            return helpName;
+        }
     }
 }

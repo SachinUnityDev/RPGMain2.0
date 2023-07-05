@@ -9,6 +9,8 @@ using Intro;
 using Town;
 using Combat;
 using Interactables;
+
+
 namespace Common
 {
 
@@ -18,28 +20,36 @@ namespace Common
         public GameController gameController; // centralised service
         public GameModeController gameModeController; // centralised service
 
+        [Header("Scene Controller")]
+        public SceneController sceneController;
+
+        [Header("Global Var")]
         public GameModel gameModel;
         public bool isGameOn = false;
         [SerializeField] List<string> allGameJSONs = new List<string>();
+
+
+
+
 
         void Start()
         {
             //gameController = GetComponent<GameController>();
             //gameModeController = GetComponent<GameModeController>(); 
-           Init(); 
+           
+            sceneController = GetComponent<SceneController>();
+           GameServiceInit(GameState.InQuest, GameDifficulty.Easy, LocationName.Nekkisari); 
         }
 
-        public void Init()
+        public void GameServiceInit(GameState gameState, GameDifficulty gameDiff, LocationName locName)
         {
-            gameModel = new GameModel(GameState.InTown, GameDifficulty.Easy, LocationName.Nekkisari);
+            gameModel = new GameModel(gameState,gameDiff, locName);
 
-            GameEventService.Instance.On_TownEnter(LocationName.Nekkisari);
+            //  GameEventService.Instance.On_TownEnter(LocationName.Nekkisari);
             // Load scene say here we start with the town scene
 
             // Init all the services in the scene 
             // ensure all the service has save service "Isaveable integrated"
-
-
 
             // list of Common Service to init       
             // ON ENTER TOWN INIT THESE SERVICES 

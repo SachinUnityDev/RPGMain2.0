@@ -25,7 +25,7 @@ namespace Common
         VideoDialogue,
 
     }
-    public class SoundServices : MonoSingletonGeneric<SoundServices>
+    public class IntroAudioService : MonoSingletonGeneric<IntroAudioService>
     {       
         public AudioSource soundFXSource;
         public AudioSource musicSource;

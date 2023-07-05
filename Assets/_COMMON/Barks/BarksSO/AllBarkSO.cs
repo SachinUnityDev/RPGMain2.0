@@ -1,3 +1,4 @@
+using Quest;
 using System.Collections;
 using System.Collections.Generic;
 using Town;
@@ -28,6 +29,23 @@ namespace Common
             }
             return null;
         }
+
+        public CurioBarkData GetCurioBarkData(CurioNames curioName)
+        {
+            int index = 
+            curioBarkSO.curioData.FindIndex(t=>t.curioName== curioName);
+
+            if(index != -1)
+            {
+               return curioBarkSO.curioData[index]; 
+            }
+            else
+            {
+                Debug.Log("Curio bark data not found");
+            }
+            return null;  
+        } 
+
 
     }
 }

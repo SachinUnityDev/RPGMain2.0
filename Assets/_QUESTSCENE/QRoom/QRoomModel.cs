@@ -95,8 +95,7 @@ namespace Quest
                 default: 
                     return null;
             }
-        }
-
+        }     
 
     }
 }

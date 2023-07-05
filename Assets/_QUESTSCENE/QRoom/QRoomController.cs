@@ -61,7 +61,9 @@ namespace Quest
         }
         void InteractInit(QRoomModel qRoomModel)
         {
+
             QRoomService.Instance.interact1.GetComponent<InteractEColEvents>().InitInteract(qRoomModel);
+
             QRoomService.Instance.interact2.GetComponent<InteractEColEvents>().InitInteract(qRoomModel);
             QRoomService.Instance.interact3.GetComponent<InteractEColEvents>().InitInteract(qRoomModel);
             //CurioService.Instance.curioView.gameObject.SetActive(false);

@@ -16,23 +16,37 @@ MonoBehaviour:
   curioData:
   - curioName: 3
     barkline: Sadly, no beer.
+    UIaudioClip: {fileID: 8300000, guid: abcedbbdc90eecc48957affaa4261b4d, type: 3}
+    VOaudioClip: {fileID: 8300000, guid: c0b3e40200ed5d541966e57bcc3c689a, type: 3}
   - curioName: 9
     barkline: Feels great to crash a crate.
+    UIaudioClip: {fileID: 8300000, guid: 817b199f209b0f94bbe8190adde550e2, type: 3}
+    VOaudioClip: {fileID: 8300000, guid: e4b9fbacc5f81484ea317ed1a0c4cf6d, type: 3}
   - curioName: 12
     barkline: What a fresh looking fountain!
+    UIaudioClip: {fileID: 8300000, guid: 0fdb4238c954ea54fb8a861b6f5d510d, type: 3}
+    VOaudioClip: {fileID: 8300000, guid: 51f0c54706b53c14c9c24bbd63bb18a6, type: 3}
   - curioName: 8
     barkline: Chest is the best.
-  - curioName: 16
-    barkline: Smells like shit.
+    UIaudioClip: {fileID: 8300000, guid: d7edcf35f2a4d0b44ace26f5b210ada7, type: 3}
+    VOaudioClip: {fileID: 8300000, guid: e4b9fbacc5f81484ea317ed1a0c4cf6d, type: 3}
   - curioName: 17
     barkline: Smells like shit.
+    UIaudioClip: {fileID: 8300000, guid: 575ae06720466194d9f39254e8651687, type: 3}
+    VOaudioClip: {fileID: 8300000, guid: cbb39a6437e1d15419c12b06e19570c1, type: 3}
   - curioName: 16
     barkline: Skulls of past brave warriors... Too brave!
+    UIaudioClip: {fileID: 8300000, guid: d98abc8023ac8cf408db830fc9fee04a, type: 3}
+    VOaudioClip: {fileID: 8300000, guid: c2ceae89ff4ba184b829e30d985f32a5, type: 3}
   - curioName: 10
     barkline: Sticky as pit!
+    UIaudioClip: {fileID: 8300000, guid: 96c6c5ae13cdbdb46937c44e33733f99, type: 3}
+    VOaudioClip: {fileID: 8300000, guid: e986056f914f4974896a49527ca80041, type: 3}
   - curioName: 18
     barkline: Fucking rats!
-  - curioName: 18
-    barkline: Fucking rats!
+    UIaudioClip: {fileID: 8300000, guid: 580111e861c193a4d979b5d0bddc59db, type: 3}
+    VOaudioClip: {fileID: 8300000, guid: 696a1b220bb00334b9820697c222bc96, type: 3}
   - curioName: 19
     barkline: I wish it was a magic sack!
+    UIaudioClip: {fileID: 8300000, guid: 2ac99d1a49139ad4c9744aa061e472ec, type: 3}
+    VOaudioClip: {fileID: 8300000, guid: 0dcd7531bf96d154bbcc0229ba8021a9, type: 3}

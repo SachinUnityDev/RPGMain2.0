@@ -8,7 +8,8 @@ using Common;
 
 namespace Intro
 {
-    
+
+
     public class LoadingPanelController : MonoBehaviour, IPanel
     {
 
@@ -35,25 +36,37 @@ namespace Intro
             UIControlServiceGeneral.Instance.ToggleInteractionsOnUI(this.gameObject, true);
             IntroServices.Instance.Fade(gameObject, 1.0f);
             UIControlServiceGeneral.Instance.SetMaxSiblingIndex(gameObject);
-            LoadScene(SceneNames.Town);
+            //LoadScene(SceneNames.Town);
+            LoadSceneSeq();
+        }
+
+        void LoadSceneSeq()
+        {
+            Sequence loadSeq = DOTween.Sequence();
+            loadSeq
+                   .AppendCallback(()=>StartAnims())
+                   .AppendInterval(1.0f)
+                   .AppendCallback(()=> GameService.Instance.sceneController.LoadScene(GameScene.Town))
+                    ;
+            loadSeq.Play();
         }
 
         public void UnLoad()
         {
-            UnLoadScene();
+           // UnLoadScene();
         }
 
         public void Init()
         {
 
         }
-        public void LoadScene(SceneNames sceneName)
-        {
-            StartAnims();
-            Application.backgroundLoadingPriority = ThreadPriority.Low;
-            scene = SceneManager.GetActiveScene();
-           // StartCoroutine(LoadingCoroutine(sceneName));
-        }
+        //public void LoadScene(SceneNames sceneName)
+        //{
+        //    StartAnims();
+        //    Application.backgroundLoadingPriority = ThreadPriority.Low;
+        //    scene = SceneManager.GetActiveScene();
+        //    StartCoroutine(LoadingCoroutine(sceneName));
+        //}
         
         public void Fade(CanvasGroup Out, CanvasGroup In)
         {
@@ -66,44 +79,27 @@ namespace Intro
             In.DOFade(0f, 0.4f);
         }
 
-        public void UnLoadScene()
-        {
-            // on text revealer complete and fade screen on do this 
-            SceneManager.UnloadSceneAsync(scene.name);
-        }
+        //public void UnLoadScene()
+        //{
+        //    // on text revealer complete and fade screen on do this 
+        //    SceneManager.UnloadSceneAsync(scene.name);
+        //}
 
-        IEnumerator LoadingCoroutine(SceneNames sceneName)
-        {
-            AsyncOperation operation = SceneManager.LoadSceneAsync((int)sceneName, LoadSceneMode.Additive);
+        //IEnumerator LoadingCoroutine(SceneNames sceneName)
+        //{
+        //    AsyncOperation operation = SceneManager.LoadSceneAsync((int)sceneName, LoadSceneMode.Additive);
          
-            operation.allowSceneActivation = false;
-            while (!operation.isDone)
-            {
-                float progress = Mathf.Clamp01(operation.progress);
-                Debug.Log("Progress" + progress);
-                yield return null;
-                operation.allowSceneActivation = true;
-               // SceneManager.SetActiveScene(scene);
-            }
-        }
-        void StartAnims()
-        {
-            circularArrow.transform.DORotate(new Vector3(0f, 0f, -360f), 2f, RotateMode.LocalAxisAdd)
-                .SetLoops(-1, LoopType.Restart)
-                .SetRelative()
-                .SetEase(Ease.Linear)
-                ;
-
-            //dotsParent.transform.DOScale(0, 5f)
-            //         .SetLoops(-1, LoopType.Yoyo); 
-                        
-            
-            // loading yo yo 
-            // rotation 
-
-
-
-        }
+        //    operation.allowSceneActivation = false;
+        //    while (!operation.isDone)
+        //    {
+        //        float progress = Mathf.Clamp01(operation.progress);
+        //        Debug.Log("Progress" + progress);
+        //        yield return null;
+        //        operation.allowSceneActivation = true;
+        //        SceneManager.SetActiveScene(scene);
+        //    }
+        //}
+       
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.N))
@@ -112,7 +108,14 @@ namespace Intro
             }
         }
 
-
+        void StartAnims()
+        {
+            circularArrow.transform.DORotate(new Vector3(0f, 0f, -360f), 2f, RotateMode.LocalAxisAdd)
+              .SetLoops(-1, LoopType.Restart)
+              .SetRelative()
+              .SetEase(Ease.Linear)
+              ;
+        }
     }
     
 

@@ -47,4 +47,4 @@ MonoBehaviour:
     trapNames: 0
   prop: {fileID: 21300000, guid: b416e5ba9efdae340bfff214303703f4, type: 3}
   fgSprite: {fileID: 21300000, guid: a869048beb64dcc468b42e5dacfc7c68, type: 3}
-  mapPortCord: {x: 57.4, y: -16.9}
+  mapPortCord: {x: 142, y: -48}

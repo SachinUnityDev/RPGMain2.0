@@ -29,12 +29,10 @@ namespace Intro
         public GameObject GetPanel(string strTag)
         {
             return allPanels.Find(t => t.name == strTag); 
-
         }
 
         public void MoveEntenNEmesh()
-        {
-            //Emesh.transform.DOLocalMoveX(25, 0.4f);
+        {            
             Enten.gameObject.transform.DOLocalMoveX(5, 0.4f);
             Emesh.gameObject.transform.DOLocalMoveX(-5, 0.4f);
 

@@ -37,27 +37,33 @@ namespace Common
             {
                 RemoveHelpView();
             }
+            if (GameService.Instance.gameModel.gameState == GameState.None)
+                return;
 
-            this.helpName= _helpName;
-            if(GameService.Instance.gameModel.gameState == GameState.InTown)
+            GameObject canvasGo = null;
+            this.helpName = _helpName;
+
+            if (GameService.Instance.gameModel.gameState == GameState.InTown)
             {                
-                GameObject canvasGo = GameObject.FindGameObjectWithTag("TownCanvas");
-                helpViewGO = Instantiate(helpViewPreFab); 
-                
-                helpViewGO.transform.SetParent(canvasGo.transform);
-                helpViewGO.transform.SetAsLastSibling();
-                RectTransform helpRect = helpViewGO.GetComponent<RectTransform>();
-
-                helpRect.anchorMin = new Vector2(0, 0);
-                helpRect.anchorMax = new Vector2(1, 1);
-                helpRect.pivot = new Vector2(0.5f, 0.5f);
-                helpRect.localScale = Vector3.one;
-                helpRect.offsetMin = new Vector2(0, 0); // new Vector2(left, bottom);
-                helpRect.offsetMax = new Vector2(0, 0); // new Vector2(-right, -top);
-                helpViewGO.GetComponent<HelpView>().InitHelp(_helpName, helpSO, this);
+                canvasGo = GameObject.FindGameObjectWithTag("TownCanvas");                
             }
-            
-            
+            if (GameService.Instance.gameModel.gameState == GameState.InQuest)
+            {
+                canvasGo = GameObject.FindGameObjectWithTag("QuestCanvas");
+            }
+
+            helpViewGO = Instantiate(helpViewPreFab);
+            helpViewGO.transform.SetParent(canvasGo.transform);
+            helpViewGO.transform.SetAsLastSibling();
+            RectTransform helpRect = helpViewGO.GetComponent<RectTransform>();
+
+            helpRect.anchorMin = new Vector2(0, 0);
+            helpRect.anchorMax = new Vector2(1, 1);
+            helpRect.pivot = new Vector2(0.5f, 0.5f);
+            helpRect.localScale = Vector3.one;
+            helpRect.offsetMin = new Vector2(0, 0); // new Vector2(left, bottom);
+            helpRect.offsetMax = new Vector2(0, 0); // new Vector2(-right, -top);
+            helpViewGO.GetComponent<HelpView>().InitHelp(_helpName, helpSO, this);
         }
         public void RemoveHelpView()
         {

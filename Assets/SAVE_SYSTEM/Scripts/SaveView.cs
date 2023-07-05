@@ -1,36 +1,51 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems; 
-using Combat;
+using System;
+using Common;
+using System.Linq;
+using TMPro;
+using UnityEngine.UI;
 
 namespace Common
 {
-    public class SaveView : MonoBehaviour
+    public class SaveView : MonoBehaviour, IPanel
     {
+        //public SaveSlot currSlotSelected;
+        //[SerializeField] Button loadBtn;
+        //[SerializeField] Button saveBtn; 
 
+        //void Start()
+        //{
+        //    loadBtn.onClick.AddListener(OnLoadBtnPressed);
+        //    saveBtn.onClick.AddListener(OnSaveBtnPressed);
+        //}
+        //public void OnLoadBtnPressed()
+        //{
+        //    // display load slots ..load game from save folders in the slots 
 
+        //}
 
-        void Start()
+        //public void OnSaveBtnPressed()
+        //{
+        //    // for Manual save in the slots
+
+        //}
+        public void Init()
         {
-
+           
         }
 
-        void OnSlotBtnPressed()
+        public void Load()
         {
-            GameObject btn = EventSystem.current.currentSelectedGameObject;
-            int index = btn.transform.GetSiblingIndex();
-
-
-
+            UIControlServiceGeneral.Instance.TogglePanel(this.gameObject, true);
         }
 
+        public void UnLoad()
+        {
+            UIControlServiceGeneral.Instance.TogglePanel(this.gameObject, false);
+        }
     }
-
- 
-
-
-
-
-
 }
+
+

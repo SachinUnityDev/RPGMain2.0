@@ -21,6 +21,16 @@ namespace Quest
         public List<QBarkNames> allBarks = new List<QBarkNames>();  
         public EnemyPack enemyPack;
         public Traps trapNames; 
+
+
+        public bool HasInteraction()
+        {
+            if (questEName != QuestENames.None && allBarks.Count > 0 
+                    && enemyPack != EnemyPack.None && trapNames != Traps.None) // it means it has interaction
+                return true;             
+            return false; 
+        }
+
     }
 
     [CreateAssetMenu(fileName = "QRoomSO", menuName = "Quest/QRoomSO")]

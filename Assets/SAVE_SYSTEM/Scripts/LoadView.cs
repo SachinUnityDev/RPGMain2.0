@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Common
 {
-    public class LoadViewController : MonoBehaviour
+    public class LoadView : MonoBehaviour
     {        
         void Start()
         {

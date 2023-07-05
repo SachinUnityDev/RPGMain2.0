@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Quest
 {
-    public class CityEPanelView : MonoBehaviour, IPanel
+    public class CityEPanelView : MonoBehaviour, IPanel, iHelp
     {
-
+        [SerializeField] HelpName helpName;
         public Transform cityEContainer;
         private void Start()
         {
@@ -43,6 +43,11 @@ namespace Quest
         public void UnLoad()
         {
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
+        }
+
+        public HelpName GetHelpName()
+        {
+            return helpName; 
         }
     }
 }

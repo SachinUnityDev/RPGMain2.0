@@ -20,12 +20,12 @@ MonoBehaviour:
       barkLineData:
         barkline: That ship has sailed a while ago!
         barkAudio: {fileID: 0}
-    - buildState: 3
+    - buildState: 2
       timeState: 0
       barkLineData:
         barkline: No right ship in the docks!
         barkAudio: {fileID: 0}
-    - buildState: 3
+    - buildState: 2
       timeState: 0
       barkLineData:
         barkline: Expected to be back in a week or two!
@@ -34,12 +34,12 @@ MonoBehaviour:
     BuildStates: []
   - BuildingName: 3
     BuildStates:
-    - buildState: 3
+    - buildState: 2
       timeState: 2
       barkLineData:
         barkline: It is late, goods are packed!
         barkAudio: {fileID: 0}
-    - buildState: 3
+    - buildState: 2
       timeState: 1
       barkLineData:
         barkline: Shop owners are resting this day.
@@ -51,7 +51,7 @@ MonoBehaviour:
       barkLineData:
         barkline: Strangers are not allowed in this holy site!
         barkAudio: {fileID: 0}
-    - buildState: 3
+    - buildState: 2
       timeState: 2
       barkLineData:
         barkline: It's night. Leave the priests and nuns alone!
@@ -59,6 +59,11 @@ MonoBehaviour:
   - BuildingName: 1
     BuildStates:
     - buildState: 0
+      timeState: 0
+      barkLineData:
+        barkline: Halt!
+        barkAudio: {fileID: 0}
+    - buildState: 2
       timeState: 0
       barkLineData:
         barkline: Halt!

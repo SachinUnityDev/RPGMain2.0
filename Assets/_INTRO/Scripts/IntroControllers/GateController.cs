@@ -47,7 +47,7 @@ namespace Intro
             UIControlServiceGeneral.Instance.ToggleInteractionsOnUI(this.gameObject, true);
             UIControlServiceGeneral.Instance.SetMaxSiblingIndex(gameObject);
             GateTxtObj.GetComponent<TextRevealer>().enabled = true;
-            SoundServices.Instance.PlayBGSound(BGAudioClipNames.GatesAmbience);
+            IntroAudioService.Instance.PlayBGSound(BGAudioClipNames.GatesAmbience);
         }
 
         public void UnLoad()

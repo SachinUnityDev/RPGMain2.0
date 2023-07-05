@@ -49,6 +49,8 @@ namespace Quest
                 qRoomModel.curio2Chked = true;
             }
             SetSprite();
+            // trigger bark 
+            BarkService.Instance.curioBarkController.ShowCurioBark(curioModel.curioName, this); 
         }
         public void OnContinue()
         {         

@@ -70,7 +70,7 @@ namespace Quest
         public void ChangeRoomSprites(QuestNames questName, int roomNo)
         {
             QNodeAllRoomSO allRoomSO = 
-                    allQNodeSO.GetQuestSceneSO(questName);
+                             allQNodeSO.GetQuestSceneSO(questName);
 
             bgSprite.sprite = allRoomSO.bGSprite;
             

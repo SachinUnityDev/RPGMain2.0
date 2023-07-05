@@ -4,7 +4,7 @@ using UnityEngine;
 using Common;
 using System;
 using Interactables;
-
+using System.Security.Policy;
 
 namespace Quest
 { 
@@ -33,10 +33,13 @@ namespace Quest
         public Sprite curioHL;
         public Sprite curioOpn;
 
+        [Header("Curio Bark SO")]
         [TextArea(2, 10)]
-        public string curioBark; 
-
-        
+        public string curioBark;
+        [Header("Audio UI")]
+        public AudioClip audioClipUI;
+        [Header("Audio VO")]
+        public AudioClip audioClipVO; 
     }
 }
 

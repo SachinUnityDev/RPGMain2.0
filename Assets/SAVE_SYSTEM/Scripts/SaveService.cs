@@ -25,7 +25,7 @@ namespace Common
         public GameObject loadPanel;
 
         public EscapePanelController escapePanelController; 
-        public SaveViewController saveViewController;
+        public SaveView saveView;
         public SaveController saveController;
         public SaveMode saveMode;
         public SaveSlot currMBloodSlot; 
@@ -42,13 +42,13 @@ namespace Common
 
         private void Start()
         {
-            UIControlServiceCombat.Instance.ToggleUIStateScale(saveViewController.gameObject, UITransformState.Close);
-
-            slotSelect = SaveSlot.New; 
-            foreach (Transform child in saveViewController.gameObject.transform)
+           
+           saveView.GetComponent<IPanel>().UnLoad();
+           slotSelect = SaveSlot.New; 
+            foreach (Transform child in saveView.gameObject.transform)
             {
                 if(child.GetComponent<Button>() != null)
-                 child.GetComponent<Button>().onClick.AddListener(()=>OnSlotBtnPressed(child));
+                    child.GetComponent<Button>().onClick.AddListener(()=>OnSlotBtnPressed(child));
             }
         }
 
@@ -128,13 +128,13 @@ namespace Common
             if (Input.GetKeyDown(KeyCode.G))
             {
                 isLoading = false; isSaving = true;                
-                UIControlServiceCombat.Instance.ToggleUIStateScale(saveViewController.gameObject, UITransformState.Open);                
+                UIControlServiceCombat.Instance.ToggleUIStateScale(saveView.gameObject, UITransformState.Open);                
             }
 
             if (Input.GetKeyDown(KeyCode.H))
             {
                 isLoading = true; isSaving = false;
-                UIControlServiceCombat.Instance.ToggleUIStateScale(saveViewController.gameObject, UITransformState.Open);
+                UIControlServiceCombat.Instance.ToggleUIStateScale(saveView.gameObject, UITransformState.Open);
             }
        
 

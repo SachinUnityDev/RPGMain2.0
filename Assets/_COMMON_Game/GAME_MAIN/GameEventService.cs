@@ -23,7 +23,8 @@ namespace Common
        
         void Start()
         {
-            OnGameStateChg += OnQuestStart; 
+            OnGameStateChg += OnQuestStart;
+            
         }
         
         public void On_TownEnter(LocationName locationName)

@@ -37,7 +37,7 @@ namespace Intro
             UIControlServiceGeneral.Instance.ToggleInteractionsOnUI(this.gameObject, false);
 
             video.gameObject.SetActive(false);
-            IntroAudioService.Instance.StopAllBGSound(0.25f);
+            IntroAudioService.Instance.StopAllBGSound(0.1f);
             IntroServices.Instance.Fade(gameObject, 0.4f);
             IntroServices.Instance.LoadNext();
         }
@@ -73,7 +73,7 @@ namespace Intro
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                UnLoad();
+               EndReached(video);
             }
         }
 

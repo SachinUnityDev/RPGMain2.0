@@ -34,11 +34,11 @@ namespace Common
 
         // does not reset with week / Month
         [Header("CURRENT DAY WEEK AND MONTH")]
-        [SerializeField] DayName dayInYrName; 
-        public DayName currDayName;
-        public WeekEventsName currentWeek;
-        public MonthName currentMonth;
-        public MonthName scrollMonth;
+        [SerializeField] DayName dayInYrName = DayName.None; 
+        public DayName currDayName = DayName.None;
+        public WeekEventsName currentWeek = WeekEventsName.None;
+        public MonthName currentMonth = MonthName.None;
+        public MonthName scrollMonth = MonthName.None;
 
 
         [SerializeField] List<MonthSO> allMonthSOs;

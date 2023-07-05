@@ -38,14 +38,14 @@ namespace Common
             //gameModeController = GetComponent<GameModeController>(); 
            
             sceneController = GetComponent<SceneController>();
-           GameServiceInit(GameState.InQuest, GameDifficulty.Easy, LocationName.Nekkisari); 
+           GameServiceInit(GameState.InIntro, GameDifficulty.Easy, LocationName.Nekkisari); 
         }
 
         public void GameServiceInit(GameState gameState, GameDifficulty gameDiff, LocationName locName)
         {
             gameModel = new GameModel(gameState,gameDiff, locName);
-
-            //  GameEventService.Instance.On_TownEnter(LocationName.Nekkisari);
+           
+            
             // Load scene say here we start with the town scene
 
             // Init all the services in the scene 
@@ -53,7 +53,7 @@ namespace Common
 
             // list of Common Service to init       
             // ON ENTER TOWN INIT THESE SERVICES 
-          
+
 
 
 

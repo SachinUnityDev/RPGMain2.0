@@ -16,15 +16,16 @@ namespace Intro
         [SerializeField] CanvasGroup IntroPanelOut;
         [SerializeField] CanvasGroup TownPanelIn; 
 
-        [Header("Ref GO s")]
-        [SerializeField] GameObject circularArrow; 
-        [SerializeField] GameObject dotsParent;
+        [Header("TBR")]         
+        [SerializeField] Transform dotsParent;
 
         [Header("Text ref")]
         [SerializeField] TextMeshProUGUI desc; 
         [SerializeField] List<string> loadingLines = new List<string>();
 
-        Scene scene; 
+        Scene scene;
+
+        int count = 1; 
         void Start()
         {
 
@@ -44,13 +45,53 @@ namespace Intro
         {
             Sequence loadSeq = DOTween.Sequence();
             loadSeq
-                   .AppendCallback(()=>StartAnims())
-                   .AppendInterval(1.0f)
-                   .AppendCallback(()=> GameService.Instance.sceneController.LoadScene(GameScene.Town))
+                   .AppendCallback(()=>ShowDots())
+                   .AppendInterval(0.2f)
+                   //.AppendCallback(()=> GameService.Instance.sceneController.LoadScene(GameScene.Town))
                     ;
-            loadSeq.Play();
+            loadSeq.Play().SetLoops(20);
         }
 
+        void LoadDotAnim()
+        {
+
+            //StartCoroutine(DotCoroutine());
+        //    Sequence loadDotSeq = DOTween.Sequence();
+        //    loadDotSeq
+        //        .AppendCallback(()=> ShowDots())
+        //        .AppendInterval(0.01f)
+        //        //.AppendCallback(() => ShowDots())
+        //        //.AppendInterval(0.4f)
+        //        //.AppendCallback(() => ShowDots())
+        //        //.AppendInterval(0.4f)
+        //        ;
+        //    loadDotSeq.Play().SetLoops(20);
+        }
+
+        //IEnumerator DotCoroutine()
+        //{
+        //    yield return new WaitForSeconds(0.1f);
+        //    ShowDots();
+        //}
+
+        void ShowDots()
+        {
+            if (count == 3) // clear all 
+            {
+                for (int i = 0;i < count; i++)
+                {
+                    dotsParent.GetChild(i).gameObject.SetActive(false);
+                }
+                count = 1;
+                return; 
+            } 
+                
+            for (int i = 0; i < count; i++)
+            {
+                dotsParent.GetChild(i).gameObject.SetActive(true); 
+            }
+            count++; 
+        }
         public void UnLoad()
         {
            // UnLoadScene();
@@ -110,11 +151,11 @@ namespace Intro
 
         void StartAnims()
         {
-            circularArrow.transform.DORotate(new Vector3(0f, 0f, -360f), 2f, RotateMode.LocalAxisAdd)
-              .SetLoops(-1, LoopType.Restart)
-              .SetRelative()
-              .SetEase(Ease.Linear)
-              ;
+            //circularArrow.transform.DORotate(new Vector3(0f, 0f, -360f), 2f, RotateMode.LocalAxisAdd)
+            //  .SetLoops(-1, LoopType.Restart)
+            //  .SetRelative()
+            //  .SetEase(Ease.Linear)
+            //  ;
         }
     }
     

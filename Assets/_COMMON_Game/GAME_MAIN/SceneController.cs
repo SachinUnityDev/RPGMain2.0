@@ -31,12 +31,13 @@ namespace Common
             {
                 yield return null;
             }
-            GameEventService.Instance.On_TownEnter(LocationName.Nekkisari); 
-        }
-        //IEnumerator UnLoadCurrScene()
-        //{
-       
-        //}
+            if (asyncLoad.isDone)
+            {
+                GameEventService.Instance.On_TownEnter(LocationName.Nekkisari);
+                GameService.Instance.
+                GameServiceInit(GameState.InTown, GameDifficulty.Easy, LocationName.Nekkisari);
+            }                
+        }      
     }
 
     public enum GameScene

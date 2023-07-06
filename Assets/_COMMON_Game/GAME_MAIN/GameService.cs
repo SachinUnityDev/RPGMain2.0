@@ -27,38 +27,44 @@ namespace Common
         public GameModel gameModel;
         public bool isGameOn = false;
         [SerializeField] List<string> allGameJSONs = new List<string>();
-
-
-
-
+        public bool isNewGInitDone = false;
 
         void Start()
-        {
-            //gameController = GetComponent<GameController>();
-            //gameModeController = GetComponent<GameModeController>(); 
-           
+        {  
             sceneController = GetComponent<SceneController>();
-           GameServiceInit(GameState.InIntro, GameDifficulty.Easy, LocationName.Nekkisari); 
+         // GameInit(GameState.InIntro, GameDifficulty.Easy, LocationName.Nekkisari); 
+            OnSceneLoad(); 
         }
 
-        public void GameServiceInit(GameState gameState, GameDifficulty gameDiff, LocationName locName)
+        void OnSceneLoad()
         {
-            gameModel = new GameModel(gameState,gameDiff, locName);
-           
-            
-            // Load scene say here we start with the town scene
-
-            // Init all the services in the scene 
-            // ensure all the service has save service "Isaveable integrated"
-
-            // list of Common Service to init       
-            // ON ENTER TOWN INIT THESE SERVICES 
-
-
-
-
+            Scene scene = SceneManager.GetActiveScene();
+            int index = scene.buildIndex;
+            if(index == (int)GameScene.Town)
+            {
+                GameInit(GameState.InTown, GameDifficulty.Easy, LocationName.Nekkisari); 
+            }else if (index == (int)GameScene.Quest)
+            {
+                GameInit(GameState.InQuest, GameDifficulty.Easy, LocationName.Nekkisari);
+            }else if (index == (int)GameScene.Combat)
+            {
+                GameInit(GameState.InCombat, GameDifficulty.Easy, LocationName.Nekkisari);
+            }
+            else if (index == (int)GameScene.Intro)
+            {
+                GameInit(GameState.InIntro, GameDifficulty.Easy, LocationName.Nekkisari);
+            }
         }
 
+
+        public void GameInit(GameState gameState, GameDifficulty gameDiff, LocationName locName)
+        {
+            isNewGInitDone = true;
+            gameModel = new GameModel(gameState,gameDiff, locName);
+            GameEventService.Instance.On_TownEnter(LocationName.Nekkisari);
+        }
+
+        #region SAVE AND LOAD 
         public void RestoreState()
         {
             string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelect.ToString()
@@ -118,7 +124,7 @@ namespace Common
             }
         }
 
-
+        #endregion
     }
 
 

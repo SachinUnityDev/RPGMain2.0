@@ -25,7 +25,6 @@ namespace Common
     public class DialogueService : MonoSingletonGeneric<DialogueService>
     {
         [Header("SO s")]
-        //public List<DialogueWithCharNPCSO> allDialogueWithNPCSOs = new List<DialogueWithCharNPCSO>();
         public DialogueViewController1 dialogueViewController1;
 
         public AllDialogueSO allDialogueSO; 

@@ -29,7 +29,7 @@ namespace Intro
         void Start()
         {
 
-            DontDestroyOnLoad(this.gameObject);
+           
         }
         public void Load()
         {
@@ -37,48 +37,26 @@ namespace Intro
             UIControlServiceGeneral.Instance.ToggleInteractionsOnUI(this.gameObject, true);
             IntroServices.Instance.Fade(gameObject, 1.0f);
             UIControlServiceGeneral.Instance.SetMaxSiblingIndex(gameObject);
-            //LoadScene(SceneNames.Town);
-            LoadSceneSeq();
+            GameService.Instance.sceneController.LoadScene(GameScene.Town);
+          //  LoadSceneSeq();
+           
         }
 
         void LoadSceneSeq()
-        {
+        {   
             Sequence loadSeq = DOTween.Sequence();
             loadSeq
                    .AppendCallback(()=>ShowDots())
-                   .AppendInterval(0.2f)
-                   //.AppendCallback(()=> GameService.Instance.sceneController.LoadScene(GameScene.Town))
+                   .AppendInterval(0.2f)               
                     ;
-            loadSeq.Play().SetLoops(20);
+            loadSeq.Play().SetLoops(-1);
+
         }
-
-        void LoadDotAnim()
-        {
-
-            //StartCoroutine(DotCoroutine());
-        //    Sequence loadDotSeq = DOTween.Sequence();
-        //    loadDotSeq
-        //        .AppendCallback(()=> ShowDots())
-        //        .AppendInterval(0.01f)
-        //        //.AppendCallback(() => ShowDots())
-        //        //.AppendInterval(0.4f)
-        //        //.AppendCallback(() => ShowDots())
-        //        //.AppendInterval(0.4f)
-        //        ;
-        //    loadDotSeq.Play().SetLoops(20);
-        }
-
-        //IEnumerator DotCoroutine()
-        //{
-        //    yield return new WaitForSeconds(0.1f);
-        //    ShowDots();
-        //}
-
         void ShowDots()
         {
-            if (count == 3) // clear all 
+            if (count > 3) // clear all 
             {
-                for (int i = 0;i < count; i++)
+                for (int i = 0;i < 3; i++)
                 {
                     dotsParent.GetChild(i).gameObject.SetActive(false);
                 }
@@ -101,14 +79,8 @@ namespace Intro
         {
 
         }
-        //public void LoadScene(SceneNames sceneName)
-        //{
-        //    StartAnims();
-        //    Application.backgroundLoadingPriority = ThreadPriority.Low;
-        //    scene = SceneManager.GetActiveScene();
-        //    StartCoroutine(LoadingCoroutine(sceneName));
-        //}
         
+
         public void Fade(CanvasGroup Out, CanvasGroup In)
         {
             Out.DOFade(0f, 0.4f);
@@ -126,21 +98,21 @@ namespace Intro
         //    SceneManager.UnloadSceneAsync(scene.name);
         //}
 
-        //IEnumerator LoadingCoroutine(SceneNames sceneName)
-        //{
-        //    AsyncOperation operation = SceneManager.LoadSceneAsync((int)sceneName, LoadSceneMode.Additive);
-         
-        //    operation.allowSceneActivation = false;
-        //    while (!operation.isDone)
-        //    {
-        //        float progress = Mathf.Clamp01(operation.progress);
-        //        Debug.Log("Progress" + progress);
-        //        yield return null;
-        //        operation.allowSceneActivation = true;
-        //        SceneManager.SetActiveScene(scene);
-        //    }
-        //}
-       
+        IEnumerator LoadingCoroutine(SceneNames sceneName)
+        {
+            AsyncOperation operation = SceneManager.LoadSceneAsync((int)sceneName, LoadSceneMode.Additive);
+
+            operation.allowSceneActivation = false;
+            while (!operation.isDone)
+            {
+                float progress = Mathf.Clamp01(operation.progress);
+                Debug.Log("Progress" + progress);
+                yield return null;
+                operation.allowSceneActivation = true;
+                SceneManager.SetActiveScene(scene);
+            }
+        }
+
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.N))

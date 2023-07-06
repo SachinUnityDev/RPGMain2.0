@@ -121,7 +121,7 @@ namespace Common
             panelInScene = PanelInScene.None;        
         }
 
-        void CloseAllPanel()
+        public void CloseAllPanel()
         {
             foreach (GameObject panel in allPanels)
             {

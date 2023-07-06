@@ -11,7 +11,7 @@ namespace Quest
         public Transform cityEContainer;
         private void Start()
         {
-           
+            UnLoad();
         }
         public void Init()
         {

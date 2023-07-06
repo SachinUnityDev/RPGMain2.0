@@ -55,7 +55,8 @@ namespace Common
         [Header("Day Events Controller")]
         public DayEventsController dayEventsController; 
         public AllDaySO allDaySO;
-
+        public bool isNewGInitDone = true;
+        
         void Start()
         {
             calendarFactory = gameObject.GetComponent<CalendarFactory>();

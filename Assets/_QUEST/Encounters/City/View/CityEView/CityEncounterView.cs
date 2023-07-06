@@ -1,13 +1,12 @@
 using Common;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Permissions;
 using TMPro;
 using UnityEngine;
 
 namespace Quest
 {
-    public class CityEncounterView : MonoBehaviour, IPanel
+    public class CityEncounterView : MonoBehaviour
     {
 
         public Transform mainPage;

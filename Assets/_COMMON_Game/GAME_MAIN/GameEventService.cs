@@ -46,6 +46,9 @@ namespace Common
             //LootService.Instance.InitLootService();
             //CurioService.Instance.InitCurioService();// test purpose only
         }
+
+
+
         void OnQuestStart(GameState gameState)
         {
             if(gameState == GameState.InQuest)

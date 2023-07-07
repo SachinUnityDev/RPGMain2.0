@@ -12,18 +12,20 @@ namespace Town
     {
         [Header("Temple Model")]
         public TempleModel templeModel;
-
-   
-        public TempleViewController templeView;
-
-
+        public TempleView templeView;
         private void Start()
         {
-            BuildingSO templeSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.Temple);
-            templeModel = new TempleModel(templeSO);
             CalendarService.Instance.OnChangeTimeState += (TimeState timeStart) => UpdateBuildState();
 
         }
+        public void InitTempleController()
+        {
+            BuildingSO templeSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.Temple);
+            templeModel = new TempleModel(templeSO);
+            BuildingIntService.Instance.allBuildModel.Add(templeModel);
+       
+        }
+
         public void UpdateBuildState()
         {
             if (templeModel.buildState == BuildingState.Locked) return;

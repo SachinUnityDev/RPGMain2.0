@@ -6,17 +6,13 @@ using UnityEngine;
 
 namespace Common
 {
-    public class SafekeepModel
+    public class SafekeepModel: BuildingModel
     {
-        [Header("Build State")]
-        public BuildingState buildState;
+    
 
         public SafekeepModel(BuildingSO safekeepSO)
         {
-            buildState = safekeepSO.buildingData.buildingState;
-
-         
+            buildState = safekeepSO.buildingState;
         }
-
     }
 }

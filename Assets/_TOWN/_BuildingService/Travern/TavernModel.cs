@@ -8,13 +8,8 @@ using UnityEngine;
 namespace Town
 {
     [Serializable]
-    public class TavernModel 
+    public class TavernModel: BuildingModel
     {
-
-        [Header("Build State")]
-        public BuildingState buildState;
-
-
         [Header("Interact: Trophy")]
         public Iitems trophyOnWall = null; 
         public Iitems peltOnWall = null;
@@ -23,19 +18,19 @@ namespace Town
         public int selfDrinks = 0;
         public bool canOfferDrink = true; 
 
-        public List<CharInteractData> charInteract = new List<CharInteractData>();
+        //public List<CharInteractData> charInteract = new List<CharInteractData>();
 
-        public List<NPCInteractData> npcData = new List<NPCInteractData>();
+        //public List<NPCInteractData> npcData = new List<NPCInteractData>();
 
-        public List<BuildIntTypeData> buildIntTypes = new List<BuildIntTypeData>();
+        //public List<BuildIntTypeData> buildIntTypes = new List<BuildIntTypeData>();
 
         public TavernModel(BuildingSO tavernSO)
         {
-            buildState = tavernSO.buildingData.buildingState; 
+            buildState = tavernSO.buildingState; 
 
-            buildIntTypes = tavernSO.buildingData.buildIntTypes.DeepClone();
-            npcData = tavernSO.buildingData.npcInteractData.DeepClone();
-            charInteract = tavernSO.buildingData.charInteractData.DeepClone();
+            buildIntTypes = tavernSO.buildIntTypes.DeepClone();
+            npcInteractData = tavernSO.npcInteractData.DeepClone();
+            charInteractData = tavernSO.charInteractData.DeepClone();
         }
     }
 }

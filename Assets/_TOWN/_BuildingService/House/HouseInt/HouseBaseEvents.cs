@@ -18,7 +18,7 @@ namespace Town
 
         [Header("Not be ref")]
         Image btnImg;
-        public HouseViewController houseView;
+        public HouseView houseView;
         TimeState timeState;
 
         void Awake()
@@ -27,7 +27,7 @@ namespace Town
             btnImg.alphaHitTestMinimumThreshold = 0.1f;
         }
 
-        public void Init(HouseViewController houseView)
+        public void Init(HouseView houseView)
         {
             this.houseView = houseView;
             timeState = CalendarService.Instance.currtimeState;

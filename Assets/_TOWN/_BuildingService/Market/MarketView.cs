@@ -48,11 +48,11 @@ namespace Town
         {
             if (CalendarService.Instance.currtimeState == TimeState.Night)
             {
-                BGSpriteContainer.GetComponent<Image>().sprite = marketSO.buildingData.buildIntNight;
+                BGSpriteContainer.GetComponent<Image>().sprite = marketSO.buildIntNight;
             }
             else
             {
-                BGSpriteContainer.GetComponent<Image>().sprite = marketSO.buildingData.buildIntDay;
+                BGSpriteContainer.GetComponent<Image>().sprite = marketSO.buildIntDay;
             }
 
             for (int i = 0; i < BGSpriteContainer.childCount; i++)

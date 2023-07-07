@@ -12,34 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b5e2eb5a4e73a74683a3af4d29d310b, type: 3}
   m_Name: SafekeepSO
   m_EditorClassIdentifier: 
-  _allbuildingData:
-    buildingName: 4
-    buildingState: 0
-    buildExtDayN: {fileID: 21300000, guid: 82de939aeb6f5cb46b00020bb418ec02, type: 3}
-    buildExtDayHL: {fileID: 21300000, guid: 8ce252583b76d6545a0edc8224cbf017, type: 3}
-    buildExtNight: {fileID: 21300000, guid: ecafec364e9469247b120ef9c6c8745e, type: 3}
-    buildExtNightHL: {fileID: 21300000, guid: 1bb3f62b274ede14c871a52bc4ea1c25, type: 3}
-    buildIntDay: {fileID: 21300000, guid: 3616f1b5ded00914dbb607267fd13c58, type: 3}
-    buildIntNight: {fileID: 21300000, guid: 3616f1b5ded00914dbb607267fd13c58, type: 3}
-    charInteractData: []
-    CharInteractPrefab: []
-    npcData:
-    - nPCNames: 11
-      nPCIntType: 1
-      npcState: 2
-    - nPCNames: 11
-      nPCIntType: 7
-      npcState: 2
-    npcDataPrefab:
-    - nPCNames: 11
-      nPCIntType: 7
-      interactPrefab: {fileID: 0}
-    buildIntTypes:
-    - BuildIntType: 7
-      isUnLocked: 0
-    buildIntPrefab: []
-    statusLockedStr:
-    - 'Come back when you got enough coins to spare!  '
-    - 'Poor people are welcome, but not a dead broke!  '
-    statusUnAvailStr:
-    - 'Closed at night! '
+  buildingName: 4
+  buildingState: 0
+  buildExtDayN: {fileID: 21300000, guid: 82de939aeb6f5cb46b00020bb418ec02, type: 3}
+  buildExtDayHL: {fileID: 21300000, guid: 8ce252583b76d6545a0edc8224cbf017, type: 3}
+  buildExtNight: {fileID: 21300000, guid: ecafec364e9469247b120ef9c6c8745e, type: 3}
+  buildExtNightHL: {fileID: 21300000, guid: 1bb3f62b274ede14c871a52bc4ea1c25, type: 3}
+  buildIntDay: {fileID: 0}
+  buildIntNight: {fileID: 0}
+  charInteractData: []
+  CharInteractPrefab: []
+  npcInteractData: []
+  npcDataPrefab: []
+  buildIntTypes: []
+  buildIntPrefab: []
+  statusLockedStr:
+  - safekeep is locked
+  statusUnAvailStr:
+  - Safekeep is Unavailable

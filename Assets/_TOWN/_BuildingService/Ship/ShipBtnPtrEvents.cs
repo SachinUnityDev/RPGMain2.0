@@ -16,7 +16,7 @@ namespace Town
         [SerializeField] BuildInteractType buildInteractType;
         [SerializeField] ShipView shipView;
         [SerializeField] Transform panel;
-        public void HouseIntInit(BuildIntTypeData buildData, InteractionSpriteData spriteData, HouseViewController houseView)
+        public void HouseIntInit(BuildIntTypeData buildData, InteractionSpriteData spriteData, HouseView houseView)
         {
             transform.GetComponent<Image>().sprite = spriteData.spriteN;
             buildInteractType = buildData.BuildIntType;

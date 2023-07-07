@@ -28,11 +28,11 @@ namespace Town
     }
 
     [Serializable]
-    public class HouseModel
+    public class HouseModel : BuildingModel
     {
 
-        [Header("Build State")]
-        public BuildingState buildState; 
+        //[Header("Build State")]
+        //public BuildingState buildState; 
 
         [Header("Interact: Buy Furniture")]
         public List<HousePurchaseOptsData> purchaseOpts = new List<HousePurchaseOptsData> ();
@@ -60,12 +60,12 @@ namespace Town
 
         [Header("Interact: Drums")]
         public bool isDrumsPurchased = false;
+        
+        //public List<CharInteractData> charInteract = new List<CharInteractData>();
 
-        public List<CharInteractData> charInteract = new List<CharInteractData>();
+        //public List<NPCInteractData> npcData = new List<NPCInteractData>();   
 
-        public List<NPCInteractData> npcData = new List<NPCInteractData>();   
-
-        public List<BuildIntTypeData> buildIntTypes = new List<BuildIntTypeData>();
+        //public List<BuildIntTypeData> buildIntTypes = new List<BuildIntTypeData>();
 
         public HousePurchaseOptsData GetHouseOptsInteractData(HousePurchaseOpts houseOpts)
         {
@@ -80,11 +80,11 @@ namespace Town
         }
         public HouseModel(BuildingSO houseSO)
         {
-            buildState = houseSO.buildingData.buildingState; 
+            buildState = houseSO.buildingState; 
 
-            buildIntTypes = houseSO.buildingData.buildIntTypes.DeepClone();
-            npcData = houseSO.buildingData.npcInteractData.DeepClone();
-            charInteract = houseSO.buildingData.charInteractData.DeepClone();
+            buildIntTypes = houseSO.buildIntTypes.DeepClone();
+            npcInteractData = houseSO.npcInteractData.DeepClone();
+            charInteractData = houseSO.charInteractData.DeepClone();
 
             HousePurchaseOptsData purchaseOpts1 = new HousePurchaseOptsData(HousePurchaseOpts.UpgradeBed, new Currency(18, 0), false, true);
             HousePurchaseOptsData purchaseOpts2 = new HousePurchaseOptsData(HousePurchaseOpts.UpgradeStash, new Currency(15, 0), false, true);

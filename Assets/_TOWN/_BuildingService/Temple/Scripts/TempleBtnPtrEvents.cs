@@ -10,9 +10,9 @@ namespace Town
     public class TempleBtnPtrEvents : MonoBehaviour,IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] BuildInteractType buildInteractType;
-        [SerializeField] TempleViewController templeView;
+        [SerializeField] TempleView templeView;
         [SerializeField] Transform panel;
-        public void TempleIntInit(BuildIntTypeData buildData, InteractionSpriteData spriteData, TempleViewController templeView)
+        public void TempleIntInit(BuildIntTypeData buildData, InteractionSpriteData spriteData, TempleView templeView)
         {
             transform.GetComponent<Image>().sprite = spriteData.spriteN;
             buildInteractType = buildData.BuildIntType;

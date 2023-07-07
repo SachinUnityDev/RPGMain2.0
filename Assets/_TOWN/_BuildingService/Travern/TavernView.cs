@@ -48,8 +48,8 @@ namespace Town
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
             AllBuildSO allBuildSO = BuildingIntService.Instance.allBuildSO; 
             BuildingSO tavernSO = allBuildSO.GetBuildSO(BuildingNames.Tavern);
-            dayBG = tavernSO.buildingData.buildIntDay;
-            nightBG = tavernSO.buildingData.buildIntNight; 
+            dayBG = tavernSO.buildIntDay;
+            nightBG = tavernSO.buildIntNight; 
 
             timeState = CalendarService.Instance.currtimeState;
             btnContainer.GetComponent<TavernBuildIntBtnView>().InitInteractBtns(this);

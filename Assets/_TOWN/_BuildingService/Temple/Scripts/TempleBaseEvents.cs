@@ -16,7 +16,7 @@ namespace Town
 
         [Header("Not be ref")]
         Image btnImg;
-        public TempleViewController templeView;
+        public TempleView templeView;
         TimeState timeState;
 
         void Awake()
@@ -25,7 +25,7 @@ namespace Town
             btnImg.alphaHitTestMinimumThreshold = 0.1f;
         }
 
-        public void Init(TempleViewController templeView)
+        public void Init(TempleView templeView)
         {
             this.templeView = templeView;
             timeState = CalendarService.Instance.currtimeState;

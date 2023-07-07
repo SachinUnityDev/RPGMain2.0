@@ -1,4 +1,5 @@
 using Common;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,26 +7,24 @@ using UnityEngine;
 
 namespace Town
 {
-    public class TempleModel
+    [Serializable]
+    public class TempleModel: BuildingModel
     {
-        [Header("Build State")]
-        public BuildingState buildState;
+        //[Header("Build State")]
+        //public BuildingState buildState;
 
         [Header("UPGRADE")]
         public bool isBuildingUpgraded = false;
 
-        public List<BuildIntTypeData> buildIntTypes = new List<BuildIntTypeData>();
-        public List<NPCInteractData> allNPCInteractData= new List<NPCInteractData>();
-        public List<CharInteractData> allCharInteractData = new List<CharInteractData>();
+        //public List<BuildIntTypeData> buid = new List<BuildIntTypeData>();
+        //public List<NPCInteractData> allNPCInteractData= new List<NPCInteractData>();
+        //public List<CharInteractData> allCharInteractData = new List<CharInteractData>();
         public TempleModel(BuildingSO templeSO)
         {
-            buildState = templeSO.buildingData.buildingState;
-
-
-
-            buildIntTypes = templeSO.buildingData.buildIntTypes.DeepClone();
-            allNPCInteractData = templeSO.buildingData.npcInteractData.DeepClone();
-            allCharInteractData = templeSO.buildingData.charInteractData.DeepClone(); 
+            buildState = templeSO.buildingState;
+            buildIntTypes = templeSO.buildIntTypes.DeepClone();
+            npcInteractData = templeSO.npcInteractData.DeepClone();
+            charInteractData = templeSO.charInteractData.DeepClone(); 
         }
     }
 }

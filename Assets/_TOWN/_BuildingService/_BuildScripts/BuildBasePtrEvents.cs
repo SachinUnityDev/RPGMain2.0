@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using Town;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using DG.Tweening;
+
 namespace Common
 {
     public class BuildBasePtrEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
@@ -27,14 +27,14 @@ namespace Common
 
         [Header("Global Var")]
         [SerializeField] TimeState timeState;
-        [SerializeField] bool isSelect = false; 
+        [SerializeField] bool isSelect = false;
         private void Awake()
         {
-           // buildImg = GetComponent<Image>();
+          //  buildImg= GetComponent<Image>();
         }
+
         void Start()
         {
-          //  buildImg = GetComponent<Image>();
             buildImg.alphaHitTestMinimumThreshold = 0.1f;
             Hidetxt();
         }
@@ -50,22 +50,22 @@ namespace Common
         {
             if (timeState == TimeState.Night)
             {
-                buildImg.sprite = buildSO.buildingData.buildExtNight;
+                buildImg.sprite = buildSO.buildExtNight;
             }
             else
             {
-                buildImg.sprite = buildSO.buildingData.buildExtDayN;                
+                buildImg.sprite = buildSO.buildExtDayN;                
             }
         }
         void SetSpriteHL()
         {
             if (timeState == TimeState.Night)
             {
-                buildImg.sprite = buildSO.buildingData.buildExtNightHL;
+                buildImg.sprite = buildSO.buildExtNightHL;
             }
             else
             {                
-                buildImg.sprite = buildSO.buildingData.buildExtDayHL;
+                buildImg.sprite = buildSO.buildExtDayHL;
             }
         }
 
@@ -99,6 +99,7 @@ namespace Common
             townViewController.OnBuildSelect(buildingName);
             SetSpriteNormal();
             Hidetxt();
+            townViewController.ShowBuildBarks(buildingName); 
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
@@ -106,6 +107,7 @@ namespace Common
             if (townViewController.selectBuild != BuildingNames.None) return; 
             SetSpriteHL();  
             ShowTxt();
+
         }
 
         public void OnPointerExit(PointerEventData eventData)

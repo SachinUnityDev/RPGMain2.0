@@ -23,5 +23,26 @@ namespace Common
     public class BuildBarkSO : ScriptableObject
     {
         public List<BuildBarkSOData> allBuildBarkSO = new List<BuildBarkSOData>();
+
+        public BarkLineData GetBuildBarkSOData(BuildingNames buildName, BuildingState buildState, TimeState timeState)
+        {
+            List<BarkLineData> barkLines= new List<BarkLineData>();
+            foreach (BuildBarkSOData allbark in allBuildBarkSO)
+            {
+                if(allbark.BuildingName == buildName)
+                {
+                    foreach (BuildStateBarkData build in allbark.BuildStates)
+                    {
+                        if(build.timeState == timeState && build.buildState == buildState)
+                        {
+                            barkLines.Add(build.barkLineData); 
+                        }
+                    }     
+                }
+            }
+            int random = UnityEngine.Random.Range(0, barkLines.Count);  
+            return barkLines[random]; 
+        }
+
     }
 }

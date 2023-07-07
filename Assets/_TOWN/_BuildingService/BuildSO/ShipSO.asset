@@ -12,36 +12,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b5e2eb5a4e73a74683a3af4d29d310b, type: 3}
   m_Name: ShipSO
   m_EditorClassIdentifier: 
-  _allbuildingData:
-    buildingName: 5
-    buildingState: 0
-    buildExtDayN: {fileID: 21300000, guid: 7f92d7836d0675649a15acf007ee688e, type: 3}
-    buildExtDayHL: {fileID: 21300000, guid: 9adb2fd0760e9ea4c9d6ca1bef571733, type: 3}
-    buildExtNight: {fileID: 21300000, guid: 850e628c8fe2e3b408547576459cfb27, type: 3}
-    buildExtNightHL: {fileID: 21300000, guid: cb516f143cfbe7c43b2aa58e0856b4c3, type: 3}
-    buildIntDay: {fileID: 21300000, guid: 5abb5997cc0238e4ca818305e5a0b966, type: 3}
-    buildIntNight: {fileID: 21300000, guid: 0bfd4c0d253a8b244a54b6341dd5d0ba, type: 3}
-    charInteractData:
-    - compName: 4
-      nPCIntType: 1
-      nPCState: 0
-    CharInteractPrefab: []
-    npcData:
-    - nPCNames: 1
-      nPCIntType: 1
-      npcState: 0
-    - nPCNames: 1
-      nPCIntType: 2
-      npcState: 0
-    npcDataPrefab:
-    - nPCNames: 1
-      nPCIntType: 2
-      interactPrefab: {fileID: 0}
-    buildIntTypes:
-    - BuildIntType: 9
+  buildingName: 5
+  buildingState: 0
+  buildExtDayN: {fileID: 21300000, guid: 7f92d7836d0675649a15acf007ee688e, type: 3}
+  buildExtDayHL: {fileID: 21300000, guid: 9adb2fd0760e9ea4c9d6ca1bef571733, type: 3}
+  buildExtNight: {fileID: 21300000, guid: 850e628c8fe2e3b408547576459cfb27, type: 3}
+  buildExtNightHL: {fileID: 21300000, guid: cb516f143cfbe7c43b2aa58e0856b4c3, type: 3}
+  buildIntDay: {fileID: 21300000, guid: 5abb5997cc0238e4ca818305e5a0b966, type: 3}
+  buildIntNight: {fileID: 21300000, guid: 0bfd4c0d253a8b244a54b6341dd5d0ba, type: 3}
+  charInteractData:
+  - compName: 4
+    nPCIntType: 1
+    nPCState: 0
+    allDialogueData:
+    - dialogueName: 2
       isUnLocked: 0
-    buildIntPrefab: []
-    statusLockedStr:
-    - "That ship has sailed a while ago!\r"
-    statusUnAvailStr:
-    - "No decent ship in the docks!\r\r\n"
+  CharInteractPrefab: []
+  npcInteractData:
+  - nPCNames: 1
+    nPCIntType: 1
+    npcState: 0
+    allDialogueData:
+    - dialogueName: 6
+      isUnLocked: 0
+  npcDataPrefab: []
+  buildIntTypes:
+  - BuildIntType: 9
+    isUnLocked: 0
+  - BuildIntType: 8
+    isUnLocked: 0
+  buildIntPrefab: []
+  statusLockedStr:
+  - qBarkName: 0
+    InValidQMode: 
+    allCharData: []
+  statusUnAvailStr:
+  - qBarkName: 0
+    InValidQMode: 
+    allCharData: []

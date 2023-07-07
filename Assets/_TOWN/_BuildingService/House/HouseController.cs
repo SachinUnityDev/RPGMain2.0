@@ -2,6 +2,7 @@ using Common;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Policy;
+using System.Xml.Serialization;
 using UnityEngine;
 
 
@@ -11,16 +12,19 @@ namespace Town
     {
         public HouseModel houseModel;
         [Header("to be ref")]
-        public HouseViewController houseView; 
-
+        public HouseView houseView; 
 
         private void Start()
         {
+            
+        }
+        public void InitHouseController()
+        {
             BuildingSO houseSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.House);
             houseModel = new HouseModel(houseSO);
+            BuildingIntService.Instance.allBuildModel.Add(houseModel);
+
         }
-
-
         public void OnPurchase(HousePurchaseOptsData houseData)
         {
             switch (houseData.houseOpts)

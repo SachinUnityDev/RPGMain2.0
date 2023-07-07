@@ -37,6 +37,7 @@ namespace Common
                 return; 
                 WelcomeService.Instance.InitWelcome();
                 CalendarService.Instance.Init();
+                BuildingIntService.Instance.InitBuildIntService();
                 EncounterService.Instance.EncounterInit();
                 CharService.Instance.Init();
                 UIControlServiceGeneral.Instance.InitUIGeneral();

@@ -15,25 +15,48 @@ namespace Town
 
         private void Start()
         {
-            BuildingSO shipSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.Ship);
-            shipModel = new ShipModel(shipSO);
+            CalendarService.Instance.OnStartOfCalDay +=UpdateBuildState;
         }
 
-        public void OnBuildUnLock()
+        public void InitShipController()
+        {
+            BuildingSO shipSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.Ship);
+            shipModel = new ShipModel(shipSO);
+            BuildingIntService.Instance.allBuildModel.Add(shipModel);
+        }
+
+        public void OnShipUnLock()
         {
             shipModel.buildState = BuildingState.Available;
             shipModel.unLockedOnDay = CalendarService.Instance.dayInGame;
+            shipModel.lastAvailDay = shipModel.unLockedOnDay;
         }
 
-        public void UpdateBuildState()
+        public void UpdateBuildState(int dayInGame)
         {
             if (shipModel.buildState == BuildingState.Locked) return;
             // weekly name to be done .....
-
-
-
-         
-            shipModel.buildState = BuildingState.Available;
+           // int dayInGame = CalendarService.Instance.dayInGame;           
+            
+            if(shipModel.buildState == BuildingState.Available)
+            {
+                int diff =  dayInGame - shipModel.lastAvailDay;
+                if (diff > 15) // avail for 15 days 
+                {
+                    shipModel.buildState = BuildingState.UnAvailable;
+                    shipModel.lastUnAvailDay = dayInGame;
+                }
+            }
+            else if(shipModel.buildState == BuildingState.UnAvailable)
+            {
+                int diff = dayInGame - shipModel.lastUnAvailDay;
+                if (diff > 10) // avail for 10 days 
+                {
+                    shipModel.buildState = BuildingState.Available;
+                    shipModel.lastAvailDay = dayInGame;
+                }
+            }
+        
         }
 
     }

@@ -13,7 +13,7 @@ namespace Town
         [Header("NTBR")]
         [SerializeField] Button talkBtn;
         [SerializeField] Button tradeBtn;   
-        TempleViewController templeView;
+        TempleView templeView;
         [SerializeField] CharNames charName;
         [SerializeField] NPCNames npcNames;
         [SerializeField] bool isShown; 
@@ -22,7 +22,7 @@ namespace Town
             isShown= false;
         }
 
-        public void InitPortraitPtrEvents(TempleViewController  templeView, NPCInteractData npcInteractData)
+        public void InitPortraitPtrEvents(TempleView  templeView, NPCInteractData npcInteractData)
         {
             this.templeView = templeView;
             

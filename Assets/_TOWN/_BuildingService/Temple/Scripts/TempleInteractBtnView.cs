@@ -11,7 +11,7 @@ namespace Town
         [SerializeField] Transform btnContainer;
 
         [SerializeField] BuildInteractType buildInteractType;
-        TempleViewController templeView;
+        TempleView templeView;
         TempleModel templeModel; 
         AllBuildSO allbuildSO;
         private void Awake()
@@ -19,7 +19,7 @@ namespace Town
             btnContainer = transform.GetChild(0);
         }
 
-        public void InitInteractBtns(TempleViewController templeView)
+        public void InitInteractBtns(TempleView templeView)
         {
             this.templeView  = templeView;
             templeModel = BuildingIntService.Instance.templeController.templeModel; 
@@ -37,7 +37,7 @@ namespace Town
                     btnContainer.GetChild(i).gameObject.SetActive(true);
                     InteractionSpriteData interactSprite = allbuildSO.GetInteractData(buildData.BuildIntType);
                     btnContainer.GetChild(i).GetComponent<TempleBtnPtrEvents>()
-                                .TempleIntInit(buildData, interactSprite, templeView);
+                                    .TempleIntInit(buildData, interactSprite, templeView);
                     i++;
                 }
             }

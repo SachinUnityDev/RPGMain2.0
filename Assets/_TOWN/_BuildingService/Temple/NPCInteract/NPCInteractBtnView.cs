@@ -8,7 +8,7 @@ namespace Town
 {
     public class NPCInteractBtnView : MonoBehaviour
     {
-        TempleViewController templeView;
+        TempleView templeView;
         TempleModel templeModel;
         AllBuildSO allBuildSO;
         GameObject npcIntPortraitPrefab; 
@@ -16,7 +16,7 @@ namespace Town
         {
                 
         }
-        public void InitInteractBtns(TempleViewController templeView)
+        public void InitInteractBtns(TempleView templeView)
         {
             this.templeView = templeView;
             templeModel = BuildingIntService.Instance.templeController.templeModel;
@@ -28,7 +28,7 @@ namespace Town
         {
             BuildingSO templeSO = allBuildSO.GetBuildSO(BuildingNames.Temple);
 
-            foreach (NPCInteractData npcInteract in templeModel.allNPCInteractData)
+            foreach (NPCInteractData npcInteract in templeModel.npcInteractData)
             {
                 if(npcInteract.npcState == NPCState.UnLockedNAvail)
                 {

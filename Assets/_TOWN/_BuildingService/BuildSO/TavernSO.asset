@@ -12,76 +12,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b5e2eb5a4e73a74683a3af4d29d310b, type: 3}
   m_Name: TavernSO
   m_EditorClassIdentifier: 
-  _allbuildingData:
-    buildingName: 7
-    buildingState: 0
-    buildExtDayN: {fileID: 21300000, guid: 9a491638a7d20e245b06ac015fe41f58, type: 3}
-    buildExtDayHL: {fileID: 21300000, guid: 4aed9e47bd6f09c4a80ca14102a34602, type: 3}
-    buildExtNight: {fileID: 21300000, guid: 87192e68d33954d499f2c3a75ada86e7, type: 3}
-    buildExtNightHL: {fileID: 21300000, guid: 966b67cfad92cc14f91febf0d6789bcc, type: 3}
-    buildIntDay: {fileID: 21300000, guid: 8ff76a01191b8a74d9c1b930aec3b091, type: 3}
-    buildIntNight: {fileID: 21300000, guid: 57f075dca22e1954e981af231b07b76f, type: 3}
-    charInteractData:
-    - compName: 3
-      nPCIntType: 1
-      nPCState: 0
-      allDialogueData: []
-    - compName: 2
-      nPCIntType: 1
-      nPCState: 0
-      allDialogueData: []
-    CharInteractPrefab: []
-    npcInteractData:
-    - nPCNames: 7
-      nPCIntType: 1
-      npcState: 1
-      allDialogueData: []
-    - nPCNames: 7
-      nPCIntType: 2
-      npcState: 1
-      allDialogueData: []
-    - nPCNames: 5
-      nPCIntType: 1
-      npcState: 0
-      allDialogueData: []
-    - nPCNames: 5
-      nPCIntType: 2
-      npcState: 0
-      allDialogueData: []
-    npcDataPrefab:
-    - nPCNames: 7
-      nPCIntType: 1
-      interactPrefab: {fileID: 0}
-    - nPCNames: 7
-      nPCIntType: 2
-      interactPrefab: {fileID: 0}
-    - nPCNames: 5
-      nPCIntType: 1
-      interactPrefab: {fileID: 0}
-    - nPCNames: 5
-      nPCIntType: 2
-      interactPrefab: {fileID: 0}
-    buildIntTypes:
-    - BuildIntType: 1
-      isUnLocked: 1
-    - BuildIntType: 8
-      isUnLocked: 1
-    - BuildIntType: 10
-      isUnLocked: 1
-    - BuildIntType: 11
-      isUnLocked: 1
-    - BuildIntType: 14
-      isUnLocked: 0
-    buildIntPrefab:
-    - BuildIntType: 1
-      interactPrefab: {fileID: 0}
-    - BuildIntType: 8
-      interactPrefab: {fileID: 0}
-    - BuildIntType: 10
-      interactPrefab: {fileID: 0}
-    - BuildIntType: 11
-      interactPrefab: {fileID: 0}
-    - BuildIntType: 11
-      interactPrefab: {fileID: 0}
-    statusLockedStr: []
-    statusUnAvailStr: []
+  buildingName: 7
+  buildingState: 0
+  buildExtDayN: {fileID: 21300000, guid: 9a491638a7d20e245b06ac015fe41f58, type: 3}
+  buildExtDayHL: {fileID: 21300000, guid: 4aed9e47bd6f09c4a80ca14102a34602, type: 3}
+  buildExtNight: {fileID: 21300000, guid: 87192e68d33954d499f2c3a75ada86e7, type: 3}
+  buildExtNightHL: {fileID: 21300000, guid: 966b67cfad92cc14f91febf0d6789bcc, type: 3}
+  buildIntDay: {fileID: 21300000, guid: 8ff76a01191b8a74d9c1b930aec3b091, type: 3}
+  buildIntNight: {fileID: 21300000, guid: 57f075dca22e1954e981af231b07b76f, type: 3}
+  charInteractData:
+  - compName: 3
+    nPCIntType: 1
+    nPCState: 0
+    allDialogueData: []
+  - compName: 2
+    nPCIntType: 1
+    nPCState: 0
+    allDialogueData: []
+  CharInteractPrefab: []
+  npcInteractData:
+  - nPCNames: 7
+    nPCIntType: 1
+    npcState: 0
+    allDialogueData: []
+  - nPCNames: 7
+    nPCIntType: 2
+    npcState: 0
+    allDialogueData: []
+  npcDataPrefab: []
+  buildIntTypes:
+  - BuildIntType: 10
+    isUnLocked: 1
+  - BuildIntType: 8
+    isUnLocked: 1
+  - BuildIntType: 1
+    isUnLocked: 0
+  - BuildIntType: 11
+    isUnLocked: 0
+  buildIntPrefab: []
+  statusLockedStr:
+  - qBarkName: 0
+    InValidQMode: 
+    allCharData: []
+  statusUnAvailStr:
+  - qBarkName: 0
+    InValidQMode: 
+    allCharData: []

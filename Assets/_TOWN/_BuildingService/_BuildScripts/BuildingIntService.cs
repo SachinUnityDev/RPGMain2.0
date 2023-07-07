@@ -20,6 +20,8 @@ namespace Town
         public NPCNames selectNpc; 
 
         public AllBuildSO allBuildSO; 
+        public List<BuildingModel> allBuildModel= new List<BuildingModel>();
+
 
         public HouseController houseController;
         public TavernController tavernController; 
@@ -29,14 +31,27 @@ namespace Town
         public SafekeepController safekeepController;
         void Start()
         {
-            houseController = GetComponent<HouseController>();
-            templeController = GetComponent<TempleController>();
-            tavernController = GetComponent<TavernController>();    
-            marketController= GetComponent<MarketController>();
-            shipController= GetComponent<ShipController>();
-            safekeepController= GetComponent<SafekeepController>();
+            
 
         }
+
+        public void InitBuildIntService()
+        {
+            houseController = GetComponent<HouseController>();
+            templeController = GetComponent<TempleController>();
+            tavernController = GetComponent<TavernController>();
+            marketController = GetComponent<MarketController>();
+            shipController = GetComponent<ShipController>();
+            //safekeepController = GetComponent<SafekeepController>();
+
+            houseController.InitHouseController();
+            templeController.InitTempleController();            
+            tavernController.InitTavernController();
+            marketController.InitMarketController();    
+            shipController.InitShipController();
+
+        }
+
 
         #region   
 

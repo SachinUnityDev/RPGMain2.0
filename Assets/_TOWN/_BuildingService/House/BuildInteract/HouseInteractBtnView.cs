@@ -12,7 +12,7 @@ namespace Town
         [SerializeField] Transform btnContainer;
   
         [SerializeField] BuildInteractType buildInteractType;
-         HouseViewController houseView;
+         HouseView houseView;
          HouseModel houseModel;
         AllBuildSO allbuildSO;
         private void Awake()
@@ -20,7 +20,7 @@ namespace Town
             btnContainer = transform.GetChild(0);
         }
 
-       public void InitInteractBtns(HouseViewController houseView)
+       public void InitInteractBtns(HouseView houseView)
         {
             this.houseView = houseView;
             houseModel = BuildingIntService.Instance.houseController.houseModel;

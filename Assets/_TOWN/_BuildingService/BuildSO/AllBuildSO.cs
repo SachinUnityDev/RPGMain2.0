@@ -63,7 +63,7 @@ namespace Town
 
         public BuildingSO GetBuildSO(BuildingNames _buildName)
         {
-            int index = allBuildSO.FindIndex(t => t.buildingData.buildingName == _buildName); 
+            int index = allBuildSO.FindIndex(t => t.buildingName == _buildName); 
             if(index != -1)
             {
                 return allBuildSO[index];

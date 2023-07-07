@@ -1,4 +1,5 @@
 using Interactables;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,25 +7,20 @@ using UnityEngine;
 
 namespace Town
 {
-    public class ShipModel
+    [Serializable]
+    public class ShipModel : BuildingModel
     {
-        [Header("Build State")]
-        public BuildingState buildState;
-
-        public int unLockedOnDay = 0; 
-
-        public List<CharInteractData> charInteract = new List<CharInteractData>();
-
-        public List<NPCInteractData> npcData = new List<NPCInteractData>();
-
-        public List<BuildIntTypeData> buildIntTypes = new List<BuildIntTypeData>();
+        public int unLockedOnDay = 0;
+        public int lastAvailDay = 0;
+        public int lastUnAvailDay = 0; 
+       
         public ShipModel(BuildingSO shipSO)
         {
-            buildState = shipSO.buildingData.buildingState;
+            buildState = shipSO.buildingState;
 
-            buildIntTypes = shipSO.buildingData.buildIntTypes.DeepClone();
-            npcData = shipSO.buildingData.npcInteractData.DeepClone();
-            charInteract = shipSO.buildingData.charInteractData.DeepClone();
+            buildIntTypes = shipSO.buildIntTypes.DeepClone();
+            npcInteractData = shipSO.npcInteractData.DeepClone();
+            charInteractData = shipSO.charInteractData.DeepClone();
 
         }
     }

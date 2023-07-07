@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Security.Policy;
 using Common;
 
 namespace Town
@@ -71,61 +70,6 @@ namespace Town
         public BuildInteractType BuildIntType;
         public GameObject interactPrefab;
     }
-
-
-    [System.Serializable]
-    public class BuildingData
-    {
-        public BuildingNames buildingName;
-        public BuildingState buildingState;
-
-
-        [Header("Building Exterior")]
-        public Sprite buildExtDayN;
-        public Sprite buildExtDayHL; 
-
-        public Sprite buildExtNight;
-        public Sprite buildExtNightHL; 
-
-        [Header("Building Interior")]
-        public Sprite buildIntDay;
-        public Sprite buildIntNight;
-
-        [Header("CharInteract")]
-        public List<CharInteractData> charInteractData = new List<CharInteractData>();
-        public List<CharInteractPrefabData> CharInteractPrefab = new List<CharInteractPrefabData>();
-
-        [Header("NPC Interactions")]        
-        public List<NPCInteractData> npcInteractData = new List<NPCInteractData>();
-        public List<NPCInteractPrefabData> npcDataPrefab = new List<NPCInteractPrefabData>();
-        
-
-        [Header("Building Interactions")]
-        public List<BuildIntTypeData> buildIntTypes = new List<BuildIntTypeData>();
-        public List<BuildIntTypePrefabData> buildIntPrefab = new List<BuildIntTypePrefabData>();    
-
-        [Header("UnLocked and Unavailable")]
-        [TextArea (4,10)]
-        public List<string> statusLockedStr= new List<string>();
-        [TextArea(4, 10)]
-        public List<string> statusUnAvailStr = new List<string>(); 
-
-        public string GetUnLockedStr()
-        {
-            int count = statusLockedStr.Count;
-            if (count == 0) return ""; 
-            int ran  = UnityEngine.Random.Range(0, count); 
-            return statusLockedStr[ran];
-        }
-        public string GetUnAvailStr()
-        {
-            int count = statusUnAvailStr.Count;
-            if (count == 0) return "";
-            int ran = UnityEngine.Random.Range(0, count);
-            return statusLockedStr[ran];
-        }
-    }
-
     [System.Serializable]
     public class InteractionSpriteData
     {
@@ -137,8 +81,17 @@ namespace Town
     [System.Serializable]
     public class BuildingModel
     {
-        public List<BuildingData> allBuildingData = new List<BuildingData>();
-        public List<InteractionSpriteData> allIntSprites = new List<InteractionSpriteData>();
+        [Header("Building Name")]
+        public BuildingNames buildingName;
+        public BuildingState buildState;
+
+        [Header("CharInteract")]
+        public List<CharInteractData> charInteractData = new List<CharInteractData>();
+        [Header("NPC Interactions")]
+        public List<NPCInteractData> npcInteractData = new List<NPCInteractData>();
+        [Header("Building Interactions")]
+        public List<BuildIntTypeData> buildIntTypes = new List<BuildIntTypeData>();
+
     }
 
 }

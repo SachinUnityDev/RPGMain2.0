@@ -12,20 +12,20 @@ namespace Town
     {
 
         public TavernModel tavernModel;
-
         BuildingSO tavernSO;
-        [Header("to be ref")]
+
+        [Header("TBR")]
         public TavernView tavernView;
-        DayNTimeData UnAvailOn;  
+    
         void Start()
+        {            
+            CalendarService.Instance.OnChangeTimeState += (TimeState timeState)=> UpdateBuildState(); 
+        }
+        public void InitTavernController()
         {
             tavernSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.Tavern);
-            tavernModel = new TavernModel(tavernSO);
-            // tavern unavailable
-            UnAvailOn = new DayNTimeData(DayName.DayOfAir, TimeState.Night);
-            CalendarService.Instance.OnChangeTimeState += (TimeState timeStart)=> UpdateBuildState(); 
+            tavernModel = new TavernModel(tavernSO);           
         }
-
         public void OnTrophySocketed(TGNames trophyName)
         {
 

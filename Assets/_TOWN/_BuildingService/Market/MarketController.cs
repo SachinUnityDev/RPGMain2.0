@@ -11,14 +11,20 @@ namespace Town
         public MarketModel marketModel;
 
         BuildingSO marketSO;
-        [Header("to be ref")]
+        [Header("TBR")]
         public MarketView marketView;
         void Start()
+        {            
+            CalendarService.Instance.OnChangeTimeState += (TimeState timeState) => UpdateBuildState();
+        }
+
+        public void InitMarketController()
         {
             marketSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.Marketplace);
             marketModel = new MarketModel(marketSO);
-            CalendarService.Instance.OnChangeTimeState += (TimeState timeStart) => UpdateBuildState();
+            BuildingIntService.Instance.allBuildModel.Add(marketModel);
         }
+
         public void UpdateBuildState()
         {
             if (marketModel.buildState == BuildingState.Locked) return;

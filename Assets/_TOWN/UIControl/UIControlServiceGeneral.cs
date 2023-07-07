@@ -26,13 +26,15 @@ namespace Common
         [Header("HelpName")]
         public HelpName helpName;
 
-
+        [Header("Game Init")]
+        public bool isNewGInitDone = false;
 
         public void InitUIGeneral()
         {
             notifyController = GetComponent<NotifyController>();
             notifyController.InitController(allNotifySO);
-           
+            isNewGInitDone = true;
+
         }
         private void Start()
         {

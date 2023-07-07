@@ -26,6 +26,11 @@ namespace Common
         [Header("Global var")]
         [SerializeField] CharModel charModel;
         [SerializeField] CharController charController;
+
+        [Header("Game Init")]
+        public bool isNewGInitDone = false;
+
+        
         private void Start()
         {
             
@@ -34,7 +39,9 @@ namespace Common
         public void Init()
         {
             if (lvlModel == null)
-                lvlModel = new LevelModel(); 
+                lvlModel = new LevelModel();
+
+            isNewGInitDone = true;
         }
 
         public void LevelUpInitAlly(CharController charController)  // ALLY

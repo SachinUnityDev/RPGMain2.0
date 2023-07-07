@@ -11,8 +11,9 @@ namespace Common
         public FameSO fameSO;
         public FameController fameController;
         public FameViewController fameViewController;
-        
-      
+
+        [Header("Game Init")]
+        public bool isNewGInitDone = false;
         void Start()
         {
            
@@ -22,7 +23,8 @@ namespace Common
         {
             // save service integration here pending
             fameController = gameObject.GetComponent<FameController>();
-            fameController.InitFameController(fameSO); 
+            fameController.InitFameController(fameSO);
+            isNewGInitDone = true;
         }
         public FameType GetFameType()
         {

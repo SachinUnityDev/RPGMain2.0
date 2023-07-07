@@ -27,8 +27,13 @@ namespace Common
         [Header("UNLOCKED Bestiary")]
         public List<CharController> allRegBestiaryCtrl = new List<CharController>();
         public List<CharModel> allRegBestiaryModels = new List<CharModel>(); // Unlocks here when u meet them 
-     
+
         // UNLOCKS => REGISTER after u meet a enemy in combat they register in scroll list
+        [Header("Game Init")]
+        public bool isNewGInitDone = false;
+
+      
+
         void Start()
         {
           currSelectRace = RaceType.None;
@@ -42,6 +47,7 @@ namespace Common
                 // init all char controllers here
             }
             CreateAllBestiaryCtrls();
+            isNewGInitDone = true;
         }
         public void OnRaceSelect(RaceType raceType)
         {

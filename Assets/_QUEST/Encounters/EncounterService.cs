@@ -30,13 +30,14 @@ namespace Quest
         [Header("Quest Encounter TBR")]
         public AllQuestESO allQuestESO;
 
+        public bool isNewGInitDone = false;
 
         void Start()
         {            
             cityEFactory = gameObject.GetComponent<CityEncounterFactory>();
             cityEController = gameObject.GetComponent<CityEController>();
 
-            mapEFactory= gameObject.GetComponent<MapEFactory>();
+            mapEFactory = gameObject.GetComponent<MapEFactory>();
             mapEController= gameObject.GetComponent<MapEController>();
 
             questEController= gameObject.GetComponent<QuestEController>();
@@ -45,21 +46,17 @@ namespace Quest
         }
         public void EncounterInit()
         {
+            cityEController = gameObject.GetComponent<CityEController>();
+            mapEController = gameObject.GetComponent<MapEController>();
+            questEController = gameObject.GetComponent<QuestEController>();
+
+
             cityEController.InitCityE(allCityESO);
             mapEController.InitMapE(allMapESO);
-            questEController.InitQuestE(allQuestESO);   
-        }
-        private void Update()
-        {
-            //if (questEController != null)
-            //{
-            //    if (Input.GetKeyDown(KeyCode.C))
-            //    {
-            //        questEController.ShowQuestE(null, QuestENames.Spidaboy); 
-            //    }
-            //}
-        }
+            questEController.InitQuestE(allQuestESO);
 
+            isNewGInitDone = true;
+        }
 
     }
 }

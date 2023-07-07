@@ -23,7 +23,11 @@ namespace Common
         public event Action<Currency> OnStashMoneyChg;
         public event Action<PocketType> OnPocketSelected;
 
-        public EcoController ecoController; 
+        public EcoController ecoController;
+
+        [Header("Game Init")]
+        public bool isNewGInitDone = false;
+
 
         void Start()
         {
@@ -31,8 +35,10 @@ namespace Common
         }
         public void InitEcoServices()
         {
+            ecoController = transform.GetComponent<EcoController>();
             econoModel = new EconoModel(ecoSO);
-            ecoController.InitEcoController(econoModel); 
+            ecoController.InitEcoController(econoModel);
+            isNewGInitDone = true;
         }
 
         public void On_PocketSelected(PocketType pocketType)

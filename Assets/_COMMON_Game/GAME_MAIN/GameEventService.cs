@@ -23,40 +23,48 @@ namespace Common
        
         void Start()
         {
-            OnGameStateChg += OnQuestStart;
-            
+            OnGameStateChg += On_QuestStart;
+            OnGameStateChg += (GameState gameState) => On_TownEnter(LocationName.Nekkisari, gameState); 
         }
         
-        public void On_TownEnter(LocationName locationName)
-        {          
-            CalendarService.Instance.Init();
-            EncounterService.Instance.EncounterInit();
-            CharService.Instance.Init();
-            UIControlServiceGeneral.Instance.InitUIGeneral();
-            MapService.Instance.InitMapService();   
-            EcoServices.Instance.InitEcoServices(); 
-            DialogueService.Instance.InitDialogueService(); 
-            BestiaryService.Instance.Init();
-            ItemService.Instance.Init();
-            FameService.Instance.Init();
-            LevelService.Instance.Init();
-            TownService.Instance.Init(locationName);
-            OnTownEnter?.Invoke(locationName);
-            //QuestMissionService.Instance.InitQuestMission();    
-            //LootService.Instance.InitLootService();
-            //CurioService.Instance.InitCurioService();// test purpose only
-        }
-
-
-
-        void OnQuestStart(GameState gameState)
+        public void On_TownEnter(LocationName locationName, GameState gameState)
         {
-            if(gameState == GameState.InQuest)
-            {
-                CurioService.Instance.InitCurioService();
-            }
-        }
+            // Anything initialised by SO to be put here 
+            // any initialisation during scene swap to be checked 
+            // model init to be implemented after the save service connection 
 
+            if (gameState != GameState.InTown)
+                return; 
+                WelcomeService.Instance.InitWelcome();
+                CalendarService.Instance.Init();
+                EncounterService.Instance.EncounterInit();
+                CharService.Instance.Init();
+                UIControlServiceGeneral.Instance.InitUIGeneral();
+                MapService.Instance.InitMapService();
+                EcoServices.Instance.InitEcoServices();
+                DialogueService.Instance.InitDialogueService();
+                BestiaryService.Instance.Init();
+                ItemService.Instance.Init();
+                FameService.Instance.Init();
+                LevelService.Instance.Init();
+                TownService.Instance.Init(locationName);
+                OnTownEnter?.Invoke(locationName);
+                QuestMissionService.Instance.InitQuestMission();
+            
+            
+        }
+        public void On_QuestStart(GameState gameState)
+        {
+            if (gameState != GameState.InQuest)
+                return;
+            CurioService.Instance.InitCurioService();
+            LootService.Instance.InitLootService();
+            
+        }
+        public void On_QuestEnd()
+        {
+
+        }
 
 
         public void On_TownExit(LocationName locationName)

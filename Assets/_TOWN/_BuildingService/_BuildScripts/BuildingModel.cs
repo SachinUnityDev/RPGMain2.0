@@ -110,8 +110,20 @@ namespace Town
         [TextArea(4, 10)]
         public List<string> statusUnAvailStr = new List<string>(); 
 
-       
-
+        public string GetUnLockedStr()
+        {
+            int count = statusLockedStr.Count;
+            if (count == 0) return ""; 
+            int ran  = UnityEngine.Random.Range(0, count); 
+            return statusLockedStr[ran];
+        }
+        public string GetUnAvailStr()
+        {
+            int count = statusUnAvailStr.Count;
+            if (count == 0) return "";
+            int ran = UnityEngine.Random.Range(0, count);
+            return statusLockedStr[ran];
+        }
     }
 
     [System.Serializable]
@@ -122,11 +134,11 @@ namespace Town
         public Sprite spriteN;
     }
 
-    //[System.Serializable]
-    //public class BuildingModel
-    //{
-    //    public List<BuildingData> allBuildingData = new List<BuildingData>();
-    //    public List<InteractionSpriteData> allIntSprites = new List<InteractionSpriteData>();
-    //}
+    [System.Serializable]
+    public class BuildingModel
+    {
+        public List<BuildingData> allBuildingData = new List<BuildingData>();
+        public List<InteractionSpriteData> allIntSprites = new List<InteractionSpriteData>();
+    }
 
 }

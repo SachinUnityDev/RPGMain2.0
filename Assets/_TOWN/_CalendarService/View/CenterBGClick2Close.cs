@@ -11,12 +11,5 @@ namespace Common
         {
             CalendarService.Instance.calendarUIController.CloseAllPanel();
         }
-
-        void Start()
-        {
-
-        }
-
-        
     }
 }

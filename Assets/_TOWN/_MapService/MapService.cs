@@ -24,6 +24,9 @@ namespace Town
         public AllPathSO allPathSO;
         public PathSO currPathSO;
 
+        [Header("Game Init")]
+        public bool isNewGInitDone = false;
+
         void Start()
         {
             pathController= GetComponent<PathController>();
@@ -32,10 +35,15 @@ namespace Town
         }
         
         public void InitMapService()
-        {          
+        {
+            pathController = GetComponent<PathController>();
+            mapController = GetComponent<MapController>();
+
             pathController.InitPath(allPathSO);
             pathExpView.PathExpInit();
             mapController.InitMapController();
+
+            isNewGInitDone = true;
         }
 
 

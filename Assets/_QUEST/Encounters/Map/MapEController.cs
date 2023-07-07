@@ -16,11 +16,11 @@ namespace Quest
         public List<MapEbase> allMapEBases= new List<MapEbase>();
         [SerializeField] int mapBaseCount = 0;
 
+        MapEFactory mapEFactory; 
 
-
-        void Start()
+        void Awake()
         {
-
+            mapEFactory= GetComponent<MapEFactory>();   
         }
 
 
@@ -52,8 +52,7 @@ namespace Quest
         {
             foreach (MapEModel mapModel in allMapEModels)
             {
-                MapEbase mapEBase = EncounterService.Instance.mapEFactory
-                                                    .GetMapEBase(mapModel.mapEName);
+                MapEbase mapEBase = mapEFactory.GetMapEBase(mapModel.mapEName);
                 mapEBase.MapEInit(mapModel);
                 allMapEBases.Add(mapEBase);
             }

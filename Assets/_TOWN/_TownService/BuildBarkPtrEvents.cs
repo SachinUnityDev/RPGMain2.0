@@ -9,10 +9,13 @@ namespace Town
 
     public class BuildBarkPtrEvents : MonoBehaviour
     {
-        [SerializeField] BuildingNames buildName; 
+        public BuildingNames buildName; 
 
-        public void DisplayBark()
+        public void InitBark(BuildingData buildingData)
         {
+            BuildingState buildState = buildingData.buildingState;
+            // get buildSO and from  SO 
+
             // get build state .. 
             // get 
         }

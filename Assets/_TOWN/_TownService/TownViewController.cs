@@ -95,6 +95,22 @@ namespace Town
         {
             return helpName; 
         }
+        public void ShowBuildBarks(BuildingData buildingData)
+        {
+            foreach (Transform trans in transform.GetChild(1))
+            {                
+                BuildBarkPtrEvents buildBarks = trans.GetComponent<BuildBarkPtrEvents>();
+                if (buildBarks == null) continue; 
+                if(buildBarks.buildName == buildingData.buildingName)
+                {
+                    buildBarks.InitBark(buildingData); 
+                }
+            }
+           
+
+
+        }
+
     }
 
 

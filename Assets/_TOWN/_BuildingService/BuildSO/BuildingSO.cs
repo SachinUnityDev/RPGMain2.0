@@ -17,23 +17,10 @@ namespace Town
             get => _allbuildingData;
             set { _allbuildingData = value; }
         }
-        
-       
-        private void Awake()
-        {
-          
-        }
-
     }
 
   
-   // [Serializable]
-    //public class BuildInteractData
-    //{
-    //    public HouseItem buildItem;
-    //    public bool isUnlocked;
-      
-    //}
+
     public interface IBuildSO
     {
         BuildingData buildingData { get; set; }   

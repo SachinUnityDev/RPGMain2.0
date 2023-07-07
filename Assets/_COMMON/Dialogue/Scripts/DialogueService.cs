@@ -47,10 +47,10 @@ namespace Common
         DialogueFactory dialogueFactory; 
 
         [Header("Custom Dialogue Interaction")]
-        public IDialogue currController; 
+        public IDialogue currController;
 
-
-
+        [Header("Game Init")]
+        public bool isNewGInitDone = false;
 
         private void Start()
         {
@@ -65,6 +65,7 @@ namespace Common
                 DialogueModel diaModel = new DialogueModel(dialogueSO);
                 allDiaLogueModels.Add(diaModel);
             }
+            isNewGInitDone = true;
         }
         public DialogueModel GetDialogueModel(DialogueNames dialogueName)
         {

@@ -23,6 +23,8 @@ namespace Town
 
 
         public AllBuildSO allbuildSO;
+        [Header("Game Init")]
+        public bool isNewGInitDone = false;
 
         void Start()
         {
@@ -32,19 +34,13 @@ namespace Town
         }
         public void Init(LocationName location)
         {  
-            // load Scene here
-
             townModel = new TownModel(); // to be linke d to save Panels
             townModel.currTown = location;
             townModel.allCharInTown 
                 = RosterService.Instance.rosterController.GetCharAvailableInTown(location);
             
             townViewController.TownViewInit(CalendarService.Instance.currtimeState);
-
-           // RosterService.Instance.OpenRosterView();
-            // can instantiate prefab etc too here 
-          //  townController.GetCharAvailableInTown(townModel.currTown);
-
+            isNewGInitDone = true;
         }
 
     }

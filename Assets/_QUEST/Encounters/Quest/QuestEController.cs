@@ -22,9 +22,10 @@ namespace Quest
 
       
 
-        void Start()
+        void Awake()
         {
-            questCanvas = GameObject.FindWithTag("QuestCanvas");          
+            questEFactory = GetComponent<QuestEFactory>();
+            questCanvas = GameObject.FindWithTag("QuestCanvas");
         }
 
 
@@ -53,7 +54,7 @@ namespace Quest
         {
             foreach (QuestEModel questEModel in allQuestEModels)
             {
-                QuestEbase questEBase = EncounterService.Instance.questEFactory.GetQuestEBase(questEModel.questEName);
+                QuestEbase questEBase = questEFactory.GetQuestEBase(questEModel.questEName);
                 questEBase.QuestEInit(questEModel);
                 allQuestEBases.Add(questEBase);
             }

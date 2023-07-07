@@ -55,7 +55,7 @@ namespace Common
         [Header("Day Events Controller")]
         public DayEventsController dayEventsController; 
         public AllDaySO allDaySO;
-        public bool isNewGInitDone = true;
+        public bool isNewGInitDone = false;
         
         void Start()
         {
@@ -81,6 +81,8 @@ namespace Common
             dayEventsController.InitDayEvent(allDaySO);
             weekEventsController = GetComponent<WeekEventsController>();
             weekEventsController.InitWeekController(allWeekSO);
+          
+            isNewGInitDone = true;
 
         }
         public MonthSO GetMonthSO(MonthName _monthName)

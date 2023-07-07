@@ -83,7 +83,11 @@ namespace Interactables
         #endregion
 
         [Header("Item card")]
-        public GameObject itemCardGO; 
+        public GameObject itemCardGO;
+
+        [Header("Game Init")]
+        public bool isNewGInitDone = false;
+
         void Start()
         {
             itemFactory = gameObject.GetComponent<ItemFactory>();
@@ -98,6 +102,7 @@ namespace Interactables
                 allItemControllers.Add(itemController);
             }
             CalendarService.Instance.OnStartOfCalDay += (int day) => OnDayTickOnScroll();
+            isNewGInitDone = true;
         }
 
         #region ITEM BASE

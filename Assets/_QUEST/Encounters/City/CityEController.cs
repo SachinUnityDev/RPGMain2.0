@@ -17,14 +17,14 @@ namespace Quest
         public Transform cityEPanel;
         public Transform cityEView;
 
-
+        CityEncounterFactory cityEFactory; 
         public List<CityEModel> allCityEModels = new List<CityEModel>();    
 
         public List<CityEncounterBase> allCityEBase = new List<CityEncounterBase>();
         [SerializeField] int allCityE =0; 
-        void Start()
+        void Awake()
         {
-
+            cityEFactory = GetComponent<CityEncounterFactory>();
         }
 
 
@@ -49,7 +49,8 @@ namespace Quest
         {
             foreach (CityEModel cityEModel in allCityEModels)
             {
-                CityEncounterBase cityEBase = EncounterService.Instance.cityEFactory
+
+                CityEncounterBase cityEBase = cityEFactory
                                 .GetCityEncounterBase(cityEModel.cityEName, cityEModel.encounterSeq); 
                 cityEBase.CityEInit(cityEModel);
                 CalendarService.Instance.OnStartOfCalDay += (int day) => cityEBase.UnLockCondChk();

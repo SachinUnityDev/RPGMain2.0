@@ -60,6 +60,9 @@ namespace Common
         //public List<CharController> enemyInPlayControllers; // enemies to be dep 
         public List<GameObject> enemyInCombatPlay; // enemies to be dep 
 
+        [Header(" Game Init ")]
+        public bool isNewGInitDone = false;
+
         void Start()
         {
             lastCharID = 0;         isPartyLocked= false;
@@ -80,8 +83,10 @@ namespace Common
             {
                 SpawnCompanions(charName);
             }
-            CharController abbas = charsInPlayControllers.Find(t => t.charModel.charName == CharNames.Abbas_Skirmisher); 
-            
+            CharController abbas = charsInPlayControllers.Find(t => t.charModel.charName == CharNames.Abbas_Skirmisher);
+
+
+            isNewGInitDone = true;
 
             //CreateAllAlliesCtrls();
         }

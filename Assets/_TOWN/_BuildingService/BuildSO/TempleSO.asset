@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TempleSO
   m_EditorClassIdentifier: 
   buildingName: 8
-  buildingState: 0
+  buildingState: 1
   buildExtDayN: {fileID: 21300000, guid: e47170b7fa046e043ba04b4fce532acb, type: 3}
   buildExtDayHL: {fileID: 21300000, guid: 34fa38842e2be2d4f9df14a1967bac55, type: 3}
   buildExtNight: {fileID: 21300000, guid: bacd7c3f4a994714ba70664e090cc829, type: 3}
@@ -46,11 +46,3 @@ MonoBehaviour:
   - BuildIntType: 16
     isUnLocked: 1
   buildIntPrefab: []
-  statusLockedStr:
-  - qBarkName: 0
-    InValidQMode: 
-    allCharData: []
-  statusUnAvailStr:
-  - qBarkName: 0
-    InValidQMode: 
-    allCharData: []

@@ -18,8 +18,8 @@ namespace Common
         [SerializeField] BuildingSO buildSO;
         TownViewController townViewController;
 
-        [Header("BuildState")]
-        public BuildingState buildState;
+        //[Header("BuildState")]
+        //public BuildingState buildState;
 
         [Header("Image")]
         [SerializeField] Image buildImg;
@@ -99,7 +99,7 @@ namespace Common
             townViewController.OnBuildSelect(buildingName);
             SetSpriteNormal();
             Hidetxt();
-            townViewController.ShowBuildBarks(buildingName); 
+         
         }
         public void OnPointerEnter(PointerEventData eventData)
         {

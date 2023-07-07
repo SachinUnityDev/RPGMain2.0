@@ -29,6 +29,9 @@ namespace Town
         public MarketController marketController; 
         public ShipController shipController;
         public SafekeepController safekeepController;
+        public StableController stableController; 
+        public ThievesGuildController thieveController;
+        public CityHallController cityHallController;
         void Start()
         {
             
@@ -42,14 +45,34 @@ namespace Town
             tavernController = GetComponent<TavernController>();
             marketController = GetComponent<MarketController>();
             shipController = GetComponent<ShipController>();
-            //safekeepController = GetComponent<SafekeepController>();
+            safekeepController = GetComponent<SafekeepController>();
+            stableController = GetComponent<StableController>();
+            thieveController = GetComponent<ThievesGuildController>();
+            cityHallController= GetComponent<CityHallController>();
 
             houseController.InitHouseController();
             templeController.InitTempleController();            
             tavernController.InitTavernController();
             marketController.InitMarketController();    
             shipController.InitShipController();
+            
+            stableController.InitStableController();
+            thieveController.InitThievesGuildController() ;
+            cityHallController.InitCityHallController();
+        }
 
+        public BuildingModel GetBuildModel(BuildingNames buildName)
+        {
+            int index = allBuildModel.FindIndex(t=>t.buildingName== buildName);
+            if(index != -1)
+            {
+                return allBuildModel[index];
+            }
+            else
+            {
+                Debug.Log(" building Model Not Found" + buildName);
+            }
+            return null; 
         }
 
 

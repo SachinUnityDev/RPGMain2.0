@@ -14,6 +14,8 @@ public class SafekeepController : MonoBehaviour
     void Start()
     {
         safekeepSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.Safekeep);
-        safekeepModel = new (safekeepSO);
+        safekeepModel = new SafekeepModel(safekeepSO);
+        BuildingIntService.Instance.allBuildModel.Add(safekeepModel);
+
     }
 }

@@ -118,7 +118,7 @@ namespace Town
         public void UnLoad()
         {
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
-            TownService.Instance.townViewController.selectBuild = BuildingNames.None;
+            TownService.Instance.townViewController.OnBuildDeselect();
         }
         public HelpName GetHelpName()
         {

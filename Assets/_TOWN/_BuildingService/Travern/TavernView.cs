@@ -110,7 +110,7 @@ namespace Town
             {
                 child.GetComponent<IPanel>().UnLoad();
             }
-            TownService.Instance.townViewController.selectBuild = BuildingNames.None;
+            TownService.Instance.townViewController.OnBuildDeselect();
         }
         private void Update()
         {

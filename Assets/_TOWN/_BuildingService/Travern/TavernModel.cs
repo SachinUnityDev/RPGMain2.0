@@ -26,6 +26,7 @@ namespace Town
 
         public TavernModel(BuildingSO tavernSO)
         {
+            buildingName= tavernSO.buildingName;    
             buildState = tavernSO.buildingState; 
 
             buildIntTypes = tavernSO.buildIntTypes.DeepClone();

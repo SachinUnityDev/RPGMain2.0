@@ -26,8 +26,3 @@ MonoBehaviour:
   npcDataPrefab: []
   buildIntTypes: []
   buildIntPrefab: []
-  statusLockedStr:
-  - qBarkName: 0
-    InValidQMode: 
-    allCharData: []
-  statusUnAvailStr: []

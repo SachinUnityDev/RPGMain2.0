@@ -21,6 +21,7 @@ namespace Town
         //public List<CharInteractData> allCharInteractData = new List<CharInteractData>();
         public TempleModel(BuildingSO templeSO)
         {
+            buildingName= templeSO.buildingName;
             buildState = templeSO.buildingState;
             buildIntTypes = templeSO.buildIntTypes.DeepClone();
             npcInteractData = templeSO.npcInteractData.DeepClone();

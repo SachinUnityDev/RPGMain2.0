@@ -15,8 +15,6 @@ namespace Town
     {
         [Header("HelpName")]
         [SerializeField] HelpName helpName; 
-
-
         [Header("Cloud")]
         [SerializeField] Transform cloudTrans; 
 
@@ -27,7 +25,10 @@ namespace Town
         [Header("TBR")]
         [SerializeField] Transform buildIntContainer;
         [Header("TBR : Build Bark container")]
-        public Transform buildBarkContainer; 
+        public Transform buildBarkContainer;
+
+        [Header("Build Model")]
+        [SerializeField] BuildingModel buildModel;
 
         void Awake()
         {
@@ -40,24 +41,34 @@ namespace Town
             CalendarService.Instance.OnChangeTimeState += TownViewInit; 
         }
 
-        
         public void OnBuildSelect(BuildingNames buildName)
         {
-            selectBuild = buildName; // correction for none
-            int index = (int)buildName - 1; 
+            selectBuild = buildName; 
+            int index = (int)buildName - 1; // correction for none
+            
             for (int i = 0; i < buildContainer.childCount; i++)
             {
-                BuildBasePtrEvents buildBase = buildContainer.GetChild(i).GetComponent<BuildBasePtrEvents>(); 
-              if (buildBase.buildingName == buildName)
-              {
-                buildContainer.GetChild(i).GetComponent<BuildBasePtrEvents>().OnSelect();                   
-              }
-              else
-              {
-                buildContainer.GetChild(i).GetComponent<BuildBasePtrEvents>().OnDeSelect();
-              }
+                BuildBasePtrEvents buildBase = buildContainer.GetChild(i).GetComponent<BuildBasePtrEvents>();
+                if (buildBase == null) continue; 
+                  if (buildBase.buildingName == buildName)
+                  {
+                      buildBase.OnSelect();                   
+                  }
+                  else
+                  {
+                      buildBase.OnDeSelect();
+                  }
             }
 
+            buildModel = BuildingIntService.Instance.GetBuildModel(buildName);
+            if (buildModel == null) return; 
+            if(buildModel.buildState == BuildingState.UnAvailable || buildModel.buildState == BuildingState.Locked)
+            {
+                ShowBuildBarks(buildName, buildModel.buildState);
+                OnBuildDeselect(); return;
+            }
+
+            // Interior Init
             foreach (Transform child in buildIntContainer)
             {
                 if(child.GetComponent<IBuildName>().BuildingName == selectBuild)
@@ -65,6 +76,21 @@ namespace Town
                     child.GetComponent<IPanel>().Init();                     
                 }
             }
+        }
+
+        public void OnBuildDeselect()
+        {
+            
+            for (int i = 0; i < buildContainer.childCount; i++)
+            {
+                BuildBasePtrEvents buildBase = buildContainer.GetChild(i).GetComponent<BuildBasePtrEvents>();
+                              
+                if(buildBase != null)
+                {
+                    buildBase.OnDeSelect();                  
+                }
+            }
+            selectBuild = BuildingNames.None;
         }
         public void TownViewInit(TimeState timeState)
         {
@@ -95,7 +121,7 @@ namespace Town
         {
             return helpName; 
         }
-        public void ShowBuildBarks(BuildingNames buildName)
+        public void ShowBuildBarks(BuildingNames buildName, BuildingState buildState)
         {
             foreach (Transform trans in transform.GetChild(1))
             {                

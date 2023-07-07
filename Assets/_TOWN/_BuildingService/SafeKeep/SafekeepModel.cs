@@ -12,6 +12,7 @@ namespace Common
 
         public SafekeepModel(BuildingSO safekeepSO)
         {
+            buildingName= safekeepSO.buildingName;
             buildState = safekeepSO.buildingState;
         }
     }

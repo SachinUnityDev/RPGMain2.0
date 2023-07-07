@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HouseSO
   m_EditorClassIdentifier: 
   buildingName: 2
-  buildingState: 0
+  buildingState: 1
   buildExtDayN: {fileID: 21300000, guid: bb82c7f59ebe4ed41b7c70d82bb4ea99, type: 3}
   buildExtDayHL: {fileID: 21300000, guid: 739db42d479874c419d4ae8b4fbab9e4, type: 3}
   buildExtNight: {fileID: 21300000, guid: 1f044cb1a200a9f469737fab13e432a9, type: 3}

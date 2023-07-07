@@ -16,6 +16,7 @@ namespace Town
        
         public ShipModel(BuildingSO shipSO)
         {
+            buildingName = shipSO.buildingName;
             buildState = shipSO.buildingState;
 
             buildIntTypes = shipSO.buildIntTypes.DeepClone();

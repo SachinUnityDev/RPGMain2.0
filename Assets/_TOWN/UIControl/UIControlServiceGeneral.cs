@@ -46,7 +46,10 @@ namespace Common
             int count = currOpenPanels.Count; 
             if (count > 0)
             {
-                TogglePanel(currOpenPanels[count - 1], false);               
+                // TogglePanel(currOpenPanels[count - 1], false); // this methods skips the other unloads
+                IPanel ipanel =
+                    currOpenPanels[count - 1].GetComponent<IPanel>();
+                ipanel.UnLoad();
             }
             else
             {
@@ -159,12 +162,13 @@ namespace Common
                 canvasGrp.interactable = turnON;
                 canvasGrp.blocksRaycasts = turnON;
             }
-            if (turnON)
+            IPanel panel = go.GetComponentInChildren<IPanel>();
+            if (panel != null)
             {
-                IPanel panel = go.GetComponentInChildren<IPanel>();
-                if (panel != null)
-                    panel.Load();
+                if (turnON)                
+                    panel.Load();               
             }
+                
         }
         public void ToggleOffNotify()
         {

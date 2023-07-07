@@ -24,7 +24,8 @@ namespace Town
         public void InitTavernController()
         {
             tavernSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.Tavern);
-            tavernModel = new TavernModel(tavernSO);           
+            tavernModel = new TavernModel(tavernSO);
+            BuildingIntService.Instance.allBuildModel.Add(tavernModel);
         }
         public void OnTrophySocketed(TGNames trophyName)
         {

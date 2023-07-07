@@ -23,6 +23,7 @@ namespace Town
         //public List<BuildIntTypeData> buildIntTypes = new List<BuildIntTypeData>();
         public MarketModel(BuildingSO marketSO)
         {
+            buildingName = marketSO.buildingName;
             buildState = marketSO.buildingState;
 
             buildIntTypes = marketSO.buildIntTypes.DeepClone();

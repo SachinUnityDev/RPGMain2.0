@@ -44,6 +44,7 @@ namespace Common
                 MapService.Instance.InitMapService();
                 EcoServices.Instance.InitEcoServices();
                 DialogueService.Instance.InitDialogueService();
+                BarkService.Instance.InitBarkService();
                 BestiaryService.Instance.Init();
                 ItemService.Instance.Init();
                 FameService.Instance.Init();

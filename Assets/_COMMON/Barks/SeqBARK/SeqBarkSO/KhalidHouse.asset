@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c37a1c91243b39845b9419bc05308aa7, type: 3}
+  m_Name: KhalidHouse
+  m_EditorClassIdentifier: 
+  seqbarkName: 1
+  barkTitle: KhalidIntro
+  npcName: 0
+  charName: 1
+  isLocked: 0
+  isRepeatable: 0
+  allBarkData:
+  - charName: 1
+    npcName: 0
+    str: Hey, i am looking for Khalid the Healer.
+    audioClip: {fileID: 8300000, guid: 1c9745f9943d1de4da0b42d8f7e25f43, type: 3}
+  - charName: 0
+    npcName: 10
+    str: "That\u2019s me. Why are you looking for him?"
+    audioClip: {fileID: 8300000, guid: 5d2864a1b1842b744a85f595cfe3cccb, type: 3}
+  - charName: 1
+    npcName: 0
+    str: "Well it\u2019s a long story. Can I come in for a second?"
+    audioClip: {fileID: 8300000, guid: da447a7fc31bfb44a9a486e985d7dd18, type: 3}
+  - charName: 0
+    npcName: 10
+    str: You will tell the long story in a second?
+    audioClip: {fileID: 8300000, guid: b505283c9776cf94680a1bcb827e8ef7, type: 3}
+  - charName: 1
+    npcName: 0
+    str: Come on!
+    audioClip: {fileID: 8300000, guid: 0f730b6277e1b04419250ce96ade7c7f, type: 3}
+  - charName: 0
+    npcName: 10
+    str: 'You come on! Come on in! '
+    audioClip: {fileID: 8300000, guid: fbdbbfc9e5f35ac4ea686b6cdb90444e, type: 3}

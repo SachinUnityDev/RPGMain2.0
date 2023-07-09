@@ -24,3 +24,4 @@ MonoBehaviour:
   curioBarkSO: {fileID: 11400000, guid: 278f06d0193e1c54facbb0f29ec773b1, type: 2}
   buildBarkSO: {fileID: 11400000, guid: c8b22a9cfa3c892459f06bd395278af3, type: 2}
   QuestPrepBarkSO: {fileID: 11400000, guid: 0ce0a3c39c4ac2a42b2bef3c47046447, type: 2}
+  allSeqbarkSO: {fileID: 11400000, guid: a49574652b8eada42b6c5a8f4befd556, type: 2}

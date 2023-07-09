@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.Audio;
-using System.Security.Policy;
 using DG.Tweening;
 
 namespace Quest

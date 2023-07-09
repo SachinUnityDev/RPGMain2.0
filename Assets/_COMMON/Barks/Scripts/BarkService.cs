@@ -1,6 +1,7 @@
 ﻿using Quest;
 using System.Collections;
 using System.Collections.Generic;
+using Town;
 using UnityEngine;
 
 
@@ -13,26 +14,22 @@ namespace Common
         public QbarkController qbarkController;
         public CurioBarkController curioBarkController; 
         public BuildBarkController buildBarkController; 
+        public SeqBarkController seqBarkController;
         void Start()
         {
-            qbarkController = gameObject.GetComponent<QbarkController>();
+      
+        }
+
+        public void InitBarkService()
+        {
+            qbarkController = GetComponent<QbarkController>();
             curioBarkController = GetComponent<CurioBarkController>();
-            buildBarkController= GetComponent<BuildBarkController>();
+            buildBarkController = GetComponent<BuildBarkController>();
+            seqBarkController = GetComponent<SeqBarkController>();
+            seqBarkController.InitBarkController();
         }
 
-        public void PlayBark( int BarkID, BarkType barkTrigger, 
-            CharNames charName)
-        {
-            // Bark trigger .. who will carry the bark 
-            // get bark SO play here 
-        }
-
-        public void PlayBark(int barkID)
-        {
-
-
-
-        }     
+ 
      
     }
 }

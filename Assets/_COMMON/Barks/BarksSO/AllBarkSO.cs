@@ -17,6 +17,7 @@ namespace Common
         public CurioBarkSO curioBarkSO;
         public BuildBarkSO buildBarkSO;
         public QuestPrepBarkSO QuestPrepBarkSO; // ABBAS only
+        public AllSeqbarkSO allSeqbarkSO;
 
 
         public BuildBarkSOData GetBuildBarkSOdata(BuildingNames buildName)

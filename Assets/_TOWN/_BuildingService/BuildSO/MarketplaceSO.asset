@@ -66,7 +66,7 @@ MonoBehaviour:
   npcDataPrefab: []
   buildIntTypes:
   - BuildIntType: 17
-    isUnLocked: 0
+    isUnLocked: 1
   - BuildIntType: 18
-    isUnLocked: 0
+    isUnLocked: 1
   buildIntPrefab: []

@@ -13,17 +13,17 @@ namespace Town
   
         [SerializeField] BuildInteractType buildInteractType;
          HouseView houseView;
-         HouseModel houseModel;
+        BuildingModel houseModel;
         AllBuildSO allbuildSO;
         private void Awake()
         {
             btnContainer = transform.GetChild(0);
         }
 
-       public void InitInteractBtns(HouseView houseView)
+       public void InitInteractBtns(HouseView houseView, BuildingModel houseModel)
         {
             this.houseView = houseView;
-            houseModel = BuildingIntService.Instance.houseController.houseModel;
+            this.houseModel = houseModel;
             allbuildSO = BuildingIntService.Instance.allBuildSO;
             FillHouseBtns();
         }

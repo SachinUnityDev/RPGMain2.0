@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace Common
+namespace Town
 {
     public class WelcomeService : MonoSingletonGeneric<WelcomeService>
     {
@@ -19,6 +19,7 @@ namespace Common
         public void InitWelcome()
         {
             welcomeController = GetComponent<WelcomeController>();
+            welcomeView.gameObject.SetActive(true); 
             welcomeView.InitWelcomeView();
         }
     }

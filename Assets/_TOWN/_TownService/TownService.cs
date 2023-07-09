@@ -8,8 +8,7 @@ namespace Town
     public class TownService : MonoSingletonGeneric<TownService>
     {        
         public FameViewController fameController;    
-        public BuildView buildView;
-
+       
         public TownModel townModel;
         public TownController townController;
         public TownViewController townViewController;

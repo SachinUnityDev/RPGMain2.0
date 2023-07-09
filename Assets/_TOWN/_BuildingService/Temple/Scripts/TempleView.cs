@@ -6,6 +6,7 @@ using DG.Tweening;
 using UnityEngine.EventSystems;
 using Common;
 using Interactables;
+
 namespace Town
 {
     public class TempleView : MonoBehaviour, IPanel, IBuildName, iHelp
@@ -76,7 +77,7 @@ namespace Town
             }
         }
 
-        public Transform GetInteractPanel(BuildInteractType buildInteract)
+        public Transform GetBuildInteractPanel(BuildInteractType buildInteract)
         {
             switch (buildInteract)
             {

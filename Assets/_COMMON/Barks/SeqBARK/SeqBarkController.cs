@@ -14,7 +14,8 @@ namespace Town
     {       
         public List<SeqbarkModel> allSeqBarkModel = new List<SeqbarkModel>();
 
-        public SeqBarkView seqBarkView; 
+        public SeqBarkView seqBarkView;
+        SeqBarkNames seqBarkName; 
         void Start()
         {
             seqBarkView.gameObject.SetActive(false);    
@@ -37,10 +38,14 @@ namespace Town
             SeqBarkSO seqbarkSO  = 
                         BarkService.Instance.allBarkSO.allSeqbarkSO.GetBarkSeqSO(barkNames);
             SeqbarkModel seqbarkModel = GetSeqBarkModel(barkNames);
-            seqBarkView.InitBark(seqbarkSO.allBarkData); 
+            seqBarkName = barkNames;
+            seqBarkView.InitBark(seqbarkSO.allBarkData, this); 
             seqbarkModel.isLocked = true;
 
         }
+
+       
+
         public SeqbarkModel GetSeqBarkModel(SeqBarkNames seqbarkNames)
         {
             int index = allSeqBarkModel.FindIndex(t=>t.seqbarkName== seqbarkNames);    
@@ -54,6 +59,24 @@ namespace Town
             }
             return null; 
         }
+
+        public void OnComplete()
+        {
+            switch (seqBarkName)
+            {
+                case SeqBarkNames.None:
+                    break;
+                case SeqBarkNames.KhalidHouse:
+                    BuildingIntService.Instance.houseController.houseView
+                                    .GetComponent<IPanel>().Init();
+                    break;
+                case SeqBarkNames.TavernIntro:
+                    break;
+                default:
+                    break;
+            }
+        }
+
         private void Update()
         {
             if(Input.GetKeyDown(KeyCode.S))

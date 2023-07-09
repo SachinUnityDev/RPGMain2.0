@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Common;
+using DG.Tweening;
 
-
-namespace Common
+namespace Town
 {
     public class WelcomeView : MonoBehaviour
     {
@@ -25,7 +26,14 @@ namespace Common
         }
         void OnContinueBtnPressed()
         {
-            gameObject.SetActive(false);            
+            gameObject.SetActive(false);
+            BarkService.Instance.seqBarkController.ShowSeqbark(SeqBarkNames.KhalidHouse); 
+              
+        }
+
+        void EnterHouse()
+        {
+            canvas.GetComponent<HouseView>().Init(); 
         }
  
     }

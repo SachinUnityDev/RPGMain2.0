@@ -9,7 +9,13 @@ using Interactables;
 
 namespace Town
 {
- 
+    //public class BuildView
+    //{
+
+    //}
+
+
+
     public class HouseView : MonoBehaviour, IPanel, IBuildName, iHelp
     {
         [SerializeField] HelpName helpName;
@@ -39,6 +45,7 @@ namespace Town
         [SerializeField] Button exit; 
 
         BuildingSO houseSO;
+        HouseModel houseModel; 
         TimeState timeState;
         void Awake()
         {
@@ -50,7 +57,8 @@ namespace Town
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
             houseSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.House);
             timeState = CalendarService.Instance.currtimeState;
-            btnContainer.GetComponent<HouseInteractBtnView>().InitInteractBtns(this); 
+            houseModel = BuildingIntService.Instance.houseController.houseModel;
+            btnContainer.GetComponent<HouseInteractBtnView>().InitInteractBtns(this, houseModel); 
             FillHouseBG();
             InitInteractPanels();
 

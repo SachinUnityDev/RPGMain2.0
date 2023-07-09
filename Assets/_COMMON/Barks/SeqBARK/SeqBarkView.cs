@@ -17,16 +17,18 @@ namespace Common
         [SerializeField] AudioSource audioSourceUI;
 
         [Header("Port container")]
-        Transform portContainer; 
+        Transform portContainer;
+
+        SeqBarkController seqBarkController; 
         void Awake()
         {
             portContainer = transform.GetChild(0);
         }
 
-        public void InitBark(List<SeqBarkData> allSeqBarkData)
+        public void InitBark(List<SeqBarkData> allSeqBarkData, SeqBarkController seqBarkController)
         {
             this.allSeqBarkData = allSeqBarkData;
-           
+           this.seqBarkController= seqBarkController;
             //this is sorted for quest mode and char in Quest 
             StartCoroutine(StartBarkLine());
         }
@@ -56,7 +58,13 @@ namespace Common
             if(i == allSeqBarkData.Count)
             {
                 gameObject.SetActive(false);
+                OnComplete();
             }
+        }
+
+        void OnComplete()
+        {
+            seqBarkController.OnComplete(); 
         }
 
     }

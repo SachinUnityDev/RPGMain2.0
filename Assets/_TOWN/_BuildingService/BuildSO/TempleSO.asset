@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: 8
   buildingState: 1
-  buildExtDayN: {fileID: 21300000, guid: e47170b7fa046e043ba04b4fce532acb, type: 3}
-  buildExtDayHL: {fileID: 21300000, guid: 34fa38842e2be2d4f9df14a1967bac55, type: 3}
+  buildExtDayN: {fileID: 21300000, guid: 20d9ef1e2f91b83418ab74221ded56a3, type: 3}
+  buildExtDayHL: {fileID: 21300000, guid: cbcb89b574bc97842bcdc04a8a3079c7, type: 3}
   buildExtNight: {fileID: 21300000, guid: bacd7c3f4a994714ba70664e090cc829, type: 3}
   buildExtNightHL: {fileID: 21300000, guid: 31e5373e147e7ea49a8313904637716c, type: 3}
   buildIntDay: {fileID: 21300000, guid: a31bd9c9e3268ea488afe65b883e0e7d, type: 3}

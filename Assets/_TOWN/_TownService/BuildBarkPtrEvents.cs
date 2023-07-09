@@ -1,3 +1,5 @@
+using Common;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,35 +12,43 @@ namespace Town
 
     public class BuildBarkPtrEvents : MonoBehaviour
     {
-        public BuildingNames buildName; 
-
-        public void InitBark(BuildingNames buildModel)
+        [Header("TBS")]
+        public BuildingNames buildName;
+        [Header("Global Var")]
+        [SerializeField] BuildingState buildState;
+        [SerializeField] BarkLineData lineData;
+        public void ShowBark(BuildingNames buildingName, BuildingState buildState)
         {
-           //BuildingState buildState = BuildingState.None;
-           // // get buildSO and from  SO 
-           // BuildingSO buildSO = 
-           //     BuildingIntService.Instance.allBuildSO.GetBuildSO(buildName); 
-           // if(buildState == BuildingState.Locked)
-           // {
-           //     string str = buildSO.GetUnLockedStr(); 
-           //     if(str != null)
-           //     {
-           //         FillBark(str);
-           //     }
-           // }else if (buildState == BuildingState.UnAvailable)
-           // {
-           //     string str = buildSO.GetUnAvailStr();
-           //     if (str != null)
-           //     {
-           //         FillBark(str);
-           //     }
-           // }
+            BuildBarkSO buildBarkSO = BarkService.Instance.allBarkSO.buildBarkSO;
+            TimeState timeState = CalendarService.Instance.currtimeState;
+            lineData =
+                buildBarkSO.GetBarkLineData(buildingName, buildState, timeState);
+            if (lineData != null)
+            {
+                gameObject.SetActive(true);
+                transform.GetComponentInChildren<TextMeshProUGUI>().text = lineData.barkline;
+
+                ShowBarkAnim();
+            }
+            else
+            {
+                CloseBarkAnim();
+            }
         }
 
-        void FillBark(string str)
+        void ShowBarkAnim()
         {
-            TextMeshProUGUI text = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-            text.text = str; 
+            Sequence barkSeq = DOTween.Sequence();
+
+            barkSeq
+                .Append(transform.DOScale(1f, 0.2f))
+                .AppendInterval(2.0f)
+                .AppendCallback(()=>CloseBarkAnim())
+                ;
+        }
+        void CloseBarkAnim()
+        {            
+            transform.DOScale(0, 0.1f);
         }
     }
 }

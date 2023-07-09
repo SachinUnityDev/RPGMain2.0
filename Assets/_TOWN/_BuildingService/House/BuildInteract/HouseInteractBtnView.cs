@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 
 namespace Town
@@ -43,8 +43,13 @@ namespace Town
             }
             for (int j = i; j < btnContainer.childCount; j++)
             {
-                btnContainer.GetChild(i).gameObject.SetActive(false);
+                btnContainer.GetChild(j).gameObject.SetActive(false);
             }
+            if (i == 0)            
+                btnContainer.GetComponent<Image>().enabled= false;            
+            else            
+                btnContainer.GetComponent<Image>().enabled = true;
+            
         }
     
 

@@ -24,24 +24,39 @@ namespace Common
     {
         public List<BuildBarkSOData> allBuildBarkSO = new List<BuildBarkSOData>();
 
-        public BarkLineData GetBuildBarkSOData(BuildingNames buildName, BuildingState buildState, TimeState timeState)
+        public BarkLineData GetBarkLineData(BuildingNames buildName, BuildingState buildState, TimeState timeState)
         {
             List<BarkLineData> barkLines= new List<BarkLineData>();
+            if(allBuildBarkSO.Count > 0) 
             foreach (BuildBarkSOData allbark in allBuildBarkSO)
             {
                 if(allbark.BuildingName == buildName)
                 {
                     foreach (BuildStateBarkData build in allbark.BuildStates)
                     {
-                        if(build.timeState == timeState && build.buildState == buildState)
-                        {
-                            barkLines.Add(build.barkLineData); 
-                        }
+                            if(build.timeState == TimeState.None)
+                            {
+                                if (build.buildState == buildState)
+                                {
+                                    barkLines.Add(build.barkLineData);
+                                }
+                            }
+                            else
+                            {
+                                if (build.timeState == timeState && build.buildState == buildState)
+                                {
+                                    barkLines.Add(build.barkLineData);
+                                }
+                            }                        
                     }     
                 }
             }
-            int random = UnityEngine.Random.Range(0, barkLines.Count);  
-            return barkLines[random]; 
+            if(barkLines.Count > 0)
+            {
+                int random = UnityEngine.Random.Range(0, barkLines.Count);
+                return barkLines[random];
+            }else
+                return null;
         }
 
     }

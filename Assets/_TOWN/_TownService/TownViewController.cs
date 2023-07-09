@@ -130,7 +130,7 @@ namespace Town
                 if(buildBarks.buildName == buildName)
                 {
                     // Get Build Models  ... 
-                   // buildBarks.InitBark(buildName); 
+                    buildBarks.ShowBark(buildName, buildState); 
                 }
             }
            

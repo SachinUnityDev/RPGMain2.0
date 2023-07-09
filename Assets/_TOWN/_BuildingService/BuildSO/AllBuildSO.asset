@@ -63,7 +63,7 @@ MonoBehaviour:
     spriteN: {fileID: 21300000, guid: dce3f10c9d654a84593ed11e3f6f34d0, type: 3}
   - intType: 19
     intTypeStr: 
-    spriteN: {fileID: 21300000, guid: 173fceac9075bc04bb9f1d8063ffd008, type: 3}
+    spriteN: {fileID: 21300000, guid: 8bd2a68430658104586b7a1b014c2174, type: 3}
   allBuildSO:
   - {fileID: 11400000, guid: 6340a2f94fbdd6a4093eac27417485e1, type: 2}
   - {fileID: 11400000, guid: 2527b9a8ff7bc6746a9a6e09f9fcd4f2, type: 2}
@@ -74,8 +74,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b2594edd6ca4e78418c48ec1ae6b361b, type: 2}
   - {fileID: 11400000, guid: bbed84bb11f473443a0829d6a758824c, type: 2}
   - {fileID: 11400000, guid: ad225de94603c354b99d46798c57061c, type: 2}
-  TownBGDay: {fileID: 21300000, guid: e53a04d65ce4dea418fdabb03c1a8b56, type: 3}
-  TownBGNight: {fileID: 21300000, guid: e71d8cd982d201d41b5ac77676b1ce80, type: 3}
+  TownBGDay: {fileID: 21300000, guid: cf9918a52d6f39747858bafb43108c17, type: 3}
+  TownBGNight: {fileID: 21300000, guid: ed5a376102ccf7546b2fc5d197c46f35, type: 3}
   allTipStrs:
   - Nothing special that i heard of today.
   - A gambler arrives here every Andu night. Just so you know...

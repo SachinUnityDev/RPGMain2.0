@@ -39,7 +39,7 @@ namespace Town
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
             marketSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.Marketplace);
             timeState = CalendarService.Instance.currtimeState;
-           // btnContainer.GetComponent<HouseInteractBtnView>().InitInteractBtns(this);
+            btnContainer.GetComponent<MarketInteractBtnView>().InitInteractBtns(this);
             FillMarketBG();
             InitInteractPanels();
 

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: 9
   buildingState: 0
-  buildExtDayN: {fileID: 21300000, guid: ff2f0897d8715f043b02befa542ab233, type: 3}
-  buildExtDayHL: {fileID: 21300000, guid: d80db09116b5a894c9d650ae4e1e868a, type: 3}
+  buildExtDayN: {fileID: 21300000, guid: c34bf9fb3a1983e40a117e591b8838b9, type: 3}
+  buildExtDayHL: {fileID: 21300000, guid: c652984ad02e3ac4a86ade33512ab41c, type: 3}
   buildExtNight: {fileID: 21300000, guid: 33a67f569090ca24eb082e6464e91d6d, type: 3}
   buildExtNightHL: {fileID: 21300000, guid: 78d830baf151d3149a890bf5a3070edd, type: 3}
   buildIntDay: {fileID: 0}
@@ -26,7 +26,3 @@ MonoBehaviour:
   npcDataPrefab: []
   buildIntTypes: []
   buildIntPrefab: []
-  statusLockedStr:
-  - "thivesGuild \t"
-  statusUnAvailStr:
-  - 

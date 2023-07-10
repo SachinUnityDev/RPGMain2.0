@@ -40,7 +40,7 @@ namespace Town
         }
         void FillHouseView()
         {
-            BuildingIntService.Instance.houseController.houseView.FillHouseBG();             
+            BuildingIntService.Instance.houseController.houseView.FillBuildBG();             
             FillPanelBg();
         }
         void FillPanelBg()

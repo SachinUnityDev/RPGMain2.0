@@ -12,11 +12,10 @@ namespace Town
     public class BedPtrEvents : HouseBaseEvents, IPointerClickHandler
     {
 
-
         public void OnPointerClick(PointerEventData eventData)
         {
             // open Rest Panel
-            
+            HouseView houseView = buildView as HouseView;
             UIControlServiceGeneral.Instance.TogglePanelOnInGrp(houseView.restPanel.gameObject, true);
         }
     }

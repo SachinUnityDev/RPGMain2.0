@@ -18,9 +18,9 @@ namespace Town
 
         public void InitWelcome()
         {
-            welcomeController = GetComponent<WelcomeController>();
-            welcomeView.gameObject.SetActive(true); 
-            welcomeView.InitWelcomeView();
+            //welcomeController = GetComponent<WelcomeController>();
+            //welcomeView.gameObject.SetActive(true); 
+           // welcomeView.InitWelcomeView();
         }
     }
 }

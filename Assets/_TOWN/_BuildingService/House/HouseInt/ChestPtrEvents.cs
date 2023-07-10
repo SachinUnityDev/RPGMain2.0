@@ -12,6 +12,7 @@ namespace Town
     {
         public void OnPointerClick(PointerEventData eventData)
         {
+            HouseView houseView = buildView as HouseView;
             UIControlServiceGeneral.Instance.TogglePanelOnInGrp(houseView.stashPanel.gameObject, true);
 
         }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Town
 {
-    public class SoothSayerPtrEvents : TempleBaseEvents
+    public class SoothSayerPtrEvents : BuildBaseEvents
     {
         
     }

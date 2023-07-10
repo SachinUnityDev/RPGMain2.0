@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using UnityEngine;
 using UnityEngine.UI; 
 using Common; 
 
 namespace Town
 {
-    public class BuildView : MonoBehaviour
+    public class BuildView : MonoBehaviour, IPanel ,iHelp
     {
         [SerializeField] HelpName helpName;
-      
+        public BuildingNames BuildingName;
 
         [Header("To be ref")]
         [SerializeField] Transform btnContainer;
@@ -28,9 +27,16 @@ namespace Town
 
         [SerializeField] Button exit;
 
+        public Transform TradePanel;
+        public Transform TalkPanel;
+
         BuildingSO buildSO;
-        BuildingModel buildModel;
+        [SerializeField]BuildingModel buildModel;
         TimeState timeState;
+
+        
+
+      
 
         void Awake()
         {
@@ -40,15 +46,15 @@ namespace Town
         public void Init()
         {
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
-            houseSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.House);
+            buildSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingName);
             timeState = CalendarService.Instance.currtimeState;
-            houseModel = BuildingIntService.Instance.houseController.houseModel;
-            btnContainer.GetComponent<HouseInteractBtnView>().InitInteractBtns(this, houseModel);
-            FillHouseBG();
+            buildModel = BuildingIntService.Instance.GetBuildModel(BuildingName);
+            btnContainer.GetComponent<BuildInteractBtnView>().InitInteractBtns(this, buildModel);
+            FillBuildBG();
             InitInteractPanels();
 
         }
-        public void FillHouseBG()
+        public void FillBuildBG()
         {
             if (CalendarService.Instance.currtimeState == TimeState.Night)
             {
@@ -59,10 +65,17 @@ namespace Town
                 BGSpriteContainer.GetComponent<Image>().sprite = dayBG;
             }
 
-            for (int i = 0; i < 4; i++)
+            foreach (Transform child in BGSpriteContainer)
             {
-                BGSpriteContainer.GetChild(i).GetComponent<HouseBaseEvents>().Init(this);
+                BuildBaseEvents baseEvents = child?.GetComponent<BuildBaseEvents>(); 
+                if(baseEvents != null)
+                    baseEvents.Init(this, buildModel);
             }
+
+            //for (int i = 0; i < 4; i++)
+            //{
+            //    BGSpriteContainer.GetChild(i).GetComponent<HouseBaseEvents>().Init(this, buildModel);
+            //}
         }
         void InitInteractPanels()
         {
@@ -70,6 +83,44 @@ namespace Town
             {
                 child.GetComponent<IPanel>().Init(); // interact panels initialized here 
             }
+        }
+        public virtual Transform GetBuildInteractPanel(BuildInteractType buildInteract)
+        {
+            return null; 
+        }
+        public Transform GetNPCInteractPanel(NPCInteractType npcInteract)
+        {
+
+            switch (npcInteract)
+            {
+                case NPCInteractType.Talk:
+                    return TalkPanel;
+                case NPCInteractType.Trade:
+                    return TradePanel;
+                default:
+                    break;
+            }
+            Debug.Log("Build interaction panel not found" + npcInteract);
+            return null;
+        }
+
+        public void Load()
+        {
+        }
+
+        public void UnLoad()
+        {
+            UIControlServiceGeneral.Instance.TogglePanelOnInGrp(this.gameObject, false);
+            foreach (Transform child in BuildInteractPanel)
+            {
+                child.GetComponent<IPanel>().UnLoad();
+            }
+            TownService.Instance.townViewController.OnBuildDeselect();
+        }
+
+        public HelpName GetHelpName()
+        {
+            return helpName;
         }
 
 

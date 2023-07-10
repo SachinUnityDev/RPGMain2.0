@@ -12,6 +12,7 @@ namespace Town
     {
         public void OnPointerClick(PointerEventData eventData)
         {
+            ShipView shipView = buildView as ShipView; 
             UIControlServiceGeneral.Instance.TogglePanelOnInGrp(shipView.smugglePanel.gameObject, true);
 
         }

@@ -9,75 +9,75 @@ using Interactables;
 
 namespace Town
 {
-    public class TempleView : MonoBehaviour, IPanel, IBuildName, iHelp
+    public class TempleView : BuildView
     {
-        [SerializeField] HelpName helpName;
+       // [SerializeField] HelpName helpName;
 
-        public BuildingNames BuildingName => BuildingNames.Temple;
-        [Header("To be ref")]
-        [SerializeField] Transform btnContainer;
-        [SerializeField] Transform NPCInteractPanel;
+       // public BuildingNames BuildingName => BuildingNames.Temple;
+        //[Header("To be ref")]
+        //[SerializeField] Transform btnContainer;
+        //[SerializeField] Transform NPCInteractPanel;
 
-        [Header("Not to be ref")]
-        [SerializeField] Transform BGSpriteContainer;
+        //[Header("Not to be ref")]
+        //[SerializeField] Transform BGSpriteContainer;
 
-        [Header("Temple Interact Panels: To be ref")]
-        [SerializeField] Transform BuildInteractPanel;
+        //[Header("Temple Interact Panels: To be ref")]
+        //[SerializeField] Transform BuildInteractPanel;
 
         public Transform enchantPanel;
         public Transform clearMindPanel;
 
-        public Transform TradePanel;
-        public Transform TalkPanel; 
+        //public Transform TradePanel;
+        //public Transform TalkPanel; 
 
 
-        [SerializeField] Button exit;
+        //[SerializeField] Button exit;
 
-        BuildingSO templeSO;
-        TempleModel templeModel;
-        void Awake()
-        {
-            BGSpriteContainer = transform.GetChild(0);
-            exit.onClick.AddListener(UnLoad);
-        }
-        public void Init()
-        {
-            Load();
-            templeSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.Temple);
-            btnContainer.GetComponent<TempleInteractBtnView>().InitInteractBtns(this);
-            FillTempleBG();
-            InitInteractPanels();
+        //BuildingSO templeSO;
+        //BuildingModel templeModel;
+        //void Awake()
+        //{
+        //    BGSpriteContainer = transform.GetChild(0);
+        //    exit.onClick.AddListener(UnLoad);
+        //}
+        //public void Init()
+        //{
+        //    Load();
+        //    templeSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.Temple);
+        //    btnContainer.GetComponent<TempleInteractBtnView>().InitInteractBtns(this);
+        //    FillTempleBG();
+        //    InitInteractPanels();
            
-        }
-        public void FillTempleBG()
-        {
-            if (CalendarService.Instance.currtimeState == TimeState.Night)
-            {
-                Sprite nightBG = templeSO.buildIntDay; 
-                BGSpriteContainer.GetComponent<Image>().sprite = nightBG;
-            }
-            else
-            {
-                Sprite dayBG = templeSO.buildIntDay;
-                BGSpriteContainer.GetComponent<Image>().sprite = dayBG;
-            }
+        //}
+        //public void FillTempleBG()
+        //{
+        //    if (CalendarService.Instance.currtimeState == TimeState.Night)
+        //    {
+        //        Sprite nightBG = templeSO.buildIntDay; 
+        //        BGSpriteContainer.GetComponent<Image>().sprite = nightBG;
+        //    }
+        //    else
+        //    {
+        //        Sprite dayBG = templeSO.buildIntDay;
+        //        BGSpriteContainer.GetComponent<Image>().sprite = dayBG;
+        //    }
 
-            foreach (Transform child in BGSpriteContainer)
-            {
-                child.GetComponent<TempleBaseEvents>().Init(this);
-            }
-        }
+        //    foreach (Transform child in BGSpriteContainer)
+        //    {
+        //        child.GetComponent<TempleBaseEvents>().Init(this);
+        //    }
+        //}
 
 
-        void InitInteractPanels()
-        {
-            foreach (Transform child in BuildInteractPanel)
-            {
-                child.GetComponent<IPanel>().Init(); // interact panels initialized here 
-            }
-        }
+        //void InitInteractPanels()
+        //{
+        //    foreach (Transform child in BuildInteractPanel)
+        //    {
+        //        child.GetComponent<IPanel>().Init(); // interact panels initialized here 
+        //    }
+        //}
 
-        public Transform GetBuildInteractPanel(BuildInteractType buildInteract)
+        public override Transform GetBuildInteractPanel(BuildInteractType buildInteract)
         {
             switch (buildInteract)
             {
@@ -90,40 +90,26 @@ namespace Town
             return null; 
         }
 
-        public Transform GetNPCInteractPanel(NPCInteractType npcInteract)
-        {
+ 
 
-            switch (npcInteract)
-            {              
-                case NPCInteractType.Talk:
-                    return TalkPanel;                  
-                case NPCInteractType.Trade:
-                    return TradePanel;                  
-                default:
-                    break;
-            }
-            Debug.Log("Building interaction panel not found" + npcInteract);
-            return null;
-        }
+        //public void InitNpcInteractPanel(NPCInteractData npcInteractData)
+        //{
 
-        public void InitNpcInteractPanel(NPCInteractData npcInteractData)
-        {
+        //}
 
-        }
+        //public void Load()
+        //{
+        //    UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
+        //}
 
-        public void Load()
-        {
-            UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
-        }
-
-        public void UnLoad()
-        {
-            UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
-            TownService.Instance.townViewController.OnBuildDeselect();
-        }
-        public HelpName GetHelpName()
-        {
-            return helpName;
-        }
+        //public void UnLoad()
+        //{
+        //    UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
+        //    TownService.Instance.townViewController.OnBuildDeselect();
+        //}
+        //public HelpName GetHelpName()
+        //{
+        //    return helpName;
+        //}
     }
 }

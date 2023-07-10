@@ -6,25 +6,25 @@ using UnityEngine.UI;
 
 namespace Town
 {
-    public class TavernView : MonoBehaviour, IPanel, IBuildName, iHelp
+    public class TavernView : BuildView
     {
-        [SerializeField] HelpName helpName;
-        public BuildingNames BuildingName => BuildingNames.Tavern;
+       // [SerializeField] HelpName helpName;
+        //public BuildingNames BuildingName => BuildingNames.Tavern;
 
-        [Header("To be ref")]
-        [SerializeField] Transform btnContainer;
-        [SerializeField] Transform NPCInteractPanel;
+        //[Header("To be ref")]
+        //[SerializeField] Transform btnContainer;
+        //[SerializeField] Transform NPCInteractPanel;
 
-        [Header("Not to be ref")]
-        [SerializeField] Transform BGSpriteContainer;
+        //[Header("Not to be ref")]
+        //[SerializeField] Transform BGSpriteContainer;
 
-        [Header("Tavern Interact Panels: To be ref")]
-        [SerializeField] Transform BuildInteractPanel;
+        //[Header("Tavern Interact Panels: To be ref")]
+        //[SerializeField] Transform BuildInteractPanel;
 
 
-        [Header("Day and Night BG Sprites")]
-        [SerializeField] Sprite dayBG;
-        [SerializeField] Sprite nightBG;
+        //[Header("Day and Night BG Sprites")]
+        //[SerializeField] Sprite dayBG;
+        //[SerializeField] Sprite nightBG;
 
         [Header("Build Interaction panel")]
         public Transform bountyBoard;
@@ -33,54 +33,54 @@ namespace Town
         public Transform rest;
 
 
-        [SerializeField] Button exitBtn;
+        //[SerializeField] Button exitBtn;
 
-        BuildingSO tavernSO;
-        TimeState timeState;
+        //BuildingSO tavernSO;
+        //TimeState timeState;
 
-        void Awake()
-        {
-            BGSpriteContainer = transform.GetChild(0);
-            exitBtn.onClick.AddListener(UnLoad);
-        }
-        public void Init()
-        {
-            UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
-            AllBuildSO allBuildSO = BuildingIntService.Instance.allBuildSO; 
-            BuildingSO tavernSO = allBuildSO.GetBuildSO(BuildingNames.Tavern);
-            dayBG = tavernSO.buildIntDay;
-            nightBG = tavernSO.buildIntNight; 
+        //void Awake()
+        //{
+        //    BGSpriteContainer = transform.GetChild(0);
+        //    exitBtn.onClick.AddListener(UnLoad);
+        //}
+        //public void Init()
+        //{
+        //    UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
+        //    AllBuildSO allBuildSO = BuildingIntService.Instance.allBuildSO; 
+        //    BuildingSO tavernSO = allBuildSO.GetBuildSO(BuildingNames.Tavern);
+        //    dayBG = tavernSO.buildIntDay;
+        //    nightBG = tavernSO.buildIntNight; 
 
-            timeState = CalendarService.Instance.currtimeState;
-            btnContainer.GetComponent<TavernBuildIntBtnView>().InitInteractBtns(this);
-            FillTavernBG();
-            InitInteractPanels();
-        }
-        public void FillTavernBG()
-        {
-            if (CalendarService.Instance.currtimeState == TimeState.Night)
-            {
-                BGSpriteContainer.GetComponent<Image>().sprite = nightBG;
-            }
-            else
-            {
-                BGSpriteContainer.GetComponent<Image>().sprite = dayBG;
-            }
+        //    timeState = CalendarService.Instance.currtimeState;
+        //    btnContainer.GetComponent<BuildInteractBtnView>().InitInteractBtns(this);
+        //    FillTavernBG();
+        //    InitInteractPanels();
+        //}
+        //public void FillTavernBG()
+        //{
+        //    if (CalendarService.Instance.currtimeState == TimeState.Night)
+        //    {
+        //        BGSpriteContainer.GetComponent<Image>().sprite = nightBG;
+        //    }
+        //    else
+        //    {
+        //        BGSpriteContainer.GetComponent<Image>().sprite = dayBG;
+        //    }
 
-            for (int i = 0; i < BGSpriteContainer.childCount; i++)
-            {
-                BGSpriteContainer.GetChild(i).GetComponent<TavernBaseEvents>().Init(this);
-            }
-        }
-        void InitInteractPanels()
-        {
-            foreach (Transform child in BuildInteractPanel)
-            {
-                child.GetComponent<IPanel>().Init(); // interact panels initialized here 
-            }
-        }
+        //    for (int i = 0; i < BGSpriteContainer.childCount; i++)
+        //    {
+        //        BGSpriteContainer.GetChild(i).GetComponent<TavernBaseEvents>().Init(this);
+        //    }
+        //}
+        //void InitInteractPanels()
+        //{
+        //    foreach (Transform child in BuildInteractPanel)
+        //    {
+        //        child.GetComponent<IPanel>().Init(); // interact panels initialized here 
+        //    }
+        //}
 
-        public Transform GetInteractPanel(BuildInteractType buildInteract)
+        public override Transform GetBuildInteractPanel(BuildInteractType buildInteract)
         {
             switch (buildInteract)
             {
@@ -98,32 +98,32 @@ namespace Town
                     return null;
             }
         }
-        public void Load()
-        {
+        //public void Load()
+        //{
            
-        }
+        //}
 
-        public void UnLoad()
-        {
-            UIControlServiceGeneral.Instance.TogglePanelOnInGrp(this.gameObject, false);
-            foreach (Transform child in BuildInteractPanel)
-            {
-                child.GetComponent<IPanel>().UnLoad();
-            }
-            TownService.Instance.townViewController.OnBuildDeselect();
-        }
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                Init(); // for test
+        //public void UnLoad()
+        //{
+        //    UIControlServiceGeneral.Instance.TogglePanelOnInGrp(this.gameObject, false);
+        //    foreach (Transform child in BuildInteractPanel)
+        //    {
+        //        child.GetComponent<IPanel>().UnLoad();
+        //    }
+        //    TownService.Instance.townViewController.OnBuildDeselect();
+        //}
+        //private void Update()
+        //{
+        //    if (Input.GetKeyDown(KeyCode.S))
+        //    {
+        //        Init(); // for test
 
-            }
-        }
+        //    }
+        //}
 
-        public HelpName GetHelpName()
-        {
-           return helpName;
-        }
+        //public HelpName GetHelpName()
+        //{
+        //   return helpName;
+        //}
     }
 }

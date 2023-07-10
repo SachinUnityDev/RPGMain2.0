@@ -7,10 +7,11 @@ using UnityEngine.EventSystems;
 
 namespace Town
 {
-    public class FountainPtrEvents : TempleBaseEvents, IPointerClickHandler
+    public class FountainPtrEvents : BuildBaseEvents, IPointerClickHandler
     {
         public void OnPointerClick(PointerEventData eventData)
         {
+            TempleView templeView = buildView as TempleView; 
             UIControlServiceGeneral.Instance.TogglePanelOnInGrp(templeView.clearMindPanel.gameObject, true);
         }
     }

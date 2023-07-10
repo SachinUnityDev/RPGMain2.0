@@ -7,37 +7,40 @@ using UnityEngine.UI;
 
 namespace Town
 {
-    public class HouseBtnPtrEvents : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class HouseBtnPtrEvents : BuildBtnPtrEvents
     {
-        [SerializeField] BuildInteractType buildInteractType;
-        [SerializeField] HouseView houseView;
-        [SerializeField] Transform panel; 
-        public void HouseIntInit(BuildIntTypeData buildData, InteractionSpriteData spriteData, HouseView houseView)
-        {
-            transform.GetComponent<Image>().sprite = spriteData.spriteN;
-            buildInteractType = buildData.BuildIntType;
-            panel = houseView.GetInteractPanel(buildInteractType);
-        }
-
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            UIControlServiceGeneral.Instance.TogglePanelOnInGrp(panel.gameObject, true);
-        }
-
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-
-        }
-
-        public void OnPointerExit(PointerEventData eventData)
-        {
-
-        }
-
-        void Start()
-        {
-
-        }
+   
 
     }
 }
+
+//[SerializeField] BuildInteractType buildInteractType;
+//[SerializeField] BuildView buildView;
+//[SerializeField] Transform panel; 
+//public void HouseIntInit(BuildIntTypeData buildData, InteractionSpriteData spriteData, BuildView buildView)
+//{
+//    this.buildView= buildView;
+//    transform.GetComponent<Image>().sprite = spriteData.spriteN;
+//    buildInteractType = buildData.BuildIntType;
+//    panel = buildView.GetBuildInteractPanel(buildInteractType);
+//}
+
+//public void OnPointerClick(PointerEventData eventData)
+//{
+//    UIControlServiceGeneral.Instance.TogglePanelOnInGrp(panel.gameObject, true);
+//}
+
+//public void OnPointerEnter(PointerEventData eventData)
+//{
+
+//}
+
+//public void OnPointerExit(PointerEventData eventData)
+//{
+
+//}
+
+//void Start()
+//{
+
+//}

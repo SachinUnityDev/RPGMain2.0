@@ -34,7 +34,7 @@ namespace Town
         }
         void FillTavernView()
         {
-            BuildingIntService.Instance.tavernController.tavernView.FillTavernBG();   
+            BuildingIntService.Instance.tavernController.tavernView.FillBuildBG();   
             FillPanelBg();
         }
         void FillPanelBg()

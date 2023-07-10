@@ -7,10 +7,10 @@ using Common;
 
 namespace Town
 {
-    interface IBuildName
-    {
-        BuildingNames BuildingName { get; }    
-    }
+    //interface IBuildName
+    //{
+    //    BuildingNames BuildingName { get; set; }    
+    //}
     public class TownViewController : MonoBehaviour, iHelp
     {
         [Header("HelpName")]
@@ -71,7 +71,7 @@ namespace Town
             // Interior Init
             foreach (Transform child in buildIntContainer)
             {
-                if(child.GetComponent<IBuildName>().BuildingName == selectBuild)
+                if(child.GetComponent<BuildView>().BuildingName == selectBuild)
                 {
                     child.GetComponent<IPanel>().Init();                     
                 }

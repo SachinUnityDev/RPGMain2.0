@@ -20,7 +20,7 @@ namespace Town
         {
             transform.GetComponent<Image>().sprite = spriteData.spriteN;
             buildInteractType = buildData.BuildIntType;
-            panel = houseView.GetInteractPanel(buildInteractType);
+            panel = houseView.GetBuildInteractPanel(buildInteractType);
         }
 
         public void OnPointerClick(PointerEventData eventData)

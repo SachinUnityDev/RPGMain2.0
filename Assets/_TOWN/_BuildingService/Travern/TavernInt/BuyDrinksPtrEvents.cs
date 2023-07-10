@@ -13,6 +13,7 @@ namespace Town
         
         public void OnPointerClick(PointerEventData eventData)
         {
+            TavernView tavernView = buildView as TavernView;
             UIControlServiceGeneral.Instance.TogglePanelOnInGrp(tavernView.buyDrink.gameObject, true);
         }
 

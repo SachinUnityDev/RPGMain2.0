@@ -52,7 +52,7 @@ namespace Town
                 Transform talkPanel =
                     buildView.GetNPCInteractPanel(IntType.Talk);
                 talkPanel.gameObject.SetActive(true);
-                talkPanel.GetComponent<DialogueViewController1>().ShowDialogueList(CharNames.None, interactData.nPCNames); 
+                talkPanel.GetComponent<DialogueView>().ShowDialogueList(CharNames.None, interactData.nPCNames); 
                 
             }
         }

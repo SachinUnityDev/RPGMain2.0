@@ -57,7 +57,7 @@ namespace Town
                 Transform talkPanel =
                     buildView.GetNPCInteractPanel(IntType.Talk);
                 talkPanel.gameObject.SetActive(true);
-                talkPanel.GetComponent<DialogueViewController1>().ShowDialogueList(interactData.compName
+                talkPanel.GetComponent<DialogueView>().ShowDialogueList(interactData.compName
                                                             , NPCNames.None);
             }
         }

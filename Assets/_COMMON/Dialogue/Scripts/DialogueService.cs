@@ -29,8 +29,9 @@ namespace Common
         public Action OnDialogueEnd;
 
         [Header("SOs")]
-        public DialogueViewController1 dialogueViewController1;
+        public DialogueView dialogueView;
         public DialogueNames dialogueName;
+        public DialogueModel dialogueModel; 
         public bool isDiaViewInitDone = false; 
 
         public AllDialogueSO allDialogueSO; 
@@ -49,10 +50,10 @@ namespace Common
         public TagData currInteraction = null;
 
 
-        [Header("Reflection related")]
+        [Header("Dialogue factory")]
         DialogueFactory dialogueFactory; 
 
-        [Header("Custom Dialogue Interaction")]
+        [Header("Dialogue Base")]
         public IDialogue diaBase;
 
         [Header("Game Init")]
@@ -95,7 +96,6 @@ namespace Common
             }
             return lsModels;
         }
-
         public void ClearAllList()
         {
             allOptions.Clear();
@@ -109,12 +109,8 @@ namespace Common
             allDiverts = allDiverts.OrderBy(t => t.numTag).ToList();
             allDefine = allDefine.OrderBy(t => t.numTag).ToList();
         }
-
-
-
         public void On_DialogueStart(DialogueNames dialogueName) // when the dialogue is clicked in dialogue LS
-        {
-               
+        {      
             StartDialogue(dialogueName);            
             OnDialogueStart?.Invoke(dialogueName);
         }
@@ -123,21 +119,26 @@ namespace Common
             Destroy(diaGO.gameObject, 0.1f);// destroy the view
             OnDialogueEnd?.Invoke();
             dialogueName = DialogueNames.None;
-            isDiaViewInitDone = false; 
+            isDiaViewInitDone = false;
+            if (!dialogueModel.isRepeatable)
+                dialogueModel.isLocked = true; 
         }
         public void SetCurrDiaBase(DialogueNames dialogueNames)
         {
             diaBase = dialogueFactory.GetDialogBase(dialogueNames);
         }
 
-        void InitDiaView()
+        void InitDiaView(Transform parent)
         {
             if (isDiaViewInitDone) return; // return multiple clicks
             diaGO = Instantiate(dialoguePrefab);
 
-            dialogueViewController1 = diaGO.GetComponent<DialogueViewController1>();
-            diaGO.transform.SetParent(canvas.transform);
-            UIControlServiceGeneral.Instance.SetMaxSiblingIndex(diaGO);
+            dialogueView = diaGO.GetComponent<DialogueView>();
+            diaGO.transform.SetParent(parent);
+
+            //UIControlServiceGeneral.Instance.SetMaxSiblingIndex(diaGO);
+            int index = diaGO.transform.parent.childCount - 2;
+            diaGO.transform.SetSiblingIndex(index);
             RectTransform diaRect = diaGO.GetComponent<RectTransform>();
 
             diaRect.anchorMin = new Vector2(0, 0);
@@ -153,25 +154,25 @@ namespace Common
         {
            // InitDiaView();
             DialogueSO diaSO = GetDialogueSO(dialogueName);
+            dialogueModel = GetDialogueModel(dialogueName);
             if (diaSO != null)
             {
                 SetCurrDiaBase(dialogueName);
-                dialogueViewController1.StartStory(diaSO);
-               
+                dialogueView.StartStory(diaSO);
             }
             else
             {
-                Debug.Log("Dia SO Not Found");
+                Debug.Log("Dia SO Not Found" + dialogueName);
             }   
         }
-        public void ShowDialogueLs(CharNames charName, NPCNames npcName)
+        public void ShowDialogueLs(CharNames charName, NPCNames npcName, Transform parent)
         {
-            InitDiaView();
-            dialogueViewController1.ShowDialogueList(CharNames.None, NPCNames.KhalidTheHealer);
+            InitDiaView(parent);
+            dialogueView.ShowDialogueList(CharNames.None, NPCNames.KhalidTheHealer);
         }
   
 
-#region GET AND SET HELPERS
+        #region GET AND SET HELPERS
 
         public DialogueSO GetDialogueSO(DialogueNames dialogueName)
         {
@@ -206,15 +207,9 @@ namespace Common
             }
             if (Input.GetKeyDown(KeyCode.M))
             {
-                ShowDialogueLs(CharNames.None, NPCNames.KhalidTheHealer);
+                //ShowDialogueLs(CharNames.None, NPCNames.MinamiTheSoothsayer);
             }
         }
 
     }
 }
-//public void OptionsClicked(TagData tagData)
-//{
-//    //dialogueViewController.IsInteracting = false;
-//    //dialogueViewController.DisplayStory(tagData.valueTag);
-//    //dialogueViewController.StartStory(GetDialogueSO(101));
-//}

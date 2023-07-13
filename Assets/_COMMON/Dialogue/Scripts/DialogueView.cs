@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 namespace Common
 {
-    public class DialogueViewController1 : MonoBehaviour
+    public class DialogueView : MonoBehaviour
     {
         //tags
         public static event Action<Story> OnCreateStory;  // redundant for INKLE EDITOR 
@@ -75,11 +75,14 @@ namespace Common
             isDialoguePlaying = false;
             IsSkipStory = false;
             fastFwdBtn.onClick.AddListener(FastFwdPressed);
+            skipBtn.onClick.AddListener(OnSkipBtnPressed); 
         }
-
+       
         void OnSkipBtnPressed()
         {
             IsSkipStory = true;
+            
+            Debug.Log("The ENd "); 
         }
         public void StartStory(DialogueSO _dialogueSO)
         {
@@ -142,11 +145,17 @@ namespace Common
             }
             else
             {
-                Debug.Log("Dialogue Ends");
-                DialogueService.Instance.On_DialogueEnd(); 
+                Debug.Log("Dialogue Stopped");
+                if(DialogueService.Instance.allDefine.Count ==0 
+                    && DialogueService.Instance.allOptions.Count == 0
+                     && DialogueService.Instance.allDiverts.Count == 0)
+                {
+                    DialogueService.Instance.On_DialogueEnd();
+                }
             }
         }
 
+      
         void DisplayChoices()
         {
             List<Choice> currentChoices = story.currentChoices;
@@ -167,6 +176,8 @@ namespace Common
 
                 choiceBtn.gameObject.SetActive(true);
                 choiceBtn.GetComponentInChildren<TextMeshProUGUI>().text = choice.text;
+                if(choice.text =="Warden" || choice.text == "Herbalist")
+                    choiceBtn.enabled= false;
 
                 choiceBtn.onClick.AddListener(() => OnChoiceClick(choice));
 
@@ -240,20 +251,19 @@ namespace Common
         }
 
         void OnChoiceClick(Choice choice)
-        {
-            //Debug.Log("Index" + choice.index);
-            //Wait(2f);
+        {        
             story.ChooseChoiceIndex(choice.index);
-                DialogueService.Instance.diaBase
+            bool choiceVal = DialogueService.Instance.diaBase
                                     .ApplyChoices(choice.index, 2f);
 
-        // can also be set from outside as in spritePanel
-                escapeCount = 1; 
+           
+            escapeCount = 1; 
             RemoveListener();
             DisplayStory();
-
+            DialogueService.Instance.ClearAllList();
         }
 
+       
         void RemoveListener()
         {
             foreach (Transform child in choiceParent.transform.GetChild(0))

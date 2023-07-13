@@ -8,12 +8,12 @@ namespace Common
 {
     public class TopOptionsBtnEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        DialogueViewController1 dialogueViewController1;
+        DialogueView dialogueViewController1;
         int index;
         private void OnEnable()
         {
             index = gameObject.transform.GetSiblingIndex();
-            dialogueViewController1 = DialogueService.Instance.dialogueViewController1;
+            dialogueViewController1 = DialogueService.Instance.dialogueView;
         }
         public void OnPointerEnter(PointerEventData eventData)
         {

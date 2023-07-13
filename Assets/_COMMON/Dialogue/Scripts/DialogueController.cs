@@ -10,7 +10,7 @@ namespace Common
     public class DialogueController : MonoBehaviour
     {
 
-        DialogueViewController1 dialogueViewController1; 
+        DialogueView dialogueViewController1; 
 
 
         //public void StartDialogue(int diaID)

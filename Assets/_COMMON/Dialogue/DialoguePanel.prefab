@@ -3208,6 +3208,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1663ca39f9342149a6a2abd9f7c442c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diaModel:
+    DiaID: 0
+    dialogueName: 4
+    dialogueTitle: I am back!
+    npcName: 10
+    charName: 0
+    isLocked: 0
+    isRepeatable: 0
+    isSkippable: 0
+    gameState: 1
+    charInDialogue: 01000000
+    NPCinDialogue: 
+    locationName: 1
 --- !u!1 &2819195208862824791
 GameObject:
   m_ObjectHideFlags: 0
@@ -3485,6 +3498,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1663ca39f9342149a6a2abd9f7c442c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diaModel:
+    DiaID: 0
+    dialogueName: 1
+    dialogueTitle: Meet Khalid
+    npcName: 10
+    charName: 0
+    isLocked: 1
+    isRepeatable: 0
+    isSkippable: 1
+    gameState: 1
+    charInDialogue: 01000000
+    NPCinDialogue: 
+    locationName: 1
 --- !u!1 &5476148291095198563
 GameObject:
   m_ObjectHideFlags: 0
@@ -3634,6 +3660,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1663ca39f9342149a6a2abd9f7c442c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diaModel:
+    DiaID: 0
+    dialogueName: 0
+    dialogueTitle: 
+    npcName: 0
+    charName: 0
+    isLocked: 0
+    isRepeatable: 0
+    isSkippable: 0
+    gameState: 0
+    charInDialogue: 
+    NPCinDialogue: 
+    locationName: 0
 --- !u!1 &5975062187422913010
 GameObject:
   m_ObjectHideFlags: 0
@@ -3783,6 +3822,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1663ca39f9342149a6a2abd9f7c442c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diaModel:
+    DiaID: 0
+    dialogueName: 5
+    dialogueTitle: "Hey old man\u2026"
+    npcName: 10
+    charName: 0
+    isLocked: 0
+    isRepeatable: 0
+    isSkippable: 0
+    gameState: 1
+    charInDialogue: 01000000
+    NPCinDialogue: 
+    locationName: 1
 --- !u!1 &8658759906450785870
 GameObject:
   m_ObjectHideFlags: 0

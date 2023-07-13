@@ -1,3 +1,4 @@
+using Interactables;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace Town
 
         [SerializeField] Button exitBtn;
 
+        [SerializeField] TradeScrollView tradeScrollView; 
         private void Start()
         {
             tradeBtn.onClick.AddListener(OnTradeBtnPressed); 
@@ -52,7 +54,8 @@ namespace Town
             // get stock of the NPC for buy(below) panel slots
             // get Abbas.. stash and main Inv items that are accepted by the NPC
             // fill to sell Panel slots
-
+            List<Iitems> commInvItems = InvService.Instance.invMainModel.commonInvItems;
+            tradeScrollView.InitSlotView(commInvItems); 
         }
 
         void FillBuySlots()

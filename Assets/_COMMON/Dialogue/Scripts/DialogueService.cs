@@ -64,7 +64,7 @@ namespace Common
             dialogueFactory = GetComponent<DialogueFactory>();
             isDiaViewInitDone = false;
         }
-    public void InitDialogueService()
+        public void InitDialogueService()
         {
             allDiaLogueModels.Clear();
             foreach (DialogueSO dialogueSO in allDialogueSO.allDialogues)
@@ -158,7 +158,7 @@ namespace Common
             if (diaSO != null)
             {
                 SetCurrDiaBase(dialogueName);
-                dialogueView.StartStory(diaSO);
+                dialogueView.StartStory(diaSO, dialogueModel);
             }
             else
             {

@@ -84,10 +84,13 @@ namespace Common
             
             Debug.Log("The ENd "); 
         }
-        public void StartStory(DialogueSO _dialogueSO)
+        public void StartStory(DialogueSO _dialogueSO, DialogueModel diaModel)
         {
             dialogueList.SetActive(false);
             dialogueParent.SetActive(true);
+            if(!diaModel.isSkippable)
+                skipBtn.gameObject.SetActive(false);
+            else skipBtn.gameObject.SetActive(true);
             dialogueSO = _dialogueSO;
             story = new Story(dialogueSO.dialogueAsset.text);
             if (OnCreateStory != null) OnCreateStory(story);

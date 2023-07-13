@@ -13,17 +13,17 @@ namespace Common
         {
             container = transform.GetChild(1);
         }
-        public void InitDialogueView(List<DialogueModel> lsModel)
+        public void InitDialogueView(List<DialogueModel> allDiaModel)
         {
             int i = 0; 
-            for (int j = 0; j < lsModel.Count; j++)
+            for (int j = 0; j < allDiaModel.Count; j++)
             {
-                if (lsModel[j].isLocked) continue;                
+                if (allDiaModel[j].isLocked) continue;                
 
                 TextMeshProUGUI txt =  container.GetChild(i).GetComponent<TextMeshProUGUI>();
                 container.GetChild(i)
-                    .GetComponent<DialogueListPtrEvents>().InitDialogueLsPtr(lsModel[j]); 
-                txt.text = $"{i+1}. " +lsModel[j].dialogueTitle;
+                    .GetComponent<DialogueListPtrEvents>().InitDialogueLsPtr(allDiaModel[j]); 
+                txt.text = $"{i+1}. " +allDiaModel[j].dialogueTitle;
                 i++; 
             }
             for(int k =i; k< container.childCount; k++)

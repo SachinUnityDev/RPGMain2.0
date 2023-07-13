@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,18 +6,21 @@ using UnityEngine;
 
 namespace Common
 {
+    [Serializable]
     public class DialogueModel
     {
         public int DiaID;  
         public DialogueNames dialogueName;
 
         public string dialogueTitle = "";
-        [Header("Auto Fill")]
+        [Header("Npc or char That owns the dialogue")]
         public NPCNames npcName;
         public CharNames charName;
+        [Header("Play restrictions")]
         public bool isLocked;
         public bool isRepeatable;
-        public bool isSkippable; 
+        public bool isSkippable;
+        
 
         public GameState gameState;
         public List<CharNames> charInDialogue = new List<CharNames>();

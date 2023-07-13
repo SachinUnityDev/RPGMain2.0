@@ -14,7 +14,7 @@
 ->END
 === classchoice ===
 
-		# interaction: 1:hello
+		# interaction: 1:class choice
 		
 		# define :1:  unavailable for Demo
 		# define :2: Hunter archetype. High dmg    , dodge but low armor.
@@ -50,5 +50,5 @@
 # speaker : 1:	Abbas		
 			Alright, i will see it done. And after that, i will see your memory refreshed, hopefully.
 
-		
+	
 ->END

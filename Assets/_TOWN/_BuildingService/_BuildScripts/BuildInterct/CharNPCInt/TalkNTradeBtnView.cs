@@ -1,3 +1,4 @@
+using Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,8 @@ namespace Town
         public BuildView buildView; 
         void Start()
         {
-
+            DialogueService.Instance.OnDialogueStart += (DialogueNames d) => HideBtns();
+            DialogueService.Instance.OnDialogueEnd += ShowBtns;
         }
 
         public void InitTalkNTrade(NPCIntData nPCInteractData, BuildView buildView)
@@ -43,6 +45,17 @@ namespace Town
                     transform.GetChild(1).GetComponent<TalkNTradeBtnPtrEvents>().OnSelect();
                 }
             }
+        }
+
+        void ShowBtns()
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+            transform.GetChild(1).gameObject.SetActive(true);
+        }
+        void HideBtns()
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+            transform.GetChild(1).gameObject.SetActive(false);
         }
     }
 }

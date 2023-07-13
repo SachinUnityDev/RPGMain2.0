@@ -18,7 +18,8 @@ namespace Common
             int i = 0; 
             for (int j = 0; j < lsModel.Count; j++)
             {
-                if (lsModel[j].isLocked) continue;
+                if (lsModel[j].isLocked) continue;                
+
                 TextMeshProUGUI txt =  container.GetChild(i).GetComponent<TextMeshProUGUI>();
                 container.GetChild(i)
                     .GetComponent<DialogueListPtrEvents>().InitDialogueLsPtr(lsModel[j]); 

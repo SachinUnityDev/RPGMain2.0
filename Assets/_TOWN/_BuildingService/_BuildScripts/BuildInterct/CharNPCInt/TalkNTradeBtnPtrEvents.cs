@@ -16,9 +16,7 @@ namespace Town
         CharIntData charIntData; 
         public void OnPointerClick(PointerEventData eventData)
         {
-         
             talkNTradeBtnView.OnSelect(intType);
-
         }
 
         public void InitTalkNTrade(NPCIntData nPCIntData, TalkNTradeBtnView talkNTradeBtnView)
@@ -54,10 +52,11 @@ namespace Town
             transform.DOScale(1.25f, 0.4f);
             if (intType == IntType.Talk)
             {
+                Transform buildViewTrans = talkNTradeBtnView.buildView.transform;
                 if(nPCIntData != null)
-                    DialogueService.Instance.ShowDialogueLs(CharNames.None, nPCIntData.nPCNames);
+                    DialogueService.Instance.ShowDialogueLs(CharNames.None, nPCIntData.nPCNames, buildViewTrans);
                 if (charIntData != null)
-                    DialogueService.Instance.ShowDialogueLs(charIntData.compName, NPCNames.None);
+                    DialogueService.Instance.ShowDialogueLs(charIntData.compName, NPCNames.None, buildViewTrans);
             }                
             if (intType == IntType.Trade)
             {

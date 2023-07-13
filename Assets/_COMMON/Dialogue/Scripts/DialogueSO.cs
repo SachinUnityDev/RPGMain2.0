@@ -27,6 +27,7 @@ namespace Common
         public CharNames charName;
         public bool isLocked;
         public bool isRepeatable;
+        public bool isSkippable; 
 
         public GameState gameState;
         public List<CharNames> charInDialogue = new List<CharNames>();
@@ -38,7 +39,6 @@ namespace Common
         
         [Header(" Interation sprites")]
         public List<InteractionSpriteData> interactSprites = new List<InteractionSpriteData>();
-
     }
 
 

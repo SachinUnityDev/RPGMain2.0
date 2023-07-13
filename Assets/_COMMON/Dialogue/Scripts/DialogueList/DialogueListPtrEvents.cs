@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class DialogueListPtrEvents : MonoBehaviour
+namespace Common
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+
+    public class DialogueListPtrEvents : MonoBehaviour, IPointerClickHandler
     {
-        
+        [SerializeField] DialogueModel diaModel; 
+        public void InitDialogueLsPtr(DialogueModel diaModel)
+        {
+            this.diaModel = diaModel;
+
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+           if(diaModel != null)
+            {
+                DialogueService.Instance.On_DialogueStart(diaModel.dialogueName); 
+            }
+        }
     }
 }

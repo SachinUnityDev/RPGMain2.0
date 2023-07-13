@@ -13,7 +13,8 @@ namespace Town
 
         [Header("To be ref")]
         [SerializeField] Transform btnContainer;
-        [SerializeField] Transform NPCInteractPanel;
+        [SerializeField] Transform NPCIntPanel;
+        [SerializeField] Transform charIntPanel;
 
         [Header("Not to be ref")]
         [SerializeField] Transform BGSpriteContainer;
@@ -27,6 +28,9 @@ namespace Town
 
         [SerializeField] Button exit;
 
+
+        [Header("Talk and trade Panel")]
+        public Transform talkNTradeBtns; 
         public Transform TradePanel;
         public Transform TalkPanel;
 
@@ -51,7 +55,8 @@ namespace Town
             buildModel = BuildingIntService.Instance.GetBuildModel(BuildingName);
             btnContainer.GetComponent<BuildInteractBtnView>().InitInteractBtns(this, buildModel);
             FillBuildBG();
-            InitInteractPanels();
+            InitBuildIntPanels();
+            InitNPCNCharIntPanels(); 
 
         }
         public void FillBuildBG()
@@ -71,13 +76,8 @@ namespace Town
                 if(baseEvents != null)
                     baseEvents.Init(this, buildModel);
             }
-
-            //for (int i = 0; i < 4; i++)
-            //{
-            //    BGSpriteContainer.GetChild(i).GetComponent<HouseBaseEvents>().Init(this, buildModel);
-            //}
         }
-        void InitInteractPanels()
+        void InitBuildIntPanels()
         {
             foreach (Transform child in BuildInteractPanel)
             {
@@ -88,14 +88,20 @@ namespace Town
         {
             return null; 
         }
-        public Transform GetNPCInteractPanel(NPCInteractType npcInteract)
-        {
 
+        void InitNPCNCharIntPanels()
+        {
+            NPCIntPanel.GetComponent<BuildNPCIntView>().InitIntPorts(this, buildModel);
+            charIntPanel.GetComponent<BuildCharIntView>().InitIntPorts(this, buildModel); 
+        }
+
+        public Transform GetNPCInteractPanel(IntType npcInteract)
+        {
             switch (npcInteract)
             {
-                case NPCInteractType.Talk:
+                case IntType.Talk:
                     return TalkPanel;
-                case NPCInteractType.Trade:
+                case IntType.Trade:
                     return TradePanel;
                 default:
                     break;
@@ -104,6 +110,29 @@ namespace Town
             return null;
         }
 
+        public void OnPortSelect(CharIntData charIntData, NPCIntData nPCIntData)
+        {
+            if(charIntData != null)
+            {
+                talkNTradeBtns.GetComponent<TalkNTradeBtnView>().InitTalkNTrade(charIntData, this); 
+            }
+            if (nPCIntData != null)
+            {
+                talkNTradeBtns.GetComponent<TalkNTradeBtnView>().InitTalkNTrade(nPCIntData, this);
+            }
+        }
+        public void OnPortHide()
+        {
+            // use events to control this
+        }
+        public void OnPortShow()
+        {
+
+        }
+        public void CloseTalkNTrade()
+        {
+
+        }
         public void Load()
         {
         }

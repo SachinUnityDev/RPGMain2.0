@@ -16,6 +16,7 @@ namespace Common
         public CharNames charName;
         public bool isLocked;
         public bool isRepeatable;
+        public bool isSkippable; 
 
         public GameState gameState;
         public List<CharNames> charInDialogue = new List<CharNames>();
@@ -30,6 +31,7 @@ namespace Common
             charName = diaSO.charName;
             isLocked = diaSO.isLocked;
             isRepeatable = diaSO.isRepeatable;
+            isSkippable= diaSO.isSkippable;
 
             gameState = diaSO.gameState;
             charInDialogue = diaSO.charInDialogue.DeepClone();

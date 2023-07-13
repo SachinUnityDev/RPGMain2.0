@@ -19,7 +19,7 @@ MonoBehaviour:
   charName: 0
   isLocked: 0
   isRepeatable: 0
-  gameState: 3
+  gameState: 1
   charInDialogue: 01000000
   NPCinDialogue: 
   locationName: 1

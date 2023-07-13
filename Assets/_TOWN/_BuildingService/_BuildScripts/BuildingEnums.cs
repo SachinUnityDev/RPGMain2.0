@@ -19,7 +19,7 @@ namespace Town
                         // as in certain days in a week cannot access the building         
     }
 
-    public enum NPCInteractType
+    public enum IntType
     {
         None, // to be shown on NPC panel
         Talk, 

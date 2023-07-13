@@ -15,7 +15,7 @@ MonoBehaviour:
   allDialogues:
   - {fileID: 11400000, guid: 6c0bce3fec63e1a4da5d94de54288737, type: 2}
   - {fileID: 11400000, guid: cc03cb79abd176d48aa80c1300696f10, type: 2}
+  - {fileID: 11400000, guid: 45f774597ea105144940ecc533283311, type: 2}
   - {fileID: 11400000, guid: c4a5fbb83c209f942bbbcfd40cfd68b7, type: 2}
   - {fileID: 11400000, guid: d65729a2d8888da4bbe92d3d9f1b2f29, type: 2}
   - {fileID: 11400000, guid: c22c25fb0424f93478566fb427efb280, type: 2}
-  - {fileID: 11400000, guid: 45f774597ea105144940ecc533283311, type: 2}

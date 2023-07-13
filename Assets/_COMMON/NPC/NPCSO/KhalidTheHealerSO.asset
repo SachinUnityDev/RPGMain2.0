@@ -16,12 +16,11 @@ MonoBehaviour:
   npcName: 10
   npcPrefab: {fileID: 0}
   npcSprite: {fileID: 21300000, guid: b8aa39fceeef2f240ad2119e9f3dddf4, type: 3}
-  npcHexPortrait: {fileID: 0}
+  npcHexPortrait: {fileID: 21300000, guid: d71b96c6bb3f8c94c9063363a3d2ce22, type: 3}
   dialoguePortraitClicked: {fileID: 21300000, guid: b8aa39fceeef2f240ad2119e9f3dddf4,
     type: 3}
   dialoguePortraitUnClicked: {fileID: 21300000, guid: 8fe79c548f545a642b4a460e60861609,
     type: 3}
-  InteractHeading: 
-  InteractionOptions:
-  - 
   itemTypesAccepted: 
+  buildName: 0
+  weeklyItemStock: []

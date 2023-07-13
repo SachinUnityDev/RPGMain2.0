@@ -26,11 +26,11 @@ namespace Town
         public Sprite buildIntNight;
 
         [Header("CharInteract")]
-        public List<CharInteractData> charInteractData = new List<CharInteractData>();
+        public List<CharIntData> charInteractData = new List<CharIntData>();
         public List<CharInteractPrefabData> CharInteractPrefab = new List<CharInteractPrefabData>();
 
         [Header("NPC Interactions")]
-        public List<NPCInteractData> npcInteractData = new List<NPCInteractData>();
+        public List<NPCIntData> npcInteractData = new List<NPCIntData>();
         public List<NPCInteractPrefabData> npcDataPrefab = new List<NPCInteractPrefabData>();
 
 

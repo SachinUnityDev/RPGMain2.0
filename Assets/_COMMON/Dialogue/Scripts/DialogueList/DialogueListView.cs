@@ -20,6 +20,8 @@ namespace Common
             {
                 if (lsModel[j].isLocked) continue;
                 TextMeshProUGUI txt =  container.GetChild(i).GetComponent<TextMeshProUGUI>();
+                container.GetChild(i)
+                    .GetComponent<DialogueListPtrEvents>().InitDialogueLsPtr(lsModel[j]); 
                 txt.text = $"{i+1}. " +lsModel[j].dialogueTitle;
                 i++; 
             }

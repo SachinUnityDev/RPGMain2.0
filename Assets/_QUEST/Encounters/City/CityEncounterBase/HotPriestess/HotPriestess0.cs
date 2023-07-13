@@ -44,7 +44,7 @@ namespace Quest
         {
             base.CityEContinuePressed();
             if (onChoiceASelect)
-                DialogueService.Instance.StartDialogue(DialogueNames.HotPriestess);
+                DialogueService.Instance.On_DialogueStart(DialogueNames.HotPriestess);
         }
     }
 }

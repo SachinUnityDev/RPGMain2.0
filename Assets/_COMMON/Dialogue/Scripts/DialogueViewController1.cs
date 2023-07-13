@@ -61,13 +61,25 @@ namespace Common
         [SerializeField] TextMeshProUGUI dialogueTxt;
         [SerializeField] Button fastFwdBtn;
 
+        [Header("Skip Btn")]
+        [SerializeField] Button skipBtn;
+        [SerializeField] bool IsSkipStory;
+
+        [SerializeField] int intCount = 0; 
+
         private void OnEnable()
         {
             dialogueTxt = dialogueParent.GetComponentInChildren<TextMeshProUGUI>();
             fastFwdBtn = dialogueParent.transform.GetChild(1).GetComponent<Button>();
             textRevealer = dialogueTxt.GetComponent<TextRevealer>();
             isDialoguePlaying = false;
+            IsSkipStory = false;
             fastFwdBtn.onClick.AddListener(FastFwdPressed);
+        }
+
+        void OnSkipBtnPressed()
+        {
+            IsSkipStory = true;
         }
         public void StartStory(DialogueSO _dialogueSO)
         {
@@ -116,6 +128,7 @@ namespace Common
                     TogglePortraitWithSpeakerTags();
                     textRevealer.Reveal();
                     dialogueTxt.text = "";
+                    
                     Debug.Log("INSIDE PRINT DIALOGUE");
                 }
                 else
@@ -126,6 +139,11 @@ namespace Common
                 if (story.currentChoices.Count >= 1)
                     DisplayChoices();
 
+            }
+            else
+            {
+                Debug.Log("Dialogue Ends");
+                DialogueService.Instance.On_DialogueEnd(); 
             }
         }
 
@@ -163,7 +181,6 @@ namespace Common
                     spriteBtn.GetComponent<Image>().sprite
                         = InteractSprites.allSprites[index];
                     spriteBtn.onClick.AddListener(() => OnChoiceClick(choice));
-
                 }
                 index++;
 
@@ -182,7 +199,7 @@ namespace Common
         void InteractTag()
         {
             tags = story.currentTags;
-
+            intCount = tags.Count; 
             foreach (var tag in tags)
             {
                 // get key and value 
@@ -216,7 +233,7 @@ namespace Common
                 if (keyTag == CUSTOMINT_TAG)
                 {
                     isTextBoxing = true;
-                    DialogueService.Instance.currController
+                    DialogueService.Instance.diaBase
                                         .ApplyInteraction(1, 2f);
                 }
             }
@@ -227,7 +244,7 @@ namespace Common
             //Debug.Log("Index" + choice.index);
             //Wait(2f);
             story.ChooseChoiceIndex(choice.index);
-                DialogueService.Instance.currController
+                DialogueService.Instance.diaBase
                                     .ApplyChoices(choice.index, 2f);
 
         // can also be set from outside as in spritePanel
@@ -319,16 +336,7 @@ namespace Common
             }
         }
 
-        // CONNECTED TO TEXT REVEALER EVENTS 
-        public void OnDialogueStart()
-        {
-            isDialoguePlaying = true;
-        }
-        public void OnDialogueEnd()
-        {
-            isDialoguePlaying = false;
-            DisplayStory();
-        }
+       
 
         //void SetHighTypeSpeed(int dist)
         //{

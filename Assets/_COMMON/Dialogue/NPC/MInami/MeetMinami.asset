@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DiaID: 105
   dialogueName: 7
+  dialogueTitle: This is the temple of water, right?
   npcName: 13
   charName: 0
-  dialogueTitle: This is the temple of water, right?
+  isLocked: 0
+  isRepeatable: 0
   gameState: 1
   charInDialogue: 01000000
   NPCinDialogue: 0d000000

@@ -28,34 +28,40 @@ namespace Town
         public bool isUnLocked; 
     }
     [Serializable]
-    public class CharInteractData
+    public class CharIntData
     {
-        public CharNames compName;
-        public NPCInteractType nPCIntType;
-        public NPCState nPCState;
-        public List<DialogueData> allDialogueData = new List<DialogueData>();
+        public CharNames compName;      
+        public NPCState compState;
+        public List<IntTypeData> allInteract = new List<IntTypeData>();
     }
     [Serializable]
     public class CharInteractPrefabData
     {
         public CharNames compName;
-        public NPCInteractType nPCIntType;        
+        public IntType nPCIntType;        
         public GameObject interactPrefab;
     }
 
     [Serializable]
-    public class NPCInteractData
+    public class NPCIntData
     {
         public NPCNames nPCNames;
-        public NPCInteractType nPCIntType;
         public NPCState npcState;
-        public List<DialogueData> allDialogueData = new List<DialogueData>();        
+        public List<IntTypeData> allInteract = new List<IntTypeData>();
+        
     }
+    [Serializable]
+    public class IntTypeData
+    {
+        public IntType nPCIntType;
+        public List<DialogueData> allDialogueData = new List<DialogueData>();
+    }
+
     [Serializable]
     public class NPCInteractPrefabData
     {
         public NPCNames nPCNames;
-        public NPCInteractType nPCIntType;        
+        public IntType nPCIntType;        
         public GameObject interactPrefab;
     }
     [Serializable]
@@ -86,9 +92,9 @@ namespace Town
         public BuildingState buildState;
 
         [Header("CharInteract")]
-        public List<CharInteractData> charInteractData = new List<CharInteractData>();
+        public List<CharIntData> charInteractData = new List<CharIntData>();
         [Header("NPC Interactions")]
-        public List<NPCInteractData> npcInteractData = new List<NPCInteractData>();
+        public List<NPCIntData> npcInteractData = new List<NPCIntData>();
         [Header("Building Interactions")]
         public List<BuildIntTypeData> buildIntTypes = new List<BuildIntTypeData>();
 

@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using Intro; 
+using Intro;
+using System;
 
 namespace Common
 {
@@ -24,13 +25,18 @@ namespace Common
 
     public class DialogueService : MonoSingletonGeneric<DialogueService>
     {
-        [Header("SO s")]
+        public Action<DialogueNames> OnDialogueStart; 
+        public Action OnDialogueEnd;
+
+        [Header("SOs")]
         public DialogueViewController1 dialogueViewController1;
+        public DialogueNames dialogueName;
+        public bool isDiaViewInitDone = false; 
 
         public AllDialogueSO allDialogueSO; 
         public List<DialogueModel> allDiaLogueModels = new List<DialogueModel>();
 
-        [Header("Dia prefab related")]
+        [Header("Dia View prefab TBR")]
         public GameObject dialoguePrefab;
         public GameObject diaGO;
 
@@ -47,19 +53,19 @@ namespace Common
         DialogueFactory dialogueFactory; 
 
         [Header("Custom Dialogue Interaction")]
-        public IDialogue currController;
+        public IDialogue diaBase;
 
         [Header("Game Init")]
         public bool isNewGInitDone = false;
 
         private void Start()
         {
-            dialogueFactory = GetComponent<DialogueFactory>();            
-            allDiaLogueModels.Clear();
-          
+            dialogueFactory = GetComponent<DialogueFactory>();
+            isDiaViewInitDone = false;
         }
-        public void InitDialogueService()
+    public void InitDialogueService()
         {
+            allDiaLogueModels.Clear();
             foreach (DialogueSO dialogueSO in allDialogueSO.allDialogues)
             {
                 DialogueModel diaModel = new DialogueModel(dialogueSO);
@@ -81,7 +87,7 @@ namespace Common
         {
             List<DialogueModel> lsModels = new List<DialogueModel>(); 
             foreach (DialogueModel diaModel in allDiaLogueModels)
-            {
+            {               
                 if(diaModel.npcName == nPCNames && diaModel.charName == charName)
                 {
                     lsModels.Add(diaModel);
@@ -104,20 +110,29 @@ namespace Common
             allDefine = allDefine.OrderBy(t => t.numTag).ToList();
         }
 
-        //public void OptionsClicked(TagData tagData)
-        //{
-        //    //dialogueViewController.IsInteracting = false;
-        //    //dialogueViewController.DisplayStory(tagData.valueTag);
-        //    //dialogueViewController.StartStory(GetDialogueSO(101));
-        //}
 
+
+        public void On_DialogueStart(DialogueNames dialogueName) // when the dialogue is clicked in dialogue LS
+        {
+               
+            StartDialogue(dialogueName);            
+            OnDialogueStart?.Invoke(dialogueName);
+        }
+        public void On_DialogueEnd()
+        {
+            Destroy(diaGO.gameObject, 0.1f);// destroy the view
+            OnDialogueEnd?.Invoke();
+            dialogueName = DialogueNames.None;
+            isDiaViewInitDone = false; 
+        }
         public void SetCurrDiaBase(DialogueNames dialogueNames)
         {
-            currController = dialogueFactory.GetDialogBase(dialogueNames);
+            diaBase = dialogueFactory.GetDialogBase(dialogueNames);
         }
 
         void InitDiaView()
         {
+            if (isDiaViewInitDone) return; // return multiple clicks
             diaGO = Instantiate(dialoguePrefab);
 
             dialogueViewController1 = diaGO.GetComponent<DialogueViewController1>();
@@ -131,16 +146,18 @@ namespace Common
             diaRect.localScale = Vector3.one;
             diaRect.offsetMin = new Vector2(0, 0); // new Vector2(left, bottom);
             diaRect.offsetMax = new Vector2(0, 0); // new Vector2(-right, -top);
+            isDiaViewInitDone= true;
         }
 
         public void StartDialogue(DialogueNames dialogueName)
         {
-            InitDiaView();
+           // InitDiaView();
             DialogueSO diaSO = GetDialogueSO(dialogueName);
             if (diaSO != null)
             {
                 SetCurrDiaBase(dialogueName);
                 dialogueViewController1.StartStory(diaSO);
+               
             }
             else
             {
@@ -152,11 +169,7 @@ namespace Common
             InitDiaView();
             dialogueViewController1.ShowDialogueList(CharNames.None, NPCNames.KhalidTheHealer);
         }
-        public void OnDialogEnd()
-        {
-
-
-        }
+  
 
 #region GET AND SET HELPERS
 
@@ -189,7 +202,7 @@ namespace Common
         {
             if (Input.GetKeyDown(KeyCode.N))
             {
-                StartDialogue(DialogueNames.MeetKhalid);
+                On_DialogueStart(DialogueNames.MeetKhalid);
             }
             if (Input.GetKeyDown(KeyCode.M))
             {
@@ -199,3 +212,9 @@ namespace Common
 
     }
 }
+//public void OptionsClicked(TagData tagData)
+//{
+//    //dialogueViewController.IsInteracting = false;
+//    //dialogueViewController.DisplayStory(tagData.valueTag);
+//    //dialogueViewController.StartStory(GetDialogueSO(101));
+//}

@@ -21,7 +21,7 @@ namespace Town
             tradeBtn.onClick.AddListener(OnTradeBtnPressed); 
             buyBtn.onClick.AddListener(OnBuyBtnPressed);
             sellBtn.onClick.AddListener(OnSellBtnPressed);  
-            exitBtn.onClick.AddListener(OnExitBtnPressed);
+           // exitBtn.onClick.AddListener(OnExitBtnPressed);
         }
 
         #region BUTTONS RESPONSES

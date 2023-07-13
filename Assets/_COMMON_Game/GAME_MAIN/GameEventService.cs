@@ -45,8 +45,10 @@ namespace Common
                 EcoServices.Instance.InitEcoServices();
                 DialogueService.Instance.InitDialogueService();
                 BarkService.Instance.InitBarkService();
+
                 BestiaryService.Instance.Init();
                 ItemService.Instance.Init();
+                TradeService.Instance.InitTradeService();
                 FameService.Instance.Init();
                 LevelService.Instance.Init();
                 TownService.Instance.Init(locationName);

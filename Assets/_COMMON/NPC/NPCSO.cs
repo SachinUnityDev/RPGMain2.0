@@ -73,6 +73,59 @@ namespace Town
         public SagaicGewgawNames sagaicName;
         public PoeticGewgawNames poeticName;
         public Pouches pouchesName; 
+
+        public int GetItemName(ItemType itemType)
+        {
+            switch (itemType)
+            {
+                case ItemType.None:
+                    break;
+                case ItemType.Potions:
+                    return (int)potionName;                     
+                case ItemType.GenGewgaws:
+                    return (int)genGewgawNames; 
+                case ItemType.Herbs:
+                    return (int)HerbName;
+                case ItemType.Foods:
+                    return(int)foodName;
+                case ItemType.Fruits:
+                    return(int)fruitNames;
+                case ItemType.Ingredients:
+                    return(int)ingredientName;
+                case ItemType.XXX:
+                    break;
+                case ItemType.Scrolls:
+                    return (int)scrollName;                    
+                case ItemType.TradeGoods:
+                    return (int)tgName; 
+                case ItemType.Tools:
+                    return (int)toolName;                     
+                case ItemType.Teas:
+                    return (int)teaName; 
+                case ItemType.Soups:
+                    return (int)soupsName;                    
+                case ItemType.Gems:
+                    return (int)gemName; 
+                case ItemType.Alcohol:
+                    return(int) alcoholName;                    
+                case ItemType.Meals:
+                    return (int)mealName;                     
+                case ItemType.SagaicGewgaws:
+                    return (int)sagaicName; 
+                case ItemType.PoeticGewgaws:
+                    return (int)poeticName;                    
+                case ItemType.RelicGewgaws:
+                    return (int)0; 
+                case ItemType.Pouches:
+                    return (int)pouchesName;                     
+                case ItemType.LoreScroll:
+                    return (int)0;
+                default:
+                    break;
+            }
+            return 0;
+        }
+
     }
 
     [Serializable]

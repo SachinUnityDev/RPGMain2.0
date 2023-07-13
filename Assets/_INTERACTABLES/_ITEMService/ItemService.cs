@@ -123,8 +123,9 @@ namespace Interactables
 
         public Iitems GetNewItem(ItemData itemData)
         {
-            Iitems iitems; 
-            if(itemData.genGewgawQ == GenGewgawQ.None)
+            Iitems iitems;
+            itemFactory = GetComponent<ItemFactory>();
+            if (itemData.genGewgawQ == GenGewgawQ.None)
             {
                 iitems = itemFactory.GetNewItem(itemData.itemType, itemData.itemName);
             }
@@ -164,7 +165,7 @@ namespace Interactables
             if (herbSO != null)
                 return herbSO;
             else
-                Debug.Log("herbSO  not found");
+                Debug.Log("herbSO  not found" + herbname);
             return null;
         }
         public PotionSO GetPotionSO(PotionNames potionName)
@@ -274,7 +275,7 @@ namespace Interactables
             if (tgSO != null)
                 return tgSO;
             else
-                Debug.Log("Trade goods SO  not found");
+                Debug.Log("Trade goods SO  not found"+ tgName);
             return null;
         }
         public ToolsSO GetToolSO(ToolNames toolName)

@@ -575,7 +575,7 @@ namespace Interactables
         Rope,
         Shovel,
         Trap,
-        HerbalPouch,
+        xxx,
         Fermentor, 
         Mortar,
     }

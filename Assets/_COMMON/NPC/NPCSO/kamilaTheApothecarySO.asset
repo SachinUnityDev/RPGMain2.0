@@ -27,6 +27,8 @@ MonoBehaviour:
   - weekSeq: 1
     itemDataLs:
     - itemType: 1
+      genGawgawQ: 0
+      qty: 20
       itemName:
         potionName: 1
         genGewgawNames: 0
@@ -45,9 +47,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
+    - itemType: 1
       genGawgawQ: 0
       qty: 20
-    - itemType: 1
       itemName:
         potionName: 2
         genGewgawNames: 0
@@ -66,9 +68,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
-      genGawgawQ: 0
-      qty: 20
     - itemType: 1
+      genGawgawQ: 0
+      qty: 12
       itemName:
         potionName: 3
         genGewgawNames: 0
@@ -87,9 +89,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
-      genGawgawQ: 0
-      qty: 12
     - itemType: 1
+      genGawgawQ: 0
+      qty: 8
       itemName:
         potionName: 5
         genGewgawNames: 0
@@ -108,9 +110,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
+    - itemType: 1
       genGawgawQ: 0
       qty: 8
-    - itemType: 1
       itemName:
         potionName: 4
         genGewgawNames: 0
@@ -129,9 +131,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
+    - itemType: 1
       genGawgawQ: 0
       qty: 8
-    - itemType: 1
       itemName:
         potionName: 6
         genGewgawNames: 0
@@ -150,9 +152,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
+    - itemType: 1
       genGawgawQ: 0
       qty: 8
-    - itemType: 1
       itemName:
         potionName: 8
         genGewgawNames: 0
@@ -171,9 +173,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
+    - itemType: 1
       genGawgawQ: 0
       qty: 8
-    - itemType: 1
       itemName:
         potionName: 7
         genGewgawNames: 0
@@ -192,9 +194,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
-      genGawgawQ: 0
-      qty: 8
     - itemType: 1
+      genGawgawQ: 0
+      qty: 6
       itemName:
         potionName: 9
         genGewgawNames: 0
@@ -213,9 +215,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
+    - itemType: 1
       genGawgawQ: 0
       qty: 6
-    - itemType: 1
       itemName:
         potionName: 10
         genGewgawNames: 0
@@ -234,9 +236,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
-      genGawgawQ: 0
-      qty: 6
     - itemType: 3
+      genGawgawQ: 0
+      qty: 12
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -255,9 +257,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
+    - itemType: 3
       genGawgawQ: 0
       qty: 12
-    - itemType: 3
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -276,9 +278,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
+    - itemType: 3
       genGawgawQ: 0
       qty: 12
-    - itemType: 3
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -297,9 +299,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
+    - itemType: 3
       genGawgawQ: 0
       qty: 12
-    - itemType: 3
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -318,9 +320,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
+    - itemType: 3
       genGawgawQ: 0
       qty: 12
-    - itemType: 3
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -339,9 +341,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
+    - itemType: 3
       genGawgawQ: 0
       qty: 12
-    - itemType: 3
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -360,9 +362,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
+    - itemType: 3
       genGawgawQ: 0
       qty: 12
-    - itemType: 3
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -381,284 +383,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
-      genGawgawQ: 0
-      qty: 12
     - itemType: 3
-      itemName:
-        potionName: 0
-        genGewgawNames: 0
-        HerbName: 12
-        foodName: 0
-        fruitNames: 0
-        ingredientName: 0
-        scrollName: 0
-        tgName: 0
-        toolName: 0
-        teaName: 0
-        soupsName: 0
-        gemName: 0
-        alcoholName: 0
-        mealName: 0
-        sagaicName: 0
-        poeticName: 0
-        pouchesName: 0
       genGawgawQ: 0
-      qty: 12
-    - itemType: 19
-      itemName:
-        potionName: 0
-        genGewgawNames: 0
-        HerbName: 0
-        foodName: 0
-        fruitNames: 0
-        ingredientName: 0
-        scrollName: 0
-        tgName: 0
-        toolName: 0
-        teaName: 0
-        soupsName: 0
-        gemName: 0
-        alcoholName: 0
-        mealName: 0
-        sagaicName: 0
-        poeticName: 0
-        pouchesName: 1
-      genGawgawQ: 0
-      qty: 2
-  - weekSeq: 2
-    itemDataLs:
-    - itemType: 1
-      itemName:
-        potionName: 1
-        genGewgawNames: 0
-        HerbName: 0
-        foodName: 0
-        fruitNames: 0
-        ingredientName: 0
-        scrollName: 0
-        tgName: 0
-        toolName: 0
-        teaName: 0
-        soupsName: 0
-        gemName: 0
-        alcoholName: 0
-        mealName: 0
-        sagaicName: 0
-        poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 20
-    - itemType: 1
-      itemName:
-        potionName: 2
-        genGewgawNames: 0
-        HerbName: 0
-        foodName: 0
-        fruitNames: 0
-        ingredientName: 0
-        scrollName: 0
-        tgName: 0
-        toolName: 0
-        teaName: 0
-        soupsName: 0
-        gemName: 0
-        alcoholName: 0
-        mealName: 0
-        sagaicName: 0
-        poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 20
-    - itemType: 1
-      itemName:
-        potionName: 3
-        genGewgawNames: 0
-        HerbName: 0
-        foodName: 0
-        fruitNames: 0
-        ingredientName: 0
-        scrollName: 0
-        tgName: 0
-        toolName: 0
-        teaName: 0
-        soupsName: 0
-        gemName: 0
-        alcoholName: 0
-        mealName: 0
-        sagaicName: 0
-        poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 12
-    - itemType: 1
-      itemName:
-        potionName: 5
-        genGewgawNames: 0
-        HerbName: 0
-        foodName: 0
-        fruitNames: 0
-        ingredientName: 0
-        scrollName: 0
-        tgName: 0
-        toolName: 0
-        teaName: 0
-        soupsName: 0
-        gemName: 0
-        alcoholName: 0
-        mealName: 0
-        sagaicName: 0
-        poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 8
-    - itemType: 1
-      itemName:
-        potionName: 4
-        genGewgawNames: 0
-        HerbName: 0
-        foodName: 0
-        fruitNames: 0
-        ingredientName: 0
-        scrollName: 0
-        tgName: 0
-        toolName: 0
-        teaName: 0
-        soupsName: 0
-        gemName: 0
-        alcoholName: 0
-        mealName: 0
-        sagaicName: 0
-        poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 8
-    - itemType: 1
-      itemName:
-        potionName: 6
-        genGewgawNames: 0
-        HerbName: 0
-        foodName: 0
-        fruitNames: 0
-        ingredientName: 0
-        scrollName: 0
-        tgName: 0
-        toolName: 0
-        teaName: 0
-        soupsName: 0
-        gemName: 0
-        alcoholName: 0
-        mealName: 0
-        sagaicName: 0
-        poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 8
-    - itemType: 1
-      itemName:
-        potionName: 8
-        genGewgawNames: 0
-        HerbName: 0
-        foodName: 0
-        fruitNames: 0
-        ingredientName: 0
-        scrollName: 0
-        tgName: 0
-        toolName: 0
-        teaName: 0
-        soupsName: 0
-        gemName: 0
-        alcoholName: 0
-        mealName: 0
-        sagaicName: 0
-        poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 8
-    - itemType: 1
-      itemName:
-        potionName: 11
-        genGewgawNames: 0
-        HerbName: 0
-        foodName: 0
-        fruitNames: 0
-        ingredientName: 0
-        scrollName: 0
-        tgName: 0
-        toolName: 0
-        teaName: 0
-        soupsName: 0
-        gemName: 0
-        alcoholName: 0
-        mealName: 0
-        sagaicName: 0
-        poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 1
-    - itemType: 1
-      itemName:
-        potionName: 9
-        genGewgawNames: 0
-        HerbName: 0
-        foodName: 0
-        fruitNames: 0
-        ingredientName: 0
-        scrollName: 0
-        tgName: 0
-        toolName: 0
-        teaName: 0
-        soupsName: 0
-        gemName: 0
-        alcoholName: 0
-        mealName: 0
-        sagaicName: 0
-        poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 6
-    - itemType: 1
-      itemName:
-        potionName: 10
-        genGewgawNames: 0
-        HerbName: 0
-        foodName: 0
-        fruitNames: 0
-        ingredientName: 0
-        scrollName: 0
-        tgName: 0
-        toolName: 0
-        teaName: 0
-        soupsName: 0
-        gemName: 0
-        alcoholName: 0
-        mealName: 0
-        sagaicName: 0
-        poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 6
-    - itemType: 3
-      itemName:
-        potionName: 0
-        genGewgawNames: 0
-        HerbName: 1
-        foodName: 0
-        fruitNames: 0
-        ingredientName: 0
-        scrollName: 0
-        tgName: 0
-        toolName: 0
-        teaName: 0
-        soupsName: 0
-        gemName: 0
-        alcoholName: 0
-        mealName: 0
-        sagaicName: 0
-        poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 12
-    - itemType: 3
+      qty: 3
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -677,135 +404,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
-      genGawgawQ: 0
-      qty: 3
-    - itemType: 3
-      itemName:
-        potionName: 0
-        genGewgawNames: 0
-        HerbName: 4
-        foodName: 0
-        fruitNames: 0
-        ingredientName: 0
-        scrollName: 0
-        tgName: 0
-        toolName: 0
-        teaName: 0
-        soupsName: 0
-        gemName: 0
-        alcoholName: 0
-        mealName: 0
-        sagaicName: 0
-        poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 12
-    - itemType: 3
-      itemName:
-        potionName: 0
-        genGewgawNames: 0
-        HerbName: 3
-        foodName: 0
-        fruitNames: 0
-        ingredientName: 0
-        scrollName: 0
-        tgName: 0
-        toolName: 0
-        teaName: 0
-        soupsName: 0
-        gemName: 0
-        alcoholName: 0
-        mealName: 0
-        sagaicName: 0
-        poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 3
-    - itemType: 3
-      itemName:
-        potionName: 0
-        genGewgawNames: 0
-        HerbName: 6
-        foodName: 0
-        fruitNames: 0
-        ingredientName: 0
-        scrollName: 0
-        tgName: 0
-        toolName: 0
-        teaName: 0
-        soupsName: 0
-        gemName: 0
-        alcoholName: 0
-        mealName: 0
-        sagaicName: 0
-        poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 12
-    - itemType: 3
-      itemName:
-        potionName: 0
-        genGewgawNames: 0
-        HerbName: 8
-        foodName: 0
-        fruitNames: 0
-        ingredientName: 0
-        scrollName: 0
-        tgName: 0
-        toolName: 0
-        teaName: 0
-        soupsName: 0
-        gemName: 0
-        alcoholName: 0
-        mealName: 0
-        sagaicName: 0
-        poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 12
-    - itemType: 3
-      itemName:
-        potionName: 0
-        genGewgawNames: 0
-        HerbName: 10
-        foodName: 0
-        fruitNames: 0
-        ingredientName: 0
-        scrollName: 0
-        tgName: 0
-        toolName: 0
-        teaName: 0
-        soupsName: 0
-        gemName: 0
-        alcoholName: 0
-        mealName: 0
-        sagaicName: 0
-        poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 12
-    - itemType: 3
-      itemName:
-        potionName: 0
-        genGewgawNames: 0
-        HerbName: 11
-        foodName: 0
-        fruitNames: 0
-        ingredientName: 0
-        scrollName: 0
-        tgName: 0
-        toolName: 0
-        teaName: 0
-        soupsName: 0
-        gemName: 0
-        alcoholName: 0
-        mealName: 0
-        sagaicName: 0
-        poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 12
     - itemType: 19
+      genGawgawQ: 0
+      qty: 2
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -824,11 +425,11 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 1
-      genGawgawQ: 0
-      qty: 2
-  - weekSeq: 3
+  - weekSeq: 2
     itemDataLs:
     - itemType: 1
+      genGawgawQ: 0
+      qty: 20
       itemName:
         potionName: 1
         genGewgawNames: 0
@@ -847,9 +448,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
-      genGawgawQ: 0
-      qty: 16
     - itemType: 1
+      genGawgawQ: 0
+      qty: 20
       itemName:
         potionName: 2
         genGewgawNames: 0
@@ -868,9 +469,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
-      genGawgawQ: 0
-      qty: 16
     - itemType: 1
+      genGawgawQ: 0
+      qty: 12
       itemName:
         potionName: 3
         genGewgawNames: 0
@@ -889,9 +490,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
-      genGawgawQ: 0
-      qty: 10
     - itemType: 1
+      genGawgawQ: 0
+      qty: 8
       itemName:
         potionName: 5
         genGewgawNames: 0
@@ -910,9 +511,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
-      genGawgawQ: 0
-      qty: 6
     - itemType: 1
+      genGawgawQ: 0
+      qty: 8
       itemName:
         potionName: 4
         genGewgawNames: 0
@@ -931,9 +532,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
-      genGawgawQ: 0
-      qty: 6
     - itemType: 1
+      genGawgawQ: 0
+      qty: 8
       itemName:
         potionName: 6
         genGewgawNames: 0
@@ -952,9 +553,410 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
+    - itemType: 1
       genGawgawQ: 0
       qty: 8
+      itemName:
+        potionName: 8
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+        pouchesName: 0
     - itemType: 1
+      genGawgawQ: 0
+      qty: 1
+      itemName:
+        potionName: 11
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+        pouchesName: 0
+    - itemType: 1
+      genGawgawQ: 0
+      qty: 6
+      itemName:
+        potionName: 9
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+        pouchesName: 0
+    - itemType: 1
+      genGawgawQ: 0
+      qty: 6
+      itemName:
+        potionName: 10
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+        pouchesName: 0
+    - itemType: 3
+      genGawgawQ: 0
+      qty: 12
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 1
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+        pouchesName: 0
+    - itemType: 3
+      genGawgawQ: 0
+      qty: 3
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 13
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+        pouchesName: 0
+    - itemType: 3
+      genGawgawQ: 0
+      qty: 12
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 4
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+        pouchesName: 0
+    - itemType: 3
+      genGawgawQ: 0
+      qty: 3
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 3
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+        pouchesName: 0
+    - itemType: 3
+      genGawgawQ: 0
+      qty: 12
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 6
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+        pouchesName: 0
+    - itemType: 3
+      genGawgawQ: 0
+      qty: 12
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 8
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+        pouchesName: 0
+    - itemType: 3
+      genGawgawQ: 0
+      qty: 12
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 10
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+        pouchesName: 0
+    - itemType: 3
+      genGawgawQ: 0
+      qty: 12
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 11
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+        pouchesName: 0
+    - itemType: 19
+      genGawgawQ: 0
+      qty: 2
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+        pouchesName: 1
+  - weekSeq: 3
+    itemDataLs:
+    - itemType: 1
+      genGawgawQ: 0
+      qty: 16
+      itemName:
+        potionName: 1
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+        pouchesName: 0
+    - itemType: 1
+      genGawgawQ: 0
+      qty: 16
+      itemName:
+        potionName: 2
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+        pouchesName: 0
+    - itemType: 1
+      genGawgawQ: 0
+      qty: 10
+      itemName:
+        potionName: 3
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+        pouchesName: 0
+    - itemType: 1
+      genGawgawQ: 0
+      qty: 6
+      itemName:
+        potionName: 5
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+        pouchesName: 0
+    - itemType: 1
+      genGawgawQ: 0
+      qty: 6
+      itemName:
+        potionName: 4
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+        pouchesName: 0
+    - itemType: 1
+      genGawgawQ: 0
+      qty: 8
+      itemName:
+        potionName: 6
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+        pouchesName: 0
+    - itemType: 1
+      genGawgawQ: 0
+      qty: 8
       itemName:
         potionName: 7
         genGewgawNames: 0
@@ -973,9 +975,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
+    - itemType: 1
       genGawgawQ: 0
       qty: 8
-    - itemType: 1
       itemName:
         potionName: 8
         genGewgawNames: 0
@@ -994,9 +996,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
-      genGawgawQ: 0
-      qty: 8
     - itemType: 1
+      genGawgawQ: 0
+      qty: 1
       itemName:
         potionName: 12
         genGewgawNames: 0
@@ -1015,9 +1017,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
+    - itemType: 1
       genGawgawQ: 0
       qty: 1
-    - itemType: 1
       itemName:
         potionName: 11
         genGewgawNames: 0
@@ -1036,9 +1038,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
-      genGawgawQ: 0
-      qty: 1
     - itemType: 1
+      genGawgawQ: 0
+      qty: 4
       itemName:
         potionName: 9
         genGewgawNames: 0
@@ -1057,9 +1059,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
+    - itemType: 1
       genGawgawQ: 0
       qty: 4
-    - itemType: 1
       itemName:
         potionName: 10
         genGewgawNames: 0
@@ -1078,9 +1080,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
-      genGawgawQ: 0
-      qty: 4
     - itemType: 3
+      genGawgawQ: 0
+      qty: 12
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -1099,9 +1101,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
-      genGawgawQ: 0
-      qty: 12
     - itemType: 3
+      genGawgawQ: 0
+      qty: 3
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -1120,9 +1122,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
+    - itemType: 3
       genGawgawQ: 0
       qty: 3
-    - itemType: 3
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -1141,9 +1143,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
-      genGawgawQ: 0
-      qty: 3
     - itemType: 3
+      genGawgawQ: 0
+      qty: 8
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -1162,9 +1164,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
-      genGawgawQ: 0
-      qty: 8
     - itemType: 19
+      genGawgawQ: 0
+      qty: 12
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -1183,9 +1185,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
-      genGawgawQ: 0
-      qty: 12
     - itemType: 3
+      genGawgawQ: 0
+      qty: 8
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -1204,9 +1206,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
+    - itemType: 3
       genGawgawQ: 0
       qty: 8
-    - itemType: 3
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -1225,9 +1227,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
-      genGawgawQ: 0
-      qty: 8
     - itemType: 3
+      genGawgawQ: 0
+      qty: 12
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -1246,9 +1248,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
-      genGawgawQ: 0
-      qty: 12
     - itemType: 3
+      genGawgawQ: 0
+      qty: 8
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -1267,9 +1269,9 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 0
-      genGawgawQ: 0
-      qty: 8
     - itemType: 19
+      genGawgawQ: 0
+      qty: 2
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -1288,5 +1290,3 @@ MonoBehaviour:
         sagaicName: 0
         poeticName: 0
         pouchesName: 1
-      genGawgawQ: 0
-      qty: 2

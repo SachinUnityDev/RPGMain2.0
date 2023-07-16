@@ -16,6 +16,7 @@ MonoBehaviour:
   questNameStr: The Power within
   questState: 1
   allObjSO:
+  - {fileID: 11400000, guid: 8829d630dbe000b41a94ca3898a95f35, type: 2}
   - {fileID: 11400000, guid: a6db4e2966c62124d8dbe38bbec484ba, type: 2}
   - {fileID: 11400000, guid: d9aec6818dd12d24c878f96cae364d2f, type: 2}
   - {fileID: 11400000, guid: 674c61badd7cef24f9460dc7936a67ff, type: 2}
@@ -23,3 +24,5 @@ MonoBehaviour:
   questType: 1
   hasCamp: 0
   questMode: 2
+  expBase: 50
+  expMultiplier: 20

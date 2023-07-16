@@ -32,7 +32,7 @@ MonoBehaviour:
   jobExp: 0
   skillPts: 0
   charLvl: 1
-  charNameStr: Abbas The Skirmisher
+  charNameStr: Abbas
   availOfChar: 1
   stateOfChar: 2
   fameBehavior: 6
@@ -193,14 +193,14 @@ MonoBehaviour:
   - AttribName: 20
     currValue: 1
     baseValue: 0
-    desc: max Armor
+    desc: Percentage value to mitigate incoming Dark damage.
     minLimit: 0
     maxLimit: 100
     isClamped: 0
   - AttribName: 21
     currValue: 1
     baseValue: 0
-    desc: Dmg max
+    desc: Percentage value to mitigate incoming Dark damage.
     minLimit: 0
     maxLimit: 100
     isClamped: 0

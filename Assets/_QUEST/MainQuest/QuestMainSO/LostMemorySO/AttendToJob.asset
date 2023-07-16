@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objName: 3
   objNameStr: Attend to Job and see Khalid after
-  objState: 3
+  objState: 1
+  IsQNode: 0
   locationName: 0
   landscapeName: 0
   distanceInDays: 0

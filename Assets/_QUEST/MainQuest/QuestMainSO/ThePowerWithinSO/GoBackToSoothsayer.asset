@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objName: 8
   objNameStr: Go Back the Soothdayer
-  objState: 1
+  objState: 3
+  IsQNode: 0
   locationName: 0
   landscapeName: 0
   distanceInDays: 0

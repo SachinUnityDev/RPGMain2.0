@@ -497,8 +497,24 @@ namespace Common
 
             charDiedinLastTurn.Clear();
         }
+        public string GetCharName(CharNames charName)
+        {
+            CharacterSO charSO = CharService.Instance.allCharSO.GetCharSO(charName);
+            if (charSO != null)
+                return charSO.charNameStr;
+            else
+                return "";
+        }
 
-#endregion
+        public string GetNPCName(NPCNames npcName)
+        {
+            NPCSO npcSO = CharService.Instance.allNpcSO.GetNPCSO(npcName);
+            if (npcSO != null)
+                return npcSO.npcNameStr;
+            else
+                return "";
+        }
+        #endregion
     }
 }
 

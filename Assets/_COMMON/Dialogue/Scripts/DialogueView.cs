@@ -334,7 +334,7 @@ namespace Common
 
                     TogglePortrait(leftPortrait, true);
                     TogglePortrait(rightPortrait, false);
-                    charTxt.text = valueTag;
+                    charTxt.text = GetString(valueTag);
                     Debug.Log("TAG DETAILS" + keyTag + "NUMBER" + numTag + "VALUE" + valueTag);
                 }
                 else if (keyTag == SPEAKER_TAG)  // right speaker
@@ -343,7 +343,7 @@ namespace Common
 
                     TogglePortrait(leftPortrait, false);
                     TogglePortrait(rightPortrait, true);
-                    charTxt.text = valueTag;
+                    charTxt.text = GetString(valueTag);
                     Debug.Log("TAG DETAILS" + keyTag + "NUMBER" + numTag + "VALUE" + valueTag);
                 }
             }
@@ -419,6 +419,31 @@ namespace Common
             }
             return sprites;
         }
+
+        string GetString(string name)
+        {
+            string nameStr = name.Trim().ToLower();
+            string charNameStr = ""; 
+            for (int i = 1; i < Enum.GetNames(typeof(CharNames)).Length; i++)
+            {
+                string nameEnum = ((CharNames)i).ToString();
+                if (nameEnum.Trim().ToLower().Contains(nameStr))
+                {
+                    charNameStr = CharService.Instance.GetCharName((CharNames)i);                    
+                }
+            }
+            for (int i = 1; i < Enum.GetNames(typeof(NPCNames)).Length; i++)
+            {
+                string nameEnum = ((NPCNames)i).ToString();
+                if (nameEnum.Trim().ToLower().Contains(nameStr))
+                {
+                    charNameStr = CharService.Instance.GetNPCName((NPCNames)i); 
+                }
+            }
+            return charNameStr;
+        }
+
+
         void TogglePortrait(GameObject portGo, bool toggle)
         {
             if (toggle)

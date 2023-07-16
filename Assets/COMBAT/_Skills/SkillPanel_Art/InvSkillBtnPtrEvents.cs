@@ -142,7 +142,7 @@ namespace Common
         {
             float width = skillCardGO.GetComponent<RectTransform>().rect.width;
             float height = skillCardGO.GetComponent<RectTransform>().rect.height;
-            GameObject Canvas = GameObject.FindWithTag("MainCanvas");
+            GameObject Canvas = GameObject.FindWithTag("TownCanvas");
             Canvas canvasObj = Canvas.GetComponent<Canvas>();
             Vector3 offSetFinal = (offset + new Vector3(width / 2, -height / 2, 0))*canvasObj.scaleFactor; 
             Vector3 pos = transform.position + offSetFinal;

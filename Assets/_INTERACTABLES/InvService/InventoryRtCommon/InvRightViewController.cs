@@ -238,7 +238,7 @@ namespace Interactables
         {
             if (!result && itemsDragDrop.itemDragged.invSlotType == SlotType.CommonInv)
             {
-                Debug.Log(result + " Drag fail result Invoked ");
+                Debug.Log(result + " Drag fail result Invoked Comm Inv");
                 Transform slotParent = itemsDragDrop.slotParent;
                 itemsDragDrop.transform.DOMove(slotParent.position, 0.1f);
 

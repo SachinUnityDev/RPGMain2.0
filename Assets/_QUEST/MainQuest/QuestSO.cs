@@ -28,6 +28,10 @@ namespace Quest
         public bool hasCamp;
         public QuestMode questMode;
 
+        [Header("Exp gained")]
+        public int expBase;
+        public int expMultiplier;
+
         public ObjSO GetObjSO(ObjNames objName)
         {
             int index =

@@ -20,9 +20,6 @@ namespace Common
         [SerializeField] GameObject draggedGO;
         [SerializeField] ItemsDragDrop itemsDragDrop;
 
-        //[Header("RIGHT CLICK CONTROLs")]
-        //public List<ItemActions> rightClickActions = new List<ItemActions>();
-        //public bool isRightClicked = false;
         public void OnDrop(PointerEventData eventData)
         {
             draggedGO = eventData.pointerDrag;
@@ -172,8 +169,6 @@ namespace Common
                 InvService.Instance.invMainModel.excessInvItems.Add(item); // directly added to prevent stackoverflow
                 InvService.Instance.invMainModel.excessInvCount++;
             }
-
-
             RefreshImg(item);
             RefreshSlotTxt();
         }

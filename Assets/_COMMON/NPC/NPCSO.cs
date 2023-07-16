@@ -15,6 +15,7 @@ namespace Town
     {
         public int npcID;
         public NPCNames npcName;
+        public string npcNameStr;
         public GameObject npcPrefab;  // change to prefab 
         public Sprite npcSprite;
         public Sprite npcHexPortrait;
@@ -28,20 +29,30 @@ namespace Town
 
         public List<WeeklyItemInStock> weeklyItemStock = new List<WeeklyItemInStock>();
 
-
-        private void Awake()
+        public List<ItemDataWithQty> GetItemStock(int weekSeq)
         {
-            if(npcName == NPCNames.AmishTheMerchant)
+            List<ItemDataWithQty> result = new List<ItemDataWithQty>();
+            foreach (WeeklyItemInStock weekItemStock in weeklyItemStock)
             {
-                //for (int i = 0; i < 4; i++)
-                //{
-                //    ItemDataLs itemDataLs = new ItemDataLs()
-                //}
-
-
+                if (weekItemStock.weekSeq == weekSeq)
+                {
+                    foreach (ItemDataLs itemDataLs in weekItemStock.itemDataLs)
+                    {
+                        int itemName =
+                            itemDataLs.itemName.GetItemName(itemDataLs.itemType);
+                        ItemData itemData = new ItemData(itemDataLs.itemType, itemName);
+                        ItemDataWithQty itemQty = new ItemDataWithQty(itemData, itemDataLs.qty);
+                        result.Add(itemQty);
+                    }
+                }
             }
+            return result;
         }
+
+
     }
+
+
 
     [Serializable]
     public class WeeklyItemInStock

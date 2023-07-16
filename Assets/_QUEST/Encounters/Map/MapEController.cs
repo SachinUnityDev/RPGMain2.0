@@ -83,7 +83,7 @@ namespace Quest
         {
             if (Input.GetKeyDown(KeyCode.C))
             {
-              //  ShowMapE(MapENames.BuffaloStampede);
+                ShowMapE(null,MapENames.BuffaloStampede);
             }
         }
 

@@ -377,7 +377,9 @@ namespace Interactables
                 case ItemType.RelicGewgaws:
                     break;
                 case ItemType.Pouches:
+                     
                     break;
+                
                 default:
                     break;
 
@@ -519,7 +521,7 @@ namespace Interactables
             if (Input.GetKeyDown(KeyCode.J))
             {
                 InitItemToInv(SlotType.CommonInv, ItemType.PoeticGewgaws, (int)PoeticGewgawNames.GlovesLegacyOfTheSpida,
-     CauseType.Items, 2);
+                CauseType.Items, 2);
                 InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionNames.HealthPotion,
                     CauseType.Items, 2);
                 InitItemToInv(SlotType.CommonInv, ItemType.Herbs, (int)HerbNames.Hemp,
@@ -546,12 +548,12 @@ namespace Interactables
 
     public class CostData
     {
-        public Currency cost;
+        public Currency baseCost;
         public float fluctuation;
 
         public CostData(Currency cost, float fluctuation)
         {
-            this.cost = cost;
+            this.baseCost = cost;
             this.fluctuation = fluctuation;
         }
     }

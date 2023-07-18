@@ -2,6 +2,7 @@ using Interactables;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Town;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -20,6 +21,9 @@ namespace Common
         [SerializeField] GameObject draggedGO;
         [SerializeField] ItemsDragDrop itemsDragDrop;
 
+        [Header("Trade View")]
+        TradeView tradeView;
+        TradeScrollView TradeScrollView; 
         public void OnDrop(PointerEventData eventData)
         {
             draggedGO = eventData.pointerDrag;
@@ -64,6 +68,13 @@ namespace Common
           
         }
 
+
+        public void InitTradeScrollSlot(TradeView tradeView, TradeScrollView tradeScrollView)
+        {
+            this.tradeView= tradeView;  
+            this.TradeScrollView = tradeScrollView;
+        }
+
         #region I-SLOTABLE 
         public void ClearSlot()
         {
@@ -104,7 +115,9 @@ namespace Common
                 return;
             }
             Iitems item = ItemsInSlot[0];
-            InvService.Instance.invMainModel.RemoveItemFrmExcessInv(item);  // ITEM REMOVED FROM INV MAIN MODEL HERE
+            
+
+           // InvService.Instance.invMainModel.RemoveItemFrmExcessInv(item);  // ITEM REMOVED FROM INV MAIN MODEL HERE
             ItemsInSlot.Remove(item);
             itemCount--;
             if (ItemsInSlot.Count >= 1)
@@ -166,11 +179,16 @@ namespace Common
             itemCount++;
             if (onDrop)
             {
-                InvService.Instance.invMainModel.excessInvItems.Add(item); // directly added to prevent stackoverflow
-                InvService.Instance.invMainModel.excessInvCount++;
+                //InvService.Instance.invMainModel.excessInvItems.Add(item); // directly added to prevent stackoverflow
+                //InvService.Instance.invMainModel.excessInvCount++;
             }
             RefreshImg(item);
             RefreshSlotTxt();
+        }
+        void MoveItem2TradeSelect()
+        {
+            tradeView.tradeSelectView.Add2EmptyOrFirstSelectSlot(ItemsInSlot); 
+            RemoveAllItems();   
         }
         void RefreshImg(Iitems item)
         {
@@ -228,24 +246,24 @@ namespace Common
             {
                 if (item != null)
                 {
-                    // sell one item 
+                    MoveItem2TradeSelect();
                 }
             }
             if (eventData.button == PointerEventData.InputButton.Left)
             {
-                if (Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl)
-                    && InvService.Instance.excessInvViewController.gameObject.activeInHierarchy)
-                {
-                    if (ItemsInSlot.Count == 0) return;
+                //if (Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl)
+                //    && InvService.Instance.excessInvViewController.gameObject.activeInHierarchy)
+                //{
+                //    if (ItemsInSlot.Count == 0) return;
 
-                    if (item != null)
-                    {
-                        if (InvService.Instance.invMainModel.AddItem2CommInv(item))
-                        {
-                            RemoveItem();
-                        }
-                    }
-                }
+                //    if (item != null)
+                //    {
+                //        if (InvService.Instance.invMainModel.AddItem2CommInv(item))
+                //        {
+                //            RemoveItem();
+                //        }
+                //    }
+                //}
             }
 
             if (eventData.button == PointerEventData.InputButton.Left)
@@ -285,11 +303,11 @@ namespace Common
 
         public bool SplitItem2EmptySlot(Iitems item, bool onDrop = true)
         {
-            if (IsEmpty())
-            {
-                AddItemOnSlot(item, onDrop);
-                return true;
-            }
+            //if (IsEmpty())
+            //{
+            //    AddItemOnSlot(item, onDrop);
+            //    return true;
+            //}
             return false;
         }
         #endregion

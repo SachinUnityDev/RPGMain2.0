@@ -58,7 +58,6 @@ namespace Interactables
     [Serializable]
     public class ItemModel  // all the items held by chars
     {
-
         [Header("Gem Socketing")]
         public CharNames charName;
         public Iitems[] divItemsSocketed = new Iitems[2];

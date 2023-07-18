@@ -19,7 +19,7 @@ namespace Common
        // public event Action<DayName> OnCalendarDayStart;  // to be remove and incorported
         public event Action<int> OnStartOfCalDay;// broadcasts day inthe game 
         public event Action<int> OnStartOfNight;
-        public event Action<WeekEventsName> OnStartOfTheWeek;
+        public event Action<WeekEventsName, int> OnStartOfTheWeek;
         public event Action<MonthName> OnStartOfTheMonth;
         public event Action<TimeState> OnChangeTimeState;
 
@@ -127,6 +127,8 @@ namespace Common
 
                 calendarUIController.UpdateWeekPanel(currentWeek);
                 currDayName = (DayName)1;
+                On_StartOfTheWeek((WeekEventsName)currentWeek); 
+
             }
 
         }
@@ -177,7 +179,7 @@ namespace Common
         }
         public void On_StartOfTheWeek(WeekEventsName weekName)
         {
-            OnStartOfTheWeek?.Invoke(weekName);
+            OnStartOfTheWeek?.Invoke(weekName, weekCounter);
         }
 
         public void On_StartOfTheMonth(MonthName monthName)

@@ -2,6 +2,7 @@ using Interactables;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Town;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI; 
@@ -23,6 +24,10 @@ namespace Common
         [Header("RIGHT CLICK CONTROLs")]
         public List<ItemActions> rightClickActions = new List<ItemActions>();
         public bool isRightClicked = false;
+
+        [Header("Global var")]
+        [SerializeField] TradeSelectView tradeSelectView;
+     
         public void OnDrop(PointerEventData eventData)
         {
             draggedGO = eventData.pointerDrag;
@@ -37,9 +42,8 @@ namespace Common
                 else
                 {
                     iSlotable islot = itemsDragDrop.iSlotable;
-
                     if (islot != null
-                         && (islot.slotType == SlotType.TrophyScrollSlot
+                         && (islot.slotType == SlotType.TrophyScrollSlot // dropped from trade Scroll
                                                 && islot.ItemsInSlot.Count > 0))
                     {
                         int count = islot.ItemsInSlot.Count;
@@ -68,6 +72,13 @@ namespace Common
             InvService.Instance.commInvViewController.CloseRightClickOpts();
         }
 
+        public void InitSelectSlot(TradeSelectView tradeSelectView)
+        {
+            this.tradeSelectView = tradeSelectView;
+            
+           
+        }
+
         #region I-SLOTABLE 
         public void ClearSlot()
         {
@@ -89,7 +100,6 @@ namespace Common
             else
                 return false;
         }
-
         public bool isSlotFull(Iitems item, int qty)
         {
             if (IsEmpty())
@@ -109,7 +119,8 @@ namespace Common
                 return;
             }
             Iitems item = ItemsInSlot[0];
-            InvService.Instance.invMainModel.RemoveItemFrmExcessInv(item);  // ITEM REMOVED FROM INV MAIN MODEL HERE
+            tradeSelectView.RemoveItemFrmSelectLs(item);
+           // InvService.Instance.invMainModel.RemoveItemFrmExcessInv(item);  // ITEM REMOVED FROM INV MAIN MODEL HERE
             ItemsInSlot.Remove(item);
             itemCount--;
             if (ItemsInSlot.Count >= 1)
@@ -137,11 +148,11 @@ namespace Common
             else
                 return true;
         }
-        public bool AddItem(Iitems item, bool onDrop = true)
+        public bool AddItem(Iitems item, bool onDropOrRtClick = true)
         {
             if (IsEmpty())
             {
-                AddItemOnSlot(item, onDrop);
+                AddItemOnSlot(item, onDropOrRtClick);
                 return true;
             }
             else
@@ -150,7 +161,7 @@ namespace Common
                 {
                     if (ItemsInSlot.Count < item.maxInvStackSize)  // SLOT STACK SIZE 
                     {
-                        AddItemOnSlot(item, onDrop);
+                        AddItemOnSlot(item, onDropOrRtClick);
                         return true;
                     }
                     else
@@ -161,23 +172,23 @@ namespace Common
                 }
                 else   // DIFF ITEM IN SLOT 
                 {
-                    return false;
+                    // remove item and add to the tradeSlot // item Swap
+                    SwapItem2TradeScroll(item);
+                    return true;
                 }
             }
         }
-        void AddItemOnSlot(Iitems item, bool onDrop)
+        void AddItemOnSlot(Iitems item, bool onDropORRtClick)
         {
             ItemsInSlot.Add(item);
             itemCount++;
-            if (onDrop)
+            if (onDropORRtClick)  // can only be added here by drop 
             {
-                InvService.Instance.invMainModel.excessInvItems.Add(item); // directly added to prevent stackoverflow
-                InvService.Instance.invMainModel.excessInvCount++;
+                tradeSelectView.AddItem2SelectLs(item);
             }
             RefreshImg(item);
             RefreshSlotTxt();
         }
-
         void RefreshImg(Iitems item)
         {
             for (int i = 0; i < gameObject.transform.GetChild(0).childCount - 1; i++)
@@ -225,6 +236,17 @@ namespace Common
         }
         #endregion
 
+        public void SwapItem2TradeScroll(Iitems item, bool onDropOrRtClick = true)
+        {
+            for (int i = 0; i < ItemsInSlot.Count; i++)
+            {
+                tradeSelectView.RemoveItemFrmSelectLs(ItemsInSlot[0]);
+                tradeSelectView.tradeView.tradeScrollView.AddItem2InVView(ItemsInSlot[0]);
+            }
+            RemoveAllItems();
+            AddItemOnSlot(item, onDropOrRtClick);
+        }
+
         #region RIGHT CLICK ACTIONS ON INV RELATED
         public void OnPointerClick(PointerEventData eventData)
         {
@@ -234,24 +256,25 @@ namespace Common
             {
                 if (item != null)
                 {
-                    // sell one item 
+                    SwapItem2TradeScroll(item, true);
+                    ClearSlot();
                 }
             }
             if (eventData.button == PointerEventData.InputButton.Left)
             {
-                if (Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl)
-                    && InvService.Instance.excessInvViewController.gameObject.activeInHierarchy)
-                {
-                    if (ItemsInSlot.Count == 0) return;
+                //if (Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl)
+                //    && InvService.Instance.excessInvViewController.gameObject.activeInHierarchy)
+                //{
+                //    if (ItemsInSlot.Count == 0) return;
 
-                    if (item != null)
-                    {
-                        if (InvService.Instance.invMainModel.AddItem2CommInv(item))
-                        {
-                            RemoveItem();
-                        }
-                    }
-                }
+                //    if (item != null)
+                //    {
+                //        if (InvService.Instance.invMainModel.AddItem2CommInv(item))
+                //        {
+                //            RemoveItem();
+                //        }
+                //    }
+                //}
             }
 
             if (eventData.button == PointerEventData.InputButton.Left)
@@ -291,11 +314,11 @@ namespace Common
 
         public bool SplitItem2EmptySlot(Iitems item, bool onDrop = true)
         {
-            if (IsEmpty())
-            {
-                AddItemOnSlot(item, onDrop);
-                return true;
-            }
+            //if (IsEmpty())
+            //{
+            //    AddItemOnSlot(item, onDrop);
+            //    return true;
+            //}
             return false;
         }
         #endregion

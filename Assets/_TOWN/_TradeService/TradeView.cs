@@ -3,125 +3,136 @@ using Interactables;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; 
+using UnityEngine.UI;
 
 namespace Town
 {
-    public class TradeView : MonoBehaviour
+    public class TradeView : MonoBehaviour, IPanel
     {
+        [Header("buy button/ Sell Btn")]
+        public bool isBuyBtnPressed = false;
 
-        [SerializeField] Button tradeBtn;
+        [Header("Trade Btns")]
+        public TradeBtnPtrEvents tradeBtnPtrEvents;
         [SerializeField] Button buyBtn;
-        [SerializeField] Button sellBtn; 
-
+        [SerializeField] Button sellBtn;
         [SerializeField] Button exitBtn;
 
-        [SerializeField] TradeScrollView tradeScrollView;
+
+        [Header(" Trade Scroll")]
+        public TradeScrollView tradeScrollView;
+
+        [Header(" Trade Select")]
+        public TradeSelectView tradeSelectView;
 
         [Header(" Global var")]
         public TradeModel tradeModel;
         public NPCNames npcName;
-        public BuildingNames buildName; 
+        public BuildingNames buildName;
+
 
         private void Start()
-        {
-            tradeBtn.onClick.AddListener(OnTradeBtnPressed); 
+        { 
             buyBtn.onClick.AddListener(OnBuyBtnPressed);
-            sellBtn.onClick.AddListener(OnSellBtnPressed);  
-           // exitBtn.onClick.AddListener(OnExitBtnPressed);
+            sellBtn.onClick.AddListener(OnSellBtnPressed);
+            // exitBtn.onClick.AddListener(OnExitBtnPressed);
+        }
+        public void InitTradeView(NPCNames npcName, BuildingNames buildName)
+        {
+            this.npcName = npcName;
+            gameObject.SetActive(true);
+            tradeSelectView.InitSelectView(npcName, this);
+            FillSellSlots();
+            isBuyBtnPressed = false;
+            tradeBtnPtrEvents.InitTradeBtnEvents(this, tradeSelectView); 
         }
 
         #region BUTTONS RESPONSES
 
-        void OnTradeBtnPressed()
-        {
-           // complete transactions in trade slots
-          
-        }
         void OnBuyBtnPressed()
         {
-          // buy btn pressed 
-          // clear items in tradebox , Fill stock inv in panel below 
-          FillBuySlots();
+            isBuyBtnPressed = true;
+            FillBuySlots();
         }
         void OnSellBtnPressed()
         {
+            isBuyBtnPressed = false;
             FillSellSlots();
-            // clear items in tradebox , Fill stash and Main ...items which are accepted by NPC
-            // inv in panel below 
         }
         void OnExitBtnPressed()
         {
             // clear trade box 
             // reset to buy
         }
-        #endregion
 
-        public void InitTradeView(NPCNames npcName, BuildingNames buildName)
+        public void OnTradePressed()
         {
-            // get stock Inv npcModel, 
-            // get stock of the NPC for buy(below) panel slots
-            // get Abbas.. stash and main Inv items that are accepted by the NPC
-            // fill to sell Panel slots
-            this.npcName = npcName; 
-            gameObject.SetActive(true);
-            FillSellSlots(); 
+            if(isBuyBtnPressed)
+            {
+                // subtract money from player inv 
+                EcoServices.Instance.DebitPlayerInv(tradeSelectView.netVal);    
+            }
+            else
+            {
+                EcoServices.Instance.AddMoney2PlayerInv(tradeSelectView.netVal);
+            }
+            tradeSelectView.InitInvMoney();
+            tradeSelectView.InitTransactCurrViews();
+            tradeSelectView.OnTradePressed();
         }
+
+        #endregion
 
         void FillBuySlots()
         {
             // get  Slots 
             tradeModel = TradeService.Instance.tradeController.GetTradeModel(npcName);
-
+            tradeSelectView.ClearSlotView();
             if (tradeScrollView != null && tradeModel != null)
             {
                 tradeScrollView.ClearSlotView();
-                tradeScrollView.InitSlotView(tradeModel.allItems);
-            }   
+                tradeScrollView.InitSlotView(tradeModel.allItems, this);
+            }
             else
-                Debug.Log("Trade Scroll view n trade Model not FOUND"); 
+                Debug.Log("Trade Scroll view n trade Model not FOUND");
 
         }
         void FillSellSlots()
         {
             List<Iitems> commInvItems = InvService.Instance.invMainModel.commonInvItems;
             // sort out items that do not confirm to the NPC
-            
+            tradeSelectView.ClearSlotView();
             if (tradeScrollView != null)
             {
                 tradeScrollView.ClearSlotView();
-                tradeScrollView.InitSlotView(commInvItems);
+                tradeScrollView.InitSlotView(commInvItems, this);
             }
-                
-        }
-
-        void FillTradeBox()
-        {
 
         }
-     
+
+
         void OnItemsPurchased()
         {
-           // check items space availablity in the main inv and stash inv
-           // if available then completed purchase
-           // subtract money in selected money bag (Stash or mainInv)
-           // 
+
         }
         void OnItemsSold()
         {
 
         }
 
+        public void Load()
+        {
+            
+        }
+
+        public void UnLoad()
+        {
+            
+        }
+
+        public void Init()
+        {
+           
+        }
     }
-
-    public enum TradeState
-    {
-        None, 
-        BuySelect, 
-        SellSelect, 
-        TradeCompleted, 
-        TradeCancelled, 
-    }
-
-
 }

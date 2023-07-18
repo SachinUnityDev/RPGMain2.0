@@ -3504,7 +3504,7 @@ MonoBehaviour:
     dialogueTitle: Meet Khalid
     npcName: 10
     charName: 0
-    isLocked: 0
+    isLocked: 1
     isRepeatable: 0
     isSkippable: 1
     gameState: 1

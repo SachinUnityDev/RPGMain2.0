@@ -29,9 +29,9 @@ namespace Town
 
         public List<WeeklyItemInStock> weeklyItemStock = new List<WeeklyItemInStock>();
 
-        public List<ItemDataWithQty> GetItemStock(int weekSeq)
+        public List<ItemDataWithQtyNPrice> GetItemStock(int weekSeq)
         {
-            List<ItemDataWithQty> result = new List<ItemDataWithQty>();
+            List<ItemDataWithQtyNPrice> result = new List<ItemDataWithQtyNPrice>();
             foreach (WeeklyItemInStock weekItemStock in weeklyItemStock)
             {
                 if (weekItemStock.weekSeq == weekSeq)
@@ -41,7 +41,7 @@ namespace Town
                         int itemName =
                             itemDataLs.itemName.GetItemName(itemDataLs.itemType);
                         ItemData itemData = new ItemData(itemDataLs.itemType, itemName);
-                        ItemDataWithQty itemQty = new ItemDataWithQty(itemData, itemDataLs.qty);
+                        ItemDataWithQtyNPrice itemQty = new ItemDataWithQtyNPrice(itemData, itemDataLs.qty);
                         result.Add(itemQty);
                     }
                 }
@@ -83,7 +83,7 @@ namespace Town
         public MealNames mealName;
         public SagaicGewgawNames sagaicName;
         public PoeticGewgawNames poeticName;
-        public Pouches pouchesName; 
+       
 
         public int GetItemName(ItemType itemType)
         {
@@ -126,9 +126,7 @@ namespace Town
                 case ItemType.PoeticGewgaws:
                     return (int)poeticName;                    
                 case ItemType.RelicGewgaws:
-                    return (int)0; 
-                case ItemType.Pouches:
-                    return (int)pouchesName;                     
+                    return (int)0;                                 
                 case ItemType.LoreScroll:
                     return (int)0;
                 default:

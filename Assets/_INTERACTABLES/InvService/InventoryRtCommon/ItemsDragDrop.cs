@@ -183,6 +183,7 @@ namespace Interactables
             clone = Instantiate(this.gameObject);
             clone.transform.SetParent(slotParent);
             RectTransform cloneRect = clone.GetComponent<RectTransform>();
+            cloneRect.localPosition= Vector3.zero;
             cloneRect.anchoredPosition = Vector3.zero;
             cloneRect.localScale = Vector3.one;
             //clone.GetComponent<CanvasGroup>().blocksRaycasts = false; 

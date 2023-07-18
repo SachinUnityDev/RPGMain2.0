@@ -22,15 +22,17 @@ namespace Town
 
         [SerializeField] int index;
         List<Iitems> allItems;
-        [SerializeField] int maxSlots;  
+        [SerializeField] int maxSlots;
+        TradeView tradeView;
         private void Start()
         {
             InvService.Instance.OnDragResult += OnDragResult2TradeScroll;
             leftBtn.onClick.AddListener(OnLeftBtnPressed); 
             rightBtn.onClick.AddListener(OnRightBtnPressed);
         }
-        public void InitSlotView(List<Iitems> allItems)
+        public void InitSlotView(List<Iitems> allItems, TradeView tradeView)
         {
+            this.tradeView= tradeView;
             ClearSlotView();
             this.allItems = allItems;
             
@@ -40,8 +42,26 @@ namespace Town
                 item.invSlotType = SlotType.TradeScrollSlot; 
             }
             maxSlots = FilledSlotCount()/4;
-            if (maxSlots == 0)
-                maxSlots = 1; 
+            if (FilledSlotCount() % 4 !=0)
+                maxSlots += 1;
+
+            if (FilledSlotCount() <= 4)
+            {
+                rightBtn.gameObject.SetActive(false);
+                leftBtn.gameObject.SetActive(false);
+            }
+            else
+            {
+                rightBtn.gameObject.SetActive(true);
+                leftBtn.gameObject.SetActive(true);
+            }
+
+            foreach (Transform child in transform)
+            {
+                child.GetComponent<TradeScrollItemSlotController>().InitTradeScrollSlot(tradeView, this); 
+            }
+            index = 0;
+            PopulateSlots();
         }
 
         public void ClearSlotView()
@@ -56,9 +76,11 @@ namespace Town
         void OnLeftBtnPressed()
         {
             if (Time.time - prevLeftClick < 0.3f) return;
-            if (index <= 0)
+            if (index == 0)
             {
-                index = maxSlots - 1;
+                index = maxSlots-1;
+                //if (index < 0)
+                //    index = 0; 
                 PopulateSlots();
             }
             else
@@ -70,7 +92,7 @@ namespace Town
         void OnRightBtnPressed()
         {
             if (Time.time - prevRightClick < 0.3f) return;
-            if (index <= maxSlots - 1)
+            if (index == maxSlots-1)
             {
                 index = 0;
                 PopulateSlots();

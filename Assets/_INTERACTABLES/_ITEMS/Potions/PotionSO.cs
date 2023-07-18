@@ -13,8 +13,10 @@ namespace Interactables
         public PotionNames potionName;
         public float potionAddict = 0f;
         public int maxInvStackSize;
+        [Header("Cost Data")]
         public Currency cost; 
         public float fluctuation;
+
         public TimeFrame timeFrame;
         public int minCastTime;
         public int maxCastTime;

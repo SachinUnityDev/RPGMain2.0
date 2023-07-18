@@ -130,7 +130,7 @@ namespace Quest
             selectedList.Add(itemBaseWithQty);
             UpdateTickBtnStatus();
         }
-        public void OnSlotDeSelected(ItemBaseWithQty itemBaseWithQty)        
+        public void OnSlotDeSelected(ItemBaseWithQty itemBaseWithQty)
         { 
             selectedList.Remove(itemBaseWithQty);
             UpdateTickBtnStatus();

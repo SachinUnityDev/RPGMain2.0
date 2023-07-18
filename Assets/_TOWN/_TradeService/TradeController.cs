@@ -15,7 +15,12 @@ namespace Common
         [SerializeField] int weekSeq; 
         void Start()
         {
-
+            CalendarService.Instance.OnStartOfTheWeek += (WeekEventsName week, int weekCounter) =>
+            {
+                int weekSeq = (int)weekCounter % 3;
+                if (weekSeq == 0) weekSeq = 3; 
+                UpdateWeekStock(weekSeq);
+            };  
         }
 
         public void InitController(AllNPCSO allNPCSO)

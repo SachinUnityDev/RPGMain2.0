@@ -1,0 +1,263 @@
+using Common;
+using DG.Tweening;
+using Interactables;
+using Quest;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using TMPro;
+using Town;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Common
+{
+    public class TradeSelectView : MonoBehaviour
+    {
+        List<Iitems> allItems;
+        [SerializeField] TradeModel tradeModel;
+        [SerializeField] NPCNames npcName;
+
+        public TradeView tradeView;
+
+        [Header("Inv Money")]
+        [SerializeField] TextMeshProUGUI moneyInInvTxt; 
+        [SerializeField] DisplayCurrency moneyInInv;
+
+        [Header("Transact Money")]
+        [SerializeField] TextMeshProUGUI transactMoneyTxt;
+        [SerializeField] DisplayCurrency transactMoney; // Demari to pay Denari to Get
+
+        [Header(" global var")]
+        public Currency netVal = new Currency(0,0) ; 
+        public Currency invMoney= new Currency(0,0) ;
+
+        private void Start()
+        {
+            InvService.Instance.OnDragResult += OnDragResult2TradeSelect;         
+        }
+
+        #region ITEM SELECT
+        public void InitSelectView(NPCNames npcName, TradeView tradeView)
+        {
+            this.tradeView = tradeView;
+            ClearSlotView();
+            this.npcName= npcName;         
+            tradeModel = TradeService.Instance.tradeController.GetTradeModel(npcName); 
+            ClearSlotView();
+            foreach (Transform child in transform)
+            {
+                child.GetComponent<TradeSelectItemSlotController>().InitSelectSlot(this); 
+            }
+            InitInvMoney();
+        } 
+        public void Add2EmptyOrFirstSelectSlot(List<Iitems> items)
+        {
+            bool slotFound = false;
+            foreach (Transform child in transform)
+            {   
+                TradeSelectItemSlotController selectSlot =
+                                    child.GetComponent<TradeSelectItemSlotController>();
+                if (selectSlot.IsEmpty())
+                {
+                    foreach(Iitems item in items)
+                    {
+                       slotFound =  selectSlot.AddItem(item, true);                       
+                    }
+                    if (slotFound) break;   
+                }  
+            }
+            if(!slotFound)
+            {
+                TradeSelectItemSlotController slotController =
+                    transform.GetChild(0).GetComponent<TradeSelectItemSlotController>();
+                slotController.SwapItem2TradeScroll(items[0], true);
+                for (int i = 0; i < items.Count-1; i++)
+                {
+                    slotController.AddItem(items[0]); 
+                }
+            }
+           
+        }
+        public void AddItem2SelectLs(Iitems item)
+        {
+            item.invSlotType = SlotType.TradeSelectSlot;
+            tradeModel.allSelectItems.Add(item);
+            OnItemSelected();  
+        }
+        public void RemoveItemFrmSelectLs(Iitems item)
+        {
+            item.invSlotType = SlotType.TradeScrollSlot;
+            tradeModel.allSelectItems.Remove(item);
+            OnItemDeSelected();
+        }
+        public void ClearSlotView()
+        {
+            foreach (Transform child in transform)
+            {
+                child.GetComponent<iSlotable>().ClearSlot();
+            }
+            InitTransactCurrViews();
+        }
+        public void OnDragResult2TradeSelect(bool result, ItemsDragDrop itemsDragDrop)
+        {
+            // Handle drag fail
+            if (!result && itemsDragDrop.itemDragged.invSlotType == SlotType.TradeSelectSlot)
+            {
+                Debug.Log(result + "Drag fail result Invoked trade Select");
+                Transform slotParent = itemsDragDrop.slotParent;
+                itemsDragDrop.transform.DOMove(slotParent.position, 0.1f);
+
+                itemsDragDrop.transform.SetParent(slotParent);
+                RectTransform cloneRect = itemsDragDrop.GetComponent<RectTransform>();
+                cloneRect.anchoredPosition = Vector3.zero;
+                cloneRect.localScale = Vector3.one;
+
+                itemsDragDrop.iSlotable.AddItem(itemsDragDrop.itemDragged);
+            }
+        }
+        public int FilledSlotCount()
+        {
+            int count = 0;
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Transform child = transform.GetChild(i);
+                iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
+                if (!iSlotable.IsEmpty())
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        #endregion
+
+        public void InitTransactCurrViews()
+        {
+            transactMoney.Display(new Currency(0, 0));
+            if(tradeView.isBuyBtnPressed)
+                transactMoneyTxt.text = "Denari to get";
+            else
+                transactMoneyTxt.text = "Denari to Pay";
+        }
+
+        public void OnItemDeSelected()
+        {
+            if(tradeModel.allSelectItems.Count == 0)
+            {
+                InitTransactCurrViews();
+                return;
+            }                
+            OnItemSelected();
+        }
+
+        public void OnItemSelected()
+        {
+            if(tradeView.isBuyBtnPressed)
+            {
+                FillBuyValue();
+            }
+            else
+            {
+                FillSellValue();
+            }
+            tradeView.tradeBtnPtrEvents.OnItemSelectORUnSelect(); 
+        }
+       void FillSellValue()
+        {
+            int Val =0; 
+            foreach (Iitems item in tradeModel.allSelectItems)
+            {
+                CostData costData =
+                        ItemService.Instance.GetCostData(item.itemType, item.itemName);
+                int bronzifiedCurr = costData.baseCost.BronzifyCurrency() / 2; // 1/2 sell factor
+                Val += bronzifiedCurr;
+            }   
+            netVal = new Currency(0, Val); 
+            transactMoney.Display(netVal);
+            transactMoneyTxt.text = "Denari to Receive";
+        }
+       void FillBuyValue()
+        {
+            netVal = new Currency(0, 0);          
+            foreach (Iitems item in tradeModel.allSelectItems)
+            {
+                Currency currency = tradeModel
+                                        .GetCurrPrice(new ItemData(item.itemType, item.itemName));
+                netVal = netVal.AddCurrency(currency);
+            }
+            transactMoney.Display(netVal);
+            transactMoneyTxt.text = "Denari to Pay";
+        }
+
+       public void InitInvMoney()
+        {
+            invMoney = EcoServices.Instance.GetMoneyAmtInPlayerInv();
+            moneyInInv.Display(invMoney);
+        }
+       public bool IsTradeClickable()
+        {
+            int invBronzify = invMoney.BronzifyCurrency();
+            int netvalBronzify = netVal.BronzifyCurrency();
+            if (invBronzify >= netvalBronzify)
+                return true; 
+            else return false;  
+        }
+
+       public void  OnTradePressed()
+       {
+            
+            if(tradeView.isBuyBtnPressed)
+            {                
+                tradeModel.OnSoldFrmStock();              
+            }
+            else
+            {
+                foreach (Iitems item in tradeModel.allSelectItems)
+                {
+                    InvService.Instance.invMainModel.RemoveItemFrmCommInv(item);
+                }
+            }
+            ClearSlotView();
+        } 
+
+
+    }
+}
+
+//public bool AddItem2InVView(Iitems item, bool onDrop = true)  // ACTUAL ADDITION 
+//{
+//    bool slotFound = false;
+//    for (int i = 0; i < transform.childCount; i++)
+//    {
+//        Transform child = transform.GetChild(i);
+//        iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
+//        if (iSlotable.ItemsInSlot.Count > 0)
+//        {
+//            if (iSlotable.ItemsInSlot[0].itemName == item.itemName)
+//            {
+//                if (iSlotable.AddItem(item, onDrop))
+//                {
+//                    slotFound = true;
+//                    return slotFound;
+//                }
+//            }
+//        }
+//    }
+//    if (!slotFound)
+//    {
+//        for (int i = 0; i < transform.childCount; i++)
+//        {
+//            Transform child = transform.GetChild(i);
+//            iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
+//            if (iSlotable.AddItem(item, onDrop))
+//            {
+//                slotFound = true;
+//                return slotFound;
+//            }
+//        }
+//    }
+//    return slotFound;
+//}

@@ -66,8 +66,8 @@ namespace Interactables
                         CostData costData = 
                         ItemService.Instance.GetCostData(item.itemType, item.itemName);
                         // add to play Eco and dispose item
-                        int silver = (costData.cost.silver / 3) * count; 
-                        int bronze = (costData.cost.bronze / 3) * count;
+                        int silver = (costData.baseCost.silver / 3) * count; 
+                        int bronze = (costData.baseCost.bronze / 3) * count;
                         Currency itemSaleVal = new Currency(silver, bronze).RationaliseCurrency();
 
                         EcoServices.Instance.AddMoney2PlayerInv(itemSaleVal); 

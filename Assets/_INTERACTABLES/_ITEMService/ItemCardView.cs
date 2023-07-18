@@ -69,6 +69,8 @@ namespace Interactables
 
             
         }
+        
+        
         void FillMid(List<string> allLines)
         {
             int i = 0; 
@@ -118,8 +120,7 @@ namespace Interactables
                 case ItemType.GenGewgaws:
                     GenGewgawSO genGewgawSO = ItemService.Instance.GetGenGewgawSO((GenGewgawNames)item.itemName);
                     if (genGewgawSO != null)
-                    {
-                       
+                    {  
                         crownTrans.gameObject.SetActive(true);
                         resHeading.text = genGewgawSO.GetRestrictionsType(); 
                         resLS.text = genGewgawSO.GetRestrictionLs();
@@ -426,6 +427,9 @@ namespace Interactables
             }
 
         }
+
+
+
 
     }
 }

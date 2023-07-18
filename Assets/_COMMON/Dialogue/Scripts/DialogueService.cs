@@ -169,7 +169,7 @@ namespace Common
         public void ShowDialogueLs(CharNames charName, NPCNames npcName, Transform parent)
         {
             InitDiaView(parent);
-            dialogueView.ShowDialogueList(CharNames.None, NPCNames.KhalidTheHealer);
+            dialogueView.ShowDialogueList(CharNames.None, NPCNames.Khalid);
         }
   
 

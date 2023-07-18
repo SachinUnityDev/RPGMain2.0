@@ -15,6 +15,7 @@ MonoBehaviour:
   npcID: 0
   npcName: 9
   npcNameStr: Kamila
+  classTypes: 8
   npcPrefab: {fileID: 0}
   npcSprite: {fileID: 21300000, guid: 61e8c01c4fb9370449b720963c0905f1, type: 3}
   npcHexPortrait: {fileID: 21300000, guid: e6e73ab738c7a084492392581a3c152a, type: 3}

@@ -15,6 +15,7 @@ MonoBehaviour:
   npcID: 0
   npcName: 10
   npcNameStr: Khalid
+  classTypes: 9
   npcPrefab: {fileID: 0}
   npcSprite: {fileID: 21300000, guid: b8aa39fceeef2f240ad2119e9f3dddf4, type: 3}
   npcHexPortrait: {fileID: 21300000, guid: d71b96c6bb3f8c94c9063363a3d2ce22, type: 3}
@@ -47,7 +48,6 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
     - itemType: 3
       genGawgawQ: 0
       qty: 10
@@ -68,4 +68,3 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0

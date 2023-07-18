@@ -766,6 +766,7 @@ GameObject:
   - component: {fileID: 1761031931498186547}
   - component: {fileID: 1761031931498186546}
   - component: {fileID: 1761031931498186556}
+  - component: {fileID: 3492821549582542813}
   m_Layer: 5
   m_Name: DialoguePanel
   m_TagString: Untagged
@@ -826,10 +827,10 @@ MonoBehaviour:
   leftPortrait: {fileID: 1761031932341015192}
   rightPortrait: {fileID: 1761031932559735815}
   dialogueSO: {fileID: 0}
+  isDialoguePlaying: 0
   fastRevealTime: 2
   slowRevealTime: 1
   escapeCount: 0
-  isDialoguePlaying: 0
   isDialogueOnHighSpeed: 0
   isInteracting: 0
   isTextBoxing: 0
@@ -870,6 +871,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3492821549582542813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761031931498186558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c1849be84ce5744ea24ff9630f05b0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1761031931670737264
 GameObject:
   m_ObjectHideFlags: 0
@@ -2398,7 +2411,7 @@ GameObject:
   - component: {fileID: 1761031932525245179}
   - component: {fileID: 1761031932525245156}
   m_Layer: 5
-  m_Name: FwdBtn
+  m_Name: SkipBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

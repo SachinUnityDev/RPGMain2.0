@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcID: 0
   npcName: 5
+  npcNameStr: Belal
+  classTypes: 5
   npcPrefab: {fileID: 0}
   npcSprite: {fileID: 21300000, guid: 52982930506b8f84b90594b5741585f3, type: 3}
   npcHexPortrait: {fileID: 21300000, guid: 529fdeeefd0ea8b468179b32912b6e14, type: 3}
@@ -22,3 +24,5 @@ MonoBehaviour:
   dialoguePortraitUnClicked: {fileID: 21300000, guid: ab8f1180ff5a7174292af69038bddfde,
     type: 3}
   itemTypesAccepted: 02000000100000001100000012000000
+  buildName: 0
+  weeklyItemStock: []

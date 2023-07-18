@@ -18,6 +18,8 @@ namespace Common
         [SerializeField] float lastEscClick = 0f; 
         [SerializeField] GameObject escPanel;
         [SerializeField] bool isEscOpen = false;
+        [SerializeField] bool isEscBlocked = false; 
+
         
         [Header("Notify SO")]
         public AllNotifySO allNotifySO;
@@ -40,6 +42,10 @@ namespace Common
         {
             townCanvas = GameObject.FindWithTag("TownCanvas");
             TogglePanel(escPanel, false);
+        }
+        public void BlockEsc(bool blockEsc)
+        {
+            isEscBlocked= blockEsc;
         }
         public void CloselastPanel()
         {
@@ -229,6 +235,7 @@ namespace Common
 
         private void Update()
         {  
+            if(isEscBlocked) return;
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 GameState gameState = GameService.Instance.gameModel.gameState; 

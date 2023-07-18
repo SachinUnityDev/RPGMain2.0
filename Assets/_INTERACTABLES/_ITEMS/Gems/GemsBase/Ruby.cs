@@ -15,7 +15,7 @@ namespace Interactables
         public SlotType invSlotType { get; set; }
         public TGNames compatibleTg => TGNames.SimpleRing;
         public GenGewgawNames pdtGenGewgawName => GenGewgawNames.RubyRing;
-        public NPCNames mergeManagerNPC => NPCNames.AmishTheMerchant;
+        public NPCNames mergeManagerNPC => NPCNames.Amish;
         public List<int> allBuffs { get; set; } = new List<int>();
         public void OnHoverItem()
         {

@@ -25,6 +25,9 @@ namespace Town
         [Header(" Trade Select")]
         public TradeSelectView tradeSelectView;
 
+        [Header("Trade N Talk Btn View")]
+        public TalkNTradeBtnPtrEvents talkNTradeBtnPtrEvents; 
+
         [Header(" Global var")]
         public TradeModel tradeModel;
         public NPCNames npcName;
@@ -37,14 +40,18 @@ namespace Town
             sellBtn.onClick.AddListener(OnSellBtnPressed);
             // exitBtn.onClick.AddListener(OnExitBtnPressed);
         }
-        public void InitTradeView(NPCNames npcName, BuildingNames buildName)
+        public void InitTradeView(NPCNames npcName, BuildingNames buildName, TalkNTradeBtnPtrEvents talkNTradeBtnPtrEvents)
         {
             this.npcName = npcName;
+            this.talkNTradeBtnPtrEvents= talkNTradeBtnPtrEvents; 
+            this.buildName = buildName;
             gameObject.SetActive(true);
+
             tradeSelectView.InitSelectView(npcName, this);
             FillSellSlots();
             isBuyBtnPressed = false;
-            tradeBtnPtrEvents.InitTradeBtnEvents(this, tradeSelectView); 
+            tradeBtnPtrEvents.InitTradeBtnEvents(this, tradeSelectView);
+            Load(); 
         }
 
         #region BUTTONS RESPONSES
@@ -110,24 +117,15 @@ namespace Town
 
         }
 
-
-        void OnItemsPurchased()
-        {
-
-        }
-        void OnItemsSold()
-        {
-
-        }
-
         public void Load()
         {
-            
+            UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
         }
 
         public void UnLoad()
         {
-            
+            UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
+            talkNTradeBtnPtrEvents.OnDeSelect();
         }
 
         public void Init()

@@ -9,7 +9,7 @@ namespace Town
 {
     public class Minami : NPCBase
     {
-        public override NPCNames nPCNames => NPCNames.MinamiTheSoothsayer;
+        public override NPCNames nPCNames => NPCNames.Minami;
 
 
         public override void NPCInit()

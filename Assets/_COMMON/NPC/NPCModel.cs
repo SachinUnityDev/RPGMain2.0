@@ -11,7 +11,8 @@ namespace Common
     [Serializable]
     public class NPCModel
     {
-        public NPCNames npcName; 
+        public NPCNames npcName;
+        public NPCClassTypes npcClass; 
         [Header("NPC item in stock inv ")]
         public List<NPCWeeklyStockData> allWeeklyStock = new List<NPCWeeklyStockData>();
 

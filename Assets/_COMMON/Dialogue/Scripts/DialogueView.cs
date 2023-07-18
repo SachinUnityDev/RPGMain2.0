@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 namespace Common
 {
-    public class DialogueView : MonoBehaviour
+    public class DialogueView : MonoBehaviour, IPanel
     {
         //tags
         public static event Action<Story> OnCreateStory;  // redundant for INKLE EDITOR 
@@ -17,7 +17,6 @@ namespace Common
         const string CUSTOMCC_TAG = "customchoice";
         const string SPEAKER_TAG = "speaker";
         const string TEXTBOX_TAG = "textbox";
-
         const string DEFINE_TAG = "define";
 
         [Header(" Tags")]
@@ -45,11 +44,15 @@ namespace Common
         [SerializeField] Story story;
         TextRevealer textRevealer;
 
+        [Header("Is DIALOGUE PLAY ON")]
+        [SerializeField] bool isDialoguePlaying = false;
+
         [Header("Global variables")]
         [SerializeField] float fastRevealTime = 0.01f;
         [SerializeField] float slowRevealTime = 4f;
         [SerializeField] int escapeCount = 0;
-        [SerializeField] bool isDialoguePlaying = false;
+
+        
         [SerializeField] bool isDialogueOnHighSpeed = false;
         [SerializeField] bool isInteracting = false;
         [SerializeField] bool isTextBoxing = false;
@@ -64,23 +67,21 @@ namespace Common
         [Header("Skip Btn")]
         [SerializeField] Button skipBtn;
         [SerializeField] bool IsSkipStory;
-
-        [SerializeField] int intCount = 0; 
+        [SerializeField] int intCount = 0;
 
         private void OnEnable()
         {
             dialogueTxt = dialogueParent.GetComponentInChildren<TextMeshProUGUI>();
-            fastFwdBtn = dialogueParent.transform.GetChild(1).GetComponent<Button>();
+           // fastFwdBtn = dialogueParent.transform.GetChild(1).GetComponent<Button>();
             textRevealer = dialogueTxt.GetComponent<TextRevealer>();
             isDialoguePlaying = false;
             IsSkipStory = false;
-            fastFwdBtn.onClick.AddListener(FastFwdPressed);
+            //fastFwdBtn.onClick.AddListener(FastFwdPressed);
             skipBtn.onClick.AddListener(OnSkipBtnPressed); 
-        }
-       
+        }       
         void OnSkipBtnPressed()
         {
-            IsSkipStory = true;
+            EndDialogue();  
             
             Debug.Log("The ENd "); 
         }
@@ -97,7 +98,6 @@ namespace Common
             InitDialogueView();
             DisplayStory();
         }
-
         public void ShowDialogueList(CharNames charName, NPCNames nPCNames)
         {
             dialogueList.SetActive(true);
@@ -106,16 +106,16 @@ namespace Common
                         DialogueService.Instance.GetDialogueModel4CharNPC(charName, nPCNames);
             dialogueList.GetComponent<DialogueListView>().InitDialogueView(lsModel);            
         }
-
         void InitDialogueView()
         {
             escapeCount = 1;
-            isDialoguePlaying = false;
+            isDialoguePlaying = true;
+            UIControlServiceGeneral.Instance.BlockEsc(true);
         }
-
         void DisplayStory()
         {
             if (story == null) return;
+             
             if (story.canContinue)  // dialogue stops when a new tag is detected
             {
                 if (escapeCount > 0)
@@ -144,7 +144,6 @@ namespace Common
                 }
                 if (story.currentChoices.Count >= 1)
                     DisplayChoices();
-
             }
             else
             {
@@ -153,12 +152,16 @@ namespace Common
                     && DialogueService.Instance.allOptions.Count == 0
                      && DialogueService.Instance.allDiverts.Count == 0)
                 {
-                    DialogueService.Instance.On_DialogueEnd();
+                    EndDialogue();
                 }
             }
+        }      
+        void EndDialogue()
+        {
+            isDialoguePlaying = false;
+            UnLoad();
+            DialogueService.Instance.On_DialogueEnd();
         }
-
-      
         void DisplayChoices()
         {
             List<Choice> currentChoices = story.currentChoices;
@@ -208,8 +211,7 @@ namespace Common
             {
                 choiceContainer.GetChild(i).gameObject.SetActive(false);
             }
-        }
-    
+        }    
         void InteractTag()
         {
             tags = story.currentTags;
@@ -252,7 +254,6 @@ namespace Common
                 }
             }
         }
-
         void OnChoiceClick(Choice choice)
         {        
             story.ChooseChoiceIndex(choice.index);
@@ -264,9 +265,7 @@ namespace Common
             RemoveListener();
             DisplayStory();
             DialogueService.Instance.ClearAllList();
-        }
-
-       
+        }       
         void RemoveListener()
         {
             foreach (Transform child in choiceParent.transform.GetChild(0))
@@ -276,23 +275,23 @@ namespace Common
             }
 
         }
-
-        IEnumerator Wait(float time)
-        {
-            yield return new WaitForSeconds(time);
-        }
-
+        //IEnumerator Wait(float time)
+        //{
+        //    yield return new WaitForSeconds(time);
+        //}
         void FastFwdPressed()
         {
+          //  UnLoad();
             // search thru the intract tag and isInteracting stage then print the display tag
-            while (story.canContinue && (!isInteracting || !isTextBoxing))
-            {
-                InteractTag();
-                story.Continue();
-            }
+            //while (story.canContinue )
+            //    //&& (!isInteracting || !isTextBoxing))
+            //{
+            //    InteractTag();
+            //    story.Continue();
+            //}
 
-            if (isInteracting || isTextBoxing)
-                DisplayStory();
+            //if (isInteracting || isTextBoxing)
+            //    DisplayStory();
         }
         public void OnChoicePtrEnter(int index)
         {
@@ -305,14 +304,12 @@ namespace Common
 
 
         }
-
         public void OnChoicePtrExit(int index)
         {
             defineParent.SetActive(false);
             defineParent.GetComponentInChildren<TextMeshProUGUI>().text = "";
 
         }
-
         void TogglePortraitWithSpeakerTags()
         {
             List<string> tags = story.currentTags;
@@ -347,22 +344,12 @@ namespace Common
                     Debug.Log("TAG DETAILS" + keyTag + "NUMBER" + numTag + "VALUE" + valueTag);
                 }
             }
-        }
-
-       
-
-        //void SetHighTypeSpeed(int dist)
-        //{
-        //    escapeCount--; // high speed cut
-        //    textRevealer.RevealTime = 0.1f;
-        //    isDialogueOnHighSpeed = true;
-        //}
+        }   
         void SetLowTypeSpeed(int dist)
         {
             textRevealer.RevealTime = slowRevealTime * dist / 100;
             isDialogueOnHighSpeed = false;
         }
-
         void ToggleDialoguePanelOn(bool isDialogueOn)
         {
 
@@ -387,7 +374,6 @@ namespace Common
                 charTxt.gameObject.SetActive(false);
             }
         }
-
         void SetPortrait(GameObject portrait, string name)
         {
             Sprite[] sprites = GetSprite(name);
@@ -395,7 +381,6 @@ namespace Common
             portrait.transform.GetChild(1).GetComponent<Image>().sprite = sprites[1];
 
         }
-
         Sprite[] GetSprite(string name)
         {
             //can populate a dictionary here for the names found ... else search 
@@ -419,7 +404,6 @@ namespace Common
             }
             return sprites;
         }
-
         string GetString(string name)
         {
             string nameStr = name.Trim().ToLower();
@@ -442,8 +426,6 @@ namespace Common
             }
             return charNameStr;
         }
-
-
         void TogglePortrait(GameObject portGo, bool toggle)
         {
             if (toggle)
@@ -461,17 +443,42 @@ namespace Common
         {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
-            escapeCount = 1; 
-                if (!isDialoguePlaying)  // start a new dialogue only when its not playing
+                escapeCount = 1;
+                if (isDialoguePlaying)  // start a new dialogue only when its not playing
                     DisplayStory();
                 //else if (!isDialogueOnHighSpeed)
                 //    SetHighTypeSpeed(currStrLen);
 
             }
-            if (story != null)
-                ChoicesLen = story.currentChoices.Count;
+            //if (story != null)
+            //    ChoicesLen = story.currentChoices.Count;
+        }
+
+        public void Load()
+        {
+            UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
+        }
+
+        public void UnLoad()
+        {
+            
+            if (!isDialoguePlaying)
+            {
+                UIControlServiceGeneral.Instance.BlockEsc(false);
+                UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);              
+            }
+        }
+
+        public void Init()
+        {
+           
         }
     }
 }
-
+//void SetHighTypeSpeed(int dist)
+//{
+//    escapeCount--; // high speed cut
+//    textRevealer.RevealTime = 0.1f;
+//    isDialogueOnHighSpeed = true;
+//}
 

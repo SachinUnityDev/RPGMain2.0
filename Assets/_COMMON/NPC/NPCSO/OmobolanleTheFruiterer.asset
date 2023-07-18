@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcID: 0
   npcName: 15
+  npcNameStr: Omobolanle
+  classTypes: 14
   npcPrefab: {fileID: 0}
   npcSprite: {fileID: 21300000, guid: 070b4e0d36155fe4bb0c05ac4582c406, type: 3}
   npcHexPortrait: {fileID: 21300000, guid: cbd7962141868a548b08a76ff0f02f29, type: 3}
@@ -27,6 +29,8 @@ MonoBehaviour:
   - weekSeq: 1
     itemDataLs:
     - itemType: 5
+      genGawgawQ: 0
+      qty: 12
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -44,10 +48,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
+    - itemType: 5
       genGawgawQ: 0
       qty: 12
-    - itemType: 5
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -65,10 +68,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
+    - itemType: 5
       genGawgawQ: 0
       qty: 12
-    - itemType: 5
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -86,10 +88,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
+    - itemType: 5
       genGawgawQ: 0
       qty: 12
-    - itemType: 5
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -107,10 +108,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
+    - itemType: 5
       genGawgawQ: 0
       qty: 12
-    - itemType: 5
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -128,10 +128,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
+    - itemType: 5
       genGawgawQ: 0
       qty: 12
-    - itemType: 5
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -149,10 +148,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
+    - itemType: 5
       genGawgawQ: 0
       qty: 12
-    - itemType: 5
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -170,10 +168,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 12
     - itemType: 5
+      genGawgawQ: 0
+      qty: 6
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -191,10 +188,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
+    - itemType: 5
       genGawgawQ: 0
       qty: 6
-    - itemType: 5
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -212,12 +208,11 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 6
   - weekSeq: 2
     itemDataLs:
     - itemType: 5
+      genGawgawQ: 0
+      qty: 12
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -235,10 +230,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
+    - itemType: 5
       genGawgawQ: 0
       qty: 12
-    - itemType: 5
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -256,10 +250,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 12
     - itemType: 5
+      genGawgawQ: 0
+      qty: 16
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -277,10 +270,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
+    - itemType: 5
       genGawgawQ: 0
       qty: 16
-    - itemType: 5
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -298,10 +290,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 16
     - itemType: 5
+      genGawgawQ: 0
+      qty: 12
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -319,10 +310,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 12
     - itemType: 5
+      genGawgawQ: 0
+      qty: 8
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -340,10 +330,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 8
     - itemType: 5
+      genGawgawQ: 0
+      qty: 6
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -361,10 +350,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
+    - itemType: 5
       genGawgawQ: 0
       qty: 6
-    - itemType: 5
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -382,10 +370,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
+    - itemType: 5
       genGawgawQ: 0
       qty: 6
-    - itemType: 5
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -403,12 +390,11 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 6
   - weekSeq: 3
     itemDataLs:
     - itemType: 5
+      genGawgawQ: 0
+      qty: 16
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -426,10 +412,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 16
     - itemType: 5
+      genGawgawQ: 0
+      qty: 12
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -447,10 +432,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
+    - itemType: 5
       genGawgawQ: 0
       qty: 12
-    - itemType: 5
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -468,10 +452,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 12
     - itemType: 5
+      genGawgawQ: 0
+      qty: 16
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -489,10 +472,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 16
     - itemType: 5
+      genGawgawQ: 0
+      qty: 12
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -510,10 +492,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
+    - itemType: 5
       genGawgawQ: 0
       qty: 12
-    - itemType: 5
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -531,10 +512,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 12
     - itemType: 5
+      genGawgawQ: 0
+      qty: 8
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -552,10 +532,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 8
     - itemType: 5
+      genGawgawQ: 0
+      qty: 6
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -573,10 +552,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
+    - itemType: 5
       genGawgawQ: 0
       qty: 6
-    - itemType: 5
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -594,10 +572,9 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
+    - itemType: 5
       genGawgawQ: 0
       qty: 6
-    - itemType: 5
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -615,6 +592,3 @@ MonoBehaviour:
         mealName: 0
         sagaicName: 0
         poeticName: 0
-        pouchesName: 0
-      genGawgawQ: 0
-      qty: 6

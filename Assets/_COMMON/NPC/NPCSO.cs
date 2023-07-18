@@ -16,6 +16,7 @@ namespace Town
         public int npcID;
         public NPCNames npcName;
         public string npcNameStr;
+        public NPCClassTypes classTypes;
         public GameObject npcPrefab;  // change to prefab 
         public Sprite npcSprite;
         public Sprite npcHexPortrait;
@@ -31,6 +32,7 @@ namespace Town
 
         public List<ItemDataWithQtyNPrice> GetItemStock(int weekSeq)
         {
+            
             List<ItemDataWithQtyNPrice> result = new List<ItemDataWithQtyNPrice>();
             foreach (WeeklyItemInStock weekItemStock in weeklyItemStock)
             {
@@ -52,7 +54,7 @@ namespace Town
 
     }
 
-
+   
 
     [Serializable]
     public class WeeklyItemInStock

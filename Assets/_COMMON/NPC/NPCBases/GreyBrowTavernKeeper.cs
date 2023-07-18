@@ -9,7 +9,7 @@ namespace Town
 {
     public class GreyBrowTavernKeeper : NPCBase
     {
-        public override NPCNames nPCNames => NPCNames.GreybrowTheTavernkeeper; 
+        public override NPCNames nPCNames => NPCNames.Greybrow; 
 
 
         public override void NPCInit()

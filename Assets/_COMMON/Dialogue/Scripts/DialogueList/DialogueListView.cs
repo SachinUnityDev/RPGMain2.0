@@ -25,11 +25,13 @@ namespace Common
                     .GetComponent<DialogueListPtrEvents>().InitDialogueLsPtr(allDiaModel[j]); 
                 txt.text = $"{i+1}. " +allDiaModel[j].dialogueTitle;
                 i++; 
+                txt.gameObject.SetActive(true); 
             }
             for(int k =i; k< container.childCount; k++)
             {
                 TextMeshProUGUI txt = container.GetChild(k).GetComponent<TextMeshProUGUI>();
                 txt.text = "";
+                txt.gameObject.SetActive(false); 
             }
         }
     }

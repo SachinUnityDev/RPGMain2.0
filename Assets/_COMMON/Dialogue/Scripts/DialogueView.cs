@@ -160,7 +160,6 @@ namespace Common
         {
             isDialoguePlaying = false;
             UnLoad();
-            DialogueService.Instance.On_DialogueEnd();
         }
         void DisplayChoices()
         {
@@ -465,7 +464,8 @@ namespace Common
             if (!isDialoguePlaying)
             {
                 UIControlServiceGeneral.Instance.BlockEsc(false);
-                UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);              
+                UIControlServiceGeneral.Instance.TogglePanel(gameObject, false); 
+                DialogueService.Instance.On_DialogueEnd();
             }
         }
 

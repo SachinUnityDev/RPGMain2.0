@@ -11,15 +11,22 @@ namespace Town
     public class TalkNTradeBtnView : MonoBehaviour
     {
         public BuildView buildView; 
-        void Start()
+        void Start() // this game obj wil toggle on and off should avoid multiple subscriptions
         {
+            DialogueService.Instance.OnDialogueLsDsply += HideBtns; 
             DialogueService.Instance.OnDialogueStart += (DialogueNames d) => HideBtns();
             DialogueService.Instance.OnDialogueEnd += ShowBtns;
+            DialogueService.Instance.OnDialogueEnd += OnDeSelect;
+
+            TradeService.Instance.OnTradeStart += HideBtns;
+            TradeService.Instance.OnTradeEnds += ShowBtns;
+            TradeService.Instance.OnTradeEnds += OnDeSelect; 
         }
 
         public void InitTalkNTrade(NPCIntData nPCInteractData, BuildView buildView)
         {
             this.buildView = buildView;
+            ShowBtns();
             transform.GetChild(0).GetComponent<TalkNTradeBtnPtrEvents>().InitTalkNTrade(nPCInteractData, this);
             transform.GetChild(1).GetComponent<TalkNTradeBtnPtrEvents>().InitTalkNTrade(nPCInteractData, this);
         }
@@ -39,12 +46,18 @@ namespace Town
                     transform.GetChild(0).GetComponent<TalkNTradeBtnPtrEvents>().OnSelect();
                     transform.GetChild(1).GetComponent<TalkNTradeBtnPtrEvents>().OnDeSelect();
                 }
-                else
+                else  // Trade  init 
                 {
+                    TradeService.Instance.On_TradeStart(); 
                     transform.GetChild(0).GetComponent<TalkNTradeBtnPtrEvents>().OnDeSelect();
                     transform.GetChild(1).GetComponent<TalkNTradeBtnPtrEvents>().OnSelect();
                 }
             }
+        }
+        public void OnDeSelect()
+        {
+            transform.GetChild(0).GetComponent<TalkNTradeBtnPtrEvents>().OnDeSelect();
+            transform.GetChild(1).GetComponent<TalkNTradeBtnPtrEvents>().OnDeSelect();
         }
 
         void ShowBtns()

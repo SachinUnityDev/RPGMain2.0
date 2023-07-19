@@ -26,6 +26,7 @@ namespace Common
 
     public class DialogueService : MonoSingletonGeneric<DialogueService>
     {
+        public Action OnDialogueLsDsply; 
         public Action<DialogueNames> OnDialogueStart; 
         public Action OnDialogueEnd;
 
@@ -124,6 +125,11 @@ namespace Common
             if (!dialogueModel.isRepeatable)
                 dialogueModel.isLocked = true; 
         }
+
+        public void On_DialogueLsDsply()
+        {
+            OnDialogueLsDsply?.Invoke(); 
+        }
         public void SetCurrDiaBase(DialogueNames dialogueNames)
         {
             diaBase = dialogueFactory.GetDialogBase(dialogueNames);
@@ -169,6 +175,7 @@ namespace Common
         public void ShowDialogueLs(CharNames charName, NPCNames npcName, Transform parent)
         {
             InitDiaView(parent);
+            OnDialogueLsDsply();
             dialogueView.ShowDialogueList(CharNames.None, NPCNames.Khalid);
         }
   

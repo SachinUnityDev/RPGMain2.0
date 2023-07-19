@@ -62,7 +62,7 @@ namespace Town
             {
                 BuildingNames buildName = talkNTradeBtnView.buildView.BuildingName;
                 talkNTradeBtnView.buildView.TradePanel.GetComponent<TradeView>()
-                    .InitTradeView(nPCIntData.nPCNames, buildName, this);
+                    .InitTradeView(nPCIntData.nPCNames, buildName);
             }
         }
 

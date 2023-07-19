@@ -25,9 +25,7 @@ namespace Town
         [Header(" Trade Select")]
         public TradeSelectView tradeSelectView;
 
-        [Header("Trade N Talk Btn View")]
-        public TalkNTradeBtnPtrEvents talkNTradeBtnPtrEvents; 
-
+        
         [Header(" Global var")]
         public TradeModel tradeModel;
         public NPCNames npcName;
@@ -37,13 +35,11 @@ namespace Town
         private void Start()
         { 
             buyBtn.onClick.AddListener(OnBuyBtnPressed);
-            sellBtn.onClick.AddListener(OnSellBtnPressed);
-            // exitBtn.onClick.AddListener(OnExitBtnPressed);
+            sellBtn.onClick.AddListener(OnSellBtnPressed);           
         }
-        public void InitTradeView(NPCNames npcName, BuildingNames buildName, TalkNTradeBtnPtrEvents talkNTradeBtnPtrEvents)
+        public void InitTradeView(NPCNames npcName, BuildingNames buildName)
         {
             this.npcName = npcName;
-            this.talkNTradeBtnPtrEvents= talkNTradeBtnPtrEvents; 
             this.buildName = buildName;
             gameObject.SetActive(true);
 
@@ -124,8 +120,9 @@ namespace Town
 
         public void UnLoad()
         {
+            TradeService.Instance.On_TradeEnds(); 
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
-            talkNTradeBtnPtrEvents.OnDeSelect();
+            
         }
 
         public void Init()

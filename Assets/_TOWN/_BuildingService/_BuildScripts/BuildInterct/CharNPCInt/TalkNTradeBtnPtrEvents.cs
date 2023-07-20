@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
-
+using UnityEngine.UI;
 namespace Town
 {
     public class TalkNTradeBtnPtrEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
@@ -13,20 +13,32 @@ namespace Town
         [SerializeField] IntType intType;
         TalkNTradeBtnView talkNTradeBtnView;
         NPCIntData nPCIntData;
-        CharIntData charIntData; 
+        CharIntData charIntData;
+
+        [Header("Sprite Ref")]
+        [SerializeField] Sprite spriteN;
+        [SerializeField] Sprite spriteHL;
+        Image img; 
+        private void Awake()
+        {
+
+            img= GetComponent<Image>();
+            
+        }
+        private void Start()
+        {
+            img.sprite = spriteN;
+        }
         public void OnPointerClick(PointerEventData eventData)
         {
             talkNTradeBtnView.OnSelect(intType);
+            img.sprite = spriteN;
         }
 
         public void InitTalkNTrade(NPCIntData nPCIntData, TalkNTradeBtnView talkNTradeBtnView)
         {
             this.talkNTradeBtnView= talkNTradeBtnView;
-            this.nPCIntData = nPCIntData;
-            if(nPCIntData.allInteract.Any(t=>t.nPCIntType == IntType.Talk))
-            {
-                talkNTradeBtnView.OnSelect(IntType.Talk); 
-            }
+            this.nPCIntData = nPCIntData;         
         }
         public void InitTalkNTrade(CharIntData charIntData, TalkNTradeBtnView talkNTradeBtnView)
         {
@@ -39,12 +51,12 @@ namespace Town
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-           
+           img.sprite = spriteHL;
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-           
+           img.sprite = spriteN; 
         }
 
         public void OnSelect()

@@ -75,7 +75,7 @@ namespace Interactables
             {
                 CharNames charName = c.charModel.charName;
                // allComp.Clear(); selectComp.Clear(); 
-                if(charName != CharNames.Abbas_Skirmisher)
+                if(charName != CharNames.Abbas)
                 {
                     allComp.Add(c.charModel);
                     selectComp.Add(c.charModel);

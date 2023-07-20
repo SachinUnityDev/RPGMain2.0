@@ -16,7 +16,7 @@ namespace Combat
 
         public override string desc => "this is Confuse them ";
 
-        public override CharNames charName => CharNames.Abbas_Skirmisher;
+        public override CharNames charName => CharNames.Abbas;
 
         public override SkillNames skillName => SkillNames.RunguThrow;
 

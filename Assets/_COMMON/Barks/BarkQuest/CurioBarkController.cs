@@ -20,7 +20,7 @@ namespace Quest
         {
             CurioBarkData curioBarkData = BarkService.Instance.allBarkSO.GetCurioBarkData(curioName);
             
-            BarkCharData barkCharData = new BarkCharData(CharNames.Abbas_Skirmisher
+            BarkCharData barkCharData = new BarkCharData(CharNames.Abbas
                                             , curioBarkData.barkline, curioBarkData.VOaudioClip);
 
             qbarkView.InitCurioBark(barkCharData, curioColEvents, curioBarkData.UIaudioClip);            

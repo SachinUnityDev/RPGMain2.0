@@ -91,15 +91,19 @@ namespace Common
             dialogueParent.SetActive(true);
             if(!diaModel.isSkippable)
                 skipBtn.gameObject.SetActive(false);
-            else skipBtn.gameObject.SetActive(true);
+            else
+                skipBtn.gameObject.SetActive(true);
+
             dialogueSO = _dialogueSO;
-            story = new Story(dialogueSO.dialogueAsset.text);
+            CharController charController = CharService.Instance.GetCharCtrlWithName(CharNames.Abbas); 
+            story = new Story(dialogueSO.GetDialogueAsset(charController.charModel.classType).text);
             if (OnCreateStory != null) OnCreateStory(story);
             InitDialogueView();
             DisplayStory();
         }
         public void ShowDialogueList(CharNames charName, NPCNames nPCNames)
         {
+            Load();
             dialogueList.SetActive(true);
             dialogueParent.SetActive(false);
             List<DialogueModel> lsModel = 
@@ -166,6 +170,7 @@ namespace Common
             List<Choice> currentChoices = story.currentChoices;
             ToggleDialoguePanelOn(false);
             Transform choiceContainer = choiceParent.transform.GetChild(0);
+           
             InteractTag();
 
             if (currentChoices.Count > 4)
@@ -192,6 +197,7 @@ namespace Common
                 if (InteractSprites != null)
                 {
                     topOptions.SetActive(true);
+                    topOptions.GetComponent<Image>().enabled= true; 
                     Button spriteBtn = topOptions.transform.GetChild(index).GetComponent<Button>();
                     spriteBtn.gameObject.SetActive(true);
                     spriteBtn.GetComponent<Image>().sprite
@@ -274,24 +280,7 @@ namespace Common
             }
 
         }
-        //IEnumerator Wait(float time)
-        //{
-        //    yield return new WaitForSeconds(time);
-        //}
-        void FastFwdPressed()
-        {
-          //  UnLoad();
-            // search thru the intract tag and isInteracting stage then print the display tag
-            //while (story.canContinue )
-            //    //&& (!isInteracting || !isTextBoxing))
-            //{
-            //    InteractTag();
-            //    story.Continue();
-            //}
-
-            //if (isInteracting || isTextBoxing)
-            //    DisplayStory();
-        }
+    
         public void OnChoicePtrEnter(int index)
         {
             TagData tagData = DialogueService.Instance.allDefine.Find(t => t.numTag == index + 1);
@@ -351,7 +340,6 @@ namespace Common
         }
         void ToggleDialoguePanelOn(bool isDialogueOn)
         {
-
             GameObject dialoguePanel = LowerDialogueParent.transform.GetChild(0).gameObject;
             GameObject choicePanel = LowerDialogueParent.transform.GetChild(1).gameObject;
 
@@ -362,8 +350,8 @@ namespace Common
 
                 choicePanel.SetActive(false);
                 topOptions.SetActive(false);
+                topOptions.GetComponent<Image>().enabled = false;
                 textBoxParent.SetActive(false);
-
             }
             else
             {
@@ -467,6 +455,11 @@ namespace Common
                 UIControlServiceGeneral.Instance.TogglePanel(gameObject, false); 
                 DialogueService.Instance.On_DialogueEnd();
             }
+            //else
+            //{
+            //    UIControlServiceGeneral.Instance.BlockEsc(true);
+            //    UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
+            //}
         }
 
         public void Init()
@@ -482,3 +475,22 @@ namespace Common
 //    isDialogueOnHighSpeed = true;
 //}
 
+
+//IEnumerator Wait(float time)
+//{
+//    yield return new WaitForSeconds(time);
+//}
+//void FastFwdPressed()
+//{
+//    //  UnLoad();
+//    // search thru the intract tag and isInteracting stage then print the display tag
+//    //while (story.canContinue )
+//    //    //&& (!isInteracting || !isTextBoxing))
+//    //{
+//    //    InteractTag();
+//    //    story.Continue();
+//    //}
+
+//    //if (isInteracting || isTextBoxing)
+//    //    DisplayStory();
+//}

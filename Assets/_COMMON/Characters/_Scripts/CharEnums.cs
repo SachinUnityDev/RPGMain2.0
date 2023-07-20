@@ -159,7 +159,7 @@ public enum CharNames
 {
     // HEROES
     None,
-    Abbas_Skirmisher,
+    Abbas,
     Baran,
     Cahyo,
     Ekwueme,

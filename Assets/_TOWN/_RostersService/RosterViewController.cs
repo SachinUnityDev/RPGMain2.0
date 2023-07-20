@@ -147,7 +147,7 @@ namespace Common
         void PopulateCharScroll()
         {
            RosterService.Instance.On_ScrollSelectCharModel(unLockedChars[index]);
-            if (RosterService.Instance.scrollSelectCharModel.charName == CharNames.Abbas_Skirmisher)
+            if (RosterService.Instance.scrollSelectCharModel.charName == CharNames.Abbas)
             {
                 index++;
                 RosterService.Instance.scrollSelectCharModel = unLockedChars[index];

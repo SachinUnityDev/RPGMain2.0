@@ -63,7 +63,7 @@ namespace Town
             if (houseModel.restChanceOnUpgrade.GetChance())
             {
                 CharController charController =
-                        CharService.Instance.GetCharCtrlWithName(CharNames.Abbas_Skirmisher);
+                        CharService.Instance.GetCharCtrlWithName(CharNames.Abbas);
                 TempTraitController tempTraitController = charController.tempTraitController;
                 tempTraitController
                         .ApplyTempTrait(CauseType.BuildingInterct, (int)BuildInteractType.Purchase

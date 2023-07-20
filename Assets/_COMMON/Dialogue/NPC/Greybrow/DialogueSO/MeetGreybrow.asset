@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c785db28e34d58b48955e27dceb5fd0e, type: 3}
+  m_Name: MeetGreybrow
+  m_EditorClassIdentifier: 
+  DiaID: 0
+  dialogueName: 33
+  dialogueTitle: HI There...
+  npcName: 7
+  charName: 0
+  isLocked: 0
+  isRepeatable: 0
+  isSkippable: 1
+  gameState: 1
+  charInDialogue: 01000000
+  NPCinDialogue: 07000000
+  locationName: 1
+  dialogueAsset: {fileID: 4900000, guid: c92d256c3c1398347bc136f011231f29, type: 3}
+  interactSprites: []

@@ -20,7 +20,7 @@ namespace Combat
 
         public override string desc => "this is the twister";
 
-        public override CharNames charName => CharNames.Abbas_Skirmisher;
+        public override CharNames charName => CharNames.Abbas;
 
         public override SkillNames skillName => SkillNames.Telekinesis;
 

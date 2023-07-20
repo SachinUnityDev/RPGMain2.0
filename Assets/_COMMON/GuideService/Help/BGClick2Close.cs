@@ -14,19 +14,20 @@ namespace Common
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            panel = GetComponent<IPanel>();
+            panel = transform.parent.GetComponent<IPanel>();
             if(panel != null)
             {
+                Debug.Log("Panel Name" + gameObject.name);
                 panel.UnLoad();
             }
-            else
-            {
-                panel = transform.parent.GetComponent<IPanel>();    
-                if(panel != null)
-                {
-                    panel.UnLoad();
-                }
-            }
+            //else
+            //{
+            //    panel = transform.parent.GetComponent<IPanel>();    
+            //    if(panel != null)
+            //    {
+            //        panel.UnLoad();
+            //    }
+            //}
             
         }
 

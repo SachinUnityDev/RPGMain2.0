@@ -24,7 +24,7 @@ MonoBehaviour:
   dialoguePortraitUnClicked: {fileID: 21300000, guid: dbff172cb1065c04c939d929dcf5b15a,
     type: 3}
   itemTypesAccepted: 030000000600000001000000
-  buildName: 0
+  buildName: 3
   weeklyItemStock:
   - weekSeq: 1
     itemDataLs:

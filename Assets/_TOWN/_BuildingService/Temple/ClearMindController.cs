@@ -186,11 +186,11 @@ namespace Town
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                Debug.Log("Clear MIND INIT TEST");
-                Init(); 
-            }
+            //if (Input.GetKeyDown(KeyCode.M))
+            //{
+            //    Debug.Log("Clear MIND INIT TEST");
+            //    Init(); 
+            //}
         }
 
     }

@@ -56,9 +56,9 @@ MonoBehaviour:
       - dialogueName: 1
         isUnLocked: 1
       - dialogueName: 3
-        isUnLocked: 0
-    - nPCIntType: 2
-      allDialogueData: []
+        isUnLocked: 1
+      - dialogueName: 4
+        isUnLocked: 1
   npcDataPrefab: []
   buildIntTypes:
   - BuildIntType: 11

@@ -10,22 +10,8 @@ namespace Common
     public class AllCharSO : ScriptableObject
     {
         public List<CharacterSO> allAllySO = new List<CharacterSO>(); 
-        public List<CharacterSO> allEnemySO= new List<CharacterSO>();
-        public List<NPCSO> allNPCSO = new List<NPCSO>();
+        public List<CharacterSO> allEnemySO= new List<CharacterSO>();      
 
-        public NPCSO GetNPCSO(NPCNames nPCName)
-        {
-            int index = allNPCSO.FindIndex(t => t.npcName == nPCName);
-            if (index != -1)
-            {
-                return allNPCSO[index];
-            }
-            else
-            {
-                Debug.Log("NPC SO not found" + nPCName);
-                return null;
-            }
-        }
         public CharacterSO GetCharSO(CharNames charName)
         {
             int index = allAllySO.FindIndex(t => t.charName == charName);

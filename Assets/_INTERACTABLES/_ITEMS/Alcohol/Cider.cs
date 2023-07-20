@@ -49,7 +49,7 @@ namespace Interactables
         public override void OnDrink()
         {
             float chance = 24f;
-            charController = CharService.Instance.GetCharCtrlWithName(CharNames.Abbas_Skirmisher);
+            charController = CharService.Instance.GetCharCtrlWithName(CharNames.Abbas);
             if (chance.GetChance())
                 charController.buffController.ApplyBuff(CauseType.Items, (int)itemName, charController.charModel.charID
                     , AttribName.focus, 1, TimeFrame.EndOfDay, 1, true);

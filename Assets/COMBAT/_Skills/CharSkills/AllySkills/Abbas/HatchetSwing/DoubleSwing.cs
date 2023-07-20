@@ -18,7 +18,7 @@ namespace Combat
 
         public override string desc => "Double Swing";
 
-        public override CharNames charName => CharNames.Abbas_Skirmisher;
+        public override CharNames charName => CharNames.Abbas;
 
         public override SkillNames skillName => SkillNames.HatchetSwing;
 

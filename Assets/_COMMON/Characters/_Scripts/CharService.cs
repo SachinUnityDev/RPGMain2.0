@@ -76,14 +76,14 @@ namespace Common
             // if save slot is defined take from save slot other SO from here pass in charSO    
 
           //  if(SaveService.Instance.)
-            List<CharNames> chars2Spawn = new List<CharNames> {CharNames.Abbas_Skirmisher
+            List<CharNames> chars2Spawn = new List<CharNames> {CharNames.Abbas
                , CharNames.Baran };
 
             foreach (CharNames charName in chars2Spawn)
             {
                 SpawnCompanions(charName);
             }
-            CharController abbas = charsInPlayControllers.Find(t => t.charModel.charName == CharNames.Abbas_Skirmisher);
+            CharController abbas = charsInPlayControllers.Find(t => t.charModel.charName == CharNames.Abbas);
 
 
             isNewGInitDone = true;
@@ -222,7 +222,7 @@ namespace Common
             allyInPlay.Add(go);
             allCharModels.Add(charModel);
 
-            if (charModel.charName != CharNames.Abbas_Skirmisher)
+            if (charModel.charName != CharNames.Abbas)
             {
                 if (charModel.availOfChar == AvailOfChar.Available)
                 {

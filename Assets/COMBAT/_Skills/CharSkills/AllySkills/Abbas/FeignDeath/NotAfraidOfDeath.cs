@@ -17,7 +17,7 @@ namespace Combat
 
         public override string desc => "this is Not afraid of death ";
 
-        public override CharNames charName => CharNames.Abbas_Skirmisher;
+        public override CharNames charName => CharNames.Abbas;
 
         public override SkillNames skillName => SkillNames.FeignDeath;
 

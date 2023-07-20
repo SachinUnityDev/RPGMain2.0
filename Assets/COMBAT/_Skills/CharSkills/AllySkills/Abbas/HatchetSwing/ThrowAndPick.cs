@@ -16,7 +16,7 @@ namespace Combat
 
         public override string desc => "this is Throw and Pick";
 
-        public override CharNames charName => CharNames.Abbas_Skirmisher;
+        public override CharNames charName => CharNames.Abbas;
 
         public override SkillNames skillName => SkillNames.HatchetSwing;
 

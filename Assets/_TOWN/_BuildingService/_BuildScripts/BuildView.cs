@@ -37,11 +37,6 @@ namespace Town
         BuildingSO buildSO;
         [SerializeField]BuildingModel buildModel;
         TimeState timeState;
-
-        
-
-      
-
         void Awake()
         {
             BGSpriteContainer = transform.GetChild(0);
@@ -83,6 +78,7 @@ namespace Town
             {
                 child.GetComponent<IPanel>().Init(); // interact panels initialized here 
             }
+            talkNTradeBtns.GetComponent<TalkNTradeBtnView>().HideBtns();
         }
         public virtual Transform GetBuildInteractPanel(BuildInteractType buildInteract)
         {
@@ -151,8 +147,6 @@ namespace Town
         {
             return helpName;
         }
-
-
     }
 }
 

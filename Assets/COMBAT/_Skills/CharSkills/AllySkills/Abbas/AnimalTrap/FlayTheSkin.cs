@@ -16,7 +16,7 @@ namespace Combat
 
         public override string desc => "this is hunting season";
 
-        public override CharNames charName => CharNames.Abbas_Skirmisher;
+        public override CharNames charName => CharNames.Abbas;
 
         public override SkillNames skillName => SkillNames.AnimalTrap;
 

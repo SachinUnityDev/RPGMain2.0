@@ -2,6 +2,7 @@ using Common;
 using Interactables;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,12 @@ namespace Town
         [SerializeField] Button sellBtn;
         [SerializeField] Button exitBtn;
 
+        [Header("Portraits")]
+        [SerializeField] Transform portLeft;
+        [SerializeField] Transform portRight;
+
+        [Header("heading Txt")]
+        [SerializeField] TextMeshProUGUI headingTxt;
 
         [Header(" Trade Scroll")]
         public TradeScrollView tradeScrollView;
@@ -30,7 +37,7 @@ namespace Town
         public TradeModel tradeModel;
         public NPCNames npcName;
         public BuildingNames buildName;
-
+        NPCSO npcSO;
 
         private void Start()
         { 
@@ -42,12 +49,13 @@ namespace Town
             this.npcName = npcName;
             this.buildName = buildName;
             gameObject.SetActive(true);
-
+            npcSO = TradeService.Instance.tradeController.allNPCSO.GetNPCSO(npcName);
             tradeSelectView.InitSelectView(npcName, this);
-            FillSellSlots();
-            isBuyBtnPressed = false;
+            FillBuySlots();
+            isBuyBtnPressed = true;
             tradeBtnPtrEvents.InitTradeBtnEvents(this, tradeSelectView);
-            Load(); 
+            Load();
+            FillPortraits(); 
         }
 
         #region BUTTONS RESPONSES
@@ -56,6 +64,8 @@ namespace Town
         {
             isBuyBtnPressed = true;
             FillBuySlots();
+
+           
         }
         void OnSellBtnPressed()
         {
@@ -86,9 +96,18 @@ namespace Town
 
         #endregion
 
+        void FillPortraits()
+        {
+            CharacterSO charSO = CharService.Instance.allCharSO.GetCharSO(CharNames.Abbas);
+            portLeft.GetChild(0).GetComponent<Image>().sprite = charSO.charSprite;
+            portRight.GetChild(0).GetComponent<Image>().sprite = npcSO.npcSprite; 
+        }
+
         void FillBuySlots()
         {
-            // get  Slots 
+            // get  Slots
+           
+            headingTxt.text =  npcSO.classTypes.ToString().CreateSpace()+ " Stock";            
             tradeModel = TradeService.Instance.tradeController.GetTradeModel(npcName);
             tradeSelectView.ClearSlotView();
             if (tradeScrollView != null && tradeModel != null)
@@ -102,6 +121,7 @@ namespace Town
         }
         void FillSellSlots()
         {
+            headingTxt.text = "Inventory"; 
             List<Iitems> commInvItems = InvService.Instance.invMainModel.commonInvItems;
             // sort out items that do not confirm to the NPC
             tradeSelectView.ClearSlotView();

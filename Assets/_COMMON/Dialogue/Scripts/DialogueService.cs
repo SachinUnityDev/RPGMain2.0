@@ -176,7 +176,7 @@ namespace Common
         {
             InitDiaView(parent);
             OnDialogueLsDsply();
-            dialogueView.ShowDialogueList(CharNames.None, NPCNames.Khalid);
+            dialogueView.ShowDialogueList(CharNames.None, npcName);
         }
   
 
@@ -211,13 +211,10 @@ namespace Common
 #endregion
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.N))
-            {
-                On_DialogueStart(DialogueNames.MeetKhalid);
-            }
             if (Input.GetKeyDown(KeyCode.M))
             {
-                //ShowDialogueLs(CharNames.None, NPCNames.MinamiTheSoothsayer);
+                Canvas canvas = FindObjectOfType<Canvas>(); 
+                ShowDialogueLs(CharNames.None, NPCNames.Tahir, canvas.transform);
             }
         }
 

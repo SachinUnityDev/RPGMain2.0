@@ -35,10 +35,40 @@ namespace Common
         public LocationName locationName;
 
         [Header("INKY text asset")]
-        public TextAsset dialogueAsset; 
-        
+        public TextAsset dialogueAsset;
+
+        [Header("INKY Text asset: ClassType.Skirmisher")]
+        public TextAsset diaAssetSkirmish;
+
+        [Header("INKY Text asset: ClassType.Herbalist")]
+        public TextAsset diaAssetHerbalist;
+
+        [Header("INKY Text asset: ClassType.Warden")]
+        public TextAsset diaAssetWarden;
+
         [Header(" Interation sprites")]
         public List<InteractionSpriteData> interactSprites = new List<InteractionSpriteData>();
+
+        public TextAsset GetDialogueAsset(ClassType  classType)
+        {
+            switch (classType)
+            {
+                case ClassType.None:
+                    return dialogueAsset;                                   
+                case ClassType.Skirmisher:
+                    return diaAssetSkirmish;                                                 
+                case ClassType.Herbalist:
+                    return diaAssetHerbalist;  
+                case ClassType.Warden:
+                    return diaAssetWarden;
+                default:
+                    break;
+            }
+            Debug.Log("Dialogue Inkle file not found"+ classType);
+            return dialogueAsset;
+        }
+
+
     }
 
 

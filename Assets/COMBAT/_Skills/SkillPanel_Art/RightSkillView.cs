@@ -68,7 +68,7 @@ namespace Common
             {
                 scrollList.Add(selectSkillController.allSkillModels[i]); 
             }
-            if(charController.charModel.charName == CharNames.Abbas_Skirmisher)
+            if(charController.charModel.charName == CharNames.Abbas)
             {
                 SkillModel skillModel = selectSkillController.allSkillModels
                                         .Find(t => t.skillType == SkillTypeCombat.Uzu); 

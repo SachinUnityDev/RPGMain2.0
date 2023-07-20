@@ -15,7 +15,7 @@ namespace Quest
         public override void OnChoiceASelect()
         {
             CharModel charModel =
-                CharService.Instance.GetCharCtrlWithName(CharNames.Abbas_Skirmisher).charModel;
+                CharService.Instance.GetCharCtrlWithName(CharNames.Abbas).charModel;
             float chance1 = 40f;
             if (chance1.GetChance())
             {

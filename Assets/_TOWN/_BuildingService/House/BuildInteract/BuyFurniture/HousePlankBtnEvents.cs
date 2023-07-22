@@ -55,7 +55,7 @@ namespace Town
             plankName.text = houseData.houseOpts.ToString().CreateSpace();
             currencyTrans.GetComponent<CurrencyView>().Init(houseData.currency);
             statusImg.gameObject.SetActive(false);
-            if (houseData.isPurchased)
+            if (houseData.isUpgraded)
                 OnPurchase();
             else
                 OnDeSelect();
@@ -65,14 +65,14 @@ namespace Town
         {
             // if some is selected other will not be hoverable 
             if (purchaseFurnitureView.selectInt != -1) return; 
-            if(houseData.isPurchased) return;
+            if(houseData.isUpgraded) return;
             plankBG.sprite = spriteBG_Purchaseable;
             plankBG.DOFade(1, 0.1f);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            if (houseData.isPurchased) return;
+            if (houseData.isUpgraded) return;
             if (purchaseFurnitureView.selectInt != -1) return;
             plankBG.DOFade(0, 0.1f); 
         }
@@ -80,7 +80,7 @@ namespace Town
         public void OnPointerClick(PointerEventData eventData)
         {
             // update the parent
-            if (houseData.isPurchased) return;
+            if (houseData.isUpgraded) return;
                 purchaseFurnitureView.OnSlotSelect(transform.GetSiblingIndex());
             plankBG.sprite = spriteBG_Purchaseable;
             plankBG.DOFade(1, 0.1f);
@@ -89,7 +89,7 @@ namespace Town
 
         public void OnPurchase()
         {
-            houseData.isPurchased = true;
+            houseData.isUpgraded = true;
             BuildingIntService.Instance.houseController.OnPurchase(houseData); 
 
 
@@ -103,7 +103,7 @@ namespace Town
         }
         public void OnCancelPurchase()
         {
-            if (houseData.isPurchased) return;
+            if (houseData.isUpgraded) return;
             plankBG.sprite = spriteBG_Purchaseable;
             plankBG.DOFade(0, 0.1f);
 
@@ -111,7 +111,7 @@ namespace Town
 
         public void OnDeSelect()
         {
-            if (houseData.isPurchased) return;
+            if (houseData.isUpgraded) return;
             plankBG.sprite = spriteBG_Purchaseable;
             plankBG.DOFade(0, 0.1f);
         }

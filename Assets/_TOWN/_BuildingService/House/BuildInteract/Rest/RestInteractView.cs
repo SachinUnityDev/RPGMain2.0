@@ -13,11 +13,12 @@ namespace Town
         [SerializeField] Button closeBtn;
         [SerializeField] TextMeshProUGUI buffTxt;
 
-        [SerializeField] Image hourGlass; 
+        [SerializeField] Image hourGlass;
         // on press close the day event in calendar
+        [Header("End day buff")]
         string buffstrOnUpgrade = "60% chance for Well Rested upon resting";
         string buffStrBase = "No Chance for buff upon resting";
-
+        [SerializeField] HousePurchaseOptsData houseData;
 
 
         TimeState timeState; 
@@ -36,8 +37,9 @@ namespace Town
             FillHouseView();
             // for upgraded bed ..chance and upgrade chk encapsulated 
             BuildingIntService.Instance.houseController.UpgradedBedBuff();
-            
+
         }
+      
         void FillHouseView()
         {
             BuildingIntService.Instance.houseController.houseView.FillBuildBG();             
@@ -61,15 +63,13 @@ namespace Town
                 hourGlass.sprite =
                     CalendarService.Instance.calendarSO.hourGlassNight;
             }
-                
         }
         void FillTheBuffStr()
         {
-            HousePurchaseOptsData houseData =
-             BuildingIntService.Instance.houseController
-             .houseModel.GetHouseOptsInteractData(HousePurchaseOpts.UpgradeBed);
+           houseData = BuildingIntService.Instance.houseController
+                                .houseModel.GetHouseOptsInteractData(HousePurchaseOpts.UpgradeBed);
 
-            if (houseData.isPurchased)
+            if (houseData.isUpgraded)
             {
                 buffTxt.text = buffstrOnUpgrade;
             }

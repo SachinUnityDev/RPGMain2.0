@@ -10,6 +10,7 @@ namespace Town
 {
     public class RestViewTavern : MonoBehaviour, IPanel
     {
+        
         [SerializeField] Button endDayBtn;
         [SerializeField] Button exitBtn;
         [SerializeField] TextMeshProUGUI buffTxt;
@@ -31,7 +32,12 @@ namespace Town
             int day = CalendarService.Instance.dayInYear;
             CalendarService.Instance.On_EndDayClick();
             FillTavernView();
+            BuildingIntService.Instance.tavernController.OnEndDayInTavern();
+
         }
+
+
+
         void FillTavernView()
         {
             BuildingIntService.Instance.tavernController.tavernView.FillBuildBG();   
@@ -63,7 +69,7 @@ namespace Town
              BuildingIntService.Instance.houseController
              .houseModel.GetHouseOptsInteractData(HousePurchaseOpts.UpgradeBed);
 
-            if (houseData.isPurchased)
+            if (houseData.isUpgraded)
             {
                 buffTxt.text = buffstrOnUpgrade;
             }

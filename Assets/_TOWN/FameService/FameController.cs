@@ -9,8 +9,11 @@ namespace Common
     public class FameController : MonoBehaviour
     {
         public int index;
-        public FameModel fameModel; 
-
+        public FameModel fameModel;
+        private void Start()
+        {
+            CalendarService.Instance.OnStartOfCalDay += (int day) => FameValueChgOnEndDay(); 
+        }
         public void InitFameController(FameSO fameSO)
         {
             fameModel = new FameModel(fameSO); 
@@ -27,6 +30,10 @@ namespace Common
         {
             FameChgData fameChgData = new FameChgData(causeType, causeName, val);
             fameModel.fameYield += fameChgData.fameAdded;          
+        }
+        void FameValueChgOnEndDay()
+        {
+            fameModel.fameVal += fameModel.fameYield; 
         }
         public bool IsFameBehaviorMatching(CharController charController)
         {

@@ -51,20 +51,26 @@ namespace Common
 
         public TextAsset GetDialogueAsset(ClassType  classType)
         {
+            TextAsset txt = null; 
             switch (classType)
             {
                 case ClassType.None:
-                    return dialogueAsset;                                   
+                    txt = dialogueAsset;break;                                    
                 case ClassType.Skirmisher:
-                    return diaAssetSkirmish;                                                 
+                    txt =  diaAssetSkirmish;break;                                               
                 case ClassType.Herbalist:
-                    return diaAssetHerbalist;  
+                    txt = diaAssetHerbalist;  break; 
                 case ClassType.Warden:
-                    return diaAssetWarden;
+                    txt = diaAssetWarden;break; 
                 default:
                     break;
             }
-            Debug.Log("Dialogue Inkle file not found"+ classType);
+            if(txt != null)
+            {
+                Debug.Log("Dialogue Inkle file not found" + classType);
+                return txt; 
+                
+            }
             return dialogueAsset;
         }
 

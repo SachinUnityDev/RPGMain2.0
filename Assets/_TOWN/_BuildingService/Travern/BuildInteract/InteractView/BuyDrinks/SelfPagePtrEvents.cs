@@ -35,9 +35,22 @@ namespace Town
         public void InitSelfPage(BuyDrinksView buyDrinksView)
         {
             this.buyDrinksView = buyDrinksView;
-            beerTrans.GetComponent<AlcoholBtnPtrEvents>().InitAlcoholPtrEvents(buyDrinksView);
-            ciderTrans.GetComponent<AlcoholBtnPtrEvents>().InitAlcoholPtrEvents(buyDrinksView);
+            beerTrans.GetComponent<AlcoholBtnPtrEvents>().InitAlcoholPtrEvents(buyDrinksView, this);
+            ciderTrans.GetComponent<AlcoholBtnPtrEvents>().InitAlcoholPtrEvents(buyDrinksView, this);
             currTransform.GetComponent<DisplayCurrencyWithToggle>().InitCurrencyToggle(); 
+        }
+        public void SetState(bool isNormal)
+        {
+            if(isNormal)
+            {
+                beerTrans.GetComponent<AlcoholBtnPtrEvents>().SetNSprite();
+                ciderTrans.GetComponent<AlcoholBtnPtrEvents>().SetNSprite();
+            }
+            else
+            {
+                beerTrans.GetComponent<AlcoholBtnPtrEvents>().SetNASprite();
+                ciderTrans.GetComponent<AlcoholBtnPtrEvents>().SetNASprite();
+            }
         }
         void OnReturnBtnPressed()
         {

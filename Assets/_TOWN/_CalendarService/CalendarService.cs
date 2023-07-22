@@ -148,6 +148,7 @@ namespace Common
         }
         public void On_EndDayClick()
         {
+
             if (currtimeState == TimeState.Night)
             {
                 // start of the day
@@ -161,8 +162,22 @@ namespace Common
                 currtimeState = TimeState.Night;
                 On_StartOfNight(dayInGame);
             }
+            OnEndInHouseBuff();
         }
-     
+        void OnEndInHouseBuff()
+        {
+            HouseModel houseModel = BuildingIntService.Instance.houseController.houseModel; 
+            if (!houseModel.isBedUpgraded) return;
+            if (houseModel.restChanceOnUpgrade.GetChance())
+            {
+                CharController charController =
+                        CharService.Instance.GetCharCtrlWithName(CharNames.Abbas);
+                TempTraitController tempTraitController = charController.tempTraitController;
+                tempTraitController
+                        .ApplyTempTrait(CauseType.BuildingInterct, (int)BuildInteractType.Purchase
+                        , charController.charModel.charID, TempTraitName.WellRested);
+            }
+        }
 
         #region DAY WEEK AND MONTH EVENT TRIGGERS
         public void On_StartOfDay(int day)

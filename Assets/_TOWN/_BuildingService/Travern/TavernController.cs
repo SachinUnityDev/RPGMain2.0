@@ -35,6 +35,19 @@ namespace Town
         {
 
         }
+        public void OnEndDayInTavern()
+        {
+            if (tavernModel.restChance.GetChance())
+            {
+                CharController charController =
+                        CharService.Instance.GetCharCtrlWithName(CharNames.Abbas);
+                TempTraitController tempTraitController = charController.tempTraitController;
+                tempTraitController
+                        .ApplyTempTrait(CauseType.BuildingInterct, (int)BuildInteractType.Purchase
+                        , charController.charModel.charID, TempTraitName.WellRested);
+            }
+        }
+
         public void UpdateBuildState()
         {
             DayName dayName = CalendarService.Instance.currDayName;

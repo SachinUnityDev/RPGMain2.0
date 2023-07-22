@@ -31,10 +31,15 @@ public class MainPtrEvents : MonoBehaviour
     }
     void OnEveryOneBtnPressed()
     {
+        EveryonePagePtrEvents ptrEvents = buyDrinksView.buyEveryone.GetComponent<EveryonePagePtrEvents>(); 
+        ptrEvents.InitBuyEveryOne(buyDrinksView);    
         UIControlServiceGeneral.Instance.TogglePanelOnInGrp(buyDrinksView.buyEveryone.gameObject, true); 
     }
     void OnSelfBtnPressed()
     {
+        //BuyDrinksPtrEvents ptrEvents = buyDrinksView.buyEveryone.GetComponent<BuyDrinksPtrEvents>();
+        //ptrEvents.Init(ptrEvents);
+        //buySelf.GetComponent<SelfPagePtrEvents>().InitSelfPage(this);
         UIControlServiceGeneral.Instance.TogglePanelOnInGrp(buyDrinksView.buySelf.gameObject, true);
     }
 }

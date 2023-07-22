@@ -20,21 +20,7 @@ MonoBehaviour:
   buildExtNightHL: {fileID: 21300000, guid: 2c45c9378beab3b429b26e1a991884fc, type: 3}
   buildIntDay: {fileID: 21300000, guid: f41bb8e1699f93d4ba2d20f97e77ca10, type: 3}
   buildIntNight: {fileID: 21300000, guid: b1e8ba239e451594a9d363725ce78568, type: 3}
-  charInteractData:
-  - compName: 2
-    compState: 1
-    allInteract:
-    - nPCIntType: 1
-      allDialogueData:
-      - dialogueName: 10
-        isUnLocked: 1
-  - compName: 3
-    compState: 1
-    allInteract:
-    - nPCIntType: 1
-      allDialogueData:
-      - dialogueName: 10
-        isUnLocked: 1
+  charInteractData: []
   CharInteractPrefab: []
   npcInteractData:
   - nPCNames: 10

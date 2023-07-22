@@ -191,7 +191,7 @@ namespace Common
         public void DayTick()
         {
             if(alltempTraitApplied.Count == 0) return;  
-            foreach (TempTraitBuffData traitData in alltempTraitApplied)
+            foreach (TempTraitBuffData traitData in alltempTraitApplied.ToList())
             {
                 if (traitData.timeFrame == TimeFrame.Infinity)
                     continue; 

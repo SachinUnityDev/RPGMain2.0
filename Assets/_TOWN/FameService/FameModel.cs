@@ -15,7 +15,7 @@ namespace Common
         public FameType fameType;       
 
         [Header("Modifier values")]
-        public float fameYield = 1;
+        public int fameYield = 1;
         
         [Header("FAME Change")]
         public List<FameChgData> allFameData = new List<FameChgData>();

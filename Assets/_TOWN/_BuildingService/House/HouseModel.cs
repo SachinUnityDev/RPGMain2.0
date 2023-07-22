@@ -12,14 +12,14 @@ namespace Town
     {
         public HousePurchaseOpts houseOpts;
         public Currency currency;
-        public bool isPurchased;
+        public bool isUpgraded;
         public bool isPurchaseAbleInDemo;
 
-        public HousePurchaseOptsData(HousePurchaseOpts houseOpts, Currency currency, bool isPurchased, bool isPurchaseAbleInDemo)
+        public HousePurchaseOptsData(HousePurchaseOpts houseOpts, Currency currency, bool isUpgraded, bool isPurchaseAbleInDemo)
         {
             this.houseOpts = houseOpts;
             this.currency = currency;
-            this.isPurchased = isPurchased;
+            this.isUpgraded = isUpgraded;
             this.isPurchaseAbleInDemo = isPurchaseAbleInDemo;
         }
 
@@ -30,9 +30,6 @@ namespace Town
     [Serializable]
     public class HouseModel : BuildingModel
     {
-
-    
-
         [Header("Interact: Buy Furniture")]
         public List<HousePurchaseOptsData> purchaseOpts = new List<HousePurchaseOptsData> ();
 
@@ -59,13 +56,7 @@ namespace Town
 
         [Header("Interact: Drums")]
         public bool isDrumsPurchased = false;
-        
-        //public List<CharInteractData> charInteract = new List<CharInteractData>();
-
-        //public List<NPCInteractData> npcData = new List<NPCInteractData>();   
-
-        //public List<BuildIntTypeData> buildIntTypes = new List<BuildIntTypeData>();
-
+      
         public HousePurchaseOptsData GetHouseOptsInteractData(HousePurchaseOpts houseOpts)
         {
             int index = purchaseOpts.FindIndex(t=>t.houseOpts== houseOpts); 
@@ -94,7 +85,7 @@ namespace Town
             HousePurchaseOptsData purchaseOpts5 = new HousePurchaseOptsData(HousePurchaseOpts.Cora, new Currency(7, 4), false, true);
             HousePurchaseOptsData purchaseOpts6 = new HousePurchaseOptsData(HousePurchaseOpts.Drums, new Currency(3, 4), false, true);
             purchaseOpts.AddRange(new List<HousePurchaseOptsData>()
-                        { purchaseOpts1, purchaseOpts2, purchaseOpts3, purchaseOpts4, purchaseOpts5, purchaseOpts6 }); 
+                            { purchaseOpts1, purchaseOpts2, purchaseOpts3, purchaseOpts4, purchaseOpts5, purchaseOpts6 }); 
         }
     }
 }

@@ -16,13 +16,10 @@ namespace Town
 
         [Header("Buy Drinks")]
         public int selfDrinks = 0;
-        public bool canOfferDrink = true; 
+        public bool canOfferDrink = true;
 
-        //public List<CharInteractData> charInteract = new List<CharInteractData>();
-
-        //public List<NPCInteractData> npcData = new List<NPCInteractData>();
-
-        //public List<BuildIntTypeData> buildIntTypes = new List<BuildIntTypeData>();
+        [Header(" Well rested")]
+        public float restChance = 80f; 
 
         public TavernModel(BuildingSO tavernSO)
         {

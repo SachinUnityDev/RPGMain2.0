@@ -20,7 +20,7 @@ MonoBehaviour:
   hungerReliefMax: 26
   thirstReliefMin: 0
   thirstReliefMax: 0
-  maxInvStackSize: 5
+  maxInvStackSize: 10
   cost:
     silver: 0
     bronze: 7

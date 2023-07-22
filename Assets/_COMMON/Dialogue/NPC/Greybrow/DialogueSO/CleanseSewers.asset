@@ -25,4 +25,7 @@ MonoBehaviour:
   NPCinDialogue: 07000000
   locationName: 1
   dialogueAsset: {fileID: 4900000, guid: ec81d5cc1a6bff340b86bf9529c70092, type: 3}
+  diaAssetSkirmish: {fileID: 4900000, guid: ec81d5cc1a6bff340b86bf9529c70092, type: 3}
+  diaAssetHerbalist: {fileID: 0}
+  diaAssetWarden: {fileID: 0}
   interactSprites: []

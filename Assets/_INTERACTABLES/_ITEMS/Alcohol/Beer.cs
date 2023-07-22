@@ -48,7 +48,7 @@ namespace Interactables
         public override void OnDrink()
         {
             // +1 morale for one day 
-            float chance = 20f;
+            float chance = 30f;
             charController = CharService.Instance.GetCharCtrlWithName(CharNames.Abbas);
             if (chance.GetChance())
                 charController.buffController.ApplyBuff(CauseType.Items, (int)itemName, charController.charModel.charID

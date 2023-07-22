@@ -91,7 +91,7 @@ namespace Town
         {
             if (selectInt == -1) return; 
             HousePurchaseOpts opts = (HousePurchaseOpts)selectInt;
-            houseModel.purchaseOpts.Find(t => t.houseOpts == opts).isPurchased = true;
+            houseModel.purchaseOpts.Find(t => t.houseOpts == opts).isUpgraded = true;
 
             purchaseValue = houseModel.purchaseOpts.Find(t => t.houseOpts == opts).currency;
             if (purchaseValue.BronzifyCurrency() < stashCurr.BronzifyCurrency())

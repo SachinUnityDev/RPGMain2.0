@@ -1,7 +1,9 @@
 using Common;
 using DG.Tweening;
+using Quest;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,6 +12,11 @@ namespace Town
 
     public class BountyQPtrEvents : MonoBehaviour, IPointerClickHandler, INotify
     {
+        [Header("Bounty")]
+        BountyBoardView bountyBoardView;
+        [SerializeField] QuestModel questModel;
+        [SerializeField] TextMeshProUGUI bountyTxt; 
+        
         public bool isDontShowItAgainTicked { get; set; }
         public NotifyName notifyName { get; set; }
         Image img;
@@ -18,6 +25,21 @@ namespace Town
         private void Start()
         {
             img = GetComponent<Image>();           
+        }
+
+        public void InitBountyQ(QuestModel questModel, BountyBoardView bountyBoardView)
+        {
+            this.bountyBoardView= bountyBoardView;  
+            this.questModel = questModel;
+            FillBountyTxt();
+        }
+        void FillBountyTxt()
+        {
+            if(questModel== null)
+            {
+                bountyTxt = GetComponent<TextMeshProUGUI>();
+                bountyTxt.text = questModel.questNameStr;
+            }
         }
         void ShowNotifyBox()
         {
@@ -32,7 +54,9 @@ namespace Town
 
         public void OnNotifyAnsPressed()
         {
-            Debug.Log("Bounty Notify pressed");                              
+            Debug.Log("Bounty Notify pressed");
+            questModel.questState = QuestState.UnLocked;
+            bountyBoardView.InitBountyBoardLs();
         }
         void PosNotify()
         {

@@ -42,7 +42,8 @@ namespace Town
             FillUpAlcoholStock(); 
             buyDrinksMain.GetComponent<MainPtrEvents>().InitMainPage(this); 
             buySelf.GetComponent<SelfPagePtrEvents>().InitSelfPage(this);  
-            buyEveryone.GetComponent<EveryonePagePtrEvents>().InitBuyEveryOne(this);    
+            buyEveryone.GetComponent<EveryonePagePtrEvents>().InitBuyEveryOne(this);
+            Load();
         }
         public void FillUpAlcoholStock()
         {
@@ -59,6 +60,7 @@ namespace Town
         }
         public void Load()
         {
+            UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
             UIControlServiceGeneral.Instance.TogglePanelOnInGrp(buyDrinksMain.gameObject, true);
         }
 

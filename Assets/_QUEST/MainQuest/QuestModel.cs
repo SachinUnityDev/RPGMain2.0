@@ -11,21 +11,21 @@ namespace Quest
     public class QuestModel
     {
         public QuestNames questName;
-        public string QuestNameStr;
+        public string questNameStr;
         public QuestState questState;
         public List<ObjModel> allObjModel = new List<ObjModel>();
         public QuestType questType;
         public QuestMode questMode;
 
         [Header("Bounty Quest Respawn and Unlock")]
-      
+        public bool isUnBoxed = false; 
         public CalDate calDate;
         public int days2Respawn;
-
+        public int dayAfterQComplete = 0; 
         public QuestModel(QuestSO questSO)
         {
             questName = questSO.questName;
-            QuestNameStr = questSO.questNameStr; 
+            questNameStr = questSO.questNameStr; 
             questState = questSO.questState;
             questType= questSO.questType;
             questMode= questSO.questMode;   
@@ -34,7 +34,8 @@ namespace Quest
                 ObjModel objModel = new ObjModel(objSO); 
                 allObjModel.Add(objModel);
             }
-           
+
+            isUnBoxed = questSO.isUnBoxed; 
             calDate = questSO.calDate.DeepClone();
             days2Respawn= questSO.days2Respawn;
         }

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Policy;
+using System.ServiceModel.Configuration;
 using UnityEngine;
 
 
@@ -11,7 +12,10 @@ namespace Quest
 {
     public class QuestMissionService : MonoSingletonGeneric<QuestMissionService>
     {
-        public Action<QuestMode> OnQuestModeChg; 
+        public Action<QuestMode> OnQuestModeChg;
+        public Action<QuestModel> OnBountyQUnboxed;
+        public Action<QuestModel> OnBountyQReSpawn; 
+
 
         [Header("QuestMode")]
         public QuestMode currQuestMode;
@@ -94,7 +98,7 @@ namespace Quest
             }
             questBaseCount = allQuestBase.Count; 
         }
-        public List<QuestModel> GetAllQuestModelsOfType(QuestType questType)
+        public List<QuestModel> GetQModelsOfType(QuestType questType)
         {
             List<QuestModel> questModels = new List<QuestModel>();  
             questModels = allQuestModels.Where(t=>t.questType == questType).ToList();
@@ -112,6 +116,23 @@ namespace Quest
             }
             return questModes;
         }
+
+        #region
+
+        public void On_BountyQUnboxed(QuestModel questModel)
+        {
+            questModel.questState = QuestState.Locked; 
+            OnBountyQUnboxed?.Invoke(questModel);
+        }
+        public void On_BountyQReSpawn(QuestModel questModel)
+        {
+            questModel.isUnBoxed = true;
+            questModel.questState= QuestState.Locked;
+            OnBountyQReSpawn?.Invoke(questModel);
+        }
+
+        #endregion
+
 
         #region FLEE 
         public void On_FleePressedInQuest()

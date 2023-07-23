@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class MainPtrEvents : MonoBehaviour
+public class MainPtrEvents : MonoBehaviour, IPanel
 {
     BuyDrinksView buyDrinksView;
 
@@ -41,5 +41,20 @@ public class MainPtrEvents : MonoBehaviour
         //ptrEvents.Init(ptrEvents);
         //buySelf.GetComponent<SelfPagePtrEvents>().InitSelfPage(this);
         UIControlServiceGeneral.Instance.TogglePanelOnInGrp(buyDrinksView.buySelf.gameObject, true);
+    }
+
+    public void Load()
+    {
+        UIControlServiceGeneral.Instance.TogglePanel(gameObject, true); 
+    }
+
+    public void UnLoad()
+    {
+        UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
+    }
+
+    public void Init()
+    {
+      Load();
     }
 }

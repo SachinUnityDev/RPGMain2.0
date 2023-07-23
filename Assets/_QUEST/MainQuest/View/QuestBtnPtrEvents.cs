@@ -30,7 +30,7 @@ namespace Quest
         }
         void ChgBtnState()
         {
-            allQuestModels = QuestMissionService.Instance.GetAllQuestModelsOfType(questType);
+            allQuestModels = QuestMissionService.Instance.GetQModelsOfType(questType);
 
             if (allQuestModels.Count == 0)
             {
@@ -51,24 +51,20 @@ namespace Quest
         
         public void FillQuestJurno()
         {
-           
-            allQuestModels = QuestMissionService.Instance.GetAllQuestModelsOfType(questType);
-            
-            ChgBtnState();           
-            
-
-            for (int i = 0; i < questView.questJournoTrans.childCount; i++)
+           allQuestModels.Clear();
+            allQuestModels = QuestMissionService.Instance.GetQModelsOfType(questType);            
+            ChgBtnState();
+            int i = 0; 
+            foreach (QuestModel model in allQuestModels) 
             {
-                if(i< allQuestModels.Count)
-                {                       
-                    questView.questJournoTrans.GetChild(i).GetComponent<QuestJournoPtrEvents>()
-                        .QuestJurnoPtrInit(questView, allQuestModels[i]); 
-                }
-                else
-                {                 
-                    questView.questJournoTrans.GetChild(i).GetComponent<QuestJournoPtrEvents>()
-                      .QuestJurnoPtrInit(questView, null);
-                }
+                questView.questJournoTrans.GetChild(i).GetComponent<QuestJournoPtrEvents>()
+                    .QuestJurnoPtrInit(questView, allQuestModels[i]);
+                questView.questJournoTrans.GetChild(i).gameObject.SetActive(true);
+                i++; 
+            }
+            for (int j = i; j < questView.questJournoTrans.childCount; j++)
+            {
+                questView.questJournoTrans.GetChild(j).gameObject.SetActive(false);
             }    
         }
 

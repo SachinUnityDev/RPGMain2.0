@@ -21,18 +21,26 @@ namespace Quest
 
         void FillJurnoTxt()
         {
-            TextMeshProUGUI txt = transform.GetComponent<TextMeshProUGUI>();
-            if (questModel == null)
+            TextMeshProUGUI txt = transform.GetComponent<TextMeshProUGUI>();           
+            if(questModel!= null ) 
             {
-                txt.text = "";
+                txt.gameObject.SetActive(true);
+                if (questModel.questState == QuestState.UnLocked)
+                    txt.text = questModel.questNameStr;
+                else if (questModel.questState == QuestState.Completed)
+                {
+                    txt.text = questModel.questNameStr;
+                    txt.fontStyle = FontStyles.Strikethrough;
+                }                    
+                else
+                    txt.text = "";
             }
             else
-            {   
-                    txt.text = questModel.QuestNameStr;
-                    
-                    if (questModel.questState == QuestState.Completed)
-                        txt.fontStyle = FontStyles.Strikethrough;                
+            {
+                txt.text = "";
+                txt.gameObject.SetActive(false);
             }
+            
         }
         void FillObjPanel()
         {
@@ -51,7 +59,7 @@ namespace Quest
                         txt.fontStyle = FontStyles.Strikethrough;
                         txt.text = $"{i + 1}. " + questModel.allObjModel[i].objNameStr;
                     }
-                    else if (questModel.allObjModel[i].objState == QuestState.ToBeTaken)
+                    else if (questModel.allObjModel[i].objState == QuestState.Locked)
                     {
                         txt.fontStyle = FontStyles.Normal;
                         txt.text = $"{i + 1}. " + questModel.allObjModel[i].objNameStr;

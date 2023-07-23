@@ -14,6 +14,11 @@ namespace Quest
         public ObjModel objModel;
 
         public NodeData currNodeData;
+        private void Start()
+        {
+            CalendarService.Instance.OnStartOfCalDate += UnBoxBountyQuest;
+            CalendarService.Instance.OnStartOfCalDate += (CalDate calDate)=> UpdateBountyQRespawn();
+        }
         public void ShowQuestEmbarkView(QuestNames questName, ObjNames objName, QuestNodePtrEvents nodePtrEvents)
         {
             questModel = QuestMissionService.Instance.GetQuestModel(questName);
@@ -25,7 +30,39 @@ namespace Quest
         }
 
         
+        public void UnBoxBountyQuest(CalDate calDate)
+        {
+            foreach (QuestModel model in QuestMissionService.Instance
+                .GetQModelsOfType(QuestType.Bounty))
+            {
+                if(model.questType == QuestType.Bounty)
+                if(model.calDate.monthName == calDate.monthName
+                    && model.calDate.day == calDate.day)
+                {
+                    model.isUnBoxed = true; 
+                    QuestMissionService.Instance.On_BountyQUnboxed(model);
+                }
+            }
+        }
 
-
+        public void UpdateBountyQRespawn()
+        {
+            foreach (QuestModel model in QuestMissionService.Instance
+                .GetQModelsOfType(QuestType.Bounty))
+            {   
+                if (model.questState == QuestState.Completed)
+                {
+                    if (model.days2Respawn >= model.dayAfterQComplete)
+                    {
+                        model.dayAfterQComplete = 0;
+                        QuestMissionService.Instance.On_BountyQReSpawn(model);                       
+                    }
+                    else
+                    {
+                        model.dayAfterQComplete++; 
+                    }
+                }
+            }
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace Quest
         public Transform objPanel;
         private void Start()
         {
-            UnLoad();           
+            
         }
         public void Init()
         {

@@ -9,7 +9,7 @@ using TMPro;
 
 namespace Town
 {
-    public class EveryonePagePtrEvents : MonoBehaviour
+    public class EveryonePagePtrEvents : MonoBehaviour, IPanel
     {
         BuyDrinksView buyDrinksView;
 
@@ -95,6 +95,21 @@ namespace Town
         void OnReturnBtnPressed()
         {
             UIControlServiceGeneral.Instance.TogglePanelOnInGrp(buyDrinksView.buyDrinksMain.gameObject, true);
+        }
+
+        public void Load()
+        {
+            UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
+        }
+
+        public void UnLoad()
+        {
+           UIControlServiceGeneral.Instance.TogglePanel(gameObject, false); 
+        }
+
+        public void Init()
+        {
+           Load();
         }
     }
 }

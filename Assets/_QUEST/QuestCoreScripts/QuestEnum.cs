@@ -85,10 +85,9 @@ namespace Quest
     public enum QuestState
     {
         None,
-        ToBeTaken,
-        InProgress,
-        Completed,
         Locked,
+        UnLocked,
+        Completed,       
     }
     public enum QRoomState
     {

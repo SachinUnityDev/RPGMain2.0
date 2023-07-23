@@ -8,7 +8,7 @@ using DG.Tweening;
 
 namespace Town
 {
-    public class SelfPagePtrEvents : MonoBehaviour
+    public class SelfPagePtrEvents : MonoBehaviour, IPanel
     {
         [Header("TBR")]
         [SerializeField] Transform beerTrans;
@@ -57,5 +57,19 @@ namespace Town
             UIControlServiceGeneral.Instance.TogglePanelOnInGrp(buyDrinksView.buyDrinksMain.gameObject, true); 
         }
 
+        public void Load()
+        {
+            UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
+        }
+
+        public void UnLoad()
+        {
+            UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
+        }
+
+        public void Init()
+        {
+            Load();
+        }
     }
 }

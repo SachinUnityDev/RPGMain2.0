@@ -32,7 +32,8 @@ namespace Quest
         public int expBase;
         public int expMultiplier;
 
-        [Header("Bounty Quest Respawn and Unlock")]       
+        [Header("Bounty Quest Respawn and Unlock")]
+        public bool isUnBoxed = false; 
         public CalDate calDate; 
         public int days2Respawn; 
 

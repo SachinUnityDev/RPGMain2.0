@@ -88,6 +88,7 @@ namespace Quest
         ToBeTaken,
         InProgress,
         Completed,
+        Locked,
     }
     public enum QRoomState
     {

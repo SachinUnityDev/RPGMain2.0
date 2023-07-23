@@ -71,6 +71,8 @@ namespace Town
             // Interior Init
             foreach (Transform child in buildIntContainer)
             {
+                BuildView buildView = child.GetComponent<BuildView>();
+                if(buildView != null)
                 if(child.GetComponent<BuildView>().BuildingName == selectBuild)
                 {
                     child.GetComponent<IPanel>().Init();                     

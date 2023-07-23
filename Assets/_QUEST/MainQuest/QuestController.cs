@@ -14,8 +14,6 @@ namespace Quest
         public ObjModel objModel;
 
         public NodeData currNodeData;
-
-
         public void ShowQuestEmbarkView(QuestNames questName, ObjNames objName, QuestNodePtrEvents nodePtrEvents)
         {
             questModel = QuestMissionService.Instance.GetQuestModel(questName);

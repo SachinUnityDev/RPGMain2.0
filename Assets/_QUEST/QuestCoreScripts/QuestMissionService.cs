@@ -13,7 +13,6 @@ namespace Quest
     {
         public Action<QuestMode> OnQuestModeChg; 
 
-
         [Header("QuestMode")]
         public QuestMode currQuestMode;
         

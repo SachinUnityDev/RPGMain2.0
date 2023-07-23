@@ -49,7 +49,7 @@ namespace Common
             notifyModel = UIControlServiceGeneral.Instance.notifyController.GetNotifyModel(notifyName);
             if (notifyModel.isDontShowAgainTicked)
             {
-                OnContinueBtnPressed(); return; 
+                OnContinueBtnPressed(); return;
             }
             NotifyView();
             Load();

@@ -20,3 +20,9 @@ MonoBehaviour:
   questType: 3
   hasCamp: 0
   questMode: 2
+  expBase: 0
+  expMultiplier: 0
+  calDate:
+    monthName: 1
+    day: 26
+  days2Respawn: 4

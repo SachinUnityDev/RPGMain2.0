@@ -13,15 +13,18 @@ namespace Town
     public class BuildCharPortPtrEvents : MonoBehaviour
     {
         [Header("Char Port")]
-        [SerializeField] Transform charPort;
+        [SerializeField] Image charPortImg;
+        [SerializeField] Image charBGPortImg; 
 
         [Header("Interact Data")]
         [SerializeField] CharIntData interactData;
         [SerializeField] BuildingModel buildModel;
         BuildView buildView;
-        private void Awake()
+        private void Start()
         {
-            // isShown= false;
+            charPortImg = transform.GetChild(1).GetComponent<Image>();
+            charBGPortImg = transform.GetChild(0).GetComponent<Image>();    
+            
         }
 
         public void InitPortPtrEvents(CharIntData charIntdata, BuildingModel buildModel
@@ -35,7 +38,8 @@ namespace Town
         void FillPort()
         {
             CharacterSO charSO = CharService.Instance.allCharSO.GetCharSO(interactData.compName);
-            charPort.GetComponent<Image>().sprite = charSO.charHexPortrait;
+            charPortImg.sprite = charSO.charHexPortrait;
+            charBGPortImg.sprite = CharService.Instance.allCharSO.hexPortBg; 
         }
         void InitBtn()
         {

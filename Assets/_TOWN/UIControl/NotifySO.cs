@@ -26,6 +26,7 @@ namespace Common
         UnSocket,
         Enchant, 
         LootTaken, 
+        BountyQUnLock,
 
 
     }

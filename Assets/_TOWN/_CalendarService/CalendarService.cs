@@ -14,6 +14,19 @@ using Town;
 
 namespace Common
 {
+    [Serializable]
+    public class CalDate
+    {
+        public MonthName monthName;
+        public int day;
+
+        public CalDate(MonthName monthName, int day)
+        {
+            this.monthName = monthName;
+            this.day = day;
+        }
+    }
+
     public class CalendarService : MonoSingletonGeneric<CalendarService>
     {
        // public event Action<DayName> OnCalendarDayStart;  // to be remove and incorported
@@ -22,6 +35,8 @@ namespace Common
         public event Action<WeekEventsName, int> OnStartOfTheWeek;
         public event Action<MonthName> OnStartOfTheMonth;
         public event Action<TimeState> OnChangeTimeState;
+        public event Action<CalDate> OnStartOfCalDate;
+
 
         [Header("CURRENT TIME STATE ")]
         public TimeState currtimeState;
@@ -75,6 +90,7 @@ namespace Common
             currentWeek = WeekEventsName.WeekOfRejuvenation;
             dayInGame = 0;
             dayInYear = 24;
+            currentMonth = MonthName.FeatherOfThePeafowl; 
             scrollMonth = currentMonth;
             currtimeState = TimeState.Day;
             dayEventsController = GetComponent<DayEventsController>();
@@ -144,11 +160,11 @@ namespace Common
             }
             Debug.Log("Current Month" + currentMonth);
             calendarUIController.UpdateMonthPanel(currentMonth, dayInYrName, dayInYear);
-            scrollMonth = currentMonth; // TIE IN POINT  
+            scrollMonth = currentMonth; // TIE IN POINT
+                                         
         }
         public void On_EndDayClick()
         {
-
             if (currtimeState == TimeState.Night)
             {
                 // start of the day
@@ -182,10 +198,11 @@ namespace Common
         #region DAY WEEK AND MONTH EVENT TRIGGERS
         public void On_StartOfDay(int day)
         {
-            Debug.Log("END Day");
+            Debug.Log("END Day");  // day in Year .... 
             UpdateDay();
             OnChangeTimeState(TimeState.Day);
             OnStartOfCalDay?.Invoke(day);
+            OnStartOfCalDate?.Invoke(new CalDate((MonthName)currentMonth, dayInYear)); 
         }
         public void On_StartOfNight(int day)
         {

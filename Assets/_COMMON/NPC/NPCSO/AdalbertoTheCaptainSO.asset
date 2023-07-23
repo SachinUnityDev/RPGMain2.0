@@ -292,13 +292,13 @@ MonoBehaviour:
         poeticName: 0
     - itemType: 5
       genGawgawQ: 0
-      qty: 16
+      qty: 10
       itemName:
         potionName: 0
         genGewgawNames: 0
         HerbName: 0
         foodName: 0
-        fruitNames: 5
+        fruitNames: 4
         ingredientName: 0
         scrollName: 0
         tgName: 0
@@ -312,7 +312,309 @@ MonoBehaviour:
         poeticName: 0
     - itemType: 9
       genGawgawQ: 0
-      qty: 6
+      qty: 10
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 2
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+    - itemType: 9
+      genGawgawQ: 0
+      qty: 10
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 3
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+    - itemType: 9
+      genGawgawQ: 0
+      qty: 4
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 12
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+    - itemType: 9
+      genGawgawQ: 0
+      qty: 4
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 17
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+    - itemType: 9
+      genGawgawQ: 0
+      qty: 3
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 14
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+    - itemType: 9
+      genGawgawQ: 0
+      qty: 5
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 4
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+    - itemType: 9
+      genGawgawQ: 0
+      qty: 4
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 16
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+    - itemType: 9
+      genGawgawQ: 0
+      qty: 2
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 7
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+  - weekSeq: 3
+    itemDataLs:
+    - itemType: 4
+      genGawgawQ: 0
+      qty: 22
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 4
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+    - itemType: 4
+      genGawgawQ: 0
+      qty: 16
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 6
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+    - itemType: 5
+      genGawgawQ: 0
+      qty: 15
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 7
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+    - itemType: 5
+      genGawgawQ: 0
+      qty: 10
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 4
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+    - itemType: 5
+      genGawgawQ: 0
+      qty: 15
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 9
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+    - itemType: 5
+      genGawgawQ: 0
+      qty: 15
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 1
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+    - itemType: 9
+      genGawgawQ: 0
+      qty: 8
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 8
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+    - itemType: 9
+      genGawgawQ: 0
+      qty: 8
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -332,7 +634,7 @@ MonoBehaviour:
         poeticName: 0
     - itemType: 9
       genGawgawQ: 0
-      qty: 6
+      qty: 7
       itemName:
         potionName: 0
         genGewgawNames: 0
@@ -341,7 +643,47 @@ MonoBehaviour:
         fruitNames: 0
         ingredientName: 0
         scrollName: 0
-        tgName: 10
+        tgName: 16
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+    - itemType: 9
+      genGawgawQ: 0
+      qty: 7
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 4
+        toolName: 0
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
+    - itemType: 9
+      genGawgawQ: 0
+      qty: 3
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 13
         toolName: 0
         teaName: 0
         soupsName: 0
@@ -362,66 +704,6 @@ MonoBehaviour:
         ingredientName: 0
         scrollName: 0
         tgName: 6
-        toolName: 0
-        teaName: 0
-        soupsName: 0
-        gemName: 0
-        alcoholName: 0
-        mealName: 0
-        sagaicName: 0
-        poeticName: 0
-    - itemType: 9
-      genGawgawQ: 0
-      qty: 5
-      itemName:
-        potionName: 0
-        genGewgawNames: 0
-        HerbName: 0
-        foodName: 0
-        fruitNames: 0
-        ingredientName: 0
-        scrollName: 0
-        tgName: 16
-        toolName: 0
-        teaName: 0
-        soupsName: 0
-        gemName: 0
-        alcoholName: 0
-        mealName: 0
-        sagaicName: 0
-        poeticName: 0
-    - itemType: 9
-      genGawgawQ: 0
-      qty: 4
-      itemName:
-        potionName: 0
-        genGewgawNames: 0
-        HerbName: 0
-        foodName: 0
-        fruitNames: 0
-        ingredientName: 0
-        scrollName: 0
-        tgName: 5
-        toolName: 0
-        teaName: 0
-        soupsName: 0
-        gemName: 0
-        alcoholName: 0
-        mealName: 0
-        sagaicName: 0
-        poeticName: 0
-    - itemType: 9
-      genGawgawQ: 0
-      qty: 4
-      itemName:
-        potionName: 0
-        genGewgawNames: 0
-        HerbName: 0
-        foodName: 0
-        fruitNames: 0
-        ingredientName: 0
-        scrollName: 0
-        tgName: 1
         toolName: 0
         teaName: 0
         soupsName: 0

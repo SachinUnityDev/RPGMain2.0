@@ -10,8 +10,10 @@ namespace Common
     [CreateAssetMenu(fileName = "AllNPCSO", menuName = "Character Service/AllNPCSO")]
     public class AllNPCSO : ScriptableObject
     {       
-        public List<NPCSO> allNPCSO = new List<NPCSO>();   
-        
+        public List<NPCSO> allNPCSO = new List<NPCSO>();
+        [Header("NPC Sprite Bg")]
+        public Sprite HexPortBgN; 
+
         public NPCSO GetNPCSO(NPCNames npcName)
         {
             int index = allNPCSO.FindIndex(t=>t.npcName== npcName); 

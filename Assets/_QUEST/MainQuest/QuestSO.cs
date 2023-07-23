@@ -32,6 +32,11 @@ namespace Quest
         public int expBase;
         public int expMultiplier;
 
+        [Header("Bounty Quest Respawn and Unlock")]       
+        public CalDate calDate; 
+        public int days2Respawn; 
+
+
         public ObjSO GetObjSO(ObjNames objName)
         {
             int index =

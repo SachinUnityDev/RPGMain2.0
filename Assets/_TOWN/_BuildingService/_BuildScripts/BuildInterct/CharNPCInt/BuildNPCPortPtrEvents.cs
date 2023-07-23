@@ -12,16 +12,19 @@ namespace Town
 {
     public class BuildNPCPortPtrEvents : MonoBehaviour, IPointerClickHandler
     { 
+                                        
         [Header("Char Port")]
-        [SerializeField] Transform charPort; 
+        [SerializeField] Image charPortImg;
+        [SerializeField] Image bgPortImg; 
 
         [Header("Interact Data")]
         [SerializeField] NPCIntData interactData;
         [SerializeField] BuildingModel buildModel;
         BuildView buildView;
-        private void Awake()
+        private void Start()
         {                
-           // isShown= false;
+           bgPortImg= transform.GetChild(0).GetComponent<Image>();
+            charPortImg = transform.GetChild(1).GetComponent<Image>();
         }
 
         public void InitPortPtrEvents(NPCIntData npcInteractData, BuildingModel buildModel
@@ -35,7 +38,8 @@ namespace Town
         void FillPort()
         {
             NPCSO npcSO = CharService.Instance.allNpcSO.GetNPCSO(interactData.nPCNames);
-            charPort.GetComponent<Image>().sprite = npcSO.npcHexPortrait;
+            charPortImg.sprite = npcSO.npcHexPortrait;
+            bgPortImg.sprite = CharService.Instance.allNpcSO.HexPortBgN;
         }
 
         #region INTERACT BTN 
@@ -62,7 +66,6 @@ namespace Town
             }
         }
 
-     
         #endregion
     }
 }

@@ -10,8 +10,9 @@ namespace Common
     public class AllCharSO : ScriptableObject
     {
         public List<CharacterSO> allAllySO = new List<CharacterSO>(); 
-        public List<CharacterSO> allEnemySO= new List<CharacterSO>();      
-
+        public List<CharacterSO> allEnemySO= new List<CharacterSO>();
+        [Header("Hex portraits BG")]
+        public Sprite hexPortBg;
         public CharacterSO GetCharSO(CharNames charName)
         {
             int index = allAllySO.FindIndex(t => t.charName == charName);

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Enchant
   m_EditorClassIdentifier: 
   NotifyName: 4
-  notifyStr: enccchant
+  notifyStr: Enchant
   isDontShowAgainTicked: 0

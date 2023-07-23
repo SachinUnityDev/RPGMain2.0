@@ -29,3 +29,7 @@ MonoBehaviour:
   iconSprite: {fileID: 21300000, guid: 41f6239a55c8586488ba860072e23f45, type: 3}
   allLines:
   - Trade item. Might look good on the Tavern wall.
+  trophyOrPeltImg_Day: {fileID: 21300000, guid: 7659bf01f855a0544ba1488ea240d54e,
+    type: 3}
+  trophyOrPeltImg_Night: {fileID: 21300000, guid: 5d27bc6b340f5154cb95f7c48f3f7234,
+    type: 3}

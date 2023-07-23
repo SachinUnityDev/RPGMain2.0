@@ -1,4 +1,5 @@
 using Common;
+using Interactables;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,78 +9,25 @@ namespace Town
 {
     public class TavernView : BuildView
     {
-       // [SerializeField] HelpName helpName;
-        //public BuildingNames BuildingName => BuildingNames.Tavern;
-
-        //[Header("To be ref")]
-        //[SerializeField] Transform btnContainer;
-        //[SerializeField] Transform NPCInteractPanel;
-
-        //[Header("Not to be ref")]
-        //[SerializeField] Transform BGSpriteContainer;
-
-        //[Header("Tavern Interact Panels: To be ref")]
-        //[SerializeField] Transform BuildInteractPanel;
-
-
-        //[Header("Day and Night BG Sprites")]
-        //[SerializeField] Sprite dayBG;
-        //[SerializeField] Sprite nightBG;
-
+      
         [Header("Build Interaction panel")]
         public Transform bountyBoard;
         public Transform buyDrink;
         public Transform trophy;
         public Transform rest;
 
+        [Header("trophy N PeltContainer")]
+        [SerializeField] Transform trophyNPeltContainer;
 
-        //[SerializeField] Button exitBtn;
+        [SerializeField] TavernModel tavernModel;
 
-        //BuildingSO tavernSO;
-        //TimeState timeState;
-
-        //void Awake()
-        //{
-        //    BGSpriteContainer = transform.GetChild(0);
-        //    exitBtn.onClick.AddListener(UnLoad);
-        //}
-        //public void Init()
-        //{
-        //    UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
-        //    AllBuildSO allBuildSO = BuildingIntService.Instance.allBuildSO; 
-        //    BuildingSO tavernSO = allBuildSO.GetBuildSO(BuildingNames.Tavern);
-        //    dayBG = tavernSO.buildIntDay;
-        //    nightBG = tavernSO.buildIntNight; 
-
-        //    timeState = CalendarService.Instance.currtimeState;
-        //    btnContainer.GetComponent<BuildInteractBtnView>().InitInteractBtns(this);
-        //    FillTavernBG();
-        //    InitInteractPanels();
-        //}
-        //public void FillTavernBG()
-        //{
-        //    if (CalendarService.Instance.currtimeState == TimeState.Night)
-        //    {
-        //        BGSpriteContainer.GetComponent<Image>().sprite = nightBG;
-        //    }
-        //    else
-        //    {
-        //        BGSpriteContainer.GetComponent<Image>().sprite = dayBG;
-        //    }
-
-        //    for (int i = 0; i < BGSpriteContainer.childCount; i++)
-        //    {
-        //        BGSpriteContainer.GetChild(i).GetComponent<TavernBaseEvents>().Init(this);
-        //    }
-        //}
-        //void InitInteractPanels()
-        //{
-        //    foreach (Transform child in BuildInteractPanel)
-        //    {
-        //        child.GetComponent<IPanel>().Init(); // interact panels initialized here 
-        //    }
-        //}
-
+        private void Start()
+        {
+            BuildingIntService.Instance.OnItemWalled +=
+                        (Iitems item , TavernSlotType t) => FillTrophyNPeltOnWall();
+            CalendarService.Instance.OnChangeTimeState += (TimeState timeState) => FillTrophyNPeltOnWall();
+            FillTrophyNPeltOnWall();
+        }
         public override Transform GetBuildInteractPanel(BuildInteractType buildInteract)
         {
             switch (buildInteract)
@@ -98,32 +46,43 @@ namespace Town
                     return null;
             }
         }
-        //public void Load()
-        //{
-           
-        //}
+        public void FillTrophyNPeltOnWall()
+        {
+            TimeState timeState = CalendarService.Instance.currtimeState; 
+            tavernModel = BuildingIntService.Instance.tavernController.tavernModel;
 
-        //public void UnLoad()
-        //{
-        //    UIControlServiceGeneral.Instance.TogglePanelOnInGrp(this.gameObject, false);
-        //    foreach (Transform child in BuildInteractPanel)
-        //    {
-        //        child.GetComponent<IPanel>().UnLoad();
-        //    }
-        //    TownService.Instance.townViewController.OnBuildDeselect();
-        //}
-        //private void Update()
-        //{
-        //    if (Input.GetKeyDown(KeyCode.S))
-        //    {
-        //        Init(); // for test
+            Transform trophyTrans = trophyNPeltContainer.GetChild(0); 
+            Transform peltTrans = trophyNPeltContainer.GetChild(1);
+            if (tavernModel.trophyOnWall!= null)
+            {
+                TGSO tgSO = 
+                ItemService.Instance.GetTradeGoodsSO((TGNames)tavernModel.trophyOnWall.itemName);
+                trophyNPeltContainer.GetChild(0).gameObject.SetActive(true);
+                if(timeState == TimeState.Night)
+                   trophyTrans.GetComponent<Image>().sprite = tgSO.trophyOrPeltImg_Night;
+                else
+                   trophyTrans.GetComponent<Image>().sprite = tgSO.trophyOrPeltImg_Day;
+            }
+            else
+            {
+                    trophyTrans.gameObject.SetActive(false);
+            }
+            if (tavernModel.peltOnWall != null)
+            {
+                TGSO tgSO =
+                ItemService.Instance.GetTradeGoodsSO((TGNames)tavernModel.peltOnWall.itemName);
+                peltTrans.gameObject.SetActive(true);
+                if (timeState == TimeState.Night)
+                    peltTrans.GetComponent<Image>().sprite = tgSO.trophyOrPeltImg_Night;
+                else
+                    peltTrans.GetComponent<Image>().sprite = tgSO.trophyOrPeltImg_Day;
+            }
+            else
+            {
+                peltTrans.gameObject.SetActive(false);
+            }
 
-        //    }
-        //}
-
-        //public HelpName GetHelpName()
-        //{
-        //   return helpName;
-        //}
+        }
+      
     }
 }

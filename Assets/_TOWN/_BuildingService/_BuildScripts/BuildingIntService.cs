@@ -79,17 +79,13 @@ namespace Town
         #region   
 
         public void On_ItemWalled(Iitems item, TavernSlotType tavernSlotType)
-        {
-            
+        {   
             if (tavernSlotType == TavernSlotType.Trophy)
             {
                tavernController.tavernModel.trophyOnWall = item; 
-
             }
-                
             if (tavernSlotType == TavernSlotType.Pelt)
             {
-                
                 tavernController.tavernModel.peltOnWall = item;
             }
             OnItemWalled?.Invoke(item, tavernSlotType);

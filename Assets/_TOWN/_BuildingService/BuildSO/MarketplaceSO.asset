@@ -24,45 +24,53 @@ MonoBehaviour:
   CharInteractPrefab: []
   npcInteractData:
   - nPCNames: 3
-    nPCIntType: 1
-    npcState: 0
-    allDialogueData:
-    - dialogueName: 22
-      isUnLocked: 0
+    npcState: 1
+    allInteract:
+    - nPCIntType: 1
+      allDialogueData:
+      - dialogueName: 1
+        isUnLocked: 1
   - nPCNames: 3
-    nPCIntType: 2
-    npcState: 0
-    allDialogueData: []
+    npcState: 1
+    allInteract:
+    - nPCIntType: 2
+      allDialogueData: []
   - nPCNames: 2
-    nPCIntType: 1
-    npcState: 0
-    allDialogueData:
-    - dialogueName: 21
-      isUnLocked: 0
+    npcState: 1
+    allInteract:
+    - nPCIntType: 1
+      allDialogueData:
+      - dialogueName: 3
+        isUnLocked: 1
   - nPCNames: 2
-    nPCIntType: 2
     npcState: 0
-    allDialogueData: []
+    allInteract:
+    - nPCIntType: 2
+      allDialogueData: []
   - nPCNames: 15
-    nPCIntType: 1
-    npcState: 0
-    allDialogueData:
-    - dialogueName: 24
-      isUnLocked: 0
+    npcState: 1
+    allInteract:
+    - nPCIntType: 1
+      allDialogueData:
+      - dialogueName: 3
+        isUnLocked: 1
   - nPCNames: 15
-    nPCIntType: 2
     npcState: 0
-    allDialogueData: []
+    allInteract:
+    - nPCIntType: 2
+      allDialogueData: []
   - nPCNames: 9
-    nPCIntType: 1
-    npcState: 0
-    allDialogueData:
-    - dialogueName: 23
-      isUnLocked: 0
+    npcState: 1
+    allInteract:
+    - nPCIntType: 1
+      allDialogueData:
+      - dialogueName: 3
+        isUnLocked: 1
   - nPCNames: 9
-    nPCIntType: 2
-    npcState: 0
-    allDialogueData: []
+    npcState: 1
+    allInteract:
+    - nPCIntType: 2
+      allDialogueData: []
   npcDataPrefab: []
   buildIntTypes:
   - BuildIntType: 17

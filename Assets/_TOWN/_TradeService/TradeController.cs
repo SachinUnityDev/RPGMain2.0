@@ -46,7 +46,7 @@ namespace Common
         public TradeModel GetTradeModel(NPCNames npcNames) 
         {
             int index = allTradeModel.FindIndex(t=>t.npcName== npcNames);
-            if (index != 0)
+            if (index != -1)
                 return allTradeModel[index]; 
             else
                 Debug.Log("trade model not found" + npcNames.ToString());

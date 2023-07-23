@@ -10,7 +10,6 @@ using UnityEngine.UI;
 namespace Common
 {
     public class TrophySelectSlotController : MonoBehaviour, IDropHandler, IPointerClickHandler,iSlotable
-
     {
 
         #region DECLARATIONS
@@ -18,7 +17,7 @@ namespace Common
         public List<Iitems> ItemsInSlot { get; set; } = new List<Iitems>();
         [SerializeField] int itemCount = 0;
 
-
+        [SerializeField] 
         public SlotType slotType => SlotType.TrophySelectSlot;
 
         [Header("FOR DROP CONTROLS")]

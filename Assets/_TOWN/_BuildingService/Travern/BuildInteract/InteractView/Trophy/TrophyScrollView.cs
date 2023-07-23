@@ -9,7 +9,7 @@ namespace Town
 {
 
 
-    public class TrophyScrollPagePtrEvents : MonoBehaviour 
+    public class TrophyScrollView : MonoBehaviour 
     {
         [Header("Select Container")]
         [SerializeField] Transform selectContainer;
@@ -48,8 +48,6 @@ namespace Town
         }
         void FillItemsinSlots()
         {
-           
-
             if (slotItems.Count == 0)
             {
                 for (int k = 0; k < 3; k++)
@@ -65,8 +63,20 @@ namespace Town
                 maxIndex = (slotItems.Count/3)-1; // 0 factor in list    
             else
                 maxIndex = (slotItems.Count/3) ;
+            if(maxIndex <= 1)
+            {
+                leftBtn.gameObject.SetActive(false);
+                rightBtn.gameObject.SetActive(false);
+            }
+            else
+            {
+                leftBtn.gameObject.SetActive(true);
+                rightBtn.gameObject.SetActive(true);
+            }
+
             int startIndex = index * 3;
-            int endIndex = startIndex + 3;           
+            int endIndex = startIndex + 3;    
+            
             int j = 0; 
             for (int i = startIndex; i < endIndex; i++)
             {

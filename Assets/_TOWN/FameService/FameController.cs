@@ -54,7 +54,5 @@ namespace Common
             return true;
         }
     }
-
-
 }
 

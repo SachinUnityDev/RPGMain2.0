@@ -26,9 +26,13 @@ namespace Common
         [Header("Bg Color")]
         [SerializeField] Color BGColorN;
         [SerializeField] Color BGColorNA;
-        [Header("Sprite Color")]
+        [SerializeField] Color spriteColorHL;
+        [Header("N/NA/HL Sprite Color")]
         [SerializeField] Color spriteColorN;
         [SerializeField] Color spriteColorNA;
+
+
+
         private void Start()
         {
             CalendarService.Instance.OnChangeTimeState += ResetSelfDrinks;
@@ -52,6 +56,7 @@ namespace Common
             {
                 return; 
             }
+            transform.GetComponent<Image>().DOColor(spriteColorHL, 0.1f);
             AlcoholBase alcoholBase = item as AlcoholBase;
             buffTxt.text = "";
             foreach (string displayStr in alcoholBase.allDisplayStr)
@@ -61,10 +66,15 @@ namespace Common
         }
         public void OnPointerExit(PointerEventData eventData)
         {
-            if(HasReachedMaxDrinksLimit())
-                buffTxt.text = ""; 
+            if (HasReachedMaxDrinksLimit())
+            {
+                buffTxt.text = "";
+                return; 
+            }   
+            transform.GetComponent<Image>().DOColor(spriteColorN, 0.1f);
+
         }
-       
+
         public void SetNSprite()
         {
             transform.GetComponent<Image>().DOColor(BGColorN, 0.1f);

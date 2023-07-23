@@ -31,20 +31,13 @@ MonoBehaviour:
       - dialogueName: 1
         isUnLocked: 1
       - dialogueName: 3
-        isUnLocked: 0
-    - nPCIntType: 2
-      allDialogueData: []
-  - nPCNames: 7
-    npcState: 1
-    allInteract:
-    - nPCIntType: 1
-      allDialogueData:
-      - dialogueName: 1
         isUnLocked: 1
-      - dialogueName: 3
+      - dialogueName: 5
         isUnLocked: 1
       - dialogueName: 4
         isUnLocked: 1
+    - nPCIntType: 2
+      allDialogueData: []
   npcDataPrefab: []
   buildIntTypes:
   - BuildIntType: 11

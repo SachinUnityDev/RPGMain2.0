@@ -22,8 +22,12 @@ MonoBehaviour:
   buildIntNight: {fileID: 21300000, guid: 0bfd4c0d253a8b244a54b6341dd5d0ba, type: 3}
   charInteractData:
   - compName: 4
-    compState: 0
-    allInteract: []
+    compState: 1
+    allInteract:
+    - nPCIntType: 1
+      allDialogueData:
+      - dialogueName: 1
+        isUnLocked: 1
   CharInteractPrefab: []
   npcInteractData:
   - nPCNames: 1
@@ -31,19 +35,16 @@ MonoBehaviour:
     allInteract:
     - nPCIntType: 1
       allDialogueData:
-      - dialogueName: 27
-        isUnLocked: 0
+      - dialogueName: 3
+        isUnLocked: 1
       - dialogueName: 6
-        isUnLocked: 0
-  - nPCNames: 1
-    npcState: 1
-    allInteract:
+        isUnLocked: 1
     - nPCIntType: 2
       allDialogueData: []
   npcDataPrefab: []
   buildIntTypes:
   - BuildIntType: 9
-    isUnLocked: 0
+    isUnLocked: 1
   - BuildIntType: 8
-    isUnLocked: 0
+    isUnLocked: 1
   buildIntPrefab: []

@@ -25,7 +25,9 @@ MonoBehaviour:
     compState: 0
     allInteract:
     - nPCIntType: 1
-      allDialogueData: []
+      allDialogueData:
+      - dialogueName: 3
+        isUnLocked: 1
   CharInteractPrefab: []
   npcInteractData:
   - nPCNames: 13
@@ -34,11 +36,11 @@ MonoBehaviour:
     - nPCIntType: 1
       allDialogueData:
       - dialogueName: 7
-        isUnLocked: 0
+        isUnLocked: 1
       - dialogueName: 17
-        isUnLocked: 0
+        isUnLocked: 1
       - dialogueName: 8
-        isUnLocked: 0
+        isUnLocked: 1
   - nPCNames: 13
     npcState: 1
     allInteract:

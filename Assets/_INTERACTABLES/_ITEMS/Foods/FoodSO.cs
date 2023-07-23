@@ -27,7 +27,7 @@ namespace Interactables
 
 
         [Header("ITEM VARIABLES")]
-        public int maxInvStackSize = 0;
+        public int maxInvStackSize; 
         public Currency cost;
         public float fluctuation;
         public int maxWorldInstance;
@@ -45,7 +45,7 @@ namespace Interactables
         {
             fluctuation = 20;
             maxWorldInstance = 100;
-            maxInvStackSize = 1; 
+        
         }
 
     }

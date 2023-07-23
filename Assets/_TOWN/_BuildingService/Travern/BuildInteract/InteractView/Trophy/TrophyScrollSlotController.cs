@@ -18,7 +18,7 @@ namespace Common
         public List<Iitems> ItemsInSlot { get; set; } = new List<Iitems>();
         [SerializeField] int itemCount = 0;
         public SlotType slotType => SlotType.TrophyScrollSlot;
-
+        [SerializeField] TavernSlotType tavernSlotType; 
         [Header("FOR DROP CONTROLS")]
         [SerializeField] GameObject draggedGO;
         [SerializeField] ItemsDragDrop itemsDragDrop;
@@ -215,7 +215,7 @@ namespace Common
                 if (trophyable.tavernSlotType == TavernSlotType.Trophy)
                     BuildingIntService.Instance.tavernController.tavernModel.trophyOnWall = item;
                 if (trophyable.tavernSlotType == TavernSlotType.Pelt)
-                    BuildingIntService.Instance.tavernController.tavernModel.trophyOnWall = item;
+                    BuildingIntService.Instance.tavernController.tavernModel.peltOnWall = item;
             }
             RefreshImg(item);
             // if (ItemsInSlot.Count > 1 || onDrop)
@@ -304,13 +304,9 @@ namespace Common
             {
                 ITrophyable itrophy = ItemsInSlot[0] as ITrophyable;
                 BuildingIntService.Instance.On_ItemWalled(ItemsInSlot[0], itrophy.tavernSlotType);
+                Debug.Log(" trophy slot type" + itrophy.tavernSlotType);
                 RemoveItem(); // remove item from the slot and common inv
                 trophyView.DisplayScrollPage();
-                //if (itrophy.tavernSlotType == TavernSlotType.Trophy)
-                //BuildingIntService.Instance.tavernController.tavernModel.trophyOnWall = ItemsInSlot[0];
-                //if (itrophy.tavernSlotType == TavernSlotType.Pelt)
-                //    BuildingIntService.Instance.tavernController.tavernModel.peltOnWall = ItemsInSlot[0];
-
             }
         }
 
@@ -320,4 +316,7 @@ namespace Common
         }
         #endregion
     }
-}
+}   //if (itrophy.tavernSlotType == TavernSlotType.Trophy)
+    //BuildingIntService.Instance.tavernController.tavernModel.trophyOnWall = ItemsInSlot[0];
+    //if (itrophy.tavernSlotType == TavernSlotType.Pelt)
+    //    BuildingIntService.Instance.tavernController.tavernModel.peltOnWall = ItemsInSlot[0];

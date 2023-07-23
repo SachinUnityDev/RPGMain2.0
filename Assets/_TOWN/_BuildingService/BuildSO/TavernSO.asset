@@ -23,10 +23,11 @@ MonoBehaviour:
   charInteractData:
   - compName: 3
     compState: 1
-    allInteract: []
-  - compName: 2
-    compState: 1
-    allInteract: []
+    allInteract:
+    - nPCIntType: 1
+      allDialogueData:
+      - dialogueName: 4
+        isUnLocked: 1
   CharInteractPrefab: []
   npcInteractData:
   - nPCNames: 7

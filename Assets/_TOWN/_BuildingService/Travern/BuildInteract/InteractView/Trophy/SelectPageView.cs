@@ -8,7 +8,7 @@ using Interactables;
 namespace Town
 {
 
-    public class SelectPagePtrEvents : MonoBehaviour  // trophy and pelt page 
+    public class SelectPageView : MonoBehaviour  // trophy and pelt page 
     {
 
         [SerializeField] Button trophyBtn;
@@ -19,8 +19,6 @@ namespace Town
 
         List<Iitems> allTGs = new List<Iitems>();   
         TrophyView trophyView;
-
-
         TrophySelectSlotController trophyslot;
         TrophySelectSlotController peltSlot; 
 
@@ -84,7 +82,7 @@ namespace Town
         void LoadScrollPage(List<Iitems> slotItems, TavernSlotType tavernSlotType)
         {
             ItemService.Instance.itemCardGO.SetActive(false);  // to eliminate item card bug
-            trophyView.scrollPageTrans.GetComponent<TrophyScrollPagePtrEvents>()
+            trophyView.scrollPageTrans.GetComponent<TrophyScrollView>()
                 .InitScrollPage(trophyView,tavernSlotType, slotItems); 
             trophyView.DisplayScrollPage();
         }

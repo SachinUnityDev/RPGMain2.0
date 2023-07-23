@@ -36,6 +36,9 @@ namespace Interactables
         [TextArea(5, 10)]
         public List<string> allLines = new List<string>();
 
+        [Header("if Trophy / Pelt wall images")]
+        public Sprite trophyOrPeltImg_Day;
+        public Sprite trophyOrPeltImg_Night;
         public Currency GetNPCSalePriceWithoutFluctuation(NPCNames nPCName)
         {
             NPCModData nPCModData = 

@@ -38,13 +38,6 @@ namespace Town
             int bronzeCurr = currency.bronze + currency.silver * 12; 
             return bronzeCurr;
         }
-
-        public static Currency AddCurrency(this Currency currency1 , Currency currency2)
-        { 
-            int netBronze = currency1.BronzifyCurrency() + currency2.BronzifyCurrency();
-            return (new Currency(0, netBronze).RationaliseCurrency()); 
-        }
-
         public static BronzifiedRange ApplyCurrencyFluctation(this Currency cost, float flucRate)
         {
             int bronzeVal = cost.BronzifyCurrency(); 

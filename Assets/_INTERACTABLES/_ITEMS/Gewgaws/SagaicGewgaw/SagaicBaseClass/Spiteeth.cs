@@ -20,6 +20,7 @@ namespace Interactables
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; }
         public int itemId { get; set; }
+        public Currency currency { get; set; }
 
         // First 3 rds of combat: -2 Haste to enemy party	
         // +6-10 Dark Res and +6-10 Earth Res

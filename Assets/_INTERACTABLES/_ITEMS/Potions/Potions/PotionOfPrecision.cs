@@ -17,7 +17,7 @@ namespace Interactables
         public int itemId { get; set; }
         public ItemData toolData { get; set; }
         public List<ItemDataWithQty> allIngredData { get; set; }
-
+        public Currency currency { get; set; }
         public void OnHoverItem()
         {
             // hoverrr

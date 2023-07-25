@@ -21,6 +21,7 @@ namespace Interactables
         public int maxInvStackSize { get ;set; }
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; } = new List<int>();
+        public Currency currency { get; set; }
 
         //+2 Wp and Vigor ....Upon Dodge: +1 Stamina and Hp Regen, 3 rds
 

@@ -21,7 +21,7 @@ namespace Interactables
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; } = new List<int>();
-
+        public Currency currency { get; set; }
         //-6-10 Air Res +8-12 Earth Res
         //	+1-2 armor
 

@@ -16,6 +16,7 @@ namespace Interactables
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; }
         public int itemId { get; set; }
+        public Currency currency { get; set; }
 
         //When Unslakable: +36-45% Dmg(attribute)
         //First 3 rds of combat: Soaked	

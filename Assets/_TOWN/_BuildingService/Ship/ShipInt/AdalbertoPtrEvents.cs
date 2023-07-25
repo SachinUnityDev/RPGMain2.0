@@ -11,10 +11,10 @@ namespace Town
     public class AdalbertoPtrEvents : ShipBasePtrEvents, IPointerClickHandler
     {
         public void OnPointerClick(PointerEventData eventData)
-        {
-            ShipView shipView = buildView as ShipView; 
-            UIControlServiceGeneral.Instance.TogglePanelOnInGrp(shipView.smugglePanel.gameObject, true);
-
+        {            
+            BuildingNames buildName = buildView.BuildingName;
+            buildView.TradePanel.GetComponent<TradeView>()
+                        .InitTradeView(NPCNames.Adalberto, buildName);
         }
     }
 }

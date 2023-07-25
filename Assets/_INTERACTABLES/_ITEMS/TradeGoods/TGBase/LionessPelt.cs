@@ -18,7 +18,7 @@ namespace Interactables
         public List<int> allBuffs { get; set; }
         public int itemId { get; set; }
         public int fameYield => 1;
-
+        public Currency currency { get; set; }
         public void OnHoverItem()
         {
 

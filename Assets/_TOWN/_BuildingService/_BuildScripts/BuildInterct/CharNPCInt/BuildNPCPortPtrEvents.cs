@@ -37,6 +37,9 @@ namespace Town
         }
         void FillPort()
         {
+            bgPortImg = transform.GetChild(0).GetComponent<Image>();
+            charPortImg = transform.GetChild(1).GetComponent<Image>();
+
             NPCSO npcSO = CharService.Instance.allNpcSO.GetNPCSO(interactData.nPCNames);
             charPortImg.sprite = npcSO.npcHexPortrait;
             bgPortImg.sprite = CharService.Instance.allNpcSO.HexPortBgN;

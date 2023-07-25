@@ -16,6 +16,7 @@ namespace Interactables
         public GenGewgawNames pdtGenGewgawName => GenGewgawNames.AmetystRing;
         public NPCNames mergeManagerNPC => NPCNames.Amish;
         public List<int> allBuffs { get; set; } = new List<int>();
+        public Currency currency { get; set; }
         public void InitItem(int itemId, int maxInvStackSize)
         {
             this.itemId = itemId;

@@ -26,7 +26,7 @@ namespace Interactables
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; } = new List<int>();
 
-
+        public Currency currency { get; set; }
         public override void GewGawSagaicInit()
         {
             CombatEventService.Instance.OnFleeInCombat += OnCombatFleeNDead;

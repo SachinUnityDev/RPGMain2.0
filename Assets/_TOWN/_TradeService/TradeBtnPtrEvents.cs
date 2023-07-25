@@ -32,10 +32,13 @@ namespace Town
             if (tradeSelectView.IsTradeClickable())
             {
                 isClickable= true;
+                img.sprite = spriteN;
             }
             else
             {
                 isClickable= false;
+                img.sprite = spriteUnClickable;
+
             }
         }
 
@@ -45,6 +48,10 @@ namespace Town
             {   
                 tradeView.OnTradePressed();
                 img.sprite = spriteClicked;
+            }
+            else
+            {
+                img.sprite = spriteUnClickable;
             }
         }
 

@@ -16,7 +16,8 @@ namespace Interactables
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; }
         public ItemData toolData { get; set; }
-        public List<ItemDataWithQty> allIngredData { get; set; } = new List<ItemDataWithQty>(); 
+        public List<ItemDataWithQty> allIngredData { get; set; } = new List<ItemDataWithQty>();
+        public Currency currency { get; set; }
         public void RecipeInit()
         {
             toolData = new ItemData(ItemType.Tools, (int)ToolNames.CookingPot);

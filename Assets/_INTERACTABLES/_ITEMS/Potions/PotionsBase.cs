@@ -14,6 +14,7 @@ namespace Interactables
         ItemType itemType { get; }
         int itemName { get;  }
         int maxInvStackSize { get; set; }
+        Currency currency { get; set; }
         //above is import for direct inv interation
         // SO ref hard to find for every click 
         SlotType invSlotType { get; set; }

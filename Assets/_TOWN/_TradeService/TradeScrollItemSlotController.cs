@@ -163,7 +163,7 @@ namespace Common
                     }
                     else
                     {
-                        Debug.Log("Slot full");
+                       // Debug.Log("Slot full");
                         return false;
                     }
                 }

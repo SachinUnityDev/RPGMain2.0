@@ -19,7 +19,7 @@ namespace Interactables
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; } = new List<int>();
-
+        public Currency currency { get; set; }
 
         int valDodge =0 , valWp = 0; 
         public override void GewGawSagaicInit()

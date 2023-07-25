@@ -15,6 +15,7 @@ namespace Interactables
         public ItemController itemController { get; set; }
         public int itemId { get; set; }
         public List<int> allBuffs { get; set; }
+        public Currency currency { get; set; }
 
         public void OnHoverItem()
         {

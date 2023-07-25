@@ -21,7 +21,7 @@ namespace Interactables
                                 new List<GemNames> { GemNames.Carnelian, GemNames.Meranite, GemNames.Rutele };
 
         public List<int> allBuffs { get; set; } = new List<int>();
-
+        public Currency currency { get; set; }
         public void InitItem(int itemId, int maxInvStackSize)
         {
             this.itemId = itemId;

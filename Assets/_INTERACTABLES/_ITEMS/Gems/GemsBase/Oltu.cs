@@ -19,7 +19,7 @@ namespace Interactables
                                 new List<GemNames> { GemNames.Ruri, GemNames.Malachite, GemNames.BlueOnyx };
 
         public List<int> allBuffs { get; set; } = new List<int>();
-
+        public Currency currency { get; set; }
         public void OnHoverItem()
         {
 

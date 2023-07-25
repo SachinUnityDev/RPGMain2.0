@@ -104,6 +104,7 @@ namespace Town
                     return price;
                 }
             }
+            Debug.Log(" current price NULL "); 
             return null;
         }
 

@@ -236,15 +236,14 @@ namespace Common
         }
         #endregion
 
-        public void SwapItem2TradeScroll(Iitems item, bool onDropOrRtClick = true)
+        public void SwapItem2TradeScroll(Iitems item, bool onDropOrRtClick = false)
         {
             for (int i = 0; i < ItemsInSlot.Count; i++)
             {
-                tradeSelectView.RemoveItemFrmSelectLs(ItemsInSlot[0]);
                 tradeSelectView.tradeView.tradeScrollView.AddItem2InVView(ItemsInSlot[0]);
             }
-            RemoveAllItems();
-            AddItemOnSlot(item, onDropOrRtClick);
+           RemoveAllItems();
+          //  AddItemOnSlot(item, onDropOrRtClick);
         }
 
         #region RIGHT CLICK ACTIONS ON INV RELATED

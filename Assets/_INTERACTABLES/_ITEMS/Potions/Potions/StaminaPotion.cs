@@ -18,7 +18,7 @@ namespace Interactables
         public List<int> allBuffs { get; set; } = new List<int>();
         public ItemData toolData { get; set; }
         public List<ItemDataWithQty> allIngredData { get; set; } = new List<ItemDataWithQty>();
-
+        public Currency currency { get; set; }
         public void OnHoverItem()
         {
 

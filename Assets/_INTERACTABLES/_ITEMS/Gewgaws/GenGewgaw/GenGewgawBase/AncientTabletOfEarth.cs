@@ -18,6 +18,7 @@ namespace Interactables
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; }
+        public Currency currency { get; set; }
         int valLuck;
         bool expFXAdded;
         public void ApplyEquipableFX()

@@ -17,6 +17,7 @@ namespace Interactables
         public List<int> allBuffs { get; set; }
         public float OcWt { get; set; }
         public TempTraitName tempTraitName { get; set; }
+        public Currency currency { get; set; }
         public void OnHoverItem()
         {
         }

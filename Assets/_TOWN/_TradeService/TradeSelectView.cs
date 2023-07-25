@@ -29,7 +29,7 @@ namespace Common
         [SerializeField] TextMeshProUGUI transactMoneyTxt;
         [SerializeField] DisplayCurrency transactMoney; // Demari to pay Denari to Get
 
-        [Header(" global var")]
+        [Header("Global var")]
         public Currency netVal = new Currency(0,0) ; 
         public Currency invMoney= new Currency(0,0) ;
 
@@ -90,7 +90,7 @@ namespace Common
         {
             item.invSlotType = SlotType.TradeScrollSlot;
             tradeModel.allSelectItems.Remove(item);
-            OnItemDeSelected();
+            OnItemDeSelected(item);
         }
         public void ClearSlotView()
         {
@@ -143,54 +143,67 @@ namespace Common
                 transactMoneyTxt.text = "Denari to Pay";
         }
 
-        public void OnItemDeSelected()
+        public void OnItemDeSelected(Iitems item)
         {
+            if(item != null)
+            {
+                if(item.currency  != null)
+                {
+                    netVal.SubMoney(item.currency);
+                    Debug.Log(" Currency send " + netVal.bronze + netVal.silver);
+                    transactMoney.Display(netVal); 
+                }    
+                item.currency = null; 
+            }     
             if(tradeModel.allSelectItems.Count == 0)
             {
-                InitTransactCurrViews();
-                return;
-            }                
-            OnItemSelected();
+                transactMoney.Display(new Currency(0, 0)); 
+            }
+            tradeView.tradeBtnPtrEvents.OnItemSelectORUnSelect();
         }
 
         public void OnItemSelected()
         {
             if(tradeView.isBuyBtnPressed)
             {
-                FillBuyValue();
+                Add2BuyValue();
             }
             else
             {
-                FillSellValue();
+                Add2SellValue();
             }
             tradeView.tradeBtnPtrEvents.OnItemSelectORUnSelect(); 
         }
-       void FillSellValue()
+       void Add2SellValue()
         {
-            int Val =0; 
+            int val =0; 
             foreach (Iitems item in tradeModel.allSelectItems)
             {
                 CostData costData =
-                        ItemService.Instance.GetCostData(item.itemType, item.itemName);
+                        ItemService.Instance.GetCostData(item.itemType, item.itemName);                
                 int bronzifiedCurr = costData.baseCost.BronzifyCurrency() / 2; // 1/2 sell factor
-                Val += bronzifiedCurr;
+                item.currency = new Currency(0, bronzifiedCurr); 
+                val += bronzifiedCurr;
             }   
-            netVal = new Currency(0, Val); 
+            netVal = new Currency(0, val);
+            Debug.Log(" add 2 sellCurrency " + netVal);
             transactMoney.Display(netVal);
             transactMoneyTxt.text = "Denari to Receive";
         }
-       void FillBuyValue()
+       void Add2BuyValue()
         {
-            netVal = new Currency(0, 0);          
+            netVal = new Currency(0,0);
+            Currency currency = null; 
             foreach (Iitems item in tradeModel.allSelectItems)
             {
-                Currency currency = tradeModel
-                                        .GetCurrPrice(new ItemData(item.itemType, item.itemName));
-                netVal = netVal.AddCurrency(currency);
+                currency = tradeModel.GetCurrPrice(new ItemData(item.itemType, item.itemName));
+                item.currency = currency.DeepClone();
+                netVal.AddMoney(currency);
             }
             transactMoney.Display(netVal);
             transactMoneyTxt.text = "Denari to Pay";
         }
+
 
        public void InitInvMoney()
         {

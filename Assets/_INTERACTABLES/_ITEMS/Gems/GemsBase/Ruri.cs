@@ -18,8 +18,8 @@ namespace Interactables
         public float multFX { get; set; }
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
-        public List<int> allBuffs { get; set; } = new List<int>();  
-
+        public List<int> allBuffs { get; set; } = new List<int>();
+        public Currency currency { get; set; }
         public void ClearSocketBuffs()
         {
             foreach (int buffID in allBuffs.ToList())

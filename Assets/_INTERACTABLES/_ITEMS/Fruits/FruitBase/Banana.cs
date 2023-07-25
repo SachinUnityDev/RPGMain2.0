@@ -17,7 +17,7 @@ namespace Interactables
         public int itemId { get; set; }
         public TempTraitName tempTraitName  { get; set; }
         public float OcWt { get; set; }
-
+        public Currency currency { get; set; }
         public void OnHoverItem()
         {
 

@@ -14,7 +14,9 @@ public class DisplayCurrency : MonoBehaviour
     }
     public void Display(Currency curr)
     {
-        currency = curr.RationaliseCurrency(); 
+        currency = null;
+        Debug.Log(" Currency " + curr.bronze + curr.silver); 
+        currency = curr.RationaliseCurrency().DeepClone(); 
         //Silver
         transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>().text =currency.silver.ToString();
         // bronze

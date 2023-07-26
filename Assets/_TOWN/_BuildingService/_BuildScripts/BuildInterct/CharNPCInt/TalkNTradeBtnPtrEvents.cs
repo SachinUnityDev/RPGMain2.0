@@ -12,8 +12,8 @@ namespace Town
     {
         [SerializeField] IntType intType;
         TalkNTradeBtnView talkNTradeBtnView;
-        NPCIntData nPCIntData;
-        CharIntData charIntData;
+        [SerializeField] NPCIntData nPCIntData;
+        [SerializeField] CharIntData charIntData;
 
         [Header("Sprite Ref")]
         [SerializeField] Sprite spriteN;
@@ -38,11 +38,14 @@ namespace Town
         public void InitTalkNTrade(NPCIntData nPCIntData, TalkNTradeBtnView talkNTradeBtnView)
         {
             this.talkNTradeBtnView= talkNTradeBtnView;
+            charIntData = null; 
             this.nPCIntData = nPCIntData;         
         }
         public void InitTalkNTrade(CharIntData charIntData, TalkNTradeBtnView talkNTradeBtnView)
         {
             this.talkNTradeBtnView = talkNTradeBtnView;
+            nPCIntData = null; 
+            this.charIntData = charIntData;
             if (charIntData.allInteract.Any(t => t.nPCIntType == IntType.Talk))
             {
                 talkNTradeBtnView.OnSelect(IntType.Talk);

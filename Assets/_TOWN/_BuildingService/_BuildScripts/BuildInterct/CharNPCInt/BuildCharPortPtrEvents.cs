@@ -10,7 +10,7 @@ using Common;
 
 namespace Town
 {
-    public class BuildCharPortPtrEvents : MonoBehaviour
+    public class BuildCharPortPtrEvents : MonoBehaviour, IPointerClickHandler
     {
         [Header("Char Port")]
         [SerializeField] Image charPortImg;
@@ -20,7 +20,7 @@ namespace Town
         [SerializeField] CharIntData interactData;
         [SerializeField] BuildingModel buildModel;
         BuildView buildView;
-        private void Start()
+        private void Awake()
         {
             charPortImg = transform.GetChild(1).GetComponent<Image>();
             charBGPortImg = transform.GetChild(0).GetComponent<Image>();    

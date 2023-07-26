@@ -46,7 +46,7 @@ namespace Town
 
         public void Init()
         {
-            Load(); 
+            InitBountyBoardLs();
         }
 
         public void Load()

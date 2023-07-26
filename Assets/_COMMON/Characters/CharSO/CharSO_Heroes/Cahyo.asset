@@ -20,8 +20,10 @@ MonoBehaviour:
   charSpriteUnClickedFlipped: {fileID: 21300000, guid: 3480bfa96429c3c4da725d863117d830,
     type: 3}
   charHexPortrait: {fileID: 21300000, guid: 1d9f6c52a2ca3274b827406510137d11, type: 3}
-  dialoguePortraitClicked: {fileID: 0}
-  dialoguePortraitUnClicked: {fileID: 0}
+  dialoguePortraitClicked: {fileID: 21300000, guid: 7c301603fcd5cd14e820e1a9af19fdaf,
+    type: 3}
+  dialoguePortraitUnClicked: {fileID: 21300000, guid: 28047fa8cd047c84a8915d137b0eb84c,
+    type: 3}
   bpPortraitUnLocked: {fileID: 21300000, guid: 760dc2e911d64b240ae8d4b89bdb44a7, type: 3}
   bpPortraitUnAvail: {fileID: 21300000, guid: f9c38cf4dbcf3de4fbf0d53758027a49, type: 3}
   charMode: 1
@@ -200,14 +202,14 @@ MonoBehaviour:
   - AttribName: 20
     currValue: 0
     baseValue: 0
-    desc: Armor Max
+    desc: Percentage value to mitigate incoming Dark damage.
     minLimit: 0
     maxLimit: 100
     isClamped: 0
   - AttribName: 21
     currValue: 0
     baseValue: 0
-    desc: Damage max
+    desc: Percentage value to mitigate incoming Dark damage.
     minLimit: 0
     maxLimit: 100
     isClamped: 0

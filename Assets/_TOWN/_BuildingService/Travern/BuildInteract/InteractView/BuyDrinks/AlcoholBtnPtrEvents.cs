@@ -19,7 +19,7 @@ namespace Common
 
         Iitems item; // ref to buydrinksView
         
-        BuyDrinksView buyDrinksView;
+        BuyDrinksTavernView buyDrinksView;
         SelfPagePtrEvents selfPage;
         TavernModel tavernModel;
 
@@ -38,7 +38,7 @@ namespace Common
             CalendarService.Instance.OnChangeTimeState += ResetSelfDrinks;
           
         }
-        public void InitAlcoholPtrEvents(BuyDrinksView buyDrinksView, SelfPagePtrEvents selfPage)
+        public void InitAlcoholPtrEvents(BuyDrinksTavernView buyDrinksView, SelfPagePtrEvents selfPage)
         { 
             this.buyDrinksView= buyDrinksView;
             this.selfPage= selfPage;
@@ -48,7 +48,6 @@ namespace Common
                 item = buyDrinksView.itemCider;
 
             tavernModel = BuildingIntService.Instance.tavernController.tavernModel;
-          
         }
         public void OnPointerEnter(PointerEventData eventData)
         {

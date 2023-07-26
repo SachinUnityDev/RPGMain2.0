@@ -11,7 +11,7 @@ namespace Town
 {
     public class EveryonePagePtrEvents : MonoBehaviour, IPanel
     {
-        BuyDrinksView buyDrinksView;
+        BuyDrinksTavernView buyDrinksView;
 
         [Header("TBR")]
         [SerializeField] TickBtnPtrEvents tickBtnPtrEvents; 
@@ -38,7 +38,7 @@ namespace Town
             displayStr = $"Wanna spend {silver} silver denari to buy everyone beer?";
             displayTxt.text = displayStr;
         }
-        public void InitBuyEveryOne(BuyDrinksView buyDrinksView)
+        public void InitBuyEveryOne(BuyDrinksTavernView buyDrinksView)
         {
             this.buyDrinksView = buyDrinksView;
             tavernModel = BuildingIntService.Instance.tavernController.tavernModel;

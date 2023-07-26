@@ -17,7 +17,7 @@ namespace Town
         [SerializeField] Transform currTransform; 
 
         [Header("Global Var")]
-        [SerializeField] BuyDrinksView buyDrinksView;
+        [SerializeField] BuyDrinksTavernView buyDrinksView;
         [SerializeField] Button returnBtn;
  
         
@@ -32,7 +32,7 @@ namespace Town
         {
             buyDrinksView.UnLoad();
         }
-        public void InitSelfPage(BuyDrinksView buyDrinksView)
+        public void InitSelfPage(BuyDrinksTavernView buyDrinksView)
         {
             this.buyDrinksView = buyDrinksView;
             beerTrans.GetComponent<AlcoholBtnPtrEvents>().InitAlcoholPtrEvents(buyDrinksView, this);

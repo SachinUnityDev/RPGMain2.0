@@ -77,7 +77,7 @@ namespace Common
 
           //  if(SaveService.Instance.)
             List<CharNames> chars2Spawn = new List<CharNames> {CharNames.Abbas
-               , CharNames.Baran };
+               , CharNames.Baran, CharNames.Cahyo, CharNames.Rayyan};
 
             foreach (CharNames charName in chars2Spawn)
             {

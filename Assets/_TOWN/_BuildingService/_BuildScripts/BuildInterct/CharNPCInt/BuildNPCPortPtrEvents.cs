@@ -21,7 +21,7 @@ namespace Town
         [SerializeField] NPCIntData interactData;
         [SerializeField] BuildingModel buildModel;
         BuildView buildView;
-        private void Start()
+        private void Awake()
         {                
            bgPortImg= transform.GetChild(0).GetComponent<Image>();
             charPortImg = transform.GetChild(1).GetComponent<Image>();

@@ -45,7 +45,7 @@ namespace Town
 
             for (int j = i; j < portContainer.childCount; j++)
             {
-                portContainer.GetChild(i).gameObject.SetActive(false);
+                portContainer.GetChild(j).gameObject.SetActive(false);
             }
         }
     }

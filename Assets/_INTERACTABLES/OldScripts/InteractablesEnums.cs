@@ -173,6 +173,7 @@ namespace Interactables
         None, 
         Beer, 
         Cider,
+        Rum, 
     }
     public enum TeaNames
     {

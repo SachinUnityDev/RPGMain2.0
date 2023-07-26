@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class MainPtrEvents : MonoBehaviour, IPanel
 {
-    BuyDrinksView buyDrinksView;
+    BuyDrinksTavernView buyDrinksView;
 
     [SerializeField] Button selfBtn;
     [SerializeField] Button everyoneBtn;
@@ -25,7 +25,7 @@ public class MainPtrEvents : MonoBehaviour, IPanel
     {
         buyDrinksView.OnExitBtnPressed();
     }
-    public void InitMainPage(BuyDrinksView buyDrinksView)
+    public void InitMainPage(BuyDrinksTavernView buyDrinksView)
     {
         this.buyDrinksView = buyDrinksView;
     }
@@ -44,12 +44,13 @@ public class MainPtrEvents : MonoBehaviour, IPanel
     }
 
     public void Load()
-    {
+    {  
         UIControlServiceGeneral.Instance.TogglePanel(gameObject, true); 
     }
 
     public void UnLoad()
     {
+      
         UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
     }
 

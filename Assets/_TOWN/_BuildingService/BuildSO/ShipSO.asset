@@ -36,8 +36,12 @@ MonoBehaviour:
       allDialogueData: []
   npcDataPrefab: []
   buildIntTypes:
-  - BuildIntType: 9
-    isUnLocked: 0
   - BuildIntType: 8
     isUnLocked: 1
   buildIntPrefab: []
+  tipStrs:
+  - random txt 1
+  - random txt 2
+  - random txt 3
+  - random txt 4
+  - random txt 5

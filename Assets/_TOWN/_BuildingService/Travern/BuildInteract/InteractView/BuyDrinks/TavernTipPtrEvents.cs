@@ -45,14 +45,15 @@ namespace Town
 
         void AllowTip(TimeState timeState)
         {
-            tipState = TipState.Tipable;     
+            tipState = TipState.Tipable;    
+            
         }
         public void OnPointerClick(PointerEventData eventData)
         {
             if (!(tipState == TipState.Tipable)) return;
                 Currency curr = new Currency(0, 6);
                 EcoServices.Instance.DebitPlayerInvThenStash(curr);
-                ChgState(TipState.UnTipable); 
+                ChgState(TipState.Tipped); 
         }
         void ChgState(TipState tipState)
         {
@@ -70,12 +71,13 @@ namespace Town
                     tipBtnImg.sprite = allBuildSO.OnUnTipable; 
                     break;
                 case TipState.Tipped:
-                    float chance = 50f;
+                    float chance = 100f;
                     if (chance.GetChance())
                     {
                         int count = allBuildSO.allTipStrs.Count; 
                         int index = UnityEngine.Random.Range(0, count);
-                        displayStr = allBuildSO.allTipStrs[index]; 
+                        displayStr = allBuildSO.allTipStrs[index];
+                        tipBtnImg.sprite = allBuildSO.OnUnTipable;
                     }
                     else
                     {
@@ -91,13 +93,13 @@ namespace Town
   
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (tipState == TipState.UnTipable) return;
+            if (tipState != TipState.Tipable) return;
             tipBtnImg.sprite = allBuildSO.OnTipableHL;     
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            if (tipState == TipState.UnTipable) return;
+            if (tipState != TipState.Tipable) return;
             tipBtnImg.sprite = allBuildSO.OnTipable;
         }
     }

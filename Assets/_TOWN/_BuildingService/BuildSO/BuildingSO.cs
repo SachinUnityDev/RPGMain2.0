@@ -38,26 +38,9 @@ namespace Town
         public List<BuildIntTypeData> buildIntTypes = new List<BuildIntTypeData>();
         public List<BuildIntTypePrefabData> buildIntPrefab = new List<BuildIntTypePrefabData>();
 
-        //[Header("UnLocked and Unavailable")]
-       
-        //public List<BuildBarkData> statusLockedStr = new List<BuildBarkData>();     
-        //public List<BuildBarkData> statusUnAvailStr = new List<BuildBarkData>();
+        [Header("Ship Tipping Txt")]
+        public List<string> tipStrs = new List<string>();
 
-       
-        //public BuildBarkData GetUnLockedStr()
-        //{
-        //    int count = statusLockedStr.Count;
-        //    if (count == 0) return null;
-        //    int ran = UnityEngine.Random.Range(0, count);
-        //    return statusLockedStr[ran];
-        //}
-        //public BuildBarkData GetUnAvailStr()
-        //{
-        //    int count = statusUnAvailStr.Count;
-        //    if (count == 0) return null;
-        //    int ran = UnityEngine.Random.Range(0, count);
-        //    return statusLockedStr[ran];
-        //}
     }
     [Serializable]
     public class BuildBarkData

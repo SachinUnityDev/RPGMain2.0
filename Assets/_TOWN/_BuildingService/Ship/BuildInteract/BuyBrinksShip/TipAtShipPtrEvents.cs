@@ -41,7 +41,7 @@ namespace Town
         {
             if (!(tipState == TipState.Tipable)) return;
             Currency curr = new Currency(0, 3);
-            EcoServices.Instance.DebitPlayerInvThenStash(curr);
+            EcoServices.Instance.DebitMoneyFrmCurrentPocket(curr);
             ChgState(TipState.Tipped);
         }
         void ChgState(TipState tipState)

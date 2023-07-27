@@ -45,21 +45,25 @@ namespace Town
         }
         void FillPanelBg()
         {
+            CalendarSO calSO = CalendarService.Instance.calendarSO; 
             if (CalendarService.Instance.currtimeState == TimeState.Day)
             {// BG
                 transform.GetChild(0).GetComponent<Image>().sprite =
-                         CalendarService.Instance.calendarSO.restPanelDay;
+                         calSO.restPanelDay;
                 // hour Glass
                 hourGlass.sprite =
-                    CalendarService.Instance.calendarSO.hourGlassDay;
-
+                    calSO.hourGlassDay;
+                endDayBtn.GetComponent<Image>().sprite
+                    = calSO.endDayBtnN;
             }
             else
             {
                 transform.GetChild(0).GetComponent<Image>().sprite =
-                    CalendarService.Instance.calendarSO.restPanelNight; ;
+                    calSO.restPanelNight; ;
                 hourGlass.sprite =
-                    CalendarService.Instance.calendarSO.hourGlassNight;
+                    calSO.hourGlassNight;
+                endDayBtn.GetComponent<Image>().sprite
+                    = calSO.endNightBtnN; 
             }
 
         }

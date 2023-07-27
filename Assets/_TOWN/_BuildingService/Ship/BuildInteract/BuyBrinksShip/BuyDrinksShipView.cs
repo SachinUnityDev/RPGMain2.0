@@ -11,7 +11,7 @@ namespace Town
         [Header("TBR")]
         public MainDrinksView mainDrinksView;
         public SelfDrinksView selfDrinksView;
-        public EveryoneDrinksView everyoneDrinksView;
+        public CrewDrinkView crewDrinkView;
 
         public List<Transform> allPanels;
 
@@ -41,7 +41,7 @@ namespace Town
             FillUpAlcoholStock();
             mainDrinksView.InitMainPage(this);
             selfDrinksView.InitSelfPage(this);
-            //buyEveryone.GetComponent<EveryonePagePtrEvents>().InitBuyEveryOne(this);
+            crewDrinkView.InitBuyEveryOne(this);
 
         }
         public void FillUpAlcoholStock()

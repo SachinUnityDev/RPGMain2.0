@@ -11,14 +11,14 @@ namespace Town
         BuyDrinksShipView buyDrinksView;
 
         [SerializeField] Button selfBtn;
-        [SerializeField] Button everyoneBtn;
+        [SerializeField] Button crewBtn;
 
         [SerializeField] Button exitBtn;
 
         private void Start()
         {
             selfBtn.onClick.AddListener(OnSelfBtnPressed);
-            everyoneBtn.onClick.AddListener(OnEveryOneBtnPressed);
+            crewBtn.onClick.AddListener(OnCrewBtnPressed);
             exitBtn.onClick.AddListener(OnExitBtnPressed);
         }
         void OnExitBtnPressed()
@@ -29,11 +29,12 @@ namespace Town
         {
             this.buyDrinksView = buyDrinksView;
         }
-        void OnEveryOneBtnPressed()
+        void OnCrewBtnPressed()
         {
             //EveryonePagePtrEvents ptrEvents = buyDrinksView.buyEveryone.GetComponent<EveryonePagePtrEvents>();
             //ptrEvents.InitBuyEveryOne(buyDrinksView);
-            //UIControlServiceGeneral.Instance.TogglePanelOnInGrp(buyDrinksView.buyEveryone.gameObject, true);
+            buyDrinksView.crewDrinkView.InitBuyEveryOne(buyDrinksView); 
+            UIControlServiceGeneral.Instance.TogglePanelOnInGrp(buyDrinksView.crewDrinkView.gameObject, true);
         }
         void OnSelfBtnPressed()
         {

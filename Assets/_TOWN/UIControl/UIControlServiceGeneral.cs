@@ -145,10 +145,10 @@ namespace Common
         {
             if(turnON)
                 if (currOpenPanels.Any(t => t.gameObject.name == go.name)) return;
-            iHelp help = go.GetComponent<iHelp>();
+            iHelp help = go?.GetComponent<iHelp>();
             if (turnON)
             {
-                if (help != null)
+              if (help != null)
                     helpName = help.GetHelpName();
                 currOpenPanels.Add(go);
             }

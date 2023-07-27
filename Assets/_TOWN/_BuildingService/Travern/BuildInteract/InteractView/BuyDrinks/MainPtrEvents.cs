@@ -31,8 +31,8 @@ public class MainPtrEvents : MonoBehaviour, IPanel
     }
     void OnEveryOneBtnPressed()
     {
-        EveryonePagePtrEvents ptrEvents = buyDrinksView.buyEveryone.GetComponent<EveryonePagePtrEvents>(); 
-        ptrEvents.InitBuyEveryOne(buyDrinksView);    
+        //EveryonePagePtrEvents ptrEvents = buyDrinksView.buyEveryone.GetComponent<EveryonePagePtrEvents>(); 
+        //ptrEvents.InitBuyEveryOne(buyDrinksView);    
         UIControlServiceGeneral.Instance.TogglePanelOnInGrp(buyDrinksView.buyEveryone.gameObject, true); 
     }
     void OnSelfBtnPressed()

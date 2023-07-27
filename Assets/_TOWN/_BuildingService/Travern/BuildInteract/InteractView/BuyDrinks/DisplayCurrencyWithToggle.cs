@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Town
 {
-
+    [RequireComponent(typeof(DisplayCurrency))]
     public class DisplayCurrencyWithToggle : MonoBehaviour
     {
         [SerializeField] Button toggleBtn;    
@@ -16,7 +16,7 @@ namespace Town
 
         string inv_Txt = "In Inventory";
         string stash_Txt = "In Stash";
-        [SerializeField] PocketType pocketType;
+        public PocketType pocketType;
         private void Awake()
         {
             //toggleBtn = transform.GetChild(2).GetComponent<Button>();
@@ -28,6 +28,7 @@ namespace Town
         {
             EcoServices.Instance.OnInvMoneyChg += FillInvMoney;
             EcoServices.Instance.OnStashMoneyChg += FillStashMoney;
+            
             InitCurrencyToggle();
         }
         public void DisplayCurrency(Currency amt)
@@ -37,8 +38,8 @@ namespace Town
         public void InitCurrencyToggle()
         {
             pocketType = PocketType.Inv;
-            Currency amt = EcoServices.Instance.GetMoneyAmtInPlayerInv().DeepClone();
-            FillInvMoney(amt);
+            EcoServices.Instance.On_PocketSelected(pocketType);             
+            FillMoney();
         }
         void OnToggleBtnPressed()
         {
@@ -46,18 +47,18 @@ namespace Town
                 pocketType = PocketType.Inv; 
             else
                 pocketType= PocketType.Stash;
-
-            if (pocketType == PocketType.Inv)
-            {
-                Currency amt = EcoServices.Instance.GetMoneyAmtInPlayerInv().DeepClone();
-                FillInvMoney(amt);              
-            }
-            if (pocketType == PocketType.Stash)
-            {
-                Currency amt = EcoServices.Instance.GetMoneyAmtInPlayerStash().DeepClone();
-                FillStashMoney(amt);                
-            }
             EcoServices.Instance.On_PocketSelected(pocketType);
+
+
+            FillMoney();
+        }
+        public void FillMoney()
+        {
+            Currency amt = EcoServices.Instance.GetMoneyFrmCurrentPocket().DeepClone();
+            if (pocketType == PocketType.Stash)
+                FillStashMoney(amt); 
+            else
+                FillInvMoney(amt);  
         }
         void FillInvMoney(Currency amt)
         {

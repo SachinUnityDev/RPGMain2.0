@@ -112,16 +112,13 @@ namespace Interactables
             AlcoholBase alcoholBase = item as AlcoholBase;
             alcoholBase.charController = abbasCharController;
             alcoholBase.OnDrink();
-
-
-
             if (alcoholName == AlcoholNames.Beer)
             {
-                EcoServices.Instance.DebitPlayerInvThenStash(new Currency(0, 4));
+                EcoServices.Instance.DebitMoneyFrmCurrentPocket(new Currency(0, 4));
             }
             if (alcoholName == AlcoholNames.Rum)
             {
-                EcoServices.Instance.DebitPlayerInvThenStash(new Currency(0, 5));
+                EcoServices.Instance.DebitMoneyFrmCurrentPocket(new Currency(0, 11));
             }
 
             shipModel.selfDrinks++;

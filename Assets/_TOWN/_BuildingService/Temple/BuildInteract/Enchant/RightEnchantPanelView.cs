@@ -32,40 +32,50 @@ namespace Town
             //  Identified: Enchantable by Ruri
             //  Enchanted: Enchanted with Ruri
             //  Rechargeable : Rechargeable by Ruri
-            if (weaponState == WeaponState.UnEnchantable)
-            {
-                gemImg.gameObject.SetActive(false);
-                gemNameTxt.gameObject.SetActive(false);
-            }
-            else
-            {
-                gemImg.gameObject.SetActive(true);
-                gemNameTxt.gameObject.SetActive(true);
-                gemSO = ItemService.Instance.GetGemSO(weaponModel.gemName);
-                gemNameTxt.text = gemSO.gemName.ToString();
-                gemImg.sprite = gemSO.iconSprite;
-            }
+        
             switch (weaponState)
             {
                 case WeaponState.UnEnchantable:
                     rechargeTxt.text = "No Charges";
-                    weaponStateTxt.text = "Enchantable";          
+                    weaponStateTxt.text = "Enchantable";
+                    gemImg.gameObject.SetActive(false);
+                    gemNameTxt.gameObject.SetActive(false);
                     break;
                 case WeaponState.Unidentified:
                     rechargeTxt.text = weaponModel.chargeRemaining.ToString() + "/12";
                     weaponStateTxt.text = "Identify first";
+                    gemImg.gameObject.SetActive(false);
+                    gemNameTxt.gameObject.SetActive(false);
                     break;
                 case WeaponState.Identified:
                     rechargeTxt.text = weaponModel.chargeRemaining.ToString() + "/12";
-                    weaponStateTxt.text = $"Enchantable by {weaponModel.gemName}";                   
+                    weaponStateTxt.text = $"Enchantable by {weaponModel.gemName}";
+
+                    gemImg.gameObject.SetActive(true);
+                    gemNameTxt.gameObject.SetActive(true);
+                    gemSO = ItemService.Instance.GetGemSO(weaponModel.gemName);
+                    gemNameTxt.text = gemSO.gemName.ToString();
+                    gemImg.sprite = gemSO.iconSprite;
                     break;
                 case WeaponState.Enchanted:
                     rechargeTxt.text = weaponModel.chargeRemaining.ToString() + "/12";
                     weaponStateTxt.text = $"Enchantable by {weaponModel.gemName}";
+
+                    gemImg.gameObject.SetActive(true);
+                    gemNameTxt.gameObject.SetActive(true);
+                    gemSO = ItemService.Instance.GetGemSO(weaponModel.gemName);
+                    gemNameTxt.text = gemSO.gemName.ToString();
+                    gemImg.sprite = gemSO.iconSprite;
                     break;
                 case WeaponState.Rechargeable:      
                     rechargeTxt.text = weaponModel.chargeRemaining.ToString() + "/12";
-                    weaponStateTxt.text = $"Enchantable by {weaponModel.gemName}";                  
+                    weaponStateTxt.text = $"Enchantable by {weaponModel.gemName}";
+
+                    gemImg.gameObject.SetActive(true);
+                    gemNameTxt.gameObject.SetActive(true);
+                    gemSO = ItemService.Instance.GetGemSO(weaponModel.gemName);
+                    gemNameTxt.text = gemSO.gemName.ToString();
+                    gemImg.sprite = gemSO.iconSprite;
                     break;
             }
         }

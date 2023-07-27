@@ -17,7 +17,7 @@ namespace Town
         [SerializeField] TickBtnPtrEvents tickBtnPtrEvents; 
         [SerializeField] Button returnBtn;
         [SerializeField] Button exitBtn;
-        [SerializeField] Transform currTransform;
+        [SerializeField] DisplayCurrencyWithToggle currDsply;
 
         [SerializeField] TextMeshProUGUI displayTxt;
 
@@ -42,8 +42,8 @@ namespace Town
         {
             this.buyDrinksView = buyDrinksView;
             tavernModel = BuildingIntService.Instance.tavernController.tavernModel;
-            currTransform.GetComponent<DisplayCurrencyWithToggle>().InitCurrencyToggle();
-            Currency availAmt = EcoServices.Instance.GetMoneyAmtInPlayerInv().DeepClone();
+            currDsply.InitCurrencyToggle();
+            Currency availAmt = EcoServices.Instance.GetMoneyFrmCurrentPocket().DeepClone();
             TimeState timeState = CalendarService.Instance.currtimeState; 
             if(timeState == TimeState.Day)
             {
@@ -53,16 +53,18 @@ namespace Town
             {
                 displayTxt.text = $"Wanna spend {silver} silver denari to buy everyone beer?";
             }
-            tickBtnPtrEvents.InitTickPtrEvents(this, availAmt, silver);            
+            tickBtnPtrEvents.InitTickPtrEvents(this, availAmt, silver); 
+            
         }
         void ResetOnTimeStateChg(TimeState timeState)
         {
             if(tavernModel!= null)
             {
-                tavernModel.canOfferDrink = true;
-                tickBtnPtrEvents.isClickable= true;
+                tavernModel.canOfferDrink = CanOfferDrink();
+                tickBtnPtrEvents.ChgTickState(CanOfferDrink());
             }                
         }
+   
         public bool CanOfferDrink()
         {
             if(CalendarService.Instance.currtimeState == TimeState.Night)
@@ -78,11 +80,12 @@ namespace Town
         {
             if (!CanOfferDrink()) return; 
 
-            EcoServices.Instance.DebitPlayerInvThenStash(new Currency(silver, 0));            
-            currTransform.GetComponent<DisplayCurrencyWithToggle>().InitCurrencyToggle();
-            
+            EcoServices.Instance.DebitMoneyFrmCurrentPocket(new Currency(silver, 0));            
+
             int fameGained = UnityEngine.Random.Range(5, 10);
             displayStr = $"You gained {fameGained} <style=fameSyblPos> Fame";
+            FameService.Instance.fameController.fameModel.fameVal += fameGained;
+
             displayTxt.text = displayStr;
             tavernModel.canOfferDrink = false; 
         }

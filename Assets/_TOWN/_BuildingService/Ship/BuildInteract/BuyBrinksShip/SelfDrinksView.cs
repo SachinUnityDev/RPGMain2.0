@@ -14,7 +14,7 @@ namespace Town
         [SerializeField] Transform beerTrans;
         [SerializeField] Transform rumTrans;
         [SerializeField] Button exitBtn;
-        [SerializeField] Transform currencyTrans;
+        [SerializeField] DisplayCurrencyWithToggle currDsply;
 
         [Header("Global Var")]
         [SerializeField] BuyDrinksShipView buyDrinksView;
@@ -34,7 +34,7 @@ namespace Town
             this.buyDrinksView = buyDrinksView;
             beerTrans.GetComponent<ShipAlcoholBtnPtrEvents>().InitAlcoholPtrEvents(buyDrinksView, this);
             rumTrans.GetComponent<ShipAlcoholBtnPtrEvents>().InitAlcoholPtrEvents(buyDrinksView, this);
-            currencyTrans.GetComponent<DisplayCurrencyWithToggle>().InitCurrencyToggle();
+            currDsply.InitCurrencyToggle();
         }
         public void SetState(bool isNormal)
         {
@@ -57,6 +57,8 @@ namespace Town
         public void Load()
         {
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
+           // UIControlServiceGeneral.Instance.TogglePanelOnInGrp(buyDrinksView.selfDrinksView.gameObject, true);
+
         }
 
         public void UnLoad()

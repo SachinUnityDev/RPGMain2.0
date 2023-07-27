@@ -189,11 +189,12 @@ namespace Town
         {
             index = 0;
             FillCharTraits();
+            UIControlServiceGeneral.Instance.TogglePanel(gameObject, true); 
         }
 
         public void UnLoad()
         {
-           
+            UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
         }
     }
 }

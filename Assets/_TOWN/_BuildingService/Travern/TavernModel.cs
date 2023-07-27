@@ -19,7 +19,9 @@ namespace Town
         public bool canOfferDrink = true;
 
         [Header(" Well rested")]
-        public float restChance = 80f; 
+        public float restChance = 80f;
+
+
 
         public TavernModel(BuildingSO tavernSO)
         {

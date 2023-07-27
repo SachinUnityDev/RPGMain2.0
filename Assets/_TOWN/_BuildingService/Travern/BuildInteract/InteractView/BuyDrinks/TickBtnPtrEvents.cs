@@ -6,8 +6,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI; 
 namespace Town
 {
-
-
     public class TickBtnPtrEvents : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] Sprite spriteN;
@@ -28,18 +26,23 @@ namespace Town
             this.silverNeeded= silverNeeded;
             SetTickState(); 
         }
+        public void ChgTickState(bool isClickable)
+        {
+            this.isClickable = isClickable;
+            SetTickState();
+        }
         void SetTickState()
         {
-            if(silverNeeded*12 > availMoney.BronzifyCurrency()
+            if(silverNeeded*12 < availMoney.BronzifyCurrency()
                 && everyonePagePtrEvents.CanOfferDrink())
             {
-                isClickable= false;
-                img.sprite = spriteNA; 
+                isClickable = true;
+                img.sprite = spriteN;
             }
             else
             {
-                isClickable= true;
-                img.sprite = spriteN;
+                isClickable = false;
+                img.sprite = spriteNA;                
             }
         }
 
@@ -62,7 +65,6 @@ namespace Town
             {
                 img.sprite = spriteNA;
             }
-
         }
 
         public void OnPointerExit(PointerEventData eventData)

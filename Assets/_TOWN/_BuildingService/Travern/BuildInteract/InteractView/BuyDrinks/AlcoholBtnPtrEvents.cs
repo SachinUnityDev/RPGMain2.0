@@ -118,12 +118,12 @@ namespace Common
 
 
             if (alcoholName == AlcoholNames.Beer)
-            {
-                EcoServices.Instance.DebitPlayerInvThenStash(new Currency(0, 4));
+            { 
+                EcoServices.Instance.DebitMoneyFrmCurrentPocket(new Currency(0, 5));
             }                
             if (alcoholName == AlcoholNames.Cider)
             {
-                EcoServices.Instance.DebitPlayerInvThenStash(new Currency(0, 5));
+                EcoServices.Instance.DebitMoneyFrmCurrentPocket(new Currency(0, 4));
             }
 
             tavernModel.selfDrinks++;

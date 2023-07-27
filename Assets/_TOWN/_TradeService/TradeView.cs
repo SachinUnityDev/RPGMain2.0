@@ -2,6 +2,7 @@ using Common;
 using Interactables;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,7 +39,7 @@ namespace Town
         public NPCNames npcName;
         public BuildingNames buildName;
         NPCSO npcSO;
-
+        List<Iitems> invitems = new List<Iitems>();
         private void Start()
         { 
             buyBtn.onClick.AddListener(OnBuyBtnPressed);
@@ -122,15 +123,21 @@ namespace Town
         void FillSellSlots()
         {
             headingTxt.text = "Inventory"; 
-            List<Iitems> commInvItems = InvService.Instance.invMainModel.commonInvItems;
-            // sort out items that do not confirm to the NPC
+            List<Iitems> commInvItems = InvService.Instance.invMainModel.commonInvItems;            
+            invitems.Clear();
+            foreach (Iitems item in commInvItems)
+            {
+                if(npcSO.itemTypesAccepted.Any(t=>t== item.itemType))
+                {
+                    invitems.Add(item);
+                }
+            }
             tradeSelectView.ClearSlotView();
             if (tradeScrollView != null)
             {
                 tradeScrollView.ClearSlotView();
-                tradeScrollView.InitSlotView(commInvItems, this);
+                tradeScrollView.InitSlotView(invitems, this);
             }
-
         }
 
         public void Load()

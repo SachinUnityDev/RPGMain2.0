@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Town;
+using System.Linq;
 
 public class EnchantView : MonoBehaviour, IPanel
 {
     [Header("left right panels")]
     [SerializeField] Button leftBtn;
     [SerializeField] Button rightBtn;
-
 
     [SerializeField] Button closeBtn;
 
@@ -21,7 +21,7 @@ public class EnchantView : MonoBehaviour, IPanel
 
     [Header("btm currency and status update btn")]
     [SerializeField] Transform statusBtn;
-    [SerializeField] Transform stashCurrency;
+    [SerializeField] DisplayCurrencyWithToggle currency;
 
     [Header("Curr Selects")]
     [SerializeField] CharNames charSelect;
@@ -29,7 +29,8 @@ public class EnchantView : MonoBehaviour, IPanel
     [Header("char Scroll var")]
     [SerializeField] int index;
     [SerializeField] float prevLeftClick;
-    [SerializeField] float prevRightClick;  
+    [SerializeField] float prevRightClick;
+    [SerializeField] List<CharModel> charModelInTown = new List<CharModel>();
     private void Start()
     {
         leftBtn.onClick.AddListener(OnLeftBtnPressed); 
@@ -68,7 +69,8 @@ public class EnchantView : MonoBehaviour, IPanel
 
     public void FillCharPlanks()
     {
-        CharNames selectChar = CharService.Instance.allCharModels[index].charName;
+        if(charModelInTown.Count == 0) return;    
+        CharNames selectChar = charModelInTown[index].charName;
         BuildingIntService.Instance.selectChar = selectChar; 
 
         CharController charController = CharService.Instance.GetCharCtrlWithName(selectChar);
@@ -77,7 +79,7 @@ public class EnchantView : MonoBehaviour, IPanel
 
         centerTrans.GetComponent<EnchantWeaponView>().InitWeaponPanel(selectChar, weaponModel, this);      
         statusBtn.GetComponent<EnchantStatusBtnPtrEvents>().InitBtnEvents(selectChar, weaponModel, this);
-        FillStashMoney();
+        currency.FillMoney();
     }
 
     void closeBtnPressed() 
@@ -88,20 +90,23 @@ public class EnchantView : MonoBehaviour, IPanel
     public void Init()
     {
         index = 0;
-      
+        
     }
 
     public void Load()
     {
         index = 0;
+        charModelInTown = CharService.Instance.allCharModels
+                        .Where(t=>t.currCharLoc  == LocationName.Nekkisari).ToList();
+        currency.InitCurrencyToggle();
         FillCharPlanks();
     }
-    void FillStashMoney()
-    {
-        Currency curr = EcoServices.Instance.GetMoneyAmtInPlayerStash().DeepClone();              
-        stashCurrency.GetComponent<DisplayCurrency>().Display(curr); 
-    }
+    
    
+    public void DebitMoney(Currency curr)
+    {
+        currency.DisplayCurrency(curr); 
+    }
     public void UnLoad()
     {
         UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);    

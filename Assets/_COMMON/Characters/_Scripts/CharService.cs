@@ -95,10 +95,10 @@ namespace Common
         public CharacterSO GetCharSO( CharNames charName)
         {            
             int  index = allAllySO.FindIndex(t=>t.charName== charName);     
-            if (index  == -1)
+            if (index  != -1)
                 return allAllySO[index];
             else
-                Debug.LogError("Char SO not found" + charName);
+                Debug.Log("Char SO not found" + charName);
             return null;
         }
         public CharacterSO GetCharSO(CharModel charModel)

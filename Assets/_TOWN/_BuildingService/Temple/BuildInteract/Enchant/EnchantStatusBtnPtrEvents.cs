@@ -85,24 +85,24 @@ namespace Common
 
         void OnEnchantBtnPressed()
         {
-            int stashCurr = EcoServices.Instance.GetMoneyAmtInPlayerStash().DeepClone().BronzifyCurrency(); 
+            int currency = EcoServices.Instance.GetMoneyFrmCurrentPocket().DeepClone().BronzifyCurrency(); 
 
             switch (weaponState)
             {
                 case WeaponState.UnEnchantable:
                     return; 
                 case WeaponState.Unidentified:
-                    if(stashCurr >= rechargeCost.BronzifyCurrency())
+                    if(currency >= rechargeCost.BronzifyCurrency())
                     {
                         weaponModel.weaponState = WeaponState.Identified;
                         enchantView.FillCharPlanks(); // check stack overflow here               
                     }
                     break;
                 case WeaponState.Identified:
-                    if (stashCurr > rechargeCost.BronzifyCurrency())
+                    if (currency > rechargeCost.BronzifyCurrency())
                     {
                         weaponModel.weaponState = WeaponState.Enchanted;
-                        EcoServices.Instance.DebitPlayerStash(rechargeCost);
+                        EcoServices.Instance.DebitMoneyFrmCurrentPocket(rechargeCost);
                         enchantView.FillCharPlanks();
                     }
                     break;
@@ -110,10 +110,10 @@ namespace Common
                     break;
                     
                 case WeaponState.Rechargeable:
-                    if (stashCurr > rechargeCost.BronzifyCurrency() && weaponModel.IsChargeZero())
+                    if (currency > rechargeCost.BronzifyCurrency() && weaponModel.IsChargeZero())
                     {
                         weaponModel.weaponState = WeaponState.Enchanted;
-                        EcoServices.Instance.DebitPlayerStash(rechargeCost);
+                        EcoServices.Instance.DebitMoneyFrmCurrentPocket(rechargeCost);
                         enchantView.FillCharPlanks();
                     }
                     break;

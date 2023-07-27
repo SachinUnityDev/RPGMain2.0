@@ -12,13 +12,19 @@ namespace Town
     public class ShipModel : BuildingModel
     {
         [Header("Buy Drinks Int")]
-        public int selfDrinks; 
+        public int selfDrinks = 0;
+        public bool canOfferDrink = true;
+
+
         public int unLockedOnDay = 0;
         public int lastAvailDay = 0;
         public int lastUnAvailDay = 0;
 
         [Header("tipping text strings")]
         [SerializeField] List<string> tipTxt = new List<string>();
+
+
+
 
         BuildingSO shipSO; 
         public ShipModel(BuildingSO shipSO)

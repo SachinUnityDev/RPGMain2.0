@@ -30,9 +30,6 @@ MonoBehaviour:
       allDialogueData:
       - dialogueName: 1
         isUnLocked: 1
-  - nPCNames: 3
-    npcState: 1
-    allInteract:
     - nPCIntType: 2
       allDialogueData: []
   - nPCNames: 2
@@ -42,21 +39,6 @@ MonoBehaviour:
       allDialogueData:
       - dialogueName: 3
         isUnLocked: 1
-  - nPCNames: 2
-    npcState: 0
-    allInteract:
-    - nPCIntType: 2
-      allDialogueData: []
-  - nPCNames: 15
-    npcState: 1
-    allInteract:
-    - nPCIntType: 1
-      allDialogueData:
-      - dialogueName: 3
-        isUnLocked: 1
-  - nPCNames: 15
-    npcState: 0
-    allInteract:
     - nPCIntType: 2
       allDialogueData: []
   - nPCNames: 9
@@ -66,9 +48,6 @@ MonoBehaviour:
       allDialogueData:
       - dialogueName: 3
         isUnLocked: 1
-  - nPCNames: 9
-    npcState: 1
-    allInteract:
     - nPCIntType: 2
       allDialogueData: []
   npcDataPrefab: []
@@ -78,3 +57,4 @@ MonoBehaviour:
   - BuildIntType: 18
     isUnLocked: 1
   buildIntPrefab: []
+  tipStrs: []

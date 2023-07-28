@@ -25,7 +25,7 @@ namespace Town
         [Header("current Data")]
         public int weekSeq; 
         public List<Iitems> allItems = new List<Iitems>();
-        public List<ItemDataWithQtyNPrice> allTradebaleItems = new List<ItemDataWithQtyNPrice>();   
+        public List<ItemDataWithQtyNPrice> allTradableItems = new List<ItemDataWithQtyNPrice>();   
         public List<Iitems> allSelectItems = new List<Iitems>();
 
 
@@ -43,14 +43,14 @@ namespace Town
         {
             this.weekSeq = weekSeq;
             NPCSO npcSO = TradeService.Instance.allNPCSO.GetNPCSO(npcName); 
-            allTradebaleItems = npcSO.GetItemStock(weekSeq);            
+            allTradableItems = npcSO.GetItemStock(weekSeq);            
             CreateItems();
             SetPrice();
         }
 
         void SetPrice()
         {
-            foreach (ItemDataWithQtyNPrice itemData in allTradebaleItems)
+            foreach (ItemDataWithQtyNPrice itemData in allTradableItems)
             {
                 Debug.Log("Item data" + itemData.itemData.itemType+ npcName + weekSeq);
                 CostData costData = 
@@ -67,14 +67,14 @@ namespace Town
             foreach (Iitems item in allSelectItems)
             {
                 allItems.Remove(item);
-                foreach (ItemDataWithQtyNPrice itemQty in allTradebaleItems.ToList())
+                foreach (ItemDataWithQtyNPrice itemQty in allTradableItems.ToList())
                 {
                     if(item.itemName == itemQty.itemData.itemName 
                         && item.itemType == itemQty.itemData.itemType)
                     {
                         itemQty.quantity--;
                         if(itemQty.quantity <=0)
-                            allTradebaleItems.Remove(itemQty);
+                            allTradableItems.Remove(itemQty);
                     }
                 }
             }
@@ -83,7 +83,7 @@ namespace Town
 
         void CreateItems()
         {
-            foreach (ItemDataWithQtyNPrice itemQty in allTradebaleItems)
+            foreach (ItemDataWithQtyNPrice itemQty in allTradableItems)
             {
                 for (int i = 0; i < itemQty.quantity; i++)
                 {  
@@ -95,7 +95,7 @@ namespace Town
 
         public Currency GetCurrPrice(ItemData itemData)
         {
-            foreach (ItemDataWithQtyNPrice item in allTradebaleItems)
+            foreach (ItemDataWithQtyNPrice item in allTradableItems)
             {
                 if(item.itemData.itemType == itemData.itemType 
                     && item.itemData.itemName == itemData.itemName)

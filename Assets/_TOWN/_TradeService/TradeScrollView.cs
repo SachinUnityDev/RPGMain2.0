@@ -24,18 +24,88 @@ namespace Town
         List<Iitems> allItems;
         [SerializeField] int maxSlots;
         TradeView tradeView;
+
+        [SerializeField] GameObject slotGO;
+        [SerializeField] List<GameObject> slotclonesAdded = new List<GameObject>();
+
+        [SerializeField]List<SlotData> allSlots = new List<SlotData>();
         private void Start()
         {
             InvService.Instance.OnDragResult += OnDragResult2TradeScroll;
             leftBtn.onClick.AddListener(OnLeftBtnPressed); 
             rightBtn.onClick.AddListener(OnRightBtnPressed);
         }
+
+        void ClearPrefabs()
+        {
+            for (int i = 0; i < slotclonesAdded.Count; i++)
+            {
+                slotclonesAdded[i].SetActive(false);
+            }
+        }
+        public int GetSlotNeed(List<Iitems> allItems)
+        {
+            allSlots.Clear();
+            foreach (Iitems item in allItems)
+            {
+                int index = -1;   
+                GenGewgawBase gBase = item as GenGewgawBase;
+                if (allSlots.Count > 0)
+                {
+                    index = allSlots.FindIndex(t => t.itemName == item.itemName && t.itemType == item.itemType
+                    && item.maxInvStackSize > t.Qty);
+                    if(gBase != null)
+                    {
+                        index = allSlots.FindIndex(t => t.itemName == item.itemName && t.itemType == item.itemType
+                            && item.maxInvStackSize > t.Qty && gBase.genGewgawQ == t.genGewgawQ); 
+                    } 
+                }
+                if (index != -1)
+                {
+                    allSlots[index].Qty++;
+                }
+                else
+                {
+                    SlotData slotData; 
+                    if(gBase != null)
+                    {
+                         slotData = new SlotData(item.itemName, item.itemType, item.maxInvStackSize, gBase.genGewgawQ);
+                    }
+                    else
+                    {
+                         slotData = new SlotData(item.itemName, item.itemType, item.maxInvStackSize);
+                    }
+                    
+                    allSlots.Add(slotData);
+                }
+            }
+            return allSlots.Count;
+        }
         public void InitSlotView(List<Iitems> allItems, TradeView tradeView)
         {
             this.tradeView= tradeView;
             ClearSlotView();
             this.allItems = allItems;
+            // spawn here
+            ClearPrefabs();
             
+            int slotNet = GetSlotNeed(allItems);
+            int slotExtra = slotNet - transform.childCount; 
+            if(slotExtra > 0) 
+            {
+                if (slotExtra % 4 != 0)
+                    slotExtra += slotExtra % 4; 
+                for (int i = 0; i < slotExtra; i++)
+                {
+
+                    GameObject slotclone = Instantiate(slotGO);
+                    slotclone.transform.SetParent(transform);
+                    slotclone.GetComponent<RectTransform>().DOScale(1.0f, 0.1f);
+                    slotclone.GetComponent<Image>().enabled= true;
+                    slotclone.GetComponent<TradeScrollItemSlotController>().enabled= true;
+                    slotclonesAdded.Add(slotGO);
+                }
+            }
             foreach (Iitems item in allItems)
             {
                 AddItem2InVView(item, false);

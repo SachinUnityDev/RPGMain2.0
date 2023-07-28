@@ -131,6 +131,7 @@ namespace Interactables
             }
             else
             {
+                Debug.Log(" Item Created" + itemData.itemName + " type" + itemData.itemType);
                 iitems = itemFactory.GetNewGenGewgaw((GenGewgawNames)itemData.itemName, itemData.genGewgawQ);
             }
             return iitems;

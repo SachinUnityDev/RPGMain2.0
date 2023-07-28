@@ -4,6 +4,8 @@ using UnityEngine;
 using Interactables;
 using TMPro;
 using Common;
+using System.Linq;
+using System;
 
 namespace Town
 {
@@ -47,10 +49,26 @@ namespace Town
             BronzifiedRange bronzifiedRange = new BronzifiedRange(bronzeMin, bronzeMax);
             return bronzifiedRange;
         }
+    
 
     }
+    [Serializable]
+    public class SlotData
+    {
+        public int Qty =1;
+        public int itemName;
+        public ItemType itemType; 
+        public GenGewgawQ genGewgawQ = GenGewgawQ.None;
+        public int maxInvStackSize; 
 
-
+        public SlotData(int itemName, ItemType itemType, int maxInvStackSize, GenGewgawQ genGewgawQ = GenGewgawQ.None)
+        {            
+            this.itemName = itemName;
+            this.itemType = itemType;
+            this.maxInvStackSize = maxInvStackSize;
+            this.genGewgawQ= genGewgawQ;
+        }
+    }
 
 }
 

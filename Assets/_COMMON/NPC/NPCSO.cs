@@ -42,7 +42,7 @@ namespace Town
                     {
                         int itemName =
                             itemDataLs.itemName.GetItemName(itemDataLs.itemType);
-                        ItemData itemData = new ItemData(itemDataLs.itemType, itemName);
+                        ItemData itemData = new ItemData(itemDataLs.itemType, itemName, itemDataLs.genGawgawQ);
                         ItemDataWithQtyNPrice itemQty = new ItemDataWithQtyNPrice(itemData, itemDataLs.qty);
                         result.Add(itemQty);
                     }

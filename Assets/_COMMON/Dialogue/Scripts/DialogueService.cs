@@ -85,7 +85,6 @@ namespace Common
             }
             Debug.Log("dialogue NOT FOUND" + dialogueName); return null;
         }
-
         public List<DialogueModel> GetDialogueModel4CharNPC(CharNames charName, NPCNames nPCNames)
         {
             List<DialogueModel> lsModels = new List<DialogueModel>(); 
@@ -104,7 +103,6 @@ namespace Common
             allDiverts.Clear();
             allDefine.Clear();
         }
-
         public void SortAllList()
         {
             allOptions = allOptions.OrderBy(t => t.numTag).ToList();

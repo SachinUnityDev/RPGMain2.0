@@ -243,7 +243,7 @@ namespace Common
                 tradeSelectView.tradeView.tradeScrollView.AddItem2InVView(ItemsInSlot[0]);
             }
            RemoveAllItems();
-          //  AddItemOnSlot(item, onDropOrRtClick);
+           AddItemOnSlot(item, onDropOrRtClick);// item added to trade select
         }
 
         #region RIGHT CLICK ACTIONS ON INV RELATED

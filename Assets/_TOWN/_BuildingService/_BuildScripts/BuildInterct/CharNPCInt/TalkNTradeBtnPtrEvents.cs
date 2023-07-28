@@ -18,7 +18,11 @@ namespace Town
         [Header("Sprite Ref")]
         [SerializeField] Sprite spriteN;
         [SerializeField] Sprite spriteHL;
-        Image img; 
+        Image img;
+
+        [Header(" Global Var")]
+        [SerializeField] float clickDelay = 0.5f;
+        [SerializeField] float lastClick = 0f;
         private void Awake()
         {
 
@@ -31,8 +35,11 @@ namespace Town
         }
         public void OnPointerClick(PointerEventData eventData)
         {
-            talkNTradeBtnView.OnSelect(intType);
-            img.sprite = spriteN;
+            if(Time.time - lastClick > clickDelay)
+            {
+                talkNTradeBtnView.OnSelect(intType);
+                img.sprite = spriteN;
+            }
         }
 
         public void InitTalkNTrade(NPCIntData nPCIntData, TalkNTradeBtnView talkNTradeBtnView)

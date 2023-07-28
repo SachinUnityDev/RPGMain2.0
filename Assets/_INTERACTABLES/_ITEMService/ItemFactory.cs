@@ -838,7 +838,6 @@ namespace Interactables
             foreach (var getTool in getTools)
             {
                 var t = Activator.CreateInstance(getTool) as ToolBase;
-
                 allTools.Add(t.toolName, getTool);
             }
             toolCount = allTools.Count;
@@ -854,7 +853,7 @@ namespace Interactables
                     return t;
                 }
             }
-            Debug.Log("   tool Base class Not found" + toolName);
+            Debug.LogError("tool Base class Not found" + toolName);
             return null;
         }
 

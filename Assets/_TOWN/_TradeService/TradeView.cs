@@ -65,8 +65,6 @@ namespace Town
         {
             isBuyBtnPressed = true;
             FillBuySlots();
-
-           
         }
         void OnSellBtnPressed()
         {
@@ -82,8 +80,7 @@ namespace Town
         public void OnTradePressed()
         {
             if(isBuyBtnPressed)
-            {
-                // subtract money from player inv 
+            {               
                 EcoServices.Instance.DebitPlayerInv(tradeSelectView.netVal);    
             }
             else
@@ -106,7 +103,6 @@ namespace Town
 
         void FillBuySlots()
         {
-            // get  Slots
            
             headingTxt.text =  npcSO.classTypes.ToString().CreateSpace()+ " Stock";            
             tradeModel = TradeService.Instance.tradeController.GetTradeModel(npcName);

@@ -74,9 +74,9 @@ namespace Common
                 rechargeCostTxt.text = "Recharge Cost"; 
                 rechargeCost = WeaponService.Instance.allWeaponSO.rechargeValue.DeepClone();
             }
-            else if (weaponState == WeaponState.UnEnchantable)
+            else if (weaponState == WeaponState.Unenchantable)
             {
-                rechargeCostTxt.text = " UnEnchantable";
+                rechargeCostTxt.text = " Unenchantable";
                 rechargeCost = new Currency(0, 0);
             }
 
@@ -89,7 +89,7 @@ namespace Common
 
             switch (weaponState)
             {
-                case WeaponState.UnEnchantable:
+                case WeaponState.Unenchantable:
                     return; 
                 case WeaponState.Unidentified:
                     if(currency >= rechargeCost.BronzifyCurrency())

@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29939290b2efa2a4b8f12ff01b1a6a06, type: 3}
   m_Name: HIdeSO
   m_EditorClassIdentifier: 
-  charNames: 010000002a0000002b000000
+  charNames: 01000000
   armorType: 2
   armorTypeStr: Hide
   minArmor: 1
   maxArmor: 1
-  minArmorUp: 0
-  maxArmorUp: 0
+  minArmorUp: 1
+  maxArmorUp: 3
   allCharArmorData:
   - charName: 1
     armorSprite: {fileID: 21300000, guid: 2d05610014ff6ba46b3e0ec7394f24d8, type: 3}

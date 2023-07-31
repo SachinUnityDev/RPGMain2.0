@@ -140,11 +140,71 @@ namespace Interactables
 
             }
             return sprite;
-
-            
         }
 
+        public string GetItemName(ItemData itemData)
+        {
+            switch (itemData.itemType)
+            {
+                case ItemType.None:
+                    break;
+                case ItemType.Potions:
+                    PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionNames)itemData.itemName);
+                    return potionSO.potionName.ToString();
 
+                case ItemType.GenGewgaws:
+                    GenGewgawSO genGewgawSO = ItemService.Instance.GetGenGewgawSO((GenGewgawNames)itemData.itemName);
+                    return genGewgawSO.genGewgawName.ToString().CreateSpace();
+
+                case ItemType.Herbs:
+                    HerbSO herbSO = ItemService.Instance.GetHerbSO((HerbNames)itemData.itemName);
+                    return herbSO.herbName.ToString().CreateSpace();
+                case ItemType.Foods:
+                    FoodSO foodSO = ItemService.Instance.GetFoodSO((FoodNames)itemData.itemName);
+                    return foodSO.foodName.ToString().CreateSpace();
+                case ItemType.Fruits:
+                    FruitSO fruitSO = ItemService.Instance.GetFruitSO((FruitNames)itemData.itemName);
+                    return fruitSO.fruitName.ToString().CreateSpace();
+                case ItemType.Ingredients:
+                    IngredSO ingredSO = ItemService.Instance.GetIngredSO((IngredNames)itemData.itemName);
+                    return ingredSO.ingredName.ToString().CreateSpace();
+                case ItemType.XXX:
+                    break;
+                case ItemType.Scrolls:
+                    ScrollSO scrollSO = ItemService.Instance.GetScrollSO((ScrollNames)itemData.itemName);
+                    return scrollSO.scrollName.ToString().CreateSpace();
+                case ItemType.TradeGoods:  // start from here
+                    TGSO tgSO = ItemService.Instance.GetTradeGoodsSO((TGNames)itemData.itemName);
+                    return tgSO.tgName.ToString().CreateSpace();
+                case ItemType.Tools:
+                    ToolsSO toolSO = ItemService.Instance.GetToolSO((ToolNames)itemData.itemName);
+                    return toolSO.toolName.ToString().CreateSpace();
+                case ItemType.Teas:
+                    break;
+                case ItemType.Soups:
+                    break;
+                case ItemType.Gems:
+                    GemSO gemSO = ItemService.Instance.GetGemSO((GemNames)itemData.itemName);
+                    return gemSO.gemName.ToString().CreateSpace();
+                case ItemType.Alcohol:
+                    break;
+                case ItemType.Meals:
+                    break;
+                case ItemType.SagaicGewgaws:
+                    SagaicGewgawSO sagaicGewgawSO = ItemService.Instance.GetSagaicGewgawSO((SagaicGewgawNames)itemData.itemName);
+                    return sagaicGewgawSO.sagaicGewgawName.ToString().CreateSpace();
+                case ItemType.PoeticGewgaws:
+                    PoeticGewgawSO poeticGewgawSO = ItemService.Instance.GetPoeticGewgawSO((PoeticGewgawNames)itemData.itemName);
+                    return poeticGewgawSO.poeticGewgawName.ToString().CreateSpace();
+                case ItemType.RelicGewgaws:
+                    // write Relic 
+                    break;
+
+                default:
+                    break;
+            }
+            return ""; 
+        }
     }
 
 

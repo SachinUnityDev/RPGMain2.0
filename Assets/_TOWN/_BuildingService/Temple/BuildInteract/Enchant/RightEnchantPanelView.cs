@@ -35,7 +35,7 @@ namespace Town
         
             switch (weaponState)
             {
-                case WeaponState.UnEnchantable:
+                case WeaponState.Unenchantable:
                     rechargeTxt.text = "No Charges";
                     weaponStateTxt.text = "Enchantable";
                     gemImg.gameObject.SetActive(false);

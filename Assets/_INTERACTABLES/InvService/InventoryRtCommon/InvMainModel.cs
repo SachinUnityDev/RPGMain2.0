@@ -71,15 +71,43 @@ namespace Interactables
             return false; 
         }
 
+        public bool AddItem2CommORExcess(Iitems item)
+        {    
+            if (AddItem2CommInv(item))
+            {
+                return true;
+            }
+            if (AddItem2ExcessInv(item))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool HasItemInQtyComm(ItemDataWithQty itemDataWithQty)
+        {
+            int count = 0;
+            List<Iitems> allItems = new List<Iitems>();
+            foreach (Iitems item in GetAllItemsInCommOfType(itemDataWithQty.itemData.itemType))
+            {
+                if (item.itemName == itemDataWithQty.itemData.itemName)
+                {
+                    count++;
+                }
+            }
+            if (count >= itemDataWithQty.quantity)
+                return true;
+            return false;
+        }
 
 
         public bool HasItemInQtyCommOrStash(ItemDataWithQty itemDataWithQty)
         {
             int count = 0; 
             List<Iitems> allItems = new List<Iitems>();
-            foreach (Iitems item in GetAllItemsInCommOrStash(itemDataWithQty.ItemData.itemType))
+            foreach (Iitems item in GetAllItemsInCommOrStash(itemDataWithQty.itemData.itemType))
             {
-                if(item.itemName == itemDataWithQty.ItemData.itemName)
+                if(item.itemName == itemDataWithQty.itemData.itemName)
                 {
                     count++; 
                 }
@@ -88,7 +116,6 @@ namespace Interactables
                 return true; 
             return false; 
         }
-
         public List<Iitems> GetAllItemsInCommOrStash(ItemType itemType)
         {
             List<Iitems> allItems = new List<Iitems>();
@@ -96,8 +123,8 @@ namespace Interactables
             allItems.AddRange(stashInvIntItems);
             return allItems;
         }
-        #region COMMON INV
 
+        #region COMMON INV
         public List<Iitems> GetAllItemsInCommOfType(ItemType itemType)
         {
             List<Iitems> allItems = new List<Iitems>();
@@ -109,29 +136,43 @@ namespace Interactables
             Debug.Log("no Items of type found in comm inv" + itemType); 
             return allItems; 
         }
-
         public bool AddItem2CommInv(Iitems item)   // KEY POINT OF ADDITION OF ITEM // Add to model => view
         {          
-            if (!InvService.Instance.IsCommInvFull(item))
+            if (InvService.Instance.commInvViewController.AddItem2InVView(item, false))// this adds to model list
             {
                 item.invSlotType = SlotType.CommonInv;
-                commonInvItems.Add(item); 
-                InvService.Instance.commInvViewController.AddItem2InVView(item, false);// this adds to model list
+                commonInvItems.Add(item);                 
                 commonInvCount++; 
                 return true;
             }
             else
             {
-                Debug.Log("Inv Size is full");
+                Debug.Log("Comm Inv is full");
                 return false;
             }         
         }
-
         public bool RemoveItemFrmCommInv(Iitems item) // view=> model 
         {
             commonInvItems.Remove(item);
             commonInvCount--; 
             return true;
+        }
+        public bool RemoveItemFrmCommInv(ItemData itemData)
+        {
+            foreach (Iitems item in commonInvItems.ToList())
+            {
+                GenGewgawBase gbase = item as GenGewgawBase;
+                if (gbase != null && item.itemName == itemData.itemName && item.itemType == itemData.itemType)
+                {
+                   return RemoveItemFrmCommInv(item);
+
+                }
+                else if (item.itemName== itemData.itemName && item.itemType == itemData.itemType)
+                {
+                   return RemoveItemFrmCommInv(item);
+                }
+            }
+            return false; 
         }
 
         public int GetItemNosInCommInv(ItemData itemData)
@@ -140,8 +181,7 @@ namespace Interactables
             int quantity = commonInvItems.Count(t=>t.itemName == itemData.itemName && t.itemType == itemData.itemType);
             return quantity; 
         }
-
-        public Iitems GetItemFromCommInv(ItemType itemType, int itemName)
+        public Iitems GetItemRefFrmCommInv(ItemType itemType, int itemName)
         {
             Iitems item =  commonInvItems.Find(t => t.itemType == itemType
                                         && t.itemName == itemName);
@@ -152,7 +192,6 @@ namespace Interactables
 
             return item; 
         }
-
         public List<Iitems> GetItemsFrmCommonInv(ItemType itemType)
         {
             List<Iitems> allItems = new List<Iitems>();
@@ -165,17 +204,16 @@ namespace Interactables
         #region EXCESS INV 
         public bool AddItem2ExcessInv(Iitems item)   // KEY POINT OF ADDITION OF ITEM // Add to model => view
         {
-            if (!InvService.Instance.IsExcessInvFull(item))
+            if (InvService.Instance.excessInvViewController.AddItem2InVView(item, false))
             {
                 item.invSlotType = SlotType.ExcessInv;
-                excessInvItems.Add(item);
-                InvService.Instance.excessInvViewController.AddItem2InVView(item, false);
+                excessInvItems.Add(item);               
                 excessInvCount++;
                 return true;
             }
             else
             {
-                Debug.Log("Inv Size is full");
+                Debug.Log("Excess Inv Size is full");
                 return false;
             }
         }
@@ -218,17 +256,16 @@ namespace Interactables
 
         public bool AddItem2StashInv(Iitems item)   // KEY POINT OF ADDITION OF ITEM // Add to model => view
         {
-            if (!InvService.Instance.IsStashInvFull(item))
+            if (InvService.Instance.stashInvViewController.AddItem2InVView(item, false)) // adds to model 
             {
                 item.invSlotType = SlotType.StashInv;
-                stashInvIntItems.Add(item);
-                InvService.Instance.stashInvViewController.AddItem2InVView(item,false);
+                stashInvIntItems.Add(item);                
                 stashInvCount++;
                 return true;
             }
             else
             {
-                Debug.Log("Inv Size is full");
+                Debug.Log("Stash Inv Size is full");
                 return false;
             }
         }

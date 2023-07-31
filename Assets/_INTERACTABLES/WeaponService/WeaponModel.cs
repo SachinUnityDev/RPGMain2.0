@@ -32,7 +32,7 @@ namespace Interactables
     }
     public enum WeaponState
     {
-        UnEnchantable, 
+        Unenchantable, 
         Unidentified, 
         Identified, 
         Enchanted, 

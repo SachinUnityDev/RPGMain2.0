@@ -43,7 +43,7 @@ namespace Interactables
 
             string str = $"{armorSO.minArmor}-{armorSO.maxArmor} Armor for 3 days";
             allLines.Add(str);
-            armorState = ArmorState.UnFortifiable; 
+            armorState = ArmorState.Unfortifiable; 
         }         
         public abstract void OnArmorFortifyUpgraded();
 

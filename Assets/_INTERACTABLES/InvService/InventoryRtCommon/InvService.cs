@@ -63,44 +63,21 @@ namespace Interactables
 
         #region INV CHECKS
 
-        public bool IsCommInvFull(Iitems item)
-        {
-            // talk to view get info dpending on current item
-            return false;
-        }
-        public bool IsStashInvFull(Iitems item)
-        {
-
-            return false;
-        }
-        public bool IsExcessInvFull(Iitems item)
-        {
-            return false;
-        }
-
-        public bool IsCommNExcessInvFull(ItemData itemData)
-        {
-
-
-            return false;
-        }
-
-
-        public void OpenInvView()  // dont know where to use // Deprecated 
-        {
-            if (invPanel == null)
-            {
-                invPanel = Instantiate(invPanelPrefab);
-            }
-            UIControlServiceGeneral.Instance.SetMaxSibling2Canvas(invPanel);
-            invPanel.SetActive(true);
-            commInvViewController = invPanel.GetComponent<InvRightViewController>();
-            commInvViewController.GetComponent<IPanel>().Init();
-        }
-        public void CloseInvView() // don t know where to use  // Deprecated
-        {
-            commInvViewController.GetComponent<IPanel>().UnLoad();
-        }
+        //public void OpenInvView()  // dont know where to use // Deprecated 
+        //{
+        //    if (invPanel == null)
+        //    {
+        //        invPanel = Instantiate(invPanelPrefab);
+        //    }
+        //    UIControlServiceGeneral.Instance.SetMaxSibling2Canvas(invPanel);
+        //    invPanel.SetActive(true);
+        //    commInvViewController = invPanel.GetComponent<InvRightViewController>();
+        //    commInvViewController.GetComponent<IPanel>().Init();
+        //}
+        //public void CloseInvView() // don t know where to use  // Deprecated
+        //{
+        //    commInvViewController.GetComponent<IPanel>().UnLoad();
+        //}
 
         #endregion
 

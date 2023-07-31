@@ -20,7 +20,7 @@ namespace Town
 
 
         [SerializeField] Transform leftCharPanel;
-        [SerializeField] Transform rightGemPanel;
+        //[SerializeField] Transform rightGemPanel;
 
      
 
@@ -51,25 +51,24 @@ namespace Town
 
         void ShowRightLeftPanel()
         {
-            rightGemPanel.gameObject.SetActive(true);
+            //rightGemPanel.gameObject.SetActive(true);
             leftCharPanel.gameObject.SetActive(true);
-
-            //leftCharPanel.GetComponent<LeftEnchantPanelView>().InitLeftPanel(selectChar, armorModel);
+            leftCharPanel.GetComponent<LeftPanelArmorView>().InitLeftPanel(selectChar, armorModel);
             //rightGemPanel.GetComponent<RightEnchantPanelView>().InitRightPanel(selectChar, armorModel);
         }
         void HideRightLeftPanel()
         {
-            rightGemPanel.gameObject.SetActive(false);
+            //rightGemPanel.gameObject.SetActive(false);
             leftCharPanel.gameObject.SetActive(false);
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
-          //  ShowRightLeftPanel();
+            ShowRightLeftPanel();
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            //HideRightLeftPanel();
+            HideRightLeftPanel();
         }
 
 

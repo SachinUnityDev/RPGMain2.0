@@ -20,7 +20,6 @@ namespace Interactables
 
         [Header("Curr CharSelected")]
         public CharController selectChar; 
-
         public ItemFactory itemFactory;    
 
         //public ItemCardViewController cardViewController;
@@ -79,7 +78,6 @@ namespace Interactables
 
         [Header("All Alcohol SO")]
         public List<AlcoholSO> allAlcoholSO = new List<AlcoholSO>();
-
         #endregion
 
         [Header("Item card")]
@@ -521,41 +519,55 @@ namespace Interactables
             }
             if (Input.GetKeyDown(KeyCode.J))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.PoeticGewgaws, (int)PoeticGewgawNames.GlovesLegacyOfTheSpida,
-                CauseType.Items, 2);
-                InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionNames.HealthPotion,
+             //   InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.ScarfOfCourage,
+             //             CauseType.Items, 2, GenGewgawQ.Folkloric);
+             //   InitItemToInv(SlotType.CommonInv, ItemType.PoeticGewgaws, (int)PoeticGewgawNames.GlovesLegacyOfTheSpida,
+             //   CauseType.Items, 2);
+             //   InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionNames.HealthPotion,
+             //       CauseType.Items, 2);
+
+             //   InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.NyalaTrophy,
+             //       CauseType.Items, 2);
+             //   InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.LionPelt,
+             //      CauseType.Items, 2);
+             //   InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.NyalaTrophy,
+             //CauseType.Items, 2);
+             //   InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.LionPelt,
+             //      CauseType.Items, 2); InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.NyalaTrophy,
+             //       CauseType.Items, 2);
+             //   InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.LionPelt,
+             //      CauseType.Items, 2); InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.NyalaTrophy,
+             //       CauseType.Items, 2);
+             //   InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.GreenBoots,
+             //      CauseType.Items, 2); InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.NyalaTrophy,
+             //       CauseType.Items, 2);
+             //   InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.LionessPelt,
+             //      CauseType.Items, 2); InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.NyalaTrophy,
+             //       CauseType.Items, 2);
+             //   InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.LionessPelt,
+             //      CauseType.Items, 2);
+
+
+                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.FelineHeart,
+                   CauseType.Items, 4);
+                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.BatEar,
+               CauseType.Items, 4);
+                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.HyenaEar,
+               CauseType.Items, 4);
+                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.Hoof,
+               CauseType.Items, 4);
+
+                InitItemToInv(SlotType.CommonInv, ItemType.Herbs, (int)HerbNames.Aloe,
                     CauseType.Items, 2);
 
-                InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.NyalaTrophy,
+                InitItemToInv(SlotType.CommonInv, ItemType.Herbs, (int)HerbNames.Echinacea,
                     CauseType.Items, 2);
-                InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.LionPelt,
-                   CauseType.Items, 2);
-                InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.NyalaTrophy,
-             CauseType.Items, 2);
-                InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.LionPelt,
-                   CauseType.Items, 2); InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.NyalaTrophy,
-                    CauseType.Items, 2);
-                InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.LionPelt,
-                   CauseType.Items, 2); InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.NyalaTrophy,
-                    CauseType.Items, 2);
-                InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.GreenBoots,
-                   CauseType.Items, 2); InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.NyalaTrophy,
-                    CauseType.Items, 2);
+
                 InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.LionessPelt,
                    CauseType.Items, 2); InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.NyalaTrophy,
                     CauseType.Items, 2);
                 InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.LionessPelt,
                    CauseType.Items, 2);
-
-
-                //InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionNames.StaminaPotion,
-                //    CauseType.Items, 2);
-                //InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionNames.ScorpionRepeller,
-                //    CauseType.Items, 2);
-                //InitItemToInv(SlotType.CommonInv, ItemType.Foods, (int)FoodNames.FlaskOfWater,
-                //    CauseType.Items, 2);
-                //InitItemToInv(SlotType.CommonInv, ItemType.Herbs, (int)HerbNames.PoisonIvy,
-                //   CauseType.Items, 2);
 
 
             }

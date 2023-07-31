@@ -14,7 +14,7 @@ namespace Town
         None,
         Fortifiable, 
         Fortified,
-        UnFortifiable,
+        Unfortifiable,
     }
     public class FortifyView : MonoBehaviour, IPanel
     {

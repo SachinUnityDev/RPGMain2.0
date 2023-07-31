@@ -27,10 +27,7 @@ namespace Town
             fortPotionBtn.onClick.AddListener(OnFortPotionPressed);
 
             // img off 
-            healthPtr = healthPotionBtn.transform.GetChild(0).GetComponent<Image>();
-            staminaPtr = staminaPotionBtn.transform.GetChild(0).GetComponent<Image>();
-            fortPtr = fortPotionBtn.transform.GetChild(0).GetComponent<Image>();
-            ptrImgs = new List<Image>() { healthPtr, staminaPtr, fortPtr };
+          
         }
 
         void DisablePtr()
@@ -43,10 +40,12 @@ namespace Town
         public void InitPotionPtrEvents(CraftView craftView)
         {
             this.craftView = craftView;
+            healthPtr = healthPotionBtn.transform.GetChild(0).GetComponent<Image>();
+            staminaPtr = staminaPotionBtn.transform.GetChild(0).GetComponent<Image>();
+            fortPtr = fortPotionBtn.transform.GetChild(0).GetComponent<Image>();
+            ptrImgs = new List<Image>() { healthPtr, staminaPtr, fortPtr };
         }
-
-
-        void OnHealthPotionPressed()
+        public void OnHealthPotionPressed()
         {
             DisablePtr();
             healthPtr.gameObject.SetActive(true);

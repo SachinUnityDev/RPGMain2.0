@@ -16,9 +16,9 @@ MonoBehaviour:
   armorType: 1
   armorTypeStr: Leather
   minArmor: 1
-  maxArmor: 1
-  minArmorUp: 0
-  maxArmorUp: 0
+  maxArmor: 2
+  minArmorUp: 2
+  maxArmorUp: 3
   allCharArmorData:
   - charName: 2
     armorSprite: {fileID: 21300000, guid: dd778cfe41dbb5446b8e6ef1dfcaca74, type: 3}

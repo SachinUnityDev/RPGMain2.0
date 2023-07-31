@@ -61,7 +61,7 @@ namespace Interactables
                 int j = 0;
                 for (int i = 0; i < allIngredData.Count; i++)
                 {
-                    Iitems ingredItem = ItemService.Instance.GetItemBase(allIngredData[i].ItemData);
+                    Iitems ingredItem = ItemService.Instance.GetItemBase(allIngredData[i].itemData);
                     j = j + 2;
                     transform.GetChild(0).GetChild(j).gameObject.SetActive(true);
                     transform.GetChild(0).GetChild(j).GetComponent<RecipeItemPtrEvents>().Init(ingredItem, allIngredData[i]);

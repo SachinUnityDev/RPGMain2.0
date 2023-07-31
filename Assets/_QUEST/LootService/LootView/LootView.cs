@@ -67,7 +67,7 @@ namespace Quest
             this.lootList.Clear();this.selectedList.Clear();
             foreach (ItemDataWithQty itemQty in lootList)
             {
-                Iitems item = ItemService.Instance.GetNewItem(itemQty.ItemData);
+                Iitems item = ItemService.Instance.GetNewItem(itemQty.itemData);
                 ItemBaseWithQty itemBaseWithQty = new ItemBaseWithQty(item, itemQty.quantity);   
                 this.lootList.Add(itemBaseWithQty); 
             }

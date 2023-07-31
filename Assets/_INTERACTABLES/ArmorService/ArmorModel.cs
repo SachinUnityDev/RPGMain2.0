@@ -22,7 +22,8 @@ namespace Interactables
         public int maxArmor;
         public int minArmorUp;
         public int maxArmorUp;
-
+   
+        // Armor Data contains state, currency cost for fortify Etc. 
         public List<ArmorDataVsLoc> allArmorDataVsLoc = new List<ArmorDataVsLoc>();
 
         public ArmorModel(ArmorSO armorSO)
@@ -32,9 +33,9 @@ namespace Interactables
             maxArmor= armorSO.maxArmor;
             minArmorUp = armorSO.minArmorUp; 
             maxArmorUp =armorSO.maxArmorUp;
+            armorTypeStr= armorSO.armorTypeStr;
             
-            allArmorDataVsLoc = armorSO.allArmorDataVsLoc;
-           
+            allArmorDataVsLoc = armorSO.allArmorDataVsLoc;           
         }
 
         public Currency GetFortifyCost(LocationName locName)

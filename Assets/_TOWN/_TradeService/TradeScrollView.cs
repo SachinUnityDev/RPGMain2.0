@@ -94,7 +94,7 @@ namespace Town
             if(slotExtra > 0) 
             {
                 if (slotExtra % 4 != 0)
-                    slotExtra += slotExtra % 4; 
+                    slotExtra += (4- slotExtra % 4); 
                 for (int i = 0; i < slotExtra; i++)
                 {
 

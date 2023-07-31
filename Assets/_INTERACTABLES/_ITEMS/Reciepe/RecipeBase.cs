@@ -9,13 +9,13 @@ using UnityEngine;
     [Serializable]
     public class ItemDataWithQty
     {
-        public ItemData ItemData;
+        public ItemData itemData;
         public int quantity;
       
         public ItemDataWithQty() { }
         public ItemDataWithQty(ItemData itemData, int quantity)
         {
-            ItemData = itemData;
+            this.itemData = itemData;
             this.quantity = quantity;
         }
     }

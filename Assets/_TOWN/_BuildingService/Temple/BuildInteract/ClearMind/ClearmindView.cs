@@ -41,19 +41,13 @@ namespace Town
         public List<TempTraitBuffData> posMentalTraits= new List<TempTraitBuffData>();
         public List<TempTraitBuffData> negMentalTraits = new List<TempTraitBuffData>();
 
-        TempTraitController tempTraitController; 
-        private void Awake()
-        {
-            
-        }
+        TempTraitController tempTraitController;         
         private void Start()
         {
             leftBtn.onClick.AddListener(OnLeftBtnPressed);
             rightBtn.onClick.AddListener(OnRightBtnPressed);
             closeBtn.onClick.AddListener(closeBtnPressed);
         }
-
-
         void OnLeftBtnPressed()
         {
             if (Time.time - prevLeftClick < 0.3f) return;
@@ -106,7 +100,6 @@ namespace Town
             FillCharInfo();
             clearMindBtn.GetComponent<ClearmindBtnPtrEvents>()
                             .InitBtnEvents(charSelect, tempTraitController, this); 
-
         }
             
         void FillCharInfo()
@@ -114,7 +107,6 @@ namespace Town
             CharacterSO charSO = CharService.Instance.allCharSO.GetCharSO(charSelect);
             charImg.sprite = charSO.charSprite;
             nameTxt.text = charSO.charNameStr; 
-
         }
         void GetMentalTraits()
         {
@@ -135,6 +127,7 @@ namespace Town
                     }
                 }
             }
+
         }
         void FillMentalTraits()
         {
@@ -165,10 +158,17 @@ namespace Town
                         negTraitTrans.GetChild(i).gameObject.SetActive(false);
                     }
                 }
-                if(negMentalTraits.Count ==0 && posMentalTraits.Count ==0)
-                        clearMindtxt.gameObject.SetActive(true);
+                if(negMentalTraits.Count ==0 && posMentalTraits.Count == 0)
+                {
+                    clearMindtxt.gameObject.SetActive(true);
+                    clearMindBtn.GetComponent<ClearmindBtnPtrEvents>().SetState(false);
+                }
                 else
+                {
                     clearMindtxt.gameObject.SetActive(false);
+                    clearMindBtn.GetComponent<ClearmindBtnPtrEvents>().SetState(true);
+                }
+
 
 
         }

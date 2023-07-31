@@ -59,7 +59,7 @@ namespace Town
             
             switch (weaponState)
             {
-                case WeaponState.UnEnchantable:
+                case WeaponState.Unenchantable:
                     descTxt.text = "Weapon cannot be Enchanted";
                     break;
                 case WeaponState.Unidentified:

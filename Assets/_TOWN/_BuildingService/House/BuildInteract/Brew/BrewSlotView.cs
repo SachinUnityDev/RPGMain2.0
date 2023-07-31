@@ -59,9 +59,9 @@ public class BrewSlotView : MonoBehaviour
                 }
                 ItemDataWithQty ingred = recipe.allIngredData[j];       
                 int quantity =
-                    InvService.Instance.invMainModel.GetItemNosInCommInv(ingred.ItemData);
+                    InvService.Instance.invMainModel.GetItemNosInCommInv(ingred.itemData);
                 quantity +=
-                    InvService.Instance.invMainModel.GetItemNosInStashInv(ingred.ItemData);
+                    InvService.Instance.invMainModel.GetItemNosInStashInv(ingred.itemData);
 
                 recipeSlotTrans.GetChild(i).GetComponent<BrewRecipePtrEvents>().InitBrewRecipe(ingred, quantity);                               
                 

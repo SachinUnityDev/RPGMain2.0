@@ -24,13 +24,13 @@ namespace Quest
 
             if (toolName1 != ToolNames.None)
                 toolSlot1 = InvService.Instance.invMainModel
-                         .GetItemFromCommInv(ItemType.Tools, (int)toolName1);
+                         .GetItemRefFrmCommInv(ItemType.Tools, (int)toolName1);
             else
                 toolSlot1 = null;
 
             if (toolName2 != ToolNames.None)
                 toolSlot2 = InvService.Instance.invMainModel
-                         .GetItemFromCommInv(ItemType.Tools, (int)toolName2);
+                         .GetItemRefFrmCommInv(ItemType.Tools, (int)toolName2);
             else
                 toolSlot2 = null;
             toolSelect = toolSlot1; 

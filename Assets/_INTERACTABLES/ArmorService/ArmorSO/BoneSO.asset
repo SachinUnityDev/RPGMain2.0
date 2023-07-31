@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29939290b2efa2a4b8f12ff01b1a6a06, type: 3}
+  m_Name: BoneSO
+  m_EditorClassIdentifier: 
+  charNames: 05000000
+  armorType: 5
+  armorTypeStr: Bone
+  minArmor: 0
+  maxArmor: 1
+  minArmorUp: 1
+  maxArmorUp: 2
+  allCharArmorData:
+  - charName: 5
+    armorSprite: {fileID: 21300000, guid: 9a1c0612a5ba10245951e521f5933676, type: 3}
+  allArmorDataVsLoc:
+  - locationName: 1
+    currFortify:
+      silver: 0
+      bronze: 0
+    currFortifyOnUpgrade:
+      silver: 0
+      bronze: 9
+    currSocketDiv:
+      silver: 1
+      bronze: 0
+    currSocketSupport:
+      silver: 0
+      bronze: 10
+    armorState: 3
+  allLines:
+  - Fortify to gain Armor buff

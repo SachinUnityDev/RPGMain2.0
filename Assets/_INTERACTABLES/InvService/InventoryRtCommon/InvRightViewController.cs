@@ -162,19 +162,19 @@ namespace Interactables
             return slotFound; 
          }
 
-        public bool IsCommInvFull(ItemBaseWithQty itemBaseWithQty)
-        {
-            for (int i = 0; i < invContainer.transform.childCount; i++)
-            {
-                Transform child = invContainer.transform.GetChild(i);
-                iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
-                if (!iSlotable.isSlotFull(itemBaseWithQty.item, itemBaseWithQty.qty))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
+        //public bool IsCommInvFull(ItemBaseWithQty itemBaseWithQty)
+        //{
+        //    for (int i = 0; i < invContainer.transform.childCount; i++)
+        //    {
+        //        Transform child = invContainer.transform.GetChild(i);
+        //        iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
+        //        if (!iSlotable.isSlotFull(itemBaseWithQty.item, itemBaseWithQty.qty))
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //    return true;
+        //}
 
         public void UpdateCommInvDB()
         {

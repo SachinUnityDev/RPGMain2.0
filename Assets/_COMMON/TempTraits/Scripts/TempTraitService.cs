@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System; 
-
-
+using System;
+using System.Linq;
 
 namespace Common
 {
@@ -18,6 +17,9 @@ namespace Common
         public event Action<TempTraitData> OnTempTraitEnd;
         public event Action<CharNames, TempTraitName> OnTempTraitHovered;
        
+        public List<TempTraitController> allTempTraitControllers = new List<TempTraitController>(); 
+
+
 
         public TempTraitsFactory temptraitsFactory;
 
@@ -36,6 +38,8 @@ namespace Common
         }
 
 
+
+
         public void ApplyPermTraits(GameObject go)
         {
             CharController charController = go?.GetComponent<CharController>();
@@ -45,6 +49,24 @@ namespace Common
                 p.ApplyTrait(charController);
             }
         }
+
+        public bool IsAnyOneSick()
+        {
+            foreach (CharController c in CharService.Instance.allyInPlayControllers)
+            {
+                TempTraitController tempTraitController = c.tempTraitController;
+                foreach (TempTraitBuffData model in tempTraitController.alltempTraitApplied)
+                {
+                    TempTraitSO tempSO = TempTraitService.Instance.allTempTraitSO.GetTempTraitSO(model.tempTraitName);
+                    if (tempSO.tempTraitType == TempTraitType.Sickness)
+                    {
+                        return true; 
+                    }
+                }
+            }
+            return false; 
+        }
+
 
 
     }

@@ -568,13 +568,28 @@ namespace Interactables
                     CauseType.Items, 2);
                 InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.LionessPelt,
                    CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.ScarfOfCourage,
+                        CauseType.Items, 2, GenGewgawQ.Folkloric);
 
 
             }
             if (Input.GetKeyDown(KeyCode.G))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.ScarfOfCourage,
-                            CauseType.Items, 2, GenGewgawQ.Folkloric);
+
+                InitItemToInv(SlotType.CommonInv, ItemType.Herbs, (int)HerbNames.BitterAloe,
+                   CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.Herbs, (int)HerbNames.Aloe,
+                   CauseType.Items, 2);
+
+                InitItemToInv(SlotType.CommonInv, ItemType.Herbs, (int)HerbNames.Myrsine,
+                   CauseType.Items, 2);
+
+                InitItemToInv(SlotType.CommonInv, ItemType.Herbs, (int)HerbNames.Buchu,
+                   CauseType.Items, 2);
+
+                InitItemToInv(SlotType.CommonInv, ItemType.Herbs, (int)HerbNames.PoisonIvy,
+                   CauseType.Items, 2);
+
             }            
         }
 

@@ -30,4 +30,4 @@ MonoBehaviour:
     herb2:
       herbName: 9
       qty: 3
-    restTimeInday: 1
+    restTimeInday: 2

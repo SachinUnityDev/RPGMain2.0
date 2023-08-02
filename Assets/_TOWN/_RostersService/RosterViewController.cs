@@ -10,9 +10,6 @@ using System;
 
 namespace Common
 {
-  
-
-
     public class RosterViewController : MonoBehaviour, IPanel, iHelp
     {
         [SerializeField] HelpName helpName;
@@ -101,11 +98,6 @@ namespace Common
             draggedGORect.localScale = Vector3.one;
             draggedGORect.anchoredPosition = new Vector3(0, 0, 0);           
         }
-
-        void OnDrag2PartySuccessful()
-        {
-
-        }
         void OnInviteBtnPressed()
         {
 
@@ -156,16 +148,6 @@ namespace Common
             PopulatePortrait();
             PopulateSidePlank();
         }
-
-        //public int GetIndexOfChar(CharNames charName)
-        //{
-        //    int i = unLockedChars.FindIndex(t => t.charName == charName);
-        //    if (i != -1)
-        //        return i;
-        //    else
-        //        Debug.Log("CharIndex not found!");
-        //    return 0;
-        //}
         public void PopulatePortrait2_Char(CharNames charName)
         {
             index = 
@@ -189,13 +171,7 @@ namespace Common
             else if (charModel.availOfChar == AvailOfChar.UnAvailable_InParty)
                 availabilityTxt.text = "Already In Party";
             else
-                availabilityTxt.text = "UnAvailable";           
-            
-            // Fame Behavior
-            //FameBehavior fameBehavior = RosterService.Instance.currCharModel.fameBehavior;
-            //SidePlankTrans.GetChild(1).GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>().text
-            //       = fameBehavior.ToString().CreateSpace();
-
+                availabilityTxt.text = "UnAvailable";                       
             SidePlankTrans.GetChild(2).GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>().text
                  = RosterService.Instance.scrollSelectCharModel.currCharLoc.ToString();
         }

@@ -114,6 +114,12 @@ namespace Common
                 }
             }
         }    
+
+        public void OnHealBtnPressed(TempTraitBuffData tempTraitBuffData)
+        {
+            RemoveTraitByName(tempTraitBuffData.tempTraitName);
+        }
+
         #endregion
 
         #region IMMUNITY APPLY & REMOVE
@@ -216,18 +222,24 @@ namespace Common
                                                             , TempTraitName.SwampyCramp);
                 ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
                                                             , TempTraitName.ForestGump);
-            }
-        
-            if (Input.GetKeyDown(KeyCode.C))
-            {
                 ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
-                                                             , TempTraitName.Confident);
+                                                          , TempTraitName.Confident);
 
                 ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
                                                              , TempTraitName.Unwavering);
 
                 ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
-                                                             , TempTraitName.Initiator); 
+                                                             , TempTraitName.Initiator);
+            }
+        
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
+                                                                , TempTraitName.Diarrhea);
+                ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
+                                                             , TempTraitName.Tapeworm);
+                ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
+                                                             , TempTraitName.Constipation);               
             }
         }
     }

@@ -16,7 +16,7 @@ namespace Town
         [SerializeField] TextMeshProUGUI clearMindtxt; 
 
         [SerializeField] Transform charLvl;
-        [SerializeField] Image portImg;
+    
         [SerializeField] CharNames charSelect;
 
         [Header("left right panels")]
@@ -34,8 +34,8 @@ namespace Town
         [SerializeField] Image charImg;
         [SerializeField] TextMeshProUGUI nameTxt;
 
-        [Header("Money requrired")]
-        [SerializeField] Transform currTrans; 
+        //[Header("Money requrired")]
+        //[SerializeField] Transform currTrans; 
 
         [Header("Global var")]
         public List<TempTraitBuffData> posMentalTraits= new List<TempTraitBuffData>();
@@ -132,45 +132,42 @@ namespace Town
         void FillMentalTraits()
         {
          
-                for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
+            {
+                if(i < posMentalTraits.Count)
                 {
-                    if(i < posMentalTraits.Count)
-                    {
-                        posTraitTrans.GetChild(i).gameObject.SetActive(true);  
-                        posTraitTrans.GetChild(i).GetComponent<TextMeshProUGUI>().text =
-                                             posMentalTraits[i].tempTraitName.ToString().CreateSpace();
-                    }
-                    else
-                    {
-                        posTraitTrans.GetChild(i).gameObject.SetActive(false);
-                    }
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    if (i < negMentalTraits.Count)
-                    {
-                        negTraitTrans.GetChild(i).gameObject.SetActive(true);
-                        negTraitTrans.GetChild(i).GetComponent<TextMeshProUGUI>().text =
-                                             negMentalTraits[i].tempTraitName.ToString().CreateSpace();
-                    }
-                    else
-                    {
-                        negTraitTrans.GetChild(i).gameObject.SetActive(false);
-                    }
-                }
-                if(negMentalTraits.Count ==0 && posMentalTraits.Count == 0)
-                {
-                    clearMindtxt.gameObject.SetActive(true);
-                    clearMindBtn.GetComponent<ClearmindBtnPtrEvents>().SetState(false);
+                    posTraitTrans.GetChild(i).gameObject.SetActive(true);  
+                    posTraitTrans.GetChild(i).GetComponent<TextMeshProUGUI>().text =
+                                            posMentalTraits[i].tempTraitName.ToString().CreateSpace();
                 }
                 else
                 {
-                    clearMindtxt.gameObject.SetActive(false);
-                    clearMindBtn.GetComponent<ClearmindBtnPtrEvents>().SetState(true);
+                    posTraitTrans.GetChild(i).gameObject.SetActive(false);
                 }
-
-
-
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                if (i < negMentalTraits.Count)
+                {
+                    negTraitTrans.GetChild(i).gameObject.SetActive(true);
+                    negTraitTrans.GetChild(i).GetComponent<TextMeshProUGUI>().text =
+                                            negMentalTraits[i].tempTraitName.ToString().CreateSpace();
+                }
+                else
+                {
+                    negTraitTrans.GetChild(i).gameObject.SetActive(false);
+                }
+            }
+            if(negMentalTraits.Count ==0 && posMentalTraits.Count == 0)
+            {
+                clearMindtxt.gameObject.SetActive(true);
+                clearMindBtn.GetComponent<ClearmindBtnPtrEvents>().SetState(false);
+            }
+            else
+            {
+                clearMindtxt.gameObject.SetActive(false);
+                clearMindBtn.GetComponent<ClearmindBtnPtrEvents>().SetState(true);
+            }
         }
         void FillStashMoney()
         {
@@ -178,7 +175,7 @@ namespace Town
             Currency amtReq = lvlExpSO
                     .ClearMindMoneyNeeded(tempTraitController.charController.charModel.charLvl);
 
-            currTrans.GetChild(0).GetComponent<DisplayCurrency>().Display(amtReq);
+           // currTrans.GetChild(0).GetComponent<DisplayCurrency>().Display(amtReq);
         }
         public void Init()
         {

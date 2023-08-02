@@ -7,13 +7,31 @@ using UnityEngine.EventSystems;
 namespace Town
 {
 
-    public class ApothecaryPtrEvents : BuildBaseEvents, IPointerClickHandler
+    public class ApothecaryPtrEvents : BuildBaseEvents, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         public void OnPointerClick(PointerEventData eventData)
         {
-            // open Rest Panel
-            MarketView marketView = buildView as MarketView;
-            UIControlServiceGeneral.Instance.TogglePanelOnInGrp(marketView.craftPotionPanel.gameObject, true);
+            if (buildModel.IsBuildIntUnLocked(BuildInteractType.CraftPotion))
+            {
+                MarketView marketView = buildView as MarketView;
+                UIControlServiceGeneral.Instance.TogglePanelOnInGrp(marketView.craftPotionPanel.gameObject, true);
+            }
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if (buildModel.IsBuildIntUnLocked(BuildInteractType.CraftPotion))
+            {
+                SetSpriteHL(); 
+            }
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            if (buildModel.IsBuildIntUnLocked(BuildInteractType.CraftPotion))
+            {
+                SetSpriteN();
+            }
         }
     }
 }

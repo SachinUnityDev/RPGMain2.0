@@ -10,7 +10,7 @@ namespace Town
 
     public class CompletedSewers : IDialogue
     {
-        public DialogueNames dialogueNames => DialogueNames.CompletedSewers; 
+        public DialogueNames dialogueName => DialogueNames.CompletedSewers; 
 
         public bool ApplyChoices(int choiceIndex, float value)
         {

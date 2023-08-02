@@ -6,7 +6,7 @@ namespace Common
 {
     public class CleanseSewers : IDialogue
     {
-        public DialogueNames dialogueNames => DialogueNames.CleanseSewers;
+        public DialogueNames dialogueName => DialogueNames.CleanseSewers;
 
         public bool ApplyChoices(int choiceIndex, float value)
         {

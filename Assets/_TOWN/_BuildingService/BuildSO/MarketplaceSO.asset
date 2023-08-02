@@ -28,7 +28,7 @@ MonoBehaviour:
     allInteract:
     - nPCIntType: 1
       allDialogueData:
-      - dialogueName: 1
+      - dialogueName: 3
         isUnLocked: 1
     - nPCIntType: 2
       allDialogueData: []

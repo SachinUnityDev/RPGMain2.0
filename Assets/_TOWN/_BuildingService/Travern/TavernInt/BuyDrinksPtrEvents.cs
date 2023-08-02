@@ -8,16 +8,30 @@ namespace Town
 {
 
 
-    public class BuyDrinksPtrEvents : TavernBaseEvents, IPointerClickHandler
+    public class BuyDrinksPtrEvents : TavernBaseEvents, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         
         public void OnPointerClick(PointerEventData eventData)
         {
-            TavernView tavernView = buildView as TavernView;
-            UIControlServiceGeneral.Instance.TogglePanelOnInGrp(tavernView.buyDrink.gameObject, true);
+            if (buildModel.IsBuildIntUnLocked(BuildInteractType.BuyDrink))
+            {
+                TavernView tavernView = buildView as TavernView;
+                UIControlServiceGeneral.Instance.TogglePanelOnInGrp(tavernView.buyDrink.gameObject, true);
+            }
+            
         }
 
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if (buildModel.IsBuildIntUnLocked(BuildInteractType.BuyDrink))
+            {
+                SetSpriteHL();
+            }
+        }
 
-
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            SetSpriteN(); 
+        }
     }
 }

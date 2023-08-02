@@ -23,48 +23,6 @@ MonoBehaviour:
     type: 3}
   dialoguePortraitUnClicked: {fileID: 21300000, guid: 8fe79c548f545a642b4a460e60861609,
     type: 3}
-  itemTypesAccepted: 010000000400000002000000
+  itemTypesAccepted: 
   buildName: 2
-  weeklyItemStock:
-  - weekSeq: 1
-    itemDataLs:
-    - itemType: 1
-      genGawgawQ: 0
-      qty: 2
-      itemName:
-        potionName: 1
-        genGewgawNames: 0
-        HerbName: 0
-        foodName: 0
-        fruitNames: 0
-        ingredientName: 0
-        scrollName: 0
-        tgName: 0
-        toolName: 0
-        teaName: 0
-        soupsName: 0
-        gemName: 0
-        alcoholName: 0
-        mealName: 0
-        sagaicName: 0
-        poeticName: 0
-    - itemType: 3
-      genGawgawQ: 0
-      qty: 10
-      itemName:
-        potionName: 1
-        genGewgawNames: 0
-        HerbName: 2
-        foodName: 0
-        fruitNames: 0
-        ingredientName: 0
-        scrollName: 0
-        tgName: 0
-        toolName: 0
-        teaName: 0
-        soupsName: 0
-        gemName: 0
-        alcoholName: 0
-        mealName: 0
-        sagaicName: 0
-        poeticName: 0
+  weeklyItemStock: []

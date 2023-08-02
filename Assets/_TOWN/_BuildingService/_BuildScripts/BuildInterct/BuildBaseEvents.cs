@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Town
 {
-    public class BuildBaseEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class BuildBaseEvents : MonoBehaviour
     {
         [Header("To be ref")]
         [SerializeField] Sprite dayN;
@@ -34,14 +34,14 @@ namespace Town
             timeState = CalendarService.Instance.currtimeState;
             SetSpriteN();
         }
-        void SetSpriteN()
+        protected void SetSpriteN()
         {
             if (timeState == TimeState.Day)
                 btnImg.sprite = dayN;
             else
                 btnImg.sprite = nightN;
         }
-        void SetSpriteHL()
+        protected void SetSpriteHL()
         {
             if (timeState == TimeState.Day)
                 btnImg.sprite = dayHL;
@@ -49,14 +49,6 @@ namespace Town
                 btnImg.sprite = nightHL;
         }
 
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            SetSpriteHL();
-        }
 
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            SetSpriteN();
-        }
     }
 }

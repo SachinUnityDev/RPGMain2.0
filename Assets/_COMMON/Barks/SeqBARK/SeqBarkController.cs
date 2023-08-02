@@ -69,6 +69,7 @@ namespace Town
                 case SeqBarkNames.KhalidHouse:
                     BuildingIntService.Instance.houseController.houseView
                                     .GetComponent<IPanel>().Init();
+                    WelcomeService.Instance.welcomeView.RevealWelcomeTxt("Click the portrait to talk with Khalid"); 
                     break;
                 case SeqBarkNames.TavernIntro:
                     break;

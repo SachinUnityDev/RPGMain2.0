@@ -48,11 +48,15 @@ namespace Town
             buildSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingName);
             timeState = CalendarService.Instance.currtimeState;
             buildModel = BuildingIntService.Instance.GetBuildModel(BuildingName);
-            btnContainer.GetComponent<BuildInteractBtnView>().InitInteractBtns(this, buildModel);
+            InitBuildIntBtns(this, buildModel); 
             FillBuildBG();
             InitBuildIntPanels();
             InitNPCNCharIntPanels(); 
 
+        }
+        public void InitBuildIntBtns(BuildView buildView, BuildingModel _buildModel)
+        {
+            btnContainer.GetComponent<BuildInteractBtnView>().InitInteractBtns(buildView, _buildModel);
         }
         public void FillBuildBG()
         {
@@ -72,7 +76,7 @@ namespace Town
                     baseEvents.Init(this, buildModel);
             }
         }
-        void InitBuildIntPanels()
+        public void InitBuildIntPanels()
         {
             foreach (Transform child in BuildInteractPanel)
             {

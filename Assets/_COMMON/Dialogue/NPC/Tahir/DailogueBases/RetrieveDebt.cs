@@ -6,7 +6,7 @@ namespace Common
 {
     public class RetrieveDebt : IDialogue
     {
-        public DialogueNames dialogueNames => DialogueNames.RetrieveDebt;
+        public DialogueNames dialogueName => DialogueNames.RetrieveDebt;
 
         public bool ApplyChoices(int choiceIndex, float value)
         {

@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using Intro;
 using System;
-using Town;
+using Quest;
 
 namespace Common
 {
@@ -29,6 +28,12 @@ namespace Common
         public Action OnDialogueLsDsply; 
         public Action<DialogueNames> OnDialogueStart; 
         public Action OnDialogueEnd;
+
+        [Header(" Dialogue Model and Bases")]
+        public List<IDialogue> allDiabases = new List<IDialogue>();
+        public List<DialogueModel> allDiaModel = new List<DialogueModel>();
+        [SerializeField] int diaBaseCount = 0;
+
 
         [Header("SOs")]
         public DialogueView dialogueView;
@@ -68,22 +73,56 @@ namespace Common
         }
         public void InitDialogueService()
         {
+            dialogueFactory= GetComponent<DialogueFactory>();   
+            dialogueFactory.InitDialogues();
+            InitAllDiaModel();
+            InitAllDiabase(); 
+        }
+        void InitAllDiaModel()
+        {
             allDiaLogueModels.Clear();
-            foreach (DialogueSO dialogueSO in allDialogueSO.allDialogues)
+            foreach (DialogueSO diaSO in allDialogueSO.allDialogues)
             {
-                DialogueModel diaModel = new DialogueModel(dialogueSO);
+                DialogueModel diaModel = new DialogueModel(diaSO);
                 allDiaLogueModels.Add(diaModel);
             }
-            isNewGInitDone = true;
+            isNewGInitDone= true;   
+        }
+        void InitAllDiabase()
+        {
+            foreach (DialogueModel diaModel in allDiaLogueModels)
+            {
+                Debug.Log("Dialogue name" + diaModel.dialogueName);
+                IDialogue diaBase = dialogueFactory.GetDialogBase(diaModel.dialogueName);
+                allDiabases.Add(diaBase);
+            }
+            diaBaseCount = allDiabases.Count;
+        }
+        public IDialogue GetDiaBase(DialogueNames dialogueName)
+        {
+            int index = allDiabases.FindIndex(t => t.dialogueName == dialogueName);
+            if (index != -1)
+            {
+                return allDiabases[index];
+            }
+            else
+            {
+                Debug.Log("Dialogue base not found" + dialogueName);
+                return null;
+            }
         }
         public DialogueModel GetDialogueModel(DialogueNames dialogueName)
         {
-            int  index = allDiaLogueModels.FindIndex(t=>t.dialogueName == dialogueName);    
-            if(index != -1)
+            int index = allDiaLogueModels.FindIndex(t => t.dialogueName == dialogueName);
+            if (index != -1)
             {
                 return allDiaLogueModels[index];
             }
-            Debug.Log("dialogue NOT FOUND" + dialogueName); return null;
+            else
+            {
+                Debug.Log("Dia model not found" + dialogueName);
+            }
+            return null;
         }
         public List<DialogueModel> GetDialogueModel4CharNPC(CharNames charName, NPCNames nPCNames)
         {
@@ -110,7 +149,10 @@ namespace Common
             allDefine = allDefine.OrderBy(t => t.numTag).ToList();
         }
         public void On_DialogueStart(DialogueNames dialogueName) // when the dialogue is clicked in dialogue LS
-        {      
+        {
+            diaBase = GetDiaBase(dialogueName); 
+            dialogueModel = GetDialogueModel(dialogueName); 
+
             StartDialogue(dialogueName);            
             OnDialogueStart?.Invoke(dialogueName);
         }
@@ -118,7 +160,10 @@ namespace Common
         {
             Destroy(diaGO.gameObject, 0.1f);// destroy the view
             OnDialogueEnd?.Invoke();
+            if(diaBase!= null)
+                diaBase.OnDialogueEnd();
             dialogueName = DialogueNames.None;
+            diaBase = null; 
             isDiaViewInitDone = false;
             if (!dialogueModel.isRepeatable)
                 dialogueModel.isLocked = true; 
@@ -126,12 +171,13 @@ namespace Common
 
         public void On_DialogueLsDsply()
         {
+            diaBase = null;
             OnDialogueLsDsply?.Invoke(); 
         }
-        public void SetCurrDiaBase(DialogueNames dialogueNames)
-        {
-            diaBase = dialogueFactory.GetDialogBase(dialogueNames);
-        }
+        //public void SetCurrDiaBase(DialogueNames dialogueNames)
+        //{
+        //    diaBase = dialogueFactory.GetDialogBase(dialogueNames);
+        //}
 
         void InitDiaView(Transform parent)
         {
@@ -162,7 +208,7 @@ namespace Common
             dialogueModel = GetDialogueModel(dialogueName);
             if (diaSO != null)
             {
-                SetCurrDiaBase(dialogueName);
+               // SetCurrDiaBase(dialogueName);
                 dialogueView.StartStory(diaSO, dialogueModel);
             }
             else

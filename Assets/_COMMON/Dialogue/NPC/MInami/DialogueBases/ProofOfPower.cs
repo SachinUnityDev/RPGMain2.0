@@ -7,7 +7,7 @@ namespace Common
 {
     public class ProofOfPower : IDialogue
     {
-        public DialogueNames dialogueNames => DialogueNames.ProofOfPower; 
+        public DialogueNames dialogueName => DialogueNames.ProofOfPower; 
 
         public bool ApplyChoices(int choiceIndex, float value)
         {

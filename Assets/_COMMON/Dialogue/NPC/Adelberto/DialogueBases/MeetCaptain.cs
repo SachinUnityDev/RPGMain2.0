@@ -6,7 +6,7 @@ namespace Common
 {
     public class MeetCaptain : IDialogue
     {
-        public DialogueNames dialogueNames => DialogueNames.MeetCaptain; 
+        public DialogueNames dialogueName => DialogueNames.MeetCaptain; 
 
         public bool ApplyChoices(int choiceIndex, float value)
         {

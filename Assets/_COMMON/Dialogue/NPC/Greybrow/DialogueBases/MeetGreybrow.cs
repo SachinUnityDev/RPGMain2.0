@@ -6,7 +6,7 @@ namespace Common
 {
     public class MeetGreybrow : IDialogue
     {
-        public DialogueNames dialogueNames => DialogueNames.MeetGreybrow; 
+        public DialogueNames dialogueName => DialogueNames.MeetGreybrow; 
 
         public bool ApplyChoices(int choiceIndex, float value)
         {

@@ -6,12 +6,31 @@ using UnityEngine.EventSystems;
 
 namespace Town
 {
-    public class BountyBoardPtrEvents : TavernBaseEvents, IPointerClickHandler
+    public class BountyBoardPtrEvents : TavernBaseEvents, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         public void OnPointerClick(PointerEventData eventData)
         {
-            TavernView tavernView = buildView as TavernView;
-            UIControlServiceGeneral.Instance.TogglePanelOnInGrp(tavernView.bountyBoard.gameObject, true);
+            if (buildModel.IsBuildIntUnLocked(BuildInteractType.Bounty))
+            {
+                TavernView tavernView = buildView as TavernView;
+                UIControlServiceGeneral.Instance.TogglePanelOnInGrp(tavernView.bountyBoard.gameObject, true);
+            }           
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if (buildModel.IsBuildIntUnLocked(BuildInteractType.Bounty))
+            {
+                SetSpriteHL(); 
+            }
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            if (buildModel.IsBuildIntUnLocked(BuildInteractType.Bounty))
+            {
+                SetSpriteN();
+            }
         }
     }
 }

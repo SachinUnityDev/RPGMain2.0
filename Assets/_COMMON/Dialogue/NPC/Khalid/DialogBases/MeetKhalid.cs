@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Town;
 using UnityEngine;
 
 
@@ -7,7 +8,7 @@ namespace Common
 {
     public class MeetKhalid : IDialogue
     {
-        public DialogueNames dialogueNames => DialogueNames.MeetKhalid; 
+        public DialogueNames dialogueName => DialogueNames.MeetKhalid; 
 
         public bool ApplyChoices(int choiceIndex, float value)
         {
@@ -47,6 +48,17 @@ namespace Common
         public void OnDialogueEnd()
         {
             Debug.Log("DIALOGUES END");
+
+            WelcomeService.Instance.welcomeView.RevealWelcomeTxt("End Day by clicking the button on bottom right");
+            BuildingIntService.Instance.houseController.UnLockBuildIntType(BuildInteractType.EndDay, true);
+            CalendarService.Instance.OnChangeTimeState += (TimeState timeState) => LockAgainOnDayEnd(); 
+            
         }
+        void LockAgainOnDayEnd()
+        {
+            BuildingIntService.Instance.houseController.UnLockBuildIntType(BuildInteractType.EndDay, false);
+            CalendarService.Instance.OnChangeTimeState -= (TimeState timeState) => LockAgainOnDayEnd();
+        }
+
     }
 }

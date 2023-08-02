@@ -37,7 +37,7 @@ namespace Town
             FillHouseView();
             // for upgraded bed ..chance and upgrade chk encapsulated 
             BuildingIntService.Instance.houseController.UpgradedBedBuff();
-
+            UnLoad();
         }
       
         void FillHouseView()

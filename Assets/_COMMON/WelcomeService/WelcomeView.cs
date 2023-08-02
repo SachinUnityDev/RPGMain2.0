@@ -4,37 +4,53 @@ using UnityEngine;
 using UnityEngine.UI;
 using Common;
 using DG.Tweening;
+using TMPro;
 
 namespace Town
 {
     public class WelcomeView : MonoBehaviour
     {
-        [SerializeField] Button continueBtn;
         GameObject canvas;
-        GameObject cornerBtns; 
+        [SerializeField] Button continueBtn;
+        [SerializeField] Transform welcomeTxt; 
+
         void Start()
         {
             continueBtn.onClick.AddListener(OnContinueBtnPressed);
             canvas = GameObject.FindGameObjectWithTag("TownCanvas"); 
-
         }
 
         public void InitWelcomeView()
         {
-            cornerBtns = GameObject.FindGameObjectWithTag("TownBtns");
-            cornerBtns.SetActive(false);
+            gameObject.SetActive(true);
+          //  transform.GetChild(0).gameObject.SetActive(true);
         }
         void OnContinueBtnPressed()
         {
             gameObject.SetActive(false);
+           // transform.GetChild(0).gameObject.SetActive(false);
             BarkService.Instance.seqBarkController.ShowSeqbark(SeqBarkNames.KhalidHouse); 
               
         }
-
-        void EnterHouse()
+        public void RevealWelcomeTxt(string str)
         {
-            canvas.GetComponent<HouseView>().Init(); 
+            welcomeTxt.GetComponent<TextMeshProUGUI>().text = str;           
+            welcomeTxt.gameObject.SetActive(true);         
+            UnRevealWelcomeTxt(); 
         }
+        public void UnRevealWelcomeTxt()
+        {
+            Sequence seq = DOTween.Sequence();
+            seq
+                .AppendInterval(6f)
+                .AppendCallback(()=> {welcomeTxt.GetComponentInChildren<TextRevealer>().Unreveal();})
+                .AppendInterval(0.4f)
+                .AppendCallback(() => welcomeTxt.gameObject.SetActive(false))
+               ;
+            seq.Play();
+        }
+
  
+
     }
 }

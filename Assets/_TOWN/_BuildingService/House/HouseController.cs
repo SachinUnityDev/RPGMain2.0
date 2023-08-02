@@ -25,6 +25,19 @@ namespace Town
             BuildingIntService.Instance.allBuildModel.Add(houseModel);
 
         }
+        public void UnLockBuildIntType(BuildInteractType buildIntType, bool unLock)
+        {
+            foreach (BuildIntTypeData buildData in houseModel.buildIntTypes)
+            {
+                if (buildData.BuildIntType == buildIntType)
+                {
+                    buildData.isUnLocked = unLock;
+                    houseView.InitBuildIntBtns(houseView as BuildView, houseModel as BuildingModel);
+                }
+            }
+        }
+
+
         public void OnPurchase(HousePurchaseOptsData houseData)
         {
             switch (houseData.houseOpts)

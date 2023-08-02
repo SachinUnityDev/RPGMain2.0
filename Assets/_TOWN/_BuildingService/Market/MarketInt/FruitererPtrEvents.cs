@@ -10,9 +10,7 @@ namespace Town
     {
         public void OnPointerClick(PointerEventData eventData)
         {
-            // open Rest Panel
-
-           // UIControlServiceGeneral.Instance.TogglePanelOnInGrp(marketView.craftPotionPanel.gameObject, true);
+           
         }
     }
 }

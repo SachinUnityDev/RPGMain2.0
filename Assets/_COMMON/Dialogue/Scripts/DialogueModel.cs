@@ -17,7 +17,7 @@ namespace Common
         public NPCNames npcName;
         public CharNames charName;
         [Header("Play restrictions")]
-        public bool isLocked;
+        public bool isUnLocked;
         public bool isRepeatable;
         public bool isSkippable;
         
@@ -33,7 +33,7 @@ namespace Common
             dialogueTitle = diaSO.dialogueTitle;
             npcName = diaSO.npcName;
             charName = diaSO.charName;
-            isLocked = diaSO.isLocked;
+            isUnLocked = diaSO.isUnLocked;
             isRepeatable = diaSO.isRepeatable;
             isSkippable= diaSO.isSkippable;
 

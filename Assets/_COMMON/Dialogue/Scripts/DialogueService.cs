@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using System;
 using Quest;
+using Town;
 
 namespace Common
 {
@@ -41,7 +42,8 @@ namespace Common
         public DialogueModel dialogueModel; 
         public bool isDiaViewInitDone = false; 
 
-        public AllDialogueSO allDialogueSO; 
+        public AllDialogueSO allDialogueSO;
+       
         public List<DialogueModel> allDiaLogueModels = new List<DialogueModel>();
 
         [Header("Dia View prefab TBR")]
@@ -90,9 +92,10 @@ namespace Common
         }
         void InitAllDiabase()
         {
+            allDiabases.Clear();
             foreach (DialogueModel diaModel in allDiaLogueModels)
             {
-                Debug.Log("Dialogue name" + diaModel.dialogueName);
+                Debug.Log("DiaBase" + diaModel.dialogueName);
                 IDialogue diaBase = dialogueFactory.GetDialogBase(diaModel.dialogueName);
                 allDiabases.Add(diaBase);
             }
@@ -131,11 +134,48 @@ namespace Common
             {               
                 if(diaModel.npcName == nPCNames && diaModel.charName == charName)
                 {
+                   if(diaModel.isUnLocked)
                     lsModels.Add(diaModel);
                 }
             }
             return lsModels;
         }
+        public void UpdateDialogueState()
+        {
+            foreach (BuildingModel  buildModel in BuildingIntService.Instance.allBuildModel)
+            {
+                if(buildModel.charInteractData.Count> 0)    
+                foreach (CharIntData intData in buildModel.charInteractData)
+                {
+                    foreach (IntTypeData intTypedata in intData.allInteract)
+                    {
+                        if(intTypedata.nPCIntType == IntType.Talk)
+                        {
+                            foreach (DialogueData diaData in intTypedata.allDialogueData)
+                            {
+                                GetDialogueModel(diaData.dialogueName).isUnLocked = diaData.isUnLocked; 
+                            }
+                        }
+                    }
+                }
+                if (buildModel.npcInteractData.Count > 0)
+                foreach (NPCIntData intData in buildModel.npcInteractData)
+                {
+                    foreach (IntTypeData intTypedata in intData.allInteract)
+                    {
+                        if (intTypedata.nPCIntType == IntType.Talk)
+                        {
+                            foreach (DialogueData diaData in intTypedata.allDialogueData)
+                            {
+                                GetDialogueModel(diaData.dialogueName).isUnLocked = diaData.isUnLocked;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
         public void ClearAllList()
         {
             allOptions.Clear();
@@ -166,12 +206,12 @@ namespace Common
             diaBase = null; 
             isDiaViewInitDone = false;
             if (!dialogueModel.isRepeatable)
-                dialogueModel.isLocked = true; 
+                dialogueModel.isUnLocked = true; 
         }
 
         public void On_DialogueLsDsply()
         {
-            diaBase = null;
+            
             OnDialogueLsDsply?.Invoke(); 
         }
         //public void SetCurrDiaBase(DialogueNames dialogueNames)
@@ -219,7 +259,7 @@ namespace Common
         public void ShowDialogueLs(CharNames charName, NPCNames npcName, Transform parent)
         {
             InitDiaView(parent);
-            OnDialogueLsDsply();
+            On_DialogueLsDsply();
             dialogueView.ShowDialogueList(CharNames.None, npcName);
         }
   
@@ -255,11 +295,11 @@ namespace Common
 #endregion
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                Canvas canvas = FindObjectOfType<Canvas>(); 
-                ShowDialogueLs(CharNames.None, NPCNames.Tahir, canvas.transform);
-            }
+            //if (Input.GetKeyDown(KeyCode.M))
+            //{
+            //    Canvas canvas = FindObjectOfType<Canvas>(); 
+            //    ShowDialogueLs(CharNames.None, NPCNames.Tahir, canvas.transform);
+            //}
         }
 
     }

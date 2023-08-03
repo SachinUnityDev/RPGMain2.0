@@ -2,6 +2,7 @@ using Ink.Runtime;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -106,8 +107,9 @@ namespace Common
             Load();
             dialogueList.SetActive(true);
             dialogueParent.SetActive(false);
+            DialogueService.Instance.UpdateDialogueState();
             List<DialogueModel> lsModel = 
-                        DialogueService.Instance.GetDialogueModel4CharNPC(charName, nPCNames);
+                        DialogueService.Instance.GetDialogueModel4CharNPC(charName, nPCNames);         
             dialogueList.GetComponent<DialogueListView>().InitDialogueView(lsModel);            
         }
         void InitDialogueView()
@@ -115,6 +117,8 @@ namespace Common
             escapeCount = 1;
             isDialoguePlaying = true;
             UIControlServiceGeneral.Instance.BlockEsc(true);
+            TogglePortOnOff(leftPortrait,false);
+            TogglePortOnOff(rightPortrait,false);
         }
         void DisplayStory()
         {
@@ -316,16 +320,14 @@ namespace Common
                 if (keyTag == SPEAKER_TAG && numTag == 1)  //left speaker 
                 {
                     SetPortrait(leftPortrait, valueTag);
-
                     TogglePortrait(leftPortrait, true);
                     TogglePortrait(rightPortrait, false);
                     charTxt.text = GetString(valueTag);
                     Debug.Log("TAG DETAILS" + keyTag + "NUMBER" + numTag + "VALUE" + valueTag);
                 }
-                else if (keyTag == SPEAKER_TAG)  // right speaker
+                if (keyTag == SPEAKER_TAG && numTag == 2)  // right speaker
                 {
                     SetPortrait(rightPortrait, valueTag);
-
                     TogglePortrait(leftPortrait, false);
                     TogglePortrait(rightPortrait, true);
                     charTxt.text = GetString(valueTag);
@@ -425,6 +427,11 @@ namespace Common
                 portGo.transform.GetChild(0).gameObject.SetActive(false);
                 portGo.transform.GetChild(1).gameObject.SetActive(true);
             }
+        }
+        void TogglePortOnOff(GameObject portGo, bool toggle)
+        {
+            portGo.transform.GetChild(0).gameObject.SetActive(toggle);
+            portGo.transform.GetChild(1).gameObject.SetActive(toggle);
         }
         private void Update()
         {

@@ -31,11 +31,11 @@ MonoBehaviour:
       - dialogueName: 1
         isUnLocked: 1
       - dialogueName: 3
-        isUnLocked: 1
+        isUnLocked: 0
       - dialogueName: 5
-        isUnLocked: 1
+        isUnLocked: 0
       - dialogueName: 4
-        isUnLocked: 1
+        isUnLocked: 0
   npcDataPrefab: []
   buildIntTypes:
   - BuildIntType: 11

@@ -18,7 +18,7 @@ namespace Common
             int i = 0; 
             for (int j = 0; j < allDiaModel.Count; j++)
             {
-                if (allDiaModel[j].isLocked) continue;                
+                if (!allDiaModel[j].isUnLocked) continue;                
 
                 TextMeshProUGUI txt =  container.GetChild(i).GetComponent<TextMeshProUGUI>();
                 container.GetChild(i)

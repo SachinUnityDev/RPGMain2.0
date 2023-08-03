@@ -17,11 +17,15 @@ MonoBehaviour:
   dialogueTitle: I am back!
   npcName: 10
   charName: 0
-  isLocked: 0
+  isUnLocked: 0
   isRepeatable: 0
+  isSkippable: 1
   gameState: 1
   charInDialogue: 01000000
   NPCinDialogue: 
   locationName: 1
   dialogueAsset: {fileID: 4900000, guid: 3dece2bcefb752549ae1159c49ceef5a, type: 3}
+  diaAssetSkirmish: {fileID: 0}
+  diaAssetHerbalist: {fileID: 0}
+  diaAssetWarden: {fileID: 0}
   interactSprites: []

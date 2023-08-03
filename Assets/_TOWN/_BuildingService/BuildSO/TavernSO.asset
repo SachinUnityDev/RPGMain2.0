@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TavernSO
   m_EditorClassIdentifier: 
   buildingName: 7
-  buildingState: 1
+  buildingState: 0
   buildExtDayN: {fileID: 21300000, guid: 6c7c58dd912cb714b87d42bb1a1d8a09, type: 3}
   buildExtDayHL: {fileID: 21300000, guid: 63361369818c85348825a460e304ea17, type: 3}
   buildExtNight: {fileID: 21300000, guid: 87192e68d33954d499f2c3a75ada86e7, type: 3}
@@ -22,12 +22,12 @@ MonoBehaviour:
   buildIntNight: {fileID: 21300000, guid: 57f075dca22e1954e981af231b07b76f, type: 3}
   charInteractData:
   - compName: 3
-    compState: 1
+    compState: 0
     allInteract:
     - nPCIntType: 1
       allDialogueData:
-      - dialogueName: 3
-        isUnLocked: 1
+      - dialogueName: 8
+        isUnLocked: 0
   CharInteractPrefab: []
   npcInteractData:
   - nPCNames: 7
@@ -38,19 +38,27 @@ MonoBehaviour:
       - dialogueName: 33
         isUnLocked: 1
       - dialogueName: 34
-        isUnLocked: 1
+        isUnLocked: 0
       - dialogueName: 35
-        isUnLocked: 1
+        isUnLocked: 0
     - nPCIntType: 2
       allDialogueData: []
+  - nPCNames: 18
+    npcState: 0
+    allInteract:
+    - nPCIntType: 1
+      allDialogueData:
+      - dialogueName: 36
+        isUnLocked: 1
   npcDataPrefab: []
   buildIntTypes:
   - BuildIntType: 8
-    isUnLocked: 1
+    isUnLocked: 0
   - BuildIntType: 1
-    isUnLocked: 1
+    isUnLocked: 0
   - BuildIntType: 11
-    isUnLocked: 1
+    isUnLocked: 0
   - BuildIntType: 10
-    isUnLocked: 1
+    isUnLocked: 0
   buildIntPrefab: []
+  tipStrs: []

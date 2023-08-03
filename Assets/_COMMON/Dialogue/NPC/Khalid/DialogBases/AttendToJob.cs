@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using Town;
 using UnityEngine;
+
+
 
 namespace Common
 {
-    public class MeetGreybrow : IDialogue
+
+
+    public class AttendToJob : IDialogue
     {
-        public DialogueNames dialogueName => DialogueNames.MeetGreybrow; 
+        public DialogueNames dialogueName => DialogueNames.AttendJob; 
 
         public bool ApplyChoices(int choiceIndex, float value)
         {
@@ -21,9 +24,7 @@ namespace Common
 
         public void OnDialogueEnd()
         {
-            // unLock tahir
-            BuildingIntService.Instance.ChgNPCState(BuildingNames.Tavern, NPCNames.Tahir, NPCState.UnLockedNAvail);
-            WelcomeService.Instance.welcomeView.RevealWelcomeTxt("Talk to Tahir the Mirrorman");
+
         }
     }
 }

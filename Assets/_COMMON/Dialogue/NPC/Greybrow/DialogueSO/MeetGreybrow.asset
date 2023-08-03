@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DiaID: 0
   dialogueName: 33
-  dialogueTitle: HI There...
+  dialogueTitle: Hi There...
   npcName: 7
   charName: 0
-  isLocked: 0
+  isUnLocked: 0
   isRepeatable: 0
   isSkippable: 1
   gameState: 1
@@ -25,4 +25,7 @@ MonoBehaviour:
   NPCinDialogue: 07000000
   locationName: 1
   dialogueAsset: {fileID: 4900000, guid: c92d256c3c1398347bc136f011231f29, type: 3}
+  diaAssetSkirmish: {fileID: 4900000, guid: c92d256c3c1398347bc136f011231f29, type: 3}
+  diaAssetHerbalist: {fileID: 0}
+  diaAssetWarden: {fileID: 0}
   interactSprites: []

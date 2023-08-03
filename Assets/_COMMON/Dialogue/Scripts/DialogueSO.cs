@@ -25,7 +25,8 @@ namespace Common
         [Header("Auto Fill")]
         public NPCNames npcName;
         public CharNames charName;
-        public bool isLocked;        
+       
+        public bool isUnLocked= false;        
         public bool isRepeatable;
         public bool isSkippable; 
 

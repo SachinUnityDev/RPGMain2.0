@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TempleSO
   m_EditorClassIdentifier: 
   buildingName: 8
-  buildingState: 1
+  buildingState: 0
   buildExtDayN: {fileID: 21300000, guid: 20d9ef1e2f91b83418ab74221ded56a3, type: 3}
   buildExtDayHL: {fileID: 21300000, guid: cbcb89b574bc97842bcdc04a8a3079c7, type: 3}
   buildExtNight: {fileID: 21300000, guid: bacd7c3f4a994714ba70664e090cc829, type: 3}
@@ -26,8 +26,8 @@ MonoBehaviour:
     allInteract:
     - nPCIntType: 1
       allDialogueData:
-      - dialogueName: 3
-        isUnLocked: 1
+      - dialogueName: 8
+        isUnLocked: 0
   CharInteractPrefab: []
   npcInteractData:
   - nPCNames: 13
@@ -36,8 +36,6 @@ MonoBehaviour:
     - nPCIntType: 1
       allDialogueData:
       - dialogueName: 7
-        isUnLocked: 1
-      - dialogueName: 17
         isUnLocked: 1
       - dialogueName: 8
         isUnLocked: 1

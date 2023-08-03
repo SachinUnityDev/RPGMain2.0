@@ -44,7 +44,8 @@ namespace Common
                     return t;
                 }
             }
-            Debug.Log("IDialogue class Not found");
+            Debug.Log("IDialogue class Not found"+ _dialogueNames);
+            
             return null;
         }
 

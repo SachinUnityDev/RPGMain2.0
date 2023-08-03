@@ -11,21 +11,26 @@ namespace Town
         public WelcomeController welcomeController;
         [Header("TBR")]
         public WelcomeView welcomeView;
-
-        
         GameObject cornerBtns;
+
+        public bool isWelcomeRun = false; 
 
         void Start()
         {
-            welcomeController= GetComponent<WelcomeController>();   
+            
         }
 
         public void InitWelcome()
         {
+            isWelcomeRun = true;
             welcomeController = GetComponent<WelcomeController>();
             cornerBtns = GameObject.FindGameObjectWithTag("TownBtns");
             cornerBtns.SetActive(false);
             welcomeView.InitWelcomeView();
+           
         }
+
+
+
     }
 }

@@ -93,9 +93,7 @@ namespace Common
 
         #region POINTER EVENTS 
         public void OnPointerClick(PointerEventData eventData)
-        {
-            // select this build
-           // int index = transform.GetSiblingIndex();
+        { 
             townViewController.OnBuildSelect(buildingName);
             SetSpriteNormal();
             Hidetxt();

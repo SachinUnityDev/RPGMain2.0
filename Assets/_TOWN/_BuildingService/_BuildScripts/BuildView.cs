@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
-using Common; 
+using Common;
+using System;
 
 namespace Town
 {
     public class BuildView : MonoBehaviour, IPanel ,iHelp
     {
+
         [SerializeField] HelpName helpName;
         public BuildingNames BuildingName;
 
@@ -46,12 +48,14 @@ namespace Town
         {
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
             buildSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingName);
+
             timeState = CalendarService.Instance.currtimeState;
             buildModel = BuildingIntService.Instance.GetBuildModel(BuildingName);
             InitBuildIntBtns(this, buildModel); 
             FillBuildBG();
             InitBuildIntPanels();
-            InitNPCNCharIntPanels(); 
+            InitNPCNCharIntPanels();
+            BuildingIntService.Instance.On_BuildInit(buildModel, this); 
 
         }
         public void InitBuildIntBtns(BuildView buildView, BuildingModel _buildModel)
@@ -71,7 +75,8 @@ namespace Town
 
             foreach (Transform child in BGSpriteContainer)
             {
-                BuildBaseEvents baseEvents = child?.GetComponent<BuildBaseEvents>(); 
+                BuildBaseEvents baseEvents = child?.GetComponent<BuildBaseEvents>();
+                Debug.Log(" build model" + buildModel.buildingName); 
                 if(baseEvents != null)
                     baseEvents.Init(this, buildModel);
             }
@@ -135,16 +140,19 @@ namespace Town
         }
         public void Load()
         {
+
         }
 
         public void UnLoad()
-        {
+        {  
             UIControlServiceGeneral.Instance.TogglePanelOnInGrp(this.gameObject, false);
             foreach (Transform child in BuildInteractPanel)
             {
                 child.GetComponent<IPanel>().UnLoad();
             }
             TownService.Instance.townViewController.OnBuildDeselect();
+            BuildingIntService.Instance.On_BuildUnload(buildModel, this);
+
         }
 
         public HelpName GetHelpName()

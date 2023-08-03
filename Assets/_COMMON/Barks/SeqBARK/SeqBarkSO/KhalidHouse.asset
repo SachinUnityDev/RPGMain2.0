@@ -22,8 +22,8 @@ MonoBehaviour:
   - charName: 1
     npcName: 0
     str: Hey, i am looking for Khalid the Healer.
-    audioClip: {fileID: 8300000, guid: 1c9745f9943d1de4da0b42d8f7e25f43, type: 3}
+    audioClip: {fileID: 8300000, guid: 1e5085193cf20074da5dc1e7ff8d9aae, type: 3}
   - charName: 0
     npcName: 10
     str: "That\u2019s me. Why are you looking for him?"
-    audioClip: {fileID: 8300000, guid: 5d2864a1b1842b744a85f595cfe3cccb, type: 3}
+    audioClip: {fileID: 8300000, guid: 1e5085193cf20074da5dc1e7ff8d9aae, type: 3}

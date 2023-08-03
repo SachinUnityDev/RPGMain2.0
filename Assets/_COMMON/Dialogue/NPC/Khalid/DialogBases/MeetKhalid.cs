@@ -51,11 +51,14 @@ namespace Common
 
             WelcomeService.Instance.welcomeView.RevealWelcomeTxt("End Day by clicking the button on bottom right");
             BuildingIntService.Instance.houseController.UnLockBuildIntType(BuildInteractType.EndDay, true);
-            CalendarService.Instance.OnChangeTimeState += (TimeState timeState) => LockAgainOnDayEnd(); 
+            CalendarService.Instance.OnChangeTimeState += (TimeState timeState) => LockAgainOnDayEnd();
+            BuildingIntService.Instance.UnLockABuild(BuildingNames.Tavern, true); 
+
             
         }
         void LockAgainOnDayEnd()
         {
+            WelcomeService.Instance.welcomeView.RevealWelcomeTxt("Exit the House and enter the Tavern");
             BuildingIntService.Instance.houseController.UnLockBuildIntType(BuildInteractType.EndDay, false);
             CalendarService.Instance.OnChangeTimeState -= (TimeState timeState) => LockAgainOnDayEnd();
         }

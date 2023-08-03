@@ -4,6 +4,7 @@ using UnityEngine;
 using Common;
 using System;
 using Interactables;
+using System.Net.NetworkInformation;
 
 namespace Town
 { 
@@ -13,7 +14,14 @@ namespace Town
 
     public class BuildingIntService : MonoSingletonGeneric<BuildingIntService>
     {
-        public event Action<Iitems, TavernSlotType> OnItemWalled; 
+        public event Action<Iitems, TavernSlotType> OnItemWalled;
+        public event Action<BuildingModel, BuildView> OnBuildInit;
+        public event Action<BuildingModel, BuildView> OnBuildUnload;
+        
+
+
+
+
 
         [Header("Char and NPC Select")]
         public CharNames selectChar;
@@ -61,6 +69,37 @@ namespace Town
             cityHallController.InitCityHallController();
         }
 
+        public void On_BuildInit(BuildingModel buildModel, BuildView buildView)
+        {
+            OnBuildInit?.Invoke(buildModel, buildView);
+        }
+        public void On_BuildUnload(BuildingModel buildModel, BuildView buildView)
+        {
+            OnBuildUnload?.Invoke(buildModel, buildView);
+        }
+        public void UnLockABuild(BuildingNames buildingName,bool UnLock)
+        {  
+            BuildingModel buildModel = GetBuildModel(buildingName);
+          
+            if(buildModel.buildState== BuildingState.Locked && UnLock)
+            {
+                buildModel.buildState= BuildingState.Available;
+            }
+            else if ((buildModel.buildState == BuildingState.Available || buildModel.buildState == BuildingState.Available)
+                && !UnLock)
+            {
+                buildModel.buildState = BuildingState.Locked;
+            }
+        }
+        public bool IsBuildUnlocked(BuildingNames buildingName)
+        {
+            BuildingModel buildModel = GetBuildModel(buildingName);
+            if(buildModel.buildState == BuildingState.Locked)
+                return false;
+            else
+                return true;
+        }
+
         public BuildingModel GetBuildModel(BuildingNames buildName)
         {
             int index = allBuildModel.FindIndex(t=>t.buildingName== buildName);
@@ -75,8 +114,93 @@ namespace Town
             return null; 
         }
 
+        #region NPC AND CHAR 
+        public void ChgNPCState(BuildingNames buildName, NPCNames npcName, NPCState npcState)
+        {
+            BuildingModel buildModel = GetBuildModel(buildName);
+            int index = buildModel.npcInteractData.FindIndex(t => t.nPCNames == npcName); 
+            if(index != -1)
+            {
+                buildModel.npcInteractData[index].npcState= npcState;   
+            }
+            else
+            {
+                Debug.Log("npc data not found " + npcName); 
+            }
+            GetBuildView(buildName).Init();
+        }
+        public NPCState GetNPCState(BuildingNames buildName, NPCNames npcName)
+        {
+            BuildingModel buildModel = GetBuildModel(buildName);
+            int index = buildModel.npcInteractData.FindIndex(t => t.nPCNames == npcName);
+            if (index != -1)
+            {
+                return buildModel.npcInteractData[index].npcState; 
+            }
+            else
+            {
+                Debug.Log("npc data not found " + npcName);
+            }
+            return 0; 
+        }
 
-        #region   
+        public void ChgCharState(BuildingNames buildName, CharNames charName, NPCState npcState)
+        {
+            BuildingModel buildModel = GetBuildModel(buildName);
+            int index = buildModel.charInteractData.FindIndex(t => t.compName == charName);
+            if (index != -1)
+            {
+                buildModel.charInteractData[index].compState = npcState;
+            }
+            else
+            {
+                Debug.Log("char data not found " + charName);
+            }
+            GetBuildView(buildName).Init();
+        }
+        public NPCState GetCharState(BuildingNames buildName, CharNames charName)
+        {
+            BuildingModel buildModel = GetBuildModel(buildName);
+            int index = buildModel.charInteractData.FindIndex(t => t.compName == charName);
+            if (index != -1)
+            {
+                return buildModel.charInteractData[index].compState; 
+            }
+            else
+            {
+                Debug.Log("char data not found " + charName);
+            }
+            return 0; 
+        }
+
+
+
+        #endregion
+        public void UnLockDiaInt(BuildingNames buildName, NPCNames npcName, DialogueNames diaName, bool isUnLock)
+        {
+            BuildingModel buildModel = GetBuildModel(buildName);
+            int index = buildModel.npcInteractData.FindIndex(t => t.nPCNames == npcName);
+            if (index != -1)
+            {
+                IntTypeData intData = 
+                buildModel.npcInteractData[index].allInteract.Find(t => t.nPCIntType == IntType.Talk);
+                foreach (DialogueData dia in intData.allDialogueData)
+                {
+                    if(dia.dialogueName == diaName)
+                    {
+                        dia.isUnLocked = isUnLock;
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("npc data not found " + npcName);
+            }
+            DialogueService.Instance.UpdateDialogueState();  // update dialogue models
+        }
+
+
+        #region  BUILD INT ACTIONS
 
         public void On_ItemWalled(Iitems item, TavernSlotType tavernSlotType)
         {   
@@ -93,7 +217,35 @@ namespace Town
 
         #endregion 
 
-
+        public BuildView GetBuildView(BuildingNames buildingNames)
+        {
+            switch (buildingNames)
+            {
+                case BuildingNames.None:
+                    break;
+                case BuildingNames.CityHall:                    
+                    break;
+                case BuildingNames.House:
+                    return houseController.houseView;                    
+                case BuildingNames.Marketplace:
+                    return marketController.marketView;                    
+                case BuildingNames.Safekeep:
+                    break; 
+                case BuildingNames.Ship:
+                    return shipController.shipView;
+                case BuildingNames.Stable:
+                    break;
+                case BuildingNames.Tavern:
+                    return tavernController.tavernView;
+                case BuildingNames.Temple:
+                    return templeController.templeView; 
+                case BuildingNames.ThievesGuild:
+                    break;
+                default:
+                    break;
+            }
+            return null; 
+        }
 
     }
 }

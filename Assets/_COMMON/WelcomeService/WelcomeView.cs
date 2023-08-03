@@ -12,45 +12,69 @@ namespace Town
     {
         GameObject canvas;
         [SerializeField] Button continueBtn;
-        [SerializeField] Transform welcomeTxt; 
+        [SerializeField] Transform welcomeTxt;
+
+        bool isRevealing = false; 
 
         void Start()
         {
             continueBtn.onClick.AddListener(OnContinueBtnPressed);
-            canvas = GameObject.FindGameObjectWithTag("TownCanvas"); 
+            canvas = GameObject.FindGameObjectWithTag("TownCanvas");
         }
 
         public void InitWelcomeView()
-        {
+        {   
             gameObject.SetActive(true);
-          //  transform.GetChild(0).gameObject.SetActive(true);
+            transform.GetChild(0).gameObject.SetActive(true);
+            transform.GetChild(1).gameObject.SetActive(true);
         }
         void OnContinueBtnPressed()
         {
-            gameObject.SetActive(false);
-           // transform.GetChild(0).gameObject.SetActive(false);
+            transform.GetChild(0).gameObject.SetActive(false);
+            transform.GetChild(1).gameObject.SetActive(false);
             BarkService.Instance.seqBarkController.ShowSeqbark(SeqBarkNames.KhalidHouse); 
               
         }
         public void RevealWelcomeTxt(string str)
-        {
-            welcomeTxt.GetComponent<TextMeshProUGUI>().text = str;           
-            welcomeTxt.gameObject.SetActive(true);         
-            UnRevealWelcomeTxt(); 
+        {   
+            if(!isRevealing) 
+            {
+                Sequence seqreveal = DOTween.Sequence();
+                seqreveal
+                         .AppendCallback(() => { isRevealing = true;  })   
+                         .AppendCallback(() => { welcomeTxt.GetComponent<TextMeshProUGUI>().text = str; })
+                         .AppendCallback(() => { welcomeTxt.gameObject.SetActive(true); })                         
+                         ;
+                seqreveal.Play(); 
+                UnrevealWelcometxt();
+            }
+            else
+            {
+                StartCoroutine(WaitForSec(str)); 
+            }
         }
-        public void UnRevealWelcomeTxt()
+
+        IEnumerator WaitForSec(string str)
+        {
+            yield return new WaitForSeconds(1.5f);
+            RevealWelcomeTxt(str); 
+        }
+
+       void OnRevealComplete()
+        {
+            Debug.Log("Reveal completed ");
+            isRevealing = false; 
+            welcomeTxt.gameObject.SetActive(false);
+        }
+
+        public void UnrevealWelcometxt()
         {
             Sequence seq = DOTween.Sequence();
             seq
-                .AppendInterval(6f)
-                .AppendCallback(()=> {welcomeTxt.GetComponentInChildren<TextRevealer>().Unreveal();})
-                .AppendInterval(0.4f)
-                .AppendCallback(() => welcomeTxt.gameObject.SetActive(false))
-               ;
-            seq.Play();
+                .AppendInterval(3.5f) 
+                .AppendCallback(() => { welcomeTxt.GetComponentInChildren<TextRevealer>().Unreveal(); })                              
+                ;
+            seq.Play().OnComplete(OnRevealComplete);
         }
-
- 
-
     }
 }

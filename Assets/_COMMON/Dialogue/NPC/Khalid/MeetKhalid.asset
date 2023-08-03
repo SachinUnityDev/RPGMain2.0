@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DiaID: 102
   dialogueName: 1
-  dialogueTitle: NIce house...
+  dialogueTitle: Nice house...
   npcName: 10
   charName: 0
-  isLocked: 0
+  isUnLocked: 0
   isRepeatable: 0
-  isSkippable: 1
+  isSkippable: 0
   gameState: 1
   charInDialogue: 01000000
   NPCinDialogue: 

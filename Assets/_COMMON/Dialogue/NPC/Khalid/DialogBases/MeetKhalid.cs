@@ -53,8 +53,6 @@ namespace Common
             BuildingIntService.Instance.houseController.UnLockBuildIntType(BuildInteractType.EndDay, true);
             CalendarService.Instance.OnChangeTimeState += (TimeState timeState) => LockAgainOnDayEnd();
             BuildingIntService.Instance.UnLockABuild(BuildingNames.Tavern, true); 
-
-            
         }
         void LockAgainOnDayEnd()
         {

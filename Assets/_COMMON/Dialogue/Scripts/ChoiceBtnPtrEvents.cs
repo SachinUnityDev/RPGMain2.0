@@ -7,21 +7,21 @@ namespace Common
 {
     public class ChoiceBtnPtrEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        DialogueView dialogueViewController1;
+        DialogueView dialogueView;
         int index; 
         private void Start()
         {
             index = gameObject.transform.GetSiblingIndex();
-            dialogueViewController1 = DialogueService.Instance.dialogueView; 
+            dialogueView = DialogueService.Instance.dialogueView; 
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
-            dialogueViewController1.OnChoicePtrEnter(index); 
+            dialogueView.OnChoicePtrEnter(index); 
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            dialogueViewController1.OnChoicePtrExit(index);
+            dialogueView.OnChoicePtrExit(index);
         }
     }
 

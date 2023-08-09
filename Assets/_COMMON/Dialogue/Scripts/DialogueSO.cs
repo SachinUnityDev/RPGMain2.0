@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Common; 
-
+using Common;
+using System;
 
 namespace Common
 {
@@ -10,9 +10,24 @@ namespace Common
     public class InteractionSpriteData
     {
         public int interactionNo; 
-        public List<Sprite> allSprites = new List<Sprite>(); 
-    }
+        public List<SpriteOpts> allSprites = new List<SpriteOpts>(); 
 
+        public SpriteOpts GetSprites(int index)
+        {
+            if(index <= allSprites.Count)
+                return allSprites[index];
+            else
+                return null;
+        }
+    }
+    [Serializable]
+    public class SpriteOpts
+    {
+        public Sprite spriteN;
+        public Sprite spriteHL;
+        public Sprite spriteNA; 
+        public bool isUnlocked; 
+    }
 
     [CreateAssetMenu(fileName = "DialogueSO", menuName = "Dialogue Service/DialogueSO")]
     public class DialogueSO : ScriptableObject

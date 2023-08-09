@@ -63,8 +63,10 @@ namespace Town
        void OnRevealComplete()
         {
             Debug.Log("Reveal completed ");
-            isRevealing = false; 
+            isRevealing = false;
+            welcomeTxt.GetComponent<TextMeshProUGUI>().text = ""; 
             welcomeTxt.gameObject.SetActive(false);
+
         }
 
         public void UnrevealWelcometxt()

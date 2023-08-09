@@ -31,6 +31,15 @@ MonoBehaviour:
   interactSprites:
   - interactionNo: 1
     allSprites:
-    - {fileID: 21300000, guid: ac8a4488079be0b45a020c2205562bc0, type: 3}
-    - {fileID: 21300000, guid: 65735e6d7859a964198498115b3edc15, type: 3}
-    - {fileID: 21300000, guid: 10675cbd689f6894f8aaa3709a2634e8, type: 3}
+    - spriteN: {fileID: 21300000, guid: 7f7bd9d5258e88848a19bb2c87abeecb, type: 3}
+      spriteHL: {fileID: 21300000, guid: 7f7bd9d5258e88848a19bb2c87abeecb, type: 3}
+      spriteNA: {fileID: 21300000, guid: 7f7bd9d5258e88848a19bb2c87abeecb, type: 3}
+      isUnlocked: 0
+    - spriteN: {fileID: 21300000, guid: 65735e6d7859a964198498115b3edc15, type: 3}
+      spriteHL: {fileID: 21300000, guid: b05d8098272cd894998360edcd04f781, type: 3}
+      spriteNA: {fileID: 21300000, guid: 65735e6d7859a964198498115b3edc15, type: 3}
+      isUnlocked: 1
+    - spriteN: {fileID: 21300000, guid: fde57e6c4df8571448818f7fa7783c60, type: 3}
+      spriteHL: {fileID: 21300000, guid: fde57e6c4df8571448818f7fa7783c60, type: 3}
+      spriteNA: {fileID: 21300000, guid: fde57e6c4df8571448818f7fa7783c60, type: 3}
+      isUnlocked: 0

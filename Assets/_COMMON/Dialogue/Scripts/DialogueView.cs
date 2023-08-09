@@ -204,8 +204,7 @@ namespace Common
                     topOptions.GetComponent<Image>().enabled= true; 
                     Button spriteBtn = topOptions.transform.GetChild(index).GetComponent<Button>();
                     spriteBtn.gameObject.SetActive(true);
-                    spriteBtn.GetComponent<Image>().sprite
-                        = InteractSprites.allSprites[index];
+                    spriteBtn.GetComponent<TopOptionsBtnEvents>().Init(InteractSprites.allSprites[index]);                                     
                     spriteBtn.onClick.AddListener(() => OnChoiceClick(choice));
                 }
                 index++;
@@ -267,13 +266,12 @@ namespace Common
         {        
             story.ChooseChoiceIndex(choice.index);
             bool choiceVal = DialogueService.Instance.diaBase
-                                    .ApplyChoices(choice.index, 2f);
-
-           
-            escapeCount = 1; 
-            RemoveListener();
-            DisplayStory();
-            DialogueService.Instance.ClearAllList();
+                                            .ApplyChoices(choice.index, 2f);
+          
+                escapeCount = 1;
+                RemoveListener();
+                DisplayStory();
+                DialogueService.Instance.ClearAllList();            
         }       
         void RemoveListener()
         {

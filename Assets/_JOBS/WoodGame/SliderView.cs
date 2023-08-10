@@ -164,7 +164,7 @@ namespace Town
                     movingRight = true;
                 }
 
-                if (Input.GetKeyDown(KeyCode.Space) && (Time.time -prevHit)> timeDelay  && (woodGameView.gameState == WoodGameState.Running))
+                if (Input.GetKeyDown(KeyCode.Space) && (Time.time -prevHit) > timeDelay  && (woodGameView.gameState == WoodGameState.Running))
                 {
                     if (pointer.transform.position.x < maxClickR.transform.position.x
                         && pointer.transform.position.x > minClickR.transform.position.x)
@@ -181,10 +181,8 @@ namespace Town
                         consecutiveHits = 0;
                         HitSeq(false);
                     }
+                    
                     prevHit = Time.time;
-
-                    //Vector3 minBaseVector = minBaseR.transform.position;
-                    //sliderObj.transform.position = new Vector3(minBaseVector.x, minBaseVector.y, minBaseVector.z);
                 }
             }
 

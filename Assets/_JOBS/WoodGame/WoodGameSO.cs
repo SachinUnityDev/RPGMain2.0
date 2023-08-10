@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using Combat;
+using Interactables;
+using Town;
 
 public enum WoodGameRank
 {
     Apprentice,     
     Expert,
     Master,
-
 }
 
 public enum WoodGameState
@@ -27,6 +28,8 @@ public class WoodGameData
 {
     public WoodGameRank woodGameRank;
     public int gameSeq;
+    public int netGameExp;
+    public bool isFlawless; 
     public float timeAvailable4Game;
     public int totalMistakesAllowed;
     public int totalCorrectHits; 
@@ -35,13 +38,14 @@ public class WoodGameData
     public bool isBarRelocationON;
     public bool isCorrectHitsConseq; 
     public int minJobExpAdded;
-    public int maxJObExpAdded;
+    public int maxJobExpAdded;
     public int minJobExpR;
-    public int maxJobExpR; 
+    public int maxJobExpR;
+
+    public List<ItemDataLs> itemDataLs = new List<ItemDataLs>();
 }
 
 [CreateAssetMenu(fileName = "WoodGameRankSO", menuName = "ScriptableObjects/WoodGameSO")]
-
 public class WoodGameSO : ScriptableObject
 {
 
@@ -58,67 +62,20 @@ public class WoodGameSO : ScriptableObject
         return null;
     }
 
+    public List<ItemDataWithQty> GetRewardItems(int gameSeq, WoodGameRank gameRank)
+    {
+        WoodGameData woodGameData = GetWoodGameData(gameSeq, gameRank); 
+        List<ItemDataWithQty> allItemQty= new List<ItemDataWithQty>();
+        foreach (ItemDataLs itemDataLs in woodGameData.itemDataLs)
+        {
+            int itemName =
+                itemDataLs.itemName.GetItemName(itemDataLs.itemType);
+            ItemData itemData = new ItemData(itemDataLs.itemType, itemName, itemDataLs.genGawgawQ);
+            ItemDataWithQty itemQty = new ItemDataWithQty(itemData, itemDataLs.qty);
+            allItemQty.Add(itemQty);                    
+        }
+        return allItemQty; 
+    }
 }
 
 
-//public class WoodGameModel
-//{
-//    public WoodGameRank currWoodGameRank;
-//    public int currentGameSeq;
-//    public int currGameJobExp;
-
-//    public WoodGameModel(WoodGameRank currWoodGameRank, int currentGameSeq, int currGameJobExp)
-//    {
-//        this.currWoodGameRank = currWoodGameRank;
-//        this.currentGameSeq = currentGameSeq;
-//        this.currGameJobExp = currGameJobExp;
-//    }
-
-//    public WoodGameModel()
-//    {
-
-//    }
-    //public void SaveModel(WoodGameModel woodGameModel)
-    //{
-    //    //string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.currSlotSelected.ToString()   + "/Grid/DynaModels.txt";
-
-    //    string mydataPath = "/SAVE_SYSTEM/savedFiles/WoodGameModel.txt"; 
-
-     
-    //    Debug.Log(" INSIDE wood game save MODEL ");
-    //    if (!File.Exists(Application.dataPath + mydataPath))
-    //    {
-    //        Debug.Log("does not exist");
-    //        File.CreateText(Application.dataPath + mydataPath);
-    //    }
-    //    else
-    //    {
-    //        ClearState(); 
-    //    }
-
-    //    string woodGameData= JsonUtility.ToJson(woodGameModel);
-    
-    //    File.WriteAllText(Application.dataPath + mydataPath, woodGameData);
-
-    //}
-    //public void ClearState()
-    //{
-    //    //string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.currSlotSelected.ToString()
-    //    // + "/Grid/DynaModels.txt";
-
-    //    string mydataPath = "/SAVE_SYSTEM/savedFiles/WoodGameModel.txt";
-    //    File.WriteAllText(Application.dataPath + mydataPath, "");
-
-    //}
-
-//}
-
-
-
-//    20 secs
-//3 total mistake chance
-//1x speed
-//Bar size Big
-//3 correct hits to win 1 game
-//Bar relocates each correct hit
-//+1 job expbExp

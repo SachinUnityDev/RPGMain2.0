@@ -15,6 +15,8 @@ MonoBehaviour:
   allWoodData:
   - woodGameRank: 0
     gameSeq: 1
+    netGameExp: 0
+    isFlawless: 0
     timeAvailable4Game: 20
     totalMistakesAllowed: 3
     totalCorrectHits: 1
@@ -22,12 +24,35 @@ MonoBehaviour:
     sliderSpeed: 1
     isBarRelocationON: 0
     isCorrectHitsConseq: 0
-    minJobExpAdded: 1
-    maxJObExpAdded: 1
+    minJobExpAdded: 3
+    maxJobExpAdded: 5
     minJobExpR: 0
-    maxJobExpR: 0
+    maxJobExpR: 60
+    itemDataLs:
+    - itemType: 10
+      genGawgawQ: 0
+      qty: 9
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 3
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
   - woodGameRank: 0
     gameSeq: 2
+    netGameExp: 0
+    isFlawless: 0
     timeAvailable4Game: 12
     totalMistakesAllowed: 3
     totalCorrectHits: 3
@@ -35,25 +60,71 @@ MonoBehaviour:
     sliderSpeed: 0.5
     isBarRelocationON: 0
     isCorrectHitsConseq: 0
-    minJobExpAdded: 2
-    maxJObExpAdded: 3
+    minJobExpAdded: 6
+    maxJobExpAdded: 9
     minJobExpR: 0
-    maxJobExpR: 0
+    maxJobExpR: 60
+    itemDataLs:
+    - itemType: 10
+      genGawgawQ: 0
+      qty: 7
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 3
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
   - woodGameRank: 0
     gameSeq: 3
+    netGameExp: 0
+    isFlawless: 0
     timeAvailable4Game: 8
     totalMistakesAllowed: 3
-    totalCorrectHits: 6
+    totalCorrectHits: 2
     barScale: 1
-    sliderSpeed: 1
+    sliderSpeed: 0.5
     isBarRelocationON: 0
     isCorrectHitsConseq: 0
-    minJobExpAdded: 4
-    maxJObExpAdded: 6
+    minJobExpAdded: 10
+    maxJobExpAdded: 15
     minJobExpR: 0
-    maxJobExpR: 0
+    maxJobExpR: 60
+    itemDataLs:
+    - itemType: 10
+      genGawgawQ: 0
+      qty: 3
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 3
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
   - woodGameRank: 1
     gameSeq: 1
+    netGameExp: 0
+    isFlawless: 0
     timeAvailable4Game: 12
     totalMistakesAllowed: 2
     totalCorrectHits: 3
@@ -61,12 +132,35 @@ MonoBehaviour:
     sliderSpeed: 1
     isBarRelocationON: 1
     isCorrectHitsConseq: 0
-    minJobExpAdded: 3
-    maxJObExpAdded: 6
-    minJobExpR: 0
-    maxJobExpR: 0
+    minJobExpAdded: 18
+    maxJobExpAdded: 24
+    minJobExpR: 60
+    maxJobExpR: 150
+    itemDataLs:
+    - itemType: 10
+      genGawgawQ: 0
+      qty: 2
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 3
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
   - woodGameRank: 1
     gameSeq: 2
+    netGameExp: 0
+    isFlawless: 0
     timeAvailable4Game: 12
     totalMistakesAllowed: 2
     totalCorrectHits: 3
@@ -74,12 +168,35 @@ MonoBehaviour:
     sliderSpeed: 1.5
     isBarRelocationON: 1
     isCorrectHitsConseq: 0
-    minJobExpAdded: 6
-    maxJObExpAdded: 12
-    minJobExpR: 0
-    maxJobExpR: 0
+    minJobExpAdded: 25
+    maxJobExpAdded: 32
+    minJobExpR: 60
+    maxJobExpR: 150
+    itemDataLs:
+    - itemType: 10
+      genGawgawQ: 0
+      qty: 4
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 3
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
   - woodGameRank: 1
     gameSeq: 3
+    netGameExp: 0
+    isFlawless: 0
     timeAvailable4Game: 12
     totalMistakesAllowed: 1
     totalCorrectHits: 3
@@ -87,12 +204,35 @@ MonoBehaviour:
     sliderSpeed: 2
     isBarRelocationON: 1
     isCorrectHitsConseq: 0
-    minJobExpAdded: 12
-    maxJObExpAdded: 20
-    minJobExpR: 0
-    maxJobExpR: 0
+    minJobExpAdded: 33
+    maxJobExpAdded: 40
+    minJobExpR: 60
+    maxJobExpR: 150
+    itemDataLs:
+    - itemType: 10
+      genGawgawQ: 0
+      qty: 6
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 3
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
   - woodGameRank: 2
     gameSeq: 1
+    netGameExp: 0
+    isFlawless: 0
     timeAvailable4Game: 12
     totalMistakesAllowed: 1
     totalCorrectHits: 3
@@ -100,12 +240,35 @@ MonoBehaviour:
     sliderSpeed: 0.3
     isBarRelocationON: 1
     isCorrectHitsConseq: 0
-    minJobExpAdded: 10
-    maxJObExpAdded: 12
-    minJobExpR: 0
-    maxJobExpR: 0
+    minJobExpAdded: 42
+    maxJobExpAdded: 50
+    minJobExpR: 150
+    maxJobExpR: 300
+    itemDataLs:
+    - itemType: 10
+      genGawgawQ: 0
+      qty: 3
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 3
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
   - woodGameRank: 2
     gameSeq: 2
+    netGameExp: 0
+    isFlawless: 0
     timeAvailable4Game: 9
     totalMistakesAllowed: 1
     totalCorrectHits: 4
@@ -113,12 +276,35 @@ MonoBehaviour:
     sliderSpeed: 2
     isBarRelocationON: 1
     isCorrectHitsConseq: 0
-    minJobExpAdded: 12
-    maxJObExpAdded: 22
-    minJobExpR: 0
-    maxJobExpR: 0
+    minJobExpAdded: 55
+    maxJobExpAdded: 65
+    minJobExpR: 150
+    maxJobExpR: 300
+    itemDataLs:
+    - itemType: 10
+      genGawgawQ: 0
+      qty: 6
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 3
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0
   - woodGameRank: 2
     gameSeq: 3
+    netGameExp: 0
+    isFlawless: 0
     timeAvailable4Game: 6
     totalMistakesAllowed: 1
     totalCorrectHits: 4
@@ -126,7 +312,28 @@ MonoBehaviour:
     sliderSpeed: 2
     isBarRelocationON: 1
     isCorrectHitsConseq: 0
-    minJobExpAdded: 24
-    maxJObExpAdded: 36
-    minJobExpR: 0
-    maxJobExpR: 0
+    minJobExpAdded: 70
+    maxJobExpAdded: 85
+    minJobExpR: 150
+    maxJobExpR: 300
+    itemDataLs:
+    - itemType: 10
+      genGawgawQ: 0
+      qty: 9
+      itemName:
+        potionName: 0
+        genGewgawNames: 0
+        HerbName: 0
+        foodName: 0
+        fruitNames: 0
+        ingredientName: 0
+        scrollName: 0
+        tgName: 0
+        toolName: 3
+        teaName: 0
+        soupsName: 0
+        gemName: 0
+        alcoholName: 0
+        mealName: 0
+        sagaicName: 0
+        poeticName: 0

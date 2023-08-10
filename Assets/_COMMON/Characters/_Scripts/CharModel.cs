@@ -68,7 +68,7 @@ namespace Common
         public int thirstMod; 
 
         [Header("Experience points")]
-        public int expPoints;
+        public int mainExp;
         public int jobExp;
         public int skillPts;
         public int expBonusModPercent = 0;
@@ -142,7 +142,7 @@ namespace Common
                 int delta =
                  allLvlExpData.Find(t => t.charLvl == (charLvl + 1)).deltaExpPts;
                 int expPts = allLvlExpData.Find(t => t.charLvl == charLvl).totalExpPts;
-                barRatio = (float)Mathf.Abs(expPoints - expPts) / delta;
+                barRatio = (float)Mathf.Abs(mainExp - expPts) / delta;
             }
             return barRatio;
         }
@@ -191,7 +191,7 @@ namespace Common
             classType = _charSO.classType;
             charNameStr = _charSO.charNameStr;
 
-            expPoints = _charSO.expPoints;             
+            mainExp = _charSO.mainExp;             
             jobExp  = _charSO.jobExp;
             skillPts = _charSO.skillPts;
             charLvl = _charSO.charLvl;

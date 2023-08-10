@@ -29,7 +29,7 @@ namespace Town
         }
         void OnBack2TownPressed()
         {
-            woodGameView.ExitGame();
+            woodGameView.Back2Town();
             gameObject.SetActive(false);    
         }
         void OnRePlayPressed()

@@ -90,38 +90,6 @@ namespace Quest
             
             ItemDataWithQty itemDataWithQty = allItemLootData[index].GetItemDataWithQty();
             return itemDataWithQty;
-
-
-
-            //for (int i = allItemLootData.Count-1; i >=0; i--)
-            //{
-              
-            //    int j = i - 1;
-            //    if (i > 0)
-            //    {
-            //        if ((netWt- allItemLootData[i].wt) < chance && chance < allItemLootData[i].wt)
-            //        {
-            //            itemDataWithQqty = allItemLootData[i].GetItemDataWithQty();
-            //            break;
-            //        }
-            //    }
-            //    else 
-            //    {
-            //        itemDataWithQqty = allItemLootData[i].GetItemDataWithQty();
-            //        break;
-            //    }
-            //}
-
-
-            //foreach (ItemLootData lootData in allItemLootData)
-            //{
-            //    if (lootData.wt < chance)
-            //    {
-            //        itemDataWithQqty = lootData.GetItemDataWithQty();
-            //        break;
-            //    }
-            //}
-          //  return itemDataWithQqty; 
         }
 
 

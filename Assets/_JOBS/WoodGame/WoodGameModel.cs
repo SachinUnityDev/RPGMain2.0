@@ -33,9 +33,9 @@ namespace Town
         }
         public void SaveModel(WoodGameModel woodGameModel)
         {
-            //string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.currSlotSelected.ToString()   + "/Grid/DynaModels.txt";
+           
 
-            string mydataPath = "/SAVE_SYSTEM/savedFiles/WoodGameModel.txt";
+            string mydataPath = "/_SaveService/savedFiles/WoodGameModel.txt";
 
 
             Debug.Log(" INSIDE wood game save MODEL ");
@@ -54,10 +54,9 @@ namespace Town
         }
         public void ClearState()
         {
-            //string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.currSlotSelected.ToString()
-            // + "/Grid/DynaModels.txt";
+      
 
-            string mydataPath = "/SAVE_SYSTEM/savedFiles/WoodGameModel.txt";
+            string mydataPath = "/_SaveService/savedFiles/WoodGameModel.txt";
             File.WriteAllText(Application.dataPath + mydataPath, "");
 
         }

@@ -23,17 +23,25 @@ namespace Town
         public void Show()
         {
             gameObject.SetActive(true);
-            woodGameView.LoadTheNextGameSeq();
+            if (woodGameView.LoadTheNextGameSeq()) // Rank Increment
+            {
+                continueBtn.gameObject.SetActive(true);
+            }
+            else
+            {
+                continueBtn.gameObject.SetActive(false);
+            }
         }
+
         void OnBack2TownPressed()
         {
-            woodGameView.ExitGame();
+            woodGameView.Back2Town();
             gameObject.SetActive(false);
         }
         void OnContinuePressed()
         {   
             woodGameView.OnContinuePressed();
-            gameObject.SetActive(false);
+            gameObject.SetActive(false);            
         }
     }
 }

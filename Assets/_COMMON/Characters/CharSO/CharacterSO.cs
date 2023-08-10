@@ -29,7 +29,7 @@ namespace Common
         public CharMode orgCharMode;
 
         [Header("Experience points")]
-        public int expPoints;
+        public int mainExp;
         public int jobExp;
         public int skillPts;
 

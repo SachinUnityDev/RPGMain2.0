@@ -64,7 +64,7 @@ namespace Town
             fleeBtn.GetComponent<RectTransform>().DOScaleX(0, 0.1f);
 
             continueBtn.onClick.AddListener(OnFleeBtnPressed);
-            Back2town.onClick.AddListener(JobService.Instance.woodGameController.OnBack2TownPressed);
+           // Back2town.onClick.AddListener(JobService.Instance.woodGameController.OnBack2TownPressed);
 
             popUp.transform.DOScale(0f, 0.1f);
             LoadPopUp.transform.DOScale(0f, 0.1f);
@@ -107,7 +107,7 @@ namespace Town
 
         public void PopulateJobExp(WoodGameData woodGameData)
         {
-            float ratio = (JobService.Instance.woodGameController.currGameJobExp - woodGameData.minJobExpR) / (woodGameData.maxJobExpR - woodGameData.minJobExpR);
+            float ratio = (JobService.Instance.woodGameController.netGameExp - woodGameData.minJobExpR) / (woodGameData.maxJobExpR - woodGameData.minJobExpR);
 
             // based on min and max R for a given Rank 
             jobBar.transform.GetChild(1).GetComponent<Image>().fillAmount = ratio;

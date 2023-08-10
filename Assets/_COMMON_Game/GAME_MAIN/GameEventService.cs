@@ -45,7 +45,7 @@ namespace Common
                 EcoServices.Instance.InitEcoServices();
                 DialogueService.Instance.InitDialogueService();
                 BarkService.Instance.InitBarkService();
-
+                JobService.Instance.JobServiceInit();
                 BestiaryService.Instance.Init();
                 ItemService.Instance.Init();
                 TradeService.Instance.InitTradeService();

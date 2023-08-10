@@ -75,7 +75,7 @@ namespace Common
         // connect to event on exp
         public bool ChkLvlUp(CharModel charModel, int expNeeded)
         {
-            int currExp = charModel.expPoints;
+            int currExp = charModel.mainExp;
             if (currExp - expNeeded >= 0)
                 return true;
             else

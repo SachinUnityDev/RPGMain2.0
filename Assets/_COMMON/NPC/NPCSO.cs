@@ -50,8 +50,6 @@ namespace Town
             }
             return result;
         }
-
-
     }
 
    
@@ -62,10 +60,6 @@ namespace Town
         public int weekSeq;
         public List<ItemDataLs> itemDataLs = new List<ItemDataLs>();
     }
-
-    
-
-
     [Serializable]
     public class AllItemNames
     {
@@ -142,7 +136,6 @@ namespace Town
     [Serializable]
     public class ItemDataLs
     {
-
         public ItemType itemType;
         public GenGewgawQ genGawgawQ = GenGewgawQ.None; 
         public int qty; 

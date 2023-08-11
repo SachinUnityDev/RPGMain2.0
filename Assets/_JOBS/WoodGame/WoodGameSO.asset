@@ -15,6 +15,7 @@ MonoBehaviour:
   allWoodData:
   - woodGameRank: 0
     gameSeq: 1
+    lastGameExp: 0
     netGameExp: 0
     isFlawless: 0
     timeAvailable4Game: 20
@@ -51,11 +52,12 @@ MonoBehaviour:
         poeticName: 0
   - woodGameRank: 0
     gameSeq: 2
+    lastGameExp: 0
     netGameExp: 0
     isFlawless: 0
     timeAvailable4Game: 12
     totalMistakesAllowed: 3
-    totalCorrectHits: 3
+    totalCorrectHits: 1
     barScale: 1
     sliderSpeed: 0.5
     isBarRelocationON: 0
@@ -87,11 +89,12 @@ MonoBehaviour:
         poeticName: 0
   - woodGameRank: 0
     gameSeq: 3
+    lastGameExp: 0
     netGameExp: 0
     isFlawless: 0
     timeAvailable4Game: 8
     totalMistakesAllowed: 3
-    totalCorrectHits: 2
+    totalCorrectHits: 1
     barScale: 1
     sliderSpeed: 0.5
     isBarRelocationON: 0
@@ -123,6 +126,7 @@ MonoBehaviour:
         poeticName: 0
   - woodGameRank: 1
     gameSeq: 1
+    lastGameExp: 0
     netGameExp: 0
     isFlawless: 0
     timeAvailable4Game: 12
@@ -159,6 +163,7 @@ MonoBehaviour:
         poeticName: 0
   - woodGameRank: 1
     gameSeq: 2
+    lastGameExp: 0
     netGameExp: 0
     isFlawless: 0
     timeAvailable4Game: 12
@@ -195,6 +200,7 @@ MonoBehaviour:
         poeticName: 0
   - woodGameRank: 1
     gameSeq: 3
+    lastGameExp: 0
     netGameExp: 0
     isFlawless: 0
     timeAvailable4Game: 12
@@ -231,6 +237,7 @@ MonoBehaviour:
         poeticName: 0
   - woodGameRank: 2
     gameSeq: 1
+    lastGameExp: 0
     netGameExp: 0
     isFlawless: 0
     timeAvailable4Game: 12
@@ -267,6 +274,7 @@ MonoBehaviour:
         poeticName: 0
   - woodGameRank: 2
     gameSeq: 2
+    lastGameExp: 0
     netGameExp: 0
     isFlawless: 0
     timeAvailable4Game: 9
@@ -303,6 +311,7 @@ MonoBehaviour:
         poeticName: 0
   - woodGameRank: 2
     gameSeq: 3
+    lastGameExp: 0
     netGameExp: 0
     isFlawless: 0
     timeAvailable4Game: 6

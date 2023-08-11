@@ -11,7 +11,8 @@ namespace Town
         public WelcomeController welcomeController;
         [Header("TBR")]
         public WelcomeView welcomeView;
-        GameObject cornerBtns;
+        [Header("NTBR")]
+        [SerializeField]GameObject cornerBtns;
 
         public bool isWelcomeRun = false; 
 

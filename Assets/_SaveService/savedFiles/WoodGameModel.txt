@@ -1,1 +1,1 @@
-{"currWoodGameRank":0,"currentGameSeq":3,"currGameJobExp":0}
+{"currWoodGameRank":0,"currentGameSeq":3,"currGameJobExp":37}

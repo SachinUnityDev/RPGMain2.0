@@ -170,8 +170,16 @@ namespace Town
                     {
                         Debug.Log("SUCCESS");
                         hits++;
-                        consecutiveHits++;
-                       HitSeq(true);
+                        if(woodGameData.isCorrectHitsConseq)
+                        {
+                            consecutiveHits++;
+                            if (consecutiveHits >= 3)
+                                HitSeq(true);
+                        }
+                        else
+                        {
+                            HitSeq(true);
+                        }   
                     }
                     else
                     {

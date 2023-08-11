@@ -28,6 +28,7 @@ public class WoodGameData
 {
     public WoodGameRank woodGameRank;
     public int gameSeq;
+    public int lastGameExp; 
     public int netGameExp;
     public bool isFlawless; 
     public float timeAvailable4Game;

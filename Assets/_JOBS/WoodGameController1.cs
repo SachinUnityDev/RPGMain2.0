@@ -77,10 +77,12 @@ namespace Town
         }
         public void ExitGame(WoodGameData woodGameData)
         {
-            this.currWoodGameData= woodGameData;
+            currWoodGameData= woodGameData;
             currentGameSeq = woodGameData.gameSeq;
-            currWoodGameRank = woodGameData.woodGameRank; 
-            netGameExp = woodGameData.netGameExp;
+            currWoodGameRank = woodGameData.woodGameRank;
+            woodGameData.netGameExp += woodGameData.lastGameExp;
+            netGameExp = woodGameData.netGameExp; 
+            woodGameData.lastGameExp = 0; 
 
             SaveGameData();
             Destroy(woodGameGO, 0.4f);
@@ -107,8 +109,7 @@ namespace Town
             {
                 currentGameSeq = 1;
                 netGameExp = 0;
-                currWoodGameRank = WoodGameRank.Apprentice;
-                netGameExp = 0;
+                currWoodGameRank = WoodGameRank.Apprentice;               
             }
             else
             {
@@ -123,10 +124,14 @@ namespace Town
                     if (wooddata.gameSeq == currentGameSeq)
                     {
                         currWoodGameData = wooddata.DeepClone();
-                        currWoodGameData.netGameExp = netGameExp; // getting data from the save model .. by default its 0 
+                        if(woodGameModel != null)
+                        {
+                            currWoodGameData.netGameExp = netGameExp;
+                        }
                     }
                 }
             }
+
         }
 
         WoodGameModel RestoreState()

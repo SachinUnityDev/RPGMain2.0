@@ -29,26 +29,33 @@ namespace Town
         public WoodGameData woodGameData;
         public WoodGameController1 woodController;
         public WoodGameView1 woodGameView;
-        public float currExp; 
+        public float currExp;
+
+        [Header(" bar Fill")]
+        [SerializeField] float ratioBeforeGain;
+        [SerializeField] float ratioAfterGain;
+
+        float netExp;
+        float lastGained; 
 
         public void RewardsInit(WoodGameData woodGameData
                         , WoodGameController1 woodController, WoodGameView1 woodGameView)
         {
             this.woodController= woodController;
-            this.woodGameData = woodGameData; 
+            this.woodGameData = woodGameData.DeepClone(); 
             this.woodGameView= woodGameView;
             flawBtn.Init(woodGameData);
             rewardsSlotView.Init(woodGameData, woodController, woodGameView);
-            expConvert.Init(woodGameData, woodController, woodGameView);
+            expConvert.Init(woodGameView);
             sellOut.Init(woodGameData, woodController, woodGameView);
             FillRank((int)woodGameData.woodGameRank);
-            continueBtn.Init(woodGameData, woodController, woodGameView);
+            continueBtn.Init(woodGameData, woodController, woodGameView, this);
 
         }
-        public void ShowRewardsView(float expGained)
+        public void ShowRewardsView()
         {
             gameObject.SetActive(true);
-            FillExpBar(expGained);
+            FillExpBar(woodGameData.netGameExp, woodGameData.lastGameExp);
         }
         void FillRank(int rank)
         {
@@ -73,17 +80,29 @@ namespace Town
                     rankDesc.text = ""; break;                   
             }
         }
-        public void FillExpBar(float expGained)
+        public void FillExpBar(float netExp, float lastExpGained)
         {
-            float ratio = (expGained - woodGameData.minJobExpR) / (woodGameData.maxJobExpR - woodGameData.minJobExpR);
+            this.netExp = netExp; 
+            this.lastGained = lastExpGained;
+             ratioBeforeGain = (netExp - woodGameData.minJobExpR) / (woodGameData.maxJobExpR - woodGameData.minJobExpR);
 
             // based on min and max R for a given Rank 
-            expBar.GetChild(0).GetComponent<Image>().fillAmount = ratio;
-            expDesc.text = "+" + $"{expGained} Exp. gained"; 
+            expBar.GetChild(0).GetComponent<Image>().fillAmount = ratioBeforeGain;
+            expDesc.text = "+" + $"{lastExpGained} Exp. gained"; 
 
         }
-        
-        
+        public void ContinueSeq()
+        {
+            Image img = expBar.GetChild(0).GetComponent<Image>(); 
+            ratioAfterGain = ((netExp+lastGained) - woodGameData.minJobExpR) / (woodGameData.maxJobExpR - woodGameData.minJobExpR);
+            Sequence seq = DOTween.Sequence();
+            seq
+                .Append(img.DOFillAmount(ratioAfterGain, 0.4f))
+                .AppendCallback(() => woodController.ExitGame(woodGameData))
+                ;
+            seq.Play();
+        }
+
 
 
     }

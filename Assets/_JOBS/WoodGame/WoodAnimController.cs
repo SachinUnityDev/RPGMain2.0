@@ -20,7 +20,7 @@ namespace Town
         [SerializeField] Vector3 initRot;
 
         WoodGameView1 woodGameView;
-
+        Sequence axeSeq; 
         void Start()
         {
             initRot = axeSpriteGO.GetComponent<RectTransform>().rotation.eulerAngles;
@@ -34,14 +34,17 @@ namespace Town
         {
             if (woodGameView.gameState == WoodGameState.Running)
             {
-                Debug.Log("TRAP " + initRot);
-                Sequence axeSeq = DOTween.Sequence();
+               axeSeq = DOTween.Sequence();
                 axeSeq
-                    .Append(axeSpriteGO.transform.DOLocalRotate(finalRot, 0.6f))
-                    .Append(axeSpriteGO.transform.DOLocalRotate(initRot, 0.6f))
+                    .Append(axeSpriteGO.transform.DOLocalRotate(finalRot, 0.4f))
+                    .Append(axeSpriteGO.transform.DOLocalRotate(initRot, 0.4f))
                     ;
                 axeSeq.Play().SetLoops(100);
             }
+        }
+        public void StopAnim()
+        {
+            axeSeq.Pause();
         }
 
     }

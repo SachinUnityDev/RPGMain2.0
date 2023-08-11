@@ -4,7 +4,6 @@ using Interactables;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +12,8 @@ namespace Town
 {
     public class WoodGameView1 : MonoBehaviour
     {
-        public Action OnRewardQuickSell; 
+        public Action OnRewardQuickSell;
+        public Action OnExpConvert; 
 
         [SerializeField] GameObject GameSeqView;
         [SerializeField] GameObject MistakeCountView;
@@ -32,27 +32,12 @@ namespace Town
         [SerializeField] float netTime;
         [SerializeField] float gameStartTime;
 
-        
-
-
         [Header("Job Exp Bar")]
         [SerializeField] Transform expBar;
-        public float expGained = 0f; 
-
+        
         [SerializeField] WoodGameController1 woodController;
         [SerializeField] WoodAnimController woodAnimController;
        
-
-        //[Header("Button UI Controlls")]
-        //bool isOptOpen, isFleeOpen;
-        //[SerializeField] Button optionsBtn;
-        //[SerializeField] Button fleeBtn;
-
-
-        //[Header("Exit options Buttons")]
-        //[SerializeField] Button continueBtn;
-        //[SerializeField] Button Back2town;
-
         [Header("START PANEL")]
         [SerializeField] StartGameView startGameView;
 
@@ -73,27 +58,6 @@ namespace Town
         [SerializeField]WoodGameData currWoodGameData;
 
 
-
-        void Start()
-        {
-            // woodAnimController = GetComponent<WoodAnimController>();
-            //isOptOpen = false;
-            //isFleeOpen = false;
-            //continueBtn.transform.parent.GetComponent<RectTransform>().DOScaleY(0, 0.1f);
-            //fleeBtn.GetComponent<RectTransform>().DOScaleX(0, 0.1f);
-
-            //continueBtn.onClick.AddListener(OnFleeBtnPressed);
-            //Back2town.onClick.AddListener(WoodGameService.Instance.OnBack2TownPressed);
-
-            //popUp.transform.DOScale(0f, 0.1f);
-            //LoadPopUp.transform.DOScale(0f, 0.1f);
-            // woodGameController = GetComponent<WoodCuttingController>();
-            //optionsBtn.onClick.AddListener(OnOptionsBtnPressed);
-            //fleeBtn.onClick.AddListener(OnFleeBtnPressed);
-         
-        }
-      
-
         public void NewGameInit(WoodGameData currWoodGameData, WoodGameController1 woodController)
         {
             this.woodController = woodController;
@@ -106,8 +70,10 @@ namespace Town
         }
         public void NewSeqInit(WoodGameData currWoodGameData)
         {
+            currWoodGameData.netGameExp = woodController.netGameExp; 
             this.currWoodGameData = currWoodGameData;            
             sliderView.Init(this, currWoodGameData);
+           
         }
         public void ReloadGameSeq()
         {
@@ -124,10 +90,12 @@ namespace Town
         {
             successView.Show();     
         }
-        public void OnExpConvert()
+        public void On_ExpConvert()
         {
-            CharService.Instance.GetCharCtrlWithName(CharNames.Abbas).charModel.mainExp += (int)expGained;
-            rewardsView.FillExpBar(0); 
+            CharService.Instance.GetCharCtrlWithName(CharNames.Abbas).charModel.mainExp += (int)currWoodGameData.lastGameExp;
+            currWoodGameData.lastGameExp = 0;
+            rewardsView.FillExpBar(currWoodGameData.netGameExp, 0);
+            OnExpConvert?.Invoke();     
         }
        
         public void OnQuickSell()
@@ -153,8 +121,8 @@ namespace Town
 
         bool AddJobExpNChkRank()
         {
-            expGained += UnityEngine.Random.Range(currWoodGameData.maxJobExpAdded, currWoodGameData.minJobExpAdded);
-            if(currWoodGameData.netGameExp + expGained >= currWoodGameData.maxJobExpR)
+            currWoodGameData.lastGameExp = UnityEngine.Random.Range(currWoodGameData.maxJobExpAdded, currWoodGameData.minJobExpAdded);
+            if((currWoodGameData.netGameExp + currWoodGameData.lastGameExp) >= currWoodGameData.maxJobExpR)
             {
                if(woodController.currWoodGameRank != WoodGameRank.Master)
                 {
@@ -172,18 +140,13 @@ namespace Town
             {
                 currWoodGameData.gameSeq++;
             }
-            else if (currWoodGameData.gameSeq >= 3 && currWoodGameData.woodGameRank != WoodGameRank.Master)
+            else if (currWoodGameData.gameSeq >= 3)
             {
                 Debug.Log("you are DONE FOR THE DAY !");
                 Back2Town();
                 return;
             }
-            else if (currWoodGameData.gameSeq >= 3 && currWoodGameData.woodGameRank == WoodGameRank.Master)
-            {
-                Debug.Log("Game play to be continued at master");
-                Back2Town();
-                return;
-            }            
+                
             currWoodGameData = woodController.woodGameSO
                         .GetWoodGameData(currWoodGameData.gameSeq, currWoodGameData.woodGameRank).DeepClone();
             NewSeqInit(currWoodGameData);
@@ -212,11 +175,12 @@ namespace Town
 
         public void PopulateJobExp(WoodGameData woodGameData)
         {
-            float ratio = (expGained - woodGameData.minJobExpR) / (woodGameData.maxJobExpR - woodGameData.minJobExpR);
+            float ratio = (float)(woodGameData.netGameExp - woodGameData.minJobExpR) / (woodGameData.maxJobExpR - woodGameData.minJobExpR);
 
             // based on min and max R for a given Rank 
             expBar.GetChild(1).GetComponent<Image>().fillAmount = ratio;
-
+            expBar.GetChild(2).GetComponent<TextMeshProUGUI>().text 
+                        = $"{woodGameData.netGameExp}/{woodGameData.maxJobExpR}"; 
         }
         public void PopulateGameView(WoodGameData woodGameData, int hits, int missHits)
         {
@@ -297,12 +261,11 @@ namespace Town
             }
         }     
         public void Back2Town()
-        {  
-            sliderView.SliderMovementStop();
-           
+        {   
+            sliderView.SliderMovementStop();           
             // show reward panel 
             rewardsView.RewardsInit(currWoodGameData, woodController, this); 
-            rewardsView.ShowRewardsView(expGained);
+            rewardsView.ShowRewardsView();
         }
         private void Update()
         {
@@ -317,15 +280,17 @@ namespace Town
             {
                 case WoodGameState.Running:
                     gameState = WoodGameState.Running;
-                    woodAnimController.StartAnim();
+                    woodAnimController.StartAnim();                    
                     break;
                 case WoodGameState.NewStartOptions:
                     break;
                 case WoodGameState.HitPaused:
                     gameState = WoodGameState.HitPaused;
+                    woodAnimController.StopAnim();
                     break;
                 case WoodGameState.LoadPaused:
-                    gameState = WoodGameState.LoadPaused;                  
+                    gameState = WoodGameState.LoadPaused;
+                    woodAnimController.StopAnim();
                     break;
                 case WoodGameState.ExitGame:
                     gameState = woodGameState;

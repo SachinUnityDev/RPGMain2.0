@@ -9,19 +9,16 @@ namespace Town
 
     public class ExpConvertPtrEvents : MonoBehaviour, IPointerClickHandler
     {
-        WoodGameData woodGameData;
-        WoodGameController1 woodController;
+   
         WoodGameView1 woodGameView; 
-        public void Init(WoodGameData woodGameData, WoodGameController1 woodController, WoodGameView1 woodGameView)
+        public void Init( WoodGameView1 woodGameView)
         {
-            this.woodGameView = woodGameView;
-            this.woodGameData= woodGameData;
-            this.woodController = woodController;
+            this.woodGameView = woodGameView;           
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            woodGameView.OnExpConvert(); 
+            woodGameView.On_ExpConvert(); 
         }
     }
 }

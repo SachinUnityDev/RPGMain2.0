@@ -109,7 +109,6 @@ namespace Town
                 ClickBoxMovement();
                 woodGameView.ControlGameState(WoodGameState.Running);
             }
-
         }
         public void HitSeq(bool isSuccess)
         {

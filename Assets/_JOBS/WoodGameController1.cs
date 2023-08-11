@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
-
+using Common;
 
 namespace Town
 {   
@@ -16,7 +16,7 @@ namespace Town
         public int netGameExp;
 
         [Header("CAN PLAY THE GAME")]
-        public bool isUnLocked; 
+        public bool isLocked; 
 
         [Header(" wood game Data Loaded ref")]
         public WoodGameData currWoodGameData;
@@ -42,11 +42,17 @@ namespace Town
         [SerializeField] GameObject woodGamePreFab;
         [SerializeField] GameObject woodGameGO;
         WoodGameView1 woodGameView;
+        private void Start()
+        {
+            CalendarService.Instance.OnStartOfCalDay -= (int day) => UnLockOnDayChg();
+            CalendarService.Instance.OnStartOfCalDay += (int day) => UnLockOnDayChg();
+            isLocked = false;
+        }
         public void StartGame()
         {
-            Debug.Log(" wood game Started");
-            // Init Dialogue
             if (isGameInitDone) return; // return multiple clicks
+            if(isLocked) return;
+
             Transform parent = GameObject.FindGameObjectWithTag("TownCanvas").transform; 
             woodGameGO = Instantiate(woodGamePreFab);
 
@@ -69,20 +75,6 @@ namespace Town
            
             woodGameGO.GetComponent<WoodGameView1>().NewGameInit(currWoodGameData, this); 
         }
-
-        void Start()
-        {
-      
-        }
-
-      
-        public void GameViewInit()
-        {
-           
-           // ContinueBtn.gameObject.SetActive(true);
-          //Back2TownBtn.gameObject.SetActive(true);            
-           
-        }
         public void ExitGame(WoodGameData woodGameData)
         {
             this.currWoodGameData= woodGameData;
@@ -92,9 +84,20 @@ namespace Town
 
             SaveGameData();
             Destroy(woodGameGO, 0.4f);
+
+            // reset params
+            isGameInitDone= false;  
+            isLocked= true;
+            CalendarService.Instance.On_EndDayClick(); 
             // destroy prefab 
             // block the game for one day 
         }
+        void UnLockOnDayChg()
+        {
+            isLocked= false;
+        }
+
+
         void GetLoadGameData()
         {
             WoodGameModel woodGameModel = RestoreState();

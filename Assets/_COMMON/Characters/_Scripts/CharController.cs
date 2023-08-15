@@ -478,11 +478,9 @@ namespace Common
         public void ChgLevelUp(int finalLvl)
         {
             charModel.skillPts++;
-           // LevelService.Instance.LevelUpStats(this, (Levels)finalLvl);
-            
-            // CONNECT TO LEVEL SERVICE
-            // attribute choice for vigor , Wp Manual clicks inventory Panel
-            // Attribute up Auto  
+            int initLvl = charModel.charLvl;
+            if(charModel.orgCharMode == CharMode.Ally)  // ensure pets or beeastiary don t level up
+                LevelService.Instance.AutoLvlUpAlly(this, (Levels)initLvl, (Levels)finalLvl);            
         }
         public void ChgLevelDown()
         {
@@ -603,6 +601,9 @@ namespace Common
 
             barSeq.Play().OnComplete(() => barTrans.gameObject.SetActive(false)); 
         }
+
+        
+
     }
 }
 

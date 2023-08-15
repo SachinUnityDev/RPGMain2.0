@@ -777,7 +777,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1761031931498186557
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2927,6 +2927,7 @@ MonoBehaviour:
     isUnLocked: 1
     isRepeatable: 0
     isSkippable: 0
+    isPlayedOnce: 0
     gameState: 1
     charInDialogue: 01000000
     NPCinDialogue: 
@@ -3356,6 +3357,7 @@ MonoBehaviour:
     isUnLocked: 1
     isRepeatable: 0
     isSkippable: 0
+    isPlayedOnce: 0
     gameState: 1
     charInDialogue: 01000000
     NPCinDialogue: 
@@ -3607,6 +3609,7 @@ MonoBehaviour:
     isUnLocked: 1
     isRepeatable: 0
     isSkippable: 0
+    isPlayedOnce: 0
     gameState: 1
     charInDialogue: 01000000
     NPCinDialogue: 
@@ -3769,6 +3772,7 @@ MonoBehaviour:
     isUnLocked: 1
     isRepeatable: 0
     isSkippable: 0
+    isPlayedOnce: 0
     gameState: 1
     charInDialogue: 00000000
     NPCinDialogue: 

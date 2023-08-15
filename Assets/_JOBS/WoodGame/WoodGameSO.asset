@@ -20,11 +20,11 @@ MonoBehaviour:
     isFlawless: 0
     timeAvailable4Game: 20
     totalMistakesAllowed: 3
-    totalCorrectHits: 1
+    totalCorrectHits: 2
     barScale: 1
     sliderSpeed: 1
     isBarRelocationON: 0
-    isCorrectHitsConseq: 0
+    isCorrectHitsConseq: 1
     minJobExpAdded: 3
     maxJobExpAdded: 5
     minJobExpR: 0
@@ -167,10 +167,10 @@ MonoBehaviour:
     netGameExp: 0
     isFlawless: 0
     timeAvailable4Game: 12
-    totalMistakesAllowed: 2
+    totalMistakesAllowed: 3
     totalCorrectHits: 3
     barScale: 1
-    sliderSpeed: 1.5
+    sliderSpeed: 1
     isBarRelocationON: 1
     isCorrectHitsConseq: 0
     minJobExpAdded: 25
@@ -204,7 +204,7 @@ MonoBehaviour:
     netGameExp: 0
     isFlawless: 0
     timeAvailable4Game: 12
-    totalMistakesAllowed: 1
+    totalMistakesAllowed: 3
     totalCorrectHits: 3
     barScale: 0.8
     sliderSpeed: 2

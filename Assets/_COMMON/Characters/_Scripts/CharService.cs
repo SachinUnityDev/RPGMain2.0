@@ -261,17 +261,7 @@ namespace Common
             return grpBuffIDs;
         }
     
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.T))
-            {              
-                foreach (CharController charCtrl in allyInPlayControllers)
-                {
-                    On_CharInit();
-                    On_CharAddToParty(GetCharCtrlWithName(charCtrl.charModel.charName)); 
-                }
-            }
-        }
+       
         public void On_CharAddToParty(CharController charController)
         {
             Debug.Log("On Char Added" + charController.charModel.charName);
@@ -453,7 +443,6 @@ namespace Common
             return minValChar;
         }
 
-
         public int GetLevel(CharNames _charName)
         { 
            return charsInPlayControllers.Find(t => t.charModel.charName == _charName).charModel.charLvl;          
@@ -515,6 +504,24 @@ namespace Common
                 return "";
         }
         #endregion
+
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                foreach (CharController charCtrl in allyInPlayControllers)
+                {
+                    On_CharInit();
+                    On_CharAddToParty(GetCharCtrlWithName(charCtrl.charModel.charName));
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                CharController charController = GetCharCtrlWithName(CharNames.Baran);
+                charController.ExpPtsGain(100); 
+            }
+        }
     }
 }
 

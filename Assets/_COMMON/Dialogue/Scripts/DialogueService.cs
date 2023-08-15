@@ -134,6 +134,8 @@ namespace Common
             {               
                 if(diaModel.npcName == nPCNames && diaModel.charName == charName)
                 {
+                   if (diaModel.isPlayedOnce && !diaModel.isRepeatable)
+                        continue; 
                    if(diaModel.isUnLocked)
                     lsModels.Add(diaModel);
                 }

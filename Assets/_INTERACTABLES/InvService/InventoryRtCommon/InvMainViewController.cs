@@ -14,7 +14,8 @@ namespace Interactables
         [Header("PARENT VIEW CONTROLLER")]
         public InvRightViewController invCommViewController;
         public BtmCharViewController btmCharViewController;
-        public LevelView levelViewController; 
+        [Header("Level view ")]
+        public LevelView levelView; 
 
 
        [SerializeField] GameObject AttributesPanel;
@@ -22,13 +23,11 @@ namespace Interactables
        [SerializeField] GameObject traitsPanel;
         public CharNames selectchar;
 
-        [Header("Manual Level Up")]
-        [SerializeField] GameObject levelUpPanel;
 
         private void Awake()
         {
             invCommViewController = transform.GetChild(1).GetComponent<InvRightViewController>();
-            levelViewController = transform.GetChild(0).GetComponent<LevelView>();
+           
             btmCharViewController = transform.GetChild(2).GetComponent<BtmCharViewController>();
      
             InvService.Instance.OnCharSelectInvPanel += OnCharSelected; 
@@ -72,9 +71,9 @@ namespace Interactables
         public void Init()
         {
             invCommViewController.Init();
-            btmCharViewController.Init();
-            levelViewController.Init();
+            btmCharViewController.Init();         
             btmCharViewController.gameObject.transform.SetParent(transform);
+            levelView.LevelViewInit();
 
         }
         public HelpName GetHelpName()

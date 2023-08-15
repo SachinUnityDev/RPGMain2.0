@@ -38,8 +38,13 @@ namespace Town
         [SerializeField] WoodGameController1 woodController;
         [SerializeField] WoodAnimController woodAnimController;
        
+        [Header("WELCOME PANEL")]
+        [SerializeField] WelcomeBoxView welcomeBoxView;
+
+
         [Header("START PANEL")]
-        [SerializeField] StartGameView startGameView;
+        [SerializeField] WoodGameStartView startView;
+
 
         [Header(" Game Reload Panel")]
         [SerializeField] ReloadGameView reloadGameView;
@@ -57,11 +62,13 @@ namespace Town
         public WoodGameState gameState;
         [SerializeField]WoodGameData currWoodGameData;
 
-
         public void NewGameInit(WoodGameData currWoodGameData, WoodGameController1 woodController)
         {
             this.woodController = woodController;
-            startGameView.InitStartGame(this);
+            welcomeBoxView.InitWelcomeGame(currWoodGameData, this);
+            startView.InitStartView(this);
+            ShowStartPanel(); 
+
             reloadGameView.InitReload(this);
             woodAnimController.InitAnim(this);
             successView.InitSuccessView(this);
@@ -72,8 +79,21 @@ namespace Town
         {
             currWoodGameData.netGameExp = woodController.netGameExp; 
             this.currWoodGameData = currWoodGameData;            
-            sliderView.Init(this, currWoodGameData);
-           
+            sliderView.Init(this, currWoodGameData);           
+        }
+        
+        public void ShowStartPanel()
+        {
+            if(currWoodGameData.isPlayedOnce)
+            {
+                welcomeBoxView.gameObject.SetActive(false);
+                startView.Show();
+            }
+            else
+            {
+                welcomeBoxView.gameObject.SetActive(true);
+                startView.Hide();
+            }
         }
         public void ReloadGameSeq()
         {
@@ -96,8 +116,7 @@ namespace Town
             currWoodGameData.lastGameExp = 0;
             rewardsView.FillExpBar(currWoodGameData.netGameExp, 0);
             OnExpConvert?.Invoke();     
-        }
-       
+        }       
         public void OnQuickSell()
         {
            List<ItemDataWithQty> allItemQty = new List<ItemDataWithQty>();
@@ -115,23 +134,12 @@ namespace Town
                 Currency itemSaleVal = new Currency(silver, bronze).RationaliseCurrency();
                 EcoServices.Instance.AddMoney2PlayerInv(itemSaleVal);
             }
-
             OnRewardQuickSell?.Invoke();
         }
-
-        bool AddJobExpNChkRank()
+        bool UpdateLastGameExp()
         {
-            currWoodGameData.lastGameExp = UnityEngine.Random.Range(currWoodGameData.maxJobExpAdded, currWoodGameData.minJobExpAdded);
-            if((currWoodGameData.netGameExp + currWoodGameData.lastGameExp) >= currWoodGameData.maxJobExpR)
-            {
-               if(woodController.currWoodGameRank != WoodGameRank.Master)
-                {
-                    woodController.currWoodGameRank++;
-                    currWoodGameData.woodGameRank++;
-                }
-                Back2Town();
-                return false; 
-            }
+            currWoodGameData.lastGameExp = UnityEngine.Random.Range(currWoodGameData.maxJobExpAdded
+                                                , currWoodGameData.minJobExpAdded); 
             return true; 
         }
         public void ChgGameParam2Next()
@@ -157,7 +165,7 @@ namespace Town
         {
             ChgGameParam2Next();            
             ControlGameState(WoodGameState.LoadPaused);
-            return AddJobExpNChkRank(); // check if game check out on Rank 
+            return UpdateLastGameExp(); // check if game check out on Rank 
         }
         public void OnContinuePressed()
         {
@@ -170,7 +178,6 @@ namespace Town
             netTime = currWoodGameData.timeAvailable4Game;
             gameStartTime = Time.time;
             PopulateGameTimer(gameStartTime);
-
         }
 
         public void PopulateJobExp(WoodGameData woodGameData)

@@ -2,12 +2,18 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; 
 
 
 namespace Town
 {
     public class SliderView : MonoBehaviour
     {
+        [Header(" Clickbox Sprites")]
+        [SerializeField] Sprite spriteN;
+        [SerializeField] Sprite spriteHL;
+        [SerializeField] Sprite spriteNA;
+
         [SerializeField] GameObject pointer;
 
         [Header("Cross Script ref")]
@@ -73,7 +79,6 @@ namespace Town
         {
             float clickBoxWidth = Mathf.Abs(maxClickR.transform.position.x - minClickR.transform.position.x);
 
-
             float availDist = Mathf.Abs(maxBaseR.transform.position.x - minBaseR.transform.position.x);
             float randPos = Random.Range(clickBoxWidth / 2, availDist - clickBoxWidth / 2);
 
@@ -95,7 +100,27 @@ namespace Town
        public  void CheckNUpdateGameParams()
         {
             woodGameView.PopulateGameView(woodGameData, hits, missHits);
-
+            if (woodGameData.isCorrectHitsConseq)
+            {
+                if(missHits >=1 && consecutiveHits < woodGameData.totalCorrectHits)
+                {
+                    woodGameView.ReloadGameSeq();
+                }
+                else if (missHits >= woodGameData.totalMistakesAllowed)
+                {
+                    woodGameView.ReloadGameSeq();
+                }
+                else if (consecutiveHits >= woodGameData.totalCorrectHits)
+                {
+                    woodGameView.ShowSuccess();
+                }
+                else
+                {
+                    ClickBoxMovement();
+                    woodGameView.ControlGameState(WoodGameState.Running);
+                }
+                return; 
+            }
             if (missHits >= woodGameData.totalMistakesAllowed)
             {
                 woodGameView.ReloadGameSeq();
@@ -113,16 +138,16 @@ namespace Town
         public void HitSeq(bool isSuccess)
         {
             woodGameView.ControlGameState(WoodGameState.HitPaused);
-
+            ToggleSliderSprite(isSuccess);
             if (isSuccess)
-            {
+            {   
                 Sequence HitSeq = DOTween.Sequence();
                 HitSeq
                      .AppendInterval(0.4f)
-                     .AppendCallback(CheckNUpdateGameParams);
+                     .AppendCallback(CheckNUpdateGameParams);                        
                 HitSeq.Play();
             }
-            else
+            else // failure 
             {
                 Sequence HitSeq = DOTween.Sequence();
                 HitSeq
@@ -131,6 +156,34 @@ namespace Town
                     ;
                 HitSeq.Play();
             }
+        }
+
+        void ToggleSliderSprite(bool isSuccess)
+        {
+            if (isSuccess)
+            {
+                Sequence seqPtr= DOTween.Sequence();
+                seqPtr
+                    .AppendCallback(() => ChgSprite(spriteHL))
+                    .AppendInterval(0.4f)
+                    .AppendCallback(()=>ChgSprite(spriteN))
+                    ;
+                seqPtr.Play();
+            }
+            else
+            {
+                Sequence seqPtr = DOTween.Sequence();
+                seqPtr
+                    .AppendCallback(() => ChgSprite(spriteNA))
+                    .AppendInterval(0.4f)
+                    .AppendCallback(() => ChgSprite(spriteN))
+                    ;
+                seqPtr.Play();
+            }
+        }
+        void ChgSprite(Sprite sprite)
+        {
+            ClickBox.GetComponent<Image>().sprite = sprite;
         }
 
         public void ResetOnHit()
@@ -170,21 +223,18 @@ namespace Town
                     {
                         Debug.Log("SUCCESS");
                         hits++;
-                        if(woodGameData.isCorrectHitsConseq)
-                        {
-                            consecutiveHits++;
-                            if (consecutiveHits >= 3)
-                                HitSeq(true);
-                        }
-                        else
-                        {
-                            HitSeq(true);
-                        }   
+                        consecutiveHits++;
+                        HitSeq(true);
                     }
                     else
                     {
                         Debug.Log("MISSED HIT ");
                         missHits++;
+                        //if (woodGameData.isCorrectHitsConseq)
+                        //{
+                        //    if (consecutiveHits <= 3)
+                        //        HitSeq(true);
+                        //}
                         consecutiveHits = 0;
                         HitSeq(false);
                     }

@@ -26,6 +26,7 @@ public enum WoodGameState
 [System.Serializable]
 public class WoodGameData
 {
+    public bool isPlayedOnce; 
     public WoodGameRank woodGameRank;
     public int gameSeq;
     public int lastGameExp; 

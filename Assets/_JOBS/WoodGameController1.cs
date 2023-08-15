@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using Common;
+using Quest;
+using DG.Tweening;
+using System.Threading.Tasks;
 
 namespace Town
 {   
@@ -71,19 +74,36 @@ namespace Town
             woodRect.offsetMin = new Vector2(0, 0); // new Vector2(left, bottom);
             woodRect.offsetMax = new Vector2(0, 0); // new Vector2(-right, -top);
             isGameInitDone = true;
-            GetLoadGameData(); // curr wood game Data populated for controller 
-           
+
+            //Sequence loadSeq = DOTween.Sequence();
+            //loadSeq
+            //     .AppendCallback(() => GetLoadGameData())
+            //     .AppendInterval(4f)
+            //     .AppendCallback(() => woodGameGO.GetComponent<WoodGameView1>().NewGameInit(currWoodGameData, this))
+            //     ; 
+            //loadSeq.Play();
+
+            GetLoadGameData();
             woodGameGO.GetComponent<WoodGameView1>().NewGameInit(currWoodGameData, this); 
+
+
         }
         public void ExitGame(WoodGameData woodGameData)
         {
             currWoodGameData= woodGameData;
             currentGameSeq = woodGameData.gameSeq;
-            currWoodGameRank = woodGameData.woodGameRank;
             woodGameData.netGameExp += woodGameData.lastGameExp;
-            netGameExp = woodGameData.netGameExp; 
-            woodGameData.lastGameExp = 0; 
+            netGameExp = woodGameData.netGameExp;
+            woodGameData.lastGameExp = 0;
 
+            if ((woodGameData.netGameExp) >= currWoodGameData.maxJobExpR)
+            {
+                if (woodGameData.woodGameRank != WoodGameRank.Master)
+                {
+                    woodGameData.woodGameRank++;                   
+                }
+            }
+            currWoodGameRank = woodGameData.woodGameRank;
             SaveGameData();
             Destroy(woodGameGO, 0.4f);
 
@@ -131,20 +151,17 @@ namespace Town
                     }
                 }
             }
-
+            currWoodGameData.isPlayedOnce = woodGameModel.isPlayedOnce;
         }
 
-        WoodGameModel RestoreState()
+        WoodGameModel  RestoreState()
         {
- 
-            WoodGameModel woodGameModel = null;
-            string mydataPath = "/_SaveService/savedFiles/WoodGameModel.txt";
 
+            string mydataPath = "/_SaveService/savedFiles/WoodGameModel.txt";
             if (File.Exists(Application.dataPath + mydataPath))
             {
                 Debug.Log("File found!");
-                string str = File.ReadAllText(Application.dataPath + mydataPath);
-
+                string str  = File.ReadAllText(Application.dataPath + mydataPath);             
                 if (string.IsNullOrEmpty(str))
                 {
                     Debug.Log("string empty!");
@@ -157,9 +174,9 @@ namespace Town
             else
             {
                 Debug.Log("File Does not Exist");
-                woodGameModel= new WoodGameModel(woodGameSO);
+                woodGameModel = new WoodGameModel(woodGameSO);
             }
-            return woodGameModel;
+            return woodGameModel;         
         }
 
         void SaveGameData()

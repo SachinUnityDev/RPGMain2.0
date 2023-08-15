@@ -167,6 +167,8 @@ namespace Common
         void EndDialogue()
         {
             isDialoguePlaying = false;
+            DialogueService.Instance.dialogueModel.isPlayedOnce = true;
+            DialogueService.Instance.dialogueModel.isUnLocked = false;
             UnLoad();
         }
         void DisplayChoices()

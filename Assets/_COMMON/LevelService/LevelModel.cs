@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq; 
+using System.Linq;
+using System;
 
 namespace Common
 {
-    [System.Serializable]
+    [Serializable]
     public class ManualOptData
     {
         public Levels lvl;
@@ -16,11 +17,15 @@ namespace Common
             this.lvl = lvl;
         }
     }
-    [System.Serializable]
+    
+
+
+    [Serializable]
     public class LvlStackData
     {
         public CharNames charName;
         public List<ManualOptData> allOptionsChosen = new List<ManualOptData>();
+        public List<LvlData> allAutoDataAdded = new List<LvlData>();
         public List<LvlDataComp> allOptionsPending = new List<LvlDataComp>();
 
         public LvlStackData(CharNames charName)
@@ -52,7 +57,18 @@ namespace Common
                 Debug.Log("CHARNAME LVL DATA MISSING" + charName);
             return null;
         }
-
+        public void Add2AutoLvledStack(CharNames charName, LvlData lvlData)
+        {
+            int index = allCharLvlUpData.FindIndex(t=>t.charName == charName);
+            if(index != -1)
+            {
+                allCharLvlUpData[index].allAutoDataAdded.Add(lvlData);
+            }
+            else
+            {
+                Debug.Log(" Lvl Stack not found"); 
+            }
+        }
         public void AddOptions2ChosenStack(CharNames charName, List<LvlData> allStatData, Levels lvl)
         {
             int i = allCharLvlUpData.FindIndex(t => t.charName == charName);
@@ -66,21 +82,19 @@ namespace Common
 
         }
 
-        public void RemoveOptions2ChosenStack(CharNames charName, Levels lvl)
-        {
-            int i = allCharLvlUpData.FindIndex(t => t.charName == charName);
-            int j = allCharLvlUpData[i].allOptionsChosen.FindIndex(t => t.lvl == lvl);
-            if (allCharLvlUpData[i].allOptionsChosen[j].allOptions.Count > 0)
-            {
-                allCharLvlUpData[i].allOptionsChosen[j].allOptions.Clear();
-            }
-            //foreach (var stat in allStatData)
-            //{
-            //    allCharLvlUpData[i].allOptionsChosen[j].allOptions.Remove(stat);
-            //}
-        }
-
-
+        //public void RemoveOptions2ChosenStack(CharNames charName, Levels lvl)
+        //{
+        //    int i = allCharLvlUpData.FindIndex(t => t.charName == charName);
+        //    int j = allCharLvlUpData[i].allOptionsChosen.FindIndex(t => t.lvl == lvl);
+        //    if (allCharLvlUpData[i].allOptionsChosen[j].allOptions.Count > 0)
+        //    {
+        //        allCharLvlUpData[i].allOptionsChosen[j].allOptions.Clear();
+        //    }
+        //    //foreach (var stat in allStatData)
+        //    //{
+        //    //    allCharLvlUpData[i].allOptionsChosen[j].allOptions.Remove(stat);
+        //    //}
+        //}
         public void AddOptions2PendingStack(CharNames charName, List<LvlData> allStatData1
             ,List<LvlData> allStatData2, Levels lvl)
         {

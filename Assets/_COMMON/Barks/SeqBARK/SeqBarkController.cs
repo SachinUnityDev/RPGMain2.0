@@ -43,9 +43,6 @@ namespace Town
             seqbarkModel.isLocked = true;
 
         }
-
-       
-
         public SeqbarkModel GetSeqBarkModel(SeqBarkNames seqbarkNames)
         {
             int index = allSeqBarkModel.FindIndex(t=>t.seqbarkName== seqbarkNames);    

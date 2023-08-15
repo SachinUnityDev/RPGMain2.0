@@ -1,3 +1,4 @@
+using Ink.Parsed;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,30 +8,19 @@ namespace Common
 {
     public class LevelService : MonoSingletonGeneric<LevelService>
     {
-
-        /// <summary>
-        /// move to ally and enemy controller
-        /// lvl Model allies to record and hold data in the proper format
-        /// 
-        /// 
-        /// </summary>
-
-
         public LevelUpSO levelUpSO;
         public LvlUpCompSO lvlUpCompSO;
         public LvlNExpSO lvlNExpSO;
 
-        public LevelModel lvlModel; 
-
-
-        [Header("Global var")]
-        [SerializeField] CharModel charModel;
-        [SerializeField] CharController charController;
+             
 
         [Header("Game Init")]
         public bool isNewGInitDone = false;
 
-        
+        CharController charController;
+        CharModel charModel;
+
+        public LevelModel lvlModel; 
         private void Start()
         {
             
@@ -43,23 +33,22 @@ namespace Common
 
             isNewGInitDone = true;
         }
-
+        // When Ally/char is created 
         public void LevelUpInitAlly(CharController charController)  // ALLY
         {
             charModel = charController.charModel;
-            this.charController = charController;
+            CharacterSO charSO = CharService.Instance.GetCharSO(charModel); 
 
-            CharacterSO charSO = CharService.Instance.GetCharSO(charModel);
 
             Levels initLvl = (Levels)charModel.charLvl;
             Levels finalLvl = (Levels)charSO.charLvl;
             if (charModel.orgCharMode == CharMode.Ally)
             {
-                AutoLvlUpAlly(initLvl, finalLvl);
+                AutoLvlUpAlly(charController, initLvl, finalLvl);
             }
         }
 
-        // to be called from the view controller
+        // Called from the view controller
         public void ManLvlUp(CharNames charName, List<LvlData> optionChosen)
         {
             charController = CharService.Instance.GetCharCtrlWithName(charName);
@@ -72,29 +61,21 @@ namespace Common
             lvlModel.AddOptions2ChosenStack(charName, optionChosen, (Levels)charModel.charLvl);
         }
 
-        // connect to event on exp
-        public bool ChkLvlUp(CharModel charModel, int expNeeded)
+        public void AutoLvlUpAlly(CharController charController, Levels initLvl, Levels finalLvl)
         {
-            int currExp = charModel.mainExp;
-            if (currExp - expNeeded >= 0)
-                return true;
-            else
-                return false; 
-        }
+            this.charController= charController;    
+            this.charModel= charController.charModel;
 
-        void AutoLvlUpAlly(Levels initLvl, Levels finalLvl)
-        {
-          
             int lvlDiff = finalLvl - initLvl;
             if ((lvlDiff) == 1)  // can be removed
             {
                 AutoLvlUpByOne(finalLvl);
             }
             else
-            {                
+            {
                 for (int i = (int)initLvl; i <= (int)finalLvl; i++)
                 {
-                    AutoLvlUpByOne((Levels)(i + 1)); 
+                    AutoLvlUpByOne((Levels)(i + 1));
                 }
             }
         }
@@ -104,40 +85,32 @@ namespace Common
             ArcheType heroType = charModel.heroType;
             LvlDataComp lvlDataComp = lvlUpCompSO.GetLvlData(heroType, finalLvl);
             Add2ManPendingStack(finalLvl);
+           
+
 
             //int expNeeded = lvlNExpSO.GetTotalExpPts4Lvl((int)finalLvl);
             //if (ChkLvlUp(charModel, expNeeded))
-            
+
             foreach (LvlData stat in lvlDataComp.allStatDataAuto)
-                {                 
-                        charController.ChangeAttrib(CauseType.LevelUp, 1, 1, stat.attribName
-                           , stat.val, true);                  
-                }
-           
-            charModel.charLvl++; 
+            {
+                charController.ChangeAttrib(CauseType.LevelUp, 1, 1, stat.attribName
+                   , stat.val, true);
+                lvlModel.Add2AutoLvledStack(charModel.charName, stat); 
+            }
+
+            charModel.charLvl++;
         }
+      
+
         void Add2ManPendingStack(Levels finalLvl)
         {
-            CharNames charName = charController.charModel.charName;
-             LvlDataComp lvlDataComp = lvlUpCompSO.GetLvlData(charModel.heroType, finalLvl);
+            CharNames charName = charModel.charName;
+            LvlDataComp lvlDataComp = lvlUpCompSO.GetLvlData(charModel.heroType, finalLvl);
             List<LvlData> option1 = lvlDataComp.allStatDataOption1;
             List<LvlData> option2 = lvlDataComp.allStatDataOption2;
 
             lvlModel.AddOptions2PendingStack(charName, option1, option2, finalLvl);
         }
-
-
-        
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -188,11 +161,6 @@ namespace Common
         }
         #endregion
 
-
-
-
-    
-      
     }
 
 

@@ -4,11 +4,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using DG.Tweening; 
+using DG.Tweening;
+using UnityEngine.UI;
 namespace Town
 {
-    public class ContinueBtnPtrEvents : MonoBehaviour, IPointerClickHandler
+    public class ContinueBtnPtrEvents : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
+        [Header("Sprites")]
+
+        [SerializeField] Sprite spriteN;
+        [SerializeField] Sprite spriteHL;
+        [SerializeField] Sprite spriteClicked;
+
+        [Header("Global Var")]
         [SerializeField] bool isQuickSellDone;
         [SerializeField] bool isExpConvertDone;
         List<ItemDataWithQty> allItemDataQty = new List<ItemDataWithQty>();
@@ -16,6 +24,8 @@ namespace Town
         WoodGameController1 woodController;
         WoodGameData woodGameData;
         RewardsView rewardView;
+        Image img; 
+
         private void Start()
         {
             isQuickSellDone = false;
@@ -29,6 +39,9 @@ namespace Town
             this.woodGameView= woodGameView;
             this.woodController = woodController;   
             this.rewardView = rewardView;
+            img = GetComponent<Image>();
+            img.sprite = spriteN;
+            
             woodGameView.OnRewardQuickSell -= OnQuickSell;
             woodGameView.OnRewardQuickSell += OnQuickSell;
             woodGameView.OnExpConvert -= OnExpConvert;
@@ -52,7 +65,8 @@ namespace Town
         public void OnPointerClick(PointerEventData eventData)
         {
             rewardView.ContinueSeq(); 
-           ContinueActions();
+             ContinueActions();
+            img.sprite = spriteClicked; 
         }
 
         void ContinueActions()
@@ -74,6 +88,16 @@ namespace Town
                     InvService.Instance.invMainModel.AddItem2CommInv(itm);
                 }
             }
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            img.sprite = spriteHL; 
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            img.sprite = spriteN; 
         }
     }
 }

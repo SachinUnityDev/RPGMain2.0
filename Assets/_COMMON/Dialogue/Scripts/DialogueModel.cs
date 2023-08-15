@@ -20,6 +20,8 @@ namespace Common
         public bool isUnLocked;
         public bool isRepeatable;
         public bool isSkippable;
+        public bool isPlayedOnce; 
+
         
 
         public GameState gameState;
@@ -36,6 +38,7 @@ namespace Common
             isUnLocked = diaSO.isUnLocked;
             isRepeatable = diaSO.isRepeatable;
             isSkippable= diaSO.isSkippable;
+            isPlayedOnce = false; 
 
             gameState = diaSO.gameState;
             charInDialogue = diaSO.charInDialogue.DeepClone();

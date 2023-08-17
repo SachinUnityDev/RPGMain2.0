@@ -505,6 +505,15 @@ namespace Common
         }
         #endregion
 
+        #region Change Char State
+
+        public void CharStateChg(CharNames charName, StateOfChar stateOfChar)
+        {
+           CharController charController = GetCharCtrlWithName(charName);
+            charController.charModel.stateOfChar= stateOfChar;  
+        }
+        #endregion
+
 
         private void Update()
         {

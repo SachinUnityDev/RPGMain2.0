@@ -12,6 +12,10 @@ namespace Quest
 {
     public class QuestMissionService : MonoSingletonGeneric<QuestMissionService>
     {
+        public Action<QuestNames> OnQuestStart; 
+        public Action<QuestNames> OnQuestEnd;
+        
+        
         public Action<QuestMode> OnQuestModeChg;
         public Action<QuestModel> OnBountyQUnboxed;
         public Action<QuestModel> OnBountyQReSpawn; 
@@ -161,6 +165,23 @@ namespace Quest
 
             // in town view for Quest failed return 
         }
+
+
+
+        #region START and END OF the Quest
+
+        public void On_QuestStart(QuestNames questName)
+        {
+            questController.questModel = GetQuestModel(questName);
+            OnQuestStart?.Invoke(questName);
+        }
+        public void On_QuestEnd(QuestNames questNames)
+        {
+            Debug.Log("QuestEnd"); 
+            OnQuestEnd?.Invoke(questNames); 
+        }
+
+        #endregion 
 
     }
 }

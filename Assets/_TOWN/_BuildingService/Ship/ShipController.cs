@@ -58,6 +58,17 @@ namespace Town
             }
         
         }
+        public void UnLockBuildIntType(BuildInteractType buildIntType, bool unLock)
+        {
+            foreach (BuildIntTypeData buildData in shipModel.buildIntTypes)
+            {
+                if (buildData.BuildIntType == buildIntType)
+                {
+                    buildData.isUnLocked = unLock;
+                    shipView.InitBuildIntBtns(shipView as BuildView, shipModel as BuildingModel);
+                }
+            }
+        }
 
     }
 }

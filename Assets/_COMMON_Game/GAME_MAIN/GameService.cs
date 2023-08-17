@@ -45,7 +45,7 @@ namespace Common
                 GameInit(GameState.InTown, GameDifficulty.Easy, LocationName.Nekkisari); 
             }else if (index == (int)GameScene.Quest)
             {
-                GameInit(GameState.InQuest, GameDifficulty.Easy, LocationName.Nekkisari);
+                GameInit(GameState.InQuestRoom, GameDifficulty.Easy, LocationName.Nekkisari);
             }else if (index == (int)GameScene.Combat)
             {
                 GameInit(GameState.InCombat, GameDifficulty.Easy, LocationName.Nekkisari);

@@ -18,4 +18,16 @@ public class SafekeepController : MonoBehaviour
         BuildingIntService.Instance.allBuildModel.Add(safekeepModel);
 
     }
+
+    public void UnLockBuildIntType(BuildInteractType buildIntType, bool unLock)
+    {
+        //foreach (BuildIntTypeData buildData in safekeepModel.buildIntTypes)
+        //{
+        //    if (buildData.BuildIntType == buildIntType)
+        //    {
+        //        buildData.isUnLocked = unLock;
+        //        safekee.InitBuildIntBtns(houseView as BuildView, houseModel as BuildingModel);
+        //    }
+        //}
+    }
 }

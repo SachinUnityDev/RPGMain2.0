@@ -173,8 +173,6 @@ namespace Town
             return 0; 
         }
 
-
-
         #endregion
         public void UnLockDiaInt(BuildingNames buildName, NPCNames npcName, DialogueNames diaName, bool isUnLock)
         {

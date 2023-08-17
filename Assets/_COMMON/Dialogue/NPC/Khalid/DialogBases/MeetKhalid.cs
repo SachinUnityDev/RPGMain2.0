@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Town;
@@ -51,15 +52,19 @@ namespace Common
 
             WelcomeService.Instance.welcomeView.RevealWelcomeTxt("End Day by clicking the button on bottom right");
             BuildingIntService.Instance.houseController.UnLockBuildIntType(BuildInteractType.EndDay, true);
-            CalendarService.Instance.OnChangeTimeState += (TimeState timeState) => LockAgainOnDayEnd();
+            CalendarService.Instance.OnChangeTimeState -= LockAgainOnDayEnd;
+            CalendarService.Instance.OnChangeTimeState += LockAgainOnDayEnd;
             BuildingIntService.Instance.UnLockABuild(BuildingNames.Tavern, true); 
         }
-        void LockAgainOnDayEnd()
+        void LockAgainOnDayEnd(TimeState timeState)
         {
-            WelcomeService.Instance.welcomeView.RevealWelcomeTxt("Exit the House and enter the Tavern");
+            string str = "Exit the House and enter the Tavern";
+            WelcomeService.Instance.welcomeView.RevealWelcomeTxt(str);
             BuildingIntService.Instance.houseController.UnLockBuildIntType(BuildInteractType.EndDay, false);
-            CalendarService.Instance.OnChangeTimeState -= (TimeState timeState) => LockAgainOnDayEnd();
+            CalendarService.Instance.OnChangeTimeState -= LockAgainOnDayEnd;
+            str = "";
         }
 
+    
     }
 }

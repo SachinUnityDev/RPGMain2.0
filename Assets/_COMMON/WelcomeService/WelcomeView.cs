@@ -11,9 +11,13 @@ namespace Town
     public class WelcomeView : MonoBehaviour
     {
         GameObject canvas;
+
+
+        [Header(" TBR")]
         [SerializeField] Button continueBtn;
         [SerializeField] Transform welcomeTxt;
-
+        [SerializeField] TextMeshProUGUI headingTxt; 
+        [SerializeField] TextMeshProUGUI welcomeDesc; 
         bool isRevealing = false; 
 
         void Start()
@@ -25,6 +29,17 @@ namespace Town
         public void InitWelcomeView()
         {   
             gameObject.SetActive(true);
+            // text desc
+            if (WelcomeService.Instance.isWelcomeRun)
+            {
+                headingTxt.text = "Welcome"; 
+                welcomeDesc.text = "At last, you arrived in the city of Nekkisari. After the long journey, fatigue surges through your body and you’re looking forward to finding a tavern and resting. But first, you need to find Khalid, the man your father told you to find in his dying words."; 
+            }
+            else
+            {
+                headingTxt.text = "End of Tutorial";
+                welcomeDesc.text = "Now that the guided section of the game is complete, you are free to make your own choices. You can access the quest journal through the City Screen and select the order of quests you want to take on according to your preference. Press F1 if you need assistance on any specific screen or panel."; 
+            }
             transform.GetChild(0).gameObject.SetActive(true);
             transform.GetChild(1).gameObject.SetActive(true);
         }
@@ -32,8 +47,14 @@ namespace Town
         {
             transform.GetChild(0).gameObject.SetActive(false);
             transform.GetChild(1).gameObject.SetActive(false);
-            BarkService.Instance.seqBarkController.ShowSeqbark(SeqBarkNames.KhalidHouse); 
-              
+            if (WelcomeService.Instance.isWelcomeRun)
+            {
+                BarkService.Instance.seqBarkController.ShowSeqbark(SeqBarkNames.KhalidHouse);
+            }   
+            else
+            {
+                gameObject.SetActive(false);                  
+            }
         }
         public void RevealWelcomeTxt(string str)
         {   
@@ -45,8 +66,7 @@ namespace Town
                          .AppendCallback(() => { welcomeTxt.GetComponent<TextMeshProUGUI>().text = str; })
                          .AppendCallback(() => { welcomeTxt.gameObject.SetActive(true); })                         
                          ;
-                seqreveal.Play(); 
-                UnrevealWelcometxt();
+                seqreveal.Play().OnComplete(UnrevealWelcometxt);
             }
             else
             {
@@ -63,7 +83,7 @@ namespace Town
        void OnRevealComplete()
         {
             Debug.Log("Reveal completed ");
-            isRevealing = false;
+            isRevealing = false;          
             welcomeTxt.GetComponent<TextMeshProUGUI>().text = ""; 
             welcomeTxt.gameObject.SetActive(false);
 

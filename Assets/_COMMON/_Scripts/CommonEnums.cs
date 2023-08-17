@@ -11,7 +11,7 @@ namespace Common
     {
         None,
         InTown,    
-        InQuest,
+        InQuestRoom,
         InCombat,
         InCamp,
         InJobs,

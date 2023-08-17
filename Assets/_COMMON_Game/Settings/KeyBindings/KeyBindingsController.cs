@@ -318,11 +318,11 @@ namespace Common
         {
             int i = 0;
             questBinds = keyBindingModel.allKeyBindingData
-                                .Where(t => t.gameState == GameState.InQuest).ToList();
+                                .Where(t => t.gameState == GameState.InQuestRoom).ToList();
             foreach (Transform Child in questPage.transform)
             {
                 KeyBindingData keyData = questBinds[i];
-                if (keyData.gameState == GameState.InQuest)
+                if (keyData.gameState == GameState.InQuestRoom)
                 {
                     textTitle.text = "QUEST";
                     Child.GetComponent<KeyBindPanelEvents>().PopulateKeyBindings(keyData, this);

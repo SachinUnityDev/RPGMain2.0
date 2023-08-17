@@ -200,7 +200,11 @@ namespace Common
         {
             Debug.Log("END Day");  // day in Year .... 
             UpdateDay();
-            OnChangeTimeState(TimeState.Day);
+
+            Debug.Log("time state" + OnChangeTimeState.GetInvocationList().Length); 
+            OnChangeTimeState?.Invoke(TimeState.Day);
+
+
             OnStartOfCalDay?.Invoke(day);
             OnStartOfCalDate?.Invoke(new CalDate((MonthName)currentMonth, dayInYear)); 
         }

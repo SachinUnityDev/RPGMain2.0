@@ -75,6 +75,8 @@ namespace Town
             woodRect.offsetMax = new Vector2(0, 0); // new Vector2(-right, -top);
             isGameInitDone = true;
 
+
+
             //Sequence loadSeq = DOTween.Sequence();
             //loadSeq
             //     .AppendCallback(() => GetLoadGameData())
@@ -107,12 +109,17 @@ namespace Town
             SaveGameData();
             Destroy(woodGameGO, 0.4f);
 
+            if(WelcomeService.Instance.isWelcomeRun)
+            {
+                BuildingIntService.Instance.UnLockDiaInt(BuildingNames.House, NPCNames.Khalid, DialogueNames.AttendJob, true);
+                WelcomeService.Instance.welcomeView.RevealWelcomeTxt("Report back to Khalid");
+            }
+
             // reset params
             isGameInitDone= false;  
             isLocked= true;
-            CalendarService.Instance.On_EndDayClick(); 
-            // destroy prefab 
-            // block the game for one day 
+            CalendarService.Instance.On_EndDayClick();
+            
         }
         void UnLockOnDayChg()
         {

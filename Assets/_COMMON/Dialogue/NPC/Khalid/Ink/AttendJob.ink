@@ -1,5 +1,5 @@
 #speaker:2:	Khalid
-<br>So how was your <br/>first day at work?
+So how was your first day at work?
 		
 #speaker:1:Abbas
 Shitty. I don't like it.

@@ -44,7 +44,17 @@ namespace Town
                 templeModel.buildState = BuildingState.Available;
             
         }
-
+        public void UnLockBuildIntType(BuildInteractType buildIntType, bool unLock)
+        {
+            foreach (BuildIntTypeData buildData in templeModel.buildIntTypes)
+            {
+                if (buildData.BuildIntType == buildIntType)
+                {
+                    buildData.isUnLocked = unLock;
+                    templeView.InitBuildIntBtns(templeView as BuildView, templeModel as BuildingModel);
+                }
+            }
+        }
 
         // [Header("Top Panel")]
         // [SerializeField] GameObject topPortraits;

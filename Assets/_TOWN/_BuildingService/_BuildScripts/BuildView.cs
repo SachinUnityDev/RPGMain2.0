@@ -76,7 +76,7 @@ namespace Town
             foreach (Transform child in BGSpriteContainer)
             {
                 BuildBaseEvents baseEvents = child?.GetComponent<BuildBaseEvents>();
-                Debug.Log(" build model" + buildModel.buildingName); 
+              //  Debug.Log(" build model" + buildModel.buildingName); 
                 if(baseEvents != null)
                     baseEvents.Init(this, buildModel);
             }

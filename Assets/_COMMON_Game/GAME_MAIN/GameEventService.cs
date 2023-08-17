@@ -23,7 +23,7 @@ namespace Common
        
         void Start()
         {
-            OnGameStateChg += On_QuestStart;
+            OnGameStateChg += On_QuestRoomStart;
             OnGameStateChg += (GameState gameState) => On_TownEnter(LocationName.Nekkisari, gameState); 
         }
         
@@ -57,15 +57,14 @@ namespace Common
             
             
         }
-        public void On_QuestStart(GameState gameState)
+        public void On_QuestRoomStart(GameState gameState)
         {
-            if (gameState != GameState.InQuest)
+            if (gameState != GameState.InQuestRoom)
                 return;
             CurioService.Instance.InitCurioService();
             LootService.Instance.InitLootService();
-            
         }
-        public void On_QuestEnd()
+        public void On_QuestRoomEnd()
         {
 
         }

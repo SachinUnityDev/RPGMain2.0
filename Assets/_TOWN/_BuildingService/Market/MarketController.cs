@@ -49,6 +49,17 @@ namespace Town
             }
             marketModel.buildState = BuildingState.Available;
         }
+        public void UnLockBuildIntType(BuildInteractType buildIntType, bool unLock)
+        {
+            foreach (BuildIntTypeData buildData in marketModel.buildIntTypes)
+            {
+                if (buildData.BuildIntType == buildIntType)
+                {
+                    buildData.isUnLocked = unLock;
+                    marketView.InitBuildIntBtns(marketView as BuildView, marketModel as BuildingModel);
+                }
+            }
+        }
 
 
     }

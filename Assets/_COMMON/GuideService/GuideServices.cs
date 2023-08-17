@@ -32,7 +32,7 @@ namespace Common
                 case GameState.InTown:
                     helpName = HelpName.TownScreen; 
                     break;
-                case GameState.InQuest:
+                case GameState.InQuestRoom:
                     helpName = HelpName.QuestPrep; // to be discussed
                     break;
                 case GameState.InCombat:

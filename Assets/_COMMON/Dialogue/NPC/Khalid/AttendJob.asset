@@ -21,11 +21,11 @@ MonoBehaviour:
   isRepeatable: 0
   isSkippable: 1
   gameState: 1
-  charInDialogue: 01000000
-  NPCinDialogue: 
+  charInDialogue: 
+  NPCinDialogue: 0a000000
   locationName: 1
   dialogueAsset: {fileID: 4900000, guid: 3dece2bcefb752549ae1159c49ceef5a, type: 3}
-  diaAssetSkirmish: {fileID: 0}
+  diaAssetSkirmish: {fileID: 4900000, guid: 3dece2bcefb752549ae1159c49ceef5a, type: 3}
   diaAssetHerbalist: {fileID: 0}
   diaAssetWarden: {fileID: 0}
   interactSprites: []

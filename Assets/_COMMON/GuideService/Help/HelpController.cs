@@ -47,7 +47,7 @@ namespace Common
             {                
                 canvasGo = GameObject.FindGameObjectWithTag("TownCanvas");                
             }
-            if (GameService.Instance.gameModel.gameState == GameState.InQuest)
+            if (GameService.Instance.gameModel.gameState == GameState.InQuestRoom)
             {
                 canvasGo = GameObject.FindGameObjectWithTag("QuestCanvas");
             }

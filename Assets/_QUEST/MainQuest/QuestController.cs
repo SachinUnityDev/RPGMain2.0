@@ -19,6 +19,7 @@ namespace Quest
             CalendarService.Instance.OnStartOfCalDate += UnBoxBountyQuest;
             CalendarService.Instance.OnStartOfCalDate += (CalDate calDate)=> UpdateBountyQRespawn();
         }
+
         public void ShowQuestEmbarkView(QuestNames questName, ObjNames objName, QuestNodePtrEvents nodePtrEvents)
         {
             questModel = QuestMissionService.Instance.GetQuestModel(questName);

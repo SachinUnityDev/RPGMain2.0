@@ -58,6 +58,19 @@ namespace Town
             else
                 tavernModel.buildState = BuildingState.Available;
         }
+
+        public void UnLockBuildIntType(BuildInteractType buildIntType, bool unLock)
+        {
+            foreach (BuildIntTypeData buildData in tavernModel.buildIntTypes)
+            {
+                if (buildData.BuildIntType == buildIntType)
+                {
+                    buildData.isUnLocked = unLock;
+                    tavernView.InitBuildIntBtns(tavernView as BuildView, tavernModel as BuildingModel);
+                }
+            }
+        }
+
     }
 
     [Serializable]

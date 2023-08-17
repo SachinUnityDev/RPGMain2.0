@@ -777,7 +777,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1761031931498186557
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3266,7 +3266,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1. Nice house...
+  m_text: 1. I am back!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5447f54311c3a074583aab7e95e6966a, type: 2}
   m_sharedMaterial: {fileID: -1283144925744203529, guid: 5447f54311c3a074583aab7e95e6966a,
@@ -3350,17 +3350,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   diaModel:
     DiaID: 0
-    dialogueName: 1
-    dialogueTitle: Nice house...
+    dialogueName: 4
+    dialogueTitle: I am back!
     npcName: 10
     charName: 0
     isUnLocked: 1
     isRepeatable: 0
-    isSkippable: 0
-    isPlayedOnce: 0
+    isSkippable: 1
+    isPlayedOnce: 1
     gameState: 1
-    charInDialogue: 01000000
-    NPCinDialogue: 
+    charInDialogue: 
+    NPCinDialogue: 0a000000
     locationName: 1
 --- !u!1 &5110574639865559088
 GameObject:

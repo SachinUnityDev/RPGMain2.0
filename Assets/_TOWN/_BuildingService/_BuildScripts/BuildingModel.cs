@@ -19,7 +19,7 @@ namespace Town
     {
         Locked,
         UnLockedNAvail,        
-        UnAvaiable,
+        UnAvailable,
     }
     [Serializable]
     public class DialogueData

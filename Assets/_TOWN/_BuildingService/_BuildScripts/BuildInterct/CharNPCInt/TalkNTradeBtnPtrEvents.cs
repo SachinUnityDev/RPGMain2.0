@@ -25,9 +25,7 @@ namespace Town
         [SerializeField] float lastClick = 0f;
         private void Awake()
         {
-
             img= GetComponent<Image>();
-            
         }
         private void Start()
         {

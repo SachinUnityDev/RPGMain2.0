@@ -2,6 +2,7 @@ using Common;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Disposables;
 using UnityEngine;
 
 
@@ -12,7 +13,7 @@ namespace Town
     public class TalkNTradeBtnView : MonoBehaviour
     {
         public BuildView buildView;
-
+       
         bool isJustTalk = false; 
         void Start() // this game obj wil toggle on and off should avoid multiple subscriptions
         {
@@ -28,7 +29,13 @@ namespace Town
         public void InitTalkNTrade(NPCIntData nPCInteractData, BuildView buildView)
         {
             this.buildView = buildView;
-            isJustTalk = !nPCInteractData.allInteract.Any(t => t.nPCIntType == IntType.Trade); 
+            isJustTalk = !nPCInteractData.allInteract.Any(t => t.nPCIntType == IntType.Trade);
+            if (transform.GetChild(0).gameObject.activeInHierarchy ||
+                transform.GetChild(1).gameObject.activeInHierarchy)
+            {
+                HideBtns();
+                return;
+            }
             if (!isJustTalk)
             {   
                 ShowBtns();

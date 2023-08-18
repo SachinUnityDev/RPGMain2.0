@@ -81,7 +81,6 @@ namespace Town
             this.currWoodGameData = currWoodGameData;            
             sliderView.Init(this, currWoodGameData);           
         }
-        
         public void ShowStartPanel()
         {
             if(currWoodGameData.isPlayedOnce)

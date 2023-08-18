@@ -60,12 +60,9 @@ namespace Town
                     buildView.GetNPCInteractPanel(IntType.Talk);
                 talkPanel.gameObject.SetActive(true);
                 if(interactData != null)
-                {
-                    Debug.Log(" dial " + interactData.nPCNames + talkPanel.GetComponent<DialogueView>().gameObject.name); 
+                {   
                     talkPanel.GetComponent<DialogueView>().ShowDialogueList(CharNames.None, interactData.nPCNames);
                 }
-                
-                
             }
         }
 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: 2
   questNameStr: The Power within
-  questState: 1
+  questState: 2
   allObjSO:
   - {fileID: 11400000, guid: 8829d630dbe000b41a94ca3898a95f35, type: 2}
   - {fileID: 11400000, guid: a6db4e2966c62124d8dbe38bbec484ba, type: 2}
@@ -26,3 +26,8 @@ MonoBehaviour:
   questMode: 2
   expBase: 50
   expMultiplier: 20
+  isUnBoxed: 0
+  calDate:
+    monthName: 0
+    day: 0
+  days2Respawn: 0

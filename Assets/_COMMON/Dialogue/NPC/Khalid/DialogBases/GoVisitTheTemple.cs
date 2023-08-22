@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Town;
 using UnityEngine;
 
 
@@ -23,7 +24,7 @@ namespace Common
 
         public void OnDialogueEnd()
         {
-            
+            BuildingIntService.Instance.UnLockABuild(BuildingNames.Temple, true); 
         }
     }
 }

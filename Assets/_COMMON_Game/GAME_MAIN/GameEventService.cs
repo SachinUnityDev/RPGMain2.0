@@ -35,7 +35,8 @@ namespace Common
 
             if (gameState != GameState.InTown)
                 return; 
-                WelcomeService.Instance.InitWelcome();
+        
+                
                 CalendarService.Instance.Init();
                 BuildingIntService.Instance.InitBuildIntService();
                 EncounterService.Instance.EncounterInit();
@@ -54,8 +55,12 @@ namespace Common
                 TownService.Instance.Init(locationName);
                 OnTownEnter?.Invoke(locationName);
                 QuestMissionService.Instance.InitQuestMission();
-            
-            
+
+            if (WelcomeService.Instance.isQuickStart)
+                WelcomeService.Instance.On_QuickStart();
+            else
+                WelcomeService.Instance.InitWelcome();
+
         }
         public void On_QuestRoomStart(GameState gameState)
         {

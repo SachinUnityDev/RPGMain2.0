@@ -14,8 +14,11 @@ namespace Quest
     {
         public Action<QuestNames> OnQuestStart; 
         public Action<QuestNames> OnQuestEnd;
-        
-        
+
+        public Action<QuestNames, ObjNames> OnObjStart;
+        public Action<QuestNames, ObjNames> OnObjEnd;
+
+
         public Action<QuestMode> OnQuestModeChg;
         public Action<QuestModel> OnBountyQUnboxed;
         public Action<QuestModel> OnBountyQReSpawn; 
@@ -24,9 +27,12 @@ namespace Quest
         [Header("QuestMode")]
         public QuestMode currQuestMode;
         
-        [Header(" Q Main ")]
+        [Header(" Q Main TBR")]
         public AllQuestSO allQuestMainSO;        
         public QuestController questController;
+
+        [Header(" Q Factory TBR")]
+        public QuestFactory questFactory;
 
         [Header(" Quest View")]
         public Transform QuestView;
@@ -35,13 +41,12 @@ namespace Quest
         public List<QuestModel> allQuestModels = new List<QuestModel>();
         public List<QuestBase> allQuestBase = new List<QuestBase>();
         [SerializeField] int questBaseCount = 0; 
-        public QuestFactory questFactory; 
+        
 
         void Start()
         {
             currQuestMode = QuestMode.Stealth; 
-            questFactory = GetComponent<QuestFactory>();
-            questController = GetComponent<QuestController>();  
+         
         }
 
         public void InitQuestMission()
@@ -108,7 +113,6 @@ namespace Quest
             questModels = allQuestModels.Where(t=>t.questType == questType).ToList();
             return questModels;
         }
-
         public List<QuestMode> GetOtherQMode()
         {
             List<QuestMode> questModes = new List<QuestMode>(); 
@@ -148,7 +152,6 @@ namespace Quest
 
 
         }
-
         #endregion
         public void On_QuestResult(bool isSucccess)
         {
@@ -171,15 +174,39 @@ namespace Quest
         #region START and END OF the Quest
 
         public void On_QuestStart(QuestNames questName)
-        {
-            questController.questModel = GetQuestModel(questName);
+        {   
+            questController.questModel = GetQuestModel(questName);          
+            ObjModel objModel = questController.questModel.allObjModel[0];
+            objModel.objState = QuestState.UnLocked; 
+            questController.objModel = objModel; 
+            On_ObjStart(questName, questController.objModel.objName);
             OnQuestStart?.Invoke(questName);
         }
         public void On_QuestEnd(QuestNames questNames)
         {
-            Debug.Log("QuestEnd"); 
+            Debug.Log("QuestEnd");
+            QuestModel questModel = GetQuestModel(questNames);
+            questModel.OnQuestCompleted();
+            On_ObjEnd(questNames, questController.objModel.objName);
             OnQuestEnd?.Invoke(questNames); 
         }
+
+        public void On_ObjStart(QuestNames questName, ObjNames objName)
+        {       
+            ObjModel objModel = questController.questModel.GetObjModel(objName);
+            
+            questController.objModel = objModel;
+            OnObjStart?.Invoke(questName, objName);
+        }
+        public void On_ObjEnd(QuestNames  questName, ObjNames objName)
+        {
+            ObjModel objModel = questController.questModel.GetObjModel(objName);
+            objModel.OnObjCompleted();
+
+            OnObjEnd?.Invoke(questName, objName);
+        }
+
+    
 
         #endregion 
 

@@ -119,8 +119,7 @@ namespace Common
                 return;
             }
             Iitems item = ItemsInSlot[0];
-            tradeSelectView.RemoveItemFrmSelectLs(item);
-           // InvService.Instance.invMainModel.RemoveItemFrmExcessInv(item);  // ITEM REMOVED FROM INV MAIN MODEL HERE
+            tradeSelectView.RemoveItemFrmSelectLs(item);           
             ItemsInSlot.Remove(item);
             itemCount--;
             if (ItemsInSlot.Count >= 1)
@@ -148,11 +147,11 @@ namespace Common
             else
                 return true;
         }
-        public bool AddItem(Iitems item, bool onDropOrRtClick = true)
+        public bool AddItem(Iitems item, bool onDrop = true)
         {
             if (IsEmpty())
             {
-                AddItemOnSlot(item, onDropOrRtClick);
+                AddItemOnSlot(item, onDrop);
                 return true;
             }
             else
@@ -161,7 +160,7 @@ namespace Common
                 {
                     if (ItemsInSlot.Count < item.maxInvStackSize)  // SLOT STACK SIZE 
                     {
-                        AddItemOnSlot(item, onDropOrRtClick);
+                        AddItemOnSlot(item, onDrop);
                         return true;
                     }
                     else
@@ -178,11 +177,11 @@ namespace Common
                 }
             }
         }
-        void AddItemOnSlot(Iitems item, bool onDropORRtClick)
+        void AddItemOnSlot(Iitems item, bool onDrop)
         {
             ItemsInSlot.Add(item);
             itemCount++;
-            if (onDropORRtClick)  // can only be added here by drop 
+            if (onDrop)  // can only be added here by drop 
             {
                 tradeSelectView.AddItem2SelectLs(item);
             }
@@ -255,7 +254,7 @@ namespace Common
             {
                 if (item != null)
                 {
-                    SwapItem2TradeScroll(item, true);
+                    SwapItem2TradeScroll(item, false);
                     ClearSlot();
                 }
             }

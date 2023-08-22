@@ -38,6 +38,7 @@ namespace Quest
             isUnBoxed = questSO.isUnBoxed; 
             calDate = questSO.calDate.DeepClone();
             days2Respawn= questSO.days2Respawn;
+
         }
 
         public ObjModel GetObjModel(ObjNames objName)
@@ -49,6 +50,16 @@ namespace Quest
                 Debug.Log("Obj model not found" + objName);
             return null; 
         }
+
+        public void OnQuestCompleted()
+        {
+            questState = QuestState.Completed;
+            foreach (ObjModel obj in allObjModel)
+            {
+                obj.objState = QuestState.Completed; 
+            }
+        }
+
 
     }
 }

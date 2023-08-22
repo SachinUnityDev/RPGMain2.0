@@ -14,10 +14,7 @@ namespace Town
         BuildView buildView;
         BuildingModel buildModel;
         AllBuildSO allbuildSO;
-        private void Awake()
-        {
-            btnContainer = transform.GetChild(0);
-        }
+       
 
         public void InitInteractBtns(BuildView buildView, BuildingModel buildModel)
         {

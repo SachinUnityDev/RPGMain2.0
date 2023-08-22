@@ -71,12 +71,7 @@ namespace Town
             isBuyBtnPressed = false;
             FillSellSlots();
         }
-        void OnExitBtnPressed()
-        {
-            // clear trade box 
-            // reset to buy
-        }
-
+   
         public void OnTradePressed()
         {
             if(isBuyBtnPressed)

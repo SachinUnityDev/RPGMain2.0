@@ -1,5 +1,6 @@
 using Common;
 using Interactables;
+using Quest;
 using System.Collections;
 using System.Collections.Generic;
 using System.Web.Services.Description;
@@ -18,13 +19,14 @@ namespace Town
         [SerializeField]GameObject cornerBtns;
 
         public bool isWelcomeRun = false;
+        public bool isQuickStart = false; 
         [SerializeField] int welcomeRunEndDay; 
 
         void Start()
         {
             
         }
-
+        #region WELCOME TWO DAY GAME PLAY GUIDE
         public void InitWelcome()
         {
             isWelcomeRun = true;
@@ -33,17 +35,22 @@ namespace Town
             cornerBtns.SetActive(false);
             welcomeView.InitWelcomeView();           
         }
-        public void InitWelcomeNormal()
+        public void InitWelcomeComplete()
         {
             isWelcomeRun = false;
             welcomeController = GetComponent<WelcomeController>();
           
             // town btns unlocked
             cornerBtns.SetActive(true);
-            welcomeView.InitWelcomeView();
+            if (isQuickStart)
+            {
 
-           
-            BuildingIntService.Instance.ChgCharState(BuildingNames.Tavern, CharNames.Cahyo, NPCState.UnLockedNAvail);
+            }
+            else
+            {
+                welcomeView.InitWelcomeView();
+            }
+            BuildingIntService.Instance.ChgCharState(BuildingNames.Tavern, CharNames.Cahyo, NPCState.UnLockedNAvail, false);
 
             CalendarService.Instance.OnStartOfCalDay -= GoVisitTemple2dayGap;
             CalendarService.Instance.OnStartOfCalDay += GoVisitTemple2dayGap;
@@ -65,7 +72,7 @@ namespace Town
             BuildingIntService.Instance.tavernController.UnLockBuildIntType(BuildInteractType.Trophy, true);
             BuildingIntService.Instance.tavernController.UnLockBuildIntType(BuildInteractType.BuyDrink, true);
             BuildingIntService.Instance.tavernController.UnLockBuildIntType(BuildInteractType.Bounty, true);
-            BuildingIntService.Instance.tavernController.UnLockBuildIntType(BuildInteractType.EndDay, true);            
+            BuildingIntService.Instance.tavernController.UnLockBuildIntType(BuildInteractType.EndDay, true);
         }
 
         void GoVisitTemple2dayGap(int day)
@@ -77,6 +84,43 @@ namespace Town
 
                 CalendarService.Instance.OnStartOfCalDay -= GoVisitTemple2dayGap;
             }
+        }
+        #endregion
+
+        public void On_QuickStart()
+        {
+            InitWelcomeComplete();
+            // unlock buildings
+            BuildingIntService.Instance.UnLockABuild(BuildingNames.Tavern, true);
+            BuildingIntService.Instance.UnLockABuild(BuildingNames.Marketplace, true);
+            BuildingIntService.Instance.UnLockABuild(BuildingNames.House, true);
+
+            // Npc 
+            BuildingIntService.Instance.ChgNPCState(BuildingNames.Marketplace, NPCNames.Amish, NPCState.UnLockedNAvail, false);
+            BuildingIntService.Instance.ChgNPCState(BuildingNames.Marketplace, NPCNames.Amadi, NPCState.UnLockedNAvail, false);
+            BuildingIntService.Instance.ChgNPCState(BuildingNames.Marketplace, NPCNames.Kamila, NPCState.UnLockedNAvail, false);
+            BuildingIntService.Instance.ChgNPCState(BuildingNames.Marketplace, NPCNames.Omobolanle, NPCState.UnLockedNAvail, false);
+
+            BuildingIntService.Instance.ChgNPCState(BuildingNames.Tavern, NPCNames.Greybrow, NPCState.UnLockedNAvail, false);
+
+            BuildingIntService.Instance.ChgNPCState(BuildingNames.House, NPCNames.Khalid, NPCState.UnLockedNAvail, false);
+
+
+            // Dailogue Completed 
+            DialogueService.Instance.GetDialogueModel(DialogueNames.MeetKhalid).isPlayedOnce= true;
+            DialogueService.Instance.GetDialogueModel(DialogueNames.MeetGreybrow).isPlayedOnce = true;
+            DialogueService.Instance.GetDialogueModel(DialogueNames.RetrieveDebt).isPlayedOnce = true;
+            DialogueService.Instance.GetDialogueModel(DialogueNames.DebtIsClear).isPlayedOnce = true;
+            DialogueService.Instance.GetDialogueModel(DialogueNames.AttendJob).isPlayedOnce = true;
+
+            // Quest model update the first quest completed
+            QuestModel questModel = 
+                 QuestMissionService.Instance.GetQuestModel(QuestNames.LostMemory);            
+            questModel.OnQuestCompleted();
+
+            QuestMissionService.Instance.On_QuestStart(QuestNames.ThePowerWithin); 
+
+
         }
 
 

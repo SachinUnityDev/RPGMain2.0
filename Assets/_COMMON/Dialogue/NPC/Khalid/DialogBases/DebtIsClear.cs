@@ -1,3 +1,4 @@
+using Quest;
 using System.Collections;
 using System.Collections.Generic;
 using Town;
@@ -22,14 +23,15 @@ namespace Common
 
         public void OnDialogueEnd()
         {
-            WelcomeService.Instance.welcomeView.RevealWelcomeTxt("End Day by clicking the button on bottom right");
+          
             BuildingIntService.Instance.houseController.UnLockBuildIntType(BuildInteractType.EndDay, true);
             CalendarService.Instance.OnChangeTimeState -= LockAgainOnDayEnd_Debt;
             CalendarService.Instance.OnChangeTimeState += LockAgainOnDayEnd_Debt;
             BuildingIntService.Instance.OnBuildUnload -= StartJob;
             BuildingIntService.Instance.OnBuildUnload += StartJob;
-            BuildingIntService.Instance.ChgNPCState(BuildingNames.Tavern, NPCNames.Tahir, NPCState.Locked);
-
+            BuildingIntService.Instance.ChgNPCState(BuildingNames.Tavern, NPCNames.Tahir, NPCState.Locked, false);
+            QuestMissionService.Instance.On_ObjStart(QuestNames.LostMemory, ObjNames.AttendToJob);
+            WelcomeService.Instance.welcomeView.RevealWelcomeTxt("End Day by clicking the button on bottom right");
         }
 
         void StartJob(BuildingModel buildModel, BuildView buildView)
@@ -42,7 +44,9 @@ namespace Common
         }
         void LockAgainOnDayEnd_Debt(TimeState timeState)
         {
-            WelcomeService.Instance.welcomeView.RevealWelcomeTxt("Exit the House to attend to your job");
+            if(BuildingIntService.Instance.buildName== BuildingNames.House) 
+                WelcomeService.Instance.welcomeView.RevealWelcomeTxt("Exit the House to attend to your job");
+            
             BuildingIntService.Instance.houseController.UnLockBuildIntType(BuildInteractType.EndDay, false);
             CalendarService.Instance.OnChangeTimeState -= LockAgainOnDayEnd_Debt;
         }

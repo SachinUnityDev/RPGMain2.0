@@ -22,7 +22,7 @@ namespace Common
         public void OnDialogueEnd()
         {
             // unLock tahir
-            BuildingIntService.Instance.ChgNPCState(BuildingNames.Tavern, NPCNames.Tahir, NPCState.UnLockedNAvail);
+            BuildingIntService.Instance.ChgNPCState(BuildingNames.Tavern, NPCNames.Tahir, NPCState.UnLockedNAvail, true);
             WelcomeService.Instance.welcomeView.RevealWelcomeTxt("Talk to Tahir the Mirrorman");
         }
     }

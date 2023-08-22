@@ -11,15 +11,15 @@ namespace Town
     public class WelcomeView : MonoBehaviour
     {
         GameObject canvas;
-
+        [SerializeField] const float TXT_DISPLAY_TIME = 4f; 
 
         [Header(" TBR")]
         [SerializeField] Button continueBtn;
         [SerializeField] Transform welcomeTxt;
         [SerializeField] TextMeshProUGUI headingTxt; 
         [SerializeField] TextMeshProUGUI welcomeDesc; 
-        bool isRevealing = false; 
-
+        bool isRevealing = false;
+        TextRevealer revealer;
         void Start()
         {
             continueBtn.onClick.AddListener(OnContinueBtnPressed);
@@ -42,6 +42,7 @@ namespace Town
             }
             transform.GetChild(0).gameObject.SetActive(true);
             transform.GetChild(1).gameObject.SetActive(true);
+            revealer  = welcomeTxt.GetComponentInChildren<TextRevealer>();
         }
         void OnContinueBtnPressed()
         {
@@ -58,6 +59,7 @@ namespace Town
         }
         public void RevealWelcomeTxt(string str)
         {   
+           
             if(!isRevealing) 
             {
                 Sequence seqreveal = DOTween.Sequence();
@@ -76,7 +78,7 @@ namespace Town
 
         IEnumerator WaitForSec(string str)
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(revealer.RevealTime);
             RevealWelcomeTxt(str); 
         }
 
@@ -86,17 +88,24 @@ namespace Town
             isRevealing = false;          
             welcomeTxt.GetComponent<TextMeshProUGUI>().text = ""; 
             welcomeTxt.gameObject.SetActive(false);
-
+            foreach (var anim in GameObject.FindObjectsOfType<Animation>())
+            {
+                if(anim.gameObject.name== "WelcomeTxt_sliced")
+                {
+                    Destroy(anim.gameObject, 0.2f);            
+                }
+            }
         }
-
         public void UnrevealWelcometxt()
         {
             Sequence seq = DOTween.Sequence();
             seq
-                .AppendInterval(3.5f) 
-                .AppendCallback(() => { welcomeTxt.GetComponentInChildren<TextRevealer>().Unreveal(); })                              
+                .AppendInterval(TXT_DISPLAY_TIME) 
+                .AppendCallback(() => { revealer.Unreveal();})
+                .AppendInterval(revealer.UnrevealTime)
+                .AppendCallback(() => OnRevealComplete())
                 ;
-            seq.Play().OnComplete(OnRevealComplete);
+            seq.Play();
         }
     }
 }

@@ -25,14 +25,19 @@ namespace Common
 
         public void OnDialogueEnd()
         {
-            QuestMissionService.Instance.OnQuestEnd -= ShowWelcomeBoxN;
-            QuestMissionService.Instance.OnQuestEnd += ShowWelcomeBoxN;
-            QuestMissionService.Instance.On_QuestEnd(QuestNames.LostMemory);
+            Sequence seq = DOTween.Sequence();
+            seq.AppendCallback(() => QuestMissionService.Instance.On_QuestEnd(QuestNames.LostMemory))
+               .AppendInterval(4f)
+               .AppendCallback(()=> QuestMissionService.Instance.On_QuestStart(QuestNames.ThePowerWithin))
+               .AppendInterval(4f)
+               .AppendCallback(() => ShowWelcomeBoxN(QuestNames.LostMemory))
+                ;
+            seq.Play();            
+            BuildingIntService.Instance.UnLockABuild(BuildingNames.Marketplace, true);
         }
         void ShowWelcomeBoxN(QuestNames questName)
         {
-            WelcomeService.Instance.InitWelcomeNormal();
-            QuestMissionService.Instance.OnQuestEnd -= ShowWelcomeBoxN;
+            WelcomeService.Instance.InitWelcomeComplete();            
         }
     }
 }

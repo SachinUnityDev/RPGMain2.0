@@ -194,6 +194,8 @@ namespace Common
                 choiceBtn.GetComponentInChildren<TextMeshProUGUI>().text = choice.text;
                 if(choice.text =="Warden" || choice.text == "Herbalist")
                     choiceBtn.enabled= false;
+                if (choice.text == "Poacher")  
+                    choiceBtn.enabled = false;
 
                 choiceBtn.onClick.AddListener(() => OnChoiceClick(choice));
 

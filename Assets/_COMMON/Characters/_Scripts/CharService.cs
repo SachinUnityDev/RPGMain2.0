@@ -84,7 +84,11 @@ namespace Common
                 SpawnCompanions(charName);
             }
             CharController abbas = charsInPlayControllers.Find(t => t.charModel.charName == CharNames.Abbas);
-
+            foreach (CharController charCtrl in allyInPlayControllers)
+            {
+                On_CharInit();
+                On_CharAddToParty(GetCharCtrlWithName(charCtrl.charModel.charName));
+            }
 
             isNewGInitDone = true;
 

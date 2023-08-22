@@ -115,8 +115,6 @@ namespace Common
                 return;
             }
             Iitems item = ItemsInSlot[0];
-            
-
            // InvService.Instance.invMainModel.RemoveItemFrmExcessInv(item);  // ITEM REMOVED FROM INV MAIN MODEL HERE
             ItemsInSlot.Remove(item);
             itemCount--;

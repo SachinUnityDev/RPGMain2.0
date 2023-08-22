@@ -17,9 +17,12 @@ namespace Quest
         public ObjModel(ObjSO objSO)
         {
            objName = objSO.objName;
-           objNameStr = objSO.objNameStr;
-         
+           objNameStr = objSO.objNameStr;         
            objState = objSO.objState; 
+        }
+        public void OnObjCompleted()
+        {
+            objState = QuestState.Completed; 
         }
 
     }

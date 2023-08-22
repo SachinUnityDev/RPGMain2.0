@@ -90,6 +90,13 @@ namespace Common
             {
                 currTransactBox.AddMoney(new Currency(0, 1));
             }
+            else if (currMax.silver <= currTransactBox.silver && currMax.silver > 0)
+            {
+                currMax.silver -= 1;
+                currMax.bronze += 12;
+                currTransactBox.SubMoney(new Currency(1, 0));  //- silver
+                currTransactBox.AddMoney(new Currency(0, 12)); // + 12 bronze
+            }
             transform.GetComponent<DisplayCurrency>().Display(currTransactBox);
         }
         void OnBronzeBtmBtnPressed()

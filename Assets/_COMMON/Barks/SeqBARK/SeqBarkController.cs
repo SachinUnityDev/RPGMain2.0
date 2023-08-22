@@ -67,7 +67,7 @@ namespace Town
                     BuildingIntService.Instance.houseController.houseView
                                     .GetComponent<IPanel>().Init();
                     WelcomeService.Instance.welcomeView.RevealWelcomeTxt("Click the portrait to talk with Khalid");
-                    QuestMissionService.Instance.On_QuestStart(QuestNames.LostMemory); 
+                    QuestMissionService.Instance.On_QuestStart(QuestNames.LostMemory);                    
                     break;
                 case SeqBarkNames.TavernIntro:
                     break;

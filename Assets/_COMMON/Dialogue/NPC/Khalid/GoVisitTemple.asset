@@ -17,11 +17,15 @@ MonoBehaviour:
   dialogueTitle: "Hey old man\u2026"
   npcName: 10
   charName: 0
-  isLocked: 0
+  isUnLocked: 0
   isRepeatable: 0
+  isSkippable: 1
   gameState: 1
   charInDialogue: 01000000
   NPCinDialogue: 
   locationName: 1
   dialogueAsset: {fileID: 4900000, guid: d4f5ba5a4726ffc4fa224826adc88e08, type: 3}
+  diaAssetSkirmish: {fileID: 0}
+  diaAssetHerbalist: {fileID: 0}
+  diaAssetWarden: {fileID: 0}
   interactSprites: []

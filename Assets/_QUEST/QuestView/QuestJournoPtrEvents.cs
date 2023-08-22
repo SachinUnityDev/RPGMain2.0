@@ -40,34 +40,32 @@ namespace Quest
                 txt.text = "";
                 txt.gameObject.SetActive(false);
             }
-            
         }
         void FillObjPanel()
         {
             if (questModel == null || questModel.questName == QuestNames.None) return;
             questView.objPanel.gameObject.SetActive(true);
-            bool objTobeTaken = false; 
+          
             Transform container = questView.objPanel.GetChild(1); 
             for (int i = 0; i < container.childCount; i++)
             {
                 TextMeshProUGUI txt = container.GetChild(i).GetComponent<TextMeshProUGUI>();
 
-                if (i < questModel.allObjModel.Count && !objTobeTaken)
+                if (i < questModel.allObjModel.Count)                   
                 {
-                    if (questModel.allObjModel[i].objState == QuestState.Completed)
-                    {
-                        txt.fontStyle = FontStyles.Strikethrough;
+                    if (questModel.allObjModel[i].objState == QuestState.UnLocked)
+                    { 
                         txt.text = $"{i + 1}. " + questModel.allObjModel[i].objNameStr;
-                    }
-                    else if (questModel.allObjModel[i].objState == QuestState.Locked)
-                    {
                         txt.fontStyle = FontStyles.Normal;
-                        txt.text = $"{i + 1}. " + questModel.allObjModel[i].objNameStr;
-                        objTobeTaken = true;
                     }
-                    else
+                    else if (questModel.allObjModel[i].objState == QuestState.Completed)
                     {
-                        txt.text = "";
+                        txt.text = $"{i + 1}. " + questModel.allObjModel[i].objNameStr;
+                        txt.fontStyle = FontStyles.Strikethrough;               
+                    }
+                    else if(questModel.allObjModel[i].objState == QuestState.Locked)
+                    {
+                        txt.text = "";              
                     }
                 }
                 else

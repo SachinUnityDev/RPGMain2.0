@@ -89,8 +89,9 @@ namespace Common
         public void RemoveItemFrmSelectLs(Iitems item)
         {
             item.invSlotType = SlotType.TradeScrollSlot;
-            tradeModel.allSelectItems.Remove(item);
             OnItemDeSelected(item);
+            tradeModel.allSelectItems.Remove(item);
+           
         }
         public void ClearSlotView()
         {
@@ -150,7 +151,7 @@ namespace Common
                 if(item.currency  != null)
                 {
                     netVal.SubMoney(item.currency);
-                    Debug.Log(" Currency send " + netVal.bronze + netVal.silver);
+                    Debug.Log("Currency send" + netVal.bronze + netVal.silver);
                     transactMoney.Display(netVal); 
                 }    
                 item.currency = null; 

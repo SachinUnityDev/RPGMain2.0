@@ -17,11 +17,12 @@ namespace Town
         public event Action<Iitems, TavernSlotType> OnItemWalled;
         public event Action<BuildingModel, BuildView> OnBuildInit;
         public event Action<BuildingModel, BuildView> OnBuildUnload;
-        
 
 
 
 
+        [Header("Current Building")]
+        public BuildingNames buildName; 
 
         [Header("Char and NPC Select")]
         public CharNames selectChar;
@@ -71,10 +72,12 @@ namespace Town
 
         public void On_BuildInit(BuildingModel buildModel, BuildView buildView)
         {
+            buildName = buildModel.buildingName; 
             OnBuildInit?.Invoke(buildModel, buildView);
         }
         public void On_BuildUnload(BuildingModel buildModel, BuildView buildView)
         {
+            buildName = BuildingNames.None; 
             OnBuildUnload?.Invoke(buildModel, buildView);
         }
         public void UnLockABuild(BuildingNames buildingName,bool UnLock)
@@ -115,7 +118,7 @@ namespace Town
         }
 
         #region NPC AND CHAR 
-        public void ChgNPCState(BuildingNames buildName, NPCNames npcName, NPCState npcState)
+        public void ChgNPCState(BuildingNames buildName, NPCNames npcName, NPCState npcState, bool InitBuild)
         {
             BuildingModel buildModel = GetBuildModel(buildName);
             int index = buildModel.npcInteractData.FindIndex(t => t.nPCNames == npcName); 
@@ -127,6 +130,7 @@ namespace Town
             {
                 Debug.Log("npc data not found " + npcName); 
             }
+            if(InitBuild) 
             GetBuildView(buildName).Init();
         }
         public NPCState GetNPCState(BuildingNames buildName, NPCNames npcName)
@@ -144,7 +148,7 @@ namespace Town
             return 0; 
         }
 
-        public void ChgCharState(BuildingNames buildName, CharNames charName, NPCState npcState)
+        public void ChgCharState(BuildingNames buildName, CharNames charName, NPCState npcState, bool initBuild)
         {
             BuildingModel buildModel = GetBuildModel(buildName);
             int index = buildModel.charInteractData.FindIndex(t => t.compName == charName);
@@ -156,6 +160,7 @@ namespace Town
             {
                 Debug.Log("char data not found " + charName);
             }
+            if(initBuild)
             GetBuildView(buildName).Init();
         }
         public NPCState GetCharState(BuildingNames buildName, CharNames charName)

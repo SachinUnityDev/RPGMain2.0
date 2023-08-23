@@ -10,14 +10,14 @@ namespace Intro
     {
         [Header("TBR")]
         public TextMeshProUGUI descTxt;
-        [SerializeField] Transform containerImg; 
+        [SerializeField] Transform imgContainer; 
 
         [Header("Global Var")]
-        QuickStartView quickStartView;
+        QuickStartController quickStartView;
         DialogueSO dialogueSO;
         DialogueModel dialogueModel; 
 
-        public void QuickStartPg1Init(QuickStartView quickStartView)
+        public void QuickStartPg1Init(QuickStartController quickStartView)
         {
             this.quickStartView = quickStartView;
             dialogueSO = DialogueService.Instance.GetDialogueSO(DialogueNames.MeetKhalid);
@@ -26,7 +26,7 @@ namespace Intro
 
             InteractionSpriteData InteractSprites = dialogueSO.interactSprites[0];
             int i = 0; 
-            foreach (Transform child in containerImg)
+            foreach (Transform child in imgContainer)
             {
                 child.GetComponent<Pg1OptsPtrEvents>().Init(InteractSprites.allSprites[i], this);                 
             }

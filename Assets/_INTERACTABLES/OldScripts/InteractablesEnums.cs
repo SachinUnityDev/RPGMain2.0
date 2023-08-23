@@ -27,8 +27,11 @@ namespace Interactables
         }
         public void AddMoney(Currency curr)
         {
-            silver += curr.silver;
-            bronze += curr.bronze; 
+            int addVal =  curr.BronzifyCurrency() + this.BronzifyCurrency();
+            Currency addCurr = new Currency(0, addVal); 
+            addCurr = addCurr.RationaliseCurrency();
+            silver = addCurr.silver;
+            bronze = addCurr.bronze; 
 
         }
         public bool IsMoneySufficent(Currency curr)

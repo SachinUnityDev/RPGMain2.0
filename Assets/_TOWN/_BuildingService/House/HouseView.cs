@@ -9,9 +9,6 @@ using Interactables;
 
 namespace Town
 {
-
-
-
     public class HouseView :BuildView
     {
         public Transform buyPanel;

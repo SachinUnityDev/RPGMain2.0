@@ -11,14 +11,14 @@ namespace Intro
     {
         [Header("TBR")]
         public TextMeshProUGUI descTxt;
-        [SerializeField] Transform containerImg;
+        [SerializeField] Transform imgContainer;
 
         [Header("Global Var")]
-        QuickStartView quickStartView;
+        QuickStartController quickStartView;
         DialogueSO dialogueSO;
         DialogueModel dialogueModel;
 
-        public void QuickStartPg2Init(QuickStartView quickStartView)
+        public void QuickStartPg2Init(QuickStartController quickStartView)
         {
             this.quickStartView = quickStartView;
             dialogueSO = DialogueService.Instance.GetDialogueSO(DialogueNames.DebtIsClear);
@@ -26,7 +26,7 @@ namespace Intro
             dialogueModel.isPlayedOnce = true; 
             InteractionSpriteData InteractSprites = dialogueSO.interactSprites[0];
             int i = 0;
-            foreach (Transform child in containerImg)
+            foreach (Transform child in imgContainer)
             {
                 child.GetComponent<Pg2OptsPtrEvents>().Init(InteractSprites.allSprites[i], this);
             }

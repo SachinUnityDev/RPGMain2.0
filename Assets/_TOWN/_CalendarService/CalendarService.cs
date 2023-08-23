@@ -37,7 +37,6 @@ namespace Common
         public event Action<TimeState> OnChangeTimeState;
         public event Action<CalDate> OnStartOfCalDate;
 
-
         [Header("CURRENT TIME STATE ")]
         public TimeState currtimeState;
 
@@ -45,6 +44,7 @@ namespace Common
         public int dayInGame;
         public int dayInYear; 
         public int weekCounter;
+
 
 
         // does not reset with week / Month
@@ -74,17 +74,20 @@ namespace Common
         
         void Start()
         {
-            calendarFactory = gameObject.GetComponent<CalendarFactory>();
-            calendarUIController = GetComponent<CalendarUIController>();
+            //calendarFactory = gameObject.GetComponent<CalendarFactory>();
+            //calendarUIController = GetComponent<CalendarUIController>();
             endday.onClick.AddListener(On_EndDayClick);
 
-            calendarUIController.UpdateMonthPanel(currentMonth, dayInYrName, dayInYear);
-            calendarUIController.UpdateWeekPanel(currentWeek);
+        
         }
 
         public void Init()
         {
             // define what date and time the game will start by default 
+            weekEventsController = GetComponent<WeekEventsController>();
+            weekEventsController.InitWeekController(allWeekSO);
+            calendarUIController.UpdateMonthPanel(currentMonth, dayInYrName, dayInYear);
+            calendarUIController.UpdateWeekPanel(currentWeek);
             currtimeState = TimeState.Day;
             dayInYrName = DayName.DayOfLight;// saturday
             currentWeek = WeekEventsName.WeekOfRejuvenation;
@@ -95,8 +98,7 @@ namespace Common
             currtimeState = TimeState.Day;
             dayEventsController = GetComponent<DayEventsController>();
             dayEventsController.InitDayEvent(allDaySO);
-            weekEventsController = GetComponent<WeekEventsController>();
-            weekEventsController.InitWeekController(allWeekSO);
+          
           
             isNewGInitDone = true;
 
@@ -201,7 +203,7 @@ namespace Common
             Debug.Log("END Day");  // day in Year .... 
             UpdateDay();
 
-            Debug.Log("time state" + OnChangeTimeState.GetInvocationList().Length); 
+           // Debug.Log("time state" + OnChangeTimeState.GetInvocationList().Length); 
             OnChangeTimeState?.Invoke(TimeState.Day);
 
 
@@ -210,7 +212,7 @@ namespace Common
         }
         public void On_StartOfNight(int day)
         {
-            OnChangeTimeState(TimeState.Night);
+            OnChangeTimeState?.Invoke(TimeState.Night);
             OnStartOfNight?.Invoke(day);
         }
         public void On_StartOfTheWeek(WeekEventsName weekName)
@@ -221,6 +223,15 @@ namespace Common
         public void On_StartOfTheMonth(MonthName monthName)
         {
             OnStartOfTheMonth?.Invoke(monthName);
+        }
+
+        public void MoveCalendarByDay(int day)
+        {
+            for (int i = 0; i < day; i++)
+            {
+                On_StartOfDay(dayInYear);
+                On_StartOfNight(dayInYear);
+            }
         }
 
         #endregion

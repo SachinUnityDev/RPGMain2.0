@@ -118,9 +118,9 @@ namespace Town
                  QuestMissionService.Instance.GetQuestModel(QuestNames.LostMemory);            
             questModel.OnQuestCompleted();
 
-            QuestMissionService.Instance.On_QuestStart(QuestNames.ThePowerWithin); 
+            QuestMissionService.Instance.On_QuestStart(QuestNames.ThePowerWithin);
 
-
+            CalendarService.Instance.MoveCalendarByDay(2);
         }
 
 

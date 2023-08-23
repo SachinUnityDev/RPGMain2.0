@@ -1,1 +1,1 @@
-{"isPlayedOnce":true,"currWoodGameRank":1,"currentGameSeq":1,"currGameJobExp":98}
+{"isPlayedOnce":true,"currWoodGameRank":1,"currentGameSeq":1,"currGameJobExp":129}

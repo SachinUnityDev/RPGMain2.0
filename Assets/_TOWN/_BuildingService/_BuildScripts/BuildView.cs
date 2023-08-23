@@ -55,8 +55,24 @@ namespace Town
             FillBuildBG();
             InitBuildIntPanels();
             InitNPCNCharIntPanels();
-            BuildingIntService.Instance.On_BuildInit(buildModel, this); 
+            BuildingIntService.Instance.On_BuildInit(buildModel, this);
+            DialogueService.Instance.OnDialogueStart -= ShowBtnContainer;
+            DialogueService.Instance.OnDialogueStart += ShowBtnContainer;
 
+            DialogueService.Instance.OnDialogueEnd -= HideBtnContainer;
+            DialogueService.Instance.OnDialogueEnd += HideBtnContainer;
+
+
+            btnContainer.gameObject.SetActive(true);
+        }
+
+        void ShowBtnContainer(DialogueNames dialogueName)
+        {
+            btnContainer.gameObject.SetActive(false);
+        }
+        void HideBtnContainer()
+        {
+            btnContainer.gameObject.SetActive(true);
         }
         public void InitBuildIntBtns(BuildView buildView, BuildingModel _buildModel)
         {

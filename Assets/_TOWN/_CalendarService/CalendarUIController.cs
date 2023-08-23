@@ -26,7 +26,7 @@ namespace Common
         [SerializeField] Button showWeekBtn;
 
         public PanelInScene panelInScene; 
-         void Start()
+         void Awake()
          {
             //START OF THE GAME
             townCenterPanel.SetActive(true);

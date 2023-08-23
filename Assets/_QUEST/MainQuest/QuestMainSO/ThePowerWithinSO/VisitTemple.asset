@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: VisitTemple
   m_EditorClassIdentifier: 
   objName: 5
-  objNameStr: Visit Temple
+  objNameStr: Visit Temple and meet the Soothsayer
   objState: 1
+  IsQNode: 0
   locationName: 0
   landscapeName: 0
   distanceInDays: 0

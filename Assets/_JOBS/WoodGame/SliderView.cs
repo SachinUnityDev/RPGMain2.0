@@ -64,6 +64,7 @@ namespace Town
             
             ChangeBarScale();        
             pointer.SetActive(true);
+            pointer.transform.DOMoveX(BaseBox.transform.position.x, 0.05f);
             woodGameView.gameState = WoodGameState.Running;
         }
 
@@ -80,7 +81,7 @@ namespace Town
             float clickBoxWidth = Mathf.Abs(maxClickR.transform.position.x - minClickR.transform.position.x);
 
             float availDist = Mathf.Abs(maxBaseR.transform.position.x - minBaseR.transform.position.x);
-            float randPos = Random.Range(clickBoxWidth / 2, availDist - clickBoxWidth / 2);
+            float randPos = Random.Range(clickBoxWidth/2 - 5, availDist - clickBoxWidth/2 - 5);// 5 space 
 
             // Debug.Log("POS added" + randPos + "click box width " + clickBoxWidth); 
             Vector3 finalPos = minBaseR.transform.position + new Vector3(randPos, 0f, 0f);

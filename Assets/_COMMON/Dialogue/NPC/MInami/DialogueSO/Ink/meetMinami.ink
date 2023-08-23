@@ -53,10 +53,10 @@ Indeed, a very talented follower of this temple may accompany you. He is young a
 That’s not terribly insightful.
 		
 #speaker:2:	Minami	
-I am no storyteller but a soothsayer, Abbas, dear boy. Let him come with you, just to stay nearby and see your prowess in the combat. Let the young man who is not younger than you be your companion and see if you are really an uzu.
+I am not a storyteller, but a soothsayer, Abbas, my dear boy. Allow him to accompany you, just to remain nearby and witness your skill in combat. Let the young man, who is no younger than you, be your companion and determine if you truly are an uzu.
 		
 #speaker:2:	Minami	
-He is smart this apprentice of mine, and gentle. Rayyan is his name. He will not bother you but observe you.
+He is quite clever this apprentice of mine, and gentle too. Rayyan is his name. He won't bother you, just observe.
 		
 #speaker:1:	Abbas	
 Alright, that’s fine. So when do I ask him to join?
@@ -64,12 +64,13 @@ Alright, that’s fine. So when do I ask him to join?
 #speaker:2:	Minami	
 Whenever you want!
 
-
 	
 
 -> END
 
-
+=== knotName ===
+This is the content of the knot.
+-> END
 
 
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GoBackToSoothsayer
   m_EditorClassIdentifier: 
   objName: 8
-  objNameStr: Go Back the Soothdayer
+  objNameStr: Go back to the Soothsayer
   objState: 1
   IsQNode: 0
   locationName: 0

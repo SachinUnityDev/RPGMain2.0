@@ -15,6 +15,7 @@ MonoBehaviour:
   objName: 7
   objNameStr: Check out the abandoned ships in the docks
   objState: 1
+  IsQNode: 0
   locationName: 1
   landscapeName: 8
   distanceInDays: 0

@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c785db28e34d58b48955e27dceb5fd0e, type: 3}
-  m_Name: ProofOfPower
+  m_Name: MeetRayyan
   m_EditorClassIdentifier: 
   DiaID: 0
-  dialogueName: 8
-  dialogueTitle: "Here i am\u2026"
-  npcName: 13
-  charName: 0
+  dialogueName: 28
+  dialogueTitle: Hey, are you the Water Mage?
+  npcName: 0
+  charName: 7
   isUnLocked: 0
   isRepeatable: 0
-  isSkippable: 0
+  isSkippable: 1
   gameState: 1
-  charInDialogue: 01000000
+  charInDialogue: 07000000
   NPCinDialogue: 
   locationName: 1
-  dialogueAsset: {fileID: 4900000, guid: 020b11c1f3c01fc4494833cd4ffe74c1, type: 3}
-  diaAssetSkirmish: {fileID: 4900000, guid: 020b11c1f3c01fc4494833cd4ffe74c1, type: 3}
+  dialogueAsset: {fileID: 4900000, guid: 7e06a1988864b114ab0783d24ebffa1d, type: 3}
+  diaAssetSkirmish: {fileID: 4900000, guid: 7e06a1988864b114ab0783d24ebffa1d, type: 3}
   diaAssetHerbalist: {fileID: 0}
   diaAssetWarden: {fileID: 0}
   interactSprites: []

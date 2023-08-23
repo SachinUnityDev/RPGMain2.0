@@ -30,7 +30,7 @@ namespace Common
     public class CalendarService : MonoSingletonGeneric<CalendarService>
     {
        // public event Action<DayName> OnCalendarDayStart;  // to be remove and incorported
-        public event Action<int> OnStartOfCalDay;// broadcasts day inthe game 
+        public event Action<int> OnStartOfCalDay;// broadcasts day inthe Game 
         public event Action<int> OnStartOfNight;
         public event Action<WeekEventsName, int> OnStartOfTheWeek;
         public event Action<MonthName> OnStartOfTheMonth;
@@ -205,9 +205,7 @@ namespace Common
 
            // Debug.Log("time state" + OnChangeTimeState.GetInvocationList().Length); 
             OnChangeTimeState?.Invoke(TimeState.Day);
-
-
-            OnStartOfCalDay?.Invoke(day);
+            OnStartOfCalDay?.Invoke(day);  // day in Game 
             OnStartOfCalDate?.Invoke(new CalDate((MonthName)currentMonth, dayInYear)); 
         }
         public void On_StartOfNight(int day)

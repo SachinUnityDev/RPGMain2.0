@@ -20,7 +20,7 @@ Hey, be kind man. What the heck?
 I am kidding kiddo. You know me.
 		
 #speaker:1:	Abbas	
-I hope i will not have to know you more. 
+I hope I won't have to know you more. 
 		
 #speaker:2:	Khalid	
 Who knows? Hehe. Ahh, by the way if you want to clear your mind you can just ask her. She got a nice, pure and wet way to do it. I mean she doesn't get wet herself but she makes you wet.
@@ -32,8 +32,8 @@ What are you talking about?
 Clear your mind kid. I do it. It helps you purify your thoughts and wards off your nightmares and negative mental traits.
 		
 #speaker:1:	Abbas	
-Maybe that's why your mind is like this. You are acting like a child.
-		
+Perhaps that's the reason for your dirty mind. You couldn't clear it well enough.
+
 #speaker:2:	Khalid	
 Who knows? Maybe. Hehehe. Now begone, byebye!
 		
@@ -42,6 +42,11 @@ You are the only half-wit wise man with white beard that i know. Bye!
 
 	
 
+-> END
+
+=== knotName ===
+This is the content of the knot.
+-> END
 
 
 

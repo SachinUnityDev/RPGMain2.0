@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: VisitKhalid
   m_EditorClassIdentifier: 
   objName: 4
-  objNameStr: Visit Khalid
+  objNameStr: Visit Khalid in 2 days
   objState: 1
   IsQNode: 0
   locationName: 0

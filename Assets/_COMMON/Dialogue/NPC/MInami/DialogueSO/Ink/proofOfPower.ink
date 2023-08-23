@@ -35,7 +35,7 @@ You are acting… weird.
 Well, it can't be that bad. Just a simple place of evil. Right?
 		
 #speaker:2:	Minami	
-Let me tell you from the beginning then, briefly and clearly, like the water itself. Murabo is a town set right beside the Imvula Forest. The woods are dense, the air fresh. Danger lurks there, though – danger sharper than the tip of a spear.
+Let me recount the tale from its beginning, succinct and clear, like the flowing waters. Murabo, a town nestled alongside the Imvula Forest. The woods dense, the air pure. Yet, danger hides within, sharper than a spear's edge.
 		
 #speaker:1:	Abbas	
 Let’s cut to the chase – what is needed to be done?
@@ -47,16 +47,16 @@ I want you to find the den of evil that resides within the forest, and vanquish 
 What’s there in that den?
 		
 #speaker:2:	Minami	
-Biloko they name him, a demon that haunts the poor people of Murabo. Comes in many shapes, to their village, to their dreams. And has his army of flesh eaters, Tikies some call them. Teeth sharp as…
+Biloko, they dub him, a demon haunting Murabo's downtrodden. In myriad forms, he invades their village, their dreams. Leading an army of flesh-devourers, Tikies by name. Teeth as keen as...
 		
 #speaker:1:	Abbas	
-The tip of a spear?
+A spear's edge?
 		
 #speaker:2:	Minami	
-...blades and and breath torrid like a furnace. I want you to go there, find the lair of these monsters and quench the fire that burns within them.
+...a blade, and breath scorching as a furnace. I want you to journey there, seek out the lair of these monsters, and quench the fire that rages within them.
 		
 #speaker:1:	Abbas	
-I would be honored to do that. However, there is one problem. I barely handled a few rats. How can i defeat these monsters, if they are so dangerous as you describe?
+I would be honored to do that. However, there is one problem. I barely handled a few rats. How can I defeat these monsters, if they are as dangerous as you describe?
 		
 #speaker:2:	Minami	
 You are not alone. Rayyan can help you anytime you need. I am sure there are others out there who can fill your party in.
@@ -65,14 +65,13 @@ You are not alone. Rayyan can help you anytime you need. I am sure there are oth
 Why don’t you, your highness join to my party of heroes then? Your robe would get dirty or what? Perhaps you are simply afraid.
 		
 #speaker:2:	Minami	
-For one, I am the temple’s keeper, i can’t leave it whenever i want even for such a worthy quest. And for another, what better way to measure one’s fortitude than to see his stand against evil? 
-It’s easy to be good when nothing is at stake. True character reveals in the face of atrocity.
+For one, I am the temple's keeper. I cannot leave it whenever I wish, even for such a noble quest. And for another, what better method to gauge one's strength than by observing their stance against evil? It's simple to uphold goodness when there's nothing to risk. True character is revealed in the face of adversity.
 		
 #speaker:1:	Abbas	
 Your words are encouraging. A morale boost for sure. Though, it didn’t move me – not as much as I thought it would. But anyways, no point in discussion. I just hope I wouldn’t die until that old man remembers my truth.
 		
 #speaker:2:	Minami	
-It’s good you have fine feelings for old men. I will have to send you to another man at his age. Elder of Murabo. He would guide you where to find the lair and give more insight about the demon. 
+You possess compassion for the elderly, which is commendable. I will need to direct you to another individual of his generation, an elder in Murabo. He will lead you to the lair's location and provide additional insights regarding the demon.
 		
 #speaker:1:	Abbas	
 So I will have the return of my good work from the old man?
@@ -81,7 +80,7 @@ So I will have the return of my good work from the old man?
 A real hero doesn’t care about what rewards he will get but…
 		
 #speaker:1:	Abbas	
-But what? Am I not a living man? Do I not have needs? I run around to do everything for your sake and will I get what? Just some pep talk? No way milady. Get something precious ready. I will pass by once I am done with the Tikies. 
+But what? Am I not a living man? Do I not have needs? I rush about, accomplishing everything for your sake, and what do I receive in return? Mere words of encouragement? No, milady. Prepare something valuable. Once I have dealt with the Tikies, I will expect a worthy reward.
 		
 #speaker:2:	Minami	
 Alright then. Maybe not precious but I will give you something divine. 
@@ -89,7 +88,16 @@ Alright then. Maybe not precious but I will give you something divine.
 #speaker:1:	Abbas	
 (murmurs) I hope not some prayers for Shalulu...
 
+
+
+	
+
 -> END
+
+=== knotName ===
+This is the content of the knot.
+-> END
+
 
 
 

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: RequestRayyan
   m_EditorClassIdentifier: 
   objName: 6
-  objNameStr: Request Rayyan
+  objNameStr: Request Rayyan the Water Mage to join you
   objState: 1
+  IsQNode: 0
   locationName: 0
   landscapeName: 0
   distanceInDays: 0

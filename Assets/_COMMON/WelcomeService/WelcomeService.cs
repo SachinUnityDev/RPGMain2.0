@@ -20,7 +20,7 @@ namespace Town
 
         public bool isWelcomeRun = false;
         public bool isQuickStart = false; 
-        [SerializeField] int welcomeRunEndDay; 
+        [SerializeField] int welcomeStartDay; 
 
         void Start()
         {
@@ -30,9 +30,11 @@ namespace Town
         public void InitWelcome()
         {
             isWelcomeRun = true;
+
             welcomeController = GetComponent<WelcomeController>();
             cornerBtns = GameObject.FindGameObjectWithTag("TownBtns");
             cornerBtns.SetActive(false);
+          //  welcomeStartDay = CalendarService.Instance.dayInGame;
             welcomeView.InitWelcomeView();           
         }
         public void InitWelcomeComplete()
@@ -48,13 +50,14 @@ namespace Town
             }
             else
             {
+              
                 welcomeView.InitWelcomeView();
             }
             BuildingIntService.Instance.ChgCharState(BuildingNames.Tavern, CharNames.Cahyo, NPCState.UnLockedNAvail, false);
 
-            CalendarService.Instance.OnStartOfCalDay -= GoVisitTemple2dayGap;
-            CalendarService.Instance.OnStartOfCalDay += GoVisitTemple2dayGap;
-            welcomeRunEndDay = CalendarService.Instance.dayInGame;
+            CalendarService.Instance.OnStartOfCalDate -= GoVisitTemple2dayGap;
+            CalendarService.Instance.OnStartOfCalDate += GoVisitTemple2dayGap;
+
 
             //            Interactions unlocked:
             //House
@@ -75,14 +78,13 @@ namespace Town
             BuildingIntService.Instance.tavernController.UnLockBuildIntType(BuildInteractType.EndDay, true);
         }
 
-        void GoVisitTemple2dayGap(int day)
+        void GoVisitTemple2dayGap(CalDate calDate)
         {
-            if(day >= welcomeRunEndDay)
+            if(calDate.day >= 28)
             {
                 BuildingIntService.Instance
                     .UnLockDiaInt(BuildingNames.House, NPCNames.Khalid, DialogueNames.GoVisitTemple, true);
-
-                CalendarService.Instance.OnStartOfCalDay -= GoVisitTemple2dayGap;
+                CalendarService.Instance.OnStartOfCalDate -= GoVisitTemple2dayGap;
             }
         }
         #endregion

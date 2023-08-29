@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Town;
 using UnityEngine;
 
 
@@ -21,6 +22,10 @@ namespace Common
 
         public void OnDialogueEnd()
         {
+            BuildingIntService.Instance.ChgCharState(BuildingNames.Temple, CharNames.Rayyan
+                                                                        , NPCState.UnLockedNAvail, true);
+            BuildingIntService.Instance
+                 .UnLockDiaInBuildChar(BuildingNames.Temple, CharNames.Rayyan, DialogueNames.MeetRayyan, true);
             
         }
     }

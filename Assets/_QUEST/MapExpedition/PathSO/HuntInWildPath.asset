@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25fc5ccb60dad5241a9476935f1d8e5d, type: 3}
+  m_Name: HuntInWildPath
+  m_EditorClassIdentifier: 
+  questName: 6
+  objName: 14
+  questState: 0
+  objState: 0
+  nodes:
+  - nodeSeq: 0
+    isChecked: 1
+  - nodeSeq: 1
+    isChecked: 0
+  - nodeSeq: 2
+    isChecked: 0
+  - nodeSeq: 3
+    isChecked: 0
+  pathPrefab: {fileID: 524774240234538955, guid: bc65e21eda7c82643a91e6eb931e7f0c,
+    type: 3}

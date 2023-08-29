@@ -10,18 +10,21 @@ namespace Town
     {
         [Header("view")]
         public GameObject mapIntViewPanel;
-        public PathExpView pathExpView;
+        public PathView pathView;
 
         [Header("Controllers")]
         public PathController pathController;
-      //  public PathFactory pathFactory;
+       // public PathFactory pathFactory;
+        public AllPathSO allPathSO; 
+
+
 
         [Header("Map Controllers")]
         public MapController mapController;
 
 
         [Header(" All Path Nodes")]
-        public AllPathSO allPathSO;
+      
         public PathSO currPathSO;
 
         [Header("Game Init")]
@@ -40,7 +43,7 @@ namespace Town
             mapController = GetComponent<MapController>();
 
             pathController.InitPath(allPathSO);
-            pathExpView.PathExpInit();
+            pathView.PathViewInit();
             mapController.InitMapController();
 
             isNewGInitDone = true;

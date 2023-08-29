@@ -24,7 +24,7 @@ namespace Quest
         {
             this.qModeNLandView = qModeNLandView;
             this.questMode = questMode;
-            img.sprite = QuestMissionService.Instance.allQuestMainSO.GetQuestModeSprite(questMode);
+            img.sprite = QuestMissionService.Instance.allQuestSO.GetQuestModeSprite(questMode);
             nameTxt.text = ""; 
         }
         public void OnPointerClick(PointerEventData eventData)

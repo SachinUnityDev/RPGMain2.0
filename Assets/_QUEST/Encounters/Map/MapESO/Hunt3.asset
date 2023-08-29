@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccb181faae61adf4680c6a8b07f0adad, type: 3}
+  m_Name: Hunt3
+  m_EditorClassIdentifier: 
+  mapEName: 7
+  mapENameStr: Hunt in the Wilderness
+  descTxt: You got more fight in you, don't you? You're a warrior - not the type
+    to step back. You like to confront your fears. Don't let the terror of the Savannah
+    overcome you. For greater gains, you can go a bit further....
+  choiceAStr: Continue
+  choiceBStr: Go back to the Town

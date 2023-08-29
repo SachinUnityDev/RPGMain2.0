@@ -10,7 +10,6 @@ namespace Quest
     {
         QuestMenuEmbarkView questMenuEmbarkView;
         [SerializeField] QuestModel questModel;
-        [SerializeField] bool isSelPanelOpen;
 
         private void Start()
         {
@@ -22,22 +21,18 @@ namespace Quest
             this.questModel = questModel;
 
             transform.GetComponent<Image>().sprite =
-                QuestMissionService.Instance.allQuestMainSO.GetQuestModeSprite(questModel.questMode); 
+                QuestMissionService.Instance.allQuestSO.GetQuestModeSprite(questModel.questMode); 
 
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (isSelPanelOpen)
-            {
-                questMenuEmbarkView.questSelPanel.gameObject.SetActive(false);
-                isSelPanelOpen= false;
-            }
+            if (questMenuEmbarkView.questModeSelPanel.gameObject.activeInHierarchy)
+                questMenuEmbarkView.questModeSelPanel.gameObject.SetActive(false);
             else
-            {
-                questMenuEmbarkView.questSelPanel.gameObject.SetActive(true);
-                isSelPanelOpen= true;
-            }
+                questMenuEmbarkView.questModeSelPanel.gameObject.SetActive(true);
+             
+            
         }
     }
 }

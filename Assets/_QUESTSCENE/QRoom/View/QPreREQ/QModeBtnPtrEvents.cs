@@ -22,7 +22,7 @@ namespace Quest
             this.qModeNLandView= qModeNLandView;
             qMode = QuestMissionService.Instance.currQuestMode;      
             if(qMode != QuestMode.None)
-                img.sprite = QuestMissionService.Instance.allQuestMainSO.GetQuestModeSprite(qMode);
+                img.sprite = QuestMissionService.Instance.allQuestSO.GetQuestModeSprite(qMode);
         }
         
         public void OnPointerClick(PointerEventData eventData)

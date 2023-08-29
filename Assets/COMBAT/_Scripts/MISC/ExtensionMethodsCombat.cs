@@ -182,16 +182,16 @@ public static class ExtensionMethodsCombat
         //     return false; 
         //}
 
-        public static bool IsNodeDataMatch(this NodeData nodeData1, NodeData nodeData2)
-        {
-            if (nodeData1.nodeType == nodeData2.nodeType
-               && nodeData1.questName == nodeData2.questName
-               && nodeData1.locName == nodeData2.locName
-               )
-                return true;
-            else
-                return false;
-        }
+        //public static bool IsNodeDataMatch(this NodeData nodeData1, NodeData nodeData2)
+        //{
+        //    if (nodeData1.nodeType == nodeData2.nodeType
+        //       && nodeData1.questName == nodeData2.questName
+        //       && nodeData1.locName == nodeData2.locName
+        //       )
+        //        return true;
+        //    else
+        //        return false;
+        //}
         public static CharMode FlipCharMode(this CharMode _charMode)
         {
             if (_charMode == CharMode.Ally)

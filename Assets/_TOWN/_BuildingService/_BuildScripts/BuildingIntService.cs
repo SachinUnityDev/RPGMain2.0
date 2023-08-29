@@ -179,7 +179,7 @@ namespace Town
         }
 
         #endregion
-        public void UnLockDiaInt(BuildingNames buildName, NPCNames npcName, DialogueNames diaName, bool isUnLock)
+        public void UnLockDiaInBuildNPC(BuildingNames buildName, NPCNames npcName, DialogueNames diaName, bool isUnLock)
         {
             BuildingModel buildModel = GetBuildModel(buildName);
             int index = buildModel.npcInteractData.FindIndex(t => t.nPCNames == npcName);
@@ -201,7 +201,28 @@ namespace Town
             }
             DialogueService.Instance.UpdateDialogueState();  // update dialogue models
         }
-
+        public void UnLockDiaInBuildChar(BuildingNames buildName, CharNames compName, DialogueNames diaName, bool isUnLock)
+        {
+            BuildingModel buildModel = GetBuildModel(buildName);
+            int index = buildModel.charInteractData.FindIndex(t => t.compName == compName);
+            if (index != -1)
+            {
+                IntTypeData intData =
+                buildModel.charInteractData[index].allInteract.Find(t => t.nPCIntType == IntType.Talk);
+                foreach (DialogueData dia in intData.allDialogueData)
+                {
+                    if (dia.dialogueName == diaName)
+                    {
+                        dia.isUnLocked = isUnLock;
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Char data not found " + compName);
+            }
+            DialogueService.Instance.UpdateDialogueState();  // update dialogue models
+        }
 
         #region  BUILD INT ACTIONS
 

@@ -23,7 +23,7 @@ namespace Common
 
         public void OnDialogueEnd()
         {
-            BuildingIntService.Instance.UnLockDiaInt(BuildingNames.House, NPCNames.Khalid, DialogueNames.DebtIsClear, true);
+            BuildingIntService.Instance.UnLockDiaInBuildNPC(BuildingNames.House, NPCNames.Khalid, DialogueNames.DebtIsClear, true);
             QuestMissionService.Instance.On_ObjStart(QuestNames.LostMemory, ObjNames.GoBackToKhalid);
         }
     }

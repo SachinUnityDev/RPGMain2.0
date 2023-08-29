@@ -32,7 +32,7 @@ namespace Quest
 
         void FillInfoSprite()
         {
-            AllQuestSO allQuestSO = QuestMissionService.Instance.allQuestMainSO;
+            AllQuestSO allQuestSO = QuestMissionService.Instance.allQuestSO;
 
             spriteLit =
                         allQuestSO.GetQInfoSpriteLit(questMode);
@@ -43,7 +43,9 @@ namespace Quest
         public void OnPointerClick(PointerEventData eventData)
         {
             questModel.questMode = questMode;
-            questMenuEmbarkView.FillMenuPanel(questModel); 
+            QuestMissionService.Instance.On_QuestModeChg(questMode);
+            questMenuEmbarkView.FillMenuPanel(questModel);
+            questMenuEmbarkView.questModeSelPanel.gameObject.SetActive(false);
         }
 
         public void OnPointerEnter(PointerEventData eventData)

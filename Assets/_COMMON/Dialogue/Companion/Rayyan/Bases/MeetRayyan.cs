@@ -1,6 +1,8 @@
 using Common;
+using Quest;
 using System.Collections;
 using System.Collections.Generic;
+using Town;
 using UnityEngine;
 
 namespace Common
@@ -21,7 +23,8 @@ namespace Common
 
         public void OnDialogueEnd()
         {
-           
+            QuestMissionService.Instance.On_ObjStart(QuestNames.ThePowerWithin, ObjNames.CheckoutTheShips); 
+            MapService.Instance.pathController.On_PathUnLock(QuestNames.ThePowerWithin, ObjNames.CheckoutTheShips); 
         }
     }
 }

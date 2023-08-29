@@ -14,13 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: 2
   objName: 7
-  startNode:
-    nodeType: 1
-    questName: 2
-    locName: 1
-  endNode:
-    nodeType: 2
-    questName: 2
-    locName: 0
-  timeInCalday: 0
-  allInterNodes: []
+  questState: 0
+  objState: 0
+  nodes:
+  - nodeSeq: 0
+    isChecked: 0
+  - nodeSeq: 1
+    isChecked: 0
+  pathPrefab: {fileID: 7972596753412367374, guid: c5d13a2530fd8c745be507f1ab934de9,
+    type: 3}

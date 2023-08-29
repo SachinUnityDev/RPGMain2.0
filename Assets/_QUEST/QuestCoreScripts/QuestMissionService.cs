@@ -28,7 +28,7 @@ namespace Quest
         public QuestMode currQuestMode;
         
         [Header(" Q Main TBR")]
-        public AllQuestSO allQuestMainSO;        
+        public AllQuestSO allQuestSO;        
         public QuestController questController;
 
         [Header(" Q Factory TBR")]
@@ -45,12 +45,15 @@ namespace Quest
 
         void Start()
         {
-            currQuestMode = QuestMode.Stealth; 
-         
+          
         }
 
         public void InitQuestMission()
         {
+            questController= GetComponent<QuestController>();   
+            questFactory = GetComponent<QuestFactory>();
+            questFactory.InitQuest();
+            On_QuestModeChg(QuestMode.Exploration);
             InitAllQuestModel();
             InitAllQuestbase();
 
@@ -91,7 +94,7 @@ namespace Quest
 
         void InitAllQuestModel()
         {
-            foreach (QuestSO questSO in allQuestMainSO.allQuestSO)
+            foreach (QuestSO questSO in allQuestSO.allQuestSO)
             {
                 QuestModel questModel = new QuestModel(questSO);
                 allQuestModels.Add(questModel);
@@ -101,7 +104,7 @@ namespace Quest
         {
             foreach (QuestModel quest in allQuestModels)
             {
-                Debug.Log("Quest name" + quest.questName);
+                Debug.Log("Questbase name" + quest.questName);
                 QuestBase qBase = questFactory.GetQuestBase(quest.questName); 
                 allQuestBase.Add(qBase);
             }

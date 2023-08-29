@@ -25,10 +25,10 @@ namespace Quest
         [SerializeField] QuestBase questBase;
         [SerializeField] ObjModel objModel;
         [SerializeField] ObjSO objSO;
-        QuestNodePtrEvents nodePtrEvents;
+        PathNodeView pathNodeView;
 
-        [Header("Start Node")]
-        [SerializeField] NodeData startNode; 
+       // [Header("Start Node")]
+        //[SerializeField] NodeData startNode; 
         void Awake()
         {
             exitBtn.onClick.AddListener(OnExitBtnPressed); 
@@ -37,34 +37,33 @@ namespace Quest
 
         // to be called only from QuestController
         public void ShowQuestEmbarkView(QuestModel questModel, QuestSO questSO
-                    , QuestBase questBase, ObjModel objModel, QuestNodePtrEvents nodePtrEvents, NodeData startNodeData) 
+                    , QuestBase questBase, ObjModel objModel, PathNodeView pathNodeView)           
         {
             this.questModel = questModel;
             this.questSO = questSO;
             this.questBase= questBase;
             this.objModel = objModel;
             this.objSO = questSO.GetObjSO(objModel.objName);
-            this.nodePtrEvents = nodePtrEvents;
-            startNode = startNodeData; 
+            this.pathNodeView = pathNodeView;           
             Load();
             FillQuestPanel(); 
         }
         void OnExitBtnPressed()
         {
-            MapService.Instance.pathExpView.OnPathExit(); 
+            MapService.Instance.pathView.OnPathExit(); 
             UnLoad();
         }
         void OnEmbarkBtnPressed()
         {
             UnLoad();
-            NodeData endNode = new NodeData(questModel.questName);
-            nodePtrEvents.OnEndNodeSelect();
+                
+            pathNodeView.OnPathEmbark();
         }
         void FillQuestPanel()
         {
             headingTxt.text = questSO.questNameStr;
             questLogo.GetComponent<Image>().sprite
-                = QuestMissionService.Instance.allQuestMainSO.GetQuestTypeSprite(questModel.questType);
+                = QuestMissionService.Instance.allQuestSO.GetQuestTypeSprite(questModel.questType);
             descTxt.text = objSO.desc;
             FillLLD();
             InitQuestMenuBoard();

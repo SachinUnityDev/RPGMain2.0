@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccb181faae61adf4680c6a8b07f0adad, type: 3}
+  m_Name: Hunt1
+  m_EditorClassIdentifier: 
+  mapEName: 5
+  mapENameStr: Hunt in the Wilderness
+  descTxt: You've covered quite a distance from the city, and now you find yourself
+    in the heart of the wilderness. The savannah stretches out before you, untamed
+    and pristine like the lands of the first men. You have the urge to press forward,
+    but you're also aware that continuing might lead to unwelcome consequences. Are
+    you bold enough to proceed?
+  choiceAStr: Continue
+  choiceBStr: Go back to Town

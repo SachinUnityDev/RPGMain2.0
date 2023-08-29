@@ -12,16 +12,17 @@ namespace Quest
         
         public List<PathSO> allPathSO= new List<PathSO>();
         
-        public PathSO GetPathSO(NodeData startNode, NodeData endNode)
+        public PathSO GetPathSO(QuestNames questName, ObjNames objName)
         {
-            //int index = allPathSO.FindIndex(t=>t.startNode.IsNodeDataMatch(startNode)
-            //                && t.endNode.nodeData.IsNodeDataMatch(endNode));
-            //if(index !=-1)
-            //{
-            //    return allPathSO[index];    
-            //}
-            //Debug.Log(" path so not found"); 
-            return null;
+            int index = allPathSO.FindIndex(t => t.questName == questName && t.objName == objName); 
+            if(index != -1)
+            {
+               return allPathSO[index];
+            }
+            Debug.Log(" path so not found" + questName +" objname" + objName);
+            return null; 
         }
+
+
     }
 }

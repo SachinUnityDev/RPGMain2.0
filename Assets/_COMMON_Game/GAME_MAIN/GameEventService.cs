@@ -42,7 +42,7 @@ namespace Common
                 EncounterService.Instance.EncounterInit();
                 CharService.Instance.Init();
                 UIControlServiceGeneral.Instance.InitUIGeneral();
-                MapService.Instance.InitMapService();
+             
                 EcoServices.Instance.InitEcoServices();
                 DialogueService.Instance.InitDialogueService();
                 BarkService.Instance.InitBarkService();
@@ -55,7 +55,7 @@ namespace Common
                 TownService.Instance.Init(locationName);
                 OnTownEnter?.Invoke(locationName);
                 QuestMissionService.Instance.InitQuestMission();
-
+                MapService.Instance.InitMapService(); // to be put below questmission
             if (WelcomeService.Instance.isQuickStart)
                 WelcomeService.Instance.On_QuickStart();
             else

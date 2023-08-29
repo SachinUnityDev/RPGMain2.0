@@ -8,18 +8,22 @@ namespace Quest
 {
     public class QuestMenuEmbarkView : MonoBehaviour, IPanel
     {
-        QuestEmbarkView questEmbarkView;       
-        [SerializeField] QuestSO questSO;
-        [SerializeField] QuestModel questModel; 
-
-        public Transform questSelPanel;
+        
+        [Header(" TBR")]
+        public Transform questModeSelPanel;
         [SerializeField] Transform questModeBtnTrans;
+
+        [Header(" global var")]
+        QuestEmbarkView questEmbarkView;
+        [SerializeField] QuestSO questSO;
+        [SerializeField] QuestModel questModel;
+
 
         [SerializeField] List<QuestSelBtnPtrEvents> allQuestSel= new List<QuestSelBtnPtrEvents>();
        
         void Start()
         {
-            questSelPanel.gameObject.SetActive(false);  
+            questModeSelPanel.gameObject.SetActive(false);  
         }
 
         public void InitQuestMenuEmbark(QuestEmbarkView questEmbarkView, QuestModel questModel, QuestSO questSO)
@@ -40,7 +44,7 @@ namespace Quest
         public void FillMenuPanel(QuestModel questModel)
         {
             Sprite sprite = 
-                QuestMissionService.Instance.allQuestMainSO.GetQuestModeSprite(questModel.questMode);
+                QuestMissionService.Instance.allQuestSO.GetQuestModeSprite(questModel.questMode);
 
             transform.GetChild(0).GetComponent<Image>().sprite = sprite;   
         }

@@ -17,7 +17,7 @@ namespace Quest
         public void InitQModeDisplay()
         {
             questMode = QuestMissionService.Instance.currQuestMode;
-            img.sprite = QuestMissionService.Instance.allQuestMainSO
+            img.sprite = QuestMissionService.Instance.allQuestSO
                                                     .GetQInfoSpriteLit(questMode);            
         }
     }

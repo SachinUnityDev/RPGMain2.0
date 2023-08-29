@@ -111,7 +111,7 @@ namespace Town
 
             if(WelcomeService.Instance.isWelcomeRun)
             {
-                BuildingIntService.Instance.UnLockDiaInt(BuildingNames.House, NPCNames.Khalid, DialogueNames.AttendJob, true);
+                BuildingIntService.Instance.UnLockDiaInBuildNPC(BuildingNames.House, NPCNames.Khalid, DialogueNames.AttendJob, true);
                 WelcomeService.Instance.welcomeView.RevealWelcomeTxt("Report back to Khalid");
             }
 

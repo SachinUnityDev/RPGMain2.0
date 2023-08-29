@@ -1,9 +1,6 @@
-using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 namespace Quest
@@ -12,11 +9,18 @@ namespace Quest
     [Serializable]
     public class PathModel
     {
-
-        public UnityEngine.Vector3 currPawnPos;
-        public PathModel()
+        public QuestNames questName;
+        public ObjNames objName;
+        public QuestState questState;
+        public QuestState objState;
+        public NodeInfo currNode; 
+        public List<NodeInfo> nodes = new List<NodeInfo>();
+        public PathModel(PathSO pathSO)
         {
-            
+            questName = pathSO.questName; 
+            objName = pathSO.objName;   
+            objState = pathSO.objState;
+            nodes = pathSO.nodes.DeepClone();
         }
 
         //public bool IsAnyUnCrossedInterNode()

@@ -262,7 +262,8 @@ namespace Common
         {
             InitDiaView(parent);
             On_DialogueLsDsply();
-            dialogueView.ShowDialogueList(CharNames.None, npcName);
+
+            dialogueView.ShowDialogueList(charName, npcName);            
         }
   
 

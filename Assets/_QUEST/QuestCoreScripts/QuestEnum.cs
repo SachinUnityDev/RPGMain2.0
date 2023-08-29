@@ -120,6 +120,10 @@ namespace Quest
         BandOfBanditsOne,
         BandOfBanditsTwo,
         BuffaloStampede,
+        Hunt1, 
+        Hunt2, 
+        Hunt3, 
+        
     }
 
     public enum Nodes
@@ -129,14 +133,7 @@ namespace Quest
         ShipRats,
         HuntWild,
     }
-    public enum NodeType
-    {
-        None,
-        TownNode,
-        QuestNode,
-        MapENode,
-        CampNode,
-    }
+   
     // town  node.. time line completion for the quest 
     // can have a quest node to travel or cannot .. is travellable 
     // directly ////

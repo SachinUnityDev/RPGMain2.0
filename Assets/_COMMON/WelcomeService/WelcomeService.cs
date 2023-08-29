@@ -83,7 +83,7 @@ namespace Town
             if(calDate.day >= 28)
             {
                 BuildingIntService.Instance
-                    .UnLockDiaInt(BuildingNames.House, NPCNames.Khalid, DialogueNames.GoVisitTemple, true);
+                    .UnLockDiaInBuildNPC(BuildingNames.House, NPCNames.Khalid, DialogueNames.GoVisitTemple, true);
                 CalendarService.Instance.OnStartOfCalDate -= GoVisitTemple2dayGap;
             }
         }

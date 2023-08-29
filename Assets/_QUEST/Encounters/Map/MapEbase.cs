@@ -17,6 +17,7 @@ namespace Quest
         public string resultStr;
 
         public string strFX;
+        public bool mapEResult= false;
         public virtual void MapEInit(MapEModel mapEModel)
         {
            this.mapEModel= mapEModel;

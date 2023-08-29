@@ -14,13 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: 4
   objName: 9
-  startNode:
-    nodeType: 1
-    questName: 4
-    locName: 1
-  endNode:
-    nodeType: 2
-    questName: 4
-    locName: 0
-  timeInCalday: 0
-  allInterNodes: []
+  questState: 0
+  objState: 0
+  nodes:
+  - nodeSeq: 1
+    isChecked: 0
+  - nodeSeq: 2
+    isChecked: 0

@@ -13,10 +13,7 @@ namespace Quest
         public Dictionary<QuestNames, Type> allQuestTypes = new Dictionary<QuestNames, Type>();
         [SerializeField] int QuestCount = 0;
 
-        void Start()
-        {
-            InitQuest();
-        }
+        
         public void InitQuest()
         {
             if (allQuestTypes.Count > 0) return;

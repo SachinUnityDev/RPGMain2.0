@@ -14,10 +14,7 @@ namespace Quest
     {
         public MapView mapView; 
 
-        void Start()
-        {
-
-        }
+      
 
         public void InitMapController()
         {

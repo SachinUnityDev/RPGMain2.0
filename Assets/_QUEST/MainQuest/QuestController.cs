@@ -13,21 +13,22 @@ namespace Quest
         public QuestBase questBase;
         public ObjModel objModel;
 
-        public NodeData currNodeData;
+       // public NodeData currNodeData;
         private void Start()
         {
             CalendarService.Instance.OnStartOfCalDate += UnBoxBountyQuest;
             CalendarService.Instance.OnStartOfCalDate += (CalDate calDate)=> UpdateBountyQRespawn();
         }
 
-        public void ShowQuestEmbarkView(QuestNames questName, ObjNames objName, QuestNodePtrEvents nodePtrEvents)
+        public void ShowQuestEmbarkView(QuestNames questName, ObjNames objName, PathNodeView pathNodeView)
         {
             questModel = QuestMissionService.Instance.GetQuestModel(questName);
             questBase = QuestMissionService.Instance.GetQuestBase(questName);   
-            questSO= QuestMissionService.Instance.allQuestMainSO.GetQuestSO(questName);
+            questSO= QuestMissionService.Instance.allQuestSO.GetQuestSO(questName);
             objModel = questModel.GetObjModel(objName);
-            QuestMissionService.Instance.questEmbarkView.GetComponent<QuestEmbarkView>()
-                                .ShowQuestEmbarkView(questModel, questSO, questBase,objModel, nodePtrEvents, currNodeData); 
+            
+            QuestEmbarkView qEView = QuestMissionService.Instance.questEmbarkView; 
+            qEView.ShowQuestEmbarkView(questModel, questSO, questBase, objModel, pathNodeView); 
         }
 
         

@@ -1,6 +1,8 @@
 using Common;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Town;
 using UnityEngine;
 
 
@@ -8,9 +10,12 @@ namespace Quest
 {
     public class MapEController : MonoBehaviour
     {
+        public Action<MapENames, bool> OnMapEComplete; 
+
+
         [Header("Map E view")]
         [SerializeField] MapEView mapEView;
-        public MapENodePtrEvents mapENodePtrEvents; // ref to node on map that triggered the MapE 
+       // public MapENodePtrEvents mapENodePtrEvents; // ref to node on map that triggered the MapE 
 
         public List<MapEModel> allMapEModels = new List<MapEModel>();
         public List<MapEbase> allMapEBases= new List<MapEbase>();
@@ -24,20 +29,17 @@ namespace Quest
         }
 
 
-        public void ShowMapE(MapENodePtrEvents mapENodePtrEvents, MapENames mapEName)
+        public void ShowMapE(MapENames mapEName)
         {
-            // get map EP Ptr events on the map
-
-
-            this.mapENodePtrEvents= mapENodePtrEvents;
             MapEModel mapEModel = GetMapEModel(mapEName); 
             mapEView.GetComponent<MapEView>().InitEncounter(mapEModel);
         }
-        //public void ShowMapE(MapENames mapEName)
-        //{
-        //    MapEModel mapEModel = GetMapEModel(mapEName);
-        //    mapEView.GetComponent<MapEView>().InitEncounter(mapEModel);
-        //}
+
+        public void On_MapEComplete(MapENames mapEName, bool isSuccess)
+        {
+            mapEView.GetComponent<IPanel>().UnLoad();    
+            OnMapEComplete?.Invoke(mapEName, isSuccess);
+        }
         public void InitMapE(AllMapESO allMapSO)
         {
             foreach (MapESO mapESO in allMapSO.allMapESO)
@@ -83,7 +85,7 @@ namespace Quest
         {
             if (Input.GetKeyDown(KeyCode.C))
             {
-                ShowMapE(null,MapENames.BuffaloStampede);
+                ShowMapE(MapENames.BuffaloStampede);
             }
         }
 

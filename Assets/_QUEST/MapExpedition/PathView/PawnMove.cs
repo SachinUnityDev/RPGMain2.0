@@ -31,14 +31,39 @@ namespace Quest
         {
             // pathModel.. check current node index 
             // move to next node in the 
+            transform.GetComponent<BoxCollider2D>().enabled = true;
             Sequence seq = DOTween.Sequence();
             seq
             .Append(transform.GetComponent<Image>().DOFade(1.0f, 0.4f))
             .Append(transform.DOLocalMove(GetNextPos().localPosition, 2.0f));
             ;
-            seq.Play().OnComplete(CheckTownArrival);
+          //  if(EncounterService.Instance.mapEController.mapEOnDsply)
+                    seq.Play().OnComplete(CheckTownArrival);
 
         }
+        public void Move2TownOnFail()
+        {
+            transform.GetComponent<BoxCollider2D>().enabled= false; 
+            Sequence unSuccessSeq = DOTween.Sequence();
+            unSuccessSeq
+           .Append(transform.GetComponent<Image>().DOFade(1.0f, 0.4f))
+           .Append(transform.DOLocalMove(pathQView.transform.GetChild(0).localPosition, 2.0f))
+            .AppendCallback(()=>transform.GetComponent<BoxCollider2D>().enabled= true);
+            ;
+            unSuccessSeq.Play().OnComplete(()=>MapService.Instance.mapController.mapView.GetComponent<IPanel>().UnLoad());
+            UpdatePathModelOnQFail();
+        }
+
+        void UpdatePathModelOnQFail()
+        {
+            for (int i = 1; i < pathModel.nodes.Count; i++)
+            {
+                pathModel.nodes[i].isChecked = false; 
+            }
+            pathModel.nodes[0].isChecked = true;
+        }
+
+
         void CheckTownArrival()
         {
             if (pathModel.nodes[nodeSeq].isChecked && nodeSeq == 0)

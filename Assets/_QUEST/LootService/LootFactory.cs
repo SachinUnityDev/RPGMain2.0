@@ -15,12 +15,12 @@ namespace Quest
         [Header("Loot Factory")]
         Dictionary<LandscapeNames, Type> allLoot = new Dictionary<LandscapeNames, Type>();
         [SerializeField] int LootCount = 0;
-        private void Start()
-        {
-            LootInit();
-        }
+        //private void Start()
+        //{
+        //    LootInit();
+        //}
 
-        void LootInit()
+        public void LootInit()
         {
             if (allLoot.Count > 0) return;
 

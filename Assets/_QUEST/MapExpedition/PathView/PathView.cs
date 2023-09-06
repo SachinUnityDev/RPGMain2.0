@@ -58,15 +58,4 @@ namespace Quest
     }
 }
 
-//        MapExpBasePtrEvents ptrE = node.GetComponent<MapExpBasePtrEvents>();
-//        if(ptrE!= null)
-//        ptrE.InitQuestNodePtrEvents(this);
-//    }
-//    foreach (Transform node in MapPathContainer)
-//    {
-//        MapENodePtrEvents ptrE = node.GetComponent<MapENodePtrEvents>();
-//        //if (ptrE != null)
-//        //    ptrE.InitMapEPtrEvents(this, );
-//    }
 
-//}

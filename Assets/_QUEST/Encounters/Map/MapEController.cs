@@ -10,11 +10,11 @@ namespace Quest
 {
     public class MapEController : MonoBehaviour
     {
-        public Action<MapENames, bool> OnMapEComplete; 
+        public Action<MapENames, bool> OnMapEComplete;
 
-
+        public bool mapEOnDsply = false; 
         [Header("Map E view")]
-        [SerializeField] MapEView mapEView;
+        public MapEView mapEView;
        // public MapENodePtrEvents mapENodePtrEvents; // ref to node on map that triggered the MapE 
 
         public List<MapEModel> allMapEModels = new List<MapEModel>();
@@ -33,10 +33,12 @@ namespace Quest
         {
             MapEModel mapEModel = GetMapEModel(mapEName); 
             mapEView.GetComponent<MapEView>().InitEncounter(mapEModel);
+            mapEOnDsply= true;
         }
 
         public void On_MapEComplete(MapENames mapEName, bool isSuccess)
         {
+            mapEOnDsply = false; 
             mapEView.GetComponent<IPanel>().UnLoad();    
             OnMapEComplete?.Invoke(mapEName, isSuccess);
         }

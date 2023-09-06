@@ -529,11 +529,11 @@ namespace Common
                     On_CharAddToParty(GetCharCtrlWithName(charCtrl.charModel.charName));
                 }
             }
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                CharController charController = GetCharCtrlWithName(CharNames.Baran);
-                charController.ExpPtsGain(100); 
-            }
+            //if (Input.GetKeyDown(KeyCode.E))
+            //{
+            //    CharController charController = GetCharCtrlWithName(CharNames.Baran);
+            //    charController.ExpPtsGain(100); 
+            //}
         }
     }
 }

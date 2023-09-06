@@ -3,8 +3,11 @@ using Interactables;
 using Quest;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.PeerToPeer.Collaboration;
 using Town;
 using UnityEngine;
+using static Spine.Unity.Examples.SpineboyFootplanter;
+
 namespace Quest
 {
     public class Hunt1 : MapEbase
@@ -14,6 +17,8 @@ namespace Quest
         CharNames charJoined;
         Currency money2Lose;
 
+        List<ItemDataWithQty> allItemDataWithQty = new List<ItemDataWithQty>();    
+
         public override void MapEContinuePressed()
         {
             EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
@@ -22,47 +27,63 @@ namespace Quest
 
         public override void OnChoiceASelect()
         {
-            //            Continue    "Deer - MAP ENC        55%
-            //Hyena pack combat        20 %
-            //Nyala - MAP ENC        25 % "	
-            //Go back to town
+          //  You encountered a Hyena pack, get ready to fight!You gained loot!You gained loot!
 
-           
-            if (55f.GetChance())
+            Transform parentTrans = EncounterService.Instance.mapEController.mapEView.transform;
+
+            if (20f.GetChance())
             {
-                EncounterService.Instance.mapEController.ShowMapE(MapENames.BandOfBanditsOne);
+                // trigger combat vs Hyena pack
+                resultStr = " You encountered a Hyena pack, get ready to fight!";
             }
-            else if (60f.GetChance())
+            else if (55f.GetChance())
             {
-                EncounterService.Instance.mapEController.ShowMapE(MapENames.MigratoryBirds);
+                allItemDataWithQty.Clear(); 
+                int qty = UnityEngine.Random.Range(3, 7);
+                ItemDataWithQty itemDataWithQty
+                    = new ItemDataWithQty(new ItemData(ItemType.Foods, (int)FoodNames.Venison), qty); 
+                allItemDataWithQty.Add(itemDataWithQty);
+                
+                qty = UnityEngine.Random.Range(1, 3);
+                itemDataWithQty
+                    = new ItemDataWithQty(new ItemData(ItemType.TradeGoods, (int)TGNames.DeerTrophy), qty);
+                allItemDataWithQty.Add(itemDataWithQty);
+
+                qty = UnityEngine.Random.Range(2, 5);
+                itemDataWithQty
+                    = new ItemDataWithQty(new ItemData(ItemType.TradeGoods, (int)TGNames.DeerSkin), qty);
+                allItemDataWithQty.Add(itemDataWithQty);
+
+                LootService.Instance.lootView.InitLootList(allItemDataWithQty, parentTrans);
+                resultStr = "You gained loot!";
             }
             else
             {
-                EncounterService.Instance.mapEController.ShowMapE(MapENames.BuffaloStampede);
-            }
+                allItemDataWithQty.Clear();
+                int qty = UnityEngine.Random.Range(3, 8);
+                ItemDataWithQty itemDataWithQty
+                    = new ItemDataWithQty(new ItemData(ItemType.Foods, (int)FoodNames.Venison), qty);
+                allItemDataWithQty.Add(itemDataWithQty);
 
-            resultStr = "You encountered a pair of deers. If you don't act fast they might run away and you will be left emptyhanded.";
-            //    strFX = "Party debuff: Flat Footed, 3 rds";
-            //}
-            //else
-            //{
-            //    resultStr = "Time to fight!";
-            //    strFX = "";
-            //}
+                qty = UnityEngine.Random.Range(2, 4);
+                itemDataWithQty
+                    = new ItemDataWithQty(new ItemData(ItemType.TradeGoods, (int)TGNames.NyalaPelt), qty);
+                allItemDataWithQty.Add(itemDataWithQty);
+
+                qty = UnityEngine.Random.Range(1, 2);
+                itemDataWithQty
+                    = new ItemDataWithQty(new ItemData(ItemType.TradeGoods, (int)TGNames.NyalaTrophy), qty);
+                allItemDataWithQty.Add(itemDataWithQty);
+
+                LootService.Instance.lootView.InitLootList(allItemDataWithQty, parentTrans);
+                resultStr = "You gained loot!"; 
+            }
         }
 
         public override void OnChoiceBSelect()
         {
-            bool hasMoney = EcoServices.Instance.HasMoney(PocketType.Inv, new Currency(3, 0));
-            if (hasMoney)
-                money2Lose = new Currency(3, 0);
-            else
-                money2Lose = EcoServices.Instance.GetMoneyAmtInPlayerInv();
-
-            EcoServices.Instance.DebitPlayerInv(money2Lose);
-
-            resultStr = "You agreed to pay a toll for free passage and Bandits seem symphatetic to your cause...";
-            strFX = $"{money2Lose.silver} Silver and {money2Lose.bronze} Bronze lost";
+            MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move2TownOnFail();
+            EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
         }
     }
 }

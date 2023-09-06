@@ -25,5 +25,5 @@ MonoBehaviour:
     isChecked: 0
   - nodeSeq: 3
     isChecked: 0
-  pathPrefab: {fileID: 524774240234538955, guid: bc65e21eda7c82643a91e6eb931e7f0c,
+  pathPrefab: {fileID: 5883672084844912971, guid: bc65e21eda7c82643a91e6eb931e7f0c,
     type: 3}

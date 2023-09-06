@@ -26,7 +26,7 @@ namespace Quest
         public void InitLootController(LandscapeNames landscapeName)
         {
             if (landscapeName == LandscapeNames.None) return;
-            //lootBase = LootService.Instance.lootFactory.GetLootBase(landscapeName);        
+            lootBase = LootService.Instance.lootFactory.GetLootBase(landscapeName);        
         }
 
 

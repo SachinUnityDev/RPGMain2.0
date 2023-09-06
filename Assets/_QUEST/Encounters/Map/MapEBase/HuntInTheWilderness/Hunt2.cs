@@ -3,6 +3,7 @@ using Interactables;
 using Quest;
 using System.Collections;
 using System.Collections.Generic;
+using Town;
 using UnityEngine;
 
 
@@ -22,31 +23,31 @@ namespace Quest
 
         public override void OnChoiceASelect()
         {
-            float chance = 50f;
-            if (chance.GetChance())
+            if (20f.GetChance())
             {
-                resultStr = "Bandits ambushed you. Watch out!";
-                strFX = "Party debuff: Flat Footed, 3 rds";
+                // combat with Hyena pack
+
+                resultStr = "You encountered a Hyena pack, get ready to fight!";
+                strFX = "";
+            }
+            else if (50f.GetChance())
+            {
+                // Combat with Lion pack 
+                resultStr = "You encountered a Lion pack, get ready to be killed!";
+                strFX = "";
             }
             else
             {
-                resultStr = "Time to fight!";
+                // combat with lioness pack
+                resultStr = "You encountered a Lioness pack, get ready to be killed!";
                 strFX = "";
             }
         }
 
         public override void OnChoiceBSelect()
         {
-            bool hasMoney = EcoServices.Instance.HasMoney(PocketType.Inv, new Currency(3, 0));
-            if (hasMoney)
-                money2Lose = new Currency(3, 0);
-            else
-                money2Lose = EcoServices.Instance.GetMoneyAmtInPlayerInv();
-
-            EcoServices.Instance.DebitPlayerInv(money2Lose);
-
-            resultStr = "You agreed to pay a toll for free passage and Bandits seem symphatetic to your cause...";
-            strFX = $"{money2Lose.silver} Silver and {money2Lose.bronze} Bronze lost";
+            MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move2TownOnFail();
+            EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
         }
     }
 }

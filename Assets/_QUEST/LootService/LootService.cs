@@ -20,12 +20,14 @@ namespace Quest
 
         private void Start()
         {
-            lootController= GetComponent<LootController>(); 
-            lootFactory= GetComponent<LootFactory>();   
+           
         }
 
         public void InitLootService()
         {
+            lootController = GetComponent<LootController>();
+            lootFactory = GetComponent<LootFactory>();
+            lootFactory.LootInit();
             //LandscapeNames landscapeName =
             //                LandscapeService.Instance.currLandscape; 
             LandscapeNames landscapeName = LandscapeNames.Sewers; 

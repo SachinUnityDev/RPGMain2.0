@@ -95,7 +95,8 @@ namespace Quest
         }
         public void OnTriggerExit2D(Collider2D collision)
         {
-            if (collision.gameObject.name == "PawnStone")
+            if (collision.gameObject.name == "PawnStone" 
+                && EncounterService.Instance.mapEController.mapEOnDsply)
             {
                 OnNodeExit();
             }
@@ -103,8 +104,8 @@ namespace Quest
 
         void OnNodeEnter()
         {
-            index = transform.GetSiblingIndex();
-            switch (index)
+           
+            switch (nodeSeq)
             {
                     case 0:
                     pathBase.OnNode0Enter(); 

@@ -33,7 +33,7 @@ namespace Common
         {  
             sceneController = GetComponent<SceneController>();
          // GameInit(GameState.InIntro, GameDifficulty.Easy, LocationName.Nekkisari); 
-            OnSceneLoad(); 
+            OnSceneLoad();           
         }
 
         void OnSceneLoad()

@@ -4,9 +4,11 @@ using UnityEngine;
 using DG.Tweening;
 using Common;
 using Town;
+using System;
 
 namespace Quest
 {
+
     public class PathView : MonoBehaviour
     {
         [Header("TBR")]
@@ -41,11 +43,6 @@ namespace Quest
         public void MovePawnStone(Vector3 pos, float time)
         {
             pawnStone.DOMove(pos, time); 
-        }
-
-        public void MovePawn(List<PathData> allNode)
-        {
-            pawnStone.GetComponent<PawnStonePtrEvents>().InitPawnMovement(allNode);
         }
         
         #endregion

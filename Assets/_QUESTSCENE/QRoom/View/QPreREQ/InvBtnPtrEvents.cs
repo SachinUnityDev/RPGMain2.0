@@ -14,11 +14,12 @@ namespace Quest
         [SerializeField]TextMeshProUGUI heading; 
         public void OnPointerClick(PointerEventData eventData)
         {
-            GameObject invPanelXL =
-                            InvService.Instance.invXLPanel; 
+            InvService.Instance.ShowInvXLPanel();
+            //GameObject invPanelXL =
+            //                InvService.Instance.invXLGO; 
 
-            UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(invPanelXL, true);
-            invPanelXL.GetComponent<IPanel>().Init();
+            //UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(invPanelXL, true);
+            //invPanelXL.GetComponent<IPanel>().Init();
         }
 
         public void OnPointerEnter(PointerEventData eventData)

@@ -41,6 +41,7 @@ namespace Interactables
 
         public void Init(CharModel charModel, CompanionViewController companionViewController)
         {
+            canvas = FindObjectOfType<Canvas>();
             selectRaceHero = charModel.raceTypeHero;
             selectCharModel = charModel;
             selectRaceType = charModel.raceType;

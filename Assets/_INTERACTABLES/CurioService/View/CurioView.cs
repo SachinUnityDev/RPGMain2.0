@@ -60,6 +60,7 @@ namespace Quest
         {
             curioColEvents.OnContinue();
             gameObject.SetActive(false);            
+
         }
 
         public void OnNotifyAnsPressed()

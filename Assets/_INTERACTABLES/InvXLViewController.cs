@@ -63,6 +63,7 @@ namespace Interactables
         public void UnLoad()
         {
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
+            InvService.Instance.isInvPanelOpen= false;
         }
 
         public void Init()
@@ -74,11 +75,16 @@ namespace Interactables
             bestiaryPanel.GetComponent<IPanel>().Init();
             skillPanel.GetComponent<IPanel>().Init();
             loreParentPanel.GetComponent<IPanel>().Init();
+            BestiaryService.Instance.bestiaryViewController 
+                        = bestiaryPanel.GetComponent<BestiaryViewController>(); 
+
+
             foreach (IPanel panel in invPanel.GetComponentsInChildren<IPanel>())
             {
                 panel.Init();
             }
         }
+
         void OnBeastiaryPressed()
         {
             UIControlServiceGeneral.Instance.TogglePanelOnInGrp(bestiaryPanel, true);

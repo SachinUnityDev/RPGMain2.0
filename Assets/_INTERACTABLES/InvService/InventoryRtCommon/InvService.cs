@@ -22,8 +22,6 @@ namespace Interactables
 
         [Header("TO BE REF")]
         public InvSO InvSO; // all items SO 
-        public GameObject invPanelPrefab;// Inv main panel
-        public GameObject invXLPanel;  // lore + beastiary+ skills+ invPanel .. parent
 
         [Header("InvMainModel")]
         public InvMainModel invMainModel;
@@ -40,6 +38,12 @@ namespace Interactables
 
         [Header("EXCESS INV Panel: to be ref")]       
         public ExcessInvViewController excessInvViewController;
+
+        [Header("Global Var NTBR")]
+        public GameObject invXLGO;// lore + beastiary+ skills+ invPanel..parent
+        public GameObject invXLPrefab; 
+
+
       
         private void Start()
         {
@@ -61,71 +65,40 @@ namespace Interactables
             OnCharSelectInvPanel?.Invoke(charModel);
         }
 
-        #region INV CHECKS
+        public void ShowInvXLPanel()
+        {
+            if (isInvPanelOpen) return; // return multiple clicks
+            invXLGO = Instantiate(invXLPrefab);
+            Canvas canvas = FindObjectOfType<Canvas>();
+            //  LootService.Instance.lootView = lootViewGO.GetComponent<LootView>();
+            invXLGO.transform.SetParent(canvas.transform);
 
-        //public void OpenInvView()  // dont know where to use // Deprecated 
-        //{
-        //    if (invPanel == null)
-        //    {
-        //        invPanel = Instantiate(invPanelPrefab);
-        //    }
-        //    UIControlServiceGeneral.Instance.SetMaxSibling2Canvas(invPanel);
-        //    invPanel.SetActive(true);
-        //    commInvViewController = invPanel.GetComponent<InvRightViewController>();
-        //    commInvViewController.GetComponent<IPanel>().Init();
-        //}
-        //public void CloseInvView() // don t know where to use  // Deprecated
-        //{
-        //    commInvViewController.GetComponent<IPanel>().UnLoad();
-        //}
+            //UIControlServiceGeneral.Instance.SetMaxSiblingIndex(diaGO);
+            int index = invXLGO.transform.parent.childCount - 2;
+            invXLGO.transform.SetSiblingIndex(index);
+            RectTransform invXLRect = invXLGO.GetComponent<RectTransform>();
 
-        #endregion
+            invXLRect.anchorMin = new Vector2(0, 0);
+            invXLRect.anchorMax = new Vector2(1, 1);
+            invXLRect.pivot = new Vector2(0.5f, 0.5f);
+            invXLRect.localScale = Vector3.one;
+            invXLRect.offsetMin = new Vector2(0, 0); // new Vector2(left, bottom);
+            invXLRect.offsetMax = new Vector2(0, 0); // new Vector2(-right, -top);
 
+
+
+            excessInvViewController = invXLGO.GetComponentInChildren<ExcessInvViewController>();
+            commInvViewController = invXLGO.GetComponentInChildren<InvRightViewController>();
+
+            //BestiaryService.Instance.bestiaryViewController = invXLGO.<BestiaryViewController>();
+
+
+            UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(invXLGO, true);
+            invXLGO.GetComponent<IPanel>().Init();
+        }
+
+    
 
     }
 }
 
-
-
-//void InitInventoryService()
-//{
-//    // integrate with the save system.... 
-//    // char in Play.... 
-
-//    //foreach (GameObject charGO in CharService.Instance.charsInPlay)
-//    //{
-//    //    if(charGO.GetComponent<InvController>()== null)
-//    //    {
-//    //        //if (SaveService.Instance.currSlotSelected == SaveSlot.New)
-//    //        //{
-//    //            CharModel charModel = charGO.GetComponent<CharController>().charModel; 
-
-//    //            InvController invController = charGO.AddComponent<InvController>();
-//    //            invController.InitController(charModel);// to be build up 
-//    //        //}else
-//    //        //{
-//    //        //    //InventoryController invController = charGO.AddComponent<InventoryController>();
-//    //        //    //charGO.InitController(charModel);
-//    //        //    // TO BE IMPLEMENTED LATER 
-//    //        //}
-
-
-//    //    }
-
-
-
-//    //}
-//}
-
-//****************************************************************************************************
-//public bool IsItemSellable(Iitems item)
-//{
-//    ISellable iSellable = item as ISellable;
-//    if (iSellable == null)
-//        return false;
-//    // can be sold only in townState 
-//    // NPC Service will match the NPC who can buy the given item
-
-
-//    return false;
-//}

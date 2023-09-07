@@ -56,6 +56,7 @@ namespace Common
                 OnTownEnter?.Invoke(locationName);
                 QuestMissionService.Instance.InitQuestMission();
                 MapService.Instance.InitMapService(); // to be put below questmission
+                LootService.Instance.InitLootService();
             if (WelcomeService.Instance.isQuickStart)
                 WelcomeService.Instance.On_QuickStart();
             else
@@ -67,7 +68,7 @@ namespace Common
             if (gameState != GameState.InQuestRoom)
                 return;
             CurioService.Instance.InitCurioService();
-            LootService.Instance.InitLootService();
+           
         }
         public void On_QuestRoomEnd()
         {

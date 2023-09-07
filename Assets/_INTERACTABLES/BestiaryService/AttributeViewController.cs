@@ -39,7 +39,6 @@ namespace Interactables
 
             foreach (AttributePtrEvents attribute in attributes)
             {
-
                 attribute.PopulateData(); 
             }
 

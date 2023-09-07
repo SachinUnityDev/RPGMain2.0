@@ -5,7 +5,8 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 using UnityEngine.UI;
 using Common;
-using TMPro; 
+using TMPro;
+using Interactables;
 
 namespace Town
 {
@@ -100,12 +101,13 @@ namespace Town
         }
         void OnInvBtnClick()
         {
-        
 
-            UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(invPanelXL, true);
-            invPanelXL.GetComponent<IPanel>().Init();
+            InvService.Instance.ShowInvXLPanel();
+         
 
         }
+
+
 
         #endregion
 

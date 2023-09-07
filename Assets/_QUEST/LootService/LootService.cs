@@ -1,5 +1,6 @@
 using Common;
 using Interactables;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,20 +10,17 @@ namespace Quest
 {
     public class LootService : MonoSingletonGeneric<LootService>
     {
-        public LootController lootController;
+        public Action<bool> OnLootDsplyToggle;
+        
 
+        public LootController lootController;
         public LootFactory lootFactory;
         public LootView lootView;
 
         [Header("Global Var")]
-        public bool isLootOpen = false;
+        public bool isLootDsplyed = false;
 
-
-        private void Start()
-        {
-           
-        }
-
+        
         public void InitLootService()
         {
             lootController = GetComponent<LootController>();
@@ -34,16 +32,21 @@ namespace Quest
             lootController.InitLootController(landscapeName);
         }
 
+        public void On_LootDsplyToggle(bool isDsplyed)
+        {
+            OnLootDsplyToggle?.Invoke(isDsplyed);
+            isLootDsplyed= isDsplyed;
+        }
 
 
         private void Update()
         {
             if(Input.GetKeyDown(KeyCode.L))
-            {               
-                //lootController.ShowLootTable(new List<ItemType>()
-                //{ItemType.Potions, ItemType.GenGewgaws, ItemType.PoeticGewgaws, ItemType.Gems, ItemType.SagaicGewgaws,
-                //ItemType.Fruits, ItemType.Foods, ItemType.TradeGoods});
-                //
+            {
+                lootController.ShowLootTable(new List<ItemType>()
+                {ItemType.Potions, ItemType.GenGewgaws, ItemType.PoeticGewgaws, ItemType.Gems, ItemType.SagaicGewgaws,
+                ItemType.Fruits, ItemType.Foods, ItemType.TradeGoods}, FindObjectOfType<Canvas>().transform);
+
             }
         }
     }

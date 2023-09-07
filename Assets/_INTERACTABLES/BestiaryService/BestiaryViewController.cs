@@ -22,7 +22,7 @@ namespace Interactables
         [Header("Drop Down related")]
 
         [Header("Scroll Related")]
-        [SerializeField] List<CharModel> selectBestiary = new List<CharModel>();
+        public List<CharModel> selectBestiary = new List<CharModel>();// accessed in attrib list 
         [SerializeField] List<CharModel> cultList = new List<CharModel>();
         [SerializeField] List<string> cultOptions = new List<String>(); 
         [SerializeField] TextMeshProUGUI nameTxt;
@@ -156,8 +156,10 @@ namespace Interactables
         #region IPANEL RELATED 
         public void Load()
         {
-           // transform.parent.gameObject.SetActive(true);
-          
+            // transform.parent.gameObject.SetActive(true);
+            PopulateBestiaryScroll();
+            PopulateRaceBar();
+           
         }
 
         public void UnLoad()
@@ -169,8 +171,7 @@ namespace Interactables
         {          
              transform.GetChild(1).
                  GetComponent<CompanionViewController>().Init();  // Acts as parent to comp 
-            PopulateRaceBar();
-            PopulateBestiaryScroll();
+           
         }
 
         #endregion

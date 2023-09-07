@@ -72,7 +72,7 @@ namespace Quest
     
         void OnContinueBtnPressed()
         {
-            if (LootService.Instance.isLootOpen)
+            if (LootService.Instance.isLootDsplyed)
             {
                 curioView.LootNotifyBoxChk();
             }

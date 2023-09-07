@@ -17,7 +17,7 @@ namespace Interactables
         public List<ArmorModel> allArmorModels = new List<ArmorModel>();
         public List<ArmorController> allArmorController = new List<ArmorController>();
         public List<ArmorBase> allArmorBases = new List<ArmorBase>();
-        public GameObject armorPanel;
+       // public GameObject armorPanel;
 
         public ArmorViewController armorViewController;
         public void Init()
@@ -43,15 +43,16 @@ namespace Interactables
         }
         private void Start()
         {
-            armorViewController = armorPanel.GetComponent<ArmorViewController>();      
+          //  armorViewController = armorPanel.GetComponent<ArmorViewController>();      
 
         }
 
 #region Button Controls
 
         public void OpenArmorPanel()
-        {            
-            armorViewController.GetComponent<IPanel>().Load(); 
+        {  
+            armorViewController = InvService.Instance.invXLGO.GetComponentInChildren<ArmorViewController>();
+            armorViewController.GetComponent<IPanel>().Load();
         }
 
         public void CloseArmorPanel()

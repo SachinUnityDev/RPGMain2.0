@@ -220,14 +220,14 @@ namespace Quest
         }
         public void Load()
         {
-            LootService.Instance.isLootOpen= true;  
+            LootService.Instance.isLootDsplyed= true;  
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
         }
 
         public void UnLoad()
         {
-            index = 0; 
-            LootService.Instance.isLootOpen = false;
+            index = 0;             
+            LootService.Instance.On_LootDsplyToggle(false); 
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
             UIControlServiceGeneral.Instance.ToggleOffNotify();
         }

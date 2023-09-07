@@ -28,11 +28,13 @@ namespace Interactables
         public void PopulateData()
         {
             
-            CharModel charModel = 
-                BestiaryService.Instance.bestiaryViewController.currBeastOnDisplay;  
-         
+            CharModel charModel =
+                BestiaryService.Instance.bestiaryViewController?.currBeastOnDisplay;
+
+            if (charModel == null)
+                return;
                 transform.GetChild(2).GetComponent<TextMeshProUGUI>().text
-                                               = GetStatValue(charModel);
+                                                         = GetStatValue(charModel);
         }
 
         string GetStatValue(CharModel charModel)

@@ -15,10 +15,18 @@ namespace Interactables
 
         void Start()
         {        
-            InvService.Instance.OnCharSelectInvPanel += PopulateArmorPanel;
+           
             gameObject.SetActive(false);
         }
- 
+        private void OnEnable()
+        {
+            InvService.Instance.OnCharSelectInvPanel += PopulateArmorPanel;
+        }
+        private void OnDisable()
+        {
+            InvService.Instance.OnCharSelectInvPanel -= PopulateArmorPanel;
+        }
+
         #region Load UnLoad
         public void Load()
         {          

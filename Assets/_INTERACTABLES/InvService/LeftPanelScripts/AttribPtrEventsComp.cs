@@ -24,13 +24,21 @@ namespace Interactables
         {
             desc = transform.GetChild(3).gameObject;
             desc.SetActive(false);
-            InvService.Instance.OnCharSelectInvPanel += PopulateData;
-            //attribPanelViewComp =
+                //attribPanelViewComp =
             //        transform.GetComponentInParent<AttribPanelViewComp>();
 
             //btmCharViewController =
             //    attribPanelViewComp.transform.parent.parent
             //                    .GetChild(2).GetComponent<BtmCharViewController>();
+        }
+        private void OnEnable()
+        {
+            InvService.Instance.OnCharSelectInvPanel += PopulateData;
+        }
+        private void OnDisable()
+        {
+            InvService.Instance.OnCharSelectInvPanel -= PopulateData;
+
         }
         private void Start()
         {

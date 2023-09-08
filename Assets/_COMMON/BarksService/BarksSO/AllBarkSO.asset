@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b6e189d7ce78854481ddf577d8815ab, type: 3}
+  m_Name: AllBarkSO
+  m_EditorClassIdentifier: 
+  allNPCSLBarkSO:
+  - {fileID: 11400000, guid: 615b4b7963b44da469e82d86503e64ad, type: 2}
+  - {fileID: 11400000, guid: b1ea110fac0c4c4419277520a845086f, type: 2}
+  - {fileID: 11400000, guid: 4c98a2b45914e754fa9611845ab44d62, type: 2}
+  - {fileID: 11400000, guid: 711432c84379e0147baf14d6d6a37e39, type: 2}
+  - {fileID: 11400000, guid: 448d00ca4a1e9d84f9b3284caeb6afc2, type: 2}
+  - {fileID: 11400000, guid: 77232b8ed876380459766138ac574af5, type: 2}
+  - {fileID: 11400000, guid: c9ddbc81104eb9d4387f0858ebb1cb8c, type: 2}
+  - {fileID: 11400000, guid: ce995ad587c7ca041bc089b499329fef, type: 2}
+  curioBarkSO: {fileID: 11400000, guid: 278f06d0193e1c54facbb0f29ec773b1, type: 2}
+  buildBarkSO: {fileID: 11400000, guid: c8b22a9cfa3c892459f06bd395278af3, type: 2}
+  QuestPrepBarkSO: {fileID: 11400000, guid: 0ce0a3c39c4ac2a42b2bef3c47046447, type: 2}
+  allSeqbarkSO: {fileID: 11400000, guid: a49574652b8eada42b6c5a8f4befd556, type: 2}

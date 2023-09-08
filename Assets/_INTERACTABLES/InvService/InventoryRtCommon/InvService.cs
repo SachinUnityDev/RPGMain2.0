@@ -14,6 +14,9 @@ namespace Interactables
 
         public event Action<bool, ItemsDragDrop> OnDragResult;
         public event Action<CharModel> OnCharSelectInvPanel;       // int here is charID 
+        public event Action<bool> OnToggleInvXLView; 
+
+
         public CharNames charSelect;
         public CharController charSelectController;
         [Header("Char SKILLS RELATED")]
@@ -29,7 +32,7 @@ namespace Interactables
 
         [Header("Common Inv View NTBR")]
         public InvRightViewController commInvViewController; // ref
-        public GameObject invPanel;
+      //  public GameObject invPanel;
         public bool isInvPanelOpen; // to track inv panel
 
         [Header("Stash Inv : to be ref")]
@@ -64,6 +67,22 @@ namespace Interactables
             charSelectController = CharService.Instance.GetCharCtrlWithName(charModel.charName);
             OnCharSelectInvPanel?.Invoke(charModel);
         }
+        public void On_ToggleInvXLView(bool isOpen)
+        {
+            isInvPanelOpen= isOpen;
+            OnToggleInvXLView?.Invoke(isOpen);
+
+            if (isOpen)
+            {
+                CharController charController = CharService.Instance.GetCharCtrlWithName(CharNames.Abbas);
+                On_CharSelectInv(charController.charModel); // Set Abbas stats as default 
+            }
+            else
+            {
+                UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(invXLGO, false);
+                Destroy(invXLGO);
+            }
+        }
 
         public void ShowInvXLPanel()
         {
@@ -74,7 +93,7 @@ namespace Interactables
             invXLGO.transform.SetParent(canvas.transform);
 
             //UIControlServiceGeneral.Instance.SetMaxSiblingIndex(diaGO);
-            int index = invXLGO.transform.parent.childCount - 2;
+            int index = invXLGO.transform.parent.childCount - 5;
             invXLGO.transform.SetSiblingIndex(index);
             RectTransform invXLRect = invXLGO.GetComponent<RectTransform>();
 
@@ -89,9 +108,6 @@ namespace Interactables
 
             excessInvViewController = invXLGO.GetComponentInChildren<ExcessInvViewController>();
             commInvViewController = invXLGO.GetComponentInChildren<InvRightViewController>();
-
-            //BestiaryService.Instance.bestiaryViewController = invXLGO.<BestiaryViewController>();
-
 
             UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(invXLGO, true);
             invXLGO.GetComponent<IPanel>().Init();

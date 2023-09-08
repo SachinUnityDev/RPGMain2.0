@@ -28,14 +28,21 @@ namespace Interactables
         {
             desc = transform.GetChild(2).gameObject;
             desc.SetActive(false);
-            PanelTrans = transform.parent;
-            InvService.Instance.OnCharSelectInvPanel += PopulateData;
+            PanelTrans = transform.parent;            
         }
         private void Start()
         {        
             CharService.Instance.allCharsInPartyLocked.ForEach(t => t.OnAttribCurrValSet
              += (AttribModData charModData) => PopulateData(CharService.Instance.GetCharCtrlWithCharID
              (charModData.effectedCharNameID).charModel));
+        }
+        private void OnEnable()
+        {
+            InvService.Instance.OnCharSelectInvPanel += PopulateData;
+        }
+        private void OnDisable()
+        {
+            InvService.Instance.OnCharSelectInvPanel -= PopulateData;
         }
         public void PopulateData(CharModel charModel)
         {

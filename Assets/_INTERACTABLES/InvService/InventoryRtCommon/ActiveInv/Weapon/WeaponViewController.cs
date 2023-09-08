@@ -13,11 +13,20 @@ namespace Interactables
         [SerializeField] Image gemImg; 
         void Awake()
         {
-            InvService.Instance.OnCharSelectInvPanel += PopulateWeaponPanel;
-            ItemService.Instance.OnGemEnchanted += 
-                            (CharController charController)=>PopulateGemEnchanted();           
+            
+                   
             gemImg = transform.GetChild(1).GetChild(0).GetComponent<Image>();
            
+        }
+        private void OnEnable()
+        {
+            InvService.Instance.OnCharSelectInvPanel += PopulateWeaponPanel;
+            ItemService.Instance.OnGemEnchanted += PopulateGemEnchanted;
+        }
+        private void OnDisable()
+        {
+            InvService.Instance.OnCharSelectInvPanel -= PopulateWeaponPanel;
+            ItemService.Instance.OnGemEnchanted -= PopulateGemEnchanted;
         }
         private void Start()
         {
@@ -26,7 +35,7 @@ namespace Interactables
         public void Load()
         {         
             Init();           
-            PopulateGemEnchanted(); 
+           //  PopulateGemEnchanted(); 
         }
         void PopulateWeaponPanel(CharModel charModel)
         {
@@ -35,8 +44,9 @@ namespace Interactables
             transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = sprite;
         }
 
-        void PopulateGemEnchanted()
+        void PopulateGemEnchanted(CharController charController1)
         {          
+            // use char Controller 1 on test
             CharController charController = InvService.Instance.charSelectController;
             if (charController == null) return;
             ItemModel itemModel = charController.itemController.itemModel;

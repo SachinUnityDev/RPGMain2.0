@@ -32,10 +32,17 @@ namespace Interactables
         {
             canvas = FindObjectOfType<Canvas>();
             InvService.Instance.OnDragResult += OnDragResult2PotionActiveInv;
-            InvService.Instance.OnCharSelectInvPanel += LoadActiveInvSlots; 
+           
             slotNum = transform.GetSiblingIndex();
         }
-
+        private void OnEnable()
+        {
+            InvService.Instance.OnCharSelectInvPanel += LoadActiveInvSlots;
+        }
+        private void OnDisable()
+        {
+            InvService.Instance.OnCharSelectInvPanel -= LoadActiveInvSlots;
+        }
         void LoadActiveInvSlots(CharModel charModel)
         {
             

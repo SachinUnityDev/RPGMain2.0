@@ -25,25 +25,27 @@ namespace Common
         [SerializeField] Transform skillPtsTrans; 
 
 
-        private void Awake()
+        private void OnEnable()
         {
             //charNameTrans = transform.GetChild(0); 
-            iconContainerTrans = transform.GetChild(1);
+            
             InvService.Instance.OnCharSelectInvPanel += PopulateLeftSkillPanel;
      
+        }
+        private void OnDisable()
+        {
+            InvService.Instance.OnCharSelectInvPanel -= PopulateLeftSkillPanel;
         }
         #region POPULATE SKILL BTNS and Panel Content
         void PopulateLeftSkillPanel(CharModel charModel)
         {
+            
             charController = InvService.Instance.charSelectController;
             selectSkillController = charController.GetComponent<SkillController1>();
             skillDataSO =
                     SkillService.Instance.GetSkillSO(charController.charModel.charName);
 
-          
-
             transform.GetComponent<Image>().sprite = skillDataSO.leftInvSkillPanelBG;
-
 
             PopulateTheMainSkills();
             PopulateTheUtilitySkills();
@@ -51,6 +53,7 @@ namespace Common
         }
         void PopulateTheMainSkills()
         {
+            iconContainerTrans = transform.GetChild(1);
             Transform mainSkillTrans = iconContainerTrans.GetChild(0).GetChild(1);
             for (int i = 0; i < 4; i++)
             {        

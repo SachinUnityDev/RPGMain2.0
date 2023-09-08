@@ -48,12 +48,22 @@ namespace Common
         {
 
             perkInfoPanelTrans = transform.GetChild(4); 
-            InvService.Instance.OnCharSelectInvPanel += PopulateRightSkillPanel;
+           
             leftBtn.onClick.AddListener(OnLeftBtnPressed);
             rightBtn.onClick.AddListener(OnRightBtnPressed);
             //skillViewMain.OnSkillSelectedInPanel += PopulateSkillScroll; // invalid .. not needed 
-            SkillService.Instance.OnSkillSelectInInv += PopulateSkillScroll; 
+         
 
+        }
+        private void OnEnable()
+        {
+            SkillService.Instance.OnSkillSelectInInv += PopulateSkillScroll;
+            InvService.Instance.OnCharSelectInvPanel += PopulateRightSkillPanel;
+        }
+        private void OnDisable()
+        {
+            SkillService.Instance.OnSkillSelectInInv -= PopulateSkillScroll;
+            InvService.Instance.OnCharSelectInvPanel -= PopulateRightSkillPanel;
         }
         void PopulateRightSkillPanel(CharModel charModel)
         {

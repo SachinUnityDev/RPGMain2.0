@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 112cb87555371bf4c8cb331b516809b9, type: 3}
+  m_Name: KamilaTheApoSLBarkSO
+  m_EditorClassIdentifier: 
+  nPCName: 9
+  NPCBarkData:
+  - FameType: 7
+    interactType: 0
+    barkLineData:
+    - barkline: Hello!
+      barkAudio: {fileID: 0}
+    - barkline: Czesc!
+      barkAudio: {fileID: 0}
+    - barkline: I have herbs and potions... Come, see yourself.
+      barkAudio: {fileID: 0}
+  - FameType: 1
+    interactType: 0
+    barkLineData:
+    - barkline: Happy to see such a respectable man in my shop!
+      barkAudio: {fileID: 0}
+    - barkline: I have herbs and potions... Come, see yourself.
+      barkAudio: {fileID: 0}
+  - FameType: 2
+    interactType: 0
+    barkLineData:
+    - barkline: I am honored to be at your service Abbas!
+      barkAudio: {fileID: 0}
+    - barkline: I have herbs and potions... Come, see yourself.
+      barkAudio: {fileID: 0}
+  - FameType: 3
+    interactType: 0
+    barkLineData:
+    - barkline: 'Let me be the healing hand of Ruru for you! '
+      barkAudio: {fileID: 0}
+    - barkline: Czesc!
+      barkAudio: {fileID: 0}
+  - FameType: 4
+    interactType: 0
+    barkLineData:
+    - barkline: 'Hello! '
+      barkAudio: {fileID: 0}
+    - barkline: Czesc!
+      barkAudio: {fileID: 0}
+  - FameType: 5
+    interactType: 0
+    barkLineData:
+    - barkline: Welcome you notorious scamp!
+      barkAudio: {fileID: 0}
+  - FameType: 6
+    interactType: 0
+    barkLineData:
+    - barkline: Every dangerous man, needs a woman to tend to his wounds!
+      barkAudio: {fileID: 0}
+  - FameType: 6
+    interactType: 0
+    barkLineData:
+    - barkline: Every dangerous man, needs a woman to tend to his wounds!
+      barkAudio: {fileID: 0}
+  - FameType: 6
+    interactType: 1
+    barkLineData:
+    - barkline: "Next time!\r"
+      barkAudio: {fileID: 0}
+    - barkline: May Ruru heal all your wounds!
+      barkAudio: {fileID: 0}
+    - barkline: Hope to see you again!
+      barkAudio: {fileID: 0}
+  - FameType: 1
+    interactType: 1
+    barkLineData:
+    - barkline: Do zobaczenia!
+      barkAudio: {fileID: 0}
+  - FameType: 2
+    interactType: 1
+    barkLineData:
+    - barkline: Do zobaczenia!
+      barkAudio: {fileID: 0}
+  - FameType: 3
+    interactType: 1
+    barkLineData:
+    - barkline: May the gods be with you my hero!
+      barkAudio: {fileID: 0}
+  - FameType: 4
+    interactType: 1
+    barkLineData:
+    - barkline: Do zobaczenia!
+      barkAudio: {fileID: 0}
+  - FameType: 5
+    interactType: 1
+    barkLineData:
+    - barkline: Do zobaczenia!
+      barkAudio: {fileID: 0}
+  - FameType: 6
+    interactType: 1
+    barkLineData:
+    - barkline: You are an eagle Abbas, that's why these serpents despise you!
+      barkAudio: {fileID: 0}
+  - FameType: 0
+    interactType: 2
+    barkLineData:
+    - barkline: Right choice!
+      barkAudio: {fileID: 0}
+  allNPCInteractBarkData:
+  - tempTraitName: 0
+    buildIntType: 18
+    barkLine:
+      barkline: "Here it is!\r"
+      barkAudio: {fileID: 0}
+  - tempTraitName: 0
+    buildIntType: 18
+    barkLine:
+      barkline: A nice mix for you!
+      barkAudio: {fileID: 0}

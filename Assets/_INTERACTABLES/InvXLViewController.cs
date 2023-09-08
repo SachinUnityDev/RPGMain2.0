@@ -9,11 +9,7 @@ namespace Interactables
 {
     public class InvXLViewController : MonoBehaviour, IPanel
     {
-
-        public event Action<CharModel> OnCharSelected;
-
-
-        [Header("To be ref")]
+        [Header("TBR")]
         [SerializeField] GameObject ToggleBtnParent;
 
         [SerializeField] GameObject bestiaryPanel;
@@ -23,7 +19,7 @@ namespace Interactables
         [SerializeField] GameObject BtmCharPanel; 
 
 
-        [Header("Not to be ref")]
+        [Header("NTBR")]
         [SerializeField] Button beastiaryBtn;
         [SerializeField] Button skillBtn;
         [SerializeField] Button loreBtn;
@@ -57,13 +53,15 @@ namespace Interactables
         
         public void Load()
         {
-            UIControlServiceGeneral.Instance.TogglePanel(invPanel, true);
+            // UIControlServiceGeneral.Instance.TogglePanel(invPanel, true);
+           // Init(); 
+            InvService.Instance.On_ToggleInvXLView(true);
         }
 
         public void UnLoad()
         {
-            UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
-            InvService.Instance.isInvPanelOpen= false;
+           UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
+           InvService.Instance.On_ToggleInvXLView(false);
         }
 
         public void Init()

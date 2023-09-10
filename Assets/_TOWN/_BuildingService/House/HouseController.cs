@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Security.Policy;
 using System.Xml.Serialization;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 namespace Town
 {
@@ -16,8 +16,16 @@ namespace Town
 
         private void Start()
         {
-            
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if(scene.name == "TOWN")
+            { 
+              houseView = FindObjectOfType<HouseView>(true);                      
+            }
+        }
+
         public void InitHouseController()
         {
             BuildingSO houseSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.House);

@@ -29,9 +29,23 @@ namespace Town
         {
             townController = GetComponent<TownController>();
             fameController = GetComponent<FameViewController>();
-            //templeController = buildingIntViewController.templePanel.GetComponent<TempleController>();           
+            //templeController = buildingIntViewController.templePanel.GetComponent<TempleController>();
+            SceneManager.sceneLoaded += OnSceneLoaded; 
         }
-        public void Init(LocationName location)
+
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name == "TOWN")
+            {
+                townViewController=  FindObjectOfType<TownViewController>(false);
+
+                TimeState timeState = CalendarService.Instance.currtimeState;
+                townViewController.TownViewInit(timeState);
+            }
+        }
+
+
+                public void Init(LocationName location)
         {  
             townModel = new TownModel(); // to be linke d to save Panels
             townModel.currTown = location;

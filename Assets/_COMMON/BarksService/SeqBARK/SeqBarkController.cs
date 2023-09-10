@@ -2,8 +2,7 @@ using Common;
 using Quest;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Policy;
-using UnityEditor.Animations;
+using UnityEngine.SceneManagement; 
 using UnityEngine;
 
 
@@ -16,16 +15,20 @@ namespace Town
         public SeqBarkView seqBarkView;
         SeqBarkNames seqBarkName;
 
-        [Header(" Bark Seq View Prefab TBR")]
-        [SerializeField] GameObject barkSeqViewPrefab;
-        [SerializeField] GameObject barkSeqViewGO; 
-
 
         void Start()
         {
-            seqBarkView.gameObject.SetActive(false);    
+            seqBarkView.gameObject.SetActive(false);
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name == "TOWN")
+            {
+                seqBarkView = FindObjectOfType<SeqBarkView>(false);
+            }
+        }
         public void InitBarkController()
         {
             foreach (SeqBarkSO seq in BarkService.Instance.allBarkSO.allSeqbarkSO.allSeqBark)

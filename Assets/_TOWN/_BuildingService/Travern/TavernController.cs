@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using Common;
 using Interactables;
 using System;
+using UnityEngine.SceneManagement;
 
 namespace Town
 {
@@ -18,8 +19,17 @@ namespace Town
         public TavernView tavernView;
     
         void Start()
-        {            
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;
             CalendarService.Instance.OnChangeTimeState += (TimeState timeState)=> UpdateBuildState(); 
+        }
+        
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name == "TOWN")
+            {
+                tavernView = FindObjectOfType<TavernView>(true);
+            }
         }
         public void InitTavernController()
         {

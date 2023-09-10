@@ -2,7 +2,7 @@ using Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 namespace Town
 {
@@ -15,9 +15,21 @@ namespace Town
         public MarketView marketView;
         void Start()
         {            
-            CalendarService.Instance.OnChangeTimeState += (TimeState timeState) => UpdateBuildState();
+            CalendarService.Instance.OnChangeTimeState += UpdateBuildState;
+            SceneManager.sceneLoaded += OnSceneLoaded;   
         }
-
+        private void OnDisable()
+        {
+            CalendarService.Instance.OnChangeTimeState -= UpdateBuildState;
+          
+        }
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name == "TOWN")
+            {
+                marketView = FindObjectOfType<MarketView>(true);
+            }
+        }
         public void InitMarketController()
         {
             marketSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.Marketplace);
@@ -25,11 +37,11 @@ namespace Town
             BuildingIntService.Instance.allBuildModel.Add(marketModel);
         }
 
-        public void UpdateBuildState()
+        public void UpdateBuildState(TimeState timeState)
         {
             if (marketModel.buildState == BuildingState.Locked) return;
             DayName dayName = CalendarService.Instance.currDayName;
-            TimeState timeState = CalendarService.Instance.currtimeState;
+            
 
             if (dayName == DayName.DayOfWater && dayName == DayName.DayOfDark)
             {

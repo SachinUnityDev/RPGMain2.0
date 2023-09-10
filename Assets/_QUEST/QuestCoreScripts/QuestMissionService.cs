@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Policy;
 using System.ServiceModel.Configuration;
+using Town;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 namespace Quest
 {
@@ -35,7 +36,7 @@ namespace Quest
         public QuestFactory questFactory;
 
         [Header(" Quest View")]
-        public Transform QuestView;
+        public Transform questView;
         public QuestEmbarkView questEmbarkView;
 
         public List<QuestModel> allQuestModels = new List<QuestModel>();
@@ -45,8 +46,17 @@ namespace Quest
 
         void Start()
         {
-          
+          SceneManager.sceneLoaded += OnSceneLoaded;    
         }
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name == "TOWN")
+            {
+                questView = FindObjectOfType<QuestView>(true).transform;
+                questEmbarkView = FindObjectOfType<QuestEmbarkView>(true); 
+            }
+        }
+
 
         public void InitQuestMission()
         {

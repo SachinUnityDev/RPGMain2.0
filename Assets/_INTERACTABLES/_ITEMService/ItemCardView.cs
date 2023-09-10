@@ -41,11 +41,11 @@ namespace Interactables
 
 
    
-        void Awake()
+        void OnEnable()
         {
-            gameObject.SetActive(false);
+           // gameObject.SetActive(false);
             crownTrans = transform.GetChild(0);
-            topTrans = transform.GetChild(1);   
+            topTrans = transform.GetChild(1);
             midTrans = transform.GetChild(2);
             btmTrans = transform.GetChild(3);
             tailTrans = transform.GetChild(4);
@@ -63,11 +63,7 @@ namespace Interactables
 
             // btm     
             currTrans = btmTrans.GetChild(0);   
-            itemSlotTrans = btmTrans.GetChild(1);   
-
-
-
-            
+            itemSlotTrans = btmTrans.GetChild(1);  
         }
         
         

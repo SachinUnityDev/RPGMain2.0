@@ -46,14 +46,10 @@ namespace Common
         [SerializeField] List<SkillModel> scrollList = new List<SkillModel>();  
         private void Awake()
         {
-
             perkInfoPanelTrans = transform.GetChild(4); 
            
             leftBtn.onClick.AddListener(OnLeftBtnPressed);
-            rightBtn.onClick.AddListener(OnRightBtnPressed);
-            //skillViewMain.OnSkillSelectedInPanel += PopulateSkillScroll; // invalid .. not needed 
-         
-
+            rightBtn.onClick.AddListener(OnRightBtnPressed);        
         }
         private void OnEnable()
         {
@@ -166,12 +162,6 @@ namespace Common
             {
                 perkBtnContainer.GetChild(j).gameObject.SetActive(false);
             }
-        }
-
-        void PopulatePerksPanel(SkillNames skillName)
-        {
-            // get all perk data from skillController1
-
         }
 
     }

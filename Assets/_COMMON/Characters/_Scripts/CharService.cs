@@ -75,9 +75,10 @@ namespace Common
             // get all so and Popyulate the list of controllers
             // if save slot is defined take from save slot other SO from here pass in charSO    
 
-          //  if(SaveService.Instance.)
-            List<CharNames> chars2Spawn = new List<CharNames> {CharNames.Abbas
-               , CharNames.Baran, CharNames.Cahyo, CharNames.Rayyan};
+            //  if(SaveService.Instance.)
+            List<CharNames> chars2Spawn = new List<CharNames> { CharNames.Abbas
+               , CharNames.Baran, CharNames.Cahyo, CharNames.Rayyan
+                };
 
             foreach (CharNames charName in chars2Spawn)
             {
@@ -171,38 +172,6 @@ namespace Common
 
 
         #endregion
-
-
-        //public void CreateAllAlliesCtrls()
-        //{
-
-        //    foreach (CharacterSO c in allAllySO)
-        //    {
-        //            GameObject charGO = new GameObject();
-        //            CharController charCtrl = charGO.AddComponent<CharController>();
-        //            charCtrl.InitiatizeController(c);
-        //            Debug.Log("Name1 " +charCtrl.charModel.charName); 
-        //            allyInPlayControllers.Add(charCtrl);
-        //            charsInPlayControllers.Add(charCtrl);
-        //            allyInPlay.Add(charGO);    
-        //            charsInPlay.Add(charGO);
-
-
-
-        //            if(c.availOfChar == AvailOfChar.Available)
-        //            {
-        //                allAvailCompModels.Add(charCtrl.charModel);                               
-        //            }
-        //            if(c.stateOfChar == StateOfChar.UnLocked)
-        //            {
-        //                allyUnLockedCompModels.Add(charCtrl.charModel);
-        //            }
-
-        //            LevelService.Instance.LevelUpInit(charCtrl);              
-        //    }
-        //}
-
-
         public CharController SpawnCompanions(CharNames charName)  // character factory 
         {
            // CharController charController = GetCharCtrlWithName(charName);

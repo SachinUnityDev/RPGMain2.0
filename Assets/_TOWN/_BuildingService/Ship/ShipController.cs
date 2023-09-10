@@ -2,7 +2,7 @@ using Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement; 
 
 namespace Town
 {
@@ -16,8 +16,15 @@ namespace Town
         private void Start()
         {
             CalendarService.Instance.OnStartOfCalDay +=UpdateBuildState;
+            SceneManager.sceneLoaded += OnSceneLoaded; 
         }
-
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name == "TOWN")
+            {
+                shipView = FindObjectOfType<ShipView>(true);
+            }
+        }
         public void InitShipController()
         {
             BuildingSO shipSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.Ship);

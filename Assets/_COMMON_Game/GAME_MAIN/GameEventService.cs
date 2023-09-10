@@ -38,6 +38,7 @@ namespace Common
         
                 
                 CalendarService.Instance.Init();
+                TownService.Instance.Init(locationName);
                 BuildingIntService.Instance.InitBuildIntService();
                 EncounterService.Instance.EncounterInit();
                 CharService.Instance.Init();
@@ -52,7 +53,7 @@ namespace Common
                 TradeService.Instance.InitTradeService();
                 FameService.Instance.Init();
                 LevelService.Instance.Init();
-                TownService.Instance.Init(locationName);
+                
                 OnTownEnter?.Invoke(locationName);
                 QuestMissionService.Instance.InitQuestMission();
                 MapService.Instance.InitMapService(); // to be put below questmission

@@ -42,7 +42,7 @@ namespace Interactables
                 canvasGroup = gameObject.GetComponent<CanvasGroup>();
 
             canvas = GetComponentInParent<Canvas>();
-            itemCardGO = ItemService.Instance.itemCardGO; 
+           // itemCardGO = ItemService.Instance.itemCardGO; 
         }
         public void OnPointerEnter(PointerEventData eventData)
         {   
@@ -65,13 +65,35 @@ namespace Interactables
 
         void ShowItemCard()
         {
-            itemCardGO.GetComponent<ItemCardView>().ShowItemCard(iSlotable.ItemsInSlot[0]);
-            if (iSlotable.slotType == SlotType.TradeScrollSlot)
-                PosTradeScrollSlot();
-            else
-                PosItemCardInInv();
+            if (itemCardGO == null)
+            {
+                itemCardGO = Instantiate(ItemService.Instance.itemCardGO);
+            }
+                Canvas canvas = FindObjectOfType<Canvas>();
+                itemCardGO.transform.SetParent(canvas.transform);
 
+
+                int index = itemCardGO.transform.parent.childCount - 1;
+                itemCardGO.transform.SetSiblingIndex(index);
+                RectTransform invXLRect = itemCardGO.GetComponent<RectTransform>();
+
+                //invXLRect.anchorMin = new Vector2(0, 0);
+                //invXLRect.anchorMax = new Vector2(1, 1);
+                invXLRect.pivot = new Vector2(0.5f, 0.5f);
+                invXLRect.localScale = Vector3.one;
+                //invXLRect.offsetMin = new Vector2(0, 0); // new Vector2(left, bottom);
+                //invXLRect.offsetMax = new Vector2(0, 0); // new Vector2(-right, -top);
+
+                itemCardGO.GetComponent<ItemCardView>().ShowItemCard(iSlotable.ItemsInSlot[0]);
+                if (iSlotable.slotType == SlotType.TradeScrollSlot)
+                    PosTradeScrollSlot();
+                else
+                    PosItemCardInInv();
+            
         }
+
+
+
         void PosTradeScrollSlot()
         {
             float width = itemCardGO.GetComponent<RectTransform>().rect.width;

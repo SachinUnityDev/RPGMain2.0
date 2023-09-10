@@ -64,6 +64,9 @@ namespace Common
             rightBtn.onClick.AddListener(OnRightBtnPressed);
 
             inviteBtn.onClick.AddListener(OnInviteBtnPressed); 
+
+
+
         }
         void OnPartyDisbandedFameBehMisMatchChk()
         {
@@ -197,8 +200,12 @@ namespace Common
 
         public void Init()
         {
-
-            Load();          
+            foreach (Transform child in SidePlankTrans.transform)
+            {
+                child.GetComponent<SidePanelPtrEvents>().SidePlankInit();
+            }
+            
+            //Load();          
         }
 
         public HelpName GetHelpName()

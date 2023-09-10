@@ -82,6 +82,7 @@ namespace Interactables
 
         [Header("Item card")]
         public GameObject itemCardGO;
+        public GameObject itemCardPrefab; 
 
         [Header("Game Init")]
         public bool isNewGInitDone = false;

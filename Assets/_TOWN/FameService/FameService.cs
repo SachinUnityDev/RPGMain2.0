@@ -1,7 +1,8 @@
+using Quest;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement; 
 
 
 namespace Common
@@ -16,9 +17,15 @@ namespace Common
         public bool isNewGInitDone = false;
         void Start()
         {
-           
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
-
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name == "TOWN")
+            {
+                fameViewController = FindObjectOfType<FameViewController>(true);
+            }
+        }
         public void Init()
         {
             // save service integration here pending

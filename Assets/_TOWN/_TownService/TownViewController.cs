@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Common;
+using UnityEngine.SceneManagement;
 
 
 namespace Town
@@ -32,15 +33,25 @@ namespace Town
 
         void Awake()
         {
-            buildContainer = transform.GetChild(0);
-            townBGImage = transform.GetChild(0).GetComponent<Image>();            
+                       
         }
 
         private void Start()
         {
-            CalendarService.Instance.OnChangeTimeState += TownViewInit; 
+            CalendarService.Instance.OnChangeTimeState += TownViewInit;
         }
-
+        private void OnDisable()
+        {
+            CalendarService.Instance.OnChangeTimeState -= TownViewInit;
+        }
+        //void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        //{
+        //    if (scene.name == "TOWN")
+        //    {
+        //        TimeState timeState = CalendarService.Instance.currtimeState;
+        //        TownViewInit(timeState);
+        //    }
+        //}
         public void OnBuildSelect(BuildingNames buildName)
         {
             selectBuild = buildName; 
@@ -96,7 +107,8 @@ namespace Town
         }
         public void TownViewInit(TimeState timeState)
         {
-
+            buildContainer = transform.GetChild(0);
+            townBGImage = transform.GetChild(0).GetComponent<Image>();
             FillTownBG(); 
             foreach (Transform child in buildContainer)
             {

@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using Town;
 using System;
+using UnityEngine.SceneManagement;
 
 namespace Common
 {
@@ -33,9 +34,18 @@ namespace Common
 
         void Start()
         {
-            RosterModel rosterModel = new RosterModel();           
+            RosterModel rosterModel = new RosterModel();
+            SceneManager.sceneLoaded += OnSceneLoaded; 
         }
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name == "TOWN")
+            {
+                rosterViewController = FindObjectOfType<RosterViewController>(true);
 
+                rosterViewController.GetComponent<IPanel>().Init();
+            }
+        }
         public void On_ScrollSelectCharModel(CharModel charModel)
         {
             scrollSelectCharModel = charModel;

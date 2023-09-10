@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.UI;
 using Combat;
 using Town;
+using UnityEngine.SceneManagement;
 
 
 // apply month 
@@ -72,13 +73,26 @@ namespace Common
         public AllDaySO allDaySO;
         public bool isNewGInitDone = false;
         
-        void Start()
+        void OnEnable()
         {
             //calendarFactory = gameObject.GetComponent<CalendarFactory>();
             //calendarUIController = GetComponent<CalendarUIController>();
-            endday.onClick.AddListener(On_EndDayClick);
+            
+           // endday.onClick.AddListener(On_EndDayClick);
+            SceneManager.sceneLoaded += OnSceneLoaded;
 
-        
+        }
+        private void OnDisable()
+        {
+          //  endday.onClick.RemoveAllListeners();
+        }
+
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name == "TOWN")
+            {
+                endday = FindObjectOfType<EndDayBtnEvents>(true).GetComponent<Button>();
+            }
         }
 
         public void Init()

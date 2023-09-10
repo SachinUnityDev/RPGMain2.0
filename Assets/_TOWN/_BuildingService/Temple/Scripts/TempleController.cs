@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 using Common;
 using Interactables;
 using Intro;
+using UnityEngine.SceneManagement;
+
 namespace Town
 {
     public class TempleController : MonoBehaviour
@@ -16,7 +18,14 @@ namespace Town
         private void Start()
         {
             CalendarService.Instance.OnChangeTimeState += (TimeState timeStart) => UpdateBuildState();
-
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name == "TOWN")
+            {
+                templeView = FindObjectOfType<TempleView>(true);
+            }
         }
         public void InitTempleController()
         {

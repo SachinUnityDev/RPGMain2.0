@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 namespace Common
 {
@@ -16,7 +17,7 @@ namespace Common
 
         [Header("So and View: NTBR")]
         [SerializeField] BuildingSO buildSO;
-        TownViewController townViewController;
+        [SerializeField] TownViewController townViewController;
 
         //[Header("BuildState")]
         //public BuildingState buildState;
@@ -34,10 +35,11 @@ namespace Common
         }
 
         void Start()
-        {
+        {         
             buildImg.alphaHitTestMinimumThreshold = 0.1f;
             Hidetxt();
         }
+    
         public void Init(TownViewController townViewController)
         {
             this.townViewController = townViewController;
@@ -93,7 +95,7 @@ namespace Common
 
         #region POINTER EVENTS 
         public void OnPointerClick(PointerEventData eventData)
-        { 
+        {           
             townViewController.OnBuildSelect(buildingName);
             SetSpriteNormal();
             Hidetxt();
@@ -105,7 +107,6 @@ namespace Common
             if (townViewController.selectBuild != BuildingNames.None) return; 
             SetSpriteHL();  
             ShowTxt();
-
         }
 
         public void OnPointerExit(PointerEventData eventData)

@@ -86,7 +86,7 @@ namespace Town
 
         void OnQuestScrollBtnClick()
         { 
-                QuestMissionService.Instance.QuestView.GetComponent<IPanel>().Load();
+                QuestMissionService.Instance.questView.GetComponent<IPanel>().Load();
         }
         void OnMapBtnClick()
         {

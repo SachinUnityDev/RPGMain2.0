@@ -1,3 +1,4 @@
+using Quest;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,35 +10,78 @@ namespace Common
 
     public class SceneMgmtController : MonoBehaviour
     {
-        [SerializeField] Button loadQ;
-        [SerializeField] Button loadC;
+       
+        [SerializeField] GameObject SceneTransitPrefab;
+        [SerializeField] GameObject sceneTransitGO;
 
+        public SceneTransitView sceneTransitView;
 
-        private void Start()
+        [SerializeField] bool sceneTransitStarted = false; 
+        private void OnEnable()
         {
-            loadQ.onClick.AddListener(OnQuestLoadPressed); 
-            loadC.onClick.AddListener(OnCombatLoadPressed);
+          
+            SceneManager.activeSceneChanged += OnSceneLoaded; 
+        }
+        private void OnDisable()
+        {
+            //loadQ.onClick.RemoveAllListeners();
+            //loadC.onClick.RemoveAllListeners();
 
-            SceneManager.sceneLoaded += OnSceneLoaded; 
+            SceneManager.activeSceneChanged -= OnSceneLoaded;
         }
 
         void OnQuestLoadPressed()
         {
-            //SceneMgmtService.Instance.LoadNewScene("QUEST"); 
-            SceneManager.LoadScene("QUEST"); 
+            SceneManager.LoadSceneAsync("QUEST"); 
+            StartSceneTransit();
         }
-        void OnCombatLoadPressed()
-        {
-            SceneMgmtService.Instance.LoadNewScene("COMBAT");
 
-        }
-        
-        void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
+        public void StartSceneTransit()
         {
+            if (sceneTransitStarted) return;
+            if(sceneTransitGO == null)
+            sceneTransitGO = Instantiate(SceneTransitPrefab);
+            sceneTransitGO.SetActive(true);
+            sceneTransitView = sceneTransitGO.GetComponent<SceneTransitView>();
+
+            RectTransform sceneTransitRect = sceneTransitGO.GetComponent<RectTransform>();
+
+            sceneTransitRect.anchorMin = new Vector2(0, 0);
+            sceneTransitRect.anchorMax = new Vector2(1, 1);
+            sceneTransitRect.pivot = new Vector2(0.5f, 0.5f);
+            sceneTransitRect.localScale = Vector3.one;
+            sceneTransitRect.offsetMin = new Vector2(0, 0); // new Vector2(left, bottom);
+            sceneTransitRect.offsetMax = new Vector2(0, 0); // new Vector2(-right, -top);
+            sceneTransitStarted = true;
+            sceneTransitView.StartAnim();
+        }
+        void OnSceneLoaded(Scene current, Scene next)
+        {
+            // end here 
+            if(sceneTransitGO!= null)
+            {
+                if(next.isLoaded)
+                {
+                    sceneTransitView = sceneTransitGO.GetComponent<SceneTransitView>();
+                    Debug.Log("Scene Transist to begin end anim");
+                    sceneTransitView.EndAnim();
+                    sceneTransitStarted = false;
+                    QRoomService.Instance.On_QuestSceneStart(QuestNames.RatInfestation); 
+
+                }
+            }
             // toggle off camera, event System and canvas  of previous scene
             // toggle on ...
             // allowscene activation  here 
         }
+
+        void OnCombatLoadPressed()
+        {
+            SceneMgmtService.Instance.LoadNewScene("COMBAT");
+            StartSceneTransit();
+        }
+        
+
 
 
     }

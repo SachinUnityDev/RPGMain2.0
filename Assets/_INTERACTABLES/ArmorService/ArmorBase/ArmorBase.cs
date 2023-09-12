@@ -1,7 +1,6 @@
 using Common;
 using System.Collections;
 using System.Collections.Generic;
-using System.Web.Configuration;
 using Town;
 using UnityEngine;
 

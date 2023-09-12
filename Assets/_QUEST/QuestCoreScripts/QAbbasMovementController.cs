@@ -4,8 +4,6 @@ using UnityEngine;
 using Spine.Unity;
 using DG.Tweening;
 using Cinemachine;
-using static UnityEngine.EventSystems.EventTrigger;
-using System.Web.Hosting;
 
 public enum AnimState
 {

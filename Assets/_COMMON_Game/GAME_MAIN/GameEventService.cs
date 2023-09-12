@@ -21,12 +21,17 @@ namespace Common
 
         public Action<GameState> OnStateStart;
        
-        void Start()
+        void OnEnable()
         {
             OnGameStateChg += On_QuestRoomStart;
             OnGameStateChg += (GameState gameState) => On_TownEnter(LocationName.Nekkisari, gameState); 
         }
-        
+        private void OnDisable()
+        {
+            OnGameStateChg -= On_QuestRoomStart;
+            OnGameStateChg -= (GameState gameState) => On_TownEnter(LocationName.Nekkisari, gameState);
+        }
+
         public void On_TownEnter(LocationName locationName, GameState gameState)
         {
             // Anything initialised by SO to be put here 
@@ -68,7 +73,7 @@ namespace Common
         {
             if (gameState != GameState.InQuestRoom)
                 return;
-            CurioService.Instance.InitCurioService();
+           
            
         }
         public void On_QuestRoomEnd()

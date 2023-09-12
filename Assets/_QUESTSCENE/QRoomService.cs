@@ -49,7 +49,9 @@ namespace Quest
         }
         public void On_QuestSceneStart(QuestNames questName)
         {
+            
             InitQRooms(questName);
+            CurioService.Instance.InitCurioService();
             OnStartOfQScene?.Invoke(questName);
         }
         void InitQRooms(QuestNames questName)   // On 1st room Enter 
@@ -57,6 +59,7 @@ namespace Quest
             qNodeAllRoomSO = 
                       allQNodeSO.GetQuestSceneSO(questName);
             ChangeRoomSprites(questName, 1);
+            qRoomController= GetComponent<QRoomController>();   
             qRoomController.InitQRoomController(qNodeAllRoomSO);
             On_QuestStateChg(QRoomState.Prep);
         }

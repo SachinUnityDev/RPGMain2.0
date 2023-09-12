@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement; 
 
 
 namespace Quest
@@ -12,10 +13,24 @@ namespace Quest
         public QBarkSO qBarkSO;
         [SerializeField]List<BarkData> allBarkDataSelect = new List<BarkData>();
 
-        public QbarkView qbarkView; 
-        void Start()
-        {
+        public QbarkView qbarkView;
 
+        private void OnEnable()
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;  
+        }
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name == "QUEST")
+            {
+                qbarkView = FindObjectOfType<QbarkView>(false);
+
+               
+            }
         }
 
         public bool ShowBark(List<QBarkNames> barkNames, InteractEColEvents intColEvents)

@@ -5,7 +5,6 @@ using DG.Tweening;
 using Common;
 using UnityEngine.UI;
 using TMPro;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace Town
 {

@@ -3,10 +3,8 @@ using Interactables;
 using Quest;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.PeerToPeer.Collaboration;
 using Town;
 using UnityEngine;
-using static Spine.Unity.Examples.SpineboyFootplanter;
 
 namespace Quest
 {

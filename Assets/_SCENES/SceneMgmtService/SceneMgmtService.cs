@@ -13,10 +13,13 @@ namespace Common
 
         public Scene currentScene;
         public Scene newScene;
-        //private void Start()
-        //{
-        //    DontDestroyOnLoad(this.gameObject);
-        //}
+        public SceneMgmtController   sceneMgmtController;
+
+        private void Awake()
+        {
+          sceneMgmtController = GetComponent<SceneMgmtController>();      
+        }
+
         public async void LoadNewScene(string sceneName)
         {
             if (cts == null)

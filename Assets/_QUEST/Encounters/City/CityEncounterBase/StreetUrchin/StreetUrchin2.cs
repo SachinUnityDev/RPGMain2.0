@@ -1,10 +1,7 @@
 using Common;
 using Interactables;
 using System.Collections;
-using System.Diagnostics;
-using System.Windows.Forms;
 using UnityEngine;
-using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 
 namespace Quest

@@ -4,18 +4,31 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 namespace Quest
 {
     public class CurioBarkController : MonoBehaviour
     {
         public QbarkView qbarkView;
-        void Start()
+        private void OnEnable()
         {
-
+            
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name == "QUEST")
+            {
+                qbarkView = FindObjectOfType<QbarkView>(false);
 
+
+            }
+        }
         public void ShowCurioBark(CurioNames curioName, CurioColEvents curioColEvents)
         {
             CurioBarkData curioBarkData = BarkService.Instance.allBarkSO.GetCurioBarkData(curioName);

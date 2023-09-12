@@ -49,9 +49,9 @@ namespace Quest
         }
         public void On_QuestSceneStart(QuestNames questName)
         {
-            
-            InitQRooms(questName);
             CurioService.Instance.InitCurioService();
+            InitQRooms(questName);
+            
             OnStartOfQScene?.Invoke(questName);
         }
         void InitQRooms(QuestNames questName)   // On 1st room Enter 
@@ -99,7 +99,7 @@ namespace Quest
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                On_QuestSceneStart(QuestNames.RatInfestation);
+              //  On_QuestSceneStart(QuestNames.RatInfestation);
             }
             //if (Input.GetKeyDown(KeyCode.A))
             //{

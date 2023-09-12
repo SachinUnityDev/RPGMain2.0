@@ -23,12 +23,12 @@ namespace Common
        
         void OnEnable()
         {
-            OnGameStateChg += On_QuestRoomStart;
+           // OnGameStateChg += On_QuestRoomStart;
             OnGameStateChg += (GameState gameState) => On_TownEnter(LocationName.Nekkisari, gameState); 
         }
         private void OnDisable()
         {
-            OnGameStateChg -= On_QuestRoomStart;
+           // OnGameStateChg -= On_QuestRoomStart;
             OnGameStateChg -= (GameState gameState) => On_TownEnter(LocationName.Nekkisari, gameState);
         }
 
@@ -69,13 +69,13 @@ namespace Common
                 WelcomeService.Instance.InitWelcome();
 
         }
-        public void On_QuestRoomStart(GameState gameState)
-        {
-            if (gameState != GameState.InQuestRoom)
-                return;
+        //public void On_QuestRoomStart(GameState gameState)
+        //{
+        //    if (gameState != GameState.InQuestRoom)
+        //        return;
            
            
-        }
+        //}
         public void On_QuestRoomEnd()
         {
 

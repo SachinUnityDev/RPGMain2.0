@@ -66,6 +66,7 @@ namespace Common
                     Debug.Log("Scene Transist to begin end anim");
                     sceneTransitView.EndAnim();
                     sceneTransitStarted = false;
+                    if(next.name =="QUEST")
                     QRoomService.Instance.On_QuestSceneStart(QuestNames.RatInfestation); 
 
                 }

@@ -27,7 +27,7 @@ namespace Quest
         [SerializeField] CurioBase curioBase; 
         [SerializeField] int curioNo;
 
-        void Start()
+        void OnEnable()
         {
             continueBtn.onClick.AddListener(OnContinueBtnPressed); 
         }

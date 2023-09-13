@@ -102,7 +102,7 @@ namespace Town
         void OnInvBtnClick()
         {
 
-            InvService.Instance.ShowInvXLPanel();
+            InvService.Instance.ShowInvXLView(true);
          
 
         }

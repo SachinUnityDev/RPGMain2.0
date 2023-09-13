@@ -4,7 +4,8 @@ using UnityEngine;
 using Combat;
 using Common;
 using System;
-using Town; 
+using Town;
+using UnityEngine.SceneManagement;
 
 namespace Interactables
 {
@@ -55,6 +56,22 @@ namespace Interactables
             invController = GetComponent<InvController>();  
         }
 
+        private void OnEnable()
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded; 
+        }
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+            {   if(invXLGO== null)
+                        InitInvXLView();               
+            }
+       
+
+
         public void On_DragResult(bool result, ItemsDragDrop itemsDragDrop)
         {
             OnDragResult?.Invoke(result,itemsDragDrop); 
@@ -80,16 +97,26 @@ namespace Interactables
             else
             {
                 UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(invXLGO, false);
-                Destroy(invXLGO);
+               // Destroy(invXLGO);
             }
         }
 
-        public void ShowInvXLPanel()
+        public void ShowInvXLView(bool toOpen)
+        {
+            if(invXLGO== null)           
+                InitInvXLView();
+           
+            UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(invXLGO, toOpen);
+            if(toOpen)
+                invXLGO.GetComponent<IPanel>().Init();
+        }
+        public void InitInvXLView()
         {
             if (isInvPanelOpen) return; // return multiple clicks
-            invXLGO = Instantiate(invXLPrefab);
-            Canvas canvas = FindObjectOfType<Canvas>();
-            //  LootService.Instance.lootView = lootViewGO.GetComponent<LootView>();
+            if(invXLGO == null)
+                invXLGO = Instantiate(invXLPrefab);
+            Canvas canvas = GameObject.FindWithTag("Canvas").GetComponent<Canvas>();
+
             invXLGO.transform.SetParent(canvas.transform);
 
             //UIControlServiceGeneral.Instance.SetMaxSiblingIndex(diaGO);
@@ -108,9 +135,7 @@ namespace Interactables
 
             excessInvViewController = invXLGO.GetComponentInChildren<ExcessInvViewController>();
             commInvViewController = invXLGO.GetComponentInChildren<InvRightViewController>();
-
-            UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(invXLGO, true);
-            invXLGO.GetComponent<IPanel>().Init();
+           
         }
 
     

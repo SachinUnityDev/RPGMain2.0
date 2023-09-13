@@ -3763,10 +3763,10 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 772, y: 434}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5546665020929860326
 CanvasRenderer:
@@ -3788,6 +3788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47b4a34f8b1d3f845aeb7a56974044a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pos: {x: 100, y: 0}
   containerTrans: {fileID: 5546665019479191668}
   lootAllBtnPtrEvents: {fileID: 5546665020299347839}
   lootTickPtrEvents: {fileID: 5546665019632639197}

@@ -27,6 +27,7 @@ namespace Common
         {
             RosterService.Instance.OnRosterScrollCharSelect -= PrintPlanks;        
             RosterService.Instance.OnRosterScrollCharSelect += PrintPlanks;
+            SidePlankInit();
         }
         void OnDisable()
         {
@@ -100,8 +101,6 @@ namespace Common
             descPlank.SetActive(false);
             img.sprite = spriteN;
         }
-
-       
 
     }
 

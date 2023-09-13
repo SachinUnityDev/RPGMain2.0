@@ -75,8 +75,8 @@ namespace Common
         
         void OnEnable()
         {
-            //calendarFactory = gameObject.GetComponent<CalendarFactory>();
-            //calendarUIController = GetComponent<CalendarUIController>();
+            calendarFactory = gameObject.GetComponent<CalendarFactory>();
+            calendarUIController = GetComponent<CalendarUIController>();
             
            // endday.onClick.AddListener(On_EndDayClick);
             SceneManager.sceneLoaded += OnSceneLoaded;
@@ -84,7 +84,8 @@ namespace Common
         }
         private void OnDisable()
         {
-          //  endday.onClick.RemoveAllListeners();
+            //  endday.onClick.RemoveAllListeners();
+            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -92,6 +93,8 @@ namespace Common
             if (scene.name == "TOWN")
             {
                 endday = FindObjectOfType<EndDayBtnEvents>(true).GetComponent<Button>();
+                
+
             }
         }
 
@@ -100,6 +103,7 @@ namespace Common
             // define what date and time the game will start by default 
             weekEventsController = GetComponent<WeekEventsController>();
             weekEventsController.InitWeekController(allWeekSO);
+            calendarUIController.Init();
             calendarUIController.UpdateMonthPanel(currentMonth, dayInYrName, dayInYear);
             calendarUIController.UpdateWeekPanel(currentWeek);
             currtimeState = TimeState.Day;

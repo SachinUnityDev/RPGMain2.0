@@ -30,26 +30,31 @@ namespace Interactables
             desc.SetActive(false);
             PanelTrans = transform.parent;            
         }
-        private void Start()
-        {        
-            CharService.Instance.allCharsInPartyLocked.ForEach(t => t.OnAttribCurrValSet
-             += (AttribModData charModData) => PopulateData(CharService.Instance.GetCharCtrlWithCharID
-             (charModData.effectedCharNameID).charModel));
-        }
+
         private void OnEnable()
         {
             InvService.Instance.OnCharSelectInvPanel += PopulateData;
+            CharService.Instance.allCharsInPartyLocked.ForEach(t => t.OnAttribCurrValSet
+                                                                                     += PopulateData);
         }
         private void OnDisable()
         {
             InvService.Instance.OnCharSelectInvPanel -= PopulateData;
+            CharService.Instance.allCharsInPartyLocked.ForEach(t => t.OnAttribCurrValSet
+                                                                                     -= PopulateData);
         }
         public void PopulateData(CharModel charModel)
         {
             transform.GetChild(1).GetComponent<TextMeshProUGUI>().text
                                                     = GetStatAttribStr(charModel);
         }
-
+        public void PopulateData(AttribModData charModData)
+        {
+            CharModel charModel =
+             CharService.Instance.GetCharCtrlWithCharID(charModData.effectedCharNameID).charModel;
+            transform.GetChild(1).GetComponent<TextMeshProUGUI>().text
+                                                    = GetStatAttribStr(charModel);
+        }
         string GetStatAttribStr(CharModel charModel)
         {
             string str = "";

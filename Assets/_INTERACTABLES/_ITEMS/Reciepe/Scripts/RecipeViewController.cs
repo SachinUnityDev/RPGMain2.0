@@ -38,19 +38,15 @@ namespace Interactables
         [SerializeField]const int PANEL_PER_page = 5;
         [SerializeField] int netPages = -1;
 
-        void Awake()
+        void OnEnable()
         {
             
-            pageContainer = transform.GetChild(1);
-            pageIndex = 1;
             cookingBtn.onClick.AddListener(OnCookingBtnPressed); 
             craftingBtn.onClick.AddListener(OnCraftingBtnPressed);  
             mergingBtn.onClick.AddListener(OnMergingBtnPressed);
             brewingBtn.onClick.AddListener(OnBrewingBtnPressed); 
 
             pageBtn.onClick.AddListener(OnPageBtnPressed);
-
-            recipeTypeTxt = transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
         }
         
         #region Button responses
@@ -79,6 +75,7 @@ namespace Interactables
         void On_RecipeTypeSelect(RecipeType recipeType)
         {
             recipeTypeSelect = recipeType;
+            recipeTypeTxt = transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
             recipeTypeTxt.text = recipeType.ToString();
             
             PopulateTheRecipe();
@@ -101,8 +98,11 @@ namespace Interactables
             else
                 netPages = (recipeCount / 5) + 1;
 
+            pageContainer = transform.GetChild(1);
+            pageIndex = 1;
             int index = pageIndex * PANEL_PER_page;
             int j = 0;
+           
             for (int i = index - 5; i < index; i++)
             {
                 if (i < recipeLs.Count)

@@ -102216,8 +102216,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   helpName: 5
-  lorePanel: {fileID: 0}
-  receipePanel: {fileID: 0}
   loreViewController: {fileID: 0}
   receipeViewController: {fileID: 0}
 --- !u!1 &1138874324371126034
@@ -129285,7 +129283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   helpName: 3
-  invCommViewController: {fileID: 0}
+  invCommViewController: {fileID: 4351977268981761562}
   btmCharViewController: {fileID: 4351977269286567985}
   levelView: {fileID: 1138874323731982457}
   AttributesPanel: {fileID: 0}

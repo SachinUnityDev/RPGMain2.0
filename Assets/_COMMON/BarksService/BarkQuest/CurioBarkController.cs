@@ -24,9 +24,7 @@ namespace Quest
         {
             if (scene.name == "QUEST")
             {
-                qbarkView = FindObjectOfType<QbarkView>(false);
-
-
+                qbarkView = FindObjectOfType<QbarkView>(true);
             }
         }
         public void ShowCurioBark(CurioNames curioName, CurioColEvents curioColEvents)

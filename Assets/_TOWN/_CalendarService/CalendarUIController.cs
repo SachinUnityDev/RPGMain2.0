@@ -8,6 +8,7 @@ using Town;
 using UnityEngine.UI;
 using Combat;
 using UnityEngine.SceneManagement;
+using DG.Tweening.Core;
 
 namespace Common
 {
@@ -30,12 +31,25 @@ namespace Common
          void Awake()
          {
             //START OF THE GAME
-            
-            GetMonthStartDay(MonthName.WingOfTheLocust, DayName.DayOfLight);
-            Init();
+           //if() 
+           // GetMonthStartDay(MonthName.WingOfTheLocust, DayName.DayOfLight);
+           
         }
-        void Init()
+       
+        public void Init()
         {
+            dayBGPanel = FindObjectOfType<TownViewController>(false).gameObject;
+            famePanel = FindObjectOfType<FameViewController>(true).gameObject;
+            monthPanel = FindObjectOfType<HelpMonth>(true).gameObject;// script attached to month
+            dayPanel = FindObjectOfType<HelpDay>(true).gameObject;// script attached to Day 
+            weekPanel = FindObjectOfType<WeekView>(true).gameObject;
+            townCenterPanel = FindObjectOfType<TownCenterView>(true).gameObject;
+
+
+            showMonthBtn = monthPanel.GetComponentInChildren<Button>();
+            showWeekBtn = weekPanel.GetComponentInChildren<Button>();
+
+
             townCenterPanel.SetActive(true);
             allPanels.Clear();
             allPanels.AddRange(new List<GameObject>(){ famePanel, monthPanel, weekPanel, dayPanel });
@@ -46,28 +60,21 @@ namespace Common
             showWeekBtn.onClick.AddListener(OnShowMonthBtnPressed);
 
         }
-        private void Start()
-        {
-            SceneManager.sceneLoaded += OnSceneLoaded;
+        private void OnEnable()
+        {           
+            SceneManager.sceneLoaded += OnSceneLoaded;    
             
+        }
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (scene.name == "TOWN")
-            {
-                dayBGPanel = FindObjectOfType<TownViewController>(false).gameObject;
-                famePanel = FindObjectOfType<FameViewController>(true).gameObject;
-                monthPanel = FindObjectOfType<HelpMonth>(true).gameObject;// script attached to month
-                dayPanel = FindObjectOfType<HelpDay>(true).gameObject;// script attached to Day 
-                weekPanel = FindObjectOfType<WeekView>(true).gameObject;
-                townCenterPanel = FindObjectOfType<TownCenterView>(true).gameObject;
-                
-
-                showMonthBtn = monthPanel.GetComponentInChildren<Button>();
-                showWeekBtn = weekPanel.GetComponentInChildren<Button>();
-                
-                Init();
-            }
+            //if (scene.name == "TOWN")
+            //{
+            //    Init();
+            //}
         }
 
         void OnShowWeekBtnPressed()

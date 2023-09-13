@@ -18,19 +18,25 @@ namespace Interactables
         public LevelView levelView; 
 
 
-       [SerializeField] GameObject AttributesPanel;
-       [SerializeField] GameObject StatsPanel;
-       [SerializeField] GameObject traitsPanel;
+       //[SerializeField] GameObject AttributesPanel;
+       //[SerializeField] GameObject StatsPanel;
+       //[SerializeField] GameObject traitsPanel;
         public CharNames selectchar;
 
 
-        private void Awake()
+        private void OnEnable()
         {
-            invCommViewController = transform.GetChild(1).GetComponent<InvRightViewController>();
+            invCommViewController =                                
+                transform.GetComponentInChildren<InvRightViewController>(true);
            
-            btmCharViewController = transform.GetChild(2).GetComponent<BtmCharViewController>();
+            btmCharViewController = 
+                transform.parent.GetComponentInChildren<BtmCharViewController>(true);
      
             InvService.Instance.OnCharSelectInvPanel += OnCharSelected; 
+        }
+        void OnDisable() {
+            InvService.Instance.OnCharSelectInvPanel += OnCharSelected; 
+        
         }
 
         public void OnCharSelected(CharModel charModel)
@@ -57,6 +63,8 @@ namespace Interactables
 
         public void Load()
         {
+            btmCharViewController =       
+                    transform.parent.GetComponentInChildren<BtmCharViewController>(true);
             btmCharViewController.gameObject.transform.SetParent(transform);
             transform.parent.gameObject.SetActive(true);
             InvService.Instance.isInvPanelOpen = true;
@@ -70,6 +78,10 @@ namespace Interactables
 
         public void Init()
         {
+            //invCommViewController =
+            //   transform.GetChild(1).GetComponent<InvRightViewController>();
+            //invCommViewController =
+            //  transform.GetComponentInChildren<InvRightViewController>(true);
             invCommViewController.Init();
             btmCharViewController.Init();         
             btmCharViewController.gameObject.transform.SetParent(transform);

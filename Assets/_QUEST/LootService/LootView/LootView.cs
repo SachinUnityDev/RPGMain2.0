@@ -30,6 +30,8 @@ namespace Quest
     public class LootView : MonoBehaviour, IPanel
     {
 
+
+
         [Header("container")]
         [SerializeField] Transform containerTrans; 
 

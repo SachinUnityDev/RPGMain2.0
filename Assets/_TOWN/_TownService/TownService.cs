@@ -16,28 +16,29 @@ namespace Town
         [Header("BUILDING CONTROLLERS")]
         public TempleController templeController;
 
-
         [Header("TOWN LOCATION")]
         public BuildingNames selectBuildingName;
-
 
         public AllBuildSO allbuildSO;
         [Header("Game Init")]
         public bool isNewGInitDone = false;
 
-        void Start()
+        void OnEnable()
         {
             townController = GetComponent<TownController>();
             fameController = GetComponent<FameViewController>();
             //templeController = buildingIntViewController.templePanel.GetComponent<TempleController>();
             SceneManager.sceneLoaded += OnSceneLoaded; 
         }
-
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             if (scene.name == "TOWN")
             {
-                townViewController=  FindObjectOfType<TownViewController>(false);
+                townViewController=  FindObjectOfType<TownViewController>(true);
 
                 TimeState timeState = CalendarService.Instance.currtimeState;
                 townViewController.TownViewInit(timeState);
@@ -45,14 +46,14 @@ namespace Town
         }
 
 
-                public void Init(LocationName location)
+        public void Init(LocationName location)
         {  
             townModel = new TownModel(); // to be linke d to save Panels
             townModel.currTown = location;
             townModel.allCharInTown 
                 = RosterService.Instance.rosterController.GetCharAvailableInTown(location);
             
-            townViewController.TownViewInit(CalendarService.Instance.currtimeState);
+           // townViewController.TownViewInit(CalendarService.Instance.currtimeState);
             isNewGInitDone = true;
         }
 

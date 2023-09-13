@@ -4,8 +4,8 @@ using UnityEngine;
 using Common;
 using TMPro;
 using UnityEngine.EventSystems;
-using System.Runtime.InteropServices.ComTypes;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
+using Combat;
+
 
 namespace Interactables
 {
@@ -22,8 +22,7 @@ namespace Interactables
 
         void Awake()
         {
-            desc = transform.GetChild(3).gameObject;
-            desc.SetActive(false);
+           
                 //attribPanelViewComp =
             //        transform.GetComponentInParent<AttribPanelViewComp>();
 
@@ -31,24 +30,34 @@ namespace Interactables
             //    attribPanelViewComp.transform.parent.parent
             //                    .GetChild(2).GetComponent<BtmCharViewController>();
         }
-        private void OnEnable()
+        private void Start()
         {
+            CharService.Instance.allCharsInPartyLocked.ForEach(t => t.OnAttribCurrValSet
+               += PopulateData);
+
             InvService.Instance.OnCharSelectInvPanel += PopulateData;
+            desc = transform.GetChild(3).gameObject;
+            desc.SetActive(false);
+
         }
         private void OnDisable()
         {
             InvService.Instance.OnCharSelectInvPanel -= PopulateData;
-
-        }
-        private void Start()
-        {
             CharService.Instance.allCharsInPartyLocked.ForEach(t => t.OnAttribCurrValSet
-               += (AttribModData charModData) => PopulateData(CharService.Instance.GetCharCtrlWithCharID
-               (charModData.effectedCharNameID).charModel));
-         
+              -= PopulateData);
         }
+     
         public void PopulateData(CharModel charModel)
         {
+            transform.GetChild(2).GetComponent<TextMeshProUGUI>().text
+                                                  = GetStatValue(charModel);
+        }
+
+
+        public void PopulateData(AttribModData charModData)
+        {
+            CharModel charModel = CharService.Instance.GetCharCtrlWithCharID
+                                                        (charModData.effectedCharNameID).charModel; 
             transform.GetChild(2).GetComponent<TextMeshProUGUI>().text
                                                     = GetStatValue(charModel);
         }

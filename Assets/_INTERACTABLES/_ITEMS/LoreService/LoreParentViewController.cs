@@ -10,24 +10,22 @@ namespace Interactables
         [Header("help")]
         [SerializeField] HelpName helpName;
 
-        [SerializeField] Transform lorePanel;
-        [SerializeField] Transform receipePanel;
+       
 
         public LoreViewController loreViewController; 
         public RecipeViewController receipeViewController;
-        void Awake()
-        {
-            lorePanel = transform.GetChild(0);
-            receipePanel = transform.GetChild(1);   
-            lorePanel.gameObject.SetActive(true);
-            receipePanel.gameObject.SetActive(true);
-            loreViewController = lorePanel.GetComponent<LoreViewController>(); 
-            receipeViewController = receipePanel.GetComponent<RecipeViewController>();
-
+        void OnEnable()
+        {     
+            loreViewController = FindObjectOfType<LoreViewController>(true); 
+            receipeViewController = FindObjectOfType<RecipeViewController>(true);
+            loreViewController.gameObject.SetActive(true); 
+            receipeViewController.gameObject.SetActive(true);  
         }
         public void Init()
         {
-            // init both sub panels here 
+            //// init both sub panels here 
+            loreViewController = FindObjectOfType<LoreViewController>(true);
+            receipeViewController = FindObjectOfType<RecipeViewController>(true);
             loreViewController.GetComponent<IPanel>().Init();
             receipeViewController.GetComponent<IPanel>().Init();
         }

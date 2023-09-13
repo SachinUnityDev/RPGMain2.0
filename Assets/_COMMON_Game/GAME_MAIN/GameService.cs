@@ -29,16 +29,19 @@ namespace Common
         [SerializeField] List<string> allGameJSONs = new List<string>();
         public bool isNewGInitDone = false;
 
-        void Start()
+        void OnEnable()
         {  
             sceneController = GetComponent<SceneController>();
-         // GameInit(GameState.InIntro, GameDifficulty.Easy, LocationName.Nekkisari); 
-            OnSceneLoad();           
+            // GameInit(GameState.InIntro, GameDifficulty.Easy, LocationName.Nekkisari); 
+            SceneManager.sceneLoaded += OnSceneLoad; 
+        }
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoad;
         }
 
-        void OnSceneLoad()
-        {
-            Scene scene = SceneManager.GetActiveScene();
+        void OnSceneLoad(Scene scene, LoadSceneMode loadMode)
+        {   
             int index = scene.buildIndex;
             if(index == (int)GameScene.Town)
             {

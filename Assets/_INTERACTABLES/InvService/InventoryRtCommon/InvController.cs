@@ -47,11 +47,16 @@ namespace Interactables
         {            
             InvService.Instance.commInvViewController.UpdateCommInvDB();
             InvService.Instance.excessInvViewController.UpdateExcessInvDataBase();
-            InvService.Instance.stashInvViewController.UpdateStashInvDatabase();
+            if(GameService.Instance.gameModel.gameState == GameState.InTown)
+            {
+                InvService.Instance.stashInvViewController.UpdateStashInvDatabase();
+                size_Stash = InvService.Instance.invMainModel.size_Stash;
+            }
+            
 
             size_Comm = InvService.Instance.invMainModel.size_Comm;
             size_excess = InvService.Instance.invMainModel.size_excess;
-            size_Stash = InvService.Instance.invMainModel.size_Stash; 
+            
         }
         public bool CheckIfLootCanBeAdded(List<ItemBaseWithQty> items)
         {            

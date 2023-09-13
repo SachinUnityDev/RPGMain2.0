@@ -30,13 +30,16 @@ namespace Interactables
 
         private void Awake()
         {
-             bestiaryPanel.SetActive(true); 
-             skillPanel.SetActive(true);
-             loreParentPanel.SetActive(true);
-             invPanel.SetActive(true);
+          
         }
-        void Start()
+        void OnEnable()
         {
+
+            bestiaryPanel.SetActive(true);
+            skillPanel.SetActive(true);
+            loreParentPanel.SetActive(true);
+            invPanel.SetActive(true);
+
             beastiaryBtn =  ToggleBtnParent.transform.GetChild(0).GetComponent<Button>();
             skillBtn = ToggleBtnParent.transform.GetChild(1).GetComponent<Button>();
             loreBtn = ToggleBtnParent.transform.GetChild(2).GetComponent<Button>();
@@ -65,11 +68,9 @@ namespace Interactables
         }
 
         public void Init()
-        {
-            //start with the inv panel display
+        {       
             UIControlServiceGeneral.Instance.TogglePanelOnInGrp(invPanel, true);
 
-            // init all four panels and their subpanels here 
             bestiaryPanel.GetComponent<IPanel>().Init();
             skillPanel.GetComponent<IPanel>().Init();
             loreParentPanel.GetComponent<IPanel>().Init();

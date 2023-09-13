@@ -91,7 +91,9 @@ namespace Interactables
             itemFactory = gameObject.GetComponent<ItemFactory>();
         }
         public void Init()
-        {            
+        {
+            itemFactory = GetComponent<ItemFactory>();
+            itemFactory.ItemInit();
             foreach (CharController charController in CharService.Instance.allCharsInPartyLocked)
             {
                 ItemController itemController = 
@@ -101,6 +103,8 @@ namespace Interactables
             }
             CalendarService.Instance.OnStartOfCalDay += (int day) => OnDayTickOnScroll();
             isNewGInitDone = true;
+    
+
         }
 
         #region ITEM BASE

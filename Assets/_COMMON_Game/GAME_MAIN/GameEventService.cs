@@ -13,6 +13,9 @@ namespace Common
         public Action OnGameStart;
         public Action OnGameEnd;
 
+        public bool hasGameStarted = false; 
+
+
         public Action<LocationName> OnTownEnter;
         public Action<LocationName> OnTownExit;
 
@@ -24,23 +27,23 @@ namespace Common
         void OnEnable()
         {
            // OnGameStateChg += On_QuestRoomStart;
-            OnGameStateChg += (GameState gameState) => On_TownEnter(LocationName.Nekkisari, gameState); 
+            OnGameStateChg += On_TownEnter; 
         }
         private void OnDisable()
         {
            // OnGameStateChg -= On_QuestRoomStart;
-            OnGameStateChg -= (GameState gameState) => On_TownEnter(LocationName.Nekkisari, gameState);
+            OnGameStateChg -= On_TownEnter;
         }
 
-        public void On_TownEnter(LocationName locationName, GameState gameState)
+        public void On_TownEnter(GameState gameState)
         {
             // Anything initialised by SO to be put here 
             // any initialisation during scene swap to be checked 
             // model init to be implemented after the save service connection 
 
-            if (gameState != GameState.InTown)
+            if (gameState != GameState.InTown && hasGameStarted)
                 return; 
-        
+           LocationName locationName = LocationName.Nekkisari;
                 
                 CalendarService.Instance.Init();
                 TownService.Instance.Init(locationName);
@@ -67,6 +70,7 @@ namespace Common
                 WelcomeService.Instance.On_QuickStart();
             else
                 WelcomeService.Instance.InitWelcome();
+            On_GameStart();
 
         }
         //public void On_QuestRoomStart(GameState gameState)
@@ -89,10 +93,12 @@ namespace Common
 
         public void On_GameStart()
         {
+            hasGameStarted = true; 
             OnGameStart?.Invoke();
         }
         public void On_GameEnd()
         {
+            hasGameStarted= false;
             OnGameEnd?.Invoke(); 
         }
     }

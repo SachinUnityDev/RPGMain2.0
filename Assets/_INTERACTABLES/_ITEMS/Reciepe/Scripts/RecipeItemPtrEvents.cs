@@ -12,15 +12,15 @@ namespace Interactables
     {
 
         [SerializeField] TextMeshProUGUI itemName;
-        private void Awake()
+        private void OnEnable()
         {
             itemName = transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>(); 
         }
 
         public void Init(Iitems item, ItemDataWithQty ingredData = null)
         {
-        
-                switch (item.itemType)
+            itemName = transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
+            switch (item.itemType)
                 {
                     case ItemType.None:
                         break;

@@ -31,18 +31,15 @@ namespace Town
         [Header("Build Model")]
         [SerializeField] BuildingModel buildModel;
 
-        void Awake()
-        {
-                       
-        }
-
         private void Start()
         {
-            CalendarService.Instance.OnChangeTimeState += TownViewInit;
+          //  CalendarService.Instance.OnChangeTimeState += TownViewInit;
+          //  SceneManager.sceneLoaded += OnSceneLoaded; 
         }
         private void OnDisable()
         {
-            CalendarService.Instance.OnChangeTimeState -= TownViewInit;
+        //    CalendarService.Instance.OnChangeTimeState -= TownViewInit;
+           // SceneManager.sceneLoaded -= OnSceneLoaded;
         }
         //void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         //{
@@ -107,6 +104,8 @@ namespace Town
         }
         public void TownViewInit(TimeState timeState)
         {
+           
+                
             buildContainer = transform.GetChild(0);
             townBGImage = transform.GetChild(0).GetComponent<Image>();
             FillTownBG(); 

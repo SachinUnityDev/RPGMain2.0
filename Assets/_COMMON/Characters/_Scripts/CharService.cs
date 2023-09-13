@@ -212,7 +212,7 @@ namespace Common
         {
             foreach (var charController in charsInPlayControllers) 
             {
-
+                if(charController != null)
                 OnCharInit?.Invoke(charController.charModel.charName);
             }
         

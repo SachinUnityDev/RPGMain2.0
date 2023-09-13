@@ -14,7 +14,7 @@ namespace Quest
         [SerializeField]TextMeshProUGUI heading; 
         public void OnPointerClick(PointerEventData eventData)
         {
-            InvService.Instance.ShowInvXLPanel();
+            InvService.Instance.ShowInvXLView(true);
             //GameObject invPanelXL =
             //                InvService.Instance.invXLGO; 
 

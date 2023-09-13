@@ -48,15 +48,20 @@ namespace Interactables
         [Header("Global Var")]
         [SerializeField] bool hasInitialized = false;
         [SerializeField] CompCharParaViewController compCharParaView; 
-        void Awake()
+        void Start()
         {
 
+
+        }
+
+        private void OnEnable()
+        {
             nameTxt = scrollNameGO.GetChild(0).GetComponent<TextMeshProUGUI>();
             rightBtn = scrollNameGO.GetChild(1).GetComponent<Button>();
             leftBtn = scrollNameGO.GetChild(2).GetComponent<Button>();
             rightBtn.onClick.AddListener(OnRightBtnPressed);
             leftBtn.onClick.AddListener(OnLeftBtnPressed);
-            
+
             cultBtn.onClick.AddListener(OnCultBtnPressed);
             //raceBtn.onClick.AddListener(OnRaceBtnPressed); 
             raceBtnAnim = raceBtnGO.GetComponent<RaceBtnAnim>();
@@ -65,7 +70,11 @@ namespace Interactables
 
             selectRace = RaceType.None;
             bannerClosedPos = bannerImg.transform.localPosition.y;
-            hasInitialized = false; 
+            hasInitialized = false;
+        }
+        private void OnDisable()
+        {
+            
         }
 
         public void Init()
@@ -81,7 +90,7 @@ namespace Interactables
                     selectComp.Add(c.charModel);
                 }
             }
-            
+            compCharParaView = GetComponent<CompCharParaViewController>();
             lockBtn.GetComponent<LockBtnPtrEvents>().Init(this);
             PopulateScollData();
             raceBtnAnim.Init(selectComp[index], this);

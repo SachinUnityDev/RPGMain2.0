@@ -116,7 +116,6 @@ namespace Common
 
         void OnOptBtn1Pressed()
         {
-
             currLvl = allPendingOptions[index].level;
             LevelService.Instance.lvlModel.RemoveOptions2PendingStack(charName, currLvl, 1);
             LevelService.Instance.lvlModel.AddOptions2ChosenStack(charName
@@ -146,8 +145,7 @@ namespace Common
         }
 
         public void Init()
-        {
-           
+        {           
             UnLoad();
         }
 

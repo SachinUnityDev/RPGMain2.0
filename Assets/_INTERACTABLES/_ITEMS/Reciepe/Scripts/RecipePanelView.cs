@@ -25,7 +25,7 @@ namespace Interactables
         [SerializeField] ItemData toolData; 
 
         IRecipe iRecipe; 
-        private void Awake()
+        private void OnEnable()
         {
             finalPdtTrans = transform.GetChild(0).GetChild(0);
             ingred1Trans = transform.GetChild(0).GetChild(2);
@@ -33,7 +33,7 @@ namespace Interactables
             ingred3Trans = transform.GetChild(0).GetChild(6);
             ingred4Trans = transform.GetChild(0).GetChild(8);
             toolTrans = transform.GetChild(0).GetChild(9);
-            slotTitleTxt = transform.GetChild(1).GetComponent<TextMeshProUGUI>(); 
+           
         }
         public void Init(ItemData itemData)
         {
@@ -56,7 +56,7 @@ namespace Interactables
                     allIngredData = iRecipe.allIngredData;
                     toolData = iRecipe.toolData; 
                 }
-                
+                finalPdtTrans = transform.GetChild(0).GetChild(0);
                 finalPdtTrans.transform.GetComponent<RecipeItemPtrEvents>().Init(iitem);
                 int j = 0;
                 for (int i = 0; i < allIngredData.Count; i++)
@@ -81,7 +81,7 @@ namespace Interactables
                     transform.GetChild(0).GetChild(9).gameObject.SetActive(false);
                 }                    
             }
-
+            slotTitleTxt = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
             switch (itemData.itemType)
             {
                 case ItemType.None:

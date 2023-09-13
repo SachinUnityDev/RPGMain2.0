@@ -169,8 +169,8 @@ namespace Interactables
 
         public void Init()
         {          
-             transform.GetChild(1).
-                 GetComponent<CompanionViewController>().Init();  // Acts as parent to comp 
+             transform.
+                 GetComponentInChildren<CompanionViewController>(true).Init();  // Acts as parent to comp 
            
         }
 

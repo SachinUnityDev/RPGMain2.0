@@ -108,12 +108,13 @@ namespace Interactables
 
         void Start()
         {
-            itemId =-1;
-            ItemInit();
+            
         }
 
-        void ItemInit()
+        public void ItemInit()
         {
+            itemId = -1;
+            
             PotionInit();           
             GenGewGawInit();              
             HerbsInit();            
@@ -343,7 +344,7 @@ namespace Interactables
         }
          void InitSuffixes()
         {
-           // if (allSuffixes.Count > 0) return;
+            if (allSuffixes.Count > 0) return;
 
             var getallsuffixes = Assembly.GetAssembly(typeof(SuffixBase)).GetTypes()
                                  .Where(myType => myType.IsClass
@@ -358,7 +359,7 @@ namespace Interactables
         }
          void InitPrefixes()
         {
-           // if (allPrefixes.Count > 0) return;
+            if (allPrefixes.Count > 0) return;
 
             var getallPrefixes = Assembly.GetAssembly(typeof(PrefixBase)).GetTypes()
                                  .Where(myType => myType.IsClass

@@ -64,6 +64,7 @@ namespace Interactables
             invContainer = gameObject.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
             InvService.Instance.OnDragResult += OnDragResult;
             gewgawsActiveInvPanel.SetActive(false);
+            canvas = FindObjectOfType<Canvas>();
         }
         private void OnDisable()
         {
@@ -81,10 +82,13 @@ namespace Interactables
         public void ShowRightClickList(ItemSlotController itemSlotController)
         {
             int i = 0;
-           
+           ItemCardView itemCardView = FindObjectOfType<ItemCardView>(true);
+            if(itemCardView != null)
+            {
+                itemCardView.OnRightClickOptsDsply(true); 
+            }
             foreach (ItemActions itemAction in itemSlotController.rightClickActions)
             {
-
                 Transform btn = rightClickOpts.GetChild(i); 
                 btn.GetComponentInChildren<TextMeshProUGUI>().text
                     = InvService.Instance.InvSO.GetItemActionStrings(itemAction);
@@ -122,6 +126,12 @@ namespace Interactables
                 {
                     return;
                 }
+            }
+            // Item Card Dsply
+            ItemCardView itemCardView = FindObjectOfType<ItemCardView>(true);
+            if (itemCardView != null)
+            {
+                itemCardView.OnRightClickOptsDsply(false);
             }
             rightClickOpts.gameObject.SetActive(false);
 

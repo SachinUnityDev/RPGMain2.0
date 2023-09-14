@@ -55,9 +55,10 @@ namespace Interactables
         public void OnPointerExit(PointerEventData eventData)
         {         
             itemCardGO.SetActive(false);
+
             Sequence closeSeq = DOTween.Sequence();
-            closeSeq.PrependInterval(2f)
-                    .Append(itemCardGO.GetComponent<Image>().DOFade(0.5f,0.1f))
+            closeSeq.PrependInterval(1f)
+                    //.Append(itemCardGO.GetComponent<Image>().DOFade(0.5f, 0.1f))
                     .AppendCallback(() => InvService.Instance.commInvViewController.CloseRightClickOpts());
             closeSeq.Play();
         }
@@ -65,25 +66,24 @@ namespace Interactables
 
         void ShowItemCard()
         {
-            if (itemCardGO == null)
+            Canvas canvas = FindObjectOfType<Canvas>();
+           
+            if (ItemService.Instance.itemCardGO == null)
             {
-                itemCardGO = Instantiate(ItemService.Instance.itemCardGO);
-            }
-                Canvas canvas = FindObjectOfType<Canvas>();
-                itemCardGO.transform.SetParent(canvas.transform);
+                ItemService.Instance.itemCardGO = Instantiate(ItemService.Instance.itemCardPrefab);
+            }            
+            itemCardGO = ItemService.Instance.itemCardGO; 
+              
+            itemCardGO.transform.SetParent(canvas.transform);
 
 
                 int index = itemCardGO.transform.parent.childCount - 1;
                 itemCardGO.transform.SetSiblingIndex(index);
                 RectTransform invXLRect = itemCardGO.GetComponent<RectTransform>();
-
-                //invXLRect.anchorMin = new Vector2(0, 0);
-                //invXLRect.anchorMax = new Vector2(1, 1);
+              
                 invXLRect.pivot = new Vector2(0.5f, 0.5f);
                 invXLRect.localScale = Vector3.one;
-                //invXLRect.offsetMin = new Vector2(0, 0); // new Vector2(left, bottom);
-                //invXLRect.offsetMax = new Vector2(0, 0); // new Vector2(-right, -top);
-
+              
                 itemCardGO.GetComponent<ItemCardView>().ShowItemCard(iSlotable.ItemsInSlot[0]);
                 if (iSlotable.slotType == SlotType.TradeScrollSlot)
                     PosTradeScrollSlot();

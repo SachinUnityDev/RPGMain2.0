@@ -75,17 +75,7 @@ namespace Common
             GameService.Instance.isNewGInitDone = true; 
 
         }
-        //public void On_QuestRoomStart(GameState gameState)
-        //{
-        //    if (gameState != GameState.InQuestRoom)
-        //        return;
-           
-           
-        //}
-        public void On_QuestRoomEnd()
-        {
-
-        }
+       
 
 
         public void On_TownExit(LocationName locationName)

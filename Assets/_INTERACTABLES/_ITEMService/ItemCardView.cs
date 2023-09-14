@@ -36,13 +36,14 @@ namespace Interactables
         [SerializeField] Transform currTrans;
 
         [Header("Tail")]
-        [SerializeField] Transform tailTrans; 
+        [SerializeField] Transform tailTrans;
 
-
+        [SerializeField] bool isRightClickDspled; 
    
         void OnEnable()
         {
            // gameObject.SetActive(false);
+           isRightClickDspled= false;
             crownTrans = transform.GetChild(0);
             topTrans = transform.GetChild(1);
             midTrans = transform.GetChild(2);
@@ -85,6 +86,8 @@ namespace Interactables
         }
         public void ShowItemCard(Iitems item)
         {
+            if (isRightClickDspled)
+                return;
             gameObject.SetActive(true);
             tailTrans.gameObject.SetActive(false);   
             itemViewSO = ItemService.Instance.itemViewSO; 
@@ -402,7 +405,6 @@ namespace Interactables
                                 child.gameObject.SetActive(false);
                             }
                         }
-
                         // TAIL verses
                         int setNum = poeticGewgawSO.setNumber;
                         tailTrans.GetChild(2).GetComponent<TextMeshProUGUI>().text
@@ -420,11 +422,19 @@ namespace Interactables
                 default:
                     break;
             }
-
+           
         }
 
+        public void OnRightClickOptsDsply(bool isDsplyed)
+        {
+            isRightClickDspled= isDsplyed;
+            if(isDsplyed)
+            {
+                gameObject.SetActive(false);
+            }
+            
 
-
+        }
 
     }
 }

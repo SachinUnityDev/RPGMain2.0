@@ -14,9 +14,13 @@ namespace Town
         [Header("to be ref")]
         public HouseView houseView; 
 
-        private void Start()
+        private void OnEnable()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
@@ -35,12 +39,13 @@ namespace Town
         }
         public void UnLockBuildIntType(BuildInteractType buildIntType, bool unLock)
         {
+            houseView = FindObjectOfType<HouseView>(true);
             foreach (BuildIntTypeData buildData in houseModel.buildIntTypes)
             {
                 if (buildData.BuildIntType == buildIntType)
                 {
                     buildData.isUnLocked = unLock;
-                    houseView.InitBuildIntBtns(houseView as BuildView, houseModel as BuildingModel);
+                    houseView.InitBuildIntBtns(houseModel as BuildingModel);
                 }
             }
         }

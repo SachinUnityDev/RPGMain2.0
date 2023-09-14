@@ -23,6 +23,7 @@ namespace Quest
         
         public void PathViewInit()
         {
+            MapPathContainer = FindObjectOfType<MapPathContainer>(true).transform;
             foreach (Transform node in MapPathContainer)
             {
                 PathQView pathQView =  node.GetComponent<PathQView>();  

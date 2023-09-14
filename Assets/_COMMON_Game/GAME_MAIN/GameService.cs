@@ -61,7 +61,6 @@ namespace Common
 
         public void GameInit(GameState gameState, GameDifficulty gameDiff, LocationName locName)
         {
-            isNewGInitDone = true;
             gameModel = new GameModel(gameState,gameDiff, locName);
             GameEventService.Instance.OnGameStateChg?.Invoke(gameState);             
         }

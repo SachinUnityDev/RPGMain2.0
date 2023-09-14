@@ -40,10 +40,11 @@ namespace Common
             // Anything initialised by SO to be put here 
             // any initialisation during scene swap to be checked 
             // model init to be implemented after the save service connection 
-
-            if (gameState != GameState.InTown && hasGameStarted)
+            if (GameService.Instance.isNewGInitDone)
+                return;
+            if (gameState != GameState.InTown)
                 return; 
-           LocationName locationName = LocationName.Nekkisari;
+                LocationName locationName = LocationName.Nekkisari;
                 
                 CalendarService.Instance.Init();
                 TownService.Instance.Init(locationName);
@@ -71,6 +72,7 @@ namespace Common
             else
                 WelcomeService.Instance.InitWelcome();
             On_GameStart();
+            GameService.Instance.isNewGInitDone = true; 
 
         }
         //public void On_QuestRoomStart(GameState gameState)

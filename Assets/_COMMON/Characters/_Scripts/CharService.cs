@@ -84,12 +84,12 @@ namespace Common
             {
                 SpawnCompanions(charName);
             }
-            CharController abbas = charsInPlayControllers.Find(t => t.charModel.charName == CharNames.Abbas);
-            foreach (CharController charCtrl in allyInPlayControllers)
-            {
-                On_CharInit();
-                On_CharAddToParty(GetCharCtrlWithName(charCtrl.charModel.charName));
-            }
+            //CharController abbas = charsInPlayControllers.Find(t => t.charModel.charName == CharNames.Abbas);
+            //foreach (CharController charCtrl in allyInPlayControllers)
+            //{
+            //    On_CharInit();
+            //    On_CharAddToParty(GetCharCtrlWithName(charCtrl.charModel.charName));
+            //}
 
             isNewGInitDone = true;
 
@@ -187,6 +187,9 @@ namespace Common
           
              CharModel charModel = charController.InitiatizeController(charSO);
 
+            if (charController.charModel.charName == CharNames.Abbas)
+                On_CharAddToParty(charController); 
+
 
             charsInPlayControllers.Add(charController);
             allyInPlayControllers.Add(charController);
@@ -210,10 +213,12 @@ namespace Common
         }
         public void On_CharInit()
         {
-            foreach (var charController in charsInPlayControllers) 
+            foreach (var charController in charsInPlayControllers.ToList()) 
             {
                 if(charController != null)
-                OnCharInit?.Invoke(charController.charModel.charName);
+                    OnCharInit?.Invoke(charController.charModel.charName);
+                else
+                    charsInPlayControllers.Remove(charController);
             }
         
         }

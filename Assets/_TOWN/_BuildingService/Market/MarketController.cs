@@ -63,12 +63,13 @@ namespace Town
         }
         public void UnLockBuildIntType(BuildInteractType buildIntType, bool unLock)
         {
+            marketView = FindObjectOfType<MarketView>(true);
             foreach (BuildIntTypeData buildData in marketModel.buildIntTypes)
             {
                 if (buildData.BuildIntType == buildIntType)
                 {
                     buildData.isUnLocked = unLock;
-                    marketView.InitBuildIntBtns(marketView as BuildView, marketModel as BuildingModel);
+                    marketView.InitBuildIntBtns(marketModel as BuildingModel);
                 }
             }
         }

@@ -50,7 +50,7 @@ namespace Town
         {
             TimeState timeState = CalendarService.Instance.currtimeState; 
             tavernModel = BuildingIntService.Instance.tavernController.tavernModel;
-
+            trophyNPeltContainer = transform.GetComponentInChildren<PeltNTrophyOnWall>(true).transform;   
             Transform trophyTrans = trophyNPeltContainer.GetChild(0); 
             Transform peltTrans = trophyNPeltContainer.GetChild(1);
             if (tavernModel.trophyOnWall!= null)

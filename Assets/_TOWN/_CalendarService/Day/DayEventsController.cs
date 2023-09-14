@@ -16,7 +16,11 @@ namespace Town
 
         private void Start()
         {
-            CalendarService.Instance.OnStartOfCalDay += (int day) =>ApplyDayEvents(); 
+            CalendarService.Instance.OnStartOfCalDay +=ApplyDayEvents; 
+        }
+        private void OnDisable()
+        {
+            CalendarService.Instance.OnStartOfCalDay -= ApplyDayEvents;
         }
         public void InitDayEvent(AllDaySO allDaySO)
         {
@@ -32,10 +36,10 @@ namespace Town
                     GetComponent<CalendarFactory>().GetDayEvent((DayName)i);                
                 allDayEventsBase.Add(dayBase);
             }
-            ApplyDayEvents();
+            ApplyDayEvents(-1);// random val 
         }
 
-        public void ApplyDayEvents()
+        public void ApplyDayEvents(int day)
         {
             DayName currDayName = CalendarService.Instance.currDayName;
             foreach (DayModel dayModel in allDayModels)

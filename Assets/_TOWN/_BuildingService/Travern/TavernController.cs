@@ -71,12 +71,13 @@ namespace Town
 
         public void UnLockBuildIntType(BuildInteractType buildIntType, bool unLock)
         {
+            tavernView = FindObjectOfType<TavernView>(true);
             foreach (BuildIntTypeData buildData in tavernModel.buildIntTypes)
             {
                 if (buildData.BuildIntType == buildIntType)
                 {
                     buildData.isUnLocked = unLock;
-                    tavernView.InitBuildIntBtns(tavernView as BuildView, tavernModel as BuildingModel);
+                    tavernView.InitBuildIntBtns(tavernModel as BuildingModel);
                 }
             }
         }

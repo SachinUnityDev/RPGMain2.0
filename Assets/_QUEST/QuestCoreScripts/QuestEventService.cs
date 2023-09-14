@@ -47,13 +47,13 @@ namespace Quest
   
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                List<CharNames> chars = new List<CharNames>() {CharNames.Rayyan, CharNames.Baran
-                   , CharNames.Cahyo};
-                On_PartySet(chars);
+            //if (Input.GetKeyDown(KeyCode.Q))
+            //{
+            //    List<CharNames> chars = new List<CharNames>() {CharNames.Rayyan, CharNames.Baran
+            //       , CharNames.Cahyo};
+            //    On_PartySet(chars);
 
-            }
+            //}
         }
 
     }

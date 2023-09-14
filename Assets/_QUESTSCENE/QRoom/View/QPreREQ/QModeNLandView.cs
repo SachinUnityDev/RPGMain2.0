@@ -20,17 +20,23 @@ namespace Quest
         [SerializeField] bool isSelPanelShown;
 
 
-        private void Start()
+        private void OnEnable()
         {
-            QRoomService.Instance.OnQRoomStateChg += OnQRoomStateChg;
-            QuestMissionService.Instance.OnQuestModeChg += (QuestMode questMode) => InitQModeNLandView(); 
+          //  QRoomService.Instance.OnQRoomStateChg += OnQRoomStateChg;
+            QuestMissionService.Instance.OnQuestModeChg += InitQModeNLandView; 
+        }
+        private void OnDisable()
+        {
+          //  QRoomService.Instance.OnQRoomStateChg -= OnQRoomStateChg;
+            QuestMissionService.Instance.OnQuestModeChg -= InitQModeNLandView;
+
         }
         void OnQRoomStateChg(QRoomState qRoomState)
         {
 
             
         }
-        public void InitQModeNLandView()
+        public void InitQModeNLandView(QuestMode questMode)
         {
             qModeBtnPtrEvents.InitQModeBtn(this); 
             qLandBtnPtrEvents.InitLandBtn(this);

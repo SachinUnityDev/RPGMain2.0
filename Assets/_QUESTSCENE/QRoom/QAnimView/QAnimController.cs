@@ -32,7 +32,7 @@ namespace Quest
 
         public void StartAnim()
         {
-            Transform parent = GameObject.FindGameObjectWithTag("TownCanvas").transform;
+            Transform parent = GameObject.FindGameObjectWithTag("Canvas").transform;
             // in 
 
             qAnimViewGo = Instantiate(qAnimPrefab);

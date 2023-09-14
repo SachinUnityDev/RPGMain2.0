@@ -55,12 +55,14 @@ namespace Town
         }
         public void UnLockBuildIntType(BuildInteractType buildIntType, bool unLock)
         {
+            templeView = FindObjectOfType<TempleView>(true);
+        
             foreach (BuildIntTypeData buildData in templeModel.buildIntTypes)
             {
                 if (buildData.BuildIntType == buildIntType)
                 {
                     buildData.isUnLocked = unLock;
-                    templeView.InitBuildIntBtns(templeView as BuildView, templeModel as BuildingModel);
+                    templeView.InitBuildIntBtns(templeModel as BuildingModel);
                 }
             }
         }

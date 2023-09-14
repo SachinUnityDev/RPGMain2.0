@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Town;
 using UnityEngine;
-
+using UnityEngine.SceneManagement; 
 
 namespace Quest
 {
@@ -42,17 +42,26 @@ namespace Quest
 
 
         public GameObject pathGO;
-        public GameObject pathPrefab; 
+        public GameObject pathPrefab;
 
 
-        //public InterNodeData interNodeData; 
-        
-        //public MapExpBasePtrEvents mapExpBasePtrEvents; 
-
-        void Start()
+        private void OnEnable()
         {
-           
+            SceneManager.sceneLoaded += OnSceneLoad; 
         }
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoad;
+        }
+        void OnSceneLoad(Scene scene, LoadSceneMode loadSceneMode)
+        {
+            if (scene.name == "TOWN")
+            {
+                pathView = FindObjectOfType<PathView>();    
+
+            }
+        }
+
         public Transform GetPawnStone()
         {
             return pawnTrans;

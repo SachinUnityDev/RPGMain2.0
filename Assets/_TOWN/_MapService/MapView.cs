@@ -23,7 +23,7 @@ namespace Town
         [SerializeField] WorldView worldView;
         [SerializeField] int index = 0;
         [SerializeField] int maxIndex = 2; 
-        void Start()
+        void OnEnable()
         {
             toggleMapBtn.onClick.AddListener(OnToggleMapBtnPressed);           
             closeBtn.onClick.AddListener(OnCloseBtnPressed);
@@ -32,6 +32,8 @@ namespace Town
 
         public void InitMapView()
         {
+            nekkiView = FindObjectOfType<NekkiView>(true);
+            worldView= FindObjectOfType<WorldView>(true);
             nekkiView.InitTown(this);
             worldView.InitTown(this); 
         }

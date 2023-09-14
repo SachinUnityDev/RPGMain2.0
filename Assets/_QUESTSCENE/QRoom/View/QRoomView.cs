@@ -103,7 +103,8 @@ namespace Quest
 
         void OnQRoomStateChgView(QRoomState qRoomState)
         {
-            qModeNLandView.InitQModeNLandView();
+            QuestMode questMode = QuestMissionService.Instance.currQuestMode; 
+            qModeNLandView.InitQModeNLandView(questMode);
            
             if (qRoomState == QRoomState.Prep)
             {

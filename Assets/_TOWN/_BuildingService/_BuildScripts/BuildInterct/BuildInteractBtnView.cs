@@ -31,6 +31,7 @@ namespace Town
             {
                 if (buildData.isUnLocked)
                 {
+                    Debug.Log(btnContainer.parent.parent.gameObject.name + i); 
                     btnContainer.GetChild(i).gameObject.SetActive(true);
                     InteractionSpriteData interactSprite = allbuildSO.GetInteractData(buildData.BuildIntType);
                     btnContainer.GetChild(i).GetComponent<BuildBtnPtrEvents>().BuildIntInit(buildData, interactSprite, buildView);

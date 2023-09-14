@@ -17,6 +17,7 @@ namespace Town
             int val = UnityEngine.Random.Range(8, 13);
             foreach (CharController c in CharService.Instance.allyInPlayControllers)
             {
+                Debug.Log(c.name + " Char Name");
                 c.timeBuffController.ApplyDayBuff(CauseType.DayEvents, (int)(dayName), c.charModel.charID, dayName
                     , AttribName.waterRes, val, 1, true);
             }

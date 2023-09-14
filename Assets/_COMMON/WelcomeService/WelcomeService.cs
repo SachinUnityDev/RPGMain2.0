@@ -3,7 +3,9 @@ using Interactables;
 using Quest;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
+using UnityEngine.SceneManagement; 
 
 
 namespace Town
@@ -19,12 +21,27 @@ namespace Town
 
         public bool isWelcomeRun = false;
         public bool isQuickStart = false; 
-        [SerializeField] int welcomeStartDay; 
+        [SerializeField] int welcomeStartDay;
 
-        void Start()
+        private void OnEnable()
         {
-            
+            SceneManager.sceneLoaded += OnSceneLoad;
         }
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoad;
+        }
+        void OnSceneLoad(Scene scene, LoadSceneMode loadSceneMode)
+        {
+            if (scene.name == "TOWN")
+            {
+                welcomeView = FindObjectOfType<WelcomeView>();
+                cornerBtns = GameObject.FindGameObjectWithTag("TownBtns");
+                cornerBtns.SetActive(true);
+
+            }
+        }
+
         #region WELCOME TWO DAY GAME PLAY GUIDE
         public void InitWelcome()
         {
@@ -38,10 +55,13 @@ namespace Town
         }
         public void InitWelcomeComplete()
         {
+           
             isWelcomeRun = false;
             welcomeController = GetComponent<WelcomeController>();
-          
+
             // town btns unlocked
+            cornerBtns = GameObject.FindGameObjectWithTag("TownBtns");
+
             cornerBtns.SetActive(true);
             if (isQuickStart)
             {

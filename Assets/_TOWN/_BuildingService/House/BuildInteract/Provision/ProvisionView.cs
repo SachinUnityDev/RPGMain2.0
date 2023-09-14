@@ -28,7 +28,7 @@ namespace Town
         }
         private void Start()
         {
-            closeBtn.onClick.AddListener(() => UIControlServiceGeneral.Instance.TogglePanel(gameObject, false));
+            closeBtn.onClick.AddListener(UnLoad);
         }
         public void OnSelect(PotionNames _potionName, int index)
         {

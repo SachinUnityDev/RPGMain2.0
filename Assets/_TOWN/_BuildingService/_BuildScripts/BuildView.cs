@@ -39,10 +39,10 @@ namespace Town
         BuildingSO buildSO;
         [SerializeField]BuildingModel buildModel;
         TimeState timeState;
-        void Awake()
+        void OnEnable()
         {
             BGSpriteContainer = transform.GetChild(0);
-            exit.onClick.AddListener(UnLoad);
+            exit.onClick.AddListener(UnLoad);          
         }
         public void Init()
         {
@@ -51,7 +51,7 @@ namespace Town
 
             timeState = CalendarService.Instance.currtimeState;
             buildModel = BuildingIntService.Instance.GetBuildModel(BuildingName);
-            InitBuildIntBtns(this, buildModel); 
+            InitBuildIntBtns( buildModel); 
             FillBuildBG();
             InitBuildIntPanels();
             InitNPCNCharIntPanels();
@@ -74,9 +74,10 @@ namespace Town
         {
             btnContainer.gameObject.SetActive(true);
         }
-        public void InitBuildIntBtns(BuildView buildView, BuildingModel _buildModel)
+        public void InitBuildIntBtns(BuildingModel _buildModel)
         {
-            btnContainer.GetComponent<BuildInteractBtnView>().InitInteractBtns(buildView, _buildModel);
+            btnContainer = gameObject.GetComponentInChildren<BuildInteractBtnView>(true).transform;
+            btnContainer.GetComponent<BuildInteractBtnView>().InitInteractBtns(this, _buildModel);
         }
         public void FillBuildBG()
         {
@@ -99,6 +100,9 @@ namespace Town
         }
         public void InitBuildIntPanels()
         {
+            BuildInteractPanel = gameObject.GetComponentInChildren<BuildInteract>(true).transform; 
+            talkNTradeBtns = gameObject.GetComponentInChildren<TalkNTradeBtnView>(true).transform;
+
             foreach (Transform child in BuildInteractPanel)
             {
                 child.GetComponent<IPanel>().Init(); // interact panels initialized here 
@@ -112,6 +116,10 @@ namespace Town
 
         void InitNPCNCharIntPanels()
         {
+            // get parent first then find the 
+            NPCIntPanel = gameObject.GetComponentInChildren<BuildNPCIntView>(true).transform; 
+            charIntPanel = gameObject.GetComponentInChildren<BuildCharIntView>(true).transform;  
+
             NPCIntPanel.GetComponent<BuildNPCIntView>().InitIntPorts(this, buildModel);
             charIntPanel.GetComponent<BuildCharIntView>().InitIntPorts(this, buildModel); 
         }

@@ -37607,7 +37607,7 @@ RectTransform:
   - {fileID: 1138874322551093714}
   - {fileID: 1138874322490139937}
   m_Father: {fileID: 4351977268152577441}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -111866,8 +111866,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4351977269191208217}
-  - {fileID: 1138874323105281601}
   - {fileID: 4351977269869779817}
+  - {fileID: 1138874323105281601}
   - {fileID: 4351977268801958368}
   - {fileID: 4351977269787324497}
   - {fileID: 1138874324248737907}
@@ -127650,7 +127650,7 @@ RectTransform:
   m_Children:
   - {fileID: 4351977268349294578}
   m_Father: {fileID: 4351977268152577441}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -129286,9 +129286,6 @@ MonoBehaviour:
   invCommViewController: {fileID: 4351977268981761562}
   btmCharViewController: {fileID: 4351977269286567985}
   levelView: {fileID: 1138874323731982457}
-  AttributesPanel: {fileID: 0}
-  StatsPanel: {fileID: 0}
-  traitsPanel: {fileID: 0}
   selectchar: 0
 --- !u!1 &4351977270043820606
 GameObject:

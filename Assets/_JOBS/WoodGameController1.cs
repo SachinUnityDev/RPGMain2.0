@@ -14,7 +14,7 @@ namespace Town
     {
 
         [Header(" Wood game Save Params")]
-        public WoodGameRank currWoodGameRank;
+        public JobRank currWoodGameRank;
         public int currentGameSeq;
         public int netGameExp;
 
@@ -25,7 +25,7 @@ namespace Town
         public WoodGameData currWoodGameData;
        
         [Header("Next game Sequence")]
-        WoodGameRank nextWoodGameRank;
+        JobRank nextWoodGameRank;
         int nextGameSeq;
 
         public WoodGameSO woodGameSO;
@@ -37,7 +37,7 @@ namespace Town
         [SerializeField] Button Back2TownBtn;
 
         [Header("Wood Game Model")]
-        public WoodGameModel woodGameModel;
+        public JobModel jobModel;
 
         [SerializeField] bool isGameInitDone = false;
 
@@ -56,7 +56,7 @@ namespace Town
             if (isGameInitDone) return; // return multiple clicks
             if(isLocked) return;
 
-            Transform parent = GameObject.FindGameObjectWithTag("TownCanvas").transform; 
+            Transform parent = GameObject.FindGameObjectWithTag("Canvas").transform; 
             woodGameGO = Instantiate(woodGamePreFab);
 
             woodGameView = woodGameGO.GetComponent<WoodGameView1>();
@@ -75,19 +75,8 @@ namespace Town
             woodRect.offsetMax = new Vector2(0, 0); // new Vector2(-right, -top);
             isGameInitDone = true;
 
-
-
-            //Sequence loadSeq = DOTween.Sequence();
-            //loadSeq
-            //     .AppendCallback(() => GetLoadGameData())
-            //     .AppendInterval(4f)
-            //     .AppendCallback(() => woodGameGO.GetComponent<WoodGameView1>().NewGameInit(currWoodGameData, this))
-            //     ; 
-            //loadSeq.Play();
-
             GetLoadGameData();
             woodGameGO.GetComponent<WoodGameView1>().NewGameInit(currWoodGameData, this); 
-
 
         }
         public void ExitGame(WoodGameData woodGameData)
@@ -100,7 +89,7 @@ namespace Town
 
             if ((woodGameData.netGameExp) >= currWoodGameData.maxJobExpR)
             {
-                if (woodGameData.woodGameRank != WoodGameRank.Master)
+                if (woodGameData.woodGameRank != JobRank.Master)
                 {
                     woodGameData.woodGameRank++;                   
                 }
@@ -127,22 +116,22 @@ namespace Town
         }
 
 
-        void GetLoadGameData()
+        public JobModel GetLoadGameData()
         {
-            WoodGameModel woodGameModel = RestoreState();
+            JobModel woodGameModel = RestoreState();
             currWoodGameData = new WoodGameData();
 
             if (woodGameModel == null)
             {
                 currentGameSeq = 1;
                 netGameExp = 0;
-                currWoodGameRank = WoodGameRank.Apprentice;               
+                currWoodGameRank = JobRank.Apprentice;               
             }
             else
             {
                 currentGameSeq = 1;
                 netGameExp = woodGameModel.currGameJobExp;
-                currWoodGameRank = woodGameModel.currWoodGameRank;
+                currWoodGameRank = woodGameModel.currJobRank;
             }
             foreach (WoodGameData wooddata in woodGameSO.allWoodData)
             {
@@ -159,9 +148,10 @@ namespace Town
                 }
             }
             currWoodGameData.isPlayedOnce = woodGameModel.isPlayedOnce;
+            return woodGameModel; 
         }
 
-        WoodGameModel  RestoreState()
+        JobModel  RestoreState()
         {
 
             string mydataPath = "/_SaveService/savedFiles/WoodGameModel.txt";
@@ -175,21 +165,25 @@ namespace Town
                 }
                 else
                 {
-                    woodGameModel = JsonUtility.FromJson<WoodGameModel>(str);
+                    jobModel = JsonUtility.FromJson<JobModel>(str);
                 }
             }
             else
             {
                 Debug.Log("File Does not Exist");
-                woodGameModel = new WoodGameModel(woodGameSO);
+                jobModel = new JobModel(woodGameSO);
             }
-            return woodGameModel;         
+            return jobModel;         
         }
 
         void SaveGameData()
         {
-            woodGameModel = new WoodGameModel(currWoodGameRank, currentGameSeq, netGameExp);
-            woodGameModel.SaveModel(woodGameModel); 
+            
+               
+            jobModel = new JobModel(currWoodGameRank, currentGameSeq, netGameExp
+                                          , CalendarService.Instance.dayInYear
+                                          , CalendarService.Instance.currentMonth);
+            jobModel.SaveModel(jobModel); 
         }
     }
 }

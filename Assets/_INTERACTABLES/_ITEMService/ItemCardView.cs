@@ -432,8 +432,6 @@ namespace Interactables
             {
                 gameObject.SetActive(false);
             }
-            
-
         }
 
     }

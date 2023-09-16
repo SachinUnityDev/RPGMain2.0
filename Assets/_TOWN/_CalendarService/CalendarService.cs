@@ -50,7 +50,7 @@ namespace Common
 
         // does not reset with week / Month
         [Header("CURRENT DAY WEEK AND MONTH")]
-        [SerializeField] DayName dayInYrName = DayName.None; 
+        public DayName startOfGameDayName = DayName.None; 
         public DayName currDayName = DayName.None;
         public WeekEventsName currentWeek = WeekEventsName.None;
         public MonthName currentMonth = MonthName.None;
@@ -104,10 +104,10 @@ namespace Common
             weekEventsController = GetComponent<WeekEventsController>();
             weekEventsController.InitWeekController(allWeekSO);
             calendarUIController.Init();
-            calendarUIController.UpdateMonthPanel(currentMonth, dayInYrName, dayInYear);
+            calendarUIController.UpdateMonthPanel(currentMonth, startOfGameDayName, dayInYear);
             calendarUIController.UpdateWeekPanel(currentWeek);
             currtimeState = TimeState.Day;
-            dayInYrName = DayName.DayOfLight;// saturday
+            startOfGameDayName = DayName.DayOfLight;// saturday
             currentWeek = WeekEventsName.WeekOfRejuvenation;
             dayInGame = 0;
             dayInYear = 24;
@@ -129,7 +129,7 @@ namespace Common
 
         public void DisplayTimeChgPanel()          // no change in 
         {
-            calendarUIController.UpdateDayPanel(dayInYear, dayInYrName);
+            calendarUIController.UpdateDayPanel(dayInYear, startOfGameDayName);
             calendarUIController.OnPanelEnter(calendarUIController.dayPanel, PanelInScene.Day);
         }
 
@@ -137,7 +137,7 @@ namespace Common
         {
             currDayName++; dayInGame++; dayInYear++;
 
-            calendarUIController.UpdateDayPanel(dayInYear, dayInYrName);
+            calendarUIController.UpdateDayPanel(dayInYear, startOfGameDayName);
             UpdateWeek();
             UpdateMonth();
         }
@@ -149,7 +149,7 @@ namespace Common
 
             Debug.Log("Scroll Month " + (int)scrollMonth);
             if (((int)scrollMonth > 0) && ((int)scrollMonth <= 12))
-                calendarUIController.UpdateMonthPanel(scrollMonth, dayInYrName, dayInYear);
+                calendarUIController.UpdateMonthPanel(scrollMonth, startOfGameDayName, dayInYear);
         }
 
         public void UpdateWeek()
@@ -176,10 +176,10 @@ namespace Common
                 var noOfMonths = Enum.GetNames(typeof(MonthName)).Length;
                 if ((int)currentMonth >= noOfMonths) currentMonth = (MonthName)1;
 
-                calendarUIController.UpdateMonthPanel(currentMonth, dayInYrName, dayInYear);
+                calendarUIController.UpdateMonthPanel(currentMonth, startOfGameDayName, dayInYear);
             }
             Debug.Log("Current Month" + currentMonth);
-            calendarUIController.UpdateMonthPanel(currentMonth, dayInYrName, dayInYear);
+            calendarUIController.UpdateMonthPanel(currentMonth, startOfGameDayName, dayInYear);
             scrollMonth = currentMonth; // TIE IN POINT
                                          
         }

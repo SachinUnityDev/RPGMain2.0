@@ -281,7 +281,7 @@ namespace Common
                 }
             }          
         }
-        int GetMonthStartDay(MonthName _currentMonth,DayName _yearStartDay)
+        public int GetMonthStartDay(MonthName _currentMonth,DayName _yearStartDay)
         {           
             int daysAdded = ((((int)_currentMonth)-1)*30);
             int monthStartDay = GetDayInRange( daysAdded+ (int)_yearStartDay);

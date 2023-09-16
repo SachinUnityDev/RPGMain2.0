@@ -22,7 +22,7 @@ namespace Town
 
         [SerializeField] GameObject invPanelXL;
         [SerializeField] GameObject rosterPanel;
-        [SerializeField] GameObject jobPanel;
+        
 
 
         [SerializeField] string nameStr = "";
@@ -95,8 +95,7 @@ namespace Town
         }
         void OnJobBtnClick()
         {
-            UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(jobPanel, true);
-            // init job here 
+            JobService.Instance.ShowJobView(); 
 
         }
         void OnInvBtnClick()

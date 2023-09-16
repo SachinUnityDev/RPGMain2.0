@@ -1,0 +1,54 @@
+using Common;
+using Interactables;
+using System.Collections;
+using System.Collections.Generic;
+using Town;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI; 
+
+namespace Town
+{
+
+
+    public class AttendJobBtn : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler  
+    {
+        [Header("Sprites")]
+
+        [SerializeField] Sprite spriteN;
+        [SerializeField] Sprite spriteHL;
+        [SerializeField] Sprite spriteClicked;
+
+        [Header("Global Var")]
+        Image img;
+        JobView jobView; 
+
+
+        private void Start()
+        {
+            img= GetComponent<Image>();
+        }
+
+        public void Init(JobView jobView)
+        {
+            this.jobView= jobView;
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            img.sprite = spriteClicked;
+            JobService.Instance.StartJob(JobNames.WoodCutting);
+            jobView.GetComponent<IPanel>().UnLoad();
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            img.sprite = spriteHL;
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            img.sprite = spriteN;
+        }
+    }
+}

@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.IO;
 using Combat;
 using Interactables;
 using Town;
 
-public enum WoodGameRank
+public enum JobRank
 {
     Apprentice,     
     Expert,
@@ -22,12 +21,23 @@ public enum WoodGameState
     ExitGame, 
 }
 
+public class MinMaxExp
+{
+    public int minExp; 
+    public int maxExp;
+
+    public MinMaxExp(int minExp, int maxExp)
+    {
+        this.minExp = minExp;
+        this.maxExp = maxExp;
+    }
+}
 
 [System.Serializable]
 public class WoodGameData
 {
     public bool isPlayedOnce; 
-    public WoodGameRank woodGameRank;
+    public JobRank woodGameRank;
     public int gameSeq;
     public int lastGameExp; 
     public int netGameExp;
@@ -53,7 +63,7 @@ public class WoodGameSO : ScriptableObject
 
     public List<WoodGameData> allWoodData = new List<WoodGameData>(); 
 
-    public WoodGameData GetWoodGameData(int gameSeq, WoodGameRank gameRank)
+    public WoodGameData GetWoodGameData(int gameSeq, JobRank gameRank)
     {
         int index = allWoodData.FindIndex(t=>t.gameSeq == gameSeq && t.woodGameRank == gameRank);
         if(index != -1)
@@ -64,7 +74,17 @@ public class WoodGameSO : ScriptableObject
         return null;
     }
 
-    public List<ItemDataWithQty> GetRewardItems(int gameSeq, WoodGameRank gameRank)
+    
+
+    public MinMaxExp GetMinMaxExp(int gameSeq, JobRank gameRank)
+    {
+        WoodGameData woodGameData = GetWoodGameData(gameSeq, gameRank);
+        MinMaxExp minMaxExp = new MinMaxExp(woodGameData.minJobExpR, woodGameData.maxJobExpR);
+        return minMaxExp;
+    }
+
+
+    public List<ItemDataWithQty> GetRewardItems(int gameSeq, JobRank gameRank)
     {
         WoodGameData woodGameData = GetWoodGameData(gameSeq, gameRank); 
         List<ItemDataWithQty> allItemQty= new List<ItemDataWithQty>();

@@ -19,9 +19,6 @@ namespace Town
         [Header("Global Var")]
         [SerializeField] BuyDrinksTavernView buyDrinksView;
         [SerializeField] Button returnBtn;
- 
-        
-
         private void Awake()
         {
             returnBtn.onClick.AddListener(OnReturnBtnPressed);

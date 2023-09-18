@@ -17,12 +17,9 @@ namespace Quest
 
         [SerializeField] int landscapeCount = 0;
 
-        private void Start()
-        {
-            LandscapesInit();      
-        }
+      
         #region LANDSCAPE 
-        void LandscapesInit()
+        public void LandscapesInit()
         {
             if (allLandscapes.Count > 0) return;
 

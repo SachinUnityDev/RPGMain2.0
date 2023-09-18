@@ -10,9 +10,6 @@ namespace Common
     {
 
         public TrapMGController trapMGController; 
-        
-
-
         void Start()
         {
             trapMGController= GetComponent<TrapMGController>();

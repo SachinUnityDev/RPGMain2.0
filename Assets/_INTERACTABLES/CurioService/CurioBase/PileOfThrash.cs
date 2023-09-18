@@ -117,7 +117,7 @@ namespace Quest
             resultStr = "So much stuff was left intact.";
             resultStr2 = "Loot gained";
             Transform curioViewTrans = CurioService.Instance.curioView.gameObject.transform;
-            LootService.Instance.lootController.ShowLootTable(lootTypes, curioViewTrans);
+            LootService.Instance.lootController.ShowLootTableInLandscape(lootTypes, curioViewTrans);
 
         }
 

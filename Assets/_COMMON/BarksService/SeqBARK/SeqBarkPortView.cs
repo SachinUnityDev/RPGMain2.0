@@ -24,10 +24,11 @@ namespace Town
 
         private void Awake()
         {
-            barkBox = transform.GetChild(2);
+            
         }
         public void ShowBark(SeqBarkData seqBarkData)
         {
+            barkBox = transform.GetChild(2);
             this.seqBarkData = seqBarkData;
             FillSprites();
             FillBarktxt(); 
@@ -46,7 +47,7 @@ namespace Town
 
         void FillBarktxt()
         {  
-            barkBox.GetComponentInChildren<TextMeshProUGUI>().text = seqBarkData.str; 
+            barkBox.GetComponentInChildren<TextMeshProUGUI>(true).text = seqBarkData.str; 
         }
         void FillSprites()
         {

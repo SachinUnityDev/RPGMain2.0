@@ -22,7 +22,7 @@ namespace Quest
         {
 
         }
-        public void ShowLootTable(List<ItemType> allItemType, Transform parentTrans)
+        public void ShowLootTableInLandscape(List<ItemType> allItemType, Transform parentTrans)
         {
             LandscapeNames landscapeNames = LandscapeNames.Sewers;
             lootBase = LootService.Instance.lootFactory.GetLootBase(landscapeNames);
@@ -31,13 +31,20 @@ namespace Quest
             InitLootView(itemLS, parentTrans); 
         }
 
+        public void ShowLootTable4MapE(List<ItemDataWithQty> itemLS, Transform parent)
+        {
+            InitLootView(itemLS, parent); 
+        }
+
         void InitLootView(List<ItemDataWithQty> itemLS, Transform parent)
         {
 
             if (LootService.Instance.isLootDsplyed) return; // return multiple clicks
-            lootViewGO = Instantiate(lootPrefab);
+            lootViewGO = FindObjectOfType<LootView>()?.gameObject;
+            if(lootViewGO == null) 
+             lootViewGO = Instantiate(lootPrefab);
 
-            LootService.Instance.lootView = lootViewGO.GetComponent<LootView>();
+            LootService.Instance.lootView = lootViewGO.GetComponent<LootView>(); // update in current scene
             lootViewGO.transform.SetParent(parent);
 
             int index = lootViewGO.transform.parent.childCount - 2;

@@ -1,6 +1,10 @@
+using DG.Tweening;
+using Quest;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI; 
 
 namespace Common
 {
@@ -8,36 +12,51 @@ namespace Common
     {
 
         [SerializeField] int letter;
-        [SerializeField] TrapView trapView;
+        
 
         [SerializeField] int currLetter;
 
-        [SerializeField] TrapMGSO trapMGSO; 
 
+        [Header(" Global Var")]
+        [SerializeField] AllTrapMGSO alltrapMGSO;
+        [SerializeField] TrapView trapView;
 
-        private void Awake()
+        public void InitTiles(TrapView trapView, AllTrapMGSO allTrapMGSO)
         {
-
+            this.trapView= trapView;    
+            this.alltrapMGSO= allTrapMGSO;
         }
-
-        public void ShowNLTile()
+        public void ShowGreyTile()
         {
-            transform.GetChild(1).gameObject.SetActive(false);
-            transform.GetChild(0).GetChild(0).GetChild(0).gameObject.SetActive(true); 
+            //BG
+            transform.GetComponent<Image>().sprite = alltrapMGSO.greyTL;
+            // LETTER
+            transform.GetChild(1).GetComponent<TextMeshProUGUI>().DOFade(0.2f, 0.01f);
+            //FX
+            transform.GetChild(0).GetChild(0).GetChild(0).gameObject.SetActive(false); // FX
         }
-        public void ShowHLTile()
+        public void ShowDefaultTile()
         {
-            transform.GetChild(1).gameObject.SetActive(true);
-            transform.GetChild(0).GetChild(0).GetChild(1).gameObject.SetActive(true);
+            //BG
+            transform.GetComponent<Image>().sprite = alltrapMGSO.defaultTL;
+            // LETTER
+            transform.GetChild(1).GetComponent<TextMeshProUGUI>().DOFade(1f, 0.01f);
+            //FX
+            transform.GetChild(0).GetChild(0).GetChild(0).gameObject.SetActive(true); // FX
+
+            //transform.GetChild(1).gameObject.SetActive(true);
+            //transform.GetChild(0).GetChild(0).GetChild(1).gameObject.SetActive(true);
         }
 
         public void OnWrongHit()
         {
-
+            //BG
+            transform.GetComponent<Image>().sprite = alltrapMGSO.mistakeHitTL;
         }
         public void OnCorrectHit()
         {
-
+            //BG
+            transform.GetComponent<Image>().sprite = alltrapMGSO.correctHitTL;
         }
 
     }

@@ -11,6 +11,7 @@ namespace Quest
     {
         public event Action<QRoomState> OnQRoomStateChg;
         public event Action<QuestNames> OnStartOfQScene;
+        public event Action<QuestNames> OnEndOfQScene;
         public event Action<QuestNames, int> OnRoomChg;
         public event Action OnInteractComplete; 
 
@@ -54,10 +55,15 @@ namespace Quest
             
             OnStartOfQScene?.Invoke(questName);
         }
+        public void On_QuestSceneEnd(QuestNames questName)
+        {
+            OnEndOfQScene?.Invoke(questName);
+        }
         void InitQRooms(QuestNames questName)   // On 1st room Enter 
         {
             qNodeAllRoomSO = 
                       allQNodeSO.GetQuestSceneSO(questName);
+            LandscapeService.Instance.On_LandscapeEnter(qNodeAllRoomSO.landscape); 
             ChangeRoomSprites(questName, 1);
             qRoomController= GetComponent<QRoomController>();   
             qRoomController.InitQRoomController(qNodeAllRoomSO);

@@ -30,8 +30,6 @@ namespace Quest
     public class LootView : MonoBehaviour, IPanel
     {
 
-
-
         [Header("container")]
         [SerializeField] Transform containerTrans; 
 
@@ -44,7 +42,7 @@ namespace Quest
         [SerializeField] Canvas canvas;
 
         [Header("Loot Scroll")]
-        [SerializeField] int index = 1;
+        [SerializeField] int index = 0;
 
         [SerializeField] Button leftBtn;
         [SerializeField] Button rightBtn;
@@ -59,7 +57,7 @@ namespace Quest
         [Header("loot list and Selected list")]
         [SerializeField] List<ItemBaseWithQty> lootList = new List<ItemBaseWithQty>();
         [SerializeField] List<ItemBaseWithQty> selectedList = new List<ItemBaseWithQty>();
-        void Start()
+        void OnEnable()
         {
             leftBtn.onClick.AddListener(OnLeftBtnPressed);
             rightBtn.onClick.AddListener(OnRightBtnPressed);
@@ -81,7 +79,8 @@ namespace Quest
             if (lootList.Count % 6 != 0)
                 max++;
             FillScrollSlots();
-            PosLootTable(trans);
+            PosLootTable(trans);           
+            OnLeftBtnPressed(); // Force loot to start with Page 1
         }
         void PosLootTable(Transform parentTrans)
         {
@@ -109,7 +108,7 @@ namespace Quest
                     containerTrans.GetChild(i).GetComponent<LootSlotView>()
                     . InitSlot(null,this);
                 }
-            }
+            }           
         }
         public bool IsItemSelected(ItemBaseWithQty itemBaseWithQty)
         {

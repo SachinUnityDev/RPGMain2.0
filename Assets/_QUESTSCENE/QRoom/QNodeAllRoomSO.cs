@@ -1,3 +1,4 @@
+using Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +18,7 @@ namespace Quest
         public List<QRoomSO> allQRoomSO = new List<QRoomSO>();
         
         public Sprite bGSprite;
-        //public Sprite fGSprite;
+        public LandscapeNames landscape; 
 
         public Sprite mapSprite;
 

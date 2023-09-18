@@ -36,6 +36,7 @@ namespace Quest
         {
             OnLootDsplyToggle?.Invoke(isDsplyed);
             isLootDsplyed= isDsplyed;
+            
         }
 
 
@@ -43,7 +44,7 @@ namespace Quest
         {
             if(Input.GetKeyDown(KeyCode.L))
             {
-                lootController.ShowLootTable(new List<ItemType>()
+                lootController.ShowLootTableInLandscape(new List<ItemType>()
                 {ItemType.Potions, ItemType.GenGewgaws, ItemType.PoeticGewgaws, ItemType.Gems, ItemType.SagaicGewgaws,
                 ItemType.Fruits, ItemType.Foods, ItemType.TradeGoods}, FindObjectOfType<Canvas>().transform);
 

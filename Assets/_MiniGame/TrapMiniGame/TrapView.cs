@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
+using Quest;
 
 namespace Common
 {
@@ -10,25 +11,41 @@ namespace Common
     {
         [Header("Result Txt")]
         [SerializeField] TextMeshProUGUI resultTxt; 
-
-        [SerializeField]int currHL =-1;
-        [SerializeField] int failedHit = 0;
-        [SerializeField] int successHit = 0; 
-        [SerializeField] float startTime = 0; 
-
         Sequence seq;
-        private void Start()
+        [Header(" trap Model")]
+        [SerializeField]TrapMGModel trapMGModel;
+        [SerializeField] AllTrapMGSO allTrapMGSO; 
+        [Header(" Letter Pressed In Number")]
+      
+        [SerializeField] int currHL = -1;
+        [SerializeField] int wrongHit = 0;
+        [SerializeField] int correctHits = 0;
+        [SerializeField] float startTime = 0;
+
+        [Header(" Chk double hit")]
+        [SerializeField]float prevHitTime;
+        [SerializeField] float timeDelta = 0.6f;
+        [SerializeField] bool onKeyRegWaitTime = false; 
+
+        public void StartSeq(TrapMGModel trapMGModel, AllTrapMGSO allTrapSO)
         {
-        }
-        public void StartSeq()
-        {
+            this.trapMGModel = trapMGModel; 
+            this.allTrapMGSO= allTrapSO;    
+
+            foreach(Transform child in transform)
+            {
+                child.GetComponent<TrapBtnPtrEvents>().InitTiles(this, allTrapMGSO); 
+            }
+
             resultTxt.gameObject.SetActive(false);
             this.gameObject.SetActive(true);
-            failedHit = 0;
+            wrongHit = 0;
             startTime = Time.time;
+
             seq = DOTween.Sequence();
-            seq.AppendCallback(HLTile);
-            seq.AppendInterval(0.2f);
+                seq
+                .AppendCallback(HLTile)
+                .AppendInterval(0.6f);
 
             seq.Play().SetLoops(100); 
         }
@@ -41,14 +58,19 @@ namespace Common
             for (int i = 0; i < 4; i++)
             {
                 if(i != currHL)
-                    transform.GetChild(i).GetComponent<TrapBtnPtrEvents>().ShowNLTile();
+                    transform.GetChild(i).GetComponent<TrapBtnPtrEvents>().ShowGreyTile();
                 else
-                    transform.GetChild(i).GetComponent<TrapBtnPtrEvents>().ShowHLTile();
+                    transform.GetChild(i).GetComponent<TrapBtnPtrEvents>().ShowDefaultTile();
             }
         }
 
         void OnLetterPressed(int letter)
         {
+            if (Time.time <= prevHitTime + timeDelta)
+                return;
+            if (onKeyRegWaitTime)
+                return; 
+            prevHitTime = Time.time;    
             if(letter== currHL)            
                 OnSuccess();
             else
@@ -56,8 +78,10 @@ namespace Common
         }
         IEnumerator Wait()
         {
+            onKeyRegWaitTime = true;
             yield return new WaitForSeconds(1f);
-            if (Time.time >= (startTime + 16f))
+            onKeyRegWaitTime = false;
+            if (Time.time >= (startTime + trapMGModel.netTime))
                 EndGame(false);
             else
                 seq.Play();            
@@ -66,10 +90,12 @@ namespace Common
         public void OnSuccess()
         {
             seq.Pause();
-            successHit++;
-            if (successHit >= 2)
+            if(currHL != -1)
+            transform.GetChild(currHL).GetComponent<TrapBtnPtrEvents>().OnCorrectHit();
+            correctHits++;
+            if (correctHits >= trapMGModel.correctHitsNeeded)
             {
-                EndGame(false);
+                EndGame(true);
                 return;
             }
             Debug.Log("success hit");
@@ -78,8 +104,10 @@ namespace Common
         public void OnFailed()
         {
             seq.Pause();
-            failedHit++;
-            if(failedHit >= 3)
+            if (currHL != -1)
+                transform.GetChild(currHL).GetComponent<TrapBtnPtrEvents>().OnWrongHit();
+            wrongHit++;
+            if(wrongHit >= trapMGModel.mistakesAllowed)
             {                
                 EndGame(false);
                 return;
@@ -102,7 +130,7 @@ namespace Common
         public void Update()
         {
             if(MGService.Instance.trapMGController.trapGameState == MGGameState.Start)
-            {
+            {   
                 if (Input.GetKeyDown(KeyCode.W))
                 {
                     OnLetterPressed(0);
@@ -114,11 +142,14 @@ namespace Common
                 if (Input.GetKeyDown(KeyCode.S))
                 {
                     OnLetterPressed(2);
+
                 }
                 if (Input.GetKeyDown(KeyCode.D))
                 {
-                    OnLetterPressed(3); 
+                    OnLetterPressed(3);
                 }
+               
+
             }
         }
 

@@ -65,6 +65,7 @@ namespace Common
                 
                 OnTownEnter?.Invoke(locationName);
                 QuestMissionService.Instance.InitQuestMission();
+            LandscapeService.Instance.InitLandscape(); 
                 MapService.Instance.InitMapService(); // to be put below questmission
                 LootService.Instance.InitLootService();
             if (WelcomeService.Instance.isQuickStart)

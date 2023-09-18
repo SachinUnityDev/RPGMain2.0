@@ -89,7 +89,7 @@ namespace Quest
 
         void Start()
         {
-   
+        
             LandscapeService.Instance.OnLandscapeEnter += OnLandscapeEnter;
             LandscapeService.Instance.OnLandscapeExit += OnLandscapeExit;
             LandscapeService.Instance.OnLandscapeEnter += OnEnterHungerNThirstModChg;
@@ -100,10 +100,18 @@ namespace Quest
 
             charController = GetComponent<CharController>();
         }
-
-        public void InitLandController(AllLandscapeSO allLandSO)
+        private void OnDisable()
         {
-            // create model and factory
+            LandscapeService.Instance.OnLandscapeEnter -= OnLandscapeEnter;
+            LandscapeService.Instance.OnLandscapeExit -= OnLandscapeExit;
+            LandscapeService.Instance.OnLandscapeEnter -= OnLandscapeEnter;
+            LandscapeService.Instance.OnLandscapeExit -= OnLandscapeExit;
+
+            LandscapeService.Instance.OnLandscapeEnter -= OnLandscapeEnter;
+            LandscapeService.Instance.OnLandscapeExit -= OnLandscapeExit;
+        }
+        public void InitLandController(AllLandscapeSO allLandSO)
+        { 
             foreach (LandscapeSO landSO in allLandSO.alllandscapeSO)
             {
                 LandModel landModel = new LandModel(landSO);

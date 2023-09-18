@@ -36,7 +36,7 @@ namespace Town
             if (scene.name == "TOWN")
             {
                 welcomeView = FindObjectOfType<WelcomeView>();
-                cornerBtns = GameObject.FindGameObjectWithTag("TownBtns");
+                cornerBtns = FindObjectOfType<CornerBtns>(true).gameObject;
                 cornerBtns.SetActive(true);
 
             }

@@ -24,14 +24,16 @@ namespace Town
         JobView jobView; 
 
 
-        private void Start()
+        private void OnEnable()
         {
             img= GetComponent<Image>();
+            img.sprite = spriteN;   
         }
-
+        
         public void Init(JobView jobView)
         {
             this.jobView= jobView;
+            img.sprite = spriteN;
         }
 
         public void OnPointerClick(PointerEventData eventData)

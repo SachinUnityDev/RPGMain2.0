@@ -73,7 +73,7 @@ namespace Quest
                     = new ItemDataWithQty(new ItemData(ItemType.TradeGoods, (int)TGNames.NyalaTrophy), qty);
                 allItemDataWithQty.Add(itemDataWithQty);
 
-                LootService.Instance.lootView.InitLootList(allItemDataWithQty, parentTrans);
+                LootService.Instance.lootController.ShowLootTable4MapE(allItemDataWithQty, parentTrans);
                 resultStr = "You gained loot!"; 
             }
         }

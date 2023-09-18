@@ -22,13 +22,16 @@ namespace Quest
 
         public LandscapeController landscapeController; // single controller
         public LandscapeFactory landFactory;
-        private void Start()
+        private void OnEnable()
         {
-            currLandscape = LandscapeNames.Sewers; 
+            currLandscape = LandscapeNames.Sewers;
+            landscapeController = GetComponent<LandscapeController>();
+            landFactory = GetComponent<LandscapeFactory>();
         }
 
         public void InitLandscape()
-        {
+        {   
+            landFactory.LandscapesInit();
             landscapeController.InitLandController(allLandSO); 
         }
 

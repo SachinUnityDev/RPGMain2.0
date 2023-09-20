@@ -31,8 +31,8 @@ namespace Quest
 
         public void ShowQuestE(InteractEColEvents questENodeCol, QuestENames questEName)
         {
-         questEView =  
-            Instantiate(questEView, questCanvas.transform); 
+            questEView =  
+                Instantiate(questEView, questCanvas.transform); 
             questEView.gameObject.transform.SetParent(questCanvas.transform);
             questEView.gameObject.SetActive(true);
             this.questENodeColEvents = questENodeCol;

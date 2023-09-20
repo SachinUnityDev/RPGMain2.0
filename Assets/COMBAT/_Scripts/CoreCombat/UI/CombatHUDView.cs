@@ -53,7 +53,7 @@ namespace Combat
         [SerializeField] List<string> deBuffList = new List<string>();
 
         [Header("Action Buttons")]
-        public Button charStatToggleBtn;
+        public Button attribPanelToggleBtn;
 
         [Header("Side Panels")]
         public GameObject AttributePanel;
@@ -100,7 +100,7 @@ namespace Combat
             
            // UnityEditor.EditorUtility.SetDirty(statIconSO);
             portraitToggleState = StatPanelToggleState.None;
-            charStatToggleBtn.onClick.AddListener(OnAttributesPanelTogglePressed);
+            attribPanelToggleBtn.onClick.AddListener(OnAttributesPanelTogglePressed);
             AttributePanelToggle();
            // CombatEventService.Instance.OnSOTactics += SetDefaultTurnOrder;
             //CombatEventService.Instance.OnSOR += SetCharOnTopPanel;

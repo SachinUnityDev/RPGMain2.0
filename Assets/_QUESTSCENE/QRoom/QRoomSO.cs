@@ -10,7 +10,7 @@ namespace Quest
     [Serializable]
     public class QRoomInteractData
     {
-        [Header("QUest Mode Chances")]
+        [Header("COMBAT CHANCES AS PER Quest Mode")]
         public float stealthChance =100f;
         public float explorationChance = 100f;
         public float tauntChance = 100f;
@@ -25,8 +25,8 @@ namespace Quest
 
         public bool HasInteraction()
         {
-            if (questEName != QuestENames.None && allBarks.Count > 0 
-                    && enemyPack != EnemyPack.None && trapNames != Traps.None) // it means it has interaction
+            if (questEName != QuestENames.None || allBarks.Count > 0 
+                    || enemyPack != EnemyPack.None || trapNames != Traps.None) // it means it has interaction
                 return true;             
             return false; 
         }

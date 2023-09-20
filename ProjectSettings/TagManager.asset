@@ -8,8 +8,6 @@ TagManager:
   - SkillPanel
   - PerkSelectionPanel
   - Bullet
-  - QuestCanvas
-  - TownCanvas
   - TownBtns
   - Canvas
   layers:

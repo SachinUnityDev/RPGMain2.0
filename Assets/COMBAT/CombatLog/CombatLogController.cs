@@ -40,9 +40,10 @@ namespace Combat
 
     public class CombatLogController : MonoBehaviour
     {
-        [Header("Content and log Prefab")]
+        [Header("Content and log Prefab TBR")]
         [SerializeField] GameObject containerCombatLog;
         [SerializeField] GameObject logPanel;
+        [Header("NTBR")]
         [SerializeField] GameObject logPanelGO; 
         public List<CombatLogData> combatLog = new List<CombatLogData>();
         void Start()

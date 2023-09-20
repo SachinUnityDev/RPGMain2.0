@@ -25,15 +25,15 @@ namespace Combat
 
         void ToggleHealthBars(bool turnON)
         {
-            foreach (GameObject charGO in CharService.Instance.charsInPlay)
-            {
-                Transform HPbarsTrans = charGO.transform.GetChild(2);
-                SpriteRenderer[] HPBarRen = HPbarsTrans.GetComponentsInChildren<SpriteRenderer>();
-                for (int i = 0; i < HPBarRen.Length; i++)
-                {
-                    HPBarRen[i].enabled = turnON;
-                }
-            }
+            //foreach (GameObject charGO in CharService.Instance.charsInPlay)
+            //{
+            //    Transform HPbarsTrans = charGO.transform.GetChild(2);
+            //    SpriteRenderer[] HPBarRen = HPbarsTrans.GetComponentsInChildren<SpriteRenderer>();
+            //    for (int i = 0; i < HPBarRen.Length; i++)
+            //    {
+            //        HPBarRen[i].enabled = turnON;
+            //    }
+            //}
         }
 
         public void OnPointerClick(PointerEventData eventData)

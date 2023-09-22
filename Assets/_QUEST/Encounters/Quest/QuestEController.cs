@@ -1,3 +1,4 @@
+using Common;
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,9 +9,10 @@ namespace Quest
 {
     public class QuestEController : MonoBehaviour
     {
-        GameObject questCanvas;
+        GameObject canvas;
         [Header("Quest E view TBR")]
-        [SerializeField]QuestEView questEView;
+        [SerializeField] QuestEView questEViewPrefab; 
+        [SerializeField]QuestEView questEViewGO;
 
         InteractEColEvents questENodeColEvents; // ref to node on map that triggered the MapE 
 
@@ -22,22 +24,27 @@ namespace Quest
 
       
 
-        void Awake()
+        void OnEnable()
         {
             questEFactory = GetComponent<QuestEFactory>();
-            questCanvas = GameObject.FindWithTag("QuestCanvas");
+            
+            
+
         }
-
-
+        
+        
         public void ShowQuestE(InteractEColEvents questENodeCol, QuestENames questEName)
         {
-            questEView =  
-                Instantiate(questEView, questCanvas.transform); 
-            questEView.gameObject.transform.SetParent(questCanvas.transform);
-            questEView.gameObject.SetActive(true);
+            canvas = FindObjectOfType<Canvas>().gameObject;
+            questEViewGO = FindObjectOfType<QuestEView>();
+            if (questEViewGO == null)
+                questEViewGO =  
+                    Instantiate(questEViewPrefab, canvas.transform); 
+            questEViewGO.gameObject.transform.SetParent(canvas.transform);
+            questEViewGO.gameObject.SetActive(true);
             this.questENodeColEvents = questENodeCol;
             QuestEModel questEModel = GetQuestEModel(questEName);
-            questEView.InitEncounter(questEModel, questENodeCol);
+            questEViewGO.InitEncounter(questEModel, questENodeCol);
         }
 
         public void InitQuestE(AllQuestESO allQuestESO)

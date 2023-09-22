@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charID: 106
   charName: 7
-  charPrefab: {fileID: 6114580909890694877, guid: 14fc32ca61a4e2e49a4d923c61f888d4,
+  charPrefab: {fileID: 4256773382335704449, guid: 78af258db424dc84a91a102fd8c392f9,
     type: 3}
   charSprite: {fileID: 21300000, guid: fad77e3efe9f7c740af65e15ff9e5e9a, type: 3}
   charSpriteUnClickedFlipped: {fileID: 21300000, guid: 06baefc432f46e649bebb5f9196aa9c2,

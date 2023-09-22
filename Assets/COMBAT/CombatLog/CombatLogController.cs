@@ -46,7 +46,7 @@ namespace Combat
         [Header("NTBR")]
         [SerializeField] GameObject logPanelGO; 
         public List<CombatLogData> combatLog = new List<CombatLogData>();
-        void Start()
+        void OnEnable()
         {
           
             //// TEMP TRAITS 
@@ -69,7 +69,16 @@ namespace Combat
            
 
         }
-#region  # COMBAT LOG BUILDERS 
+        private void OnDisable()
+        {
+            CombatEventService.Instance.OnSOC -= StartOfCombat;
+            CombatEventService.Instance.OnSOR -= StartOfRound;
+            // CombatEventService.Instance.OnCharOnTurnSet += StartOfTurn;
+            CombatEventService.Instance.OnCharDeath -= DeathOfCharUpdate;
+            CharStatesService.Instance.OnCharStateStart -= CharStateStart;
+            CharStatesService.Instance.OnCharStateEnd -= CharStateEnd;
+        }
+        #region  # COMBAT LOG BUILDERS 
         // **********CHAR STATE
         void CharStateStart(CharStateModData charStateModData)
         {

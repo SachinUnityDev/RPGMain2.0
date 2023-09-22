@@ -10,7 +10,7 @@ namespace Combat
     public class EnemyDataInPack
     {
         public CharNames enemyName;
-        public int charID;
+      //  public int charID;
         public List<int> preferredPos = new List<int>();      
     }
 

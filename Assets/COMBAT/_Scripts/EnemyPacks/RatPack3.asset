@@ -15,13 +15,13 @@ MonoBehaviour:
   enemyPack: 3
   allEnemyDataInPack:
   - enemyName: 18
-    charID: 0
+    charID: 215
     preferredPos: 07000000
   - enemyName: 19
-    charID: 0
+    charID: 216
     preferredPos: 01000000
   - enemyName: 19
-    charID: 0
+    charID: 217
     preferredPos: 03000000
   loot:
     min: 3

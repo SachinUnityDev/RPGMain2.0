@@ -357,9 +357,10 @@ namespace Combat
 
             foreach (EnemyDataInPack eData in enemySO.allEnemyDataInPack)
             {
-                //CharController charCtrl = CharService.Instance.SpawnCompanions(eData.enemyName);
+                // CharController charCtrl = CharService.Instance.SpawnCompanions(eData.enemyName);
 
-                CharController charCtrl = BestiaryService.Instance.SpawnBestiary(eData.enemyName,eData.charID);
+                CharController charCtrl = BestiaryService.Instance.SpawnBestiary(eData.enemyName); 
+                    //,eData.charID);
                 CharOccupies charOccupies = charCtrl.charModel._charOccupies;
 
                 foreach (int pos in eData.preferredPos)
@@ -378,7 +379,7 @@ namespace Combat
                     }
                     else
                     {
-                        //  Debug.Log("Cell no is filled" + pos);
+                          Debug.LogError("Cell no is filled" + pos);
                         // place on an empty spot
 
                     }

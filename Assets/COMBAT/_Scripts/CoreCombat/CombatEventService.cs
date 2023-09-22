@@ -218,40 +218,40 @@ namespace Combat
         // Update is called once per frame
         void Update()
         {
-         
-            //if (Input.GetKeyDown(KeyCode.L))
-            //{
-            //    On_CombatInit();
-            //    Debug.Log("ON COmbat Init");
-            //}
-            //if (Input.GetKeyDown(KeyCode.S))
-            //{
-            //    On_SOTactics();
-            //    Debug.Log("SOTactics");
-            //}
 
-            //if (Input.GetKeyDown(KeyCode.C))
-            //{
-            //    On_SOC();
-            //    Debug.Log("SOC");
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                On_CombatInit();
+                Debug.Log("ON COmbat Init");
+            }
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                On_SOTactics();
+                Debug.Log("SOTactics");
+            }
 
-            //}
-            //if (Input.GetKeyDown(KeyCode.R))
-            //{
-            //    Debug.Log("SOR");
-            //    On_SOR();
-            //}
-            //if (Input.GetKeyDown(KeyCode.T))
-            //{
-            //    Debug.Log("SOT");
-            //    On_SOT();
-            //}
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                On_SOC();
+                Debug.Log("SOC");
 
-            //if (Input.GetKeyDown(KeyCode.Y))
-            //{
-            //    Debug.Log("EOT");
-            //    On_EOT();
-            //}
+            }
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                Debug.Log("SOR");
+                On_SOR();
+            }
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                Debug.Log("SOT");
+                On_SOT();
+            }
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                Debug.Log("EOT");
+                On_EOT();
+            }
 
             //if (Input.GetKeyDown(KeyCode.J))
             //{

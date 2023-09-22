@@ -89,7 +89,7 @@ namespace Combat
 
         public SkillNames currSkillHovered;
 
-        SkillServiceView skillServiceView;
+        SkillServiceView skillView;
 
 
       
@@ -129,7 +129,7 @@ namespace Combat
             base.Awake();
      
             skillFactory = GetComponent<SkillFactory>();
-            skillServiceView = GetComponent<SkillServiceView>();
+            skillView = GetComponent<SkillServiceView>();
          
             //move and FX controller 
             skillFXMoveController = gameObject.GetComponent<SkillFxMoveController>();
@@ -144,14 +144,24 @@ namespace Combat
 
             //CombatEventService.Instance.OnSOR += InitSkillManagers; // for enemies
         }
-        void Start()
+        void OnEnable()
         {
            // InitSkillControllers();
             // Cn be later Set to the start of Combat Event
           
+          if(GameService.Instance.gameModel.gameState == GameState.InCombat)
+          {
+                skillView = FindObjectOfType<SkillServiceView>();
+
+          }
             SkillApply += SkillEventtest;
             GameEventService.Instance.OnGameStateChg += OnStartOfCombat; 
             // CombatService.Instance.GetComponent<RoundController>().OnCharOnTurnSet += PopulateSkillTargets; 
+        }
+        private void OnDisable()
+        {
+            SkillApply -= SkillEventtest;
+            GameEventService.Instance.OnGameStateChg -= OnStartOfCombat;
         }
 
         void OnStartOfCombat(GameState gameState)
@@ -403,8 +413,8 @@ namespace Combat
             SkillModel skillModel = GetSkillModel(charID, currSkillName);
             skillModel.SetSkillState(SkillSelectState.Clickable);
             currSkillName = SkillNames.None;
-            skillServiceView.SetSkillsPanel(charID);
-            skillServiceView.PopulateSkillClickedState(-1);
+            skillView.SetSkillsPanel(charID);
+            skillView.PopulateSkillClickedState(-1);
         }
 
         public void On_SkillHovered(CharNames _charName, SkillNames skillName)
@@ -542,7 +552,7 @@ namespace Combat
             // 
             CharController charController = CharService.Instance.GetCharCtrlWithCharID(_charID);
             if (charController == null) return null; 
-            SkillController skillController = charController.GetComponent<SkillController>(); 
+            SkillController1 skillController = charController.GetComponent<SkillController1>(); 
           //  Debug.Log("skillcontroller found" + skillController.allSkillBases.Count);
             foreach (SkillBase skill in skillController.allSkillBases)
             {

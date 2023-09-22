@@ -34,9 +34,20 @@ namespace Common
 
       
 
-        void Start()
+        void OnEnable()
         {
           currSelectRace = RaceType.None;
+            if(GameService.Instance.gameModel.gameState == GameState.InCombat)
+            {
+                bestiaryViewController = FindObjectOfType<BestiaryViewController>();
+
+
+            }
+
+        }
+        private void OnDisable()
+        {
+            
         }
         public void Init()
         {
@@ -71,36 +82,37 @@ namespace Common
                     allBestiarySO.Find(t => t.charName == charName);
             return charSO;
         }
-        public CharController SpawnBestiary(CharNames enemyName, int charID)
+        public CharController SpawnBestiary(CharNames enemyName)
+            //, int charID)
         {
             CharController charController = null;
             CharacterSO charSO = GetEnemySO(enemyName);
-            if ( charID > (int)enemyName)
+            if ( charSO.orgCharMode == CharMode.Enemy)
             {
-                charController = CreateEnemyCtrl(enemyName);
-                charController.charModel.charID = charID;
+                charController = CreateEnemyCtrl(enemyName);                
             }
             else
             {
-                charController = GetCharControllerWithID(charID);
+                charController = GetCharControllerWithName(enemyName);
                 CharNames charName = charController.charModel.charName;
                
                 if (charSO == null)
                 {
-                    charSO = BestiaryService.Instance.GetEnemySO(charName);// this one is pet
+                    charSO = GetEnemySO(charName);// this one is pet
                 }
-            }
+            }            
             GameObject go = Instantiate(charSO.charPrefab, spawnPos, Quaternion.identity);
             go.AddComponent<CharController>();
+            CharService.Instance.charsInPlay.Add(go);
             return charController;
         }
-        public CharController GetCharControllerWithID(int charID)
+        public CharController GetCharControllerWithName(CharNames enemyName)
         {
-            CharController charController = allBestiaryInGame.Find(t=>t.charModel.charID == charID);
-            if (charController != null)
-                return charController;
+            int index = allBestiaryInGame.FindIndex(t=>t.charModel.charName == enemyName);
+            if (index != -1)
+                return allBestiaryInGame[index];
             else
-                Debug.LogError("Enemy Controller not found");
+                Debug.LogError("Enemy Controller not found !");
             return null;
         }
         public CharController CreateEnemyCtrl(CharNames charName)  // create for duplicate Chars 
@@ -110,11 +122,10 @@ namespace Common
             {
                 if (charName == c.charName)
                 {
-                    charCtrl.InitiatizeController(c);
+                    charCtrl.charModel =  charCtrl.InitiatizeController(c);
                     allBestiaryInGame.Add(charCtrl);
                     CharService.Instance.charsInPlayControllers.Add(charCtrl);
-                    LevelService.Instance.LevelUpInitBeastiary(charCtrl);
-
+                    //LevelService.Instance.LevelUpInitBeastiary(charCtrl);
                 }
             }
             return charCtrl;

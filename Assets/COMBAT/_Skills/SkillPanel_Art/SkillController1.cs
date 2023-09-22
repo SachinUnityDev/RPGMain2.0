@@ -47,6 +47,10 @@ namespace Common
            // CharService.Instance.OnCharAddedToParty += InitSkillList;
 
         }
+        private void OnDisable()
+        {
+            CharService.Instance.OnCharInit -= InitSkillList;
+        }
         public void InitSkillList(CharNames _charName)
         {
             if (charName != _charName) return;

@@ -23,7 +23,7 @@ namespace Quest
         [SerializeField] Iitems item;
         [SerializeField] bool isSelected;
 
-        private void Awake()
+        private void OnEnable()
         {
             slotID = transform.GetSiblingIndex();
             itemImg = transform.GetChild(0).GetComponentInChildren<Image>();
@@ -44,6 +44,7 @@ namespace Quest
             this.item = item;
             transform.gameObject.SetActive(true);
             itemImg.gameObject.SetActive(true);
+            Debug.Log(item.itemName + " NAME" + item.itemType + " TYPE");
             itemImg.sprite = GetSprite(item.itemName, item.itemType);
             itemBG.sprite = GetBGSprite(item);
             

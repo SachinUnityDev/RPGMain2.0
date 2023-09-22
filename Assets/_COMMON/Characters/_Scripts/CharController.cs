@@ -58,7 +58,7 @@ namespace Common
         float prevHPVal = 0f;
         float prevStaminaVal = 0f; 
 
-        private void Start()
+        private void OnEnable()
         {          
             buffController=  gameObject.AddComponent<BuffController>();
             charTypeBuffController= gameObject.AddComponent<CharTypeBuffController>();
@@ -80,19 +80,33 @@ namespace Common
             CombatEventService.Instance.OnSOTactics += AddControllerOnCombatStart; 
 
         }
+        private void OnDisable()
+        {
+            CombatEventService.Instance.OnEOC -= FortitudeReset2FortOrg;
+            CombatEventService.Instance.OnSOTactics -= AddControllerOnCombatStart;
+        }
         public CharModel InitiatizeController(CharacterSO _charSO)
         {
             if (SaveService.Instance.slotSelect == SaveSlot.New)
             {
                 charModel = new CharModel(_charSO);
-                CharService.Instance.lastCharID++;
-                charModel.charID = CharService.Instance.lastCharID; 
+                if(charModel.orgCharMode == CharMode.Ally)
+                {
+                    CharService.Instance.lastAllyCharID++;
+                    charModel.charID = CharService.Instance.lastAllyCharID;
+                }                    
+                if(charModel.orgCharMode == CharMode.Enemy)
+                {
+                    CharService.Instance.lastEnemyCharID++;
+                    charModel.charID = CharService.Instance.lastEnemyCharID;
+                }
             }
             else
             {
                 charModel = CharService.Instance.LoadCharModel(_charSO.charName); 
             }
             OnCharSpawned?.Invoke(charModel.charID, charModel.charName);
+        
             return charModel; 
         }
         void AddControllerOnCombatStart()
@@ -177,8 +191,12 @@ namespace Common
         public AttribData GetAttrib(AttribName _statName)
         {
             List<AttribData> st = charModel.attribList;
-            int index = st.FindIndex(x => x.AttribName == _statName);           
+            int index = st.FindIndex(x => x.AttribName == _statName);    
+            if(index != -1)
             return st[index];
+            else
+                Debug.Log("Attrib Name " + _statName);
+            return null;
         }
         public void SetCurrStat(CauseType causeType, int causeName, int causeByCharID, AttribName _statName, float _newValue, bool toInvoke = true )
         {

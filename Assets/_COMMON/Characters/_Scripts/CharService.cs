@@ -56,8 +56,9 @@ namespace Common
         public Vector3 spawnPos = new Vector3(-100, 0, 0);
 
         [Header("Recordable Params")]
-        public int lastCharID;
-        //public List<CharController> enemyInPlayControllers; // enemies to be dep 
+        public int lastAllyCharID;
+        public int lastEnemyCharID; 
+        
         public List<GameObject> enemyInCombatPlay; // enemies to be dep 
 
         [Header(" Game Init ")]
@@ -65,7 +66,7 @@ namespace Common
 
         void Start()
         {
-            lastCharID = 0;         isPartyLocked= false;
+            lastAllyCharID = 0;         isPartyLocked= false;
             CombatEventService.Instance.OnEOT += UpdateOnDeath;       
             DontDestroyOnLoad(this.gameObject);
         }
@@ -119,9 +120,28 @@ namespace Common
         }
         public GameObject GetCharGOWithName(CharNames _charName, int _charID)   //change it to charID based only 
         {
-            GameObject charGO = charsInPlay.Find(x => x.GetComponent<CharController>().charModel.charName == _charName
-                                && x.GetComponent<CharController>().charModel.charID == _charID);
-            return charGO; 
+
+            foreach (GameObject c in charsInPlay)
+            {
+                CharController charController = c.GetComponent<CharController>();   
+                if(charController.charModel.charName == _charName)
+                {
+                    if(charController.charModel.charID== _charID)
+                    {
+                        return c;
+                    }
+                }
+               
+            }
+            return null;
+            //int index = charsInPlay.FindIndex(x => x.GetComponent<CharController>().charModel.charName == _charName
+            //                    && x.GetComponent<CharController>().charModel.charID == _charID);
+
+            //if (index != -1)
+            //    return charsInPlay[index];
+            //else
+            //    Debug.LogError("CHARIN PLAY NOT FOUND" + _charName + _charID); 
+            //return null; 
         }
         public CharController GetCharCtrlWithCharID(int  _charID)
         {
@@ -189,7 +209,6 @@ namespace Common
 
             if (charController.charModel.charName == CharNames.Abbas)
                 On_CharAddToParty(charController); 
-
 
             charsInPlayControllers.Add(charController);
             allyInPlayControllers.Add(charController);
@@ -500,6 +519,7 @@ namespace Common
                 foreach (CharController charCtrl in allyInPlayControllers)
                 {
                     On_CharInit();
+                    if(charCtrl.charModel.charName != CharNames.Abbas) 
                     On_CharAddToParty(GetCharCtrlWithName(charCtrl.charModel.charName));
                 }
             }

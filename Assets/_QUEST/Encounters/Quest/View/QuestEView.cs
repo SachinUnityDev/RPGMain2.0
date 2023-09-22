@@ -43,6 +43,7 @@ namespace Quest
             this.interactEColEvents= interactEColEvents;    
             questEBase = EncounterService.Instance.questEController
                             .GetQuestEBase(questEModel.questEName);
+            questEBase.QuestEInit(questEModel); 
             page1Trans.GetComponent<QuestEMainPgView>().InitMainPage(this, questEBase, questEModel);
             ShowMainPage();
             Load();

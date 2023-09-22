@@ -10,7 +10,7 @@ namespace Quest
     public class QRoomPortView : MonoBehaviour
     {
         QRoomView qRoomView;
-        void Start()
+        void OnEnable()
         {
             CharService.Instance.OnCharFlee +=(CharFleeState ch, CharNames charName)=> FillPort(); 
         }

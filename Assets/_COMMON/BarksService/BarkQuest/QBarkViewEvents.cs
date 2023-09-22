@@ -13,7 +13,7 @@ namespace Quest
         [SerializeField] TextMeshProUGUI barkTxt;
         QbarkView qbarkView;
         AudioSource audioSource; 
-        void Start()
+        void OnEnable()
         {
             transform.GetChild(1).gameObject.SetActive(false);
 
@@ -26,6 +26,7 @@ namespace Quest
 
         public void ShowBark(BarkCharData barkCharData)
         {
+            Debug.Log("BARKKKS" + barkCharData.str); 
             barkTxt.text = barkCharData.str;
             transform.GetChild(1).gameObject.SetActive(true);           
         }

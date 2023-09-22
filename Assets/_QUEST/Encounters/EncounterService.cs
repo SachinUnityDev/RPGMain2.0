@@ -1,3 +1,4 @@
+using Common;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Permissions;
@@ -34,22 +35,21 @@ namespace Quest
 
         void Start()
         {            
-            cityEFactory = gameObject.GetComponent<CityEncounterFactory>();
-            cityEController = gameObject.GetComponent<CityEController>();
-
-            mapEFactory = gameObject.GetComponent<MapEFactory>();
-            mapEController= gameObject.GetComponent<MapEController>();
-
+            
             questEController= gameObject.GetComponent<QuestEController>();
             questEFactory= gameObject.GetComponent<QuestEFactory>();    
 
         }
         public void EncounterInit()
         {
-            cityEController = gameObject.GetComponent<CityEController>();
-            mapEController = gameObject.GetComponent<MapEController>();
-            questEController = gameObject.GetComponent<QuestEController>();
 
+            cityEFactory = gameObject.GetComponent<CityEncounterFactory>();
+            cityEController = gameObject.GetComponent<CityEController>();
+
+            mapEFactory = gameObject.GetComponent<MapEFactory>();
+            mapEController = gameObject.GetComponent<MapEController>();
+            
+            questEController = gameObject.GetComponent<QuestEController>();
 
             cityEController.InitCityE(allCityESO);
             mapEController.InitMapE(allMapESO);

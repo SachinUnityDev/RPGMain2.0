@@ -7,21 +7,28 @@ namespace Combat
 {
     public class TacticsController : MonoBehaviour
     {
-        [SerializeField] Button StartCombatBtn;
+       // [SerializeField] Button StartCombatBtn;
         [SerializeField]
         DynamicPosData targetDyna = null;
         [SerializeField]
         DynamicPosData selectDyna = null;
 
 
-        void Start()
+        void OnEnable()
         {
-            StartCombatBtn.onClick.AddListener(CombatEventService.Instance.On_SOC);
+           // StartCombatBtn.onClick.AddListener(CombatEventService.Instance.On_SOC);
             CombatEventService.Instance.OnCharRightClicked += OnCharRightClicked;
             GridService.Instance.OnCellPosClicked += OnTileClicked;
-            StartCombatBtn.onClick.AddListener(StartCombat);
+           // StartCombatBtn.onClick.AddListener(StartCombat);
             CombatEventService.Instance.OnSOTactics += StartTactics; 
 
+        }
+        private void OnDisable()
+        {
+            CombatEventService.Instance.OnCharRightClicked -= OnCharRightClicked;
+            GridService.Instance.OnCellPosClicked -= OnTileClicked;
+            // StartCombatBtn.onClick.AddListener(StartCombat);
+            CombatEventService.Instance.OnSOTactics -= StartTactics;
         }
 
         public void StartTactics()

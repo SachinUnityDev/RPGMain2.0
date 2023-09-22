@@ -47,7 +47,7 @@ namespace Combat
 
 #endregion
 
-        void Start()
+        void OnEnable()
         {
             index = -1; 
             optionsBtn.onClick.AddListener(OnOptionBtnPressed);
@@ -67,7 +67,16 @@ namespace Combat
 
         }
 
-       
+        private void OnDisable()
+        {
+            CombatEventService.Instance.OnSOT +=
+            () => SetSkillsPanel(CombatService.Instance.currCharOnTurn.charModel.charID);
+            CombatEventService.Instance.OnCharClicked +=
+               () => SetSkillsPanel(CombatService.Instance.currCharClicked.charModel.charID);
+            CombatEventService.Instance.OnCharClicked +=
+                                                 () => PopulateSkillClickedState(-1);
+            CombatEventService.Instance.OnEOT += () => PopulateSkillClickedState(-1);
+        }
 
         public void OnOptionBtnPressed()
         {

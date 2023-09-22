@@ -13,8 +13,9 @@ namespace Quest
         public QBarkSO qBarkSO;
         [SerializeField]List<BarkData> allBarkDataSelect = new List<BarkData>();
 
-        public QbarkView qbarkView;
-
+        public QbarkView qbarkViewGO;
+     
+        [SerializeField] QbarkView qBarkViewPrefab;
         private void OnEnable()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;  
@@ -25,26 +26,33 @@ namespace Quest
         }
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (scene.name == "QUEST")
+            if (GameService.Instance.gameModel.gameState == GameState.InQuestRoom)
             {
-                qbarkView = FindObjectOfType<QbarkView>(false);
-
-               
+                GameObject canvasGO = FindObjectOfType<Canvas>().gameObject; 
+                qbarkViewGO = FindObjectOfType<QbarkView>(true);
+                //if (qbarkViewGO == null)
+                //    qbarkViewGO =
+                //          Instantiate(qBarkViewPrefab ,canvasGO.transform);
+               // qbarkViewGO.gameObject.transform.SetParent(canvasGO.transform);
             }
         }
 
         public bool ShowBark(List<QBarkNames> barkNames, InteractEColEvents intColEvents)
         {
-            GetBarkData(barkNames);
+            allBarkDataSelect.Clear();
+            allBarkDataSelect.AddRange(GetBarkData(barkNames));
             if (allBarkDataSelect.Count == 0)
                 return false; 
             int index = UnityEngine.Random.Range(0,allBarkDataSelect.Count);
-            qbarkView.InitBark(allBarkDataSelect[index].allCharData, intColEvents); 
+            qbarkViewGO.gameObject.SetActive(true);
+
+            qbarkViewGO.InitBark(allBarkDataSelect[index].allCharData, intColEvents); 
             return true;
         }
         public List<BarkData> GetBarkData(List<QBarkNames> qBarkNames)
         {
-            allBarkDataSelect = qBarkSO.GetBarkData(qBarkNames);            
+            allBarkDataSelect.Clear(); 
+            allBarkDataSelect.AddRange(qBarkSO.GetBarkData(qBarkNames));            
             RemoveOnQModeBasis();
             RemoveOnCharNameBasis();
             return allBarkDataSelect;

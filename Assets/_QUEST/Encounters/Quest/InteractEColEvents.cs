@@ -85,7 +85,7 @@ namespace Quest
             }
             else if(interactData.allBarks.Count != 0)
             {
-                Debug.Log("Detected: BARKS");
+                Debug.Log("Detected: BARKS" + interactData.allBarks[0]);
                       
                BarkService.Instance.qbarkController.ShowBark(interactData.allBarks, this);
                 OnPosChked();               

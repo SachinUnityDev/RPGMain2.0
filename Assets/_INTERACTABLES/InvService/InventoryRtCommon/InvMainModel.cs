@@ -187,7 +187,7 @@ namespace Interactables
                                         && t.itemName == itemName);
             if(item == null)
             {
-                Debug.Log("Item Not FOUND"); return null;
+                Debug.Log("Item Not FOUND in comm Inv"); return null;
             }
 
             return item; 

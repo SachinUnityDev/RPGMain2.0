@@ -11,7 +11,7 @@ namespace Common
 
     public class UIControlServiceGeneral : MonoSingletonGeneric<UIControlServiceGeneral>
     {
-        public GameObject townCanvas;
+        public GameObject activeCanvas;
         public List<GameObject> currOpenPanels = new List<GameObject>();
 
         [Header("Escape related")]
@@ -38,9 +38,10 @@ namespace Common
             isNewGInitDone = true;
 
         }
-        private void Start()
+        private void OnEnable()
         {
-            townCanvas = GameObject.FindWithTag("TownCanvas");
+
+            activeCanvas = FindObjectOfType<Canvas>().gameObject;
             TogglePanel(escPanel, false);
         }
         public void BlockEsc(bool blockEsc)
@@ -112,8 +113,8 @@ namespace Common
      
         public void SetMaxSibling2Canvas(GameObject go)
         {
-            go.transform.SetParent(townCanvas.transform);
-            int childCount = townCanvas.transform.childCount - 1;
+            go.transform.SetParent(activeCanvas.transform);
+            int childCount = activeCanvas.transform.childCount - 1;
             go.transform.SetSiblingIndex(childCount);
             AddAnchorsToMaxExpansion(go);
         }

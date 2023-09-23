@@ -2811,7 +2811,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   qBarkSO: {fileID: 11400000, guid: 42ecfa1c5572a4245b488b7fb02c8fb1, type: 2}
   allBarkDataSelect: []
-  qbarkView: {fileID: 1880755366}
+  qbarkViewGO: {fileID: 0}
+  qBarkViewPrefab: {fileID: 0}
 --- !u!114 &274464522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4418,7 +4419,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 406599547}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.1172962, y: 3.0072782, z: -10}
+  m_LocalPosition: {x: -2.1033611, y: 3.007324, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7598,8 +7599,9 @@ MonoBehaviour:
     mistakesAllowed: 0
     timeElapsed: 0
     netTime: 0
-  trapView: {fileID: 3636975245285738062, guid: 9ae8629b0043c794b9ef09125e2f33fb,
+  trapViewPrefab: {fileID: 3636975245285738062, guid: 9ae8629b0043c794b9ef09125e2f33fb,
     type: 3}
+  trapViewGO: {fileID: 0}
   trapGameState: 0
 --- !u!114 &778597378
 MonoBehaviour:

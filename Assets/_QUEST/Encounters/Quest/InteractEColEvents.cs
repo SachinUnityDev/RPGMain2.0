@@ -80,7 +80,7 @@ namespace Quest
             if (interactData.questEName != QuestENames.None)
             {
                 Debug.Log("Detected: Q E ");
-                EncounterService.Instance.questEController.ShowQuestE(this, QuestENames.Spidaboy);
+                EncounterService.Instance.questEController.ShowQuestE(this, interactData.questEName);
                 OnPosChked();
             }
             else if(interactData.allBarks.Count != 0)
@@ -101,8 +101,9 @@ namespace Quest
             {
                 // init trap game
                 Debug.Log("Detected: Traps ");
+                MGService.Instance.trapMGController.InitGame(this); 
                 OnPosChked();
-                OnContinue();
+                
             }
         }
 
@@ -112,13 +113,14 @@ namespace Quest
         }
         IEnumerator WaitForSec()
         {
-            yield return new WaitForSeconds(1);
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            yield return new WaitForSeconds(1);          
             QRoomService.Instance.canAbbasMove = true;
         }
 
         void OnPosChked()
         {
+            QRoomService.Instance.canAbbasMove = false;
             if (interactNo == 1)
             {
                 qRoomModel.interact1Chked = true;
@@ -134,10 +136,10 @@ namespace Quest
         }
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.L))
-            {
-                OnContinue();   
-            }
+            //if(Input.GetKeyDown(KeyCode.L))
+            //{
+            //    OnContinue();   
+            //}
         }
 
     }

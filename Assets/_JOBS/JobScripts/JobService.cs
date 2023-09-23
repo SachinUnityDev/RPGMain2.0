@@ -67,14 +67,14 @@ namespace Town
             }
 
         }
-        private void Update()
-        {
-            if(Input.GetKeyUp(KeyCode.W))
-            {
-                StartJob(JobNames.WoodCutting);    
+        //private void Update()
+        //{
+        //    if(Input.GetKeyUp(KeyCode.W))
+        //    {
+        //        StartJob(JobNames.WoodCutting);    
 
-            }
-        }
+        //    }
+        //}
     }
     
 

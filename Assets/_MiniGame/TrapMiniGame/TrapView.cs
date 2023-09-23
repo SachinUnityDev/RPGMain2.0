@@ -9,12 +9,17 @@ namespace Common
 {
     public class TrapView : MonoBehaviour
     {
-        [Header("Result Txt")]
-        [SerializeField] TextMeshProUGUI resultTxt; 
+        [Header("TBR")]
+        [SerializeField] Transform mainPage;
+        [SerializeField] Transform keyContainer; 
+        //[SerializeField] TextMeshProUGUI resultTxt; 
         Sequence seq;
         [Header(" trap Model")]
         [SerializeField]TrapMGModel trapMGModel;
-        [SerializeField] AllTrapMGSO allTrapMGSO; 
+        [SerializeField] AllTrapMGSO allTrapMGSO;
+        [SerializeField] TrapMGController trapMGController; 
+
+
         [Header(" Letter Pressed In Number")]
       
         [SerializeField] int currHL = -1;
@@ -27,17 +32,18 @@ namespace Common
         [SerializeField] float timeDelta = 0.6f;
         [SerializeField] bool onKeyRegWaitTime = false; 
 
-        public void StartSeq(TrapMGModel trapMGModel, AllTrapMGSO allTrapSO)
+        public void StartSeq(TrapMGModel trapMGModel, AllTrapMGSO allTrapSO, TrapMGController trapMGController)
         {
             this.trapMGModel = trapMGModel; 
             this.allTrapMGSO= allTrapSO;    
-
-            foreach(Transform child in transform)
+            this.trapMGController= trapMGController;    
+            foreach(Transform child in keyContainer)
             {
                 child.GetComponent<TrapBtnPtrEvents>().InitTiles(this, allTrapMGSO); 
             }
 
-            resultTxt.gameObject.SetActive(false);
+         
+            // resultTxt.gameObject.SetActive(false);
             this.gameObject.SetActive(true);
             wrongHit = 0;
             startTime = Time.time;
@@ -58,9 +64,9 @@ namespace Common
             for (int i = 0; i < 4; i++)
             {
                 if(i != currHL)
-                    transform.GetChild(i).GetComponent<TrapBtnPtrEvents>().ShowGreyTile();
+                    keyContainer.GetChild(i).GetComponent<TrapBtnPtrEvents>().ShowGreyTile();
                 else
-                    transform.GetChild(i).GetComponent<TrapBtnPtrEvents>().ShowDefaultTile();
+                    keyContainer.GetChild(i).GetComponent<TrapBtnPtrEvents>().ShowDefaultTile();
             }
         }
 
@@ -91,7 +97,7 @@ namespace Common
         {
             seq.Pause();
             if(currHL != -1)
-            transform.GetChild(currHL).GetComponent<TrapBtnPtrEvents>().OnCorrectHit();
+            keyContainer.GetChild(currHL).GetComponent<TrapBtnPtrEvents>().OnCorrectHit();
             correctHits++;
             if (correctHits >= trapMGModel.correctHitsNeeded)
             {
@@ -105,7 +111,7 @@ namespace Common
         {
             seq.Pause();
             if (currHL != -1)
-                transform.GetChild(currHL).GetComponent<TrapBtnPtrEvents>().OnWrongHit();
+                keyContainer.GetChild(currHL).GetComponent<TrapBtnPtrEvents>().OnWrongHit();
             wrongHit++;
             if(wrongHit >= trapMGModel.mistakesAllowed)
             {                
@@ -117,15 +123,17 @@ namespace Common
         }
         void EndGame(bool result)
         {
-            Debug.Log("End Game");
-            if (result)
-                resultTxt.text = "UNLOCKED"; 
-            else
-                resultTxt.text = "TRAPPED"; 
+            //Debug.Log("End Game");
+            //if (result)
+            //    resultTxt.text = "UNLOCKED"; 
+            //else
+            //    resultTxt.text = "TRAPPED"; 
             StopAllCoroutines();
             seq.Pause();
-            resultTxt.gameObject.SetActive(true);
+          //  resultTxt.gameObject.SetActive(true);
             gameObject.SetActive(false);
+            trapMGController.OnEndGame(); 
+
         }
         public void Update()
         {
@@ -148,8 +156,6 @@ namespace Common
                 {
                     OnLetterPressed(3);
                 }
-               
-
             }
         }
 

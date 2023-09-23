@@ -296,14 +296,14 @@ namespace Common
 
       
 #endregion
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                Canvas canvas = FindObjectOfType<Canvas>();
-                ShowDialogueLs(CharNames.None, NPCNames.Khalid, canvas.transform);
-            }
-        }
+        //private void Update()
+        //{
+        //    //if (Input.GetKeyDown(KeyCode.M))
+        //    //{
+        //    //    Canvas canvas = FindObjectOfType<Canvas>();
+        //    //    ShowDialogueLs(CharNames.None, NPCNames.Khalid, canvas.transform);
+        //    //}
+        //}
 
     }
 }

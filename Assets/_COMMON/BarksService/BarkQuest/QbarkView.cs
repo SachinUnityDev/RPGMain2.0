@@ -87,12 +87,12 @@ namespace Quest
                
                 i++;
             }
-            if (isCurio)
-                curioColEvents.OnContinue();
-            else
+            if (!isCurio)                           
                interactEColEvents.OnContinue();
+            //else
+                // curioColEvents.OnContinue();
 
-            CloseAllBarks();
+                CloseAllBarks();
         }
     
         void ShowBark(int index, BarkCharData barkCharData)

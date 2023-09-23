@@ -16,12 +16,9 @@ MonoBehaviour:
   - qBarkName: 1
     InValidQMode: 00000000
     allCharData:
-    - charName: 0
-      str: Rat squeak
-      audioClip: {fileID: 8300000, guid: e4b9fbacc5f81484ea317ed1a0c4cf6d, type: 3}
     - charName: 1
-      str: F.ckuing rats!
-      audioClip: {fileID: 8300000, guid: cbb39a6437e1d15419c12b06e19570c1, type: 3}
+      str: Chest is the best.
+      audioClip: {fileID: 8300000, guid: e4b9fbacc5f81484ea317ed1a0c4cf6d, type: 3}
   - qBarkName: 2
     InValidQMode: 00000000
     allCharData:
@@ -43,21 +40,9 @@ MonoBehaviour:
   - qBarkName: 3
     InValidQMode: 00000000
     allCharData:
-    - charName: 0
-      str: rat sq
-      audioClip: {fileID: 8300000, guid: eafbfc5a3d9083044a1fa947ba89f8b0, type: 3}
     - charName: 1
-      str: Rats and bats and cats... I hate them all!
-      audioClip: {fileID: 8300000, guid: eafbfc5a3d9083044a1fa947ba89f8b0, type: 3}
-    - charName: 2
-      str: Is der any animal yeh like?
-      audioClip: {fileID: 8300000, guid: 4c2b04d56c3bbb14e888bece78fdd310, type: 3}
-    - charName: 1
-      str: Yeah, you mate!
-      audioClip: {fileID: 8300000, guid: 03d3bd4a26cb2524e9ddd4300e44f93e, type: 3}
-    - charName: 2
-      str: Modershagger!
-      audioClip: {fileID: 8300000, guid: 4c2b04d56c3bbb14e888bece78fdd310, type: 3}
+      str: Chest is the best.
+      audioClip: {fileID: 8300000, guid: e4b9fbacc5f81484ea317ed1a0c4cf6d, type: 3}
   - qBarkName: 4
     InValidQMode: 00000000
     allCharData:
@@ -145,12 +130,9 @@ MonoBehaviour:
   - qBarkName: 10
     InValidQMode: 00000000
     allCharData:
-    - charName: 0
-      str: bat sq
-      audioClip: {fileID: 0}
     - charName: 1
-      str: I think, out of all the animals, i hate bats the most!
-      audioClip: {fileID: 0}
+      str: Chest is the best.
+      audioClip: {fileID: 8300000, guid: e4b9fbacc5f81484ea317ed1a0c4cf6d, type: 3}
   - qBarkName: 11
     InValidQMode: 00000000
     allCharData:
@@ -204,19 +186,19 @@ MonoBehaviour:
     allCharData:
     - charName: 0
       str: bat sq
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: cbb39a6437e1d15419c12b06e19570c1, type: 3}
     - charName: 1
       str: I got a bad feeling about this place!
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: eafbfc5a3d9083044a1fa947ba89f8b0, type: 3}
     - charName: 3
       str: You are not alone!
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: abcedbbdc90eecc48957affaa4261b4d, type: 3}
     - charName: 1
       str: You mean you got a bad feeling too?
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 96c6c5ae13cdbdb46937c44e33733f99, type: 3}
     - charName: 3
       str: No! I am here to fight beside you!
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 817b199f209b0f94bbe8190adde550e2, type: 3}
   - qBarkName: 15
     InValidQMode: 00000000
     allCharData:

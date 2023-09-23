@@ -89,10 +89,10 @@ namespace Town
 
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.S))
-            {
-                ShowSeqbark(SeqBarkNames.KhalidHouse);
-            }
+            //if(Input.GetKeyDown(KeyCode.S))
+            //{
+            //    ShowSeqbark(SeqBarkNames.KhalidHouse);
+            //}
         }
     }
 }

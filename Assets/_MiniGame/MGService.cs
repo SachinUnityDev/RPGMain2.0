@@ -18,13 +18,13 @@ namespace Common
             trapMGController= GetComponent<TrapMGController>();
         }
 
-        private void Update()
-        {
-            if(Input.GetKeyDown(KeyCode.M)) 
-            { 
-                trapMGController.InitGame();
-            }
-        }
+        //private void Update()
+        //{
+        //    if(Input.GetKeyDown(KeyCode.M)) 
+        //    { 
+        //        trapMGController.InitGame();
+        //    }
+        //}
 
 
     }

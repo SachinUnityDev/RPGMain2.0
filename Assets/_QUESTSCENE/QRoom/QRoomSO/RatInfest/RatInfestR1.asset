@@ -25,10 +25,10 @@ MonoBehaviour:
     stealthChance: 30
     explorationChance: 60
     tauntChance: 90
-    questEName: 1
+    questEName: 0
     allBarks: 
     enemyPack: 0
-    trapNames: 0
+    trapNames: 1
   interact2:
     stealthChance: 30
     explorationChance: 60
@@ -44,7 +44,7 @@ MonoBehaviour:
     questEName: 0
     allBarks: 
     enemyPack: 0
-    trapNames: 1
+    trapNames: 0
   prop: {fileID: 21300000, guid: c811060f4bae01f4b88e26bdc93bee40, type: 3}
   fgSprite: {fileID: 21300000, guid: af91e61165c47b84aa663fafbfed9644, type: 3}
   mapPortCord: {x: -601, y: 54}

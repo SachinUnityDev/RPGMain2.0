@@ -4,15 +4,26 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 using Quest;
+using Combat;
+using UnityEngine.UIElements;
 
 namespace Common
 {
     public class TrapView : MonoBehaviour
     {
+
+        [SerializeField] const float TIME_BET_HITS = 0.6f;
+        [SerializeField] const float TIME_BET_LETTER_CHG = 0.45f;
+        [SerializeField] const float TIME_DELTA = 0.4f; // to prevent double hits
+
         [Header("TBR")]
-        [SerializeField] Transform mainPage;
-        [SerializeField] Transform keyContainer; 
-        //[SerializeField] TextMeshProUGUI resultTxt; 
+      
+        [SerializeField] Transform keyContainer;
+        [SerializeField] MistakeBarView mistakeBarView;
+        [SerializeField] TextMeshProUGUI timerTxt;
+        [SerializeField] TextMeshProUGUI resultTxt; 
+
+
         Sequence seq;
         [Header(" trap Model")]
         [SerializeField]TrapMGModel trapMGModel;
@@ -29,35 +40,83 @@ namespace Common
 
         [Header(" Chk double hit")]
         [SerializeField]float prevHitTime;
-        [SerializeField] float timeDelta = 0.6f;
-        [SerializeField] bool onKeyRegWaitTime = false; 
+        [SerializeField] bool onKeyRegWaitTime = false;
+
+        [Header("Trap Anim")]
+        public TransitionSO transitionSO;
+        [SerializeField] GameObject animPanel;
+
+        [Header("Timer")]
+        [SerializeField] float prevTime; 
+
 
         public void StartSeq(TrapMGModel trapMGModel, AllTrapMGSO allTrapSO, TrapMGController trapMGController)
         {
             this.trapMGModel = trapMGModel; 
             this.allTrapMGSO= allTrapSO;    
-            this.trapMGController= trapMGController;    
-            foreach(Transform child in keyContainer)
+            this.trapMGController= trapMGController;
+
+            foreach (Transform child in keyContainer)
             {
                 child.GetComponent<TrapBtnPtrEvents>().InitTiles(this, allTrapMGSO); 
             }
 
-         
-            // resultTxt.gameObject.SetActive(false);
-            this.gameObject.SetActive(true);
+            SetElementsInActive();  
             wrongHit = 0;
-            startTime = Time.time;
+          
+            mistakeBarView.FillMistakeHearts(trapMGModel.mistakesAllowed, 0);
 
-            seq = DOTween.Sequence();
-                seq
-                .AppendCallback(HLTile)
-                .AppendInterval(0.6f);
+            Sequence startSeq = DOTween.Sequence();
+            startSeq
+                .AppendCallback(() => transitionSO.PlayAnims("TRAP!", animPanel))
+                .AppendInterval(2f)
+                .AppendCallback(SetElementsActive)
+                ;
 
-            seq.Play().SetLoops(100); 
+            startSeq.Play().OnComplete(GameSeq); 
+            
         }
 
+        void SetElementsActive()
+        {
+            keyContainer.gameObject.SetActive(true);
+            mistakeBarView.gameObject.SetActive(true);
+            timerTxt.gameObject.SetActive(true);
+            resultTxt.gameObject.SetActive(false);
+            resultTxt.DOFade(0f, 0.1f);
+        }
 
-
+        void SetElementsInActive()
+        {
+            keyContainer.gameObject.SetActive(false);
+            mistakeBarView.gameObject.SetActive(false);
+            timerTxt.gameObject.SetActive(false);
+            resultTxt.gameObject.SetActive(true);
+            resultTxt.DOFade(0f, 0.1f);
+        }
+        void GameSeq()
+        {
+            startTime = Time.time;
+            prevTime = 0;
+            FillTimer();
+            seq = DOTween.Sequence();
+            seq
+                .AppendCallback(HLTile)
+                .AppendInterval(TIME_BET_LETTER_CHG)                
+                ;
+            seq.Play().SetLoops(100);
+        }
+        void FillTimer()
+        {
+            float timerVal = Time.time - startTime;
+            if (timerVal < trapMGModel.netTime)
+                timerTxt.text = ((int)(trapMGModel.netTime - timerVal)).ToString();
+            else
+            {
+                Debug.Log("TIME OUT");
+                EndGame(false); 
+            }
+        }
         void HLTile()
         {
             currHL = UnityEngine.Random.Range(0, 4);
@@ -72,7 +131,7 @@ namespace Common
 
         void OnLetterPressed(int letter)
         {
-            if (Time.time <= prevHitTime + timeDelta)
+            if (Time.time <= prevHitTime + TIME_DELTA)
                 return;
             if (onKeyRegWaitTime)
                 return; 
@@ -85,12 +144,9 @@ namespace Common
         IEnumerator Wait()
         {
             onKeyRegWaitTime = true;
-            yield return new WaitForSeconds(1f);
-            onKeyRegWaitTime = false;
-            if (Time.time >= (startTime + trapMGModel.netTime))
-                EndGame(false);
-            else
-                seq.Play();            
+            yield return new WaitForSeconds(TIME_BET_HITS);
+            onKeyRegWaitTime = false;          
+            seq.Play();            
         }     
 
         public void OnSuccess()
@@ -113,6 +169,7 @@ namespace Common
             if (currHL != -1)
                 keyContainer.GetChild(currHL).GetComponent<TrapBtnPtrEvents>().OnWrongHit();
             wrongHit++;
+            mistakeBarView.FillMistakeHearts(trapMGModel.mistakesAllowed, wrongHit); 
             if(wrongHit >= trapMGModel.mistakesAllowed)
             {                
                 EndGame(false);
@@ -123,17 +180,31 @@ namespace Common
         }
         void EndGame(bool result)
         {
-            //Debug.Log("End Game");
-            //if (result)
-            //    resultTxt.text = "UNLOCKED"; 
-            //else
-            //    resultTxt.text = "TRAPPED"; 
-            StopAllCoroutines();
-            seq.Pause();
-          //  resultTxt.gameObject.SetActive(true);
-            gameObject.SetActive(false);
-            trapMGController.OnEndGame(); 
+            MGService.Instance.trapMGController.trapGameState = MGGameState.End; 
+            if (!result)
+            {              
+                resultTxt.text = "TRAPPED";             
+            }
+            else
+            {
+                resultTxt.text = "TRAP EVADED"; 
+            }
+            Sequence endGameSeq = DOTween.Sequence();
+            endGameSeq
+                .AppendInterval(0.5f)
+                .AppendCallback(SetElementsInActive)
+                .Append(resultTxt.DOFade(1.0f, 0.5f))
+                .AppendInterval(1.0f)
+                .AppendCallback(EndGameFinal);
+            endGameSeq.Play();
+        }
 
+        void EndGameFinal()
+        {
+            StopAllCoroutines();
+            seq.Pause();            
+            gameObject.SetActive(false);
+            trapMGController.OnEndGame();
         }
         public void Update()
         {
@@ -156,6 +227,12 @@ namespace Common
                 {
                     OnLetterPressed(3);
                 }
+
+                if((Time.time - prevTime) > 1f)
+                {
+                    FillTimer(); 
+                }
+
             }
         }
 

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameDifficulty: 0
   correctHitsNeeded: 6
-  mistakesAllowed: 2
-  netTime: 30
+  mistakesAllowed: 3
+  netTime: 10

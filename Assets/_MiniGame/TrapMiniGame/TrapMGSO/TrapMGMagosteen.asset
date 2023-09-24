@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TrapMGMagosteen
   m_EditorClassIdentifier: 
   gameDifficulty: 2
-  correctHitsNeeded: 0
-  mistakesAllowed: 0
+  correctHitsNeeded: 4
+  mistakesAllowed: 4
   netTime: 16

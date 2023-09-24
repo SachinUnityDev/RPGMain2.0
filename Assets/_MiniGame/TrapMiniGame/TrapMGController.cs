@@ -1,3 +1,4 @@
+using Combat;
 using Quest;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ namespace Common
         public TrapView trapViewGO; 
 
         public MGGameState trapGameState;
+
+        
 
         [Header(" global Var")]
         InteractEColEvents interactEColEvents; 

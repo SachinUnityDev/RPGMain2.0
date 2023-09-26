@@ -1,9 +1,7 @@
 using Common;
 using Interactables;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +11,8 @@ namespace Combat
 {
     public class SkillCardView : MonoBehaviour
     {
+        [SerializeField] const float skillCardHt = 308f;
+        [SerializeField] const float midTransHt = 111f;
 
         [SerializeField] SkillController1 skillController;
         [SerializeField] CharController charController;
@@ -49,11 +49,11 @@ namespace Combat
                 skillModel  = SkillService.Instance.skillModelHovered;
                 skillName = skillModel.skillName;
            //}
-           PopulateTopTrans();
-            PopulateMidTrans();    
-            PopulateBtmTrans();
+           FillTopTrans();
+            FillMidTrans();    
+            FillBtmTrans();
         }
-        void PopulateTopTrans()
+        void FillTopTrans()
         {
             skillDataSO = SkillService.Instance.GetSkillSO(charController.charModel.charName);
             skillData = skillDataSO.GetSkillData(skillName); 
@@ -89,25 +89,49 @@ namespace Combat
             {
                 topTrans.GetChild(3).GetChild(i).GetComponent<Image>().sprite =
                                                         skillHexSO.GetHexSprite(perkHex);
-                i++;
-                if (i > 3)
-                {
-                   // expand the skillcard ..
-                   // Expand the mid card by some val as height of text go 
-                   // setactive => true....
-                } 
+                i++;            
             }
         }
-        void PopulateMidTrans()
-        {            
-            for (int i = 0; i < skillModel.descLines.Count; i++)
+        void FillMidTrans()
+        {
+            int lines = skillModel.descLines.Count;
+            // get skill card height             
+            RectTransform skillCardRect = transform.GetComponent<RectTransform>();
+            RectTransform midTransRect = midTrans.GetComponent<RectTransform>();
+            if (lines > 2)
             {
-                midTrans.GetChild(i).GetComponent<TextMeshProUGUI>().text
-                                                   = skillModel.descLines[i]; 
-            }  
-            
+                // increase size 
+                int incr = lines - 2;
+                midTransRect.sizeDelta
+                        = new Vector2(midTransRect.sizeDelta.x, midTransHt + incr * 40f);
+                skillCardRect.sizeDelta
+                        = new Vector2(skillCardRect.sizeDelta.x, skillCardHt + incr * 40f);
+            }
+            else
+            {
+                // reduce to org size 
+                midTransRect.sizeDelta
+                        = new Vector2(midTransRect.sizeDelta.x, midTransHt );
+                skillCardRect.sizeDelta
+                        = new Vector2(skillCardRect.sizeDelta.x, skillCardHt);
+            }
+            int j = 0; 
+            foreach (Transform child in midTrans)
+            {
+                if(j < lines)
+                {
+                    child.gameObject.SetActive(true);
+                    child.GetComponent<TextMeshProUGUI>().text
+                                                   = skillModel.descLines[j];
+                }
+                else
+                {
+                    child.gameObject.SetActive(false);  
+                }
+                j++; 
+            }
         }
-        void PopulateBtmTrans()
+        void FillBtmTrans()
         {
             // skillModel has it 
             btmTrans.GetChild(0).GetComponent<TextMeshProUGUI>().text

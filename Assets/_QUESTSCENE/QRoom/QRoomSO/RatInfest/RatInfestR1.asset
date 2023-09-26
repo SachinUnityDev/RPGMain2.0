@@ -28,7 +28,7 @@ MonoBehaviour:
     questEName: 0
     allBarks: 
     enemyPack: 0
-    trapNames: 1
+    trapNames: 0
   interact2:
     stealthChance: 30
     explorationChance: 60
@@ -36,7 +36,7 @@ MonoBehaviour:
     questEName: 0
     allBarks: 
     enemyPack: 0
-    trapNames: 1
+    trapNames: 0
   interact3:
     stealthChance: 50
     explorationChance: 75

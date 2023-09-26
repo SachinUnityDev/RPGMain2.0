@@ -13,27 +13,23 @@ namespace Quest
     {
         public Transform mapImgTrans;
         public Button bgBtn;
-        [SerializeField] Transform headTrans; 
+        [SerializeField] Transform headTrans;
+        [SerializeField] QRoomModel qRoomModel; 
         private void Start()
         {
             UnLoad();
-            bgBtn.onClick.AddListener(UnLoad);
-            SceneManager.sceneLoaded += OnSceneLoaded;
-            QRoomService.Instance.OnQRoomStateChg += QuestStartInit;
+            bgBtn.onClick.AddListener(UnLoad);        
+            qRoomModel = QRoomService.Instance.qRoomController.qRoomModel;
+            if(qRoomModel != null )
+            {
+                OnRoomChg(qRoomModel.questNames, qRoomModel.roomNo);
+            }
+            
             QRoomService.Instance.OnRoomChg += OnRoomChg; 
         }
         private void OnDisable()
         {
             QRoomService.Instance.OnRoomChg -= OnRoomChg;
-        }
-        void OnSceneLoaded(Scene current, LoadSceneMode loadMode)
-        {
-         
-                
-        }
-        void QuestStartInit(QRoomState questState)
-        {
-            OnRoomChg(QRoomService.Instance.questName, 1);
         }
         public void OnRoomChg(QuestNames questName, int roomNo)
         {
@@ -46,9 +42,6 @@ namespace Quest
             headTrans.DOLocalMoveX(qRoomSO.mapPortCord.x, 0.1f);
             headTrans.DOLocalMoveY(qRoomSO.mapPortCord.y, 0.1f);
         }
-
-
-
         public void Init()
         {
            

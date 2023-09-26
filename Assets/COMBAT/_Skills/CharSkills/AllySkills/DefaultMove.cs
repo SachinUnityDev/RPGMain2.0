@@ -103,7 +103,7 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str1 = $"<style=Move>Move</style> to adj tile";
+            str1 = $"<style=Move>Move</style> to adj tile // Chance to keep your turn depending on Haste";
             SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
 

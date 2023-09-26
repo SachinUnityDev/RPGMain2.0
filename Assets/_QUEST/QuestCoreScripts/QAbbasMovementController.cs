@@ -97,6 +97,7 @@ namespace Quest
         {
             QRoomService.Instance.canAbbasMove = false;
             string name = collision.gameObject.name;
+            Debug.Log(" Name " + name); 
             if (name == "EntryCollider")
             {
                 movement = 0;
@@ -109,6 +110,10 @@ namespace Quest
             if (name == "ArrowTrigger")
             {
                 QRoomService.Instance.qRoomView.ShowEndArrow();              
+            }
+            if(name == "Floor")
+            {
+                QRoomService.Instance.canAbbasMove = true;
             }
         }
         public void OnQRoomStateChg(QRoomState qRoomState)

@@ -56,7 +56,7 @@ namespace Common
                 mgRect.offsetMax = new Vector2(0, 0); // new Vector2(-right, -top);
                 //isDiaViewInitDone = true;
             }
-
+            trapViewGO.gameObject.SetActive(true);
             QRoomService.Instance.canAbbasMove = false;
             trapViewGO.StartSeq(trapMGModel, allTrapSO, this);
 

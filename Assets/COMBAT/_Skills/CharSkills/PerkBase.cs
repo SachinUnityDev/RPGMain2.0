@@ -59,11 +59,11 @@ namespace Combat
             if (!skillModel.castPos.Any(t => t == currDyna.currentPos))
                 return;
             AddTargetPos();
-            SkillService.Instance.SkillApply += BaseApply;
-            SkillService.Instance.SkillApply += ApplyFX1;
-            SkillService.Instance.SkillApply += ApplyFX2;
-            SkillService.Instance.SkillApply += ApplyFX3;
-            SkillService.Instance.SkillApply += ApplyVFx;
+            SkillService.Instance.OnSkillApply += BaseApply;
+            SkillService.Instance.OnSkillApply += ApplyFX1;
+            SkillService.Instance.OnSkillApply += ApplyFX2;
+            SkillService.Instance.OnSkillApply += ApplyFX3;
+            SkillService.Instance.OnSkillApply += ApplyVFx;
             SkillService.Instance.SkillApplyMoveFx += ApplyMoveFX; 
 
             SkillService.Instance.PostSkillApply += PostApplyFX;
@@ -135,10 +135,10 @@ namespace Combat
         public virtual void WipeFX2() => SkillService.Instance.SkillHovered -= DisplayFX2;
         public virtual void WipeFX3() => SkillService.Instance.SkillHovered -= DisplayFX3;
         public virtual void WipeFX4() => SkillService.Instance.SkillHovered -= DisplayFX4;
-        public virtual void RemoveFX1() => SkillService.Instance.SkillApply -= ApplyFX1;
-        public virtual void RemoveFX2() => SkillService.Instance.SkillApply -= ApplyFX2;
-        public virtual void RemoveFX3() => SkillService.Instance.SkillApply -= ApplyFX3;
-        public virtual void RemoveVFx() => SkillService.Instance.SkillApply -= ApplyVFx;
+        public virtual void RemoveFX1() => SkillService.Instance.OnSkillApply -= ApplyFX1;
+        public virtual void RemoveFX2() => SkillService.Instance.OnSkillApply -= ApplyFX2;
+        public virtual void RemoveFX3() => SkillService.Instance.OnSkillApply -= ApplyFX3;
+        public virtual void RemoveVFx() => SkillService.Instance.OnSkillApply -= ApplyVFx;
         public virtual void RemoveMoveFX() => SkillService.Instance.SkillApplyMoveFx -= ApplyMoveFX; 
 
         #endregion

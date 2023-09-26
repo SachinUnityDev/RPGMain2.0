@@ -43,18 +43,25 @@ namespace Quest
         [Header("TEST")]
         [SerializeField] QuestEView questEView;
 
-        void Awake()
-        {
-            qAbbasMove = abbasGO.GetComponent<QAbbasMovementController>();            
-        }
-
         private void Start()
         {
-            QRoomService.Instance.OnStartOfQScene += OnStartQRoomView;
+            qAbbasMove = abbasGO.GetComponent<QAbbasMovementController>();
+            QRoomService.Instance.OnQSceneStart += OnStartQRoomView;
             QRoomService.Instance.OnQRoomStateChg += OnQRoomStateChgView;
-            QRoomService.Instance.OnRoomChg += (QuestNames questName, int roomNo)=>OnRoomChg(); 
+            QRoomService.Instance.OnRoomChg += OnRoomChg;
+
+            OnQRoomStateChgView(QRoomState.Prep); 
         }
-        void OnRoomChg()
+        private void OnDisable()
+        {
+            QRoomService.Instance.OnQSceneStart -= OnStartQRoomView;
+            QRoomService.Instance.OnQRoomStateChg -= OnQRoomStateChgView;
+            QRoomService.Instance.OnRoomChg -= OnRoomChg;
+        }
+
+        
+
+        void OnRoomChg(QuestNames questName, int roomNo)
         {
             Sequence chgSeq = DOTween.Sequence();
 
@@ -103,9 +110,9 @@ namespace Quest
 
         void OnQRoomStateChgView(QRoomState qRoomState)
         {
-            QuestMode questMode = QuestMissionService.Instance.currQuestMode; 
+            QuestMode questMode = QuestMissionService.Instance.currQuestMode;
             qModeNLandView.InitQModeNLandView(questMode);
-           
+
             if (qRoomState == QRoomState.Prep)
             {
                 qRoomPrepEndArrow.gameObject.SetActive(true);
@@ -121,6 +128,7 @@ namespace Quest
                 qWalkBtmView.gameObject.SetActive(true);
                 qPreReqView.gameObject.SetActive(false);
                 qWalkBtmView.QWalkInit(this);
+                QRoomService.Instance.canAbbasMove = true;
                 UIControlServiceGeneral.Instance.helpName = HelpName.QRoom;
             }
             if (qRoomState == QRoomState.Walk)
@@ -128,6 +136,7 @@ namespace Quest
                 qRoomPrepEndArrow.gameObject.SetActive(false);
                 AbbasRoomInitPos = -8f;
                 UIControlServiceGeneral.Instance.helpName = HelpName.QRoom;
+                QRoomService.Instance.canAbbasMove = true;
             }
         }
 

@@ -62,18 +62,15 @@ namespace Common
             {
                 if(next.isLoaded)
                 {
+                    if (next.name == "QUEST")
+                        QRoomService.Instance.On_QuestSceneStart(QuestNames.RatInfestation);
+
                     sceneTransitView = sceneTransitGO.GetComponent<SceneTransitView>();
                     Debug.Log("Scene Transist to begin end anim");
                     sceneTransitView.EndAnim();
                     sceneTransitStarted = false;
-                    if(next.name =="QUEST")
-                    QRoomService.Instance.On_QuestSceneStart(QuestNames.RatInfestation); 
-
                 }
             }
-            // toggle off camera, event System and canvas  of previous scene
-            // toggle on ...
-            // allowscene activation  here 
         }
 
         void OnCombatLoadPressed()
@@ -81,9 +78,5 @@ namespace Common
             SceneMgmtService.Instance.LoadNewScene("COMBAT");
             StartSceneTransit();
         }
-        
-
-
-
     }
 }

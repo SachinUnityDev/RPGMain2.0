@@ -17,25 +17,21 @@ namespace Quest
         [SerializeField] QModeDispPtrEvents qModeDispPtrEvents;
 
         [SerializeField] Transform qSelPanel;
-        [SerializeField] bool isSelPanelShown;
+        [SerializeField] bool isSelPanelShown ;
 
 
         private void OnEnable()
         {
           //  QRoomService.Instance.OnQRoomStateChg += OnQRoomStateChg;
             QuestMissionService.Instance.OnQuestModeChg += InitQModeNLandView; 
+            TogglePanel();
         }
         private void OnDisable()
         {
           //  QRoomService.Instance.OnQRoomStateChg -= OnQRoomStateChg;
             QuestMissionService.Instance.OnQuestModeChg -= InitQModeNLandView;
-
         }
-        void OnQRoomStateChg(QRoomState qRoomState)
-        {
-
-            
-        }
+     
         public void InitQModeNLandView(QuestMode questMode)
         {
             qModeBtnPtrEvents.InitQModeBtn(this); 
@@ -46,20 +42,19 @@ namespace Quest
                 qSelPanel.GetChild(i).GetComponent<QModeSelPtrEvents>()
                                             .InitQModeSelBtnPtrEvents(this, modes[i]);
             }
-            isSelPanelShown= false;
-            TogglePanel();
+            isSelPanelShown= true;
+            TogglePanel(); // toggle off
         }
 
         public void TogglePanel()
-        {
-          
+        { 
             if (isSelPanelShown)
             {
-                qSelPanel.transform.DOLocalMoveX(0, 0.4f);
+                qSelPanel.transform.DOLocalMoveX(120, 0.4f); // off state
             }
             else
             {
-                qSelPanel.transform.DOLocalMoveX(60, 0.4f);
+                qSelPanel.transform.DOLocalMoveX(0, 0.4f); // on state
             }
             isSelPanelShown = !isSelPanelShown;
         }

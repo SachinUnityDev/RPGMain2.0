@@ -47,7 +47,17 @@ namespace Common
         [SerializeField] GameObject animPanel;
 
         [Header("Timer")]
-        [SerializeField] float prevTime; 
+        [SerializeField] float prevTime;
+        float timerVal;
+
+        private void OnEnable()
+        {
+            wrongHit = 0;
+            correctHits = 0;
+            timerVal = 0;
+            startTime = Time.time;
+            prevTime = 0;
+        }
 
 
         public void StartSeq(TrapMGModel trapMGModel, AllTrapMGSO allTrapSO, TrapMGController trapMGController)
@@ -62,8 +72,7 @@ namespace Common
             }
 
             SetElementsInActive();  
-            wrongHit = 0;
-          
+           
             mistakeBarView.FillMistakeHearts(trapMGModel.mistakesAllowed, 0);
 
             Sequence startSeq = DOTween.Sequence();
@@ -96,8 +105,6 @@ namespace Common
         }
         void GameSeq()
         {
-            startTime = Time.time;
-            prevTime = 0;
             FillTimer();
             seq = DOTween.Sequence();
             seq
@@ -108,12 +115,12 @@ namespace Common
         }
         void FillTimer()
         {
-            float timerVal = Time.time - startTime;
+            timerVal = Time.time - startTime;
             if (timerVal < trapMGModel.netTime)
                 timerTxt.text = ((int)(trapMGModel.netTime - timerVal)).ToString();
             else
             {
-                Debug.Log("TIME OUT");
+                Debug.Log("TIME OUT" + timerVal);
                 EndGame(false); 
             }
         }
@@ -232,7 +239,6 @@ namespace Common
                 {
                     FillTimer(); 
                 }
-
             }
         }
 

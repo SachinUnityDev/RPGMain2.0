@@ -97,13 +97,16 @@ namespace Quest
                 OnPosChked();
                 OnContinue();
             }
-            else
+            else if(interactData.trapNames != Traps.None)
             {
                 // init trap game
                 Debug.Log("Detected: Traps ");
                 MGService.Instance.trapMGController.InitGame(this); 
                 OnPosChked();
-                
+            }
+            else
+            {
+
             }
         }
 
@@ -134,14 +137,7 @@ namespace Quest
                 qRoomModel.interact3Chked = true;
             }
         }
-        private void Update()
-        {
-            //if(Input.GetKeyDown(KeyCode.L))
-            //{
-            //    OnContinue();   
-            //}
-        }
-
+   
     }
 }
 

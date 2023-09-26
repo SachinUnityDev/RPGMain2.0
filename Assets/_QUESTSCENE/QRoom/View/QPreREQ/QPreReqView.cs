@@ -8,10 +8,7 @@ namespace Quest
     public class QPreReqView : MonoBehaviour
     {
         QRoomView qRoomView; 
-        void Start()
-        {
-          
-        }
+
 
         public void InitQPreReqView(QRoomView qRoomView)
         {

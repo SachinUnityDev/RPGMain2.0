@@ -29,8 +29,7 @@ namespace Quest
         }
         public void OnPointerClick(PointerEventData eventData)
         {
-            QuestMissionService.Instance.On_QuestModeChg(questMode); 
-            
+            QuestMissionService.Instance.On_QuestModeChg(questMode);             
         }
 
         public void OnPointerEnter(PointerEventData eventData)

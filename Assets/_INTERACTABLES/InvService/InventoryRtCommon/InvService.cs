@@ -66,12 +66,11 @@ namespace Interactables
         }
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-            {   if(invXLGO== null)
-                        InitInvXLView();               
-            }
-       
-
-
+        {   
+            if(invXLGO== null)
+                    InitInvXLView();
+            charSelectController = CharService.Instance.GetCharCtrlWithName(CharNames.Abbas);
+        }
         public void On_DragResult(bool result, ItemsDragDrop itemsDragDrop)
         {
             OnDragResult?.Invoke(result,itemsDragDrop); 

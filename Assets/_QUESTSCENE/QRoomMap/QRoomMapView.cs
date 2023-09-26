@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Quest
@@ -17,9 +18,23 @@ namespace Quest
         {
             UnLoad();
             bgBtn.onClick.AddListener(UnLoad);
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            QRoomService.Instance.OnQRoomStateChg += QuestStartInit;
             QRoomService.Instance.OnRoomChg += OnRoomChg; 
         }
-
+        private void OnDisable()
+        {
+            QRoomService.Instance.OnRoomChg -= OnRoomChg;
+        }
+        void OnSceneLoaded(Scene current, LoadSceneMode loadMode)
+        {
+         
+                
+        }
+        void QuestStartInit(QRoomState questState)
+        {
+            OnRoomChg(QRoomService.Instance.questName, 1);
+        }
         public void OnRoomChg(QuestNames questName, int roomNo)
         {
             if (roomNo < 0)

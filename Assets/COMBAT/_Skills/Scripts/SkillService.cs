@@ -7,8 +7,7 @@ using DG.Tweening;
 using Common;
 using UnityEngine.UI;
 using TMPro;
-
-
+using UnityEngine.SceneManagement; 
 namespace Combat
 {
      [Serializable]
@@ -31,11 +30,33 @@ namespace Combat
 
     public class SkillService : MonoSingletonGeneric<SkillService>
     {
-        public float combatSpeed = 1f;
+       
 
         public event Action<PerkData> OnPerkStateChg;
         public event Action<SkillModel> OnSkillSelectInInv; 
         public event Action<PerkNames> OnPerkHovered;
+
+        //("ON SKILL APPLY")
+        private event Action _SkillApply = null;
+        public event Action OnSkillApply
+        {
+            add
+            {
+                if (_SkillApply == null || !_SkillApply.GetInvocationList().Contains(value))
+                {
+                    _SkillApply += value;
+                }
+                else
+                {
+                    Debug.Log("Duplicate >>");
+                }
+            }
+            remove
+            {
+                _SkillApply -= value;
+            }
+        }
+
         #region Initializers
 
         [Header("SKill Factory NTBR")]
@@ -52,7 +73,8 @@ namespace Combat
         public List<SkillDataSO> allCharSkillSO = new List<SkillDataSO>();
         public SkillViewSO skillViewSO; 
         public SkillHexSO skillHexSO;   
-        public GameObject skillCardGO; 
+        public GameObject skillCardGO;
+        [SerializeField] GameObject skillCardPrefab; 
 
         [Header("ALL SKILL MANAGER")]
         public List<SkillController1> allSkillControllers = new List<SkillController1>();   
@@ -63,7 +85,7 @@ namespace Combat
 
         [Header("SKILL MOVE AND FX RELATED")]
         public SkillFxMoveController skillFXMoveController;
-      //  public SkillFXController skillFXController; 
+     
 
         // ALL ACTIONS// 
         public event Action SkillInit;
@@ -81,49 +103,24 @@ namespace Combat
         public event Action<SkillEventData> OnSkillUsed; 
         [Header("curr Char UPDATES")]
         public CharMode currCharMode;
-       // public CharNames currCharName;
+
+
+
+        [Header(" ALL SKILLS DATA")]
         public SkillNames currSkillName = SkillNames.None;
         public DynamicPosData currentTargetDyna = new DynamicPosData();
         public DynamicPosData currStrikerDyna = new DynamicPosData(); 
         public SkillNames defaultSkillName;
 
-        public SkillNames currSkillHovered;
-
-        SkillServiceView skillView;
-
-
-      
-      
-        public int currSkillPts =10;
+        public SkillNames currSkillHovered;        
+        public SkillServiceView skillView;
 
         [Header("Perk Selection Controller")]
         [SerializeField] PerkSelectionController perkSelectionController;
 
+        public int currSkillPts =10;
 
-
-        //[Header("TEMP text display")]
-        //public TextMeshProUGUI temptxt;
-        private event Action _SkillApply = null;
-        public event Action SkillApply
-        {
-            add
-            {
-                if (_SkillApply == null ||!_SkillApply.GetInvocationList().Contains(value))
-                {
-                    _SkillApply += value;
-                }
-                else
-                {
-                    Debug.Log("Duplicate >>");
-                }
-            }
-            remove
-            {
-                _SkillApply -= value;
-            }
-        }
-
-
+        public float combatSpeed = 1f;
         protected override void Awake()
         {
             base.Awake();
@@ -146,22 +143,36 @@ namespace Combat
         }
         void OnEnable()
         {
-           // InitSkillControllers();
+            // InitSkillControllers();
             // Cn be later Set to the start of Combat Event
-          
-          if(GameService.Instance.gameModel.gameState == GameState.InCombat)
-          {
-                skillView = FindObjectOfType<SkillServiceView>();
-
-          }
-            SkillApply += SkillEventtest;
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        
+            OnSkillApply += SkillEventtest;
             GameEventService.Instance.OnGameStateChg += OnStartOfCombat; 
             // CombatService.Instance.GetComponent<RoundController>().OnCharOnTurnSet += PopulateSkillTargets; 
         }
         private void OnDisable()
         {
-            SkillApply -= SkillEventtest;
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            OnSkillApply -= SkillEventtest;
             GameEventService.Instance.OnGameStateChg -= OnStartOfCombat;
+        }
+
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            {
+                skillView = FindObjectOfType<SkillServiceView>();
+            }
+            GameObject canvasGO = GameObject.FindGameObjectWithTag("Canvas");
+            if (skillCardGO == null)
+            {
+                skillCardGO = Instantiate(skillCardPrefab);       
+            }
+            skillCardGO.transform.SetParent(canvasGO.transform);
+            skillCardGO.transform.SetAsLastSibling();
+            skillCardGO.transform.localScale = Vector3.one; 
+            skillCardGO.SetActive(false);
         }
 
         void OnStartOfCombat(GameState gameState)

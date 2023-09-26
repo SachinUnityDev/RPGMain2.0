@@ -14,12 +14,7 @@ namespace Quest
         [SerializeField]TextMeshProUGUI heading; 
         public void OnPointerClick(PointerEventData eventData)
         {
-            InvService.Instance.ShowInvXLView(true);
-            //GameObject invPanelXL =
-            //                InvService.Instance.invXLGO; 
-
-            //UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(invPanelXL, true);
-            //invPanelXL.GetComponent<IPanel>().Init();
+            InvService.Instance.ShowInvXLView(true);          
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -35,7 +30,7 @@ namespace Quest
         void ShowTxt()
         {
             string str = "Inventory";
-            heading.alignment = TextAlignmentOptions.Left; 
+           // heading.alignment = TextAlignmentOptions.Left; 
             heading.text = str;
         }
         void Hidetxt()

@@ -48,7 +48,7 @@ namespace Quest
         void ShowTxt()
         {
             string str = qMode.ToString();
-            heading.alignment = TextAlignmentOptions.Right;
+          //  heading.alignment = TextAlignmentOptions.Right;
             heading.text = str;
         }
         void Hidetxt()

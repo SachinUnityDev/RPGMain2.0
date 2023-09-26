@@ -30,11 +30,7 @@ namespace Quest
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            //GameObject invPanelXL =
-            //                InvService.Instance.invXLPanel;
-
-            //UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(invPanelXL, true);
-            //invPanelXL.GetComponent<IPanel>().Init();
+           
         }
         
 
@@ -52,7 +48,7 @@ namespace Quest
         void ShowTxt()
         {
             string str = landName.ToString();
-            heading.alignment = TextAlignmentOptions.Left;
+            //heading.alignment = TextAlignmentOptions.Left;
             heading.text = str;
 
             qModeNLandView.ShowLandDisplay(); 

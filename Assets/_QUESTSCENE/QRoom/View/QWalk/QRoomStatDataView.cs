@@ -4,34 +4,45 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class QRoomStatDataView : MonoBehaviour
+namespace Quest
 {
-    [SerializeField] AttribName attribName;
-    [SerializeField] StatName statName; 
-    void Start()
-    {
-        
-    }
 
-    public void InitStat(CharModel charModel)
+
+    public class QRoomStatDataView : MonoBehaviour
     {
-        if(statName  == StatName.None)
+        [SerializeField] AttribName attribName;
+        [SerializeField] StatName statName;
+        void Start()
         {
-            foreach (StatData stat in charModel.statList)
+
+        }
+
+        public void InitStat(CharModel charModel)
+        {
+            if (statName != StatName.None)
             {
-                if(stat.statName == statName)
-                transform.GetChild(1).GetComponent<TextMeshProUGUI>().text
-                    = stat.currValue + "/" + stat.maxLimit; 
+                foreach (StatData stat in charModel.statList)
+                {
+                    if (stat.statName == statName)
+                        transform.GetChild(1).GetComponent<TextMeshProUGUI>().text
+                            = stat.currValue + "/" + stat.maxLimit;
+                }
+            }
+            else if (attribName != AttribName.None)
+            {
+                foreach (AttribData attrib in charModel.attribList)
+                {
+                    if (attrib.AttribName == attribName)
+                        transform.GetChild(1).GetComponent<TextMeshProUGUI>().text
+                            = attrib.currValue.ToString();
+                }
+            }
+            else // Char main Exp 
+            {
+                int totalExp = CharService.Instance.lvlNExpSO.GetTotalExpPts4Lvl(charModel.charLvl);
+                 transform.GetChild(1).GetComponent<TextMeshProUGUI>().text
+                         = charModel.mainExp.ToString() + "/" + totalExp;
             }
         }
-        else
-        {
-            foreach (AttribData attrib in charModel.attribList)
-            {
-                if (attrib.AttribName == attribName)
-                    transform.GetChild(1).GetComponent<TextMeshProUGUI>().text
-                        = attrib.currValue.ToString();
-            }
-        }
-    }    
+    }
 }

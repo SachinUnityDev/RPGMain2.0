@@ -133,19 +133,19 @@ namespace Combat
         }
         public override void RemoveFX1()
         {
-            SkillService.Instance.SkillApply -= ApplyFX1;
+            SkillService.Instance.OnSkillApply -= ApplyFX1;
 
         }
 
         public override void RemoveFX2()
         {
-            SkillService.Instance.SkillApply -= ApplyFX2;
+            SkillService.Instance.OnSkillApply -= ApplyFX2;
 
         }
 
         public override void RemoveFX3()
         {
-            SkillService.Instance.SkillApply -= ApplyFX3;
+            SkillService.Instance.OnSkillApply -= ApplyFX3;
 
         }
         public override void DisplayFX4()

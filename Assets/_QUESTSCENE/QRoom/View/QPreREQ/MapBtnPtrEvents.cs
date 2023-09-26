@@ -15,6 +15,7 @@ namespace Quest
 
         public void OnPointerClick(PointerEventData eventData)
         {
+           
             mapGO.GetComponent<IPanel>().Load(); 
         }
 
@@ -31,7 +32,7 @@ namespace Quest
         void ShowTxt()
         {
             string str = "Map";
-            heading.alignment = TextAlignmentOptions.Right; 
+           // heading.alignment = TextAlignmentOptions.Right; 
             heading.text = str;
         }
         void Hidetxt()
@@ -39,11 +40,15 @@ namespace Quest
             heading.text = "";
         }
 
-        void Start()
+        void OnEnable()
         {
             heading = transform.parent.parent.GetChild(1).GetComponent<TextMeshProUGUI>();
             heading.text = "";
+            mapGO = FindObjectOfType<QRoomMapView>(true).gameObject;
         }
+
+    
+
 
     }
 }

@@ -10,7 +10,7 @@ namespace Quest
     public class QRoomService : MonoSingletonGeneric<QRoomService>
     {
         public event Action<QRoomState> OnQRoomStateChg;
-        public event Action<QuestNames> OnStartOfQScene;
+        public event Action<QuestNames> OnQSceneStart;
         public event Action<QuestNames> OnEndOfQScene;
         public event Action<QuestNames, int> OnRoomChg;
         public event Action OnInteractComplete; 
@@ -39,6 +39,9 @@ namespace Quest
 
         [Header("Abbas")]
         public bool canAbbasMove = true;
+
+        [Header(" Quest Name")]
+        public QuestNames questName; 
         private void Start()
         {
             qRoomController = GetComponent<QRoomController>();          
@@ -46,14 +49,16 @@ namespace Quest
         public void On_QuestStateChg(QRoomState qRoomState)
         {
             this.qRoomState = qRoomState;
+            
             OnQRoomStateChg?.Invoke(qRoomState);
         }
         public void On_QuestSceneStart(QuestNames questName)
         {
+            this.questName = questName;
             CurioService.Instance.InitCurioService();
             InitQRooms(questName);
-            
-            OnStartOfQScene?.Invoke(questName);
+           
+            OnQSceneStart?.Invoke(questName);
         }
         public void On_QuestSceneEnd(QuestNames questName)
         {
@@ -73,6 +78,7 @@ namespace Quest
         public void On_RoomChg(QuestNames questName, int roomNo)
         {
             ChangeRoomSprites(questName, roomNo);
+            
             OnRoomChg?.Invoke(questName, roomNo); 
         }
 
@@ -105,7 +111,7 @@ namespace Quest
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-              //  On_QuestSceneStart(QuestNames.RatInfestation);
+                On_QuestSceneStart(QuestNames.RatInfestation);
             }
             //if (Input.GetKeyDown(KeyCode.A))
             //{

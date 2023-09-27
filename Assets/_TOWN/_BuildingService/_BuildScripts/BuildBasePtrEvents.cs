@@ -31,7 +31,7 @@ namespace Common
         [SerializeField] bool isSelect = false;
         private void Awake()
         {
-          //  buildImg= GetComponent<Image>();
+            buildImg= GetComponent<Image>();
         }
 
         void Start()

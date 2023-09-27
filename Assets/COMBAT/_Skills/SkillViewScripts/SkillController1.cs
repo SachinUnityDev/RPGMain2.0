@@ -11,13 +11,10 @@ namespace Common
 {
     public class SkillController1 : MonoBehaviour
     {
-
-
         [SerializeField] CharMode charMode;
         public CharController charController;
         public CharNames charName;
         
-
         public int currSkillID;        
 
         [Header("Skill Perk Data")]

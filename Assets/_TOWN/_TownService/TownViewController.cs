@@ -33,22 +33,14 @@ namespace Town
 
         private void Start()
         {
-          //  CalendarService.Instance.OnChangeTimeState += TownViewInit;
-          //  SceneManager.sceneLoaded += OnSceneLoaded; 
+           CalendarService.Instance.OnChangeTimeState += TownViewInit;
+          
         }
         private void OnDisable()
         {
-        //    CalendarService.Instance.OnChangeTimeState -= TownViewInit;
-           // SceneManager.sceneLoaded -= OnSceneLoaded;
-        }
-        //void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-        //{
-        //    if (scene.name == "TOWN")
-        //    {
-        //        TimeState timeState = CalendarService.Instance.currtimeState;
-        //        TownViewInit(timeState);
-        //    }
-        //}
+            CalendarService.Instance.OnChangeTimeState -= TownViewInit;
+           
+        }     
         public void OnBuildSelect(BuildingNames buildName)
         {
             selectBuild = buildName; 
@@ -103,9 +95,7 @@ namespace Town
             selectBuild = BuildingNames.None;
         }
         public void TownViewInit(TimeState timeState)
-        {
-           
-                
+        {           
             buildContainer = transform.GetChild(0);
             townBGImage = transform.GetChild(0).GetComponent<Image>();
             FillTownBG(); 

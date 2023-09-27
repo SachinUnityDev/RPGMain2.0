@@ -39,14 +39,20 @@ namespace Combat
 
         #region APPLY and HOVER
 
-        public virtual void SkillInit(SkillController1 _skillController) 
-        {          
+        public virtual void SkillInit(SkillController1 skillController) 
+        {
+            this.skillController = skillController;
             skillModel = skillController?.allSkillModels.Find(t => t.skillName == skillName);
-            skillController = _skillController;
 
-            charController = skillController.gameObject.GetComponent<CharController>();
+            charController = this.skillController.gameObject.GetComponent<CharController>();
             charID = charController.charModel.charID;
-            charGO = skillController.gameObject;
+
+            if (skillModel == null)
+            {
+               Debug.LogError(" Could not find the skillModel" + skillName +" CharName" + charController.charModel.charName);
+
+            }
+            charGO = this.skillController.gameObject;
             if(GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
                 currDyna = GridService.Instance.GetDyna4GO(charGO);

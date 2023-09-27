@@ -93,8 +93,10 @@ namespace Common
             if (scene.name == "TOWN")
             {
                 endday = FindObjectOfType<EndDayBtnEvents>(true).GetComponent<Button>();
-                
 
+                calendarUIController.Init();
+                calendarUIController.UpdateMonthPanel(currentMonth, startOfGameDayName, dayInYear);
+                calendarUIController.UpdateWeekPanel(currentWeek);
             }
         }
 

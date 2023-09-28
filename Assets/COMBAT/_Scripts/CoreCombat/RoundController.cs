@@ -27,13 +27,16 @@ namespace Combat
 
         private void Start()
         {
-    
             index = -1;
             CombatEventService.Instance.OnSOT += SetCharOnTurn;
             CombatEventService.Instance.OnSOR += OnRoundStart;
-    
+           
         }
-
+        private void OnDisable()
+        {
+            CombatEventService.Instance.OnSOT += SetCharOnTurn;
+            CombatEventService.Instance.OnSOR += OnRoundStart;
+        }
         public void SetCharOnTurn()
         {
             if (CombatService.Instance.combatState != CombatState.INCombat_normal) {

@@ -572,7 +572,7 @@ namespace Combat
                     return skill.skillModel; 
                 }
             }
-           Debug.Log("SkillModel Not found" + _skillName); 
+           Debug.Log("SkillModel Not found" + _skillName  +" CHAR ID " + _charID); 
             return null; 
         }
         public GameObject GetGO4SkillCtrller(CharNames _charName)

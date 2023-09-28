@@ -239,9 +239,6 @@ namespace Combat
         #endregion
 
         #region CharTOPPANEL
-
-   
-
         //public void ShuffleCharOnTopPanel()
         //{  
         //    gameObject.GetComponent<TopPortraitsController>().ShufflePortraits();
@@ -407,57 +404,71 @@ namespace Combat
         public void SetCharAttributesDisplay(CharController charController)
         {
              
-            for (int i = 1; i <= 16; i++)    // 6-21  // 0 in list "none"      // ICON STATS            
-            {
+            //for (int i = 1; i <= 16; i++)    // 6-21  // 0 in list "none"      // ICON STATS            
+            //{
               
-                int index = i + 5;
+            //    int index = i;
+            //    SpriteData spriteData = null; 
+                    
+            //    int j = statIconSO.allSpriteData.FindIndex(x => x.statName == (AttribName)index);
+            //    if (j != -1)
+            //        spriteData = statIconSO.allSpriteData[j];
+            //    else
+            //    {
+            //        Debug.LogError(" Attrib data missoing" + (AttribName)index);
+            //    }
+                    
                
-                SpriteData spriteData = statIconSO.allSpriteData.Find(x => x.statName == (AttribName)index); // img from SO 
-                AttribData statData = charController.GetAttrib((AttribName)index);  // current stats from ctrller               
+            //    // img from SO 
+            //    AttribData attribData = charController.GetAttrib((AttribName)index);  // current stats from ctrller               
 
-                StatDisplayData statDisplayData = statDisplay.Find(x => x.statName == (AttribName)index); // reference list
-                statDisplayData.statDisplayGO.GetComponentInChildren<Image>().sprite = spriteData.statSprite;
+            //    StatDisplayData statDisplayData = statDisplay.Find(x => x.statName == (AttribName)index); // reference list
+            //    statDisplayData.statDisplayGO.GetComponentInChildren<Image>().sprite = spriteData.statSprite;
 
-                PopUpAndHL popUpAndHL = statDisplayData.statDisplayGO.GetComponent<PopUpAndHL>();
-                popUpAndHL.spriteNormal = spriteData.statSprite;
-                popUpAndHL.spriteLit = spriteData.statSpriteLit;
-                popUpAndHL.statName = (AttribName)index;
+            //    PopUpAndHL popUpAndHL = statDisplayData.statDisplayGO.GetComponent<PopUpAndHL>();
+            //    popUpAndHL.spriteNormal = spriteData.statSprite;
+            //    popUpAndHL.spriteLit = spriteData.statSpriteLit;
+            //    popUpAndHL.statName = (AttribName)index;
 
 
-                popUpAndHL.desc = statData.desc;
-                string statStr;
-                if (((AttribName)index).IsAttribDamage())
-                {
-                    float dmgMin = charController.GetAttrib(AttribName.dmgMin).currValue;
-                    float dmgMax = charController.GetAttrib(AttribName.dmgMax).currValue;   
+            //    popUpAndHL.desc = attribData.desc;
+            //    string statStr;
+            //    if (((AttribName)index).IsAttribDamage())
+            //    {
+            //        float dmgMin = charController.GetAttrib(AttribName.dmgMin).currValue;
+            //        float dmgMax = charController.GetAttrib(AttribName.dmgMax).currValue;   
 
-                    statStr = dmgMin + "-" + dmgMax;
-                }else if (((AttribName)index).IsAttribArmor())
-                {
-                    float armorMin = charController.GetAttrib(AttribName.armorMin).currValue;
-                    float armorMax = charController.GetAttrib(AttribName.armorMax).currValue;
+            //        statStr = dmgMin + "-" + dmgMax;
+            //    }else if (((AttribName)index).IsAttribArmor())
+            //    {
+            //        float armorMin = charController.GetAttrib(AttribName.armorMin).currValue;
+            //        float armorMax = charController.GetAttrib(AttribName.armorMax).currValue;
 
-                    statStr = armorMin + "-" + armorMax;
+            //        statStr = armorMin + "-" + armorMax;
 
-                }
-                else
-                {
-                    float val = statData.currValue;
-                    statStr = val.ToString();
-                }
-                statDisplayData.statDisplayGO.GetComponentInChildren<TextMeshProUGUI>().text = statStr;
-                statDisplayData.statDisplayGO.GetComponentInChildren<TextMeshProUGUI>().alignment = TextAlignmentOptions.Center;
+            //    }
+            //    else
+            //    {
+            //        float val = attribData.currValue;
+            //        statStr = val.ToString();
+            //    }
+            //    statDisplayData.statDisplayGO.GetComponentInChildren<TextMeshProUGUI>().text = statStr;
+            //    statDisplayData.statDisplayGO.GetComponentInChildren<TextMeshProUGUI>().alignment = TextAlignmentOptions.Center;
 
              
-            }
+            //}
         }
 
         public void SetBuffDebuffList(CharController charController)
         {
             buffList.Clear(); deBuffList.Clear();
-            buffView = statDisplay.Find(x => x.isBuff == true).statDisplayGO.transform.GetChild(0);
+            if (statDisplay.Count == 0) return; 
+            
+                buffView = statDisplay.Find(x => x.isBuff == true).statDisplayGO.transform.GetChild(0);
 
-            deBuffView = statDisplay.Find(x => x.isDebuff == true).statDisplayGO.transform.GetChild(0);
+                deBuffView = statDisplay.Find(x => x.isDebuff == true).statDisplayGO.transform.GetChild(0);
+            
+        
             buffListHt = buffView.GetChild(0).GetChild(0).GetComponent<RectTransform>().rect.height;
             Transform buffContent = buffView.GetChild(0).GetChild(0);
             buffContent.GetComponent<RectTransform>().sizeDelta

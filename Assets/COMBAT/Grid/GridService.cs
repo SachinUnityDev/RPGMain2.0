@@ -67,8 +67,11 @@ namespace Combat
            // CombatEventService.Instance.OnTargetClicked += GridUpdateOnTargetSelected;
            // CombatEventService.Instance.OnCharDeath += UpdateGridOnCharDeath;
             CombatEventService.Instance.OnEOT +=  ClearOldTargets;
-
-
+        }
+        private void OnDisable()
+        {
+            CombatEventService.Instance.OnCombatInit -= GridInit;
+            CombatEventService.Instance.OnEOT -= ClearOldTargets;
         }
         public void GridPosInit()
         {
@@ -774,10 +777,4 @@ namespace Combat
 
 
 }
-//else
-//{  
-
-//    PlaceEnemyOnSpot(charController, dyna.currentPos);                   
-//}
-
 

@@ -65,14 +65,28 @@ namespace Combat
         private void Update()
         {
 
-            if (Input.GetKeyDown(KeyCode.U))
-            {
-                HLAllTiles();
-            }
-
+            //if (Input.GetKeyDown(KeyCode.U))
+            //{
+            //    HLAllTiles();
+            //}
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Debug.DrawRay(ray.origin, ray.direction * 1000, Color.yellow);
             RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 1000f))
+            {
+                if (Input.GetMouseButtonDown(1))
+                {
+                    Debug.Log("In fire 2"+ hit.transform.name);
+                }
+                else
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Debug.Log("in fire 1" + hit.transform.name);
+                }
+            }
+            //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            //Debug.DrawRay(ray.origin, ray.direction * 1000, Color.yellow);
+            //RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 1000f))
             {
                 if (Input.GetMouseButtonDown(1))
@@ -103,8 +117,7 @@ namespace Combat
                                 {                                   
                                     //if(currentdyna.charGO != null || )
                                      CombatEventService.Instance.On_targetClicked(currentdyna);
-                                }                           
-
+                                }       
                             }
                             
                         }                      

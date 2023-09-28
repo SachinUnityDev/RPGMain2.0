@@ -61,3 +61,6 @@ MonoBehaviour:
   - statName: 21
     statSprite: {fileID: 21300000, guid: 8c6b752176d10794daca6263fafd3caf, type: 3}
     statSpriteLit: {fileID: 21300000, guid: 34057d5d9fef0e943aedbd68f4316d94, type: 3}
+  - statName: 1
+    statSprite: {fileID: 21300000, guid: 8c6b752176d10794daca6263fafd3caf, type: 3}
+    statSpriteLit: {fileID: 21300000, guid: 34057d5d9fef0e943aedbd68f4316d94, type: 3}

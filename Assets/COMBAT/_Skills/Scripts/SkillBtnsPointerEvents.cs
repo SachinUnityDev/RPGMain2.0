@@ -56,6 +56,8 @@ namespace Combat
 
         public void ShowSkillCard()
         {
+
+
             skillCard.SetActive(true);
             SkillServiceView.Instance.pointerOnSkillIcon = true;
             SkillDataSO skillSO = SkillService.Instance

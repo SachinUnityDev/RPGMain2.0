@@ -38,7 +38,7 @@ namespace Combat
         [Header("Result")]
         public bool isVictory; 
 
-        void Start()
+        void OnEnable()
         {
             combatState = CombatState.None;
             
@@ -50,12 +50,17 @@ namespace Combat
             CombatEventService.Instance.OnEOR += EORActions;
             CombatEventService.Instance.OnCharOnTurnSet += SetAllCurrCharValues;
             SkillService.Instance.SkillSelect
-                += (CharNames _charName, SkillNames _skillName) =>combatState = CombatState.INCombat_InSkillSelected;
+                            += (CharNames _charName, SkillNames _skillName)
+                            =>combatState = CombatState.INCombat_InSkillSelected;
    
             combatLogController = GetComponent<CombatLogController>();
             combatAnimController = GetComponent<CombatAnimController>();
             roundController = GetComponent<RoundController>();
-            combatHUDView = gameObject.GetComponent<CombatHUDView>(); 
+            combatHUDView = gameObject.GetComponent<CombatHUDView>();
+            // Set Abbas as main Char
+             currCharOnTurn = CharService.Instance.charsInPlayControllers[0]; 
+           
+            SetAllCurrCharValues(currCharOnTurn);
         }
  
         public void SetAllCurrCharValues(CharController charController)  // Inits 

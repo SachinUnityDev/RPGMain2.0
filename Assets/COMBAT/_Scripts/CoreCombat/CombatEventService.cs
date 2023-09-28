@@ -15,8 +15,7 @@ namespace Combat
         public event Action OnSOR;
         public event Action OnEOR;
         public event Action OnSOC;
-        public event Action OnCombatInit;
-        public event Action OnQuestInit; 
+        public event Action OnCombatInit;       
         public event Action OnEOC;      
         public event Action<CharController> OnFleeInCombat;
         public event Action<CharController> OnDeathInCombat;
@@ -97,7 +96,7 @@ namespace Combat
         {
             CombatService.Instance.combatState = CombatState.INCombat_normal;            
             OnSOC?.Invoke();
-            //SkillService.Instance.InitSkillControllers(); 
+            SkillService.Instance.InitSkillControllers(); 
         }
 
         public void On_EOC()

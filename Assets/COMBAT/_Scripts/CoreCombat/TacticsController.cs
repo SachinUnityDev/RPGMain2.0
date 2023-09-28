@@ -14,13 +14,14 @@ namespace Combat
         DynamicPosData selectDyna = null;
 
 
-        void OnEnable()
+        void Start()
         {
            // StartCombatBtn.onClick.AddListener(CombatEventService.Instance.On_SOC);
             CombatEventService.Instance.OnCharRightClicked += OnCharRightClicked;
             GridService.Instance.OnCellPosClicked += OnTileClicked;
            // StartCombatBtn.onClick.AddListener(StartCombat);
             CombatEventService.Instance.OnSOTactics += StartTactics; 
+            StartTactics();
 
         }
         private void OnDisable()

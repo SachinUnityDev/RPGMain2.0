@@ -40,12 +40,13 @@ namespace Interactables
             str = "If Ally: Spider: +1 Hp and Stm Regen";
             displayStrs.Add(str);
         }
-        void OnSpiderAddedToParty(CharNames charNames)
+        void OnSpiderAddedToParty(CharController charController)
         {
-            if (charNames != CharNames.Spider_pet) return;
+            CharNames charName = charController.charModel.charName; 
+            if (charName != CharNames.Spider_pet) return;
 
             CharController spiderController = 
-            CharService.Instance.allCharsInPartyLocked.Find(t => t.charModel.charName == charNames);
+            CharService.Instance.allCharsInPartyLocked.Find(t => t.charModel.charName == charName);
             if(spiderController != null)
                 ApplyBuffOnSpider(spiderController); 
         }

@@ -24,7 +24,7 @@ namespace Combat
 
         public override void SkillInit(SkillController1 _skillController)
         {           
-            base.SkillInit(skillController);
+            base.SkillInit(_skillController);
             //charName = _skillController.charName;
 
             //Debug.Log("XXXXXXXX Default Move Init for  " + charName);

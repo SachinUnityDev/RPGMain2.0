@@ -75,7 +75,7 @@ namespace Combat
             attackType = _skillDataSO.attackType;
             dmgType = _skillDataSO.dmgType.DeepClone();
             castPos = _skillDataSO.castPos.DeepClone();
-           // targetPos = _skillDataSO.targetPos;
+            //targetPos = _skillDataSO.targetPos;
             staminaReq = _skillDataSO.staminareq;
             castTime = _skillDataSO.castTime;
             timeFrame = _skillDataSO.timeFrame;

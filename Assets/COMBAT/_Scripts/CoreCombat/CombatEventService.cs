@@ -15,6 +15,7 @@ namespace Combat
         public event Action OnSOR;
         public event Action OnEOR;
         public event Action OnSOC;
+        public event Action<CombatState> OnSOC1;
         public event Action OnCombatInit;       
         public event Action OnEOC;      
         public event Action<CharController> OnFleeInCombat;
@@ -94,8 +95,9 @@ namespace Combat
         }
         public void On_SOC()
         {
-            CombatService.Instance.combatState = CombatState.INCombat_normal;            
-            OnSOC?.Invoke();
+            CombatService.Instance.combatState = CombatState.INCombat_normal;   
+            OnSOC?.Invoke();   
+            OnSOC1?.Invoke(CombatService.Instance.combatState);
             SkillService.Instance.InitSkillControllers(); 
         }
 

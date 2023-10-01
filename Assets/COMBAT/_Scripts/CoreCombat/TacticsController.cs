@@ -20,12 +20,13 @@ namespace Combat
             CombatEventService.Instance.OnCharRightClicked += OnCharRightClicked;
             GridService.Instance.OnCellPosClicked += OnTileClicked;
            // StartCombatBtn.onClick.AddListener(StartCombat);
-            CombatEventService.Instance.OnSOTactics += StartTactics; 
-            StartTactics();
+            CombatEventService.Instance.OnSOTactics += StartTactics;
+            CombatEventService.Instance.OnCharClicked += OnCharClickedIN_TACTICS; 
 
         }
         private void OnDisable()
         {
+
             CombatEventService.Instance.OnCharRightClicked -= OnCharRightClicked;
             GridService.Instance.OnCellPosClicked -= OnTileClicked;
             // StartCombatBtn.onClick.AddListener(StartCombat);
@@ -46,7 +47,13 @@ namespace Combat
 
 
         }
-
+        void OnCharClickedIN_TACTICS()
+        {
+            CharController charController = CombatService.Instance.currCharClicked;
+            // get game object  and Dyna
+            DynamicPosData dyna = GridService.Instance.GetDyna4GO(charController.gameObject);
+            GridService.Instance.gridView.CharOnTurnHL(dyna);
+        }
 
         public void OnCharRightClicked(GameObject _charGO)
         {
@@ -58,11 +65,20 @@ namespace Combat
                     GridService.Instance.gridController.SwapPos(selectDyna, targetDyna);
 
             }
-                // use from current system 
-                // target tile clicked.. get the tile from gridService
-                // checked if its vacant otherwise swap.....pos
-                // set all skill icons state to unclickable_inTactics 
+            
+            // use from current system 
+            // target tile clicked.. get the tile from gridService
+            // checked if its vacant otherwise swap.....pos
+            // set all skill icons state to unclickable_inTactics 
 
+        }
+
+        void CharColToggle(bool toEnable)
+        {
+            foreach (CharController charCtrl in CharService.Instance.allCharsInPartyLocked)
+            {
+                charCtrl.GetComponent<BoxCollider2D>().enabled = toEnable;
+            }
         }
 
         public void OnTileClicked(CellPosData currCellPos)

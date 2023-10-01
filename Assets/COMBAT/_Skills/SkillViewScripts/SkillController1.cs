@@ -3,6 +3,7 @@ using Common;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
 
@@ -21,7 +22,6 @@ namespace Common
         public List<PerkData> allSkillPerkData = new List<PerkData>();
 
         [Header("All Skill and UnLocked Skill list")]
-        public List<SkillNames> allSkillInChar = new List<SkillNames>();
         public List<SkillNames> unLockedSkills = new List<SkillNames>();
 
         [Header("Skill Model")]
@@ -35,35 +35,56 @@ namespace Common
         [SerializeField] int perkBaseCount = -1;
 
         SkillDataSO skillDataSO;
-        private void Start()
+        private void OnEnable()
         {
             charController = gameObject.GetComponent<CharController>();
             charName = charController.charModel.charName;
             
             CharService.Instance.OnCharInit += InitSkillList;
+            CombatEventService.Instance.OnSOC1 += InitAllSkill_OnCombat; 
            // CharService.Instance.OnCharAddedToParty += InitSkillList;
 
         }
         private void OnDisable()
         {
             CharService.Instance.OnCharInit -= InitSkillList;
+            CombatEventService.Instance.OnSOC1 -= InitAllSkill_OnCombat;
+
         }
-        public void InitSkillList(CharNames _charName)
+
+
+        public void InitAllSkill_OnCombat(CombatState combatState)
         {
-            if (charName != _charName) return;
+           
+            CharMode charMode = charController.charModel.charMode;
+            Debug.Log("COMBAT STATE" + charController.charModel.charID);
+            if (charMode == CharMode.Ally)
+            {
+                foreach (SkillBase skillBase in allSkillBases)
+                {
+                    skillBase.SkillInit(this); 
+                }
+            }
+            if(charMode == CharMode.Enemy)
+            {
+                InitSkillList(charController); 
+            }
+        }
+        public void InitSkillList(CharController charController)
+        {
+            if (this.charController.charModel.charID != charController.charModel.charID) return;
             // stop double run
-            if (allSkillInChar.Count > 0) return;    
-            skillDataSO = SkillService.Instance.GetSkillSO(charName);
+            if (allSkillModels.Count > 0) return; 
+            skillDataSO = SkillService.Instance.GetSkillSO(this.charName);
             foreach (SkillData skill in skillDataSO.allSkills)
             {
-                allSkillInChar.Add(skill.skillName);
-
+                
                 if (skill.skillUnLockStatus == 1) // 1 = unlock, 0 locked, -1 NA
                 {
                     unLockedSkills.Add(skill.skillName);
                 }
             }
-            foreach (var skillSO in skillDataSO.allSkills)
+            foreach (SkillData skillSO in skillDataSO.allSkills)
             {
                 SkillBase skillbase = SkillService.Instance.skillFactory.GetSkill(skillSO.skillName);
                 Debug.Log("skill base" + skillSO.skillName);

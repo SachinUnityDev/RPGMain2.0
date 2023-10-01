@@ -27,14 +27,17 @@ namespace Combat
         [Header("Perk Info Panel")]
         [SerializeField] Transform perkHoveredTrans; 
 
-        private void Awake()
+    
+        private void Start()
         {
             InvService.Instance.OnCharSelectInvPanel += OnCharSelect;
             SkillService.Instance.OnPerkStateChg += OnPerkStateChg;
+
         }
-        private void Start()
+        private void OnDisable()
         {
-         
+            InvService.Instance.OnCharSelectInvPanel -= OnCharSelect;
+            SkillService.Instance.OnPerkStateChg -= OnPerkStateChg;
 
         }
         void OnPerkStateChg(PerkData _perkData)
@@ -182,6 +185,8 @@ namespace Combat
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
+            this.charController = InvService.Instance.charSelectController;
+            skillController = charController.skillController;
             ShowPipeRelations();
             ShowPerkHoveredPanel();
         }

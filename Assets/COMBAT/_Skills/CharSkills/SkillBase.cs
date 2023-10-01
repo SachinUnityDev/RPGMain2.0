@@ -33,7 +33,7 @@ namespace Combat
         #endregion
 
         #region APPLY and HOVER
-        public virtual void  SkillInit(SkillController1 _skillController) 
+        public virtual void  SkillInit(SkillController1 skillController) 
         {
             //if (SkillService.Instance.allSkillModels
             //    .Any(t => t.skillName == skillName && t.charName == charName 
@@ -43,10 +43,8 @@ namespace Combat
             SkillDataSO skillDataSO = SkillService.Instance.GetSkillSO(charName);
             Debug.Log("SKILLNAME........" + skillName);
 
-            
-         
-            charController = CharService.Instance.GetCharCtrlWithName(skillDataSO.charName);
-            skillController = charController.GetComponent<SkillController1>();
+            this.skillController = skillController; 
+            charController = skillController.GetComponent<CharController>();
             charID = charController.charModel.charID; 
             skillData = skillDataSO.allSkills.Find(t => t.skillName == skillName);
            
@@ -54,8 +52,8 @@ namespace Combat
             //skillModel.skillID = skillController.skillID;
             skillModel.charID = charID; 
             //SkillService.Instance.allSkillModels.Add(skillModel);
-            skillController.allSkillModels.Add(skillModel);   // skillModel for ref
-            charGO = skillController.gameObject;
+            this.skillController.allSkillModels.Add(skillModel);   // skillModel for ref
+            charGO = this.skillController.gameObject;
             if(GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
                 myDyna = GridService.Instance.GetDyna4GO(charGO);

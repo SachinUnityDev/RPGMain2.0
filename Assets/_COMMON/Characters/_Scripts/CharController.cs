@@ -59,31 +59,14 @@ namespace Common
         float prevStaminaVal = 0f; 
 
         private void OnEnable()
-        {          
-            buffController=  gameObject.AddComponent<BuffController>();
-            charTypeBuffController= gameObject.AddComponent<CharTypeBuffController>();
-            timeBuffController = gameObject.AddComponent<TimeBuffController>();
-
-            itemController = gameObject.AddComponent<ItemController>();
-            skillController = gameObject.AddComponent<SkillController1>();
-            weaponController= gameObject.AddComponent<WeaponController>();
-            landscapeController= gameObject.AddComponent<LandscapeController>();    
-            
-            tempTraitController= gameObject.AddComponent<TempTraitController>();
-            permaTraitController= gameObject.GetComponent<PermaTraitController>();  
-
-            charStateController = gameObject.AddComponent<CharStateController>();
-            armorController= gameObject.AddComponent<ArmorController>();
-            SkillService.Instance.allSkillControllers.Add(skillController);
-            // CombatEventService.Instance.OnSOT += ()=> PopulateOverCharBars(false); 
-            CombatEventService.Instance.OnEOC += FortitudeReset2FortOrg;
-            CombatEventService.Instance.OnSOTactics += AddControllerOnCombatStart; 
+        {
+           
 
         }
         private void OnDisable()
         {
             CombatEventService.Instance.OnEOC -= FortitudeReset2FortOrg;
-            CombatEventService.Instance.OnSOTactics -= AddControllerOnCombatStart;
+            CombatEventService.Instance.OnSOTactics -= AddControllers_OnCombatStart;
         }
         public CharModel InitiatizeController(CharacterSO _charSO)
         {
@@ -92,24 +75,49 @@ namespace Common
                 charModel = new CharModel(_charSO);
                 if(charModel.orgCharMode == CharMode.Ally)
                 {
-                    CharService.Instance.lastAllyCharID++;
-                    charModel.charID = CharService.Instance.lastAllyCharID;
-                }                    
-                if(charModel.orgCharMode == CharMode.Enemy)
-                {
-                    CharService.Instance.lastEnemyCharID++;
-                    charModel.charID = CharService.Instance.lastEnemyCharID;
-                }
+
+                    charModel.charID = CharService.Instance.allCharModels.Count + 1; 
+                }    
             }
             else
             {
                 charModel = CharService.Instance.LoadCharModel(_charSO.charName); 
             }
+
             OnCharSpawned?.Invoke(charModel.charID, charModel.charName);
-        
+            AddController_OnCharSpawn(); 
             return charModel; 
         }
-        void AddControllerOnCombatStart()
+
+
+        void AddController_OnCharSpawn()
+        {
+            buffController = gameObject.AddComponent<BuffController>();
+            timeBuffController = gameObject.AddComponent<TimeBuffController>();
+            if (charModel.orgCharMode == CharMode.Ally)
+            {
+                charTypeBuffController = gameObject.AddComponent<CharTypeBuffController>();
+                itemController = gameObject.AddComponent<ItemController>();
+                weaponController = gameObject.AddComponent<WeaponController>();
+                landscapeController = gameObject.AddComponent<LandscapeController>();
+                permaTraitController = gameObject.GetComponent<PermaTraitController>();
+                armorController = gameObject.AddComponent<ArmorController>();
+                // CombatEventService.Instance.OnSOT += ()=> PopulateOverCharBars(false); 
+                CombatEventService.Instance.OnEOC -= FortitudeReset2FortOrg;
+                CombatEventService.Instance.OnEOC += FortitudeReset2FortOrg;
+            }
+
+            tempTraitController = gameObject.AddComponent<TempTraitController>();
+            charStateController = gameObject.AddComponent<CharStateController>();
+
+            skillController = gameObject.AddComponent<SkillController1>();
+            SkillService.Instance.allSkillControllers.Add(skillController);
+            CombatEventService.Instance.OnSOTactics -= AddControllers_OnCombatStart;
+            CombatEventService.Instance.OnSOTactics += AddControllers_OnCombatStart;
+        }
+                
+
+        void AddControllers_OnCombatStart()
         {
             damageController = gameObject.AddComponent<DamageController>();
             strikeController = gameObject.AddComponent<StrikeController>();
@@ -561,63 +569,63 @@ namespace Common
 
         void PopulateOverCharBars(StatName statName)
         {
-            Transform hpBarsTransform = gameObject.transform.GetChild(2);
+        //    Transform hpBarsTransform = gameObject.transform.GetChild(2);
 
-            Transform HPBarImgTrans = hpBarsTransform.GetChild(0).GetChild(1);
-            Transform StaminaBarImgTrans = hpBarsTransform.GetChild(1).GetChild(1);
+        //    Transform HPBarImgTrans = hpBarsTransform.GetChild(0).GetChild(1);
+        //    Transform StaminaBarImgTrans = hpBarsTransform.GetChild(1).GetChild(1);
 
-            Transform HPBarImgOrange = hpBarsTransform.GetChild(0).GetChild(0);
-            Transform StaminaBarImgOrange = hpBarsTransform.GetChild(1).GetChild(0);
-            StatData statData = GetStat(statName);
-            AttribData willPowerSD = GetAttrib(AttribName.willpower);
-            AttribData vigorSD = GetAttrib(AttribName.vigor);
-            //float barVal = statData.currValue / statData.maxLimit;
+        //    Transform HPBarImgOrange = hpBarsTransform.GetChild(0).GetChild(0);
+        //    Transform StaminaBarImgOrange = hpBarsTransform.GetChild(1).GetChild(0);
+        //    StatData statData = GetStat(statName);
+        //    AttribData willPowerSD = GetAttrib(AttribName.willpower);
+        //    AttribData vigorSD = GetAttrib(AttribName.vigor);
+        //    //float barVal = statData.currValue / statData.maxLimit;
            
-            if (statName == StatName.health)
-            {
-                float barVal = statData.currValue / (vigorSD.currValue * 4);
-                barVal = (barVal > 1) ? 1 : barVal; 
+        //    if (statName == StatName.health)
+        //    {
+        //        float barVal = statData.currValue / (vigorSD.currValue * 4);
+        //        barVal = (barVal > 1) ? 1 : barVal; 
 
-                if (statData.currValue != prevHPVal)
-                {  
-                    Vector3 barImgScale = new Vector3(barVal, HPBarImgTrans.localScale.y, HPBarImgTrans.localScale.z);
-                    HPBarImgTrans.localScale = barImgScale;
-                    OrangeBarScaleAnim(HPBarImgOrange, barImgScale.x); 
-                }
-                else return; 
+        //        if (statData.currValue != prevHPVal)
+        //        {  
+        //            Vector3 barImgScale = new Vector3(barVal, HPBarImgTrans.localScale.y, HPBarImgTrans.localScale.z);
+        //            HPBarImgTrans.localScale = barImgScale;
+        //            OrangeBarScaleAnim(HPBarImgOrange, barImgScale.x); 
+        //        }
+        //        else return; 
 
-            }else if(statName == StatName.stamina)
-            {
-                float barVal = statData.currValue / (willPowerSD.currValue * 3);
-                barVal = (barVal > 1) ? 1 : barVal;
-                if (statData.currValue != prevStaminaVal)
-                {                  
-                    Vector3 staminaScale = new Vector3(barVal, StaminaBarImgTrans.localScale.y, StaminaBarImgTrans.localScale.z);
-                    StaminaBarImgTrans.localScale = staminaScale;
-                    OrangeBarScaleAnim(StaminaBarImgOrange, staminaScale.x);
-                }
-                else return;
-
-
-            }else if(statName == StatName.fortitude)
-            {
+        //    }else if(statName == StatName.stamina)
+        //    {
+        //        float barVal = statData.currValue / (willPowerSD.currValue * 3);
+        //        barVal = (barVal > 1) ? 1 : barVal;
+        //        if (statData.currValue != prevStaminaVal)
+        //        {                  
+        //            Vector3 staminaScale = new Vector3(barVal, StaminaBarImgTrans.localScale.y, StaminaBarImgTrans.localScale.z);
+        //            StaminaBarImgTrans.localScale = staminaScale;
+        //            OrangeBarScaleAnim(StaminaBarImgOrange, staminaScale.x);
+        //        }
+        //        else return;
 
 
-            }
-            prevHPVal = statData.currValue;
-            prevStaminaVal = statData.currValue;
-        }        
-        void OrangeBarScaleAnim(Transform barTrans, float scale)
-        {
-            barTrans.gameObject.SetActive(true);
-            Sequence barSeq = DOTween.Sequence();
+        //    }else if(statName == StatName.fortitude)
+        //    {
 
-            barSeq
-                .AppendInterval(0.4f)
-                .Append(barTrans.DOScaleX(scale, 1f))
-                ;
 
-            barSeq.Play().OnComplete(() => barTrans.gameObject.SetActive(false)); 
+        //    }
+        //    prevHPVal = statData.currValue;
+        //    prevStaminaVal = statData.currValue;
+        //}        
+        //void OrangeBarScaleAnim(Transform barTrans, float scale)
+        //{
+        //    barTrans.gameObject.SetActive(true);
+        //    Sequence barSeq = DOTween.Sequence();
+
+        //    barSeq
+        //        .AppendInterval(0.4f)
+        //        .Append(barTrans.DOScaleX(scale, 1f))
+        //        ;
+
+        //    barSeq.Play().OnComplete(() => barTrans.gameObject.SetActive(false)); 
         }
 
         

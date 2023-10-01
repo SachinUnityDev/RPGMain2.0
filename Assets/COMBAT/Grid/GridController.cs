@@ -52,9 +52,10 @@ namespace Combat
             int targetPos = targetDyna.currentPos;
             int selectPos = selectDyna.currentPos; 
             if (targetDyna.charMode != selectDyna.charMode) return;
-
+           
+            Move2Pos(selectDyna, targetPos);
             Move2Pos(targetDyna,selectPos );
-            Move2Pos(selectDyna,targetPos); 
+           
         }
 
         public List<DynamicPosData> GetAvailableDynas(DynamicPosData selectDyna)

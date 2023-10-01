@@ -76,6 +76,15 @@ namespace Combat
             CombatEventService.Instance.OnCharOnTurnSet += OnCharSetPortrait;
             CombatEventService.Instance.OnEOT += EOTRemovePortrait;
             CombatEventService.Instance.OnCharDeath += (CharController c) => SetDefaultTurnOrder();
+
+            foreach (Transform child in allyPortraits.transform)
+            {
+                allyInCombat.Add(child.gameObject); 
+            }
+            foreach (Transform child in enemyPortraits.transform)
+            {
+                enemyInCombat.Add(child.gameObject);
+            }
         }
 
         public void SetDefaultTurnOrder()
@@ -84,6 +93,7 @@ namespace Combat
             CleanPanelGO(enemyInCombat);
             for (int i = 0; i < roundController.allyTurnOrder.Count; i++)
             {
+             
                 allyInCombat[i].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite =
                      roundController.allyTurnOrder[i].charModel.charHexSprite;
                 allyInCombat[i].transform.GetComponent<TopPanelEvents>().charController

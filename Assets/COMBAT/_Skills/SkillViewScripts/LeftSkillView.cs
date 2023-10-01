@@ -25,14 +25,14 @@ namespace Common
         [SerializeField] Transform skillPtsTrans; 
 
 
-        private void Start()
+        private void OnEnable()
         {
             //charNameTrans = transform.GetChild(0); 
             
             InvService.Instance.OnCharSelectInvPanel += FillLeftSkillPanel;
             // Get ABBAS
             CharModel charModel = CharService.Instance.GetAllyCharModel(CharNames.Abbas);
-            FillLeftSkillPanel(charModel); 
+            FillLeftSkillPanel(charModel);
         }
         private void OnDisable()
         {

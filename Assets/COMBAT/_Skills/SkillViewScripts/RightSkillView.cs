@@ -46,19 +46,25 @@ namespace Common
         [SerializeField] List<SkillModel> scrollList = new List<SkillModel>();  
         private void Awake()
         {
-            perkInfoPanelTrans = transform.GetChild(4); 
-           
-            leftBtn.onClick.AddListener(OnLeftBtnPressed);
-            rightBtn.onClick.AddListener(OnRightBtnPressed);        
+            //SkillService.Instance.OnSkillSelectInInv += FillSkillScroll;
+            //InvService.Instance.OnCharSelectInvPanel += PopulateRightSkillPanel;
+
         }
         private void OnEnable()
         {
-            SkillService.Instance.OnSkillSelectInInv += PopulateSkillScroll;
+            perkInfoPanelTrans = transform.GetChild(4);
+
+            leftBtn.onClick.AddListener(OnLeftBtnPressed);
+            rightBtn.onClick.AddListener(OnRightBtnPressed);
+
+            SkillService.Instance.OnSkillSelectInInv -= FillSkillScroll;
+            InvService.Instance.OnCharSelectInvPanel -= PopulateRightSkillPanel;
+            SkillService.Instance.OnSkillSelectInInv += FillSkillScroll;
             InvService.Instance.OnCharSelectInvPanel += PopulateRightSkillPanel;
         }
         private void OnDisable()
         {
-            SkillService.Instance.OnSkillSelectInInv -= PopulateSkillScroll;
+            SkillService.Instance.OnSkillSelectInInv -= FillSkillScroll;
             InvService.Instance.OnCharSelectInvPanel -= PopulateRightSkillPanel;
         }
         void PopulateRightSkillPanel(CharModel charModel)
@@ -81,7 +87,7 @@ namespace Common
                 scrollList.Add(skillModel);
             }
 
-            PopulateSkillScroll(scrollList[0]); 
+            FillSkillScroll(scrollList[0]); 
 
     
         }
@@ -97,7 +103,7 @@ namespace Common
             else
             {
                 --index;
-                PopulateSkillScroll(scrollList[index]);
+                FillSkillScroll(scrollList[index]);
             }
             prevLeftClick = Time.time;
         }
@@ -112,12 +118,12 @@ namespace Common
             else
             {
                 ++index;
-               PopulateSkillScroll(scrollList[index]);          
+               FillSkillScroll(scrollList[index]);          
             }
             prevRightClick = Time.time;
         }
 
-        void PopulateSkillScroll(SkillModel skillModel)
+        void FillSkillScroll(SkillModel skillModel)
         {
             if(skillModel != null)
             {

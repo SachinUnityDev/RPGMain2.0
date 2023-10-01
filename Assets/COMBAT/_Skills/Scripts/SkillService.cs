@@ -148,8 +148,10 @@ namespace Combat
             SceneManager.sceneLoaded += OnSceneLoaded;
         
             OnSkillApply += SkillEventtest;
-            GameEventService.Instance.OnGameStateChg += OnStartOfCombat; 
+            GameEventService.Instance.OnGameStateChg += OnStartOfCombat;
             // CombatService.Instance.GetComponent<RoundController>().OnCharOnTurnSet += PopulateSkillTargets; 
+            skillFactory =GetComponent<SkillFactory>();
+            skillFactory.SkillsInit(); 
         }
         private void OnDisable()
         {
@@ -178,7 +180,14 @@ namespace Combat
         void OnStartOfCombat(GameState gameState)
         {
             if (gameState != GameState.InCombat) return;
-              CombatEventService.Instance.OnSOT += SetDefaultSkillForChar;
+            
+            //foreach (GameObject charGO in CharService.Instance.charsInPlay)
+            //{
+            //    CharNames charName = charGO.GetComponent<CharController>().charModel.charName;
+            //    charGO.GetComponent<SkillController1>().InitSkillList(charName); 
+            //}
+
+            CombatEventService.Instance.OnSOT += SetDefaultSkillForChar;
             CombatEventService.Instance.OnCharOnTurnSet += InitEnemySkillSelection; 
             CombatEventService.Instance.OnTargetClicked += TargetIsSelected;
             PostSkillApply += GridService.Instance.ClearOldTargets;// to be decided later to DEL or MOVE 
@@ -214,7 +223,7 @@ namespace Combat
         public void PopulateSkillTargets(CharController charController)
         {
             //if (charController.charModel.charMode == CharMode.Enemy) return; 
-           SkillController skillController = charController.gameObject.GetComponent<SkillController>();
+           SkillController1 skillController = charController.gameObject.GetComponent<SkillController1>();
             //skillController.allSkillBases.ForEach(t => Debug.Log("SKILL BASES ARE HEALTHY" +t.charName + t.skillName));
             //skillController.allSkillModels.ForEach(t => Debug.Log(t.skillName +"SkillBase" + t.targetPos.Count));
             
@@ -226,21 +235,27 @@ namespace Combat
 
         public void InitSkillControllers()
         {
-            // CombatService.Instance.AddCombatControllers();
-            //foreach (var character in CharService.Instance.charsInPlay)
-            //{
-            //    if (character.GetComponent<SkillController1>() == null)
-            //    {
-            //        SkillController1 skillController = character.gameObject.AddComponent<SkillController1>();
-            //        allSkillControllers.Add(skillController);
+            CombatService.Instance.AddController();
+            foreach (GameObject charGO in CharService.Instance.charsInPlay)
+            {
+                SkillController1 skillController = charGO.GetComponent<SkillController1>(); 
 
-            //        skillController.InitPerkDataList();
+                if (skillController == null)
+                {
+                    skillController = charGO.gameObject.AddComponent<SkillController1>();
+                    allSkillControllers.Add(skillController);
+                    
+                    skillController.InitPerkDataList();
 
 
-            //        //SkillAIController skillAIController = character.gameObject.AddComponent<SkillAIController>();
-            //        //allSKillAIControllers.Add(skillAIController); 
-            //    }
-            //}
+                    //SkillAIController skillAIController = character.gameObject.AddComponent<SkillAIController>();
+                    //allSKillAIControllers.Add(skillAIController); 
+                }
+                CharNames charName = charGO.GetComponent<CharController>().charModel.charName; 
+             //   skillController.InitSkillList(charName);
+            }
+
+
         }
 
 
@@ -422,6 +437,8 @@ namespace Combat
             ClearPrevSkillData();
             int charID = CombatService.Instance.currCharClicked.charModel.charID;
             SkillModel skillModel = GetSkillModel(charID, currSkillName);
+            if (skillModel == null)
+                return;
             skillModel.SetSkillState(SkillSelectState.Clickable);
             currSkillName = SkillNames.None;
             skillView.SetSkillsPanel(charID);
@@ -666,7 +683,7 @@ namespace Combat
 
         private void Update()
         {
-          //  temptxt.text =  currSkillName.ToString();
+            //  temptxt.text =  currSkillName.ToString();
             //if (Input.GetKeyDown(KeyCode.B))
             //{
             //    foreach (SkillController1 skillController in allSkillControllers)
@@ -680,9 +697,13 @@ namespace Combat
             //}
 
             // NOT TO BE ERASED 
-          //  if (CombatService.Instance.combatState == CombatState.INCombat_InSkillSelected)
+            //  if (CombatService.Instance.combatState == CombatState.INCombat_InSkillSelected)
+
+          
             if(GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
+                if (CombatService.Instance.combatState == CombatState.INTactics)
+                    return;
                 if (Input.GetMouseButtonDown(1))
                 {
                     DeSelectSkill();

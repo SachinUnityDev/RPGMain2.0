@@ -6,7 +6,7 @@ public class gridTest : MonoBehaviour, IPointerEnterHandler
 {
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("pointer enter"); 
+        Debug.Log("pointer enter IN GRID "); 
     }
 
     void Start()

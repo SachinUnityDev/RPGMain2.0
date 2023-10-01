@@ -10,8 +10,8 @@ namespace Common
 {
     public class CharService : MonoSingletonGeneric<CharService>, ISaveableService
     {
-        public event Action<CharNames> OnCharInit;
-        public event Action<CharNames> OnCharAddedToParty;
+        public event Action<CharController> OnCharInit;
+        public event Action<CharController> OnCharAddedToParty;
         public event Action OnPartyLocked; 
         public event Action OnPartyDisbanded;
 
@@ -54,10 +54,6 @@ namespace Common
         public List<CharController> charDiedinLastTurn;
         [Header("Character Pos")]
         public Vector3 spawnPos = new Vector3(-100, 0, 0);
-
-        [Header("Recordable Params")]
-        public int lastAllyCharID;
-        public int lastEnemyCharID; 
         
         public List<GameObject> enemyInCombatPlay; // enemies to be dep 
 
@@ -66,7 +62,8 @@ namespace Common
 
         void Start()
         {
-            lastAllyCharID = 0;         isPartyLocked= false;
+            //lastAllyCharID = 0;       
+            isPartyLocked= false;
             CombatEventService.Instance.OnEOT += UpdateOnDeath;       
             DontDestroyOnLoad(this.gameObject);
         }
@@ -133,15 +130,7 @@ namespace Common
                 }
                
             }
-            return null;
-            //int index = charsInPlay.FindIndex(x => x.GetComponent<CharController>().charModel.charName == _charName
-            //                    && x.GetComponent<CharController>().charModel.charID == _charID);
-
-            //if (index != -1)
-            //    return charsInPlay[index];
-            //else
-            //    Debug.LogError("CHARIN PLAY NOT FOUND" + _charName + _charID); 
-            //return null; 
+            return null; 
         }
         public CharController GetCharCtrlWithCharID(int  _charID)
         {
@@ -235,7 +224,7 @@ namespace Common
             foreach (var charController in charsInPlayControllers.ToList()) 
             {
                 if(charController != null)
-                    OnCharInit?.Invoke(charController.charModel.charName);
+                    OnCharInit?.Invoke(charController);
                 else
                     charsInPlayControllers.Remove(charController);
             }
@@ -263,7 +252,7 @@ namespace Common
         {
             Debug.Log("On Char Added" + charController.charModel.charName);
             allCharsInPartyLocked.Add(charController);
-            OnCharAddedToParty?.Invoke(charController.charModel.charName);
+            OnCharAddedToParty?.Invoke(charController);
         }
     
         public void LoadCharControllers(CharModel charModel)

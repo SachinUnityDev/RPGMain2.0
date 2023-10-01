@@ -362,7 +362,7 @@ namespace Combat
             {
                 // CharController charCtrl = CharService.Instance.SpawnCompanions(eData.enemyName);
 
-                CharController charCtrl = BestiaryService.Instance.SpawnBestiary(eData.enemyName); 
+                CharController charCtrl = BestiaryService.Instance.SpawnBestiary1(eData.enemyName); 
                     //,eData.charID);
                 CharOccupies charOccupies = charCtrl.charModel._charOccupies;
 

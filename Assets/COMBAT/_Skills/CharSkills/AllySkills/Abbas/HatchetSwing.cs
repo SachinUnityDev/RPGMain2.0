@@ -20,73 +20,29 @@ namespace Combat
 
         private float _chance = 40f;
         public override float chance { get => _chance; set => _chance = value; }
-        public override SkillModel skillModel { get; set; }
+
      
 
         public override StrikeTargetNos strikeNos { get; }
+        public override void PopulateTargetPos()
+        {
+            if (skillModel == null) return;
+            skillModel.targetPos.Clear();
+            for (int i = 1; i <= 4; i++) //1/2/3/4/
+            {
+                CellPosData cellPosData = new CellPosData(CharMode.Enemy, i);
+                skillModel.targetPos.Add(cellPosData);
+            }
 
-        //public override void SkillInit(SkillController1 skillController)
-        //{
-        //    base.SkillInit(skillController);
-        //    //if (SkillService.Instance.allSkillModels.Any(t => t.skillName == skillName)) return;
-
-        //    //SkillDataSO skillDataSO = SkillService.Instance.GetSkillSO(charName);
-        //    //skillData = skillDataSO.allSkills.Find(t => t.skillName == skillName);
-
-        //    //skillModel = new SkillModel(skillData);
-        //    //SkillService.Instance.allSkillModels.Add(skillModel);
-
-        //    //charController = CharacterService.Instance.GetCharCtrlWithName(charName);
-        //    //charGO = SkillService.Instance.GetGO4Skill(charName);
-
-        //    //skillModel.castPos = new List<int>() { 2, 3, 4, 5, 6, 7 };
-
-        //}
-
-        //public override void SkillHovered()
-        //{
-        //    //SkillInit();
-        //    base.SkillHovered();
-        //}
-
-
-        //public override void SkillSelected()
-        //{
-        //    base.SkillSelected(); 
-        //    if(GameService.Instance.gameModel.gameState == GameState.InCombat)
-        //    {
-        //        DynamicPosData currCharDyna = GridService.Instance.GetDyna4GO(charGO);
-
-        //        if (!skillModel.castPos.Any(t => t == currCharDyna.currentPos))
-        //            return;
-        //        CharMode currCharMode = charController.charModel.charMode;
-        //        skillModel.targetPos.Clear();
-        //        for (int i = 1; i <= 4; i++)
-        //        {
-        //            CellPosData cellPosData = new CellPosData(currCharMode.FlipCharMode(), i);
-        //            skillModel.targetPos.Add(cellPosData);
-        //        }
-        //        GridService.Instance.HLTargetTiles(skillModel.targetPos); // overriden by next skill 
-        //    }
-           
-        //}
-        //public override void BaseApply()
-        //{
-        //    targetGO = SkillService.Instance.currentTargetDyna.charGO;
-        //    targetController = targetGO.GetComponent<CharController>();
-        //    CombatEventService.Instance.OnEOR += Tick;
-
-        //    skillModel.lastUsedInRound = CombatService.Instance.currentRound;
-        // //   charController.ChangeStat(StatsName.stamina, -skillModel.staminaReq, 0, 0);
-        //}
+        }
 
         public override void ApplyFX1()
         {
             //if (CkhNSetInCoolDown() || appliedOnce || IsTargetMyEnemy()) return;
-
-            //if (targetController)
-            //    targetController.dmgController.ApplyDamage(charController, DamageType.Physical
-            //                                            , skillModel.damageMod, false);
+            
+            if (targetController)
+                targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
+                                                                    , DamageType.Physical, skillModel.damageMod, false);
         }
 
         public override void ApplyFX2()
@@ -103,9 +59,6 @@ namespace Combat
         public override void ApplyFX3()
         {
         }
-
-      
-
 
         public override void DisplayFX1()
         {
@@ -143,10 +96,7 @@ namespace Combat
         {
         }
 
-        public override void PopulateTargetPos()
-        {
-           
-        }
+    
 
         public override void ApplyVFx()
         {

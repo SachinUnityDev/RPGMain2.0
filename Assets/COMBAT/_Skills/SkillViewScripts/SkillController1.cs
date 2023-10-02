@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
-
+using UnityEngine.SceneManagement; 
 
 namespace Common
 {
@@ -35,27 +35,40 @@ namespace Common
         [SerializeField] int perkBaseCount = -1;
 
         SkillDataSO skillDataSO;
+        SkillView skillView; 
         private void OnEnable()
         {
             charController = gameObject.GetComponent<CharController>();
             charName = charController.charModel.charName;
             
             CharService.Instance.OnCharInit += InitSkillList;
-            CombatEventService.Instance.OnSOC1 += InitAllSkill_OnCombat; 
-           // CharService.Instance.OnCharAddedToParty += InitSkillList;
-
+           
+            Debug.Log("ENABLED" + charName);
+            // CharService.Instance.OnCharAddedToParty += InitSkillList;
+            SceneManager.sceneLoaded += OnSceneLoaded; 
         }
         private void OnDisable()
         {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
             CharService.Instance.OnCharInit -= InitSkillList;
             CombatEventService.Instance.OnSOC1 -= InitAllSkill_OnCombat;
 
         }
 
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if(GameService.Instance.gameModel.gameState == GameState.InCombat)
+            {
+                if (skillView == null)
+                    skillView = FindObjectOfType<SkillView>();
+                CombatEventService.Instance.OnSOC1 += InitAllSkill_OnCombat;
+            }
+                
+        }
+
 
         public void InitAllSkill_OnCombat(CombatState combatState)
         {
-           
             CharMode charMode = charController.charModel.charMode;
             Debug.Log("COMBAT STATE" + charController.charModel.charID);
             if (charMode == CharMode.Ally)
@@ -665,7 +678,7 @@ namespace Common
             }
             else
             {
-                SkillService.Instance.On_PostSkill();
+                SkillService.Instance.On_PostSkill(selectedSkillModel);
             }
         }
         public SkillModel SkillSelectByAI()
@@ -674,7 +687,7 @@ namespace Common
             foreach (SkillNames skillName in unLockedSkills)
             {
                 SkillModel skillModel = allSkillModels.Find(t => t.skillName == skillName);
-                skillModel.SetSkillState(SkillServiceView.Instance.UpdateSkillState(skillModel));
+                skillModel.SetSkillState(skillView.UpdateSkillState(skillModel));
                 if (skillModel.GetSkillState() == SkillSelectState.Clickable)
                 {
                     Debug.Log("SKILL MODEL" + skillModel.skillName);

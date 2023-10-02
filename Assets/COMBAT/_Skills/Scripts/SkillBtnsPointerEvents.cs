@@ -12,7 +12,7 @@ using System;
 namespace Combat
 {
     public class SkillBtnsPointerEvents : MonoBehaviour
-        , IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+                            , IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
         const float waitTime = 0.1f;
         [SerializeField] int expBeyondLineNo = 3;
@@ -23,7 +23,7 @@ namespace Combat
         [SerializeField] GameObject skillCard;
         [SerializeField] int index = -1;
 
-        public SkillModel skillCardData; 
+        public SkillModel skillModel; 
         public SkillSelectState skillState;
         public SkillNames prevSkillHovered;
 
@@ -37,33 +37,40 @@ namespace Combat
 
         [Header("SkillState Display")]
         [SerializeField] TextMeshProUGUI skillStateTxt;
+
+        [Header("SKillView")]
+        SkillView skillView;
+
         void Start()
         {
             prevSkillHovered = SkillNames.None;
         }
+
+        public void InitSkillBtns(SkillView skillView)
+        {
+            this.skillView = skillView;
+        }
+
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (skillCardData.skillName == SkillNames.None) return;
+            if (skillModel.skillName == SkillNames.None) return;
             ShowSkillCard();
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            SkillServiceView.Instance.index = -1;
-
+            skillView.index = -1;
             StartCoroutine(Wait());
         }
 
         public void ShowSkillCard()
         {
-
-
             skillCard.SetActive(true);
-            SkillServiceView.Instance.pointerOnSkillIcon = true;
+            skillView.pointerOnSkillIcon = true;
             SkillDataSO skillSO = SkillService.Instance
                        .GetSkillSO(CombatService.Instance.currCharClicked.charModel.charName);
             index = gameObject.transform.GetSiblingIndex();
-            SkillServiceView.Instance.index = index;
+            skillView.index = index;
             // UPDATE SKILL SERVICE 
             if (skillSO != null && index < skillSO.allSkills.Count)
                 SkillService.Instance.On_SkillHovered(CombatService.Instance.currCharClicked.charModel.charName,
@@ -74,7 +81,7 @@ namespace Combat
 
 
 
-            skillCardData = SkillService.Instance.skillModelHovered;
+            skillModel = SkillService.Instance.skillModelHovered;
 
             //float htSkillIcon = gameObject.GetComponent<RectTransform>().rect.height;          
 
@@ -94,7 +101,7 @@ namespace Combat
             ToggleTxt(Desc);
 
             //float htOfTxt = skillCard.transform.GetChild(0).GetChild(2).GetChild(0).GetComponent<RectTransform>().rect.height;
-            int lines = skillCardData.descLines.Count;
+            int lines = skillModel.descLines.Count;
             if (lines > expBeyondLineNo)
             {
                 int incr = lines - expBeyondLineNo;
@@ -115,11 +122,11 @@ namespace Combat
             Vector3 pos = new Vector3(xPos, yPos, 1);
             skillCard.GetComponent<RectTransform>().anchoredPosition = pos;
 
-            for (int i = 0; i < skillCardData.descLines.Count; i++)
+            for (int i = 0; i < skillModel.descLines.Count; i++)
             {
                 Desc.transform.GetChild(i).gameObject.SetActive(true);
                 Desc.transform.GetChild(i).gameObject.GetComponent<TextMeshProUGUI>().text
-                                                                     = skillCardData.descLines[i];
+                                                                     = skillModel.descLines[i];
 
             }
             // populate round and stamina Info
@@ -132,7 +139,7 @@ namespace Combat
         public void PopulateSkillState()
         {
             // grab the UI and show the state
-            skillStateTxt.text = skillCardData.GetSkillState().ToString();
+            skillStateTxt.text = skillModel.GetSkillState().ToString();
 
 
 
@@ -141,15 +148,15 @@ namespace Combat
         {
 
             skillCard.transform.GetChild(1).GetChild(2).GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text
-                = skillCardData.staminaReq.ToString();
+                = skillModel.staminaReq.ToString();
             skillCard.transform.GetChild(1).GetChild(3).GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text
-               = skillCardData.skillLvl.ToString();
+               = skillModel.skillLvl.ToString();
 
             string str = "";
-            if (skillCardData.cd <= 0)
+            if (skillModel.cd <= 0)
                 str = "No cd";
             else
-                str = $"{skillCardData.cd} Rd";
+                str = $"{skillModel.cd} Rd";
 
             skillCard.transform.GetChild(0).GetChild(3).GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text
                 = str;
@@ -160,14 +167,14 @@ namespace Combat
             // get attack type from skillmodel
             // get respective sprite and background from skillHexSO
             // zero down on the images and allocate 
-            AttackType attackType = skillCardData.attackType;
+            AttackType attackType = skillModel.attackType;
             Sprite atSprite = skillHexSO.allAttacksSprites.Find(t => t.attackType == attackType).attackTypeSprite;
             Sprite bGSprite = skillHexSO.allAttacksSprites.Find(t => t.attackType == attackType).attackTypeBG;
 
             skillCard.transform.GetChild(1).GetChild(1).GetComponent<Image>().sprite = bGSprite;
             skillCard.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Image>().sprite = atSprite;
 
-            SkillInclination skillIncli = skillCardData.skillInclination;
+            SkillInclination skillIncli = skillModel.skillInclination;
             Sprite SLSprite = skillHexSO.allSkillIncli.Find(t => t.SkillIncliType == skillIncli).SkillIncliSprite;
             Sprite bgSpriteSIncli = skillHexSO.allSkillIncli.Find(t => t.SkillIncliType == skillIncli).SkillIncliBG;
             skillCard.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = bgSpriteSIncli;
@@ -179,20 +186,20 @@ namespace Combat
             Sprite sprite1 = null, sprite2 = null, sprite3 = null;
             //Debug.Log("Skillcard data " + skillCardData); 
 
-            if (skillCardData.allPerkHexes.Count == 0) return;
-            foreach (var ls in skillCardData.allPerkHexes)
+            if (skillModel.allPerkHexes.Count == 0) return;
+            foreach (var ls in skillModel.allPerkHexes)
             {
-                List<PerkType> SCperkChain = skillCardData.perkChain.OrderBy(e => e).ToList();
+                List<PerkType> SCperkChain = skillModel.perkChain.OrderBy(e => e).ToList();
                 List<PerkType> LSPerkChain = ls.perkChain.OrderBy(e => e).ToList();
 
                 if (SCperkChain.Count == 0)  // none case 
                 {
                     sprite1 = skillHexSO.allHexes.Find(t => t.hexName
-                            == skillCardData.allPerkHexes[0].hexNames[0]).hexSprite;
+                            == skillModel.allPerkHexes[0].hexNames[0]).hexSprite;
                     sprite2 = skillHexSO.allHexes.Find(t => t.hexName
-                          == skillCardData.allPerkHexes[0].hexNames[1]).hexSprite;
+                          == skillModel.allPerkHexes[0].hexNames[1]).hexSprite;
                     sprite3 = skillHexSO.allHexes.Find(t => t.hexName
-                          == skillCardData.allPerkHexes[0].hexNames[2]).hexSprite;
+                          == skillModel.allPerkHexes[0].hexNames[2]).hexSprite;
                 }
                 else if (SCperkChain.SequenceEqual(LSPerkChain))
                 {
@@ -211,7 +218,7 @@ namespace Combat
 
         public void RefreshIconAsPerState()
         {
-            skillState = skillCardData.GetSkillState();
+            skillState = skillModel.GetSkillState();
             // ChangeSkillFrame(skillState);
             switch (skillState)
             {
@@ -260,7 +267,7 @@ namespace Combat
         IEnumerator Wait()
         {
             yield return new WaitForSeconds(waitTime);
-            if (!SkillServiceView.Instance.pointerOnSkillCard && SkillServiceView.Instance.index == -1)
+            if (!skillView.pointerOnSkillCard && skillView.index == -1)
                 skillCard.SetActive(false);
         }
 
@@ -278,7 +285,7 @@ namespace Combat
         {
 
             if (eventData.button == PointerEventData.InputButton.Left)
-                SkillServiceView.Instance.SkillBtnPressed();
+                skillView.SkillBtnPressed();
             //if (eventData.button == PointerEventData.InputButton.Left)
             //    ChangeSkillFrame(SkillSelectState.Clickable); 
             //if (skillState == SkillSelectState.Clickable)
@@ -316,16 +323,16 @@ namespace Combat
         {
             if (prevSkillHovered == SkillService.Instance.currSkillHovered) return;
             Debug.Log("Inside the SKILL SORT ");
-            attackTypeLs = skillCardData.descLines?.Where(t => t.Contains(AttackType.Ranged.ToString())).ToList();
+            attackTypeLs = skillModel.descLines?.Where(t => t.Contains(AttackType.Ranged.ToString())).ToList();
 
             bothAllyNEnemy.Clear();
-            bothAllyNEnemy = skillCardData.descLines?.Where(t => t.Contains("<style=Enemy>") && t.Contains("<style=Allies>")).ToList();
+            bothAllyNEnemy = skillModel.descLines?.Where(t => t.Contains("<style=Enemy>") && t.Contains("<style=Allies>")).ToList();
 
             enemyDesc.Clear();
-            enemyDesc = skillCardData.descLines?.Where(t => t.Contains("<style=Enemy>")).Except(bothAllyNEnemy).ToList();
+            enemyDesc = skillModel.descLines?.Where(t => t.Contains("<style=Enemy>")).Except(bothAllyNEnemy).ToList();
 
             alliesDesc.Clear();
-            alliesDesc = skillCardData.descLines?.Where(t => t.Contains("<style=Allies>")).Except(bothAllyNEnemy).ToList();
+            alliesDesc = skillModel.descLines?.Where(t => t.Contains("<style=Allies>")).Except(bothAllyNEnemy).ToList();
 
             //alliesDesc = SumUpLS(alliesDesc);
             //enemyDesc = SumUpLS(enemyDesc);
@@ -337,7 +344,7 @@ namespace Combat
             finalDesc.AddRange(bothAllyNEnemy);
             finalDesc.Distinct().ToList();
 
-            skillCardData.descLines = finalDesc;
+            skillModel.descLines = finalDesc;
         }
 
         List<string> SumUpLS(List<string> stringLS)

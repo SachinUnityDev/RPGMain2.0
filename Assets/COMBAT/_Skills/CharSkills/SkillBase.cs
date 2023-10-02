@@ -23,7 +23,7 @@ namespace Combat
         protected SkillData skillData = new SkillData();
         protected string str0, str1, str2, str3;
 
-        public abstract SkillModel skillModel { get; set; } 
+        public SkillModel skillModel; 
         public abstract CharNames charName { get; set; }
         public abstract SkillNames skillName { get; }      
         public abstract SkillLvl skillLvl { get;  }
@@ -52,7 +52,17 @@ namespace Combat
             //skillModel.skillID = skillController.skillID;
             skillModel.charID = charID; 
             //SkillService.Instance.allSkillModels.Add(skillModel);
-            this.skillController.allSkillModels.Add(skillModel);   // skillModel for ref
+            
+            if(this.skillController.allSkillModels.Any(t=>t.skillName == skillName))
+            {
+                int index =
+                this.skillController.allSkillModels.FindIndex(t=>t.skillName == skillName);
+                this.skillController.allSkillModels.RemoveAt(index);
+            }            
+            this.skillController.allSkillModels.Add(skillModel);   // lastest skillModel for ref
+            
+
+
             charGO = this.skillController.gameObject;
             if(GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
@@ -62,19 +72,9 @@ namespace Combat
 
                 PopulateTargetPos();
             }
-           
-           
         }
-
-        //public void SetState(SkillSelectState _skillState)
-        //{
-        //    if(skillModel != null)
-        //    {
-        //        skillModel.SetSkillState
-        //    }
-
-        //}
-        public virtual void SkillSelected() {
+        public virtual void SkillSelected() 
+        {
 
             if (!skillModel.castPos.Any(t => t == myDyna.currentPos))
                 return;
@@ -152,8 +152,8 @@ namespace Combat
                 skillModel.SetSkillState(SkillSelectState.UnClickable_InCd);
             }
             // Debug.Log("Post apply EXCECUTED");
-            SkillServiceView.Instance.UpdateSkillState(skillModel);
-            SkillService.Instance.On_PostSkill();          
+           
+            SkillService.Instance.On_PostSkill(skillModel);          
             // set in cool down state
             // if (skillModel.cd == -1) return;
             //  SkillServiceView.Instance.SetSkillState(ref skillModel);            

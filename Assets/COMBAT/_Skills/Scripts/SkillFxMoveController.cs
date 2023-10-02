@@ -12,8 +12,8 @@ namespace Combat
         [Header("OFFSETS")]
         [SerializeField] Vector3 striker2TargetOffset = new Vector3(1.5f, 0, 0);
         [SerializeField] Vector3 strikerMainFXOffset = new Vector3(1.5f,1.5f,0); 
-        Transform strikerTransform;
-        Transform targetTransform;
+        [SerializeField] Transform strikerTransform;
+        [SerializeField] Transform targetTransform;
 
       //  Vector3 endPos;
         Vector3 startPos;

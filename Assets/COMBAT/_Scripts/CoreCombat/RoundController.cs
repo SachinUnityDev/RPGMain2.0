@@ -51,12 +51,12 @@ namespace Combat
             if(index < charCount && index > -1)
             {
                 CombatService.Instance.currCharOnTurn = charTurnOrder[index];
-                CombatEventService.Instance.On_CharOnTurnSet(CombatService.Instance.currCharOnTurn);
+                CombatEventService.Instance.On_CharOnTurnSet();
             }else // next round 
             {
                 index = 0;
                 CombatService.Instance.currCharOnTurn = charTurnOrder[index];
-                CombatEventService.Instance.On_CharOnTurnSet(CombatService.Instance.currCharOnTurn);
+                CombatEventService.Instance.On_CharOnTurnSet();
             }
             CombatService.Instance.currentTurn = index + 1;
         }
@@ -64,8 +64,8 @@ namespace Combat
         void OnRoundStart()
         {
             SetTurnOrder();
-            gameObject.GetComponent<TopPortraitsController>().SetDefaultTurnOrder();
-            gameObject.GetComponent<TopPortraitsController>().BuildCharPosData(); 
+            //gameObject.GetComponent<TopPortraitsController>().SetDefaultTurnOrder();
+            //gameObject.GetComponent<TopPortraitsController>().BuildCharPosData(); 
         }
 
         void UpdateAllyEnemyList()

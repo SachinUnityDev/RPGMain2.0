@@ -7,7 +7,6 @@ namespace Combat
 {
     public class AnimalTrap : SkillBase
     {
-        public override SkillModel skillModel { get; set; }
         public override CharNames charName { get; set; }
 
         public override SkillNames skillName => SkillNames.AnimalTrap;

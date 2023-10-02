@@ -6,7 +6,6 @@ namespace Combat
 {
     public class Telekinesis : SkillBase
     {
-        public override SkillModel skillModel { get; set; }
         public override CharNames charName { get; set; }
 
         public override SkillNames skillName => SkillNames.Telekinesis;

@@ -9,7 +9,6 @@ namespace Combat
 {
     public class KrisLunge : SkillBase
     {
-        public override SkillModel skillModel { get; set; }
         public override SkillNames skillName => SkillNames.KrisLunge;
         private CharNames _charName;
         public override CharNames charName { get => _charName; set => _charName = value; }

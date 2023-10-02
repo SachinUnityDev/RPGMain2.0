@@ -27,6 +27,7 @@ namespace Common
         [Header("Combat Controllers")]
         public DamageController damageController;   
         public StrikeController strikeController;
+        public CombatController combatController; 
 
         [Header("Buff Controller")]
         public BuffController buffController;

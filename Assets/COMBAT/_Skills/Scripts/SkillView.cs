@@ -10,22 +10,14 @@ using Common;
 
 namespace Combat
 {
-    public class SkillServiceView : MonoSingletonGeneric<SkillServiceView>
+    public class SkillView: MonoBehaviour
     {
 #region Declarations
-        // algo for sprite toggles. 
-        GameObject skillPanel;
-        const int skillBtnCount = 8; 
+        const int skillBtnCount = 8;
 
-      //  [SerializeField] List<Button> SkillBtns = new List<Button>();
-        [SerializeField] Button optionsBtn;
-        [SerializeField] Button fleeBtn;
         [SerializeField] Sprite LockedSkillIconSprite;
-        [SerializeField] Sprite NASkillIconSprite; 
+        [SerializeField] Sprite NASkillIconSprite;
         [SerializeField] Transform currTransHovered;
-
-        [Header("DRAG REFERENCE")]
-        [SerializeField] PerkSelectionController perkSelectionController;
 
 
         [Header("SKILL CARD PARAMS")]
@@ -33,8 +25,7 @@ namespace Combat
         public bool pointerOnSkillCard =false;
         public bool pointerOnSkillIcon = false; 
 
-        //[SerializeField] List<GameObject> allySkillCards = new List<GameObject>();
-        //[SerializeField] List<GameObject> enemySkillCards = new List<GameObject>();
+
         [SerializeField] GameObject SkillPanel; 
        // [SerializeField] GameObject currSkillCard;
         [SerializeField] GameObject textPrefab;
@@ -50,10 +41,7 @@ namespace Combat
         void OnEnable()
         {
             index = -1; 
-            optionsBtn.onClick.AddListener(OnOptionBtnPressed);
-
-            skillPanel = GameObject.FindGameObjectWithTag("SkillPanel");
-
+     
             //CombatEventService.Instance.OnSOTactics +=
             //   () => SetSkillsPanel(CombatService.Instance.defaultChar.charModel.charName);
             CombatEventService.Instance.OnSOT +=
@@ -62,9 +50,9 @@ namespace Combat
             CombatEventService.Instance.OnCharClicked += 
                 ()=>SetSkillsPanel(CombatService.Instance.currCharClicked.charModel.charID);
             CombatEventService.Instance.OnCharClicked +=
-                                                 () => PopulateSkillClickedState(-1);
-            CombatEventService.Instance.OnEOT += () => PopulateSkillClickedState(-1);
-
+                                                 () => FillSkillClickedState(-1);
+            CombatEventService.Instance.OnEOT += () => FillSkillClickedState(-1);
+            CombatEventService.Instance.OnSOTactics += InitSkillBtns;
         }
 
         private void OnDisable()
@@ -74,18 +62,16 @@ namespace Combat
             CombatEventService.Instance.OnCharClicked +=
                () => SetSkillsPanel(CombatService.Instance.currCharClicked.charModel.charID);
             CombatEventService.Instance.OnCharClicked +=
-                                                 () => PopulateSkillClickedState(-1);
-            CombatEventService.Instance.OnEOT += () => PopulateSkillClickedState(-1);
+                                                 () => FillSkillClickedState(-1);
+            CombatEventService.Instance.OnEOT += () => FillSkillClickedState(-1);
+            CombatEventService.Instance.OnSOTactics -= InitSkillBtns;
         }
-
-        public void OnOptionBtnPressed()
+        void InitSkillBtns()
         {
-            perkSelectionController.On_OptionBtnPressed(); 
-        }
-        
-        public void OnFleeBtnPressed()
-        {
-
+            foreach (Transform child in transform)
+            {
+                child.GetComponent<SkillBtnsPointerEvents>().InitSkillBtns(this); 
+            }
         }
 
         public void SkillBtnPressed()
@@ -114,7 +100,7 @@ namespace Combat
             {
                 SkillService.Instance.ClearPrevSkillData();
             }
-            PopulateSkillClickedState(index);        
+            FillSkillClickedState(index);        
             SkillService.Instance.On_SkillSelected
                 (CombatService.Instance.currCharOnTurn.charModel.charName, SkillService.Instance.currSkillName);
         }
@@ -226,8 +212,6 @@ namespace Combat
         public void UpdateSkillBtntxt(CharNames _charName,SkillNames _skillName, int posOnSkillPanel)
         {
 
-
-
             //SkillModel skillModel = SkillService.Instance.GetSkillModel(_charName, _skillName); 
           
             //int cdGap = CombatService.Instance.currentRound - skillModel.lastUsedInRound;
@@ -240,11 +224,11 @@ namespace Combat
             //    = displayTxt;
         }
 
-        public void PopulateSkillClickedState(int index)  // -1 index => all skills frames are cleared
+        public void FillSkillClickedState(int index)  // -1 index => all skills frames are cleared
         {
             //SkillService.Instance.ClearPrevSkillData();
             GridService.Instance.ClearOldTargets();
-            foreach (Transform child in skillPanel.transform)
+            foreach (Transform child in transform)
             {
                 child.GetChild(1).GetComponent<Image>().sprite = skillHexSO.SkillNormalFrame;
                 child.GetChild(1).GetComponent<RectTransform>().localScale = Vector3.one;
@@ -260,7 +244,7 @@ namespace Combat
                     {
                         if (skillSO.allSkills[i].skillUnLockStatus == 1)
                         {
-                            Transform skillIconTranform = skillPanel.transform.GetChild(i);
+                            Transform skillIconTranform = transform.GetChild(i);
                             skillIconTranform.GetComponent<Image>().sprite
                                                                 = skillSO.allSkills[i].skillIconSprite;
                             SkillNames skillName = skillSO.allSkills[i].skillName;
@@ -272,8 +256,6 @@ namespace Combat
                                 Debug.Log("SkillMModel missing" + skillName);
                                 return;
                             }
-                                
-
                             if(i != index)
                             {
                                 if (skillModel.GetSkillState() == SkillSelectState.Clicked)
@@ -285,7 +267,7 @@ namespace Combat
                                     skillModel.SetSkillState(SkillSelectState.Clicked);
                                     Change2ClickedFrame(skillIconTranform); 
                             }
-                            skillBtn.skillCardData = skillModel;
+                            skillBtn.skillModel = skillModel;
                             skillBtn.RefreshIconAsPerState();
                         }
                     }
@@ -314,7 +296,7 @@ namespace Combat
                     {
                         if (skillSO.allSkills[i].skillUnLockStatus == 1)
                         {                         
-                            Transform skillIconTranform = skillPanel.transform.GetChild(i);
+                            Transform skillIconTranform = transform.GetChild(i);
                             skillIconTranform.GetComponent<Image>().sprite
                                                                 = skillSO.allSkills[i].skillIconSprite;
                             SkillNames skillName = skillSO.allSkills[i].skillName;
@@ -333,7 +315,7 @@ namespace Combat
                             SkillBtnsPointerEvents skillBtn = skillIconTranform.GetComponent<SkillBtnsPointerEvents>();
 
                             // Debug.Log("SkillModel Updates" + skillModel.GetSkillState()); 
-                            skillBtn.skillCardData = skillModel;
+                            skillBtn.skillModel = skillModel;
 
                             skillBtn.RefreshIconAsPerState();
 
@@ -341,16 +323,16 @@ namespace Combat
                         else if(skillSO.allSkills[i].skillUnLockStatus == 0)
                         {
                             //skillPanel.transform.GetChild(i).gameObject.SetActive(true);
-                            skillPanel.transform.GetChild(i).GetComponent<Image>().sprite = LockedSkillIconSprite;
+                            transform.GetChild(i).GetComponent<Image>().sprite = LockedSkillIconSprite;
                         }else
                         {
-                            skillPanel.transform.GetChild(i).GetComponent<Image>().sprite = NASkillIconSprite;
+                            transform.GetChild(i).GetComponent<Image>().sprite = NASkillIconSprite;
                         }                            
                     }
                     // to make the extra button as not available 
                     for (int i = skillSO.allSkills.Count; i < skillBtnCount; i++)
                     {
-                        skillPanel.transform.GetChild(i).GetComponent<Image>().sprite = NASkillIconSprite;
+                        transform.GetChild(i).GetComponent<Image>().sprite = NASkillIconSprite;
                     }
                 }
             }

@@ -74,7 +74,7 @@ namespace Combat
             OnCombatLoot?.Invoke(isVictory); 
         }
 
-        public void On_CharOnTurnSet(CharController charController)
+        public void On_CharOnTurnSet()
         {       
             CharController charCtrl = CombatService.Instance.currCharOnTurn;
             DynamicPosData dynaOnTurn = GridService.Instance.GetDyna4GO(charCtrl.gameObject);
@@ -250,8 +250,8 @@ namespace Combat
 
             if (Input.GetKeyDown(KeyCode.A))
             {
-                Debug.Log("EOT");
-                On_EOT();
+                Debug.Log("On CharOn Turn Set");
+                On_CharOnTurnSet();
             }
 
             //if (Input.GetKeyDown(KeyCode.J))

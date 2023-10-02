@@ -30,8 +30,6 @@ namespace Combat
 
     public class SkillService : MonoSingletonGeneric<SkillService>
     {
-       
-
         public event Action<PerkData> OnPerkStateChg;
         public event Action<SkillModel> OnSkillSelectInInv; 
         public event Action<PerkNames> OnPerkHovered;
@@ -43,8 +41,9 @@ namespace Combat
             add
             {
                 if (_SkillApply == null || !_SkillApply.GetInvocationList().Contains(value))
-                {
+                {                    
                     _SkillApply += value;
+                    Debug.Log("skill apply >>" + _SkillApply.GetInvocationList().Length);
                 }
                 else
                 {
@@ -113,10 +112,10 @@ namespace Combat
         public SkillNames defaultSkillName;
 
         public SkillNames currSkillHovered;        
-        public SkillServiceView skillView;
+        public SkillView skillView;
 
-        [Header("Perk Selection Controller")]
-        [SerializeField] PerkSelectionController perkSelectionController;
+        //[Header("Perk Selection Controller")]
+        //[SerializeField] PerkSelectionController perkSelectionController;
 
         public int currSkillPts =10;
 
@@ -125,12 +124,10 @@ namespace Combat
         {
             base.Awake();
      
-            skillFactory = GetComponent<SkillFactory>();
-            skillView = GetComponent<SkillServiceView>();
+     
          
             //move and FX controller 
-            skillFXMoveController = gameObject.GetComponent<SkillFxMoveController>();
-            // skillFXController = gameObject.GetComponent<SkillFXController>();
+          
    
            
            // CombatEventService.Instance.OnCombatInit += skillFactory.SkillsInit;
@@ -145,9 +142,9 @@ namespace Combat
         {
             // InitSkillControllers();
             // Cn be later Set to the start of Combat Event
+            skillFactory = GetComponent<SkillFactory>();
+            skillView = GetComponent<SkillView>();
             SceneManager.sceneLoaded += OnSceneLoaded;
-        
-            OnSkillApply += SkillEventtest;
             GameEventService.Instance.OnGameStateChg += OnStartOfCombat;
             // CombatService.Instance.GetComponent<RoundController>().OnCharOnTurnSet += PopulateSkillTargets; 
             skillFactory =GetComponent<SkillFactory>();
@@ -156,15 +153,21 @@ namespace Combat
         private void OnDisable()
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
-            OnSkillApply -= SkillEventtest;
+           // OnSkillApply -= SkillEventtest;
             GameEventService.Instance.OnGameStateChg -= OnStartOfCombat;
         }
+
+
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
-                skillView = FindObjectOfType<SkillServiceView>();
+                skillView = FindObjectOfType<SkillView>();
+                _SkillApply += SkillEventtest;
+                skillFXMoveController = gameObject.GetComponent<SkillFxMoveController>();
+                if(skillFXMoveController == null)
+                    skillFXMoveController = gameObject.AddComponent<SkillFxMoveController>();
             }
             GameObject canvasGO = GameObject.FindGameObjectWithTag("Canvas");
             if (skillCardGO == null)
@@ -180,13 +183,6 @@ namespace Combat
         void OnStartOfCombat(GameState gameState)
         {
             if (gameState != GameState.InCombat) return;
-            
-            //foreach (GameObject charGO in CharService.Instance.charsInPlay)
-            //{
-            //    CharNames charName = charGO.GetComponent<CharController>().charModel.charName;
-            //    charGO.GetComponent<SkillController1>().InitSkillList(charName); 
-            //}
-
             CombatEventService.Instance.OnSOT += SetDefaultSkillForChar;
             CombatEventService.Instance.OnCharOnTurnSet += InitEnemySkillSelection; 
             CombatEventService.Instance.OnTargetClicked += TargetIsSelected;
@@ -327,32 +323,7 @@ namespace Combat
                 bool isMagical = dmgTypes.Any(t => t == DamageType.Air || t == DamageType.Dark
                 || t == DamageType.Earth || t == DamageType.Fire || t == DamageType.Light
                 || t == DamageType.Water);
-                //if (isMagical)
-                //{
-                //    if (strikeController.FocusCheck())
-                //    { // MISFIRE 
-                //        CombatService.Instance.isFocusChecked = true;
-                //        strikeController.MisFireApply();
-
-                //    }
-                //        //####### modify MAIN TARGET and CURR TARGET DYNAS ....... ensure no dyna set in skill APPLY ########
-                //}
-                //if (isPhysical)
-                //{
-                //    if (strikeController.AccuracyCheck())
-                //    {
-                //        CombatService.Instance.isAccChecked = true;
-                //    }
-                //    bool isDodged = targetController.damageController.HitChance();
-                //   // IF SKILL HAS TRUE HIT CANNOT i.e.isDodge = false;
-
-                //    if (isDodged)
-                //        Debug.Log("FX is Dodged");
-                //    return;   // CAN INSERT DODGE FX HERE
-                //    // get skill type DamageType.. Acc and Focus Check 
-                //}
-
-                // only target pos/tile can be clicked
+         
                 if (!skillModel.targetPos.Any(t => t.pos == target.currentPos))
                     //&& t.charMode == target.charMode))
                     return;
@@ -365,7 +336,7 @@ namespace Combat
 
             PreSkillApply?.Invoke();
             SkillFXRemove?.Invoke();
-           // Sequence SkillSeq = DOTween.Sequence();
+           // Sequence SkillSeq = DOTween.Sequence();           
             _SkillApply.Invoke();
             On_PostSkillApply(); 
         }
@@ -412,18 +383,16 @@ namespace Combat
 
         public void On_SkillSelected(CharNames _charName, SkillNames skillName)  // Ally Skill and perk "Skill Select" 
         {
-
+            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            {
+                CombatService.Instance.combatState = CombatState.INCombat_InSkillSelected;
+                ClearPrevData();
+                SkillSelect?.Invoke(_charName, skillName);  // message broadcaster 
+            }
             currSkillController = allSkillControllers.FirstOrDefault(t => t.charName == _charName);
             Debug.Log("SKILL IS SELECTED" + currSkillController.name);
             currSkillController.SkillSelect(skillName);
 
-            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
-            {
-                ClearPrevData();
-
-                SkillSelect?.Invoke(_charName, skillName);  // message broadcaster 
-            }
-          
         }
 
         public void ClearPrevSkillData()
@@ -442,7 +411,7 @@ namespace Combat
             skillModel.SetSkillState(SkillSelectState.Clickable);
             currSkillName = SkillNames.None;
             skillView.SetSkillsPanel(charID);
-            skillView.PopulateSkillClickedState(-1);
+            skillView.FillSkillClickedState(-1);
         }
 
         public void On_SkillHovered(CharNames _charName, SkillNames skillName)
@@ -466,11 +435,11 @@ namespace Combat
             SkillHovered?.Invoke(); 
         }
 
-        public void On_PostSkill()
+        public void On_PostSkill(SkillModel skillModel)
         {
-           // ClearPrevData();  // redundant safety .. causing only one FX to play as it clears mainTargetDyna
+            // ClearPrevData();  // redundant safety .. causing only one FX to play as it clears mainTargetDyna
 
-
+            skillView.UpdateSkillState(skillModel);
 
             CombatEventService.Instance.On_EOT();
             Sequence PauseSeq = DOTween.Sequence();
@@ -582,14 +551,14 @@ namespace Combat
             if (charController == null) return null; 
             SkillController1 skillController = charController.GetComponent<SkillController1>(); 
           //  Debug.Log("skillcontroller found" + skillController.allSkillBases.Count);
-            foreach (SkillBase skill in skillController.allSkillBases)
+            foreach (SkillModel skillModel in skillController.allSkillModels)
             {
-                if (skill.skillName == _skillName)
+                if (skillModel.skillName == _skillName)
                 {
-                    return skill.skillModel; 
+                    return skillModel; 
                 }
             }
-           Debug.Log("SkillModel Not found" + _skillName  +" CHAR ID " + _charID); 
+            Debug.Log("SkillModel Not found" + _skillName  +" CHAR ID " + _charID); 
             return null; 
         }
         public GameObject GetGO4SkillCtrller(CharNames _charName)
@@ -781,3 +750,36 @@ namespace Combat
 //        skillstate = _skillState; 
 //    }
 //}
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+///
+
+
+//if (isMagical)
+//{
+//    if (strikeController.FocusCheck())
+//    { // MISFIRE 
+//        CombatService.Instance.isFocusChecked = true;
+//        strikeController.MisFireApply();
+
+//    }
+//        //####### modify MAIN TARGET and CURR TARGET DYNAS ....... ensure no dyna set in skill APPLY ########
+//}
+//if (isPhysical)
+//{
+//    if (strikeController.AccuracyCheck())
+//    {
+//        CombatService.Instance.isAccChecked = true;
+//    }
+//    bool isDodged = targetController.damageController.HitChance();
+//   // IF SKILL HAS TRUE HIT CANNOT i.e.isDodge = false;
+
+//    if (isDodged)
+//        Debug.Log("FX is Dodged");
+//    return;   // CAN INSERT DODGE FX HERE
+//    // get skill type DamageType.. Acc and Focus Check 
+//}
+
+// only target pos/tile can be clicked

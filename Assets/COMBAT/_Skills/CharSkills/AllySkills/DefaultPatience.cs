@@ -10,7 +10,6 @@ namespace Combat
 {
     public class DefaultPatience : SkillBase
     {
-        public override SkillModel skillModel { get; set; }
         public override SkillNames skillName => SkillNames.DefaultPatience;
         public override SkillLvl skillLvl => SkillLvl.Level0;
         public override StrikeTargetNos strikeNos => StrikeTargetNos.Single;

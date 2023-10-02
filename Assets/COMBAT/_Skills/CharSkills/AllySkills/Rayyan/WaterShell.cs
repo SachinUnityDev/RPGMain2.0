@@ -8,7 +8,6 @@ namespace Combat
 {
     public class WaterShell : SkillBase   // replacement for patience
     {
-        public override SkillModel skillModel { get ; set; }
         private CharNames _charName;
         public override CharNames charName { get => _charName; set => _charName = value; }
         public override SkillNames skillName => SkillNames.WaterShell;

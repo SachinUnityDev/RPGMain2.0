@@ -11,7 +11,6 @@ namespace Combat
 {
     public class HoneBlades : SkillBase
     {
-        public override SkillModel skillModel { get; set; }
 
         private CharNames _charName;
         public override CharNames charName { get => _charName; set => _charName = value; }

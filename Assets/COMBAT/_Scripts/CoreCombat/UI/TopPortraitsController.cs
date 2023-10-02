@@ -233,6 +233,7 @@ namespace Combat
 
         void MoveAlly2Pos(GameObject GO, int pos)
         {
+            Debug.Log("TOP" + pos + "Game object" + GO.name);
             GO.transform.DOMove(allyWayPoints[pos].position, 0.4f);
             if(pos ==3)
                 GO.transform.DOScale(1.25f, 0.2f);
@@ -303,7 +304,6 @@ namespace Combat
                             MoveAlly2Pos(TopPanel.gameObject, newPos);
                             charPosData.pos = newPos;
                         }
-                          
                     }
                 }
             }

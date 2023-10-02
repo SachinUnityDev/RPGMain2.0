@@ -87,8 +87,12 @@ namespace Combat
             {
                if (charCtrl.damageController == null)
                     charCtrl.damageController=  charCtrl.gameObject.AddComponent<DamageController>();
+
                 if (charCtrl.gameObject.GetComponent<CombatController>() == null)
-                    charCtrl.gameObject.AddComponent<CombatController>();
+                   charCtrl.combatController = charCtrl.gameObject.AddComponent<CombatController>();
+
+                if (charCtrl.strikeController == null)
+                    charCtrl.strikeController = charCtrl.gameObject.AddComponent<StrikeController>();
             }
         }
 

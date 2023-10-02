@@ -9,7 +9,6 @@ namespace Combat
 {
     public class InTheNameOfUsmu : SkillBase
     {
-        public override SkillModel skillModel { get; set; }
         public override SkillNames skillName => SkillNames.InTheNameOfUsmu;
 
         private CharNames _charName;

@@ -50,7 +50,7 @@ namespace Combat
         private void Awake()
         {
             charController = GetComponent<CharController>();
-            CombatEventService.Instance.OnEOR += RoundTick;
+            CombatEventService.Instance.OnEOR1 += RoundTick;
             CombatEventService.Instance.OnEOC += EOCTick;
             QuestEventService.Instance.OnEOQ += EOQTick;
             CalendarService.Instance.OnChangeTimeState += ToggleBuffsOnTimeStateChg;
@@ -153,7 +153,7 @@ namespace Combat
             //}
             return deDuffStrs;          
         }
-        public void RoundTick()
+        public void RoundTick(int roundNo)
         {
             foreach (BuffData buffData in allBuffs.ToList())
             {

@@ -79,7 +79,7 @@ namespace Combat
         }
         public override void SkillEnd()
         {
-            CombatEventService.Instance.OnEOR -= Tick; RemoveFX1();
+            CombatEventService.Instance.OnEOR1 -= Tick; RemoveFX1();
           //  charController.ChangeStatRange(CauseType.CharSkill, (int)skillName, charController,StatsName.damage, -2, 0);
            
         }

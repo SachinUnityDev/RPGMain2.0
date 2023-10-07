@@ -40,11 +40,12 @@ namespace Quest
                 transform.gameObject.SetActive(false);
                 return;
             }
+            Debug.Log(item.itemName + " NAME" + item.itemType + " TYPE");
             this.toolView = toolView;
             this.item = item;
             transform.gameObject.SetActive(true);
             itemImg.gameObject.SetActive(true);
-            Debug.Log(item.itemName + " NAME" + item.itemType + " TYPE");
+           
             itemImg.sprite = GetSprite(item.itemName, item.itemType);
             itemBG.sprite = GetBGSprite(item);
             

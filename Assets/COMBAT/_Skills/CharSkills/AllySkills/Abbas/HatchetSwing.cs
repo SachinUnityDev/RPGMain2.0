@@ -92,7 +92,7 @@ namespace Combat
 
 
 
-        public override void Tick()
+        public override void Tick(int roundNo)
         {
         }
 

@@ -107,7 +107,7 @@ namespace Combat
             targetGO = SkillService.Instance.currentTargetDyna.charGO;
             targetController = targetGO.GetComponent<CharController>();
             if (skillModel.castTime > 0)
-                CombatEventService.Instance.OnSOR += Tick;
+                CombatEventService.Instance.OnSOT += Tick;
         }     
 
         public abstract void ApplyFX1();
@@ -124,7 +124,7 @@ namespace Combat
         }
         public virtual void SkillEnd()
         {
-            CombatEventService.Instance.OnSOR -= Tick;
+            CombatEventService.Instance.OnSOT -= Tick;
             RemoveFX1();
             RemoveFX2();
             RemoveFX3();

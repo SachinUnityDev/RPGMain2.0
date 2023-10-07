@@ -115,7 +115,7 @@ namespace Combat
             CombatEventService.Instance.OnSOTactics += () => transitionSO.PlayAnims("TACTICS", animPanel);
             CombatEventService.Instance.OnSOC += () => transitionSO.PlayAnims("COMBAT", animPanel);
            // CombatEventService.Instance.OnSOR += () => transitionSO.PlayAnims("ROUND " + CombatService.Instance.currentRound, animPanel);
-            CombatEventService.Instance.OnSOR += RoundDisplay; 
+            CombatEventService.Instance.OnSOR1 += RoundDisplay; 
             CombatEventService.Instance.OnCombatLoot += CombatResultDisplay;
 
             CombatEventService.Instance.OnCharOnTurnSet
@@ -137,14 +137,13 @@ namespace Combat
 
         }
 
-        void RoundDisplay()
+        void RoundDisplay(int roundNo)
         {
             if (CombatService.Instance.combatState == CombatState.INCombat_normal)
             {
-                transitionSO.PlayAnims("ROUND " + CombatService.Instance.currentRound, animPanel);
-                roundDisplayGO.GetComponent<TextMeshProUGUI>().text = CombatService.Instance.currentRound.ToString();
+                transitionSO.PlayAnims("ROUND " + roundNo, animPanel);
+                roundDisplayGO.GetComponent<TextMeshProUGUI>().text = roundNo.ToString();
             }
-           
         }
         void CombatResultDisplay(bool isVictory)
         {

@@ -55,7 +55,7 @@ namespace Combat
         {
             targetGO = SkillService.Instance.currentTargetDyna.charGO;
             targetController = targetGO.GetComponent<CharController>();
-            CombatEventService.Instance.OnEOR += Tick;
+           // CombatEventService.Instance.OnEOR1 += Tick;
 
         }
         public override void DisplayFX1()

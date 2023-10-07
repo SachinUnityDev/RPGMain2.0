@@ -21,6 +21,8 @@ MonoBehaviour:
   defendFX:
     loc: 1
     skillSprite: {fileID: 21300000, guid: 9707d5e8a639301488b278b99e1b0c2a, type: 3}
+  leftInvSkillPanelBG: {fileID: 0}
+  rightInvSkillPanelBG: {fileID: 0}
   passiveSkills:
   - passiveSkillName: 42
     passiveSprite: {fileID: 21300000, guid: df58f787eb860a04caeaa1bfb95cc358, type: 3}
@@ -50,11 +52,11 @@ MonoBehaviour:
     timeFrame: 0
     maxUsagePerCombat: 0
     skillIncli: 2
-    baseWeight: 20
+    baseWeight: 0
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexName: 0a0000000c0000000b000000
+      hexNames: 000000000000000000000000
     allSkillFXs:
     - charMode: 1
       perkType: 0
@@ -64,6 +66,7 @@ MonoBehaviour:
         type: 3}
       colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
+    allLines: []
   - skillName: 512
     charName: 18
     skillID: 0
@@ -91,7 +94,7 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexName: 020000000b00000002000000
+      hexNames: 000000000000000000000000
     allSkillFXs:
     - charMode: 1
       perkType: 0
@@ -101,6 +104,7 @@ MonoBehaviour:
       mainSkillFX: {fileID: 0}
       colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
+    allLines: []
   - skillName: 513
     charName: 18
     skillID: 0
@@ -129,8 +133,9 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexName: 200000000b0000000b000000
+      hexNames: 000000000000000000000000
     allSkillFXs: []
+    allLines: []
   - skillName: 128
     charName: 18
     skillID: 0
@@ -158,8 +163,9 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexName: 190000000b0000000b000000
+      hexNames: 190000000b0000000b000000
     allSkillFXs: []
+    allLines: []
   - skillName: 2
     charName: 18
     skillID: 144
@@ -187,5 +193,6 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexName: 020000000b0000000b000000
+      hexNames: 020000000b0000000b000000
     allSkillFXs: []
+    allLines: []

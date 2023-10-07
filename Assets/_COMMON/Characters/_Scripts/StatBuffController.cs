@@ -48,18 +48,22 @@ namespace Common
 
         public int buffIndex = 0;
 
-        private void Awake()
-        {
-            charController = GetComponent<CharController>();
-            CombatEventService.Instance.OnEOR += RoundTick;
-            CombatEventService.Instance.OnEOC += EOCTick;
-            QuestEventService.Instance.OnEOQ += EOQTick;
-            CalendarService.Instance.OnChangeTimeState += ToggleBuffsOnTimeStateChg; 
-        }
+  
         void Start()
         {
-          
-          
+            charController = GetComponent<CharController>();
+            CombatEventService.Instance.OnEOR1 += RoundTick;
+            CombatEventService.Instance.OnEOC += EOCTick;
+            QuestEventService.Instance.OnEOQ += EOQTick;
+            CalendarService.Instance.OnChangeTimeState += ToggleBuffsOnTimeStateChg;
+
+        }
+        private void OnDisable()
+        {
+            CombatEventService.Instance.OnEOR1 -= RoundTick;
+            CombatEventService.Instance.OnEOC -= EOCTick;
+            QuestEventService.Instance.OnEOQ -= EOQTick;
+            CalendarService.Instance.OnChangeTimeState -= ToggleBuffsOnTimeStateChg;
         }
 
         #region  APPLY_BUFFS 
@@ -112,7 +116,7 @@ namespace Common
         }
         #endregion
      
-        public void RoundTick()
+        public void RoundTick(int roundNo)
         {
             foreach (StatBuffData buffData in allBuffs.ToList())
             {

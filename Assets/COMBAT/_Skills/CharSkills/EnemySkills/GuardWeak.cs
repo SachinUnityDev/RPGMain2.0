@@ -77,9 +77,6 @@ namespace Combat
         {
         }
 
-
-
-
         public override void SkillEnd()
         {
             base.SkillEnd();

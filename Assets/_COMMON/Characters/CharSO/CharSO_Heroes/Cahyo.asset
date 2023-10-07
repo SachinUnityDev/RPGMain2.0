@@ -66,7 +66,7 @@ MonoBehaviour:
   permaTraitNames: 
   AttribList:
   - AttribName: 1
-    currValue: 0
+    currValue: 9
     baseValue: 0
     desc: Base value for Physical and Magical attacks.
     minLimit: 0
@@ -215,31 +215,31 @@ MonoBehaviour:
     isClamped: 0
   statList:
   - statName: 1
-    currValue: 0
+    currValue: 36
     desc: Health is health, you know it...
     minLimit: 0
-    maxLimit: 0
+    maxLimit: 100
     isClamped: 0
   - statName: 2
     currValue: 0
     desc: Resource to use skills.
     minLimit: 0
-    maxLimit: 0
+    maxLimit: 100
     isClamped: 0
   - statName: 3
-    currValue: 0
+    currValue: 12
     desc: Be among those who dare to dare!
     minLimit: -24
     maxLimit: 24
     isClamped: 0
   - statName: 4
-    currValue: 0
+    currValue: 12
     desc: Start losing Health once Hunger is 100%.
     minLimit: 0
     maxLimit: 100
     isClamped: 0
   - statName: 5
-    currValue: 0
+    currValue: 12
     desc: Start losing Stamina once Thirst is 100%.
     minLimit: 0
     maxLimit: 100

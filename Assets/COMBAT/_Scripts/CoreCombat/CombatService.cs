@@ -47,7 +47,7 @@ namespace Combat
             CombatEventService.Instance.OnSOC += ()=>GetEnemyInCombat(currEnemyPack); 
 
             
-            CombatEventService.Instance.OnEOR += EORActions;
+            CombatEventService.Instance.OnEOR1 += EORActions;
             CombatEventService.Instance.OnCharOnTurnSet += SetAllCurrCharValues;
             SkillService.Instance.SkillSelect
                             += (CharNames _charName, SkillNames _skillName)
@@ -98,7 +98,7 @@ namespace Combat
 
      
 
-        public void EORActions()
+        public void EORActions(int roundNo)
         {
             //Debug.Log("STAMINA REGEN ");
             //CharacterService.Instance.CharsInPlayControllers.ForEach(t => t.RegenStamina()); 

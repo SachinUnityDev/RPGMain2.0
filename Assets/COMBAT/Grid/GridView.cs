@@ -27,7 +27,8 @@ namespace Combat
         [SerializeField] DynamicPosData selectDyna = null;
         [SerializeField] DynamicPosData targetDyna = null;
 
-        public Vector3Int currTilePos = Vector3Int.zero; Vector3Int prevTilePos = Vector3Int.zero;
+        public Vector3Int currTilePos = Vector3Int.zero; 
+        Vector3Int prevTilePos = Vector3Int.zero;
         [SerializeField] int currentpos = -1;       
         [SerializeField] TileState _tileState;
       

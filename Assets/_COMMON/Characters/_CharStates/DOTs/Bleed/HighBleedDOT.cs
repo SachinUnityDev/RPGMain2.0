@@ -33,7 +33,7 @@ namespace Common
                 ApplyFX();                
                 CombatEventService.Instance.OnSOT += ApplyFX;
           
-                CombatEventService.Instance.OnEOR += DOTTick;
+              //  CombatEventService.Instance.OnEOR1 += DOTTick;
                 if (charController.charStateController.HasCharDOTState(CharStateName.PoisonedLowDOT))
                 {
                     OverLapRulePoison();
@@ -42,7 +42,7 @@ namespace Common
              
         }
 
-        void DOTTick()
+        void DOTTick(int roundNo)
         {
             if (!charController.charStateController.HasCharDOTState(charStateName) && !fxApplied)
              // already has bleed following FX will not stack up 
@@ -97,7 +97,7 @@ namespace Common
         {
             base.EndState();
             CombatEventService.Instance.OnSOT -= ApplyFX;
-            CombatEventService.Instance.OnEOR += DOTTick;
+         //   CombatEventService.Instance.OnEOR1 -= DOTTick;
 
             // -2 dodge 
             charController.ChangeAttrib(CauseType.CharState, (int)charStateName

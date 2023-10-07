@@ -95,11 +95,17 @@ namespace Common
         void Start()
         {
             charController = GetComponent<CharController>();
-            CombatEventService.Instance.OnEOR += RoundTick;
+            CombatEventService.Instance.OnEOR1 += RoundTick;
             CombatEventService.Instance.OnEOC += EOCTick; 
 
         }
-    #region BUFF & DEBUFF
+        private void OnDisable()
+        {
+            CombatEventService.Instance.OnEOR1 -= RoundTick;
+            CombatEventService.Instance.OnEOC -= EOCTick;
+        }
+
+        #region BUFF & DEBUFF
         public int ApplyCharStateBuff(CauseType causeType, int causeName, int causeByCharID
                                 , CharStateName charStateName, TimeFrame timeFrame = TimeFrame.Infinity, int netTime =-1)
         {
@@ -315,8 +321,9 @@ namespace Common
             return false; 
         }
 
-        public void RoundTick()
+        public void RoundTick(int roundNo)
         {
+            if (allCharStateBuffs.Count == 0) return; 
             foreach (CharStateBuffData stateData in allCharStateBuffs)
             {
                 if (stateData.timeFrame == TimeFrame.EndOfRound)

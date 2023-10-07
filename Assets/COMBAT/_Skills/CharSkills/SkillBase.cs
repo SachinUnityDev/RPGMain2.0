@@ -35,11 +35,6 @@ namespace Combat
         #region APPLY and HOVER
         public virtual void  SkillInit(SkillController1 skillController) 
         {
-            //if (SkillService.Instance.allSkillModels
-            //    .Any(t => t.skillName == skillName && t.charName == charName 
-            //    && charController.charModel.charID == _charID)) return;
-           // if (SkillService.Instance.allSkillModels.Any(t => t.skillID == _skillID)) return;
-
             SkillDataSO skillDataSO = SkillService.Instance.GetSkillSO(charName);
             Debug.Log("SKILLNAME........" + skillName);
 
@@ -67,9 +62,7 @@ namespace Combat
             if(GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
                 myDyna = GridService.Instance.GetDyna4GO(charGO);
-                // Debug.Log("INSIDE SKILL INIT" + skillName);
-                // Do a Skill Init at the start of the combat.. 
-
+       
                 PopulateTargetPos();
             }
         }
@@ -79,6 +72,7 @@ namespace Combat
             if (!skillModel.castPos.Any(t => t == myDyna.currentPos))
                 return;
             PopulateTargetPos(); 
+            
             SkillService.Instance.OnSkillApply += BaseApply;
             SkillService.Instance.OnSkillApply += ApplyFX1;
             SkillService.Instance.OnSkillApply += ApplyFX2;
@@ -105,7 +99,7 @@ namespace Combat
             targetGO = SkillService.Instance.currentTargetDyna.charGO;
             targetController = targetGO.GetComponent<CharController>();
             if (skillModel.castTime >0)
-                CombatEventService.Instance.OnEOR += Tick; 
+                CombatEventService.Instance.OnEOR1 += Tick; 
             
             skillModel.lastUsedInRound = CombatService.Instance.currentRound;
             charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatName.stamina, -skillModel.staminaReq);
@@ -160,9 +154,9 @@ namespace Combat
 
         }
 
-        public virtual void Tick()
+        public virtual void Tick(int roundNo)
         {
-            int roundCounter = CombatService.Instance.currentRound - skillModel.lastUsedInRound;
+            int roundCounter = roundNo - skillModel.lastUsedInRound;
             //  Debug.Log("INSIDE TICK " + roundCounter + "CAST time " + skillModel.castTime);
 
             if (roundCounter >= skillModel.castTime)
@@ -171,7 +165,7 @@ namespace Combat
 
         public virtual void SkillEnd()
         {
-            CombatEventService.Instance.OnEOR -= Tick;
+            CombatEventService.Instance.OnEOR1 -= Tick;
             RemoveFX1(); 
             RemoveFX2();
             RemoveFX3();

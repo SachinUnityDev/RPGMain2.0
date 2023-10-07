@@ -93,7 +93,7 @@ namespace Combat
         }
         public virtual void SkillEnd()
         {
-            CombatEventService.Instance.OnSOR -= Tick;
+            CombatEventService.Instance.OnSOT -= Tick;
             RemoveFX1();
             RemoveFX2();
             RemoveFX3();

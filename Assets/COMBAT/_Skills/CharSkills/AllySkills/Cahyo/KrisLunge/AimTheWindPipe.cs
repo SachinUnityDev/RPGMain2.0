@@ -29,7 +29,7 @@ namespace Combat
         {
             targetGO = SkillService.Instance.currentTargetDyna.charGO;
             targetController = targetGO.GetComponent<CharController>();
-            CombatEventService.Instance.OnEOR += Tick;
+          //  CombatEventService.Instance.OnEOR1 += Tick;
             skillModel.lastUsedInRound = CombatService.Instance.currentRound;
             skillModel.cd = 3;
         }
@@ -72,6 +72,7 @@ namespace Combat
         {
 
         }
+        
         public override void RemoveFX1()
         {
 

@@ -82,10 +82,24 @@ namespace Combat
             {// if clicked on target pos... 
                 Vector3Int tilePos = GridService.Instance.gridView.currTilePos;
                 CellPosData cellPosData = GridService.Instance.gridView.GetPos4TilePos(tilePos);
-                if (skillModel.targetPos.Any(t => t.pos == cellPosData.pos && t.charMode == cellPosData.charMode))
+                if (cellPosData == null)
                 {
-                    GridService.Instance.gridController.Move2Pos(myDyna, cellPosData.pos);
+                    
+                } 
+                foreach (CellPosData cellPos in skillModel.targetPos)
+                {
+                    if(cellPos.charMode == cellPosData.charMode)
+                    {
+                        if(cellPos.pos== cellPosData.pos)
+                        {
+                            GridService.Instance.gridController.Move2Pos(myDyna, cellPosData.pos);
+                        }
+                    }
                 }
+                //if (skillModel.targetPos.Any(t => t.pos == cellPosData.pos && t.charMode == cellPosData.charMode))
+                //{
+                    
+                //}
             }
         }
 

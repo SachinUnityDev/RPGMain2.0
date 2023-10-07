@@ -44,8 +44,8 @@ namespace Combat
      
             //CombatEventService.Instance.OnSOTactics +=
             //   () => SetSkillsPanel(CombatService.Instance.defaultChar.charModel.charName);
-            CombatEventService.Instance.OnSOT +=
-              () => SetSkillsPanel(CombatService.Instance.currCharOnTurn.charModel.charID);
+            CombatEventService.Instance.OnCharOnTurnSet +=
+              (CharController charController) => SetSkillsPanel(charController.charModel.charID);
 
             CombatEventService.Instance.OnCharClicked += 
                 ()=>SetSkillsPanel(CombatService.Instance.currCharClicked.charModel.charID);

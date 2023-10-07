@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPack: 3
   allEnemyDataInPack:
-  - enemyName: 18
-    preferredPos: 07000000
   - enemyName: 19
     preferredPos: 03000000
   - enemyName: 19

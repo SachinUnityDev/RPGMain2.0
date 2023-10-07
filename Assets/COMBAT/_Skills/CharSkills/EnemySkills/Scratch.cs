@@ -33,8 +33,7 @@ namespace Combat
                     if (dyna != null)
                     {
                         skillModel.targetPos.Add(cellPosData);
-                    }
-                
+                    }                
             }
         }
         public override void ApplyFX1()
@@ -57,7 +56,7 @@ namespace Combat
 
         public override void ApplyFX3()
         {          
-            rodent = new Rodent();  // move to skill Init 
+           // rodent = new Rodent();  // move to skill Init 
             //rodent.ApplyPassiveFX(targetController);
             //senseTheWeak = new SenseTheWeak();
             //senseTheWeak.ApplyPassiveFX(targetController);
@@ -105,20 +104,28 @@ namespace Combat
             // populate targets to skill Service 
             // main and collatral too... 
             PopulateTargetPos();
+            SkillService.Instance.currentTargetDyna = null; 
             DynamicPosData tempDyna = null;
-            DynamicPosData randomDyna = null; 
+            DynamicPosData randomDyna = null;
+
             foreach (CellPosData cell in skillModel.targetPos)
             {
                 DynamicPosData dyna = GridService.Instance.GetDynaAtCellPos(cell.charMode, cell.pos);
                 
                 if (dyna != null)
                 {
-                    if (targetController.charStateController.HasCharDOTState(CharStateName.BleedLowDOT))
+                    //if (targetController == null)
+                    //    Debug.Log(" Traget controller is null"); 
+                    //if(targetController.charStateController== null)
+                    //    Debug.Log("CharState controller");
+
+                    CharController targetCtrl = dyna.charGO.GetComponent<CharController>();
+                    if (targetCtrl.charStateController.HasCharDOTState(CharStateName.BleedLowDOT))
                     {
                         tempDyna = dyna; 
                     }
-                    else if (targetController.tempTraitController.HasTempTrait(TempTraitName.Nausea) ||
-                            targetController.tempTraitController.HasTempTrait(TempTraitName.RatBiteFever))
+                    else if (targetCtrl.tempTraitController.HasTempTrait(TempTraitName.Nausea) ||
+                            targetCtrl.tempTraitController.HasTempTrait(TempTraitName.RatBiteFever))
                     {
                         tempDyna = dyna;
                     }else
@@ -131,9 +138,10 @@ namespace Combat
                     }
                 }
             }
-            if (tempDyna == null)
+            if (SkillService.Instance.currentTargetDyna == null)
+            {
                 SkillService.Instance.currentTargetDyna = randomDyna;
-
+            }
 
         }
 

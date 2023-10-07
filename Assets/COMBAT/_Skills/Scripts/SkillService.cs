@@ -120,24 +120,7 @@ namespace Combat
         public int currSkillPts =10;
 
         public float combatSpeed = 1f;
-        protected override void Awake()
-        {
-            base.Awake();
      
-     
-         
-            //move and FX controller 
-          
-   
-           
-           // CombatEventService.Instance.OnCombatInit += skillFactory.SkillsInit;
-           // CombatEventService.Instance.OnCombatInit += skillFactory.InitPerks; 
-           //  CombatEventService.Instance.OnCombatInit += InitSkillControllers;
-
-           
-
-            //CombatEventService.Instance.OnSOR += InitSkillManagers; // for enemies
-        }
         void OnEnable()
         {
             // InitSkillControllers();
@@ -212,8 +195,30 @@ namespace Combat
 
         public void SetDefaultSkillForChar()
         {
-            SkillDataSO skillDataSo = GetSkillSO(CombatService.Instance.currCharOnTurn.charModel.charName);
-             defaultSkillName =  skillDataSo.allSkills[0].skillName; 
+            // get skillmodel and skillcontroller 
+            // loop thru all the skills set default skill to first clickable skill
+            // if no skills in the loop => pass the turn 
+
+            CharController charOnTurn = CombatService.Instance.currCharOnTurn; 
+            SkillController1 skillController = charOnTurn.GetComponent<SkillController1>();
+
+            SkillModel defaultSkillModel = null; 
+            foreach (SkillModel skillModel in skillController.allSkillModels)
+            {
+                if(skillModel.GetSkillState() == SkillSelectState.Clickable)
+                {
+                    defaultSkillModel = skillModel;
+                    defaultSkillName = defaultSkillModel.skillName; 
+                    break; 
+                }
+            }
+            if(defaultSkillModel == null)
+            {
+                if(charOnTurn.charModel.charMode == CharMode.Ally)
+                 On_PostSkill(defaultSkillModel); // pass the turn
+            }
+            //SkillDataSO skillDataSo = GetSkillSO(CombatService.Instance.currCharOnTurn.charModel.charName);
+            // defaultSkillName =  skillDataSo.allSkills[0].skillName; 
         }
 
         public void PopulateSkillTargets(CharController charController)
@@ -240,12 +245,10 @@ namespace Combat
                 {
                     skillController = charGO.gameObject.AddComponent<SkillController1>();
                     allSkillControllers.Add(skillController);
-                    
-                    skillController.InitPerkDataList();
-
+                    // skillController.InitSkillList(skillController.charController); 
 
                     //SkillAIController skillAIController = character.gameObject.AddComponent<SkillAIController>();
-                    //allSKillAIControllers.Add(skillAIController); 
+                    //allSKillAIControllers.Add(skillAIController);
                 }
                 CharNames charName = charGO.GetComponent<CharController>().charModel.charName; 
              //   skillController.InitSkillList(charName);
@@ -303,7 +306,7 @@ namespace Combat
         {
 
             // FOCUS CHECK TO BE INCORPORPORATED HERE 
-
+            
             if (CombatService.Instance.combatState != CombatState.INCombat_InSkillSelected)
             {
                 Debug.Log("Combat State not in skill selected"); return;
@@ -330,7 +333,7 @@ namespace Combat
                 Debug.Log("TARGET SELECT" + target.charGO.name);
             }
 
-          
+            
             OnSkillUsed?.Invoke(new SkillEventData(CombatService.Instance.currCharOnTurn
                                     , targetController, currSkillName, skillModel));
 
@@ -344,7 +347,9 @@ namespace Combat
         void On_PostSkillApply()
         {
             // char Death update here 
-           // CharacterService.Instance.UpdateOnDeath(); 
+          //  CharService.Instance.UpdateOnDeath();
+            GridService.Instance.ClearOldTargets();
+            CombatService.Instance.combatState = CombatState.INCombat_normal;
             PostSkillApply?.Invoke();
         }
 
@@ -376,9 +381,6 @@ namespace Combat
                 .AppendCallback(On_PostSkillApply)
                 ;
             eventSeq.Play(); 
-        
-
-
         }
 
         public void On_SkillSelected(CharNames _charName, SkillNames skillName)  // Ally Skill and perk "Skill Select" 
@@ -438,8 +440,8 @@ namespace Combat
         public void On_PostSkill(SkillModel skillModel)
         {
             // ClearPrevData();  // redundant safety .. causing only one FX to play as it clears mainTargetDyna
-
-            skillView.UpdateSkillState(skillModel);
+            if(skillModel != null) // skillmodel is null when no skill can be selected 
+                skillView.UpdateSkillState(skillModel);
 
             CombatEventService.Instance.On_EOT();
             Sequence PauseSeq = DOTween.Sequence();
@@ -450,20 +452,14 @@ namespace Combat
                 .AppendInterval(1f)
                 ;
             PauseSeq.Play();
-
-            // CombatEventService.Instance.On_SOT();
-            Debug.Log("AUTO MOVE FORWARDS >>>>>>>>>>>>" + currSkillName);
+            Debug.Log("AUTO MOVE FORWARDS >>>>>>>>>>>>" + skillModel.skillName);
         }
         public void PerkUnLock(PerkNames _perkName, GameObject btn)
         {       
            // shifted to the skillController    
                          
                
-        }
-        //public void ChangePerkState(PerkNames _perkName, PerkSelectState _state)
-        //{
-        //    allSkillPerksData.Find(t => t.perkName == _perkName).state = _state;
-        //}
+        }   
 
         #endregion
         #region GETTERS and SETTERS
@@ -615,8 +611,11 @@ namespace Combat
             CombatService.Instance.mainTargetDynas.Clear();
             CombatService.Instance.colTargetDynas.Clear();
 
-            PostSkillApply += GridService.Instance.ClearOldTargets;
-            PostSkillApply += ()=> CombatService.Instance.combatState = CombatState.INCombat_normal;
+            //PostSkillApply -= GridService.Instance.ClearOldTargets;
+
+            //PostSkillApply += GridService.Instance.ClearOldTargets;
+            //PostSkillApply -= () => CombatService.Instance.combatState = CombatState.INCombat_normal;
+            //PostSkillApply += ()=> CombatService.Instance.combatState = CombatState.INCombat_normal;
 
         }
         public List<DynamicPosData> GetTargetInRange(SkillModel _skillModel)
@@ -783,3 +782,26 @@ namespace Combat
 //}
 
 // only target pos/tile can be clicked
+
+
+
+
+////////////////////////////////////////////////
+//protected override void Awake()
+//{
+//    base.Awake();
+
+
+
+//    //move and FX controller 
+
+
+
+//   // CombatEventService.Instance.OnCombatInit += skillFactory.SkillsInit;
+//   // CombatEventService.Instance.OnCombatInit += skillFactory.InitPerks; 
+//   //  CombatEventService.Instance.OnCombatInit += InitSkillControllers;
+
+
+
+//    //CombatEventService.Instance.OnSOR += InitSkillManagers; // for enemies
+//}

@@ -42,7 +42,7 @@ namespace Common
             charName = charController.charModel.charName;
             
             CharService.Instance.OnCharInit += InitSkillList;
-           
+            CombatEventService.Instance.OnSOC1 += InitAllSkill_OnCombat;
             Debug.Log("ENABLED" + charName);
             // CharService.Instance.OnCharAddedToParty += InitSkillList;
             SceneManager.sceneLoaded += OnSceneLoaded; 
@@ -62,8 +62,9 @@ namespace Common
                 if (skillView == null)
                     skillView = FindObjectOfType<SkillView>();
                 CombatEventService.Instance.OnSOC1 += InitAllSkill_OnCombat;
+
             }
-                
+
         }
 
 
@@ -71,16 +72,14 @@ namespace Common
         {
             CharMode charMode = charController.charModel.charMode;
             Debug.Log("COMBAT STATE" + charController.charModel.charID);
-            if (charMode == CharMode.Ally)
+            if (charMode == CharMode.Enemy)
             {
-                foreach (SkillBase skillBase in allSkillBases)
-                {
-                    skillBase.SkillInit(this); 
-                }
+                InitSkillList(charController);
             }
-            if(charMode == CharMode.Enemy)
+        
+            foreach (SkillBase skillBase in allSkillBases)
             {
-                InitSkillList(charController); 
+                skillBase.SkillInit(this); 
             }
         }
         public void InitSkillList(CharController charController)
@@ -121,7 +120,7 @@ namespace Common
                     foreach (PerkBaseData perkData in skillPerkData)
                     {
                         PerkBase P1 = SkillService.Instance.skillFactory
-                                    .GetPerkBase(perkData.skillName, perkData.perkName);
+                                            .GetPerkBase(perkData.skillName, perkData.perkName);
 
                         Debug.Log("PERKANME..." + P1.perkName);
                         allPerkBases.Add(P1);// perk bases
@@ -669,7 +668,7 @@ namespace Common
                 allSkillBases.Find(t => t.skillName == selectedSkillModel.skillName).SkillSelected();
                 // SkillSelect?.Invoke(selectedSkillModel.skillName);  // message broadcaster 
 
-                Debug.Log("SELECTED SKILLS" + selectedSkillModel.skillName);
+                Debug.Log("SELECTED SKILLS" + selectedSkillModel.skillName +"Enemy Skillbases" + allSkillBases.Count);                 
 
                 allSkillBases.Find(t => t.skillName == selectedSkillModel.skillName).PopulateAITarget();
                 // Set the target ..i.e currTargetDyna .. etc 
@@ -684,10 +683,9 @@ namespace Common
         public SkillModel SkillSelectByAI()
         {
             float netBaseWt = 0f; ClickableSkills.Clear();
-            foreach (SkillNames skillName in unLockedSkills)
-            {
-                SkillModel skillModel = allSkillModels.Find(t => t.skillName == skillName);
-                skillModel.SetSkillState(skillView.UpdateSkillState(skillModel));
+            foreach (SkillModel skillModel in allSkillModels)
+            {   
+                //skillModel.SetSkillState(skillView.UpdateSkillState(skillModel));
                 if (skillModel.GetSkillState() == SkillSelectState.Clickable)
                 {
                     Debug.Log("SKILL MODEL" + skillModel.skillName);

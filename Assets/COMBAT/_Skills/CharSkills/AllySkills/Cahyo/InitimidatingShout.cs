@@ -47,7 +47,7 @@ namespace Combat
         public override void BaseApply()
         {
 
-            CombatEventService.Instance.OnEOR += Tick;
+            CombatEventService.Instance.OnEOR1 += Tick;
             targetsDynas = GridService.Instance.GetAllOccupiedbyCharMode(CharMode.Enemy);
 
 

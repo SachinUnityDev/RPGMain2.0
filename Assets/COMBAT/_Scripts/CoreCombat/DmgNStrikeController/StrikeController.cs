@@ -78,7 +78,7 @@ namespace Combat
         {
             strikeCharModel = new StrikeCharModel();
             CombatEventService.Instance.OnEOC += EOCTick;
-            CombatEventService.Instance.OnEOR += EORTick;
+            CombatEventService.Instance.OnEOR1 += EORTick;
         }
 
         public bool FocusCheck()// Magical only .. 
@@ -260,7 +260,7 @@ namespace Combat
             }
         }
 
-        public void EORTick()  // to be completed
+        public void EORTick(int roundNo)  // to be completed
         {
             foreach (DmgBuffData dmgBuffData in allDmgBuffData.ToList())
             {

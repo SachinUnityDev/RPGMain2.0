@@ -130,9 +130,9 @@ namespace Combat
 
             }
             // populate round and stamina Info
-            PopulateHexesInSkillCard();
-            PopulateLowerValues();
-            PopulateUpperCorners();
+            FillHexesInSkillCard();
+            FillSkillCardLowerValues();
+            FillSkillCardUpperCorners();
             PopulateSkillState();
         }
 
@@ -141,10 +141,8 @@ namespace Combat
             // grab the UI and show the state
             skillStateTxt.text = skillModel.GetSkillState().ToString();
 
-
-
         }
-        public void PopulateLowerValues()
+        public void FillSkillCardLowerValues()
         {
 
             skillCard.transform.GetChild(1).GetChild(2).GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text
@@ -162,7 +160,7 @@ namespace Combat
                 = str;
 
         }
-        public void PopulateUpperCorners()
+        public void FillSkillCardUpperCorners()
         {
             // get attack type from skillmodel
             // get respective sprite and background from skillHexSO
@@ -181,7 +179,7 @@ namespace Combat
             skillCard.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Image>().sprite = SLSprite;
         }
 
-        public void PopulateHexesInSkillCard()
+        public void FillHexesInSkillCard()
         {
             Sprite sprite1 = null, sprite2 = null, sprite3 = null;
             //Debug.Log("Skillcard data " + skillCardData); 
@@ -346,7 +344,6 @@ namespace Combat
 
             skillModel.descLines = finalDesc;
         }
-
         List<string> SumUpLS(List<string> stringLS)
         {
             sunStrReturn = new List<string>();
@@ -364,9 +361,6 @@ namespace Combat
 
             return sunStrReturn;
         }
-
-
-
         List<string> SortbyDamageType(List<string> stringLS)
         {
             List<string> strReturn = new List<string>();

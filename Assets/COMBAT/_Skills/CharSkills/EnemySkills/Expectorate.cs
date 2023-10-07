@@ -18,8 +18,8 @@ namespace Combat
         private float _chance =0;
         public override float chance { get => _chance; set => _chance = value; }
 
-        Rodent rodent;
-        Vermin vermin; 
+        //Rodent rodent;
+        //Vermin vermin; 
         public override void PopulateTargetPos()
         {
             skillModel.targetPos.Clear();
@@ -38,6 +38,9 @@ namespace Combat
         {
             if (IsTargetMyEnemy())
             {
+                if (targetController == null)
+                    Debug.Log("targetController is null"); 
+                else
                 targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
                              , DamageType.Earth, skillModel.damageMod);
             }
@@ -53,49 +56,60 @@ namespace Combat
 
         public override void ApplyFX3()
         {
-            rodent = new Rodent();
-            //rodent.ApplyPassiveFX(targetController);
-            vermin = new Vermin();
-           // vermin.ApplyPassiveFX(targetController);
+           // rodent = new Rodent();
+           // //rodent.ApplyPassiveFX(targetController);
+           // vermin = new Vermin();
+           //// vermin.ApplyPassiveFX(targetController);
         }
-        public override void SkillEnd()
-        {
-            base.SkillEnd();
-            //if (rodent != null)
-            //   // rodent.RemovePassiveFX(targetController);
-            //if (vermin != null)
-            //    vermin.RemovePassiveFX(targetController);
-        }
+        //public override void SkillEnd()
+        //{
+        //    base.SkillEnd();
+        //    if (rodent != null)
+        //        // rodent.RemovePassiveFX(targetController);
+        //        if (vermin != null)
+        //            vermin.RemovePassiveFX(targetController);
+        //}
         public override void ApplyVFx()
         {        
-            SkillService.Instance.skillFXMoveController.MultiTargetRangeFX(PerkType.None);            
+          //  SkillService.Instance.skillFXMoveController.MultiTargetRangeFX(PerkType.None);            
         }
 
         public override void PopulateAITarget()
         {
             PopulateTargetPos();
-            DynamicPosData tempTarget = null; 
+            SkillService.Instance.currentTargetDyna = null;
+            DynamicPosData tempTarget = null;
+            DynamicPosData randomTarget = null; 
             foreach (CellPosData cell in skillModel.targetPos)
             {
                 DynamicPosData dyna = GridService.Instance.GetDynaAtCellPos(cell.charMode, cell.pos);
-                CharController targetController = dyna.charGO.GetComponent<CharController>(); 
+                CharController targetCtrl = dyna.charGO.GetComponent<CharController>(); 
 
                 if (dyna != null)
                 {
-                    if (targetController.charStateController.HasCharDOTState(CharStateName.BleedLowDOT))
+                    if (targetCtrl.charStateController.HasCharDOTState(CharStateName.BleedLowDOT))
                     {
-                        SkillService.Instance.currentTargetDyna = dyna;
-                        return; 
+                        tempTarget= dyna;
+                      
                     }
-                    else if (targetController.GetAttrib(AttribName.earthRes).currValue < 25f)
+                    else if (targetCtrl.GetAttrib(AttribName.earthRes).currValue < 25f)
                     {
-                        SkillService.Instance.currentTargetDyna = dyna;
-                        return; 
+                        tempTarget = dyna;
                     }
-                    tempTarget = dyna;
+                    else
+                    {
+                        randomTarget= dyna;
+                    }
+                    if (tempTarget != null)
+                    {
+                        SkillService.Instance.currentTargetDyna = tempTarget; break;
+                    }
                 }
             }
-            SkillService.Instance.currentTargetDyna = tempTarget;
+            if (SkillService.Instance.currentTargetDyna == null)
+            {
+                SkillService.Instance.currentTargetDyna = randomTarget; 
+            }
         }
 
         public override void DisplayFX1()

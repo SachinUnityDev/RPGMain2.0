@@ -12,8 +12,8 @@ namespace Combat
         public event Action OnSOTactics; 
         public event Action OnSOT;
         public event Action OnEOT;
-        public event Action OnSOR;
-        public event Action OnEOR;
+        public event Action <int> OnSOR1;// round no
+        public event Action <int> OnEOR1;
         public event Action OnSOC;
         public event Action<CombatState> OnSOC1;
         public event Action OnCombatInit;       
@@ -41,8 +41,6 @@ namespace Combat
         public event Action<CharController> OnLosingAction;
 
         public event Action<CharController> OnHasteCheck; 
-
-
 
         public event Action OnCharClicked;
         public event Action OnCharHovered;
@@ -95,10 +93,13 @@ namespace Combat
         }
         public void On_SOC()
         {
-            CombatService.Instance.combatState = CombatState.INCombat_normal;   
-            OnSOC?.Invoke();   
+            CombatService.Instance.combatState = CombatState.INCombat_normal;
+           
+
+            OnSOC?.Invoke();
+            SkillService.Instance.InitSkillControllers();
             OnSOC1?.Invoke(CombatService.Instance.combatState);
-            SkillService.Instance.InitSkillControllers(); 
+           
         }
 
         public void On_EOC()
@@ -120,16 +121,17 @@ namespace Combat
                 }
             }
         }
-        public void On_SOR()
+        public void On_SOR(int roundNo)
         {
-            OnSOR?.Invoke();
+            Debug.Log("SOR Triggered" + roundNo);            
+            OnSOR1?.Invoke(roundNo);         
         }
-        public void On_EOR()
+        public void On_EOR(int roundNo)
         {
             if(CombatService.Instance.combatState == CombatState.INCombat_normal)
             {
-                CombatService.Instance.currentRound++;
-                OnEOR?.Invoke();
+                Debug.Log("EOR triggered");                 
+                OnEOR1?.Invoke(roundNo);
             }       
         }
 
@@ -143,8 +145,12 @@ namespace Combat
         {           
             if (CheckEndOFRound())
             {
-                On_EOR();
-                On_SOR(); 
+                //  Debug.Log("Check end of round");
+                int roundNo = CombatService.Instance.currentRound; 
+                On_EOR(roundNo);
+                Debug.Log("Check end of round");
+                roundNo = ++CombatService.Instance.currentRound;
+                On_SOR(roundNo); 
             }
             Debug.Log("@@@@@SOT");
             OnSOT?.Invoke(); 
@@ -210,7 +216,7 @@ namespace Combat
 
         public void IsActionSubcribed()
         {
-            foreach (Action del in OnSOR.GetInvocationList())
+            foreach (Action del in OnSOR1.GetInvocationList())
             {
                 Debug.Log("SOR Subs" + del.Method.Name);
             }
@@ -240,7 +246,7 @@ namespace Combat
             if (Input.GetKeyDown(KeyCode.O))
             {
                 Debug.Log("SOR");
-                On_SOR();
+                On_SOR(1);
             }
             if (Input.GetKeyDown(KeyCode.P))
             {
@@ -254,6 +260,11 @@ namespace Combat
                 On_CharOnTurnSet();
             }
 
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                Debug.Log("On CharOn Turn Set");
+                On_EOT();
+            }
             //if (Input.GetKeyDown(KeyCode.J))
             //{
             //    IsActionSubcribed();

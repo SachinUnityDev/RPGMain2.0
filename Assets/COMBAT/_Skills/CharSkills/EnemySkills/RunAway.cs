@@ -21,6 +21,7 @@ namespace Combat
 
         public override void PopulateTargetPos()
         {
+            skillModel.targetPos.Clear();   
             CellPosData selfCellPos = new CellPosData(myDyna.charMode, myDyna.currentPos);
             skillModel.targetPos.Add(selfCellPos);                
         }
@@ -37,18 +38,18 @@ namespace Combat
         public override void ApplyFX3()
         {
         }
-        public override void SkillEnd()
-        {
-            base.SkillEnd();
+        //public override void SkillEnd()
+        //{
+        //    base.SkillEnd();
 
-            //targetController.ChangeStat(CauseType.CharSkill, (int)skillName, charController
-            //    , StatsName.dodge, -3);
-            // if (rodent != null)
-            //  rodent.RemovePassiveFX(targetController);
-            //if (vermin != null)
-            //    vermin.RemovePassiveFX(targetController);
+        //    //targetController.ChangeStat(CauseType.CharSkill, (int)skillName, charController
+        //    //    , StatsName.dodge, -3);
+        //    // if (rodent != null)
+        //    //  rodent.RemovePassiveFX(targetController);
+        //    //if (vermin != null)
+        //    //    vermin.RemovePassiveFX(targetController);
 
-        }
+        //}
 
         public override void DisplayFX1()
         {

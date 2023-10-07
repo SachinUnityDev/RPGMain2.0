@@ -58,7 +58,7 @@ namespace Combat
        
             // COMBAT EVENT START EVENTS
             CombatEventService.Instance.OnSOC += StartOfCombat;
-            CombatEventService.Instance.OnSOR += StartOfRound;
+            CombatEventService.Instance.OnSOR1 += StartOfRound;
            // CombatEventService.Instance.OnCharOnTurnSet += StartOfTurn;
             CombatEventService.Instance.OnCharDeath += DeathOfCharUpdate;
             CharStatesService.Instance.OnCharStateStart += CharStateStart;
@@ -72,7 +72,7 @@ namespace Combat
         private void OnDisable()
         {
             CombatEventService.Instance.OnSOC -= StartOfCombat;
-            CombatEventService.Instance.OnSOR -= StartOfRound;
+            CombatEventService.Instance.OnSOR1 -= StartOfRound;
             // CombatEventService.Instance.OnCharOnTurnSet += StartOfTurn;
             CombatEventService.Instance.OnCharDeath -= DeathOfCharUpdate;
             CharStatesService.Instance.OnCharStateStart -= CharStateStart;
@@ -128,9 +128,8 @@ namespace Combat
             RefreshCombatLogUI();
         }
         //***********START ROUND **************//
-        void StartOfRound()
-        {
-            int roundNo = CombatService.Instance.currentRound; 
+        void StartOfRound(int roundNo)
+        {   
             string str = "Round #" + roundNo +"Starts";
             combatLog.Add(new CombatLogData(LogBackGround.HighHL, str));
             RefreshCombatLogUI();

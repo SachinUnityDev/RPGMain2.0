@@ -28,21 +28,22 @@ namespace Combat
         private void Start()
         {
             index = -1;
+            //CombatEventService.Instance.OnSOT -= SetCharOnTurn;
+            //CombatEventService.Instance.OnSOR -= OnRoundStart;            
             CombatEventService.Instance.OnSOT += SetCharOnTurn;
-            CombatEventService.Instance.OnSOR += OnRoundStart;
+            CombatEventService.Instance.OnSOR1 += OnRoundStart;
            
         }
         private void OnDisable()
         {
-            CombatEventService.Instance.OnSOT += SetCharOnTurn;
-            CombatEventService.Instance.OnSOR += OnRoundStart;
+            CombatEventService.Instance.OnSOT -= SetCharOnTurn;
+            CombatEventService.Instance.OnSOR1 -= OnRoundStart;
         }
         public void SetCharOnTurn()
         {
-            if (CombatService.Instance.combatState != CombatState.INCombat_normal) {
-
+            if (CombatService.Instance.combatState != CombatState.INCombat_normal) 
+            {
                 Debug.Log("wrong STATE return " + index);
-
                 return;
             } 
          
@@ -61,8 +62,9 @@ namespace Combat
             CombatService.Instance.currentTurn = index + 1;
         }
 
-        void OnRoundStart()
+        void OnRoundStart(int roundNo)
         {
+            Debug.Log("Round Start Triggerd" + roundNo); 
             SetTurnOrder();
             //gameObject.GetComponent<TopPortraitsController>().SetDefaultTurnOrder();
             //gameObject.GetComponent<TopPortraitsController>().BuildCharPosData(); 
@@ -73,14 +75,13 @@ namespace Combat
             charCount= CharService.Instance.charsInPlayControllers.Count;
             allyTurnOrder = charTurnOrder.Where(t => t.charModel.charMode == CharMode.Ally).ToList();
             enemyTurnOrder = charTurnOrder.Where(t => t.charModel.charMode == CharMode.Enemy).ToList();
-            
         }
         public void ReorderAfterCharDeath(CharController charController)
         {
             // RESET ALL LIST 
             charTurnOrder.Remove(charController);
             UpdateAllyEnemyList(); // update all three list charturnOrder, AllyTurnOrder and EnemyTurnOrder
-            OnRoundStart();
+            OnRoundStart(CombatService.Instance.currentRound);
 
 
             //RESET INDEX VALUE ON NEW LISTS 

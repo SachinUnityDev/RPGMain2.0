@@ -74,7 +74,7 @@ namespace Common
             if (timeFrame == TimeFrame.EndOfRound
                 && castTime > 0)
             {
-                CombatEventService.Instance.OnEOR += RoundTick; 
+                CombatEventService.Instance.OnEOR1 += RoundTick; 
             }
             if (timeFrame == TimeFrame.EndOfCombat)
             {
@@ -94,9 +94,9 @@ namespace Common
         {
 
         }
-        protected virtual void RoundTick()
+        protected virtual void RoundTick(int roundNo)
         {
-            int roundCounter = CombatService.Instance.currentRound - startRound;
+            int roundCounter = roundNo - startRound;
             if (roundCounter >= castTime)
                 EndState();
         }
@@ -131,8 +131,8 @@ namespace Common
                 }
             }
 
-            CombatEventService.Instance.OnEOR -= CombatTick;
-            CombatEventService.Instance.OnEOR -= RoundTick;
+            CombatEventService.Instance.OnEOC -= CombatTick;
+            CombatEventService.Instance.OnEOR1 -= RoundTick;
         }
 
 

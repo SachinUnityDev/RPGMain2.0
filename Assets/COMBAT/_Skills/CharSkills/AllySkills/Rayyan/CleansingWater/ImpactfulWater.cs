@@ -23,46 +23,29 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-       // public override List<DynamicPosData> targetDynas => new List<DynamicPosData>();
-        int targetHit = 0;  
+        int targetHit = 0;
 
-   
-        //public override void SkillHovered()
-        //{
-        //    base.SkillHovered();    
-        //    //SkillService.Instance.SkillWipe += skillController.allPerkBases.Find(t => t.skillName == skillName
-        //    //             && t.skillLvl == SkillLvl.Level2 && t.state == PerkSelectState.Clicked).WipeFX2;
 
-        //    //SkillService.Instance.SkillWipe += skillController.allPerkBases.Find(t => t.skillName == skillName
-        //    //&& t.skillLvl == SkillLvl.Level2 && t.state == PerkSelectState.Clicked).WipeFX3;
-        //}
+        public override void SkillHovered()
+        {
+            base.SkillHovered();
+            skillModel.staminaReq = 7;  
+        }
 
-        //public override void SkillSelected()
-        //{
-        //    base.SkillSelected();
-
-        //    //SkillService.Instance.SkillFXRemove +=  skillController.allPerkBases.Find(t => t.skillName == skillName 
-        //    //                                        && t.skillLvl == SkillLvl.Level2
-        //    //                                        && t.state == PerkSelectState.Clicked).RemoveFX2;
-        //    //SkillService.Instance.SkillFXRemove +=  skillController.allPerkBases.Find(t => t.skillName == skillName 
-        //    //                                        && t.skillLvl == SkillLvl.Level2
-        //    //                                        && t.state == PerkSelectState.Clicked).RemoveFX3;
-
-        //}
-  
         public override void ApplyFX1()
-        {            
+        {    
             if (IsTargetEnemy())
             {
                 DynamicPosData targetDyna = GridService.Instance.GetDyna4GO(targetGO);
 
-                List<DynamicPosData> allAdjOccupied = GridService.Instance.gridController
+                List<DynamicPosData> allColTargets = GridService.Instance.gridController
                                                                 .GetAllAdjDynaOccupied(targetDyna);
 
-                allAdjOccupied.ForEach(t => t.charGO.GetComponent<CharController>()
-                        .damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Water, 80f));
+                allColTargets.ForEach(t => t.charGO.GetComponent<CharController>()
+                        .damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
+                        , DamageType.Water, 80f));
 
-                targetHit = targetHit + allAdjOccupied.Count;
+                targetHit = allColTargets.Count +1;
             }
         }
 
@@ -75,7 +58,7 @@ namespace Combat
         public override void ApplyFX2()
         {
             //Debug.Log("Target Hit" + targetHit);
-            for (int i = 0; i <= targetHit; i++)
+            for (int i = 0; i < targetHit; i++)
             {
                 charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatName.fortitude, +3f);
             }
@@ -94,12 +77,7 @@ namespace Combat
         {
 
         }
-        public override void SkillEnd()
-        {
-            if(IsTargetEnemy())
-                targetController.charStateController.RemoveCharState(CharStateName.Confused);         
-        }
-
+      
         public override void DisplayFX2()
         {
             str2 = $"<style=Enemy> +3 Fortitude for every target hit";

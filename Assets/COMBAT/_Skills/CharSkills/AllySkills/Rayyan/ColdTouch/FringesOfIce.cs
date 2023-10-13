@@ -8,7 +8,6 @@ namespace Combat
     public class FringesOfIce : PerkBase
     {
         public override PerkNames perkName => PerkNames.FringesOfIce;
-
         public override PerkType perkType => PerkType.B1;
 
         private PerkSelectState _state = PerkSelectState.Clickable;

@@ -81,7 +81,7 @@ namespace Combat
         }
 
    
-        public void AddController()
+        public void AddCombatControllers()
         {
             foreach (CharController charCtrl in CharService.Instance.charsInPlayControllers)
             {
@@ -93,6 +93,11 @@ namespace Combat
 
                 if (charCtrl.strikeController == null)
                     charCtrl.strikeController = charCtrl.gameObject.AddComponent<StrikeController>();
+
+                charCtrl.damageController.Init(); 
+                charCtrl.strikeController.Init() ;
+                charCtrl.combatController.Init() ;
+
             }
         }
 

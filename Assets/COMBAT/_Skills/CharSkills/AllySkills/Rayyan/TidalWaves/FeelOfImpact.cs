@@ -25,19 +25,35 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-      //  public override List<DynamicPosData> targetDynas => new List<DynamicPosData>();
+        //  public override List<DynamicPosData> targetDynas => new List<DynamicPosData>();
+        public override void SkillSelected()
+        {
+            base.SkillSelected();
+            SkillService.Instance.SkillFXRemove += skillController.allPerkBases
+                .Find(t => t.skillName == skillName && t.skillLvl == SkillLvl.Level1).RemoveFX1;
+        }
 
-  
         public override void ApplyFX1()
         {
-            if (currDyna != null)
+            if (targetController != null)
             {
-                if (currDyna.currentPos == 4)
+                foreach (DynamicPosData dyna in CombatService.Instance.mainTargetDynas)
                 {
-                    targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
-                                                                    ,DamageType.Water, 50f, false); 
+                    if(dyna.currentPos == 4)
+                    {
+                        dyna.charGO.GetComponent<CharController>().damageController.ApplyDamage(charController
+                                            , CauseType.CharSkill, (int)skillName
+                                            , DamageType.Water, skillModel.damageMod+50f, false);
+                    }
+                    else
+                    {
+
+                        dyna.charGO.GetComponent<CharController>().damageController.ApplyDamage(charController
+                                            , CauseType.CharSkill, (int)skillName
+                                            , DamageType.Water, skillModel.damageMod, false);
+                    }
                 }
-            }    
+            }
         }
 
         public override void ApplyFX2()

@@ -52,37 +52,39 @@ namespace Combat
             if (hpPercent < 0.4f)
             {
                 charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                                , charController.charModel.charID, CharStateName.Enraged);
+                                , charController.charModel.charID, CharStateName.Enraged, skillModel.timeFrame, skillModel.castTime);
             }
         }
 
-        public override void SkillEnd()
-        {
-            base.SkillEnd();
-            charController.charStateController.RemoveCharState(CharStateName.Enraged);
-        }
+        //public override void SkillEnd()
+        //{
+        //    base.SkillEnd();
+        //    charController.charStateController.RemoveCharState(CharStateName.Enraged);
+        //}
 
         public override void ApplyFX2()
         {
             AttribData luckStat = charController.GetAttrib(AttribName.luck);
-            if (luckStat.currValue == 12 && !subscribed)
+            if (luckStat.currValue == 12 )
+               // && !subscribed)
             {
-                charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName,
-                            charID, AttribName.fortOrg, 2, TimeFrame.EndOfCombat, 1, true);
+                RegainAP(); 
+                //charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName,
+                //            charID, AttribName.fortOrg, 2, TimeFrame.EndOfCombat, 1, true);
 
-                // charController.ChangeStat(CauseType.CharSkill, (int)skillName, charController, StatsName.fortitude, +2, false);
-                QuestEventService.Instance.OnEOQ += fortEOQ;
-                subscribed = true;
+                //// charController.ChangeStat(CauseType.CharSkill, (int)skillName, charController, StatsName.fortitude, +2, false);
+                //QuestEventService.Instance.OnEOQ += fortEOQ;
+                //subscribed = true;
             }
         }
 
-        void fortEOQ()
-        {
-            //  charController.ChangeStat(CauseType.CharSkill, (int)skillName, charController, StatsName.fortitude, -2, false);
-           // charController.charModel.fortitudeOrg -= 2;
-            QuestEventService.Instance.OnEOQ -= fortEOQ;
-            subscribed = false;
-        }
+        //void fortEOQ()
+        //{
+        //    //  charController.ChangeStat(CauseType.CharSkill, (int)skillName, charController, StatsName.fortitude, -2, false);
+        //   // charController.charModel.fortitudeOrg -= 2;
+        //    QuestEventService.Instance.OnEOQ -= fortEOQ;
+        //    subscribed = false;
+        //}
         public override void ApplyFX3()
         {
         }
@@ -102,8 +104,8 @@ namespace Combat
             str0 = $"+6<style=Attributes> Acc </style>";
             SkillService.Instance.skillModelHovered.descLines.Add(str0);
 
-            str1 = $"If Luck 12, +2<style=Attributes> Fort org </style>, until eoq";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
+            //str1 = $"If Luck 12, +2<style=Attributes> Fort org </style>, until eoq";
+            //SkillService.Instance.skillModelHovered.descLines.Add(str1);
 
         }
 

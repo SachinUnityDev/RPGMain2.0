@@ -28,13 +28,33 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        int stack = 0; 
         // on damage applied check if Baran hit crit 
         // chk if targets is bleeding 
         // for each bleeding target give him +1 luck EOQ
+        public override void BaseApply()
+        {
+            base.BaseApply();
+            targetController.damageController.OnDamageApplied -= ApplyCrit;
+            targetController.damageController.OnDamageApplied += ApplyCrit; 
 
+
+        }
+
+        void ApplyCrit(DmgAppliedData dmgAppliedData)
+        {
+            if(dmgAppliedData.strikeType == StrikeType.Crit)
+            {
+                if (targetController.GetComponent<CharStateController>().HasCharDOTState(CharStateName.BleedLowDOT))
+                {
+                    charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                    , AttribName.luck, 1, TimeFrame.EndOfQuest, 1, true);
+                }   
+            }
+        }
         public override void ApplyFX1()
         {
+
+
         }
 
         public override void ApplyFX2()
@@ -51,6 +71,11 @@ namespace Combat
 
         public override void ApplyVFx()
         {
+        }
+        public override void SkillEnd()
+        {
+            base.SkillEnd();
+            targetController.damageController.OnDamageApplied -= ApplyCrit;
         }
         public override void DisplayFX1()
         {

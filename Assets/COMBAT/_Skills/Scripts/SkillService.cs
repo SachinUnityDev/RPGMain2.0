@@ -79,6 +79,8 @@ namespace Combat
         public List<SkillController1> allSkillControllers = new List<SkillController1>();   
         public SkillController1 currSkillController = new SkillController1();
 
+        [Header(" Skill Model")]
+        public SkillModel currSkillModel; 
         [Header("ALL CTRL AI RELATED")]
        // public List<SkillAIController> allSKillAIControllers = new List<SkillAIController>();
 
@@ -212,11 +214,11 @@ namespace Combat
                     break; 
                 }
             }
-            if(defaultSkillModel == null)
-            {
-                if(charOnTurn.charModel.charMode == CharMode.Ally)
-                 On_PostSkill(defaultSkillModel); // pass the turn
-            }
+            //if(defaultSkillModel == null)
+            //{
+            //    if(charOnTurn.charModel.charMode == CharMode.Ally)
+            //     On_PostSkill(defaultSkillModel); // pass the turn
+            //}
             //SkillDataSO skillDataSo = GetSkillSO(CombatService.Instance.currCharOnTurn.charModel.charName);
             // defaultSkillName =  skillDataSo.allSkills[0].skillName; 
         }
@@ -231,12 +233,12 @@ namespace Combat
              skillController.allSkillBases.ForEach(t => t.PopulateTargetPos());
             if(currCharMode == CharMode.Ally)
              skillController.allPerkBases.ForEach(t => t.AddTargetPos());
-             skillController.CheckNUpdateSkillState(); 
+            // skillController.CheckNUpdateSkillState();  // checked in view not needed here
         }
 
         public void InitSkillControllers()
         {
-            CombatService.Instance.AddController();
+            CombatService.Instance.AddCombatControllers();
             foreach (GameObject charGO in CharService.Instance.charsInPlay)
             {
                 SkillController1 skillController = charGO.GetComponent<SkillController1>(); 
@@ -332,8 +334,6 @@ namespace Combat
                     return;
                 Debug.Log("TARGET SELECT" + target.charGO.name);
             }
-
-            
             OnSkillUsed?.Invoke(new SkillEventData(CombatService.Instance.currCharOnTurn
                                     , targetController, currSkillName, skillModel));
 
@@ -347,7 +347,7 @@ namespace Combat
         void On_PostSkillApply()
         {
             // char Death update here 
-          //  CharService.Instance.UpdateOnDeath();
+           // CharService.Instance.UpdateOnDeath();// EOt to Manage
             GridService.Instance.ClearOldTargets();
             CombatService.Instance.combatState = CombatState.INCombat_normal;
             PostSkillApply?.Invoke();
@@ -440,9 +440,39 @@ namespace Combat
         public void On_PostSkill(SkillModel skillModel)
         {
             // ClearPrevData();  // redundant safety .. causing only one FX to play as it clears mainTargetDyna
-            if(skillModel != null) // skillmodel is null when no skill can be selected 
-                skillView.UpdateSkillState(skillModel);
+        
+            CharController currCharOnturn = CombatService.Instance.currCharOnTurn;
 
+            Debug.Log(skillModel.charName +" MOVE FORWARDS >>>>>>>>>>>>" + skillModel.skillName);
+            // if ally reduce action pts 
+            if (currCharOnturn.charModel.charMode == CharMode.Ally)
+            {
+                CombatController combatController = currCharOnturn.GetComponent<CombatController>();
+                combatController.UpdateActionPts();
+                if (skillModel != null) // skillmodel is null when no skill can be selected 
+                    skillView.UpdateSkillState(skillModel);
+                
+
+                if (combatController.actionPts > 0)
+                {
+                    CombatService.Instance.roundController.SetSameCharOnTurn();
+                    return;
+                }
+                //else
+                //{
+                //    Move2Nextturn();
+                //}
+            }
+            else
+            {
+                if (skillModel != null) // skillmodel is null when no skill can be selected 
+                    skillView.UpdateSkillState(skillModel);
+                Move2Nextturn();
+            }
+        }
+
+        public void Move2Nextturn()
+        {
             CombatEventService.Instance.On_EOT();
             Sequence PauseSeq = DOTween.Sequence();
 
@@ -452,7 +482,7 @@ namespace Combat
                 .AppendInterval(1f)
                 ;
             PauseSeq.Play();
-            Debug.Log("AUTO MOVE FORWARDS >>>>>>>>>>>>" + skillModel.skillName);
+           
         }
         public void PerkUnLock(PerkNames _perkName, GameObject btn)
         {       

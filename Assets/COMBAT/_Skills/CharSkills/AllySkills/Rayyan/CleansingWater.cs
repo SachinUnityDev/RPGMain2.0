@@ -59,7 +59,7 @@ namespace Combat
         {           
            if(IsTargetMyAlly())
             targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                                    , AttribName.haste, 2, TimeFrame.EndOfRound, skillModel.castTime,true);
+                                    , AttribName.haste, 2, skillModel.timeFrame, skillModel.castTime,true);
         }
 
         public override void DisplayFX2()
@@ -70,8 +70,8 @@ namespace Combat
 
         public override void ApplyFX3()
         {          
-            charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                                        , charController.charModel.charID, CharStateName.Soaked);
+            targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName, charController.charModel.charID
+                                                            , CharStateName.Soaked, skillModel.timeFrame, skillModel.castTime);
         }
         public override void DisplayFX3()
         {
@@ -88,14 +88,7 @@ namespace Combat
         {          
             SkillService.Instance.skillFXMoveController.SingleTargetRangeStrike(PerkType.None); 
 
-        }
-        public override void SkillEnd()
-        {
-            base.SkillEnd(); 
-            //if (IsTargetMyEnemy()) return;
-            //targetController.ChangeStat(CauseType.CharSkill, (int)skillName, charController, StatsName.haste, -2);
-            targetController.charStateController.RemoveCharState(CharStateName.Soaked);
-        }
+        } 
         public override void PopulateAITarget()
         {
            

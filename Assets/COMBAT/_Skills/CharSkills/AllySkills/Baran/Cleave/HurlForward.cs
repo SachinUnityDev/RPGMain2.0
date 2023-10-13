@@ -34,7 +34,7 @@ namespace Combat
 
             skillModel.targetPos.Clear();
             targetDynaCopy.Clear(); 
-            //CombatService.Instance.mainTargetDynas.Clear(); 
+            CombatService.Instance.mainTargetDynas.Clear(); 
             for (int i = 1; i < 8; i++)
             {
                 CellPosData cell = new CellPosData(CharMode.Enemy, i);
@@ -47,12 +47,19 @@ namespace Combat
                 }        
             }
         }
-        public override void BaseApply()
-        {
-            base.BaseApply();
-            skillModel.cd = 2;
 
+        public override void SkillHovered()
+        {
+            base.SkillHovered();
+            skillModel.cd = 2;
+            skillModel.attackType = AttackType.Ranged;
         }
+
+        //public override void BaseApply()
+        //{
+        //    base.BaseApply();
+        
+        //}
 
         public override void ApplyFX1()
         {
@@ -69,17 +76,17 @@ namespace Combat
             }
 
         }
-        public override void SkillEnd()
-        {
-            base.SkillEnd();
-            //foreach (DynamicPosData dyna in targetDynaCopy)
-            //{
-            //    dyna.charGO.GetComponent<CharController>()
-            //        .ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.focus, 2);
+        //public override void SkillEnd()
+        //{
+        //    base.SkillEnd();
+        //    //foreach (DynamicPosData dyna in targetDynaCopy)
+        //    //{
+        //    //    dyna.charGO.GetComponent<CharController>()
+        //    //        .ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.focus, 2);
 
-            //}
+        //    //}
 
-        }
+        //}
         public override void ApplyFX3()
         {
         }

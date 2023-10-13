@@ -140,17 +140,9 @@ namespace Combat
         }
 
         public virtual void PostApplyFX()
-        {
-            if (skillModel.cd > 0)
-            {
-                skillModel.SetSkillState(SkillSelectState.UnClickable_InCd);
-            }
-            // Debug.Log("Post apply EXCECUTED");
-           
+        {  
             SkillService.Instance.On_PostSkill(skillModel);          
-            // set in cool down state
-            // if (skillModel.cd == -1) return;
-            //  SkillServiceView.Instance.SetSkillState(ref skillModel);            
+        
 
         }
 
@@ -205,7 +197,37 @@ namespace Combat
             CharMode targetCharMode = SkillService.Instance.currentTargetDyna.charMode;
             return (charController.charModel.charMode != targetCharMode);
         }
+
+        protected void AddTargetInRange(int startCell, int endCell, CharMode charMode)
+        {
+            for (int i = startCell; i <= endCell; i++)
+            {
+                CellPosData cellPosData = new CellPosData(charMode, i);
+                AddTarget(cellPosData);
+            }
+        }
+
+        protected void AddTarget(CellPosData cellPosData)
+        {
+
+            DynamicPosData dyna = GridService.Instance.gridView.GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
+            if (dyna != null)
+            {
+                skillModel.targetPos.Add(cellPosData);
+                CombatService.Instance.mainTargetDynas.Add(dyna);
+            }
+
+        }
         #endregion
+
+        protected void RegainAP()
+        {
+            CombatController combatController =
+                    charController.GetComponent<CombatController>();
+            if (combatController != null)
+                combatController.actionPts++;
+        }
+
     }
 
 }

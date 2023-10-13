@@ -43,18 +43,13 @@ namespace Combat
         {
           if(targetController)
             charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                                        , charController.charModel.charID, CharStateName.Confused);
+                                        , charController.charModel.charID, CharStateName.Confused, skillModel.timeFrame, skillModel.castTime);
         }
 
         public override void ApplyFX2()
         {
         }
-        public override void SkillEnd()
-        {
-            base.SkillEnd();
-            if (targetController)
-                charController.charStateController.RemoveCharState(CharStateName.Confused);
-        }
+     
         public override void ApplyFX3()
         {
         }

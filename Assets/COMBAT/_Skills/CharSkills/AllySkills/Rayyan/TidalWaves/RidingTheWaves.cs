@@ -24,59 +24,34 @@ namespace Combat
         public override SkillLvl skillLvl => SkillLvl.Level3;
 
         private float _chance = 0f;
-        public override float chance { get => _chance; set => _chance = value; }
-        //    public override List<DynamicPosData> targetDynas => new List<DynamicPosData>();
+        public override float chance { get => _chance; set => _chance = value; }      
       
-        public override void AddTargetPos()
-        {
-            if (skillModel == null) return;
-            if (currDyna != null && skillModel != null)
-            {
-                CellPosData cell = new CellPosData(currDyna.charMode, currDyna.currentPos);
-                skillModel.targetPos.Add(cell);
-            }
-            // should I mark my self as target 
-            //myDyna.currentPos == i))
-            //    {
-            //    CellPosData cellPosData = new CellPosData(CharMode.Ally, i);
-            //    DynamicPosData dyna = GridService.Instance.gridView.GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
-
-        }
   
         public override void ApplyFX1()
         {
-            targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                    , charController.charModel.charID, CharStateName.Soaked); 
+            if(targetController)
+                charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                    , charController.charModel.charID, CharStateName.Soaked,skillModel.timeFrame, skillModel.castTime); 
         }
 
         public override void ApplyFX2()
         {
-          
+            if (targetController)
+            {
+                List<DynamicPosData> allAdjOccupied = GridService.Instance.gridController
+                                                                  .GetAllAdjDynaOccupied(currDyna);
+
+                allAdjOccupied.ForEach(t=>t.charGO.GetComponent<CharController>().charStateController.
+               ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                    , charController.charModel.charID, CharStateName.Sneaky, skillModel.timeFrame, skillModel.castTime));
+
+            }
         }
 
         public override void ApplyFX3()
         {
-            CombatService.Instance.mainTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>()
-                    .buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                    , AttribName.morale, -3, TimeFrame.EndOfRound, skillModel.castTime, false));
-
-            CombatService.Instance.mainTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>()
-                    .buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                    , AttribName.luck, -3, TimeFrame.EndOfRound, skillModel.castTime, false ));
+      
         }
-
-        public override void SkillEnd()
-        {
-            base.SkillEnd();
-            targetController.charStateController.RemoveCharState(CharStateName.Soaked);
-           // CombatService.Instance.mainTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>()
-           //.ChangeStat(CauseType.CharSkill, (int)skillName, charController, StatsName.morale, 3));
-
-           // CombatService.Instance.mainTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>()
-           //  .ChangeStat(CauseType.CharSkill, (int)skillName, charController, StatsName.luck, 3));
-
-        }
-
 
         public override void ApplyVFx()
         {
@@ -107,6 +82,8 @@ namespace Combat
 
         public override void DisplayFX4()
         {
+            str0 = $"<style=States> Add sneaky state to adj targets </style>";
+            SkillService.Instance.skillModelHovered.descLines.Add(str0);
         }
 
     }

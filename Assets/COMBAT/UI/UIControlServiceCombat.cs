@@ -35,7 +35,9 @@ namespace Combat
         UnClickable_NoTargets,// grey out 
         UnClickable_NoStamina,
         UnClickable_InTactics,
-        Clicked,       
+        Clicked,
+        UnClickable_NoActionPts,
+        UnClickable_Locked, 
 
     }
 

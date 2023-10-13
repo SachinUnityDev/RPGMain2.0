@@ -13,14 +13,11 @@ namespace Combat
         public override CharNames charName { get => _charName; set => _charName = value; }
         public override SkillNames skillName => SkillNames.HeadToss;
         public override SkillLvl skillLvl => SkillLvl.Level0;
-
         public override StrikeTargetNos strikeNos => StrikeTargetNos.Single;
         public override string desc => "Head toss";
 
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
-
-        //public bool focuschg = false; 
 
         public override void PopulateTargetPos()
         {

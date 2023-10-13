@@ -23,12 +23,6 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        //public override void AddTargetPos()
-        //{
-        //    if (skillModel != null )
-        //    Debug.Log("Inside the feast of waves " + skillModel.targetPos.Count); 
-        //}
-
         public override void ApplyFX1()
         {
             foreach (CellPosData cell in skillModel.targetPos)
@@ -36,14 +30,13 @@ namespace Combat
                 if(cell.charMode == CharMode.Ally)
                 {
                     DynamicPosData dyna = GridService.Instance.gridView.GetDynaFromPos(cell.pos, cell.charMode);
-                    float healVal = Random.Range(4f, 10f);
+                    float healVal = Random.Range(4f, 11f);
                     
                     dyna.charGO.GetComponent<CharController>().damageController.ApplyDamage(charController,
                                                                         CauseType.CharSkill, (int)skillName, DamageType.Heal, healVal, false);
 
                     dyna.charGO.GetComponent<CharController>().charStateController.ClearDOT(CharStateName.BurnHighDOT); 
                 }
-
             }
         }
 

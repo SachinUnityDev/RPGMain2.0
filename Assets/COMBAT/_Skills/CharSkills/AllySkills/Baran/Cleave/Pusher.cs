@@ -28,9 +28,9 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-
         public override void AddTargetPos()
         {
+
             if (skillModel == null) return;
             CombatService.Instance.mainTargetDynas.Clear();
             foreach (var cell in skillModel.targetPos)
@@ -39,10 +39,9 @@ namespace Combat
                     .Add(GridService.Instance.gridView?.GetDynaFromPos(cell.pos, cell.charMode));
             }
         }
-
         public override void ApplyFX1()
         {
-
+           
         }
 
         public override void ApplyFX2()
@@ -55,11 +54,11 @@ namespace Combat
         {
 
         }
-        public override void SkillEnd()
-        {
-            base.SkillEnd();
-           // targetController.ChangeStat(CauseType.CharSkill, (int)skillName, charController, StatsName.haste, 2);
-        }
+        //public override void SkillEnd()
+        //{
+        //    base.SkillEnd();
+        //   // targetController.ChangeStat(CauseType.CharSkill, (int)skillName, charController, StatsName.haste, 2);
+        //}
 
 
         public override void ApplyMoveFX()
@@ -69,7 +68,7 @@ namespace Combat
                 if (dyna != null)
                 {
                     GridService.Instance.gridMovement.MovebyRow(dyna, MoveDir.Backward, 1);
-                    chance++;
+                   // chance++;
                 }
             }
         }

@@ -69,15 +69,15 @@ MonoBehaviour:
   permaTraitNames: 
   AttribList:
   - AttribName: 1
-    currValue: 5
-    baseValue: 5
+    currValue: 4
+    baseValue: 4
     desc: Base value for Physical and Magical attacks.
     minLimit: 0
     maxLimit: 100
     isClamped: 0
   - AttribName: 2
-    currValue: 4
-    baseValue: 4
+    currValue: 0
+    baseValue: 0
     desc: Chance to land Physical attack to a target.
     minLimit: 0
     maxLimit: 15
@@ -86,97 +86,97 @@ MonoBehaviour:
     currValue: 6
     baseValue: 6
     desc: Determinant value for hitting correct target by Magical attacks or Misfire.
-    minLimit: 12
-    maxLimit: 96
+    minLimit: 0
+    maxLimit: 12
     isClamped: 0
   - AttribName: 4
-    currValue: 6
-    baseValue: 6
+    currValue: 3
+    baseValue: 3
     desc: Determinant value for Critical and Feeble hits.
     minLimit: 0
     maxLimit: 12
     isClamped: 0
   - AttribName: 5
-    currValue: 6
-    baseValue: 6
+    currValue: 5
+    baseValue: 5
     desc: Determinant value for extra action or pass action.
     minLimit: 0
     maxLimit: 12
     isClamped: 0
   - AttribName: 6
-    currValue: 6
-    baseValue: 6
+    currValue: 2
+    baseValue: 2
     desc: Main determinant for turn order. Increases chance to keep action after
       using Move.
     minLimit: 0
     maxLimit: 12
     isClamped: 0
   - AttribName: 7
-    currValue: 20
-    baseValue: 20
+    currValue: 8
+    baseValue: 8
     desc: Determinant value for base Health. Increases chance to withstand Hunger.
     minLimit: 0
     maxLimit: 100
     isClamped: 0
   - AttribName: 8
-    currValue: 20
-    baseValue: 20
+    currValue: 14
+    baseValue: 14
     desc: Determinant value for base Stamina. Increases chance to withstand Thirst.
     minLimit: 0
     maxLimit: 100
     isClamped: 0
   - AttribName: 9
-    currValue: 0
-    baseValue: 0
+    currValue: 1
+    baseValue: 1
     desc: Value to mitigate incoming Physical damage.
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 10
     isClamped: 0
   - AttribName: 10
-    currValue: 4
-    baseValue: 4
+    currValue: 0
+    baseValue: 0
     desc: Chance to evade a Physical attack.
     minLimit: 0
     maxLimit: 100
     isClamped: 0
   - AttribName: 11
-    currValue: 66
-    baseValue: 66
+    currValue: -14
+    baseValue: -14
     desc: Percentage value to mitigate incoming Fire damage.
     minLimit: -60
-    maxLimit: 90
+    maxLimit: 80
     isClamped: 0
   - AttribName: 12
-    currValue: 66
-    baseValue: 66
+    currValue: 9
+    baseValue: 9
     desc: Percentage value to mitigate incoming Earth damage.
     minLimit: -60
-    maxLimit: 90
+    maxLimit: 80
     isClamped: 0
   - AttribName: 13
-    currValue: 66
-    baseValue: 66
+    currValue: 40
+    baseValue: 40
     desc: Percentage value to mitigate incoming Water damage.
     minLimit: -60
-    maxLimit: 90
+    maxLimit: 80
     isClamped: 0
   - AttribName: 14
-    currValue: 66
-    baseValue: 66
+    currValue: 10
+    baseValue: 10
     desc: Percentage value to mitigate incoming Air damage.
     minLimit: -60
-    maxLimit: 90
+    maxLimit: 80
     isClamped: 0
   - AttribName: 15
-    currValue: 66
-    baseValue: 66
+    currValue: 9
+    baseValue: 9
     desc: Percentage value to mitigate incoming Light damage.
     minLimit: -30
     maxLimit: 60
     isClamped: 0
   - AttribName: 16
-    currValue: 66
-    baseValue: 66
+    currValue: -12
+    baseValue: -12
     desc: Percentage value to mitigate incoming Dark damage.
     minLimit: -30
     maxLimit: 60
@@ -186,32 +186,32 @@ MonoBehaviour:
     baseValue: 2
     desc: Percentage value to mitigate incoming Dark damage.
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 10
     isClamped: 0
   - AttribName: 18
     currValue: 0
     baseValue: 0
     desc: Percentage value to mitigate incoming Dark damage.
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 10
     isClamped: 0
   - AttribName: 19
-    currValue: 12
-    baseValue: 12
+    currValue: 0
+    baseValue: 0
     desc: Percentage value to mitigate incoming Dark damage.
     minLimit: -24
     maxLimit: 24
     isClamped: 0
   - AttribName: 20
-    currValue: 11
-    baseValue: 11
+    currValue: 2
+    baseValue: 2
     desc: Percentage value to mitigate incoming Dark damage.
     minLimit: 0
     maxLimit: 100
     isClamped: 0
   - AttribName: 21
-    currValue: 11
-    baseValue: 11
+    currValue: 5
+    baseValue: 5
     desc: Percentage value to mitigate incoming Dark damage.
     minLimit: 0
     maxLimit: 100
@@ -224,25 +224,25 @@ MonoBehaviour:
     maxLimit: 32
     isClamped: 0
   - statName: 2
-    currValue: 33
+    currValue: 42
     desc: Resource to use skills.
     minLimit: 0
-    maxLimit: 33
+    maxLimit: 42
     isClamped: 0
   - statName: 3
     currValue: 12
     desc: Be among those who dare to dare!
-    minLimit: -24
-    maxLimit: 24
+    minLimit: -30
+    maxLimit: 30
     isClamped: 0
   - statName: 4
-    currValue: 12
+    currValue: 0
     desc: Start losing Health once Hunger is 100%.
     minLimit: 0
     maxLimit: 100
     isClamped: 0
   - statName: 5
-    currValue: 12
+    currValue: 0
     desc: Start losing Stamina once Thirst is 100%.
     minLimit: 0
     maxLimit: 100

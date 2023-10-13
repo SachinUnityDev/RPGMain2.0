@@ -24,23 +24,11 @@ namespace Combat
         public override float chance { get => _chance; set => _chance = value; }
         
         public override void ApplyFX1()
-        {
-            if (targetController)
-            {
-                charController.buffController.ApplyBuff(CauseType.CharSkill,(int)skillName, charID, AttribName.waterRes, +40f
-                    , TimeFrame.EndOfRound, skillModel.castTime, true);
-                charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, AttribName.earthRes, +40f
-                   , TimeFrame.EndOfRound, skillModel.castTime, true);
-
-            }
-        }
-
-        public override void SkillEnd()
-        {
-            base.SkillEnd();
-             //charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.waterRes, -40f, false);
-             //charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.earthRes, -40f, false);
-
+        {         
+            charController.buffController.ApplyBuff(CauseType.CharSkill,(int)skillName, charID, AttribName.waterRes, +24f
+                , skillModel.timeFrame, skillModel.castTime, true);
+            charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, AttribName.earthRes, +24f
+                , skillModel.timeFrame, skillModel.castTime, true);
         }
         public override void ApplyFX2()
         {

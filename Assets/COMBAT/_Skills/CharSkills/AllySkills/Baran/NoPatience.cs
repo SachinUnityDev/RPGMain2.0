@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Reflection;
 
 namespace Combat
 {
@@ -25,30 +24,31 @@ namespace Combat
             if (skillModel == null) return;
             skillModel.targetPos.Clear();
             skillModel.targetPos.Add(new CellPosData(myDyna.charMode, myDyna.currentPos));
-        }
 
+        }
         public override void BaseApply()
         {
-            base.BaseApply();                     
-            CombatEventService.Instance.OnEOC += NoPatienceWpIncrEnd; 
+            base.BaseApply();
+            SkillService.Instance.OnSkillUsed += HeadTossRegainAP;
+            CombatEventService.Instance.OnEOT += OnEOT;
         }
-      
-        void NoPatienceWpIncrEnd()
+        void HeadTossRegainAP(SkillEventData skilleventData)
         {
-            Debug.Log("THIS MEHTHOD NAME" + MethodBase.GetCurrentMethod().Name);
-            if (StackAmt >0 )
+            if(skilleventData.skillName == SkillNames.HeadToss)
             {
-                charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID
-                                  , AttribName.willpower, -1 * StackAmt, false);
-                StackAmt = 0; 
-            }    
-            CombatEventService.Instance.OnEOC -= NoPatienceWpIncrEnd;
+                RegainAP(); 
+            }
+            SkillService.Instance.OnSkillUsed -= HeadTossRegainAP;
+        }
+
+        void OnEOT()
+        {
+            SkillService.Instance.OnSkillUsed -= HeadTossRegainAP;
+            CombatEventService.Instance.OnEOT -= OnEOT;
         }
         public override void ApplyFX1()
-        {
-            //Gain 5 Fortitude
+        {         
             charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatName.fortitude, +5, false);
-
         }
 
         public override void ApplyFX2()
@@ -67,10 +67,15 @@ namespace Combat
         public override void ApplyFX3()
         {
 
-            if (StackAmt < 3)
+            if (StackAmt <= 6)
             {
-                charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.willpower, +1, false);
+                charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                                , AttribName.willpower, +2, skillModel.timeFrame, skillModel.castTime, true);
                 StackAmt++;
+            }
+            else if(StackAmt > 6)
+            {
+                StackAmt= 0;
             }
         }
 
@@ -84,7 +89,7 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str0 = $"+1<style=Attributes> Willpower </style>until eoc, stacks up to 3";
+            str0 = $"+2<style=Attributes> Willpower </style>until eoc, stacks up to 6";
             SkillService.Instance.skillModelHovered.descLines.Add(str0);
         }
 

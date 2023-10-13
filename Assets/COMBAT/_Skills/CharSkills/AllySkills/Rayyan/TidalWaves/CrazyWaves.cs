@@ -26,7 +26,8 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        bool isFront; 
+        bool isFront;
+        bool dmgInc = false; 
         public override void SkillHovered()
         {
             base.SkillHovered();
@@ -55,6 +56,7 @@ namespace Combat
             {
                 CellPosData cell = new CellPosData(dyna.charMode, dyna.currentPos);
                 skillModel.targetPos.Add(cell);
+
             }
             Debug.Log("Crazy waves ADD TARGETS");
         }
@@ -62,7 +64,12 @@ namespace Combat
         public override void BaseApply()
         {
             base.BaseApply();
-            skillModel.damageMod = 150f; 
+            if (!dmgInc)
+            {
+                skillModel.damageMod += 30f;
+                dmgInc= true;
+            }
+            
         }
 
 
@@ -123,29 +130,3 @@ namespace Combat
     
     }
 }
-
-// DynamicPosData targetDyna = GridService.Instance.GetDyna4GO(targetGO);
-
-//isFront = GridService.Instance.IsFrontDiamond(targetDyna);
-//targetDynas = new List<DynamicPosData>();
-//targetDynas.AddRange(GridService.Instance.GetCharINDiamond(targetDyna.charMode, isFront));
-
-
-
-//if (isFront)  // FRONT DYNA 
-//{                
-//    skillModel.damageMod = 120f;
-//    targetDynas.ForEach(t => t.charGO.GetComponent<CharController>().damageController.ApplyDamage(charController
-//                            , skillName, DamageType.Water, 120f, false));
-
-//    targetDynas.ForEach(t => GridService.Instance.gridMovement.MovebyRow(t, MoveDir.Backward, 1));                            
-
-//}
-//else   // BACK DYNA 
-//{
-//    skillModel.damageMod = 150f;
-//    targetDynas.ForEach(t => t.charGO.GetComponent<CharController>().damageController.ApplyDamage(charController
-//                            ,skillName, DamageType.Water, 150f, false));
-
-//    targetDynas.ForEach(t => GridService.Instance.gridMovement.MovebyRow(t, MoveDir.Forward, 1));
-//}

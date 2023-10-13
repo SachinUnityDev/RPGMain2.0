@@ -46,12 +46,12 @@ namespace Combat
         public event Action OnCharHovered;
 
         public event Action <DynamicPosData>OnTargetClicked;
-        public CombatController combatController;
+        
 
         // Start is called before the first frame update
         void Start()
         {
-            combatController = gameObject.AddComponent<CombatController>();
+          
         }
 
         public void On_StrikeFired(StrikeData strikeData)
@@ -152,7 +152,7 @@ namespace Combat
                 roundNo = ++CombatService.Instance.currentRound;
                 On_SOR(roundNo); 
             }
-            Debug.Log("@@@@@SOT");
+            Debug.Log("@SOT");
             OnSOT?.Invoke(); 
         }
 

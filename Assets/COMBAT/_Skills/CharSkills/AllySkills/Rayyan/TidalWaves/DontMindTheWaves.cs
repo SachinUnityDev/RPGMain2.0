@@ -64,11 +64,11 @@ namespace Combat
         {
             allEnemies.ForEach(t => t.charGO.GetComponent<CharController>().charStateController.
                                 ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                       , charController.charModel.charID, CharStateName.Soaked));
+                       , charController.charModel.charID, CharStateName.Soaked, skillModel.timeFrame, skillModel.castTime));
 
             allAlliesINFront.ForEach(t => t.charGO.GetComponent<CharController>().charStateController.
                                 ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                       , charController.charModel.charID, CharStateName.Soaked));
+                       , charController.charModel.charID, CharStateName.Soaked, skillModel.timeFrame, skillModel.castTime));
         }
 
         public override void ApplyFX2()  
@@ -76,12 +76,12 @@ namespace Combat
             foreach (DynamicPosData dyna in allAlliesINFront)
             {
                 dyna.charGO.GetComponent<CharController>().buffController.ApplyBuff(CauseType.CharSkill
-                    , (int)skillName, charID, AttribName.haste, 2, TimeFrame.EndOfRound, skillModel.castTime, true);
+                    , (int)skillName, charID, AttribName.haste, 2, skillModel.timeFrame, skillModel.castTime, true);
             }
             foreach (DynamicPosData dyna in allEnemies)
             {
                 dyna.charGO.GetComponent<CharController>().buffController.ApplyBuff(CauseType.CharSkill, (int)skillName
-                    , charID, AttribName.haste, -2, TimeFrame.EndOfRound, skillModel.castTime, false);
+                    , charID, AttribName.morale, -2, skillModel.timeFrame, skillModel.castTime, false);
             }
         }
 
@@ -90,22 +90,6 @@ namespace Combat
            
         }
 
-      
-        public override void SkillEnd()
-        {
-            base.SkillEnd();
-            //foreach (DynamicPosData dyna in allAlliesINFront)
-            //{
-            //    dyna.charGO.GetComponent<CharController>()
-            //        .ChangeStat(CauseType.CharSkill, (int)skillName, charController, StatsName.haste, -2);
-            //}
-            //foreach (DynamicPosData dyna in allEnemies)
-            //{
-            //    dyna.charGO.GetComponent<CharController>()
-            //        .ChangeStat(CauseType.CharSkill, (int)skillName, charController, StatsName.haste, 2);
-            //}
-        }
-   
         public override void ApplyVFx()
         {
         }

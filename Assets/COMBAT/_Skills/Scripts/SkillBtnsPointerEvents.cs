@@ -62,7 +62,7 @@ namespace Combat
             skillView.index = -1;
             StartCoroutine(Wait());
         }
-
+        
         public void ShowSkillCard()
         {
             skillCard.SetActive(true);

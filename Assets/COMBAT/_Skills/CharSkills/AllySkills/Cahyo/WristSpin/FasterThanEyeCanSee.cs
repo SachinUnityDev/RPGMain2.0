@@ -32,19 +32,19 @@ namespace Combat
              foreach (DynamicPosData dyna in CombatService.Instance.mainTargetDynas)
                 {
                     if(chance.GetChance())
-                    charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                                                , charController.charModel.charID, CharStateName.Confused);
+                    charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName, charController.charModel.charID
+                                                                , CharStateName.Confused, skillModel.timeFrame, skillModel.castTime);
             }
             
         }
-        public override void SkillEnd()
-        {
-            base.SkillEnd();      
-            foreach (DynamicPosData dyna in CombatService.Instance.mainTargetDynas)
-            {
-                charController.charStateController.RemoveCharState(CharStateName.Confused);
-            }
-        }
+        //public override void SkillEnd()
+        //{
+        //    base.SkillEnd();      
+        //    foreach (DynamicPosData dyna in CombatService.Instance.mainTargetDynas)
+        //    {
+        //        charController.charStateController.RemoveCharState(CharStateName.Confused);
+        //    }
+        //}
         public override void ApplyFX2()
         {
         }

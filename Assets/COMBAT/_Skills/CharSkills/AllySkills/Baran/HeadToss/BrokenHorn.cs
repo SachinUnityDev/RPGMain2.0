@@ -26,6 +26,12 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
+        public override void SkillSelected()
+        {
+            base.SkillSelected();
+            SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).RemoveFX1;
+        }
+
         public override void BaseApply()
         {
             base.BaseApply();
@@ -35,24 +41,26 @@ namespace Combat
             float percentHP = hpData.currValue / hpData.maxLimit;
             if (percentHP < 0.4f)
             {
-                charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.acc
-                    , +6, false);
-            }
-            if (targetController.charStateController.HasCharDOTState(CharStateName.BleedLowDOT))
-            {
                 charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.luck
                     , +6, false);
-
             }
-
-
         }
-
-        
-       // if target bleeding, hits with +6 Luck. (ADDED)
+         // luck increase for skill use only   
         public override void ApplyFX1()
         {   
-         
+            if(targetController!= null)
+            {
+                if(targetController.charStateController.HasCharDOTState(CharStateName.BleedLowDOT))
+                {
+                    targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
+                                          , DamageType.Physical, skillModel.damageMod, false, true);
+                }
+                else
+                {
+                    targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
+                                          , DamageType.Physical, skillModel.damageMod);
+                }
+            }
         }
 
         public override void ApplyFX2()
@@ -97,9 +105,7 @@ namespace Combat
 
         public override void PostApplyFX()
         {
-            base.PostApplyFX(); 
-            charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.acc
-                     , -6, false);
+            base.PostApplyFX();          
             charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.luck
                     , -6, false);
         }

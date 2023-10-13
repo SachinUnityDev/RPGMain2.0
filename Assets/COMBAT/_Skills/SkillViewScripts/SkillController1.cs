@@ -179,34 +179,34 @@ namespace Common
             }
         }
 
-        public void CheckNUpdateSkillState()
-        {
+        //public void CheckNUpdateSkillState()
+        //{
 
-            //cd .. 0 cast this even this round double strike
-            //cd... 1 cast this only next round .... 
-            //cd .. so on and so forth
+        //    //cd .. 0 cast this even this round double strike
+        //    //cd... 1 cast this only next round .... 
+        //    //cd .. so on and so forth
 
-            int cdGap = 0;
-            foreach (var skill in allSkillBases)
-            {
-                cdGap = CombatService.Instance.currentRound - skill.skillModel.lastUsedInRound;
-                //if (cdGap < 0)
-                //{
-                //  //  Debug.Log("Cool Calc Error");
-                //}
-                if (cdGap < skill.skillModel.cd)
-                {
-                    skill.skillModel.SetSkillState(SkillSelectState.UnClickable_InCd);
-                    // Debug.Log("SkillUsed" + cdGap);
-                }
-                else
-                {
-                    //SkillServiceView.Instance.UpdateSkillIconTxt(skill.skillName, cdGap);
-                    skill.skillModel.SetSkillState(SkillSelectState.Clickable);
+        //    int cdGap = 0;
+        //    foreach (var skill in allSkillBases)
+        //    {
+        //        cdGap = CombatService.Instance.currentRound - skill.skillModel.lastUsedInRound;
+        //        //if (cdGap < 0)
+        //        //{
+        //        //  //  Debug.Log("Cool Calc Error");
+        //        //}
+        //        if (cdGap < skill.skillModel.cd)
+        //        {
+        //            skill.skillModel.SetSkillState(SkillSelectState.UnClickable_InCd);
+        //            // Debug.Log("SkillUsed" + cdGap);
+        //        }
+        //        else
+        //        {
+        //            //SkillServiceView.Instance.UpdateSkillIconTxt(skill.skillName, cdGap);
+        //            skill.skillModel.SetSkillState(SkillSelectState.Clickable);
 
-                }
-            }
-        }
+        //        }
+        //    }
+        //}
 
         #endregion
 

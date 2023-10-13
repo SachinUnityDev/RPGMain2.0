@@ -106,17 +106,14 @@ namespace Common
                         break;        
                     case AttribName.fortOrg:
                         s.minLimit = -24f;
-                        s.maxLimit = 24f; break;
-           
-                    case AttribName.dmgMin:
-                        s.minLimit = 0f;
-                        s.maxLimit = 100f; break;
+                        s.maxLimit = 24f; break;                        
+                   
                     case AttribName.acc:
                         s.minLimit = 0f;
                         s.maxLimit = 15; break;
                     case AttribName.focus:
-                        s.minLimit = 12f;
-                        s.maxLimit = 96f; break;
+                        s.minLimit = 0f;
+                        s.maxLimit = 12f; break;
                     case AttribName.luck:
                         s.minLimit = 0f;
                         s.maxLimit = 12f; break;
@@ -131,56 +128,73 @@ namespace Common
                         s.maxLimit = 100f; break;
                     case AttribName.willpower:
                         s.minLimit = 0f;
-                        s.maxLimit = 100f; break;
-                    case AttribName.armorMin:
-                        s.minLimit = 0f;
-                        s.maxLimit = 100f; break;
+                        s.maxLimit = 100f; break;        
                     case AttribName.dodge:
                         s.minLimit = 0f;
                         s.maxLimit = 100f; break;
                     case AttribName.fireRes:
                         s.minLimit = -60f;
-                        s.maxLimit = 90f; break;
+                        s.maxLimit = 80f; break;
                     case AttribName.earthRes:
                         s.minLimit = -60f;
-                        s.maxLimit = 90f; break;
+                        s.maxLimit = 80f; break;
                     case AttribName.waterRes:
                         s.minLimit = -60f;
-                        s.maxLimit = 90f; break;
+                        s.maxLimit = 80f; break;
                     case AttribName.airRes:
                         s.minLimit = -60f;
-                        s.maxLimit = 90f; break;
+                        s.maxLimit = 80f; break;
                     case AttribName.lightRes:
                         s.minLimit = -30f;
                         s.maxLimit = 60f; break;
                     case AttribName.darkRes:
                         s.minLimit = -30f;
                         s.maxLimit = 60f; break;
+                    case AttribName.hpRegen:
+                        s.minLimit = 0f;
+                        s.maxLimit = 10f; break;
+                    case AttribName.staminaRegen:
+                        s.minLimit = 0f;
+                        s.maxLimit = 10f; break;
+                    case AttribName.armorMin:
+                        s.minLimit = 0f;
+                        s.maxLimit = 100f; break;
+                    case AttribName.armorMax:
+                        s.minLimit = 0f;
+                        s.maxLimit = 100f; break;
+                    case AttribName.dmgMin:
+                        s.minLimit = 0f;
+                        s.maxLimit = 100f; break;
+                    case AttribName.dmgMax:
+                        s.minLimit = 0f;
+                        s.maxLimit = 100f; break;
+
                     default:
                         break;
                 }
                 AttribList.Add(s);
                 }
+                statList.Clear();
                 for (int i = 1; i < Enum.GetNames(typeof(StatName)).Length; i++)
                 {
                     StatData s = new StatData();
                     s.statName = (StatName)i;
-                    Debug.Log("SO awake  function called");
+                    Debug.Log("SO awake  function called" + charName);
                     switch (s.statName)
                     {
                         case StatName.None:
                             break;
                         case StatName.health:
                             s.minLimit = 0;
-                            s.maxLimit = 100f; break;
+                            s.maxLimit = 200f; break;
                         
                         case StatName.stamina:
                             s.minLimit = 0;
-                            s.maxLimit = 100f; break;
+                            s.maxLimit = 200f; break;
                         
                         case StatName.fortitude:
-                            s.minLimit =-24;
-                            s.maxLimit = 24f; break;
+                            s.minLimit =-30;
+                            s.maxLimit = 30f; break;
                         
                         case StatName.hunger:
                             s.minLimit = 0;
@@ -192,7 +206,7 @@ namespace Common
                     }
                     statList.Add(s);
                 }
-            }
+             }
             else
             {
                 Debug.Log("Updated vigor n willpower");

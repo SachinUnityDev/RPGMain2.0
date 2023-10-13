@@ -15,7 +15,7 @@ namespace Combat
 
         public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.None };
 
-        public override string desc => "%60 Low Bleed";
+        public override string desc => "%66 Low Bleed";
 
         public override CharNames charName => CharNames.Baran;
 
@@ -23,7 +23,7 @@ namespace Combat
 
         public override SkillLvl skillLvl => SkillLvl.Level1;
 
-        private float _chance = 60f;
+        private float _chance = 66f;
         public override float chance { get => _chance; set => _chance = value; }
   
         public override void ApplyFX1()

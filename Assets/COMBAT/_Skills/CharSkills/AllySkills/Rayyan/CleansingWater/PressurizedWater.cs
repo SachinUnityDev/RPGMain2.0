@@ -58,8 +58,8 @@ namespace Combat
             {
                 float percent = 15f;
                 if (percent.GetChance())
-                    charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                                               , charController.charModel.charID, CharStateName.Confused);
+                    charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName, charController.charModel.charID
+                                                                        , CharStateName.Feebleminded, skillModel.timeFrame, skillModel.castTime);
             }       
         }
         public override void ApplyFX3()
@@ -82,14 +82,14 @@ namespace Combat
                 }
             }
         }
-
-        public override void SkillEnd()
-        {
-            if (IsTargetEnemy())
-            {
-                targetController.charStateController.RemoveCharState(CharStateName.Confused);
-            }           
-        }
+        
+        //public override void SkillEnd()
+        //{
+        //    if (IsTargetEnemy())
+        //    {
+        //        targetController.charStateController.RemoveCharState(CharStateName.Confused);
+        //    }           
+        //}
 
         public override void DisplayFX1()
         {
@@ -105,7 +105,7 @@ namespace Combat
 
         public override void DisplayFX3()
         {
-            str3 = $"<style=Enemy>15%<style=States> Confuse</style>";
+            str3 = $"<style=Enemy>15%<style=States> Feebleminded</style>";
             SkillService.Instance.skillModelHovered.descLines.Add(str3);
         }
 

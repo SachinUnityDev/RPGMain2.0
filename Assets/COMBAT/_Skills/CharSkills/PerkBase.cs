@@ -160,6 +160,20 @@ namespace Combat
             return (SkillService.Instance.currentTargetDyna.charMode == targetCharMode);
         }
 
+
+        #region COMMONLY USED METHODS
+
+        protected void RegainAP()
+        {
+            CombatController combatController =
+                    charController.GetComponent<CombatController>();
+            if(combatController!= null ) 
+            combatController.actionPts++; 
+        }
+
+
+        #endregion
+
     }
 }
 

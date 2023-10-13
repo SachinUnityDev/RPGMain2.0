@@ -127,7 +127,7 @@ public enum CharStateName
     PoisonedHighDOT,
     Radiant,
     Rooted,
-    SafeSpot,
+    Sneaky,
     Shocked,
     Soaked, 
     Cloaked,

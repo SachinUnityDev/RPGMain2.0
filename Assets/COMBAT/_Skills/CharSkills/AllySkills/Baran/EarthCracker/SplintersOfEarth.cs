@@ -27,7 +27,7 @@ namespace Combat
         public override void SkillHovered()
         {
             base.SkillHovered();
-            SkillService.Instance.SkillWipe += skillController.allSkillBases.Find(t => t.skillName == skillName
+             SkillService.Instance.SkillWipe += skillController.allSkillBases.Find(t => t.skillName == skillName
                          ).WipeFX2;
         }
         public override void BaseApply()
@@ -70,12 +70,13 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str0 = $"75%<style=Earth> Earth </style>to adj targets";
-            SkillService.Instance.skillModelHovered.descLines.Add(str0);
+            
         }
 
         public override void DisplayFX2()
         {
+            str0 = $"75%<style=Earth> Earth </style>to adj targets";
+            SkillService.Instance.skillModelHovered.descLines.Add(str0);
         }
 
         public override void DisplayFX3()

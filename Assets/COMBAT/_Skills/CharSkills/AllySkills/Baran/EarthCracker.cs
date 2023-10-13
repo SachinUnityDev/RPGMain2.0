@@ -42,21 +42,12 @@ namespace Combat
             }
         }
 
-        //public override void BaseApply()
-        //{
-        //    base.BaseApply(); 
-        //    targetGO = sameLaneTargets[0].charGO;
-        //    targetController = targetGO.GetComponent<CharController>();
-
-        //}
+     
 
         public override void ApplyFX1()
         {
             targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Physical, skillModel.damageMod
                     , false);
-
-          //  Debug.Log("Skill1" + desc);
-
         }
 
         public override void ApplyFX2()
@@ -66,26 +57,22 @@ namespace Combat
                 CharController target = CombatService.Instance.colTargetDynas[i].charGO.GetComponent<CharController>();
                 target.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Earth, damageExtra, false);
             }
-           // Debug.Log("Skill2" + desc);
         }
 
         public override void ApplyFX3()
         {         
             if (_chance.GetChance())
             {
-            //    CharStatesService.Instance.ApplyCharState(targetGO, CharStateName.BleedLowDOT
-            //                         , charController, CauseType.CharSkill, (int)skillName);
-
-                 charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                 targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
                     , charController.charModel.charID, CharStateName.BleedLowDOT);
             }
 
-            //Debug.Log("Skill3" + desc);
+            
         }
 
         public override void DisplayFX1()
         {
-            str1 = $"{skillModel.damageMod}%<style=Physical> Physical</style>";
+            str1 = $" 150%<style=Physical> Physical</style>";
             SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
 

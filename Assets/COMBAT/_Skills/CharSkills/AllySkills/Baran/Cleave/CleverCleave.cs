@@ -28,8 +28,41 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        int stack = 0; 
-     
+        int stack = 0;
+
+        bool isEdgyAxeSelect = false;
+        bool isPusherSelect = false; 
+        public override void SkillHovered()
+        {
+            foreach (PerkData skillModelData in skillController.allSkillPerkData)
+            {
+                if (skillModelData.state == PerkSelectState.Clicked && skillModelData.perkName == PerkNames.EdgyAxe)
+                {
+                    isEdgyAxeSelect = true;
+                }
+                if (skillModelData.state == PerkSelectState.Clicked && skillModelData.perkName == PerkNames.Pusher)
+                {
+                    isPusherSelect = true;
+                }
+            }
+
+                base.SkillHovered();
+                if(isEdgyAxeSelect)
+                    SkillService.Instance.SkillWipe += skillController.allSkillBases
+                                                .Find(t => t.skillName == skillName).WipeFX2;
+                if(isPusherSelect)
+                    SkillService.Instance.SkillWipe += skillController.allSkillBases
+                                                .Find(t => t.skillName == skillName).WipeFX1;
+        }
+        public override void SkillSelected()
+        {
+            base.SkillSelected();
+            if(isPusherSelect)
+                SkillService.Instance.SkillWipe += skillController.allSkillBases
+                                              .Find(t => t.skillName == skillName).RemoveFX1;
+
+
+        }
 
         public override void BaseApply()
         {
@@ -37,27 +70,11 @@ namespace Combat
 
             foreach (PerkData skillModelData in skillController.allSkillPerkData)
             {
-                if (skillModelData.state == PerkSelectState.Clicked && skillModelData.perkName == PerkNames.EdgyAxe)
+                if (isEdgyAxeSelect)
                 {
                     skillController.allPerkBases.Find(t => t.skillName == skillName
                                                            && t.skillLvl == SkillLvl.Level1
                                                            && t.state == PerkSelectState.Clicked).chance = 60f;
-
-                }
-                if (skillModelData.state == PerkSelectState.Clicked && skillModelData.perkName == PerkNames.Pusher)
-                {
-                    //chance = skillController.allPerkBases.Find(t => t.skillName == skillName
-                    //                                        && t.skillLvl == SkillLvl.Level1
-                    //                                        && t.state == PerkSelectState.Clicked).chance;
-
-                    // per enemy pushed you get +1. UNTILL EOQ 
-                    if(stack <= 8)
-                    {
-                        charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName,
-                            charID, AttribName.fortOrg, 1, TimeFrame.EndOfCombat, 1, true); 
-                        
-                        stack++; 
-                    }
 
                 }
             }
@@ -67,7 +84,11 @@ namespace Combat
 
         public override void ApplyFX1()
         {
-       
+            if(isPusherSelect)
+                if (CombatService.Instance.mainTargetDynas.Count > 0)
+                    CombatService.Instance.mainTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>().damageController
+                        .ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Physical, skillModel.damageMod, false, true));
+
 
 
 
@@ -91,12 +112,12 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str0 = $"60% <style=Bleed>High Bleed</style>";
-            SkillService.Instance.skillModelHovered.descLines.Add(str0);
-
-
-            str1 = $"+1 <style=Fort>Fortitude Org.</style> until EOQ, per pushed enemy(Stacks up to 8)";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
+            if(isEdgyAxeSelect)
+                str0 = $"60% <style=Bleed>High Bleed</style>";
+                SkillService.Instance.skillModelHovered.descLines.Add(str0);
+            if(isPusherSelect)
+                str0 = $"0% <style=Bleed>High Bleed</style>";
+                SkillService.Instance.skillModelHovered.descLines.Add(str0);
 
         }
 

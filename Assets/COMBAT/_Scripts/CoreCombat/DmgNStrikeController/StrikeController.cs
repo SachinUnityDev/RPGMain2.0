@@ -36,7 +36,6 @@ namespace Combat
     {
         public AttribName statName;
         public float value;
-
         public StatChgData(AttribName statName, float value)
         {
             this.statName = statName;
@@ -180,17 +179,17 @@ namespace Combat
 
 
         // INIFINITE CAST TIME THORNS FX 
-        public void AddThornsFXBuff(AttackType attackType, DamageType damageType, float thornsMin, float thornsMax)
+        public void AddThornsFXBuff(DamageType damageType, float thornsMin, float thornsMax, TimeFrame timeframe, int castTime)
         {
-            thornID++;
-            ThornsDmgData thornsDmgData = new ThornsDmgData(thornID, attackType, damageType, thornsMin, thornsMax);
+            //thornID++;
+            //ThornBuffData thornsDmgData = new ThornBuffData(thornID, attackType, damageType, thornsMin, thornsMax);
 
-            strikeCharModel.AddThornsDamage(thornsDmgData);
+          //  strikeCharModel.AddThornsDamage(thornsDmgData);
 
             //int currRd = CombatService.Instance.currentRound;
             //buffIndex++;
             //BuffData buffData = new BuffData(buffIndex, isBuff, currRd, timeFrame, netTime,
-            //                                                      charModVal, directStr);
+            //                                                                  charModVal, directStr);
 
             //allBuffs.Add(buffData);
             //return buffIndex;
@@ -199,10 +198,10 @@ namespace Combat
         public void AddThornsFXBuff(TimeFrame timeFrame, int currentTime, int thornID
             , AttackType attackType, DamageType damageType, float thornsMin, float thornsMax)
         {
-            thornID++;
-            ThornsDmgData thornsDmgData = new ThornsDmgData(timeFrame, currentTime, thornID, attackType, damageType, thornsMin, thornsMax);
+            //thornID++;
+            //ThornBuffData thornsDmgData = new ThornBuffData(timeFrame, currentTime, thornID, attackType, damageType, thornsMin, thornsMax);
 
-            strikeCharModel.AddThornsDamage(thornsDmgData);
+            //strikeCharModel.AddThornsDamage(thornsDmgData);
         }
         public void RemoveThornsFx(int thornID)
         {
@@ -211,14 +210,14 @@ namespace Combat
 
         void OnDmgDeliveredTick(DmgData dmgData)
         {
-            foreach (ThornsDmgData thornData in strikeCharModel.allThornsData)
+            foreach (ThornBuffData thornData in strikeCharModel.allThornsData)
             {
-                if (thornData.attackType == dmgData.attackType)
-                {
-                    float dmgPercentValue = UnityEngine.Random.Range(thornData.thornsMin, thornData.thornsMax);
-                    dmgData.striker.GetComponent<DamageController>()
-                        .ApplyDamage(charController, CauseType.ThornsAttack, -1, thornData.damageType, dmgPercentValue, false);
-                }
+                //if (thornData.attackType == dmgData.attackType)
+                //{
+                //    float dmgPercentValue = UnityEngine.Random.Range(thornData.thornsMin, thornData.thornsMax);
+                //    dmgData.striker.GetComponent<DamageController>()
+                //        .ApplyDamage(charController, CauseType.ThornsAttack, -1, thornData.damageType, dmgPercentValue, false);
+                //}
             }
         }
 

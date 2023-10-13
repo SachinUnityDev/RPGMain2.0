@@ -87,6 +87,24 @@ namespace Common
             }
         }
 
+        public int GetChanceForStatValue(AttribName attribName, int val)
+        {
+            int index = allStatChanceData.FindIndex(t => t.attribName == attribName);
+            if(index != -1)
+            {
+                AttribChanceData attribChanceData = allStatChanceData[index];
+                foreach (AttribNChances attribNChance in attribChanceData.allStatsNChances)
+                {
+                    if (attribNChance.statValue == val)
+                        return (int)attribNChance.statChance; 
+                }
+                Debug.Log(" Chance not found " + attribName + "value" + val); 
+            }
+            Debug.Log(" Attrib Chance not found " + attribName + "value" + val);
+            return 0; 
+        }
+
+
       void FillLinearChanceValues(float _min, float  _minPlusOne, float _startPtr, float _endPtr, float _changeVal,   List<AttribNChances> _allStatNChances)
         {
             float prevValue = _minPlusOne;  

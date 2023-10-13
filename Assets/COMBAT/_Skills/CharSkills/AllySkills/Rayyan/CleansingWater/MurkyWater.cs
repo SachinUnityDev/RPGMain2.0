@@ -49,6 +49,7 @@ namespace Combat
                 if (dyna != null)
                 {
                     skillModel.targetPos.Add(cellPosData);
+                    CombatService.Instance.mainTargetDynas.Add(dyna);
                 }
             }
         }   
@@ -59,7 +60,8 @@ namespace Combat
 
             if (IsTargetEnemy())
             {
-                targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Water, 80f, false);
+                targetController.damageController.ApplyDamage(charController, CauseType.CharSkill
+                                                , (int)skillName, DamageType.Water, skillModel.damageMod, false);
             }
         }
         public override void DisplayFX1()
@@ -72,7 +74,7 @@ namespace Combat
         {
             if (IsTargetEnemy())
                 targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                                , AttribName.haste, -2f, TimeFrame.EndOfRound, skillModel.castTime, false);
+                                , AttribName.haste, -2f, skillModel.timeFrame, skillModel.castTime, false);
         }
         public override void DisplayFX2()
         {
@@ -98,15 +100,7 @@ namespace Combat
         }
         public override void ApplyMoveFX()
         {
-        }
-        public override void SkillEnd()
-        {
-            Debug.Log("MURKY WATER SKILL END ");
-            //if (targetController && IsTargetEnemy())
-            //    targetController.ChangeStat(CauseType.CharSkill, (int)skillName, charController
-            //                                                            , StatsName.haste, 2f);
-            targetController.charStateController.RemoveCharState(CharStateName.Soaked);            
-        }
+        }   
         public override void DisplayFX4()
         {
 

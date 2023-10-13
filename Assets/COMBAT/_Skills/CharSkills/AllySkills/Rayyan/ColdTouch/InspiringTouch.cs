@@ -29,8 +29,8 @@ namespace Combat
         {
             if (targetController && IsTargetAlly())
             {
-                charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                                , charController.charModel.charID, CharStateName.Inspired);
+                charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName, charController.charModel.charID
+                                                            , CharStateName.Inspired, skillModel.timeFrame, skillModel.castTime);
             }
         }
 

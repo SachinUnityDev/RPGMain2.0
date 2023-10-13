@@ -88,8 +88,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 710039401
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1935994814414485414
@@ -157,8 +157,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5622062363133479056}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.62, y: 9.26, z: 0}
-  m_LocalScale: {x: 1.0232396, y: 1.0884302, z: 11.027416}
+  m_LocalPosition: {x: 7.29, y: 11.37, z: 0}
+  m_LocalScale: {x: 0.98128676, y: 1.0438045, z: 10.575292}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1105714680660663460}

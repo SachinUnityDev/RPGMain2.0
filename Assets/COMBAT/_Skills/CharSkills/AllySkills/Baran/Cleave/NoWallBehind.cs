@@ -57,18 +57,18 @@ namespace Combat
             {
                 if (dyna != null)
                 {
-                    if (!GridService.Instance.gridMovement.MovebyRow(dyna, MoveDir.Backward, 1))
-                    {
-                        targetGO.GetComponent<CharController>().charStateController
-                            .ApplyCharStateBuff(CauseType.CharSkill, (int)skillName, charController.charModel.charID, CharStateName.Rooted);
-
-                        //CharStatesService.Instance
-                        //              .ApplyCharState(targetGO, CharStateName.Rooted
-                        //             , charController, CauseType.CharSkill, (int)skillName);
+                    if (GridService.Instance.gridMovement.MovebyRow(dyna, MoveDir.Backward, 1))
+                    { 
                         chance++;
                     }
                 }
             }
+
+            if(chance >= 3)
+            {
+                RegainAP(); 
+            }
+
         }
 
         public override void ApplyFX2()
@@ -82,15 +82,11 @@ namespace Combat
               
         }
 
-        public override void SkillEnd()
-        {
-            base.SkillEnd();       
-            foreach (DynamicPosData dyna in CombatService.Instance.mainTargetDynas)
-            {
-                dyna.charGO.GetComponent<CharController>().charStateController
-                    .RemoveCharState(CharStateName.Rooted);
-            }
-        }
+        //public override void SkillEnd()
+        //{
+        //    base.SkillEnd();       
+          
+        //}
         public override void ApplyFX3()
         {
         }

@@ -38,23 +38,13 @@ namespace Combat
                 }
             }          
         }
- 
-        //public override void BaseApply()
-        //{
-        //    //base.BaseApply();
-        //    //foreach( CellPosData target in skillModel.targetPos)
-        //    //{
-        //    //   DynamicPosData dyna =  GridService.Instance.gridView.GetDynaFromPos(target.pos, target.charMode);
-               
-        //    //}     
-        //}
-
         public override void ApplyFX1()  // DAMAGE 
         {
             foreach (DynamicPosData targetDyna in CombatService.Instance.mainTargetDynas.ToList())
             {
                 targetDyna.charGO.GetComponent<CharController>()
-                    .damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Water, skillModel.damageMod, false);
+                    .damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
+                                                , DamageType.Water, skillModel.damageMod, false);
             }
             Debug.Log("Apply FX1" + desc);
         }

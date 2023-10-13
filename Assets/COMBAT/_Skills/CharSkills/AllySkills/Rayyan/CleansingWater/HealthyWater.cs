@@ -29,9 +29,8 @@ namespace Combat
             base.SkillHovered();
             if (skillController != null)
             {
-
                 SkillService.Instance.SkillWipe += skillController.allSkillBases
-                                               .Find(t => t.skillName == skillName).WipeFX2;  // heal change 
+                                                    .Find(t => t.skillName == skillName).WipeFX2;  // heal change 
                 skillModel.attackType = AttackType.Ranged;
             }
         }
@@ -39,7 +38,7 @@ namespace Combat
         public override void SkillSelected()
         {
             base.SkillSelected();
-            SkillService.Instance.SkillFXRemove += skillController.allPerkBases.Find(t => t.skillName == skillName).RemoveFX1;// heal change
+            SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).RemoveFX1;// heal change
         }
 
         public override void ApplyFX1()

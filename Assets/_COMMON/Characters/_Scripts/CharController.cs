@@ -67,7 +67,7 @@ namespace Common
         private void OnDisable()
         {
             CombatEventService.Instance.OnEOC -= FortitudeReset2FortOrg;
-            CombatEventService.Instance.OnSOTactics -= AddControllers_OnCombatStart;
+          //  CombatEventService.Instance.OnSOTactics -= AddControllers_OnCombatStart;
         }
         public CharModel InitiatizeController(CharacterSO _charSO)
         {
@@ -113,16 +113,18 @@ namespace Common
 
             skillController = gameObject.AddComponent<SkillController1>();
             SkillService.Instance.allSkillControllers.Add(skillController);
-            CombatEventService.Instance.OnSOTactics -= AddControllers_OnCombatStart;
-            CombatEventService.Instance.OnSOTactics += AddControllers_OnCombatStart;
+            //CombatEventService.Instance.OnSOTactics -= AddControllers_OnCombatStart;
+            //CombatEventService.Instance.OnSOTactics += AddControllers_OnCombatStart;
         }
                 
 
-        void AddControllers_OnCombatStart()
-        {
-            damageController = gameObject.AddComponent<DamageController>();
-            strikeController = gameObject.AddComponent<StrikeController>();
-        }
+        //void AddControllers_OnCombatStart()
+        //{
+        //    damageController = gameObject.AddComponent<DamageController>();
+        //    damageController.Init();
+        //    strikeController = gameObject.AddComponent<StrikeController>();
+        //    strikeController.Init(); 
+        //}
         public AttribChanceData GetAttribChanceData(AttribName _statName)
         {
             foreach (AttribChanceData attribChanceData in CharService.Instance.statChanceSO.allStatChanceData)
@@ -581,26 +583,27 @@ namespace Common
         //    AttribData willPowerSD = GetAttrib(AttribName.willpower);
         //    AttribData vigorSD = GetAttrib(AttribName.vigor);
         //    //float barVal = statData.currValue / statData.maxLimit;
-           
+
         //    if (statName == StatName.health)
         //    {
         //        float barVal = statData.currValue / (vigorSD.currValue * 4);
-        //        barVal = (barVal > 1) ? 1 : barVal; 
+        //        barVal = (barVal > 1) ? 1 : barVal;
 
         //        if (statData.currValue != prevHPVal)
-        //        {  
+        //        {
         //            Vector3 barImgScale = new Vector3(barVal, HPBarImgTrans.localScale.y, HPBarImgTrans.localScale.z);
         //            HPBarImgTrans.localScale = barImgScale;
-        //            OrangeBarScaleAnim(HPBarImgOrange, barImgScale.x); 
+        //            OrangeBarScaleAnim(HPBarImgOrange, barImgScale.x);
         //        }
-        //        else return; 
+        //        else return;
 
-        //    }else if(statName == StatName.stamina)
+        //    }
+        //    else if (statName == StatName.stamina)
         //    {
         //        float barVal = statData.currValue / (willPowerSD.currValue * 3);
         //        barVal = (barVal > 1) ? 1 : barVal;
         //        if (statData.currValue != prevStaminaVal)
-        //        {                  
+        //        {
         //            Vector3 staminaScale = new Vector3(barVal, StaminaBarImgTrans.localScale.y, StaminaBarImgTrans.localScale.z);
         //            StaminaBarImgTrans.localScale = staminaScale;
         //            OrangeBarScaleAnim(StaminaBarImgOrange, staminaScale.x);
@@ -608,14 +611,15 @@ namespace Common
         //        else return;
 
 
-        //    }else if(statName == StatName.fortitude)
+        //    }
+        //    else if (statName == StatName.fortitude)
         //    {
 
 
         //    }
         //    prevHPVal = statData.currValue;
         //    prevStaminaVal = statData.currValue;
-        //}        
+        //}
         //void OrangeBarScaleAnim(Transform barTrans, float scale)
         //{
         //    barTrans.gameObject.SetActive(true);
@@ -626,7 +630,7 @@ namespace Common
         //        .Append(barTrans.DOScaleX(scale, 1f))
         //        ;
 
-        //    barSeq.Play().OnComplete(() => barTrans.gameObject.SetActive(false)); 
+        //    barSeq.Play().OnComplete(() => barTrans.gameObject.SetActive(false));
         }
 
         

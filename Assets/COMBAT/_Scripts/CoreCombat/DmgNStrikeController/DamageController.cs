@@ -127,18 +127,20 @@ namespace Combat
         }
 
         public void ApplyDamage(CharController striker, CauseType causeType, int causeName
-                            , DamageType _dmgType, float dmgPercentVal, bool ignoreArmor = false)
+                                    , DamageType _dmgType, float dmgPercentVal
+                                    , bool ignoreArmor = false, bool isTrueStrike = false)
         {
             this.striker = striker;
             AttackType attackType =
                             SkillService.Instance.GetSkillAttackType((SkillNames)causeName);
             // is dodge 
-            if(_dmgType == DamageType.Physical && HitChance())
-            {
-                strikeType = StrikeType.Dodged; 
-                OnDamageApplied?.Invoke(new DmgAppliedData(striker, causeType, causeName, _dmgType, 0f, strikeType, charController));
-                return; 
-            }
+            if(!isTrueStrike)
+                if(_dmgType == DamageType.Physical && HitChance())
+                {
+                    strikeType = StrikeType.Dodged; 
+                    OnDamageApplied?.Invoke(new DmgAppliedData(striker, causeType, causeName, _dmgType, 0f, strikeType, charController));
+                    return; 
+                }
 
             // ask strike controller do you have a extra dmg buff against me 
             float damageAlt = striker.GetComponent<StrikeController>()

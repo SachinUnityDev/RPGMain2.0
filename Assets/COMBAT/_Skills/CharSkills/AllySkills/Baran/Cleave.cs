@@ -28,11 +28,7 @@ namespace Combat
             //  targetDynas.Clear();
             if (myDyna.currentPos == 1 || myDyna.currentPos == 4)
             {
-                for (int i = 1; i <= 3; i++)
-                {
-                    CellPosData cellPosData = new CellPosData(CharMode.Enemy, i);                    
-                    AddTarget(cellPosData); 
-                }
+                AddTargetInRange(1, 4, CharMode.Enemy); 
             }
             else if (myDyna.currentPos == 2)
             {
@@ -49,17 +45,7 @@ namespace Combat
                 AddTarget(cellPosData);
             }
         }
-        void AddTarget(CellPosData cellPosData)
-        {
-           
-            DynamicPosData dyna = GridService.Instance.gridView.GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
-            if (dyna != null)
-            {
-                skillModel.targetPos.Add(cellPosData);
-                CombatService.Instance.mainTargetDynas.Add(dyna);
-            }
-            
-        }
+     
 
         public override void ApplyFX1()
         {
@@ -74,11 +60,7 @@ namespace Combat
             if (chance.GetChance())            
                     CombatService.Instance.mainTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>()
                     .charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                    , charController.charModel.charID, CharStateName.BleedLowDOT));
-
-            //CombatService.Instance.mainTargetDynas.ForEach(t => CharStatesService.Instance
-            //.ApplyCharState(t.charGO, CharStateName.BleedLowDOT
-            //                     , charController, CauseType.CharSkill, (int)skillName));                
+                            , charController.charModel.charID, CharStateName.BleedLowDOT));
         }
 
         public override void ApplyFX3()
@@ -92,7 +74,7 @@ namespace Combat
             str0 = "<margin=1.2em>Ranged";
             SkillService.Instance.skillModelHovered.descLines.Add(str0);
 
-            str1 = $"{skillModel.damageMod}% <style=Physical> Physical</style>";
+            str1 = $"{skillModel.damageMod}% <style=Physical>Physical</style>";
             SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
 

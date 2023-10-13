@@ -27,11 +27,22 @@ namespace Combat
         public override float chance { get => _chance; set => _chance = value; }
 
         List<DynamicPosData> colDynaCopy = new List<DynamicPosData>(); 
-  
+        bool dmgInc =false;
         public override void BaseApply()
         {
             base.BaseApply();            
             DynamicPosData targetDyna = GridService.Instance.GetDyna4GO(targetGO);
+
+            if (targetDyna.charGO.GetComponent<CharStateController>().HasCharState(CharStateName.Rooted))
+            {
+                if(!dmgInc)
+                {
+                    skillModel.damageMod += 50f;
+                    dmgInc = true;
+                }
+            }
+                
+
             colDynaCopy.Clear(); 
             if (targetDyna != null)
             {
@@ -43,33 +54,24 @@ namespace Combat
         }
         public override void ApplyFX1()
         {
-            if (charController.charStateController.HasCharState(CharStateName.Rooted))
-                targetController
-                    .ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.luck, 2);
-
             if (chance.GetChance())
                 charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName,
-                charController.charModel.charID, CharStateName.Rooted);
+                charController.charModel.charID, CharStateName.Rooted, skillModel.timeFrame, skillModel.castTime);
 
 
         }
-        public override void SkillEnd()
-        {
-            base.SkillEnd();
-            //colDynaCopy.ForEach(t => t.charGO.GetComponent<CharController>()
-            //  .buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-            //  , StatsName.luck, 1, TimeFrame.EndOfRound, skillModel.castTime, true));
-            charController.charStateController.RemoveCharState(CharStateName.Rooted);
-        }
+
         public override void ApplyFX2()
         {
             colDynaCopy.ForEach(t => t.charGO.GetComponent<CharController>()
               .buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-              , AttribName.luck, 1, TimeFrame.EndOfRound, skillModel.castTime, true));
+              , AttribName.luck, -1, skillModel.timeFrame, skillModel.castTime, false));
         }
 
         public override void ApplyFX3()
         {
+
+
         }
 
         public override void ApplyMoveFX()

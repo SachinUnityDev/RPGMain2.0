@@ -31,11 +31,30 @@ namespace Combat
         public override void SkillHovered()
         {
             base.SkillHovered();
-            skillModel.staminaReq = 7;
             skillModel.cd = 2;
             stackAmt = 0f;
         }
-   
+        public override void BaseApply()
+        {
+            base.BaseApply();
+            SkillService.Instance.OnSkillUsed += WaterShellRegainAP;
+            CombatEventService.Instance.OnEOT += OnEOT;
+
+        }
+        void WaterShellRegainAP(SkillEventData skilleventData)
+        {
+            if (50f.GetChance()) return; 
+            if (skilleventData.skillName == SkillNames.WaterShell)
+            {
+                RegainAP();
+            }
+            SkillService.Instance.OnSkillUsed -= WaterShellRegainAP;
+        }
+        void OnEOT()
+        {
+            SkillService.Instance.OnSkillUsed -= WaterShellRegainAP;
+            CombatEventService.Instance.OnEOT -= OnEOT;
+        }
         public override void ApplyFX1()
         {
             if (IsTargetAlly())
@@ -46,10 +65,10 @@ namespace Combat
                  chgMax = armorMax * 0.6f;
 
                 targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                                                     , AttribName.armorMin, chgMin, TimeFrame.EndOfRound
+                                                     , AttribName.armorMin, chgMin, skillModel.timeFrame
                                                      , skillModel.castTime, true);
                 targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                                                   , AttribName.armorMin, chgMax, TimeFrame.EndOfRound
+                                                   , AttribName.armorMin, chgMax, skillModel.timeFrame
                                                    , skillModel.castTime, true);
 
             }
@@ -60,7 +79,7 @@ namespace Combat
             if (IsTargetAlly())
             {             
                 targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                    , AttribName.fireRes, 20, TimeFrame.EndOfRound, skillModel.castTime, true);
+                    , AttribName.fireRes, 20, skillModel.timeFrame, skillModel.castTime, true);
             }
         }
 
@@ -91,20 +110,6 @@ namespace Combat
             CombatEventService.Instance.OnEOC -= EOCEnd;
         }
 
-        public override void SkillEnd()
-        {
-            //base.SkillEnd();
-            //if (IsTargetAlly())
-            //{               
-            //    targetController.ChangeStatRange(CauseType.CharSkill, (int)skillName, charID
-            //                                    , StatsName.armor, -chgMin, -chgMax);
-            //    targetController.ChangeStat(CauseType.CharSkill, (int)skillName, charID
-            //    , StatsName.fireRes, -20);
-            //}
-
-        }
-
-
         public override void ApplyVFx()
         {
         }
@@ -130,10 +135,9 @@ namespace Combat
 
         public override void DisplayFX4()
         {
+            str0 = $"regain to 50% ";
+            SkillService.Instance.skillModelHovered.descLines.Add(str0);
         }
-
-
-
         
     }
 

@@ -27,81 +27,59 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        bool subscribed = false;
-        bool resIncr = false;
+       
+        bool moraleChgesCasttime = false;
 
         float chgMin = 0;
         float chgMax = 0; 
-        
-        //If he has full hp when casting Ignore Pain, 
-        //    gives +40% Armor and +20 water and earth resistances 2 rds.
-        //    If Morale 12, until EOC
-
-
-  
-
+      
         public override void ApplyFX1()
         {
             StatData hpStat = charController.GetStat(StatName.health);
             AttribData moraleStat = charController.GetAttrib(AttribName.morale);
-            if (moraleStat.currValue == 12 && !subscribed)
+            if (moraleStat.currValue == 12)
             {
-                charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.waterRes, 40f, false);
-                charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.earthRes, 20f, false);
-                QuestEventService.Instance.OnEOQ += EndOnEOQ;
-                subscribed = true;
+                skillModel.timeFrame = TimeFrame.EndOfCombat; 
+                skillModel.castTime = 1;
+                moraleChgesCasttime = true;
             }
-            else if (hpStat.currValue == hpStat.maxLimit)
+
+            if (hpStat.currValue == hpStat.maxLimit)
             {
-                charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.waterRes, 40f, false);
-                charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.earthRes, 20f, false);
+                charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                                    , AttribName.waterRes, 30f, skillModel.timeFrame, skillModel.castTime, true);
+                charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                                    , AttribName.earthRes, 20f, skillModel.timeFrame, skillModel.castTime, true);
 
              
                     AttribData armorMin = charController.GetAttrib(AttribName.armorMin);
                     AttribData armorMax = charController.GetAttrib(AttribName.armorMax);
                     float armorMinVal = armorMin.currValue;
                     float armorMaxVal = armorMin.currValue;
-                    chgMin = armorMinVal * 0.8f;
-                    chgMax = armorMaxVal * 0.8f; 
+                    chgMin = armorMinVal * 0.6f;
+                    chgMax = armorMaxVal * 0.6f; 
 
-                    charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID
-                                                    , AttribName.armorMin, chgMin);
-                    charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID
-                                                    , AttribName.armorMax, chgMax);
+                    charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                                                    , AttribName.armorMin, chgMin, skillModel.timeFrame, skillModel.castTime, true);
+                    charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                                                    , AttribName.armorMax, chgMax, skillModel.timeFrame, skillModel.castTime, true);
 
-                    resIncr = true; 
+                 
             }            
-        }
-
-        void EndOnEOQ()
-        {
-            charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.waterRes, -40f, false);
-            charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.earthRes, -20f, false);
-            QuestEventService.Instance.OnEOQ -= EndOnEOQ;
-
-            subscribed = false; 
-
-        }
-        public override void SkillEnd()
-        {
-            base.SkillEnd();
-            if (resIncr)
-            {
-                charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.waterRes, -40f, false);
-                charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.earthRes, -20f, false);
-
-                targetController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID
-                                                                , AttribName.armorMin, -chgMin);
-
-                targetController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID
-                                                                 , AttribName.armorMax, -chgMax);
-                resIncr = false;
-            }
         }
         public override void DisplayFX1()
         {
-            str0 = $"If full HP,+80% <style=Attributes> Armor </style>, {skillModel.castTime} rds";
-            SkillService.Instance.skillModelHovered.descLines.Add(str0);
+            if (!moraleChgesCasttime)
+            {
+                str0 = $"If full HP,+80% <style=Attributes> Armor </style>, {skillModel.castTime} rds";
+                SkillService.Instance.skillModelHovered.descLines.Add(str0);
+            }
+            else
+            {
+                str0 = $"If full HP,+80% <style=Attributes> Armor </style>, EOC";
+                SkillService.Instance.skillModelHovered.descLines.Add(str0);
+            }
+            
             str1 = $"If full HP, +40%<style=Water> Water Res </style>and +40%<style=Earth> Earth Res </style>, {skillModel.castTime} rds";
             SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }

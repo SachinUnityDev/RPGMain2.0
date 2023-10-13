@@ -51,13 +51,13 @@ namespace Combat
         //    SkillService.Instance.SkillApply += ApplyFX1;
 
         //}
-        public override void BaseApply()
-        {
-            targetGO = SkillService.Instance.currentTargetDyna.charGO;
-            targetController = targetGO.GetComponent<CharController>();
-           // CombatEventService.Instance.OnEOR1 += Tick;
+        //public override void BaseApply()
+        //{
+        //    targetGO = SkillService.Instance.currentTargetDyna.charGO;
+        //    targetController = targetGO.GetComponent<CharController>();
+        //   // CombatEventService.Instance.OnEOR1 += Tick;
 
-        }
+        //}
         public override void DisplayFX1()
         {
             str1 = "<style=Allies>Wrist Spin has 100% <style=Bleed>Bleed</style>";

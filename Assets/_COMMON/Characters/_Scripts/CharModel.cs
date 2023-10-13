@@ -266,6 +266,10 @@ namespace Common
             {
                 StatData statData = new StatData();
                 statData.statName = _charSO.statList[i].statName;
+                if(statData.statName == StatName.stamina)
+                {
+                    Debug.Log("Stop here"); 
+                }
                 statData.currValue = _charSO.statList[i].currValue;            
                 statData.desc = _charSO.AttribList[i].desc;
 

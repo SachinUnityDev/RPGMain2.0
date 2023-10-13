@@ -53,7 +53,7 @@ namespace Combat
                 .AppendCallback(() => CharService.Instance.ToggleCharColliders(targetTransform.gameObject))
                 .AppendCallback(()=> ApplyGabMainFXOnTarget())   
                 .AppendCallback(()=> ApplyFXOnCollatralTargets())
-                .AppendCallback(()=> ApplyImpactFXOnAllTarget())
+                .AppendCallback(()=> ApplyImpactFXOnSingleTarget())
                 ;
             singleRev
                 .AppendInterval(0.90f)
@@ -165,6 +165,21 @@ namespace Combat
 
         //****************TARGET FX APPLIERS *****************************************
         #region TARGET FX APPLIERS
+
+        void ApplyImpactFXOnSingleTarget()
+        {
+            GameObject impactFXGO;
+
+            SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType);
+
+            impactFXGO = skillPerkdataFX.impactFX;
+            if (impactFXGO == null) return;
+
+                ImpactFX = Instantiate(impactFXGO, targetTransform.position, Quaternion.identity).gameObject;
+                ImpactFX.GetComponentInChildren<ParticleSystem>().Play();
+                Destroy(ImpactFX, 2.5f);           
+        }
+
         public void ApplyImpactFXOnAllTarget()
         {
             GameObject impactFXGO;

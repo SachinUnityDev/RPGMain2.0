@@ -21,8 +21,8 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        List<GameObject> targetGOs = new List<GameObject>();
-        List<CharController> targetControllers = new List<CharController>();
+        //List<GameObject> targetGOs = new List<GameObject>();
+        //List<CharController> targetControllers = new List<CharController>();
         public override void PopulateTargetPos()
         {
             if (skillModel == null) return; 

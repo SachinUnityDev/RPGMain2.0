@@ -30,36 +30,46 @@ namespace Combat
             index = -1;
             //CombatEventService.Instance.OnSOT -= SetCharOnTurn;
             //CombatEventService.Instance.OnSOR -= OnRoundStart;            
-            CombatEventService.Instance.OnSOT += SetCharOnTurn;
+            CombatEventService.Instance.OnSOT += SetNextCharOnTurn;
             CombatEventService.Instance.OnSOR1 += OnRoundStart;
            
         }
         private void OnDisable()
         {
-            CombatEventService.Instance.OnSOT -= SetCharOnTurn;
+            CombatEventService.Instance.OnSOT -= SetNextCharOnTurn;
             CombatEventService.Instance.OnSOR1 -= OnRoundStart;
         }
-        public void SetCharOnTurn()
+
+        public void SetSameCharOnTurn()
+        {
+            if (CombatService.Instance.combatState != CombatState.INCombat_normal)
+            {
+                Debug.Log("wrong STATE return " + index);
+                return;
+            }
+            CombatEventService.Instance.On_CharOnTurnSet();
+        }
+
+        public void SetNextCharOnTurn()
         {
             if (CombatService.Instance.combatState != CombatState.INCombat_normal) 
             {
                 Debug.Log("wrong STATE return " + index);
                 return;
             } 
-         
             index++;
             charCount = CharService.Instance.charsInPlayControllers.Count; 
             if(index < charCount && index > -1)
             {
                 CombatService.Instance.currCharOnTurn = charTurnOrder[index];
-                CombatEventService.Instance.On_CharOnTurnSet();
             }else // next round 
             {
                 index = 0;
                 CombatService.Instance.currCharOnTurn = charTurnOrder[index];
-                CombatEventService.Instance.On_CharOnTurnSet();
             }
             CombatService.Instance.currentTurn = index + 1;
+            CombatEventService.Instance.On_CharOnTurnSet();
+
         }
 
         void OnRoundStart(int roundNo)

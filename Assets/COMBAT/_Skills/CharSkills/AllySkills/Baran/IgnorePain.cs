@@ -56,22 +56,15 @@ namespace Combat
 
         public override void ApplyFX2()
         {
-            charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                                        , charController.charModel.charID, CharStateName.Invulnerable);
+            charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName, charController.charModel.charID
+                                    , CharStateName.Invulnerable, skillModel.timeFrame, skillModel.castTime);
         }
 
         public override void ApplyFX3()
         {
-            targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, AttribName.haste
-                , -4, TimeFrame.EndOfRound, skillModel.castTime, false );
-        }
-
-        public override void SkillEnd()
-        {
-            base.SkillEnd();
-            charController.charStateController.RemoveCharState(CharStateName.Invulnerable);
-         //   targetController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.haste, 4);
-
+            if(targetController != null)
+                targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, AttribName.haste
+                                                                , -4, skillModel.timeFrame, skillModel.castTime, false );
         }
         public override void DisplayFX1()
         {           

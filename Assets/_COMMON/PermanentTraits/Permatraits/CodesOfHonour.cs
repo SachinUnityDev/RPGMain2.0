@@ -35,10 +35,10 @@ using Combat;
         }         
         void ExtraDodgeIfLastMan()
         {
-            if (CombatEventService.Instance.combatController.IsLastManInHeroes(charController))
-            {
-                charController.ChangeAttrib(CauseType.PermanentTrait, (int)permaTraitName, charID,AttribName.dodge,3.0f); 
-            } 
+            //if (CombatEventService.Instance.combatController.IsLastManInHeroes(charController))
+            //{
+            //    charController.ChangeAttrib(CauseType.PermanentTrait, (int)permaTraitName, charID,AttribName.dodge,3.0f); 
+            //} 
         }
     }
 

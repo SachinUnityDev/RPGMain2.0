@@ -62,26 +62,20 @@ namespace Combat
 
         public override void ApplyFX2()
         {
-            targetDynasCopy.ForEach(t => t.charGO.GetComponent<CharController>().charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                    , charController.charModel.charID, CharStateName.Soaked));
+            targetDynasCopy.ForEach(t => t.charGO.GetComponent<CharController>()
+                    .charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                    , charController.charModel.charID, CharStateName.Soaked, skillModel.timeFrame, skillModel.castTime));
         }
         public override void ApplyFX3()
         {
+
+
         }
         public override void ApplyVFx()
         {
             SkillService.Instance.skillFXMoveController.SingleTargetRangeStrike(PerkType.None);             
         }
 
-
-        public override void SkillEnd()
-        {
-            if (targetDynasCopy.Count > 0)
-            {
-                targetDynasCopy.ForEach(t => t.charGO.GetComponent<CharStateController>().RemoveCharState(CharStateName.Soaked));
-            }
-
-        }
         public override void DisplayFX1()
         {
             str0 = $"<style=Enemy> {skillModel.damageMod}% <style=Water> Water </style>";

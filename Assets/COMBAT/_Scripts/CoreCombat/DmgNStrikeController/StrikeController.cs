@@ -2,35 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Common;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Linq;
+
 
 namespace Combat
 {
-
-    public class StrikeMadeData  //  DEPRECATED  
-    {
-        public CharController striker;
-        public List<DynamicPosData> targets; // to decide to keep or remove
-        public List<CharController> targetControllers;
-        public SkillNames skillUsed;
-        public DamageType dmgType;
-        public float dmgValue;
-        public CharStateName charStateName;
-        
-        
-        public StrikeMadeData(CharController striker, List<DynamicPosData> targets, SkillNames skillUsed,
-            DamageType dmgType, float dmgValue, CharStateName charStateName)
-        {
-            this.striker = striker;
-            this.targets = targets;
-            this.skillUsed = skillUsed;
-            this.dmgType = dmgType;
-            this.dmgValue = dmgValue;
-            this.charStateName = charStateName;
-        }
-    }
-
     [System.Serializable]
     public class StatChgData
     {
@@ -48,18 +24,18 @@ namespace Combat
 
         CharController charController;
         List<DynamicPosData> otherTargetDynas;
-        public StrikeCharModel strikeCharModel;
+        public StrikerModel strikerModel;
 
         [Header("Thorns Damage related")]
         public int thornID = -1;
-
-
         float dmgMin, dmgMax;
         private void Start()
         {
             charController = GetComponent<CharController>();
             otherTargetDynas = new List<DynamicPosData>();
-            CombatEventService.Instance.OnDmgDelivered += OnDmgDeliveredTick;
+            CombatEventService.Instance.OnDamageApplied += OnDmgDeliveredTick;
+            CombatEventService.Instance.OnEOR1 += RoundTick;
+            CombatEventService.Instance.OnEOC += EOCTick; 
         }
 
         /// <summary>
@@ -75,9 +51,8 @@ namespace Combat
 
         public void Init()
         {
-            strikeCharModel = new StrikeCharModel();
-            CombatEventService.Instance.OnEOC += EOCTick;
-            CombatEventService.Instance.OnEOR1 += EORTick;
+            strikerModel = new StrikerModel();
+           
         }
 
         public bool FocusCheck()// Magical only .. 
@@ -175,54 +150,59 @@ namespace Combat
         }
 
 
-        #region THORNS RELATED
+    #region THORNS RELATED
 
-
-        // INIFINITE CAST TIME THORNS FX 
-        public void AddThornsFXBuff(DamageType damageType, float thornsMin, float thornsMax, TimeFrame timeframe, int castTime)
+        public int AddThornsBuff(DamageType damageType, float thornsMin, float thornsMax, TimeFrame timeframe, int castTime)
         {
-            //thornID++;
-            //ThornBuffData thornsDmgData = new ThornBuffData(thornID, attackType, damageType, thornsMin, thornsMax);
-
-          //  strikeCharModel.AddThornsDamage(thornsDmgData);
-
-            //int currRd = CombatService.Instance.currentRound;
-            //buffIndex++;
-            //BuffData buffData = new BuffData(buffIndex, isBuff, currRd, timeFrame, netTime,
-            //                                                                  charModVal, directStr);
-
-            //allBuffs.Add(buffData);
-            //return buffIndex;
+            int currRd = CombatService.Instance.currentRound;
+            thornID = strikerModel.allThornsData.Count + 1; 
+            ThornBuffData thornBuffData = new ThornBuffData(thornID, damageType, thornsMin, thornsMax, timeframe, castTime);
+            
+            strikerModel.allThornsData.Add(thornBuffData);
+            
+            return thornID;
         }
-        // TIME BASED THORN FX 
-        public void AddThornsFXBuff(TimeFrame timeFrame, int currentTime, int thornID
-            , AttackType attackType, DamageType damageType, float thornsMin, float thornsMax)
-        {
-            //thornID++;
-            //ThornBuffData thornsDmgData = new ThornBuffData(timeFrame, currentTime, thornID, attackType, damageType, thornsMin, thornsMax);
-
-            //strikeCharModel.AddThornsDamage(thornsDmgData);
-        }
+        
         public void RemoveThornsFx(int thornID)
         {
-            strikeCharModel.RemoveThornDamage(thornID);
+            strikerModel.RemoveThornDamage(thornID);
         }
-
-        void OnDmgDeliveredTick(DmgData dmgData)
+        public void RoundTick(int roundNo)
         {
-            foreach (ThornBuffData thornData in strikeCharModel.allThornsData)
+            foreach (ThornBuffData thornBuffData in strikerModel.allThornsData.ToList())
             {
-                //if (thornData.attackType == dmgData.attackType)
-                //{
-                //    float dmgPercentValue = UnityEngine.Random.Range(thornData.thornsMin, thornData.thornsMax);
-                //    dmgData.striker.GetComponent<DamageController>()
-                //        .ApplyDamage(charController, CauseType.ThornsAttack, -1, thornData.damageType, dmgPercentValue, false);
-                //}
+                if (thornBuffData.timeFrame == TimeFrame.EndOfRound)
+                {
+                    if (thornBuffData.currentTime >= thornBuffData.castTime)
+                    {
+                        RemoveThornsFx(thornBuffData.thornID);
+                    }
+                    thornBuffData.currentTime++;
+                }
             }
         }
-
-        // remove thorns that are time based 
-
+        public void EOCTick()
+        {
+            foreach (ThornBuffData thornBuffData in strikerModel.allThornsData.ToList())
+            {
+                if (thornBuffData.timeFrame == TimeFrame.EndOfCombat)
+                {
+                    strikerModel.allThornsData.Clear();
+                }
+            }
+        }
+        void OnDmgDeliveredTick(DmgAppliedData dmgAppliedData)
+        {
+            foreach (ThornBuffData thornData in strikerModel.allThornsData)
+            {   
+                if(thornData.damageType == dmgAppliedData.dmgType)
+                {
+                    float dmgPercentValue = UnityEngine.Random.Range(thornData.thornsMin, thornData.thornsMax);
+                    dmgAppliedData.striker.GetComponent<DamageController>()
+                        .ApplyDamage(charController, CauseType.ThornsAttack, -1, thornData.damageType, dmgPercentValue, false);
+                }
+            }
+        }
 
         #endregion
 
@@ -237,18 +217,18 @@ namespace Combat
             AttackType attackType = AttackType.None, DamageType dmgType = DamageType.None,
             CultureType cultType = CultureType.None, RaceType raceType = RaceType.None)
         {
+            dmgBuffID = allDmgBuffData.Count + 1; 
 
-            DmgAltData dmgAltData = new DmgAltData(valPercent, attackType, dmgType, cultType, raceType);
+            DmgAltData dmgAltData = new DmgAltData( valPercent, attackType, dmgType, cultType, raceType);
             int startRoundNo = CombatService.Instance.currentRound;
-            dmgBuffID++;
-
+          
             DmgBuffData dmgBuffData = new DmgBuffData(dmgBuffID, isBuff, startRoundNo, timeFrame
                             , netTime, dmgAltData);
 
             allDmgBuffData.Add(dmgBuffData);
             return dmgBuffID;
         }
-        public void EOCTick()
+        public void EOCTickDmgBuff()
         {
             foreach (DmgBuffData dmgBuffData in allDmgBuffData.ToList())
             {
@@ -385,8 +365,9 @@ namespace Combat
         public RaceType raceType = RaceType.None;
         public float valPercent = 0f;
 
-        public DmgAltData(float valPercent, AttackType attackType, DamageType damageType, CultureType cultType, RaceType raceType)
+        public DmgAltData( float valPercent, AttackType attackType, DamageType damageType, CultureType cultType, RaceType raceType)
         {
+           
             this.attackType = attackType;
             this.damageType = damageType;
             this.cultType = cultType;

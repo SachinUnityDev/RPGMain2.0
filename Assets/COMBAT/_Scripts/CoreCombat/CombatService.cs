@@ -95,9 +95,8 @@ namespace Combat
                     charCtrl.strikeController = charCtrl.gameObject.AddComponent<StrikeController>();
 
                 charCtrl.damageController.Init(); 
-                charCtrl.strikeController.Init() ;
-                charCtrl.combatController.Init() ;
-
+                charCtrl.strikeController.Init();
+                charCtrl.combatController.Init();
             }
         }
 

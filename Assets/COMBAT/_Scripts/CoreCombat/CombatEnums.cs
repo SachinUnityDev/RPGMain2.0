@@ -44,9 +44,9 @@ namespace Combat
         Light, 
         Dark, 
         Pure,        // not stopped by any armor or resistance no chance for dodge , mishits
-        Buff,
-        Debuff,
-        Guard, 
+        Blank1,
+        Blank2,
+        Blank3, 
         Heal,
         FortitudeDmg, 
         DOT,

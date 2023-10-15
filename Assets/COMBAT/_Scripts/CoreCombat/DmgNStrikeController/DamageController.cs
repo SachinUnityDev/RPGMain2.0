@@ -7,16 +7,10 @@ using System;
 
 namespace Combat
 {
-
- 
-
     public class DamageController : MonoBehaviour
     {
-        public event Action<DmgAppliedData> OnDamageApplied;
+        //public event Action<DmgAppliedData> OnDamageApplied;
         
-
-
-
         const float hitChanceMin = 30f;
 
         const float hitChanceMax = 93f;
@@ -95,7 +89,6 @@ namespace Combat
                 if (luckChance.GetChance())
                 {
                     strikeType = StrikeType.Crit;
-
                 }
             }
             else
@@ -107,7 +100,7 @@ namespace Combat
 
         float CritNFeebleApply(float dmg)
         {
-            LuckCheck();
+            LuckCheck(); // modifies the strikeType
             float dmgNew = 0f;
             if (strikeType == StrikeType.Crit)
             {
@@ -127,8 +120,8 @@ namespace Combat
         }
 
         public void ApplyDamage(CharController striker, CauseType causeType, int causeName
-                                    , DamageType _dmgType, float dmgPercentVal
-                                    , bool ignoreArmor = false, bool isTrueStrike = false)
+                                    , DamageType _dmgType, float dmgPercentORVal
+                                    , bool ignoreArmorNRes = false, bool isTrueStrike = false)
         {
             this.striker = striker;
             AttackType attackType =
@@ -138,7 +131,8 @@ namespace Combat
                 if(_dmgType == DamageType.Physical && HitChance())
                 {
                     strikeType = StrikeType.Dodged; 
-                    OnDamageApplied?.Invoke(new DmgAppliedData(striker, causeType, causeName, _dmgType, 0f, strikeType, charController));
+                    CombatEventService.Instance.On_DmgApplied(new DmgAppliedData(striker, causeType, causeName
+                        , _dmgType, 0f, strikeType, charController));
                     return; 
                 }
 
@@ -148,9 +142,7 @@ namespace Combat
                 
             AttribData dmgSDMin = striker.GetAttrib(AttribName.dmgMin);
             AttribData dmgSDMax = striker.GetAttrib(AttribName.dmgMax);
-            float percentDmg = dmgPercentVal + damageAlt; // copy of Dmg value for magical and physical + Dmg modifiers 
-
-
+            float percentDmg = dmgPercentORVal + damageAlt; // copy of Dmg value for magical and physical + Dmg modifiers 
 
             float dmg = (float)(UnityEngine.Random.Range(dmgSDMin.currValue, dmgSDMax.currValue) * (percentDmg / 100f));
             int strikerID = striker.charModel.charID;
@@ -162,78 +154,97 @@ namespace Combat
                     break;
                 case DamageType.Physical:
                     float dmgVal = CritNFeebleApply(dmg);
-                    AttribData armorSDMin = charController.GetAttrib(AttribName.armorMin);
-                    AttribData armorSDMax = charController.GetAttrib(AttribName.armorMax);
+                    float chgValue = dmgVal; 
+                    if (ignoreArmorNRes)
+                    {
+                        AttribData armorSDMin = charController.GetAttrib(AttribName.armorMin);
+                        AttribData armorSDMax = charController.GetAttrib(AttribName.armorMax);
 
-                    float armor = UnityEngine.Random.Range(armorSDMin.currValue, armorSDMax.currValue);
-                    float chgValue = dmgVal - armor;
-                    chgValue = chgValue < 0 ? 0 : chgValue;
+                        float armor = UnityEngine.Random.Range(armorSDMin.currValue, armorSDMax.currValue);
+                        chgValue = dmgVal - armor;
+                        chgValue = chgValue < 0 ? 0 : chgValue;
+                    }
                     charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -chgValue);
                     break;
-
-                case DamageType.StaminaDmg: // no resistance, no armor etc ok no substractions for stamina , Fort and Pure
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.stamina, -dmgPercentVal);
-
-                    break;
+             
                 case DamageType.Air:
                     dmgVal = CritNFeebleApply(dmg);
                     float airRes = charController.GetAttrib(AttribName.waterRes).currValue;
-                    float airDmg = dmgVal * (100 - airRes) / 100;
-                    // airDmg = airDmg < 0 ? 0 : airDmg;
+                    float airDmg = dmgVal; 
+                    if(ignoreArmorNRes && airRes > 0)
+                            airDmg = dmgVal * (100 - airRes) / 100;
+                     airDmg = airDmg < 0 ? 0 : airDmg;
                     charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -airDmg);
                     break;
                 case DamageType.Water:
                     dmgVal = CritNFeebleApply(dmg);
                     float waterRes = charController.GetAttrib(AttribName.waterRes).currValue;
-                    float waterDmg = dmgVal * ((100f - waterRes) / 100f);
-                    // waterDmg = waterDmg < 0 ? 0 : waterDmg;
+                    float waterDmg = dmgVal;
+                    if (ignoreArmorNRes && waterRes > 0)
+                         waterDmg = dmgVal * ((100f - waterRes) / 100f);
+                     waterDmg = waterDmg < 0 ? 0 : waterDmg;
                     charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -waterDmg);
                     break;
                 case DamageType.Earth:
                     dmgVal = CritNFeebleApply(dmg);
                     float earthRes = charController.GetAttrib(AttribName.earthRes).currValue;
-                    float earthDmg = dmgVal * (100 - earthRes) / 100;
-                    //  earthDmg = earthDmg < 0 ? 0 : earthDmg;
+                    float earthDmg = dmgVal;
+                    if (ignoreArmorNRes && earthRes > 0)
+                        earthDmg = dmgVal * ((100f - earthRes) / 100f);
+                    
+                      earthDmg = earthDmg < 0 ? 0 : earthDmg;
                     charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -earthDmg);
                     break;
                 case DamageType.Fire:
                     dmgVal = CritNFeebleApply(dmg);
                     float fireRes = charController.GetAttrib(AttribName.fireRes).currValue;
-                    float fireDmg = dmgVal * (100 - fireRes) / 100;
-                    // fireDmg = fireDmg < 0 ? 0 : fireDmg;
+                    float fireDmg = dmgVal;
+                    if (ignoreArmorNRes && fireRes > 0)
+                        fireDmg = dmgVal * (100 - fireRes) / 100;
 
+                     fireDmg = fireDmg < 0 ? 0 : fireDmg;
                     charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -fireDmg);
                     break;
                 case DamageType.Light:
                     dmgVal = CritNFeebleApply(dmg);
                     float lightRes = charController.GetAttrib(AttribName.lightRes).currValue;
-                    float lightDmg = dmgVal * (100 - lightRes) / 100;
-                    //   lightDmg = lightDmg < 0 ? 0 : lightDmg;
+                    float lightDmg = dmgVal;
+                    if (ignoreArmorNRes && lightRes > 0)
+                        lightDmg = dmgVal * ((100f - lightRes) / 100f);
+                    
+                       lightDmg = lightDmg < 0 ? 0 : lightDmg;
                     charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -lightDmg);
                     break;
                 case DamageType.Dark:
                     dmgVal = CritNFeebleApply(dmg);
                     float darkRes = charController.GetAttrib(AttribName.darkRes).currValue;
-                    float darkDmg = dmgVal * (100 - darkRes) / 100;
-                    //   darkDmg = darkDmg < 0 ? 0 : darkDmg;
+                    float darkDmg = dmgVal;
+                    if (ignoreArmorNRes && darkRes > 0)
+                        darkDmg = dmgVal * ((100f - darkRes) / 100f);
+                    
+                       darkDmg = darkDmg < 0 ? 0 : darkDmg;
                     charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -darkDmg);
                     break;
                 case DamageType.Pure:
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -dmgPercentVal);
+                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -dmgPercentORVal);
                     break;
-                case DamageType.Buff:
+                case DamageType.Blank1:
 
                     break;
-                case DamageType.Debuff:
+                case DamageType.Blank2:
 
                     break;
-                case DamageType.Guard:
+                case DamageType.Blank3:
                     break;
                 case DamageType.Heal:
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, dmgPercentVal);
+                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, dmgPercentORVal*(1 + damageAlt/100));
                     break;
                 case DamageType.FortitudeDmg:
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.fortitude, -dmgPercentVal);
+                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.fortitude, -dmgPercentORVal);
+                    break;
+                case DamageType.StaminaDmg: // no resistance, no armor etc ok no substractions for stamina , Fort and Pure
+                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.stamina, -dmgPercentORVal);
+
                     break;
                 //case DamageType.HealthDmg:
                 //    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatsName.health, -dmgPercentVal);
@@ -241,13 +252,20 @@ namespace Combat
                 default:
                     break;
             }
-            OnDamageApplied?.Invoke(new DmgAppliedData(striker, causeType, causeName, _dmgType, dmgPercentVal, strikeType, charController));
+            CombatEventService.Instance.On_DmgApplied(new DmgAppliedData(striker, causeType, causeName
+                                                , _dmgType, dmgPercentORVal, strikeType, charController));
 
         }
-        // code it like buff return a index and get it sorted 
+       
 
-        // COMBAT CHAR MODEL WILL CONTAIN STRIKEDATA, DMGDATA,
 
+        public void HealingAsPercentOfMaxHP(CharController charController, CauseType causeType, int causeName, float val)
+        {
+            StatData statData = charController.GetStat(StatName.health);
+            float healVal = ((val / 100) * statData.maxLimit);
+
+            ApplyDamage(charController, causeType, causeName, DamageType.Heal, healVal); 
+        }
 
         void FortChgOnStrikingCritNFeeble()
         {

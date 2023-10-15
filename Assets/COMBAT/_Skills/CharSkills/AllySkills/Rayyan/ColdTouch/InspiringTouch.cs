@@ -34,11 +34,7 @@ namespace Combat
             }
         }
 
-        public override void SkillEnd()
-        {
-            base.SkillEnd();
-            targetController.charStateController.RemoveCharState(CharStateName.Inspired);
-        }
+
         public override void ApplyFX2()
         {
         }

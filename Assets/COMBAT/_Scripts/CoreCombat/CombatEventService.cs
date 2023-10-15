@@ -22,7 +22,9 @@ namespace Combat
         public event Action<CharController> OnDeathInCombat;
         public event Action<CharController> OnCombatRejoin;
         public event Action<StrikeData> OnStrikeFired;
-        public event Action<DmgData> OnDmgDelivered;
+       // public event Action<DmgData> OnDmgDelivered;
+        public event Action<DmgAppliedData> OnDamageApplied;
+
         public event Action<GameObject> OnCharRightClicked;
         public event Action<CharController> OnCharOnTurnSet;
         public event Action<bool> OnCombatLoot;
@@ -167,9 +169,9 @@ namespace Combat
                return false; 
 
         }
-        public void On_DmgDelivered(DmgData _dmgData)
+        public void On_DmgApplied(DmgAppliedData dmgAppliedData)
         {
-            OnDmgDelivered.Invoke(_dmgData);
+           OnDamageApplied?.Invoke(dmgAppliedData);
         }
         public void On_targetClicked(DynamicPosData _targetDyna)
         {

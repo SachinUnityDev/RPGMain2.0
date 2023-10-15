@@ -118,10 +118,9 @@ namespace Combat
             CharService.Instance.charsInPlayControllers
                         .ForEach(t => t.OnAttribChg += PrintAttribChanged);
 
-            CharService.Instance.charsInPlayControllers.ForEach(t => t.OnStatChg += PrintStatChgAdded); 
+           CharService.Instance.charsInPlayControllers.ForEach(t => t.OnStatChg += PrintStatChgAdded); 
 
-            CharService.Instance.charsInPlayControllers
-                        .ForEach(t => t.damageController.OnDamageApplied += PrintDamageApplied); 
+           CombatEventService.Instance.OnDamageApplied += PrintDamageApplied; 
 
             string str = "Combat Start!";
             combatLog.Add(new CombatLogData(LogBackGround.HighHL, str));

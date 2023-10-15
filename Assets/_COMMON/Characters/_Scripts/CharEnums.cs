@@ -108,7 +108,7 @@ public enum CharStateName
     Fearful,
     Feebleminded,
     FirstBlood,
-    Frigid,
+    Aquaborne,
     FullBlood,
     Guarded,
     Hexed,

@@ -48,7 +48,6 @@ namespace Combat
             {
                 RegainAP();
             }
-            SkillService.Instance.OnSkillUsed -= WaterShellRegainAP;
         }
         void OnEOT()
         {
@@ -87,7 +86,7 @@ namespace Combat
         {
             if (IsTargetAlly())
             {
-                targetController.damageController.OnDamageApplied += EOCTick;
+                CombatEventService.Instance.OnDamageApplied += EOCTick;
                 CombatEventService.Instance.OnEOC += EOCEnd; 
             }
         }
@@ -96,6 +95,7 @@ namespace Combat
         }
         void EOCTick(DmgAppliedData dmgAppliedData)
         {
+            if (dmgAppliedData.targetController.charModel.charID != targetController.charModel.charID) return;
             if (dmgAppliedData.dmgType != DamageType.Heal) return;
             if (stackAmt <= 36)
             {
@@ -106,7 +106,7 @@ namespace Combat
         }
         void EOCEnd()
         {
-            targetController.damageController.OnDamageApplied -= EOCTick;
+            CombatEventService.Instance.OnDamageApplied -= EOCTick;
             CombatEventService.Instance.OnEOC -= EOCEnd;
         }
 

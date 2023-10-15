@@ -34,14 +34,14 @@ namespace Combat
         public override void BaseApply()
         {
             base.BaseApply();
-            targetController.damageController.OnDamageApplied -= ApplyCrit;
-            targetController.damageController.OnDamageApplied += ApplyCrit; 
-
-
+            CombatEventService.Instance.OnDamageApplied -= ApplyCrit;
+            CombatEventService.Instance.OnDamageApplied += ApplyCrit; 
         }
 
         void ApplyCrit(DmgAppliedData dmgAppliedData)
         {
+            if (dmgAppliedData.targetController.charModel.charID != targetController.charModel.charID) return; 
+
             if(dmgAppliedData.strikeType == StrikeType.Crit)
             {
                 if (targetController.GetComponent<CharStateController>().HasCharDOTState(CharStateName.BleedLowDOT))
@@ -75,7 +75,7 @@ namespace Combat
         public override void SkillEnd()
         {
             base.SkillEnd();
-            targetController.damageController.OnDamageApplied -= ApplyCrit;
+            CombatEventService.Instance.OnDamageApplied -= ApplyCrit;
         }
         public override void DisplayFX1()
         {

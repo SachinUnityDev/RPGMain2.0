@@ -19,39 +19,17 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        bool subscribed = false; 
+       // bool subscribed = false; 
         public override void PopulateTargetPos()
         {
             if (skillModel == null) return; skillModel.targetPos.Clear();
                  skillModel.targetPos.Add(new CellPosData(myDyna.charMode, myDyna.currentPos));
         }
-       
-        void EndSubs()
-        {
-            CombatEventService.Instance.OnDmgDelivered -= ReduceHealingUntilEOC;
-            CombatEventService.Instance.OnEOC -= EndSubs;
-            subscribed = false;
-        }
-
-        void ReduceHealingUntilEOC(DmgData dmgData)
-        {
-           if(dmgData.dmgRecievedType == DamageType.Heal)
-           {
-                if(dmgData.targetController == charController)
-                {
-                    int healVal = (int)dmgData.dmgDelivered / 2;
-                    charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatName.health
-                        , -healVal, false);
-                }               
-           }
-        }
-
+   
         public override void ApplyFX1()
-        {
-            if (subscribed) return;
-            CombatEventService.Instance.OnDmgDelivered += ReduceHealingUntilEOC;
-            CombatEventService.Instance.OnEOC += EndSubs;
-            subscribed = true;
+        {           
+            charController.strikeController.ApplyDmgAltBuff(-50f, CauseType.CharSkill, (int)skillName
+                , charController.charModel.charID, TimeFrame.EndOfCombat, -1, false, AttackType.None, DamageType.Heal);
         }
 
         public override void ApplyFX2()

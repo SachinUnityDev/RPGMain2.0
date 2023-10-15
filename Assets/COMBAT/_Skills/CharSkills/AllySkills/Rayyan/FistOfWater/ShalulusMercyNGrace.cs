@@ -26,7 +26,7 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        public List<CharController> allCharControllers = new List<CharController>();
+        //public List<CharController> allCharControllers = new List<CharController>();
         public override void AddTargetPos()
         {
             if (skillModel == null) return;
@@ -37,41 +37,64 @@ namespace Combat
                     if (dyna != null)
                     {
                         skillModel.targetPos.Add(cellPosData);
-                        allCharControllers.Add(dyna.charGO.GetComponent<CharController>());
+                        CombatService.Instance.mainTargetDynas.Add(dyna);
                     }                
             }
         }
-
-        public override void SkillSelected()
+        public override void SkillHovered()
         {
-            base.SkillSelected();
-            skillModel.damageMod = 140f; 
+            base.SkillHovered();
+            skillModel.damageMod = 120f;
+            skillModel.cd = 4;
         }
+
+
 
         public override void ApplyFX1()
         {
             AttribData statData = charController.GetAttrib(AttribName.morale);
-            if(statData.currValue < 12)
+            foreach (DynamicPosData dyna in CombatService.Instance.mainTargetDynas)
             {
-                allCharControllers.ForEach(t => t.damageController
-                 .ApplyDamage(charController, CauseType.CharSkill, (int)SkillNames.FistOfWater, DamageType.Heal
-                                                                    , UnityEngine.Random.Range(6, 12)));
-            }else
-            {
-                allCharControllers.ForEach(t => t.damageController
-                        .ApplyDamage(charController, CauseType.CharSkill, (int)SkillNames.FistOfWater, DamageType.Heal
-                                        , UnityEngine.Random.Range(12, 24)));
-            }       
+                if(dyna.charMode== CharMode.Ally)
+                {
+                    if (statData.currValue < 12)
+                    {
+                        dyna.charGO.GetComponent<CharController>().damageController
+                         .ApplyDamage(charController, CauseType.CharSkill, (int)SkillNames.FistOfWater, DamageType.Heal
+                                                                            , UnityEngine.Random.Range(5, 11));
+                    }
+                    else
+                    {
+                        dyna.charGO.GetComponent<CharController>().damageController
+                                .ApplyDamage(charController, CauseType.CharSkill, (int)SkillNames.FistOfWater, DamageType.Heal
+                                                , UnityEngine.Random.Range(10, 21));
+                    }
+                }
+            }
         }
         public override void ApplyFX2()
         {
-            allCharControllers.ForEach(t => charController.charStateController.ClearDOT(CharStateName.BurnLowDOT)); 
+            foreach (DynamicPosData dyna in CombatService.Instance.mainTargetDynas)
+            {
+                if (dyna.charMode == CharMode.Ally)
+                {
+                    dyna.charGO.GetComponent<CharController>().charStateController.ClearDOT(CharStateName.BurnLowDOT);
+                    dyna.charGO.GetComponent<CharController>().charStateController.ClearDOT(CharStateName.PoisonedHighDOT);
+                }
+            }
         }
 
         public override void ApplyFX3()
         {
-            allCharControllers.ForEach(t => t.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                       , charController.charModel.charID, CharStateName.Soaked));                            
+            //foreach (DynamicPosData dyna in CombatService.Instance.mainTargetDynas)
+            //{
+            //    if (dyna.charMode == CharMode.Ally)
+            //    {
+            //        dyna.charGO.GetComponent<CharController>().charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+            //                                , charController.charModel.charID, CharStateName.Soaked);
+            //    }
+            //}
+            
         }
 
         public override void ApplyMoveFX()
@@ -84,7 +107,7 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str0 = $"<style=Heal>Heal</style> 6-12";
+            str0 = $"<style=Heal>Heal</style> 5-10";
             SkillService.Instance.skillModelHovered.descLines.Add(str0);
 
             str1 = $"If <style=Attribute>Morale</style> 12, <style=Heal>Heal</style> 12-24";

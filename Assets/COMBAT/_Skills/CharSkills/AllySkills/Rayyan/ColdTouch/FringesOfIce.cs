@@ -25,28 +25,14 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        public override void BaseApply()
-        {
-            base.BaseApply(); 
-            CombatEventService.Instance.OnDmgDelivered += ExtraWaterDmg2Attacker;
 
-        } 
 
-        public void ExtraWaterDmg2Attacker(DmgData dmgData)
-        {
-            if (dmgData.targetController == targetController)
-            {
-                if (dmgData.attackType == AttackType.Melee)  // A STRIKE BACK 
-                {
-                    dmgData.striker.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName,
-                                                                        DamageType.Water, 40f, false);
-                }
-            }
-        }
+   
 
         public override void ApplyFX1()
         {
-
+           targetController.strikeController.AddThornsBuff(DamageType.Water, 4, 6
+                                                    , skillModel.timeFrame, skillModel.castTime);
 
         }
 
@@ -82,14 +68,6 @@ namespace Combat
         }
 
         public override void DisplayFX4()
-        {
-        }
-
-        public override void PostApplyFX()
-        {
-        }
-
-        public override void PreApplyFX()
         {
         }
     }

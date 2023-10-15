@@ -3,6 +3,7 @@ using Common;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
+using Town;
 using UnityEngine;
 
 
@@ -38,7 +39,7 @@ namespace Interactables
         {
             CharStatesService.Instance.OnCharStateStart += OnCharStateStart;
             CharStatesService.Instance.OnCharStateEnd += OnCharStateEnd;
-            charController.damageController.OnDamageApplied += OnCritHit;
+            CombatEventService.Instance.OnDamageApplied += OnCritHit;
             SkillService.Instance.OnSkillUsed += OnSkillUsed;
         }
         void OnCharStateStart(CharStateModData charStateModData)
@@ -57,13 +58,13 @@ namespace Interactables
 
         void OnCritHit(DmgAppliedData dmgAppliedData)
         {
-            if(dmgAppliedData.strikeType != StrikeType.Crit) return;
+            if (dmgAppliedData.targetController.charModel.charID != charController.charModel.charID) return;
+            if (dmgAppliedData.strikeType != StrikeType.Crit) return;
             int buffID = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw,
                              (int)sagaicGewgawName, charController.charModel.charID, AttribName.acc,
                              +2, TimeFrame.EndOfCombat, 1, true);
             buffIndex.Add(buffID); // id # 1 
         }
-
 
         void OnSkillUsed(SkillEventData skillEventData)
         {
@@ -79,7 +80,7 @@ namespace Interactables
             CharStatesService.Instance.OnCharStateStart -= OnCharStateStart;
             CharStatesService.Instance.OnCharStateEnd -= OnCharStateEnd;
 
-            charController.damageController.OnDamageApplied -= OnCritHit;
+            CombatEventService.Instance.OnDamageApplied -= OnCritHit;
 
             SkillService.Instance.OnSkillUsed -= OnSkillUsed;
             charController.buffController.RemoveBuff(buffIndex[0]);// vigor buff // no other buff sticks  

@@ -24,44 +24,34 @@ namespace Combat
 
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
-     
-        public override void BaseApply()
+
+        public override void SkillSelected()
         {
-            base.BaseApply();
-            CombatEventService.Instance.OnDmgDelivered += Retaliation4FireDmg; 
+            base.SkillSelected();
+            SkillService.Instance.SkillFXRemove += skillController.allPerkBases
+                        .Find(t => t.skillName == skillName && t.skillLvl == SkillLvl.Level1).RemoveFX1;
+
+
         }
+
+
         public override void ApplyFX1()
         {
-            if(targetController != null  && IsTargetAlly())
+
+            targetController.strikeController.AddThornsBuff(DamageType.Water, 5, 8 
+                                                   , skillModel.timeFrame, skillModel.castTime);
+
+            if (targetController != null  && IsTargetAlly())
             {
                 targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                    , AttribName.fireRes, 20f, TimeFrame.EndOfRound, skillModel.castTime, true); 
+                    , AttribName.fireRes, 20f, skillModel.timeFrame, skillModel.castTime, true); 
             }
         }
-
-        public override void SkillEnd()
-        {
-            base.SkillEnd();
-            //targetController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatsName.fireRes
-            //                , -20f);
-            CombatEventService.Instance.OnDmgDelivered -= Retaliation4FireDmg;
-        }
-
-        public void Retaliation4FireDmg(DmgData dmgData)
-        {
-            if(dmgData.dmgRecievedType == DamageType.Fire)
-            {
-                if (dmgData.targetController == targetController)
-                {                  
-                        dmgData.striker.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
-                                                                                            , DamageType.Water, 60f, false);                    
-                }
-            }       
-        }
-
   
         public override void ApplyFX2()
         {
+            if(targetController != null)
+                    targetController.charStateController.ClearDOT(CharStateName.BurnLowDOT); 
         }
 
         public override void ApplyFX3()

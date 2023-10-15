@@ -32,12 +32,14 @@ namespace Combat
             CombatEventService.Instance.OnStrikeFired += ExtraWaterDmg1;
         }
 
-        public override void BaseApply()
+        public override void SkillHovered()
         {
-            base.BaseApply();
+            base.SkillHovered();
             skillModel.staminaReq = 6;
 
+
         }
+        
 
         public void ExtraWaterDmg1(StrikeData strikeData)
         {
@@ -46,7 +48,7 @@ namespace Combat
                 if (strikeData.attackType == AttackType.Melee && strikeData.skillInclination == SkillInclination.Physical)
                 {
                     strikeData.targets.ForEach(t => t.damageController.ApplyDamage(strikeData.striker, CauseType.CharSkill, (int)skillName
-                            , DamageType.Water, 70f, false));
+                            , DamageType.Water, 30f, false));
                 }
             }
         }

@@ -28,17 +28,20 @@ namespace Combat
             if(targetController && IsTargetAlly())
             {
                 targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                                                , charController.charModel.charID, CharStateName.Frigid, skillModel.timeFrame, skillModel.castTime);
+                                                , charController.charModel.charID, CharStateName.Aquaborne, skillModel.timeFrame, skillModel.castTime);
             }
         }
-        public override void SkillEnd()
-        {
-            base.SkillEnd();
-            targetController.charStateController.RemoveCharState(CharStateName.Frigid);
-        }
+        //public override void SkillEnd()
+        //{
+        //    base.SkillEnd();
+        //    targetController.charStateController.RemoveCharState(CharStateName.Aquaborne);
+        //}
 
         public override void ApplyFX2()
         {
+            if(50f.GetChance())
+            RegainAP();
+
         }
 
         public override void ApplyFX3()
@@ -55,12 +58,14 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str1 = $"<style=States> Frigid </style>, {skillModel.castTime} rds";
+            str1 = $"<style=States> Aquaborne </style>, {skillModel.castTime} rds";
             SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
 
         public override void DisplayFX2()
         {
+            str0 = $"50 % chance  regain AP ";
+            SkillService.Instance.skillModelHovered.descLines.Add(str0);
         }
 
         public override void DisplayFX3()

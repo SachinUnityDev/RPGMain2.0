@@ -1,5 +1,7 @@
 using Combat;
+using common;
 using Common;
+using Quest;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -35,7 +37,12 @@ namespace Common
         [SerializeField] int perkBaseCount = -1;
 
         SkillDataSO skillDataSO;
-        SkillView skillView; 
+        SkillView skillView;
+
+        [Header("Skill DmgMod Buffs")]
+        public List<SkillDmgModData> allSkillDmgMod = new List<SkillDmgModData>(); 
+
+
         private void OnEnable()
         {
             charController = gameObject.GetComponent<CharController>();
@@ -45,7 +52,8 @@ namespace Common
             CombatEventService.Instance.OnSOC1 += InitAllSkill_OnCombat;
             Debug.Log("ENABLED" + charName);
             // CharService.Instance.OnCharAddedToParty += InitSkillList;
-            SceneManager.sceneLoaded += OnSceneLoaded; 
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            QuestEventService.Instance.OnEOQ += EOQTick; 
         }
         private void OnDisable()
         {
@@ -57,14 +65,15 @@ namespace Common
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if(GameService.Instance.gameModel.gameState == GameState.InCombat)
+            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
                 if (skillView == null)
                     skillView = FindObjectOfType<SkillView>();
                 CombatEventService.Instance.OnSOC1 += InitAllSkill_OnCombat;
-
+                CombatEventService.Instance.OnEOR1 += RoundTick;
+                CombatEventService.Instance.OnEOC += EOCTick;
             }
-
+            
         }
 
 
@@ -710,7 +719,101 @@ namespace Common
             return skillchance.GetChance();
         }
 
-        #endregion 
+        #endregion
 
+        #region SKILL MOD BUFF
+        
+        public int ApplySkillDmgModBuff(CauseType causeType, int causeName,  SkillInclination skillInclination, float dmgVal, TimeFrame timeFrame, int castTime)
+        {
+            int skillModId = allSkillDmgMod.Count + 1;
+            int currRd = GameSupportService.Instance.currentRound;
+            SkillDmgModData skillBuffModVal = new SkillDmgModData(skillModId, causeType, causeName, skillInclination
+                                                                                    , dmgVal, timeFrame, castTime, currRd);
+            foreach (SkillModel skillModel in allSkillModels)
+            {
+                if(skillModel.skillInclination == skillInclination)
+                        skillModel.damageMod += dmgVal; 
+            }
+            allSkillDmgMod.Add(skillBuffModVal);
+            return skillModId;
+        }
+
+        public void RemoveSkillDmgModBuff(int skillModId)
+        {
+            int index = allSkillDmgMod.FindIndex(t=>t.skillModID== skillModId);
+            if (index != -1)
+            {
+                foreach (SkillModel skillModel in allSkillModels)
+                {
+                    if (skillModel.skillInclination == allSkillDmgMod[index].skillInclination)
+                            skillModel.damageMod -= allSkillDmgMod[index].dmgVal;
+                }
+                allSkillDmgMod.RemoveAt(index);
+            }
+        }
+
+        public void RoundTick(int roundNo)
+        {
+            foreach (SkillDmgModData skillDmgModData in allSkillDmgMod.ToList())
+            {
+                if (skillDmgModData.timeFrame == TimeFrame.EndOfRound)
+                {
+                    if (skillDmgModData.currentTime >= skillDmgModData.castTime)
+                    {
+                        RemoveSkillDmgModBuff(skillDmgModData.skillModID);
+                    }
+                    skillDmgModData.currentTime++;
+                }
+            }
+        }
+        public void EOCTick()
+        {
+            foreach (SkillDmgModData buffData in allSkillDmgMod.ToList())
+            {
+                if (buffData.timeFrame == TimeFrame.EndOfCombat)
+                {
+                    RemoveSkillDmgModBuff(buffData.skillModID);
+                }
+            }
+        }
+        public void EOQTick()
+        {
+            foreach (SkillDmgModData skillModBuffData in allSkillDmgMod.ToList())
+            {
+                if (skillModBuffData.timeFrame == TimeFrame.EndOfQuest)
+                {
+                    RemoveSkillDmgModBuff(skillModBuffData.skillModID);
+                }
+            }
+        }
+
+        #endregion
+
+
+    }
+
+    public class SkillDmgModData
+    {
+        public int skillModID; 
+        public CauseType causeType;
+        public int causeName;
+        public SkillInclination skillInclination;
+        public float dmgVal;
+        public TimeFrame timeFrame;
+        public int castTime;
+        public int currentTime; 
+
+        public SkillDmgModData(int skillModID, CauseType causeType, int causeName, SkillInclination skillInclination, float dmgVal
+                                    , TimeFrame timeFrame, int castTime, int currentTime)
+        {
+            this.skillModID = skillModID;
+            this.causeType = causeType;
+            this.causeName = causeName;
+            this.skillInclination = skillInclination;
+            this.dmgVal = dmgVal;
+            this.timeFrame = timeFrame;
+            this.castTime = castTime;
+            this.currentTime = currentTime; 
+        }
     }
 }

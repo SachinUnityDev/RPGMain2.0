@@ -223,7 +223,7 @@ MonoBehaviour:
     skillType: 4
     skillUnLockStatus: 1
     skillDesc: 
-    damageMod: 180
+    damageMod: 160
     skillLvl: 0
     skillSelState: 1
     cd: -1
@@ -268,7 +268,7 @@ MonoBehaviour:
     damageMod: 0
     skillLvl: 0
     skillSelState: 1
-    cd: 3
+    cd: 2
     attackType: 0
     dmgType: 0a0000000b000000
     castPos: 01000000020000000300000004000000050000000600000007000000

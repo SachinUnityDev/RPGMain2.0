@@ -8,16 +8,14 @@ namespace Combat
     public class DmgData  // Dmg Delivered data
     {
 
-        public CharController targetController;
+        public CharController targetController; 
         public CharController striker; 
         public DamageType dmgRecievedType;
         public AttackType attackType; 
         public StrikeType strikeType;
         public float dmgDelivered; 
-        public List<CharStateName> allCharStateRecieved;
         public bool minArmorTriggered;
         public bool maxArmorTriggered;
-        public bool dodgedTheAttack;
         public bool minDmgRecieved;
         public bool maxDmgRecieved;
 
@@ -32,7 +30,7 @@ namespace Combat
               strikeType = _strikeType;                      
               minArmorTriggered = _minArmorTriggered;
               maxArmorTriggered = _maxArmorTriggered;
-              dodgedTheAttack = _dodgedTheAttack;
+              //dodgedTheAttack = _dodgedTheAttack;
               minDmgRecieved = _minArmorTriggered ;
               dmgDelivered = _dmgDelivered; 
 

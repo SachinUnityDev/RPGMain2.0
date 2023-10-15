@@ -33,19 +33,19 @@ namespace Combat
 
     //Thorns Damage
     // if you are struck you revert back with thorns damage
-    public class StrikeCharModel
+    public class StrikerModel
     {
         public List<ThornBuffData> allThornsData = new List<ThornBuffData>();
 
-        public void AddThornsDamage(ThornBuffData thornDmgData)
-        {
-            allThornsData.Add(thornDmgData);            
-        }
+        
 
         public void RemoveThornDamage(int thornID)
         {
-            ThornBuffData thornDmgData = allThornsData.Find(t => t.thornID == thornID);
-            allThornsData.Remove(thornDmgData);
+            int index = allThornsData.FindIndex(t => t.thornID == thornID);
+            if (index != -1)
+            {
+                allThornsData.RemoveAt(index);
+            }
         }
     
 

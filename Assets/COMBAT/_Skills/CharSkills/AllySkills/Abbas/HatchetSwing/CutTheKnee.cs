@@ -24,9 +24,17 @@ namespace Combat
         public override SkillLvl skillLvl => SkillLvl.Level2;
 
         public override float chance { get;set; }
-
+        public override void SkillHovered()
+        {
+            base.SkillHovered();
+            skillModel.staminaReq = 6; 
+        }
         public override void ApplyFX1()
         {
+            if(targetController !=null)
+                targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                    , AttribName.haste, -2f, skillModel.timeFrame, skillModel.castTime, false);
+
         }
 
         public override void ApplyFX2()

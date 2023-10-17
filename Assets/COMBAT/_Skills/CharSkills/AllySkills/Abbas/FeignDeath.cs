@@ -1,4 +1,5 @@
 using Combat;
+using Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,13 +19,40 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get; set; }
         public override StrikeTargetNos strikeNos => StrikeTargetNos.Single;
+        public override void PopulateTargetPos()
+        {
+            if (skillModel == null) return;
+            skillModel.targetPos.Clear();
+            CombatService.Instance.mainTargetDynas.Clear();
 
+            skillModel.targetPos.Add(new CellPosData(myDyna.charMode, myDyna.currentPos));
+            CombatService.Instance.mainTargetDynas.Add(myDyna);
+        }
+        public override void SkillHovered()
+        {
+            base.SkillHovered();
+            StatData statData = charController.GetStat(StatName.health); 
+            if (statData != null)
+            {
+                float hpPercent = statData.currValue / statData.maxLimit;
+                if (hpPercent > 0.4f)
+                    skillModel.SetSkillState(SkillSelectState.UnClickable_Misc);
+            }
+        }
         public override void ApplyFX1()
         {
+            if(targetController)
+                    charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                                                 , AttribName.dodge, +3, TimeFrame.EndOfCombat, 1, true);
         }
 
         public override void ApplyFX2()
         {
+            if (targetController)
+            {
+                    charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                    , charController.charModel.charID, CharStateName.Cloaked, skillModel.timeFrame, skillModel.castTime);
+            }
         }
 
         public override void ApplyFX3()
@@ -41,72 +69,16 @@ namespace Combat
 
         public override void DisplayFX2()
         {
-            str1 = $"<style=Move>Move</style> to adj tile // Chance to keep your turn depending on Haste";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
-        }
 
+        }
         public override void DisplayFX3()
         {
-            str1 = $"<style=Move>Move</style> to adj tile // Chance to keep your turn depending on Haste";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
-
+ 
         }
 
         public override void DisplayFX4()
         {
-            str1 = $"<style=Move>Move</style> to adj tile // Chance to keep your turn depending on Haste";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
-        }
-
-        public override void PostApplyFX()
-        {
-        }
-
-        public override void PreApplyFX()
-        {
-        }
-
-        public override void RemoveFX1()
-        {
-        }
-
-        public override void RemoveFX2()
-        {
-        }
-
-        public override void RemoveFX3()
-        {
-        }
-
-
-
-        public override void SkillEnd()
-        {
-        }
-
-        public override void Tick(int roundNo)
-        {
-        }
-
-        public override void WipeFX1()
-        {
-        }
-
-        public override void WipeFX2()
-        {
-        }
-
-        public override void WipeFX3()
-        {
-        }
-
-        public override void WipeFX4()
-        {
-        }
-
-        public override void PopulateTargetPos()
-        {
-
+ 
         }
 
         public override void ApplyVFx()

@@ -9,7 +9,6 @@ namespace Combat
     public class FinishingTouch : PerkBase
     {
         public override PerkNames perkName => PerkNames.FinishingTouch;
-
         public override PerkType perkType => PerkType.B2;
 
         private PerkSelectState _state = PerkSelectState.Clickable;
@@ -26,26 +25,44 @@ namespace Combat
 
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
-    
+
+        public override void SkillHovered()
+        {
+            base.SkillHovered();
+            SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).WipeFX1;
+        }
+        public override void SkillSelected()
+        {
+            base.SkillSelected();
+            SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).RemoveFX1;
+        }
 
         public override void ApplyFX1()
+        {
+            StatData statData = charController.GetStat(StatName.health);
+            float hpPercent = statData.currValue / statData.maxLimit;
+            if (targetController)
+                if (hpPercent < 0.3f)
+                {
+                    targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
+                                                     , DamageType.Physical, skillModel.damageMod, false, true);
+                }
+                else
+                {
+                    targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
+                                                     , DamageType.Physical, skillModel.damageMod, false);
+                }
+        }
+
+        public override void ApplyFX2()
         {
             bool isTargetBleeding = targetController.charStateController.HasCharDOTState(CharStateName.BleedLowDOT);
 
             if (isTargetBleeding)
             {
-                targetController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.luck, +4, false); 
+                targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
+                                                                      , DamageType.Physical, (skillModel.damageMod + 40), false);
             }
-        }
-
-        public override void SkillEnd()
-        {
-            base.SkillEnd();
-           targetController.charStateController.RemoveCharState(CharStateName.BleedLowDOT);
-        }
-
-        public override void ApplyFX2()
-        {
         }
 
         public override void ApplyFX3()
@@ -62,12 +79,14 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str1 = $"+4 <style=Attributes>Luck</style> to bleeding targets";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
+            str0 = $"true strike ";
+            SkillService.Instance.skillModelHovered.descLines.Add(str0);
         }
 
         public override void DisplayFX2()
         {
+            str1 = $"+4 <style=Attributes>Luck</style> to bleeding targets";
+            SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
 
         public override void DisplayFX3()
@@ -77,164 +96,7 @@ namespace Combat
         public override void DisplayFX4()
         {
         }
-
-
     }
 }
 
 
-
-
-//}
-//        public override CharNames charName => CharNames.Cahyo;
-
-//        public override SkillNames skillName => SkillNames.WristSpin;
-
-//        public override SkillLvl skillLvl => SkillLvl.Level2;
-
-//        private PerkSelectState _state = PerkSelectState.Clickable;
-//        public override PerkSelectState skillState { get => _state; set => _state = value; }
-//        public override PerkNames perkName => PerkNames.FinishingTouch;
-
-//        public override PerkType perkType => PerkType.B2;
-
-//        public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.None };
-
-//        public override string desc => "Finishing Touch";
-//        private float _chance = 0f;
-//        public override float chance { get => _chance; set => _chance = value; }
-//        public override void SkillInit()
-//        {
-//            skillModel = SkillService.Instance.allSkillModels
-//                                                  .Find(t => t.skillName == skillName);
-
-//            charController = CharacterService.Instance.GetCharCtrlWithName(charName);
-//            skillController = SkillService.Instance.currSkillMgr;
-
-//            charGO = SkillService.Instance.GetGO4Skill(charName);
-
-
-//        }
-//        public override void SkillHovered()
-//        {
-//            SkillInit();          
-
-//            SkillServiceView.Instance.skillCardData.skillModel = skillModel;
-
-//            SkillService.Instance.SkillHovered += DisplayFX1;
-//        }
-//        public override void SkillSelected()
-//        {
-//            DynamicPosData currCharDyna = GridService.Instance.GetDyna4GO(charGO);
-
-//            if (!skillModel.castPos.Any(t => t == currCharDyna.currentPos))
-//                return;
-
-
-//            SkillService.Instance.SkillApply += BaseApply;
-//            SkillService.Instance.SkillApply += ApplyFX1;
-
-//        }
-//        public override void BaseApply()
-//        {
-//            targetGO = SkillService.Instance.currentTargetDyna.charGO;
-//            targetController = targetGO.GetComponent<CharController>();
-//           // CombatEventService.Instance.OnEOR += Tick;
-//        }
-//        public override void Tick()
-//        {
-//        }
-
-//        public override void ApplyFX1()
-//        {
-//            if (CharStatesService.Instance.HasCharState(targetGO, CharStateName.BleedLowDOT)
-//                || CharStatesService.Instance.HasCharState(targetGO, CharStateName.BleedMedDOT)
-//                || CharStatesService.Instance.HasCharState(targetGO, CharStateName.BleedHighDOT))
-//            {
-
-//                skillModel.damageMod = 140f;
-//            }
-
-
-
-//        }
-
-//        public override void ApplyFX2()
-//        {
-//        }
-
-//        public override void ApplyFX3()
-//        {
-
-//        }
-
-//        public override void ApplyFX4()
-//        {
-//        }
-
-
-
-//        public override void RemoveFX1()
-//        {
-//        }
-
-//        public override void RemoveFX2()
-//        {
-//        }
-
-//        public override void RemoveFX3()
-//        {
-//        }
-
-//        public override void RemoveFX4()
-//        {
-//        }
-
-//        public override void SkillEnd()
-//        {
-//        }
-
-
-
-//        public override void DisplayFX1()
-//        {
-//            str1 = $"<style=Enemy> 40% Extra Dmg to <style=Bleed> Bleeding </style>";
-//            SkillServiceView.Instance.skillCardData.descLines.Add(str1);
-
-//        }
-
-//        public override void DisplayFX2()
-//        {
-//        }
-
-//        public override void DisplayFX3()
-//        {
-//        }
-
-//        public override void DisplayFX4()
-//        {
-//        }
-
-//        public override void WipeFX1()
-//        {
-//        }
-
-//        public override void WipeFX2()
-//        {
-//        }
-
-//        public override void WipeFX3()
-//        {
-//        }
-
-//        public override void WipeFX4()
-//        {
-//        }
-
-//        public override void PreApplyFX()
-//        {
-//        }
-
-//        public override void PostApplyFX()
-//        {
-//        }

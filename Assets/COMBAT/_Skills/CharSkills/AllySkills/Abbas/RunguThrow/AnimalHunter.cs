@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Common;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,10 +27,20 @@ namespace Combat
 
         public override void ApplyFX1()
         {
+
+            if(targetController)
+                charController.strikeController.ApplyDmgAltBuff(-12f, CauseType.CharSkill, (int)skillName
+                 , charController.charModel.charID, TimeFrame.EndOfCombat, 1, false, skillModel.attackType, skillModel.dmgType[0],
+                    CultureType.None, RaceType.Animal);
+            else
+                charController.strikeController.ApplyDmgAltBuff(-6f, CauseType.CharSkill, (int)skillName
+                , charController.charModel.charID, TimeFrame.EndOfCombat, 1, false, skillModel.attackType, skillModel.dmgType[0],
+                CultureType.None, RaceType.None);
         }
 
         public override void ApplyFX2()
         {
+
         }
 
         public override void ApplyFX3()

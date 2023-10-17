@@ -51,6 +51,7 @@ public enum CauseType
     DayEvents, 
     WeekEvents, 
     Loot,
+    AttribMinMaxLimit,
     
 }
 
@@ -121,7 +122,7 @@ public enum CharStateName
     LastDropOfBlood,
     LuckyDuck,
     Lunatic,
-    Lightfooted,
+    Lissome,
     PoisonedLowDOT,
     PoisonedMedDOT,
     PoisonedHighDOT,

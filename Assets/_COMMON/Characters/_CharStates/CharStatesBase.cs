@@ -57,6 +57,8 @@ namespace Common
         {
             this.charStateSO = stateSO;
             this.charController = charController;
+            if (charController.charModel.orgCharMode != CharMode.Ally)
+                return; 
             this.charID = charController.charModel.charID;
             if (_timeframe != TimeFrame.None)   // applied time frame 
             {               
@@ -111,13 +113,6 @@ namespace Common
 
         public virtual void EndState()
         {
-           //charController.charStateController.RemoveCharState(charStateName);
-           // to be updated 
-           //if(charController.charModel.InCharStatesList.Any(t => t == charStateName))
-           //{
-           //     charController.charModel.InCharStatesList.Remove(charStateName);
-           //     // should also delete the char State base from the base list
-           //}
             foreach(int buffID in allBuffIds)
             {
                 charController.buffController.RemoveBuff(buffID);

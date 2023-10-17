@@ -31,7 +31,7 @@ namespace Combat
         {
             if (skillModel == null) return;
             skillModel.targetPos.Clear();
-
+            CombatService.Instance.mainTargetDynas.Clear();
             for (int i = 1; i < 8; i++)
             {
                 CellPosData cell = new CellPosData(CharMode.Enemy, i);
@@ -40,8 +40,17 @@ namespace Combat
                 if(dyna != null)
                 {
                     skillModel.targetPos.Add(cell); 
+                    CombatService.Instance.mainTargetDynas.Add(dyna);   
                 }
             }
+        }
+
+        public override void SkillHovered()
+        {
+            base.SkillHovered();
+            skillModel.castPos.Clear();
+            skillModel.castPos = new List<int> { 1,2,3,4,5,6,7};
+
         }
 
         public override void SkillSelected()

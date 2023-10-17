@@ -6,9 +6,9 @@ using UnityEngine;
 
 namespace Common
 {
-    public class Lightfooted : CharStatesBase
+    public class Lissome : CharStatesBase
     {
-        public override CharStateName charStateName => CharStateName.Lightfooted;        
+        public override CharStateName charStateName => CharStateName.Lissome;        
         public override CharController charController { get; set; }
         public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;

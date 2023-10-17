@@ -86,15 +86,15 @@ MonoBehaviour:
     damageMod: 140
     skillLvl: 0
     skillSelState: 1
-    cd: 0
+    cd: -1
     attackType: 2
-    dmgType: 010000000b000000
+    dmgType: 01000000
     castPos: 020000000300000004000000050000000600000007000000
     targetPos: []
     staminareq: 7
-    castTime: 2
+    castTime: 1
     timeFrame: 1
-    maxUsagePerCombat: 3
+    maxUsagePerCombat: 4
     skillIncli: 1
     baseWeight: 0
     isActive: 0
@@ -213,12 +213,12 @@ MonoBehaviour:
     skillType: 5
     skillUnLockStatus: 1
     skillDesc: Feign Death
-    damageMod: 140
+    damageMod: 0
     skillLvl: 0
     skillSelState: 0
     cd: 3
     attackType: 0
-    dmgType: 0a0000000b000000
+    dmgType: 
     castPos: 01000000020000000300000004000000050000000600000007000000
     targetPos: []
     staminareq: 0

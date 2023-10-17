@@ -26,9 +26,34 @@ namespace Combat
 
         public override float chance { get;set; }
 
+        public override void AddTargetPos()
+        {
+            if (skillModel != null)
+            {
+                skillModel.targetPos.Clear();
+                CombatService.Instance.mainTargetDynas.Clear();
+                for (int i = 1; i < 8; i++)
+                {
+                    CellPosData cellPosData = new CellPosData(CharMode.Enemy, i);
+                    DynamicPosData dyna = GridService.Instance.gridView.GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
+                    if (dyna != null)
+                    {
+                        CombatService.Instance.mainTargetDynas.Add(dyna);
+                        skillModel.targetPos.Add(cellPosData);
+                    }
+                }
+            }
+        }
+        public override void SkillHovered()
+        {
+            base.SkillHovered();
+            skillModel.cd = 1; 
+
+        }
+
         public override void ApplyFX1()
         {
-          
+            RegainAP();
         }
 
         public override void ApplyFX2()
@@ -53,7 +78,8 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-          
+            str1 = $"Add all targets";
+            SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
 
         public override void DisplayFX2()

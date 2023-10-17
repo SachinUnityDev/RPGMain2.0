@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Common; 
 namespace Combat
 {
 
@@ -27,10 +27,23 @@ namespace Combat
 
         public override void ApplyFX1()
         {
+            StatData fortStatData = charController.GetStat(StatName.fortitude);
+            
+            if (fortStatData.currValue < 0f)
+            {
+                charController.ChangeStat(CauseType.CharSkill, (int)skillName
+                                , charController.charModel.charID, StatName.fortitude, 30f);
+            }
         }
 
         public override void ApplyFX2()
         {
+            AttribData moraleStat = charController.GetAttrib(AttribName.morale);
+            if (moraleStat.currValue == 12)
+            {
+                charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName
+                 , charID, AttribName.fortOrg, 2, TimeFrame.EndOfQuest, 1, true); 
+            }
         }
 
         public override void ApplyFX3()

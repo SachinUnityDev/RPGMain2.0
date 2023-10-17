@@ -24,12 +24,26 @@ namespace Combat
 
         public override float chance { get; set; }
 
+
+        public override void SkillHovered()
+        {
+            base.SkillHovered();
+            skillModel.maxUsagePerCombat = 5; 
+
+        }
         public override void ApplyFX1()
         {
+            if (targetController != null)
+                targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                         , AttribName.haste, -2, skillModel.timeFrame, skillModel.castTime, false);
+
         }
 
         public override void ApplyFX2()
         {
+            if (40f.GetChance())
+                GridService.Instance.ShuffleCharSet(CombatService.Instance.mainTargetDynas); 
+              
         }
 
         public override void ApplyFX3()

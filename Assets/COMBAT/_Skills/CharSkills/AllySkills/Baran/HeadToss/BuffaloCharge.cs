@@ -32,11 +32,12 @@ namespace Combat
 
             targetDyna = GridService.Instance.GetInSameLaneOppParty
                             (new CellPosData(CharMode.Ally, GridService.Instance.GetDyna4GO(charGO).currentPos))[0];
-
+            CombatService.Instance.mainTargetDynas.Clear(); 
             if (targetDyna != null)
             {
                 skillModel.targetPos.Clear();
                 skillModel.targetPos.Add(new CellPosData(CharMode.Enemy, targetDyna.currentPos));
+                CombatService.Instance.mainTargetDynas.Add(targetDyna); 
             }
         }
 

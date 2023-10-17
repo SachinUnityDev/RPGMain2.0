@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Common;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,8 +25,15 @@ namespace Combat
 
         public override float chance { get; set; }
 
+        int stackAmt = 0; 
         public override void ApplyFX1()
         {
+            if(targetController !=  null && stackAmt <= 4)
+            {
+                charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, AttribName.luck
+                    , 2f, TimeFrame.EndOfCombat, 1, true);
+                stackAmt += 2; 
+            }
         }
 
         public override void ApplyFX2()

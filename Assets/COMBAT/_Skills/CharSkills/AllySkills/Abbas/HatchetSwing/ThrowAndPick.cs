@@ -23,9 +23,31 @@ namespace Combat
         public override SkillLvl skillLvl => SkillLvl.Level2;
 
         public override float chance { get; set; }
+        DynamicPosData targetDyna; 
+        public override void SkillHovered()
+        {
+            base.SkillHovered();
+            skillModel.attackType = AttackType.Ranged;
+            skillModel.damageMod = 145;
+            skillModel.cd = 2; 
+        }
+        public override void AddTargetPos()
+        {
+           
+            if(skillModel != null)
+            {
+                skillModel.targetPos.Clear();
+                CombatService.Instance.mainTargetDynas.Clear();
+                CellPosData cellPos = new CellPosData(CharMode.Enemy, targetDyna.currentPos);
+                skillModel.targetPos.Add(cellPos);
+                targetDyna = GridService.Instance.GetInSameLaneOppParty(cellPos)[0];
 
+                CombatService.Instance.mainTargetDynas.Add(targetDyna); 
+            }
+        }
         public override void ApplyFX1()
         {
+
         }
 
         public override void ApplyFX2()

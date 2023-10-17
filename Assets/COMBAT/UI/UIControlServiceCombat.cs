@@ -38,6 +38,7 @@ namespace Combat
         Clicked,
         UnClickable_NoActionPts,
         UnClickable_Locked, 
+        UnClickable_Misc, 
 
     }
 

@@ -45,9 +45,7 @@ namespace Combat
                                             , charController.charModel.charID, CharStateName.BleedLowDOT);
         }
         public override void DisplayFX1()
-        {
-            str0 = "<margin=1.2em>Melee";
-            SkillService.Instance.skillModelHovered.descLines.Add(str0);
+        {  
             str1 = $"{skillModel.damageMod}% <style=Physical>Physical</style>";
             SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
@@ -57,10 +55,6 @@ namespace Combat
             str2 = $"50% <style=Bleed>Low Bleed</style> ";
             SkillService.Instance.skillModelHovered.descLines.Add(str2);
         }
-
-
-
-     
 
         public override void ApplyFX3()
         {

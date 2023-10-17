@@ -26,7 +26,7 @@ namespace Common
 
             int immuneBuffID = charController.charStateController
                 .ApplyImmunityBuff(CauseType.CharState, (int)charStateName
-                   , charID, CharStateName.Lightfooted, timeFrame, castTime);
+                   , charID, CharStateName.Lissome, timeFrame, castTime);
 
             allImmunityBuffs.Add(immuneBuffID);
 

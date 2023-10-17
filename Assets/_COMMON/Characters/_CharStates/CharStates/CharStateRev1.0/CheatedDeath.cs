@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Town;
 using UnityEngine;
 
 namespace Common
@@ -18,12 +19,27 @@ namespace Common
 
         public override void StateApplyFX()
         {
+            // fort  Org changes
             int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-            , charID, AttribName.fortOrg, +8, timeFrame, castTime, true);
+                        , charID, AttribName.fortOrg, +8, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             charController.ChangeAttribBaseVal(CauseType.CharState, (int)charStateName, charID
-                                       , AttribName.fortOrg, -1);
+                                                  , AttribName.fortOrg, -1);
+
+            // fort changes
+            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID
+                                            , StatName.fortitude, 18, true);
+
+            // Hp Changes
+            StatData statdata = charController.GetStat(StatName.health);
+
+            float hpVal = 0.3f * statdata.maxLimit;
+
+            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID
+                                             , StatName.health, hpVal,true);
+
+
         }
         public override void StateApplyVFX()
         {

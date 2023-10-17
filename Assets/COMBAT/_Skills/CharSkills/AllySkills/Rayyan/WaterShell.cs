@@ -19,7 +19,6 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        float minArmor, maxArmor = 0; 
 
         public override void PopulateTargetPos()
         {

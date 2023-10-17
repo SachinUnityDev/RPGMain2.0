@@ -56,11 +56,7 @@ namespace Combat
             }
         }
 
-        //public override void SkillEnd()
-        //{
-        //    base.SkillEnd();
-        //    charController.charStateController.RemoveCharState(CharStateName.Enraged);
-        //}
+    
 
         public override void ApplyFX2()
         {

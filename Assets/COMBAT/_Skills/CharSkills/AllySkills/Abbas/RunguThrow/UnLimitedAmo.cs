@@ -25,8 +25,17 @@ namespace Combat
 
         public override float chance { get; set; }
 
+        public override void SkillHovered()
+        {
+            base.SkillHovered();
+            skillModel.cd = 1;
+            skillModel.maxUsagePerCombat = -1; 
+        }
         public override void ApplyFX1()
         {
+            if(targetController)
+                targetController.damageController.ApplyDamage(charController, CauseType.CharSkill
+                  , (int)skillName, DamageType.StaminaDmg, UnityEngine.Random.Range(4,7), false);
         }
 
         public override void ApplyFX2()

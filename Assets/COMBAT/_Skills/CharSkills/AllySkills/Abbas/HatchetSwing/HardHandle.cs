@@ -25,12 +25,31 @@ namespace Combat
 
         public override float chance { get; set; }
 
+        public SkillBase runguThrowBase; 
+        public override void BaseApply()
+        {
+            base.BaseApply();
+            CombatEventService.Instance.OnEOT += OnEOT;
+            runguThrowBase = skillController.GetSkillBase(SkillNames.RunguThrow);
+            runguThrowBase.chance = -5; 
+        }
+
+        void OnEOT()
+        {
+            runguThrowBase.chance = 0;
+            CombatEventService.Instance.OnEOT -= OnEOT;
+        }
         public override void ApplyFX1()
         {
+            if(targetController != null)
+                targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                   , charController.charModel.charID, CharStateName.Feebleminded, skillModel.timeFrame, skillModel.castTime);
         }
 
         public override void ApplyFX2()
         {
+
+
         }
 
         public override void ApplyFX3()

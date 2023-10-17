@@ -25,9 +25,36 @@ namespace Combat
 
         public override float chance { get; set; }
 
+        DynamicPosData targetDyna; 
         public override void ApplyFX1()
         {
+            if (targetController == null) return; 
+            if(targetController.charStateController.HasCharDOTState(CharStateName.Confused)
+                || targetController.charStateController.HasCharDOTState(CharStateName.Feebleminded)
+                || targetController.charStateController.HasCharDOTState(CharStateName.Despaired)
+                || targetController.charStateController.HasCharDOTState(CharStateName.Rooted))
+            {
+                ApplyBackRowDmg(true);
+            }
+            else
+            {
+                ApplyBackRowDmg(false);
+            }
         }
+
+        void ApplyBackRowDmg(bool isTrueStrike)
+        {
+            targetDyna = GridService.Instance.GetDyna4GO(targetController.gameObject);
+            
+            if (GridService.Instance.IsTargetInBackRow(targetDyna))
+                targetController.damageController.ApplyDamage(charController, CauseType.CharSkill,
+                    (int)skillName, DamageType.Physical, (skillModel.damageMod + 40f), false, isTrueStrike);
+            else
+                targetController.damageController.ApplyDamage(charController, CauseType.CharSkill
+                    , (int)skillName, DamageType.Physical, (skillModel.damageMod), false, isTrueStrike);
+
+        }
+
 
         public override void ApplyFX2()
         {

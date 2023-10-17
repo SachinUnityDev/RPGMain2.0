@@ -18,15 +18,38 @@ namespace Combat
         public override string desc => "Rungu throw ";
 
         public override float chance { get; set; }
+        DynamicPosData targetDyna; 
+        public override void PopulateTargetPos()
+        {
+            if (skillModel != null)
+            {
+                skillModel.targetPos.Clear();
+                CombatService.Instance.mainTargetDynas.Clear();
+                CellPosData cellPos = new CellPosData(CharMode.Enemy, targetDyna.currentPos);
+                skillModel.targetPos.Add(cellPos);
+                targetDyna = GridService.Instance.GetInSameLaneOppParty(cellPos)[0];
+                CombatService.Instance.mainTargetDynas.Add(targetDyna);
+            }
+        }
 
         public override void ApplyFX1()
         {
-           
+            if (targetController == null) return; 
+
+            if(chance == -5)
+                targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
+                              , DamageType.Physical, skillModel.damageMod, false, true);
+            else
+                targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
+                              , DamageType.Physical, skillModel.damageMod, false);
+
         }
 
         public override void ApplyFX2()
         {
-            
+            if (targetController != null)
+                targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                         , AttribName.focus, -2, skillModel.timeFrame, skillModel.castTime, false);
         }
 
         public override void ApplyFX3()
@@ -51,7 +74,7 @@ namespace Combat
 
         public override void DisplayFX2()
         {
-           
+           // -2 focus string here
         }
 
         public override void DisplayFX3()
@@ -69,9 +92,6 @@ namespace Combat
            
         }
 
-        public override void PopulateTargetPos()
-        {
-          
-        }
+ 
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Common;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,10 +25,36 @@ namespace Combat
 
         public override float chance { get; set; }
 
-        public override void ApplyFX1()
+        float initialdmg = 0;
+
+        float dmgMod = 0;
+
+        public override void SkillInit(SkillController1 skillController)
         {
+            base.SkillInit(skillController);
+            initialdmg = skillModel.damageMod;
+            dmgMod = initialdmg; 
+        }
+        public override void BaseApply()
+        {
+            base.BaseApply();
+            if (targetController)
+                dmgMod += 10f;
+            CombatEventService.Instance.OnEOC -= OnEOC;
+            CombatEventService.Instance.OnEOC += OnEOC;
         }
 
+        public override void ApplyFX1()
+        {
+                
+        }
+
+        void OnEOC()
+        {
+            skillModel.damageMod = initialdmg; 
+            dmgMod= 0;
+            CombatEventService.Instance.OnEOC -= OnEOC;
+        }
         public override void ApplyFX2()
         {
         }

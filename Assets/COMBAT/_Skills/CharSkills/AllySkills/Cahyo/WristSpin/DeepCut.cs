@@ -26,14 +26,13 @@ namespace Combat
 
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
-     
 
-        public override void BaseApply()
+        public override void SkillHovered()
         {
-            base.BaseApply();
-
-            skillController.allSkillBases.Find(t => t.skillName == skillName).chance = 100f; 
+            base.SkillHovered();
+            skillController.allSkillBases.Find(t => t.skillName == skillName).chance = 100f;
         }
+        
         public override void ApplyFX1()
         {
         }

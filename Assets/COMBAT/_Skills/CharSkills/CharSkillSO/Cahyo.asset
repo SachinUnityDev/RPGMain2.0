@@ -104,7 +104,7 @@ MonoBehaviour:
     - pos: 2
       charMode: 2
     staminareq: 7
-    castTime: 2
+    castTime: 1
     timeFrame: 1
     maxUsagePerCombat: -1
     skillIncli: 1
@@ -245,7 +245,7 @@ MonoBehaviour:
     cd: 2
     attackType: 0
     dmgType: 
-    castPos: 04000000050000000600000007000000
+    castPos: 01000000020000000300000004000000050000000600000007000000
     targetPos: []
     staminareq: 0
     castTime: 2

@@ -97,12 +97,15 @@ namespace Common
             charController = GetComponent<CharController>();
             CombatEventService.Instance.OnEOR1 += RoundTick;
             CombatEventService.Instance.OnEOC += EOCTick; 
-
+            charController.OnStatChg += StatChg;
+            charController.OnAttribChg += AttribChg; 
         }
         private void OnDisable()
         {
             CombatEventService.Instance.OnEOR1 -= RoundTick;
             CombatEventService.Instance.OnEOC -= EOCTick;
+            charController.OnStatChg -= StatChg;
+            charController.OnAttribChg -= AttribChg;
         }
 
         #region BUFF & DEBUFF
@@ -110,6 +113,15 @@ namespace Common
                                 , CharStateName charStateName, TimeFrame timeFrame = TimeFrame.Infinity, int netTime =-1)
         {
             // check immunity list 
+            if (IsDOT(charStateName))
+            {
+                if (HasDOTImmunity(charStateName)) return -1; 
+            }
+            else
+            {
+                if (HasImmunity(charStateName))
+                    return -1; 
+            }
             int effectedCharID = charController.charModel.charID;
 
             int currRd = -1;
@@ -125,14 +137,42 @@ namespace Common
                                                                         , charStateModData); 
 
             allCharStateBuffs.Add(charStateBuffData);
-
            
             CharStatesService.Instance.On_CharStateStart(charStateModData);
+            if (!IsDOT(charStateName))  // no char State can occur twice to the same char ...DOT have independent rules
+            {
+                ApplyImmunityBuff(causeType, causeName, causeByCharID, charStateName, timeFrame, netTime);
+            }
 
-            // add Char State Buffs FX 
             return stateID;
         }
 
+
+        public void RemoveCharState(CharStateName charStateName)
+        {
+            int index = allCharBases.FindIndex(t => t.charStateName == charStateName);
+            allCharBases[index].EndState();   // all related buffs to be cleared from here
+            allCharBases.RemoveAt(index);
+            RemoveImmunityByCharState(charStateName);
+        }
+
+        public void ResetCharStateBuff(CharStateName charStateName)
+        {
+            foreach (CharStateBuffData buffData in allCharStateBuffs)
+            {
+                //if(buffData.charStateModData.causeType == CauseType.CharSkill)
+                //{
+                if (buffData.charStateModData.causeName == (int)charStateName)
+                {
+                    buffData.currentTime = 0;
+                }
+                //}
+            }
+        }
+
+        #endregion
+
+        #region  IMMUNITY 
         public int ApplyImmunityBuff(CauseType causeType, int causeName, int causeByCharID
                                 , CharStateName charStateName, TimeFrame timeFrame, int netTime) // immunity buff for this char State
         {
@@ -161,8 +201,6 @@ namespace Common
                 }
             }
         }
-
-
 
         public void RemoveImmunityBuff(int immunityID)
         {
@@ -234,7 +272,9 @@ namespace Common
             }
             return deDuffStrs;
         }
+        #endregion
 
+        #region HAS STATE CHECKS 
         public bool HasCharDOTState(CharStateName _charStateName)
         {
             if (_charStateName == CharStateName.BurnHighDOT
@@ -320,7 +360,9 @@ namespace Common
             }
             return false; 
         }
+        #endregion
 
+        #region TICKS
         public void RoundTick(int roundNo)
         {
             if (allCharStateBuffs.Count == 0) return; 
@@ -349,7 +391,11 @@ namespace Common
                 }
             }
         }
-#endregion
+        
+
+        #endregion
+
+        #region CLEAR DOT
 
         public void ClearDOT(CharStateName _charStateName)
         {
@@ -380,28 +426,32 @@ namespace Common
                 RemoveCharState(CharStateName.PoisonedLowDOT);
             }
         }
-
-        public void RemoveCharState(CharStateName charStateName)
-        {            
-            int index = allCharBases.FindIndex(t => t.charStateName == charStateName);
-            allCharBases[index].EndState();   // all related buffs to be cleared from here
-            allCharBases.RemoveAt(index);
-        }
-   
-        public void ResetCharStateBuff(CharStateName charStateName)
-        {  
-            foreach (CharStateBuffData buffData in allCharStateBuffs)
+        public bool IsDOT(CharStateName charStateName)
+        {
+            if (charStateName == CharStateName.PoisonedHighDOT
+              || charStateName == CharStateName.PoisonedMedDOT
+              || charStateName == CharStateName.PoisonedLowDOT)
             {
-                //if(buffData.charStateModData.causeType == CauseType.CharSkill)
-                //{
-                    if(buffData.charStateModData.causeName == (int)charStateName)
-                    {
-                        buffData.currentTime = 0;
-                    }
-                //}
+                return true; 
             }
+           if (charStateName == CharStateName.BleedHighDOT
+                  || charStateName == CharStateName.BleedMedDOT
+                  || charStateName == CharStateName.BleedLowDOT)
+           {
+                return true;
+           }
+
+           if (charStateName == CharStateName.BurnHighDOT
+                || charStateName == CharStateName.BurnMedDOT
+                || charStateName == CharStateName.BurnLowDOT)
+           {
+                return true;
+           }
+            return false; 
         }
 
+
+        # endregion 
         public CharStatesBase GetCurrCharStateBase(CharStateName _charStateName)
         {
             if (allCharBases.Any(t=>t.charStateName == _charStateName))
@@ -411,6 +461,101 @@ namespace Common
             Debug.Log("Char State Base Not found"); 
             return null; 
         }
+
+        public CharStateBuffData GetCharStateBuffData(CharStateName charStateName) 
+        {
+            int index =
+            allCharStateBuffs.FindIndex(t => t.charStateModData.charStateName == charStateName); 
+            if(index!= -1)
+            {
+                return allCharStateBuffs[index]; 
+            }
+            else
+            {
+                Debug.Log(" charState buff not found" + charStateName);
+            }
+            return null; 
+        }
+
+        #region STATE TRIGGERS 
+
+        // hp =0 
+
+        void StatChg(StatModData statModData)
+        {
+            if(statModData.statModified == StatName.health)
+            {
+                if(statModData.modVal== 0)
+                {
+                    ApplyCharStateBuff(CauseType.StatChange, (int)statModData.statModified, statModData.causeByCharID,
+                        CharStateName.LastDropOfBlood); 
+                }else if (HasCharState(CharStateName.LastDropOfBlood))
+                {
+                    RemoveCharState(CharStateName.LastDropOfBlood); 
+                }
+            }
+            if (statModData.statModified == StatName.stamina)
+            {
+                if (statModData.modVal == 0)
+                {
+                    ApplyCharStateBuff(CauseType.StatChange, (int)statModData.statModified, statModData.causeByCharID,
+                        CharStateName.LastBreath);
+                }
+                else if (HasCharState(CharStateName.LastBreath))
+                {
+                    RemoveCharState(CharStateName.LastBreath);
+                }
+            }
+            if (statModData.statModified == StatName.fortitude)
+            {
+                if (statModData.modVal == -30)
+                {
+                    ApplyCharStateBuff(CauseType.StatChange, (int)statModData.statModified, statModData.causeByCharID,
+                        CharStateName.Fearful, TimeFrame.EndOfRound, 2);
+                }
+                if (statModData.modVal == +30)
+                {
+                    ApplyCharStateBuff(CauseType.StatChange, (int)statModData.statModified, statModData.causeByCharID,
+                        CharStateName.Faithful, TimeFrame.EndOfRound, 2);
+                }
+            }
+        }
+
+        void AttribChg(AttribModData attribModData) 
+        {
+            if (attribModData.attribModified == AttribName.focus)
+            {
+                if (attribModData.modCurrVal == 12f)
+                {
+                    ApplyCharStateBuff(CauseType.StatChange, (int)attribModData.attribModified, attribModData.causeByCharID,
+                      CharStateName.Concentrated);
+                }
+                else if (HasCharState(CharStateName.Concentrated))
+                {
+                    CharStateBuffData charStateBuffData = GetCharStateBuffData(CharStateName.Concentrated);
+                    if(charStateBuffData.charStateModData.causeType == CauseType.AttribMinMaxLimit)
+                        RemoveCharState(CharStateName.Concentrated);
+                }
+            }
+            if (attribModData.attribModified == AttribName.luck)
+            {
+                if (attribModData.modCurrVal == 12f)
+                {
+                    ApplyCharStateBuff(CauseType.StatChange, (int)attribModData.attribModified, attribModData.causeByCharID,
+                      CharStateName.LuckyDuck);
+                }
+                else if (HasCharState(CharStateName.LuckyDuck))
+                {
+                    CharStateBuffData charStateBuffData = GetCharStateBuffData(CharStateName.LuckyDuck);
+                    if (charStateBuffData.charStateModData.causeType == CauseType.AttribMinMaxLimit)
+                        RemoveCharState(CharStateName.LuckyDuck);
+                }
+            }
+        }
+
+        #endregion
+
+
     }
 
 

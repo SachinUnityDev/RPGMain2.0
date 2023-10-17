@@ -24,8 +24,24 @@ namespace Combat
 
         public override float chance { get; set; }
 
+        public override void SkillHovered()
+        {
+            base.SkillHovered();
+            SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).WipeFX2;
+        }
+        public override void SkillSelected()
+        {
+            base.SkillSelected();
+            SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).RemoveFX2;
+        }
         public override void ApplyFX1()
         {
+            if (targetController)
+            {
+                if (50f.GetChance())
+                    targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                    , charController.charModel.charID, CharStateName.Confused, skillModel.timeFrame, skillModel.castTime);
+            }
         }
 
         public override void ApplyFX2()

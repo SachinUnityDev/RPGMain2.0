@@ -21,8 +21,6 @@ namespace Combat
         private float _chance = 40f;
         public override float chance { get => _chance; set => _chance = value; }
 
-     
-
         public override StrikeTargetNos strikeNos { get; }
         public override void PopulateTargetPos()
         {
@@ -33,13 +31,10 @@ namespace Combat
                 CellPosData cellPosData = new CellPosData(CharMode.Enemy, i);
                 skillModel.targetPos.Add(cellPosData);
             }
-
         }
 
         public override void ApplyFX1()
         {
-            //if (CkhNSetInCoolDown() || appliedOnce || IsTargetMyEnemy()) return;
-            
             if (targetController)
                 targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
                                                                     , DamageType.Physical, skillModel.damageMod, false);
@@ -47,13 +42,12 @@ namespace Combat
 
         public override void ApplyFX2()
         {
-            //if (CkhNSetInCoolDown() || appliedOnce || IsTargetMyEnemy()) return;
-
-            //if (targetController)
-            //{
-            //    if (chance.GetChance())
-            //        CharStatesService.Instance.SetCharState(targetGO, CharStateName.BleedLowDOT);
-            //}
+            if (targetController)
+            {
+                if (chance.GetChance())
+                    targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                    ,charController.charModel.charID, CharStateName.BleedLowDOT, skillModel.timeFrame, skillModel.castTime);
+            }
         }
 
         public override void ApplyFX3()
@@ -62,17 +56,14 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str0 = "<margin=1.2em>Ranged";
+            str0 = $"{skillModel.damageMod}%<style=Physical> Physical,</style> dmg";
             SkillService.Instance.skillModelHovered.descLines.Add(str0);
-
-            str1 = $"{skillModel.damageMod}%<style=Physical> Physical,</style> dmg";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
 
         public override void DisplayFX2()
         {
-            str2 = $"{chance}%<style=Bleed> Low Bleed</style>";
-            SkillService.Instance.skillModelHovered.descLines.Add(str2);
+            str1 = $"{chance}%<style=Bleed> Low Bleed</style>";
+            SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
 
         public override void DisplayFX3()
@@ -83,20 +74,6 @@ namespace Combat
         public override void DisplayFX4()
         {
         }
-
-    
-    
-        public override void SkillEnd()
-        {
-        }
-
-
-
-        public override void Tick(int roundNo)
-        {
-        }
-
-    
 
         public override void ApplyVFx()
         {

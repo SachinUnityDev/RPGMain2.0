@@ -22,14 +22,18 @@ namespace Combat
        // bool subscribed = false; 
         public override void PopulateTargetPos()
         {
-            if (skillModel == null) return; skillModel.targetPos.Clear();
-                 skillModel.targetPos.Add(new CellPosData(myDyna.charMode, myDyna.currentPos));
+            if (skillModel == null) return; 
+            skillModel.targetPos.Clear();
+            CombatService.Instance.mainTargetDynas.Clear(); 
+
+                skillModel.targetPos.Add(new CellPosData(myDyna.charMode, myDyna.currentPos));
+                CombatService.Instance.mainTargetDynas.Add(myDyna);    
         }
    
         public override void ApplyFX1()
         {           
             charController.strikeController.ApplyDmgAltBuff(-50f, CauseType.CharSkill, (int)skillName
-                , charController.charModel.charID, TimeFrame.EndOfCombat, -1, false, AttackType.None, DamageType.Heal);
+                , charController.charModel.charID, TimeFrame.EndOfCombat, 1, false, AttackType.None, DamageType.Heal);
         }
 
         public override void ApplyFX2()

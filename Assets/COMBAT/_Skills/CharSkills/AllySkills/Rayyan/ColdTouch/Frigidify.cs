@@ -31,16 +31,12 @@ namespace Combat
                                                 , charController.charModel.charID, CharStateName.Aquaborne, skillModel.timeFrame, skillModel.castTime);
             }
         }
-        //public override void SkillEnd()
-        //{
-        //    base.SkillEnd();
-        //    targetController.charStateController.RemoveCharState(CharStateName.Aquaborne);
-        //}
+    
 
         public override void ApplyFX2()
         {
             if(50f.GetChance())
-            RegainAP();
+                RegainAP();
 
         }
 

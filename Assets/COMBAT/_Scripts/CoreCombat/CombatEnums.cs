@@ -66,6 +66,7 @@ namespace Combat
         Move, 
         Weapon, 
         Uzu, 
+        Retaliate,
     }
 
     public enum StrikeTargetNos
@@ -157,32 +158,32 @@ namespace Combat
         None,
         DefaultPatience, 
         DefaultMove, 
-        WristSpin = 130,	
+        WristSpin,	
         KrisLunge,
         HoneBlades,
         IntimidatingShout,
         InTheNameOfUsmu,
-        Cleave =140,
+        Cleave,
         EarthCracker,
         HeadToss,
         IgnorePain,
         NoPatience,
         SplitEarth,
-        CleansingWater = 170,
+        CleansingWater,
         TidalWaves,
         ColdTouch,
         FistOfWater,
         Tsunami,   
-        Scratch = 501,
+        Scratch,
         RatBite,
         GuardWeak,
-        Expectorate = 511,
+        Expectorate,
         PoisonUp,
         RunAway,
-        Sweep = 521,  // rat king 
+        Sweep,  // rat king 
         Intimidate,
         RottenKing,
-        HatchetSwing =100,
+        HatchetSwing,
         RunguThrow,
         AnimalTrap,
         FeignDeath,
@@ -211,7 +212,8 @@ namespace Combat
         WebbySpit,
         SelfDefense,
         Respire, // equivalent to patience
-        Telekinesis,//uzu abbas
+        Telekinesis,//uzu abbas       
+        Retaliate, 
 
 
     }
@@ -331,7 +333,7 @@ namespace Combat
         BadLuckInTheShip,
         BlackKpinga,
         BladeSlap,
-        BleedForSure,
+        BlindingSparks,
         BleedItOn,
         Blindeye,
         BloodyAxe,

@@ -20,60 +20,29 @@ namespace Combat
 
         public override PerkSelectState state { get; set; }
 
-        public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.None }; 
-
-        //public override void SkillInit()
-        //{
-        //    skillModel = SkillService.Instance.allSkillModels
-        //                                                 .Find(t => t.skillName == skillName);
-
-        //    charController = CharacterService.Instance.GetCharCtrlWithName(charName);
-        //    skillModel.staminaReq = 9;
-        //}
-        //public override void SkillHovered()
-        //{
-        //    SkillInit();
-        //    SkillServiceView.Instance.skillCardData.skillModel = skillModel;
-
-        //    SkillService.Instance.SkillHovered += DisplayFX1;
-        //    SkillService.Instance.SkillHovered += DisplayFX2;
-
-        //}
-        //public override void SkillSelected()
-        //{
-        //    SkillService.Instance.SkillApply += BaseApply;
-        //    SkillService.Instance.SkillApply += ApplyFX1;
-        //    SkillService.Instance.SkillApply += ApplyFX2;
-        //    SkillService.Instance.SkillApply += ApplyFX3;
-        //}
-        public override void BaseApply()
+        public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.None };
+        public override void SkillHovered()
         {
-            targetGO = SkillService.Instance.currentTargetDyna.charGO;
-            targetController = targetGO.GetComponent<CharController>();
-           // CombatEventService.Instance.OnEOR1 += Tick;
-            skillModel.lastUsedInRound = CombatService.Instance.currentRound;
-        }
-        public override void DisplayFX1()
-        {
-            str1 = $"<style=Enemy>Kills Bleeding Enemy Health < 35%";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
-        }
-        public override void DisplayFX2()
-        {
-            str2 = $"<style=Enemy> {skillModel.staminaReq} <style=Stamina> Stamina</style>";
-            SkillService.Instance.skillModelHovered.descLines.Add(str2);
+            base.SkillHovered();
+            skillModel.staminaReq = 10; 
         }
         public override void ApplyFX1()
         {
-            if (targetController.charStateController.HasCharState(CharStateName.BleedHighDOT))               
-            {
-                if (targetController.GetStat(StatName.health).currValue < 35f)
-                {
-                    // kill TARGET  !!!!!... exceptions are Kongomato 
-                }
-            }
-        }
+            if (targetController.charModel.charName == CharNames.RatKing ||
+                targetController.charModel.charName == CharNames.Kongamato)
+                return; 
+           if(targetController.charStateController.HasCharState(CharStateName.BleedHighDOT))
+           {
+                StatData statData = targetController.GetStat(StatName.health);
+                float hpPercent = statData.currValue / statData.maxLimit; 
 
+               if (hpPercent < 30f)
+               {
+                    // kill TARGET  !!!!
+                 
+               }
+           }
+        }
         public override void ApplyFX2()
         {
 
@@ -83,34 +52,16 @@ namespace Combat
         {
 
         }
-
-  
-
-        public override void Tick()
+        public override void DisplayFX1()
         {
-
+            str1 = $"<style=Enemy>Kills Bleeding Enemy Health < 30%";
+            SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
-        public override void RemoveFX1()
+        public override void DisplayFX2()
         {
+            str2 = $"<style=Enemy> {skillModel.staminaReq} <style=Stamina> Stamina</style>";
+            SkillService.Instance.skillModelHovered.descLines.Add(str2);
         }
-
-        public override void RemoveFX2()
-        {
-        }
-
-        public override void RemoveFX3()
-        {
-        }
-
-
-        public override void SkillEnd()
-        {
-        }
-
-
-
-
-
         public override void DisplayFX3()
         {
         }
@@ -118,25 +69,6 @@ namespace Combat
         public override void DisplayFX4()
         {
         }
-
-        public override void WipeFX1()
-        {
-        }
-
-        public override void WipeFX2()
-        {
-        }
-
-        public override void WipeFX3()
-        {
-        }
-
-        public override void WipeFX4()
-        {
-        }
-
-
-
         public override void ApplyVFx()
         {
         }

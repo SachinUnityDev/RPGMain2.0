@@ -228,6 +228,28 @@ namespace Combat
                 combatController.actionPts++;
         }
 
+        protected void AllInCharMode(CharMode charMode)
+        {
+            if (skillModel == null) return;
+            CombatService.Instance.mainTargetDynas.Clear(); skillModel.targetPos.Clear();
+            CombatService.Instance.mainTargetDynas.AddRange(GridService.Instance.GetAllByCharMode(charMode));
+            foreach (DynamicPosData dyna in CombatService.Instance.mainTargetDynas)
+            {
+                skillModel.targetPos.Add(new CellPosData(dyna.charMode, dyna.currentPos));
+            }
+        }
+        protected void SelfTarget()
+        {
+            if (skillModel == null) return;
+            skillModel.targetPos.Clear(); CombatService.Instance.mainTargetDynas.Clear();
+
+            int pos = GridService.Instance.GetDyna4GO(charGO).currentPos;
+            skillModel.targetPos.Add(new CellPosData(myDyna.charMode, pos));
+
+            CombatService.Instance.mainTargetDynas.Add(myDyna);
+
+        }
+
     }
 
 }

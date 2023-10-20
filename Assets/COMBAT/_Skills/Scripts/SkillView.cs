@@ -88,7 +88,7 @@ namespace Combat
 
             if (skillSO != null)
             {
-                if (index < skillSO.allSkills.Count)
+                if (index < skillSO.allSkills.Count) // -1 retaliate skill correction
                     SkillService.Instance.currSkillName = skillSO.allSkills[index].skillName;
                 else
                     return;
@@ -276,6 +276,8 @@ namespace Combat
                     {
                         if (skillSO.allSkills[i].skillUnLockStatus == 1)
                         {
+                            if (skillSO.allSkills[i].skillType == SkillTypeCombat.Retaliate) // Skipping retaliate skill from 
+                                continue;
                             Transform skillIconTranform = transform.GetChild(i);
                             skillIconTranform.GetComponent<Image>().sprite
                                                                 = skillSO.allSkills[i].skillIconSprite;
@@ -315,36 +317,7 @@ namespace Combat
         }
 
 
-        void UpdateAllSkillBtnState(CharController charController)
-        {
-            // get char controller 
-            // 
-            if (charController == null) return;
-            SkillController1 skillController = charController.skillController;
-
-            for (int i = 0; i < skillController.allSkillModels.Count; i++)
-            {
-                if (skillController.allSkillModels[i].GetSkillState()== SkillSelectState.Clickable)
-                {
-                    // image set active false       
-                }
-                else
-                {
-                    // image set active true .. change color
-                }
-            }
-
-            //for (SkillModel skillmodel in skillController.allSkillModels)
-            //{
-            //    if(skillmodel.GetSkillState() == SkillSelectState.Clickable)
-            //    {
-
-            //    }
-            //}
-
-           
-
-        }
+      
 
         public void SetSkillsPanel(int  _charID)
         {
@@ -370,12 +343,14 @@ namespace Combat
                     {
                         
                         if (skillSO.allSkills[i].skillUnLockStatus == 1)
-                        {                         
+                        {
+                            if (skillSO.allSkills[i].skillType == SkillTypeCombat.Retaliate) // Skipping retaliate skill from 
+                                continue;
                             Transform skillIconTranform = transform.GetChild(i);
                             skillIconTranform.GetComponent<Image>().sprite
                                                                 = skillSO.allSkills[i].skillIconSprite;
                             SkillNames skillName = skillSO.allSkills[i].skillName;
-
+                       
                             SkillModel skillModel = SkillService.Instance.GetSkillModel(_charID, skillName);
                             if (skillModel == null)
                                 Debug.Log("SkillMModel missing" + skillName);

@@ -66,8 +66,6 @@ namespace Combat
                  targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
                     , charController.charModel.charID, CharStateName.BleedLowDOT);
             }
-
-            
         }
 
         public override void DisplayFX1()

@@ -27,7 +27,7 @@ MonoBehaviour:
     type: 3}
   passiveSkills: []
   allSkills:
-  - skillName: 100
+  - skillName: 28
     charName: 1
     skillID: 100
     skillIconSprite: {fileID: 21300000, guid: 5c511bed2b0827d4f915f3a9bd43689c, type: 3}
@@ -73,7 +73,7 @@ MonoBehaviour:
       hexNames: 25000000180000000b000000
     allSkillFXs: []
     allLines: []
-  - skillName: 101
+  - skillName: 29
     charName: 1
     skillID: 101
     skillIconSprite: {fileID: 21300000, guid: 88a0a9d784e56694984d79b226b8e377, type: 3}
@@ -121,7 +121,7 @@ MonoBehaviour:
       hexNames: 25000000230000000b000000
     allSkillFXs: []
     allLines: []
-  - skillName: 102
+  - skillName: 30
     charName: 1
     skillID: 102
     skillIconSprite: {fileID: 21300000, guid: 6bf2e87abc00f654f92ff8b252d01309, type: 3}
@@ -169,7 +169,7 @@ MonoBehaviour:
       hexNames: 0a000000260000000b000000
     allSkillFXs: []
     allLines: []
-  - skillName: 103
+  - skillName: 31
     charName: 1
     skillID: 103
     skillIconSprite: {fileID: 21300000, guid: 6b1d2b9ac782f074e99050bc9df8a89b, type: 3}
@@ -203,7 +203,7 @@ MonoBehaviour:
       hexNames: 250000000b0000000b000000
     allSkillFXs: []
     allLines: []
-  - skillName: 104
+  - skillName: 32
     charName: 1
     skillID: 103
     skillIconSprite: {fileID: 21300000, guid: 22bc3c8732168c046810338280bf0cc3, type: 3}
@@ -263,7 +263,7 @@ MonoBehaviour:
       hexNames: 020000000b0000000b000000
     allSkillFXs: []
     allLines: []
-  - skillName: 105
+  - skillName: 33
     charName: 1
     skillID: 0
     skillIconSprite: {fileID: 21300000, guid: 706fe5e5d9f041b4ebf1f1feae994600, type: 3}
@@ -293,7 +293,7 @@ MonoBehaviour:
       hexNames: 0a000000240000000b000000
     allSkillFXs: []
     allLines: []
-  - skillName: 129
+  - skillName: 57
     charName: 1
     skillID: 0
     skillIconSprite: {fileID: 21300000, guid: 9fa707bf783e1fc46816921a2a8c04be, type: 3}
@@ -301,6 +301,64 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 8
+    skillUnLockStatus: 1
+    skillDesc: Telekinesis
+    damageMod: 140
+    skillLvl: 0
+    skillSelState: 0
+    cd: -1
+    attackType: 2
+    dmgType: 0900000010000000
+    castPos: 01000000020000000300000004000000050000000600000007000000
+    targetPos: []
+    staminareq: 4
+    castTime: 1
+    timeFrame: 1
+    maxUsagePerCombat: 3
+    skillIncli: 3
+    baseWeight: 0
+    isActive: 0
+    allPerkHexes:
+    - perkChain: 00000000
+      hexNames: 02000000230000000b000000
+    - perkChain: 01000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 02000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 0100000003000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 0200000004000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 0100000004000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 0200000003000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 010000000300000005000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 020000000400000006000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 010000000300000006000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 010000000400000006000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 010000000400000005000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 020000000400000005000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 020000000300000005000000
+      hexNames: 02000000240000000b000000
+    - perkChain: 020000000300000006000000
+      hexNames: 02000000240000000b000000
+    allSkillFXs: []
+    allLines: []
+  - skillName: 58
+    charName: 1
+    skillID: 0
+    skillIconSprite: {fileID: 21300000, guid: 9fa707bf783e1fc46816921a2a8c04be, type: 3}
+    skillPose: {fileID: 0}
+    skillTransitionPose: {fileID: 0}
+    skillTransitionPose2: {fileID: 0}
+    skillType: 9
     skillUnLockStatus: 1
     skillDesc: Telekinesis
     damageMod: 140

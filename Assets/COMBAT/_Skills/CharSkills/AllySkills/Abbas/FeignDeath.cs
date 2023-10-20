@@ -14,19 +14,14 @@ namespace Combat
         public override SkillLvl skillLvl => SkillLvl.Level0;
 
         private PerkSelectState _state = PerkSelectState.Clickable;
-        public override string desc => "Rungu Throw";
+        public override string desc => "Feign Death";
 
         private float _chance = 0f;
         public override float chance { get; set; }
         public override StrikeTargetNos strikeNos => StrikeTargetNos.Single;
         public override void PopulateTargetPos()
         {
-            if (skillModel == null) return;
-            skillModel.targetPos.Clear();
-            CombatService.Instance.mainTargetDynas.Clear();
-
-            skillModel.targetPos.Add(new CellPosData(myDyna.charMode, myDyna.currentPos));
-            CombatService.Instance.mainTargetDynas.Add(myDyna);
+            SelfTarget(); 
         }
         public override void SkillHovered()
         {

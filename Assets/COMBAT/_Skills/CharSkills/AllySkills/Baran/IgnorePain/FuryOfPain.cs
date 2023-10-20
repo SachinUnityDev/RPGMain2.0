@@ -60,8 +60,8 @@ namespace Combat
 
         public override void ApplyFX2()
         {
-            AttribData luckStat = charController.GetAttrib(AttribName.luck);
-            if (luckStat.currValue == 12 )
+            AttribData luckAttrib = charController.GetAttrib(AttribName.luck);
+            if (luckAttrib.currValue == 12 )
                // && !subscribed)
             {
                 RegainAP(); 

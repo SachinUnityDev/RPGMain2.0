@@ -8,7 +8,6 @@ namespace Combat
 {
     public class CombatEventService : MonoSingletonGeneric<CombatEventService>
     {
-        public event Action<CharController> OnCharDeath;
         public event Action OnSOTactics; 
         public event Action OnSOT;
         public event Action OnEOT;
@@ -83,11 +82,7 @@ namespace Combat
             charCtrl.HPRegen(); 
             OnCharOnTurnSet?.Invoke(charCtrl);
         }
-        public void On_CharDeath(CharController _charController)
-        {
-            Debug.Log("@@@@@@ON CHAR DEATH INVOKE");
-            OnCharDeath?.Invoke(_charController);
-        }
+     
         public void On_SOTactics()
         {
             CombatService.Instance.combatState = CombatState.INTactics;

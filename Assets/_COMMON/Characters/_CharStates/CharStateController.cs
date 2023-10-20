@@ -151,6 +151,7 @@ namespace Common
         public void RemoveCharState(CharStateName charStateName)
         {
             int index = allCharBases.FindIndex(t => t.charStateName == charStateName);
+            if (index == -1) return;
             allCharBases[index].EndState();   // all related buffs to be cleared from here
             allCharBases.RemoveAt(index);
             RemoveImmunityByCharState(charStateName);

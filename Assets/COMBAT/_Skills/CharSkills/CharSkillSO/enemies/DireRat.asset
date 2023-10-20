@@ -21,13 +21,15 @@ MonoBehaviour:
   defendFX:
     loc: 0
     skillSprite: {fileID: 0}
+  leftInvSkillPanelBG: {fileID: 0}
+  rightInvSkillPanelBG: {fileID: 0}
   passiveSkills:
   - passiveSkillName: 42
     passiveSprite: {fileID: 21300000, guid: df58f787eb860a04caeaa1bfb95cc358, type: 3}
   - passiveSkillName: 45
     passiveSprite: {fileID: 21300000, guid: 4ce5e9d45f4ce7348b143d60238116a0, type: 3}
   allSkills:
-  - skillName: 501
+  - skillName: 19
     charName: 19
     skillID: 0
     skillIconSprite: {fileID: 21300000, guid: 0e9643acd212fb04cb00cf522eaf0a6c, type: 3}
@@ -54,7 +56,7 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexName: 06000000180000000b000000
+      hexNames: 000000000000000000000000
     allSkillFXs:
     - charMode: 1
       perkType: 0
@@ -64,7 +66,8 @@ MonoBehaviour:
       mainSkillFX: {fileID: 0}
       colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
-  - skillName: 502
+    allLines: []
+  - skillName: 20
     charName: 19
     skillID: 0
     skillIconSprite: {fileID: 21300000, guid: 1216be5803074f24c93afa8c333b9608, type: 3}
@@ -91,9 +94,10 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexName: 02000000100000000b000000
+      hexNames: 000000000000000000000000
     allSkillFXs: []
-  - skillName: 503
+    allLines: []
+  - skillName: 21
     charName: 19
     skillID: 0
     skillIconSprite: {fileID: 21300000, guid: 0016dca74096a734592eebc8dd4e4774, type: 3}
@@ -120,7 +124,7 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexName: 200000000b00000002000000
+      hexNames: 000000000000000000000000
     allSkillFXs:
     - charMode: 1
       perkType: 0
@@ -130,7 +134,8 @@ MonoBehaviour:
       mainSkillFX: {fileID: 0}
       colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
-  - skillName: 128
+    allLines: []
+  - skillName: 1
     charName: 19
     skillID: 0
     skillIconSprite: {fileID: 21300000, guid: e8a75ecb5696e65499a954c256760440, type: 3}
@@ -157,8 +162,9 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexName: 190000000b0000000b000000
+      hexNames: 190000000b0000000b000000
     allSkillFXs: []
+    allLines: []
   - skillName: 2
     charName: 19
     skillID: 144
@@ -186,5 +192,6 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexName: 020000000b0000000b000000
+      hexNames: 020000000b0000000b000000
     allSkillFXs: []
+    allLines: []

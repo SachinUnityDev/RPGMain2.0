@@ -39,7 +39,6 @@ namespace Combat
             base.BaseApply();
             SkillService.Instance.OnSkillUsed += WaterShellRegainAP;
             CombatEventService.Instance.OnEOT += OnEOT;
-
         }
         void WaterShellRegainAP(SkillEventData skilleventData)
         {

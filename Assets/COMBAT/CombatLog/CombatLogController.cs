@@ -60,7 +60,7 @@ namespace Combat
             CombatEventService.Instance.OnSOC += StartOfCombat;
             CombatEventService.Instance.OnSOR1 += StartOfRound;
            // CombatEventService.Instance.OnCharOnTurnSet += StartOfTurn;
-            CombatEventService.Instance.OnCharDeath += DeathOfCharUpdate;
+            CharService.Instance.OnCharDeath += DeathOfCharUpdate;
             CharStatesService.Instance.OnCharStateStart += CharStateStart;
             CharStatesService.Instance.OnCharStateEnd += CharStateEnd;
 
@@ -74,16 +74,14 @@ namespace Combat
             CombatEventService.Instance.OnSOC -= StartOfCombat;
             CombatEventService.Instance.OnSOR1 -= StartOfRound;
             // CombatEventService.Instance.OnCharOnTurnSet += StartOfTurn;
-            CombatEventService.Instance.OnCharDeath -= DeathOfCharUpdate;
+            CharService.Instance.OnCharDeath -= DeathOfCharUpdate;
             CharStatesService.Instance.OnCharStateStart -= CharStateStart;
             CharStatesService.Instance.OnCharStateEnd -= CharStateEnd;
         }
         #region  # COMBAT LOG BUILDERS 
         // **********CHAR STATE
         void CharStateStart(CharStateModData charStateModData)
-        {
-
-            
+        {   
             CharController charController = CharService.Instance.GetCharCtrlWithCharID(charStateModData.effectedCharID);
             CharNames charName = charController.charModel.charName;
             string str = charName + " is now " + charStateModData.charStateName + ", "; 

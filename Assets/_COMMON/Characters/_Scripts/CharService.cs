@@ -10,6 +10,7 @@ namespace Common
 {
     public class CharService : MonoSingletonGeneric<CharService>, ISaveableService
     {
+        public event Action<CharController> OnCharDeath;
         public event Action<CharController> OnCharInit;
         public event Action<CharController> OnCharAddedToParty;
         public event Action OnPartyLocked; 
@@ -466,12 +467,19 @@ namespace Common
                 charsInPlay.Remove(charGO);
                 charsInPlayControllers.Remove(charCtrl);
                 GridService.Instance.UpdateGridOnCharDeath(charCtrl);  // subscribe to event once tested
-                CombatEventService.Instance.On_CharDeath(charCtrl);
+                On_CharDeath(charCtrl);
                 CombatService.Instance.roundController.ReorderAfterCharDeath(charCtrl);
             }
 
             charDiedinLastTurn.Clear();
         }
+
+        public void On_CharDeath(CharController _charController)
+        {
+            Debug.Log("@@@@@@ON CHAR DEATH INVOKE");
+            OnCharDeath?.Invoke(_charController);
+        }
+
         public string GetCharName(CharNames charName)
         {
             CharacterSO charSO = CharService.Instance.allCharSO.GetCharSO(charName);

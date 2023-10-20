@@ -22,46 +22,9 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-
-
-        public override void SkillInit(SkillController1 _skillController)
-        {
-            base.SkillInit(_skillController);
-
-            //charName = _skillController.charName;
-            //SkillDataSO skillDataSO = SkillService.Instance.GetSkillSO(charName);
-            //skillController = _skillController;
-            //charController = skillController.gameObject.GetComponent<CharController>();
-            //charID = charController.charModel.charID;
-            //skillData = skillDataSO.allSkills.Find(t => t.skillName == skillName);
-
-            //skillModel = new SkillModel(skillData);
-            //skillModel.skillID = skillController.skillID;
-            //skillModel.charID = skillController.charID;
-            ////SkillService.Instance.allSkillModels.Add(skillModel);
-            //skillController.allSkillModels.Add(skillModel);
-            //charGO = SkillService.Instance.GetGO4SkillCtrller(charName);
-            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
-            {
-
-                myDyna = GridService.Instance.GetDyna4GO(charGO);
-                // Debug.Log("INSIDE SKILL INIT" + skillName);
-                // Do a Skill Init at the start of the combat.. 
-
-                PopulateTargetPos();
-            }
-        }
-
         public override void PopulateTargetPos()
         {
-            if (skillModel == null) return;
-            skillModel.targetPos.Clear(); CombatService.Instance.mainTargetDynas.Clear();
-            
-            int pos = GridService.Instance.GetDyna4GO(charGO).currentPos; 
-            skillModel.targetPos.Add(new CellPosData(myDyna.charMode, pos));
-
-            CombatService.Instance.mainTargetDynas.Add(myDyna);
-
+            SelfTarget(); 
         }
      
         public override void ApplyFX1()
@@ -83,13 +46,7 @@ namespace Combat
         }
 
 
-        public override void SkillEnd()
-        {
 
-            //  charController.charModel.staminaRegen.currValue -= 2;
-            //charController.ChangeStat(CauseType.CharSkill, (int)skillName, charController, StatsName.haste, 2);
-
-        }
 
 
         public override void DisplayFX1()

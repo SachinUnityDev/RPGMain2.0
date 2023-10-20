@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Common;
 using System;
+using DG.Tweening;
 
 
 namespace Combat
@@ -12,11 +13,14 @@ namespace Combat
         //public event Action<DmgAppliedData> OnDamageApplied;
         
         const float hitChanceMin = 30f;
-
         const float hitChanceMax = 93f;
         CharController charController;
         CharController striker;
         StrikeType strikeType = StrikeType.Normal;
+
+        [Header("Cheated Death")]
+        public int cheatedDeathCount = 0;
+        public int MAX_ALLOWED_CHEATDEATH = 1; 
 
 
         [Header("Damage Model")]
@@ -33,7 +37,8 @@ namespace Combat
         public void Init()
         {
             dmgModel = new DmgModel();
-         
+            cheatedDeathCount = 0;
+            MAX_ALLOWED_CHEATDEATH = 1;
         }
         public bool HitChance()  // only for physical 
         {
@@ -132,7 +137,7 @@ namespace Combat
                 {
                     strikeType = StrikeType.Dodged; 
                     CombatEventService.Instance.On_DmgApplied(new DmgAppliedData(striker, causeType, causeName
-                        , _dmgType, 0f, strikeType, charController));
+                        , _dmgType, 0f, strikeType, charController, attackType));
                     return; 
                 }
 
@@ -253,12 +258,9 @@ namespace Combat
                     break;
             }
             CombatEventService.Instance.On_DmgApplied(new DmgAppliedData(striker, causeType, causeName
-                                                , _dmgType, dmgPercentORVal, strikeType, charController));
+                                                , _dmgType, dmgPercentORVal, strikeType, charController, attackType));
 
         }
-       
-
-
         public void HealingAsPercentOfMaxHP(CharController charController, CauseType causeType, int causeName, float val)
         {
             StatData statData = charController.GetStat(StatName.health);
@@ -267,6 +269,7 @@ namespace Combat
             ApplyDamage(charController, causeType, causeName, DamageType.Heal, healVal); 
         }
 
+        // Striking Crit and feeble 
         void FortChgOnStrikingCritNFeeble()
         {
             if (strikeType == StrikeType.Normal)
@@ -303,7 +306,7 @@ namespace Combat
                 }
             }
         }
-
+        // Getting Crit and Feeble
         void FortChgOnGettingCritNFeeble()
         {
             if (strikeType == StrikeType.Normal)
@@ -343,7 +346,25 @@ namespace Combat
 
 
         }
-    
+
+
+        public void CheatDeath()
+        {
+            if(cheatedDeathCount < MAX_ALLOWED_CHEATDEATH)
+            {
+                // Gain +% 30 health and +18 Fortitude instantly    -1 Fort Origin permanently(Base value)            
+                charController.ChangeStat(CauseType.StatMinMaxLimit, 1, charController.charModel.charID
+                                                                                , StatName.health, +30f);
+                charController.ChangeStat(CauseType.StatMinMaxLimit, 1, charController.charModel.charID
+                                                                                , StatName.fortitude, +18f);
+                charController.ChangeAttribBaseVal(CauseType.StatMinMaxLimit, 1, charController.charModel.charID
+                                                                                , AttribName.fortOrg, -1);
+                charController.charStateController.ApplyCharStateBuff(CauseType.StatMinMaxLimit, (int)1
+                       , charController.charModel.charID, CharStateName.CheatedDeath);
+
+                cheatedDeathCount++;
+            }
+        }
     }
 
 
@@ -354,11 +375,12 @@ namespace Combat
         public CauseType causeType;
         public int causeName;
         public DamageType dmgType;
+        public AttackType attackType;
         public float dmgValue;
         public StrikeType strikeType;
         public CharController targetController;
         public DmgAppliedData(CharController striker, CauseType causeType, int causeName, DamageType dmgType, float dmgValue
-                            , StrikeType strikeType, CharController targetController)
+                            , StrikeType strikeType, CharController targetController, AttackType attackType)
         {
             this.striker = striker;
             this.causeType = causeType;
@@ -367,6 +389,7 @@ namespace Combat
             this.dmgValue = dmgValue;
             this.strikeType = strikeType;
             this.targetController = targetController;
+            this.attackType = attackType;
         }
     }
 

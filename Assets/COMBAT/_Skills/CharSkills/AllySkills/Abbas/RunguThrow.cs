@@ -25,10 +25,10 @@ namespace Combat
             {
                 skillModel.targetPos.Clear();
                 CombatService.Instance.mainTargetDynas.Clear();
-                CellPosData cellPos = new CellPosData(CharMode.Enemy, targetDyna.currentPos);
-                skillModel.targetPos.Add(cellPos);
+                CellPosData cellPos = new CellPosData(CharMode.Enemy, myDyna.currentPos);
                 targetDyna = GridService.Instance.GetInSameLaneOppParty(cellPos)[0];
-                CombatService.Instance.mainTargetDynas.Add(targetDyna);
+                CombatService.Instance.mainTargetDynas.Add(targetDyna);                
+                skillModel.targetPos.Add(cellPos);
             }
         }
 

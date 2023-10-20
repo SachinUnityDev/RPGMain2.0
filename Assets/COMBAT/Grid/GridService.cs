@@ -259,7 +259,7 @@ namespace Combat
 
         }
 
-        public void ShuffleParty(CharMode charMode)
+        public void ShuffleCharMode(CharMode charMode)
         {
             if (charMode == CharMode.Ally)
             {               

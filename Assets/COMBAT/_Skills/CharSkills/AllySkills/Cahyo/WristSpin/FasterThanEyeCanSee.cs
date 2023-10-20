@@ -24,7 +24,7 @@ namespace Combat
 
         public override SkillLvl skillLvl => SkillLvl.Level2;
 
-        private float _chance = 0f;
+        private float _chance = 30f;
         public override float chance { get => _chance; set => _chance = value; }
     
         public override void ApplyFX1()
@@ -34,7 +34,7 @@ namespace Combat
                     if(chance.GetChance())
                     dyna.charGO.GetComponent<CharController>().charStateController
                         .ApplyCharStateBuff(CauseType.CharSkill, (int)skillName, charController.charModel.charID
-                                             , CharStateName.Confused, skillModel.timeFrame, skillModel.castTime);
+                                             , CharStateName.Blinded, skillModel.timeFrame, skillModel.castTime);
              }
         }
 

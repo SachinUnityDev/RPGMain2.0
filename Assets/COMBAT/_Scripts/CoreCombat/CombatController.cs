@@ -21,6 +21,7 @@ namespace Combat
         [SerializeField] Canvas canvas;
         [SerializeField] ActionPtsView actionPtsView;
 
+
         [SerializeField] int prevTurn =-1; 
 
         void Start()

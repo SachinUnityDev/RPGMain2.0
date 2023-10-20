@@ -21,36 +21,6 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        public override void SkillInit(SkillController1 _skillController)
-        {           
-            base.SkillInit(_skillController);
-            //charName = _skillController.charName;
-
-            //Debug.Log("XXXXXXXX Default Move Init for  " + charName);
-
-            //SkillDataSO skillDataSO = SkillService.Instance.GetSkillSO(charName);
-            //skillController = _skillController;
-            //charController = skillController.gameObject.GetComponent<CharController>();
-
-            //skillData = skillDataSO.allSkills.Find(t => t.skillName == skillName);
-
-            //skillModel = new SkillModel(skillData);
-            //// skillModel.skillID = skillController.skillID;
-            //skillModel.charID = charID; 
-
-            //skillController.allSkillModels.Add(skillModel);
-            //charGO = skillController.gameObject;  
-
-            //SkillService.Instance.GetGO4SkillCtrller(charName);
-            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
-            {
-                myDyna = GridService.Instance.GetDyna4GO(charGO);
-
-                PopulateTargetPos();
-            }
-        }
-
-
         public override void PopulateTargetPos()
         {
   
@@ -68,7 +38,6 @@ namespace Combat
                     skillModel.targetPos.Add(cellPosData);
                 }                
             }
-
         }
 
         public override void ApplyFX1()
@@ -79,7 +48,7 @@ namespace Combat
                 GridService.Instance.gridController.Move2Pos(myDyna, skillModel.targetPos[pos].pos);
             }
             else
-            {// if clicked on target pos... 
+            {   // if clicked on target pos... 
                 Vector3Int tilePos = GridService.Instance.gridView.currTilePos;
                 CellPosData cellPosData = GridService.Instance.gridView.GetPos4TilePos(tilePos);
                 if (cellPosData == null)
@@ -95,11 +64,7 @@ namespace Combat
                             GridService.Instance.gridController.Move2Pos(myDyna, cellPosData.pos);
                         }
                     }
-                }
-                //if (skillModel.targetPos.Any(t => t.pos == cellPosData.pos && t.charMode == cellPosData.charMode))
-                //{
-                    
-                //}
+                }     
             }
         }
 

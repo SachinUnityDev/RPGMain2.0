@@ -24,22 +24,6 @@ namespace Common
                         , charID, AttribName.fortOrg, +8, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
-            charController.ChangeAttribBaseVal(CauseType.CharState, (int)charStateName, charID
-                                                  , AttribName.fortOrg, -1);
-
-            // fort changes
-            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID
-                                            , StatName.fortitude, 18, true);
-
-            // Hp Changes
-            StatData statdata = charController.GetStat(StatName.health);
-
-            float hpVal = 0.3f * statdata.maxLimit;
-
-            charController.ChangeStat(CauseType.CharState, (int)charStateName, charID
-                                             , StatName.health, hpVal,true);
-
-
         }
         public override void StateApplyVFX()
         {
@@ -47,14 +31,8 @@ namespace Common
         }
         public override void StateDisplay()
         {
-            str0 = "Gain 30% Hp and +18 Fort";
-            charStateCardStrs.Add(str0);
-
             str1 = "+8 Fort Origin until eoc";
             charStateCardStrs.Add(str1);
-
-            str2 = "-1 Fort Origin permanently";
-            charStateCardStrs.Add(str2);
         }
     }
 }

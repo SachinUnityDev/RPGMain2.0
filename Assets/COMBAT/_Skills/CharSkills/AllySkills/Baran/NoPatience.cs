@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Common;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,11 +21,8 @@ namespace Combat
 
         float  StackAmt = 0; 
         public override void PopulateTargetPos()
-        {            
-            if (skillModel == null) return;
-            skillModel.targetPos.Clear();
-            skillModel.targetPos.Add(new CellPosData(myDyna.charMode, myDyna.currentPos));
-
+        {          
+            SelfTarget(); 
         }
         public override void BaseApply()
         {
@@ -34,9 +32,12 @@ namespace Combat
         }
         void HeadTossRegainAP(SkillEventData skilleventData)
         {
-            if(skilleventData.skillName == SkillNames.HeadToss)
+            if (70f.GetChance())
             {
-                RegainAP(); 
+                if (skilleventData.skillName == SkillNames.HeadToss)
+                {
+                    RegainAP();
+                }
             }
             SkillService.Instance.OnSkillUsed -= HeadTossRegainAP;
         }
@@ -66,14 +67,13 @@ namespace Combat
 
         public override void ApplyFX3()
         {
-
-            if (StackAmt <= 6)
+            if (StackAmt <= 3)
             {
                 charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                                , AttribName.willpower, +2, skillModel.timeFrame, skillModel.castTime, true);
+                                , AttribName.willpower, +2, TimeFrame.EndOfCombat, skillModel.castTime, true);
                 StackAmt++;
             }
-            else if(StackAmt > 6)
+            else if(StackAmt > 3)
             {
                 StackAmt= 0;
             }

@@ -63,7 +63,7 @@ namespace Combat
 
         public override void ApplyFX1()
         {
-            GridService.Instance.ShuffleParty(CharMode.Enemy);
+            GridService.Instance.ShuffleCharMode(CharMode.Enemy);
         }
 
         public override void ApplyFX2()

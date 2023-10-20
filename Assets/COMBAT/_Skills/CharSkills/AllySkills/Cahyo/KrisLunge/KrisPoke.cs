@@ -45,11 +45,7 @@ namespace Combat
                 targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
                  , AttribName.haste, -2, skillModel.timeFrame, skillModel.castTime, false);
         }
-        public override void DisplayFX1()
-        {
-            str1 = $"-2<style=Enemy> haste, rd";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
-        }
+       
         public override void ApplyFX2()
         {
         }
@@ -57,6 +53,11 @@ namespace Combat
         public override void ApplyFX3()
         {
 
+        }
+        public override void DisplayFX1()
+        {
+            str1 = $"-2<style=Enemy> haste, rd";
+            SkillService.Instance.skillModelHovered.descLines.Add(str1);
         }
         public override void DisplayFX2()
         {

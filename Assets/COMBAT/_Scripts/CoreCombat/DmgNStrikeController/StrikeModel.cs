@@ -18,7 +18,8 @@ namespace Combat
         public int currentTime =-1;
         public int castTime = 0; 
 
-        public ThornBuffData(int thornID, DamageType damageType, float thornsMin, float thornsMax, TimeFrame timeframe, int castTime)
+        public ThornBuffData(int thornID, DamageType damageType, float thornsMin, float thornsMax
+                                    , TimeFrame timeframe, int castTime)
         {
             this.thornID = thornID;
             
@@ -29,6 +30,26 @@ namespace Combat
             this.castTime = castTime;
         }
     }
+    public class RetaliateBuffData
+    {
+        public int retaliateID = -1;
+        public DamageType damageType;  // damage attackers will be reverted by
+        public float dmgVal; 
+        public int rdCount;
+        public TimeFrame timeFrame = TimeFrame.None;
+        public int currentTime = -1;
+        public int castTime = 0;
+
+        public RetaliateBuffData(int retaliateID, DamageType damageType, float dmgVal
+                                    , TimeFrame timeframe, int castTime)
+        {
+            this.retaliateID = retaliateID;
+            this.damageType = damageType;
+            this.dmgVal = dmgVal;
+            this.timeFrame = timeframe;
+            this.castTime = castTime;
+        }
+    }
 
 
     //Thorns Damage
@@ -36,7 +57,7 @@ namespace Combat
     public class StrikerModel
     {
         public List<ThornBuffData> allThornsData = new List<ThornBuffData>();
-
+        public List<RetaliateBuffData> allRetaliateData = new List<RetaliateBuffData>();
         
 
         public void RemoveThornDamage(int thornID)

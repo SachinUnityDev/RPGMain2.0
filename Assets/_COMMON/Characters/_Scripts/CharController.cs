@@ -298,7 +298,13 @@ namespace Common
                     Debug.Log("ATTEMPTED change in stat" + causeType + "Name" + causeByCharID + "StatName" + statName);
                     return null;
                 }
+                if (GetHealthValBelow0(value)>0)
+                {
+                    damageController.ApplyDamage(this,CauseType.StatMinMaxLimit, 0, DamageType.FortitudeDmg
+                                                                        , GetHealthValBelow0(value), false);                    
+                }                 
             }
+            
             // COMBAT PATCH FIX ENDS 
             // BroadCast the value change thru On_StatCurrValChg
             StatModData statModData = new StatModData(turn, causeType, CauseName, causeByCharID
@@ -331,7 +337,7 @@ namespace Common
                 PopulateOverCharBars(statName);
 
             if (statName == StatName.health)
-                CheckHealth();
+                On_HealthAtZero();
 
             return statModData;
         }
@@ -355,6 +361,7 @@ namespace Common
                     Debug.Log("ATTEMPTED change in stat" + causeType + "Name" + causeByCharID + "StatName" + attribName);
                     return null;
                 }
+               
             }
             // COMBAT PATCH FIX ENDS 
             // BroadCast the value change thru On_StatCurrValChg
@@ -428,23 +435,31 @@ namespace Common
 
         }
 
-        void CheckHealth()
+
+         float GetHealthValBelow0(float val)
+         {
+            StatData healthdata = GetStat(StatName.health); 
+            if(healthdata.currValue + val <= healthdata.minLimit)
+            {
+                return healthdata.currValue + val; 
+            }
+            return 1f; 
+         }
+
+        void On_HealthAtZero()
         {       
             StatData statHP = GetStat(StatName.health); 
             if(statHP.currValue <= 0)
             {
                 if(charModel.charMode == CharMode.Enemy)
                 {
-                  // CombatEventService.Instance.On_CharDeath(this); 
+                  CharService.Instance.On_CharDeath(this); 
                     CharService.Instance.charDiedinLastTurn.Add(this); 
                 }else
                 {
-                    Debug.Log("ALLY DEATH CODE TO BE WRITTEN HERE"); 
-                    // LAST DROP of blood char State 
-                    // has three chances, Cheated death is one of them
-                    //ONce health is 0 DOT FX are blocked and do not effect here 
-
-
+                    Debug.Log("ALLY DEATH CODE TO BE WRITTEN HERE");
+                    charStateController.ApplyCharStateBuff(CauseType.StatMinMaxLimit, (int)0,
+                                                        charModel.charID, CharStateName.LastDropOfBlood);                                    
                 }
             }
         }

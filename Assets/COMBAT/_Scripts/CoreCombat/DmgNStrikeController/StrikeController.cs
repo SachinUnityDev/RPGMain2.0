@@ -195,18 +195,73 @@ namespace Combat
         {
             foreach (ThornBuffData thornData in strikerModel.allThornsData)
             {   
-                if(thornData.damageType == dmgAppliedData.dmgType)
-                {
-                    float dmgPercentValue = UnityEngine.Random.Range(thornData.thornsMin, thornData.thornsMax);
-                    dmgAppliedData.striker.GetComponent<DamageController>()
-                        .ApplyDamage(charController, CauseType.ThornsAttack, -1, thornData.damageType, dmgPercentValue, false);
-                }
+                int charLvl = this.GetComponent<CharController>().charModel.charLvl;
+                float dmgPercentValue = (thornData.thornsMax - thornData.thornsMin)*(0.6f + charLvl/6);
+                if (dmgPercentValue > 0)
+                dmgAppliedData.striker.GetComponent<DamageController>()
+                    .ApplyDamage(charController, CauseType.ThornsAttack, -1, thornData.damageType, dmgPercentValue, false);               
             }
         }
 
         #endregion
 
+        #region RETALIATE
 
+        public int AddRetailiateBuff(DamageType damageType, float dmgVal, TimeFrame timeframe, int castTime)
+        {
+            int currRd = CombatService.Instance.currentRound;
+            thornID = strikerModel.allThornsData.Count + 1;
+            RetaliateBuffData retaliateBuffData = new RetaliateBuffData(thornID, damageType, dmgVal, timeframe, castTime);
+
+            strikerModel.allRetaliateData.Add(retaliateBuffData);
+
+            return thornID;
+        }
+
+        public void RemoveRetaliateFx(int thornID)
+        {
+            strikerModel.RemoveThornDamage(thornID);
+        }
+        public void RoundTickRetaliate(int roundNo)
+        {
+            foreach (RetaliateBuffData retaliateBuffData in strikerModel.allRetaliateData.ToList())
+            {
+                if (retaliateBuffData.timeFrame == TimeFrame.EndOfRound)
+                {
+                    if (retaliateBuffData.currentTime >= retaliateBuffData.castTime)
+                    {
+                        RemoveThornsFx(retaliateBuffData.retaliateID);
+                    }
+                    retaliateBuffData.currentTime++;
+                }
+            }
+        }
+        public void EOCTickRetaliate()
+        {
+            foreach (RetaliateBuffData retaliateBuffData in strikerModel.allRetaliateData.ToList())
+            {
+                if (retaliateBuffData.timeFrame == TimeFrame.EndOfCombat)
+                {
+                    strikerModel.allRetaliateData.Clear();
+                }
+            }
+        }
+        void OnDmgDeliveredTickRetaliate(DmgAppliedData dmgAppliedData)
+        {
+            foreach (RetaliateBuffData retaliateBuffData in strikerModel.allRetaliateData)
+            {
+                int charLvl = this.GetComponent<CharController>().charModel.charLvl;
+                //float dmgPercentValue = (retaliateBuffData.retaliateMax - retaliateBuffData.retaliateMin) * (0.6f + charLvl / 6);
+                //if (dmgPercentValue > 0)
+                    //dmgAppliedData.striker.GetComponent<DamageController>()
+                    //    .ApplyDamage(charController, CauseType.ThornsAttack, -1, retaliateBuffData.damageType, dmgPercentValue, false);
+            }
+        }
+
+
+
+
+        #endregion
         #region DAMAGE BUFF ALTERER
 
         public List<DmgBuffData> allDmgBuffData = new List<DmgBuffData>();

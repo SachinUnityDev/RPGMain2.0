@@ -163,7 +163,6 @@ namespace Common
             clickedPerkList.ForEach(t => allPerkBases.Find(x => x.perkName == t.perkName).SkillInit(this));
             clickedPerkList.ForEach(t => allPerkBases.Find(x => x.perkName == t.perkName).SkillHovered());
         }
-
         public void SkillSelect(SkillNames _skillName)
         {
             allSkillBases.Find(t => t.skillName == _skillName).SkillSelected();
@@ -187,35 +186,6 @@ namespace Common
                 }
             }
         }
-
-        //public void CheckNUpdateSkillState()
-        //{
-
-        //    //cd .. 0 cast this even this round double strike
-        //    //cd... 1 cast this only next round .... 
-        //    //cd .. so on and so forth
-
-        //    int cdGap = 0;
-        //    foreach (var skill in allSkillBases)
-        //    {
-        //        cdGap = CombatService.Instance.currentRound - skill.skillModel.lastUsedInRound;
-        //        //if (cdGap < 0)
-        //        //{
-        //        //  //  Debug.Log("Cool Calc Error");
-        //        //}
-        //        if (cdGap < skill.skillModel.cd)
-        //        {
-        //            skill.skillModel.SetSkillState(SkillSelectState.UnClickable_InCd);
-        //            // Debug.Log("SkillUsed" + cdGap);
-        //        }
-        //        else
-        //        {
-        //            //SkillServiceView.Instance.UpdateSkillIconTxt(skill.skillName, cdGap);
-        //            skill.skillModel.SetSkillState(SkillSelectState.Clickable);
-
-        //        }
-        //    }
-        //}
 
         #endregion
 
@@ -245,7 +215,6 @@ namespace Common
                 return null;
             }
         }
-
         public SkillBase GetSkillBase(SkillNames skillName)
         {
             SkillBase skillBase = allSkillBases.Find(t => t.skillName == skillName);
@@ -296,8 +265,7 @@ namespace Common
             //SkillViewService.. Update skillBtn State.. skill points in view 
          
 
-        }
-        
+        }        
         void SetSameLvlPerkUnClickable(PerkData perkData)
         {
             SkillNames skillName = perkData.skillName;
@@ -382,7 +350,6 @@ namespace Common
             }
             //UpdatePipeRel();
         }
-
         void UpdateDataPerkState(PerkNames _perkName, PerkSelectState _state)
         {
             if (_perkName == PerkNames.None) return;
@@ -442,9 +409,6 @@ namespace Common
                 }
             }
         }
-
-
-
         public void UpdatePerkRel(PerkData clickedPerkData)
         {
             SkillNames skillName = clickedPerkData.skillName;
@@ -651,6 +615,12 @@ namespace Common
             
             return allPerks;
         }
+
+        public bool IsPerkClicked(SkillNames skillName, PerkNames perkName)
+        {
+            List<PerkData> perks = GetClickedPerks(skillName); 
+            return perks.Any(t=>t.preReqList.Contains(perkName) && t.state == PerkSelectState.Clicked);
+        }
         bool IsPrevLvlClicked(PerkData perkData)
         {
 
@@ -737,7 +707,6 @@ namespace Common
             allSkillDmgMod.Add(skillBuffModVal);
             return skillModId;
         }
-
         public void RemoveSkillDmgModBuff(int skillModId)
         {
             int index = allSkillDmgMod.FindIndex(t=>t.skillModID== skillModId);
@@ -788,8 +757,6 @@ namespace Common
         }
 
         #endregion
-
-
     }
 
     public class SkillDmgModData

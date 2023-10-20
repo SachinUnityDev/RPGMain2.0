@@ -52,6 +52,7 @@ public enum CauseType
     WeekEvents, 
     Loot,
     AttribMinMaxLimit,
+    StatMinMaxLimit,
     
 }
 
@@ -185,7 +186,7 @@ public enum CharNames
     Forestaller,
     Hyena,
     KingScorpio,
-    Kongo_mato,
+    Kongamato,
     Leopard,
     Leopardess_pet,
     Lion,

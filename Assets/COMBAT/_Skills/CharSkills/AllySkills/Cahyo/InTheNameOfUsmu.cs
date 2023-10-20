@@ -20,22 +20,43 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        public override void SkillSelected()
+        public override void PopulateTargetPos()
         {
-           
+            SelfTarget(); 
         }
-
-        public override void Tick(int roundNo)
+        public override void BaseApply()
         {
-            
-        }
+            base.BaseApply();
+            SkillService.Instance.OnSkillUsed -= KrisLungeRegainAP;
+            CombatEventService.Instance.OnEOT -= OnEOT;
 
-   
+            SkillService.Instance.OnSkillUsed += KrisLungeRegainAP;
+            CombatEventService.Instance.OnEOT += OnEOT;
+        }
         public override void ApplyFX1()
         {
-           
+            int stmRegen = UnityEngine.Random.Range(3, 6);
+            if(targetController != null)
+                    targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                    , AttribName.staminaRegen, stmRegen, skillModel.timeFrame, skillModel.castTime, true); 
         }
 
+
+        void KrisLungeRegainAP(SkillEventData skilleventData)
+        {
+            if (80f.GetChance())
+            {
+                if (skilleventData.skillName == SkillNames.KrisLunge)
+                {
+                    RegainAP();
+                }
+            }
+        }
+        void OnEOT()
+        {
+            SkillService.Instance.OnSkillUsed -= KrisLungeRegainAP;
+            CombatEventService.Instance.OnEOT -= OnEOT;
+        }
         public override void ApplyFX2()
         {
            
@@ -49,13 +70,6 @@ namespace Combat
         public override void ApplyMoveFx()
         {
         }
-
-        public override void SkillEnd()
-        {
-          
-        }
-
-
 
         public override void DisplayFX1()
         {
@@ -76,37 +90,13 @@ namespace Combat
         {
           
         }
-
-     
-
-        public override void PreApplyFX()
-        {
-          
-        }
-
-        public override void PostApplyFX()
-        {
-           
-        }
-
         public override void ApplyVFx()
-        {
-           
+        {           
         }
-
-     
-
         public override void PopulateAITarget()
         {
           
         }
-
-        public override void PopulateTargetPos()
-        {
-          
-        }
-
-  
     }
 
 }

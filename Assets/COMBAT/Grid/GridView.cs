@@ -218,9 +218,6 @@ namespace Combat
 
         }
 
-        
-
-            
         public DynamicPosData GetDynaFromTilePos(Vector3Int _tilePos)
         {
             CellPosData cData = GetPos4TilePos(_tilePos);

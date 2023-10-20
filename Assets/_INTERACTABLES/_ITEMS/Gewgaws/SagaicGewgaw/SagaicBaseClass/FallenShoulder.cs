@@ -30,7 +30,7 @@ namespace Interactables
         public override void GewGawSagaicInit()
         {
             CombatEventService.Instance.OnFleeInCombat += OnCombatFleeNDead;
-            CombatEventService.Instance.OnCharDeath += OnCombatFleeNDead;
+            CharService.Instance.OnCharDeath += OnCombatFleeNDead;
 
             string str = "When solo: +2 Stm regen";
             displayStrs.Add(str);
@@ -71,7 +71,7 @@ namespace Interactables
         public override void UnEquipSagaic()
         {
             CombatEventService.Instance.OnFleeInCombat += OnCombatFleeNDead;
-            CombatEventService.Instance.OnCharDeath += OnCombatFleeNDead;
+            CharService.Instance.OnCharDeath += OnCombatFleeNDead;
             foreach (int i in buffIndex)
             {
                 charController.buffController.RemoveBuff(i);

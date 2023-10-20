@@ -75,7 +75,7 @@ namespace Combat
             roundController = GetComponent<RoundController>(); 
             CombatEventService.Instance.OnCharOnTurnSet += OnCharSetPortrait;
             CombatEventService.Instance.OnEOT += EOTRemovePortrait;
-            CombatEventService.Instance.OnCharDeath += (CharController c) => SetDefaultTurnOrder();
+            CharService.Instance.OnCharDeath += (CharController c) => SetDefaultTurnOrder();
 
             foreach (Transform child in allyPortraits.transform)
             {

@@ -7,7 +7,10 @@ using DG.Tweening;
 using Common;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement; 
+using UnityEngine.SceneManagement;
+using UnityEngine.Rendering;
+using System.Security.Policy;
+
 namespace Combat
 {
      [Serializable]
@@ -34,7 +37,10 @@ namespace Combat
         public event Action<SkillModel> OnSkillSelectInInv; 
         public event Action<PerkNames> OnPerkHovered;
 
-        //("ON SKILL APPLY")
+
+
+
+       // ("ON SKILL APPLY")]
         private event Action _SkillApply = null;
         public event Action OnSkillApply
         {
@@ -86,7 +92,9 @@ namespace Combat
 
         [Header("SKILL MOVE AND FX RELATED")]
         public SkillFxMoveController skillFXMoveController;
-     
+
+        [Header(" Action Pts")]
+        bool isZeroActionPtsSkill = false; 
 
         // ALL ACTIONS// 
         public event Action SkillInit;
@@ -105,6 +113,8 @@ namespace Combat
         [Header("curr Char UPDATES")]
         public CharMode currCharMode;
 
+        [Header("REMOTE SKILLS SERVICE")]
+        public RemoteSkillView remoteSkillView; 
 
 
         [Header(" ALL SKILLS DATA")]
@@ -153,6 +163,8 @@ namespace Combat
                 skillFXMoveController = gameObject.GetComponent<SkillFxMoveController>();
                 if(skillFXMoveController == null)
                     skillFXMoveController = gameObject.AddComponent<SkillFxMoveController>();
+                if (remoteSkillView == null)
+                    remoteSkillView = FindObjectOfType<RemoteSkillView>();
             }
             GameObject canvasGO = GameObject.FindGameObjectWithTag("Canvas");
             if (skillCardGO == null)
@@ -448,6 +460,7 @@ namespace Combat
             if (currCharOnturn.charModel.charMode == CharMode.Ally)
             {
                 CombatController combatController = currCharOnturn.GetComponent<CombatController>();
+
                 combatController.UpdateActionPts();
                 if (skillModel != null) // skillmodel is null when no skill can be selected 
                     skillView.UpdateSkillState(skillModel);
@@ -609,7 +622,7 @@ namespace Combat
             // return   perkDataMap.Values.ToList();           
             return null; 
         }
-      
+
         //public PerkBaseData GetPerkData(PerkNames _perkName)
         //{
         //   // return allSkillPerksData.Find(t => t.perkName == _perkName); 
@@ -618,12 +631,24 @@ namespace Combat
         //{
         //  //  allSkillPerksData.Find(t => t.perkName == _perkName).state = state; 
         //}
-        
+
 
         #endregion
 
+        #region APPLY REMOTE SKILLS
+        
+        public void ApplyRemoteSkills(SkillController1 skillController, SkillNames skillName
+                                                                        , CellPosData cellPosData)
+        {
+            remoteSkillView.ApplyRemoteSkillBuff(skillController, skillName, cellPosData); 
+        } 
+
+
+        #endregion
+
+
         #region Helpers
-      
+
 
         public AttackType GetSkillAttackType(SkillNames _skillName)
         {
@@ -680,24 +705,7 @@ namespace Combat
         #endregion
 
         private void Update()
-        {
-            //  temptxt.text =  currSkillName.ToString();
-            //if (Input.GetKeyDown(KeyCode.B))
-            //{
-            //    foreach (SkillController1 skillController in allSkillControllers)
-            //    {
-            //        CharModel charModel = skillController.gameObject.GetComponent<CharController>().charModel; 
-
-            //        int charID  = charModel.charID;
-            //        Debug.Log("CHAR ID " + charID  +"Char NAME " + charModel.charName); 
-
-            //    }
-            //}
-
-            // NOT TO BE ERASED 
-            //  if (CombatService.Instance.combatState == CombatState.INCombat_InSkillSelected)
-
-          
+        { 
             if(GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
                 if (CombatService.Instance.combatState == CombatState.INTactics)
@@ -712,126 +720,3 @@ namespace Combat
 
 
 }
-
-
-// SkillApply?.Invoke();
-//// Debug.Log("Target selected" + currentTargetDyna.charGO.name);
-// PostSkillApply?.Invoke();
-//OnSkillUsed?.Invoke(new SkillEventData(CombatService.Instance.currCharOnTurn
-//                           , targetController, currSkillName, skillModel));
-//CharController charController = CharacterService.Instance.GetGO4CharID(skillModel.charID).GetComponent<CharController>();
-//if(charController.charModel.charMode == CharMode.Ally)
-//{
-//    Debug.Log("ALLY in auto mode attempted");
-//    return;
-//}
-
-//public bool IsSkillApplySubcribed()
-//{
-//    foreach (Action del in PostSkillApply.GetInvocationList())
-//    {
-//        Debug.Log("SKILL APPLY SUBS" + del.Method.Name);
-//        //if(name == del.Method.Name)
-//        //    return true; 
-//    }
-//    return false; 
-
-//}
-
-// @@@@@@@@@@@@@@@@@ SUBSCRIPTION TESTING@@@@@@@@@@@@@@@@@@@@@@@
-//  for (int j = _SkillApply.GetInvocationList().Length - 1; j >= 0; j--)
-//  {
-//      var outputMsg = _SkillApply.GetInvocationList()[j];
-
-//      Debug.Log(outputMsg.GetType().Name + "INVOKE " + outputMsg.Method.Name);
-//  }
-
-
-////  SkillApply?.Invoke();
-//   //SkillEventtest();
-
-
-//PerkModelData GetMaxPerk(SkillNames _skillName)
-//{
-//    // highest lvl of clicked
-//    List<PerkModelData> myList = GetAllPerkdata(_skillName); 
-//    int count = myList.Count; 
-//    for (int i = count-1; i >= 0 ; i--)
-//    {
-//        if (myList[i].state == PerkSelectState.Clicked)
-//        {
-//            return myList[i]; 
-//        }
-//    }
-//    return null;             
-//}
-
-
-//public class SkillModelData
-//{
-//    public SkillNames skillName;
-//    public Type skillBase;
-//    public SkillSelectState skillstate;
-//    public SkillModelData(Type _skillBase, SkillNames _skillName, SkillSelectState _skillState)
-//    {
-//        skillBase = _skillBase;
-//        skillName = _skillName;
-//        skillstate = _skillState; 
-//    }
-//}
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////
-///
-
-
-//if (isMagical)
-//{
-//    if (strikeController.FocusCheck())
-//    { // MISFIRE 
-//        CombatService.Instance.isFocusChecked = true;
-//        strikeController.MisFireApply();
-
-//    }
-//        //####### modify MAIN TARGET and CURR TARGET DYNAS ....... ensure no dyna set in skill APPLY ########
-//}
-//if (isPhysical)
-//{
-//    if (strikeController.AccuracyCheck())
-//    {
-//        CombatService.Instance.isAccChecked = true;
-//    }
-//    bool isDodged = targetController.damageController.HitChance();
-//   // IF SKILL HAS TRUE HIT CANNOT i.e.isDodge = false;
-
-//    if (isDodged)
-//        Debug.Log("FX is Dodged");
-//    return;   // CAN INSERT DODGE FX HERE
-//    // get skill type DamageType.. Acc and Focus Check 
-//}
-
-// only target pos/tile can be clicked
-
-
-
-
-////////////////////////////////////////////////
-//protected override void Awake()
-//{
-//    base.Awake();
-
-
-
-//    //move and FX controller 
-
-
-
-//   // CombatEventService.Instance.OnCombatInit += skillFactory.SkillsInit;
-//   // CombatEventService.Instance.OnCombatInit += skillFactory.InitPerks; 
-//   //  CombatEventService.Instance.OnCombatInit += InitSkillControllers;
-
-
-
-//    //CombatEventService.Instance.OnSOR += InitSkillManagers; // for enemies
-//}

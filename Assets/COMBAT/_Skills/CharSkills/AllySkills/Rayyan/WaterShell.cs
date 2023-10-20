@@ -22,15 +22,18 @@ namespace Combat
 
         public override void PopulateTargetPos()
         {
-            skillModel.targetPos.Clear();
-            int pos = GridService.Instance.GetDyna4GO(charGO).currentPos;
-            skillModel.targetPos.Add(new CellPosData(myDyna.charMode, pos));
+            //    skillModel.targetPos.Clear();
+            //    int pos = GridService.Instance.GetDyna4GO(charGO).currentPos;
+            //    skillModel.targetPos.Add(new CellPosData(myDyna.charMode, pos));
+                SelfTarget(); 
         }
  
         public override void ApplyFX1()
         {
-            charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, AttribName.staminaRegen
-                , 3f, skillModel.timeFrame, skillModel.castTime, true);
+            int stmRegen = UnityEngine.Random.Range(3, 6);
+            if (targetController != null)
+                charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                , AttribName.staminaRegen, stmRegen, skillModel.timeFrame, skillModel.castTime, true);
 
             charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, AttribName.haste
                 , -3f, skillModel.timeFrame, skillModel.castTime, false);
@@ -61,15 +64,11 @@ namespace Combat
 
         public override void ApplyMoveFx()
         {
-
-
         }
 
         public override void ApplyVFx()
         {
             SkillService.Instance.skillFXMoveController.SingleTargetRangeStrike(PerkType.None);
-
-
         }
 
         public override void PopulateAITarget()

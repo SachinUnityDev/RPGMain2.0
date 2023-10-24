@@ -39,6 +39,8 @@ namespace Combat
         public List<PerkHexData> allPerkHexes = new List<PerkHexData>();
         public List<SkillPerkFXData> allSkillFXs = new List<SkillPerkFXData>(); 
         public List<string> allLines = new List<string>();
+
+
         public SkillData()
         {
 

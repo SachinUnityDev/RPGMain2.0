@@ -61,7 +61,7 @@ namespace Combat
 
         public SkillModel(SkillData _skillDataSO)
         {
-          //  SkillData _skillData = _skillDataSO;
+          
             skillName = _skillDataSO.skillName;
             charName = _skillDataSO.charName;
             skillID = (int)skillName;
@@ -84,6 +84,8 @@ namespace Combat
             baseWeight = _skillDataSO.baseWeight;
             allPerkHexes = _skillDataSO.allPerkHexes;
             isActive = _skillDataSO.isActive;
+
+
         }
 
     }

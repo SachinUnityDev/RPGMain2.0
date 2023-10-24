@@ -1,5 +1,4 @@
-using Combat;
-using common;
+
 using Common;
 using Quest;
 using System;
@@ -10,7 +9,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement; 
 
-namespace Common
+namespace Combat
 {
     public class SkillController1 : MonoBehaviour
     {
@@ -40,7 +39,10 @@ namespace Common
         SkillView skillView;
 
         [Header("Skill DmgMod Buffs")]
-        public List<SkillDmgModData> allSkillDmgMod = new List<SkillDmgModData>(); 
+        public List<SkillDmgModData> allSkillDmgMod = new List<SkillDmgModData>();
+
+        [Header(" Passive Skill controller")]
+        public PassiveSkillsController passiveSkillcontroller;
 
 
         private void OnEnable()
@@ -756,6 +758,19 @@ namespace Common
             }
         }
 
+        #endregion
+        #region Passive Skill Controllers
+        // init on Combat
+        public void InitPassiveSkillController()
+        {
+            if (charController.charModel.orgCharMode != CharMode.Enemy) return;
+           
+            passiveSkillcontroller = GetComponent<PassiveSkillsController>();
+            if (passiveSkillcontroller == null)
+                passiveSkillcontroller= gameObject.AddComponent<PassiveSkillsController>();
+
+            passiveSkillcontroller.InitPassive(charController);
+        }
         #endregion
     }
 

@@ -14,6 +14,8 @@ namespace Common
         public override StateFor stateFor => StateFor.Heroes;
 
         public override int castTime { get; protected set;}
+
+        public override float chance { get; set; }
         //Immune to Fortitude attacks for 3 rds
         //after 3 rds go back to origin	
         //+2 Focus, haste, Luck, Morale, Dodge and +(2-2) Armor + 20 resistances once per combat

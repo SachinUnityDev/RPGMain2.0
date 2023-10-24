@@ -40,8 +40,8 @@ namespace Combat
 
         public override void ApplyFX2()
         {
-            charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID
-                    , StatName.stamina, -2);
+            charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                                                    , AttribName.haste, -2, skillModel.timeFrame, skillModel.castTime, false);
         }
 
         public override void ApplyFX3()

@@ -16,7 +16,8 @@ namespace Common
         public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Heroes; 
         public override int castTime { get; protected set; }
-        int roundCount = 0; 
+        int roundCount = 0;
+        public override float chance { get; set; }
         public override void StateApplyFX()
         {
             castTime = 1; 

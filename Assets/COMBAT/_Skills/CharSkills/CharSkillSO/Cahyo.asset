@@ -309,7 +309,7 @@ MonoBehaviour:
     skillLvl: 0
     skillSelState: 1
     cd: 1
-    attackType: 0
+    attackType: 1
     dmgType: 
     castPos: 01000000020000000300000004000000050000000600000007000000
     targetPos:

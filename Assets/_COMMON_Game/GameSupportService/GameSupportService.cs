@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace common
+namespace Common
 {
 
     public class GameSupportService : MonoSingletonGeneric<GameSupportService>

@@ -16,6 +16,7 @@ namespace Common
 
         public CharController strikerController;
         bool fxApplied = false;
+        public override float chance { get; set; }
         public override void StateApplyFX()
         {
             int strikerLvl = 0;

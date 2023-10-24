@@ -16,7 +16,7 @@ namespace Common
 
         public override StateFor stateFor => StateFor.Mutual; 
         public override int castTime { get;protected set; }
-
+        public override float chance { get; set; }
         public override void StateApplyFX()
         {
             CharService.Instance.ApplyBuffOnPartyExceptSelf(CauseType.CharState, (int)charStateName

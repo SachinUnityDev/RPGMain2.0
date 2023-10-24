@@ -20,11 +20,12 @@ namespace Common
         public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Heroes;
         public override int castTime { get; protected set; }
-        List<float> chances = new List<float>() { 12f, 24f, 64f }; 
 
+        List<float> chances;
+        public override float chance { get; set; } = 24f; 
         public override void StateApplyFX()
         {
-
+            chances = new List<float>() { 12f, chance, 64f };
             switch (chances.GetChanceFrmList())
             {
                 case 0:

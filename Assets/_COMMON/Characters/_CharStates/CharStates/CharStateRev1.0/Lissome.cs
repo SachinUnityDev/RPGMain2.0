@@ -13,6 +13,7 @@ namespace Common
         public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
         public override int castTime { get; protected set; }
+        public override float chance { get; set; }
         //+1 Haste on allies 	-1 Luck on self Immune to Rooted
         public override void StateApplyFX()
         {

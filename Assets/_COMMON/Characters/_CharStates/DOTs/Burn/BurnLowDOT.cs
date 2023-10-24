@@ -17,7 +17,7 @@ namespace Common
         public override int castTime { get; protected set; }
 
         public CharController strikerController;
-
+        public override float chance { get; set; }
         public override void StateApplyFX()
         {
             int strikerLvl = 0;

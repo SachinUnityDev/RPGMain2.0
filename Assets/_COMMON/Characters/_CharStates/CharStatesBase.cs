@@ -28,6 +28,8 @@ namespace Common
         public  TimeFrame timeFrame;
         public List<int> allBuffIds { get; set; } = new List<int>();
         public List<int> allImmunityBuffs { get; set; } = new List<int>();
+
+        public abstract float chance { get; set; }
         public virtual void SetCastTime(int value)
         {
             if(value > 0)

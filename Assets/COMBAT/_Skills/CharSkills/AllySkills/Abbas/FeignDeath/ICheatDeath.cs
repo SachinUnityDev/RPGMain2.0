@@ -1,3 +1,4 @@
+using Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +6,6 @@ using UnityEngine;
 
 namespace Combat
 {
-
-
     public class ICheatDeath : PerkBase
     {
         public override PerkNames perkName => PerkNames.ICheatDeath;
@@ -27,12 +26,34 @@ namespace Combat
 
         public override float chance { get; set; }
 
+        public override void BaseApply()
+        {
+            base.BaseApply();
+     
+            CombatEventService.Instance.OnEOC += OnEOC; 
+
+        }
+        void OnEOC()
+        {
+     
+            CombatEventService.Instance.OnEOC -= OnEOC;
+        }
+     
         public override void ApplyFX1()
         {
+            charController.damageController.MAX_ALLOWED_CHEATDEATH++; 
+
         }
 
         public override void ApplyFX2()
         {
+
+            AttribData hasteState = charController.GetAttrib(AttribName.haste);
+            if (hasteState.currValue == 12)
+            {
+                charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                                                , charController.charModel.charID, CharStateName.Sneaky);
+            }
         }
 
         public override void ApplyFX3()

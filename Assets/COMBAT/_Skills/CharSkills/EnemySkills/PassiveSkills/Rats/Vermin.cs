@@ -1,3 +1,5 @@
+using Common;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +13,6 @@ namespace Combat
 
         private CharNames _charName;
         public override CharNames charName { get => _charName; set => _charName = value; }
-        public override SkillLvl skillLvl => SkillLvl.Level0;
 
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
@@ -20,56 +21,18 @@ namespace Combat
         private SkillNames _skillName;
         public override SkillNames skillName { get => _skillName; set => _skillName = value; }
 
-        public override void AddTargetPos()
-        {
-        }
+    
 
-        public override void ApplyFX1()
+        public override void ApplyFX()
         {
-        }
+            charController.charStateController.ApplyDOTImmunityBuff(CauseType.CharSkill, (int)skillName
+                  , charController.charModel.charID, CharStateName.PoisonedLowDOT, TimeFrame.Infinity,1, true);
 
-        public override void ApplyFX2()
-        {
-        }
+            charController.strikeController.AddThornsBuff(DamageType.Earth, 1, 3
+                                                                , TimeFrame.Infinity,1);
 
-        public override void ApplyFX3()
-        {
         }
-
-        public override void ApplyMoveFX()
-        {
-        }
-
-        public override void ApplyVFx()
-        {
-        }
-
-        public override void DisplayFX1()
-        {
-        }
-
-        public override void DisplayFX2()
-        {
-        }
-
-        public override void DisplayFX3()
-        {
-        }
-
-        public override void DisplayFX4()
-        {
-        }
-
-        public override void PostApplyFX()
-        {
-        }
-
-        public override void PreApplyFX()
-        {
-        }
+     
     }
-
-
-
 
 }

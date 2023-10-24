@@ -126,8 +126,9 @@ namespace Combat
         public SkillNames currSkillHovered;        
         public SkillView skillView;
 
-        //[Header("Perk Selection Controller")]
-        //[SerializeField] PerkSelectionController perkSelectionController;
+        [Header(" PASSIVE SKILLS")]    
+        public PassiveSkillFactory passiveSkillFactory; 
+
 
         public int currSkillPts =10;
 
@@ -143,7 +144,9 @@ namespace Combat
             GameEventService.Instance.OnGameStateChg += OnStartOfCombat;
             // CombatService.Instance.GetComponent<RoundController>().OnCharOnTurnSet += PopulateSkillTargets; 
             skillFactory =GetComponent<SkillFactory>();
-            skillFactory.SkillsInit(); 
+            skillFactory.SkillsInit();
+            passiveSkillFactory = GetComponent<PassiveSkillFactory>();
+            passiveSkillFactory.PassiveSkillsInit();
         }
         private void OnDisable()
         {
@@ -165,6 +168,7 @@ namespace Combat
                     skillFXMoveController = gameObject.AddComponent<SkillFxMoveController>();
                 if (remoteSkillView == null)
                     remoteSkillView = FindObjectOfType<RemoteSkillView>();
+
             }
             GameObject canvasGO = GameObject.FindGameObjectWithTag("Canvas");
             if (skillCardGO == null)
@@ -247,10 +251,12 @@ namespace Combat
              skillController.allPerkBases.ForEach(t => t.AddTargetPos());
             // skillController.CheckNUpdateSkillState();  // checked in view not needed here
         }
-
+        // ON SOC 
         public void InitSkillControllers()
         {
             CombatService.Instance.AddCombatControllers();
+
+
             foreach (GameObject charGO in CharService.Instance.charsInPlay)
             {
                 SkillController1 skillController = charGO.GetComponent<SkillController1>(); 
@@ -258,20 +264,18 @@ namespace Combat
                 if (skillController == null)
                 {
                     skillController = charGO.gameObject.AddComponent<SkillController1>();
-                    allSkillControllers.Add(skillController);
+                    allSkillControllers.Add(skillController);                 
                     // skillController.InitSkillList(skillController.charController); 
 
                     //SkillAIController skillAIController = character.gameObject.AddComponent<SkillAIController>();
                     //allSKillAIControllers.Add(skillAIController);
                 }
+                if(skillController.charController.charModel.orgCharMode== CharMode.Enemy)
+                    skillController.InitPassiveSkillController(); 
                 CharNames charName = charGO.GetComponent<CharController>().charModel.charName; 
-             //   skillController.InitSkillList(charName);
+                //   skillController.InitSkillList(charName);
             }
-
-
         }
-
-
         #endregion
 
         #region AI
@@ -300,7 +304,6 @@ namespace Combat
         }
 
         #endregion
-
 
         #region Actions 
 
@@ -641,11 +644,9 @@ namespace Combat
                                                                         , CellPosData cellPosData)
         {
             remoteSkillView.ApplyRemoteSkillBuff(skillController, skillName, cellPosData); 
-        } 
-
+        }
 
         #endregion
-
 
         #region Helpers
 

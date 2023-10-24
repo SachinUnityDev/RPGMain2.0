@@ -104,6 +104,10 @@ namespace Combat
             skillModel.lastUsedInRound = CombatService.Instance.currentRound;
             charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatName.stamina, -skillModel.staminaReq);
            
+            //if(charController.charModel.charMode == CharMode.Enemy)
+            //    charController.GetComponent<PassiveSkillsController>().ApplyPassiveSkills(targetController);
+
+
            
         }  // actual Skill FX // container Skill Data
         public abstract void ApplyFX1();

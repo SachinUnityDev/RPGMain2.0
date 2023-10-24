@@ -290,7 +290,7 @@ namespace Common
             {
                 turn = CombatService.Instance.currentTurn;
                 Debug.Log("GAME OBJECT " + gameObject.name);
-                Debug.Log("STAT CHANGE Cause " + causeType + " causebyCharID " + causeByCharID + " Stat " + statName + " value " + value);
+               // Debug.Log("STAT CHANGE Cause " + causeType + " causebyCharID " + causeByCharID + " Stat " + statName + " value " + value);
                 Vector3 fwd = Vector3.zero;
                 dyna = GridService.Instance.GetDyna4GO(gameObject);
                 if (dyna == null)
@@ -298,7 +298,7 @@ namespace Common
                     Debug.Log("ATTEMPTED change in stat" + causeType + "Name" + causeByCharID + "StatName" + statName);
                     return null;
                 }
-                if (GetHealthValBelow0(value)>0)
+                if (GetHealthValBelow0(value)<=0)
                 {
                     damageController.ApplyDamage(this,CauseType.StatMinMaxLimit, 0, DamageType.FortitudeDmg
                                                                         , GetHealthValBelow0(value), false);                    
@@ -337,7 +337,7 @@ namespace Common
                 PopulateOverCharBars(statName);
 
             if (statName == StatName.health)
-                On_HealthAtZero();
+                On_DeathBlow();
 
             return statModData;
         }
@@ -446,7 +446,7 @@ namespace Common
             return 1f; 
          }
 
-        void On_HealthAtZero()
+        void On_DeathBlow()
         {       
             StatData statHP = GetStat(StatName.health); 
             if(statHP.currValue <= 0)

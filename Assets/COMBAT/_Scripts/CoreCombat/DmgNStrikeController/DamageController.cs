@@ -132,13 +132,13 @@ namespace Combat
             AttackType attackType =
                             SkillService.Instance.GetSkillAttackType((SkillNames)causeName);
             // is dodge 
-            if(!isTrueStrike)
-                if(_dmgType == DamageType.Physical && HitChance())
+            if (!isTrueStrike)
+                if (_dmgType == DamageType.Physical && HitChance())
                 {
-                    strikeType = StrikeType.Dodged; 
+                    strikeType = StrikeType.Dodged;
                     CombatEventService.Instance.On_DmgApplied(new DmgAppliedData(striker, causeType, causeName
                         , _dmgType, 0f, strikeType, charController, attackType));
-                    return; 
+                    return;
                 }
 
             // ask strike controller do you have a extra dmg buff against me 
@@ -151,7 +151,7 @@ namespace Combat
 
             float dmg = (float)(UnityEngine.Random.Range(dmgSDMin.currValue, dmgSDMax.currValue) * (percentDmg / 100f));
             int strikerID = striker.charModel.charID;
-            Debug.Log("MIN AND MAX RANGE " + dmgSDMin.currValue + dmgSDMax.currValue + "DAMAGE " + dmg);
+           // Debug.Log("MIN AND MAX RANGE " + dmgSDMin.currValue + dmgSDMax.currValue + "DAMAGE " + dmg);
 
             switch (_dmgType)
             {

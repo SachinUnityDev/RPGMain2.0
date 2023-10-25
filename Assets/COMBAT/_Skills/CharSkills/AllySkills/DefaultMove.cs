@@ -53,7 +53,7 @@ namespace Combat
                 CellPosData cellPosData = GridService.Instance.gridView.GetPos4TilePos(tilePos);
                 if (cellPosData == null)
                 {
-                    
+                    return;
                 } 
                 foreach (CellPosData cellPos in skillModel.targetPos)
                 {

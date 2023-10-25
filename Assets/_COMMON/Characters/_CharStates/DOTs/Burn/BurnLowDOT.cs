@@ -53,7 +53,8 @@ namespace Common
 
                 charController.damageController.ApplyDamage(charController, CauseType.CharState, (int)charStateName
                              , DamageType.FortitudeDmg, UnityEngine.Random.Range(4, 9), false);
-
+                //charController.damageController.ApplyDamage(charController, CauseType.CharState, (int)charStateName
+                //             , DamageType.Earth, 25, false);
             }
             else
             {

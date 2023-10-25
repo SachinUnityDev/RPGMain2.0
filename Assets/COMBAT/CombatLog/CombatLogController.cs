@@ -89,7 +89,6 @@ namespace Combat
 
             combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
             RefreshCombatLogUI();
-
         }
         void CharStateEnd(CharStateModData charStateModData)
         {

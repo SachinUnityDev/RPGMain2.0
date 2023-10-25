@@ -85,7 +85,9 @@ namespace Combat
                 }
             }
         }
-   
+        
+
+
         bool IsDmgArmorChg(BuffData buffData)
         {
             if (buffData.attribModData.attribModified == AttribName.dmgMin ||
@@ -235,6 +237,45 @@ namespace Combat
         }
         #endregion
 
+
+        #region 
+
+        public List<int> BuffAllRes(CauseType causeType, int causeName, int causeByCharID
+                                ,  float value, TimeFrame timeFrame, int netTime, bool isBuff)
+        {
+            List<int> allbuffID = new List<int>();
+            int buffID = ApplyBuff(causeType, causeName, causeByCharID, AttribName.waterRes, value, timeFrame, netTime, isBuff);
+            allbuffID.Add(buffID);  
+            buffID = ApplyBuff(causeType, causeName, causeByCharID, AttribName.fireRes, value, timeFrame, netTime, isBuff);
+            allbuffID.Add(buffID);
+            buffID = ApplyBuff(causeType, causeName, causeByCharID, AttribName.earthRes, value, timeFrame, netTime, isBuff);
+            allbuffID.Add(buffID);    
+            buffID = ApplyBuff(causeType, causeName, causeByCharID, AttribName.lightRes, value, timeFrame, netTime, isBuff);
+            allbuffID.Add(buffID);
+            buffID = ApplyBuff(causeType, causeName, causeByCharID, AttribName.darkRes, value, timeFrame, netTime, isBuff);
+            allbuffID.Add(buffID);
+            buffID = ApplyBuff(causeType, causeName, causeByCharID, AttribName.airRes, value, timeFrame, netTime, isBuff);
+            allbuffID.Add(buffID);
+
+            return allbuffID; 
+        }
+        public List<int> BuffElementalRes(CauseType causeType, int causeName, int causeByCharID
+                                , float value, TimeFrame timeFrame, int netTime, bool isBuff)
+        {
+            List<int> allbuffID = new List<int>();
+            int buffID = ApplyBuff(causeType, causeName, causeByCharID, AttribName.waterRes, value, timeFrame, netTime, isBuff);
+            allbuffID.Add(buffID);  
+            buffID =ApplyBuff(causeType, causeName, causeByCharID, AttribName.fireRes, value, timeFrame, netTime, isBuff);
+            allbuffID.Add(buffID);   
+            buffID = ApplyBuff(causeType, causeName, causeByCharID, AttribName.earthRes, value, timeFrame, netTime, isBuff);
+            allbuffID.Add(buffID);
+            buffID= ApplyBuff(causeType, causeName, causeByCharID, AttribName.airRes, value, timeFrame, netTime, isBuff);
+            allbuffID.Add(buffID);
+            
+
+            return allbuffID;   
+        }
+        #endregion
 
     }
 }

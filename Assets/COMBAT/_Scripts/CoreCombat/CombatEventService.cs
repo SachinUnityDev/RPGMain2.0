@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using Common; 
+using Common;
+using System.Linq; 
 
 namespace Combat
 {
@@ -46,7 +47,7 @@ namespace Combat
         public event Action OnCharClicked;
         public event Action OnCharHovered;
 
-        public event Action <DynamicPosData>OnTargetClicked;
+        public event Action <DynamicPosData, CellPosData> OnTargetClicked;
         
 
         // Start is called before the first frame update
@@ -168,9 +169,11 @@ namespace Combat
         {
            OnDamageApplied?.Invoke(dmgAppliedData);
         }
-        public void On_targetClicked(DynamicPosData _targetDyna)
+        public void On_targetClicked(DynamicPosData _targetDyna, CellPosData cellPosData)
         {
-            if (CombatService.Instance.combatState == CombatState.INCombat_Pause) return; // patch fix as perk selpanel was not blocking raycast
+            if (CombatService.Instance.combatState == CombatState.INCombat_Pause
+                || CombatService.Instance.combatState == CombatState.INTactics
+                ) return; // patch fix as perk selpanel was not blocking raycast
 
             int currCharID = CombatService.Instance.currCharOnTurn.charModel.charID; 
             SkillModel skillModel = SkillService.Instance.GetSkillModel(currCharID
@@ -180,14 +183,17 @@ namespace Combat
             {
                 Debug.Log("Target Dyna " + _targetDyna.charGO.GetComponent<CharController>().charModel.charName);
                 CombatService.Instance.currTargetClicked = _targetDyna.charGO.GetComponent<CharController>();
-                OnTargetClicked?.Invoke(_targetDyna);
+                OnTargetClicked?.Invoke(_targetDyna, null);
             } else if(skillModel.skillType == SkillTypeCombat.Move)
             {
                 GameObject charGO = CombatService.Instance.currCharOnTurn.gameObject;
                 _targetDyna = GridService.Instance.GetDyna4GO(charGO);
                 CombatService.Instance.currTargetClicked = CombatService.Instance.currCharOnTurn;
                 SkillService.Instance.currentTargetDyna = _targetDyna;
-                OnTargetClicked?.Invoke(_targetDyna);
+                // In move skill if a empty tile is clicked
+                if (!skillModel.targetPos.Any(t => t.pos == cellPosData.pos && t.charMode == cellPosData.charMode))
+                return;
+                OnTargetClicked?.Invoke(_targetDyna, cellPosData);
             }
         }
 

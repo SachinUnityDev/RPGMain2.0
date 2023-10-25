@@ -18,18 +18,13 @@ namespace Combat
         public override float chance { get => _chance; set => _chance = value; }
         public override string desc => "";
 
-        private SkillNames _skillName;
-        public override SkillNames skillName { get => _skillName; set => _skillName = value; }
-
-    
-
         public override void ApplyFX()
         {
-            charController.charStateController.ApplyDOTImmunityBuff(CauseType.CharSkill, (int)skillName
+            charController.charStateController.ApplyDOTImmunityBuff(CauseType.PassiveSkillName, (int)passiveSkillName
                   , charController.charModel.charID, CharStateName.PoisonedLowDOT, TimeFrame.Infinity,1, true);
 
-            charController.strikeController.AddThornsBuff(DamageType.Earth, 1, 3
-                                                                , TimeFrame.Infinity,1);
+            //charController.strikeController.AddThornsBuff(DamageType.Earth, 1, 3
+            //                                                    , TimeFrame.Infinity, 1);
 
         }
      

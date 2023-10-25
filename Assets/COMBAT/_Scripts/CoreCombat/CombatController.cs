@@ -75,26 +75,19 @@ namespace Combat
                     actionPts = MAX_VAL_FOR_ACTION_PTS; 
 
             return actionPts;
-
         }
 
-        public void UpdateActionPts()
+        public void UpdateActionPts(SkillModel skillModel)
         {
+            if (skillModel.skillType == SkillTypeCombat.Retaliate)
+                return; 
             canvas = FindObjectOfType<Canvas>();
             actionPtsView = canvas.GetComponentInChildren<ActionPtsView>(true);
             --actionPts; 
             actionPtsView.UpDateActionsPtsView(actionPts);
         }
-
-
-
-
-
         public bool IfSingleInRow(GameObject _charGO)
         {
-
-
-
             return false;
         }
 

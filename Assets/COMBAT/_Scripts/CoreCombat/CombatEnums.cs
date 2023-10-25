@@ -227,7 +227,7 @@ namespace Combat
         Bandit,
         BehindMilady,
         BirdOfPrey,
-        Boss,
+        Boss1,
         BullyGang,
         Canine,
         CanineBlood,

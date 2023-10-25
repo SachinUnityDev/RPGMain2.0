@@ -152,7 +152,7 @@ namespace Common
                 {
                     if (GridService.Instance.IsTileHLOne(charDyna.FwdtilePos))   // if the clicked char is targeted 
                     {
-                        CombatEventService.Instance.On_targetClicked(charDyna);
+                        CombatEventService.Instance.On_targetClicked(charDyna, null);
                     }
                     else return; // to fix null error on wrong target click
                 }        
@@ -288,9 +288,7 @@ namespace Common
         
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
-                turn = CombatService.Instance.currentTurn;
-                Debug.Log("GAME OBJECT " + gameObject.name);
-               // Debug.Log("STAT CHANGE Cause " + causeType + " causebyCharID " + causeByCharID + " Stat " + statName + " value " + value);
+                turn = CombatService.Instance.currentTurn;             
                 Vector3 fwd = Vector3.zero;
                 dyna = GridService.Instance.GetDyna4GO(gameObject);
                 if (dyna == null)
@@ -298,11 +296,11 @@ namespace Common
                     Debug.Log("ATTEMPTED change in stat" + causeType + "Name" + causeByCharID + "StatName" + statName);
                     return null;
                 }
-                if (GetHealthValBelow0(value)<=0)
+                if (GetHealthValBelow0(value) <= 0)
                 {
-                    damageController.ApplyDamage(this,CauseType.StatMinMaxLimit, 0, DamageType.FortitudeDmg
-                                                                        , GetHealthValBelow0(value), false);                    
-                }                 
+                    damageController.ApplyDamage(this, CauseType.StatMinMaxLimit, 0, DamageType.FortitudeDmg
+                                                                        , GetHealthValBelow0(value), false);
+                }
             }
             
             // COMBAT PATCH FIX ENDS 
@@ -319,10 +317,7 @@ namespace Common
                 statModData.modVal = currVal;  // no change is executed 
                 return statModData;
             }
-            if (toInvoke)
-            {   // IF NO CHANGE IN VALUE HAS HAPPENED DUE TO CLAMPING THIS NEEDS TO BE KEPT HERE
-                OnStatChg?.Invoke(statModData);
-            }
+          
             if(statName == StatName.hunger || statName == StatName.thirst)
             {// HUNGER AND THIRST SPECIAL CASE HANDLED HERE>>>>
                 return 
@@ -338,7 +333,10 @@ namespace Common
 
             if (statName == StatName.health)
                 On_DeathBlow();
-
+            if (toInvoke)
+            {   // IF NO CHANGE IN VALUE HAS HAPPENED DUE TO CLAMPING THIS NEEDS TO BE KEPT HERE
+                OnStatChg?.Invoke(statModData);
+            }
             return statModData;
         }
 
@@ -583,8 +581,7 @@ namespace Common
         }
 
         #endregion
-
-
+            
         void PopulateOverCharBars(StatName statName)
         {
         //    Transform hpBarsTransform = gameObject.transform.GetChild(2);
@@ -648,172 +645,5 @@ namespace Common
         //    barSeq.Play().OnComplete(() => barTrans.gameObject.SetActive(false));
         }
 
-        
-
     }
 }
-
-// changes stat by a given  value 
-//public void ChangeStat(StatsName _statName, float _valueChange = 0.0f, 
-//    float _minRangeChange = 0.0f, float _maxRangeChange = 0.0f, bool toInvoke = true)
-//{
-
-
-//}
-//_valueChange = Mathf.Round(_valueChange); _maxRangeChange = Mathf.Round(_maxRangeChange); _minRangeChange = Mathf.Round(_minRangeChange);
-
-//if (_statName != StatsName.None)
-//{
-//    if (_valueChange != 0.0f)
-//    {
-
-//        float preConstrainedValue = charModel.statsList.Find(x => x.statsName == _statName).currValue + _valueChange; 
-//        charModel.statsList.Find(x => x.statsName == _statName).currValue = Constrain2Limit(_statName,preConstrainedValue);
-//        OnStatMinMax(_statName); 
-//        if (toInvoke)
-//        {
-//          //  OnStatChanged?.Invoke(_statName, _valueChange);// if in all cases final values r valued no point in chasing
-//          //  change go with setStat
-//          //  OnStatSet(_statName, _valueChange);
-//        }
-
-//    }
-//    if (_minRangeChange != 0.0f)
-//    {
-//        float fMinRange = charModel.statsList.Find(x => x.statsName == _statName).minRange + _valueChange;
-//        charModel.statsList.Find(x => x.statsName == _statName).minRange = Constrain2Limit(_statName, fMinRange);                    
-//        if (toInvoke)
-//            StatMinRSet?.Invoke(_statName, _minRangeChange); 
-
-//    }
-//    if (_maxRangeChange != 0.0f)
-//    {
-//        float fMaxRange = charModel.statsList.Find(x => x.statsName == _statName).maxRange + _valueChange;
-//        charModel.statsList.Find(x => x.statsName == _statName).maxRange = Constrain2Limit(_statName, fMaxRange);
-//        if (toInvoke)
-//            StatMaxRSet?.Invoke(_statName, _maxRangeChange); 
-
-//    }
-
-
-// fleeingC exp/ fortitude Origin loss ..
-// C-> E    CauseType: Skill, Permanent traits, temp traits,charStates, PotionItem, 
-//Gewgaws, otherItems, HealthRegen, StaminaRegen, FleeingQ, FleeCombat,  
-// yes lets build. .. it FXDatapack(ChangeType, )
-
-// TurnNo, Causetype , CauseByCharName,  EffectedCharName, StatName, ChangeValue, castTime,
-// fort org to be added to stats.. 
-// 
-// Turn No CuasedType
-
-
-//switch.. case for each type 
-
-// call respective methods that create individual data packs for each change
-// TurnModel will contain list of data Packs that 
-// each data pack will contain causeGO,List<GO> effectedGOs, ChangeType,  
-
-
-
-// ############################################################# POPULATE CHAR ######################################
-
-//public void PopulateOverCharBars(bool statChg)
-//{
-//    StatData HPData = charController.GetStat(StatsName.health);
-//    StatData StaminaData = charController.GetStat(StatsName.stamina);
-
-//    StatData fortData = charController.GetStat(StatsName.fortitude);
-//    // Debug.Log("CHAR CONTROLLER " + charController.name);
-//    Transform hpBarsTransform = charController.gameObject.transform.GetChild(2);
-
-
-//    Transform HPBarImgTrans = hpBarsTransform.GetChild(0).GetChild(1);
-//    Transform StaminaBarImgTrans = hpBarsTransform.GetChild(1).GetChild(1);
-
-//    Transform HPBarImgOrange = hpBarsTransform.GetChild(0).GetChild(0);
-//    Transform StaminaBarImgOrange = hpBarsTransform.GetChild(1).GetChild(0);
-
-//    float HPbarVal = HPData.currValue / HPData.maxLimit;
-//    float staminaBarVal = StaminaData.currValue / StaminaData.maxLimit;
-//    Vector3 HPbarImgScale = new Vector3(HPbarVal, HPBarImgTrans.localScale.y, HPBarImgTrans.localScale.z);
-//    HPBarImgTrans.localScale = HPbarImgScale;
-//    Vector3 staminaScale = new Vector3(staminaBarVal, StaminaBarImgTrans.localScale.y, StaminaBarImgTrans.localScale.z);
-//    StaminaBarImgTrans.localScale = staminaScale;
-
-
-//    if (statChg)
-//    {
-//        if (prevHPVal == HPbarVal)
-//            HPBarImgOrange.DOScaleX(1, 0.01f);
-//        else
-//            prevHPVal = HPbarVal;
-//        if (prevStaminaVal == staminaBarVal)
-//            StaminaBarImgOrange.DOScale(1, 0.01f);
-//        else
-//            prevStaminaVal = HPbarVal;
-
-//        HPBarImgOrange.gameObject.SetActive(true);
-//        StaminaBarImgOrange.gameObject.SetActive(true);
-
-//        Sequence barSeq = DOTween.Sequence();
-//        //   Debug.Log("CHAR  " + charModel.charName);
-//        barSeq.AppendInterval(0.25f);
-//        barSeq.Append(HPBarImgOrange.DOScaleX(HPbarVal, 1f));
-//        barSeq.Append(StaminaBarImgOrange.DOScaleX(staminaBarVal, 1f));
-
-//        barSeq.Play().OnComplete(() => {
-//            HPBarImgOrange.gameObject.SetActive(false);
-//            StaminaBarImgOrange.gameObject.SetActive(false);
-//        });
-//    }
-//}
-
-
-
-//StatData HPData = charController.GetStat(StatsName.health);
-//StatData StaminaData = charController.GetStat(StatsName.stamina);
-
-//StatData fortData = charController.GetStat(StatsName.fortitude);
-// Debug.Log("CHAR CONTROLLER " + charController.name);
-//Transform hpBarsTransform = charController.gameObject.transform.GetChild(2);
-
-
-//Transform HPBarImgTrans = hpBarsTransform.GetChild(0).GetChild(1);
-//Transform StaminaBarImgTrans = hpBarsTransform.GetChild(1).GetChild(1);
-
-//Transform HPBarImgOrange = hpBarsTransform.GetChild(0).GetChild(0);
-//Transform StaminaBarImgOrange = hpBarsTransform.GetChild(1).GetChild(0);
-
-//float HPbarVal = HPData.currValue / HPData.maxLimit;
-//float staminaBarVal = StaminaData.currValue / StaminaData.maxLimit;
-//Vector3 HPbarImgScale = new Vector3(HPbarVal, HPBarImgTrans.localScale.y, HPBarImgTrans.localScale.z);
-//HPBarImgTrans.localScale = HPbarImgScale;
-
-
-
-//if (statChg)
-//{
-//    if (prevHPVal == HPbarVal)
-//        HPBarImgOrange.DOScaleX(1, 0.01f);
-//    else
-//        prevHPVal = HPbarVal;
-//    if (prevStaminaVal == staminaBarVal)
-//        StaminaBarImgOrange.DOScale(1, 0.01f);
-//    else
-//        prevStaminaVal = HPbarVal;
-
-//    //HPBarImgOrange.gameObject.SetActive(true);
-//    //StaminaBarImgOrange.gameObject.SetActive(true);
-
-//    Sequence barSeq = DOTween.Sequence();
-//    //   Debug.Log("CHAR  " + charModel.charName);
-//    barSeq.AppendInterval(0.25f);
-//    barSeq.Append(HPBarImgOrange.DOScaleX(HPbarVal, 1f));
-//    barSeq.Append(StaminaBarImgOrange.DOScaleX(staminaBarVal, 1f));
-
-//    barSeq.Play().OnComplete(() =>
-//    {
-//        HPBarImgOrange.gameObject.SetActive(false);
-//        StaminaBarImgOrange.gameObject.SetActive(false);
-//    });
-//}

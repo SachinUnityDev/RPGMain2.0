@@ -53,6 +53,7 @@ public enum CauseType
     Loot,
     AttribMinMaxLimit,
     StatMinMaxLimit,
+    PassiveSkillName, 
     
 }
 

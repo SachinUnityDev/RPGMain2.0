@@ -115,9 +115,12 @@ namespace Combat
                             {
                                 if (CombatService.Instance.combatState == CombatState.INCombat_InSkillSelected
                                     || CombatService.Instance.combatState == CombatState.INTactics)   //SOmething IN HERE .. 
-                                {                                   
+                                {
                                     //if(currentdyna.charGO != null || )
-                                     CombatEventService.Instance.On_targetClicked(currentdyna);
+                                    //CellPosData cellPos = GridService.Instance.gr
+                                    
+                                    CellPosData cellPosData = GridService.Instance.gridView.GetPos4TilePos(currTilePos);
+                                    CombatEventService.Instance.On_targetClicked(currentdyna, cellPosData);
                                 }       
                             }
                             
@@ -135,29 +138,29 @@ namespace Combat
 
         }
 
-        void HLAllTiles()
-        {
+        //void HLAllTiles()
+        //{
            
-            GameObject FxAlly = _gridModelSO.allyOnTurnHL;
-            GameObject FxEnemy = _gridModelSO.enemyOnTurnHL;
-            Quaternion quat = GridService.Instance.gridLayout.transform.rotation;
+        //    GameObject FxAlly = _gridModelSO.allyOnTurnHL;
+        //    GameObject FxEnemy = _gridModelSO.enemyOnTurnHL;
+        //    Quaternion quat = GridService.Instance.gridLayout.transform.rotation;
 
-            for (int i = 1; i < 8; i++)
-            {
-                Vector3Int tilePos = gridMovement.GetTilePos4Pos(CharMode.Ally, i);
-                Vector3 worldPos = gridMovement.GetWorldPosSingle(tilePos);
+        //    for (int i = 1; i < 8; i++)
+        //    {
+        //        Vector3Int tilePos = gridMovement.GetTilePos4Pos(CharMode.Ally, i);
+        //        Vector3 worldPos = gridMovement.GetWorldPosSingle(tilePos);
 
-               Instantiate(FxAlly, worldPos, quat);
+        //       Instantiate(FxAlly, worldPos, quat);
 
-            }
-            for (int i = 1; i < 8; i++)
-            {
-                Vector3Int tilePos = gridMovement.GetTilePos4Pos(CharMode.Enemy, i);
-                Vector3 worldPos = gridMovement.GetWorldPosSingle(tilePos);
+        //    }
+        //    for (int i = 1; i < 8; i++)
+        //    {
+        //        Vector3Int tilePos = gridMovement.GetTilePos4Pos(CharMode.Enemy, i);
+        //        Vector3 worldPos = gridMovement.GetWorldPosSingle(tilePos);
 
-                Instantiate(FxEnemy, worldPos, quat);
-            }
-        }
+        //        Instantiate(FxEnemy, worldPos, quat);
+        //    }
+        //}
 
         public void CharOnTurnHL(DynamicPosData dyna)
         {
@@ -166,8 +169,8 @@ namespace Combat
                 Debug.Log("DEAD OBJECT TURN");
                 return; 
             }
-            //if (CombatService.Instance.combatState != CombatState.INCombat_normal)
-            //    return ; 
+            if (CombatService.Instance.combatState != CombatState.INCombat_normal)
+                return;
             Vector3 worldPos = GridService.Instance.GetDynaWorldPos(dyna); 
             GameObject FxAlly = _gridModelSO.allyOnTurnHL;
             GameObject FxEnemy = _gridModelSO.enemyOnTurnHL;

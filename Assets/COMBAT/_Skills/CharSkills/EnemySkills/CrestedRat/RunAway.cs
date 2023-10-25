@@ -16,8 +16,7 @@ namespace Combat
 
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
-        Rodent rodent;
-        Vermin vermin;
+  
 
         public override void PopulateTargetPos()
         {
@@ -27,29 +26,18 @@ namespace Combat
         }
         public override void ApplyFX1()
         {
-            charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID
-                    , AttribName.dodge, 3);                 
+            //charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID
+            //        , AttribName.dodge, 3);                 
         }
         public override void ApplyFX2()
         {
-           GridService.Instance.gridMovement.MovebyRow(myDyna, MoveDir.Backward, 2);
+          // GridService.Instance.gridMovement.MovebyRow(myDyna, MoveDir.Backward, 2);
         }
 
         public override void ApplyFX3()
         {
         }
-        //public override void SkillEnd()
-        //{
-        //    base.SkillEnd();
-
-        //    //targetController.ChangeStat(CauseType.CharSkill, (int)skillName, charController
-        //    //    , StatsName.dodge, -3);
-        //    // if (rodent != null)
-        //    //  rodent.RemovePassiveFX(targetController);
-        //    //if (vermin != null)
-        //    //    vermin.RemovePassiveFX(targetController);
-
-        //}
+     
 
         public override void DisplayFX1()
         {

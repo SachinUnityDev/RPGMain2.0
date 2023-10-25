@@ -24,22 +24,19 @@ namespace Combat
         public SkillModel skillModel { get; set; }
         public abstract PassiveSkillNames passiveSkillName { get; }
         public abstract CharNames charName { get; set; }
-        public abstract SkillNames skillName { get; set; }
         public abstract string desc { get; }
         public abstract float chance { get; set; }
         #endregion
 
         #region APPLY and HOVER
 
-        public virtual void PassiveSkillInit(SkillController1 skillController, SkillNames skillName)
+        public virtual void PassiveSkillInit(SkillController1 skillController)
         {
-            this.skillController = skillController;
-            this.skillName = skillName;
+            this.skillController = skillController;            
             charController = skillController.GetComponent<CharController>();            
             charGO = charController.gameObject;
             currDyna = GridService.Instance.GetDyna4GO(charGO);
-            skillModel = skillController.GetSkillModel(skillName); 
-           // AddTargetPos();          
+            charName = charController.charModel.charName;   
         }
         
        // public abstract void AddTargetPos();

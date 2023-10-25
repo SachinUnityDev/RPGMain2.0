@@ -94,15 +94,15 @@ MonoBehaviour:
     maxLimit: 12
     isClamped: 0
   - AttribName: 7
-    currValue: 3
-    baseValue: 3
+    currValue: 6
+    baseValue: 6
     desc: Determinant value for base Health. Increases chance to withstand Hunger.
     minLimit: 0
     maxLimit: 100
     isClamped: 0
   - AttribName: 8
-    currValue: 6
-    baseValue: 6
+    currValue: 9
+    baseValue: 9
     desc: Determinant value for base Stamina. Increases chance to withstand Thirst.
     minLimit: 0
     maxLimit: 100
@@ -203,13 +203,13 @@ MonoBehaviour:
     currValue: 12
     desc: Health is health, you know it...
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 12
     isClamped: 0
   - statName: 2
     currValue: 18
     desc: Resource to use skills.
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 18
     isClamped: 0
   - statName: 3
     currValue: 12
@@ -230,7 +230,7 @@ MonoBehaviour:
     maxLimit: 100
     isClamped: 0
   charOccupies: 0
-  posPriority: 04000000
+  posPriority: 0400000007000000
   armorType: 0
   armorTypeStr: 
   enchantableGem4Weapon: 0

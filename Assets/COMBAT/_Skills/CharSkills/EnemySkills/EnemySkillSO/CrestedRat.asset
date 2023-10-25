@@ -10,49 +10,49 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76a4a1798b88f0f43a32928e5ebf9320, type: 3}
-  m_Name: DireRat
+  m_Name: CrestedRat
   m_EditorClassIdentifier: 
-  charName: 19
-  combatPose: {fileID: 21300000, guid: 4a997d663d2d10848ba924b97138f73c, type: 3}
+  charName: 18
+  combatPose: {fileID: 21300000, guid: 8adece8c7b5ba7f4981db6938a013b6e, type: 3}
   combatFX:
-    loc: 0
-    skillSprite: {fileID: 0}
-  defendPose: {fileID: 21300000, guid: 18ea45f131055a04bb404dae9f311ae4, type: 3}
+    loc: 1
+    skillSprite: {fileID: 21300000, guid: 4f3f50298d928db4c930c650c19ac6fe, type: 3}
+  defendPose: {fileID: 21300000, guid: ec6a83db2bb066546b84dfea3741c122, type: 3}
   defendFX:
-    loc: 0
-    skillSprite: {fileID: 0}
+    loc: 1
+    skillSprite: {fileID: 21300000, guid: 9707d5e8a639301488b278b99e1b0c2a, type: 3}
   leftInvSkillPanelBG: {fileID: 0}
   rightInvSkillPanelBG: {fileID: 0}
   passiveSkills:
   - passiveSkillName: 42
     passiveSprite: {fileID: 21300000, guid: df58f787eb860a04caeaa1bfb95cc358, type: 3}
-  - passiveSkillName: 45
-    passiveSprite: {fileID: 21300000, guid: 4ce5e9d45f4ce7348b143d60238116a0, type: 3}
+  - passiveSkillName: 57
+    passiveSprite: {fileID: 21300000, guid: 2c402e11b4d5f7f45a52fb07d640d4b2, type: 3}
   allSkills:
-  - skillName: 19
-    charName: 19
+  - skillName: 22
+    charName: 18
     skillID: 0
-    skillIconSprite: {fileID: 21300000, guid: 0e9643acd212fb04cb00cf522eaf0a6c, type: 3}
-    skillPose: {fileID: 21300000, guid: 56895ed5741a33b4d87c32cea96310f5, type: 3}
+    skillIconSprite: {fileID: 21300000, guid: 709fe1149a2dbf5488f457f75823e5ca, type: 3}
+    skillPose: {fileID: 21300000, guid: 1950d9077a6d4d14c82281481aab8fe2, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 1
     skillUnLockStatus: 1
     skillDesc: 
-    damageMod: 100
+    damageMod: 110
     skillLvl: 0
     skillSelState: 1
     cd: 1
-    attackType: 1
-    dmgType: 010000000f000000
-    castPos: 01000000020000000300000004000000
+    attackType: 2
+    dmgType: 05000000
+    castPos: 04000000050000000600000007000000
     targetPos: []
-    staminareq: 4
-    castTime: 1
-    timeFrame: 1
+    staminareq: 3
+    castTime: 0
+    timeFrame: 0
     maxUsagePerCombat: 0
-    skillIncli: 1
-    baseWeight: 15
+    skillIncli: 2
+    baseWeight: 0
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
@@ -60,86 +60,87 @@ MonoBehaviour:
     allSkillFXs:
     - charMode: 1
       perkType: 0
-      impactFX: {fileID: 3348466901156232673, guid: eb9b88b2eaf0b0d4e81585ea789b36a7,
+      impactFX: {fileID: 0}
+      colImpactFX: {fileID: 0}
+      mainSkillFX: {fileID: 1367524025346344, guid: 4032ef862efbcd14482eccf65bd9cb64,
+        type: 3}
+      colMainFX: {fileID: 0}
+      selfFX: {fileID: 0}
+    allLines: []
+  - skillName: 23
+    charName: 18
+    skillID: 0
+    skillIconSprite: {fileID: 21300000, guid: 7e01ccca3c1f0c849866071bad8b6f46, type: 3}
+    skillPose: {fileID: 21300000, guid: 9cb114bb26bb62e40a11659f96cbc555, type: 3}
+    skillTransitionPose: {fileID: 0}
+    skillTransitionPose2: {fileID: 0}
+    skillType: 2
+    skillUnLockStatus: 1
+    skillDesc: 
+    damageMod: 0
+    skillLvl: 0
+    skillSelState: 0
+    cd: 3
+    attackType: 0
+    dmgType: 0a000000
+    castPos: 01000000020000000300000004000000050000000600000007000000
+    targetPos: []
+    staminareq: 5
+    castTime: 2
+    timeFrame: 1
+    maxUsagePerCombat: 0
+    skillIncli: 1
+    baseWeight: 25
+    isActive: 0
+    allPerkHexes:
+    - perkChain: 00000000
+      hexNames: 000000000000000000000000
+    allSkillFXs:
+    - charMode: 1
+      perkType: 0
+      impactFX: {fileID: 5523282006502781700, guid: 1beb0376a1ca637489aaa8ebde82ed0a,
         type: 3}
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 0}
       colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
     allLines: []
-  - skillName: 20
-    charName: 19
+  - skillName: 24
+    charName: 18
     skillID: 0
-    skillIconSprite: {fileID: 21300000, guid: 1216be5803074f24c93afa8c333b9608, type: 3}
-    skillPose: {fileID: 21300000, guid: 1b0d302e8377f1248a1476af43fcddbd, type: 3}
-    skillTransitionPose: {fileID: 0}
-    skillTransitionPose2: {fileID: 0}
-    skillType: 2
-    skillUnLockStatus: 1
-    skillDesc: 
-    damageMod: 125
-    skillLvl: 0
-    skillSelState: 1
-    cd: 2
-    attackType: 1
-    dmgType: 010000000b00000010000000
-    castPos: 01000000020000000300000004000000050000000600000007000000
-    targetPos: []
-    staminareq: 6
-    castTime: 2
-    timeFrame: 1
-    maxUsagePerCombat: 0
-    skillIncli: 1
-    baseWeight: 40
-    isActive: 0
-    allPerkHexes:
-    - perkChain: 00000000
-      hexNames: 000000000000000000000000
-    allSkillFXs: []
-    allLines: []
-  - skillName: 21
-    charName: 19
-    skillID: 0
-    skillIconSprite: {fileID: 21300000, guid: 0016dca74096a734592eebc8dd4e4774, type: 3}
-    skillPose: {fileID: 21300000, guid: 00927cc0909e6fc478d03acdd865f2d2, type: 3}
-    skillTransitionPose: {fileID: 0}
+    skillIconSprite: {fileID: 21300000, guid: 3abfbcecde885ef4fb9687dfe2ef7fe9, type: 3}
+    skillPose: {fileID: 21300000, guid: 4f5ecf85d07d68c4f9d1d8077d532b9d, type: 3}
+    skillTransitionPose: {fileID: 21300000, guid: 4f5ecf85d07d68c4f9d1d8077d532b9d,
+      type: 3}
     skillTransitionPose2: {fileID: 0}
     skillType: 3
     skillUnLockStatus: 1
     skillDesc: 
     damageMod: 0
     skillLvl: 0
-    skillSelState: 1
+    skillSelState: 0
     cd: 3
     attackType: 0
-    dmgType: 0c0000000a000000
+    dmgType: 0100000010000000
     castPos: 01000000020000000300000004000000
     targetPos: []
-    staminareq: 5
+    staminareq: 4
     castTime: 2
     timeFrame: 1
     maxUsagePerCombat: 0
-    skillIncli: 5
+    skillIncli: 10
     baseWeight: 5
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
       hexNames: 000000000000000000000000
-    allSkillFXs:
-    - charMode: 1
-      perkType: 0
-      impactFX: {fileID: 8068754018568030605, guid: 01395930e70d28445aacaa95281ff535,
-        type: 3}
-      colImpactFX: {fileID: 0}
-      mainSkillFX: {fileID: 0}
-      colMainFX: {fileID: 0}
-      selfFX: {fileID: 0}
+    allSkillFXs: []
     allLines: []
-  - skillName: 1
-    charName: 19
+  - skillName: 56
+    charName: 18
     skillID: 0
     skillIconSprite: {fileID: 21300000, guid: e8a75ecb5696e65499a954c256760440, type: 3}
-    skillPose: {fileID: 21300000, guid: 4a997d663d2d10848ba924b97138f73c, type: 3}
+    skillPose: {fileID: 21300000, guid: 8adece8c7b5ba7f4981db6938a013b6e, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 5
@@ -147,16 +148,16 @@ MonoBehaviour:
     skillDesc: 
     damageMod: 0
     skillLvl: 0
-    skillSelState: 0
-    cd: 2
+    skillSelState: 1
+    cd: 1
     attackType: 0
-    dmgType: 
+    dmgType: 00000000
     castPos: 01000000020000000300000004000000050000000600000007000000
     targetPos: []
     staminareq: 0
     castTime: 1
     timeFrame: 1
-    maxUsagePerCombat: 0
+    maxUsagePerCombat: -1
     skillIncli: 7
     baseWeight: 1
     isActive: 0
@@ -166,10 +167,10 @@ MonoBehaviour:
     allSkillFXs: []
     allLines: []
   - skillName: 2
-    charName: 19
+    charName: 18
     skillID: 144
     skillIconSprite: {fileID: 21300000, guid: 860dad25a56a6b24c9775b6497bd7f5d, type: 3}
-    skillPose: {fileID: 21300000, guid: 4a997d663d2d10848ba924b97138f73c, type: 3}
+    skillPose: {fileID: 21300000, guid: 8adece8c7b5ba7f4981db6938a013b6e, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 6
@@ -177,17 +178,17 @@ MonoBehaviour:
     skillDesc: 
     damageMod: 0
     skillLvl: 0
-    skillSelState: 0
+    skillSelState: 1
     cd: 1
     attackType: 0
     dmgType: 
     castPos: 01000000020000000300000004000000050000000600000007000000
     targetPos: []
-    staminareq: 0
-    castTime: 0
-    timeFrame: 0
-    maxUsagePerCombat: 0
-    skillIncli: 0
+    staminareq: 2
+    castTime: 1
+    timeFrame: 1
+    maxUsagePerCombat: -1
+    skillIncli: 10
     baseWeight: 1
     isActive: 0
     allPerkHexes:

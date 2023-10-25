@@ -16,9 +16,7 @@ namespace Combat
         public override float chance { get => _chance; set => _chance = value; }
         public override string desc => "";
 
-        private SkillNames _skillName; 
-        public override SkillNames skillName { get => _skillName; set => _skillName = value; }
-
+     
         public override void ApplyFX()
         {
            

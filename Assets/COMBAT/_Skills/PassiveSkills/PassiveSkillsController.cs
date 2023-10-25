@@ -27,21 +27,12 @@ namespace Combat
             {
                 PassiveSkillBase pSkillbase =
                         passiveSkillFactory.GetPassiveSkills(pSkillData.passiveSkillName);
-
+                pSkillbase.PassiveSkillInit(charController.skillController); 
                 pSkillbase.ApplyFX(); 
 
                 allPassiveSkillbase.Add(pSkillbase);
             }
         }
-
-        //public void ApplyPassiveSkills(CharController targetController)
-        //{
-        //    foreach (PassiveSkillBase pSkillBase in allPassiveSkillbase)
-        //    {
-        //        pSkillBase.BaseFX(targetController);
-        //        pSkillBase.ApplyFX();
-        //    }
-        //}
 
     }
 }

@@ -12,6 +12,6 @@ public class collisionTEST : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-       // Debug.Log(" hello I found the cube");
+        Debug.Log(" hello I found the cube");
     }
 }

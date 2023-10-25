@@ -42,18 +42,18 @@ namespace Combat
         }
          void PoisonBuff(SkillEventData skillEventData)
          {
-            if (skillEventData.strikerController.charModel.charName == CharNames.DireRat)
-            {
-                if(skillEventData.skillModel.skillName == SkillNames.RatBite)
-                {
-                    float percent = 70f;
-                    if (percent.GetChance())
-                    {
-                        skillEventData.targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                       , charController.charModel.charID, CharStateName.PoisonedHighDOT);
-                    }
-                } 
-            }
+            //if (skillEventData.strikerController.charModel.charName == CharNames.DireRat)
+            //{
+            //    if(skillEventData.skillModel.skillName == SkillNames.RatBite)
+            //    {
+            //        float percent = 70f;
+            //        if (percent.GetChance())
+            //        {
+            //            skillEventData.targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+            //           , charController.charModel.charID, CharStateName.PoisonedHighDOT);
+            //        }
+            //    } 
+            //}
          }
 
         public override void ApplyFX1()

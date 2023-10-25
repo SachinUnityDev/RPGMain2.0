@@ -196,7 +196,7 @@ namespace Combat
             foreach (ThornBuffData thornData in strikerModel.allThornsData)
             {   
                 int charLvl = this.GetComponent<CharController>().charModel.charLvl;
-                float dmgPercentValue = UnityEngine.Random.Range(thornData.thornsMin,(thornData.thornsMax))*(0.6f + charLvl/6);
+                float dmgPercentValue = UnityEngine.Random.Range(thornData.thornsMin,thornData.thornsMax)*(0.6f + charLvl/6);
                 if (dmgPercentValue > 0)
                 dmgAppliedData.striker.GetComponent<DamageController>()
                     .ApplyDamage(charController, CauseType.ThornsAttack, -1, thornData.damageType, dmgPercentValue, false);               

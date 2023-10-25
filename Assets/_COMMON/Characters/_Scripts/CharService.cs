@@ -475,8 +475,7 @@ namespace Common
         }
 
         public void On_CharDeath(CharController _charController)
-        {
-            Debug.Log("@@@@@@ON CHAR DEATH INVOKE");
+        {         
             OnCharDeath?.Invoke(_charController);
         }
 

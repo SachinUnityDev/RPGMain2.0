@@ -79,13 +79,10 @@ namespace Common
             OnCharStateEnd?.Invoke(charStateModData);
         }
 
-        public CharStatesBase GetNewCharState(CharStateName charStateName, CharController charController)
+        public CharStatesBase GetNewCharState(CharStateName charStateName)
         {
             CharStatesBase charStateBase = charStateFactory.GetCharState(charStateName);
             // create a charState Model and Add to the list
-
-
-
             return charStateBase;   
         }
 

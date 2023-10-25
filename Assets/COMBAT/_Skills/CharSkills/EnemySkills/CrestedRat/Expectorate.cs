@@ -18,8 +18,7 @@ namespace Combat
         private float _chance =0;
         public override float chance { get => _chance; set => _chance = value; }
 
-        //Rodent rodent;
-        //Vermin vermin; 
+    
         public override void PopulateTargetPos()
         {
             skillModel.targetPos.Clear();

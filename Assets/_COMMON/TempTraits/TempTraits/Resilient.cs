@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace Common
 {
     public class Resilient : TempTraitBase
@@ -13,7 +12,7 @@ namespace Common
         {
             this.charController = charController;
         }
-
+        
         public override void OnTraitEnd()
         {
             

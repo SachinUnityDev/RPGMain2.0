@@ -177,6 +177,8 @@ namespace Common
         public int ApplyImmunityBuff(CauseType causeType, int causeName, int causeByCharID
                                 , CharStateName charStateName, TimeFrame timeFrame, int netTime) // immunity buff for this char State
         {
+            charController = GetComponent<CharController>();
+
             int effectedCharID = charController.charModel.charID;
             int currRd = -1;
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)

@@ -41,15 +41,15 @@ namespace Combat
 
 
        // ("ON SKILL APPLY")]
-        private event Action _SkillApply = null;
+        private event Action _OnSkillApply = null;
         public event Action OnSkillApply
         {
             add
             {
-                if (_SkillApply == null || !_SkillApply.GetInvocationList().Contains(value))
+                if (_OnSkillApply == null || !_OnSkillApply.GetInvocationList().Contains(value))
                 {                    
-                    _SkillApply += value;
-                    Debug.Log("skill apply >>" + _SkillApply.GetInvocationList().Length);
+                    _OnSkillApply += value;
+                    Debug.Log("skill apply >>" + _OnSkillApply.GetInvocationList().Length);
                 }
                 else
                 {
@@ -58,7 +58,7 @@ namespace Combat
             }
             remove
             {
-                _SkillApply -= value;
+                _OnSkillApply -= value;
             }
         }
 
@@ -162,7 +162,7 @@ namespace Combat
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
                 skillView = FindObjectOfType<SkillView>();
-                _SkillApply += SkillEventtest;
+                _OnSkillApply += SkillEventtest;
                 skillFXMoveController = gameObject.GetComponent<SkillFxMoveController>();
                 if(skillFXMoveController == null)
                     skillFXMoveController = gameObject.AddComponent<SkillFxMoveController>();
@@ -319,7 +319,7 @@ namespace Combat
             
         }
 
-        public void TargetIsSelected(DynamicPosData target)
+        public void TargetIsSelected(DynamicPosData target, CellPosData cellPosData = null)
         {
 
             // FOCUS CHECK TO BE INCORPORPORATED HERE 
@@ -329,33 +329,43 @@ namespace Combat
                 Debug.Log("Combat State not in skill selected"); return;
             }
 
-            int currCharID = CombatService.Instance.currCharOnTurn.charModel.charID; 
-            SkillModel skillModel = GetSkillModel(currCharID, currSkillName);
-            CharController targetController = null; 
-            if(skillModel.skillType != SkillTypeCombat.Move)
+            int currCharID = CombatService.Instance.currCharOnTurn.charModel.charID;
+            currSkillModel = GetSkillModel(currCharID, currSkillName);
+
+            CharController targetController = null;
+         
+            if (currSkillModel.skillType != SkillTypeCombat.Move)
             {
+              
                 currentTargetDyna = target;
                 StrikeController strikeController =
                             CombatService.Instance.currCharOnTurn.GetComponent<StrikeController>();
                  targetController = target.charGO.GetComponent<CharController>();
-                List<DamageType> dmgTypes = skillModel.dmgType;
+                List<DamageType> dmgTypes = currSkillModel.dmgType;
                 bool isPhysical = dmgTypes.Any(t => t == DamageType.Physical);
                 bool isMagical = dmgTypes.Any(t => t == DamageType.Air || t == DamageType.Dark
                 || t == DamageType.Earth || t == DamageType.Fire || t == DamageType.Light
                 || t == DamageType.Water);
-         
-                if (!skillModel.targetPos.Any(t => t.pos == target.currentPos))
+                if (!currSkillModel.targetPos.Any(t => t.pos == target.currentPos))
                     //&& t.charMode == target.charMode))
                     return;
+
                 Debug.Log("TARGET SELECT" + target.charGO.name);
             }
+            
+            if(currSkillModel.skillType == SkillTypeCombat.Move && cellPosData  == null)
+            {
+                return;
+            }
+
+           
+
             OnSkillUsed?.Invoke(new SkillEventData(CombatService.Instance.currCharOnTurn
-                                    , targetController, currSkillName, skillModel));
+                                    , targetController, currSkillName, currSkillModel));
 
             PreSkillApply?.Invoke();
             SkillFXRemove?.Invoke();
-           // Sequence SkillSeq = DOTween.Sequence();           
-            _SkillApply.Invoke();
+            _OnSkillApply.Invoke();
             On_PostSkillApply(); 
         }
 
@@ -382,7 +392,7 @@ namespace Combat
             OnSkillUsed?.Invoke(new SkillEventData(CombatService.Instance.currCharOnTurn
                                     , targetController, currSkillName, skillModel));
 
-            if (_SkillApply == null) return;
+            if (_OnSkillApply == null) return;
 
 
             PreSkillApply?.Invoke();
@@ -391,7 +401,7 @@ namespace Combat
             Sequence eventSeq = DOTween.Sequence();
 
             eventSeq
-                .AppendCallback(() => _SkillApply?.Invoke())
+                .AppendCallback(() => _OnSkillApply?.Invoke())
                 .AppendInterval(2)
                 .AppendCallback(On_PostSkillApply)
                 ;
@@ -405,6 +415,14 @@ namespace Combat
                 CombatService.Instance.combatState = CombatState.INCombat_InSkillSelected;
                 ClearPrevData();
                 SkillSelect?.Invoke(_charName, skillName);  // message broadcaster 
+
+                int currCharID = CombatService.Instance.currCharOnTurn.charModel.charID;
+                currSkillModel = GetSkillModel(currCharID, currSkillName);
+
+                if (currSkillModel.skillType == SkillTypeCombat.Move)
+                    CombatService.Instance.ToggleColliders(false);
+                else
+                    CombatService.Instance.ToggleColliders(true);
             }
             currSkillController = allSkillControllers.FirstOrDefault(t => t.charName == _charName);
             Debug.Log("SKILL IS SELECTED" + currSkillController.name);
@@ -464,7 +482,7 @@ namespace Combat
             {
                 CombatController combatController = currCharOnturn.GetComponent<CombatController>();
 
-                combatController.UpdateActionPts();
+                combatController.UpdateActionPts(skillModel);
                 if (skillModel != null) // skillmodel is null when no skill can be selected 
                     skillView.UpdateSkillState(skillModel);
                 
@@ -661,7 +679,7 @@ namespace Combat
         void ClearPrevData()
         {
            
-            _SkillApply = null; SkillFXRemove = null; SkillApplyMoveFx = null;
+            _OnSkillApply = null; SkillFXRemove = null; SkillApplyMoveFx = null;
             PostSkillApply = null;
             PreSkillApply = null;
             CombatService.Instance.mainTargetDynas.Clear();

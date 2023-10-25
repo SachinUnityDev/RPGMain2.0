@@ -81,6 +81,14 @@ namespace Combat
         }
 
    
+        public void ToggleColliders(bool turnOn)
+        {
+            foreach (CharController charCtrl in CharService.Instance.charsInPlayControllers)
+            {
+                if(currCharOnTurn.charModel.charID != charCtrl.charModel.charID && !turnOn)
+                     charCtrl.GetComponent<BoxCollider2D>().enabled = turnOn;
+            }
+        }
         public void AddCombatControllers()
         {
             foreach (CharController charCtrl in CharService.Instance.charsInPlayControllers)

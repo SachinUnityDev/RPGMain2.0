@@ -24,6 +24,14 @@ namespace Combat
 
         public override float chance { get; set; }
 
+        public override void SkillHovered()
+        {
+            base.SkillHovered();
+            skillModel.castPos.Clear();
+            skillModel.castPos = new List<int> { 1,2,3,4,5,6,7 };
+            skillModel.maxUsagePerCombat = 6; 
+
+        }
         public override void ApplyFX1()
         {
         }

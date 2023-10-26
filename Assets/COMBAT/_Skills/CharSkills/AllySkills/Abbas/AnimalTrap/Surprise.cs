@@ -26,9 +26,20 @@ namespace Combat
         public override SkillLvl skillLvl => SkillLvl.Level3;
 
         public override float chance { get; set; }
-
+        public override void SkillHovered()
+        {
+            base.SkillHovered();
+            skillModel.staminaReq = 4; 
+        }
         public override void ApplyFX1()
         {
+            if (targetController == null) return;
+            if (targetController.charModel.raceType == RaceType.Animal)
+                targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                     , charController.charModel.charID, CharStateName.Feebleminded, skillModel.timeFrame, skillModel.castTime);
+            else
+                targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName,
+                 charController.charModel.charID, AttribName.luck, -3, skillModel.timeFrame, skillModel.castTime, false);
         }
 
         public override void ApplyFX2()

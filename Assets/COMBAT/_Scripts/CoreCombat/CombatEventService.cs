@@ -179,21 +179,32 @@ namespace Combat
             SkillModel skillModel = SkillService.Instance.GetSkillModel(currCharID
                              , SkillService.Instance.currSkillName);
 
-            if (_targetDyna.charGO != null)  
+            if (_targetDyna != null)  // this happens only in move and remote skills{when applied on tile} 
             {
                 Debug.Log("Target Dyna " + _targetDyna.charGO.GetComponent<CharController>().charModel.charName);
                 CombatService.Instance.currTargetClicked = _targetDyna.charGO.GetComponent<CharController>();
                 OnTargetClicked?.Invoke(_targetDyna, null);
-            } else if(skillModel.skillType == SkillTypeCombat.Move)
+            }
+            else
             {
-                GameObject charGO = CombatService.Instance.currCharOnTurn.gameObject;
-                _targetDyna = GridService.Instance.GetDyna4GO(charGO);
-                CombatService.Instance.currTargetClicked = CombatService.Instance.currCharOnTurn;
-                SkillService.Instance.currentTargetDyna = _targetDyna;
-                // In move skill if a empty tile is clicked
-                if (!skillModel.targetPos.Any(t => t.pos == cellPosData.pos && t.charMode == cellPosData.charMode))
-                return;
-                OnTargetClicked?.Invoke(_targetDyna, cellPosData);
+                if (skillModel.skillType == SkillTypeCombat.Move)
+                {
+                    GameObject charGO = CombatService.Instance.currCharOnTurn.gameObject;
+                    _targetDyna = GridService.Instance.GetDyna4GO(charGO);
+                    CombatService.Instance.currTargetClicked = CombatService.Instance.currCharOnTurn;
+                    SkillService.Instance.currentTargetDyna = _targetDyna;
+                    // In move skill if a empty tile is clicked
+                    if (!skillModel.targetPos.Any(t => t.pos == cellPosData.pos && t.charMode == cellPosData.charMode))
+                        return;
+                    OnTargetClicked?.Invoke(_targetDyna, cellPosData);
+                }
+                if (skillModel.skillType == SkillTypeCombat.Remote)
+                {
+                    if (!skillModel.targetPos.Any(t => t.pos == cellPosData.pos && t.charMode == cellPosData.charMode))
+                        return;
+                    SkillService.Instance.SetRemoteSkills(skillModel, cellPosData);
+
+                }
             }
         }
 

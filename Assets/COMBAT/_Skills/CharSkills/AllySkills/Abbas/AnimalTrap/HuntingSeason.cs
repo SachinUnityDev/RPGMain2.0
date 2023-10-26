@@ -26,6 +26,13 @@ namespace Combat
 
         public override void ApplyFX1()
         {
+            if (targetController == null) return;
+            if (targetController.charModel.raceType == RaceType.Animal)
+                targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                          , charController.charModel.charID, CharStateName.BleedHighDOT);
+            else if(50f.GetChance())
+                targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                         , charController.charModel.charID, CharStateName.BleedLowDOT);
         }
 
         public override void ApplyFX2()

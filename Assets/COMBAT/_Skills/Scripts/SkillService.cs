@@ -113,10 +113,6 @@ namespace Combat
         [Header("curr Char UPDATES")]
         public CharMode currCharMode;
 
-        [Header("REMOTE SKILLS SERVICE")]
-        public RemoteSkillView remoteSkillView; 
-
-
         [Header(" ALL SKILLS DATA")]
         public SkillNames currSkillName = SkillNames.None;
         public DynamicPosData currentTargetDyna = new DynamicPosData();
@@ -142,7 +138,6 @@ namespace Combat
             skillView = GetComponent<SkillView>();
             SceneManager.sceneLoaded += OnSceneLoaded;
             GameEventService.Instance.OnGameStateChg += OnStartOfCombat;
-            // CombatService.Instance.GetComponent<RoundController>().OnCharOnTurnSet += PopulateSkillTargets; 
             skillFactory =GetComponent<SkillFactory>();
             skillFactory.SkillsInit();
             passiveSkillFactory = GetComponent<PassiveSkillFactory>();
@@ -166,8 +161,7 @@ namespace Combat
                 skillFXMoveController = gameObject.GetComponent<SkillFxMoveController>();
                 if(skillFXMoveController == null)
                     skillFXMoveController = gameObject.AddComponent<SkillFxMoveController>();
-                if (remoteSkillView == null)
-                    remoteSkillView = FindObjectOfType<RemoteSkillView>();
+               
 
             }
             GameObject canvasGO = GameObject.FindGameObjectWithTag("Canvas");
@@ -334,7 +328,7 @@ namespace Combat
 
             CharController targetController = null;
          
-            if (currSkillModel.skillType != SkillTypeCombat.Move)
+            if (currSkillModel.skillType != SkillTypeCombat.Move && currSkillModel.skillType != SkillTypeCombat.Remote)
             {
               
                 currentTargetDyna = target;
@@ -357,8 +351,11 @@ namespace Combat
             {
                 return;
             }
+            if (currSkillModel.skillType == SkillTypeCombat.Remote && cellPosData == null)
+            {
+                return;
+            }
 
-           
 
             OnSkillUsed?.Invoke(new SkillEventData(CombatService.Instance.currCharOnTurn
                                     , targetController, currSkillName, currSkillModel));
@@ -484,18 +481,14 @@ namespace Combat
 
                 combatController.UpdateActionPts(skillModel);
                 if (skillModel != null) // skillmodel is null when no skill can be selected 
-                    skillView.UpdateSkillState(skillModel);
-                
+                    skillView.UpdateSkillState(skillModel);                
 
-                if (combatController.actionPts > 0)
+                if (combatController.actionPts > 0)// allies 
                 {
                     CombatService.Instance.roundController.SetSameCharOnTurn();
                     return;
-                }
-                //else
-                //{
-                //    Move2Nextturn();
-                //}
+                } 
+
             }
             else
             {
@@ -658,10 +651,14 @@ namespace Combat
 
         #region APPLY REMOTE SKILLS
         
-        public void ApplyRemoteSkills(SkillController1 skillController, SkillNames skillName
-                                                                        , CellPosData cellPosData)
+        public void SetRemoteSkills(SkillModel skillModel, CellPosData cellPosData)
         {
-            remoteSkillView.ApplyRemoteSkillBuff(skillController, skillName, cellPosData); 
+            CharController charController = CombatService.Instance.currCharOnTurn; 
+            if(charController.combatController.actionPts >0)
+                GridService.Instance.gridView.SetRemoteSkill(skillModel, cellPosData); 
+            ClearPrevData();
+            skillView.UpdateSkillState(skillModel);
+            On_PostSkillApply(); // move to the next turn
         }
 
         #endregion
@@ -684,13 +681,6 @@ namespace Combat
             PreSkillApply = null;
             CombatService.Instance.mainTargetDynas.Clear();
             CombatService.Instance.colTargetDynas.Clear();
-
-            //PostSkillApply -= GridService.Instance.ClearOldTargets;
-
-            //PostSkillApply += GridService.Instance.ClearOldTargets;
-            //PostSkillApply -= () => CombatService.Instance.combatState = CombatState.INCombat_normal;
-            //PostSkillApply += ()=> CombatService.Instance.combatState = CombatState.INCombat_normal;
-
         }
         public List<DynamicPosData> GetTargetInRange(SkillModel _skillModel)
         {            

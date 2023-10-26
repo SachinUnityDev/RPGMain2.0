@@ -15,10 +15,10 @@ namespace Combat
         protected GameObject charGO;
         public GameObject targetGO;
         public virtual int charID { get; set; }
-        protected CharController targetController;
+        public CharController targetController;// public for remote skills
         protected CharController charController;
         protected SkillController1 skillController;
-        protected DynamicPosData myDyna; 
+        public DynamicPosData myDyna; //public for remote skills
 
         protected SkillData skillData = new SkillData();
         protected string str0, str1, str2, str3;

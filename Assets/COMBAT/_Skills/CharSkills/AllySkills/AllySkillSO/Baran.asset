@@ -284,7 +284,14 @@ MonoBehaviour:
     allPerkHexes:
     - perkChain: 00000000
       hexNames: 020000000b0000000b000000
-    allSkillFXs: []
+    allSkillFXs:
+    - charMode: 0
+      perkType: 0
+      impactFX: {fileID: 0}
+      colImpactFX: {fileID: 0}
+      mainSkillFX: {fileID: 0}
+      colMainFX: {fileID: 0}
+      selfFX: {fileID: 0}
     allLines: []
   - skillName: 13
     charName: 2

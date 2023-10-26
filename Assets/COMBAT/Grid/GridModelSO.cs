@@ -24,7 +24,8 @@ namespace Combat
         //public GameObject allyTargetHL;
         //public GameObject enemyTargetHL;
 
-
+        [Header(" Remote View FX")]
+        public GameObject remoteViewFX; 
 
 
         public Tile GetTile(TileState _tileState, CharMode _charMode)

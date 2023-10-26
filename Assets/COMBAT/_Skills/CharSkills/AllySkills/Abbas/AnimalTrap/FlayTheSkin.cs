@@ -23,9 +23,23 @@ namespace Combat
         public override SkillLvl skillLvl => SkillLvl.Level2;
 
         public override float chance { get; set; }
-
+        public override void SkillSelected()
+        {
+            base.SkillSelected();
+            SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).RemoveFX1;
+        }
         public override void ApplyFX1()
         {
+            if (targetController.charStateController.HasCharDOTState(CharStateName.BleedHighDOT) ||
+             targetController.charStateController.HasCharDOTState(CharStateName.BurnHighDOT) ||
+             targetController.charStateController.HasCharDOTState(CharStateName.PoisonedHighDOT))
+            {
+                targetController.damageController.ApplyDamage(charController, CauseType.CharSkill,
+                    (int)skillName, skillModel.dmgType[0], (skillModel.damageMod + 25f), true);
+            }
+            else
+                targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
+                                                , skillModel.dmgType[0], (skillModel.damageMod), true);
         }
 
         public override void ApplyFX2()

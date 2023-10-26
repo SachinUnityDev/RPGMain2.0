@@ -67,6 +67,7 @@ namespace Combat
         Weapon, 
         Uzu, 
         Retaliate,
+        Remote,
     }
 
     public enum StrikeTargetNos

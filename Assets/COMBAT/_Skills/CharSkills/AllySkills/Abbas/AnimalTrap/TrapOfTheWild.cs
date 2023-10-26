@@ -12,7 +12,7 @@ namespace Combat
 
         public override PerkSelectState state { get; set; }
 
-        public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.None };
+        public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.Flextrap };
         
         public override string desc => "this is trap of the wild";
 
@@ -24,12 +24,22 @@ namespace Combat
 
         public override float chance { get; set; }
 
+        public override void SkillHovered()
+        {
+            base.SkillHovered();
+            skillModel.dmgType[0] = DamageType.Earth; 
+        }
         public override void ApplyFX1()
         {
+            targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName, skillModel.dmgType[0]
+                                                                                                   , skillModel.damageMod, true);
         }
 
         public override void ApplyFX2()
         {
+            if(targetController)
+            targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                                        , charController.charModel.charID, CharStateName.PoisonedLowDOT);
         }
 
         public override void ApplyFX3()

@@ -19,14 +19,45 @@ namespace Combat
 
         public override float chance { get; set; }
 
+        public override void PopulateTargetPos()
+        {
+            if (skillModel == null) return;
+            skillModel.targetPos.Clear();
+            CombatService.Instance.mainTargetDynas.Clear();
+
+            for (int i = 1; i < 8; i++)
+            {
+                CellPosData cellPosData = new CellPosData(CharMode.Enemy, i);
+                DynamicPosData dyna = GridService.Instance.gridView
+                                        .GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
+                if (dyna == null)
+                {
+                    skillModel.targetPos.Add(cellPosData);                    
+                }
+            }
+        }
+
+
         public override void ApplyFX1()
         {
-            
+            if (targetController == null) return;
+            targetController.damageController.ApplyDamage(charController, CauseType.CharSkill
+                                            , (int)skillName, skillModel.dmgType[0], skillModel.damageMod, false, true); 
+
         }
 
         public override void ApplyFX2()
         {
-           
+
+            if (targetController == null) return;
+            if (targetController.charModel.raceType == RaceType.Animal)
+                targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                     , charController.charModel.charID, CharStateName.Rooted, skillModel.timeFrame, skillModel.castTime);
+            else
+                targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName,
+                 charController.charModel.charID, AttribName.haste, -3, skillModel.timeFrame, skillModel.castTime, false);
+
+
         }
 
         public override void ApplyFX3()
@@ -70,9 +101,5 @@ namespace Combat
            
         }
 
-        public override void PopulateTargetPos()
-        {
-            
-        }
     }
 }

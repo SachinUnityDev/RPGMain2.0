@@ -27,6 +27,13 @@ namespace Combat
 
         public override void ApplyFX1()
         {
+            if (targetController == null) return;
+            if (targetController.charModel.raceType == RaceType.Animal)
+                targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName,
+                  charController.charModel.charID, AttribName.morale, -3, skillModel.timeFrame, skillModel.castTime, false);
+            else
+                targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName,
+                 charController.charModel.charID, AttribName.morale, -2, skillModel.timeFrame, skillModel.castTime, false);
         }
 
         public override void ApplyFX2()

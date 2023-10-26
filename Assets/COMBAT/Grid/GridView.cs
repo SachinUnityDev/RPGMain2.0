@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
 using System.Linq;
 using DG.Tweening;
+using Common;
 
 namespace Combat
 {
@@ -38,6 +39,8 @@ namespace Combat
         GridController gridController;
 
         GameObject FxCursor;
+        List<GameObject> allFxRemote = new List<GameObject>();
+
         CharMode prevCharMode = CharMode.None;
 
         void Start()
@@ -106,6 +109,7 @@ namespace Combat
                 {
                     if (hit.transform.name == "TileBase")
                     {
+                        currentdyna = null; 
                         currTilePos = _tileMap.WorldToCell(hit.point);
                         if (gridController.IsTileOnGrid(currTilePos)) 
                         {
@@ -140,7 +144,7 @@ namespace Combat
 
         //void HLAllTiles()
         //{
-           
+
         //    GameObject FxAlly = _gridModelSO.allyOnTurnHL;
         //    GameObject FxEnemy = _gridModelSO.enemyOnTurnHL;
         //    Quaternion quat = GridService.Instance.gridLayout.transform.rotation;
@@ -161,6 +165,32 @@ namespace Combat
         //        Instantiate(FxEnemy, worldPos, quat);
         //    }
         //}
+
+        public void SetRemoteSkill(SkillModel skillModel,CellPosData cellPosData)
+        {   
+            Vector3Int tilePos = gridMovement.GetTilePos4Pos(cellPosData.charMode, cellPosData.pos);
+            Vector3 worldPos = gridMovement.GetWorldPosSingle(tilePos);
+            Quaternion quat = GridService.Instance.gridLayout.transform.rotation;
+            SkillDataSO skillDataSO = SkillService.Instance.GetSkillSO(skillModel.charName);
+            SkillData skillData = skillDataSO.GetSkillData(skillModel.skillName);
+            GameObject fxRemote = skillData.allSkillFXs[0].mainSkillFX; // prefab 
+
+            GameObject fxRmoteAlly = Instantiate(fxRemote, worldPos, quat);
+            CharController charController = CombatService.Instance.currCharOnTurn;
+            fxRmoteAlly.GetComponent<RemoteView>().InitRemoteView(skillModel, cellPosData,charController); 
+
+
+            allFxRemote.Add(fxRmoteAlly);
+            SkillService.Instance.On_PostSkill(skillModel);
+        }
+
+        public void RemoteSkill(CellPosData cellPosData, SkillModel skillModel)
+        {
+            // loop thru the skills go and destroy the one that matches the criteria
+
+
+        }
+
 
         public void CharOnTurnHL(DynamicPosData dyna)
         {

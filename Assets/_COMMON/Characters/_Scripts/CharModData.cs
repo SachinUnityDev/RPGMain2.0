@@ -33,8 +33,8 @@ namespace Common
             this.causeName = causeName;
             this.causeByCharID = causedByCharID;
             this.effectedCharNameID = effectedCharNameID;
-
             this.attribModified = statModfified;
+
             //this.modChgMaxR = modChgMaxR;
             //this.modChgMinR = modChgMinR;
         }

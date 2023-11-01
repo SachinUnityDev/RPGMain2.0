@@ -40,21 +40,22 @@ namespace Combat
             base.BaseApply();
             SkillService.Instance.OnSkillUsed += PoisonBuff; 
         }
-         void PoisonBuff(SkillEventData skillEventData)
+         bool PoisonBuff(SkillEventData skillEventData)
          {
-            //if (skillEventData.strikerController.charModel.charName == CharNames.DireRat)
-            //{
-            //    if(skillEventData.skillModel.skillName == SkillNames.RatBite)
-            //    {
-            //        float percent = 70f;
-            //        if (percent.GetChance())
-            //        {
-            //            skillEventData.targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-            //           , charController.charModel.charID, CharStateName.PoisonedHighDOT);
-            //        }
-            //    } 
-            //}
-         }
+            if (skillEventData.strikerController.charModel.charName == CharNames.DireRat)
+            {
+                if (skillEventData.skillModel.skillName == SkillNames.RatBite)
+                {
+                    float percent = 70f;
+                    if (percent.GetChance())
+                    {
+                        skillEventData.targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                       , charController.charModel.charID, CharStateName.PoisonedHighDOT);
+                    }
+                }
+            }
+            return true; 
+        }
 
         public override void ApplyFX1()
         {
@@ -83,7 +84,6 @@ namespace Combat
 
         public override void DisplayFX2()
         {
-          
         }
 
         public override void DisplayFX3()
@@ -101,8 +101,9 @@ namespace Combat
 
         public override void PopulateAITarget()
         {
-            PopulateTargetPos();
-            
+            base.PopulateAITarget();
+            if (SkillService.Instance.currentTargetDyna != null) return;
+
             CharController maxValChar = CharService.Instance.HasHighestStat(StatName.health, CharMode.Enemy);
             foreach (CellPosData cell in skillModel.targetPos)
             {

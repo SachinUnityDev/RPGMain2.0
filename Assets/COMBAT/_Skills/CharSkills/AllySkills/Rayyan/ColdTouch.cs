@@ -57,7 +57,7 @@ namespace Combat
                 {
                     strikeData.targets.ForEach(t => Debug.Log("STRIKE DATA " + t.name)); 
                     strikeData.targets.ForEach(t => t.damageController.ApplyDamage(strikeData.striker,
-                                                 CauseType.CharSkill, (int)skillName, DamageType.Water, 40f, false));
+                     CauseType.CharSkill, (int)skillName, DamageType.Water, 40f, skillModel.skillInclination));
                 }                       
             }          
         }     

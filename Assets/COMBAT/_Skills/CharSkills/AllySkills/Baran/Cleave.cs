@@ -52,7 +52,8 @@ namespace Combat
             Debug.Log("Apply FX reached"); 
           if(CombatService.Instance.mainTargetDynas.Count>0)
                 CombatService.Instance.mainTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>().damageController
-                    .ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Physical, skillModel.damageMod, false));
+                    .ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Physical, skillModel.damageMod
+                    , skillModel.skillInclination));
         }
 
         public override void ApplyFX2()

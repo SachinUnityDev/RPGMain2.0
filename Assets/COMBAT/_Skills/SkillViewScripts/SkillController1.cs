@@ -658,7 +658,7 @@ namespace Combat
             }
             else
             {
-                SkillService.Instance.On_PostSkill(selectedSkillModel);
+                  SkillService.Instance.On_PostSkill(selectedSkillModel); // model is null here             
             }
         }
         public SkillModel SkillSelectByAI()
@@ -772,6 +772,34 @@ namespace Combat
             passiveSkillcontroller.InitPassive(charController);
         }
         #endregion
+
+        #region HELPERS
+
+        public void UnClickableSkillsByIncli(SkillInclination skillInclination)
+        {
+            foreach (SkillBase skillbase in allSkillBases)
+            {
+                if(skillbase.skillModel.skillInclination == skillInclination)
+                {
+                    skillbase.skillModel.SetSkillState(SkillSelectState.UnClickable_Misc); 
+                }
+            }
+        }
+        public void UnClickableSkillsByAttackType(AttackType attackType, int pos)
+        {
+            foreach (SkillBase skillbase in allSkillBases)
+            {
+                if (skillbase.skillModel.attackType == attackType)
+                {
+                    if(skillbase.skillModel.castPos.Any(t => t != pos))
+                        skillbase.skillModel.SetSkillState(SkillSelectState.UnClickable_Misc);
+                    
+                }
+            }
+        }
+        #endregion
+
+
     }
 
     public class SkillDmgModData

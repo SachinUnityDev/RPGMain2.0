@@ -299,7 +299,7 @@ namespace Common
                 if (GetHealthValBelow0(value) <= 0)
                 {
                     damageController.ApplyDamage(this, CauseType.StatMinMaxLimit, 0, DamageType.FortitudeDmg
-                                                                        , GetHealthValBelow0(value), false);
+                                                                        , GetHealthValBelow0(value));
                 }
             }
             
@@ -364,7 +364,7 @@ namespace Common
             // COMBAT PATCH FIX ENDS 
             // BroadCast the value change thru On_StatCurrValChg
             AttribModData charModData = new AttribModData(turn, causeType, CauseName, causeByCharID
-                                                             , this.charModel.charID, attribName, value);
+                                                             , this.charModel.charID, attribName);
 
             float currVal = statData.currValue;
             float preConstrainedValue = currVal + value;

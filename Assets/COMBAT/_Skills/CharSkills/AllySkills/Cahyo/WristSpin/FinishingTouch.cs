@@ -45,12 +45,13 @@ namespace Combat
                 if (hpPercent < 0.3f)
                 {
                     targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
-                                                     , DamageType.Physical, skillModel.damageMod, false, true);
+                                                     , DamageType.Physical, skillModel.damageMod
+                                                     ,skillModel.skillInclination, false, true);
                 }
                 else
                 {
                     targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
-                                                     , DamageType.Physical, skillModel.damageMod, false);
+                                                     , DamageType.Physical, skillModel.damageMod, skillModel.skillInclination);
                 }
         }
 
@@ -61,7 +62,7 @@ namespace Combat
             if (isTargetBleeding)
             {
                 targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
-                                                                      , DamageType.Physical, (skillModel.damageMod + 40), false);
+                                                , DamageType.Physical, (skillModel.damageMod + 40), skillModel.skillInclination);
             }
         }
 

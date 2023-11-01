@@ -16,9 +16,6 @@ MonoBehaviour:
   stateFor: 0
   charStateType: 0
   charStateBehavior: 1
-  timeFrame: 1
-  minCastTime: -1
-  maxCastTime: -1
   CharStateNameStr: Shocked
   iconSprite: {fileID: 21300000, guid: 91186864f16d28749b9de2e8c66033f8, type: 3}
   allLines:
@@ -26,5 +23,5 @@ MonoBehaviour:
   - -3 Focus
   - 1-3 Armor
   - +24 Earth Res
-  - Can't use Move skills
+  - Can't use Move and Physical Skills
   CharStateFX: {fileID: 0}

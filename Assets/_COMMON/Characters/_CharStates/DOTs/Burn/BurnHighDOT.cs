@@ -10,8 +10,6 @@ namespace Common
     public class BurnHighDOT : CharStatesBase
     {
         public override CharStateName charStateName => CharStateName.BurnHighDOT;
-        public override CharController charController { get; set; }
-        public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
         public override int castTime { get; protected set; }
 
@@ -44,10 +42,10 @@ namespace Common
             if (isBurning)
             {
                 charController.damageController.ApplyDamage(charController, CauseType.CharState, (int)charStateName
-                           , DamageType.Fire, UnityEngine.Random.Range(4, 9), false);
+                           , DamageType.Fire, UnityEngine.Random.Range(4, 9));
 
                 charController.damageController.ApplyDamage(charController, CauseType.CharState, (int)charStateName
-                             , DamageType.FortitudeDmg, UnityEngine.Random.Range(4, 9), false);
+                             , DamageType.FortitudeDmg, UnityEngine.Random.Range(4, 9));
             }
             else
             {

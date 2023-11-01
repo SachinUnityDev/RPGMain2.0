@@ -9,8 +9,6 @@ namespace Common
     public class Inspired : CharStatesBase
     {
         public override CharStateName charStateName => CharStateName.Inspired;
-        public override CharController charController { get; set; }
-        public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
         public override int castTime { get; protected set; }
         public override float chance { get; set; }
@@ -23,9 +21,8 @@ namespace Common
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                   , charID, AttribName.focus, -1, timeFrame, castTime, true);
 
-            charController.charStateController
-                .ApplyImmunityBuff(CauseType.CharState, (int)charStateName
-                   , charID, CharStateName.Despaired, timeFrame, castTime);
+            charController.charStateController.ApplyImmunityBuff(CauseType.CharState, (int)charStateName
+                                                , charID, CharStateName.Despaired, timeFrame, castTime);
             charController.OnAttribCurrValSet += Tick2;
         }
 

@@ -48,7 +48,8 @@ namespace Combat
         {
             if (targetController)  // ignore armor
                 targetController.damageController.ApplyDamage(charController,CauseType.CharSkill, (int)skillName
-                                                                    , DamageType.Physical, skillModel.damageMod, true);
+                                                                    , DamageType.Physical, skillModel.damageMod
+                                                                    ,skillModel.skillInclination, true);
 
         }
 

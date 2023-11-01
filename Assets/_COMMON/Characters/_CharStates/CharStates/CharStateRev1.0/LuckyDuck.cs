@@ -9,8 +9,6 @@ namespace Common
     public class LuckyDuck : CharStatesBase
     {
         public override CharStateName charStateName => CharStateName.LuckyDuck;
-        public override CharController charController { get; set; }
-        public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
         public override int castTime { get; protected set; }
         public override float chance { get; set; }
@@ -21,13 +19,12 @@ namespace Common
                          , charID, AttribName.luck, +1, timeFrame, castTime, true, CharMode.Ally));
             int buffId = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                  , charID, AttribName.haste, -1, timeFrame, castTime, true);
+                                        , charID, AttribName.haste, -1, timeFrame, castTime, true);
             allBuffIds.Add(buffId); 
 
             int immuneBuffID =
-            charController.charStateController
-                    .ApplyImmunityBuff(CauseType.CharState, (int)charStateName
-                       , charID, CharStateName.Feebleminded, timeFrame, castTime);
+            charController.charStateController.ApplyImmunityBuff(CauseType.CharState, (int)charStateName
+                                                , charID, CharStateName.Feebleminded, timeFrame, castTime);
             allImmunityBuffs.Add(immuneBuffID);
 
             charController.OnAttribCurrValSet += Tick2;
@@ -58,6 +55,12 @@ namespace Common
             {
                 EndState();
             }
+        }
+
+        public override void EndState()
+        {
+            base.EndState();
+            charController.OnAttribCurrValSet -= Tick2;
         }
     }
 }

@@ -30,7 +30,8 @@ namespace Combat
         {
             if(targetController.charStateController.HasCharState(CharStateName.Sneaky))
                 targetController.damageController.ApplyDamage(charController, CauseType.CharSkill,
-                             (int)skillName, DamageType.Physical, (skillModel.damageMod + 65f), false, true);
+                             (int)skillName, DamageType.Physical, (skillModel.damageMod + 65f)
+                             , skillModel.skillInclination,false, true);
         }
         public override void ApplyFX2()
         {

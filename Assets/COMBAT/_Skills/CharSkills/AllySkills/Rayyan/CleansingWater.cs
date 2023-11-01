@@ -48,7 +48,7 @@ namespace Combat
 
             if (targetController && IsTargetMyAlly())
                 targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Heal
-                                                                    , UnityEngine.Random.Range(4f, 7f), false);           
+                                                    , UnityEngine.Random.Range(4f, 7f));           
         }
 
         public override void DisplayFX1()

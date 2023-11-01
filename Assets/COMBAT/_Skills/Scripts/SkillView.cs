@@ -45,7 +45,8 @@ namespace Combat
             //CombatEventService.Instance.OnSOTactics +=
             //   () => SetSkillsPanel(CombatService.Instance.defaultChar.charModel.charName);
             CombatEventService.Instance.OnCharOnTurnSet +=
-              (CharController charController) => SetSkillsPanel(charController.charModel.charID);
+              //  () => SetSkillsPanel(CombatService.Instance.currCharClicked.charModel.charID);
+               (CharController charController) => SetSkillsPanel(charController.charModel.charID);
 
             CombatEventService.Instance.OnCharClicked += 
                 ()=>SetSkillsPanel(CombatService.Instance.currCharClicked.charModel.charID);
@@ -57,8 +58,9 @@ namespace Combat
 
         private void OnDisable()
         {
-            CombatEventService.Instance.OnSOT -=
-            () => SetSkillsPanel(CombatService.Instance.currCharOnTurn.charModel.charID);
+            CombatEventService.Instance.OnCharOnTurnSet -=
+                (CharController charController) => SetSkillsPanel(charController.charModel.charID);
+            //() => SetSkillsPanel(CombatService.Instance.currCharOnTurn.charModel.charID);
             CombatEventService.Instance.OnCharClicked -=
                () => SetSkillsPanel(CombatService.Instance.currCharClicked.charModel.charID);
             CombatEventService.Instance.OnCharClicked -=
@@ -308,16 +310,11 @@ namespace Combat
                 }
             }
         }
-
-
         public void Change2ClickedFrame(Transform skillBtnTransform)
         {
             skillBtnTransform.GetChild(1).GetComponent<Image>().sprite = skillHexSO.SkillSelectFrame;
             skillBtnTransform.GetChild(1).GetComponent<RectTransform>().localScale = Vector3.one * 1.25f;  
         }
-
-
-      
 
         public void SetSkillsPanel(int  _charID)
         {
@@ -326,15 +323,14 @@ namespace Combat
             CharNames charName = charController.charModel.charName;
             // SET ACTION POINTS 
 
-
-            if(GameService.Instance.gameModel.gameState == GameState.InCombat)
+            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
                 CombatController combatController =
                                 charController.GetComponent<CombatController>();
-                if(combatController!= null && charController.charModel.charMode == CharMode.Ally) 
-                    combatController.SetActionPts();
+                if (combatController != null)
+                    combatController.SetActionPts(charController);
             }
-           
+
             foreach (SkillDataSO skillSO in SkillService.Instance.allCharSkillSO)
             {
                 if (skillSO.charName == charName)

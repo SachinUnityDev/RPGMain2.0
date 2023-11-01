@@ -8,8 +8,6 @@ using Common;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-using UnityEngine.Rendering;
-using System.Security.Policy;
 
 namespace Combat
 {
@@ -93,8 +91,8 @@ namespace Combat
         [Header("SKILL MOVE AND FX RELATED")]
         public SkillFxMoveController skillFXMoveController;
 
-        [Header(" Action Pts")]
-        bool isZeroActionPtsSkill = false; 
+        [Header(" Ignore Haste Chk")]
+        public bool ignoreHasteChk = false; 
 
         // ALL ACTIONS// 
         public event Action SkillInit;
@@ -109,7 +107,7 @@ namespace Combat
         public event Action SkillFXRemove; 
         public event Action SkillTick;// no use for now... 
         public event Action SkillEnd;// no use for now...
-        public event Action<SkillEventData> OnSkillUsed; 
+        public event Func<SkillEventData, bool> OnSkillUsed; 
         [Header("curr Char UPDATES")]
         public CharMode currCharMode;
 
@@ -149,9 +147,6 @@ namespace Combat
            // OnSkillApply -= SkillEventtest;
             GameEventService.Instance.OnGameStateChg -= OnStartOfCombat;
         }
-
-
-
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
@@ -189,7 +184,6 @@ namespace Combat
         {
             OnPerkStateChg?.Invoke(perkData);
         }
-
         public void On_SkillSelectedInInv(SkillModel skillModel)
         {
             skillModelSelect = skillModel;
@@ -344,9 +338,11 @@ namespace Combat
                     //&& t.charMode == target.charMode))
                     return;
 
+               
                 Debug.Log("TARGET SELECT" + target.charGO.name);
             }
-            
+      
+
             if(currSkillModel.skillType == SkillTypeCombat.Move && cellPosData  == null)
             {
                 return;
@@ -355,15 +351,13 @@ namespace Combat
             {
                 return;
             }
-
-
             OnSkillUsed?.Invoke(new SkillEventData(CombatService.Instance.currCharOnTurn
-                                    , targetController, currSkillName, currSkillModel));
-
+                                        , targetController, currSkillName, currSkillModel));            
+            
             PreSkillApply?.Invoke();
             SkillFXRemove?.Invoke();
             _OnSkillApply.Invoke();
-            On_PostSkillApply(); 
+            On_PostSkillApply();
         }
 
         void On_PostSkillApply()
@@ -445,7 +439,6 @@ namespace Combat
             skillView.SetSkillsPanel(charID);
             skillView.FillSkillClickedState(-1);
         }
-
         public void On_SkillHovered(CharNames _charName, SkillNames skillName)
         {
             SkillHovered = null; SkillWipe = null;
@@ -467,36 +460,60 @@ namespace Combat
             SkillHovered?.Invoke(); 
         }
 
+        bool HasteChk(CharController charController)
+        {
+            AttribData hasteData = charController.GetAttrib(AttribName.haste);
+            float chance = (float)CharService.Instance.statChanceSO.GetChanceForStatValue(AttribName.haste, (int)hasteData.currValue);
+
+            if (chance.GetChance())
+            {
+                CombatEventService.Instance.On_HasteCheck(charController); 
+                return true;
+            }                
+            return false; 
+        }
+
+
         public void On_PostSkill(SkillModel skillModel)
         {
             // ClearPrevData();  // redundant safety .. causing only one FX to play as it clears mainTargetDyna
         
             CharController currCharOnturn = CombatService.Instance.currCharOnTurn;
 
-            Debug.Log(skillModel.charName +" MOVE FORWARDS >>>>>>>>>>>>" + skillModel.skillName);
-            // if ally reduce action pts 
-            if (currCharOnturn.charModel.charMode == CharMode.Ally)
-            {
-                CombatController combatController = currCharOnturn.GetComponent<CombatController>();
+            Debug.Log(skillModel.charName +" Skill END>>> " + skillModel.skillName);
+            // if ally reduce action pts
 
-                combatController.UpdateActionPts(skillModel);
-                if (skillModel != null) // skillmodel is null when no skill can be selected 
-                    skillView.UpdateSkillState(skillModel);                
+            // HASTE CHECK
+            
+            bool hasteChk = false; 
+            if(skillModel.skillInclination == SkillInclination.Move && !ignoreHasteChk)
+                    hasteChk = HasteChk(currCharOnturn);
+            
+            
+                CombatController combatController = currCharOnturn.GetComponent<CombatController>();
+                if (hasteChk) // if haste check allies get a extra AP
+                    combatController.actionPts++; 
+                combatController.UpdateActionPts(skillModel, currCharOnturn.charModel.charMode);
+            if (skillModel != null) // skillmodel is null when no skill can be selected 
+                skillView.UpdateSkillState(skillModel);
+            else if (currCharOnturn.charModel.charMode == CharMode.Enemy)
+                Move2Nextturn(); 
+
 
                 if (combatController.actionPts > 0)// allies 
                 {
                     CombatService.Instance.roundController.SetSameCharOnTurn();
-                    return;
-                } 
+                    if (currCharOnturn.charModel.charMode == CharMode.Enemy)
+                        InitEnemySkillSelection(CombatService.Instance.currCharOnTurn);
 
-            }
-            else
-            {
-                if (skillModel != null) // skillmodel is null when no skill can be selected 
-                    skillView.UpdateSkillState(skillModel);
-                Move2Nextturn();
-            }
+                }
+                else
+                {
+                    if (currCharOnturn.charModel.charMode == CharMode.Enemy)
+                        Move2Nextturn();
+                }
         }
+      
 
         public void Move2Nextturn()
         {
@@ -504,7 +521,7 @@ namespace Combat
             Sequence PauseSeq = DOTween.Sequence();
 
             PauseSeq.AppendInterval(1f)
-            //.AppendCallback(ClearPrevData)
+                 .AppendCallback(ClearPrevData)
                 .AppendCallback(CombatEventService.Instance.On_SOT)
                 .AppendInterval(1f)
                 ;
@@ -653,6 +670,7 @@ namespace Combat
         
         public void SetRemoteSkills(SkillModel skillModel, CellPosData cellPosData)
         {
+            
             CharController charController = CombatService.Instance.currCharOnTurn; 
             if(charController.combatController.actionPts >0)
                 GridService.Instance.gridView.SetRemoteSkill(skillModel, cellPosData); 
@@ -729,3 +747,23 @@ namespace Combat
 
 
 }
+//else 
+//{
+//    //if (skillModel != null) // skillmodel is null when no skill can be selected 
+//    //    skillView.UpdateSkillState(skillModel);
+
+//    //if (hasteChk)  // if haste chk true enemies get an extra strike 
+//    //{
+//    //    CombatService.Instance.roundController.SetSameCharOnTurn();
+//    //    return;
+//    //}
+//    if (combatController.actionPts > 0)// allies 
+//    {
+//        CombatService.Instance.roundController.SetSameCharOnTurn();
+//    }
+//    else
+//    {
+//        Move2Nextturn();
+//    }
+//}
+// }

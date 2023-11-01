@@ -35,7 +35,7 @@ namespace Combat
         {
             if (chance.GetChance())
                 targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.FortitudeDmg
-                                                    , UnityEngine.Random.Range(10,19), false);
+                                        , UnityEngine.Random.Range(10,19), skillModel.skillInclination);
         }
 
         public override void ApplyFX2()
@@ -84,10 +84,8 @@ namespace Combat
 
         public override void PopulateAITarget()
         {
-            PopulateTargetPos();
-            SkillService.Instance.currentTargetDyna = null;
-            DynamicPosData tempDyna = null;
-            DynamicPosData randomDyna = null;
+            base.PopulateAITarget();
+            if (SkillService.Instance.currentTargetDyna != null) return;
 
             foreach (CellPosData cell in skillModel.targetPos)
             {

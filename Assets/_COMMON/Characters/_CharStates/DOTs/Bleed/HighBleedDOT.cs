@@ -8,38 +8,32 @@ namespace Common
     public class HighBleedDOT : CharStatesBase
     {
         public override CharStateName charStateName => CharStateName.BleedHighDOT;
-        public override CharController charController { get; set; }
-        public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
         public override int castTime { get; protected set; }
 
         public CharController strikerController;
-
         public override float chance { get; set; }
         bool fxApplied = false; 
         public override void StateApplyFX()
         {
-            int strikerLvl = 0;
-          
+            int strikerLvl = 0;          
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
                 strikerController = CombatService.Instance.currCharOnTurn;
                 strikerLvl = strikerController.charModel.charLvl;                
             }
-       
              if(!charController.charStateController.HasCharDOTState(CharStateName.BurnHighDOT))
              {             
                 dmgPerRound = 3 + (strikerLvl / 4);
-                ApplyFX();                
+                ApplyFX();
+                CombatEventService.Instance.OnEOR1 += DOTTick;
                 CombatEventService.Instance.OnSOT += ApplyFX;
-          
-              //  CombatEventService.Instance.OnEOR1 += DOTTick;
                 if (charController.charStateController.HasCharDOTState(CharStateName.PoisonedLowDOT))
                 {
                     OverLapRulePoison();
                 }
              }
-             
+
         }
 
         void DOTTick(int roundNo)
@@ -97,7 +91,7 @@ namespace Common
         {
             base.EndState();
             CombatEventService.Instance.OnSOT -= ApplyFX;
-         //   CombatEventService.Instance.OnEOR1 -= DOTTick;
+            CombatEventService.Instance.OnEOR1 -= DOTTick;
 
             // -2 dodge 
             charController.ChangeAttrib(CauseType.CharState, (int)charStateName
@@ -128,51 +122,4 @@ namespace Common
         }
     }
 }
-
-
-//    //4 rds	5 dmg per round
-
-//    public class HighBleedDOT : CharStatesBase
-//    {
-//        int timeElapsed = 0;
-
-//        int netDOT = 4;
-//        CharController charController; 
-//        public override int castTime { get => netDOT ; set => base.castTime = value; }        
-//        public override CharStateName charStateName => CharStateName.BleedHighDOT;
-//        public override StateFor stateFor => StateFor.Mutual;
-//        public override float dmgPerRound => 5.0f;
-//        // Start is called before the first frame update
-//        void Start()
-//        {
-//            charController = gameObject?.GetComponent<CharController>();
-//            charID = charController.charModel.charID;
-//            CombatEventService.Instance.OnEOR += TickState;
-//        }
-//        protected void TickState()
-//        {
-//            timeElapsed++;
-
-//            //CharacterController characterController = gameObject.GetComponent<CharacterController>();
-
-//            StatData statData = charController.GetStat(StatsName.armor);
-
-//            if (statData.currValue > statData.minRange + 5)
-//                charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.health, Mathf.RoundToInt(-dmgPerRound / 2));
-//            else
-//                charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.health, -dmgPerRound);
-
-//            if (timeElapsed >= castTime)
-//            {
-//                EndState();
-//            }
-//        }
-
-//        public override void EndState()
-//        {
-//            charController.charModel.InCharStatesList.Remove(charStateName);
-//            CombatEventService.Instance.OnEOR -= TickState;
-//            Destroy(this);
-//        }
-
 

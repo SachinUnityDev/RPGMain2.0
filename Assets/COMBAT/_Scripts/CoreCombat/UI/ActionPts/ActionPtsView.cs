@@ -12,7 +12,7 @@ namespace Combat
         
         public int actionPts; 
 
-        private void Awake()  // view subscriptions not to be disabled
+        private void Start()  // view subscriptions not to be disabled
         {
             CombatEventService.Instance.OnCharOnTurnSet -= ShowActionPtsDsply;
             CombatEventService.Instance.OnEOT -= HideActionPtsDsply;

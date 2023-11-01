@@ -82,6 +82,9 @@ namespace Common
         public List<ImmunityBuffData> allImmunityBuffs = new List<ImmunityBuffData>();
         CharController charController;
 
+        [Header(" All Char State Models")]
+        public List<CharStateModel> allCharStateModels = new List<CharStateModel>();    
+
 
         [SerializeField] List<string> buffStrs = new List<string>();
         [SerializeField] List<string> deDuffStrs = new List<string>();
@@ -98,19 +101,19 @@ namespace Common
             CombatEventService.Instance.OnEOR1 += RoundTick;
             CombatEventService.Instance.OnEOC += EOCTick; 
             charController.OnStatChg += StatChg;
-            charController.OnAttribChg += AttribChg; 
+            charController.OnAttribCurrValSet += AttribChg; 
         }
         private void OnDisable()
         {
             CombatEventService.Instance.OnEOR1 -= RoundTick;
             CombatEventService.Instance.OnEOC -= EOCTick;
             charController.OnStatChg -= StatChg;
-            charController.OnAttribChg -= AttribChg;
+            charController.OnAttribCurrValSet -= AttribChg;
         }
 
         #region BUFF & DEBUFF
         public int ApplyCharStateBuff(CauseType causeType, int causeName, int causeByCharID
-                                , CharStateName charStateName, TimeFrame timeFrame = TimeFrame.Infinity, int netTime =-1)
+                                , CharStateName charStateName, TimeFrame timeFrame = TimeFrame.Infinity, int castTime =-1)
         {
             // check immunity list 
             if (IsDOT(charStateName))
@@ -131,9 +134,22 @@ namespace Common
             }
             CharStateModData charStateModData = new CharStateModData(causeType, causeName, causeByCharID
                                                                     , effectedCharID, charStateName);
-            stateID++;
+            stateID++;// to be corrected
             allBuffIds.Add(stateID);
-            CharStateBuffData charStateBuffData = new CharStateBuffData(stateID, currRd, timeFrame, netTime
+            
+            // 
+            CharStatesBase charStateBase = CharStatesService.Instance.GetNewCharState(charStateName);
+
+            CharStateSO1 charStateSO = CharStatesService.Instance.allCharStateSO.GetCharStateSO(charStateName);
+
+            // char State init only when its applied 
+            charStateBase.StateInit(charStateSO, charController, timeFrame, castTime, stateID);
+            charStateBase.StateBaseApply();
+            charStateBase.StateApplyFX();
+            charStateBase.StateApplyVFX();
+
+
+            CharStateBuffData charStateBuffData = new CharStateBuffData(stateID, currRd, timeFrame, castTime
                                                                         , charStateModData); 
 
             allCharStateBuffs.Add(charStateBuffData);
@@ -141,7 +157,7 @@ namespace Common
             CharStatesService.Instance.On_CharStateStart(charStateModData);
             if (!IsDOT(charStateName))  // no char State can occur twice to the same char ...DOT have independent rules
             {
-                ApplyImmunityBuff(causeType, causeName, causeByCharID, charStateName, timeFrame, netTime);
+                ApplyImmunityBuff(causeType, causeName, causeByCharID, charStateName, timeFrame, castTime);
             }
 
             return stateID;
@@ -151,12 +167,18 @@ namespace Common
         public void RemoveCharState(CharStateName charStateName)
         {
             int index = allCharBases.FindIndex(t => t.charStateName == charStateName);
-            if (index == -1) return;
-            allCharBases[index].EndState();   // all related buffs to be cleared from here
-            allCharBases.RemoveAt(index);
-            RemoveImmunityByCharState(charStateName);
+            if (index != -1)
+            {
+                allCharBases[index].EndState();   // all related buffs to be cleared from here
+                allCharBases.RemoveAt(index);
+                RemoveImmunityByCharState(charStateName);
+            }
+            int index2 = allCharStateModels.FindIndex(t => t.charStateName == charStateName);
+            if (index != -1)
+            {
+                allCharStateModels.RemoveAt(index2);
+            }
         }
-
         public void ResetCharStateBuff(CharStateName charStateName)
         {
             foreach (CharStateBuffData buffData in allCharStateBuffs)
@@ -363,6 +385,7 @@ namespace Common
             }
             return false; 
         }
+
         #endregion
 
         #region TICKS
@@ -393,6 +416,7 @@ namespace Common
                     RemoveCharState(stateData.charStateModData.charStateName);
                 }
             }
+            
         }
         
 
@@ -488,11 +512,11 @@ namespace Common
         {
             if(statModData.statModified == StatName.health)
             {
-                if(statModData.modVal== 0)
+                if(statModData.modVal== 0 )
                 {
                     ApplyCharStateBuff(CauseType.StatChange, (int)statModData.statModified, statModData.causeByCharID,
                         CharStateName.LastDropOfBlood); 
-                }else if (HasCharState(CharStateName.LastDropOfBlood))
+                }else if (HasCharState(CharStateName.LastDropOfBlood) && statModData.modVal > 0)
                 {
                     RemoveCharState(CharStateName.LastDropOfBlood); 
                 }
@@ -504,7 +528,7 @@ namespace Common
                     ApplyCharStateBuff(CauseType.StatChange, (int)statModData.statModified, statModData.causeByCharID,
                         CharStateName.LastBreath);
                 }
-                else if (HasCharState(CharStateName.LastBreath))
+                else if (HasCharState(CharStateName.LastBreath) && statModData.modVal >0)
                 {
                     RemoveCharState(CharStateName.LastBreath);
                 }
@@ -530,28 +554,188 @@ namespace Common
             {
                 if (attribModData.modCurrVal == 12f)
                 {
-                    ApplyCharStateBuff(CauseType.StatChange, (int)attribModData.attribModified, attribModData.causeByCharID,
+                    ApplyCharStateBuff(CauseType.AttribMinMaxLimit, (int)attribModData.attribModified, attribModData.causeByCharID,
                       CharStateName.Concentrated);
                 }
-                else if (HasCharState(CharStateName.Concentrated))
+                else if (HasCharState(CharStateName.Concentrated) && attribModData.modCurrVal < 12)
                 {
                     CharStateBuffData charStateBuffData = GetCharStateBuffData(CharStateName.Concentrated);
                     if(charStateBuffData.charStateModData.causeType == CauseType.AttribMinMaxLimit)
                         RemoveCharState(CharStateName.Concentrated);
+                }
+                if (attribModData.modCurrVal == 0f)
+                {
+                    ApplyCharStateBuff(CauseType.AttribMinMaxLimit, (int)attribModData.attribModified, attribModData.causeByCharID,
+                      CharStateName.Confused);
+                }
+                else if (HasCharState(CharStateName.Confused) && attribModData.modCurrVal > 0)
+                {
+                    CharStateBuffData charStateBuffData = GetCharStateBuffData(CharStateName.Confused);
+                    if (charStateBuffData.charStateModData.causeType == CauseType.AttribMinMaxLimit)
+                        RemoveCharState(CharStateName.Confused);
                 }
             }
             if (attribModData.attribModified == AttribName.luck)
             {
                 if (attribModData.modCurrVal == 12f)
                 {
-                    ApplyCharStateBuff(CauseType.StatChange, (int)attribModData.attribModified, attribModData.causeByCharID,
+                    ApplyCharStateBuff(CauseType.AttribMinMaxLimit, (int)attribModData.attribModified, attribModData.causeByCharID,
                       CharStateName.LuckyDuck);
                 }
-                else if (HasCharState(CharStateName.LuckyDuck))
+                else if (HasCharState(CharStateName.LuckyDuck) && attribModData.modCurrVal < 12)
                 {
                     CharStateBuffData charStateBuffData = GetCharStateBuffData(CharStateName.LuckyDuck);
                     if (charStateBuffData.charStateModData.causeType == CauseType.AttribMinMaxLimit)
                         RemoveCharState(CharStateName.LuckyDuck);
+                }
+                if (attribModData.modCurrVal == 0f)
+                {
+                    ApplyCharStateBuff(CauseType.AttribMinMaxLimit, (int)attribModData.attribModified, attribModData.causeByCharID,
+                      CharStateName.Feebleminded);
+                }
+                else if (HasCharState(CharStateName.Feebleminded) && attribModData.modCurrVal > 0)
+                {
+                    CharStateBuffData charStateBuffData = GetCharStateBuffData(CharStateName.Feebleminded);
+                    if (charStateBuffData.charStateModData.causeType == CauseType.AttribMinMaxLimit)
+                        RemoveCharState(CharStateName.Feebleminded);
+                }
+            }
+            if (attribModData.attribModified == AttribName.haste)
+            {
+                if (attribModData.modCurrVal == 12f)
+                {
+                    ApplyCharStateBuff(CauseType.AttribMinMaxLimit, (int)attribModData.attribModified, attribModData.causeByCharID,
+                      CharStateName.Lissome);
+                }
+                else if (HasCharState(CharStateName.Lissome) && attribModData.modCurrVal < 12)
+                {
+                    CharStateBuffData charStateBuffData = GetCharStateBuffData(CharStateName.Lissome);
+                    if (charStateBuffData.charStateModData.causeType == CauseType.AttribMinMaxLimit)
+                        RemoveCharState(CharStateName.Lissome);
+                }
+                if (attribModData.modCurrVal == 0f)
+                {
+                    ApplyCharStateBuff(CauseType.AttribMinMaxLimit, (int)attribModData.attribModified, attribModData.causeByCharID,
+                      CharStateName.Rooted);
+                }
+                else if (HasCharState(CharStateName.Rooted) && attribModData.modCurrVal > 0)
+                {
+                    CharStateBuffData charStateBuffData = GetCharStateBuffData(CharStateName.Rooted);
+                    if (charStateBuffData.charStateModData.causeType == CauseType.AttribMinMaxLimit)
+                        RemoveCharState(CharStateName.Rooted);
+                }
+
+            }
+            if (attribModData.attribModified == AttribName.morale)
+            {
+                if (attribModData.modCurrVal == 12f)
+                {
+                    ApplyCharStateBuff(CauseType.AttribMinMaxLimit, (int)attribModData.attribModified, attribModData.causeByCharID,
+                      CharStateName.Inspired);
+                }
+                else if (HasCharState(CharStateName.Inspired) && attribModData.modCurrVal < 12)
+                {
+                    CharStateBuffData charStateBuffData = GetCharStateBuffData(CharStateName.Inspired);
+                    if (charStateBuffData.charStateModData.causeType == CauseType.AttribMinMaxLimit)
+                        RemoveCharState(CharStateName.Inspired);
+                }
+                if (attribModData.modCurrVal == 0f)
+                {
+                    ApplyCharStateBuff(CauseType.AttribMinMaxLimit, (int)attribModData.attribModified, attribModData.causeByCharID,
+                      CharStateName.Despaired);
+                }
+                else if (HasCharState(CharStateName.Despaired) && attribModData.modCurrVal > 0)
+                {
+                    CharStateBuffData charStateBuffData = GetCharStateBuffData(CharStateName.Despaired);
+                    if (charStateBuffData.charStateModData.causeType == CauseType.AttribMinMaxLimit)
+                        RemoveCharState(CharStateName.Despaired);
+                }
+            }
+            // Earth Res
+
+            if (attribModData.attribModified == AttribName.earthRes)
+            {
+                if (attribModData.modCurrVal == 80f)
+                {
+                    ApplyCharStateBuff(CauseType.AttribMinMaxLimit, (int)attribModData.attribModified, attribModData.causeByCharID,
+                      CharStateName.Calloused);
+                }
+                else if (HasCharState(CharStateName.Calloused) && attribModData.modCurrVal < 80)
+                {
+                    CharStateBuffData charStateBuffData = GetCharStateBuffData(CharStateName.Calloused);
+                    if (charStateBuffData.charStateModData.causeType == CauseType.AttribMinMaxLimit)
+                        RemoveCharState(CharStateName.Calloused);
+                }
+                
+            }
+            if (attribModData.attribModified == AttribName.airRes)
+            {
+                if (attribModData.modCurrVal == 80f)
+                {
+                    ApplyCharStateBuff(CauseType.AttribMinMaxLimit, (int)attribModData.attribModified, attribModData.causeByCharID,
+                      CharStateName.Charged);
+                }
+                else if (HasCharState(CharStateName.Charged) && attribModData.modCurrVal < 80)
+                {
+                    CharStateBuffData charStateBuffData = GetCharStateBuffData(CharStateName.Charged);
+                    if (charStateBuffData.charStateModData.causeType == CauseType.AttribMinMaxLimit)
+                        RemoveCharState(CharStateName.Charged);
+                }
+            }
+            if (attribModData.attribModified == AttribName.fireRes)
+            {
+                if (attribModData.modCurrVal == 80f)
+                {
+                    ApplyCharStateBuff(CauseType.AttribMinMaxLimit, (int)attribModData.attribModified, attribModData.causeByCharID,
+                      CharStateName.Enraged);
+                }
+                else if (HasCharState(CharStateName.Enraged) && attribModData.modCurrVal < 80)
+                {
+                    CharStateBuffData charStateBuffData = GetCharStateBuffData(CharStateName.Enraged);
+                    if (charStateBuffData.charStateModData.causeType == CauseType.AttribMinMaxLimit)
+                        RemoveCharState(CharStateName.Enraged);
+                }
+            }
+            if (attribModData.attribModified == AttribName.waterRes)
+            {
+                if (attribModData.modCurrVal == 80f)
+                {
+                    ApplyCharStateBuff(CauseType.AttribMinMaxLimit, (int)attribModData.attribModified, attribModData.causeByCharID,
+                      CharStateName.Aquaborne);
+                }
+                else if (HasCharState(CharStateName.Aquaborne) && attribModData.modCurrVal < 80)
+                {
+                    CharStateBuffData charStateBuffData = GetCharStateBuffData(CharStateName.Aquaborne);
+                    if (charStateBuffData.charStateModData.causeType == CauseType.AttribMinMaxLimit)
+                        RemoveCharState(CharStateName.Aquaborne);
+                }
+            }
+            if (attribModData.attribModified == AttribName.lightRes)
+            {
+                if (attribModData.modCurrVal == 60f)
+                {
+                    ApplyCharStateBuff(CauseType.AttribMinMaxLimit, (int)attribModData.attribModified, attribModData.causeByCharID,
+                      CharStateName.Radiant);
+                }
+                else if (HasCharState(CharStateName.Radiant) && attribModData.modCurrVal < 60)
+                {
+                    CharStateBuffData charStateBuffData = GetCharStateBuffData(CharStateName.Radiant);
+                    if (charStateBuffData.charStateModData.causeType == CauseType.AttribMinMaxLimit)
+                        RemoveCharState(CharStateName.Radiant);
+                }
+            }
+            if (attribModData.attribModified == AttribName.darkRes)
+            {
+                if (attribModData.modCurrVal == 60f)
+                {
+                    ApplyCharStateBuff(CauseType.AttribMinMaxLimit, (int)attribModData.attribModified, attribModData.causeByCharID,
+                      CharStateName.Lunatic);
+                }
+                else if (HasCharState(CharStateName.Lunatic) && attribModData.modCurrVal < 60)
+                {
+                    CharStateBuffData charStateBuffData = GetCharStateBuffData(CharStateName.Lunatic);
+                    if (charStateBuffData.charStateModData.causeType == CauseType.AttribMinMaxLimit)
+                        RemoveCharState(CharStateName.Lunatic);
                 }
             }
         }

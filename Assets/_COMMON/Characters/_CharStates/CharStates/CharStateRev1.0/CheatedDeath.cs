@@ -11,9 +11,7 @@ namespace Common
         // Gain +%30 health and +18 Fortitude instantly(CHEAT DEATH ACTION WILL EXE THIS )
         //	-1 Fort Origin permanently (Base value)
         //	+8 Fort Origin until eoc
-        public override CharStateName charStateName => CharStateName.CheatedDeath;      
-        public override CharController charController { get; set; }
-        public override int charID { get; set; }
+        public override CharStateName charStateName => CharStateName.CheatedDeath; 
         public override StateFor stateFor => StateFor.Heroes;
         public override int castTime { get; protected set;}
         public override float chance { get; set; }

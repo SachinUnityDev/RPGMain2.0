@@ -8,9 +8,7 @@ namespace Common
     public class Guarding : CharStatesBase
     {
         //Single target attacks diverted from guarded ally	+1 Luck
-        public override CharStateName charStateName => CharStateName.Guarding;
-        public override CharController charController { get; set; }
-        public override int charID { get; set; }
+        public override CharStateName charStateName => CharStateName.XXXX;
 
         public override StateFor stateFor => StateFor.Mutual;
 

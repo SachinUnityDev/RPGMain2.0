@@ -5,12 +5,15 @@ using System;
 using Common;
 using System.Linq;
 using Quest;
+using System.Runtime.InteropServices.WindowsRuntime;
+using UnityEngine.SceneManagement;
 
 namespace Combat
 {
     [System.Serializable]
     public class BuffData
     {
+        
         public int buffID; 
         public bool isBuff;   // true if BUFF and false if DEBUFF
         public int startRoundNo;
@@ -34,11 +37,50 @@ namespace Combat
            
         }
     }
+    public class PosBuffData
+    {
+        public List<int> allPos = new List<int>();
+        public int buffID;
+        public bool isBuff;   // true if BUFF and false if DEBUFF
+        public int startRoundNo;
+        public TimeFrame timeFrame;
+        public int castTime;
+        public int buffCurrentTime;
+        public AttribModData attribModVal;
+        public TimeState timeState;
 
+        public CauseType causeType;
+        public int causeName;
+        public int causeByCharID;
+        public AttribName attribName;
+        public float attribVal;
+
+
+        public PosBuffData(CauseType causeType, int causeName, int causeByCharID, AttribName attribName, float val, List<int> allPos, int buffID, bool isBuff, int startRoundNo, TimeFrame timeFrame,
+            int castTime, AttribModData attribModData, TimeState timeState = TimeState.None)
+        {
+            this.allPos = allPos.DeepClone();
+            this.buffID = buffID;
+            this.isBuff = isBuff;
+            this.startRoundNo = startRoundNo;
+            this.timeFrame = timeFrame;
+            this.castTime = castTime;
+            this.buffCurrentTime = 0;
+            this.attribModVal = attribModData;
+            this.timeState = timeState;
+
+            this.causeType= causeType;  
+            this.causeName = causeName;
+            this.causeByCharID = causeByCharID;
+            this.attribName = attribName;
+            this.attribVal = val;
+        }
+    }
     public class BuffController : MonoBehaviour
     {
          List<BuffData> allBuffs = new List<BuffData>();  
          List<BuffData> allDayNightbuffs = new List<BuffData>(); 
+         List<PosBuffData> allPosBuffs = new List<PosBuffData>();  
       
         CharController charController; // ref to char Controller 
         [SerializeField]List<string> buffStrs = new List<string>();
@@ -46,18 +88,41 @@ namespace Combat
 
         public int buffIndex = 0;
 
-        private void Awake()
+
+        void Start()
         {
             charController = GetComponent<CharController>();
             CombatEventService.Instance.OnEOR1 += RoundTick;
             CombatEventService.Instance.OnEOC += EOCTick;
             QuestEventService.Instance.OnEOQ += EOQTick;
             CalendarService.Instance.OnChangeTimeState += ToggleBuffsOnTimeStateChg;
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
-        void Start()
+        private void OnDisable()
         {
-           
-          
+            CombatEventService.Instance.OnEOR1 -= RoundTick;
+            CombatEventService.Instance.OnEOC -= EOCTick;
+            QuestEventService.Instance.OnEOQ -= EOQTick;
+            CalendarService.Instance.OnChangeTimeState -= ToggleBuffsOnTimeStateChg;
+
+            GridService.Instance.OnPosChange -= PosChgTick;
+            CombatEventService.Instance.OnEOR1 -= RoundPosTick;
+            CombatEventService.Instance.OnEOC -= EOCPosTick;
+            QuestEventService.Instance.OnEOQ -= EOQPosTick;
+
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            {
+                GridService.Instance.OnPosChange += PosChgTick;
+
+                CombatEventService.Instance.OnEOR1 += RoundPosTick;
+                CombatEventService.Instance.OnEOC += EOCPosTick;
+                QuestEventService.Instance.OnEOQ += EOQPosTick;
+            }
         }
 
         #region  APPLY_BUFFS 
@@ -75,6 +140,16 @@ namespace Combat
                 return buffIndex;         
         }
 
+        public int ApplyDmgArmorByPercent(CauseType causeType, int causeName, int causebyCharID, AttribName attribName, 
+            float percentVal, TimeFrame timeFrame, int castTime, bool isBuff)
+        {
+            AttribData attribData = charController.GetAttrib(attribName);
+            float val = attribData.currValue*(1 + (percentVal / 100));
+
+            int buffID = ApplyBuff(causeType, causeName, causebyCharID, attribName, val, timeFrame, castTime, isBuff); 
+            return buffID;
+        }
+
         public void IncrBuffCastTime(int buffID, int incrBy)
         {
             foreach (BuffData buff in allBuffs)
@@ -85,9 +160,6 @@ namespace Combat
                 }
             }
         }
-        
-
-
         bool IsDmgArmorChg(BuffData buffData)
         {
             if (buffData.attribModData.attribModified == AttribName.dmgMin ||
@@ -111,7 +183,15 @@ namespace Combat
                 index = allDayNightbuffs.FindIndex(t => t.buffID == buffID); 
                 if(index == -1)
                 {
-                    return false;
+                    index = allPosBuffs.FindIndex(t => t.buffID == buffID);
+                    if (index == -1)
+                        return false;
+                    else
+                    {
+                        PosBuffData posBuffData= allPosBuffs[index];
+                        allPosBuffs.Remove(posBuffData);
+                        return true;
+                    }
                 }
                 else // remove day buff
                 {
@@ -188,6 +268,95 @@ namespace Combat
                 }
             }
         }
+
+        #region POS BUFFS
+
+        public int ApplyPosBuff(List<int> allPos, CauseType causeType, int causeName, int causeByCharID
+                                , AttribName attribName, float value, TimeFrame timeFrame, int castTime, bool isBuff)
+        {
+
+            // check pos using dyna and apply Attrib mod Here
+            DynamicPosData dyna = GridService.Instance.GetDyna4GO(gameObject);
+            AttribModData attribModVal = null; 
+            
+            if(allPos.Any(t=>t == dyna.currentPos)) // apply if in pos // attribModVal == null will signal not applied
+                    attribModVal = charController.ChangeAttrib(causeType, causeName, causeByCharID
+                                                                    , attribName, value, true);
+                
+            int currRd = GameSupportService.Instance.currentRound;
+            buffIndex++;
+            PosBuffData posBuffData = new PosBuffData(causeType, causeName, causeByCharID ,attribName, value,
+                                        allPos, buffIndex, isBuff, currRd, timeFrame, castTime,attribModVal);
+            allPosBuffs.Add(posBuffData);
+            return buffIndex;
+        }
+        #endregion
+
+        void PosChgTick(DynamicPosData dyna , int pos)
+        {
+            if(charController.charModel.charID == dyna.charGO.GetComponent<CharController>().charModel.charID)
+            {
+                foreach (PosBuffData posBuffData in allPosBuffs)
+                {
+                    if(posBuffData.allPos.Any(t=>t == pos))
+                    {
+                        if(posBuffData.attribModVal== null)
+                        {
+                            AttribModData 
+                            attribModVal = charController.ChangeAttrib(posBuffData.causeType, posBuffData.causeName
+                            , posBuffData.causeByCharID, posBuffData.attribName, posBuffData.attribVal, true);
+
+                            posBuffData.attribModVal= attribModVal;                     
+                        }
+                    }
+                }
+            }
+        }
+
+        void EOCPosTick()
+        {
+            foreach (PosBuffData buffData in allPosBuffs.ToList())
+            {
+                if (buffData.timeFrame == TimeFrame.EndOfCombat)
+                {
+                    RemovePosBuff(buffData.buffID);
+                }
+            }
+        }
+        public void EOQPosTick()
+        {
+            foreach (PosBuffData buffData in allPosBuffs.ToList())
+            {
+                if (buffData.timeFrame == TimeFrame.EndOfQuest)
+                {
+                    RemovePosBuff(buffData.buffID);
+                }
+            }
+        }
+        public void RoundPosTick(int roundNo)
+        {
+            foreach (PosBuffData buffData in allPosBuffs.ToList())
+            {
+                if (buffData.timeFrame == TimeFrame.EndOfRound)
+                {
+                    if (buffData.buffCurrentTime >= buffData.castTime)
+                    {
+                        RemovePosBuff(buffData.buffID);
+                    }
+                    buffData.buffCurrentTime++;
+                }
+            }
+        }
+
+        public void RemovePosBuff(int buffID) 
+        {
+            foreach (PosBuffData buffData in allPosBuffs.ToList())
+            {
+                if (buffData.buffID == buffID)
+                    allPosBuffs.Remove(buffData); 
+            }
+        }
+
 
         #region DAY BUFF MGMT
         public int ApplyNInitBuffOnDayNNight(CauseType causeType, int causeName, int causeByCharID

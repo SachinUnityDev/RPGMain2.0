@@ -27,9 +27,9 @@ namespace Interactables
             charController.ChangeAttrib(CauseType.PoeticGewgaw, (int)poeticSetName
                  , charController.charModel.charID, AttribName.fortOrg, 2);
         }
-        void OnDodgeChar(CharController _charController)
+        void OnDodgeChar(DmgAppliedData dmgAppliedData)
         {
-            if (charController.charModel.charID == _charController.charModel.charID)
+            if (dmgAppliedData.targetController.charModel.charID == charController.charModel.charID)
             {
                 charController.ChangeStat(CauseType.PoeticGewgaw, (int)poeticSetName
                 , charController.charModel.charID, StatName.stamina, 8);

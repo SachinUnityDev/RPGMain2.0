@@ -36,13 +36,8 @@ namespace Combat
             {
                 if (adjDyna.charGO.GetComponent<CharController>() == dmgAppliedData.targetController)
                 {
-              
-                    SkillService.Instance.currSkillName = SkillNames.Retaliate;
-                    //SkillService.Instance.currSkillModel = SkillService.Instance.allSkillControllers
-                    //CombatService.Instance.cu = charController;
-                    targetGO = dmgAppliedData.striker.gameObject;
-                    SkillService.Instance.TargetIsSelected(GridService.Instance.GetDyna4GO(targetGO));
-                    
+                    charController.strikeController.ApplyRetaliate(dmgAppliedData.striker);
+                    break; 
                 }
             }
         }

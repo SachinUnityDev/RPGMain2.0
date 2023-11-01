@@ -42,7 +42,8 @@ namespace Combat
         {
             if (targetController == null) return;
             targetController.damageController.ApplyDamage(charController, CauseType.CharSkill
-                                            , (int)skillName, skillModel.dmgType[0], skillModel.damageMod, false, true); 
+                                            , (int)skillName, skillModel.dmgType[0]
+                                                , skillModel.damageMod,skillModel.skillInclination, false, true); 
 
         }
 
@@ -96,10 +97,7 @@ namespace Combat
         {
         }
 
-        public override void PopulateAITarget()
-        {
-           
-        }
+      
 
     }
 }

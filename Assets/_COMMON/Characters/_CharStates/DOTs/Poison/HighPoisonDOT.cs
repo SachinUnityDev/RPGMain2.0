@@ -9,8 +9,6 @@ namespace Common
     {
 
         public override CharStateName charStateName => CharStateName.PoisonedHighDOT;
-        public override CharController charController { get; set; }
-        public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
         public override int castTime { get; protected set; }
 
@@ -34,7 +32,7 @@ namespace Common
             {                
                 charController.charStateController.ClearDOT(CharStateName.PoisonedLowDOT);
                 charController.damageController.ApplyDamage(charController, CauseType.CharState, (int)charStateName
-                    , DamageType.FortitudeDmg, UnityEngine.Random.Range(5, 7), false);
+                    , DamageType.FortitudeDmg, UnityEngine.Random.Range(5, 7));
             }
 
             ApplyRoundFX();
@@ -44,13 +42,13 @@ namespace Common
             {
                 // 4-5 stamina Damage
                 charController.damageController.ApplyDamage(charController, CauseType.CharState, (int)charStateName
-                      , DamageType.StaminaDmg, UnityEngine.Random.Range(4, 6), false);       
+                      , DamageType.StaminaDmg, UnityEngine.Random.Range(4, 6));       
             }
             if (isBurning)
             {
                 //  6-9 earth damage 
                 charController.damageController.ApplyDamage(charController, CauseType.CharState, (int)charStateName
-                  , DamageType.Earth, UnityEngine.Random.Range(6, 10), false);
+                                                    , DamageType.Earth, UnityEngine.Random.Range(6, 10));
             }
         }
 

@@ -136,7 +136,7 @@ public enum CharStateName
     Cloaked,
     Unslakable,
     Vanguard,
-    Guarding,
+    XXXX,
 }
 public enum CharStateBehavior
 {     

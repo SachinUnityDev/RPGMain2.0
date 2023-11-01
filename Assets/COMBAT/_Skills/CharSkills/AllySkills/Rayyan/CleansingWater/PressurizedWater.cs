@@ -48,7 +48,7 @@ namespace Combat
             if (IsTargetEnemy())
             {
                 targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName,
-                         DamageType.Water, skillModel.damageMod, false);
+                         DamageType.Water, skillModel.damageMod, skillModel.skillInclination);
             } 
         }
         public override void ApplyFX2()

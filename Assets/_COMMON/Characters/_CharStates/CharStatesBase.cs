@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Combat;
-using System.Linq; 
-
+using System.Linq;
+using Quest;
 
 namespace Common
 {
@@ -11,13 +11,15 @@ namespace Common
     public abstract class CharStatesBase 
     {
         public abstract CharStateName charStateName { get; }
-        public CharStateSO1 charStateSO { get; set; }
-        public abstract CharController charController { get; set; } // set this  base apply 
+      //  public CharStateSO1 charStateSO { get; set; }
+        public CharStateModel charStateModel { get; set; }
+        public CharController charController { get; set; } // set this  base apply 
+
+        public int charID { get; set; }
 
         protected GameObject charGO;
-        public abstract int charID { get; set; }
-
-        protected CharStateData CharStateData = new CharStateData(); // broadcasting data
+        
+        public int stateID { get; set; }
 
         protected string str0, str1, str2, str3, str4, str5;
 
@@ -33,9 +35,8 @@ namespace Common
         public virtual void SetCastTime(int value)
         {
             if(value > 0)
-            {
-                castTime = value;
-                if(charStateSO != null)
+            {  
+                if(charStateModel != null)
                     castTime = value; 
             }
         }
@@ -54,13 +55,25 @@ namespace Common
             startRound = CombatService.Instance.currentRound; 
             charController.charStateController.ResetCharStateBuff(charStateName); 
         }        
+
+        // Init to apply char State occurs in an instance so code bundled up for init, baseApply, applyFx etc 
         public virtual void StateInit(CharStateSO1 stateSO, CharController charController,
-            TimeFrame _timeframe, int _castTime)
+            TimeFrame _timeframe, int _castTime, int stateID)
         {
-            this.charStateSO = stateSO;
+
+            // exclusion
+            if (stateSO.stateFor == StateFor.Heroes)
+                if (charController.charModel.orgCharMode != CharMode.Ally)
+                    return;
+
+            this.stateID = stateID;
+            timeFrame = _timeframe;
+            castTime = _castTime;
+
+            charStateModel = new CharStateModel(stateSO, stateID);             
+            charController.charStateController.allCharStateModels.Add(charStateModel);
+
             this.charController = charController;
-            if (charController.charModel.orgCharMode != CharMode.Ally)
-                return; 
             this.charID = charController.charModel.charID;
             if (_timeframe != TimeFrame.None)   // applied time frame 
             {               
@@ -88,6 +101,11 @@ namespace Common
             {
                 castTime = 100; 
             }
+            if (timeFrame == TimeFrame.EndOfQuest)
+            {
+                QuestEventService.Instance.OnEOQ += QuestTick;
+            }
+
             startRound = CombatService.Instance.currentRound;   
             allBuffIds.Clear();
         }
@@ -101,6 +119,10 @@ namespace Common
         protected virtual void RoundTick(int roundNo)
         {
             int roundCounter = roundNo - startRound;
+            if (charStateName == CharStateName.Faithful || charStateName == CharStateName.Fearful)
+                if (roundCounter >= 2)
+                    EndState(); 
+
             if (roundCounter >= castTime)
                 EndState();
         }
@@ -109,10 +131,20 @@ namespace Common
             // on EOC all DOT are destroyed
             if(charStateName == CharStateName.BurnHighDOT || charStateName== CharStateName.BurnLowDOT ||
                charStateName == CharStateName.BleedHighDOT || charStateName == CharStateName.BleedLowDOT ||
-               charStateName == CharStateName.PoisonedHighDOT || charStateName == CharStateName.PoisonedLowDOT)
-            EndState(); 
-        }
+               charStateName == CharStateName.PoisonedHighDOT || charStateName == CharStateName.PoisonedLowDOT
+               || charStateName == CharStateName.FirstBlood || charStateName == CharStateName.Fearful
+               || charStateName == CharStateName.Faithful || charStateName == CharStateName.CheatedDeath
+               || charStateName == CharStateName.FlatFooted)
+                 EndState(); 
 
+            if(timeFrame == TimeFrame.EndOfCombat)
+                EndState();
+        }
+        protected virtual void QuestTick()
+        {
+            if (timeFrame == TimeFrame.EndOfQuest)
+                EndState();
+        }
         public virtual void EndState()
         {
             foreach(int buffID in allBuffIds)
@@ -121,17 +153,16 @@ namespace Common
             }
             foreach (ImmunityBuffData immuneBuffData in charController.charStateController.allImmunityBuffs)
             {
-
                 if(allImmunityBuffs.Any(t=>t == immuneBuffData.immunityID))
                 {
                     charController.charStateController.RemoveImmunityBuff(immuneBuffData.immunityID); 
                 }
             }
-
+            charController.charStateController.RemoveCharState(charStateName);
             CombatEventService.Instance.OnEOC -= CombatTick;
             CombatEventService.Instance.OnEOR1 -= RoundTick;
+            QuestEventService.Instance.OnEOQ -= QuestTick;
         }
-
 
     }
 

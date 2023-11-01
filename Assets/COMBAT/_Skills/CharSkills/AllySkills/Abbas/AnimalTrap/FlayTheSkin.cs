@@ -35,11 +35,15 @@ namespace Combat
              targetController.charStateController.HasCharDOTState(CharStateName.PoisonedHighDOT))
             {
                 targetController.damageController.ApplyDamage(charController, CauseType.CharSkill,
-                    (int)skillName, skillModel.dmgType[0], (skillModel.damageMod + 25f), true);
+                    (int)skillName, skillModel.dmgType[0], (skillModel.damageMod + 25f)
+                    , skillModel.skillInclination,true);
             }
             else
+            {
                 targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
-                                                , skillModel.dmgType[0], (skillModel.damageMod), true);
+                                                , skillModel.dmgType[0], (skillModel.damageMod)
+                                                , skillModel.skillInclination, true);
+            }   
         }
 
         public override void ApplyFX2()

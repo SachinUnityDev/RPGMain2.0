@@ -13,31 +13,9 @@ MonoBehaviour:
   m_Name: StatVsChance
   m_EditorClassIdentifier: 
   allStatChanceData:
-  - statName: 1
+  - attribName: 1
     allStatsNChances: []
-    minLimit: 0
-    maxLimit: 100
-  - statName: 2
-    allStatsNChances: []
-    minLimit: 0
-    maxLimit: 100
-  - statName: 3
-    allStatsNChances: []
-    minLimit: -30
-    maxLimit: 30
-  - statName: 4
-    allStatsNChances: []
-    minLimit: 0
-    maxLimit: 60
-  - statName: 5
-    allStatsNChances: []
-    minLimit: 0
-    maxLimit: 60
-  - statName: 6
-    allStatsNChances: []
-    minLimit: 0
-    maxLimit: 100
-  - statName: 7
+  - attribName: 2
     allStatsNChances:
     - statValue: 0
       statChance: 12
@@ -65,18 +43,10 @@ MonoBehaviour:
       statChance: 126
     - statValue: 12
       statChance: 132
-    - statValue: 13
-      statChance: 138
-    - statValue: 14
-      statChance: 144
-    - statValue: 15
-      statChance: 150
-    minLimit: 0
-    maxLimit: 30
-  - statName: 8
+  - attribName: 3
     allStatsNChances:
     - statValue: 0
-      statChance: 0
+      statChance: 2
     - statValue: 1
       statChance: 8
     - statValue: 2
@@ -101,9 +71,7 @@ MonoBehaviour:
       statChance: 88
     - statValue: 12
       statChance: 96
-    minLimit: 0
-    maxLimit: 12
-  - statName: 9
+  - attribName: 4
     allStatsNChances:
     - statValue: 0
       statChance: 54
@@ -131,9 +99,7 @@ MonoBehaviour:
       statChance: 30
     - statValue: 12
       statChance: 36
-    minLimit: 0
-    maxLimit: 12
-  - statName: 10
+  - attribName: 5
     allStatsNChances:
     - statValue: 0
       statChance: 54
@@ -161,9 +127,7 @@ MonoBehaviour:
       statChance: 30
     - statValue: 12
       statChance: 36
-    minLimit: 0
-    maxLimit: 12
-  - statName: 11
+  - attribName: 6
     allStatsNChances:
     - statValue: 0
       statChance: 0
@@ -191,71 +155,59 @@ MonoBehaviour:
       statChance: 11
     - statValue: 12
       statChance: 12
-    minLimit: 0
-    maxLimit: 12
-  - statName: 12
+  - attribName: 7
     allStatsNChances: []
-    minLimit: -1
-    maxLimit: -1
-  - statName: 13
+  - attribName: 8
     allStatsNChances: []
-    minLimit: -1
-    maxLimit: -1
-  - statName: 14
+  - attribName: 9
     allStatsNChances: []
-    minLimit: 0
-    maxLimit: 100
-  - statName: 15
+  - attribName: 10
     allStatsNChances:
     - statValue: 0
-      statChance: 4
+      statChance: 0
     - statValue: 1
-      statChance: 4
+      statChance: 6
     - statValue: 2
-      statChance: 8
-    - statValue: 3
       statChance: 12
+    - statValue: 3
+      statChance: 18
     - statValue: 4
-      statChance: 16
-    - statValue: 5
-      statChance: 20
-    - statValue: 6
       statChance: 24
-    - statValue: 7
-      statChance: 28
-    - statValue: 8
-      statChance: 32
-    - statValue: 9
+    - statValue: 5
+      statChance: 30
+    - statValue: 6
       statChance: 36
-    - statValue: 10
-      statChance: 40
-    - statValue: 11
-      statChance: 44
-    - statValue: 12
+    - statValue: 7
+      statChance: 42
+    - statValue: 8
       statChance: 48
-    minLimit: 0
-    maxLimit: 12
-  - statName: 16
+    - statValue: 9
+      statChance: 54
+    - statValue: 10
+      statChance: 60
+    - statValue: 11
+      statChance: 66
+    - statValue: 12
+      statChance: 72
+  - attribName: 11
     allStatsNChances: []
-    minLimit: 0
-    maxLimit: 90
-  - statName: 17
+  - attribName: 12
     allStatsNChances: []
-    minLimit: 0
-    maxLimit: 90
-  - statName: 18
+  - attribName: 13
     allStatsNChances: []
-    minLimit: 0
-    maxLimit: 90
-  - statName: 19
+  - attribName: 14
     allStatsNChances: []
-    minLimit: 0
-    maxLimit: 90
-  - statName: 20
+  - attribName: 15
     allStatsNChances: []
-    minLimit: 0
-    maxLimit: 60
-  - statName: 21
+  - attribName: 16
     allStatsNChances: []
-    minLimit: 0
-    maxLimit: 60
+  - attribName: 17
+    allStatsNChances: []
+  - attribName: 18
+    allStatsNChances: []
+  - attribName: 19
+    allStatsNChances: []
+  - attribName: 20
+    allStatsNChances: []
+  - attribName: 21
+    allStatsNChances: []

@@ -40,13 +40,14 @@ namespace Combat
             SkillService.Instance.OnSkillUsed += WaterShellRegainAP;
             CombatEventService.Instance.OnEOT += OnEOT;
         }
-        void WaterShellRegainAP(SkillEventData skilleventData)
+        bool WaterShellRegainAP(SkillEventData skilleventData)
         {
-            if (50f.GetChance()) return; 
+            if (50f.GetChance()) return true; 
             if (skilleventData.skillName == SkillNames.WaterShell)
             {
                 RegainAP();
             }
+            return true;
         }
         void OnEOT()
         {

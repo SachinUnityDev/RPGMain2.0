@@ -71,6 +71,7 @@ namespace Combat
                        .GetSkillSO(CombatService.Instance.currCharClicked.charModel.charName);
             index = gameObject.transform.GetSiblingIndex();
             skillView.index = index;
+            skillModel = SkillService.Instance.skillModelHovered;
             // UPDATE SKILL SERVICE 
             if (skillSO != null && index < skillSO.allSkills.Count)
                 SkillService.Instance.On_SkillHovered(CombatService.Instance.currCharClicked.charModel.charName,
@@ -81,7 +82,7 @@ namespace Combat
 
 
 
-            skillModel = SkillService.Instance.skillModelHovered;
+
 
             //float htSkillIcon = gameObject.GetComponent<RectTransform>().rect.height;          
 

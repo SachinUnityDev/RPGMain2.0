@@ -9,31 +9,31 @@ namespace Common
     public class Enraged : CharStatesBase
     {
         public override CharStateName charStateName => CharStateName.Enraged;
-        public override CharController charController { get; set; }
-        public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
         public override int castTime { get; protected set;}
         public override float chance { get; set; }
         public override void StateApplyFX()
         {
-            // +3 Dodge, -1 Focus and -1 Acc
+            // -2 Focus and -1 Acc
             // Dmg increases by 8 % each time attacked up to 40 %
             // gain 12 fortitude on burn
             // -30 water res
-            int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                 , charID, AttribName.dodge, +3, timeFrame, castTime, true);
-            allBuffIds.Add(buffID);
             
-            buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                , charID, AttribName.focus, -1, timeFrame, castTime, true);
+            
+            int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+                , charID, AttribName.focus, -2, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                , charID, AttribName.acc, -1, timeFrame, castTime, true);
+                , charID, AttribName.acc, -1, timeFrame, castTime, false);
+            allBuffIds.Add(buffID);
+
+            buffID = charController.buffController.ApplyDmgArmorByPercent(CauseType.CharState, (int)charStateName
+                , charID, AttribName.dmgMax, 20f, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                , charID, AttribName.waterRes, -30, timeFrame, castTime, true);
+                , charID, AttribName.waterRes, -20, timeFrame, castTime, false);
             allBuffIds.Add(buffID);
             CharStatesService.Instance.OnCharStateStart += ApplyBurnFX; 
        
@@ -54,13 +54,13 @@ namespace Common
 
         public override void StateDisplay()
         {
-            str0 = "+3 Dodge, -1 Focus and -1 Acc";
+            str0 = "-2 Focus and -1 Acc";
             charStateCardStrs.Add(str0);
 
-            str1 = "-30 water res";
+            str1 = "-20 Water Res";
             charStateCardStrs.Add(str1);
 
-            str2 = "Dmg increases by 8 % each time attacked up to 40 %";
+            str2 = "+20% Max Dmg";
             charStateCardStrs.Add(str2);
 
             str3 = "Gain 12 <style=Fortitude>Fort</style> upon <style=Burn>Burning</style>";

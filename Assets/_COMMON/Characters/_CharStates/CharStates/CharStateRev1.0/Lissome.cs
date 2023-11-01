@@ -9,8 +9,6 @@ namespace Common
     public class Lissome : CharStatesBase
     {
         public override CharStateName charStateName => CharStateName.Lissome;        
-        public override CharController charController { get; set; }
-        public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
         public override int castTime { get; protected set; }
         public override float chance { get; set; }
@@ -20,13 +18,12 @@ namespace Common
             allBuffIds.AddRange
                  (CharService.Instance.ApplyBuffOnPartyExceptSelf(CauseType.CharState, (int)charStateName
                                 , charID, AttribName.haste, +1, timeFrame, castTime, true, CharMode.Ally));
+
             allBuffIds.Add(charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
                   , charID, AttribName.luck, -1, timeFrame, castTime, true));
 
-            int immuneBuff =
-            charController.charStateController
-                .ApplyImmunityBuff(CauseType.CharState, (int)charStateName
-                   , charID, CharStateName.Rooted, timeFrame, castTime);
+            int immuneBuff = charController.charStateController.ApplyImmunityBuff(CauseType.CharState, (int)charStateName
+                                                                    , charID, CharStateName.Rooted, timeFrame, castTime);
             allImmunityBuffs.Add(immuneBuff);
             charController.OnAttribCurrValSet += Tick2;
         }
@@ -59,6 +56,12 @@ namespace Common
             {
                 EndState();
             }
+        }
+        public override void EndState()
+        {
+            base.EndState();
+            charController.OnAttribCurrValSet -= Tick2;
+
         }
     }
 }

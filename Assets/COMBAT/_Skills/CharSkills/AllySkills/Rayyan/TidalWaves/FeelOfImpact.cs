@@ -43,14 +43,14 @@ namespace Combat
                     {
                         dyna.charGO.GetComponent<CharController>().damageController.ApplyDamage(charController
                                             , CauseType.CharSkill, (int)skillName
-                                            , DamageType.Water, skillModel.damageMod+50f, false);
+                                            , DamageType.Water, skillModel.damageMod+50f, skillModel.skillInclination);
                     }
                     else
                     {
 
                         dyna.charGO.GetComponent<CharController>().damageController.ApplyDamage(charController
                                             , CauseType.CharSkill, (int)skillName
-                                            , DamageType.Water, skillModel.damageMod, false);
+                                            , DamageType.Water, skillModel.damageMod, skillModel.skillInclination);
                     }
                 }
             }

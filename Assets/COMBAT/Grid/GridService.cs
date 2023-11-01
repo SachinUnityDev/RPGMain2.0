@@ -25,7 +25,10 @@ namespace Combat
 
     public class GridService : MonoSingletonGeneric<GridService>, ISaveableService
     {
+        public Action <DynamicPosData, int> OnPosChange; 
+
         #region Declarations
+
         public Grid gridLayout;
         public GridPos2TilePosSO grid2CellPos;
         public GridModelSO gridModelSO;
@@ -186,7 +189,10 @@ namespace Combat
         }
  #endregion
 
-
+        public void On_PosChg(DynamicPosData dyna, int targetCell)
+        {
+            OnPosChange?.Invoke(dyna, targetCell);  
+        }
         void Add2CharDynaList(DynamicPosData dyna)
         {
             allCurrPosOccupiedByDyna.Add(dyna);

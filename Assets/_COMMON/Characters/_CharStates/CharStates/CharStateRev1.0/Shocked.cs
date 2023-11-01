@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Combat;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,8 +9,6 @@ namespace Common
     public class Shocked : CharStatesBase
     {
         public override CharStateName charStateName => CharStateName.Shocked;
-        public override CharController charController { get; set; }
-        public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
         public override int castTime { get; protected set; }
         public override float chance { get; set; }
@@ -43,8 +42,19 @@ namespace Common
                   , charID, CharStateName.PoisonedHighDOT, timeFrame, castTime, false);
 
             allImmunityBuffs.AddRange(immuneBuffIDs);
-        }
 
+            CombatEventService.Instance.OnCharOnTurnSet += CantUseMoveSkills; 
+        }
+        void CantUseMoveSkills(CharController charController)
+        {
+            if(GameService.Instance.gameModel.gameState == GameState.InCombat)
+            {
+                if (this.charController.charModel.charID == charController.charModel.charID)
+                {
+                    charController.skillController.UnClickableSkillsByIncli(SkillInclination.Move); 
+                }
+            }
+        }
         public override void StateApplyVFX()
         {
 
@@ -66,6 +76,12 @@ namespace Common
 
             str4 = "Can not use<style=Move> Move </style>skills";
             charStateCardStrs.Add(str4);
+        }
+        public override void EndState()
+        {
+            base.EndState();
+            CombatEventService.Instance.OnCharOnTurnSet -= CantUseMoveSkills;
+
         }
     }
 }

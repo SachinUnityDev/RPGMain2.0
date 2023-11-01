@@ -38,10 +38,11 @@ namespace Combat
 
             if(chance == -5)
                 targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
-                              , DamageType.Physical, skillModel.damageMod, false, true);
+                              , DamageType.Physical, skillModel.damageMod
+                              ,skillModel.skillInclination, false, true);
             else
                 targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
-                              , DamageType.Physical, skillModel.damageMod, false);
+                              , DamageType.Physical, skillModel.damageMod, skillModel.skillInclination);
 
         }
 

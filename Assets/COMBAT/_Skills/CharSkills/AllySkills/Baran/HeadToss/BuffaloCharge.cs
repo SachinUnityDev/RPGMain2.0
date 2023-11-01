@@ -70,9 +70,12 @@ namespace Combat
         {
             if (GridService.Instance.IsTargetInBackRow(targetDyna))
                             targetController.damageController.ApplyDamage(charController, CauseType.CharSkill,
-                                (int)skillName, DamageType.Physical, (skillModel.damageMod + 40f), false);
+                                (int)skillName, DamageType.Physical, (skillModel.damageMod + 40f)
+                                ,skillModel.skillInclination, false);
             else
-                targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Physical, (skillModel.damageMod), false);
+                targetController.damageController.ApplyDamage(charController, CauseType.CharSkill
+                            , (int)skillName, DamageType.Physical
+                            , (skillModel.damageMod),skillModel.skillInclination, false);
         }
 
         public override void ApplyFX2()

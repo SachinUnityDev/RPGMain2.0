@@ -11,8 +11,6 @@ namespace Common
     public class BurnLowDOT : CharStatesBase
     {
         public override CharStateName charStateName => CharStateName.BurnLowDOT;
-        public override CharController charController { get; set; }
-        public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
         public override int castTime { get; protected set; }
 
@@ -49,10 +47,10 @@ namespace Common
                 // deal 4 - 8 fire dmg(instant)
                 // +deal 4 - 8 Fortitude dmg(instnat)
                 charController.damageController.ApplyDamage(charController, CauseType.CharState, (int)charStateName
-                             , DamageType.Fire, UnityEngine.Random.Range(4,9), false);
+                             , DamageType.Fire, UnityEngine.Random.Range(4,9));
 
                 charController.damageController.ApplyDamage(charController, CauseType.CharState, (int)charStateName
-                             , DamageType.FortitudeDmg, UnityEngine.Random.Range(4, 9), false);
+                             , DamageType.FortitudeDmg, UnityEngine.Random.Range(4, 9));
                 //charController.damageController.ApplyDamage(charController, CauseType.CharState, (int)charStateName
                 //             , DamageType.Earth, 25, false);
             }

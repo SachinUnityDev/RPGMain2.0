@@ -7,9 +7,7 @@ namespace Common
 {
     public class Despaired : CharStatesBase
     {
-        public override CharStateName charStateName => CharStateName.Despaired;
-        public override CharController charController { get; set; }
-        public override int charID { get; set; }
+        public override CharStateName charStateName => CharStateName.Despaired;     
         public override StateFor stateFor => StateFor.Mutual;
         public override int castTime { get; protected set; }
         public override float chance { get; set; }
@@ -20,13 +18,11 @@ namespace Common
             CombatEventService.Instance.OnSOT += ApplyRoundFX;
 
             int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                   , charID, AttribName.lightRes, -20, timeFrame, castTime, true);
+                                            , charID, AttribName.lightRes, -20, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
 
-            int immuneBuffID = charController.charStateController
-                  .ApplyImmunityBuff(CauseType.CharState, (int)charStateName
-                     , charID, CharStateName.Inspired, timeFrame, castTime);
-
+            int immuneBuffID = charController.charStateController.ApplyImmunityBuff(CauseType.CharState, (int)charStateName
+                                                , charID, CharStateName.Inspired, timeFrame, castTime);
             allImmunityBuffs.Add(immuneBuffID);
         }
 
@@ -35,8 +31,20 @@ namespace Common
             if (CombatService.Instance.currCharOnTurn.charModel.charID != charID) return;
             charController.ChangeStat(CauseType.CharState, (int)charStateName, charID
                                                                , StatName.fortitude, -5);
+
+            CombatEventService.Instance.OnCharOnTurnSet += PatienceUnClickable;
         }
 
+        void PatienceUnClickable(CharController charController)
+        {
+            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            {
+                if (this.charController.charModel.charID == charController.charModel.charID)
+                {
+                    charController.skillController.UnClickableSkillsByIncli(SkillInclination.Patience);
+                }
+            }
+        }
         public override void StateApplyVFX()
         {
 
@@ -45,6 +53,7 @@ namespace Common
         {
             base.EndState();
             CombatEventService.Instance.OnSOT -= ApplyRoundFX;
+            CombatEventService.Instance.OnCharOnTurnSet -= PatienceUnClickable;
         }
         public override void StateDisplay()
         {          
@@ -54,11 +63,11 @@ namespace Common
             str1 = "-20 Light Res";
             charStateCardStrs.Add(str1);
 
-            //str2 = "30% chance to force use Patience";
-            //charStateModel.charStateCardStrs.Add(str2);
-
-            str2 = "Immune to<style=States> Inspired </style>";
+            str2 = "Can't use Patience Skills";
             charStateCardStrs.Add(str2);
+
+            str3 = "Immune to<style=States> Inspired </style>";
+            charStateCardStrs.Add(str3);
         }
 
     }

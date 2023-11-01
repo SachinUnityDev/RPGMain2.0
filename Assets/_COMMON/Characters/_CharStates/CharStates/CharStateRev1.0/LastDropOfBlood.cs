@@ -1,5 +1,4 @@
 using Combat;
-using Common;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,8 +15,6 @@ namespace Common
     public class LastDropOfBlood : CharStatesBase
     {
         public override CharStateName charStateName => CharStateName.LastDropOfBlood;
-        public override CharController charController { get; set; }
-        public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Heroes;
         public override int castTime { get; protected set; }
 
@@ -25,18 +22,18 @@ namespace Common
         public override float chance { get; set; } = 24f; 
         public override void StateApplyFX()
         {
-            chances = new List<float>() { 12f, chance, 64f };
+            chances = new List<float>() { 60f, chance, 100-(chance +60) };
             switch (chances.GetChanceFrmList())
             {
                 case 0:
-                    CharService.Instance.On_CharDeath(charController);              
+                    charController.ChangeStat(CauseType.CharState, (int)charStateName, charController.charModel.charID
+                                                                               , StatName.fortitude, -6f);                    
                     break;
                 case 1:
                     charController.damageController.CheatDeath(); 
                     break;
                 case 2:
-                    charController.ChangeStat(CauseType.CharState, (int)charStateName, charController.charModel.charID
-                                                                               , StatName.fortitude, -6f);
+                    CharService.Instance.On_CharDeath(charController);
                     break;
                 default:
                     break;
@@ -51,7 +48,14 @@ namespace Common
 
         public override void StateDisplay()
         {
-            
+            str0 = "Upon recieving damage:";
+            charStateCardStrs.Add(str0);
+            str1 = "May lose Fortitude";
+            charStateCardStrs.Add(str1);
+            str2 = "May cheat death";
+            charStateCardStrs.Add(str2);
+            str3 = "May die";
+            charStateCardStrs.Add(str3);
         }
     }
 }

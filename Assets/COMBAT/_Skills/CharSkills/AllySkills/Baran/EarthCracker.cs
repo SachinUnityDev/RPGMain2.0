@@ -47,7 +47,7 @@ namespace Combat
         public override void ApplyFX1()
         {
             targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Physical, skillModel.damageMod
-                    , false);
+                    , skillModel.skillInclination);
         }
 
         public override void ApplyFX2()
@@ -55,7 +55,8 @@ namespace Combat
             for (int i = 0; i < CombatService.Instance.colTargetDynas.Count; i++)
             {
                 CharController target = CombatService.Instance.colTargetDynas[i].charGO.GetComponent<CharController>();
-                target.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Earth, damageExtra, false);
+                target.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
+                                        , DamageType.Earth, damageExtra, skillModel.skillInclination);
             }
         }
 

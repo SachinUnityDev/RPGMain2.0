@@ -45,6 +45,9 @@ namespace Combat
             dyna.charGO.transform.DOMove(targetPos, charSpeed, false);
             GridService.Instance.UpdateNewPosInDyna(dyna, targetCell);
             GridService.Instance.gridView.CharOnTurnHL(dyna);
+
+            GridService.Instance.On_PosChg(dyna, targetCell);
+
         }
 
         public void SwapPos (DynamicPosData targetDyna, DynamicPosData selectDyna)

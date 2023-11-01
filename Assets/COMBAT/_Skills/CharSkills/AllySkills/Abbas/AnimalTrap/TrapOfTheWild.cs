@@ -31,8 +31,8 @@ namespace Combat
         }
         public override void ApplyFX1()
         {
-            targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName, skillModel.dmgType[0]
-                                                                                                   , skillModel.damageMod, true);
+            targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
+                            , skillModel.dmgType[0], skillModel.damageMod, skillModel.skillInclination, true);
         }
 
         public override void ApplyFX2()

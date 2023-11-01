@@ -4,7 +4,7 @@ using UnityEngine;
 using Common;
 using System;
 using DG.Tweening;
-
+using System.Linq;
 
 namespace Combat
 {
@@ -20,27 +20,28 @@ namespace Combat
 
         [Header("Cheated Death")]
         public int cheatedDeathCount = 0;
-        public int MAX_ALLOWED_CHEATDEATH = 1; 
+        public int MAX_ALLOWED_CHEATDEATH = 1;
 
 
+        float dmgMin, dmgMax;
         [Header("Damage Model")]
         public DmgModel dmgModel;
 
-        //bool isCritical = false;
-        //bool isFeeble = false; 
+       
+
         void Start()
         {
             charController = GetComponent<CharController>();
             Init();
         }
 
-        public void Init()
+        public void Init()  /// OnSOC 
         {
             dmgModel = new DmgModel();
             cheatedDeathCount = 0;
             MAX_ALLOWED_CHEATDEATH = 1;
         }
-        public bool HitChance()  // only for physical 
+        public bool HitChance()  // only for physical // for Dodge   
         {
             // Wrong Hit apply same damage to wrong target           
 
@@ -74,7 +75,6 @@ namespace Combat
             {
                 hitChance= 12f;
             }
-
             return hitChance.GetChance();
         }
         void LuckCheck()
@@ -110,6 +110,8 @@ namespace Combat
             if (strikeType == StrikeType.Crit)
             {
                 dmgNew = dmg * 1.6f;
+                
+
             }
             else if (strikeType == StrikeType.Feeble)
             {
@@ -125,25 +127,47 @@ namespace Combat
         }
 
         public void ApplyDamage(CharController striker, CauseType causeType, int causeName
-                                    , DamageType _dmgType, float dmgPercentORVal
-                                    , bool ignoreArmorNRes = false, bool isTrueStrike = false)
+                                    , DamageType _dmgType, float dmgPercentORVal, SkillInclination skillInclination = SkillInclination.None, bool ignoreArmorNRes = false
+                                    , bool isTrueStrike = false)
         {
             this.striker = striker;
             AttackType attackType =
                             SkillService.Instance.GetSkillAttackType((SkillNames)causeName);
+            // immune to skills Incli
+
+            if (dmgModel.allImmune2Skills.Any(t => t == skillInclination))
+                return; 
+            
+            
             // is dodge 
-            if (!isTrueStrike)
-                if (_dmgType == DamageType.Physical && HitChance())
+
+            if(!(causeType == CauseType.ThornsAttack))
+            {
+                if (!isTrueStrike)
+                    if (skillInclination == SkillInclination.Physical && HitChance())
+                    {
+                        strikeType = StrikeType.Dodged;
+                        DmgAppliedData dmgApplied = new DmgAppliedData(striker, causeType, causeName
+                            , _dmgType, 0f, strikeType, charController, attackType);
+                        CombatEventService.Instance.On_DmgApplied(dmgApplied);
+                        CombatEventService.Instance.On_Dodge(dmgApplied);
+                        return;
+                    }
+
+                if (skillInclination == SkillInclination.Magical)
                 {
-                    strikeType = StrikeType.Dodged;
-                    CombatEventService.Instance.On_DmgApplied(new DmgAppliedData(striker, causeType, causeName
-                        , _dmgType, 0f, strikeType, charController, attackType));
-                    return;
+                    if (FocusCheck())
+                    {
+                        ApplyMisFire();
+                    }
                 }
+            }
+            
+
 
             // ask strike controller do you have a extra dmg buff against me 
             float damageAlt = striker.GetComponent<StrikeController>()
-                        .GetDmgAlt(charController.charModel, attackType, _dmgType ); 
+                                .GetDmgAlt(charController.charModel, attackType, _dmgType ); 
                 
             AttribData dmgSDMin = striker.GetAttrib(AttribName.dmgMin);
             AttribData dmgSDMax = striker.GetAttrib(AttribName.dmgMax);
@@ -152,6 +176,7 @@ namespace Combat
             float dmg = (float)(UnityEngine.Random.Range(dmgSDMin.currValue, dmgSDMax.currValue) * (percentDmg / 100f));
             int strikerID = striker.charModel.charID;
            // Debug.Log("MIN AND MAX RANGE " + dmgSDMin.currValue + dmgSDMax.currValue + "DAMAGE " + dmg);
+
 
             switch (_dmgType)
             {
@@ -249,7 +274,6 @@ namespace Combat
                     break;
                 case DamageType.StaminaDmg: // no resistance, no armor etc ok no substractions for stamina , Fort and Pure
                     charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.stamina, -dmgPercentORVal);
-
                     break;
                 //case DamageType.HealthDmg:
                 //    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatsName.health, -dmgPercentVal);
@@ -266,7 +290,7 @@ namespace Combat
             StatData statData = charController.GetStat(StatName.health);
             float healVal = ((val / 100) * statData.maxLimit);
 
-            ApplyDamage(charController, causeType, causeName, DamageType.Heal, healVal); 
+            ApplyDamage(charController, causeType, causeName, DamageType.Heal, healVal, SkillInclination.Heal); 
         }
 
         // Striking Crit and feeble 
@@ -365,9 +389,79 @@ namespace Combat
                 cheatedDeathCount++;
             }
         }
+
+        #region FOCUS CHK AND MISFIRE
+
+        public bool FocusCheck()// Magical only .. 
+        {
+            // get focus statChance Data of performers focus 
+            // depending on that decide ..TO be decided 
+            float focusVal = charController.GetAttrib(AttribName.focus).currValue;
+            float focusChance = 100f - charController.GetStatChance(AttribName.focus, focusVal);
+
+            if (charController.charStateController.HasCharState(CharStateName.Confused))
+            {
+                return 50f.GetChance();
+            }
+            else
+            {
+                return focusChance.GetChance();
+            }
+        }
+        public void ApplyMisFire()
+        {
+            // SKIP AKILL APPLY DMG 
+            SkillController1 skillController = SkillService.Instance.currSkillController;
+
+            StrikeTargetNos strikeNos = skillController.allSkillBases.Find(t => t.skillName
+                                                == SkillService.Instance.currSkillName).strikeNos;
+            if (strikeNos == StrikeTargetNos.Single)
+            {
+                int netTargetCount = CombatService.Instance.mainTargetDynas.Count;
+                if (netTargetCount > 1)
+                {
+                    CombatService.Instance.mainTargetDynas.Remove(SkillService.Instance.currentTargetDyna);
+                    int random = UnityEngine.Random.Range(0, netTargetCount - 1);
+                    SkillService.Instance.currentTargetDyna = CombatService.Instance.mainTargetDynas[random];
+                }
+                else
+                {
+                    ReduceDmgPercent();
+                    SkillService.Instance.PostSkillApply += RevertDamageRange;
+                }
+            }
+            else
+            {
+                ReduceDmgPercent();
+                SkillService.Instance.PostSkillApply += RevertDamageRange;
+            }
+        }
+
+        void ReduceDmgPercent()
+        {
+            int charID = charController.charModel.charID;
+            AttribData dmgMin1 = charController.GetAttrib(AttribName.dmgMin);
+            AttribData dmgMax1 = charController.GetAttrib(AttribName.dmgMax);
+            dmgMin = dmgMin1.currValue;
+            dmgMax = dmgMax1.currValue;
+            float chgMin = 0.2f * this.dmgMin;
+            float chgMax = 0.2f * dmgMax;
+
+            charController.ChangeAttrib(CauseType.StatChecks, (int)StatChecks.FocusCheck, charID
+                , AttribName.dmgMin, chgMin);
+            charController.ChangeAttrib(CauseType.StatChecks, (int)StatChecks.FocusCheck, charID
+                , AttribName.dmgMin, chgMax);
+
+        }
+        void RevertDamageRange()
+        {
+            charController.GetAttrib(AttribName.dmgMin).currValue = dmgMin;
+            charController.GetAttrib(AttribName.dmgMin).currValue = dmgMax;
+        }
+
+
+        #endregion
     }
-
-
     #region DATA CLASSES
     public class DmgAppliedData   /// Data broadcasted by target on being hit
     {
@@ -397,3 +491,20 @@ namespace Combat
 }
 
 
+//public bool AccuracyCheck()// Physical 
+//{
+//    float accVal = charController.GetAttrib(AttribName.acc).currValue;
+//    float accChance = charController.GetStatChance(AttribName.acc, accVal);
+
+//    if (accVal == 0)
+//    { // self inflicted
+
+//        int buffId = charController.charStateController.ApplyCharStateBuff(CauseType.CharState, (int)CharStateName.Confused
+//             , charController.charModel.charID, CharStateName.Blinded, TimeFrame.Infinity, -1);
+//        return false;// miss the target .. i.e not going to hit/FX anyone.. 
+//    }
+//    else
+//    {
+//        return accChance.GetChance();
+//    }
+//}

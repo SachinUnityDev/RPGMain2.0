@@ -15,7 +15,7 @@ namespace Common
         public CharStateSO1 GetCharStateSO(CharStateName charStateName)
         {
             int index = allCharStateSO.FindIndex(t=>t.charStateName == charStateName);
-            if(index == -1)
+            if(index != -1)
             {
                 return allCharStateSO[index];   
             }

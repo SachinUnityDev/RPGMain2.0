@@ -35,15 +35,17 @@ namespace Combat
             SkillService.Instance.OnSkillUsed += AnimalTrapRegainAP;
             CombatEventService.Instance.OnEOT += OnEOT;
         }
-        void AnimalTrapRegainAP(SkillEventData skilleventData)
+        bool AnimalTrapRegainAP(SkillEventData skillEventData)
         {
+            if (skillEventData.strikerController.charModel.charID != charID) return true;
             if (50f.GetChance())
             {
-                if (skilleventData.skillName == SkillNames.AnimalTrap)
+                if (skillEventData.skillName == SkillNames.AnimalTrap)
                 {
                     RegainAP();
                 }
             }
+            return true;
         }
         void OnEOT()
         {

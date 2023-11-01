@@ -14,19 +14,11 @@ namespace Common
         public CharStateType charStateType;
         public CharStateBehavior charStateBehavior;
 
-        //[Header("CastTime")]
-        //public TimeFrame timeFrame;
-        //public int minCastTime;
-        //public int maxCastTime;
-
         [Header("Description")]
         public string CharStateNameStr = "";
 
         [Header("Sprites")]
         public Sprite iconSprite;
-
-        [TextArea(5, 10)]
-        public List<string> allLines = new List<string>();
         public GameObject CharStateFX;
     }
 }

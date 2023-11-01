@@ -87,11 +87,8 @@ namespace Combat
             if(isPusherSelect)
                 if (CombatService.Instance.mainTargetDynas.Count > 0)
                     CombatService.Instance.mainTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>().damageController
-                        .ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Physical, skillModel.damageMod, false, true));
-
-
-
-
+                        .ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Physical
+                        , skillModel.damageMod, skillModel.skillInclination,false, true));
         }
 
         public override void ApplyFX2()

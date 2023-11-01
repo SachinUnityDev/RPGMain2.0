@@ -5,13 +5,10 @@ using Combat;
 
 namespace Common
 {
-
     public class Flatfooted : CharStatesBase
     {
         //-3 Haste
-        public override CharStateName charStateName => CharStateName.FlatFooted; 
-        public override CharController charController { get; set; }
-        public override int charID { get; set; }
+        public override CharStateName charStateName => CharStateName.FlatFooted;    
         public override StateFor stateFor => StateFor.Mutual;
         public override int castTime { get; protected set; }
         public override float chance { get; set; }
@@ -20,8 +17,14 @@ namespace Common
             int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
              , charID, AttribName.haste, -3, timeFrame, castTime, true);
             allBuffIds.Add(buffID);
-        }
 
+            SkillService.Instance.ignoreHasteChk = true; 
+        }
+        public override void EndState()
+        {
+            base.EndState();
+            SkillService.Instance.ignoreHasteChk = false;
+        }
         public override void StateApplyVFX()
         {
             

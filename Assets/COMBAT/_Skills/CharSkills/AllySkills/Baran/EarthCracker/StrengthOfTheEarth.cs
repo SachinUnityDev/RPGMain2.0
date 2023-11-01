@@ -59,7 +59,8 @@ namespace Combat
         {
             if (targetController != null)
                 targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
-                                                        , DamageType.Physical, skillModel.damageMod, true, false);
+                                                     , DamageType.Physical, skillModel.damageMod, 
+                                                      skillModel.skillInclination, true, false);
         }
 
         public override void ApplyFX2()

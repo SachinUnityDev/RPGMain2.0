@@ -27,8 +27,7 @@ namespace Combat
         void Start()
         {
             charController = GetComponent<CharController>();
-            CombatEventService.Instance.OnEOR1 += ResetValues; 
-            
+            CombatEventService.Instance.OnEOR1 += ResetValues;
         }
 
         private void OnDisable()
@@ -36,54 +35,68 @@ namespace Combat
             CombatEventService.Instance.OnEOR1 -= ResetValues;
         }
         
+  
         void ResetValues(int roundNo)
         {
-            prevTurn = -1; 
+            prevTurn = -5; 
         }
     
         public void Init()
         {
 
         }
-        public int SetActionPts()
+        public void SetActionPts(CharController _charController)
         {
             // get haste val 
-            CharController currCharOnTurn = CombatService.Instance.currCharOnTurn;
-            if (charController.charModel.charID != currCharOnTurn.charModel.charID)
-                return 0;
+            if (_charController.charModel.charID != this.charController.charModel.charID)
+                return;
+            MoraleChk(_charController);
             if (prevTurn == CombatService.Instance.currentTurn)
-                return actionPts; 
+                return;
+            prevTurn = CombatService.Instance.currentTurn;
 
-            prevTurn= CombatService.Instance.currentTurn;
-            actionPts= 0;
-            AttribData haste_AttribData = currCharOnTurn.GetAttrib(AttribName.haste);
-            int hasteBonus = (int)haste_AttribData.currValue / 6; 
-            actionPts = 1+hasteBonus;
-            Debug.Log(" Action Points" + actionPts); 
             // MORALE CHECK
-            AttribData moraleData = CombatService.Instance.currCharOnTurn.GetAttrib(AttribName.morale);
-            StatsVsChanceSO statChanceSO =  CharService.Instance.statChanceSO;
-            float chance = (float)statChanceSO.GetChanceForStatValue(AttribName.morale, (int)moraleData.currValue);
-            if (chance.GetChance())
-            {
-                if (moraleData.currValue < 6)
-                    --actionPts;
-                else if (moraleData.currValue > 6)
-                    ++actionPts;
-            }          
+            ++actionPts; 
             if (actionPts > MAX_VAL_FOR_ACTION_PTS)
-                    actionPts = MAX_VAL_FOR_ACTION_PTS; 
+                    actionPts = MAX_VAL_FOR_ACTION_PTS;
+            Debug.Log(" charName" + _charController.charModel.charName + "action"+ actionPts);
+        }
+        void MoraleChk(CharController charController)
+        {
+            AttribData moraleData = charController.GetAttrib(AttribName.morale);
+            StatsVsChanceSO statChanceSO = CharService.Instance.statChanceSO;
+            float chance = (float)statChanceSO.GetChanceForStatValue(AttribName.morale, (int)moraleData.currValue);
+            
+                if (moraleData.currValue < 6)
+                {
+                    if (chance.GetChance())
+                    {
+                        CombatEventService.Instance.On_MoraleCheck(charController, false);
+                        if (charController.charModel.orgCharMode == CharMode.Ally)
+                            --actionPts;
+                    }
 
-            return actionPts;
+                }
+                else if (moraleData.currValue > 6)
+                {
+                    if (chance.GetChance())
+                    {
+                        CombatEventService.Instance.On_MoraleCheck(charController, true);
+                        if (charController.charModel.orgCharMode == CharMode.Ally)
+                            ++actionPts;
+                    }
+                }            
         }
 
-        public void UpdateActionPts(SkillModel skillModel)
+        public void UpdateActionPts(SkillModel skillModel, CharMode charMode)
         {
             if (skillModel.skillType == SkillTypeCombat.Retaliate)
-                return; 
+                return;
+            --actionPts;
+            if (charMode != CharMode.Ally) return; // no action pts view for the enemy
             canvas = FindObjectOfType<Canvas>();
             actionPtsView = canvas.GetComponentInChildren<ActionPtsView>(true);
-            --actionPts; 
+      
             actionPtsView.UpDateActionsPtsView(actionPts);
         }
         public bool IfSingleInRow(GameObject _charGO)
@@ -104,3 +117,6 @@ namespace Combat
 
 
 }
+//AttribData haste_AttribData = currCharOnTurn.GetAttrib(AttribName.haste);
+//int hasteBonus = (int)haste_AttribData.currValue / 6; 
+//actionPts = 1+hasteBonus;

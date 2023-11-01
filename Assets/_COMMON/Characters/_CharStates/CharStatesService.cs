@@ -11,28 +11,28 @@ using Combat;
 namespace Common
 {
 
-    public class CharStateData  // braodcast data 
-    {
-       public CharNames causeByCharName;
-       public int causeCharID; 
-       public CauseType causeType; 
-       public int causeID;
-       public CharStateModel charStateModel; // effected char Inside this model
+    //public class CharStateData  // braodcast data 
+    //{
+    //   public CharNames causeByCharName;
+    //   public int causeCharID; 
+    //   public CauseType causeType; 
+    //   public int causeID;
+    //   public CharStateModel charStateModel; // effected char Inside this model
 
-        public CharStateData(CharNames causeByCharName, int causeCharID, CauseType causeType, int causeID
-           , CharStateModel charStateModel)
-        {
-            this.causeByCharName = causeByCharName;
-            this.causeCharID = causeCharID;
-            this.causeType = causeType;
-            this.causeID = causeID;
-            this.charStateModel = charStateModel; 
-        }
-        public CharStateData()
-        {
+    //    public CharStateData(CharNames causeByCharName, int causeCharID, CauseType causeType, int causeID
+    //       , CharStateModel charStateModel)
+    //    {
+    //        this.causeByCharName = causeByCharName;
+    //        this.causeCharID = causeCharID;
+    //        this.causeType = causeType;
+    //        this.causeID = causeID;
+    //        this.charStateModel = charStateModel; 
+    //    }
+    //    public CharStateData()
+    //    {
 
-        }
-    }
+    //    }
+    //}
 
     //public class CharStateInstance
     //{

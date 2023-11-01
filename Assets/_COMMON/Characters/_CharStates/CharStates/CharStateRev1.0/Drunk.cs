@@ -12,8 +12,6 @@ namespace Common
         //and lose fortitude chances on Last Drop of Blood effects)
 
         public override CharStateName charStateName => CharStateName.Drunk;       
-        public override CharController charController { get; set; }
-        public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Heroes;
         public override int castTime { get; protected set; }
         public override float chance { get; set; }

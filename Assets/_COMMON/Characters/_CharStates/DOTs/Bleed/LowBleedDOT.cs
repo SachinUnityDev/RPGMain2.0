@@ -9,8 +9,6 @@ namespace Common
     public class LowBleedDOT : CharStatesBase
     {
         public override CharStateName charStateName => CharStateName.BleedLowDOT;
-        public override CharController charController { get; set; }
-        public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
         public override int castTime { get; protected set; }
 
@@ -127,46 +125,3 @@ namespace Common
 
 }
 
-//int timeElapsed = 0;
-//int netDOT = 2;
-//CharController charController;
-//public override int castTime { get => netDOT; set => base.castTime = value; }
-
-//public override CharStateName charStateName => CharStateName.BleedLowDOT;
-//public override StateFor stateFor => StateFor.Mutual;
-//public override float dmgPerRound => 2.0f;
-
-//// Start is called before the first frame update
-//void Start()
-//{
-//    charController = GetComponent<CharController>();
-//    charID = charController.charModel.charID;
-//    CombatEventService.Instance.OnEOR += TickState;
-
-//}
-
-
-//protected void TickState()
-//{
-//    timeElapsed++;
-
-//    //CharacterController characterController = gameObject.GetComponent<CharacterController>();
-
-//    StatData statData = charController.GetStat(StatsName.armor);
-//    if (statData.currValue > (statData.minRange + 5))
-//        charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.health, Mathf.RoundToInt(-2 / 2));
-//    else
-//        charController.ChangeStat(CauseType.CharState, (int)charStateName, charID, StatsName.health, -2);
-
-//    if (timeElapsed >= castTime)
-//    {
-//        EndState();
-//    }
-//}
-
-//public override void EndState()
-//{
-//    charController.charModel.InCharStatesList.Remove(charStateName);
-//    CombatEventService.Instance.OnEOR -= TickState;
-//    Destroy(this);
-//}

@@ -8,8 +8,9 @@ namespace Common
 {
     public class CharStateModel
     {
+        public int charStateID;
+
         public CharStateName charStateName;
-        public Sprite charStateSprite;
         public CharStateBehavior statebehavior;
         public StateFor stateFor;
         public CharStateType stateType;
@@ -17,14 +18,14 @@ namespace Common
         public int castTime; //-5 for NA
         public GameObject CharStateFX;
 
-        [Header("NOT TO FILLED IN INSPECTOR")]
-        public int timeRemaining;
-        public int startRound = 0;
+        public CharStateModel(CharStateSO1 charStateSO, int charStateID)
+        {
+            charStateName = charStateSO.charStateName;
+            statebehavior = charStateSO.charStateBehavior;
+            stateFor = charStateSO.stateFor;
+            stateType = charStateSO.charStateType;
 
-        public CharNames effectedChar;
-        public int effectedCharID;
-
-        public List<string> charStateCardStrs = new List<string>();
-        public int charStateID;
+            this.charStateID = charStateID; 
+        }
     }
 }

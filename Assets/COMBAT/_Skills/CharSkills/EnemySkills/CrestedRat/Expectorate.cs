@@ -70,10 +70,8 @@ namespace Combat
 
         public override void PopulateAITarget()
         {
-            PopulateTargetPos();
-            SkillService.Instance.currentTargetDyna = null;
-            DynamicPosData tempTarget = null;
-            DynamicPosData randomTarget = null; 
+          base.PopulateAITarget();
+          if(SkillService.Instance.currentTargetDyna == null)  
             foreach (CellPosData cell in skillModel.targetPos)
             {
                 DynamicPosData dyna = GridService.Instance.GetDynaAtCellPos(cell.charMode, cell.pos);
@@ -83,26 +81,26 @@ namespace Combat
                 {
                     if (targetCtrl.charStateController.HasCharDOTState(CharStateName.BleedLowDOT))
                     {
-                        tempTarget= dyna;
+                        tempDyna= dyna;
                       
                     }
                     else if (targetCtrl.GetAttrib(AttribName.earthRes).currValue < 25f)
                     {
-                        tempTarget = dyna;
+                        tempDyna = dyna;
                     }
                     else
                     {
-                        randomTarget= dyna;
+                        randomDyna= dyna;
                     }
-                    if (tempTarget != null)
+                    if (tempDyna != null)
                     {
-                        SkillService.Instance.currentTargetDyna = tempTarget; break;
+                        SkillService.Instance.currentTargetDyna = tempDyna; break;
                     }
                 }
             }
             if (SkillService.Instance.currentTargetDyna == null)
             {
-                SkillService.Instance.currentTargetDyna = randomTarget; 
+                SkillService.Instance.currentTargetDyna = randomDyna; 
             }
         }
 

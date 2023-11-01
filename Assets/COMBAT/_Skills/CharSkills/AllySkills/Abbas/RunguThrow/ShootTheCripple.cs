@@ -48,10 +48,10 @@ namespace Combat
             
             if (GridService.Instance.IsTargetInBackRow(targetDyna))
                 targetController.damageController.ApplyDamage(charController, CauseType.CharSkill,
-                    (int)skillName, DamageType.Physical, (skillModel.damageMod + 40f), false, isTrueStrike);
+                    (int)skillName, DamageType.Physical, (skillModel.damageMod + 40f), skillModel.skillInclination, false, isTrueStrike);
             else
                 targetController.damageController.ApplyDamage(charController, CauseType.CharSkill
-                    , (int)skillName, DamageType.Physical, (skillModel.damageMod), false, isTrueStrike);
+                    , (int)skillName, DamageType.Physical, (skillModel.damageMod), skillModel.skillInclination,false, isTrueStrike);
 
         }
 

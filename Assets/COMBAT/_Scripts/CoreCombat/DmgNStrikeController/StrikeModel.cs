@@ -21,32 +21,29 @@ namespace Combat
         public ThornBuffData(int thornID, DamageType damageType, float thornsMin, float thornsMax
                                     , TimeFrame timeframe, int castTime)
         {
-            this.thornID = thornID;
-            
+            this.thornID = thornID;            
             this.damageType = damageType;
             this.thornsMin = thornsMin;
             this.thornsMax = thornsMax;
             this.timeFrame = timeframe; 
-            this.castTime = castTime;
+            this.castTime = castTime;            
         }
     }
     public class RetaliateBuffData
     {
         public int retaliateID = -1;
-        public DamageType damageType;  // damage attackers will be reverted by
-        public float dmgVal; 
-        public int rdCount;
+        CauseType causeType;
+        int causeName; 
         public TimeFrame timeFrame = TimeFrame.None;
         public int currentTime = -1;
         public int castTime = 0;
 
-        public RetaliateBuffData(int retaliateID, DamageType damageType, float dmgVal
-                                    , TimeFrame timeframe, int castTime)
+        public RetaliateBuffData(int retaliateID, CauseType causeType, int causeName, TimeFrame timeFrame, int castTime)
         {
             this.retaliateID = retaliateID;
-            this.damageType = damageType;
-            this.dmgVal = dmgVal;
-            this.timeFrame = timeframe;
+            this.causeType = causeType; 
+            this.causeName = causeName;
+            this.timeFrame = timeFrame;
             this.castTime = castTime;
         }
     }
@@ -68,10 +65,5 @@ namespace Combat
                 allThornsData.RemoveAt(index);
             }
         }
-    
-
-
-
-
     }
 }

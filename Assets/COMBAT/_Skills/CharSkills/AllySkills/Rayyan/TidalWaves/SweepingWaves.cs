@@ -71,7 +71,7 @@ namespace Combat
             AddTargetPos();
             CombatService.Instance.mainTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>().damageController
                     .ApplyDamage(charController,CauseType.CharSkill, (int)skillName
-                                        , DamageType.Water, skillModel.damageMod, false));
+                    , DamageType.Water, skillModel.damageMod, skillModel.skillInclination));
 
             Debug.Log("FX1" + desc);
 

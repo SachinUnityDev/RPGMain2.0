@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Combat;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,8 +10,6 @@ namespace Common
     public class FeebleMinded : CharStatesBase
     {
         public override CharStateName charStateName => CharStateName.Feebleminded;
-        public override CharController charController { get; set; }
-        public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
         public override int castTime { get; protected set; }
         public override float chance { get; set; }
@@ -35,7 +34,27 @@ namespace Common
             int immuneBuffID = charController.charStateController
                .ApplyImmunityBuff(CauseType.CharState, (int)charStateName
                   , charID, CharStateName.LuckyDuck, timeFrame, castTime);
-            allImmunityBuffs.Add(immuneBuffID); 
+            allImmunityBuffs.Add(immuneBuffID);
+            CombatEventService.Instance.OnCharOnTurnSet += BuffUnClickable;
+
+        }
+
+        void BuffUnClickable(CharController charController)
+        {
+            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            {
+                if (this.charController.charModel.charID == charController.charModel.charID)
+                {
+                    charController.skillController.UnClickableSkillsByIncli(SkillInclination.Buff);
+                }
+            }
+        }
+
+        public override void EndState()
+        {
+            base.EndState();
+            CombatEventService.Instance.OnCharOnTurnSet -= BuffUnClickable;
+
         }
         public override void StateApplyVFX()
         {
@@ -43,9 +62,9 @@ namespace Common
         }
         public override void StateDisplay()
         {
-            str0 = "Can't use Buff or Heal skills";
+            str0 = "Can't use Buff Skills";
             charStateCardStrs.Add(str0);
-            str1 = "-20 Cold Res";
+            str1 = "-20 Cold Resistances";
             charStateCardStrs.Add(str1);
             str2 = "Immune to<style=States> Lucky Duck</style>";
             charStateCardStrs.Add(str2);

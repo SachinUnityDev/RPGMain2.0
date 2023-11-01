@@ -40,7 +40,7 @@ namespace Interactables
             StatData hpData = charController.GetStat(StatName.health);
             float val = (Random.Range(40f, 60f) * hpData.maxLimit) / 100f;
             charController.damageController
-                .ApplyDamage(charController, CauseType.Potions, (int)potionName, DamageType.Heal, val, false);
+                .ApplyDamage(charController, CauseType.Potions, (int)potionName, DamageType.Heal, val);
 
         }
         public void ApplyConsumableFX()

@@ -1,3 +1,4 @@
+using Combat;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,8 +11,6 @@ namespace Common
     {
         //Immune to Magical and Physical dmg(can suffer Pure, Stamina or Fortitude dmgs) -3 Haste
         public override CharStateName charStateName => CharStateName.Invulnerable;     
-        public override CharController charController { get; set; }
-        public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
         public override int castTime { get; protected set; }
         public override float chance { get; set; }
@@ -22,6 +21,11 @@ namespace Common
             allBuffIds.Add(buffID);
 
             // dmg controller magic and physical block
+            charController.damageController.dmgModel
+                .allImmune2Skills.AddRange(new List<SkillInclination>() { SkillInclination.Magical, SkillInclination.Physical });
+
+            charController.charStateController.ApplyImmunityBuff(CauseType.CharState, (int)charStateName
+                                            , charID, CharStateName.Guarded, timeFrame, castTime); 
         }
 
         public override void StateApplyVFX()
@@ -31,11 +35,15 @@ namespace Common
 
         public override void StateDisplay()
         {
-            str0 = "Immune to Magical and Physical Dmg";
+            str0 = "Immune to Magical and Physical Skills";
             charStateCardStrs.Add(str0);
 
             str1 = "-3 Haste";
             charStateCardStrs.Add(str1);
+
+
+            str2 = "Immune to Guarded";
+            charStateCardStrs.Add(str2);
         }
     }
 }

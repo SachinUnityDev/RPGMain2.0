@@ -30,6 +30,12 @@ namespace Combat
         public abstract StrikeTargetNos strikeNos { get; }
         public abstract string desc { get;  }
         public abstract float chance { get; set; }
+
+        // for enemy target selection
+        public DynamicPosData tempDyna = null;
+        protected DynamicPosData randomDyna = null;
+
+
         #endregion
 
         #region APPLY and HOVER
@@ -140,7 +146,7 @@ namespace Combat
         public virtual void PreApplyFX()
         {
             // to be used to get the FX from FX Service
-
+            
         }
 
         public virtual void PostApplyFX()
@@ -176,8 +182,27 @@ namespace Combat
 
         # region AI Controls
 
-        public abstract void PopulateAITarget();  // last step in target selection 
+        public virtual void PopulateAITarget()  // last step in target selection 
+        {
+            PopulateTargetPos();
+            SkillService.Instance.currentTargetDyna = null;
+            if (strikeNos == StrikeTargetNos.Single)
+            {
+                foreach (CellPosData cell in skillModel.targetPos)
+                {
+                    DynamicPosData dyna = GridService.Instance.GetDynaAtCellPos(cell.charMode, cell.pos);
+                    CharController targetCtrl = dyna.charGO.GetComponent<CharController>();
 
+                    if (dyna != null)
+                    {
+                        if (targetCtrl.charStateController.HasCharDOTState(CharStateName.Hexed))
+                        {
+                            SkillService.Instance.currentTargetDyna = dyna; 
+                        }
+                    }
+                }
+            }
+        }
         #endregion 
 
         #region SKILL CHECKS

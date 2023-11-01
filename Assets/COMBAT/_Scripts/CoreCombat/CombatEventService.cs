@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Common;
-using System.Linq; 
+using System.Linq;
+using Interactables;
 
 namespace Combat
 {
@@ -30,25 +31,22 @@ namespace Combat
         public event Action<bool> OnCombatLoot;
         public event Action OnCombatEnd;
 
-        public event Action<CharController> OnDodge; // from target perspective
+        // Strike FX 
+
+        public event Action<DmgAppliedData> OnDodge; // from target perspective
         public event Action<CharController> OnMisfire; // from striker perspective
 
-        public event Action<CharController> OnReceivingCrit;
-        public event Action<CharController> OnDeliveringCrit; 
+        public event Action<CharController> OnHasteCheck;
+        public event Action<CharController, bool> OnMoraleCheck; 
 
-        public event Action<CharController> OnReceivingFeeble;
-        public event Action<CharController> OnDeliveringFeeble;
-
-        public event Action<CharController> OnMoraleAction;
-        public event Action<CharController> OnLosingAction;
-
-        public event Action<CharController> OnHasteCheck; 
 
         public event Action OnCharClicked;
         public event Action OnCharHovered;
 
         public event Action <DynamicPosData, CellPosData> OnTargetClicked;
-        
+
+        public event Action<CharController, PotionNames> OnPotionConsumedInCombat; 
+
 
         // Start is called before the first frame update
         void Start()
@@ -163,7 +161,6 @@ namespace Combat
                 return true;
             else 
                return false; 
-
         }
         public void On_DmgApplied(DmgAppliedData dmgAppliedData)
         {
@@ -182,7 +179,27 @@ namespace Combat
             if (_targetDyna != null)  // this happens only in move and remote skills{when applied on tile} 
             {
                 Debug.Log("Target Dyna " + _targetDyna.charGO.GetComponent<CharController>().charModel.charName);
-                CombatService.Instance.currTargetClicked = _targetDyna.charGO.GetComponent<CharController>();
+                CharController targetController = _targetDyna.charGO.GetComponent<CharController>();
+                CombatService.Instance.currTargetClicked = targetController;
+                
+                if (targetController.charStateController.HasCharState(CharStateName.Cloaked)
+                  && CombatService.Instance.mainTargetDynas.Count == 1)
+                {
+                    return; 
+                }
+                if (targetController.charStateController.HasCharState(CharStateName.Guarded)
+                   && CombatService.Instance.mainTargetDynas.Count ==1)
+                {                
+                    CharStateBuffData charStateBuffData = targetController.charStateController
+                                                    .GetCharStateBuffData(CharStateName.Guarded);
+
+                    int guardingCharID = charStateBuffData.charStateModData.causeByCharID; 
+                    CharController charController = CharService.Instance
+                                                        .GetCharCtrlWithCharID(guardingCharID);
+                    DynamicPosData newTargetDyna = GridService.Instance.GetDyna4GO(charController.gameObject);
+
+                    _targetDyna = newTargetDyna; 
+                }
                 OnTargetClicked?.Invoke(_targetDyna, null);
             }
             else
@@ -235,6 +252,30 @@ namespace Combat
                 Debug.Log("SOR Subs" + del.Method.Name);
             }
         }
+
+
+        #region STRIKE FX EVENTS
+
+        public void On_Dodge(DmgAppliedData dmgAppliedData)
+        {
+            OnDodge?.Invoke(dmgAppliedData);
+        }
+
+
+
+        #endregion
+
+        #region Checks Broadcast
+
+        public void On_HasteCheck(CharController charController)
+        {
+            OnHasteCheck?.Invoke(charController);   
+        }
+        public void On_MoraleCheck(CharController charController, bool posChk)
+        {
+            OnMoraleCheck?.Invoke(charController, posChk);
+        }
+        #endregion
 
         // Update is called once per frame
         void Update()

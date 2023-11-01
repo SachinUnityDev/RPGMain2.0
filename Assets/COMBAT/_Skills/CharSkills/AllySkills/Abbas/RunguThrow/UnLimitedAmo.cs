@@ -35,7 +35,8 @@ namespace Combat
         {
             if(targetController)
                 targetController.damageController.ApplyDamage(charController, CauseType.CharSkill
-                  , (int)skillName, DamageType.StaminaDmg, UnityEngine.Random.Range(4,7), false);
+                  , (int)skillName, DamageType.StaminaDmg
+                  , UnityEngine.Random.Range(4,7), skillModel.skillInclination);
         }
 
         public override void ApplyFX2()

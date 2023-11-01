@@ -56,7 +56,7 @@ namespace Combat
             { 
                 targetDynasCopy.ForEach(t => t.charGO.GetComponent<CharController>().damageController
                                         .ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Water
-                                                                                                    , skillModel.damageMod, true));            
+                                                            , skillModel.damageMod, skillModel.skillInclination, true));            
             }
         }
 

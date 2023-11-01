@@ -35,9 +35,7 @@ namespace Combat
             StatData hpStat = charController.GetStat(StatName.health); 
             if(hpStat.currValue < hpStat.maxLimit * 0.3)
             {
-                SkillService.Instance.currSkillName = SkillNames.Retaliate;               
-                targetGO = dmgAppliedData.striker.gameObject;
-                SkillService.Instance.TargetIsSelected(GridService.Instance.GetDyna4GO(targetGO));
+                charController.strikeController.ApplyRetaliate(dmgAppliedData.striker); 
             }
         }
 

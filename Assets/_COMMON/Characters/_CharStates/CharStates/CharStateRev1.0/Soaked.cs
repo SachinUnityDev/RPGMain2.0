@@ -8,8 +8,6 @@ namespace Common
     public class Soaked : CharStatesBase
     {
         public override CharStateName charStateName => CharStateName.Soaked;
-        public override CharController charController { get; set; }
-        public override int charID { get; set; }
         public override StateFor stateFor => StateFor.Mutual;
         public override int castTime { get; protected set; }
         public override float chance { get; set; }
@@ -26,7 +24,7 @@ namespace Common
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                     , charID, AttribName.airRes, -40, timeFrame, castTime, true);
+                     , charID, AttribName.airRes, -40, timeFrame, castTime, false);
             allBuffIds.Add(buffID);
 
         

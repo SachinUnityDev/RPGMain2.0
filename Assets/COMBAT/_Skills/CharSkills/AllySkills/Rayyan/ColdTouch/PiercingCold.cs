@@ -48,7 +48,7 @@ namespace Combat
                 if (strikeData.attackType == AttackType.Melee && strikeData.skillInclination == SkillInclination.Physical)
                 {
                     strikeData.targets.ForEach(t => t.damageController.ApplyDamage(strikeData.striker, CauseType.CharSkill, (int)skillName
-                            , DamageType.Water, 30f, false));
+                            , DamageType.Water, 30f, skillModel.skillInclination));
                 }
             }
         }

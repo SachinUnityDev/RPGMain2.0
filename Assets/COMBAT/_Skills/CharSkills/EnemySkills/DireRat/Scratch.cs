@@ -100,11 +100,8 @@ namespace Combat
         {
             // populate targets to skill Service 
             // main and collatral too... 
-            PopulateTargetPos();
-            SkillService.Instance.currentTargetDyna = null; 
-            DynamicPosData tempDyna = null;
-            DynamicPosData randomDyna = null;
-
+            base.PopulateAITarget();
+            if(SkillService.Instance.currentTargetDyna == null)
             foreach (CellPosData cell in skillModel.targetPos)
             {
                 DynamicPosData dyna = GridService.Instance.GetDynaAtCellPos(cell.charMode, cell.pos);

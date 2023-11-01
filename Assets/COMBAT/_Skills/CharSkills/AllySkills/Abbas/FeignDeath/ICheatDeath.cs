@@ -28,14 +28,11 @@ namespace Combat
 
         public override void BaseApply()
         {
-            base.BaseApply();
-     
+            base.BaseApply();     
             CombatEventService.Instance.OnEOC += OnEOC; 
-
         }
         void OnEOC()
         {
-     
             CombatEventService.Instance.OnEOC -= OnEOC;
         }
      

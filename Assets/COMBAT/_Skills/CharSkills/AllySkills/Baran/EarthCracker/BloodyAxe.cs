@@ -50,9 +50,11 @@ namespace Combat
         {
             if (targetController.charStateController.HasCharDOTState(CharStateName.BleedHighDOT))
                 targetController.damageController.ApplyDamage(charController, CauseType.CharSkill,
-                    (int)skillName, DamageType.Physical, (skillModel.damageMod + 50f), false);
+                    (int)skillName, DamageType.Physical, (skillModel.damageMod + 50f)
+                    , skillModel.skillInclination);
             else
-                targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Physical, (skillModel.damageMod), false);
+                targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
+                                    , DamageType.Physical, (skillModel.damageMod), skillModel.skillInclination);
         }
 
         public override void ApplyFX2()

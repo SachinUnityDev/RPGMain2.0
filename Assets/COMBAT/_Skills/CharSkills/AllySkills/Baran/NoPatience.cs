@@ -30,7 +30,7 @@ namespace Combat
             SkillService.Instance.OnSkillUsed += HeadTossRegainAP;
             CombatEventService.Instance.OnEOT += OnEOT;
         }
-        bool HeadTossRegainAP(SkillEventData skilleventData)
+        void HeadTossRegainAP(SkillEventData skilleventData)
         {
             if (70f.GetChance())
             {
@@ -40,7 +40,7 @@ namespace Combat
                 }
             }
             SkillService.Instance.OnSkillUsed -= HeadTossRegainAP;
-            return true; 
+             
         }
 
         void OnEOT()

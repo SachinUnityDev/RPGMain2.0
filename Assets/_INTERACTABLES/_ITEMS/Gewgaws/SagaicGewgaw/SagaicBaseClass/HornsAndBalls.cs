@@ -66,15 +66,15 @@ namespace Interactables
             buffIndex.Add(buffID); // id # 1 
         }
 
-        bool OnSkillUsed(SkillEventData skillEventData)
+        void OnSkillUsed(SkillEventData skillEventData)
         {
-            if (skillEventData.strikerController != charController.strikeController) return true; 
+            if (skillEventData.strikerController != charController.strikeController) return; 
             if(skillEventData.skillModel.skillName  == SkillNames.NoPatience)
             {
                 charController.ChangeStat(CauseType.SagaicGewgaw, (int)sagaicGewgawName, charController.charModel.charID
                     , StatName.fortitude, UnityEngine.Random.Range(4,6),true); 
             }
-            return true; 
+            return; 
         }
         public override void UnEquipSagaic()
         {

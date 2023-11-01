@@ -23,15 +23,15 @@ namespace Common
   
         }
 
-        bool OnGuardSkill(SkillEventData skillEventData)
+        void OnGuardSkill(SkillEventData skillEventData)
         {
-            if (skillEventData.strikerController.charModel.charID != charID) return true;
+            if (skillEventData.strikerController.charModel.charID != charID) return;
             if (skillEventData.skillModel.skillInclination == SkillInclination.Guard)
             {
                 charController.ChangeStat(CauseType.CharState, (int)charStateName
                                             ,charID, StatName.fortitude, UnityEngine.Random.Range(5, 11));
             }
-            return true; 
+            return; 
         }
         void ExtraAPFor123(CharController charController)
         {

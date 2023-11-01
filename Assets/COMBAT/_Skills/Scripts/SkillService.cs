@@ -35,9 +35,6 @@ namespace Combat
         public event Action<SkillModel> OnSkillSelectInInv; 
         public event Action<PerkNames> OnPerkHovered;
 
-
-
-
        // ("ON SKILL APPLY")]
         private event Action _OnSkillApply = null;
         public event Action OnSkillApply
@@ -107,7 +104,7 @@ namespace Combat
         public event Action SkillFXRemove; 
         public event Action SkillTick;// no use for now... 
         public event Action SkillEnd;// no use for now...
-        public event Func<SkillEventData, bool> OnSkillUsed; 
+        public event Action<SkillEventData> OnSkillUsed; 
         [Header("curr Char UPDATES")]
         public CharMode currCharMode;
 
@@ -384,8 +381,6 @@ namespace Combat
                                     , targetController, currSkillName, skillModel));
 
             if (_OnSkillApply == null) return;
-
-
             PreSkillApply?.Invoke();
             SkillFXRemove?.Invoke();
 

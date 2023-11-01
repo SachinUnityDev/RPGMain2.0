@@ -42,7 +42,7 @@ namespace Combat
         }
 
 
-        bool KrisLungeRegainAP(SkillEventData skilleventData)
+        void KrisLungeRegainAP(SkillEventData skilleventData)
         {
             if (80f.GetChance())
             {
@@ -50,8 +50,7 @@ namespace Combat
                 {
                     RegainAP();
                 }
-            }
-            return true; 
+            }          
         }
         void OnEOT()
         {

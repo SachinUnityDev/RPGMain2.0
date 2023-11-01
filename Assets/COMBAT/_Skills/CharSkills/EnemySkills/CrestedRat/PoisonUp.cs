@@ -40,7 +40,7 @@ namespace Combat
             base.BaseApply();
             SkillService.Instance.OnSkillUsed += PoisonBuff; 
         }
-         bool PoisonBuff(SkillEventData skillEventData)
+        void PoisonBuff(SkillEventData skillEventData)
          {
             if (skillEventData.strikerController.charModel.charName == CharNames.DireRat)
             {
@@ -50,11 +50,11 @@ namespace Combat
                     if (percent.GetChance())
                     {
                         skillEventData.targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                       , charController.charModel.charID, CharStateName.PoisonedHighDOT);
+                                            , charController.charModel.charID, CharStateName.PoisonedHighDOT);
                     }
                 }
             }
-            return true; 
+            return; 
         }
 
         public override void ApplyFX1()

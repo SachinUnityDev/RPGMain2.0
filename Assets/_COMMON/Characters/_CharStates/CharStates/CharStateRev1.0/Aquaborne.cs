@@ -39,15 +39,15 @@ namespace Common
         }
 
         // 50% chance to regain Ap upon using patience skill 
-        bool OnPatienceSkill(SkillEventData skillEventData)
+        void OnPatienceSkill(SkillEventData skillEventData)
         {
-            if (skillEventData.strikerController.charModel.charID != charID) return true;
+            if (skillEventData.strikerController.charModel.charID != charID) return;
             if(skillEventData.skillModel.skillInclination == SkillInclination.Patience)
             {
                 if (50f.GetChance())
                     charController.combatController.actionPts++; 
             }
-            return true;
+            return;
         }
 
 

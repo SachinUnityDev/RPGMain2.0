@@ -11,7 +11,6 @@ namespace Combat
     {
         public LocWRTChar loc; 
         public Sprite skillSprite;
-
     }
 
     [System.Serializable]

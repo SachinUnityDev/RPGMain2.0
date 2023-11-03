@@ -9,7 +9,6 @@ using UnityEngine;
 using System.Linq;
 using Town;
 using System;
-using DG.Tweening;
 
 namespace Quest
 {

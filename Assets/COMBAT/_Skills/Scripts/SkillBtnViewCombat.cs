@@ -78,38 +78,74 @@ namespace Combat
             IsClicked = false;
             transform.GetChild(1).GetComponent<Image>().sprite = skillHexSO.SkillNormalFrame;
         }
-        public void SkillBtnInit(SkillDataSO _skillDataSO, SkillNames _skillName , SkillView skillView)
+        public void SkillBtnInit(SkillDataSO _skillDataSO, SkillModel skillModel , SkillView skillView)
         {
+            Image skillImg = transform.GetComponent<Image>();
+            this.skillModel = skillModel;
             skillDataSO = _skillDataSO;
-            skillName = _skillName;
             this.skillView = skillView;
-            index = _skillDataSO.allSkills.FindIndex(t => t.skillName == _skillName);
+            if (skillModel == null)
+            {
+                skillImg.sprite = skillView.NASkillIconSprite;
+                skillName = SkillNames.None; 
+               // skillCardGO = null;
+                return;
+            }
+            
+            skillName = skillModel.skillName;
+            
+            index = _skillDataSO.allSkills.FindIndex(t => t.skillName == skillName);
+            if (skillModel.skillUnLockStatus == 1)
+            {
+                skillImg.sprite = skillDataSO.allSkills[index].skillIconSprite;
+            }
+            if (skillModel.skillUnLockStatus == 0)
+            {
+                skillImg.sprite = skillView.LockedSkillIconSprite;
+            }
+            if (skillModel.skillUnLockStatus == 1)
+            {
+                skillImg.sprite = skillDataSO.allSkills[index].skillIconSprite;
+            }
+            if (skillModel.skillUnLockStatus == -1)
+            {
+                skillImg.sprite = skillView.NASkillIconSprite;
+            }
 
-            SkillController1 skillController = InvService.Instance.charSelectController.skillController;
-            skillModel = skillController.GetSkillModel(skillName);
-
-            transform.GetComponent<Image>().sprite =
-                                    skillDataSO.allSkills[index].skillIconSprite;
-
-            if (skillModel == null) return;
+   
             int skilllvlInt = (int)skillModel.skillLvl;  // skillmodel req here for this
        
             skillCardGO = SkillService.Instance.skillCardGO;
         }
 
+        void DsplySkillLvl()
+        {
+            if(skillModel == null)
+            {
+                // set active as false
+            }
+            else
+            {
+
+            }
+
+        }
+
         void HideSkillCard()
         {
+            if(skillCardGO != null)
             skillCardGO.gameObject.SetActive(false);
         }
         void ShowSkillcardInCombat()
         {
             if (GameService.Instance.gameModel.gameState != GameState.InCombat)
                 return;
-
+            if (skillCardGO == null)
+                return; 
             CharNames charName = CombatService.Instance.currCharClicked.charModel.charName; 
              
             skillDataSO = SkillService.Instance.GetSkillSO(charName);
-
+            SkillService.Instance.skillModelHovered = skillModel;
             if (skillDataSO != null)
             {
                 SkillService.Instance.On_SkillHovered(skillDataSO.charName, skillName);
@@ -118,7 +154,7 @@ namespace Combat
             {
                 Debug.Log("Skill SO is null "); return;
             }
-            skillModel = SkillService.Instance.skillModelHovered;
+          
             PosSkillCard();
 
         }
@@ -138,6 +174,7 @@ namespace Combat
 
         public void RefreshIconAsPerState()
         {
+            if (skillModel == null) return;
             skillState = skillModel.GetSkillState();
             // ChangeSkillFrame(skillState);
             switch (skillState)

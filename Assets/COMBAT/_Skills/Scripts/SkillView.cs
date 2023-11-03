@@ -15,8 +15,8 @@ namespace Combat
 #region Declarations
         const int skillBtnCount = 8;
 
-        [SerializeField] Sprite LockedSkillIconSprite;
-        [SerializeField] Sprite NASkillIconSprite;
+        public Sprite LockedSkillIconSprite;
+        public Sprite NASkillIconSprite;
         [SerializeField] Transform currTransHovered;
 
 
@@ -65,10 +65,8 @@ namespace Combat
         }
         void InitSkillBtns()
         {
-            //foreach (Transform child in transform)
-            //{
-            //    child.GetComponent<S>().InitSkillBtns(this); 
-            //}
+            // first ally in party set
+            SetSkillsPanel(CharService.Instance.allyInPlayControllers[0]); 
         } 
 
         public void SkillBtnPressed()
@@ -107,9 +105,6 @@ namespace Combat
             SkillService.Instance.On_SkillSelected
                 (CombatService.Instance.currCharOnTurn.charModel.charName, SkillService.Instance.currSkillName);
         }
-      
-       
-
         public SkillSelectState UpdateSkillState(SkillModel _skillModel)
         {
   
@@ -164,8 +159,8 @@ namespace Combat
         bool HasNoChkActionPts()
         {
             CharController charController = CombatService.Instance.currCharOnTurn;
-            if (charController.charModel.charMode == CharMode.Enemy)
-                return false; 
+            //if (charController.charModel.charMode == CharMode.Enemy)
+            //    return false; 
             CombatController combatController = charController.GetComponent<CombatController>();
 
             if (combatController.actionPts > 0)
@@ -311,15 +306,11 @@ namespace Combat
             skillBtnTransform.GetChild(1).GetComponent<RectTransform>().localScale = Vector3.one * 1.25f;  
         }
 
-        public void SetSkillsPanel(CharController charController)
+        void SetActionPts4Char()
         {
-            if (charController == null) return; 
-            CharNames charName = charController.charModel.charName;
-            // SET ACTION POINTS 
-            int _charID = charController.charModel.charID;  
-            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            if (GameService.Instance.gameModel.gameState == GameState.InCombat)  
             {
-                if (CombatService.Instance.currCharClicked.charModel.charID 
+                if (CombatService.Instance.currCharClicked.charModel.charID
                     == CombatService.Instance.currCharOnTurn.charModel.charID)
                 {
                     CombatController combatController = CombatService.Instance.currCharOnTurn
@@ -328,60 +319,88 @@ namespace Combat
                         combatController.SetActionPts();
                 }
             }
+        }
 
-            foreach (SkillDataSO skillSO in SkillService.Instance.allCharSkillSO)
+        public void SetSkillsPanel(CharController charController)
+        {
+            if (charController == null) return; 
+            CharNames charName = charController.charModel.charName;
+            // SET ACTION POINTS             
+            SetActionPts4Char(); // its here as action pts need to be set before updateState
+
+            SkillController1 skillController = charController.skillController;
+            SkillDataSO skillSO = SkillService.Instance.GetSkillSO(charName);
+            int j = 0; 
+            foreach ( SkillModel skillModel in skillController.allSkillModels)
             {
-                if (skillSO.charName == charName)
-                {
-                    for (int i = 0; i < skillSO.allSkills.Count; i++)
-                    {
-                        
-                        if (skillSO.allSkills[i].skillUnLockStatus == 1)
-                        {
-                            if (skillSO.allSkills[i].skillType == SkillTypeCombat.Retaliate) // Skipping retaliate skill from 
-                                continue;
-                            Transform skillIconTranform = transform.GetChild(i);
-                            skillIconTranform.GetComponent<Image>().sprite
-                                                                = skillSO.allSkills[i].skillIconSprite;
-                            SkillNames skillName = skillSO.allSkills[i].skillName;
-                       
-                            SkillModel skillModel = SkillService.Instance.GetSkillModel(_charID, skillName);
-                            if (skillModel == null)
-                                Debug.Log("SkillMModel missing" + skillName);
-
-                            skillModel.SetSkillState(SkillSelectState.Clickable); // setting clicable here if unlcickable due to any reasons will be reset in update
-
-                            UpdateSkillState(skillModel); //<= updates the skillState in SkillModel
-                           // skillModel.SetSkillState(skillSelState);
-
-                            SkillBtnViewCombat skillBtn = skillIconTranform.GetComponent<SkillBtnViewCombat>();
-
-                            // Debug.Log("SkillModel Updates" + skillModel.GetSkillState()); 
-                            skillBtn.skillModel = skillModel;
-
-                            skillBtn.RefreshIconAsPerState();
-                            skillBtn.SkillBtnInit(skillSO, skillName, this);
-                        }
-                        else if(skillSO.allSkills[i].skillUnLockStatus == 0)
-                        {
-                            //skillPanel.transform.GetChild(i).gameObject.SetActive(true);
-                            // setting clicable here if unlcickable due to any reasons will be reset in update
-                            SkillNames skillName = skillSO.allSkills[i].skillName;
-                            SkillModel skillModel = SkillService.Instance.GetSkillModel(_charID, skillName);
-                            skillModel.SetSkillState(SkillSelectState.UnClickable_Locked);
-                            transform.GetChild(i).GetComponent<Image>().sprite = LockedSkillIconSprite;
-                        }else
-                        {
-                            transform.GetChild(i).GetComponent<Image>().sprite = NASkillIconSprite;
-                        }                            
-                    }
-                    // to make the extra button as not available 
-                    for (int i = skillSO.allSkills.Count; i < skillBtnCount; i++)
-                    {
-                        transform.GetChild(i).GetComponent<Image>().sprite = NASkillIconSprite;
-                    }
-                }
+                if (skillModel.skillType == SkillTypeCombat.Retaliate) // Skipping retaliate skill from 
+                    continue;
+                SkillBtnViewCombat skillBtn = transform.GetChild(j).GetComponent<SkillBtnViewCombat>();
+           
+                
+                    skillModel.SetSkillState(SkillSelectState.Clickable); // setting clicable here if unlcickable due to any reasons will be reset in update
+                    UpdateSkillState(skillModel);
+                    skillBtn.RefreshIconAsPerState();
+                    skillBtn.SkillBtnInit(skillSO, skillModel, this);
+                j++; 
             }
+            for (int i = j; i < transform.childCount; i++)
+            {
+                SkillBtnViewCombat skillBtn = transform.GetChild(i).GetComponent<SkillBtnViewCombat>();
+                skillBtn.SkillBtnInit(null, null, this); 
+            }
+
+
+            //foreach (SkillDataSO skillSO in SkillService.Instance.allCharSkillSO)
+            //{
+            //    if (skillSO.charName == charName)
+            //    {
+            //        for (int i = 0; i < skillSO.allSkills.Count; i++)
+            //        {
+
+            //            if (skillSO.allSkills[i].skillUnLockStatus == 1)
+            //            {
+            //                if (skillSO.allSkills[i].skillType == SkillTypeCombat.Retaliate) // Skipping retaliate skill from 
+            //                    continue;
+            //                Transform skillIconTranform = transform.GetChild(i);
+            //                skillIconTranform.GetComponent<Image>().sprite
+            //                                                    = skillSO.allSkills[i].skillIconSprite;
+            //                SkillNames skillName = skillSO.allSkills[i].skillName;
+
+            //                SkillModel skillModel = SkillService.Instance.GetSkillModel(_charID, skillName);
+            //                if (skillModel == null)
+            //                    Debug.Log("SkillMModel missing" + skillName);
+
+            //                skillModel.SetSkillState(SkillSelectState.Clickable); // setting clicable here if unlcickable due to any reasons will be reset in update
+
+            //                UpdateSkillState(skillModel); 
+
+            //                SkillBtnViewCombat skillBtn = skillIconTranform.GetComponent<SkillBtnViewCombat>();
+            //                skillBtn.skillModel = skillModel;
+
+            //                skillBtn.RefreshIconAsPerState();
+            //                skillBtn.SkillBtnInit(skillSO, skillModel, this);
+            //            }
+            //            else if(skillSO.allSkills[i].skillUnLockStatus == 0)
+            //            {
+            //                //skillPanel.transform.GetChild(i).gameObject.SetActive(true);
+            //                // setting clicable here if unlcickable due to any reasons will be reset in update
+            //                SkillNames skillName = skillSO.allSkills[i].skillName;
+            //                SkillModel skillModel = SkillService.Instance.GetSkillModel(_charID, skillName);
+            //                skillModel.SetSkillState(SkillSelectState.UnClickable_Locked);
+            //                transform.GetChild(i).GetComponent<Image>().sprite = LockedSkillIconSprite;
+            //            }else
+            //            {
+            //                transform.GetChild(i).GetComponent<Image>().sprite = NASkillIconSprite;
+            //            }                            
+            //        }
+            //        // to make the extra button as not available 
+            //        for (int i = skillSO.allSkills.Count; i < skillBtnCount; i++)
+            //        {
+            //            transform.GetChild(i).GetComponent<Image>().sprite = NASkillIconSprite;
+            //        }
+            //    }
+            //}
         }
     }
 }

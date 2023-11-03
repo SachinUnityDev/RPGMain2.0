@@ -152,6 +152,7 @@ namespace Combat
 
         public void SkillHovered(SkillNames _skillName)
         {
+            if (_skillName == SkillNames.None) return;
             SkillService.Instance.skillModelHovered.perkChain.Clear();
             SkillService.Instance.skillModelHovered.descLines.Clear();
             Debug.Log(" all Skill bases count" + allSkillBases.Count +

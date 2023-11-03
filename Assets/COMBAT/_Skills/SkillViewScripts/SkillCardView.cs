@@ -40,8 +40,15 @@ namespace Combat
         {
              SkillCardInit();     
         }
+        void ClearData()
+        {
+            skillName = SkillNames.None;
+            skillModel = null;
+            skillDataSO = null; 
+        }
         void SkillCardInit()
         {
+            ClearData();
             if (GameService.Instance.gameModel.gameState == GameState.InTown ||
                GameService.Instance.gameModel.gameState == GameState.InQuestRoom)
             {
@@ -57,10 +64,27 @@ namespace Combat
                 skillModel = SkillService.Instance.skillModelHovered;
                 skillName = skillModel.skillName;
             }
+            if(skillName == SkillNames.None || charController == null)
+            {
+                ClearData();
+                gameObject.SetActive(false);
+                return;
+            }
+            if(skillModel.skillUnLockStatus == 0 || skillModel.skillUnLockStatus == -1)
+            {
+                ClearData();
+                gameObject.SetActive(false);
+                return;
+            }
+
+
             FillTopTrans();
             FillMidTrans();    
             FillBtmTrans();
         }
+
+        
+
         void FillTopTrans()
         {
             skillDataSO = SkillService.Instance.GetSkillSO(charController.charModel.charName);

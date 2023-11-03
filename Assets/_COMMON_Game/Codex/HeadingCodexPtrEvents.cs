@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.UI;
 using DG.Tweening;
-using UnityEngine.EventSystems;
+
 namespace Common
 {
     public class HeadingCodexPtrEvents : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler

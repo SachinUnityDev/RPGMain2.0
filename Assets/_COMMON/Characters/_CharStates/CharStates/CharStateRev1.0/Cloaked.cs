@@ -52,13 +52,13 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "Can't be single targeted";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
 
             str1 = "+14 Dark Res";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
 
             str2 = "Lost upon attacking";
-            charStateCardStrs.Add(str2);
+            allStateFxStrs.Add(str2);
         }
     }
 }

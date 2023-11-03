@@ -44,13 +44,13 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "-2 Morale";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
 
             str1 = "+24 Fire Res and -40 Air Res";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
 
             str2 = "Immune to <style=Burn> Burning </style>";
-            charStateCardStrs.Add(str2);
+            allStateFxStrs.Add(str2);
         }
     }
 }

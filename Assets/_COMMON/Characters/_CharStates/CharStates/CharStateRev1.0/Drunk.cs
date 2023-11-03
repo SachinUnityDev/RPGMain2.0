@@ -56,10 +56,10 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "-2 Focus, -2 Acc, -2 Dodge";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
 
             str1 = "+6 Fort Origin";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
         }
     }
 }

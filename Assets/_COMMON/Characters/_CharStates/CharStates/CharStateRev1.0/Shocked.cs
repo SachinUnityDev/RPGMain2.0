@@ -63,19 +63,19 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "-3 Focus";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
 
             str1 = "+1-2 Armor";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
 
             str2 = "+24 Earth Res";
-            charStateCardStrs.Add(str2);
+            allStateFxStrs.Add(str2);
 
             str3 = "Immune to <style=Poison> Poisoned </style>";
-            charStateCardStrs.Add(str3);
+            allStateFxStrs.Add(str3);
 
             str4 = "Can not use<style=Move> Move </style>skills";
-            charStateCardStrs.Add(str4);
+            allStateFxStrs.Add(str4);
         }
         public override void EndState()
         {

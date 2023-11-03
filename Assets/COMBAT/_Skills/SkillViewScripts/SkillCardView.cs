@@ -38,18 +38,26 @@ namespace Combat
         }
         private void OnEnable()
         {
-             OnSkillHovered();     
+             SkillCardInit();     
         }
-        void OnSkillHovered()
+        void SkillCardInit()
         {
-           //if(GameService.Instance.gameModel.gameState == GameState.InTown)
-           //{
+            if (GameService.Instance.gameModel.gameState == GameState.InTown ||
+               GameService.Instance.gameModel.gameState == GameState.InQuestRoom)
+            {
                 charController = InvService.Instance.charSelectController;
                 skillController = charController.skillController; 
                 skillModel  = SkillService.Instance.skillModelHovered;
                 skillName = skillModel.skillName;
-           //}
-           FillTopTrans();
+            }
+            if (GameService.Instance.gameModel.gameState == GameState.InCombat)              
+            {
+                charController = CombatService.Instance.currCharClicked;
+                skillController = charController.skillController;
+                skillModel = SkillService.Instance.skillModelHovered;
+                skillName = skillModel.skillName;
+            }
+            FillTopTrans();
             FillMidTrans();    
             FillBtmTrans();
         }

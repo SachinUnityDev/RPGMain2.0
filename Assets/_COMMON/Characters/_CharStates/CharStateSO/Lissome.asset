@@ -17,9 +17,5 @@ MonoBehaviour:
   charStateType: 0
   charStateBehavior: 0
   CharStateNameStr: Lightfooted
-  iconSprite: {fileID: 21300000, guid: de647753926ec2f4f95f9a1776be58f1, type: 3}
-  allLines:
-  - +1 Haste on allies
-  - -1 Luck on self
-  - Immune to Rooted
+  iconSprite: {fileID: 21300000, guid: cddc617953f82974c8dd060405c43fe6, type: 3}
   CharStateFX: {fileID: 0}

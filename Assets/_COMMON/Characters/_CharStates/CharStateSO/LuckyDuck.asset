@@ -16,13 +16,6 @@ MonoBehaviour:
   stateFor: 1
   charStateType: 0
   charStateBehavior: 0
-  timeFrame: 1
-  minCastTime: -1
-  maxCastTime: -1
   CharStateNameStr: Lucky Duck
-  iconSprite: {fileID: 21300000, guid: 645b923d49f820f4a9f89e69352075cc, type: 3}
-  allLines:
-  - +1 Luck on teammates
-  - -1 Haste on self
-  - Immune to Feebleminded
+  iconSprite: {fileID: 21300000, guid: 93eb63386c688744d853883d6cb9de93, type: 3}
   CharStateFX: {fileID: 0}

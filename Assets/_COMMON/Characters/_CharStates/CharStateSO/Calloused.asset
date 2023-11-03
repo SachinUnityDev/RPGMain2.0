@@ -17,6 +17,5 @@ MonoBehaviour:
   charStateType: 0
   charStateBehavior: 0
   CharStateNameStr: Calloused
-  iconSprite: {fileID: 21300000, guid: ecd2aeb3004319a47ac9475565726d06, type: 3}
-  allLines: []
+  iconSprite: {fileID: 21300000, guid: 5e5f23170058d6b429d8a7c7aedb093a, type: 3}
   CharStateFX: {fileID: 0}

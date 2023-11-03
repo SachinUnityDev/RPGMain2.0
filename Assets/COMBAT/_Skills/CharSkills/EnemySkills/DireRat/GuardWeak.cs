@@ -55,6 +55,10 @@ namespace Combat
 
                 targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
                  , AttribName.armorMax, maxArmorChg, skillModel.timeFrame, skillModel.castTime, true);
+
+                charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName, charID,
+                        CharStateName.Guarded, skillModel.timeFrame, skillModel.castTime); 
+
             }
         }
 

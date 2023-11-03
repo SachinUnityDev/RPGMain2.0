@@ -35,11 +35,11 @@ namespace Common
         {     
 
             str0 = "+1 Morale on allies";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
             str1 = "-1 Focus on self";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
             str2 = "Immune to <style=States> Despaired </style>";
-            charStateCardStrs.Add(str2);            
+            allStateFxStrs.Add(str2);            
         }
 
         void Tick2(AttribModData charModData)  //  change Stat subscribe 

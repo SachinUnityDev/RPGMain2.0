@@ -17,6 +17,5 @@ MonoBehaviour:
   charStateType: 0
   charStateBehavior: 0
   CharStateNameStr: Charged
-  iconSprite: {fileID: 21300000, guid: 455b26020349bf045b5a0aa13d01ee7b, type: 3}
-  allLines: []
+  iconSprite: {fileID: 21300000, guid: d42a28198507ed04e931f0f122921a12, type: 3}
   CharStateFX: {fileID: 0}

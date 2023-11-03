@@ -60,16 +60,16 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "+3 Luck and -2 Haste";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
 
             str1 = "-30 Air Res";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
 
             str2 = "Immune to <style=Poison>Poisoned</style>";
-            charStateCardStrs.Add(str2);
+            allStateFxStrs.Add(str2);
 
             str3 = "Upon consume Elixir of Hardening:\nGain 30 Hp and 12 Fortitude";
-            charStateCardStrs.Add(str3);
+            allStateFxStrs.Add(str3);
         }
     }
 }

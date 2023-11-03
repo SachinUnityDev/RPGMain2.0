@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems; 
-
+using UnityEngine.EventSystems;
+using Common;
 
 namespace Combat
 {
@@ -25,15 +25,15 @@ namespace Combat
              CombatEventService.Instance.On_CharClicked(CombatService.Instance.currCharOnTurn.gameObject);
         }
 
-        public void Check4DiffChar()
+        public void Check4DiffChar(CharController charController)
         {
             if (CombatService.Instance.combatState == CombatState.INCombat_normal)
             {
-                if (CombatService.Instance.currCharClicked.gameObject == null)
+                if (charController.gameObject == null)
                 {
                   //  UIControlService.Instance.TurnOnOff(gameObject, false); return; 
                 }
-                if (CombatService.Instance.currCharClicked.gameObject != CombatService.Instance.currCharOnTurn.gameObject)
+                if (charController.gameObject != CombatService.Instance.currCharOnTurn.gameObject)
                 {
                     UIControlServiceCombat.Instance.TurnOnOff(gameObject, true);
                 }

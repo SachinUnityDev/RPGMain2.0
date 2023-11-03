@@ -60,11 +60,11 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "On use Guard skills: Gain 5-10 Fort";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
             str1 = "If on frontrow: +2 Max Armor";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
             str2 = "If on frontrow at sot: +1 AP";
-            charStateCardStrs.Add(str2);
+            allStateFxStrs.Add(str2);
         }
     }
 }

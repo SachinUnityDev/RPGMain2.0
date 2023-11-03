@@ -17,9 +17,5 @@ MonoBehaviour:
   charStateType: 0
   charStateBehavior: 1
   CharStateNameStr: Flatfooted
-  iconSprite: {fileID: 21300000, guid: 38a5403db0a2dca439043471c512a962, type: 3}
-  allLines:
-  - "-3 Haste to party until eoc\r"
-  - "Tactics is unaccesible, party is shuffled\r"
-  - "Move skills can not grant extra action\r"
+  iconSprite: {fileID: 21300000, guid: d41dc8538c8702d48ade448917d22df9, type: 3}
   CharStateFX: {fileID: 0}

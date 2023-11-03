@@ -215,7 +215,7 @@ namespace Common
             float currentVal = statData.currValue;
             float modCurrValue = Constrain2LimitAttrib(statData.AttribName, currentVal);
             if (statData.isClamped) return;
-            statData.currValue = modCurrValue;
+            statData.currValue = (int)modCurrValue;
             int turn = -1;
             AttribModData charModData = new AttribModData(turn, causeType, causeName, causeByCharID,
                                          charModel.charID, _statName, modCurrValue);
@@ -245,7 +245,7 @@ namespace Common
         public void ClampStatToggle2Val(StatName statName, bool toClamp, float val)
         {
             StatData statData = charModel.statList.Find(x => x.statName == statName);
-            statData.currValue = val;
+            statData.currValue = (int)val;
             statData.isClamped = toClamp;
         }
 
@@ -306,7 +306,7 @@ namespace Common
             // COMBAT PATCH FIX ENDS 
             // BroadCast the value change thru On_StatCurrValChg
             StatModData statModData = new StatModData(turn, causeType, CauseName, causeByCharID
-                                                             , this.charModel.charID, statName, value);
+                                                             , this.charModel.charID, statName,(int)value);
 
             float currVal = statData.currValue;
             float preConstrainedValue = currVal + value;
@@ -314,7 +314,7 @@ namespace Common
             if (statData.isClamped)
             {
                 Debug.Log("Value is clamped");  // due to some charstate or trait
-                statModData.modVal = currVal;  // no change is executed 
+                statModData.modVal = (int)currVal;  // no change is executed 
                 return statModData;
             }
           
@@ -326,8 +326,8 @@ namespace Common
             float modCurrValue = Constrain2LimitStat(statModData.statModified, preConstrainedValue);
             // ACTUAL VALUE UPDATED HERE
             charModel.statList.Find(x => x.statName == statModData.statModified).currValue
-                                                                            = modCurrValue;
-            statModData.modVal = modCurrValue;            
+                                                                            = (int)modCurrValue;
+            statModData.modVal = (int)modCurrValue;            
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
                 PopulateOverCharBars(statName);
 
@@ -384,7 +384,7 @@ namespace Common
             float modCurrValue = Constrain2LimitAttrib(charModData.attribModified, preConstrainedValue);
             // ACTUAL VALUE UPDATED HERE
             charModel.attribList.Find(x => x.AttribName == charModData.attribModified).currValue
-                                                                            = modCurrValue;
+                                                                            = (int)modCurrValue;
             charModData.modCurrVal = modCurrValue;              
             if (toInvoke)
             {

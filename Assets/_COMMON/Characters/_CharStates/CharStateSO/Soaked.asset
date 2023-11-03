@@ -16,14 +16,6 @@ MonoBehaviour:
   stateFor: 0
   charStateType: 0
   charStateBehavior: 1
-  timeFrame: 1
-  minCastTime: -1
-  maxCastTime: -1
   CharStateNameStr: Soaked
-  iconSprite: {fileID: 21300000, guid: 35e158ce87ad3564d91a3410d48e6cc6, type: 3}
-  allLines:
-  - Immune to Burning
-  - -2 Morale
-  - -40 Air res
-  - +24 Fire Res
+  iconSprite: {fileID: 21300000, guid: ead409a599f37694ba72ea1abe53482c, type: 3}
   CharStateFX: {fileID: 0}

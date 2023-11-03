@@ -70,10 +70,10 @@ namespace Common
         public int effectedCharNameID;
         public StatName statModified;
 
-        public float modVal = 0f;
+        public int modVal = 0;
 
         public StatModData(int turnNo, CauseType causeType, int causeName, int causedByCharID
-            , int effectedCharNameID, StatName statModfified, float modVal)
+            , int effectedCharNameID, StatName statModfified, int modVal)
         {
             this.turnNo = turnNo;
             this.causeType = causeType;

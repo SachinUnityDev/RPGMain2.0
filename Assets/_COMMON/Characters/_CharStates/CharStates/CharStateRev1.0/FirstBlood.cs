@@ -44,10 +44,10 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "+1 Utility Attributes";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
 
             str1 = "+1 Fort Org until eoq";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
 
         }
 

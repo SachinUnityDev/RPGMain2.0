@@ -29,10 +29,10 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "+1 Luck";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
 
             str1 = "Single target attacks diverted from guarded ally";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
         }
     }
 }

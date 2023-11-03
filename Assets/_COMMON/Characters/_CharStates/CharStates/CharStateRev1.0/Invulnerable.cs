@@ -36,14 +36,14 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "Immune to Magical and Physical Skills";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
 
             str1 = "-3 Haste";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
 
 
             str2 = "Immune to Guarded";
-            charStateCardStrs.Add(str2);
+            allStateFxStrs.Add(str2);
         }
     }
 }

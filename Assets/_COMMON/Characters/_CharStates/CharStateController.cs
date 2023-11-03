@@ -139,7 +139,7 @@ namespace Common
             
             // 
             CharStatesBase charStateBase = CharStatesService.Instance.GetNewCharState(charStateName);
-
+            allCharBases.Add(charStateBase);
             CharStateSO1 charStateSO = CharStatesService.Instance.allCharStateSO.GetCharStateSO(charStateName);
 
             // char State init only when its applied 
@@ -523,15 +523,15 @@ namespace Common
             }
             if (statModData.statModified == StatName.stamina)
             {
-                if (statModData.modVal == 0)
-                {
-                    ApplyCharStateBuff(CauseType.StatChange, (int)statModData.statModified, statModData.causeByCharID,
-                        CharStateName.LastBreath);
-                }
-                else if (HasCharState(CharStateName.LastBreath) && statModData.modVal >0)
-                {
-                    RemoveCharState(CharStateName.LastBreath);
-                }
+                //if (statModData.modVal == 0)
+                //{
+                //    ApplyCharStateBuff(CauseType.StatChange, (int)statModData.statModified, statModData.causeByCharID,
+                //        CharStateName.LastBreath);
+                //}
+                //else if (HasCharState(CharStateName.LastBreath) && statModData.modVal >0)
+                //{
+                //    RemoveCharState(CharStateName.LastBreath);
+                //}
             }
             if (statModData.statModified == StatName.fortitude)
             {

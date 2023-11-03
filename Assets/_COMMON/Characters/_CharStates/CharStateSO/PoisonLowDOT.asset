@@ -16,14 +16,6 @@ MonoBehaviour:
   stateFor: 0
   charStateType: 3
   charStateBehavior: 1
-  timeFrame: 1
-  minCastTime: 2
-  maxCastTime: 2
   CharStateNameStr: Poisoned
-  iconSprite: {fileID: 21300000, guid: c8a913bdd933f5c44ab927422ddcfe8f, type: 3}
-  allLines:
-  - Immune to Shocked
-  - -2 Haste
-  - -30 Fire Res
-  - +20 Air Res
+  iconSprite: {fileID: 21300000, guid: 03a5a348d7dcc55418134804137cb02d, type: 3}
   CharStateFX: {fileID: 0}

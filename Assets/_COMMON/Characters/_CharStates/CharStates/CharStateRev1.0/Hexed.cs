@@ -30,10 +30,10 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "-3 Focus and -3 Luck";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
 
             str1 = "Becomes AI priority";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
 
         }
     }

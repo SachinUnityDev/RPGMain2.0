@@ -81,16 +81,16 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "+2 Focus and +12% Armor";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
             str1 = "-20 Fire Res";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
             
             str2 = "Upon consume Potion of Concentration:\nGain 20 Hp";
-            charStateCardStrs.Add(str2);
+            allStateFxStrs.Add(str2);
             str3 = "Upon consume Snow Leopard's Breath:\nGain 15 Stamina";
-            charStateCardStrs.Add(str3);
+            allStateFxStrs.Add(str3);
             str4 = "Upon use Patience Skills: 50% Regain AP";
-            charStateCardStrs.Add(str4);
+            allStateFxStrs.Add(str4);
            
 
         }

@@ -410,8 +410,11 @@ namespace Combat
                 else
                     CombatService.Instance.ToggleColliders(true);
             }
-            currSkillController = allSkillControllers.FirstOrDefault(t => t.charName == _charName);
-            Debug.Log("SKILL IS SELECTED" + currSkillController.name);
+            int index = allSkillControllers.FindIndex(t => t.charName == _charName);
+            if(index != -1)
+                currSkillController = allSkillControllers[index];
+            else
+            Debug.Log("skill controller not found!" + _charName+ "SkillName" + skillName);
             currSkillController.SkillSelect(skillName);
 
         }
@@ -431,7 +434,7 @@ namespace Combat
                 return;
             skillModel.SetSkillState(SkillSelectState.Clickable);
             currSkillName = SkillNames.None;
-            skillView.SetSkillsPanel(charID);
+            skillView.SetSkillsPanel(CombatService.Instance.currCharClicked);
             skillView.FillSkillClickedState(-1);
         }
         public void On_SkillHovered(CharNames _charName, SkillNames skillName)

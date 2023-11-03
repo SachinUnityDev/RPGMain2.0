@@ -30,7 +30,7 @@ namespace Common
         public override void StateDisplay()
         {
             str1 = "+8 Fort Origin until eoc";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
         }
     }
 }

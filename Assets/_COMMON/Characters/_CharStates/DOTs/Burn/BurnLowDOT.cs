@@ -112,17 +112,17 @@ namespace Common
         {
             int dmg = Mathf.RoundToInt(dmgPerRound);
             str0 = "<style=Burn> Burning </style>";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
             str1 = $"-{dmg}<style=Burn> Health </style>per rd";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
             str2 = "+2<style=Attributes> Dodge </style>";
-            charStateCardStrs.Add(str2);
+            allStateFxStrs.Add(str2);
             str3 = "+24<style=Water> Water Res </style>";
-            charStateCardStrs.Add(str3);
+            allStateFxStrs.Add(str3);
             str4 = "-6<style=Fortitude> Fortitude </style>per rd";
-            charStateCardStrs.Add(str4);
+            allStateFxStrs.Add(str4);
             str5 = "Immune to<style=Water> Soaked </style>and<style=Bleed> Bleeding </style>";
-            charStateCardStrs.Add(str5);
+            allStateFxStrs.Add(str5);
         }
 
         public override void EndState()

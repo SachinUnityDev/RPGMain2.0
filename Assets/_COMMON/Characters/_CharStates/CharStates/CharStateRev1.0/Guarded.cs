@@ -31,10 +31,10 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "+1 Morale";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
 
             str1 = "Single target attacks diverted to guarding ally";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
         }
     }
 }

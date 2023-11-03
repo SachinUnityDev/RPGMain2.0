@@ -455,8 +455,8 @@ namespace Combat
         }
         void RevertDamageRange()
         {
-            charController.GetAttrib(AttribName.dmgMin).currValue = dmgMin;
-            charController.GetAttrib(AttribName.dmgMin).currValue = dmgMax;
+            charController.GetAttrib(AttribName.dmgMin).currValue = (int)dmgMin;
+            charController.GetAttrib(AttribName.dmgMin).currValue = (int)dmgMax;
         }
 
 

@@ -12,7 +12,7 @@ namespace Common
     public class AttribData
     {
         public AttribName AttribName;
-        public float currValue;
+        public int currValue;
         public float baseValue;   
         public string desc;      
         public float minLimit; 
@@ -23,7 +23,7 @@ namespace Common
     public class StatData
     {
         public StatName statName;
-        public float currValue;        
+        public int currValue;        
         public string desc;
         public float minLimit;
         public float maxLimit;

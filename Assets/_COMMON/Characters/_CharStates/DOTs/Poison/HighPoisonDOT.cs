@@ -98,15 +98,15 @@ namespace Common
         {
             int dmg = Mathf.RoundToInt(dmgPerRound);
             str0 = "<style=Poison> Poisoned </style>";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
             str1 = $"-{dmg}<style=Poison> Health </style>per rd";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
             str2 = "-2<style=Attributes> Haste </style>";
-            charStateCardStrs.Add(str2);
+            allStateFxStrs.Add(str2);
             str3 = "-30<style=Fire> Fire Res </style>and +20<style=Air> Air Res </style>";
-            charStateCardStrs.Add(str3);
+            allStateFxStrs.Add(str3);
             str4 = "Immune to<style=Air> Shocked </style>";
-            charStateCardStrs.Add(str4);
+            allStateFxStrs.Add(str4);
         }
 
         public override void EndState()

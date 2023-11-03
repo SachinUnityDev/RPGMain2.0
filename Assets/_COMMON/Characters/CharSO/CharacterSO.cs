@@ -211,11 +211,11 @@ namespace Common
             {
                 Debug.Log("Updated vigor n willpower");
                 float healthMax = AttribList.Find(t => t.AttribName == AttribName.vigor).currValue * 4;
-                statList.Find(t => t.statName == StatName.health).currValue = healthMax;
+                statList.Find(t => t.statName == StatName.health).currValue = (int)healthMax;
                 statList.Find(t => t.statName == StatName.health).maxLimit = healthMax; 
 
                 float staminaMax = AttribList.Find(t => t.AttribName == AttribName.willpower).currValue * 3;
-                statList.Find(t => t.statName == StatName.stamina).currValue = staminaMax;
+                statList.Find(t => t.statName == StatName.stamina).currValue = (int)staminaMax;
                 statList.Find(t => t.statName == StatName.stamina).maxLimit  = staminaMax;
             }
 

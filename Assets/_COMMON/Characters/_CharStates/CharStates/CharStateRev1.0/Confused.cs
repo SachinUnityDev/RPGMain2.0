@@ -100,11 +100,11 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "<style=States> Confused </style>";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
             str1 = $"-2<style=Attributes> Acc </style>";
-            charStateCardStrs.Add(str1);          
+            allStateFxStrs.Add(str1);          
             str2 = "Immune to <style=States> Concentrated </style>";
-            charStateCardStrs.Add(str2);
+            allStateFxStrs.Add(str2);
         }
 
     }

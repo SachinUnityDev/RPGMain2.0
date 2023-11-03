@@ -33,10 +33,10 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "-3 Haste";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
 
             str1 = "No extra Move action";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
         }
     }
 }

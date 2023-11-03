@@ -50,11 +50,11 @@ namespace Common
         {
             //+1 Focus on allies .... - 1 Morale on self   Immune to Confused
             str0 = "+1 Focus on allies";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
             str1 = "-1 Morale on self";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
             str2 = "Immune to<style=States> Confused </style>";
-            charStateCardStrs.Add(str2);
+            allStateFxStrs.Add(str2);
         }
 
         public override void EndState()

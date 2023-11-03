@@ -154,8 +154,10 @@ namespace Combat
         {
             SkillService.Instance.skillModelHovered.perkChain.Clear();
             SkillService.Instance.skillModelHovered.descLines.Clear();
+            Debug.Log(" all Skill bases count" + allSkillBases.Count +
+                            "all perk bases count" + allPerkBases +" SKillname" + _skillName); 
 
-            allSkillBases.Find(t => t.skillName == _skillName).SkillHovered();
+             allSkillBases.Find(t => t.skillName == _skillName).SkillHovered();
 
             List<PerkData> clickedPerkList = allSkillPerkData
                 .Where(t => t.skillName == _skillName && t.state == PerkSelectState.Clicked).ToList();

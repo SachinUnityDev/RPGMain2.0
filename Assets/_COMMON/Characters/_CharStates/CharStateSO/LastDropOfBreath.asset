@@ -17,6 +17,5 @@ MonoBehaviour:
   charStateType: 0
   charStateBehavior: 1
   CharStateNameStr: Last Drop of Blood
-  iconSprite: {fileID: 21300000, guid: fb3db3ab97d253d42ba9968fd517d0bb, type: 3}
-  allLines: []
+  iconSprite: {fileID: 21300000, guid: e8b889384ec599d40a16f5a4064012a7, type: 3}
   CharStateFX: {fileID: 0}

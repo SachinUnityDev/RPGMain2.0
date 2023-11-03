@@ -16,14 +16,6 @@ MonoBehaviour:
   stateFor: 0
   charStateType: 0
   charStateBehavior: 1
-  timeFrame: 1
-  minCastTime: -1
-  maxCastTime: -1
   CharStateNameStr: Rooted
-  iconSprite: {fileID: 21300000, guid: 68d136d46c9009242a3cad57051fe08c, type: 3}
-  allLines:
-  - Can't use Move skills
-  - -5 Dodge
-  - 'Melee attack limit: pos1 -> pos1'
-  - Immune to Lightfooted
+  iconSprite: {fileID: 21300000, guid: 7b7f6628f143cdd4380f4c5df1e050fc, type: 3}
   CharStateFX: {fileID: 0}

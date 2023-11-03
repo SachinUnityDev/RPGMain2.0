@@ -23,7 +23,7 @@ namespace Common
 
         protected string str0, str1, str2, str3, str4, str5;
 
-        public List<string> charStateCardStrs = new List<string>();
+        public List<string> allStateFxStrs = new List<string>();
         public abstract StateFor stateFor { get; }        
         public abstract int castTime { get; protected set; }
 
@@ -108,6 +108,15 @@ namespace Common
 
             startRound = CombatService.Instance.currentRound;   
             allBuffIds.Clear();
+            allStateFxStrs.Clear();
+            allStateFxStrs.AddRange(new List<string>() { str0, str1, str2, str3, str4, str5 });
+            foreach (string str in allStateFxStrs.ToList())
+            {
+                if(str == "")
+                {
+                    allStateFxStrs.Remove(str);
+                }
+            }
         }
         public abstract void StateDisplay();
         public abstract void StateApplyFX();

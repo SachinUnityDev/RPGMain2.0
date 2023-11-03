@@ -69,13 +69,13 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "-3 Utility Attributes";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
 
             str1 = "-20 All Res";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
 
             str2 = "-1 AP";
-            charStateCardStrs.Add(str2);
+            allStateFxStrs.Add(str2);
         }
     }
 }

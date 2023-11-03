@@ -47,9 +47,9 @@ namespace Combat
 
 
         }
-        void OnCharClickedIN_TACTICS()
+        void OnCharClickedIN_TACTICS(CharController charController)
         {
-            CharController charController = CombatService.Instance.currCharClicked;
+            //CharController charController = CombatService.Instance.currCharClicked;
             // get game object  and Dyna
             DynamicPosData dyna = GridService.Instance.GetDyna4GO(charController.gameObject);
             GridService.Instance.gridView.CharOnTurnHL(dyna);

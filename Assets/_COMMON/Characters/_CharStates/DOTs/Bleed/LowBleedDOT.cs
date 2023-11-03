@@ -75,17 +75,15 @@ namespace Common
 
         public override void StateDisplay()
         {
-            int dmg = Mathf.RoundToInt(dmgPerRound); 
-            str0 = "<style=Bleed> Bleeding </style>";
-            charStateCardStrs.Add(str0);
+            int dmg = Mathf.RoundToInt(dmgPerRound);    
             str1 = $"-3<style=Bleed> Health </style>per rd";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
             str2 = "-1<style=Stamina> Stamina Regen </style>";
-            charStateCardStrs.Add(str2);
+            allStateFxStrs.Add(str2);
             str3 = "-2<style=Fortitude> Fortitude </style>per rd";
-            charStateCardStrs.Add(str3);
+            allStateFxStrs.Add(str3);
             str4 = "-2<style=Attributes> Dodge </style>";
-            charStateCardStrs.Add(str4);
+            allStateFxStrs.Add(str4);
 
         }
 

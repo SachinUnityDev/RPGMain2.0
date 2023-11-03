@@ -55,16 +55,16 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "-2 Focus and -1 Acc";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
 
             str1 = "-20 Water Res";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
 
             str2 = "+20% Max Dmg";
-            charStateCardStrs.Add(str2);
+            allStateFxStrs.Add(str2);
 
             str3 = "Gain 12 <style=Fortitude>Fort</style> upon <style=Burn>Burning</style>";
-            charStateCardStrs.Add(str3);
+            allStateFxStrs.Add(str3);
         }
         public override void EndState()
         {

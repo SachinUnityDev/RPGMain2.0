@@ -16,14 +16,6 @@ MonoBehaviour:
   stateFor: 0
   charStateType: 2
   charStateBehavior: 1
-  timeFrame: 1
-  minCastTime: 1
-  maxCastTime: 1
   CharStateNameStr: Burning
-  iconSprite: {fileID: 21300000, guid: 67819ac1ee6b999408bbb12359b57970, type: 3}
-  allLines:
-  - Immune to Soaked, Bleeding
-  - +2 Dodge
-  - -6 Fortitude per rd
-  - +24 Water Res
+  iconSprite: {fileID: 21300000, guid: c84c7eb9d0443c14e9015e0e525f024e, type: 3}
   CharStateFX: {fileID: 0}

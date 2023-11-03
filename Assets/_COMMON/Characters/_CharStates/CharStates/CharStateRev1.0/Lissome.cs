@@ -37,13 +37,13 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "+1 Haste on allies";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
 
             str1 = "-1 Luck on self";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
 
             str2 = "Immune to<style=States> Rooted </style>";
-            charStateCardStrs.Add(str2);
+            allStateFxStrs.Add(str2);
         }
 
         void Tick2(AttribModData charModData)  //  change Stat subscribe 

@@ -49,13 +49,13 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "Upon recieving damage:";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
             str1 = "May lose Fortitude";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
             str2 = "May cheat death";
-            charStateCardStrs.Add(str2);
+            allStateFxStrs.Add(str2);
             str3 = "May die";
-            charStateCardStrs.Add(str3);
+            allStateFxStrs.Add(str3);
         }
     }
 }

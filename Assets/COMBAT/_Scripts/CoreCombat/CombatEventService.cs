@@ -40,7 +40,7 @@ namespace Combat
         public event Action<CharController, bool> OnMoraleCheck; 
 
 
-        public event Action OnCharClicked;
+        public event Action <CharController> OnCharClicked;
         public event Action OnCharHovered;
 
         public event Action <DynamicPosData, CellPosData> OnTargetClicked;
@@ -228,7 +228,7 @@ namespace Combat
         public void On_CharClicked(GameObject _charClickedGO)
         {
             CombatService.Instance.currCharClicked = _charClickedGO?.GetComponent<CharController>();  
-            OnCharClicked.Invoke(); 
+            OnCharClicked?.Invoke(CombatService.Instance.currCharClicked); 
         }
 
         public void On_CharRightClicked(GameObject _charRightClickedGO)

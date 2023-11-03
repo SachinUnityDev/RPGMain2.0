@@ -104,12 +104,6 @@ namespace Combat
             CombatEventService.Instance.OnEOC -= EOCTick;
             QuestEventService.Instance.OnEOQ -= EOQTick;
             CalendarService.Instance.OnChangeTimeState -= ToggleBuffsOnTimeStateChg;
-
-            GridService.Instance.OnPosChange -= PosChgTick;
-            CombatEventService.Instance.OnEOR1 -= RoundPosTick;
-            CombatEventService.Instance.OnEOC -= EOCPosTick;
-            QuestEventService.Instance.OnEOQ -= EOQPosTick;
-
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 

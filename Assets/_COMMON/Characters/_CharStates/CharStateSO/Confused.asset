@@ -16,13 +16,6 @@ MonoBehaviour:
   stateFor: 0
   charStateType: 0
   charStateBehavior: 1
-  timeFrame: 1
-  minCastTime: -1
-  maxCastTime: -1
   CharStateNameStr: Confused
-  iconSprite: {fileID: 21300000, guid: d632e72d6932bd748a3b0938540fba9a, type: 3}
-  allLines:
-  - Chance to hit friendly targets
-  - -2 Acc
-  - Immune to Concentrated
+  iconSprite: {fileID: 21300000, guid: 66f704f9fafd15a4fa6d4d3a7ed8d2dd, type: 3}
   CharStateFX: {fileID: 0}

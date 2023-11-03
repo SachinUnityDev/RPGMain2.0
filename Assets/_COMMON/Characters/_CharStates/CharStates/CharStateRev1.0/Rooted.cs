@@ -68,16 +68,16 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "Can't use Move Skills";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
 
             str1 = "Melee attack limit: cast pos 1";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
 
             str2 = "-6 Dodge";
-            charStateCardStrs.Add(str2);
+            allStateFxStrs.Add(str2);
 
             str3 = "Immune to<style=States> Inspired </style>";
-            charStateCardStrs.Add(str3);
+            allStateFxStrs.Add(str3);
         }
     }
 }

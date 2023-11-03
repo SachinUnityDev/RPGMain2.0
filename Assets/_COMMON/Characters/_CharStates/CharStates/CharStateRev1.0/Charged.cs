@@ -52,16 +52,16 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "+2 Haste";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
 
             str1 = "-20 Earth Res";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
 
             str2 = "Immune to <style=Air>Shocked</style>";
-            charStateCardStrs.Add(str2);
+            allStateFxStrs.Add(str2);
 
             str3 = "Thorn:<style=Air>Shocked</style> 1-7 <style=Air>Air</style> dmg";
-            charStateCardStrs.Add(str3);
+            allStateFxStrs.Add(str3);
         }
     }
 }

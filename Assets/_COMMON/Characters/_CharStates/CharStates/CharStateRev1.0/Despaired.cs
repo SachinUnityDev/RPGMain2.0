@@ -58,16 +58,16 @@ namespace Common
         public override void StateDisplay()
         {          
             str0 = "-5<style=Fortitude> Fortitude </style> per rd";
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
 
             str1 = "-20 Light Res";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
 
             str2 = "Can't use Patience Skills";
-            charStateCardStrs.Add(str2);
+            allStateFxStrs.Add(str2);
 
             str3 = "Immune to<style=States> Inspired </style>";
-            charStateCardStrs.Add(str3);
+            allStateFxStrs.Add(str3);
         }
 
     }

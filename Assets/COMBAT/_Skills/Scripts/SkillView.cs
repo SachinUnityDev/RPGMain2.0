@@ -44,36 +44,31 @@ namespace Combat
      
             //CombatEventService.Instance.OnSOTactics +=
             //   () => SetSkillsPanel(CombatService.Instance.defaultChar.charModel.charName);
-            CombatEventService.Instance.OnCharOnTurnSet +=
-              //  () => SetSkillsPanel(CombatService.Instance.currCharClicked.charModel.charID);
-               (CharController charController) => SetSkillsPanel(charController.charModel.charID);
+            CombatEventService.Instance.OnCharOnTurnSet += SetSkillsPanel;
+            //  () => SetSkillsPanel(CombatService.Instance.currCharClicked.charModel.charID);
 
-            CombatEventService.Instance.OnCharClicked += 
-                ()=>SetSkillsPanel(CombatService.Instance.currCharClicked.charModel.charID);
-            CombatEventService.Instance.OnCharClicked +=
-                                                 () => FillSkillClickedState(-1);
+            CombatEventService.Instance.OnCharClicked += SetSkillsPanel;
+            CombatEventService.Instance.OnCharClicked += (CharController c)=> FillSkillClickedState(-1);
             CombatEventService.Instance.OnEOT += () => FillSkillClickedState(-1);
             CombatEventService.Instance.OnSOTactics += InitSkillBtns;
         }
 
         private void OnDisable()
         {
-            CombatEventService.Instance.OnCharOnTurnSet -=
-                (CharController charController) => SetSkillsPanel(charController.charModel.charID);
+            CombatEventService.Instance.OnCharOnTurnSet -= SetSkillsPanel;
             //() => SetSkillsPanel(CombatService.Instance.currCharOnTurn.charModel.charID);
+            CombatEventService.Instance.OnCharClicked -= SetSkillsPanel;
             CombatEventService.Instance.OnCharClicked -=
-               () => SetSkillsPanel(CombatService.Instance.currCharClicked.charModel.charID);
-            CombatEventService.Instance.OnCharClicked -=
-                                                 () => FillSkillClickedState(-1);
+                                                 (CharController c) => FillSkillClickedState(-1);
             CombatEventService.Instance.OnEOT -= () => FillSkillClickedState(-1);
             CombatEventService.Instance.OnSOTactics -= InitSkillBtns;
         }
         void InitSkillBtns()
         {
-            foreach (Transform child in transform)
-            {
-                child.GetComponent<SkillBtnsPointerEvents>().InitSkillBtns(this); 
-            }
+            //foreach (Transform child in transform)
+            //{
+            //    child.GetComponent<S>().InitSkillBtns(this); 
+            //}
         } 
 
         public void SkillBtnPressed()
@@ -286,7 +281,7 @@ namespace Combat
                             SkillNames skillName = skillSO.allSkills[i].skillName;
 
                             SkillModel skillModel = SkillService.Instance.GetSkillModel(currClickedCharID, skillName);
-                            SkillBtnsPointerEvents skillBtn = skillIconTranform.GetComponent<SkillBtnsPointerEvents>();
+                            SkillBtnViewCombat skillBtn = skillIconTranform.GetComponent<SkillBtnViewCombat>();
                             if (skillModel == null)
                             {
                                 Debug.Log("SkillMModel missing" + skillName);
@@ -316,19 +311,22 @@ namespace Combat
             skillBtnTransform.GetChild(1).GetComponent<RectTransform>().localScale = Vector3.one * 1.25f;  
         }
 
-        public void SetSkillsPanel(int  _charID)
+        public void SetSkillsPanel(CharController charController)
         {
-            CharController charController = CharService.Instance.GetCharCtrlWithCharID(_charID);
             if (charController == null) return; 
             CharNames charName = charController.charModel.charName;
             // SET ACTION POINTS 
-
+            int _charID = charController.charModel.charID;  
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
-                CombatController combatController =
-                                charController.GetComponent<CombatController>();
-                if (combatController != null)
-                    combatController.SetActionPts(charController);
+                if (CombatService.Instance.currCharClicked.charModel.charID 
+                    == CombatService.Instance.currCharOnTurn.charModel.charID)
+                {
+                    CombatController combatController = CombatService.Instance.currCharOnTurn
+                                                            .GetComponent<CombatController>();
+                    if (combatController != null)
+                        combatController.SetActionPts();
+                }
             }
 
             foreach (SkillDataSO skillSO in SkillService.Instance.allCharSkillSO)
@@ -356,13 +354,13 @@ namespace Combat
                             UpdateSkillState(skillModel); //<= updates the skillState in SkillModel
                            // skillModel.SetSkillState(skillSelState);
 
-                            SkillBtnsPointerEvents skillBtn = skillIconTranform.GetComponent<SkillBtnsPointerEvents>();
+                            SkillBtnViewCombat skillBtn = skillIconTranform.GetComponent<SkillBtnViewCombat>();
 
                             // Debug.Log("SkillModel Updates" + skillModel.GetSkillState()); 
                             skillBtn.skillModel = skillModel;
 
                             skillBtn.RefreshIconAsPerState();
-
+                            skillBtn.SkillBtnInit(skillSO, skillName, this);
                         }
                         else if(skillSO.allSkills[i].skillUnLockStatus == 0)
                         {

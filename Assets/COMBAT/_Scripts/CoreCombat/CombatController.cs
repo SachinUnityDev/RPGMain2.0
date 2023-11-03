@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Common;
-using UnityEngine.SceneManagement;
 
 namespace Combat
 {   
@@ -45,12 +44,11 @@ namespace Combat
         {
 
         }
-        public void SetActionPts(CharController _charController)
-        {
-            // get haste val 
-            if (_charController.charModel.charID != this.charController.charModel.charID)
+        public void SetActionPts()
+        {       
+            if (CombatService.Instance.currCharOnTurn.charModel.charID != this.charController.charModel.charID)
                 return;
-            MoraleChk(_charController);
+            MoraleChk(charController);
             if (prevTurn == CombatService.Instance.currentTurn)
                 return;
             prevTurn = CombatService.Instance.currentTurn;
@@ -59,7 +57,12 @@ namespace Combat
             ++actionPts; 
             if (actionPts > MAX_VAL_FOR_ACTION_PTS)
                     actionPts = MAX_VAL_FOR_ACTION_PTS;
-            Debug.Log(" charName" + _charController.charModel.charName + "action"+ actionPts);
+            Debug.Log(" charName" + charController.charModel.charName + "action"+ actionPts);
+            if (charController.charModel.charMode == CharMode.Enemy)
+            {
+                if (actionPts <= 0)
+                    CombatEventService.Instance.On_EOT();
+            }
         }
         void MoraleChk(CharController charController)
         {

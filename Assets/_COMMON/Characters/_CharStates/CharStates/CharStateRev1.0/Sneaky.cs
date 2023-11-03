@@ -60,12 +60,12 @@ namespace Common
         public override void StateDisplay()
         {
             str0 = "+2 Dodge and -14 Light Res"; 
-            charStateCardStrs.Add(str0);
+            allStateFxStrs.Add(str0);
             str1 = "Retaliate vs Melee attacks";
-            charStateCardStrs.Add(str1);
+            allStateFxStrs.Add(str1);
 
             str2 = "If on backrow at sot: +1 AP";
-            charStateCardStrs.Add(str2);
+            allStateFxStrs.Add(str2);
         }
     }
 }

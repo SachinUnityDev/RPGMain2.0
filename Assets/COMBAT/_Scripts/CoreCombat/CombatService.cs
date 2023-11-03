@@ -67,7 +67,7 @@ namespace Combat
         {      
             currCharClicked = currCharOnTurn;
             currCharHovered = currCharOnTurn;
-            combatHUDView.UpdateTurnBtn(); 
+            combatHUDView.UpdateTurnBtn(charController); 
         }
         void GetAllyInCombat()
         {

@@ -54,7 +54,7 @@ namespace Combat
                 IsClicked = true;
                 transform.GetChild(1).GetComponent<Image>().sprite = skillHexSO.skillIconFrameHL;
                 ShowSkillcardInCombat();
-                SkillService.Instance.On_SkillSelectedInInv(skillModel);
+                SkillService.Instance.On_SkillSelectInCombat(skillModel);
             }
             else
             {
@@ -64,6 +64,7 @@ namespace Combat
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if(skillModel != null)
             ShowSkillcardInCombat();
         }
 

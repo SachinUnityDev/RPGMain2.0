@@ -310,14 +310,14 @@ namespace Combat
         {
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)  
             {
-                if (CombatService.Instance.currCharClicked.charModel.charID
-                    == CombatService.Instance.currCharOnTurn.charModel.charID)
-                {
+                //if (CombatService.Instance.currCharClicked.charModel.charID
+                //    == CombatService.Instance.currCharOnTurn.charModel.charID)
+                //{
                     CombatController combatController = CombatService.Instance.currCharOnTurn
                                                             .GetComponent<CombatController>();
                     if (combatController != null)
                         combatController.SetActionPts();
-                }
+                //}
             }
         }
 

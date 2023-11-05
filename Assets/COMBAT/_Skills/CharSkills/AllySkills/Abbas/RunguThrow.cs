@@ -25,10 +25,10 @@ namespace Combat
             {
                 skillModel.targetPos.Clear();
                 CombatService.Instance.mainTargetDynas.Clear();
-                CellPosData cellPos = new CellPosData(CharMode.Enemy, myDyna.currentPos);
+                CellPosData cellPos = new CellPosData(CharMode.Ally, myDyna.currentPos);
                 targetDyna = GridService.Instance.GetInSameLaneOppParty(cellPos)[0];
                 CombatService.Instance.mainTargetDynas.Add(targetDyna);                
-                skillModel.targetPos.Add(cellPos);
+                skillModel.targetPos.Add(new CellPosData(targetDyna.charMode, targetDyna.currentPos));
             }
         }
 
@@ -88,10 +88,7 @@ namespace Combat
            
         }
 
-        public override void PopulateAITarget()
-        {
-           
-        }
+     
 
  
     }

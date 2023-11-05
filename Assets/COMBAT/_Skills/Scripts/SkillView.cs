@@ -69,10 +69,10 @@ namespace Combat
             SetSkillsPanel(CharService.Instance.allyInPlayControllers[0]); 
         } 
 
-        public void SkillBtnPressed()
+        public void SkillBtnPressed(int index)
         {
-            GameObject btn = EventSystem.current.currentSelectedGameObject;
-            int index = btn.transform.GetSiblingIndex();
+        //    GameObject btn = EventSystem.current.currentSelectedGameObject;
+        //    int index = btn.transform.GetSiblingIndex();
             // outliers
             if (CombatService.Instance.currCharOnTurn.charModel.charMode == CharMode.Enemy) return;
             if (CombatService.Instance.currCharClicked.charModel.charID != CombatService.Instance.currCharOnTurn.charModel.charID)

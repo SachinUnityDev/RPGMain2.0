@@ -14,6 +14,8 @@ namespace Combat
         [SerializeField] const float skillCardHt = 308f;
         [SerializeField] const float midTransHt = 111f;
 
+        [SerializeField] int incrVal = 0;
+
         [SerializeField] SkillController1 skillController;
         [SerializeField] CharController charController;
         [SerializeField] SkillModel skillModel;
@@ -32,19 +34,36 @@ namespace Combat
         [Header("Skill Hex SO & SkillView SO ")]
         SkillHexSO skillHexSO;
         SkillViewSO skillViewSO;
-        private void Awake()
-        {
-            gameObject.SetActive(false);
-        }
+
+        [Header(" In combat for testing ")]
+        [SerializeField] TextMeshProUGUI skillStateTxt;             
         private void OnEnable()
         {
-             SkillCardInit();     
+            SkillCardInit();
+        }
+
+        private void OnDisable()
+        {
+            ClearData(); 
+            ResetWidthHeight();
+        }
+        void ResetWidthHeight()
+        {
+            RectTransform skillCardRect = transform.GetComponent<RectTransform>();
+            RectTransform midTransRect = midTrans.GetComponent<RectTransform>();
+          
+                midTransRect.sizeDelta
+                        = new Vector2(midTransRect.sizeDelta.x, midTransHt);
+                skillCardRect.sizeDelta
+                        = new Vector2(skillCardRect.sizeDelta.x, skillCardHt);
+          
         }
         void ClearData()
         {
             skillName = SkillNames.None;
             skillModel = null;
             skillDataSO = null; 
+            incrVal= 0;
         }
         void SkillCardInit()
         {
@@ -76,15 +95,73 @@ namespace Combat
                 gameObject.SetActive(false);
                 return;
             }
-
-
             FillTopTrans();
             FillMidTrans();    
             FillBtmTrans();
+            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            {
+                skillStateTxt.gameObject.SetActive(true);
+                SkillStateDsply();
+            }
+            else
+            {
+                skillStateTxt.gameObject.SetActive(false);
+            }   
+        }
+        void SkillStateDsply()
+        {  
+            if (skillModel == null) return;
+            SkillSelectState skillState = skillModel.GetSkillState();
+            
+            switch (skillState)
+            {
+                case SkillSelectState.None:
+                    break;
+                case SkillSelectState.Clickable:
+                    skillStateTxt.text = "Clickable";
+                    break;
+                case SkillSelectState.UnHoverable:
+                    skillStateTxt.text = "UnHoverable";
+                    break;
+                case SkillSelectState.Unclickable_passiveSkills:
+                    skillStateTxt.text = "PassiveSkills";
+                    break;
+                case SkillSelectState.UnClickable_InCd:
+                    skillStateTxt.text = "In CD";
+                    break;
+                case SkillSelectState.Unclickable_notCharsTurn:
+                    skillStateTxt.text = "Not Char Turn";
+                    break;
+                case SkillSelectState.Unclickable_notOnCastPos:
+                    skillStateTxt.text = "not on castPos";
+                    break;
+                case SkillSelectState.UnClickable_NoTargets:
+                    skillStateTxt.text = "No targets";
+                    break;
+                case SkillSelectState.UnClickable_NoStamina:
+                    skillStateTxt.text = "No stamina";
+                    break;
+                case SkillSelectState.UnClickable_InTactics:
+                    skillStateTxt.text = "In Tactics";
+                    break;
+                case SkillSelectState.Clicked:
+                    skillStateTxt.text = "Clicked";
+                    break;
+                case SkillSelectState.UnClickable_NoActionPts:
+                    skillStateTxt.text = "No action pts";
+                    break;
+                case SkillSelectState.UnClickable_Locked:
+                    skillStateTxt.text = "Locked";
+                    break;
+                case SkillSelectState.UnClickable_Misc:
+                    skillStateTxt.text = "Misc";
+                    break;
+                default:
+                    break;
+            }
         }
 
-        
-
+      
         void FillTopTrans()
         {
             skillDataSO = SkillService.Instance.GetSkillSO(charController.charModel.charName);
@@ -134,14 +211,16 @@ namespace Combat
             {
                 // increase size 
                 int incr = lines - 2;
+                incrVal = incr * 40; 
                 midTransRect.sizeDelta
-                        = new Vector2(midTransRect.sizeDelta.x, midTransHt + incr * 40f);
+                        = new Vector2(midTransRect.sizeDelta.x, midTransHt + incrVal);
                 skillCardRect.sizeDelta
-                        = new Vector2(skillCardRect.sizeDelta.x, skillCardHt + incr * 40f);
+                        = new Vector2(skillCardRect.sizeDelta.x, skillCardHt + incrVal);
             }
             else
             {
                 // reduce to org size 
+                incrVal= 0;
                 midTransRect.sizeDelta
                         = new Vector2(midTransRect.sizeDelta.x, midTransHt );
                 skillCardRect.sizeDelta
@@ -193,5 +272,11 @@ namespace Combat
             btmTrans.GetChild(3).GetComponent<TextMeshProUGUI>().text
                                                              = dmgPrint;
         }
+
+        public int GetIncVal()
+        {
+            return incrVal; 
+        }
+
     }
 }

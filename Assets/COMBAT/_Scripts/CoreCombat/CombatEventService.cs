@@ -215,7 +215,7 @@ namespace Combat
                         return;
                     OnTargetClicked?.Invoke(_targetDyna, cellPosData);
                 }
-                if (skillModel.skillType == SkillTypeCombat.Remote)
+                if (skillModel.attackType == AttackType.Remote)
                 {
                     if (!skillModel.targetPos.Any(t => t.pos == cellPosData.pos && t.charMode == cellPosData.charMode))
                         return;

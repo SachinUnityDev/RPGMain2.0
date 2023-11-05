@@ -324,7 +324,7 @@ namespace Combat
 
             CharController targetController = null;
          
-            if (currSkillModel.skillType != SkillTypeCombat.Move && currSkillModel.skillType != SkillTypeCombat.Remote)
+            if (currSkillModel.skillType != SkillTypeCombat.Move && currSkillModel.attackType != AttackType.Remote)
             {
               
                 currentTargetDyna = target;
@@ -349,7 +349,7 @@ namespace Combat
             {
                 return;
             }
-            if (currSkillModel.skillType == SkillTypeCombat.Remote && cellPosData == null)
+            if (currSkillModel.attackType == AttackType.Remote && cellPosData == null)
             {
                 return;
             }

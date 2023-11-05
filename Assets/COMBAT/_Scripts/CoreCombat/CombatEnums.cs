@@ -65,9 +65,9 @@ namespace Combat
         Patience,
         Move, 
         Weapon, 
-        Uzu, 
+        Uzu,
         Retaliate,
-        Remote,
+     //   Remote,
     }
 
     public enum StrikeTargetNos

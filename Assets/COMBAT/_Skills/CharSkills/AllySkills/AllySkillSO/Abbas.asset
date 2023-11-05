@@ -128,7 +128,7 @@ MonoBehaviour:
     skillPose: {fileID: 0}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
-    skillType: 10
+    skillType: 3
     skillUnLockStatus: 1
     skillDesc: Animal Trap
     damageMod: 120

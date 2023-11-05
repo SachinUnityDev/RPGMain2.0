@@ -16,14 +16,15 @@ namespace Combat
 
         [Header("Skill card Dimensions")]
         [SerializeField] int expBeyondLineNo = 3;
-        [SerializeField] Vector2 skillCardBaseDim = new Vector2(328f, 325f);
+
+        [Header("Skill lvl")]
+        [SerializeField] Transform skillLvlTrans; 
 
         [Header("Skill Card positioning")]
-        [SerializeField] Vector3 offset = new Vector3(150, 60, 0);
+        [SerializeField] Vector3 offset = new Vector3(0, 250, 0);
 
         [Header("Skill HEX SO TBR")] // contain skill card SO 
         public SkillHexSO skillHexSO;
-
 
         [SerializeField] int index = -1;
 
@@ -51,10 +52,12 @@ namespace Combat
 
             if (IsClicked)
             {
+                if (skillModel.GetSkillState() != SkillSelectState.Clickable)
+                    return; 
                 IsClicked = true;
                 transform.GetChild(1).GetComponent<Image>().sprite = skillHexSO.skillIconFrameHL;
                 ShowSkillcardInCombat();
-                SkillService.Instance.On_SkillSelectInCombat(skillModel);
+                skillView.SkillBtnPressed(transform.GetSiblingIndex());
             }
             else
             {
@@ -67,7 +70,6 @@ namespace Combat
             if(skillModel != null)
             ShowSkillcardInCombat();
         }
-
         public void OnPointerExit(PointerEventData eventData)
         {
             HideSkillCard();
@@ -89,7 +91,6 @@ namespace Combat
             {
                 skillImg.sprite = skillView.NASkillIconSprite;
                 skillName = SkillNames.None; 
-               // skillCardGO = null;
                 return;
             }
             
@@ -112,37 +113,29 @@ namespace Combat
             {
                 skillImg.sprite = skillView.NASkillIconSprite;
             }
-
-   
             int skilllvlInt = (int)skillModel.skillLvl;  // skillmodel req here for this
        
             skillCardGO = SkillService.Instance.skillCardGO;
+            DsplySkillLvl();
+           
         }
 
-        void DsplySkillLvl()
-        {
-            if(skillModel == null)
-            {
-                // set active as false
-            }
-            else
-            {
-
-            }
-
-        }
+  
 
         void HideSkillCard()
         {
             if(skillCardGO != null)
-            skillCardGO.gameObject.SetActive(false);
+            {
+                skillCardGO.gameObject.SetActive(false);              
+            }            
         }
         void ShowSkillcardInCombat()
         {
             if (GameService.Instance.gameModel.gameState != GameState.InCombat)
                 return;
             if (skillCardGO == null)
-                return; 
+                return;
+           
             CharNames charName = CombatService.Instance.currCharClicked.charModel.charName; 
              
             skillDataSO = SkillService.Instance.GetSkillSO(charName);
@@ -155,23 +148,76 @@ namespace Combat
             {
                 Debug.Log("Skill SO is null "); return;
             }
-          
-            PosSkillCard();
-
+            PosNShowSkillCard();
         }
 
-        void PosSkillCard()
+        void DsplySkillLvl()
+        {
+            if (skillModel == null)
+                return;
+            if (skillModel.skillUnLockStatus == 1)
+            {
+                int skillLvl = (int)skillModel.skillLvl;
+                SkillTypeCombat skillType = skillModel.skillType;
+
+                skillLvlTrans.gameObject.SetActive(false);
+
+                switch (skillType)
+                {
+                    case SkillTypeCombat.None:
+                        break;
+                    case SkillTypeCombat.Skill1:
+                        skillLvlTrans.gameObject.SetActive(true);
+                        skillLvlTrans.GetComponentInChildren<TextMeshProUGUI>().text = skillModel.skillLvl.ToString(); 
+                        break;
+                    case SkillTypeCombat.Skill2:
+                        skillLvlTrans.gameObject.SetActive(true);
+                        skillLvlTrans.GetComponentInChildren<TextMeshProUGUI>().text = skillModel.skillLvl.ToString();
+                        break;
+                    case SkillTypeCombat.Skill3:
+                        skillLvlTrans.gameObject.SetActive(true);
+                        skillLvlTrans.GetComponentInChildren<TextMeshProUGUI>().text = skillModel.skillLvl.ToString();
+                        break;
+                    case SkillTypeCombat.Ulti:
+                        skillLvlTrans.gameObject.SetActive(true);
+                        skillLvlTrans.GetComponentInChildren<TextMeshProUGUI>().text = skillModel.skillLvl.ToString();
+                        break;
+                    case SkillTypeCombat.Patience:
+                        skillLvlTrans.gameObject.SetActive(false);                        
+                        break;
+                    case SkillTypeCombat.Move:
+                        skillLvlTrans.gameObject.SetActive(false);                        
+                        break;
+                    case SkillTypeCombat.Weapon:
+                        break;
+                    case SkillTypeCombat.Uzu:
+                        skillLvlTrans.gameObject.SetActive(true);
+                        skillLvlTrans.GetComponentInChildren<TextMeshProUGUI>().text = skillModel.skillLvl.ToString();
+                        break;
+                    case SkillTypeCombat.Retaliate:
+                        break;
+           
+                    default:
+                        break;
+                }
+            }
+        }
+
+
+        void PosNShowSkillCard()
         {
             float width = skillCardGO.GetComponent<RectTransform>().rect.width;
             float height = skillCardGO.GetComponent<RectTransform>().rect.height;
+
+            skillCardGO.SetActive(true);
+            int incrVal = skillCardGO.GetComponent<SkillCardView>().GetIncVal();
             GameObject Canvas = GameObject.FindWithTag("Canvas");
             Canvas canvasObj = Canvas.GetComponent<Canvas>();
-            Vector3 offSetFinal = (offset + new Vector3(width / 2, -height / 2, 0)) * canvasObj.scaleFactor;
+            Vector3 offSetFinal = (offset + new Vector3(-width / 2, (height*2/3), 0)) * canvasObj.scaleFactor;
             Vector3 pos = transform.position + offSetFinal;
-            skillCardGO.GetComponent<Transform>().DOMove(pos, 0.1f);
-            skillCardGO.SetActive(true);
+            skillCardGO.GetComponent<Transform>().DOMove(pos, 0.001f);
+            
         }
-
 
         public void RefreshIconAsPerState()
         {

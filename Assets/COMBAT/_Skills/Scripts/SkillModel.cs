@@ -39,22 +39,22 @@ namespace Combat
         public List<PerkHexData> allPerkHexes = new List<PerkHexData>();
         public List<PerkType> perkChain = new List<PerkType>();
         public List<string> descLines = new List<string>();
+
+        [Header("Use Limit")]
+        public int noOfTimesUsed;
+        [Header(" cd remaining")]
+        public int cdRemaining; 
+
         public SkillSelectState GetSkillState()
         {
             return skillSelState; 
         }
         public void SetSkillState(SkillSelectState _skillState)
-        {
-            // if passive  it cannot have anyother state than passive unclickable
+        {   
             if (skillInclination == SkillInclination.Passive)
             {               
-                skillSelState = SkillSelectState.Unclickable_passiveSkills;
-              
-            }
-            //else if(attackType == AttackType.Remote)
-            //{
-            //     // to be written 
-            //}
+                skillSelState = SkillSelectState.Unclickable_passiveSkills;              
+            }   
             else
             {
                 skillSelState = _skillState; 
@@ -87,8 +87,8 @@ namespace Combat
             baseWeight = _skillDataSO.baseWeight;
             allPerkHexes = _skillDataSO.allPerkHexes;
             isActive = _skillDataSO.isActive;
-
-
+            //  Uses and cd remaining
+            noOfTimesUsed = 0;
         }
 
     }

@@ -105,9 +105,16 @@ namespace Combat
             targetGO = SkillService.Instance.currentTargetDyna.charGO;
             targetController = targetGO.GetComponent<CharController>();
             if (skillModel.castTime >0)
-                CombatEventService.Instance.OnEOR1 += Tick; 
-            
-            skillModel.lastUsedInRound = CombatService.Instance.currentRound;
+                CombatEventService.Instance.OnEOR1 += Tick;
+
+            if (skillModel.maxUsagePerCombat > 0)
+            {
+                skillModel.noOfTimesUsed++;
+            }
+            else
+            {
+                skillModel.lastUsedInRound = CombatService.Instance.currentRound;
+            }
             charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatName.stamina, -skillModel.staminaReq);
            
             //if(charController.charModel.charMode == CharMode.Enemy)

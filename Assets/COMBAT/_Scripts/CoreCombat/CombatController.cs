@@ -61,7 +61,9 @@ namespace Combat
             if (charController.charModel.charMode == CharMode.Enemy)
             {
                 if (actionPts <= 0)
-                    CombatEventService.Instance.On_EOT();
+                {
+                    SkillService.Instance.Move2Nextturn();
+                }
             }
         }
         void MoraleChk(CharController charController)

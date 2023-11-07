@@ -141,17 +141,20 @@ namespace Combat
         {           
             if (CheckEndOFRound())
             {
-                //  Debug.Log("Check end of round");
-                int roundNo = CombatService.Instance.currentRound; 
-                On_EOR(roundNo);
-                Debug.Log("Check end of round");
-                roundNo = ++CombatService.Instance.currentRound;
-                On_SOR(roundNo); 
+                Move2NextRds();
             }
             Debug.Log("@SOT");
             OnSOT?.Invoke(); 
         }
-
+        public void Move2NextRds()
+        {    
+            int roundNo = CombatService.Instance.currentRound;
+            Debug.Log(roundNo + "Check end of round.........................");
+            On_EOR(roundNo);
+            Debug.Log("Check end of round");
+            roundNo = ++CombatService.Instance.currentRound;
+            On_SOR(roundNo);
+        }
         bool CheckEndOFRound()
         {
             int currTurn = CombatService.Instance.currentTurn;

@@ -4,6 +4,7 @@ using UnityEngine;
 using Common;
 using System.Linq;
 using System;
+using UnityEngine.SceneManagement;
 
 namespace Combat
 {
@@ -27,24 +28,32 @@ namespace Combat
 
         private void Start()
         {
-            index = -1;
-            //CombatEventService.Instance.OnSOT -= SetCharOnTurn;
-            //CombatEventService.Instance.OnSOR -= OnRoundStart;            
-            CombatEventService.Instance.OnSOT += SetNextCharOnTurn;
-            CombatEventService.Instance.OnSOR1 += OnRoundStart;
-           
+            index = 0;
+            SceneManager.sceneLoaded += OnSceneLoaded;
+
+
         }
         private void OnDisable()
         {
             CombatEventService.Instance.OnSOT -= SetNextCharOnTurn;
             CombatEventService.Instance.OnSOR1 -= OnRoundStart;
-        }
+            SceneManager.sceneLoaded -= OnSceneLoaded;
 
+        }
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            {
+                CombatEventService.Instance.OnSOT += SetNextCharOnTurn;
+                CombatEventService.Instance.OnSOR1 += OnRoundStart;
+            }
+      
+        }
         public void SetSameCharOnTurn()
         {
             if (CombatService.Instance.combatState != CombatState.INCombat_normal)
             {
-                Debug.Log("wrong STATE return " + index);
+                Debug.Log("SAME CHAR ON TURN SET" + index);
                 return;
             }
             CombatEventService.Instance.On_CharOnTurnSet();
@@ -52,23 +61,27 @@ namespace Combat
 
         public void SetNextCharOnTurn()
         {
-            if (CombatService.Instance.combatState != CombatState.INCombat_normal) 
+            if (CombatService.Instance.combatState != CombatState.INCombat_normal
+                || CombatService.Instance.combatState != CombatState.INCombat_InSkillSelected) 
             {
-                Debug.Log("wrong STATE return " + index);
+                Debug.Log("NEXT CHAR ON TURN SET" + index);
                 return;
-            } 
+            }
             index++;
             charCount = CharService.Instance.charsInPlayControllers.Count; 
             if(index < charCount && index > -1)
             {
                 CombatService.Instance.currCharOnTurn = charTurnOrder[index];
-            }else // next round 
+                CombatService.Instance.currentTurn = index;
+                CombatEventService.Instance.On_CharOnTurnSet();
+            }
+            else // next round 
             {
                 index = 0;
+                CombatEventService.Instance.Move2NextRds();
                 CombatService.Instance.currCharOnTurn = charTurnOrder[index];
             }
-            CombatService.Instance.currentTurn = index + 1;
-            CombatEventService.Instance.On_CharOnTurnSet();
+      
 
         }
 

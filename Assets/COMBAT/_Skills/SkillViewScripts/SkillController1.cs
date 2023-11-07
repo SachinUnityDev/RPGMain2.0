@@ -55,13 +55,17 @@ namespace Combat
             Debug.Log("ENABLED" + charName);
             // CharService.Instance.OnCharAddedToParty += InitSkillList;
             SceneManager.sceneLoaded += OnSceneLoaded;
-            QuestEventService.Instance.OnEOQ += EOQTick; 
+            QuestEventService.Instance.OnEOQ += EOQTick;
         }
         private void OnDisable()
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
             CharService.Instance.OnCharInit -= InitSkillList;
             CombatEventService.Instance.OnSOC1 -= InitAllSkill_OnCombat;
+            CombatEventService.Instance.OnEOR1 -= RoundTick;
+            CombatEventService.Instance.OnEOC -= EOCTick;
+            QuestEventService.Instance.OnEOQ -= EOQTick;
+
 
         }
 
@@ -74,6 +78,7 @@ namespace Combat
                 CombatEventService.Instance.OnSOC1 += InitAllSkill_OnCombat;
                 CombatEventService.Instance.OnEOR1 += RoundTick;
                 CombatEventService.Instance.OnEOC += EOCTick;
+            
             }
             
         }
@@ -802,6 +807,7 @@ namespace Combat
         }
         #endregion
 
+     
 
     }
 

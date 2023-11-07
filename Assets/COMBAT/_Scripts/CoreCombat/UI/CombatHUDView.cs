@@ -118,14 +118,14 @@ namespace Combat
             CombatEventService.Instance.OnSOR1 += RoundDisplay; 
             CombatEventService.Instance.OnCombatLoot += CombatResultDisplay;
 
-            //CombatEventService.Instance.OnCharOnTurnSet
-            //                                 += SetCharAttributesDisplay;               
-            
-            //CombatEventService.Instance.OnCharClicked += SetCharAttributesDisplay;
-        
-            //CombatEventService.Instance.OnCharOnTurnSet += SetSelectCharPortrait;
-            //CombatEventService.Instance.OnCharClicked += SetSelectCharPortrait;
-            
+            CombatEventService.Instance.OnCharOnTurnSet
+                                             += SetCharAttributesDisplay;
+
+            CombatEventService.Instance.OnCharClicked += SetCharAttributesDisplay;
+
+            CombatEventService.Instance.OnCharOnTurnSet += SetSelectCharPortrait;
+            CombatEventService.Instance.OnCharClicked += SetSelectCharPortrait;
+
             CombatEventService.Instance.OnCharOnTurnSet += SetCombatStatesDisplay;
             CombatEventService.Instance.OnCharClicked += SetCombatStatesDisplay;
            // CharStatesPanelIconsClear();
@@ -399,13 +399,13 @@ namespace Combat
 
         public void SetCharAttributesDisplay(CharController charController)
         {
-             
+
             //for (int i = 1; i <= 16; i++)    // 6-21  // 0 in list "none"      // ICON STATS            
             //{
-              
+
             //    int index = i;
-            //    SpriteData spriteData = null; 
-                    
+            //    SpriteData spriteData = null;
+
             //    int j = statIconSO.allSpriteData.FindIndex(x => x.statName == (AttribName)index);
             //    if (j != -1)
             //        spriteData = statIconSO.allSpriteData[j];
@@ -413,8 +413,8 @@ namespace Combat
             //    {
             //        Debug.LogError(" Attrib data missoing" + (AttribName)index);
             //    }
-                    
-               
+
+
             //    // img from SO 
             //    AttribData attribData = charController.GetAttrib((AttribName)index);  // current stats from ctrller               
 
@@ -432,16 +432,16 @@ namespace Combat
             //    if (((AttribName)index).IsAttribDamage())
             //    {
             //        float dmgMin = charController.GetAttrib(AttribName.dmgMin).currValue;
-            //        float dmgMax = charController.GetAttrib(AttribName.dmgMax).currValue;   
+            //        float dmgMax = charController.GetAttrib(AttribName.dmgMax).currValue;
 
             //        statStr = dmgMin + "-" + dmgMax;
-            //    }else if (((AttribName)index).IsAttribArmor())
+            //    }
+            //    else if (((AttribName)index).IsAttribArmor())
             //    {
             //        float armorMin = charController.GetAttrib(AttribName.armorMin).currValue;
             //        float armorMax = charController.GetAttrib(AttribName.armorMax).currValue;
 
             //        statStr = armorMin + "-" + armorMax;
-
             //    }
             //    else
             //    {
@@ -451,7 +451,7 @@ namespace Combat
             //    statDisplayData.statDisplayGO.GetComponentInChildren<TextMeshProUGUI>().text = statStr;
             //    statDisplayData.statDisplayGO.GetComponentInChildren<TextMeshProUGUI>().alignment = TextAlignmentOptions.Center;
 
-             
+
             //}
         }
 

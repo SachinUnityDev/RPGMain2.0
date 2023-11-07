@@ -90,7 +90,8 @@ namespace Combat
             if (skillModel == null)
             {
                 skillImg.sprite = skillView.NASkillIconSprite;
-                skillName = SkillNames.None; 
+                skillName = SkillNames.None;
+                skillLvlTrans.gameObject.SetActive(false);
                 return;
             }
             
@@ -119,8 +120,6 @@ namespace Combat
             DsplySkillLvl();
            
         }
-
-  
 
         void HideSkillCard()
         {
@@ -153,14 +152,14 @@ namespace Combat
 
         void DsplySkillLvl()
         {
+            skillLvlTrans.gameObject.SetActive(false);
             if (skillModel == null)
                 return;
+           
             if (skillModel.skillUnLockStatus == 1)
             {
                 int skillLvl = (int)skillModel.skillLvl;
                 SkillTypeCombat skillType = skillModel.skillType;
-
-                skillLvlTrans.gameObject.SetActive(false);
 
                 switch (skillType)
                 {
@@ -200,9 +199,9 @@ namespace Combat
                     default:
                         break;
                 }
+           
             }
         }
-
 
         void PosNShowSkillCard()
         {

@@ -66,7 +66,7 @@ namespace Combat
         //public SkillCardData skillCardData;
         [Header("CURR SKILLMODEL")]
         public SkillModel skillModelHovered;
-        public SkillModel skillModelSelect; 
+      //  public SkillModel skillModelSelect; 
         public List<string> perkDescOnHover= new List<string>();
 
         [Header("ALL SO")]
@@ -183,14 +183,14 @@ namespace Combat
         }
         public void On_SkillSelectedInInv(SkillModel skillModel)
         {
-            skillModelSelect = skillModel;
+            currSkillModel = skillModel;
             OnSkillSelectInInv?.Invoke(skillModel); 
         }
-        public void On_SkillSelectInCombat(SkillModel skillModel)
-        {
-            skillModelSelect = skillModel;
-            On_SkillSelected(skillModel.charName, skillModel.skillName);
-        }
+        //public void On_SkillSelectInCombat(SkillModel skillModel)
+        //{
+        //    skillModelSelect = skillModel;
+        //    On_SkillSelected(skillModel.charName, skillModel.skillName);
+        //}
         void SkillDisplay()  // some reference is there for SKILL DISPLAY ON TOP
         {
             
@@ -521,6 +521,8 @@ namespace Combat
         public void Move2Nextturn()
         {
             CombatEventService.Instance.On_EOT();
+
+
             Sequence PauseSeq = DOTween.Sequence();
 
             PauseSeq.AppendInterval(1f)

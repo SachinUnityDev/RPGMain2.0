@@ -8,9 +8,13 @@ namespace Combat
 {
     public class CombatService : MonoSingletonGeneric<CombatService>
     {
-        public CombatState combatState; 
+        public CombatState combatState;
 
-        public List<EnemyPacksSO> allEnemyPacks = new List<EnemyPacksSO>();
+        [Header("Enemy Pack")]
+        public AllEnemyPackSO allEnemyPackSO;
+        public EnemyPackController enemyPackController; 
+        public EnemypackFactory enemyPackFactory;
+
         public List<CharController> allEnemiesInCombat = new List<CharController>();
         public List<CharController> allAlliesInCombat = new List<CharController>();
 
@@ -23,7 +27,7 @@ namespace Combat
         public List<DynamicPosData> mainTargetDynas = new List<DynamicPosData>();
         public List<DynamicPosData> colTargetDynas = new List<DynamicPosData>(); 
 
-        public EnemyPack currEnemyPack; 
+        public EnemyPackName currEnemyPack; 
         public CombatLogController combatLogController;
         public CombatAnimController combatAnimController;
         public RoundController roundController;
@@ -43,8 +47,8 @@ namespace Combat
             combatState = CombatState.None;
             
             CombatEventService.Instance.OnCombatInit += GetAllyInCombat;
-            currEnemyPack = EnemyPack.RatPack3;
-            CombatEventService.Instance.OnSOC += ()=>GetEnemyInCombat(currEnemyPack); 
+            currEnemyPack = EnemyPackName.RatPack3;
+            CombatEventService.Instance.OnSOC += ()=>SetEnemyInCombat(currEnemyPack); 
 
             
             CombatEventService.Instance.OnEOR1 += EORActions;
@@ -57,12 +61,30 @@ namespace Combat
             combatAnimController = GetComponent<CombatAnimController>();
             roundController = GetComponent<RoundController>();
             combatHUDView = gameObject.GetComponent<CombatHUDView>();
+            // ENEMY PACK 
+
+            enemyPackController= GetComponent<EnemyPackController>();   
+            enemyPackFactory = GetComponent<EnemypackFactory>();
+
             // Set Abbas as main Char
              currCharOnTurn = CharService.Instance.charsInPlayControllers[0]; 
            
-            SetAllCurrCharValues(currCharOnTurn);
+            SetAllCurrCharValues(currCharOnTurn);    
         }
- 
+        private void OnDisable()
+        {
+            CombatEventService.Instance.OnCombatInit -= GetAllyInCombat;
+           
+            CombatEventService.Instance.OnSOC -= () => SetEnemyInCombat(currEnemyPack);
+
+
+            CombatEventService.Instance.OnEOR1 -= EORActions;
+            CombatEventService.Instance.OnCharOnTurnSet -= SetAllCurrCharValues;
+
+            SkillService.Instance.SkillSelect
+                                       -= (CharNames _charName, SkillNames _skillName)
+                                       => combatState = CombatState.INCombat_InSkillSelected; 
+        }
         public void SetAllCurrCharValues(CharController charController)  // Inits 
         {      
             currCharClicked = currCharOnTurn;
@@ -74,9 +96,11 @@ namespace Combat
             GridService.Instance.SetAllyPreTactics(); 
         }
 
-        void GetEnemyInCombat(EnemyPack _enemyPack)
+        void SetEnemyInCombat(EnemyPackName enemyPack)
         {
-            EnemyPacksSO enemySO = allEnemyPacks.FirstOrDefault(e => e.enemyPack == _enemyPack);           
+            currEnemyPack = enemyPack;
+            enemyPackController.InitEnemyPackController(allEnemyPackSO);
+            EnemyPacksSO enemySO = allEnemyPackSO.GetEnemyPackSO(enemyPack);            
             GridService.Instance.SetEnemy(enemySO);
         }
 
@@ -101,11 +125,6 @@ namespace Combat
 
                 if (charCtrl.strikeController == null)
                     charCtrl.strikeController = charCtrl.gameObject.AddComponent<StrikeController>();
-
-                
-
-
-
                 charCtrl.damageController.Init(); 
                 charCtrl.strikeController.Init();
                 charCtrl.combatController.Init();

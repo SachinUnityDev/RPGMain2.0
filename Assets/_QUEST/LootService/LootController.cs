@@ -18,10 +18,7 @@ namespace Quest
 
         [Header(" loot view GO")]
         [SerializeField] GameObject lootViewGO; 
-        void Start()
-        {
 
-        }
         public void ShowLootTableInLandscape(List<ItemType> allItemType, Transform parentTrans)
         {
             LandscapeNames landscapeNames = LandscapeNames.Sewers;
@@ -61,9 +58,6 @@ namespace Quest
               //  float offset =  parent.GetComponent<RectTransform>().rect.width / 2 + 50f; 
                 lootRect.localPosition = new Vector3(-400,-150);
             }
-            
-      
-
             LootService.Instance.lootView.InitLootList(itemLS, parent);
             LootService.Instance.On_LootDsplyToggle(true);
         }

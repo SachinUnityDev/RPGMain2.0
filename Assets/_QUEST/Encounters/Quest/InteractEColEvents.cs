@@ -91,7 +91,7 @@ namespace Quest
                 OnPosChked();               
                 OnContinue();
             }
-            else if(interactData.enemyPack != EnemyPack.None)
+            else if(interactData.enemyPack != EnemyPackName.None)
             {
                 Debug.Log("Detected: Enemy Pack ");
                 OnPosChked();

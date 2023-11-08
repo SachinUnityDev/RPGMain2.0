@@ -160,7 +160,7 @@ namespace Common
             {
                 charController.buffController.RemoveBuff(buffID);
             }
-            foreach (ImmunityBuffData immuneBuffData in charController.charStateController.allImmunityBuffs)
+            foreach (ImmunityBuffData immuneBuffData in charController.charStateController.allImmunityBuffs.ToList())
             {
                 if(allImmunityBuffs.Any(t=>t == immuneBuffData.immunityID))
                 {

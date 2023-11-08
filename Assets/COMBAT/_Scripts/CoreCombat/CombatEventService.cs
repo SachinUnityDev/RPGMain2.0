@@ -120,7 +120,8 @@ namespace Combat
         public void On_SOR(int roundNo)
         {
             Debug.Log("SOR Triggered" + roundNo);            
-            OnSOR1?.Invoke(roundNo);         
+            OnSOR1?.Invoke(roundNo);
+            On_SOT();
         }
         public void On_EOR(int roundNo)
         {
@@ -138,12 +139,7 @@ namespace Combat
         }
 
         public void On_SOT()
-        {           
-            if (CheckEndOFRound())
-            {
-                Move2NextRds();
-            }
-            Debug.Log("@SOT");
+        {
             OnSOT?.Invoke(); 
         }
         public void Move2NextRds()
@@ -151,20 +147,26 @@ namespace Combat
             int roundNo = CombatService.Instance.currentRound;
             Debug.Log(roundNo + "Check end of round.........................");
             On_EOR(roundNo);
-            Debug.Log("Check end of round");
-            roundNo = ++CombatService.Instance.currentRound;
-            On_SOR(roundNo);
+            Debug.Log("Check end of round" + roundNo);
+            int MAX_RD_LIMIT = GameService.Instance.gameController.GetMaxRoundLimit();
+            if (roundNo >= MAX_RD_LIMIT)
+                On_EOC();
+            else
+            {
+                roundNo = ++CombatService.Instance.currentRound;
+                On_SOR(roundNo);
+            }
         }
-        bool CheckEndOFRound()
-        {
-            int currTurn = CombatService.Instance.currentTurn;
-            int charCount = CharService.Instance.charsInPlay.Count;
+        //bool CheckEndOFRound()
+        //{
+        //    int currTurn = CombatService.Instance.currentTurn;
+        //    int charCount = CharService.Instance.charsInPlay.Count;
             
-            if (currTurn >= (charCount)) 
-                return true;
-            else 
-               return false; 
-        }
+        //    if (currTurn >= (charCount)) 
+        //        return true;
+        //    else 
+        //       return false; 
+        //}
         public void On_DmgApplied(DmgAppliedData dmgAppliedData)
         {
            OnDamageApplied?.Invoke(dmgAppliedData);

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9e90dc1de19dd84db657aa155d19449, type: 3}
+  m_Name: AllEnemyPackSO
+  m_EditorClassIdentifier: 
+  lootTypes: 
+  allEnemyPack:
+  - {fileID: 11400000, guid: 7868bea6d3ab7ec4a8989150daa632e3, type: 2}
+  - {fileID: 11400000, guid: 3bd137c6a31a268449ce0bfb551bf485, type: 2}
+  - {fileID: 11400000, guid: 50848192169b5044cbc6e50d1137f3be, type: 2}
+  - {fileID: 11400000, guid: a25a1b886f17a684aa66eccd9af3335a, type: 2}
+  - {fileID: 11400000, guid: cf55f80f328584d439379e735447e171, type: 2}

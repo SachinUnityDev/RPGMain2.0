@@ -19,14 +19,14 @@ namespace Quest
         [Header("Trigger Type")]
         public QuestENames questEName;
         public List<QBarkNames> allBarks = new List<QBarkNames>();  
-        public EnemyPack enemyPack;
+        public EnemyPackName enemyPack;
         public Traps trapNames; 
 
 
         public bool HasInteraction()
         {
             if (questEName != QuestENames.None || allBarks.Count > 0 
-                    || enemyPack != EnemyPack.None || trapNames != Traps.None) // it means it has interaction
+                    || enemyPack != EnemyPackName.None || trapNames != Traps.None) // it means it has interaction
                 return true;             
             return false; 
         }

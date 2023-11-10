@@ -158,7 +158,7 @@ namespace Town
         }
         void FillCharInfo()
         {
-            CharacterSO charSO = CharService.Instance.allCharSO.GetCharSO(charSelect);
+            CharacterSO charSO = CharService.Instance.allCharSO.GetAllySO(charSelect);
             charImg.sprite = charSO.charSprite;
             nameTxt.text = charSO.charNameStr;
         }

@@ -19,10 +19,10 @@ namespace Combat
         protected SkillController1 skillController;  // ?? to be checked when it init
         protected DynamicPosData currDyna;
 
-        protected string str0, str1, str2, str3;
+        protected string str0, str1, str2, str3, str4;
 
         public SkillModel skillModel { get; set; }
-        public abstract PassiveSkillNames passiveSkillName { get; }
+        public abstract PassiveSkillName passiveSkillName { get; }
         public abstract CharNames charName { get; set; }
         public abstract string desc { get; }
         public abstract float chance { get; set; }
@@ -38,19 +38,11 @@ namespace Combat
             currDyna = GridService.Instance.GetDyna4GO(charGO);
             charName = charController.charModel.charName;   
         }
-        
-       // public abstract void AddTargetPos();
-
-        public virtual void SkillHovered()
+        public virtual void PSkillHovered()
         {
-
+            PassiveSkillService.Instance.currPSkillName = passiveSkillName; 
+            PassiveSkillService.Instance.OnPSkillHovered += DisplayFX1;
         }
-        //public virtual void BaseFX(CharController targetController)
-        //{
-        //    this.targetController = targetController;
-        //    targetGO = targetController.gameObject;
-        //} 
-
         public abstract void ApplyFX();    
 
         #endregion
@@ -65,6 +57,8 @@ namespace Combat
             CharMode targetCharMode = strikerCharMode.FlipCharMode();
             return (SkillService.Instance.currentTargetDyna.charMode == targetCharMode);
         }
+        protected abstract void DisplayFX1(PassiveSkillName pSkillName); 
+
     }
 
 }

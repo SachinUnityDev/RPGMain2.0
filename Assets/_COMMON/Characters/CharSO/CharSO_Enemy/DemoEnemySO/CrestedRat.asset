@@ -29,7 +29,7 @@ MonoBehaviour:
   jobExp: 0
   skillPts: 0
   charLvl: 0
-  charNameStr: 
+  charNameStr: Crested Rat
   availOfChar: 1
   stateOfChar: 2
   fameBehavior: 0
@@ -200,16 +200,16 @@ MonoBehaviour:
     isClamped: 0
   statList:
   - statName: 1
-    currValue: 12
+    currValue: 24
     desc: Health is health, you know it...
     minLimit: 0
-    maxLimit: 12
+    maxLimit: 24
     isClamped: 0
   - statName: 2
-    currValue: 18
+    currValue: 27
     desc: Resource to use skills.
     minLimit: 0
-    maxLimit: 18
+    maxLimit: 27
     isClamped: 0
   - statName: 3
     currValue: 12

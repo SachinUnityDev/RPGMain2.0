@@ -67,6 +67,7 @@ namespace Combat
         Weapon, 
         Uzu,
         Retaliate,
+        Passive, 
      //   Remote,
     }
 
@@ -214,13 +215,13 @@ namespace Combat
         SelfDefense,
         Respire, // equivalent to patience
         Telekinesis,//uzu abbas       
-        Retaliate, 
+        Retaliate,         
 
 
     }
 
 
-    public enum PassiveSkillNames
+    public enum PassiveSkillName
     {
         None,
         Arachnid,

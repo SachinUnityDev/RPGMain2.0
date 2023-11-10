@@ -37,7 +37,7 @@ namespace Town
         }
         void FillPort()
         {
-            CharacterSO charSO = CharService.Instance.allCharSO.GetCharSO(interactData.compName);
+            CharacterSO charSO = CharService.Instance.allCharSO.GetAllySO(interactData.compName);
             charPortImg.sprite = charSO.charHexPortrait;
             charBGPortImg.sprite = CharService.Instance.allCharSO.hexPortBg; 
         }

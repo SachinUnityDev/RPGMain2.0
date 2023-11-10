@@ -9,7 +9,7 @@ namespace Combat
 {
     public class Vermin : PassiveSkillBase
     {
-        public override PassiveSkillNames passiveSkillName => PassiveSkillNames.Vermin;
+        public override PassiveSkillName passiveSkillName => PassiveSkillName.Vermin;
 
         private CharNames _charName;
         public override CharNames charName { get => _charName; set => _charName = value; }
@@ -27,7 +27,16 @@ namespace Combat
             //                                                    , TimeFrame.Infinity, 1);
 
         }
-     
+        protected override void DisplayFX1(PassiveSkillName passiveSkillName)
+        {
+            if (this.passiveSkillName != passiveSkillName) return;
+            str0 = "Immune to Poison";
+            PassiveSkillService.Instance.descLines.Add(str0);
+            str1 = "Thorns: 1 - 3 Earth";
+            PassiveSkillService.Instance.descLines.Add(str1);
+            str2 = "+20% dmg vs Nausea";
+            PassiveSkillService.Instance.descLines.Add(str2);
+        }
     }
 
 }

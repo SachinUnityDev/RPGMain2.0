@@ -65,8 +65,6 @@ namespace Combat
             CombatEventService.Instance.OnEOR1 -= RoundTick;
             CombatEventService.Instance.OnEOC -= EOCTick;
             QuestEventService.Instance.OnEOQ -= EOQTick;
-
-
         }
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)

@@ -15,7 +15,7 @@ namespace Combat
     {
 
 
-        Dictionary<PassiveSkillNames, Type> allSkills = new Dictionary<PassiveSkillNames, Type>();
+        Dictionary<PassiveSkillName, Type> allSkills = new Dictionary<PassiveSkillName, Type>();
         [SerializeField] int skillCount;
         public void PassiveSkillsInit()
         {
@@ -32,7 +32,7 @@ namespace Combat
             skillCount = allSkills.Count;
         }
 
-        public PassiveSkillBase GetPassiveSkills(PassiveSkillNames pSkillName)
+        public PassiveSkillBase GetPassiveSkills(PassiveSkillName pSkillName)
         {
             foreach (var skill in allSkills)
             {

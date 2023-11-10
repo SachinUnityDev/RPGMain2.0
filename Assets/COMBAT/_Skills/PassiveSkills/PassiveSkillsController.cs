@@ -34,5 +34,22 @@ namespace Combat
             }
         }
 
+        public PassiveSkillBase GetPassiveSkillBase(PassiveSkillName passiveSkillName)
+        {
+            int index = allPassiveSkillbase.FindIndex(t=>t.passiveSkillName == passiveSkillName);
+            if(index != -1)
+            {
+                return allPassiveSkillbase[index];  
+            }
+            else
+            {
+                Debug.Log(" Passive Skill Name " + passiveSkillName);
+            }
+
+
+            return null; 
+        }
+
+
     }
 }

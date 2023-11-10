@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Common;
 using TMPro;
-
+using System;
 
 namespace Combat
 {
@@ -15,6 +15,7 @@ namespace Combat
         MediumHL, 
         HighHL, 
     }
+    [Serializable]
     public class CombatLogData
     {
         public LogBackGround logBackGround;
@@ -40,245 +41,225 @@ namespace Combat
 
     public class CombatLogController : MonoBehaviour
     {
-        [Header("Content and log Prefab TBR")]
-        [SerializeField] GameObject containerCombatLog;
-        [SerializeField] GameObject logPanel;
-        [Header("NTBR")]
-        [SerializeField] GameObject logPanelGO; 
-        public List<CombatLogData> combatLog = new List<CombatLogData>();
-        void OnEnable()
-        {
+        //[Header("Content and log Prefab TBR")]
+        //[SerializeField] GameObject containerCombatLog;
+        //[SerializeField] GameObject logPanel;
+        //[Header("NTBR")]
+        //[SerializeField] GameObject logPanelGO; 
+        //public List<CombatLogData> combatLog = new List<CombatLogData>();
+        //void OnEnable()
+        //{
           
-            //// TEMP TRAITS 
-            //TempTraitService.Instance.OnTempTraitStart += PrintTempTraitStart;
-            //TempTraitService.Instance.OnTempTraitEnd += PrintTempTraitEnd;
+        //    //// TEMP TRAITS 
+        //    //TempTraitService.Instance.OnTempTraitStart += PrintTempTraitStart;
+        //    //TempTraitService.Instance.OnTempTraitEnd += PrintTempTraitEnd;
 
-            //// PERMANENT TRAITS 
-            //PermanentTraitsService.Instance.OnPermaTraitAdded += PrintPermaTraitAdded;
+        //    //// PERMANENT TRAITS 
+        //    //PermanentTraitsService.Instance.OnPermaTraitAdded += PrintPermaTraitAdded;
        
-            // COMBAT EVENT START EVENTS
-            CombatEventService.Instance.OnSOC += StartOfCombat;
-            CombatEventService.Instance.OnSOR1 += StartOfRound;
-           // CombatEventService.Instance.OnCharOnTurnSet += StartOfTurn;
-            CharService.Instance.OnCharDeath += DeathOfCharUpdate;
-            CharStatesService.Instance.OnCharStateStart += CharStateStart;
-            CharStatesService.Instance.OnCharStateEnd += CharStateEnd;
+        //    // COMBAT EVENT START EVENTS
+        //    CombatEventService.Instance.OnSOC += StartOfCombat;
+        //    CombatEventService.Instance.OnSOR1 += StartOfRound;
+        //   // CombatEventService.Instance.OnCharOnTurnSet += StartOfTurn;
+        //    CharService.Instance.OnCharDeath += DeathOfCharUpdate;
+        //    CharStatesService.Instance.OnCharStateStart += CharStateStart;
+        //    CharStatesService.Instance.OnCharStateEnd += CharStateEnd;
 
-            // TO BE CAPTURED 
-            // move events push and pull 
+        //    // TO BE CAPTURED 
+        //    // move events push and pull 
            
 
-        }
-        private void OnDisable()
-        {
-            CombatEventService.Instance.OnSOC -= StartOfCombat;
-            CombatEventService.Instance.OnSOR1 -= StartOfRound;
-            // CombatEventService.Instance.OnCharOnTurnSet += StartOfTurn;
-            CharService.Instance.OnCharDeath -= DeathOfCharUpdate;
-            CharStatesService.Instance.OnCharStateStart -= CharStateStart;
-            CharStatesService.Instance.OnCharStateEnd -= CharStateEnd;
-        }
-        #region  # COMBAT LOG BUILDERS 
-        // **********CHAR STATE
-        void CharStateStart(CharStateModData charStateModData)
-        {   
-            CharController charController = CharService.Instance.GetCharCtrlWithCharID(charStateModData.effectedCharID);
-            CharNames charName = charController.charModel.charName;
-            string str = charName + " is now " + charStateModData.charStateName + ", "; 
-                                 //+ charStateModData.castTime + " rds";
+        //}
+        //private void OnDisable()
+        //{
+        //    CombatEventService.Instance.OnSOC -= StartOfCombat;
+        //    CombatEventService.Instance.OnSOR1 -= StartOfRound;
+        //    // CombatEventService.Instance.OnCharOnTurnSet += StartOfTurn;
+        //    CharService.Instance.OnCharDeath -= DeathOfCharUpdate;
+        //    CharStatesService.Instance.OnCharStateStart -= CharStateStart;
+        //    CharStatesService.Instance.OnCharStateEnd -= CharStateEnd;
+        //}
+        //#region  # COMBAT LOG BUILDERS 
+        //// **********CHAR STATE
+        //void CharStateStart(CharStateModData charStateModData)
+        //{   
+        //    CharController charController = CharService.Instance.GetCharCtrlWithCharID(charStateModData.effectedCharID);
+        //    CharNames charName = charController.charModel.charName;
+        //    string str = charName + " is now " + charStateModData.charStateName + ", "; 
+        //                         //+ charStateModData.castTime + " rds";
 
-            combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
-            RefreshCombatLogUI();
-        }
-        void CharStateEnd(CharStateModData charStateModData)
-        {
-            string charNameStr = CharService.Instance.GetCharCtrlWithCharID(charStateModData.effectedCharID).charModel.charNameStr; 
-            string str = charNameStr + " state ENDS " + charStateModData.charStateName + "";
+        //    combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
+        //    RefreshCombatLogUI();
+        //}
+        //void CharStateEnd(CharStateModData charStateModData)
+        //{
+        //    string charNameStr = CharService.Instance.GetCharCtrlWithCharID(charStateModData.effectedCharID).charModel.charNameStr; 
+        //    string str = charNameStr + " state ENDS " + charStateModData.charStateName + "";
                
-            combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
-            RefreshCombatLogUI();
+        //    combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
+        //    RefreshCombatLogUI();
 
-        }
-
-
-        // ********* CHAR DIED 
-
-        void DeathOfCharUpdate(CharController charController)
-        {
-            string str = charController.charModel.charName + " Died";
-            combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
-            RefreshCombatLogUI();
-        }
-        //***********START IF COMBAT **************//
-        void StartOfCombat()
-        {           
-            CharService.Instance.charsInPlayControllers
-                        .ForEach(t => t.OnAttribChg += PrintAttribChanged);
-
-           CharService.Instance.charsInPlayControllers.ForEach(t => t.OnStatChg += PrintStatChgAdded); 
-
-           CombatEventService.Instance.OnDamageApplied += PrintDamageApplied; 
-
-            string str = "Combat Start!";
-            combatLog.Add(new CombatLogData(LogBackGround.HighHL, str));
-            RefreshCombatLogUI();
-        }
-        //***********START ROUND **************//
-        void StartOfRound(int roundNo)
-        {   
-            string str = "Round #" + roundNo +"Starts";
-            combatLog.Add(new CombatLogData(LogBackGround.HighHL, str));
-            RefreshCombatLogUI();
-
-        }
-        #endregion
+        //}
 
 
-        void RefreshCombatLogUI()
-        {          
-            int i = 0; 
-            foreach (Transform child in containerCombatLog.transform)
-            {
-                child.GetComponentInChildren<TextMeshProUGUI>().text = combatLog[i].logString;
-                SetPanelColor(child.gameObject, combatLog[i].logBackGround);
-                i++; 
-            }
-            if (combatLog.Count > i)
-            {
-                for (int j = i-1; j < combatLog.Count-i; j++)
-                {
-                    Vector3 pos = Vector3.zero;
-                    logPanelGO = Instantiate(logPanel, pos, Quaternion.identity);
-                    logPanelGO.transform.SetParent(containerCombatLog.transform);
-                    logPanelGO.transform.localScale = Vector3.one; 
-                    logPanelGO.GetComponentInChildren<TextMeshProUGUI>().text
-                                                        = combatLog[j].logString;
-                    SetPanelColor(logPanelGO, combatLog[j].logBackGround);
-                }
-            }
-        }
+        //// ********* CHAR DIED 
 
-        void SetPanelColor(GameObject panel, LogBackGround _logBG)
-        {
+        //void DeathOfCharUpdate(CharController charController)
+        //{
+        //    string str = charController.charModel.charName + " Died";
+        //    combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
+        //    RefreshCombatLogUI();
+        //}
+        ////***********START IF COMBAT **************//
+        //void StartOfCombat()
+        //{           
+        //    CharService.Instance.charsInPlayControllers
+        //                .ForEach(t => t.OnAttribChg += PrintAttribChanged);
 
-            switch (_logBG)
-            {
-                case LogBackGround.None:
-                    panel.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0f); 
-                    break;
-                case LogBackGround.LowHL:
-                    panel.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.4f);
+        //   CharService.Instance.charsInPlayControllers.ForEach(t => t.OnStatChg += PrintStatChgAdded); 
 
-                    break;
-                case LogBackGround.MediumHL:
-                    panel.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.6f);
-                    break;
-                case LogBackGround.HighHL:
-                    panel.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
+        //   CombatEventService.Instance.OnDamageApplied += PrintDamageApplied; 
 
-                    break;
-                default:
-                    break;
-            }
+        //    string str = "Combat Start!";
+        //    combatLog.Add(new CombatLogData(LogBackGround.HighHL, str));
+        //    RefreshCombatLogUI();
+        //}
+        ////***********START ROUND **************//
+        //void StartOfRound(int roundNo)
+        //{   
+        //    string str = "Round #" + roundNo +"Starts";
+        //    combatLog.Add(new CombatLogData(LogBackGround.HighHL, str));
+        //    RefreshCombatLogUI();
 
-        }
+        //}
+        //#endregion
+
+
+        //void RefreshCombatLogUI()
+        //{          
+        //    int i = 0; 
+        //    foreach (Transform child in containerCombatLog.transform)
+        //    {
+        //        child.GetComponentInChildren<TextMeshProUGUI>().text = combatLog[i].logString;
+        //        SetPanelColor(child.gameObject, combatLog[i].logBackGround);
+        //        i++; 
+        //    }
+        //    if (combatLog.Count > i)
+        //    {
+        //        for (int j = i-1; j < combatLog.Count-i; j++)
+        //        {
+        //            Vector3 pos = Vector3.zero;
+        //            logPanelGO = Instantiate(logPanel, pos, Quaternion.identity);
+        //            logPanelGO.transform.SetParent(containerCombatLog.transform);
+        //            logPanelGO.transform.localScale = Vector3.one; 
+        //            logPanelGO.GetComponentInChildren<TextMeshProUGUI>().text
+        //                                                = combatLog[j].logString;
+        //            SetPanelColor(logPanelGO, combatLog[j].logBackGround);
+        //        }
+        //    }
+        //}
+
+        //void SetPanelColor(GameObject panel, LogBackGround _logBG)
+        //{
+
+        //    switch (_logBG)
+        //    {
+        //        case LogBackGround.None:
+        //            panel.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0f); 
+        //            break;
+        //        case LogBackGround.LowHL:
+        //            panel.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.4f);
+
+        //            break;
+        //        case LogBackGround.MediumHL:
+        //            panel.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.6f);
+        //            break;
+        //        case LogBackGround.HighHL:
+        //            panel.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
+
+        //            break;
+        //        default:
+        //            break;
+        //    }
+
+        //}
         
-        void PrintDamageApplied(DmgAppliedData dmgAppliedData)
-        {
-            CharNames charName = dmgAppliedData.striker.charModel.charName;
-            SkillDataSO skillDataSO = SkillService.Instance.GetSkillSO(charName);
+        //void PrintDamageApplied(DmgAppliedData dmgAppliedData)
+        //{
+        //    CharNames charName = dmgAppliedData.striker.charModel.charName;
+        //    SkillDataSO skillDataSO = SkillService.Instance.GetSkillSO(charName);
 
-            CharNames targetName = dmgAppliedData.targetController.charModel.charName; 
+        //    CharNames targetName = dmgAppliedData.targetController.charModel.charName; 
 
-            SkillNames skillName = SkillNames.None; 
-            if(dmgAppliedData.causeType == CauseType.CharSkill)
-                 skillName =(SkillNames)dmgAppliedData.causeName;
+        //    SkillNames skillName = SkillNames.None; 
+        //    if(dmgAppliedData.causeType == CauseType.CharSkill)
+        //         skillName =(SkillNames)dmgAppliedData.causeName;
 
-            AttackType attackType = skillDataSO.allSkills.Find(t => t.skillName == skillName).attackType; 
+        //    AttackType attackType = skillDataSO.allSkills.Find(t => t.skillName == skillName).attackType; 
 
-            DamageType damageType = dmgAppliedData.dmgType; 
+        //    DamageType damageType = dmgAppliedData.dmgType; 
 
-            if(damageType == DamageType.Physical || damageType == DamageType.Air || damageType == DamageType.Water
-                || damageType == DamageType.Earth || damageType == DamageType.Fire || damageType == DamageType.Light
-                || damageType == DamageType.Dark || damageType == DamageType.FortitudeDmg || damageType == DamageType.StaminaDmg
-                || damageType == DamageType.StaminaDmg)
-            {
-                string str = charName + " " + attackType + " " + damageType + " attack on " + targetName + " with " + skillName; 
-                combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
-                RefreshCombatLogUI();
-            }
-            else
-            {
-                string str = charName + " " + attackType + " " + damageType + " " + targetName + " with " + skillName;
-                combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
-                RefreshCombatLogUI();
-            }
+        //    if(damageType == DamageType.Physical || damageType == DamageType.Air || damageType == DamageType.Water
+        //        || damageType == DamageType.Earth || damageType == DamageType.Fire || damageType == DamageType.Light
+        //        || damageType == DamageType.Dark || damageType == DamageType.FortitudeDmg || damageType == DamageType.StaminaDmg
+        //        || damageType == DamageType.StaminaDmg)
+        //    {
+        //        string str = charName + " " + attackType + " " + damageType + " attack on " + targetName + " with " + skillName; 
+        //        combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
+        //        RefreshCombatLogUI();
+        //    }
+        //    else
+        //    {
+        //        string str = charName + " " + attackType + " " + damageType + " " + targetName + " with " + skillName;
+        //        combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
+        //        RefreshCombatLogUI();
+        //    }
 
-            // Rayyan ranged magical attack on Dire Rat, Dire Rat with Tidal Waves
-            // get <AttackType> in Skill Service ... 
-            // if charName == EnemyName / target name => "Self"
-            // <CharName><AttackType> <DamageType0>  "attack" on <Enemy Name>, <Enemy Name> with <SkillName>
+        //    // Rayyan ranged magical attack on Dire Rat, Dire Rat with Tidal Waves
+        //    // get <AttackType> in Skill Service ... 
+        //    // if charName == EnemyName / target name => "Self"
+        //    // <CharName><AttackType> <DamageType0>  "attack" on <Enemy Name>, <Enemy Name> with <SkillName>
 
-            // use word "ATTACK " Physical, magical(air, water bla bla ) , pure , stamina, fortitude             
-        }
+        //    // use word "ATTACK " Physical, magical(air, water bla bla ) , pure , stamina, fortitude             
+        //}
 
-        void PrintAttribChanged(AttribModData attribModData)
-        {
+        //void PrintAttribChanged(AttribModData attribModData)
+        //{
            
-            AttribName statName = attribModData.attribModified;
-            string str = "";
-            CharNames CharName = CharService.Instance.GetCharCtrlWithCharID(attribModData.effectedCharNameID)
-                                    .charModel.charName;           
+        //    AttribName statName = attribModData.attribModified;
+        //    string str = "";
+        //    CharNames CharName = CharService.Instance.GetCharCtrlWithCharID(attribModData.effectedCharNameID)
+        //                            .charModel.charName;           
 
-            if (attribModData.modCurrVal == 0) return;                                                                               
+        //    if (attribModData.modCurrVal == 0) return;                                                                               
 
-                string sign = attribModData.modCurrVal > 0 ? "+" : "-";
-                string str2 = attribModData.modCurrVal > 0 ? "gains" : "suffers";
-                str = CharName + " " + str2 + " " + sign +
-                          + Mathf.Abs((int)attribModData.modCurrVal) + " " + attribModData.attribModified;
+        //        string sign = attribModData.modCurrVal > 0 ? "+" : "-";
+        //        string str2 = attribModData.modCurrVal > 0 ? "gains" : "suffers";
+        //        str = CharName + " " + str2 + " " + sign +
+        //                  + Mathf.Abs((int)attribModData.modCurrVal) + " " + attribModData.attribModified;
 
-            combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
-            RefreshCombatLogUI();
-        }
+        //    combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
+        //    RefreshCombatLogUI();
+        //}
 
-        void PrintStatChgAdded(StatModData statModData)
-        {
-            StatName statName =statModData.statModified;
-            string str = "";
-            CharNames CharName = CharService.Instance.GetCharCtrlWithCharID(statModData.effectedCharNameID)
-                                    .charModel.charName;
+        //void PrintStatChgAdded(StatModData statModData)
+        //{
+        //    StatName statName =statModData.statModified;
+        //    string str = "";
+        //    CharNames CharName = CharService.Instance.GetCharCtrlWithCharID(statModData.effectedCharNameID)
+        //                            .charModel.charName;
 
-            if (statModData.modVal == 0) return;
+        //    if (statModData.modVal == 0) return;
             
-            if (statName == StatName.health || statName == StatName.stamina
-                || statName == StatName.fortitude)
-            {
-                string str1 = statModData.modVal > 0 ? "gains" : "loses";
+        //    if (statName == StatName.health || statName == StatName.stamina
+        //        || statName == StatName.fortitude)
+        //    {
+        //        string str1 = statModData.modVal > 0 ? "gains" : "loses";
 
-                str = CharName + " " + str1 + " " +
-                            +Mathf.Abs((int)statModData.modVal) + " " + statModData.statModified;
-            }
-        }
-
-
-        //void PrintPermaTraitAdded(PermaTraitData permaTraitData)
-        //{
-
+        //        str = CharName + " " + str1 + " " +
+        //                    +Mathf.Abs((int)statModData.modVal) + " " + statModData.statModified;
+        //    }
         //}
-        //void PrintTempTraitEnd(TempTraitData tempTraitData)
-        //{
-
-        //}
-        //void PrintTempTraitStart(TempTraitData tempTraitData)
-        //{
-
-        //}
-
-
     }
-
-
-
-
 }
 

@@ -29,7 +29,7 @@ MonoBehaviour:
   jobExp: 0
   skillPts: 0
   charLvl: 0
-  charNameStr: 
+  charNameStr: Dire Rat
   availOfChar: 1
   stateOfChar: 2
   fameBehavior: 0
@@ -206,10 +206,10 @@ MonoBehaviour:
     maxLimit: 32
     isClamped: 0
   - statName: 2
-    currValue: 21
+    currValue: 24
     desc: Resource to use skills.
     minLimit: 0
-    maxLimit: 21
+    maxLimit: 24
     isClamped: 0
   - statName: 3
     currValue: 0

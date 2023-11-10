@@ -261,7 +261,7 @@ namespace Combat
                     //allSKillAIControllers.Add(skillAIController);
                 }
                 if(skillController.charController.charModel.orgCharMode== CharMode.Enemy)
-                    skillController.InitPassiveSkillController(); 
+                                skillController.InitPassiveSkillController(); 
                 CharNames charName = charGO.GetComponent<CharController>().charModel.charName; 
                 //   skillController.InitSkillList(charName);
             }

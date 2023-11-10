@@ -17,7 +17,7 @@ namespace Combat
 
     public class PassiveSkillData
     {
-        public PassiveSkillNames passiveSkillName;
+        public PassiveSkillName passiveSkillName;
         public Sprite passiveSprite; 
     }
 

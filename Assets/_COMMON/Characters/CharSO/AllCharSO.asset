@@ -17,5 +17,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d3d0717e71ed0d141966883eaa07d246, type: 2}
   - {fileID: 11400000, guid: 94e69136ef5d2d94dae31171654df5ba, type: 2}
   - {fileID: 11400000, guid: 9a9e85d2e310dda469cf424acd926f02, type: 2}
-  allEnemySO: []
+  allEnemySO:
+  - {fileID: 11400000, guid: a2004cea9459bf347b839ebcacf56e19, type: 2}
+  - {fileID: 11400000, guid: d2dc9a1823c5f6b448c864c1c167f33e, type: 2}
+  - {fileID: 11400000, guid: 747c04ee3f8b2b74cb3c1df63b9edbb1, type: 2}
+  - {fileID: 11400000, guid: aacd76dc9844b6e42bfb3c028348b6c4, type: 2}
+  - {fileID: 11400000, guid: 504e6c20d9eb272469be193154665062, type: 2}
+  - {fileID: 11400000, guid: 6c873dfb866c68646a30f1ae74345a66, type: 2}
+  - {fileID: 11400000, guid: 72f843c70dc200c428fdb6d44277d693, type: 2}
+  - {fileID: 11400000, guid: d4196483ac1f8f04da555551e49bc5be, type: 2}
+  - {fileID: 11400000, guid: 5eca6d1c864bf2b43bec0115eb6fe16d, type: 2}
   hexPortBg: {fileID: 21300000, guid: 0d205d4e6d7f9614eba023a22b411c56, type: 3}

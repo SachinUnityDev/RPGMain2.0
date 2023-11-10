@@ -344,6 +344,15 @@ namespace Combat
                     skillBtn.SkillBtnInit(skillSO, skillModel, this);
                 j++; 
             }
+            if (skillSO.passiveSkills.Count > 0)
+            {
+                foreach (PassiveSkillData pSKillData in skillSO.passiveSkills)
+                {
+                    SkillBtnViewCombat skillBtn = transform.GetChild(j).GetComponent<SkillBtnViewCombat>();
+                    skillBtn.PSkillBtnInit(skillSO, pSKillData, this); 
+                    j++;
+                }
+            }
             for (int i = j; i < transform.childCount; i++)
             {
                 SkillBtnViewCombat skillBtn = transform.GetChild(i).GetComponent<SkillBtnViewCombat>();

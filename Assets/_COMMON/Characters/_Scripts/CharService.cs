@@ -98,12 +98,7 @@ namespace Common
         #region GETTERS
         public CharacterSO GetCharSO( CharNames charName)
         {            
-            int  index = allAllySO.FindIndex(t=>t.charName== charName);     
-            if (index  != -1)
-                return allAllySO[index];
-            else
-                Debug.Log("Char SO not found" + charName);
-            return null;
+            return allCharSO.GetCharSO(charName);                
         }
         public CharacterSO GetCharSO(CharModel charModel)
         {
@@ -481,7 +476,7 @@ namespace Common
 
         public string GetCharName(CharNames charName)
         {
-            CharacterSO charSO = CharService.Instance.allCharSO.GetCharSO(charName);
+            CharacterSO charSO = CharService.Instance.allCharSO.GetAllySO(charName);
             if (charSO != null)
                 return charSO.charNameStr;
             else

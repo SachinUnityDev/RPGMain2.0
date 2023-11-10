@@ -9,7 +9,7 @@ namespace Combat
 {
     public class Boss1 : PassiveSkillBase
     {
-        public override PassiveSkillNames passiveSkillName => PassiveSkillNames.Boss1;
+        public override PassiveSkillName passiveSkillName => PassiveSkillName.Boss1;
 
         private CharNames _charName;
         public override CharNames charName { get => _charName; set => _charName = value; }
@@ -18,31 +18,29 @@ namespace Combat
         public override float chance { get => _chance; set => _chance = value; }
         public override string desc => "";
 
-        private SkillNames _skillName;
-
         List<int> allBuffId = new List<int>();  
 
         public override void ApplyFX()
         {
-            //if (allBuffId.Count > 0) return; /// apply buffs only once
-            //charController.charStateController.ApplyImmunityBuff(CauseType.PassiveSkillName, (int)passiveSkillName
-            //     , charController.charModel.charID, CharStateName.Despaired, TimeFrame.Infinity, 1);
+            if (allBuffId.Count > 0) return; /// apply buffs only once
+            charController.charStateController.ApplyImmunityBuff(CauseType.PassiveSkillName, (int)passiveSkillName
+                 , charController.charModel.charID, CharStateName.Despaired, TimeFrame.Infinity, 1);
 
-            //charController.charStateController.ApplyImmunityBuff(CauseType.PassiveSkillName, (int)passiveSkillName
-            //     , charController.charModel.charID, CharStateName.Rooted, TimeFrame.Infinity, 1);
+            charController.charStateController.ApplyImmunityBuff(CauseType.PassiveSkillName, (int)passiveSkillName
+                 , charController.charModel.charID, CharStateName.Rooted, TimeFrame.Infinity, 1);
 
-            //charController.charStateController.ApplyDOTImmunityBuff(CauseType.PassiveSkillName, (int)passiveSkillName
-            //  , charController.charModel.charID, CharStateName.PoisonedLowDOT, TimeFrame.Infinity, 1, true);
+            charController.charStateController.ApplyDOTImmunityBuff(CauseType.PassiveSkillName, (int)passiveSkillName
+              , charController.charModel.charID, CharStateName.PoisonedLowDOT, TimeFrame.Infinity, 1, true);
 
-            //charController.charStateController.ApplyDOTImmunityBuff(CauseType.PassiveSkillName, (int)passiveSkillName
-            //  , charController.charModel.charID, CharStateName.BleedLowDOT, TimeFrame.Infinity, 1, true);
+            charController.charStateController.ApplyDOTImmunityBuff(CauseType.PassiveSkillName, (int)passiveSkillName
+              , charController.charModel.charID, CharStateName.BleedLowDOT, TimeFrame.Infinity, 1, true);
 
-            //charController.OnStatChg += OnHPBelow;
-            //charController.OnStatChg += OnHPAbove;
-            //CombatEventService.Instance.OnEOC += OnEOC; 
+            charController.OnStatChg += OnHPBelow;
+            charController.OnStatChg += OnHPAbove;
+     
 
         }
-
+     
         void OnHPBelow(StatModData statModData)
         {
             if (statModData.statModified != StatName.health)
@@ -92,14 +90,22 @@ namespace Combat
             }
             allBuffId.Clear(); 
         }
-        //void OnEOC()
-        //{
-        //    //charController.OnStatChg -= OnHPBelow;
-        //    //charController.OnStatChg -= OnHPAbove;
-        //    //CombatEventService.Instance.OnEOC -= OnEOC;
-        //}
 
-
+        protected override void DisplayFX1(PassiveSkillName passiveSkillName)
+        {
+            if (this.passiveSkillName != passiveSkillName) return;
+            str0 = "Immune to two of DOTs";
+            PassiveSkillService.Instance.descLines.Add(str0);
+            str1 = "Immune to two of Despaired, Rooted, Feebleminded, Confused";
+            PassiveSkillService.Instance.descLines.Add(str1);
+            //str2 = "Feebleminded, Confused";
+            //PassiveSkillService.Instance.descLines.Add(str2);
+            //str4 = "+20 All Res and +3 Dodge";
+            //PassiveSkillService.Instance.descLines.Add(str4);
+            str3 = "When Hp < 12%: +50% Armor, +20 All Res and +3 Dodge";
+            PassiveSkillService.Instance.descLines.Add(str3);            
+          
+        }
 
     }
 }

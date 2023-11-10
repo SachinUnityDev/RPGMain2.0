@@ -39,11 +39,14 @@ namespace Combat
         [SerializeField] GameObject skillCardGO;
         [SerializeField] Transform skillPtsTrans;
         public SkillNames skillName;
-        SkillView skillView; 
+        SkillView skillView;
+        public PassiveSkillName passiveSkillName; 
         void Awake()
         {
             IsClicked = false;
             prevSkillHovered = SkillNames.None;
+            passiveSkillName = PassiveSkillName.None;
+            skillName= SkillNames.None;
         }
         #region  POINTER EVENTS
         public void OnPointerClick(PointerEventData eventData)
@@ -81,8 +84,36 @@ namespace Combat
             IsClicked = false;
             transform.GetChild(1).GetComponent<Image>().sprite = skillHexSO.SkillNormalFrame;
         }
+
+        void ClearData()
+        {
+            passiveSkillName = PassiveSkillName.None;
+            skillName = SkillNames.None;
+            skillDataSO = null;
+            skillCardGO= null;
+            
+        }
+        public void PSkillBtnInit(SkillDataSO skillDataSO, PassiveSkillData passiveSkillData,SkillView skillView)
+        {
+            ClearData();
+            Image skillImg = transform.GetComponent<Image>();            
+            this.skillDataSO = skillDataSO;
+            this.skillView = skillView;
+            skillLvlTrans.gameObject.SetActive(false);
+            if (passiveSkillData == null)
+            {
+                skillImg.sprite = skillView.NASkillIconSprite;
+                skillName = SkillNames.None;                
+                return;
+            }
+            passiveSkillName = passiveSkillData.passiveSkillName;
+            skillImg.sprite = passiveSkillData.passiveSprite; 
+            skillCardGO = PassiveSkillService.Instance.pSkillCardGO;            
+        }
+
         public void SkillBtnInit(SkillDataSO _skillDataSO, SkillModel skillModel , SkillView skillView)
         {
+            ClearData();
             Image skillImg = transform.GetComponent<Image>();
             this.skillModel = skillModel;
             skillDataSO = _skillDataSO;
@@ -134,18 +165,22 @@ namespace Combat
                 return;
             if (skillCardGO == null)
                 return;
-           
-            CharNames charName = CombatService.Instance.currCharClicked.charModel.charName; 
+            CharController charClicked = CombatService.Instance.currCharClicked;
+            CharNames charName = charClicked.charModel.charName; 
              
             skillDataSO = SkillService.Instance.GetSkillSO(charName);
-            SkillService.Instance.skillModelHovered = skillModel;
-            if (skillDataSO != null)
+            if(passiveSkillName != PassiveSkillName.None)
             {
+                PassiveSkillService.Instance.On_PSkillHovered(passiveSkillName, charClicked); 
+
+            }else if (skillDataSO != null)
+            {
+                SkillService.Instance.skillModelHovered = skillModel;
                 SkillService.Instance.On_SkillHovered(skillDataSO.charName, skillName);
             }
             else
             {
-                Debug.Log("Skill SO is null "); return;
+               Debug.Log("Skill SO is null"); return;
             }
             PosNShowSkillCard();
         }
@@ -195,7 +230,8 @@ namespace Combat
                         break;
                     case SkillTypeCombat.Retaliate:
                         break;
-           
+                    case SkillTypeCombat.Passive:
+                        break;
                     default:
                         break;
                 }
@@ -209,7 +245,7 @@ namespace Combat
             float height = skillCardGO.GetComponent<RectTransform>().rect.height;
 
             skillCardGO.SetActive(true);
-            int incrVal = skillCardGO.GetComponent<SkillCardView>().GetIncVal();
+            //int incrVal = skillCardGO.GetComponent<SkillCardView>().GetIncVal();
             GameObject Canvas = GameObject.FindWithTag("Canvas");
             Canvas canvasObj = Canvas.GetComponent<Canvas>();
             Vector3 offSetFinal = (offset + new Vector3(-width / 2, (height*2/3), 0)) * canvasObj.scaleFactor;

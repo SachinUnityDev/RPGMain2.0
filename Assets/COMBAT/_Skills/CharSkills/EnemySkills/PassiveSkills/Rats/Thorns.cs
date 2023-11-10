@@ -8,7 +8,7 @@ namespace Combat
 {
     public class Thorns : PassiveSkillBase
     {
-        public override PassiveSkillNames passiveSkillName => PassiveSkillNames.Thorns;
+        public override PassiveSkillName passiveSkillName => PassiveSkillName.Thorns;
 
         private CharNames _charName;
         public override CharNames charName { get => _charName; set => _charName = value; }
@@ -43,6 +43,14 @@ namespace Combat
         {
             CombatEventService.Instance.OnDamageApplied -= RetaliateHPLessThan30f;
             CombatEventService.Instance.OnEOC -= OnEOC;
+        }
+        protected override void DisplayFX1(PassiveSkillName passiveSkillName)
+        {
+            if (this.passiveSkillName != passiveSkillName) return;
+            str0 = "Thorns: 3-6 Physical";
+            PassiveSkillService.Instance.descLines.Add(str0);
+            str1 = "When Hp < 30%: Retaliate";
+            PassiveSkillService.Instance.descLines.Add(str1);
         }
     }
 }

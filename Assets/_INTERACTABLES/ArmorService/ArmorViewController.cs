@@ -53,7 +53,7 @@ namespace Interactables
         {
             charSelect = charModel.charName; 
             ArmorType armorType = charModel.armorType;
-            Sprite sprite = CharService.Instance.allCharSO.GetCharSO(charSelect).armorSprite;
+            Sprite sprite = CharService.Instance.allCharSO.GetAllySO(charSelect).armorSprite;
             transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite
                 = sprite;
             PopulateGemSocketed();

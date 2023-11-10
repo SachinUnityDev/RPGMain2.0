@@ -91,7 +91,7 @@ namespace Town
 
         void FillPortraits()
         {
-            CharacterSO charSO = CharService.Instance.allCharSO.GetCharSO(CharNames.Abbas);
+            CharacterSO charSO = CharService.Instance.allCharSO.GetAllySO(CharNames.Abbas);
             portLeft.GetChild(0).GetComponent<Image>().sprite = charSO.charSprite;
             portRight.GetChild(0).GetComponent<Image>().sprite = npcSO.npcSprite; 
         }

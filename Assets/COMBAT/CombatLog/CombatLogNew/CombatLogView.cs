@@ -19,6 +19,9 @@ namespace Combat
         [Header("NTBR GO ")]
         [SerializeField] GameObject logPanelGO;
         public List<CombatLogData> combatLog = new List<CombatLogData>();
+
+        [Header(" String Duplication Correction")]
+        [SerializeField] string strPrev = "";
         void Start()
         {
 
@@ -42,11 +45,6 @@ namespace Combat
             CombatEventService.Instance.OnEOC += OnCombatEnd;
             CombatEventService.Instance.OnSOR1 += StartOfRound;
             CombatEventService.Instance.OnCharOnTurnSet += StartOfTurn;
-
-            CharService.Instance.charsInPlayControllers
-                                     .ForEach(t => t.OnStatChg += HpChg);
-
-
         }
         private void OnDisable()
         {
@@ -60,22 +58,24 @@ namespace Combat
             CombatEventService.Instance.OnSOR1 -= StartOfRound;
             CombatEventService.Instance.OnCharOnTurnSet -= StartOfTurn;
 
-            CharService.Instance.charsInPlayControllers
-                                .ForEach(t => t.OnStatChg -= HpChg);
+           
         }
 
         void StartOfCombat()
         {
+            CharService.Instance.charsInPlayControllers
+                                     .ForEach(t => t.OnStatChg += HpChg);
             string str = "Combat Start!";
             combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
             RefreshCombatLogUI();
         }
         void OnCombatEnd()
         {
-
+            CharService.Instance.charsInPlayControllers
+                               .ForEach(t => t.OnStatChg -= HpChg);
         }
         void StartOfTurn(CharController charController)
-        {
+        {   
             string charNameStr = charController.charModel.charNameStr;
             string str = charNameStr + "'s Turn";
 
@@ -119,7 +119,7 @@ namespace Combat
                 charNameStr = skillEventData.targetController.charModel.charNameStr;
                 DynamicPosData dyna = GridService.Instance.GetDyna4GO(skillEventData.targetController.gameObject);
                 int currPos = dyna.currentPos; 
-                str = charNameStr + " moves to "+ currPos;
+                str = charNameStr + " moves to hex "+ currPos;
             }
             else
             {
@@ -136,7 +136,7 @@ namespace Combat
         //***********START ROUND **************//
         void StartOfRound(int roundNo)
         {
-            string str = "Round #" + roundNo + "Starts";
+            string str = "Round #" + roundNo + " Starts";
             combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
             RefreshCombatLogUI();
 
@@ -146,25 +146,34 @@ namespace Combat
 
         void RefreshCombatLogUI()
         {
-            int i = 0;
-            foreach (Transform child in containerCombatLog.transform)
+            int k = containerCombatLog.transform.childCount; 
+            if (combatLog.Count > k)
             {
-                child.GetComponentInChildren<TextMeshProUGUI>().text = combatLog[i].logString;
-                SetPanelColor(child.gameObject, combatLog[i].logBackGround);
-                i++;
-            }
-            if (combatLog.Count > i)
-            {
-                for (int j = i - 1; j < combatLog.Count - i; j++)
+                for (int j =0; j < k; j++)
                 {
                     Vector3 pos = Vector3.zero;
                     logPanelGO = Instantiate(logPanelPrefab, pos, Quaternion.identity);
                     logPanelGO.transform.SetParent(containerCombatLog.transform);
-                    logPanelGO.transform.localScale = Vector3.one;
-                    logPanelGO.GetComponentInChildren<TextMeshProUGUI>().text
-                                                        = combatLog[j].logString;
-                    SetPanelColor(logPanelGO, combatLog[j].logBackGround);
+                      logPanelGO.transform.localScale = Vector3.one;             
                 }
+            }
+            int i = 0;
+            foreach (Transform child in containerCombatLog.transform)
+            {
+                if(i < combatLog.Count)
+                {
+                    child.gameObject.SetActive(true);
+                    if(strPrev != combatLog[i].logString)
+                        child.GetComponentInChildren<TextMeshProUGUI>().text = combatLog[i].logString;
+                    SetPanelColor(child.gameObject, combatLog[i].logBackGround);
+                    strPrev = combatLog[i].logString; 
+                }
+                else
+                {
+                    child.gameObject.SetActive(false);
+                }
+
+                i++;
             }
         }
 
@@ -193,41 +202,9 @@ namespace Combat
 
         }
     
-        void DmgApplied(DmgAppliedData dmgAppliedData)
-        {
-            CharNames charName = dmgAppliedData.striker.charModel.charName;
-            SkillDataSO skillDataSO = SkillService.Instance.GetSkillSO(charName);
-
-            CharNames targetName = dmgAppliedData.targetController.charModel.charName;
-
-            SkillNames skillName = SkillNames.None;
-            if (dmgAppliedData.causeType == CauseType.CharSkill)
-                skillName = (SkillNames)dmgAppliedData.causeName;
-
-            AttackType attackType = skillDataSO.allSkills.Find(t => t.skillName == skillName).attackType;
-
-            DamageType damageType = dmgAppliedData.dmgType;
-
-            if (damageType == DamageType.Physical || damageType == DamageType.Air || damageType == DamageType.Water
-                || damageType == DamageType.Earth || damageType == DamageType.Fire || damageType == DamageType.Light
-                || damageType == DamageType.Dark || damageType == DamageType.FortitudeDmg || damageType == DamageType.StaminaDmg
-                || damageType == DamageType.StaminaDmg)
-            {
-                string str = charName + " " + attackType + " " + damageType + " attack on " + targetName + " with " + skillName;
-                combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
-                RefreshCombatLogUI();
-            }
-            else
-            {
-                string str = charName + " " + attackType + " " + damageType + " " + targetName + " with " + skillName;
-                combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
-                RefreshCombatLogUI();
-            } 
-        }
-
+   
         void HpChg(StatModData statModData)
         {
-
             StatName statName = statModData.statModified;
             if (statName != StatName.health) return; 
             string str = "";
@@ -236,32 +213,66 @@ namespace Combat
 
             if (statModData.modVal == 0) return;
 
-            string sign = statModData.modVal > 0 ? "+" : "-";
-            string str2 = statModData.modVal > 0 ? "gains" : "suffers";
+            string sign = statModData.valChg > 0 ? "+" : "-";
+            string str2 = statModData.valChg > 0 ? "gains" : "suffers";
             str = CharName + " " + str2 + " " + sign +
-                      +Mathf.Abs((int)statModData.modVal) + " " + statModData.statModified;
+                      +Mathf.Abs((int)statModData.valChg) + " " + statModData.statModified;
 
             combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
             RefreshCombatLogUI();
         }
 
-        //void PrintStatChgAdded(StatModData statModData)
-        //{
-        //    StatName statName = statModData.statModified;
-        //    string str = "";
-        //    CharNames CharName = CharService.Instance.GetCharCtrlWithCharID(statModData.effectedCharNameID)
-        //                            .charModel.charName;
-
-        //    if (statModData.modVal == 0) return;
-
-        //    if (statName == StatName.health || statName == StatName.stamina
-        //        || statName == StatName.fortitude)
-        //    {
-        //        string str1 = statModData.modVal > 0 ? "gains" : "loses";
-
-        //        str = CharName + " " + str1 + " " +
-        //                    +Mathf.Abs((int)statModData.modVal) + " " + statModData.statModified;
-        //    }
-        //}
+    
     }
 }
+
+
+//void PrintStatChgAdded(StatModData statModData)
+//{
+//    StatName statName = statModData.statModified;
+//    string str = "";
+//    CharNames CharName = CharService.Instance.GetCharCtrlWithCharID(statModData.effectedCharNameID)
+//                            .charModel.charName;
+
+//    if (statModData.modVal == 0) return;
+
+//    if (statName == StatName.health || statName == StatName.stamina
+//        || statName == StatName.fortitude)
+//    {
+//        string str1 = statModData.modVal > 0 ? "gains" : "loses";
+
+//        str = CharName + " " + str1 + " " +
+//                    +Mathf.Abs((int)statModData.modVal) + " " + statModData.statModified;
+//    }
+//}
+//void DmgApplied(DmgAppliedData dmgAppliedData)
+//{
+//    CharNames charName = dmgAppliedData.striker.charModel.charName;
+//    SkillDataSO skillDataSO = SkillService.Instance.GetSkillSO(charName);
+
+//    CharNames targetName = dmgAppliedData.targetController.charModel.charName;
+
+//    SkillNames skillName = SkillNames.None;
+//    if (dmgAppliedData.causeType == CauseType.CharSkill)
+//        skillName = (SkillNames)dmgAppliedData.causeName;
+
+//    AttackType attackType = skillDataSO.allSkills.Find(t => t.skillName == skillName).attackType;
+
+//    DamageType damageType = dmgAppliedData.dmgType;
+
+//    if (damageType == DamageType.Physical || damageType == DamageType.Air || damageType == DamageType.Water
+//        || damageType == DamageType.Earth || damageType == DamageType.Fire || damageType == DamageType.Light
+//        || damageType == DamageType.Dark || damageType == DamageType.FortitudeDmg || damageType == DamageType.StaminaDmg
+//        || damageType == DamageType.StaminaDmg)
+//    {
+//        string str = charName + " " + attackType + " " + damageType + " attack on " + targetName + " with " + skillName;
+//        combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
+//        RefreshCombatLogUI();
+//    }
+//    else
+//    {
+//        string str = charName + " " + attackType + " " + damageType + " " + targetName + " with " + skillName;
+//        combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
+//        RefreshCombatLogUI();
+//    } 
+//}

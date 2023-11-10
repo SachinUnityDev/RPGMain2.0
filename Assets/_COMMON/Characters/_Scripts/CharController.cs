@@ -306,7 +306,7 @@ namespace Common
             // COMBAT PATCH FIX ENDS 
             // BroadCast the value change thru On_StatCurrValChg
             StatModData statModData = new StatModData(turn, causeType, CauseName, causeByCharID
-                                                             , this.charModel.charID, statName,(int)value);
+                                                             , this.charModel.charID, statName,(int)value, (int)value);
 
             float currVal = statData.currValue;
             float preConstrainedValue = currVal + value;
@@ -364,7 +364,7 @@ namespace Common
             // COMBAT PATCH FIX ENDS 
             // BroadCast the value change thru On_StatCurrValChg
             AttribModData charModData = new AttribModData(turn, causeType, CauseName, causeByCharID
-                                                             , this.charModel.charID, attribName);
+                                                             , this.charModel.charID, attribName, value, (int)value);
 
             float currVal = statData.currValue;
             float preConstrainedValue = currVal + value;

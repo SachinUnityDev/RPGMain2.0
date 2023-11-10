@@ -17,7 +17,8 @@ namespace Common
         public AttribName attribModified;       
 
         public float modCurrVal = 0f;
-        public float baseVal = 0f;  
+        public float baseVal = 0f;
+        public int chgVal = 0; 
 
         //public float modChgMaxR = 0f;
         //public float modChgMinR = 0f;
@@ -43,7 +44,22 @@ namespace Common
         // ON STAT MODIFIED 
 
         public AttribModData(int turnNo, CauseType causeType, int causeName, int causedByCharID
-                                       , int effectedCharNameID, AttribName statModified,  float modCurrVal =-1, float baseVal =-1)
+                                       , int effectedCharNameID, AttribName statModified, float modCurrVal = -1, float baseVal = -1)
+        {
+            this.turnNo = turnNo;
+            this.causeType = causeType;
+            this.causeName = causeName;
+            this.causeByCharID = causedByCharID;
+            this.effectedCharNameID = effectedCharNameID;
+            this.attribModified = statModified;
+            if (modCurrVal != -1)
+                this.modCurrVal = modCurrVal;
+            if (baseVal != -1)
+                this.baseVal = baseVal;
+
+        }
+        public AttribModData(int turnNo, CauseType causeType, int causeName, int causedByCharID
+                                       , int effectedCharNameID, AttribName statModified,  float modCurrVal, int chgVal)
         {
             this.turnNo = turnNo;
             this.causeType = causeType;
@@ -53,8 +69,7 @@ namespace Common
             this.attribModified = statModified;
             if(modCurrVal != -1)
                 this.modCurrVal = modCurrVal;
-            if (baseVal != -1)
-                this.baseVal = baseVal;
+                this.chgVal = chgVal;
               
         }
 
@@ -69,11 +84,11 @@ namespace Common
         public int causeByCharID;
         public int effectedCharNameID;
         public StatName statModified;
-
+        public int valChg = 0; 
         public int modVal = 0;
 
         public StatModData(int turnNo, CauseType causeType, int causeName, int causedByCharID
-            , int effectedCharNameID, StatName statModfified, int modVal)
+            , int effectedCharNameID, StatName statModfified, int modVal, int valChg)
         {
             this.turnNo = turnNo;
             this.causeType = causeType;
@@ -83,6 +98,7 @@ namespace Common
 
             this.statModified = statModfified;
             this.modVal = modVal; 
+            this.valChg = valChg;
         }
     
     }

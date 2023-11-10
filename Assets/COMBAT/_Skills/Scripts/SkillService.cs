@@ -125,7 +125,7 @@ namespace Combat
 
         public float combatSpeed = 1f;
      
-        void OnEnable()
+        void Start()
         {
             // InitSkillControllers();
             // Cn be later Set to the start of Combat Event
@@ -245,8 +245,6 @@ namespace Combat
         public void InitSkillControllers()
         {
             CombatService.Instance.AddCombatControllers();
-
-
             foreach (GameObject charGO in CharService.Instance.charsInPlay)
             {
                 SkillController1 skillController = charGO.GetComponent<SkillController1>(); 

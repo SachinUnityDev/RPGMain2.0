@@ -39,7 +39,11 @@ namespace Combat
         [SerializeField] Transform cdNMaxUse; 
 
         [Header(" In combat for testing ")]
-        [SerializeField] TextMeshProUGUI skillStateTxt;             
+        [SerializeField] TextMeshProUGUI skillStateTxt;
+
+        [Header(" Global var")]
+        int incr; 
+
         private void OnEnable()
         {
             SkillCardInit();
@@ -163,7 +167,6 @@ namespace Combat
                     break;
             }
         }
-
       
         void FillTopTrans()
         {
@@ -206,15 +209,39 @@ namespace Combat
         }
         void FillMidTrans()
         {
-            int lines = skillModel.descLines.Count;
+            int lines = skillModel.descLines.Count;           
             // get skill card height             
             RectTransform skillCardRect = transform.GetComponent<RectTransform>();
             RectTransform midTransRect = midTrans.GetComponent<RectTransform>();
+
+            int j = 0; 
+            foreach (Transform child in midTrans)
+            {
+                if(j < lines)
+                {
+                    child.gameObject.SetActive(true);
+                    TextMeshProUGUI textM = child.GetComponent<TextMeshProUGUI>();
+                    UpdateTextHeight(textM);
+                    textM.text = skillModel.descLines[j];
+                }
+                else
+                {
+                    child.gameObject.SetActive(false);  
+                }
+                j++; 
+            }
             if (lines > 2)
             {
                 // increase size 
-                int incr = lines - 2;
-                incrVal = incr * 40; 
+                incr += lines - 2;// also updated in update Txt Ht
+
+                RectTransform txtRect = midTrans.GetChild(0).GetComponent<RectTransform>();
+                float txtHt = txtRect.sizeDelta.y;
+                Debug.Log("TXT HT" + txtHt);
+                incrVal = incr * (int)(txtHt * 0.75f);// correction factor
+
+                //if (incrVal > 500)
+                //    return;
                 midTransRect.sizeDelta
                         = new Vector2(midTransRect.sizeDelta.x, midTransHt + incrVal);
                 skillCardRect.sizeDelta
@@ -223,26 +250,11 @@ namespace Combat
             else
             {
                 // reduce to org size 
-                incrVal= 0;
+                incrVal = 0;
                 midTransRect.sizeDelta
-                        = new Vector2(midTransRect.sizeDelta.x, midTransHt );
+                        = new Vector2(midTransRect.sizeDelta.x, midTransHt);
                 skillCardRect.sizeDelta
                         = new Vector2(skillCardRect.sizeDelta.x, skillCardHt);
-            }
-            int j = 0; 
-            foreach (Transform child in midTrans)
-            {
-                if(j < lines)
-                {
-                    child.gameObject.SetActive(true);
-                    child.GetComponent<TextMeshProUGUI>().text
-                                                   = skillModel.descLines[j];
-                }
-                else
-                {
-                    child.gameObject.SetActive(false);  
-                }
-                j++; 
             }
         }
         void FillBtmTrans()
@@ -283,5 +295,25 @@ namespace Combat
             return incrVal; 
         }
 
+        void UpdateTextHeight(TextMeshProUGUI textM)
+        {
+            // Get the current text from the TextMeshPro component
+            string text = textM.text;
+            incr = 0;
+            // Check if the text length exceeds the maximum length
+            if (text.Length > 30)
+            {
+                // Calculate the new height based on the number of lines required               
+                int numberOfLines = Mathf.CeilToInt((float)text.Length / 30);
+                float newHeight = textM.fontSize * numberOfLines;
+                incr += (int)(numberOfLines*1.25f); 
+                // Adjust the text component's rect transform height
+                textM.rectTransform.sizeDelta = new Vector2(textM.rectTransform.sizeDelta.x, newHeight);
+            }
+            else
+            {
+                textM.rectTransform.sizeDelta = new Vector2(textM.rectTransform.sizeDelta.x, 40);
+            }
+        }
     }
 }

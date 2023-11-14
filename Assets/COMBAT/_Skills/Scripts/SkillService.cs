@@ -505,7 +505,7 @@ namespace Combat
                 {
                     CombatService.Instance.roundController.SetSameCharOnTurn();
                     if (currCharOnturn.charModel.charMode == CharMode.Enemy)
-                        InitEnemySkillSelection(CombatService.Instance.currCharOnTurn);
+                        InitEnemySkillSelection(CombatService.Instance.currCharOnTurn);   // to be called 
 
                 }
                 else

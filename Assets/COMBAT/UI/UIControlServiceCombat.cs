@@ -54,7 +54,7 @@ namespace Combat
         #region SCALING
         public void ToggleUIStateScale(GameObject UIObject, UITransformState newState)
         {
-
+            
             if (newState == UITransformState.Open)
             {
                 if (allOpenUI.Any(t => t == UIObject))

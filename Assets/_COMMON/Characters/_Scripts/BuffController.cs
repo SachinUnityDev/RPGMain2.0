@@ -7,6 +7,7 @@ using System.Linq;
 using Quest;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine.SceneManagement;
+using Interactables;
 
 namespace Combat
 {
@@ -78,9 +79,9 @@ namespace Combat
     }
     public class BuffController : MonoBehaviour
     {
-         List<BuffData> allBuffs = new List<BuffData>();  
-         List<BuffData> allDayNightbuffs = new List<BuffData>(); 
-         List<PosBuffData> allPosBuffs = new List<PosBuffData>();  
+        public List<BuffData> allBuffs = new List<BuffData>();  
+        public List<BuffData> allDayNightbuffs = new List<BuffData>(); 
+        public List<PosBuffData> allPosBuffs = new List<PosBuffData>();  
       
         CharController charController; // ref to char Controller 
         [SerializeField]List<string> buffStrs = new List<string>();
@@ -112,7 +113,6 @@ namespace Combat
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
                 GridService.Instance.OnPosChange += PosChgTick;
-
                 CombatEventService.Instance.OnEOR1 += RoundPosTick;
                 CombatEventService.Instance.OnEOC += EOCPosTick;
                 QuestEventService.Instance.OnEOQ += EOQPosTick;
@@ -210,12 +210,23 @@ namespace Combat
                 allBuffs.Remove(buffData);
         }
         #endregion
+
+        public List<BuffData> GetBuffDebuffData()
+        {
+            return allBuffs; 
+        }
+
         public List<string> GetBuffList()
-        {  
+        {
             //foreach (BuffData buffData in allBuffs)
-            //{  
-            //    if(buffData.isBuff)
-            //        buffStrs.Add(buffData.directString);  
+            //{
+            //    string str = ""; 
+            //    if (buffData.isBuff)
+            //    {
+            //        // +1 Morale from Skills, 2 rds
+            //        str= buffData.attribModData.chgVal 
+            //    }
+            //        buffStrs.Add();
             //}
             return buffStrs;            
         }

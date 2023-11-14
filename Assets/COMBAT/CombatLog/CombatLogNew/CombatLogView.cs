@@ -179,26 +179,26 @@ namespace Combat
 
         void SetPanelColor(GameObject panel, LogBackGround _logBG)
         {
+            panel.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0f);
+            //switch (_logBG)
+            //{
+            //    case LogBackGround.None:
+            //        panel.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0f);
+            //        break;
+            //    case LogBackGround.LowHL:
+            //        panel.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.4f);
 
-            switch (_logBG)
-            {
-                case LogBackGround.None:
-                    panel.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0f);
-                    break;
-                case LogBackGround.LowHL:
-                    panel.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.4f);
+            //        break;
+            //    case LogBackGround.MediumHL:
+            //        panel.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.6f);
+            //        break;
+            //    case LogBackGround.HighHL:
+            //        panel.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
 
-                    break;
-                case LogBackGround.MediumHL:
-                    panel.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.6f);
-                    break;
-                case LogBackGround.HighHL:
-                    panel.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
-
-                    break;
-                default:
-                    break;
-            }
+            //        break;
+            //    default:
+            //        break;
+            //}
 
         }
     

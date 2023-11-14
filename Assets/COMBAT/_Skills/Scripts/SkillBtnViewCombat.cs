@@ -21,7 +21,7 @@ namespace Combat
         [SerializeField] Transform skillLvlTrans; 
 
         [Header("Skill Card positioning")]
-        [SerializeField] Vector3 offset = new Vector3(0, 250, 0);
+        [SerializeField] Vector3 offset = new Vector3(0, 150, 0);
 
         [Header("Skill HEX SO TBR")] // contain skill card SO 
         public SkillHexSO skillHexSO;
@@ -245,10 +245,11 @@ namespace Combat
             float height = skillCardGO.GetComponent<RectTransform>().rect.height;
 
             skillCardGO.SetActive(true);
+            skillCardGO.transform.SetParent(transform); 
             //int incrVal = skillCardGO.GetComponent<SkillCardView>().GetIncVal();
             GameObject Canvas = GameObject.FindWithTag("Canvas");
             Canvas canvasObj = Canvas.GetComponent<Canvas>();
-            Vector3 offSetFinal = (offset + new Vector3(-width / 2, (height*2/3), 0)) * canvasObj.scaleFactor;
+            Vector3 offSetFinal = (offset + new Vector3(-width / 2, (height * 3/4), 0))* canvasObj.scaleFactor;
             Vector3 pos = transform.position + offSetFinal;
             skillCardGO.GetComponent<Transform>().DOMove(pos, 0.001f);
             

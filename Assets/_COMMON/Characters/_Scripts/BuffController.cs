@@ -213,7 +213,9 @@ namespace Combat
 
         public List<BuffData> GetBuffDebuffData()
         {
-            return allBuffs; 
+            List<BuffData> allBufftemp=new List<BuffData>();
+            allBufftemp = allBuffs.DeepClone();
+            return allBufftemp; 
         }
 
         public List<string> GetBuffList()

@@ -44,7 +44,7 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"<style=Enemy> retaliates with Wrist spin for adj Targets";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
         public override void SkillEnd()
         {

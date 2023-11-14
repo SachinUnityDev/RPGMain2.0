@@ -76,7 +76,7 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $"50%<style=Physical> Physical </style>on Bleeding target";
-            SkillService.Instance.skillModelHovered.descLines.Add(str0);
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
 
         }
 

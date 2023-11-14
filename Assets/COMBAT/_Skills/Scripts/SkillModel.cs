@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Common; 
+using Common;
+using System.Linq;
 
 namespace Combat
 {
@@ -38,7 +39,7 @@ namespace Combat
         public int lastUsedInRound =-5;
         public List<PerkHexData> allPerkHexes = new List<PerkHexData>();
         public List<PerkType> perkChain = new List<PerkType>();
-        public List<string> descLines = new List<string>();
+        List<string> descLines = new List<string>();
 
         [Header("Use Limit")]
         public int noOfTimesUsed;
@@ -59,6 +60,17 @@ namespace Combat
             {
                 skillSelState = _skillState; 
             }          
+        }
+        public void AddDescLines(string str)
+        {
+            if(!descLines.Any(t=>t == str))
+                descLines.Add(str);
+        }
+        public List<string> GetDescLines()
+        {
+            List<string> descLines1 = new List<string>();
+            descLines1 = descLines.DeepClone();
+            return descLines1;
         }
 
         public SkillModel(SkillData _skillDataSO)

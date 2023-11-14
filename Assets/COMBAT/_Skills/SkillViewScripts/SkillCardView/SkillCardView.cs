@@ -14,7 +14,7 @@ namespace Combat
         [SerializeField] const float skillCardHt = 308f;
         [SerializeField] const float midTransHt = 111f;
 
-        [SerializeField] int incrVal = 0;
+       
 
         [SerializeField] SkillController1 skillController;
         [SerializeField] CharController charController;
@@ -42,8 +42,9 @@ namespace Combat
         [SerializeField] TextMeshProUGUI skillStateTxt;
 
         [Header(" Global var")]
-        int incr; 
-
+        int incr;
+        [SerializeField] int incrVal = 0;
+        List<string> descLine = new List<string>(); 
         private void OnEnable()
         {
             SkillCardInit();
@@ -71,6 +72,16 @@ namespace Combat
             skillModel = null;
             skillDataSO = null; 
             incrVal= 0;
+            ResetSize();
+        }
+        void ResetSize()
+        {
+            RectTransform skillCardRect = transform.GetComponent<RectTransform>();
+            RectTransform midTransRect = midTrans.GetComponent<RectTransform>();
+            midTransRect.sizeDelta
+                    = new Vector2(midTransRect.sizeDelta.x, midTransHt);
+            skillCardRect.sizeDelta
+                    = new Vector2(skillCardRect.sizeDelta.x, skillCardHt);
         }
         void SkillCardInit()
         {
@@ -209,7 +220,8 @@ namespace Combat
         }
         void FillMidTrans()
         {
-            int lines = skillModel.descLines.Count;           
+            descLine = skillModel.GetDescLines(); 
+            int lines = descLine.Count;           
             // get skill card height             
             RectTransform skillCardRect = transform.GetComponent<RectTransform>();
             RectTransform midTransRect = midTrans.GetComponent<RectTransform>();
@@ -222,7 +234,8 @@ namespace Combat
                     child.gameObject.SetActive(true);
                     TextMeshProUGUI textM = child.GetComponent<TextMeshProUGUI>();
                     UpdateTextHeight(textM);
-                    textM.text = skillModel.descLines[j];
+                    
+                    textM.text = descLine[j];
                 }
                 else
                 {
@@ -238,10 +251,9 @@ namespace Combat
                 RectTransform txtRect = midTrans.GetChild(0).GetComponent<RectTransform>();
                 float txtHt = txtRect.sizeDelta.y;
                 Debug.Log("TXT HT" + txtHt);
-                incrVal = incr * (int)(txtHt * 0.75f);// correction factor
+                incrVal += incr * (int)(txtHt);// correction factor
 
-                //if (incrVal > 500)
-                //    return;
+          
                 midTransRect.sizeDelta
                         = new Vector2(midTransRect.sizeDelta.x, midTransHt + incrVal);
                 skillCardRect.sizeDelta
@@ -299,14 +311,15 @@ namespace Combat
         {
             // Get the current text from the TextMeshPro component
             string text = textM.text;
-            incr = 0;
+            incr = 0; incrVal= 0;
             // Check if the text length exceeds the maximum length
             if (text.Length > 30)
             {
                 // Calculate the new height based on the number of lines required               
                 int numberOfLines = Mathf.CeilToInt((float)text.Length / 30);
                 float newHeight = textM.fontSize * numberOfLines;
-                incr += (int)(numberOfLines*1.25f); 
+
+                incrVal += (int)((numberOfLines-1)* textM.rectTransform.sizeDelta.y); 
                 // Adjust the text component's rect transform height
                 textM.rectTransform.sizeDelta = new Vector2(textM.rectTransform.sizeDelta.x, newHeight);
             }

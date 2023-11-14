@@ -49,7 +49,7 @@ namespace Combat
         public override void DisplayFX2()
         {
             str1 = $"<style=Allies> <style=States>Confuse </style> backrow1 rd";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
         public override void DisplayFX3()
         {

@@ -76,20 +76,20 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"<style=Enemy>60% <style=Bleed>Low Bleed</style>";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
 
         }
 
         public override void DisplayFX2()
         {
             str2 = $"<style=Enemy>20% Rat Bite fever, {skillModel.castTime} rd ";
-            SkillService.Instance.skillModelHovered.descLines.Add(str2);
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
 
         public override void DisplayFX3()
         {
             str3 = $"<style=Enemy>35% more dmg,if target has Rat Bite Fever or nausea";
-            SkillService.Instance.skillModelHovered.descLines.Add(str3);
+            SkillService.Instance.skillModelHovered.AddDescLines(str3);
         }
 
         public override void DisplayFX4()

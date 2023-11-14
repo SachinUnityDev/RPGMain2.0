@@ -82,16 +82,16 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $"<style=Allies> Guard Crested Rat, {skillModel.castTime} rds";
-            SkillService.Instance.skillModelHovered.descLines.Add(str0);
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
             str1 = $"<style=self> Gain +40% Armor, {skillModel.castTime} rds";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
   
         }
 
         public override void DisplayFX2()
         {
             str2 = $"<style=self> +20 <style=Water>Water</style> and <style=Earth>Earth</style> Res, {skillModel.castTime} rds";
-            SkillService.Instance.skillModelHovered.descLines.Add(str2);
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
 
         public override void DisplayFX3()

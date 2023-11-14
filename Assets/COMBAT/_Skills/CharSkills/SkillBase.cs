@@ -93,6 +93,7 @@ namespace Combat
      
         public virtual void SkillHovered()
         {
+
             SkillService.Instance.skillModelHovered = skillModel;
             SkillService.Instance.SkillHovered += DisplayFX1;
             SkillService.Instance.SkillHovered += DisplayFX2;

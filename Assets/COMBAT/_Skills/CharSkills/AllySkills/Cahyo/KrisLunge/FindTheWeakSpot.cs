@@ -52,7 +52,7 @@ namespace Combat
         public override void DisplayFX2()
         {
             str2 = $"<style=Enemy>3 5 stm dmg";
-            SkillService.Instance.skillModelHovered.descLines.Add(str2);
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
         public override void ApplyFX3()
         {

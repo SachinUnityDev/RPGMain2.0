@@ -108,10 +108,10 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $"<style=Heal>Heal</style> 5-10";
-            SkillService.Instance.skillModelHovered.descLines.Add(str0);
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
 
             str1 = $"If <style=Attribute>Morale</style> 12, <style=Heal>Heal</style> 12-24";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
 
         public override void DisplayFX2()

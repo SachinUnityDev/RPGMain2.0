@@ -44,15 +44,15 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = "<margin=1.2em>Buff, Debuff";
-            SkillService.Instance.skillModelHovered.descLines.Add(str0);
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
 
             str1 = $"<style=Performer>+3 Acc and Dodge";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
         public override void DisplayFX2()
         {
             str2 = $"<style=Enemy> -2 Morale";
-            SkillService.Instance.skillModelHovered.descLines.Add(str2);
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
 
         public override void DisplayFX3()

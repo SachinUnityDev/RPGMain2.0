@@ -57,13 +57,13 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $"{skillModel.damageMod}%<style=Physical> Physical,</style> dmg";
-            SkillService.Instance.skillModelHovered.descLines.Add(str0);
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
 
         public override void DisplayFX2()
         {
             str1 = $"{chance}%<style=Bleed> Low Bleed</style>";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
 
         public override void DisplayFX3()

@@ -72,19 +72,19 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $" 150%<style=Physical> Physical</style>";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
 
         public override void DisplayFX2()
         {
             str2 = $"{damageExtra}%<style=Earth> Earth </style>to targets behind on same lane";
-            SkillService.Instance.skillModelHovered.descLines.Add(str2);
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
 
         public override void DisplayFX3()
         {
             str3 = $"{chance}%<style=Bleed> Low Bleed </style>";
-            SkillService.Instance.skillModelHovered.descLines.Add(str3);
+            SkillService.Instance.skillModelHovered.AddDescLines(str3);
         }
 
         public override void DisplayFX4()

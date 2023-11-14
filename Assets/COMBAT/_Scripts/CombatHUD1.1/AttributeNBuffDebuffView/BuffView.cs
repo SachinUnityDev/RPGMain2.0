@@ -24,7 +24,9 @@ namespace Combat
         [SerializeField] float MAX_HT = 500f;
         [SerializeField] float MIN_HT = 100f;
 
-        //[SerializeField] Transform container;
+        [SerializeField] float WIDTH_N = 350f; 
+
+        [SerializeField] Transform container;
         [SerializeField] List<BuffData> allBuffData = new List<BuffData>();
         [SerializeField] List<string> allBuffStrs = new List<string>();
 
@@ -38,17 +40,23 @@ namespace Combat
         [SerializeField] string strPrev = "";
 
         
-        public void InitBuffView(BuffBtnView buffBtnView, CharController charController, bool isBuffView)
+        public bool InitBuffView(BuffBtnView buffBtnView, CharController charController, bool isBuffView)
         {
+          container = transform.GetChild(0);    
             this.buffbtnView = buffBtnView;
-            OnCharClicked(charController);
+          
             this.isBuffView= isBuffView;
+            bool hasBuff = OnCharClicked(charController);
+            return hasBuff;
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-           gameObject.SetActive(true);
-            PrintBuffList();
+            if(allBuffStrs.Count > 0)
+            {
+                gameObject.SetActive(true);
+                PrintBuffList();
+            }
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -57,18 +65,19 @@ namespace Combat
         }
 
 
-        void OnCharClicked(CharController charController)
+        bool OnCharClicked(CharController charController)
         {
             BuffController buffController = charController.buffController; 
             allBuffData.Clear();
             allBuffData = buffController.GetBuffDebuffData();
-
+            allBuffStrs.Clear();
             string charNameStr = charController.charModel.charNameStr; 
             foreach (BuffData buffData in allBuffData)
             {
                 //+1 Morale from Skills, 2 rds
-
-                if (buffData.attribModData.chgVal == 0) return;
+                if(buffData.isBuff != isBuffView) continue; 
+                if (buffData.attribModData.chgVal == 0) continue;
+                if(buffData.timeFrame == TimeFrame.Infinity) continue;                
 
                 string sign = buffData.attribModData.chgVal > 0 ? "+" : "-";
                 string str2 = buffData.attribModData.chgVal > 0 ? "gains" : "suffers";
@@ -81,10 +90,15 @@ namespace Combat
                 
             }
             PrintBuffList();
+            if(allBuffStrs.Count > 0)
+            {
+                return true; 
+            }
+            return false; 
 
         }
 
-        void IncrSize()
+        void IncrHt()
         {
             int lines = allBuffStrs.Count;
             // get skill card height             
@@ -106,7 +120,7 @@ namespace Combat
                         = new Vector2(buffRect.sizeDelta.x, MIN_HT);
             }
             int j = 0;
-            foreach (Transform child in transform)
+            foreach (Transform child in container)
             {
                 if (j < lines)
                 {
@@ -121,23 +135,45 @@ namespace Combat
                 j++;
             }
         }
-  
+        void IncrWidth()
+        {
+            int maxlength = 0; 
+            foreach (string str in allBuffStrs)
+            {
+                if(str.Length > 30)
+                {
+                    if(str.Length > maxlength)
+                        maxlength = str.Length;                    
+                }
+            }
+            RectTransform rect = transform.GetComponent<RectTransform>();
+            if (maxlength == 0)
+            {
+                rect.sizeDelta = new Vector2(WIDTH_N, rect.sizeDelta.y);
+            }
+            else
+            {
+                float preferredWidth = (maxlength - 30) * 10.0f;
+                rect.sizeDelta = new Vector2(preferredWidth, rect.sizeDelta.y);
+            } 
+        }
         void PrintBuffList()
         {
-            IncrSize();
+            IncrHt();
+            IncrWidth();
             int k = allBuffStrs.Count; 
-            if (transform.childCount < k)
+            if (container.childCount < k)
             {
                 for (int j = 0; j < k; j++)
                 {
                     Vector3 pos = Vector3.zero;
                     logPanelGO = Instantiate(logPanelPrefab, pos, Quaternion.identity);
-                    logPanelGO.transform.SetParent(transform);
+                    logPanelGO.transform.SetParent(container);
                     logPanelGO.transform.localScale = Vector3.one;
                 }
             }
             int i = 0;
-            foreach (Transform child in transform)
+            foreach (Transform child in container)
             {
                 if (i < allBuffStrs.Count)
                 {

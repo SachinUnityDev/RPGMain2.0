@@ -13,10 +13,16 @@ namespace Combat
     {
         [Header("Buff View")]
         [SerializeField] BuffView buffView;
-        [SerializeField] bool isBuffView ; 
+        [SerializeField] bool isBuffView ;
+
+        Image img;
+        [SerializeField] bool hasBuffs; 
         private void Start()
         {
             CombatEventService.Instance.OnCharClicked += OnCharClicked; 
+            buffView.gameObject.SetActive(false);
+            img = GetComponent<Image>();
+            img.DOFade(0.5f, 0.1f); hasBuffs= false;
         }
 
         private void OnDisable()
@@ -25,12 +31,22 @@ namespace Combat
         }
         void OnCharClicked(CharController charController)
         {
-            buffView.InitBuffView(this, charController, isBuffView); 
+            hasBuffs = buffView.InitBuffView(this, charController, isBuffView);
+            BuffBtnInit(charController); 
+        }
+
+        void BuffBtnInit(CharController charController)
+        {
+           if(hasBuffs)            
+                img.DOFade(1.0f, 0.1f); 
+           else
+                img.DOFade(0.5f, 0.1f);
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            buffView.gameObject.SetActive(true); 
+            if(hasBuffs)
+             buffView.gameObject.SetActive(true); 
             
         }
 

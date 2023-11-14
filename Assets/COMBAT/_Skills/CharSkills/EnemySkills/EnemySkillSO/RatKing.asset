@@ -58,7 +58,7 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexNames: 000000000000000000000000
+      hexNames: 02000000110000000b000000
     allSkillFXs: []
     allLines: []
   - skillName: 26
@@ -88,7 +88,7 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexNames: 000000000000000000000000
+      hexNames: 020000000c0000000b000000
     allSkillFXs: []
     allLines: []
   - skillName: 27
@@ -118,7 +118,7 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexNames: 000000000000000000000000
+      hexNames: 190000000b00000003000000
     allSkillFXs: []
     allLines: []
   - skillName: 56
@@ -148,7 +148,7 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexNames: 000000000000000000000000
+      hexNames: 190000000b0000000b000000
     allSkillFXs: []
     allLines: []
   - skillName: 2
@@ -178,6 +178,6 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexNames: 000000000000000000000000
+      hexNames: 020000000b0000000b000000
     allSkillFXs: []
     allLines: []

@@ -56,7 +56,7 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexNames: 000000000000000000000000
+      hexNames: 0a0000000c0000000b000000
     allSkillFXs:
     - charMode: 1
       perkType: 0
@@ -94,7 +94,7 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexNames: 000000000000000000000000
+      hexNames: 020000000b00000002000000
     allSkillFXs:
     - charMode: 1
       perkType: 0
@@ -133,7 +133,7 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexNames: 000000000000000000000000
+      hexNames: 200000000b0000000b000000
     allSkillFXs: []
     allLines: []
   - skillName: 56

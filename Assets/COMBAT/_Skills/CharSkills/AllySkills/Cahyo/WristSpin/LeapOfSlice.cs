@@ -114,19 +114,19 @@ namespace Combat
         {
             //Can hit anyone from any spo
             str0 = $"Can hit anyone from any pos";
-            SkillService.Instance.skillModelHovered.descLines.Add(str0);
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
 
         public override void DisplayFX2()
         {
             str1 = $" if target at 5,6,7, +25% <style=Physical>Physical</style> ";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
 
         public override void DisplayFX3()
         {
             str2 = $" if striker & target at 7, +50% <style=Physical>Physical</style> ";
-            SkillService.Instance.skillModelHovered.descLines.Add(str2);
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
 
         public override void DisplayFX4()

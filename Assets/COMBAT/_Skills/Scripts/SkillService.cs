@@ -446,6 +446,8 @@ namespace Combat
             currSkillHovered = skillName; 
             currSkillController = allSkillControllers.FirstOrDefault(t => t.charName == _charName);
             currSkillController.SkillHovered(currSkillHovered);
+            
+
             if(SkillWipe != null)
             {
                 foreach (Action del in SkillWipe.GetInvocationList())

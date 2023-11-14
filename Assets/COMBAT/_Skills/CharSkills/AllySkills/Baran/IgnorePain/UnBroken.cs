@@ -72,22 +72,22 @@ namespace Combat
             if (!moraleChgesCasttime)
             {
                 str0 = $"If full HP,+80% <style=Attributes> Armor </style>, {skillModel.castTime} rds";
-                SkillService.Instance.skillModelHovered.descLines.Add(str0);
+                SkillService.Instance.skillModelHovered.AddDescLines(str0);
             }
             else
             {
                 str0 = $"If full HP,+80% <style=Attributes> Armor </style>, EOC";
-                SkillService.Instance.skillModelHovered.descLines.Add(str0);
+                SkillService.Instance.skillModelHovered.AddDescLines(str0);
             }
             
             str1 = $"If full HP, +40%<style=Water> Water Res </style>and +40%<style=Earth> Earth Res </style>, {skillModel.castTime} rds";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
 
         public override void DisplayFX2()
         {
             str2 = $"If Morale 12, +40%<style=Water> Water Res </style> and +20%<style=Earth> Earth Res </style>, until eoq";
-            SkillService.Instance.skillModelHovered.descLines.Add(str2);      
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);      
         }
         public override void ApplyFX2()
         {

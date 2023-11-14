@@ -108,14 +108,14 @@ namespace Combat
         public override void DisplayFX2()
         {
             str2 = $"+40%<style=Physical> Physical </style>on targets back row";
-            SkillService.Instance.skillModelHovered.descLines.Add(str2);
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
 
         }
 
         public override void DisplayFX3()
         {
             str3 = $"<style=Move> Move </style>forward 2";
-            SkillService.Instance.skillModelHovered.descLines.Add(str3);
+            SkillService.Instance.skillModelHovered.AddDescLines(str3);
         }
 
         public override void DisplayFX4()

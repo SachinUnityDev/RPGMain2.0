@@ -111,10 +111,10 @@ namespace Combat
         {
             if(isEdgyAxeSelect)
                 str0 = $"60% <style=Bleed>High Bleed</style>";
-                SkillService.Instance.skillModelHovered.descLines.Add(str0);
+                SkillService.Instance.skillModelHovered.AddDescLines(str0);
             if(isPusherSelect)
                 str0 = $"0% <style=Bleed>High Bleed</style>";
-                SkillService.Instance.skillModelHovered.descLines.Add(str0);
+                SkillService.Instance.skillModelHovered.AddDescLines(str0);
 
         }
 

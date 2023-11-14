@@ -76,14 +76,14 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"<style=Heal> Heal </style>6-12";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
 
         }
 
         public override void DisplayFX2()
         {
             str2 = $"<style=Burn> Clear Burn</style>";
-            SkillService.Instance.skillModelHovered.descLines.Add(str2);
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
 
         public override void DisplayFX3()

@@ -65,7 +65,7 @@ namespace Combat
         public override void DisplayFX2()
         {
             str1 = $"<style=Allies> <style=Heal>Heal,</style> 4-7";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);       
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);       
         }
 
         public override void ApplyFX3()
@@ -76,12 +76,12 @@ namespace Combat
         public override void DisplayFX3()
         {
             str2 = $"<style=Allies> +2 <style=Attributes>Haste</style>, {skillModel.castTime} rds ";
-            SkillService.Instance.skillModelHovered.descLines.Add(str2);      
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);      
         }
         public override void DisplayFX4()
         {
             str3 = $"<style=Allies> <style=States>Soaked</style>, {skillModel.castTime} rds ";
-            SkillService.Instance.skillModelHovered.descLines.Add(str3);
+            SkillService.Instance.skillModelHovered.AddDescLines(str3);
         }
 
         public override void ApplyVFx()

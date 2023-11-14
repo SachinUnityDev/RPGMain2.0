@@ -79,7 +79,7 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"Add all targets";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
 
         public override void DisplayFX2()

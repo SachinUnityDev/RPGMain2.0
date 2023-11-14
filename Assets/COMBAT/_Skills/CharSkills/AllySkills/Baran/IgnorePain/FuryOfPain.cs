@@ -98,7 +98,7 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $"+6<style=Attributes> Acc </style>";
-            SkillService.Instance.skillModelHovered.descLines.Add(str0);
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
 
             //str1 = $"If Luck 12, +2<style=Attributes> Fort org </style>, until eoq";
             //SkillService.Instance.skillModelHovered.descLines.Add(str1);
@@ -108,7 +108,7 @@ namespace Combat
         public override void DisplayFX2()
         {
             str2 = $"If self HP < 40%<style=States> Enraged </style>,{skillModel.castTime} rds";
-            SkillService.Instance.skillModelHovered.descLines.Add(str2);
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
 
         public override void DisplayFX3()

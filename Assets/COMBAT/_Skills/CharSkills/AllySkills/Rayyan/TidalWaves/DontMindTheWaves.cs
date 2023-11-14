@@ -108,19 +108,19 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $"<style=Allies> <style=Enemy> <style=States> Soaked </style>, {skillModel.castTime} rd";
-            SkillService.Instance.skillModelHovered.descLines.Add(str0);
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
 
         public override void DisplayFX2()
         {
             str1 = $"<style=Allies> <style=Move> Push </style>";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
 
         public override void DisplayFX3()
         {
             str3 = $"<style=Allies> Init +2, 2 rds";
-            SkillService.Instance.skillModelHovered.descLines.Add(str3);
+            SkillService.Instance.skillModelHovered.AddDescLines(str3);
         }
 
         public override void DisplayFX4()

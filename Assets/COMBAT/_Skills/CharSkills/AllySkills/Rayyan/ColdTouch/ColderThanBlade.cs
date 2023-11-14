@@ -73,10 +73,10 @@ namespace Combat
         {
             str1 = $"+20% Physical Skills, {skillModel.castTime} rds";
 
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
 
-        public override void DisplayFX2()
+        public override void DisplayFX2()   
         {
           
         }

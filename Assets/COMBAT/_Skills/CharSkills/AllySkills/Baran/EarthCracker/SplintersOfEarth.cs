@@ -76,7 +76,7 @@ namespace Combat
         public override void DisplayFX2()
         {
             str0 = $"75%<style=Earth> Earth </style>to adj targets";
-            SkillService.Instance.skillModelHovered.descLines.Add(str0);
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
 
         public override void DisplayFX3()

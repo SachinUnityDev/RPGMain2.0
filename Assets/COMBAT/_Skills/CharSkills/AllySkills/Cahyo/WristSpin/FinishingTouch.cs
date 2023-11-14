@@ -81,13 +81,13 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $"true strike ";
-            SkillService.Instance.skillModelHovered.descLines.Add(str0);
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
 
         public override void DisplayFX2()
         {
             str1 = $"+4 <style=Attributes>Luck</style> to bleeding targets";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
 
         public override void DisplayFX3()

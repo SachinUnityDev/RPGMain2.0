@@ -67,10 +67,10 @@ namespace Combat
         public override void DisplayFX1()
         {
             str1 = $"<style=Performer>if solo, +20% Armor&Dmg";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
 
             str2 = $"<style=Performer>(if Init 12, +40% Armor&Dmg)";
-            SkillService.Instance.skillModelHovered.descLines.Add(str2);
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
         public override void DisplayFX2()
         {

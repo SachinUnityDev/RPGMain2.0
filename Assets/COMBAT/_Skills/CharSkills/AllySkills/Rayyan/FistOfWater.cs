@@ -79,19 +79,19 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $"<style=Enemy> {skillModel.damageMod}% <style=Water> Water </style>";
-            SkillService.Instance.skillModelHovered.descLines.Add(str0);
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
 
         public override void DisplayFX2()
         {
             str1 = $"<style=Enemy><style=States> Soaked </style>, {skillModel.castTime} rds";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
 
         public override void DisplayFX3()
         {
             str2 = $"<style=Enemy> Ignore <style=Water> Water Res </style>";
-            SkillService.Instance.skillModelHovered.descLines.Add(str2);
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
 
         public override void DisplayFX4()

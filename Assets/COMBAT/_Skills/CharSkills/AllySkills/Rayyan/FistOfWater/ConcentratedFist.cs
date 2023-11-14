@@ -91,16 +91,16 @@ namespace Combat
         public override void DisplayFX1()
         {
             str0 = $" 240% <style=Water>Water</style>";
-            SkillService.Instance.skillModelHovered.descLines.Add(str0);
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
 
             str1 = $"If <style=Attribute>Focus</style> 12, 280% <style=Water>Water</style>";
-            SkillService.Instance.skillModelHovered.descLines.Add(str1);
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
 
         public override void DisplayFX2()
         {
             str2 = $"<style=States>Soaked</style>,{skillModel.castTime}";
-            SkillService.Instance.skillModelHovered.descLines.Add(str2);
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         
         }
 

@@ -279,7 +279,7 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 7
-    skillUnLockStatus: 1
+    skillUnLockStatus: 0
     skillDesc: Feign Death
     damageMod: 110
     skillLvl: 0
@@ -309,7 +309,7 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 8
-    skillUnLockStatus: 1
+    skillUnLockStatus: 0
     skillDesc: Telekinesis
     damageMod: 140
     skillLvl: 0

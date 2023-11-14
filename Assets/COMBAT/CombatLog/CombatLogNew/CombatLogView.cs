@@ -1,5 +1,6 @@
 using Common;
 using Spine.Unity.Examples;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -22,6 +23,8 @@ namespace Combat
 
         [Header(" String Duplication Correction")]
         [SerializeField] string strPrev = "";
+
+       
         void Start()
         {
 
@@ -34,31 +37,30 @@ namespace Combat
             //// PERMANENT TRAITS 
             //PermanentTraitsService.Instance.OnPermaTraitAdded += PrintPermaTraitAdded;
             // SKILL USED
-            SkillService.Instance.OnSkillUsed += SkillUsed; 
+       
 
             // COMBAT EVENT START EVENTS
             CombatEventService.Instance.OnSOC += StartOfCombat;  
 
-            CharService.Instance.OnCharDeath += DeathOfCharUpdate;
+            //CharService.Instance.OnCharDeath += DeathOfCharUpdate;
             CharStatesService.Instance.OnCharStateStart += CharStateStart;
             CharStatesService.Instance.OnCharStateEnd += CharStateEnd;
             CombatEventService.Instance.OnEOC += OnCombatEnd;
             CombatEventService.Instance.OnSOR1 += StartOfRound;
             CombatEventService.Instance.OnCharOnTurnSet += StartOfTurn;
+            SkillService.Instance.OnSkillUsed += SkillUsed;
         }
         private void OnDisable()
         {
             CombatEventService.Instance.OnSOC -= StartOfCombat;
             CombatEventService.Instance.OnEOC -= OnCombatEnd;
-            CharService.Instance.OnCharDeath -= DeathOfCharUpdate;
+            //CharService.Instance.OnCharDeath -= DeathOfCharUpdate;
             CharStatesService.Instance.OnCharStateStart -= CharStateStart;
             CharStatesService.Instance.OnCharStateEnd -= CharStateEnd;
 
-            SkillService.Instance.OnSkillUsed -= SkillUsed;
             CombatEventService.Instance.OnSOR1 -= StartOfRound;
             CombatEventService.Instance.OnCharOnTurnSet -= StartOfTurn;
-
-           
+            SkillService.Instance.OnSkillUsed -= SkillUsed;
         }
 
         void StartOfCombat()
@@ -75,11 +77,20 @@ namespace Combat
                                .ForEach(t => t.OnStatChg -= HpChg);
         }
         void StartOfTurn(CharController charController)
-        {   
-            string charNameStr = charController.charModel.charNameStr;
-            string str = charNameStr + "'s Turn";
+        {
 
-            combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
+            string turnStr = charController.charModel.charNameStr + "'s Turn";
+
+            if (strPrev.Contains(charController.charModel.charNameStr))
+            {
+                combatLog.RemoveAt(combatLog.Count-1);
+                combatLog.Add(new CombatLogData(LogBackGround.LowHL, turnStr));
+                combatLog.Add(new CombatLogData(LogBackGround.LowHL, strPrev));
+            }
+            else
+            {
+                combatLog.Add(new CombatLogData(LogBackGround.LowHL, turnStr));
+            }            
             RefreshCombatLogUI();
         }
 
@@ -116,8 +127,8 @@ namespace Combat
             string str = ""; 
             if (skillEventData.skillModel.skillInclination == SkillInclination.Move)
             {
-                charNameStr = skillEventData.targetController.charModel.charNameStr;
-                DynamicPosData dyna = GridService.Instance.GetDyna4GO(skillEventData.targetController.gameObject);
+                charNameStr = skillEventData.strikerController.charModel.charNameStr;
+                DynamicPosData dyna = GridService.Instance.GetDyna4GO(skillEventData.strikerController.gameObject);
                 int currPos = dyna.currentPos; 
                 str = charNameStr + " moves to hex "+ currPos;
             }
@@ -223,6 +234,26 @@ namespace Combat
         }
 
     
+    }
+
+    public enum LogBackGround
+    {
+        None,
+        LowHL,
+        MediumHL,
+        HighHL,
+    }
+    [Serializable]
+    public class CombatLogData
+    {
+        public LogBackGround logBackGround;
+        public string logString;
+
+        public CombatLogData(LogBackGround logBackGround, string logString)
+        {
+            this.logBackGround = logBackGround;
+            this.logString = logString;
+        }
     }
 }
 

@@ -20,7 +20,7 @@ namespace Combat
             CharStatesService.Instance.OnCharStateStart += UpdateCharStateChg;
             CombatEventService.Instance.OnCharOnTurnSet += SetCombatStatesDisplay;
             CombatEventService.Instance.OnCharClicked += SetCombatStatesDisplay;
-
+            CombatEventService.Instance.OnCharOnTurnSet += OnCharSet; 
 
         }
 
@@ -28,9 +28,13 @@ namespace Combat
         {
             CharStatesService.Instance.OnCharStateStart -= UpdateCharStateChg;
             CombatEventService.Instance.OnCharOnTurnSet -= SetCombatStatesDisplay;
+            CombatEventService.Instance.OnCharOnTurnSet -= OnCharSet;
         }
       
-
+        void OnCharSet(CharController charController)
+        {
+            gameObject.SetActive(false);
+        }
         public void InitCharStatesView()
         {
 

@@ -315,7 +315,7 @@ MonoBehaviour:
     castTime: -1
     timeFrame: 1
     maxUsagePerCombat: -1
-    skillIncli: 0
+    skillIncli: 10
     baseWeight: 1
     isActive: 0
     allPerkHexes:

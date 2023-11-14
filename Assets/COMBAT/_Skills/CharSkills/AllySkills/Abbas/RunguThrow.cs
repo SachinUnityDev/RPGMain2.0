@@ -27,8 +27,11 @@ namespace Combat
                 CombatService.Instance.mainTargetDynas.Clear();
                 CellPosData cellPos = new CellPosData(CharMode.Ally, myDyna.currentPos);
                 targetDyna = GridService.Instance.GetInSameLaneOppParty(cellPos)[0];
-                CombatService.Instance.mainTargetDynas.Add(targetDyna);                
-                skillModel.targetPos.Add(new CellPosData(targetDyna.charMode, targetDyna.currentPos));
+                if(targetDyna != null)
+                {
+                    CombatService.Instance.mainTargetDynas.Add(targetDyna);
+                    skillModel.targetPos.Add(new CellPosData(targetDyna.charMode, targetDyna.currentPos));
+                }
             }
         }
 

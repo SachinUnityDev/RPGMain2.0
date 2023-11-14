@@ -25,11 +25,17 @@ namespace Combat
         public override void PopulateTargetPos()
         {
             if (skillModel == null) return;
-            skillModel.targetPos.Clear();
-            for (int i = 1; i <= 4; i++) //1/2/3/4/
+            skillModel.targetPos.Clear();            
+            for (int i = 1; i < 4; i++)
             {
-                CellPosData cellPosData = new CellPosData(CharMode.Enemy, i);
-                skillModel.targetPos.Add(cellPosData);
+                CellPosData cellPosData = new CellPosData(CharMode.Enemy, i); // Enemy
+                DynamicPosData dyna = GridService.Instance.gridView
+                                       .GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
+                if (dyna != null)
+                {
+                    CombatService.Instance.mainTargetDynas.Add(dyna);   
+                    skillModel.targetPos.Add(cellPosData);
+                }
             }
         }
 
@@ -84,11 +90,7 @@ namespace Combat
         {
           
         }
-
-        public override void PopulateAITarget()
-        {
-           
-        }
+     
     }
 
 

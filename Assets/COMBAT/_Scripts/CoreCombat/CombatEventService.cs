@@ -79,6 +79,7 @@ namespace Combat
             GridService.Instance.gridView.CharOnTurnHL(dynaOnTurn);
             charCtrl.RegenStamina();
             charCtrl.HPRegen(); 
+            Debug.Log("CHAR SET ON TURN >>>>" + charCtrl.charModel.charName);
             OnCharOnTurnSet?.Invoke(charCtrl);
         }
      
@@ -180,18 +181,19 @@ namespace Combat
             int currCharID = CombatService.Instance.currCharOnTurn.charModel.charID; 
             SkillModel skillModel = SkillService.Instance.GetSkillModel(currCharID
                              , SkillService.Instance.currSkillName);
-
+            if (skillModel == null) return;
             if (_targetDyna != null)  // this happens only in move and remote skills{when applied on tile} 
             {
                 Debug.Log("Target Dyna " + _targetDyna.charGO.GetComponent<CharController>().charModel.charName);
                 CharController targetController = _targetDyna.charGO.GetComponent<CharController>();
                 CombatService.Instance.currTargetClicked = targetController;
-                
+
                 if (targetController.charStateController.HasCharState(CharStateName.Cloaked)
                   && CombatService.Instance.mainTargetDynas.Count == 1)
                 {
-                    return; 
+                    return;
                 }
+
                 if (targetController.charStateController.HasCharState(CharStateName.Guarded)
                    && CombatService.Instance.mainTargetDynas.Count ==1)
                 {                
@@ -203,12 +205,18 @@ namespace Combat
                                                         .GetCharCtrlWithCharID(guardingCharID);
                     DynamicPosData newTargetDyna = GridService.Instance.GetDyna4GO(charController.gameObject);
 
-                    _targetDyna = newTargetDyna; 
+                    _targetDyna = newTargetDyna;
+                    CombatService.Instance.currTargetClicked = newTargetDyna.charGO.GetComponent<CharController>();
+                    skillModel.targetPos.Clear();
+                    skillModel.targetPos.Add(new CellPosData(newTargetDyna.charMode,newTargetDyna.currentPos)); 
+              
+
                 }
                 OnTargetClicked?.Invoke(_targetDyna, null);
             }
             else
             {
+     
                 if (skillModel.skillType == SkillTypeCombat.Move)
                 {
                     GameObject charGO = CombatService.Instance.currCharOnTurn.gameObject;

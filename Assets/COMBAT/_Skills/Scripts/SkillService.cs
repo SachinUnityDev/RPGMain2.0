@@ -8,6 +8,7 @@ using Common;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Town;
 
 namespace Combat
 {
@@ -273,7 +274,6 @@ namespace Combat
 
             if (charController.charModel.charMode == CharMode.Ally)
             {
-
                 Debug.Log("ALLY TURN");
                 return;
             }
@@ -309,7 +309,6 @@ namespace Combat
 
         public void TargetIsSelected(DynamicPosData target, CellPosData cellPosData = null)
         {
-
             // FOCUS CHECK TO BE INCORPORPORATED HERE 
             
             if (CombatService.Instance.combatState != CombatState.INCombat_InSkillSelected)
@@ -351,13 +350,19 @@ namespace Combat
             {
                 return;
             }
-            OnSkillUsed?.Invoke(new SkillEventData(CombatService.Instance.currCharOnTurn
-                                        , targetController, currSkillName, currSkillModel));            
-            
+
+            On_SkillUsed(new SkillEventData(CombatService.Instance.currCharOnTurn
+                            , targetController, currSkillName, currSkillModel));
             PreSkillApply?.Invoke();
             SkillFXRemove?.Invoke();
             _OnSkillApply.Invoke();
             On_PostSkillApply();
+        }
+
+        public void On_SkillUsed(SkillEventData skillEventData)
+        {
+            Debug.Log("SKILL USED >>>>>" + skillEventData.skillModel.skillName); 
+            OnSkillUsed?.Invoke(skillEventData);
         }
 
         void On_PostSkillApply()
@@ -380,7 +385,7 @@ namespace Combat
             StrikeController strikeController =
                         CombatService.Instance.currCharOnTurn.GetComponent<StrikeController>();
 
-            OnSkillUsed?.Invoke(new SkillEventData(CombatService.Instance.currCharOnTurn
+            On_SkillUsed(new SkillEventData(CombatService.Instance.currCharOnTurn
                                     , targetController, currSkillName, skillModel));
 
             if (_OnSkillApply == null) return;

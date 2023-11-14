@@ -8,25 +8,7 @@ using System;
 
 namespace Combat
 {
-    public enum LogBackGround
-    {
-        None, 
-        LowHL, 
-        MediumHL, 
-        HighHL, 
-    }
-    [Serializable]
-    public class CombatLogData
-    {
-        public LogBackGround logBackGround;
-        public string logString;
-
-        public CombatLogData(LogBackGround logBackGround, string logString)
-        {
-            this.logBackGround = logBackGround;
-            this.logString = logString;
-        }
-    }
+   
     // reference the log list container in this scripts 
     // revamp log events with all the current data stream events 
     // On hover plank to be revamped too.. with simple highlighting  

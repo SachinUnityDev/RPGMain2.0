@@ -89,6 +89,8 @@ namespace Combat
                     if (hit.transform.name == "TileBase")
                     {
                         currTilePos = _tileMap.WorldToCell(hit.point);
+                        Debug.Log("CURR TILE POS" + hit.point + "COnverted" + _tileMap.CellToWorld(currTilePos));
+                             
                         if (gridController.IsTileOnGrid(currTilePos))
                         {                          
                             GridService.Instance.On_CellPosRightClicked(GetPos4TilePos(currTilePos));   // right clicked on tile                          

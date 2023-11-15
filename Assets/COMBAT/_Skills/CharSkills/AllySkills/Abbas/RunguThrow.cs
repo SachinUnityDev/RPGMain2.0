@@ -19,6 +19,7 @@ namespace Combat
 
         public override float chance { get; set; }
         DynamicPosData targetDyna; 
+        List<DynamicPosData> sameLaneTargets= new List<DynamicPosData>();
         public override void PopulateTargetPos()
         {
             if (skillModel != null)
@@ -26,7 +27,11 @@ namespace Combat
                 skillModel.targetPos.Clear();
                 CombatService.Instance.mainTargetDynas.Clear();
                 CellPosData cellPos = new CellPosData(CharMode.Ally, myDyna.currentPos);
-                targetDyna = GridService.Instance.GetInSameLaneOppParty(cellPos)[0];
+                sameLaneTargets = GridService.Instance.GetInSameLaneOppParty(cellPos); 
+                if(sameLaneTargets.Count > 0 ) 
+                targetDyna = sameLaneTargets[0];
+                else
+                targetDyna = null;                
                 if(targetDyna != null)
                 {
                     CombatService.Instance.mainTargetDynas.Add(targetDyna);

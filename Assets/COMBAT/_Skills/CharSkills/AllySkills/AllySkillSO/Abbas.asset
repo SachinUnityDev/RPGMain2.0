@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Abbas
   m_EditorClassIdentifier: 
   charName: 1
-  combatPose: {fileID: 0}
+  combatPose: {fileID: 21300000, guid: 6a2e992d17767fa478888dde453b57b2, type: 3}
   combatFX:
     loc: 0
     skillSprite: {fileID: 0}

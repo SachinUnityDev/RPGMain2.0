@@ -91,12 +91,9 @@ namespace Combat
         public void On_SOC()
         {
             CombatService.Instance.combatState = CombatState.INCombat_normal;
-           
-
             OnSOC?.Invoke();
             SkillService.Instance.InitSkillControllers();
             OnSOC1?.Invoke(CombatService.Instance.combatState);
-           
         }
 
         public void On_EOC()

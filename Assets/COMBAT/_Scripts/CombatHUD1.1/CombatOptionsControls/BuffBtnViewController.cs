@@ -1,18 +1,16 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using TMPro;
-using DG.Tweening;
-using UnityEngine.Tilemaps;
-using UnityEngine.UI; 
+using UnityEngine.UI;
 
 namespace Combat
 {
-    public class HexController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class BuffBtnViewController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-
-        [SerializeField] GameObject hexGrid; 
+        [SerializeField] GameObject BuffBtnsGO; 
         [SerializeField] TextMeshProUGUI toggleTxt;
         public bool isON = true;
         [Header(" Images")]
@@ -32,14 +30,14 @@ namespace Combat
         public void OnPointerClick(PointerEventData eventData)
         {
             img.sprite = spriteHL;
-            ToggleHex(!isON);
+            ToggleBuffBtns(!isON);
             if (isON)
             {
-                toggleTxt.text = "ON";               
+                toggleTxt.text = "ON";
             }
             else
             {
-                toggleTxt.text = "OFF";                
+                toggleTxt.text = "OFF";
             }
             isON = !isON;
         }
@@ -51,24 +49,13 @@ namespace Combat
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            img.sprite = spriteN; 
+            img.sprite = spriteN;
             transform.GetChild(0).GetComponent<RectTransform>().DOScaleX(0, 0.4f);
         }
 
-        void ToggleHex(bool _isON)
+        void ToggleBuffBtns(bool _isON)
         {
-            if (_isON)
-            {
-                hexGrid.GetComponentInChildren<Tilemap>().color = new Color(1, 1, 1, 0.75f); 
-            }else
-            {
-                hexGrid.GetComponentInChildren<Tilemap>().color = new Color(1, 1,1 , 0.0f);
-            }
+            BuffBtnsGO.SetActive(isON);
         }
-
     }
-
-
-
 }
-

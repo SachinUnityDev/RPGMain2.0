@@ -16,7 +16,6 @@ namespace Combat
         // all display Input 
         // all display outputs
         [Header("UI Elements")]
-        [SerializeField] Button MoveButton;
         [SerializeField] Tilemap _tileMap;
 
         [Header("SOs")]
@@ -50,21 +49,13 @@ namespace Combat
             gridController = GetComponent<GridController>(); 
             currentSelectedTiles = new List<Vector3Int>();
             GridService.Instance.currSelectionState = SelectionState.Hover;            
-            MoveButton.onClick.AddListener(OnMoveBtnDown);
+           
             
             CombatEventService.Instance.OnCombatLoot += OnCombatEndOrInLoot; 
 
         }
 
-        void OnMoveBtnDown()
-        {
-           // List<DynamicPosData> allMoveablePos =  gridController.GetAvailableDynas(currentdyna);
-            // HL them 
-            // HL should be the only one pickable
-
-
-
-        }
+      
 
         private void Update()
         {

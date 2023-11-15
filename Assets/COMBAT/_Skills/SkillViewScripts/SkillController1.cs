@@ -80,7 +80,7 @@ namespace Combat
             }
             
         }
-
+  
 
         public void InitAllSkill_OnCombat(CombatState combatState)
         {

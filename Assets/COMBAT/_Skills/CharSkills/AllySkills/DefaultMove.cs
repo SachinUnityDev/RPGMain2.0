@@ -46,6 +46,7 @@ namespace Combat
             {
                 int pos = Random.Range(0, skillModel.targetPos.Count);
                 GridService.Instance.gridController.Move2Pos(myDyna, skillModel.targetPos[pos].pos);
+                GridService.Instance.gridView.CharOnTurnHL(myDyna);
             }
             else
             {   // if clicked on target pos... 
@@ -62,6 +63,7 @@ namespace Combat
                         if(cellPos.pos== cellPosData.pos)
                         {
                             GridService.Instance.gridController.Move2Pos(myDyna, cellPosData.pos);
+                            GridService.Instance.gridView.CharOnTurnHL(myDyna);
                         }
                     }
                 }     

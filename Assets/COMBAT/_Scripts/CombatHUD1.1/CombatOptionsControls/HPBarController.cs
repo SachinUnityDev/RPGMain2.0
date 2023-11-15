@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 using TMPro;
-using Common; 
-
+using Common;
+using UnityEngine.UI; 
 
 namespace Combat
 {
@@ -14,8 +14,16 @@ namespace Combat
         [SerializeField] TextMeshProUGUI toggleTxt;
 
         public bool isON;
+        [Header(" Images")]
+        Image img;
+        [SerializeField] Sprite spriteN;
+        [SerializeField] Sprite spriteHL;
+                    
         private void Start()
         {
+            img = GetComponent<Image>();
+            img.sprite = spriteN;
+
             toggleTxt = gameObject.transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
             transform.GetChild(0).GetComponent<RectTransform>().DOScaleX(0, 0.4f);
             toggleTxt.text = "ON";
@@ -38,6 +46,7 @@ namespace Combat
 
         public void OnPointerClick(PointerEventData eventData)
         {
+            img.sprite = spriteHL;
             if (isON)
             {
                 toggleTxt.text = "ON";
@@ -54,10 +63,12 @@ namespace Combat
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            
             transform.GetChild(0).GetComponent<RectTransform>().DOScaleX(1, 0.4f);
         }
         public void OnPointerExit(PointerEventData eventData)
         {
+            img.sprite = spriteN;
             transform.GetChild(0).GetComponent<RectTransform>().DOScaleX(0, 0.4f);
         }
     }

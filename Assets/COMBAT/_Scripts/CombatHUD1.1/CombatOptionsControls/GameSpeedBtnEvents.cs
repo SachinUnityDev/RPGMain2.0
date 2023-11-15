@@ -12,20 +12,24 @@ namespace Combat
     {
         Normal, 
         Fast,
-        Fastest, 
+      //  Fastest, 
     }
 
-    public class GameSpeedController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class GameSpeedBtnEvents : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         
         [SerializeField] TextMeshProUGUI centerTxt;
         
         public GameSpeed currSpeed;  // move to combat service 
-        public float timeval; 
-
+        public float timeval;
+        [Header(" Images")]
+        Image img;
+        [SerializeField] Sprite spriteN;
+        [SerializeField] Sprite spriteHL;
         private void Start()
         {
-            
+            img = GetComponent<Image>();
+            img.sprite = spriteN;
             centerTxt = gameObject.transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
             transform.GetChild(0).GetComponent<RectTransform>().DOScaleX(0, 0.4f);
 
@@ -34,17 +38,13 @@ namespace Combat
            timeval =  Time.timeScale = 1.0f; 
         }
 
-        void IncrementSpeed()
+        void ToggleSpeed()
         {
-            int nextSpeed = (int)currSpeed+1;
-            if (nextSpeed < 3)
-            {
-                currSpeed = (GameSpeed)nextSpeed;
-               
-            }else if (nextSpeed == 3)
-            {
-                currSpeed = (GameSpeed)0; 
-            }
+            if(currSpeed == GameSpeed.Normal) 
+                currSpeed = GameSpeed.Fast;
+            else
+                currSpeed = GameSpeed.Normal;
+
             centerTxt.text = currSpeed.ToString();
             switch (currSpeed)
             {
@@ -52,23 +52,17 @@ namespace Combat
                     timeval= Time.timeScale = 1.0f; 
                     break;
                 case GameSpeed.Fast:
-                    timeval= Time.timeScale = 1.25f; 
+                    timeval= Time.timeScale = 1.6f; 
                     break;
-                case GameSpeed.Fastest:
-                    timeval=  Time.timeScale = 1.5f; 
-                    break;
-           
                 default:
                     break;
             }
-
-
-
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            IncrementSpeed();
+            img.sprite = spriteHL;
+            ToggleSpeed();     
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -78,11 +72,8 @@ namespace Combat
         public void OnPointerExit(PointerEventData eventData)
         {
             transform.GetChild(0).GetComponent<RectTransform>().DOScaleX(0, 0.4f);
+            img.sprite = spriteN; 
         }
     }
-
-
-
-
 }
 

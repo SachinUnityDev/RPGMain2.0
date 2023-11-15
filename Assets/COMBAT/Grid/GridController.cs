@@ -44,7 +44,7 @@ namespace Combat
             Vector3 targetPos = _gridMovement.GetWorldPosSingle(cellPos);
             dyna.charGO.transform.DOMove(targetPos, charSpeed, false);
             GridService.Instance.UpdateNewPosInDyna(dyna, targetCell);
-            GridService.Instance.gridView.CharOnTurnHL(dyna);
+           // GridService.Instance.gridView.CharOnTurnHL(dyna);
 
             GridService.Instance.On_PosChg(dyna, targetCell);
 

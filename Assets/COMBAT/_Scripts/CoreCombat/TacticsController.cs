@@ -21,18 +21,23 @@ namespace Combat
             GridService.Instance.OnCellPosClicked += OnTileClicked;
            // StartCombatBtn.onClick.AddListener(StartCombat);
             CombatEventService.Instance.OnSOTactics += StartTactics;
-            CombatEventService.Instance.OnCharClicked += OnCharClickedIN_TACTICS; 
-
+            CombatEventService.Instance.OnCharClicked += OnCharClickedIN_TACTICS;
+            CombatEventService.Instance.OnSOC += OnSOC; 
         }
         private void OnDisable()
         {
+            CombatEventService.Instance.OnSOC -= OnSOC;
 
+        }
+        void OnSOC()
+        {
             CombatEventService.Instance.OnCharRightClicked -= OnCharRightClicked;
             GridService.Instance.OnCellPosClicked -= OnTileClicked;
             // StartCombatBtn.onClick.AddListener(StartCombat);
             CombatEventService.Instance.OnSOTactics -= StartTactics;
-        }
+            CombatEventService.Instance.OnCharClicked -= OnCharClickedIN_TACTICS;
 
+        }
         public void StartTactics()
         {
             CombatService.Instance.combatState = CombatState.INTactics;

@@ -199,8 +199,8 @@ namespace Combat
                 Debug.Log("DEAD OBJECT TURN");
                 return; 
             }
-            if (CombatService.Instance.combatState != CombatState.INCombat_normal)
-                return;
+            //if (CombatService.Instance.combatState != CombatState.INCombat_normal)
+            //    return;
             Vector3 worldPos = GridService.Instance.GetDynaWorldPos(dyna); 
             GameObject FxAlly = _gridModelSO.allyOnTurnHL;
             GameObject FxEnemy = _gridModelSO.enemyOnTurnHL;

@@ -41,13 +41,26 @@ namespace Combat
         public SkillNames skillName;
         SkillView skillView;
         public PassiveSkillName passiveSkillName; 
-        void Awake()
+        void Start()
         {
             IsClicked = false;
             prevSkillHovered = SkillNames.None;
             passiveSkillName = PassiveSkillName.None;
             skillName= SkillNames.None;
+            SkillService.Instance.OnSkillUsed += OnSkillUsed; 
+
         }
+        private void OnDisable()
+        {
+            SkillService.Instance.OnSkillUsed -= OnSkillUsed;
+        }
+
+        void OnSkillUsed(SkillEventData skillEventData)
+        {
+            SetUnClick();
+        }
+
+
         #region  POINTER EVENTS
         public void OnPointerClick(PointerEventData eventData)
         {

@@ -34,7 +34,6 @@ namespace Combat
                 {
                     skillModel.targetPos.Add(new CellPosData(dynaChar.charMode, dynaChar.currentPos));
                     CombatService.Instance.mainTargetDynas.Add(dynaChar);
-
                 }
             }          
         }

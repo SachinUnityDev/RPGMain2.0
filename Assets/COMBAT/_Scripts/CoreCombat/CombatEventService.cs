@@ -138,6 +138,7 @@ namespace Combat
 
         public void On_SOT()
         {
+            Debug.Log("SOT CALLED");
             OnSOT?.Invoke(); 
         }
         public void Move2NextRds()

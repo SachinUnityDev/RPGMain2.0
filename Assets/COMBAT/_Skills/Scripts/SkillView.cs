@@ -27,7 +27,6 @@ namespace Combat
 
 
         [SerializeField] GameObject SkillPanel; 
-       // [SerializeField] GameObject currSkillCard;
         [SerializeField] GameObject textPrefab;
         [SerializeField] Vector2 posOffset;
         public int index;
@@ -38,7 +37,7 @@ namespace Combat
 
 #endregion
 
-        void OnEnable()
+        void Start()
         {
             index = -1; 
      
@@ -51,6 +50,7 @@ namespace Combat
             CombatEventService.Instance.OnCharClicked += (CharController c)=> FillSkillClickedState(-1);
             CombatEventService.Instance.OnEOT += () => FillSkillClickedState(-1);
             CombatEventService.Instance.OnSOTactics += InitSkillBtns;
+          
         }
 
         private void OnDisable()
@@ -62,6 +62,7 @@ namespace Combat
                                                  (CharController c) => FillSkillClickedState(-1);
             CombatEventService.Instance.OnEOT -= () => FillSkillClickedState(-1);
             CombatEventService.Instance.OnSOTactics -= InitSkillBtns;
+          
         }
         void InitSkillBtns()
         {
@@ -92,8 +93,8 @@ namespace Combat
                 return;
 
             SkillModel skillModel = SkillService.Instance.currSkillController.GetSkillModel(SkillService.Instance.currSkillName);
-            if (skillModel.GetSkillState() != SkillSelectState.Clickable)
-                return;
+            //if (skillModel.GetSkillState() != SkillSelectState.Clickable)
+            //    return;
 
             SkillService.Instance.currSkillModel = skillModel; 
 
@@ -101,10 +102,20 @@ namespace Combat
             {
                 SkillService.Instance.ClearPrevSkillData();
             }
-            FillSkillClickedState(index);        
+           // FillSkillClickedState(index);        
             SkillService.Instance.On_SkillSelected
                 (CombatService.Instance.currCharOnTurn.charModel.charName, SkillService.Instance.currSkillName);
         }
+
+        public void UnClickAllSkills()
+        {
+            foreach (Transform child in transform)
+            {              
+                child.GetComponent<SkillBtnViewCombat>().SetUnClick();
+            }
+        }
+
+        #region SKILL UPSTATE WITH CHECKS
         public SkillSelectState UpdateSkillState(SkillModel _skillModel)
         {
   
@@ -233,6 +244,7 @@ namespace Combat
             return true; 
         }
 
+        #endregion
         public void UpdateSkillBtntxt(CharNames _charName,SkillNames _skillName, int posOnSkillPanel)
         {
 
@@ -252,11 +264,13 @@ namespace Combat
         {
             //SkillService.Instance.ClearPrevSkillData();
             GridService.Instance.ClearOldTargets();
-            foreach (Transform child in transform)
-            {
-                child.GetChild(1).GetComponent<Image>().sprite = skillHexSO.SkillNormalFrame;
-                child.GetChild(1).GetComponent<RectTransform>().localScale = Vector3.one;
-            }
+            UnClickAllSkills();
+            //foreach (Transform child in transform)
+            //{
+            //    // child.GetChild(1).GetComponent<Image>().sprite = skillHexSO.SkillNormalFrame;
+            //    child.GetComponent<SkillBtnViewCombat>().SetUnClick();
+            //   // child.GetChild(1).GetComponent<RectTransform>().localScale = Vector3.one;
+            //}
 
             CharNames currCharName = CombatService.Instance.currCharClicked.charModel.charName;
             int currClickedCharID = CombatService.Instance.currCharClicked.charModel.charID;
@@ -302,31 +316,17 @@ namespace Combat
         }
         public void Change2ClickedFrame(Transform skillBtnTransform)
         {
-            skillBtnTransform.GetChild(1).GetComponent<Image>().sprite = skillHexSO.SkillSelectFrame;
-            skillBtnTransform.GetChild(1).GetComponent<RectTransform>().localScale = Vector3.one * 1.25f;  
+            skillBtnTransform.GetComponent<SkillBtnViewCombat>().SetClicked();
+           // skillBtnTransform.GetChild(1).GetComponent<RectTransform>().localScale = Vector3.one * 1.25f;  
         }
 
-        void SetActionPts4Char()
-        {
-            if (GameService.Instance.gameModel.gameState == GameState.InCombat)  
-            {
-                //if (CombatService.Instance.currCharClicked.charModel.charID
-                //    == CombatService.Instance.currCharOnTurn.charModel.charID)
-                //{
-                    CombatController combatController = CombatService.Instance.currCharOnTurn
-                                                            .GetComponent<CombatController>();
-                    if (combatController != null)
-                        combatController.SetActionPts();
-                //}
-            }
-        }
-
+     
         public void SetSkillsPanel(CharController charController)
         {
             if (charController == null) return; 
             CharNames charName = charController.charModel.charName;
             // SET ACTION POINTS             
-            SetActionPts4Char(); // its here as action pts need to be set before updateState
+           // SetActionOnSOT(); // its here as action pts need to be set before updateState
 
             SkillController1 skillController = charController.skillController;
             SkillDataSO skillSO = SkillService.Instance.GetSkillSO(charName);
@@ -358,58 +358,56 @@ namespace Combat
                 SkillBtnViewCombat skillBtn = transform.GetChild(i).GetComponent<SkillBtnViewCombat>();
                 skillBtn.SkillBtnInit(null, null, this); 
             }
-
-
-            //foreach (SkillDataSO skillSO in SkillService.Instance.allCharSkillSO)
-            //{
-            //    if (skillSO.charName == charName)
-            //    {
-            //        for (int i = 0; i < skillSO.allSkills.Count; i++)
-            //        {
-
-            //            if (skillSO.allSkills[i].skillUnLockStatus == 1)
-            //            {
-            //                if (skillSO.allSkills[i].skillType == SkillTypeCombat.Retaliate) // Skipping retaliate skill from 
-            //                    continue;
-            //                Transform skillIconTranform = transform.GetChild(i);
-            //                skillIconTranform.GetComponent<Image>().sprite
-            //                                                    = skillSO.allSkills[i].skillIconSprite;
-            //                SkillNames skillName = skillSO.allSkills[i].skillName;
-
-            //                SkillModel skillModel = SkillService.Instance.GetSkillModel(_charID, skillName);
-            //                if (skillModel == null)
-            //                    Debug.Log("SkillMModel missing" + skillName);
-
-            //                skillModel.SetSkillState(SkillSelectState.Clickable); // setting clicable here if unlcickable due to any reasons will be reset in update
-
-            //                UpdateSkillState(skillModel); 
-
-            //                SkillBtnViewCombat skillBtn = skillIconTranform.GetComponent<SkillBtnViewCombat>();
-            //                skillBtn.skillModel = skillModel;
-
-            //                skillBtn.RefreshIconAsPerState();
-            //                skillBtn.SkillBtnInit(skillSO, skillModel, this);
-            //            }
-            //            else if(skillSO.allSkills[i].skillUnLockStatus == 0)
-            //            {
-            //                //skillPanel.transform.GetChild(i).gameObject.SetActive(true);
-            //                // setting clicable here if unlcickable due to any reasons will be reset in update
-            //                SkillNames skillName = skillSO.allSkills[i].skillName;
-            //                SkillModel skillModel = SkillService.Instance.GetSkillModel(_charID, skillName);
-            //                skillModel.SetSkillState(SkillSelectState.UnClickable_Locked);
-            //                transform.GetChild(i).GetComponent<Image>().sprite = LockedSkillIconSprite;
-            //            }else
-            //            {
-            //                transform.GetChild(i).GetComponent<Image>().sprite = NASkillIconSprite;
-            //            }                            
-            //        }
-            //        // to make the extra button as not available 
-            //        for (int i = skillSO.allSkills.Count; i < skillBtnCount; i++)
-            //        {
-            //            transform.GetChild(i).GetComponent<Image>().sprite = NASkillIconSprite;
-            //        }
-            //    }
-            //}
         }
     }
 }
+//foreach (SkillDataSO skillSO in SkillService.Instance.allCharSkillSO)
+//{
+//    if (skillSO.charName == charName)
+//    {
+//        for (int i = 0; i < skillSO.allSkills.Count; i++)
+//        {
+
+//            if (skillSO.allSkills[i].skillUnLockStatus == 1)
+//            {
+//                if (skillSO.allSkills[i].skillType == SkillTypeCombat.Retaliate) // Skipping retaliate skill from 
+//                    continue;
+//                Transform skillIconTranform = transform.GetChild(i);
+//                skillIconTranform.GetComponent<Image>().sprite
+//                                                    = skillSO.allSkills[i].skillIconSprite;
+//                SkillNames skillName = skillSO.allSkills[i].skillName;
+
+//                SkillModel skillModel = SkillService.Instance.GetSkillModel(_charID, skillName);
+//                if (skillModel == null)
+//                    Debug.Log("SkillMModel missing" + skillName);
+
+//                skillModel.SetSkillState(SkillSelectState.Clickable); // setting clicable here if unlcickable due to any reasons will be reset in update
+
+//                UpdateSkillState(skillModel); 
+
+//                SkillBtnViewCombat skillBtn = skillIconTranform.GetComponent<SkillBtnViewCombat>();
+//                skillBtn.skillModel = skillModel;
+
+//                skillBtn.RefreshIconAsPerState();
+//                skillBtn.SkillBtnInit(skillSO, skillModel, this);
+//            }
+//            else if(skillSO.allSkills[i].skillUnLockStatus == 0)
+//            {
+//                //skillPanel.transform.GetChild(i).gameObject.SetActive(true);
+//                // setting clicable here if unlcickable due to any reasons will be reset in update
+//                SkillNames skillName = skillSO.allSkills[i].skillName;
+//                SkillModel skillModel = SkillService.Instance.GetSkillModel(_charID, skillName);
+//                skillModel.SetSkillState(SkillSelectState.UnClickable_Locked);
+//                transform.GetChild(i).GetComponent<Image>().sprite = LockedSkillIconSprite;
+//            }else
+//            {
+//                transform.GetChild(i).GetComponent<Image>().sprite = NASkillIconSprite;
+//            }                            
+//        }
+//        // to make the extra button as not available 
+//        for (int i = skillSO.allSkills.Count; i < skillBtnCount; i++)
+//        {
+//            transform.GetChild(i).GetComponent<Image>().sprite = NASkillIconSprite;
+//        }
+//    }
+//}

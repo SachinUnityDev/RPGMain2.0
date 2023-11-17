@@ -138,6 +138,7 @@ namespace Combat
             skillFactory.SkillsInit();
             passiveSkillFactory = GetComponent<PassiveSkillFactory>();
             passiveSkillFactory.PassiveSkillsInit();
+            CreateSkillCardGO();
         }
         private void OnDisable()
         {
@@ -154,17 +155,21 @@ namespace Combat
                 skillFXMoveController = gameObject.GetComponent<SkillFxMoveController>();
                 if(skillFXMoveController == null)
                     skillFXMoveController = gameObject.AddComponent<SkillFxMoveController>();
-               
 
-            }
+                CreateSkillCardGO(); 
+            }           
+        }
+
+        void CreateSkillCardGO()
+        {
             GameObject canvasGO = GameObject.FindGameObjectWithTag("Canvas");
             if (skillCardGO == null)
             {
-                skillCardGO = Instantiate(skillCardPrefab);       
+                skillCardGO = Instantiate(skillCardPrefab);
             }
             skillCardGO.transform.SetParent(canvasGO.transform);
             skillCardGO.transform.SetAsLastSibling();
-            skillCardGO.transform.localScale = Vector3.one; 
+            skillCardGO.transform.localScale = Vector3.one;
             skillCardGO.SetActive(false);
         }
 
@@ -250,17 +255,30 @@ namespace Combat
             {
                 SkillController1 skillController = charGO.GetComponent<SkillController1>(); 
 
-                if (skillController == null)
-                {
-                    skillController = charGO.gameObject.AddComponent<SkillController1>();
-                    allSkillControllers.Add(skillController);                 
-                    // skillController.InitSkillList(skillController.charController); 
+                //if (skillController == null)
+                //{
+                //    skillController = charGO.gameObject.AddComponent<SkillController1>();
+                //    allSkillControllers.Add(skillController);                    
+                //   skillController.InitSkillList(skillController.charController); 
 
-                    //SkillAIController skillAIController = character.gameObject.AddComponent<SkillAIController>();
-                    //allSKillAIControllers.Add(skillAIController);
+                //    //SkillAIController skillAIController = character.gameObject.AddComponent<SkillAIController>();
+                //    //allSKillAIControllers.Add(skillAIController);
+                //}
+                if(skillController!= null)
+                {
+                    if (skillController.charController.charModel.orgCharMode == CharMode.Enemy)
+                    {
+                        skillController.InitSkillList(skillController.charController);
+                        skillController.InitPassiveSkillController();
+                    }
                 }
-                if(skillController.charController.charModel.orgCharMode== CharMode.Enemy)
-                                skillController.InitPassiveSkillController(); 
+                else
+                {
+                    Debug.LogError("SkillController is Null" + charGO.name); 
+                }
+
+                
+                    
                 CharNames charName = charGO.GetComponent<CharController>().charModel.charName; 
                 //   skillController.InitSkillList(charName);
             }
@@ -496,17 +514,15 @@ namespace Combat
             bool hasteChk = false; 
             if(skillModel.skillInclination == SkillInclination.Move && !ignoreHasteChk)
                     hasteChk = HasteChk(currCharOnturn);
-            
-            
                 CombatController combatController = currCharOnturn.GetComponent<CombatController>();
                 if (hasteChk) // if haste check allies get a extra AP
                     combatController.actionPts++; 
-                combatController.UpdateActionPts(skillModel, currCharOnturn.charModel.charMode);
+
+                combatController.SubtractActionPtOnSkilluse(skillModel, currCharOnturn.charModel.charMode);
             if (skillModel != null) // skillmodel is null when no skill can be selected 
                 skillView.UpdateSkillState(skillModel);
             else if (currCharOnturn.charModel.charMode == CharMode.Enemy)
                 Move2Nextturn(); 
-
 
                 if (combatController.actionPts > 0)// allies 
                 {
@@ -672,7 +688,6 @@ namespace Combat
         //{
         //  //  allSkillPerksData.Find(t => t.perkName == _perkName).state = state; 
         //}
-
 
         #endregion
 

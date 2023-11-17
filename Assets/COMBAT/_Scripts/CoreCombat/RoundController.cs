@@ -57,7 +57,9 @@ namespace Combat
                 charCount = CharService.Instance.charsInPlayControllers.Count;
                 if (index < charCount && index > -1)
                 {
-                    CombatService.Instance.currCharOnTurn = charTurnOrder[index];                   
+                    
+                    CombatService.Instance.currCharOnTurn = charTurnOrder[index];
+                    SetAP(charTurnOrder[index]);
                 }
                 else // next round 
                 {
@@ -68,7 +70,11 @@ namespace Combat
                 CombatEventService.Instance.On_CharOnTurnSet();
             }
         }
-
+        void SetAP(CharController charController)
+        {
+            CombatController combatController = charController.GetComponent<CombatController>();
+            combatController.SetActionPts(); 
+        }
         void OnRoundStart(int roundNo)
         {
             Debug.Log("Round Start Triggerd" + roundNo); 

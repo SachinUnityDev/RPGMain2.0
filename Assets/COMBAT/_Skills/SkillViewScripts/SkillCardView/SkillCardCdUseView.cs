@@ -63,8 +63,13 @@ namespace Common
         void FillCdImg()
         {
 
-            int j = 0;
-            int currRd = CombatService.Instance.currentRound; 
+            int j = 0; int currRd = 0; 
+            if(GameService.Instance.gameModel.gameState == GameState.InTown ||
+                GameService.Instance.gameModel.gameState == GameState.InQuestRoom)            
+                        currRd = skillModel.cd;                
+            else if (GameService.Instance.gameModel.gameState == GameState.InTown)
+                        currRd = CombatService.Instance.currentRound;
+
             for (j = 0; j < skillModel.cd; j++)
             {
                 transform.GetChild(j).gameObject.SetActive(true);

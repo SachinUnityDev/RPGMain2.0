@@ -19,8 +19,8 @@ namespace Combat
         public override float chance { get => _chance; set => _chance = value; }
 
         public override string desc => "This is the Scratch skill ";
-        public Rodent rodent;
-        public SenseTheWeak senseTheWeak;
+        //public Rodent rodent;
+        //public SenseTheWeak senseTheWeak;
         public override void PopulateTargetPos()
         {
             skillModel.targetPos.Clear();

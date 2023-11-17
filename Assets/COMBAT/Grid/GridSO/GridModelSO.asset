@@ -28,5 +28,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  allyOnTurnHL: {fileID: 131060, guid: 0cf8b69f523437349a65357a1b490b5b, type: 3}
-  enemyOnTurnHL: {fileID: 173872, guid: bcb37dc98ec88994398901edf4c0a254, type: 3}
+  allyOnTurnHL: {fileID: 2225011493432440620, guid: 6ec9e1b9132db0944863524586025058,
+    type: 3}
+  enemyOnTurnHL: {fileID: 8235451120821030808, guid: 579f19b3ac7718b43b34e2023fbbbc7a,
+    type: 3}
+  remoteViewFX: {fileID: 0}

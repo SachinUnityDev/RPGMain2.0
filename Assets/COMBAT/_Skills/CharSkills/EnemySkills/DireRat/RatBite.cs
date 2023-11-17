@@ -19,22 +19,22 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        Rodent rodent;
-        SenseTheWeak senseTheWeak;
+        //Rodent rodent;
+        //SenseTheWeak senseTheWeak;
         public override void PopulateTargetPos()
         {
-            skillModel.targetPos.Clear();
-            int pos = GridService.Instance.GetDyna4GO(charGO).currentPos;
-            CharMode charMode = charController.charModel.charMode;
-            CellPosData cellPos = new CellPosData(charMode, pos);
-            List<DynamicPosData> InSameLane =  GridService.Instance.GetInSameLaneOppParty(cellPos);
-            
-            if (InSameLane.Count > 0)
-            {
-                skillModel.targetPos.Add(new CellPosData(InSameLane[0].charMode, InSameLane[0].currentPos));
-                Debug.Log("RAT BITE TARGET SET" + skillModel.targetPos  + InSameLane[0].charGO); 
-            }
-            
+            //skillModel.targetPos.Clear();
+            //int pos = GridService.Instance.GetDyna4GO(charGO).currentPos;
+            //CharMode charMode = charController.charModel.charMode;
+            //CellPosData cellPos = new CellPosData(charMode, pos);
+            //List<DynamicPosData> InSameLane =  GridService.Instance.GetInSameLaneOppParty(cellPos);
+
+            //if (InSameLane.Count > 0)
+            //{
+            //    skillModel.targetPos.Add(new CellPosData(InSameLane[0].charMode, InSameLane[0].currentPos));
+            //    Debug.Log("RAT BITE TARGET SET" + skillModel.targetPos  + InSameLane[0].charGO); 
+            //}
+            FirstOnSamelane();
 
         }
         public override void ApplyFX1()

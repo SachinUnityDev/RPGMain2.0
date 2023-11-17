@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Common;
+using Combat;
 
 namespace Combat
 {   
@@ -27,36 +28,59 @@ namespace Combat
         {
             charController = GetComponent<CharController>();
             CombatEventService.Instance.OnEOR1 += ResetValues;
+          //  CombatEventService.Instance.OnSOT += ONSOT; 
         }
 
         private void OnDisable()
         {
             CombatEventService.Instance.OnEOR1 -= ResetValues;
+           // CombatEventService.Instance.OnSOT -= ONSOT;
         }
         
-  
+        void ONSOT()
+        {
+            //CombatEventService.Instance.OnCharOnTurnSet -= OnCharSetOnTurn;
+            // CombatEventService.Instance.OnCharOnTurnSet += OnCharSetOnTurn;
+            Debug.Log(" ENENMY SOT TRIGGERED" + charController.charModel.charNameStr);
+            if (CombatService.Instance.currCharOnTurn.charModel.charID != this.charController.charModel.charID)
+                return;
+            if (charController.charModel.charMode == CharMode.Enemy)
+                Debug.LogError(" ENENMY SOT TRIGGERED" + charController.charModel.charNameStr);
+
+        }
+        void OnCharSetOnTurn(CharController charController)
+        {
+         
+
+           // CombatEventService.Instance.OnCharOnTurnSet -= OnCharSetOnTurn;
+
+        }
+
+
         void ResetValues(int roundNo)
         {
-            prevTurn = -5; 
+            prevTurn = -5; actionPts= 0;
         }
     
         public void Init()
         {
 
         }
-        public void SetActionPts()
+        public void SetActionPts()  // SOT ONLY 
         {       
             if (CombatService.Instance.currCharOnTurn.charModel.charID != this.charController.charModel.charID)
                 return;
-            MoraleChk(charController);
-            if (prevTurn == CombatService.Instance.currentTurn)
-                return;
-            prevTurn = CombatService.Instance.currentTurn;
-
-            // MORALE CHECK
+            MoraleChk(charController);        
             ++actionPts; 
             if (actionPts > MAX_VAL_FOR_ACTION_PTS)
                     actionPts = MAX_VAL_FOR_ACTION_PTS;
+            if(actionPts <= 0)
+                    actionPts= 0;
+
+            Canvas canvas = FindObjectOfType<Canvas>();
+            SkillView skillView = canvas.GetComponentInChildren<SkillView>(); 
+           skillView.SetSkillsPanel(charController);
+
             Debug.Log(" charName" + charController.charModel.charName + "action"+ actionPts);
             if (charController.charModel.charMode == CharMode.Enemy)
             {
@@ -64,6 +88,10 @@ namespace Combat
                 {
                     SkillService.Instance.Move2Nextturn();
                 }
+            }
+            else
+            {
+                FillActionPtsView(charController.charModel.charMode); 
             }
         }
         void MoraleChk(CharController charController)
@@ -93,17 +121,22 @@ namespace Combat
                 }            
         }
 
-        public void UpdateActionPts(SkillModel skillModel, CharMode charMode)
+        public void SubtractActionPtOnSkilluse(SkillModel skillModel, CharMode charMode)
         {
             if (skillModel.skillType == SkillTypeCombat.Retaliate)
                 return;
             --actionPts;
+            FillActionPtsView(charMode); 
+        }
+
+        void FillActionPtsView(CharMode charMode)
+        {
             if (charMode != CharMode.Ally) return; // no action pts view for the enemy
             canvas = FindObjectOfType<Canvas>();
             actionPtsView = canvas.GetComponentInChildren<ActionPtsView>(true);
-      
             actionPtsView.UpDateActionsPtsView(actionPts);
         }
+
         public bool IfSingleInRow(GameObject _charGO)
         {
             return false;
@@ -125,3 +158,24 @@ namespace Combat
 //AttribData haste_AttribData = currCharOnTurn.GetAttrib(AttribName.haste);
 //int hasteBonus = (int)haste_AttribData.currValue / 6; 
 //actionPts = 1+hasteBonus;
+
+
+
+//void SetActionOnSOT()
+//{
+//    if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+//    {
+//        CombatEventService.Instance.OnCharOnTurnSet -= OnCharSetOnTurn;
+//        CombatEventService.Instance.OnCharOnTurnSet += OnCharSetOnTurn;
+//    }
+//}
+//void OnCharSetOnTurn(CharController charController)
+//{
+//    if (charController.charModel.charID != CombatService.Instance.currCharOnTurn.charModel.charID)
+//        return;
+//    CombatController combatController = GetComponent<CombatController>();
+//    if (combatController != null)
+//        combatController.SetActionPts();
+
+//    CombatEventService.Instance.OnCharOnTurnSet -= OnCharSetOnTurn;
+//}

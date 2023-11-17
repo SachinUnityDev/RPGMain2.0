@@ -64,15 +64,12 @@ namespace Combat
         #region  POINTER EVENTS
         public void OnPointerClick(PointerEventData eventData)
         {
-            IsClicked = !IsClicked;
-
-            if (IsClicked)
+            if (!IsClicked)
             {
                 if (skillModel.GetSkillState() != SkillSelectState.Clickable)
                     return; 
-                IsClicked = true;
-                transform.GetChild(1).GetComponent<Image>().sprite = skillHexSO.skillIconFrameHL;
-                ShowSkillcardInCombat();
+
+                SetClicked();       
                 skillView.SkillBtnPressed(transform.GetSiblingIndex());
             }
             else
@@ -95,9 +92,27 @@ namespace Combat
         public void SetUnClick()
         {
             IsClicked = false;
+            if(skillModel != null)
+            skillModel.SetSkillState(SkillSelectState.Clickable);
             transform.GetChild(1).GetComponent<Image>().sprite = skillHexSO.SkillNormalFrame;
         }
-
+        public void SetClicked()
+        {
+            if (skillModel == null) return;            
+            skillView.UnClickAllSkills();
+            if (IsEnemy()) return;
+            IsClicked = true;
+            skillModel.SetSkillState(SkillSelectState.Clicked);
+            transform.GetChild(1).GetComponent<Image>().sprite = skillHexSO.SkillSelectFrame;
+        }
+        bool IsEnemy()
+        {
+            CharController charController = CombatService.Instance.currCharClicked; 
+            if (charController)
+                if (charController.charModel.charMode == CharMode.Enemy)
+                    return true; 
+            return false;
+        }
         void ClearData()
         {
             passiveSkillName = PassiveSkillName.None;

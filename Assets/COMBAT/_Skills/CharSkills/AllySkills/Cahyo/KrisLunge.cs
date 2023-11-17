@@ -24,19 +24,20 @@ namespace Combat
 
         public override void PopulateTargetPos()
         {
-            if (skillModel == null) return; 
+            //if (skillModel == null) return; 
 
-             skillModel.targetPos.Clear(); CombatService.Instance.mainTargetDynas.Clear();   
+            // skillModel.targetPos.Clear(); CombatService.Instance.mainTargetDynas.Clear();   
 
-            List<DynamicPosData> sameLaneOccupiedPos = GridService.Instance.GetInSameLaneOppParty
-                         (new CellPosData(CharMode.Ally, GridService.Instance.GetDyna4GO(charGO).currentPos));
-            if (sameLaneOccupiedPos.Count > 0)
-            {
-                CellPosData Pos = new CellPosData(CharMode.Enemy, sameLaneOccupiedPos[0].currentPos);
-                skillModel.targetPos.Add(Pos);
-                CombatService.Instance.mainTargetDynas
-                    .Add(GridService.Instance.GetDynaAtCellPos(CharMode.Enemy, sameLaneOccupiedPos[0].currentPos)); 
-            }
+            //List<DynamicPosData> sameLaneOccupiedPos = GridService.Instance.GetInSameLaneOppParty
+            //             (new CellPosData(CharMode.Ally, GridService.Instance.GetDyna4GO(charGO).currentPos));
+            //if (sameLaneOccupiedPos.Count > 0)
+            //{
+            //    CellPosData Pos = new CellPosData(CharMode.Enemy, sameLaneOccupiedPos[0].currentPos);
+            //    skillModel.targetPos.Add(Pos);
+            //    CombatService.Instance.mainTargetDynas
+            //        .Add(GridService.Instance.GetDynaAtCellPos(CharMode.Enemy, sameLaneOccupiedPos[0].currentPos)); 
+            //}
+            FirstOnSamelane();
         }
 
         public override void ApplyFX1()

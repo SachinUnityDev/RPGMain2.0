@@ -69,16 +69,16 @@ namespace Combat
         }
         public override void DisplayFX1()
         {
-            if (!moraleChgesCasttime)
-            {
-                str0 = $"If full HP,+80% <style=Attributes> Armor </style>, {skillModel.castTime} rds";
-                SkillService.Instance.skillModelHovered.AddDescLines(str0);
-            }
-            else
-            {
-                str0 = $"If full HP,+80% <style=Attributes> Armor </style>, EOC";
-                SkillService.Instance.skillModelHovered.AddDescLines(str0);
-            }
+            //if (!moraleChgesCasttime)
+            //{
+            //    str0 = $"If full HP,+80% <style=Attributes> Armor </style>, {skillModel.castTime} rds";
+            //    SkillService.Instance.skillModelHovered.AddDescLines(str0);
+            //}
+            //else
+            //{
+            //    str0 = $"If full HP,+80% <style=Attributes> Armor </style>, EOC";
+            //    SkillService.Instance.skillModelHovered.AddDescLines(str0);
+            //}
             
             str1 = $"If full HP, +40%<style=Water> Water Res </style>and +40%<style=Earth> Earth Res </style>, {skillModel.castTime} rds";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);

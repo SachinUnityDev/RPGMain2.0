@@ -287,6 +287,24 @@ namespace Combat
 
         }
 
+        protected void FirstOnSamelane()
+        {
+            if (skillModel == null) return;
+
+            skillModel.targetPos.Clear(); CombatService.Instance.mainTargetDynas.Clear();
+
+            List<DynamicPosData> sameLaneOccupiedPos = GridService.Instance.GetInSameLaneOppParty
+                         (new CellPosData(charController.charModel.charMode, GridService.Instance.GetDyna4GO(charGO).currentPos));
+            if (sameLaneOccupiedPos.Count > 0)
+            {
+                CellPosData Pos = new CellPosData(CharMode.Enemy, sameLaneOccupiedPos[0].currentPos);
+                skillModel.targetPos.Add(Pos);
+                CombatService.Instance.mainTargetDynas
+                    .Add(GridService.Instance.GetDynaAtCellPos(CharMode.Enemy, sameLaneOccupiedPos[0].currentPos));
+            }
+        }
+
+
     }
 
 }

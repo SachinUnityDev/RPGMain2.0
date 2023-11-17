@@ -49,13 +49,22 @@ namespace Combat
         {
             charController = gameObject.GetComponent<CharController>();
             charName = charController.charModel.charName;
-            
+            CombatEventService.Instance.OnEOC += OnEOCReset; 
+
+        }
+
+        private void Start()
+        {
             CharService.Instance.OnCharInit += InitSkillList;
             CombatEventService.Instance.OnSOC1 += InitAllSkill_OnCombat;
             Debug.Log("ENABLED" + charName);
             // CharService.Instance.OnCharAddedToParty += InitSkillList;
             SceneManager.sceneLoaded += OnSceneLoaded;
             QuestEventService.Instance.OnEOQ += EOQTick;
+            CombatEventService.Instance.OnEOC -= OnEOCReset;
+            // CombatEventService.Instance.OnSOT += SetActionOnSOT;
+            if (skillView == null)
+                skillView = FindObjectOfType<SkillView>();
         }
         private void OnDisable()
         {
@@ -65,6 +74,8 @@ namespace Combat
             CombatEventService.Instance.OnEOR1 -= RoundTick;
             CombatEventService.Instance.OnEOC -= EOCTick;
             QuestEventService.Instance.OnEOQ -= EOQTick;
+
+          //  CombatEventService.Instance.OnSOT -= SetActionOnSOT;
         }
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -76,7 +87,7 @@ namespace Combat
                 CombatEventService.Instance.OnSOC1 += InitAllSkill_OnCombat;
                 CombatEventService.Instance.OnEOR1 += RoundTick;
                 CombatEventService.Instance.OnEOC += EOCTick;
-            
+               // CombatEventService.Instance.OnSOT += SetActionOnSOT;
             }
             
         }
@@ -672,7 +683,8 @@ namespace Combat
             float netBaseWt = 0f; ClickableSkills.Clear();
             foreach (SkillModel skillModel in allSkillModels)
             {   
-                //skillModel.SetSkillState(skillView.UpdateSkillState(skillModel));
+            
+                skillView.UpdateSkillState(skillModel);
                 if (skillModel.GetSkillState() == SkillSelectState.Clickable)
                 {
                     Debug.Log("SKILL MODEL" + skillModel.skillName);
@@ -805,7 +817,18 @@ namespace Combat
         }
         #endregion
 
-     
+
+        #region EOC RESET
+
+        void OnEOCReset()
+        {
+            foreach (SkillModel skillModel  in allSkillModels)
+            {
+                skillModel.lastUsedInRound = 0; 
+            }
+        }
+        #endregion
+
 
     }
 

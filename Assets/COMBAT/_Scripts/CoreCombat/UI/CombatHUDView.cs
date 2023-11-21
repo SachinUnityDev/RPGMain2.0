@@ -119,7 +119,7 @@ namespace Combat
             CombatEventService.Instance.OnCombatLoot += CombatResultDisplay;
 
             CombatEventService.Instance.OnCharOnTurnSet
-                                             += SetCharAttributesDisplay;
+                                                          += SetCharAttributesDisplay;
 
             CombatEventService.Instance.OnCharClicked += SetCharAttributesDisplay;
 
@@ -285,7 +285,7 @@ namespace Combat
         public void SetSelectCharPortrait(CharController charController)
         {
          
-          //  Transform charOnTurnBtn = charOnTurn.transform; 
+             //  Transform charOnTurnBtn = charOnTurn.transform; 
             CharMode charMode = charController.charModel.charMode;
 
             RectTransform portraitRectAlly = PortraitPanelAlly.GetComponent<RectTransform>();
@@ -455,55 +455,55 @@ namespace Combat
             //}
         }
 
-        public void SetBuffDebuffList(CharController charController)
-        {
-            buffList.Clear(); deBuffList.Clear();
-            if (statDisplay.Count == 0) return; 
+        //public void SetBuffDebuffList(CharController charController)
+        //{
+        //    buffList.Clear(); deBuffList.Clear();
+        //    if (statDisplay.Count == 0) return; 
             
-                buffView = statDisplay.Find(x => x.isBuff == true).statDisplayGO.transform.GetChild(0);
+        //        buffView = statDisplay.Find(x => x.isBuff == true).statDisplayGO.transform.GetChild(0);
 
-                deBuffView = statDisplay.Find(x => x.isDebuff == true).statDisplayGO.transform.GetChild(0);
+        //        deBuffView = statDisplay.Find(x => x.isDebuff == true).statDisplayGO.transform.GetChild(0);
             
         
-            buffListHt = buffView.GetChild(0).GetChild(0).GetComponent<RectTransform>().rect.height;
-            Transform buffContent = buffView.GetChild(0).GetChild(0);
-            buffContent.GetComponent<RectTransform>().sizeDelta
-                                            = new Vector2(buffTransX, buffListHt);
+        //    buffListHt = buffView.GetChild(0).GetChild(0).GetComponent<RectTransform>().rect.height;
+        //    Transform buffContent = buffView.GetChild(0).GetChild(0);
+        //    buffContent.GetComponent<RectTransform>().sizeDelta
+        //                                    = new Vector2(buffTransX, buffListHt);
 
 
-            buffList = charController.gameObject.GetComponent<BuffController>().GetBuffList();
-            deBuffList = charController.gameObject.GetComponent<BuffController>().GetDeBuffList();
+        //    buffList = charController.gameObject.GetComponent<BuffController>().GetBuffList();
+        //    deBuffList = charController.gameObject.GetComponent<BuffController>().GetDeBuffList();
 
 
-            int lines = buffList.Count;
-            Debug.Log("BUFF LIST LINES" + lines);
-            if (lines > maxExpectedLines)
-            {
-                int incr = lines - maxExpectedLines;
-                buffContent.GetComponent<RectTransform>().sizeDelta
-                    = new Vector2(buffTransX, buffListHt + incr * 40f);
-            }
-            else
-            {
-                buffContent.GetComponent<RectTransform>().sizeDelta
-                  = new Vector2(buffTransX, buffListHt);
-            }
+        //    int lines = buffList.Count;
+        //    Debug.Log("BUFF LIST LINES" + lines);
+        //    if (lines > maxExpectedLines)
+        //    {
+        //        int incr = lines - maxExpectedLines;
+        //        buffContent.GetComponent<RectTransform>().sizeDelta
+        //            = new Vector2(buffTransX, buffListHt + incr * 40f);
+        //    }
+        //    else
+        //    {
+        //        buffContent.GetComponent<RectTransform>().sizeDelta
+        //          = new Vector2(buffTransX, buffListHt);
+        //    }
 
 
-            for (int i = 0; i < lines; i++)
-            {
-                if (i < buffContent.childCount)
-                {
-                    buffContent.GetChild(i).gameObject.SetActive(true);
-                    buffContent.GetChild(i).gameObject.GetComponent<TextMeshProUGUI>().text
-                                                                                  = buffList[i];
-                }
-                else
-                {
-                    Debug.Log("MORE LINES NEED TO BE ADDED ");
-                }
-            }
-        }
+        //    for (int i = 0; i < lines; i++)
+        //    {
+        //        if (i < buffContent.childCount)
+        //        {
+        //            buffContent.GetChild(i).gameObject.SetActive(true);
+        //            buffContent.GetChild(i).gameObject.GetComponent<TextMeshProUGUI>().text
+        //                                                                          = buffList[i];
+        //        }
+        //        else
+        //        {
+        //            Debug.Log("MORE LINES NEED TO BE ADDED ");
+        //        }
+        //    }
+        //}
 
         //public void ToggleBuffDebuff(bool isBuff, bool isDebuff)
         //{

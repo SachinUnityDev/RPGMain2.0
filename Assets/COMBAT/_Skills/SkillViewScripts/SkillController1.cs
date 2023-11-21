@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SceneManagement; 
 
@@ -49,20 +50,19 @@ namespace Combat
         {
             charController = gameObject.GetComponent<CharController>();
             charName = charController.charModel.charName;
-            CombatEventService.Instance.OnEOC += OnEOCReset; 
-
+           
         }
 
         private void Start()
         {
             CharService.Instance.OnCharInit += InitSkillList;
             CombatEventService.Instance.OnSOC1 += InitAllSkill_OnCombat;
-            Debug.Log("ENABLED" + charName);
+            CombatEventService.Instance.OnEOC += OnEOCReset;
+            CombatEventService.Instance.OnCharOnTurnSet += UpdateAllSkillState;            
             // CharService.Instance.OnCharAddedToParty += InitSkillList;
             SceneManager.sceneLoaded += OnSceneLoaded;
             QuestEventService.Instance.OnEOQ += EOQTick;
             CombatEventService.Instance.OnEOC -= OnEOCReset;
-            // CombatEventService.Instance.OnSOT += SetActionOnSOT;
             if (skillView == null)
                 skillView = FindObjectOfType<SkillView>();
         }
@@ -74,8 +74,6 @@ namespace Combat
             CombatEventService.Instance.OnEOR1 -= RoundTick;
             CombatEventService.Instance.OnEOC -= EOCTick;
             QuestEventService.Instance.OnEOQ -= EOQTick;
-
-          //  CombatEventService.Instance.OnSOT -= SetActionOnSOT;
         }
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -87,7 +85,6 @@ namespace Combat
                 CombatEventService.Instance.OnSOC1 += InitAllSkill_OnCombat;
                 CombatEventService.Instance.OnEOR1 += RoundTick;
                 CombatEventService.Instance.OnEOC += EOCTick;
-               // CombatEventService.Instance.OnSOT += SetActionOnSOT;
             }
             
         }
@@ -101,10 +98,14 @@ namespace Combat
             {
                 InitSkillList(charController);
             }
-        
+            AllSkillInit();
+        }
+
+        void AllSkillInit()
+        {
             foreach (SkillBase skillBase in allSkillBases)
             {
-                skillBase.SkillInit(this); 
+                skillBase.SkillInit(this);
             }
         }
         public void InitSkillList(CharController charController)
@@ -655,10 +656,10 @@ namespace Combat
         #region  SKILL SELECTION AI 
         public void StartAISkillInController()
         {
+
             SkillModel selectedSkillModel = SkillSelectByAI();
             if (selectedSkillModel != null)
             {
-
                 SkillService.Instance.currSkillName = selectedSkillModel.skillName;
                 //SkillService.Instance.On_SkillSelected(selectedSkillModel.charName);// dependencies skillName
 
@@ -684,7 +685,7 @@ namespace Combat
             foreach (SkillModel skillModel in allSkillModels)
             {   
             
-                skillView.UpdateSkillState(skillModel);
+                UpdateSkillState(skillModel);
                 if (skillModel.GetSkillState() == SkillSelectState.Clickable)
                 {
                     Debug.Log("SKILL MODEL" + skillModel.skillName);
@@ -815,6 +816,145 @@ namespace Combat
                 }
             }
         }
+        #endregion
+
+        #region UPDATE SKILL STATE
+
+        public void UpdateAllSkillState(CharController charController)
+        {
+            foreach (SkillModel skillModel in allSkillModels)
+            {
+                UpdateSkillState(skillModel); 
+            }
+        }
+        public SkillSelectState UpdateSkillState(SkillModel skillModel)
+        {
+
+            // Debug.Log("SKILL NAME " + _skillModel.skillName + "TARGETS" + _skillModel.targetPos.Count);
+            if (CombatService.Instance.combatState == CombatState.INTactics)
+            {
+                skillModel.SetSkillState(SkillSelectState.UnClickable_InTactics);
+                return SkillSelectState.UnClickable_InTactics;
+            }
+            else if (CombatService.Instance.currCharClicked != CombatService.Instance.currCharOnTurn)
+            {
+                skillModel.SetSkillState(SkillSelectState.Unclickable_notCharsTurn);
+                return SkillSelectState.Unclickable_notCharsTurn;
+            }
+            else if (HasNoChkActionPts())
+            {
+                skillModel.SetSkillState(SkillSelectState.UnClickable_NoActionPts);
+                return SkillSelectState.UnClickable_NoActionPts;
+            }
+            else if (IfInCoolDown(skillModel))      // only char on turn will get here 
+            {
+                skillModel.SetSkillState(SkillSelectState.UnClickable_InCd);
+                return SkillSelectState.UnClickable_InCd;
+            }
+            else if (IsNotOnCastPos(skillModel))     // not on cast pos 
+            {
+                skillModel.SetSkillState(SkillSelectState.Unclickable_notOnCastPos);
+                return SkillSelectState.Unclickable_notOnCastPos;
+            }
+            else if (NoTargetsInRange(skillModel))
+            {
+                skillModel.SetSkillState(SkillSelectState.UnClickable_NoTargets);
+                return SkillSelectState.UnClickable_NoTargets;
+            }
+            else if (HasNoStamina(skillModel))
+            {
+                skillModel.SetSkillState(SkillSelectState.UnClickable_NoStamina);
+                return SkillSelectState.UnClickable_NoStamina;
+            }
+            else if (skillModel.skillInclination == SkillInclination.Passive)  // as enemies only // more like traits
+            {
+                skillModel.SetSkillState(SkillSelectState.Unclickable_passiveSkills);
+                return SkillSelectState.Unclickable_passiveSkills;
+            }
+            else
+            {
+                skillModel.SetSkillState(SkillSelectState.Clickable);
+                return SkillSelectState.Clickable;
+            }
+        }
+
+        bool HasNoChkActionPts()
+        {
+            CharController charController = CombatService.Instance.currCharOnTurn;
+            //if (charController.charModel.charMode == CharMode.Enemy)
+            //    return false; 
+            CombatController combatController = charController.GetComponent<CombatController>();
+
+            if (combatController.actionPts > 0)
+                return false;
+            return true;
+        }
+
+        public bool HasNoStamina(SkillModel _skillModel)
+        {
+            StatData staminaData = CharService.Instance.GetCharCtrlWithCharID(_skillModel.charID).GetStat(StatName.stamina);
+            float stamina = staminaData.currValue;
+
+            if (stamina < _skillModel.staminaReq)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        bool NoTargetsInRange(SkillModel _skillModel)
+        {
+
+            if (_skillModel.skillType == SkillTypeCombat.Move || _skillModel.attackType == AttackType.Remote)
+            {
+                // Checks only target Pos as skill is used on empty tile 
+                if (_skillModel.targetPos.Count != 0) return false;
+                else return true;
+
+            }
+            else
+            {  // get dyna from target pos
+                if (SkillService.Instance.GetTargetInRange(_skillModel) == null)
+                {
+                    // Debug.Log("return null targets due to no DYNA");     
+                    return true;
+                }
+                if (SkillService.Instance.GetTargetInRange(_skillModel).Count == 0)
+                {
+                    /// Debug.Log("return ZERO targets due to no DYNA");
+                    return true;
+                }
+                else
+                {
+                    // Debug.Log("return HAS targets");
+                    return false;
+                }
+            }
+        }
+
+        bool IsNotOnCastPos(SkillModel _skillModel)
+        {
+            GameObject charGO = CharService.Instance.GetCharGOWithName(_skillModel.charName, _skillModel.charID);
+
+            int pos = GridService.Instance.GetDyna4GO(charGO).currentPos;
+            // Debug.Log("Position in" + pos);
+
+            return !(_skillModel.castPos.Any(t => t == pos));
+        }
+
+        bool IfInCoolDown(SkillModel _skillModel)
+        {
+            if (_skillModel.cd == -5) return false;
+            if (_skillModel.lastUsedInRound == -5) return false;
+            int rdDiff = CombatService.Instance.currentRound - _skillModel.lastUsedInRound;
+            // Debug.Log("CD diff " + rdDiff); 
+            if (rdDiff >= _skillModel.cd)
+            {
+                return false;
+            }
+            return true;
+        }
+
         #endregion
 
 

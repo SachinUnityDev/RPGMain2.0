@@ -102,6 +102,6 @@ Material:
     - _DistStrength: {r: 2, g: 2, b: -0.5, a: 0.1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _ScaleSpeedMainNoiseTex: {r: 1, g: 1, b: -5, a: 0}
-    - _ScaleSpeedMainTex: {r: 1, g: 1, b: 5, a: 1}
+    - _ScaleSpeedMainTex: {r: 1, g: 1, b: 8, a: 1}
     - _TintColor: {r: 0, g: 2.0698164, b: 7.9066987, a: 1}
   m_BuildTextureStacks: []

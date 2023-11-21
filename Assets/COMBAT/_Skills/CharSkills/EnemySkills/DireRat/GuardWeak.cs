@@ -120,18 +120,22 @@ namespace Combat
                 if (dyna != null)
                 {
                     CharController targetCharCtrl = dyna.charGO.GetComponent<CharController>();
-                   
-                    StatData hp = targetCharCtrl.GetStat(StatName.health); 
 
-                    if(hp.currValue/hp.maxLimit < 0.4f)
+                    StatData hp = targetCharCtrl.GetStat(StatName.health);
+                    if (!targetCharCtrl.charStateController.HasCharState(CharStateName.Guarded))
+                    {
+                        SkillService.Instance.currentTargetDyna = dyna; break;
+                    }
+                    else if (hp.currValue / hp.maxLimit < 0.4f)
                     {
                         SkillService.Instance.currentTargetDyna = dyna; break;
                     }
                     else
                     {
-                        randomDyna = dyna; 
-                    } 
-                }       
+                        randomDyna = dyna;
+                    }
+                }
+                      
             }
             if(SkillService.Instance.currentTargetDyna == null)
             {

@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: RatPack3
   m_EditorClassIdentifier: 
   enemyPack: 3
+  isBossPack: 0
   allEnemyDataInPack:
   - enemyName: 19
     preferredPos: 03000000
   - enemyName: 19
-    preferredPos: 02000000
+    preferredPos: 01000000
   - enemyName: 18
     preferredPos: 07000000
   loot:

@@ -45,13 +45,15 @@ namespace Combat
 
         public event Action <DynamicPosData, CellPosData> OnTargetClicked;
 
-        public event Action<CharController, PotionNames> OnPotionConsumedInCombat; 
+        public event Action<CharController, PotionNames> OnPotionConsumedInCombat;
 
+
+        RoundController roundController; 
 
         // Start is called before the first frame update
         void Start()
         {
-          
+          roundController = GetComponent<RoundController>();
         }
 
         public void On_StrikeFired(StrikeData strikeData)
@@ -117,7 +119,8 @@ namespace Combat
         }
         public void On_SOR(int roundNo)
         {
-            Debug.Log("SOR Triggered" + roundNo);            
+            Debug.Log("SOR Triggered" + roundNo);
+            roundController.OnRoundStart(roundNo); 
             OnSOR1?.Invoke(roundNo);
             On_SOT();
         }
@@ -125,7 +128,7 @@ namespace Combat
         {
             if(CombatService.Instance.combatState == CombatState.INCombat_normal)
             {
-                Debug.Log("EOR triggered");                 
+                Debug.Log("EOR triggered" + roundNo);                 
                 OnEOR1?.Invoke(roundNo);
             }       
         }
@@ -139,6 +142,7 @@ namespace Combat
         public void On_SOT()
         {
             Debug.Log("SOT CALLED");
+            roundController.SetNextCharOnTurn(); 
             OnSOT?.Invoke(); 
         }
         public void Move2NextRds()

@@ -72,7 +72,8 @@ MonoBehaviour:
     allSkillFXs:
     - charMode: 2
       perkType: 0
-      impactFX: {fileID: 0}
+      impactFX: {fileID: 6192724089161036641, guid: e17d9a3f04750764c8c0a7a0461e4c3b,
+        type: 3}
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 0}
       colMainFX: {fileID: 0}

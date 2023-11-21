@@ -98,12 +98,18 @@ namespace Combat
                 if (targetDyna == null)
                 {
                     if(selectDyna.charMode == currCellPos.charMode)
-                        GridService.Instance.gridController.Move2Pos(selectDyna, currCellPos.pos); 
+                    {
+                        GridService.Instance.gridController.Move2Pos(selectDyna, currCellPos.pos);
+                        GridService.Instance.gridView.CharOnTurnHL(selectDyna);
+                    }
 
                 }else
                 {
                     if (targetDyna.charMode == selectDyna.charMode)
-                        GridService.Instance.gridController.SwapPos(selectDyna, targetDyna); 
+                    {
+                        GridService.Instance.gridController.SwapPos(selectDyna, targetDyna);
+                        GridService.Instance.gridView.CharOnTurnHL(selectDyna);
+                    }
                 }
                 // if target pos empty
                // move to the target pos

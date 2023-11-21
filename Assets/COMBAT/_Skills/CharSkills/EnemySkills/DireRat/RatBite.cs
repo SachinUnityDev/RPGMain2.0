@@ -94,6 +94,9 @@ namespace Combat
 
         public override void ApplyVFx()
         {
+            SkillService.Instance.skillFXMoveController.MeleeSingleStrike(PerkType.None);
+
+
         }
 
 

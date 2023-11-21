@@ -505,37 +505,40 @@ namespace Combat
             // ClearPrevData();  // redundant safety .. causing only one FX to play as it clears mainTargetDyna
         
             CharController currCharOnturn = CombatService.Instance.currCharOnTurn;
+            CombatController combatController = currCharOnturn.GetComponent<CombatController>();
 
-            Debug.Log(skillModel.charName +" Skill END>>> " + skillModel.skillName);
+            //Debug.Log(skillModel.charName +" Skill END>>> " + skillModel.skillName);
             // if ally reduce action pts
-
-            // HASTE CHECK
-            
-            bool hasteChk = false; 
-            if(skillModel.skillInclination == SkillInclination.Move && !ignoreHasteChk)
+            if (skillModel != null)
+            { // HASTE CHECK      
+                bool hasteChk = false;
+                if (skillModel.skillInclination == SkillInclination.Move && !ignoreHasteChk)
                     hasteChk = HasteChk(currCharOnturn);
-                CombatController combatController = currCharOnturn.GetComponent<CombatController>();
+               
+                // AP UPDATES 
                 if (hasteChk) // if haste check allies get a extra AP
-                    combatController.actionPts++; 
+                    combatController.actionPts++;
 
                 combatController.SubtractActionPtOnSkilluse(skillModel, currCharOnturn.charModel.charMode);
-            if (skillModel != null) // skillmodel is null when no skill can be selected 
-                skillView.UpdateSkillState(skillModel);
-            else if (currCharOnturn.charModel.charMode == CharMode.Enemy)
-                Move2Nextturn(); 
+                currSkillController.UpdateAllSkillState(currCharOnturn);
+            }else if (currCharOnturn.charModel.charMode == CharMode.Enemy) 
+            {
+                Move2Nextturn();
+                return; 
+            }
+            
 
-                if (combatController.actionPts > 0)// allies 
-                {
-                    CombatService.Instance.roundController.SetSameCharOnTurn();
-                    if (currCharOnturn.charModel.charMode == CharMode.Enemy)
-                        InitEnemySkillSelection(CombatService.Instance.currCharOnTurn);   // to be called 
-
-                }
-                else
-                {
-                    if (currCharOnturn.charModel.charMode == CharMode.Enemy)
-                        Move2Nextturn();
-                }
+            if (combatController.actionPts > 0)// allies 
+            {
+                CombatService.Instance.roundController.SetSameCharOnTurn();
+                if (currCharOnturn.charModel.charMode == CharMode.Enemy)
+                    InitEnemySkillSelection(CombatService.Instance.currCharOnTurn);   // to be called 
+            }
+            else
+            {
+                if (currCharOnturn.charModel.charMode == CharMode.Enemy)
+                    Move2Nextturn();
+            }
         }
       
 
@@ -700,7 +703,7 @@ namespace Combat
             if(charController.combatController.actionPts >0)
                 GridService.Instance.gridView.SetRemoteSkill(skillModel, cellPosData); 
             ClearPrevData();
-            skillView.UpdateSkillState(skillModel);
+            currSkillController.UpdateAllSkillState(charController);
             On_PostSkillApply(); // move to the next turn
         }
 

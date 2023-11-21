@@ -266,16 +266,16 @@ namespace Common
             {
                 StatData statData = new StatData();
                 statData.statName = _charSO.statList[i].statName;
-                if(statData.statName == StatName.stamina)
+                if(statData.statName == StatName.health)
                 {
-                    Debug.Log("Stop here"); 
+                    Debug.Log("Stop here" + statData.maxLimit); 
                 }
                 statData.currValue = _charSO.statList[i].currValue;            
-                statData.desc = _charSO.AttribList[i].desc;
+                statData.desc = _charSO.statList[i].desc;
 
-                statData.minLimit = _charSO.AttribList[i].minLimit;
+                statData.minLimit = _charSO.statList[i].minLimit;
 
-                statData.maxLimit = _charSO.AttribList[i].maxLimit;
+                statData.maxLimit = _charSO.statList[i].maxLimit;
 
                 statList.Add(statData);
             }

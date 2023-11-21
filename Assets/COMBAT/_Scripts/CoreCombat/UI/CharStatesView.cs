@@ -33,7 +33,7 @@ namespace Combat
       
         void OnCharSet(CharController charController)
         {
-            gameObject.SetActive(false);
+            gameObject.SetActive(true);
         }
         public void InitCharStatesView()
         {

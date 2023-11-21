@@ -463,7 +463,7 @@ namespace Common
                 charsInPlayControllers.Remove(charCtrl);
                 GridService.Instance.UpdateGridOnCharDeath(charCtrl);  // subscribe to event once tested
                 On_CharDeath(charCtrl);
-                CombatService.Instance.roundController.ReorderAfterCharDeath(charCtrl);
+               // CombatService.Instance.roundController.ReorderAfterCharDeath(charCtrl);
             }
 
             charDiedinLastTurn.Clear();

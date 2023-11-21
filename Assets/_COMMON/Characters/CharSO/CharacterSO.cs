@@ -184,13 +184,13 @@ namespace Common
                     {
                         case StatName.None:
                             break;
-                        case StatName.health:
-                            s.minLimit = 0;
-                            s.maxLimit = 200f; break;
+                        //case StatName.health:
+                        //    s.minLimit = 0;
+                        //    s.maxLimit = 200f; break;
                         
-                        case StatName.stamina:
-                            s.minLimit = 0;
-                            s.maxLimit = 200f; break;
+                        //case StatName.stamina:
+                        //    s.minLimit = 0;
+                        //    s.maxLimit = 200f; break;
                         
                         case StatName.fortitude:
                             s.minLimit =-30;

@@ -52,7 +52,7 @@ MonoBehaviour:
     timeFrame: 1
     maxUsagePerCombat: 0
     skillIncli: 1
-    baseWeight: 15
+    baseWeight: 0
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
@@ -95,7 +95,15 @@ MonoBehaviour:
     allPerkHexes:
     - perkChain: 00000000
       hexNames: 02000000230000000b000000
-    allSkillFXs: []
+    allSkillFXs:
+    - charMode: 1
+      perkType: 0
+      impactFX: {fileID: 4794043405585894037, guid: 37138c0c33167b04fa1fb90b7f5a794f,
+        type: 3}
+      colImpactFX: {fileID: 0}
+      mainSkillFX: {fileID: 0}
+      colMainFX: {fileID: 0}
+      selfFX: {fileID: 0}
     allLines: []
   - skillName: 21
     charName: 19
@@ -188,7 +196,7 @@ MonoBehaviour:
     timeFrame: 1
     maxUsagePerCombat: -1
     skillIncli: 10
-    baseWeight: 1000
+    baseWeight: 2
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000

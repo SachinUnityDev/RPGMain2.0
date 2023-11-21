@@ -28,14 +28,14 @@ namespace Combat
         private void Start()
         {
             index = -1;          
-            CombatEventService.Instance.OnSOT += SetNextCharOnTurn;
-            CombatEventService.Instance.OnSOR1 += OnRoundStart;
+           // CombatEventService.Instance.OnSOT += SetNextCharOnTurn;
+          //  CombatEventService.Instance.OnSOR1 += OnRoundStart;
 
         }
         private void OnDisable()
         {
-            CombatEventService.Instance.OnSOT -= SetNextCharOnTurn;
-            CombatEventService.Instance.OnSOR1 -= OnRoundStart;
+        //    CombatEventService.Instance.OnSOT -= SetNextCharOnTurn;
+         //   CombatEventService.Instance.OnSOR1 -= OnRoundStart;
 
         }
         public void SetSameCharOnTurn()
@@ -55,7 +55,7 @@ namespace Combat
             {
                 index++;
                 charCount = CharService.Instance.charsInPlayControllers.Count;
-                if (index < charCount && index > -1)
+                if (index < charCount && index >= -1)
                 {
                     
                     CombatService.Instance.currCharOnTurn = charTurnOrder[index];
@@ -64,7 +64,8 @@ namespace Combat
                 else // next round 
                 {
                     index = -1;
-                    CombatEventService.Instance.Move2NextRds();                   
+                    CombatEventService.Instance.Move2NextRds();
+                    return; 
                 }
                 CombatService.Instance.currentTurn = index;
                 CombatEventService.Instance.On_CharOnTurnSet();
@@ -75,13 +76,11 @@ namespace Combat
             CombatController combatController = charController.GetComponent<CombatController>();
             combatController.SetActionPts(); 
         }
-        void OnRoundStart(int roundNo)
-        {
+       public void OnRoundStart(int roundNo)
+       {
             Debug.Log("Round Start Triggerd" + roundNo); 
             SetTurnOrder();
-            //gameObject.GetComponent<TopPortraitsController>().SetDefaultTurnOrder();
-            //gameObject.GetComponent<TopPortraitsController>().BuildCharPosData(); 
-        }
+       }
 
         void UpdateAllyEnemyList()
         {
@@ -92,15 +91,15 @@ namespace Combat
         public void ReorderAfterCharDeath(CharController charController)
         {
             // RESET ALL LIST 
-            charTurnOrder.Remove(charController);
-            UpdateAllyEnemyList(); // update all three list charturnOrder, AllyTurnOrder and EnemyTurnOrder
-            OnRoundStart(CombatService.Instance.currentRound);
+            //charTurnOrder.Remove(charController);
+            //UpdateAllyEnemyList(); // update all three list charturnOrder, AllyTurnOrder and EnemyTurnOrder
+            //OnRoundStart(CombatService.Instance.currentRound);
 
 
-            //RESET INDEX VALUE ON NEW LISTS 
-            CharController currCharOnTurn = CombatService.Instance.currCharOnTurn;
-            newIndex = charTurnOrder.FindIndex(t => t.charModel.charID == currCharOnTurn.charModel.charID);
-            index = newIndex;           
+            ////RESET INDEX VALUE ON NEW LISTS 
+            //CharController currCharOnTurn = CombatService.Instance.currCharOnTurn;
+            //newIndex = charTurnOrder.FindIndex(t => t.charModel.charID == currCharOnTurn.charModel.charID);
+            //index = newIndex;           
          
         }
         public void SetTurnOrder()

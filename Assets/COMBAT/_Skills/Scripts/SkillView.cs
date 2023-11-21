@@ -44,6 +44,7 @@ namespace Combat
             //CombatEventService.Instance.OnSOTactics +=
             //   () => SetSkillsPanel(CombatService.Instance.defaultChar.charModel.charName);
             CombatEventService.Instance.OnCharOnTurnSet += SetSkillsPanel;
+           
             //  () => SetSkillsPanel(CombatService.Instance.currCharClicked.charModel.charID);
 
             CombatEventService.Instance.OnCharClicked += SetSkillsPanel;
@@ -115,137 +116,8 @@ namespace Combat
             }
         }
 
-        #region SKILL UPSTATE WITH CHECKS
-        public SkillSelectState UpdateSkillState(SkillModel _skillModel)
-        {
-  
-           // Debug.Log("SKILL NAME " + _skillModel.skillName + "TARGETS" + _skillModel.targetPos.Count);
-            if (CombatService.Instance.combatState == CombatState.INTactics)
-            {
-                _skillModel.SetSkillState(SkillSelectState.UnClickable_InTactics); 
-                return SkillSelectState.UnClickable_InTactics;
-            }            
-            if (CombatService.Instance.currCharClicked != CombatService.Instance.currCharOnTurn)
-            {
-                _skillModel.SetSkillState(SkillSelectState.Unclickable_notCharsTurn);
-                return SkillSelectState.Unclickable_notCharsTurn; 
-            }
-            else if (HasNoChkActionPts())
-            {
-                _skillModel.SetSkillState(SkillSelectState.UnClickable_NoActionPts);
-                return SkillSelectState.UnClickable_NoActionPts;
-            }
-            else if (IfInCoolDown(_skillModel))      // only char on turn will get here 
-            {
-                _skillModel.SetSkillState(SkillSelectState.UnClickable_InCd);
-                return SkillSelectState.UnClickable_InCd; 
-            }
-            else if (IsNotOnCastPos(_skillModel))     // not on cast pos 
-            {
-                _skillModel.SetSkillState(SkillSelectState.Unclickable_notOnCastPos);
-                return SkillSelectState.Unclickable_notOnCastPos; 
-            }
-            else if (NoTargetsInRange(_skillModel))
-            {
-                _skillModel.SetSkillState(SkillSelectState.UnClickable_NoTargets);
-                return SkillSelectState.UnClickable_NoTargets; 
-            }
-            else if (HasNoStamina(_skillModel))
-            {
-                _skillModel.SetSkillState(SkillSelectState.UnClickable_NoStamina);
-                return SkillSelectState.UnClickable_NoStamina; 
-            }
-            else if (_skillModel.skillInclination == SkillInclination.Passive)  // as enemies only // more like traits
-            {
-                _skillModel.SetSkillState(SkillSelectState.Unclickable_passiveSkills);
-                return SkillSelectState.Unclickable_passiveSkills; 
-            }
-            else
-            {
-                _skillModel.SetSkillState(SkillSelectState.Clickable); 
-                return SkillSelectState.Clickable;
-            }
-        }
-
-        bool HasNoChkActionPts()
-        {
-            CharController charController = CombatService.Instance.currCharOnTurn;
-            //if (charController.charModel.charMode == CharMode.Enemy)
-            //    return false; 
-            CombatController combatController = charController.GetComponent<CombatController>();
-
-            if (combatController.actionPts > 0)
-                return false;
-            return true; 
-        }
-
-        public bool HasNoStamina(SkillModel _skillModel)
-        {
-            StatData staminaData = CharService.Instance.GetCharCtrlWithCharID(_skillModel.charID).GetStat(StatName.stamina);
-            float stamina = staminaData.currValue; 
-
-            if (stamina < _skillModel.staminaReq)
-            {
-                return true; 
-            }
-            return false; 
-        }    
-
-        bool NoTargetsInRange(SkillModel _skillModel)
-        {          
-
-            if(_skillModel.skillType == SkillTypeCombat.Move || _skillModel.attackType == AttackType.Remote)
-            {
-              // Checks only target Pos as skill is used on empty tile 
-                if (_skillModel.targetPos.Count != 0) return false;
-                else return true; 
-
-            }
-            else
-            {  // get dyna from target pos
-                if (SkillService.Instance.GetTargetInRange(_skillModel) == null)
-                {
-                   // Debug.Log("return null targets due to no DYNA");     
-                    return true;
-                } 
-                if (SkillService.Instance.GetTargetInRange(_skillModel).Count == 0)
-                {
-                   /// Debug.Log("return ZERO targets due to no DYNA");
-                    return true;
-                }
-                else
-                {
-                   // Debug.Log("return HAS targets");
-                    return false;
-                }
-            }         
-        }
-        
-        bool IsNotOnCastPos(SkillModel _skillModel)
-        {
-            GameObject charGO = CharService.Instance.GetCharGOWithName(_skillModel.charName, _skillModel.charID);
-
-            int pos = GridService.Instance.GetDyna4GO(charGO).currentPos;
-           // Debug.Log("Position in" + pos);
-            
-            return !(_skillModel.castPos.Any(t=>t == pos));
-        }
-        
-        bool IfInCoolDown(SkillModel _skillModel)
-        {
-            if (_skillModel.cd == -5) return false;
-            if (_skillModel.lastUsedInRound == -5) return false; 
-            int rdDiff =CombatService.Instance.currentRound - _skillModel.lastUsedInRound;
-           // Debug.Log("CD diff " + rdDiff); 
-            if (rdDiff >=_skillModel.cd)
-            {
-                return false; 
-            }
-            return true; 
-        }
-
-        #endregion
-        public void UpdateSkillBtntxt(CharNames _charName,SkillNames _skillName, int posOnSkillPanel)
+      
+                public void UpdateSkillBtntxt(CharNames _charName,SkillNames _skillName, int posOnSkillPanel)
         {
 
             //SkillModel skillModel = SkillService.Instance.GetSkillModel(_charName, _skillName); 
@@ -265,13 +137,7 @@ namespace Combat
             //SkillService.Instance.ClearPrevSkillData();
             GridService.Instance.ClearOldTargets();
             UnClickAllSkills();
-            //foreach (Transform child in transform)
-            //{
-            //    // child.GetChild(1).GetComponent<Image>().sprite = skillHexSO.SkillNormalFrame;
-            //    child.GetComponent<SkillBtnViewCombat>().SetUnClick();
-            //   // child.GetChild(1).GetComponent<RectTransform>().localScale = Vector3.one;
-            //}
-
+          
             CharNames currCharName = CombatService.Instance.currCharClicked.charModel.charName;
             int currClickedCharID = CombatService.Instance.currCharClicked.charModel.charID;
             foreach (SkillDataSO skillSO in SkillService.Instance.allCharSkillSO)
@@ -325,9 +191,6 @@ namespace Combat
         {
             if (charController == null) return; 
             CharNames charName = charController.charModel.charName;
-            // SET ACTION POINTS             
-           // SetActionOnSOT(); // its here as action pts need to be set before updateState
-
             SkillController1 skillController = charController.skillController;
             SkillDataSO skillSO = SkillService.Instance.GetSkillSO(charName);
             int j = 0; 
@@ -337,9 +200,11 @@ namespace Combat
                     continue;
                 SkillBtnViewCombat skillBtn = transform.GetChild(j).GetComponent<SkillBtnViewCombat>();
            
+                //THIS IS BRUTE FORCE .. to be corrected 
+                    //skillModel.SetSkillState(SkillSelectState.Clickable); // setting clicable here if unlcickable due to any reasons will be reset in update
+                   
                 
-                    skillModel.SetSkillState(SkillSelectState.Clickable); // setting clicable here if unlcickable due to any reasons will be reset in update
-                    UpdateSkillState(skillModel);
+                    skillController.UpdateSkillState(skillModel);
                     skillBtn.RefreshIconAsPerState();
                     skillBtn.SkillBtnInit(skillSO, skillModel, this);
                 j++; 
@@ -361,53 +226,3 @@ namespace Combat
         }
     }
 }
-//foreach (SkillDataSO skillSO in SkillService.Instance.allCharSkillSO)
-//{
-//    if (skillSO.charName == charName)
-//    {
-//        for (int i = 0; i < skillSO.allSkills.Count; i++)
-//        {
-
-//            if (skillSO.allSkills[i].skillUnLockStatus == 1)
-//            {
-//                if (skillSO.allSkills[i].skillType == SkillTypeCombat.Retaliate) // Skipping retaliate skill from 
-//                    continue;
-//                Transform skillIconTranform = transform.GetChild(i);
-//                skillIconTranform.GetComponent<Image>().sprite
-//                                                    = skillSO.allSkills[i].skillIconSprite;
-//                SkillNames skillName = skillSO.allSkills[i].skillName;
-
-//                SkillModel skillModel = SkillService.Instance.GetSkillModel(_charID, skillName);
-//                if (skillModel == null)
-//                    Debug.Log("SkillMModel missing" + skillName);
-
-//                skillModel.SetSkillState(SkillSelectState.Clickable); // setting clicable here if unlcickable due to any reasons will be reset in update
-
-//                UpdateSkillState(skillModel); 
-
-//                SkillBtnViewCombat skillBtn = skillIconTranform.GetComponent<SkillBtnViewCombat>();
-//                skillBtn.skillModel = skillModel;
-
-//                skillBtn.RefreshIconAsPerState();
-//                skillBtn.SkillBtnInit(skillSO, skillModel, this);
-//            }
-//            else if(skillSO.allSkills[i].skillUnLockStatus == 0)
-//            {
-//                //skillPanel.transform.GetChild(i).gameObject.SetActive(true);
-//                // setting clicable here if unlcickable due to any reasons will be reset in update
-//                SkillNames skillName = skillSO.allSkills[i].skillName;
-//                SkillModel skillModel = SkillService.Instance.GetSkillModel(_charID, skillName);
-//                skillModel.SetSkillState(SkillSelectState.UnClickable_Locked);
-//                transform.GetChild(i).GetComponent<Image>().sprite = LockedSkillIconSprite;
-//            }else
-//            {
-//                transform.GetChild(i).GetComponent<Image>().sprite = NASkillIconSprite;
-//            }                            
-//        }
-//        // to make the extra button as not available 
-//        for (int i = skillSO.allSkills.Count; i < skillBtnCount; i++)
-//        {
-//            transform.GetChild(i).GetComponent<Image>().sprite = NASkillIconSprite;
-//        }
-//    }
-//}

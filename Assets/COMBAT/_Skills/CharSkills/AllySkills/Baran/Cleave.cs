@@ -26,23 +26,28 @@ namespace Combat
 
             skillModel.targetPos.Clear(); CombatService.Instance.mainTargetDynas.Clear();
             //  targetDynas.Clear();
-            if (myDyna.currentPos == 1 || myDyna.currentPos == 4)
+            if (myDyna.currentPos == 1)
             {
-                AddTargetInRange(1, 4, CharMode.Enemy); 
+                AddTargetInRange(1, 3, CharMode.Enemy); 
+            }
+            else if (myDyna.currentPos == 4)
+            {
+                CellPosData cellPosData = new CellPosData(CharMode.Enemy, 1);
+                AddTarget(cellPosData);
             }
             else if (myDyna.currentPos == 2)
             {
                 CellPosData cellPosData = new CellPosData(CharMode.Enemy, 1);
                 AddTarget(cellPosData); 
                 CellPosData cellPosData2 = new CellPosData(CharMode.Enemy, 2);
-                AddTarget(cellPosData);
+                AddTarget(cellPosData2);
             }
             else if (myDyna.currentPos == 3)
             {
                 CellPosData cellPosData = new CellPosData(CharMode.Enemy, 1);
                 AddTarget(cellPosData); 
                 CellPosData cellPosData2 = new CellPosData(CharMode.Enemy, 3);
-                AddTarget(cellPosData);
+                AddTarget(cellPosData2);
             }
         }
      
@@ -99,7 +104,7 @@ namespace Combat
 
         public override void ApplyVFx()
         {
-            SkillService.Instance.skillFXMoveController.SingleTargetRangeStrike(PerkType.None);
+            SkillService.Instance.skillFXMoveController.MultiTargetRangeFX(PerkType.None);
         }
 
         public override void PopulateAITarget()

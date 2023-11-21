@@ -70,8 +70,16 @@ namespace Combat
                 myDyna = GridService.Instance.GetDyna4GO(charGO);
        
                 PopulateTargetPos();
+                //CombatEventService.Instance.OnCharClicked -= OnCharClicked;
+                //CombatEventService.Instance.OnCharClicked += OnCharClicked;
             }
+            
         }
+        //void OnCharClicked(CharController charController)
+        //{
+        //    if (charController == null) return;
+        //    PopulateTargetPos();
+        //}
         public virtual void SkillSelected() 
         {
 
@@ -297,10 +305,10 @@ namespace Combat
                          (new CellPosData(charController.charModel.charMode, GridService.Instance.GetDyna4GO(charGO).currentPos));
             if (sameLaneOccupiedPos.Count > 0)
             {
-                CellPosData Pos = new CellPosData(CharMode.Enemy, sameLaneOccupiedPos[0].currentPos);
+                CellPosData Pos = new CellPosData(sameLaneOccupiedPos[0].charMode, sameLaneOccupiedPos[0].currentPos);
                 skillModel.targetPos.Add(Pos);
                 CombatService.Instance.mainTargetDynas
-                    .Add(GridService.Instance.GetDynaAtCellPos(CharMode.Enemy, sameLaneOccupiedPos[0].currentPos));
+                    .Add(GridService.Instance.GetDynaAtCellPos(sameLaneOccupiedPos[0].charMode, sameLaneOccupiedPos[0].currentPos));
             }
         }
 

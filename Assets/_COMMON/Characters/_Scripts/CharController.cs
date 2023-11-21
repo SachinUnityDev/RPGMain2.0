@@ -350,8 +350,8 @@ namespace Common
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
                 turn = CombatService.Instance.currentTurn;
-                Debug.Log("GAME OBJECT " + gameObject.name);
-                Debug.Log("STAT CHANGE Cause " + causeType + " causebyCharID " + causeByCharID + " Stat " + attribName + " value " + value);
+                Debug.Log("attrib Change for  " + gameObject.name);
+                Debug.Log("Attrib CHANGE Cause " + causeType + "causeNAME "+ CauseName + " causebyCharID " + causeByCharID + " Stat " + attribName + " value " + value);
                 Vector3 fwd = Vector3.zero;
                 dyna = GridService.Instance.GetDyna4GO(gameObject);
                 if (dyna == null)
@@ -359,8 +359,10 @@ namespace Common
                     Debug.Log("ATTEMPTED change in stat" + causeType + "Name" + causeByCharID + "StatName" + attribName);
                     return null;
                 }
-               
             }
+     
+
+
             // COMBAT PATCH FIX ENDS 
             // BroadCast the value change thru On_StatCurrValChg
             AttribModData charModData = new AttribModData(turn, causeType, CauseName, causeByCharID
@@ -385,30 +387,29 @@ namespace Common
             // ACTUAL VALUE UPDATED HERE
             charModel.attribList.Find(x => x.AttribName == charModData.attribModified).currValue
                                                                             = (int)modCurrValue;
-            charModData.modCurrVal = modCurrValue;              
+            charModData.modCurrVal = modCurrValue;
+            if (attribName == AttribName.vigor)
+            {
+                StatData statDataHP = GetStat(StatName.health);
+                statDataHP.maxLimit = modCurrValue * 4;
+
+            }
+            if (attribName == AttribName.willpower)
+            {
+                StatData statDataStm = GetStat(StatName.stamina);
+                statDataStm.maxLimit = modCurrValue * 3;
+
+            }
+
             if (toInvoke)
             {
                 OnAttribCurrValSet?.Invoke(charModData);// broadcast the final change              
             }
-            //if (attribName == AttribName.vigor)
-            //{
-            //    //CharModData charModDataBase = new CharModData(turn, CauseType.StatChecks
-            //    //    , (int)statName, charModData.causeByCharID, charModData.effectedCharNameID,
-            //    //    StatsName.health, modCurrValue * 4f); 
-
-            //    SetMaxValue(StatName.health, modCurrValue*4); 
-            //}
-            //if (attribName == AttribName.willpower)
-            //{
-            //    //CharModData charModDataBase = new CharModData(turn, CauseType.StatChecks
-            //    //   , (int)statName, charModData.causeByCharID, charModData.effectedCharNameID,
-            //    //   StatsName.stamina, modCurrValue * 3f);
-            //    SetMaxValue(AttribName.stamina, modCurrValue*3); 
-            //}
+            
             //// TBD: Following to be made event based 
             //if(GameService.Instance.gameModel.gameState == GameState.InCombat)
             //    PopulateOverCharBars(attribName);
-           
+
             //if(attribName == AttribName.health)
             //    CheckHealth();
 
@@ -584,66 +585,67 @@ namespace Common
             
         void PopulateOverCharBars(StatName statName)
         {
-        //    Transform hpBarsTransform = gameObject.transform.GetChild(2);
-
-        //    Transform HPBarImgTrans = hpBarsTransform.GetChild(0).GetChild(1);
-        //    Transform StaminaBarImgTrans = hpBarsTransform.GetChild(1).GetChild(1);
-
-        //    Transform HPBarImgOrange = hpBarsTransform.GetChild(0).GetChild(0);
-        //    Transform StaminaBarImgOrange = hpBarsTransform.GetChild(1).GetChild(0);
-        //    StatData statData = GetStat(statName);
-        //    AttribData willPowerSD = GetAttrib(AttribName.willpower);
-        //    AttribData vigorSD = GetAttrib(AttribName.vigor);
-        //    //float barVal = statData.currValue / statData.maxLimit;
-
-        //    if (statName == StatName.health)
-        //    {
-        //        float barVal = statData.currValue / (vigorSD.currValue * 4);
-        //        barVal = (barVal > 1) ? 1 : barVal;
-
-        //        if (statData.currValue != prevHPVal)
-        //        {
-        //            Vector3 barImgScale = new Vector3(barVal, HPBarImgTrans.localScale.y, HPBarImgTrans.localScale.z);
-        //            HPBarImgTrans.localScale = barImgScale;
-        //            OrangeBarScaleAnim(HPBarImgOrange, barImgScale.x);
-        //        }
-        //        else return;
-
-        //    }
-        //    else if (statName == StatName.stamina)
-        //    {
-        //        float barVal = statData.currValue / (willPowerSD.currValue * 3);
-        //        barVal = (barVal > 1) ? 1 : barVal;
-        //        if (statData.currValue != prevStaminaVal)
-        //        {
-        //            Vector3 staminaScale = new Vector3(barVal, StaminaBarImgTrans.localScale.y, StaminaBarImgTrans.localScale.z);
-        //            StaminaBarImgTrans.localScale = staminaScale;
-        //            OrangeBarScaleAnim(StaminaBarImgOrange, staminaScale.x);
-        //        }
-        //        else return;
-
-
-        //    }
-        //    else if (statName == StatName.fortitude)
-        //    {
-
-
-        //    }
-        //    prevHPVal = statData.currValue;
-        //    prevStaminaVal = statData.currValue;
-        //}
-        //void OrangeBarScaleAnim(Transform barTrans, float scale)
-        //{
-        //    barTrans.gameObject.SetActive(true);
-        //    Sequence barSeq = DOTween.Sequence();
-
-        //    barSeq
-        //        .AppendInterval(0.4f)
-        //        .Append(barTrans.DOScaleX(scale, 1f))
-        //        ;
-
-        //    barSeq.Play().OnComplete(() => barTrans.gameObject.SetActive(false));
+            transform.GetChild(2).GetComponent<HPBarView>().FillHPBar(this);
         }
 
     }
 }
+//    Transform hpBarsTransform = gameObject.transform.GetChild(2);
+
+//    Transform HPBarImgTrans = hpBarsTransform.GetChild(0).GetChild(1);
+//    Transform StaminaBarImgTrans = hpBarsTransform.GetChild(1).GetChild(1);
+
+//    Transform HPBarImgOrange = hpBarsTransform.GetChild(0).GetChild(0);
+//    Transform StaminaBarImgOrange = hpBarsTransform.GetChild(1).GetChild(0);
+//    StatData statData = GetStat(statName);
+//    AttribData willPowerSD = GetAttrib(AttribName.willpower);
+//    AttribData vigorSD = GetAttrib(AttribName.vigor);
+//    //float barVal = statData.currValue / statData.maxLimit;
+
+//    if (statName == StatName.health)
+//    {
+//        float barVal = statData.currValue / (vigorSD.currValue * 4);
+//        barVal = (barVal > 1) ? 1 : barVal;
+
+//        if (statData.currValue != prevHPVal)
+//        {
+//            Vector3 barImgScale = new Vector3(barVal, HPBarImgTrans.localScale.y, HPBarImgTrans.localScale.z);
+//            HPBarImgTrans.localScale = barImgScale;
+//            OrangeBarScaleAnim(HPBarImgOrange, barImgScale.x);
+//        }
+//        else return;
+
+//    }
+//    else if (statName == StatName.stamina)
+//    {
+//        float barVal = statData.currValue / (willPowerSD.currValue * 3);
+//        barVal = (barVal > 1) ? 1 : barVal;
+//        if (statData.currValue != prevStaminaVal)
+//        {
+//            Vector3 staminaScale = new Vector3(barVal, StaminaBarImgTrans.localScale.y, StaminaBarImgTrans.localScale.z);
+//            StaminaBarImgTrans.localScale = staminaScale;
+//            OrangeBarScaleAnim(StaminaBarImgOrange, staminaScale.x);
+//        }
+//        else return;
+
+
+//    }
+//    else if (statName == StatName.fortitude)
+//    {
+
+
+//    }
+//    prevHPVal = statData.currValue;
+//    prevStaminaVal = statData.currValue;
+//}
+//void OrangeBarScaleAnim(Transform barTrans, float scale)
+//{
+//    barTrans.gameObject.SetActive(true);
+//    Sequence barSeq = DOTween.Sequence();
+
+//    barSeq
+//        .AppendInterval(0.4f)
+//        .Append(barTrans.DOScaleX(scale, 1f))
+//        ;
+
+//    barSeq.Play().OnComplete(() => barTrans.gameObject.SetActive(false));

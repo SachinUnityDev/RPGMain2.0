@@ -155,24 +155,26 @@ namespace Common
                 EndState();
         }
         public virtual void EndState()
-        {
-            foreach(int buffID in allBuffIds)
-            {
-                charController.buffController.RemoveBuff(buffID);
-            }
-            foreach (ImmunityBuffData immuneBuffData in charController.charStateController.allImmunityBuffs.ToList())
-            {
-                if(allImmunityBuffs.Any(t=>t == immuneBuffData.immunityID))
-                {
-                    charController.charStateController.RemoveImmunityBuff(immuneBuffData.immunityID); 
-                }
-            }
+        {   
             charController.charStateController.RemoveCharState(charStateName);
             CombatEventService.Instance.OnEOC -= CombatTick;
             CombatEventService.Instance.OnEOR1 -= RoundTick;
             QuestEventService.Instance.OnEOQ -= QuestTick;
         }
-
+        public virtual void ClearBuffs()
+        {
+            foreach (int buffID in allBuffIds)
+            {
+                charController.buffController.RemoveBuff(buffID);
+            }
+            foreach (ImmunityBuffData immuneBuffData in charController.charStateController.allImmunityBuffs.ToList())
+            {
+                if (allImmunityBuffs.Any(t => t == immuneBuffData.immunityID))
+                {
+                    charController.charStateController.RemoveImmunityBuff(immuneBuffData.immunityID);
+                }
+            }
+        }
     }
 
 

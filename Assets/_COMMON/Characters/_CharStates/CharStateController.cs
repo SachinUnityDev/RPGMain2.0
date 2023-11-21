@@ -123,8 +123,12 @@ namespace Common
             else
             {
                 if (HasImmunity(charStateName))
-                    return -1; 
+                    return -1;
+                if (HasCharState(charStateName))                
+                    return -1;
             }
+        
+
             int effectedCharID = charController.charModel.charID;
 
             int currRd = -1;
@@ -169,7 +173,7 @@ namespace Common
             int index = allCharBases.FindIndex(t => t.charStateName == charStateName);
             if (index != -1)
             {
-                allCharBases[index].EndState();   // all related buffs to be cleared from here
+                allCharBases[index].ClearBuffs();   // all related buffs to be cleared from here
                 allCharBases.RemoveAt(index);
                 RemoveImmunityByCharState(charStateName);
             }

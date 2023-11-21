@@ -64,17 +64,20 @@ namespace Combat
         #region  POINTER EVENTS
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (!IsClicked)
+            if (skillModel == null) return;
+            if(skillModel.skillUnLockStatus== 0 || skillModel.skillUnLockStatus == -1) return;
+            if (skillModel.GetSkillState() == SkillSelectState.Clickable ||
+                skillModel.GetSkillState() == SkillSelectState.Clicked)
             {
-                if (skillModel.GetSkillState() != SkillSelectState.Clickable)
-                    return; 
-
-                SetClicked();       
-                skillView.SkillBtnPressed(transform.GetSiblingIndex());
-            }
-            else
-            {
-                SetUnClick();
+                if (!IsClicked)
+                {
+                    SetClicked();
+                    skillView.SkillBtnPressed(transform.GetSiblingIndex());
+                }
+                else
+                {
+                    SetUnClick();
+                }
             }
         }
 
@@ -127,6 +130,8 @@ namespace Combat
             Image skillImg = transform.GetComponent<Image>();            
             this.skillDataSO = skillDataSO;
             this.skillView = skillView;
+
+           // skillView.skillController.UpdateAllSkillState(CombatService.Instance.currCharClicked);
             skillLvlTrans.gameObject.SetActive(false);
             if (passiveSkillData == null)
             {
@@ -288,47 +293,14 @@ namespace Combat
             if (skillModel == null) return;
             skillState = skillModel.GetSkillState();
             // ChangeSkillFrame(skillState);
-            switch (skillState)
+            if(skillState == SkillSelectState.Clicked || skillState == SkillSelectState.Clickable)
             {
-                case SkillSelectState.Clickable:
-                    gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 1);
-                    //ChangeSkillFrame(SkillSelectState.Clickable);
-                    break;
-                case SkillSelectState.UnClickable_InCd:
-                    gameObject.GetComponent<Image>().color = new Color(0.5f, 1, 1, 0.8f);
-
-                    break;
-                case SkillSelectState.UnClickable_NoTargets:
-                    gameObject.GetComponent<Image>().color = new Color(0.6f, 1, 1, 0.8f);
-
-                    break;
-                case SkillSelectState.UnClickable_NoStamina:
-                    gameObject.GetComponent<Image>().color = new Color(0.9f, 1, 1, 0.8f);
-
-                    break;
-                case SkillSelectState.Unclickable_notOnCastPos:
-                    gameObject.GetComponent<Image>().color = new Color(0.2f, 1, 1, 0.8f);
-
-                    break;
-                case SkillSelectState.Unclickable_passiveSkills:
-                    gameObject.GetComponent<Image>().color = new Color(0.3f, 1, 1, 0.8f);
-
-                    break;
-                case SkillSelectState.Unclickable_notCharsTurn:
-                    gameObject.GetComponent<Image>().color = new Color(1f, 1, 1, 0.9f);
-
-                    break;
-                case SkillSelectState.Clicked:
-                    // change frame from skillSO
-                    // ChangeSkillFrame(SkillSelectState.Clicked);
-                    break;
-
-
-                default:
-                    break;
+                gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 1);
             }
-
-
+            else
+            {
+                gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            }       
         }
 
         #region HELPER Methods
@@ -352,3 +324,44 @@ namespace Combat
 
     }
 }
+
+//switch (skillState)
+//{
+//    case SkillSelectState.Clickable:
+//        gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+//        //ChangeSkillFrame(SkillSelectState.Clickable);
+//        break;
+//    case SkillSelectState.UnClickable_InCd:
+//        gameObject.GetComponent<Image>().color = new Color(0.5f, 1, 1, 0.8f);
+
+//        break;
+//    case SkillSelectState.UnClickable_NoTargets:
+//        gameObject.GetComponent<Image>().color = new Color(0.6f, 1, 1, 0.8f);
+
+//        break;
+//    case SkillSelectState.UnClickable_NoStamina:
+//        gameObject.GetComponent<Image>().color = new Color(0.9f, 1, 1, 0.8f);
+
+//        break;
+//    case SkillSelectState.Unclickable_notOnCastPos:
+//        gameObject.GetComponent<Image>().color = new Color(0.2f, 1, 1, 0.8f);
+
+//        break;
+//    case SkillSelectState.Unclickable_passiveSkills:
+//        gameObject.GetComponent<Image>().color = new Color(0.3f, 1, 1, 0.8f);
+
+//        break;
+//    case SkillSelectState.Unclickable_notCharsTurn:
+//        gameObject.GetComponent<Image>().color = new Color(1f, 1, 1, 0.9f);
+
+//        break;
+//    case SkillSelectState.Clicked:
+//        // change frame from skillSO
+//        // ChangeSkillFrame(SkillSelectState.Clicked);
+//        break;
+
+
+//    default:
+//        break;
+//}
+

@@ -30,7 +30,7 @@ MonoBehaviour:
   - skillName: 14
     charName: 7
     skillID: 0
-    skillIconSprite: {fileID: 21300000, guid: 552377ce4b4c51b4798fe801fdc4781a, type: 3}
+    skillIconSprite: {fileID: 21300000, guid: efce7062f69f90f4bb42db25efed7c47, type: 3}
     skillPose: {fileID: 21300000, guid: 359fad681b07e804082e32c7482fda7f, type: 3}
     skillTransitionPose: {fileID: 21300000, guid: 359fad681b07e804082e32c7482fda7f,
       type: 3}
@@ -164,7 +164,7 @@ MonoBehaviour:
   - skillName: 16
     charName: 7
     skillID: 0
-    skillIconSprite: {fileID: 21300000, guid: f2b7cc00e401a484da21081ce8a580f2, type: 3}
+    skillIconSprite: {fileID: 21300000, guid: 851a2a37b002eab4ba111505e6a284f2, type: 3}
     skillPose: {fileID: 21300000, guid: c281a0670fc97514e8599eba02bd2a9e, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}

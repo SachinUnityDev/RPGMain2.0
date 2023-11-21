@@ -282,8 +282,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 710039401
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &3248434694607839326
@@ -323,7 +323,7 @@ MonoBehaviour:
   disableRenderingOnOverride: 1
   updateTiming: 1
   unscaledTime: 0
-  _animationName: 
+  _animationName: animation
   loop: 1
   timeScale: 1
 --- !u!1001 &1781021148568773980
@@ -439,3 +439,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6071cdd3aba1e8438acca11bb23aecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prevHPVal: 0
+  prevStaminaVal: 0
+  charController: {fileID: 0}

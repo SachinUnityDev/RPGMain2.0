@@ -53,7 +53,7 @@ namespace Combat
                 , AttribName.armorMin, statDataMin*0.6f, skillModel.timeFrame, skillModel.castTime, true);
 
             charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                , AttribName.armorMin, statDataMax * 0.6f, skillModel.timeFrame, skillModel.castTime, true);
+                , AttribName.armorMax, statDataMax * 0.6f, skillModel.timeFrame, skillModel.castTime, true);
         }
 
         public override void ApplyFX3()

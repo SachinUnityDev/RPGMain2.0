@@ -831,6 +831,7 @@ namespace Combat
         {
 
             // Debug.Log("SKILL NAME " + _skillModel.skillName + "TARGETS" + _skillModel.targetPos.Count);
+            skillModel.SetSkillState(SkillSelectState.Clickable);
             if (CombatService.Instance.combatState == CombatState.INTactics)
             {
                 skillModel.SetSkillState(SkillSelectState.UnClickable_InTactics);

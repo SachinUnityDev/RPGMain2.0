@@ -266,10 +266,10 @@ namespace Common
             {
                 StatData statData = new StatData();
                 statData.statName = _charSO.statList[i].statName;
-                if(statData.statName == StatName.health)
-                {
-                    Debug.Log("Stop here" + statData.maxLimit); 
-                }
+                //if(statData.statName == StatName.health)
+                //{
+                //    Debug.Log("Stop here" + statData.maxLimit); 
+                //}
                 statData.currValue = _charSO.statList[i].currValue;            
                 statData.desc = _charSO.statList[i].desc;
 

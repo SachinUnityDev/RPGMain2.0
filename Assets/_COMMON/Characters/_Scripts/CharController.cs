@@ -199,14 +199,14 @@ namespace Common
             int index = st.FindIndex(x => x.statName == _statName);
             return st[index];
         }
-        public AttribData GetAttrib(AttribName _statName)
+        public AttribData GetAttrib(AttribName attribName)
         {
             List<AttribData> st = charModel.attribList;
-            int index = st.FindIndex(x => x.AttribName == _statName);    
+            int index = st.FindIndex(x => x.AttribName == attribName);    
             if(index != -1)
             return st[index];
             else
-                Debug.Log("Attrib Name " + _statName);
+                Debug.Log("Attrib Name " + attribName);
             return null;
         }
         public void SetCurrStat(CauseType causeType, int causeName, int causeByCharID, AttribName _statName, float _newValue, bool toInvoke = true )
@@ -346,7 +346,7 @@ namespace Common
             // COMBAT PATCH FIX BEGINS 
             int turn = -1;
             DynamicPosData dyna = null; 
-            AttribData statData = GetAttrib(attribName);         
+            AttribData attribData = GetAttrib(attribName);         
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
                 turn = CombatService.Instance.currentTurn;
@@ -361,17 +361,13 @@ namespace Common
                 }
             }
      
-
-
+            float currVal = attribData.currValue;
+            float preConstrainedValue = currVal + value;
             // COMBAT PATCH FIX ENDS 
             // BroadCast the value change thru On_StatCurrValChg
             AttribModData charModData = new AttribModData(turn, causeType, CauseName, causeByCharID
-                                                             , this.charModel.charID, attribName, value, (int)value);
-
-            float currVal = statData.currValue;
-            float preConstrainedValue = currVal + value;
-
-            if (statData.isClamped)
+                                         , this.charModel.charID, attribName, currVal, (int)value);
+            if (attribData.isClamped)
             {
                 Debug.Log("Value is clamped");  // due to some charstate or trait
                 charModData.modCurrVal = currVal;  // no change is executed 
@@ -385,8 +381,10 @@ namespace Common
 
             float modCurrValue = Constrain2LimitAttrib(charModData.attribModified, preConstrainedValue);
             // ACTUAL VALUE UPDATED HERE
-            charModel.attribList.Find(x => x.AttribName == charModData.attribModified).currValue
-                                                                            = (int)modCurrValue;
+            //charModel.attribList.Find(x => x.AttribName == charModData.attribModified).currValue
+            //                                                                = Mathf.RoundToInt(modCurrValue);
+            SetAttribVal(attribName,modCurrValue);
+
             charModData.modCurrVal = modCurrValue;
             if (attribName == AttribName.vigor)
             {
@@ -415,10 +413,17 @@ namespace Common
 
             return charModData; 
         }
+        void SetAttribVal(AttribName attribName, float val)
+        {
+           Debug.Log("AttribName: " + attribName + "Value: " + val);
+           AttribData attribdata =  charModel.attribList.Find(t=>t.AttribName == attribName);
+            attribdata.currValue = Mathf.RoundToInt(val); 
+        }
+
         public void SetMaxAttribValue(AttribName attribName, float val)
         {
             AttribData statData = GetAttrib(attribName);
-            Debug.Log("MAX VALUE changed" + attribName +"to " + val); 
+            Debug.Log("MAX VALUE changed " + attribName +"to " + val); 
             statData.maxLimit = val; 
         }
 
@@ -492,14 +497,52 @@ namespace Common
             else
                 Debug.Log("Stamina Clamped" + charModel.charName);
         }
-        public float Constrain2LimitAttrib(AttribName _attribName,float _value )
+        public float Constrain2LimitAttrib(AttribName attribName,float _value )
         {
-            float value = 0f; 
-            AttribData statdata = GetAttrib(_attribName);
-            if (_value >= statdata.maxLimit)
-                value = statdata.maxLimit;
-            else if (_value <= statdata.minLimit)
-                value = statdata.minLimit;
+            float value = 0f;
+            AttribData attribData1 = GetAttrib(attribName);
+            if (attribName == AttribName.dmgMin)
+            {
+                AttribData attribDataMax = GetAttrib(AttribName.dmgMax); 
+                if(_value > attribDataMax.currValue)
+                {
+                    value = attribDataMax.currValue;
+                    return value;
+                }
+            }
+            if(attribName== AttribName.dmgMax)
+            {
+                AttribData attribDataMin = GetAttrib(AttribName.dmgMin);
+                if (_value < attribDataMin.currValue)
+                {
+                    value = attribDataMin.currValue;
+                    return value;
+                }
+            }
+            if (attribName == AttribName.armorMin)
+            {
+                AttribData attribDataMax = GetAttrib(AttribName.armorMax);
+                if (_value > attribDataMax.currValue)
+                {
+                    value = attribDataMax.currValue;
+                    return value;
+                }
+            }
+            if (attribName == AttribName.armorMax)
+            {
+                AttribData attribDataMin = GetAttrib(AttribName.armorMin);
+                if (_value < attribDataMin.currValue)
+                {
+                    value = attribDataMin.currValue;
+                    return value;
+                }
+            }
+
+
+            if (_value >= attribData1.maxLimit)
+                value = attribData1.maxLimit;
+            else if (_value <= attribData1.minLimit)
+                value = attribData1.minLimit;
             else
                 value = _value; 
             return value; 

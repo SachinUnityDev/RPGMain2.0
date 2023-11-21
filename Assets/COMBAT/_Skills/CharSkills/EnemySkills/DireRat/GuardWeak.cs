@@ -21,8 +21,7 @@ namespace Combat
         public override float chance { get => _chance; set => _chance = value; }
 
         public override string desc => "guard weak";
-        float minArmorChg = 0; 
-        float maxArmorChg = 0f;
+ 
         public override void PopulateTargetPos()
         {
             skillModel.targetPos.Clear();
@@ -47,17 +46,17 @@ namespace Combat
                 AttribData attribDataMin = charController.GetAttrib(AttribName.armorMin);
                 AttribData attribDataMax = charController.GetAttrib(AttribName.armorMax);
 
-                minArmorChg = attribDataMin.currValue * 0.5f;
-                maxArmorChg = attribDataMax.currValue * 0.5f;
+              float minArmorChg = attribDataMin.currValue * 0.6f;
+               float maxArmorChg = attribDataMax.currValue * 0.6f;
 
-                targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                  , AttribName.armorMin, minArmorChg,skillModel.timeFrame, skillModel.castTime, true);
+                charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                  , AttribName.armorMin, minArmorChg, skillModel.timeFrame, skillModel.castTime, true);
 
-                targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
                  , AttribName.armorMax, maxArmorChg, skillModel.timeFrame, skillModel.castTime, true);
 
-                targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName, charID,
-                        CharStateName.Guarded, skillModel.timeFrame, skillModel.castTime); 
+                //targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName, charID,
+                //        CharStateName.Guarded, skillModel.timeFrame, skillModel.castTime);
 
             }
         }

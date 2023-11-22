@@ -5,12 +5,16 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI; 
 
 namespace Combat
 {
-    public class CombatLogView : MonoBehaviour
+    public class CombatLogView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
+        [SerializeField] const float MIN_HT = 140f;
+        [SerializeField] const float MAX_HT = 500f;
+
 
         [Header("Content and log Prefab TBR")]
         [SerializeField] GameObject containerCombatLog;
@@ -186,8 +190,17 @@ namespace Combat
 
                 i++;
             }
+            ResetToPos();
         }
 
+        void ResetToPos()
+        {
+            ScrollRect scrollRect = transform.GetComponentInChildren<ScrollRect>();
+            if (scrollRect != null)
+            {
+                scrollRect.verticalNormalizedPosition = 0f;
+            }
+        }
         void SetPanelColor(GameObject panel, LogBackGround _logBG)
         {
             panel.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0f);
@@ -233,7 +246,25 @@ namespace Combat
             RefreshCombatLogUI();
         }
 
-    
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            ExpandLog();
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            RectTransform rect = GetComponent<RectTransform>();
+            rect.sizeDelta
+                  = new Vector2(rect.sizeDelta.x, MIN_HT);
+        }
+
+        void ExpandLog()
+        {
+            RectTransform rect = GetComponent<RectTransform>();
+            rect.sizeDelta
+                  = new Vector2(rect.sizeDelta.x, MAX_HT);
+            ResetToPos();
+        }
     }
 
     public enum LogBackGround

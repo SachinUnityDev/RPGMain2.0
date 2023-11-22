@@ -5,6 +5,7 @@ using System;
 using Common;
 using System.Linq;
 using Interactables;
+using DG.Tweening;
 
 namespace Combat
 {
@@ -96,7 +97,12 @@ namespace Combat
             OnSOC?.Invoke();
             SkillService.Instance.InitSkillControllers();
             OnSOC1?.Invoke(CombatService.Instance.combatState);
-            On_SOR(1);
+
+            Sequence seq = DOTween.Sequence(); 
+            seq.AppendInterval(2.5f)
+                .AppendCallback(()=> On_SOR(1))
+                ;
+            seq.Play();
         }
 
         public void On_EOC()
@@ -308,34 +314,34 @@ namespace Combat
                 Debug.Log("SOTactics");
             }
 
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                On_SOC();
-                Debug.Log("SOC");
+            //if (Input.GetKeyDown(KeyCode.I))
+            //{
+            //    On_SOC();
+            //    Debug.Log("SOC");
 
-            }
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                Debug.Log("SOR");
-                On_SOR(1);
-            }
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                Debug.Log("SOT");
-                On_SOT();
-            }
+            //}
+            //if (Input.GetKeyDown(KeyCode.O))
+            //{
+            //    Debug.Log("SOR");
+            //    On_SOR(1);
+            //}
+            //if (Input.GetKeyDown(KeyCode.P))
+            //{
+            //    Debug.Log("SOT");
+            //    On_SOT();
+            //}
 
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                Debug.Log("On CharOn Turn Set");
-                On_CharOnTurnSet();
-            }
+            //if (Input.GetKeyDown(KeyCode.A))
+            //{
+            //    Debug.Log("On CharOn Turn Set");
+            //    On_CharOnTurnSet();
+            //}
 
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                Debug.Log("On CharOn Turn Set");
-                On_EOT();
-            }
+            //if (Input.GetKeyDown(KeyCode.S))
+            //{
+            //    Debug.Log("On CharOn Turn Set");
+            //    On_EOT();
+            //}
             //if (Input.GetKeyDown(KeyCode.J))
             //{
             //    IsActionSubcribed();

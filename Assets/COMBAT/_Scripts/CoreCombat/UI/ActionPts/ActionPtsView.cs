@@ -10,16 +10,34 @@ namespace Combat
         [Header(" TBR")]
         [SerializeField] ActionPtsPtrEvents actionPtsPtrEvents;
         
-        public int actionPts; 
+        public int actionPts;
+        [SerializeField] Transform actionPtsDOT; 
+
 
         private void Start()  // view subscriptions not to be disabled
         {
+            // can' t write on disable as it happens often
             CombatEventService.Instance.OnCharOnTurnSet -= ShowActionPtsDsply;
             CombatEventService.Instance.OnEOT -= HideActionPtsDsply;
+
             CombatEventService.Instance.OnCharOnTurnSet += ShowActionPtsDsply;
             CombatEventService.Instance.OnEOT += HideActionPtsDsply;
+
+            CombatEventService.Instance.OnSOTactics -= HideActionPtsDOTs;
+            CombatEventService.Instance.OnSOTactics += HideActionPtsDOTs; 
+          
         }
- 
+
+
+
+        void HideActionPtsDOTs()
+        {
+          //  actionPtsPtrEvents.Init(this);
+            foreach (Transform child in actionPtsDOT)
+            {
+                child.gameObject.SetActive(false); 
+            }
+        }
 
        public void ShowActionPtsDsply(CharController charController)
        {    

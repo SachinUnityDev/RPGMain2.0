@@ -1,4 +1,5 @@
 ﻿using Common;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,6 +40,7 @@ namespace Combat
         }
         public override void ApplyFX1()
         {
+          
             if (IsTargetMyEnemy())
             {
                 if (targetController.tempTraitController.HasTempTrait(TempTraitName.RatBiteFever))
@@ -57,7 +59,7 @@ namespace Combat
                 targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
                             , AttribName.haste, -3, TimeFrame.EndOfRound, skillModel.castTime, false);
 
-                GridService.Instance.gridMovement.MovebyRow(myDyna, MoveDir.Forward, 1);
+             
             }
         }
 
@@ -94,9 +96,14 @@ namespace Combat
 
         public override void ApplyVFx()
         {
-            SkillService.Instance.skillFXMoveController.MeleeSingleStrike(PerkType.None);
+            Sequence Seq = DOTween.Sequence();
+            Seq.AppendCallback(()=> SkillService.Instance.skillFXMoveController.MeleeSingleStrike(PerkType.None))
+                .AppendInterval(0.5f)
+                .AppendCallback(()=> GridService.Instance.gridMovement.MovebyRow(myDyna, MoveDir.Forward, 1))
+            ;
 
-
+            Seq.Play(); 
+           
         }
 
 
@@ -115,6 +122,7 @@ namespace Combat
 
         public override void ApplyMoveFx()
         {
+           
         }
     }
 

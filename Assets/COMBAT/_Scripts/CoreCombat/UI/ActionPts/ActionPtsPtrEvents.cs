@@ -8,7 +8,7 @@ namespace Combat
 {
     public class ActionPtsPtrEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        ActionPtsView actionPtsView;
+       [SerializeField] ActionPtsView actionPtsView;
 
         [SerializeField] TextMeshProUGUI actionsPtsTxt; 
         public void Init(ActionPtsView actionPtsView)

@@ -71,7 +71,16 @@ MonoBehaviour:
       hexNames: 25000000100000000b000000
     - perkChain: 020000000300000006000000
       hexNames: 25000000180000000b000000
-    allSkillFXs: []
+    allSkillFXs:
+    - charMode: 0
+      perkType: 0
+      impactFX: {fileID: 4794043405585894037, guid: 37138c0c33167b04fa1fb90b7f5a794f,
+        type: 3}
+      colImpactFX: {fileID: 0}
+      mainSkillFX: {fileID: 6192724089161036641, guid: e17d9a3f04750764c8c0a7a0461e4c3b,
+        type: 3}
+      colMainFX: {fileID: 0}
+      selfFX: {fileID: 0}
     allLines: []
   - skillName: 29
     charName: 1
@@ -119,7 +128,15 @@ MonoBehaviour:
       hexNames: 25000000230000000b000000
     - perkChain: 010000000400000006000000
       hexNames: 25000000230000000b000000
-    allSkillFXs: []
+    allSkillFXs:
+    - charMode: 2
+      perkType: 0
+      impactFX: {fileID: 1610735533121614198, guid: 3a5abd38aeeae60498db64819996778f,
+        type: 3}
+      colImpactFX: {fileID: 0}
+      mainSkillFX: {fileID: 0}
+      colMainFX: {fileID: 0}
+      selfFX: {fileID: 0}
     allLines: []
   - skillName: 30
     charName: 1
@@ -239,7 +256,15 @@ MonoBehaviour:
     allPerkHexes:
     - perkChain: 00000000
       hexNames: 190000000b0000000b000000
-    allSkillFXs: []
+    allSkillFXs:
+    - charMode: 1
+      perkType: 0
+      impactFX: {fileID: 0}
+      colImpactFX: {fileID: 0}
+      mainSkillFX: {fileID: 0}
+      colMainFX: {fileID: 0}
+      selfFX: {fileID: 6341380756500085998, guid: 8d22f8de33a885b46ba712496b8da547,
+        type: 3}
     allLines: []
   - skillName: 2
     charName: 1

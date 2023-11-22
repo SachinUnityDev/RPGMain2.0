@@ -33,6 +33,12 @@ namespace Combat
         public List<int> cellsOccupied = new List<int>();  // also defines charOccupies(Data)
         public Vector3Int FwdtilePos;
         public DynaModel dynaModel; 
+
+        public void SetCurrPos(int pos)
+        {
+            currentPos= pos;
+            dynaModel.currPos= pos;
+        }
         public DynamicPosData()
         {
 

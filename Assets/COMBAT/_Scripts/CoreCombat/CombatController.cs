@@ -22,8 +22,12 @@ namespace Combat
         [SerializeField] ActionPtsView actionPtsView;
 
 
-        [SerializeField] int prevTurn =-1; 
+        [SerializeField] int prevTurn =-1;
 
+        private void OnEnable()
+        {
+            charController = GetComponent<CharController>();
+        }
         void Start()
         {
             charController = GetComponent<CharController>();
@@ -37,29 +41,31 @@ namespace Combat
            // CombatEventService.Instance.OnSOT -= ONSOT;
         }
         
-        void ONSOT()
-        {
-            //CombatEventService.Instance.OnCharOnTurnSet -= OnCharSetOnTurn;
-            // CombatEventService.Instance.OnCharOnTurnSet += OnCharSetOnTurn;
-            Debug.Log(" ENENMY SOT TRIGGERED" + charController.charModel.charNameStr);
-            if (CombatService.Instance.currCharOnTurn.charModel.charID != this.charController.charModel.charID)
-                return;
-            if (charController.charModel.charMode == CharMode.Enemy)
-                Debug.LogError(" ENENMY SOT TRIGGERED" + charController.charModel.charNameStr);
+        //void ONSOT()
+        //{
+        //    //CombatEventService.Instance.OnCharOnTurnSet -= OnCharSetOnTurn;
+        //    // CombatEventService.Instance.OnCharOnTurnSet += OnCharSetOnTurn;
+        //    Debug.Log(" ENENMY SOT TRIGGERED" + charController.charModel.charNameStr);
+        //    if (CombatService.Instance.currCharOnTurn.charModel.charID != this.charController.charModel.charID)
+        //        return;
+        //    if (charController.charModel.charMode == CharMode.Enemy)
+        //        Debug.LogError(" ENENMY SOT TRIGGERED" + charController.charModel.charNameStr);
 
-        }
-        void OnCharSetOnTurn(CharController charController)
-        {
+        //}
+
+        //void OnCharSetOnTurn(CharController charController)
+        //{
          
 
-           // CombatEventService.Instance.OnCharOnTurnSet -= OnCharSetOnTurn;
+        //   // CombatEventService.Instance.OnCharOnTurnSet -= OnCharSetOnTurn;
 
-        }
+        //}
 
 
         void ResetValues(int roundNo)
         {
             prevTurn = -5; actionPts= 0;
+            
         }
     
         public void Init()
@@ -67,11 +73,12 @@ namespace Combat
 
         }
         public void SetActionPts()  // SOT ONLY 
-        {       
-            if (CombatService.Instance.currCharOnTurn.charModel.charID != this.charController.charModel.charID)
-                return;
-            MoraleChk(charController);        
-            ++actionPts; 
+        {
+            MoraleChk(charController);
+            if (charController.charModel.orgCharMode == CharMode.Ally)
+                actionPts +=2;
+            else
+                ++actionPts;
             if (actionPts > MAX_VAL_FOR_ACTION_PTS)
                     actionPts = MAX_VAL_FOR_ACTION_PTS;
             if(actionPts <= 0)
@@ -105,7 +112,6 @@ namespace Combat
                     if (chance.GetChance())
                     {
                         CombatEventService.Instance.On_MoraleCheck(charController, false);
-                        if (charController.charModel.orgCharMode == CharMode.Ally)
                             --actionPts;
                     }
 
@@ -114,8 +120,7 @@ namespace Combat
                 {
                     if (chance.GetChance())
                     {
-                        CombatEventService.Instance.On_MoraleCheck(charController, true);
-                        if (charController.charModel.orgCharMode == CharMode.Ally)
+                        CombatEventService.Instance.On_MoraleCheck(charController, true);                      
                             ++actionPts;
                     }
                 }            

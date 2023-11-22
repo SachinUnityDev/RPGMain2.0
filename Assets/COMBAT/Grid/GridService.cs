@@ -160,7 +160,7 @@ namespace Combat
             int prevPos = dynamicPosData.currentPos;
             dynamicPosData.cellsOccupied.Remove(prevPos);
             dynamicPosData.cellsOccupied.Add(newPos);
-            dynamicPosData.currentPos = newPos;
+            dynamicPosData.SetCurrPos(newPos);
             dynamicPosData.FwdtilePos = gridMovement.GetTilePos4Pos(dynamicPosData.charMode, newPos);
             // update in Dyna List
 

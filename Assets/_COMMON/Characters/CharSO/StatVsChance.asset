@@ -46,7 +46,7 @@ MonoBehaviour:
   - attribName: 3
     allStatsNChances:
     - statValue: 0
-      statChance: 2
+      statChance: 0
     - statValue: 1
       statChance: 8
     - statValue: 2
@@ -126,35 +126,35 @@ MonoBehaviour:
     - statValue: 11
       statChance: 30
     - statValue: 12
-      statChance: 36
+      statChance: 96
   - attribName: 6
     allStatsNChances:
     - statValue: 0
       statChance: 0
     - statValue: 1
-      statChance: 1
-    - statValue: 2
-      statChance: 2
-    - statValue: 3
-      statChance: 3
-    - statValue: 4
       statChance: 4
-    - statValue: 5
-      statChance: 5
-    - statValue: 6
-      statChance: 6
-    - statValue: 7
-      statChance: 7
-    - statValue: 8
+    - statValue: 2
       statChance: 8
-    - statValue: 9
-      statChance: 9
-    - statValue: 10
-      statChance: 10
-    - statValue: 11
-      statChance: 11
-    - statValue: 12
+    - statValue: 3
       statChance: 12
+    - statValue: 4
+      statChance: 16
+    - statValue: 5
+      statChance: 20
+    - statValue: 6
+      statChance: 24
+    - statValue: 7
+      statChance: 28
+    - statValue: 8
+      statChance: 32
+    - statValue: 9
+      statChance: 36
+    - statValue: 10
+      statChance: 40
+    - statValue: 11
+      statChance: 44
+    - statValue: 12
+      statChance: 60
   - attribName: 7
     allStatsNChances: []
   - attribName: 8

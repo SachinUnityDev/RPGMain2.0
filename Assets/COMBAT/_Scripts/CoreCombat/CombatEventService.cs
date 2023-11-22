@@ -96,6 +96,7 @@ namespace Combat
             OnSOC?.Invoke();
             SkillService.Instance.InitSkillControllers();
             OnSOC1?.Invoke(CombatService.Instance.combatState);
+            On_SOR(1);
         }
 
         public void On_EOC()

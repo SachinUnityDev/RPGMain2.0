@@ -17,16 +17,26 @@ namespace Combat
 
         Image img;
         [SerializeField] TextMeshProUGUI descTxt; 
+
+        
+
         public void OnPointerClick(PointerEventData eventData)
         {
             img.sprite = spriteClicked;
-            SkillService.Instance.Move2Nextturn(); // on End turn clicked
-            descTxt.gameObject.SetActive(false);
+            if (CombatService.Instance.combatState == CombatState.INTactics)
+            {
+                CombatEventService.Instance.On_SOC(); 
+            }
+            else
+            {
+                SkillService.Instance.Move2Nextturn(); // on End turn clicked
+                descTxt.gameObject.SetActive(false);
+            }
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-           descTxt.gameObject.SetActive(true);
+             descTxt.gameObject.SetActive(true);
             img.sprite = spriteHovered; 
         }
 

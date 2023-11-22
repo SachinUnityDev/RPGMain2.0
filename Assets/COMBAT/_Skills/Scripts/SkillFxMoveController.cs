@@ -145,19 +145,24 @@ namespace Combat
             Vector3 START = new Vector3(strikerTransform.position.x, strikerTransform.position.y
                                     , strikerTransform.position.z);
             Debug.Log("END " + END + " START POS " + startPos);
-            meleeSeq.Append(strikerTransform.DOMove(END, 0.16f * SkillService.Instance.combatSpeed)
-              .OnComplete(() => ToggleSprite(true))
-              .OnComplete(() => ImpactFXOnCurrTarget())
-                );
+            meleeSeq
+                .AppendCallback(() => CharService.Instance.ToggleCharColliders(targetTransform.gameObject))
+                .AppendCallback(() => ToggleSprite(true))
+                .Append(strikerTransform.DOMove(END, 0.16f * SkillService.Instance.combatSpeed))
+                .AppendCallback(() => ImpactFXOnCurrTarget())
+                ;
 
             meleeRev
-                      .AppendInterval(0.5f)
-                      .Append(strikerTransform.DOMove(START, 0.16f * SkillService.Instance.combatSpeed)
-                      );
+                .AppendInterval(0.5f)
+                .AppendCallback(() => ToggleSprite(false))
+                .AppendCallback(() => CharService.Instance.TurnOnAllCharColliders())
+                .Append(strikerTransform.DOMove(START, 0.16f * SkillService.Instance.combatSpeed))
+                ;
 
             meleeSeq.Play().OnComplete(() => meleeRev.Play()
                        .OnComplete(() => Destroy(ImpactFX))
                        .OnComplete(() => meleeRev = null)
+                       .OnComplete(() => meleeSeq = null)
                        );
 
         }

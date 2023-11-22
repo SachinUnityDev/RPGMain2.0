@@ -58,8 +58,10 @@ namespace Combat
                 if (index < charCount && index >= -1)
                 {
                     
-                    CombatService.Instance.currCharOnTurn = charTurnOrder[index];
+                    CombatService.Instance.currCharOnTurn = charTurnOrder[index];                  
                     SetAP(charTurnOrder[index]);
+                    CombatService.Instance.currentTurn = index;
+                    CombatEventService.Instance.On_CharOnTurnSet();
                 }
                 else // next round 
                 {
@@ -67,8 +69,7 @@ namespace Combat
                     CombatEventService.Instance.Move2NextRds();
                     return; 
                 }
-                CombatService.Instance.currentTurn = index;
-                CombatEventService.Instance.On_CharOnTurnSet();
+               
             }
         }
         void SetAP(CharController charController)

@@ -607,12 +607,15 @@ namespace Combat
 
             CharMode targetCharMode = currentTargetDyna.charMode;
 
-            //if()
-            //SkillPerkFXData skillPerkFXData = 
-            //            allSkillPerkFXData.Find(t => t.charMode == targetCharMode && t.perkType == perkType); 
 
-            //return skillPerkFXData; 
-            return allSkillPerkFXData[0];
+            int index = allSkillPerkFXData.FindIndex(t => t.charMode == targetCharMode);
+            //&& t.perkType == perkType); 
+
+            if (index != -1)
+                return allSkillPerkFXData[index];
+            else
+                Debug.Log(" FX Not found!!!!!"); 
+            return null;
         }
         public SkillDataSO GetSkillSO(CharNames _charName)
         {

@@ -246,6 +246,15 @@ MonoBehaviour:
     - perkChain: 02000000
       hexNames: 020000000c0000000b000000
     allSkillFXs:
+    - charMode: 2
+      perkType: 0
+      impactFX: {fileID: 1502306625036764, guid: 1c49e69f8e770bf45863c7187bf8fcb3,
+        type: 3}
+      colImpactFX: {fileID: 0}
+      mainSkillFX: {fileID: 1502306625036764, guid: 1c49e69f8e770bf45863c7187bf8fcb3,
+        type: 3}
+      colMainFX: {fileID: 0}
+      selfFX: {fileID: 0}
     - charMode: 1
       perkType: 0
       impactFX: {fileID: 0}

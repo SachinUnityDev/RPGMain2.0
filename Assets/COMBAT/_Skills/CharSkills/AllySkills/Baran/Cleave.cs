@@ -59,6 +59,12 @@ namespace Combat
                 CombatService.Instance.mainTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>().damageController
                     .ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Physical, skillModel.damageMod
                     , skillModel.skillInclination));
+
+
+            if (CombatService.Instance.mainTargetDynas.Count > 0)
+                CombatService.Instance.mainTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>()
+                .buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, AttribName.haste
+                , -3f, skillModel.timeFrame, skillModel.castTime, false));
         }
 
         public override void ApplyFX2()

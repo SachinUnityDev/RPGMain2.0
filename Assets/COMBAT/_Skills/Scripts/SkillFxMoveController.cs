@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using System.Linq;
 using Common;
+using System.Drawing.Drawing2D;
 
 namespace Combat
 {
@@ -14,8 +15,10 @@ namespace Combat
         [SerializeField] Vector3 strikerMainFXOffset = new Vector3(1.5f,1.5f,0); 
         [SerializeField] Transform strikerTransform;
         [SerializeField] Transform targetTransform;
+        [Header("Global var")]
+        List<DynamicPosData> mainTargets = new List<DynamicPosData>();
 
-      //  Vector3 endPos;
+        //  Vector3 endPos;
         Vector3 startPos;
         Vector3 centerPos;
         Vector3 endPos; 
@@ -31,7 +34,9 @@ namespace Combat
 
         [Header("Buffer variables")]
         [SerializeField] CharController prevCharController;
-        [SerializeField] bool lastStatus = false; 
+        [SerializeField] bool lastStatus = false;
+
+
         //public List<DynamicPosData> targetDynasFX;
         // Start is called before the first frame update
         void Start()
@@ -98,7 +103,7 @@ namespace Combat
             currPerkType = perkType;
             Sequence multiTargetSeq = DOTween.Sequence();
             Sequence revMultiTargetSeq = DOTween.Sequence();
-            Debug.Log("PROGRAM WAS HERE" + CombatService.Instance.mainTargetDynas.Count);
+          
             multiTargetSeq
                 .PrependCallback(() => ToggleSprite(true))
                 .AppendCallback(() => ApplyFXOnSelf())
@@ -195,7 +200,8 @@ namespace Combat
             if (impactFXGO == null) return;
 
             if (CombatService.Instance.mainTargetDynas.Count > 0)
-            {         
+            {
+                Debug.Log("PROGRAM WAS HERE" + mainTargets.Count);
                 foreach (DynamicPosData dyna in CombatService.Instance.mainTargetDynas)
                 {
                     Transform targetTrans = dyna.charGO.transform;
@@ -277,7 +283,7 @@ namespace Combat
             }
             if (CombatService.Instance.mainTargetDynas.Count > 0)
             {
-                foreach (DynamicPosData dyna in CombatService.Instance.mainTargetDynas)
+                foreach (DynamicPosData dyna in mainTargets)
                 {
                     Vector3 targetPos = dyna.charGO.transform.position - striker2TargetOffset; 
                     GameObject mainFX = Instantiate(mainFXGO, startPos, Quaternion.identity);
@@ -292,6 +298,52 @@ namespace Combat
                 mainFX.GetComponent<VFXMoveScript>().targetPos = targetPos;
 
             }         
+        }
+       public void ApplyRunguFX(PerkType perkType)
+        {
+            SetMoveParams();
+            currPerkType = perkType;
+
+            Sequence singleSeq = DOTween.Sequence();
+            Sequence singleRev = DOTween.Sequence();
+
+            singleSeq
+                .PrependCallback(() => ToggleSprite(true))
+                .AppendCallback(() => ApplyFXOnSelf())
+                .AppendCallback(() => CharService.Instance.ToggleCharColliders(targetTransform.gameObject))
+                .AppendCallback(() => PrefabMove())
+                //.AppendCallback(() => ApplyFXOnCollatralTargets())
+                .AppendCallback(() => ApplyImpactFXOnSingleTarget())
+                ;
+            singleRev
+                .AppendInterval(0.90f)
+                .AppendCallback(() => ToggleSprite(false))
+                .AppendCallback(() => CharService.Instance.TurnOnAllCharColliders())
+                ;
+
+            singleSeq.Play()
+                .OnComplete(() => singleRev.Play())
+                .OnComplete(() => singleSeq = null);
+            ;
+
+        }
+        void PrefabMove()
+        {
+            GameObject mainFXGO;
+            SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType);
+            mainFXGO = skillPerkdataFX.mainSkillFX;
+
+            if (mainFXGO == null)
+            {
+                SkillService.Instance.OnTargetReached();
+                return;
+            }
+            Vector3 targetPos = targetTransform.position - striker2TargetOffset;
+            GameObject mainFX = Instantiate(mainFXGO, startPos, Quaternion.identity);
+           // mainFX.transform.DOLookAt(targetPos, 0.01f);
+            mainFX.GetComponentInChildren<RunguMotion>().RotMotion(targetPos);
+
+
         }
 
         public void DestroyMAINFX()
@@ -319,7 +371,8 @@ namespace Combat
             targetCharMode = SkillService.Instance.currentTargetDyna.charMode;
             
             startPos = strikerTransform.position + strikerMainFXOffset;
-          
+            mainTargets.Clear();
+            mainTargets = CombatService.Instance.mainTargetDynas; 
            
                 
                 //GridService.Instance.GetDynaWorldPos(SkillService.Instance.currentTargetDyna)

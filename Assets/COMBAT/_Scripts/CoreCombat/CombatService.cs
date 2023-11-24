@@ -28,7 +28,7 @@ namespace Combat
         public List<DynamicPosData> colTargetDynas = new List<DynamicPosData>(); 
 
         public EnemyPackName currEnemyPack; 
-        public CombatLogController combatLogController;
+
         public CombatAnimController combatAnimController;
         public RoundController roundController;
         public CombatHUDView combatHUDView; 
@@ -57,7 +57,7 @@ namespace Combat
                             += (CharNames _charName, SkillNames _skillName)
                             =>combatState = CombatState.INCombat_InSkillSelected;
    
-            combatLogController = GetComponent<CombatLogController>();
+           
             combatAnimController = GetComponent<CombatAnimController>();
             roundController = GetComponent<RoundController>();
             combatHUDView = gameObject.GetComponent<CombatHUDView>();

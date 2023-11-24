@@ -73,7 +73,7 @@ namespace Combat
 
         public override void ApplyVFx()
         {
-            SkillService.Instance.skillFXMoveController.SingleTargetRangeStrike(PerkType.None);
+            SkillService.Instance.skillFXMoveController.ApplyRunguFX(PerkType.None);
         }
 
         public override void DisplayFX1()

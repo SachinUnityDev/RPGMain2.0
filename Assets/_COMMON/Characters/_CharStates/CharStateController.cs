@@ -159,10 +159,10 @@ namespace Common
             allCharStateBuffs.Add(charStateBuffData);
            
             CharStatesService.Instance.On_CharStateStart(charStateModData);
-            if (!IsDOT(charStateName))  // no char State can occur twice to the same char ...DOT have independent rules
-            {
-                ApplyImmunityBuff(causeType, causeName, causeByCharID, charStateName, timeFrame, castTime);
-            }
+            //if (!IsDOT(charStateName))  // no char State can occur twice to the same char ...DOT have independent rules
+            //{
+            //    ApplyImmunityBuff(causeType, causeName, causeByCharID, charStateName, timeFrame, castTime);
+            //}
 
             return stateID;
         }

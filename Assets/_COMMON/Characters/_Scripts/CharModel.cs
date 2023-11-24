@@ -80,7 +80,10 @@ namespace Common
 
         [Header("CHAR EXTD STATS")]
         public FleeBehaviour fleeBehaviour;  
-        public CharFleeState charFleeState; 
+        public CharFleeState charFleeState;
+
+        [Header("Active Inv Slot items")]
+        public List<Iitems> activeInvItems = new List<Iitems>();
 
         [Header("DEFAULT PROVISION")]
         public List<ItemData> provisionItems = new List<ItemData>();

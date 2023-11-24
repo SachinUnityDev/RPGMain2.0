@@ -39,7 +39,7 @@ namespace Combat
         }
         public override void ApplyFX1()  // DAMAGE 
         {
-            foreach (DynamicPosData targetDyna in CombatService.Instance.mainTargetDynas.ToList())
+            foreach (DynamicPosData targetDyna in CombatService.Instance.mainTargetDynas)
             {
                 targetDyna.charGO.GetComponent<CharController>()
                     .damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName

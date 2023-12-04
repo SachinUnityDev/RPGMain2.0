@@ -22,9 +22,6 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        //  public override List<DynamicPosData> targetDynas => new List<DynamicPosData>();
-
-      
         public override void ApplyFX1()
         {
             if (IsTargetAlly())
@@ -35,7 +32,7 @@ namespace Combat
                                                                 .GetAllAdjDynaOccupied(targetDyna);
 
                 allAdjOccupied.ForEach(t => t.charGO.GetComponent<CharController>()
-                        .damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Heal, Random.Range(6f, 9f)));
+                     .damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Heal, Random.Range(6, 10)));
 
             }
         }
@@ -58,7 +55,7 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str1 = $"<style=Heal>Heal</style> adj targets  6-9 ";
+            str1 = $"<style=Heal>Heal</style> 6-9 adj targets to target";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
 
@@ -74,7 +71,11 @@ namespace Combat
         {
         }
 
-
+        public override void InvPerkDesc()
+        {
+            perkDesc = "<style=Heal>Heal </style>6-9 adj targets to target";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+        }
     }
 
 }

@@ -24,19 +24,6 @@ namespace Combat
 
         public override void PopulateTargetPos()
         {
-            //if (skillModel == null) return; 
-
-            // skillModel.targetPos.Clear(); CombatService.Instance.mainTargetDynas.Clear();   
-
-            //List<DynamicPosData> sameLaneOccupiedPos = GridService.Instance.GetInSameLaneOppParty
-            //             (new CellPosData(CharMode.Ally, GridService.Instance.GetDyna4GO(charGO).currentPos));
-            //if (sameLaneOccupiedPos.Count > 0)
-            //{
-            //    CellPosData Pos = new CellPosData(CharMode.Enemy, sameLaneOccupiedPos[0].currentPos);
-            //    skillModel.targetPos.Add(Pos);
-            //    CombatService.Instance.mainTargetDynas
-            //        .Add(GridService.Instance.GetDynaAtCellPos(CharMode.Enemy, sameLaneOccupiedPos[0].currentPos)); 
-            //}
             FirstOnSamelane();
         }
 
@@ -55,30 +42,27 @@ namespace Combat
         public override void ApplyFX3()
         {
             if (targetController)            
-                GridService.Instance.gridMovement.MovebyRow(GridService.Instance.targetSelected
-                                                                             , MoveDir.Forward, 1);            
+                GridService.Instance.gridMovement.MovebyRow(myDyna, MoveDir.Forward, 1);            
         }
+ 
         public override void DisplayFX1()
         {
-            str1 = $"{skillModel.damageMod}% <style=Physical>Physical </style>";
+            str1 = $"{skillModel.damageMod}% <style=Physical>Physical</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
         public override void DisplayFX2()
         {
-            str2 = $" <style=Bleed>High Bleed</style>, 30%";
+            str2 = $"{chance}% <style=Bleed>High Bleed</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
         public override void DisplayFX3()
         {
-            str3 = $"<style=Move>Pull </style> self";
+            str3 = $"<style=Move>Move</style> forward 1";
             SkillService.Instance.skillModelHovered.AddDescLines(str3);
         }
-
         public override void DisplayFX4()
         {
-
         }
-      
         public override void ApplyVFx()
         {
             SkillService.Instance.skillFXMoveController.SingleTargetRangeStrike(PerkType.None);

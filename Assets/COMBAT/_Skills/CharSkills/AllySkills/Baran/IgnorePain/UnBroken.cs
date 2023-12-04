@@ -28,8 +28,7 @@ namespace Combat
         public override float chance { get => _chance; set => _chance = value; }
 
        
-        bool moraleChgesCasttime = false;
-
+      
         float chgMin = 0;
         float chgMax = 0; 
       
@@ -40,8 +39,7 @@ namespace Combat
             if (moraleStat.currValue == 12)
             {
                 skillModel.timeFrame = TimeFrame.EndOfCombat; 
-                skillModel.castTime = 1;
-                moraleChgesCasttime = true;
+                skillModel.castTime = 1;             
             }
 
             if (hpStat.currValue == hpStat.maxLimit)
@@ -52,42 +50,32 @@ namespace Combat
                                     , AttribName.earthRes, 20f, skillModel.timeFrame, skillModel.castTime, true);
 
              
-                    AttribData armorMin = charController.GetAttrib(AttribName.armorMin);
-                    AttribData armorMax = charController.GetAttrib(AttribName.armorMax);
-                    float armorMinVal = armorMin.currValue;
-                    float armorMaxVal = armorMin.currValue;
-                    chgMin = armorMinVal * 0.6f;
-                    chgMax = armorMaxVal * 0.6f; 
+                AttribData armorMin = charController.GetAttrib(AttribName.armorMin);
+                AttribData armorMax = charController.GetAttrib(AttribName.armorMax);
+                float armorMinVal = armorMin.currValue;
+                float armorMaxVal = armorMax.currValue;
+                chgMin = armorMinVal * 0.6f;
+                chgMax = armorMaxVal * 0.6f; 
 
-                    charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                                                    , AttribName.armorMin, chgMin, skillModel.timeFrame, skillModel.castTime, true);
-                    charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                                                    , AttribName.armorMax, chgMax, skillModel.timeFrame, skillModel.castTime, true);
+                charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                                                , AttribName.armorMin, chgMin, skillModel.timeFrame, skillModel.castTime, true);
+                charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                                                , AttribName.armorMax, chgMax, skillModel.timeFrame, skillModel.castTime, true);
 
                  
             }            
         }
         public override void DisplayFX1()
         {
-            //if (!moraleChgesCasttime)
-            //{
-            //    str0 = $"If full HP,+80% <style=Attributes> Armor </style>, {skillModel.castTime} rds";
-            //    SkillService.Instance.skillModelHovered.AddDescLines(str0);
-            //}
-            //else
-            //{
-            //    str0 = $"If full HP,+80% <style=Attributes> Armor </style>, EOC";
-            //    SkillService.Instance.skillModelHovered.AddDescLines(str0);
-            //}
-            
-            str1 = $"If full HP, +40%<style=Water> Water Res </style>and +40%<style=Earth> Earth Res </style>, {skillModel.castTime} rds";
-            SkillService.Instance.skillModelHovered.AddDescLines(str1);
+            str0 = $"If full Hp: +60% Armor, +30 Water Res and +20 Earth Res";
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
+
         }
 
         public override void DisplayFX2()
         {
-            str2 = $"If Morale 12, +40%<style=Water> Water Res </style> and +20%<style=Earth> Earth Res </style>, until eoq";
-            SkillService.Instance.skillModelHovered.AddDescLines(str2);      
+            str1 = $"If Morale 12: Duration until eoc";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);      
         }
         public override void ApplyFX2()
         {
@@ -108,9 +96,6 @@ namespace Combat
         {
            
         }
-
-  
-
         public override void DisplayFX3()
         {
             
@@ -120,7 +105,14 @@ namespace Combat
         {
             
         }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "If full Hp: +60% Armor, +30 Water Res and +20 Earth Res";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
 
+            perkDesc = "If Morale 12: Duration until eoc";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+        }
 
     }
 }

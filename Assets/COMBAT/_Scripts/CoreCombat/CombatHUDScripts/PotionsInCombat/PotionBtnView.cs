@@ -14,8 +14,6 @@ namespace Combat
         Clicked, 
         NA, 
     }
-
-
     public class PotionBtnView : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] Sprite spriteN;

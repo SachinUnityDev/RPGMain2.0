@@ -25,42 +25,15 @@ namespace Combat
 
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
-   
-        public override void SkillSelected()
-        {
-            base.SkillSelected();
-            CombatEventService.Instance.OnStrikeFired += ExtraWaterDmg1;
-        }
-
         public override void SkillHovered()
         {
             base.SkillHovered();
             skillModel.staminaReq = 6;
-
-
+            skillController.allSkillBases.Find(t => t.skillName == skillName).chance = 70f;
         }
-        
-
-        public void ExtraWaterDmg1(StrikeData strikeData)
-        {
-            if (targetController == strikeData.striker)
-            {
-                if (strikeData.attackType == AttackType.Melee && strikeData.skillInclination == SkillInclination.Physical)
-                {
-                    strikeData.targets.ForEach(t => t.damageController.ApplyDamage(strikeData.striker, CauseType.CharSkill, (int)skillName
-                            , DamageType.Water, 30f, skillModel.skillInclination));
-                }
-            }
-        }
-        public override void SkillEnd()
-        {
-            base.SkillEnd();
-            CombatEventService.Instance.OnStrikeFired -= ExtraWaterDmg1;
-        }
+   
         public override void ApplyFX1()
         {
-
-
         }
 
         public override void ApplyFX2()
@@ -81,8 +54,7 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str1 = $"+70%<style=Water> Water </style>on Ally Physical Melee attacks";
-            SkillService.Instance.skillModelHovered.AddDescLines(str1);
+    
         }
 
         public override void DisplayFX2()
@@ -96,13 +68,12 @@ namespace Combat
         public override void DisplayFX4()
         {
         }
-
-        public override void PostApplyFX()
+        public override void InvPerkDesc()
         {
-        }
-
-        public override void PreApplyFX()
-        {
+            perkDesc = "Dmg buff: 40% -> +70%<style=Water> Water</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Stm cost: 4 -> 6";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 }

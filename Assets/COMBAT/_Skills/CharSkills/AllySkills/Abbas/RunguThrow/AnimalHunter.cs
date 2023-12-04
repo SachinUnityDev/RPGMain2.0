@@ -27,7 +27,6 @@ namespace Combat
 
         public override void ApplyFX1()
         {
-
             if(targetController)
                 charController.strikeController.ApplyDmgAltBuff(-12f, CauseType.CharSkill, (int)skillName
                  , charController.charModel.charID, TimeFrame.EndOfCombat, 1, false, skillModel.attackType, skillModel.dmgType[0],
@@ -40,7 +39,6 @@ namespace Combat
 
         public override void ApplyFX2()
         {
-
         }
 
         public override void ApplyFX3()
@@ -50,18 +48,21 @@ namespace Combat
         public override void ApplyMoveFX()
         {
         }
-
         public override void ApplyVFx()
         {
         }
 
         public override void DisplayFX1()
         {
+            str1 = "Vs Animal: -12% Dmg <style=Physical>Physical</style> Skills until eoc";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
+            str2 = "Vs else: -6% Dmg <style=Physical>Physical</style> Skills until eoc";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
+      
 
         public override void DisplayFX3()
         {
@@ -69,6 +70,13 @@ namespace Combat
 
         public override void DisplayFX4()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Vs Animal: -12% Dmg <style=Physical>Physical</style> Skills until eoc";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Vs else: -6% Dmg <style=Physical>Physical</style> Skills until eoc";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 }

@@ -51,7 +51,7 @@ namespace Combat
             CharStatesService.Instance.OnCharStateEnd += CharStateEnd;
             CombatEventService.Instance.OnEOC += OnCombatEnd;
             CombatEventService.Instance.OnSOR1 += StartOfRound;
-            CombatEventService.Instance.OnCharOnTurnSet += StartOfTurn;
+            CombatEventService.Instance.OnSOT += StartOfTurn;
             SkillService.Instance.OnSkillUsed += SkillUsed;
         }
         private void OnDisable()
@@ -63,7 +63,7 @@ namespace Combat
             CharStatesService.Instance.OnCharStateEnd -= CharStateEnd;
 
             CombatEventService.Instance.OnSOR1 -= StartOfRound;
-            CombatEventService.Instance.OnCharOnTurnSet -= StartOfTurn;
+            CombatEventService.Instance.OnSOT -= StartOfTurn;
             SkillService.Instance.OnSkillUsed -= SkillUsed;
         }
 
@@ -80,9 +80,10 @@ namespace Combat
             CharService.Instance.charsInPlayControllers
                                .ForEach(t => t.OnStatChg -= HpChg);
         }
-        void StartOfTurn(CharController charController)
+        void StartOfTurn()
         {
-
+            CharController charController = CombatService.Instance.currCharOnTurn;
+            if (charController == null) return;
             string turnStr = charController.charModel.charNameStr + "'s Turn";
 
             if (strPrev.Contains(charController.charModel.charNameStr))
@@ -104,7 +105,7 @@ namespace Combat
         {
             CharController charController = CharService.Instance.GetCharCtrlWithCharID(charStateModData.effectedCharID);
             CharNames charName = charController.charModel.charName;
-            string str = charName + " is now " + charStateModData.charStateName + ", ";
+            string str = charName + " is now " + charStateModData.charStateName;
             //+ charStateModData.castTime + " rds";
 
             combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));

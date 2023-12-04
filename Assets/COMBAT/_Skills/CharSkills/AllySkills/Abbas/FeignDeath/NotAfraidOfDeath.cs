@@ -60,12 +60,14 @@ namespace Combat
 
         public override void DisplayFX1()
         {
+            str1 = "If cast when <style=Fortitude>Fortitude</style> < 0: Gain 30 <style=Fortitude>Fort</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
+            str2 = "If Morale 12: +2 <style=Fortitude>Fort Org</style> until eoq";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
-
         public override void DisplayFX3()
         {
         }
@@ -73,7 +75,12 @@ namespace Combat
         public override void DisplayFX4()
         {
         }
-
-
+        public override void InvPerkDesc()
+        {
+            perkDesc = "If cast when <style=Fortitude>Fortitude</style> < 0: Gain 30 <style=Fortitude>Fort</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "If Morale 12: +2 <style=Fortitude>Fort Org</style> until eoq";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+        }
     }
 }

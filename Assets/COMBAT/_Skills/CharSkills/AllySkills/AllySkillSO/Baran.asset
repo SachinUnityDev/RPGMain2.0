@@ -79,7 +79,8 @@ MonoBehaviour:
       colMainFX: {fileID: 0}
       selfFX: {fileID: 6148754506158781688, guid: 14cafda68f5afe54eb839d472668ef20,
         type: 3}
-    allLines: []
+    allLines:
+    - 
   - skillName: 9
     charName: 2
     skillID: 141

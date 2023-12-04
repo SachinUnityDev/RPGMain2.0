@@ -53,18 +53,26 @@ namespace Combat
 
         public override void DisplayFX1()
         {
+            str1 = "Vs Animal: 100% <style=Physical>High Bleed</style>,";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
+            str2 = "else 50% <style=Physical>Low Bleed</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
-
         public override void DisplayFX3()
         {
         }
-
         public override void DisplayFX4()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Vs Animal: 100% <style=Physical>High Bleed</style>,";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "else 50% <style=Physical>Low Bleed</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 }

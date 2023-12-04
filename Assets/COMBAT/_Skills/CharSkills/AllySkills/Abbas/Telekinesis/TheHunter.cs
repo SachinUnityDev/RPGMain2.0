@@ -29,10 +29,15 @@ namespace Combat
 
         public override void ApplyFX1()
         {
+            if(targetController)
+                targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                 , AttribName.dodge, -2, skillModel.timeFrame, skillModel.castTime, false);
         }
 
         public override void ApplyFX2()
         {
+            if(targetController)
+                charController.charStateController.RemoveCharState(CharStateName.Sneaky);
         }
 
         public override void ApplyFX3()
@@ -49,11 +54,16 @@ namespace Combat
 
         public override void DisplayFX1()
         {
+            str1 = "-2 Dodge";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
+            str2 = "Clear <style=States>Sneaky</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
+
+      
 
         public override void DisplayFX3()
         {
@@ -61,6 +71,13 @@ namespace Combat
 
         public override void DisplayFX4()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "-2 Dodge";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Clear <style=States>Sneaky</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 }

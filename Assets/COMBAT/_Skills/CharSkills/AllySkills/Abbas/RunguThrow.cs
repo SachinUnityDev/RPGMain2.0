@@ -27,11 +27,12 @@ namespace Combat
                 skillModel.targetPos.Clear();
                 CombatService.Instance.mainTargetDynas.Clear();
                 CellPosData cellPos = new CellPosData(CharMode.Ally, myDyna.currentPos);
-                sameLaneTargets = GridService.Instance.GetInSameLaneOppParty(cellPos); 
+                sameLaneTargets = GridService.Instance.GetInSameLaneOppParty(cellPos);
+                
                 if(sameLaneTargets.Count > 0 ) 
-                targetDyna = sameLaneTargets[0];
+                    targetDyna = sameLaneTargets[0];
                 else
-                targetDyna = null;                
+                    targetDyna = null;                
                 if(targetDyna != null)
                 {
                     CombatService.Instance.mainTargetDynas.Add(targetDyna);
@@ -51,6 +52,8 @@ namespace Combat
             else
                 targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
                               , DamageType.Physical, skillModel.damageMod, skillModel.skillInclination);
+
+            chance = 0; 
 
         }
 
@@ -78,14 +81,14 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-           
+            str1 = $"{skillModel.damageMod}% <style=Physical>Physical</style> Dmg";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
-           // -2 focus string here
+            str2 = "-2 Focus";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
-
         public override void DisplayFX3()
         {
             

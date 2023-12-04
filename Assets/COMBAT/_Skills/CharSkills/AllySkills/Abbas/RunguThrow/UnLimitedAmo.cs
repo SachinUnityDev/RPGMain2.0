@@ -13,7 +13,7 @@ namespace Combat
         public override PerkSelectState state { get; set; }
 
         public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.ConfuseThem
-                ,PerkNames.ShootTheCripple  };
+                                                                                 ,PerkNames.ShootTheCripple  };
 
         public override string desc => "this is Unlimited Amo ";
 
@@ -35,8 +35,8 @@ namespace Combat
         {
             if(targetController)
                 targetController.damageController.ApplyDamage(charController, CauseType.CharSkill
-                  , (int)skillName, DamageType.StaminaDmg
-                  , UnityEngine.Random.Range(4,7), skillModel.skillInclination);
+                             , (int)skillName, DamageType.StaminaDmg
+                             , UnityEngine.Random.Range(4,7), skillModel.skillInclination);
         }
 
         public override void ApplyFX2()
@@ -57,8 +57,10 @@ namespace Combat
 
         public override void DisplayFX1()
         {
+            str1 = "Drain <style=Stamina>4-6 Stm</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
+      
         public override void DisplayFX2()
         {
         }
@@ -69,6 +71,13 @@ namespace Combat
 
         public override void DisplayFX4()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "No use limit -> 1 rd cd";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Stm drain 4-6";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 }

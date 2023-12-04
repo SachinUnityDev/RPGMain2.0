@@ -33,14 +33,14 @@ namespace Combat
                 allEnemies = GridService.Instance.GetAllByCharMode(CharMode.Enemy);
                 CombatService.Instance.colTargetDynas.AddRange(allAlliesINFront);
                 CombatService.Instance.mainTargetDynas.AddRange(allEnemies);
-                if (allAlliesINFront.Count > 0)
-                {
-                    foreach (DynamicPosData dyna in allAlliesINFront)
-                    {
-                        CellPosData cell = new CellPosData(dyna.charMode, dyna.currentPos);
-                        skillModel.targetPos.Add(cell);
-                    }
-                }
+                //if (allAlliesINFront.Count > 0)
+                //{
+                //    foreach (DynamicPosData dyna in allAlliesINFront)
+                //    {
+                //        CellPosData cell = new CellPosData(dyna.charMode, dyna.currentPos);
+                //        skillModel.targetPos.Add(cell);
+                //    }
+                //}
 
                 if (allEnemies.Count > 0)
                 {
@@ -53,13 +53,6 @@ namespace Combat
             }
            
         }
-
-        public override void SkillHovered()
-        {
-            base.SkillHovered();
-            SkillService.Instance.SkillWipe += skillController.allSkillBases.Find(t => t.skillName == skillName).WipeFX3;
-        }
-
         public override void ApplyFX1()  // Soak all in front enemy n allies 
         {
             allEnemies.ForEach(t => t.charGO.GetComponent<CharController>().charStateController.
@@ -100,35 +93,39 @@ namespace Combat
                 GridService.Instance.gridMovement.MovebyRow(dyna, MoveDir.Forward, 1);
             }
 
-            foreach (DynamicPosData dyna in allEnemies)
-            {
-                GridService.Instance.gridMovement.MovebyRow(dyna, MoveDir.Backward, 1);
-            }
+            //foreach (DynamicPosData dyna in allEnemies)
+            //{
+            //    GridService.Instance.gridMovement.MovebyRow(dyna, MoveDir.Backward, 1);
+            //}
         }
         public override void DisplayFX1()
         {
-            str0 = $"<style=Allies> <style=Enemy> <style=States> Soaked </style>, {skillModel.castTime} rd";
+            str0 = "Added target: Allies in front";
             SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
-
         public override void DisplayFX2()
         {
-            str1 = $"<style=Allies> <style=Move> Push </style>";
+            str1 = "+2 Haste on allies";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX3()
         {
-            str3 = $"<style=Allies> Init +2, 2 rds";
-            SkillService.Instance.skillModelHovered.AddDescLines(str3);
+            str2 = "-2 Morale on enemies";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
 
         public override void DisplayFX4()
         {
         }
-
-       
-    
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Added target: Allies in front";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "+2 Haste on allies";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "-2 Morale on enemies";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+        }
     }
 
 

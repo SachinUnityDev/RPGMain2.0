@@ -28,15 +28,14 @@ namespace Combat
         public override void SkillHovered()
         {
             base.SkillHovered();
-            SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).RemoveFX3;
+            SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).WipeFX3;
             skillModel.castPos.Clear();
             skillModel.castPos = new List<int> { 1,2,3,4,5,6,7 };
         }
         public override void SkillSelected()
         {
             base.SkillSelected();
-            SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).WipeFX3;
-
+            SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).RemoveFX3;
         }
 
         public override void ApplyFX1()
@@ -56,11 +55,13 @@ namespace Combat
         }
         public override void DisplayFX1()
         {
-            str1 = $"-2<style=Enemy> haste, rd";
-            SkillService.Instance.skillModelHovered.AddDescLines(str1);
+            str0 = "Cast from any pos";
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
         public override void DisplayFX2()
         {
+            str1 = "-2 Haste";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
 
         public override void DisplayFX3()
@@ -76,6 +77,17 @@ namespace Combat
         public override void ApplyMoveFX()
         {
           
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Cast from any pos";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+
+            perkDesc = "-2 Haste";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+
+            perkDesc = "Move forward subtracted";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 

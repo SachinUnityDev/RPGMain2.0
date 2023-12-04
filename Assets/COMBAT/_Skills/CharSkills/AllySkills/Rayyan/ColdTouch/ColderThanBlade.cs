@@ -18,35 +18,17 @@ namespace Combat
         public override string desc => "+20% Physical skills";
 
         public override CharNames charName => CharNames.Rayyan;
-
         public override SkillNames skillName => SkillNames.ColdTouch;
         public override SkillLvl skillLvl => SkillLvl.Level2;
 
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
-  
-
-        //public override void BaseApply()
-        //{
-        //    base.BaseApply();
-        //    CombatEventService.Instance.OnStrikeFired += ExtraPhysicalDmg;
-        //}
-
-        //public void ExtraPhysicalDmg(StrikeData strikeData)
-        //{
-        //    if (targetController == strikeData.striker)
-        //    {
-        //        if (strikeData.skillInclination == SkillInclination.Physical)
-        //        {
-        //            strikeData.targets.ForEach(t => t.damageController.ApplyDamage(strikeData.striker, CauseType.CharSkill
-        //                                                               , (int)skillName, DamageType.Physical, +20f, false));
-        //        }
-        //    }
-        //}
+     
         public override void ApplyFX1()
         {
-            targetController.skillController.ApplySkillDmgModBuff(CauseType.CharSkill, (int)skillName, SkillInclination.Physical
-               , 20f, skillModel.timeFrame, skillModel.castTime);                
+            if(targetController && IsTargetAlly())
+                targetController.skillController.ApplySkillDmgModBuff(CauseType.CharSkill, (int)skillName, SkillInclination.Physical
+                                                                                , 20f, skillModel.timeFrame, skillModel.castTime);                
         }
 
         public override void ApplyFX2()
@@ -68,14 +50,11 @@ namespace Combat
         {
            
         }
-
         public override void DisplayFX1()
         {
-            str1 = $"+20% Physical Skills, {skillModel.castTime} rds";
-
+            str1 = "Ally <style=Physical>Physical</style> Skills: +20% Dmg";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()   
         {
           
@@ -89,6 +68,11 @@ namespace Combat
         public override void DisplayFX4()
         {
             
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Ally <style=Physical>Physical</style> Skills: +20% Dmg";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 }

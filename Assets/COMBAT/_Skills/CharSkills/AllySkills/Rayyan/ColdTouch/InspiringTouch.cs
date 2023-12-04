@@ -29,7 +29,7 @@ namespace Combat
         {
             if (targetController && IsTargetAlly())
             {
-                charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName, charController.charModel.charID
+                targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName, charController.charModel.charID
                                                             , CharStateName.Inspired, skillModel.timeFrame, skillModel.castTime);
             }
         }
@@ -51,10 +51,9 @@ namespace Combat
         }
         public override void DisplayFX1()
         {
-            str1 = $"<style=States> Inspired </style>, {skillModel.castTime} rds";
+            str1 = "Apply <style=States>Inspired</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
         }
@@ -65,6 +64,11 @@ namespace Combat
 
         public override void DisplayFX4()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Apply <style=States>Inspired</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
 
     }

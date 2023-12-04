@@ -30,7 +30,7 @@ namespace Combat
                 CellPosData cellPosData = new CellPosData(CharMode.Enemy, i);
                 DynamicPosData dyna = GridService.Instance.gridView
                                         .GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
-                if (dyna == null)
+                if (dyna == null)  // null pos targetted 
                 {
                     skillModel.targetPos.Add(cellPosData);                    
                 }
@@ -57,8 +57,6 @@ namespace Combat
             else
                 targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName,
                  charController.charModel.charID, AttribName.haste, -3, skillModel.timeFrame, skillModel.castTime, false);
-
-
         }
 
         public override void ApplyFX3()
@@ -78,26 +76,22 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str0 = $"<style=Allies> <style=Heal>Heal,</style> 4-7";
-            SkillService.Instance.skillModelHovered.AddDescLines(str0);
-        }
-
-        public override void DisplayFX2()
-        {
-            str1 = $"<style=Allies> <style=Heal>Heal,</style> 4-7";
+            str1 = $"{skillModel.damageMod}% <style=Physical>Physical</style> Dmg";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
+        public override void DisplayFX2()
+        {
+            str2 = $"Vs Animal apply<style=States> Rooted</style>, else -3 Haste";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
+        }
         public override void DisplayFX3()
         {
-           
+            str3 = $"True Strike";
+            SkillService.Instance.skillModelHovered.AddDescLines(str3);
         }
 
         public override void DisplayFX4()
         {
         }
-
-      
-
     }
 }

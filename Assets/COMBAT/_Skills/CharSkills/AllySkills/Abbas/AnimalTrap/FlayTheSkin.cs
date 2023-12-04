@@ -64,18 +64,27 @@ namespace Combat
 
         public override void DisplayFX1()
         {
+            str1 = "+25% Dmg vs targets with DoT";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
+            str2 = "Ignore Armor";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
-
         public override void DisplayFX3()
         {
         }
 
         public override void DisplayFX4()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "+25% Dmg vs targets with DoT";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Ignore Armor";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 

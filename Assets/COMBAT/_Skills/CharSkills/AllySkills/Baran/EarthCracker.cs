@@ -65,36 +65,30 @@ namespace Combat
             if (_chance.GetChance())
             {
                  targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                    , charController.charModel.charID, CharStateName.BleedLowDOT);
+                                                    , charController.charModel.charID, CharStateName.BleedLowDOT);
             }
         }
-
         public override void DisplayFX1()
         {
-            str1 = $" 150%<style=Physical> Physical</style>";
+            str1 = "150% <style=Physical>Physical</style> to first target on same lane";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
-            str2 = $"{damageExtra}%<style=Earth> Earth </style>to targets behind on same lane";
+            str2 = "{damageExtra}% <style=Earth>Earth</style> to targets behind on same lane";
             SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
-
         public override void DisplayFX3()
         {
-            str3 = $"{chance}%<style=Bleed> Low Bleed </style>";
+            str3 = $"{chance}% <style=Bleed>Low Bleed</style> on initial target";
             SkillService.Instance.skillModelHovered.AddDescLines(str3);
         }
-
         public override void DisplayFX4()
         {
         }
         public override void ApplyVFx()
         {
             SkillService.Instance.skillFXMoveController.SingleTargetRangeStrike(PerkType.None);
-
-          //  Debug.Log("Skill VFX" + desc);
         }
         public override void PopulateAITarget()
         {
@@ -102,7 +96,6 @@ namespace Combat
 
         public override void ApplyMoveFx()
         {
-           // Debug.Log("Move FX" + desc);
         }
     }
 }

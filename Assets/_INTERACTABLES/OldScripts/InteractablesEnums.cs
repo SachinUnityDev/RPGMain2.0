@@ -124,6 +124,7 @@ namespace Interactables
         CraftSlot,
         TradeScrollSlot, 
         TradeSelectSlot,
+        PotionActInCombat, 
     }
     public enum GemType
     {
@@ -256,8 +257,6 @@ namespace Interactables
         RottenFood,
         Ham, 
         Mutton,
-        
-
     }
 
     public enum ScrollNames
@@ -348,6 +347,7 @@ namespace Interactables
         SimpleRing,
         Spice,
         NyalaPelt,
+        SimpleNecklace,
     }
     public enum GenGewgawQ
     {

@@ -84,27 +84,38 @@ namespace Combat
         public override void ApplyVFx()
         {
         }
-
         public override void DisplayFX1()
         {
-            str0 = $"Ignore<style=Attributes> Armor </style>on main target";
-            SkillService.Instance.skillModelHovered.AddDescLines(str0);          
+            str0 = "Ignore Armor on initial target";
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
-
         public override void DisplayFX2()
         {
-            str1 = $"-40<style=Earth> Earth res </style>on col targets";
+            str1 = "-40<style=Earth>Earth Res</style>on col targets";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX3()
         {
+            str2 = "Gain <style=States>Vanguard</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
-
         public override void DisplayFX4()
         {
         }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Ignore Armor on initial target";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
 
-  
+            perkDesc = "-40<style=Earth>Earth Res</style>on col targets";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+
+            perkDesc = "Gain <style=States>Vanguard</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+
+            perkDesc = $"Stm cost: 9 -> 11";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+        }
+
     }
 }

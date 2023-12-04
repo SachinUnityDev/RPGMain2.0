@@ -16,7 +16,7 @@ namespace Combat
 
         public override PerkSelectState state { get; set; }
 
-        public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.None };
+        public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.TheTwister, PerkNames.TheHunter };
 
         public override string desc => "this is the trickster";
 
@@ -30,10 +30,16 @@ namespace Combat
 
         public override void ApplyFX1()
         {
+            chance = 50f; 
+            if (chance.GetChance())
+                charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                , charController.charModel.charID, CharStateName.Confused, skillModel.timeFrame, skillModel.castTime);
         }
 
         public override void ApplyFX2()
         {
+            if(targetController)
+                RegainAP();
         }
 
         public override void ApplyFX3()
@@ -50,12 +56,21 @@ namespace Combat
 
         public override void DisplayFX1()
         {
+            str1 = "50% apply <style=States>Confused</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
+            str2 = "Regain AP";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
-
+        public override void InvPerkDesc()
+        {
+            perkDesc = "50% apply <style=States>Confused</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Regain AP";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+        }
         public override void DisplayFX3()
         {
         }

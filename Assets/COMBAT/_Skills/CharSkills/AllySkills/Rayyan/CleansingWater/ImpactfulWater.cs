@@ -34,6 +34,7 @@ namespace Combat
 
         public override void ApplyFX1()
         {    
+            targetHit= 0;
             if (IsTargetEnemy())
             {
                 DynamicPosData targetDyna = GridService.Instance.GetDyna4GO(targetGO);
@@ -48,13 +49,6 @@ namespace Combat
                 targetHit = allColTargets.Count +1;
             }
         }
-
-        public override void DisplayFX1()
-        {
-            str1 = $"<style=Enemy>{skillModel.damageMod}%<style=Water> Water </style>on adj targets";
-            SkillService.Instance.skillModelHovered.AddDescLines(str1);
-        }
-
         public override void ApplyFX2()
         {
             //Debug.Log("Target Hit" + targetHit);
@@ -77,21 +71,32 @@ namespace Combat
         {
 
         }
-      
+        public override void DisplayFX1()
+        {
+            str1 = "Hit adj targets 80% <style=Water>Water</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
+        }
         public override void DisplayFX2()
         {
-            str2 = $"<style=Enemy> +3 Fortitude for every target hit";
+            str2 = "Gain 3 <style=Fortitude>Fortitude</style> for every target hit";
             SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
-
         public override void DisplayFX3()
         {
-           
+          
         }
-
         public override void DisplayFX4()
         {
             
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Hit adj targets 80% <style=Water>Water</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Gain 3 <style=Fortitude>Fortitude</style> for every target hit";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Stm cost: 5 -> 7";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
 
     }

@@ -90,7 +90,6 @@ namespace Combat
         public override void ApplyMoveFX()
         {
             GridService.Instance.gridMovement.MovebyRow(CombatService.Instance.mainTargetDynas[0], MoveDir.Forward, 2);
-
         }
 
         public override void ApplyVFx()
@@ -98,29 +97,39 @@ namespace Combat
            
         }
 
-
-
         public override void DisplayFX1()
-        {
-            
+        {   
+            str0 = $"Target-> : First on same lane";
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
-
         public override void DisplayFX2()
         {
-            str2 = $"+40%<style=Physical> Physical </style>on targets back row";
+            str2 = $"+40% Dmg vs Back Row";
             SkillService.Instance.skillModelHovered.AddDescLines(str2);
-
         }
-
         public override void DisplayFX3()
         {
-            str3 = $"<style=Move> Move </style>forward 2";
+            str3 = $"<style=Move>Move</style>forward 2";
             SkillService.Instance.skillModelHovered.AddDescLines(str3);
         }
 
         public override void DisplayFX4()
         {
          
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Cast pos: 4,5,6,7";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+
+            perkDesc = $"Target-> : First on same lane";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+
+            perkDesc = $"+40% Dmg vs Back Row";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+
+            perkDesc = $"<style=Move>Move</style>forward 2";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 }

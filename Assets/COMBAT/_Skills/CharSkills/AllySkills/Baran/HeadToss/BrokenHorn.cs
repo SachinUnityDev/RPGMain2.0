@@ -26,6 +26,7 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
+        int buffID = -1; 
         public override void SkillSelected()
         {
             base.SkillSelected();
@@ -41,8 +42,8 @@ namespace Combat
             float percentHP = hpData.currValue / hpData.maxLimit;
             if (percentHP < 0.4f)
             {
-                charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.luck
-                    , +6, false);
+              buffID = charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, AttribName.luck
+                    , +6, TimeFrame.Infinity, -1,true);
             }
         }
          // luck increase for skill use only   
@@ -53,14 +54,15 @@ namespace Combat
                 if(targetController.charStateController.HasCharDOTState(CharStateName.BleedLowDOT))
                 {
                     targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
-                                          , DamageType.Physical
-                                          , skillModel.damageMod, skillModel.skillInclination, false, true);
+                                          , DamageType.Physical, skillModel.damageMod, skillModel.skillInclination, false, true);     
                 }
                 else
                 {
                     targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
                                           , DamageType.Physical, skillModel.damageMod, skillModel.skillInclination);
                 }
+                charController.buffController.RemoveBuff(buffID);
+                buffID = -1;
             }
         }
 
@@ -83,176 +85,31 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str1 = $"Hits with +6<style=Attributes> Luck </style> on Bleeding targets";
-            SkillService.Instance.skillModelHovered.AddDescLines(str1); 
+            str1 = "If self HP < 40%: Strike with +6 Luck";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
-
-            str2 = $"+6<style=Attributes> Acc </style>if self HP < 40%";
+            str2 = "True Strike vs <style=Bleed>Bleeding</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str2);
-
         }
 
         public override void DisplayFX3()
-        {
-          
+        {          
         }
 
         public override void DisplayFX4()
         {
         }
-
-        public override void PostApplyFX()
+        public override void InvPerkDesc()
         {
-            base.PostApplyFX();          
-            charController.ChangeAttrib(CauseType.CharSkill, (int)skillName, charID, AttribName.luck
-                    , -6, false);
+            perkDesc = "If self HP < 40%: Strike with +6 Luck";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "True Strike vs <style=Bleed>Bleeding</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Stm cost: 5 -> 7";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
 
-   
     }
-
-
-
-
 }
-
-
-//        public override CharNames charName => CharNames.Baran;
-
-//        public override SkillNames skillName => SkillNames.HeadToss;
-
-//        public override SkillLvl skillLvl => SkillLvl.Level3;
-
-//        private PerkSelectState _state = PerkSelectState.Clickable;
-//        public override PerkSelectState skillState { get => _state; set => _state = value; }
-//        public override PerkNames perkName => PerkNames.BrokenHorn;
-
-//        public override PerkType perkType => PerkType.A3;
-
-//        public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.None };
-
-//        public override string desc => " Broken Horn";
-
-//        private float _chance = 60f;
-//        public override float chance { get => _chance; set => _chance = value; }      
-
-//        public override void SkillInit()
-//        {
-//            skillModel = SkillService.Instance.allSkillModels
-//                                                .Find(t => t.skillName == skillName);
-//            charController = CharacterService.Instance.GetCharCtrlWithName(charName);
-//            skillController = SkillService.Instance.currSkillMgr;
-//            charGO = SkillService.Instance.GetGO4Skill(charName);
-//        }
-//        public override void SkillHovered()
-//        {
-//            SkillInit();
-//            SkillServiceView.Instance.skillCardData.skillModel = skillModel;
-//            SkillService.Instance.SkillHovered += DisplayFX1;
-//            SkillService.Instance.SkillHovered += DisplayFX2;
-//            SkillService.Instance.SkillWipe += skillController.allSkillBases.Find(t => t.skillName == skillName
-//            && t.skillLvl == SkillLvl.Level0).WipeFX1;
-//        }
-//        public override void SkillSelected()
-//        {
-//            SkillController skillController = SkillService.Instance.currSkillMgr;
-//            SkillService.Instance.SkillApply += BaseApply;
-//            SkillService.Instance.SkillApply += ApplyFX1;
-//            SkillService.Instance.SkillApply += ApplyFX2;
-//            skillController.allSkillBases.Find(t => t.skillName == skillName && t.skillLvl == SkillLvl.Level0).RemoveFX1();
-//        }
-//        public override void BaseApply()
-//        {
-//            targetGO = SkillService.Instance.currentTargetDyna.charGO;
-//            targetController = targetGO.GetComponent<CharController>();
-//        }
-
-//        public override void ApplyFX1()
-//        {
-//            if (CkhNSetInCoolDown() || appliedOnce || IsTargetMyAlly()) return;
-//                StatData hpData = targetController.GetStat(StatsName.health); 
-
-
-//        }
-
-//        public override void ApplyFX2()
-//        {
-//        }
-
-//        public override void ApplyFX3()
-//        {
-//        }
-
-//        public override void ApplyFX4()
-//        {
-//        }
-
-
-//        public override void DisplayFX1()
-//        {
-//        }
-
-//        public override void DisplayFX2()
-//        {
-//        }
-
-//        public override void DisplayFX3()
-//        {
-//        }
-
-//        public override void DisplayFX4()
-//        {
-//        }
-
-//        public override void PostApplyFX()
-//        {
-//        }
-
-//        public override void PreApplyFX()
-//        {
-//        }
-
-//        public override void RemoveFX1()
-//        {
-//        }
-
-//        public override void RemoveFX2()
-//        {
-//        }
-
-//        public override void RemoveFX3()
-//        {
-//        }
-
-//        public override void RemoveFX4()
-//        {
-//        }
-
-//        public override void SkillEnd()
-//        {
-//        }
-
-
-
-//        public override void Tick()
-//        {
-//        }
-
-//        public override void WipeFX1()
-//        {
-//        }
-
-//        public override void WipeFX2()
-//        {
-//        }
-
-//        public override void WipeFX3()
-//        {
-//        }
-
-//        public override void WipeFX4()
-//        {
-//        }

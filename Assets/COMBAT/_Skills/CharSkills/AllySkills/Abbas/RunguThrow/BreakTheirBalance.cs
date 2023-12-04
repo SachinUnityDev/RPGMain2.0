@@ -42,7 +42,8 @@ namespace Combat
         public override void ApplyFX2()
         {
             if (40f.GetChance())
-                GridService.Instance.ShuffleCharSet(CombatService.Instance.mainTargetDynas); 
+                if(CombatService.Instance.mainTargetDynas.Count> 0)
+                    GridService.Instance.Move2RandomEmpty(CombatService.Instance.mainTargetDynas[0]); 
               
         }
 
@@ -60,18 +61,29 @@ namespace Combat
 
         public override void DisplayFX1()
         {
+            str1 = "40% <style=Move>Shuffle</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
+            str2 = "-2 Haste";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
-
         public override void DisplayFX3()
         {
         }
 
         public override void DisplayFX4()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "40% <style=Move>Shuffle</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "-2 Haste";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Use: 4 -> 5";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 }

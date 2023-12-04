@@ -34,28 +34,25 @@ namespace Combat
                 || targetController.charStateController.HasCharDOTState(CharStateName.Despaired)
                 || targetController.charStateController.HasCharDOTState(CharStateName.Rooted))
             {
-                ApplyBackRowDmg(true);
+                ApplyDmg(true);
             }
             else
             {
-                ApplyBackRowDmg(false);
+                ApplyDmg(false);
             }
         }
 
-        void ApplyBackRowDmg(bool isTrueStrike)
+        void ApplyDmg(bool isTrueStrike)
         {
             targetDyna = GridService.Instance.GetDyna4GO(targetController.gameObject);
             
-            if (GridService.Instance.IsTargetInBackRow(targetDyna))
+            if (GridService.Instance.IsTargetInBackRow(targetDyna)) // if back row extra dmg 
                 targetController.damageController.ApplyDamage(charController, CauseType.CharSkill,
                     (int)skillName, DamageType.Physical, (skillModel.damageMod + 40f), skillModel.skillInclination, false, isTrueStrike);
             else
                 targetController.damageController.ApplyDamage(charController, CauseType.CharSkill
                     , (int)skillName, DamageType.Physical, (skillModel.damageMod), skillModel.skillInclination,false, isTrueStrike);
-
         }
-
-
         public override void ApplyFX2()
         {
         }
@@ -74,18 +71,28 @@ namespace Combat
 
         public override void DisplayFX1()
         {
+            str1 = "True Strike vs <style=States>Feebleminded, Despaired, Confused, Rooted</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
+            str2 = "+40% Dmg vs Backrow";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
-
+       
         public override void DisplayFX3()
         {
         }
 
         public override void DisplayFX4()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "True Strike vs <style=States>Feebleminded, Despaired, Confused, Rooted</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "+40% Dmg vs Backrow";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 }

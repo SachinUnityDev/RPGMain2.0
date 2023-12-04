@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Combat
 {
-    public class LeapOfSlice : PerkBase
+    public class LeapToSlice : PerkBase
     {
         public override PerkNames perkName => PerkNames.LeapToSlice;
 
@@ -29,20 +29,7 @@ namespace Combat
         public override float chance { get => _chance; set => _chance = value; }
         public override void AddTargetPos()
         {
-            if (skillModel == null) return;
-            skillModel.targetPos.Clear();
-            CombatService.Instance.mainTargetDynas.Clear();
-            for (int i = 1; i < 8; i++)
-            {
-                CellPosData cell = new CellPosData(CharMode.Enemy, i);
-                DynamicPosData dyna = GridService.Instance.gridView.GetDynaFromPos(cell.pos, cell.charMode);
-
-                if(dyna != null)
-                {
-                    skillModel.targetPos.Add(cell); 
-                    CombatService.Instance.mainTargetDynas.Add(dyna);   
-                }
-            }
+            TargetAnyEnemy();
         }
 
         public override void SkillHovered()
@@ -56,7 +43,6 @@ namespace Combat
         public override void SkillSelected()
         {
             base.SkillSelected();
-
             SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).RemoveFX1; 
 
         }
@@ -109,37 +95,40 @@ namespace Combat
         public override void ApplyVFx()
         {
         }
-
         public override void DisplayFX1()
         {
-            //Can hit anyone from any spo
-            str0 = $"Can hit anyone from any pos";
+            str0 = "Can hit anyone from any pos";
             SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
-
         public override void DisplayFX2()
         {
-            str1 = $" if target at 5,6,7, +25% <style=Physical>Physical</style> ";
+            str1 = "+25% Dmg vs pos 5,6,7";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX3()
         {
-            str2 = $" if striker & target at 7, +50% <style=Physical>Physical</style> ";
+            str2 = "+50% Dmg vs pos 7 if self at 7";
             SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
 
         public override void DisplayFX4()
         {
         }
-
-        public override void PostApplyFX()
+        public override void InvPerkDesc()
         {
+            perkDesc = "Can hit anyone from any pos";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+
+            perkDesc = "+25% Dmg vs pos 5,6,7";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+
+            perkDesc = "+50% Dmg vs pos 7 if self at 7";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+
+            perkDesc = "Stm cost: 5 -> 7";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
 
-        public override void PreApplyFX()
-        {
-        }
     }
 
 

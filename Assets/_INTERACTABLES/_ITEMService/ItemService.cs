@@ -512,13 +512,13 @@ namespace Interactables
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Tools, (int)ToolNames.Chalice,
-                                     CauseType.Items, 2);
-                InitItemToInv(SlotType.CommonInv, ItemType.Tools, (int)ToolNames.Key,
+                InitItemToInv(SlotType.CommonInv, ItemType.Foods, (int)FoodNames.Poultry,
+                                     CauseType.Items, 1);
+                InitItemToInv(SlotType.CommonInv, ItemType.Herbs, (int)HerbNames.Aloe,
                                     CauseType.Items, 2);
-                InitItemToInv(SlotType.CommonInv, ItemType.Tools, (int)ToolNames.PlagueMask,
+                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.Ginger,
                                     CauseType.Items, 2);
-                InitItemToInv(SlotType.CommonInv, ItemType.Tools, (int)ToolNames.Shovel,
+                InitItemToInv(SlotType.CommonInv, ItemType.Fruits, (int)FruitNames.Kiwi,
                                     CauseType.Items, 2);
             }
             if (Input.GetKeyDown(KeyCode.J))

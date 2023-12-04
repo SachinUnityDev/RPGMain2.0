@@ -47,11 +47,12 @@ namespace Combat
         }
         public override void DisplayFX1()
         {
-
+            str1 = "50% regain AP vs <style=Bleed>Bleeding</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
         public override void DisplayFX2()
         {
-            str2 = $"<style=Enemy>3 5 stm dmg";
+            str2 = "Drain <style=Stamina>3-5 Stm</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
         public override void ApplyFX3()
@@ -67,12 +68,21 @@ namespace Combat
         }
         public override void ApplyVFx()
         {
-           
         }
 
         public override void ApplyMoveFX()
         {
-            
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "<style=Bleed>High Bleed</style> chance: 30% -> 60%";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+
+            perkDesc = "50% regain AP vs <style=Bleed>Bleeding</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(perkDesc);
+
+            perkDesc = "Stm drain.. 3-5";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 }

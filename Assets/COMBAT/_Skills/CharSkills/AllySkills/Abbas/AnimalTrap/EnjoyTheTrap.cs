@@ -54,8 +54,9 @@ namespace Combat
 
         public override void DisplayFX1()
         {
+            str1 = "Vs Animal: -3 Morale, else -2";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
         }
@@ -66,6 +67,11 @@ namespace Combat
 
         public override void DisplayFX4()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Vs Animal: -3 Morale, else -2";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 

@@ -1,6 +1,7 @@
 ﻿using Common;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 namespace Combat
@@ -90,24 +91,26 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str0 = $"+2<style=Attributes> Willpower </style>until eoc, stacks up to 6";
+            str0 = $"+2 Wp until eoc, stacks up to 6";
             SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
 
         public override void DisplayFX2()
         {
-            str1 = $"+5 <style=Attributes>Fortitude</style>";
+            str1 = $"+5 <style=Fortitude>Fortitude</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);           
         }
 
         public override void DisplayFX3()
         {
-            str2 = $"<style=Move> Move </style>to pos 1";
+            str2 = $"<style=Move>Move </style>to pos 1";
             SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
 
         public override void DisplayFX4()
-        {
+        {   
+            str3 = $"On use Head Toss this turn: 70% Regain AP";
+            SkillService.Instance.skillModelHovered.AddDescLines(str3);
         }
 
         public override void ApplyMoveFx()

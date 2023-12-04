@@ -14,7 +14,6 @@ namespace Combat
 
         public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.CutTheKnee
                                                                                 , PerkNames.DoubleSwing };
-
         public override string desc => "this is cut the knee";
 
         public override CharNames charName => CharNames.Abbas;
@@ -48,8 +47,6 @@ namespace Combat
 
         public override void ApplyFX2()
         {
-
-
         }
 
         public override void ApplyFX3()
@@ -66,18 +63,27 @@ namespace Combat
 
         public override void DisplayFX1()
         {
+            str1 = "Apply <style=States>Feebleminded</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
+            str2 = "Next Rungu Throw this turn: True Strike";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
-
         public override void DisplayFX3()
         {
         }
 
         public override void DisplayFX4()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Apply <style=States>Feebleminded</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Next Rungu Throw this turn: True Strike";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 }

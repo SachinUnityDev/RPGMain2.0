@@ -30,7 +30,6 @@ namespace Combat
             skillModel.castPos.Clear();
             skillModel.castPos = new List<int> { 1,2,3,4,5,6,7 };
             skillModel.maxUsagePerCombat = 6; 
-
         }
         public override void ApplyFX1()
         {
@@ -68,7 +67,13 @@ namespace Combat
         {
         }
 
-
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Can cast from anywhere";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Use 4 -> 6";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+        }
 
     }
 }

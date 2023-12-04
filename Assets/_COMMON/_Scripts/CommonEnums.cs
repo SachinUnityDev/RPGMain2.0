@@ -83,9 +83,9 @@ namespace Common
     public enum FleeBehaviour
     {
         None,
-        Easy,
-        NeverFlees,
-        Hard,
+        Easy,// 60% flee Combat
+        NeverFlees,// 0 flee Combat
+        Hard, // 30% flee combat
     }
      public enum CharFleeState
      {

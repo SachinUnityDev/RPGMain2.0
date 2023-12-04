@@ -331,22 +331,22 @@ namespace Combat
             if (charMode == CharMode.Ally)
             {
                 // fortitude
-                StatData fortData = charController.GetStat(StatName.fortitude);
-                Transform fortCircleTrans = PortraitPanelAlly.transform.GetChild(3);
+                //StatData fortData = charController.GetStat(StatName.fortitude);
+                //Transform fortCircleTrans = PortraitPanelAlly.transform.GetChild(3);
 
-                // Fortitude Update 
-                if (fortData.currValue >= 0)
-                {
-                    fortCircleTrans.GetChild(0).GetChild(0).GetComponent<Image>().fillAmount = fortData.currValue / fortData.maxLimit;
-                }
-                else if (fortData.currValue <= 0)
-                {
-                    fortCircleTrans.GetChild(0).GetChild(1).GetComponent<Image>().fillAmount = Mathf.Abs(fortData.currValue / fortData.maxLimit);
-                }
-                fortCircleTrans.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = fortData.currValue.ToString();
-                float fortOrg = charController.GetAttrib(AttribName.fortOrg).currValue; 
+                //// Fortitude Update 
+                //if (fortData.currValue >= 0)
+                //{
+                //    fortCircleTrans.GetChild(0).GetChild(0).GetComponent<Image>().fillAmount = fortData.currValue / fortData.maxLimit;
+                //}
+                //else if (fortData.currValue <= 0)
+                //{
+                //    fortCircleTrans.GetChild(0).GetChild(1).GetComponent<Image>().fillAmount = Mathf.Abs(fortData.currValue / fortData.maxLimit);
+                //}
+                //fortCircleTrans.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = fortData.currValue.ToString();
+                //float fortOrg = charController.GetAttrib(AttribName.fortOrg).currValue; 
 
-                fortCircleTrans.DORotate(new Vector3(0, 0, -fortOrg * 6), 0.5f);
+                //fortCircleTrans.DORotate(new Vector3(0, 0, -fortOrg * 6), 0.5f);
             }       
         }
         public void UpdateTurnBtn(CharController charController)

@@ -39,7 +39,11 @@ namespace Combat
         {
             base.BaseApply();
             if (targetController)
+            {
                 dmgMod += 10f;
+                skillModel.damageMod= dmgMod;
+            }
+                
             CombatEventService.Instance.OnEOC -= OnEOC;
             CombatEventService.Instance.OnEOC += OnEOC;
         }
@@ -73,8 +77,9 @@ namespace Combat
 
         public override void DisplayFX1()
         {
+            str1 = "Each next Rungu Throw: +10% Dmg until eoc";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
         }
@@ -85,6 +90,13 @@ namespace Combat
 
         public override void DisplayFX4()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Each next Rungu Throw: +10% Dmg until eoc";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Stm cost: 7 -> 8";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 

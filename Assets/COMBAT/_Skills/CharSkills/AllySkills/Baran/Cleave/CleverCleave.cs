@@ -46,23 +46,23 @@ namespace Combat
                 }
             }
 
-                base.SkillHovered();
-                if(isEdgyAxeSelect)
-                    SkillService.Instance.SkillWipe += skillController.allSkillBases
-                                                .Find(t => t.skillName == skillName).WipeFX2;
-                if(isPusherSelect)
-                    SkillService.Instance.SkillWipe += skillController.allSkillBases
-                                                .Find(t => t.skillName == skillName).WipeFX1;
+                //base.SkillHovered();
+                //if(isEdgyAxeSelect)
+                //    SkillService.Instance.SkillWipe += skillController.allSkillBases
+                //                                .Find(t => t.skillName == skillName).WipeFX2;
+                //if(isPusherSelect)
+                //    SkillService.Instance.SkillWipe += skillController.allSkillBases
+                //                                .Find(t => t.skillName == skillName).WipeFX1;
         }
-        public override void SkillSelected()
-        {
-            base.SkillSelected();
-            if(isPusherSelect)
-                SkillService.Instance.SkillWipe += skillController.allSkillBases
-                                              .Find(t => t.skillName == skillName).RemoveFX1;
+        //public override void SkillSelected()
+        //{
+        //    base.SkillSelected();
+        //    if(isPusherSelect)
+        //        SkillService.Instance.SkillWipe += skillController.allSkillBases
+        //                                      .Find(t => t.skillName == skillName).RemoveFX1;
 
 
-        }
+        //}
 
         public override void BaseApply()
         {
@@ -75,7 +75,6 @@ namespace Combat
                     skillController.allPerkBases.Find(t => t.skillName == skillName
                                                            && t.skillLvl == SkillLvl.Level1
                                                            && t.state == PerkSelectState.Clicked).chance = 60f;
-
                 }
             }
 
@@ -113,7 +112,7 @@ namespace Combat
                 str0 = $"60% <style=Bleed>High Bleed</style>";
                 SkillService.Instance.skillModelHovered.AddDescLines(str0);
             if(isPusherSelect)
-                str0 = $"0% <style=Bleed>High Bleed</style>";
+                str0 = $"True Strike";
                 SkillService.Instance.skillModelHovered.AddDescLines(str0);
 
         }
@@ -131,193 +130,17 @@ namespace Combat
         public override void DisplayFX4()
         {
         }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "If Edgy Axe is picked: <style=Bleed>High Bleed</style> chance: 30% -> 60%";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
 
-  
+            perkDesc = "If Pusher is picked: True Strike";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            
+            perkDesc = "Stm cost: 6-> 8";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+        }
+
     }
 }
-
-
-//public override CharNames charName => CharNames.Baran;
-
-//        public override SkillNames skillName => SkillNames.Cleave;
-//        public override SkillLvl skillLvl => SkillLvl.Level3;
-
-//        private PerkSelectState _state = PerkSelectState.Clickable;
-//        public override PerkSelectState skillState { get => _state; set => _state = value; }
-//        public override PerkNames perkName => PerkNames.CleverCleave;
-
-//        public override PerkType perkType => PerkType.A3;
-
-//        public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.None };
-
-//        public override string desc => "Clever Cleave";
-
-//        private float _chance = 100f;
-//        public override float chance { get => _chance; set => _chance = value; }
-//        float baseFortOrg; 
-
-//        List<DynamicPosData> targetDynas = new List<DynamicPosData>();
-//        bool edgySelect = false;
-//        bool pusherSelect = false; 
-
-//        public override void SkillInit()
-//        {
-//            skillModel = SkillService.Instance.allSkillModels
-//                                            .Find(t => t.skillName == skillName);
-
-//            charController = CharacterService.Instance.GetCharCtrlWithName(charName);
-//            skillController = SkillService.Instance.currSkillMgr;
-//            charGO = SkillService.Instance.GetGO4Skill(charName);
-
-//        }
-
-//        public override void SkillHovered()
-//        {
-//            SkillInit();
-//            SkillServiceView.Instance.skillCardData.skillModel = skillModel;
-//            SkillService.Instance.SkillHovered += DisplayFX1;
-//            SkillService.Instance.SkillHovered += DisplayFX2;
-//        }      
-
-//        public override void SkillSelected()
-//        {
-//            SkillService.Instance.SkillApply += BaseApply;
-//            SkillService.Instance.SkillApply += ApplyFX1;
-//            SkillService.Instance.SkillApply += ApplyFX2;
-//             edgySelect = (skillController.allPerkBases.Any(t => t.skillName == skillName && t.skillLvl == SkillLvl.Level1
-//               & t.perkName == PerkNames.EdgyAxe));
-//             pusherSelect = (skillController.allPerkBases.Any(t => t.skillName == skillName && t.skillLvl == SkillLvl.Level1
-//           & t.perkName == PerkNames.Pusher));
-//            if (edgySelect)
-//            {
-//                skillController.allPerkBases.Find(t => t.skillName == skillName && t.skillLvl == SkillLvl.Level1
-//                & t.perkName == PerkNames.EdgyAxe).RemoveFX1();
-
-//            }           
-//            foreach (var cell in skillModel.targetPos)
-//            {
-//                targetDynas.Add(GridService.Instance.gridView?.GetDynaFromPos(cell.pos, cell.charMode));
-//            }
-
-//        }
-//        public override void PreApplyFX()
-//        {
-
-//        }
-//        public override void BaseApply()
-//        {
-//            CombatEventService.Instance.OnEOR += Tick;
-
-//        }
-
-//        public override void ApplyFX1()
-//        {
-//            if (edgySelect)
-//            {
-//                if (_chance.GetChance())
-//                    targetDynas.ForEach(t => CharStatesService.Instance
-//                                .SetCharState(t.charGO, CharStateName.BleedHighDOT));
-//            }
-//        }
-
-//        public override void ApplyFX2()
-//        {
-//            if (pusherSelect)
-//            {
-//                // tap if to fortitude value @ start of Combat
-
-//            }
-
-
-//        }
-
-//        public override void ApplyFX3()
-//        {
-
-//        }
-
-//        public override void ApplyFX4()
-//        {
-
-//        }
-//        public override void Tick()
-//        {
-
-//        }
-//        public override void SkillEnd()
-//        {
-
-//        }
-
-//        public override void DisplayFX1()
-//        {
-
-//        }
-
-//        public override void DisplayFX2()
-//        {
-
-//        }
-
-//        public override void DisplayFX3()
-//        {
-
-//        }
-
-//        public override void DisplayFX4()
-//        {
-
-//        }
-
-//        public override void PostApplyFX()
-//        {
-
-//        }
-
-
-
-//        public override void RemoveFX1()
-//        {
-
-//        }
-
-//        public override void RemoveFX2()
-//        {
-
-//        }
-
-//        public override void RemoveFX3()
-//        {
-
-//        }
-
-//        public override void RemoveFX4()
-//        {
-
-//        }
-
-
-
-
-
-
-
-//        public override void WipeFX1()
-//        {
-
-//        }
-
-//        public override void WipeFX2()
-//        {
-
-//        }
-
-//        public override void WipeFX3()
-//        {
-
-//        }
-
-//        public override void WipeFX4()
-//        {
-
-//        }

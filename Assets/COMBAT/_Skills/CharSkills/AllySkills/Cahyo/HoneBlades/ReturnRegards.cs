@@ -43,7 +43,7 @@ namespace Combat
         }
         public override void DisplayFX1()
         {
-            str1 = $"<style=Enemy> retaliates with Wrist spin for adj Targets";
+            str1 = "Retaliates if any adj allies are hit";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
         public override void SkillEnd()
@@ -85,6 +85,11 @@ namespace Combat
         public override void ApplyMoveFX()
         {
            
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Retaliates if any adj allies are hit";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);        
         }
     }
 

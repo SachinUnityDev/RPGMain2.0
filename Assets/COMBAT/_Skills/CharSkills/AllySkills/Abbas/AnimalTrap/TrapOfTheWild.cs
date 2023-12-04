@@ -27,19 +27,22 @@ namespace Combat
         public override void SkillHovered()
         {
             base.SkillHovered();
-            skillModel.dmgType[0] = DamageType.Earth; 
+            skillModel.dmgType[0] = DamageType.Earth;
+            skillModel.skillInclination = SkillInclination.Magical;
+
+            SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).WipeFX1;
+
         }
         public override void ApplyFX1()
         {
-            targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
-                            , skillModel.dmgType[0], skillModel.damageMod, skillModel.skillInclination, true);
+            if (targetController)
+                targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                                            , charController.charModel.charID, CharStateName.PoisonedLowDOT);
         }
 
         public override void ApplyFX2()
         {
-            if(targetController)
-            targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                                        , charController.charModel.charID, CharStateName.PoisonedLowDOT);
+        
         }
 
         public override void ApplyFX3()
@@ -56,18 +59,30 @@ namespace Combat
 
         public override void DisplayFX1()
         {
+            str1 = $"{skillModel.damageMod}% <style=Earth>Earth</style> Dmg";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
+            str2 = $"100% <style=Earth>Low Poison</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
-
         public override void DisplayFX3()
         {
+            str3 = "Ignore <style=Earth>Earth Res</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str3);
         }
-
         public override void DisplayFX4()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = $"{skillModel.damageMod}% <style=Earth>Earth</style> Dmg";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = $"100% <style=Earth>Low Poison</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Ignore <style=Earth>Earth Res</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 }

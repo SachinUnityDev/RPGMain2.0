@@ -64,7 +64,7 @@ namespace Combat
                 }
             }
 
-            if(chance >= 3)
+            if(chance == 3)
             {
                 RegainAP(); 
             }
@@ -82,11 +82,7 @@ namespace Combat
               
         }
 
-        //public override void SkillEnd()
-        //{
-        //    base.SkillEnd();       
-          
-        //}
+    
         public override void ApplyFX3()
         {
         }
@@ -96,16 +92,17 @@ namespace Combat
         public override void ApplyVFx()
         {
         }
-
         public override void DisplayFX1()
         {
-            str1 = $"<style=Enemy>If Can't <style=Move>Push,</style> apply<style=States> Rooted </style>, {skillModel.castTime} rds";
-            SkillService.Instance.skillModelHovered.AddDescLines(str1);
+            str0 = "If pushes 3 targets at once: Regain AP";
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
-
         public override void DisplayFX2()
         {
+            str1 = "Gain 3 <style=Fortitude>Fortitude</style> per pushed enemy";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
+   
 
         public override void DisplayFX3()
         {
@@ -114,7 +111,14 @@ namespace Combat
         public override void DisplayFX4()
         {
         }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "If pushes 3 targets at once: Regain AP";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
 
-       
+            perkDesc = "Gain 3 <style=Fortitude>Fortitude</style> per pushed enemy";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);            
+        }
+
     }
 }

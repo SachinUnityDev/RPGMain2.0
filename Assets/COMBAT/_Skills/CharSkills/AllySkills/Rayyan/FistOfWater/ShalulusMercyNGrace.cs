@@ -26,19 +26,18 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        //public List<CharController> allCharControllers = new List<CharController>();
         public override void AddTargetPos()
         {
             if (skillModel == null) return;
             for (int i = 1; i < 8; i++)
             {            
-                    CellPosData cellPosData = new CellPosData(CharMode.Ally, i);
-                    DynamicPosData dyna = GridService.Instance.gridView.GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
-                    if (dyna != null)
-                    {
-                        skillModel.targetPos.Add(cellPosData);
-                        CombatService.Instance.mainTargetDynas.Add(dyna);
-                    }                
+                CellPosData cellPosData = new CellPosData(CharMode.Ally, i);
+                DynamicPosData dyna = GridService.Instance.gridView.GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
+                if (dyna != null)
+                {
+                    skillModel.targetPos.Add(cellPosData);
+                    CombatService.Instance.mainTargetDynas.Add(dyna);
+                }                
             }
         }
         public override void SkillHovered()
@@ -52,12 +51,12 @@ namespace Combat
 
         public override void ApplyFX1()
         {
-            AttribData statData = charController.GetAttrib(AttribName.morale);
+            AttribData statDataMorale = charController.GetAttrib(AttribName.morale);
             foreach (DynamicPosData dyna in CombatService.Instance.mainTargetDynas)
             {
                 if(dyna.charMode== CharMode.Ally)
                 {
-                    if (statData.currValue < 12)
+                    if (statDataMorale.currValue < 12)
                     {
                         dyna.charGO.GetComponent<CharController>().damageController
                          .ApplyDamage(charController, CauseType.CharSkill, (int)SkillNames.FistOfWater, DamageType.Heal
@@ -85,16 +84,7 @@ namespace Combat
         }
 
         public override void ApplyFX3()
-        {
-            //foreach (DynamicPosData dyna in CombatService.Instance.mainTargetDynas)
-            //{
-            //    if (dyna.charMode == CharMode.Ally)
-            //    {
-            //        dyna.charGO.GetComponent<CharController>().charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-            //                                , charController.charModel.charID, CharStateName.Soaked);
-            //    }
-            //}
-            
+        {   
         }
 
         public override void ApplyMoveFX()
@@ -107,33 +97,34 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str0 = $"<style=Heal>Heal</style> 5-10";
+            str0 = "On allies:<style=Heal>Heal</style> 5-10 and";
             SkillService.Instance.skillModelHovered.AddDescLines(str0);
-
-            str1 = $"If <style=Attribute>Morale</style> 12, <style=Heal>Heal</style> 12-24";
-            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
-            // add clear 
-            // add soaked 
+            str1 = "clear <style=Burn>Burn</style> and <style=Earth>Poison</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX3()
         {
+            str1 = "If Morale 12: <style=Heal>Heal</style> 10-20";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX4()
         {
         }
-
-        public override void PostApplyFX()
+        public override void InvPerkDesc()
         {
-        }
-
-        public override void PreApplyFX()
-        {
+            perkDesc = "<style=Water>Water</style> Dmg: 160% -> 120%";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Added target: allies";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "On allies:<style=Heal>Heal</style> 5-10 and clear <style=Burn>Burn</style> and <style=Earth>Poison</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Use -> 4 rd cd";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "If Morale 12: <style=Heal>Heal</style> 10-20";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 }

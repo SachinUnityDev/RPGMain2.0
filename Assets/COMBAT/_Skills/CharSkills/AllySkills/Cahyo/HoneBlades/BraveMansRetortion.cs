@@ -37,9 +37,7 @@ namespace Combat
             if (skillController.IsPerkClicked(skillName, PerkNames.QuickToReact))
             {
                 skillController.allPerkBases.Find(t => t.skillName == skillName).chance = 60f;
-
             }
-
         }
         void RetaliatedAdjHitWithMelee(DmgAppliedData dmgAppliedData)
         {
@@ -53,14 +51,14 @@ namespace Combat
                 if (adjDyna.charGO.GetComponent<CharController>() == dmgAppliedData.targetController)
                 {
                     charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID
-                                                            , StatName.fortitude, +3, true); 
+                                                            , StatName.fortitude, +3, true);
+                    break;
                 }
             }
         }
         public override void SkillEnd()
         {
-            CombatEventService.Instance.OnDamageApplied -= RetaliatedAdjHitWithMelee;
-            //roundEnd = 0;
+            CombatEventService.Instance.OnDamageApplied -= RetaliatedAdjHitWithMelee;           
         }
 
         
@@ -78,13 +76,15 @@ namespace Combat
         }
         public override void DisplayFX1()
         {
-            str1 = $"<style=Enemy> self gain +3 fort for every retaliation";
+            str1 = "Gain 3 Fortitude when Retaliate";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
         public override void DisplayFX2()
-        {          
-        }    
-
+        {
+            str2 = "Regain AP 20% -> 60%";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
+        }
+      
         public override void DisplayFX3()
         {
         }
@@ -98,6 +98,14 @@ namespace Combat
         }
         public override void ApplyMoveFX()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Gain 3 Fortitude when Retaliate";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+
+            perkDesc = "Regain AP 20% -> 60%";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 

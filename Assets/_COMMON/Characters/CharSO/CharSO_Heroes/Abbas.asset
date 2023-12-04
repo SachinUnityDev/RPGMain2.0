@@ -35,7 +35,7 @@ MonoBehaviour:
   charNameStr: Abbas
   availOfChar: 1
   stateOfChar: 2
-  fameBehavior: 6
+  fameBehavior: 0
   baseCharLoc: 1
   charRole: 1
   raceType: 5
@@ -45,10 +45,7 @@ MonoBehaviour:
   archeType: 2
   fleeBehaviour: 0
   charFleeState: 0
-  provisionItems:
-  - itemType: 0
-    itemName: 0
-    genGewgawQ: 0
+  provisionItems: []
   earningsItems: []
   earningShare: 0
   CompanionPreReqOpt1: []

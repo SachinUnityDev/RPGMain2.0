@@ -24,7 +24,7 @@ namespace Combat
 
       //  public override List<DynamicPosData> targetDynas => new List<DynamicPosData>();  
 
-        float stackAmt;
+        float stackAmt=0;
 
         float chgMin;
         float chgMax;
@@ -32,7 +32,7 @@ namespace Combat
         {
             base.SkillHovered();
             skillModel.cd = 2;
-            stackAmt = 0f;
+            
         }
         public override void BaseApply()
         {
@@ -85,59 +85,50 @@ namespace Combat
         {
             if (IsTargetAlly())
             {
-                CombatEventService.Instance.OnDamageApplied += EOCTick;
-                CombatEventService.Instance.OnEOC += EOCEnd; 
-            }
+                targetController.strikeController.ApplyDmgAltBuff(12f, CauseType.CharSkill, (int)skillName
+                , charController.charModel.charID, TimeFrame.EndOfCombat, 1, true, AttackType.None, DamageType.Heal);
+             }
         }
         public override void ApplyMoveFX()
         {
         }
-        void EOCTick(DmgAppliedData dmgAppliedData)
-        {
-            if (dmgAppliedData.targetController.charModel.charID != targetController.charModel.charID) return;
-            if (dmgAppliedData.dmgType != DamageType.Heal) return;
-            if (stackAmt <= 36)
-            {
-                stackAmt += 12;
-                float addedVal = dmgAppliedData.dmgValue * stackAmt/100f;
-                targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Heal, addedVal);                
-            }       
-        }
-        void EOCEnd()
-        {
-            CombatEventService.Instance.OnDamageApplied -= EOCTick;
-            CombatEventService.Instance.OnEOC -= EOCEnd;
-        }
+ 
 
         public override void ApplyVFx()
         {
         }
-
         public override void DisplayFX1()
         {
-            str1 = $"+60% Armor, {skillModel.castTime} rd";
+            str1 = "+60% Armor and +20 <style=Fire>Fire Res</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
-
         }
-
         public override void DisplayFX2()
         {
-            str2 = $"+20 <style=Fire>Fire res</style>, {skillModel.castTime} rd";
+            str2 = "+12% <style=Heal>Healing</style> Received until eoc";
             SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
-
         public override void DisplayFX3()
         {
-            str3 = $"+12% <style=Heal>Heal</style> recieved until EOC, stack up to 36%";
+            str3 = "On use Water Shell this turn: 50% Regain AP";
             SkillService.Instance.skillModelHovered.AddDescLines(str3);
         }
-
         public override void DisplayFX4()
         {
-            str0 = $"regain to 50% ";
-            SkillService.Instance.skillModelHovered.AddDescLines(str0);
+            
         }
-        
+
+        public override void InvPerkDesc()
+        {
+            perkDesc = "+60% Armor and +20 <style=Fire>Fire Res</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "+12% <style=Heal>Healing</style> Received until eoc";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "On use Water Shell this turn: 50% Regain AP";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Cd: 0 -> 2";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+        }
+
     }
 
 

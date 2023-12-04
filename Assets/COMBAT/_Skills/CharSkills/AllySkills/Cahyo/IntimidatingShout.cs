@@ -23,19 +23,20 @@ namespace Combat
         public override float chance { get => _chance; set => _chance = value; }
         public override void PopulateTargetPos()
         {
-            AllInCharMode(CharMode.Enemy); 
+            AnyWithCharMode(CharMode.Enemy); 
         }
         public override void ApplyFX1()
         {
-           
+            foreach (var dyna in CombatService.Instance.mainTargetDynas)
+            {
+                dyna.charGO.GetComponent<CharController>().buffController
+                    .ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                    , AttribName.morale, -2, skillModel.timeFrame, skillModel.castTime, false);
+            }
         }
         public override void ApplyFX2()
         {        
-            foreach (var dyna in CombatService.Instance.mainTargetDynas)
-            {
-                dyna.charGO.GetComponent<CharController>().buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, AttribName.morale, -2
-                    , skillModel.timeFrame, skillModel.castTime, false);
-            }
+           
         }
         public override void ApplyFX3()
         {
@@ -43,16 +44,12 @@ namespace Combat
         }
         public override void DisplayFX1()
         {
-            str0 = "<margin=1.2em>Buff, Debuff";
+            str0 = "-2 Morale";
             SkillService.Instance.skillModelHovered.AddDescLines(str0);
-
-            str1 = $"<style=Performer>+3 Acc and Dodge";
-            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
         public override void DisplayFX2()
         {
-            str2 = $"<style=Enemy> -2 Morale";
-            SkillService.Instance.skillModelHovered.AddDescLines(str2);
+          
         }
 
         public override void DisplayFX3()

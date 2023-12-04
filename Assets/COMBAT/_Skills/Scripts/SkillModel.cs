@@ -40,6 +40,7 @@ namespace Combat
         public List<PerkHexData> allPerkHexes = new List<PerkHexData>();
         public List<PerkType> perkChain = new List<PerkType>();
         List<string> descLines = new List<string>();
+        List<string> perkDescLines = new List<string>();
 
         [Header("Use Limit")]
         public int noOfTimesUsed;
@@ -72,7 +73,17 @@ namespace Combat
             descLines1 = descLines.DeepClone();
             return descLines1;
         }
-
+        public void AddPerkDescLines(string str)
+        {
+            if (!perkDescLines.Any(t => t == str))
+                descLines.Add(str);
+        }
+        public List<string> GetPerkDescLines()
+        {
+            List<string> perkDescLines1 = new List<string>();
+            perkDescLines1 = perkDescLines.DeepClone();
+            return perkDescLines1;
+        }
         public SkillModel(SkillData _skillDataSO)
         {
           

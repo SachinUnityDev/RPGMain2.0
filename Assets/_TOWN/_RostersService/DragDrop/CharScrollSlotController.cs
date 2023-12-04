@@ -30,7 +30,8 @@ namespace Common
         [SerializeField] Transform nameContainer;
         [SerializeField] TextMeshProUGUI scrollName;
         [Header("To be ref")]
-        public Transform portTransGO; 
+        public Transform portTransGO;
+        [SerializeField] CharSlotPlankContainer charSlotPlankContainer;
         public int slotID => -1;
         public RosterSlotType slotType => RosterSlotType.CharScrollSlot;
         public CharNames charInSlot { get; set; }
@@ -133,8 +134,10 @@ namespace Common
                             = RosterService.Instance.scrollSelectCharModel.classType.ToString().CreateSpace();
             
             SetIPortraitValues();
+            charSlotPlankContainer.InitPlankView(charModel);
         }
 
+      
         public bool isSlotFull()
         {
             if (charInSlot != CharNames.None)

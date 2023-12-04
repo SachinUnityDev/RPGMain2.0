@@ -40,8 +40,6 @@ namespace Combat
                     targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
                     , AttribName.staminaRegen, stmRegen, skillModel.timeFrame, skillModel.castTime, true); 
         }
-
-
         void KrisLungeRegainAP(SkillEventData skilleventData)
         {
             if (80f.GetChance())
@@ -70,20 +68,20 @@ namespace Combat
         public override void ApplyMoveFx()
         {
         }
-
         public override void DisplayFX1()
         {
-            
+            str1 = "On use Kris Lunge this turn:";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
-           
+            str2 = "%80 Regain AP";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
-
         public override void DisplayFX3()
         {
-           
+            str3 = "+3-5 Stm Regen";
+            SkillService.Instance.skillModelHovered.AddDescLines(str3);
         }
 
         public override void DisplayFX4()

@@ -28,27 +28,27 @@ namespace Combat
 
         public override void AddTargetPos()
         {
-            if (skillModel != null)
-            {
-                skillModel.targetPos.Clear();
-                CombatService.Instance.mainTargetDynas.Clear();
-                for (int i = 1; i < 8; i++)
-                {
-                    CellPosData cellPosData = new CellPosData(CharMode.Enemy, i);
-                    DynamicPosData dyna = GridService.Instance.gridView.GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
-                    if (dyna != null)
-                    {
-                        CombatService.Instance.mainTargetDynas.Add(dyna);
-                        skillModel.targetPos.Add(cellPosData);
-                    }
-                }
-            }
+            //if (skillModel != null)
+            //{
+            //    skillModel.targetPos.Clear();
+            //    CombatService.Instance.mainTargetDynas.Clear();
+            //    for (int i = 1; i < 8; i++)
+            //    {
+            //        CellPosData cellPosData = new CellPosData(CharMode.Enemy, i);
+            //        DynamicPosData dyna = GridService.Instance.gridView.GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
+            //        if (dyna != null)
+            //        {
+            //            CombatService.Instance.mainTargetDynas.Add(dyna);
+            //            skillModel.targetPos.Add(cellPosData);
+            //        }
+            //    }
+            //}
+            TargetAnyEnemy();
         }
         public override void SkillHovered()
         {
             base.SkillHovered();
             skillModel.cd = 1; 
-
         }
 
         public override void ApplyFX1()
@@ -78,15 +78,15 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str1 = $"Add all targets";
+            str1 = "Target -> anyone";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
-          
+            str2 = "Regain AP";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
-
+      
         public override void DisplayFX3()
         {
            
@@ -95,6 +95,15 @@ namespace Combat
         public override void DisplayFX4()
         {
            
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Target -> anyone";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Regain AP";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Cd: 0 -> 1";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 

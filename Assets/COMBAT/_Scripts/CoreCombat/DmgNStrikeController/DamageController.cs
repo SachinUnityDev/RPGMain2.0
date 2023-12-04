@@ -162,9 +162,6 @@ namespace Combat
                     }
                 }
             }
-            
-
-
             // ask strike controller do you have a extra dmg buff against me 
             float damageAlt = striker.GetComponent<StrikeController>()
                                 .GetDmgAlt(charController.charModel, attackType, _dmgType ); 

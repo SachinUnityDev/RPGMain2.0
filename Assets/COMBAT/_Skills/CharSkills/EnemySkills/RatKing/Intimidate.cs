@@ -28,7 +28,7 @@ namespace Combat
 
         public override void PopulateTargetPos()
         {
-            AllInCharMode(CharMode.Ally); 
+            AnyWithCharMode(CharMode.Ally); 
         }
 
         public override void ApplyFX1()

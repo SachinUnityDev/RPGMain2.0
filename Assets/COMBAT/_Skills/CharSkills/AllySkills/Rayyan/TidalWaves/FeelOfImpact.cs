@@ -24,15 +24,25 @@ namespace Combat
 
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
+        public override void AddTargetPos()
+        {
+            base.AddTargetPos();
+            if (skillModel == null) return;
+            skillModel.targetPos.Clear();
+            CombatService.Instance.mainTargetDynas.Clear();
+            CombatService.Instance.mainTargetDynas.AddRange(GridService.Instance.GetFirstDiamond(CharMode.Enemy));
 
-        //  public override List<DynamicPosData> targetDynas => new List<DynamicPosData>();
+            foreach (DynamicPosData dyna in CombatService.Instance.mainTargetDynas)
+            {
+                CellPosData cell = new CellPosData(dyna.charMode, dyna.currentPos);
+                skillModel.targetPos.Add(cell);
+            }
+        }
         public override void SkillSelected()
         {
             base.SkillSelected();
-            SkillService.Instance.SkillFXRemove += skillController.allPerkBases
-                .Find(t => t.skillName == skillName && t.skillLvl == SkillLvl.Level1).RemoveFX1;
+            SkillService.Instance.SkillWipe += skillController.allSkillBases.Find(t => t.skillName == skillName).RemoveFX1;
         }
-
         public override void ApplyFX1()
         {
             if (targetController != null)
@@ -65,35 +75,37 @@ namespace Combat
         {
            
         }
-
         public override void ApplyVFx()
-        {
-           
+        {           
         }
 
         public override void DisplayFX1()
         {
-            str1 = $"+50%<style=Water> Water </style>on pos 4";
+            str0 = "Target -> First Diamond";
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
+        }
+        public override void DisplayFX2()
+        {
+            str1 = "+50% Dmg vs pos 4";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
 
-        public override void DisplayFX2()
-        {
-          
-        }
-
         public override void DisplayFX3()
-        {
-          
+        {          
         }
 
         public override void DisplayFX4()
-        {
-           
+        {           
         }
-
         public override void ApplyMoveFX()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Target -> First Diamond";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "+50% Dmg vs pos 4";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 

@@ -183,6 +183,10 @@ namespace Combat
         {
             skillDataSO = SkillService.Instance.GetSkillSO(charController.charModel.charName);
             skillData = skillDataSO.GetSkillData(skillName); 
+            if(skillData == null)
+            {
+                Debug.LogError("skilldata missing" + skillName);
+            }
             SkillInclination skillIncli = skillData.skillIncli;
             
             skillHexSO = SkillService.Instance.skillHexSO;

@@ -72,19 +72,17 @@ namespace Combat
         public override void ApplyVFx()
         {
         }
-
         public override void DisplayFX1()
         {
-            str0 = $"50%<style=Physical> Physical </style>on Bleeding target";
+            str0 = "+50%<style=Physical> Physical</style> vs <style=Physical>Bleeding</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str0);
-
         }
-
         public override void DisplayFX2()
         {
-          
+            str1 = "Target anyone";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
+    
         public override void DisplayFX3()
         {
         }
@@ -92,6 +90,13 @@ namespace Combat
         public override void DisplayFX4()
         {
         }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "+50%<style=Physical> Physical</style> vs <style=Physical>Bleeding</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
 
+            perkDesc = "Target anyone";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+        }
     }
 }

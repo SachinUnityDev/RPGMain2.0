@@ -95,11 +95,11 @@ namespace Common
                 
             }else if (droppedOn.GetComponent<IDropHandler>() == null
                 && droppedOn.transform.parent.GetComponent<IDropHandler>() == null )                            
-            {
+             {
                 Debug.Log("I drop handler NOT FOUND" + droppedOn.transform.name);
                 RosterService.Instance.rosterViewController.ReverseBack(this); 
                 RosterService.Instance.On_PortraitDragResult(false);
-            }
+             }
             else
             {
                 clone.transform.GetChild(1).gameObject.SetActive(true);

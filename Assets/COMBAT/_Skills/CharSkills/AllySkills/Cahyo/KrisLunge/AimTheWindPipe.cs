@@ -29,28 +29,29 @@ namespace Combat
             
             SkillService.Instance.SkillHovered += 
                 skillController.allPerkBases
-                .Find(t => t.skillName == skillName && t.skillLvl == SkillLvl.Level2).WipeFX1;
+                .Find(t => t.skillName == skillName && t.skillLvl == SkillLvl.Level2).WipeFX2; // stm drain
 
         }
         public override void SkillSelected()
         {
             base.SkillSelected();
-
-            SkillService.Instance.SkillFXRemove +=
-                skillController.allPerkBases
-                .Find(t => t.skillName == skillName && t.skillLvl == SkillLvl.Level2).RemoveFX1;
+            SkillService.Instance.SkillFXRemove += skillController.allPerkBases
+                        .Find(t => t.skillName == skillName && t.skillLvl == SkillLvl.Level2).RemoveFX1;
         }
 
         public override void ApplyFX1()
         {
-            if(targetController)
-                charController.ChangeStat(CauseType.CharSkill, (int)skillName
-                    , charID, StatName.fortitude, UnityEngine.Random.Range(6,9));
+            if (targetController)
+                targetController.damageController.ApplyDamage(charController,
+                                CauseType.CharSkill, (int)skillName, DamageType.StaminaDmg,
+                                UnityEngine.Random.Range(5, 8), skillModel.skillInclination);
         }
 
         public override void ApplyFX2()
         {
-            
+            if (targetController)
+                charController.ChangeStat(CauseType.CharSkill, (int)skillName
+                    , charID, StatName.fortitude, UnityEngine.Random.Range(6, 9));
         }
 
         public override void ApplyFX3()
@@ -59,18 +60,18 @@ namespace Combat
         }
         public override void DisplayFX1()
         {
-            str1 = $"cd increased 3 rd";
+            str1 = "Gain <style=Fortitude>6-8 Fortitude</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
         public override void DisplayFX2()
         {
-            str2 = $"<style=Enemy>half<style=Stamina> Stamina</style>";
+            str2 = "Drain <style=Stamina>5-7 Stm</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
+     
         public override void DisplayFX3()
         {
-            str3 = $"<style=Enemy><style=Fortitude> fortitude</style>, +6-8";
-            SkillService.Instance.skillModelHovered.AddDescLines(str3);
+           
         }
 
         public override void DisplayFX4()
@@ -84,6 +85,14 @@ namespace Combat
         public override void ApplyMoveFX()
         {
           
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Stm drain: -> 5-7";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+
+            perkDesc = "Gain <style=Fortitude>6-8 Fortitude</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 

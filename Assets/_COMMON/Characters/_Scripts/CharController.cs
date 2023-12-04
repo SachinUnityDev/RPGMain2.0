@@ -54,7 +54,10 @@ namespace Common
         public WeaponController weaponController;
 
         [Header("Armor Controller")]
-        public ArmorController armorController;     
+        public ArmorController armorController;
+
+        [Header("Flee Controller")]
+        public FleeController fleeController;
 
         float prevHPVal = 0f;
         float prevStaminaVal = 0f; 
@@ -76,7 +79,6 @@ namespace Common
                 charModel = new CharModel(_charSO);
                 if(charModel.orgCharMode == CharMode.Ally)
                 {
-
                     charModel.charID = CharService.Instance.allCharModels.Count + 1; 
                 }    
             }
@@ -106,6 +108,8 @@ namespace Common
                 // CombatEventService.Instance.OnSOT += ()=> PopulateOverCharBars(false); 
                 CombatEventService.Instance.OnEOC -= FortitudeReset2FortOrg;
                 CombatEventService.Instance.OnEOC += FortitudeReset2FortOrg;
+
+                fleeController = gameObject.AddComponent<FleeController>();
             }
 
             tempTraitController = gameObject.AddComponent<TempTraitController>();

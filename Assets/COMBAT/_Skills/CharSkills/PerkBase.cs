@@ -21,6 +21,7 @@ namespace Combat
 
         protected SkillData skillData;
         protected string str0, str1, str2, str3;
+        protected string perkDesc = ""; 
         public abstract PerkNames perkName { get; }
         public abstract PerkType perkType { get; }
         public abstract PerkSelectState state { get; set; }  // perk select ...
@@ -135,6 +136,8 @@ namespace Combat
         public abstract void DisplayFX2();
         public abstract void DisplayFX3();
         public abstract void DisplayFX4();
+        public abstract void InvPerkDesc();
+        
         public virtual void PreApplyFX() { }
         public virtual void PostApplyFX() { }
         public virtual void WipeFX1() => SkillService.Instance.SkillHovered -= DisplayFX1;
@@ -170,7 +173,24 @@ namespace Combat
             if(combatController!= null ) 
             combatController.actionPts++; 
         }
+        protected void TargetAnyEnemy()
+        {
+            if (skillModel == null) return;
+            skillModel.targetPos.Clear();
+            CombatService.Instance.mainTargetDynas.Clear();
+            for (int i = 1; i < 8; i++)
+            {
+                CellPosData cell = new CellPosData(CharMode.Enemy, i);
+                DynamicPosData dyna = GridService.Instance.gridView.GetDynaFromPos(cell.pos, cell.charMode);
 
+                if (dyna != null)
+                {
+                    skillModel.targetPos.Add(cell);
+                    CombatService.Instance.mainTargetDynas.Add(dyna);
+                }
+            }
+        }
+    
 
         #endregion
 

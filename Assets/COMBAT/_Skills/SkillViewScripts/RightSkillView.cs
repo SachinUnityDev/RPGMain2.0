@@ -71,25 +71,32 @@ namespace Common
         {
             charController = InvService.Instance.charSelectController;
             selectSkillController = charController.skillController;
+             
             skillDataSO =
                     SkillService.Instance.GetSkillSO(charController.charModel.charName);
 
             CharBGImg.sprite = skillDataSO.rightInvSkillPanelBG;
-            scrollList.Clear(); 
-            for (int i = 0; i < 4; i++)
+            scrollList.Clear();
+            if(selectSkillController.allSkillModels.Count == 0) // to ctrl bug inv view 
             {
+                charController.skillController.InitSkillList(charController);
+            }
+
+            for (int i = 0; i < selectSkillController.allSkillModels.Count; i++)
+            {
+                if (selectSkillController.allSkillModels[i].skillType == SkillTypeCombat.Retaliate)
+                    continue; 
                 scrollList.Add(selectSkillController.allSkillModels[i]); 
             }
-            if(charController.charModel.charName == CharNames.Abbas)
-            {
-                SkillModel skillModel = selectSkillController.allSkillModels
-                                        .Find(t => t.skillType == SkillTypeCombat.Uzu); 
-                scrollList.Add(skillModel);
-            }
+            //if(charController.charModel.charName == CharNames.Abbas)
+            //{
+            //    SkillModel skillModel = selectSkillController.allSkillModels
+            //                            .Find(t => t.skillType == SkillTypeCombat.Uzu); 
+            //    scrollList.Add(skillModel);
+            //}
 
             FillSkillScroll(scrollList[0]); 
 
-    
         }
 
         void OnLeftBtnPressed()

@@ -28,7 +28,7 @@ namespace Combat
             if(targetController && IsTargetAlly())
             {
                 targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                                                , charController.charModel.charID, CharStateName.Aquaborne, skillModel.timeFrame, skillModel.castTime);
+                        , charController.charModel.charID, CharStateName.Aquaborne, skillModel.timeFrame, skillModel.castTime);
             }
         }
     
@@ -54,22 +54,27 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str1 = $"<style=States> Aquaborne </style>, {skillModel.castTime} rds";
+            str1 = "Apply <style=States>Aquaborne</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
-            str0 = $"50 % chance  regain AP ";
-            SkillService.Instance.skillModelHovered.AddDescLines(str0);
-        }
-
+            str2 = "50% Regain AP upon cast";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
+        }     
         public override void DisplayFX3()
         {
         }
 
         public override void DisplayFX4()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Apply <style=States>Aquaborne</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "50% Regain AP upon cast";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 

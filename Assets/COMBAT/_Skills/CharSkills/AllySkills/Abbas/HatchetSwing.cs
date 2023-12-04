@@ -18,7 +18,7 @@ namespace Combat
         private PerkSelectState _state = PerkSelectState.Clickable;
         public override string desc => "Hatchet Swing";
 
-        private float _chance = 40f;
+        private float _chance = 50f;
         public override float chance { get => _chance; set => _chance = value; }
 
         public override StrikeTargetNos strikeNos { get; }
@@ -33,8 +33,8 @@ namespace Combat
                                        .GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
                 if (dyna != null)
                 {
-                    CombatService.Instance.mainTargetDynas.Add(dyna);   
                     skillModel.targetPos.Add(cellPosData);
+                    CombatService.Instance.mainTargetDynas.Add(dyna);                       
                 }
             }
         }
@@ -62,13 +62,12 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str0 = $"{skillModel.damageMod}%<style=Physical> Physical,</style> dmg";
+            str0 = $"{skillModel.damageMod}% <style=Physical>Physical</style> Dmg";
             SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
-
         public override void DisplayFX2()
         {
-            str1 = $"{chance}%<style=Bleed> Low Bleed</style>";
+            str1 = $"{chance}% <style=Bleed>Low Bleed</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
 

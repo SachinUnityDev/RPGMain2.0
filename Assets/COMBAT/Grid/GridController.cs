@@ -6,6 +6,9 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 using System.Linq;
 using Common;
+using Spine.Unity;
+using System;
+
 namespace Combat
 {
     
@@ -37,6 +40,11 @@ namespace Combat
         {
             // for single , if lane/tris/dia/hex 
             // use switch case
+           
+            // IF ROOTED CANNOT BE MOVED
+            CharStateController charStateController = dyna.charGO.GetComponent<CharStateController>();
+            if (charStateController.HasCharState(CharStateName.Rooted)) return; 
+
             if (targetCell < 1 || targetCell > 7) return;
             if (dyna == null) return;
            // Debug.Log("Target cell " + targetCell); 
@@ -47,7 +55,49 @@ namespace Combat
            // GridService.Instance.gridView.CharOnTurnHL(dyna);
 
             GridService.Instance.On_PosChg(dyna, targetCell);
+            SetCharLayers(dyna, targetCell);
+        }
 
+        void SetCharLayers(DynamicPosData dyna, int targetCell)
+        {
+            GameObject charGO = dyna.charGO;
+
+            if (targetCell == 2 || targetCell == 5)// back lane 
+            {
+                charGO.transform.GetChild(0).GetComponent<SkeletonAnimation>()
+                    .GetComponent<MeshRenderer>().sortingOrder = -3;
+                HPBarRenderSet(charGO, -3); 
+
+            }
+            else if (targetCell == 1 || targetCell == 4 || targetCell == 7) // mid Lane
+            {
+                charGO.transform.GetChild(0).GetComponent<SkeletonAnimation>()
+                   .GetComponent<MeshRenderer>().sortingOrder = 0;
+                HPBarRenderSet(charGO, 0);
+            }
+            else if (targetCell == 3 || targetCell == 6) // Front Lane
+            {
+                charGO.transform.GetChild(0).GetComponent<SkeletonAnimation>()
+                  .GetComponent<MeshRenderer>().sortingOrder = 3;
+                HPBarRenderSet(charGO, 3);
+            }
+        }
+
+        void HPBarRenderSet(GameObject charGO, int order)
+        {
+            SpriteRenderer[] allSpriteRenderer = charGO.GetComponentsInChildren<SpriteRenderer>();
+            foreach (SpriteRenderer spriteRen in allSpriteRenderer)
+            {
+                spriteRen.sortingOrder = order;
+                if(spriteRen.gameObject.tag == "CharOrangeBar")
+                {
+                    spriteRen.sortingOrder = order + 1; 
+                }
+                if (spriteRen.gameObject.tag == "CharFillBar")
+                {
+                    spriteRen.sortingOrder = order + 2;
+                }
+            }
         }
 
         public void SwapPos (DynamicPosData targetDyna, DynamicPosData selectDyna)
@@ -58,7 +108,6 @@ namespace Combat
            
             Move2Pos(selectDyna, targetPos);
             Move2Pos(targetDyna,selectPos );
-           
         }
 
         public List<DynamicPosData> GetAvailableDynas(DynamicPosData selectDyna)

@@ -23,7 +23,6 @@ namespace Combat
         public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.None };
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
-      //  public override List<DynamicPosData> targetDynas => new List<DynamicPosData>();
 
         public override SkillModel skillModel { get ; set ; }
       
@@ -33,14 +32,14 @@ namespace Combat
             skillModel.damageMod = 80f; 
             if (skillController != null)
             {
-               
                 SkillService.Instance.SkillWipe += skillController.allSkillBases
-                                               .Find(t => t.skillName == skillName).WipeFX4;   // remove only allies soak      
+                                                    .Find(t => t.skillName == skillName).WipeFX2;   // remove only allies soak      
                 skillModel.attackType = AttackType.Ranged;
             }               
         }
         public override void AddTargetPos()
         {
+            // Added enemy targets 
             if (skillModel == null) return;
             for (int i = 1; i < 8; i++)
             {
@@ -64,35 +63,31 @@ namespace Combat
                             , (int)skillName, DamageType.Water, skillModel.damageMod, skillModel.skillInclination);
             }
         }
-        public override void DisplayFX1()
-        {
-            str1 = $"<style=Enemy> {skillModel.damageMod}% <style=Water>Water </style>";
-            SkillService.Instance.skillModelHovered.AddDescLines(str1);
-           
-        }
+     
         public override void ApplyFX2()
         {
             if (IsTargetEnemy())
                 targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
                                 , AttribName.haste, -2f, skillModel.timeFrame, skillModel.castTime, false);
         }
-        public override void DisplayFX2()
-        {
-            str2 = $"<style=Enemy> -2 Haste, {skillModel.castTime} rd";
-            SkillService.Instance.skillModelHovered.AddDescLines(str2);
-          
-
-        }
         public override void ApplyFX3()
         {
-            
+
+        }
+        public override void DisplayFX1()
+        {
+            str0 = "May target enemy";
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
+        }
+        public override void DisplayFX2()
+        {
+            str1 = $"{skillModel.damageMod}% <style=Water>Water</style> Dmg";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
         public override void DisplayFX3()
         {
-            str3 = $"<style=Allies><style=Enemy> <style=States> Soaked, </style>{skillModel.castTime} rd";
-            SkillService.Instance.skillModelHovered.AddDescLines(str3);
-          
-
+            str2 = $"+2 Haste on ally, -2 on enemy";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
         public override void ApplyVFx()
         {
@@ -105,7 +100,14 @@ namespace Combat
         {
 
         }
-  
+        public override void InvPerkDesc()
+        {
+            perkDesc = "May target enemy for 80% <style=Water>Water</style> Dmg";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "-2 Haste on enemy";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+        }
+
     }
 
 }

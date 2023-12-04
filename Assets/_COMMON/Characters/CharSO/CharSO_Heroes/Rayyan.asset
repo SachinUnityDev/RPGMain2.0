@@ -35,7 +35,7 @@ MonoBehaviour:
   charNameStr: Rayyan
   availOfChar: 1
   stateOfChar: 2
-  fameBehavior: 3
+  fameBehavior: 4
   baseCharLoc: 1
   charRole: 2
   raceType: 5
@@ -43,28 +43,62 @@ MonoBehaviour:
   cultType: 14
   classType: 9
   archeType: 3
-  fleeBehaviour: 3
+  fleeBehaviour: 1
   charFleeState: 0
   provisionItems:
-  - itemType: 0
-    itemName: 0
-    genGewgawQ: 0
+  - itemDataQty:
+      itemData:
+        itemType: 1
+        itemName: 2
+        genGewgawQ: 0
+      quantity: 1
+    fameType: 0
+  - itemDataQty:
+      itemData:
+        itemType: 1
+        itemName: 2
+        genGewgawQ: 0
+      quantity: 2
+    fameType: 3
   earningsItems:
-  - itemType: 4
-    itemName: 0
-    genGewgawQ: 0
-  earningShare: 0
+  - itemDataQty:
+      itemData:
+        itemType: 1
+        itemName: 9
+        genGewgawQ: 0
+      quantity: 1
+    fameType: 0
+  earningShare: 12
   CompanionPreReqOpt1:
-  - itemType: 5
-    itemName: 0
-    genGewgawQ: 0
-  - itemType: 5
-    itemName: 0
-    genGewgawQ: 0
+  - itemDataQty:
+      itemData:
+        itemType: 3
+        itemName: 1
+        genGewgawQ: 0
+      quantity: 2
+    fameType: 0
+  - itemDataQty:
+      itemData:
+        itemType: 0
+        itemName: 0
+        genGewgawQ: 0
+      quantity: 0
+    fameType: 3
   CompanionPreReqOpt2:
-  - itemType: 2
-    itemName: 0
-    genGewgawQ: 0
+  - itemDataQty:
+      itemData:
+        itemType: 6
+        itemName: 4
+        genGewgawQ: 0
+      quantity: 2
+    fameType: 0
+  - itemDataQty:
+      itemData:
+        itemType: 0
+        itemName: 0
+        genGewgawQ: 0
+      quantity: 0
+    fameType: 3
   startLevel: 0
   permaTraitNames: 
   AttribList:

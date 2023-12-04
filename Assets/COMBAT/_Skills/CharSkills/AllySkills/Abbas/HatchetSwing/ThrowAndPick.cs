@@ -23,7 +23,30 @@ namespace Combat
         public override SkillLvl skillLvl => SkillLvl.Level2;
 
         public override float chance { get; set; }
-        DynamicPosData targetDyna; 
+        DynamicPosData targetDyna;
+        List<DynamicPosData> sameLaneTargets = new List<DynamicPosData>();
+        public override void AddTargetPos()
+        {
+            if (skillModel != null)
+            {
+                skillModel.targetPos.Clear();
+                CombatService.Instance.mainTargetDynas.Clear();
+                
+                CellPosData cellPos = new CellPosData(CharMode.Ally, currDyna.currentPos);                
+            
+                sameLaneTargets = GridService.Instance.GetInSameLaneOppParty(cellPos);
+
+                if (sameLaneTargets.Count > 0)
+                    targetDyna = sameLaneTargets[0];
+                else
+                    targetDyna = null;
+                if(targetDyna!= null)
+                {
+                    skillModel.targetPos.Add(cellPos);
+                    CombatService.Instance.mainTargetDynas.Add(targetDyna);
+                }
+            }
+        }
         public override void SkillHovered()
         {
             base.SkillHovered();
@@ -31,20 +54,7 @@ namespace Combat
             skillModel.damageMod = 145;
             skillModel.cd = 2; 
         }
-        public override void AddTargetPos()
-        {
-           
-            if(skillModel != null)
-            {
-                skillModel.targetPos.Clear();
-                CombatService.Instance.mainTargetDynas.Clear();
-                CellPosData cellPos = new CellPosData(CharMode.Enemy, targetDyna.currentPos);
-                skillModel.targetPos.Add(cellPos);
-                targetDyna = GridService.Instance.GetInSameLaneOppParty(cellPos)[0];
-
-                CombatService.Instance.mainTargetDynas.Add(targetDyna); 
-            }
-        }
+       
         public override void ApplyFX1()
         {
 
@@ -68,11 +78,14 @@ namespace Combat
 
         public override void DisplayFX1()
         {
+            str1 = "Target -> First on same lane";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
+          
         }
+        
 
         public override void DisplayFX3()
         {
@@ -80,6 +93,17 @@ namespace Combat
 
         public override void DisplayFX4()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "90% -> 145% <style=Bleed>Physical</style> Dmg";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Attack type -> Ranged";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Target -> First on same lane";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Cd: 0 -> 2";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
 
     }

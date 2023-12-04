@@ -22,26 +22,27 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        List<DynamicPosData> targetDynasCopy = new List<DynamicPosData>(); // COPY for Skill EnD
+       // List<DynamicPosData> targetDynasCopy = new List<DynamicPosData>(); // COPY for Skill EnD
         public override void PopulateTargetPos()
         {
-            if (skillModel == null) return;
-            targetDynasCopy.Clear();
-            skillModel.targetPos.Clear();
-            CombatService.Instance.mainTargetDynas.Clear(); 
+            //if (skillModel == null) return;
+            //targetDynasCopy.Clear();
+            //skillModel.targetPos.Clear();
+            //CombatService.Instance.mainTargetDynas.Clear(); 
 
-            for (int i = 1; i < 8; i++)
-            {
-                CellPosData cellPosData = new CellPosData(CharMode.Enemy, i);
-                DynamicPosData dyna = GridService.Instance.gridView
-                                        .GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
-                if(dyna != null)
-                {
-                    skillModel.targetPos.Add(cellPosData);
-                    CombatService.Instance.mainTargetDynas.Add(dyna);
-                    targetDynasCopy.Add(dyna); 
-                }            
-            }
+            //for (int i = 1; i < 8; i++)
+            //{
+            //    CellPosData cellPosData = new CellPosData(CharMode.Enemy, i);
+            //    DynamicPosData dyna = GridService.Instance.gridView
+            //                            .GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
+            //    if(dyna != null)
+            //    {
+            //        skillModel.targetPos.Add(cellPosData);
+            //        CombatService.Instance.mainTargetDynas.Add(dyna);
+            //        targetDynasCopy.Add(dyna); 
+            //    }            
+            //}
+            AnyWithCharMode(CharMode.Enemy);
         }
 
         public override void SkillSelected()
@@ -54,7 +55,7 @@ namespace Combat
         {
             if (skillModel.targetPos.Count > 0)
             { 
-                targetDynasCopy.ForEach(t => t.charGO.GetComponent<CharController>().damageController
+                CombatService.Instance.mainTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>().damageController
                                         .ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Water
                                                             , skillModel.damageMod, skillModel.skillInclination, true));            
             }
@@ -62,7 +63,8 @@ namespace Combat
 
         public override void ApplyFX2()
         {
-            targetDynasCopy.ForEach(t => t.charGO.GetComponent<CharController>()
+            if (skillModel.targetPos.Count > 0)            
+                CombatService.Instance.mainTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>()
                     .charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
                     , charController.charModel.charID, CharStateName.Soaked, skillModel.timeFrame, skillModel.castTime));
         }
@@ -78,19 +80,17 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str0 = $"<style=Enemy> {skillModel.damageMod}% <style=Water> Water </style>";
+            str0 = $"{skillModel.damageMod}%<style=Water> Water</style> Dmg";
             SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
-
         public override void DisplayFX2()
         {
-            str1 = $"<style=Enemy><style=States> Soaked </style>, {skillModel.castTime} rds";
+            str1 = "<style=States>Soaked</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX3()
         {
-            str2 = $"<style=Enemy> Ignore <style=Water> Water Res </style>";
+            str2 = "Ignore <style=Water>Water Res</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
 

@@ -5,8 +5,6 @@ using UnityEngine;
 
 namespace Combat
 {
-
-
     public class Surprise : PerkBase
     {
         public override PerkNames perkName => PerkNames.Surprise;
@@ -60,18 +58,29 @@ namespace Combat
 
         public override void DisplayFX1()
         {
+            str1 = "Vs Animal: <style=States>Feebleminded</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
+            str2 = "Vs else: -3 Luck";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
-
         public override void DisplayFX3()
         {
         }
 
         public override void DisplayFX4()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Vs Animal: Apply<style=States>Feebleminded</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Vs else: -3 Luck";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Stm cost: 5 -> 4";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 }

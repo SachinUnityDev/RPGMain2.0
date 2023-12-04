@@ -34,18 +34,18 @@ namespace Combat
                 float attribDmgMax = charController.GetAttrib(AttribName.dmgMax).currValue;
 
                 charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                  , AttribName.dmgMax, attribDmgMax*0.3f, TimeFrame.EndOfCombat, skillModel.castTime, true);
+                  , AttribName.dmgMax, attribDmgMax*0.3f*enemyCount, TimeFrame.EndOfCombat, skillModel.castTime, true);
                 charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                  , AttribName.dmgMax, attribDmgMin*0.3f, TimeFrame.EndOfCombat, skillModel.castTime, true);
+                  , AttribName.dmgMax, attribDmgMin*0.3f*enemyCount, TimeFrame.EndOfCombat, skillModel.castTime, true);
 
 
                 float armorMin = charController.GetAttrib(AttribName.armorMin).currValue;
                 float armorMax = charController.GetAttrib(AttribName.armorMax).currValue;
 
                 charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                  , AttribName.armorMax, armorMax*0.3f, TimeFrame.EndOfCombat, skillModel.castTime, true);
+                  , AttribName.armorMax, armorMax * 0.3f * enemyCount, TimeFrame.EndOfCombat, skillModel.castTime, true);
                 charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                  , AttribName.armorMin, armorMin*0.3f, TimeFrame.EndOfCombat, skillModel.castTime, true);
+                  , AttribName.armorMin, armorMin * 0.3f * enemyCount, TimeFrame.EndOfCombat, skillModel.castTime, true);
 
             }
         }
@@ -66,22 +66,29 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str1 = $"<style=Performer>if solo, +20% Armor&Dmg";
+            str1 = "+2 Morale on self";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
-
-            str2 = $"<style=Performer>(if Init 12, +40% Armor&Dmg)";
-            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
         public override void DisplayFX2()
         {
-
+            str2 = "If solo: +30% Armor and Dmg per enemy until eoc";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
-
         public override void DisplayFX3()
         {
-
+            str3 = "If Haste 12:<style=Move> Shuffle</style>enemies";
+            SkillService.Instance.skillModelHovered.AddDescLines(str3);
         }
-
+        public override void InvPerkDesc()
+        {
+            perkDesc = "+2 Morale on self";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "If solo: +30% Armor and Dmg per enemy until eoc";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "If Haste 12:<style=Move> Shuffle </style>enemies";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+        }
+    
         public override void DisplayFX4()
         {
 

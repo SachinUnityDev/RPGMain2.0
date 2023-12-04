@@ -29,7 +29,7 @@ namespace Common
         public float maxLimit;
         public bool isClamped = false;
     }
-
+    
 
 
 
@@ -86,22 +86,22 @@ namespace Common
         public List<Iitems> activeInvItems = new List<Iitems>();
 
         [Header("DEFAULT PROVISION")]
-        public List<ItemData> provisionItems = new List<ItemData>();
+        public List<ItemDataWithQtyNFameType> provisionItems = new List<ItemDataWithQtyNFameType>();
 
         [Header("ITEM STATS")]
         public int netPotionAddictChance = 0; 
 
         [Header("Gift")]
         // money and Item 
-        public List<ItemData> earningsItems = new List<ItemData>();
+        public List<ItemDataWithQtyNFameType> earningsItems = new List<ItemDataWithQtyNFameType>();
 
         [Header("Money Share")]
         public int earningsShare;   // earning share (percent) out of 100
-        public float earningShareBonus_percent; 
-        
+        public float earningShareBonus_percent;
+
         [Header("Companion PreReq")]
-        public List<ItemData> CompanionPreReqOpt1 = new List<ItemData>();
-        public List<ItemData> CompanionPreReqOpt2 = new List<ItemData>();
+        public List<ItemDataWithQtyNFameType> CompanionPreReqOpt1 = new List<ItemDataWithQtyNFameType>(); 
+        public List<ItemDataWithQtyNFameType> CompanionPreReqOpt2 = new List<ItemDataWithQtyNFameType>(); 
 
         public int startLevel;
         
@@ -282,47 +282,65 @@ namespace Common
 
                 statList.Add(statData);
             }
-
-
         }
         #endregion
 
+        #region  GET PreReq, Earning and provision
+
+        public ItemDataWithQty GetProvisionItem()
+        {
+            ItemDataWithQty itemQty = null;
+            FameType fameType = FameService.Instance.fameController.fameModel.fameType;
+
+            itemQty = GetItemDataWithQty(fameType, provisionItems); 
+            return itemQty; 
+        }
+        public List<ItemDataWithQty> GetPrereqsItem()
+        {
+            ItemDataWithQty itemQty1 = null;
+            ItemDataWithQty itemQty2 = null;    
+            FameType fameType = FameService.Instance.fameController.fameModel.fameType;
+
+            itemQty1 = GetItemDataWithQty(fameType, CompanionPreReqOpt1);
+            itemQty2 = GetItemDataWithQty(fameType, CompanionPreReqOpt2);
+
+            List<ItemDataWithQty> allPreReqs = new List<ItemDataWithQty>() {itemQty1, itemQty2};
+   
+            return allPreReqs;
+        }
+        public ItemDataWithQty GetEarningItem()
+        {
+            ItemDataWithQty itemQty1 = null;
+            FameType fameType = FameService.Instance.fameController.fameModel.fameType;
+
+            itemQty1 = GetItemDataWithQty(fameType, earningsItems);
+            return itemQty1;
+        }
+        ItemDataWithQty GetItemDataWithQty(FameType fameType, List<ItemDataWithQtyNFameType> allItemQty)
+        {
+            ItemDataWithQty itemQty = null;
+         
+            foreach (ItemDataWithQtyNFameType itemFame in allItemQty)
+            {
+                if (itemFame.fameType == fameType)
+                    itemQty = itemFame.itemDataQty;
+            }
+            if (itemQty == null)
+            {
+                int index = allItemQty.FindIndex(t => t.fameType == FameType.None);
+                if (index != -1)
+                    itemQty = allItemQty[index].itemDataQty;
+                else
+                    Debug.LogError("None not found" + charName);
+            }
+            return itemQty;
+        }
+
+
+        #endregion
+
+
     }
 }
-
-
-//#region ACTIVE INV SLOT
-//public void AddItemToPotionSlot(Iitems item, int slotID)
-//{
-//    ItemData itemData = new ItemData(item.itemType, item.itemName);
-//    if (slotID == 0)
-//    {
-//        potionSlot1 = itemData;
-//    }else if (slotID == 1)
-//    {
-//        potionSlot2 = itemData; 
-//    }else if (slotID == 2)
-//    {
-//        provisionSlot = itemData; 
-//    }            
-//}
-//public void RemoveItmFrmPotionSlot(int slotID)
-//{          
-//    if (slotID == 0)
-//    {
-//        potionSlot1 = null; 
-//    }
-//    else if (slotID == 1)
-//    {
-//        potionSlot2 = null;
-//    }
-//    else if (slotID == 2)
-//    {
-//        provisionSlot = null;
-//    }
-//}
-
-//#endregion 
-
 
 

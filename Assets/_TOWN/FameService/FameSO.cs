@@ -61,7 +61,12 @@ namespace Common
 
         public string GetFameBehaviorStr(FameBehavior fameBehavior)
         {
-            string str = allfameBehaviorDesc.Find(t => t.famebehavior == fameBehavior).desc;
+
+            string str = "";
+            int index = allfameBehaviorDesc.FindIndex(t => t.famebehavior == fameBehavior);
+            if(index != -1)
+                str = allfameBehaviorDesc[index].desc;
+
             return str;
         }
 

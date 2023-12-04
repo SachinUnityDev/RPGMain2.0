@@ -25,22 +25,8 @@ namespace Combat
 
        
         public override void PopulateTargetPos()
-        {
-            skillModel.targetPos.Clear();            
-
-            for (int i = 1; i < 8; i++)
-            {
-                if (!(myDyna.currentPos == i))
-                {
-                    CellPosData cellPosData = new CellPosData(CharMode.Ally, i);
-                    DynamicPosData dyna = GridService.Instance.gridView.GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
-                    if (dyna != null)
-                    {                      
-                        skillModel.targetPos.Add(cellPosData);
-                        CombatService.Instance.mainTargetDynas.Add(dyna);
-                    }
-                }
-            }         
+        {         
+            AllinCharModeExceptSelf(CharMode.Ally);
         }    
         public override void ApplyFX1()
         {
@@ -50,38 +36,37 @@ namespace Combat
                 targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Heal
                                                     , UnityEngine.Random.Range(4f, 7f));           
         }
-
-        public override void DisplayFX1()
-        {
-
-        }
         public override void ApplyFX2()
         {           
            if(IsTargetMyAlly())
             targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
                                     , AttribName.haste, 2, skillModel.timeFrame, skillModel.castTime,true);
         }
-
-        public override void DisplayFX2()
-        {
-            str1 = $"<style=Allies> <style=Heal>Heal,</style> 4-7";
-            SkillService.Instance.skillModelHovered.AddDescLines(str1);       
-        }
-
         public override void ApplyFX3()
         {          
             targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName, charController.charModel.charID
                                                             , CharStateName.Soaked, skillModel.timeFrame, skillModel.castTime);
         }
+
+        public override void DisplayFX1()
+        {
+            str1 = "<style=Heal>Heal</style> 4-7";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
+        }
+        public override void DisplayFX2()
+        {
+            str2 = "+2 Haste";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
+        }
         public override void DisplayFX3()
         {
-            str2 = $"<style=Allies> +2 <style=Attributes>Haste</style>, {skillModel.castTime} rds ";
-            SkillService.Instance.skillModelHovered.AddDescLines(str2);      
+            str3 = "Apply <style=States>Soaked</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str3);
         }
+     
         public override void DisplayFX4()
         {
-            str3 = $"<style=Allies> <style=States>Soaked</style>, {skillModel.castTime} rds ";
-            SkillService.Instance.skillModelHovered.AddDescLines(str3);
+           
         }
 
         public override void ApplyVFx()
@@ -100,16 +85,4 @@ namespace Combat
         }
     }
 }
-
-
-// move sequence general ..
-// movement controller .. style 1 move and strike a target 
-// style 2 move N strike multiple targets 
-
-
-//..... FX 
-// FX.. get FX ..style 1 .. just instnatiate at once point
-// style 2 start at a point and end at a point 
-// change color 
-// change scale
 

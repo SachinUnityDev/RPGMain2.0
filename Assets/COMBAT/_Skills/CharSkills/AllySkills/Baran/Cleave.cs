@@ -80,28 +80,42 @@ namespace Combat
 
         }
 
- 
         public override void DisplayFX1()
         {
-            //str0 = "<margin=1.2em>Ranged";
-            //SkillService.Instance.skillModelHovered.descLines.Add(str0);
-
-            str1 = $"{skillModel.damageMod}% <style=Physical>Physical</style>";
-            SkillService.Instance.skillModelHovered.AddDescLines(str1);
+            str0 = $"{skillModel.damageMod}% <style=Physical>Physical</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
-
-
         public override void DisplayFX2()
         {
-            str2 = $"Target Front Row if cast from 1, 1+2 if cast from 2, 1+3 if cast from 3";
-            SkillService.Instance.skillModelHovered.AddDescLines(str2);
+            str1 = $"{chance}% <style=Bleed>Low Bleed</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX3()
         {
-            str3 = $"{chance}% <style=Bleed>Low Bleed </style>";
-            SkillService.Instance.skillModelHovered.AddDescLines(str3);
+            str2 = $"Targets: Front Row if cast from 1, 1 if from 4, 1+2 if from 2, 1+3 if from 3";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
+        //public override void DisplayFX1()
+        //{
+        //    //str0 = "<margin=1.2em>Ranged";
+        //    //SkillService.Instance.skillModelHovered.descLines.Add(str0);
+
+        //    str1 = $"{skillModel.damageMod}% <style=Physical>Physical</style>";
+        //    SkillService.Instance.skillModelHovered.AddDescLines(str1);
+        //}
+
+
+        //public override void DisplayFX2()
+        //{
+        //    str2 = $"Target Front Row if cast from 1, 1+2 if cast from 2, 1+3 if cast from 3";
+        //    SkillService.Instance.skillModelHovered.AddDescLines(str2);
+        //}
+
+        //public override void DisplayFX3()
+        //{
+        //    str3 = $"{chance}% <style=Bleed>Low Bleed </style>";
+        //    SkillService.Instance.skillModelHovered.AddDescLines(str3);
+        //}
 
         public override void DisplayFX4()
         {

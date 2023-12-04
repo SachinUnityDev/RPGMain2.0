@@ -21,17 +21,14 @@ namespace Combat
 
 
         public override void PopulateTargetPos()
-        {
-            //    skillModel.targetPos.Clear();
-            //    int pos = GridService.Instance.GetDyna4GO(charGO).currentPos;
-            //    skillModel.targetPos.Add(new CellPosData(myDyna.charMode, pos));
+        {  
                 SelfTarget(); 
         }
  
         public override void ApplyFX1()
         {
             int stmRegen = UnityEngine.Random.Range(3, 6);
-            if (targetController != null)
+            if (targetController == null) return;
                 charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
                 , AttribName.staminaRegen, stmRegen, skillModel.timeFrame, skillModel.castTime, true);
 
@@ -46,11 +43,12 @@ namespace Combat
         public override void ApplyFX2()
         {
             //  +% 60 Armor, 
+            if (targetController == null) return;
             float statDataMin = charController.GetAttrib(AttribName.armorMin).currValue;
             float statDataMax = charController.GetAttrib(AttribName.armorMax).currValue;
          
             charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                , AttribName.armorMin, statDataMin*0.6f, skillModel.timeFrame, skillModel.castTime, true);
+                , AttribName.armorMin, statDataMin * 0.6f, skillModel.timeFrame, skillModel.castTime, true);
 
             charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
                 , AttribName.armorMax, statDataMax * 0.6f, skillModel.timeFrame, skillModel.castTime, true);
@@ -58,6 +56,7 @@ namespace Combat
 
         public override void ApplyFX3()
         {
+            if (targetController == null) return;
             charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, AttribName.fireRes, +14,
                 skillModel.timeFrame, skillModel.castTime, true);          
         }
@@ -77,28 +76,21 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str0 = $"2 -3 <style=Attributes>Stamina regen</style>, {skillModel.castTime} rd ";
+            str0 = "+3-5 Stm Regen and -3 Haste";
             SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
-
         public override void DisplayFX2()
         {
-            str1 = $"-3 <style=Attributes>Haste</style>, {skillModel.castTime} rd ";
+            str1 = "<style=Heal>Heal</style> 12% of max Hp";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX3()
         {
-            str2 = $"4-10 <style=Attributes>Heal</style>, {skillModel.castTime} rd ";
+            str2 = "+60% Max Armor and +14 <style=Burn>Fire Res</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str2);
-            str3 = $"+14 <style=Attributes>Elemental Res</style>, {skillModel.castTime} rd ";
-            SkillService.Instance.skillModelHovered.AddDescLines(str3);
         }
-
         public override void DisplayFX4()
-        {
-            str0 = $"Ignore <style=Attributes>Stamina Dmg</style>, {skillModel.castTime} rd ";
-            SkillService.Instance.skillModelHovered.AddDescLines(str0);
+        {          
         }
 
   

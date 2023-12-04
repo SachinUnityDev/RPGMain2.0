@@ -31,7 +31,7 @@ namespace Combat
             if(targetController.charStateController.HasCharState(CharStateName.Sneaky))
                 targetController.damageController.ApplyDamage(charController, CauseType.CharSkill,
                              (int)skillName, DamageType.Physical, (skillModel.damageMod + 65f)
-                             , skillModel.skillInclination,false, true);
+                                                     , skillModel.skillInclination,false, true);
         }
         public override void ApplyFX2()
         {
@@ -43,17 +43,18 @@ namespace Combat
         }
         public override void DisplayFX1()
         {
-
+            str0 = "<style=Move>Pull</style> 1 vs backrow";   
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(str0);
         }
-
         public override void DisplayFX2()
         {
-            str1 = $"<style=Allies> <style=States>Confuse </style> backrow1 rd";
+            str1 = "True Strike vs <style=States>Sneaky</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
         public override void DisplayFX3()
         {
-            
+            str2 = "+65% Dmg vs <style=States>Sneaky</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
         public override void DisplayFX4()
         {
@@ -71,6 +72,17 @@ namespace Combat
             {
                 GridService.Instance.gridMovement.MovebyRow(targetDyna, MoveDir.Forward, 1);
             }
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "<style=Move>Pull</style> 1 vs backrow";
+            SkillService.Instance.skillModelHovered.AddDescLines(perkDesc);
+
+            perkDesc = "True Strike vs <style=States>Sneaky</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(perkDesc);
+
+            perkDesc = "+65% Dmg vs <style=States>Sneaky</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 }

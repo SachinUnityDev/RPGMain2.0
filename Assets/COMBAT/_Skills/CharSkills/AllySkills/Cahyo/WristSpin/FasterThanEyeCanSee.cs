@@ -9,7 +9,6 @@ namespace Combat
     public class FasterThanEyeCanSee : PerkBase
     {
         public override PerkNames perkName => PerkNames.FasterThanEyeCanSee;
-
         public override PerkType perkType => PerkType.A2;
 
         private PerkSelectState _state = PerkSelectState.Clickable;
@@ -56,7 +55,7 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str0 = $"30 % chance, <style=States>Confused</style>, {skillModel.castTime} rd ";
+            str0 = $"{chance}% apply <style=States>Blinded</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
 
@@ -72,6 +71,11 @@ namespace Combat
         public override void DisplayFX4()
         {
           
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = $"{chance}% apply <style=States>Blinded</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 

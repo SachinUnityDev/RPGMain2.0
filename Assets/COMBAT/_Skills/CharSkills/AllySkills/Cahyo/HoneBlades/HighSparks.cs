@@ -22,7 +22,7 @@ namespace Combat
         public override void ApplyFX1()
         {
             charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                , AttribName.dmgMax,2, skillModel.timeFrame, skillModel.castTime, true);
+                , AttribName.dmgMax,3, skillModel.timeFrame, skillModel.castTime, true);
         }
         public override void ApplyFX2()
         {
@@ -35,7 +35,7 @@ namespace Combat
         }
         public override void DisplayFX1()
         {
-            str1 = $"<style=Allies> max <style=Physical>Dmg</style> +2";
+            str1 = "+3 Max Dmg";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
         public override void DisplayFX2()
@@ -57,6 +57,11 @@ namespace Combat
 
         public override void ApplyMoveFX()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "+3 Max Dmg";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 }

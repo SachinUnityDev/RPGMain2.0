@@ -79,14 +79,6 @@ namespace Combat
         {
         }
 
-
-        public override void SkillEnd()
-        {       
-            //if(targetController !=null)
-            //targetController.ChangeStat(CauseType.CharSkill, (int)skillName, charController, StatsName.focus, 2);
-        }
-
-
         public override void ApplyVFx()
         {
 

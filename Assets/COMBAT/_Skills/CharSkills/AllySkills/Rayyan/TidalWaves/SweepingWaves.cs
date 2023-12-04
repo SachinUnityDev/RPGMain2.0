@@ -47,34 +47,19 @@ namespace Combat
         public override void SkillHovered()
         {
             base.SkillHovered();
-            skillModel.damageMod = 90f;
-            SkillService.Instance.SkillWipe += skillController.allSkillBases.Find(t => t.skillName == skillName).WipeFX2;
+            skillModel.damageMod = 90f;            
         }
 
-        public override void SkillSelected()
-        {
-            base.SkillSelected();
-            SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).RemoveFX1;
-           
-        }
-
+     
         public override void BaseApply()
         {
             base.BaseApply();
-            skillModel.damageMod = 90f;
-            Debug.Log("Base" + desc);
-
+            skillModel.damageMod = 90f;          
         }
 
         public override void ApplyFX1()
         {
-            AddTargetPos();
-            CombatService.Instance.mainTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>().damageController
-                    .ApplyDamage(charController,CauseType.CharSkill, (int)skillName
-                    , DamageType.Water, skillModel.damageMod, skillModel.skillInclination));
-
-            Debug.Log("FX1" + desc);
-
+         
         }
 
         public override void ApplyFX2()
@@ -93,13 +78,12 @@ namespace Combat
         }
         public override void ApplyMoveFX()
         {
-           // Debug.Log(">>>>>>>>>>MoveFX" + desc);
-          //  GridService.Instance.ShuffleCharSet(CombatService.Instance.mainTargetDynas);
+           
         }
         public override void DisplayFX1()
         {
-            str0 = $"<style=Move> Shuffle </style>";
-            SkillService.Instance.skillModelHovered.AddDescLines(str0);
+            str1 = "Target -> All enemies";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
 
         public override void DisplayFX2()
@@ -113,8 +97,14 @@ namespace Combat
         public override void DisplayFX4()
         {
         }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "<style=Water>Water</style> Dmg: 120% -> 90%";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Target -> All enemies";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+        }
 
-     
     }
 
 }

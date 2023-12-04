@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charID: 103
   charName: 3
-  charPrefab: {fileID: 5264738912818039742, guid: a998eb6023d95ca42970e90496cb523a,
+  charPrefab: {fileID: 9089907047962137050, guid: a878e07ca46bd244ab71e56aea2fb239,
     type: 3}
   charSprite: {fileID: 21300000, guid: 09fbee7bb1a33844c8258afa6d6a5a8f, type: 3}
   charSpriteUnClickedFlipped: {fileID: 21300000, guid: 3480bfa96429c3c4da725d863117d830,
@@ -35,7 +35,7 @@ MonoBehaviour:
   charNameStr: Cahyo
   availOfChar: 1
   stateOfChar: 2
-  fameBehavior: 2
+  fameBehavior: 6
   baseCharLoc: 1
   charRole: 2
   raceType: 2
@@ -46,99 +46,136 @@ MonoBehaviour:
   fleeBehaviour: 2
   charFleeState: 0
   provisionItems:
-  - itemType: 0
-    itemName: 0
-    genGewgawQ: 0
+  - itemDataQty:
+      itemData:
+        itemType: 1
+        itemName: 3
+        genGewgawQ: 0
+      quantity: 1
+    fameType: 0
+  - itemDataQty:
+      itemData:
+        itemType: 1
+        itemName: 3
+        genGewgawQ: 0
+      quantity: 2
+    fameType: 3
   earningsItems:
-  - itemType: 4
-    itemName: 0
-    genGewgawQ: 0
-  earningShare: 15
+  - itemDataQty:
+      itemData:
+        itemType: 5
+        itemName: 10
+        genGewgawQ: 0
+      quantity: 1
+    fameType: 0
+  earningShare: 9
   CompanionPreReqOpt1:
-  - itemType: 3
-    itemName: 0
-    genGewgawQ: 0
+  - itemDataQty:
+      itemData:
+        itemType: 4
+        itemName: 3
+        genGewgawQ: 0
+      quantity: 2
+    fameType: 0
+  - itemDataQty:
+      itemData:
+        itemType: 0
+        itemName: 0
+        genGewgawQ: 0
+      quantity: 0
+    fameType: 3
   CompanionPreReqOpt2:
-  - itemType: 0
-    itemName: 0
-    genGewgawQ: 0
+  - itemDataQty:
+      itemData:
+        itemType: 1
+        itemName: 3
+        genGewgawQ: 0
+      quantity: 1
+    fameType: 0
+  - itemDataQty:
+      itemData:
+        itemType: 0
+        itemName: 0
+        genGewgawQ: 0
+      quantity: 0
+    fameType: 3
   startLevel: 0
   permaTraitNames: 
   AttribList:
   - AttribName: 1
-    currValue: 9
-    baseValue: 0
+    currValue: 6
+    baseValue: 6
     desc: Base value for Physical and Magical attacks.
     minLimit: 0
     maxLimit: 100
     isClamped: 0
   - AttribName: 2
-    currValue: 0
-    baseValue: 0
+    currValue: 6
+    baseValue: 6
     desc: Chance to land Physical attack to a target.
     minLimit: 0
     maxLimit: 15
     isClamped: 0
   - AttribName: 3
-    currValue: 0
-    baseValue: 0
+    currValue: -1
+    baseValue: -1
     desc: Determinant value for hitting correct target by Magical attacks or Misfire.
     minLimit: 12
     maxLimit: 96
     isClamped: 0
   - AttribName: 4
-    currValue: 0
-    baseValue: 0
+    currValue: 4
+    baseValue: 4
     desc: Determinant value for Critical and Feeble hits.
     minLimit: 0
     maxLimit: 12
     isClamped: 0
   - AttribName: 5
-    currValue: 0
-    baseValue: 0
+    currValue: 4
+    baseValue: 4
     desc: Determinant value for extra action or pass action.
     minLimit: 0
     maxLimit: 12
     isClamped: 0
   - AttribName: 6
-    currValue: 0
-    baseValue: 0
+    currValue: 5
+    baseValue: 5
     desc: Main determinant for turn order. Increases chance to keep action after
       using Move.
     minLimit: 0
     maxLimit: 12
     isClamped: 0
   - AttribName: 7
-    currValue: 0
-    baseValue: 0
+    currValue: 11
+    baseValue: 11
     desc: Determinant value for base Health. Increases chance to withstand Hunger.
     minLimit: 0
     maxLimit: 100
     isClamped: 0
   - AttribName: 8
-    currValue: 0
-    baseValue: 0
+    currValue: 13
+    baseValue: 13
     desc: Determinant value for base Stamina. Increases chance to withstand Thirst.
     minLimit: 0
     maxLimit: 100
     isClamped: 0
   - AttribName: 9
-    currValue: 0
-    baseValue: 0
+    currValue: 1
+    baseValue: 1
     desc: Value to mitigate incoming Physical damage.
     minLimit: 0
     maxLimit: 100
     isClamped: 0
   - AttribName: 10
-    currValue: 0
-    baseValue: 0
+    currValue: 3
+    baseValue: 3
     desc: Chance to evade a Physical attack.
     minLimit: 0
     maxLimit: 100
     isClamped: 0
   - AttribName: 11
-    currValue: 0
-    baseValue: 0
+    currValue: 20
+    baseValue: 20
     desc: Percentage value to mitigate incoming Fire damage.
     minLimit: -60
     maxLimit: 90
@@ -151,36 +188,36 @@ MonoBehaviour:
     maxLimit: 90
     isClamped: 0
   - AttribName: 13
-    currValue: 0
-    baseValue: 0
+    currValue: -10
+    baseValue: -10
     desc: Percentage value to mitigate incoming Water damage.
     minLimit: -60
     maxLimit: 90
     isClamped: 0
   - AttribName: 14
-    currValue: 0
-    baseValue: 0
+    currValue: 15
+    baseValue: 15
     desc: Percentage value to mitigate incoming Air damage.
     minLimit: -60
     maxLimit: 90
     isClamped: 0
   - AttribName: 15
-    currValue: 11
-    baseValue: 0
+    currValue: -10
+    baseValue: -10
     desc: Percentage value to mitigate incoming Light damage.
     minLimit: -30
     maxLimit: 60
     isClamped: 0
   - AttribName: 16
-    currValue: 0
-    baseValue: 0
+    currValue: -10
+    baseValue: -10
     desc: Percentage value to mitigate incoming Dark damage.
     minLimit: -30
     maxLimit: 60
     isClamped: 0
   - AttribName: 17
-    currValue: 0
-    baseValue: 0
+    currValue: 2
+    baseValue: 2
     desc: Percentage value to mitigate incoming Dark damage.
     minLimit: 0
     maxLimit: 0
@@ -200,34 +237,34 @@ MonoBehaviour:
     maxLimit: 24
     isClamped: 0
   - AttribName: 20
-    currValue: 0
-    baseValue: 0
+    currValue: 3
+    baseValue: 3
     desc: Percentage value to mitigate incoming Dark damage.
     minLimit: 0
     maxLimit: 100
     isClamped: 0
   - AttribName: 21
-    currValue: 0
-    baseValue: 0
+    currValue: 8
+    baseValue: 8
     desc: Percentage value to mitigate incoming Dark damage.
     minLimit: 0
     maxLimit: 100
     isClamped: 0
   statList:
   - statName: 1
-    currValue: 36
+    currValue: 44
     desc: Health is health, you know it...
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 44
     isClamped: 0
   - statName: 2
-    currValue: 0
+    currValue: 39
     desc: Resource to use skills.
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 39
     isClamped: 0
   - statName: 3
-    currValue: 12
+    currValue: 0
     desc: Be among those who dare to dare!
     minLimit: -24
     maxLimit: 24

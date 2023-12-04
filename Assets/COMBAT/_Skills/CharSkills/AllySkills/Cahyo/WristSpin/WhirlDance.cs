@@ -27,14 +27,8 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
         public override void AddTargetPos()
-        {
-            if (skillModel == null) return;
-            CombatService.Instance.mainTargetDynas.Clear(); skillModel.targetPos.Clear();
-             CombatService.Instance.mainTargetDynas.AddRange(GridService.Instance.GetAllByCharMode(CharMode.Enemy));
-            foreach (DynamicPosData dyna in CombatService.Instance.mainTargetDynas)
-            {
-                skillModel.targetPos.Add(new CellPosData(dyna.charMode, dyna.currentPos));
-            }
+        { 
+            TargetAnyEnemy();
         }
 
         public override void BaseApply()
@@ -64,6 +58,8 @@ namespace Combat
 
         public override void DisplayFX1()
         {
+            str0 = "Target -> everyone";
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);           
         }
 
         public override void DisplayFX2()
@@ -76,6 +72,15 @@ namespace Combat
 
         public override void DisplayFX4()
         {
+        }
+        
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Target -> everyone";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+
+            perkDesc = "Cd: 1 -> 2";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 

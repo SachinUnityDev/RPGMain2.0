@@ -44,14 +44,10 @@ namespace Combat
                 targetDyna.charGO.GetComponent<CharController>()
                     .damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
                             , DamageType.Water, skillModel.damageMod, skillModel.skillInclination);
-            }
-            Debug.Log("Apply FX1" + desc);
+            }           
         }
-        public override void DisplayFX1()
-        {
-            str0 = $"{skillModel.damageMod}%<style=Water> Water </style>";
-            SkillService.Instance.skillModelHovered.AddDescLines(str0);
-        }
+
+   
 
         public override void ApplyMoveFx()
         {
@@ -59,52 +55,44 @@ namespace Combat
             {
                 GridService.Instance.gridMovement.MovebyRow(targetDyna, MoveDir.Backward, 1);
             }
-            Debug.Log("Apply Move FX" + desc);
         }
-        public override void ApplyFX2() // earlier it was MOVE 
+        public override void ApplyFX2() 
         {
-           // Debug.Log("Apply FX2" + desc);
+           
         }
 
-        public override void DisplayFX2()
-        {
-            str1 = $"<style=Move> Push </style>1";
-            SkillService.Instance.skillModelHovered.AddDescLines(str1);
-        }
-      
         public override void ApplyFX3()
         {
             foreach (DynamicPosData dyna in CombatService.Instance.mainTargetDynas)
             {
-                charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                       , charController.charModel.charID, CharStateName.Soaked);
+               dyna.charGO.GetComponent<CharController>().charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                       , charController.charModel.charID, CharStateName.Soaked, skillModel.timeFrame, skillModel.castTime);
             }
-            Debug.Log("Apply FX3" + desc);
 
         }
-          public override void DisplayFX3()
+
+        public override void DisplayFX1()
         {
-            str2 = $"<style=States> Soaked </style>, {skillModel.castTime} rd";
-            SkillService.Instance.skillModelHovered.AddDescLines(str2);
+            str0 = $"{skillModel.damageMod}%<style=Water> Water </style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
-        public override void ApplyVFx()
+        public override void DisplayFX2()
         {
-            
-            SkillService.Instance.skillFXMoveController.MultiTargetRangeFX(PerkType.None);
-            Debug.Log("Apply VFX" + desc);
-
+            str1 = "Apply <style=States>Soaked</style> and<style=Move> Push </style>1";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
-        public override void SkillEnd()
+        public override void DisplayFX3()
         {
-            base.SkillEnd(); 
-            targetController.charStateController.RemoveCharState(CharStateName.Soaked);       
+          
         }
-
         public override void DisplayFX4()
         {
         }
 
+        public override void ApplyVFx()
+        {   
+            SkillService.Instance.skillFXMoveController.MultiTargetRangeFX(PerkType.None);
+        }
 
         public override void PopulateAITarget()
         {

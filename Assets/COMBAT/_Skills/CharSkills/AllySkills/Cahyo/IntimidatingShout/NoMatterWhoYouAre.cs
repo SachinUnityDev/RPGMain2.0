@@ -17,9 +17,6 @@ namespace Combat
         public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.None };
         public override string desc => "No matter who you are !";        
         public override float chance { get; set; }
-      
-
-   
         public override void ApplyFX1()
         {
             charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, AttribName.acc, +3
@@ -45,15 +42,18 @@ namespace Combat
         }
         public override void DisplayFX1()
         {
-            str1 = $"<style=Enemy><style=States> Despair</style> solo enemy";
-            SkillService.Instance.skillModelHovered.AddDescLines(str1);
+            str0 = "+2 Dodge and Acc on self";
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
         public override void DisplayFX2()
         {
+            str1 = "Apply <style=States>Despaired</style> if enemy solo";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX3()
         {
+            str2 = "If Morale 12: Regain AP";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
         public override void DisplayFX4()
         {
@@ -63,6 +63,16 @@ namespace Combat
         }
         public override void ApplyMoveFX()
         {          
+        }
+
+        public override void InvPerkDesc()
+        {
+            perkDesc = "+2 Dodge and Acc on self";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Apply <style=States>Despaired</style> if enemy solo";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "If Morale 12: Regain AP";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 

@@ -28,7 +28,7 @@ namespace Combat
             perkBase1.chance = 100f;
 
             perkBase2 = skillController.allPerkBases.Find(t => t.perkName == PerkNames.FasterThanEyeCanSee);
-            perkBase2.chance = 50f;
+            perkBase2.chance = 60f;
         }
 
         public override void ApplyFX1()
@@ -46,24 +46,24 @@ namespace Combat
         }
         public override void DisplayFX1()
         {
-            str1 = "<style=Allies>Wrist Spin has 100% <style=Bleed>Bleed</style>";
-            SkillService.Instance.skillModelHovered.AddDescLines(str1);
+            str0 = "Faster Than Eye Can See:";
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
         public override void DisplayFX2()
         {
-
+            str1 = "60% <style=States>Blinded</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX3()
         {
-
+            str2 = "Find the Weak Spot:";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
-
         public override void DisplayFX4()
         {
-
+            str3 = "100% Regain AP";
+            SkillService.Instance.skillModelHovered.AddDescLines(str3);
         }
-
         public override void ApplyVFx()
         {
 
@@ -78,7 +78,17 @@ namespace Combat
             base.SkillEnd();
             perkBase1.chance = 50f;
             perkBase2.chance = 30f;
-
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Faster Than Eye Can See:";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "60% <style=States>Blinded</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Find the Weak Spot:";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "100% Regain AP";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }    
 }

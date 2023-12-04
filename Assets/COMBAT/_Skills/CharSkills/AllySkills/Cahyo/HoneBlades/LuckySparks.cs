@@ -25,8 +25,9 @@ namespace Combat
         }
         public override void ApplyFX1()
         {
-           charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                 , AttribName.luck,+3, skillModel.timeFrame, skillModel.castTime, true);
+            if(targetController)
+               charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                             , AttribName.luck,+3, skillModel.timeFrame, skillModel.castTime, true);
         }
         public override void ApplyFX2()
         {
@@ -37,7 +38,7 @@ namespace Combat
         }
         public override void DisplayFX1()
         {
-            str1 = $"<style=Allies> Luck +4, 2 rd";
+            str1 = "+3 Luck";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
         public override void DisplayFX2()
@@ -59,6 +60,15 @@ namespace Combat
         public override void ApplyMoveFX()
         {
           
+        }
+        
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Stm cost: 5 -> 7";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+
+            perkDesc = "+3 Luck";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 

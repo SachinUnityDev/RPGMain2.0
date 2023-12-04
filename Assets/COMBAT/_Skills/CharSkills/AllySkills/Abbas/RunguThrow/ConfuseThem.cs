@@ -62,7 +62,10 @@ namespace Combat
 
         public override void DisplayFX1()
         {
+            str1 = "50% apply <style=States>Confused</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
+    
 
         public override void DisplayFX2()
         {
@@ -74,6 +77,13 @@ namespace Combat
 
         public override void DisplayFX4()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "50% apply <style=States>Confused</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Remove -2 Focus";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 

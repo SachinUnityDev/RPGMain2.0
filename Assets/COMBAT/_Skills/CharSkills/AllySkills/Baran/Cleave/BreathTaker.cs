@@ -44,7 +44,14 @@ namespace Combat
                 }
             }
         }
+        public override void SkillHovered()
+        {
+            base.SkillHovered();
+            SkillService.Instance.SkillWipe += skillController.allSkillBases
+                                                .Find(t => t.skillName == skillName).WipeFX3;
 
+        }
+     
         public override void ApplyFX1()
         {
             foreach (DynamicPosData dyna in CombatService.Instance.mainTargetDynas)
@@ -69,19 +76,18 @@ namespace Combat
         public override void ApplyVFx()
         {
         }
-
         public override void DisplayFX1()
         {
-            str1 = $"Hits first row";
-            SkillService.Instance.skillModelHovered.AddDescLines(str1);
+            str0 = "Target First Row";
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
-
+        //wipe str 2 of cleave
         public override void DisplayFX2()
         {
-            str2 = $"Drain <style=Attributes>Stamina </style> 3-5";
-            SkillService.Instance.skillModelHovered.AddDescLines(str2);
+            str1 = "Drain <style=Stamina>Stamina</style> 3-5";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
+ 
         public override void DisplayFX3()
         {
         }
@@ -89,174 +95,14 @@ namespace Combat
         public override void DisplayFX4()
         {
         }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Target First Row regardless of cast pos";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Drain 3-5 Stamina";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+        }
 
-        public override void PostApplyFX()
-        {
-        }
-        public override void PreApplyFX()
-        {
-        }
     }
 
 }
-
-//public override CharNames charName => CharNames.Baran;
-
-//        public override SkillNames skillName => SkillNames.Cleave;
-
-//        public override SkillLvl skillLvl => SkillLvl.Level2;
-
-//        private PerkSelectState _state = PerkSelectState.Clickable;
-//        public override PerkSelectState skillState { get => _state; set => _state = value; }
-//        public override PerkNames perkName => PerkNames.Breathtaker;
-
-//        public override PerkType perkType => PerkType.B2;
-
-//        public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.EdgyAxe };
-
-//        public override string desc => "BreathTaker";
-
-//        private float _chance = 0f;
-//        public override float chance { get => _chance; set => _chance = value; }
-//        List<DynamicPosData> targetDynas = new List<DynamicPosData>(); 
-
-//        public override void SkillInit()
-//        {
-//            // new cast pos and new targets .. override the begining skills 
-//            skillModel = SkillService.Instance.allSkillModels
-//                                             .Find(t => t.skillName == skillName);
-
-//            charController = CharacterService.Instance.GetCharCtrlWithName(charName);
-//            skillController = SkillService.Instance.currSkillMgr;
-//            charGO = SkillService.Instance.GetGO4Skill(charName);
-
-
-
-//        }
-//        public override void SkillHovered()
-//        {
-//            SkillInit();
-//            SkillServiceView.Instance.skillCardData.skillModel = skillModel;
-//            SkillService.Instance.SkillHovered += DisplayFX1;
-//            SkillService.Instance.SkillHovered += DisplayFX2;
-//            //SkillService.Instance.SkillWipe += skillController.allSkillBases.Find(t => t.skillName == skillName
-//            //&& t.skillLvl == SkillLvl.Level0).WipeFX1;
-
-//        }
-//        public override void SkillSelected()
-//        {
-//            SkillService.Instance.SkillApply += BaseApply;
-//            SkillService.Instance.SkillApply += ApplyFX1;
-//            SkillService.Instance.SkillApply += ApplyFX2;
-
-//            //skillController.allSkillBases.Find(t => t.skillName == skillName
-//            //                    && t.skillLvl == SkillLvl.Level0).RemoveFX1();
-//            CharMode oppParty = charController.charModel.charMode.FlipCharMode();
-//            targetDynas = GridService.Instance.GetFirstRowChar(oppParty);
-
-//            skillModel.targetPos.Clear();
-//            foreach (var dyna in targetDynas)
-//            {
-//                skillModel.targetPos.Add(new CellPosData(dyna.charMode, dyna.currentPos));
-//            }
-
-//        }
-//        public override void PreApplyFX()
-//        {
-
-//        }
-
-
-//        public override void BaseApply()
-//        {
-//            CombatEventService.Instance.OnEOR += Tick;
-
-
-
-//        }
-//        public override void ApplyFX1()
-//        {
-//            foreach (var dyna in targetDynas)
-//            {
-//                dyna.charGO.GetComponent<CharController>().ChangeStat(StatsName.stamina, -Random.Range(3, 6), 0, 0);
-//            }
-
-//        }
-
-//        public override void ApplyFX2()
-//        {
-
-//        }
-
-//        public override void ApplyFX3()
-//        {
-//        }
-
-//        public override void ApplyFX4()
-//        {
-//        }
-//        public override void Tick()
-//        {
-
-
-//        }
-//        public override void SkillEnd()
-//        {
-//        } 
-
-//        public override void DisplayFX1()
-//        {
-//            str1 = $" Decr Stamina 3-5";
-//            SkillServiceView.Instance.skillCardData.descLines.Add(str1);
-//        }
-
-//        public override void DisplayFX2()
-//        {
-//        }
-
-//        public override void DisplayFX3()
-//        {
-//        }
-
-//        public override void DisplayFX4()
-//        {
-//        }
-
-//        public override void PostApplyFX()
-//        {
-//        }
-
-
-//        public override void RemoveFX1()
-//        {
-//        }
-
-//        public override void RemoveFX2()
-//        {
-//        }
-
-//        public override void RemoveFX3()
-//        {
-//        }
-
-//        public override void RemoveFX4()
-//        {
-//        }
-
-
-
-//        public override void WipeFX1()
-//        {
-//        }
-
-//        public override void WipeFX2()
-//        {
-//        }
-
-//        public override void WipeFX3()
-//        {
-//        }
-
-//        public override void WipeFX4()
-//        {
-//        }

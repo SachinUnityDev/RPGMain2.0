@@ -251,8 +251,7 @@ MonoBehaviour:
       impactFX: {fileID: 1502306625036764, guid: 1c49e69f8e770bf45863c7187bf8fcb3,
         type: 3}
       colImpactFX: {fileID: 0}
-      mainSkillFX: {fileID: 1502306625036764, guid: 1c49e69f8e770bf45863c7187bf8fcb3,
-        type: 3}
+      mainSkillFX: {fileID: 0}
       colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
     - charMode: 1

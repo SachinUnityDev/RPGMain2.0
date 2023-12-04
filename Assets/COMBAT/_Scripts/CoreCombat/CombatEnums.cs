@@ -513,11 +513,11 @@ namespace Combat
         TrapOfTheWild,
         Surprise,
         TheHunter,
-        TheGrabber,
+        TheRuthless,
         TheTrickster,
-        Pulsator,
-        Twister,
-        Wapper,
+        ThePuller,
+        TheTwister,
+        TheEntangler,
     }
 
 

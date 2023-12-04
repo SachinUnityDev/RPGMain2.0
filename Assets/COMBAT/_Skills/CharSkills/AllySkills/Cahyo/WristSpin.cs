@@ -17,17 +17,32 @@ namespace Combat
         public override StrikeTargetNos strikeNos => StrikeTargetNos.Single;
         public override string desc => "this is wristSpin";
         
-        private float _chance = 0f;
+        private float _chance = 50f;
         public override float chance { get => _chance; set => _chance = value; }
 
         public override void PopulateTargetPos()
         {
             if (skillModel == null) return;
-            skillModel.targetPos.Clear();
-            for (int i = 1; i < 4; i++) //1,2,3
+            skillModel.targetPos.Clear(); CombatService.Instance.mainTargetDynas.Clear();
+            //  targetDynas.Clear();
+            if (myDyna.currentPos == 1)
             {
-                CellPosData cellPosData = new CellPosData(CharMode.Enemy, i);
-                skillModel.targetPos.Add(cellPosData);
+                CellPosData cellPosData = new CellPosData(CharMode.Enemy, 1);
+                AddTarget(cellPosData);
+            }      
+            else if (myDyna.currentPos == 2)
+            {
+                CellPosData cellPosData = new CellPosData(CharMode.Enemy, 1);
+                AddTarget(cellPosData);
+                CellPosData cellPosData2 = new CellPosData(CharMode.Enemy, 2);
+                AddTarget(cellPosData2);
+            }
+            else if (myDyna.currentPos == 3)
+            {
+                CellPosData cellPosData = new CellPosData(CharMode.Enemy, 1);
+                AddTarget(cellPosData);
+                CellPosData cellPosData2 = new CellPosData(CharMode.Enemy, 3);
+                AddTarget(cellPosData2);
             }
         }
         public override void ApplyFX1()
@@ -39,23 +54,22 @@ namespace Combat
 
         public override void ApplyFX2()
         {
-            chance = 50f; // bleed chance
+           
             if (targetController && chance.GetChance())
-                charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
                                             , charController.charModel.charID, CharStateName.BleedLowDOT);
         }
+  
         public override void DisplayFX1()
-        {  
+        {
             str1 = $"{skillModel.damageMod}% <style=Physical>Physical</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
-            str2 = $"50% <style=Bleed>Low Bleed</style> ";
+            str2 = $"{chance}% <style=Bleed>Low Bleed</style> ";
             SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
-
         public override void ApplyFX3()
         {
 
@@ -82,6 +96,7 @@ namespace Combat
         public override void ApplyMoveFx()
         {
         }
+   
     }
 
 

@@ -42,15 +42,11 @@ namespace Combat
 
         public override void SkillHovered()
         {
-            base.SkillHovered();
-            SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).WipeFX1;
-            SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).WipeFX2;
-
             skillModel.cd = 4;
             skillModel.maxUsagePerCombat = -1; 
             AttribData statData = charController.GetAttrib(AttribName.focus);
             if (statData.currValue == 12f)            
-                skillModel.damageMod = 280f;            
+                skillModel.damageMod = 300f;            
             else            
                 skillModel.damageMod = 240f;
         }
@@ -66,7 +62,7 @@ namespace Combat
             if(targetController)
             targetController.damageController
                                        .ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Water
-                                                                    , skillModel.damageMod, skillModel.skillInclination, true);
+                                                        , skillModel.damageMod, skillModel.skillInclination, true);
         }
 
         public override void ApplyFX2()
@@ -90,26 +86,29 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str0 = $" 240% <style=Water>Water</style>";
+            str0 = "Target -> single enemy";
             SkillService.Instance.skillModelHovered.AddDescLines(str0);
-
-            str1 = $"If <style=Attribute>Focus</style> 12, 280% <style=Water>Water</style>";
-            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
-            str2 = $"<style=States>Soaked</style>,{skillModel.castTime}";
-            SkillService.Instance.skillModelHovered.AddDescLines(str2);
-        
+            str1 = "If Focus 12: 300% <style=Water>Water</style> Dmg";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX3()
         {
         }
 
         public override void DisplayFX4()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "<style=Water>Water</style> Dmg: 160% -> 240%";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Target -> single enemy";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "If Focus 12: 300% <style=Water>Water</style> Dmg";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
 
     }

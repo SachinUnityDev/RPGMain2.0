@@ -41,9 +41,6 @@ namespace Combat
             SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).RemoveFX1;
         }
 
-
-        //        Ignores armor. (ADDED buff)
-        //    Self buff: Trigger Max armor for 2 rds. (ADDED)
         public override void ApplyFX1()
         {
             if (targetController)  // ignore armor
@@ -55,14 +52,7 @@ namespace Combat
 
         public override void ApplyFX2()
         {
-            //AttribData armorMin = charController.GetAttrib(AttribName.armorMin);
-            
-            // TO BE CORRECTED
-
-            //armorChg = armorMin.min - armorMin.currValue;
-            //charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID,AttribName.armorMin
-            //    , armorChg, TimeFrame.EndOfRound, skillModel.castTime, true);
-
+      
         }
 
     
@@ -80,14 +70,13 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str1 = $"Ignores<style=Attributes> Armor </style>";
+            str1 = "Ignore<style=Attributes> Armor </style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
 
         public override void DisplayFX2()
         {
-            //str2 = $"Trigger max<style=Attributes> Armor </style>, {skillModel.castTime} rds";
-            //SkillService.Instance.skillModelHovered.descLines.Add(str2);
+           
         }
 
         public override void DisplayFX3()
@@ -97,7 +86,14 @@ namespace Combat
         public override void DisplayFX4()
         {
         }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Ignore<style=Attributes> Armor </style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
 
+            perkDesc = "Cd: 2 -> 1 rd";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+        }
     }
 }
 

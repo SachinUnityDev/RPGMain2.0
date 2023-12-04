@@ -30,7 +30,7 @@ namespace Combat
                 if(cell.charMode == CharMode.Ally)
                 {
                     DynamicPosData dyna = GridService.Instance.gridView.GetDynaFromPos(cell.pos, cell.charMode);
-                    float healVal = Random.Range(4f, 11f);
+                    float healVal = (float)Random.Range(4, 11);
 
                     dyna.charGO.GetComponent<CharController>().damageController.ApplyDamage(charController,
                                           CauseType.CharSkill, (int)skillName, DamageType.Heal, healVal, SkillInclination.None);
@@ -61,14 +61,13 @@ namespace Combat
         }
         public override void DisplayFX1()
         {
-            str1 = $"<style=Allies><style=Heal> Heal </style> 4-10";
+            str1 = "Allies:<style=Heal> Heal</style> 4-10, Clear<style=Burn>Burn</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
 
         public override void DisplayFX2()
         {
-            str2 = $"<style=Allies><style=Burn> Clear Burn </style>";
-            SkillService.Instance.skillModelHovered.AddDescLines(str2);
+         
         }
 
         public override void DisplayFX3()
@@ -81,8 +80,12 @@ namespace Combat
            
         }
 
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Allies:<style=Heal> Heal</style> 4-10, Clear<style=Burn>Burn</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+        }
 
- 
     }
 
 

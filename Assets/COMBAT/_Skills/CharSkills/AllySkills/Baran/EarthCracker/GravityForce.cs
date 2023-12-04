@@ -27,6 +27,7 @@ namespace Combat
         public override float chance { get => _chance; set => _chance = value; }
 
         List<DynamicPosData> colDynaCopy = new List<DynamicPosData>(); 
+
         bool dmgInc =false;
         public override void BaseApply()
         {
@@ -54,11 +55,12 @@ namespace Combat
         }
         public override void ApplyFX1()
         {
-            if (chance.GetChance())
+            if(dmgInc) 
+                if (chance.GetChance())
                 charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName,
                 charController.charModel.charID, CharStateName.Rooted, skillModel.timeFrame, skillModel.castTime);
 
-
+            dmgInc = false;
         }
 
         public override void ApplyFX2()
@@ -81,29 +83,36 @@ namespace Combat
         public override void ApplyVFx()
         {
         }
-
         public override void DisplayFX1()
         {
-            str0 = $"<style=States> Rooted </style>on main target, {skillModel.castTime} rds";
+            str0 = $"60% <style=States>Rooted</style> on initial target";
             SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
-
         public override void DisplayFX2()
         {
-            str1 = $"+50%<style=Physical> Physical </style>on main target if already rooted";
+            str1 = $"+50% Dmg vs initial target if <style=States>Rooted</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX3()
         {
-            str2 = $"-1<style=Attributes> Luck </style>on col targets, {skillModel.castTime} rds";
+            str2 = $"-1 Luck on adj targets";
             SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
-
         public override void DisplayFX4()
         {
         }
-  
+        public override void InvPerkDesc()
+        {
+            perkDesc = "60% <style=States>Rooted</style> on initial target";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+
+            perkDesc = $"+50% Dmg vs initial target if <style=States>Rooted</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+
+            perkDesc = $"-1 Luck on adj targets";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+        }
+
     }
 }
 

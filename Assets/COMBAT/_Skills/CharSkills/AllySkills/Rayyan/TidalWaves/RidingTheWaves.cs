@@ -24,9 +24,13 @@ namespace Combat
         public override SkillLvl skillLvl => SkillLvl.Level3;
 
         private float _chance = 0f;
-        public override float chance { get => _chance; set => _chance = value; }      
-      
-  
+        public override float chance { get => _chance; set => _chance = value; }
+
+        public override void SkillHovered()
+        {
+            base.SkillHovered();
+            skillModel.cd = 2;
+        }
         public override void ApplyFX1()
         {
             if(targetController)
@@ -42,7 +46,7 @@ namespace Combat
                                                                   .GetAllAdjDynaOccupied(currDyna);
 
                 allAdjOccupied.ForEach(t=>t.charGO.GetComponent<CharController>().charStateController.
-               ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                  ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
                     , charController.charModel.charID, CharStateName.Sneaky, skillModel.timeFrame, skillModel.castTime));
 
             }
@@ -50,7 +54,6 @@ namespace Combat
 
         public override void ApplyFX3()
         {
-      
         }
 
         public override void ApplyVFx()
@@ -64,26 +67,34 @@ namespace Combat
         }
         public override void DisplayFX1()
         {
-            str1 = $"<style=Self> <style=States> Soaked </style>, 2 rds";
+            str1 = "Self: <style=States>Soaked</style> & <style=Move>Move</style> to pos 7";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
-            str2 = $"<style=Enemy> -3 Morale and Luck, 2 rds";
+            str2 = "Apply <style=States>Sneaky</style> to adj allies";
             SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
 
         public override void DisplayFX3()
         {
-            str3 = $"<style=Move> Move </style>to pos 7";
-            SkillService.Instance.skillModelHovered.AddDescLines(str3);
+           
         }
 
         public override void DisplayFX4()
         {
-            str0 = $"<style=States> Add sneaky state to adj targets </style>";
-            SkillService.Instance.skillModelHovered.AddDescLines(str0);
+         
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Self: <style=States>Soaked</style> <style=Move>Move</style> to pos 7";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+
+            perkDesc = "Apply <style=States>Sneaky</style> to adj allies";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+
+            perkDesc = "Cd: 3 -> 2";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
 
     }

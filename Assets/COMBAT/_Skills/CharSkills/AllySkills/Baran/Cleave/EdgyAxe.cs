@@ -65,15 +65,22 @@ namespace Combat
         public override void ApplyVFx()
         {
         }
-
         public override void DisplayFX1()
         {
-            str1 = $"{chance}% <style=Bleed>High Bleed </style>";
+            str1 = $"{chance}% <style=Bleed>High Bleed</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
+         
+
         }
+        //public override void DisplayFX1()
+        //{
+        //    str1 = $"{chance}% <style=Bleed>High Bleed </style>";
+        //    SkillService.Instance.skillModelHovered.AddDescLines(str1);
+        //}
 
         public override void DisplayFX2()
         {
+         
         }
 
         public override void DisplayFX3()
@@ -84,6 +91,11 @@ namespace Combat
         {
         }
 
+        public override void InvPerkDesc()
+        {
+            perkDesc = $"{chance}% Low -><style=Bleed> High Bleed</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+        }
     }
 }
 

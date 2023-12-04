@@ -19,15 +19,10 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-       // bool subscribed = false; 
+
         public override void PopulateTargetPos()
         {
-            if (skillModel == null) return; 
-            skillModel.targetPos.Clear();
-            CombatService.Instance.mainTargetDynas.Clear(); 
-
-                skillModel.targetPos.Add(new CellPosData(myDyna.charMode, myDyna.currentPos));
-                CombatService.Instance.mainTargetDynas.Add(myDyna);    
+            SelfTarget();
         }
    
         public override void ApplyFX1()
@@ -50,19 +45,19 @@ namespace Combat
         }
         public override void DisplayFX1()
         {           
-            str1 = $"<style=States>Invunerable</style>, {skillModel.castTime} rds";
+            str1 = "Gain <style=States>Invunerable</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
 
         public override void DisplayFX2()
         {
-            str2 = $"-4 <style=Attributes>Haste</style>, {skillModel.castTime} rds";
+            str2 = $"-4 Haste";
             SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
 
         public override void DisplayFX3()
         {
-            str3 = $"-50%<style=Heal> Healing </style>recieved until eoc";
+            str3 = $"-50%<style=Heal> Healing </style>received until eoc";
             SkillService.Instance.skillModelHovered.AddDescLines(str3);
         }
 

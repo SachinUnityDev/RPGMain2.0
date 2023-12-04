@@ -10,6 +10,8 @@ TagManager:
   - Bullet
   - TownBtns
   - Canvas
+  - CharFillBar
+  - CharOrangeBar
   layers:
   - Default
   - TransparentFX
@@ -53,7 +55,7 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Players
+  - name: Player
     uniqueID: 710039401
     locked: 0
   - name: FrontEnvironment

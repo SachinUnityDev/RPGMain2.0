@@ -7,8 +7,6 @@ using UnityEngine;
 
 namespace Combat
 {
-
-
     public class HideInTheBushes : SkillBase
     {
         private CharNames _charName;
@@ -58,19 +56,17 @@ namespace Combat
                  , AttribName.haste, +1, TimeFrame.EndOfCombat, skillModel.castTime, true);
 
             charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                 , AttribName.haste, +3, skillModel.timeFrame, skillModel.castTime, true);
+                 , AttribName.haste, -3, skillModel.timeFrame, skillModel.castTime, false);
 
             int stmGain = UnityEngine.Random.Range(5, 8); 
             charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID
                                                         , StatName.stamina, stmGain);
-
-
         }
 
         public override void ApplyFX2()
         {
             charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                                     , charController.charModel.charID, CharStateName.Sneaky);
+                                            , charController.charModel.charID, CharStateName.Sneaky);
         }
 
         public override void ApplyFX3()
@@ -78,14 +74,18 @@ namespace Combat
         }
         public override void DisplayFX1()
         {
+            str1 = "-3 Haste for skill duration, +1 Haste until eoc";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
+            str2 = "Gain<style=Stamina> 5-7 Stm</style> and <style=States>Sneaky</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
-
         public override void DisplayFX3()
         {
+            str3 = "Next Animal Trap: 50% Regain AP";
+            SkillService.Instance.skillModelHovered.AddDescLines(str3);
         }
 
         public override void DisplayFX4()
@@ -95,7 +95,6 @@ namespace Combat
         public override void ApplyVFx()
         {
             SkillService.Instance.skillFXMoveController.SingleTargetRangeStrike(PerkType.None);
-
         }
 
         public override void ApplyMoveFx()

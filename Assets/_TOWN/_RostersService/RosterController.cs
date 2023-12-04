@@ -6,7 +6,7 @@ using TMPro;
 using DG.Tweening;
 using Town;
 using System.Linq;
-
+using Interactables;
 
 namespace Common
 {
@@ -31,14 +31,41 @@ namespace Common
             return allCharInOtherTown;  
         }
 
-        //public List<CharModel> GetCharUnLocked()
-        //{
-        //    //allCharUnLocked = CharService.Instance.allyInPLayControllers
-        //    //         .Where(t => t.charModel.stateOfChar == StateOfChar.UnLocked).ToList();
+        public List<CharController> GetCharUnlockedWithStatusUpdated()
+        {
+            List<CharController> allUnLocked = CharService.Instance.allyInPlayControllers
+                   .Where(t => t.charModel.stateOfChar == StateOfChar.UnLocked).ToList();
 
-        //    //return allCharUnLocked;
+            foreach (CharController charCtrl in allUnLocked)
+            {
+                if (!FameService.Instance.fameController.IsFameBehaviorMatching(charCtrl))
+                    charCtrl.charModel.availOfChar = AvailOfChar.UnAvailable_Fame;
+                else if (charCtrl.charModel.currCharLoc != TownService.Instance.townModel.currTown)
+                    charCtrl.charModel.availOfChar = AvailOfChar.UnAvailable_Loc; 
+                else if(ChkInParty(charCtrl))
+                    charCtrl.charModel.availOfChar = AvailOfChar.UnAvailable_InParty;
+                else if(!ChkPreReq(charCtrl))
+                    charCtrl.charModel.availOfChar = AvailOfChar.UnAvailable_Prereq;
 
-        //}
+            }
+            return allUnLocked; 
+        }
+        bool ChkInParty(CharController charCtrl)
+        {
+           return CharService.Instance.allCharsInPartyLocked
+                .Any(t=>t.charModel.charID == charCtrl.charModel.charID);
+        }
+
+        bool ChkPreReq(CharController charCtrl)
+        {
+            // stash and main inv 
+            List<ItemDataWithQty> allItemQty = charCtrl.charModel.GetPrereqsItem();
+            bool hasItem1 = InvService.Instance.invMainModel.HasItemInQtyCommOrStash(allItemQty[0]);
+            bool hasItem2 = InvService.Instance.invMainModel.HasItemInQtyCommOrStash(allItemQty[1]);
+            if (hasItem1 || hasItem2) return true;
+            return false;
+        }
+
 
     }
 }

@@ -31,7 +31,7 @@ namespace Combat
         }
         public override void ApplyFX1()
         {
-            if(targetController !=null)
+            if(targetController)
                 targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
                     , AttribName.haste, -2f, skillModel.timeFrame, skillModel.castTime, false);
 
@@ -55,7 +55,10 @@ namespace Combat
 
         public override void DisplayFX1()
         {
+            str1 = "-2 Haste";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
+     
 
         public override void DisplayFX2()
         {
@@ -67,6 +70,13 @@ namespace Combat
 
         public override void DisplayFX4()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "-2 Haste";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Stm cost: 5 -> 6";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 }

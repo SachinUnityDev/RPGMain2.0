@@ -237,6 +237,25 @@ namespace Combat
             allTargetedDyna = new List<DynamicPosData>();
         }
 
+        public void Move2RandomEmpty(DynamicPosData dyna)
+        {
+            CharMode charMode = dyna.charMode;
+
+            if (charMode == CharMode.Ally)
+            {
+                allOccupiedPosAlly.ForEach(t => allUnOccupiedPosAlly.Remove(t));             
+                int ran = UnityEngine.Random.Range(0, allUnOccupiedPosAlly.Count);
+                gridController.Move2Pos(dyna, allUnOccupiedPosAlly[ran]);
+            }
+            else if (charMode == CharMode.Enemy)
+            {
+                allOccupiedPosEnemy.ForEach(t => allUnOccupiedPosEnemy.Remove(t));
+                int ran = UnityEngine.Random.Range(0, allUnOccupiedPosEnemy.Count);
+                gridController.Move2Pos(dyna, allUnOccupiedPosEnemy[ran]);             
+            }
+        }
+
+
         public void ShuffleCharSet(List<DynamicPosData> shuffleChar)
         {
             CharMode charMode = shuffleChar[0].charMode;

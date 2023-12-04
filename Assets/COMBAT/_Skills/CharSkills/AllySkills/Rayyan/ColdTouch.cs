@@ -18,11 +18,9 @@ namespace Combat
         public override StrikeTargetNos strikeNos => StrikeTargetNos.Single;
         public override string desc => "the is cold touch";
 
-        private float _chance = 0f;
+        private float _chance = 40f;
         public override float chance { get => _chance; set => _chance = value; }
-
-        //List<GameObject> targetGOs = new List<GameObject>();
-        //List<CharController> targetControllers = new List<CharController>();
+    
         public override void PopulateTargetPos()
         {
             if (skillModel == null) return; 
@@ -57,7 +55,7 @@ namespace Combat
                 {
                     strikeData.targets.ForEach(t => Debug.Log("STRIKE DATA " + t.name)); 
                     strikeData.targets.ForEach(t => t.damageController.ApplyDamage(strikeData.striker,
-                     CauseType.CharSkill, (int)skillName, DamageType.Water, 40f, skillModel.skillInclination));
+                     CauseType.CharSkill, (int)skillName, DamageType.Water, chance, skillModel.skillInclination));
                 }                       
             }          
         }     
@@ -68,7 +66,8 @@ namespace Combat
         }
         public override void DisplayFX1()
         {
-           
+            str0 = $"Add +{chance}% <style=Water>Water</style> Dmg on ally <style=Physical>Physical</style> Melee skills";
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
 
         public override void DisplayFX2()

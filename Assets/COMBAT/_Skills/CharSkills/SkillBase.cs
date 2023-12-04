@@ -67,11 +67,8 @@ namespace Combat
             charGO = this.skillController.gameObject;
             if(GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
-                myDyna = GridService.Instance.GetDyna4GO(charGO);
-       
+                myDyna = GridService.Instance.GetDyna4GO(charGO);       
                 PopulateTargetPos();
-                //CombatEventService.Instance.OnCharClicked -= OnCharClicked;
-                //CombatEventService.Instance.OnCharClicked += OnCharClicked;
             }
             
         }
@@ -273,7 +270,7 @@ namespace Combat
                 combatController.actionPts++;
         }
 
-        protected void AllInCharMode(CharMode charMode)
+        protected void AnyWithCharMode(CharMode charMode)
         {
             if (skillModel == null) return;
             CombatService.Instance.mainTargetDynas.Clear(); skillModel.targetPos.Clear();
@@ -312,7 +309,24 @@ namespace Combat
             }
         }
 
+        protected void AllinCharModeExceptSelf(CharMode charMode)
+        {
+            skillModel.targetPos.Clear();
 
+            for (int i = 1; i < 8; i++)
+            {
+                if (!(myDyna.currentPos == i))
+                {
+                    CellPosData cellPosData = new CellPosData(charMode, i);
+                    DynamicPosData dyna = GridService.Instance.gridView.GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
+                    if (dyna != null)
+                    {
+                        skillModel.targetPos.Add(cellPosData);
+                        CombatService.Instance.mainTargetDynas.Add(dyna);
+                    }
+                }
+            }
+        }
     }
 
 }

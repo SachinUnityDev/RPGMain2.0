@@ -15,20 +15,20 @@ namespace Combat
         public override PerkNames perkName => PerkNames.QuickToReact;
         public override PerkType perkType => PerkType.A1;
         public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.None };
-        public override string desc => "Quick To react";    
-        public override float chance { get; set; }
+        public override string desc => "Quick To react";
+        private float _chance = 20f;
+        public override float chance { get => _chance; set => _chance = value; }
 
         public override void SkillHovered()
         {
             base.SkillHovered();
-            skillModel.cd = 2;
-            chance = 20f; 
+            skillModel.cd = 2;           
         }
 
 
         public override void ApplyFX1()
         {
-            if (20f.GetChance())
+            if (chance.GetChance())
                 RegainAP(); 
         }
 
@@ -41,7 +41,7 @@ namespace Combat
         }
         public override void DisplayFX1()
         {
-            str1 = $"<style=Allies> cd now {skillModel.cd} rd";
+            str1 = $"20% Regain AP";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
         public override void DisplayFX2()
@@ -61,6 +61,13 @@ namespace Combat
 
         public override void ApplyMoveFX()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "20% Regain AP";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Cd: 3 -> 2";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 }

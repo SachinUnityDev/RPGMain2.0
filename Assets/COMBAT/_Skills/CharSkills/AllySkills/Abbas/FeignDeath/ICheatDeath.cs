@@ -44,7 +44,6 @@ namespace Combat
 
         public override void ApplyFX2()
         {
-
             AttribData hasteState = charController.GetAttrib(AttribName.haste);
             if (hasteState.currValue == 12)
             {
@@ -67,18 +66,27 @@ namespace Combat
 
         public override void DisplayFX1()
         {
+            str1 = "+1 Cheat death limit this combat";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
+            str2 = "If Haste 12: Gain<style=States> Sneaky</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
-
         public override void DisplayFX3()
         {
         }
 
         public override void DisplayFX4()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "+1 Cheat death limit this combat";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "If Haste 12: Gain<style=States> Sneaky</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 }

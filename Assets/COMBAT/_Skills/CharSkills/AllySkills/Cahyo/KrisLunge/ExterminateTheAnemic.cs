@@ -54,13 +54,13 @@ namespace Combat
         }
         public override void DisplayFX1()
         {
-            str1 = $"<style=Enemy>Kills Bleeding Enemy Health < 30%";
+            str1 = "Instant kill if target Hp < 30% & <style=Bleed>Bleeding</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
         public override void DisplayFX2()
         {
-            str2 = $"<style=Enemy> {skillModel.staminaReq} <style=Stamina> Stamina</style>";
-            SkillService.Instance.skillModelHovered.AddDescLines(str2);
+            str2 = "Doesn't work on Bosses";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
         public override void DisplayFX3()
         {
@@ -75,6 +75,17 @@ namespace Combat
 
         public override void ApplyMoveFX()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Instant kill if target Hp < 30% & <style=Bleed>Bleeding</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(perkDesc);
+
+            perkDesc = "Doesn't work on Bosses";
+            SkillService.Instance.skillModelHovered.AddDescLines(perkDesc);
+
+            perkDesc = "Stm cost: 5 -> 7";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 

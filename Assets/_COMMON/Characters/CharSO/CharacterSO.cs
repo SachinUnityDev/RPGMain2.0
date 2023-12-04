@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Interactables;
+using System.Security.Policy;
 
 namespace Common
 {
@@ -60,16 +61,16 @@ namespace Common
         public CharFleeState charFleeState;
 
         [Header("DEFAULT PROVISION")]
-        public List<ItemData> provisionItems = new List<ItemData>();
+        public List<ItemDataWithQtyNFameType> provisionItems = new List<ItemDataWithQtyNFameType>();
 
         [Header("Earnings In Quest")]
         // money and Item 
-        public List<ItemData> earningsItems = new List<ItemData>();
+        public List<ItemDataWithQtyNFameType> earningsItems = new List<ItemDataWithQtyNFameType>();
         public int earningShare; 
 
         [Header("Companion PreReq")]
-        public List<ItemData> CompanionPreReqOpt1 = new List<ItemData>();
-        public List<ItemData> CompanionPreReqOpt2 = new List<ItemData>();
+        public List<ItemDataWithQtyNFameType> CompanionPreReqOpt1 = new List<ItemDataWithQtyNFameType>(); 
+        public List<ItemDataWithQtyNFameType> CompanionPreReqOpt2 = new List<ItemDataWithQtyNFameType>();
         
         [Header("Char Start Lvl")]
         public int startLevel;
@@ -327,6 +328,14 @@ namespace Common
 
         }
         #endregion
+    }
+    [Serializable]
+    public class ItemDataWithQtyNFameType
+    {
+        public ItemDataWithQty itemDataQty;
+        public FameType fameType; 
+
+
     }
 
 }

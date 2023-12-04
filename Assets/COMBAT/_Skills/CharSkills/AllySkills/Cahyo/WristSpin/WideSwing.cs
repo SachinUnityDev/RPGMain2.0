@@ -65,14 +65,30 @@ namespace Combat
             base.SkillHovered();
             skillModel.damageMod = 80f;
         }
-        
+        public override void SkillSelected()
+        {
+            base.SkillSelected();
+            SkillService.Instance.SkillFXRemove += skillController
+                                                .allSkillBases.Find(t => t.skillName == skillName).RemoveFX1;
+            SkillService.Instance.SkillFXRemove += skillController
+                                              .allSkillBases.Find(t => t.skillName == skillName).RemoveFX2;
+        }
 
         public override void ApplyFX1()
         {
-       
+            if (CombatService.Instance.mainTargetDynas.Count > 0)
+                CombatService.Instance.mainTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>().damageController
+                    .ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Physical, skillModel.damageMod
+                    , skillModel.skillInclination));
         }
         public override void ApplyFX2()
         {
+            chance = 50f; // bleed chance
+            if (targetController && chance.GetChance())
+                if (CombatService.Instance.mainTargetDynas.Count > 0)
+                    CombatService.Instance.mainTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>()
+                                    .charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                                             , charController.charModel.charID, CharStateName.BleedLowDOT));
         }
 
         public override void ApplyFX3()
@@ -89,7 +105,8 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-          
+            str0 = "If on pos 1: Hit 1, if on 2, hit 1+2, if on 3, hit 1+3";
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
 
         public override void DisplayFX2()
@@ -102,6 +119,15 @@ namespace Combat
 
         public override void DisplayFX4()
         {
+        }
+
+        public override void InvPerkDesc()
+        {
+            perkDesc = "100% -> 80%<style=Physical> Physical </style>Dmg";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+
+            perkDesc = "If on pos 1: Hit 1, if on 2, hit 1+2, if on 3, hit 1+3";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }
 }

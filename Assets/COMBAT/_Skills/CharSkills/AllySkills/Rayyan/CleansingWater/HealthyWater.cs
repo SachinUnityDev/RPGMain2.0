@@ -22,7 +22,6 @@ namespace Combat
 
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
-      //  public override List<DynamicPosData> targetDynas => new List<DynamicPosData>();
 
         public override void SkillHovered()
         {
@@ -30,7 +29,7 @@ namespace Combat
             if (skillController != null)
             {
                 SkillService.Instance.SkillWipe += skillController.allSkillBases
-                                                    .Find(t => t.skillName == skillName).WipeFX2;  // heal change 
+                                                    .Find(t => t.skillName == skillName).WipeFX1;  // heal change 
                 skillModel.attackType = AttackType.Ranged;
             }
         }
@@ -38,14 +37,16 @@ namespace Combat
         public override void SkillSelected()
         {
             base.SkillSelected();
-            SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).RemoveFX1;// heal change
+            SkillService.Instance.SkillFXRemove += skillController
+                .allSkillBases.Find(t => t.skillName == skillName).RemoveFX1;// heal change
         }
 
         public override void ApplyFX1()
         {
             if (IsTargetAlly())
             {
-                targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Heal, Random.Range(6f, 12f));
+                targetController.damageController
+                .ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Heal, Random.Range(6f, 12f));
             }
         }
         public override void ApplyFX2()
@@ -68,21 +69,14 @@ namespace Combat
         {
           
         }
-        public override void SkillEnd()
-        {
-
-        }   
-
         public override void DisplayFX1()
         {
-            str1 = $"<style=Heal> Heal </style>6-12";
+            str1 = "<style=Heal>Heal </style>6-12";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
-
         }
-
         public override void DisplayFX2()
         {
-            str2 = $"<style=Burn> Clear Burn</style>";
+            str2 = "Clear <style=Burn>Burn</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
 
@@ -92,6 +86,13 @@ namespace Combat
 
         public override void DisplayFX4()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Heal: 4-7 -> 6-12";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Clear <style=Burn>Burn</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
 
     }

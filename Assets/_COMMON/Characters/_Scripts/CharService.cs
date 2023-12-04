@@ -23,7 +23,8 @@ namespace Common
         [Header("Character SO")]
         public AllCharSO allCharSO; 
         public List<CharacterSO> allAllySO = new List<CharacterSO>();
-        public AllNPCSO allNpcSO; 
+        public AllNPCSO allNpcSO;
+        public FleeChancesSO fleeChancesSO;
 
         [Header("Load Strings ")]
         public List<string> allCharsJSONs = new List<string>();
@@ -76,7 +77,7 @@ namespace Common
 
             //  if(SaveService.Instance.)
             List<CharNames> chars2Spawn = new List<CharNames> { CharNames.Abbas
-               , CharNames.Baran, CharNames.Rayyan
+               , CharNames.Baran, CharNames.Rayyan, CharNames.Cahyo
                 };
 
             foreach (CharNames charName in chars2Spawn)
@@ -246,8 +247,9 @@ namespace Common
        
         public void On_CharAddToParty(CharController charController)
         {
-            Debug.Log("On Char Added" + charController.charModel.charName);
-            allCharsInPartyLocked.Add(charController);
+            if (allCharsInPartyLocked.Any(t => t.charModel.charID == charController.charModel.charID)) return;
+            Debug.Log("On Char Added" + charController.charModel.charName);                    
+            allCharsInPartyLocked.Add(charController);    
             OnCharAddedToParty?.Invoke(charController);
         }
     

@@ -20,7 +20,7 @@ namespace Combat
         public override void PopulateTargetPos()
         {
             if (skillModel == null) return;
-                AllInCharMode(CharMode.Enemy); 
+                AnyWithCharMode(CharMode.Enemy); 
         }
 
         public override void ApplyFX1()

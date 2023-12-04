@@ -53,13 +53,10 @@ namespace Combat
             base.SkillHovered();
             skillModel.cd = 2;
             skillModel.attackType = AttackType.Ranged;
-        }
 
-        //public override void BaseApply()
-        //{
-        //    base.BaseApply();
-        
-        //}
+            SkillService.Instance.SkillWipe += skillController.allPerkBases
+                                                .Find(t => t.skillName == skillName && t.perkName == PerkNames.Breathtaker).WipeFX1;
+        }
 
         public override void ApplyFX1()
         {
@@ -98,27 +95,48 @@ namespace Combat
         public override void ApplyVFx()
         {
         }
-
         public override void DisplayFX1()
         {
-            str0 = $"<style=Move> Shuffle </style>";
+            str0 = $"Target everyone and <style=Move>Shuffle</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
-
+        // wipe breathtaker display 0 (and cleave 2)
         public override void DisplayFX2()
         {
-            str1 = $" -2 <style=Attributes>Focus</style>, {skillModel.castTime} rd ";
+            str1 = $"-2 Focus";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
 
+        //public override void DisplayFX1()
+        //{
+        //    str0 = $"<style=Move> Shuffle </style>";
+        //    SkillService.Instance.skillModelHovered.AddDescLines(str0);
+        //}
+
+        //public override void DisplayFX2()
+        //{
+        //    str1 = $" -2 <style=Attributes>Focus</style>, {skillModel.castTime} rd ";
+        //    SkillService.Instance.skillModelHovered.AddDescLines(str1);
+        //}
+
         public override void DisplayFX3()
         {
-            //str3 = $"1 rd cd --> 2 rd cd";
-            //SkillServiceView.Instance.skillCardData.descLines.Add(str3);
+           
         }
 
         public override void DisplayFX4()
         {
+        }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Attack type: Melee -> Ranged";                
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Target everyone and shuffle";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);            
+            perkDesc = "- 2 Focus";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "Cd: 1 rd-> 2 rds";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
 
     }

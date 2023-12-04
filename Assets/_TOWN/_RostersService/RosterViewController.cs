@@ -17,7 +17,7 @@ namespace Common
         [SerializeField] Button closeBtn; 
         [SerializeField] GameObject charScrollGO;
         public GameObject CharPortraitGO;
-
+      
 
         [Header("Btm Char List")]
         [SerializeField] Transform btmCharTrans;
@@ -37,7 +37,7 @@ namespace Common
         [SerializeField] float prevRightClick = 0f;
 
         [SerializeField] int index;
-        [SerializeField] List<CharModel> unLockedChars = new List<CharModel>();
+        [SerializeField] List<CharController> unLockedChars = new List<CharController>();
         [SerializeField] Sprite BGUnClicked;
         [SerializeField] Sprite BGClicked;
 
@@ -64,9 +64,6 @@ namespace Common
             rightBtn.onClick.AddListener(OnRightBtnPressed);
 
             inviteBtn.onClick.AddListener(OnInviteBtnPressed); 
-
-
-
         }
         void OnPartyDisbandedFameBehMisMatchChk()
         {
@@ -91,6 +88,7 @@ namespace Common
                 }
             }
         }
+
         public void ReverseBack(PortraitDragNDrop portraitDragNDrop)
         {
             Transform slotParent = portraitDragNDrop.parentTransform;
@@ -99,13 +97,14 @@ namespace Common
             portraitDragNDrop.transform.SetParent(slotParent);
 
             draggedGORect.localScale = Vector3.one;
-            draggedGORect.anchoredPosition = new Vector3(0, 0, 0);           
+            draggedGORect.anchoredPosition = new Vector3(0, 0, 0);
+            PopulateCharScroll();
+            Destroy(portraitDragNDrop.gameObject);
         }
         void OnInviteBtnPressed()
         {
 
         }
-
         void OnCloseBtnPressed()
         {
             UnLoad();
@@ -141,11 +140,11 @@ namespace Common
 
         void PopulateCharScroll()
         {
-           RosterService.Instance.On_ScrollSelectCharModel(unLockedChars[index]);
+           RosterService.Instance.On_ScrollSelectCharModel(unLockedChars[index].charModel);
             if (RosterService.Instance.scrollSelectCharModel.charName == CharNames.Abbas)
             {
                 index++;
-                RosterService.Instance.scrollSelectCharModel = unLockedChars[index];
+                RosterService.Instance.scrollSelectCharModel = unLockedChars[index].charModel;
             }
             Debug.Log("RosterService" + RosterService.Instance.scrollSelectCharModel.charName);
             PopulatePortrait();
@@ -154,7 +153,7 @@ namespace Common
         public void PopulatePortrait2_Char(CharNames charName)
         {
             index = 
-            unLockedChars.FindIndex(t => t.charName == charName);                
+                unLockedChars.FindIndex(t => t.charModel.charName == charName);                
             PopulateCharScroll();
             PopulateSidePlank();
         }
@@ -162,7 +161,9 @@ namespace Common
         public void PopulatePortrait()
         {
             charScrollGO.transform.GetChild(0)
-                .GetComponent<CharScrollSlotController>().PopulatePortrait();           
+                .GetComponent<CharScrollSlotController>().PopulatePortrait(); 
+            
+
         }
         void PopulateSidePlank()
         {
@@ -185,17 +186,15 @@ namespace Common
             {
                 CharService.Instance.GetCharCtrlWithName(charModel.charName); 
             }
-           
             index = 0;
             gameObject.SetActive(true);
-            unLockedChars = CharService.Instance.allyUnLockedCompModels; 
+            unLockedChars = RosterService.Instance.rosterController.GetCharUnlockedWithStatusUpdated(); 
             PopulateCharScroll();
         }
 
         public void UnLoad()
         {
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
-           
         }
 
         public void Init()
@@ -203,9 +202,7 @@ namespace Common
             foreach (Transform child in SidePlankTrans.transform)
             {
                 child.GetComponent<SidePanelPtrEvents>().SidePlankInit();
-            }
-            
-            //Load();          
+            }         
         }
 
         public HelpName GetHelpName()

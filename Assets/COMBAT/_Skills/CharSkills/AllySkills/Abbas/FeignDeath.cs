@@ -53,24 +53,21 @@ namespace Combat
         public override void ApplyFX3()
         {
         }
-
-
-
         public override void DisplayFX1()
         {
-            str1 = $"<style=Move>Move</style> to adj tile // Chance to keep your turn depending on Haste";
+            str1 = "Req: Hp <40%";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
-
+            str2 = "Gain<style=States> Cloaked</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
         public override void DisplayFX3()
         {
- 
+            str3 = "+3 Dodge until eoc";
+            SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX4()
         {
  

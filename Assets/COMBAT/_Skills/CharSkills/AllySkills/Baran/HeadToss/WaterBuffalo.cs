@@ -51,13 +51,12 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str0 = $"<style=Performer> +40<style=Water> Water Res </style>and<style=Earth> Earth Res </style>, 2 rds";
+            str0 = "Self: +24<style=Water> Water</style>and<style=Earth> Earth Res</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
-
         public override void DisplayFX2()
         {
-            str1 = $"<style=Performer> Clear DoT";
+            str1 = "Self: Clear DoT";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
 
@@ -70,6 +69,13 @@ namespace Combat
         {
         }
 
-       
+        public override void InvPerkDesc()
+        {
+            perkDesc = "Self: +24<style=Water> Water</style>and<style=Earth> Earth Res</style>";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+
+            perkDesc = "Self: Clear DoT";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+        }
     }
 }

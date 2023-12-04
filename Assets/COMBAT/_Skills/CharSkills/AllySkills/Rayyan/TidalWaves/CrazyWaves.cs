@@ -26,61 +26,45 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        bool isFront;
-        bool dmgInc = false; 
-        public override void SkillHovered()
-        {
-            base.SkillHovered();
+      //  bool isFront;
+      
+        //public override void SkillHovered()
+        //{
+        //    base.SkillHovered();
+        //    SkillService.Instance.SkillWipe += skillController.allSkillBases.Find(t => t.skillName == skillName).WipeFX1;
+        //    SkillService.Instance.SkillWipe += skillController.allSkillBases.Find(t => t.skillName == skillName).WipeFX2;
+        //}
 
-            SkillService.Instance.SkillWipe += skillController.allSkillBases.Find(t => t.skillName == skillName).WipeFX1;
-            SkillService.Instance.SkillWipe += skillController.allSkillBases.Find(t => t.skillName == skillName).WipeFX2;
-        }
+        //public override void SkillSelected()
+        //{
+        //    base.SkillSelected();
+        //  //  SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).RemoveFX1;
+        //  //  Debug.Log("skillName FX REMOVE >>>>" + skillName);
+        //   // SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).RemoveMoveFX;
+        //  //  SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).RemoveVFX;
+        //}
 
-        public override void SkillSelected()
-        {
-            base.SkillSelected();
-            SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).RemoveFX1;
-            Debug.Log("skillName FX REMOVE >>>>" + skillName);
-            SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).RemoveMoveFX;
-            SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).RemoveVFX;
-        }
-
-        public override void AddTargetPos()
-        {
-            if (skillModel == null) return;
-            skillModel.targetPos.Clear();
-            CombatService.Instance.mainTargetDynas.Clear(); 
-            CombatService.Instance.mainTargetDynas.AddRange(GridService.Instance.GetFirstDiamond(CharMode.Enemy));
-
-            foreach (DynamicPosData dyna in CombatService.Instance.mainTargetDynas)
-            {
-                CellPosData cell = new CellPosData(dyna.charMode, dyna.currentPos);
-                skillModel.targetPos.Add(cell);
-
-            }
-            Debug.Log("Crazy waves ADD TARGETS");
-        }
+        //public override void AddTargetPos()
+        //{
+            
+        //    Debug.Log("Crazy waves ADD TARGETS");
+        //}
 
         public override void BaseApply()
         {
             base.BaseApply();
-            if (!dmgInc)
-            {
-                skillModel.damageMod += 30f;
-                dmgInc= true;
-            }
-            
+            skillModel.damageMod = 150; 
         }
 
 
         public override void ApplyFX1()
         {
-            if (currDyna != null)
-            {
-                CombatService.Instance.mainTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>().damageController.ApplyDamage(charController
-                                            , CauseType.CharSkill, (int)skillName
-                                            , DamageType.Water, skillModel.damageMod, skillModel.skillInclination));
-            }
+            //if (currDyna != null)
+            //{
+            //    CombatService.Instance.mainTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>().damageController.ApplyDamage(charController
+            //                                , CauseType.CharSkill, (int)skillName
+            //                                , DamageType.Water, skillModel.damageMod, skillModel.skillInclination));
+            //}
         }
 
         public override void ApplyFX2()
@@ -95,24 +79,24 @@ namespace Combat
 
         public override void ApplyVFx()
         {
-            SkillService.Instance.skillFXMoveController.MultiTargetRangeFX(PerkType.None);
+           // SkillService.Instance.skillFXMoveController.MultiTargetRangeFX(perkType);
         }
         public override void ApplyMoveFX()
         {
-            Debug.Log("Move Crazy waves");
-            GridService.Instance.ShuffleCharSet(CombatService.Instance.mainTargetDynas);
+            //Debug.Log("Move Crazy waves");
+            //GridService.Instance.ShuffleCharSet(CombatService.Instance.mainTargetDynas);
         }
 
         public override void DisplayFX1()
         {
-            str0 = $"{skillModel.damageMod}% <style=Water> Water </style>";
-            SkillService.Instance.skillModelHovered.AddDescLines(str0);
+            //str0 = $"{skillModel.damageMod}% <style=Water> Water </style>";
+            //SkillService.Instance.skillModelHovered.AddDescLines(str0);
         }
 
         public override void DisplayFX2()
         {
-            str1 = $"<style=Move> Shuffle </style>";
-            SkillService.Instance.skillModelHovered.AddDescLines(str1);
+            //str1 = $"<style=Move> Shuffle </style>";
+            //SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
 
         public override void DisplayFX3()
@@ -124,9 +108,10 @@ namespace Combat
         {
             
         }
-
-   
-
-    
+        public override void InvPerkDesc()
+        {
+            perkDesc = "<style=Water>Water</style> Dmg: 120% -> 150%";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+        }
     }
 }

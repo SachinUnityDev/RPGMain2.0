@@ -21,46 +21,29 @@ namespace Combat
 
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
-     //   public override List<DynamicPosData> targetDynas => new List<DynamicPosData>();
 
         public override void SkillHovered()
         { // only for enemies
             base.SkillHovered();
             skillModel.damageMod = 120f;
-            SkillService.Instance.SkillWipe += skillController.allPerkBases.Find(t => t.skillName == skillName
-                     && t.skillLvl == SkillLvl.Level1 && t.state == PerkSelectState.Clicked).WipeFX1;         
+               
         }
 
-        public override void SkillSelected()
-        { 
-            base.SkillSelected();
-            SkillService.Instance.SkillFXRemove += skillController.allPerkBases.Find(t => t.skillName == skillName
-                                                  && t.skillLvl == SkillLvl.Level1
-                                                  && t.state == PerkSelectState.Clicked).RemoveFX1;
-
-            //skillController.allPerkBases.Find(t => t.skillName == skillName && t.skillLvl == SkillLvl.Level1
-            //&& t.state == PerkSelectState.Clicked).RemoveFX1();
-           
-        }
- 
+     
         public override void ApplyFX1()
         {
-            if (IsTargetEnemy())
-            {
-                targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName,
-                         DamageType.Water, skillModel.damageMod, skillModel.skillInclination);
-            } 
-        }
-        public override void ApplyFX2()
-        {
-
             if (IsTargetEnemy())
             {
                 float percent = 15f;
                 if (percent.GetChance())
                     charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName, charController.charModel.charID
-                                                                        , CharStateName.Feebleminded, skillModel.timeFrame, skillModel.castTime);
-            }       
+                                                        , CharStateName.Feebleminded, skillModel.timeFrame, skillModel.castTime);
+            }
+        }
+        public override void ApplyFX2()
+        {
+
+            
         }
         public override void ApplyFX3()
         {
@@ -82,41 +65,38 @@ namespace Combat
                 }
             }
         }
-        
-        //public override void SkillEnd()
-        //{
-        //    if (IsTargetEnemy())
-        //    {
-        //        targetController.charStateController.RemoveCharState(CharStateName.Confused);
-        //    }           
-        //}
-
         public override void DisplayFX1()
         {
-            str1 = $"<style=Enemy>{skillModel.damageMod}% <style=Water>Water</style>";
+            str1 = "<style=Move>Push</style> enemy 1";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-
         public override void DisplayFX2()
         {
-            str2 = $"<style=Enemy><style=Move>Push</style>";
+            str2 = "15% <style=States> Feebleminded</style> on enemy";
             SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
 
         public override void DisplayFX3()
         {
-            str3 = $"<style=Enemy>15%<style=States> Feebleminded</style>";
-            SkillService.Instance.skillModelHovered.AddDescLines(str3);
+         
         }
 
         public override void DisplayFX4()
         {
             
         }
+        public override void InvPerkDesc()
+        {
+            perkDesc = "<style=Water>Water</style> Dmg: 80% -> 120%";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "<style=Move>Push</style> enemy 1";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            perkDesc = "15% <style=States> Feebleminded</style> on enemy";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+        }
 
- 
 
-     
+
     }
 
 

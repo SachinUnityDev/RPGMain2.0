@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GlovesLegacyOfTheSpida
   m_EditorClassIdentifier: 
   poeticGewgawName: 2
+  desc: Gloves
   poeticSetName: 1
   gewgawMidName: 6
   gewgawSlotType: 3

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GreenVelvet
   m_EditorClassIdentifier: 
   tgName: 7
+  desc: Green Velvet
   maxInvStackSize: 1
   cost:
     silver: 12
@@ -27,3 +28,5 @@ MonoBehaviour:
   iconSprite: {fileID: 21300000, guid: e3328cf65464fd94ab4fe423bee685fa, type: 3}
   allLines:
   - Trade item. HIgh price fluctuation between NPCs.
+  trophyOrPeltImg_Day: {fileID: 0}
+  trophyOrPeltImg_Night: {fileID: 0}

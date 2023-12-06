@@ -24,13 +24,14 @@ namespace Interactables
     public class TGSO : ScriptableObject
     {
         public TGNames tgName;
+        [Header("Desc")]
+        public string desc = "";
         public int maxInvStackSize = 0;
         public Currency cost;
         public float fluctuation;
         public int maxWorldInstance;
         public List<NPCModData> allNPCModData = new List<NPCModData>();
-        [Header("Desc")]
-        public string desc = "";
+
         [Header("Sprites")]
         public Sprite iconSprite;
         [TextArea(5, 10)]

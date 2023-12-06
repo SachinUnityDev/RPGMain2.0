@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Lentils
   m_EditorClassIdentifier: 
   ingredName: 22
+  desc: Lentils
   maxInvStackSize: 6
   cost:
     silver: 0

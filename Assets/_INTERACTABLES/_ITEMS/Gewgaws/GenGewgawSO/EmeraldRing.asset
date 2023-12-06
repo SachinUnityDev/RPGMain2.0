@@ -25,5 +25,6 @@ MonoBehaviour:
     silver: 0
     bronze: 130
   fluctuationRate: 20
-  desc: 
+  desc: Emerald Ring
   iconSprite: {fileID: 21300000, guid: c6db74b60a946d742bd209e66482e18c, type: 3}
+  resLs: 

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: NyalaTrophy
   m_EditorClassIdentifier: 
   tgName: 12
+  desc: Nyala Trophy
   maxInvStackSize: 1
   cost:
     silver: 4

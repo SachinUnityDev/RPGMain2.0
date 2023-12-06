@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BeefSteakSO
   m_EditorClassIdentifier: 
   mealName: 1
+  desc: Beef Steak
   maxInvStackSize: 1
   maxWorldInstance: 100
   iconSprite: {fileID: 21300000, guid: 779c0f398be95bf488454e9d96eea3b9, type: 3}

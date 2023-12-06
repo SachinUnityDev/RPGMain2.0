@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: DeerSkin
   m_EditorClassIdentifier: 
   tgName: 2
+  desc: Deer Skin
   maxInvStackSize: 2
   cost:
     silver: 2

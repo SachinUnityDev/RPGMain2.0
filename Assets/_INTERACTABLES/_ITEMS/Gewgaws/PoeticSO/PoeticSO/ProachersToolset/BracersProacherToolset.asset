@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BracersProacherToolset
   m_EditorClassIdentifier: 
   poeticGewgawName: 4
+  desc: Bracers
   poeticSetName: 2
   gewgawMidName: 4
   gewgawSlotType: 3

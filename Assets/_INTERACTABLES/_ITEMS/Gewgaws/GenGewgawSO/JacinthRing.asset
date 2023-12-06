@@ -25,5 +25,6 @@ MonoBehaviour:
     silver: 0
     bronze: 180
   fluctuationRate: 20
-  desc: 
+  desc: Jacinth Ring
   iconSprite: {fileID: 21300000, guid: 7cc4303b4b61061489cae3d39ac6a84e, type: 3}
+  resLs: 

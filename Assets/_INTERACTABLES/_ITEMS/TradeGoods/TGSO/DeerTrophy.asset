@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: DeerTrophy
   m_EditorClassIdentifier: 
   tgName: 3
+  desc: Deer Trophy
   maxInvStackSize: 1
   cost:
     silver: 3

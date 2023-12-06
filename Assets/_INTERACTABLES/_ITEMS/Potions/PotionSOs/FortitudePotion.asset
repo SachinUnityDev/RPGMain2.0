@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FortitudePotion
   m_EditorClassIdentifier: 
   potionName: 3
+  desc: Fortitude Potion
   potionAddict: 4
   maxInvStackSize: 3
   cost:
@@ -23,7 +24,6 @@ MonoBehaviour:
   minCastTime: 1
   maxCastTime: 1
   maxWorldInstance: 9
-  desc: 
   iconSprite: {fileID: 21300000, guid: a8fb696fbfb7f8543baf25a4a8869a24, type: 3}
   allLines:
   - Gain 22-30<style="Fortitude"> Fortitude </style>

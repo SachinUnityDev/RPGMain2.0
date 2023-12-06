@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Hoof
   m_EditorClassIdentifier: 
   ingredName: 14
+  desc: Hoof
   maxInvStackSize: 2
   cost:
     silver: 0

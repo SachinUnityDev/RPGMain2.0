@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Wheat
   m_EditorClassIdentifier: 
   ingredName: 18
+  desc: Wheat
   maxInvStackSize: 9
   cost:
     silver: 0

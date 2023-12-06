@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: RaffiaTrapHuntersArsenal
   m_EditorClassIdentifier: 
   poeticGewgawName: 9
+  desc: Raffia Trap
   poeticSetName: 3
   gewgawMidName: 14
   gewgawSlotType: 7

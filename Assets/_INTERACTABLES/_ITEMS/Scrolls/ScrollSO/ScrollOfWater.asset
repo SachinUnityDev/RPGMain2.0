@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ScrollOfWater
   m_EditorClassIdentifier: 
   scrollName: 1
-  scrollType: 1
+  desc: Scroll of Water
   enchantmentGemName: 4
-  inventoryStack: 6
+  maxInvStackSize: 6
   cost:
     silver: 0
     bronze: 20
@@ -23,6 +23,8 @@ MonoBehaviour:
   maxWorldInstance: 12
   timeFrame: 3
   castTime: 6
+  rechargeExpMin: 5
+  rechargeExpMax: 10
   iconSprite: {fileID: 21300000, guid: e952a554c6f1f8f41b53884b223b00e9, type: 3}
   allLines:
   - 'Provides knowledge of Ruri gem enchantment

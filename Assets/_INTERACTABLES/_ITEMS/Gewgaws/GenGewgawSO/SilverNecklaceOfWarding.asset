@@ -25,5 +25,6 @@ MonoBehaviour:
     silver: 0
     bronze: 80
   fluctuationRate: 20
-  desc: 
+  desc: Silver Necklace of Warding
   iconSprite: {fileID: 21300000, guid: 25b185c3c3ef17e49b0c497426ba474d, type: 3}
+  resLs: 

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SeasonedVenisonSO
   m_EditorClassIdentifier: 
   mealName: 3
+  desc: Seasoned Venison
   maxInvStackSize: 1
   maxWorldInstance: 100
   iconSprite: {fileID: 21300000, guid: 609a713269d4ab541a883a5b9f6e6829, type: 3}

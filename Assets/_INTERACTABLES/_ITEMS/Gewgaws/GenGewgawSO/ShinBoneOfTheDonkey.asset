@@ -25,5 +25,6 @@ MonoBehaviour:
     silver: 0
     bronze: 60
   fluctuationRate: 20
-  desc: 
+  desc: Shinbone of the Donkey
   iconSprite: {fileID: 21300000, guid: e55791c9fe91fa849a62d21eb6a6a03c, type: 3}
+  resLs: 

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Spiteeth
   m_EditorClassIdentifier: 
   sagaicGewgawName: 2
+  desc: Spiteeth
   gewgawSlotType: 2
-  classRestrictions: 15000000040000001200000008000000
+  classRestrictions: 1500000004000000120000000800000007000000
   cultureRestrictions: 
   raceRestrictions: 
   cost:
@@ -22,5 +23,6 @@ MonoBehaviour:
     bronze: 120
   fluctuation: 20
   maxWorldInstance: 1
+  maxInvStackSize: 1
   iconSprite: {fileID: 21300000, guid: a6071e38fb03c554e94764a9642e97a8, type: 3}
   allLines: []

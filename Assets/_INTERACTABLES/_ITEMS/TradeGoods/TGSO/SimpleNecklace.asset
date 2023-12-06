@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SimpleNecklace
   m_EditorClassIdentifier: 
   tgName: 18
+  desc: Simple Necklace
   maxInvStackSize: 1
   cost:
     silver: 2

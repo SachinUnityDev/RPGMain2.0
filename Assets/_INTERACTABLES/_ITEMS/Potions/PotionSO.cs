@@ -11,6 +11,8 @@ namespace Interactables
     public class PotionSO : ScriptableObject
     {
         public PotionNames potionName;
+        [Header("Description")]
+        public string desc = "";
         public float potionAddict = 0f;
         public int maxInvStackSize;
         [Header("Cost Data")]
@@ -23,8 +25,7 @@ namespace Interactables
 
         public int maxWorldInstance;
 
-        [Header("Description")]
-        public string desc = ""; 
+      
 
         [Header("Sprites")]
         public Sprite iconSprite; 

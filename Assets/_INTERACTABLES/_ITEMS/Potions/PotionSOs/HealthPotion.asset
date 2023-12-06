@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: HealthPotion
   m_EditorClassIdentifier: 
   potionName: 1
+  desc: Health Potion
   potionAddict: 3
   maxInvStackSize: 3
   cost:
@@ -23,7 +24,6 @@ MonoBehaviour:
   minCastTime: 30
   maxCastTime: 40
   maxWorldInstance: 999
-  desc: 
   iconSprite: {fileID: 21300000, guid: b3c1f16d0fe8ef148856f79d60359ea6, type: 3}
   allLines:
   - Heals 40%-60% of<style="Heal"> Health </style>

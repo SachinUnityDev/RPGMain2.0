@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CloakPoacherToolset
   m_EditorClassIdentifier: 
   poeticGewgawName: 5
+  desc: Cloak
   poeticSetName: 2
   gewgawMidName: 5
   gewgawSlotType: 1

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GreywargsHunger
   m_EditorClassIdentifier: 
   sagaicGewgawName: 12
+  desc: Grey Warg's Hunger
   gewgawSlotType: 5
   classRestrictions: 
   cultureRestrictions: 0e00000008000000
@@ -22,5 +23,6 @@ MonoBehaviour:
     bronze: 190
   fluctuation: 20
   maxWorldInstance: 1
+  maxInvStackSize: 1
   iconSprite: {fileID: 21300000, guid: 4b9fc469c34114846afeb72fe2f7e602, type: 3}
   allLines: []

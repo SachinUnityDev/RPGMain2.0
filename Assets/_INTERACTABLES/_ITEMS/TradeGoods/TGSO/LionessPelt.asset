@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: LionessPelt
   m_EditorClassIdentifier: 
   tgName: 10
+  desc: Lioness Pelt
   maxInvStackSize: 2
   cost:
     silver: 2

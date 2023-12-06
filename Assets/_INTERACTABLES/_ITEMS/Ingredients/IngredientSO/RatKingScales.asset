@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: RatKingScales
   m_EditorClassIdentifier: 
   ingredName: 17
+  desc: Rat King Scales
   maxInvStackSize: 2
   cost:
     silver: 0

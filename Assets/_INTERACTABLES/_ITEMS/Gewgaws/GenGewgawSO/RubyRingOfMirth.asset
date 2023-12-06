@@ -25,5 +25,6 @@ MonoBehaviour:
     silver: 0
     bronze: 150
   fluctuationRate: 20
-  desc: 
+  desc: Ruby Ring of Mirth
   iconSprite: {fileID: 21300000, guid: 4c2a1e0b36b94dc4b82f8c4019953189, type: 3}
+  resLs: 

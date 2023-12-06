@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: RingLegacyOfTheSpida
   m_EditorClassIdentifier: 
   poeticGewgawName: 1
+  desc: Ring
   poeticSetName: 1
   gewgawMidName: 9
   gewgawSlotType: 4

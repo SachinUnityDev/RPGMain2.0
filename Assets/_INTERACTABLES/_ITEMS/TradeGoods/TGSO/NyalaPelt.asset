@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: NyalaPelt
   m_EditorClassIdentifier: 
   tgName: 17
+  desc: Nyala Pelt
   maxInvStackSize: 2
   cost:
     silver: 3

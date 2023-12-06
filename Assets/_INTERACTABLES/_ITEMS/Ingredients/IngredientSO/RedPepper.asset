@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: RedPepper
   m_EditorClassIdentifier: 
   ingredName: 7
+  desc: Red Pepper
   maxInvStackSize: 5
   cost:
     silver: 0

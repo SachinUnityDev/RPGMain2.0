@@ -25,5 +25,6 @@ MonoBehaviour:
     silver: 0
     bronze: 50
   fluctuationRate: 20
-  desc: 
+  desc: Bracers of Versatility
   iconSprite: {fileID: 21300000, guid: 2c59edbe18a9a154bbea85acd750c554, type: 3}
+  resLs: 

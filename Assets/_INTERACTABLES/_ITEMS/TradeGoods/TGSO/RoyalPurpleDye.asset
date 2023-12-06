@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: RoyalPurpleDye
   m_EditorClassIdentifier: 
   tgName: 13
+  desc: Royal Purple Dye
   maxInvStackSize: 3
   cost:
     silver: 6
@@ -27,3 +28,5 @@ MonoBehaviour:
   iconSprite: {fileID: 21300000, guid: 38d811ea7a9838445847927de8f6dc3e, type: 3}
   allLines:
   - Trade item. HIgh price fluctuation between NPCs.
+  trophyOrPeltImg_Day: {fileID: 0}
+  trophyOrPeltImg_Night: {fileID: 0}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: HyenaEar
   m_EditorClassIdentifier: 
   ingredName: 21
+  desc: Hyena Ear
   maxInvStackSize: 5
   cost:
     silver: 0

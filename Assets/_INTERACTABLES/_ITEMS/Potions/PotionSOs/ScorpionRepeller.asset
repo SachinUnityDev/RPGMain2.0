@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ScorpionRepeller
   m_EditorClassIdentifier: 
   potionName: 6
+  desc: Scorpion Repeller
   potionAddict: 5
   maxInvStackSize: 3
   cost:
@@ -23,7 +24,6 @@ MonoBehaviour:
   minCastTime: 16
   maxCastTime: 20
   maxWorldInstance: 6
-  desc: 
   iconSprite: {fileID: 21300000, guid: beea41e6bab0b0f4dbf4959993ef7af9, type: 3}
   allLines:
   - Immune to<style="Poison"> Poisoned </style>

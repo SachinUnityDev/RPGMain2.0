@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FelineHeart
   m_EditorClassIdentifier: 
   ingredName: 13
+  desc: Feline Heart
   maxInvStackSize: 3
   cost:
     silver: 0

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: MushroomSoupSO
   m_EditorClassIdentifier: 
   soupName: 3
+  desc: Mushroom Soup
   maxInvStackSize: 1
   maxWorldInstance: 100
   iconSprite: {fileID: 21300000, guid: 5bc31bbc2bba1e041bae9262b5d4f16d, type: 3}

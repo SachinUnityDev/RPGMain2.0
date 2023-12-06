@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TambotiFruit
   m_EditorClassIdentifier: 
   herbName: 11
+  desc: Tamboti Fruit
   maxInvStackSize: 6
   cost:
     silver: 0
@@ -21,7 +22,6 @@ MonoBehaviour:
   maxWorldInstance: 12
   HpRegenVal: 1
   bufftimeInRds: 5
-  desc: 
   iconSprite: {fileID: 21300000, guid: 33706b48ee2eb3a4dac167b14eb0b05b, type: 3}
   allLines:
   - Helps cure certain sicknesses

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: RatFang
   m_EditorClassIdentifier: 
   ingredName: 16
+  desc: Rat Fang
   maxInvStackSize: 6
   cost:
     silver: 0

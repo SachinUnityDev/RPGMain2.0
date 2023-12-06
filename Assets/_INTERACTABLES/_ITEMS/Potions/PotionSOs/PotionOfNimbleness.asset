@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PotionOfNimbleness
   m_EditorClassIdentifier: 
   potionName: 5
+  desc: Potion of Nimbleness
   potionAddict: 4
   maxInvStackSize: 3
   cost:
@@ -23,7 +24,6 @@ MonoBehaviour:
   minCastTime: 16
   maxCastTime: 20
   maxWorldInstance: 6
-  desc: 
   iconSprite: {fileID: 21300000, guid: 0383f81c661f25c4e905c8602e080044, type: 3}
   allLines:
   - +3<style="Attributes"> Dodge </style>

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BatEar
   m_EditorClassIdentifier: 
   ingredName: 11
+  desc: Bat Ear
   maxInvStackSize: 5
   cost:
     silver: 0

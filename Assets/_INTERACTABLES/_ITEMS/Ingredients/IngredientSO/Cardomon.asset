@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Cardomon
   m_EditorClassIdentifier: 
   ingredName: 1
+  desc: Cardamon
   maxInvStackSize: 8
   cost:
     silver: 0

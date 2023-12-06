@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: LionPelt
   m_EditorClassIdentifier: 
   tgName: 9
+  desc: Lion Pelt
   maxInvStackSize: 2
   cost:
     silver: 3

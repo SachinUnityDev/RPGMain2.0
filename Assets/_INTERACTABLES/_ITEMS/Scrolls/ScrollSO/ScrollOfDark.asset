@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ScrollOfDark
   m_EditorClassIdentifier: 
   scrollName: 6
-  scrollType: 1
+  desc: Scroll of Dark
   enchantmentGemName: 5
-  inventoryStack: 6
+  maxInvStackSize: 6
   cost:
     silver: 0
     bronze: 20
@@ -23,6 +23,8 @@ MonoBehaviour:
   maxWorldInstance: 12
   timeFrame: 3
   castTime: 6
+  rechargeExpMin: 5
+  rechargeExpMax: 10
   iconSprite: {fileID: 21300000, guid: e88d3effdf19d0e45adfeef62796a882, type: 3}
   allLines:
   - "Provides knowledge of Blue Onyx gem enchantment\r"

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BitterAloe
   m_EditorClassIdentifier: 
   herbName: 13
+  desc: Bitter Aloe
   maxInvStackSize: 1
   cost:
     silver: 0
@@ -21,7 +22,6 @@ MonoBehaviour:
   maxWorldInstance: 8
   HpRegenVal: 2
   bufftimeInRds: 4
-  desc: 
   iconSprite: {fileID: 21300000, guid: 6ba7fc18f528e684b848487a0a63dc3d, type: 3}
   allLines:
   - Helps cure certain sicknesses

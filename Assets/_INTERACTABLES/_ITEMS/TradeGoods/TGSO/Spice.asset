@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Spice
   m_EditorClassIdentifier: 
   tgName: 16
+  desc: Spice
   maxInvStackSize: 3
   cost:
     silver: 5
@@ -27,3 +28,5 @@ MonoBehaviour:
   iconSprite: {fileID: 21300000, guid: 1cc6623217970c6469bdd0922ed8cb00, type: 3}
   allLines:
   - Trade item. HIgh price fluctuation between NPCs.
+  trophyOrPeltImg_Day: {fileID: 0}
+  trophyOrPeltImg_Night: {fileID: 0}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CookedFishSO
   m_EditorClassIdentifier: 
   mealName: 6
+  desc: Cooked Fish
   maxInvStackSize: 1
   maxWorldInstance: 100
   iconSprite: {fileID: 21300000, guid: a463609ccaecc394da85b64e7fa78f89, type: 3}

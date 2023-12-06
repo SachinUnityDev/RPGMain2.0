@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BeltPoachersToolSet
   m_EditorClassIdentifier: 
   poeticGewgawName: 6
+  desc: Belt
   poeticSetName: 2
   gewgawMidName: 2
   gewgawSlotType: 2

@@ -8,7 +8,9 @@ namespace Interactables
     public class SagaicGewgawSO : ScriptableObject
     {
         [Header("Fundamentals")]         
-        public SagaicGewgawNames sagaicGewgawName;            
+        public SagaicGewgawNames sagaicGewgawName;
+        [Header("Desc")]
+        public string desc = "";
         public GewgawSlotType gewgawSlotType;
 
         [Header("RESTRICTIONS")]  // ONLY THE BELOW GIVEN CLASS CULTURE AND RACE TYPE CAN HAVE IT 

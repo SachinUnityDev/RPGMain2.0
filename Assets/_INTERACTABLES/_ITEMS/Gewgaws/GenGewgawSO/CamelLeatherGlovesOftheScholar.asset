@@ -25,5 +25,6 @@ MonoBehaviour:
     silver: 0
     bronze: 80
   fluctuationRate: 20
-  desc: 
+  desc: Camel Leather Gloves of the Scholar
   iconSprite: {fileID: 21300000, guid: 46713bc57689d7b4aaeb5a5f93c97e75, type: 3}
+  resLs: 

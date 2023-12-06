@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ThrowingKnifeHuntersArsenal
   m_EditorClassIdentifier: 
   poeticGewgawName: 8
+  desc: Throwing Knife
   poeticSetName: 3
   gewgawMidName: 13
   gewgawSlotType: 3

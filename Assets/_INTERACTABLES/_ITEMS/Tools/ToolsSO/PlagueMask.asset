@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: PlagueMask
   m_EditorClassIdentifier: 
   toolName: 6
+  desc: Plague Mask
   maxInvStackSize: 1
   cost:
     silver: 0
     bronze: 18
   fluctuation: 30
   maxWorldInstance: 6
+  toolMaxUses: 10
   iconSprite: {fileID: 21300000, guid: 39fd1150e47081f4f8ee36b01c60d5c2, type: 3}
   allLines:
   - Interacts with certain quest objects

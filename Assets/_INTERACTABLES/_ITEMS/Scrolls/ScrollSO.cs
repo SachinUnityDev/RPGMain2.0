@@ -11,7 +11,9 @@ namespace Interactables
 
     public class ScrollSO : ScriptableObject
     {
-       public ScrollNames scrollName;      
+       public ScrollNames scrollName;
+        [Header("Desc")]
+        public string desc = "";
         public GemNames enchantmentGemName;
 
         public int maxInvStackSize = 0;
@@ -31,8 +33,7 @@ namespace Interactables
         public List<string> allLines = new List<string>();
 
 
-        [Header("Desc")]
-        public string desc = "";
+   
         private void Awake()
         {
             timeFrame = TimeFrame.EndOfDay;

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ScrollOfLight
   m_EditorClassIdentifier: 
   scrollName: 7
-  scrollType: 1
+  desc: Scroll of Light
   enchantmentGemName: 11
-  inventoryStack: 6
+  maxInvStackSize: 6
   cost:
     silver: 0
     bronze: 20
@@ -23,6 +23,8 @@ MonoBehaviour:
   maxWorldInstance: 12
   timeFrame: 3
   castTime: 6
+  rechargeExpMin: 5
+  rechargeExpMax: 10
   iconSprite: {fileID: 21300000, guid: 1c9d7fa056916734798ff9dd81daa0a7, type: 3}
   allLines:
   - "Provides knowledge of Rutele gem enchantment\r"

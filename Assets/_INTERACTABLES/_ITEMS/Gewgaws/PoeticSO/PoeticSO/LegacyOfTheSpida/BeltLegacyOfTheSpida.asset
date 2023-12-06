@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BeltLegacyOfTheSpida
   m_EditorClassIdentifier: 
   poeticGewgawName: 3
+  desc: Belt
   poeticSetName: 1
   gewgawMidName: 2
   gewgawSlotType: 2

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Ginger
   m_EditorClassIdentifier: 
   ingredName: 4
+  desc: Ginger
   maxInvStackSize: 8
   cost:
     silver: 0

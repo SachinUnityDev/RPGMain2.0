@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: DragonFlyWings
   m_EditorClassIdentifier: 
   ingredName: 12
+  desc: Dragon Fly Wing's
   maxInvStackSize: 4
   cost:
     silver: 0

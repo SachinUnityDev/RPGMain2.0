@@ -14,6 +14,8 @@ namespace Interactables
     {
         // unique feature 
         public PoeticGewgawNames poeticGewgawName;
+        [Header("Desc")]
+        public string desc = ""; 
         public PoeticSetName poeticSetName; 
         public GewgawMidNames gewgawMidName;
         

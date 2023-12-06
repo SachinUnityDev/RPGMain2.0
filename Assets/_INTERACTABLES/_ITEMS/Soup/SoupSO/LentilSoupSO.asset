@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: LentilSoupSO
   m_EditorClassIdentifier: 
   soupName: 1
+  desc: Lentil Soup
   maxInvStackSize: 1
   maxWorldInstance: 100
   iconSprite: {fileID: 21300000, guid: 46047573f786fe24db7dab81efcd1450, type: 3}

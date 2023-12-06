@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Garlic
   m_EditorClassIdentifier: 
   ingredName: 3
+  desc: Garlic
   maxInvStackSize: 8
   cost:
     silver: 0

@@ -9,7 +9,9 @@ namespace Interactables
     [CreateAssetMenu(fileName = "ToolSO", menuName = "Interactable/ToolSO")]
     public class ToolsSO : ScriptableObject
     {
-        public ToolNames toolName;    
+        public ToolNames toolName;
+        [Header("Desc")]
+        public string desc = "";
         public int maxInvStackSize;
         public Currency cost;
         public float fluctuation;
@@ -21,8 +23,6 @@ namespace Interactables
         [TextArea(5, 10)]
         public List<string> allLines = new List<string>();
 
-        [Header("Desc")]
-        public string desc = "";
     }
 }
 

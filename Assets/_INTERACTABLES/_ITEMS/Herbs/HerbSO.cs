@@ -10,7 +10,9 @@ namespace Interactables
 
     public class HerbSO : ScriptableObject
      {
-        public HerbNames herbName;       
+        public HerbNames herbName;
+        [Header("Desc")]
+        public string desc = "";
         public int maxInvStackSize;
         public Currency cost;
         public float fluctuation;
@@ -20,8 +22,7 @@ namespace Interactables
         public int HpRegenVal;
         public int bufftimeInRds; 
 
-        [Header("Desc")]
-        public string desc = "";
+
 
         [Header("Sprites")]
         public Sprite iconSprite;

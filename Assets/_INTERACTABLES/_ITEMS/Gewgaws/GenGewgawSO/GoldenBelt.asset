@@ -25,5 +25,6 @@ MonoBehaviour:
     silver: 0
     bronze: 170
   fluctuationRate: 20
-  desc: 
+  desc: Golden Belt
   iconSprite: {fileID: 21300000, guid: 4c5965ad009979d4b8601d669d3247cd, type: 3}
+  resLs: 

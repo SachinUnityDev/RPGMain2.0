@@ -25,5 +25,6 @@ MonoBehaviour:
     silver: 0
     bronze: 160
   fluctuationRate: 20
-  desc: 
+  desc: Golden Amulet of the Lion
   iconSprite: {fileID: 21300000, guid: d0b6a6cd5b735ff46855246871657be5, type: 3}
+  resLs: 

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: NecklaceHuntersArsenal
   m_EditorClassIdentifier: 
   poeticGewgawName: 7
+  desc: Necklace
   poeticSetName: 3
   gewgawMidName: 7
   gewgawSlotType: 5

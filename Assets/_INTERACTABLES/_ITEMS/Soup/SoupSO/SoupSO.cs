@@ -9,6 +9,9 @@ namespace Interactables
     public class SoupSO : ScriptableObject
     {
         public SoupNames soupName;
+
+        [Header("Desc")]
+        public string desc = "";
         public int maxInvStackSize;
         public int maxWorldInstance;
 
@@ -22,8 +25,6 @@ namespace Interactables
         public Sprite recipeSprite;
         public Currency recipePrice;
 
-        [Header("Desc")]
-        public string desc = "";
         private void Awake()
         {
             maxInvStackSize = 1;

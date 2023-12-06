@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GreenBoots
   m_EditorClassIdentifier: 
   tgName: 6
+  desc: Green Boots
   maxInvStackSize: 1
   cost:
     silver: 3
@@ -27,3 +28,5 @@ MonoBehaviour:
   iconSprite: {fileID: 21300000, guid: 089952db52341034f87a37b9924ab6ea, type: 3}
   allLines:
   - Trade item. HIgh price fluctuation between NPCs.
+  trophyOrPeltImg_Day: {fileID: 0}
+  trophyOrPeltImg_Night: {fileID: 0}

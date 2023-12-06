@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: HumanEar
   m_EditorClassIdentifier: 
   ingredName: 15
+  desc: Human Ear
   maxInvStackSize: 3
   cost:
     silver: 0

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: HolyKris
   m_EditorClassIdentifier: 
   sagaicGewgawName: 11
+  desc: Holy Kris
   gewgawSlotType: 7
   classRestrictions: 
   cultureRestrictions: 0a000000
@@ -22,5 +23,6 @@ MonoBehaviour:
     bronze: 160
   fluctuation: 20
   maxWorldInstance: 1
+  maxInvStackSize: 1
   iconSprite: {fileID: 21300000, guid: f3365204f74b6fc42994942def3c0ee9, type: 3}
   allLines: []

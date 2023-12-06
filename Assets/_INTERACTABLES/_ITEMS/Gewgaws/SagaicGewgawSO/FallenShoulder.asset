@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FallenShoulder
   m_EditorClassIdentifier: 
   sagaicGewgawName: 7
+  desc: Fallen Shoulders
   gewgawSlotType: 1
   classRestrictions: 05000000
   cultureRestrictions: 
@@ -22,5 +23,6 @@ MonoBehaviour:
     bronze: 160
   fluctuation: 20
   maxWorldInstance: 1
+  maxInvStackSize: 1
   iconSprite: {fileID: 21300000, guid: 3244553b2a3d3604f90b553b88378b07, type: 3}
   allLines: []

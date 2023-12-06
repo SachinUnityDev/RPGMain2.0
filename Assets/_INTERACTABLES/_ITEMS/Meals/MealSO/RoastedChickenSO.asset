@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: RoastedChickenSO
   m_EditorClassIdentifier: 
   mealName: 10
+  desc: Roasted Chicken
   maxInvStackSize: 1
   maxWorldInstance: 100
   iconSprite: {fileID: 21300000, guid: 4d956baaf45bfaf4794311ab4241b5e7, type: 3}

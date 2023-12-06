@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: VegetableSoupSO
   m_EditorClassIdentifier: 
   soupName: 2
+  desc: Vegetable Soup
   maxInvStackSize: 1
   maxWorldInstance: 100
   iconSprite: {fileID: 21300000, guid: 9cc2d120bfea31946b98fb62a32316ff, type: 3}

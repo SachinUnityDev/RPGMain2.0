@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SpiderEgg
   m_EditorClassIdentifier: 
   ingredName: 10
+  desc: Spider Egg
   maxInvStackSize: 4
   cost:
     silver: 0

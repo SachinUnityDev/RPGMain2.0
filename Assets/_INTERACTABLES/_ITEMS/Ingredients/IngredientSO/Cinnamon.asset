@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Cinnamon
   m_EditorClassIdentifier: 
   ingredName: 2
+  desc: Cinnamon
   maxInvStackSize: 8
   cost:
     silver: 0

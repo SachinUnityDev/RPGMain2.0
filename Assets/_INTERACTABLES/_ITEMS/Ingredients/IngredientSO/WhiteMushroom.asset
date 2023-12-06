@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: WhiteMushroom
   m_EditorClassIdentifier: 
   ingredName: 20
+  desc: White Mushroom
   maxInvStackSize: 12
   cost:
     silver: 0

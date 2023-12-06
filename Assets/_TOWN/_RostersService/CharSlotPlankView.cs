@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using Interactables;
 using TMPro;
 using UnityEngine.EventSystems;
-using UnityEditor.VersionControl;
+
 
 public class CharSlotPlankView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -78,16 +78,16 @@ public class CharSlotPlankView : MonoBehaviour, IPointerEnterHandler, IPointerEx
         }
         if (preReqItems.Count == 2)
         {
-            string itemNameStr = InvService.Instance.InvSO.GetItemName(preReqItems[0].itemData).CreateSpace();
+            string itemNameStr = InvService.Instance.InvSO.GetItemName(preReqItems[0].itemData);
             string charNameStr = charModel.charNameStr;
-            string itemNameStr2 = InvService.Instance.InvSO.GetItemName(preReqItems[1].itemData).CreateSpace();            
-            str = charNameStr + " wants" +itemNameStr + " and" + itemNameStr2 + " as incentives to join the party.";
+            string itemNameStr2 = InvService.Instance.InvSO.GetItemName(preReqItems[1].itemData);            
+            str = $"{charNameStr} wants <style=States>{itemNameStr}</style> and <style=States>{itemNameStr2}</style> as incentives to join the party.";
         }
         if (preReqItems.Count == 1)
         {
-            string itemNameStr = InvService.Instance.InvSO.GetItemName(preReqItems[0].itemData).CreateSpace();
+            string itemNameStr = InvService.Instance.InvSO.GetItemName(preReqItems[0].itemData);
             string charNameStr = charModel.charNameStr;
-            str = charNameStr + " wants" + itemNameStr + " as incentives to join the party.";
+            str = $"{charNameStr} wants <style=States>{itemNameStr}</style> as incentives to join the party.";
 
         }
         if (preReqItems.Count == 0)
@@ -116,28 +116,13 @@ public class CharSlotPlankView : MonoBehaviour, IPointerEnterHandler, IPointerEx
         else
             cellTran.GetComponentInChildren<TextMeshProUGUI>().text = "";
     }
-    Sprite GetSprite(ItemData itemData)
-    {
-        Sprite sprite = InvService.Instance.InvSO.GetSprite(itemData.itemName, itemData.itemType);
-        if (sprite != null)
-            return sprite;
-        else
-            Debug.Log("SPRITE NOT FOUND");
-        return null;
-    }
-    void FillProvision()
-    {
-        ItemDataWithQty provItem = charModel.GetProvisionItem();
-        str = "Provision slot:" + InvService.Instance.InvSO.GetItemName(provItem.itemData).CreateSpace()
-                    +". Replenishes upon completing quest."; 
-        FillItemCell(provItem, img1); 
-    }
+   
     void FillEarning()
     {
         ItemDataWithQty itemQty = charModel.GetEarningItem();
-        string itemNameStr = InvService.Instance.InvSO.GetItemName(itemQty.itemData).CreateSpace();
+        string itemNameStr = InvService.Instance.InvSO.GetItemName(itemQty.itemData);
         string charNameStr = charModel.charNameStr; 
-        str = $"Every{itemNameStr} and 50 % of money found in quest will go to {charNameStr}.";
+        str = $"Every <style=States>{itemNameStr}</style> and 50 % of money found in quest will go to {charNameStr}.";
 
         itemQty.quantity = 0;
         FillItemCell(itemQty, img1);
@@ -157,5 +142,21 @@ public class CharSlotPlankView : MonoBehaviour, IPointerEnterHandler, IPointerEx
     {
         toolTipPlank.SetActive(false);
         img.sprite = spriteN;
+    }
+    Sprite GetSprite(ItemData itemData)
+    {
+        Sprite sprite = InvService.Instance.InvSO.GetSprite(itemData.itemName, itemData.itemType);
+        if (sprite != null)
+            return sprite;
+        else
+            Debug.Log("SPRITE NOT FOUND");
+        return null;
+    }
+    void FillProvision()
+    {
+        ItemDataWithQty provItem = charModel.GetProvisionItem();
+        string itemNameStr = InvService.Instance.InvSO.GetItemName(provItem.itemData); 
+        str = $"Provision slot: <style=States>{itemNameStr}</style>. Replenishes upon completing quest.";
+        FillItemCell(provItem, img1);
     }
 }

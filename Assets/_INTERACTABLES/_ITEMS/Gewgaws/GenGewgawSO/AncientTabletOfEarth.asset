@@ -25,6 +25,6 @@ MonoBehaviour:
     silver: 0
     bronze: 56
   fluctuationRate: 20
-  desc: 
+  desc: Ancient Tablet of Earth
   iconSprite: {fileID: 21300000, guid: 01177e760ac211949bf27622eeb8273f, type: 3}
   resLs: 

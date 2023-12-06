@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ScrollofFire
   m_EditorClassIdentifier: 
   scrollName: 2
-  scrollType: 1
+  desc: Scroll of Fire
   enchantmentGemName: 1
-  inventoryStack: 6
+  maxInvStackSize: 6
   cost:
     silver: 0
     bronze: 20
@@ -23,6 +23,8 @@ MonoBehaviour:
   maxWorldInstance: 12
   timeFrame: 3
   castTime: 6
+  rechargeExpMin: 5
+  rechargeExpMax: 10
   iconSprite: {fileID: 21300000, guid: 8604c5caeb25ff344b118de82a640088, type: 3}
   allLines:
   - "Provides knowledge of Carnelian gem enchantment\r"

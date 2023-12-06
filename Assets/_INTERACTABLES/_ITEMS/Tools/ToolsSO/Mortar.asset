@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: Mortar
   m_EditorClassIdentifier: 
   toolName: 14
+  desc: Mortar
   maxInvStackSize: 1
   cost:
     silver: 0
     bronze: 20
   fluctuation: 0
   maxWorldInstance: 6
+  toolMaxUses: 10
   iconSprite: {fileID: 21300000, guid: 32bfd2ee0d80d8e47a6b8fded0d8580e, type: 3}
   allLines:
   - Used for crafting potions

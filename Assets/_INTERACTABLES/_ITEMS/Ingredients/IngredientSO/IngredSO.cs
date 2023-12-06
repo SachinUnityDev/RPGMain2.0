@@ -9,6 +9,9 @@ namespace Interactables
     public class IngredSO : ScriptableObject
     {
         public IngredNames ingredName;
+
+        [Header("Desc")]
+        public string desc = "";
         public int maxInvStackSize = 0;
         public Currency cost;
         public float fluctuation;
@@ -20,8 +23,6 @@ namespace Interactables
         public List<string> allLines = new List<string>();
 
 
-        [Header("Desc")]
-        public string desc = "";
         private void Awake()
         {
             fluctuation = 20;

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GoldenRodDye
   m_EditorClassIdentifier: 
   tgName: 5
+  desc: Goldenrod Dye
   maxInvStackSize: 3
   cost:
     silver: 3
@@ -27,3 +28,5 @@ MonoBehaviour:
   iconSprite: {fileID: 21300000, guid: 49be9928f3caf034fb870705ce249aba, type: 3}
   allLines:
   - Trade item. HIgh price fluctuation between NPCs.
+  trophyOrPeltImg_Day: {fileID: 0}
+  trophyOrPeltImg_Night: {fileID: 0}

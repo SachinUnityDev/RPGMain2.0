@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Yeast
   m_EditorClassIdentifier: 
   ingredName: 9
+  desc: Yeast
   maxInvStackSize: 8
   cost:
     silver: 0

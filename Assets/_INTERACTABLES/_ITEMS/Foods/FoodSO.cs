@@ -1,6 +1,7 @@
 using Common;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Policy;
 using UnityEngine;
 
 
@@ -10,6 +11,7 @@ namespace Interactables
     public class FoodSO : ScriptableObject
     {
         public FoodNames foodName;
+        public string desc; 
         public int shelfLife;
         
         [Header("HP RANGE")]

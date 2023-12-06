@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FlaskOfWater
   m_EditorClassIdentifier: 
   foodName: 6
+  desc: Flask of Water
   shelfLife: 0
   hpHealMin: 2
   hpHealMax: 3

@@ -42,6 +42,10 @@ namespace Common
             index = transform.GetSiblingIndex();
             rosterSO = RosterService.Instance.rosterSO;
         }
+        public void FillSidePlanks(CharModel charModel)
+        {
+            PrintPlanks(charModel);
+        }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
@@ -84,14 +88,13 @@ namespace Common
         }
         string GetHeaderStr(AvailOfChar availOfChar)
         {
-            string str = RosterService.Instance.rosterSO
-                        .allAvailStateStr.Find(t => t.availOfChar == availOfChar)
-                        .availStateHeaderStr;
+            string str = RosterService.Instance.rosterSO.GetAvailHeaderStr(availOfChar);
+                        
             return str; 
         }
         string GetAvailStr(AvailOfChar availOfChar)
         {
-            string str =   rosterSO.allAvailStateStr.Find(t => t.availOfChar == availOfChar).availStateDescStr;
+            string str = RosterService.Instance.rosterSO.GetAvailDescStr(availOfChar);
             if (str == null)
                 str = ""; 
             return str; 

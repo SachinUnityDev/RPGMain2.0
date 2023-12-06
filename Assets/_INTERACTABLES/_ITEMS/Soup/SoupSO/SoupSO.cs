@@ -21,6 +21,9 @@ namespace Interactables
         public RecipeType recipeType;
         public Sprite recipeSprite;
         public Currency recipePrice;
+
+        [Header("Desc")]
+        public string desc = "";
         private void Awake()
         {
             maxInvStackSize = 1;

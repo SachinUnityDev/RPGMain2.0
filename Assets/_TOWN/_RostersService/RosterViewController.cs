@@ -54,6 +54,7 @@ namespace Common
         }
         void OnEnable()
         {
+            index = 1;
             closeBtn.onClick.AddListener(OnCloseBtnPressed);
             nameContainer = charScrollGO.transform.GetChild(1);
             scrollName = nameContainer.GetChild(2).GetComponent<TextMeshProUGUI>();
@@ -111,7 +112,8 @@ namespace Common
         }
         void OnLeftBtnPressed()
         {
-            if (Time.time - prevLeftClick < 0.3f) return; 
+            if (Time.time - prevLeftClick < 0.3f) return;
+          
             if (index == 0)
             {
                 index = unLockedChars.Count-1;
@@ -125,8 +127,8 @@ namespace Common
         }
         void OnRightBtnPressed()
         {
-            if (Time.time - prevRightClick < 0.3f) return;
-            if (index == unLockedChars.Count-1)
+            if (Time.time - prevRightClick < 0.3f) return;         
+            if (index >= unLockedChars.Count-1)
             {
                 index = 0; 
                 PopulateCharScroll();   
@@ -137,15 +139,18 @@ namespace Common
             }
             prevRightClick = Time.time;
         }
-
+        void AbbasChk(int incr)
+        {
+            if (unLockedChars[index].charModel.charName == CharNames.Abbas)
+            {
+                index+=incr;
+            }
+        }
         void PopulateCharScroll()
         {
-           RosterService.Instance.On_ScrollSelectCharModel(unLockedChars[index].charModel);
-            if (RosterService.Instance.scrollSelectCharModel.charName == CharNames.Abbas)
-            {
-                index++;
-                RosterService.Instance.scrollSelectCharModel = unLockedChars[index].charModel;
-            }
+            AbbasChk(1);
+            RosterService.Instance.On_ScrollSelectCharModel(unLockedChars[index].charModel);
+            
             Debug.Log("RosterService" + RosterService.Instance.scrollSelectCharModel.charName);
             PopulatePortrait();
             PopulateSidePlank();
@@ -162,32 +167,27 @@ namespace Common
         {
             charScrollGO.transform.GetChild(0)
                 .GetComponent<CharScrollSlotController>().PopulatePortrait(); 
-            
-
         }
         void PopulateSidePlank()
         {
-            TextMeshProUGUI availabilityTxt = SidePlankTrans.GetChild(0)
-                        .GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>();
             CharModel charModel = RosterService.Instance.scrollSelectCharModel;
-            if (charModel.availOfChar == AvailOfChar.Available)
-                availabilityTxt.text = "Available";
-            else if (charModel.availOfChar == AvailOfChar.UnAvailable_InParty)
-                availabilityTxt.text = "Already In Party";
-            else
-                availabilityTxt.text = "UnAvailable";                       
-            SidePlankTrans.GetChild(2).GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>().text
-                 = RosterService.Instance.scrollSelectCharModel.currCharLoc.ToString();
+            foreach (Transform child in SidePlankTrans.transform)
+            {
+                SidePanelPtrEvents sidePanelPtrEvents = child.GetComponent<SidePanelPtrEvents>();
+                sidePanelPtrEvents.SidePlankInit();
+                sidePanelPtrEvents.FillSidePlanks(charModel);
+            }
         }
 
         public void Load()
         {
-            foreach (CharModel charModel in CharService.Instance.allyUnLockedCompModels)
-            {
-                CharService.Instance.GetCharCtrlWithName(charModel.charName); 
-            }
+            //foreach (CharModel charModel in CharService.Instance.allyUnLockedCompModels)
+            //{
+            //    CharService.Instance.GetCharCtrlWithName(charModel.charName); 
+            //}
             index = 0;
             gameObject.SetActive(true);
+            unLockedChars.Clear();
             unLockedChars = RosterService.Instance.rosterController.GetCharUnlockedWithStatusUpdated(); 
             PopulateCharScroll();
         }

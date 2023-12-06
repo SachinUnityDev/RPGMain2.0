@@ -11,6 +11,8 @@ namespace Interactables
     public class FruitSO : ScriptableObject
     {
         public FruitNames fruitName;
+        [Header(" Desc")]
+        public string desc = "";
         public int shelfLife;
 
         [Header("HP AND STAMINA REGEN")]

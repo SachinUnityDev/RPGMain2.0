@@ -21,7 +21,7 @@ MonoBehaviour:
     bronze: 48
   fluctuation: 30
   maxWorldInstance: 18
-  desc: 
+  desc: Amber
   iconSprite: {fileID: 21300000, guid: 00c358cc7533e64479bd27158f398b4f, type: 3}
   allLines:
   - 'On Socket: +1<style="Health"> Hp Regen </style> at day.'

@@ -47,6 +47,7 @@ namespace Combat
 
         public void OnPointerClick(PointerEventData eventData)
         {
+           
             img.sprite = spriteHL;
             if (isON)
             {

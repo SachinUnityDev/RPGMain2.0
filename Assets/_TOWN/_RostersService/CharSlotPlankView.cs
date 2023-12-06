@@ -5,21 +5,38 @@ using UnityEngine;
 using UnityEngine.UI;
 using Interactables;
 using TMPro;
+using UnityEngine.EventSystems;
+using UnityEditor.VersionControl;
 
-public class CharSlotPlankView : MonoBehaviour
+public class CharSlotPlankView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] Image img1;
-    [SerializeField] Image img2;
-    [SerializeField] Transform orTrans; 
+    [SerializeField] Transform img1;
+    [SerializeField] Transform img2;
+    [SerializeField] Transform orTrans;
 
-    [SerializeField] CharModel charModel; 
-    void Start()
+    [SerializeField] TextMeshProUGUI earningShareTxt;
+
+    [SerializeField] CharModel charModel;
+
+    [Header("OnHover")]
+    [SerializeField] Sprite spriteHL;
+    [SerializeField] Sprite spriteN;
+
+    [SerializeField] Image img;
+    [SerializeField] int index;
+    [SerializeField] string str;
+    [SerializeField] GameObject toolTipPlank;
+
+
+
+    void Awake()
     {
-        
+     
     }
 
     public void InitPlankView(CharModel charModel)
     {
+        this.charModel = charModel; 
         int index = transform.GetSiblingIndex();
         if (index == 0)
             FillPreReq();
@@ -27,6 +44,11 @@ public class CharSlotPlankView : MonoBehaviour
             FillProvision();
         else if(index == 2)
             FillEarning();
+
+        img = transform.GetChild(0).GetComponent<Image>();
+        img.sprite = spriteN;
+      
+        toolTipPlank.SetActive(false);
     }
  
   
@@ -34,18 +56,65 @@ public class CharSlotPlankView : MonoBehaviour
     {
         List<ItemDataWithQty> preReqItems = charModel.GetPrereqsItem();
 
-        //if (preReqItems[0].itemData.itemType == ItemType.None
-        //    && )
-        //{
-        //    img1.gameObject.SetActive(false);
-        //    img2.gameObject.SetActive(false);
-        //    orTrans.gameObject.SetActive(false);    
-        //}
-        //img1.sprite = GetSprite(preReqItems[0].itemData);
-        //img1.GetComponentInChildren<TextMeshProUGUI>().text = preReqItems.quantity.ToString();
 
-        //orTrans.gameObject.SetActive(false);
-        img2.gameObject.SetActive(false);
+        if(preReqItems.Count == 2)
+        {
+            FillItemCell(preReqItems[0], img1);
+            FillItemCell(preReqItems[1], img2);
+            orTrans.gameObject.SetActive(true);
+           
+        }
+        if (preReqItems.Count == 1)
+        {
+            FillItemCell(preReqItems[0], img1);
+            FillItemCell(null, img2);
+            orTrans.gameObject.SetActive(false);
+        }
+        if (preReqItems.Count == 0)
+        {
+            FillItemCell(null, img1);
+            FillItemCell(null, img2);
+            orTrans.gameObject.SetActive(false);
+        }
+        if (preReqItems.Count == 2)
+        {
+            string itemNameStr = InvService.Instance.InvSO.GetItemName(preReqItems[0].itemData).CreateSpace();
+            string charNameStr = charModel.charNameStr;
+            string itemNameStr2 = InvService.Instance.InvSO.GetItemName(preReqItems[1].itemData).CreateSpace();            
+            str = charNameStr + " wants" +itemNameStr + " and" + itemNameStr2 + " as incentives to join the party.";
+        }
+        if (preReqItems.Count == 1)
+        {
+            string itemNameStr = InvService.Instance.InvSO.GetItemName(preReqItems[0].itemData).CreateSpace();
+            string charNameStr = charModel.charNameStr;
+            str = charNameStr + " wants" + itemNameStr + " as incentives to join the party.";
+
+        }
+        if (preReqItems.Count == 0)
+        {
+            string charNameStr = charModel.charNameStr;
+            str = $"{charNameStr} wants no items as incentives to join the party.";
+        }
+        
+    }
+
+    void FillItemCell(ItemDataWithQty itemDataQty,  Transform cellTran)
+    {
+       // 0,1,2
+       if(itemDataQty == null)
+       {
+           cellTran.gameObject.SetActive(false);          
+            return; 
+       }            
+       else
+       {
+          cellTran.gameObject.SetActive(true);           
+       }
+        cellTran.GetComponent<Image>().sprite = GetSprite(itemDataQty.itemData); 
+        if(itemDataQty.quantity > 1)
+            cellTran.GetComponentInChildren<TextMeshProUGUI>().text = itemDataQty.quantity.ToString();
+        else
+            cellTran.GetComponentInChildren<TextMeshProUGUI>().text = "";
     }
     Sprite GetSprite(ItemData itemData)
     {
@@ -59,19 +128,34 @@ public class CharSlotPlankView : MonoBehaviour
     void FillProvision()
     {
         ItemDataWithQty provItem = charModel.GetProvisionItem();
-        img1.sprite = GetSprite(provItem.itemData);
-        img1.GetComponentInChildren<TextMeshProUGUI>().text = provItem.quantity.ToString(); 
-
-        orTrans.gameObject.SetActive(false);
-        img2.gameObject.SetActive(false);
-
-        //get provision
-        // get image 
-        // check whether it has provision 
-        // change color etc and ta daa...
+        str = "Provision slot:" + InvService.Instance.InvSO.GetItemName(provItem.itemData).CreateSpace()
+                    +". Replenishes upon completing quest."; 
+        FillItemCell(provItem, img1); 
     }
     void FillEarning()
     {
+        ItemDataWithQty itemQty = charModel.GetEarningItem();
+        string itemNameStr = InvService.Instance.InvSO.GetItemName(itemQty.itemData).CreateSpace();
+        string charNameStr = charModel.charNameStr; 
+        str = $"Every{itemNameStr} and 50 % of money found in quest will go to {charNameStr}.";
 
+        itemQty.quantity = 0;
+        FillItemCell(itemQty, img1);
+        // fill earning share
+        earningShareTxt.text = charModel.earningsShare.ToString() + " %";  
+
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        toolTipPlank.SetActive(true);
+        toolTipPlank.GetComponentInChildren<TextMeshProUGUI>().text = str;
+        img.sprite = spriteHL;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        toolTipPlank.SetActive(false);
+        img.sprite = spriteN;
     }
 }

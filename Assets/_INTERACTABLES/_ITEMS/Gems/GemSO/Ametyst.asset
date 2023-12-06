@@ -14,15 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gemName: 9
   gemType: 1
-  inventoryStack: 2
+  allCharsThatCanBeEnchanted: 
+  maxInvStackSize: 2
   cost:
     silver: 0
     bronze: 160
   fluctuation: 20
   maxWorldInstance: 4
-  minSpecrange: 0
-  maxSpecRange: 0
-  desc: 
+  desc: Amethyst
   iconSprite: {fileID: 21300000, guid: 3d9f647a24dcc4444a5cc16a728627c4, type: 3}
   allLines:
   - "Merges with Simple Rings/Amulets into Gewgaws.\r"

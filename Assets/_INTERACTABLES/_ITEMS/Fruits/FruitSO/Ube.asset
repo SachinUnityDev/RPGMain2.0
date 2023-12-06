@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Ube
   m_EditorClassIdentifier: 
   fruitName: 4
+  desc: Ube
   shelfLife: 6
   hpRegen: 0
   staminaRegen: 2

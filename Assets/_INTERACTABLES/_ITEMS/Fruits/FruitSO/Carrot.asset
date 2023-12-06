@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Carrot
   m_EditorClassIdentifier: 
   fruitName: 8
+  desc: Carrot
   shelfLife: 9
   hpRegen: 1
   staminaRegen: 0

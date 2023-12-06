@@ -16,7 +16,7 @@ namespace Combat
         [SerializeField] Transform strikerTransform;
         [SerializeField] Transform targetTransform;
         [Header("Global var")]
-        List<DynamicPosData> mainTargets = new List<DynamicPosData>();
+        [SerializeField] List<DynamicPosData> mainTargets = new List<DynamicPosData>();
 
         //  Vector3 endPos;
         Vector3 startPos;
@@ -35,6 +35,7 @@ namespace Combat
         [Header("Buffer variables")]
         [SerializeField] CharController prevCharController;
         [SerializeField] bool lastStatus = false;
+
 
 
         //public List<DynamicPosData> targetDynasFX;
@@ -135,7 +136,8 @@ namespace Combat
             impactFXGO = skillPerkdataFX.impactFX;
             if (impactFXGO == null) return;
             ImpactFX = Instantiate(impactFXGO, targetTransform.position, Quaternion.identity).gameObject;
-            ImpactFX.GetComponentInChildren<ParticleSystem>().Play();
+            PlayParticleSystem(impactFXGO);
+            //ImpactFX.GetComponentInChildren<ParticleSystem>().Play();
             Destroy(ImpactFX, 2.5f);
 
         }
@@ -186,7 +188,8 @@ namespace Combat
             if (impactFXGO == null) return;
 
                 ImpactFX = Instantiate(impactFXGO, targetTransform.position, Quaternion.identity).gameObject;
-                ImpactFX.GetComponentInChildren<ParticleSystem>().Play();
+                //ImpactFX.GetComponentInChildren<ParticleSystem>().Play();
+                PlayParticleSystem(impactFXGO);
                 Destroy(ImpactFX, 2.5f);           
         }
 
@@ -196,17 +199,20 @@ namespace Combat
       
             SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType);
 
+  
             impactFXGO = skillPerkdataFX.impactFX;            
             if (impactFXGO == null) return;
 
             if (CombatService.Instance.mainTargetDynas.Count > 0)
             {
                 Debug.Log("PROGRAM WAS HERE" + mainTargets.Count);
-                foreach (DynamicPosData dyna in CombatService.Instance.mainTargetDynas)
+                foreach (DynamicPosData dyna in mainTargets)
                 {
                     Transform targetTrans = dyna.charGO.transform;
                     ImpactFX = Instantiate(impactFXGO, targetTrans.position, Quaternion.identity).gameObject;
-                    ImpactFX.GetComponentInChildren<ParticleSystem>().Play();
+                    ParticleSystem ps = ImpactFX.GetComponentInChildren<ParticleSystem>(); 
+                    ps.GetComponent<Renderer>().sortingOrder = dyna.GetLayerOrder();
+                    ps.Play();
                     
                     Destroy(ImpactFX, 2.5f);
                 }
@@ -214,7 +220,8 @@ namespace Combat
             else
             {
                 ImpactFX = Instantiate(impactFXGO, targetTransform.position, Quaternion.identity).gameObject;
-                ImpactFX.GetComponentInChildren<ParticleSystem>().Play();              
+                ParticleSystem ps = ImpactFX.GetComponentInChildren<ParticleSystem>();
+                ps.GetComponent<Renderer>().sortingOrder = 3;
                 Destroy(ImpactFX, 2.5f);
             }
             //ClearPreviousParams();
@@ -232,11 +239,17 @@ namespace Combat
             if (SelfFXGO != null)
             {
                 selfFX = Instantiate(SelfFXGO, strikerTransform.position, Quaternion.identity).gameObject;
-                selfFX.GetComponentsInChildren<ParticleSystem>().ToList().ForEach(t => t.Play());
+               PlayParticleSystem(SelfFXGO);    
                 Destroy(selfFX, 2.5f);
             }
         }
-
+        void PlayParticleSystem(GameObject FxGO)
+        {
+            foreach (ParticleSystem ps in FxGO.GetComponentsInChildren<ParticleSystem>())
+            {
+                ps.Play();      
+            }
+        }
         public void ApplyFXOnCollatralTargets()
         {
             GameObject colFXGO;
@@ -249,7 +262,8 @@ namespace Combat
             {
                 Transform targetTrans = dyna.charGO.transform; 
                  GameObject ColFX = Instantiate(colFXGO, targetTrans.position, Quaternion.identity).gameObject;
-                ColFX.GetComponentInChildren<ParticleSystem>().Play();               
+                PlayParticleSystem(ColFX);
+                //ColFX.GetComponentInChildren<ParticleSystem>().Play();               
                 Destroy(ColFX, 2.5f);
             }
         }
@@ -264,10 +278,10 @@ namespace Combat
             if (SelfFXGO != null)
             {
                 selfFX = Instantiate(SelfFXGO, strikerTransform.position, Quaternion.identity).gameObject;
-                selfFX.GetComponentsInChildren<ParticleSystem>().ToList().ForEach(t => t.Play());
+                PlayParticleSystem(selfFX);
+              //  selfFX.GetComponentsInChildren<ParticleSystem>().ToList().ForEach(t => t.Play());
                 Destroy(selfFX, 2.5f);
             }
-           
         }
 
         void ApplyGabMainFXOnTarget()
@@ -371,12 +385,10 @@ namespace Combat
             targetCharMode = SkillService.Instance.currentTargetDyna.charMode;
             
             startPos = strikerTransform.position + strikerMainFXOffset;
-            mainTargets.Clear();
-            mainTargets = CombatService.Instance.mainTargetDynas; 
-           
-                
-                //GridService.Instance.GetDynaWorldPos(SkillService.Instance.currentTargetDyna)
-                       //                                                - striker2TargetOffset;
+            mainTargets.Clear();       
+            mainTargets.AddRange(CombatService.Instance.mainTargetDynas);
+            //GridService.Instance.GetDynaWorldPos(SkillService.Instance.currentTargetDyna)
+            //                                                - striker2TargetOffset;
             //targetDynasFX.AddRange(GridService.Instance.GetAllTargets()); 
             //centerPos = GridService.Instance.GetCenterPos4CurrHLTargets();
             UpdateSkillPose();
@@ -395,7 +407,8 @@ namespace Combat
             if (FXGO == null) return;
 
             mainFX = Instantiate(FXGO, _pos, Quaternion.identity).gameObject;
-            mainFX.GetComponentsInChildren<ParticleSystem>().ToList().ForEach(t => t.Play());
+            PlayParticleSystem(mainFX);
+          //  mainFX.GetComponentsInChildren<ParticleSystem>().ToList().ForEach(t => t.Play());
             Destroy(mainFX, 2.5f);
         }
 

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Mangosteen
   m_EditorClassIdentifier: 
   fruitName: 10
+  desc: Mangosteen
   shelfLife: 7
   hpRegen: 2
   staminaRegen: 0

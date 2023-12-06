@@ -22,17 +22,20 @@ MonoBehaviour:
     availStateHeaderStr: Available
     availStateDescStr: Available to join the party
   - availOfChar: 2
-    availStateHeaderStr: Available
-    availStateDescStr: Not Available
+    availStateHeaderStr: Unavailable
+    availStateDescStr: Fame behavior doesn't match
   - availOfChar: 3
-    availStateHeaderStr: Available
-    availStateDescStr: Not Available
+    availStateHeaderStr: Unavailable
+    availStateDescStr: Not in town
   - availOfChar: 4
-    availStateHeaderStr: Available
-    availStateDescStr: Not Available
+    availStateHeaderStr: Unavailable
+    availStateDescStr: Prereq items missing
   - availOfChar: 5
     availStateHeaderStr: Already In Party
-    availStateDescStr: Not Available
-  - availOfChar: 0
-    availStateHeaderStr: 
-    availStateDescStr: 
+    availStateDescStr: Already In Party
+  - availOfChar: 7
+    availStateHeaderStr: Unavailable
+    availStateDescStr: Recovering
+  - availOfChar: 6
+    availStateHeaderStr: Unavailable
+    availStateDescStr: Whereabouts unknown

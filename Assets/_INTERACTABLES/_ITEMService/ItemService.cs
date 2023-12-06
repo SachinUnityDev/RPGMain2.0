@@ -18,7 +18,7 @@ namespace Interactables
         public List<Iitems> allItemsInGame = new List<Iitems>();
 
         [Header("Curr CharSelected")]
-        public CharController selectChar; 
+      //  public CharController selectChar; 
         public ItemFactory itemFactory;    
 
         //public ItemCardViewController cardViewController;
@@ -512,7 +512,11 @@ namespace Interactables
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                InitItemToInv(SlotType.CommonInv, ItemType.Foods, (int)FoodNames.Poultry,
+                InitItemToInv(SlotType.CommonInv, ItemType.Gems, (int)GemNames.Ruri,
+                                     CauseType.Items, 1);
+                InitItemToInv(SlotType.CommonInv, ItemType.Gems, (int)GemNames.Malachite,
+                                     CauseType.Items, 1);
+                InitItemToInv(SlotType.CommonInv, ItemType.Gems, (int)GemNames.Oltu,
                                      CauseType.Items, 1);
                 InitItemToInv(SlotType.CommonInv, ItemType.Herbs, (int)HerbNames.Aloe,
                                     CauseType.Items, 2);
@@ -580,7 +584,7 @@ namespace Interactables
             if (Input.GetKeyDown(KeyCode.G))
             {
 
-                InitItemToInv(SlotType.CommonInv, ItemType.Herbs, (int)HerbNames.BitterAloe,
+                InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionNames.HealthPotion,
                    CauseType.Items, 2);
                 InitItemToInv(SlotType.CommonInv, ItemType.Herbs, (int)HerbNames.Aloe,
                    CauseType.Items, 2);

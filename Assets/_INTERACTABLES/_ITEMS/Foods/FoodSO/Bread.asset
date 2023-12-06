@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Bread
   m_EditorClassIdentifier: 
   foodName: 5
+  desc: Bread
   shelfLife: 6
   hpHealMin: 0
   hpHealMax: 0

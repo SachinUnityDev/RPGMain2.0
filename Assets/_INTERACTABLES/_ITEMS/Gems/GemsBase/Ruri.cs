@@ -42,6 +42,7 @@ namespace Interactables
         {
             this.itemId = itemId;
             this.maxInvStackSize = maxInvStackSize;
+            multFX = 1;
         }
         public void OnSocketed()
         {

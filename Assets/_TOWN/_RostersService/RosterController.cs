@@ -46,7 +46,8 @@ namespace Common
                     charCtrl.charModel.availOfChar = AvailOfChar.UnAvailable_InParty;
                 else if(!ChkPreReq(charCtrl))
                     charCtrl.charModel.availOfChar = AvailOfChar.UnAvailable_Prereq;
-
+                else
+                    charCtrl.charModel.availOfChar = AvailOfChar.Available;
             }
             return allUnLocked; 
         }

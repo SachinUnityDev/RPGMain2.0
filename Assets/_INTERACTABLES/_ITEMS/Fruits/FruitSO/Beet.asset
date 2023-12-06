@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Beet
   m_EditorClassIdentifier: 
   fruitName: 7
+  desc: Beet
   shelfLife: 4
   hpRegen: 0
   staminaRegen: 1

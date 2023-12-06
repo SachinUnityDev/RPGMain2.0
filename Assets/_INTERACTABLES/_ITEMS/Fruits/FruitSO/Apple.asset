@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Apple
   m_EditorClassIdentifier: 
   fruitName: 3
+  desc: Apple
   shelfLife: 6
   hpRegen: 1
   staminaRegen: 1

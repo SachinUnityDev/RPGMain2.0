@@ -13,7 +13,7 @@ namespace Interactables
 
         public void ApplyScrollReadFX()
         {
-            charController = ItemService.Instance.selectChar;
+            charController = InvService.Instance.charSelectController;
             LoreScrollSO loreSO = ItemService.Instance.loreScrollSO; 
             int expVal = UnityEngine.Random.Range(loreSO.expGainMin, loreSO.expGainMax+1);
             charController.ExpPtsGain(expVal);

@@ -15,13 +15,13 @@ MonoBehaviour:
   gemName: 3
   gemType: 0
   allCharsThatCanBeEnchanted: 
-  maxInvStackSize: 3
+  maxInvStackSize: 2
   cost:
     silver: 0
     bronze: 72
   fluctuation: 0
   maxWorldInstance: 12
-  desc: 
+  desc: Meranite
   iconSprite: {fileID: 21300000, guid: 35c8710e41ebd114da3b6ceec24ae3de, type: 3}
   allLines:
   - 'On Socket: +6-10<style="Air"> Air Res </style>'

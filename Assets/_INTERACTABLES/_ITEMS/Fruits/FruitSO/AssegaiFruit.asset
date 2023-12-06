@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: AssegaiFruit
   m_EditorClassIdentifier: 
   fruitName: 1
+  desc: Assegai Fruit
   shelfLife: 8
   hpRegen: 0
   staminaRegen: 3

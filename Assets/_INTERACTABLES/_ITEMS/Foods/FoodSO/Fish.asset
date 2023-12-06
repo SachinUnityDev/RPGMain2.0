@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Fish
   m_EditorClassIdentifier: 
   foodName: 4
+  desc: Fish
   shelfLife: 2
   hpHealMin: 1
   hpHealMax: 4

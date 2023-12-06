@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Linq;
 using System.Security.Policy;
 using Quest;
+using Combat;
 
 public static class ExtensionMethodsCombat
     {
@@ -140,7 +141,23 @@ public static class ExtensionMethodsCombat
                 return i; 
             }
         }
+        public static int GetLayerOrder(this DynamicPosData dyna)
+        {
 
+            if (dyna.currentPos == 2 || dyna.currentPos == 5)// back lane 
+            {
+                return -3; 
+            }
+            else if (dyna.currentPos == 1 || dyna.currentPos == 4 || dyna.currentPos == 7) // mid Lane
+            {
+                return 0; 
+            }
+            else if(dyna.currentPos == 3 || dyna.currentPos == 6)
+            {
+                return 3; 
+            }
+            return 0;
+        }
 
         public static bool GetChance(this float percent)
         {

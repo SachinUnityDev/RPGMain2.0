@@ -15,13 +15,13 @@ MonoBehaviour:
   gemName: 2
   gemType: 0
   allCharsThatCanBeEnchanted: 010000002b0000000500000002000000
-  maxInvStackSize: 3
+  maxInvStackSize: 2
   cost:
     silver: 0
     bronze: 72
   fluctuation: 0
   maxWorldInstance: 12
-  desc: 
+  desc: Malachite
   iconSprite: {fileID: 21300000, guid: 45e89863093fcc24eaa5448a96def745, type: 3}
   allLines:
   - 'On Socket: +6-10 <style="Earth"> Earth Res </style>'

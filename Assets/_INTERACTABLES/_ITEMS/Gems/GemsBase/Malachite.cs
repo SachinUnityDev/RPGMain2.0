@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Common;
-using Combat; 
+using Combat;
+using System.Linq;
 
 namespace Interactables
 {
@@ -27,13 +28,15 @@ namespace Interactables
         {
             this.itemId = itemId;
             this.maxInvStackSize = maxInvStackSize;
+            multFX = 1;
         }
         public void ClearSocketBuffs()
         {
-            foreach (int buffID in allBuffs)
+            foreach (int buffID in allBuffs.ToList())
             {
                 charController.buffController.RemoveBuff(buffID);
             }
+            allDisplayStr.Clear();
         }
 
         public void OnEnchantedFX()
@@ -44,7 +47,7 @@ namespace Interactables
       
         public void OnSocketed()
         {
-            charController = ItemService.Instance.selectChar;
+            charController = InvService.Instance.charSelectController;
             itemController = charController.itemController;
             itemController.OnSocketDivineGem(this);
         }

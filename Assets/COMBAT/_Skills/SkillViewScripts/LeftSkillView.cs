@@ -25,7 +25,7 @@ namespace Common
         [SerializeField] Transform skillPtsTrans; 
 
 
-        private void OnEnable()
+        private void Start()
         {
             //charNameTrans = transform.GetChild(0); 
             
@@ -46,6 +46,7 @@ namespace Common
         {
             
             charController = InvService.Instance.charSelectController;
+         //   if (charController == null) return;
             selectSkillController = charController.GetComponent<SkillController1>();
             skillDataSO =
                     SkillService.Instance.GetSkillSO(charController.charModel.charName);

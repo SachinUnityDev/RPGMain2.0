@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Cucumber
   m_EditorClassIdentifier: 
   fruitName: 9
+  desc: Cucumber
   shelfLife: 6
   hpRegen: 1
   staminaRegen: 1

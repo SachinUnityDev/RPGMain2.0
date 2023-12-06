@@ -45,6 +45,8 @@ namespace Common
             toolTipPlank.GetComponentInChildren<TextMeshProUGUI>().text = str;
             img.sprite = spriteHL; 
         }
+        
+
         public void OnPointerExit(PointerEventData eventData)
         {
             toolTipPlank.SetActive(false);

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Kiwi
   m_EditorClassIdentifier: 
   fruitName: 2
+  desc: Kiwi
   shelfLife: 5
   hpRegen: 1
   staminaRegen: 0

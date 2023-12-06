@@ -308,7 +308,7 @@ namespace Common
    
             return allPreReqs;
         }
-        public ItemDataWithQty GetEarningItem()
+        public ItemDataWithQty GetEarningItem()  // Qty here is redundant eery time a item is earned(in loot etc....) is it is taken by the char 
         {
             ItemDataWithQty itemQty1 = null;
             FameType fameType = FameService.Instance.fameController.fameModel.fameType;
@@ -331,7 +331,7 @@ namespace Common
                 if (index != -1)
                     itemQty = allItemQty[index].itemDataQty;
                 else
-                    Debug.LogError("None not found" + charName);
+                    Debug.Log("None not found" + charName);
             }
             return itemQty;
         }

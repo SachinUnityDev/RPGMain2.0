@@ -27,6 +27,22 @@ namespace Common
 
         public List<AvailOfCharStrData> allAvailStateStr = new List<AvailOfCharStrData>();
 
+        public string GetAvailDescStr(AvailOfChar availOfChar)
+        {
+            int index = allAvailStateStr.FindIndex(t => t.availOfChar == availOfChar);
+            if (index != -1)
+                return allAvailStateStr[index].availStateDescStr; 
+            Debug.Log("avail status Not FOUND " + availOfChar);
+            return "";
+        }
+
+        public string GetAvailHeaderStr(AvailOfChar availOfChar)
+        {
+            int index = allAvailStateStr.FindIndex(t => t.availOfChar == availOfChar); 
+            if(index != -1)
+                return allAvailStateStr[index].availStateHeaderStr;
+            return "";
+        }
     }
 }
 

@@ -20,6 +20,9 @@ namespace Interactables
         public Sprite iconSprite;
         [TextArea(5, 10)]
         public List<string> allLines = new List<string>();
+
+        [Header("Desc")]
+        public string desc = "";
     }
 }
 

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Venison
   m_EditorClassIdentifier: 
   foodName: 1
+  desc: Venison
   shelfLife: 3
   hpHealMin: 2
   hpHealMax: 5

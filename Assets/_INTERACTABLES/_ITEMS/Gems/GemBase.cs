@@ -55,7 +55,8 @@ namespace Interactables
         void OnEnchantedFX();
         void OnSocketed();
         void SocketedFX(float multFx);
-        void ClearSocketBuffs();       
+        void ClearSocketBuffs();
+              
 
         //List<int> allBuffIDs { get; set; }
     }

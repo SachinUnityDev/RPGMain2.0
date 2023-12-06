@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Ham
   m_EditorClassIdentifier: 
   foodName: 8
+  desc: Ham
   shelfLife: 2
   hpHealMin: 1
   hpHealMax: 4

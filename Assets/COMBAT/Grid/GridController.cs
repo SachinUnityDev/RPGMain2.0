@@ -52,35 +52,25 @@ namespace Combat
             Vector3 targetPos = _gridMovement.GetWorldPosSingle(cellPos);
             dyna.charGO.transform.DOMove(targetPos, charSpeed, false);
             GridService.Instance.UpdateNewPosInDyna(dyna, targetCell);
-           // GridService.Instance.gridView.CharOnTurnHL(dyna);
+
+            if(CombatService.Instance.currCharOnTurn.charModel.charID == 
+                            dyna.charGO.GetComponent<CharController>().charModel.charID) 
+                GridService.Instance.gridView.CharOnTurnHL(dyna);
 
             GridService.Instance.On_PosChg(dyna, targetCell);
-            SetCharLayers(dyna, targetCell);
+            SetCharLayers(dyna);
         }
 
-        void SetCharLayers(DynamicPosData dyna, int targetCell)
+        void SetCharLayers(DynamicPosData dyna)
         {
             GameObject charGO = dyna.charGO;
 
-            if (targetCell == 2 || targetCell == 5)// back lane 
-            {
-                charGO.transform.GetChild(0).GetComponent<SkeletonAnimation>()
-                    .GetComponent<MeshRenderer>().sortingOrder = -3;
-                HPBarRenderSet(charGO, -3); 
-
-            }
-            else if (targetCell == 1 || targetCell == 4 || targetCell == 7) // mid Lane
-            {
-                charGO.transform.GetChild(0).GetComponent<SkeletonAnimation>()
-                   .GetComponent<MeshRenderer>().sortingOrder = 0;
-                HPBarRenderSet(charGO, 0);
-            }
-            else if (targetCell == 3 || targetCell == 6) // Front Lane
-            {
-                charGO.transform.GetChild(0).GetComponent<SkeletonAnimation>()
-                  .GetComponent<MeshRenderer>().sortingOrder = 3;
-                HPBarRenderSet(charGO, 3);
-            }
+            int sortLayer = dyna.GetLayerOrder(); 
+       
+           charGO.transform.GetChild(0).GetComponent<SkeletonAnimation>()
+                                 .GetComponent<MeshRenderer>().sortingOrder = sortLayer;
+           
+            HPBarRenderSet(charGO, sortLayer); 
         }
 
         void HPBarRenderSet(GameObject charGO, int order)

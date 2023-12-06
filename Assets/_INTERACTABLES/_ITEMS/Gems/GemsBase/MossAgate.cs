@@ -26,6 +26,7 @@ namespace Interactables
         {
             this.itemId = itemId;
             this.maxInvStackSize = maxInvStackSize;
+            multFX = 1;
         }
 
         public void ClearSocketBuffs()
@@ -42,7 +43,7 @@ namespace Interactables
         }
         public void OnSocketed()
         {
-            charController = ItemService.Instance.selectChar;
+            charController = InvService.Instance.charSelectController;
             itemController = charController.itemController;
             itemController.OnSocketDivineGem(this);
         }

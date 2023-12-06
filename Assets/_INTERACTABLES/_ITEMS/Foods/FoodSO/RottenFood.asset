@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: RottenFood
   m_EditorClassIdentifier: 
   foodName: 7
+  desc: Rotten Food
   shelfLife: 0
   hpHealMin: 0
   hpHealMax: 0

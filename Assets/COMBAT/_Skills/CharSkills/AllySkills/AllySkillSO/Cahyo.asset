@@ -81,7 +81,15 @@ MonoBehaviour:
       hexNames: 050000000f0000000b000000
     - perkChain: 020000000300000006000000
       hexNames: 020000000c0000000b000000
-    allSkillFXs: []
+    allSkillFXs:
+    - charMode: 2
+      perkType: 0
+      impactFX: {fileID: 0}
+      colImpactFX: {fileID: 0}
+      mainSkillFX: {fileID: 0}
+      colMainFX: {fileID: 0}
+      selfFX: {fileID: 8377994951542707448, guid: 90c2d3e288b8644448abe7c205df1cc9,
+        type: 3}
     allLines: []
   - skillName: 4
     charName: 3
@@ -136,7 +144,8 @@ MonoBehaviour:
     allSkillFXs:
     - charMode: 2
       perkType: 0
-      impactFX: {fileID: 0}
+      impactFX: {fileID: 8377994951542707448, guid: 90c2d3e288b8644448abe7c205df1cc9,
+        type: 3}
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 0}
       colMainFX: {fileID: 0}

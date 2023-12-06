@@ -15,7 +15,7 @@ namespace Interactables
         public int charID { get; set; }
         public virtual void ApplyInitNHPStaminaRegenFX() 
         {
-            charController = ItemService.Instance.selectChar;
+            charController = InvService.Instance.charSelectController;
             charID = charController.charModel.charID;
             fruitSO = ItemService.Instance.GetFruitSO(fruitName); 
 

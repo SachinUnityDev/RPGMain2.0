@@ -10,6 +10,7 @@ namespace Interactables
     public class AlcoholSO : ScriptableObject
     {
         public AlcoholNames alcoholName;
+        public string desc;
         public int maxInvStackSize;
         public int maxWorldInstance;
 

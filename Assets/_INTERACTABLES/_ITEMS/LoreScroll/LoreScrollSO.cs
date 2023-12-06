@@ -25,6 +25,8 @@ namespace Interactables
         [TextArea(5, 10)]
         public List<string> allLines = new List<string>();
 
+        [Header("Desc")]
+        public string desc = "";
         private void Awake()
         {          
             inventoryStack = 6;

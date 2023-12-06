@@ -20,6 +20,8 @@ namespace Interactables
         public List<string> allLines = new List<string>();
 
 
+        [Header("Desc")]
+        public string desc = "";
         private void Awake()
         {
             fluctuation = 20;

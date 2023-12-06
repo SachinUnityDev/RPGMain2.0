@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Kiwano
   m_EditorClassIdentifier: 
   fruitName: 5
+  desc: Kiwano
   shelfLife: 6
   hpRegen: 1
   staminaRegen: 0

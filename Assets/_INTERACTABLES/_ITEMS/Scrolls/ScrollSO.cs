@@ -31,6 +31,8 @@ namespace Interactables
         public List<string> allLines = new List<string>();
 
 
+        [Header("Desc")]
+        public string desc = "";
         private void Awake()
         {
             timeFrame = TimeFrame.EndOfDay;

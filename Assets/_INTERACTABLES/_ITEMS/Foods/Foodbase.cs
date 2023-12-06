@@ -19,7 +19,7 @@ namespace Interactables
         /// </summary>
         public virtual void ApplyInitNFX()  
         {
-            charController = ItemService.Instance.selectChar;
+            charController = InvService.Instance.charSelectController;
             charID = charController.charModel.charID;
             foodSO = ItemService.Instance.GetFoodSO(foodName);
             int valHp = 0; 

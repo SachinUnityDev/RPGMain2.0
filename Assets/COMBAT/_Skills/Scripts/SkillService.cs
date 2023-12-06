@@ -724,7 +724,6 @@ namespace Combat
 
         void ClearPrevData()
         {
-           
             _OnSkillApply = null; SkillFXRemove = null; SkillApplyMoveFx = null;
             PostSkillApply = null;
             PreSkillApply = null;
@@ -761,6 +760,8 @@ namespace Combat
             }
         }
         #endregion
+
+
 
         private void Update()
         { 

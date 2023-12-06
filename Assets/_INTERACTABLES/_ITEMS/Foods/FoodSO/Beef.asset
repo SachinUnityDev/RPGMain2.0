@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Beef
   m_EditorClassIdentifier: 
   foodName: 2
+  desc: Beef
   shelfLife: 3
   hpHealMin: 3
   hpHealMax: 6

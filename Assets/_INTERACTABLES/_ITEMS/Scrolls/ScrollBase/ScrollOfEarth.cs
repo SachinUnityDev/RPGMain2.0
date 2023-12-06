@@ -28,7 +28,7 @@ namespace Interactables
         public void ApplyScrollReadFX()
         {
             scrollSO = ItemService.Instance.GetScrollSO(scrollName);
-            charController = ItemService.Instance.selectChar;
+            charController = InvService.Instance.charSelectController;
            // ItemController itemController = charController.gameObject.GetComponent<ItemController>();
            ItemService.Instance.OnScrollRead(scrollName);
 

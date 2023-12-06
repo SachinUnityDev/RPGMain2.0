@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Poultry
   m_EditorClassIdentifier: 
   foodName: 3
+  desc: Poultry
   shelfLife: 3
   hpHealMin: 1
   hpHealMax: 2

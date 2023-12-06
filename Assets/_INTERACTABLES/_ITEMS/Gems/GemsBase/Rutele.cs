@@ -27,6 +27,7 @@ namespace Interactables
             {
                 charController.buffController.RemoveBuff(buffID);
             }
+            allDisplayStr.Clear();
         }
 
         public void OnEnchantedFX()
@@ -42,10 +43,11 @@ namespace Interactables
         {
             this.itemId = itemId;
             this.maxInvStackSize = maxInvStackSize;
+            multFX = 1;
         }
         public void OnSocketed()
         {
-            charController = ItemService.Instance.selectChar;
+            charController = InvService.Instance.charSelectController;
             itemController = charController.itemController;
             itemController.OnSocketDivineGem(this);
         }

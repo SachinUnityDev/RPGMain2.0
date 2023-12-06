@@ -29,7 +29,7 @@ namespace Interactables
         public void ApplyScrollReadFX()
         {
             scrollSO = ItemService.Instance.GetScrollSO(scrollName);
-            charController = ItemService.Instance.selectChar;        
+            charController = InvService.Instance.charSelectController;
             ItemService.Instance.OnScrollRead(scrollName);
 
             int expGained = UnityEngine.Random.Range(scrollSO.rechargeExpMin, scrollSO.rechargeExpMax + 1);

@@ -59,7 +59,7 @@ namespace Interactables
             transform.DOScale(1, 0.1f);
         }
 
-        void Start()
+        void OnEnable()
         {
             scaleHL = 1.1f;
             title = transform.GetChild(0); 

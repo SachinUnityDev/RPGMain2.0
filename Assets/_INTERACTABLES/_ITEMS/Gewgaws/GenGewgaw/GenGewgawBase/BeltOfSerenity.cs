@@ -28,20 +28,20 @@ namespace Interactables
             this.maxInvStackSize = maxInvStackSize;
         }
 
-        public override void EquipGenGewgawFX()
+        //public override void EquipGenGewgawFX()
+        //{ 
+        //  EquipGenGewgawFX();
+        //}
+        public void ApplyEquipableFX(CharController charController)
         {
-            charController = CharService.Instance.GetCharCtrlWithName(InvService.Instance.charSelect);
-            base.EquipGenGewgawFX();
-
-        }
-        public void ApplyEquipableFX()
-        {
+            this.charController = charController;
             EquipGenGewgawFX();
         }
 
         public void RemoveEquipableFX()
         {
             UnEquipGenGewgawFX();
+            charController = null; 
         }
     }
 }

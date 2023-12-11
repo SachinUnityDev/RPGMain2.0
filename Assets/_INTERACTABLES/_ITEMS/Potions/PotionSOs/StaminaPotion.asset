@@ -26,6 +26,6 @@ MonoBehaviour:
   maxWorldInstance: 999
   iconSprite: {fileID: 21300000, guid: 4eecbc24f1768ff48aad845b263bc4e0, type: 3}
   allLines:
-  - Heals 80%-100% of<style="Stamina"> Stamina </style>
-  - -1 <style="Attributes">Willpower </style>
+  - Heals 80%-100% of Stamina
+  - -1 Willpower
   - Slight chance for "Potion Addict"

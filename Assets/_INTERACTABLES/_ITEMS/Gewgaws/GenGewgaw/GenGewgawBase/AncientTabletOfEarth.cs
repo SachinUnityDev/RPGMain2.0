@@ -21,9 +21,11 @@ namespace Interactables
         public Currency currency { get; set; }
         int valLuck;
         bool expFXAdded;
-        public void ApplyEquipableFX()
+        public void ApplyEquipableFX(CharController charController)
         {
-            charController = InvService.Instance.charSelectController;
+            this.charController = charController;
+            EquipGenGewgawFX();
+
             //    expFXAdded = false;
             //    CalendarService.Instance.OnStartOfCalDay += ExpIncrBasedOnDay;
             //    LandScapeFX();
@@ -44,7 +46,8 @@ namespace Interactables
 
         public void RemoveEquipableFX()
         {
-            
+            UnEquipGenGewgawFX();
+            charController = null; 
         }
     }
 }

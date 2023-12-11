@@ -27,16 +27,16 @@ namespace Combat
         public abstract PerkSelectState state { get; set; }  // perk select ...
         public abstract List<PerkNames> preReqList { get; }
         public abstract string desc { get; }
-
+     
         public virtual SkillModel skillModel { get; set; }
         public abstract CharNames charName { get;  }
         public abstract SkillNames skillName { get; }
         public abstract SkillLvl skillLvl { get; }
         public abstract float chance { get; set; }
+        protected bool incrDone = false;
 
-        
-      //  public List<DynamicPosData> targetDynas  =  new List<DynamicPosData>();
-      #endregion
+        //  public List<DynamicPosData> targetDynas  =  new List<DynamicPosData>();
+        #endregion
 
         #region APPLY and HOVER
 
@@ -47,7 +47,7 @@ namespace Combat
 
             charController = this.skillController.gameObject.GetComponent<CharController>();
             charID = charController.charModel.charID;
-
+            incrDone = false; 
             if (skillModel == null)
             {
                Debug.LogError(" Could not find the skillModel" + skillName +" CharName" + charController.charModel.charName);

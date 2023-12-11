@@ -31,7 +31,7 @@ namespace Interactables
 
     public interface IEquipAble   // stored in active inventory in combat 
     {
-        void ApplyEquipableFX();
+        void ApplyEquipableFX(CharController charController);
         void RemoveEquipableFX();
 
     }
@@ -46,12 +46,12 @@ namespace Interactables
         protected CharController charController;        
         protected CharNames charName;
         protected int charID;
-        public virtual void  PotionEquip()  
-        {
-            charController = CharService.Instance.GetCharCtrlWithName(InvService.Instance.charSelect); 
-            charName = charController.charModel.charName;
-            charID = charController.charModel.charID;           
-        }
+        //public virtual void PotionEquip() 
+        //{
+        //    //charController = CharService.Instance.GetCharCtrlWithName(InvService.Instance.charSelect); 
+        //    //charName = charController.charModel.charName;
+        //    //charID = charController.charModel.charID;           
+        //}
         public abstract void PotionApplyFX();  
     }
 

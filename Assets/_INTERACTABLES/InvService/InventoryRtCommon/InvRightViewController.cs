@@ -258,11 +258,7 @@ namespace Interactables
         }
 
        
-        // this can be done here 
-        void PopulateActiveInv()
-        {
 
-        }
     }
 }
 //public bool IsCommInvFull(ItemBaseWithQty itemBaseWithQty)

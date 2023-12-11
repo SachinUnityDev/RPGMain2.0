@@ -26,6 +26,10 @@ namespace Interactables
             valFocus = UnityEngine.Random.Range(1, 4);
             string str = $"+{valFocus} Focus";
             displayStrs.Add(str);
+            str = $"";
+            displayStrs.Add(str);          
+            str = $"<i>Verse 3: Going out of salty lake, you lost the ring already</i>";
+            displayStrs.Add(str);
         }
         public override void EquipGewgawPoetic()
         {
@@ -34,12 +38,9 @@ namespace Interactables
             int index =
                 charController.buffController.ApplyBuff(CauseType.PoeticGewgaw, (int)poeticGewgawName
                 , charController.charModel.charID, AttribName.focus, valFocus, TimeFrame.Infinity, -1, true);
-            buffIndex.Add(index);
+            allBuffIds.Add(index);
         }
-        public override void UnEquipPoetic()
-        {
-            buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
-        }
+
 
         public void InitItem(int itemId, int maxInvStackSize)
         {
@@ -53,12 +54,16 @@ namespace Interactables
 
         }
 
-        public void ApplyEquipableFX()
+        public void ApplyEquipableFX(CharController charController)
         {
+            this.charController= charController;
+            EquipGewgawPoetic();
         }
 
         public void RemoveEquipableFX()
         {
+            UnEquipPoetic();
+            charController = null; 
         }
     }
 }

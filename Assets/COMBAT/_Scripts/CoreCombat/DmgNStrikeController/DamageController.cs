@@ -109,9 +109,7 @@ namespace Combat
             float dmgNew = 0f;
             if (strikeType == StrikeType.Crit)
             {
-                dmgNew = dmg * 1.6f;
-                
-
+                dmgNew = dmg * 1.6f;                
             }
             else if (strikeType == StrikeType.Feeble)
             {
@@ -164,11 +162,15 @@ namespace Combat
             }
             // ask strike controller do you have a extra dmg buff against me 
             float damageAlt = striker.GetComponent<StrikeController>()
-                                .GetDmgAlt(charController.charModel, attackType, _dmgType ); 
-                
+                                .GetDmgAlt(charController.charModel, attackType, _dmgType );
+            float damageAltCharState = striker.GetComponent<StrikeController>()
+                                .GetDmgCharStateAlt(charController);
+
+
             AttribData dmgSDMin = striker.GetAttrib(AttribName.dmgMin);
             AttribData dmgSDMax = striker.GetAttrib(AttribName.dmgMax);
-            float percentDmg = dmgPercentORVal + damageAlt; // copy of Dmg value for magical and physical + Dmg modifiers 
+            float percentDmg = dmgPercentORVal + damageAlt + damageAltCharState;
+            // copy of Dmg value for magical and physical + Dmg modifiers 
 
             float dmg = (float)(UnityEngine.Random.Range(dmgSDMin.currValue, dmgSDMax.currValue) * (percentDmg / 100f));
             int strikerID = striker.charModel.charID;

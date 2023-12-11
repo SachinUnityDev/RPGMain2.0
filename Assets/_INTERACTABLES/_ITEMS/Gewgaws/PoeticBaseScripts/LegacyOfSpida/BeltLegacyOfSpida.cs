@@ -23,23 +23,23 @@ namespace Interactables
         int valER; 
         public override void PoeticInit()
         {
-            valER = UnityEngine.Random.Range(6, 13);            
+            valER = UnityEngine.Random.Range(7, 13);            
             string str = $"+{valER} Earth Res";
+            displayStrs.Add(str);
+            str = $"";
+            displayStrs.Add(str);
+            str = $"<i>Verse 1: Your webby covers my belly</i>";
             displayStrs.Add(str);
         }
         public override void EquipGewgawPoetic()
         {
-            charController = InvService.Instance.charSelectController;
-   
+    
             int index =
                 charController.buffController.ApplyBuff(CauseType.PoeticGewgaw, (int)poeticGewgawName
                 , charController.charModel.charID, AttribName.earthRes, valER, TimeFrame.Infinity, -1, true);
-            buffIndex.Add(index);
+            allBuffIds.Add(index);
         }
-        public override void UnEquipPoetic()
-        {
-            buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));          
-        }
+    
 
         public void InitItem(int itemId, int maxInvStackSize)
         {
@@ -51,12 +51,15 @@ namespace Interactables
         {
 
         }
-        public void ApplyEquipableFX()
+        public void ApplyEquipableFX(CharController charController)
         {
-
+            this.charController = charController;
+            EquipGewgawPoetic();
         }
         public void RemoveEquipableFX()
         {
+            UnEquipPoetic();
+            charController = null;
 
         }
     }

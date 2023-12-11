@@ -28,10 +28,10 @@ namespace Combat
 
         [Header("Thorns Damage related")]
         public int thornID = -1;
-     
+
 
         [Header(" retaliate Skill")]
-        public int retaliateID = -1; 
+        public int retaliateID = -1;
 
         private void Start()
         {
@@ -53,25 +53,25 @@ namespace Combat
         ///  then you get a chance to use another skill..(including move skill)
         /// 
         /// </summary>
- 
+
         public void Init()
         {
             strikerModel = new StrikerModel();
-           
+
         }
-    #region THORNS RELATED
+        #region THORNS RELATED
 
         public int AddThornsBuff(DamageType damageType, float thornsMin, float thornsMax, TimeFrame timeframe, int castTime)
         {
             int currRd = CombatService.Instance.currentRound;
-            thornID = strikerModel.allThornsData.Count + 1; 
+            thornID = strikerModel.allThornsData.Count + 1;
             ThornBuffData thornBuffData = new ThornBuffData(thornID, damageType, thornsMin, thornsMax, timeframe, castTime);
-            
+
             strikerModel.allThornsData.Add(thornBuffData);
-            
+
             return thornID;
         }
-        
+
         public void RemoveThornsFx(int thornID)
         {
             strikerModel.RemoveThornDamage(thornID);
@@ -103,12 +103,12 @@ namespace Combat
         void OnDmgDeliveredTick(DmgAppliedData dmgAppliedData)
         {
             foreach (ThornBuffData thornData in strikerModel.allThornsData)
-            {   
+            {
                 int charLvl = this.GetComponent<CharController>().charModel.charLvl;
-                float dmgPercentValue = UnityEngine.Random.Range(thornData.thornsMin,thornData.thornsMax)*(0.6f + charLvl/6);
+                float dmgPercentValue = UnityEngine.Random.Range(thornData.thornsMin, thornData.thornsMax) * (0.6f + charLvl / 6);
                 if (dmgPercentValue > 0)
-                dmgAppliedData.striker.GetComponent<DamageController>()
-                    .ApplyDamage(charController, CauseType.ThornsAttack, -1, thornData.damageType, dmgPercentValue);               
+                    dmgAppliedData.striker.GetComponent<DamageController>()
+                        .ApplyDamage(charController, CauseType.ThornsAttack, -1, thornData.damageType, dmgPercentValue);
             }
         }
 
@@ -119,7 +119,7 @@ namespace Combat
         public int AddRetailiateBuff(CauseType causeType, int causeName, TimeFrame timeFrame, int castTime)
         {
             int currRd = CombatService.Instance.currentRound;
-            retaliateID = strikerModel.allRetaliateData.Count + 1;           
+            retaliateID = strikerModel.allRetaliateData.Count + 1;
             RetaliateBuffData retaliateBuffData = new RetaliateBuffData(retaliateID, causeType, causeName, timeFrame, castTime);
             strikerModel.allRetaliateData.Add(retaliateBuffData);
             return retaliateID;
@@ -133,8 +133,8 @@ namespace Combat
                     skillController.allSkillBases.FindIndex(t => t.skillModel.skillType == SkillTypeCombat.Retaliate);
             if (index == -1) return;
 
-            SkillBase skillBase = skillController.allSkillBases[index]; 
-            
+            SkillBase skillBase = skillController.allSkillBases[index];
+
             skillBase.targetGO = targetController.gameObject;
             skillBase.targetController = targetController;
             skillBase.PreApplyFX();
@@ -176,9 +176,9 @@ namespace Combat
         }
         void OnDmgDeliveredTickRetaliate(DmgAppliedData dmgAppliedData)
         {
-           if(strikerModel.allRetaliateData.Count > 0)
+            if (strikerModel.allRetaliateData.Count > 0)
             {
-                ApplyRetaliate(dmgAppliedData.striker); 
+                ApplyRetaliate(dmgAppliedData.striker);
             }
         }
 
@@ -196,11 +196,11 @@ namespace Combat
             AttackType attackType = AttackType.None, DamageType dmgType = DamageType.None,
             CultureType cultType = CultureType.None, RaceType raceType = RaceType.None)
         {
-            dmgBuffID = allDmgBuffData.Count + 1; 
+            dmgBuffID = allDmgBuffData.Count + 1;
 
-            DmgAltData dmgAltData = new DmgAltData( valPercent, attackType, dmgType, cultType, raceType);
+            DmgAltData dmgAltData = new DmgAltData(valPercent, attackType, dmgType, cultType, raceType);
             int startRoundNo = CombatService.Instance.currentRound;
-          
+
             DmgBuffData dmgBuffData = new DmgBuffData(dmgBuffID, isBuff, startRoundNo, timeFrame
                             , netTime, dmgAltData);
 
@@ -233,11 +233,11 @@ namespace Combat
             }
         }
 
-        public void RemoveDmgBuffData(DmgBuffData dmgBuffData)
+        void RemoveDmgBuffData(DmgBuffData dmgBuffData)
         {
             allDmgBuffData.Remove(dmgBuffData);
         }
-        public bool RemoveDmgBuff(int dmgBuffID)
+        public bool RemoveDmgAltBuff(int dmgBuffID)
         {
             int index = allDmgBuffData.FindIndex(t => t.dmgBuffID == dmgBuffID);
             if (index == -1) return false;
@@ -253,34 +253,7 @@ namespace Combat
             foreach (DmgBuffData dmgBuffData in allDmgBuffData.ToList())
             {
                 DmgAltData dmgAltData = dmgBuffData.altData;
-                if (dmgAltData.damageType != DamageType.None && dmgAltData.damageType == damageType)
-                {
-                    float val = 0;
-                    if (dmgAltData.raceType != RaceType.None
-                        && dmgAltData.raceType == targetModel.raceType
-                                && dmgAltData.cultType != CultureType.None
-                                && dmgAltData.cultType == targetModel.cultType)
-                    {
-
-                        val = dmgAltData.valPercent; // COMBO RACE AND CULT
-
-                    }
-                    else   // NOT A COMBO OF RACE AND CULT
-                    {
-                        if (dmgAltData.raceType != RaceType.None
-                                  && dmgAltData.raceType == targetModel.raceType)
-                        {
-                            val = dmgAltData.valPercent;
-                        }
-                        if (dmgAltData.cultType != CultureType.None
-                                        && dmgAltData.cultType == targetModel.cultType)
-                        {
-                            val = dmgAltData.valPercent;
-                        }
-                    }
-                    return val; 
-                }
-                else if (dmgAltData.attackType != AttackType.None && dmgAltData.attackType == attackType)
+                if (dmgAltData.damageType != DamageType.None && dmgAltData.damageType == damageType)// Damage Type Block 
                 {
                     float val = 0;
                     if (dmgAltData.raceType != RaceType.None
@@ -307,53 +280,191 @@ namespace Combat
                     }
                     return val;
                 }
+                else if (dmgAltData.attackType != AttackType.None && dmgAltData.attackType == attackType)// Attack type block
+                {
+                    float val = 0;
+                    if (dmgAltData.raceType != RaceType.None
+                        && dmgAltData.raceType == targetModel.raceType
+                                && dmgAltData.cultType != CultureType.None
+                                && dmgAltData.cultType == targetModel.cultType)
+                    {
+
+                        val = dmgAltData.valPercent; // COMBO RACE AND CULT
+
+                    }
+                    else   // NOT A COMBO OF RACE AND CULT
+                    {
+                        if (dmgAltData.raceType != RaceType.None
+                                  && dmgAltData.raceType == targetModel.raceType)
+                        {
+                            val = dmgAltData.valPercent;
+                        }
+                        if (dmgAltData.cultType != CultureType.None
+                                        && dmgAltData.cultType == targetModel.cultType)
+                        {
+                            val = dmgAltData.valPercent;
+                        }
+                    }
+                    return val;
+                }
+                else if (dmgAltData.attackType == AttackType.None && dmgAltData.damageType == DamageType.None)
+                {
+                    return dmgAltData.valPercent;
+                }
             }
             return 0f;
         }
         #endregion
-    }
 
-    public class DmgBuffData
-    {
-        public int dmgBuffID;
-        public bool isBuff;   // true if BUFF and false if DEBUFF
-        public int startRoundNo;
-        public TimeFrame timeFrame;
-        public int buffedNetTime;
-        public int buffCurrentTime;
-        public DmgAltData altData;  // contains value for the buff        
+        #region  CHAR STATE DMG ALT BUFF DATA 
 
-        public DmgBuffData(int dmgBuffID, bool isBuff, int startRoundNo, TimeFrame timeFrame
-                            , int buffedNetTime, DmgAltData altData)
+        public List<DmgBuffCharStateData> allDmgBuffCharStateData = new List<DmgBuffCharStateData>();
+
+        int dmgCharStateBuffID = 0;
+        public int ApplyCharStateDmgAltBuff(float valPercent, CauseType causeType, int causeName, int causeByCharID,
+             TimeFrame timeFrame, int netTime, bool isBuff, CharStateName charStateName)
         {
-            this.dmgBuffID = dmgBuffID;
-            this.isBuff = isBuff;
-            this.startRoundNo = startRoundNo;
-            this.timeFrame = timeFrame;
-            this.buffedNetTime = buffedNetTime;
-            this.buffCurrentTime = 0;// time counter for the dmgBuff
-            this.altData = altData;
+            dmgCharStateBuffID = allDmgBuffCharStateData.Count + 1;
+
+            DmgAltCharStateData dmgAltCSData = new DmgAltCharStateData(valPercent, charStateName);
+
+            int startRoundNo = CombatService.Instance.currentRound;
+
+            DmgBuffCharStateData dmgBuffCSData = new DmgBuffCharStateData(dmgCharStateBuffID, isBuff, startRoundNo, timeFrame
+                            , netTime, dmgAltCSData);
+
+            allDmgBuffCharStateData.Add(dmgBuffCSData);
+            return dmgCharStateBuffID;
         }
-    }
-
-    public class DmgAltData
-    {
-        public AttackType attackType = AttackType.None;
-        public DamageType damageType = DamageType.None;
-        public CultureType cultType = CultureType.None;
-        public RaceType raceType = RaceType.None;
-        public float valPercent = 0f;
-
-        public DmgAltData( float valPercent, AttackType attackType, DamageType damageType, CultureType cultType, RaceType raceType)
+        public void EOCTickDmgCharStateBuff()
         {
-           
-            this.attackType = attackType;
-            this.damageType = damageType;
-            this.cultType = cultType;
-            this.raceType = raceType;
-            this.valPercent = valPercent;
+            foreach (DmgBuffCharStateData dmgBuffData in allDmgBuffCharStateData.ToList())
+            {
+                if (dmgBuffData.timeFrame == TimeFrame.EndOfCombat)
+                {
+                    RemoveDmgBuffCharStateData(dmgBuffData);
+                }
+            }
         }
 
+        public void EORCharStateTick(int roundNo)  // to be completed
+        {
+            foreach (DmgBuffCharStateData dmgBuffCSData in allDmgBuffCharStateData.ToList())
+            {
+                if (dmgBuffCSData.timeFrame == TimeFrame.EndOfRound)
+                {
+                    if (dmgBuffCSData.buffCurrentTime >= dmgBuffCSData.buffedNetTime)
+                    {
+                        RemoveDmgBuffCharStateData(dmgBuffCSData);
+                    }
+                    dmgBuffCSData.buffCurrentTime++;
+                }
+            }
+        }
+
+        void RemoveDmgBuffCharStateData(DmgBuffCharStateData dmgBuffCSData)
+        {
+            allDmgBuffCharStateData.Remove(dmgBuffCSData);
+        }
+        public bool RemoveDmgAltCharStateBuff(int dmgCharStateBuffID)
+        {
+            int index = allDmgBuffCharStateData.FindIndex(t => t.dmgBuffID == dmgCharStateBuffID);
+            if (index == -1) return false;
+            DmgBuffCharStateData dmgBuffCSData = allDmgBuffCharStateData[index];
+            RemoveDmgBuffCharStateData(dmgBuffCSData);
+            return true;
+        }
+
+        public float GetDmgCharStateAlt(CharController targetController)
+        {
+            // 20% More Dmg against (CHAR STATE) Rooted Targets    
+            foreach (DmgBuffCharStateData dmgBuffCSData in allDmgBuffCharStateData.ToList())
+            {
+                if (targetController.charStateController.HasCharState(dmgBuffCSData.altData.charStateName))
+                {
+                    return dmgBuffCSData.altData.valPercent;
+                }
+            }
+            return 0f;
+
+        }
+        #endregion
+
+        public class DmgBuffData
+        {
+            public int dmgBuffID;
+            public bool isBuff;   // true if BUFF and false if DEBUFF
+            public int startRoundNo;
+            public TimeFrame timeFrame;
+            public int buffedNetTime;
+            public int buffCurrentTime;
+            public DmgAltData altData;  // contains value for the buff        
+
+            public DmgBuffData(int dmgBuffID, bool isBuff, int startRoundNo, TimeFrame timeFrame
+                                , int buffedNetTime, DmgAltData altData)
+            {
+                this.dmgBuffID = dmgBuffID;
+                this.isBuff = isBuff;
+                this.startRoundNo = startRoundNo;
+                this.timeFrame = timeFrame;
+                this.buffedNetTime = buffedNetTime;
+                this.buffCurrentTime = 0;// time counter for the dmgBuff
+                this.altData = altData;
+            }
+        }
+
+        public class DmgAltData
+        {
+            public AttackType attackType = AttackType.None;
+            public DamageType damageType = DamageType.None;
+            public CultureType cultType = CultureType.None;
+            public RaceType raceType = RaceType.None;
+            public float valPercent = 0f;
+
+            public DmgAltData(float valPercent, AttackType attackType, DamageType damageType, CultureType cultType, RaceType raceType)
+            {
+
+                this.attackType = attackType;
+                this.damageType = damageType;
+                this.cultType = cultType;
+                this.raceType = raceType;
+                this.valPercent = valPercent;
+            }
+
+        }
+        public class DmgAltCharStateData
+        {
+            public CharStateName charStateName;
+            public float valPercent = 0f;
+
+            public DmgAltCharStateData(float valPercent, CharStateName charStateName = CharStateName.None)
+            {
+                this.charStateName = charStateName;
+                this.valPercent = valPercent;
+            }
+        }
+        public class DmgBuffCharStateData
+        {
+            public int dmgBuffID;
+            public bool isBuff;   // true if BUFF and false if DEBUFF
+            public int startRoundNo;
+            public TimeFrame timeFrame;
+            public int buffedNetTime;
+            public int buffCurrentTime;
+            public DmgAltCharStateData altData;  // contains value for the buff        
+
+            public DmgBuffCharStateData(int dmgBuffID, bool isBuff, int startRoundNo, TimeFrame timeFrame
+                                , int buffedNetTime, DmgAltCharStateData altData)
+            {
+                this.dmgBuffID = dmgBuffID;
+                this.isBuff = isBuff;
+                this.startRoundNo = startRoundNo;
+                this.timeFrame = timeFrame;
+                this.buffedNetTime = buffedNetTime;
+                this.buffCurrentTime = 0;// time counter for the dmgBuff
+                this.altData = altData;
+            }
+        }
     }
 
 

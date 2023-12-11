@@ -21,6 +21,6 @@ MonoBehaviour:
   - gewgawMidNames: 4
     verseStr: 'Fire: Hit with your eyes closed'
   bonusBuffStr:
-  - 'On Stealth Mode: Gain +16% Dmg'
-  - 'Enemy Beastmen and Felines: -3 Luck'
-  - +3 luck vs Rooted targets
+  - 'On Stealth Mode: Physical Skills: +16% Dmg'
+  - 'Enemy Beastmen, Canine and Feline: -3 Luck'
+  - 'First 3 rds of combat: +3 Luck'

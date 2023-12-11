@@ -55,7 +55,7 @@ namespace Combat
             {
                 index++;
                 charCount = CharService.Instance.charsInPlayControllers.Count;
-                if (index < charCount && index >= -1)
+                if (index < charCount && index > -1)
                 {
                     
                     CombatService.Instance.currCharOnTurn = charTurnOrder[index];                  

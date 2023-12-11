@@ -6,6 +6,7 @@ using Common;
 using System.Linq;
 using Interactables;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 namespace Combat
 {
@@ -55,6 +56,22 @@ namespace Combat
         void Start()
         {
           roundController = GetComponent<RoundController>();
+            SceneManager.sceneLoaded += OnSceneLoaded;
+
+        }
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+
+        }
+        // on scene Load
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            {
+                On_CombatInit(CombatState.INCombat_normal);
+            }
+
         }
 
         public void On_StrikeFired(StrikeData strikeData)
@@ -62,10 +79,26 @@ namespace Combat
             OnStrikeFired?.Invoke(strikeData); 
 
         }
-        public void On_CombatInit()
+        public void On_CombatInit(CombatState startState)
         {
-            //CharService.Instance.Init();
-            OnCombatInit?.Invoke(); 
+            OnCombatInit?.Invoke();
+            Sequence seq = DOTween.Sequence();
+            if (startState== CombatState.INTactics) 
+            {
+                seq
+               .AppendInterval(0.2f)
+               .AppendCallback(() => On_SOTactics())
+               ;
+                seq.Play();
+            }
+            if(startState == CombatState.INCombat_normal)
+            {
+                seq
+               .AppendInterval(0.2f)
+               .AppendCallback(() => On_SOC())
+               ;
+                seq.Play();
+            }
         }
 
         public void On_CombatLoot(bool isVictory)
@@ -83,13 +116,15 @@ namespace Combat
             charCtrl.RegenStamina();
             charCtrl.HPRegen(); 
             Debug.Log("CHAR SET ON TURN >>>>" + charCtrl.charModel.charName);
+         
             OnCharOnTurnSet?.Invoke(charCtrl);
+            On_CharClicked(charCtrl.gameObject);
         }
      
         public void On_SOTactics()
         {
-            CombatService.Instance.combatState = CombatState.INTactics;
-            OnSOTactics?.Invoke();                
+            CombatService.Instance.combatState = CombatState.INTactics; // skip one frame for Inits to occur
+            OnSOTactics?.Invoke(); 
         }
         public void On_SOC()
         {
@@ -127,9 +162,10 @@ namespace Combat
         public void On_SOR(int roundNo)
         {
             Debug.Log("SOR Triggered" + roundNo);
-            roundController.OnRoundStart(roundNo); 
-            OnSOR1?.Invoke(roundNo);
+            roundController.OnRoundStart(roundNo);
             On_SOT();
+
+            OnSOR1?.Invoke(roundNo);
         }
         public void On_EOR(int roundNo)
         {
@@ -305,7 +341,7 @@ namespace Combat
 
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                On_CombatInit();
+                On_CombatInit(CombatState.INTactics);
                 Debug.Log("ON COmbat Init");
             }
             if (Input.GetKeyDown(KeyCode.U))

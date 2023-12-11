@@ -26,6 +26,6 @@ MonoBehaviour:
   maxWorldInstance: 6
   iconSprite: {fileID: 21300000, guid: 86ccfda834b2c03459a7ea689e894628, type: 3}
   allLines:
-  - "+3<style=\"Attributes\"> Accuracy\t </style>"
-  - -(1-1)<style="Attributes"> Damage </style>
+  - +3 Accuracy
+  - -(1-1) Damage
   - Slight chance for "Potion Addict"

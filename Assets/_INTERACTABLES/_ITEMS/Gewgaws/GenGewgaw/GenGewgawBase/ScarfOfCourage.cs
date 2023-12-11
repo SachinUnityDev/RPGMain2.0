@@ -29,19 +29,21 @@ namespace Interactables
         }
 
 
-        public override void EquipGenGewgawFX()
-        {            
-            charController = CharService.Instance.GetCharCtrlWithName(InvService.Instance.charSelect);
-            base.EquipGenGewgawFX();
-        }
-        public void ApplyEquipableFX()
+        //public override void EquipGenGewgawFX()
+        //{            
+        //    charController = CharService.Instance.GetCharCtrlWithName(InvService.Instance.charSelect);
+        //    base.EquipGenGewgawFX();
+        //}
+        public void ApplyEquipableFX(CharController charController)
         {
+            this.charController = charController; 
             EquipGenGewgawFX();
         }
 
         public void RemoveEquipableFX()
         {
             UnEquipGenGewgawFX();
+            charController = null; 
         }
 
 

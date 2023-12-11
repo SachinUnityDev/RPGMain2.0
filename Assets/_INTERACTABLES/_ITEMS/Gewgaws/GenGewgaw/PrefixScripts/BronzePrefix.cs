@@ -93,14 +93,14 @@ namespace Interactables
         public void RemoveFXLyric()
         {
             buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
-            dmgAltBuffIndex.ForEach(t => charController.strikeController.RemoveDmgBuff(t));
+            dmgAltBuffIndex.ForEach(t => charController.strikeController.RemoveDmgAltBuff(t));
             dmgAltBuffIndex.Clear();
             buffIndex.Clear();
         }
         public void RemoveFXFolkloric()
         {
             buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
-            dmgAltBuffIndex.ForEach(t => charController.strikeController.RemoveDmgBuff(t));
+            dmgAltBuffIndex.ForEach(t => charController.strikeController.RemoveDmgAltBuff(t));
             dmgAltBuffIndex.Clear();
             buffIndex.Clear();
         }

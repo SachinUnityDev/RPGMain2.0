@@ -46,16 +46,17 @@ namespace Interactables
         }
         public void ApplyConsumableFX()
         {
+            PotionApplyFX();
         }
 
-        public void ApplyEquipableFX()
+        public void ApplyEquipableFX(CharController charController)
         {
-
+            this.charController= charController;
         }
 
         public void RemoveEquipableFX()
         {
-
+            charController = null; 
         }
 
     }

@@ -334,7 +334,9 @@ namespace Interactables
                     SagaicGewgawSO sagaicGewgawSO = ItemService.Instance.GetSagaicGewgawSO((SagaicGewgawNames)item.itemName);
                     if (sagaicGewgawSO != null)
                     {
-                        crownTrans.gameObject.SetActive(false);                      
+                        crownTrans.gameObject.SetActive(true);
+                        resHeading.text = sagaicGewgawSO.GetRestrictionsType();
+                        resLS.text = sagaicGewgawSO.GetRestrictionLs();
 
                         // top
                         itemNametxt.text = sagaicGewgawSO.sagaicGewgawName.ToString().CreateSpace();
@@ -360,8 +362,9 @@ namespace Interactables
                     PoeticGewgawSO poeticGewgawSO = ItemService.Instance.GetPoeticGewgawSO((PoeticGewgawNames)item.itemName);
                     if (poeticGewgawSO != null)
                     {
-                        crownTrans.gameObject.SetActive(false);
-
+                        crownTrans.gameObject.SetActive(true);
+                        resHeading.text = poeticGewgawSO.GetRestrictionsType();
+                        resLS.text = poeticGewgawSO.GetRestrictionLs();
                         // top
                         itemNametxt.text = poeticGewgawSO.gewgawMidName.ToString().CreateSpace();
                         itemTypetxt.text = "Gewgaw";
@@ -406,9 +409,9 @@ namespace Interactables
                             }
                         }
                         // TAIL verses
-                        int setNum = poeticGewgawSO.setNumber;
-                        tailTrans.GetChild(2).GetComponent<TextMeshProUGUI>().text
-                            = "Verse" + setNum + ": " + poeticGewgawSO.verseDesc;
+                        //int setNum = poeticGewgawSO.setNumber;
+                       // tailTrans.GetChild(2).GetComponent<TextMeshProUGUI>().text = "";
+                        //    = "Verse" + setNum + ": " + poeticGewgawSO.verseDesc;
 
                     }
                     // write Poetic

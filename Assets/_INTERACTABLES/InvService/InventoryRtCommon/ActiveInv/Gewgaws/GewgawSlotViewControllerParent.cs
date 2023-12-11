@@ -41,7 +41,7 @@ namespace Interactables
         [Header("Slot results")]
         [SerializeField] bool slot1result;
         [SerializeField] bool slot2result;
-
+        [SerializeField] bool slot3result;
 
         void Start()
         {
@@ -108,14 +108,18 @@ namespace Interactables
             // and if both fails then remove from slot 1 
             
                 slot1result = false; slot2result = false;
+                slot3result =false;
                 slot1result = AddItemtoActiveSlotView(item, 0);
                 if (!slot1result) // try slot 2 
                 {
                     slot2result = AddItemtoActiveSlotView(item, 1);
-                    if (slot2result)
+                if (slot2result)
+                    return true;
+                else
+                    slot3result = AddItemtoActiveSlotView(item, 2); 
+                    if(slot3result)
                         return true;
                     else
-                        //swap here with first
                         return false;
                 }
                 return true;            

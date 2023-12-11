@@ -24,11 +24,11 @@ namespace Combat
         public override SkillLvl skillLvl => SkillLvl.Level3;
 
         public override float chance { get; set; }
-        public override void SkillHovered()
-        {
-            base.SkillHovered();
-            skillModel.staminaReq = 4; 
-        }
+        //public override void SkillHovered()
+        //{
+        //    base.SkillHovered();
+        //    skillModel.staminaReq = 4; 
+        //}
         public override void ApplyFX1()
         {
             if (targetController == null) return;

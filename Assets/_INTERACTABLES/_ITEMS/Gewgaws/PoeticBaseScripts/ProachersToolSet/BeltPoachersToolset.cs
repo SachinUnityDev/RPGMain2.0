@@ -22,6 +22,10 @@ namespace Interactables
         {
             valHunger = UnityEngine.Random.Range(12, 19);
             string str = $"-{valHunger}% Hunger";
+            displayStrs.Add(str);      
+            str = "";
+            displayStrs.Add(str);
+            str = "<i>Verse 1: Ready: Withstand your voracity</i>";
             displayStrs.Add(str);
         }
         public override void EquipGewgawPoetic()
@@ -33,6 +37,7 @@ namespace Interactables
         }
         public override void UnEquipPoetic()
         {
+            base.UnEquipPoetic();
             charController.ChangeStat(CauseType.PoeticGewgaw, (int)poeticGewgawName
                 , charController.charModel.charID, StatName.hunger, valHunger, true);
 
@@ -43,6 +48,7 @@ namespace Interactables
         {
            this.itemId = itemId;
            this.maxInvStackSize = maxInvStackSize;
+            PoeticInit();
         }
 
         public void OnHoverItem()
@@ -50,14 +56,16 @@ namespace Interactables
           
         }
 
-        public void ApplyEquipableFX()
+        public void ApplyEquipableFX(CharController charController)
         {
-            
+            this.charController = charController;
+            EquipGewgawPoetic();
         }
-
         public void RemoveEquipableFX()
         {
-           
+            UnEquipPoetic();
+            charController = null;
+
         }
     }
 }

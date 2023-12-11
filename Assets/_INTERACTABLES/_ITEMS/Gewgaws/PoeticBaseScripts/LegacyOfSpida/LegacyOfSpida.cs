@@ -17,15 +17,16 @@ namespace Interactables
 
             CombatEventService.Instance.OnSOC += SOCHaste2Rds;
             CombatEventService.Instance.OnDodge += OnDodgeChar;
-            charController.ChangeAttrib(CauseType.PoeticGewgaw, (int)poeticSetName
-                 , charController.charModel.charID, AttribName.fortOrg, -2);
+            int buffID = 
+            charController.buffController.ApplyBuff(CauseType.PoeticGewgaw, (int)poeticSetName
+                 , charController.charModel.charID, AttribName.fortOrg, -2, TimeFrame.Infinity, 1, false);
+            allBuffIds.Add(buffID);
         }
         public override void RemoveBonusFX()
         {
-            CombatEventService.Instance.OnSOC += SOCHaste2Rds;
-            CombatEventService.Instance.OnDodge += OnDodgeChar;
-            charController.ChangeAttrib(CauseType.PoeticGewgaw, (int)poeticSetName
-                 , charController.charModel.charID, AttribName.fortOrg, 2);
+            base.RemoveBonusFX();
+            CombatEventService.Instance.OnSOC -= SOCHaste2Rds;
+            CombatEventService.Instance.OnDodge -= OnDodgeChar;
         }
         void OnDodgeChar(DmgAppliedData dmgAppliedData)
         {
@@ -37,8 +38,16 @@ namespace Interactables
         }
         void SOCHaste2Rds()
         {
-            charController.buffController.ApplyBuff(CauseType.PoeticGewgaw, (int)poeticSetName
-               , charController.charModel.charID, AttribName.haste, -2, TimeFrame.EndOfRound, 2, false);
+            foreach (CharController charCtrl in CharService.Instance.charsInPlayControllers)
+            {
+                if (charCtrl.charModel.charMode == CharMode.Enemy)
+                {
+                    int index =
+                      charController.buffController.ApplyBuff(CauseType.PoeticGewgaw, (int)poeticSetName
+                            , charController.charModel.charID, AttribName.haste, -2, TimeFrame.EndOfRound, 2, false);
+                    allBuffIds.Add(index);
+                }
+            }
         }
     }
 }

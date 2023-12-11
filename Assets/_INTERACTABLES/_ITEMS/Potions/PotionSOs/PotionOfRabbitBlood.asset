@@ -26,6 +26,6 @@ MonoBehaviour:
   maxWorldInstance: 6
   iconSprite: {fileID: 21300000, guid: 16456a97faf2bda448f5098fd8febfe6, type: 3}
   allLines:
-  - +2-4<style="Attributes"> Luck </style>
-  - -2<style="Attributes"> Dodge </style>
+  - +2-4 Luck
+  - -2 Dodge
   - Slight chance for "Potion Addict"

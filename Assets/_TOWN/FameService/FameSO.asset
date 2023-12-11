@@ -24,7 +24,7 @@ MonoBehaviour:
   - fameBehavior: 5
     allAntiFameTypes: 040000000500000006000000
   - fameBehavior: 6
-    allAntiFameTypes: 050000000600000007000000
+    allAntiFameTypes: 0500000006000000
   allFameRangeData:
   - FameType: 7
     rangeStart: -30

@@ -21,9 +21,9 @@ namespace Combat
         public override SkillNames skillName => SkillNames.RunguThrow;
 
         public override SkillLvl skillLvl => SkillLvl.Level1;
-
-        public override float chance { get; set; }
-
+        private float _chance;    
+        public override float chance { get=> _chance; set { _chance = 50f;  } }
+        
         public override void SkillHovered()
         {
             base.SkillHovered();
@@ -38,7 +38,7 @@ namespace Combat
         {
             if (targetController)
             {
-                if (50f.GetChance())
+                if (chance.GetChance())
                     targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
                     , charController.charModel.charID, CharStateName.Confused, skillModel.timeFrame, skillModel.castTime);
             }

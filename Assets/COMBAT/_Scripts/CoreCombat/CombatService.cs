@@ -85,6 +85,9 @@ namespace Combat
                                        -= (CharNames _charName, SkillNames _skillName)
                                        => combatState = CombatState.INCombat_InSkillSelected; 
         }
+
+
+
         public void SetAllCurrCharValues(CharController charController)  // Inits 
         {      
             currCharClicked = currCharOnTurn;
@@ -92,8 +95,8 @@ namespace Combat
             combatHUDView.UpdateTurnBtn(charController); 
         }
         void GetAllyInCombat()
-        {
-            GridService.Instance.SetAllyPreTactics(); 
+        {   
+             GridService.Instance.SetAllyPreTactics();
         }
 
         void SetEnemyInCombat(EnemyPackName enemyPack)

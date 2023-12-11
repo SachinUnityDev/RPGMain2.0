@@ -50,9 +50,13 @@ namespace Combat
         public override void SkillHovered()
         {
             base.SkillHovered();
-            skillModel.attackType = AttackType.Ranged;
-            skillModel.damageMod = 145;
-            skillModel.cd = 2; 
+            if(!incrDone)
+            {
+                skillModel.attackType = AttackType.Ranged;
+                skillModel.damageMod += 55;
+                skillModel.cd = 2;
+                incrDone= true;
+            }
         }
        
         public override void ApplyFX1()

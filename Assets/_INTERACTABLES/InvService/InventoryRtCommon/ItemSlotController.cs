@@ -478,7 +478,7 @@ namespace Interactables
 
                 if (parentView.Equip2PotionSlot(ItemsInSlot[0]))
                 {// equiped to a slot 
-                    iEquip.ApplyEquipableFX();
+                    iEquip.ApplyEquipableFX(InvService.Instance.charSelectController);
                     RemoveItem(); 
                 }
                
@@ -491,7 +491,7 @@ namespace Interactables
 
                 if (parentView.Equip2GewgawSlot(ItemsInSlot[0]))
                 {// equiped to a slot 
-
+                    iEquip.ApplyEquipableFX(InvService.Instance.charSelectController);
                     RemoveItem();
                 }
             }

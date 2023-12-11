@@ -26,7 +26,7 @@ MonoBehaviour:
   maxWorldInstance: 3
   iconSprite: {fileID: 21300000, guid: 83c449b760eff10499c532a7152c8841, type: 3}
   allLines:
-  - '+1 <style="Attributes"> Willpower </style>permanently '
-  - 'On Taunt mode: -3<style="Attributes"> Morale </style>'
-  - -3<style="Attributes"> Willpower </style>
+  - '+1 Willpower permanently '
+  - 'On Taunt mode: -3 Morale '
+  - -3 Willpower
   - Decent chance for "Potion Addict"

@@ -141,7 +141,7 @@ namespace Common
             stateID++;// to be corrected
             allBuffIds.Add(stateID);
             
-            // 
+      
             CharStatesBase charStateBase = CharStatesService.Instance.GetNewCharState(charStateName);
             allCharBases.Add(charStateBase);
             CharStateSO1 charStateSO = CharStatesService.Instance.allCharStateSO.GetCharStateSO(charStateName);

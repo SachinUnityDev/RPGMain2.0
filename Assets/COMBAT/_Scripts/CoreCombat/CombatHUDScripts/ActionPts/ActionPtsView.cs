@@ -14,7 +14,7 @@ namespace Combat
         [SerializeField] Transform actionPtsDOT; 
 
 
-        private void Start()  // view subscriptions not to be disabled
+        private void OnEnable()  // view subscriptions not to be disabled
         {
             // can' t write on disable as it happens often
             CombatEventService.Instance.OnCharOnTurnSet -= ShowActionPtsDsply;
@@ -23,8 +23,8 @@ namespace Combat
             CombatEventService.Instance.OnCharOnTurnSet += ShowActionPtsDsply;
             CombatEventService.Instance.OnEOT += HideActionPtsDsply;
 
-            CombatEventService.Instance.OnSOTactics -= HideActionPtsDOTs;
-            CombatEventService.Instance.OnSOTactics += HideActionPtsDOTs; 
+            CombatEventService.Instance.OnCombatInit -= HideActionPtsDOTs;
+            CombatEventService.Instance.OnCombatInit += HideActionPtsDOTs; 
           
         }
 

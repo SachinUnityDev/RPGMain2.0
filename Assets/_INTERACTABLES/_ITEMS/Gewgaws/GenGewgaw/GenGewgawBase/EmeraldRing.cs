@@ -1,3 +1,4 @@
+using Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,14 +40,16 @@ namespace Interactables
         {
 
         }
-        public void ApplyEquipableFX()
+        public void ApplyEquipableFX(CharController charController)
         {
+            this.charController = charController;
             EquipGenGewgawFX();
         }
 
         public void RemoveEquipableFX()
-        {
+        {   
             UnEquipGenGewgawFX();
+            charController = null;
         }
     }
 }

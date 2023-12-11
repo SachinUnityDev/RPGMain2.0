@@ -65,7 +65,7 @@ namespace Interactables
         public void RemoveFXEpic()
         {
             buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
-            dmgAltBuffIndex.ForEach(t => charController.strikeController.RemoveDmgBuff(t));
+            dmgAltBuffIndex.ForEach(t => charController.strikeController.RemoveDmgAltBuff(t));
             dmgAltBuffIndex.Clear();
             buffIndex.Clear();
 

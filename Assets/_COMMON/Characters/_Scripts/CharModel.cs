@@ -82,8 +82,8 @@ namespace Common
         public FleeBehaviour fleeBehaviour;  
         public CharFleeState charFleeState;
 
-        [Header("Active Inv Slot items")]
-        public List<Iitems> activeInvItems = new List<Iitems>();
+        //[Header("Active Inv Slot items")]
+        //public List<Iitems> activeInvItems = new List<Iitems>();
 
         [Header("DEFAULT PROVISION")]
         public List<ItemDataWithQtyNFameType> provisionItems = new List<ItemDataWithQtyNFameType>();

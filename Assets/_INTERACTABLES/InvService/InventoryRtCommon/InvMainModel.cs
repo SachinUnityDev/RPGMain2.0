@@ -33,6 +33,10 @@ namespace Interactables
             potionCount = 0;
             gewgawCount = 0;    
         }
+
+        
+
+
     }
 
     [System.Serializable]
@@ -296,7 +300,7 @@ namespace Interactables
         }
 
 
-        public void AddItem2PotionActInv(Iitems item, int slotID) // key point of addition
+        public void EquipItem2PotionActInv(Iitems item, int slotID) // key point of addition
                                                                   // SAVE and LOAD Active slot here
         {
             CharController charController = InvService.Instance.charSelectController;
@@ -315,6 +319,23 @@ namespace Interactables
                 activeInvDataNew.potionCount++;
                 allActiveInvData.Add(activeInvDataNew);
             }
+            EquipItem(item, charController); 
+        }
+        void EquipItem(Iitems item, CharController charController)
+        {
+            IEquipAble equip = item as IEquipAble;
+            if (equip != null)
+            {
+                equip.ApplyEquipableFX(charController);
+            }
+        }
+        void UnEquipItem(Iitems item)
+        {
+            IEquipAble equip = item as IEquipAble;
+            if (equip != null)
+            {
+                equip.RemoveEquipableFX(); 
+            }
         }
         public bool RemoveItemFromPotionActInv(Iitems Item)
         {
@@ -326,13 +347,16 @@ namespace Interactables
             {
                 activeInvData.potionActivInv.Remove(Item);
                 activeInvData.potionCount--;
+                UnEquipItem(Item);
+                return true;
             }
             else
             {
                 Debug.Log("char active slot data not found");
+                return false;
             }
             // remove from char
-            return false;
+            
         }
         #endregion
 
@@ -343,33 +367,39 @@ namespace Interactables
             CharController charController = InvService.Instance.charSelectController;
             CharNames charName = charController.charModel.charName;
 
-            ActiveInvData activeInvData = allActiveInvData.Find(t => t.CharName == charName);
-            if (activeInvData != null)
+            int index = allActiveInvData.FindIndex(t => t.CharName == charName);
+            if (index != -1)
             {
-                activeInvData.gewgawActivInv.Add(item);
+                allActiveInvData[index].gewgawActivInv.Add(item);
             }
             else
             {
                 ActiveInvData activeInvDataNew = new ActiveInvData(charName);
                 activeInvDataNew.gewgawActivInv.Add(item);
-                allActiveInvData.Add(activeInvData);
+                allActiveInvData.Add(activeInvDataNew);
             }
         }
-        public bool RemoveItemFromGewgawActInv(CharController charController, Iitems Item)
+        public bool RemoveItemFromGewgawActInv(Iitems Item)
         {
+            CharController charController = InvService.Instance.charSelectController;
+
             CharNames charName = charController.charModel.charName;
 
             ActiveInvData activeInvData = allActiveInvData.Find(t => t.CharName == charName);
             if (activeInvData != null)
             {
                 activeInvData.gewgawActivInv.Remove(Item);
+                activeInvData.gewgawCount--;
+                UnEquipItem(Item); 
+                return true;
             }
             else
             {
                 Debug.Log("char active slot data not found" + charController.charModel.charName);
+                return false;
             }
             // remove from char
-            return false;
+          
         }
 
         #endregion

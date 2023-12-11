@@ -45,15 +45,18 @@ namespace Interactables
         }
         public void ApplyConsumableFX()
         {
+            Debug.Log(" char" + charController.charModel.charName + "Potion" + potionName.ToString()); 
+                 
+            PotionApplyFX();
         }
-        public void ApplyEquipableFX()
+        public void ApplyEquipableFX(CharController charController)
         {
-
+            this.charController = charController;
         }
 
         public void RemoveEquipableFX()
         {
-
+            this.charController = null;
         }
 
         public void RecipeInit()

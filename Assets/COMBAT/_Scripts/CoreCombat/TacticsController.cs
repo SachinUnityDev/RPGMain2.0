@@ -41,7 +41,7 @@ namespace Combat
         public void StartTactics()
         {
             CombatService.Instance.combatState = CombatState.INTactics;
-            CombatEventService.Instance.On_CharClicked(CharService.Instance.charsInPlay[0]); 
+            CombatEventService.Instance.On_CharClicked(CharService.Instance.allCharsInPartyLocked[0].gameObject); 
             // show animations
         }
 

@@ -74,7 +74,7 @@ namespace Interactables
 
         public override void EquipGewgawSagaic()
         {
-            charController = InvService.Instance.charSelectController;
+           // charController = InvService.Instance.charSelectController;
 
             if (charController.charStateController.HasCharState(CharStateName.Unslakable))
             {
@@ -122,14 +122,17 @@ namespace Interactables
           
         }
 
-        public void ApplyEquipableFX()
+        public void ApplyEquipableFX(CharController charController)
         {
-            
+            this.charController= charController;
+            EquipGewgawSagaic(); 
         }
 
         public void RemoveEquipableFX()
         {
-           
+            UnEquipSagaic();
+            charController = null; 
+
         }
     }
 }

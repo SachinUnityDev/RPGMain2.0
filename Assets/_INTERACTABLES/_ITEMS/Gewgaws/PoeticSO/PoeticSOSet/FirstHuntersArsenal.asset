@@ -21,6 +21,6 @@ MonoBehaviour:
   - gewgawMidNames: 13
     verseStr: Shredded his foes, the ones he couldn't tame
   bonusBuffStr:
-  - 'When Hungry: +3 Vigor, When Thirsty: +3 Wp'
-  - +1 Morale per Animal in enemy party
-  - 'Enemy Party: Animals: First 3 rds of combat: -4 Haste'
+  - 'When Starving: +3 Vigor, When Unslakable: +3 Wp'
+  - +1 Morale until eoc, if animal ally
+  - 'Enemy Party: Animals: First 3 rds of combat: -3 Haste'

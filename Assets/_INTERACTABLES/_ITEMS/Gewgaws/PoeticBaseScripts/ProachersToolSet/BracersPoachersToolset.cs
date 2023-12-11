@@ -14,34 +14,37 @@ namespace Interactables
         //+2-3 Acc
         public override PoeticGewgawNames poeticGewgawName => PoeticGewgawNames.BracersPoachersToolset;
         public ItemType itemType => ItemType.PoeticGewgaws;
-        public int itemName => (int)PoeticGewgawNames.BeltPoachersToolset;
+        public int itemName => (int)PoeticGewgawNames.BracersPoachersToolset;
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; }
         public int itemId { get; set; }
         public Currency currency { get; set; }
-        int valAcc;
+        int valDmg;
         public override void PoeticInit()
         {
-            valAcc = UnityEngine.Random.Range(2, 4);
-            string str = $"+{valAcc} Accuracy";
+            valDmg = UnityEngine.Random.Range(12,19) ;
+            string str = $"+{valDmg}% Dmg vs Rooted";
+            displayStrs.Add(str);
+            str = "";
+            displayStrs.Add(str);
+            str = "<i>Verse 3: Fire: Execute your prey</i>";
             displayStrs.Add(str);
         }
         public override void EquipGewgawPoetic()
         {
-            int index = charController.buffController.ApplyBuff(CauseType.PoeticGewgaw, (int)poeticGewgawName
-                , charController.charModel.charID, AttribName.acc, valAcc, TimeFrame.Infinity, -1, true);
-            buffIndex.Add(index);
+            int index = charController.strikeController.ApplyCharStateDmgAltBuff(valDmg, CauseType.PoeticGewgaw
+            , (int)poeticGewgawName, charController.charModel.charID, TimeFrame.Infinity, -1, true, CharStateName.Rooted); 
+            allBuffIds.Add(index);
 
         }
-        public override void UnEquipPoetic()
-        {
-            buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
-        }
+        
 
         public void InitItem(int itemId, int maxInvStackSize)
         {
-          
+            this.itemId = itemId;
+            this.maxInvStackSize = maxInvStackSize;
+            PoeticInit();
         }
 
         public void OnHoverItem()
@@ -49,14 +52,16 @@ namespace Interactables
            
         }
 
-        public void ApplyEquipableFX()
+        public void ApplyEquipableFX(CharController charController)
         {
-           
+            this.charController = charController;
+            EquipGewgawPoetic();
         }
-
         public void RemoveEquipableFX()
         {
-           
+            UnEquipPoetic();
+            charController = null;
+
         }
     }
 }

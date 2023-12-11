@@ -31,7 +31,7 @@ MonoBehaviour:
   mainExp: 0
   jobExp: 0
   skillPts: 0
-  charLvl: 1
+  charLvl: 3
   charNameStr: Abbas
   availOfChar: 1
   stateOfChar: 2

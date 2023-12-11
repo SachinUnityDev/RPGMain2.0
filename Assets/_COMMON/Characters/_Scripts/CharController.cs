@@ -117,8 +117,7 @@ namespace Common
 
             skillController = gameObject.AddComponent<SkillController1>();
             SkillService.Instance.allSkillControllers.Add(skillController);
-            //CombatEventService.Instance.OnSOTactics -= AddControllers_OnCombatStart;
-            //CombatEventService.Instance.OnSOTactics += AddControllers_OnCombatStart;
+
         }
                 
 

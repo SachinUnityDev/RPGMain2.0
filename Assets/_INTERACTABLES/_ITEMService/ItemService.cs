@@ -556,14 +556,14 @@ namespace Interactables
              //      CauseType.Items, 2);
 
 
-                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.FelineHeart,
-                   CauseType.Items, 4);
-                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.BatEar,
-               CauseType.Items, 4);
-                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.HyenaEar,
-               CauseType.Items, 4);
-                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.Hoof,
-               CauseType.Items, 4);
+               // InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.FelineHeart,
+               //    CauseType.Items, 4);
+               // InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.BatEar,
+               //CauseType.Items, 4);
+               // InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.HyenaEar,
+               //CauseType.Items, 4);
+               // InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.Hoof,
+               //CauseType.Items, 4);
 
                 InitItemToInv(SlotType.CommonInv, ItemType.Herbs, (int)HerbNames.Aloe,
                     CauseType.Items, 2);
@@ -579,6 +579,14 @@ namespace Interactables
                 InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.ScarfOfCourage,
                         CauseType.Items, 2, GenGewgawQ.Folkloric);
 
+                InitItemToInv(SlotType.CommonInv, ItemType.PoeticGewgaws, (int)PoeticGewgawNames.NecklaceFirstHuntersArsenal,
+                        CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.PoeticGewgaws, (int)PoeticGewgawNames.BeltPoachersToolset,
+                   CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.PoeticGewgaws, (int)PoeticGewgawNames.RingLegacyOfTheSpida,
+                CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.SagaicGewgaws, (int)SagaicGewgawNames.SoftAndTenacious,
+                CauseType.Items, 2);
 
             }
             if (Input.GetKeyDown(KeyCode.G))
@@ -586,6 +594,8 @@ namespace Interactables
 
                 InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionNames.HealthPotion,
                    CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.Potions, (int)PotionNames.FortitudePotion,
+             CauseType.Items, 2);
                 InitItemToInv(SlotType.CommonInv, ItemType.Herbs, (int)HerbNames.Aloe,
                    CauseType.Items, 2);
 

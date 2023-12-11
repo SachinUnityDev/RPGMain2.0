@@ -42,20 +42,23 @@ namespace Interactables
                    , AttribName.waterRes, Random.Range(-12f, -19f), TimeFrame.EndOfRound, castTime, true);
             allBuffs.Add(buffId);
         }
-   
+
         public void ApplyConsumableFX()
         {
+            PotionApplyFX();
         }
-        public void ApplyEquipableFX()
-        {
 
+        public void ApplyEquipableFX(CharController charController)
+        {
+            this.charController = charController;
         }
 
         public void RemoveEquipableFX()
         {
-           
+            charController = null;
         }
 
+  
     }
 
 }

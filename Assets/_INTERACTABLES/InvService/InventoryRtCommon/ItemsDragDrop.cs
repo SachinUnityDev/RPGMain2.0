@@ -45,7 +45,10 @@ namespace Interactables
            // itemCardGO = ItemService.Instance.itemCardGO; 
         }
         public void OnPointerEnter(PointerEventData eventData)
-        {   
+        {
+            if (iSlotable.slotType == SlotType.GewgawsActiveInv || iSlotable.slotType == SlotType.PotionsActiveInv)
+                return; 
+
             if(iSlotable.ItemsInSlot.Count != 0)
             {
                 ShowItemCard();
@@ -53,7 +56,9 @@ namespace Interactables
         }
     
         public void OnPointerExit(PointerEventData eventData)
-        {         
+        {
+            if (iSlotable.slotType == SlotType.GewgawsActiveInv || iSlotable.slotType == SlotType.PotionsActiveInv)
+                return;
             itemCardGO.SetActive(false);
 
             Sequence closeSeq = DOTween.Sequence();
@@ -87,12 +92,37 @@ namespace Interactables
                 itemCardGO.GetComponent<ItemCardView>().ShowItemCard(iSlotable.ItemsInSlot[0]);
                 if (iSlotable.slotType == SlotType.TradeScrollSlot)
                     PosTradeScrollSlot();
+                else if(iSlotable.slotType == SlotType.PotionActInCombat)
+                    PosItemCardInCombat();
                 else
                     PosItemCardInInv();
             
         }
 
+        void PosItemCardInCombat()
+        {
+            float width = itemCardGO.GetComponent<RectTransform>().rect.width;
+            float height = itemCardGO.GetComponent<RectTransform>().rect.height;
 
+            Canvas canvasObj = canvas.GetComponent<Canvas>();
+            // get slot index based on slot index adjust the offset
+            Transform slotTrans = transform.parent.parent;
+            
+            Vector3 offsetFinal;
+
+            offset = new Vector3(0, (height/2+100), 0);
+            offsetFinal = (offset) * canvasObj.scaleFactor;
+            
+            Vector3 pos = transform.position + offsetFinal;
+
+            Sequence seq = DOTween.Sequence();
+            seq
+                .Append(itemCardGO.transform.DOMove(pos, 0.1f))
+                .Append(itemCardGO.transform.GetComponent<Image>().DOFade(1.0f, 0.3f))
+                ;
+            itemCardGO.SetActive(true);
+            seq.Play();
+        }
 
         void PosTradeScrollSlot()
         {
@@ -147,12 +177,12 @@ namespace Interactables
             if(slotIndex <= 2)
             {
                 offset = new Vector3(100, 70,0);
-                offsetFinal = (offset + new Vector3(width / 2, -height / 2, 0)) * canvasObj.scaleFactor;
+                offsetFinal = (offset + new Vector3(width / 2, -(height / 2)+100f, 0)) * canvasObj.scaleFactor;
             }
             else
             {
                 offset = new Vector3(-100, 70,0);
-                offsetFinal = (offset + new Vector3(-width / 2, -height / 2, 0)) * canvasObj.scaleFactor;
+                offsetFinal = (offset + new Vector3(-width / 2, -(height / 2)+100f, 0)) * canvasObj.scaleFactor;
             }
 
             Vector3 pos = transform.position + offsetFinal;

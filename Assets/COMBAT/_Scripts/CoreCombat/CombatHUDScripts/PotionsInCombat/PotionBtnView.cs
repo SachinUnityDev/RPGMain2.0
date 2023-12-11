@@ -8,68 +8,95 @@ using UnityEngine.UI;
 
 namespace Combat
 {
-    public enum PotionBtnState
-    {   
-        Normal, 
-        Clicked, 
-        NA, 
-    }
-    public class PotionBtnView : MonoBehaviour, IPointerClickHandler
+
+    public class PotionBtnView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
+        [Header("To be ref")]
         [SerializeField] Sprite spriteN;
         [SerializeField] Sprite spriteHL;
         [SerializeField] Sprite spriteNA;
 
         [SerializeField] Transform container; 
-
-        [SerializeField] PotionBtnState state;
         CharController charController;
         Image img;
-        bool isClicked = false; 
+       
 
         private void Start()
         {
+            CombatEventService.Instance.OnCharClicked -= InitPotionSlot;
             CombatEventService.Instance.OnCharClicked += InitPotionSlot;
-            img = GetComponent<Image>();
+            img = GetComponent<Image>();            
+            img.sprite = spriteN;
+            container.gameObject.SetActive(false);
         }
-
+        private void OnDisable()
+        {
+            CombatEventService.Instance.OnCharClicked -= InitPotionSlot;
+        }
         void InitPotionSlot(CharController charController)
         {
             container.gameObject.SetActive(false);  
             this.charController = charController;
             if (charController.charModel.orgCharMode == CharMode.Enemy)
-                state = PotionBtnState.NA;
-            else            
-                state = PotionBtnState.Normal;
+            {
+                img.sprite = spriteNA;                
+            }
+            else
+            {
+                img.sprite = spriteN;
+            }
         }
         void FillPotions()
         {
-            int itemCount = charController.charModel.activeInvItems.Count; 
-            if(itemCount > 0) 
+            CharNames charName = charController.charModel.charName; 
+            ActiveInvData activeInvData = InvService.Instance.invMainModel.GetActiveInvData(charName); 
+           if(activeInvData != null) 
             for (int i = 0; i < container.childCount;  i++)
             {
-                if(i< itemCount)
-                container.GetChild(i).GetComponent<PotionSlotInCombatView>()
-                                .Init(charController.charModel.activeInvItems[i]);
+                if(i < activeInvData.potionActivInv.Count)
+                    container.GetChild(i).GetComponent<PotionSlotInCombatView>()
+                                .Init(activeInvData.potionActivInv[i]);
+                else
+                    container.GetChild(i).GetComponent<PotionSlotInCombatView>()
+                               .Init(null);
             }
+           else
+            for (int i = 0; i < container.childCount; i++)
+            {
+                container.GetChild(i).GetComponent<PotionSlotInCombatView>()
+                            .Init(null);
+            }
+                
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (state == PotionBtnState.NA)
+            if (charController.charModel.orgCharMode == CharMode.Enemy)
+            {
+                img.sprite = spriteNA;
                 return;
-            
-            if (state == PotionBtnState.Normal)
+            }
+            if (!container.gameObject.activeInHierarchy)
             {
                 container.gameObject.SetActive(true);
-                state = PotionBtnState.Clicked; 
+                img.sprite = spriteHL; 
                 FillPotions();
             }
             else
             {
                 container.gameObject.SetActive(false);
-                state = PotionBtnState.Normal;
+                img.sprite = spriteN;
             }
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            Debug.Log(" POINTER ENTER POTION"); 
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            Debug.Log(" POINTER EXIT POTION");
         }
     }
 }

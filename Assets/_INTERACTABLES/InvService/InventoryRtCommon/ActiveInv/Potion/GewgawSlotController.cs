@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System;
 using TMPro;
 using System.Linq;
+using Common;
 
 namespace Interactables
 {
@@ -80,12 +81,29 @@ namespace Interactables
                 return true;
         }
 
+    
+
         public bool AddItem(Iitems item, bool onDrop = false)
         {
-            CharNames charName = InvService.Instance.charSelect;         
-
-            if (item.itemType != ItemType.GenGewgaws)
+            CharNames charName = InvService.Instance.charSelect;
+            CharController charController = InvService.Instance.charSelectController; 
+            if (!(item.itemType == ItemType.GenGewgaws || item.itemType == ItemType.PoeticGewgaws ||
+                item.itemType == ItemType.SagaicGewgaws || item.itemType == ItemType.RelicGewgaws))
                 return false;
+
+            if(item.itemType == ItemType.PoeticGewgaws)
+            {
+                PoeticGewgawSO poeticSO = ItemService.Instance.GetPoeticGewgawSO((PoeticGewgawNames)item.itemName); 
+                if(!poeticSO.ChkEquipRestriction(charController))
+                    return false;
+            }
+            if (item.itemType == ItemType.SagaicGewgaws)
+            {
+                SagaicGewgawSO sagaicSO = ItemService.Instance.GetSagaicGewgawSO((SagaicGewgawNames)item.itemName);
+                if (!sagaicSO.ChkEquipRestriction(charController))
+                    return false;
+            }
+
 
             if (ItemsInSlot.Count > 0)
             {
@@ -93,7 +111,6 @@ namespace Interactables
                 RemoveItem();
                 // add to common inv
                 InvService.Instance.invMainModel.AddItem2CommInv(currItem);
-
             }
 
             if (IsEmpty())
@@ -105,8 +122,11 @@ namespace Interactables
         }
         void AddItemOnSlot(Iitems item)
         {
+            if (item == null) return;
             item.invSlotType = SlotType.GewgawsActiveInv;
             ItemsInSlot.Add(item);
+            InvService.Instance.invMainModel.AddItem2GewgawsActInv(item, slotID);
+
             RefreshImg(item);
             if (ItemsInSlot.Count > 1)
                 RefreshSlotTxt();
@@ -121,6 +141,8 @@ namespace Interactables
             }
             Iitems item = ItemsInSlot[0];
             ItemsInSlot.Remove(item);
+            InvService.Instance.invMainModel.RemoveItemFromGewgawActInv(item);
+
             if (ItemsInSlot.Count >= 1)
             {
                 RefreshImg(item);

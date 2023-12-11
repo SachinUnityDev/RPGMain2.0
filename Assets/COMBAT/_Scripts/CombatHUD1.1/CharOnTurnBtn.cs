@@ -13,7 +13,7 @@ namespace Combat
         private void Start()
         {
             CombatEventService.Instance.OnSOC += () => UIControlServiceCombat.Instance.TurnOnOff(gameObject, true);
-            CombatEventService.Instance.OnSOTactics += () => UIControlServiceCombat.Instance.TurnOnOff(gameObject, false);
+            CombatEventService.Instance.OnCombatInit += () => UIControlServiceCombat.Instance.TurnOnOff(gameObject, false);
             gameObject.GetComponent<Button>().onClick
                             .AddListener(OnClickedONCharInNormalCombatState);
             CombatEventService.Instance.OnCharClicked += Check4DiffChar;

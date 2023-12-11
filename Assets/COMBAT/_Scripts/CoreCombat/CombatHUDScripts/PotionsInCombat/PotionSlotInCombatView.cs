@@ -10,7 +10,7 @@ public class PotionSlotInCombatView : MonoBehaviour, IPointerClickHandler, iSlot
     public int slotID { get; set; }
     public List<Iitems> ItemsInSlot { get; set; } = new List<Iitems>();
     [SerializeField] int itemCount = 0;
-    public SlotType slotType => SlotType.ExcessInv;
+    public SlotType slotType => SlotType.PotionActInCombat;
 
     [Header("FOR DROP CONTROLS")]
     [SerializeField] GameObject draggedGO;
@@ -31,7 +31,13 @@ public class PotionSlotInCombatView : MonoBehaviour, IPointerClickHandler, iSlot
 
     public void Init(Iitems item)
     {
-        // Add item or make ghostly
+        if(item == null) 
+        {
+            ClearSlot(); return;
+        }
+        item.invSlotType = SlotType.PotionsActiveInv;
+        ItemsInSlot.Add(item);
+        RefreshImg(item);
     }
 
     #region I-SLOTABLE 
@@ -75,7 +81,7 @@ public class PotionSlotInCombatView : MonoBehaviour, IPointerClickHandler, iSlot
             return;
         }
         Iitems item = ItemsInSlot[0];
-        InvService.Instance.invMainModel.RemoveItemFrmExcessInv(item);  // ITEM REMOVED FROM INV MAIN MODEL HERE
+        InvService.Instance.invMainModel.RemoveItemFromPotionActInv(item);    
         ItemsInSlot.Remove(item);
         itemCount--;
         if (ItemsInSlot.Count >= 1)
@@ -198,52 +204,20 @@ public class PotionSlotInCombatView : MonoBehaviour, IPointerClickHandler, iSlot
     {
         if (ItemsInSlot.Count == 0) return;
         Iitems item = ItemsInSlot[0];
-        if (eventData.button == PointerEventData.InputButton.Right)
-        {
+      
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {  
+            if (ItemsInSlot.Count == 0) return;
+
             if (item != null)
             {
-                // COnsume on right click 
-                }
-        }
-        if (eventData.button == PointerEventData.InputButton.Left)
-        {
-            if (Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl)
-                && InvService.Instance.excessInvViewController.gameObject.activeInHierarchy)
-            {
-                if (ItemsInSlot.Count == 0) return;
 
-                if (item != null)
-                {
-                    if (InvService.Instance.invMainModel.AddItem2CommInv(item)) // remove Item from common Inv
-                    {
-                        RemoveItem();
-                    }
-                }
+                IConsumable iconsume = item as IConsumable;
+                if (iconsume != null)
+                    iconsume.ApplyConsumableFX();
+                RemoveItem();
             }
-        }
-
-        if (eventData.button == PointerEventData.InputButton.Left)
-        {
-            if (Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.LeftShift))
-            {
-                bool slotfound = false;
-                if (ItemsInSlot.Count <= 1) return;
-                Transform parentTrans = transform.parent;
-                for (int i = 0; i < parentTrans.childCount; i++)
-                {
-                    Transform child = parentTrans.GetChild(i);
-                    iSlotable iSlotable = child.GetComponent<iSlotable>();
-                    if (iSlotable.SplitItem2EmptySlot(item))
-                    {
-                        slotfound = true;
-                        break;
-                    }
-                }
-                if (slotfound)
-                {
-                    RemoveItem();
-                }
-            }
+               
         }
     }
 
@@ -259,11 +233,11 @@ public class PotionSlotInCombatView : MonoBehaviour, IPointerClickHandler, iSlot
 
     public bool SplitItem2EmptySlot(Iitems item, bool onDrop = true)
     {
-        if (IsEmpty())
-        {
-            AddItemOnSlot(item, onDrop);
-            return true;
-        }
+        //if (IsEmpty())
+        //{
+        //    AddItemOnSlot(item, onDrop);
+        //    return true;
+        //}
         return false;
     }
     #endregion

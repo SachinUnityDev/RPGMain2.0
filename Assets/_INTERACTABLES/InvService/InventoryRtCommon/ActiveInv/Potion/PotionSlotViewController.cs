@@ -123,7 +123,7 @@ namespace Interactables
             item.invSlotType = SlotType.PotionsActiveInv;
             ItemsInSlot.Add(item);
 
-            InvService.Instance.invMainModel.AddItem2PotionActInv(item, slotID); 
+            InvService.Instance.invMainModel.EquipItem2PotionActInv(item, slotID); 
             
             RefreshImg(item);
             //if (ItemsInSlot.Count > 1)

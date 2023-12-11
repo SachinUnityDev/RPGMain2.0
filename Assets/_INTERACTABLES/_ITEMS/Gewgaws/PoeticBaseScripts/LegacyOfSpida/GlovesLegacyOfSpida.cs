@@ -26,20 +26,21 @@ namespace Interactables
             valDodge = UnityEngine.Random.Range(2, 4);
             string str = $"+{valDodge} Dodge";
             displayStrs.Add(str);
+            str = $"";
+            displayStrs.Add(str);
+            str = $"<i>Verse 2: Clutch it tight with your palpy</i>";
+            displayStrs.Add(str);
         }
         public override void EquipGewgawPoetic()
         { 
-                charController = InvService.Instance.charSelectController;   
-                int index =
+//                charController = InvService.Instance.charSelectController;   
+            int index =
                 charController.buffController.ApplyBuff(CauseType.PoeticGewgaw, (int)poeticGewgawName
-                , charController.charModel.charID, AttribName.dodge, valDodge, TimeFrame.Infinity, -1, true);
-                 buffIndex.Add(index);
+                 , charController.charModel.charID, AttribName.dodge, valDodge, TimeFrame.Infinity, -1, true);
+              allBuffIds.Add(index);
 
         }
-        public override void UnEquipPoetic()
-        {
-            buffIndex.ForEach(t => charController.buffController.RemoveBuff(t));
-        }
+    
 
         public void InitItem(int itemId, int maxInvStackSize)
         {
@@ -53,13 +54,16 @@ namespace Interactables
 
         }
 
-        public void ApplyEquipableFX()
-        {   
-            
+        public void ApplyEquipableFX(CharController charController)
+        {
+            this.charController = charController;
+            EquipGewgawPoetic();
         }
 
         public void RemoveEquipableFX()
-        {           
+        {
+            UnEquipPoetic();
+            charController = null;
         }
     }
 }

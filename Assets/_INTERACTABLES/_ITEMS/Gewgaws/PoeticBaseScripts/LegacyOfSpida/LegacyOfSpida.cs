@@ -38,7 +38,7 @@ namespace Interactables
         }
         void SOCHaste2Rds()
         {
-            foreach (CharController charCtrl in CharService.Instance.charsInPlayControllers)
+            foreach (CharController charCtrl in CharService.Instance.allCharInCombat)
             {
                 if (charCtrl.charModel.charMode == CharMode.Enemy)
                 {

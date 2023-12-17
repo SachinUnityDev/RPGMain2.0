@@ -55,10 +55,15 @@ namespace Combat
 
         private void Start()
         {
-            CharService.Instance.OnCharInit += InitSkillList;
-            CombatEventService.Instance.OnSOC1 += InitAllSkill_OnCombat;
+            
+            charController = GetComponent<CharController>();
+            InitSkillList(charController); 
+            //CombatEventService.Instance.OnSOC1 += InitAllSkill_OnCombat;
+
+         //   CombatEventService.Instance.OnCombatInit += () => InitAllSkill_OnCombat(CombatState.INCombat_normal);
+
             CombatEventService.Instance.OnEOC += OnEOCReset;
-            CombatEventService.Instance.OnCharOnTurnSet += UpdateAllSkillState;            
+           // CombatEventService.Instance.OnCharOnTurnSet += UpdateAllSkillState;            
             // CharService.Instance.OnCharAddedToParty += InitSkillList;
             SceneManager.sceneLoaded += OnSceneLoaded;
             QuestEventService.Instance.OnEOQ += EOQTick;
@@ -69,8 +74,8 @@ namespace Combat
         private void OnDisable()
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
-            CharService.Instance.OnCharInit -= InitSkillList;
-            CombatEventService.Instance.OnSOC1 -= InitAllSkill_OnCombat;
+            CharService.Instance.OnCharSpawn -= InitSkillList;
+            
             CombatEventService.Instance.OnEOR1 -= RoundTick;
             CombatEventService.Instance.OnEOC -= EOCTick;
             QuestEventService.Instance.OnEOQ -= EOQTick;
@@ -82,16 +87,21 @@ namespace Combat
             {
                 if (skillView == null)
                     skillView = FindObjectOfType<SkillView>();
-                CombatEventService.Instance.OnSOC1 += InitAllSkill_OnCombat;
+
+                //  InitAllSkill_OnCombat(CombatState.INCombat_normal);
+                CombatEventService.Instance.OnSOTactics += InitAllSkill_OnCombat;
+                CombatEventService.Instance.OnSOC += InitAllSkill_OnCombat;
+
                 CombatEventService.Instance.OnEOR1 += RoundTick;
                 CombatEventService.Instance.OnEOC += EOCTick;
             }
-            
         }
   
 
-        public void InitAllSkill_OnCombat(CombatState combatState)
+        public void InitAllSkill_OnCombat()
         {
+            if (!CharService.Instance.allCharInCombat.Any(t => t.charModel.charID == charController.charModel.charID))
+                return; // if not in combat List return
             CharMode charMode = charController.charModel.charMode;
             Debug.Log("COMBAT STATE" + charController.charModel.charID);
             if (charMode == CharMode.Enemy)
@@ -108,10 +118,10 @@ namespace Combat
                 skillBase.SkillInit(this);
             }
         }
-        public void InitSkillList(CharController charController)
-        {
+        public void InitSkillList(CharController charController) 
+        { 
             if (this.charController.charModel.charID != charController.charModel.charID) return;
-            // stop double run
+            // stop double run// overrides 
             if (allSkillModels.Count > 0) return; 
             skillDataSO = SkillService.Instance.GetSkillSO(this.charName);
             foreach (SkillData skill in skillDataSO.allSkills)
@@ -765,6 +775,7 @@ namespace Combat
                     RemoveSkillDmgModBuff(buffData.skillModID);
                 }
             }
+            ResetNoOfTimeUsedOnEOC();
         }
         public void EOQTick()
         {
@@ -774,6 +785,14 @@ namespace Combat
                 {
                     RemoveSkillDmgModBuff(skillModBuffData.skillModID);
                 }
+            }
+        }
+
+        void ResetNoOfTimeUsedOnEOC()
+        {
+            foreach (SkillModel skillModel in allSkillModels)
+            {
+                skillModel.noOfTimesUsed = 0; 
             }
         }
 
@@ -822,6 +841,9 @@ namespace Combat
 
         public void UpdateAllSkillState(CharController charController)
         {
+            if (GameService.Instance.gameModel.gameState != GameState.InCombat) return; 
+            if(!CharService.Instance.allCharInCombat.Any(t=>t.charModel.charID == charController.charModel.charID))  return;
+            Debug.Log(" CHAR SKILL UPDATE" + charController.charModel.charName); 
             foreach (SkillModel skillModel in allSkillModels)
             {
                 UpdateSkillState(skillModel); 
@@ -830,7 +852,7 @@ namespace Combat
         public SkillSelectState UpdateSkillState(SkillModel skillModel)
         {
 
-            // Debug.Log("SKILL NAME " + _skillModel.skillName + "TARGETS" + _skillModel.targetPos.Count);
+             Debug.Log("SKILL NAME " + skillModel.skillName + "TARGETS" + skillModel.targetPos.Count);
             skillModel.SetSkillState(SkillSelectState.Clickable);
             if (CombatService.Instance.combatState == CombatState.INTactics)
             {
@@ -851,6 +873,11 @@ namespace Combat
             {
                 skillModel.SetSkillState(SkillSelectState.UnClickable_InCd);
                 return SkillSelectState.UnClickable_InCd;
+            }
+            else if (IfNoUseLeft(skillModel))      // only char on turn will get here 
+            {
+                skillModel.SetSkillState(SkillSelectState.UnClickable_NoUseLeft);
+                return SkillSelectState.UnClickable_NoUseLeft;
             }
             else if (IsNotOnCastPos(skillModel))     // not on cast pos 
             {
@@ -881,10 +908,13 @@ namespace Combat
 
         bool HasNoChkActionPts()
         {
+            
             CharController charController = CombatService.Instance.currCharOnTurn;
             //if (charController.charModel.charMode == CharMode.Enemy)
             //    return false; 
-            CombatController combatController = charController.GetComponent<CombatController>();
+            CombatController combatController = charController?.GetComponent<CombatController>();
+            if (combatController == null)
+                return false; // case: Combat controller is null in tactics and therefore
 
             if (combatController.actionPts > 0)
                 return false;
@@ -936,11 +966,20 @@ namespace Combat
         bool IsNotOnCastPos(SkillModel _skillModel)
         {
             GameObject charGO = CharService.Instance.GetCharGOWithName(_skillModel.charName, _skillModel.charID);
-
+            Debug.Log("charName"+ _skillModel.charName + _skillModel.charID);    
             int pos = GridService.Instance.GetDyna4GO(charGO).currentPos;
             // Debug.Log("Position in" + pos);
 
             return !(_skillModel.castPos.Any(t => t == pos));
+        }
+        bool IfNoUseLeft(SkillModel _skillModel)
+        {
+            if (_skillModel.cd > 0) return false; // governed by cd not use 
+            if (_skillModel.maxUsagePerCombat - _skillModel.noOfTimesUsed <= 0)
+            {
+                return true; 
+            }
+            return false; 
         }
 
         bool IfInCoolDown(SkillModel _skillModel)

@@ -252,10 +252,10 @@ MonoBehaviour:
     isClamped: 0
   statList:
   - statName: 1
-    currValue: 32
+    currValue: 36
     desc: Health is health, you know it...
     minLimit: 0
-    maxLimit: 32
+    maxLimit: 36
     isClamped: 0
   - statName: 2
     currValue: 42

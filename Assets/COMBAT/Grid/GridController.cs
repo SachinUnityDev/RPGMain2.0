@@ -27,7 +27,7 @@ namespace Combat
         float charSpeed = 0.5f;
         [SerializeField]List<DynamicPosData> allMovableDyna;
         [SerializeField] List<DynamicPosData> allAdjOccupied; 
-        private void Start()
+        private void OnEnable()
         {
             allMovableDyna = new List<DynamicPosData>();
             _gridMovement = GetComponent<GridMovement>(); 

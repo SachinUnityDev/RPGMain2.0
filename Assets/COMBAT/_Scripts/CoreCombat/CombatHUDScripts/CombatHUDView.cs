@@ -114,7 +114,8 @@ namespace Combat
 
             CombatEventService.Instance.OnSOTactics += () => transitionSO.PlayAnims("TACTICS", animPanel);
             CombatEventService.Instance.OnSOC += () => transitionSO.PlayAnims("COMBAT", animPanel);
-           // CombatEventService.Instance.OnSOR += () => transitionSO.PlayAnims("ROUND " + CombatService.Instance.currentRound, animPanel);
+            CombatEventService.Instance.OnEOC += ()=> transitionSO.PlayAnims("COMBAT ENDS", animPanel);
+            // CombatEventService.Instance.OnSOR += () => transitionSO.PlayAnims("ROUND " + CombatService.Instance.currentRound, animPanel);
             CombatEventService.Instance.OnSOR1 += RoundDisplay; 
             CombatEventService.Instance.OnCombatLoot += CombatResultDisplay;
 

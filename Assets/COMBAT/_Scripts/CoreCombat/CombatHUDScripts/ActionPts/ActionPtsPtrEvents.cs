@@ -18,7 +18,9 @@ namespace Combat
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-           int actionPts= actionPtsView.actionPts;
+            if (CombatService.Instance.combatState == CombatState.INTactics)
+                return; 
+            int actionPts= actionPtsView.actionPts;
             if(actionPts > 0)
             {
                 actionsPtsTxt.gameObject.SetActive(true); 

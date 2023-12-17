@@ -11,7 +11,7 @@ namespace Common
     public class CharService : MonoSingletonGeneric<CharService>, ISaveableService
     {
         public event Action<CharController> OnCharDeath;
-        public event Action<CharController> OnCharInit;
+        public event Action<CharController> OnCharSpawn;
         public event Action<CharController> OnCharAddedToParty;
         public event Action OnPartyLocked; 
         public event Action OnPartyDisbanded;
@@ -48,16 +48,19 @@ namespace Common
         public List<CharController> charsInPlayControllers;
 
         [Header("Specific Sub list of Chars/ Allies")]
-        public List<CharController> allyInPlayControllers;
-        public List<CharModel> allyUnLockedCompModels;// char Unlocked in the game
-        public List<CharModel> allAvailCompModels;
-        
-        public List<CharController> allCharsInPartyLocked; // on party Locked and Set 
-        public List<CharController> charDiedinLastTurn;
+        public List<CharController> allyInPlayControllers = new List<CharController>();
+        public List<CharModel> allyUnLockedCompModels= new List<CharModel>();// char Unlocked in the game
+        public List<CharModel> allAvailCompModels = new List<CharModel>();
+
+
+        [Header("Char List Related to Combat")]
+        public List<CharController> allCharsInPartyLocked = new List<CharController>(); // on party Locked and Set 
+        public List<CharController> allCharInCombat =new List<CharController>(); 
+        public List<CharController> charDiedinLastTurn = new List<CharController>();
         [Header("Character Pos")]
         public Vector3 spawnPos = new Vector3(-100, 0, 0);
         
-        public List<GameObject> enemyInCombatPlay; // enemies to be dep 
+        
 
         [Header(" Game Init ")]
         public bool isNewGInitDone = false;
@@ -214,17 +217,18 @@ namespace Common
                     allyUnLockedCompModels.Add(charModel);
                 }
             }
+            On_CharSpawn(charController); 
             return charController; 
         }
-        public void On_CharInit()
+        public void On_CharSpawn(CharController charController)
         {
-            foreach (var charController in charsInPlayControllers.ToList()) 
-            {
-                if(charController != null)
-                    OnCharInit?.Invoke(charController);
-                else
-                    charsInPlayControllers.Remove(charController);
-            }
+            //foreach (var charController in charsInPlayControllers.ToList()) 
+            //{
+            //    if(charController != null)
+                    OnCharSpawn?.Invoke(charController);
+                //else
+                //    charsInPlayControllers.Remove(charController);
+          //  }
         
         }
         public List<int> ApplyBuffOnPartyExceptSelf(CauseType causeType, int causeName, int causeByCharID,
@@ -453,8 +457,8 @@ namespace Common
                 }
                 else if (charMode == CharMode.Enemy)   // COMBAT END CONDITION.. ALL ENEMY KILLED
                 {
-                    enemyInCombatPlay.Remove(charGO);
-                    
+                    // enemyInCombatPlay.Remove(charGO);
+                    allCharInCombat.Remove(charCtrl); 
                     //enemyInPlayControllers.Remove(charCtrl);
                     //if (enemyInPlayControllers.Count <= 0)  // end of combat
                     //{
@@ -511,9 +515,9 @@ namespace Common
             {
                 foreach (CharController charCtrl in allyInPlayControllers)
                 {
-                    On_CharInit();
-                    if(charCtrl.charModel.charName != CharNames.Abbas) 
-                    On_CharAddToParty(GetCharCtrlWithName(charCtrl.charModel.charName));
+                  //  On_CharInit();
+                    //if(charCtrl.charModel.charName != CharNames.Abbas) 
+                    //On_CharAddToParty(GetCharCtrlWithName(charCtrl.charModel.charName));
                 }
             }
             //if (Input.GetKeyDown(KeyCode.E))

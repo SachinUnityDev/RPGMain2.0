@@ -89,9 +89,9 @@ namespace Common
             CharModel charModel = charController.InitiatizeController(charSO);
             CharService.Instance.allCharModels.Add(charModel);
             CharService.Instance.charsInPlayControllers.Add(charController);
-            
+            CharService.Instance.allCharInCombat.Add(charController);
+
             CharService.Instance.charsInPlay.Add(go);
-            CharService.Instance.enemyInCombatPlay.Add(go);
 
             allRegBestiaryCtrl.Add(charController);
 
@@ -103,7 +103,6 @@ namespace Common
 
             return charController;
         }
-       
         public CharController GetCharControllerWithName(CharNames enemyName)
         {
             int index = allBestiaryInGame.FindIndex(t=>t.charModel.charName == enemyName);

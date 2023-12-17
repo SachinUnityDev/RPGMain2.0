@@ -50,7 +50,8 @@ namespace Combat
             CombatEventService.Instance.OnCharClicked += SetSkillsPanel;
             CombatEventService.Instance.OnCharClicked += (CharController c)=> FillSkillClickedState(-1);
             CombatEventService.Instance.OnEOT += () => FillSkillClickedState(-1);
-            CombatEventService.Instance.OnSOTactics += InitSkillBtns;
+            CombatEventService.Instance.OnCombatInit += InitSkillBtns;
+            InitSkillBtns();
           
         }
 
@@ -62,13 +63,13 @@ namespace Combat
             CombatEventService.Instance.OnCharClicked -=
                                                  (CharController c) => FillSkillClickedState(-1);
             CombatEventService.Instance.OnEOT -= () => FillSkillClickedState(-1);
-            CombatEventService.Instance.OnSOTactics -= InitSkillBtns;
+            CombatEventService.Instance.OnCombatInit -= InitSkillBtns;
           
         }
         void InitSkillBtns()
         {
             // first ally in party set
-            SetSkillsPanel(CharService.Instance.allyInPlayControllers[0]); 
+            SetSkillsPanel(CharService.Instance.allCharsInPartyLocked[0]); 
         } 
 
         public void SkillBtnPressed(int index)
@@ -191,6 +192,7 @@ namespace Combat
         {
             if (charController == null) return; 
             CharNames charName = charController.charModel.charName;
+
             SkillController1 skillController = charController.skillController;
             SkillDataSO skillSO = SkillService.Instance.GetSkillSO(charName);
             int j = 0; 
@@ -199,14 +201,10 @@ namespace Combat
                 if (skillModel.skillType == SkillTypeCombat.Retaliate) // Skipping retaliate skill from 
                     continue;
                 SkillBtnViewCombat skillBtn = transform.GetChild(j).GetComponent<SkillBtnViewCombat>();
-           
-                //THIS IS BRUTE FORCE .. to be corrected 
-                    //skillModel.SetSkillState(SkillSelectState.Clickable); // setting clicable here if unlcickable due to any reasons will be reset in update
-                   
                 
-                    skillController.UpdateSkillState(skillModel);
-                    skillBtn.RefreshIconAsPerState();
-                    skillBtn.SkillBtnInit(skillSO, skillModel, this);
+                skillController.UpdateSkillState(skillModel);
+                skillBtn.RefreshIconAsPerState();
+                skillBtn.SkillBtnInit(skillSO, skillModel, this);
                 j++; 
             }
             if (skillSO.passiveSkills.Count > 0)

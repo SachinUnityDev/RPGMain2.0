@@ -33,9 +33,9 @@ namespace Combat
         public GridPos2TilePosSO grid2CellPos;
         public GridModelSO gridModelSO;
 
-        [HideInInspector] public GridController gridController;
-        [HideInInspector] public GridView gridView;
-        [HideInInspector] public GridMovement gridMovement;
+        public GridController gridController;
+        public GridView gridView;
+        public GridMovement gridMovement;
 
         [Header("Position DYNA List")]
         public List<DynamicPosData> allCurrPosOccupiedByDyna = new List<DynamicPosData>();
@@ -61,19 +61,25 @@ namespace Combat
         public List<String> allDynaStr = new List<string>();
 
         #endregion
-        void Start()
+
+        private void OnEnable()
         {
             gridController = GetComponent<GridController>();
             gridView = GetComponent<GridView>();
             gridMovement = GetComponent<GridMovement>();
-            CombatEventService.Instance.OnCombatInit += GridInit;
+            GridInit();
+        }
+
+        void Start()
+        {
+          //  CombatEventService.Instance.OnCombatInit += GridInit;
            // CombatEventService.Instance.OnTargetClicked += GridUpdateOnTargetSelected;
            // CombatEventService.Instance.OnCharDeath += UpdateGridOnCharDeath;
             CombatEventService.Instance.OnEOT +=  ClearOldTargets;
         }
         private void OnDisable()
         {
-            CombatEventService.Instance.OnCombatInit -= GridInit;
+            //CombatEventService.Instance.OnCombatInit -= GridInit;
             CombatEventService.Instance.OnEOT -= ClearOldTargets;
         }
         public void GridPosInit()
@@ -195,9 +201,10 @@ namespace Combat
         }
         void Add2CharDynaList(DynamicPosData dyna)
         {
+            //if (!allCurrPosOccupiedByDyna.Any(t => t == dyna))
+            //    return;
             allCurrPosOccupiedByDyna.Add(dyna);
             allCurrPosOccupiedByDyna.Distinct().ToList();
-
 
         }
      
@@ -360,8 +367,8 @@ namespace Combat
 
         public void SetCharOnPosAfterAmbushed()
         {
-            List<CharController> charCtrlInCombat = CharService.Instance.charsInPlayControllers;
-            foreach (CharController charCtrl in charCtrlInCombat)
+           // List<CharController> charCtrlInCombat = CharService.Instance.charsInPlayControllers;
+            foreach (CharController charCtrl in CharService.Instance.allCharInCombat)
             {
                 int pos = -1;
                 do
@@ -388,6 +395,7 @@ namespace Combat
                 // CharController charCtrl = CharService.Instance.SpawnCompanions(eData.enemyName);
 
                 CharController charCtrl = BestiaryService.Instance.SpawnBestiary1(eData.enemyName); 
+
                     //,eData.charID);
                 CharOccupies charOccupies = charCtrl.charModel._charOccupies;
 
@@ -588,7 +596,11 @@ namespace Combat
         }
         public DynamicPosData GetDyna4GO(GameObject _charGO)
         {
-            return allCurrPosOccupiedByDyna.Find(d => d.charGO == _charGO); 
+            int index = allCurrPosOccupiedByDyna.FindIndex(d => d.charGO == _charGO);
+            if (index != -1)
+                return allCurrPosOccupiedByDyna[index]; 
+            Debug.Log("DYNA NOT FOUND "+ _charGO.name);
+            return null;
         }
 
         public DynamicPosData GetDynaAtCellPos(CharMode charMode, int pos)
@@ -607,8 +619,8 @@ namespace Combat
             // select one player at a time 
             // get pos priority for char Model 
             // if unoccupied give it him else go to next 
-            List<CharController> charCtrlInPlay = CharService.Instance.charsInPlayControllers;
-            foreach (CharController charCtrl in charCtrlInPlay)
+           // List<CharController> charCtrlInPlay = CharService.Instance.allCharInCombat;
+            foreach (CharController charCtrl in CharService.Instance.allCharInCombat)
             {
                 CharOccupies charOccupies = charCtrl.charModel._charOccupies;
                 bool charfoundPlace = false; 

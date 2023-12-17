@@ -304,7 +304,7 @@ namespace Combat
                     if (striker.charModel.orgCharMode == CharMode.Ally)
                         striker.ChangeStat(CauseType.CriticalStrike, 0, striker.charModel.charID, StatName.fortitude, +6);
 
-                    foreach (CharController c in CharService.Instance.charsInPlayControllers)
+                    foreach (CharController c in CharService.Instance.allCharInCombat)
                     {
                         if (c.charModel.charID != striker.charModel.charID
                             && c.charModel.orgCharMode == CharMode.Ally)
@@ -320,7 +320,7 @@ namespace Combat
                     if (striker.charModel.orgCharMode == CharMode.Ally)
                         striker.ChangeStat(CauseType.CriticalStrike, 0, striker.charModel.charID, StatName.fortitude, -6);
 
-                    foreach (CharController c in CharService.Instance.charsInPlayControllers)
+                    foreach (CharController c in CharService.Instance.allCharInCombat)
                     {
                         if (c.charModel.charID != striker.charModel.charID
                             && c.charModel.orgCharMode == CharMode.Ally)
@@ -341,7 +341,7 @@ namespace Combat
                     if (charController.charModel.orgCharMode == CharMode.Ally)
                         charController.ChangeStat(CauseType.CriticalStrike, 0, striker.charModel.charID, StatName.fortitude, -6);
 
-                    foreach (CharController c in CharService.Instance.charsInPlayControllers)
+                    foreach (CharController c in CharService.Instance.allCharInCombat)
                     {
                         if (c.charModel.charID != charController.charModel.charID
                             && c.charModel.orgCharMode == CharMode.Ally)
@@ -357,7 +357,7 @@ namespace Combat
                     if (charController.charModel.orgCharMode == CharMode.Ally)
                         charController.ChangeStat(CauseType.CriticalStrike, 0, charController.charModel.charID, StatName.fortitude, +6);
 
-                    foreach (CharController c in CharService.Instance.charsInPlayControllers)
+                    foreach (CharController c in CharService.Instance.allCharInCombat)
                     {
                         if (c.charModel.charID != charController.charModel.charID
                             && c.charModel.orgCharMode == CharMode.Ally)

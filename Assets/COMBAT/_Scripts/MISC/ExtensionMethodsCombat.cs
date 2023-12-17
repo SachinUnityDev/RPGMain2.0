@@ -39,8 +39,8 @@ public static class ExtensionMethodsCombat
             foreach (var str1 in split)
             {
                 finalStr = string.Concat(finalStr,' ', str1); 
-            }          
-            return finalStr; 
+            }
+            return finalStr.TrimStart(); 
                 
 
         }

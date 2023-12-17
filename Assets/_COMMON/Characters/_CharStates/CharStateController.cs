@@ -4,6 +4,8 @@ using UnityEngine;
 using Combat;
 using System.Linq;
 using System;
+using Quest;
+using UnityEngine.SceneManagement;
 
 namespace Common
 {
@@ -98,23 +100,35 @@ namespace Common
         void Start()
         {
             charController = GetComponent<CharController>();
-            CombatEventService.Instance.OnEOR1 += RoundTick;
-            CombatEventService.Instance.OnEOC += EOCTick; 
+            SceneManager.sceneLoaded += OnSceneLoaded;
             charController.OnStatChg += StatChg;
             charController.OnAttribCurrValSet += AttribChg; 
         }
         private void OnDisable()
         {
-            CombatEventService.Instance.OnEOR1 -= RoundTick;
-            CombatEventService.Instance.OnEOC -= EOCTick;
+            SceneManager.sceneLoaded -= OnSceneLoaded;
             charController.OnStatChg -= StatChg;
             charController.OnAttribCurrValSet -= AttribChg;
+        }
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            {
+                CombatEventService.Instance.OnEOR1 += RoundTick;
+                CombatEventService.Instance.OnEOC += EOCTick;               
+            }
+            else
+            {
+                CombatEventService.Instance.OnEOR1 -= RoundTick;
+                CombatEventService.Instance.OnEOC -= EOCTick;
+            }
         }
 
         #region BUFF & DEBUFF
         public int ApplyCharStateBuff(CauseType causeType, int causeName, int causeByCharID
                                 , CharStateName charStateName, TimeFrame timeFrame = TimeFrame.Infinity, int castTime =-1)
         {
+            if (!IsCharStateApplicable(charStateName)) return -1; // if char State not applicable
             // check immunity list 
             if (IsDOT(charStateName))
             {
@@ -165,6 +179,21 @@ namespace Common
             //}
 
             return stateID;
+        }
+
+        bool IsCharStateApplicable(CharStateName charStateName)
+        {
+            CharStateSO1 charStateSO = CharStatesService.Instance.allCharStateSO.GetCharStateSO(charStateName);
+            CharMode charMode = charController.charModel.orgCharMode; 
+            if(charStateSO.stateFor == StateFor.Mutual)
+            {
+                return true; 
+            }
+            if (charStateSO.stateFor == StateFor.Heroes)
+            {
+                return charMode == CharMode.Ally;                 
+            }
+            return false; 
         }
 
 
@@ -222,7 +251,7 @@ namespace Common
 
         public void RemoveImmunityByCharState(CharStateName charStateName) 
         {
-            foreach (ImmunityBuffData immunityBuffData in allImmunityBuffs)
+            foreach (ImmunityBuffData immunityBuffData in allImmunityBuffs.ToList())
             {
                 if (immunityBuffData.charStateModData.charStateName == charStateName)
                 {
@@ -233,7 +262,7 @@ namespace Common
 
         public void RemoveImmunityBuff(int immunityID)
         {
-            foreach (ImmunityBuffData immunityBuffData in allImmunityBuffs)
+            foreach (ImmunityBuffData immunityBuffData in allImmunityBuffs.ToList())
             {
                 if(immunityBuffData.immunityID == immunityID)
                 {
@@ -516,7 +545,7 @@ namespace Common
         {
             if(statModData.statModified == StatName.health)
             {
-                if(statModData.modVal== 0 )
+                if(statModData.modVal== 0 && charController.charModel.orgCharMode == CharMode.Ally)
                 {
                     ApplyCharStateBuff(CauseType.StatChange, (int)statModData.statModified, statModData.causeByCharID,
                         CharStateName.LastDropOfBlood); 

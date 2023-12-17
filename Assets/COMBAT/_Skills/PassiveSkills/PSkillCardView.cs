@@ -53,7 +53,8 @@ namespace Combat
 
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
-                charController = CombatService.Instance.currCharClicked;
+                charController = CombatService.Instance?.currCharClicked;
+                if (charController == null) return;
                 pSkillController = charController.GetComponent<PassiveSkillsController>();
                 pSkillName = PassiveSkillService.Instance.currPSkillName;
 

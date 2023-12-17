@@ -17,8 +17,7 @@ namespace Combat
         public event Action OnEOT;
         public event Action <int> OnSOR1;// round no
         public event Action <int> OnEOR1;
-        public event Action OnSOC;
-        public event Action<CombatState> OnSOC1;
+        public event Action OnSOC;  
         public event Action OnCombatInit;       
         public event Action OnEOC;      
         public event Action<CharController> OnFleeInCombat;
@@ -55,7 +54,7 @@ namespace Combat
         // Start is called before the first frame update
         void Start()
         {
-          roundController = GetComponent<RoundController>();
+         
             SceneManager.sceneLoaded += OnSceneLoaded;
 
         }
@@ -69,9 +68,10 @@ namespace Combat
         {
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
-                On_CombatInit(CombatState.INCombat_normal);
+              
+                CombatService.Instance.GetAllyInCombat(); 
+                On_CombatInit(CombatState.INTactics);
             }
-
         }
 
         public void On_StrikeFired(StrikeData strikeData)
@@ -114,7 +114,8 @@ namespace Combat
             DynamicPosData dynaOnTurn = GridService.Instance.GetDyna4GO(charCtrl.gameObject);
             GridService.Instance.gridView.CharOnTurnHL(dynaOnTurn);
             charCtrl.RegenStamina();
-            charCtrl.HPRegen(); 
+            charCtrl.HPRegen();
+            charCtrl.skillController.UpdateAllSkillState(charCtrl); 
             Debug.Log("CHAR SET ON TURN >>>>" + charCtrl.charModel.charName);
          
             OnCharOnTurnSet?.Invoke(charCtrl);
@@ -124,14 +125,21 @@ namespace Combat
         public void On_SOTactics()
         {
             CombatService.Instance.combatState = CombatState.INTactics; // skip one frame for Inits to occur
+            // combat Services
+            CombatService.Instance.currCharOnTurn = CharService.Instance.allCharInCombat[0];
+
             OnSOTactics?.Invoke(); 
         }
         public void On_SOC()
         {
+            roundController = CombatService.Instance.roundController; 
             CombatService.Instance.combatState = CombatState.INCombat_normal;
-            OnSOC?.Invoke();
-            SkillService.Instance.InitSkillControllers();
-            OnSOC1?.Invoke(CombatService.Instance.combatState);
+            CombatService.Instance.SetEnemyInCombat(EnemyPackName.RatPack3);
+            CombatService.Instance.AddCombatControllers();
+            SkillService.Instance.InitSkillControllers();// For enemies 
+            CombatService.Instance.currCharOnTurn = CharService.Instance.allCharInCombat[0]; 
+            OnSOC?.Invoke();           
+
 
             Sequence seq = DOTween.Sequence(); 
             seq.AppendInterval(2.5f)
@@ -143,12 +151,13 @@ namespace Combat
         public void On_EOC()
         {
             FortReset2FortOrg();
+            CharService.Instance.allCharInCombat.Clear();
             OnEOC?.Invoke();
         }
 
         private void FortReset2FortOrg()
         {
-            foreach (CharController c in CharService.Instance.charsInPlayControllers)
+            foreach (CharController c in CharService.Instance.allCharInCombat)
             {
                 if(c.charModel.orgCharMode == CharMode.Ally)
                 {
@@ -196,7 +205,10 @@ namespace Combat
             Debug.Log("Check end of round" + roundNo);
             int MAX_RD_LIMIT = GameService.Instance.gameController.GetMaxRoundLimit();
             if (roundNo >= MAX_RD_LIMIT)
+            {
+               
                 On_EOC();
+            }   
             else
             {
                 roundNo = ++CombatService.Instance.currentRound;

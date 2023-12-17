@@ -142,20 +142,7 @@ namespace Combat
             actionPtsView.UpDateActionsPtsView(actionPts);
         }
 
-        public bool IfSingleInRow(GameObject _charGO)
-        {
-            return false;
-        }
-
-        public bool IsLastManInHeroes(CharController _charSO)
-        {
-            return false;
-        }
-        public bool IfRaceInTeam(CultureType _cultType)
-        {
-            return false;
-
-        }
+  
     }
 
 

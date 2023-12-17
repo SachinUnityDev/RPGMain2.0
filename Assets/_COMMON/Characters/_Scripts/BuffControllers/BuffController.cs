@@ -125,8 +125,7 @@ namespace Combat
         void Start()
         {
             charController = GetComponent<CharController>();
-            CombatEventService.Instance.OnEOR1 += RoundTick;
-            CombatEventService.Instance.OnEOC += EOCTick;
+   
             QuestEventService.Instance.OnEOQ += EOQTick;
             CalendarService.Instance.OnChangeTimeState += ToggleBuffsOnTimeStateChg;
             SceneManager.sceneLoaded += OnSceneLoaded;
@@ -134,8 +133,6 @@ namespace Combat
         }
         private void OnDisable()
         {
-            CombatEventService.Instance.OnEOR1 -= RoundTick;
-            CombatEventService.Instance.OnEOC -= EOCTick;
             QuestEventService.Instance.OnEOQ -= EOQTick;
             CalendarService.Instance.OnChangeTimeState -= ToggleBuffsOnTimeStateChg;
             SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -146,10 +143,23 @@ namespace Combat
         {
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
+                CombatEventService.Instance.OnEOR1 += RoundTick;
+                CombatEventService.Instance.OnEOC += EOCTick;
+                GridService.Instance.OnPosChange -= PosChgTick;
                 GridService.Instance.OnPosChange += PosChgTick;
                 CombatEventService.Instance.OnEOR1 += RoundPosTick;
                 CombatEventService.Instance.OnEOC += EOCPosTick;
                 QuestEventService.Instance.OnEOQ += EOQPosTick;
+            }
+            else
+            {
+                CombatEventService.Instance.OnEOR1 -= RoundTick;
+                CombatEventService.Instance.OnEOC -= EOCTick;
+
+             
+                CombatEventService.Instance.OnEOR1 -= RoundPosTick;
+                CombatEventService.Instance.OnEOC -= EOCPosTick;
+                QuestEventService.Instance.OnEOQ -= EOQPosTick;
             }
         }
         #region SOC

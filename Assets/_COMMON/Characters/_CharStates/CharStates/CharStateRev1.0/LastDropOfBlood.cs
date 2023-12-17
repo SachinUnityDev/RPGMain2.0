@@ -22,6 +22,7 @@ namespace Common
         public override float chance { get; set; } = 24f; 
         public override void StateApplyFX()
         {
+            if (charController.charModel.orgCharMode == CharMode.Enemy) return;
             chances = new List<float>() { 60f, chance, 100-(chance +60) };
             switch (chances.GetChanceFrmList())
             {

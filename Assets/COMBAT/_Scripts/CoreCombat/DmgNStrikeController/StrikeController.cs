@@ -46,7 +46,17 @@ namespace Combat
             CombatEventService.Instance.OnEOC += EOCTickRetaliate;
 
         }
+        private void OnDisable()
+        {
+            CombatEventService.Instance.OnDamageApplied -= OnDmgDeliveredTick;
+            CombatEventService.Instance.OnEOR1 -= RoundTick;
+            CombatEventService.Instance.OnEOC -= EOCTick;
+            // retaliate Events
+            CombatEventService.Instance.OnDamageApplied -= OnDmgDeliveredTickRetaliate;
+            CombatEventService.Instance.OnEOR1 -= RoundTickRetaliate;
+            CombatEventService.Instance.OnEOC -= EOCTickRetaliate;
 
+        }
         /// <summary>
         /// to be checked only when move skill are used 
         /// Whenever you execute a move skill you get a haste check if its positive then 

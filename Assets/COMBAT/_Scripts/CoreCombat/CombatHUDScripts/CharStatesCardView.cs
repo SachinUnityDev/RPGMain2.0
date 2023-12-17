@@ -27,7 +27,7 @@ namespace Combat
 
         private void Start()
         {
-           gameObject.SetActive(false);
+            //   gameObject.SetActive(false);
             initPos = transform.localPosition; 
         }
         public void InitStatesCardView(CharStateSO1 charStatesSO, CharStatesBase charStateBase, int lvl)

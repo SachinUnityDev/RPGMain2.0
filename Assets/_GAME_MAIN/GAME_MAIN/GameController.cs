@@ -18,6 +18,7 @@ namespace Common
         public GameDiffModel currGameDiffModel; 
         public void InitGameController(GameDifficulty gameDifficulty)
         {
+            if (allGameDiffModel.Count > 0) return; 
             foreach (GameDiffSO gameDiffSO in allGameDiffSO.allGameDiffSO) 
             {
                 GameDiffModel gameDiffModel= new GameDiffModel(gameDiffSO);   

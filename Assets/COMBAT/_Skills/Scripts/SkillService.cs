@@ -250,7 +250,6 @@ namespace Combat
         // ON SOC 
         public void InitSkillControllers()
         {
-            CombatService.Instance.AddCombatControllers();
             foreach (GameObject charGO in CharService.Instance.charsInPlay)
             {
                 SkillController1 skillController = charGO.GetComponent<SkillController1>(); 
@@ -506,8 +505,6 @@ namespace Combat
         
             CharController currCharOnturn = CombatService.Instance.currCharOnTurn;
             CombatController combatController = currCharOnturn.GetComponent<CombatController>();
-
-            //Debug.Log(skillModel.charName +" Skill END>>> " + skillModel.skillName);
             // if ally reduce action pts
             if (skillModel != null)
             { // HASTE CHECK      
@@ -526,7 +523,6 @@ namespace Combat
                 Move2Nextturn();
                 return; 
             }
-            
 
             if (combatController.actionPts > 0)// allies 
             {
@@ -540,7 +536,7 @@ namespace Combat
                     Move2Nextturn();
             }
         }
-      
+        
 
         public void Move2Nextturn()
         {
@@ -760,12 +756,9 @@ namespace Combat
             }
         }
         #endregion
-
-
-
         private void Update()
-        { 
-            if(GameService.Instance.gameModel.gameState == GameState.InCombat)
+        {
+            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
                 if (CombatService.Instance.combatState == CombatState.INTactics)
                     return;
@@ -775,6 +768,7 @@ namespace Combat
                 }
             }
         }
+
     }
 
 

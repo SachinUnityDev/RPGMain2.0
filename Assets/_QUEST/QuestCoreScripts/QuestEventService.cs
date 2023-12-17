@@ -30,19 +30,19 @@ namespace Quest
          //   dayNightController = gameObject.GetComponent<DayNightController>();
         }
 
-        public void On_DeathInQuest(CharController charController)
-        {
-            OnDeathInQuest?.Invoke(charController); 
-        }
-        public void On_FleeInQuest(CharController charController)
-        {
-            OnFleeInQuest?.Invoke(charController);
-        }
+        //public void On_DeathInQuest(CharController charController)
+        //{
+        //    OnDeathInQuest?.Invoke(charController); 
+        //}
+        //public void On_FleeInQuest(CharController charController)
+        //{
+        //    OnFleeInQuest?.Invoke(charController);
+        //}
 
-        public void On_PartySet(List<CharNames> allyPartyList)
-        {
-            allyPartyList.ForEach(t => CharService.Instance.SpawnCompanions(t)); 
-        }
+        //public void On_PartySet(List<CharNames> allyPartyList)
+        //{
+        //    allyPartyList.ForEach(t => CharService.Instance.SpawnCompanions(t)); 
+        //}
 
   
         private void Update()

@@ -27,7 +27,7 @@ namespace Interactables
         void OnSOC()
         {
             //Enemy Beastmen and Felines: -3 Luck
-            foreach (CharController charCtrl in CharService.Instance.charsInPlayControllers)
+            foreach (CharController charCtrl in CharService.Instance.allCharInCombat)
             {
                 if(charCtrl.charModel.raceType == RaceType.Beastmen
                     || charCtrl.charModel.cultType == CultureType.Feline

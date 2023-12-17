@@ -64,6 +64,7 @@ namespace Combat
         #region  POINTER EVENTS
         public void OnPointerClick(PointerEventData eventData)
         {
+            if (CombatService.Instance.combatState == CombatState.INTactics) return;
             if (skillModel == null) return;
             if(skillModel.skillUnLockStatus== 0 || skillModel.skillUnLockStatus == -1) return;
             if (skillModel.GetSkillState() == SkillSelectState.Clickable ||

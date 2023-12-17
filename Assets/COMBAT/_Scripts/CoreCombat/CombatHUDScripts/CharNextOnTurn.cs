@@ -49,14 +49,14 @@ namespace Combat
         void ChgPort(CharController charController)
         {
            roundController = CombatService.Instance.roundController;        
-            charTurn = roundController.charTurnOrder.FindIndex(t=>t.charModel.charID== charController.charModel.charID);
+            charTurn = CharService.Instance.allCharInCombat.FindIndex(t=>t.charModel.charID== charController.charModel.charID);
             CharMode charMode = charController.charModel.charMode; 
             if(charTurn== 0)
             {
                 allyTurn = 0;
                 enemyTurn = 0;
             }
-            if(charTurn < roundController.charTurnOrder.Count)
+            if(charTurn < CharService.Instance.allCharInCombat.Count)
             {
                 if(charMode== CharMode.Ally)
                 {

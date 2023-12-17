@@ -48,23 +48,22 @@ namespace Combat
             charController = skillController.GetComponent<CharController>();
             charID = charController.charModel.charID; 
             skillData = skillDataSO.allSkills.Find(t => t.skillName == skillName);
-           
-            skillModel = new SkillModel(skillData);
-            //skillModel.skillID = skillController.skillID;
-            skillModel.charID = charID; 
-            //SkillService.Instance.allSkillModels.Add(skillModel);
-            
-            if(this.skillController.allSkillModels.Any(t=>t.skillName == skillName))
+            if(skillModel== null)
             {
-                int index =
-                this.skillController.allSkillModels.FindIndex(t=>t.skillName == skillName);
-                this.skillController.allSkillModels.RemoveAt(index);
-            }            
-            this.skillController.allSkillModels.Add(skillModel);   // lastest skillModel for ref
-            
+                skillModel = new SkillModel(skillData);
+                //skillModel.skillID = skillController.skillID;
+                skillModel.charID = charID;
+                //SkillService.Instance.allSkillModels.Add(skillModel);
 
-
-            charGO = this.skillController.gameObject;
+                if (this.skillController.allSkillModels.Any(t => t.skillName == skillName))
+                {
+                    int index =
+                    this.skillController.allSkillModels.FindIndex(t => t.skillName == skillName);
+                    this.skillController.allSkillModels.RemoveAt(index);
+                }
+                this.skillController.allSkillModels.Add(skillModel);   // lastest skillModel for ref
+                charGO = this.skillController.gameObject;
+            }
             if(GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
                 myDyna = GridService.Instance.GetDyna4GO(charGO);       
@@ -165,8 +164,6 @@ namespace Combat
         public virtual void PostApplyFX()
         {  
             SkillService.Instance.On_PostSkill(skillModel);          
-        
-
         }
 
         public virtual void Tick(int roundNo)

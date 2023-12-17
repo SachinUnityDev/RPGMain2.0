@@ -36,7 +36,12 @@ namespace Combat
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-             descTxt.gameObject.SetActive(true);
+            if (CombatService.Instance.combatState == CombatState.INTactics)
+                descTxt.text = "Start Combat";
+            else 
+                descTxt.text = "End Turn";
+
+            descTxt.gameObject.SetActive(true);
             img.sprite = spriteHovered; 
         }
 

@@ -13,10 +13,15 @@ namespace Combat
         private void Start()
         {
             CombatEventService.Instance.OnSOC += () => UIControlServiceCombat.Instance.TurnOnOff(gameObject, true);
-            CombatEventService.Instance.OnCombatInit += () => UIControlServiceCombat.Instance.TurnOnOff(gameObject, false);
+            CombatEventService.Instance.OnSOTactics += () => UIControlServiceCombat.Instance.TurnOnOff(gameObject, false);
             gameObject.GetComponent<Button>().onClick
                             .AddListener(OnClickedONCharInNormalCombatState);
             CombatEventService.Instance.OnCharClicked += Check4DiffChar;
+        }
+        private void OnDisable()
+        {
+            CombatEventService.Instance.OnSOC -= () => UIControlServiceCombat.Instance.TurnOnOff(gameObject, true);
+            CombatEventService.Instance.OnSOTactics -= () => UIControlServiceCombat.Instance.TurnOnOff(gameObject, false);
         }
 
         void OnClickedONCharInNormalCombatState()
@@ -27,12 +32,14 @@ namespace Combat
 
         public void Check4DiffChar(CharController charController)
         {
+            if (CombatService.Instance.combatState == CombatState.INTactics)
+                return;
+      
+
             if (CombatService.Instance.combatState == CombatState.INCombat_normal)
             {
                 if (charController.gameObject == null)
-                {
-                  //  UIControlService.Instance.TurnOnOff(gameObject, false); return; 
-                }
+                    return;
                 if (charController.gameObject != CombatService.Instance.currCharOnTurn.gameObject)
                 {
                     UIControlServiceCombat.Instance.TurnOnOff(gameObject, true);

@@ -89,14 +89,16 @@ namespace Combat
             if (GameService.Instance.gameModel.gameState == GameState.InTown ||
                GameService.Instance.gameModel.gameState == GameState.InQuestRoom)
             {
-                charController = InvService.Instance.charSelectController;
+                charController = InvService.Instance?.charSelectController;
+                if (charController == null) return; 
                 skillController = charController.skillController; 
                 skillModel  = SkillService.Instance.skillModelHovered;
                 skillName = skillModel.skillName;
             }
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)              
             {
-                charController = CombatService.Instance.currCharClicked;
+                charController = CombatService.Instance?.currCharClicked;
+                if (charController == null) return;
                 skillController = charController.skillController;
                 skillModel = SkillService.Instance.skillModelHovered;
                 skillName = skillModel.skillName;
@@ -301,7 +303,7 @@ namespace Combat
                 dmgPrint = dmgTypeStr.Substring(0,dmgTypeStr.Length - 2); 
             }
             btmTrans.GetChild(3).GetComponent<TextMeshProUGUI>().text
-                                                             = dmgPrint;
+                                                                    = dmgPrint;
             cdNMaxUse.GetComponent<SkillCardCdUseView>().InitSkillCdNUse(skillModel);
 
         }

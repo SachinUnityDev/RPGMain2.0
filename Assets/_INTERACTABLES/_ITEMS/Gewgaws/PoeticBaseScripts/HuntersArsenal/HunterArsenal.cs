@@ -47,7 +47,7 @@ namespace Interactables
         }
         void EnemyNAnimalBuff()
         {
-            foreach (CharController charCtrl in CharService.Instance.charsInPlayControllers)
+            foreach (CharController charCtrl in CharService.Instance.allCharInCombat)
             {
                 if(charCtrl.charModel.charMode == CharMode.Enemy && charCtrl.charModel.raceType == RaceType.Animal)
                 {

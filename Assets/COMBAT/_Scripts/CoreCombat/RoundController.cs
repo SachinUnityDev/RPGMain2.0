@@ -20,7 +20,7 @@ namespace Combat
 
         public List<CharController> allyTurnOrder = new List<CharController>();
         public List<CharController> enemyTurnOrder = new List<CharController>();
-        public List<CharController> charTurnOrder = new List<CharController>();
+      //  public List<CharController> charTurnOrder = new List<CharController>();
         
         
         List<AttribName> StatOrder = new List<AttribName>() { AttribName.haste, AttribName.focus, AttribName.morale, AttribName.luck };
@@ -54,12 +54,12 @@ namespace Combat
                     CombatService.Instance.combatState == CombatState.INCombat_InSkillSelected)
             {
                 index++;
-                charCount = CharService.Instance.charsInPlayControllers.Count;
-                if (index < charCount && index > -1)
+                charCount = CharService.Instance.allCharInCombat.Count;
+                if (index < charCount && index >= -1)
                 {
                     
-                    CombatService.Instance.currCharOnTurn = charTurnOrder[index];                  
-                    SetAP(charTurnOrder[index]);
+                    CombatService.Instance.currCharOnTurn = CharService.Instance.allCharInCombat[index];                  
+                    SetAP(CharService.Instance.allCharInCombat[index]);
                     CombatService.Instance.currentTurn = index;
                     CombatEventService.Instance.On_CharOnTurnSet();
                 }
@@ -85,9 +85,9 @@ namespace Combat
 
         void UpdateAllyEnemyList()
         {
-            charCount= CharService.Instance.charsInPlayControllers.Count;
-            allyTurnOrder = charTurnOrder.Where(t => t.charModel.charMode == CharMode.Ally).ToList();
-            enemyTurnOrder = charTurnOrder.Where(t => t.charModel.charMode == CharMode.Enemy).ToList();
+            charCount= CharService.Instance.allCharInCombat.Count;
+            allyTurnOrder = CharService.Instance.allCharInCombat.Where(t => t.charModel.charMode == CharMode.Ally).ToList();
+            enemyTurnOrder = CharService.Instance.allCharInCombat.Where(t => t.charModel.charMode == CharMode.Enemy).ToList();
         }
         public void ReorderAfterCharDeath(CharController charController)
         {
@@ -111,7 +111,7 @@ namespace Combat
 
         public void OrderByRecursion2(AttribName _statName)
         {
-            charTurnOrder = CharService.Instance.charsInPlayControllers.
+            CharService.Instance.allCharInCombat.
                              OrderByDescending(x => x.GetAttrib(_statName).currValue).ToList();           
         }
 

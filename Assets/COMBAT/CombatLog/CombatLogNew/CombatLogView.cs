@@ -53,6 +53,7 @@ namespace Combat
             CombatEventService.Instance.OnSOR1 += StartOfRound;
             CombatEventService.Instance.OnSOT += StartOfTurn;
             SkillService.Instance.OnSkillUsed += SkillUsed;
+            CombatEventService.Instance.OnDodge += OnDodge;
         }
         private void OnDisable()
         {
@@ -69,7 +70,7 @@ namespace Combat
 
         void StartOfCombat()
         {
-            CharService.Instance.charsInPlayControllers
+            CharService.Instance.allCharInCombat
                                      .ForEach(t => t.OnStatChg += HpChg);
             string str = "Combat Start!";
             combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
@@ -77,7 +78,7 @@ namespace Combat
         }
         void OnCombatEnd()
         {
-            CharService.Instance.charsInPlayControllers
+            CharService.Instance.allCharInCombat
                                .ForEach(t => t.OnStatChg -= HpChg);
         }
         void StartOfTurn()
@@ -135,12 +136,13 @@ namespace Combat
                 charNameStr = skillEventData.strikerController.charModel.charNameStr;
                 DynamicPosData dyna = GridService.Instance.GetDyna4GO(skillEventData.strikerController.gameObject);
                 int currPos = dyna.currentPos; 
-                str = charNameStr + " moves to hex "+ currPos;
+                str = $"{charNameStr} moves to hex {currPos}";
             }
             else
             {
                 charNameStr = skillEventData.strikerController.charModel.charNameStr;
-                str = charNameStr + " uses " + skillEventData.skillModel.skillName.ToString().CreateSpace() + "";
+                string skillNameStr = skillEventData.skillModel.skillName.ToString().CreateSpace(); 
+                str = $"{charNameStr} uses {skillNameStr}";
             }
             combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
             RefreshCombatLogUI();
@@ -152,13 +154,24 @@ namespace Combat
         //***********START ROUND **************//
         void StartOfRound(int roundNo)
         {
-            string str = "Round #" + roundNo + " Starts";
+            string str = $"   # Round {roundNo} starts";
             combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
             RefreshCombatLogUI();
 
         }
         #endregion
 
+        #region IN COMBAT EVENTS
+
+        void OnDodge(DmgAppliedData dmgAppliedData)
+        {
+            string strikerName = dmgAppliedData.striker.charModel.charNameStr;
+            string str = strikerName + " misses target";
+            combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
+            RefreshCombatLogUI();
+        }
+
+        #endregion
 
         void RefreshCombatLogUI()
         {
@@ -238,10 +251,9 @@ namespace Combat
 
             if (statModData.modVal == 0) return;
 
-            string sign = statModData.valChg > 0 ? "+" : "-";
-            string str2 = statModData.valChg > 0 ? "gains" : "suffers";
-            str = CharName + " " + str2 + " " + sign +
-                      +Mathf.Abs((int)statModData.valChg) + " " + statModData.statModified;
+            //string sign = statModData.valChg > 0 ? "+" : "-";
+            string str2 = statModData.valChg > 0 ? "gains" : "loses";
+            str = $"{CharName} {str2} {Mathf.Abs((int)statModData.valChg)} {statModData.statModified}";
 
             combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
             RefreshCombatLogUI();

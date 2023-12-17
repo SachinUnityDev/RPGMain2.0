@@ -42,16 +42,13 @@ namespace Combat
         [Header("Result")]
         public bool isVictory; 
 
-        void OnEnable()
-        {
-            combatState = CombatState.None;
-            
-            CombatEventService.Instance.OnCombatInit += GetAllyInCombat;
-            currEnemyPack = EnemyPackName.RatPack3;
-            CombatEventService.Instance.OnSOC += ()=>SetEnemyInCombat(currEnemyPack); 
 
-            
-            CombatEventService.Instance.OnEOR1 += EORActions;
+
+        
+
+        void OnEnable()
+        {            
+          //  CombatEventService.Instance.OnEOR1 += EORActions;
             CombatEventService.Instance.OnCharOnTurnSet += SetAllCurrCharValues;
             SkillService.Instance.SkillSelect
                             += (CharNames _charName, SkillNames _skillName)
@@ -67,17 +64,12 @@ namespace Combat
             enemyPackFactory = GetComponent<EnemypackFactory>();
 
             // Set Abbas as main Char
-             currCharOnTurn = CharService.Instance.charsInPlayControllers[0]; 
+            // currCharOnTurn = CharService.Instance.allCharInCombat[0]; 
            
             SetAllCurrCharValues(currCharOnTurn);    
         }
         private void OnDisable()
-        {
-            CombatEventService.Instance.OnCombatInit -= GetAllyInCombat;
-           
-            CombatEventService.Instance.OnSOC -= () => SetEnemyInCombat(currEnemyPack);
-
-
+        {  
             CombatEventService.Instance.OnEOR1 -= EORActions;
             CombatEventService.Instance.OnCharOnTurnSet -= SetAllCurrCharValues;
 
@@ -94,12 +86,19 @@ namespace Combat
             currCharHovered = currCharOnTurn;
             combatHUDView.UpdateTurnBtn(charController); 
         }
-        void GetAllyInCombat()
-        {   
+        public void GetAllyInCombat()
+        {
+            foreach (CharController charCtrl in CharService.Instance.allCharsInPartyLocked)
+            {
+                if(!CharService.Instance.allCharInCombat.Any(t=>t.charModel.charID == charCtrl.charModel.charID))
+                {
+                    CharService.Instance.allCharInCombat.Add(charCtrl);
+                }
+            }
              GridService.Instance.SetAllyPreTactics();
         }
 
-        void SetEnemyInCombat(EnemyPackName enemyPack)
+        public void SetEnemyInCombat(EnemyPackName enemyPack)
         {
             currEnemyPack = enemyPack;
             enemyPackController.InitEnemyPackController(allEnemyPackSO);
@@ -110,7 +109,7 @@ namespace Combat
    
         public void ToggleColliders(bool turnOn)
         {
-            foreach (CharController charCtrl in CharService.Instance.charsInPlayControllers)
+            foreach (CharController charCtrl in CharService.Instance.allCharInCombat)
             {
                 if(currCharOnTurn.charModel.charID != charCtrl.charModel.charID && !turnOn)
                      charCtrl.GetComponent<BoxCollider2D>().enabled = turnOn;
@@ -118,7 +117,7 @@ namespace Combat
         }
         public void AddCombatControllers()
         {
-            foreach (CharController charCtrl in CharService.Instance.charsInPlayControllers)
+            foreach (CharController charCtrl in CharService.Instance.allCharInCombat)
             {
                if (charCtrl.damageController == null)
                     charCtrl.damageController=  charCtrl.gameObject.AddComponent<DamageController>();

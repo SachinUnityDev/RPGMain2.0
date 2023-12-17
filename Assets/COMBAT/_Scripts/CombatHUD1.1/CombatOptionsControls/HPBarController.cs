@@ -33,9 +33,9 @@ namespace Combat
 
         void ToggleHealthBars(bool turnON)
         {
-            foreach (GameObject charGO in CharService.Instance.charsInPlay)
+            foreach (CharController charCtrl in CharService.Instance.allCharInCombat)
             {
-                HPBarView HPBarView = charGO.GetComponentInChildren<HPBarView>(); 
+                HPBarView HPBarView = charCtrl.GetComponentInChildren<HPBarView>(); 
 
                 SpriteRenderer[] HPBarRen = HPBarView.gameObject.GetComponentsInChildren<SpriteRenderer>();
                 for (int i = 0; i < HPBarRen.Length; i++)

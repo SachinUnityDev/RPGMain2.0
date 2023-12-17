@@ -51,7 +51,6 @@ namespace Combat
                 combatOptionsBtn.GetComponent<Transform>().DOLocalMoveX(-combatOptsWidth, 0.4f);
                 isOptOpen = true;
             }
-
         }
 
     }

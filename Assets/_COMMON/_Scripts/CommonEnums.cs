@@ -113,8 +113,8 @@ namespace Common
     }
     public enum StateFor   // char States
     {
-        Mutual, // Heroes + bestiary  
-        Heroes, // heroes only
+        Mutual, // Allies + enemies  
+        Heroes, // Allies only
     }
 
     public enum Levels

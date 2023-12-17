@@ -15,21 +15,21 @@ namespace Combat
 
     public class GridMovement : MonoBehaviour
     {
-       // all scripts movement related 
-
-         Grid _gridLayout;
-         GridPos2TilePosSO _grid2cellPosSO;  // dependency
+        // all scripts movement related 
+        [SerializeField] GridPos2TilePosSO _grid2cellPosSO; 
+        Grid _gridLayout;
+         
        
         [SerializeField] Vector3 movePos;
         [SerializeField] float moveSpeed;
 
         AdjMatrixData adjMatrixData; 
-        void Start()
+        void OnEnable()
         {
             moveSpeed = 2.5f;
             adjMatrixData = new AdjMatrixData();
             _gridLayout = GridService.Instance.gridLayout;
-            _grid2cellPosSO = GridService.Instance.grid2CellPos; 
+           // _grid2cellPosSO = GridService.Instance.grid2CellPos; 
         }
 
         public List<int> GetUnOccupiedPosList(DynamicPosData dynamicPosData)

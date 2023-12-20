@@ -78,7 +78,7 @@ namespace Combat
                 if (dyna.charMode == CharMode.Ally)
                 {
                     dyna.charGO.GetComponent<CharController>().charStateController.ClearDOT(CharStateName.BurnLowDOT);
-                    dyna.charGO.GetComponent<CharController>().charStateController.ClearDOT(CharStateName.PoisonedHighDOT);
+                    dyna.charGO.GetComponent<CharController>().charStateController.ClearDOT(CharStateName.Poisoned);
                 }
             }
         }

@@ -46,7 +46,7 @@ namespace Combat
             if (chance.GetChance())             
                 CombatService.Instance.mainTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>()
                 .charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                , charController.charModel.charID, CharStateName.BleedHighDOT, TimeFrame.Infinity, -1));
+                , charController.charModel.charID, CharStateName.Bleeding, TimeFrame.Infinity, -1));
 
         }
 

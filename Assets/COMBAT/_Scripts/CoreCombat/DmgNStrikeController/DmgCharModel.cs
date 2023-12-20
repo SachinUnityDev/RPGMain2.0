@@ -175,9 +175,9 @@ namespace Combat
                     return 1;
                 case CharStateName.BleedLowDOT:
                     return BleedLowDOT_dmgMultPercentCharState;
-                case CharStateName.BleedMedDOT:
+                case CharStateName.XXX1:
                     return BleedMedDOT_dmgMultPercentCharState;  
-                case CharStateName.BleedHighDOT:
+                case CharStateName.Bleeding:
                     return BleedHighDOT_dmgMultPercentCharState; 
                 case CharStateName.Blinded:
                     return Blinded_dmgMultPercentCharState;
@@ -185,7 +185,7 @@ namespace Combat
                     return BurnLowDOT_dmgMultPercentCharState;
                 case CharStateName.BurnMedDOT:
                     return BurnMedDOT_dmgMultPercentCharState;
-                case CharStateName.BurnHighDOT:
+                case CharStateName.Burning:
                     return BurnHighDOT_dmgMultPercentCharState;
                 case CharStateName.CheatedDeath:
                     return CheatedDeath_dmgMultPercentCharState; 
@@ -207,7 +207,7 @@ namespace Combat
                     return PoisonedLowDOT_dmgMultPercentCharState;
                 case CharStateName.PoisonedMedDOT:
                     return PoisonedMedDOT_dmgMultPercentCharState;
-                case CharStateName.PoisonedHighDOT:
+                case CharStateName.Poisoned:
                     return PoisonedHighDOT_dmgMultPercentCharState;
                 case CharStateName.Rooted:
                     return Rooted_dmgMultPercentCharState;

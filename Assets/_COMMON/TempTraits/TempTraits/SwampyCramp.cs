@@ -9,19 +9,16 @@ namespace Common
     {
         public override TempTraitName tempTraitName => TempTraitName.SwampyCramp;
        // -2 Vigor in Swamp	-2 Wp in Swamp
-        public override void OnApply(CharController charController)
+        public override void OnApply()
         {
-            this.charController = charController;
-            charController.landscapeController.ApplyLandscapeBuff(CauseType.TempTrait, (int)tempTraitName,
+          int id =  charController.landscapeController.ApplyLandscapeBuff(CauseType.TempTrait, (int)tempTraitName,
                                                               LandscapeNames.Swamp, AttribName.vigor, -2);
-
-            charController.landscapeController.ApplyLandscapeBuff(CauseType.TempTrait, (int)tempTraitName,
+            allLandBuffIds.Add(id);
+            id =  charController.landscapeController.ApplyLandscapeBuff(CauseType.TempTrait, (int)tempTraitName,
                                                               LandscapeNames.Swamp, AttribName.willpower, -2);
+            allLandBuffIds.Add(id);
         }
 
-        public override void OnTraitEnd()
-        {
-           
-        }
+
     }
 }

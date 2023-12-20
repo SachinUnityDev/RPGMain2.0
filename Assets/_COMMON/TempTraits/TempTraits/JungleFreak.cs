@@ -9,14 +9,13 @@ namespace Common
     {
         public override TempTraitName tempTraitName => TempTraitName.JungleFreak;
 
-        public override void OnApply(CharController charController)
-        {
-            this.charController = charController;
+        public override void OnApply()
+        {            
             // -3 Morale in Jungle
-            charController.landscapeController.ApplyLandscapeBuff(CauseType.TempTrait, (int)tempTraitName,
+           int Id =  charController.landscapeController.ApplyLandscapeBuff(CauseType.TempTrait, (int)tempTraitName,
                                                                LandscapeNames.Jungle , AttribName.morale, -3); 
-        }      
-
-
+            allLandBuffIds.Add(Id);
+        }
+     
     }
 }

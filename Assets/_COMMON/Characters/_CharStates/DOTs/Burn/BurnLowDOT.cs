@@ -36,7 +36,7 @@ namespace Common
             }
             if (isBleeding)
             {
-                charController.charStateController.ClearDOT(CharStateName.BleedHighDOT);
+                charController.charStateController.ClearDOT(CharStateName.Bleeding);
             }
             if (isPoisoned && isBurning)
             {
@@ -133,12 +133,12 @@ namespace Common
         void OverLapRuleBurning()
         {
 
-            if (charController.charStateController.HasCharState(CharStateName.BurnHighDOT))
+            if (charController.charStateController.HasCharState(CharStateName.Burning))
             {
                 int castTime = charController.charStateController.allCharBases
-                                    .Find(t => t.charStateName == CharStateName.BurnHighDOT).castTime;
+                                    .Find(t => t.charStateName == CharStateName.Burning).castTime;
                 charController.charStateController.allCharBases
-                                    .Find(t => t.charStateName == CharStateName.BurnHighDOT).SetCastTime(castTime + 1);
+                                    .Find(t => t.charStateName == CharStateName.Burning).SetCastTime(castTime + 1);
             }
             if (charController.charStateController.HasCharState(CharStateName.BurnLowDOT))
             {

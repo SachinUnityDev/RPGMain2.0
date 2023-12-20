@@ -30,9 +30,9 @@ namespace Combat
         }
         public override void ApplyFX1()
         {
-            if (targetController.charStateController.HasCharDOTState(CharStateName.BleedHighDOT) ||
-             targetController.charStateController.HasCharDOTState(CharStateName.BurnHighDOT) ||
-             targetController.charStateController.HasCharDOTState(CharStateName.PoisonedHighDOT))
+            if (targetController.charStateController.HasCharDOTState(CharStateName.Bleeding) ||
+             targetController.charStateController.HasCharDOTState(CharStateName.Burning) ||
+             targetController.charStateController.HasCharDOTState(CharStateName.Poisoned))
             {
                 targetController.damageController.ApplyDamage(charController, CauseType.CharSkill,
                     (int)skillName, skillModel.dmgType[0], (skillModel.damageMod + 25f)

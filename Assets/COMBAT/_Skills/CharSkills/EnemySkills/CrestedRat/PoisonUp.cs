@@ -50,7 +50,7 @@ namespace Combat
                     if (percent.GetChance())
                     {
                         skillEventData.targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                                            , charController.charModel.charID, CharStateName.PoisonedHighDOT);
+                                            , charController.charModel.charID, CharStateName.Poisoned);
                     }
                 }
             }

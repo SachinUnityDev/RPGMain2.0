@@ -9,13 +9,13 @@ namespace Common
     {
         public override TempTraitName tempTraitName => TempTraitName.Bloodthirsty; 
         //+30% Dmg vs Bleeding target	-1 Focus per Bleeding target	-2 Acc vs Bleeding target
-        public override void OnApply(CharController charController)
-        {
-            this.charController = charController;
-        }
-        public override void OnTraitEnd()
+        public override void OnApply()
         {
             
+        }
+        public override void EndTrait()
+        {
+            base.EndTrait();
         }
     }
 }

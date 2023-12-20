@@ -13,16 +13,13 @@ namespace Common
     {
         public TempTraitName tempTraitName;
         public TempTraitType tempTraitType;
-        public TraitBehaviour temptraitBehavior;
+        public TempTraitBehaviour temptraitBehavior;
 
         public int minCastTime;
         public int maxCastTime;
 
         [Header("Description")]
         public string traitNameStr = "";
-
-        [Header("Sprites")]
-        public Sprite iconSprite;
         
         [TextArea(5, 10)]
         public List<string> allLines = new List<string>();

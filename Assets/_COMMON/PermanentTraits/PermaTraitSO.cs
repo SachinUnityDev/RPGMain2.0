@@ -10,7 +10,7 @@ namespace Common
     public class PermaTraitSO : ScriptableObject
     {
         public PermaTraitName permaTraitName;
-        public TraitBehaviour traitBehaviour;
+        public TempTraitBehaviour traitBehaviour;
         [Header("Class type")]
         public ClassType classType;
         [Header("culture ")]

@@ -8,7 +8,7 @@ namespace Common
     public class HighPoisonDOT : CharStatesBase
     {
 
-        public override CharStateName charStateName => CharStateName.PoisonedHighDOT;
+        public override CharStateName charStateName => CharStateName.Poisoned;
         public override StateFor stateFor => StateFor.Mutual;
         public override int castTime { get; protected set; }
 
@@ -26,7 +26,7 @@ namespace Common
 
             bool isBleeding = charController.charStateController.HasCharDOTState(CharStateName.BleedLowDOT);
             bool isPoisoned = charController.charStateController.HasCharDOTState(CharStateName.PoisonedLowDOT);
-            bool isBurning = charController.charStateController.HasCharDOTState(CharStateName.BurnHighDOT);
+            bool isBurning = charController.charStateController.HasCharDOTState(CharStateName.Burning);
 
             if (isPoisoned)
             {                

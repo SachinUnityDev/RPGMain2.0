@@ -35,7 +35,7 @@ namespace Common
                 if (chance.GetChance())
                 {
                     charCtrl.charStateController.ApplyCharStateBuff(CauseType.Landscape, (int)landscapeName
-                    , charCtrl.charModel.charID, CharStateName.PoisonedHighDOT, TimeFrame.Infinity, -1); 
+                    , charCtrl.charModel.charID, CharStateName.Poisoned, TimeFrame.Infinity, -1); 
                 }
                 else
                 {

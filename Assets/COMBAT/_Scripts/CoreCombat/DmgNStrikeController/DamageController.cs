@@ -460,6 +460,30 @@ namespace Combat
 
 
         #endregion
+
+        #region BLEED , BURN AND POISONED DOT
+
+        
+
+        public void ApplyLowBleed(CauseType causeType, int causeName, int causeByCharID
+                    , CharStateName charStateName)
+        {
+
+            if (charController.charStateController.HasCharState(CharStateName.Poisoned))
+            {
+                int castTime = charController.charStateController.allCharBases
+                                    .Find(t => t.charStateName == CharStateName.Poisoned).castTime;
+                charController.charStateController.allCharBases
+                                    .Find(t => t.charStateName == CharStateName.Poisoned).IncrCastTime(1);
+            }
+            charController.charStateController.ApplyCharStateBuff(causeType,causeName, causeByCharID
+                                                    , CharStateName.Bleeding, TimeFrame.EndOfRound, 2); 
+        }
+
+
+        #endregion
+
+
     }
     #region DATA CLASSES
     public class DmgAppliedData   /// Data broadcasted by target on being hit

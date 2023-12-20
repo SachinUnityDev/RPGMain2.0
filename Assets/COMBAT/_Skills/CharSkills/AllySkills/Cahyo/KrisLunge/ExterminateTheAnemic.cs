@@ -31,7 +31,7 @@ namespace Combat
             if (targetController.charModel.charName == CharNames.RatKing ||
                 targetController.charModel.charName == CharNames.Kongamato)
                 return; 
-           if(targetController.charStateController.HasCharState(CharStateName.BleedHighDOT))
+           if(targetController.charStateController.HasCharState(CharStateName.Bleeding))
            {
                 StatData statData = targetController.GetStat(StatName.health);
                 float hpPercent = statData.currValue / statData.maxLimit; 

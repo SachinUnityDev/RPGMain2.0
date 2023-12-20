@@ -10,9 +10,8 @@ namespace Common
     {
         public override TempTraitName tempTraitName => TempTraitName.Agile; 
        // +2 Dodge	+2 Acc
-        public override void OnApply(CharController charController)
+        public override void OnApply()
         {
-            int charID = charController.charModel.charID;
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
                                                          charID, AttribName.dodge, 2, TimeFrame.Infinity, -1, true);
            
@@ -21,9 +20,9 @@ namespace Common
 
         }
 
-        public override void OnTraitEnd()
+        public override void EndTrait()
         {
-           
+            base.EndTrait();
         }
     }
 }

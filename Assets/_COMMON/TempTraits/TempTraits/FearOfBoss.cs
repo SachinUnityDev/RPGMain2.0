@@ -9,13 +9,13 @@ namespace Common
     {
         public override TempTraitName tempTraitName => TempTraitName.FearOfBoss;
 
-        public override void OnApply(CharController charController)
+        public override void OnApply()
         {
-            this.charController = charController;
         }
 
-        public override void OnTraitEnd()
+        public override void EndTrait()
         {
+            base.EndTrait();
         }
     }
 }

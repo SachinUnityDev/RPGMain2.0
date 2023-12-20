@@ -16,12 +16,16 @@ namespace Common
         public List<ImmunityFrmType> allImmunitiesFrmType = new List<ImmunityFrmType>();
 
         [Header(" All Temp Trait Applied")] 
-        public List<TempTraitBuffData> alltempTraitApplied = new List<TempTraitBuffData>();
-        public List<TempTraitBase> allTempTraitAppliedBase = new List<TempTraitBase>();   
+        public List<TempTraitBuffData> alltempTraitBuffData = new List<TempTraitBuffData>();
+        public List<TempTraitBase> allTempTraitBase = new List<TempTraitBase>();   
+
+        public List<TempTraitModel> allTempTraitModels = new List<TempTraitModel>();
 
 
         public CharController charController;
         int traitID =-1;
+        [SerializeField] List<int> allBuffIds = new List<int>();
+
         /// <summary>
         ///  You can have 3 sickness.If you trigger 1 more sickness when already have 3
         ///  , you will become gravely ill.When you are gravely ill, you are immune to sickness
@@ -36,76 +40,208 @@ namespace Common
 
         void Start()
         {
-            traitID = 0;
+            traitID = -1;
             charController = GetComponent<CharController>();
             CalendarService.Instance.OnStartOfCalDay +=(int day)=> DayTick();          
         }
         #region TRAIT APPLY & REMOVE
-        public void ApplyTempTrait(CauseType causeType, int causeName, int causeByCharID
+
+
+        void PosTrait_FIFOChk(TempTraitType tempTraitType)
+        {
+            // You can have 3 physical positive and 3 mental positive traits.first in first out 
+            int count = 0; int firstId = -1; 
+            foreach (TempTraitModel tempTraitModel in allTempTraitModels)
+            {
+               if(tempTraitModel.temptraitBehavior != TempTraitBehaviour.Positive)
+                    continue; 
+               if (tempTraitModel.tempTraitType == tempTraitType)                     
+               {
+                   //// 
+                    if(tempTraitModel.tempTraitID < firstId)
+                    {
+                        firstId= tempTraitModel.tempTraitID;
+                    }
+                    count++; 
+               }
+            }
+            if (count >= 3)
+            {
+                RemoveTrait(firstId); 
+            }
+        }
+        int NegTraitStackChk(TempTraitType tempTraitType, CauseType causeType, int causeName, int causeByCharID)
+        {
+            ///You can have 3 mental negative traits and 3 physical negative traits.If you trigger 1 more
+            ///, you become Madness(for mental) or Weakness(for physical)
+            List<int> allIds = new List<int>(); 
+            foreach (TempTraitModel tempTraitModel in allTempTraitModels)
+            {
+                if (tempTraitModel.temptraitBehavior != TempTraitBehaviour.Negative)
+                    continue;
+                if (tempTraitModel.tempTraitType == tempTraitType)
+                {   
+                    allIds.Add(tempTraitModel.tempTraitID);                    
+                }
+            }
+            if (allIds.Count >= 3)
+            {
+                allIds.ForEach(t => RemoveTrait(t));
+                int traitID = -1; 
+                if(tempTraitType == TempTraitType.Mental)
+                  traitID =  ApplyTempTrait(causeType, causeName, causeByCharID, TempTraitName.Insane);
+                if (tempTraitType == TempTraitType.Physical)
+                    traitID = ApplyTempTrait(causeType, causeName, causeByCharID, TempTraitName.Weakness);
+                if (tempTraitType == TempTraitType.Sickness)
+                    traitID = ApplyTempTrait(causeType, causeName, causeByCharID, TempTraitName.GravelyIll);
+                return traitID; 
+            }
+            return -1; 
+
+        }
+        void ClearForBossTempTrait(TempTraitName tempTraitName)
+        {
+            switch (tempTraitName)
+            { 
+                case TempTraitName.Insane:
+                    ClearAllNegTraitOfType(TempTraitType.Mental); 
+                    break; 
+                case TempTraitName.Weakness:
+                    ClearAllNegTraitOfType(TempTraitType.Physical);
+                    break;
+                case TempTraitName.GravelyIll:
+                    ClearAllNegTraitOfType(TempTraitType.Sickness);
+                    break;
+                default:
+                    break; 
+            }
+        }
+
+        void ClearAllNegTraitOfType(TempTraitType tempTraitType)
+        {
+            List<int> allIds = new List<int>();
+            foreach (TempTraitModel tempTraitModel in allTempTraitModels)
+            {
+                if (tempTraitModel.temptraitBehavior != TempTraitBehaviour.Negative)
+                    continue;
+                if (tempTraitModel.tempTraitType == tempTraitType)
+                {
+                    allIds.Add(tempTraitModel.tempTraitID);
+                }
+            }
+            if (allIds.Count >= 3)
+            {
+                allIds.ForEach(t => RemoveTrait(t));
+            }
+        }
+
+        public int ApplyTempTrait(CauseType causeType, int causeName, int causeByCharID
                                                              ,TempTraitName tempTraitName)
         {
             // check immunity list 
             if (HasTempTrait(tempTraitName) || HasImmunityFrmTrait(tempTraitName) 
                                             || HasImmunityFrmType(tempTraitName))
-                return;
+                return -1;
+            
+            TempTraitSO tempTraitSO = TempTraitService.Instance.allTempTraitSO.GetTempTraitSO(tempTraitName);
+            PosTrait_FIFOChk(tempTraitSO.tempTraitType);
 
-            // get temp trait from the factory add to hashset 
+            if(tempTraitName != TempTraitName.GravelyIll || tempTraitName != TempTraitName.Insane
+                                                         || tempTraitName != TempTraitName.Weakness)
+            {
+                int negId = NegTraitStackChk(tempTraitSO.tempTraitType, causeType, causeName, causeByCharID);
+                if (negId != -1)
+                    return negId;
+            }
+            else
+            {
+                ClearForBossTempTrait(tempTraitName); 
+            }
+
+
+            
             int effectedCharID = charController.charModel.charID;
 
             int startDay = CalendarService.Instance.dayInGame; 
     
             TempTraitBase traitBase = TempTraitService.Instance
                                     .temptraitsFactory.GetNewTempTraitBase(tempTraitName);
-            TempTraitSO tempTraitSO = TempTraitService.Instance.allTempTraitSO.GetTempTraitSO(tempTraitName);
+            
 
-            traitID++;
+            traitID = allBuffIds.Count+1;
+            allBuffIds.Add(traitID); 
+
             int netTime = UnityEngine.Random.Range(tempTraitSO.minCastTime, tempTraitSO.maxCastTime+1);
             // mod data for record and string creation 
-            CauseData4Trait modData = new CauseData4Trait(causeType, causeName, causeByCharID, effectedCharID);
+            TempTraitModData modData = new TempTraitModData(causeType, causeName, causeByCharID, effectedCharID);
 
-            TempTraitBuffData tempTraitAppliedData
+            TempTraitBuffData tempTraitBuffData
                              = new TempTraitBuffData(traitID, tempTraitName, startDay, netTime, modData);
 
-            alltempTraitApplied.Add(tempTraitAppliedData);
-            traitBase.OnApply(charController);
-            allTempTraitAppliedBase.Add(traitBase); 
+            alltempTraitBuffData.Add(tempTraitBuffData);
+
+            traitBase.TempTraitInit(tempTraitSO, charController, traitID);
+            traitBase.TraitBaseApply(); 
+            traitBase.OnApply();
+            allTempTraitBase.Add(traitBase);
+            TempTraitService.Instance.On_TempTraitStart(tempTraitBuffData);
+
+            return traitID; 
+      
         }
         public void RemoveTraitByName(TempTraitName tempTraitName)
         {
-            int index = alltempTraitApplied.FindIndex(t => t.tempTraitName == tempTraitName);
+            int index = alltempTraitBuffData.FindIndex(t => t.tempTraitName == tempTraitName);
             if (index != -1)
             {
-                RemoveTrait(alltempTraitApplied[index].traitID);  // base etc removed here
+
+                int id = alltempTraitBuffData[index].traitID; 
+                RemoveTrait(id);  // base etc removed here
             }
             else
             {
                 Debug.Log("trait not found" + tempTraitName);
             }
         }
-        //public void RemoveTraitFrmLs(TempTraitModel tempTraitBuffData)
-        //{
-        //    alltempTraitApplied.Remove(tempTraitBuffData);
-        //}
-
+       
         public bool RemoveTrait(int _traitID)
         {
-            int index = alltempTraitApplied.FindIndex(t => t.traitID == _traitID);
+            int index = alltempTraitBuffData.FindIndex(t => t.traitID == _traitID);
             if (index == -1) return false;
-            TempTraitBuffData traitData = alltempTraitApplied[index];
-            alltempTraitApplied.Remove(traitData);
+            TempTraitBuffData traitData = alltempTraitBuffData[index];
+            alltempTraitBuffData.Remove(traitData);
             int indexBase =
-                    allTempTraitAppliedBase.FindIndex(t => t.tempTraitName == traitData.tempTraitName);
-            if (indexBase != -1)
+                    allTempTraitBase.FindIndex(t => t.tempTraitName == traitData.tempTraitName);
+            if (indexBase != -1)  // base
             {
-                allTempTraitAppliedBase[indexBase].OnTraitEnd();
-                allTempTraitAppliedBase.RemoveAt(indexBase);
-            }                
-            return true;
+                allTempTraitBase[indexBase].EndTrait();
+                allTempTraitBase.RemoveAt(indexBase);
+            }
+            else
+            {
+                Debug.Log("temp trait base not  found " + traitData.tempTraitName);
+                return false; 
+            }
+
+       
+            int index2 = allTempTraitModels.FindIndex(t => t.tempTraitName == traitData.tempTraitName);
+            if (index != -1) // model 
+            {
+                allTempTraitModels.RemoveAt(index2);
+            }
+            else
+            {
+                Debug.Log("temp trait model not  found " + traitData.tempTraitName);
+                return false;
+            }
+            TempTraitService.Instance.On_TempTraitEnd(traitData);
+
+            return true;        
         }
 
         public void OnClearMindPressed()
         {
-            foreach (TempTraitBuffData model in alltempTraitApplied.ToList())
+            foreach (TempTraitBuffData model in alltempTraitBuffData.ToList())
             {
                 TempTraitSO tempSO = TempTraitService.Instance.allTempTraitSO.GetTempTraitSO(model.tempTraitName);
                 if (tempSO.tempTraitType == TempTraitType.Mental)
@@ -133,7 +269,7 @@ namespace Common
                 currtime = CalendarService.Instance.dayInGame; 
         
             traitID++;
-            CauseData4Trait causeData = new CauseData4Trait(causeType,causeName, causeByCharID, effectedCharID, true); 
+            TempTraitModData causeData = new TempTraitModData(causeType,causeName, causeByCharID, effectedCharID, true); 
 
             TempTraitBuffData immunityData = new TempTraitBuffData
                                                     (traitID, tempTraitName, currtime, netTime, causeData);
@@ -157,7 +293,7 @@ namespace Common
                 currtime = CalendarService.Instance.dayInGame;
 
             traitID++;
-            CauseData4Trait causeData = new CauseData4Trait(causeType, causeName, causeByCharID, effectedCharID, true);
+            TempTraitModData causeData = new TempTraitModData(causeType, causeName, causeByCharID, effectedCharID, true);
 
 
             ImmunityFrmType immunityFrmTypeData = new ImmunityFrmType(traitID, tempTraitType, timeFrame, netTime
@@ -173,14 +309,12 @@ namespace Common
             return true;
         }
 
-
-
         #endregion
 
         #region CHECKS TRAIT & IMMUNITY
         public bool HasTempTrait(TempTraitName tempTraitName)
         {
-            return alltempTraitApplied.Any(t => t.tempTraitName == tempTraitName);
+            return alltempTraitBuffData.Any(t => t.tempTraitName == tempTraitName);
         }
         public bool HasImmunityFrmTrait(TempTraitName tempTraitName)
         {
@@ -196,8 +330,8 @@ namespace Common
         #endregion
         public void DayTick()
         {
-            if(alltempTraitApplied.Count == 0) return;  
-            foreach (TempTraitBuffData traitData in alltempTraitApplied.ToList())
+            if(alltempTraitBuffData.Count == 0) return;  
+            foreach (TempTraitBuffData traitData in alltempTraitBuffData.ToList())
             {
                 if (traitData.timeFrame == TimeFrame.Infinity)
                     continue; 
@@ -253,10 +387,10 @@ namespace Common
         public TimeFrame timeFrame;
         public int netTime;
         public int currentTime;
-        public CauseData4Trait modData; 
+        public TempTraitModData modData; 
 
         public TempTraitBuffData(int traitID, TempTraitName tempTraitName
-                                , int startTime, int netTime, CauseData4Trait modData)
+                                , int startTime, int netTime, TempTraitModData modData)
         {
             this.traitID = traitID;
             this.tempTraitName = tempTraitName;
@@ -269,7 +403,7 @@ namespace Common
     }
 
     [Serializable]
-    public class CauseData4Trait  // broadCast Data 
+    public class TempTraitModData  // broadCast Data 
     {
         public CauseType causeType;  // add cause name here 
         public int causeName;
@@ -277,7 +411,7 @@ namespace Common
         public int effectedCharID;
         public bool isImmunity;
 
-        public CauseData4Trait(CauseType causeType, int causeName, int causeByCharID
+        public TempTraitModData(CauseType causeType, int causeName, int causeByCharID
                                     , int effectedCharID, bool isImmunity = false)
         {
             this.causeType = causeType;
@@ -296,10 +430,10 @@ namespace Common
         public int netTime;
         public int startTime;
         public int currentTime;
-        public CauseData4Trait causeData; 
+        public TempTraitModData causeData; 
 
         public ImmunityFrmType(int traitID, TempTraitType traitType, TimeFrame timeFrame, int netTime
-                                              , int startTime, int currentTime, CauseData4Trait causeData)
+                                              , int startTime, int currentTime, TempTraitModData causeData)
         {
             this.traitID = traitID;
             this.traitType = traitType;

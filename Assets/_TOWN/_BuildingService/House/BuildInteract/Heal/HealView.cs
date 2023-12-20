@@ -165,7 +165,7 @@ namespace Town
         int GetSicknessTraits()
         {
             sicknessTraits.Clear();         
-            foreach (TempTraitBuffData model in tempTraitController.alltempTraitApplied)
+            foreach (TempTraitBuffData model in tempTraitController.alltempTraitBuffData)
             {
                 TempTraitSO tempSO = TempTraitService.Instance.allTempTraitSO.GetTempTraitSO(model.tempTraitName);
                 if (tempSO.tempTraitType == TempTraitType.Sickness)

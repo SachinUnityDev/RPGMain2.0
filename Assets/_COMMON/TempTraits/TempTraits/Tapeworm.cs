@@ -9,10 +9,8 @@ namespace Common
     {
         public override TempTraitName tempTraitName => TempTraitName.Tapeworm;
        //  Upon consume Food: Half Hunger and Thirst relief	-2 Vigor and Wp
-        public override void OnApply(CharController charController)
+        public override void OnApply()
         {
-            this.charController = charController;
-            int charID = charController.charModel.charID;
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
                                                          charID, AttribName.willpower, -2, TimeFrame.Infinity, -1, true);
 
@@ -20,9 +18,9 @@ namespace Common
                                              charID, AttribName.vigor, -2, TimeFrame.Infinity, -1, true);
         }
 
-        public override void OnTraitEnd()
+        public override void EndTrait()
         {
-            
+            base.EndTrait();    
         }
     }
 }

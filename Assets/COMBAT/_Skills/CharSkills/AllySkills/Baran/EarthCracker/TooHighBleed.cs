@@ -54,7 +54,7 @@ namespace Combat
             if (_chance.GetChance())
             {
                 charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                                            , charController.charModel.charID, CharStateName.BleedHighDOT);
+                                            , charController.charModel.charID, CharStateName.Bleeding);
             }
         }
 

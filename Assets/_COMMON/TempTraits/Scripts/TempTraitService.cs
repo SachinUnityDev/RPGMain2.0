@@ -13,8 +13,8 @@ namespace Common
         //  will add all temp traits to itself
         // independent mono behaviours will inform when a trait has started to this service.  
 
-        public event Action<TempTraitData> OnTempTraitStart;
-        public event Action<TempTraitData> OnTempTraitEnd;
+        public event Action<TempTraitBuffData> OnTempTraitStart;
+        public event Action<TempTraitBuffData> OnTempTraitEnd;
         public event Action<CharNames, TempTraitName> OnTempTraitHovered;
        
         public List<TempTraitController> allTempTraitControllers = new List<TempTraitController>(); 
@@ -38,7 +38,20 @@ namespace Common
         }
 
 
+        public void On_TempTraitStart(TempTraitBuffData tempTraitBuffData)
+        {
+            OnTempTraitStart?.Invoke(tempTraitBuffData);
+        }
+        public void On_TempTraitEnd(TempTraitBuffData tempTraitBuffData)
+        {
+            OnTempTraitEnd?.Invoke(tempTraitBuffData); 
+        }
 
+        public  TempTraitBase GetNewTempTraitBase(TempTraitName tempTraitName)
+        {
+            TempTraitBase tempTraitBase = temptraitsFactory.GetNewTempTraitBase(tempTraitName);            
+            return tempTraitBase;
+        }
 
         public void ApplyPermTraits(GameObject go)
         {
@@ -55,7 +68,7 @@ namespace Common
             foreach (CharController c in CharService.Instance.allyInPlayControllers)
             {
                 TempTraitController tempTraitController = c.tempTraitController;
-                foreach (TempTraitBuffData model in tempTraitController.alltempTraitApplied)
+                foreach (TempTraitBuffData model in tempTraitController.alltempTraitBuffData)
                 {
                     TempTraitSO tempSO = TempTraitService.Instance.allTempTraitSO.GetTempTraitSO(model.tempTraitName);
                     if (tempSO.tempTraitType == TempTraitType.Sickness)

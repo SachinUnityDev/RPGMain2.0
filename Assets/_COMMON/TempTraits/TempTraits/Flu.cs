@@ -9,10 +9,8 @@ using UnityEngine;
     {
         public override TempTraitName tempTraitName => TempTraitName.Flu;
        // -3 Vigor	-3 Willpower
-        public override void OnApply(CharController charController)
+        public override void OnApply()
         {
-            this.charController = charController;
-            int charID = charController.charModel.charID;
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
                                                          charID, AttribName.vigor, -3, TimeFrame.Infinity, -1, true);
 
@@ -20,9 +18,9 @@ using UnityEngine;
                                                          charID, AttribName.willpower, -3, TimeFrame.Infinity, -1, true);
         }
 
-        public override void OnTraitEnd()
+        public override void EndTrait()
         {
-            
+            base.EndTrait();
         }
     }
 

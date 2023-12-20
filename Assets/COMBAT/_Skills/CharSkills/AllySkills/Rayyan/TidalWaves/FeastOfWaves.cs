@@ -35,7 +35,7 @@ namespace Combat
                     dyna.charGO.GetComponent<CharController>().damageController.ApplyDamage(charController,
                                           CauseType.CharSkill, (int)skillName, DamageType.Heal, healVal, SkillInclination.None);
 
-                    dyna.charGO.GetComponent<CharController>().charStateController.ClearDOT(CharStateName.BurnHighDOT); 
+                    dyna.charGO.GetComponent<CharController>().charStateController.ClearDOT(CharStateName.Burning); 
                 }
             }
         }

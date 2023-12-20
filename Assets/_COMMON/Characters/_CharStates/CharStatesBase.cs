@@ -138,9 +138,9 @@ namespace Common
         protected virtual void CombatTick()
         {          
             // on EOC all DOT are destroyed
-            if(charStateName == CharStateName.BurnHighDOT || charStateName== CharStateName.BurnLowDOT ||
-               charStateName == CharStateName.BleedHighDOT || charStateName == CharStateName.BleedLowDOT ||
-               charStateName == CharStateName.PoisonedHighDOT || charStateName == CharStateName.PoisonedLowDOT
+            if(charStateName == CharStateName.Burning || charStateName== CharStateName.BurnLowDOT ||
+               charStateName == CharStateName.Bleeding || charStateName == CharStateName.BleedLowDOT ||
+               charStateName == CharStateName.Poisoned || charStateName == CharStateName.PoisonedLowDOT
                || charStateName == CharStateName.FirstBlood || charStateName == CharStateName.Fearful
                || charStateName == CharStateName.Faithful || charStateName == CharStateName.CheatedDeath
                || charStateName == CharStateName.FlatFooted)

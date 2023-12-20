@@ -48,7 +48,7 @@ namespace Combat
     
         public override void ApplyFX1()
         {
-            if (targetController.charStateController.HasCharDOTState(CharStateName.BleedHighDOT))
+            if (targetController.charStateController.HasCharDOTState(CharStateName.Bleeding))
                 targetController.damageController.ApplyDamage(charController, CauseType.CharSkill,
                     (int)skillName, DamageType.Physical, (skillModel.damageMod + 50f)
                     , skillModel.skillInclination);

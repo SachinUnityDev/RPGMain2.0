@@ -9,18 +9,16 @@ using UnityEngine;
     {
         public override TempTraitName tempTraitName => TempTraitName.Initiator;
 
-        public override void OnApply(CharController charController)
+        public override void OnApply()
         {
-            this.charController = charController;
-            //+2 Haste
-            int charID = charController.charModel.charID;
+            // +2 haste
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
                                                        charID, AttribName.haste, 2, TimeFrame.Infinity, -1, true);
         }
 
-        public override void OnTraitEnd()
+        public override void EndTrait()
         {
-            
+            base.EndTrait();
         }
     }
 

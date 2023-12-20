@@ -9,14 +9,14 @@ namespace Common
     {
         public override TempTraitName tempTraitName => TempTraitName.Anemic;
         //When Bleeding: Receive +30% Dmg When Bleeding: -4 Luck
-        public override void OnApply(CharController charController)
-        {
-            this.charController = charController;
-        }
-
-        public override void OnTraitEnd()
+        public override void OnApply()
         {
             
+        }
+
+        public override void EndTrait()
+        {
+            base.EndTrait();
         }
     }
 

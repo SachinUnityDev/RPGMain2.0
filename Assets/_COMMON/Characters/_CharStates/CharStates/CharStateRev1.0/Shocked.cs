@@ -39,7 +39,7 @@ namespace Common
 
             List<int> immuneBuffIDs = charController.charStateController
                .ApplyDOTImmunityBuff(CauseType.CharState, (int)charStateName
-                  , charID, CharStateName.PoisonedHighDOT, timeFrame, castTime, false);
+                  , charID, CharStateName.Poisoned, timeFrame, castTime, false);
 
             allImmunityBuffs.AddRange(immuneBuffIDs);
 

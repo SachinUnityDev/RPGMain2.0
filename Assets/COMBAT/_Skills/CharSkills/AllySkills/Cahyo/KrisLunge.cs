@@ -37,7 +37,7 @@ namespace Combat
         {   
             if (chance.GetChance())
                 charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                                        , charController.charModel.charID, CharStateName.BleedHighDOT);
+                                        , charController.charModel.charID, CharStateName.Bleeding);
         }
         public override void ApplyFX3()
         {

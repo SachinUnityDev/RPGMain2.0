@@ -9,10 +9,9 @@ namespace Common
     {
         public override TempTraitName tempTraitName => TempTraitName.WellRested;
 
-        public override void OnApply(CharController charController)
+        public override void OnApply()
         {
-            this.charController = charController;
-            int charID = charController.charModel.charID;
+
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
                                                 charID, AttribName.focus, 1, TimeFrame.EndOfDay, castTime, true);
             
@@ -27,9 +26,9 @@ namespace Common
 
         }
 
-        public override void OnTraitEnd()
+        public override void EndTrait()
         {
-            
+            base.EndTrait();
         }
     }
 }

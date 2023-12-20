@@ -8,48 +8,6 @@ using UnityEngine;
 
 namespace Common
 {
-
-    public class TempTraitData
-    {
-        public float castTime = -5f;
-        public TempTraitName tempTraitName;
-        public CharNames causedbyChar;
-        public CharNames effectedChar;
-        public Vector3 effectedCharPos;
-
-        public TempTraitData(float castTime, TempTraitName tempTraitName, CharNames causedbyChar
-            , CharNames effectedChar, Vector3 effectedCharPos)
-        {
-            this.castTime = castTime;
-            this.tempTraitName = tempTraitName;
-            this.causedbyChar = causedbyChar;
-            this.effectedChar = effectedChar;
-            this.effectedCharPos = effectedCharPos;
-        }
-    }
-
-    public abstract class TempTraitBase
-    {
-        public abstract TempTraitName tempTraitName { get; }
-        public CharController charController;
-        public TempTraitSO tempTraitSO;
-
-        public int castTime; 
-        public virtual void TempTraitInit(TempTraitSO tempTraitSO)
-        {
-           this.tempTraitSO = tempTraitSO;
-            castTime = UnityEngine.Random.Range(tempTraitSO.minCastTime, tempTraitSO.maxCastTime);  
-        }
-
-        public abstract void OnApply(CharController charController);
-
-        public virtual void OnTraitEnd()
-        {
-
-        }
-
-    }
-
     public class TempTraitsFactory : MonoBehaviour
     {
         Dictionary<TempTraitName, Type> allTempTraits;
@@ -86,8 +44,7 @@ namespace Common
                 if (trait.Key == tempTraitName)
                 {
                     var t = Activator.CreateInstance(trait.Value) as TempTraitBase; 
-                    TempTraitSO tempTraitSO = TempTraitService.Instance.allTempTraitSO.GetTempTraitSO(tempTraitName);
-                    t.TempTraitInit(tempTraitSO); 
+                    TempTraitSO tempTraitSO = TempTraitService.Instance.allTempTraitSO.GetTempTraitSO(tempTraitName);                  
                     return t;
                 }
             }

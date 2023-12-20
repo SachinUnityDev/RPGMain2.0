@@ -7,9 +7,8 @@ namespace Common
     public class RatBiteFever : TempTraitBase
     {
         public override TempTraitName tempTraitName => TempTraitName.RatBiteFever;
-        public override void OnApply(CharController charController)
+        public override void OnApply()
         {
-            this.charController = charController;
             // -1 Utility stats(foc, haste, mor, luck)
             int charID = charController.charModel.charID;
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
@@ -26,9 +25,9 @@ namespace Common
                                              charID, AttribName.luck, -1, TimeFrame.Infinity, -1, true);
         }
 
-        public override void OnTraitEnd()
+        public override void EndTrait()
         {
-            
+            base.EndTrait();
         }
     }
 }

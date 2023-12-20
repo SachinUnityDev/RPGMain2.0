@@ -55,7 +55,7 @@ namespace Quest
                 charCtrl.charStateController.ApplyCharStateBuff(CauseType.Curios, (int)curioName, charCtrl.charModel.charID
                                             , CharStateName.Blinded, TimeFrame.EndOfRound, 12);
                 charCtrl.charStateController.ApplyCharStateBuff(CauseType.Curios, (int)curioName
-                                                    , charCtrl.charModel.charID, CharStateName.BurnHighDOT);
+                                                    , charCtrl.charModel.charID, CharStateName.Burning);
             }
             resultStr = "Explosion!";
             resultStr2 = "Burning\nBlinded, 12 rds\n+1-2 Fire Res";

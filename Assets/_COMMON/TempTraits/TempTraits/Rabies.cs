@@ -10,10 +10,8 @@ namespace Common
         public override TempTraitName tempTraitName => TempTraitName.Rabies;
 
         //+3 Haste	-3 Vigor	-20 All Res
-        public override void OnApply(CharController charController)
-        {
-            this.charController = charController;
-            int charID = charController.charModel.charID;
+        public override void OnApply()
+        {           
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
                                                          charID, AttribName.haste, 3, TimeFrame.Infinity, -1, true);
 
@@ -40,7 +38,7 @@ namespace Common
 
 
         }
-        public override void OnTraitEnd()
+        public override void EndTrait()
         {
             
         }

@@ -9,7 +9,7 @@ namespace Common
 
     public class BurnHighDOT : CharStatesBase
     {
-        public override CharStateName charStateName => CharStateName.BurnHighDOT;
+        public override CharStateName charStateName => CharStateName.Burning;
         public override StateFor stateFor => StateFor.Mutual;
         public override int castTime { get; protected set; }
 
@@ -27,7 +27,7 @@ namespace Common
 
             bool isBleeding = charController.charStateController.HasCharDOTState(CharStateName.BleedLowDOT);
             bool isPoisoned = charController.charStateController.HasCharDOTState(CharStateName.PoisonedLowDOT);               
-            bool isBurning = charController.charStateController.HasCharDOTState(CharStateName.BurnHighDOT);
+            bool isBurning = charController.charStateController.HasCharDOTState(CharStateName.Burning);
 
             if (isPoisoned && !isBurning)
             {
@@ -129,12 +129,12 @@ namespace Common
         void OverLapRuleBurning()
         {
 
-            if (charController.charStateController.HasCharState(CharStateName.BurnHighDOT))                
+            if (charController.charStateController.HasCharState(CharStateName.Burning))                
             {
                 int castTime = charController.charStateController.allCharBases
-                                    .Find(t => t.charStateName == CharStateName.BurnHighDOT).castTime;
+                                    .Find(t => t.charStateName == CharStateName.Burning).castTime;
                 charController.charStateController.allCharBases
-                                    .Find(t => t.charStateName == CharStateName.BurnHighDOT).IncrCastTime(1);
+                                    .Find(t => t.charStateName == CharStateName.Burning).IncrCastTime(1);
             }
             if (charController.charStateController.HasCharState(CharStateName.BurnLowDOT))
             {

@@ -7,7 +7,7 @@ namespace Common
 {
     public class TempTBehaviourSpriteData
     {
-        public TraitBehaviour tempTraitBehaviour;
+        public TempTraitBehaviour tempTraitBehaviour;
         public Sprite iconSprite; 
     }
     public class TempTraitTypeSpriteData
@@ -56,7 +56,7 @@ namespace Common
                 return null;
             }
         }
-        public TempTBehaviourSpriteData GetTempTraitBehaviourData(TraitBehaviour tempTraitBehaviour)
+        public TempTBehaviourSpriteData GetTempTraitBehaviourData(TempTraitBehaviour tempTraitBehaviour)
         {
             int index = alltempTraitBehaviorSprite.FindIndex(t => t.tempTraitBehaviour == tempTraitBehaviour);
             if (index != -1)

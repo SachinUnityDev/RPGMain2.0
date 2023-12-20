@@ -11,14 +11,40 @@ namespace Common
     {
         public override TempTraitName tempTraitName => TempTraitName.Hemophobia;
 
-        public override void OnApply(CharController charController)
+        public override void OnApply()
         {
-            this.charController = charController;
+            // When Last Drop of Blood: -3 to Utility Stats          
+            CharStatesService.Instance.OnCharStateStart += CharStateFX;
+            CharStatesService.Instance.OnCharStateEnd += CharStateEndFX;
         }
 
-        public override void OnTraitEnd()
+
+        void CharStateFX(CharStateModData charStateModData)
         {
+            if (charStateModData.charStateName != CharStateName.BleedLowDOT ||
+                charStateModData.charStateName != CharStateName.Bleeding) return;
+
+            if (charStateModData.effectedCharID != charController.charModel.charID) return;
+
             
+
         }
+
+        void CharStateEndFX(CharStateModData charStateModData)
+        {
+            if (charStateModData.charStateName != CharStateName.LastDropOfBlood) return;
+
+            if (charStateModData.effectedCharID != charController.charModel.charID) return;
+            if (allBuffIds.Count <= 0) return;
+            EndTrait();
+        }
+        public override void EndTrait()
+        {
+            base.EndTrait();
+            CharStatesService.Instance.OnCharStateStart -= CharStateFX;
+            CharStatesService.Instance.OnCharStateEnd -= CharStateEndFX;
+
+        }
+
     }
 }

@@ -9,13 +9,13 @@ namespace Common
     {
         public override TempTraitName tempTraitName => TempTraitName.Claustrophobia;
 
-        public override void OnApply(CharController charController)
-        {
-            this.charController = charController;
+        public override void OnApply()
+        {            
             // +60% fortitude loss in the sewers 
         }
-        public override void OnTraitEnd()
+        public override void EndTrait()
         {
+            base.EndTrait();
             // unsubscribe
         }
     }

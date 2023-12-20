@@ -42,7 +42,7 @@ namespace Common
         {
             if(charController.charModel.charID == charStateModData.effectedCharID)
                 if(charStateModData.charStateName == CharStateName.BurnLowDOT ||
-                    charStateModData.charStateName == CharStateName.BurnHighDOT)
+                    charStateModData.charStateName == CharStateName.Burning)
              
                     charController.ChangeStat(CauseType.CharState, (int)charStateName, charID
                                                        , StatName.fortitude, 12);

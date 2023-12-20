@@ -12,7 +12,7 @@ namespace Common
     }
 
 
-    public enum TraitBehaviour
+    public enum TempTraitBehaviour
     {
         None,
         Positive,

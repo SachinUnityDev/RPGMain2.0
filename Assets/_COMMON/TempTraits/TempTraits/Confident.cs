@@ -8,17 +8,15 @@ namespace Common
     {
         public override TempTraitName tempTraitName =>  TempTraitName.Confident;
 
-        public override void OnApply(CharController charController)
+        public override void OnApply()
         {
-            this.charController = charController;
-            //  +2 Morale
-            int charID = charController.charModel.charID;
+            //  +2 Morale         
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
                                                        charID, AttribName.morale, 2, TimeFrame.Infinity, -1, true);
         }
-        public override void OnTraitEnd()
+        public override void EndTrait()
         {
-            
+            base.EndTrait();
         }
     }
 

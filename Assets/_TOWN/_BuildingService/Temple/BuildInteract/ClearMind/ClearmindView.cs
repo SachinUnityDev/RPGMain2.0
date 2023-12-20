@@ -112,16 +112,16 @@ namespace Town
         {
             posMentalTraits.Clear(); 
             negMentalTraits.Clear();
-            foreach (TempTraitBuffData model in tempTraitController.alltempTraitApplied)
+            foreach (TempTraitBuffData model in tempTraitController.alltempTraitBuffData)
             {
                 TempTraitSO tempSO = TempTraitService.Instance.allTempTraitSO.GetTempTraitSO(model.tempTraitName); 
                 if(tempSO.tempTraitType == TempTraitType.Mental)
                 {
-                    if(tempSO.temptraitBehavior == TraitBehaviour.Positive)
+                    if(tempSO.temptraitBehavior == TempTraitBehaviour.Positive)
                     {
                         posMentalTraits.Add(model);
                     }
-                    if (tempSO.temptraitBehavior == TraitBehaviour.Negative)
+                    if (tempSO.temptraitBehavior == TempTraitBehaviour.Negative)
                     {
                         negMentalTraits.Add(model);
                     }

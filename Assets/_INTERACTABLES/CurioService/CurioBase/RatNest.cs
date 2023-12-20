@@ -52,7 +52,7 @@ namespace Quest
                 charCtrl.tempTraitController.ApplyTempTrait(CauseType.Curios, (int)curioName, charCtrl.charModel.charID
                                                          , TempTraitName.Nausea);
                 charCtrl.charStateController.ApplyCharStateBuff(CauseType.Curios, (int)curioName
-                                                         , charCtrl.charModel.charID, CharStateName.PoisonedHighDOT);
+                                                         , charCtrl.charModel.charID, CharStateName.Poisoned);
             }
             resultStr = "Well, no good would come out of vermins.";
             resultStr2 = "Sickness gained\n Poisoned";

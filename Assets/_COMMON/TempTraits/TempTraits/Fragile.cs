@@ -9,14 +9,14 @@ namespace Common
     {
         public override TempTraitName tempTraitName => TempTraitName.Fragile;
         //Always triggers Min Armor
-        public override void OnApply(CharController charController)
-        {
-            this.charController = charController;
-        }
-
-        public override void OnTraitEnd()
+        public override void OnApply()
         {
             
+        }
+
+        public override void EndTrait()
+        {
+            base.EndTrait();
         }
     }
 }

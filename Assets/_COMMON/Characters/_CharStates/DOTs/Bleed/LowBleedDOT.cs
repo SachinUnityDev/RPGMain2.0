@@ -23,17 +23,21 @@ namespace Common
                 strikerController = CombatService.Instance.currCharOnTurn;
                 strikerLvl = strikerController.charModel.charLvl;
             }
-            if (!charController.charStateController.HasCharDOTState(CharStateName.BurnHighDOT))
+            else
             {
+                strikerLvl = 0; 
+            }
+            //if (!charController.charStateController.HasCharDOTState(CharStateName.Burning))
+            //{
                 dmgPerRound = 3 + (strikerLvl / 4);
                 ApplyFX(); 
                 CombatEventService.Instance.OnSOT += ApplyFX;
                 CombatEventService.Instance.OnEOR1 += DOTTick;
-                if (charController.charStateController.HasCharDOTState(CharStateName.PoisonedLowDOT))
-                {
-                    OverLapRulePoison();
-                }
-            }
+                //if (charController.charStateController.HasCharDOTState(CharStateName.PoisonedLowDOT))
+                //{
+                //   // OverLapRulePoison();
+                //}
+            //}
         }
 
         void ApplyFX()
@@ -87,23 +91,23 @@ namespace Common
 
         }
 
-        void OverLapRulePoison()
-        {
-            if (charController.charStateController.HasCharState(CharStateName.PoisonedHighDOT))
-            {
-                int castTime = charController.charStateController.allCharBases
-                                    .Find(t => t.charStateName == CharStateName.PoisonedHighDOT).castTime;
-                charController.charStateController.allCharBases
-                                    .Find(t => t.charStateName == CharStateName.PoisonedHighDOT).IncrCastTime(1);
-            }
-            if (charController.charStateController.HasCharState(CharStateName.PoisonedLowDOT))
-            {
-                int castTime = charController.charStateController.allCharBases
-                                    .Find(t => t.charStateName == CharStateName.PoisonedLowDOT).castTime;
-                charController.charStateController.allCharBases
-                                    .Find(t => t.charStateName == CharStateName.PoisonedLowDOT).IncrCastTime(1);
-            }
-        }
+        //void OverLapRulePoison()
+        //{
+        //    if (charController.charStateController.HasCharState(CharStateName.Poisoned))
+        //    {
+        //        int castTime = charController.charStateController.allCharBases
+        //                            .Find(t => t.charStateName == CharStateName.Poisoned).castTime;
+        //        charController.charStateController.allCharBases
+        //                            .Find(t => t.charStateName == CharStateName.Poisoned).IncrCastTime(1);
+        //    }
+        //    if (charController.charStateController.HasCharState(CharStateName.PoisonedLowDOT))
+        //    {
+        //        int castTime = charController.charStateController.allCharBases
+        //                            .Find(t => t.charStateName == CharStateName.PoisonedLowDOT).castTime;
+        //        charController.charStateController.allCharBases
+        //                            .Find(t => t.charStateName == CharStateName.PoisonedLowDOT).IncrCastTime(1);
+        //    }
+        //}
         public override void EndState()
         {
             base.EndState();

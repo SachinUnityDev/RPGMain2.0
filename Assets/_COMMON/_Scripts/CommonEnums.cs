@@ -43,6 +43,7 @@ namespace Common
         Locked,
         UnLocked,
         Dead,
+        Fled,
     }
 
     public enum AvailOfChar
@@ -55,6 +56,7 @@ namespace Common
         UnAvailable_InParty,
         UnAvailable_WhereAboutsUnKnown, //is actually travelling 
         UnAvailable_Resting,
+        UnAvailable_InPartyLocked, 
     }
 
     public enum LandscapeNames
@@ -87,12 +89,12 @@ namespace Common
         NeverFlees,// 0 flee Combat
         Hard, // 30% flee combat
     }
-     public enum CharFleeState
-     {
-        None,  
-        FledCombat, 
-        FledQuest, 
-     }
+     //public enum CharFleeState
+     //{
+     //   None,  
+     //   FledCombat, 
+     //   FledQuest, 
+     //}
 
     public enum TimeState
     {

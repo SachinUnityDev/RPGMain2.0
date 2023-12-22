@@ -53,7 +53,7 @@ namespace Combat
         {
             if (chance.GetChance())
                 targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                                        , charController.charModel.charID, CharStateName.BleedLowDOT);
+                                        , charController.charModel.charID, CharStateName.Bleeding);
 
             if (20f.GetChance())
                 targetController.tempTraitController.ApplyTempTrait(CauseType.CharSkill, (int)skillName
@@ -114,7 +114,7 @@ namespace Combat
                     //    Debug.Log("CharState controller");
 
                     CharController targetCtrl = dyna.charGO.GetComponent<CharController>();
-                    if (targetCtrl.charStateController.HasCharDOTState(CharStateName.BleedLowDOT))
+                    if (targetCtrl.charStateController.HasCharState(CharStateName.Bleeding))
                     {
                         tempDyna = dyna; 
                     }

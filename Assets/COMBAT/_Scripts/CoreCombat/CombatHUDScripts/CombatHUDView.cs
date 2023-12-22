@@ -119,18 +119,19 @@ namespace Combat
             CombatEventService.Instance.OnSOR1 += RoundDisplay; 
             CombatEventService.Instance.OnCombatLoot += CombatResultDisplay;
 
-            CombatEventService.Instance.OnCharOnTurnSet
-                                                          += SetCharAttributesDisplay;
+            //CombatEventService.Instance.OnCharOnTurnSet
+            //                                              += SetCharAttributesDisplay;
 
-            CombatEventService.Instance.OnCharClicked += SetCharAttributesDisplay;
+            //CombatEventService.Instance.OnCharClicked += SetCharAttributesDisplay;
 
+            // to be kept 
             CombatEventService.Instance.OnCharOnTurnSet += SetSelectCharPortrait;
             CombatEventService.Instance.OnCharClicked += SetSelectCharPortrait;
 
-            CombatEventService.Instance.OnCharOnTurnSet += SetCombatStatesDisplay;
-            CombatEventService.Instance.OnCharClicked += SetCombatStatesDisplay;
-           // CharStatesPanelIconsClear();
-            CharStatesService.Instance.OnCharStateStart += UpdateCharStateChg;
+            // CombatEventService.Instance.OnCharOnTurnSet += SetCombatStatesDisplay;
+            // CombatEventService.Instance.OnCharClicked += SetCombatStatesDisplay;
+            //// CharStatesPanelIconsClear();
+            // CharStatesService.Instance.OnCharStateStart += UpdateCharStateChg;
             // CharStatesService.Instance.OnCharStateEnd += UpdateCharStateChg;
 
         }
@@ -164,58 +165,58 @@ namespace Combat
         }
 
         #region CharBOTTOM_PANEL
-        void UpdateCharStateChg(CharStateModData charStateModData)
-        {
-           // SetCombatStatesDisplay(); 
-        }
-        public void SetCombatStatesDisplay(CharController charController)
-        {
-            // get reference to Icon SO 
-            //CharController charController = CombatService.Instance.currCharClicked;
+        //void UpdateCharStateChg(CharStateModData charStateModData)
+        //{
+        //   // SetCombatStatesDisplay(); 
+        //}
+        //public void SetCombatStatesDisplay(CharController charController)
+        //{
+        //    // get reference to Icon SO 
+        //    //CharController charController = CombatService.Instance.currCharClicked;
 
-            //int k = 0;
+        //    //int k = 0;
 
-            //List<CharStatesBase> allCharStateBases = charController.charStateController.allCharBases;
-            //CharStatesPanelIconsClear();
+        //    //List<CharStatesBase> allCharStateBases = charController.charStateController.allCharBases;
+        //    //CharStatesPanelIconsClear();
 
-            //for (int i = 0; i < allCharStateBases.Count; i++)
-            //{
-            //    //CharStateModel stateSO = allStatesSO.GetCharStateSO(charInStates[i]);   
+        //    //for (int i = 0; i < allCharStateBases.Count; i++)
+        //    //{
+        //    //    //CharStateModel stateSO = allStatesSO.GetCharStateSO(charInStates[i]);   
                     
-            //    //    charStateIconSO.allCharStatesModels.Find(x => x.charStateName == charInStates[i]);
-            //    CharStateSO1 stateSO = CharStatesService.Instance.allCharStateSO.GetCharStateSO(allCharStateBases[i].charStateName);
-            //    //CharStateModel charStateModel = CharStatesService.Instance.allCharStateModel
-            //    //                                .Find(t => t.charStateName == charInStates[i].charStateName);
-            //    CharStateBehavior charStateType = stateSO.charStateBehavior; 
-            //    k = (charStateType == CharStateBehavior.Positive) ? 0 : 1;
+        //    //    //    charStateIconSO.allCharStatesModels.Find(x => x.charStateName == charInStates[i]);
+        //    //    CharStateSO1 stateSO = CharStatesService.Instance.allCharStateSO.GetCharStateSO(allCharStateBases[i].charStateName);
+        //    //    //CharStateModel charStateModel = CharStatesService.Instance.allCharStateModel
+        //    //    //                                .Find(t => t.charStateName == charInStates[i].charStateName);
+        //    //    CharStateBehavior charStateType = stateSO.charStateBehavior; 
+        //    //    k = (charStateType == CharStateBehavior.Positive) ? 0 : 1;
 
-            //   // Debug.Log("CHAR STATES " + data.charStateName);
-            //    if (i < 4)// level 1
-            //    {
-            //        Transform ImgTrans = CharStatesPanel.transform.GetChild(k).GetChild(0).GetChild(i);
-            //        ImgTrans.gameObject.SetActive(true);
-            //        ImgTrans.GetChild(0).GetComponent<Image>().sprite  = stateSO.iconSprite;
-            //        ImgTrans.GetComponent<CharStatePanelEvents>().charStatebase = allCharStateBases[i]; 
+        //    //   // Debug.Log("CHAR STATES " + data.charStateName);
+        //    //    if (i < 4)// level 1
+        //    //    {
+        //    //        Transform ImgTrans = CharStatesPanel.transform.GetChild(k).GetChild(0).GetChild(i);
+        //    //        ImgTrans.gameObject.SetActive(true);
+        //    //        ImgTrans.GetChild(0).GetComponent<Image>().sprite  = stateSO.iconSprite;
+        //    //        ImgTrans.GetComponent<CharStatePanelEvents>().charStatebase = allCharStateBases[i]; 
 
-            //    }
-            //    if (i >= 4 && i < 7)
-            //    {
-            //        Transform ImgTrans = CharStatesPanel.transform.GetChild(k).GetChild(0).GetChild(i - 4);
-            //        ImgTrans.gameObject.SetActive(true);
-            //        ImgTrans.GetChild(0).GetComponent<Image>().sprite = stateSO.iconSprite;
-            //        ImgTrans.GetComponent<CharStatePanelEvents>().charStatebase = allCharStateBases[i];
-            //    }
-            //    if (i >= 7 && i < 9)
-            //    {
-            //        Transform ImgTrans = CharStatesPanel.transform.GetChild(k).GetChild(0).GetChild(i - 7);
-            //        ImgTrans.gameObject.SetActive(true);
-            //        ImgTrans.GetChild(0).GetComponent<Image>().sprite = stateSO.iconSprite;
-            //        ImgTrans.GetComponent<CharStatePanelEvents>().charStatebase = allCharStateBases[i];
+        //    //    }
+        //    //    if (i >= 4 && i < 7)
+        //    //    {
+        //    //        Transform ImgTrans = CharStatesPanel.transform.GetChild(k).GetChild(0).GetChild(i - 4);
+        //    //        ImgTrans.gameObject.SetActive(true);
+        //    //        ImgTrans.GetChild(0).GetComponent<Image>().sprite = stateSO.iconSprite;
+        //    //        ImgTrans.GetComponent<CharStatePanelEvents>().charStatebase = allCharStateBases[i];
+        //    //    }
+        //    //    if (i >= 7 && i < 9)
+        //    //    {
+        //    //        Transform ImgTrans = CharStatesPanel.transform.GetChild(k).GetChild(0).GetChild(i - 7);
+        //    //        ImgTrans.gameObject.SetActive(true);
+        //    //        ImgTrans.GetChild(0).GetComponent<Image>().sprite = stateSO.iconSprite;
+        //    //        ImgTrans.GetComponent<CharStatePanelEvents>().charStatebase = allCharStateBases[i];
 
-            //    }
+        //    //    }
     
-           // }
-        }
+        //   // }
+        //}
         //void CharStatesPanelIconsClear()
         //{
         //    //for (int j = 0; j < CharStatesPanel.transform.childCount; j++)
@@ -358,103 +359,103 @@ namespace Combat
 
         #region CharAttributes
 
-        public void OnAttributesPanelTogglePressed()
-        {         
-            if (portraitToggleState == StatPanelToggleState.OnlyAttributes)
-                portraitToggleState = StatPanelToggleState.None;
-            else
-                portraitToggleState++;            
-            AttributePanelToggle(); 
-        }
+        //public void OnAttributesPanelTogglePressed()
+        //{         
+        //    //if (portraitToggleState == StatPanelToggleState.OnlyAttributes)
+        //    //    portraitToggleState = StatPanelToggleState.None;
+        //    //else
+        //    //    portraitToggleState++;            
+        //    //AttributePanelToggle(); 
+        //}
 
-        public void AttributePanelToggle()
-        {
-            RectTransform statPanelRect = AttributePanel.GetComponent<RectTransform>();
-            RectTransform combatPanelRect = CombatLogPanel.GetComponent<RectTransform>();
+        //public void AttributePanelToggle()
+        //{
+        //    RectTransform statPanelRect = AttributePanel.GetComponent<RectTransform>();
+        //    RectTransform combatPanelRect = CombatLogPanel.GetComponent<RectTransform>();
            
-            switch (portraitToggleState)
-            {
-                case StatPanelToggleState.None:
-                    statPanelRect.DOScaleX(0, animTime);
-                    combatPanelRect.DOScaleY(0, animTime);
+        //    switch (portraitToggleState)
+        //    {
+        //        case StatPanelToggleState.None:
+        //            statPanelRect.DOScaleX(0, animTime);
+        //            combatPanelRect.DOScaleY(0, animTime);
 
-                    break;
-                case StatPanelToggleState.OnlyLog:
-                    combatPanelRect.DOScaleY(1, animTime);
-                    break;
-                case StatPanelToggleState.LogPlusAttributes:
-                    statPanelRect.DOScaleX(1, animTime);
+        //            break;
+        //        case StatPanelToggleState.OnlyLog:
+        //            combatPanelRect.DOScaleY(1, animTime);
+        //            break;
+        //        case StatPanelToggleState.LogPlusAttributes:
+        //            statPanelRect.DOScaleX(1, animTime);
 
-                    break;
-                case StatPanelToggleState.OnlyAttributes:
-                    combatPanelRect.DOScaleY(0, animTime);
-                    break;
-                default:
-                    statPanelRect.DOScaleX(0, animTime);
-                    combatPanelRect.DOScaleY(0, animTime);
-                    break;
-            }
-
-
-        }
-
-        public void SetCharAttributesDisplay(CharController charController)
-        {
-
-            //for (int i = 1; i <= 16; i++)    // 6-21  // 0 in list "none"      // ICON STATS            
-            //{
-
-            //    int index = i;
-            //    SpriteData spriteData = null;
-
-            //    int j = statIconSO.allSpriteData.FindIndex(x => x.statName == (AttribName)index);
-            //    if (j != -1)
-            //        spriteData = statIconSO.allSpriteData[j];
-            //    else
-            //    {
-            //        Debug.LogError(" Attrib data missoing" + (AttribName)index);
-            //    }
+        //            break;
+        //        case StatPanelToggleState.OnlyAttributes:
+        //            combatPanelRect.DOScaleY(0, animTime);
+        //            break;
+        //        default:
+        //            statPanelRect.DOScaleX(0, animTime);
+        //            combatPanelRect.DOScaleY(0, animTime);
+        //            break;
+        //    }
 
 
-            //    // img from SO 
-            //    AttribData attribData = charController.GetAttrib((AttribName)index);  // current stats from ctrller               
+        //}
 
-            //    StatDisplayData statDisplayData = statDisplay.Find(x => x.statName == (AttribName)index); // reference list
-            //    statDisplayData.statDisplayGO.GetComponentInChildren<Image>().sprite = spriteData.statSprite;
+        //public void SetCharAttributesDisplay(CharController charController)
+        //{
 
-            //    PopUpAndHL popUpAndHL = statDisplayData.statDisplayGO.GetComponent<PopUpAndHL>();
-            //    popUpAndHL.spriteNormal = spriteData.statSprite;
-            //    popUpAndHL.spriteLit = spriteData.statSpriteLit;
-            //    popUpAndHL.statName = (AttribName)index;
+        //    //for (int i = 1; i <= 16; i++)    // 6-21  // 0 in list "none"      // ICON STATS            
+        //    //{
 
+        //    //    int index = i;
+        //    //    SpriteData spriteData = null;
 
-            //    popUpAndHL.desc = attribData.desc;
-            //    string statStr;
-            //    if (((AttribName)index).IsAttribDamage())
-            //    {
-            //        float dmgMin = charController.GetAttrib(AttribName.dmgMin).currValue;
-            //        float dmgMax = charController.GetAttrib(AttribName.dmgMax).currValue;
-
-            //        statStr = dmgMin + "-" + dmgMax;
-            //    }
-            //    else if (((AttribName)index).IsAttribArmor())
-            //    {
-            //        float armorMin = charController.GetAttrib(AttribName.armorMin).currValue;
-            //        float armorMax = charController.GetAttrib(AttribName.armorMax).currValue;
-
-            //        statStr = armorMin + "-" + armorMax;
-            //    }
-            //    else
-            //    {
-            //        float val = attribData.currValue;
-            //        statStr = val.ToString();
-            //    }
-            //    statDisplayData.statDisplayGO.GetComponentInChildren<TextMeshProUGUI>().text = statStr;
-            //    statDisplayData.statDisplayGO.GetComponentInChildren<TextMeshProUGUI>().alignment = TextAlignmentOptions.Center;
+        //    //    int j = statIconSO.allSpriteData.FindIndex(x => x.statName == (AttribName)index);
+        //    //    if (j != -1)
+        //    //        spriteData = statIconSO.allSpriteData[j];
+        //    //    else
+        //    //    {
+        //    //        Debug.LogError(" Attrib data missoing" + (AttribName)index);
+        //    //    }
 
 
-            //}
-        }
+        //    //    // img from SO 
+        //    //    AttribData attribData = charController.GetAttrib((AttribName)index);  // current stats from ctrller               
+
+        //    //    StatDisplayData statDisplayData = statDisplay.Find(x => x.statName == (AttribName)index); // reference list
+        //    //    statDisplayData.statDisplayGO.GetComponentInChildren<Image>().sprite = spriteData.statSprite;
+
+        //    //    PopUpAndHL popUpAndHL = statDisplayData.statDisplayGO.GetComponent<PopUpAndHL>();
+        //    //    popUpAndHL.spriteNormal = spriteData.statSprite;
+        //    //    popUpAndHL.spriteLit = spriteData.statSpriteLit;
+        //    //    popUpAndHL.statName = (AttribName)index;
+
+
+        //    //    popUpAndHL.desc = attribData.desc;
+        //    //    string statStr;
+        //    //    if (((AttribName)index).IsAttribDamage())
+        //    //    {
+        //    //        float dmgMin = charController.GetAttrib(AttribName.dmgMin).currValue;
+        //    //        float dmgMax = charController.GetAttrib(AttribName.dmgMax).currValue;
+
+        //    //        statStr = dmgMin + "-" + dmgMax;
+        //    //    }
+        //    //    else if (((AttribName)index).IsAttribArmor())
+        //    //    {
+        //    //        float armorMin = charController.GetAttrib(AttribName.armorMin).currValue;
+        //    //        float armorMax = charController.GetAttrib(AttribName.armorMax).currValue;
+
+        //    //        statStr = armorMin + "-" + armorMax;
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        float val = attribData.currValue;
+        //    //        statStr = val.ToString();
+        //    //    }
+        //    //    statDisplayData.statDisplayGO.GetComponentInChildren<TextMeshProUGUI>().text = statStr;
+        //    //    statDisplayData.statDisplayGO.GetComponentInChildren<TextMeshProUGUI>().alignment = TextAlignmentOptions.Center;
+
+
+        //    //}
+        //}
 
         //public void SetBuffDebuffList(CharController charController)
         //{

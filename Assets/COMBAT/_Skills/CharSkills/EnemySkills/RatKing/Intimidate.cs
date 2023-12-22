@@ -97,7 +97,7 @@ namespace Combat
 
                     AttribData focusData = targetCtrl.GetAttrib(AttribName.focus);
 
-                    if (targetCtrl.charStateController.HasCharDOTState(CharStateName.Fearful))
+                    if (targetCtrl.charStateController.HasCharState(CharStateName.Fearful))
                     {
                         tempDyna = dyna;
                     }

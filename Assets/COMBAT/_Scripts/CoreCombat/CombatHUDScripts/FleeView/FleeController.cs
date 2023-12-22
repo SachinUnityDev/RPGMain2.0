@@ -13,10 +13,16 @@ namespace Common
         CharController charController;
         [SerializeField] bool isChkDone = false; 
         [SerializeField] bool combatFleeResult = false;
+
+        [Header(" On Quest flee")]
+        int currDayCount = 0;
+        int netDaysFled = 0; 
         void Start()
         {
           
             CombatEventService.Instance.OnSOC += OnSOC;
+            charController = GetComponent<CharController>();
+
         }
         private void OnDisable()
         {
@@ -34,7 +40,32 @@ namespace Common
             isChkDone = true; 
             return combatFleeResult;
         }
+        #region ON QUEST FLED 
 
+        public void InitOnDayFledQ(int netDaysFled)
+        {
+            currDayCount = 0;
+            this.netDaysFled = netDaysFled;
+            CalendarService.Instance.OnStartOfCalDay += OnFledDayTick;
+            charController.charModel.availOfChar = AvailOfChar.UnAvailable_WhereAboutsUnKnown;
+        }
+        void OnFledDayTick(int dayInGame)
+        {
+            if (netDaysFled <= currDayCount)
+            { // available at base loc and Unlocked in roster
+                charController.charModel.availOfChar = AvailOfChar.Available;
+                charController.charModel.stateOfChar = StateOfChar.UnLocked; 
+                charController.charModel.currCharLoc = charController.charModel.baseCharLoc;
+                CalendarService.Instance.OnStartOfCalDay -= OnFledDayTick;
+            }
+            else
+            {
+                currDayCount++; 
+            }
+        }
+
+
+        #endregion
         void OnSOC()
         {
             isChkDone= false;

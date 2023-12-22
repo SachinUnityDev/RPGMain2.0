@@ -32,9 +32,9 @@ namespace Combat
         }
         public override void ApplyFX2()
         {
-            charController.charStateController.ClearDOT(CharStateName.BleedLowDOT);
-            charController.charStateController.ClearDOT(CharStateName.PoisonedLowDOT);
-            charController.charStateController.ClearDOT(CharStateName.BurnLowDOT);
+            charController.charStateController.RemoveCharState(CharStateName.Bleeding);
+            charController.charStateController.RemoveCharState(CharStateName.Poisoned);
+            charController.charStateController.RemoveCharState(CharStateName.Burning);
         }
 
         public override void ApplyFX3()

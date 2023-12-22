@@ -28,11 +28,11 @@ namespace Combat
         {
             if (targetController == null) return;
             if (targetController.charModel.raceType == RaceType.Animal)
-                targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                          , charController.charModel.charID, CharStateName.Bleeding);
+                targetController.damageController.ApplyHighBleed(CauseType.CharSkill, (int)skillName
+                          , charController.charModel.charID);
             else if(50f.GetChance())
-                targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                         , charController.charModel.charID, CharStateName.BleedLowDOT);
+                targetController.damageController.ApplyLowBleed(CauseType.CharSkill, (int)skillName
+                         , charController.charModel.charID);
         }
 
         public override void ApplyFX2()

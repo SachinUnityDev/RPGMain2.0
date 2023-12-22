@@ -18,7 +18,7 @@ namespace Common
       
             //  END conditions .. TO BE Corrected 
             //CombatEventService.Instance.OnDeathInCombat += DecMorNFoc4Safriman;
-            CombatEventService.Instance.OnFleeInCombat += DecMorNFoc4Safriman;
+            CombatEventService.Instance.OnCombatFlee += DecMorNFoc4Safriman;
             CombatEventService.Instance.OnCombatRejoin += DecMorNFoc4ReJoinerSafriman; 
 
             //QuestEventService.Instance.OnDeathInQuest += DecMorNFoc4Safriman;

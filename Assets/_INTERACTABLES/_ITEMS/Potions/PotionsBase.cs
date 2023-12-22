@@ -21,6 +21,7 @@ namespace Interactables
         abstract void InitItem(int itemId, int maxInvStackSize);      
         abstract void OnHoverItem();
         List<int> allBuffs  { get; set; }
+      
     }
 
 

@@ -33,9 +33,9 @@ namespace Common
                   , charID, AttribName.airRes, -20, timeFrame, castTime, false);
             allBuffIds.Add(buffID);
 
-            List<int> immuneBuffIDs = charController.charStateController.ApplyDOTImmunityBuff(CauseType.CharState, (int)charStateName
+            int immuneBuffID = charController.charStateController.ApplyImmunityBuff(CauseType.CharState, (int)charStateName
                                                     , charID, CharStateName.Poisoned, timeFrame, castTime);
-            allImmunityBuffs.AddRange(immuneBuffIDs);
+            allImmunityBuffs.Add(immuneBuffID);
 
             CombatEventService.Instance.OnPotionConsumedInCombat += OnPotionConsumed; 
 

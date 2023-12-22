@@ -22,10 +22,16 @@ namespace Interactables
 
         public List<int> allBuffs { get; set; } = new List<int>();
         public Currency currency { get; set; }
+        
+
+        public void OnHoverItem()
+        {
+        }
         public void InitItem(int itemId, int maxInvStackSize)
         {
             this.itemId = itemId;
             this.maxInvStackSize = maxInvStackSize;
+            
         }
         public void ClearSocketBuffs()
         {
@@ -33,11 +39,6 @@ namespace Interactables
             {
                 charController.buffController.RemoveBuff(buffID);
             }
-        }
-
-        public void OnHoverItem()
-        {
-
         }
 
         public void OnSocketed()

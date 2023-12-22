@@ -58,7 +58,7 @@ namespace Common
         public ArcheType archeType;
         [Header("MISC STATS")]
         public FleeBehaviour fleeBehaviour;
-        public CharFleeState charFleeState;
+        //public CharFleeState charFleeState;
 
         [Header("DEFAULT PROVISION")]
         public List<ItemDataWithQtyNFameType> provisionItems = new List<ItemDataWithQtyNFameType>();

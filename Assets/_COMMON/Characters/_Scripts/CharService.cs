@@ -16,7 +16,8 @@ namespace Common
         public event Action OnPartyLocked; 
         public event Action OnPartyDisbanded;
 
-        public event Action<CharFleeState, CharNames> OnCharFlee; 
+        public event Action<CharController> OnCharFleeCombat;
+        public event Action<CharController> OnCharFleeQuest;
 
         public bool isPartyLocked = false; 
 
@@ -36,6 +37,7 @@ namespace Common
 
         [Header("ALL Loaded char models")]
         public List <CharModel> allCharModels = new List<CharModel>();// to be populated by charCtrl
+        public CharMainModel charMainModel; 
 
         [Header("GO list")]
         public List<GameObject> allyInPlay;       
@@ -57,10 +59,12 @@ namespace Common
         public List<CharController> allCharsInPartyLocked = new List<CharController>(); // on party Locked and Set 
         public List<CharController> allCharInCombat =new List<CharController>(); 
         public List<CharController> charDiedinLastTurn = new List<CharController>();
+
+        [Header(" Fled list")]
+        public List<CharController> allCharfledQ = new List<CharController>();
+
         [Header("Character Pos")]
         public Vector3 spawnPos = new Vector3(-100, 0, 0);
-        
-        
 
         [Header(" Game Init ")]
         public bool isNewGInitDone = false;
@@ -80,9 +84,8 @@ namespace Common
 
             //  if(SaveService.Instance.)
             List<CharNames> chars2Spawn = new List<CharNames> { CharNames.Abbas
-               , CharNames.Baran, CharNames.Rayyan, CharNames.Cahyo
-                };
-
+                                 , CharNames.Baran, CharNames.Rayyan, CharNames.Cahyo };
+            charMainModel= new CharMainModel(); 
             foreach (CharNames charName in chars2Spawn)
             {
                 SpawnCompanions(charName);
@@ -173,14 +176,25 @@ namespace Common
             OnPartyDisbanded?.Invoke();
         }
 
-        public void On_CharFlee(CharFleeState charFleeState, CharController charController)
+        public void On_CharFleeCombat(CharController charController)
         {
-            CharNames charName = charController.charModel.charName;
-            OnCharFlee?.Invoke(charFleeState, charName); 
+            ToggleViewForChar(charController, false); 
+            allCharInCombat.Remove(charController);
+            OnCharFleeCombat?.Invoke(charController); 
         }
 
-
+        public void On_CharFleeQuest(CharController charController)
+        {
+            ToggleViewForChar(charController, false);
+            allCharsInPartyLocked.Remove(charController);
+            charController.charModel.stateOfChar = StateOfChar.Fled;
+            charController.fleeController.InitOnDayFledQ(2); // fled for 2 days 
+            allCharfledQ.Add(charController);
+            OnCharFleeQuest?.Invoke(charController);
+        }
         #endregion
+
+        #region CHAR SPWAN AND PARTY LOCK UNLOCK
         public CharController SpawnCompanions(CharNames charName)  // character factory 
         {
            // CharController charController = GetCharCtrlWithName(charName);
@@ -231,24 +245,7 @@ namespace Common
           //  }
         
         }
-        public List<int> ApplyBuffOnPartyExceptSelf(CauseType causeType, int causeName, int causeByCharID,
-                                    AttribName statName, int value, TimeFrame timeFrame, int netTime, bool isBuff, CharMode charMode)
-        {
-            List<int> grpBuffIDs = new List<int>();
-            foreach (CharController charController in CharService.Instance.allCharsInPartyLocked)
-            {
-                if(charController.charModel.charMode== charMode && charController.charModel.charID != causeByCharID)
-                {
-                    int buffID = 
-                    charController.buffController.ApplyBuff(causeType, causeName, causeByCharID
-                                                  , statName, value, timeFrame, netTime, isBuff);
-                    grpBuffIDs.Add(buffID);
-                }   
-            }
-            return grpBuffIDs;
-        }
     
-       
         public void On_CharAddToParty(CharController charController)
         {
             if (allCharsInPartyLocked.Any(t => t.charModel.charID == charController.charModel.charID)) return;
@@ -256,7 +253,26 @@ namespace Common
             allCharsInPartyLocked.Add(charController);    
             OnCharAddedToParty?.Invoke(charController);
         }
-    
+
+        #endregion
+
+        public List<int> ApplyBuffOnPartyExceptSelf(CauseType causeType, int causeName, int causeByCharID,
+                                  AttribName statName, int value, TimeFrame timeFrame, int netTime, bool isBuff, CharMode charMode)
+        {
+            List<int> grpBuffIDs = new List<int>();
+            foreach (CharController charController in CharService.Instance.allCharsInPartyLocked)
+            {
+                if (charController.charModel.charMode == charMode && charController.charModel.charID != causeByCharID)
+                {
+                    int buffID =
+                    charController.buffController.ApplyBuff(causeType, causeName, causeByCharID
+                                                  , statName, value, timeFrame, netTime, isBuff);
+                    grpBuffIDs.Add(buffID);
+                }
+            }
+            return grpBuffIDs;
+        }
+        #region SAVE AND LOAD 
         public void LoadCharControllers(CharModel charModel)
         {
             //CharController charCtrl = null;
@@ -346,7 +362,9 @@ namespace Common
             }    
         }
 
-#region ALLY AND ENEMY COMMON CONTROLLERS 
+        #endregion
+
+        #region TOGGLE COLLIDERS 
 
         public void ToggleCharColliders(GameObject targetGO)
         {
@@ -386,11 +404,15 @@ namespace Common
 
 
         }
-        public GameObject GetGO4CharID(int charID)
+
+        public void ToggleViewForChar(CharController charController,   bool showChar)
         {
-            return null; 
+            charController.transform.GetChild(0).gameObject.SetActive(showChar);
+            charController.transform.GetChild(2).gameObject.SetActive(showChar);
         }
 
+
+        #endregion
 
         #region GETTER
         public CharController HasHighestStat(StatName _statNames, CharMode _charMode)
@@ -438,6 +460,7 @@ namespace Common
 
         #endregion
 
+        #region CHAR DEATH 
         public void UpdateOnDeath()
         {
             if (charDiedinLastTurn.Count < 1) return;
@@ -459,6 +482,7 @@ namespace Common
                 {
                     // enemyInCombatPlay.Remove(charGO);
                     allCharInCombat.Remove(charCtrl); 
+
                     //enemyInPlayControllers.Remove(charCtrl);
                     //if (enemyInPlayControllers.Count <= 0)  // end of combat
                     //{
@@ -468,18 +492,24 @@ namespace Common
                 charsInPlay.Remove(charGO);
                 charsInPlayControllers.Remove(charCtrl);
                 GridService.Instance.UpdateGridOnCharDeath(charCtrl);  // subscribe to event once tested
-                On_CharDeath(charCtrl);
-               // CombatService.Instance.roundController.ReorderAfterCharDeath(charCtrl);
+
+                CombatService.Instance.roundController.ReorderAfterCharDeathOnEOT(charCtrl);
+                
             }
 
             charDiedinLastTurn.Clear();
         }
+        public void On_CharDeath(CharController _charController, int causeByCharID)
+        {
+            if (GameService.Instance.gameModel.gameState != GameState.InCombat) return; 
+                OnCharDeath?.Invoke(_charController);
 
-        public void On_CharDeath(CharController _charController)
-        {         
-            OnCharDeath?.Invoke(_charController);
+            charDiedinLastTurn.Add(_charController);
+
         }
+        #endregion 
 
+        #region GET NAME STRINTGS
         public string GetCharName(CharNames charName)
         {
             CharacterSO charSO = CharService.Instance.allCharSO.GetAllySO(charName);
@@ -499,14 +529,8 @@ namespace Common
         }
         #endregion
 
-        #region Change Char State
+      
 
-        public void CharStateChg(CharNames charName, StateOfChar stateOfChar)
-        {
-           CharController charController = GetCharCtrlWithName(charName);
-            charController.charModel.stateOfChar= stateOfChar;  
-        }
-        #endregion
 
 
         private void Update()

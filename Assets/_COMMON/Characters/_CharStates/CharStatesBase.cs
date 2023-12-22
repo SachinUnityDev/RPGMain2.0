@@ -138,12 +138,10 @@ namespace Common
         protected virtual void CombatTick()
         {          
             // on EOC all DOT are destroyed
-            if(charStateName == CharStateName.Burning || charStateName== CharStateName.BurnLowDOT ||
-               charStateName == CharStateName.Bleeding || charStateName == CharStateName.BleedLowDOT ||
-               charStateName == CharStateName.Poisoned || charStateName == CharStateName.PoisonedLowDOT
-               || charStateName == CharStateName.FirstBlood || charStateName == CharStateName.Fearful
-               || charStateName == CharStateName.Faithful || charStateName == CharStateName.CheatedDeath
-               || charStateName == CharStateName.FlatFooted)
+            if(charStateName == CharStateName.Burning || charStateName == CharStateName.Bleeding || 
+               charStateName == CharStateName.Poisoned || charStateName == CharStateName.FirstBlood 
+               || charStateName == CharStateName.Fearful || charStateName == CharStateName.Faithful 
+               || charStateName == CharStateName.CheatedDeath || charStateName == CharStateName.FlatFooted)
                  EndState(); 
 
             if(timeFrame == TimeFrame.EndOfCombat)

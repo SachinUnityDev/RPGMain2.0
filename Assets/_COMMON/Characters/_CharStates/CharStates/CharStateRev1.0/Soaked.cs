@@ -27,13 +27,12 @@ namespace Common
                      , charID, AttribName.airRes, -40, timeFrame, castTime, false);
             allBuffIds.Add(buffID);
 
-        
-            List<int> immuneDOTBuffIDs =     
-            charController.charStateController
-                .ApplyDOTImmunityBuff(CauseType.CharState, (int)charStateName
-                   , charID, CharStateName.Burning, timeFrame, castTime, false);
 
-            allImmunityBuffs.AddRange(immuneDOTBuffIDs);
+            buffID =     
+            charController.charStateController.ApplyImmunityBuff(CauseType.CharState, (int)charStateName
+                   , charID, CharStateName.Burning, timeFrame, castTime);
+
+            allImmunityBuffs.Add(buffID);
         }
 
         public override void StateApplyVFX()

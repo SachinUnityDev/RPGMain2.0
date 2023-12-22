@@ -21,7 +21,7 @@ namespace Common
             CombatEventService.Instance.OnCombatRejoin += DecMor4RejoinerKhugarian;
 
             QuestEventService.Instance.OnDeathInQuest += IncMoraleKhugarian;
-            QuestEventService.Instance.OnFleeInQuest += IncMoraleKhugarian; 
+            QuestEventService.Instance.OnQuestFlee += IncMoraleKhugarian; 
 
         }
 

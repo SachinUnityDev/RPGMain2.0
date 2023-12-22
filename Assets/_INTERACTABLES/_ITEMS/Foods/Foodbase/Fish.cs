@@ -18,7 +18,6 @@ namespace Interactables
 
         public void OnHoverItem()
         {
-
         }
         public void InitItem(int itemId, int maxInvStackSize)
         {
@@ -39,7 +38,7 @@ namespace Interactables
             if (chance1.GetChance())
             {
                 charController.charStateController.ApplyCharStateBuff(CauseType.Food, (int)foodName
-                    , charController.charModel.charID, CharStateName.PoisonedLowDOT, TimeFrame.Infinity, -1);
+                    , charController.charModel.charID, CharStateName.Poisoned, foodSO.timeFrame, 3);
             }
         }
 

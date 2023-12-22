@@ -39,12 +39,11 @@ namespace Interactables
             string str = $"+1 Morale for one day ";
             Debug.Log("Beer  init" + str);
             allDisplayStr.Add(str);
+         
         }
         public void OnHoverItem()
         {
-
         }
-
         public override void OnDrink()
         {
             // +1 morale for one day 

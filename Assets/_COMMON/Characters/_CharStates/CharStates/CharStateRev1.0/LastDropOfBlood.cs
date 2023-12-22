@@ -23,24 +23,36 @@ namespace Common
         public override void StateApplyFX()
         {
             if (charController.charModel.orgCharMode == CharMode.Enemy) return;
-            chances = new List<float>() { 60f, chance, 100-(chance +60) };
+            charController.OnStatChg += SkillAttackChks; 
+        }
+        void SkillAttackChks(StatModData statModData)
+        {
+            if (statModData.statModified != StatName.health) return;
+            if (statModData.causeType != CauseType.CharSkill) return; 
+            LastDropChks();
+        }
+        void LastDropChks()
+        {
+            chances = new List<float>() { 60f, chance, 100 - (chance + 60) };
             switch (chances.GetChanceFrmList())
             {
                 case 0:
                     charController.ChangeStat(CauseType.CharState, (int)charStateName, charController.charModel.charID
-                                                                               , StatName.fortitude, -6f);                    
+                                                                               , StatName.fortitude, -6f);
                     break;
                 case 1:
-                    charController.damageController.CheatDeath(); 
+                    if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+                        charController.damageController.CheatDeath();
                     break;
                 case 2:
-                    CharService.Instance.On_CharDeath(charController);
+                    if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+                        CharService.Instance.On_CharDeath(charController, -1);
                     break;
                 default:
                     break;
             }
-
         }
+
 
         public override void StateApplyVFX()
         {
@@ -57,6 +69,12 @@ namespace Common
             allStateFxStrs.Add(str2);
             str3 = "May die";
             allStateFxStrs.Add(str3);
+        }
+        public override void EndState()
+        {
+            base.EndState();
+            charController.OnStatChg -= SkillAttackChks;
+
         }
     }
 }

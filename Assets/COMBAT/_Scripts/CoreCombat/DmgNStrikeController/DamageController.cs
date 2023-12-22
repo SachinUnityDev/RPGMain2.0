@@ -124,19 +124,16 @@ namespace Combat
             return dmgNew;
         }
 
-        public void ApplyDamage(CharController striker, CauseType causeType, int causeName
-                                    , DamageType _dmgType, float dmgPercentORVal, SkillInclination skillInclination = SkillInclination.None, bool ignoreArmorNRes = false
-                                    , bool isTrueStrike = false)
+        public void ApplyDamage(CharController striker, CauseType causeType, int causeName, DamageType _dmgType
+                                , float dmgPercentORVal, SkillInclination skillInclination = SkillInclination.None
+                                , bool ignoreArmorNRes = false, bool isTrueStrike = false)
         {
             this.striker = striker;
             AttackType attackType =
                             SkillService.Instance.GetSkillAttackType((SkillNames)causeName);
-            // immune to skills Incli
-
+            
             if (dmgModel.allImmune2Skills.Any(t => t == skillInclination))
                 return; 
-            
-            
             // is dodge 
 
             if(!(causeType == CauseType.ThornsAttack))
@@ -174,7 +171,6 @@ namespace Combat
 
             float dmg = (float)(UnityEngine.Random.Range(dmgSDMin.currValue, dmgSDMax.currValue) * (percentDmg / 100f));
             int strikerID = striker.charModel.charID;
-           // Debug.Log("MIN AND MAX RANGE " + dmgSDMin.currValue + dmgSDMax.currValue + "DAMAGE " + dmg);
 
 
             switch (_dmgType)
@@ -258,10 +254,8 @@ namespace Combat
                     charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -dmgPercentORVal);
                     break;
                 case DamageType.Blank1:
-
                     break;
                 case DamageType.Blank2:
-
                     break;
                 case DamageType.Blank3:
                     break;
@@ -273,10 +267,7 @@ namespace Combat
                     break;
                 case DamageType.StaminaDmg: // no resistance, no armor etc ok no substractions for stamina , Fort and Pure
                     charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.stamina, -dmgPercentORVal);
-                    break;
-                //case DamageType.HealthDmg:
-                //    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatsName.health, -dmgPercentVal);
-                //    break; 
+                    break;     
                 default:
                     break;
             }
@@ -311,7 +302,6 @@ namespace Combat
                             c.ChangeStat(CauseType.CriticalStrike, 0, striker.charModel.charID, StatName.fortitude, +3);
                     }
                 }
-               
             }
             if (strikeType == StrikeType.Feeble)
             {
@@ -463,10 +453,7 @@ namespace Combat
 
         #region BLEED , BURN AND POISONED DOT
 
-        
-
-        public void ApplyLowBleed(CauseType causeType, int causeName, int causeByCharID
-                    , CharStateName charStateName)
+        public void ApplyLowBleed(CauseType causeType, int causeName, int causeByCharID)
         {
 
             if (charController.charStateController.HasCharState(CharStateName.Poisoned))
@@ -478,6 +465,102 @@ namespace Combat
             }
             charController.charStateController.ApplyCharStateBuff(causeType,causeName, causeByCharID
                                                     , CharStateName.Bleeding, TimeFrame.EndOfRound, 2); 
+        }
+        public void ApplyHighBleed(CauseType causeType, int causeName, int causeByCharID)
+        {
+
+            if (charController.charStateController.HasCharState(CharStateName.Poisoned))
+            {
+                int castTime = charController.charStateController.allCharBases
+                                    .Find(t => t.charStateName == CharStateName.Poisoned).castTime;
+                charController.charStateController.allCharBases
+                                    .Find(t => t.charStateName == CharStateName.Poisoned).IncrCastTime(1);
+            }
+            if (charController.charStateController.HasCharState(CharStateName.Bleeding))
+            {
+                charController.ChangeStat(causeType, (int)causeName, 
+                                            charController.charModel.charID, StatName.fortitude, -4);
+            }           
+            charController.charStateController.ApplyCharStateBuff(causeType, causeName, causeByCharID
+                                                    , CharStateName.Bleeding, TimeFrame.EndOfRound, 4);
+        }
+        public void ApplyLowPoison(CauseType causeType, int causeName, int causeByCharID)
+        {
+            charController.charStateController.ApplyCharStateBuff(causeType, causeName, causeByCharID
+                                                    , CharStateName.Poisoned, TimeFrame.EndOfRound, 2);
+
+            if (charController.charStateController.HasCharState(CharStateName.Bleeding))
+            {
+                charController.ChangeStat(causeType, (int)causeName,
+                               charController.charModel.charID, StatName.stamina, -4);
+            }
+
+            if (charController.charStateController.HasCharState(CharStateName.Burning))
+            {
+                if (GameService.Instance.gameModel.gameState != GameState.InCombat) return; 
+
+                CharController strikeCtrl = CombatService.Instance.currCharOnTurn; 
+                ApplyDamage(strikeCtrl, causeType, (int)causeName, DamageType.Earth, 40f);
+            }
+        }
+        public void ApplyHighPoison(CauseType causeType, int causeName, int causeByCharID)
+        {
+            charController.charStateController.ApplyCharStateBuff(causeType, causeName, causeByCharID
+                                                    , CharStateName.Poisoned, TimeFrame.EndOfRound, 3);
+
+            if (charController.charStateController.HasCharState(CharStateName.Bleeding))
+            {
+                charController.ChangeStat(causeType, (int)causeName,
+                               charController.charModel.charID, StatName.stamina, -6);
+            }
+
+            if (charController.charStateController.HasCharState(CharStateName.Burning))
+            {
+                if (GameService.Instance.gameModel.gameState != GameState.InCombat) return;
+
+                CharController strikeCtrl = CombatService.Instance.currCharOnTurn;
+                ApplyDamage(strikeCtrl, causeType, (int)causeName, DamageType.Earth, 60f);
+            }
+        }
+
+        public void ApplyLowBurn(CauseType causeType, int causeName, int causeByCharID)
+        {
+            charController.charStateController.ApplyCharStateBuff(causeType, causeName, causeByCharID
+                                                    , CharStateName.Burning, TimeFrame.EndOfRound,2);
+
+            if (charController.charStateController.HasCharState(CharStateName.Bleeding))
+            {
+                int castTime = charController.charStateController.allCharBases
+                                    .Find(t => t.charStateName == CharStateName.Bleeding).castTime;
+                charController.charStateController.allCharBases
+                                    .Find(t => t.charStateName == CharStateName.Bleeding).IncrCastTime(-1);                
+            }
+
+            if (charController.charStateController.HasCharState(CharStateName.Poisoned))
+            {
+                if (GameService.Instance.gameModel.gameState != GameState.InCombat) return;
+
+                CharController strikeCtrl = CombatService.Instance.currCharOnTurn;
+                ApplyDamage(strikeCtrl, causeType, (int)causeName, DamageType.Fire, 50f);
+            }
+        }
+        public void ApplyHighBurn(CauseType causeType, int causeName, int causeByCharID)
+        {
+            charController.charStateController.ApplyCharStateBuff(causeType, causeName, causeByCharID
+                                                    , CharStateName.Burning, TimeFrame.EndOfRound, 4);
+
+            if (charController.charStateController.HasCharState(CharStateName.Bleeding))
+            {
+                charController.charStateController.RemoveCharState(CharStateName.Bleeding);   
+            }
+
+            if (charController.charStateController.HasCharState(CharStateName.Poisoned))
+            {
+                if (GameService.Instance.gameModel.gameState != GameState.InCombat) return;
+
+                CharController strikeCtrl = CombatService.Instance.currCharOnTurn;
+                ApplyDamage(strikeCtrl, causeType, (int)causeName, DamageType.Fire, 90f);
+            }
         }
 
 

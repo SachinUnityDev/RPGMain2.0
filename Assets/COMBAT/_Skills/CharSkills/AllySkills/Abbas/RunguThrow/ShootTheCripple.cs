@@ -29,10 +29,10 @@ namespace Combat
         public override void ApplyFX1()
         {
             if (targetController == null) return; 
-            if(targetController.charStateController.HasCharDOTState(CharStateName.Confused)
-                || targetController.charStateController.HasCharDOTState(CharStateName.Feebleminded)
-                || targetController.charStateController.HasCharDOTState(CharStateName.Despaired)
-                || targetController.charStateController.HasCharDOTState(CharStateName.Rooted))
+            if(targetController.charStateController.HasCharState(CharStateName.Confused)
+                || targetController.charStateController.HasCharState(CharStateName.Feebleminded)
+                || targetController.charStateController.HasCharState(CharStateName.Despaired)
+                || targetController.charStateController.HasCharState(CharStateName.Rooted))
             {
                 ApplyDmg(true);
             }

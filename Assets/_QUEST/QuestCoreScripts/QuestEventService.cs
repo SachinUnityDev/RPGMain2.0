@@ -13,7 +13,7 @@ namespace Quest
         public event Action OnSOQ; 
         public event Action OnEOQ;
 
-        public event Action<CharController> OnFleeInQuest;
+        public event Action<CharController> OnQuestFlee;
         public event Action<CharController> OnDeathInQuest;
 
         // Quest => town it should reset the QuestCombatMode to NONE 
@@ -34,17 +34,17 @@ namespace Quest
         //{
         //    OnDeathInQuest?.Invoke(charController); 
         //}
-        //public void On_FleeInQuest(CharController charController)
-        //{
-        //    OnFleeInQuest?.Invoke(charController);
-        //}
+        public void On_FleeInQuest(CharController charController)
+        {
+            OnQuestFlee?.Invoke(charController);
+        }
 
         //public void On_PartySet(List<CharNames> allyPartyList)
         //{
         //    allyPartyList.ForEach(t => CharService.Instance.SpawnCompanions(t)); 
         //}
 
-  
+
         private void Update()
         {
             //if (Input.GetKeyDown(KeyCode.Q))

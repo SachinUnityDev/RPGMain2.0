@@ -49,8 +49,21 @@ namespace Common
 
             CombatEventService.Instance.OnCharOnTurnSet += LoseAP;
             charController.ClampStatToggle(StatName.fortitude, true);
-
+            charController.OnStatChg += FortChkOnStatDecr; 
         }
+
+        void FortChkOnStatDecr(StatModData statModData)
+        {
+            if (statModData.statModified != StatName.fortitude) return;
+            if (statModData.valChg > 0) return;
+            FortChks(); 
+            
+        }
+        void FortChks()
+        {
+            // Flee Combat /// flee quest // nothing happens
+        }
+
         void LoseAP(CharController charController)
         {
             if (charController.charModel.charID == charID)
@@ -65,6 +78,7 @@ namespace Common
             base.EndState();
             charController.ClampStatToggle(StatName.fortitude, false);
             CombatEventService.Instance.OnCharOnTurnSet -= LoseAP;
+            charController.OnStatChg -= FortChkOnStatDecr;
         }
         public override void StateDisplay()
         {

@@ -53,7 +53,7 @@ namespace Combat
         {
             if (IsTargetAlly())
             {
-                targetController.charStateController.ClearDOT(CharStateName.Burning);
+                targetController.charStateController.RemoveCharState(CharStateName.Burning);
             }
         }
 

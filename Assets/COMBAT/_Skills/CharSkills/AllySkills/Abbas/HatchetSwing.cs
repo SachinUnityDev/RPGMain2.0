@@ -51,8 +51,8 @@ namespace Combat
             if (targetController)
             {
                 if (chance.GetChance())
-                    targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                    ,charController.charModel.charID, CharStateName.BleedLowDOT, skillModel.timeFrame, skillModel.castTime);
+                    targetController.damageController.ApplyLowBleed(CauseType.CharSkill, (int)skillName
+                                                                        ,charController.charModel.charID);
             }
         }
 

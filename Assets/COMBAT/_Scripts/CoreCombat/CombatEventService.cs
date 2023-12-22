@@ -20,7 +20,7 @@ namespace Combat
         public event Action OnSOC;  
         public event Action OnCombatInit;       
         public event Action OnEOC;      
-        public event Action<CharController> OnFleeInCombat;
+        public event Action<CharController> OnCombatFlee;
         public event Action<CharController> OnDeathInCombat;
         public event Action<CharController> OnCombatRejoin;
         public event Action<StrikeData> OnStrikeFired;
@@ -154,7 +154,10 @@ namespace Combat
             CharService.Instance.allCharInCombat.Clear();
             OnEOC?.Invoke();
         }
-
+        public void On_CombatFlee(CharController charController)
+        {
+            OnCombatFlee?.Invoke(charController); 
+        }
         private void FortReset2FortOrg()
         {
             foreach (CharController c in CharService.Instance.allCharInCombat)
@@ -266,8 +269,6 @@ namespace Combat
                     CombatService.Instance.currTargetClicked = newTargetDyna.charGO.GetComponent<CharController>();
                     skillModel.targetPos.Clear();
                     skillModel.targetPos.Add(new CellPosData(newTargetDyna.charMode,newTargetDyna.currentPos)); 
-              
-
                 }
                 OnTargetClicked?.Invoke(_targetDyna, null);
             }
@@ -306,8 +307,6 @@ namespace Combat
             OnCharRightClicked?.Invoke(_charRightClickedGO); 
         }
 
-        
-
         public void On_CharHovered(GameObject _charHoveredGO)
         {
             if(GameService.Instance.gameModel.gameState == GameState.InCombat)
@@ -330,8 +329,6 @@ namespace Combat
         {
             OnDodge?.Invoke(dmgAppliedData);
         }
-
-
 
         #endregion
 

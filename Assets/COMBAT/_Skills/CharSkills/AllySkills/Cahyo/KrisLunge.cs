@@ -17,7 +17,7 @@ namespace Combat
         public override SkillLvl skillLvl => SkillLvl.Level0;
         public override StrikeTargetNos strikeNos => StrikeTargetNos.Single;
 
-        private float _chance = 30f;
+        private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
         public List<int> possibleTargetLoc = new List<int>();
@@ -35,9 +35,13 @@ namespace Combat
         }
         public override void ApplyFX2()
         {   
+            if (30f.GetChance())
+                targetController.damageController.ApplyHighBleed(CauseType.CharSkill, (int)skillName
+                             , charController.charModel.charID);
             if (chance.GetChance())
-                charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                                        , charController.charModel.charID, CharStateName.Bleeding);
+                targetController.damageController.ApplyHighPoison(CauseType.CharSkill, (int)skillName
+                             , charController.charModel.charID);
+
         }
         public override void ApplyFX3()
         {

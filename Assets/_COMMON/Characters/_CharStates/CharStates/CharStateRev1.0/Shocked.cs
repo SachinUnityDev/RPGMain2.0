@@ -37,11 +37,10 @@ namespace Common
             allBuffIds.Add(buffID);
 
 
-            List<int> immuneBuffIDs = charController.charStateController
-               .ApplyDOTImmunityBuff(CauseType.CharState, (int)charStateName
-                  , charID, CharStateName.Poisoned, timeFrame, castTime, false);
+            int immuneBuffID = charController.charStateController.ApplyImmunityBuff(CauseType.CharState, (int)charStateName
+                  , charID, CharStateName.Poisoned, timeFrame, castTime);
 
-            allImmunityBuffs.AddRange(immuneBuffIDs);
+            allImmunityBuffs.Add(immuneBuffID);
 
             CombatEventService.Instance.OnCharOnTurnSet += CantUseMoveSkills; 
         }

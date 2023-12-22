@@ -30,8 +30,8 @@ namespace Combat
         {
             if (targetController)
                 if (_chance.GetChance())
-                    charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                        , charController.charModel.charID, CharStateName.BleedLowDOT);
+                    targetController.damageController.ApplyLowBleed(CauseType.CharSkill, (int)skillName
+                             , charController.charModel.charID);
         }
 
         public override void ApplyFX2()

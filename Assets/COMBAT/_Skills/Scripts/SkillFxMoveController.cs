@@ -72,8 +72,6 @@ namespace Combat
                 .OnComplete(() => singleSeq = null); 
                 ;
 
-           
-
         }
 
         //public void MultiTargetEnemyFX()

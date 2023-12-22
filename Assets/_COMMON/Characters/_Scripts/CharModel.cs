@@ -80,7 +80,7 @@ namespace Common
 
         [Header("CHAR EXTD STATS")]
         public FleeBehaviour fleeBehaviour;  
-        public CharFleeState charFleeState;
+       // public CharFleeState charFleeState;
 
         //[Header("Active Inv Slot items")]
         //public List<Iitems> activeInvItems = new List<Iitems>();
@@ -212,7 +212,6 @@ namespace Common
             // MISC STATS
             
             fleeBehaviour = _charSO.fleeBehaviour;
-            charFleeState = _charSO.charFleeState;
 
             // "DEFAULT PROVISION
             provisionItems = _charSO.provisionItems.DeepClone();

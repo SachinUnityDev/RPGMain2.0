@@ -22,7 +22,7 @@ namespace Common
             CombatEventService.Instance.OnCombatRejoin += DecInit4ReJoinerSafriman;
 
             QuestEventService.Instance.OnDeathInQuest += IncInit4Safriman;
-            QuestEventService.Instance.OnFleeInQuest += IncInit4Safriman;
+            QuestEventService.Instance.OnQuestFlee += IncInit4Safriman;
 
         }
 

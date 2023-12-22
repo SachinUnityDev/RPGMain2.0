@@ -20,7 +20,7 @@ namespace Combat
 
         List<int> allBuffId = new List<int>();  
 
-        public override void ApplyFX()
+        public override void ApplyFX() // time frame is always infinity
         {
             if (allBuffId.Count > 0) return; /// apply buffs only once
             charController.charStateController.ApplyImmunityBuff(CauseType.PassiveSkillName, (int)passiveSkillName
@@ -29,11 +29,11 @@ namespace Combat
             charController.charStateController.ApplyImmunityBuff(CauseType.PassiveSkillName, (int)passiveSkillName
                  , charController.charModel.charID, CharStateName.Rooted, TimeFrame.Infinity, 1);
 
-            charController.charStateController.ApplyDOTImmunityBuff(CauseType.PassiveSkillName, (int)passiveSkillName
-              , charController.charModel.charID, CharStateName.PoisonedLowDOT, TimeFrame.Infinity, 1, true);
+            charController.charStateController.ApplyImmunityBuff(CauseType.PassiveSkillName, (int)passiveSkillName
+              , charController.charModel.charID, CharStateName.Poisoned, TimeFrame.Infinity, 1);
 
-            charController.charStateController.ApplyDOTImmunityBuff(CauseType.PassiveSkillName, (int)passiveSkillName
-              , charController.charModel.charID, CharStateName.BleedLowDOT, TimeFrame.Infinity, 1, true);
+            charController.charStateController.ApplyImmunityBuff(CauseType.PassiveSkillName, (int)passiveSkillName
+              , charController.charModel.charID, CharStateName.Bleeding, TimeFrame.Infinity, 1);
 
             charController.OnStatChg += OnHPBelow;
             charController.OnStatChg += OnHPAbove;

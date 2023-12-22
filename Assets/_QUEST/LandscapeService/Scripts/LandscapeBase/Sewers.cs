@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using UnityEngine;
 
 
@@ -18,13 +17,10 @@ namespace Common
             foreach (CharController charCtrl in CharService.Instance.allCharsInPartyLocked)
             {
                 int charID = charCtrl.charModel.charID;
-                charCtrl.buffController.ApplyBuff(CauseType.Landscape, (int)LandscapeNames.Field
-                            , charID, AttribName.morale, -1, TimeFrame.Infinity, 1, false);
+                charCtrl.landscapeController.ApplyLandscapeBuff(CauseType.Landscape, (int)LandscapeNames.Sewers
+                            , LandscapeNames.Sewers, AttribName.morale, -1);
             }
         }
-
-
-
         //   "%40 High poison, 
         //   %60 Nausea"	
         public override void TrapNegative()
@@ -35,22 +31,19 @@ namespace Common
                 if (chance.GetChance())
                 {
                     charCtrl.charStateController.ApplyCharStateBuff(CauseType.Landscape, (int)landscapeName
-                    , charCtrl.charModel.charID, CharStateName.Poisoned, TimeFrame.Infinity, -1); 
+                    , charCtrl.charModel.charID, CharStateName.Poisoned, TimeFrame.EndOfRound, 6); 
                 }
                 else
                 {
                     charCtrl.tempTraitController.ApplyTempTrait(CauseType.Landscape
-                        , (int)landscapeName, 1, TempTraitName.Nausea); 
+                                             , (int)landscapeName, 1, TempTraitName.Nausea); 
                 }
             }
         }
-
         //"%70 +2 morale until eoq
-
         public override void TrapPositive()
         {
             float chance = 70f;
-
             foreach (CharController charCtrl in CharService.Instance.allCharsInPartyLocked)
             {
                 if (chance.GetChance())
@@ -58,15 +51,12 @@ namespace Common
                     charCtrl.buffController.ApplyBuff(CauseType.Landscape, (int)landscapeName
                                             , 1, AttribName.morale, +2, TimeFrame.EndOfQuest, 1, true); 
                 }
-
             }
         }
-        
 
         protected override void OnLandscapeExit(LandscapeNames landscapeName)
         {
-            if (this.landscapeName != landscapeName) return;
-            // remove all buff because of a landscape
+         
         }
     }
 }

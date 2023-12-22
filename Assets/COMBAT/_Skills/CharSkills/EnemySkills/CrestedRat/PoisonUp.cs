@@ -49,8 +49,9 @@ namespace Combat
                     float percent = 70f;
                     if (percent.GetChance())
                     {
-                        skillEventData.targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                                            , charController.charModel.charID, CharStateName.Poisoned);
+
+                        skillEventData.targetController.damageController.ApplyHighPoison(CauseType.CharSkill, (int)skillName
+                                        , charController.charModel.charID);
                     }
                 }
             }
@@ -59,7 +60,9 @@ namespace Combat
 
         public override void ApplyFX1()
         {
-
+            if (targetController)
+                targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+                , AttribName.morale, 2f, skillModel.timeFrame, skillModel.castTime, true); 
         }
 
         public override void ApplyFX2()

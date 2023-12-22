@@ -34,15 +34,15 @@ namespace Interactables
 
         }
 
+       
         public void OnHoverItem()
         {
-
         }
         public void InitItem(int itemId, int maxInvStackSize)
         {
             this.itemId = itemId;
             this.maxInvStackSize = maxInvStackSize;
-            multFX = 1;
+            multFX = 1; 
         }
         public void OnSocketed()
         {

@@ -17,16 +17,15 @@ namespace Interactables
         public List<int> allBuffs { get; set; }
         public int itemId { get; set; }
         public Currency currency { get; set; }
+
         public void OnHoverItem()
         {
-
         }
         public void InitItem(int itemId, int maxInvStackSize)
         {
             this.itemId = itemId;
             this.maxInvStackSize = maxInvStackSize;
         }
-
         public override void ApplyFX2()
         {
             float chance = 40f;
@@ -40,7 +39,7 @@ namespace Interactables
             if (chance1.GetChance())
             {
                 charController.charStateController.ApplyCharStateBuff(CauseType.Food, (int)foodName
-                    , charController.charModel.charID, CharStateName.PoisonedLowDOT, TimeFrame.Infinity, -1);
+                    , charController.charModel.charID, CharStateName.Poisoned, TimeFrame.EndOfRound, 2);
             }
         }
 

@@ -50,10 +50,10 @@ namespace Combat
         {
             chance = 50f;
             if (chance.GetChance())
-                charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                       , charController.charModel.charID, CharStateName.PoisonedLowDOT);
+                targetController.damageController.ApplyLowPoison(CauseType.CharSkill, (int)skillName
+                                        , charController.charModel.charID);
 
-          
+
         }
 
         public override void ApplyFX3()
@@ -80,7 +80,7 @@ namespace Combat
 
                 if (dyna != null)
                 {
-                    if (targetCtrl.charStateController.HasCharDOTState(CharStateName.BleedLowDOT))
+                    if (targetCtrl.charStateController.HasCharState(CharStateName.Bleeding))
                     {
                         tempDyna= dyna;
                       

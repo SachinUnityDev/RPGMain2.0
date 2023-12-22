@@ -30,8 +30,6 @@ namespace Common
 
             allbuffID.Add(buffID);
         }
-        
-
 
         void IncLootInCoast(LandscapeNames landName)
         {

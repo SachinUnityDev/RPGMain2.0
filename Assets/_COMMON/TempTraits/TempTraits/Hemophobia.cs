@@ -21,8 +21,7 @@ namespace Common
 
         void CharStateFX(CharStateModData charStateModData)
         {
-            if (charStateModData.charStateName != CharStateName.BleedLowDOT ||
-                charStateModData.charStateName != CharStateName.Bleeding) return;
+            if (charStateModData.charStateName != CharStateName.Bleeding) return;
 
             if (charStateModData.effectedCharID != charController.charModel.charID) return;
 

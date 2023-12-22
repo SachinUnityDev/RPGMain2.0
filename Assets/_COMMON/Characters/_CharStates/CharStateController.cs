@@ -129,19 +129,15 @@ namespace Common
                                 , CharStateName charStateName, TimeFrame timeFrame = TimeFrame.Infinity, int castTime =-1)
         {
             if (!IsCharStateApplicable(charStateName)) return -1; // if char State not applicable
-            // check immunity list 
-            if (IsDOT(charStateName))
-            {
-                if (HasDOTImmunity(charStateName)) return -1; 
-            }
-            else
-            {
-                if (HasImmunity(charStateName))
-                    return -1;
-                if (HasCharState(charStateName))                
-                    return -1;
-            }
-        
+                                                                  // check immunity list 
+
+
+            if (HasImmunity(charStateName))
+                return -1;
+            if (HasCharState(charStateName))
+                return -1;
+
+
 
             int effectedCharID = charController.charModel.charID;
 
@@ -173,11 +169,7 @@ namespace Common
             allCharStateBuffs.Add(charStateBuffData);
            
             CharStatesService.Instance.On_CharStateStart(charStateModData);
-            //if (!IsDOT(charStateName))  // no char State can occur twice to the same char ...DOT have independent rules
-            //{
-            //    ApplyImmunityBuff(causeType, causeName, causeByCharID, charStateName, timeFrame, castTime);
-            //}
-
+      
             return stateID;
         }
 
@@ -270,44 +262,44 @@ namespace Common
                 }
             }
         }
-        public List<int> ApplyDOTImmunityBuff(CauseType causeType, int causeName, int causeByCharID
-                                , CharStateName charStateName, TimeFrame timeFrame, int netTime, bool isBuff = true)
-        {
-            List<int> allImmuneBuffID = new List<int>();
-            if (charStateName == CharStateName.BleedLowDOT || charStateName == CharStateName.XXX1
-                                                            || charStateName == CharStateName.Bleeding)
-            {   
-                int id = 
-                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BleedLowDOT, timeFrame, netTime);                
-               // ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BleedMedDOT, timeFrame, netTime);
-               allImmuneBuffID.Add(id);
-                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.Bleeding, timeFrame, netTime);
-                allImmuneBuffID.Add(id);
-            }
-            if (charStateName == CharStateName.Poisoned || charStateName == CharStateName.PoisonedMedDOT
-                                                              || charStateName == CharStateName.PoisonedLowDOT)
-            {
-                int id =
-                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.Poisoned, timeFrame, netTime);
-                allImmuneBuffID.Add(id);
-                //ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.PoisonedMedDOT, timeFrame, netTime);
-                id =
-                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.PoisonedLowDOT, timeFrame, netTime);
-                allImmuneBuffID.Add(id);   
-            }
-            if (charStateName == CharStateName.Burning || charStateName == CharStateName.BurnMedDOT
-                                                            || charStateName == CharStateName.BurnLowDOT)
-            {
-                int id = 
-                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.Burning, timeFrame, netTime);
-                allImmuneBuffID.Add(id);
-                //ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BurnMedDOT, timeFrame, netTime);
-                id = 
-                ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BurnLowDOT, timeFrame, netTime);
-                allImmuneBuffID.Add(id);   
-            }
-            return allImmuneBuffID;
-        }
+        //public List<int> ApplyDOTImmunityBuff(CauseType causeType, int causeName, int causeByCharID
+        //                        , CharStateName charStateName, TimeFrame timeFrame, int netTime, bool isBuff = true)
+        //{
+        //    List<int> allImmuneBuffID = new List<int>();
+        //    if (charStateName == CharStateName.BleedLowDOT || charStateName == CharStateName.XXX1
+        //                                                    || charStateName == CharStateName.Bleeding)
+        //    {   
+        //        int id = 
+        //        ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BleedLowDOT, timeFrame, netTime);                
+        //       // ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BleedMedDOT, timeFrame, netTime);
+        //       allImmuneBuffID.Add(id);
+        //        ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.Bleeding, timeFrame, netTime);
+        //        allImmuneBuffID.Add(id);
+        //    }
+        //    if (charStateName == CharStateName.Poisoned || charStateName == CharStateName.PoisonedMedDOT
+        //                                                      || charStateName == CharStateName.PoisonedLowDOT)
+        //    {
+        //        int id =
+        //        ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.Poisoned, timeFrame, netTime);
+        //        allImmuneBuffID.Add(id);
+        //        //ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.PoisonedMedDOT, timeFrame, netTime);
+        //        id =
+        //        ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.PoisonedLowDOT, timeFrame, netTime);
+        //        allImmuneBuffID.Add(id);   
+        //    }
+        //    if (charStateName == CharStateName.Burning || charStateName == CharStateName.BurnMedDOT
+        //                                                    || charStateName == CharStateName.BurnLowDOT)
+        //    {
+        //        int id = 
+        //        ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.Burning, timeFrame, netTime);
+        //        allImmuneBuffID.Add(id);
+        //        //ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BurnMedDOT, timeFrame, netTime);
+        //        id = 
+        //        ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BurnLowDOT, timeFrame, netTime);
+        //        allImmuneBuffID.Add(id);   
+        //    }
+        //    return allImmuneBuffID;
+        //}
                
         public List<string> GetCharStateBuffList()
         {
@@ -333,36 +325,36 @@ namespace Common
         #endregion
 
         #region HAS STATE CHECKS 
-        public bool HasCharDOTState(CharStateName _charStateName)
-        {
-            if (_charStateName == CharStateName.Burning
-               || _charStateName == CharStateName.BurnMedDOT
-               || _charStateName == CharStateName.BurnLowDOT)
-            {
-                return (HasCharState( CharStateName.Burning)
-                  || HasCharState( CharStateName.BurnMedDOT)
-                  || HasCharState( CharStateName.BurnLowDOT));
-            }
+        //public bool HasCharDOTState(CharStateName _charStateName)
+        //{
+        //    if (_charStateName == CharStateName.Burning
+        //       || _charStateName == CharStateName.BurnMedDOT
+        //       || _charStateName == CharStateName.BurnLowDOT)
+        //    {
+        //        return (HasCharState( CharStateName.Burning)
+        //          || HasCharState( CharStateName.BurnMedDOT)
+        //          || HasCharState( CharStateName.BurnLowDOT));
+        //    }
 
-            if (_charStateName == CharStateName.Bleeding
-              || _charStateName == CharStateName.XXX1
-              || _charStateName == CharStateName.BleedLowDOT)
-            {
-                return (HasCharState( CharStateName.Bleeding)
-                   || HasCharState( CharStateName.XXX1)
-                   || HasCharState( CharStateName.BleedLowDOT));
-            }
+        //    if (_charStateName == CharStateName.Bleeding
+        //      || _charStateName == CharStateName.XXX1
+        //      || _charStateName == CharStateName.BleedLowDOT)
+        //    {
+        //        return (HasCharState( CharStateName.Bleeding)
+        //           || HasCharState( CharStateName.XXX1)
+        //           || HasCharState( CharStateName.BleedLowDOT));
+        //    }
 
-            if (_charStateName == CharStateName.Poisoned
-              || _charStateName == CharStateName.PoisonedMedDOT
-              || _charStateName == CharStateName.PoisonedLowDOT)
-            {
-                return (HasCharState( CharStateName.Poisoned)
-                 || HasCharState( CharStateName.PoisonedMedDOT)
-                 || HasCharState( CharStateName.PoisonedLowDOT));
-            }
-            return false;
-        }
+        //    if (_charStateName == CharStateName.Poisoned
+        //      || _charStateName == CharStateName.PoisonedMedDOT
+        //      || _charStateName == CharStateName.PoisonedLowDOT)
+        //    {
+        //        return (HasCharState( CharStateName.Poisoned)
+        //         || HasCharState( CharStateName.PoisonedMedDOT)
+        //         || HasCharState( CharStateName.PoisonedLowDOT));
+        //    }
+        //    return false;
+        //}
     
         public bool HasCharState(CharStateName _charStateName)
         {
@@ -376,36 +368,36 @@ namespace Common
             return false;
         }
 
-        public bool HasDOTImmunity(CharStateName _charStateName)
-        {
-            if (_charStateName == CharStateName.Burning
-               || _charStateName == CharStateName.BurnMedDOT
-               || _charStateName == CharStateName.BurnLowDOT)
-            {
-                return (HasImmunity(CharStateName.Burning)
-                        || HasImmunity(CharStateName.BurnMedDOT)
-                        || HasImmunity(CharStateName.BurnLowDOT)); 
-            }
+        //public bool HasDOTImmunity(CharStateName _charStateName)
+        //{
+        //    if (_charStateName == CharStateName.Burning
+        //       || _charStateName == CharStateName.BurnMedDOT
+        //       || _charStateName == CharStateName.BurnLowDOT)
+        //    {
+        //        return (HasImmunity(CharStateName.Burning)
+        //                || HasImmunity(CharStateName.BurnMedDOT)
+        //                || HasImmunity(CharStateName.BurnLowDOT)); 
+        //    }
 
-            if (_charStateName == CharStateName.Bleeding
-              || _charStateName == CharStateName.XXX1
-              || _charStateName == CharStateName.BleedLowDOT)
-            {
-                return (HasImmunity(CharStateName.Bleeding)
-                        || HasImmunity(CharStateName.XXX1)
-                        || HasImmunity(CharStateName.BleedLowDOT));
-            }
+        //    if (_charStateName == CharStateName.Bleeding
+        //      || _charStateName == CharStateName.XXX1
+        //      || _charStateName == CharStateName.BleedLowDOT)
+        //    {
+        //        return (HasImmunity(CharStateName.Bleeding)
+        //                || HasImmunity(CharStateName.XXX1)
+        //                || HasImmunity(CharStateName.BleedLowDOT));
+        //    }
 
-            if (_charStateName == CharStateName.Poisoned
-              || _charStateName == CharStateName.PoisonedMedDOT
-              || _charStateName == CharStateName.PoisonedLowDOT)
-            {
-                return (HasImmunity(CharStateName.Poisoned)
-                         || HasImmunity(CharStateName.PoisonedMedDOT)
-                         || HasImmunity(CharStateName.PoisonedLowDOT));
-            }
-            return false; 
-        }
+        //    if (_charStateName == CharStateName.Poisoned
+        //      || _charStateName == CharStateName.PoisonedMedDOT
+        //      || _charStateName == CharStateName.PoisonedLowDOT)
+        //    {
+        //        return (HasImmunity(CharStateName.Poisoned)
+        //                 || HasImmunity(CharStateName.PoisonedMedDOT)
+        //                 || HasImmunity(CharStateName.PoisonedLowDOT));
+        //    }
+        //    return false; 
+        //}
 
         public bool HasImmunity(CharStateName charStateName)
         {
@@ -457,58 +449,56 @@ namespace Common
 
         #region CLEAR DOT
 
-        public void ClearDOT(CharStateName _charStateName)
-        {
-            if (_charStateName == CharStateName.Burning
-         || _charStateName == CharStateName.BurnMedDOT
-         || _charStateName == CharStateName.BurnLowDOT)
-            {
-                RemoveCharState(CharStateName.Burning);
-                RemoveCharState(CharStateName.BurnMedDOT);
-                RemoveCharState(CharStateName.BurnLowDOT);
-            }
+        //public void ClearDOT(CharStateName _charStateName)
+        //{
+        //    if (_charStateName == CharStateName.Burning)
+        //    {
+        //        RemoveCharState(CharStateName.Burning);
+        //        RemoveCharState(CharStateName.BurnMedDOT);
+        //        RemoveCharState(CharStateName.BurnLowDOT);
+        //    }
 
-            if (_charStateName == CharStateName.Bleeding
-              || _charStateName == CharStateName.XXX1
-              || _charStateName == CharStateName.BleedLowDOT)
-            {
-                RemoveCharState(CharStateName.Bleeding);
-                RemoveCharState(CharStateName.XXX1);
-                RemoveCharState(CharStateName.BleedLowDOT);
-            }
+        //    if (_charStateName == CharStateName.Bleeding
+        //      || _charStateName == CharStateName.XXX1
+        //      || _charStateName == CharStateName.BleedLowDOT)
+        //    {
+        //        RemoveCharState(CharStateName.Bleeding);
+        //        RemoveCharState(CharStateName.XXX1);
+        //        RemoveCharState(CharStateName.BleedLowDOT);
+        //    }
 
-            if (_charStateName == CharStateName.Poisoned
-              || _charStateName == CharStateName.PoisonedMedDOT
-              || _charStateName == CharStateName.PoisonedLowDOT)
-            {
-                RemoveCharState(CharStateName.Poisoned);
-                RemoveCharState(CharStateName.PoisonedMedDOT);
-                RemoveCharState(CharStateName.PoisonedLowDOT);
-            }
-        }
-        public bool IsDOT(CharStateName charStateName)
-        {
-            if (charStateName == CharStateName.Poisoned
-              || charStateName == CharStateName.PoisonedMedDOT
-              || charStateName == CharStateName.PoisonedLowDOT)
-            {
-                return true; 
-            }
-           if (charStateName == CharStateName.Bleeding
-                  || charStateName == CharStateName.XXX1
-                  || charStateName == CharStateName.BleedLowDOT)
-           {
-                return true;
-           }
+        //    if (_charStateName == CharStateName.Poisoned
+        //      || _charStateName == CharStateName.PoisonedMedDOT
+        //      || _charStateName == CharStateName.PoisonedLowDOT)
+        //    {
+        //        RemoveCharState(CharStateName.Poisoned);
+        //        RemoveCharState(CharStateName.PoisonedMedDOT);
+        //        RemoveCharState(CharStateName.PoisonedLowDOT);
+        //    }
+        //}
+        //public bool IsDOT(CharStateName charStateName)
+        //{
+        //    if (charStateName == CharStateName.Poisoned
+        //      || charStateName == CharStateName.PoisonedMedDOT
+        //      || charStateName == CharStateName.PoisonedLowDOT)
+        //    {
+        //        return true; 
+        //    }
+        //   if (charStateName == CharStateName.Bleeding
+        //          || charStateName == CharStateName.XXX1
+        //          || charStateName == CharStateName.BleedLowDOT)
+        //   {
+        //        return true;
+        //   }
 
-           if (charStateName == CharStateName.Burning
-                || charStateName == CharStateName.BurnMedDOT
-                || charStateName == CharStateName.BurnLowDOT)
-           {
-                return true;
-           }
-            return false; 
-        }
+        //   if (charStateName == CharStateName.Burning
+        //        || charStateName == CharStateName.BurnMedDOT
+        //        || charStateName == CharStateName.BurnLowDOT)
+        //   {
+        //        return true;
+        //   }
+        //    return false; 
+        //}
 
 
         # endregion 

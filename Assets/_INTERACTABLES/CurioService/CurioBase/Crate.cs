@@ -26,7 +26,7 @@ namespace Quest
                 foreach (CharController charCtrl in CharService.Instance.allCharsInPartyLocked)
                 {
                     charCtrl.charStateController.ApplyCharStateBuff(CauseType.Curios, (int)curioName
-                                                    , charCtrl.charModel.charID, CharStateName.PoisonedLowDOT);
+                                                    , charCtrl.charModel.charID, CharStateName.Poisoned);
                     charCtrl.ChangeAttrib(CauseType.Curios, (int)curioName, charCtrl.charModel.charID,
                                         AttribName.vigor, 1);
                 }

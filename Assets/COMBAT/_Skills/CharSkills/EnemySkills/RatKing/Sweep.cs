@@ -46,8 +46,8 @@ namespace Combat
         public override void ApplyFX1()
         {
             if (chance.GetChance())
-                targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                                        , charController.charModel.charID, CharStateName.BleedLowDOT);
+                targetController.damageController.ApplyLowBleed(CauseType.CharSkill, (int)skillName
+                                 , charController.charModel.charID);
         }
 
         public override void ApplyFX2()

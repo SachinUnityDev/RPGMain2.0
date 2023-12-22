@@ -33,8 +33,9 @@ namespace Interactables
             float chance1 = 25f;
             if (chance1.GetChance())
             {
-                charController.charStateController.ApplyDOTImmunityBuff(CauseType.Food
-                    , (int)fruitName, charController.charModel.charID, CharStateName.BurnLowDOT, TimeFrame.Infinity, -1, false);
+                charController.charStateController.ApplyImmunityBuff(CauseType.Food
+                    , (int)fruitName, charController.charModel.charID, CharStateName.Burning
+                    , TimeFrame.EndOfRound, 4);
 
             }
         }
@@ -58,7 +59,6 @@ namespace Interactables
             ApplyInitNHPStaminaRegenFX();
             ApplyHungerThirstRegenFX();
             CheckNApplyOC();
-
         }
     }
 }

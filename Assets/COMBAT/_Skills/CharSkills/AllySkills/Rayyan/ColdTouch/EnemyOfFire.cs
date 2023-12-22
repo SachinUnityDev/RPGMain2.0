@@ -51,7 +51,7 @@ namespace Combat
         public override void ApplyFX2()
         {
             if (targetController != null && IsTargetAlly())
-                targetController.charStateController.ClearDOT(CharStateName.BurnLowDOT); 
+                targetController.charStateController.RemoveCharState(CharStateName.Burning); 
         }
 
         public override void ApplyFX3()

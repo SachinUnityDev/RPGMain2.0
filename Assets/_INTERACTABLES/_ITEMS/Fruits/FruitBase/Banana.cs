@@ -20,12 +20,11 @@ namespace Interactables
         public Currency currency { get; set; }
         public void OnHoverItem()
         {
-
         }
         public void InitItem(int itemId, int maxInvStackSize)
         {
             this.itemId = itemId;
-            this.maxInvStackSize = maxInvStackSize;
+            this.maxInvStackSize = maxInvStackSize;            
         }
         public override void ApplyBuffFX()
         {
@@ -44,8 +43,7 @@ namespace Interactables
         public void ApplyOC_FX()
         {
             charController.tempTraitController.ApplyTempTrait(CauseType.Fruit, (int)itemName, charID
-                                         , tempTraitName);
-
+                                                 , tempTraitName);
         }
         public void ApplyConsumableFX()
         {

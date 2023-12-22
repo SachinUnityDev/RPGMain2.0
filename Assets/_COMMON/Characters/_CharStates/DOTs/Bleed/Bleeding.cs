@@ -29,10 +29,10 @@ namespace Common
              dmgPerRound = 2 + (strikerLvl / 4);
 
             int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                , charID, AttribName.dodge, -2, timeFrame, castTime, true);
+                , charID, AttribName.dodge, -2, TimeFrame.Infinity, 1, true);
             allBuffIds.Add(buffID);
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                , charID, AttribName.staminaRegen, -1, timeFrame, castTime, true);
+                , charID, AttribName.staminaRegen, -1, TimeFrame.Infinity, 1, true);
             allBuffIds.Add(buffID);
 
             CombatEventService.Instance.OnEOT += ApplyFX;

@@ -16,21 +16,23 @@ namespace Interactables
         public List<int> allBuffs { get; set; } = new List<int>();
         public int itemId { get; set; }
         public Currency currency { get; set; }
+
         public void OnHoverItem()
         {
         }
         public void InitItem(int itemId, int maxInvStackSize)
         {
             this.itemId = itemId;
-            this.maxInvStackSize = maxInvStackSize;
+            this.maxInvStackSize = maxInvStackSize;            
         }
         public override void ApplyBuffFX()
         {
             float chance1 = 30f;
             if (chance1.GetChance())
             {
-                charController.charStateController.ApplyDOTImmunityBuff(CauseType.Food
-                    , (int)fruitName, charController.charModel.charID, CharStateName.PoisonedLowDOT, TimeFrame.Infinity, -1, false);
+                   charController.charStateController.ApplyImmunityBuff(CauseType.Food
+                                , (int)fruitName, charController.charModel.charID, CharStateName.Poisoned
+                                , TimeFrame.EndOfRound, 6);
             }
         }
 

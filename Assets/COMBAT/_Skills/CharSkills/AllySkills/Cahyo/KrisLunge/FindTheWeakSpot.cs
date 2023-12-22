@@ -21,15 +21,15 @@ namespace Combat
         private float _chance = 50f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        public override void SkillHovered()
-        {
-            base.SkillHovered();
-            skillController.allSkillBases.Find(t => t.skillName == skillName).chance = 60f;
-        }
+        //public override void SkillHovered()
+        //{
+        //    //base.SkillHovered();
+        //    //skillController.allSkillBases.Find(t => t.skillName == skillName).chance = 60f;
+        //}
         public override void BaseApply()
         {
             base.BaseApply();
-            if (targetController.charStateController.HasCharDOTState(CharStateName.BleedLowDOT))
+            if (targetController.charStateController.HasCharState(CharStateName.Bleeding))
                 if (chance.GetChance())
                     RegainAP();
         }
@@ -75,8 +75,8 @@ namespace Combat
         }
         public override void InvPerkDesc()
         {
-            perkDesc = "<style=Bleed>High Bleed</style> chance: 30% -> 60%";
-            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+            //perkDesc = "<style=Bleed>High Bleed</style> chance: 30% -> 60%";
+            //SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
 
             perkDesc = "50% regain AP vs <style=Bleed>Bleeding</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(perkDesc);

@@ -20,8 +20,8 @@ namespace Combat
 
         public override void ApplyFX()
         {
-            charController.charStateController.ApplyDOTImmunityBuff(CauseType.PassiveSkillName, (int)passiveSkillName
-                  , charController.charModel.charID, CharStateName.PoisonedLowDOT, TimeFrame.Infinity,1, true);
+            charController.charStateController.ApplyImmunityBuff(CauseType.PassiveSkillName, (int)passiveSkillName
+                  , charController.charModel.charID, CharStateName.Poisoned, TimeFrame.Infinity,1);
 
             //charController.strikeController.AddThornsBuff(DamageType.Earth, 1, 3
             //                                                    , TimeFrame.Infinity, 1);

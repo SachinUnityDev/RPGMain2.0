@@ -17,6 +17,8 @@ namespace Interactables
         public ItemData toolData { get; set; }
         public List<ItemDataWithQty> allIngredData { get; set; } = new List<ItemDataWithQty>();
         public Currency currency { get; set; }
+        public int castTime { get; set; }
+
         public void RecipeInit()
         {
             toolData = new ItemData(ItemType.Tools, (int)ToolNames.Fermentor);
@@ -37,9 +39,15 @@ namespace Interactables
             Debug.Log("Rum  init" + str);
             allDisplayStr.Add(str);
         }
+
         public void OnHoverItem()
         {
-
+        }
+        public void InitItem(int itemId, int maxInvStackSize, int castTime)
+        {
+            this.itemId = itemId;
+            this.maxInvStackSize = maxInvStackSize;
+            this.castTime = castTime;
         }
 
         public override void OnDrink()

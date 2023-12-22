@@ -29,7 +29,7 @@ namespace Combat
 
         public EnemyPackName currEnemyPack; 
 
-        public CombatAnimController combatAnimController;
+        public DeathAnimView deathAnimView;
         public RoundController roundController;
         public CombatHUDView combatHUDView; 
 
@@ -42,10 +42,6 @@ namespace Combat
         [Header("Result")]
         public bool isVictory; 
 
-
-
-        
-
         void OnEnable()
         {            
           //  CombatEventService.Instance.OnEOR1 += EORActions;
@@ -55,7 +51,7 @@ namespace Combat
                             =>combatState = CombatState.INCombat_InSkillSelected;
    
            
-            combatAnimController = GetComponent<CombatAnimController>();
+            deathAnimView = GetComponent<DeathAnimView>();
             roundController = GetComponent<RoundController>();
             combatHUDView = gameObject.GetComponent<CombatHUDView>();
             // ENEMY PACK 
@@ -77,9 +73,6 @@ namespace Combat
                                        -= (CharNames _charName, SkillNames _skillName)
                                        => combatState = CombatState.INCombat_InSkillSelected; 
         }
-
-
-
         public void SetAllCurrCharValues(CharController charController)  // Inits 
         {      
             currCharClicked = currCharOnTurn;
@@ -92,7 +85,8 @@ namespace Combat
             {
                 if(!CharService.Instance.allCharInCombat.Any(t=>t.charModel.charID == charCtrl.charModel.charID))
                 {
-                    CharService.Instance.allCharInCombat.Add(charCtrl);
+                    if(charCtrl.charModel.stateOfChar != StateOfChar.Fled)
+                        CharService.Instance.allCharInCombat.Add(charCtrl);                    
                 }
             }
              GridService.Instance.SetAllyPreTactics();

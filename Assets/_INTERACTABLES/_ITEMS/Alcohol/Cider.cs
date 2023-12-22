@@ -44,7 +44,6 @@ namespace Interactables
         }
         public void OnHoverItem()
         {
-
         }
 
         public override void OnDrink()

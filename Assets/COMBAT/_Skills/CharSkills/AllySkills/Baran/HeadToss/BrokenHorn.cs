@@ -51,7 +51,7 @@ namespace Combat
         {   
             if(targetController!= null)
             {
-                if(targetController.charStateController.HasCharDOTState(CharStateName.BleedLowDOT))
+                if(targetController.charStateController.HasCharState(CharStateName.Bleeding))
                 {
                     targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
                                           , DamageType.Physical, skillModel.damageMod, skillModel.skillInclination, false, true);     

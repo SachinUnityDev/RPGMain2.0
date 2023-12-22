@@ -29,7 +29,7 @@ namespace Interactables
         public Currency currency { get; set; }
         public override void GewGawSagaicInit()
         {
-            CombatEventService.Instance.OnFleeInCombat += OnCombatFleeNDead;
+            CombatEventService.Instance.OnCombatFlee += OnCombatFleeNDead;
             CharService.Instance.OnCharDeath += OnCombatFleeNDead;
 
             string str = "When solo: +2 Stm regen";
@@ -70,7 +70,7 @@ namespace Interactables
 
         public override void UnEquipSagaic()
         {
-            CombatEventService.Instance.OnFleeInCombat += OnCombatFleeNDead;
+            CombatEventService.Instance.OnCombatFlee += OnCombatFleeNDead;
             CharService.Instance.OnCharDeath += OnCombatFleeNDead;
             foreach (int i in buffIndex)
             {

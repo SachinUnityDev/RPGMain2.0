@@ -36,8 +36,7 @@ namespace Combat
         public override void ApplyFX1()
         {
             if (targetController)
-                targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                                            , charController.charModel.charID, CharStateName.PoisonedLowDOT);
+                targetController.damageController.ApplyLowPoison(CauseType.CharSkill, (int)skillName, charController.charModel.charID);
         }
 
         public override void ApplyFX2()

@@ -89,19 +89,23 @@ namespace Combat
             allyTurnOrder = CharService.Instance.allCharInCombat.Where(t => t.charModel.charMode == CharMode.Ally).ToList();
             enemyTurnOrder = CharService.Instance.allCharInCombat.Where(t => t.charModel.charMode == CharMode.Enemy).ToList();
         }
-        public void ReorderAfterCharDeath(CharController charController)
-        {
-            // RESET ALL LIST 
-            //charTurnOrder.Remove(charController);
-            //UpdateAllyEnemyList(); // update all three list charturnOrder, AllyTurnOrder and EnemyTurnOrder
-            //OnRoundStart(CombatService.Instance.currentRound);
-
-
-            ////RESET INDEX VALUE ON NEW LISTS 
-            //CharController currCharOnTurn = CombatService.Instance.currCharOnTurn;
-            //newIndex = charTurnOrder.FindIndex(t => t.charModel.charID == currCharOnTurn.charModel.charID);
-            //index = newIndex;           
+        public void ReorderAfterCharDeathOnEOT(CharController charController)
+        {   
+            CharController currCharOnTurn = CombatService.Instance.currCharOnTurn; 
          
+            UpdateAllyEnemyList(); // update all three list charturnOrder, AllyTurnOrder and EnemyTurnOrder
+            
+            newIndex = CharService.Instance.allCharInCombat
+                .FindIndex(t => t.charModel.charID == currCharOnTurn.charModel.charID);
+            if(newIndex != -1)
+            {
+                index = newIndex;                
+            }   
+            else // char on turn died
+            {
+               // index++; 
+                SetNextCharOnTurn();
+            }
         }
         public void SetTurnOrder()
         {

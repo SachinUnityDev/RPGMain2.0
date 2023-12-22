@@ -205,7 +205,7 @@ namespace Combat
 
                     if (dyna != null)
                     {
-                        if (targetCtrl.charStateController.HasCharDOTState(CharStateName.Hexed))
+                        if (targetCtrl.charStateController.HasCharState(CharStateName.Hexed))
                         {
                             SkillService.Instance.currentTargetDyna = dyna; 
                         }

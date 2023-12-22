@@ -52,7 +52,7 @@ namespace Combat
 
         public override void ApplyFX2()
         {
-            bool isTargetBleeding = targetController.charStateController.HasCharDOTState(CharStateName.BleedLowDOT);
+            bool isTargetBleeding = targetController.charStateController.HasCharState(CharStateName.Bleeding);
 
             if (isTargetBleeding)
             {

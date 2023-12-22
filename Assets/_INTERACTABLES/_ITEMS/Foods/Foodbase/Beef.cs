@@ -32,14 +32,13 @@ namespace Interactables
             if (chance.GetChance())
             {
                 charController.buffController.ApplyBuff(CauseType.Food, (int)foodName,
-                 charController.charModel.charID, AttribName.morale, 1, foodSO.timeFrame
-                 , foodSO.castTime, true);
+                 charController.charModel.charID, AttribName.morale, 1, foodSO.timeFrame, foodSO.castTime, true);
             }
             float chance1 = 50f;
             if (chance1.GetChance())
             {
                 charController.charStateController.ApplyCharStateBuff(CauseType.Food, (int)foodName
-                    , charController.charModel.charID, CharStateName.PoisonedLowDOT, TimeFrame.Infinity, -1);
+                    , charController.charModel.charID, CharStateName.Poisoned, TimeFrame.EndOfRound, 3);
             }
         }
         public void ApplyConsumableFX()

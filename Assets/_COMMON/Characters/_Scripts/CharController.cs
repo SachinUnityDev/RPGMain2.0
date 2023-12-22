@@ -92,7 +92,6 @@ namespace Common
             return charModel; 
         }
 
-
         void AddController_OnCharSpawn()
         {
             buffController = gameObject.AddComponent<BuffController>();
@@ -119,15 +118,7 @@ namespace Common
             SkillService.Instance.allSkillControllers.Add(skillController);
 
         }
-                
-
-        //void AddControllers_OnCombatStart()
-        //{
-        //    damageController = gameObject.AddComponent<DamageController>();
-        //    damageController.Init();
-        //    strikeController = gameObject.AddComponent<StrikeController>();
-        //    strikeController.Init(); 
-        //}
+   
         public AttribChanceData GetAttribChanceData(AttribName _statName)
         {
             foreach (AttribChanceData attribChanceData in CharService.Instance.statChanceSO.allStatChanceData)
@@ -158,10 +149,9 @@ namespace Common
                         CombatEventService.Instance.On_targetClicked(charDyna, null);
                     }
                     else return; // to fix null error on wrong target click
-                }        
-                if (CombatService.Instance.combatState == CombatState.INCombat_normal
+                }else if (CombatService.Instance.combatState == CombatState.INCombat_normal
                                  || CombatService.Instance.combatState == CombatState.INTactics)
-                     CombatEventService.Instance.On_CharClicked(gameObject);
+                                            CombatEventService.Instance.On_CharClicked(gameObject);
             }else
             {
                 CombatEventService.Instance.On_CharHovered(gameObject);
@@ -335,7 +325,7 @@ namespace Common
                 PopulateOverCharBars(statName);
 
             if (statName == StatName.health)
-                On_DeathBlow();
+                On_DeathChk(causeByCharID);
             if (toInvoke)
             {   // IF NO CHANGE IN VALUE HAS HAPPENED DUE TO CLAMPING THIS NEEDS TO BE KEPT HERE
                 OnStatChg?.Invoke(statModData);
@@ -441,8 +431,6 @@ namespace Common
         {
 
         }
-
-
          float GetHealthValBelow0(float val)
          {
             StatData healthdata = GetStat(StatName.health); 
@@ -453,18 +441,17 @@ namespace Common
             return 1f; 
          }
 
-        void On_DeathBlow()
+        void On_DeathChk(int causeByCharID)
         {       
             StatData statHP = GetStat(StatName.health); 
             if(statHP.currValue <= 0)
             {
-                if(charModel.charMode == CharMode.Enemy)
+                if(charModel.orgCharMode == CharMode.Enemy)
                 {
-                  CharService.Instance.On_CharDeath(this); 
-                    CharService.Instance.charDiedinLastTurn.Add(this); 
+                  CharService.Instance.On_CharDeath(this, causeByCharID); 
                 }else
-                {
-                    Debug.Log("ALLY DEATH CODE TO BE WRITTEN HERE");
+                {  
+                    if(!charStateController.HasCharState(CharStateName.LastDropOfBlood))
                     charStateController.ApplyCharStateBuff(CauseType.StatMinMaxLimit, (int)0,
                                                         charModel.charID, CharStateName.LastDropOfBlood);                                    
                 }
@@ -607,7 +594,7 @@ namespace Common
         #region HUNGER AND THRIST
 
          StatModData ChangeHungerNThirst(CauseType causeType, int name, int causeByCharID, StatName statName
-            , float val)
+                                                                                                , float val)
         {
             if(statName == StatName.hunger)
             {
@@ -628,7 +615,11 @@ namespace Common
         }
 
         #endregion
-            
+
+ 
+
+
+
         void PopulateOverCharBars(StatName statName)
         {
             transform.GetChild(2).GetComponent<HPBarView>().FillHPBar(this);
@@ -636,62 +627,3 @@ namespace Common
 
     }
 }
-//    Transform hpBarsTransform = gameObject.transform.GetChild(2);
-
-//    Transform HPBarImgTrans = hpBarsTransform.GetChild(0).GetChild(1);
-//    Transform StaminaBarImgTrans = hpBarsTransform.GetChild(1).GetChild(1);
-
-//    Transform HPBarImgOrange = hpBarsTransform.GetChild(0).GetChild(0);
-//    Transform StaminaBarImgOrange = hpBarsTransform.GetChild(1).GetChild(0);
-//    StatData statData = GetStat(statName);
-//    AttribData willPowerSD = GetAttrib(AttribName.willpower);
-//    AttribData vigorSD = GetAttrib(AttribName.vigor);
-//    //float barVal = statData.currValue / statData.maxLimit;
-
-//    if (statName == StatName.health)
-//    {
-//        float barVal = statData.currValue / (vigorSD.currValue * 4);
-//        barVal = (barVal > 1) ? 1 : barVal;
-
-//        if (statData.currValue != prevHPVal)
-//        {
-//            Vector3 barImgScale = new Vector3(barVal, HPBarImgTrans.localScale.y, HPBarImgTrans.localScale.z);
-//            HPBarImgTrans.localScale = barImgScale;
-//            OrangeBarScaleAnim(HPBarImgOrange, barImgScale.x);
-//        }
-//        else return;
-
-//    }
-//    else if (statName == StatName.stamina)
-//    {
-//        float barVal = statData.currValue / (willPowerSD.currValue * 3);
-//        barVal = (barVal > 1) ? 1 : barVal;
-//        if (statData.currValue != prevStaminaVal)
-//        {
-//            Vector3 staminaScale = new Vector3(barVal, StaminaBarImgTrans.localScale.y, StaminaBarImgTrans.localScale.z);
-//            StaminaBarImgTrans.localScale = staminaScale;
-//            OrangeBarScaleAnim(StaminaBarImgOrange, staminaScale.x);
-//        }
-//        else return;
-
-
-//    }
-//    else if (statName == StatName.fortitude)
-//    {
-
-
-//    }
-//    prevHPVal = statData.currValue;
-//    prevStaminaVal = statData.currValue;
-//}
-//void OrangeBarScaleAnim(Transform barTrans, float scale)
-//{
-//    barTrans.gameObject.SetActive(true);
-//    Sequence barSeq = DOTween.Sequence();
-
-//    barSeq
-//        .AppendInterval(0.4f)
-//        .Append(barTrans.DOScaleX(scale, 1f))
-//        ;
-
-//    barSeq.Play().OnComplete(() => barTrans.gameObject.SetActive(false));

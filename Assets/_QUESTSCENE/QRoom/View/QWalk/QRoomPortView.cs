@@ -12,7 +12,7 @@ namespace Quest
         QRoomView qRoomView;
         void OnEnable()
         {
-            CharService.Instance.OnCharFlee +=(CharFleeState ch, CharNames charName)=> FillPort(); 
+            CharService.Instance.OnCharFleeCombat +=(CharController charController)=> FillPort(); 
         }
      
         public void QPortViewInit(QRoomView qRoomView)

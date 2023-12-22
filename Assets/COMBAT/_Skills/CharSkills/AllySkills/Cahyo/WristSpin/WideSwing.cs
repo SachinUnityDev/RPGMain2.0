@@ -88,7 +88,7 @@ namespace Combat
                 if (CombatService.Instance.mainTargetDynas.Count > 0)
                     CombatService.Instance.mainTargetDynas.ForEach(t => t.charGO.GetComponent<CharController>()
                                     .charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
-                                             , charController.charModel.charID, CharStateName.BleedLowDOT));
+                                             , charController.charModel.charID, CharStateName.Bleeding));
         }
 
         public override void ApplyFX3()

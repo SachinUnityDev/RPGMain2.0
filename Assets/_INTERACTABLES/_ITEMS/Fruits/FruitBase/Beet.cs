@@ -17,6 +17,7 @@ namespace Interactables
         public int itemId { get; set; }
         public List<int> allBuffs { get; set; }
         public Currency currency { get; set; }
+
         public void OnHoverItem()
         {
         }
@@ -29,9 +30,9 @@ namespace Interactables
         {
             float chance1 = 30f;
             if (chance1.GetChance())
-            {
-                charController.charStateController.ApplyDOTImmunityBuff(CauseType.Food
-                    , (int)fruitName, charController.charModel.charID, CharStateName.BleedLowDOT, TimeFrame.Infinity, -1, false);
+            {// get cast time from SO 
+                charController.charStateController.ApplyImmunityBuff(CauseType.Food
+                    , (int)fruitName, charController.charModel.charID, CharStateName.Bleeding, TimeFrame.EndOfRound, 8);
             }
         }     
 

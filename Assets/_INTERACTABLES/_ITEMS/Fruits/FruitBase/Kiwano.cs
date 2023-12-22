@@ -30,9 +30,8 @@ namespace Interactables
             float chance1 = 45f;
             if (chance1.GetChance())
             {
-                charController.charStateController.ApplyDOTImmunityBuff(CauseType.Food
-                    , (int)fruitName, charController.charModel.charID, CharStateName.PoisonedLowDOT, TimeFrame.Infinity, -1, false);
-
+                charController.charStateController.ApplyImmunityBuff(CauseType.Food
+                    , (int)fruitName, charController.charModel.charID, CharStateName.Poisoned, TimeFrame.EndOfRound,7);
             }
         }
         public void CheckNApplyOC()

@@ -7,31 +7,50 @@ using UnityEngine.UI;
 
 public class FleeView : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI headingTxt; 
 
     [SerializeField] Transform container; 
 
-    [SerializeField] Transform tickBtn; 
+    [SerializeField] Button tickBtn; 
     [SerializeField] Button closeBtn; 
-    List<string> allResultStr = new List<string>(); 
+    List<string> allResultStr = new List<string>();
+    [SerializeField] List<CharController> charFleeing= new List<CharController>();  
+
+
     void Start()
     {
-        closeBtn.onClick.AddListener(OnCloseBtnPressed); 
+        closeBtn.onClick.AddListener(OnCloseBtnPressed);
     }
     public void InitFleeView()
     {
         allResultStr.Clear();   
-        foreach (CharController charCtrl in CharService.Instance.allyInPlayControllers)
+        if(CharService.Instance.allCharInCombat.Count <= 1) // abbas is the only char
         {
-            if (charCtrl.charModel.charName == CharNames.Abbas) continue;
-            string str = ""; 
-            string charName = charCtrl.charModel.charNameStr;
-            
-            bool willFlee = charCtrl.fleeController.OnCombatFleeChk();
-            if (willFlee)            
-                str = charName + " will come with you";            
-            else            
-                str = charName + " will stay and fight"; 
-            allResultStr.Add(str);
+            headingTxt.text = "Are you sure you want to flee combat?"; 
+        }
+        else
+        {
+            foreach (CharController charCtrl in CharService.Instance.allCharInCombat)
+            {
+                if (charCtrl.charModel.charName == CharNames.Abbas) 
+                {
+                    charFleeing.Add(charCtrl);  
+                    continue; 
+                }
+                string str = "";
+                string charName = charCtrl.charModel.charNameStr;
+
+                bool willFlee = charCtrl.fleeController.OnCombatFleeChk();
+                if (willFlee)
+                {
+                    charFleeing.Add(charCtrl);  
+                    str = charName + " will come with you";
+                }   
+                else
+                    str = charName + " will stay and fight";
+                allResultStr.Add(str);
+            }
+            headingTxt.text = "If you flee combat:"; 
         }
         FillContainer();
     }
@@ -50,6 +69,19 @@ public class FleeView : MonoBehaviour
             }
         }
     }
+    void OnFleeBtnPressed()
+    {
+        if (charFleeing.Count == 0) return; 
+        
+
+            // if only abbas and all fleeing =>close combat 
+            // if few staying continue combat => rest flee and disappear
+    }
+
+
+
+
+
 
     void OnCloseBtnPressed()
     {

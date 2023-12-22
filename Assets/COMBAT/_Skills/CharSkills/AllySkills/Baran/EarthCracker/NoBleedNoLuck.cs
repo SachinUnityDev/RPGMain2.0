@@ -44,7 +44,7 @@ namespace Combat
 
             if(dmgAppliedData.strikeType == StrikeType.Crit)
             {
-                if (targetController.GetComponent<CharStateController>().HasCharDOTState(CharStateName.BleedLowDOT))
+                if (targetController.GetComponent<CharStateController>().HasCharState(CharStateName.Bleeding))
                 {
                     charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
                     , AttribName.luck, 1, TimeFrame.EndOfQuest, 1, true);

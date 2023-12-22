@@ -26,11 +26,11 @@ namespace Quest
             this.charController = charController;
             if(charController != null )
             {
-                CharFleeState fleeState = charController.charModel.charFleeState;
+                StateOfChar stateOfChar = charController.charModel.stateOfChar;
                 CharacterSO charSO = CharService.Instance.allCharSO.GetAllySO(charController.charModel.charName);
                 charSprite = charSO.dialoguePortraitClicked;
                 charName = charSO.charName;
-                if (fleeState == CharFleeState.None)
+                if (stateOfChar != StateOfChar.Fled)
                 {
                     charSprite = charSO.charSprite;
                 }

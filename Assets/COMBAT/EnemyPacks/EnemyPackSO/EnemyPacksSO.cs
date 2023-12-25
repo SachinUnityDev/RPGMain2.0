@@ -21,6 +21,7 @@ namespace Combat
         public bool isBossPack = false; 
         public List<EnemyDataInPack> allEnemyDataInPack = new List<EnemyDataInPack>();
         public Spread loot = new Spread(0, 0);
+        public int sharedExp; 
     }
 
     public enum EnemyPackName

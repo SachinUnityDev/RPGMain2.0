@@ -677,7 +677,7 @@ namespace Combat
                 allSkillBases.Find(t => t.skillName == selectedSkillModel.skillName).SkillSelected();
                 // SkillSelect?.Invoke(selectedSkillModel.skillName);  // message broadcaster 
 
-                Debug.Log("SELECTED SKILLS" + selectedSkillModel.skillName +"Enemy Skillbases" + allSkillBases.Count);                 
+                Debug.Log("SELECTED SKILLS: " + selectedSkillModel.skillName +"Enemy Skillbases: " + allSkillBases.Count);                 
 
                 allSkillBases.Find(t => t.skillName == selectedSkillModel.skillName).PopulateAITarget();
                 // Set the target ..i.e currTargetDyna .. etc 

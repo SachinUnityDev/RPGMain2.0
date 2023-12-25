@@ -54,12 +54,10 @@ namespace Combat
         {
             SkillService.Instance.OnSkillUsed -= OnSkillUsed;
         }
-
         void OnSkillUsed(SkillEventData skillEventData)
         {
             SetUnClick();
         }
-
 
         #region  POINTER EVENTS
         public void OnPointerClick(PointerEventData eventData)
@@ -85,7 +83,7 @@ namespace Combat
         public void OnPointerEnter(PointerEventData eventData)
         {
             if(skillModel != null)
-            ShowSkillcardInCombat();
+                 ShowSkillcardInCombat();
         }
         public void OnPointerExit(PointerEventData eventData)
         {

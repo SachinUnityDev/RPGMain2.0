@@ -150,9 +150,13 @@ namespace Combat
 
         public void On_EOC()
         {
-            FortReset2FortOrg();
-            CharService.Instance.allCharInCombat.Clear();
+            Debug.Log("EOC triggered");
+            FortReset2FortOrg();         
+            CombatService.Instance.combatEndView.ShowCombatEndView();
+        
+
             OnEOC?.Invoke();
+            CharService.Instance.allCharInCombat.Clear();
         }
         public void On_CombatFlee(CharController charController)
         {
@@ -160,7 +164,7 @@ namespace Combat
         }
         private void FortReset2FortOrg()
         {
-            foreach (CharController c in CharService.Instance.allCharInCombat)
+            foreach (CharController c in CharService.Instance.allCharsInPartyLocked)
             {
                 if(c.charModel.orgCharMode == CharMode.Ally)
                 {

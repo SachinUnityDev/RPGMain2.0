@@ -610,7 +610,7 @@ namespace Combat
             if (index != -1)
                 return allSkillPerkFXData[index];
             else
-                Debug.Log(" FX Not found!!!!!"); 
+                Debug.Log(" FX Not found!!!!!" + currSkillName); 
             return null;
         }
         public SkillDataSO GetSkillSO(CharNames _charName)

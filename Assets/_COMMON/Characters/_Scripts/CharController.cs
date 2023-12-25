@@ -6,8 +6,8 @@ using Combat;
 using DG.Tweening;
 using Interactables;
 using Quest;
-using Town; 
-
+using Town;
+using System.Linq;
 
 namespace Common
 {   
@@ -69,7 +69,7 @@ namespace Common
         }
         private void OnDisable()
         {
-            CombatEventService.Instance.OnEOC -= FortitudeReset2FortOrg;
+          //  CombatEventService.Instance.OnEOC -= FortitudeReset2FortOrg;
           //  CombatEventService.Instance.OnSOTactics -= AddControllers_OnCombatStart;
         }
         public CharModel InitiatizeController(CharacterSO _charSO)
@@ -105,8 +105,8 @@ namespace Common
                 permaTraitController = gameObject.GetComponent<PermaTraitController>();
                 armorController = gameObject.AddComponent<ArmorController>();
                 // CombatEventService.Instance.OnSOT += ()=> PopulateOverCharBars(false); 
-                CombatEventService.Instance.OnEOC -= FortitudeReset2FortOrg;
-                CombatEventService.Instance.OnEOC += FortitudeReset2FortOrg;
+                //CombatEventService.Instance.OnEOC -= FortitudeReset2FortOrg;
+                //CombatEventService.Instance.OnEOC += FortitudeReset2FortOrg;
 
                 fleeController = gameObject.AddComponent<FleeController>();
             }
@@ -467,15 +467,16 @@ namespace Common
             }
         }
 
-        void FortitudeReset2FortOrg()
-        {
-            if(charModel.orgCharMode == CharMode.Ally)
-            {
-                AttribData fortOrgData = GetAttrib(AttribName.fortOrg);
-                ChangeStat(CauseType.StatChecks, (int)AttribName.fortOrg
-                        , charModel.charID, StatName.fortitude, fortOrgData.currValue);
-            }
-        }
+        //void FortitudeReset2FortOrg()
+        //{
+        //    if (CharService.Instance.allCharsInPartyLocked.Any(t => t.charModel.charID != charModel.charID)) return; 
+        //    if(charModel.orgCharMode == CharMode.Ally)
+        //    {
+        //        AttribData fortOrgData = GetAttrib(AttribName.fortOrg);
+        //        ChangeStat(CauseType.StatChecks, (int)AttribName.fortOrg
+        //                , charModel.charID, StatName.fortitude, fortOrgData.currValue);
+        //    }
+        //}
 
         public void RegenStamina()  // for ally and enemies stamina regen is 2 
         {

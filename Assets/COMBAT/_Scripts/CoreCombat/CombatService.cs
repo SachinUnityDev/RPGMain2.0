@@ -10,6 +10,9 @@ namespace Combat
     {
         public CombatState combatState;
 
+        [Header(" Combat End View TBR")]
+        public CombatEndView combatEndView;
+
         [Header("Enemy Pack")]
         public AllEnemyPackSO allEnemyPackSO;
         public EnemyPackController enemyPackController; 
@@ -40,7 +43,9 @@ namespace Combat
         public bool isFocusChecked = false;
 
         [Header("Result")]
-        public bool isVictory; 
+        public bool isVictory;
+        [Header("Enemy Pack")]
+        public EnemyPacksSO currEnemyPackSO; 
 
         void OnEnable()
         {            
@@ -49,7 +54,7 @@ namespace Combat
             SkillService.Instance.SkillSelect
                             += (CharNames _charName, SkillNames _skillName)
                             =>combatState = CombatState.INCombat_InSkillSelected;
-   
+            
            
             deathAnimView = GetComponent<DeathAnimView>();
             roundController = GetComponent<RoundController>();
@@ -96,11 +101,9 @@ namespace Combat
         {
             currEnemyPack = enemyPack;
             enemyPackController.InitEnemyPackController(allEnemyPackSO);
-            EnemyPacksSO enemySO = allEnemyPackSO.GetEnemyPackSO(enemyPack);            
-            GridService.Instance.SetEnemy(enemySO);
+            currEnemyPackSO = allEnemyPackSO.GetEnemyPackSO(enemyPack);            
+            GridService.Instance.SetEnemy(currEnemyPackSO);
         }
-
-   
         public void ToggleColliders(bool turnOn)
         {
             foreach (CharController charCtrl in CharService.Instance.allCharInCombat)
@@ -126,9 +129,6 @@ namespace Combat
                 charCtrl.combatController.Init();
             }
         }
-
-     
-
         public void EORActions(int roundNo)
         {
             //Debug.Log("STAMINA REGEN ");

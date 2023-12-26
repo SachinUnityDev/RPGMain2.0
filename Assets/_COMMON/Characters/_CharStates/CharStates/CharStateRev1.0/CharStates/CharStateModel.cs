@@ -24,7 +24,7 @@ namespace Common
             statebehavior = charStateSO.charStateBehavior;
             stateFor = charStateSO.stateFor;
             stateType = charStateSO.charStateType;
-
+            
             this.charStateID = charStateID; 
         }
     }

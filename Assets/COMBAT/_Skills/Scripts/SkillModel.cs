@@ -20,8 +20,8 @@ namespace Combat
         public int skillUnLockStatus;
         public float damageMod;
         public float skillLvl;
-        [SerializeField]
-        SkillSelectState skillSelState; 
+        [SerializeField] SkillSelectState skillSelState;
+        public SkillSelectState prevSkillSelState;// for unClick.. without overloading the update skill Method 
         public int cd;
         public AttackType attackType;
         public List<DamageType> dmgType;
@@ -36,7 +36,6 @@ namespace Combat
         public float AIChance = 0; 
         public bool isActive;
         // // EXTRA Parameters
-        public int lastUsedInRound =-5;
         public List<PerkHexData> allPerkHexes = new List<PerkHexData>();
         public List<PerkType> perkChain = new List<PerkType>();
         List<string> descLines = new List<string>();
@@ -45,11 +44,17 @@ namespace Combat
         [Header("Use Limit")]
         public int noOfTimesUsed;
         [Header(" cd remaining")]
-        public int cdRemaining; 
+        public int cdRemaining;
+        public int lastUsedInRound = -5;
+
 
         public SkillSelectState GetSkillState()
         {
             return skillSelState; 
+        }
+        public void SetPrevSkillState()
+        {
+           SetSkillState(prevSkillSelState); 
         }
         public void SetSkillState(SkillSelectState _skillState)
         {   
@@ -59,6 +64,7 @@ namespace Combat
             }   
             else
             {
+                prevSkillSelState = skillSelState; 
                 skillSelState = _skillState; 
             }          
         }
@@ -112,6 +118,8 @@ namespace Combat
             isActive = _skillDataSO.isActive;
             //  Uses and cd remaining
             noOfTimesUsed = 0;
+            cdRemaining = 0; 
+            prevSkillSelState = SkillSelectState.None;
         }
 
     }

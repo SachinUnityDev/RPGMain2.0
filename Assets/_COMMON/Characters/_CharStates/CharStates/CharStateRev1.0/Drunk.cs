@@ -40,7 +40,7 @@ namespace Common
         }
         void OnEndofTheNight(int day)
         {
-            EndState();
+            charController.charStateController.RemoveCharState(charStateName);
         }
         public override void EndState()
         {

@@ -43,7 +43,7 @@ namespace Common
 
             buffID = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                    , charID, AttribName.fireRes, -30, TimeFrame.Infinity, 1, true);
+                    , charID, AttribName.fireRes, -30, TimeFrame.Infinity, 1, false);
             allBuffIds.Add(buffID);
 
             buffID = 

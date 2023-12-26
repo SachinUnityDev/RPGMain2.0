@@ -177,14 +177,6 @@ namespace Combat
             SkillService.Instance.On_PostSkill(skillModel);
         }
 
-        public void RemoteSkill(CellPosData cellPosData, SkillModel skillModel)
-        {
-            // loop thru the skills go and destroy the one that matches the criteria
-
-
-        }
-
-
         public void CharOnTurnHL(DynamicPosData dyna)
         {
             if(dyna == null)

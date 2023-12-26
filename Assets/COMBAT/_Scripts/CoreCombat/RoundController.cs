@@ -40,11 +40,13 @@ namespace Combat
         }
         public void SetSameCharOnTurn()
         {
+            Debug.Log("SAME CHAR ON TURN SET" + index);
             if (CombatService.Instance.combatState != CombatState.INCombat_normal)
             {
-                Debug.Log("SAME CHAR ON TURN SET" + index);
+             
                 return;
             }
+
             CombatEventService.Instance.On_CharOnTurnSet();
         }
 

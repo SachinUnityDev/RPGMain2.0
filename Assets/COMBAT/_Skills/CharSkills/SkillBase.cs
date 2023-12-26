@@ -202,7 +202,6 @@ namespace Combat
                 {
                     DynamicPosData dyna = GridService.Instance.GetDynaAtCellPos(cell.charMode, cell.pos);
                     CharController targetCtrl = dyna.charGO.GetComponent<CharController>();
-
                     if (dyna != null)
                     {
                         if (targetCtrl.charStateController.HasCharState(CharStateName.Hexed))

@@ -37,7 +37,7 @@ namespace Common
             float maxL = charController.GetAttrib(AttribName.focus).maxLimit;
             if (charController.GetAttrib(AttribName.luck).currValue < maxL)  // Exit condition 
             {
-                EndState();
+                charController.charStateController.RemoveCharState(charStateName);
             }
         }
 

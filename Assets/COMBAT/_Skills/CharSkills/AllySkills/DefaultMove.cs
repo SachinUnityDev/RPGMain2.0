@@ -23,7 +23,6 @@ namespace Combat
 
         public override void PopulateTargetPos()
         {
-  
             if (skillModel == null) return;
             skillModel.targetPos.Clear(); CombatService.Instance.mainTargetDynas.Clear();
 
@@ -45,6 +44,7 @@ namespace Combat
             if(charController.charModel.charMode == CharMode.Enemy)
             {
                 int pos = Random.Range(0, skillModel.targetPos.Count);
+                Debug.Log("Move2" + pos + " myDyna" + myDyna.charGO.name + myDyna.currentPos); 
                 GridService.Instance.gridController.Move2Pos(myDyna, skillModel.targetPos[pos].pos);
                 GridService.Instance.gridView.CharOnTurnHL(myDyna);
             }
@@ -104,8 +104,8 @@ namespace Combat
 
         public override void PopulateAITarget()
         {
-            SkillService.Instance.currentTargetDyna = myDyna;
-
+            PopulateTargetPos();
+            SkillService.Instance.currentTargetDyna = myDyna;     
         }
 
         public override void ApplyMoveFx()

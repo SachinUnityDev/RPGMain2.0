@@ -4080,6 +4080,7 @@ MonoBehaviour:
     damageMod: 0
     skillLvl: 0
     skillSelState: 0
+    prevSkillSelState: 0
     cd: 0
     attackType: 0
     dmgType: 
@@ -4093,11 +4094,11 @@ MonoBehaviour:
     baseWeight: 0
     AIChance: 0
     isActive: 0
-    lastUsedInRound: 0
     allPerkHexes: []
     perkChain: 
     noOfTimesUsed: 0
     cdRemaining: 0
+    lastUsedInRound: 0
   skillDataSO: {fileID: 0}
   skillCardGO: {fileID: 0}
   skillPtsTrans: {fileID: 0}
@@ -6002,6 +6003,7 @@ MonoBehaviour:
     damageMod: 0
     skillLvl: 0
     skillSelState: 0
+    prevSkillSelState: 0
     cd: 0
     attackType: 0
     dmgType: 
@@ -6015,11 +6017,11 @@ MonoBehaviour:
     baseWeight: 0
     AIChance: 0
     isActive: 0
-    lastUsedInRound: 0
     allPerkHexes: []
     perkChain: 
     noOfTimesUsed: 0
     cdRemaining: 0
+    lastUsedInRound: 0
   skillDataSO: {fileID: 0}
   skillCardGO: {fileID: 0}
   skillPtsTrans: {fileID: 0}
@@ -13806,6 +13808,7 @@ MonoBehaviour:
     damageMod: 0
     skillLvl: 0
     skillSelState: 0
+    prevSkillSelState: 0
     cd: 0
     attackType: 0
     dmgType: 
@@ -13819,11 +13822,11 @@ MonoBehaviour:
     baseWeight: 0
     AIChance: 0
     isActive: 0
-    lastUsedInRound: 0
     allPerkHexes: []
     perkChain: 
     noOfTimesUsed: 0
     cdRemaining: 0
+    lastUsedInRound: 0
   skillDataSO: {fileID: 0}
   skillCardGO: {fileID: 0}
   skillPtsTrans: {fileID: 0}
@@ -18358,6 +18361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b98d0c1c93cfa944badb418d1d56160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillNameTxt: {fileID: 1770080155}
   statIconSO: {fileID: 11400000, guid: f4361e123155a814a94b66519c8be0c2, type: 2}
   transitionSO: {fileID: 11400000, guid: 2441255d5c7312c4a83281d3862a6e2e, type: 2}
   maxExpectedLines: 10
@@ -18397,6 +18401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combatState: 0
+  combatEndView: {fileID: 0}
   allEnemyPackSO: {fileID: 11400000, guid: 1e87088f80c9c8a4fb9caf5e2f0d18a6, type: 2}
   enemyPackController: {fileID: 0}
   enemyPackFactory: {fileID: 0}
@@ -18924,6 +18929,7 @@ MonoBehaviour:
     damageMod: 0
     skillLvl: 0
     skillSelState: 0
+    prevSkillSelState: 0
     cd: 0
     attackType: 0
     dmgType: 
@@ -18937,11 +18943,11 @@ MonoBehaviour:
     baseWeight: 0
     AIChance: 0
     isActive: 0
-    lastUsedInRound: 0
     allPerkHexes: []
     perkChain: 
     noOfTimesUsed: 0
     cdRemaining: 0
+    lastUsedInRound: 0
   skillDataSO: {fileID: 0}
   skillCardGO: {fileID: 0}
   skillPtsTrans: {fileID: 0}
@@ -20585,6 +20591,7 @@ MonoBehaviour:
     damageMod: 0
     skillLvl: 0
     skillSelState: 0
+    prevSkillSelState: 0
     cd: 0
     attackType: 0
     dmgType: 
@@ -20598,11 +20605,11 @@ MonoBehaviour:
     baseWeight: 0
     AIChance: 0
     isActive: 0
-    lastUsedInRound: 0
     allPerkHexes: []
     perkChain: 
     noOfTimesUsed: 0
     cdRemaining: 0
+    lastUsedInRound: 0
   skillDataSO: {fileID: 0}
   skillCardGO: {fileID: 0}
   skillPtsTrans: {fileID: 0}
@@ -25047,6 +25054,7 @@ MonoBehaviour:
     damageMod: 0
     skillLvl: 0
     skillSelState: 0
+    prevSkillSelState: 0
     cd: 0
     attackType: 0
     dmgType: 
@@ -25060,11 +25068,11 @@ MonoBehaviour:
     baseWeight: 0
     AIChance: 0
     isActive: 0
-    lastUsedInRound: 0
     allPerkHexes: []
     perkChain: 
     noOfTimesUsed: 0
     cdRemaining: 0
+    lastUsedInRound: 0
   skillDataSO: {fileID: 0}
   skillCardGO: {fileID: 0}
   skillPtsTrans: {fileID: 0}
@@ -27715,6 +27723,7 @@ MonoBehaviour:
     damageMod: 0
     skillLvl: 0
     skillSelState: 0
+    prevSkillSelState: 0
     cd: 0
     attackType: 0
     dmgType: 
@@ -27728,11 +27737,11 @@ MonoBehaviour:
     baseWeight: 0
     AIChance: 0
     isActive: 0
-    lastUsedInRound: 0
     allPerkHexes: []
     perkChain: 
     noOfTimesUsed: 0
     cdRemaining: 0
+    lastUsedInRound: 0
   skillDataSO: {fileID: 0}
   skillCardGO: {fileID: 0}
   skillPtsTrans: {fileID: 0}
@@ -28880,6 +28889,7 @@ MonoBehaviour:
     damageMod: 0
     skillLvl: 0
     skillSelState: 0
+    prevSkillSelState: 0
     cd: 0
     attackType: 0
     dmgType: 
@@ -28893,11 +28903,11 @@ MonoBehaviour:
     baseWeight: 0
     AIChance: 0
     isActive: 0
-    lastUsedInRound: 0
     allPerkHexes: []
     perkChain: 
     noOfTimesUsed: 0
     cdRemaining: 0
+    lastUsedInRound: 0
   skillDataSO: {fileID: 0}
   skillCardGO: {fileID: 0}
   skillPtsTrans: {fileID: 0}
@@ -31639,7 +31649,7 @@ GameObject:
   - component: {fileID: 1770080156}
   - component: {fileID: 1770080155}
   m_Layer: 5
-  m_Name: TEMPDisplay
+  m_Name: SkillDsply
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

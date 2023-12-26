@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Combat
 {
+    [System.Serializable]
     public class AdjMatrixData
     {
         public int[,] adjMatrix = new int[8, 8];
@@ -19,7 +20,7 @@ namespace Combat
         public List<int> GetAdjacency(int cellNoFwd)
         {
             List<int> singleAdj = new List<int>(); 
-            for (int i = 1; i <= 7; i++)
+            for (int i = 1; i <= 7; ++i)
             {              
                 if (adjMatrix[cellNoFwd, i] == 1)
                 {

@@ -105,24 +105,28 @@ namespace Combat
         public override void PopulateAITarget()
         {
             base.PopulateAITarget();
-            if (SkillService.Instance.currentTargetDyna != null) return;
-
-            CharController maxValChar = CharService.Instance.HasHighestStat(StatName.health, CharMode.Enemy);
-            foreach (CellPosData cell in skillModel.targetPos)
+            DynamicPosData randomDyna = null; 
+            if (SkillService.Instance.currentTargetDyna == null)
             {
-                DynamicPosData dyna = GridService.Instance.GetDynaAtCellPos(cell.charMode, cell.pos);
-                if (dyna != null)
+                CharController maxValChar = CharService.Instance.HasHighestStat(StatName.health, CharMode.Enemy);
+                foreach (CellPosData cell in skillModel.targetPos)
                 {
-                    CharController myCharCtrl = dyna.charGO.GetComponent<CharController>();                   
-                    if (maxValChar.charModel.charID == myCharCtrl.charModel.charID)
+                    DynamicPosData dyna = GridService.Instance.GetDynaAtCellPos(cell.charMode, cell.pos);
+                    if (dyna != null)
                     {
-                        SkillService.Instance.currentTargetDyna = dyna;
-                        return; 
+                        randomDyna= dyna;
+                        CharController myCharCtrl = dyna.charGO.GetComponent<CharController>();
+                        if (maxValChar.charModel.charID == myCharCtrl.charModel.charID)
+                        {
+                            SkillService.Instance.currentTargetDyna = dyna;
+                            return;
+                        }
                     }
-                   
                 }
+                if (SkillService.Instance.currentTargetDyna == null)
+                    SkillService.Instance.currentTargetDyna = randomDyna;
+
             }
-         
         }
 
         public override void ApplyMoveFx()

@@ -40,7 +40,7 @@ MonoBehaviour:
     damageMod: 100
     skillLvl: 0
     skillSelState: 1
-    cd: 0
+    cd: 4
     attackType: 1
     dmgType: 010000000f000000
     castPos: 020000000300000004000000050000000600000007000000
@@ -238,14 +238,14 @@ MonoBehaviour:
     skillTransitionPose2: {fileID: 0}
     skillType: 5
     skillUnLockStatus: 1
-    skillDesc: Feign Death
+    skillDesc: Hide in the Bushes
     damageMod: 0
     skillLvl: 0
     skillSelState: 0
     cd: 2
     attackType: 0
     dmgType: 
-    castPos: 01000000020000000300000004000000050000000600000007000000
+    castPos: 020000000300000004000000050000000600000007000000
     targetPos: []
     staminareq: 0
     castTime: 2

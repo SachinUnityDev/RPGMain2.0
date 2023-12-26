@@ -33,7 +33,7 @@ namespace Common
             {
                 if(dmgAppliedData.attackType == AttackType.Melee || dmgAppliedData.attackType == AttackType.Ranged)
                 {
-                    EndState();
+                    charController.charStateController.RemoveCharState(charStateName);
                 }
             }
         }

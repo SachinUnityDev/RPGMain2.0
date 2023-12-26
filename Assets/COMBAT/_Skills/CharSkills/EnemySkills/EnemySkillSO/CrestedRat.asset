@@ -52,7 +52,7 @@ MonoBehaviour:
     timeFrame: 0
     maxUsagePerCombat: 0
     skillIncli: 2
-    baseWeight: 1000
+    baseWeight: 100
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
@@ -90,7 +90,7 @@ MonoBehaviour:
     timeFrame: 1
     maxUsagePerCombat: 0
     skillIncli: 1
-    baseWeight: 25
+    baseWeight: 200
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
@@ -129,7 +129,7 @@ MonoBehaviour:
     timeFrame: 1
     maxUsagePerCombat: 0
     skillIncli: 10
-    baseWeight: 5
+    baseWeight: 20
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
@@ -175,7 +175,7 @@ MonoBehaviour:
     skillTransitionPose2: {fileID: 0}
     skillType: 6
     skillUnLockStatus: 1
-    skillDesc: 
+    skillDesc: Move
     damageMod: 0
     skillLvl: 0
     skillSelState: 1

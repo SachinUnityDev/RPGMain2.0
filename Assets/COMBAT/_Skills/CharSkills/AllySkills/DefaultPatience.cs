@@ -80,7 +80,13 @@ namespace Combat
 
         public override void PopulateAITarget()
         {
-            // add self target .. 
+            // add self target ..
+             base.PopulateAITarget();
+            if (SkillService.Instance.currentTargetDyna != null) return;
+            if (myDyna == null)
+            {
+                Debug.LogError("mydyna null" + myDyna.charGO.name); return;
+            }
             SkillService.Instance.currentTargetDyna = myDyna;
 
         }

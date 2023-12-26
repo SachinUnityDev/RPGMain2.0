@@ -33,13 +33,13 @@ namespace Common
         public BuffController buffController;
         public CharTypeBuffController charTypeBuffController;
         public TimeBuffController timeBuffController;
-
+        
 
         [Header("States and traits controller")]
         public CharStateController charStateController;
         public TempTraitController tempTraitController;
         public PermaTraitController permaTraitController;
- 
+
 
         [Header("Item Controller")]
         public ItemController  itemController;
@@ -64,7 +64,7 @@ namespace Common
 
         private void OnEnable()
         {
-           
+            
 
         }
         private void OnDisable()
@@ -376,7 +376,20 @@ namespace Common
             // ACTUAL VALUE UPDATED HERE
             //charModel.attribList.Find(x => x.AttribName == charModData.attribModified).currValue
             //                                                                = Mathf.RoundToInt(modCurrValue);
-            SetAttribVal(attribName,modCurrValue);
+            if(attribName == AttribName.airRes)
+            {
+                Debug.Log(" value " + modCurrValue); 
+            }
+            int index = charModel.attribList.FindIndex(t => t.AttribName == attribName);
+            if(index != -1)
+            {
+                charModel.attribList[index].currValue = Mathf.RoundToInt(modCurrValue); 
+            }
+            else
+            {
+                Debug.Log("attrib not found in list"); 
+            }
+
 
             charModData.modCurrVal = modCurrValue;
             if (attribName == AttribName.vigor)
@@ -406,12 +419,7 @@ namespace Common
 
             return charModData; 
         }
-        void SetAttribVal(AttribName attribName, float val)
-        {
-           Debug.Log("AttribName: " + attribName + "Value: " + val);
-           AttribData attribdata =  charModel.attribList.Find(t=>t.AttribName == attribName);
-            attribdata.currValue = Mathf.RoundToInt(val); 
-        }
+
 
         public void SetMaxAttribValue(AttribName attribName, float val)
         {

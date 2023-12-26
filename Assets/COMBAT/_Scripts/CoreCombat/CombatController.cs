@@ -84,11 +84,11 @@ namespace Combat
             if(actionPts <= 0)
                     actionPts= 0;
 
-            Canvas canvas = FindObjectOfType<Canvas>();
-            SkillView skillView = canvas.GetComponentInChildren<SkillView>(); 
-           skillView.SetSkillsPanel(charController);
+          //  Canvas canvas = FindObjectOfType<Canvas>();
+          //  SkillView skillView = canvas.GetComponentInChildren<SkillView>(); 
+          ////  skillView.SetSkillsPanel(charController);
 
-            Debug.Log(" charName" + charController.charModel.charName + "action"+ actionPts);
+            Debug.Log("ACTION PTS SET FOR: " + charController.charModel.charName + "action"+ actionPts);
             if (charController.charModel.charMode == CharMode.Enemy)
             {
                 if (actionPts <= 0)

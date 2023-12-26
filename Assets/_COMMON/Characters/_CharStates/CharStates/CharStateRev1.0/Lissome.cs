@@ -54,7 +54,7 @@ namespace Common
             float maxL = charController.GetAttrib(AttribName.haste).maxLimit;
             if (charController.GetAttrib(AttribName.haste).currValue < maxL)  // Exit condition 
             {
-                EndState();
+                charController.charStateController.RemoveCharState(charStateName);
             }
         }
         public override void EndState()

@@ -23,7 +23,7 @@ namespace Combat
         [SerializeField] Vector3 movePos;
         [SerializeField] float moveSpeed;
 
-        AdjMatrixData adjMatrixData; 
+        [SerializeField] AdjMatrixData adjMatrixData; 
         void OnEnable()
         {
             moveSpeed = 2.5f;

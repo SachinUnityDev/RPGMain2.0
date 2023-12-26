@@ -60,14 +60,14 @@ namespace Common
 
         public override void StateDisplay()
         {
-            str1 = $"Lose<style=Bleed> Health </style>per rd";
+            str0 = $"Lose<style=Bleed> Health </style>per rd";
+            allStateFxStrs.Add(str0);
+            str1 = "-2<style=Fortitude> Fortitude </style>per rd";
             allStateFxStrs.Add(str1);
-            str2 = "-2<style=Fortitude> Fortitude </style>per rd";
-            allStateFxStrs.Add(str2);
-            str3 = "-1<style=Stamina> Stamina Regen</style>";
-            allStateFxStrs.Add(str3);   
-            str4 = "-2<style=Attributes> Dodge </style>";
-            allStateFxStrs.Add(str4);
+            str2 = "-1<style=Stamina> Stamina Regen</style>";
+            allStateFxStrs.Add(str2);   
+            str3 = "-2<style=Attributes> Dodge </style>";
+            allStateFxStrs.Add(str3);
         }
 
         public override void EndState()

@@ -40,6 +40,7 @@ namespace Combat
         UnClickable_Locked, 
         UnClickable_Misc,
         UnClickable_NoUseLeft,
+        UnClickable_2Move,
 
     }
 

@@ -130,10 +130,10 @@ namespace Common
             int roundCounter = roundNo - startRound;
             if (charStateName == CharStateName.Faithful || charStateName == CharStateName.Fearful)
                 if (roundCounter >= 2)
-                    EndState(); 
+                    charController.charStateController.RemoveCharState(charStateName); 
 
-            if (roundCounter >= castTime)
-                EndState();
+            if (roundCounter >= castTime) 
+                charController.charStateController.RemoveCharState(charStateName);
         }
         protected virtual void CombatTick()
         {          
@@ -142,36 +142,42 @@ namespace Common
                charStateName == CharStateName.Poisoned || charStateName == CharStateName.FirstBlood 
                || charStateName == CharStateName.Fearful || charStateName == CharStateName.Faithful 
                || charStateName == CharStateName.CheatedDeath || charStateName == CharStateName.FlatFooted)
-                 EndState(); 
+                charController.charStateController.RemoveCharState(charStateName);  
 
             if(timeFrame == TimeFrame.EndOfCombat)
-                EndState();
+                charController.charStateController.RemoveCharState(charStateName);
         }
         protected virtual void QuestTick()
         {
             if (timeFrame == TimeFrame.EndOfQuest)
-                EndState();
+                charController.charStateController.RemoveCharState(charStateName); 
+                    
         }
         public virtual void EndState()
         {   
-            charController.charStateController.RemoveCharState(charStateName);
+           // charController.charStateController.RemoveCharState(charStateName);
+            ClearBuffs();
             CombatEventService.Instance.OnEOC -= CombatTick;
             CombatEventService.Instance.OnEOR1 -= RoundTick;
             QuestEventService.Instance.OnEOQ -= QuestTick;
         }
         public virtual void ClearBuffs()
         {
-            foreach (int buffID in allBuffIds)
+            foreach (int buffID in allBuffIds.ToList())
             {
                 charController.buffController.RemoveBuff(buffID);
+                allBuffIds.Remove(buffID);
             }
             foreach (ImmunityBuffData immuneBuffData in charController.charStateController.allImmunityBuffs.ToList())
             {
                 if (allImmunityBuffs.Any(t => t == immuneBuffData.immunityID))
                 {
                     charController.charStateController.RemoveImmunityBuff(immuneBuffData.immunityID);
+                    allImmunityBuffs.Remove(immuneBuffData.immunityID);
                 }
             }
+            allBuffIds.Clear();
+            allImmunityBuffs.Clear(); 
         }
     }
 

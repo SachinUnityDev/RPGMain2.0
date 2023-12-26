@@ -52,7 +52,7 @@ MonoBehaviour:
     timeFrame: 1
     maxUsagePerCombat: 0
     skillIncli: 1
-    baseWeight: 0
+    baseWeight: 50
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
@@ -90,7 +90,7 @@ MonoBehaviour:
     timeFrame: 1
     maxUsagePerCombat: 0
     skillIncli: 1
-    baseWeight: 1000
+    baseWeight: 300
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
@@ -128,7 +128,7 @@ MonoBehaviour:
     timeFrame: 1
     maxUsagePerCombat: 0
     skillIncli: 5
-    baseWeight: 5
+    baseWeight: 10
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000

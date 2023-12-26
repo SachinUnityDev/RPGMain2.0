@@ -35,7 +35,8 @@ namespace Combat
     {
         #region Declarations
 
-
+        [Header("Skill NAME ")]
+        [SerializeField] TextMeshProUGUI skillNameTxt; 
         [Header("Scriptable objects")]
         public StatIconSO statIconSO;
         //public CharStateModelSO charStateIconSO;
@@ -80,7 +81,6 @@ namespace Combat
         float animTime = 0.2f;
 
 
-
         public List<GameObject> statBars = new List<GameObject>();  // get Health,stamina, fortitude, hunger thrist bars in order
         public List<StatDisplayData> statDisplay = new List<StatDisplayData>();
         public GameObject CharStatesPanel;
@@ -102,19 +102,19 @@ namespace Combat
             portraitToggleState = StatPanelToggleState.None;
             //attribPanelToggleBtn.onClick.AddListener(OnAttributesPanelTogglePressed);
             //AttributePanelToggle();
-           // CombatEventService.Instance.OnSOTactics += SetDefaultTurnOrder;
+            // CombatEventService.Instance.OnSOTactics += SetDefaultTurnOrder;
             //CombatEventService.Instance.OnSOR += SetCharOnTopPanel;
 
-           // CombatEventService.Instance.OnCharClicked += SetBuffDebuffList;
-          
-    
+            // CombatEventService.Instance.OnCharClicked += SetBuffDebuffList;
+
+
             //CombatEventService.Instance.OnSOR += SetDefaultTurnOrder;
 
             //CombatEventService.Instance.OnSOT += CleanOnTurnGO; 
 
-            CombatEventService.Instance.OnSOTactics += () => transitionSO.PlayAnims("TACTICS", animPanel);
-            CombatEventService.Instance.OnSOC += () => transitionSO.PlayAnims("COMBAT", animPanel);
-            CombatEventService.Instance.OnEOC += ()=> transitionSO.PlayAnims("COMBAT ENDS", animPanel);
+            CombatEventService.Instance.OnSOTactics += () => PlayTransitAnim("TACTICS"); 
+            CombatEventService.Instance.OnSOC += () => PlayTransitAnim("COMBAT");
+            CombatEventService.Instance.OnEOC += ()=> PlayTransitAnim("COMBAT ENDS");
             // CombatEventService.Instance.OnSOR += () => transitionSO.PlayAnims("ROUND " + CombatService.Instance.currentRound, animPanel);
             CombatEventService.Instance.OnSOR1 += RoundDisplay; 
             CombatEventService.Instance.OnCombatLoot += CombatResultDisplay;
@@ -127,13 +127,21 @@ namespace Combat
             // to be kept 
             CombatEventService.Instance.OnCharOnTurnSet += SetSelectCharPortrait;
             CombatEventService.Instance.OnCharClicked += SetSelectCharPortrait;
-
+            SkillService.Instance.OnSkillUsed += DsplySkillName; 
             // CombatEventService.Instance.OnCharOnTurnSet += SetCombatStatesDisplay;
             // CombatEventService.Instance.OnCharClicked += SetCombatStatesDisplay;
             //// CharStatesPanelIconsClear();
             // CharStatesService.Instance.OnCharStateStart += UpdateCharStateChg;
             // CharStatesService.Instance.OnCharStateEnd += UpdateCharStateChg;
 
+        }
+        void DsplySkillName(SkillEventData skillEventData)
+        {
+            skillNameTxt.text = skillEventData.skillName.ToString().CreateSpace();   
+        }
+        void PlayTransitAnim(string  str)
+        {
+            transitionSO.PlayAnims(str, animPanel);
         }
 
         void RoundDisplay(int roundNo)

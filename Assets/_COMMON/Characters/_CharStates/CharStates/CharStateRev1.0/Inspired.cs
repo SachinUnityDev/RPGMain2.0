@@ -50,7 +50,7 @@ namespace Common
             float maxL = charController.GetAttrib(AttribName.morale).maxLimit;
             if (charController.GetAttrib(AttribName.morale).currValue < maxL)  // Exit condition 
             {
-                EndState();
+                charController.charStateController.RemoveCharState(charStateName);
             }
         }
     }

@@ -194,9 +194,9 @@ namespace Common
             int index = allCharBases.FindIndex(t => t.charStateName == charStateName);
             if (index != -1)
             {
-                allCharBases[index].ClearBuffs();   // all related buffs to be cleared from here
+                allCharBases[index].EndState(); // all related buffs to be cleared from here
                 allCharBases.RemoveAt(index);
-                RemoveImmunityByCharState(charStateName);
+                //RemoveImmunityByCharState(charStateName);
             }
             int index2 = allCharStateModels.FindIndex(t => t.charStateName == charStateName);
             if (index != -1)
@@ -204,6 +204,7 @@ namespace Common
                 allCharStateModels.RemoveAt(index2);
             }
         }
+        
         public void ResetCharStateBuff(CharStateName charStateName)
         {
             foreach (CharStateBuffData buffData in allCharStateBuffs)
@@ -417,7 +418,7 @@ namespace Common
         public void RoundTick(int roundNo)
         {
             if (allCharStateBuffs.Count == 0) return; 
-            foreach (CharStateBuffData stateData in allCharStateBuffs)
+            foreach (CharStateBuffData stateData in allCharStateBuffs.ToList())
             {
                 if (stateData.timeFrame == TimeFrame.EndOfRound)
                 {

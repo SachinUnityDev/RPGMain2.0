@@ -517,7 +517,8 @@ namespace Combat
                     combatController.actionPts++;
 
                 combatController.SubtractActionPtOnSkilluse(skillModel, currCharOnturn.charModel.charMode);
-                currSkillController.UpdateAllSkillState(currCharOnturn);
+
+               currSkillController.UpdateAllSkillState();
             }else if (currCharOnturn.charModel.charMode == CharMode.Enemy) 
             {
                 Move2Nextturn();
@@ -702,7 +703,7 @@ namespace Combat
             if(charController.combatController.actionPts >0)
                 GridService.Instance.gridView.SetRemoteSkill(skillModel, cellPosData); 
             ClearPrevData();
-            currSkillController.UpdateAllSkillState(charController);
+           // currSkillController.UpdateAllSkillState(charController);
             On_PostSkillApply(); // move to the next turn
         }
 

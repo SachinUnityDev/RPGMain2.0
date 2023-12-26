@@ -94,8 +94,8 @@ namespace Combat
         public void SetUnClick()
         {
             IsClicked = false;
-            if(skillModel != null)
-            skillModel.SetSkillState(SkillSelectState.Clickable);
+            if (skillModel != null)
+                skillModel.SetPrevSkillState();    
             transform.GetChild(1).GetComponent<Image>().sprite = skillHexSO.SkillNormalFrame;
         }
         public void SetClicked()

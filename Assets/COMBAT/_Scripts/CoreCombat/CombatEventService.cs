@@ -115,7 +115,6 @@ namespace Combat
             GridService.Instance.gridView.CharOnTurnHL(dynaOnTurn);
             charCtrl.RegenStamina();
             charCtrl.HPRegen();
-            charCtrl.skillController.UpdateAllSkillState(charCtrl); 
             Debug.Log("CHAR SET ON TURN >>>>" + charCtrl.charModel.charName);
          
             OnCharOnTurnSet?.Invoke(charCtrl);
@@ -152,7 +151,7 @@ namespace Combat
         {
             Debug.Log("EOC triggered");
             FortReset2FortOrg();         
-            CombatService.Instance.combatEndView.ShowCombatEndView();
+          //  CombatService.Instance.combatEndView.ShowCombatEndView();
         
 
             OnEOC?.Invoke();
@@ -168,7 +167,7 @@ namespace Combat
             {
                 if(c.charModel.orgCharMode == CharMode.Ally)
                 {
-                    float fortOrg = c.GetAttrib(AttribName.fortOrg).currValue;                   
+                  //  float fortOrg = c.GetAttrib(AttribName.fortOrg).currValue;                   
 
                     c.SetCurrStat(CauseType.CombatOver, -1, c.charModel.charID,AttribName.fortOrg,0); 
                     

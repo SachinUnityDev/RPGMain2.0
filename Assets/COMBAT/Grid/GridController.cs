@@ -40,10 +40,7 @@ namespace Combat
         {
             // for single , if lane/tris/dia/hex 
             // use switch case
-           
-            // IF ROOTED CANNOT BE MOVED
-            CharStateController charStateController = dyna.charGO.GetComponent<CharStateController>();
-            if (charStateController.HasCharState(CharStateName.Rooted)) return; 
+      
 
             if (targetCell < 1 || targetCell > 7) return;
             if (dyna == null) return;

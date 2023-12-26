@@ -672,8 +672,9 @@ namespace Combat
             {
                 SkillService.Instance.currSkillName = selectedSkillModel.skillName;
                 //SkillService.Instance.On_SkillSelected(selectedSkillModel.charName);// dependencies skillName
-
                 // fixes skill select call  and currSKill controller to skill Service
+
+
                 allSkillBases.Find(t => t.skillName == selectedSkillModel.skillName).SkillSelected();
                 // SkillSelect?.Invoke(selectedSkillModel.skillName);  // message broadcaster 
 
@@ -694,7 +695,6 @@ namespace Combat
             float netBaseWt = 0f; ClickableSkills.Clear();
             foreach (SkillModel skillModel in allSkillModels)
             {   
-            
                 UpdateSkillState(skillModel);
                 if (skillModel.GetSkillState() == SkillSelectState.Clickable)
                 {
@@ -839,71 +839,83 @@ namespace Combat
 
         #region UPDATE SKILL STATE
 
-        public void UpdateAllSkillState(CharController charController)
+        public void UpdateAllSkillState()
         {
-            if (GameService.Instance.gameModel.gameState != GameState.InCombat) return; 
-            if(!CharService.Instance.allCharInCombat.Any(t=>t.charModel.charID == charController.charModel.charID))  return;
-            Debug.Log(" CHAR SKILL UPDATE" + charController.charModel.charName); 
+            if (GameService.Instance.gameModel.gameState != GameState.InCombat) return;
+            if (!CharService.Instance.allCharInCombat.Any(t => t.charModel.charID == charController.charModel.charID)) return;
+            Debug.Log(" CHAR SKILL UPDATE" + charController.charModel.charName);
             foreach (SkillModel skillModel in allSkillModels)
             {
-                UpdateSkillState(skillModel); 
+                UpdateSkillState(skillModel);
             }
         }
         public SkillSelectState UpdateSkillState(SkillModel skillModel)
         {
 
-             Debug.Log("SKILL NAME " + skillModel.skillName + "TARGETS" + skillModel.targetPos.Count);
-            skillModel.SetSkillState(SkillSelectState.Clickable);
+            //  skillModel.SetSkillState(SkillSelectState.Clickable);
+            SkillSelectState skillState = SkillSelectState.None;
+            bool isRooted = charController.charStateController.HasCharState(CharStateName.Rooted); 
+
             if (CombatService.Instance.combatState == CombatState.INTactics)
             {
                 skillModel.SetSkillState(SkillSelectState.UnClickable_InTactics);
-                return SkillSelectState.UnClickable_InTactics;
+                skillState = SkillSelectState.UnClickable_InTactics;
             }
             else if (CombatService.Instance.currCharClicked != CombatService.Instance.currCharOnTurn)
             {
                 skillModel.SetSkillState(SkillSelectState.Unclickable_notCharsTurn);
-                return SkillSelectState.Unclickable_notCharsTurn;
+                skillState = SkillSelectState.Unclickable_notCharsTurn;
             }
             else if (HasNoChkActionPts())
             {
                 skillModel.SetSkillState(SkillSelectState.UnClickable_NoActionPts);
-                return SkillSelectState.UnClickable_NoActionPts;
+                skillState = SkillSelectState.UnClickable_NoActionPts;
+            }
+            else if(skillModel.skillInclination == SkillInclination.Move && isRooted)
+            {
+                skillModel.SetSkillState(SkillSelectState.UnClickable_2Move);
+                skillState = SkillSelectState.UnClickable_2Move;
             }
             else if (IfInCoolDown(skillModel))      // only char on turn will get here 
             {
                 skillModel.SetSkillState(SkillSelectState.UnClickable_InCd);
-                return SkillSelectState.UnClickable_InCd;
+                skillState = SkillSelectState.UnClickable_InCd;
             }
             else if (IfNoUseLeft(skillModel))      // only char on turn will get here 
             {
                 skillModel.SetSkillState(SkillSelectState.UnClickable_NoUseLeft);
-                return SkillSelectState.UnClickable_NoUseLeft;
+                skillState = SkillSelectState.UnClickable_NoUseLeft;
             }
             else if (IsNotOnCastPos(skillModel))     // not on cast pos 
             {
                 skillModel.SetSkillState(SkillSelectState.Unclickable_notOnCastPos);
-                return SkillSelectState.Unclickable_notOnCastPos;
+                skillState = SkillSelectState.Unclickable_notOnCastPos;
             }
+        
             else if (NoTargetsInRange(skillModel))
             {
                 skillModel.SetSkillState(SkillSelectState.UnClickable_NoTargets);
-                return SkillSelectState.UnClickable_NoTargets;
+                skillState = SkillSelectState.UnClickable_NoTargets;
             }
             else if (HasNoStamina(skillModel))
             {
                 skillModel.SetSkillState(SkillSelectState.UnClickable_NoStamina);
-                return SkillSelectState.UnClickable_NoStamina;
+                skillState = SkillSelectState.UnClickable_NoStamina;
             }
             else if (skillModel.skillInclination == SkillInclination.Passive)  // as enemies only // more like traits
             {
                 skillModel.SetSkillState(SkillSelectState.Unclickable_passiveSkills);
-                return SkillSelectState.Unclickable_passiveSkills;
+                skillState = SkillSelectState.Unclickable_passiveSkills;
             }
             else
             {
                 skillModel.SetSkillState(SkillSelectState.Clickable);
-                return SkillSelectState.Clickable;
+                skillState = SkillSelectState.Clickable;
             }
+            skillModel.prevSkillSelState =skillState; //prev state set to updated state
+            Debug.Log("SKILL NAME " + skillModel.skillName + "State" + skillState +
+         "TARGETS" + skillModel.targetPos.Count);
+            return skillState; 
         }
 
         bool HasNoChkActionPts()
@@ -915,9 +927,10 @@ namespace Combat
             CombatController combatController = charController?.GetComponent<CombatController>();
             if (combatController == null)
                 return false; // case: Combat controller is null in tactics and therefore
-
+            Debug.Log("Checked on action pts" + combatController.actionPts + " charName"+ charController.gameObject.name);
             if (combatController.actionPts > 0)
                 return false;
+            
             return true;
         }
 
@@ -986,13 +999,12 @@ namespace Combat
         {
             if (_skillModel.cd == -5) return false;
             if (_skillModel.lastUsedInRound == -5) return false;
-            int rdDiff = CombatService.Instance.currentRound - _skillModel.lastUsedInRound;
-            // Debug.Log("CD diff " + rdDiff); 
-            if (rdDiff >= _skillModel.cd)
-            {
-                return false;
+            _skillModel.cdRemaining = (CombatService.Instance.currentRound+1) - _skillModel.lastUsedInRound ;
+            if (_skillModel.cdRemaining >0)
+            {               
+                return true;
             }
-            return true;
+            return false;
         }
 
         #endregion

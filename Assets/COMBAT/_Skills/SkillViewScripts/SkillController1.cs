@@ -999,12 +999,17 @@ namespace Combat
         {
             if (_skillModel.cd == -5) return false;
             if (_skillModel.lastUsedInRound == -5) return false;
-            _skillModel.cdRemaining = (CombatService.Instance.currentRound+1) - _skillModel.lastUsedInRound ;
-            if (_skillModel.cdRemaining >0)
+            _skillModel.cdRemaining = _skillModel.cd - (CombatService.Instance.currentRound - _skillModel.lastUsedInRound);
+            if (_skillModel.cdRemaining > 0)
             {               
                 return true;
             }
-            return false;
+            else
+            {
+                _skillModel.cdRemaining = 0; 
+                _skillModel.lastUsedInRound= 0;
+                return false;
+            }
         }
 
         #endregion

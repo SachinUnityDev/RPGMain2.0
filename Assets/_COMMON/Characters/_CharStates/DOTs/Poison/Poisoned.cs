@@ -79,14 +79,14 @@ namespace Common
         public override void StateDisplay()
         {
             int dmg = Mathf.RoundToInt(dmgPerRound);      
-            str1 = $"Lose<style=Bleed> Health </style>per rd";
+            str0 = $"Lose<style=Bleed> Health </style>per rd";
+            allStateFxStrs.Add(str0);
+            str1 = "-2<style=Attributes> Haste</style>";
             allStateFxStrs.Add(str1);
-            str2 = "-2<style=Attributes> Haste</style>";
+            str2= "-30<style=Fire> Fire Res </style>and +20<style=Air> Air Res</style>";
             allStateFxStrs.Add(str2);
-            str3 = "-30<style=Fire> Fire Res </style>and +20<style=Air> Air Res</style>";
+            str3 = "Immune to<style=Air> Shocked</style>";
             allStateFxStrs.Add(str3);
-            str4 = "Immune to<style=Air> Shocked</style>";
-            allStateFxStrs.Add(str4);
         }
 
         public override void EndState()

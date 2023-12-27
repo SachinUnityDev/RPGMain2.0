@@ -196,7 +196,7 @@ namespace Common
             {
                 allCharBases[index].EndState(); // all related buffs to be cleared from here
                 allCharBases.RemoveAt(index);
-                //RemoveImmunityByCharState(charStateName);
+                RemoveImmunityByCharState(charStateName);
             }
             int index2 = allCharStateModels.FindIndex(t => t.charStateName == charStateName);
             if (index != -1)

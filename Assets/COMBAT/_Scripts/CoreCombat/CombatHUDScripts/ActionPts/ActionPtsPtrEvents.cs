@@ -1,5 +1,7 @@
+using Common;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -19,8 +21,10 @@ namespace Combat
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (CombatService.Instance.combatState == CombatState.INTactics)
-                return; 
-            int actionPts= actionPtsView.actionPts;
+                return;
+            CharController charController = CombatService.Instance.currCharOnTurn;
+
+            int actionPts = charController.combatController.actionPts; 
             if(actionPts > 0)
             {
                 actionsPtsTxt.gameObject.SetActive(true); 

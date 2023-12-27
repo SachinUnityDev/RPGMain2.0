@@ -26,6 +26,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 774757609257730860}
   m_Father: {fileID: 0}
@@ -165,6 +166,14 @@ PrefabInstance:
     - target: {fileID: 19815976, guid: dca0a1441173f0046b680a414e203635, type: 3}
       propertyPath: InitialModule.startSizeZ.minMaxState
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19901704, guid: dca0a1441173f0046b680a414e203635, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 19901704, guid: dca0a1441173f0046b680a414e203635, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1081719165
       objectReference: {fileID: 0}
     - target: {fileID: 19901704, guid: dca0a1441173f0046b680a414e203635, type: 3}
       propertyPath: m_Materials.Array.size

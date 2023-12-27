@@ -73,7 +73,7 @@ namespace Common
             for (j = 0; j < skillModel.cd; j++)
             {
                 transform.GetChild(j).gameObject.SetActive(true);
-                if (j < currRd-skillModel.lastUsedInRound)
+                if (j >= skillModel.cdRemaining)
                     transform.GetChild(j).GetComponent<Image>().sprite = cdN;
                 else
                     transform.GetChild(j).GetComponent<Image>().sprite = cdNA;
@@ -82,8 +82,6 @@ namespace Common
             {
                 transform.GetChild(k).gameObject.SetActive(false);
             }
-
-
         }
     }
 }

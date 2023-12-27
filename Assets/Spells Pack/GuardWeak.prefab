@@ -26,6 +26,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6191244676923037943}
   m_Father: {fileID: 0}
@@ -55,13 +56,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7812585452936393674, guid: 4da2216bfcbd6764c9dee834c281d43d,
         type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7812585452936393674, guid: 4da2216bfcbd6764c9dee834c281d43d,
+        type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 1e-45
+      value: -7.1301297e-29
+      objectReference: {fileID: 0}
+    - target: {fileID: 7812585452936393674, guid: 4da2216bfcbd6764c9dee834c281d43d,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 5.34e-43
       objectReference: {fileID: 0}
     - target: {fileID: 7812585453281971152, guid: 4da2216bfcbd6764c9dee834c281d43d,
         type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7812585453298936648, guid: 4da2216bfcbd6764c9dee834c281d43d,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7812585453298936648, guid: 4da2216bfcbd6764c9dee834c281d43d,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1081719165
       objectReference: {fileID: 0}
     - target: {fileID: 7812585453298936649, guid: 4da2216bfcbd6764c9dee834c281d43d,
         type: 3}
@@ -135,6 +156,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4da2216bfcbd6764c9dee834c281d43d, type: 3}
+--- !u!1 &6191244676552097908 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7812585452936393673, guid: 4da2216bfcbd6764c9dee834c281d43d,
+    type: 3}
+  m_PrefabInstance: {fileID: 4143409688010224573}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6221751327789879092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6191244676552097908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!4 &6191244676923037943 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7812585453298936650, guid: 4da2216bfcbd6764c9dee834c281d43d,

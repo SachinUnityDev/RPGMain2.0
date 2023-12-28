@@ -41,7 +41,7 @@ MonoBehaviour:
     damageMod: 0
     skillLvl: 0
     skillSelState: 1
-    cd: 2
+    cd: 0
     attackType: 2
     dmgType: 0d0000000a0000000b000000
     castPos: 01000000020000000300000004000000050000000600000007000000

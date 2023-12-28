@@ -325,5 +325,13 @@ namespace Combat
         }
     }
 
+    public interface IRemoteSkill
+    {
+        CellPosData cellPosData { get; set; }
+        public abstract void Init(CellPosData cellPosData); 
+
+    }
+
+
 }
 

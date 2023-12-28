@@ -4,8 +4,8 @@ using UnityEngine;
 using Common;
 
 namespace Combat
-{
-    public class AnimalTrap : SkillBase
+{  
+    public class AnimalTrap : SkillBase, IRemoteSkill
     {
         public override CharNames charName { get; set; }
 
@@ -18,6 +18,7 @@ namespace Combat
         public override string desc => "This is animal trap";
 
         public override float chance { get; set; }
+        public CellPosData cellPosData { get ; set; }
 
         public override void PopulateTargetPos()
         {
@@ -92,6 +93,11 @@ namespace Combat
 
         public override void DisplayFX4()
         {
+        }
+
+        public void Init(CellPosData cellPosData)
+        {
+            // apply skill FX get the 
         }
     }
 }

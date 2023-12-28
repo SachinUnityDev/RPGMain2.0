@@ -26,6 +26,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.057090163, y: 0.19567233, z: 6.8244143}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8096587187474817982}
   m_Father: {fileID: 0}
@@ -103,6 +104,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 199357939504343688, guid: 63ba312287e0b41468935a63c0a31ca4,
         type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 199357939504343688, guid: 63ba312287e0b41468935a63c0a31ca4,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1081719165
+      objectReference: {fileID: 0}
+    - target: {fileID: 199357939504343688, guid: 63ba312287e0b41468935a63c0a31ca4,
+        type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -123,6 +134,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63ba312287e0b41468935a63c0a31ca4, type: 3}
+--- !u!1 &8094587242713142756 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1773169192283568, guid: 63ba312287e0b41468935a63c0a31ca4,
+    type: 3}
+  m_PrefabInstance: {fileID: 8093967461571262548}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7688924781143792535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8094587242713142756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!4 &8096587187474817982 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4318484539120618, guid: 63ba312287e0b41468935a63c0a31ca4,

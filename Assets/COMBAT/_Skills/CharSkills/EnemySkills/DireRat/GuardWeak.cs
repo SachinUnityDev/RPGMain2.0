@@ -105,7 +105,7 @@ namespace Combat
   
         public override void ApplyVFx()
         {
-            SkillService.Instance.skillFXMoveController.MultiTargetRangeFX(PerkType.None);
+            SkillService.Instance.skillFXMoveController.SingleTargetRangeStrike(PerkType.None);
         }
 
         public override void PopulateAITarget()

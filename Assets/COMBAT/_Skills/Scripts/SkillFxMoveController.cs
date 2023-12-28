@@ -45,6 +45,16 @@ namespace Combat
             //targetDynasFX = new List<DynamicPosData>(); 
         }
      
+        public GameObject RemoteSkillFX(PerkType perkType)
+        {
+            // remote skill interface ..Add it here 
+            // apply FX and     
+            currPerkType = perkType;
+            // get Impact Fx from the SO 
+            return null; 
+
+        }
+
         public void SingleTargetRangeStrike(PerkType perkType)
         {
             SetMoveParams();
@@ -69,7 +79,7 @@ namespace Combat
 
             singleSeq.Play()
                 .OnComplete(() => singleRev.Play())
-                .OnComplete(() => singleSeq = null); 
+                //.OnComplete(() => singleSeq = null); 
                 ;
 
         }

@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4381955735598889379}
   m_Father: {fileID: 0}
@@ -137,6 +138,14 @@ PrefabInstance:
     - target: {fileID: 19865322, guid: 6ecc60ef205d3084e9b551061fc74b4d, type: 3}
       propertyPath: InitialModule.startRotationY.minMaxState
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19900000, guid: 6ecc60ef205d3084e9b551061fc74b4d, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 19900000, guid: 6ecc60ef205d3084e9b551061fc74b4d, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1081719165
       objectReference: {fileID: 0}
     - target: {fileID: 19900002, guid: 6ecc60ef205d3084e9b551061fc74b4d, type: 3}
       propertyPath: m_UseCustomVertexStreams

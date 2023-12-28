@@ -41,7 +41,7 @@ MonoBehaviour:
     damageMod: 0
     skillLvl: 0
     skillSelState: 1
-    cd: -1
+    cd: 2
     attackType: 2
     dmgType: 0d0000000a0000000b000000
     castPos: 01000000020000000300000004000000050000000600000007000000
@@ -49,7 +49,7 @@ MonoBehaviour:
     staminareq: 5
     castTime: 1
     timeFrame: 1
-    maxUsagePerCombat: -1
+    maxUsagePerCombat: -5
     skillIncli: 6
     baseWeight: 0
     isActive: 0
@@ -403,12 +403,5 @@ MonoBehaviour:
     allPerkHexes:
     - perkChain: 00000000
       hexNames: 0a0000000f0000000b000000
-    allSkillFXs:
-    - charMode: 0
-      perkType: 0
-      impactFX: {fileID: 0}
-      colImpactFX: {fileID: 0}
-      mainSkillFX: {fileID: 0}
-      colMainFX: {fileID: 0}
-      selfFX: {fileID: 0}
+    allSkillFXs: []
     allLines: []

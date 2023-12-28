@@ -197,12 +197,7 @@ namespace Combat
         //    skillModelSelect = skillModel;
         //    On_SkillSelected(skillModel.charName, skillModel.skillName);
         //}
-        void SkillDisplay()  // some reference is there for SKILL DISPLAY ON TOP
-        {
-            
-          //  temptxt.text = "SkillName" + currSkillName; 
-        }
-
+      
         #endregion
     
         #region SKILL_INIT related

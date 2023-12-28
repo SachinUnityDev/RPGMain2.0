@@ -294,7 +294,6 @@ namespace Combat
                     if (!skillModel.targetPos.Any(t => t.pos == cellPosData.pos && t.charMode == cellPosData.charMode))
                         return;
                     SkillService.Instance.SetRemoteSkills(skillModel, cellPosData);
-
                 }
             }
         }

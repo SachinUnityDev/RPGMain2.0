@@ -1,10 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Common;
-
 namespace Combat
-{  
+{
     public class AnimalTrap : SkillBase, IRemoteSkill
     {
         public override CharNames charName { get; set; }
@@ -97,7 +92,19 @@ namespace Combat
 
         public void Init(CellPosData cellPosData)
         {
+            if (skillModel.castTime > 0)
+                CombatEventService.Instance.OnEOR1 += Tick;
+
+            if (skillModel.maxUsagePerCombat > 0)
+            {
+                skillModel.noOfTimesUsed++;
+            }
+            else
+            {
+                skillModel.lastUsedInRound = CombatService.Instance.currentRound;
+            }
             // apply skill FX get the 
+            SkillService.Instance.skillFXMoveController.RemoteSkillFX(PerkType.None, cellPosData, this); 
         }
     }
 }

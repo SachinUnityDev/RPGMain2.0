@@ -104,8 +104,7 @@ namespace Combat
                 index = newIndex;                
             }   
             else // char on turn died
-            {
-               // index++; 
+            {       
                 SetNextCharOnTurn();
             }
         }

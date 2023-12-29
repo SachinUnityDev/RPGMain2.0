@@ -589,7 +589,7 @@ namespace Combat
 
             return skillPerkFXData; 
         }
-        public SkillPerkFXData GetSkillPerkFXData(PerkType perkType)
+        public SkillPerkFXData GetSkillPerkFXData(PerkType perkType, CharMode targetCharMode)
         {
             // to be converted to max perk type after testing
             // .. current for lvl0 to be extended to the perks
@@ -597,11 +597,8 @@ namespace Combat
             List<SkillPerkFXData> allSkillPerkFXData =
                         skillDataSO.allSkills.Find(t => t.skillName == currSkillName).allSkillFXs;
 
-            CharMode targetCharMode = currentTargetDyna.charMode;
 
-
-            int index = allSkillPerkFXData.FindIndex(t => t.charMode == targetCharMode);
-            //&& t.perkType == perkType); 
+            int index = allSkillPerkFXData.FindIndex(t => t.charMode == targetCharMode && t.perkType == perkType); 
 
             if (index != -1)
                 return allSkillPerkFXData[index];
@@ -695,8 +692,17 @@ namespace Combat
         {
             
             CharController charController = CombatService.Instance.currCharOnTurn; 
-            if(charController.combatController.actionPts >0)
-                GridService.Instance.gridView.SetRemoteSkill(skillModel, cellPosData); 
+            if(charController.combatController.actionPts > 0)
+            {
+                SkillBase skillBase = currSkillController.GetSkillBase(skillModel.skillName);
+                IRemoteSkill iRemote = skillBase as IRemoteSkill; 
+                if(iRemote != null)
+                {
+                    iRemote.Init(cellPosData); 
+                }
+               // GridService.Instance.gridView.SetRemoteSkill(skillModel, cellPosData);
+            }
+                
             ClearPrevData();
            // currSkillController.UpdateAllSkillState(charController);
             On_PostSkillApply(); // move to the next turn

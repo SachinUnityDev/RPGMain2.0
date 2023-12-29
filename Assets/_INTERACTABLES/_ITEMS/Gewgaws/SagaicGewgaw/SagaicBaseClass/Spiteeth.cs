@@ -71,7 +71,9 @@ namespace Interactables
         }
         void OnStartOfCombat()
         {
-            foreach (CharController c in CombatService.Instance.allEnemiesInCombat)
+            List<CharController> enemyLs = new List<CharController>();
+            enemyLs = CharService.Instance.allCharInCombat.Where(t => t.charModel.charMode == CharMode.Enemy).ToList(); 
+            foreach (CharController c in enemyLs)
             {
                 int buffID=   c.buffController.ApplyBuff(CauseType.SagaicGewgaw, charController.charModel.charID,
                         (int)sagaicGewgawName, AttribName.haste, -2, TimeFrame.EndOfRound, 3, false);

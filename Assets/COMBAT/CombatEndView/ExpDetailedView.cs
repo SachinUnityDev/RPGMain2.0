@@ -22,7 +22,7 @@ namespace Combat
         {
            this.charModel= charModel;
            string signStr = sharedExp > 0 ? "+" : "";
-            expTxt.text = $"{signStr} {sharedExp}";
+            expTxt.text = $"{signStr} {sharedExp} Exp";
         }
 
         public void OnPointerEnter(PointerEventData eventData)

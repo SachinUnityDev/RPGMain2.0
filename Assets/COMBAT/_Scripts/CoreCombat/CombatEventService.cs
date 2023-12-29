@@ -49,8 +49,12 @@ namespace Combat
         public event Action<CharController, PotionNames> OnPotionConsumedInCombat;
 
 
-        RoundController roundController; 
 
+        [Header(" Combat result")]  // every time a combat end add here 
+        public List<CombatModel> allCombatModels = new List<CombatModel>();
+        public CombatResult currCombatResult; 
+        
+        RoundController roundController; 
         // Start is called before the first frame update
         void Start()
         {
@@ -147,13 +151,13 @@ namespace Combat
             seq.Play();
         }
 
-        public void On_EOC()
+        public void On_EOC(CombatResult combatResult)
         {
             Debug.Log("EOC triggered");
             FortReset2FortOrg();         
           //  CombatService.Instance.combatEndView.ShowCombatEndView();
-        
-
+            //CombatResult = 
+            
             OnEOC?.Invoke();
             CharService.Instance.allCharInCombat.Clear();
         }
@@ -212,8 +216,7 @@ namespace Combat
             int MAX_RD_LIMIT = GameService.Instance.gameController.GetMaxRoundLimit();
             if (roundNo >= MAX_RD_LIMIT)
             {
-               
-                On_EOC();
+                On_EOC(CombatResult.Draw);
             }   
             else
             {

@@ -33,6 +33,10 @@ namespace Combat
 
     public class CombatHUDView : MonoBehaviour
     {
+
+        [Header("In Use")]
+        [SerializeField] CombatEndView combatEndView; 
+
         #region Declarations
 
         [Header("Skill NAME ")]
@@ -114,7 +118,7 @@ namespace Combat
 
             CombatEventService.Instance.OnSOTactics += () => PlayTransitAnim("TACTICS"); 
             CombatEventService.Instance.OnSOC += () => PlayTransitAnim("COMBAT");
-            CombatEventService.Instance.OnEOC += ()=> PlayTransitAnim("COMBAT ENDS");
+            CombatEventService.Instance.OnEOC += OnCombatEnd; 
             // CombatEventService.Instance.OnSOR += () => transitionSO.PlayAnims("ROUND " + CombatService.Instance.currentRound, animPanel);
             CombatEventService.Instance.OnSOR1 += RoundDisplay; 
             CombatEventService.Instance.OnCombatLoot += CombatResultDisplay;
@@ -144,6 +148,19 @@ namespace Combat
             transitionSO.PlayAnims(str, animPanel);
         }
 
+        void OnCombatEnd()
+        {
+            Sequence seq = DOTween.Sequence();
+
+            
+            seq
+                .AppendCallback(() => PlayTransitAnim("COMBAT ENDS"))
+                .AppendInterval(1.5f)
+                .AppendCallback(()=>combatEndView.ShowCombatEndView())
+                ;
+
+            seq.Play(); 
+        }
         void RoundDisplay(int roundNo)
         {
             if (CombatService.Instance.combatState == CombatState.INCombat_normal)

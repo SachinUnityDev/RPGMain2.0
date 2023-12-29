@@ -6,6 +6,8 @@ using Combat;
 
 namespace Combat
 {   
+    
+
     public class CombatController : MonoBehaviour
     {
 
@@ -40,27 +42,6 @@ namespace Combat
             CombatEventService.Instance.OnEOR1 -= ResetValues;
            // CombatEventService.Instance.OnSOT -= ONSOT;
         }
-        
-        //void ONSOT()
-        //{
-        //    //CombatEventService.Instance.OnCharOnTurnSet -= OnCharSetOnTurn;
-        //    // CombatEventService.Instance.OnCharOnTurnSet += OnCharSetOnTurn;
-        //    Debug.Log(" ENENMY SOT TRIGGERED" + charController.charModel.charNameStr);
-        //    if (CombatService.Instance.currCharOnTurn.charModel.charID != this.charController.charModel.charID)
-        //        return;
-        //    if (charController.charModel.charMode == CharMode.Enemy)
-        //        Debug.LogError(" ENENMY SOT TRIGGERED" + charController.charModel.charNameStr);
-
-        //}
-
-        //void OnCharSetOnTurn(CharController charController)
-        //{
-         
-
-        //   // CombatEventService.Instance.OnCharOnTurnSet -= OnCharSetOnTurn;
-
-        //}
-
 
         void ResetValues(int roundNo)
         {
@@ -72,6 +53,9 @@ namespace Combat
         {
 
         }
+
+
+
         public void SetActionPts()  // SOT ONLY 
         {
             MoraleChk(charController);

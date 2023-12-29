@@ -25,7 +25,9 @@ namespace Interactables
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
         public List<int> allBuffs { get; set; } = new List<int>();
-
+        int cdInit;
+        int stmReq;
+        SkillBase skillbase;
         public Currency currency { get; set; }
         public override void GewGawSagaicInit()
         {
@@ -42,10 +44,11 @@ namespace Interactables
 
         void OnCombatFleeNDead(CharController charController)
         {
-            if(CombatService.Instance.allAlliesInCombat.Count == 1)
+            List<CharController> allAllies = new List<CharController>();
+            allAllies = CharService.Instance.allCharInCombat.Where(t=>t.charModel.charMode == CharMode.Ally).ToList();
+            if (allAllies.Count ==1)
             {
-                if(CombatService.Instance.allAlliesInCombat[0].charModel.charName 
-                                    == charController.charModel.charName)
+                if (allAllies[0].charModel.cultType == CultureType.Macalaki)
                 {
                     int buffID = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw,
                        (int)sagaicGewgawName, charController.charModel.charID, AttribName.staminaRegen,
@@ -66,16 +69,25 @@ namespace Interactables
             buffID = charController.buffController.ApplyBuff(CauseType.SagaicGewgaw, charController.charModel.charID,
                            (int)sagaicGewgawName, AttribName.armorMax, 3, TimeFrame.Infinity, -1, true);
             buffIndex.Add(buffID);
+
+            skillbase  = charController.skillController.GetSkillBase(SkillNames.IntimidatingShout);
+            cdInit = skillbase.skillModel.cd;
+            stmReq = skillbase.skillModel.staminaReq;
+
+            skillbase.skillModel.cd = 3; 
+            skillbase.skillModel.staminaReq= 6;
         }
 
         public override void UnEquipSagaic()
         {
-            CombatEventService.Instance.OnCombatFlee += OnCombatFleeNDead;
-            CharService.Instance.OnCharDeath += OnCombatFleeNDead;
+            CombatEventService.Instance.OnCombatFlee -= OnCombatFleeNDead;
+            CharService.Instance.OnCharDeath -= OnCombatFleeNDead;
             foreach (int i in buffIndex)
             {
                 charController.buffController.RemoveBuff(i);
             }
+            skillbase.skillModel.cd = cdInit;   
+            skillbase.skillModel.staminaReq= stmReq;
         }
 
         public void InitItem(int itemId, int maxInvStackSize)

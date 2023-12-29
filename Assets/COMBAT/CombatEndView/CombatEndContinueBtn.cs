@@ -18,10 +18,11 @@ namespace Combat
         Image btnImg; 
         void Start()
         {
-            btnImg = GetComponent<Image>();
+            
         }
         public void InitContinueBtn(CombatEndView combatEndView)
         {
+            btnImg = GetComponent<Image>();
             this.combatEndView= combatEndView;
             btnImg.sprite = spriteN; 
         }

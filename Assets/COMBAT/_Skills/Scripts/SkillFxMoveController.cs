@@ -45,13 +45,31 @@ namespace Combat
             //targetDynasFX = new List<DynamicPosData>(); 
         }
      
-        public GameObject RemoteSkillFX(PerkType perkType)
+        public GameObject RemoteSkillFX(PerkType perkType, CellPosData cellPosData, SkillBase skillbase)
         {
             // remote skill interface ..Add it here 
             // apply FX and     
             currPerkType = perkType;
-            // get Impact Fx from the SO 
-            return null; 
+            Vector3Int tilePos = GridService.Instance.gridMovement.GetTilePos4Pos(cellPosData.charMode, cellPosData.pos);
+            Vector3 worldPos = GridService.Instance.gridMovement.GetWorldPosSingle(tilePos);
+            Quaternion quat = GridService.Instance.gridLayout.transform.rotation;
+            skillModel = skillbase.skillModel;
+
+
+            // CharMode will not match in get method// so this is needed...// GET FX
+            //SkillDataSO skillDataSO = SkillService.Instance.GetSkillSO(skillModel.charName);
+            //SkillData skillData = skillDataSO.GetSkillData(skillModel.skillName);
+            //List<SkillPerkFXData> allSkillPerkFXData =
+            //     skillDataSO.allSkills.Find(t => t.skillName == skillModel.skillName).allSkillFXs;
+            SkillPerkFXData fxData = SkillService.Instance.GetSkillPerkFXData(perkType, CharMode.Enemy); 
+
+            GameObject fxRemote = Instantiate(fxData.mainSkillFX, worldPos, quat);
+            CharController charController = CombatService.Instance.currCharOnTurn;
+            fxRemote.AddComponent<RemoteView>(); 
+            fxRemote.GetComponent<RemoteView>().InitRemoteView(skillbase, cellPosData, charController, fxData);
+
+            SkillService.Instance.On_PostSkill(skillModel);
+            return fxRemote;
 
         }
 
@@ -139,7 +157,7 @@ namespace Combat
         {
             GameObject impactFXGO;
 
-            SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType);
+            SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType, targetCharMode);
 
             impactFXGO = skillPerkdataFX.impactFX;
             if (impactFXGO == null) return;
@@ -190,7 +208,7 @@ namespace Combat
         {
             GameObject impactFXGO;
 
-            SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType);
+            SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType,targetCharMode);
 
             impactFXGO = skillPerkdataFX.impactFX;
             if (impactFXGO == null) return;
@@ -205,7 +223,7 @@ namespace Combat
         {
             GameObject impactFXGO;
       
-            SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType);
+            SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType, targetCharMode);
 
   
             impactFXGO = skillPerkdataFX.impactFX;            
@@ -262,7 +280,7 @@ namespace Combat
         {
             GameObject colFXGO;
            
-            SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType);
+            SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType, targetCharMode);
 
             colFXGO = skillPerkdataFX.colImpactFX;
             if (colFXGO == null) return;
@@ -277,8 +295,7 @@ namespace Combat
         }
         public void ApplyFXOnSelf()
         {
-           
-            SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType);
+            SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType, targetCharMode);
            
             GameObject SelfFXGO = skillPerkdataFX.selfFX;
             Debug.Log("INSIDE Self base11111" + SelfFXGO.name);
@@ -295,7 +312,7 @@ namespace Combat
         void ApplyGabMainFXOnTarget()
         {
             GameObject mainFXGO; 
-            SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType);
+            SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType, targetCharMode);
             mainFXGO = skillPerkdataFX.mainSkillFX;
 
             if (mainFXGO == null) 
@@ -352,7 +369,7 @@ namespace Combat
         void PrefabMove()
         {
             GameObject mainFXGO;
-            SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType);
+            SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType, targetCharMode);
             mainFXGO = skillPerkdataFX.mainSkillFX;
 
             if (mainFXGO == null)
@@ -390,6 +407,7 @@ namespace Combat
             strikerTransform = SkillService.Instance.currStrikerDyna.charGO.transform;
 
             targetTransform = SkillService.Instance.currentTargetDyna.charGO.transform;
+            targetCharMode = CharMode.None; 
             targetCharMode = SkillService.Instance.currentTargetDyna.charMode;
             
             startPos = strikerTransform.position + strikerMainFXOffset;
@@ -409,7 +427,7 @@ namespace Combat
         {
             GameObject FXGO;
 
-            SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType);
+            SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType, targetCharMode);
 
             FXGO = skillPerkdataFX.mainSkillFX;
             if (FXGO == null) return;

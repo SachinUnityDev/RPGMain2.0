@@ -60,6 +60,8 @@ namespace Common
         public List<CharController> allCharInCombat =new List<CharController>(); 
         public List<CharController> charDiedinLastTurn = new List<CharController>();
 
+        [Header(" Char in Graveyard")]
+        public List<CharController> charInGraveyard = new List<CharController>();   
         [Header(" Fled list")]
         public List<CharController> allCharfledQ = new List<CharController>();
 
@@ -75,6 +77,10 @@ namespace Common
             isPartyLocked= false;
             CombatEventService.Instance.OnEOT += UpdateOnDeath;       
             DontDestroyOnLoad(this.gameObject);
+        }
+        private void OnDisable()
+        {
+            CombatEventService.Instance.OnEOT -= UpdateOnDeath;
         }
 
         public void Init()
@@ -466,46 +472,19 @@ namespace Common
             if (charDiedinLastTurn.Count < 1) return;
             foreach (CharController charCtrl in charDiedinLastTurn.ToList())
             {
-                Debug.Log("CHAR DIED " + charCtrl.charModel.charID);
-                CharMode charMode = charCtrl.charModel.charMode;
-                GameObject charGO = charCtrl.gameObject;
-                if (charMode == CharMode.Ally)
-                {
-                    allyInPlay.Remove(charGO);
-                    allyInPlayControllers.Remove(charCtrl);
-                    if (allyInPlayControllers.Count <= 0) // COMBAT END CONDITION   
-                    {
-                        CombatEventService.Instance.On_CombatLoot(false);
-                    }
-                }
-                else if (charMode == CharMode.Enemy)   // COMBAT END CONDITION.. ALL ENEMY KILLED
-                {
-                    // enemyInCombatPlay.Remove(charGO);
-                    allCharInCombat.Remove(charCtrl); 
-
-                    //enemyInPlayControllers.Remove(charCtrl);
-                    //if (enemyInPlayControllers.Count <= 0)  // end of combat
-                    //{
-                    //    CombatEventService.Instance.On_CombatLoot(true);
-                    //}
-                }
-                charsInPlay.Remove(charGO);
-                charsInPlayControllers.Remove(charCtrl);
-                GridService.Instance.UpdateGridOnCharDeath(charCtrl);  // subscribe to event once tested
-
+                GridService.Instance.UpdateGridOnCharDeath(charCtrl);
                 CombatService.Instance.roundController.ReorderAfterCharDeathOnEOT(charCtrl);
-                
             }
-
+            charInGraveyard.AddRange(charDiedinLastTurn);
             charDiedinLastTurn.Clear();
         }
         public void On_CharDeath(CharController _charController, int causeByCharID)
         {
-            if (GameService.Instance.gameModel.gameState != GameState.InCombat) return; 
-                OnCharDeath?.Invoke(_charController);
-
+            if (GameService.Instance.gameModel.gameState != GameState.InCombat) return;
+            _charController.charModel.stateOfChar = StateOfChar.Dead; 
+            allCharInCombat.Remove(_charController); // rest of the list are update on EOT
+            OnCharDeath?.Invoke(_charController);
             charDiedinLastTurn.Add(_charController);
-
         }
         #endregion 
 
@@ -529,29 +508,35 @@ namespace Common
         }
         #endregion
 
-      
-
-
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                foreach (CharController charCtrl in allyInPlayControllers)
-                {
-                  //  On_CharInit();
-                    //if(charCtrl.charModel.charName != CharNames.Abbas) 
-                    //On_CharAddToParty(GetCharCtrlWithName(charCtrl.charModel.charName));
-                }
-            }
-            //if (Input.GetKeyDown(KeyCode.E))
-            //{
-            //    CharController charController = GetCharCtrlWithName(CharNames.Baran);
-            //    charController.ExpPtsGain(100); 
-            //}
-        }
     }
 }
 
+
+
+//Debug.Log("CHAR DIED " + charCtrl.charModel.charID);
+//CharMode charMode = charCtrl.charModel.charMode;
+//GameObject charGO = charCtrl.gameObject;
+//if (charMode == CharMode.Ally)
+//{
+//    //    allyInPlay.Remove(charGO);
+//    //    allyInPlayControllers.Remove(charCtrl);
+
+//    //if (allyInPlayControllers.Count <= 0) // COMBAT END CONDITION   
+//    //{
+//    //    CombatEventService.Instance.On_CombatLoot(false);
+//    //}
+//}
+//else if (charMode == CharMode.Enemy)   // COMBAT END CONDITION.. ALL ENEMY KILLED
+//{
+//    // enemyInCombatPlay.Remove(charGO);
+
+//    //enemyInPlayControllers.Remove(charCtrl);
+//    //if (enemyInPlayControllers.Count <= 0)  // end of combat
+//    //{
+//    //    CombatEventService.Instance.On_CombatLoot(true);
+//    //}
+//}
+////charsInPlay.Remove(charGO);
+////charsInPlayControllers.Remove(charCtrl);
 
 

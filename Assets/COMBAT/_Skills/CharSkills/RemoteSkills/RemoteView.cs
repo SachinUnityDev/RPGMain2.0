@@ -1,4 +1,5 @@
 using Common;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,56 +11,57 @@ namespace Combat
     {
         [SerializeField] SkillModel skillModel;         
         [SerializeField]CellPosData cellPosData;
-        [SerializeField]CharController charController; 
-        public void InitRemoteView(SkillModel skillModel, CellPosData cellPosData, CharController charController)
+        [SerializeField]CharController charController;
+        SkillBase skillbase;
+        SkillPerkFXData skillPerkFXData; 
+        public void InitRemoteView(SkillBase skillBase, CellPosData cellPosData, CharController charController, 
+            SkillPerkFXData skillPerkFXData)
         {  
-            this.skillModel= skillModel;
+            
             this.cellPosData= cellPosData;
             this.charController= charController;
+            this.skillbase= skillBase;
+            this.skillPerkFXData= skillPerkFXData;  
+            skillModel = skillBase.skillModel;
         }
-        public void OnCollisionEnter2D(Collision2D collision)
+
+        public void OnTriggerEnter(Collider collision)
         {
-            Debug.Log("remote Skill here trigger");
-
-            if (collision.gameObject != null)
+            Debug.Log("remote Skill here TRIGGER");
+            CharController targetController = collision.transform.parent?.GetComponent<CharController>(); 
+            if (targetController != null)
             {
-                CharController charController = collision.gameObject.GetComponent<CharController>();
-                DynamicPosData dyna =
-                GridService.Instance.GetDyna4GO(charController.gameObject);
-                if (dyna != null)
-                {
-                    SkillService.Instance.On_SkillSelected(skillModel.charName, skillModel.skillName);
-                    CombatEventService.Instance.On_targetClicked(dyna, cellPosData);
-                }
-            }
-        }
-        public void OnTriggerEnter2D(Collider2D collision)
-        {
-            Debug.Log("remote Skill here collider");
-
-            if (collision.gameObject.GetComponent<CharController>() != null)
-            {
-                CharController targetController = collision.gameObject.GetComponent<CharController>();
-                DynamicPosData dyna =
-                            GridService.Instance.GetDyna4GO(targetController.gameObject);
-                SkillBase skillbase = charController.skillController.GetSkillBase(skillModel.skillName); 
-
+                DynamicPosData dyna = GridService.Instance.GetDyna4GO(targetController.gameObject);
+               
                 if (dyna != null)
                 {
                     skillbase.targetGO = targetController.gameObject; 
                     skillbase.targetController = targetController;
                     skillbase.myDyna= dyna;
                     skillbase.PreApplyFX();
+                   // skillbase.BaseApply(); // not to be used in remote
                     skillbase.ApplyFX1();
                     skillbase.ApplyFX2();
                     skillbase.ApplyFX3();
                     skillbase.ApplyMoveFx();
                     skillbase.ApplyVFx();
                     skillbase.PostApplyFX();
-                    Destroy(this.gameObject, 0.2f); 
-                    //SkillService.Instance.On_SkillSelected(skillModel.charName, skillModel.skillName);
-                    //CombatEventService.Instance.On_targetClicked(dyna, cellPosData);
-                    //SkillService.Instance.DeSelectSkill(); 
+                    GameObject ImpactFX = Instantiate(skillPerkFXData.impactFX, transform.position, Quaternion.identity).gameObject;
+                    Sequence seq = DOTween.Sequence();
+                    seq
+                        .AppendCallback(() => PlayParticleSystem(ImpactFX))
+                        .AppendInterval(1.0f)
+                        .AppendCallback(()=>Destroy(ImpactFX))
+                        .AppendCallback(() => Destroy(this.gameObject, 0.2f))              
+                        ; 
+                    seq.Play();
+                }
+            }
+            void PlayParticleSystem(GameObject FxGO)
+            {   
+                foreach (ParticleSystem ps in FxGO.GetComponentsInChildren<ParticleSystem>())
+                {
+                    ps.Play();
                 }
             }
         }

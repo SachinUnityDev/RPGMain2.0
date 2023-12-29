@@ -23,8 +23,7 @@ namespace Combat
         public void ShowCombatEndView()
         {
             InitCombatEndView();
-
-            transform.GetChild(0).gameObject.SetActive(true); 
+            transform.GetChild(0).gameObject.SetActive(true);
         }
 
         public void InitCombatEndView()
@@ -44,6 +43,7 @@ namespace Combat
 
         int GetSharedExp()
         {
+
             enemyPacksSO = CombatService.Instance.currEnemyPackSO;
             int sharedExp = enemyPacksSO.sharedExp;
             int allyExceptDeadNFledCount = 0;

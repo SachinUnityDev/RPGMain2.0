@@ -18,9 +18,6 @@ namespace Combat
         public EnemyPackController enemyPackController; 
         public EnemypackFactory enemyPackFactory;
 
-        public List<CharController> allEnemiesInCombat = new List<CharController>();
-        public List<CharController> allAlliesInCombat = new List<CharController>();
-
         public CharController currCharOnTurn;
         public CharController currCharClicked;
         public CharController currCharHovered;
@@ -144,6 +141,74 @@ namespace Combat
 
         }
 
+        #region COMBAT RESULT 
+
+        public void OnCharDeathCombatChk(CharController charController)
+        {
+            // combat end conditions 
+
+            //"Kill all enemies
+            //(If Abbas fled combat you can still win Combat with remaining heroes)"	
+            //Combat didnt finish before the round limit	
+            //Abbas dies / Manually Flee / No Hero left on battlefield (die or flee)  // Combat DEFEAT on all flee
+
+            foreach (CharController charCtrl in CharService.Instance.allCharInCombat)
+            {
+                if(charCtrl.charModel.charMode == CharMode.Enemy)
+                {
+                    if (CharService.Instance.allCharInCombat.Any(t => t.charModel.charMode == CharMode.Enemy))
+                    {
+
+                    }
+                    // chk if all enemies have died // victory case here 
+                }else if(charCtrl.charModel.charName == CharNames.Abbas)
+                {
+                    // end combat 
+                }
+                else // ally other than abbas Died
+                {
+                    //abbas fled n others dead... 
+                }
+            }
+        }
+
+
+        public void OnEOCResult(CombatResult combatResult)
+        {
+            switch (combatResult)
+            {
+                case CombatResult.None:
+                    break;
+                case CombatResult.Victory: // all enemies Killed
+
+
+
+                    break;
+                case CombatResult.Draw: // on max Round Limit reached 
+
+
+                    break;
+                case CombatResult.Defeat: // On Abbas Dead, All companions in Combat Dead,   
+                    break;
+            }
+        }
+
+
+
+        # endregion
+
+
     }
+
+    public enum CombatEndCondition
+    {
+        None,
+        Defeat_AllInCombatDiedNFled,
+        Defeat_AbbasDied, 
+        Defeat_AbbasFledQ, 
+        Victory_AllEnemiesDied, 
+        Draw_MaxRdsLmt, 
+    }
+
 }
 

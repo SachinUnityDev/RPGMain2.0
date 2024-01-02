@@ -144,7 +144,7 @@ namespace Common
             int currRd = -1;
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
-                currRd = CombatService.Instance.currentRound;
+                currRd = CombatEventService.Instance.currentRound;
             }
             CharStateModData charStateModData = new CharStateModData(causeType, causeName, causeByCharID
                                                                     , effectedCharID, charStateName);
@@ -231,7 +231,7 @@ namespace Common
             int currRd = -1;
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
-                currRd = CombatService.Instance.currentRound;
+                currRd = CombatEventService.Instance.currentRound;
             }
             CharStateModData charStateModData = new CharStateModData(causeType, causeName, causeByCharID
                                                                     , effectedCharID, charStateName, true);

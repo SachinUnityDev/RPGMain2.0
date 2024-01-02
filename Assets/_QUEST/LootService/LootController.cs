@@ -1,3 +1,4 @@
+using Combat;
 using Common;
 using Interactables;
 using System.Collections;
@@ -26,6 +27,18 @@ namespace Quest
             List<ItemDataWithQty> itemLS = lootBase.GetLootList(allItemType);
 
             InitLootView(itemLS, parentTrans); 
+        }
+
+        public void ShowLootTableInCombat(List<ItemType> allItemType ,EnemyPackName enemyPackName, Transform parentTrans)
+        {
+            LandscapeNames landscapeNames = LandscapeNames.Sewers;
+            lootBase = LootService.Instance.lootFactory.GetLootBase(landscapeNames);
+
+            EnemyPackBase enemyPackBase = CombatService.Instance.enemyPackController.GetEnemyPackBase(enemyPackName);             
+
+            List<ItemDataWithQty> itemLS = lootBase.GetLootList(allItemType);
+           // itemLS.AddRange(enemyPackBase.lootData); 
+            InitLootView(itemLS, parentTrans);
         }
 
         public void ShowLootTable4MapE(List<ItemDataWithQty> itemLS, Transform parent)
@@ -57,6 +70,11 @@ namespace Quest
             {
               //  float offset =  parent.GetComponent<RectTransform>().rect.width / 2 + 50f; 
                 lootRect.localPosition = new Vector3(-400,-150);
+            }
+            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            {
+                //  float offset =  parent.GetComponent<RectTransform>().rect.width / 2 + 50f; 
+                lootRect.localPosition = new Vector3(-600, -250);
             }
             LootService.Instance.lootView.InitLootList(itemLS, parent);
             LootService.Instance.On_LootDsplyToggle(true);

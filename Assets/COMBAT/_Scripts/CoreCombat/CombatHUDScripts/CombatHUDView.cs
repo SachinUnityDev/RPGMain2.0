@@ -121,7 +121,7 @@ namespace Combat
             CombatEventService.Instance.OnEOC += OnCombatEnd; 
             // CombatEventService.Instance.OnSOR += () => transitionSO.PlayAnims("ROUND " + CombatService.Instance.currentRound, animPanel);
             CombatEventService.Instance.OnSOR1 += RoundDisplay; 
-            CombatEventService.Instance.OnCombatLoot += CombatResultDisplay;
+           // CombatEventService.Instance.OnCombatLoot += CombatResultDisplay;
 
             //CombatEventService.Instance.OnCharOnTurnSet
             //                                              += SetCharAttributesDisplay;
@@ -156,7 +156,7 @@ namespace Combat
             seq
                 .AppendCallback(() => PlayTransitAnim("COMBAT ENDS"))
                 .AppendInterval(1.5f)
-                .AppendCallback(()=>combatEndView.ShowCombatEndView())
+                .AppendCallback(()=>combatEndView.InitCombatEndView())
                 ;
 
             seq.Play(); 
@@ -169,97 +169,8 @@ namespace Combat
                 roundDisplayGO.GetComponent<TextMeshProUGUI>().text = roundNo.ToString();
             }
         }
-        void CombatResultDisplay(bool isVictory)
-        {
-            Sequence CombatFinal = DOTween.Sequence(); 
-            if (isVictory)
-            {
-                CombatFinal
-                    .AppendInterval(2.5f)
-                    .AppendCallback(() => transitionSO.PlayAnims("VICTORY", animPanel)); 
-             
-            }
-            else
-            {
-                CombatFinal
-                   .AppendInterval(2.5f)
-                    .AppendCallback(() => transitionSO.PlayAnims("BATTLE LOST", animPanel));               
-            }
+ 
 
-            CombatFinal.Play();
-        }
-
-        #region CharBOTTOM_PANEL
-        //void UpdateCharStateChg(CharStateModData charStateModData)
-        //{
-        //   // SetCombatStatesDisplay(); 
-        //}
-        //public void SetCombatStatesDisplay(CharController charController)
-        //{
-        //    // get reference to Icon SO 
-        //    //CharController charController = CombatService.Instance.currCharClicked;
-
-        //    //int k = 0;
-
-        //    //List<CharStatesBase> allCharStateBases = charController.charStateController.allCharBases;
-        //    //CharStatesPanelIconsClear();
-
-        //    //for (int i = 0; i < allCharStateBases.Count; i++)
-        //    //{
-        //    //    //CharStateModel stateSO = allStatesSO.GetCharStateSO(charInStates[i]);   
-                    
-        //    //    //    charStateIconSO.allCharStatesModels.Find(x => x.charStateName == charInStates[i]);
-        //    //    CharStateSO1 stateSO = CharStatesService.Instance.allCharStateSO.GetCharStateSO(allCharStateBases[i].charStateName);
-        //    //    //CharStateModel charStateModel = CharStatesService.Instance.allCharStateModel
-        //    //    //                                .Find(t => t.charStateName == charInStates[i].charStateName);
-        //    //    CharStateBehavior charStateType = stateSO.charStateBehavior; 
-        //    //    k = (charStateType == CharStateBehavior.Positive) ? 0 : 1;
-
-        //    //   // Debug.Log("CHAR STATES " + data.charStateName);
-        //    //    if (i < 4)// level 1
-        //    //    {
-        //    //        Transform ImgTrans = CharStatesPanel.transform.GetChild(k).GetChild(0).GetChild(i);
-        //    //        ImgTrans.gameObject.SetActive(true);
-        //    //        ImgTrans.GetChild(0).GetComponent<Image>().sprite  = stateSO.iconSprite;
-        //    //        ImgTrans.GetComponent<CharStatePanelEvents>().charStatebase = allCharStateBases[i]; 
-
-        //    //    }
-        //    //    if (i >= 4 && i < 7)
-        //    //    {
-        //    //        Transform ImgTrans = CharStatesPanel.transform.GetChild(k).GetChild(0).GetChild(i - 4);
-        //    //        ImgTrans.gameObject.SetActive(true);
-        //    //        ImgTrans.GetChild(0).GetComponent<Image>().sprite = stateSO.iconSprite;
-        //    //        ImgTrans.GetComponent<CharStatePanelEvents>().charStatebase = allCharStateBases[i];
-        //    //    }
-        //    //    if (i >= 7 && i < 9)
-        //    //    {
-        //    //        Transform ImgTrans = CharStatesPanel.transform.GetChild(k).GetChild(0).GetChild(i - 7);
-        //    //        ImgTrans.gameObject.SetActive(true);
-        //    //        ImgTrans.GetChild(0).GetComponent<Image>().sprite = stateSO.iconSprite;
-        //    //        ImgTrans.GetComponent<CharStatePanelEvents>().charStatebase = allCharStateBases[i];
-
-        //    //    }
-    
-        //   // }
-        //}
-        //void CharStatesPanelIconsClear()
-        //{
-        //    //for (int j = 0; j < CharStatesPanel.transform.childCount; j++)
-        //    //{
-        //    //    Transform posNegTransform = CharStatesPanel.transform.GetChild(j);
-        //    //    for (int l = 0; l < posNegTransform.childCount; l++)
-        //    //    {
-        //    //        Transform lvls = posNegTransform.GetChild(l);
-        //    //        for (int m = 0; m < lvls.childCount; m++)
-        //    //        {
-        //    //            Transform stateIcons = lvls.GetChild(m);
-        //    //            stateIcons.gameObject.SetActive(false);
-        //    //        }
-        //    //    }
-        //    //}
-        //}
-
-        #endregion
 
         #region CharTOPPANEL
         //public void ShuffleCharOnTopPanel()

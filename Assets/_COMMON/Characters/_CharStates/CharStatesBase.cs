@@ -52,7 +52,7 @@ namespace Common
         public virtual float dmgPerRound { get; set; }
         public virtual void ResetState()
         {
-            startRound = CombatService.Instance.currentRound; 
+            startRound = CombatEventService.Instance.currentRound; 
             charController.charStateController.ResetCharStateBuff(charStateName); 
         }        
 
@@ -106,7 +106,7 @@ namespace Common
                 QuestEventService.Instance.OnEOQ += QuestTick;
             }
 
-            startRound = CombatService.Instance.currentRound;   
+            startRound = CombatEventService.Instance.currentRound;   
             allBuffIds.Clear();
             allStateFxStrs.Clear();
             allStateFxStrs.AddRange(new List<string>() { str0, str1, str2, str3, str4, str5 });

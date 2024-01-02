@@ -118,7 +118,7 @@ namespace Combat
         public abstract void ApplyMoveFX(); 
         public virtual void Tick()
         {
-            int roundCounter = CombatService.Instance.currentRound - skillModel.lastUsedInRound;
+            int roundCounter = CombatEventService.Instance.currentRound - skillModel.lastUsedInRound;
             if (skillModel.castTime < 0) return;
             if (roundCounter >= skillModel.castTime)
                 SkillEnd();

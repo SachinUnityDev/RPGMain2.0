@@ -24,7 +24,7 @@ namespace Common
         public Sprite dialoguePortraitClicked;
         public Sprite dialoguePortraitUnClicked;
         public Sprite bpPortraitUnLocked;
-        public Sprite bpPortraitUnAvail; 
+        public Sprite bpPortraitUnAvail;
 
         public CharMode charMode;
         public CharMode orgCharMode;

@@ -42,9 +42,6 @@ namespace Combat
             }
 
         }
-        public override void EnemyPackInteract()
-        {
 
-        }
     }
 }

@@ -4,25 +4,30 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI; 
 namespace Combat
 {
-    public class PortView : MonoBehaviour
+    public class PortView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [Header("TBR")]
         [SerializeField] TextMeshProUGUI nametxt;
-        [SerializeField] ExpDetailedView expDetailedView; 
+        [SerializeField] ExpDetailedView expDetailedView;
+        [SerializeField] Image bgPortImg;
 
+        CombatEndView combatEndView; 
+
+        [SerializeField] AllCharSO allCharSO; 
         [Header("Global var")]
         [SerializeField] CharModel charModel;
-        [SerializeField] int sharedExp; 
-
-
-
-        public void InitPortView(CharModel charModel, int sharedExp)
+        [SerializeField]int sharedExp;
+        [SerializeField] int manualExp; 
+        public void InitPortView(CharModel charModel, int sharedExp, CombatEndView combatEndView)
         {
             this.charModel = charModel;
-            FillPort(sharedExp); 
+            this.combatEndView= combatEndView;  
+            FillPort(sharedExp);
+            bgPortImg.sprite = allCharSO.bgPortUnClicked;
         }
         void FillPort(int sharedExp)
         {
@@ -67,9 +72,44 @@ namespace Combat
 
         }
 
-        void FillSharedExp()
+        public void AddManualExp()
         {
+            manualExp = CombatService.Instance.GetManualExp();
+            expDetailedView.AddManualExpDsply(manualExp);
+            combatEndView.OnManualExpAwarded();
+        }
 
+        
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (CanAwardManualExp())
+            {
+                AddManualExp();
+                combatEndView.manualExpRewarded = true;
+            }
+        }
+        bool CanAwardManualExp()
+        {
+            if (charModel.charName == CharNames.Abbas) return false;            
+            if (!combatEndView.manualExpBtnPressed) return false;
+            if (combatEndView.manualExpRewarded) return false;
+            return true; 
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if (CanAwardManualExp())
+            {
+                bgPortImg.sprite = allCharSO.bgPortClicked;
+            }
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {   
+            if (CanAwardManualExp())
+            {
+                bgPortImg.sprite = allCharSO.bgPortUnClicked;
+            }
         }
     }
 }

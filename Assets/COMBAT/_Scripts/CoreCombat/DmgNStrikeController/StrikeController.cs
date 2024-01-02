@@ -73,7 +73,7 @@ namespace Combat
 
         public int AddThornsBuff(DamageType damageType, float thornsMin, float thornsMax, TimeFrame timeframe, int castTime)
         {
-            int currRd = CombatService.Instance.currentRound;
+            int currRd = CombatEventService.Instance.currentRound;
             thornID = strikerModel.allThornsData.Count + 1;
             ThornBuffData thornBuffData = new ThornBuffData(thornID, damageType, thornsMin, thornsMax, timeframe, castTime);
 
@@ -128,7 +128,7 @@ namespace Combat
 
         public int AddRetailiateBuff(CauseType causeType, int causeName, TimeFrame timeFrame, int castTime)
         {
-            int currRd = CombatService.Instance.currentRound;
+            int currRd = CombatEventService.Instance.currentRound;
             retaliateID = strikerModel.allRetaliateData.Count + 1;
             RetaliateBuffData retaliateBuffData = new RetaliateBuffData(retaliateID, causeType, causeName, timeFrame, castTime);
             strikerModel.allRetaliateData.Add(retaliateBuffData);
@@ -209,7 +209,7 @@ namespace Combat
             dmgBuffID = allDmgBuffData.Count + 1;
 
             DmgAltData dmgAltData = new DmgAltData(valPercent, attackType, dmgType, cultType, raceType);
-            int startRoundNo = CombatService.Instance.currentRound;
+            int startRoundNo = CombatEventService.Instance.currentRound;
 
             DmgBuffData dmgBuffData = new DmgBuffData(dmgBuffID, isBuff, startRoundNo, timeFrame
                             , netTime, dmgAltData);
@@ -338,7 +338,7 @@ namespace Combat
 
             DmgAltCharStateData dmgAltCSData = new DmgAltCharStateData(valPercent, charStateName);
 
-            int startRoundNo = CombatService.Instance.currentRound;
+            int startRoundNo = CombatEventService.Instance.currentRound;
 
             DmgBuffCharStateData dmgBuffCSData = new DmgBuffCharStateData(dmgCharStateBuffID, isBuff, startRoundNo, timeFrame
                             , netTime, dmgAltCSData);

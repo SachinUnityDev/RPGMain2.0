@@ -1,6 +1,7 @@
 using Combat;
 using Common;
 using Interactables;
+using Quest;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,62 +14,76 @@ namespace Combat
     public class CombatEndView : MonoBehaviour
     {
         [Header("TBR")]
+        [SerializeField] TextMeshProUGUI headingTxt; 
         [SerializeField] Transform charPortContainer;
-        [SerializeField] CombatEndContinueBtn combatEndContinueBtn; 
-
+        [SerializeField] CombatEndContinueBtn combatEndContinueBtn;
+        [SerializeField] ManualExpBtn manualExpBtn; 
         [SerializeField] List<CharController> allAllyInclDeadNFled = new List<CharController>();
-        EnemyPacksSO enemyPacksSO; 
 
-      
-        public void ShowCombatEndView()
+
+        [Header(" Global var")]
+        public bool manualExpBtnPressed = false; 
+        public bool manualExpRewarded = false;
+
+        CombatEndCondition combatEndCondition;
+        CombatResult combatResult;
+
+    
+        public void ShowCombatPanel()
         {
-            InitCombatEndView();
-            transform.GetChild(0).gameObject.SetActive(true);
+           
         }
-
         public void InitCombatEndView()
         {
+            this.combatResult= CombatEventService.Instance.currCombatResult;    
+  
             allAllyInclDeadNFled = CharService.Instance
                                  .allCharsInPartyLocked.Where(t => t.charModel.orgCharMode == CharMode.Ally).ToList();
             combatEndContinueBtn.InitContinueBtn(this); 
-
+            manualExpBtn.ManualExpBtnInit(this);
             FillCharPort();
-            
+            FillHeading();
+            transform.GetChild(0).gameObject.SetActive(true);
         }
 
+        public void OnManualExpAwarded()
+        {
+            manualExpBtn.StateNA(); 
+            manualExpRewarded = true; 
+        }
         public void CloseCombatView()
         {
             transform.GetChild(0).gameObject.SetActive(false);
         }
-
-        int GetSharedExp()
+        void FillHeading()
         {
-
-            enemyPacksSO = CombatService.Instance.currEnemyPackSO;
-            int sharedExp = enemyPacksSO.sharedExp;
-            int allyExceptDeadNFledCount = 0;
-            foreach (CharController charCtrl in allAllyInclDeadNFled)
+            switch (combatResult)
             {
-                if(charCtrl.charModel.stateOfChar == StateOfChar.UnLocked)
-                {
-                    allyExceptDeadNFledCount++; 
-                }
+                case CombatResult.None:
+                    break;
+                case CombatResult.Victory:
+                    headingTxt.text = "VICTORY"; 
+                    break;
+                case CombatResult.Draw:
+                    headingTxt.text = "DRAW";
+                    break;
+                case CombatResult.Defeat:
+                    headingTxt.text = "DEFEAT";
+                    break;
+                default:
+                    break;
             }
-            if (allyExceptDeadNFledCount > 0)
-                return sharedExp / allyExceptDeadNFledCount;
-            else return 0; 
         }
-
         void FillCharPort()
         {
-            int charSharedExp = GetSharedExp();
+            int charSharedExp = CombatService.Instance.GetSharedExp();
             for (int i = 0; i < charPortContainer.childCount; i++)
             {
                 if (i < allAllyInclDeadNFled.Count)
                 {
                     charPortContainer.GetChild(i).gameObject.SetActive(true);
                     charPortContainer.GetChild(i).GetComponent<PortView>()
-                                    .InitPortView(allAllyInclDeadNFled[i].charModel, charSharedExp); 
+                                    .InitPortView(allAllyInclDeadNFled[i].charModel, charSharedExp, this); 
                 }
                 else
                 {
@@ -76,7 +91,16 @@ namespace Combat
                 }
             }
         }
-
+  
+        
+        public bool IsOnlyAbbas()
+        {
+           if(allAllyInclDeadNFled.Count == 1)
+            {
+                if (allAllyInclDeadNFled[0].charModel.charName == CharNames.Abbas) return true; 
+            }
+            return false; 
+        }
 
 
     }

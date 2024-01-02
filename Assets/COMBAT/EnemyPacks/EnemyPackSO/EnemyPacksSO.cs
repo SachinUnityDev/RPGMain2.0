@@ -13,6 +13,14 @@ namespace Combat
       //  public int charID;
         public List<int> preferredPos = new List<int>();      
     }
+    public enum CombatLootSize
+    {
+        None, 
+        Small, 
+        Medium, 
+        Large,  
+    }
+
 
     [CreateAssetMenu(fileName = "EnemyPackSO", menuName = "Combat/EnemyPackSO")]
     public class EnemyPacksSO : ScriptableObject
@@ -20,7 +28,8 @@ namespace Combat
         public EnemyPackName enemyPack;
         public bool isBossPack = false; 
         public List<EnemyDataInPack> allEnemyDataInPack = new List<EnemyDataInPack>();
-        public Spread loot = new Spread(0, 0);
+        // public Spread loot = new Spread(0, 0);
+        public CombatLootSize combatLootSize; 
         public int sharedExp; 
     }
 

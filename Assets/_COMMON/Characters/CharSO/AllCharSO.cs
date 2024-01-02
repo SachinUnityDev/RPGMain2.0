@@ -17,6 +17,10 @@ namespace Common
         [Header("Hex portraits BG")]
         public Sprite hexPortBg;
 
+        [Header("Background Portrait")]
+        public Sprite bgPortClicked;
+        public Sprite bgPortUnClicked;
+        public Sprite bgPortUnAvail;
         private void Awake()
         {
             charList.Clear();

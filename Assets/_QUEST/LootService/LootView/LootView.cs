@@ -97,16 +97,18 @@ namespace Quest
             for (int i = 0; i < containerTrans.childCount; i++)
             {
                 int j = startPos + i; 
-                if (j <lootList.Count)
-                {
-                    containerTrans.GetChild(i).GetComponent<LootSlotView>()
-                    .InitSlot(lootList[j], this);
-                }
-                else
-                {
-                    containerTrans.GetChild(i).GetComponent<LootSlotView>()
-                    . InitSlot(null,this);
-                }
+         
+                    if (j < lootList.Count)
+                    {
+                        containerTrans.GetChild(i).GetComponent<LootSlotView>()
+                        .InitSlot(lootList[j], this);
+                    }
+                    else
+                    {
+                        containerTrans.GetChild(i).GetComponent<LootSlotView>()
+                        .InitSlot(null, this);
+                    }
+                
             }           
         }
         public bool IsItemSelected(ItemBaseWithQty itemBaseWithQty)

@@ -19,3 +19,28 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 50848192169b5044cbc6e50d1137f3be, type: 2}
   - {fileID: 11400000, guid: a25a1b886f17a684aa66eccd9af3335a, type: 2}
   - {fileID: 11400000, guid: cf55f80f328584d439379e735447e171, type: 2}
+  allCombatLootSizeData:
+  - combatLootSize: 1
+    allLootSizeVsQMode:
+    - questMode: 1
+      size: 4
+    - questMode: 2
+      size: 5
+    - questMode: 3
+      size: 6
+  - combatLootSize: 2
+    allLootSizeVsQMode:
+    - questMode: 1
+      size: 6
+    - questMode: 2
+      size: 7
+    - questMode: 3
+      size: 8
+  - combatLootSize: 3
+    allLootSizeVsQMode:
+    - questMode: 1
+      size: 9
+    - questMode: 2
+      size: 10
+    - questMode: 3
+      size: 12

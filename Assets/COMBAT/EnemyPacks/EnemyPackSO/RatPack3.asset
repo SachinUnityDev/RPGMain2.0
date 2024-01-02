@@ -21,7 +21,5 @@ MonoBehaviour:
     preferredPos: 02000000
   - enemyName: 18
     preferredPos: 07000000
-  loot:
-    min: 3
-    max: 3
+  combatLootSize: 3
   sharedExp: 40

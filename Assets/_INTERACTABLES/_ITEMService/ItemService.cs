@@ -52,7 +52,7 @@ namespace Interactables
         public List<ScrollSO> allScrollSO = new List<ScrollSO>();
 
         [Header("Lore Scroll SO")]
-        public LoreScrollSO loreScrollSO;
+        public LoreBookSO loreScrollSO;
 
         [Header("All Herbs SO ")]
         public List<HerbSO> allHerbSO = new List<HerbSO>();
@@ -524,6 +524,8 @@ namespace Interactables
                                     CauseType.Items, 2);
                 InitItemToInv(SlotType.CommonInv, ItemType.Fruits, (int)FruitNames.Kiwi,
                                     CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.Scrolls, (int)ScrollNames.ScrollOfLight,
+                               CauseType.Items, 2);
             }
             if (Input.GetKeyDown(KeyCode.J))
             {

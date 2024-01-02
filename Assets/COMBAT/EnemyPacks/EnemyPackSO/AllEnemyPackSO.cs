@@ -3,15 +3,66 @@ using System.Collections.Generic;
 using UnityEngine;
 using Interactables;
 using Combat;
+using Quest;
+using System;
+using System.Security.Policy;
 
 namespace Common
 {
+    [Serializable]
+    public class CombatLootSizeData
+    {
+        public CombatLootSize combatLootSize; 
+        public List<CombatLootVsQMode> allLootSizeVsQMode = new List<CombatLootVsQMode>();    
+    }
+
+    [Serializable]
+    public class CombatLootVsQMode
+    {
+        public QuestMode questMode;
+        public int size; 
+    }
+
+
     [CreateAssetMenu(fileName = "AllEnemySO", menuName = "Combat/AllEnemySO")]
 
     public class AllEnemyPackSO : ScriptableObject
     {
         public List<ItemType> lootTypes = new List<ItemType>();
         public List<EnemyPacksSO> allEnemyPack = new List<EnemyPacksSO>();
+        public List<CombatLootSizeData> allCombatLootSizeData = new List<CombatLootSizeData>();    
+
+
+
+        public List<ItemType> GetAllItemType(EnemyPackName enemyPackName, QuestMode questMode)
+        {
+            EnemyPacksSO enemyPackSO = GetEnemyPackSO(enemyPackName);
+            CombatLootSize combatLootSize = enemyPackSO.combatLootSize;
+            int lootSize = GetLootSize(questMode,combatLootSize);
+            return GetItemLs(lootSize);            
+        }
+        int GetLootSize(QuestMode questMode, CombatLootSize combatLootSize)
+        {
+            int index = allCombatLootSizeData.FindIndex(t=>t.combatLootSize== combatLootSize);
+            if(index != -1)
+            {
+                int index2 = allCombatLootSizeData[index].allLootSizeVsQMode.FindIndex(t=>t.questMode==questMode);
+                if(index2 != -1)
+                {
+                    return allCombatLootSizeData[index].allLootSizeVsQMode[index2].size;
+                }
+                else
+                {
+                    Debug.LogError(" loot size not found!"); 
+                        return 0; 
+                }
+            }
+            else
+            {
+                Debug.LogError(" loot size not found");
+                return 0;
+            }
+        }
 
         public EnemyPacksSO GetEnemyPackSO(EnemyPackName enemyPackName, bool isBoss = false)
         {
@@ -22,9 +73,7 @@ namespace Common
                 Debug.Log("Enemy pack Not found"); 
             return null; 
         }
-
-
-        public List<ItemType> GetItemLs()
+        public List<ItemType> GetItemLs(int lootSize)
         {
             lootTypes.Clear();
 
@@ -50,10 +99,10 @@ namespace Common
             else
                 lootTypes.Add(ItemType.Gems);
 
-            if (40f.GetChance()) //5
-                lootTypes.Add(ItemType.Scrolls);
-            else
-                lootTypes.Add(ItemType.LoreScroll);
+         //   if (40f.GetChance()) //5
+           //     lootTypes.Add(ItemType.Scrolls);
+            //else
+                lootTypes.Add(ItemType.LoreBooks);
 
             if (50f.GetChance())  //6
                 lootTypes.Add(ItemType.GenGewgaws);
@@ -96,8 +145,12 @@ namespace Common
             else
                 lootTypes.Add(ItemType.Foods);
 
-
-            return lootTypes;
+            List<ItemType> list = new List<ItemType>();
+            for (int i = 0; i < lootSize; i++)
+            {
+                list.Add(lootTypes[i]); 
+            }
+            return list;
         }
 
     }

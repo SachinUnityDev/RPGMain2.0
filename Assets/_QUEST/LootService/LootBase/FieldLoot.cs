@@ -135,7 +135,7 @@ namespace Quest
             itemDataLs.Add(itemDataLoot);
 
 
-            itemDataLoot = new ItemLootData(ItemType.LoreScroll, (int)LoreScrollName.LoreScroll, 1, 1);
+            itemDataLoot = new ItemLootData(ItemType.LoreBooks, (int)LoreBooksNames.LandsOfShargad, 1, 1);
             itemDataLs.Add(itemDataLoot);
 
             //SCROLLS

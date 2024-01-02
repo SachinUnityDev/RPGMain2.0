@@ -50,7 +50,12 @@ namespace Interactables
             loreBtn.onClick.AddListener(OnLoreBtnPressed);
             invBtn.onClick.AddListener(OnInvBtnPressed);
             invXLClose.onClick.AddListener(UnLoad);
-         
+            
+            LoreService.Instance.loreViewController = transform.GetComponentInChildren<LoreViewController>();
+            // get prefab
+
+
+
         }
 
         

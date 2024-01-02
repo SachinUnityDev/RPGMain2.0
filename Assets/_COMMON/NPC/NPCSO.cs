@@ -123,7 +123,7 @@ namespace Town
                     return (int)poeticName;                    
                 case ItemType.RelicGewgaws:
                     return (int)0;                                 
-                case ItemType.LoreScroll:
+                case ItemType.LoreBooks:
                     return (int)0;
                 default:
                     break;

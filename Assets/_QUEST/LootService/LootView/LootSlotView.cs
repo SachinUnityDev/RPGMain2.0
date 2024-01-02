@@ -42,6 +42,9 @@ namespace Quest
             this.itemBaseWithQty = itemBaseWithQty;
             transform.gameObject.SetActive(true);
             itemImg.gameObject.SetActive(true);
+
+            Debug.Log("ITEM>>>" + itemBaseWithQty.item.itemName); 
+
             itemImg.sprite = GetSprite(itemBaseWithQty.item.itemName, itemBaseWithQty.item.itemType);
             itemBG.sprite = GetBGSprite(itemBaseWithQty.item);
             if (itemBaseWithQty.qty > 1)

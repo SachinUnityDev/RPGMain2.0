@@ -999,7 +999,7 @@ namespace Combat
         {
             if (_skillModel.cd == -5) return false;
             if (_skillModel.lastUsedInRound == -5) return false;
-            _skillModel.cdRemaining = _skillModel.cd - (CombatService.Instance.currentRound - _skillModel.lastUsedInRound);
+            _skillModel.cdRemaining = _skillModel.cd - (CombatEventService.Instance.currentRound - _skillModel.lastUsedInRound);
             if (_skillModel.cdRemaining > 0)
             {               
                 return true;

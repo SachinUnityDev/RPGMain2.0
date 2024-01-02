@@ -35,7 +35,7 @@ namespace Interactables
 
         [Header("Global Var")]
         [SerializeField] LoreData currLoredata; // once lore Selection is clicked Populate this 
-        [SerializeField] List<LoreSubData> currUnLockedSubLore; 
+        [SerializeField] List<LoreSubData> currUnLockedSubLore = new List<LoreSubData>(); 
         [SerializeField] int index;
         [SerializeField] int pageInd = 0;
         [SerializeField] List<Sprite> currLoreSprites; 

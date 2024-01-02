@@ -118,7 +118,7 @@ namespace Combat
             }
             else
             {
-                skillModel.lastUsedInRound = CombatService.Instance.currentRound;
+                skillModel.lastUsedInRound = CombatEventService.Instance.currentRound;
             }
             charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatName.stamina, -skillModel.staminaReq);
            

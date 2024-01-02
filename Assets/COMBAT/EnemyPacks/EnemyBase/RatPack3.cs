@@ -1,5 +1,8 @@
 using Combat;
+using Common;
+using DG.Tweening;
 using Interactables;
+using Quest;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +18,7 @@ namespace Combat
         public override void InitEnemyPack()
         {
             lootData.Clear();
+
             if (50f.GetChance())
             {
                 ItemDataWithQty itemQty = new ItemDataWithQty
@@ -27,11 +31,7 @@ namespace Combat
                                     (new ItemData(ItemType.Ingredients, (int)IngredNames.RatFang), 2);
                 lootData.Add(itemQty);
             }
-
         }
-        public override void EnemyPackInteract()
-        {
-
-        }
+     
     }
 }

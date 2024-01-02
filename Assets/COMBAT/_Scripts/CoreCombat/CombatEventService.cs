@@ -48,6 +48,9 @@ namespace Combat
 
         public event Action<CharController, PotionNames> OnPotionConsumedInCombat;
 
+        [Header(" Common round Counter")]
+        public int currentRound = 1;
+        
 
 
         [Header(" Combat result")]  // every time a combat end add here 
@@ -152,14 +155,10 @@ namespace Combat
         }
 
         public void On_EOC(CombatResult combatResult)
-        {
-            Debug.Log("EOC triggered");
-            FortReset2FortOrg();         
-          //  CombatService.Instance.combatEndView.ShowCombatEndView();
-            //CombatResult = 
-            
-            OnEOC?.Invoke();
-            CharService.Instance.allCharInCombat.Clear();
+        {            
+            FortReset2FortOrg();
+            currCombatResult = combatResult; 
+            OnEOC?.Invoke();         
         }
         public void On_CombatFlee(CharController charController)
         {
@@ -209,18 +208,18 @@ namespace Combat
         }
         public void Move2NextRds()
         {    
-            int roundNo = CombatService.Instance.currentRound;
+            int roundNo = currentRound;
             Debug.Log(roundNo + "Check end of round.........................");
             On_EOR(roundNo);
             Debug.Log("Check end of round" + roundNo);
             int MAX_RD_LIMIT = GameService.Instance.gameController.GetMaxRoundLimit();
             if (roundNo >= MAX_RD_LIMIT)
             {
-                On_EOC(CombatResult.Draw);
+                CombatService.Instance.OnCombatResult(CombatResult.Draw, CombatEndCondition.Draw_MaxRdsLmt); 
             }   
             else
             {
-                roundNo = ++CombatService.Instance.currentRound;
+                roundNo = ++currentRound;
                 On_SOR(roundNo);
             }
         }

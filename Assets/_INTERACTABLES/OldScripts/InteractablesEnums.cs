@@ -154,7 +154,7 @@ namespace Interactables
         PoeticGewgaws,
         RelicGewgaws, 
         Pouches,
-        LoreScroll,
+        LoreBooks,
 
     }
 
@@ -271,10 +271,16 @@ namespace Interactables
         ScrollOfLight,        
     }
 
-    public enum LoreScrollName
+    public enum LoreBooksNames
     {
-        None, 
-        LoreScroll,
+        None,
+        LandsOfShargad,
+        ElementsOfShargad,
+        GodsOfShargad,
+        GuildsOfShargad,
+        HistoryOfShargad,
+        RacesOfShargad,
+        UniverseOfShargad,
     }
 
 

@@ -27,17 +27,17 @@ MonoBehaviour:
       - {fileID: 21300000, guid: e0bf72f4a47c2064fb7ef20ef45ae408, type: 3}
       - {fileID: 21300000, guid: 0b44e0d0554812a4d97abb19b03cfcfc, type: 3}
     - subLoreNames: 9
-      isLocked: 1
+      isLocked: 0
       pics:
       - {fileID: 21300000, guid: e4f90f5195d826645879597639f82d2f, type: 3}
       - {fileID: 21300000, guid: f80e9381f8502f44fa1996b2cec825e2, type: 3}
     - subLoreNames: 11
-      isLocked: 1
+      isLocked: 0
       pics:
       - {fileID: 21300000, guid: f7001afd81a439c4aacaa5d79cef3968, type: 3}
       - {fileID: 21300000, guid: c4b195c2481a8e04aa7c16e6d233bfcb, type: 3}
     - subLoreNames: 13
-      isLocked: 1
+      isLocked: 0
       pics:
       - {fileID: 21300000, guid: 77a3517eefe7c894cbc64986e883ac8d, type: 3}
       - {fileID: 21300000, guid: b9a66b67263e8224582ebc202c23e346, type: 3}

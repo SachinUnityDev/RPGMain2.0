@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Common;
-using System.Linq; 
+using System.Linq;
+using Quest;
 
 namespace Combat
 {
@@ -33,7 +34,7 @@ namespace Combat
         public RoundController roundController;
         public CombatHUDView combatHUDView; 
 
-        public int currentRound = 1;
+       // public int currentRound = 1;
         public int currentTurn = 0;
 
         public bool isAccChecked = false;
@@ -42,7 +43,8 @@ namespace Combat
         [Header("Result")]
         public bool isVictory;
         [Header("Enemy Pack")]
-        public EnemyPacksSO currEnemyPackSO; 
+        public EnemyPacksSO currEnemyPackSO;
+
 
         void OnEnable()
         {            
@@ -51,7 +53,7 @@ namespace Combat
             SkillService.Instance.SkillSelect
                             += (CharNames _charName, SkillNames _skillName)
                             =>combatState = CombatState.INCombat_InSkillSelected;
-            
+            CharService.Instance.OnCharDeath += OnCharDeathCombatChk; 
            
             deathAnimView = GetComponent<DeathAnimView>();
             roundController = GetComponent<RoundController>();
@@ -70,7 +72,7 @@ namespace Combat
         {  
             CombatEventService.Instance.OnEOR1 -= EORActions;
             CombatEventService.Instance.OnCharOnTurnSet -= SetAllCurrCharValues;
-
+            CharService.Instance.OnCharDeath -= OnCharDeathCombatChk;
             SkillService.Instance.SkillSelect
                                        -= (CharNames _charName, SkillNames _skillName)
                                        => combatState = CombatState.INCombat_InSkillSelected; 
@@ -145,59 +147,77 @@ namespace Combat
 
         public void OnCharDeathCombatChk(CharController charController)
         {
-            // combat end conditions 
-
             //"Kill all enemies
             //(If Abbas fled combat you can still win Combat with remaining heroes)"	
             //Combat didnt finish before the round limit	
             //Abbas dies / Manually Flee / No Hero left on battlefield (die or flee)  // Combat DEFEAT on all flee
 
-            foreach (CharController charCtrl in CharService.Instance.allCharInCombat)
-            {
-                if(charCtrl.charModel.charMode == CharMode.Enemy)
+            if(charController.charModel.charMode == CharMode.Enemy)
+            {// chk if all enemies have died // victory case here
+                if (!CharService.Instance.allCharInCombat.Any(t => t.charModel.charMode == CharMode.Enemy))
                 {
-                    if (CharService.Instance.allCharInCombat.Any(t => t.charModel.charMode == CharMode.Enemy))
-                    {
-
-                    }
-                    // chk if all enemies have died // victory case here 
-                }else if(charCtrl.charModel.charName == CharNames.Abbas)
-                {
-                    // end combat 
-                }
-                else // ally other than abbas Died
-                {
-                    //abbas fled n others dead... 
-                }
+                    OnCombatResult(CombatResult.Victory, CombatEndCondition.Victory_AllEnemiesDied); 
+                }                     
+            }else if(charController.charModel.charName == CharNames.Abbas)
+            { // combat lost .. Abbas Died
+                    OnCombatResult(CombatResult.Defeat, CombatEndCondition.Defeat_AbbasDied);
             }
+            else // ally other than abbas Died
+            {
+                if(!CharService.Instance.allCharInCombat.Any(t=>t.charModel.charMode == CharMode.Ally))
+                {
+                     OnCombatResult(CombatResult.Defeat, CombatEndCondition.Defeat_AllInCombatDiedNFled); 
+                }              
+            }            
         }
-
-
-        public void OnEOCResult(CombatResult combatResult)
+        public void OnCombatResult(CombatResult combatResult, CombatEndCondition combatEndCondition)
         {
+            CombatEventService.Instance.On_EOC(combatResult);
+  
+
+            EnemyPackBase enemyPackBase = enemyPackController.GetEnemyPackBase(currEnemyPack); 
+
             switch (combatResult)
             {
                 case CombatResult.None:
                     break;
-                case CombatResult.Victory: // all enemies Killed
-
-
-
+                case CombatResult.Victory: // loot and Exp
+                    enemyPackBase.EnemyPackShowLoot(); 
                     break;
                 case CombatResult.Draw: // on max Round Limit reached 
-
+                    enemyPackBase.EnemyPackShowLoot();
 
                     break;
                 case CombatResult.Defeat: // On Abbas Dead, All companions in Combat Dead,   
                     break;
             }
         }
+        #endregion
 
-
-
-        # endregion
-
-
+        public int GetSharedExp()
+        {
+            int sharedExp = currEnemyPackSO.sharedExp;
+            int allyExceptDeadNFledCount = 0;
+            List<CharController> allAllyInclDeadNFled 
+                                         = CharService.Instance.allCharsInPartyLocked
+                                         .Where(t => t.charModel.orgCharMode == CharMode.Ally).ToList();
+            
+            foreach (CharController charCtrl in allAllyInclDeadNFled)
+            {
+                if (charCtrl.charModel.stateOfChar == StateOfChar.UnLocked)
+                {
+                    allyExceptDeadNFledCount++;
+                }
+            }
+            if (allyExceptDeadNFledCount > 0)
+                return sharedExp / allyExceptDeadNFledCount;
+            else return 0;
+        }
+        public int GetManualExp()
+        {
+            int manualExp = currEnemyPackSO.sharedExp / 6; 
+            return manualExp;   
+        }
     }
 
     public enum CombatEndCondition

@@ -101,7 +101,7 @@ namespace Combat
             }
             else
             {
-                skillModel.lastUsedInRound = CombatService.Instance.currentRound;
+                skillModel.lastUsedInRound = CombatEventService.Instance.currentRound;
             }
             // apply skill FX get the 
             SkillService.Instance.skillFXMoveController.RemoteSkillFX(PerkType.None, cellPosData, this); 

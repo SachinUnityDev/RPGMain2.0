@@ -68,7 +68,7 @@ namespace Common
                 GameService.Instance.gameModel.gameState == GameState.InQuestRoom)            
                         currRd = skillModel.cd;                
             else if (GameService.Instance.gameModel.gameState == GameState.InTown)
-                        currRd = CombatService.Instance.currentRound;
+                        currRd = CombatEventService.Instance.currentRound;
 
             for (j = 0; j < skillModel.cd; j++)
             {

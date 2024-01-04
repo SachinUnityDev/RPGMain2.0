@@ -421,7 +421,26 @@ namespace Interactables
                     break;
                 case ItemType.Pouches:
                     break;
+                case ItemType.LoreBooks:
 
+                    LoreBookSO loreBookSO = ItemService.Instance.GetLoreBookSO((LoreNames)item.itemName);
+                    if (loreBookSO != null)
+                    {
+                        transform.GetComponent<Image>().sprite = itemViewSO.lyricBG;
+                        crownTrans.gameObject.SetActive(false);
+                        // top
+                        itemNametxt.text = loreBookSO.loreName.ToString().CreateSpace();
+                        itemTypetxt.text = "Lore Book";
+                        itemFilterImg.sprite = itemViewSO.GetItemTypeImgData(item.itemType).FilterIconN;
+                        itemImg.sprite = loreBookSO.iconSprite;
+                        itemSubTypeTrans.gameObject.SetActive(false);
+                        //mid
+                        FillMid(loreBookSO.allLines);
+                        //btm
+                        itemSlotTrans.gameObject.SetActive(false);
+                        currTrans.GetComponent<DisplayCurrency>().Display(loreBookSO.cost.DeepClone());
+                    }
+                     break;
                 default:
                     break;
             }

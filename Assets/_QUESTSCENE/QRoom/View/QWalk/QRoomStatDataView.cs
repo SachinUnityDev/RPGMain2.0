@@ -39,7 +39,7 @@ namespace Quest
             }
             else // Char main Exp 
             {
-                int totalExp = CharService.Instance.lvlNExpSO.GetTotalExpPts4Lvl(charModel.charLvl);
+                int totalExp = CharService.Instance.lvlNExpSO.GetThresholdExpPts4Lvl(charModel.charLvl);
                  transform.GetChild(1).GetComponent<TextMeshProUGUI>().text
                          = charModel.mainExp.ToString() + "/" + totalExp;
             }

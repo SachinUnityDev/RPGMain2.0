@@ -74,7 +74,9 @@ namespace Quest
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
                 //  float offset =  parent.GetComponent<RectTransform>().rect.width / 2 + 50f; 
-                lootRect.localPosition = new Vector3(-600, -250);
+                Canvas canvas = FindObjectOfType<Canvas>();
+                Vector2 size = canvas.GetComponent<RectTransform>().sizeDelta; 
+                lootRect.localPosition = new Vector3(0, 0);
             }
             LootService.Instance.lootView.InitLootList(itemLS, parent);
             LootService.Instance.On_LootDsplyToggle(true);

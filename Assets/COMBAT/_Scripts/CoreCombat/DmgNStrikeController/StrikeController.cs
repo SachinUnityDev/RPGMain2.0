@@ -44,6 +44,7 @@ namespace Combat
             CombatEventService.Instance.OnDamageApplied += OnDmgDeliveredTickRetaliate;
             CombatEventService.Instance.OnEOR1 += RoundTickRetaliate;
             CombatEventService.Instance.OnEOC += EOCTickRetaliate;
+            CombatEventService.Instance.OnDamageApplied += FirstBloodChk; 
 
         }
         private void OnDisable()
@@ -55,7 +56,7 @@ namespace Combat
             CombatEventService.Instance.OnDamageApplied -= OnDmgDeliveredTickRetaliate;
             CombatEventService.Instance.OnEOR1 -= RoundTickRetaliate;
             CombatEventService.Instance.OnEOC -= EOCTickRetaliate;
-
+            CombatEventService.Instance.OnDamageApplied -= FirstBloodChk;
         }
         /// <summary>
         /// to be checked only when move skill are used 
@@ -69,6 +70,32 @@ namespace Combat
             strikerModel = new StrikerModel();
 
         }
+
+
+        #region CHK FOR FIRST BLOOD
+
+        void FirstBloodChk(DmgAppliedData dmgAppliedData)
+        {
+            if (dmgAppliedData.dmgValue == 0) return;
+            if (dmgAppliedData.isMisFire == true) return;
+            
+            CharController striker = dmgAppliedData.striker;
+            CharStateController charStateController = striker.charStateController;
+            if (charStateController.HasCharState(CharStateName.FirstBlood)) return; 
+            
+            if (CombatService.Instance.IsFirstBloodChkDone) return;
+
+                charStateController.ApplyCharStateBuff(dmgAppliedData.causeType, (int)dmgAppliedData.causeName
+                    , dmgAppliedData.striker.charModel.charID, CharStateName.FirstBlood, TimeFrame.EndOfCombat, 1);
+                CombatService.Instance.IsFirstBloodChkDone = true;
+                CombatService.Instance.combatEndView.SetCharAsFirstBlood(striker); 
+
+        }
+
+
+        #endregion 
+
+
         #region THORNS RELATED
 
         public int AddThornsBuff(DamageType damageType, float thornsMin, float thornsMax, TimeFrame timeframe, int castTime)
@@ -196,6 +223,7 @@ namespace Combat
 
 
         #endregion
+
         #region DAMAGE BUFF ALTERER
 
         public List<DmgBuffData> allDmgBuffData = new List<DmgBuffData>();
@@ -400,6 +428,7 @@ namespace Combat
         }
         #endregion
 
+        #region DATA CLASSES
         public class DmgBuffData
         {
             public int dmgBuffID;
@@ -422,7 +451,6 @@ namespace Combat
                 this.altData = altData;
             }
         }
-
         public class DmgAltData
         {
             public AttackType attackType = AttackType.None;
@@ -475,6 +503,11 @@ namespace Combat
                 this.altData = altData;
             }
         }
+
+        #endregion
+
+
+
     }
 
 

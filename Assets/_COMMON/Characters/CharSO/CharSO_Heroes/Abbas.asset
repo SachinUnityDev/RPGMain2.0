@@ -28,7 +28,7 @@ MonoBehaviour:
   bpPortraitUnAvail: {fileID: 21300000, guid: c441f4f4a50a07947bebf59eec87c2ae, type: 3}
   charMode: 1
   orgCharMode: 1
-  mainExp: 0
+  mainExp: 250
   jobExp: 0
   skillPts: 0
   charLvl: 3

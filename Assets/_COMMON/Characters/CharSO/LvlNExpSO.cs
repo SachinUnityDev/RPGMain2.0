@@ -20,7 +20,7 @@ namespace Common
     {
         public List<LvlExpData> allLvlExpData = new List<LvlExpData>();
 
-        public int GetTotalExpPts4Lvl(int charlvl)
+        public int GetThresholdExpPts4Lvl(int charlvl)
         {
             return allLvlExpData.Find(t => t.charLvl == charlvl).totalExpPts;
         }

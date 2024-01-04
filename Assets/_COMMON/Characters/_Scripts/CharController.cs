@@ -294,6 +294,16 @@ namespace Common
                     damageController.ApplyDamage(this, CauseType.StatMinMaxLimit, 0, DamageType.FortitudeDmg
                                                                         , GetHealthValBelow0(value));
                 }
+                if(statName == StatName.health  
+                            && charStateController.HasCharState(CharStateName.LastDropOfBlood)
+                            && causeType == CauseType.CharSkill)
+                {// saves chck 
+
+                    SkillModel skillModel = SkillService.Instance.GetSkillModel(causeByCharID, (SkillNames)CauseName); 
+                    if(skillModel.skillInclination == SkillInclination.Guard 
+                            || skillModel.skillInclination == SkillInclination.Heal)
+                        CombatEventService.Instance.combatModel.AddOn_Saves(causeByCharID, charModel); 
+                }
             }
             
             // COMBAT PATCH FIX ENDS 
@@ -325,7 +335,7 @@ namespace Common
                 PopulateOverCharBars(statName);
 
             if (statName == StatName.health)
-                On_DeathChk(causeByCharID);
+                On_DeathChk(causeByCharID, causeType);
             if (toInvoke)
             {   // IF NO CHANGE IN VALUE HAS HAPPENED DUE TO CLAMPING THIS NEEDS TO BE KEPT HERE
                 OnStatChg?.Invoke(statModData);
@@ -449,19 +459,21 @@ namespace Common
             return 1f; 
          }
 
-        void On_DeathChk(int causeByCharID)
+        void On_DeathChk(int causeByCharID, CauseType causeType)
         {       
             StatData statHP = GetStat(StatName.health); 
             if(statHP.currValue <= 0)
             {
                 if(charModel.orgCharMode == CharMode.Enemy)
                 {
+                    if(causeType == CauseType.CharSkill)
+                        CombatEventService.Instance.combatModel.AddOn_Kill(causeByCharID, charModel); 
                   CharService.Instance.On_CharDeath(this, causeByCharID); 
                 }else
                 {  
                     if(!charStateController.HasCharState(CharStateName.LastDropOfBlood))
-                    charStateController.ApplyCharStateBuff(CauseType.StatMinMaxLimit, (int)0,
-                                                        charModel.charID, CharStateName.LastDropOfBlood);                                    
+                        charStateController.ApplyCharStateBuff(CauseType.StatMinMaxLimit, (int)0,
+                                                        charModel.charID, CharStateName.LastDropOfBlood);                    
                 }
             }
         }
@@ -579,7 +591,7 @@ namespace Common
         {
             charModel.mainExp -= (int)val;
             int prevlvl = charModel.charLvl-1;
-            int totalExpPts = CharService.Instance.lvlNExpSO.GetTotalExpPts4Lvl(prevlvl);
+            int totalExpPts = CharService.Instance.lvlNExpSO.GetThresholdExpPts4Lvl(prevlvl);
             if (charModel.mainExp < totalExpPts)
             {
                 ChgLevelDown();
@@ -592,7 +604,7 @@ namespace Common
 
             charModel.mainExp += (int)valNew;
             int nextlvl = charModel.charLvl+1; 
-            int totalExpPts = CharService.Instance.lvlNExpSO.GetTotalExpPts4Lvl(nextlvl); 
+            int totalExpPts = CharService.Instance.lvlNExpSO.GetThresholdExpPts4Lvl(nextlvl); 
             if(charModel.mainExp > totalExpPts)
             {
                 ChgLevelUp(nextlvl); 

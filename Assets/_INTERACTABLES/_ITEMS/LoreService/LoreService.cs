@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Common;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Interactables
 {
@@ -31,6 +32,15 @@ namespace Interactables
            // OpenLoreView();
 
         }
+
+        public void UnLockTheCompleteLore(LoreNames loreName) // is done on reading "LORE BOOK 
+        {
+            LoreData loreData = GetLoreData(loreName);
+            if (IsLoreLocked(loreName))
+            {
+                loreData.isLocked = false;
+            }
+        }
         public void UnLockRandomSubLore(LoreNames _loreName)
         {
             LoreData loreData = GetLoreData(_loreName);
@@ -52,6 +62,8 @@ namespace Interactables
                 }
             }
         }
+
+
         public List<LoreSubData> GetUnLockedSubLores(LoreNames loreName)
         {
             LoreData loreData = GetLoreData(loreName);

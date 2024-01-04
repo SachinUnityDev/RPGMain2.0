@@ -27,12 +27,8 @@ namespace Combat
 
         CombatEndCondition combatEndCondition;
         CombatResult combatResult;
-
-    
-        public void ShowCombatPanel()
-        {
-           
-        }
+        public CharController firstBloodChar;  
+ 
         public void InitCombatEndView()
         {
             this.combatResult= CombatEventService.Instance.currCombatResult;    
@@ -43,9 +39,18 @@ namespace Combat
             manualExpBtn.ManualExpBtnInit(this);
             FillCharPort();
             FillHeading();
-            transform.GetChild(0).gameObject.SetActive(true);
-        }
+            Transform lootTrans = transform.GetChild(0);
+            Transform endTrans = transform.GetChild(1); 
+            endTrans.SetAsFirstSibling();
+            lootTrans.SetAsLastSibling();
+            lootTrans.gameObject.SetActive(true);
+            endTrans.gameObject.SetActive(true);
 
+        }
+        public void SetCharAsFirstBlood(CharController charController)
+        {
+            firstBloodChar = charController;
+        }
         public void OnManualExpAwarded()
         {
             manualExpBtn.StateNA(); 

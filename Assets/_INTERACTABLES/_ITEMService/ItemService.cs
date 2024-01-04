@@ -27,6 +27,7 @@ namespace Interactables
         public List<ScrollReadData> allScrollRead = new List<ScrollReadData>();
 
         #region SO LIST REFERNCES 
+
         [Header("Item View SO ")]
         public ItemViewSO itemViewSO;
 
@@ -51,9 +52,6 @@ namespace Interactables
         [Header("All Scroll SO")]
         public List<ScrollSO> allScrollSO = new List<ScrollSO>();
 
-        [Header("Lore Scroll SO")]
-        public LoreBookSO loreScrollSO;
-
         [Header("All Herbs SO ")]
         public List<HerbSO> allHerbSO = new List<HerbSO>();
 
@@ -77,6 +75,9 @@ namespace Interactables
 
         [Header("All Alcohol SO")]
         public List<AlcoholSO> allAlcoholSO = new List<AlcoholSO>();
+        [Header(" ALl Lore Book SO")]
+        public List<LoreBookSO> allLoreBooksSO= new List<LoreBookSO>();
+
         #endregion
 
         [Header("Item card")]
@@ -206,8 +207,6 @@ namespace Interactables
             else
                 Debug.Log("scrollSO  not found");
             return null;
-
-
         }
         public SagaicGewgawSO GetSagaicGewgawSO(SagaicGewgawNames sagaicNames)
         {
@@ -227,6 +226,7 @@ namespace Interactables
                 Debug.Log(genGewgawName+ "genGewGaw SO  not found");
             return null;
         }
+
         public PoeticGewgawSO GetPoeticGewgawSO(PoeticGewgawNames poeticGewgawName)
         {
             PoeticGewgawSO poeticGewgawSO = allPoeticGewgawSO.Find(t => t.poeticGewgawName == poeticGewgawName);
@@ -306,6 +306,15 @@ namespace Interactables
                 return alcoholSO;
             else
                 Debug.Log("alcohol SO  not found" + alcoholName);
+            return null;
+        }
+        public LoreBookSO GetLoreBookSO(LoreNames loreName)
+        {
+            LoreBookSO loreBookSO =  allLoreBooksSO.Find(t => t.loreName == loreName);
+            if (loreBookSO != null)
+                return loreBookSO;
+            else
+                Debug.Log("Lore books SO  not found" + loreName);
             return null;
         }
 
@@ -408,16 +417,10 @@ namespace Interactables
                 On_GemEnchanted(charController); 
                 return true;
             }
-                
             else
                 return false; 
         }
-        public void OnScrollRead(ScrollNames scrollName)
-        {
-            ScrollSO scrollSO = GetScrollSO(scrollName);
-            ScrollReadData scrollReadData = new ScrollReadData(scrollName, scrollSO.castTime);
-            allScrollRead.Add(scrollReadData);
-        }
+  
         void OnDayTickOnScroll()
         {
             foreach (ScrollReadData scrollData in allScrollRead.ToList())
@@ -434,17 +437,6 @@ namespace Interactables
         {
             OnGemEnchanted?.Invoke(charController); 
         }
-
-        //public GemType GetGemType(GemNames gemName)
-        //{
-        //    GemType gemType =
-        //                allGemsSO.Find(t => t.gemName == gemName).gemType;
-        //    if (gemType != 0)
-        //        return gemType;
-        //    else
-        //        Debug.Log("GemType Not found");
-        //    return 0;
-        //}
         #endregion
 
         public void InitItemToInv(SlotType slotType, ItemType itemType, int itemName,
@@ -524,7 +516,7 @@ namespace Interactables
                                     CauseType.Items, 2);
                 InitItemToInv(SlotType.CommonInv, ItemType.Fruits, (int)FruitNames.Kiwi,
                                     CauseType.Items, 2);
-                InitItemToInv(SlotType.CommonInv, ItemType.Scrolls, (int)ScrollNames.ScrollOfLight,
+                InitItemToInv(SlotType.CommonInv, ItemType.LoreBooks, (int)LoreNames.LandsOfShargad,
                                CauseType.Items, 2);
             }
             if (Input.GetKeyDown(KeyCode.J))

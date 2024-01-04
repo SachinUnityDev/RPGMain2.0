@@ -7,6 +7,7 @@ using System.Linq;
 using Interactables;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using Quest;
 
 namespace Combat
 {
@@ -34,8 +35,8 @@ namespace Combat
 
         // Strike FX 
 
-        public event Action<DmgAppliedData> OnDodge; // from target perspective
-        public event Action<CharController> OnMisfire; // from striker perspective
+        public event Action<DmgAppliedData> OnDodge; // dmg controller broadcast
+        public event Action<DmgAppliedData> OnMisfire; // dmg controller broadcast
 
         public event Action<CharController> OnHasteCheck;
         public event Action<CharController, bool> OnMoraleCheck; 
@@ -50,11 +51,12 @@ namespace Combat
 
         [Header(" Common round Counter")]
         public int currentRound = 1;
-        
+
 
 
         [Header(" Combat result")]  // every time a combat end add here 
-        public List<CombatModel> allCombatModels = new List<CombatModel>();
+
+        public CombatModel combatModel = null; 
         public CombatResult currCombatResult; 
         
         RoundController roundController; 
@@ -144,6 +146,9 @@ namespace Combat
             CombatService.Instance.AddCombatControllers();
             SkillService.Instance.InitSkillControllers();// For enemies 
             CombatService.Instance.currCharOnTurn = CharService.Instance.allCharInCombat[0]; 
+            QuestController questController = QuestMissionService.Instance.questController;
+
+            combatModel = new CombatModel(questController.questModel.questName, questController.objModel.objName);
             OnSOC?.Invoke();           
 
 
@@ -193,13 +198,11 @@ namespace Combat
                 OnEOR1?.Invoke(roundNo);
             }       
         }
-
         public void On_EOT()
         {
             Debug.Log("EOT CALLED");
             OnEOT?.Invoke();
         }
-
         public void On_SOT()
         {
             Debug.Log("SOT CALLED");
@@ -223,16 +226,6 @@ namespace Combat
                 On_SOR(roundNo);
             }
         }
-        //bool CheckEndOFRound()
-        //{
-        //    int currTurn = CombatService.Instance.currentTurn;
-        //    int charCount = CharService.Instance.charsInPlay.Count;
-            
-        //    if (currTurn >= (charCount)) 
-        //        return true;
-        //    else 
-        //       return false; 
-        //}
         public void On_DmgApplied(DmgAppliedData dmgAppliedData)
         {
            OnDamageApplied?.Invoke(dmgAppliedData);
@@ -334,6 +327,12 @@ namespace Combat
             OnDodge?.Invoke(dmgAppliedData);
         }
 
+        public void On_Misfire(DmgAppliedData dmgAppliedData)
+        {
+            OnMisfire?.Invoke(dmgAppliedData); 
+        }
+
+
         #endregion
 
         #region Checks Broadcast
@@ -346,6 +345,20 @@ namespace Combat
         {
             OnMoraleCheck?.Invoke(charController, posChk);
         }
+        #endregion
+
+
+        #region ACHIEVEMENTS RELATED
+
+        public void On_CompSaved(CharController charController, CharController savedController)
+        {
+
+        }
+        public void On_EnemyKilled(CharController striker, CharController killedChar)
+        {
+
+        }
+
         #endregion
 
         // Update is called once per frame

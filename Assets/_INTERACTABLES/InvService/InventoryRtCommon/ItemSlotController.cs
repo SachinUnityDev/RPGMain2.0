@@ -561,17 +561,29 @@ namespace Interactables
         public bool IsReadable()
         {
            EnchantScrollBase enchantScrollBase = ItemsInSlot[0] as EnchantScrollBase;
-            if (enchantScrollBase != null)
+           LoreBookBase loreBookBase = ItemsInSlot[0] as LoreBookBase;
+            if (enchantScrollBase != null)            
+                return true;                        
+            else if (loreBookBase != null)
                 return true;
             else
-                return false; 
+                return false;             
         }
         public void Read()
         {
             EnchantScrollBase enchantScrollBase = ItemsInSlot[0] as EnchantScrollBase;
-            ScrollNames scrollName = enchantScrollBase.scrollName;
-            ItemService.Instance.OnScrollRead(scrollName);
-            RemoveItem();
+            LoreBookBase loreBookBase = ItemsInSlot[0] as LoreBookBase;
+            if (enchantScrollBase != null)
+            {                
+                enchantScrollBase.ApplyScrollReadFX(); 
+                RemoveItem();
+            }
+            else if(loreBookBase != null)
+            {
+                loreBookBase.ApplyBookReadFx();                 
+                RemoveItem();
+            }
+            
         }
         public bool IsRechargeable()
         {

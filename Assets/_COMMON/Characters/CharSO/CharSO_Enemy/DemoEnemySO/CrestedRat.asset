@@ -28,7 +28,7 @@ MonoBehaviour:
   mainExp: 0
   jobExp: 0
   skillPts: 0
-  charLvl: 0
+  charLvl: 1
   charNameStr: Crested Rat
   availOfChar: 1
   stateOfChar: 2
@@ -41,7 +41,6 @@ MonoBehaviour:
   classType: 0
   archeType: 0
   fleeBehaviour: 0
-  charFleeState: 0
   provisionItems: []
   earningsItems: []
   earningShare: 0

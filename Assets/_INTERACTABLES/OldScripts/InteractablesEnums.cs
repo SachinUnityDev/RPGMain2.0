@@ -271,17 +271,6 @@ namespace Interactables
         ScrollOfLight,        
     }
 
-    public enum LoreBooksNames
-    {
-        None,
-        LandsOfShargad,
-        ElementsOfShargad,
-        GodsOfShargad,
-        GuildsOfShargad,
-        HistoryOfShargad,
-        RacesOfShargad,
-        UniverseOfShargad,
-    }
 
 
     public enum FruitNames
@@ -589,7 +578,19 @@ namespace Interactables
         Fermentor, 
         Mortar,
     }
-    
+
+    //public enum LoreBooksNames
+    //{
+    //    None,
+    //    LandsOfShargad_Book,
+    //    ElementsOfShargad_Book,
+    //    GodsOfShargad_Book,
+    //    HeroesOfShargad_Book,
+    //    GuildsOfShargad_Book,
+    //    HistoryOfShargad_Book,
+    //    RacesOfShargad_Book,
+    //    UniverseOfShargad_Book,
+    //}
 
 
 

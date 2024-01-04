@@ -17,6 +17,7 @@ namespace Combat
         CharController charController;
         CharController striker;
         StrikeType strikeType = StrikeType.Normal;
+        public bool isMisFire; 
 
         [Header("Cheated Death")]
         public int cheatedDeathCount = 0;
@@ -131,19 +132,19 @@ namespace Combat
             this.striker = striker;
             AttackType attackType =
                             SkillService.Instance.GetSkillAttackType((SkillNames)causeName);
-            
+            isMisFire = false; 
             if (dmgModel.allImmune2Skills.Any(t => t == skillInclination))
                 return; 
             // is dodge 
 
             if(!(causeType == CauseType.ThornsAttack))
             {
+                DmgAppliedData dmgApplied = new DmgAppliedData(striker, causeType, causeName
+                       , _dmgType, 0f, strikeType, charController, attackType);
                 if (!isTrueStrike)
                     if (skillInclination == SkillInclination.Physical && HitChance())
                     {
-                        strikeType = StrikeType.Dodged;
-                        DmgAppliedData dmgApplied = new DmgAppliedData(striker, causeType, causeName
-                            , _dmgType, 0f, strikeType, charController, attackType);
+                        strikeType = StrikeType.Dodged;                   
                         CombatEventService.Instance.On_DmgApplied(dmgApplied);
                         CombatEventService.Instance.On_Dodge(dmgApplied);
                         return;
@@ -153,7 +154,7 @@ namespace Combat
                 {
                     if (FocusCheck())
                     {
-                        ApplyMisFire();
+                        dmgPercentORVal = ApplyMisFire(dmgPercentORVal);  // dmg val modfied if MIsfire
                     }
                 }
             }
@@ -271,8 +272,15 @@ namespace Combat
                 default:
                     break;
             }
-            CombatEventService.Instance.On_DmgApplied(new DmgAppliedData(striker, causeType, causeName
-                                                , _dmgType, dmgPercentORVal, strikeType, charController, attackType));
+
+
+            DmgAppliedData dmgAppliedData = new DmgAppliedData(striker, causeType, causeName
+                                            , _dmgType, dmgPercentORVal, strikeType, charController, attackType, isMisFire);
+            if (isMisFire)
+            {
+                CombatEventService.Instance.On_Misfire(dmgAppliedData);
+            }
+            CombatEventService.Instance.On_DmgApplied(dmgAppliedData);
 
         }
         public void HealingAsPercentOfMaxHP(CharController charController, CauseType causeType, int causeName, float val)
@@ -397,13 +405,14 @@ namespace Combat
                 return focusChance.GetChance();
             }
         }
-        public void ApplyMisFire()
+        public float ApplyMisFire(float dmgVal)
         {
             // SKIP AKILL APPLY DMG 
             SkillController1 skillController = SkillService.Instance.currSkillController;
 
             StrikeTargetNos strikeNos = skillController.allSkillBases.Find(t => t.skillName
                                                 == SkillService.Instance.currSkillName).strikeNos;
+            isMisFire= true;
             if (strikeNos == StrikeTargetNos.Single)
             {
                 int netTargetCount = CombatService.Instance.mainTargetDynas.Count;
@@ -412,43 +421,22 @@ namespace Combat
                     CombatService.Instance.mainTargetDynas.Remove(SkillService.Instance.currentTargetDyna);
                     int random = UnityEngine.Random.Range(0, netTargetCount - 1);
                     SkillService.Instance.currentTargetDyna = CombatService.Instance.mainTargetDynas[random];
+                    return dmgVal; 
                 }
                 else
                 {
-                    ReduceDmgPercent();
-                    SkillService.Instance.PostSkillApply += RevertDamageRange;
+                    return dmgVal * 0.8f; 
+                    //ReduceDmgPercent();
+                    //SkillService.Instance.PostSkillApply += RevertDamageRange;
                 }
             }
             else
             {
-                ReduceDmgPercent();
-                SkillService.Instance.PostSkillApply += RevertDamageRange;
+                return dmgVal * 0.8f;
+                //ReduceDmgPercent();
+                //SkillService.Instance.PostSkillApply += RevertDamageRange;
             }
         }
-
-        void ReduceDmgPercent()
-        {
-            int charID = charController.charModel.charID;
-            AttribData dmgMin1 = charController.GetAttrib(AttribName.dmgMin);
-            AttribData dmgMax1 = charController.GetAttrib(AttribName.dmgMax);
-            dmgMin = dmgMin1.currValue;
-            dmgMax = dmgMax1.currValue;
-            float chgMin = 0.2f * this.dmgMin;
-            float chgMax = 0.2f * dmgMax;
-
-            charController.ChangeAttrib(CauseType.StatChecks, (int)StatChecks.FocusCheck, charID
-                , AttribName.dmgMin, chgMin);
-            charController.ChangeAttrib(CauseType.StatChecks, (int)StatChecks.FocusCheck, charID
-                , AttribName.dmgMin, chgMax);
-
-        }
-        void RevertDamageRange()
-        {
-            charController.GetAttrib(AttribName.dmgMin).currValue = (int)dmgMin;
-            charController.GetAttrib(AttribName.dmgMin).currValue = (int)dmgMax;
-        }
-
-
         #endregion
 
         #region BLEED , BURN AND POISONED DOT
@@ -579,8 +567,9 @@ namespace Combat
         public float dmgValue;
         public StrikeType strikeType;
         public CharController targetController;
+        public bool isMisFire = false; 
         public DmgAppliedData(CharController striker, CauseType causeType, int causeName, DamageType dmgType, float dmgValue
-                            , StrikeType strikeType, CharController targetController, AttackType attackType)
+                            , StrikeType strikeType, CharController targetController, AttackType attackType, bool isMisFire = false)
         {
             this.striker = striker;
             this.causeType = causeType;
@@ -590,12 +579,33 @@ namespace Combat
             this.strikeType = strikeType;
             this.targetController = targetController;
             this.attackType = attackType;
+            this.isMisFire = isMisFire;
         }
     }
 
     #endregion
 }
+//void ReduceDmgPercent()
+//{
+//    int charID = charController.charModel.charID;
+//    AttribData dmgMin1 = charController.GetAttrib(AttribName.dmgMin);
+//    AttribData dmgMax1 = charController.GetAttrib(AttribName.dmgMax);
+//    dmgMin = dmgMin1.currValue;
+//    dmgMax = dmgMax1.currValue;
+//    float chgMin = 0.2f * this.dmgMin;
+//    float chgMax = 0.2f * dmgMax;
 
+//    charController.ChangeAttrib(CauseType.StatChecks, (int)StatChecks.FocusCheck, charID
+//        , AttribName.dmgMin, chgMin);
+//    charController.ChangeAttrib(CauseType.StatChecks, (int)StatChecks.FocusCheck, charID
+//        , AttribName.dmgMin, chgMax);
+
+//}
+//void RevertDamageRange()
+//{
+//    charController.GetAttrib(AttribName.dmgMin).currValue = (int)dmgMin;
+//    charController.GetAttrib(AttribName.dmgMin).currValue = (int)dmgMax;
+//}
 
 //public bool AccuracyCheck()// Physical 
 //{

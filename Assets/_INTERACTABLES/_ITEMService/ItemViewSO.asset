@@ -104,6 +104,10 @@ MonoBehaviour:
     BGSprite: {fileID: 21300000, guid: df172e088050d4e4e8e205d042033b82, type: 3}
     FilterIconN: {fileID: 21300000, guid: 080b03d0278d4cb4aa2d538cd93c0476, type: 3}
     FilterIconHL: {fileID: 21300000, guid: 02d1c33b6ba20db4d8dfaeabe3ca9162, type: 3}
+  - itemType: 20
+    BGSprite: {fileID: 21300000, guid: df172e088050d4e4e8e205d042033b82, type: 3}
+    FilterIconN: {fileID: 21300000, guid: 102b9037c0ac46c489e63d8538799add, type: 3}
+    FilterIconHL: {fileID: 21300000, guid: 6169eeed69a923e44b434cbbcd258413, type: 3}
   lyricBG: {fileID: 21300000, guid: df172e088050d4e4e8e205d042033b82, type: 3}
   folkoricBG: {fileID: 21300000, guid: 72a11e8c505ce5040a4bce2033951a63, type: 3}
   epicBG: {fileID: 21300000, guid: 779d8d8b1b95d564ca881768944721c3, type: 3}

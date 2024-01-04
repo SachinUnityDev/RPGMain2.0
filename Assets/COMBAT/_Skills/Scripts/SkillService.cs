@@ -446,6 +446,7 @@ namespace Combat
         }
         public void DeSelectSkill()
         {
+            if (CombatService.Instance.currCharOnTurn.charModel.charMode == CharMode.Enemy) return; // On Enemy turn u cannot deselect
             CombatService.Instance.combatState = CombatState.INCombat_normal;
             ClearPrevSkillData();
             int charID = CombatService.Instance.currCharClicked.charModel.charID;

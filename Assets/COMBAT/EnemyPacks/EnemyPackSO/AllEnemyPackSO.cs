@@ -99,9 +99,9 @@ namespace Common
             else
                 lootTypes.Add(ItemType.Gems);
 
-         //   if (40f.GetChance()) //5
-           //     lootTypes.Add(ItemType.Scrolls);
-            //else
+            if (40f.GetChance()) //5
+                lootTypes.Add(ItemType.Scrolls);
+            else
                 lootTypes.Add(ItemType.LoreBooks);
 
             if (50f.GetChance())  //6

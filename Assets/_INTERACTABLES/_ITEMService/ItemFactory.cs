@@ -80,10 +80,8 @@ namespace Interactables
         
         [Header("Tea")]
         Dictionary<TeaNames, Type> allTea = new Dictionary<TeaNames, Type>();
-
-
-        LoreScroll loreScroll; 
-
+        [Header("Lore Books")]
+        Dictionary<LoreNames, Type> allLoreBooks = new Dictionary<LoreNames, Type>();
 
         [SerializeField] int itemId = -1; 
 
@@ -103,8 +101,8 @@ namespace Interactables
         [SerializeField] int mealCount = 0;
         [SerializeField] int alcoholCount = 0;
         [SerializeField] int soupCount = 0;
-        [SerializeField] int teaCount = 0; 
-
+        [SerializeField] int teaCount = 0;
+        [SerializeField] int loreBookCount = 0; 
 
         void Start()
         {
@@ -129,6 +127,7 @@ namespace Interactables
             ToolsInit();
             MealsInit();
             AlcoholInit();
+            LoreBooksInit(); 
            // RecipeInit(); 
         }
         public Iitems GetNewGenGewgaw(GenGewgawNames genGewgawNames, GenGewgawQ genGewgawQ)
@@ -247,6 +246,13 @@ namespace Interactables
                     return poeticGewgaw;                    
                 case ItemType.RelicGewgaws: // not in demo 
                     break;
+                case ItemType.LoreBooks:
+                    Iitems loreBook = GetNewLoreBookItem((LoreNames)itemName);
+                    LoreBookSO LoreBookSO = ItemService.Instance
+                                                    .GetLoreBookSO((LoreNames)itemName);
+                    loreBook.InitItem(itemId, LoreBookSO.inventoryStack);
+                    ItemService.Instance.allItemsInGame.Add(loreBook);
+                    return loreBook;
                 default:
                     break;
             }
@@ -785,13 +791,37 @@ namespace Interactables
 
         #endregion
 
-        #region LORE SCROLLS
+        #region LORE BOOKS
 
-        LoreScroll GetLoreScroll()
+        void LoreBooksInit()
         {
-            return loreScroll; 
+            if (allLoreBooks.Count > 0) return;
+            var getBooks = Assembly.GetAssembly(typeof(LoreBookBase)).GetTypes()
+                                   .Where(myType => myType.IsClass
+                                   && !myType.IsAbstract && myType.IsSubclassOf(typeof(LoreBookBase)));
+
+            foreach (var getBook in getBooks)
+            {
+                var t = Activator.CreateInstance(getBook) as LoreBookBase;
+
+               allLoreBooks.Add(t.loreName, getBook);
+            }
+            loreBookCount = allLoreBooks.Count;
         }
 
+        Iitems GetNewLoreBookItem(LoreNames loreName)
+        {
+            foreach (var lb in allLoreBooks)
+            {
+                if (lb.Key == loreName)
+                {
+                    var t = Activator.CreateInstance(lb.Value) as Iitems;
+                    return t;
+                }
+            }
+            Debug.Log("Lore book Base class Not found" + loreName);
+            return null;
+        }
         #endregion
 
         #region TRADE GOODS

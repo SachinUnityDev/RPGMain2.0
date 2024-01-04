@@ -45,7 +45,9 @@ namespace Combat
         [Header("Enemy Pack")]
         public EnemyPacksSO currEnemyPackSO;
 
-
+        [Header("Who drew the first blood")]
+        public bool IsFirstBloodChkDone;
+        
         void OnEnable()
         {            
           //  CombatEventService.Instance.OnEOR1 += EORActions;
@@ -103,6 +105,11 @@ namespace Combat
             currEnemyPackSO = allEnemyPackSO.GetEnemyPackSO(enemyPack);            
             GridService.Instance.SetEnemy(currEnemyPackSO);
         }
+        public void InitOnSOC()
+        {
+             IsFirstBloodChkDone = false;
+        }
+
         public void ToggleColliders(bool turnOn)
         {
             foreach (CharController charCtrl in CharService.Instance.allCharInCombat)

@@ -150,16 +150,16 @@ namespace Combat
 
         void OnCombatEnd()
         {
-            Sequence seq = DOTween.Sequence();
+            Sequence endSeq = DOTween.Sequence();
 
             
-            seq
+            endSeq
                 .AppendCallback(() => PlayTransitAnim("COMBAT ENDS"))
                 .AppendInterval(1.5f)
                 .AppendCallback(()=>combatEndView.InitCombatEndView())
                 ;
 
-            seq.Play(); 
+            endSeq.Play(); 
         }
         void RoundDisplay(int roundNo)
         {

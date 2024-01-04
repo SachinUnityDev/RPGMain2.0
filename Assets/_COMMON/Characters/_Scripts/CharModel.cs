@@ -5,6 +5,8 @@ using System.IO;
 using Combat;
 using Interactables;
 using System.Linq;
+using System.Security.Policy;
+
 namespace Common
 {
 
@@ -337,7 +339,26 @@ namespace Common
 
 
         #endregion
+        #region CHAR LVL
 
+        public void LvlNExpUpdate(int currExp)
+        {
+            mainExp = currExp;
+            if (!LvlUpCharChk(currExp)) return;             // recursion
+                charLvl++;
+            LvlNExpUpdate(mainExp); 
+        }
+
+        public bool LvlUpCharChk(int currExp)
+        {
+            int thresholdExp = CharService.Instance.lvlNExpSO.GetThresholdExpPts4Lvl(charLvl+1);
+            if (currExp < thresholdExp) return false;
+            else
+                return true; 
+        }
+
+
+        #endregion
 
     }
 }

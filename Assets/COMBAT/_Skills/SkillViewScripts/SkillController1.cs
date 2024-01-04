@@ -987,7 +987,7 @@ namespace Combat
         }
         bool IfNoUseLeft(SkillModel _skillModel)
         {
-            if (_skillModel.cd > 0) return false; // governed by cd not use 
+            if (_skillModel.cd >= 0) return false; // governed by cd not use 
             if (_skillModel.maxUsagePerCombat - _skillModel.noOfTimesUsed <= 0)
             {
                 return true; 
@@ -998,6 +998,7 @@ namespace Combat
         bool IfInCoolDown(SkillModel _skillModel)
         {
             if (_skillModel.cd == -5) return false;
+            if(_skillModel.cd == 0) return false; // 0 cd case
             if (_skillModel.lastUsedInRound == -5) return false;
             _skillModel.cdRemaining = _skillModel.cd - (CombatEventService.Instance.currentRound - _skillModel.lastUsedInRound);
             if (_skillModel.cdRemaining > 0)

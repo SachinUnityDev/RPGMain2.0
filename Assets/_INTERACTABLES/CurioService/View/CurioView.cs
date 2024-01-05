@@ -73,12 +73,9 @@ namespace Quest
 
         public void LootNotifyBoxChk()
         {          
-            NotifyName notifyName = NotifyName.LootTaken;
-          
-            notifyBoxView.OnShowNotifyBox(this, notifyName);
-           
+            NotifyName notifyName = NotifyName.LootTaken;          
+            notifyBoxView.OnShowNotifyBox(this, notifyName);           
         }
-
     }
 }
 

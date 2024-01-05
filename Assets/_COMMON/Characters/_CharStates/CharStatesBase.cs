@@ -106,6 +106,7 @@ namespace Common
                 QuestEventService.Instance.OnEOQ += QuestTick;
             }
 
+            CombatEventService.Instance.OnEOC += EndCharStateOnEOC; 
             startRound = CombatEventService.Instance.currentRound;   
             allBuffIds.Clear();
             allStateFxStrs.Clear();
@@ -135,15 +136,20 @@ namespace Common
             if (roundCounter >= castTime) 
                 charController.charStateController.RemoveCharState(charStateName);
         }
+        protected virtual void EndCharStateOnEOC()
+        {
+            if (charStateName == CharStateName.Burning || charStateName == CharStateName.Bleeding ||
+               charStateName == CharStateName.Poisoned || charStateName == CharStateName.FirstBlood
+               || charStateName == CharStateName.Fearful || charStateName == CharStateName.Faithful
+               || charStateName == CharStateName.CheatedDeath || charStateName == CharStateName.FlatFooted)
+                charController.charStateController.RemoveCharState(charStateName);
+
+        }
+
         protected virtual void CombatTick()
         {          
             // on EOC all DOT are destroyed
-            if(charStateName == CharStateName.Burning || charStateName == CharStateName.Bleeding || 
-               charStateName == CharStateName.Poisoned || charStateName == CharStateName.FirstBlood 
-               || charStateName == CharStateName.Fearful || charStateName == CharStateName.Faithful 
-               || charStateName == CharStateName.CheatedDeath || charStateName == CharStateName.FlatFooted)
-                charController.charStateController.RemoveCharState(charStateName);  
-
+            
             if(timeFrame == TimeFrame.EndOfCombat)
                 charController.charStateController.RemoveCharState(charStateName);
         }
@@ -160,6 +166,8 @@ namespace Common
             CombatEventService.Instance.OnEOC -= CombatTick;
             CombatEventService.Instance.OnEOR1 -= RoundTick;
             QuestEventService.Instance.OnEOQ -= QuestTick;
+            CombatEventService.Instance.OnEOC -= EndCharStateOnEOC;
+
         }
         public virtual void ClearBuffs()
         {

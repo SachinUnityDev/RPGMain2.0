@@ -35,8 +35,25 @@ namespace Combat
 
             ToggleAttrib(false);
             ToggleLog(false);
-
+            CombatEventService.Instance.OnSOC += ToggleON;
+            CombatEventService.Instance.OnSOTactics += ToggleOFF; 
         }
+        private void OnDisable()
+        {
+            CombatEventService.Instance.OnSOTactics -= ToggleOFF;
+            CombatEventService.Instance.OnSOC -= ToggleON;
+        }
+        void ToggleON()
+        {
+            gameObject.GetComponent<Button>().enabled = true;
+            gameObject.GetComponent<Image>().DOFade(1.0f, 0.1f);
+        }
+        void ToggleOFF()
+        {
+            gameObject.GetComponent<Button>().enabled = false;
+            gameObject.GetComponent<Image>().DOFade(0.0f, 0.1f);
+        }
+
         void ToggleAttrib(bool toOpen)
         {
             if(toOpen)            

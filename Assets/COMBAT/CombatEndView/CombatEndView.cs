@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Combat
 {
-    public class CombatEndView : MonoBehaviour
+    public class CombatEndView : MonoBehaviour, INotify
     {
         [Header("TBR")]
         [SerializeField] TextMeshProUGUI headingTxt; 
@@ -20,6 +20,9 @@ namespace Combat
         [SerializeField] ManualExpBtn manualExpBtn; 
         [SerializeField] List<CharController> allAllyInclDeadNFled = new List<CharController>();
 
+        [Header(" Notify Box View TBR")]
+        [SerializeField] NotifyBoxView notifyBoxView;
+
 
         [Header(" Global var")]
         public bool manualExpBtnPressed = false; 
@@ -27,8 +30,12 @@ namespace Combat
 
         CombatEndCondition combatEndCondition;
         CombatResult combatResult;
-        public CharController firstBloodChar;  
- 
+        public CharController firstBloodChar;
+
+        public NotifyName notifyName { get; set; }
+        public bool isDontShowItAgainTicked { get ; set; }
+
+        Transform endTrans; 
         public void InitCombatEndView()
         {
             this.combatResult= CombatEventService.Instance.currCombatResult;    
@@ -40,7 +47,7 @@ namespace Combat
             FillCharPort();
             FillHeading();
             Transform lootTrans = transform.GetChild(0);
-            Transform endTrans = transform.GetChild(1); 
+            endTrans = transform.GetChild(1); 
             endTrans.SetAsFirstSibling();
             lootTrans.SetAsLastSibling();
             lootTrans.gameObject.SetActive(true);
@@ -56,10 +63,7 @@ namespace Combat
             manualExpBtn.StateNA(); 
             manualExpRewarded = true; 
         }
-        public void CloseCombatView()
-        {
-            transform.GetChild(0).gameObject.SetActive(false);
-        }
+      
         void FillHeading()
         {
             switch (combatResult)
@@ -96,8 +100,7 @@ namespace Combat
                 }
             }
         }
-  
-        
+
         public bool IsOnlyAbbas()
         {
            if(allAllyInclDeadNFled.Count == 1)
@@ -107,6 +110,32 @@ namespace Combat
             return false; 
         }
 
+        public void OnNotifyAnsPressed()
+        {
+            LootService.Instance.lootView.UnLoad();
+            UnLoad();
+        }
 
+        public void OnContinueBtnClick()
+        {
+            if (LootService.Instance.isLootDsplyed)
+            {
+                LootNotifyBoxChk();
+            }
+            else
+            {
+                UnLoad();
+            }
+        }
+        public void UnLoad()
+        {
+            LootService.Instance.lootView.UnLoad();
+            endTrans.gameObject.SetActive(false);
+        }
+        public void LootNotifyBoxChk()
+        {
+            NotifyName notifyName = NotifyName.LootTaken;
+            notifyBoxView.OnShowNotifyBox(this, notifyName);
+        }
     }
 }

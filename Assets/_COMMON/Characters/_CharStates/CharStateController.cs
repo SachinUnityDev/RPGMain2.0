@@ -34,7 +34,7 @@ namespace Common
     [Serializable]
     public class CharStateBuffData
     {
-        public int stateID;
+        public int buffId;
         public int startRoundNo;
         public TimeFrame timeFrame;
         public int netTime;
@@ -42,10 +42,10 @@ namespace Common
         public CharStateModData charStateModData;
 
 
-        public CharStateBuffData(int stateID,  int startRoundNo, TimeFrame timeFrame, int buffedNetTime
+        public CharStateBuffData(int buffId,  int startRoundNo, TimeFrame timeFrame, int buffedNetTime
                                     , CharStateModData charStateModData)
         {
-            this.stateID = stateID;
+            this.buffId = buffId;
             this.startRoundNo = startRoundNo;
             this.timeFrame = timeFrame;
             this.netTime = buffedNetTime;
@@ -86,7 +86,6 @@ namespace Common
 
         [Header(" All Char State Models")]
         public List<CharStateModel> allCharStateModels = new List<CharStateModel>();    
-
 
         [SerializeField] List<string> buffStrs = new List<string>();
         [SerializeField] List<string> deDuffStrs = new List<string>();
@@ -187,8 +186,6 @@ namespace Common
             }
             return false; 
         }
-
-
         public void RemoveCharState(CharStateName charStateName)
         {
             int index = allCharBases.FindIndex(t => t.charStateName == charStateName);
@@ -196,15 +193,26 @@ namespace Common
             {
                 allCharBases[index].EndState(); // all related buffs to be cleared from here
                 allCharBases.RemoveAt(index);
+                RemoveCharStateBuffs(charStateName);    
                 RemoveImmunityByCharState(charStateName);
             }
             int index2 = allCharStateModels.FindIndex(t => t.charStateName == charStateName);
-            if (index != -1)
+            if (index2 != -1)
             {
                 allCharStateModels.RemoveAt(index2);
             }
         }
-        
+        public void RemoveCharStateBuffs(CharStateName charStateName)
+        {
+            foreach (CharStateBuffData charStateBuffData in allCharStateBuffs.ToList())
+            {
+                if (charStateBuffData.charStateModData.charStateName == charStateName)
+                {
+                    allCharStateBuffs.Remove(charStateBuffData);
+                    RemoveBuffID(charStateBuffData.buffId);
+                }
+            }
+        }
         public void ResetCharStateBuff(CharStateName charStateName)
         {
             foreach (CharStateBuffData buffData in allCharStateBuffs)
@@ -241,7 +249,6 @@ namespace Common
             allImmunityBuffs.Add(immunityBuffData);
             return stateID;
         }
-
         public void RemoveImmunityByCharState(CharStateName charStateName) 
         {
             foreach (ImmunityBuffData immunityBuffData in allImmunityBuffs.ToList())
@@ -252,7 +259,6 @@ namespace Common
                 }
             }
         }
-
         public void RemoveImmunityBuff(int immunityID)
         {
             foreach (ImmunityBuffData immunityBuffData in allImmunityBuffs.ToList())
@@ -260,47 +266,18 @@ namespace Common
                 if(immunityBuffData.immunityID == immunityID)
                 {
                    allImmunityBuffs.Remove(immunityBuffData);
+                    RemoveBuffID(immunityID); 
                 }
             }
         }
-        //public List<int> ApplyDOTImmunityBuff(CauseType causeType, int causeName, int causeByCharID
-        //                        , CharStateName charStateName, TimeFrame timeFrame, int netTime, bool isBuff = true)
-        //{
-        //    List<int> allImmuneBuffID = new List<int>();
-        //    if (charStateName == CharStateName.BleedLowDOT || charStateName == CharStateName.XXX1
-        //                                                    || charStateName == CharStateName.Bleeding)
-        //    {   
-        //        int id = 
-        //        ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BleedLowDOT, timeFrame, netTime);                
-        //       // ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BleedMedDOT, timeFrame, netTime);
-        //       allImmuneBuffID.Add(id);
-        //        ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.Bleeding, timeFrame, netTime);
-        //        allImmuneBuffID.Add(id);
-        //    }
-        //    if (charStateName == CharStateName.Poisoned || charStateName == CharStateName.PoisonedMedDOT
-        //                                                      || charStateName == CharStateName.PoisonedLowDOT)
-        //    {
-        //        int id =
-        //        ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.Poisoned, timeFrame, netTime);
-        //        allImmuneBuffID.Add(id);
-        //        //ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.PoisonedMedDOT, timeFrame, netTime);
-        //        id =
-        //        ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.PoisonedLowDOT, timeFrame, netTime);
-        //        allImmuneBuffID.Add(id);   
-        //    }
-        //    if (charStateName == CharStateName.Burning || charStateName == CharStateName.BurnMedDOT
-        //                                                    || charStateName == CharStateName.BurnLowDOT)
-        //    {
-        //        int id = 
-        //        ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.Burning, timeFrame, netTime);
-        //        allImmuneBuffID.Add(id);
-        //        //ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BurnMedDOT, timeFrame, netTime);
-        //        id = 
-        //        ApplyImmunityBuff(causeType, causeName, causeByCharID, CharStateName.BurnLowDOT, timeFrame, netTime);
-        //        allImmuneBuffID.Add(id);   
-        //    }
-        //    return allImmuneBuffID;
-        //}
+        void RemoveBuffID(int buffid)
+        {
+            foreach (int i in allBuffIds.ToList())
+            {
+                if(i==buffid)
+                    allBuffIds.Remove(i); 
+            }
+        }      
                
         public List<string> GetCharStateBuffList()
         {
@@ -326,36 +303,7 @@ namespace Common
         #endregion
 
         #region HAS STATE CHECKS 
-        //public bool HasCharDOTState(CharStateName _charStateName)
-        //{
-        //    if (_charStateName == CharStateName.Burning
-        //       || _charStateName == CharStateName.BurnMedDOT
-        //       || _charStateName == CharStateName.BurnLowDOT)
-        //    {
-        //        return (HasCharState( CharStateName.Burning)
-        //          || HasCharState( CharStateName.BurnMedDOT)
-        //          || HasCharState( CharStateName.BurnLowDOT));
-        //    }
-
-        //    if (_charStateName == CharStateName.Bleeding
-        //      || _charStateName == CharStateName.XXX1
-        //      || _charStateName == CharStateName.BleedLowDOT)
-        //    {
-        //        return (HasCharState( CharStateName.Bleeding)
-        //           || HasCharState( CharStateName.XXX1)
-        //           || HasCharState( CharStateName.BleedLowDOT));
-        //    }
-
-        //    if (_charStateName == CharStateName.Poisoned
-        //      || _charStateName == CharStateName.PoisonedMedDOT
-        //      || _charStateName == CharStateName.PoisonedLowDOT)
-        //    {
-        //        return (HasCharState( CharStateName.Poisoned)
-        //         || HasCharState( CharStateName.PoisonedMedDOT)
-        //         || HasCharState( CharStateName.PoisonedLowDOT));
-        //    }
-        //    return false;
-        //}
+   
     
         public bool HasCharState(CharStateName _charStateName)
         {
@@ -369,37 +317,7 @@ namespace Common
             return false;
         }
 
-        //public bool HasDOTImmunity(CharStateName _charStateName)
-        //{
-        //    if (_charStateName == CharStateName.Burning
-        //       || _charStateName == CharStateName.BurnMedDOT
-        //       || _charStateName == CharStateName.BurnLowDOT)
-        //    {
-        //        return (HasImmunity(CharStateName.Burning)
-        //                || HasImmunity(CharStateName.BurnMedDOT)
-        //                || HasImmunity(CharStateName.BurnLowDOT)); 
-        //    }
-
-        //    if (_charStateName == CharStateName.Bleeding
-        //      || _charStateName == CharStateName.XXX1
-        //      || _charStateName == CharStateName.BleedLowDOT)
-        //    {
-        //        return (HasImmunity(CharStateName.Bleeding)
-        //                || HasImmunity(CharStateName.XXX1)
-        //                || HasImmunity(CharStateName.BleedLowDOT));
-        //    }
-
-        //    if (_charStateName == CharStateName.Poisoned
-        //      || _charStateName == CharStateName.PoisonedMedDOT
-        //      || _charStateName == CharStateName.PoisonedLowDOT)
-        //    {
-        //        return (HasImmunity(CharStateName.Poisoned)
-        //                 || HasImmunity(CharStateName.PoisonedMedDOT)
-        //                 || HasImmunity(CharStateName.PoisonedLowDOT));
-        //    }
-        //    return false; 
-        //}
-
+    
         public bool HasImmunity(CharStateName charStateName)
         {
             foreach (ImmunityBuffData immunityBuffData in allImmunityBuffs)
@@ -434,7 +352,7 @@ namespace Common
 
         public void EOCTick()
         {
-            foreach (CharStateBuffData stateData in allCharStateBuffs)
+            foreach (CharStateBuffData stateData in allCharStateBuffs.ToList())
             {
                 if (stateData.timeFrame == TimeFrame.EndOfCombat)
                 {
@@ -442,67 +360,11 @@ namespace Common
                     RemoveCharState(stateData.charStateModData.charStateName);
                 }
             }
-            
         }
         
 
         #endregion
 
-        #region CLEAR DOT
-
-        //public void ClearDOT(CharStateName _charStateName)
-        //{
-        //    if (_charStateName == CharStateName.Burning)
-        //    {
-        //        RemoveCharState(CharStateName.Burning);
-        //        RemoveCharState(CharStateName.BurnMedDOT);
-        //        RemoveCharState(CharStateName.BurnLowDOT);
-        //    }
-
-        //    if (_charStateName == CharStateName.Bleeding
-        //      || _charStateName == CharStateName.XXX1
-        //      || _charStateName == CharStateName.BleedLowDOT)
-        //    {
-        //        RemoveCharState(CharStateName.Bleeding);
-        //        RemoveCharState(CharStateName.XXX1);
-        //        RemoveCharState(CharStateName.BleedLowDOT);
-        //    }
-
-        //    if (_charStateName == CharStateName.Poisoned
-        //      || _charStateName == CharStateName.PoisonedMedDOT
-        //      || _charStateName == CharStateName.PoisonedLowDOT)
-        //    {
-        //        RemoveCharState(CharStateName.Poisoned);
-        //        RemoveCharState(CharStateName.PoisonedMedDOT);
-        //        RemoveCharState(CharStateName.PoisonedLowDOT);
-        //    }
-        //}
-        //public bool IsDOT(CharStateName charStateName)
-        //{
-        //    if (charStateName == CharStateName.Poisoned
-        //      || charStateName == CharStateName.PoisonedMedDOT
-        //      || charStateName == CharStateName.PoisonedLowDOT)
-        //    {
-        //        return true; 
-        //    }
-        //   if (charStateName == CharStateName.Bleeding
-        //          || charStateName == CharStateName.XXX1
-        //          || charStateName == CharStateName.BleedLowDOT)
-        //   {
-        //        return true;
-        //   }
-
-        //   if (charStateName == CharStateName.Burning
-        //        || charStateName == CharStateName.BurnMedDOT
-        //        || charStateName == CharStateName.BurnLowDOT)
-        //   {
-        //        return true;
-        //   }
-        //    return false; 
-        //}
-
-
-        # endregion 
         public CharStatesBase GetCurrCharStateBase(CharStateName _charStateName)
         {
             if (allCharBases.Any(t=>t.charStateName == _charStateName))

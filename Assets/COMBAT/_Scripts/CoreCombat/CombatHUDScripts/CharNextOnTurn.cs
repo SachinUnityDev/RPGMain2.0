@@ -27,13 +27,13 @@ namespace Combat
         private void Start()
         {
             CombatEventService.Instance.OnCharOnTurnSet += ChgPort;
+
            // CombatEventService.Instance.OnEOR1 += Reset;
             Reset(0);
         }
         private void OnDisable()
         {
-            CombatEventService.Instance.OnCharOnTurnSet -= ChgPort;
-         
+            CombatEventService.Instance.OnCharOnTurnSet -= ChgPort;         
         }
         private void Reset(int roundNo)
         {

@@ -21,9 +21,9 @@ namespace Combat
         void LvlBarTxtUpdate()
         {
             int deltaExp = lvlNExpSO.GetdeltaExpPts4Lvl(charModel.charLvl);
-            int thresholdExp = lvlNExpSO.GetThresholdExpPts4Lvl(charModel.charLvl);
-            int expDiff = charModel.mainExp - thresholdExp;
-            onHoverTxt.text = $"{expDiff}/{deltaExp}";             
+            int thresholdExp = lvlNExpSO.GetThresholdExpPts4Lvl(charModel.charLvl+1);
+            //int expDiff = charModel.mainExp - thresholdExp;
+            onHoverTxt.text = $"{charModel.mainExp}/{thresholdExp}";             
         }
     }
 }

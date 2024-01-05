@@ -24,6 +24,5 @@ MonoBehaviour:
   desc: Moss Agate
   iconSprite: {fileID: 21300000, guid: 7e591c91e06efae48aac83f74f58e9e1, type: 3}
   allLines:
-  - 'On Socket: +4-7<style="Water"> Water Res </style> and <style="Earth"> Earth
-    Res </style>'
+  - 'On Socket: +4-7 Water Res and Earth Res'
   - Can be enchanted on certain weapons

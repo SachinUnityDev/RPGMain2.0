@@ -242,7 +242,7 @@ namespace Common
                 GameState gameState = GameService.Instance.gameModel.gameState; 
                 if(gameState == GameState.InTown)
                 {
-                    if ((Time.time - lastEscClick) < 0.5f) return;
+                    if ((Time.time - lastEscClick) < 0.5f) return;                    
                     CloselastPanel();
                     lastEscClick = Time.time;
                 }

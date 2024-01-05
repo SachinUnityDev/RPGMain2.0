@@ -2726,9 +2726,11 @@ MonoBehaviour:
     skillDesc: 
     skillSprite: {fileID: 0}
     skillType: 0
+    skillUnLockStatus: 0
     damageMod: 0
     skillLvl: 0
     skillSelState: 0
+    prevSkillSelState: 0
     cd: 0
     attackType: 0
     dmgType: 
@@ -2742,15 +2744,19 @@ MonoBehaviour:
     baseWeight: 0
     AIChance: 0
     isActive: 0
-    lastUsedInRound: 0
     allPerkHexes: []
     perkChain: 
-    descLines: []
+    noOfTimesUsed: 0
+    cdRemaining: 0
+    lastUsedInRound: 0
   skillName: 0
   topTrans: {fileID: 360658513}
   midTrans: {fileID: 1909080482}
   btmTrans: {fileID: 241487673}
   skillDataSO: {fileID: 0}
+  cdNMaxUse: {fileID: 0}
+  skillStateTxt: {fileID: 0}
+  incrVal: 0
 --- !u!114 &240226599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4693,7 +4699,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 406599547}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.1085691, y: 3.0073068, z: -10}
+  m_LocalPosition: {x: -2.1107492, y: 3.0073001, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

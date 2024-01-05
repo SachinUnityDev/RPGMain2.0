@@ -47,8 +47,6 @@ namespace Interactables
         public GameObject invXLGO;// lore + beastiary+ skills+ invPanel..parent
         public GameObject invXLPrefab; 
 
-
-      
         private void Start()
         {
             invMainModel = new InvMainModel();

@@ -56,8 +56,8 @@ namespace Combat
         void CalcKillsNSavesExp()
         {
             CombatModel combatModel = CombatEventService.Instance.combatModel;
-            int savesExp = combatModel.GetKillsExp(charModel.charID);     
-            int killsExp = combatModel.GetSavesExp(charModel.charID);
+            int savesExp = combatModel.GetSavesExp(charModel.charID);     
+            int killsExp = combatModel.GetKillsExp(charModel.charID);
             killsNSavesExp = sharedExp*(savesExp + killsExp); 
         }
         void CalcFirstBloodExp()
@@ -78,7 +78,7 @@ namespace Combat
             Sequence seq = DOTween.Sequence();
             seq                
                 .AppendCallback(() => lvlUpBird.gameObject.SetActive(false))
-                .Append(lvlUpBird.transform.DOMoveY(-1000, 0.4f, true))                
+                .Append(lvlUpBird.GetComponent<RectTransform>().DOAnchorPos(new Vector2(0f,-1000f), 0.4f, true))                
                 ;
             seq.Play();
         }   
@@ -115,7 +115,7 @@ namespace Combat
                     .Append(lvlbarImg.DOFillAmount(0, 0.1f))
                     .AppendInterval(0.4f)
                     .AppendCallback(() => lvlUpBird.gameObject.SetActive(true))
-                    .Append(lvlUpBird.transform.DOMoveY(120, 0.4f, true))
+                    .Append(lvlUpBird.GetComponent<RectTransform>().DOAnchorPos(new Vector2(0f, -98f), 0.4f, true))
                     .Append(lvlbarImg.DOFillAmount(val1, 0.4f))
                     ;
                 seq.Play(); 

@@ -27,6 +27,7 @@ namespace Common
         Enchant, 
         LootTaken, 
         BountyQUnLock,
+        CombatEnd, 
 
 
     }

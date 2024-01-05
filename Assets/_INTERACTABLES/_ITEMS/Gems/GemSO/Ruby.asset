@@ -24,5 +24,5 @@ MonoBehaviour:
   desc: Ruby
   iconSprite: {fileID: 21300000, guid: 884d5032f9972484db42d2e799950bc3, type: 3}
   allLines:
-  - "Merges with Simple Rings/Amulets into Gewgaws.\r"
-  - <i>They say Ruby arouses the feeling of Lust.</i>
+  - Merges with Simple Rings/Amulets into Gewgaws
+  - <i>They say Ruby arouses the feeling of Lust</i>

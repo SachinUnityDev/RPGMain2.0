@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Common; 
+using Common;
 
 
 namespace Interactables
@@ -15,28 +15,28 @@ namespace Interactables
         public InvRightViewController invCommViewController;
         public BtmCharViewController btmCharViewController;
         [Header("Level view ")]
-        public LevelView levelView; 
+        public LevelView levelView;
 
 
-       //[SerializeField] GameObject AttributesPanel;
-       //[SerializeField] GameObject StatsPanel;
-       //[SerializeField] GameObject traitsPanel;
+        //[SerializeField] GameObject AttributesPanel;
+        //[SerializeField] GameObject StatsPanel;
+        //[SerializeField] GameObject traitsPanel;
         public CharNames selectchar;
 
 
         private void OnEnable()
         {
-            invCommViewController =                                
+            invCommViewController =
                 transform.GetComponentInChildren<InvRightViewController>(true);
-           
-            btmCharViewController = 
+
+            btmCharViewController =
                 transform.parent.GetComponentInChildren<BtmCharViewController>(true);
-     
-            InvService.Instance.OnCharSelectInvPanel += OnCharSelected; 
+
+            InvService.Instance.OnCharSelectInvPanel += OnCharSelected;
         }
-        void OnDisable() {
-            InvService.Instance.OnCharSelectInvPanel += OnCharSelected; 
-        
+        void OnDisable()
+        {
+            InvService.Instance.OnCharSelectInvPanel += OnCharSelected;
         }
 
         public void OnCharSelected(CharModel charModel)
@@ -46,7 +46,7 @@ namespace Interactables
         }
         void PopulateStatsPanel()
         {
-            
+
 
 
         }
@@ -63,7 +63,7 @@ namespace Interactables
 
         public void Load()
         {
-            btmCharViewController =       
+            btmCharViewController =
                     transform.parent.GetComponentInChildren<BtmCharViewController>(true);
             btmCharViewController.gameObject.transform.SetParent(transform);
             transform.parent.gameObject.SetActive(true);
@@ -71,9 +71,9 @@ namespace Interactables
         }
 
         public void UnLoad()
-        {   
+        {
             transform.parent.gameObject.SetActive(false);
-            InvService.Instance.isInvPanelOpen = false; 
+            //InvService.Instance.isInvPanelOpen = false; 
         }
 
         public void Init()
@@ -83,7 +83,7 @@ namespace Interactables
             //invCommViewController =
             //  transform.GetComponentInChildren<InvRightViewController>(true);
             invCommViewController.Init();
-            btmCharViewController.Init();         
+            btmCharViewController.Init();
             btmCharViewController.gameObject.transform.SetParent(transform);
             levelView.LevelViewInit();
 

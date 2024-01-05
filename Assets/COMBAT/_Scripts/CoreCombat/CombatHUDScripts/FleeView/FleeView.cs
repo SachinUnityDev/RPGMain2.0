@@ -32,6 +32,7 @@ public class FleeView : MonoBehaviour
         {
             foreach (CharController charCtrl in CharService.Instance.allCharInCombat)
             {
+                if (charCtrl.charModel.orgCharMode == CharMode.Enemy) continue; 
                 if (charCtrl.charModel.charName == CharNames.Abbas) 
                 {
                     charFleeing.Add(charCtrl);  

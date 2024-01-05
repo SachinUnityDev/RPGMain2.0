@@ -30,7 +30,7 @@ namespace Combat
         public void OnPointerClick(PointerEventData eventData)
         {
             btnImg.sprite = spriteN;
-            combatEndView.CloseCombatView(); 
+            combatEndView.OnContinueBtnClick(); 
         }
 
         public void OnPointerEnter(PointerEventData eventData)

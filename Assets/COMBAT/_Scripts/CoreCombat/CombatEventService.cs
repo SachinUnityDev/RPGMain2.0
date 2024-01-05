@@ -149,9 +149,7 @@ namespace Combat
             QuestController questController = QuestMissionService.Instance.questController;
 
             combatModel = new CombatModel(questController.questModel.questName, questController.objModel.objName);
-            OnSOC?.Invoke();           
-
-
+            OnSOC?.Invoke();         
             Sequence seq = DOTween.Sequence(); 
             seq.AppendInterval(2.5f)
                 .AppendCallback(()=> On_SOR(1))
@@ -160,10 +158,11 @@ namespace Combat
         }
 
         public void On_EOC(CombatResult combatResult)
-        {            
+        {
+            Debug.Log(" ON EOC TRIGGER"); 
             FortReset2FortOrg();
             currCombatResult = combatResult; 
-            OnEOC?.Invoke();         
+            OnEOC?.Invoke();
         }
         public void On_CombatFlee(CharController charController)
         {
@@ -289,6 +288,7 @@ namespace Combat
                     if (!skillModel.targetPos.Any(t => t.pos == cellPosData.pos && t.charMode == cellPosData.charMode))
                         return;
                     SkillService.Instance.SetRemoteSkills(skillModel, cellPosData);
+
                 }
             }
         }

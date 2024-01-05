@@ -24,5 +24,5 @@ MonoBehaviour:
   desc: Oltu
   iconSprite: {fileID: 21300000, guid: f75b46f022163b648b546acae40709bd, type: 3}
   allLines:
-  - 'On Socket: +1<style="Health"> Hp Regen </style> at night'
+  - 'On Socket: +1 Hp Regen at night'
   - Increases potency of Ruri, Malachite, Blue Onyx and Moss Agate

@@ -27,11 +27,6 @@ namespace Interactables
 
         [SerializeField] Button invXLClose;
 
-
-        private void Awake()
-        {
-          
-        }
         void OnEnable()
         {
 
@@ -51,25 +46,20 @@ namespace Interactables
             invBtn.onClick.AddListener(OnInvBtnPressed);
             invXLClose.onClick.AddListener(UnLoad);
             
-            LoreService.Instance.loreViewController = transform.GetComponentInChildren<LoreViewController>();
-            // get prefab
-
-
-
+            LoreService.Instance.loreViewController = transform.GetComponentInChildren<LoreViewController>();         
         }
 
         
         public void Load()
-        {
-            // UIControlServiceGeneral.Instance.TogglePanel(invPanel, true);
-           // Init(); 
+        {    
             InvService.Instance.On_ToggleInvXLView(true);
         }
 
         public void UnLoad()
         {
-           UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
-           InvService.Instance.On_ToggleInvXLView(false);
+            InvService.Instance.On_ToggleInvXLView(false);
+            UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
+            InvService.Instance.isInvPanelOpen= false;  
         }
 
         public void Init()
@@ -108,7 +98,8 @@ namespace Interactables
 
         private void Update()
         {
-           if(InvService.Instance.isInvPanelOpen && Input.GetKeyDown(KeyCode.Escape))
+           if(InvService.Instance.isInvPanelOpen) 
+                if(Input.GetKeyDown(KeyCode.Escape))
             {
                 UnLoad();
               //  Input.GetKeyDown(KeyCode.LeftControl)

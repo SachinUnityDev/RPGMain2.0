@@ -24,5 +24,5 @@ MonoBehaviour:
   desc: Amber
   iconSprite: {fileID: 21300000, guid: 00c358cc7533e64479bd27158f398b4f, type: 3}
   allLines:
-  - 'On Socket: +1<style="Health"> Hp Regen </style> at day.'
-  - Increases potency of Carnelian, Meranite and Rutele.
+  - 'On Socket: +1 Hp Regen at day'
+  - Increases potency of Carnelian, Meranite and Rutele

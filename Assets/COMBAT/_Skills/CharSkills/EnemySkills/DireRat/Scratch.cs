@@ -24,9 +24,8 @@ namespace Combat
         public override void PopulateTargetPos()
         {
             skillModel.targetPos.Clear();
-            for (int i = 1; i < 4; i++)
+            for (int i = 1; i <= 4; i++)
             {
-               
                     CellPosData cellPosData = new CellPosData(CharMode.Ally, i); // Allies
                     DynamicPosData dyna = GridService.Instance.gridView
                                            .GetDynaFromPos(cellPosData.pos, cellPosData.charMode);

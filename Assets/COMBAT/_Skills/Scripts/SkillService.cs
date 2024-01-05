@@ -270,9 +270,6 @@ namespace Combat
                 {
                     Debug.LogError("SkillController is Null" + charGO.name); 
                 }
-
-                
-                    
                 CharNames charName = charGO.GetComponent<CharController>().charModel.charName; 
                 //   skillController.InitSkillList(charName);
             }
@@ -703,10 +700,11 @@ namespace Combat
                 }
                // GridService.Instance.gridView.SetRemoteSkill(skillModel, cellPosData);
             }
-                
+           
             ClearPrevData();
            // currSkillController.UpdateAllSkillState(charController);
             On_PostSkillApply(); // move to the next turn
+            DeSelectSkill();
         }
 
         #endregion

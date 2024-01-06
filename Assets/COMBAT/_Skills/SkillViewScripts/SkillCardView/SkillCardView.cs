@@ -180,8 +180,7 @@ namespace Combat
                 default:
                     break;
             }
-        }
-      
+        }      
         void FillTopTrans()
         {
             skillDataSO = SkillService.Instance.GetSkillSO(charController.charModel.charName);
@@ -259,8 +258,6 @@ namespace Combat
                 float txtHt = txtRect.sizeDelta.y;
                 Debug.Log("TXT HT" + txtHt);
                 incrVal += incr * (int)(txtHt);// correction factor
-
-          
                 midTransRect.sizeDelta
                         = new Vector2(midTransRect.sizeDelta.x, midTransHt + incrVal);
                 skillCardRect.sizeDelta

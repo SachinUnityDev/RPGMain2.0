@@ -281,10 +281,15 @@ namespace Combat
             //int incrVal = skillCardGO.GetComponent<SkillCardView>().GetIncVal();
             GameObject Canvas = GameObject.FindWithTag("Canvas");
             Canvas canvasObj = Canvas.GetComponent<Canvas>();
-            Vector3 offSetFinal = (offset + new Vector3(-width / 2, (height * 3/4), 0))* canvasObj.scaleFactor;
-            Vector3 pos = transform.position + offSetFinal;
-            skillCardGO.GetComponent<Transform>().DOMove(pos, 0.001f);
-            
+            Vector3 offSetFinal = (offset + new Vector3(-width / 2, (0), 0))* canvasObj.scaleFactor;
+            RectTransform skillCardRect = skillCardGO.GetComponent<RectTransform>();
+            skillCardRect.localPosition = Vector2.zero; 
+            Vector3 pos = skillCardRect.position + offSetFinal + new Vector3(0f, 40f, 0f);
+            skillCardRect.pivot = new Vector2(0.5f, 0f);
+            skillCardRect.anchorMin = new Vector2(0.5f, 0f);
+            skillCardRect.anchorMax = new Vector2(0.5f, 0f);
+            skillCardRect.DOMove(pos, 0.001f);
+
         }
 
         public void RefreshIconAsPerState()

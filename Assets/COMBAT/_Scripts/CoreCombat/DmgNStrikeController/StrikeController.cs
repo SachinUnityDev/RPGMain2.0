@@ -285,7 +285,7 @@ namespace Combat
         }
 
         public float GetDmgAlt(CharModel targetModel, AttackType attackType = AttackType.None
-            , DamageType damageType = DamageType.None)
+                                         , DamageType damageType = DamageType.None)
         {
             // 20% physical attack against beastmen            
             foreach (DmgBuffData dmgBuffData in allDmgBuffData.ToList())

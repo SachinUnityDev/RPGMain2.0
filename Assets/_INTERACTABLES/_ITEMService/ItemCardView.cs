@@ -63,9 +63,15 @@ namespace Interactables
 
             // btm     
             currTrans = btmTrans.GetChild(0);   
-            itemSlotTrans = btmTrans.GetChild(1);  
+            itemSlotTrans = btmTrans.GetChild(1);
+            InvService.Instance.OnToggleInvXLView -= CloseItemCardView;
+            InvService.Instance.OnToggleInvXLView += CloseItemCardView; 
         }
-        
+        void CloseItemCardView(bool isOpen)
+        {
+            if(!isOpen)
+            gameObject.SetActive(isOpen);
+        }
         
         void FillMid(List<string> allLines)
         {

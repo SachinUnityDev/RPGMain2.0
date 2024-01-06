@@ -724,7 +724,8 @@ namespace Combat
 
         #region SKILL MOD BUFF
         
-        public int ApplySkillDmgModBuff(CauseType causeType, int causeName,  SkillInclination skillInclination, float dmgVal, TimeFrame timeFrame, int castTime)
+        public int ApplySkillDmgModBuff(CauseType causeType, int causeName,  SkillInclination skillInclination
+                                                                    , float dmgVal, TimeFrame timeFrame, int castTime)
         {
             int skillModId = allSkillDmgMod.Count + 1;
             int currRd = GameSupportService.Instance.currentRound;

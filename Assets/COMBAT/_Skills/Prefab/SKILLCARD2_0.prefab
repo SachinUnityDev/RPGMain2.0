@@ -338,7 +338,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b30ad162be4bf44a4665bb81c512f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  incrVal: 0
   skillController: {fileID: 0}
   charController: {fileID: 0}
   skillModel:
@@ -353,6 +352,7 @@ MonoBehaviour:
     damageMod: 0
     skillLvl: 0
     skillSelState: 0
+    prevSkillSelState: 0
     cd: 0
     attackType: 0
     dmgType: 
@@ -366,12 +366,11 @@ MonoBehaviour:
     baseWeight: 0
     AIChance: 0
     isActive: 0
-    lastUsedInRound: 0
     allPerkHexes: []
     perkChain: 
-    descLines: []
     noOfTimesUsed: 0
     cdRemaining: 0
+    lastUsedInRound: 0
   skillName: 0
   topTrans: {fileID: 5245180689234158215}
   midTrans: {fileID: 5245180687462379881}
@@ -379,6 +378,7 @@ MonoBehaviour:
   skillDataSO: {fileID: 0}
   cdNMaxUse: {fileID: 5245180688612375115}
   skillStateTxt: {fileID: 8134822181466869148}
+  incrVal: 0
 --- !u!225 &605023616616360640
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2449,6 +2449,7 @@ MonoBehaviour:
     damageMod: 0
     skillLvl: 0
     skillSelState: 0
+    prevSkillSelState: 0
     cd: 0
     attackType: 0
     dmgType: 
@@ -2462,12 +2463,11 @@ MonoBehaviour:
     baseWeight: 0
     AIChance: 0
     isActive: 0
-    lastUsedInRound: 0
     allPerkHexes: []
     perkChain: 
-    descLines: []
     noOfTimesUsed: 0
     cdRemaining: 0
+    lastUsedInRound: 0
   isCdBased: 0
 --- !u!1 &5245180688685007158
 GameObject:
@@ -3673,8 +3673,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: 101}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 0.000030517578, y: 53}
+  m_SizeDelta: {x: 159.354, y: 32.328}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1787012620724293170
 CanvasRenderer:
@@ -3732,8 +3732,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

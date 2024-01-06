@@ -88,6 +88,7 @@ namespace Interactables
 
             if (isOpen)
             {
+                 
                 CharController charController = CharService.Instance.GetCharCtrlWithName(CharNames.Abbas);
                 On_CharSelectInv(charController.charModel); // Set Abbas stats as default 
             }
@@ -96,6 +97,7 @@ namespace Interactables
                 UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(invXLGO, false);
                // Destroy(invXLGO);
             }
+            OnToggleInvXLView?.Invoke(!isOpen);
         }
 
         public void ShowInvXLView(bool toOpen)

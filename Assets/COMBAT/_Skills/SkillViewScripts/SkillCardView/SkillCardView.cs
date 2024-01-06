@@ -47,12 +47,13 @@ namespace Combat
         List<string> descLine = new List<string>(); 
         private void OnEnable()
         {
+            ResetWidthHeight();
             SkillCardInit();
         }
 
         private void OnDisable()
         {
-            ClearData(); 
+            ClearData();
             ResetWidthHeight();
         }
         void ResetWidthHeight()

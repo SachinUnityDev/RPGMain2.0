@@ -55,12 +55,14 @@ namespace Combat
         public List<int> unOccupiedTargetPos = new List<int>();
 
         // Action Events
-        public event Action<CellPosData> OnCellPosClicked;
-
+        public event Action<CellPosData> OnCellPosRtClicked;
+        public event Action<CellPosData> OnCellPosLeftClicked;
         [Header("Save and Load")]
         public List<String> allDynaStr = new List<string>();
 
         #endregion
+        [Header(" Global var")]
+        public CellPosData lastTileClicked; 
 
         private void OnEnable()
         {
@@ -546,8 +548,15 @@ namespace Combat
 
         public void On_CellPosRightClicked(CellPosData currCellPosClicked)
         {
-            OnCellPosClicked?.Invoke(currCellPosClicked); 
+            lastTileClicked = currCellPosClicked;
+            OnCellPosRtClicked?.Invoke(currCellPosClicked);             
         }
+        public void On_CellPosLeftClicked(CellPosData currCellPosClicked)
+        {
+            lastTileClicked = currCellPosClicked;
+            OnCellPosLeftClicked?.Invoke(currCellPosClicked);
+        }
+
 
         #endregion
 

@@ -18,7 +18,7 @@ namespace Combat
         {
            // StartCombatBtn.onClick.AddListener(CombatEventService.Instance.On_SOC);
             CombatEventService.Instance.OnCharRightClicked += OnCharRightClicked;
-            GridService.Instance.OnCellPosClicked += OnTileClicked;
+            GridService.Instance.OnCellPosRtClicked += OnTileClicked;
            // StartCombatBtn.onClick.AddListener(StartCombat);
             CombatEventService.Instance.OnSOTactics += StartTactics;
             CombatEventService.Instance.OnCharClicked += OnCharClickedIN_TACTICS;
@@ -32,7 +32,7 @@ namespace Combat
         void OnSOC()
         {
             CombatEventService.Instance.OnCharRightClicked -= OnCharRightClicked;
-            GridService.Instance.OnCellPosClicked -= OnTileClicked;
+            GridService.Instance.OnCellPosRtClicked -= OnTileClicked;
             // StartCombatBtn.onClick.AddListener(StartCombat);
             CombatEventService.Instance.OnSOTactics -= StartTactics;
             CombatEventService.Instance.OnCharClicked -= OnCharClickedIN_TACTICS;

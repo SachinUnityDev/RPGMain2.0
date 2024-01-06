@@ -76,7 +76,8 @@ namespace Combat
             {
                 hitChance= 12f;
             }
-            return hitChance.GetChance();
+            bool ch = hitChance.GetChance();
+            return ch;
         }
         void LuckCheck()
         {
@@ -142,7 +143,7 @@ namespace Combat
                 DmgAppliedData dmgApplied = new DmgAppliedData(striker, causeType, causeName
                        , _dmgType, 0f, strikeType, charController, attackType);
                 if (!isTrueStrike)
-                    if (skillInclination == SkillInclination.Physical && HitChance())
+                    if (skillInclination == SkillInclination.Physical && !HitChance())
                     {
                         strikeType = StrikeType.Dodged;                   
                         CombatEventService.Instance.On_DmgApplied(dmgApplied);

@@ -117,6 +117,7 @@ namespace Combat
                                     //CellPosData cellPos = GridService.Instance.gr
                                     
                                     CellPosData cellPosData = GridService.Instance.gridView.GetPos4TilePos(currTilePos);
+                                    GridService.Instance.On_CellPosLeftClicked(cellPosData); 
                                     CombatEventService.Instance.On_targetClicked(currentdyna, cellPosData);
                                 }       
                             }

@@ -134,9 +134,10 @@ namespace Combat
             if (skillEventData.skillModel.skillInclination == SkillInclination.Move)
             {
                 charNameStr = skillEventData.strikerController.charModel.charNameStr;
-                DynamicPosData dyna = GridService.Instance.GetDyna4GO(skillEventData.strikerController.gameObject);
-                int currPos = dyna.currentPos; 
-                str = $"{charNameStr} moves to hex {currPos}";
+                //DynamicPosData dyna = GridService.Instance.GetDyna4GO(skillEventData.strikerController.gameObject);
+                //int currPos = dyna.currentPos; 
+                int posClicked = GridService.Instance.lastTileClicked.pos; 
+                str = $"{charNameStr} moves to hex {posClicked}";
             }
             else
             {
@@ -147,8 +148,6 @@ namespace Combat
             combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
             RefreshCombatLogUI();
         }
-
-
 
 
         //***********START ROUND **************//
@@ -191,7 +190,7 @@ namespace Combat
             {
                 if(i < combatLog.Count)
                 {
-                    child.gameObject.SetActive(true);
+                    child.gameObject.SetActive(true);                   
                     if(strPrev != combatLog[i].logString)
                         child.GetComponentInChildren<TextMeshProUGUI>().text = combatLog[i].logString;
                     SetPanelColor(child.gameObject, combatLog[i].logBackGround);

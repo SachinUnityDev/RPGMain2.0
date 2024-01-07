@@ -330,12 +330,16 @@ namespace Common
             // ACTUAL VALUE UPDATED HERE
             charModel.statList.Find(x => x.statName == statModData.statModified).currValue
                                                                             = (int)modCurrValue;
-            statModData.modVal = (int)modCurrValue;            
+            statModData.modVal = (int)modCurrValue;
+            
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
-                PopulateOverCharBars(statName);
+                PopulateOverCharBars();
 
             if (statName == StatName.health)
+            {
+                Debug.Log("CharHealth" + charModel.charNameStr + " HEALTH" + modCurrValue);            
                 On_DeathChk(causeByCharID, causeType);
+            }
             if (toInvoke)
             {   // IF NO CHANGE IN VALUE HAS HAPPENED DUE TO CLAMPING THIS NEEDS TO BE KEPT HERE
                 OnStatChg?.Invoke(statModData);
@@ -429,15 +433,12 @@ namespace Common
 
             return charModData; 
         }
-
-
         public void SetMaxAttribValue(AttribName attribName, float val)
         {
             AttribData statData = GetAttrib(attribName);
             Debug.Log("MAX VALUE changed " + attribName +"to " + val); 
             statData.maxLimit = val; 
         }
-
         public void SetMaxStatValue(StatName statName, float val)
         {
             StatData statData = GetStat(statName);
@@ -458,7 +459,6 @@ namespace Common
             }
             return 1f; 
          }
-
         void On_DeathChk(int causeByCharID, CauseType causeType)
         {       
             StatData statHP = GetStat(StatName.health); 
@@ -476,8 +476,7 @@ namespace Common
                                                         charModel.charID, CharStateName.LastDropOfBlood);                    
                 }
             }
-        }
-    
+        }    
         public void HPRegen()  // linked to charController as Stamina regen
         {
             AttribData statData = GetAttrib(AttribName.hpRegen); 
@@ -637,11 +636,7 @@ namespace Common
 
         #endregion
 
- 
-
-
-
-        void PopulateOverCharBars(StatName statName)
+        void PopulateOverCharBars()
         {
             transform.GetChild(2).GetComponent<HPBarView>().FillHPBar(this);
         }

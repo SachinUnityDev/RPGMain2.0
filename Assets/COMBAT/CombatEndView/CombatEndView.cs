@@ -46,13 +46,20 @@ namespace Combat
             manualExpBtn.ManualExpBtnInit(this);
             FillCharPort();
             FillHeading();
-            Transform lootTrans = transform.GetChild(0);
-            endTrans = transform.GetChild(1); 
-            endTrans.SetAsFirstSibling();
-            lootTrans.SetAsLastSibling();
-            lootTrans.gameObject.SetActive(true);
-            endTrans.gameObject.SetActive(true);
-
+            if(combatResult == CombatResult.Victory)
+            {
+                Transform lootTrans = transform.GetChild(0);
+                endTrans = transform.GetChild(1);
+                endTrans.SetAsFirstSibling();
+                lootTrans.SetAsLastSibling();
+                lootTrans.gameObject.SetActive(true);
+                endTrans.gameObject.SetActive(true);
+            }
+            else if(combatResult == CombatResult.Draw || combatResult == CombatResult.Defeat)
+            {
+                endTrans = transform.GetChild(0);
+                endTrans.gameObject.SetActive(true); 
+            }
         }
         public void SetCharAsFirstBlood(CharController charController)
         {
@@ -129,7 +136,6 @@ namespace Combat
         }
         public void UnLoad()
         {
-            LootService.Instance.lootView.UnLoad();
             endTrans.gameObject.SetActive(false);
         }
         public void LootNotifyBoxChk()

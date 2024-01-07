@@ -34,6 +34,7 @@ namespace Common
         void LastDropChks()
         {
             chances = new List<float>() { 60f, chance, 100 - (chance + 60) };
+            
             switch (chances.GetChanceFrmList())
             {
                 case 0:

@@ -51,7 +51,7 @@ namespace Combat
             GridService.Instance.currSelectionState = SelectionState.Hover;            
            
             
-            CombatEventService.Instance.OnCombatLoot += OnCombatEndOrInLoot; 
+            CombatEventService.Instance.OnEOC += OnCombatEnd; 
 
         }
 
@@ -129,11 +129,9 @@ namespace Combat
             }
         }
 
-        void OnCombatEndOrInLoot(bool inLoot)
+        void OnCombatEnd()
         {
-
             DestroyImmediate(FxCursor);
-
         }
 
         //void HLAllTiles()

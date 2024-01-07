@@ -30,7 +30,6 @@ namespace Combat
 
         public event Action<GameObject> OnCharRightClicked;
         public event Action<CharController> OnCharOnTurnSet;
-        public event Action<bool> OnCombatLoot;
         public event Action OnCombatEnd;
 
         // Strike FX 
@@ -60,6 +59,8 @@ namespace Combat
         public CombatResult currCombatResult; 
         
         RoundController roundController; 
+
+
         // Start is called before the first frame update
         void Start()
         {
@@ -109,14 +110,6 @@ namespace Combat
                 seq.Play();
             }
         }
-
-        public void On_CombatLoot(bool isVictory)
-        {
-            CombatService.Instance.isVictory = isVictory;
-            CombatService.Instance.combatState = CombatState.INCombat_Loot; 
-            OnCombatLoot?.Invoke(isVictory); 
-        }
-
         public void On_CharOnTurnSet()
         {       
             CharController charCtrl = CombatService.Instance.currCharOnTurn;
@@ -140,6 +133,7 @@ namespace Combat
         }
         public void On_SOC()
         {
+            currCombatResult = CombatResult.None; 
             roundController = CombatService.Instance.roundController; 
             CombatService.Instance.combatState = CombatState.INCombat_normal;
             CombatService.Instance.SetEnemyInCombat(EnemyPackName.RatPack3);

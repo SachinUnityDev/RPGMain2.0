@@ -62,6 +62,7 @@ namespace Combat
                 Vector3 barImgScale = new Vector3(barValHP, HPBarImgTrans.localScale.y, HPBarImgTrans.localScale.z);
                 HPBarImgTrans.localScale = barImgScale;
                 OrangeBarScaleAnim(BarImgOrange, barImgScale.x);
+                prevHPVal= statDataHP.currValue;
             }
 
             float barValStm = (float)statDataStm.currValue / (float)(statDataStm.maxLimit);
@@ -71,6 +72,7 @@ namespace Combat
                 Vector3 staminaScale = new Vector3(barValStm, StaminaBarImgTrans.localScale.y, StaminaBarImgTrans.localScale.z);
                 StaminaBarImgTrans.localScale = staminaScale;
                 OrangeBarScaleAnim(StaminaBarImgOrange, staminaScale.x);
+                prevStaminaVal= statDataStm.currValue;  
             }
         }
 

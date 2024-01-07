@@ -40,14 +40,13 @@ namespace Combat
         public bool isAccChecked = false;
         public bool isFocusChecked = false;
 
-        [Header("Result")]
-        public bool isVictory;
         [Header("Enemy Pack")]
         public EnemyPacksSO currEnemyPackSO;
 
         [Header("Who drew the first blood")]
         public bool IsFirstBloodChkDone;
         
+
         void OnEnable()
         {            
           //  CombatEventService.Instance.OnEOR1 += EORActions;
@@ -192,10 +191,10 @@ namespace Combat
                     enemyPackBase.EnemyPackShowLoot(); 
                     break;
                 case CombatResult.Draw: // on max Round Limit reached 
-                    enemyPackBase.EnemyPackShowLoot();
-
+                    combatEndView.InitCombatEndView();
                     break;
                 case CombatResult.Defeat: // On Abbas Dead, All companions in Combat Dead,   
+                    combatEndView.InitCombatEndView();
                     break;
             }
         }

@@ -15,7 +15,8 @@ namespace Combat
         [SerializeField] TextMeshProUGUI nametxt;
         [SerializeField] ExpDetailedView expDetailedView;
         [SerializeField] Image bgPortImg;
-        [SerializeField] Image charPortImg; 
+        [SerializeField] Image charPortImg;
+        [SerializeField] Image frameImg; 
 
         
 
@@ -47,7 +48,6 @@ namespace Combat
             this.combatEndView= combatEndView;
             onLvlBarHover.InitOnLvlBarHover(charModel);
             FillPort(sharedExp);
-            bgPortImg.sprite = allCharSO.bgPortUnClicked;
             FillLvlExpBar(); 
             ResetLvlUpBirds();
             CalcFirstBloodExp();
@@ -130,27 +130,28 @@ namespace Combat
 
             ClassType classType = charModel.classType; 
             nametxt.text = classType.ToString().CreateSpace();
+            bgPortImg.gameObject.SetActive(true);
 
             if (charModel.stateOfChar == StateOfChar.UnLocked)
             {                
                 charPortImg.sprite = charSO.bpPortraitUnLocked;
-                bgPortImg.sprite = charCompSO.frameAvail;
-                lvlbarImg.sprite  = CharService.Instance.charComplimentarySO.lvlBarAvail;
-                Sprite BGUnClicked = CharService.Instance.charComplimentarySO.BGAvailUnClicked;
-                Sprite BGClicked = CharService.Instance.charComplimentarySO.BGAvailClicked;
+                frameImg.sprite = charCompSO.frameAvail;
+                lvlbarImg.sprite  = charCompSO.lvlBarAvail;
+                Sprite BGUnClicked = charCompSO.BGAvailUnClicked;
+                Sprite BGClicked = charCompSO.BGAvailClicked;
 
-                bgPortImg.gameObject.SetActive(true); 
                 bgPortImg.sprite = BGUnClicked;
 
                 this.sharedExp = sharedExp;
             }
-            else // fled and dead
+            else if(charModel.stateOfChar == StateOfChar.Fled ||
+                charModel.stateOfChar == StateOfChar.Dead)// fled and dead
             {
-                charPortImg.gameObject.SetActive(false);
                 charPortImg.sprite = charSO.bpPortraitUnAvail;
-                bgPortImg.sprite = charCompSO.frameUnavail;
+                frameImg.sprite = charCompSO.frameUnavail;
+                bgPortImg.sprite = charCompSO.BGUnavail;
                 // SIDE BARS LVL
-                lvlbarImg.sprite =  CharService.Instance.charComplimentarySO.lvlbarUnAvail;
+                lvlbarImg.sprite =  charCompSO.lvlbarUnAvail;
                 this.sharedExp = 0;                
             }
             expDetailedView.InitExp(charModel, sharedExp, firstBloodExp, killsNSavesExp);
@@ -159,7 +160,6 @@ namespace Combat
             //                                    = charModel.classType.ToString().CreateSpace();
 
         }
-
         public void AddManualExp()
         {
             manualExp = CombatService.Instance.GetManualExp();
@@ -167,8 +167,6 @@ namespace Combat
             combatEndView.OnManualExpAwarded();
             FillLvlExpBar();
         }
-
-        
         public void OnPointerClick(PointerEventData eventData)
         {
             if (CanAwardManualExp())
@@ -187,6 +185,7 @@ namespace Combat
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if(charModel.stateOfChar == StateOfChar.UnLocked)
             if (CanAwardManualExp())
             {
                 bgPortImg.sprite = allCharSO.bgPortClicked;
@@ -194,11 +193,10 @@ namespace Combat
         }
 
         public void OnPointerExit(PointerEventData eventData)
-        {   
-            //if (CanAwardManualExp())
-            //{
+        {
+            if (charModel.stateOfChar == StateOfChar.UnLocked)
                 bgPortImg.sprite = allCharSO.bgPortUnClicked;
-            //}
+           
         }
     }
 }

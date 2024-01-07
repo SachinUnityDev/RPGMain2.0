@@ -58,7 +58,8 @@ namespace Combat
             CombatModel combatModel = CombatEventService.Instance.combatModel;
             int savesExp = combatModel.GetSavesExp(charModel.charID);     
             int killsExp = combatModel.GetKillsExp(charModel.charID);
-            killsNSavesExp = sharedExp*(savesExp + killsExp); 
+            killsNSavesExp = sharedExp*(savesExp + killsExp);
+            
         }
         void CalcFirstBloodExp()
         {
@@ -71,8 +72,6 @@ namespace Combat
                 firstBloodExp = 0;
             }
         }
-
-
         void ResetLvlUpBirds()
         {
             Sequence seq = DOTween.Sequence();
@@ -87,7 +86,7 @@ namespace Combat
             int deltaExp = lvlNExpSO.GetdeltaExpPts4Lvl(charModel.charLvl);
             int thresholdExp = lvlNExpSO.GetThresholdExpPts4Lvl(charModel.charLvl);
             lvlbarImg.DOFillAmount(((float)charModel.mainExp -thresholdExp) / deltaExp,0.1f);
-            int currExp = charModel.mainExp + sharedExp + manualExp; 
+            int currExp = charModel.mainExp + sharedExp + manualExp + firstBloodExp + killsNSavesExp; 
             if (!charModel.LvlUpCharChk(currExp))
             {
                 charModel.LvlNExpUpdate(currExp);
@@ -123,7 +122,6 @@ namespace Combat
             lvlTxt.text = charModel.charLvl.ToString();
             onLvlBarHover.InitOnLvlBarHover(charModel);
         }
-
         void FillPort(int sharedExp)
         {
             
@@ -197,10 +195,10 @@ namespace Combat
 
         public void OnPointerExit(PointerEventData eventData)
         {   
-            if (CanAwardManualExp())
-            {
+            //if (CanAwardManualExp())
+            //{
                 bgPortImg.sprite = allCharSO.bgPortUnClicked;
-            }
+            //}
         }
     }
 }

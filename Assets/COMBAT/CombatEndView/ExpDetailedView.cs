@@ -30,7 +30,7 @@ namespace Combat
             this.firstBloodExp= firstBloodExp;
             this.killsNSavesExp= killsNSavesExp;
             manualExp = 0;
-            netExp = sharedExp;
+            netExp = 0; 
             AddNPrintExpTxtOnTop();
         }
 

@@ -556,8 +556,6 @@ namespace Combat
             lastTileClicked = currCellPosClicked;
             OnCellPosLeftClicked?.Invoke(currCellPosClicked);
         }
-
-
         #endregion
 
         #region Getters

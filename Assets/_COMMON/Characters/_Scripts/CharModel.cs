@@ -346,6 +346,7 @@ namespace Common
             mainExp = currExp;
             if (!LvlUpCharChk(currExp)) return;             // recursion
                 charLvl++;
+
             LvlNExpUpdate(mainExp); 
         }
 

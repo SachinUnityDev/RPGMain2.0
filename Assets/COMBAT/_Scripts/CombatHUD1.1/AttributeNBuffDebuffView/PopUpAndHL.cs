@@ -49,25 +49,9 @@ namespace Combat
 
         public void InitAttrib(CharController charController)
         {
-            attribData = charController.GetAttrib(attribName);
-          
-                                          
-            if (attribName == AttribName.dmgMax)
-            {
-                AttribData attribDataMin= charController.GetAttrib(AttribName.dmgMin);
-                attribValTxt.text = attribDataMin.currValue.ToString() +"-"+attribData.currValue.ToString();
-                
-
-            }else if(attribName == AttribName.armorMax)
-            {
-                AttribData attribDataMin = charController.GetAttrib(AttribName.armorMin);
-                attribValTxt.text = attribDataMin.currValue.ToString() +"-"+attribData.currValue.ToString();
-               
-            }
-            else
-            {
+            attribData = charController.GetAttrib(attribName);          
                 attribValTxt.text = attribData.currValue.ToString(); 
-            }
+           
             img.sprite = spriteNormal;
             ChgColorBasedOnBuffDebuff();
         }

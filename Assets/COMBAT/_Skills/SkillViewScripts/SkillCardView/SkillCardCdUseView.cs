@@ -1,4 +1,5 @@
 using Combat;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,16 +50,17 @@ namespace Common
                 for (j = 0; j < skillModel.maxUsagePerCombat; j++)
                 {
                     transform.GetChild(j).gameObject.SetActive(true);
-                    if (j < skillModel.maxUsagePerCombat - skillModel.noOfTimesUsed)
+                    transform.GetChild(j).transform.DOScale(1.0f, 0.1f);
+                if (j < skillModel.maxUsagePerCombat - skillModel.noOfTimesUsed)
                         transform.GetChild(j).GetComponent<Image>().sprite = useN;
                     else
                         transform.GetChild(j).GetComponent<Image>().sprite = useNA;                    
                 }
                 for (int k = skillModel.maxUsagePerCombat; k < transform.childCount; k++)
                 {
-                    transform.GetChild(k).gameObject.SetActive(false);  
-                }
-            
+                    transform.GetChild(k).gameObject.SetActive(false);
+                    transform.GetChild(k).transform.DOScale(1f, 0.1f);
+                }            
         }
         void FillCdImg()
         {
@@ -73,6 +75,8 @@ namespace Common
             for (j = 0; j < skillModel.cd; j++)
             {
                 transform.GetChild(j).gameObject.SetActive(true);
+                transform.GetChild(j).transform.DOScale(1.2f, 0.1f); 
+
                 if (j >= skillModel.cdRemaining)
                     transform.GetChild(j).GetComponent<Image>().sprite = cdN;
                 else
@@ -81,6 +85,7 @@ namespace Common
             for (int k = j; k < transform.childCount; k++)
             {
                 transform.GetChild(k).gameObject.SetActive(false);
+                transform.GetChild(k).transform.DOScale(1.2f, 0.1f);
             }
         }
     }

@@ -37,7 +37,7 @@ namespace Combat
         void AddNPrintExpTxtOnTop()
         {
             netExp = sharedExp + manualExp + firstBloodExp;
-            string signStr = sharedExp > 0 ? "+" : "";
+            string signStr = netExp > 0 ? "+" : "";
             expTxt.text = $"{signStr} {netExp} Exp";
             FillDetails();
         }

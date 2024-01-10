@@ -178,10 +178,9 @@ namespace Combat
         public void On_SOR(int roundNo)
         {
             Debug.Log("SOR Triggered" + roundNo);
-            roundController.OnRoundStart(roundNo);
-            On_SOT();
-
+            roundController.OnRoundStart(roundNo);            
             OnSOR1?.Invoke(roundNo);
+            On_SOT();
         }
         public void On_EOR(int roundNo)
         {

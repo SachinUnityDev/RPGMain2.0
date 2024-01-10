@@ -31,14 +31,14 @@ namespace Common
                                         .AddChar2Party(portraitDragNDrop.charDragged); 
                 if (isDropSuccess)
                 {
-                   
                     draggedGO.transform.SetParent(gameObject.transform);
                     draggedGO.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
-                    CharModel charModel = RosterService.Instance.scrollSelectCharModel; 
+                    CharModel charModel = RosterService.Instance.scrollSelectCharModel;
                     charModel.availOfChar = AvailOfChar.UnAvailable_InParty;
                     RosterService.Instance.rosterViewController.PopulatePortrait();
                     RosterService.Instance.On_ScrollSelectCharModel(charModel);
-                    // RosterService.Instance.On_PortraitDragResult(isDropSuccess);
+                    draggedGO.transform.SetParent(gameObject.transform);
+                    draggedGO.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
                     SetIPortraitValues();
                     portraitDragNDrop.parentTransform = transform;
                 }                  
@@ -48,6 +48,16 @@ namespace Common
                 }
             }
         }
+        public void OnAddChar2Slot(GameObject draggedgo)
+        {
+            draggedGO = draggedgo;
+            portraitDragNDrop = draggedgo.GetComponent<PortraitDragNDrop>();
+            draggedgo.transform.SetParent(gameObject.transform);
+            draggedgo.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+            SetIPortraitValues();
+            portraitDragNDrop.parentTransform = transform;
+        }
+
         public void SetIPortraitValues()
         {
             iPortrait IPortrait = draggedGO.GetComponent<iPortrait>();

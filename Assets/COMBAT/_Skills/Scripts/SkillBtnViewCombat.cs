@@ -62,21 +62,24 @@ namespace Combat
         #region  POINTER EVENTS
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (CombatService.Instance.combatState == CombatState.INTactics) return;
-            if (skillModel == null) return;
-            if(skillModel.skillUnLockStatus== 0 || skillModel.skillUnLockStatus == -1) return;
-            if (skillModel.GetSkillState() == SkillSelectState.Clickable ||
-                skillModel.GetSkillState() == SkillSelectState.Clicked)
+            if (eventData.button == 0)
             {
-                if (!IsClicked)
+                if (CombatService.Instance.combatState == CombatState.INTactics) return;
+                if (skillModel == null) return;
+                if (skillModel.skillUnLockStatus == 0 || skillModel.skillUnLockStatus == -1) return;
+                if (skillModel.GetSkillState() == SkillSelectState.Clickable ||
+                    skillModel.GetSkillState() == SkillSelectState.Clicked)
                 {
-                    SetClicked();
-                    skillView.SkillBtnPressed(transform.GetSiblingIndex());
+                    if (!IsClicked)
+                    {
+                        SetClicked();
+                        skillView.SkillBtnPressed(transform.GetSiblingIndex());
+                    }                
                 }
-                else
-                {
-                    SetUnClick();
-                }
+            }
+            if ((int)eventData.button == 1)
+            {
+                SetUnClick();
             }
         }
 
@@ -97,6 +100,7 @@ namespace Combat
             if (skillModel != null)
                 skillModel.SetPrevSkillState();    
             transform.GetChild(1).GetComponent<Image>().sprite = skillHexSO.SkillNormalFrame;
+         //   SkillService.Instance.DeSelectSkill(); 
         }
         public void SetClicked()
         {

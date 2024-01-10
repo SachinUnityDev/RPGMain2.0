@@ -30,7 +30,7 @@ namespace Combat
         [SerializeField] GameObject mainFX;
         [SerializeField] GameObject selfFX;
         [SerializeField] PerkType currPerkType = PerkType.None;
-
+        [SerializeField] StrikeTargetNos strikeNos; 
 
         [Header("Buffer variables")]
         [SerializeField] CharController prevCharController;
@@ -73,11 +73,13 @@ namespace Combat
 
         }
 
-        public void SingleTargetRangeStrike(PerkType perkType)
+        public void RangedSingleStrike(PerkType perkType, StrikeTargetNos strikeNos)
         {
             SetMoveParams();
+            if (ChkIfAttackIsDodged()) return;
             currPerkType = perkType;
-           
+            this.strikeNos = strikeNos; 
+
             Sequence singleSeq = DOTween.Sequence();
             Sequence singleRev = DOTween.Sequence();
 
@@ -124,9 +126,18 @@ namespace Combat
 
         //}
 
-        public void MultiTargetRangeFX(PerkType perkType)
+        bool ChkIfAttackIsDodged()
         {
-            SetMoveParams();           
+            DamageController dmgController = targetTransform.GetComponent<DamageController>();
+            if (dmgController.strikeType == StrikeType.Dodged) return true; 
+            return false; 
+        }
+
+        public void MultiTargetRangeFX(PerkType perkType)
+        {   
+            SetMoveParams();
+            if (ChkIfAttackIsDodged()) return; 
+
             currPerkType = perkType;
             Sequence multiTargetSeq = DOTween.Sequence();
             Sequence revMultiTargetSeq = DOTween.Sequence();
@@ -149,8 +160,6 @@ namespace Combat
                 .OnComplete(() => multiTargetSeq = null)
                .OnComplete(() => revMultiTargetSeq = null)
                ;
-
-
         }
 
         public void ImpactFXOnCurrTarget()
@@ -171,6 +180,7 @@ namespace Combat
         public void MeleeSingleStrike(PerkType perkType)
         {
             SetMoveParams();
+            if (ChkIfAttackIsDodged()) return;
             Sequence meleeSeq = DOTween.Sequence();
             Sequence meleeRev = DOTween.Sequence();
            
@@ -320,76 +330,25 @@ namespace Combat
                 SkillService.Instance.OnTargetReached(); 
                 return;
             }
-            if (CombatService.Instance.mainTargetDynas.Count > 0)
+            if (CombatService.Instance.mainTargetDynas.Count > 0 && strikeNos == StrikeTargetNos.Multiple)
             {
                 foreach (DynamicPosData dyna in mainTargets)
                 {
                     Vector3 targetPos = dyna.charGO.transform.position - striker2TargetOffset; 
                     GameObject mainFX = Instantiate(mainFXGO, startPos, Quaternion.identity);
                     mainFX.transform.DOLookAt(targetPos, 0.01f);
-                    mainFX.GetComponent<VFXMoveScript>().targetPos = targetPos;
+                    mainFX.GetComponent<VFXMoveScript>().targetPos = targetPos;                
                 }
             }else
             {
                 Vector3 targetPos = targetTransform.position - striker2TargetOffset;
                 GameObject mainFX = Instantiate(mainFXGO, startPos, Quaternion.identity);
                 mainFX.transform.DOLookAt(targetPos, 0.01f);
-                mainFX.GetComponent<VFXMoveScript>().targetPos = targetPos;
-
-            }         
-        }
-       public void ApplyRunguFX(PerkType perkType)
-        {
-            SetMoveParams();
-            currPerkType = perkType;
-
-            Sequence singleSeq = DOTween.Sequence();
-            Sequence singleRev = DOTween.Sequence();
-
-            singleSeq
-                .PrependCallback(() => ToggleSprite(true))
-                .AppendCallback(() => ApplyFXOnSelf())
-                .AppendCallback(() => CharService.Instance.ToggleCharColliders(targetTransform.gameObject))
-                .AppendCallback(() => PrefabMove())
-                //.AppendCallback(() => ApplyFXOnCollatralTargets())
-                .AppendCallback(() => ApplyImpactFXOnSingleTarget())
-                ;
-            singleRev
-                .AppendInterval(0.90f)
-                .AppendCallback(() => ToggleSprite(false))
-                .AppendCallback(() => CharService.Instance.TurnOnAllCharColliders())
-                ;
-
-            singleSeq.Play()
-                .OnComplete(() => singleRev.Play())
-                .OnComplete(() => singleSeq = null);
-            ;
-
-        }
-        void PrefabMove()
-        {
-            GameObject mainFXGO;
-            SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType, targetCharMode);
-            mainFXGO = skillPerkdataFX.mainSkillFX;
-
-            if (mainFXGO == null)
-            {
-                SkillService.Instance.OnTargetReached();
-                return;
+                mainFX.GetComponent<VFXMoveScript>().targetPos = targetPos;                
             }
-            Vector3 targetPos = targetTransform.position - striker2TargetOffset;
-            GameObject mainFX = Instantiate(mainFXGO, startPos, Quaternion.identity);
-           // mainFX.transform.DOLookAt(targetPos, 0.01f);
-            mainFX.GetComponentInChildren<RunguMotion>().RotMotion(targetPos);
-
-
+           
         }
-
-        public void DestroyMAINFX()
-        {
-            Destroy(mainFX);
-            mainFX = null;  
-        }
+  
 #endregion
 
 # region HELPERS 
@@ -447,6 +406,7 @@ namespace Combat
             if (transPoseON)
             {
                 strikerTransform.GetChild(1).gameObject.SetActive(true);
+                strikerTransform.GetChild(1).DOScale(0.75f, 0.1f); 
                 strikerTransform.GetChild(0).gameObject.SetActive(false);
             }
             else

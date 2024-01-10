@@ -12,11 +12,11 @@ namespace Combat
     {
         //public event Action<DmgAppliedData> OnDamageApplied;
         
-        const float hitChanceMin = 30f;
-        const float hitChanceMax = 93f;
+        const float hitChanceMin = 40f;
+        const float hitChanceMax = 96f;
         CharController charController;
         CharController striker;
-        StrikeType strikeType = StrikeType.Normal;
+        public StrikeType strikeType = StrikeType.Normal; // accessed outside to chk the dodge 
         public bool isMisFire; 
 
         [Header("Cheated Death")]

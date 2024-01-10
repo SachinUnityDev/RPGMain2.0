@@ -231,8 +231,10 @@ namespace Combat
             // get skill card height             
             RectTransform skillCardRect = transform.GetComponent<RectTransform>();
             RectTransform midTransRect = midTrans.GetComponent<RectTransform>();
-
-            int j = 0; 
+            incrVal = 0;
+            int j = 0;
+            incr = 0; 
+            ResetSize();
             foreach (Transform child in midTrans)
             {
                 if(j < lines)
@@ -245,18 +247,22 @@ namespace Combat
                 }
                 else
                 {
-                    child.gameObject.SetActive(false);  
+                    child.gameObject.SetActive(false);
+                    incrVal = 0;                    
+                    incr = 0;
                 }
                 j++; 
             }
             if (lines > 2)
             {
+                incrVal = 0;
+                incr = 0;
                 // increase size 
                 incr += lines - 2;// also updated in update Txt Ht
 
                 RectTransform txtRect = midTrans.GetChild(0).GetComponent<RectTransform>();
                 float txtHt = txtRect.sizeDelta.y;
-                Debug.Log("TXT HT" + txtHt);
+                //Debug.Log("TXT HT" + txtHt);
                 incrVal += incr * (int)(txtHt);// correction factor
                 midTransRect.sizeDelta
                         = new Vector2(midTransRect.sizeDelta.x, midTransHt + incrVal);
@@ -266,7 +272,7 @@ namespace Combat
             else
             {
                 // reduce to org size 
-                incrVal = 0;
+                incrVal = 0; incr = 0;
                 midTransRect.sizeDelta
                         = new Vector2(midTransRect.sizeDelta.x, midTransHt);
                 skillCardRect.sizeDelta

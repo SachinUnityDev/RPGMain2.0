@@ -179,11 +179,11 @@ namespace Combat
         {
             if (_skillName == SkillNames.None) return;
             SkillService.Instance.skillModelHovered.perkChain.Clear();
-          //  SkillService.Instance.skillModelHovered.descLines.Clear();
+            //  SkillService.Instance.skillModelHovered.descLines.Clear();
             Debug.Log(" all Skill bases count" + allSkillBases.Count +
-                            "all perk bases count" + allPerkBases +" SKillname" + _skillName); 
+                            "all perk bases count" + allPerkBases + " SKillname" + _skillName);
 
-             allSkillBases.Find(t => t.skillName == _skillName).SkillHovered();
+            allSkillBases.Find(t => t.skillName == _skillName).SkillHovered();
 
             List<PerkData> clickedPerkList = allSkillPerkData
                 .Where(t => t.skillName == _skillName && t.state == PerkSelectState.Clicked).ToList();
@@ -867,16 +867,6 @@ namespace Combat
                 skillModel.SetSkillState(SkillSelectState.Unclickable_notCharsTurn);
                 skillState = SkillSelectState.Unclickable_notCharsTurn;
             }
-            else if (HasNoChkActionPts())
-            {
-                skillModel.SetSkillState(SkillSelectState.UnClickable_NoActionPts);
-                skillState = SkillSelectState.UnClickable_NoActionPts;
-            }
-            else if(skillModel.skillInclination == SkillInclination.Move && isRooted)
-            {
-                skillModel.SetSkillState(SkillSelectState.UnClickable_2Move);
-                skillState = SkillSelectState.UnClickable_2Move;
-            }
             else if (IfInCoolDown(skillModel))      // only char on turn will get here 
             {
                 skillModel.SetSkillState(SkillSelectState.UnClickable_InCd);
@@ -887,6 +877,17 @@ namespace Combat
                 skillModel.SetSkillState(SkillSelectState.UnClickable_NoUseLeft);
                 skillState = SkillSelectState.UnClickable_NoUseLeft;
             }
+            else if (HasNoChkActionPts())
+            {
+                skillModel.SetSkillState(SkillSelectState.UnClickable_NoActionPts);
+                skillState = SkillSelectState.UnClickable_NoActionPts;
+            }
+            else if(skillModel.skillInclination == SkillInclination.Move && isRooted)
+            {
+                skillModel.SetSkillState(SkillSelectState.UnClickable_2Move);
+                skillState = SkillSelectState.UnClickable_2Move;
+            }
+           
             else if (IsNotOnCastPos(skillModel))     // not on cast pos 
             {
                 skillModel.SetSkillState(SkillSelectState.Unclickable_notOnCastPos);

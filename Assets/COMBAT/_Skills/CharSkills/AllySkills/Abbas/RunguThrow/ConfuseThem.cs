@@ -21,7 +21,7 @@ namespace Combat
         public override SkillNames skillName => SkillNames.RunguThrow;
 
         public override SkillLvl skillLvl => SkillLvl.Level1;
-        private float _chance;    
+        private float _chance = 50f;    
         public override float chance { get=> _chance; set { _chance = 50f;  } }
         
         public override void SkillHovered()
@@ -36,12 +36,14 @@ namespace Combat
         }
         public override void ApplyFX1()
         {
-            if (targetController)
+            if (targetController && !IsDodged())
             {
                 if (chance.GetChance())
                     targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
                     , charController.charModel.charID, CharStateName.Confused, skillModel.timeFrame, skillModel.castTime);
+
             }
+          
         }
 
         public override void ApplyFX2()
@@ -62,7 +64,7 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-            str1 = "50% apply <style=States>Confused</style>";
+            str1 = $"{chance}% apply <style=States>Confused</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
     

@@ -242,7 +242,7 @@ MonoBehaviour:
     charName: 3
     skillID: 0
     skillIconSprite: {fileID: 21300000, guid: 1bbd6ae3ede542f4c81844dd7329ff34, type: 3}
-    skillPose: {fileID: 21300000, guid: 61de652e069c4a946852d263d8beb538, type: 3}
+    skillPose: {fileID: 21300000, guid: 9446c794b43c4ee4884cc1a99521b0c9, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 5

@@ -176,6 +176,7 @@ namespace Combat
 
             if (dyna.charMode == prevCharMode)
             {
+                if(FxCursor!= null)
                 FxCursor.transform.DOMove(worldPos, 0.0f);
             }
             else

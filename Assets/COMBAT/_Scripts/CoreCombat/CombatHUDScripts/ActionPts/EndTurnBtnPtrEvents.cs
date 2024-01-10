@@ -1,3 +1,4 @@
+using Common;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -29,6 +30,10 @@ namespace Combat
             }
             else
             {
+                CharController charController = CombatService.Instance.currCharOnTurn; 
+                if (charController.charModel.charMode == CharMode.Ally)
+                    charController.combatController.CnvrtRmgAP2StmGain();
+
                 SkillService.Instance.Move2Nextturn(); // on End turn clicked
                 descTxt.gameObject.SetActive(false);
             }

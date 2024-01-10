@@ -43,7 +43,6 @@ namespace Combat
             Debug.Log("SAME CHAR ON TURN SET" + index);
             if (CombatService.Instance.combatState != CombatState.INCombat_normal)
             {
-             
                 return;
             }
 
@@ -97,6 +96,10 @@ namespace Combat
          
             UpdateAllyEnemyList(); // update all three list charturnOrder, AllyTurnOrder and EnemyTurnOrder
             
+            // if char who is on turn dies => ..end the turn and start the next char in seq
+            // 
+
+
             newIndex = CharService.Instance.allCharInCombat
                 .FindIndex(t => t.charModel.charID == currCharOnTurn.charModel.charID);
             if(newIndex != -1)

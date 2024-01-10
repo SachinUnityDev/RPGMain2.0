@@ -5,6 +5,8 @@ using DG.Tweening;
 using Common;
 using Spine.Unity;
 using UnityEngine.UI;
+using System;
+
 namespace Combat
 {
     public class DeathAnimView : MonoBehaviour
@@ -28,6 +30,12 @@ namespace Combat
         {
             CharService.Instance.OnCharDeath -= PlayDeathAnim;
         }
+
+        public void Add2DeathAnimLs(CharController charController)
+        {
+
+        }
+
         public void PlayDeathAnim(CharController charController)
         {
                 SkeletonAnimation skeletonAnim = charController.gameObject.GetComponentInChildren<SkeletonAnimation>();
@@ -103,9 +111,16 @@ namespace Combat
         void SpawnDeathGodess(CharController charController)
         {
             GameObject charGO = charController.gameObject;
-            deathGoddessGO = Instantiate(deathGoddess, charController.gameObject.transform.position, Quaternion.identity);
-            deathGoddessGO.transform.GetChild(0).DOScale(intermediateSize, 0.15f).OnComplete(()=>
-            deathGoddessGO.transform.GetChild(0).DOPunchScale(new Vector3(1.1f,1.1f,1.1f),0.2f,1, 0.5f));
+            if (deathGoddessGO == null)
+            {   
+                deathGoddessGO = Instantiate(deathGoddess, charController.gameObject.transform.position, Quaternion.identity);           
+            }
+            else
+            {
+                deathGoddess.transform.DOMove(charController.transform.position, 0.1f);
+            }
+            deathGoddessGO.transform.GetChild(0).DOScale(intermediateSize, 0.15f).OnComplete(() =>
+             deathGoddessGO.transform.GetChild(0).DOPunchScale(new Vector3(1.1f, 1.1f, 1.1f), 0.2f, 1, 0.5f));
             deathGoddessGO.transform.SetParent(charGO.transform);
         }
 

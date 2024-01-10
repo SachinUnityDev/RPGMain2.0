@@ -28,7 +28,7 @@ namespace Combat
         public override void SkillHovered()
         {
             base.SkillHovered();
-            skillModel.maxUsagePerCombat = 5; 
+            skillModel.maxUsagePerCombat = 6; 
 
         }
         public override void ApplyFX1()

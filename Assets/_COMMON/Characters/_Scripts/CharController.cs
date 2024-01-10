@@ -500,10 +500,12 @@ namespace Common
         public void RegenStamina()  // for ally and enemies stamina regen is 2 
         {
             StatModData statModData;
-            StatData statData = charModel.statList.Find(t=>t.statName == StatName.stamina); 
+            StatData statData = charModel.statList.Find(t=>t.statName == StatName.stamina);
+            AttribData stmRegenVal = GetAttrib(AttribName.staminaRegen); 
+
             int value = (int)statData.currValue;
             if (!statData.isClamped)
-                 statModData = ChangeStat(CauseType.StaminaRegen, 0, this.charModel.charID, StatName.stamina, 2);
+                 statModData = ChangeStat(CauseType.StaminaRegen, 0, this.charModel.charID, StatName.stamina, stmRegenVal.currValue);
             else
                 Debug.Log("Stamina Clamped" + charModel.charName);
         }

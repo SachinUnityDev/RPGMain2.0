@@ -54,6 +54,9 @@ namespace Combat
             CombatEventService.Instance.OnSOT += StartOfTurn;
             SkillService.Instance.OnSkillUsed += SkillUsed;
             CombatEventService.Instance.OnDodge += OnDodge;
+            CombatEventService.Instance.OnDamageApplied += OnCritFeeble;
+            CombatEventService.Instance.OnMisfire += OnMisFire;
+
         }
         private void OnDisable()
         {
@@ -142,7 +145,7 @@ namespace Combat
             else
             {
                 charNameStr = skillEventData.strikerController.charModel.charNameStr;
-                string skillNameStr = skillEventData.skillModel.skillName.ToString().CreateSpace(); 
+                string skillNameStr = skillEventData.skillModel.skillName.ToString().CreateSpace();                 
                 str = $"{charNameStr} uses {skillNameStr}";
             }
             combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
@@ -166,6 +169,26 @@ namespace Combat
         {
             string strikerName = dmgAppliedData.striker.charModel.charNameStr;
             string str = strikerName + " misses target";
+            combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
+            RefreshCombatLogUI();
+        }
+        void OnCritFeeble(DmgAppliedData dmgAppliedData)
+        {   
+            StrikeType strikeType = dmgAppliedData.strikeType;
+            string str =""; 
+            if(strikeType == StrikeType.Crit)
+                str = "Critical Strike!";
+            else if (strikeType == StrikeType.Feeble)
+                str = "Feeble Strike";
+            else
+                return; 
+
+            combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
+            RefreshCombatLogUI();
+        }
+        void OnMisFire(DmgAppliedData dmgAppliedData)
+        {  
+            string str = "Misfire";           
             combatLog.Add(new CombatLogData(LogBackGround.LowHL, str));
             RefreshCombatLogUI();
         }
@@ -237,8 +260,7 @@ namespace Combat
             //        break;
             //}
 
-        }
-    
+        }    
    
         void HpChg(StatModData statModData)
         {

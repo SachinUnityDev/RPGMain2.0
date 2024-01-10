@@ -55,8 +55,8 @@ namespace Combat
                 charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
                  , AttribName.armorMax, maxArmorChg, skillModel.timeFrame, skillModel.castTime, true);
 
-                //targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName, charID,
-                //        CharStateName.Guarded, skillModel.timeFrame, skillModel.castTime);
+                targetController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName, charID,
+                        CharStateName.Guarded, skillModel.timeFrame, skillModel.castTime);
 
             }
         }
@@ -105,7 +105,7 @@ namespace Combat
   
         public override void ApplyVFx()
         {
-            SkillService.Instance.skillFXMoveController.SingleTargetRangeStrike(PerkType.None);
+            SkillService.Instance.skillFXMoveController.RangedSingleStrike(PerkType.None, strikeNos);
         }
 
         public override void PopulateAITarget()

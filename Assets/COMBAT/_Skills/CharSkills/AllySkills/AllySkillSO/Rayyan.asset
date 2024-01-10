@@ -223,7 +223,7 @@ MonoBehaviour:
     skillType: 4
     skillUnLockStatus: 1
     skillDesc: 
-    damageMod: 160
+    damageMod: 4000
     skillLvl: 0
     skillSelState: 1
     cd: -1

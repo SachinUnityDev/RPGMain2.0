@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using Intro;
-using System.Linq; 
+using System.Linq;
+using UnityEngine.SceneManagement;
+
 
 namespace Common
 {
@@ -40,10 +42,18 @@ namespace Common
         }
         private void OnEnable()
         {
-
-            activeCanvas = FindObjectOfType<Canvas>().gameObject;
+            SceneManager.sceneLoaded += OnSceneLoad;
             TogglePanel(escPanel, false);
         }
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoad;
+        }
+        void OnSceneLoad(Scene scene, LoadSceneMode loadMode)
+        {
+            activeCanvas = FindObjectOfType<Canvas>().gameObject;
+        }
+
         public void BlockEsc(bool blockEsc)
         {
             isEscBlocked= blockEsc;

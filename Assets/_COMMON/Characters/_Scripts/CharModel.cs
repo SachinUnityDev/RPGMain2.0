@@ -344,10 +344,8 @@ namespace Common
         public void LvlNExpUpdate(int currExp)
         {
             mainExp = currExp;
-            if (!LvlUpCharChk(currExp)) return;             // recursion
+            if (!LvlUpCharChk(currExp)) return;    
                 charLvl++;
-
-            LvlNExpUpdate(mainExp); 
         }
 
         public bool LvlUpCharChk(int currExp)

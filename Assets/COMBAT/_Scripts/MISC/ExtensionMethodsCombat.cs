@@ -51,7 +51,7 @@ public static class ExtensionMethodsCombat
             switch (statName)
             {        
                 case AttribName.dmgMin:
-                    str = "Damage";
+                    str = "Damage Min";
                     break;
                 case AttribName.acc:
                     str = "Accuracy";
@@ -75,7 +75,7 @@ public static class ExtensionMethodsCombat
                     str = "Willpower";
                     break;
                 case AttribName.armorMin:
-                    str = "Armor";
+                    str = "Armor Min";
                     break;
                 case AttribName.dodge:
                     str = "Dodge";
@@ -109,10 +109,10 @@ public static class ExtensionMethodsCombat
                     str = "HP Regen";
                     break;
                 case AttribName.armorMax:
-                    str = "Armor";
+                    str = "Armor Max";
                 break;
                 case AttribName.dmgMax:
-                    str = "Damage";
+                    str = "Damage Max";
                     break;
                 default:
                     break;
@@ -169,7 +169,6 @@ public static class ExtensionMethodsCombat
         }
         public static int GetChanceFrmList(this List<float> chances)
         {
-            int val = UnityEngine.Random.Range(0, 100);
             chances.Insert(0, 0f);
             List<float> cumulativeChances = new List<float>();
             float cumChance = 0f;     
@@ -178,11 +177,14 @@ public static class ExtensionMethodsCombat
                 cumChance+= chance;
                 cumulativeChances.Add(cumChance);  
             }
-            cumulativeChances.Insert(cumulativeChances.Count, 100);
-            for (int i = 0; i < cumulativeChances.Count; i++)
+
+        float val = UnityEngine.Random.Range(0F, cumulativeChances[cumulativeChances.Count-1]);
+
+        //cumulativeChances.Insert(cumulativeChances.Count, 100);
+        for (int i = 0; i < cumulativeChances.Count-1 ; i++)
             {
                 if (val > cumulativeChances[i] && val <= cumulativeChances[i+1])
-                    return i; 
+                    return i--; 
             }
             return 0; 
         }

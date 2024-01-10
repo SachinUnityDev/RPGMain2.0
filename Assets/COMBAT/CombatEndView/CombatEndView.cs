@@ -35,7 +35,7 @@ namespace Combat
         public NotifyName notifyName { get; set; }
         public bool isDontShowItAgainTicked { get ; set; }
 
-        Transform endTrans; 
+        [SerializeField] Transform endTrans; 
         public void InitCombatEndView()
         {
             this.combatResult= CombatEventService.Instance.currCombatResult;    
@@ -46,10 +46,11 @@ namespace Combat
             manualExpBtn.ManualExpBtnInit(this);
             FillCharPort();
             FillHeading();
-            if(combatResult == CombatResult.Victory)
+            
+            if (combatResult == CombatResult.Victory)
             {
-                Transform lootTrans = transform.GetChild(0);
                 endTrans = transform.GetChild(1);
+                Transform lootTrans = transform.GetChild(0); 
                 endTrans.SetAsFirstSibling();
                 lootTrans.SetAsLastSibling();
                 lootTrans.gameObject.SetActive(true);
@@ -58,7 +59,7 @@ namespace Combat
             else if(combatResult == CombatResult.Draw || combatResult == CombatResult.Defeat)
             {
                 endTrans = transform.GetChild(0);
-                endTrans.gameObject.SetActive(true); 
+                endTrans.gameObject.SetActive(true);                
             }
         }
         public void SetCharAsFirstBlood(CharController charController)

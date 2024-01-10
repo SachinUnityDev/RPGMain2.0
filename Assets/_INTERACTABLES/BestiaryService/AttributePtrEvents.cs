@@ -13,7 +13,7 @@ namespace Interactables
         [SerializeField] bool isOnLeft = false; 
 
         [SerializeField] GameObject desc; 
-        [SerializeField] AttribData statData;
+        [SerializeField] AttribData attribData;
         [SerializeField] AttribData statDataMax; 
         AttributeViewController attributeViewController; 
         void Start()
@@ -27,9 +27,8 @@ namespace Interactables
 
         public void PopulateData()
         {
-            
-            CharModel charModel =
-                BestiaryService.Instance.bestiaryViewController?.currBeastOnDisplay;
+            CharModel charModel = BestiaryService.Instance
+                                            .bestiaryViewController?.currBeastOnDisplay;
 
             if (charModel == null)
                 return;
@@ -46,22 +45,9 @@ namespace Interactables
             }
             else
             {
-                statData = charModel.attribList.Find(t => t.AttribName == statName);
+                attribData = charModel.attribList.Find(t => t.AttribName == statName);
                 PopulateDesc();
-                if (statName == AttribName.armorMin || statName == AttribName.dmgMin)
-                {
-                    if(statName == AttribName.armorMin)
-                    statDataMax = charModel.attribList.Find(t => t.AttribName == AttribName.armorMax);
-
-                    if (statName == AttribName.dmgMin)
-                        statDataMax = charModel.attribList.Find(t => t.AttribName == AttribName.dmgMax);
-
-                    str = statData.currValue + "-" + statDataMax.currValue;
-                }
-                else
-                {
-                    str = statData.currValue.ToString();
-                }
+                str = attribData.currValue.ToString();
             }
 
             return str;
@@ -71,9 +57,9 @@ namespace Interactables
         void PopulateDesc()
         {
             desc.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text
-                            = statData.AttribName.ToString().CreateSpace();
+                            = attribData.AttribName.ToString().CreateSpace();
             desc.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text
-                            = statData.desc; 
+                            = attribData.desc; 
         }
 
         public void OnPointerEnter(PointerEventData eventData)

@@ -90,13 +90,13 @@ MonoBehaviour:
     timeFrame: 1
     maxUsagePerCombat: 0
     skillIncli: 1
-    baseWeight: 200
+    baseWeight: 2000
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
       hexNames: 020000000b00000002000000
     allSkillFXs:
-    - charMode: 1
+    - charMode: 2
       perkType: 0
       impactFX: {fileID: 5523282006502781700, guid: 1beb0376a1ca637489aaa8ebde82ed0a,
         type: 3}

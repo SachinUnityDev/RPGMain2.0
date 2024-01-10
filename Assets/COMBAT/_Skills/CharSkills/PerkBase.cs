@@ -190,9 +190,21 @@ namespace Combat
                 }
             }
         }
-    
+
 
         #endregion
+
+        #region DODGE CHK
+
+        public bool IsDodged()
+        {
+            if (targetController.damageController.strikeType == StrikeType.Dodged)
+                return true; 
+            return false; 
+        }
+
+        #endregion
+
 
     }
 }

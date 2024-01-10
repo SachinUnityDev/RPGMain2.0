@@ -129,8 +129,8 @@ namespace Combat
             //CombatEventService.Instance.OnCharClicked += SetCharAttributesDisplay;
 
             // to be kept 
-            CombatEventService.Instance.OnCharOnTurnSet += SetSelectCharPortrait;
-            CombatEventService.Instance.OnCharClicked += SetSelectCharPortrait;
+            //CombatEventService.Instance.OnCharOnTurnSet += SetSelectCharPortrait;
+            //CombatEventService.Instance.OnCharClicked += SetSelectCharPortrait;
             SkillService.Instance.OnSkillUsed += DsplySkillName; 
             // CombatEventService.Instance.OnCharOnTurnSet += SetCombatStatesDisplay;
             // CombatEventService.Instance.OnCharClicked += SetCombatStatesDisplay;
@@ -151,8 +151,6 @@ namespace Combat
         void OnCombatEnd()
         {
             Sequence endSeq = DOTween.Sequence();
-
-            
             endSeq
                 .AppendCallback(() => PlayTransitAnim("COMBAT ENDS"))
                 .AppendInterval(1.5f)

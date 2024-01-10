@@ -29,7 +29,8 @@ namespace Combat
         {
             base.SkillHovered();
             skillModel.cd = 1;
-            skillModel.maxUsagePerCombat = -1; 
+            skillModel.maxUsagePerCombat = -1;
+            skillModel.attackType = AttackType.Melee;
         }
         public override void ApplyFX1()
         {
@@ -53,6 +54,8 @@ namespace Combat
 
         public override void ApplyVFx()
         {
+            SkillService.Instance.skillFXMoveController.MeleeSingleStrike(PerkType.None);
+
         }
 
         public override void DisplayFX1()

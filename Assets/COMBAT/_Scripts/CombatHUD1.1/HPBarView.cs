@@ -55,7 +55,7 @@ namespace Combat
             AttribData willPowerSD = charController.GetAttrib(AttribName.willpower);
             AttribData vigorSD = charController.GetAttrib(AttribName.vigor);
             
-            float barValHP = (float)statDataHP.currValue / (float)(statDataHP.maxLimit);
+            float barValHP = (float)statDataHP.currValue / (float)(vigorSD.currValue*4);
             barValHP = (barValHP > 1) ? 1 : barValHP;
             if (statDataHP.currValue != prevHPVal)
             {
@@ -65,7 +65,7 @@ namespace Combat
                 prevHPVal= statDataHP.currValue;
             }
 
-            float barValStm = (float)statDataStm.currValue / (float)(statDataStm.maxLimit);
+            float barValStm = (float)statDataStm.currValue / (float)(willPowerSD.currValue*3);
             barValStm = (barValStm > 1) ? 1 : barValStm;
             if (statDataStm.currValue != prevStaminaVal)
             {

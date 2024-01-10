@@ -47,19 +47,18 @@ namespace Combat
             this.charModel = charModel;
             this.combatEndView= combatEndView;
             onLvlBarHover.InitOnLvlBarHover(charModel);
-            FillPort(sharedExp);
-            FillLvlExpBar(); 
+            FillPort(sharedExp);            
             ResetLvlUpBirds();
             CalcFirstBloodExp();
-            CalcKillsNSavesExp();            
+            CalcKillsNSavesExp();
+            FillLvlExpBar(sharedExp + killsNSavesExp + firstBloodExp);
         }
         void CalcKillsNSavesExp()
         {
             CombatModel combatModel = CombatEventService.Instance.combatModel;
-            int savesExp = combatModel.GetSavesExp(charModel.charID);     
-            int killsExp = combatModel.GetKillsExp(charModel.charID);
-            killsNSavesExp = sharedExp*(savesExp + killsExp);
-            
+            float savesExp = combatModel.GetSavesExp(charModel.charID);     
+            float killsExp = combatModel.GetKillsExp(charModel.charID);
+            killsNSavesExp = sharedExp*(int)(savesExp + killsExp);            
         }
         void CalcFirstBloodExp()
         {
@@ -81,12 +80,12 @@ namespace Combat
                 ;
             seq.Play();
         }   
-        void FillLvlExpBar()
+        void FillLvlExpBar(int expAdded)
         {           
             int deltaExp = lvlNExpSO.GetdeltaExpPts4Lvl(charModel.charLvl);
             int thresholdExp = lvlNExpSO.GetThresholdExpPts4Lvl(charModel.charLvl);
             lvlbarImg.DOFillAmount(((float)charModel.mainExp -thresholdExp) / deltaExp,0.1f);
-            int currExp = charModel.mainExp + sharedExp + manualExp + firstBloodExp + killsNSavesExp; 
+            int currExp = charModel.mainExp + expAdded; 
             if (!charModel.LvlUpCharChk(currExp))
             {
                 charModel.LvlNExpUpdate(currExp);
@@ -165,7 +164,7 @@ namespace Combat
             manualExp = CombatService.Instance.GetManualExp();
             expDetailedView.AddManualExpDsply(manualExp);
             combatEndView.OnManualExpAwarded();
-            FillLvlExpBar();
+            FillLvlExpBar(manualExp);
         }
         public void OnPointerClick(PointerEventData eventData)
         {

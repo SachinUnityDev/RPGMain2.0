@@ -64,8 +64,8 @@ MonoBehaviour:
     maxLimit: 15
     isClamped: 0
   - AttribName: 3
-    currValue: 4
-    baseValue: 4
+    currValue: 6
+    baseValue: 6
     desc: Determinant value for hitting correct target by Magical attacks or Misfire.
     minLimit: 0
     maxLimit: 12
@@ -163,11 +163,11 @@ MonoBehaviour:
     maxLimit: 60
     isClamped: 0
   - AttribName: 17
-    currValue: 1
-    baseValue: 1
+    currValue: 2
+    baseValue: 2
     desc: Percentage value to mitigate incoming Dark damage.
     minLimit: 0
-    maxLimit: 0
+    maxLimit: 10
     isClamped: 0
   - AttribName: 18
     currValue: 0

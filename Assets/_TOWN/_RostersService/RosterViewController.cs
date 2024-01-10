@@ -99,7 +99,18 @@ namespace Common
 
             draggedGORect.localScale = Vector3.one;
             draggedGORect.anchoredPosition = new Vector3(0, 0, 0);
-            PopulateCharScroll();
+            // if slot parent ==
+            if(slotParent.GetComponent<PartyPortraitSlotController>() != null)
+            {
+                slotParent.GetComponent<PartyPortraitSlotController>()
+                    .OnAddChar2Slot(portraitDragNDrop.gameObject); 
+            }
+            else
+            {
+                PopulateCharScroll();
+            }
+        
+
             Destroy(portraitDragNDrop.gameObject);
         }
         void OnInviteBtnPressed()

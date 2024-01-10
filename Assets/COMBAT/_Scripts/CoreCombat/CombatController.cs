@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Common;
 using Combat;
+using System;
 
 namespace Combat
 {   
@@ -54,7 +55,12 @@ namespace Combat
 
         }
 
-
+        public void CnvrtRmgAP2StmGain()
+        {
+            if(actionPts > 0)
+            charController.ChangeStat(CauseType.ActionsPts, (int)0, charController.charModel.charID
+                                                               , StatName.stamina, +actionPts * 2); 
+        }
 
         public void SetActionPts()  // SOT ONLY 
         {

@@ -109,25 +109,31 @@ namespace Combat
         {
             targetGO = SkillService.Instance.currentTargetDyna.charGO;
             targetController = targetGO.GetComponent<CharController>();
-            if (skillModel.castTime >0)
-                CombatEventService.Instance.OnEOR1 += Tick;
-
             if (skillModel.maxUsagePerCombat > 0)
             {
                 skillModel.noOfTimesUsed++;
             }
-            else
+            if (skillModel.attackType != AttackType.Remote)
+            {
+                if (skillModel.castTime > 0)
+                    CombatEventService.Instance.OnEOR1 += Tick;
+
+                if(skillModel.cd >= 0)
+                {
+                    skillModel.lastUsedInRound = CombatEventService.Instance.currentRound;
+                }
+                charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatName.stamina, -skillModel.staminaReq);
+            }            
+        }  
+        public virtual void OnRemoteUse()
+        {
+            if (skillModel.cd >= 0)
             {
                 skillModel.lastUsedInRound = CombatEventService.Instance.currentRound;
             }
             charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatName.stamina, -skillModel.staminaReq);
-           
-            //if(charController.charModel.charMode == CharMode.Enemy)
-            //    charController.GetComponent<PassiveSkillsController>().ApplyPassiveSkills(targetController);
+        }
 
-
-           
-        }  // actual Skill FX // container Skill Data
         public abstract void ApplyFX1();
         public abstract void ApplyFX2();
         public abstract void ApplyFX3();
@@ -169,7 +175,7 @@ namespace Combat
         public virtual void Tick(int roundNo)
         {
             int roundCounter = roundNo - skillModel.lastUsedInRound;
-            //  Debug.Log("INSIDE TICK " + roundCounter + "CAST time " + skillModel.castTime);
+              Debug.Log("INSIDE TICK " + roundCounter + "CAST time " + skillModel.castTime);
 
             if (roundCounter >= skillModel.castTime)
                 SkillEnd();
@@ -322,6 +328,13 @@ namespace Combat
                     }
                 }
             }
+        }
+
+        public bool IsDodged()
+        {
+            if (targetController.damageController.strikeType == StrikeType.Dodged)
+                return true;
+            return false;
         }
     }
 

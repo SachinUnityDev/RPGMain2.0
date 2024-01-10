@@ -86,29 +86,29 @@ namespace Combat
             }
         }
 
-        public int GetKillsExp(int charID)
+        public float GetKillsExp(int charID)
         {
             float killsExp = 0; 
             foreach(KilledData kill in allKills)
             {
                 if(kill.strikeModel.charID == charID)
                 {
-                    killsExp += kill.killedModel.charLvl/9;     
+                    killsExp += (float)kill.killedModel.charLvl/6;     
                 }
             }
-            return (int)killsExp; 
+            return killsExp; 
         }
-        public int GetSavesExp(int charID)
+        public float GetSavesExp(int charID)
         {
             float saveExp = 0; 
             foreach (CompSavedData saveData in allSaved)
             {
                 if(saveData.strikeModel.charID == charID)
                 {
-                    saveExp = (saveData.savedCompModel.charLvl * saveData.savedCount) / 6; 
+                    saveExp = (float)(saveData.savedCompModel.charLvl * saveData.savedCount) / 4; 
                 }
             }
-            return (int)saveExp; 
+            return saveExp; 
         }
     }
 

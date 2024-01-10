@@ -59,7 +59,7 @@ namespace Combat
 
         public override void ApplyFX2()
         {
-            if (targetController != null)
+            if (targetController & !IsDodged())
                 targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
                          , AttribName.focus, -2, skillModel.timeFrame, skillModel.castTime, false);
         }
@@ -76,7 +76,8 @@ namespace Combat
 
         public override void ApplyVFx()
         {
-            SkillService.Instance.skillFXMoveController.ApplyRunguFX(PerkType.None);
+            if (targetController & !IsDodged())
+                SkillService.Instance.skillFXMoveController.RangedSingleStrike(PerkType.None, strikeNos);
         }
 
         public override void DisplayFX1()

@@ -696,13 +696,12 @@ namespace Combat
                 IRemoteSkill iRemote = skillBase as IRemoteSkill; 
                 if(iRemote != null)
                 {
-                    iRemote.Init(cellPosData); 
+                    iRemote.Init(cellPosData);
+                    skillBase.OnRemoteUse(); 
                 }
-               // GridService.Instance.gridView.SetRemoteSkill(skillModel, cellPosData);
             }
            
             ClearPrevData();
-           // currSkillController.UpdateAllSkillState(charController);
             On_PostSkillApply(); // move to the next turn
             DeSelectSkill();
         }
@@ -712,10 +711,12 @@ namespace Combat
         #region Helpers
 
 
-        public AttackType GetSkillAttackType(SkillNames _skillName)
+        public AttackType GetSkillAttackType(SkillNames skillName)
         {
-
-
+            SkillModel skillModel = currSkillController.GetSkillModel(skillName);
+            if (skillModel != null)
+                return skillModel.attackType; 
+            Debug.Log("SKILLMODEL Not found!!" + skillName);
             return AttackType.None; 
         }
 

@@ -23,6 +23,9 @@ namespace Combat
         [SerializeField] HpRegenView hpRegenView;
         [SerializeField] StmRegenView stmRegenView;
 
+        [Header("On Hover Scripts")]
+        [SerializeField] OnHoverHpBar onHoverHpBar;
+
         [Header("Global Var")]
         CharController charController; 
         private void OnEnable()
@@ -48,9 +51,15 @@ namespace Combat
             {
                 portView.transform.DOScaleY(0.0f, 0.4f);
             }
+            InitOnHover(); 
             FillNameNTxt();
             FillBars();
             FillHpNStmRegen(); 
+        }
+        void InitOnHover()
+        {
+            onHoverHpBar.InitOnHoverTxt(charController);
+            //onHoverStmBar.InitOnHoverTxt(charController);
         }
         void FillNameNTxt()
         {

@@ -221,69 +221,69 @@ namespace Combat
         public void SetSelectCharPortrait(CharController charController)
         {
          
-             //  Transform charOnTurnBtn = charOnTurn.transform; 
-            CharMode charMode = charController.charModel.charMode;
+           //  //  Transform charOnTurnBtn = charOnTurn.transform; 
+           // CharMode charMode = charController.charModel.charMode;
 
-            RectTransform portraitRectAlly = PortraitPanelAlly.GetComponent<RectTransform>();
-            RectTransform portRectEnemy = PortraitPanelEnemy.GetComponent<RectTransform>();
-           // Transform fortTrans = PortraitPanelAlly.transform.GetChild(3);
-            Transform currPanel; 
-            charOnTurn.SetActive(true);
-            if (charMode == CharMode.Ally)
-            {
-                currPanel = PortraitPanelAlly.transform;            
-                portRectEnemy.DOScaleY(0.0f, 0.4f);
-                portraitRectAlly.DOScaleY(1.0f, 0.4f);
+           // RectTransform portraitRectAlly = PortraitPanelAlly.GetComponent<RectTransform>();
+           // RectTransform portRectEnemy = PortraitPanelEnemy.GetComponent<RectTransform>();
+           //// Transform fortTrans = PortraitPanelAlly.transform.GetChild(3);
+           // Transform currPanel; 
+           // charOnTurn.SetActive(true);
+           // if (charMode == CharMode.Ally)
+           // {
+           //     currPanel = PortraitPanelAlly.transform;            
+           //     portRectEnemy.DOScaleY(0.0f, 0.4f);
+           //     portraitRectAlly.DOScaleY(1.0f, 0.4f);
 
-            }
-            else
-            {
-                currPanel = portRectEnemy.transform;
-                portRectEnemy.DOScaleY(1.0f, 0.4f);
-                portraitRectAlly.DOScaleY(0.0f, 0.4f);
-            }
+           // }
+           // else
+           // {
+           //     currPanel = portRectEnemy.transform;
+           //     portRectEnemy.DOScaleY(1.0f, 0.4f);
+           //     portraitRectAlly.DOScaleY(0.0f, 0.4f);
+           // }
 
-            Image charImg = currPanel.transform.GetChild(0).GetComponent<Image>();
-            charImg.sprite = charController.charModel.charSprite;
-            // name 
-            currPanel.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text
-                = charController.charModel.charName.ToString();
+           // Image charImg = currPanel.transform.GetChild(0).GetComponent<Image>();
+           // charImg.sprite = charController.charModel.charSprite;
+           // // name 
+           // currPanel.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text
+           //     = charController.charModel.charName.ToString();
 
-            // bars
-            Transform portraitBars = currPanel.transform.GetChild(2);
-            Image HPBarImg = portraitBars.GetChild(0).GetChild(0).GetComponent<Image>();
-            Image StaminaBarImg = portraitBars.GetChild(1).GetChild(0).GetComponent<Image>();
+           // // bars
+           // Transform portraitBars = currPanel.transform.GetChild(2);
+           // Image HPBarImg = portraitBars.GetChild(0).GetChild(0).GetComponent<Image>();
+           // Image StaminaBarImg = portraitBars.GetChild(1).GetChild(0).GetComponent<Image>();
 
-            StatData HPData = charController.GetStat(StatName.health);
-            StatData StaminaData = charController.GetStat(StatName.stamina);
+           // StatData HPData = charController.GetStat(StatName.health);
+           // StatData StaminaData = charController.GetStat(StatName.stamina);
 
-            // Change fill
-            float HPbarValue = HPData.currValue / HPData.maxLimit;
-            float staminaBarVal = StaminaData.currValue / StaminaData.maxLimit;
-           // Debug.Log("HP Values " + HPbarValue + "Stamina" + staminaBarVal); 
-            HPBarImg.fillAmount = HPbarValue;
-            StaminaBarImg.fillAmount = staminaBarVal;
+           // // Change fill
+           // float HPbarValue = HPData.currValue / HPData.maxLimit;
+           // float staminaBarVal = StaminaData.currValue / StaminaData.maxLimit;
+           //// Debug.Log("HP Values " + HPbarValue + "Stamina" + staminaBarVal); 
+           // HPBarImg.fillAmount = HPbarValue;
+           // StaminaBarImg.fillAmount = staminaBarVal;
 
-            if (charMode == CharMode.Ally)
-            {
-                // fortitude
-                //StatData fortData = charController.GetStat(StatName.fortitude);
-                //Transform fortCircleTrans = PortraitPanelAlly.transform.GetChild(3);
+           // if (charMode == CharMode.Ally)
+           // {
+           //     // fortitude
+           //     //StatData fortData = charController.GetStat(StatName.fortitude);
+           //     //Transform fortCircleTrans = PortraitPanelAlly.transform.GetChild(3);
 
-                //// Fortitude Update 
-                //if (fortData.currValue >= 0)
-                //{
-                //    fortCircleTrans.GetChild(0).GetChild(0).GetComponent<Image>().fillAmount = fortData.currValue / fortData.maxLimit;
-                //}
-                //else if (fortData.currValue <= 0)
-                //{
-                //    fortCircleTrans.GetChild(0).GetChild(1).GetComponent<Image>().fillAmount = Mathf.Abs(fortData.currValue / fortData.maxLimit);
-                //}
-                //fortCircleTrans.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = fortData.currValue.ToString();
-                //float fortOrg = charController.GetAttrib(AttribName.fortOrg).currValue; 
+           //     //// Fortitude Update 
+           //     //if (fortData.currValue >= 0)
+           //     //{
+           //     //    fortCircleTrans.GetChild(0).GetChild(0).GetComponent<Image>().fillAmount = fortData.currValue / fortData.maxLimit;
+           //     //}
+           //     //else if (fortData.currValue <= 0)
+           //     //{
+           //     //    fortCircleTrans.GetChild(0).GetChild(1).GetComponent<Image>().fillAmount = Mathf.Abs(fortData.currValue / fortData.maxLimit);
+           //     //}
+           //     //fortCircleTrans.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = fortData.currValue.ToString();
+           //     //float fortOrg = charController.GetAttrib(AttribName.fortOrg).currValue; 
 
-                //fortCircleTrans.DORotate(new Vector3(0, 0, -fortOrg * 6), 0.5f);
-            }       
+           //     //fortCircleTrans.DORotate(new Vector3(0, 0, -fortOrg * 6), 0.5f);
+           // }       
         }
         public void UpdateTurnBtn(CharController charController)
         {   

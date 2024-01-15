@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 671b1f6de47f40c498950a8bcbe370be,
     type: 2}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 1e397e7fd65bfce4194615063c37c7b0,
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 73fa4dd5e5343024a95ed56e6da89a10,
     type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -4592,7 +4592,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4735328bae5bfcb48b3243f44defdc01, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

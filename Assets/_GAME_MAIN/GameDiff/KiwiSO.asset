@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: KiwiSO
   m_EditorClassIdentifier: 
   gameDiff: 0
-  maxRoundLimit: 1
+  maxRoundLimit: 6
   maxRoundLimitBoss: 12
   partyLvlFactor: 2.1
   allFortIncPerEOQ:

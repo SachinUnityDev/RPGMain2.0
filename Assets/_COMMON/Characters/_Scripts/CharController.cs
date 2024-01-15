@@ -8,6 +8,9 @@ using Interactables;
 using Quest;
 using Town;
 using System.Linq;
+using Spine.Unity;
+using TMPro;
+using NUnit.Framework.Internal;
 
 namespace Common
 {   
@@ -60,11 +63,19 @@ namespace Common
         public FleeController fleeController;
 
         float prevHPVal = 0f;
-        float prevStaminaVal = 0f; 
-
+        float prevStaminaVal = 0f;
+        [Header("for shader switch")]
+        [SerializeField] Shader shaderN;
+        [SerializeField] Shader shaderOnHover;
+        [SerializeField] bool isCharHovered = false;
+        [SerializeField] float prevTime = 0f; 
         private void OnEnable()
         {
-            
+            shaderN = Shader.Find("Spine/Skeleton");
+          //  shaderN = Shader.Find("Shader Graphs/ShaderGraph_Particles_Lit");
+            shaderOnHover = Shader.Find("Spine/Special/Skeleton Grayscale");
+            //shaderOnHover = Shader.Find("Spine/Blend Modes/Skeleton PMA Screen");
+            isCharHovered = false; 
 
         }
         private void OnDisable()
@@ -151,12 +162,39 @@ namespace Common
                     else return; // to fix null error on wrong target click
                 }else if (CombatService.Instance.combatState == CombatState.INCombat_normal
                                  || CombatService.Instance.combatState == CombatState.INTactics)
-                                            CombatEventService.Instance.On_CharClicked(gameObject);
+                {
+                    CombatEventService.Instance.On_CharClicked(gameObject);
+                }
+                    
             }else
             {
                 CombatEventService.Instance.On_CharHovered(gameObject);
             }
         }
+        private void OnMouseEnter()
+        {
+            SkeletonAnimation skeletonAnim = gameObject.GetComponentInChildren<SkeletonAnimation>();
+            if (skeletonAnim == null) return; // can happen during skill use
+            foreach (Material mat in skeletonAnim.gameObject.GetComponent<MeshRenderer>().sharedMaterials)
+            {
+                mat.shader = shaderOnHover;           
+            }
+        }
+        private void OnMouseExit()
+        {
+            SkeletonAnimation skeletonAnim = gameObject.GetComponentInChildren<SkeletonAnimation>();
+            if (skeletonAnim == null) return; // can happen during skill use
+            foreach (Material mat in skeletonAnim.gameObject.GetComponent<MeshRenderer>().sharedMaterials)
+            {
+                mat.shader = shaderN;
+                //int id = mat.shader.FindPropertyIndex("_Cutoff");
+                //Color color = new Color(0, 0, 0, 1);
+                //mat.SetColor(ShaderUtilities.ID_FaceColor, color); 
+                //Debug.Log("PROPERTY" + mat.shader.GetPropertyDefaultFloatValue(id));
+            }
+        }
+
+
         public float GetStatChance(AttribName _attribName, float _statValue)
         {
             foreach (AttribChanceData  statChanceData in CharService.Instance.statChanceSO.allStatChanceData)
@@ -642,6 +680,6 @@ namespace Common
         {
             transform.GetChild(2).GetComponent<HPBarView>().FillHPBar(this);
         }
-
+      
     }
 }

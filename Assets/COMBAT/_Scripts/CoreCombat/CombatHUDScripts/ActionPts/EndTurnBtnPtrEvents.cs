@@ -18,14 +18,12 @@ namespace Combat
 
         Image img;
         [SerializeField] TextMeshProUGUI descTxt; 
-
-        
-
         public void OnPointerClick(PointerEventData eventData)
         {
             img.sprite = spriteClicked;
             if (CombatService.Instance.combatState == CombatState.INTactics)
             {
+                gameObject.SetActive(false);
                 CombatEventService.Instance.On_SOC(); 
             }
             else

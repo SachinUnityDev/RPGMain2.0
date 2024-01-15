@@ -33,7 +33,7 @@ namespace Combat
         GameObject SkillCard; 
       
         public SkillController1 skillController;
-        //public SkillBase skillBase;
+        
 
 #endregion
 
@@ -41,29 +41,21 @@ namespace Combat
         {
             index = -1; 
      
-            //CombatEventService.Instance.OnSOTactics +=
-            //   () => SetSkillsPanel(CombatService.Instance.defaultChar.charModel.charName);
-            //CombatEventService.Instance.OnCharOnTurnSet += SetSkillsPanel;
-           
-            //  () => SetSkillsPanel(CombatService.Instance.currCharClicked.charModel.charID);
-
             CombatEventService.Instance.OnCharClicked += SetSkillsPanel;
             CombatEventService.Instance.OnCharClicked += (CharController c)=> FillSkillClickedState(-1);
             CombatEventService.Instance.OnEOT += () => FillSkillClickedState(-1);
-            CombatEventService.Instance.OnCombatInit += InitSkillBtns;
+            CombatEventService.Instance.OnCombatInit += 
+            (CombatState startState, LandscapeNames landscape, EnemyPackName enemyPackName) =>InitSkillBtns();
             InitSkillBtns();
-          
         }
 
         private void OnDisable()
         {
-           // CombatEventService.Instance.OnCharOnTurnSet -= SetSkillsPanel;
-            //() => SetSkillsPanel(CombatService.Instance.currCharOnTurn.charModel.charID);
             CombatEventService.Instance.OnCharClicked -= SetSkillsPanel;
             CombatEventService.Instance.OnCharClicked -= (CharController c) => FillSkillClickedState(-1);
             CombatEventService.Instance.OnEOT -= () => FillSkillClickedState(-1);
-            CombatEventService.Instance.OnCombatInit -= InitSkillBtns;
-          
+            CombatEventService.Instance.OnCombatInit -= 
+                (CombatState startState, LandscapeNames landscape, EnemyPackName enemyPackName) => InitSkillBtns();            
         }
         void InitSkillBtns()
         {

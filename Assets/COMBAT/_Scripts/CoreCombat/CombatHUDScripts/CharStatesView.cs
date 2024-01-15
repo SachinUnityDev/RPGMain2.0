@@ -15,18 +15,22 @@ namespace Combat
         public GameObject posStatesCard;
         public GameObject negStatesCard; 
 
-        private void Start() 
+        private void OnEnable() 
         {
+            CharStatesPanelIconsClear();
+            CombatEventService.Instance.OnSOTactics += CharStatesPanelIconsClear;
+            CombatEventService.Instance.OnSOC += CharStatesPanelIconsClear;
             CharStatesService.Instance.OnCharStateStart += UpdateCharStateChg;
             CombatEventService.Instance.OnCharOnTurnSet += SetCombatStatesDisplay;
             CombatEventService.Instance.OnCharClicked += SetCombatStatesDisplay;
             CombatEventService.Instance.OnCharOnTurnSet += OnCharSet;
             CombatEventService.Instance.OnEOT += OnEOT;
-
         }
 
         private void OnDisable()
         {
+            CombatEventService.Instance.OnSOTactics -= CharStatesPanelIconsClear;
+            CombatEventService.Instance.OnSOC -= CharStatesPanelIconsClear;
             CharStatesService.Instance.OnCharStateStart -= UpdateCharStateChg;
             CombatEventService.Instance.OnCharOnTurnSet -= SetCombatStatesDisplay;
             CombatEventService.Instance.OnCharOnTurnSet -= OnCharSet;
@@ -45,7 +49,7 @@ namespace Combat
         }
         public void InitCharStatesView()
         {
-
+            CharStatesPanelIconsClear();
         }
         public GameObject GetCharStateCard(CharStateBehavior statesBehaviour)
         {
@@ -71,8 +75,6 @@ namespace Combat
         public void SetCombatStatesDisplay(CharController charController)
         {
             // get reference to Icon SO 
-         
-
             int k = 0;
 
             List<CharStatesBase> allCharStateBases = charController.charStateController.allCharBases;

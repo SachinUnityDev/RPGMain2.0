@@ -483,8 +483,11 @@ namespace Common
             if (GameService.Instance.gameModel.gameState != GameState.InCombat) return;
             
             _charController.charModel.stateOfChar = StateOfChar.Dead; 
+            _charController.gameObject.GetComponent<BoxCollider2D>().enabled= false;
+            // grid service Unoccupied to be added
            // allCharInCombat.Remove(_charController); // rest of the list are update on EOT
             OnCharDeath?.Invoke(_charController);
+
             charDiedinLastTurn.Add(_charController);
             if (_charController.charModel.charName == CharNames.Abbas)
             {

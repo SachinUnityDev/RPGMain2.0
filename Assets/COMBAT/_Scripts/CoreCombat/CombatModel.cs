@@ -39,6 +39,7 @@ namespace Combat
     {
         public QuestNames questName; 
         public ObjNames objName;
+        public LandscapeNames landscapeName; 
 
 
         public EnemyPackName enemyPackName;
@@ -49,10 +50,11 @@ namespace Combat
         public List<KilledData> allKills = new List<KilledData>();  
         public List<CompSavedData> allSaved = new List<CompSavedData>();
 
-        public CombatModel(QuestNames questName, ObjNames objName)
+        public CombatModel(QuestNames questName, ObjNames objName, LandscapeNames landscapeName)
         {
             this.questName = questName;
             this.objName = objName; 
+            this.landscapeName = landscapeName;  
         }
 
         public void OnCombatEnd(CombatResult combatResult, CombatEndCondition combatEndCondition)

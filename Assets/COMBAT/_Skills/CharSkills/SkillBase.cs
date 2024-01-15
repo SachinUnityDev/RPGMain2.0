@@ -139,7 +139,6 @@ namespace Combat
         public abstract void ApplyFX3();
         public abstract void ApplyVFx();
         public abstract void ApplyMoveFx();
-
         public abstract void DisplayFX1();
         public abstract void DisplayFX2();
         public abstract void DisplayFX3();

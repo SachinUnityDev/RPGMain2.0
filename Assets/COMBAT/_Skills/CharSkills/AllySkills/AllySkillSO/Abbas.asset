@@ -289,7 +289,7 @@ MonoBehaviour:
     staminareq: 2
     castTime: -1
     timeFrame: 1
-    maxUsagePerCombat: -1
+    maxUsagePerCombat: -5
     skillIncli: 10
     baseWeight: 0
     isActive: 0

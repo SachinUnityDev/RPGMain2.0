@@ -8,15 +8,14 @@ namespace Quest
 {
 
     public class LandscapeService : MonoSingletonGeneric<LandscapeService>  
-    {
-        
+    {   
         public event Action<LandscapeNames> OnLandscapeEnter;
         public event Action<LandscapeNames> OnLandscapeExit;
 
         [Header(" All Land SO")]
         public AllLandscapeSO allLandSO; 
 
-        [Header("global variable")   ]
+        [Header("global variable")]
         public LandscapeNames currLandscape;
 
 
@@ -45,6 +44,5 @@ namespace Quest
             currLandscape = landName;
             OnLandscapeExit?.Invoke(landName);
         }
-        
     }
 }

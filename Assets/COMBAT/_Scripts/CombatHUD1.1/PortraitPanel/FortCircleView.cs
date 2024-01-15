@@ -10,8 +10,6 @@ using UnityEngine.UI;
 
 namespace Combat
 {
-
-
     public class FortCircleView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
 

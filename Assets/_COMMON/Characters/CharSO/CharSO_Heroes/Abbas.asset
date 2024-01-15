@@ -57,14 +57,14 @@ MonoBehaviour:
     baseValue: 7
     desc: Base value for Physical and Magical attacks.
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 30
     isClamped: 0
   - AttribName: 2
     currValue: 7
     baseValue: 7
     desc: Chance to land Physical attack to a target.
     minLimit: 0
-    maxLimit: 15
+    maxLimit: 12
     isClamped: 0
   - AttribName: 3
     currValue: 3
@@ -114,55 +114,55 @@ MonoBehaviour:
     baseValue: 0
     desc: Value to mitigate incoming Physical damage.
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 30
     isClamped: 0
   - AttribName: 10
     currValue: 3
     baseValue: 3
     desc: Chance to evade a Physical attack.
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 12
     isClamped: 0
   - AttribName: 11
     currValue: 10
     baseValue: 10
     desc: Percentage value to mitigate incoming Fire damage.
-    minLimit: -60
+    minLimit: -30
     maxLimit: 80
     isClamped: 0
   - AttribName: 12
     currValue: 20
     baseValue: 20
     desc: Percentage value to mitigate incoming Earth damage.
-    minLimit: -60
+    minLimit: -30
     maxLimit: 80
     isClamped: 0
   - AttribName: 13
     currValue: 0
     baseValue: 0
     desc: Percentage value to mitigate incoming Water damage.
-    minLimit: -60
+    minLimit: -30
     maxLimit: 80
     isClamped: 0
   - AttribName: 14
     currValue: -10
     baseValue: -10
     desc: Percentage value to mitigate incoming Air damage.
-    minLimit: -60
+    minLimit: -30
     maxLimit: 80
     isClamped: 0
   - AttribName: 15
     currValue: 0
     baseValue: 0
     desc: Percentage value to mitigate incoming Light damage.
-    minLimit: -30
+    minLimit: -20
     maxLimit: 60
     isClamped: 0
   - AttribName: 16
     currValue: -10
     baseValue: -10
     desc: Percentage value to mitigate incoming Dark damage.
-    minLimit: -30
+    minLimit: -20
     maxLimit: 60
     isClamped: 0
   - AttribName: 17
@@ -170,14 +170,14 @@ MonoBehaviour:
     baseValue: 2
     desc: Percentage value to mitigate incoming Dark damage.
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 6
     isClamped: 0
   - AttribName: 18
     currValue: 0
     baseValue: 0
     desc: Percentage value to mitigate incoming Dark damage.
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 6
     isClamped: 0
   - AttribName: 19
     currValue: 0
@@ -191,14 +191,14 @@ MonoBehaviour:
     baseValue: 2
     desc: Percentage value to mitigate incoming Dark damage.
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 30
     isClamped: 0
   - AttribName: 21
     currValue: 10
     baseValue: 10
     desc: Percentage value to mitigate incoming Dark damage.
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 30
     isClamped: 0
   statList:
   - statName: 1

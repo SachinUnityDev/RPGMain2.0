@@ -52,16 +52,16 @@ MonoBehaviour:
   - AttribName: 1
     currValue: 4
     baseValue: 4
-    desc: Base value for Physical and Magical attacks.
+    desc: Min value for Physical and Magical attacks.
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 30
     isClamped: 0
   - AttribName: 2
     currValue: 6
     baseValue: 6
     desc: Chance to land Physical attack to a target.
     minLimit: 0
-    maxLimit: 15
+    maxLimit: 12
     isClamped: 0
   - AttribName: 3
     currValue: 0
@@ -80,15 +80,15 @@ MonoBehaviour:
   - AttribName: 5
     currValue: 6
     baseValue: 6
-    desc: Determinant value for extra action or pass action.
+    desc: Determinant value for gain or lose AP.
     minLimit: 0
     maxLimit: 12
     isClamped: 0
   - AttribName: 6
-    currValue: 7
-    baseValue: 7
-    desc: Main determinant for turn order. Increases chance to keep action after
-      using Move.
+    currValue: 4
+    baseValue: 4
+    desc: Main determinant for turn order. Increases chance to gain AP by using Move
+      skills.
     minLimit: 0
     maxLimit: 12
     isClamped: 0
@@ -109,9 +109,9 @@ MonoBehaviour:
   - AttribName: 9
     currValue: 1
     baseValue: 1
-    desc: Value to mitigate incoming Physical damage.
+    desc: Min value to mitigate incoming Physical damage.
     minLimit: 0
-    maxLimit: 10
+    maxLimit: 30
     isClamped: 0
   - AttribName: 10
     currValue: 1
@@ -124,107 +124,107 @@ MonoBehaviour:
     currValue: -20
     baseValue: -20
     desc: Percentage value to mitigate incoming Fire damage.
-    minLimit: -60
+    minLimit: -30
     maxLimit: 80
     isClamped: 0
   - AttribName: 12
     currValue: 35
     baseValue: 35
     desc: Percentage value to mitigate incoming Earth damage.
-    minLimit: -60
+    minLimit: -30
     maxLimit: 80
     isClamped: 0
   - AttribName: 13
     currValue: 20
     baseValue: 20
     desc: Percentage value to mitigate incoming Water damage.
-    minLimit: -60
+    minLimit: -30
     maxLimit: 80
     isClamped: 0
   - AttribName: 14
     currValue: 0
     baseValue: 0
     desc: Percentage value to mitigate incoming Air damage.
-    minLimit: -60
+    minLimit: -30
     maxLimit: 80
     isClamped: 0
   - AttribName: 15
     currValue: 0
     baseValue: 0
     desc: Percentage value to mitigate incoming Light damage.
-    minLimit: -30
+    minLimit: -20
     maxLimit: 60
     isClamped: 0
   - AttribName: 16
     currValue: 0
     baseValue: 0
     desc: Percentage value to mitigate incoming Dark damage.
-    minLimit: -30
+    minLimit: -20
     maxLimit: 60
     isClamped: 0
   - AttribName: 17
     currValue: 2
     baseValue: 2
-    desc: Percentage value to mitigate incoming Dark damage.
+    desc: Value to gain Stamina per rd.
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 6
     isClamped: 0
   - AttribName: 18
     currValue: 0
     baseValue: 0
-    desc: Percentage value to mitigate incoming Dark damage.
+    desc: Value to gain Health per rd.
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 6
     isClamped: 0
   - AttribName: 19
     currValue: 0
     baseValue: 0
-    desc: Percentage value to mitigate incoming Dark damage.
+    desc: Value to reset Fortitude after each combat.
     minLimit: -24
     maxLimit: 24
     isClamped: 0
   - AttribName: 20
     currValue: 3
     baseValue: 3
-    desc: Percentage value to mitigate incoming Dark damage.
+    desc: Max value to mitigate incoming Physical damage.
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 30
     isClamped: 0
   - AttribName: 21
     currValue: 6
     baseValue: 6
-    desc: Percentage value to mitigate incoming Dark damage.
+    desc: Max value for Physical and Magical attacks.
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 30
     isClamped: 0
   statList:
   - statName: 1
     currValue: 32
-    desc: Health is health, you know it...
+    desc: Health is health, you know it.
     minLimit: 0
-    maxLimit: 32
+    maxLimit: 400
     isClamped: 0
   - statName: 2
     currValue: 24
-    desc: Resource to use skills.
+    desc: Fuel for using skills.
     minLimit: 0
-    maxLimit: 24
+    maxLimit: 300
     isClamped: 0
   - statName: 3
     currValue: 0
-    desc: Be among those who dare to dare!
+    desc: Value that shows your fear or faith.
     minLimit: -30
     maxLimit: 30
     isClamped: 0
   - statName: 4
     currValue: 0
-    desc: Start losing Health once Hunger is 100%.
+    desc: When full, get Starving status.
     minLimit: 0
     maxLimit: 100
     isClamped: 0
   - statName: 5
     currValue: 0
-    desc: Start losing Stamina once Thirst is 100%.
+    desc: When full, get Unslakable status
     minLimit: 0
     maxLimit: 100
     isClamped: 0

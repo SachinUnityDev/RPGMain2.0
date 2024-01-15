@@ -1,6 +1,6 @@
 Shader "Spine/Skeleton" {
 	Properties {
-		_Cutoff ("Shadow alpha cutoff", Range(0,1)) = 0.1
+		_Cutoff ("Shadow alpha cutoff", Range(0,1)) = 0.8
 		[NoScaleOffset] _MainTex ("Main Texture", 2D) = "black" {}
 		[Toggle(_STRAIGHT_ALPHA_INPUT)] _StraightAlphaInput("Straight Alpha Texture", Int) = 0
 		[HideInInspector] _StencilRef("Stencil Reference", Float) = 1.0

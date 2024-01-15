@@ -9,7 +9,7 @@ namespace Combat
     {
         [Header(" TBR")]
         [SerializeField] ActionPtsPtrEvents actionPtsPtrEvents;
-        
+        [SerializeField] GameObject endTurnBtn; 
         public int actionPts;
         [SerializeField] Transform actionPtsDOT; 
 
@@ -24,13 +24,22 @@ namespace Combat
             CombatEventService.Instance.OnEOT += HideActionPtsDsply;
 
             CombatEventService.Instance.OnCombatInit -= HideActionPtsDOTs;
-            CombatEventService.Instance.OnCombatInit += HideActionPtsDOTs; 
-          
+            CombatEventService.Instance.OnCombatInit += HideActionPtsDOTs;
+            // end turn btn
+            CombatEventService.Instance.OnSOTactics += ShowEndTurnBtn;
+            CombatEventService.Instance.OnSOR1 += (int rd) =>ShowEndTurnBtn();
+        }
+        private void OnDisable()
+        {
+            CombatEventService.Instance.OnSOTactics -= ShowEndTurnBtn;
+            CombatEventService.Instance.OnSOR1 -= (int rd) => ShowEndTurnBtn();
+        }
+        void ShowEndTurnBtn()
+        {
+            endTurnBtn.SetActive(true);
         }
 
-
-
-        void HideActionPtsDOTs()
+        void HideActionPtsDOTs(CombatState startState, LandscapeNames landscape, EnemyPackName enemyPackName)
         {
           //  actionPtsPtrEvents.Init(this);
             foreach (Transform child in actionPtsDOT)

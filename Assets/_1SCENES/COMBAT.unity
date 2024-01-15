@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4402846, g: 0.4888413, b: 0.56901205, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3216,7 +3216,7 @@ GameObject:
   - component: {fileID: 158028035}
   - component: {fileID: 158028036}
   m_Layer: 5
-  m_Name: SettingNFleeView
+  m_Name: CombatOpts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6699,11 +6699,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 011392fb0e3a07a429f70c64b5097dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fearfulSprite: {fileID: 0}
-  faithfulSprite: {fileID: 0}
   fortText: {fileID: 2078409632}
   colorFort: {r: 1, g: 1, b: 1, a: 1}
-  colorFortOrg: {r: 0.8402847, g: 1, b: 0.63584906, a: 1}
+  colorFortOrg: {r: 0.7562791, g: 1, b: 0.44716978, a: 1}
 --- !u!1 &298632961
 GameObject:
   m_ObjectHideFlags: 0
@@ -12679,6 +12677,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0962164acfb91874faad85923c004a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rdDsply: {fileID: 1874706722}
+  rdDsplyTxt: {fileID: 1182890605}
   allyPort: {fileID: 1199111844}
   enemyPort: {fileID: 1109525322}
   ptrTrans: {fileID: 0}
@@ -19752,8 +19752,11 @@ MonoBehaviour:
   newIndex: 0
   charCount: 0
   TurnMode: 0
+  prevVal: 0
+  prevAttribName: 0
   allyTurnOrder: []
   enemyTurnOrder: []
+  charTurnOrder: []
 --- !u!114 &1044210484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19767,23 +19770,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combatEndView: {fileID: 948976894}
+  combatOpts: {fileID: 158028035}
   skillNameTxt: {fileID: 1770080155}
   statIconSO: {fileID: 11400000, guid: f4361e123155a814a94b66519c8be0c2, type: 2}
   transitionSO: {fileID: 11400000, guid: 2441255d5c7312c4a83281d3862a6e2e, type: 2}
-  maxExpectedLines: 10
-  buffTransX: 250
-  buffTransY: 250
-  buffView: {fileID: 0}
-  deBuffView: {fileID: 0}
-  buffListHt: 0
-  buffList: []
-  deBuffList: []
-  attribPanelToggleBtn: {fileID: 976581111}
-  AttributePanel: {fileID: 93756244}
-  CombatLogPanel: {fileID: 738457126}
-  PortraitPanelAlly: {fileID: 2030948827}
-  PortraitPanelEnemy: {fileID: 1004013976}
-  roundDisplayGO: {fileID: 1182890603}
+  combatBG: {fileID: 221729268}
   animPanel: {fileID: 4769939937040485285}
   charOnTurn: {fileID: 385033331}
   statBars: []
@@ -28336,6 +28327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionPtsPtrEvents: {fileID: 440346668}
+  endTurnBtn: {fileID: 663736134}
   actionPts: 0
   actionPtsDOT: {fileID: 440346665}
 --- !u!222 &1479356649
@@ -39230,8 +39222,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4285726657
+  m_fontColor: {r: 0.75686276, g: 1, b: 0.44705883, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 1
   m_fontColorGradient:
@@ -39256,7 +39248,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0

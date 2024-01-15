@@ -11,10 +11,7 @@ namespace Combat
 
     public class DeathGodessFX : MonoBehaviour
     {
-        [Header(" global var")]
-        [SerializeField] float intermediateSize = 0.85f;
-        [SerializeField] float startSize = 1.2f;
-
+ 
         
         public void PlayDeathAnim(CharController charController)
         {

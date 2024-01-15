@@ -14,13 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   landscapeName: 4
   hazardStr: -6 Fortitude Org
-  spriteData:
-    locationName: 1
-    spriteBG_Q_day: {fileID: 0}
-    spriteBG_Q_night: {fileID: 0}
-    spriteBG_C_day: {fileID: 21300000, guid: 2899381031022784e8c03201589c04e4, type: 3}
-    spriteBG_C_night: {fileID: 21300000, guid: 131584f7e5d592043a44ce3649460a0e, type: 3}
   iconSpriteDay: {fileID: 0}
   iconSpriteNight: {fileID: 0}
+  spriteBG_Q_day: {fileID: 0}
+  spriteBG_Q_night: {fileID: 0}
+  spriteBG_C_day: {fileID: 21300000, guid: 2899381031022784e8c03201589c04e4, type: 3}
+  spriteBG_C_night: {fileID: 21300000, guid: 131584f7e5d592043a44ce3649460a0e, type: 3}
   hungerMod: 0
   thirstMod: 0

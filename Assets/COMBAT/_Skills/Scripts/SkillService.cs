@@ -159,7 +159,6 @@ namespace Combat
                 CreateSkillCardGO(); 
             }           
         }
-
         void CreateSkillCardGO()
         {
             GameObject canvasGO = GameObject.FindGameObjectWithTag("Canvas");
@@ -172,7 +171,6 @@ namespace Combat
             skillCardGO.transform.localScale = Vector3.one;
             skillCardGO.SetActive(false);
         }
-
         void OnStartOfCombat(GameState gameState)
         {
             if (gameState != GameState.InCombat) return;
@@ -192,16 +190,10 @@ namespace Combat
             currSkillModel = skillModel;
             OnSkillSelectInInv?.Invoke(skillModel); 
         }
-        //public void On_SkillSelectInCombat(SkillModel skillModel)
-        //{
-        //    skillModelSelect = skillModel;
-        //    On_SkillSelected(skillModel.charName, skillModel.skillName);
-        //}
-      
+       
         #endregion
     
         #region SKILL_INIT related
-
         public void SetDefaultSkillForChar()
         {
             // get skillmodel and skillcontroller 
@@ -229,7 +221,6 @@ namespace Combat
             //SkillDataSO skillDataSo = GetSkillSO(CombatService.Instance.currCharOnTurn.charModel.charName);
             // defaultSkillName =  skillDataSo.allSkills[0].skillName; 
         }
-
         public void PopulateSkillTargets(CharController charController)
         {
             //if (charController.charModel.charMode == CharMode.Enemy) return; 
@@ -242,8 +233,8 @@ namespace Combat
              skillController.allPerkBases.ForEach(t => t.AddTargetPos());
             // skillController.CheckNUpdateSkillState();  // checked in view not needed here
         }
-        // ON SOC 
-        public void InitSkillControllers()
+        
+        public void InitSkillControllers()// ON SOC 
         {
             foreach (GameObject charGO in CharService.Instance.charsInPlay)
             {
@@ -373,7 +364,6 @@ namespace Combat
             Debug.Log("SKILL USED >>>>>" + skillEventData.skillModel.skillName); 
             OnSkillUsed?.Invoke(skillEventData);
         }
-
         void On_PostSkillApply()
         {
             // char Death update here 
@@ -382,7 +372,6 @@ namespace Combat
             CombatService.Instance.combatState = CombatState.INCombat_normal;
             PostSkillApply?.Invoke();
         }
-
         public void OnAITargetSelected(SkillModel skillModel)
         {
             if (currentTargetDyna == null)
@@ -410,7 +399,6 @@ namespace Combat
                 ;
             eventSeq.Play(); 
         }
-
         public void On_SkillSelected(CharNames _charName, SkillNames skillName)  // Ally Skill and perk "Skill Select" 
         {
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
@@ -435,7 +423,6 @@ namespace Combat
             currSkillController.SkillSelect(skillName);
 
         }
-
         public void ClearPrevSkillData()
         {
             ClearPrevData();
@@ -477,7 +464,6 @@ namespace Combat
             SkillWipe?.Invoke(); 
             SkillHovered?.Invoke(); 
         }
-
         bool HasteChk(CharController charController)
         {
             AttribData hasteData = charController.GetAttrib(AttribName.haste);
@@ -490,8 +476,6 @@ namespace Combat
             }                
             return false; 
         }
-
-
         public void On_PostSkill(SkillModel skillModel)
         {
             // ClearPrevData();  // redundant safety .. causing only one FX to play as it clears mainTargetDyna
@@ -529,9 +513,7 @@ namespace Combat
                 if (currCharOnturn.charModel.charMode == CharMode.Enemy)
                     Move2Nextturn();
             }
-        }
-        
-
+        }        
         public void Move2Nextturn()
         {
             CombatEventService.Instance.On_EOT();
@@ -673,14 +655,6 @@ namespace Combat
             return null; 
         }
 
-        //public PerkBaseData GetPerkData(PerkNames _perkName)
-        //{
-        //   // return allSkillPerksData.Find(t => t.perkName == _perkName); 
-        //}
-        //public void SetPerkState(PerkNames _perkName, PerkSelectState state)
-        //{
-        //  //  allSkillPerksData.Find(t => t.perkName == _perkName).state = state; 
-        //}
 
         #endregion
 
@@ -709,8 +683,6 @@ namespace Combat
         #endregion
 
         #region Helpers
-
-
         public AttackType GetSkillAttackType(SkillNames skillName)
         {
             SkillModel skillModel = currSkillController.GetSkillModel(skillName);
@@ -719,7 +691,6 @@ namespace Combat
             Debug.Log("SKILLMODEL Not found!!" + skillName);
             return AttackType.None; 
         }
-
         void ClearPrevData()
         {
             _OnSkillApply = null; SkillFXRemove = null; SkillApplyMoveFx = null;
@@ -744,8 +715,6 @@ namespace Combat
 
             return dynas; 
         }
-
-
         public void SkillEventtest()
         {
             Debug.Log("SkillApplied");
@@ -772,26 +741,14 @@ namespace Combat
         }
 
     }
-
-
 }
-//else 
-//{
-//    //if (skillModel != null) // skillmodel is null when no skill can be selected 
-//    //    skillView.UpdateSkillState(skillModel);
 
-//    //if (hasteChk)  // if haste chk true enemies get an extra strike 
-//    //{
-//    //    CombatService.Instance.roundController.SetSameCharOnTurn();
-//    //    return;
-//    //}
-//    if (combatController.actionPts > 0)// allies 
-//    {
-//        CombatService.Instance.roundController.SetSameCharOnTurn();
-//    }
-//    else
-//    {
-//        Move2Nextturn();
-//    }
+
+//public PerkBaseData GetPerkData(PerkNames _perkName)
+//{
+//   // return allSkillPerksData.Find(t => t.perkName == _perkName); 
 //}
-// }
+//public void SetPerkState(PerkNames _perkName, PerkSelectState state)
+//{
+//  //  allSkillPerksData.Find(t => t.perkName == _perkName).state = state; 
+//}

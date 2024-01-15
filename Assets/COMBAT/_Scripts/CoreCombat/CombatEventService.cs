@@ -8,6 +8,7 @@ using Interactables;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 using Quest;
+using Spine.Unity;
 
 namespace Combat
 {
@@ -19,7 +20,7 @@ namespace Combat
         public event Action <int> OnSOR1;// round no
         public event Action <int> OnEOR1;
         public event Action OnSOC;  
-        public event Action OnCombatInit;       
+        public event Action<CombatState, LandscapeNames, EnemyPackName> OnCombatInit;       
         public event Action OnEOC;      
         public event Action<CharController> OnCombatFlee;
         public event Action<CharController> OnDeathInCombat;
@@ -51,36 +52,28 @@ namespace Combat
         [Header(" Common round Counter")]
         public int currentRound = 1;
 
-
-
         [Header(" Combat result")]  // every time a combat end add here 
-
+        
         public CombatModel combatModel = null; 
         public CombatResult currCombatResult; 
         
-        RoundController roundController; 
+        RoundController roundController;
 
-
-        // Start is called before the first frame update
         void Start()
-        {
-         
+        {         
             SceneManager.sceneLoaded += OnSceneLoaded;
-
         }
         private void OnDisable()
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
 
         }
-        // on scene Load
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
-              
                 CombatService.Instance.GetAllyInCombat(); 
-                On_CombatInit(CombatState.INTactics);
+                On_CombatInit(CombatState.INTactics, LandscapeNames.Sewers, EnemyPackName.RatPack3);
             }
         }
 
@@ -89,9 +82,11 @@ namespace Combat
             OnStrikeFired?.Invoke(strikeData); 
 
         }
-        public void On_CombatInit(CombatState startState)
+        public void On_CombatInit(CombatState startState, LandscapeNames landscape, EnemyPackName enemyPackName)
         {
-            OnCombatInit?.Invoke();
+            OnCombatInit?.Invoke(startState, landscape,enemyPackName);
+            CombatService.Instance.combatHUDView.SetCombatBG(landscape); 
+            LandscapeService.Instance.On_LandscapeEnter(landscape);
             Sequence seq = DOTween.Sequence();
             if (startState== CombatState.INTactics) 
             {
@@ -127,7 +122,9 @@ namespace Combat
         {
             CombatService.Instance.combatState = CombatState.INTactics; // skip one frame for Inits to occur
             // combat Services
-            CombatService.Instance.currCharOnTurn = CharService.Instance.allCharInCombat[0];
+            CharController charController = CharService.Instance.allCharsInPartyLocked[0];
+            CombatService.Instance.currCharOnTurn = charController;
+            On_CharClicked(charController.gameObject); 
 
             OnSOTactics?.Invoke(); 
         }
@@ -141,8 +138,9 @@ namespace Combat
             SkillService.Instance.InitSkillControllers();// For enemies 
             CombatService.Instance.currCharOnTurn = CharService.Instance.allCharInCombat[0]; 
             QuestController questController = QuestMissionService.Instance.questController;
-
-            combatModel = new CombatModel(questController.questModel.questName, questController.objModel.objName);
+            LandscapeNames landscapeName = LandscapeService.Instance.currLandscape;
+            combatModel = new CombatModel(questController.questModel.questName
+                                        , questController.objModel.objName, landscapeName);
             OnSOC?.Invoke();         
             Sequence seq = DOTween.Sequence(); 
             seq.AppendInterval(2.5f)
@@ -281,7 +279,6 @@ namespace Combat
                     if (!skillModel.targetPos.Any(t => t.pos == cellPosData.pos && t.charMode == cellPosData.charMode))
                         return;
                     SkillService.Instance.SetRemoteSkills(skillModel, cellPosData);
-
                 }
             }
         }
@@ -300,10 +297,11 @@ namespace Combat
         public void On_CharHovered(GameObject _charHoveredGO)
         {
             if(GameService.Instance.gameModel.gameState == GameState.InCombat)
-           CombatService.Instance.currCharHovered = _charHoveredGO?.GetComponent<CharController>(); 
-
+            {
+                CharController charController = _charHoveredGO?.GetComponent<CharController>();
+                CombatService.Instance.currCharHovered = charController;            
+            }
         }
-
         public void IsActionSubcribed()
         {
             foreach (Action del in OnSOR1.GetInvocationList())
@@ -311,7 +309,6 @@ namespace Combat
                 Debug.Log("SOR Subs" + del.Method.Name);
             }
         }
-
 
         #region STRIKE FX EVENTS
 
@@ -324,7 +321,6 @@ namespace Combat
         {
             OnMisfire?.Invoke(dmgAppliedData); 
         }
-
 
         #endregion
 
@@ -340,7 +336,6 @@ namespace Combat
         }
         #endregion
 
-
         #region ACHIEVEMENTS RELATED
 
         public void On_CompSaved(CharController charController, CharController savedController)
@@ -354,57 +349,7 @@ namespace Combat
 
         #endregion
 
-        // Update is called once per frame
-        void Update()
-        {
 
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                On_CombatInit(CombatState.INTactics);
-                Debug.Log("ON COmbat Init");
-            }
-            if (Input.GetKeyDown(KeyCode.U))
-            {
-                On_SOTactics();
-                Debug.Log("SOTactics");
-            }
-
-            //if (Input.GetKeyDown(KeyCode.I))
-            //{
-            //    On_SOC();
-            //    Debug.Log("SOC");
-
-            //}
-            //if (Input.GetKeyDown(KeyCode.O))
-            //{
-            //    Debug.Log("SOR");
-            //    On_SOR(1);
-            //}
-            //if (Input.GetKeyDown(KeyCode.P))
-            //{
-            //    Debug.Log("SOT");
-            //    On_SOT();
-            //}
-
-            //if (Input.GetKeyDown(KeyCode.A))
-            //{
-            //    Debug.Log("On CharOn Turn Set");
-            //    On_CharOnTurnSet();
-            //}
-
-            //if (Input.GetKeyDown(KeyCode.S))
-            //{
-            //    Debug.Log("On CharOn Turn Set");
-            //    On_EOT();
-            //}
-            //if (Input.GetKeyDown(KeyCode.J))
-            //{
-            //    IsActionSubcribed();
-            //}
-
-
-
-        }
     }
 }
 

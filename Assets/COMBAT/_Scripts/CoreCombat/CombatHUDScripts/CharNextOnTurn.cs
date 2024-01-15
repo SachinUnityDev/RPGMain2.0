@@ -1,6 +1,7 @@
 using Common;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,10 @@ namespace Combat
 {
     public class CharNextOnTurn : MonoBehaviour
     {
+        [Header("Rd dsply")]
+        [SerializeField] Transform rdDsply;
+        [SerializeField] TextMeshProUGUI rdDsplyTxt; 
+
 
         [SerializeField] Transform allyPort;
         [SerializeField] Transform enemyPort;
@@ -24,17 +29,22 @@ namespace Combat
         [SerializeField] bool isEnemyTurn;
         [SerializeField] bool isAllyTurn;
 
-        private void Start()
-        {
-            CombatEventService.Instance.OnCharOnTurnSet += ChgPort;
-
-           // CombatEventService.Instance.OnEOR1 += Reset;
+        private void OnEnable()
+        {  
+            CombatEventService.Instance.OnSOR1 += RoundDsply;
+            CombatEventService.Instance.OnCharClicked += (CharController c)=>ToggleRdDsply();
+             
             Reset(0);
         }
         private void OnDisable()
         {
-            CombatEventService.Instance.OnCharOnTurnSet -= ChgPort;         
+            //CombatEventService.Instance.OnSOT -= ChgPort;
+            CombatEventService.Instance.OnCharClicked += (CharController c) => ToggleRdDsply();
+
         }
+
+
+        #region Char Portrait 
         private void Reset(int roundNo)
         {
             allyTurn = 0;
@@ -46,8 +56,9 @@ namespace Combat
             enemyPort.gameObject.SetActive(false);
 
         }
-        void ChgPort(CharController charController)
+        void ChgPort()
         {
+            CharController charController = CombatService.Instance.currCharOnTurn; 
            roundController = CombatService.Instance.roundController;        
             charTurn = CharService.Instance.allCharInCombat.FindIndex(t=>t.charModel.charID== charController.charModel.charID);
             CharMode charMode = charController.charModel.charMode; 
@@ -117,6 +128,31 @@ namespace Combat
                 enemyPort.gameObject.SetActive(false);
             }
         }
+
+        #endregion
+
+#region round DSLY
+
+        void RoundDsply(int rd)
+        {
+            rdDsplyTxt.text = rd.ToString();
+        }
+        void ToggleRdDsply()
+        {
+            if(CombatService.Instance.combatState == CombatState.INCombat_InSkillSelected ||
+                CombatService.Instance.combatState == CombatState.INCombat_normal)
+            {
+                rdDsply.gameObject.SetActive(true);
+            }
+            else
+            {
+                rdDsply.gameObject.SetActive(false);
+            }
+            
+        }
+
+
+#endregion
 
     }
 }

@@ -33,7 +33,7 @@ namespace Common
                 castTime = -1; 
             tempTraitModel = new TempTraitModel(tempTraitSO, traitID, castTime);
             charController.tempTraitController.allTempTraitModels.Add(tempTraitModel);
-            TraitBaseApply();
+            TraitBaseApply(); // chekc this out 
         }
         public virtual void TraitBaseApply()
         {

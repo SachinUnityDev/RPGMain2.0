@@ -4,23 +4,25 @@ using UnityEngine;
 using Common;
 using System.Linq;
 using System;
+using UnityEditor.ShaderGraph.Internal;
 
 namespace Combat
 {
     public class RoundController : MonoBehaviour
     {
      
-        [Header("")]
+        [Header("global var")]
         [SerializeField] int index;
         [SerializeField] int newIndex = 0;
 
         [SerializeField] int charCount = 0; 
         public CharMode TurnMode;
-
+        [SerializeField] float prevVal;
+        [SerializeField] AttribName prevAttribName; 
 
         public List<CharController> allyTurnOrder = new List<CharController>();
         public List<CharController> enemyTurnOrder = new List<CharController>();
-      //  public List<CharController> charTurnOrder = new List<CharController>();
+        public List<CharController> charTurnOrder = new List<CharController>();
         
         
         List<AttribName> StatOrder = new List<AttribName>() { AttribName.haste, AttribName.focus, AttribName.morale, AttribName.luck };
@@ -55,12 +57,12 @@ namespace Combat
                     CombatService.Instance.combatState == CombatState.INCombat_InSkillSelected)
             {
                 index++;
-                charCount = CharService.Instance.allCharInCombat.Count;
+                charCount = charTurnOrder.Count;
                 if (index < charCount && index >= -1)
                 {
                     
-                    CombatService.Instance.currCharOnTurn = CharService.Instance.allCharInCombat[index];                  
-                    SetAP(CharService.Instance.allCharInCombat[index]);
+                    CombatService.Instance.currCharOnTurn = charTurnOrder[index];                  
+                    SetAP(charTurnOrder[index]);
                     CombatService.Instance.currentTurn = index;
                     CombatEventService.Instance.On_CharOnTurnSet();
                 }
@@ -84,23 +86,25 @@ namespace Combat
             SetTurnOrder();
        }
 
-        void UpdateAllyEnemyList()
+        void UpdateCharList()
         {
             charCount= CharService.Instance.allCharInCombat.Count;
-            allyTurnOrder = CharService.Instance.allCharInCombat.Where(t => t.charModel.charMode == CharMode.Ally).ToList();
-            enemyTurnOrder = CharService.Instance.allCharInCombat.Where(t => t.charModel.charMode == CharMode.Enemy).ToList();
+            charTurnOrder = CharService.Instance.allCharInCombat.Where(t => t.charModel.stateOfChar == StateOfChar.UnLocked).ToList();
+
+            allyTurnOrder = charTurnOrder.Where(t => t.charModel.charMode == CharMode.Ally).ToList();
+            enemyTurnOrder = charTurnOrder.Where(t => t.charModel.charMode == CharMode.Enemy).ToList();
         }
         public void ReorderAfterCharDeathOnEOT(CharController charController)
         {   
             CharController currCharOnTurn = CombatService.Instance.currCharOnTurn; 
          
-            UpdateAllyEnemyList(); // update all three list charturnOrder, AllyTurnOrder and EnemyTurnOrder
+            UpdateCharList(); // update all three list charturnOrder, AllyTurnOrder and EnemyTurnOrder
             
             // if char who is on turn dies => ..end the turn and start the next char in seq
             // 
 
 
-            newIndex = CharService.Instance.allCharInCombat
+            newIndex = charTurnOrder
                 .FindIndex(t => t.charModel.charID == currCharOnTurn.charModel.charID);
             if(newIndex != -1)
             {
@@ -113,16 +117,22 @@ namespace Combat
         }
         public void SetTurnOrder()
         {
+            UpdateCharList();
             OrderByRecursion2(AttribName.haste);
-            UpdateAllyEnemyList();          
         }
 
         public void OrderByRecursion2(AttribName _statName)
         {
-            CharService.Instance.allCharInCombat.
-                             OrderByDescending(x => x.GetAttrib(_statName).currValue).ToList();           
+            List<CharController> newOrder = new List<CharController>();
+            newOrder = charTurnOrder
+                        .OrderByDescending(x => x.GetAttrib(AttribName.haste).currValue)
+                        .ThenByDescending(t => t.GetAttrib(AttribName.morale).currValue)
+                        .ThenByDescending(t => t.GetAttrib(AttribName.focus).currValue)
+                        .ThenByDescending(t => t.GetAttrib(AttribName.luck).currValue)
+                        .ToList();
+            charTurnOrder = newOrder;
         }
-
+        
     }
 
 }

@@ -14,9 +14,14 @@ namespace Common
 
         [TextArea(5,10)]        
         public string hazardStr ="";
-        public SpriteDataLandscape spriteData;
+       // public SpriteDataLandscape spriteData;
         public Sprite iconSpriteDay;
         public Sprite iconSpriteNight;
+
+        public Sprite spriteBG_Q_day;
+        public Sprite spriteBG_Q_night;
+        public Sprite spriteBG_C_day;
+        public Sprite spriteBG_C_night;
 
         [Header("Hunger and Thirst")]
         public int hungerMod = 0;   
@@ -24,13 +29,13 @@ namespace Common
    
     }
 
-    [Serializable]
-    public class SpriteDataLandscape
-    {
-        public LocationName locationName; 
-        public Sprite spriteBG_Q_day;
-        public Sprite spriteBG_Q_night;
-        public Sprite spriteBG_C_day;
-        public Sprite spriteBG_C_night;
-    }
+    //[Serializable]
+    //public class SpriteDataLandscape
+    //{
+    //    public LocationName locationName;
+    //    public Sprite spriteBG_Q_day;
+    //    public Sprite spriteBG_Q_night;
+    //    public Sprite spriteBG_C_day;
+    //    public Sprite spriteBG_C_night;
+    //}
 }

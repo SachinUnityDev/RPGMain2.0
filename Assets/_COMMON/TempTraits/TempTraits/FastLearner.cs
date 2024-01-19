@@ -11,12 +11,9 @@ namespace Common
         //+30% Exp
         public override void OnApply()
         {
-            
-        }
-
-        public override void EndTrait()
-        {
-           base.EndTrait();
+            int buffID = charController.buffController.ApplyExpByPercent(CauseType.TempTrait, (int)tempTraitName,
+                charID, +30f, TimeFrame.Infinity, 1, true); 
+            allBuffIds.Add(buffID);
         }
     }
 }

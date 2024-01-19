@@ -99,6 +99,8 @@ namespace Common
         FastLearner,
         Insane,
         DesertFever,
+        Musophobia,
+        Seaborne, 
     }
 
     public enum PermaTraitName

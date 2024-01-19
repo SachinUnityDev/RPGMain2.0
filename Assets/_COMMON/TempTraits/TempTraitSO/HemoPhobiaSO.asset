@@ -18,7 +18,13 @@ MonoBehaviour:
   minCastTime: 6
   maxCastTime: 10
   traitNameStr: ' Hemophobia'
-  iconSprite: {fileID: 0}
   allLines:
-  - '-6 Fortitude per Bleeding turn '
   - -3 Focus when Bleeding
+  sicknessData:
+    herb1:
+      herbName: 0
+      qty: 0
+    herb2:
+      herbName: 0
+      qty: 0
+    restTimeInday: 0

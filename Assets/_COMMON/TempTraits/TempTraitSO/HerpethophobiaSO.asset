@@ -18,7 +18,14 @@ MonoBehaviour:
   minCastTime: 6
   maxCastTime: 10
   traitNameStr: ' Herpethophobia'
-  iconSprite: {fileID: 0}
   allLines:
-  - Double Fortitude loss vs Reptiles
-  - -3 Acc vs Reptiles
+  - Receive double Fortitude Dmg from Reptiles
+  - -20% Dmg vs Reptiles
+  sicknessData:
+    herb1:
+      herbName: 0
+      qty: 0
+    herb2:
+      herbName: 0
+      qty: 0
+    restTimeInday: 0

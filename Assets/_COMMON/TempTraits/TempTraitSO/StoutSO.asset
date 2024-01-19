@@ -15,10 +15,17 @@ MonoBehaviour:
   tempTraitName: 41
   tempTraitType: 1
   temptraitBehavior: 1
-  minCastTime: 0
-  maxCastTime: 0
+  minCastTime: 4
+  maxCastTime: 6
   traitNameStr: ' Stout'
-  iconSprite: {fileID: 0}
   allLines:
-  - 'when Faithful: +4 Vigor'
+  - 'When Faithful: +4 Vigor'
   - 'When Faithful: +2 Hp Regen'
+  sicknessData:
+    herb1:
+      herbName: 0
+      qty: 0
+    herb2:
+      herbName: 0
+      qty: 0
+    restTimeInday: 0

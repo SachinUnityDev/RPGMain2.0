@@ -9,14 +9,14 @@ namespace Common
     public class WeakGrip : TempTraitBase
     {
         public override TempTraitName tempTraitName => TempTraitName.WeakGrip;
-        //Always triggers min Melee Physical Dmg
+        //Always triggers min dmg
         public override void OnApply()
         {
-            
+            int buffID =
+                charController.buffController.SetDmgORArmor2Min(CauseType.TempTrait, (int)tempTraitName
+                , charID, AttribName.dmgMin, TimeFrame.Infinity, 1);
+            allBuffIds.Add(buffID);
         }
-        public override void EndTrait()
-        {
-            base.EndTrait();
-        }
+
     }
 }

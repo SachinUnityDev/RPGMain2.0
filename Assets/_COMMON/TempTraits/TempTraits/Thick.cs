@@ -12,13 +12,11 @@ namespace Common
         //-3 Dodge
         public override void OnApply()
         {
-           
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                         charID, AttribName.dodge, -3, TimeFrame.Infinity, -1, true);
+           int buffId = 
+                charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+                                             charID, AttribName.dodge, -3, TimeFrame.Infinity, -1, false);
+            allBuffIds.Add(buffId); 
         }
-        public override void EndTrait()
-        {
-            base.EndTrait();    
-        }
+        
     }
 }

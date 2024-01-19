@@ -7,38 +7,27 @@ namespace Common
     public class Weakness : TempTraitBase
     {
         public override TempTraitName tempTraitName => TempTraitName.Weakness;
-        // Always triggers min Dmg	 Always triggers min Armor	 -30 All Res
+        // Always triggers min Armor and min Dmg Clamp Dodge to 0,
+
+
         public override void OnApply()
         {
-           
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                         charID, AttribName.waterRes, -30, TimeFrame.Infinity, -1, true);
+            int buffID =
+                charController.buffController.SetDmgORArmor2Min(CauseType.TempTrait, (int)tempTraitName
+                , charID, AttribName.dmgMin, TimeFrame.Infinity, 1);
+            allBuffIds.Add(buffID);
+            buffID =
+                charController.buffController.SetDmgORArmor2Min(CauseType.TempTrait, (int)tempTraitName
+              , charID, AttribName.armorMin, TimeFrame.Infinity, 1);
+            allBuffIds.Add(buffID);
 
+            buffID =
+                charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+                                       charID, AttribName.dodge, -10, TimeFrame.Infinity, -1, false);
+            allBuffIds.Add(buffID);
 
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                         charID, AttribName.fireRes, -30, TimeFrame.Infinity, -1, true);
-
-
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                         charID, AttribName.earthRes, -30, TimeFrame.Infinity, -1, true);
-
-
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                         charID, AttribName.airRes, -30, TimeFrame.Infinity, -1, true);
-
-
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                         charID, AttribName.darkRes, -30, TimeFrame.Infinity, -1, true);
-
-
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                         charID, AttribName.lightRes, -30, TimeFrame.Infinity, -1, true);
-        }
-
-
-        public override void EndTrait()
-        {
-            base.EndTrait();
+            allBuffIds.AddRange(charController.buffController.BuffAllRes(CauseType.TempTrait, (int)tempTraitName
+               , charID, -25, TimeFrame.Infinity, 1, false));
         }
     }
 }

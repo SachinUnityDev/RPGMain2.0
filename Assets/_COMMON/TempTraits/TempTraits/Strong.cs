@@ -8,14 +8,13 @@ namespace Common
     public class Strong : TempTraitBase
     {
         public override TempTraitName tempTraitName => TempTraitName.Strong;
-       // Always triggers max Melee Dmg
+        // Always triggers max  Dmg
         public override void OnApply()
         {
-        }
-
-        public override void EndTrait()
-        {
-            base.EndTrait();  
+            int buffID =
+                charController.buffController.SetDmgORArmor2Max(CauseType.TempTrait, (int)tempTraitName
+                , charID, AttribName.dmgMax, TimeFrame.Infinity, 1);
+            allBuffIds.Add(buffID);
         }
     }
 }

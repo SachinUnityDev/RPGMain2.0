@@ -18,7 +18,14 @@ MonoBehaviour:
   minCastTime: 6
   maxCastTime: 6
   traitNameStr: ' Anemic'
-  iconSprite: {fileID: 0}
   allLines:
-  - 'When Bleeding: Receive +30% Dmg'
-  - 'When Bleeding: -4 Luck'
+  - 'When Bleeding: -80% Armor'
+  - 'When Bleeding: -20% All Res'
+  sicknessData:
+    herb1:
+      herbName: 0
+      qty: 0
+    herb2:
+      herbName: 0
+      qty: 0
+    restTimeInday: 0

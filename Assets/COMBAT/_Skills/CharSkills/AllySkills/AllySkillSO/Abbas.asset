@@ -390,25 +390,25 @@ MonoBehaviour:
     charName: 1
     skillID: 0
     skillIconSprite: {fileID: 21300000, guid: 9fa707bf783e1fc46816921a2a8c04be, type: 3}
-    skillPose: {fileID: 21300000, guid: e4207a48bd59c3444aea9d1b177c7554, type: 3}
+    skillPose: {fileID: 21300000, guid: 892536e71dc1ddd40a62c0b41f1fc709, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 9
     skillUnLockStatus: 1
-    skillDesc: Telekinesis
-    damageMod: 140
+    skillDesc: Retaliate
+    damageMod: 90
     skillLvl: 0
-    skillSelState: 0
-    cd: -1
+    skillSelState: 1
+    cd: 0
     attackType: 2
-    dmgType: 0900000010000000
+    dmgType: 01000000
     castPos: 01000000020000000300000004000000050000000600000007000000
     targetPos: []
-    staminareq: 4
+    staminareq: 3
     castTime: 1
     timeFrame: 1
-    maxUsagePerCombat: 3
-    skillIncli: 3
+    maxUsagePerCombat: -5
+    skillIncli: 1
     baseWeight: 0
     isActive: 0
     allPerkHexes:
@@ -442,5 +442,14 @@ MonoBehaviour:
       hexNames: 02000000240000000b000000
     - perkChain: 020000000300000006000000
       hexNames: 02000000240000000b000000
-    allSkillFXs: []
+    allSkillFXs:
+    - charMode: 2
+      perkType: 0
+      impactFX: {fileID: 6192724089161036641, guid: e17d9a3f04750764c8c0a7a0461e4c3b,
+        type: 3}
+      colImpactFX: {fileID: 0}
+      mainSkillFX: {fileID: 4200477982907238735, guid: c3a66c11ab77bba40b9cd3f798eec085,
+        type: 3}
+      colMainFX: {fileID: 0}
+      selfFX: {fileID: 0}
     allLines: []

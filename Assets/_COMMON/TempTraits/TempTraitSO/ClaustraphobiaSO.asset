@@ -15,9 +15,16 @@ MonoBehaviour:
   tempTraitName: 6
   tempTraitType: 1
   temptraitBehavior: 2
-  minCastTime: 6
-  maxCastTime: 10
+  minCastTime: 10
+  maxCastTime: 12
   traitNameStr: ' Claustrophobia'
-  iconSprite: {fileID: 0}
   allLines:
-  - +60% Fortitude loss in Sewers, Cave, Catacombs
+  - -8 Fortitude Org in Sewers, Cave, Catacombs, Desert Cave
+  sicknessData:
+    herb1:
+      herbName: 0
+      qty: 0
+    herb2:
+      herbName: 0
+      qty: 0
+    restTimeInday: 0

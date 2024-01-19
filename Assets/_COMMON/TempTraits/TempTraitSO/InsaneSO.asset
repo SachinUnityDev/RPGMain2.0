@@ -18,8 +18,16 @@ MonoBehaviour:
   minCastTime: -1
   maxCastTime: -1
   traitNameStr: ' Insane'
-  iconSprite: {fileID: 0}
   allLines:
+  - Clear all Mental Traits
   - May act Insanely
-  - 'Physical Skills: +20% Dmg Mod'
-  - -50 All Res
+  - 'Physical Dmg: +20%'
+  - -50 All Res, -5 Acc
+  sicknessData:
+    herb1:
+      herbName: 0
+      qty: 0
+    herb2:
+      herbName: 0
+      qty: 0
+    restTimeInday: 0

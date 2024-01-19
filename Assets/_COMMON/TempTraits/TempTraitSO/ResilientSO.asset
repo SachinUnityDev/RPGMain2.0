@@ -18,7 +18,14 @@ MonoBehaviour:
   minCastTime: 6
   maxCastTime: 6
   traitNameStr: ' Resilient'
-  iconSprite: {fileID: 0}
   allLines:
-  - 'When Hp < 30%: +16 to All Res'
-  - 'When Hp < 30%: +30% Armor'
+  - 'When Hp < 30%: +15 to All Res'
+  - 'When Hp < 30%: +50% Armor'
+  sicknessData:
+    herb1:
+      herbName: 0
+      qty: 0
+    herb2:
+      herbName: 0
+      qty: 0
+    restTimeInday: 0

@@ -10,16 +10,13 @@ namespace Common
         public override TempTraitName tempTraitName => TempTraitName.FatesChild;
 
         public override void OnApply()
-        {
-            //+2 Luck          
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+        {            
+           int buffId = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
                                                        charID, AttribName.luck, 2, TimeFrame.Infinity, -1, true);
+            allBuffIds.Add(buffId);   
         }
 
-        public override void EndTrait()
-        {
-            base.EndTrait();
-        }
+  
     }
 
 }

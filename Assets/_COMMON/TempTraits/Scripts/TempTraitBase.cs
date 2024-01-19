@@ -19,8 +19,11 @@ namespace Common
         public int traitID { get; set; }
         public int castTime { get; protected set; }
         public List<int> allBuffIds { get; set; } = new List<int>();
-        public List<int> allLandBuffIds { get; set; } = new List<int>(); 
-
+        public List<int> allLandBuffIds { get; set; } = new List<int>();
+        
+        public List<int> allBuffDmgAltIds  = new List<int>();
+        public List<int> allBuffDmgRecAltIds = new List<int>();
+        public List<int> allCharStateDmgAltBuffIds = new List<int>();
         public virtual void TempTraitInit(TempTraitSO tempTraitSO, CharController charController, int traitID)
         {
 
@@ -40,6 +43,8 @@ namespace Common
             CalendarService.Instance.OnStartOfCalDay += DayTick;
             startDay = CalendarService.Instance.dayInGame;
             allBuffIds.Clear();
+            allBuffDmgAltIds.Clear();
+            allBuffDmgRecAltIds.Clear();
         }
         public abstract void OnApply();
 
@@ -48,13 +53,20 @@ namespace Common
             if (castTime == -1) return; // NA case
             int dayCounter = day - startDay;
             if (dayCounter >= castTime)
+            {
+                OnEndConvert();
                 EndTrait();
+            }
         }
         public virtual void EndTrait()
         {
             CalendarService.Instance.OnStartOfCalDay -= DayTick;
             ClearBuffs();
             charController.tempTraitController.RemoveTraitByName(tempTraitName); 
+        }
+        public virtual void OnEndConvert()
+        {
+            
         }
         public virtual void ClearBuffs()
         {
@@ -65,6 +77,18 @@ namespace Common
             foreach (int LbuffID in allLandBuffIds)
             {
                 charController.landscapeController.RemoveBuff(LbuffID);
+            }
+            foreach (int dmgRecBuffID in allBuffDmgRecAltIds)
+            {
+                charController.damageController.RemoveDmgReceivedAltBuff(dmgRecBuffID);
+            }
+            foreach (int dmgAltBuffID in allBuffDmgAltIds)
+            {
+                charController.strikeController.RemoveDmgAltBuff(dmgAltBuffID);
+            }
+            foreach (int charStateDmgAltbuffID in allCharStateDmgAltBuffIds)
+            {
+                charController.strikeController.RemoveDmgAltCharStateBuff(charStateDmgAltbuffID);
             }
         }
     }

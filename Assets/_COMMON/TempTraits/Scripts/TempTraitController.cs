@@ -99,40 +99,60 @@ namespace Common
             return -1; 
 
         }
+
+        bool HasBossTraitOfSameType(TempTraitName tempTraitName)
+        {
+            TempTraitSO tempTraitSO = TempTraitService.Instance.allTempTraitSO.GetTempTraitSO(tempTraitName);
+            TempTraitBehaviour tempTraitBehavior = tempTraitSO.temptraitBehavior;
+            TempTraitType tempTraitType = tempTraitSO.tempTraitType;
+
+            switch (tempTraitType)
+            {
+                case TempTraitType.None:
+                    return false;                     
+                case TempTraitType.Mental:
+                    return HasTempTrait(TempTraitName.Insane);                     
+                case TempTraitType.Physical:
+                    return HasTempTrait(TempTraitName.Weakness);                    
+                case TempTraitType.Sickness:
+                    return HasTempTrait(TempTraitName.GravelyIll);                    
+                default:
+                    return false;                    
+            }
+
+        }
+
         void ClearForBossTempTrait(TempTraitName tempTraitName)
         {
             switch (tempTraitName)
             { 
                 case TempTraitName.Insane:
-                    ClearAllNegTraitOfType(TempTraitType.Mental); 
+                    ClearAllNegTraitOfType(TempTraitType.Mental, TempTraitBehaviour.Negative);
+                    ClearAllNegTraitOfType(TempTraitType.Mental, TempTraitBehaviour.Positive);
                     break; 
                 case TempTraitName.Weakness:
-                    ClearAllNegTraitOfType(TempTraitType.Physical);
+                    ClearAllNegTraitOfType(TempTraitType.Physical, TempTraitBehaviour.Negative);
+                    ClearAllNegTraitOfType(TempTraitType.Physical, TempTraitBehaviour.Positive);
                     break;
                 case TempTraitName.GravelyIll:
-                    ClearAllNegTraitOfType(TempTraitType.Sickness);
+                    ClearAllNegTraitOfType(TempTraitType.Sickness, TempTraitBehaviour.Negative);
                     break;
                 default:
                     break; 
             }
         }
 
-        void ClearAllNegTraitOfType(TempTraitType tempTraitType)
-        {
-            List<int> allIds = new List<int>();
+        void ClearAllNegTraitOfType(TempTraitType tempTraitType, TempTraitBehaviour traitBehaviour)
+        {            
             foreach (TempTraitModel tempTraitModel in allTempTraitModels)
             {
-                if (tempTraitModel.temptraitBehavior != TempTraitBehaviour.Negative)
+                if (tempTraitModel.temptraitBehavior != traitBehaviour)
                     continue;
                 if (tempTraitModel.tempTraitType == tempTraitType)
                 {
-                    allIds.Add(tempTraitModel.tempTraitID);
+                    RemoveTrait(tempTraitModel.tempTraitID);
                 }
-            }
-            if (allIds.Count >= 3)
-            {
-                allIds.ForEach(t => RemoveTrait(t));
-            }
+            }            
         }
 
         public int ApplyTempTrait(CauseType causeType, int causeName, int causeByCharID
@@ -140,8 +160,10 @@ namespace Common
         {
             // check immunity list 
             if (HasTempTrait(tempTraitName) || HasImmunityFrmTrait(tempTraitName) 
-                                            || HasImmunityFrmType(tempTraitName))
+                                            || HasImmunityFrmType(tempTraitName)
+                                            || HasBossTraitOfSameType(tempTraitName)) // boss trait chk 
                 return -1;
+            
             
             TempTraitSO tempTraitSO = TempTraitService.Instance.allTempTraitSO.GetTempTraitSO(tempTraitName);
             PosTrait_FIFOChk(tempTraitSO.tempTraitType);
@@ -157,9 +179,6 @@ namespace Common
             {
                 ClearForBossTempTrait(tempTraitName); 
             }
-
-
-            
             int effectedCharID = charController.charModel.charID;
 
             int startDay = CalendarService.Instance.dayInGame; 
@@ -249,7 +268,7 @@ namespace Common
                         RemoveTraitByName(model.tempTraitName);                   
                 }
             }
-        }    
+        }
 
         public void OnHealBtnPressed(TempTraitBuffData tempTraitBuffData)
         {

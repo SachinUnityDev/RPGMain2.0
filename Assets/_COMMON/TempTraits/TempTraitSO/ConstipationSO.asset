@@ -15,10 +15,9 @@ MonoBehaviour:
   tempTraitName: 10
   tempTraitType: 3
   temptraitBehavior: 2
-  minCastTime: -1
-  maxCastTime: -1
+  minCastTime: 3
+  maxCastTime: 4
   traitNameStr: ' Constipation'
-  iconSprite: {fileID: 0}
   allLines:
   - -3 Dodge
   - -2 Haste

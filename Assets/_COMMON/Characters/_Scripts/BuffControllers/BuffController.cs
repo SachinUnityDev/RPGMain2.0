@@ -225,7 +225,25 @@ namespace Combat
             int buffID = ApplyBuff(causeType, causeName, causebyCharID, attribName, val, timeFrame, castTime, isBuff); 
             return buffID;
         }
+        public int ApplyExpByPercent(CauseType causeType, int causeName, int causebyCharID,
+       float percentVal, TimeFrame timeFrame, int castTime, bool isBuff)
+        {
+            CharModel charModel = charController.charModel;
+            int charID = charModel.charID; 
+            float val = charModel.mainExp * (1 + (percentVal / 100));
+            int turn = -1; 
+            if (GameService.Instance.gameModel.gameState == GameState.InCombat)            
+                turn = CombatService.Instance.currentTurn;
 
+            AttribModData attribModVal = new AttribModData(turn, causeType, causeName
+                , causebyCharID, charID, AttribName.None, val, charModel.mainExp); 
+            int currRd = GameSupportService.Instance.currentRound;
+            buffIndex++;
+            BuffData buffData = new BuffData(buffIndex, isBuff, currRd, timeFrame, castTime,attribModVal);
+            allBuffs.Add(buffData);
+            return buffIndex;
+        
+        }
         public void IncrBuffCastTime(int buffID, int incrBy)
         {
             foreach (BuffData buff in allBuffs)
@@ -236,17 +254,60 @@ namespace Combat
                 }
             }
         }
-        bool IsDmgArmorChg(BuffData buffData)
-        {
-            if (buffData.attribModData.attribModified == AttribName.dmgMin ||
-                buffData.attribModData.attribModified == AttribName.dmgMax ||
-                buffData.attribModData.attribModified == AttribName.armorMin||
-                buffData.attribModData.attribModified == AttribName.armorMax)
-                return true;
-            else
-                return false;                 
-        }
 
+        public int SetDmgORArmor2Max(CauseType causeType, int causeName, int causeByCharID
+                                , AttribName attribName, TimeFrame timeFrame, int netTime)
+        {
+            float val = 0; 
+            AttribName chgAttrib = AttribName.None;
+            if(attribName == AttribName.armorMax)
+            {
+                AttribData attribDataMax = charController.GetAttrib(AttribName.armorMax);
+                AttribData attribDataMin = charController.GetAttrib(AttribName.armorMin);
+                val = attribDataMax.currValue - attribDataMin.currValue;
+                chgAttrib = AttribName.armorMin; 
+            }
+            if (attribName == AttribName.dmgMax)
+            {
+                AttribData attribDataMax = charController.GetAttrib(AttribName.dmgMax);
+                AttribData attribDataMin = charController.GetAttrib(AttribName.dmgMin);
+                val = attribDataMax.currValue - attribDataMin.currValue;
+                chgAttrib = AttribName.dmgMin;
+            }
+
+            int buffID = ApplyBuff(causeType, causeName, causeByCharID, chgAttrib, val, timeFrame, netTime, true); 
+
+            return buffID; 
+        }
+        public int SetDmgORArmor2Min(CauseType causeType, int causeName, int causeByCharID
+                                , AttribName attribName, TimeFrame timeFrame, int netTime)
+        {
+            float val = 0;
+            AttribName chgAttrib = AttribName.None;
+
+            if (attribName == AttribName.armorMin)
+            {
+                AttribData attribDataMax = charController.GetAttrib(AttribName.armorMax);
+                AttribData attribDataMin = charController.GetAttrib(AttribName.armorMin);
+                val = attribDataMax.currValue - attribDataMin.currValue;
+                chgAttrib = AttribName.armorMax;
+            }else if (attribName == AttribName.dmgMin)
+            {
+                AttribData attribDataMax = charController.GetAttrib(AttribName.dmgMax);
+                AttribData attribDataMin = charController.GetAttrib(AttribName.dmgMin);
+                val = attribDataMax.currValue - attribDataMin.currValue;
+                chgAttrib = AttribName.dmgMax;
+            }
+            else
+            {
+                Debug.LogError(" wrong ref"); 
+                return-1;
+            }
+
+            int buffID = ApplyBuff(causeType, causeName, causeByCharID, chgAttrib, -val, timeFrame, netTime, false);
+
+            return buffID;
+        }
         #endregion
 
         #region REMOVE BUFFS 
@@ -285,11 +346,17 @@ namespace Combat
         }
         public void RemoveBuffData(BuffData buffData)
         {        
+            if(buffData.attribModData.attribModified != AttribName.None)
+            {
                 charController.ChangeAttrib(buffData.attribModData.causeType,
                                         buffData.attribModData.causeName, buffData.attribModData.causeByCharID
                                         , buffData.attribModData.attribModified, -buffData.attribModData.chgVal, true);
-                   
-                allBuffs.Remove(buffData);
+            }
+            else // attrib NOne case is for Exp 
+            {
+                charController.charModel.mainExp = (int)buffData.attribModData.baseVal; 
+            }      
+            allBuffs.Remove(buffData);
         }
         #endregion
 

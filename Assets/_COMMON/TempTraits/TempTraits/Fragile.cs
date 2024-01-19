@@ -11,12 +11,12 @@ namespace Common
         //Always triggers Min Armor
         public override void OnApply()
         {
-            
+            int buffID = 
+                charController.buffController.SetDmgORArmor2Min(CauseType.TempTrait, (int)tempTraitName
+                , charID, AttribName.armorMin, TimeFrame.Infinity,1);        
+            allBuffIds.Add(buffID); 
         }
 
-        public override void EndTrait()
-        {
-            base.EndTrait();
-        }
+   
     }
 }

@@ -17,7 +17,14 @@ MonoBehaviour:
   temptraitBehavior: 2
   minCastTime: 4
   maxCastTime: 6
-  desc: 
-  iconSprite: {fileID: 0}
+  traitNameStr: Spineless
   allLines:
-  - -3 Vigor
+  - -3 Willpower
+  sicknessData:
+    herb1:
+      herbName: 0
+      qty: 0
+    herb2:
+      herbName: 0
+      qty: 0
+    restTimeInday: 0

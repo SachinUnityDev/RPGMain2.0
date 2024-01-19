@@ -17,7 +17,14 @@ MonoBehaviour:
   temptraitBehavior: 1
   minCastTime: 3
   maxCastTime: 3
-  desc: 
-  iconSprite: {fileID: 0}
+  traitNameStr: Strong
   allLines:
-  - Always triggers max Melee Dmg
+  - Always triggers Max Dmg
+  sicknessData:
+    herb1:
+      herbName: 0
+      qty: 0
+    herb2:
+      herbName: 0
+      qty: 0
+    restTimeInday: 0

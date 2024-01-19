@@ -18,33 +18,12 @@ namespace Common
 
         public float modCurrVal = 0f;
         public float baseVal = 0f;
-        public int chgVal = 0; 
-
-        //public float modChgMaxR = 0f;
-        //public float modChgMinR = 0f;
-        
-        // ON STAT RANGE MODIFIED 
+        public int chgVal = 0;
+        public bool isClamped = false; 
 
         public AttribModData() { }
         public AttribModData(int turnNo, CauseType causeType, int causeName, int causedByCharID
-            , int effectedCharNameID, AttribName statModfified)
-        {
-            this.turnNo = turnNo;
-            this.causeType = causeType;
-            this.causeName = causeName;
-            this.causeByCharID = causedByCharID;
-            this.effectedCharNameID = effectedCharNameID;
-            this.attribModified = statModfified;
-
-            //this.modChgMaxR = modChgMaxR;
-            //this.modChgMinR = modChgMinR;
-        }
-
-
-        // ON STAT MODIFIED 
-
-        public AttribModData(int turnNo, CauseType causeType, int causeName, int causedByCharID
-                                       , int effectedCharNameID, AttribName statModified, float modCurrVal = -1, float baseVal = -1)
+                                       , int effectedCharNameID, AttribName statModified, float modCurrVal = -1, float baseVal = -1, bool isClamped = false)
         {
             this.turnNo = turnNo;
             this.causeType = causeType;
@@ -56,10 +35,10 @@ namespace Common
                 this.modCurrVal = modCurrVal;
             if (baseVal != -1)
                 this.baseVal = baseVal;
-
+            this.isClamped = isClamped; 
         }
         public AttribModData(int turnNo, CauseType causeType, int causeName, int causedByCharID
-                                       , int effectedCharNameID, AttribName statModified,  float modCurrVal, int chgVal)
+                                       , int effectedCharNameID, AttribName statModified,  float modCurrVal, int chgVal, bool isClamped = false)
         {
             this.turnNo = turnNo;
             this.causeType = causeType;
@@ -70,7 +49,7 @@ namespace Common
             if(modCurrVal != -1)
                 this.modCurrVal = modCurrVal;
                 this.chgVal = chgVal;
-              
+            this.isClamped = isClamped;   
         }
 
     }
@@ -86,9 +65,10 @@ namespace Common
         public StatName statModified;
         public int valChg = 0; 
         public int modVal = 0;
+        public bool isClamped = false;  
 
         public StatModData(int turnNo, CauseType causeType, int causeName, int causedByCharID
-            , int effectedCharNameID, StatName statModfified, int modVal, int valChg)
+            , int effectedCharNameID, StatName statModfified, int modVal, int valChg, bool isClamped = false)
         {
             this.turnNo = turnNo;
             this.causeType = causeType;
@@ -99,6 +79,7 @@ namespace Common
             this.statModified = statModfified;
             this.modVal = modVal; 
             this.valChg = valChg;
+            this.isClamped = isClamped;
         }
     
     }

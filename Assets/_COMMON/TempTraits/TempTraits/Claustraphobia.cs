@@ -10,14 +10,22 @@ namespace Common
         public override TempTraitName tempTraitName => TempTraitName.Claustrophobia;
 
         public override void OnApply()
-        {            
-            // +60% fortitude loss in the sewers 
-        }
-        public override void EndTrait()
         {
-            base.EndTrait();
-            // unsubscribe
+            // -8 Fortitude Org in Sewers, Cave, Catacombs
+            int Id = charController.landscapeController.ApplyLandscapeBuff(CauseType.TempTrait
+                         , (int)tempTraitName, LandscapeNames.Sewers, AttribName.fortOrg, -8);
+            allLandBuffIds.Add(Id);
+
+            Id = charController.landscapeController.ApplyLandscapeBuff(CauseType.TempTrait
+                         , (int)tempTraitName, LandscapeNames.Cave, AttribName.fortOrg, -8);
+            allLandBuffIds.Add(Id);
+
+            Id = charController.landscapeController.ApplyLandscapeBuff(CauseType.TempTrait
+                    , (int)tempTraitName, LandscapeNames.DesertCave, AttribName.fortOrg, -8);
+            allLandBuffIds.Add(Id);
+
         }
+     
     }
 
 }

@@ -25,6 +25,8 @@ namespace Combat
 
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
+
+        int charStruckCount = 0; 
         public override void AddTargetPos()
         {
             if (skillModel == null) return;
@@ -34,15 +36,6 @@ namespace Combat
                 CombatService.Instance.mainTargetDynas.Add(GridService.Instance.gridView?.GetDynaFromPos(cell.pos, cell.charMode));
             }
         }
-
-        //public override void SkillHovered()
-        //{
-        //    base.SkillHovered();
-        //    SkillService.Instance.SkillWipe += skillController.allPerkBases.Find(t => t.skillName == skillName
-        //                 && t.skillLvl == SkillLvl.Level1 && t.state == PerkSelectState.Clicked).WipeFX1;
-
-        //}
-
         public override void SkillSelected()
         {
             base.SkillSelected();
@@ -58,13 +51,13 @@ namespace Combat
                 if (dyna != null)
                 {
                     if (GridService.Instance.gridMovement.MovebyRow(dyna, MoveDir.Backward, 1))
-                    { 
-                        chance++;
+                    {
+                        charStruckCount++;
                     }
                 }
             }
 
-            if(chance == 3)
+            if(charStruckCount == 3)
             {
                 RegainAP(); 
             }
@@ -74,7 +67,7 @@ namespace Combat
         public override void ApplyFX2()
         {
             charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatName.fortitude
-                ,+3 * chance);
+                                                                                         ,+3 * charStruckCount);
         }
 
         public override void ApplyMoveFX()

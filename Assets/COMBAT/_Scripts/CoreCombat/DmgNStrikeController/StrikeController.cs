@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Common;
 using System.Linq;
+using System;
 
 
 namespace Combat
@@ -44,8 +45,9 @@ namespace Combat
             CombatEventService.Instance.OnDamageApplied += OnDmgDeliveredTickRetaliate;
             CombatEventService.Instance.OnEOR1 += RoundTickRetaliate;
             CombatEventService.Instance.OnEOC += EOCTickRetaliate;
-            CombatEventService.Instance.OnDamageApplied += FirstBloodChk; 
-
+            CombatEventService.Instance.OnDamageApplied += FirstBloodChk;
+            CombatEventService.Instance.OnEOC += EOCTickDmgBuff;
+            CombatEventService.Instance.OnEOR1 += EORTick;
         }
         private void OnDisable()
         {
@@ -57,6 +59,8 @@ namespace Combat
             CombatEventService.Instance.OnEOR1 -= RoundTickRetaliate;
             CombatEventService.Instance.OnEOC -= EOCTickRetaliate;
             CombatEventService.Instance.OnDamageApplied -= FirstBloodChk;
+            CombatEventService.Instance.OnEOC -= EOCTickDmgBuff;
+            CombatEventService.Instance.OnEOR1 -= EORTick;
         }
         /// <summary>
         /// to be checked only when move skill are used 
@@ -69,6 +73,22 @@ namespace Combat
         {
             strikerModel = new StrikerModel();
 
+        }
+
+        public void ApplyFriendlyFire(int charID)
+        {
+            List<CharController> activeInCombat = new List<CharController>();
+            foreach (CharController charCtrl in CharService.Instance.allCharInCombat)
+            {
+                if (charCtrl.charModel.stateOfChar == StateOfChar.UnLocked &&
+                    charCtrl.charModel.charID != charID)
+                {
+                    activeInCombat.Add(charCtrl);
+                }
+            }
+            int ran = UnityEngine.Random.Range(0, activeInCombat.Count);
+            CharController selectCtrl = activeInCombat[ran];
+            charController.strikeController.ApplyRetaliate(selectCtrl);
         }
 
 
@@ -218,9 +238,6 @@ namespace Combat
                 ApplyRetaliate(dmgAppliedData.striker);
             }
         }
-
-
-
 
         #endregion
 

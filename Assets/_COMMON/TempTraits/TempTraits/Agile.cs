@@ -12,37 +12,14 @@ namespace Common
        // +2 Dodge	+2 Acc
         public override void OnApply()
         {
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+           int buffID = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
                                                          charID, AttribName.dodge, 2, TimeFrame.Infinity, -1, true);
-           
+            allBuffIds.Add(buffID);
+           buffID =
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
                                                          charID, AttribName.acc, 2, TimeFrame.Infinity, -1, true);
-
-        }
-
-        public override void EndTrait()
-        {
-            base.EndTrait();
+            allBuffIds.Add(buffID);
         }
     }
 }
 
-
-//public override void ApplyTempTrait(CharacterController _charController )
-//{
-//    charController = _charController;
-//    if(charController!= null)
-//    {
-//        int  valueChange = Random.Range(1, 3);  // 1,2 in data 
-//        charController.ChangeStat(StatsName.Dodge,valueChange,0,0);
-//        valueChange = Random.Range(1, 3);  //1,2 in data 
-//        charController.ChangeStat(StatsName.acc, valueChange, 0, 0);                  
-//    }   
-
-//}
-
-//public override bool ChkCharImmunityfromThis(CharacterController _charController)
-//{
-//    // character controller should stock what its immune too... 
-//    return false;
-//}

@@ -15,8 +15,9 @@ namespace Quest
         public int buffID;        
         public CauseType causeType;
         public int causeName;
-        public LandscapeNames landscapeName;            
-        public AttribName statModified;        
+        public LandscapeNames landscapeName;
+       // public StatName statModified;
+        public AttribName attribModified;        
         public float val;
         public bool isBuff;
         public float minVal; 
@@ -24,20 +25,35 @@ namespace Quest
         public bool isApplied; 
 
         public LandBuffData(int buffID, CauseType causeType, int causeName, LandscapeNames landscapeName,
-                        AttribName statModified, float val, bool isBuff = true
+                        AttribName attribModified, float val, bool isBuff = true
                         , float minVal =0, float maxVal=0, bool isApplied = false)
         {
             this.buffID = buffID;
             this.causeType = causeType;
             this.causeName = causeName;
             this.landscapeName = landscapeName;          
-            this.statModified = statModified;
+            this.attribModified = attribModified;
             this.val = val;
             this.isBuff = isBuff;
             this.minVal = minVal;
             this.maxVal = maxVal;
             this.isApplied = isApplied; 
         }
+        //public LandBuffData(int buffID, CauseType causeType, int causeName, LandscapeNames landscapeName,
+        //              StatName statModified, float val, bool isBuff = true
+        //              , float minVal = 0, float maxVal = 0, bool isApplied = false)
+        //{
+        //    this.buffID = buffID;
+        //    this.causeType = causeType;
+        //    this.causeName = causeName;
+        //    this.landscapeName = landscapeName;
+        //    this.statModified = statModified;
+        //    this.val = val;
+        //    this.isBuff = isBuff;
+        //    this.minVal = minVal;
+        //    this.maxVal = maxVal;
+        //    this.isApplied = isApplied;
+        //}
     }
     public class LandCharStateBuffData
     {
@@ -261,14 +277,14 @@ namespace Quest
         void ApplyLandBuffFX(LandBuffData landBuff)  // TOGGLE ON LAND ENTER
         {
             charController.ChangeAttrib(landBuff.causeType, landBuff.causeName
-             , charController.charModel.charID, landBuff.statModified, landBuff.val);
+             , charController.charModel.charID, landBuff.attribModified, landBuff.val);
         }
 
         public void RemoveBuffFX(LandBuffData landBuff)
         {
             // remove the statchange caused by landscape
             charController.ChangeAttrib(landBuff.causeType, landBuff.causeName
-                , charController.charModel.charID, landBuff.statModified, -landBuff.val); 
+                , charController.charModel.charID, landBuff.attribModified, -landBuff.val); 
 
         }
 

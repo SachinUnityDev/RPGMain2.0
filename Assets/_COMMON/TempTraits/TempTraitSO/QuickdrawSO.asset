@@ -18,7 +18,14 @@ MonoBehaviour:
   minCastTime: 3
   maxCastTime: 3
   traitNameStr: ' Quickdraw'
-  iconSprite: {fileID: 0}
   allLines:
-  - 'When First Blood: +20% Dmg until eoc'
-  - 'When First Blood: +3 Acc until eoc'
+  - 'When First Blood: +20% Dmg'
+  - 'When First Blood: +3 Acc'
+  sicknessData:
+    herb1:
+      herbName: 0
+      qty: 0
+    herb2:
+      herbName: 0
+      qty: 0
+    restTimeInday: 0

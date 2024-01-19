@@ -14,6 +14,8 @@ namespace Common
            int Id =  charController.landscapeController.ApplyLandscapeBuff(CauseType.TempTrait
                             , (int)tempTraitName,LandscapeNames.Jungle , AttribName.morale, -3); 
             allLandBuffIds.Add(Id);
+
+       
         }     
     }
 }

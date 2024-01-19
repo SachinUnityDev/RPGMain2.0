@@ -12,13 +12,33 @@ using UnityEngine;
 
         public override void OnApply()
         {   
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                         charID, AttribName.vigor, -3, TimeFrame.Infinity, -1, true);
+           int buffID =  charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+                                                         charID, AttribName.vigor, -3, TimeFrame.Infinity, -1, false);
+            allBuffIds.Add(buffID); 
         }
-
-        public override void EndTrait()
+        public override void OnEndConvert()
         {
-            base.EndTrait();
+            base.OnEndConvert();
+            List<float> chances = new List<float>() { 30f, 30f, 40f };
+
+            switch (chances.GetChanceFrmList())
+            {
+                case 0:
+                    charController.tempTraitController
+                        .ApplyTempTrait(CauseType.TempTrait, (int)tempTraitName, charID, TempTraitName.Weakdraw);
+                    break;
+                case 1:
+                    charController.tempTraitController
+                        .ApplyTempTrait(CauseType.TempTrait, (int)tempTraitName, charID, TempTraitName.WeakGrip);
+                    break;
+                case 2:
+                    
+                    break;
+                default:
+
+                    break;
+            }
+
         }
     }
 

@@ -18,7 +18,14 @@ MonoBehaviour:
   minCastTime: 6
   maxCastTime: 10
   traitNameStr: ' Fear Of The Dead'
-  iconSprite: {fileID: 0}
   allLines:
-  - +60% Fortitude loss vs Half-dead
-  - -3 Acc vs Half-dead
+  - Receive double Fortitude Dmg from Undead
+  - -20% Dmg vs Undead
+  sicknessData:
+    herb1:
+      herbName: 0
+      qty: 0
+    herb2:
+      herbName: 0
+      qty: 0
+    restTimeInday: 0

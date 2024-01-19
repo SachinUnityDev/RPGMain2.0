@@ -26,13 +26,13 @@ namespace Combat
         public override void SkillHovered()
         {
             base.SkillHovered();
-            StatData statData = charController.GetStat(StatName.health); 
-            //if (statData != null)
-            //{
-            //    float hpPercent = statData.currValue / statData.maxLimit;
-            //    if (hpPercent > 0.4f)
-            //        skillModel.SetSkillState(SkillSelectState.UnClickable_Misc);
-            //}
+            StatData statData = charController.GetStat(StatName.health);
+            if (statData != null)
+            {
+                float hpPercent = statData.currValue / statData.maxLimit;
+                if (hpPercent > 0.4f)
+                    skillModel.SetSkillState(SkillSelectState.UnClickable_Misc);
+            }
         }
         public override void ApplyFX1()
         {

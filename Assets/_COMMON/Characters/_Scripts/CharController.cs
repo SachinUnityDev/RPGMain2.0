@@ -11,6 +11,7 @@ using System.Linq;
 using Spine.Unity;
 using TMPro;
 using NUnit.Framework.Internal;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace Common
 {   
@@ -441,20 +442,22 @@ namespace Common
             {
                 Debug.Log("attrib not found in list"); 
             }
-
-
             charModData.modCurrVal = modCurrValue;
             if (attribName == AttribName.vigor)
             {
                 StatData statDataHP = GetStat(StatName.health);
                 statDataHP.maxLimit = modCurrValue * 4;
 
+                if (statDataHP.currValue >= statDataHP.maxLimit)
+                    statDataHP.currValue = (int)statDataHP.maxLimit; 
             }
             if (attribName == AttribName.willpower)
             {
                 StatData statDataStm = GetStat(StatName.stamina);
                 statDataStm.maxLimit = modCurrValue * 3;
 
+                if (statDataStm.currValue >= statDataStm.maxLimit)
+                    statDataStm.currValue = (int)statDataStm.maxLimit;
             }
 
             if (toInvoke)

@@ -11,14 +11,21 @@ namespace Common
 
         public override void OnApply()
         {
-            //-3 Willpower
+           int buffId = 
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                        charID, AttribName.willpower, -3, TimeFrame.Infinity, -1, true);
+                                                        charID, AttribName.willpower, -3, TimeFrame.Infinity, -1, false);
+            allBuffIds.Add(buffId);
+        }
+        public override void OnEndConvert()
+        {
+            base.OnEndConvert();
+            if (50f.GetChance())
+            {
+                charController.tempTraitController
+                .ApplyTempTrait(CauseType.TempTrait, (int)tempTraitName, charID, TempTraitName.Fragile);
+            }   
+
         }
 
-        public override void EndTrait()
-        {
-            base.EndTrait();
-        }
     }
 }

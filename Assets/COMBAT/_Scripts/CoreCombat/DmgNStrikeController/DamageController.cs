@@ -5,6 +5,7 @@ using Common;
 using System;
 using DG.Tweening;
 using System.Linq;
+using static Combat.StrikeController;
 
 namespace Combat
 {
@@ -28,14 +29,19 @@ namespace Combat
         [Header("Damage Model")]
         public DmgModel dmgModel;
 
-       
-
         void Start()
         {
             charController = GetComponent<CharController>();
-            Init();
+            CombatEventService.Instance.OnEOC += EOCTickDmgBuff;
+            CombatEventService.Instance.OnEOR1 += EORTick; 
+                
+            Init();            
         }
-
+        private void OnDisable()
+        {
+            CombatEventService.Instance.OnEOC -= EOCTickDmgBuff;
+            CombatEventService.Instance.OnEOR1 -= EORTick;
+        }
         public void Init()  /// OnSOC 
         {
             dmgModel = new DmgModel();
@@ -104,7 +110,6 @@ namespace Combat
             }
 
         }
-
         float CritNFeebleApply(float dmg)
         {
             LuckCheck(); // modifies the strikeType
@@ -125,7 +130,6 @@ namespace Combat
             FortChgOnGettingCritNFeeble();
             return dmgNew;
         }
-
         public void ApplyDamage(CharController striker, CauseType causeType, int causeName, DamageType _dmgType
                                 , float dmgPercentORVal, SkillInclination skillInclination = SkillInclination.None
                                 , bool ignoreArmorNRes = false, bool isTrueStrike = false)
@@ -164,11 +168,12 @@ namespace Combat
                                 .GetDmgAlt(charController.charModel, attackType, _dmgType );
             float damageAltCharState = striker.GetComponent<StrikeController>()
                                 .GetDmgCharStateAlt(charController);
-
+            float dmgReceivedAlt = GetDmgReceivedAlt(striker.charModel, attackType, _dmgType); 
 
             AttribData dmgSDMin = striker.GetAttrib(AttribName.dmgMin);
             AttribData dmgSDMax = striker.GetAttrib(AttribName.dmgMax);
-            float percentDmg = dmgPercentORVal + damageAlt + damageAltCharState;
+            float percentDmg = dmgPercentORVal*(1 + (damageAlt / 100) + (damageAltCharState/100));
+
             // copy of Dmg value for magical and physical + Dmg modifiers 
 
             float dmg = (float)(UnityEngine.Random.Range(dmgSDMin.currValue, dmgSDMax.currValue) * (percentDmg / 100f));
@@ -182,7 +187,7 @@ namespace Combat
                 case DamageType.Physical:
                     float dmgVal = CritNFeebleApply(dmg);
                     float chgValue = dmgVal; 
-                    if (ignoreArmorNRes)
+                    if (!ignoreArmorNRes)
                     {
                         AttribData armorSDMin = charController.GetAttrib(AttribName.armorMin);
                         AttribData armorSDMax = charController.GetAttrib(AttribName.armorMax);
@@ -198,7 +203,7 @@ namespace Combat
                     dmgVal = CritNFeebleApply(dmg);
                     float airRes = charController.GetAttrib(AttribName.waterRes).currValue;
                     float airDmg = dmgVal; 
-                    if(ignoreArmorNRes && airRes > 0)
+                    if(!ignoreArmorNRes && airRes > 0)
                             airDmg = dmgVal * (100 - airRes) / 100;
                      airDmg = airDmg < 0 ? 0 : airDmg;
                     charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -airDmg);
@@ -207,7 +212,7 @@ namespace Combat
                     dmgVal = CritNFeebleApply(dmg);
                     float waterRes = charController.GetAttrib(AttribName.waterRes).currValue;
                     float waterDmg = dmgVal;
-                    if (ignoreArmorNRes && waterRes > 0)
+                    if (!ignoreArmorNRes && waterRes > 0)
                          waterDmg = dmgVal * ((100f - waterRes) / 100f);
                      waterDmg = waterDmg < 0 ? 0 : waterDmg;
                     charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -waterDmg);
@@ -216,7 +221,7 @@ namespace Combat
                     dmgVal = CritNFeebleApply(dmg);
                     float earthRes = charController.GetAttrib(AttribName.earthRes).currValue;
                     float earthDmg = dmgVal;
-                    if (ignoreArmorNRes && earthRes > 0)
+                    if (!ignoreArmorNRes && earthRes > 0)
                         earthDmg = dmgVal * ((100f - earthRes) / 100f);
                     
                       earthDmg = earthDmg < 0 ? 0 : earthDmg;
@@ -226,7 +231,7 @@ namespace Combat
                     dmgVal = CritNFeebleApply(dmg);
                     float fireRes = charController.GetAttrib(AttribName.fireRes).currValue;
                     float fireDmg = dmgVal;
-                    if (ignoreArmorNRes && fireRes > 0)
+                    if (!ignoreArmorNRes && fireRes > 0)
                         fireDmg = dmgVal * (100 - fireRes) / 100;
 
                      fireDmg = fireDmg < 0 ? 0 : fireDmg;
@@ -236,7 +241,7 @@ namespace Combat
                     dmgVal = CritNFeebleApply(dmg);
                     float lightRes = charController.GetAttrib(AttribName.lightRes).currValue;
                     float lightDmg = dmgVal;
-                    if (ignoreArmorNRes && lightRes > 0)
+                    if (!ignoreArmorNRes && lightRes > 0)
                         lightDmg = dmgVal * ((100f - lightRes) / 100f);
                     
                        lightDmg = lightDmg < 0 ? 0 : lightDmg;
@@ -246,7 +251,7 @@ namespace Combat
                     dmgVal = CritNFeebleApply(dmg);
                     float darkRes = charController.GetAttrib(AttribName.darkRes).currValue;
                     float darkDmg = dmgVal;
-                    if (ignoreArmorNRes && darkRes > 0)
+                    if (!ignoreArmorNRes && darkRes > 0)
                         darkDmg = dmgVal * ((100f - darkRes) / 100f);
                     
                        darkDmg = darkDmg < 0 ? 0 : darkDmg;
@@ -262,7 +267,7 @@ namespace Combat
                 case DamageType.Blank3:
                     break;
                 case DamageType.Heal:
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, dmgPercentORVal*(1 + damageAlt/100));
+                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, dmgPercentORVal*(1 + damageAlt/100+ dmgReceivedAlt/100));
                     break;
                 case DamageType.FortitudeDmg:
                     charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.fortitude, -dmgPercentORVal);
@@ -291,7 +296,6 @@ namespace Combat
 
             ApplyDamage(charController, causeType, causeName, DamageType.Heal, healVal, SkillInclination.Heal); 
         }
-
         // Striking Crit and feeble 
         void FortChgOnStrikingCritNFeeble()
         {
@@ -364,12 +368,7 @@ namespace Combat
                     }
                 }
             }
-
-
-
         }
-
-
         public void CheatDeath()
         {
             if(cheatedDeathCount < MAX_ALLOWED_CHEATDEATH)
@@ -554,7 +553,135 @@ namespace Combat
 
 
         #endregion
+        #region DAMAGE RECEIVE BUFF ALTERER
 
+        public List<DmgBuffData> allDmgReceivedBuffData = new List<DmgBuffData>();
+
+        int dmgBuffID = 0;
+        public int ApplyDmgReceivedAltBuff(float valPercent, CauseType causeType, int causeName, int causeByCharID,
+             TimeFrame timeFrame, int netTime, bool isBuff,
+            AttackType attackType = AttackType.None, DamageType dmgType = DamageType.None,
+            CultureType cultType = CultureType.None, RaceType raceType = RaceType.None)
+        {
+            dmgBuffID = allDmgReceivedBuffData.Count + 1;
+
+            DmgAltData dmgAltData = new DmgAltData(valPercent, attackType, dmgType, cultType, raceType);
+            int startRoundNo = CombatEventService.Instance.currentRound;
+
+            DmgBuffData dmgBuffData = new DmgBuffData(dmgBuffID, isBuff, startRoundNo, timeFrame
+                            , netTime, dmgAltData);
+
+            allDmgReceivedBuffData.Add(dmgBuffData);
+            return dmgBuffID;
+        }
+        public void EOCTickDmgBuff()
+        {
+            foreach (DmgBuffData dmgBuffData in allDmgReceivedBuffData.ToList())
+            {
+                if (dmgBuffData.timeFrame == TimeFrame.EndOfCombat)
+                {
+                    RemoveDmgBuffData(dmgBuffData);
+                }
+            }
+        }
+
+        public void EORTick(int roundNo)  // to be completed
+        {
+            foreach (DmgBuffData dmgBuffData in allDmgReceivedBuffData.ToList())
+            {
+                if (dmgBuffData.timeFrame == TimeFrame.EndOfRound)
+                {
+                    if (dmgBuffData.buffCurrentTime >= dmgBuffData.buffedNetTime)
+                    {
+                        RemoveDmgBuffData(dmgBuffData);
+                    }
+                    dmgBuffData.buffCurrentTime++;
+                }
+            }
+        }
+
+        void RemoveDmgBuffData(DmgBuffData dmgBuffData)
+        {
+            allDmgReceivedBuffData.Remove(dmgBuffData);
+        }
+        public bool RemoveDmgReceivedAltBuff(int dmgBuffID)
+        {
+            int index = allDmgReceivedBuffData.FindIndex(t => t.dmgBuffID == dmgBuffID);
+            if (index == -1) return false;
+            DmgBuffData dmgBuffData = allDmgReceivedBuffData[index];
+            RemoveDmgBuffData(dmgBuffData);
+            return true;
+        }
+
+        public float GetDmgReceivedAlt(CharModel strikerModel, AttackType attackType = AttackType.None
+                                         , DamageType damageType = DamageType.None)
+        {
+            // 20% physical attack against beastmen            
+            foreach (DmgBuffData dmgBuffData in allDmgReceivedBuffData.ToList())
+            {
+                DmgAltData dmgAltData = dmgBuffData.altData;
+                if (dmgAltData.damageType != DamageType.None && dmgAltData.damageType == damageType)// Damage Type Block 
+                {
+                    float val = 0;
+                    if (dmgAltData.raceType != RaceType.None
+                        && dmgAltData.raceType == strikerModel.raceType
+                                && dmgAltData.cultType != CultureType.None
+                                && dmgAltData.cultType == strikerModel.cultType)
+                    {
+
+                        val = dmgAltData.valPercent; // COMBO RACE AND CULT
+
+                    }
+                    else   // NOT A COMBO OF RACE AND CULT
+                    {
+                        if (dmgAltData.raceType != RaceType.None
+                                  && dmgAltData.raceType == strikerModel.raceType)
+                        {
+                            val = dmgAltData.valPercent;
+                        }
+                        if (dmgAltData.cultType != CultureType.None
+                                        && dmgAltData.cultType == strikerModel.cultType)
+                        {
+                            val = dmgAltData.valPercent;
+                        }
+                    }
+                    return val;
+                }
+                else if (dmgAltData.attackType != AttackType.None && dmgAltData.attackType == attackType)// Attack type block
+                {
+                    float val = 0;
+                    if (dmgAltData.raceType != RaceType.None
+                        && dmgAltData.raceType == strikerModel.raceType
+                                && dmgAltData.cultType != CultureType.None
+                                && dmgAltData.cultType == strikerModel.cultType)
+                    {
+
+                        val = dmgAltData.valPercent; // COMBO RACE AND CULT
+
+                    }
+                    else   // NOT A COMBO OF RACE AND CULT
+                    {
+                        if (dmgAltData.raceType != RaceType.None
+                                  && dmgAltData.raceType == strikerModel.raceType)
+                        {
+                            val = dmgAltData.valPercent;
+                        }
+                        if (dmgAltData.cultType != CultureType.None
+                                        && dmgAltData.cultType == strikerModel.cultType)
+                        {
+                            val = dmgAltData.valPercent;
+                        }
+                    }
+                    return val;
+                }
+                else if (dmgAltData.attackType == AttackType.None && dmgAltData.damageType == DamageType.None)
+                {
+                    return dmgAltData.valPercent;
+                }
+            }
+            return 0f;
+        }
+        #endregion
 
     }
     #region DATA CLASSES

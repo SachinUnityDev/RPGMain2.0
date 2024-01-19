@@ -12,14 +12,12 @@ using UnityEngine;
         public override void OnApply()
         {
             // +2 haste
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+           int buffId = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
                                                        charID, AttribName.haste, 2, TimeFrame.Infinity, -1, true);
+            allBuffIds.Add(buffId);
         }
 
-        public override void EndTrait()
-        {
-            base.EndTrait();
-        }
+  
     }
 
 }

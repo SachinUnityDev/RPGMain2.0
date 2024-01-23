@@ -37,6 +37,7 @@ namespace Combat
         private void Start()
         {
             charController = GetComponent<CharController>();
+            charController.strikeController= this;
             otherTargetDynas = new List<DynamicPosData>();
             CombatEventService.Instance.OnDamageApplied += OnDmgDeliveredTick;
             CombatEventService.Instance.OnEOR1 += RoundTick;

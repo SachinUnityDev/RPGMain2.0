@@ -16,9 +16,8 @@ MonoBehaviour:
   tempTraitType: 3
   temptraitBehavior: 2
   minCastTime: 1
-  maxCastTime: 2
+  maxCastTime: 1
   traitNameStr: ' Nausea'
-  iconSprite: {fileID: 0}
   allLines:
   - -2 Focus
   - -1 Morale

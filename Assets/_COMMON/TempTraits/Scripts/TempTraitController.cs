@@ -53,7 +53,7 @@ namespace Common
             int count = 0; int firstId = -1; 
             foreach (TempTraitModel tempTraitModel in allTempTraitModels)
             {
-               if(tempTraitModel.temptraitBehavior != TempTraitBehaviour.Positive)
+               if(tempTraitModel.temptraitBehavior != TraitBehaviour.Positive)
                     continue; 
                if (tempTraitModel.tempTraitType == tempTraitType)                     
                {
@@ -77,7 +77,7 @@ namespace Common
             List<int> allIds = new List<int>(); 
             foreach (TempTraitModel tempTraitModel in allTempTraitModels)
             {
-                if (tempTraitModel.temptraitBehavior != TempTraitBehaviour.Negative)
+                if (tempTraitModel.temptraitBehavior != TraitBehaviour.Negative)
                     continue;
                 if (tempTraitModel.tempTraitType == tempTraitType)
                 {   
@@ -103,7 +103,7 @@ namespace Common
         bool HasBossTraitOfSameType(TempTraitName tempTraitName)
         {
             TempTraitSO tempTraitSO = TempTraitService.Instance.allTempTraitSO.GetTempTraitSO(tempTraitName);
-            TempTraitBehaviour tempTraitBehavior = tempTraitSO.temptraitBehavior;
+            TraitBehaviour tempTraitBehavior = tempTraitSO.temptraitBehavior;
             TempTraitType tempTraitType = tempTraitSO.tempTraitType;
 
             switch (tempTraitType)
@@ -127,22 +127,22 @@ namespace Common
             switch (tempTraitName)
             { 
                 case TempTraitName.Insane:
-                    ClearAllNegTraitOfType(TempTraitType.Mental, TempTraitBehaviour.Negative);
-                    ClearAllNegTraitOfType(TempTraitType.Mental, TempTraitBehaviour.Positive);
+                    ClearAllNegTraitOfType(TempTraitType.Mental, TraitBehaviour.Negative);
+                    ClearAllNegTraitOfType(TempTraitType.Mental, TraitBehaviour.Positive);
                     break; 
                 case TempTraitName.Weakness:
-                    ClearAllNegTraitOfType(TempTraitType.Physical, TempTraitBehaviour.Negative);
-                    ClearAllNegTraitOfType(TempTraitType.Physical, TempTraitBehaviour.Positive);
+                    ClearAllNegTraitOfType(TempTraitType.Physical, TraitBehaviour.Negative);
+                    ClearAllNegTraitOfType(TempTraitType.Physical, TraitBehaviour.Positive);
                     break;
                 case TempTraitName.GravelyIll:
-                    ClearAllNegTraitOfType(TempTraitType.Sickness, TempTraitBehaviour.Negative);
+                    ClearAllNegTraitOfType(TempTraitType.Sickness, TraitBehaviour.Negative);
                     break;
                 default:
                     break; 
             }
         }
 
-        void ClearAllNegTraitOfType(TempTraitType tempTraitType, TempTraitBehaviour traitBehaviour)
+        void ClearAllNegTraitOfType(TempTraitType tempTraitType, TraitBehaviour traitBehaviour)
         {            
             foreach (TempTraitModel tempTraitModel in allTempTraitModels)
             {
@@ -279,14 +279,12 @@ namespace Common
 
         #region IMMUNITY APPLY & REMOVE
         public void ApplyImmunityBuff(CauseType causeType, int causeName, int causeByCharID
-                                , TempTraitName tempTraitName, TimeFrame timeFrame, int netTime) // immunity buff for this char State
+                                        , TempTraitName tempTraitName, TimeFrame timeFrame, int netTime) // immunity buff for this temp trait
         {
             int effectedCharID = charController.charModel.charID;
-
             int currtime = 0;                
             if (timeFrame == TimeFrame.EndOfDay)
-                currtime = CalendarService.Instance.dayInGame; 
-        
+                currtime = CalendarService.Instance.dayInGame;         
             traitID++;
             TempTraitModData causeData = new TempTraitModData(causeType,causeName, causeByCharID, effectedCharID, true); 
 

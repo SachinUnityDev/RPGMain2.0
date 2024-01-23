@@ -11,16 +11,15 @@ namespace Common
        //  Upon consume Food: Half Hunger and Thirst relief	-2 Vigor and Wp
         public override void OnApply()
         {
+            int buffID = 
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                         charID, AttribName.willpower, -2, TimeFrame.Infinity, -1, true);
+                                                         charID, AttribName.willpower, -2, TimeFrame.Infinity, -1, false);
+            allBuffIds.Add(buffID);
 
+            buffID = 
             charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, AttribName.vigor, -2, TimeFrame.Infinity, -1, true);
-        }
-
-        public override void EndTrait()
-        {
-            base.EndTrait();    
+                                             charID, AttribName.vigor, -2, TimeFrame.Infinity, -1, false);
+            allBuffIds.Add(buffID);
         }
     }
 }

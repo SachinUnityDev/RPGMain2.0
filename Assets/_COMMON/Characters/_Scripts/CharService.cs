@@ -516,6 +516,30 @@ namespace Common
         }
         #endregion
 
+        #region
+        public bool ChkIfSOLO(CharController charController)
+        {            
+            int charCount = 0;
+            CharController charChtrl1 = null;
+            foreach (CharController charCtrl in allCharInCombat)
+            {
+                if (charCtrl.charModel.stateOfChar == StateOfChar.UnLocked)
+                {
+                    charChtrl1 = charCtrl;
+                    charCount++;
+                }
+            }
+            if (charCount == 1)
+            {
+                if (charChtrl1.charModel.charID == charController.charModel.charID)
+                    return true; 
+            }
+            return false;
+        }
+
+        #endregion
+
+
     }
 }
 

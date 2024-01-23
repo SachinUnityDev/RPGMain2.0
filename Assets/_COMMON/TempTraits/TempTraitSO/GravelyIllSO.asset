@@ -18,9 +18,9 @@ MonoBehaviour:
   minCastTime: 6
   maxCastTime: 6
   traitNameStr: ' Gravely Ill'
-  iconSprite: {fileID: 0}
   allLines:
   - May die if not healed timely
+  - -6 Vigor and Wp
   sicknessData:
     herb1:
       herbName: 3

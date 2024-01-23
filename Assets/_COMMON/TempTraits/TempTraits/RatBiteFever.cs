@@ -9,25 +9,23 @@ namespace Common
         public override TempTraitName tempTraitName => TempTraitName.RatBiteFever;
         public override void OnApply()
         {
-            // -1 Utility stats(foc, haste, mor, luck)
-            int charID = charController.charModel.charID;
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, AttribName.focus, -1, TimeFrame.Infinity, -1, true);
+            // -1 Utility stats(foc, haste, mor, luck)            
+            int  buffID= 
+                    charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+                                     charID, AttribName.focus, -1, TimeFrame.Infinity, -1, false);
+            allBuffIds.Add(buffID);
 
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, AttribName.haste, -1, TimeFrame.Infinity, -1, true);
+            buffID = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+                                    charID, AttribName.haste, -1, TimeFrame.Infinity, -1, false);
+            allBuffIds.Add(buffID);
 
+            buffID = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+                                             charID, AttribName.morale, -1, TimeFrame.Infinity, -1, false);
+            allBuffIds.Add(buffID);
 
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, AttribName.morale, -1, TimeFrame.Infinity, -1, true);
-
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, AttribName.luck, -1, TimeFrame.Infinity, -1, true);
-        }
-
-        public override void EndTrait()
-        {
-            base.EndTrait();
+            buffID = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+                                             charID, AttribName.luck, -1, TimeFrame.Infinity, -1, false);
+            allBuffIds.Add(buffID); 
         }
     }
 }

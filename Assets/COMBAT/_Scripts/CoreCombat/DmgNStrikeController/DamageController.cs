@@ -32,6 +32,7 @@ namespace Combat
         void Start()
         {
             charController = GetComponent<CharController>();
+            charController.damageController = this;
             CombatEventService.Instance.OnEOC += EOCTickDmgBuff;
             CombatEventService.Instance.OnEOR1 += EORTick; 
                 
@@ -713,42 +714,3 @@ namespace Combat
 
     #endregion
 }
-//void ReduceDmgPercent()
-//{
-//    int charID = charController.charModel.charID;
-//    AttribData dmgMin1 = charController.GetAttrib(AttribName.dmgMin);
-//    AttribData dmgMax1 = charController.GetAttrib(AttribName.dmgMax);
-//    dmgMin = dmgMin1.currValue;
-//    dmgMax = dmgMax1.currValue;
-//    float chgMin = 0.2f * this.dmgMin;
-//    float chgMax = 0.2f * dmgMax;
-
-//    charController.ChangeAttrib(CauseType.StatChecks, (int)StatChecks.FocusCheck, charID
-//        , AttribName.dmgMin, chgMin);
-//    charController.ChangeAttrib(CauseType.StatChecks, (int)StatChecks.FocusCheck, charID
-//        , AttribName.dmgMin, chgMax);
-
-//}
-//void RevertDamageRange()
-//{
-//    charController.GetAttrib(AttribName.dmgMin).currValue = (int)dmgMin;
-//    charController.GetAttrib(AttribName.dmgMin).currValue = (int)dmgMax;
-//}
-
-//public bool AccuracyCheck()// Physical 
-//{
-//    float accVal = charController.GetAttrib(AttribName.acc).currValue;
-//    float accChance = charController.GetStatChance(AttribName.acc, accVal);
-
-//    if (accVal == 0)
-//    { // self inflicted
-
-//        int buffId = charController.charStateController.ApplyCharStateBuff(CauseType.CharState, (int)CharStateName.Confused
-//             , charController.charModel.charID, CharStateName.Blinded, TimeFrame.Infinity, -1);
-//        return false;// miss the target .. i.e not going to hit/FX anyone.. 
-//    }
-//    else
-//    {
-//        return accChance.GetChance();
-//    }
-//}

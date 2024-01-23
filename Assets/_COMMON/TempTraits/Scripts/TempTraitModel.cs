@@ -11,7 +11,7 @@ namespace Common
 
         public TempTraitName tempTraitName;        
         public TempTraitType tempTraitType;
-        public TempTraitBehaviour temptraitBehavior;
+        public TraitBehaviour temptraitBehavior;
        
         public int castTime = -1;
         [Header("Description")]

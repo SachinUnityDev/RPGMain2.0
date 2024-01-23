@@ -10,8 +10,9 @@ namespace Interactables
     public class ItemService : MonoSingletonGeneric<ItemService>
     {
         public event Action<CharController, GemNames> OnGemSocketed;
-        public event Action<CharController> OnGemEnchanted;
-        public event Action<CharController, PotionNames> OnPotionConsumed; 
+        //public event Action<CharController> OnGemEnchanted;
+        public event Action<CharController, Iitems> OnItemConsumed;
+        public event Action<CharController, Iitems> OnItemEnchanted;
 
 
         public List<ItemController> allItemControllers = new List<ItemController>();        
@@ -107,6 +108,21 @@ namespace Interactables
     
 
         }
+
+        #region ITEM EVENTS
+        
+        public void On_ItemConsumed(CharController charController, Iitems iitem)
+        {
+            OnItemConsumed?.Invoke(charController, iitem);  
+        }
+        public void On_ItemEnchanted(CharController charController, Iitems iitem)
+        {
+            OnItemEnchanted?.Invoke(charController, iitem);
+        }
+
+        #endregion
+
+
 
         #region ITEM BASE
 
@@ -404,7 +420,7 @@ namespace Interactables
         # region GEMS, ENCHANTMENT AND  SCROLLS
         public bool CanEnchantGemThruScroll(CharController charController, GemNames gemName)
         {
-            // get corresponding gem
+            // Get corresponding gem
             ScrollSO scrollSO = GetScrollSOFrmGem(gemName); 
             ItemController itemController = charController.gameObject.GetComponent<ItemController>();
             if (!allScrollRead.Any(t => t.scrollName == scrollSO.scrollName))            
@@ -412,11 +428,8 @@ namespace Interactables
             if (itemController.itemModel.IsAlreadyEnchanted())
                 return false; 
 
-            if (charController.charModel.enchantableGem4Weapon == gemName)
-            {
-                On_GemEnchanted(charController); 
-                return true;
-            }
+            if (charController.charModel.enchantableGem4Weapon == gemName)                
+                return true;            
             else
                 return false; 
         }
@@ -433,10 +446,7 @@ namespace Interactables
             }
         }
         
-        public void On_GemEnchanted(CharController charController)
-        {
-            OnGemEnchanted?.Invoke(charController); 
-        }
+    
         #endregion
 
         public void InitItemToInv(SlotType slotType, ItemType itemType, int itemName,

@@ -4,9 +4,7 @@ using Quest;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SceneManagement; 
 
@@ -49,6 +47,7 @@ namespace Combat
         private void OnEnable()
         {
             charController = gameObject.GetComponent<CharController>();
+            charController.skillController = this; 
             charName = charController.charModel.charName;
            
         }

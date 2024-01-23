@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-
 namespace Common
 {
 
@@ -34,10 +33,55 @@ namespace Common
         }
     }
 
+    public class StatAltBuffData
+    {
+        public int dmgBuffID;
+        public bool isBuff;   // true if BUFF and false if DEBUFF
+        public int startRoundNo;
+        public TimeFrame timeFrame;
+        public int buffedNetTime;
+        public int buffCurrentTime;
+        public StatAltData altData;  // contains value for the buff        
+
+        public StatAltBuffData(int dmgBuffID, bool isBuff, int startRoundNo, TimeFrame timeFrame
+                            , int buffedNetTime, StatAltData altData)
+        {
+            this.dmgBuffID = dmgBuffID;
+            this.isBuff = isBuff;
+            this.startRoundNo = startRoundNo;
+            this.timeFrame = timeFrame;
+            this.buffedNetTime = buffedNetTime;
+            this.buffCurrentTime = 0;// time counter for the dmgBuff
+            this.altData = altData;
+        }
+    }
+    public class StatAltData
+    {
+        public StatName statModified;
+        public AttackType attackType = AttackType.None;
+        public DamageType damageType = DamageType.None;
+        public CultureType cultType = CultureType.None;
+        public RaceType raceType = RaceType.None;
+
+        public float valPercent = 0f;
+
+        public StatAltData(StatName statModified, float valPercent, AttackType attackType, DamageType damageType,
+                                CultureType cultType, RaceType raceType)
+        {
+            this.statModified = statModified;
+
+            this.attackType = attackType; 
+            this.damageType = damageType;  
+
+            this.cultType = cultType;
+            this.raceType = raceType;
+            this.valPercent = valPercent;
+        }
+    }
+
     public class StatBuffController : MonoBehaviour
     {
 
-        List<StatBuffData> allBuffs = new List<StatBuffData>();
         List<StatBuffData> allDayNightbuffs = new List<StatBuffData>();       
         // use array here for the index to work 
 
@@ -51,107 +95,19 @@ namespace Common
         void Start()
         {
             charController = GetComponent<CharController>();
-            CombatEventService.Instance.OnEOR1 += RoundTick;
-            CombatEventService.Instance.OnEOC += EOCTick;
-            QuestEventService.Instance.OnEOQ += EOQTick;
+            CombatEventService.Instance.OnEOR1 += EORTick;
+            CombatEventService.Instance.OnEOC += EOCTickStatAltBuff;
             CalendarService.Instance.OnChangeTimeState += ToggleBuffsOnTimeStateChg;
-
         }
         private void OnDisable()
         {
-            CombatEventService.Instance.OnEOR1 -= RoundTick;
-            CombatEventService.Instance.OnEOC -= EOCTick;
-            QuestEventService.Instance.OnEOQ -= EOQTick;
+            CombatEventService.Instance.OnEOR1 -= EORTick;
+            CombatEventService.Instance.OnEOC -= EOCTickStatAltBuff;            
             CalendarService.Instance.OnChangeTimeState -= ToggleBuffsOnTimeStateChg;
         }
 
         #region  APPLY_BUFFS 
-        public int ApplyBuff(CauseType causeType, int causeName, int causeByCharID
-                                , StatName statName, float value, TimeFrame timeFrame, int netTime, bool isBuff)
-        {
-
-            StatModData statModData = charController.ChangeStat(causeType, causeName, causeByCharID
-                                            , statName, value, true);
-            int currRd = GameSupportService.Instance.currentRound;
-            buffIndex++;
-            StatBuffData statBuffData = new StatBuffData(buffIndex, isBuff, currRd, timeFrame, netTime,
-                                                                    statModData);
-            allBuffs.Add(statBuffData);
-            return buffIndex;
-        }
-
-        public bool RemoveStatBuff(int buffID)   // to be revised
-        {
-            StatBuffData statbuffData = null;
-            int index = allBuffs.FindIndex(t => t.buffID == buffID);
-            if (index == -1)
-            {
-                index = allDayNightbuffs.FindIndex(t => t.buffID == buffID);
-                if (index == -1)
-                {
-                    return false; 
-                }
-                else // remove day buff
-                {
-                    statbuffData = allDayNightbuffs[index];
-                    allDayNightbuffs.Remove(statbuffData);
-                    return true;
-                }
-            }
-            else
-            {
-                statbuffData = allBuffs[index];
-                RemoveStatBuffData(statbuffData);
-                return true;
-            }
-        }
-        public void RemoveStatBuffData(StatBuffData statbuffData)
-        {   
-             charController.ChangeStat(statbuffData.statModData.causeType,
-                                    statbuffData.statModData.causeName, statbuffData.statModData.causeByCharID
-                                    , statbuffData.statModData.statModified, -statbuffData.statModData.modVal, true);
-            
-            allBuffs.Remove(statbuffData);
-        }
-        #endregion
      
-        public void RoundTick(int roundNo)
-        {
-            foreach (StatBuffData buffData in allBuffs.ToList())
-            {
-                if (buffData.timeFrame == TimeFrame.EndOfRound)
-                {
-                    if (buffData.buffCurrentTime >= buffData.buffedNetTime)
-                    {
-                        RemoveStatBuffData(buffData);
-                    }
-                    buffData.buffCurrentTime++;
-                }
-            }
-        }
-
-        public void EOCTick()
-        {
-            foreach (StatBuffData buffData in allBuffs.ToList())
-            {
-                if (buffData.timeFrame == TimeFrame.EndOfCombat)
-                {
-                    RemoveStatBuffData(buffData);
-                }
-            }
-        }
-
-        public void EOQTick()
-        {
-            foreach (StatBuffData buffData in allBuffs.ToList())
-            {
-                if (buffData.timeFrame == TimeFrame.EndOfQuest)
-                {
-                    RemoveStatBuffData(buffData);
-                }
-            }
-        }
-
         public int ApplyNInitBuffOnDay(CauseType causeType, int causeName, int causeByCharID
                               , StatName statName, float value, TimeFrame timeFrame, int netTime, bool isBuff)
         {
@@ -193,5 +149,139 @@ namespace Common
                 }
             }       
         }
+
+        #endregion
+
+        #region DAMAGE RECEIVE BUFF ALTERER
+
+        public List<StatAltBuffData> allStatAltBuffData = new List<StatAltBuffData>();
+
+        int statBuffID = 0;
+        public int ApplyStatReceivedAltBuff(float valPercent, CauseType causeType, int causeName, int causeByCharID, StatName statModified,
+             TimeFrame timeFrame, int netTime, bool isBuff,AttackType attackType,  DamageType damageType,          
+            CultureType cultType = CultureType.None, RaceType raceType = RaceType.None)
+        {
+            statBuffID = allStatAltBuffData.Count + 1;
+            int startRoundNo = CombatEventService.Instance.currentRound;
+      
+            StatAltData statAltData = new StatAltData(statModified, valPercent,attackType
+                                                        , damageType,  cultType , raceType);
+            StatAltBuffData statAltBuffData = new StatAltBuffData(statBuffID, isBuff, startRoundNo, timeFrame
+                            , netTime, statAltData);
+            
+            allStatAltBuffData.Add(statAltBuffData);
+            return statBuffID;
+        }
+        public void EOCTickStatAltBuff()
+        {
+            foreach (StatAltBuffData statAltBuffData in allStatAltBuffData.ToList())
+            {
+                if (statAltBuffData.timeFrame == TimeFrame.EndOfCombat)
+                {
+                    RemoveStatAltBuffData(statAltBuffData);
+                }
+            }
+        }
+
+        public void EORTick(int roundNo)  // to be completed
+        {
+            foreach (StatAltBuffData statAltBuffData in allStatAltBuffData.ToList())
+            {
+                if (statAltBuffData.timeFrame == TimeFrame.EndOfRound)
+                {
+                    if (statAltBuffData.buffCurrentTime >= statAltBuffData.buffedNetTime)
+                    {
+                        RemoveStatAltBuffData(statAltBuffData);
+                    }
+                    statAltBuffData.buffCurrentTime++;
+                }
+            }
+        }
+
+        void RemoveStatAltBuffData(StatAltBuffData statAltBuffData)
+        {
+            allStatAltBuffData.Remove(statAltBuffData);
+        }
+        public bool RemoveStatAltBuff(int dmgBuffID)
+        {
+            int index = allStatAltBuffData.FindIndex(t => t.dmgBuffID == dmgBuffID);
+            if (index == -1) return false;
+            StatAltBuffData statAltBuffData = allStatAltBuffData[index];
+            RemoveStatAltBuffData(statAltBuffData);
+            return true;
+        }
+
+        public float GetStatReceivedAlt(CharModel strikerModel, AttackType attackType = AttackType.None
+                                         , DamageType damageType = DamageType.None)
+        {
+            // 20% physical attack against beastmen            
+            foreach (StatAltBuffData statAltBuffData in allStatAltBuffData.ToList())
+            {
+                StatAltData statAltData = statAltBuffData.altData;
+                if (statAltData.damageType != DamageType.None && statAltData.damageType == damageType)// Damage Type Block 
+                {
+                    float val = 0;
+                    if (statAltData.raceType != RaceType.None
+                        && statAltData.raceType == strikerModel.raceType
+                                && statAltData.cultType != CultureType.None
+                                && statAltData.cultType == strikerModel.cultType)
+                    {
+
+                        val = statAltData.valPercent; // COMBO RACE AND CULT
+
+                    }
+                    else   // NOT A COMBO OF RACE AND CULT
+                    {
+                        if (statAltData.raceType != RaceType.None
+                                  && statAltData.raceType == strikerModel.raceType)
+                        {
+                            val = statAltData.valPercent;
+                        }
+                        if (statAltData.cultType != CultureType.None
+                                        && statAltData.cultType == strikerModel.cultType)
+                        {
+                            val = statAltData.valPercent;
+                        }
+                    }
+                    return val;
+                }
+                else if (statAltData.attackType != AttackType.None && statAltData.attackType == attackType)// Attack type block
+                {
+                    float val = 0;
+                    if (statAltData.raceType != RaceType.None
+                        && statAltData.raceType == strikerModel.raceType
+                                && statAltData.cultType != CultureType.None
+                                && statAltData.cultType == strikerModel.cultType)
+                    {
+
+                        val = statAltData.valPercent; // COMBO RACE AND CULT
+
+                    }
+                    else   // NOT A COMBO OF RACE AND CULT
+                    {
+                        if (statAltData.raceType != RaceType.None
+                                  && statAltData.raceType == strikerModel.raceType)
+                        {
+                            val = statAltData.valPercent;
+                        }
+                        if (statAltData.cultType != CultureType.None
+                                        && statAltData.cultType == strikerModel.cultType)
+                        {
+                            val = statAltData.valPercent;
+                        }
+                    }
+                    return val;
+                }
+                else if (statAltData.attackType == AttackType.None && statAltData.damageType == DamageType.None)
+                {
+                    return statAltData.valPercent;
+                }
+            }
+            return 0f;
+        
+        }
+
+        #endregion
+
     }
 }

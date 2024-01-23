@@ -17,10 +17,8 @@ namespace Common
             //+1 AP if starts turn on pos 1,2,3,
             //  +5 -10 fort 
             // + 2 armor Max at 1,2,3
-
             CombatEventService.Instance.OnCharOnTurnSet += ExtraAPFor123;
             SkillService.Instance.OnSkillUsed += OnGuardSkill; 
-  
         }
 
         void OnGuardSkill(SkillEventData skillEventData)
@@ -43,8 +41,9 @@ namespace Common
             }
             List<int> allPos = new List<int>() { 1, 2, 3 };
 
-            charController.buffController.ApplyPosBuff(allPos, CauseType.CharState, (int)charStateName
+           int buffID =   charController.buffController.ApplyPosBuff(allPos, CauseType.CharState, (int)charStateName
                                     , charID, AttribName.armorMax, 2f, timeFrame, castTime, true); 
+            allBuffIds.Add(buffID);
                        
         }
         public override void EndState()

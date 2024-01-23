@@ -15,10 +15,9 @@ MonoBehaviour:
   tempTraitName: 37
   tempTraitType: 3
   temptraitBehavior: 2
-  minCastTime: -1
-  maxCastTime: -1
+  minCastTime: 2
+  maxCastTime: 3
   traitNameStr: ' Sore Throat'
-  iconSprite: {fileID: 0}
   allLines:
   - -2 Wp
   - -1 Morale

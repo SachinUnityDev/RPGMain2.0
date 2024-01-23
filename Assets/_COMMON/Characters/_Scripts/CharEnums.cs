@@ -364,6 +364,7 @@ public enum CultureType
     Huwawa,
     Fleshly,
     IndigenElf,
+    All, 
 }
 public enum ArcheType
 {
@@ -412,6 +413,7 @@ public enum ClassType {
     Sanddigger,
     Secudor,
     Warden,
+    All,
 }; 
 
 public enum CharOccupies

@@ -21,12 +21,12 @@ namespace Interactables
         private void OnEnable()
         {
             InvService.Instance.OnCharSelectInvPanel += PopulateWeaponPanel;
-            ItemService.Instance.OnGemEnchanted += PopulateGemEnchanted;
+            ItemService.Instance.OnItemEnchanted += PopulateGemEnchanted;
         }
         private void OnDisable()
         {
             InvService.Instance.OnCharSelectInvPanel -= PopulateWeaponPanel;
-            ItemService.Instance.OnGemEnchanted -= PopulateGemEnchanted;
+            ItemService.Instance.OnItemEnchanted -= PopulateGemEnchanted;
         }
         private void Start()
         {
@@ -44,7 +44,7 @@ namespace Interactables
             transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = sprite;
         }
 
-        void PopulateGemEnchanted(CharController charController1)
+        void PopulateGemEnchanted(CharController charController1, Iitems iitem)
         {          
             // use char Controller 1 on test
             CharController charController = InvService.Instance.charSelectController;

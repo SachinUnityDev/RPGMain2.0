@@ -11,16 +11,13 @@ namespace Common
         //-2 Focus	-1 Morale
         public override void OnApply()
         {      
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                         charID, AttribName.focus, -2, TimeFrame.Infinity, -1, true);
+            int buffID = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+                                                 charID, AttribName.focus, -2, TimeFrame.Infinity, -1, false);
+            allBuffIds.Add(buffID);
 
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                         charID, AttribName.morale, -1, TimeFrame.Infinity, -1, true);
-        }
-
-        public override void EndTrait()
-        {
-            base.EndTrait();
+            buffID = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+                                                charID, AttribName.morale, -1, TimeFrame.Infinity, -1, false);
+            allBuffIds.Add(buffID);
         }
     }
 }

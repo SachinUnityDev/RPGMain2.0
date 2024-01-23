@@ -215,6 +215,8 @@ public class PotionSlotInCombatView : MonoBehaviour, IPointerClickHandler, iSlot
                 IConsumable iconsume = item as IConsumable;
                 if (iconsume != null)
                     iconsume.ApplyConsumableFX();
+                
+
                 RemoveItem();
             }
                

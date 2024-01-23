@@ -20,7 +20,7 @@ namespace Quest
 
         public override void OnChoiceASelect()
         {
-            float chance = 0f;
+            float chance = 60f;
             if (chance.GetChance())
             {
                 resultStr = "You managed to taked couple of them down and the rest is gravy...";

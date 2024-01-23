@@ -11,17 +11,15 @@ using UnityEngine;
        // -3 Vigor	-3 Willpower
         public override void OnApply()
         {
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                         charID, AttribName.vigor, -3, TimeFrame.Infinity, -1, true);
+            int buffID = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+                                                     charID, AttribName.vigor, -3, TimeFrame.Infinity, -1, false);
+            allBuffIds.Add(buffID);
 
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                         charID, AttribName.willpower, -3, TimeFrame.Infinity, -1, true);
+            buffID = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+                                                charID, AttribName.willpower, -3, TimeFrame.Infinity, -1, false);
+            allBuffIds.Add(buffID);
         }
 
-        public override void EndTrait()
-        {
-            base.EndTrait();
-        }
     }
 
 }

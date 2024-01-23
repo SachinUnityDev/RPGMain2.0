@@ -24,9 +24,16 @@ namespace Interactables
         public void Init()
         {
             itemModel = new ItemModel();
-            charController = gameObject.GetComponent<CharController>(); 
+            charController = gameObject.GetComponent<CharController>();
+            charController.itemController= this;
+            CalendarService.Instance.OnStartOfCalDay -= (int day) => itemModel.ClearAllOCData();
+            CalendarService.Instance.OnStartOfCalDay += (int day) => itemModel.ClearAllOCData(); 
         }
 
+        private void OnDisable()
+        {
+            CalendarService.Instance.OnStartOfCalDay -= (int day) => itemModel.ClearAllOCData();
+        }
         void Start()
         {
             displayStrs = new List<string>();

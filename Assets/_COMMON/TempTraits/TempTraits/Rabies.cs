@@ -12,35 +12,25 @@ namespace Common
         //+3 Haste	-3 Vigor	-20 All Res
         public override void OnApply()
         {           
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+            int buffID = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
                                                          charID, AttribName.haste, 3, TimeFrame.Infinity, -1, true);
+            allBuffIds.Add(buffID);
 
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, AttribName.vigor, -3, TimeFrame.Infinity, -1, true);
+            buffID = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+                                             charID, AttribName.vigor, -3, TimeFrame.Infinity, -1, false);
+            allBuffIds.Add(buffID);
 
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, AttribName.earthRes, -20, TimeFrame.Infinity, -1, true);
-
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, AttribName.airRes, -20, TimeFrame.Infinity, -1, true);
-
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, AttribName.waterRes, -20, TimeFrame.Infinity, -1, true);
-
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, AttribName.fireRes, -20, TimeFrame.Infinity, -1, true);
-
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, AttribName.darkRes, -20, TimeFrame.Infinity, -1, true);
-
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, AttribName.lightRes, -20, TimeFrame.Infinity, -1, true);
-
-
+            allBuffIds.AddRange(charController.buffController.BuffAllRes(CauseType.TempTrait
+                           , (int)tempTraitName, charID, -20f, TimeFrame.Infinity, -1, false));
         }
-        public override void EndTrait()
+        public override void OnEndConvert()
         {
-            
+            base.OnEndConvert();
+            if (60f.GetChance())
+            {
+                charController.tempTraitController
+                    .ApplyTempTrait(CauseType.TempTrait, (int)tempTraitName, charID, TempTraitName.Insane);
+            }
         }
     }
 }

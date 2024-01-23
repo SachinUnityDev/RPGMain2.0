@@ -10,8 +10,7 @@ using Town;
 using System.Linq;
 using Spine.Unity;
 using TMPro;
-using NUnit.Framework.Internal;
-using System.Runtime.InteropServices.ComTypes;
+
 
 namespace Common
 {   
@@ -103,7 +102,6 @@ namespace Common
             AddController_OnCharSpawn(); 
             return charModel; 
         }
-
         void AddController_OnCharSpawn()
         {
             buffController = gameObject.AddComponent<BuffController>();
@@ -122,15 +120,14 @@ namespace Common
 
                 fleeController = gameObject.AddComponent<FleeController>();
             }
-
+            permaTraitController = gameObject.AddComponent<PermaTraitController>();
             tempTraitController = gameObject.AddComponent<TempTraitController>();
             charStateController = gameObject.AddComponent<CharStateController>();
 
             skillController = gameObject.AddComponent<SkillController1>();
             SkillService.Instance.allSkillControllers.Add(skillController);
 
-        }
-   
+        }   
         public AttribChanceData GetAttribChanceData(AttribName _statName)
         {
             foreach (AttribChanceData attribChanceData in CharService.Instance.statChanceSO.allStatChanceData)

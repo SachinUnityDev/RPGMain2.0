@@ -15,10 +15,9 @@ MonoBehaviour:
   tempTraitName: 55
   tempTraitType: 3
   temptraitBehavior: 2
-  minCastTime: -1
-  maxCastTime: -1
+  minCastTime: 4
+  maxCastTime: 6
   traitNameStr: ' Rat Bite Fever'
-  iconSprite: {fileID: 0}
   allLines:
   - -1 Utility stats
   - -20% Hunger and Thirst

@@ -11,15 +11,22 @@ using UnityEngine;
 
         public override void OnApply()
         {
-          
-        }
+            int buffID = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+                                               charID, AttribName.willpower, -6, TimeFrame.Infinity, -1, false);
+            allBuffIds.Add(buffID);
 
-        public override void EndTrait()
+            buffID = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+                                             charID, AttribName.vigor, -6, TimeFrame.Infinity, -1, false);
+            allBuffIds.Add(buffID);
+        }
+        public override void OnEndConvert()
         {
-            base.EndTrait();
+            base.OnEndConvert();
+            
+            if(charController.charModel.charName != CharNames.Abbas)
+                CharService.Instance.On_CharDeath(charController, charID); 
+            
         }
     }
-
-
 }
 

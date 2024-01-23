@@ -427,7 +427,9 @@ namespace Interactables
         /// </summary>
         public bool IsConsumable()
         {
-            IConsumable iConsumable = ItemsInSlot[0] as IConsumable;
+            if (GameService.Instance.gameModel.gameState == GameState.InTown)
+                return false; 
+                IConsumable iConsumable = ItemsInSlot[0] as IConsumable;
             if (iConsumable == null)
                 return false;
             return true;
@@ -436,6 +438,8 @@ namespace Interactables
         {
             IConsumable iconsume = ItemsInSlot[0] as IConsumable;
             iconsume.ApplyConsumableFX();
+            CharController charController = InvService.Instance.charSelectController;
+            ItemService.Instance.On_ItemConsumed(charController, ItemsInSlot[0]); 
         }
         public bool IsEnchantable()
         {
@@ -455,6 +459,7 @@ namespace Interactables
         {
             CharController charController = InvService.Instance.charSelectController;
             charController.itemController.EnchantTheWeaponThruScroll((GemBase)ItemsInSlot[0]);
+            ItemService.Instance.On_ItemEnchanted(charController, ItemsInSlot[0]);  
             RemoveItem(); 
         }
         public bool IsEquipable()

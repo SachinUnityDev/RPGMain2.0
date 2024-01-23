@@ -15,10 +15,9 @@ MonoBehaviour:
   tempTraitName: 12
   tempTraitType: 3
   temptraitBehavior: 2
-  minCastTime: -1
-  maxCastTime: -1
+  minCastTime: 1
+  maxCastTime: 2
   traitNameStr: ' Diarrhea'
-  iconSprite: {fileID: 0}
   allLines:
   - +2 Dodge
   - -4 Acc

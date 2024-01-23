@@ -12,7 +12,7 @@ namespace Common
     }
 
 
-    public enum TempTraitBehaviour
+    public enum TraitBehaviour
     {
         None,
         Positive,
@@ -106,41 +106,19 @@ namespace Common
     public enum PermaTraitName
     {
         None,
-        BeastTamer,
-        BoldMover,
-        BornRider,
-        CannotBeCaged,
-        CatVision,
-        CodesofHonour,
-        Shapeshifter,
-        DarkKnight,
-        DeepSearcher,
+        AttentionSeeker,
+        CodesOfHonor,
+        Conspicuous,
+        Derring,
         Hale,
-        HiddenClaw,
-        Vaward,
-        Impenitent,
-        JungleMan,
-        SnaredSlayer,
-        Looter,
         LoreReader,
-        MasterSmuggler,
-        NaturalHabitat,
-        NeedSomeSpace,
-        NomadBlood,
         NothingToLose,
-        QueenOfTheForest,
-        Regeneration,
-        Scout,
-        Selfcentred,
-        SidedWithTheWeak,
-        SmellsLikeHome,
+        Regeneration,        
+        SnaredSlayer,
         SwornRivals,
         TheMoreTheMerrier,
         Unmoved,
-        Unwilling,
         WetAndHappy,
-        Derring,
-        CenterOfAttention,
     }
 
 }

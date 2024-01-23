@@ -53,15 +53,15 @@ namespace Common
             return tempTraitBase;
         }
 
-        public void ApplyPermTraits(GameObject go)
-        {
-            CharController charController = go?.GetComponent<CharController>();
-            PermaTraitBase[] tempTraits = go.GetComponents<PermaTraitBase>();
-            foreach (PermaTraitBase p in tempTraits)
-            {
-                p.ApplyTrait(charController);
-            }
-        }
+        //public void ApplyPermTraits(GameObject go)
+        //{
+        //    CharController charController = go?.GetComponent<CharController>();
+        //    PermaTraitBase[] tempTraits = go.GetComponents<PermaTraitBase>();
+        //    foreach (PermaTraitBase p in tempTraits)
+        //    {
+        //        p.ApplyTrait(charController);
+        //    }
+        //}
 
         public bool IsAnyOneSick()
         {

@@ -18,15 +18,14 @@ namespace Common
         public int charID { get; set; }
         public int traitID { get; set; }
         public int castTime { get; protected set; }
-        public List<int> allBuffIds { get; set; } = new List<int>();
-        public List<int> allLandBuffIds { get; set; } = new List<int>();
-        
+
+        public List<int> allBuffIds = new List<int>();
+        public List<int> allLandBuffIds = new List<int>();        
         public List<int> allBuffDmgAltIds  = new List<int>();
         public List<int> allBuffDmgRecAltIds = new List<int>();
         public List<int> allCharStateDmgAltBuffIds = new List<int>();
         public virtual void TempTraitInit(TempTraitSO tempTraitSO, CharController charController, int traitID)
         {
-
             this.tempTraitSO = tempTraitSO;
             this.charController = charController;
             this.charID = charController.charModel.charID;
@@ -43,8 +42,10 @@ namespace Common
             CalendarService.Instance.OnStartOfCalDay += DayTick;
             startDay = CalendarService.Instance.dayInGame;
             allBuffIds.Clear();
+            allLandBuffIds.Clear();
             allBuffDmgAltIds.Clear();
             allBuffDmgRecAltIds.Clear();
+            allCharStateDmgAltBuffIds.Clear();
         }
         public abstract void OnApply();
 

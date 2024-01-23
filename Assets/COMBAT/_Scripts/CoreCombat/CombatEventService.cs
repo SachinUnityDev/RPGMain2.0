@@ -51,9 +51,9 @@ namespace Combat
 
         [Header(" Common round Counter")]
         public int currentRound = 1;
+        public int currentTurn = 0; 
 
         [Header(" Combat result")]  // every time a combat end add here 
-        
         public CombatModel combatModel = null; 
         public CombatResult currCombatResult; 
         

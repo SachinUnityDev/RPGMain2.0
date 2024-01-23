@@ -50,7 +50,7 @@ MonoBehaviour:
   CompanionPreReqOpt1: []
   CompanionPreReqOpt2: []
   startLevel: 0
-  permaTraitNames: 
+  permaTraitNames: 00000000000000000000000000000000
   AttribList:
   - AttribName: 1
     currValue: 7

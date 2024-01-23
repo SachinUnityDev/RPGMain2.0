@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Combat;
-using Common;
-using Quest;
+
 namespace Common
 {
     public class UnMoved :PermaTraitBase
@@ -11,69 +10,44 @@ namespace Common
 
         public override PermaTraitName permaTraitName => PermaTraitName.Unmoved;
         public override void ApplyTrait()
-        {
-            DecInit4Safriman();
-
-            CombatEventService.Instance.OnDeathInCombat += IncInit4Safriman;
-          //  CombatEventService.Instance.OnFleeInCombat += IncInit4Safriman;
-          // to be uncommented .. 
-            CombatEventService.Instance.OnCombatRejoin += DecInit4ReJoinerSafriman;
-
-            QuestEventService.Instance.OnDeathInQuest += IncInit4Safriman;
-            QuestEventService.Instance.OnQuestFlee += IncInit4Safriman;
+        {   
+            CharService.Instance.OnPartyLocked += ApplyHasteBuff;
+            CharService.Instance.OnCharDeath += DeathNFleeChk;             
+            CharService.Instance.OnCharFleeQuest += DeathNFleeChk;
 
         }
 
-
-        void DecInit4ReJoinerSafriman(CharController _charChanged)
+        void DeathNFleeChk(CharController charController)
         {
+            if (charController.charModel.cultType == CultureType.Safriman
+                && charController.charModel.charID != charID)
+                ApplyHasteBuff(); 
+        }
 
-            foreach (CharController c in CharService.Instance.allyInPlayControllers)
+        void ApplyHasteBuff()
+        {
+            int count = 0;
+            ClearBuffs();
+            foreach (CharController  charCtrl in CharService.Instance.allCharsInPartyLocked)
             {
-                if (c.charModel.charID != _charChanged.charModel.charID) // other than myself
-                {
-                    if (c.charModel.cultType == CultureType.Safriman)
-                    {
-                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permaTraitName, charID, AttribName.haste, -1);
 
-                    }
-                }
+                if (charController.charModel.cultType == CultureType.Safriman
+                    && charController.charModel.charID != charID)
+                    if (charCtrl.charModel.stateOfChar == StateOfChar.UnLocked)
+                    count++;
+            }
+            for (int i = 0; i < count; i++)
+            {
+                int buffID = charController.buffController.ApplyBuff(CauseType.PermanentTrait, (int)permaTraitName
+                                    , charID, AttribName.haste, -1, TimeFrame.Infinity, 1, false);
+                allBuffIds.Add(buffID); 
             }
         }
 
 
-        void IncInit4Safriman(CharController _charChanged)
-        {
 
-            foreach (CharController c in CharService.Instance.allyInPlayControllers)
-            {
-                if (c.charModel.charID != _charChanged.charModel.charID) // other than myself
-                {
-                    if (c.charModel.cultType == CultureType.Safriman)
-                    {
-                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permaTraitName, charID, AttribName.haste, -1);
 
-                    }
-                }
-            }
-        }
-
-        // -1 init for each other Safriman in party
-        void DecInit4Safriman()
-        {
-
-            foreach (CharController c in CharService.Instance.allyInPlayControllers)
-            {
-                if (c.charModel.charID != charController.charModel.charID) // other than myself
-                {
-                    if (c.charModel.cultType == CultureType.Safriman)
-                    {
-                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permaTraitName, charID, AttribName.haste, -1);                        
-
-                    }
-                }
-            }
-        }
     }
 }
+
 

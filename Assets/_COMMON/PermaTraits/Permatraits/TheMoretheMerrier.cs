@@ -7,76 +7,44 @@ namespace Common
 {
     public class TheMoretheMerrier : PermaTraitBase
     {
-        //1 morale for each other Safriman in party
-        //+1 focus for each other Safriman in party
         public override PermaTraitName permaTraitName => PermaTraitName.TheMoreTheMerrier;
+
         public override void ApplyTrait()
         {
-           
-            IncMoraleSafriman();
-      
-            //  END conditions .. TO BE Corrected 
-            //CombatEventService.Instance.OnDeathInCombat += DecMorNFoc4Safriman;
-            CombatEventService.Instance.OnCombatFlee += DecMorNFoc4Safriman;
-            CombatEventService.Instance.OnCombatRejoin += DecMorNFoc4ReJoinerSafriman; 
-
-            //QuestEventService.Instance.OnDeathInQuest += DecMorNFoc4Safriman;
-            //QuestEventService.Instance.OnFleeInQuest += DecMorNFoc4Safriman;
-
+            CharService.Instance.OnPartyLocked += ApplyHasteBuff;
+            CharService.Instance.OnCharDeath += DeathNFleeChk;
+            CharService.Instance.OnCharFleeQuest += DeathNFleeChk;
         }
 
-        void DecMorNFoc4ReJoinerSafriman(CharController _charChanged)
+        void DeathNFleeChk(CharController charController)
         {
+            if (charController.charModel.cultType == CultureType.Safriman
+                && charController.charModel.charID != charID)
+                ApplyHasteBuff();
+        }
 
-            foreach (CharController c in CharService.Instance.allyInPlayControllers)
+        void ApplyHasteBuff()
+        {
+            int count = 0;
+            ClearBuffs();
+            foreach (CharController charCtrl in CharService.Instance.allCharsInPartyLocked)
             {
-                if (c.charModel.charID != _charChanged.charModel.charID) // other than myself
-                {
-                    if (c.charModel.cultType == CultureType.Safriman)
-                    {
-                        c.ChangeAttrib(CauseType.PermanentTrait,(int)permaTraitName, charID, AttribName.haste, -1);
 
-                    }
-                }
+                if (charController.charModel.cultType == CultureType.Safriman
+                    && charController.charModel.charID != charID)
+                    if (charCtrl.charModel.stateOfChar == StateOfChar.UnLocked)
+                        count++;
+            }
+            for (int i = 0; i < count; i++)
+            {
+                int buffID = charController.buffController.ApplyBuff(CauseType.PermanentTrait, (int)permaTraitName
+                                    , charID, AttribName.morale, 1, TimeFrame.Infinity, 1, true);
+                allBuffIds.Add(buffID);
+                buffID = charController.buffController.ApplyBuff(CauseType.PermanentTrait, (int)permaTraitName
+                         , charID, AttribName.focus, 1, TimeFrame.Infinity, 1, true);
+                allBuffIds.Add(buffID);
             }
         }
-
-        //1 morale for each other Safriman in party
-        //+1 focus for each other Safriman in party
-        void DecMorNFoc4Safriman(CharController charController)
-        {
-            foreach (CharController c in CharService.Instance.allyInPlayControllers)
-            {
-                if (c.charModel.charID != charController.charModel.charID) // other than myself
-                {
-                    if (c.charModel.cultType == CultureType.Safriman)
-                    {
-                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permaTraitName, charID, AttribName.morale, -1);
-                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permaTraitName, charID, AttribName.focus, -1);
-
-                    }
-                }
-            }
-        }
-
-
-        void IncMoraleSafriman()
-        {
-
-            foreach (CharController c in CharService.Instance.allyInPlayControllers)
-            {
-                if (c.charModel.charID != charController.charModel.charID) // other than myself
-                {
-                    if (c.charModel.cultType == CultureType.Safriman)
-                    {
-                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permaTraitName, charID,AttribName.morale, +1);
-                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permaTraitName, charID, AttribName.focus, +1);
-
-                    }
-                }
-            }
-        }
-
 
 
     }

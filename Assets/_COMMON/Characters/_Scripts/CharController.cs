@@ -36,7 +36,7 @@ namespace Common
         public BuffController buffController;
         public CharTypeBuffController charTypeBuffController;
         public TimeBuffController timeBuffController;
-        
+        public StatBuffController statBuffController;
 
         [Header("States and traits controller")]
         public CharStateController charStateController;
@@ -114,6 +114,7 @@ namespace Common
                 landscapeController = gameObject.AddComponent<LandscapeController>();
                 permaTraitController = gameObject.GetComponent<PermaTraitController>();
                 armorController = gameObject.AddComponent<ArmorController>();
+                statBuffController= gameObject.AddComponent<StatBuffController>();
                 // CombatEventService.Instance.OnSOT += ()=> PopulateOverCharBars(false); 
                 //CombatEventService.Instance.OnEOC -= FortitudeReset2FortOrg;
                 //CombatEventService.Instance.OnEOC += FortitudeReset2FortOrg;

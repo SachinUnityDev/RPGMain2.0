@@ -36,6 +36,11 @@ namespace Common
     public class StatAltBuffData
     {
         public int dmgBuffID;
+        public CauseType causeType;
+        public int causeName;
+        public int causeByCharID;
+        public bool isPositive = true; 
+
         public bool isBuff;   // true if BUFF and false if DEBUFF
         public int startRoundNo;
         public TimeFrame timeFrame;
@@ -43,16 +48,26 @@ namespace Common
         public int buffCurrentTime;
         public StatAltData altData;  // contains value for the buff        
 
-        public StatAltBuffData(int dmgBuffID, bool isBuff, int startRoundNo, TimeFrame timeFrame
-                            , int buffedNetTime, StatAltData altData)
+        public StatAltBuffData(int dmgBuffID, CauseType causeType, int causeName, int causeByCharID, 
+            bool isBuff,bool isPositive,  int startRoundNo, TimeFrame timeFrame
+                            , int buffedNetTime, StatAltData altData )
         {
             this.dmgBuffID = dmgBuffID;
             this.isBuff = isBuff;
+            this.isPositive= isPositive;
+            this.causeType= causeType;
+            this.causeName = causeName;
+            this.causeByCharID= causeByCharID;
+
+
             this.startRoundNo = startRoundNo;
             this.timeFrame = timeFrame;
             this.buffedNetTime = buffedNetTime;
             this.buffCurrentTime = 0;// time counter for the dmgBuff
             this.altData = altData;
+            this.causeType = causeType;
+            this.causeName = causeName;
+            this.causeByCharID = causeByCharID;
         }
     }
     public class StatAltData
@@ -85,7 +100,7 @@ namespace Common
         List<StatBuffData> allDayNightbuffs = new List<StatBuffData>();       
         // use array here for the index to work 
 
-        CharController charController; // ref to char Controller 
+        CharController charController;
         [SerializeField] List<string> buffStrs = new List<string>();
         [SerializeField] List<string> deDuffStrs = new List<string>();
 
@@ -120,7 +135,7 @@ namespace Common
                 charController.ChangeStat(causeType, causeName, causeByCharID
                                                         , statName, -value, true);
             }
-            int currRd = GameSupportService.Instance.currentRound;
+            int currRd = CombatEventService.Instance.currentRound;
             buffIndex++;
 
             StatBuffData buffData = new StatBuffData(buffIndex, isBuff, currRd, timeFrame, netTime,
@@ -157,8 +172,8 @@ namespace Common
         public List<StatAltBuffData> allStatAltBuffData = new List<StatAltBuffData>();
 
         int statBuffID = 0;
-        public int ApplyStatReceivedAltBuff(float valPercent, CauseType causeType, int causeName, int causeByCharID, StatName statModified,
-             TimeFrame timeFrame, int netTime, bool isBuff,AttackType attackType,  DamageType damageType,          
+        public int ApplyStatReceivedAltBuff(float valPercent, StatName statModified, CauseType causeType, int causeName, int causeByCharID,
+             TimeFrame timeFrame, int netTime, bool isBuff, AttackType attackType =AttackType.None,  DamageType damageType = DamageType.None,          
             CultureType cultType = CultureType.None, RaceType raceType = RaceType.None)
         {
             statBuffID = allStatAltBuffData.Count + 1;
@@ -166,7 +181,9 @@ namespace Common
       
             StatAltData statAltData = new StatAltData(statModified, valPercent,attackType
                                                         , damageType,  cultType , raceType);
-            StatAltBuffData statAltBuffData = new StatAltBuffData(statBuffID, isBuff, startRoundNo, timeFrame
+
+
+            StatAltBuffData statAltBuffData = new StatAltBuffData(statBuffID, causeType, causeName, causeByCharID, isBuff,true, startRoundNo, timeFrame
                             , netTime, statAltData);
             
             allStatAltBuffData.Add(statAltBuffData);
@@ -211,10 +228,16 @@ namespace Common
             return true;
         }
 
-        public float GetStatReceivedAlt(CharModel strikerModel, AttackType attackType = AttackType.None
+        public float GetStatReceivedAlt(CharModel strikerModel, StatName statModified, float valChg, AttackType attackType = AttackType.None
                                          , DamageType damageType = DamageType.None)
         {
             // 20% physical attack against beastmen            
+            bool isPositive = false; 
+            if(valChg >= 0 )
+                isPositive= true;
+            else isPositive= false;
+
+
             foreach (StatAltBuffData statAltBuffData in allStatAltBuffData.ToList())
             {
                 StatAltData statAltData = statAltBuffData.altData;

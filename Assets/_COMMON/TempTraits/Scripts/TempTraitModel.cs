@@ -12,7 +12,9 @@ namespace Common
         public TempTraitName tempTraitName;        
         public TempTraitType tempTraitType;
         public TraitBehaviour temptraitBehavior;
-       
+
+        [Header("Sickness Data")]
+        public SicknessData sicknessData; 
         public int castTime = -1;
         [Header("Description")]
         public string traitNameStr = "";
@@ -22,10 +24,16 @@ namespace Common
             tempTraitName = tempTraitSO.tempTraitName;
             tempTraitType= tempTraitSO.tempTraitType;
             temptraitBehavior = tempTraitSO.temptraitBehavior;
+            sicknessData= tempTraitSO.sicknessData.DeepClone();
 
             this.castTime = casttime;
             this.tempTraitID = tempTraitID;
      
         }
+        public void ChangeRestingPeriodTo(int restDays)
+        {
+            sicknessData.restTimeInday= restDays;
+        }
+
     }
 }

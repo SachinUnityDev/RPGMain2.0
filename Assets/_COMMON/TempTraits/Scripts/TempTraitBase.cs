@@ -24,6 +24,8 @@ namespace Common
         public List<int> allBuffDmgAltIds  = new List<int>();
         public List<int> allBuffDmgRecAltIds = new List<int>();
         public List<int> allCharStateDmgAltBuffIds = new List<int>();
+        public List<int> allStatAltBuff = new List<int>();
+
         public virtual void TempTraitInit(TempTraitSO tempTraitSO, CharController charController, int traitID)
         {
             this.tempTraitSO = tempTraitSO;
@@ -90,6 +92,10 @@ namespace Common
             foreach (int charStateDmgAltbuffID in allCharStateDmgAltBuffIds)
             {
                 charController.strikeController.RemoveDmgAltCharStateBuff(charStateDmgAltbuffID);
+            }
+            foreach (int statBuffID in allStatAltBuff)
+            {
+                charController.statBuffController.RemoveStatAltBuff(statBuffID);
             }
         }
     }

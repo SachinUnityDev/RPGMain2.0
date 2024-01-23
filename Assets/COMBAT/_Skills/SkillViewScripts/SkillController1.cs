@@ -727,7 +727,7 @@ namespace Combat
                                                                     , float dmgVal, TimeFrame timeFrame, int castTime)
         {
             int skillModId = allSkillDmgMod.Count + 1;
-            int currRd = GameSupportService.Instance.currentRound;
+            int currRd = CombatEventService.Instance.currentRound;
             SkillDmgModData skillBuffModVal = new SkillDmgModData(skillModId, causeType, causeName, skillInclination
                                                                                     , dmgVal, timeFrame, castTime, currRd);
             foreach (SkillModel skillModel in allSkillModels)

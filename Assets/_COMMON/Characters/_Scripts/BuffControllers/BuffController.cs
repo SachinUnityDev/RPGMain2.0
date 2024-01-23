@@ -208,7 +208,7 @@ namespace Combat
            
             AttribModData attribModVal =  charController.ChangeAttrib( causeType,  causeName, causeByCharID
                                             ,  attribName,  value, true);
-            int currRd = GameSupportService.Instance.currentRound;
+            int currRd = CombatEventService.Instance.currentRound;
             buffIndex++;
             BuffData buffData = new BuffData(buffIndex,isBuff, currRd, timeFrame, netTime,
                                                                     attribModVal);                
@@ -237,7 +237,7 @@ namespace Combat
 
             AttribModData attribModVal = new AttribModData(turn, causeType, causeName
                 , causebyCharID, charID, AttribName.None, val, charModel.mainExp); 
-            int currRd = GameSupportService.Instance.currentRound;
+            int currRd = CombatEventService.Instance.currentRound;
             buffIndex++;
             BuffData buffData = new BuffData(buffIndex, isBuff, currRd, timeFrame, castTime,attribModVal);
             allBuffs.Add(buffData);
@@ -430,16 +430,17 @@ namespace Combat
         public int ApplyPosBuff(List<int> allPos, CauseType causeType, int causeName, int causeByCharID
                                 , AttribName attribName, float value, TimeFrame timeFrame, int castTime, bool isBuff)
         {
+            AttribModData attribModVal = null;
+            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            {
+                DynamicPosData dyna = GridService.Instance.GetDyna4GO(gameObject);            
 
-            // check pos using dyna and apply Attrib mod Here
-            DynamicPosData dyna = GridService.Instance.GetDyna4GO(gameObject);
-            AttribModData attribModVal = null; 
-            
-            if(allPos.Any(t=>t == dyna.currentPos)) // apply if in pos // attribModVal == null will signal not applied
+                if (allPos.Any(t => t == dyna.currentPos)) // apply if in pos // attribModVal == null will signal not applied
                     attribModVal = charController.ChangeAttrib(causeType, causeName, causeByCharID
                                                                     , attribName, value, true);
-                
-            int currRd = GameSupportService.Instance.currentRound;
+            }   
+
+            int currRd = CombatEventService.Instance.currentRound;            
             buffIndex++;
             PosBuffData posBuffData = new PosBuffData(causeType, causeName, causeByCharID ,attribName, value,
                                         allPos, buffIndex, isBuff, currRd, timeFrame, castTime,attribModVal);
@@ -532,7 +533,7 @@ namespace Combat
                 attribModVal = charController.ChangeAttrib(causeType, causeName, causeByCharID
                                                         , statName, -value, true);  
             }
-            int currRd = GameSupportService.Instance.currentRound;
+            int currRd = CombatEventService.Instance.currentRound;
             buffIndex++;
             BuffData buffData = new BuffData(buffIndex, isBuff, currRd, timeFrame, netTime,
                                                                   attribModVal, timeState);

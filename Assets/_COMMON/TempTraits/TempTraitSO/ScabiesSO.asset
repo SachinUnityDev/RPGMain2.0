@@ -15,10 +15,9 @@ MonoBehaviour:
   tempTraitName: 36
   tempTraitType: 3
   temptraitBehavior: 2
-  minCastTime: -1
-  maxCastTime: -1
+  minCastTime: 10
+  maxCastTime: 12
   traitNameStr: ' Scabies'
-  iconSprite: {fileID: 0}
   allLines:
   - -2 Morale
   - -3 Focus

@@ -10,35 +10,26 @@ namespace Common
         //-2 Morale	-3 Focus	+10 Elemental Res
         public override void OnApply()
         {
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, AttribName.morale, -2, TimeFrame.Infinity, -1, true);
-
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, AttribName.focus, -3, TimeFrame.Infinity, -1, true);
-
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+            int buffid = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+                                             charID, AttribName.morale, -2, TimeFrame.Infinity, -1, false);
+            allBuffIds.Add(buffid);
+            buffid = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+                                             charID, AttribName.focus, -3, TimeFrame.Infinity, -1, false);
+            allBuffIds.Add(buffid);
+            buffid = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
                                              charID, AttribName.earthRes, +10, TimeFrame.Infinity, -1, true);
-
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+            allBuffIds.Add(buffid);
+            buffid = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
                                              charID, AttribName.airRes, +10, TimeFrame.Infinity, -1, true);
-
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, AttribName.waterRes, +10, TimeFrame.Infinity, -1, true);
-
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+            allBuffIds.Add(buffid); 
+            buffid = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName
+                                            , charID, AttribName.waterRes, +10, TimeFrame.Infinity, -1, true);
+            allBuffIds.Add(buffid);
+            buffid = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
                                              charID, AttribName.fireRes, +10, TimeFrame.Infinity, -1, true);
-
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, AttribName.darkRes, +10, TimeFrame.Infinity, -1, true);
-
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, AttribName.lightRes, +10, TimeFrame.Infinity, -1, true);
-
+            allBuffIds.Add(buffid); 
+    
         }
 
-        public override void EndTrait()
-        {
-          base.EndTrait();
-        }
     }
 }

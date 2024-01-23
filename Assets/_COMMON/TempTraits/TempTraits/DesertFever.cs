@@ -13,16 +13,18 @@ namespace Common
 
         public override void OnApply()
         {
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                                         charID, AttribName.willpower, -4, TimeFrame.Infinity, -1, true);
+            int buffid = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+                                                         charID, AttribName.willpower, -4, TimeFrame.Infinity, -1, false);
+            allBuffIds.Add(buffid);
+            buffid = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
+                                             charID, AttribName.morale, -2, TimeFrame.Infinity, -1, false);
+            allBuffIds.Add(buffid);
 
-            charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName,
-                                             charID, AttribName.morale, -2, TimeFrame.Infinity, -1, true);
+            int buffID = charController.statBuffController.ApplyStatReceivedAltBuff(+10f, StatName.thirst, CauseType.TempTrait
+                                                  , (int)tempTraitName, charID, TimeFrame.Infinity, 1, false);
+            allStatAltBuff.Add(buffID);
+
         }
 
-        public override void EndTrait()
-        {
-            base.EndTrait();
-        }
     }
 }

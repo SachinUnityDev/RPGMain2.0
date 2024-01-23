@@ -37,11 +37,13 @@ namespace Common
         /// 
         ///  FIFO rule for pos traits
         /// </summary>
-
+        private void OnEnable()
+        {
+            charController = GetComponent<CharController>();
+        }
         void Start()
         {
-            traitID = -1;
-            charController = GetComponent<CharController>();
+            traitID = -1;            
             CalendarService.Instance.OnStartOfCalDay +=(int day)=> DayTick();          
         }
         #region TRAIT APPLY & REMOVE
@@ -328,6 +330,26 @@ namespace Common
 
         #endregion
 
+        public TempTraitBase GetTempTraitBase(TempTraitName tempTraitName)
+        {
+            int index = allTempTraitBase.FindIndex(t=>t.tempTraitName == tempTraitName);
+            if(index != -1)
+            {
+                return allTempTraitBase[index]; 
+            }
+            Debug.Log(" temp Trait base NOT FOUND !!" + tempTraitName);
+            return null; 
+        }
+        public TempTraitModel GetTempTraitModel(TempTraitName tempTraitName)
+        {
+            int index = allTempTraitModels.FindIndex(t => t.tempTraitName == tempTraitName);
+            if (index != -1)
+            {
+                return allTempTraitModels[index];
+            }
+            Debug.Log(" temp Trait Model NOT FOUND !!" + tempTraitName); 
+            return null;
+        }
         #region CHECKS TRAIT & IMMUNITY
         public bool HasTempTrait(TempTraitName tempTraitName)
         {

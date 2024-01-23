@@ -10,68 +10,36 @@ namespace Common
         public override PermaTraitName permaTraitName => PermaTraitName.SwornRivals;
         public override void ApplyTrait()
         {
-            DecMoraleKhugarian();
-
-            CombatEventService.Instance.OnDeathInCombat += IncMoraleKhugarian;
-           // CombatEventService.Instance.OnFleeInCombat += IncMoraleKhugarian;
-           // (to be uncommented)
-            CombatEventService.Instance.OnCombatRejoin += DecMor4RejoinerKhugarian;
-
-            QuestEventService.Instance.OnDeathInQuest += IncMoraleKhugarian;
-            QuestEventService.Instance.OnQuestFlee += IncMoraleKhugarian; 
-
+            CharService.Instance.OnPartyLocked += ApplyHasteBuff;
+            CharService.Instance.OnCharDeath += DeathNFleeChk;
+            CharService.Instance.OnCharFleeQuest += DeathNFleeChk;
         }
 
-        void DecMor4RejoinerKhugarian(CharController _charChanged)
+        void DeathNFleeChk(CharController charController)
         {
-
-            foreach (CharController c in CharService.Instance.allyInPlayControllers)
-            {
-                if (c.charModel.charID != _charChanged.charModel.charID) // other than myself
-                {
-                    if (c.charModel.cultType == CultureType.Kugharian)
-                    {
-                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permaTraitName, charID, AttribName.morale, -4);
-                    }
-                }
-            }
+            if (charController.charModel.cultType == CultureType.Kugharian
+                && charController.charModel.charID != charID)
+                ApplyHasteBuff();
         }
 
-        // -4 Mor when there is a Khugarian in team
-        void IncMoraleKhugarian(CharController _charChanged)
+        void ApplyHasteBuff()
         {
-            foreach (CharController c in CharService.Instance.allyInPlayControllers)
+            int count = 0;
+            ClearBuffs();
+            foreach (CharController charCtrl in CharService.Instance.allCharsInPartyLocked)
             {
-                if (c.charModel.charID != _charChanged.charModel.charID)
-                {
-                    if (c.charModel.cultType == CultureType.Kugharian)
-                    {
-                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permaTraitName, charID,AttribName.morale, 4);
-                    }
-                }
+
+                if (charController.charModel.cultType == CultureType.Kugharian
+                    && charController.charModel.charID != charID)
+                    if (charCtrl.charModel.stateOfChar == StateOfChar.UnLocked)
+                        count++;
+            }
+            for (int i = 0; i < count; i++)
+            {
+                int buffID = charController.buffController.ApplyBuff(CauseType.PermanentTrait, (int)permaTraitName
+                                    , charID, AttribName.haste, -1, TimeFrame.Infinity, 1, false);
+                allBuffIds.Add(buffID);
             }
         }
-
-
-        void DecMoraleKhugarian()
-        {          
-
-            foreach (CharController c in CharService.Instance.allyInPlayControllers)
-            {
-                if (c.charModel.charID != charController.charModel.charID)   
-                {
-                    if (c.charModel.cultType == CultureType.Kugharian)
-                    {
-                        c.ChangeAttrib(CauseType.PermanentTrait, (int)permaTraitName, charID,AttribName.morale, -4); 
-                    }
-                }          
-
-            }
-
-        }
-
     }
-
-
 }
-

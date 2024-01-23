@@ -13,18 +13,11 @@ namespace Common
         {
 
             CombatEventService.Instance.OnCharOnTurnSet += ExtraAPWhenSOLO;
-            charController.OnStatChg += FortitudeLossReduced;
+           int buffID =  charController.statBuffController.ApplyStatReceivedAltBuff(+30f, StatName.fortitude, CauseType.PermanentTrait
+                                                    , (int)permaTraitName, charID, TimeFrame.Infinity,1 , true);
+            allStatAltBuff.Add(buffID); 
             NeverFleesEvenFearFul();
         }
-        void FortitudeLossReduced(StatModData statModData)
-        {        //Lose half Fortitude(everything, including Fortitude diminishing attacks)  // for chagestat Fortitude  
-
-            if (statModData.statModified == StatName.fortitude && statModData.modVal < 0)
-                charController.ChangeStat(CauseType.PermanentTrait, (int)permaTraitName, charID
-                    , statModData.statModified, -(statModData.modVal / 2));    // increase half the value , as value might be reduced on call
-            //- minus added to increment by half value
-        }
-
         void NeverFleesEvenFearFul()
         {
             charController.charModel.fleeBehaviour = FleeBehaviour.NeverFlees;

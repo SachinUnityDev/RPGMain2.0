@@ -58,15 +58,13 @@ namespace Combat
                 {
                     if (statDataMorale.currValue < 12)
                     {
-                        dyna.charGO.GetComponent<CharController>().damageController
-                         .ApplyDamage(charController, CauseType.CharSkill, (int)SkillNames.FistOfWater, DamageType.Heal
-                                                                            , UnityEngine.Random.Range(5, 11));
+                        dyna.charGO.GetComponent<CharController>()
+                            .ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatName.health, UnityEngine.Random.Range(5f, 10f));                
                     }
                     else
                     {
-                        dyna.charGO.GetComponent<CharController>().damageController
-                                .ApplyDamage(charController, CauseType.CharSkill, (int)SkillNames.FistOfWater, DamageType.Heal
-                                                , UnityEngine.Random.Range(10, 21));
+                        dyna.charGO.GetComponent<CharController>()
+                             .ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatName.health, UnityEngine.Random.Range(10f, 20f));
                     }
                 }
             }

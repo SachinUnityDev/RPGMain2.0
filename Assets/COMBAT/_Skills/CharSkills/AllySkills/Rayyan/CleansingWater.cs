@@ -33,8 +33,7 @@ namespace Combat
             Debug.Log("this is cleansing water Apply FX1 ");
 
             if (targetController && IsTargetMyAlly())
-                targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Heal
-                                                    , UnityEngine.Random.Range(4f, 7f));           
+                    targetController.ChangeStat( CauseType.CharSkill, (int)skillName, charID, StatName.health, UnityEngine.Random.Range(4f, 7f));
         }
         public override void ApplyFX2()
         {           

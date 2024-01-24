@@ -1,5 +1,6 @@
 using Combat;
 using Quest;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,7 @@ namespace Common
         }
     }
 
+    [Serializable]
     public class StatAltBuffData
     {
         public int dmgBuffID;
@@ -58,38 +60,27 @@ namespace Common
             this.causeType= causeType;
             this.causeName = causeName;
             this.causeByCharID= causeByCharID;
-
-
             this.startRoundNo = startRoundNo;
             this.timeFrame = timeFrame;
             this.buffedNetTime = buffedNetTime;
             this.buffCurrentTime = 0;// time counter for the dmgBuff
-            this.altData = altData;
-            this.causeType = causeType;
-            this.causeName = causeName;
-            this.causeByCharID = causeByCharID;
+            this.altData = altData;       
         }
     }
+    [Serializable]
     public class StatAltData
     {
         public StatName statModified;
-        public AttackType attackType = AttackType.None;
-        public DamageType damageType = DamageType.None;
-        public CultureType cultType = CultureType.None;
-        public RaceType raceType = RaceType.None;
+        
+        public bool isGain = false;
+
 
         public float valPercent = 0f;
-
-        public StatAltData(StatName statModified, float valPercent, AttackType attackType, DamageType damageType,
-                                CultureType cultType, RaceType raceType)
+        public StatAltData(StatName statModified, float valPercent, bool isGain)
         {
-            this.statModified = statModified;
+            this.statModified = statModified;                        
+            this.isGain = isGain;         
 
-            this.attackType = attackType; 
-            this.damageType = damageType;  
-
-            this.cultType = cultType;
-            this.raceType = raceType;
             this.valPercent = valPercent;
         }
     }
@@ -167,24 +158,22 @@ namespace Common
 
         #endregion
 
-        #region DAMAGE RECEIVE BUFF ALTERER
+        #region STAT ALT BUFF
 
         public List<StatAltBuffData> allStatAltBuffData = new List<StatAltBuffData>();
 
         int statBuffID = 0;
-        public int ApplyStatReceivedAltBuff(float valPercent, StatName statModified, CauseType causeType, int causeName, int causeByCharID,
-             TimeFrame timeFrame, int netTime, bool isBuff, AttackType attackType =AttackType.None,  DamageType damageType = DamageType.None,          
-            CultureType cultType = CultureType.None, RaceType raceType = RaceType.None)
+        public int ApplyStatRecAltBuff(float valPercent, StatName statModified, CauseType causeType, int causeName, int causeByCharID,
+             TimeFrame timeFrame, int netTime, bool isBuff, bool isGain = false, CharStateName charStateName = CharStateName.None
+                , TempTraitName tempTraitName = TempTraitName.None)
         {
-            statBuffID = allStatAltBuffData.Count + 1;
+            statBuffID++; 
             int startRoundNo = CombatEventService.Instance.currentRound;
       
-            StatAltData statAltData = new StatAltData(statModified, valPercent,attackType
-                                                        , damageType,  cultType , raceType);
+            StatAltData statAltData = new StatAltData(statModified, valPercent, isGain);
 
-
-            StatAltBuffData statAltBuffData = new StatAltBuffData(statBuffID, causeType, causeName, causeByCharID, isBuff,true, startRoundNo, timeFrame
-                            , netTime, statAltData);
+            StatAltBuffData statAltBuffData = new StatAltBuffData(statBuffID, causeType, causeName, causeByCharID, isBuff,true, startRoundNo
+                                                                 , timeFrame, netTime, statAltData);
             
             allStatAltBuffData.Add(statAltBuffData);
             return statBuffID;
@@ -195,7 +184,7 @@ namespace Common
             {
                 if (statAltBuffData.timeFrame == TimeFrame.EndOfCombat)
                 {
-                    RemoveStatAltBuffData(statAltBuffData);
+                    RemoveStatRecAltBuffData(statAltBuffData);
                 }
             }
         }
@@ -208,101 +197,39 @@ namespace Common
                 {
                     if (statAltBuffData.buffCurrentTime >= statAltBuffData.buffedNetTime)
                     {
-                        RemoveStatAltBuffData(statAltBuffData);
+                        RemoveStatRecAltBuffData(statAltBuffData);
                     }
                     statAltBuffData.buffCurrentTime++;
                 }
             }
         }
 
-        void RemoveStatAltBuffData(StatAltBuffData statAltBuffData)
+        void RemoveStatRecAltBuffData(StatAltBuffData statAltBuffData)
         {
             allStatAltBuffData.Remove(statAltBuffData);
         }
-        public bool RemoveStatAltBuff(int dmgBuffID)
+        public bool RemoveStatRecAltBuff(int dmgBuffID)
         {
             int index = allStatAltBuffData.FindIndex(t => t.dmgBuffID == dmgBuffID);
             if (index == -1) return false;
             StatAltBuffData statAltBuffData = allStatAltBuffData[index];
-            RemoveStatAltBuffData(statAltBuffData);
+            RemoveStatRecAltBuffData(statAltBuffData);
             return true;
         }
 
-        public float GetStatReceivedAlt(CharModel strikerModel, StatName statModified, float valChg, AttackType attackType = AttackType.None
-                                         , DamageType damageType = DamageType.None)
+        public float GetStatRecAltData(StatName statModified, bool isGain)
         {
-            // 20% physical attack against beastmen            
-            bool isPositive = false; 
-            if(valChg >= 0 )
-                isPositive= true;
-            else isPositive= false;
-
-
-            foreach (StatAltBuffData statAltBuffData in allStatAltBuffData.ToList())
+            List<StatAltBuffData> statAltData_StatName = allStatAltBuffData.Where(t=>t.altData.statModified == statModified).ToList();
+            List<StatAltBuffData> statAltData_IsPos = statAltData_StatName.Where(t=>t.altData.isGain == isGain).ToList();         
+            
+            float val = 0f; 
+            foreach (StatAltBuffData statAltBuffData in statAltData_IsPos)
             {
-                StatAltData statAltData = statAltBuffData.altData;
-                if (statAltData.damageType != DamageType.None && statAltData.damageType == damageType)// Damage Type Block 
-                {
-                    float val = 0;
-                    if (statAltData.raceType != RaceType.None
-                        && statAltData.raceType == strikerModel.raceType
-                                && statAltData.cultType != CultureType.None
-                                && statAltData.cultType == strikerModel.cultType)
-                    {
-
-                        val = statAltData.valPercent; // COMBO RACE AND CULT
-
-                    }
-                    else   // NOT A COMBO OF RACE AND CULT
-                    {
-                        if (statAltData.raceType != RaceType.None
-                                  && statAltData.raceType == strikerModel.raceType)
-                        {
-                            val = statAltData.valPercent;
-                        }
-                        if (statAltData.cultType != CultureType.None
-                                        && statAltData.cultType == strikerModel.cultType)
-                        {
-                            val = statAltData.valPercent;
-                        }
-                    }
-                    return val;
-                }
-                else if (statAltData.attackType != AttackType.None && statAltData.attackType == attackType)// Attack type block
-                {
-                    float val = 0;
-                    if (statAltData.raceType != RaceType.None
-                        && statAltData.raceType == strikerModel.raceType
-                                && statAltData.cultType != CultureType.None
-                                && statAltData.cultType == strikerModel.cultType)
-                    {
-
-                        val = statAltData.valPercent; // COMBO RACE AND CULT
-
-                    }
-                    else   // NOT A COMBO OF RACE AND CULT
-                    {
-                        if (statAltData.raceType != RaceType.None
-                                  && statAltData.raceType == strikerModel.raceType)
-                        {
-                            val = statAltData.valPercent;
-                        }
-                        if (statAltData.cultType != CultureType.None
-                                        && statAltData.cultType == strikerModel.cultType)
-                        {
-                            val = statAltData.valPercent;
-                        }
-                    }
-                    return val;
-                }
-                else if (statAltData.attackType == AttackType.None && statAltData.damageType == DamageType.None)
-                {
-                    return statAltData.valPercent;
-                }
+                val += statAltBuffData.altData.valPercent; 
             }
-            return 0f;
-        
+            return val; 
         }
+
 
         #endregion
 

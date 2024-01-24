@@ -44,9 +44,8 @@ namespace Combat
         public override void ApplyFX1()
         {
             if (IsTargetAlly())
-            {
-                targetController.damageController
-                .ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Heal, Random.Range(6f, 12f));
+            {   
+               targetController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatName.health, UnityEngine.Random.Range(6f, 12f));                
             }
         }
         public override void ApplyFX2()

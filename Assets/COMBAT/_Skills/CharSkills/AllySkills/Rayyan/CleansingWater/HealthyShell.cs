@@ -85,8 +85,8 @@ namespace Combat
         {
             if (IsTargetAlly())
             {
-                targetController.strikeController.ApplyDmgAltBuff(12f, CauseType.CharSkill, (int)skillName
-                , charController.charModel.charID, TimeFrame.EndOfCombat, 1, true, AttackType.None, DamageType.Heal);
+                targetController.statBuffController.ApplyStatRecAltBuff(12f, StatName.health, CauseType.CharSkill, (int)skillName
+                                                    , charController.charModel.charID, TimeFrame.EndOfCombat, 1, true, true);        
              }
         }
         public override void ApplyMoveFX()

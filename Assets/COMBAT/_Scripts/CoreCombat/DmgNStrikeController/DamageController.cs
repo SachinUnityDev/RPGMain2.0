@@ -6,6 +6,7 @@ using System;
 using DG.Tweening;
 using System.Linq;
 using static Combat.StrikeController;
+using System.Globalization;
 
 namespace Combat
 {
@@ -132,7 +133,7 @@ namespace Combat
             return dmgNew;
         }
         public void ApplyDamage(CharController striker, CauseType causeType, int causeName, DamageType _dmgType
-                                , float dmgPercentORVal, SkillInclination skillInclination = SkillInclination.None
+                                , float dmgPercent, SkillInclination skillInclination = SkillInclination.None
                                 , bool ignoreArmorNRes = false, bool isTrueStrike = false)
         {
             this.striker = striker;
@@ -160,7 +161,7 @@ namespace Combat
                 {
                     if (FocusCheck())
                     {
-                        dmgPercentORVal = ApplyMisFire(dmgPercentORVal);  // dmg val modfied if MIsfire
+                        dmgPercent = ApplyMisFire(dmgPercent);  // dmg val modfied if MIsfire
                     }
                 }
             }
@@ -168,12 +169,12 @@ namespace Combat
             float damageAlt = striker.GetComponent<StrikeController>()
                                 .GetDmgAlt(charController.charModel, attackType, _dmgType );
             float damageAltCharState = striker.GetComponent<StrikeController>()
-                                .GetDmgCharStateAlt(charController);
+                                        .GetDmgCharStateAlt(charController);
             float dmgReceivedAlt = GetDmgReceivedAlt(striker.charModel, attackType, _dmgType); 
 
             AttribData dmgSDMin = striker.GetAttrib(AttribName.dmgMin);
             AttribData dmgSDMax = striker.GetAttrib(AttribName.dmgMax);
-            float percentDmg = dmgPercentORVal*(1 + (damageAlt / 100) + (damageAltCharState/100));
+            float percentDmg = dmgPercent + damageAlt  + damageAltCharState;
 
             // copy of Dmg value for magical and physical + Dmg modifiers 
 
@@ -259,30 +260,16 @@ namespace Combat
                     charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -darkDmg);
                     break;
                 case DamageType.Pure:
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -dmgPercentORVal);
-                    break;
-                case DamageType.Blank1:
-                    break;
-                case DamageType.Blank2:
-                    break;
-                case DamageType.Blank3:
-                    break;
-                case DamageType.Heal:
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, dmgPercentORVal*(1 + damageAlt/100+ dmgReceivedAlt/100));
-                    break;
-                case DamageType.FortitudeDmg:
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.fortitude, -dmgPercentORVal);
-                    break;
-                case DamageType.StaminaDmg: // no resistance, no armor etc ok no substractions for stamina , Fort and Pure
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.stamina, -dmgPercentORVal);
-                    break;     
+                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -dmgPercent);
+                    break;                                 
+              
                 default:
                     break;
             }
 
 
             DmgAppliedData dmgAppliedData = new DmgAppliedData(striker, causeType, causeName
-                                            , _dmgType, dmgPercentORVal, strikeType, charController, attackType, isMisFire);
+                                            , _dmgType, dmgPercent, strikeType, charController, attackType, isMisFire);
             if (isMisFire)
             {
                 CombatEventService.Instance.On_Misfire(dmgAppliedData);
@@ -290,13 +277,7 @@ namespace Combat
             CombatEventService.Instance.On_DmgApplied(dmgAppliedData);
 
         }
-        public void HealingAsPercentOfMaxHP(CharController charController, CauseType causeType, int causeName, float val)
-        {
-            StatData statData = charController.GetStat(StatName.health);
-            float healVal = ((val / 100) * statData.maxLimit);
-
-            ApplyDamage(charController, causeType, causeName, DamageType.Heal, healVal, SkillInclination.Heal); 
-        }
+   
         // Striking Crit and feeble 
         void FortChgOnStrikingCritNFeeble()
         {
@@ -613,7 +594,25 @@ namespace Combat
             RemoveDmgBuffData(dmgBuffData);
             return true;
         }
+        public float GetDmgReceivedAlt1( AttackType attackType = AttackType.None, DamageType damageType = DamageType.None
+                                        , RaceType raceType = RaceType.None, CultureType cultType = CultureType.None
+                                        , CharStateName charStateName = CharStateName.None, TempTraitName tempTraitName = TempTraitName.None)
+        {
+            List<DmgBuffData> statAltData_attackType = allDmgReceivedBuffData.Where(t => t.altData.attackType == attackType).ToList();
+            List<DmgBuffData> statAltData_damageType = statAltData_attackType.Where(t => t.altData.damageType == damageType ).ToList();
 
+            List<DmgBuffData> statAltData_raceType = statAltData_damageType.Where(t => t.altData.raceType == raceType).ToList();
+            List<DmgBuffData> statAltData_cultType = statAltData_raceType.Where(t => t.altData.cultType == cultType).ToList();
+            List<DmgBuffData> statAltData_charState = statAltData_cultType.Where(t => t.altData.cultType == cultType).ToList();
+            List<DmgBuffData> statAltData_tempTrait = statAltData_charState.Where(t => t.altData.cultType == cultType).ToList();
+
+            float val = 0f;
+            foreach (DmgBuffData statAltBuffData in statAltData_tempTrait)
+            {
+                val += statAltBuffData.altData.valPercent;
+            }
+            return val;
+        }
         public float GetDmgReceivedAlt(CharModel strikerModel, AttackType attackType = AttackType.None
                                          , DamageType damageType = DamageType.None)
         {

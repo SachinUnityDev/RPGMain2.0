@@ -34,13 +34,14 @@ namespace Combat
         public override void ApplyFX1()
         {
             if (chance.GetChance())
-                targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.FortitudeDmg
-                                        , UnityEngine.Random.Range(10,19), skillModel.skillInclination);
+                targetController.ChangeStat(CauseType.CharSkill, (int)skillName, charController.charModel.charID
+                               , StatName.fortitude, -UnityEngine.Random.Range(10, 19));
+
         }
 
         public override void ApplyFX2()
         {
-            if (30f.GetChance())
+            if (10f.GetChance())
                 targetController.tempTraitController.ApplyTempTrait(CauseType.CharSkill, (int)skillName
                                         , charController.charModel.charID, TempTraitName.RatBiteFever);
         }

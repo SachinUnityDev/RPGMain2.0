@@ -95,7 +95,7 @@ namespace Common
             }
             foreach (int statBuffID in allStatAltBuff)
             {
-                charController.statBuffController.RemoveStatAltBuff(statBuffID);
+                charController.statBuffController.RemoveStatRecAltBuff(statBuffID);
             }
         }
     }

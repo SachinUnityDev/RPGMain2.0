@@ -273,7 +273,6 @@ namespace Combat
                 }
             }
         }
-
         public void EORTick(int roundNo)  // to be completed
         {
             foreach (DmgBuffData dmgBuffData in allDmgBuffData.ToList())
@@ -288,7 +287,6 @@ namespace Combat
                 }
             }
         }
-
         void RemoveDmgBuffData(DmgBuffData dmgBuffData)
         {
             allDmgBuffData.Remove(dmgBuffData);
@@ -301,7 +299,6 @@ namespace Combat
             RemoveDmgBuffData(dmgBuffData);
             return true;
         }
-
         public float GetDmgAlt(CharModel targetModel, AttackType attackType = AttackType.None
                                          , DamageType damageType = DamageType.None)
         {
@@ -434,15 +431,15 @@ namespace Combat
         public float GetDmgCharStateAlt(CharController targetController)
         {
             // 20% More Dmg against (CHAR STATE) Rooted Targets    
+            float val = 0f; 
             foreach (DmgBuffCharStateData dmgBuffCSData in allDmgBuffCharStateData.ToList())
             {
                 if (targetController.charStateController.HasCharState(dmgBuffCSData.altData.charStateName))
                 {
-                    return dmgBuffCSData.altData.valPercent;
+                    val += dmgBuffCSData.altData.valPercent;
                 }
             }
-            return 0f;
-
+            return val;
         }
         #endregion
 

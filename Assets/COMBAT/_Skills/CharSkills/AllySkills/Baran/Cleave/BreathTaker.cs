@@ -56,8 +56,10 @@ namespace Combat
         {
             foreach (DynamicPosData dyna in CombatService.Instance.mainTargetDynas)
             {
-                dyna.charGO.GetComponent<CharController>().damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
-                    , DamageType.StaminaDmg, UnityEngine.Random.Range(3, 6)); 
+                dyna.charGO.GetComponent<CharController>().ChangeStat(CauseType.CharSkill
+                             , (int)skillName, charController.charModel.charID, StatName.stamina,
+                               -UnityEngine.Random.Range(3, 6));
+
             }
         }
 

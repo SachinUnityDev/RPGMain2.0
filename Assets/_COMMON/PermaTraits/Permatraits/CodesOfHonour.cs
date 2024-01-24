@@ -13,7 +13,7 @@ namespace Common
         {
 
             CombatEventService.Instance.OnCharOnTurnSet += ExtraAPWhenSOLO;
-           int buffID =  charController.statBuffController.ApplyStatReceivedAltBuff(+30f, StatName.fortitude, CauseType.PermanentTrait
+           int buffID =  charController.statBuffController.ApplyStatRecAltBuff(+30f, StatName.fortitude, CauseType.PermanentTrait
                                                     , (int)permaTraitName, charID, TimeFrame.Infinity,1 , true);
             allStatAltBuff.Add(buffID); 
             NeverFleesEvenFearFul();

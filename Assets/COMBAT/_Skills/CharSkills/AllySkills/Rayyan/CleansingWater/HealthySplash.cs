@@ -32,8 +32,8 @@ namespace Combat
                                                                 .GetAllAdjDynaOccupied(targetDyna);
 
                 allAdjOccupied.ForEach(t => t.charGO.GetComponent<CharController>()
-                     .damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName, DamageType.Heal, Random.Range(6, 10)));
-
+                        .ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatName.health, UnityEngine.Random.Range(6f, 9f)));
+                
             }
         }
 

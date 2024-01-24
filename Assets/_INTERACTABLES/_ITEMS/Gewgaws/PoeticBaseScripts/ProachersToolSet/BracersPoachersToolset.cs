@@ -35,7 +35,7 @@ namespace Interactables
         {
             int index = charController.strikeController.ApplyCharStateDmgAltBuff(valDmg, CauseType.PoeticGewgaw
             , (int)poeticGewgawName, charController.charModel.charID, TimeFrame.Infinity, -1, true, CharStateName.Rooted); 
-            allBuffIds.Add(index);
+            allCharStateBuffID.Add(index);
 
         }
         

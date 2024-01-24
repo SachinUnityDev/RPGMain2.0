@@ -26,9 +26,9 @@ namespace Combat
         }
    
         public override void ApplyFX1()
-        {           
-            charController.strikeController.ApplyDmgAltBuff(-50f, CauseType.CharSkill, (int)skillName
-                , charController.charModel.charID, TimeFrame.EndOfCombat, 1, false, AttackType.None, DamageType.Heal);
+        {  
+            charController.statBuffController.ApplyStatRecAltBuff(-50f, StatName.health,  CauseType.CharSkill, (int)skillName
+                , charController.charModel.charID, TimeFrame.EndOfCombat, 1, false, true);            
         }
 
         public override void ApplyFX2()

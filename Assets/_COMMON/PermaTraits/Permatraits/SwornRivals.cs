@@ -37,7 +37,7 @@ namespace Common
             for (int i = 0; i < count; i++)
             {
                 int buffID = charController.buffController.ApplyBuff(CauseType.PermanentTrait, (int)permaTraitName
-                                    , charID, AttribName.haste, -1, TimeFrame.Infinity, 1, false);
+                                    , charID, AttribName.morale, -3, TimeFrame.Infinity, 1, false);
                 allBuffIds.Add(buffID);
             }
         }

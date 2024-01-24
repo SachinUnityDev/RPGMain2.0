@@ -32,8 +32,8 @@ namespace Combat
                     DynamicPosData dyna = GridService.Instance.gridView.GetDynaFromPos(cell.pos, cell.charMode);
                     float healVal = (float)Random.Range(4, 11);
 
-                    dyna.charGO.GetComponent<CharController>().damageController.ApplyDamage(charController,
-                                          CauseType.CharSkill, (int)skillName, DamageType.Heal, healVal, SkillInclination.None);
+                    dyna.charGO.GetComponent<CharController>()
+                           .ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatName.health, healVal);                    
 
                     dyna.charGO.GetComponent<CharController>().charStateController.RemoveCharState(CharStateName.Burning); 
                 }

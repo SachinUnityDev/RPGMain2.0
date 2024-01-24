@@ -47,10 +47,10 @@ namespace Combat
         Blank1,
         Blank2,
         Blank3, 
-        Heal,
-        FortitudeDmg, 
-        DOT,
-        Move,
+        Blank6,
+        Blank7, 
+        Blank4,
+        Blank5,
         
        // HealthDmg,
     }

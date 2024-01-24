@@ -71,7 +71,7 @@ namespace Combat
             KilledData killData = new KilledData(strikeModel, killedModel); 
             allKills.Add(killData); 
         }
-        public void AddOn_Saves(int causeByCharID, CharModel savedModel)
+        public void AddOn_CharSaved(int causeByCharID, CharModel savedModel)
         {
             // find inthe list first strikeModel and saved Model combo ....if not found add new element 
             CharModel strikeModel = CharService.Instance.GetCharCtrlWithCharID(causeByCharID).charModel;

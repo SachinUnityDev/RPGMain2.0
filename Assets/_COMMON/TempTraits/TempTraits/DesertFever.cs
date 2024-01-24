@@ -20,7 +20,7 @@ namespace Common
                                              charID, AttribName.morale, -2, TimeFrame.Infinity, -1, false);
             allBuffIds.Add(buffid);
 
-            int buffID = charController.statBuffController.ApplyStatReceivedAltBuff(+10f, StatName.thirst, CauseType.TempTrait
+            int buffID = charController.statBuffController.ApplyStatRecAltBuff(+10f, StatName.thirst, CauseType.TempTrait
                                                   , (int)tempTraitName, charID, TimeFrame.Infinity, 1, false);
             allStatAltBuff.Add(buffID);
 

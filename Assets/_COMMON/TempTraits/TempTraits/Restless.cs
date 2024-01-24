@@ -21,11 +21,10 @@ namespace Common
                 , AttribName.fortOrg, -5, TimeFrame.Infinity, 1, false);
             allBuffIds.Add(buffID);
 
-            int dmgrecAltBuffID =
-                charController.damageController.ApplyDmgReceivedAltBuff(-30f, CauseType.TempTrait, (int)tempTraitName
-                , charController.charModel.charID, TimeFrame.Infinity, -1, false, AttackType.None, DamageType.Heal
-                    , CultureType.None);
-            allBuffDmgRecAltIds.Add((int)dmgrecAltBuffID);
+            int statBuffID =
+                charController.statBuffController.ApplyStatRecAltBuff(-30f, StatName.health, CauseType.TempTrait, (int)tempTraitName
+                                                   , charID, TimeFrame.Infinity, 1, false, true); 
+            allStatAltBuff.Add(statBuffID);
         }
         public override void OnEndConvert()
         {

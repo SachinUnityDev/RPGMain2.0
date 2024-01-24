@@ -328,8 +328,8 @@ namespace Common
                 }
                 if (GetHealthValBelow0(value) <= 0)
                 {
-                    damageController.ApplyDamage(this, CauseType.StatMinMaxLimit, 0, DamageType.FortitudeDmg
-                                                                        , GetHealthValBelow0(value));
+                    ChangeStat(CauseType.StatMinMaxLimit, 0, charModel.charID
+                                , StatName.fortitude, GetHealthValBelow0(value));                    
                 }
                 if(statName == StatName.health  
                             && charStateController.HasCharState(CharStateName.LastDropOfBlood)
@@ -339,12 +339,13 @@ namespace Common
                     SkillModel skillModel = SkillService.Instance.GetSkillModel(causeByCharID, (SkillNames)CauseName); 
                     if(skillModel.skillInclination == SkillInclination.Guard 
                             || skillModel.skillInclination == SkillInclination.Heal)
-                        CombatEventService.Instance.combatModel.AddOn_Saves(causeByCharID, charModel); 
+                        CombatEventService.Instance.combatModel.AddOn_CharSaved(causeByCharID, charModel); 
                 }
             }
-            
-            // COMBAT PATCH FIX ENDS 
-            // BroadCast the value change thru On_StatCurrValChg
+            bool isGain = value >= 0 ? true : false; 
+            float altVal = statBuffController.GetStatRecAltData(statName, isGain);
+            value = value*(1 + altVal / 100); 
+        
             StatModData statModData = new StatModData(turn, causeType, CauseName, causeByCharID
                                                              , this.charModel.charID, statName,(int)value, (int)value);
 
@@ -674,6 +675,15 @@ namespace Common
 
             return null; 
         }
+
+
+        public void HealingAsPercentOfMaxHP(CauseType causeType, int causeName, float val)
+        {
+            StatData statData = GetStat(StatName.health);
+            float healVal = ((val / 100) * statData.maxLimit);
+            ChangeStat(causeType, (int)causeName, charModel.charID,  StatName.health, healVal);
+        }
+
 
         #endregion
 

@@ -36,7 +36,7 @@ namespace Combat
                 , -3f, skillModel.timeFrame, skillModel.castTime, false);
 
             // healing as percentage of MAX HP
-            charController.damageController.HealingAsPercentOfMaxHP(charController, CauseType.CharSkill, (int)skillName, 12f); 
+            charController.HealingAsPercentOfMaxHP( CauseType.CharSkill, (int)skillName, 12f); 
 
         }
 

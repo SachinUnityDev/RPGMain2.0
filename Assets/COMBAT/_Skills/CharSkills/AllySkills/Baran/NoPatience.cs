@@ -12,7 +12,7 @@ namespace Combat
         private CharNames _charName;
         public override CharNames charName { get => _charName; set => _charName = value; }
         public override SkillNames skillName => SkillNames.NoPatience;
-        public override StrikeTargetNos strikeNos => StrikeTargetNos.Single;
+        public override StrikeNos strikeNos => StrikeNos.Single;
         public override SkillLvl skillLvl => SkillLvl.Level0;
 
         public override string desc => "No patience";

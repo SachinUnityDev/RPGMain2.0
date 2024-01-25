@@ -13,7 +13,7 @@ namespace Combat
         public override CharNames charName { get => _charName; set => _charName = value; }
         public override SkillNames skillName => SkillNames.Scratch;
         public override SkillLvl skillLvl => SkillLvl.Level0;
-        public override StrikeTargetNos strikeNos => StrikeTargetNos.Single;
+        public override StrikeNos strikeNos => StrikeNos.Single;
 
         private float _chance = 30f;
         public override float chance { get => _chance; set => _chance = value; }

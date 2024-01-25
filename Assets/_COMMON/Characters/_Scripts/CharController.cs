@@ -76,7 +76,12 @@ namespace Common
             shaderOnHover = Shader.Find("Spine/Special/Skeleton Grayscale");
             //shaderOnHover = Shader.Find("Spine/Blend Modes/Skeleton PMA Screen");
             isCharHovered = false; 
-
+            
+        }
+        private void Start()
+        {
+            CombatEventService.Instance.OnSOC += FortReset2FortOrg;
+            CombatEventService.Instance.OnEOC += FortReset2FortOrg;
         }
         private void OnDisable()
         {
@@ -114,13 +119,14 @@ namespace Common
                 landscapeController = gameObject.AddComponent<LandscapeController>();
                 permaTraitController = gameObject.GetComponent<PermaTraitController>();
                 armorController = gameObject.AddComponent<ArmorController>();
-                statBuffController= gameObject.AddComponent<StatBuffController>();
+                
                 // CombatEventService.Instance.OnSOT += ()=> PopulateOverCharBars(false); 
                 //CombatEventService.Instance.OnEOC -= FortitudeReset2FortOrg;
                 //CombatEventService.Instance.OnEOC += FortitudeReset2FortOrg;
 
                 fleeController = gameObject.AddComponent<FleeController>();
             }
+            statBuffController = gameObject.AddComponent<StatBuffController>();
             permaTraitController = gameObject.AddComponent<PermaTraitController>();
             tempTraitController = gameObject.AddComponent<TempTraitController>();
             charStateController = gameObject.AddComponent<CharStateController>();
@@ -278,7 +284,6 @@ namespace Common
             statData.currValue = (int)val;
             statData.isClamped = toClamp;
         }
-
         public float GetDisplayAttrib(AttribName _statName)
         {
             float actualVal = GetAttrib(_statName).currValue;
@@ -292,8 +297,7 @@ namespace Common
                 return actualVal; 
 
         }
-
-        // clamp stat to value
+        
         public AttribModData ClampStat(CauseType causeType, int CauseName, int causeByCharID
                                                 , AttribName statName, float value, bool toInvoke = true, bool isClamp =true)
         {
@@ -384,7 +388,6 @@ namespace Common
             }
             return statModData;
         }
-
         public AttribModData ChangeAttrib(CauseType causeType, int CauseName, int causeByCharID, AttribName attribName
                                                                                 , float value,  bool toInvoke = true) 
         {
@@ -525,18 +528,16 @@ namespace Common
                 ChangeStat(CauseType.HealthRegen, (int)AttribName.hpRegen, charModel.charID, StatName.health, statData.currValue); 
             }
         }
-
-        //void FortitudeReset2FortOrg()
-        //{
-        //    if (CharService.Instance.allCharsInPartyLocked.Any(t => t.charModel.charID != charModel.charID)) return; 
-        //    if(charModel.orgCharMode == CharMode.Ally)
-        //    {
-        //        AttribData fortOrgData = GetAttrib(AttribName.fortOrg);
-        //        ChangeStat(CauseType.StatChecks, (int)AttribName.fortOrg
-        //                , charModel.charID, StatName.fortitude, fortOrgData.currValue);
-        //    }
-        //}
-
+        void FortReset2FortOrg()
+        {
+            if (CharService.Instance.allCharsInPartyLocked.Any(t => t.charModel.charID != charModel.charID)) return;
+            if (charModel.orgCharMode == CharMode.Ally)
+            {
+                AttribData fortOrgData = GetAttrib(AttribName.fortOrg);
+                StatData fortData = GetStat(StatName.fortitude);
+                fortData.currValue = fortOrgData.currValue; 
+            }
+        }
         public void RegenStamina()  // for ally and enemies stamina regen is 2 
         {
             StatModData statModData;

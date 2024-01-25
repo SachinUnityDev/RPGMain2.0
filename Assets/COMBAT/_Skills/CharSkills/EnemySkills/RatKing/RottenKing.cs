@@ -19,7 +19,7 @@ namespace Combat
         private float _chance = 40f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        public override StrikeTargetNos strikeNos { get; }
+        public override StrikeNos strikeNos { get; }
         List<DynamicPosData> firstRowChar = new List<DynamicPosData>();
 
         public override void PopulateTargetPos()

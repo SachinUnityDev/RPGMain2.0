@@ -36,7 +36,7 @@ namespace Combat
     {
         None,
         Physical,
-        StaminaDmg,
+        Blank1,
         Air,   // magical skills 
         Water,
         Earth, 
@@ -44,15 +44,6 @@ namespace Combat
         Light, 
         Dark, 
         Pure,        // not stopped by any armor or resistance no chance for dodge , mishits
-        Blank1,
-        Blank2,
-        Blank3, 
-        Blank6,
-        Blank7, 
-        Blank4,
-        Blank5,
-        
-       // HealthDmg,
     }
 
     public enum SkillTypeCombat
@@ -71,7 +62,7 @@ namespace Combat
      //   Remote,
     }
 
-    public enum StrikeTargetNos
+    public enum StrikeNos
     {
         None, 
         Single, 

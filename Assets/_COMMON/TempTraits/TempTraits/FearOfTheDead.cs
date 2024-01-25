@@ -9,6 +9,7 @@ namespace Common
     public class FearOfTheDead : TempTraitBase
     {
         public override TempTraitName tempTraitName => TempTraitName.FearOfTheDead;
+        List<int> socBuffs = new List<int>();
 
         public override void OnApply()
         {
@@ -17,11 +18,76 @@ namespace Common
              , CultureType.None, RaceType.Undead);
             allBuffDmgAltIds.Add(dmgAltBuffID);
 
-            int dmgrecAltBuffID =
-               charController.damageController.ApplyDmgReceivedAltBuff(100f, CauseType.TempTrait, (int)tempTraitName
-               , charController.charModel.charID, TimeFrame.Infinity, -1, false, AttackType.None, DamageType.None
-                   , CultureType.None, RaceType.Undead);
-            allBuffDmgRecAltIds.Add((int)dmgrecAltBuffID);
+    
+            CharService.Instance.OnCharDeath += DeathNFleeChk;
+            CharService.Instance.OnCharFleeQuest += DeathNFleeChk;
+            CombatEventService.Instance.OnCombatInit += OnCombatInit;
+            CombatEventService.Instance.OnEOC += OnEOC;
+        }
+        void DeathNFleeChk(CharController charController)
+        {
+            if (charController.charModel.raceType == RaceType.Undead
+                && charController.charModel.charID != charID)
+                ApplyBuffs();
+        }
+
+        void ApplyBuffs()
+        {
+            int count = 0;
+            ClearBuffs();
+            foreach (CharController charCtrl in CharService.Instance.allCharsInPartyLocked)
+            {
+
+                if (charController.charModel.raceType == RaceType.Undead
+                    && charController.charModel.charID != charID)
+                    if (charCtrl.charModel.stateOfChar == StateOfChar.UnLocked)
+                        count++;
+            }
+            for (int i = 0; i < count; i++)
+            {
+                int buffID = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName
+                                    , charID, AttribName.morale, -1, TimeFrame.Infinity, 1, false);
+                allBuffIds.Add(buffID);
+                buffID = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName
+                         , charID, AttribName.luck, -1, TimeFrame.Infinity, 1, false);
+                allBuffIds.Add(buffID);
+            }
+        }
+        void FortChg()
+        {
+            int count = 0;
+            ClearBuffs();
+            foreach (CharController charCtrl in CharService.Instance.allCharsInPartyLocked)
+            {
+                if (charController.charModel.raceType == RaceType.Undead
+                    && charController.charModel.charID != charID)
+                    if (charCtrl.charModel.stateOfChar == StateOfChar.UnLocked)
+                        count++;
+            }
+            for (int i = 0; i < count; i++)
+            {
+                int buffID = charController.buffController.ApplyBuff(CauseType.TempTrait, (int)tempTraitName
+                  , charID, AttribName.fortOrg, -6, TimeFrame.EndOfCombat, 1, false);
+                socBuffs.Add(buffID);
+            }
+        }
+        void OnCombatInit(CombatState c, LandscapeNames l, EnemyPackName e)
+        {
+            FortChg();
+        }
+
+        void OnEOC()
+        {
+            socBuffs.ForEach(t => charController.buffController.RemoveBuff(t));
+            socBuffs.Clear();
+        }
+        public override void EndTrait()
+        {
+            base.EndTrait();
+            CharService.Instance.OnCharDeath += DeathNFleeChk;
+            CharService.Instance.OnCharFleeQuest += DeathNFleeChk;
+            CombatEventService.Instance.OnCombatInit -= OnCombatInit;
+            CombatEventService.Instance.OnEOC -= OnEOC;
         }
     }
 }

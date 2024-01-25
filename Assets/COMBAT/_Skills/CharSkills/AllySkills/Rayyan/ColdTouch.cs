@@ -15,7 +15,7 @@ namespace Combat
         public override SkillNames skillName => SkillNames.ColdTouch;
         public override SkillLvl skillLvl => SkillLvl.Level0;
 
-        public override StrikeTargetNos strikeNos => StrikeTargetNos.Single;
+        public override StrikeNos strikeNos => StrikeNos.Single;
         public override string desc => "the is cold touch";
 
         private float _chance = 40f;
@@ -94,7 +94,7 @@ namespace Combat
 
         public override void ApplyVFx()
         {
-            SkillService.Instance.skillFXMoveController.RangedSingleStrike(PerkType.None, strikeNos);
+            SkillService.Instance.skillFXMoveController.RangedStrike(PerkType.None, strikeNos);
 
         }
 

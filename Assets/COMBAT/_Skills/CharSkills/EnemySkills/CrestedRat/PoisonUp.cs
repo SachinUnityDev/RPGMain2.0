@@ -14,7 +14,7 @@ namespace Combat
         public override SkillNames skillName => SkillNames.PoisonUp;
         public override SkillLvl skillLvl => SkillLvl.Level0;
 
-        public override StrikeTargetNos strikeNos => StrikeTargetNos.Single;
+        public override StrikeNos strikeNos => StrikeNos.Single;
         public override string desc => "this is  poison up...";
     
         private float _chance = 0f;

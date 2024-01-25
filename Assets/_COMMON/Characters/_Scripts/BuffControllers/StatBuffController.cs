@@ -223,10 +223,11 @@ namespace Common
             List<StatAltBuffData> statAltData_IsPos = statAltData_StatName.Where(t=>t.altData.isGain == isGain).ToList();         
             
             float val = 0f; 
-            foreach (StatAltBuffData statAltBuffData in statAltData_IsPos)
-            {
-                val += statAltBuffData.altData.valPercent; 
-            }
+            if(statAltData_IsPos.Count > 0)
+                foreach (StatAltBuffData statAltBuffData in statAltData_IsPos)
+                {
+                    val += statAltBuffData.altData.valPercent; 
+                }
             return val; 
         }
 

@@ -11,7 +11,7 @@ namespace Combat
         public override SkillNames skillName => SkillNames.SplitEarth;
 
         public override SkillLvl skillLvl => SkillLvl.Level0;
-        public override StrikeTargetNos strikeNos => StrikeTargetNos.Single;
+        public override StrikeNos strikeNos => StrikeNos.Single;
         public override string desc => "split earth";
 
         private float _chance = 0f;

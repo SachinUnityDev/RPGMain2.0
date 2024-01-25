@@ -15,7 +15,7 @@ namespace Combat
         public override SkillNames skillName => SkillNames.IntimidatingShout;
         public override SkillLvl skillLvl => SkillLvl.Level0;
 
-        public override StrikeTargetNos strikeNos => StrikeTargetNos.Multiple;
+        public override StrikeNos strikeNos => StrikeNos.Multiple;
         public override string desc => "This is intimading shout";
 
 

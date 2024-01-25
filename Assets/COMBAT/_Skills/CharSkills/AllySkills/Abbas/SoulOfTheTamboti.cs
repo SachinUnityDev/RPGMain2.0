@@ -16,7 +16,7 @@ namespace Combat
 
         private float _chance = 0f;
         public override float chance { get; set; }
-        public override StrikeTargetNos strikeNos => StrikeTargetNos.Single;
+        public override StrikeNos strikeNos => StrikeNos.Single;
 
         public override void ApplyFX1()
         {

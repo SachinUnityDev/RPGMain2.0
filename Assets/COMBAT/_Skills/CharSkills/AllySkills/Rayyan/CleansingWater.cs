@@ -17,7 +17,7 @@ namespace Combat
         public override SkillNames skillName => SkillNames.CleansingWater;
         public override SkillLvl skillLvl => SkillLvl.Level0;
 
-        public override StrikeTargetNos strikeNos => StrikeTargetNos.Single; 
+        public override StrikeNos strikeNos => StrikeNos.Single; 
         public override string desc => "this is cleansing water";       
 
         private float _chance = 0f;
@@ -70,7 +70,7 @@ namespace Combat
 
         public override void ApplyVFx()
         {          
-            SkillService.Instance.skillFXMoveController.RangedSingleStrike(PerkType.None, strikeNos); 
+            SkillService.Instance.skillFXMoveController.RangedStrike(PerkType.None, strikeNos); 
 
         } 
         public override void PopulateAITarget()

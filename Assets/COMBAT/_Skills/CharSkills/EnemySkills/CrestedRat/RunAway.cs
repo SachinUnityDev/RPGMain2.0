@@ -11,7 +11,7 @@ namespace Combat
         public override CharNames charName { get => _charName; set => _charName = value; }
         public override SkillNames skillName => SkillNames.RunAway;
         public override SkillLvl skillLvl => SkillLvl.Level0;
-        public override StrikeTargetNos strikeNos => StrikeTargetNos.Single;
+        public override StrikeNos strikeNos => StrikeNos.Single;
         public override string desc => "this is run away";   
 
         private float _chance = 0f;

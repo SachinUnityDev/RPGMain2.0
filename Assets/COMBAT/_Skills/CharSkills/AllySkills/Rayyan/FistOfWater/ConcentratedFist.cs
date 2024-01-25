@@ -55,6 +55,7 @@ namespace Combat
             base.SkillSelected();
             SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).RemoveFX1;
             SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).RemoveFX2;
+           // skillController.allSkillBases.Find(t => t.skillName == skillName).strikeNos = StrikeTargetNos.Single; 
         }
 
         public override void ApplyFX1()
@@ -82,6 +83,7 @@ namespace Combat
 
         public override void ApplyVFx()
         {
+
         }
 
         public override void DisplayFX1()

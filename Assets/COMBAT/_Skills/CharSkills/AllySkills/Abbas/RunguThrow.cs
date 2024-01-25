@@ -13,7 +13,7 @@ namespace Combat
         public override SkillNames skillName => SkillNames.RunguThrow;
 
         public override SkillLvl skillLvl => SkillLvl.Level0;
-        public override StrikeTargetNos strikeNos => StrikeTargetNos.Single; 
+        public override StrikeNos strikeNos => StrikeNos.Single; 
 
         public override string desc => "Rungu throw ";
 
@@ -77,7 +77,7 @@ namespace Combat
         public override void ApplyVFx()
         {
             if (targetController & !IsDodged())
-                SkillService.Instance.skillFXMoveController.RangedSingleStrike(PerkType.None, strikeNos);
+                SkillService.Instance.skillFXMoveController.RangedStrike(PerkType.None, strikeNos);
         }
 
         public override void DisplayFX1()

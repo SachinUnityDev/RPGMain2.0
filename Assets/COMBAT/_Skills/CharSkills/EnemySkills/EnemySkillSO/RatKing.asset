@@ -46,7 +46,7 @@ MonoBehaviour:
     skillSelState: 1
     cd: 1
     attackType: 1
-    dmgType: 010000000f000000
+    dmgType: 01000000
     castPos: 01000000020000000300000004000000050000000600000007000000
     targetPos: []
     staminareq: 5
@@ -76,7 +76,7 @@ MonoBehaviour:
     skillSelState: 1
     cd: 2
     attackType: 0
-    dmgType: 0e0000000b000000
+    dmgType: 
     castPos: 01000000020000000300000004000000050000000600000007000000
     targetPos: []
     staminareq: 8

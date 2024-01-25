@@ -12,15 +12,14 @@ namespace Combat
     {
         public override SkillNames skillName => SkillNames.DefaultPatience;
         public override SkillLvl skillLvl => SkillLvl.Level0;
-        public override StrikeTargetNos strikeNos => StrikeTargetNos.Single;
-
+        
         private CharNames _charName;
         public override CharNames charName { get => _charName; set => _charName = value; }
         public override string desc => "this is default patience";
-
      
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
+        public override StrikeNos strikeNos => StrikeNos.Single; 
 
         public override void PopulateTargetPos()
         {

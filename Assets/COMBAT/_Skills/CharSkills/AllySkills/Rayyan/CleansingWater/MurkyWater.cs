@@ -29,7 +29,8 @@ namespace Combat
         public override void SkillHovered()
         {
             base.SkillHovered();
-            skillModel.damageMod = 80f; 
+            skillModel.damageMod = 80f;
+            skillModel.skillInclination = SkillInclination.Magical; 
             if (skillController != null)
             {
                 SkillService.Instance.SkillWipe += skillController.allSkillBases

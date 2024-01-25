@@ -31,7 +31,7 @@ MonoBehaviour:
     charName: 1
     skillID: 100
     skillIconSprite: {fileID: 21300000, guid: 5c511bed2b0827d4f915f3a9bd43689c, type: 3}
-    skillPose: {fileID: 21300000, guid: e4207a48bd59c3444aea9d1b177c7554, type: 3}
+    skillPose: {fileID: 21300000, guid: 220ed037feeda514ea14bd0f44364d56, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 1
@@ -42,7 +42,7 @@ MonoBehaviour:
     skillSelState: 1
     cd: 1
     attackType: 1
-    dmgType: 010000000f000000
+    dmgType: 01000000
     castPos: 020000000300000004000000050000000600000007000000
     targetPos: []
     staminareq: 5
@@ -86,7 +86,7 @@ MonoBehaviour:
     charName: 1
     skillID: 101
     skillIconSprite: {fileID: 21300000, guid: 88a0a9d784e56694984d79b226b8e377, type: 3}
-    skillPose: {fileID: 21300000, guid: 892536e71dc1ddd40a62c0b41f1fc709, type: 3}
+    skillPose: {fileID: 21300000, guid: 5f2b3e5f4137e294a8674758b1a23d54, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 2
@@ -143,7 +143,7 @@ MonoBehaviour:
     charName: 1
     skillID: 102
     skillIconSprite: {fileID: 21300000, guid: 6bf2e87abc00f654f92ff8b252d01309, type: 3}
-    skillPose: {fileID: 21300000, guid: cac4301f77320c04889f48a501422004, type: 3}
+    skillPose: {fileID: 21300000, guid: 15f797a84a48c6a4e9d116b70c3d8c8e, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 3
@@ -154,7 +154,7 @@ MonoBehaviour:
     skillSelState: 1
     cd: 0
     attackType: 3
-    dmgType: 010000000b000000
+    dmgType: 01000000
     castPos: 04000000050000000600000007000000
     targetPos: []
     staminareq: 5
@@ -200,7 +200,7 @@ MonoBehaviour:
     charName: 1
     skillID: 103
     skillIconSprite: {fileID: 21300000, guid: 6b1d2b9ac782f074e99050bc9df8a89b, type: 3}
-    skillPose: {fileID: 21300000, guid: 9552f72800d658f4ea3ef5ae48e7cd88, type: 3}
+    skillPose: {fileID: 21300000, guid: 886f54d076da40a47a05555a7ad53d6f, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 4
@@ -211,7 +211,7 @@ MonoBehaviour:
     skillSelState: 1
     cd: 0
     attackType: 0
-    dmgType: 0a000000
+    dmgType: 
     castPos: 020000000300000004000000050000000600000007000000
     targetPos: []
     staminareq: 10
@@ -234,7 +234,7 @@ MonoBehaviour:
     charName: 1
     skillID: 103
     skillIconSprite: {fileID: 21300000, guid: 7d67c36a9caadb548ae9a9e873064b37, type: 3}
-    skillPose: {fileID: 21300000, guid: cac4301f77320c04889f48a501422004, type: 3}
+    skillPose: {fileID: 21300000, guid: 15f797a84a48c6a4e9d116b70c3d8c8e, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 5
@@ -283,7 +283,7 @@ MonoBehaviour:
     skillSelState: 1
     cd: 1
     attackType: 0
-    dmgType: 10000000
+    dmgType: 
     castPos: 01000000020000000300000004000000050000000600000007000000
     targetPos: []
     staminareq: 2
@@ -302,7 +302,7 @@ MonoBehaviour:
     charName: 1
     skillID: 0
     skillIconSprite: {fileID: 21300000, guid: 706fe5e5d9f041b4ebf1f1feae994600, type: 3}
-    skillPose: {fileID: 21300000, guid: ddfef16829009374693b500852133f22, type: 3}
+    skillPose: {fileID: 21300000, guid: b99d36ce5a005a3438deb4801c248aa2, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 7
@@ -313,7 +313,7 @@ MonoBehaviour:
     skillSelState: 0
     cd: 3
     attackType: 2
-    dmgType: 050000000f000000
+    dmgType: 05000000
     castPos: 04000000050000000600000007000000
     targetPos: []
     staminareq: 7
@@ -332,7 +332,7 @@ MonoBehaviour:
     charName: 1
     skillID: 0
     skillIconSprite: {fileID: 21300000, guid: 9fa707bf783e1fc46816921a2a8c04be, type: 3}
-    skillPose: {fileID: 21300000, guid: e4207a48bd59c3444aea9d1b177c7554, type: 3}
+    skillPose: {fileID: 21300000, guid: b99d36ce5a005a3438deb4801c248aa2, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 8
@@ -343,7 +343,7 @@ MonoBehaviour:
     skillSelState: 12
     cd: -1
     attackType: 2
-    dmgType: 0900000010000000
+    dmgType: 09000000
     castPos: 01000000020000000300000004000000050000000600000007000000
     targetPos: []
     staminareq: 4
@@ -390,7 +390,7 @@ MonoBehaviour:
     charName: 1
     skillID: 0
     skillIconSprite: {fileID: 21300000, guid: 9fa707bf783e1fc46816921a2a8c04be, type: 3}
-    skillPose: {fileID: 21300000, guid: 892536e71dc1ddd40a62c0b41f1fc709, type: 3}
+    skillPose: {fileID: 21300000, guid: 220ed037feeda514ea14bd0f44364d56, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 9

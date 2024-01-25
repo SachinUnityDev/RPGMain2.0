@@ -17,6 +17,7 @@ namespace Combat
         public Sprite skillTransitionPose;
         public Sprite skillTransitionPose2;
         public SkillTypeCombat skillType;
+        public StrikeNos strikeNos; 
         [Tooltip("-1 for NA , 0 for Locked and 1 for Unlocked.")]
         public int skillUnLockStatus;
         public string skillDesc;

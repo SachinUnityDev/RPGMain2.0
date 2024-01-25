@@ -12,7 +12,7 @@ namespace Combat
         public override SkillNames skillName => SkillNames.Retaliate;
         public override string desc => "this is Retaliate";
         public override SkillLvl skillLvl => SkillLvl.Level0;
-        public override StrikeTargetNos strikeNos => StrikeTargetNos.Single;
+        public override StrikeNos strikeNos => StrikeNos.Single;
 
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }

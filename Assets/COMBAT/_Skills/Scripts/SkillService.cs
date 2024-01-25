@@ -558,6 +558,13 @@ namespace Combat
             return skillDataSO.allSkills.Find(t => t.skillName == currSkillName).skillPose;             
         }
 
+        public Sprite GetDefPoseSprite(CharController target)
+        {
+            SkillDataSO skillDataSO = GetSkillSO(target.charModel.charName);
+            return skillDataSO.defendPose;
+
+        }
+
         public SkillPerkFXData GetSkillFXDataOnSkillSelect(PerkType perkType)
         {
             SkillDataSO skillDataSO = GetSkillSO(CombatService.Instance.currCharOnTurn.charModel.charName);

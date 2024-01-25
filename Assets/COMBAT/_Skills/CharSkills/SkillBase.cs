@@ -27,7 +27,6 @@ namespace Combat
         public abstract CharNames charName { get; set; }
         public abstract SkillNames skillName { get; }      
         public abstract SkillLvl skillLvl { get;  }
-        public abstract StrikeTargetNos strikeNos { get; }
         public abstract string desc { get;  }
         public abstract float chance { get; set; }
 
@@ -201,7 +200,7 @@ namespace Combat
         {
             PopulateTargetPos();
             SkillService.Instance.currentTargetDyna = null;
-            if (strikeNos == StrikeTargetNos.Single)
+            if (strikeNos == StrikeNos.Single)
             {
                 foreach (CellPosData cell in skillModel.targetPos)
                 {

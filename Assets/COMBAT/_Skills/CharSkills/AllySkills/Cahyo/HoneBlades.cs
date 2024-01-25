@@ -17,7 +17,7 @@ namespace Combat
         public override SkillNames skillName => SkillNames.HoneBlades;
         public override SkillLvl skillLvl => SkillLvl.Level0;
 
-        public override StrikeTargetNos strikeNos => StrikeTargetNos.Single;
+        public override StrikeNos strikeNos => StrikeNos.Single;
         public override string desc => "Hone blades";
 
         private float _chance = 0f;

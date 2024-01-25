@@ -16,6 +16,7 @@ namespace Combat
         public string skillDesc;
         public Sprite skillSprite;
         public SkillTypeCombat skillType;
+        public StrikeNos strikeNos; 
         [Tooltip("-1 for NA , 0 for Locked and 1 for Unlocked.")]
         public int skillUnLockStatus;
         public float damageMod;
@@ -99,6 +100,7 @@ namespace Combat
             skillDesc = _skillDataSO.skillDesc;
             skillSprite = _skillDataSO.skillIconSprite;
             skillType = _skillDataSO.skillType;
+            strikeNos= _skillDataSO.strikeNos;
             skillUnLockStatus =_skillDataSO.skillUnLockStatus;
             damageMod = _skillDataSO.damageMod;
             skillLvl = _skillDataSO.skillLvl;

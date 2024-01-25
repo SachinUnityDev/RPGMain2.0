@@ -5,6 +5,7 @@ using DG.Tweening;
 using System.Linq;
 using Common;
 using System.Drawing.Drawing2D;
+using Town;
 
 namespace Combat
 {
@@ -30,13 +31,13 @@ namespace Combat
         [SerializeField] GameObject mainFX;
         [SerializeField] GameObject selfFX;
         [SerializeField] PerkType currPerkType = PerkType.None;
-        [SerializeField] StrikeTargetNos strikeNos; 
+        [SerializeField] StrikeNos strikeNos; 
 
         [Header("Buffer variables")]
         [SerializeField] CharController prevCharController;
         [SerializeField] bool lastStatus = false;
 
-
+        [SerializeField] StrikeType strikeType;
 
         //public List<DynamicPosData> targetDynasFX;
         // Start is called before the first frame update
@@ -44,7 +45,29 @@ namespace Combat
         {
             //targetDynasFX = new List<DynamicPosData>(); 
         }
-     
+        void SetMoveParams()
+        {
+            SkillService.Instance.currStrikerDyna = GridService.Instance.GetDyna4GO(CombatService.Instance.currCharOnTurn.gameObject);
+
+            strikerTransform = SkillService.Instance.currStrikerDyna.charGO.transform;
+
+            targetTransform = SkillService.Instance.currentTargetDyna.charGO.transform;
+            targetCharMode = CharMode.None;
+            targetCharMode = SkillService.Instance.currentTargetDyna.charMode;
+
+            startPos = strikerTransform.position + strikerMainFXOffset;
+            mainTargets.Clear();
+            mainTargets.AddRange(CombatService.Instance.mainTargetDynas);
+
+            strikeType = targetTransform.GetComponent<DamageController>().strikeType;
+
+            //GridService.Instance.GetDynaWorldPos(SkillService.Instance.currentTargetDyna)
+            //                                                - striker2TargetOffset;
+            //targetDynasFX.AddRange(GridService.Instance.GetAllTargets()); 
+            //centerPos = GridService.Instance.GetCenterPos4CurrHLTargets();
+            UpdateSkillPose();
+
+        }
         public GameObject RemoteSkillFX(PerkType perkType, CellPosData cellPosData, SkillBase skillbase)
         {
             // remote skill interface ..Add it here 
@@ -73,10 +96,9 @@ namespace Combat
 
         }
 
-        public void RangedSingleStrike(PerkType perkType, StrikeTargetNos strikeNos)
+        public void RangedStrike(PerkType perkType, StrikeNos strikeNos)
         {
             SetMoveParams();
-            if (ChkIfAttackIsDodged()) return;
             currPerkType = perkType;
             this.strikeNos = strikeNos; 
 
@@ -84,16 +106,16 @@ namespace Combat
             Sequence singleRev = DOTween.Sequence();
 
             singleSeq
-                .PrependCallback(() => ToggleSprite(true))
+                .PrependCallback(() => ToggleSprite(strikerTransform, true))
                 .AppendCallback(()=> ApplyFXOnSelf())
                 .AppendCallback(() => CharService.Instance.ToggleCharColliders(targetTransform.gameObject))
                 .AppendCallback(()=> ApplyGabMainFXOnTarget())   
                 .AppendCallback(()=> ApplyFXOnCollatralTargets())
-                .AppendCallback(()=> ApplyImpactFXOnSingleTarget())
+                .AppendCallback(()=> ApplyImpactFXTarget())
                 ;
             singleRev
                 .AppendInterval(0.90f)
-                .AppendCallback(() => ToggleSprite(false))
+                .AppendCallback(() => ToggleSprite(strikerTransform, false))
                 .AppendCallback(() => CharService.Instance.TurnOnAllCharColliders())
                 ;
 
@@ -104,31 +126,11 @@ namespace Combat
 
         }
 
-        //public void MultiTargetEnemyFX()
-        //{
-        //    SetMoveParams();
-        //    currPerkType = PerkType.None;
+  
 
-        //    Sequence mySequence = DOTween.Sequence();
-         
-        //    mySequence
-        //        .PrependCallback(() => ToggleSprite())
-        //        .AppendCallback(() => Debug.Log("HELLO u reached next stage"))
-        //        .AppendCallback(() => CharacterService.Instance.ToggleCharColliders(targetTransform.gameObject))
-        //        .AppendCallback(() => ApplyGabMainFXOnTarget())
-        //        //.AppendCallback(() => ApplyImpactFXOnAllTarget())
-        //        ;
-           
-
-        //    mySequence.Play()
-        //        //.OnComplete(() => reverseSequence.Play())
-        //        ;
-
-        //}
-
-        bool ChkIfAttackIsDodged()
+        bool ChkIfAttackIsDodged(GameObject targetGO)
         {
-            DamageController dmgController = targetTransform.GetComponent<DamageController>();
+            DamageController dmgController = targetGO.GetComponent<DamageController>();
             if (dmgController.strikeType == StrikeType.Dodged) return true; 
             return false; 
         }
@@ -136,22 +138,20 @@ namespace Combat
         public void MultiTargetRangeFX(PerkType perkType)
         {   
             SetMoveParams();
-            if (ChkIfAttackIsDodged()) return; 
-
             currPerkType = perkType;
             Sequence multiTargetSeq = DOTween.Sequence();
             Sequence revMultiTargetSeq = DOTween.Sequence();
           
             multiTargetSeq
-                .PrependCallback(() => ToggleSprite(true))
+                .PrependCallback(() => ToggleSprite(strikerTransform, true))
                 .AppendCallback(() => ApplyFXOnSelf())
                 .AppendCallback(() => CharService.Instance.ToggleCharColliders(targetTransform.gameObject))
                 .AppendCallback(() => ApplyGabMainFXOnTarget())
-                .AppendCallback(() => ApplyImpactFXOnAllTarget())
+                .AppendCallback(() => ApplyImpactFXTarget())
                 ;
             revMultiTargetSeq
                 .AppendInterval(0.90f)
-                .AppendCallback(() => ToggleSprite(false))
+                .AppendCallback(() => ToggleSprite(strikerTransform, false))
                 .AppendCallback(() => CharService.Instance.TurnOnAllCharColliders())
                 ;
 
@@ -164,6 +164,8 @@ namespace Combat
 
         public void ImpactFXOnCurrTarget()
         {
+            if (ChkIfAttackIsDodged(targetTransform.gameObject)) return;
+
             GameObject impactFXGO;
 
             SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType, targetCharMode);
@@ -180,7 +182,7 @@ namespace Combat
         public void MeleeSingleStrike(PerkType perkType)
         {
             SetMoveParams();
-            if (ChkIfAttackIsDodged()) return;
+            strikeNos = StrikeNos.Single; 
             Sequence meleeSeq = DOTween.Sequence();
             Sequence meleeRev = DOTween.Sequence();
            
@@ -190,14 +192,16 @@ namespace Combat
             Debug.Log("END " + END + " START POS " + startPos);
             meleeSeq
                 .AppendCallback(() => CharService.Instance.ToggleCharColliders(targetTransform.gameObject))
-                .AppendCallback(() => ToggleSprite(true))
+                .AppendCallback(() => ToggleSprite(strikerTransform, true))
                 .Append(strikerTransform.DOMove(END, 0.16f * SkillService.Instance.combatSpeed))
+                .AppendCallback(()=>ApplyDefensePose(true))
                 .AppendCallback(() => ImpactFXOnCurrTarget())
                 ;
 
             meleeRev
                 .AppendInterval(0.5f)
-                .AppendCallback(() => ToggleSprite(false))
+                .AppendCallback(() => ApplyDefensePose(false))
+                .AppendCallback(() => ToggleSprite(strikerTransform, false))
                 .AppendCallback(() => CharService.Instance.TurnOnAllCharColliders())
                 .Append(strikerTransform.DOMove(START, 0.16f * SkillService.Instance.combatSpeed))
                 ;
@@ -219,6 +223,7 @@ namespace Combat
             GameObject impactFXGO;
 
             SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType,targetCharMode);
+            if (ChkIfAttackIsDodged(targetTransform.gameObject)) return;
 
             impactFXGO = skillPerkdataFX.impactFX;
             if (impactFXGO == null) return;
@@ -229,30 +234,31 @@ namespace Combat
                 Destroy(ImpactFX, 2.5f);           
         }
 
-        public void ApplyImpactFXOnAllTarget()
+        public void ApplyImpactFXTarget()
         {
-            GameObject impactFXGO;
-      
+            GameObject impactFXGO;      
             SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType, targetCharMode);
-
-  
+              
             impactFXGO = skillPerkdataFX.impactFX;            
             if (impactFXGO == null) return;
-
-            if (CombatService.Instance.mainTargetDynas.Count > 0)
+            if(strikeNos == StrikeNos.Multiple)
             {
-                Debug.Log("PROGRAM WAS HERE" + mainTargets.Count);
-                foreach (DynamicPosData dyna in mainTargets)
+                if (CombatService.Instance.mainTargetDynas.Count > 0)
                 {
-                    Transform targetTrans = dyna.charGO.transform;
-                    ImpactFX = Instantiate(impactFXGO, targetTrans.position, Quaternion.identity).gameObject;
-                    ParticleSystem ps = ImpactFX.GetComponentInChildren<ParticleSystem>(); 
-                    ps.GetComponent<Renderer>().sortingOrder = dyna.GetLayerOrder();
-                    ps.Play();
-                    
-                    Destroy(ImpactFX, 2.5f);
+                    Debug.Log("Multi target FX" + mainTargets.Count);
+                    foreach (DynamicPosData dyna in mainTargets)
+                    {
+                        Transform targetTrans = dyna.charGO.transform;
+                        if (ChkIfAttackIsDodged(targetTrans.gameObject)) continue;
+                        ImpactFX = Instantiate(impactFXGO, targetTrans.position, Quaternion.identity).gameObject;
+                        ParticleSystem ps = ImpactFX.GetComponentInChildren<ParticleSystem>();
+                        ps.GetComponent<Renderer>().sortingOrder = dyna.GetLayerOrder();
+                        ps.Play();
+
+                        Destroy(ImpactFX, 2.5f);
+                    }
                 }
-            }
+            }          
             else
             {
                 ImpactFX = Instantiate(impactFXGO, targetTransform.position, Quaternion.identity).gameObject;
@@ -296,8 +302,10 @@ namespace Combat
             if (colFXGO == null) return;
             foreach (DynamicPosData dyna in CombatService.Instance.colTargetDynas)
             {
-                Transform targetTrans = dyna.charGO.transform; 
-                 GameObject ColFX = Instantiate(colFXGO, targetTrans.position, Quaternion.identity).gameObject;
+                Transform targetTrans = dyna.charGO.transform;
+                if (ChkIfAttackIsDodged(targetTrans.gameObject)) continue;
+
+                GameObject ColFX = Instantiate(colFXGO, targetTrans.position, Quaternion.identity).gameObject;
                 PlayParticleSystem(ColFX);
                 //ColFX.GetComponentInChildren<ParticleSystem>().Play();               
                 Destroy(ColFX, 2.5f);
@@ -330,7 +338,7 @@ namespace Combat
                 SkillService.Instance.OnTargetReached(); 
                 return;
             }
-            if (CombatService.Instance.mainTargetDynas.Count > 0 && strikeNos == StrikeTargetNos.Multiple)
+            if (CombatService.Instance.mainTargetDynas.Count > 0 && strikeNos == StrikeNos.Multiple)
             {
                 foreach (DynamicPosData dyna in mainTargets)
                 {
@@ -357,31 +365,33 @@ namespace Combat
         {
             Transform poseTransform = strikerTransform.GetChild(1);            
             poseTransform.GetComponent<SpriteRenderer>().sprite = SkillService.Instance.GetCurrSkillSprite();
-
-        }
-        void SetMoveParams()
-        {
-            SkillService.Instance.currStrikerDyna = GridService.Instance.GetDyna4GO(CombatService.Instance.currCharOnTurn.gameObject);
-
-            strikerTransform = SkillService.Instance.currStrikerDyna.charGO.transform;
-
-            targetTransform = SkillService.Instance.currentTargetDyna.charGO.transform;
-            targetCharMode = CharMode.None; 
-            targetCharMode = SkillService.Instance.currentTargetDyna.charMode;
-            
-            startPos = strikerTransform.position + strikerMainFXOffset;
-            mainTargets.Clear();       
-            mainTargets.AddRange(CombatService.Instance.mainTargetDynas);
-            //GridService.Instance.GetDynaWorldPos(SkillService.Instance.currentTargetDyna)
-            //                                                - striker2TargetOffset;
-            //targetDynasFX.AddRange(GridService.Instance.GetAllTargets()); 
-            //centerPos = GridService.Instance.GetCenterPos4CurrHLTargets();
-            UpdateSkillPose();
-
         }
     
-
-
+        void ApplyDefensePose(bool showSprite)
+        {
+            if (strikeType == StrikeType.Dodged) return; 
+            if(strikeNos == StrikeNos.Single)
+            {
+                CharController targetController = targetTransform.GetComponent<CharController>(); 
+                AddDefensePose(targetController);
+                ToggleSprite(targetTransform, showSprite); 
+            }
+            if(strikeNos == StrikeNos.Multiple)
+            {
+                foreach (DynamicPosData dyna in mainTargets)
+                {
+                    CharController targetController = dyna.charGO.GetComponent<CharController>(); 
+                    AddDefensePose(targetController);
+                    ToggleSprite(targetController.transform, showSprite);
+                }
+            }            
+        }
+        void AddDefensePose(CharController targetController)
+        {
+            Transform defenseTrans = targetTransform.GetChild(1);
+            defenseTrans.GetComponent<SpriteRenderer>().sprite = SkillService.Instance.GetDefPoseSprite(targetController);
+        }
+   
         void SpawnMainAtACenterPos(Vector3 _pos)
         {
             GameObject FXGO;
@@ -397,7 +407,7 @@ namespace Combat
             Destroy(mainFX, 2.5f);
         }
 
-        void ToggleSprite(bool transPoseON)   // to accomodate for once extra transition POSE 
+        void ToggleSprite(Transform transform, bool transPoseON)   // to accomodate for once extra transition POSE 
         {
             Debug.Log("Ranged Strike" + strikerTransform.GetChild(0).gameObject.activeInHierarchy
                 + "GAMEPBJECT" + strikerTransform.name);
@@ -405,16 +415,15 @@ namespace Combat
          //   if (lastStatus == Status) return;
             if (transPoseON)
             {
-                strikerTransform.GetChild(1).gameObject.SetActive(true);
-                strikerTransform.GetChild(1).DOScale(0.75f, 0.1f); 
-                strikerTransform.GetChild(0).gameObject.SetActive(false);
+                transform.GetChild(1).gameObject.SetActive(true);
+                transform.GetChild(1).DOScale(1.82f, 0.1f);
+                transform.GetChild(0).gameObject.SetActive(false);
             }
             else
             {
-                strikerTransform.GetChild(1).gameObject.SetActive(false);
-                strikerTransform.GetChild(0).gameObject.SetActive(true);
+                transform.GetChild(1).gameObject.SetActive(false);
+                transform.GetChild(0).gameObject.SetActive(true);
             }
-          //  lastStatus = Status; 
         }
 
 #endregion
@@ -423,6 +432,29 @@ namespace Combat
 
     }
 }
+//public void MultiTargetEnemyFX()
+//{
+//    SetMoveParams();
+//    currPerkType = PerkType.None;
+
+//    Sequence mySequence = DOTween.Sequence();
+
+//    mySequence
+//        .PrependCallback(() => ToggleSprite())
+//        .AppendCallback(() => Debug.Log("HELLO u reached next stage"))
+//        .AppendCallback(() => CharacterService.Instance.ToggleCharColliders(targetTransform.gameObject))
+//        .AppendCallback(() => ApplyGabMainFXOnTarget())
+//        //.AppendCallback(() => ApplyImpactFXOnAllTarget())
+//        ;
+
+
+//    mySequence.Play()
+//        //.OnComplete(() => reverseSequence.Play())
+//        ;
+
+//}
+
+
 //void ClearPreviousParams()
 //{
 //    targetDynasFX.Clear(); 

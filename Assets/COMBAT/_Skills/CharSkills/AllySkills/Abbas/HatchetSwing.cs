@@ -21,7 +21,7 @@ namespace Combat
         private float _chance = 50f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        public override StrikeTargetNos strikeNos { get; }
+        public override StrikeNos strikeNos { get; }
         public override void PopulateTargetPos()
         {
             if (skillModel == null) return;

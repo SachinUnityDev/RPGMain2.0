@@ -35,11 +35,11 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 1
+    strikeNos: 2
     skillUnLockStatus: 1
     skillDesc: 
     damageMod: 90
     skillLvl: 0
-    skillSelState: 1
     cd: 1
     attackType: 1
     dmgType: 01000000
@@ -89,11 +89,11 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 2
+    strikeNos: 1
     skillUnLockStatus: 1
     skillDesc: 
     damageMod: 150
     skillLvl: 0
-    skillSelState: 1
     cd: 3
     attackType: 1
     dmgType: 0100000005000000
@@ -139,11 +139,11 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 3
+    strikeNos: 1
     skillUnLockStatus: 1
     skillDesc: 
     damageMod: 60
     skillLvl: 0
-    skillSelState: 1
     cd: 2
     attackType: 1
     dmgType: 01000000
@@ -187,11 +187,11 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 4
+    strikeNos: 1
     skillUnLockStatus: 1
     skillDesc: 
     damageMod: 0
     skillLvl: 0
-    skillSelState: 0
     cd: -5
     attackType: 0
     dmgType: 
@@ -229,11 +229,11 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 5
+    strikeNos: 1
     skillUnLockStatus: 1
     skillDesc: 
     damageMod: 0
     skillLvl: 0
-    skillSelState: 1
     cd: 3
     attackType: 0
     dmgType: 
@@ -266,11 +266,11 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 6
+    strikeNos: 1
     skillUnLockStatus: 1
     skillDesc: 
     damageMod: 0
     skillLvl: 0
-    skillSelState: 1
     cd: 1
     attackType: 0
     dmgType: 
@@ -303,11 +303,11 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 7
+    strikeNos: 2
     skillUnLockStatus: 0
     skillDesc: 
     damageMod: 160
     skillLvl: 0
-    skillSelState: 1
     cd: -1
     attackType: 2
     dmgType: 05000000
@@ -333,11 +333,11 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 9
+    strikeNos: 1
     skillUnLockStatus: 1
     skillDesc: 
     damageMod: 80
     skillLvl: 0
-    skillSelState: 1
     cd: 0
     attackType: 1
     dmgType: 01000000

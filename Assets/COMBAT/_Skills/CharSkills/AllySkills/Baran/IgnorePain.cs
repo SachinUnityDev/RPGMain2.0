@@ -13,7 +13,6 @@ namespace Combat
         public override CharNames charName { get => _charName; set => _charName = value; }
         public override SkillNames skillName => SkillNames.IgnorePain;
         public override SkillLvl skillLvl => SkillLvl.Level0;
-        public override StrikeNos strikeNos => StrikeNos.Single;
         public override string desc => "ignore pain";
 
         private float _chance = 0f;
@@ -67,7 +66,7 @@ namespace Combat
 
         public override void ApplyVFx()
         {
-            SkillService.Instance.skillFXMoveController.RangedStrike(PerkType.None, strikeNos);
+            SkillService.Instance.skillFXMoveController.RangedStrike(PerkType.None, skillModel);
         }
 
 

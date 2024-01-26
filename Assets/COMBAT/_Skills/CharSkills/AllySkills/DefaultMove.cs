@@ -16,8 +16,6 @@ namespace Combat
         public override string desc => "this is default move";
         public override SkillLvl skillLvl => SkillLvl.Level0;
 
-        public override StrikeNos strikeNos => StrikeNos.Single;
-
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 

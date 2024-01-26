@@ -39,8 +39,6 @@ namespace Combat
 
         [SerializeField] StrikeType strikeType;
 
-        //public List<DynamicPosData> targetDynasFX;
-        // Start is called before the first frame update
         void Start()
         {
             //targetDynasFX = new List<DynamicPosData>(); 
@@ -69,21 +67,13 @@ namespace Combat
 
         }
         public GameObject RemoteSkillFX(PerkType perkType, CellPosData cellPosData, SkillBase skillbase)
-        {
-            // remote skill interface ..Add it here 
-            // apply FX and     
+        {       
             currPerkType = perkType;
             Vector3Int tilePos = GridService.Instance.gridMovement.GetTilePos4Pos(cellPosData.charMode, cellPosData.pos);
             Vector3 worldPos = GridService.Instance.gridMovement.GetWorldPosSingle(tilePos);
             Quaternion quat = GridService.Instance.gridLayout.transform.rotation;
             skillModel = skillbase.skillModel;
 
-
-            // CharMode will not match in get method// so this is needed...// GET FX
-            //SkillDataSO skillDataSO = SkillService.Instance.GetSkillSO(skillModel.charName);
-            //SkillData skillData = skillDataSO.GetSkillData(skillModel.skillName);
-            //List<SkillPerkFXData> allSkillPerkFXData =
-            //     skillDataSO.allSkills.Find(t => t.skillName == skillModel.skillName).allSkillFXs;
             SkillPerkFXData fxData = SkillService.Instance.GetSkillPerkFXData(perkType, CharMode.Enemy); 
 
             GameObject fxRemote = Instantiate(fxData.mainSkillFX, worldPos, quat);
@@ -96,11 +86,11 @@ namespace Combat
 
         }
 
-        public void RangedStrike(PerkType perkType, StrikeNos strikeNos)
+        public void RangedStrike(PerkType perkType, SkillModel skillModel)
         {
             SetMoveParams();
             currPerkType = perkType;
-            this.strikeNos = strikeNos; 
+            strikeNos = skillModel.strikeNos; 
 
             Sequence singleSeq = DOTween.Sequence();
             Sequence singleRev = DOTween.Sequence();
@@ -125,20 +115,12 @@ namespace Combat
                 ;
 
         }
-
-  
-
-        bool ChkIfAttackIsDodged(GameObject targetGO)
-        {
-            DamageController dmgController = targetGO.GetComponent<DamageController>();
-            if (dmgController.strikeType == StrikeType.Dodged) return true; 
-            return false; 
-        }
-
-        public void MultiTargetRangeFX(PerkType perkType)
+        public void MultiTargetRangeFX(PerkType perkType, SkillModel skillModel)
         {   
             SetMoveParams();
             currPerkType = perkType;
+            strikeNos = skillModel.strikeNos;
+
             Sequence multiTargetSeq = DOTween.Sequence();
             Sequence revMultiTargetSeq = DOTween.Sequence();
           
@@ -218,21 +200,21 @@ namespace Combat
         //****************TARGET FX APPLIERS *****************************************
         #region TARGET FX APPLIERS
 
-        void ApplyImpactFXOnSingleTarget()
-        {
-            GameObject impactFXGO;
+        //void ApplyImpactFXOnSingleTarget()
+        //{
+        //    GameObject impactFXGO;
 
-            SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType,targetCharMode);
-            if (ChkIfAttackIsDodged(targetTransform.gameObject)) return;
+        //    SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType,targetCharMode);
+        //    if (ChkIfAttackIsDodged(targetTransform.gameObject)) return;
 
-            impactFXGO = skillPerkdataFX.impactFX;
-            if (impactFXGO == null) return;
+        //    impactFXGO = skillPerkdataFX.impactFX;
+        //    if (impactFXGO == null) return;
 
-                ImpactFX = Instantiate(impactFXGO, targetTransform.position, Quaternion.identity).gameObject;
-                //ImpactFX.GetComponentInChildren<ParticleSystem>().Play();
-                PlayParticleSystem(impactFXGO);
-                Destroy(ImpactFX, 2.5f);           
-        }
+        //        ImpactFX = Instantiate(impactFXGO, targetTransform.position, Quaternion.identity).gameObject;
+        //        //ImpactFX.GetComponentInChildren<ParticleSystem>().Play();
+        //        PlayParticleSystem(impactFXGO);
+        //        Destroy(ImpactFX, 2.5f);           
+        //}
 
         public void ApplyImpactFXTarget()
         {
@@ -270,7 +252,6 @@ namespace Combat
 
 
         }
-
         public void ApplyOnSkillSelect()
         {
             strikerTransform = CombatService.Instance.currCharOnTurn.gameObject.transform;
@@ -356,11 +337,17 @@ namespace Combat
             }
            
         }
-  
-#endregion
 
-# region HELPERS 
+        #endregion
 
+        #region HELPERS 
+
+        bool ChkIfAttackIsDodged(GameObject targetGO)
+        {
+            DamageController dmgController = targetGO.GetComponent<DamageController>();
+            if (dmgController.strikeType == StrikeType.Dodged) return true;
+            return false;
+        }
         void UpdateSkillPose()
         {
             Transform poseTransform = strikerTransform.GetChild(1);            

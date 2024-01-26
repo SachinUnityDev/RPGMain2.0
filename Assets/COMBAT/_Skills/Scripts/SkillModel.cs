@@ -104,7 +104,10 @@ namespace Combat
             skillUnLockStatus =_skillDataSO.skillUnLockStatus;
             damageMod = _skillDataSO.damageMod;
             skillLvl = _skillDataSO.skillLvl;
-            skillSelState = _skillDataSO.skillSelState;
+            if(skillUnLockStatus == 1) 
+                skillSelState = SkillSelectState.Clickable;
+            if (skillUnLockStatus == 0)
+                skillSelState = SkillSelectState.UnClickable_Locked;
             cd = _skillDataSO.cd;
             attackType = _skillDataSO.attackType;
             dmgType = _skillDataSO.dmgType.DeepClone();

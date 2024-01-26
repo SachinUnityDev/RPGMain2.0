@@ -12,12 +12,10 @@ namespace Combat
 
         public override SkillLvl skillLvl => SkillLvl.Level0;
 
-        public override StrikeNos strikeNos => StrikeNos.Single;
-
         public override string desc => " Telekenesis";
 
-        public override float chance { get; set; }
-
+        private float _chance = 0f;
+        public override float chance { get => _chance; set => _chance = value; }
         public override void PopulateTargetPos()
         {
             FirstOnSamelane(); 

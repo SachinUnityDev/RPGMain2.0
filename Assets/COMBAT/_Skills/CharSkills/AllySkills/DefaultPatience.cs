@@ -19,8 +19,6 @@ namespace Combat
      
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
-        public override StrikeNos strikeNos => StrikeNos.Single; 
-
         public override void PopulateTargetPos()
         {
             SelfTarget(); 
@@ -72,7 +70,7 @@ namespace Combat
 
         public override void ApplyVFx()
         {
-            SkillService.Instance.skillFXMoveController.MultiTargetRangeFX(PerkType.None);
+            SkillService.Instance.skillFXMoveController.MultiTargetRangeFX(PerkType.None, skillModel);
         }
 
       

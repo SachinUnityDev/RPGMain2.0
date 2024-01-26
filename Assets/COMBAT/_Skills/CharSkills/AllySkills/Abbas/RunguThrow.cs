@@ -11,13 +11,12 @@ namespace Combat
 
         public override CharNames charName { get; set; }
         public override SkillNames skillName => SkillNames.RunguThrow;
-
         public override SkillLvl skillLvl => SkillLvl.Level0;
-        public override StrikeNos strikeNos => StrikeNos.Single; 
-
         public override string desc => "Rungu throw ";
 
-        public override float chance { get; set; }
+        private float _chance = 0f;
+        public override float chance { get => _chance; set => _chance = value; }
+
         DynamicPosData targetDyna; 
         List<DynamicPosData> sameLaneTargets= new List<DynamicPosData>();
         public override void PopulateTargetPos()
@@ -77,7 +76,7 @@ namespace Combat
         public override void ApplyVFx()
         {
             if (targetController & !IsDodged())
-                SkillService.Instance.skillFXMoveController.RangedStrike(PerkType.None, strikeNos);
+                SkillService.Instance.skillFXMoveController.RangedStrike(PerkType.None, skillModel);
         }
 
         public override void DisplayFX1()

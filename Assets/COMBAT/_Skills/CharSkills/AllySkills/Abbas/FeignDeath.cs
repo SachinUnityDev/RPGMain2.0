@@ -17,8 +17,7 @@ namespace Combat
         public override string desc => "Feign Death";
 
         private float _chance = 0f;
-        public override float chance { get; set; }
-        public override StrikeNos strikeNos => StrikeNos.Single;
+        public override float chance { get => _chance; set => _chance = value; }
         public override void PopulateTargetPos()
         {
             SelfTarget(); 

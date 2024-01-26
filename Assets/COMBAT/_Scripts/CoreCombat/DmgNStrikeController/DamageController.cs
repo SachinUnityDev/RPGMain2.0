@@ -392,8 +392,9 @@ namespace Combat
             // SKIP AKILL APPLY DMG 
             SkillController1 skillController = SkillService.Instance.currSkillController;
 
-            StrikeNos strikeNos = skillController.allSkillBases.Find(t => t.skillName
-                                                == SkillService.Instance.currSkillName).strikeNos;
+            SkillBase skillBase = skillController.allSkillBases
+                                .Find(t => t.skillName == SkillService.Instance.currSkillName);
+            StrikeNos strikeNos = skillBase.skillModel.strikeNos; 
             isMisFire= true;
             if (strikeNos == StrikeNos.Single)
             {

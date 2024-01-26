@@ -40,6 +40,7 @@ namespace Combat
         public List<SkillData> allSkills = new List<SkillData>();
         public void Awake()
         {
+        
             if (allSkills.Count < 1) return; 
             foreach(SkillData skillData in allSkills)
             {

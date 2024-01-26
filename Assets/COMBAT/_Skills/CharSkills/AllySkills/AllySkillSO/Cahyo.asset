@@ -35,11 +35,11 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 1
+    strikeNos: 2
     skillUnLockStatus: 1
     skillDesc: 
     damageMod: 100
     skillLvl: 0
-    skillSelState: 1
     cd: 1
     attackType: 1
     dmgType: 01000000
@@ -99,11 +99,11 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 2
+    strikeNos: 1
     skillUnLockStatus: 1
     skillDesc: 
     damageMod: 125
     skillLvl: 0
-    skillSelState: 1
     cd: 2
     attackType: 1
     dmgType: 01000000
@@ -160,11 +160,11 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 3
+    strikeNos: 1
     skillUnLockStatus: 1
     skillDesc: 
     damageMod: 0
     skillLvl: 0
-    skillSelState: 1
     cd: 3
     attackType: 0
     dmgType: 
@@ -212,11 +212,11 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 4
+    strikeNos: 2
     skillUnLockStatus: 1
     skillDesc: 
     damageMod: 0
     skillLvl: 0
-    skillSelState: 1
     cd: 4
     attackType: 0
     dmgType: 0a0000000b000000
@@ -246,11 +246,11 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 5
+    strikeNos: 1
     skillUnLockStatus: 1
     skillDesc: 
     damageMod: 0
     skillLvl: 0
-    skillSelState: 1
     cd: 2
     attackType: 0
     dmgType: 
@@ -276,11 +276,11 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 6
+    strikeNos: 1
     skillUnLockStatus: 1
     skillDesc: 
     damageMod: 0
     skillLvl: 0
-    skillSelState: 1
     cd: 1
     attackType: 0
     dmgType: 
@@ -312,11 +312,11 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 9
+    strikeNos: 1
     skillUnLockStatus: 1
     skillDesc: 
     damageMod: 0
     skillLvl: 0
-    skillSelState: 1
     cd: 1
     attackType: 1
     dmgType: 01000000
@@ -332,7 +332,7 @@ MonoBehaviour:
     castTime: -1
     timeFrame: 1
     maxUsagePerCombat: -1
-    skillIncli: 10
+    skillIncli: 1
     baseWeight: 0
     isActive: 0
     allPerkHexes:

@@ -3,16 +3,12 @@ namespace Combat
     public class AnimalTrap : SkillBase, IRemoteSkill
     {
         public override CharNames charName { get; set; }
-
         public override SkillNames skillName => SkillNames.AnimalTrap;
-
         public override SkillLvl skillLvl => SkillLvl.Level0;
-
-        public override StrikeNos strikeNos => StrikeNos.Single;
-
         public override string desc => "This is animal trap";
 
-        public override float chance { get; set; }
+        private float _chance = 0f;
+        public override float chance { get => _chance; set => _chance = value; }
         public CellPosData cellPosData { get ; set; }
 
         public override void PopulateTargetPos()

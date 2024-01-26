@@ -14,8 +14,7 @@ namespace Combat
         public override CharNames charName { get => _charName; set => _charName = value; }
         public override string desc => "This is Kris Lunge";
 
-        public override SkillLvl skillLvl => SkillLvl.Level0;
-        public override StrikeNos strikeNos => StrikeNos.Single;
+        public override SkillLvl skillLvl => SkillLvl.Level0;        
 
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }

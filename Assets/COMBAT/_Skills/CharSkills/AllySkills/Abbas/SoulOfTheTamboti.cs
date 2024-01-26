@@ -15,8 +15,7 @@ namespace Combat
         public override string desc => "Soul of Tamboti";
 
         private float _chance = 0f;
-        public override float chance { get; set; }
-        public override StrikeNos strikeNos => StrikeNos.Single;
+        public override float chance { get => _chance; set => _chance = value; }
 
         public override void ApplyFX1()
         {

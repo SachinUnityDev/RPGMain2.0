@@ -11,13 +11,10 @@ namespace Combat
 {
     public class HoneBlades : SkillBase
     {
-
         private CharNames _charName;
         public override CharNames charName { get => _charName; set => _charName = value; }
         public override SkillNames skillName => SkillNames.HoneBlades;
         public override SkillLvl skillLvl => SkillLvl.Level0;
-
-        public override StrikeNos strikeNos => StrikeNos.Single;
         public override string desc => "Hone blades";
 
         private float _chance = 0f;

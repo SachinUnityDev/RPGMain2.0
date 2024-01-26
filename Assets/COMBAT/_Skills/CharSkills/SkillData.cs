@@ -24,7 +24,7 @@ namespace Combat
         //public int NumberOfPerks;
         public int damageMod;
         public int skillLvl;
-        public SkillSelectState skillSelState; 
+        //public SkillSelectState skillSelState; 
         public int cd;
         public AttackType attackType;
         public List<DamageType> dmgType = new List<DamageType>();
@@ -64,7 +64,6 @@ namespace Combat
         public GameObject impactFX;
         public GameObject colImpactFX; 
         public GameObject mainSkillFX;
-        public GameObject colMainFX; 
         public GameObject selfFX;
     }
 

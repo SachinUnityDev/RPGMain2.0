@@ -13,8 +13,6 @@ namespace Combat
         private CharNames _charName;
         public override CharNames charName { get => _charName; set => _charName = value; }
         public override SkillNames skillName => SkillNames.GuardWeak;
-
-        public override StrikeNos strikeNos => StrikeNos.Single;
         public override SkillLvl skillLvl => SkillLvl.Level0;
 
         private float _chance = 0f;
@@ -105,7 +103,7 @@ namespace Combat
   
         public override void ApplyVFx()
         {
-            SkillService.Instance.skillFXMoveController.RangedStrike(PerkType.None, strikeNos);
+            SkillService.Instance.skillFXMoveController.RangedStrike(PerkType.None, skillModel);
         }
 
         public override void PopulateAITarget()

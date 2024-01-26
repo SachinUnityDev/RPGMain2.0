@@ -35,11 +35,11 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 1
+    strikeNos: 1
     skillUnLockStatus: 1
     skillDesc: 
     damageMod: 100
     skillLvl: 0
-    skillSelState: 1
     cd: 1
     attackType: 1
     dmgType: 01000000
@@ -90,11 +90,11 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 2
+    strikeNos: 1
     skillUnLockStatus: 1
     skillDesc: Rungu Throw
     damageMod: 4000
     skillLvl: 0
-    skillSelState: 1
     cd: -1
     attackType: 2
     dmgType: 01000000
@@ -147,11 +147,11 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 3
+    strikeNos: 1
     skillUnLockStatus: 1
     skillDesc: Animal Trap
     damageMod: 120
     skillLvl: 0
-    skillSelState: 1
     cd: 0
     attackType: 3
     dmgType: 01000000
@@ -204,11 +204,11 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 4
+    strikeNos: 1
     skillUnLockStatus: 1
     skillDesc: Feign Death
     damageMod: 140
     skillLvl: 0
-    skillSelState: 1
     cd: 0
     attackType: 0
     dmgType: 
@@ -238,11 +238,11 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 5
+    strikeNos: 1
     skillUnLockStatus: 1
     skillDesc: Hide in the Bushes
     damageMod: 0
     skillLvl: 0
-    skillSelState: 0
     cd: 2
     attackType: 0
     dmgType: 
@@ -276,11 +276,11 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 6
+    strikeNos: 1
     skillUnLockStatus: 1
     skillDesc: Default Move
     damageMod: 0
     skillLvl: 0
-    skillSelState: 1
     cd: 1
     attackType: 0
     dmgType: 
@@ -306,11 +306,11 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 7
+    strikeNos: 2
     skillUnLockStatus: 0
     skillDesc: Feign Death
     damageMod: 110
     skillLvl: 0
-    skillSelState: 0
     cd: 3
     attackType: 2
     dmgType: 05000000
@@ -336,11 +336,11 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 8
+    strikeNos: 1
     skillUnLockStatus: 0
     skillDesc: Telekinesis
     damageMod: 140
     skillLvl: 0
-    skillSelState: 12
     cd: -1
     attackType: 2
     dmgType: 09000000
@@ -394,11 +394,11 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 9
+    strikeNos: 1
     skillUnLockStatus: 1
     skillDesc: Retaliate
     damageMod: 90
     skillLvl: 0
-    skillSelState: 1
     cd: 0
     attackType: 2
     dmgType: 01000000

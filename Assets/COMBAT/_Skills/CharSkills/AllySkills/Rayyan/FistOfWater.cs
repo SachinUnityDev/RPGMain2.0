@@ -15,8 +15,6 @@ namespace Combat
         public override CharNames charName { get => _charName; set => _charName = value; }
         public override SkillNames skillName => SkillNames.FistOfWater;
         public override SkillLvl skillLvl => SkillLvl.Level0;
-
-        public override StrikeNos strikeNos => StrikeNos.Multiple;
         public override string desc => "this is fist of water";
 
         private float _chance = 0f;
@@ -75,7 +73,7 @@ namespace Combat
         }
         public override void ApplyVFx()
         {
-            SkillService.Instance.skillFXMoveController.RangedStrike(PerkType.None, strikeNos);             
+            SkillService.Instance.skillFXMoveController.RangedStrike(PerkType.None, skillModel);             
         }
 
         public override void DisplayFX1()

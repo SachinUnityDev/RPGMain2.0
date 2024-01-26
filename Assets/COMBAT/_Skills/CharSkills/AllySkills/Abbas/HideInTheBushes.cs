@@ -18,8 +18,7 @@ namespace Combat
         public override string desc => "Hide in the bushes";
 
         private float _chance = 0f;
-        public override float chance { get; set; }
-        public override StrikeNos strikeNos => StrikeNos.Single;
+        public override float chance { get => _chance; set => _chance = value; }
         public override void PopulateTargetPos()
         {
             SelfTarget(); 
@@ -94,7 +93,7 @@ namespace Combat
       
         public override void ApplyVFx()
         {
-            SkillService.Instance.skillFXMoveController.RangedStrike(PerkType.None, strikeNos);
+            SkillService.Instance.skillFXMoveController.RangedStrike(PerkType.None, skillModel);
         }
 
         public override void ApplyMoveFx()

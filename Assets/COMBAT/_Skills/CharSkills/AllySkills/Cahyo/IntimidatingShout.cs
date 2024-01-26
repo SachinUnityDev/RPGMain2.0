@@ -14,19 +14,17 @@ namespace Combat
         public override CharNames charName { get => _charName; set => _charName = value; }
         public override SkillNames skillName => SkillNames.IntimidatingShout;
         public override SkillLvl skillLvl => SkillLvl.Level0;
-
-        public override StrikeNos strikeNos => StrikeNos.Multiple;
         public override string desc => "This is intimading shout";
-
-
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
         public override void PopulateTargetPos()
         {
+            SelfTarget(); 
             AnyWithCharMode(CharMode.Enemy); 
         }
         public override void ApplyFX1()
         {
+            CombatService.Instance.mainTargetDynas.AddRange(GridService.Instance.GetAllByCharMode(CharMode.Enemy));
             foreach (var dyna in CombatService.Instance.mainTargetDynas)
             {
                 dyna.charGO.GetComponent<CharController>().buffController

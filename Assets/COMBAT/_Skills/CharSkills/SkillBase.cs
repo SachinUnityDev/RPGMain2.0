@@ -200,7 +200,7 @@ namespace Combat
         {
             PopulateTargetPos();
             SkillService.Instance.currentTargetDyna = null;
-            if (strikeNos == StrikeNos.Single)
+            if (skillModel.strikeNos == StrikeNos.Single)
             {
                 foreach (CellPosData cell in skillModel.targetPos)
                 {

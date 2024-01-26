@@ -120,7 +120,7 @@ public class VFXMoveScript : MonoBehaviour
                 }
             }
         }
-        SkillService.Instance.OnTargetReached();
+        SkillService.Instance.skillFXMoveController.OnTargetReached();
         speed = 0;
         GetComponent<Rigidbody>().isKinematic = true;
 

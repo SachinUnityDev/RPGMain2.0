@@ -96,13 +96,11 @@ namespace Combat
         public override void ApplyVFx()
         {
             Sequence Seq = DOTween.Sequence();
-            Seq.AppendCallback(()=> SkillService.Instance.skillFXMoveController.MeleeSingleStrike(PerkType.None))
+            Seq.AppendCallback(()=> SkillService.Instance.skillFXMoveController.MeleeStrike(PerkType.None, skillModel))
                 .AppendInterval(0.5f)
-                .AppendCallback(()=> GridService.Instance.gridMovement.MovebyRow(myDyna, MoveDir.Forward, 1))
-            ;
+                .AppendCallback(()=> GridService.Instance.gridMovement.MovebyRow(myDyna, MoveDir.Forward, 1))           ;
 
-            Seq.Play(); 
-           
+            Seq.Play();            
         }
 
 

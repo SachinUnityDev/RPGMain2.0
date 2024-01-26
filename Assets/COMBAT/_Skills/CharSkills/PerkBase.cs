@@ -71,7 +71,7 @@ namespace Combat
             SkillService.Instance.OnSkillApply += ApplyFX2;
             SkillService.Instance.OnSkillApply += ApplyFX3;
             SkillService.Instance.OnSkillApply += ApplyVFx;
-            SkillService.Instance.SkillApplyMoveFx += ApplyMoveFX; 
+            SkillService.Instance.OnSkillApplyMoveFx += ApplyMoveFX; 
 
             SkillService.Instance.PostSkillApply += PostApplyFX;
             GridService.Instance.HLTargetTiles(skillModel.targetPos);
@@ -148,7 +148,7 @@ namespace Combat
         public virtual void RemoveFX2() => SkillService.Instance.OnSkillApply -= ApplyFX2;
         public virtual void RemoveFX3() => SkillService.Instance.OnSkillApply -= ApplyFX3;
         public virtual void RemoveVFx() => SkillService.Instance.OnSkillApply -= ApplyVFx;
-        public virtual void RemoveMoveFX() => SkillService.Instance.SkillApplyMoveFx -= ApplyMoveFX; 
+        public virtual void RemoveMoveFX() => SkillService.Instance.OnSkillApplyMoveFx -= ApplyMoveFX; 
 
         #endregion
         public bool IsTargetAlly()

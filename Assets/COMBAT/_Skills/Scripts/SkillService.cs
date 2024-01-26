@@ -98,7 +98,7 @@ namespace Combat
         public event Action SkillDeSelect; 
         public event Action PreSkillApply; // target is selected and but dodge acc etc to be chked N fixed 
        // public event Action SkillApply;
-        public event Action SkillApplyMoveFx; 
+        public event Action OnSkillApplyMoveFx; 
         public event Action PostSkillApply; 
         public event Action SkillHovered;
         public event Action SkillWipe;
@@ -293,18 +293,11 @@ namespace Combat
 
         #endregion
 
-        #region Actions 
+        #region EVENTS  
 
-        public void OnTargetReached()
+        public void On_SkillApplyFXMove()
         {
-            Sequence FXHitTargetSeq = DOTween.Sequence();
-
-            FXHitTargetSeq.AppendCallback(() => SkillApplyMoveFx?.Invoke())
-                .AppendInterval(0.2f)
-               // .AppendCallback(() => skillFXMoveController.ApplyImpactFXOnAllTarget())
-                ;
-            FXHitTargetSeq.Play(); 
-            
+            OnSkillApplyMoveFx?.Invoke();
         }
 
         public void TargetIsSelected(DynamicPosData target, CellPosData cellPosData = null)
@@ -700,7 +693,7 @@ namespace Combat
         }
         void ClearPrevData()
         {
-            _OnSkillApply = null; SkillFXRemove = null; SkillApplyMoveFx = null;
+            _OnSkillApply = null; SkillFXRemove = null; OnSkillApplyMoveFx = null;
             PostSkillApply = null;
             PreSkillApply = null;
             CombatService.Instance.mainTargetDynas.Clear();
@@ -726,9 +719,9 @@ namespace Combat
         {
             Debug.Log("SkillApplied");
 
-            for (int i = SkillApplyMoveFx.GetInvocationList().Length - 1; i >= 0; i--)
+            for (int i = OnSkillApplyMoveFx.GetInvocationList().Length - 1; i >= 0; i--)
             {
-                var outputMsg = SkillApplyMoveFx.GetInvocationList()[i];
+                var outputMsg = OnSkillApplyMoveFx.GetInvocationList()[i];
 
                 Debug.Log("INVOKE  MOVE FX" + outputMsg.Method);
             }

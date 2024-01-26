@@ -81,6 +81,8 @@ namespace Combat
 
         public override void ApplyVFx()
         {
+            SkillService.Instance.skillFXMoveController.MeleeStrike(PerkType.None, skillModel);
+
         }
 
         public override void PopulateAITarget()

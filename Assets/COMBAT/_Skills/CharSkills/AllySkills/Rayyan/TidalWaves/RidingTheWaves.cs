@@ -58,7 +58,7 @@ namespace Combat
 
         public override void ApplyVFx()
         {
-            SkillService.Instance.skillFXMoveController.MultiTargetRangeFX(PerkType.B3, skillModel);
+            SkillService.Instance.skillFXMoveController.RangedStrike(PerkType.B3, skillModel);
 
         }
         public override void ApplyMoveFX()

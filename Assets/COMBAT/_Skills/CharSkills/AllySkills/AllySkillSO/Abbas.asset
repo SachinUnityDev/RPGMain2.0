@@ -17,7 +17,7 @@ MonoBehaviour:
   combatFX:
     loc: 0
     skillSprite: {fileID: 0}
-  defendPose: {fileID: 0}
+  defendPose: {fileID: 21300000, guid: 31425c7521736c7449bb4cb1b7240b43, type: 3}
   defendFX:
     loc: 0
     skillSprite: {fileID: 0}
@@ -79,7 +79,6 @@ MonoBehaviour:
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 6192724089161036641, guid: e17d9a3f04750764c8c0a7a0461e4c3b,
         type: 3}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
     allLines: []
   - skillName: 29
@@ -93,7 +92,7 @@ MonoBehaviour:
     strikeNos: 1
     skillUnLockStatus: 1
     skillDesc: Rungu Throw
-    damageMod: 4000
+    damageMod: 140
     skillLvl: 0
     cd: -1
     attackType: 2
@@ -136,7 +135,6 @@ MonoBehaviour:
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 4200477982907238735, guid: c3a66c11ab77bba40b9cd3f798eec085,
         type: 3}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
     allLines: []
   - skillName: 30
@@ -193,7 +191,6 @@ MonoBehaviour:
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 8790239494410540453, guid: 367e932c339dc5a468b8565969ed082b,
         type: 3}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
     allLines: []
   - skillName: 31
@@ -264,7 +261,6 @@ MonoBehaviour:
       impactFX: {fileID: 0}
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 0}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 6341380756500085998, guid: 8d22f8de33a885b46ba712496b8da547,
         type: 3}
     allLines: []
@@ -450,6 +446,5 @@ MonoBehaviour:
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 4200477982907238735, guid: c3a66c11ab77bba40b9cd3f798eec085,
         type: 3}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
     allLines: []

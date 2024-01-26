@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Baran
   m_EditorClassIdentifier: 
   charName: 2
-  combatPose: {fileID: 21300000, guid: 4711feee5cad7134ebb50de3dc180623, type: 3}
+  combatPose: {fileID: 21300000, guid: b9d3ffcd7ddd79e4cb973cdc69a75708, type: 3}
   combatFX:
     loc: 0
     skillSprite: {fileID: 0}
-  defendPose: {fileID: 0}
+  defendPose: {fileID: 21300000, guid: 2de9252e692b5e947b06feeea01d2c58, type: 3}
   defendFX:
     loc: 0
     skillSprite: {fileID: 0}
@@ -31,7 +31,7 @@ MonoBehaviour:
     charName: 2
     skillID: 90
     skillIconSprite: {fileID: 21300000, guid: b056c11649f079d4592d6960ab20ffe3, type: 3}
-    skillPose: {fileID: 21300000, guid: dea52ae807420524282b903159cf65e9, type: 3}
+    skillPose: {fileID: 21300000, guid: 96d55a9f3f894c14b927dbf5e5bdf537, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 1
@@ -76,7 +76,6 @@ MonoBehaviour:
         type: 3}
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 0}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 6148754506158781688, guid: 14cafda68f5afe54eb839d472668ef20,
         type: 3}
     allLines:
@@ -85,8 +84,9 @@ MonoBehaviour:
     charName: 2
     skillID: 141
     skillIconSprite: {fileID: 21300000, guid: b2265624c904bc84a905da75cdf93dca, type: 3}
-    skillPose: {fileID: 21300000, guid: 7e00aeaf68196564588a993fdfb909db, type: 3}
-    skillTransitionPose: {fileID: 0}
+    skillPose: {fileID: 21300000, guid: 84ef0cd0fcbd7ec4db400cc76199dd74, type: 3}
+    skillTransitionPose: {fileID: 21300000, guid: 1a5cda8cb3c0a43458f7f6f21184cecc,
+      type: 3}
     skillTransitionPose2: {fileID: 0}
     skillType: 2
     strikeNos: 1
@@ -127,7 +127,6 @@ MonoBehaviour:
       impactFX: {fileID: 0}
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 0}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 1943563886778379370, guid: 05c186dac36793b4ca8560046e1117c5,
         type: 3}
     allLines: []
@@ -135,7 +134,7 @@ MonoBehaviour:
     charName: 2
     skillID: 142
     skillIconSprite: {fileID: 21300000, guid: 87866bd9183895f41b8928cb9a4dbd63, type: 3}
-    skillPose: {fileID: 21300000, guid: 61fe197907443b34db8a5ebf975cda42, type: 3}
+    skillPose: {fileID: 21300000, guid: 744530ab3285e4e47935645cddec67ed, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 3
@@ -183,7 +182,7 @@ MonoBehaviour:
     charName: 2
     skillID: 143
     skillIconSprite: {fileID: 21300000, guid: 6d0d37d1d05c0e94cbff6823f5ef1443, type: 3}
-    skillPose: {fileID: 21300000, guid: 3226e7a69e673724a90441979ae96e52, type: 3}
+    skillPose: {fileID: 21300000, guid: 7c5ee950242cdba429c22ed8b6292fc4, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 4
@@ -217,7 +216,6 @@ MonoBehaviour:
       impactFX: {fileID: 0}
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 0}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 7607998311695135919, guid: 59e5c276ee0087549a65779eced913c4,
         type: 3}
     allLines: []
@@ -225,7 +223,7 @@ MonoBehaviour:
     charName: 2
     skillID: 144
     skillIconSprite: {fileID: 21300000, guid: 2bcab3473d1db48469298e14db63c2eb, type: 3}
-    skillPose: {fileID: 21300000, guid: 36e137b78c90a224096ee5be695679fc, type: 3}
+    skillPose: {fileID: 21300000, guid: 744530ab3285e4e47935645cddec67ed, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 5
@@ -255,7 +253,6 @@ MonoBehaviour:
       impactFX: {fileID: 0}
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 0}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
     allLines: []
   - skillName: 2
@@ -292,14 +289,13 @@ MonoBehaviour:
       impactFX: {fileID: 0}
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 0}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
     allLines: []
   - skillName: 13
     charName: 2
     skillID: 146
     skillIconSprite: {fileID: 21300000, guid: b7dd556a41782764399057a3e04affbf, type: 3}
-    skillPose: {fileID: 21300000, guid: 4711feee5cad7134ebb50de3dc180623, type: 3}
+    skillPose: {fileID: 21300000, guid: 84ef0cd0fcbd7ec4db400cc76199dd74, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 7
@@ -329,7 +325,7 @@ MonoBehaviour:
     charName: 2
     skillID: 146
     skillIconSprite: {fileID: 21300000, guid: b7dd556a41782764399057a3e04affbf, type: 3}
-    skillPose: {fileID: 21300000, guid: dea52ae807420524282b903159cf65e9, type: 3}
+    skillPose: {fileID: 21300000, guid: 0c68ce9fa20508b4b9be90b15113f45f, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 9
@@ -360,7 +356,6 @@ MonoBehaviour:
         type: 3}
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 0}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 6148754506158781688, guid: 14cafda68f5afe54eb839d472668ef20,
         type: 3}
     allLines: []

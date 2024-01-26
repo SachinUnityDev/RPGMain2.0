@@ -87,7 +87,7 @@ namespace Combat
             SkillService.Instance.OnSkillApply += ApplyFX2;
             SkillService.Instance.OnSkillApply += ApplyFX3;
             SkillService.Instance.OnSkillApply += ApplyVFx;
-            SkillService.Instance.SkillApplyMoveFx += ApplyMoveFx;
+            SkillService.Instance.OnSkillApplyMoveFx += ApplyMoveFx;
             SkillService.Instance.PostSkillApply += PostApplyFX;
             GridService.Instance.HLTargetTiles(skillModel.targetPos);
 
@@ -153,7 +153,7 @@ namespace Combat
         public virtual void RemoveVFX() => SkillService.Instance.OnSkillApply -= ApplyVFx;
         public virtual void RemoveMoveFX()
         {
-            SkillService.Instance.SkillApplyMoveFx -= ApplyMoveFx;
+            SkillService.Instance.OnSkillApplyMoveFx -= ApplyMoveFx;
             Debug.Log("REMOVE MOVE FX BASE");
 
         }

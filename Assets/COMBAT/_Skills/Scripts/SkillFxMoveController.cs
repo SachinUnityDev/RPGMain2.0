@@ -4,7 +4,6 @@ using UnityEngine;
 using DG.Tweening;
 using System.Linq;
 using Common;
-using System.Drawing.Drawing2D;
 using Town;
 
 namespace Combat
@@ -38,7 +37,7 @@ namespace Combat
         [SerializeField] bool lastStatus = false;
 
         [SerializeField] StrikeType strikeType;
-
+        
         void Start()
         {
             //targetDynasFX = new List<DynamicPosData>(); 
@@ -90,6 +89,7 @@ namespace Combat
         {
             SetMoveParams();
             currPerkType = perkType;
+            this.skillModel = skillModel;
             strikeNos = skillModel.strikeNos; 
 
             Sequence singleSeq = DOTween.Sequence();
@@ -115,56 +115,33 @@ namespace Combat
                 ;
 
         }
-        public void MultiTargetRangeFX(PerkType perkType, SkillModel skillModel)
-        {   
+
+      
+
+        //public void ImpactFXOnCurrTarget()
+        //{
+        //    if (ChkIfAttackIsDodged(targetTransform.gameObject)) return;
+
+        //    GameObject impactFXGO;
+
+        //    SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType, targetCharMode);
+
+        //    impactFXGO = skillPerkdataFX.impactFX;
+        //    if (impactFXGO == null) return;
+        //    ImpactFX = Instantiate(impactFXGO, targetTransform.position, Quaternion.identity).gameObject;
+        //    PlayParticleSystem(impactFXGO);
+        //    //ImpactFX.GetComponentInChildren<ParticleSystem>().Play();
+        //    Destroy(ImpactFX, 2.5f);
+
+        //}
+
+        public void MeleeStrike(PerkType perkType, SkillModel skillModel)
+        {
             SetMoveParams();
-            currPerkType = perkType;
+            this.skillModel = skillModel;
             strikeNos = skillModel.strikeNos;
+            currPerkType = perkType; 
 
-            Sequence multiTargetSeq = DOTween.Sequence();
-            Sequence revMultiTargetSeq = DOTween.Sequence();
-          
-            multiTargetSeq
-                .PrependCallback(() => ToggleSprite(strikerTransform, true))
-                .AppendCallback(() => ApplyFXOnSelf())
-                .AppendCallback(() => CharService.Instance.ToggleCharColliders(targetTransform.gameObject))
-                .AppendCallback(() => ApplyGabMainFXOnTarget())
-                .AppendCallback(() => ApplyImpactFXTarget())
-                ;
-            revMultiTargetSeq
-                .AppendInterval(0.90f)
-                .AppendCallback(() => ToggleSprite(strikerTransform, false))
-                .AppendCallback(() => CharService.Instance.TurnOnAllCharColliders())
-                ;
-
-            multiTargetSeq.Play()
-                .OnComplete(() => revMultiTargetSeq.Play())
-                .OnComplete(() => multiTargetSeq = null)
-               .OnComplete(() => revMultiTargetSeq = null)
-               ;
-        }
-
-        public void ImpactFXOnCurrTarget()
-        {
-            if (ChkIfAttackIsDodged(targetTransform.gameObject)) return;
-
-            GameObject impactFXGO;
-
-            SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType, targetCharMode);
-
-            impactFXGO = skillPerkdataFX.impactFX;
-            if (impactFXGO == null) return;
-            ImpactFX = Instantiate(impactFXGO, targetTransform.position, Quaternion.identity).gameObject;
-            PlayParticleSystem(impactFXGO);
-            //ImpactFX.GetComponentInChildren<ParticleSystem>().Play();
-            Destroy(ImpactFX, 2.5f);
-
-        }
-
-        public void MeleeSingleStrike(PerkType perkType)
-        {
-            SetMoveParams();
-            strikeNos = StrikeNos.Single; 
             Sequence meleeSeq = DOTween.Sequence();
             Sequence meleeRev = DOTween.Sequence();
            
@@ -174,10 +151,11 @@ namespace Combat
             Debug.Log("END " + END + " START POS " + startPos);
             meleeSeq
                 .AppendCallback(() => CharService.Instance.ToggleCharColliders(targetTransform.gameObject))
+                .AppendCallback(() => CharService.Instance.ToggleCharColliders(strikerTransform.gameObject))
                 .AppendCallback(() => ToggleSprite(strikerTransform, true))
                 .Append(strikerTransform.DOMove(END, 0.16f * SkillService.Instance.combatSpeed))
                 .AppendCallback(()=>ApplyDefensePose(true))
-                .AppendCallback(() => ImpactFXOnCurrTarget())
+                .AppendCallback(() => ApplyImpactFXTarget())
                 ;
 
             meleeRev
@@ -199,23 +177,6 @@ namespace Combat
 
         //****************TARGET FX APPLIERS *****************************************
         #region TARGET FX APPLIERS
-
-        //void ApplyImpactFXOnSingleTarget()
-        //{
-        //    GameObject impactFXGO;
-
-        //    SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType,targetCharMode);
-        //    if (ChkIfAttackIsDodged(targetTransform.gameObject)) return;
-
-        //    impactFXGO = skillPerkdataFX.impactFX;
-        //    if (impactFXGO == null) return;
-
-        //        ImpactFX = Instantiate(impactFXGO, targetTransform.position, Quaternion.identity).gameObject;
-        //        //ImpactFX.GetComponentInChildren<ParticleSystem>().Play();
-        //        PlayParticleSystem(impactFXGO);
-        //        Destroy(ImpactFX, 2.5f);           
-        //}
-
         public void ApplyImpactFXTarget()
         {
             GameObject impactFXGO;      
@@ -307,7 +268,6 @@ namespace Combat
                 Destroy(selfFX, 2.5f);
             }
         }
-
         void ApplyGabMainFXOnTarget()
         {
             GameObject mainFXGO; 
@@ -316,7 +276,7 @@ namespace Combat
 
             if (mainFXGO == null) 
             {
-                SkillService.Instance.OnTargetReached(); 
+                OnTargetReached(); 
                 return;
             }
             if (CombatService.Instance.mainTargetDynas.Count > 0 && strikeNos == StrikeNos.Multiple)
@@ -339,7 +299,19 @@ namespace Combat
         }
 
         #endregion
+        public void OnTargetReached()
+        {
+            Sequence FXHitTargetSeq = DOTween.Sequence();
 
+            FXHitTargetSeq
+                .AppendCallback(() => SkillService.Instance.On_SkillApplyFXMove())                    
+                .AppendCallback(() => ApplyDefensePose(true))
+                .AppendInterval(1f)
+                .AppendCallback(() => ApplyDefensePose(false))                
+                ;
+            FXHitTargetSeq.Play();
+
+        }
         #region HELPERS 
 
         bool ChkIfAttackIsDodged(GameObject targetGO)
@@ -356,7 +328,12 @@ namespace Combat
     
         void ApplyDefensePose(bool showSprite)
         {
-            if (strikeType == StrikeType.Dodged) return; 
+            if (strikeType == StrikeType.Dodged) return;
+            if (skillModel.skillInclination == SkillInclination.Heal 
+                || skillModel.skillInclination == SkillInclination.Guard
+                || skillModel.skillInclination == SkillInclination.Buff
+                ||skillModel.skillInclination == SkillInclination.Patience) return; 
+
             if(strikeNos == StrikeNos.Single)
             {
                 CharController targetController = targetTransform.GetComponent<CharController>(); 
@@ -412,13 +389,55 @@ namespace Combat
                 transform.GetChild(0).gameObject.SetActive(true);
             }
         }
-
 #endregion
-
-
 
     }
 }
+//void ApplyImpactFXOnSingleTarget()
+//{
+//    GameObject impactFXGO;
+
+//    SkillPerkFXData skillPerkdataFX = SkillService.Instance.GetSkillPerkFXData(currPerkType,targetCharMode);
+//    if (ChkIfAttackIsDodged(targetTransform.gameObject)) return;
+
+//    impactFXGO = skillPerkdataFX.impactFX;
+//    if (impactFXGO == null) return;
+
+//        ImpactFX = Instantiate(impactFXGO, targetTransform.position, Quaternion.identity).gameObject;
+//        //ImpactFX.GetComponentInChildren<ParticleSystem>().Play();
+//        PlayParticleSystem(impactFXGO);
+//        Destroy(ImpactFX, 2.5f);           
+//}
+//public void MultiTargetRangeFX(PerkType perkType, SkillModel skillModel)
+//{   
+//    SetMoveParams();
+//    currPerkType = perkType;
+//    strikeNos = skillModel.strikeNos;
+
+//    Sequence multiTargetSeq = DOTween.Sequence();
+//    Sequence revMultiTargetSeq = DOTween.Sequence();
+
+//    multiTargetSeq
+//        .PrependCallback(() => ToggleSprite(strikerTransform, true))
+//        .AppendCallback(() => ApplyFXOnSelf())
+//        .AppendCallback(() => CharService.Instance.ToggleCharColliders(targetTransform.gameObject))
+//        .AppendCallback(() => ApplyGabMainFXOnTarget())
+//        .AppendCallback(() => ApplyImpactFXTarget())
+//        ;
+//    revMultiTargetSeq
+//        .AppendInterval(0.90f)
+//        .AppendCallback(() => ToggleSprite(strikerTransform, false))
+//        .AppendCallback(() => CharService.Instance.TurnOnAllCharColliders())
+//        ;
+
+//    multiTargetSeq.Play()
+//        .OnComplete(() => revMultiTargetSeq.Play())
+//        .OnComplete(() => multiTargetSeq = null)
+//       .OnComplete(() => revMultiTargetSeq = null)
+//       ;
+//}
+
+
 //public void MultiTargetEnemyFX()
 //{
 //    SetMoveParams();

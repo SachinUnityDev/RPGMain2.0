@@ -332,8 +332,9 @@ namespace Common
                 }
                 if (GetHealthValBelow0(value) <= 0)
                 {
-                    ChangeStat(CauseType.StatMinMaxLimit, 0, charModel.charID
-                                , StatName.fortitude, GetHealthValBelow0(value));                    
+                   StatModData statModDataFort =ChangeStat(CauseType.StatMinMaxLimit, 0, charModel.charID
+                                , StatName.fortitude, GetHealthValBelow0(value));
+                    return statModDataFort; 
                 }
                 if(statName == StatName.health  
                             && charStateController.HasCharState(CharStateName.LastDropOfBlood)
@@ -351,7 +352,7 @@ namespace Common
             value = value*(1 + altVal / 100); 
         
             StatModData statModData = new StatModData(turn, causeType, CauseName, causeByCharID
-                                                             , this.charModel.charID, statName,(int)value, (int)value);
+                                                    , this.charModel.charID, statName,(int)value, (int)value);
 
             float currVal = statData.currValue;
             float preConstrainedValue = currVal + value;

@@ -123,7 +123,7 @@ namespace Combat
 
         public override void ApplyVFx()
         {
-            SkillService.Instance.skillFXMoveController.MultiTargetRangeFX(PerkType.None, skillModel);
+            SkillService.Instance.skillFXMoveController.RangedStrike(PerkType.None, skillModel);
         }
 
         public override void PopulateAITarget()

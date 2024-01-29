@@ -48,7 +48,7 @@ namespace Town
         }
         void FillGemSlots()
         {
-            CharController charController = CharService.Instance.GetCharCtrlWithName(selectChar);
+            CharController charController = CharService.Instance.GetAbbasController(selectChar);
             ItemController itemController = charController.itemController;
             itemModel = itemController.itemModel;
             for (int i = 0; i < 2; i++)

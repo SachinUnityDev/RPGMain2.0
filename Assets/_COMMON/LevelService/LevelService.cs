@@ -51,7 +51,7 @@ namespace Common
         // Called from the view controller
         public void ManLvlUp(CharNames charName, List<LvlData> optionChosen)
         {
-            charController = CharService.Instance.GetCharCtrlWithName(charName);
+            charController = CharService.Instance.GetAbbasController(charName);
             // apply to char Controller
             foreach (LvlData attrib in optionChosen)
             {

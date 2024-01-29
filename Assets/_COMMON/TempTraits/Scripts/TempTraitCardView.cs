@@ -39,7 +39,7 @@ namespace Common
             this.charName = charName;   
             this.tempTraitName= tempTraitName;  
 
-            charController = CharService.Instance.GetCharCtrlWithName(charName);
+            charController = CharService.Instance.GetAbbasController(charName);
             tempTraitController = charController.tempTraitController;
 
             FillBtmTrans();   

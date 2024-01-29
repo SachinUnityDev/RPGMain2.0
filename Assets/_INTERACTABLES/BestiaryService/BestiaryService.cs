@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Interactables;
-using System.Security.Policy;
-using UnityEngine.PlayerLoop;
+using Town;
 
 namespace Common
 {
@@ -13,7 +12,7 @@ namespace Common
         
         [Header("Character Pos")]
         public Vector3 spawnPos = new Vector3(0, 0, 0);
-
+        
 
 
         [Header("BestiarySO")]
@@ -99,8 +98,9 @@ namespace Common
             // find the model and update  its level here 
             allRegBestiaryModels.Add(charModel);
             charModel.availOfChar = AvailOfChar.Available;
-            charModel.charID = allRegBestiaryModels.Count + start_INT_FOR_BESTIARY_CHARID + 1; 
-
+            charModel.charID = allRegBestiaryModels.Count + start_INT_FOR_BESTIARY_CHARID + 1;
+            //go.name += charModel.charID.ToString(); 
+            
             return charController;
         }
         public CharController GetCharControllerWithName(CharNames enemyName)

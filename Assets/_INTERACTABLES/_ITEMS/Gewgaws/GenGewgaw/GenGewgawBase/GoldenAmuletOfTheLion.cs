@@ -28,7 +28,8 @@ namespace Interactables
 
         public override void EquipGenGewgawFX()
         {
-            charController = CharService.Instance.GetCharCtrlWithName(InvService.Instance.charSelect);
+            charController = InvService.Instance.charSelectController; 
+                // .GetAbbasController(InvService.Instance.charSelect);
             base.EquipGenGewgawFX();
         }
     }

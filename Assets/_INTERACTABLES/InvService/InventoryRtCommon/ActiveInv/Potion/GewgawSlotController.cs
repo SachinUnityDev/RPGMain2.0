@@ -85,7 +85,6 @@ namespace Interactables
 
         public bool AddItem(Iitems item, bool onDrop = false)
         {
-            CharNames charName = InvService.Instance.charSelect;
             CharController charController = InvService.Instance.charSelectController; 
             if (!(item.itemType == ItemType.GenGewgaws || item.itemType == ItemType.PoeticGewgaws ||
                 item.itemType == ItemType.SagaicGewgaws || item.itemType == ItemType.RelicGewgaws))

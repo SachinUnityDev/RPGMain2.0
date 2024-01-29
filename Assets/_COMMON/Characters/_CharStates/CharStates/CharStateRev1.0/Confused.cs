@@ -19,8 +19,11 @@ namespace Common
             //...50% chance to misfire ()
             int buffId = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                       , charID, AttribName.acc, -2, timeFrame, castTime, true);
+                       , charID, AttribName.acc, -2, timeFrame, castTime, false);
             allBuffIds.Add(buffId);
+
+            charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+              , charID, AttribName.focus, -2, TimeFrame.EndOfCombat, 1, false); // not to be lost on char state END
 
             int buffImmuneID =
             charController.charStateController.ApplyImmunityBuff(CauseType.CharState, (int)charStateName

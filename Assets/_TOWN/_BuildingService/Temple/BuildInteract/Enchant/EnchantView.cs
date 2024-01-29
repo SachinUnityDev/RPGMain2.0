@@ -73,7 +73,7 @@ public class EnchantView : MonoBehaviour, IPanel
         CharNames selectChar = charModelInTown[index].charName;
         BuildingIntService.Instance.selectChar = selectChar; 
 
-        CharController charController = CharService.Instance.GetCharCtrlWithName(selectChar);
+        CharController charController = CharService.Instance.GetAbbasController(selectChar);
         WeaponController weaponController = charController.weaponController;
         WeaponModel weaponModel = weaponController.weaponModel;
 

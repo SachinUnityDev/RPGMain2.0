@@ -20,16 +20,19 @@ namespace Common
             // ...Immune to LuckyDuck...
 
             int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-            , charID, AttribName.waterRes, -20, timeFrame, castTime, true);
+            , charID, AttribName.waterRes, -20, timeFrame, castTime, false);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-            , charID, AttribName.earthRes, -20, timeFrame, castTime, true);
+            , charID, AttribName.earthRes, -20, timeFrame, castTime, false);
             allBuffIds.Add(buffID);
 
             buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-            , charID, AttribName.darkRes, -20, timeFrame, castTime, true);
+            , charID, AttribName.darkRes, -20, timeFrame, castTime, false);
             allBuffIds.Add(buffID);
+
+            charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+             , charID, AttribName.luck, -2, TimeFrame.EndOfCombat, 1, false); // not to be lost on char state END
 
             int immuneBuffID = charController.charStateController
                .ApplyImmunityBuff(CauseType.CharState, (int)charStateName

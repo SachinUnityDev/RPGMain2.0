@@ -15,14 +15,24 @@ namespace Common
         public override void StateApplyFX()
         {
             //+1 Morale on allies - 1 Focus on self    Immune to Despaired
+            allBuffIds.AddRange(
             CharService.Instance.ApplyBuffOnPartyExceptSelf(CauseType.CharState, (int)charStateName
-                               , charID, AttribName.morale, +1, timeFrame, castTime, true, CharMode.Ally);
+                               , charID, AttribName.morale, +1, timeFrame, castTime, true, CharMode.Ally));
 
+            int buffId = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                  , charID, AttribName.focus, -1, timeFrame, castTime, true);
+                , charID, AttribName.morale, +3, timeFrame, castTime, true);
+            allBuffIds.Add(buffId);
+            
+            buffId = 
+            charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+                  , charID, AttribName.focus, -1, timeFrame, castTime, false);
+            allBuffIds.Add(buffId); 
 
+            int immunityID = 
             charController.charStateController.ApplyImmunityBuff(CauseType.CharState, (int)charStateName
                                                 , charID, CharStateName.Despaired, timeFrame, castTime);
+            allImmunityBuffs.Add(immunityID);
             charController.OnAttribCurrValSet += Tick2;
         }
 

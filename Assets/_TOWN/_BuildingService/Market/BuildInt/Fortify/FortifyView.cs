@@ -88,7 +88,7 @@ namespace Town
             CharNames selectChar = CharService.Instance.allCharModels[index].charName;
             BuildingIntService.Instance.selectChar = selectChar;
 
-            CharController charController = CharService.Instance.GetCharCtrlWithName(selectChar);
+            CharController charController = CharService.Instance.GetAbbasController(selectChar);
             ArmorController armorController = charController.armorController;
             ArmorModel armorModel = armorController.armorModel;
 

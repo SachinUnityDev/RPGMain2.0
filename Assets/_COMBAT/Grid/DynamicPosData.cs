@@ -48,7 +48,7 @@ namespace Combat
         {
             charMode = _dynaModel.charMode;
             currentPos = _dynaModel.currPos;
-            charGO = CharService.Instance.GetCharGOWithName(_dynaModel.charName, _dynaModel.charID);
+            charGO = CharService.Instance.GetCharCtrlWithCharID(_dynaModel.charID).gameObject;
             FwdtilePos = GridService.Instance.gridMovement.GetTilePos4Pos(charMode, currentPos);
             // find game object with charName and ID and Assign 
             // get TilePos from cellPos Data ... 

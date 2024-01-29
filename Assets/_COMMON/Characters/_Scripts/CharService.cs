@@ -123,50 +123,21 @@ namespace Common
         {           
             CharacterSO charSO = allAllySO.Find(x => x.charName == _charName);
             return charSO;
-        }
-        public GameObject GetCharGOWithName(CharNames _charName, int _charID)   //change it to charID based only 
-        {
-
-            foreach (GameObject c in charsInPlay)
-            {
-                CharController charController = c.GetComponent<CharController>();   
-                if(charController.charModel.charName == _charName)
-                {
-                    if(charController.charModel.charID== _charID)
-                    {
-                        return c;
-                    }
-                }
-               
-            }
-            return null; 
-        }
+        }      
         public CharController GetCharCtrlWithCharID(int  _charID)
         {
             CharController charCtrl = charsInPlayControllers.Find(x => x.charModel.charID == _charID ); 
             return charCtrl; 
         }
-        public CharController GetCharCtrlWithName(CharNames charName)
+        public CharController GetAbbasController(CharNames charName)
         {
-       
             CharController charCtrl = charsInPlayControllers.Find(x => x.charModel.charName == charName);
             if (charCtrl != null)
                 return charCtrl;
             else
-                Debug.Log("CharController not found" + charName);
+                Debug.Log("Abbas CharController not found" + charName);
             return null;
         }
-        public CharModel GetAllyCharModel(CharNames charName)
-        {          
-            CharModel charModel = allyUnLockedCompModels
-                            .Find(t => t.charName == charName);
-            if (charModel != null)
-                return charModel;
-            else
-                Debug.Log("CharModel not found" + charName);
-            return null; 
-        }
-
         #endregion
 
         #region LOCK and UNLOCK and FLEE

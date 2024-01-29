@@ -101,13 +101,13 @@ namespace Common
             charController = GetComponent<CharController>();
             SceneManager.sceneLoaded += OnSceneLoaded;
             charController.OnStatChg += StatChg;
-            charController.OnAttribCurrValSet += AttribChg; 
+           // charController.OnAttribCurrValSet += AttribChg; 
         }
         private void OnDisable()
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
             charController.OnStatChg -= StatChg;
-            charController.OnAttribCurrValSet -= AttribChg;
+           // charController.OnAttribCurrValSet -= AttribChg;
         }
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {

@@ -40,7 +40,7 @@ namespace Intro
             {
                 if(quickStartOpt == 1)
                 {
-                    CharController charController = CharService.Instance.GetCharCtrlWithName(CharNames.Abbas);
+                    CharController charController = CharService.Instance.GetAbbasController(CharNames.Abbas);
                     charController.charModel.classType = ClassType.Skirmisher;
                 }
             }

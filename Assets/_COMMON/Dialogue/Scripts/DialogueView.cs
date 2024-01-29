@@ -96,7 +96,7 @@ namespace Common
                 skipBtn.gameObject.SetActive(true);
 
             dialogueSO = _dialogueSO;
-            CharController charController = CharService.Instance.GetCharCtrlWithName(CharNames.Abbas); 
+            CharController charController = CharService.Instance.GetAbbasController(CharNames.Abbas); 
             story = new Story(dialogueSO.GetDialogueAsset(charController.charModel.classType).text);
             if (OnCreateStory != null) OnCreateStory(story);
             InitDialogueView();

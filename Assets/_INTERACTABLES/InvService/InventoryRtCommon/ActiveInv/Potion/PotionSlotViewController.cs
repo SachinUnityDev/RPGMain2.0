@@ -99,7 +99,7 @@ namespace Interactables
 
         public bool AddItem(Iitems item, bool onDrop = false)
         {
-            CharNames charName = InvService.Instance.charSelect;           
+           // CharNames charName = InvService.Instance.charSelect;           
             if (item.itemType != ItemType.Potions)
                 return false; 
                 

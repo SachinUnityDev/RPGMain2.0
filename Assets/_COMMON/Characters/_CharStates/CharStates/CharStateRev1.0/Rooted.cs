@@ -20,14 +20,17 @@ namespace Common
            //	Immune to Lissome
 
             int buffID = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-            , charID, AttribName.dodge, -6, timeFrame, castTime, true);
+            , charID, AttribName.dodge, -6, timeFrame, castTime, false);
             allBuffIds.Add(buffID);
 
             int immuneBuffID = charController.charStateController
                 .ApplyImmunityBuff(CauseType.CharState, (int)charStateName
                    , charID, CharStateName.Lissome, timeFrame, castTime);
-
             allImmunityBuffs.Add(immuneBuffID);
+
+            charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+             , charID, AttribName.haste, -2, TimeFrame.EndOfCombat, 1, false); // not to be lost on char state END
+                     
             CombatEventService.Instance.OnCharOnTurnSet += MoveUnClickable;
             CombatEventService.Instance.OnCharOnTurnSet += NoMeleeAttackExceptOn1;
         }

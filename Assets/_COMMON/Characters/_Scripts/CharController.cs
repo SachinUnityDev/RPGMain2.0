@@ -10,6 +10,7 @@ using Town;
 using System.Linq;
 using Spine.Unity;
 using TMPro;
+using UnityEngine.UIElements;
 
 
 namespace Common
@@ -68,7 +69,10 @@ namespace Common
         [SerializeField] Shader shaderN;
         [SerializeField] Shader shaderOnHover;
         [SerializeField] bool isCharHovered = false;
-        [SerializeField] float prevTime = 0f; 
+        [SerializeField] float prevTime = 0f;
+
+     
+
         private void OnEnable()
         {
             shaderN = Shader.Find("Spine/Skeleton");
@@ -85,8 +89,8 @@ namespace Common
         }
         private void OnDisable()
         {
-          //  CombatEventService.Instance.OnEOC -= FortitudeReset2FortOrg;
-          //  CombatEventService.Instance.OnSOTactics -= AddControllers_OnCombatStart;
+            CombatEventService.Instance.OnSOC -= FortReset2FortOrg;
+            CombatEventService.Instance.OnEOC -= FortReset2FortOrg;
         }
         public CharModel InitiatizeController(CharacterSO _charSO)
         {
@@ -180,23 +184,26 @@ namespace Common
         {
             SkeletonAnimation skeletonAnim = gameObject.GetComponentInChildren<SkeletonAnimation>();
             if (skeletonAnim == null) return; // can happen during skill use
-            foreach (Material mat in skeletonAnim.gameObject.GetComponent<MeshRenderer>().sharedMaterials)
-            {
-                mat.shader = shaderOnHover;           
-            }
+            skeletonAnim.skeleton.SetColor(new Color(224/255f,232/255f,255/255f,1f)); 
+            //foreach (Material mat in skeletonAnim.gameObject.GetComponent<MeshRenderer>().sharedMaterials)
+            //{
+            //    mat.shader = shaderOnHover;
+            //}
         }
         private void OnMouseExit()
         {
             SkeletonAnimation skeletonAnim = gameObject.GetComponentInChildren<SkeletonAnimation>();
             if (skeletonAnim == null) return; // can happen during skill use
-            foreach (Material mat in skeletonAnim.gameObject.GetComponent<MeshRenderer>().sharedMaterials)
-            {
-                mat.shader = shaderN;
-                //int id = mat.shader.FindPropertyIndex("_Cutoff");
-                //Color color = new Color(0, 0, 0, 1);
-                //mat.SetColor(ShaderUtilities.ID_FaceColor, color); 
-                //Debug.Log("PROPERTY" + mat.shader.GetPropertyDefaultFloatValue(id));
-            }
+            skeletonAnim.skeleton.SetColor(new Color(1, 1, 1f));
+
+            //foreach (Material mat in skeletonAnim.gameObject.GetComponent<MeshRenderer>().sharedMaterials)
+            //{
+            //    mat.shader = shaderN;
+            //    //int id = mat.shader.FindPropertyIndex("_Cutoff");
+            //    //Color color = new Color(0, 0, 0, 1);
+            //    //mat.SetColor(ShaderUtilities.ID_FaceColor, color); 
+            //    //Debug.Log("PROPERTY" + mat.shader.GetPropertyDefaultFloatValue(id));
+            //}
         }
 
 
@@ -330,12 +337,16 @@ namespace Common
                     Debug.Log("ATTEMPTED change in stat" + causeType + "Name" + causeByCharID + "StatName" + statName);
                     return null;
                 }
-                if (GetHealthValBelow0(value) <= 0)
+                if(statName == StatName.health)  
                 {
-                   StatModData statModDataFort =ChangeStat(CauseType.StatMinMaxLimit, 0, charModel.charID
-                                , StatName.fortitude, GetHealthValBelow0(value));
-                    return statModDataFort; 
-                }
+                    float belowZero = GetHealthValBelow0(value);
+                    if (belowZero <= 0)
+                    {
+                        StatModData statModDataFort = ChangeStat(CauseType.StatMinMaxLimit, 0, charModel.charID
+                                     , StatName.fortitude, belowZero);
+                        return statModDataFort;
+                    }
+                }               
                 if(statName == StatName.health  
                             && charStateController.HasCharState(CharStateName.LastDropOfBlood)
                             && causeType == CauseType.CharSkill)
@@ -693,6 +704,7 @@ namespace Common
         {
             transform.GetChild(2).GetComponent<HPBarView>().FillHPBar(this);
         }
-      
+
+    
     }
 }

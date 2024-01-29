@@ -41,7 +41,7 @@ namespace Interactables
 
         public void Init()
         {
-            charSelect = InvService.Instance.charSelect;
+            charSelect = InvService.Instance.charSelectController.charModel.charName;
             Load(); 
         }
 

@@ -73,17 +73,19 @@ namespace Interactables
                 return null;
             }
         }
-        public bool IsArmorSocketable(CharNames charName, GemNames gemName)
+        public bool IsArmorSocketable(CharController charController, GemNames gemName)
         {
-            CharModel charModel = CharService.Instance.GetAllyCharModel(charName);
+            CharModel charModel = charController.charModel; 
+                // CharService.Instance.GetAllyCharModel(charController.charModel.charName);
 
             return false; 
         }
 
         public bool SocketArmor(GemNames gemName)
         {
-            CharNames charName = InvService.Instance.charSelect;
-            if (IsArmorSocketable(charName, gemName))
+            //   CharNames charName = InvService.Instance.charSelect;
+            CharController charController = InvService.Instance.charSelectController; 
+            if (IsArmorSocketable(charController, gemName))
             {
                 // get gembase enchant weapon 
                 // Unlock the weapon skill

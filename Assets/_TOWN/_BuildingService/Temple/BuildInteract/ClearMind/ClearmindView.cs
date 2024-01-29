@@ -90,7 +90,7 @@ namespace Town
              charSelect = CharService.Instance.allCharModels[index].charName;
             BuildingIntService.Instance.selectChar = charSelect;
 
-            CharController charController = CharService.Instance.GetCharCtrlWithName(charSelect);
+            CharController charController = CharService.Instance.GetAbbasController(charSelect);
           
             tempTraitController = charController.GetComponent<TempTraitController>();
          

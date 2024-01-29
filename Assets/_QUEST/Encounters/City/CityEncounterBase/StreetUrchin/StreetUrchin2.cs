@@ -21,7 +21,7 @@ namespace Quest
             // - 2 Luck for 7 days
             //Lose 20 - 30 fame"
             float chance = 50f;
-            CharController charController = CharService.Instance.GetCharCtrlWithName(CharNames.Abbas);
+            CharController charController = CharService.Instance.GetAbbasController(CharNames.Abbas);
             if (chance.GetChance())
             {
                 TempTraitController tempTraitController = charController.tempTraitController;

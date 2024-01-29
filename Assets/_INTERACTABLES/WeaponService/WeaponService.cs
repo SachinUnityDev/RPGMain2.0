@@ -29,9 +29,9 @@ namespace Interactables
                 return null;
             }
         }
-        public bool IsGemEnchantable(CharNames charName, GemNames gemName)
+        public bool IsGemEnchantable(CharController charController, GemNames gemName)
         {
-            CharModel charModel = CharService.Instance.GetAllyCharModel(charName);
+            CharModel charModel = charController.charModel; 
             GemNames charGemName = 
                         charModel.enchantableGem4Weapon;
             if (gemName != charGemName)
@@ -42,8 +42,8 @@ namespace Interactables
         
         public bool EnchantWeapon(GemNames gemName)
         {
-            CharNames charName = InvService.Instance.charSelect;
-            if (IsGemEnchantable(charName, gemName))
+            CharController charSelectCtrl = InvService.Instance.charSelectController;
+            if (IsGemEnchantable(charSelectCtrl, gemName))
             {
                 // get gembase enchant weapon 
                 // Unlock the weapon skill

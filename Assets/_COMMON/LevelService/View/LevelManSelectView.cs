@@ -55,7 +55,7 @@ namespace Common
             // get abbas charModel on inv open
             // make it work only for allies first
             CharModel charModel =
-             CharService.Instance.GetCharCtrlWithName(CharNames.Abbas).charModel;
+             CharService.Instance.GetAbbasController(CharNames.Abbas).charModel;
             FillOptionPendingList(charModel);
         }
         void FillOptionPendingList(CharModel charModel)

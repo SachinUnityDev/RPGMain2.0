@@ -31,7 +31,7 @@ namespace Common
             
             InvService.Instance.OnCharSelectInvPanel += FillLeftSkillPanel;
             // Get ABBAS
-            CharModel charModel = CharService.Instance.GetAllyCharModel(CharNames.Abbas);
+            CharModel charModel = CharService.Instance.GetAbbasController(CharNames.Abbas).charModel;
             FillLeftSkillPanel(charModel);
         }
         private void OnDisable()

@@ -53,7 +53,7 @@ namespace Common
 
                 portraitDragNDrop.parentTransform = transform;
 
-                CharController charController = CharService.Instance.GetCharCtrlWithName(draggedChar);                
+                CharController charController = CharService.Instance.GetAbbasController(draggedChar);                
 
                 CharModel charModel = charController.charModel;
                 charModel.availOfChar = AvailOfChar.Available;

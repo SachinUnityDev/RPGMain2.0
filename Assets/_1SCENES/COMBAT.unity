@@ -4352,6 +4352,7 @@ MonoBehaviour:
     skillDesc: 
     skillSprite: {fileID: 0}
     skillType: 0
+    strikeNos: 0
     skillUnLockStatus: 0
     damageMod: 0
     skillLvl: 0
@@ -6929,6 +6930,7 @@ MonoBehaviour:
     skillDesc: 
     skillSprite: {fileID: 0}
     skillType: 0
+    strikeNos: 0
     skillUnLockStatus: 0
     damageMod: 0
     skillLvl: 0
@@ -15035,6 +15037,7 @@ MonoBehaviour:
     skillDesc: 
     skillSprite: {fileID: 0}
     skillType: 0
+    strikeNos: 0
     skillUnLockStatus: 0
     damageMod: 0
     skillLvl: 0
@@ -19629,6 +19632,7 @@ GameObject:
   - component: {fileID: 1044210477}
   - component: {fileID: 1044210488}
   - component: {fileID: 1044210487}
+  - component: {fileID: 1044210489}
   m_Layer: 0
   m_Name: CombatService
   m_TagString: Untagged
@@ -19842,6 +19846,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43cddf44f27fd7543bfd318aa926f66a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1044210489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044210475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52919509a9d3b9e4e80d1d019a42f518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dmgPrefab: {fileID: 3887115471004653358, guid: 198d429e425dd1c44b81a7b842504b65,
+    type: 3}
+  critPrefab: {fileID: 3599545889587655083, guid: e3c3035b1573abd4bb175a206cb33973,
+    type: 3}
+  feeblePrefab: {fileID: 4266298278704237584, guid: a84f29d7c24549d438c3e711afef6967,
+    type: 3}
+  dodgePrefab: {fileID: 3599545889587655083, guid: e3c3035b1573abd4bb175a206cb33973,
+    type: 3}
+  moraleChkPrefab_Pos: {fileID: 0}
+  moraleChkPrefab_Neg: {fileID: 0}
+  hasteChkPrefab: {fileID: 0}
+  bleedPrefab: {fileID: 0}
+  poisonPrefab: {fileID: 0}
+  burnPrefab: {fileID: 0}
+  healPrefab: {fileID: 0}
+  stmPrefab: {fileID: 0}
+  fortPrefab: {fileID: 0}
 --- !u!1 &1045020018
 GameObject:
   m_ObjectHideFlags: 0
@@ -20319,6 +20352,7 @@ MonoBehaviour:
     skillDesc: 
     skillSprite: {fileID: 0}
     skillType: 0
+    strikeNos: 0
     skillUnLockStatus: 0
     damageMod: 0
     skillLvl: 0
@@ -22346,6 +22380,7 @@ MonoBehaviour:
     skillDesc: 
     skillSprite: {fileID: 0}
     skillType: 0
+    strikeNos: 0
     skillUnLockStatus: 0
     damageMod: 0
     skillLvl: 0
@@ -27272,6 +27307,7 @@ MonoBehaviour:
     skillDesc: 
     skillSprite: {fileID: 0}
     skillType: 0
+    strikeNos: 0
     skillUnLockStatus: 0
     damageMod: 0
     skillLvl: 0
@@ -30664,6 +30700,7 @@ MonoBehaviour:
     skillDesc: 
     skillSprite: {fileID: 0}
     skillType: 0
+    strikeNos: 0
     skillUnLockStatus: 0
     damageMod: 0
     skillLvl: 0
@@ -31906,6 +31943,7 @@ MonoBehaviour:
     skillDesc: 
     skillSprite: {fileID: 0}
     skillType: 0
+    strikeNos: 0
     skillUnLockStatus: 0
     damageMod: 0
     skillLvl: 0

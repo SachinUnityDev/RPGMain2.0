@@ -14,7 +14,7 @@ namespace Quest
         public override void OnChoiceASelect()
         {
             CharModel charModel = 
-                CharService.Instance.GetCharCtrlWithName(CharNames.Abbas).charModel;
+                CharService.Instance.GetAbbasController(CharNames.Abbas).charModel;
 
             if (charModel.skillPts > 1)
                 charModel.skillPts--;

@@ -88,7 +88,7 @@ namespace Common
             GameObject droppedOn = eventData.pointerEnter;
             if (CharService.Instance.isPartyLocked
                 || !FameService.Instance.fameController
-                .IsFameBehaviorMatching(CharService.Instance.GetCharCtrlWithName(charDragged)))
+                .IsFameBehaviorMatching(CharService.Instance.GetAbbasController(charDragged)))
             { 
                 RosterService.Instance.rosterViewController.ReverseBack(this);
                 RosterService.Instance.On_PortraitDragResult(false);

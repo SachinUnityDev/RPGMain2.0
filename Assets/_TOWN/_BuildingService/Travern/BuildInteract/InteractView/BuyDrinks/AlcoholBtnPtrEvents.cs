@@ -109,7 +109,7 @@ namespace Common
            
             if (HasReachedMaxDrinksLimit()) return; 
             CharController abbasCharController 
-                = CharService.Instance.GetCharCtrlWithName(CharNames.Abbas);
+                = CharService.Instance.GetAbbasController(CharNames.Abbas);
 
             AlcoholBase alcoholBase = item as AlcoholBase;
             alcoholBase.charController= abbasCharController;

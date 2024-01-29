@@ -18,7 +18,7 @@ namespace Interactables
         public event Action<bool> OnToggleInvXLView; 
 
 
-        public CharNames charSelect;
+        //public CharNames charSelect;
         public CharController charSelectController;
         [Header("Char SKILLS RELATED")]
 
@@ -67,7 +67,7 @@ namespace Interactables
         {   
             if(invXLGO== null)
                     InitInvXLView();
-            charSelectController = CharService.Instance.GetCharCtrlWithName(CharNames.Abbas);
+            charSelectController = CharService.Instance.GetAbbasController(CharNames.Abbas);
         }
         public void On_DragResult(bool result, ItemsDragDrop itemsDragDrop)
         {
@@ -77,8 +77,8 @@ namespace Interactables
         public void On_CharSelectInv(CharModel charModel)
         {
             if (!isInvPanelOpen) return; 
-            charSelect = charModel.charName;
-            charSelectController = CharService.Instance.GetCharCtrlWithName(charModel.charName);
+          //  charSelect = charModel.charName;
+            charSelectController = CharService.Instance.GetAbbasController(charModel.charName);
             OnCharSelectInvPanel?.Invoke(charModel);
         }
         public void On_ToggleInvXLView(bool isOpen)
@@ -89,7 +89,7 @@ namespace Interactables
             if (isOpen)
             {
                  
-                CharController charController = CharService.Instance.GetCharCtrlWithName(CharNames.Abbas);
+                CharController charController = CharService.Instance.GetAbbasController(CharNames.Abbas);
                 On_CharSelectInv(charController.charModel); // Set Abbas stats as default 
             }
             else

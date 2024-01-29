@@ -111,7 +111,7 @@ namespace Town
         }
         public void On_ExpConvert()
         {
-            CharService.Instance.GetCharCtrlWithName(CharNames.Abbas).charModel.mainExp += (int)currWoodGameData.lastGameExp;
+            CharService.Instance.GetAbbasController(CharNames.Abbas).charModel.mainExp += (int)currWoodGameData.lastGameExp;
             currWoodGameData.lastGameExp = 0;
             rewardsView.FillExpBar(currWoodGameData.netGameExp, 0);
             OnExpConvert?.Invoke();     

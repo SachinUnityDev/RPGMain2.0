@@ -1,4 +1,5 @@
 ﻿using Interactables;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -19,8 +20,12 @@ namespace Common
                  (CharService.Instance.ApplyBuffOnPartyExceptSelf(CauseType.CharState, (int)charStateName
                                 , charID, AttribName.haste, +1, timeFrame, castTime, true, CharMode.Ally));
 
+           int buffId = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+                                        , charID, AttribName.haste, +3, timeFrame, castTime, true); 
+            allBuffIds.Add(buffId);
+
             allBuffIds.Add(charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                  , charID, AttribName.luck, -1, timeFrame, castTime, true));
+                  , charID, AttribName.luck, -1, timeFrame, castTime, false));
 
             int immuneBuff = charController.charStateController.ApplyImmunityBuff(CauseType.CharState, (int)charStateName
                                                                     , charID, CharStateName.Rooted, timeFrame, castTime);

@@ -19,8 +19,11 @@ namespace Common
                          , charID, AttribName.luck, +1, timeFrame, castTime, true, CharMode.Ally));
             int buffId = 
             charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
-                                        , charID, AttribName.haste, -1, timeFrame, castTime, true);
-            allBuffIds.Add(buffId); 
+                                        , charID, AttribName.haste, -1, timeFrame, castTime, false);
+            allBuffIds.Add(buffId);
+            buffId =  charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+                , charID, AttribName.luck, +3, timeFrame, castTime, false); // not to be lost on char state END
+            allBuffIds.Add(buffId);
 
             int immuneBuffID =
             charController.charStateController.ApplyImmunityBuff(CauseType.CharState, (int)charStateName

@@ -21,12 +21,15 @@ namespace Combat
     
         public override void ApplyFX1()
         {
-            charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
+           charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
                 , AttribName.dmgMax,3, skillModel.timeFrame, skillModel.castTime, true);
+            
         }
         public override void ApplyFX2()
         {
-
+            if(50f.GetChance())
+            charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                                                , charController.charModel.charID, CharStateName.Lissome);
         }
 
         public override void ApplyFX3()

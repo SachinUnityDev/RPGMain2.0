@@ -979,7 +979,7 @@ namespace Combat
 
         bool IsNotOnCastPos(SkillModel _skillModel)
         {
-            GameObject charGO = CharService.Instance.GetCharGOWithName(_skillModel.charName, _skillModel.charID);
+            GameObject charGO = CharService.Instance.GetCharCtrlWithCharID(_skillModel.charID).gameObject;
             Debug.Log("charName"+ _skillModel.charName + _skillModel.charID);    
             int pos = GridService.Instance.GetDyna4GO(charGO).currentPos;
             // Debug.Log("Position in" + pos);

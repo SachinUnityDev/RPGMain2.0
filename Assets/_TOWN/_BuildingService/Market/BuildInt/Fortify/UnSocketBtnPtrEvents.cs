@@ -36,7 +36,7 @@ namespace Town
         {
             this.charSelect = charSelect;
             this.armorModel = armorModel;
-            CharController charController = CharService.Instance.GetCharCtrlWithName(charSelect); 
+            CharController charController = CharService.Instance.GetAbbasController(charSelect); 
             ItemController itemController = charController.itemController;
             itemModel = itemController.itemModel;
             this.unSocketView = unSocketView;

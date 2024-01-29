@@ -15,7 +15,7 @@ namespace Common
     {
         public AttribName AttribName;
         public int currValue;
-        public float baseValue;   
+        public int baseValue;   
         public string desc;      
         public float minLimit; 
         public float maxLimit; 
@@ -255,7 +255,7 @@ namespace Common
                 AttribData attribData = new AttribData();
                 attribData.AttribName = _charSO.AttribList[i].AttribName;
                 attribData.currValue = _charSO.AttribList[i].currValue;
-                attribData.baseValue = attribData.currValue;
+                attribData.baseValue = _charSO.AttribList[i].baseValue;
                 attribData.desc = _charSO.AttribList[i].desc;             
 
                 AttribChanceData statChanceData = statsVsChanceSO.allStatChanceData

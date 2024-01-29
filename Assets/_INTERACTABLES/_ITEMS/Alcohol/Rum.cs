@@ -54,7 +54,7 @@ namespace Interactables
         {
             // +1 morale for one day 
             float chance = 60f;
-            charController = CharService.Instance.GetCharCtrlWithName(CharNames.Abbas);
+            charController = CharService.Instance.GetAbbasController(CharNames.Abbas);
             if (chance.GetChance())
                 charController.buffController.ApplyBuff(CauseType.Items, (int)itemName, charController.charModel.charID
                 , AttribName.luck, 1, TimeFrame.EndOfDay, 1, true);

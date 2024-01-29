@@ -23,6 +23,10 @@ namespace Common
 
             allBuffIds.Add( buffId );
 
+            buffId = charController.buffController.ApplyBuff(CauseType.CharState, (int)charStateName
+            , charID, AttribName.focus, +3, timeFrame, castTime, true); // not to be lost on char state END
+            allBuffIds.Add(buffId);
+
             allImmunityBuffs.Add(charController.charStateController.ApplyImmunityBuff(CauseType.CharState, (int)charStateName
                    , charID, CharStateName.Confused,  timeFrame, castTime));
 

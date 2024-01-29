@@ -89,22 +89,19 @@ namespace Combat
         }
         void LuckCheck()
         {
-            float luckVal = charController.GetAttrib(AttribName.luck).currValue;
+            AttribData attribData = striker.GetAttrib(AttribName.luck);
+            float luckVal = attribData.currValue; 
             float luckChance = charController.GetStatChance(AttribName.luck, luckVal);
 
             if (luckVal < 6)
             {
-                if (luckChance.GetChance())
-                {
-                    strikeType = StrikeType.Feeble;
-                }
+                if (luckChance.GetChance())                
+                    strikeType = StrikeType.Feeble;                
             }
             else if (luckVal > 6)
             {
-                if (luckChance.GetChance())
-                {
-                    strikeType = StrikeType.Crit;
-                }
+                if (luckChance.GetChance())                
+                    strikeType = StrikeType.Crit;                
             }
             else
             {
@@ -177,18 +174,18 @@ namespace Combat
             float percentDmg = dmgPercent + damageAlt  + damageAltCharState;
 
             // copy of Dmg value for magical and physical + Dmg modifiers 
-
-            float dmg = (float)(UnityEngine.Random.Range(dmgSDMin.currValue, dmgSDMax.currValue) * (percentDmg / 100f));
+            int dmgFrmRange = UnityEngine.Random.Range(dmgSDMin.currValue, dmgSDMax.currValue); 
+            float dmg = (float)(dmgFrmRange * (percentDmg / 100f));
             int strikerID = striker.charModel.charID;
 
-
+            float dmgVal = 0; float chgValue =0; 
             switch (_dmgType)
             {
                 case DamageType.None:
                     break;
                 case DamageType.Physical:
-                    float dmgVal = CritNFeebleApply(dmg);
-                    float chgValue = dmgVal; 
+                    dmgVal = CritNFeebleApply(dmg);
+                    chgValue = dmgVal; 
                     if (!ignoreArmorNRes)
                     {
                         AttribData armorSDMin = charController.GetAttrib(AttribName.armorMin);
@@ -204,63 +201,63 @@ namespace Combat
                 case DamageType.Air:
                     dmgVal = CritNFeebleApply(dmg);
                     float airRes = charController.GetAttrib(AttribName.waterRes).currValue;
-                    float airDmg = dmgVal; 
+                    chgValue = dmgVal; 
                     if(!ignoreArmorNRes && airRes > 0)
-                            airDmg = dmgVal * (100 - airRes) / 100;
-                     airDmg = airDmg < 0 ? 0 : airDmg;
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -airDmg);
+                        chgValue = dmgVal * (100 - airRes) / 100;
+                    chgValue = chgValue < 0 ? 0 : chgValue;
+                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -chgValue);
                     break;
                 case DamageType.Water:
                     dmgVal = CritNFeebleApply(dmg);
                     float waterRes = charController.GetAttrib(AttribName.waterRes).currValue;
-                    float waterDmg = dmgVal;
+                    chgValue = dmgVal;
                     if (!ignoreArmorNRes && waterRes > 0)
-                         waterDmg = dmgVal * ((100f - waterRes) / 100f);
-                     waterDmg = waterDmg < 0 ? 0 : waterDmg;
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -waterDmg);
+                        chgValue = dmgVal * ((100f - waterRes) / 100f);
+                    chgValue = chgValue < 0 ? 0 : chgValue;
+                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -chgValue);
                     break;
                 case DamageType.Earth:
                     dmgVal = CritNFeebleApply(dmg);
                     float earthRes = charController.GetAttrib(AttribName.earthRes).currValue;
-                    float earthDmg = dmgVal;
+                    chgValue = dmgVal;
                     if (!ignoreArmorNRes && earthRes > 0)
-                        earthDmg = dmgVal * ((100f - earthRes) / 100f);
-                    
-                      earthDmg = earthDmg < 0 ? 0 : earthDmg;
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -earthDmg);
+                        chgValue = dmgVal * ((100f - earthRes) / 100f);
+                    chgValue = chgValue < 0 ? 0 : chgValue;
+                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -chgValue);
                     break;
                 case DamageType.Fire:
                     dmgVal = CritNFeebleApply(dmg);
                     float fireRes = charController.GetAttrib(AttribName.fireRes).currValue;
-                    float fireDmg = dmgVal;
+                    chgValue = dmgVal;
                     if (!ignoreArmorNRes && fireRes > 0)
-                        fireDmg = dmgVal * (100 - fireRes) / 100;
+                        chgValue = dmgVal * (100 - fireRes) / 100;
 
-                     fireDmg = fireDmg < 0 ? 0 : fireDmg;
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -fireDmg);
+                    chgValue = chgValue < 0 ? 0 : chgValue;
+                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -chgValue);
                     break;
                 case DamageType.Light:
                     dmgVal = CritNFeebleApply(dmg);
                     float lightRes = charController.GetAttrib(AttribName.lightRes).currValue;
-                    float lightDmg = dmgVal;
+                    chgValue = dmgVal;
                     if (!ignoreArmorNRes && lightRes > 0)
-                        lightDmg = dmgVal * ((100f - lightRes) / 100f);
-                    
-                       lightDmg = lightDmg < 0 ? 0 : lightDmg;
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -lightDmg);
+                        chgValue = dmgVal * ((100f - lightRes) / 100f);
+
+                    chgValue = chgValue < 0 ? 0 : chgValue;
+                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -chgValue);
                     break;
                 case DamageType.Dark:
                     dmgVal = CritNFeebleApply(dmg);
                     float darkRes = charController.GetAttrib(AttribName.darkRes).currValue;
-                    float darkDmg = dmgVal;
+                    chgValue = dmgVal;
                     if (!ignoreArmorNRes && darkRes > 0)
-                        darkDmg = dmgVal * ((100f - darkRes) / 100f);
-                    
-                       darkDmg = darkDmg < 0 ? 0 : darkDmg;
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -darkDmg);
+                        chgValue = dmgVal * ((100f - darkRes) / 100f);
+
+                    chgValue = chgValue < 0 ? 0 : chgValue;
+                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -chgValue);
                     break;
                 case DamageType.Pure:
-                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -dmgPercent);
+                    chgValue = dmgPercent; 
+                    charController.ChangeStat(CauseType.CharSkill, (int)causeName, strikerID, StatName.health, -chgValue);
                     break;                                 
               
                 default:
@@ -269,7 +266,7 @@ namespace Combat
 
 
             DmgAppliedData dmgAppliedData = new DmgAppliedData(striker, causeType, causeName
-                                            , _dmgType, dmgPercent, strikeType, charController, attackType, isMisFire);
+                                            , _dmgType, chgValue, strikeType, charController, attackType, isMisFire);
             if (isMisFire)
             {
                 CombatEventService.Instance.On_Misfire(dmgAppliedData);

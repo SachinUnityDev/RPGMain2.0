@@ -414,11 +414,14 @@ namespace Combat
             {
                 if (perk.skillName != skillName) continue;
                
-                for(int i = 1; i <= 2; i++)
-                {
-                    SkillLvl nextlvl = clickedPerkData.perkLvl + i;
+           
+                    SkillLvl nextlvl = clickedPerkData.perkLvl + 1;
                     if ((int)nextlvl > 3) continue;
                     //NEXT LVL
+                    if(clickedPerkData.perkName == PerkNames.HuntingSeason)
+                    {
+                        Debug.Log("XX"); 
+                    }
                     if (perk.perkLvl == nextlvl)
                     {
                         if (perk.perkType == PerkType.A2 || perk.perkType == PerkType.B2)
@@ -582,8 +585,7 @@ namespace Combat
                                         break;
                                 }
                             }
-                        }
-                    }
+                        }                
                 }
            
             }

@@ -130,7 +130,7 @@ namespace Common
             prevRightClick = Time.time;
         }
 
-        void FillSkillScroll(SkillModel skillModel)
+        public void FillSkillScroll(SkillModel skillModel)
         {
             if(skillModel != null)
             {
@@ -155,7 +155,7 @@ namespace Common
                 PerkType perkType = perkData.perkType;
                 i = (int)perkType - 1;
                 perkBtnContainer.GetChild(i).gameObject.SetActive(true);    
-                perkBtnContainer.GetChild(i).GetComponent<PerkBtnPtrEvents>().Init(perkData, skillViewMain);               
+                perkBtnContainer.GetChild(i).GetComponent<PerkBtnPtrEvents>().Init(perkData, skillViewMain, skillModel);               
             }
             if(allPerkData.Count <= 2)
             {

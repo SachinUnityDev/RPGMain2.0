@@ -25,8 +25,9 @@ namespace Combat
         [SerializeField] Color colorUnClickable;
 
         [Header("Perk Info Panel")]
-        [SerializeField] Transform perkHoveredTrans; 
+        [SerializeField] Transform perkHoveredTrans;
 
+        SkillModel skillModel; 
     
         private void Start()
         {
@@ -49,10 +50,11 @@ namespace Combat
             }
         }
         #region INIT
-        public void Init(PerkData _perkData, InvSkillViewMain _skillViewMain)
+        public void Init(PerkData _perkData, InvSkillViewMain _skillViewMain, SkillModel skillModel)
         {
             perkData = _perkData;
             skillViewMain = _skillViewMain;
+            this.skillModel = skillModel; 
             skillViewSO = skillViewMain.skillViewSO;
             // fill in name and btn image
             transform.GetComponentInChildren<TextMeshProUGUI>().text
@@ -179,7 +181,8 @@ namespace Combat
             {
                 if(perkData.state== PerkSelectState.Clickable)
                 {
-                    skillController.OnPerkClicked(perkData);
+                    skillController.OnPerkClicked(perkData);                   
+                    skillViewMain.rightSkillView.FillSkillScroll(skillModel);
                 }
             }
         }

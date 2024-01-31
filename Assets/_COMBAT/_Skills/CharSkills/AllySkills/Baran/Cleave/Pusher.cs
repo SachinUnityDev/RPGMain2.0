@@ -81,17 +81,7 @@ namespace Combat
             str1 = $"-2 Haste";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
-        //public override void DisplayFX1()
-        //{
-        //    str0 = $"<style=Move>Push,</style> 1 row";
-        //    SkillService.Instance.skillModelHovered.AddDescLines(str0);    
-        //}
 
-        //public override void DisplayFX2()
-        //{
-        //    str1 = $"-2 <style=Attributes>Haste</style>, {skillModel.castTime} rd ";
-        //    SkillService.Instance.skillModelHovered.AddDescLines(str1);
-        //}
 
         public override void DisplayFX3()
         {

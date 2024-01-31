@@ -400,7 +400,21 @@ namespace Combat
 
 
    
-
+        public bool IsPerkClickable(SkillNames skillName, PerkNames perkName)
+        {
+            int lvl = 0; 
+            foreach (PerkData pData in allSkillPerkData)
+            {
+                if(pData.state == PerkSelectState.Clicked && pData.skillName == skillName)
+                {
+                    if (lvl <= (int)pData.perkLvl)
+                        lvl = (int)pData.perkLvl; 
+                }
+            }
+            PerkData perkData = GetPerkData(perkName);
+            if ((int)perkData.perkLvl == (lvl + 1)) return true; 
+            return false; 
+        }
 
         public void OnPerkHovered(PerkNames perkName)
         {

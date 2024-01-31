@@ -20,7 +20,7 @@ namespace Combat
         protected DynamicPosData currDyna;
 
         protected SkillData skillData;
-        protected string str0, str1, str2, str3;
+        protected string str0="", str1="", str2 = "", str3 = "";
         protected string perkDesc = ""; 
         public abstract PerkNames perkName { get; }
         public abstract PerkType perkType { get; }

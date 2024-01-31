@@ -65,8 +65,8 @@ namespace Combat
         }
         public override void DisplayFX1()
         {
-            str1 = $"{chance}% <style=Bleed>High Bleed</style>";
-            SkillService.Instance.skillModelHovered.AddDescLines(str1);
+            str0 = $"{chance}% <style=Bleed>High Bleed</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str0);
          
 
         }

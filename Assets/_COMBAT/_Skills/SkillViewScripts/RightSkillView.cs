@@ -56,18 +56,18 @@ namespace Common
 
             leftBtn.onClick.AddListener(OnLeftBtnPressed);
             rightBtn.onClick.AddListener(OnRightBtnPressed);
-
+            PopulateRightSkillPanel(); 
             SkillService.Instance.OnSkillSelectInInv -= FillSkillScroll;
-            InvService.Instance.OnCharSelectInvPanel -= PopulateRightSkillPanel;
+            InvService.Instance.OnCharSelectInvPanel -= (CharModel c) => PopulateRightSkillPanel();            ;
             SkillService.Instance.OnSkillSelectInInv += FillSkillScroll;
-            InvService.Instance.OnCharSelectInvPanel += PopulateRightSkillPanel;
+            InvService.Instance.OnCharSelectInvPanel += (CharModel c) => PopulateRightSkillPanel();
         }
         private void OnDisable()
         {
             SkillService.Instance.OnSkillSelectInInv -= FillSkillScroll;
-            InvService.Instance.OnCharSelectInvPanel -= PopulateRightSkillPanel;
+            InvService.Instance.OnCharSelectInvPanel -= (CharModel c) =>PopulateRightSkillPanel();
         }
-        void PopulateRightSkillPanel(CharModel charModel)
+        void PopulateRightSkillPanel()
         {
             charController = InvService.Instance.charSelectController;
             selectSkillController = charController.skillController;

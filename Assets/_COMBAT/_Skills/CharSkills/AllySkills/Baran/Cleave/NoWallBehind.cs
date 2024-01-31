@@ -92,7 +92,7 @@ namespace Combat
         }
         public override void DisplayFX2()
         {
-            str1 = "Gain 3 <style=Fortitude>Fortitude</style> per pushed enemy";
+            str1 = "Gain 3 <style=Fortitude>Fort</style> per pushed enemy";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
    

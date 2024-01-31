@@ -28,18 +28,17 @@ namespace Combat
         [SerializeField] Transform perkHoveredTrans;
 
         SkillModel skillModel; 
+        
     
         private void Start()
         {
-            InvService.Instance.OnCharSelectInvPanel += OnCharSelect;
+            InvService.Instance.OnCharSelectInvPanel += (CharModel c)=>OnCharSelect();
             SkillService.Instance.OnPerkStateChg += OnPerkStateChg;
-
         }
         private void OnDisable()
         {
-            InvService.Instance.OnCharSelectInvPanel -= OnCharSelect;
+            InvService.Instance.OnCharSelectInvPanel -= (CharModel c) => OnCharSelect();
             SkillService.Instance.OnPerkStateChg -= OnPerkStateChg;
-
         }
         void OnPerkStateChg(PerkData _perkData)
         {
@@ -56,6 +55,8 @@ namespace Combat
             skillViewMain = _skillViewMain;
             this.skillModel = skillModel; 
             skillViewSO = skillViewMain.skillViewSO;
+            OnCharSelect();
+
             // fill in name and btn image
             transform.GetComponentInChildren<TextMeshProUGUI>().text
                                                      = perkData.perkName.ToString().CreateSpace();
@@ -64,7 +65,7 @@ namespace Combat
             BGPipe2 = skillViewMain.rightSkillView.BGPipe2;
         }
 
-        void OnCharSelect(CharModel charModel)
+        void OnCharSelect()
         {
             this.charController = InvService.Instance.charSelectController;
             skillController = charController.skillController;
@@ -177,19 +178,32 @@ namespace Combat
         #endregion
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (skillViewMain.isPerkClickAvail)
+            if (skillViewMain.isPerkClickAvail)// chks whether the skill pts + btn is pressed 
             {
-                if(perkData.state== PerkSelectState.Clickable)
-                {
-                    skillController.OnPerkClicked(perkData);                   
-                    skillViewMain.rightSkillView.FillSkillScroll(skillModel);
-                }
+                if(skillController.IsPerkClickable(skillModel.skillName, perkData.perkName))
+                    if(perkData.state== PerkSelectState.Clickable)
+                    {
+                        skillController.OnPerkClicked(perkData);                   
+                        skillViewMain.rightSkillView.FillSkillScroll(skillModel);
+                    }
             }
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
             this.charController = InvService.Instance.charSelectController;
             skillController = charController.skillController;
+            
+
+            if (skillModel != null)
+            {
+                SkillService.Instance.On_SkillHovered(skillModel.charName, skillModel.skillName);
+            }
+            else
+            {
+                Debug.LogError("Skill Model is null " + skillController); return;
+            }
+            skillModel = SkillService.Instance.skillModelHovered;
+
             ShowPipeRelations();
             ShowPerkHoveredPanel();
         }

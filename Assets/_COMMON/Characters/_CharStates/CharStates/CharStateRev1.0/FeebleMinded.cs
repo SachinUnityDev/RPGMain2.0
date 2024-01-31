@@ -71,6 +71,8 @@ namespace Common
             allStateFxStrs.Add(str1);
             str2 = "Immune to<style=States> Lucky Duck</style>";
             allStateFxStrs.Add(str2);
+            str3 = "-2 Luck until eoc";
+            allStateFxStrs.Add(str3);
         }
     }
 }

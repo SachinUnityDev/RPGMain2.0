@@ -343,23 +343,27 @@ namespace Common
 
         #region TOGGLE COLLIDERS 
 
-        public void ToggleCharColliders(GameObject targetGO)
+        public void ToggleCharColliders(GameObject targetGO, bool turnON)
         {
 
             CharController targetController = targetGO.GetComponent<CharController>();
 
-            foreach (CharController charController in charsInPlayControllers)
+            foreach (CharController charController in allCharInCombat)
             {
                 if(targetController != charController)
                 {
+                    //Collider collider = charController.GetComponent<Collider>();
+                    //collider.enabled = turnON;
                     Collider[] allColliders = charController.gameObject.GetComponentsInChildren<Collider>();
                     for (int i = 0; i < allColliders.Length; i++)
                     {
-                        allColliders[i].enabled = false;
+                        allColliders[i].enabled = turnON;
                     }
                 }else
                 {
-                    Collider[] allColliders = charController.gameObject.GetComponentsInChildren<Collider>();
+                    //Collider collider = charController.GetComponent<Collider>();
+                    //collider.enabled = true;
+                    BoxCollider2D[] allColliders = charController.gameObject.GetComponentsInChildren<BoxCollider2D>();
                     for (int i = 0; i < allColliders.Length; i++)
                     {
                         allColliders[i].enabled = true;

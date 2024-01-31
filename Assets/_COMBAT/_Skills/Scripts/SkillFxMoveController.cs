@@ -98,19 +98,19 @@ namespace Combat
             singleSeq
                 .PrependCallback(() => ToggleSprite(strikerTransform, true))
                 .AppendCallback(()=> ApplyFXOnSelf())
-                .AppendCallback(() => CharService.Instance.ToggleCharColliders(targetTransform.gameObject))
+                .AppendCallback(() => CharService.Instance.ToggleCharColliders(targetTransform.gameObject, false))
                 .AppendCallback(()=> ApplyGabMainFXOnTarget())   
                 .AppendCallback(()=> ApplyFXOnCollatralTargets())
                 .AppendCallback(()=> ApplyImpactFXTarget())
                 ;
             singleRev
                 .AppendInterval(0.90f)
-                .AppendCallback(() => ToggleSprite(strikerTransform, false))
-                .AppendCallback(() => CharService.Instance.TurnOnAllCharColliders())
+                .AppendCallback(() => ToggleSprite(strikerTransform, false))                
                 ;
 
             singleSeq.Play()
                 .OnComplete(() => singleRev.Play())
+                .OnComplete(() => CharService.Instance.TurnOnAllCharColliders())
                 //.OnComplete(() => singleSeq = null); 
                 ;
 
@@ -150,8 +150,8 @@ namespace Combat
                                     , strikerTransform.position.z);
             Debug.Log("END " + END + " START POS " + startPos);
             meleeSeq
-                .AppendCallback(() => CharService.Instance.ToggleCharColliders(targetTransform.gameObject))
-                .AppendCallback(() => CharService.Instance.ToggleCharColliders(strikerTransform.gameObject))
+                .AppendCallback(() => CharService.Instance.ToggleCharColliders(targetTransform.gameObject, false))
+                //.AppendCallback(() => CharService.Instance.ToggleCharColliders(strikerTransform.gameObject, false))
                 .AppendCallback(() => ToggleSprite(strikerTransform, true))
                 .Append(strikerTransform.DOMove(END, 0.16f * SkillService.Instance.combatSpeed))
                 .AppendCallback(()=>ApplyDefensePose(true))
@@ -161,15 +161,15 @@ namespace Combat
             meleeRev
                 .AppendInterval(0.5f)
                 .AppendCallback(() => ApplyDefensePose(false))
-                .AppendCallback(() => ToggleSprite(strikerTransform, false))
-                .AppendCallback(() => CharService.Instance.TurnOnAllCharColliders())
-                .Append(strikerTransform.DOMove(START, 0.16f * SkillService.Instance.combatSpeed))
+                .AppendCallback(() => ToggleSprite(strikerTransform, false))                
+                .Append(strikerTransform.DOMove(START, 0.16f * SkillService.Instance.combatSpeed))                
                 ;
 
             meleeSeq.Play().OnComplete(() => meleeRev.Play()
                        .OnComplete(() => Destroy(ImpactFX))
                        .OnComplete(() => meleeRev = null)
                        .OnComplete(() => meleeSeq = null)
+                       .OnComplete(() => CharService.Instance.TurnOnAllCharColliders())
                        );
 
         }

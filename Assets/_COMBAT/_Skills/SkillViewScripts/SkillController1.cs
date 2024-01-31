@@ -20,6 +20,7 @@ namespace Combat
 
         [Header("Skill Perk Data")]
         public List<PerkData> allSkillPerkData = new List<PerkData>();
+ 
 
         [Header("All Skill and UnLocked Skill list")]
         public List<SkillNames> unLockedSkills = new List<SkillNames>();
@@ -168,10 +169,11 @@ namespace Combat
                     }
                 }
             }
+           
             perkBaseCount = allPerkBases.Count;
-
         }
 
+  
         #region On_Hover, On_SkillSelect and Check coolDown
 
         public void SkillHovered(SkillNames _skillName)
@@ -306,7 +308,7 @@ namespace Combat
                     if(perk.perkLvl == perkData.perkLvl)
                     {
                         UpdateDataPerkState(perk.perkName, PerkSelectState.UnClickable);
-                       // UpdatePerkRel(perk);
+                        //UpdatePerkRel(perk);
                     }
                 }
             }
@@ -324,8 +326,6 @@ namespace Combat
                 if (perk.skillName != skillName) continue; 
                 SkillLvl nextlvl = clickedPerkData.perkLvl + 1;
                 if ((int)nextlvl > 3) continue;
-
-
                 if (perk.perkLvl == nextlvl)
                 {
                     foreach (PerkNames perkName in perk.preReqList)
@@ -334,7 +334,6 @@ namespace Combat
                             || GetPerkData(perkName).state == PerkSelectState.Clicked)
                         {
                             UpdateDataPerkState(perk.perkName, PerkSelectState.Clickable);//update
-                                                                                          //
                         }
                         else 
                         {
@@ -397,47 +396,17 @@ namespace Combat
 
         #endregion 
 
-        public void UpdatePipeRel()
-        {
-            // go reverse // sort each perk using linq into separate lvl 
-            // mark status as 1,2,3 ... handle display in  perk btn ptr events 
 
-            List<PerkData> allHachet = allSkillPerkData.Where(t => t.skillName == SkillNames.HatchetSwing).ToList();
-            foreach (PerkData perk1 in allHachet)
-            {               
-                if (perk1.perkLvl == SkillLvl.Level3) continue; 
-                foreach (PerkData perk2 in allHachet)
-                {
-                   // if(perk2.perkLvl == perk1.perkLvl) continue;
-                    if(perk2.perkLvl == perk1.perkLvl + 1)
-                    {
-                        switch (perk2.state)
-                        {
-                            case PerkSelectState.Clickable:
-                                if (perk2.perkType == PerkType.A2)
-                                    perk1.pipeRel[0] = 1;
-                                if (perk2.perkType == PerkType.B2)
-                                    perk1.pipeRel[1] = 1;
-                                break;
-                            case PerkSelectState.Clicked:
-                                if (perk2.perkType == PerkType.A2)
-                                    perk1.pipeRel[0] = 2;
-                                if (perk2.perkType == PerkType.B2)
-                                    perk1.pipeRel[1] = 2;
-                                break;
-                            case PerkSelectState.UnClickable:
-                                if (perk2.perkType == PerkType.A2)
-                                    perk1.pipeRel[0] = 3;
-                                if (perk2.perkType == PerkType.B2)
-                                    perk1.pipeRel[1] = 3;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }
-            }
+
+
+   
+
+
+        public void OnPerkHovered(PerkNames perkName)
+        {
+
         }
+   
         public void UpdatePerkRel(PerkData clickedPerkData)
         {
             SkillNames skillName = clickedPerkData.skillName;
@@ -797,6 +766,7 @@ namespace Combat
         }
 
         #endregion
+
         #region Passive Skill Controllers
         // init on Combat
         public void InitPassiveSkillController()
@@ -1016,7 +986,6 @@ namespace Combat
 
         #endregion
 
-
         #region EOC RESET
 
         void OnEOCReset()
@@ -1027,7 +996,6 @@ namespace Combat
             }
         }
         #endregion
-
 
     }
 

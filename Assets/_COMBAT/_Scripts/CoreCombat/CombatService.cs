@@ -113,8 +113,10 @@ namespace Combat
         {
             foreach (CharController charCtrl in CharService.Instance.allCharInCombat)
             {
-                if(currCharOnTurn.charModel.charID != charCtrl.charModel.charID && !turnOn)
-                     charCtrl.GetComponent<BoxCollider2D>().enabled = turnOn;
+                if (currCharOnTurn.charModel.charID != charCtrl.charModel.charID && !turnOn)
+                {
+                    charCtrl.GetComponentInChildren<Collider>().enabled = turnOn;
+                }   
             }
         }
         public void AddCombatControllers()

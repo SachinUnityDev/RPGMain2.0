@@ -81,6 +81,9 @@ namespace Common
 
             str3 = "Immune to<style=States> Inspired </style>";
             allStateFxStrs.Add(str3);
+
+            str4 = "-2 Haste until eoc";
+            allStateFxStrs.Add(str4);
         }
     }
 }

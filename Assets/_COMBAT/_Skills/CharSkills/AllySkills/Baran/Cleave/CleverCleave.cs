@@ -34,13 +34,13 @@ namespace Combat
         bool isPusherSelect = false; 
         public override void SkillHovered()
         {
-            foreach (PerkData skillModelData in skillController.allSkillPerkData)
+            foreach (PerkData perkData in skillController.allSkillPerkData)
             {
-                if (skillModelData.state == PerkSelectState.Clicked && skillModelData.perkName == PerkNames.EdgyAxe)
+                if (perkData.state == PerkSelectState.Clicked && perkData.perkName == PerkNames.EdgyAxe)
                 {
                     isEdgyAxeSelect = true;
                 }
-                if (skillModelData.state == PerkSelectState.Clicked && skillModelData.perkName == PerkNames.Pusher)
+                if (perkData.state == PerkSelectState.Clicked && perkData.perkName == PerkNames.Pusher)
                 {
                     isPusherSelect = true;
                 }

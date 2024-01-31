@@ -10,13 +10,13 @@ namespace Common
     [System.Serializable]
     public class PerkData 
     {
-        
         public SkillNames skillName;
         public PerkNames perkName;
         public PerkSelectState state;
         public PerkType perkType;
         public SkillLvl perkLvl;
-        public List<PerkNames> preReqList = new List<PerkNames>();
+        public List<PerkNames> preReqList = new List<PerkNames>(); 
+
         public int[] pipeRel = new int[2];
         public PerkData(SkillNames skillName, PerkNames perkName, PerkSelectState state
             , PerkType perkType, SkillLvl perkLvl, List<PerkNames> preReqList)
@@ -34,5 +34,6 @@ namespace Common
         {
 
         }
+    
     }
 }

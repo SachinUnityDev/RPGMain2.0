@@ -42,11 +42,10 @@ namespace Common
         }
 
         public override void StateDisplay()
-        {     
-
+        {   
             str0 = "+1 Morale on allies";
             allStateFxStrs.Add(str0);
-            str1 = "-1 Focus on self";
+            str1 = "+3 Morale and -1 Focus on self";
             allStateFxStrs.Add(str1);
             str2 = "Immune to <style=States> Despaired </style>";
             allStateFxStrs.Add(str2);            

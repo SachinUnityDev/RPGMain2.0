@@ -55,7 +55,7 @@ namespace Common
             //+1 Focus on allies .... - 1 Morale on self   Immune to Confused
             str0 = "+1 Focus on allies";
             allStateFxStrs.Add(str0);
-            str1 = "-1 Morale on self";
+            str1 = "+3 Focus and -1 Morale on self";
             allStateFxStrs.Add(str1);
             str2 = "Immune to<style=States> Confused </style>";
             allStateFxStrs.Add(str2);

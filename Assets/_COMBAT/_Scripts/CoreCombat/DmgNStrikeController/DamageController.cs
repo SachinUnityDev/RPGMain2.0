@@ -107,7 +107,6 @@ namespace Combat
             {
                 strikeType = StrikeType.Normal;
             }
-
         }
         float CritNFeebleApply(float dmg)
         {

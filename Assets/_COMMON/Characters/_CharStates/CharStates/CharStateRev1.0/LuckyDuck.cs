@@ -42,10 +42,11 @@ namespace Common
         {           
             str0 = "+1 Luck for allies";
             allStateFxStrs.Add(str0);
-            str1 = "-1 Haste for self";
+            str1 = "+3 Luck and -1 Haste for self";
             allStateFxStrs.Add(str1);
             str2 = "Immune to<style=States> Feebleminded </style>";
             allStateFxStrs.Add(str2);  
+
         }
 
         void Tick2(AttribModData charModData)  //  change Stat subscribe 

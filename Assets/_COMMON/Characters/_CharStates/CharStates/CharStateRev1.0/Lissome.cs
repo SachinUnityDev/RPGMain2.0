@@ -44,7 +44,7 @@ namespace Common
             str0 = "+1 Haste on allies";
             allStateFxStrs.Add(str0);
 
-            str1 = "-1 Luck on self";
+            str1 = "+3 Haste and -1 Luck on self";
             allStateFxStrs.Add(str1);
 
             str2 = "Immune to<style=States> Rooted </style>";

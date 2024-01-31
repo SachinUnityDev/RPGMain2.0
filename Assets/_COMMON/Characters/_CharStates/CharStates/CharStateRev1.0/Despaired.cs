@@ -33,6 +33,7 @@ namespace Common
         void ApplyRoundFX()
         {
             if (CombatService.Instance.currCharOnTurn.charModel.charID != charID) return;
+            if (CombatService.Instance.currCharOnTurn.charModel.orgCharMode == CharMode.Ally)
             charController.ChangeStat(CauseType.CharState, (int)charStateName, charID
                                                                , StatName.fortitude, -5);
 
@@ -72,6 +73,8 @@ namespace Common
 
             str3 = "Immune to<style=States> Inspired </style>";
             allStateFxStrs.Add(str3);
+            str4 = "-2 Morale until eoc";
+            allStateFxStrs.Add(str4);
         }
 
     }

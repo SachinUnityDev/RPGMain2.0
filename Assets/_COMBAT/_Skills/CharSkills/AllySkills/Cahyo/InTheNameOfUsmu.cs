@@ -34,10 +34,13 @@ namespace Combat
         }
         public override void ApplyFX1()
         {
-            int stmRegen = UnityEngine.Random.Range(3, 6);
-            if(targetController != null)
+            int stmRegen = UnityEngine.Random.Range(3, 5);
+            if (targetController == null) return; 
                     targetController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                    , AttribName.staminaRegen, stmRegen, skillModel.timeFrame, skillModel.castTime, true); 
+                    , AttribName.staminaRegen, stmRegen, skillModel.timeFrame, skillModel.castTime, true);
+
+            charController.charStateController.RemoveCharState(CharStateName.Despaired);
+            charController.charStateController.RemoveCharState(CharStateName.Feebleminded);
         }
         void KrisLungeRegainAP(SkillEventData skilleventData)
         {
@@ -69,17 +72,17 @@ namespace Combat
         }
         public override void DisplayFX1()
         {
-            str1 = "On use Kris Lunge this turn:";
+            str1 = "On use Kris Lunge this turn: %80 Regain AP";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
         public override void DisplayFX2()
         {
-            str2 = "%80 Regain AP";
+            str2 = "Clear <style=States>Despaired</style> and <style=States>Feebleminded</style> ";
             SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
         public override void DisplayFX3()
         {
-            str3 = "+3-5 Stm Regen";
+            str3 = "+3-4 Stm Regen";
             SkillService.Instance.skillModelHovered.AddDescLines(str3);
         }
 

@@ -74,7 +74,6 @@ MonoBehaviour:
         type: 3}
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 0}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
     - charMode: 2
       perkType: 0
@@ -83,7 +82,6 @@ MonoBehaviour:
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 1860375860738744, guid: bc1b8ccd6e5f1694fb5d4b16abccbb15,
         type: 3}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
     allLines: []
   - skillName: 15
@@ -133,14 +131,12 @@ MonoBehaviour:
         type: 3}
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 0}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
     - charMode: 2
       perkType: 6
       impactFX: {fileID: 0}
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 0}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 2645804192403734551, guid: c2baa198c0415df4185775cad934013e,
         type: 3}
     - charMode: 1
@@ -149,7 +145,6 @@ MonoBehaviour:
         type: 3}
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 0}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
     - charMode: 1
       perkType: 5
@@ -157,7 +152,6 @@ MonoBehaviour:
         type: 3}
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 0}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
     allLines: []
   - skillName: 16
@@ -209,7 +203,6 @@ MonoBehaviour:
         type: 3}
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 0}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
     allLines: []
   - skillName: 17
@@ -251,14 +244,12 @@ MonoBehaviour:
         type: 3}
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 0}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
     - charMode: 1
       perkType: 0
       impactFX: {fileID: 0}
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 0}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 5558889293018098868, guid: 5b774a4eb621acc4bbe648740deaba54,
         type: 3}
     allLines: []
@@ -296,8 +287,7 @@ MonoBehaviour:
       impactFX: {fileID: 0}
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 0}
-      colMainFX: {fileID: 0}
-      selfFX: {fileID: 229825020943521155, guid: 8a86e869f4374a043abf301812ef7e09,
+      selfFX: {fileID: 8827035634478733333, guid: dc9a0e75ce7b4c509d0b572b8054997c,
         type: 3}
     allLines: []
   - skillName: 2
@@ -334,7 +324,6 @@ MonoBehaviour:
       impactFX: {fileID: 0}
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 0}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
     allLines: []
   - skillName: 18
@@ -371,7 +360,6 @@ MonoBehaviour:
       impactFX: {fileID: 0}
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 0}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
     allLines: []
   - skillName: 58
@@ -409,6 +397,5 @@ MonoBehaviour:
         type: 3}
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 0}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
     allLines: []

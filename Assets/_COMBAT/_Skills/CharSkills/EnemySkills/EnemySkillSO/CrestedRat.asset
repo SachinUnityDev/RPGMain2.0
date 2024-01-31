@@ -64,7 +64,6 @@ MonoBehaviour:
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 1367524025346344, guid: 4032ef862efbcd14482eccf65bd9cb64,
         type: 3}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
     allLines: []
   - skillName: 23
@@ -89,7 +88,7 @@ MonoBehaviour:
     castTime: 2
     timeFrame: 1
     maxUsagePerCombat: 0
-    skillIncli: 1
+    skillIncli: 4
     baseWeight: 2000
     isActive: 0
     allPerkHexes:
@@ -102,7 +101,6 @@ MonoBehaviour:
         type: 3}
       colImpactFX: {fileID: 0}
       mainSkillFX: {fileID: 0}
-      colMainFX: {fileID: 0}
       selfFX: {fileID: 0}
     allLines: []
   - skillName: 24

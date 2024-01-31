@@ -28,21 +28,6 @@ namespace Combat
 
         public override void AddTargetPos()
         {
-            //if (skillModel != null)
-            //{
-            //    skillModel.targetPos.Clear();
-            //    CombatService.Instance.mainTargetDynas.Clear();
-            //    for (int i = 1; i < 8; i++)
-            //    {
-            //        CellPosData cellPosData = new CellPosData(CharMode.Enemy, i);
-            //        DynamicPosData dyna = GridService.Instance.gridView.GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
-            //        if (dyna != null)
-            //        {
-            //            CombatService.Instance.mainTargetDynas.Add(dyna);
-            //            skillModel.targetPos.Add(cellPosData);
-            //        }
-            //    }
-            //}
             TargetAnyEnemy();
         }
         public override void SkillHovered()
@@ -65,7 +50,6 @@ namespace Combat
         {
             
         }
-
         public override void ApplyMoveFX()
         {
            
@@ -109,4 +93,20 @@ namespace Combat
 
 
 }
+
+//if (skillModel != null)
+//{
+//    skillModel.targetPos.Clear();
+//    CombatService.Instance.mainTargetDynas.Clear();
+//    for (int i = 1; i < 8; i++)
+//    {
+//        CellPosData cellPosData = new CellPosData(CharMode.Enemy, i);
+//        DynamicPosData dyna = GridService.Instance.gridView.GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
+//        if (dyna != null)
+//        {
+//            CombatService.Instance.mainTargetDynas.Add(dyna);
+//            skillModel.targetPos.Add(cellPosData);
+//        }
+//    }
+//}
 

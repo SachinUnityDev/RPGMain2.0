@@ -40,6 +40,8 @@ namespace Combat
         {
             str1 = "+3 Max Dmg";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
+            str2 = "Apply 50% <style=States>Lissome</style>";
+            SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
         public override void DisplayFX2()
         {
@@ -64,6 +66,9 @@ namespace Combat
         public override void InvPerkDesc()
         {
             perkDesc = "+3 Max Dmg";
+            SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
+
+            perkDesc = "Apply 50% <style=States>Lissome</style>";
             SkillService.Instance.skillModelHovered.AddPerkDescLines(perkDesc);
         }
     }

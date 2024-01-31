@@ -40,23 +40,20 @@ namespace Combat
 
         public override void ApplyFX2()
         {
-            //  +% 60 Armor, 
-            if (targetController == null) return;
-            float statDataMin = charController.GetAttrib(AttribName.armorMin).currValue;
-            float statDataMax = charController.GetAttrib(AttribName.armorMax).currValue;
-         
-            charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                , AttribName.armorMin, statDataMin * 0.6f, skillModel.timeFrame, skillModel.castTime, true);
+            //  set max armor 
+            if (targetController == null) return;            
+                charController.buffController.SetDmgORArmor2Max(CauseType.CharSkill, (int)skillName
+                        ,charID, AttribName.armorMax, skillModel.timeFrame,skillModel.castTime);
 
-            charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                , AttribName.armorMax, statDataMax * 0.6f, skillModel.timeFrame, skillModel.castTime, true);
+            charController.charStateController.ApplyCharStateBuff(CauseType.CharSkill, (int)skillName
+                                             , charController.charModel.charID, CharStateName.Concentrated);
         }
 
         public override void ApplyFX3()
         {
             if (targetController == null) return;
             charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, AttribName.fireRes, +14,
-                skillModel.timeFrame, skillModel.castTime, true);          
+                skillModel.timeFrame, skillModel.castTime, true);
         }
 
         public override void ApplyMoveFx()
@@ -79,12 +76,12 @@ namespace Combat
         }
         public override void DisplayFX2()
         {
-            str1 = "<style=Heal>Heal</style> 12% of max Hp";
+            str1 = "<style=Heal>Heal</style> 12% and Apply 50% <style=States>Concentrated</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
         }
         public override void DisplayFX3()
         {
-            str2 = "+60% Max Armor and +14 <style=Burn>Fire Res</style>";
+            str2 = "Trigger Max Armor and +14 <style=Burn>Fire Res</style>";
             SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
         public override void DisplayFX4()

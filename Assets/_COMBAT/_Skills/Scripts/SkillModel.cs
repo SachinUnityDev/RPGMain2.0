@@ -10,13 +10,13 @@ namespace Combat
     public class SkillModel
     {
         public SkillNames skillName;
-        public CharNames charName; 
+        public CharNames charName;
         public int skillID;
         public int charID;
         public string skillDesc;
         public Sprite skillSprite;
         public SkillTypeCombat skillType;
-        public StrikeNos strikeNos; 
+        public StrikeNos strikeNos;
         [Tooltip("-1 for NA , 0 for Locked and 1 for Unlocked.")]
         public int skillUnLockStatus;
         public float damageMod;
@@ -34,7 +34,7 @@ namespace Combat
         public int maxUsagePerCombat;
         public SkillInclination skillInclination;
         public int baseWeight;
-        public float AIChance = 0; 
+        public float AIChance = 0;
         public bool isActive;
         // // EXTRA Parameters
         public List<PerkHexData> allPerkHexes = new List<PerkHexData>();
@@ -51,27 +51,27 @@ namespace Combat
 
         public SkillSelectState GetSkillState()
         {
-            return skillSelState; 
+            return skillSelState;
         }
         public void SetPrevSkillState()
         {
-           SetSkillState(prevSkillSelState); 
+            SetSkillState(prevSkillSelState);
         }
         public void SetSkillState(SkillSelectState _skillState)
-        {   
+        {
             if (skillInclination == SkillInclination.Passive)
-            {               
-                skillSelState = SkillSelectState.Unclickable_passiveSkills;              
-            }   
+            {
+                skillSelState = SkillSelectState.Unclickable_passiveSkills;
+            }
             else
             {
-                prevSkillSelState = skillSelState; 
-                skillSelState = _skillState; 
-            }          
+                prevSkillSelState = skillSelState;
+                skillSelState = _skillState;
+            }
         }
         public void AddDescLines(string str)
         {
-            if(!descLines.Any(t=>t == str))
+            if (!descLines.Any(t => t == str))
                 descLines.Add(str);
         }
         public List<string> GetDescLines()
@@ -93,18 +93,18 @@ namespace Combat
         }
         public SkillModel(SkillData _skillDataSO)
         {
-          
+
             skillName = _skillDataSO.skillName;
             charName = _skillDataSO.charName;
             skillID = (int)skillName;
             skillDesc = _skillDataSO.skillDesc;
             skillSprite = _skillDataSO.skillIconSprite;
             skillType = _skillDataSO.skillType;
-            strikeNos= _skillDataSO.strikeNos;
-            skillUnLockStatus =_skillDataSO.skillUnLockStatus;
+            strikeNos = _skillDataSO.strikeNos;
+            skillUnLockStatus = _skillDataSO.skillUnLockStatus;
             damageMod = _skillDataSO.damageMod;
             skillLvl = _skillDataSO.skillLvl;
-            if(skillUnLockStatus == 1) 
+            if (skillUnLockStatus == 1)
                 skillSelState = SkillSelectState.Clickable;
             if (skillUnLockStatus == 0)
                 skillSelState = SkillSelectState.UnClickable_Locked;
@@ -123,16 +123,19 @@ namespace Combat
             isActive = _skillDataSO.isActive;
             //  Uses and cd remaining
             noOfTimesUsed = 0;
-            cdRemaining = 0; 
+            cdRemaining = 0;
             prevSkillSelState = SkillSelectState.None;
         }
 
     }
 
 
+    public class PerkChainData
+    {
+        public PerkChainData Atype;
+        public PerkChainData Btype;
+        public PerkSelectState state; 
 
-
-
-
+    }   
 }
 

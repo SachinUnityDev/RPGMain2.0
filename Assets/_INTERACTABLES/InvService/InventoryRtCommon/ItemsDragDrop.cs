@@ -4,7 +4,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Common;
 using UnityEngine.UI;
-using DG.Tweening; 
+using DG.Tweening;
+using UnityEngine.Rendering.Universal;
+using UnityEditor.UI;
+using System.Linq;
 
 namespace Interactables
 {
@@ -27,12 +30,11 @@ namespace Interactables
         [Header("Item Card related")]
         [SerializeField] GameObject itemCardGO;
         [SerializeField] Vector3 offset;
-       
+        [SerializeField] List<GameObject> hovered = new List<GameObject>();
         #endregion
 
         void Start()
         {
-            
             iSlotable = transform.parent.parent.GetComponent<iSlotable>();
             if (iSlotable == null)
                 Debug.Log("ERROR Item Slot Controller Not found"+ gameObject.name);
@@ -42,61 +44,84 @@ namespace Interactables
                 canvasGroup = gameObject.GetComponent<CanvasGroup>();
 
             canvas = GetComponentInParent<Canvas>();
-           // itemCardGO = ItemService.Instance.itemCardGO; 
+            itemCardGO = ItemService.Instance.itemCardGO; 
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (iSlotable.slotType == SlotType.GewgawsActiveInv || iSlotable.slotType == SlotType.PotionsActiveInv)
-                return; 
-
+                return;
+            hovered = eventData.hovered;
             if(iSlotable.ItemsInSlot.Count != 0)
             {
-                ShowItemCard();
+                if (ItemService.Instance.itemCardGO == null)
+                {
+                    ItemService.Instance.itemCardGO = Instantiate(ItemService.Instance.itemCardPrefab);
+                }
+
+                Sequence seq = DOTween.Sequence();
+                seq
+                    .AppendCallback(()=> ItemService.Instance.itemCardGO.gameObject.SetActive(false))
+                    .AppendCallback(() => PosItemCard())
+                    .AppendInterval(0.5f)
+                    .AppendCallback(() => ShowItemCard())
+                    ;                 
+                seq.Play();
             }
         }
     
         public void OnPointerExit(PointerEventData eventData)
         {
             if (iSlotable.slotType == SlotType.GewgawsActiveInv || iSlotable.slotType == SlotType.PotionsActiveInv)
-                return;
-            itemCardGO.SetActive(false);
+                return; // eliminating drag and drop on active slot of Potion n Gewgaw
+            ItemService.Instance.itemCardGO.SetActive(false);
+            if (InvService.Instance.commInvViewController.rightClickOpts.GetComponent<RightClickOpts>().isHovered)
+                return; 
 
+            ItemSlotController itemSlotController = iSlotable as ItemSlotController;
+          
             Sequence closeSeq = DOTween.Sequence();
-            closeSeq.PrependInterval(1f)
-                    //.Append(itemCardGO.GetComponent<Image>().DOFade(0.5f, 0.1f))
-                    .AppendCallback(() => InvService.Instance.commInvViewController.CloseRightClickOpts());
-            closeSeq.Play();
+            closeSeq
+                    .PrependInterval(0.1f)  
+                    .AppendCallback(() => CloseRightClickOpts(itemSlotController))
+                    ;
+            if (itemSlotController != null)
+                closeSeq.Play();
         }
     
+        void CloseRightClickOpts(ItemSlotController itemSlotController)
+        {
+            if (!InvService.Instance.commInvViewController.rightClickOpts.GetComponent<RightClickOpts>().isHovered)
+            {
+                itemSlotController.CloseRightClickOpts();
+                Debug.Log("CLOSED on ITEM DRAG"); 
+            }
+        }
 
         void ShowItemCard()
         {
+            if(hovered.Any(t=>t == gameObject))
+            itemCardGO.GetComponent<ItemCardView>().ShowItemCard(iSlotable.ItemsInSlot[0]);             
+        }
+        void PosItemCard()
+        {
             Canvas canvas = FindObjectOfType<Canvas>();
-           
-            if (ItemService.Instance.itemCardGO == null)
-            {
-                ItemService.Instance.itemCardGO = Instantiate(ItemService.Instance.itemCardPrefab);
-            }            
-            itemCardGO = ItemService.Instance.itemCardGO; 
-              
+
+            itemCardGO = ItemService.Instance.itemCardGO;
             itemCardGO.transform.SetParent(canvas.transform);
 
+            int index = itemCardGO.transform.parent.childCount - 1;
+            itemCardGO.transform.SetSiblingIndex(index);
+            RectTransform invXLRect = itemCardGO.GetComponent<RectTransform>();
 
-                int index = itemCardGO.transform.parent.childCount - 1;
-                itemCardGO.transform.SetSiblingIndex(index);
-                RectTransform invXLRect = itemCardGO.GetComponent<RectTransform>();
-              
-                invXLRect.pivot = new Vector2(0.5f, 0.5f);
-                invXLRect.localScale = Vector3.one;
-              
-                itemCardGO.GetComponent<ItemCardView>().ShowItemCard(iSlotable.ItemsInSlot[0]);
-                if (iSlotable.slotType == SlotType.TradeScrollSlot)
-                    PosTradeScrollSlot();
-                else if(iSlotable.slotType == SlotType.PotionActInCombat)
-                    PosItemCardInCombat();
-                else
-                    PosItemCardInInv();
-            
+            invXLRect.pivot = new Vector2(0.5f, 0.5f);
+            invXLRect.localScale = Vector3.one;
+
+            if (iSlotable.slotType == SlotType.TradeScrollSlot)
+                PosTradeScrollSlot();
+            else if (iSlotable.slotType == SlotType.PotionActInCombat)
+                PosItemCardInCombat();
+            else
+                PosItemCardInInv();
         }
 
         void PosItemCardInCombat()
@@ -189,10 +214,10 @@ namespace Interactables
 
             Sequence seq = DOTween.Sequence();
             seq
-                .Append(itemCardGO.transform.DOMove(pos, 0.1f))
-                .Append(itemCardGO.transform.GetComponent<Image>().DOFade(1.0f, 0.3f))
+                .Append(itemCardGO.transform.DOMove(pos, 0.01f))
+                .Append(itemCardGO.transform.GetComponent<Image>().DOFade(1.0f, 0.2f))
                 ;
-                itemCardGO.SetActive(true);
+               // itemCardGO.SetActive(true);
             seq.Play(); 
         }
 

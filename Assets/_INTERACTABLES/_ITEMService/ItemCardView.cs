@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -90,11 +91,13 @@ namespace Interactables
                 }
             }
         }
+
+        
+
         public void ShowItemCard(Iitems item)
         {
             if (isRightClickDspled)
                 return;
-            gameObject.SetActive(true);
             tailTrans.gameObject.SetActive(false);   
             itemViewSO = ItemService.Instance.itemViewSO; 
             switch (item.itemType)
@@ -450,7 +453,8 @@ namespace Interactables
                 default:
                     break;
             }
-           
+            gameObject.SetActive(true);
+
         }
 
         public void OnRightClickOptsDsply(bool isDsplyed)

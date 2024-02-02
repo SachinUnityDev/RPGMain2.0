@@ -87,6 +87,7 @@ namespace Interactables
             {
                 itemCardView.OnRightClickOptsDsply(true); 
             }
+            rightClickOpts.GetComponent<RightClickOpts>().Init(itemSlotController); 
             foreach (ItemActions itemAction in itemSlotController.rightClickActions)
             {
                 Transform btn = rightClickOpts.GetChild(i); 
@@ -107,11 +108,12 @@ namespace Interactables
                 }
                 
             }
-            Debug.Log("VALUE of" + i +" value of " + itemSlotController.rightClickActions); 
             Transform slotTrans = itemSlotController.gameObject.transform;
             Vector3 offset = new Vector3(100/2f, 130/2f, 0f)* canvas.scaleFactor;  
 
             rightClickOpts.DOMove(slotTrans.position+offset, 0.01f);
+            rightClickOpts.gameObject.SetActive(true);
+
         }
 
         public void OpenRightClickOpts()
@@ -120,13 +122,17 @@ namespace Interactables
         }
         public void CloseRightClickOpts()
         {
-            foreach (Transform child in rightClickOpts)
-            {
-                if (child.GetComponent<ItemActionPtrController>().isHovered)
-                {
-                    return;
-                }
-            }
+            if (rightClickOpts.GetComponent<RightClickOpts>().isHovered)
+                return; 
+
+            //foreach (Transform child in rightClickOpts)
+            //{
+
+            //    //if (child.GetComponent<ItemActionPtrController>().isHovered)
+            //    //{
+            //    //    return;
+            //    //}
+            //}
             // Item Card Dsply
             ItemCardView itemCardView = FindObjectOfType<ItemCardView>(true);
             if (itemCardView != null)

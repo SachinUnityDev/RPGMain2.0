@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 using DG.Tweening;
-
+using Combat;
 
 namespace Interactables
 {
@@ -14,16 +14,18 @@ namespace Interactables
         [SerializeField] Color colorN;
         [SerializeField] Color colorHL;
         [SerializeField] Color colorUnClickable;
-        IComInvActions iComInvActions; 
+        IComInvActions iComInvActions;
+        ItemSlotController itemSlotController; 
 
-        public bool isClickable = true;
-        public bool isHovered = false; 
+      //  public bool isClickable = true;
+      //  public bool isHovered = false; 
 
         public void Init(ItemActions itemActions, IComInvActions iComInvAction) 
         {
             this.itemActions = itemActions;
             this.iComInvActions = iComInvAction;    
-            isHovered = false;  
+            this.itemSlotController = iComInvAction as ItemSlotController;
+         //   isHovered = false;  
         }
 
         public void ResetItemAction()
@@ -47,7 +49,7 @@ namespace Interactables
                     iComInvActions.Dispose();
                     break;
                 case ItemActions.Sellable:
-                    iComInvActions.Dispose();
+                    iComInvActions.Sell();
                     break;
                 case ItemActions.Readable:
                     iComInvActions.Read();
@@ -64,43 +66,42 @@ namespace Interactables
                 default:
                     break;
             }
-            InvService.Instance.commInvViewController.CloseRightClickOpts();
+            InvService.Instance.commInvViewController.rightClickOpts.GetComponent<RightClickOpts>().isHovered = false;
+            // isHovered = false;
+            itemSlotController.CloseRightClickOpts();
+            
+            //.gameObject.SetActive(false);
+  
             ResetItemAction(); 
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            transform.parent.gameObject.SetActive(true);
-            isHovered = true;// this will prevent itemdragNDrop from closing it 
-            if(isClickable)
-                transform.GetChild(0).GetComponent<TextMeshProUGUI>().color
-                            = colorHL; 
-            else
-                transform.GetChild(0).GetComponent<TextMeshProUGUI>().color
-                           = colorUnClickable;
+         //   transform.parent.gameObject.SetActive(true);
+        //    isHovered = true;// this will prevent itemdragNDrop from closing it 
+          //  if(isClickable)
+                transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = colorHL; 
+         //   else
+              //  transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = colorUnClickable;
         }
-        //IEnumerator WaitForTime(float time)
-        //{
-        //    yield return new WaitForSeconds(time);
-        //    InvService.Instance.invViewController.CloseRightClickOpts();
-        //}
+    
         public void OnPointerExit(PointerEventData eventData)
         {
-            if (isClickable)
+           // if (isClickable)
                 transform.GetChild(0).GetComponent<TextMeshProUGUI>().color
                             = colorN;
-            else
-                transform.GetChild(0).GetComponent<TextMeshProUGUI>().color
-                           = colorUnClickable;
-            isHovered= false;
-            Sequence closeSeq = DOTween.Sequence();
-            closeSeq.PrependInterval(1f);
-            closeSeq.AppendCallback(() => InvService.Instance.commInvViewController.CloseRightClickOpts());
-            closeSeq.Play();
-
+         //   else
+               // transform.GetChild(0).GetComponent<TextMeshProUGUI>().color
+                         //  = colorUnClickable;
+          //  isHovered= false;
+            //Sequence closeSeq = DOTween.Sequence();
+            //closeSeq.PrependInterval(0.5f);
+            //closeSeq.AppendCallback(() => itemSlotController.CloseRightClickOpts());
+            //closeSeq.Play();
+           
         }
 
-        void Start()
+        void OnEnable()
         {
             transform.GetChild(0).GetComponent<TextMeshProUGUI>().color
              = colorN;

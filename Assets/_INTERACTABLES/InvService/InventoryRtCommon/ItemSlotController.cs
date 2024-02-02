@@ -112,23 +112,23 @@ namespace Interactables
         private void Start()
         {
             slotID = transform.GetSiblingIndex();
-            isRightClicked = false;
+          
             InvService.Instance.commInvViewController.CloseRightClickOpts();
         }
 
         #region SLOT ITEM HANDLING ..ADD/REMOVE/REFRESH
 
         public void ClearSlot()
-        {   
+        {
             ItemsInSlot.Clear();
-            itemCount= 0;
+            itemCount = 0;
             if (IsEmpty())
             {
                 Transform ImgTrans = gameObject.transform.GetChild(0).GetChild(0);
                 ImgTrans.gameObject.SetActive(false);
                 gameObject.GetComponent<Image>().sprite = InvService.Instance.InvSO.emptySlot;
                 RefreshSlotTxt();
-            }   
+            }
         }
         public bool HasSameItem(Iitems item)
         {
@@ -152,10 +152,10 @@ namespace Interactables
         {
             int count = ItemsInSlot.Count;
             for (int i = 0; i < count; i++)
-            {            
-                RemoveItem();              
+            {
+                RemoveItem();
             }
-        }       
+        }
         public bool IsEmpty()
         {
             if (ItemsInSlot.Count > 0)
@@ -170,10 +170,10 @@ namespace Interactables
                 AddItemOnSlot(item, onDrop);
                 return true;
             }
-            return false;          
+            return false;
         }
-        public bool AddItem(Iitems item, bool onDrop =true)
-        {         
+        public bool AddItem(Iitems item, bool onDrop = true)
+        {
             if (IsEmpty())
             {
                 AddItemOnSlot(item, onDrop);
@@ -190,7 +190,7 @@ namespace Interactables
                     }
                     else
                     {
-                      //  Debug.Log("Slot full");
+                        //  Debug.Log("Slot full");
                         return false;
                     }
                 }
@@ -201,7 +201,7 @@ namespace Interactables
             }
         }
         void AddItemOnSlot(Iitems item, bool onDrop)
-        {            
+        {
             ItemsInSlot.Add(item);
             itemCount++;
             if (onDrop)
@@ -209,11 +209,11 @@ namespace Interactables
                 InvService.Instance.invMainModel.commonInvItems.Add(item); // directly added to prevent stackoverflow
                 InvService.Instance.invMainModel.commonInvCount++;
             }
-                
+
 
             RefreshImg(item);
-           // if (ItemsInSlot.Count > 1 || onDrop)
-                RefreshSlotTxt();
+            // if (ItemsInSlot.Count > 1 || onDrop)
+            RefreshSlotTxt();
         }
         public void LoadSlot(Iitems item)
         {
@@ -231,7 +231,7 @@ namespace Interactables
                 ClearSlot();
                 return;
             }
-            Iitems item = ItemsInSlot[0];           
+            Iitems item = ItemsInSlot[0];
             InvService.Instance.invMainModel.RemoveItemFrmCommInv(item);  // ITEM REMOVED FROM INV MAIN MODEL HERE
             ItemsInSlot.Remove(item);
             itemCount--;
@@ -243,7 +243,7 @@ namespace Interactables
             {
                 ClearSlot();
             }
-            RefreshSlotTxt();   
+            RefreshSlotTxt();
         }
 
         void RefreshImg(Iitems item)
@@ -302,34 +302,34 @@ namespace Interactables
             if (isRightClicked)
             {
                 InvService.Instance.commInvViewController.CloseRightClickOpts();
-                isRightClicked = !isRightClicked;
+                isRightClicked= false;
                 return;
             }
         }
+        public void ShowRightClickOpts()
+        {
+            isRightClicked = true;
+            InvService.Instance.commInvViewController.ShowRightClickList(this);
+        }
+
         void PopulateRightClickList()
         {
             if (ItemsInSlot.Count == 0)
             {
-                InvService.Instance.commInvViewController.CloseRightClickOpts();
+                CloseRightClickOpts();
                 return;
             }
             
             Iitems item = ItemsInSlot[0];
-            if (isRightClicked)
-            {
-                InvService.Instance.commInvViewController.CloseRightClickOpts();
-                isRightClicked = !isRightClicked;
-                return;
-            }
-            else
-            {
-                InvService.Instance.commInvViewController.OpenRightClickOpts();
-                isRightClicked = !isRightClicked;
-            }
-
-            //bool isEquipable = InvService.Instance.IsItemEquipable(item, slotType);
-            //bool isConsumable = InvService.Instance.IsItemConsumable(item, slotType);
-            //bool isDisposable = InvService.Instance.IsItemDisposable(item, slotType);
+            //if (isRightClicked)
+            //{
+            //    CloseRightClickOpts();                 
+            //}
+            //else
+            //{
+            //    InvService.Instance.commInvViewController.OpenRightClickOpts();               
+            //}
+           // isRightClicked = !isRightClicked; 
 
             rightClickActions.Clear();
             if (IsEquipable())
@@ -364,18 +364,25 @@ namespace Interactables
                 if (!rightClickActions.Any(t => t == ItemActions.Disposable))
                     rightClickActions.Add(ItemActions.Disposable);
             }
-            InvService.Instance.commInvViewController.ShowRightClickList(this);
+            ShowRightClickOpts(); 
 
         }
         public void OnPointerClick(PointerEventData eventData)
         {
             if (eventData.button == PointerEventData.InputButton.Right)
             {
-                PopulateRightClickList();
-                ItemService.Instance.itemCardGO.SetActive(false);
+                if(isRightClicked)
+                {
+                    CloseRightClickOpts();
+                }
+                else
+                {
+                    PopulateRightClickList();
+                    ItemService.Instance.itemCardGO.SetActive(false);
+                }
             }
 
-            if (eventData.button == PointerEventData.InputButton.Left)
+            if (eventData.button == PointerEventData.InputButton.Left)// transfer item to Excess Inv
             {
                 if(Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl)
                     && InvService.Instance.excessInvViewController.gameObject.activeInHierarchy)
@@ -392,7 +399,7 @@ namespace Interactables
                 }
             }
 
-            if (eventData.button == PointerEventData.InputButton.Left)
+            if (eventData.button == PointerEventData.InputButton.Left) // Split Item in two slots 
             {
                 if (Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.LeftShift))                                        
                 {

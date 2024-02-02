@@ -17,12 +17,7 @@ namespace Interactables
         [Header("Level view ")]
         public LevelView levelView;
 
-
-        //[SerializeField] GameObject AttributesPanel;
-        //[SerializeField] GameObject StatsPanel;
-        //[SerializeField] GameObject traitsPanel;
         public CharNames selectchar;
-
 
         private void OnEnable()
         {

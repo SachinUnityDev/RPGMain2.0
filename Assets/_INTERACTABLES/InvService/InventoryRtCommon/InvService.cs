@@ -35,6 +35,7 @@ namespace Interactables
         public InvRightViewController commInvViewController; // ref
       //  public GameObject invPanel;
         public bool isInvPanelOpen; // to track inv panel
+        public bool isRightClickHovered= false;
 
         [Header("Stash Inv : to be ref")]
         public StashInvViewController stashInvViewController;

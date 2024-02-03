@@ -47,9 +47,7 @@ namespace Combat
         {
         }
 
-        public override void PostApplyFX()
-        {
-        }
+    
 
         public override void PreApplyFX()
         {

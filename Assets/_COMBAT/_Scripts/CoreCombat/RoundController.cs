@@ -4,7 +4,6 @@ using UnityEngine;
 using Common;
 using System.Linq;
 using System;
-using UnityEditor.ShaderGraph.Internal;
 
 namespace Combat
 {
@@ -47,7 +46,6 @@ namespace Combat
             {
                 return;
             }
-
             CombatEventService.Instance.On_CharOnTurnSet();
         }
 
@@ -57,10 +55,10 @@ namespace Combat
                     CombatService.Instance.combatState == CombatState.INCombat_InSkillSelected)
             {
                 index++;
+                Debug.Log("CHAR INCR" + index); 
                 charCount = charTurnOrder.Count;
-                if (index < charCount && index >= -1)
-                {
-                    
+                if (index < charCount && index > -1)
+                {                    
                     CombatService.Instance.currCharOnTurn = charTurnOrder[index];                  
                     SetAP(charTurnOrder[index]);
                     CombatService.Instance.currentTurn = index;
@@ -71,8 +69,7 @@ namespace Combat
                     index = -1;
                     CombatEventService.Instance.Move2NextRds();
                     return; 
-                }
-               
+                }               
             }
         }
         void SetAP(CharController charController)
@@ -124,7 +121,9 @@ namespace Combat
         public void OrderByRecursion2(AttribName _statName)
         {
             List<CharController> newOrder = new List<CharController>();
+            int ran = UnityEngine.Random.Range(0, charTurnOrder.Count);
             newOrder = charTurnOrder
+                        .OrderBy(i => Guid.NewGuid())// shuffle
                         .OrderByDescending(x => x.GetAttrib(AttribName.haste).currValue)
                         .ThenByDescending(t => t.GetAttrib(AttribName.morale).currValue)
                         .ThenByDescending(t => t.GetAttrib(AttribName.focus).currValue)

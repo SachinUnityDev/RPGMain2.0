@@ -64,7 +64,8 @@ namespace Combat
 
         public override void ApplyFX3()
         {
-            if (30f.GetChance())
+          
+            if (30f.GetChance() && targetController)
                 targetController.tempTraitController.ApplyTempTrait(CauseType.CharSkill, (int)skillName
                                         , charController.charModel.charID, TempTraitName.RatBiteFever);
 
@@ -95,12 +96,15 @@ namespace Combat
 
         public override void ApplyVFx()
         {
-            Sequence Seq = DOTween.Sequence();
-            Seq.AppendCallback(()=> SkillService.Instance.skillFXMoveController.MeleeStrike(PerkType.None, skillModel))
-                .AppendInterval(0.5f)
-                .AppendCallback(()=> GridService.Instance.gridMovement.MovebyRow(myDyna, MoveDir.Forward, 1))           ;
+            if (targetController)
+            {
+                Sequence Seq = DOTween.Sequence();
+                Seq.AppendCallback(() => SkillService.Instance.skillFXMoveController.MeleeStrike(PerkType.None, skillModel))
+                    .AppendInterval(0.5f)
+                    .AppendCallback(() => GridService.Instance.gridMovement.MovebyRow(myDyna, MoveDir.Forward, 1));
 
-            Seq.Play();            
+                Seq.Play();
+            }            
         }
 
 

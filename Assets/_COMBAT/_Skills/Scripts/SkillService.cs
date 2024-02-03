@@ -387,7 +387,7 @@ namespace Combat
 
             eventSeq
                 .AppendCallback(() => _OnSkillApply?.Invoke())
-                .AppendInterval(2)
+                //.AppendInterval(2)
                 .AppendCallback(On_PostSkillApply)
                 ;
             eventSeq.Play(); 
@@ -472,25 +472,26 @@ namespace Combat
         public void On_PostSkill(SkillModel skillModel)
         {
             // ClearPrevData();  // redundant safety .. causing only one FX to play as it clears mainTargetDyna
-        
-            CharController currCharOnturn = CombatService.Instance.currCharOnTurn;
-            CombatController combatController = currCharOnturn.GetComponent<CombatController>();
+
+            CharController charController = CombatService.Instance.currCharOnTurn;  
+            CombatController combatController = charController.GetComponent<CombatController>();
             // if ally reduce action pts
             if (skillModel != null)
             { // HASTE CHECK      
                 bool hasteChk = false;
                 if (skillModel.skillInclination == SkillInclination.Move && !ignoreHasteChk)
-                    hasteChk = HasteChk(currCharOnturn);
+                    hasteChk = HasteChk(charController);
                
                 // AP UPDATES 
-                if (hasteChk) // if haste check allies get a extra AP
+                if (hasteChk) // if haste check /Enemies get a extra AP
                     combatController.actionPts++;
 
-                combatController.SubtractActionPtOnSkilluse(skillModel, currCharOnturn.charModel.charMode);
+                combatController.SubtractActionPtOnSkilluse(skillModel, charController.charModel.charMode);
 
                currSkillController.UpdateAllSkillState();
-            }else if (currCharOnturn.charModel.charMode == CharMode.Enemy) 
+            }else if (charController.charModel.charMode == CharMode.Enemy) // no SkillAvailable
             {
+                Debug.LogError("TURN MISSED" + charController.charModel.charName); 
                 Move2Nextturn();
                 return; 
             }
@@ -498,12 +499,12 @@ namespace Combat
             if (combatController.actionPts > 0)// allies 
             {
                 CombatService.Instance.roundController.SetSameCharOnTurn();
-                if (currCharOnturn.charModel.charMode == CharMode.Enemy)
+                if (charController.charModel.charMode == CharMode.Enemy)
                     InitEnemySkillSelection(CombatService.Instance.currCharOnTurn);   // to be called 
             }
             else
             {
-                if (currCharOnturn.charModel.charMode == CharMode.Enemy)
+                if (charController.charModel.charMode == CharMode.Enemy)
                     Move2Nextturn();
             }
         }        

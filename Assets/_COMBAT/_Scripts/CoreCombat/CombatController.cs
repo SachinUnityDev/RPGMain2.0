@@ -58,12 +58,16 @@ namespace Combat
         public void CnvrtRmgAP2StmGain()
         {
             if(actionPts > 0)
-            charController.ChangeStat(CauseType.ActionsPts, (int)0, charController.charModel.charID
-                                                               , StatName.stamina, +actionPts * 2); 
+            {
+                charController.ChangeStat(CauseType.ActionsPts, (int)0, charController.charModel.charID
+                                                               , StatName.stamina, +actionPts * 2);
+                actionPts = 0; 
+            }            
         }
 
         public void SetActionPts()  // SOT ONLY 
         {
+            actionPts= 0;
             MoraleChk(charController);
             if (charController.charModel.orgCharMode == CharMode.Ally)
                 actionPts +=2;
@@ -118,6 +122,7 @@ namespace Combat
 
         public void SubtractActionPtOnSkilluse(SkillModel skillModel, CharMode charMode)
         {
+            Debug.Log(" ACTION PTS SUBTRACT" + skillModel.charID + skillModel.skillName); 
             if (skillModel.skillType == SkillTypeCombat.Retaliate)
                 return;
             --actionPts;

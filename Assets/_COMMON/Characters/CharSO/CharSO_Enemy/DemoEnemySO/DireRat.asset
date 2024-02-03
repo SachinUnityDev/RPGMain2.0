@@ -78,14 +78,14 @@ MonoBehaviour:
     maxLimit: 12
     isClamped: 0
   - AttribName: 5
-    currValue: 6
+    currValue: 12
     baseValue: 6
     desc: Determinant value for gain or lose AP.
     minLimit: 0
     maxLimit: 12
     isClamped: 0
   - AttribName: 6
-    currValue: 4
+    currValue: 2
     baseValue: 4
     desc: Main determinant for turn order. Increases chance to gain AP by using Move
       skills.

@@ -148,7 +148,6 @@ namespace Interactables
             itemCardGO.SetActive(true);
             seq.Play();
         }
-
         void PosTradeScrollSlot()
         {
             float width = itemCardGO.GetComponent<RectTransform>().rect.width;

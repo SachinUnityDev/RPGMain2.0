@@ -261,8 +261,7 @@ namespace Combat
                 OnTargetClicked?.Invoke(_targetDyna, null);
             }
             else
-            {
-     
+            {     
                 if (skillModel.skillType == SkillTypeCombat.Move)
                 {
                     GameObject charGO = CombatService.Instance.currCharOnTurn.gameObject;
@@ -328,10 +327,12 @@ namespace Combat
 
         public void On_HasteCheck(CharController charController)
         {
+            Debug.Log("HASTE  charController" + charController.charModel.charName + charController.charModel.charID);
             OnHasteCheck?.Invoke(charController);   
         }
         public void On_MoraleCheck(CharController charController, bool posChk)
         {
+            Debug.Log("MORALE charController" + charController.charModel.charName + charController.charModel.charID); 
             OnMoraleCheck?.Invoke(charController, posChk);
         }
         #endregion

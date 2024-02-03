@@ -681,25 +681,26 @@ namespace Combat
             {   
                 UpdateSkillState(skillModel);
                 if (skillModel.GetSkillState() == SkillSelectState.Clickable)
-                {
-                    Debug.Log("SKILL MODEL" + skillModel.skillName);
+                {                    
                     netBaseWt += skillModel.baseWeight;
                     ClickableSkills.Add(skillModel);
                 }
             }
-            if (ClickableSkills.Count < 1) return null;
+            if (ClickableSkills.Count < 1) 
+                return null;
             //int index = UnityEngine.Random.Range(0, ClickableSkills.Count);
             for (int i = 0; i < ClickableSkills.Count; i++)
             {
-                if (GetSkillModelByBaseWtChance(netBaseWt, i))
-                    return ClickableSkills[i];
+                if (GetSkillModelByBaseWtChance(netBaseWt, i))                 
+                return ClickableSkills[i];
             }
             int random = UnityEngine.Random.Range(0, ClickableSkills.Count);
+          
             return ClickableSkills[random];// to remove error 
         }
-        bool GetSkillModelByBaseWtChance(float NetWt, int i)
+        bool GetSkillModelByBaseWtChance(float netBaseWt, int i)
         {
-            float skillchance = (ClickableSkills[i].baseWeight / NetWt) * 100f;
+            float skillchance = (ClickableSkills[i].baseWeight / netBaseWt) * 100f;
 
             return skillchance.GetChance();
         }

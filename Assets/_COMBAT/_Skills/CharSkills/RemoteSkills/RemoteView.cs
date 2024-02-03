@@ -45,7 +45,7 @@ namespace Combat
                     skillbase.ApplyFX3();
                     skillbase.ApplyMoveFx();
                     skillbase.ApplyVFx();
-                    skillbase.PostApplyFX();
+                   
                     GameObject ImpactFX = Instantiate(skillPerkFXData.impactFX, transform.position, Quaternion.identity).gameObject;
                     Sequence seq = DOTween.Sequence();
                     seq

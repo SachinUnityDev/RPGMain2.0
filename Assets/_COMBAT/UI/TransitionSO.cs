@@ -43,7 +43,7 @@ namespace Combat
             TimeState _timeState = TimeState.Day; 
             if (_timeState == TimeState.Day)
             {               
-                Debug.Log("position" + orgPos);
+             //   Debug.Log("position" + orgPos);
                 centerPanel = _centerPanel;
                 //centerPanel.SetActive(true); 
                 centerTrans = centerPanel.transform.GetChild(0);

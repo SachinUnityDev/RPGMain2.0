@@ -12,7 +12,7 @@ namespace Combat
     public class CombatController : MonoBehaviour
     {
 
-        int MAX_VAL_FOR_ACTION_PTS = 4; 
+        int MAX_VAL_FOR_ACTION_PTS = 1; 
 
         public DynamicPosData selectedLoc;
         public DynamicPosData TargetLoc;
@@ -69,8 +69,8 @@ namespace Combat
         {
             actionPts= 0;
             MoraleChk(charController);
-            if (charController.charModel.orgCharMode == CharMode.Ally)
-                actionPts +=2;
+            if (charController.charModel.charMode == CharMode.Ally)
+                actionPts ++;
             else
                 ++actionPts;
             if (actionPts > MAX_VAL_FOR_ACTION_PTS)
@@ -82,7 +82,7 @@ namespace Combat
           //  SkillView skillView = canvas.GetComponentInChildren<SkillView>(); 
           ////  skillView.SetSkillsPanel(charController);
 
-            Debug.Log("ACTION PTS SET FOR: " + charController.charModel.charName + "action"+ actionPts);
+            Debug.Log("ACTION PTS SET FOR: " + charController.charModel.charName +charController.charModel.charID + "action :"+ actionPts);
             if (charController.charModel.charMode == CharMode.Enemy)
             {
                 if (actionPts <= 0)
@@ -122,7 +122,7 @@ namespace Combat
 
         public void SubtractActionPtOnSkilluse(SkillModel skillModel, CharMode charMode)
         {
-            Debug.Log(" ACTION PTS SUBTRACT" + skillModel.charID + skillModel.skillName); 
+          //  Debug.Log(" ACTION PTS SUBTRACT" + skillModel.charID + skillModel.skillName); 
             if (skillModel.skillType == SkillTypeCombat.Retaliate)
                 return;
             --actionPts;
@@ -136,33 +136,9 @@ namespace Combat
             actionPtsView = canvas.GetComponentInChildren<ActionPtsView>(true);
             actionPtsView.UpDateActionsPtsView(actionPts);
         }
-
   
     }
-
-
 }
-//AttribData haste_AttribData = currCharOnTurn.GetAttrib(AttribName.haste);
-//int hasteBonus = (int)haste_AttribData.currValue / 6; 
-//actionPts = 1+hasteBonus;
 
 
 
-//void SetActionOnSOT()
-//{
-//    if (GameService.Instance.gameModel.gameState == GameState.InCombat)
-//    {
-//        CombatEventService.Instance.OnCharOnTurnSet -= OnCharSetOnTurn;
-//        CombatEventService.Instance.OnCharOnTurnSet += OnCharSetOnTurn;
-//    }
-//}
-//void OnCharSetOnTurn(CharController charController)
-//{
-//    if (charController.charModel.charID != CombatService.Instance.currCharOnTurn.charModel.charID)
-//        return;
-//    CombatController combatController = GetComponent<CombatController>();
-//    if (combatController != null)
-//        combatController.SetActionPts();
-
-//    CombatEventService.Instance.OnCharOnTurnSet -= OnCharSetOnTurn;
-//}

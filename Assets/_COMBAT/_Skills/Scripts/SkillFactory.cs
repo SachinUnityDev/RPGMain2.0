@@ -132,7 +132,7 @@ namespace Combat
                     return P1;
                 }
             }
-            Debug.Log("Perk base not found" + skillName + "PerkName" + perkName);            
+          //  Debug.Log("Perk base not found" + skillName + "PerkName" + perkName);            
             return null; 
         }
        
@@ -144,7 +144,7 @@ namespace Combat
             return skillPerkData;
             else
             {
-                Debug.Log("Perk Data Not found"+ _skillName);
+               // Debug.Log("Perk Data Not found"+ _skillName);
                 return null; 
             }
         }

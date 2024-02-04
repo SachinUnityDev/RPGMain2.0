@@ -42,7 +42,7 @@ namespace Combat
             if(charController.charModel.charMode == CharMode.Enemy)
             {
                 int pos = Random.Range(0, skillModel.targetPos.Count);
-                Debug.Log("Move2" + pos + " myDyna" + myDyna.charGO.name + myDyna.currentPos); 
+              //  Debug.Log("Move2" + pos + " myDyna" + myDyna.charGO.name + myDyna.currentPos); 
                 GridService.Instance.gridController.Move2Pos(myDyna, skillModel.targetPos[pos].pos);
                 GridService.Instance.gridView.CharOnTurnHL(myDyna);
             }

@@ -91,16 +91,16 @@ namespace Combat
             if (startState== CombatState.INTactics) 
             {
                 seq
-               .AppendInterval(0.2f)
-               .AppendCallback(() => On_SOTactics())
+                   .AppendInterval(0.2f)
+                   .AppendCallback(() => On_SOTactics())
                ;
                 seq.Play();
             }
             if(startState == CombatState.INCombat_normal)
             {
                 seq
-               .AppendInterval(0.2f)
-               .AppendCallback(() => On_SOC())
+                   .AppendInterval(0.2f)
+                   .AppendCallback(() => On_SOC())
                ;
                 seq.Play();
             }
@@ -112,7 +112,7 @@ namespace Combat
             GridService.Instance.gridView.CharOnTurnHL(dynaOnTurn);
             charCtrl.RegenStamina();
             charCtrl.HPRegen();
-            Debug.Log("CHAR SET ON TURN >>>>" + charCtrl.charModel.charName);
+            Debug.Log("CHAR SET ON TURN >>>>" + charCtrl.charModel.charName + charCtrl.charModel.charID);
          
             OnCharOnTurnSet?.Invoke(charCtrl);
             On_CharClicked(charCtrl.gameObject);
@@ -327,12 +327,13 @@ namespace Combat
 
         public void On_HasteCheck(CharController charController)
         {
-            Debug.Log("HASTE  charController" + charController.charModel.charName + charController.charModel.charID);
+            Debug.Log("HASTE CHK" + charController.charModel.charName + charController.charModel.charID);
             OnHasteCheck?.Invoke(charController);   
         }
         public void On_MoraleCheck(CharController charController, bool posChk)
         {
-            Debug.Log("MORALE charController" + charController.charModel.charName + charController.charModel.charID); 
+            Debug.Log("MORALE CHK" + charController.charModel.charName + charController.charModel.charID + posChk
+                +"ROUNDS" + currentRound); 
             OnMoraleCheck?.Invoke(charController, posChk);
         }
         #endregion

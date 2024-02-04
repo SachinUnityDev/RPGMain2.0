@@ -135,7 +135,7 @@ namespace Combat
             foreach (SkillData skillSO in skillDataSO.allSkills)
             {
                 SkillBase skillbase = SkillService.Instance.skillFactory.GetSkill(skillSO.skillName);
-                Debug.Log("skill base" + skillSO.skillName);
+               // Debug.Log("skill base" + skillSO.skillName);
                 skillbase.charName = skillDataSO.charName;
               
                 allSkillBases.Add(skillbase);
@@ -662,11 +662,12 @@ namespace Combat
                 allSkillBases.Find(t => t.skillName == selectedSkillModel.skillName).SkillSelected();
                 // SkillSelect?.Invoke(selectedSkillModel.skillName);  // message broadcaster 
 
-                Debug.Log("SELECTED SKILLS: " + selectedSkillModel.skillName +"Enemy Skillbases: " + allSkillBases.Count);                 
+                Debug.Log("SELECTED SKILLS: " + selectedSkillModel.skillName +"Enemy Skillbases: " + 
+                    selectedSkillModel.charID);                 
 
                 allSkillBases.Find(t => t.skillName == selectedSkillModel.skillName).PopulateAITarget();
                 // Set the target ..i.e currTargetDyna .. etc 
-                Debug.Log("TARGETS" + SkillService.Instance.currentTargetDyna.charGO.name);
+              //  Debug.Log("TARGETS" + SkillService.Instance.currentTargetDyna.charGO.name);
                 SkillService.Instance.OnAITargetSelected(selectedSkillModel);
             }
             else
@@ -830,7 +831,7 @@ namespace Combat
         {
             if (GameService.Instance.gameModel.gameState != GameState.InCombat) return;
             if (!CharService.Instance.allCharInCombat.Any(t => t.charModel.charID == charController.charModel.charID)) return;
-            Debug.Log(" CHAR SKILL UPDATE" + charController.charModel.charName);
+           // Debug.Log(" CHAR SKILL UPDATE" + charController.charModel.charName);
             foreach (SkillModel skillModel in allSkillModels)
             {
                 UpdateSkillState(skillModel);
@@ -901,8 +902,8 @@ namespace Combat
                 skillState = SkillSelectState.Clickable;
             }
             skillModel.prevSkillSelState =skillState; //prev state set to updated state
-            Debug.Log("SKILL NAME " + skillModel.skillName + "State" + skillState +
-         "TARGETS" + skillModel.targetPos.Count);
+         //   Debug.Log("SKILL NAME " + skillModel.skillName + "State" + skillState +
+         //"TARGETS" + skillModel.targetPos.Count);
             return skillState; 
         }
 
@@ -915,7 +916,7 @@ namespace Combat
             CombatController combatController = charController?.GetComponent<CombatController>();
             if (combatController == null)
                 return false; // case: Combat controller is null in tactics and therefore
-            Debug.Log("Checked on action pts" + combatController.actionPts + " charName"+ charController.gameObject.name);
+          //  Debug.Log("Checked on action pts" + combatController.actionPts + " charName"+ charController.gameObject.name);
             if (combatController.actionPts > 0)
                 return false;
             
@@ -967,7 +968,7 @@ namespace Combat
         bool IsNotOnCastPos(SkillModel _skillModel)
         {
             GameObject charGO = CharService.Instance.GetCharCtrlWithCharID(_skillModel.charID).gameObject;
-            Debug.Log("charName"+ _skillModel.charName + _skillModel.charID);    
+           // Debug.Log("charName"+ _skillModel.charName + _skillModel.charID);    
             int pos = GridService.Instance.GetDyna4GO(charGO).currentPos;
             // Debug.Log("Position in" + pos);
 

@@ -154,7 +154,7 @@ MonoBehaviour:
     - statValue: 11
       statChance: 11
     - statValue: 12
-      statChance: 100
+      statChance: 12
   - attribName: 7
     allStatsNChances: []
   - attribName: 8

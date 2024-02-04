@@ -88,8 +88,8 @@ MonoBehaviour:
     maxLimit: 12
     isClamped: 0
   - AttribName: 6
-    currValue: 5
-    baseValue: 5
+    currValue: 4
+    baseValue: 4
     desc: Main determinant for turn order. Increases chance to keep action after
       using Move.
     minLimit: 0

@@ -41,7 +41,7 @@ namespace Combat
         public virtual void  SkillInit(SkillController1 skillController) 
         {
             SkillDataSO skillDataSO = SkillService.Instance.GetSkillSO(charName);
-            Debug.Log("SKILLNAME........" + skillName);
+           // Debug.Log("SKILLNAME........" + skillName);
 
             this.skillController = skillController; 
             charController = skillController.GetComponent<CharController>();

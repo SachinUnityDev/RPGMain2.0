@@ -148,7 +148,7 @@ namespace Combat
             Vector3 END = new Vector3(0, strikerTransform.position.y, strikerTransform.position.z);
             Vector3 START = new Vector3(strikerTransform.position.x, strikerTransform.position.y
                                     , strikerTransform.position.z);
-            Debug.Log("END " + END + " START POS " + startPos);
+          //  Debug.Log("END " + END + " START POS " + startPos);
             meleeSeq
                 .AppendCallback(() => CharService.Instance.ToggleCharColliders(targetTransform.gameObject, false))
                 //.AppendCallback(() => CharService.Instance.ToggleCharColliders(strikerTransform.gameObject, false))
@@ -373,8 +373,8 @@ namespace Combat
 
         void ToggleSprite(Transform transform, bool transPoseON)   // to accomodate for once extra transition POSE 
         {
-            Debug.Log("Ranged Strike" + strikerTransform.GetChild(0).gameObject.activeInHierarchy
-                + "GAMEPBJECT" + strikerTransform.name);
+            //Debug.Log("Ranged Strike" + strikerTransform.GetChild(0).gameObject.activeInHierarchy
+            //    + "GAMEPBJECT" + strikerTransform.name);
            // bool Status = strikerTransform.GetChild(0).gameObject.activeInHierarchy;
          //   if (lastStatus == Status) return;
             if (transPoseON)

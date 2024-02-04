@@ -45,7 +45,7 @@ namespace Combat
                 if (_OnSkillApply == null || !_OnSkillApply.GetInvocationList().Contains(value))
                 {                    
                     _OnSkillApply += value;
-                    Debug.Log("skill apply >>" + _OnSkillApply.GetInvocationList().Length);
+                   // Debug.Log("skill apply >>" + _OnSkillApply.GetInvocationList().Length);
                 }
                 else
                 {
@@ -177,7 +177,7 @@ namespace Combat
             CombatEventService.Instance.OnSOT += SetDefaultSkillForChar;
             CombatEventService.Instance.OnCharOnTurnSet += InitEnemySkillSelection; 
             CombatEventService.Instance.OnTargetClicked += TargetIsSelected;
-            PostSkillApply += GridService.Instance.ClearOldTargets;// to be decided later to DEL or MOVE 
+            PostSkillApply += GridService.Instance.ClearOldTargetsOnGrid;// to be decided later to DEL or MOVE 
             CombatEventService.Instance.OnCharOnTurnSet += PopulateSkillTargets;
 
         }
@@ -279,7 +279,7 @@ namespace Combat
             }
             ClearPrevData();
 
-            Debug.Log("INIT SKILL CONTROLLER >>>>>>>>>>>>");
+            //Debug.Log("INIT SKILL CONTROLLER >>>>>>>>>>>>");
             currSkillController = CombatService.Instance.currCharOnTurn
                                     .gameObject.GetComponent<SkillController1>();
      
@@ -301,9 +301,7 @@ namespace Combat
         }
 
         public void TargetIsSelected(DynamicPosData target, CellPosData cellPosData = null)
-        {
-            // FOCUS CHECK TO BE INCORPORPORATED HERE 
-            
+        {            
             if (CombatService.Instance.combatState != CombatState.INCombat_InSkillSelected)
             {
                 Debug.Log("Combat State not in skill selected"); return;
@@ -349,7 +347,8 @@ namespace Combat
             PreSkillApply?.Invoke();
             SkillFXRemove?.Invoke();
             _OnSkillApply.Invoke();
-            On_PostSkillApply();
+            PostSkillApply?.Invoke();
+            Cleartargets();
         }
 
         public void On_SkillUsed(SkillEventData skillEventData)
@@ -357,13 +356,13 @@ namespace Combat
             Debug.Log("SKILL USED >>>>>" + skillEventData.skillModel.skillName); 
             OnSkillUsed?.Invoke(skillEventData);
         }
-        void On_PostSkillApply()
+        void Cleartargets()
         {
             // char Death update here 
            // CharService.Instance.UpdateOnDeath();// EOt to Manage
-            GridService.Instance.ClearOldTargets();
+            GridService.Instance.ClearOldTargetsOnGrid();
             CombatService.Instance.combatState = CombatState.INCombat_normal;
-            PostSkillApply?.Invoke();
+            
         }
         public void OnAITargetSelected(SkillModel skillModel)
         {
@@ -384,11 +383,10 @@ namespace Combat
             SkillFXRemove?.Invoke();
 
             Sequence eventSeq = DOTween.Sequence();
-
             eventSeq
                 .AppendCallback(() => _OnSkillApply?.Invoke())
-                //.AppendInterval(2)
-                .AppendCallback(On_PostSkillApply)
+                .AppendInterval(2)
+                .AppendCallback(()=>PostSkillApply?.Invoke())
                 ;
             eventSeq.Play(); 
         }
@@ -419,7 +417,7 @@ namespace Combat
         public void ClearPrevSkillData()
         {
             ClearPrevData();
-            GridService.Instance.ClearOldTargets();          
+            GridService.Instance.ClearOldTargetsOnGrid();          
         }
         public void DeSelectSkill()
         {
@@ -481,7 +479,7 @@ namespace Combat
                 bool hasteChk = false;
                 if (skillModel.skillInclination == SkillInclination.Move && !ignoreHasteChk)
                     hasteChk = HasteChk(charController);
-               
+
                 // AP UPDATES 
                 if (hasteChk) // if haste check /Enemies get a extra AP
                     combatController.actionPts++;
@@ -491,7 +489,7 @@ namespace Combat
                currSkillController.UpdateAllSkillState();
             }else if (charController.charModel.charMode == CharMode.Enemy) // no SkillAvailable
             {
-                Debug.LogError("TURN MISSED" + charController.charModel.charName); 
+               // Debug.LogError("TURN MISSED" + charController.charModel.charName); 
                 Move2Nextturn();
                 return; 
             }
@@ -511,8 +509,6 @@ namespace Combat
         public void Move2Nextturn()
         {
             CombatEventService.Instance.On_EOT();
-
-
             Sequence PauseSeq = DOTween.Sequence();
 
             PauseSeq.AppendInterval(1f)
@@ -523,13 +519,6 @@ namespace Combat
             PauseSeq.Play();
            
         }
-        public void PerkUnLock(PerkNames _perkName, GameObject btn)
-        {       
-           // shifted to the skillController    
-                         
-               
-        }   
-
         #endregion
         #region GETTERS and SETTERS
 
@@ -677,7 +666,7 @@ namespace Combat
             }
            
             ClearPrevData();
-            On_PostSkillApply(); // move to the next turn
+            Cleartargets(); // move to the next turn
             DeSelectSkill();
         }
 

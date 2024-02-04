@@ -410,13 +410,13 @@ namespace Common
             if (GameService.Instance.gameModel.gameState == GameState.InCombat)
             {
                 turn = CombatService.Instance.currentTurn;
-                Debug.Log("attrib Change for  " + gameObject.name);
-                Debug.Log("Attrib CHANGE Cause " + causeType + "causeNAME "+ CauseName + " causebyCharID " + causeByCharID + " Stat " + attribName + " value " + value);
+                //Debug.Log("attrib Change for  " + gameObject.name);
+                //Debug.Log("Attrib CHANGE Cause " + causeType + "causeNAME "+ CauseName + " causebyCharID " + causeByCharID + " Stat " + attribName + " value " + value);
                 Vector3 fwd = Vector3.zero;
                 dyna = GridService.Instance.GetDyna4GO(gameObject);
                 if (dyna == null)
                 {
-                    Debug.Log("ATTEMPTED change in stat" + causeType + "Name" + causeByCharID + "StatName" + attribName);
+                   // Debug.Log("ATTEMPTED change in stat" + causeType + "Name" + causeByCharID + "StatName" + attribName);
                     return null;
                 }
             }

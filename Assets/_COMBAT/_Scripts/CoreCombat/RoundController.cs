@@ -24,7 +24,7 @@ namespace Combat
         public List<CharController> charTurnOrder = new List<CharController>();
         
         
-        List<AttribName> StatOrder = new List<AttribName>() { AttribName.haste, AttribName.focus, AttribName.morale, AttribName.luck };
+        
 
         private void Start()
         {
@@ -55,10 +55,11 @@ namespace Combat
                     CombatService.Instance.combatState == CombatState.INCombat_InSkillSelected)
             {
                 index++;
-                Debug.Log("CHAR INCR" + index); 
+               
                 charCount = charTurnOrder.Count;
                 if (index < charCount && index > -1)
-                {                    
+                {
+                    Debug.Log("TURN " + index + "Char ID" + charTurnOrder[index].charModel.charID); 
                     CombatService.Instance.currCharOnTurn = charTurnOrder[index];                  
                     SetAP(charTurnOrder[index]);
                     CombatService.Instance.currentTurn = index;

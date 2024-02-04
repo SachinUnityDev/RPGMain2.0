@@ -77,12 +77,12 @@ namespace Combat
           //  CombatEventService.Instance.OnCombatInit += GridInit;
            // CombatEventService.Instance.OnTargetClicked += GridUpdateOnTargetSelected;
            // CombatEventService.Instance.OnCharDeath += UpdateGridOnCharDeath;
-            CombatEventService.Instance.OnEOT +=  ClearOldTargets;
+            CombatEventService.Instance.OnEOT +=  ClearOldTargetsOnGrid;
         }
         private void OnDisable()
         {
             //CombatEventService.Instance.OnCombatInit -= GridInit;
-            CombatEventService.Instance.OnEOT -= ClearOldTargets;
+            CombatEventService.Instance.OnEOT -= ClearOldTargetsOnGrid;
         }
         public void GridPosInit()
         {
@@ -511,7 +511,7 @@ namespace Combat
           
         }
 
-        public void ClearOldTargets()
+        public void ClearOldTargetsOnGrid()
         {
             allTargetedDyna.Clear();
             gridView.ClearAllTileState();
@@ -524,7 +524,7 @@ namespace Combat
         }
         public void HLTargetTiles(List<CellPosData> allPos)  // cellData mode
         {
-            ClearOldTargets(); 
+            ClearOldTargetsOnGrid(); 
 
             foreach (CellPosData cellPosData in allPos)
             {

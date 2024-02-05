@@ -70,7 +70,7 @@ namespace Common
         public int thirstMod;
 
         [Header("Gewgaw Restrictions")]
-        public bool areGewgawRestrictBypassed = false; 
+        public List<GewgawSlotType> extraSlotTypeAllowed = new List<GewgawSlotType>();
 
         [Header("Experience points")]
         public int mainExp;

@@ -22,14 +22,14 @@ namespace Interactables
     [System.Serializable]
     public class ActiveInvData
     {
-        public CharNames CharName; 
+        public int CharID; 
         public List<Iitems> potionActivInv = new List<Iitems>();
         public List<Iitems> gewgawActivInv = new List<Iitems>();
         public int potionCount; 
         public int gewgawCount;
-        public ActiveInvData(CharNames charName)
+        public ActiveInvData(int charID)
         {
-            CharName = charName;
+            this.CharID = charID;
             potionCount = 0;
             gewgawCount = 0;    
         }
@@ -289,13 +289,13 @@ namespace Interactables
         #endregion
 
         #region  ACTIVE INV POTION  
-        public ActiveInvData GetActiveInvData(CharNames charName)
+        public ActiveInvData GetActiveInvData(int charID)
         {
-            ActiveInvData invData = allActiveInvData.Find(t => t.CharName == charName);
+            ActiveInvData invData = allActiveInvData.Find(t => t.CharID == charID);
             if (invData != null)
                 return invData;
             else
-                Debug.Log("Potion Active Inv Data Not found" + charName);
+                Debug.Log("Active Inv Data Not found" + charID);
             return null;
         }
 
@@ -304,9 +304,9 @@ namespace Interactables
                                                                   // SAVE and LOAD Active slot here
         {
             CharController charController = InvService.Instance.charSelectController;
-            CharNames charName = charController.charModel.charName;
+            int charID = charController.charModel.charID;
 
-            ActiveInvData activeInvData = allActiveInvData.Find(t => t.CharName == charName);
+            ActiveInvData activeInvData = allActiveInvData.Find(t => t.CharID == charID);
             if (activeInvData != null)
             {
                 activeInvData.potionActivInv.Add(item);
@@ -314,7 +314,7 @@ namespace Interactables
             }
             else
             {
-                ActiveInvData activeInvDataNew = new ActiveInvData(charName);
+                ActiveInvData activeInvDataNew = new ActiveInvData(charID);
                 activeInvDataNew.potionActivInv.Add(item);
                 activeInvDataNew.potionCount++;
                 allActiveInvData.Add(activeInvDataNew);
@@ -340,9 +340,9 @@ namespace Interactables
         public bool RemoveItemFromPotionActInv(Iitems Item)
         {
             CharController charController = InvService.Instance.charSelectController;
-            CharNames charName = charController.charModel.charName;
+            int charID = charController.charModel.charID;
 
-            ActiveInvData activeInvData = allActiveInvData.Find(t => t.CharName == charName);
+            ActiveInvData activeInvData = allActiveInvData.Find(t => t.CharID == charID);
             if (activeInvData != null)
             {
                 activeInvData.potionActivInv.Remove(Item);
@@ -365,17 +365,20 @@ namespace Interactables
                                                                    // SAVE and LOAD Active slot here
         {
             CharController charController = InvService.Instance.charSelectController;
-            CharNames charName = charController.charModel.charName;
+            int charID = charController.charModel.charID;
 
-            int index = allActiveInvData.FindIndex(t => t.CharName == charName);
+            int index = allActiveInvData.FindIndex(t => t.CharID == charID);
             if (index != -1)
             {
                 allActiveInvData[index].gewgawActivInv.Add(item);
+                allActiveInvData[index].gewgawCount++;
             }
             else
             {
-                ActiveInvData activeInvDataNew = new ActiveInvData(charName);
+                ActiveInvData activeInvDataNew = new ActiveInvData(charID);
                 activeInvDataNew.gewgawActivInv.Add(item);
+                activeInvDataNew.gewgawCount++;
+
                 allActiveInvData.Add(activeInvDataNew);
             }
         }
@@ -383,9 +386,9 @@ namespace Interactables
         {
             CharController charController = InvService.Instance.charSelectController;
 
-            CharNames charName = charController.charModel.charName;
+            int charID = charController.charModel.charID;
 
-            ActiveInvData activeInvData = allActiveInvData.Find(t => t.CharName == charName);
+            ActiveInvData activeInvData = allActiveInvData.Find(t => t.CharID == charID);
             if (activeInvData != null)
             {
                 activeInvData.gewgawActivInv.Remove(Item);

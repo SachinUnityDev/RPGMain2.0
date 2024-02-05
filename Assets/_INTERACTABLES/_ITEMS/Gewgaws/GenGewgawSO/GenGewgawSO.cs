@@ -1,13 +1,15 @@
+using Common;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
 namespace Interactables
 {
-    
+
     [CreateAssetMenu(fileName = "GenGewgawSO", menuName = "Interactable/GenGewgawSO")]
-    public class GenGewgawSO : ScriptableObject
+    public class GenGewgawSO : ScriptableObject 
     {
         public GenGewgawNames genGewgawName;
         public PrefixNames prefixName;
@@ -84,7 +86,27 @@ namespace Interactables
            finalStr = resStrLS.Substring(0,resStrLS.Length - 2);
             return finalStr; 
         }
-
+        public bool ChkEquipRestriction(CharController charController) // if true then only items can be equip
+        {
+            CharModel charModel = charController.charModel;
+        
+            if (classRestrictions.Count > 0)
+            {
+                ClassType classType = charModel.classType;
+                return classRestrictions.Any(t => t == classType);
+            }
+            if (cultureRestrictions.Count > 0)
+            {
+                CultureType cultType = charModel.cultType;
+                return cultureRestrictions.Any(t => t == cultType);
+            }
+            if (raceRestrictions.Count > 0)
+            {
+                RaceType raceType = charModel.raceType;
+                return raceRestrictions.Any(t => t == raceType);
+            }
+            return false;
+        }
         private void Awake()
         {
             maxInvStackSize = 1;

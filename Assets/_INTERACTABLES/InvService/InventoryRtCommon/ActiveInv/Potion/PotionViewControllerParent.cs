@@ -51,7 +51,7 @@ namespace Interactables
             CharController charController = InvService.Instance.charSelectController;
             if (charController == null) return;
             ActiveInvData activeInvData = InvService.Instance.invMainModel
-                                            .GetActiveInvData(charController.charModel.charName);
+                                            .GetActiveInvData(charController.charModel.charID);
             if (activeInvData == null) return; 
             for (int i = 0; i < activeInvData.potionActivInv.Count; i++)
             {

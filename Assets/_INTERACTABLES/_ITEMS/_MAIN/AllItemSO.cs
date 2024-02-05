@@ -2,17 +2,124 @@ using Common;
 using Interactables;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 [CreateAssetMenu(fileName = "AllItemSO", menuName = "Item Service/AllItemSO")]
 
 public class AllItemSO : ScriptableObject
 {
-    public void IsGewgawSlotAble(CharController charController)
+    public bool IsGewgawEquipable(CharController charController, Iitems item)
+    {
+    
+            if (item.itemType == ItemType.GenGewgaws)
+            {
+                GenGewgawSO genGewgawSO = GetGenGewgawSO((GenGewgawNames)item.itemName);
+                GewgawSlotType slotType = genGewgawSO.gewgawSlotType;
+                return IsClassRaceCultReqMatch(charController, genGewgawSO.classRestrictions, genGewgawSO.cultureRestrictions
+                     , genGewgawSO.raceRestrictions);
+
+            }
+            else if (item.itemType == ItemType.SagaicGewgaws)
+            {
+                SagaicGewgawSO sagaicGewgawSO = GetSagaicGewgawSO((SagaicGewgawNames)item.itemName);
+                return IsClassRaceCultReqMatch(charController, sagaicGewgawSO.classRestrictions, sagaicGewgawSO.cultureRestrictions
+                     , sagaicGewgawSO.raceRestrictions);
+            }
+            else if (item.itemType == ItemType.PoeticGewgaws)
+            {
+                PoeticGewgawSO poeticGewgawSO = GetPoeticGewgawSO((PoeticGewgawNames)item.itemName);
+                return IsClassRaceCultReqMatch(charController, poeticGewgawSO.classRestrictions, poeticGewgawSO.cultureRestrictions
+                     , poeticGewgawSO.raceRestrictions);
+            }        
+        return false;
+    }
+    bool IsClassRaceCultReqMatch(CharController charController, List<ClassType> classReq, List<CultureType> cultReq, List<RaceType> raceReq)
     {
 
+        if (classReq.Count > 0)
+        {
+            ClassType classType = charController.charModel.classType;
+            if (classReq.Any(t => t == classType))
+                return true;
+            else
+                return false;
+        }
+        else if (cultReq.Count > 0)
+        {
+            CultureType cultType = charController.charModel.cultType;
+            if (cultReq.Any(t => t == cultType))
+                return true;
+            else
+                return false;
+        }
+        else if (raceReq.Count > 0)
+        {
+            RaceType raceType = charController.charModel.raceType;
+            if (raceReq.Any(t => t == raceType))
+                return true;
+            else
+                return false;
+        }
+        return false; 
+    }
+    public int IsSlotRestricted(CharController charController, Iitems item)
+    {
+        GewgawSlotType slotType = GetSlotType(item); 
+        if (!IsSlotUNRetricted(charController, slotType))
+        {
+            ActiveInvData activeInvData = InvService.Instance.invMainModel.GetActiveInvData(charController.charModel.charID);
+            if (activeInvData == null) return -1;
+
+            for (int i = 0; i < activeInvData.gewgawActivInv.Count; i++)
+            {
+                if (GetSlotType(activeInvData.gewgawActivInv[i]) == slotType)// to be fixed
+                    return i; 
+            }            
+        }
+        return -1; 
     }
 
+    public bool IsSlotUNRetricted(CharController charController, GewgawSlotType slotType)
+    {
+        // get other equipped items
+        ActiveInvData activeInvData = InvService.Instance.invMainModel.GetActiveInvData(charController.charModel.charID);
+        if (activeInvData == null) return true; 
+        // slot type count from current Data
+        int currCount = 0; int allowedCount = 1; 
+        foreach (Iitems item in activeInvData.gewgawActivInv)
+        {
+            if(GetSlotType(item) == slotType)
+                currCount++;
+        }
+        charController.charModel.extraSlotTypeAllowed.ForEach(t => { if (t == slotType) allowedCount++; });
+        if (currCount < allowedCount)
+            return true;
+        else return false; 
+    }
+
+    GewgawSlotType GetSlotType(Iitems item)
+    {
+        // get so 
+        if (item.itemType == ItemType.GenGewgaws)
+        {
+            GenGewgawSO genGewgawSO = GetGenGewgawSO((GenGewgawNames)item.itemName);
+            GewgawSlotType slotType = genGewgawSO.gewgawSlotType;
+            return slotType; 
+        }
+        else if (item.itemType == ItemType.SagaicGewgaws)
+        {
+            SagaicGewgawSO sagaicGewgawSO = GetSagaicGewgawSO((SagaicGewgawNames)item.itemName);
+            return sagaicGewgawSO.gewgawSlotType; 
+        }
+        else if (item.itemType == ItemType.PoeticGewgaws)
+        {
+            PoeticGewgawSO poeticGewgawSO = GetPoeticGewgawSO((PoeticGewgawNames)item.itemName);
+            return poeticGewgawSO.gewgawSlotType;   
+        }
+        return 0; 
+    }
 
     #region  ITEM SO REFENCES
     [Header("Item View SO")]

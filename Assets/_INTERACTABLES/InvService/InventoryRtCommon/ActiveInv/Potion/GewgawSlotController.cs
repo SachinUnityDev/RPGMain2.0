@@ -89,22 +89,27 @@ namespace Interactables
             if (!(item.itemType == ItemType.GenGewgaws || item.itemType == ItemType.PoeticGewgaws ||
                 item.itemType == ItemType.SagaicGewgaws || item.itemType == ItemType.RelicGewgaws))
                 return false;
+            if (!ItemService.Instance.allItemSO.IsGewgawEquipable(charController, item)) // if false return
+                return false;
 
-            if(item.itemType == ItemType.PoeticGewgaws)
+            int slotWithSameSlotType = ItemService.Instance.allItemSO.IsSlotRestricted(charController, item);
+            if(slotWithSameSlotType != -1)
             {
-                PoeticGewgawSO poeticSO = ItemService.Instance.allItemSO.GetPoeticGewgawSO((PoeticGewgawNames)item.itemName); 
-                if(!poeticSO.ChkEquipRestriction(charController))
+                if (slotWithSameSlotType == slotID)
+                {
+                    Iitems currItem = ItemsInSlot[0];
+                    RemoveItem();
+                    // add to common inv
+                    InvService.Instance.invMainModel.AddItem2CommInv(currItem);
+                }
+                else
+                {
                     return false;
+                }
             }
-            if (item.itemType == ItemType.SagaicGewgaws)
-            {
-                SagaicGewgawSO sagaicSO = ItemService.Instance.allItemSO.GetSagaicGewgawSO((SagaicGewgawNames)item.itemName);
-                if (!sagaicSO.ChkEquipRestriction(charController))
-                    return false;
-            }
+            
 
-
-            if (ItemsInSlot.Count > 0)
+            if (ItemsInSlot.Count > 0 )
             {
                 Iitems currItem = ItemsInSlot[0];
                 RemoveItem();
@@ -124,6 +129,7 @@ namespace Interactables
             if (item == null) return;
             item.invSlotType = SlotType.GewgawsActiveInv;
             ItemsInSlot.Add(item);
+            
             InvService.Instance.invMainModel.AddItem2GewgawsActInv(item, slotID);
             IEquipAble iequip  = item as IEquipAble;
             if (iequip != null)
@@ -241,4 +247,22 @@ namespace Interactables
         }
     }
 }
+//if (item.itemType == ItemType.GenGewgaws)
+//{
+//    GenGewgawSO genGewgawSO = ItemService.Instance.allItemSO.GetGenGewgawSO((GenGewgawNames)item.itemName);
+//    if (!genGewgawSO.ChkEquipRestriction(charController))
+//        return false;
+//}
+//if (item.itemType == ItemType.PoeticGewgaws)
+//{
+//    PoeticGewgawSO poeticSO = ItemService.Instance.allItemSO.GetPoeticGewgawSO((PoeticGewgawNames)item.itemName); 
+//    if(!poeticSO.ChkEquipRestriction(charController))
+//        return false;
+//}
+//if (item.itemType == ItemType.SagaicGewgaws)
+//{
+//    SagaicGewgawSO sagaicSO = ItemService.Instance.allItemSO.GetSagaicGewgawSO((SagaicGewgawNames)item.itemName);
+//    if (!sagaicSO.ChkEquipRestriction(charController))
+//        return false;
+//}
 

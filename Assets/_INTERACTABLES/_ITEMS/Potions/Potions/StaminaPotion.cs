@@ -31,7 +31,7 @@ namespace Interactables
         }
         public override void PotionApplyFX()
         {
-            PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionNames)itemName);
+            PotionSO potionSO = ItemService.Instance.allItemSO.GetPotionSO((PotionNames)itemName);
             int charID = charController.charModel.charID;
             int castTime = (int)UnityEngine.Random.Range(potionSO.minCastTime, potionSO.maxCastTime);
 

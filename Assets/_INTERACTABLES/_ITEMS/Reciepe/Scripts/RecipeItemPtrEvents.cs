@@ -25,33 +25,33 @@ namespace Interactables
                     case ItemType.None:
                         break;
                     case ItemType.Potions:
-                        PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionNames)item.itemName);
+                        PotionSO potionSO = ItemService.Instance.allItemSO.GetPotionSO((PotionNames)item.itemName);
                         transform.GetComponent<Image>().sprite = potionSO.iconSprite;
                         itemName.text = potionSO.potionName.ToString().CreateSpace();
                         break;
                     case ItemType.GenGewgaws:
-                        GenGewgawSO genSO = ItemService.Instance.GetGenGewgawSO((GenGewgawNames)item.itemName);
+                        GenGewgawSO genSO = ItemService.Instance.allItemSO.GetGenGewgawSO((GenGewgawNames)item.itemName);
                         transform.GetComponent<Image>().sprite = genSO.iconSprite;
                         itemName.text = genSO.genGewgawName.ToString().CreateSpace();
                         break;
                     case ItemType.Herbs:
-                        HerbSO herbSO = ItemService.Instance.GetHerbSO((HerbNames)item.itemName);
+                        HerbSO herbSO = ItemService.Instance.allItemSO.GetHerbSO((HerbNames)item.itemName);
                         transform.GetComponent<Image>().sprite = herbSO.iconSprite;
                         itemName.text = herbSO.herbName.ToString().CreateSpace();
                         break;
                     case ItemType.Foods:
-                        FoodSO foodSO = ItemService.Instance.GetFoodSO((FoodNames)item.itemName);
+                        FoodSO foodSO = ItemService.Instance.allItemSO.GetFoodSO((FoodNames)item.itemName);
                         transform.GetComponent<Image>().sprite = foodSO.iconSprite;
                         itemName.text = foodSO.foodName.ToString().CreateSpace();
                         break;
                     case ItemType.Fruits:
-                        FruitSO fruitSO = ItemService.Instance.GetFruitSO((FruitNames)item.itemName);
+                        FruitSO fruitSO = ItemService.Instance.allItemSO.GetFruitSO((FruitNames)item.itemName);
                         transform.GetComponent<Image>().sprite = fruitSO.iconSprite;
                         itemName.text = fruitSO.fruitName.ToString().CreateSpace();
                         break;
                     case ItemType.Ingredients:
 
-                        IngredSO ingredSO = ItemService.Instance.GetIngredSO((IngredNames)item.itemName);
+                        IngredSO ingredSO = ItemService.Instance.allItemSO.GetIngredSO((IngredNames)item.itemName);
                         transform.GetComponent<Image>().sprite = ingredSO.iconSprite;
                         itemName.text = ingredSO.ingredName.ToString().CreateSpace();
                         break;
@@ -60,12 +60,12 @@ namespace Interactables
                     case ItemType.Scrolls:
                         break;
                     case ItemType.TradeGoods:
-                        TGSO tgSO = ItemService.Instance.GetTradeGoodsSO((TGNames)item.itemName);
+                        TGSO tgSO = ItemService.Instance.allItemSO.GetTradeGoodsSO((TGNames)item.itemName);
                         transform.GetComponent<Image>().sprite = tgSO.iconSprite;
                         itemName.text = tgSO.tgName.ToString().CreateSpace();
                         break;
                     case ItemType.Tools:
-                        ToolsSO toolSO = ItemService.Instance.GetToolSO((ToolNames)item.itemName);
+                        ToolsSO toolSO = ItemService.Instance.allItemSO.GetToolSO((ToolNames)item.itemName);
                         transform.GetComponent<Image>().sprite = toolSO.iconSprite;
                         itemName.text = toolSO.toolName.ToString().CreateSpace();
                         break;
@@ -74,17 +74,17 @@ namespace Interactables
                     case ItemType.Soups:
                         break;
                     case ItemType.Gems:
-                        GemSO gemSO = ItemService.Instance.GetGemSO((GemNames)item.itemName);
+                        GemSO gemSO = ItemService.Instance.allItemSO.GetGemSO((GemNames)item.itemName);
                         transform.GetComponent<Image>().sprite = gemSO.iconSprite;
                         itemName.text = gemSO.gemName.ToString().CreateSpace();
                         break;
                     case ItemType.Alcohol:
-                        AlcoholSO alcoholSO = ItemService.Instance.GetAlcoholSO((AlcoholNames)item.itemName);
+                        AlcoholSO alcoholSO = ItemService.Instance.allItemSO.GetAlcoholSO((AlcoholNames)item.itemName);
                         transform.GetComponent<Image>().sprite = alcoholSO.iconSprite;
                         itemName.text = alcoholSO.alcoholName.ToString().CreateSpace();
                         break;
                     case ItemType.Meals:
-                        MealsSO mealSO = ItemService.Instance.GetMealSO((MealNames)item.itemName);
+                        MealsSO mealSO = ItemService.Instance.allItemSO.GetMealSO((MealNames)item.itemName);
                         transform.GetComponent<Image>().sprite = mealSO.iconSprite;
                         itemName.text = mealSO.mealName.ToString().CreateSpace();
                         break;

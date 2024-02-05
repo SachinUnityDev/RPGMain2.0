@@ -55,36 +55,36 @@ namespace Interactables
             }
         }
 
-        bool SlotRuleCheck()
-        {
+        //bool SlotRuleCheck()
+        //{
 
-            return false; 
-        }
-        GewgawSlotType GetSlotType(Iitems item)
-        {
-            if (item.itemType == ItemType.GenGewgaws)
-            {
-                GenGewgawSO gengewgawSO =
-                    ItemService.Instance.allItemSO.GetGenGewgawSO((GenGewgawNames)item.itemName);
-                GewgawSlotType slotType = gengewgawSO.gewgawSlotType;
-                return slotType;
-            }
-            if(item.itemType == ItemType.SagaicGewgaws)
-            {
-                SagaicGewgawSO sagaicSO = 
-                    ItemService.Instance.allItemSO.GetSagaicGewgawSO((SagaicGewgawNames)item.itemName);
-                GewgawSlotType slotType = sagaicSO.gewgawSlotType;
-                return slotType;
-            }
-            if (item.itemType == ItemType.PoeticGewgaws)
-            {
-                PoeticGewgawSO poeticSO =
-                    ItemService.Instance.allItemSO.GetPoeticGewgawSO((PoeticGewgawNames)(item.itemName));                    
-                GewgawSlotType slotType = poeticSO.gewgawSlotType;
-                return slotType;
-            }
-            return 0; 
-        }
+        //    return false; 
+        //}
+        //GewgawSlotType GetSlotType(Iitems item)
+        //{
+        //    if (item.itemType == ItemType.GenGewgaws)
+        //    {
+        //        GenGewgawSO gengewgawSO =
+        //            ItemService.Instance.allItemSO.GetGenGewgawSO((GenGewgawNames)item.itemName);
+        //        GewgawSlotType slotType = gengewgawSO.gewgawSlotType;
+        //        return slotType;
+        //    }
+        //    if(item.itemType == ItemType.SagaicGewgaws)
+        //    {
+        //        SagaicGewgawSO sagaicSO = 
+        //            ItemService.Instance.allItemSO.GetSagaicGewgawSO((SagaicGewgawNames)item.itemName);
+        //        GewgawSlotType slotType = sagaicSO.gewgawSlotType;
+        //        return slotType;
+        //    }
+        //    if (item.itemType == ItemType.PoeticGewgaws)
+        //    {
+        //        PoeticGewgawSO poeticSO =
+        //            ItemService.Instance.allItemSO.GetPoeticGewgawSO((PoeticGewgawNames)(item.itemName));                    
+        //        GewgawSlotType slotType = poeticSO.gewgawSlotType;
+        //        return slotType;
+        //    }
+        //    return 0; 
+        //}
 
         void LoadActiveInvSlots(CharModel charModel)
         {
@@ -92,7 +92,7 @@ namespace Interactables
             CharController charController = InvService.Instance.charSelectController;
             if (charController == null) return;
             ActiveInvData activeInvData = InvService.Instance.invMainModel
-                                            .GetActiveInvData(charController.charModel.charName);
+                                            .GetActiveInvData(charController.charModel.charID);
             if (activeInvData == null) return;
             for (int i = 0; i < activeInvData.gewgawActivInv.Count; i++)
             {
@@ -102,25 +102,41 @@ namespace Interactables
         }
 
         #region EQUIP TO VIEW from selection MENU
-        public bool Equip2GewgawSlot(Iitems item)
+        public bool Equip2GewgawSlot(Iitems item)  // right click 
         {
             // try equip to slot 1 then 2 
             // and if both fails then remove from slot 1 
-            
-                slot1result = false; slot2result = false;
+            CharController charController = InvService.Instance.charSelectController;
+
+            if (!(item.itemType == ItemType.GenGewgaws || item.itemType == ItemType.PoeticGewgaws ||
+             item.itemType == ItemType.SagaicGewgaws || item.itemType == ItemType.RelicGewgaws))
+                return false;
+
+            if(!ItemService.Instance.allItemSO.IsGewgawEquipable(charController, item)) // if false return
+                return false;
+            int slotWithSameSlotType = ItemService.Instance.allItemSO.IsSlotRestricted(charController, item); 
+            if (slotWithSameSlotType != -1)
+            {
+                Swap(item, slotWithSameSlotType);
+                return true;
+            }
+
+            slot1result = false; slot2result = false;
                 slot3result =false;
                 slot1result = AddItemtoActiveSlotView(item, 0);
                 if (!slot1result) // try slot 2 
                 {
                     slot2result = AddItemtoActiveSlotView(item, 1);
-                if (slot2result)
-                    return true;
-                else
-                    slot3result = AddItemtoActiveSlotView(item, 2); 
+                    if (slot2result)
+                        return true;
+                    else
+                        slot3result = AddItemtoActiveSlotView(item, 2); 
+
                     if(slot3result)
                         return true;
                     else
-                        return false;
+                        Swap(item, 0);
+                        return true;
                 }
                 return true;            
         }
@@ -137,7 +153,17 @@ namespace Interactables
             }
             return false;
         }
-
+        void Swap(Iitems itemAdd, int slotID)
+        {
+            Transform child = transform.GetChild(slotID);
+            iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();            
+            if(iSlotable.ItemsInSlot[0] != null)
+            {
+                InvService.Instance.invMainModel.AddItem2CommInv(iSlotable.ItemsInSlot[0]);
+                iSlotable.RemoveItem(); 
+            }
+            AddItemtoActiveSlotView(itemAdd, slotID); 
+        }
 
         void ClearInv()
         {
@@ -223,3 +249,21 @@ namespace Interactables
 
 
 }
+//if (item.itemType == ItemType.GenGewgaws)
+//{
+//    GenGewgawSO genGewgawSO = ItemService.Instance.allItemSO.GetGenGewgawSO((GenGewgawNames)item.itemName);
+//    if (!genGewgawSO.ChkEquipRestriction(charController))
+//        return false;
+//}
+//if (item.itemType == ItemType.PoeticGewgaws)
+//{
+//    PoeticGewgawSO poeticSO = ItemService.Instance.allItemSO.GetPoeticGewgawSO((PoeticGewgawNames)item.itemName);
+//    if (!poeticSO.ChkEquipRestriction(charController))
+//        return false;
+//}
+//if (item.itemType == ItemType.SagaicGewgaws)
+//{
+//    SagaicGewgawSO sagaicSO = ItemService.Instance.allItemSO.GetSagaicGewgawSO((SagaicGewgawNames)item.itemName);
+//    if (!sagaicSO.ChkEquipRestriction(charController))
+//        return false;
+//}

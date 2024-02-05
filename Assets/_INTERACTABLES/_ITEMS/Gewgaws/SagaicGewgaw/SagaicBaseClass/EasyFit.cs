@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class EasyFit : SagaicGewgawBase, Iitems
+    public class EasyFit : SagaicGewgawBase, Iitems, IEquipAble
     {
         public override SagaicGewgawNames sagaicGewgawName => SagaicGewgawNames.EasyFit;
 
@@ -122,6 +122,18 @@ namespace Interactables
         public void OnHoverItem()
         {
            
+        }
+
+        public void ApplyEquipableFX(CharController charController)
+        {
+            this.charController= charController;
+            EquipGewgawSagaic(); 
+        }
+
+        public void RemoveEquipableFX()
+        {
+            UnEquipSagaic();
+            charController = null; 
         }
     }
 }

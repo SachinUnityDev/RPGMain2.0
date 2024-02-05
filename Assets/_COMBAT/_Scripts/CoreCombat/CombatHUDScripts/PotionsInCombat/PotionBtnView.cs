@@ -48,8 +48,8 @@ namespace Combat
         }
         void FillPotions()
         {
-            CharNames charName = charController.charModel.charName; 
-            ActiveInvData activeInvData = InvService.Instance.invMainModel.GetActiveInvData(charName); 
+            int  charID = charController.charModel.charID; 
+            ActiveInvData activeInvData = InvService.Instance.invMainModel.GetActiveInvData(charID); 
            if(activeInvData != null) 
             for (int i = 0; i < container.childCount;  i++)
             {

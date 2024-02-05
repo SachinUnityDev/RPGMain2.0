@@ -476,7 +476,7 @@ namespace Interactables
                 return false;
             return true;
         }
-        public void Equip()
+        public void Equip() // on right click opts
         {
             IEquipAble iEquip = ItemsInSlot[0] as IEquipAble;
            
@@ -505,7 +505,7 @@ namespace Interactables
                 {// equiped to a slot 
                     iEquip.ApplyEquipableFX(InvService.Instance.charSelectController);
                     RemoveItem();
-                }
+                }                
             }
 
 

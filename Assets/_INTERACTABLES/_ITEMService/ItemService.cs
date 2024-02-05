@@ -571,11 +571,11 @@ namespace Interactables
                // InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.Hoof,
                //CauseType.Items, 4);
 
-                InitItemToInv(SlotType.CommonInv, ItemType.Herbs, (int)HerbNames.Aloe,
-                    CauseType.Items, 2);
+                //InitItemToInv(SlotType.CommonInv, ItemType.Herbs, (int)HerbNames.Aloe,
+                //    CauseType.Items, 2);
 
-                InitItemToInv(SlotType.CommonInv, ItemType.Herbs, (int)HerbNames.Echinacea,
-                    CauseType.Items, 2);
+                //InitItemToInv(SlotType.CommonInv, ItemType.Herbs, (int)HerbNames.Echinacea,
+                //    CauseType.Items, 2);
 
                 InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.LionessPelt,
                    CauseType.Items, 2); InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.NyalaTrophy,
@@ -584,7 +584,8 @@ namespace Interactables
                    CauseType.Items, 2);
                 InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.ScarfOfCourage,
                         CauseType.Items, 2, GenGewgawQ.Folkloric);
-
+                InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.RubyRing,
+                        CauseType.Items, 2, GenGewgawQ.Folkloric);
                 InitItemToInv(SlotType.CommonInv, ItemType.PoeticGewgaws, (int)PoeticGewgawNames.NecklaceFirstHuntersArsenal,
                         CauseType.Items, 2);
                 InitItemToInv(SlotType.CommonInv, ItemType.PoeticGewgaws, (int)PoeticGewgawNames.BeltPoachersToolset,

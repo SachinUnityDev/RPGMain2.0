@@ -31,7 +31,7 @@ namespace Interactables
             charController.ChangeAttrib(CauseType.Potions, (int)potionName, charID
                                         , AttribName.vigor, +1);  // Not a buff 
 
-            PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionNames)itemName);
+            PotionSO potionSO = ItemService.Instance.allItemSO.GetPotionSO((PotionNames)itemName);
             int castTime = (int)UnityEngine.Random.Range(potionSO.minCastTime, potionSO.maxCastTime);
 
             int buffID = -1;

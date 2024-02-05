@@ -64,7 +64,7 @@ namespace Interactables
                     if (count > 0)
                     {
                         CostData costData = 
-                        ItemService.Instance.GetCostData(item.itemType, item.itemName);
+                        ItemService.Instance.allItemSO.GetCostData(item.itemType, item.itemName);
                         // add to play Eco and dispose item
                         int silver = (costData.baseCost.silver / 3) * count; 
                         int bronze = (costData.baseCost.bronze / 3) * count;

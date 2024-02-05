@@ -57,7 +57,7 @@ namespace Town
         {
             this.brewSlotView = brewSlotView; 
             alcoholName = brewSlotView.alcoholName; 
-            alcoholSO = ItemService.Instance.GetAlcoholSO(alcoholName);
+            alcoholSO = ItemService.Instance.allItemSO.GetAlcoholSO(alcoholName);
 
             WIPImg.gameObject.SetActive(true);
             fillImg.gameObject.SetActive(true);

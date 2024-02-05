@@ -33,7 +33,7 @@ public class BrewSlotView : MonoBehaviour
     public void InitBrewSlot(AlcoholNames alcoholName, BrewView brewView)
     {
         this.alcoholName= alcoholName;
-        alcoholSO = ItemService.Instance.GetAlcoholSO(alcoholName);
+        alcoholSO = ItemService.Instance.allItemSO.GetAlcoholSO(alcoholName);
         ItemData itemData = new ItemData(ItemType.Alcohol, (int)alcoholName);
         item = ItemService.Instance.GetItemBase(itemData); 
         this.brewView = brewView;

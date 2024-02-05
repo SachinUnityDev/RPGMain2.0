@@ -57,7 +57,7 @@ namespace Interactables
                 return; 
             }
             GemSO gemSO =
-                     ItemService.Instance.GetGemSO(charge.gemName);
+                     ItemService.Instance.allItemSO.GetGemSO(charge.gemName);
             gemImg.gameObject.SetActive(true);
             gemImg.sprite = gemSO.iconSprite; 
         }

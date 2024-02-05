@@ -181,7 +181,7 @@ namespace Common
             foreach (Iitems item in tradeModel.allSelectItems)
             {
                 CostData costData =
-                        ItemService.Instance.GetCostData(item.itemType, item.itemName);                
+                        ItemService.Instance.allItemSO.GetCostData(item.itemType, item.itemName);                
                 int bronzifiedCurr = costData.baseCost.BronzifyCurrency() / 2; // 1/2 sell factor
                 item.currency = new Currency(0, bronzifiedCurr); 
                 val += bronzifiedCurr;

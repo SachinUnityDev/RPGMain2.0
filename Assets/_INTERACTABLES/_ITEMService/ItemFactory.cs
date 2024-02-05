@@ -133,7 +133,7 @@ namespace Interactables
         public Iitems GetNewGenGewgaw(GenGewgawNames genGewgawNames, GenGewgawQ genGewgawQ)
         {
             Iitems itemGengewgaw = GetGenGewgaws(genGewgawNames, genGewgawQ);
-            GenGewgawSO genGewgawSO = ItemService.Instance.GetGenGewgawSO(genGewgawNames);
+            GenGewgawSO genGewgawSO = ItemService.Instance.allItemSO.GetGenGewgawSO(genGewgawNames);
             GenGewgawBase genGewgawBase = itemGengewgaw as GenGewgawBase;
 
             genGewgawBase.prefixBase = GetPrefixBase(genGewgawSO.prefixName); 
@@ -151,7 +151,7 @@ namespace Interactables
             {
                 case ItemType.Potions:
                     Iitems itemPotion = GetNewPotionItem((PotionNames)itemName);
-                    PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionNames)itemName);                    
+                    PotionSO potionSO = ItemService.Instance.allItemSO.GetPotionSO((PotionNames)itemName);                    
                     itemPotion.InitItem(itemId, potionSO.maxInvStackSize);
                     ItemService.Instance.allItemsInGame.Add(itemPotion);    
                     return itemPotion;
@@ -162,25 +162,25 @@ namespace Interactables
                 //    //return itemGengewgaw;
                 case ItemType.Herbs:
                     Iitems itemHerbs = GetNewHerbItem((HerbNames)itemName);
-                    HerbSO herbSO = ItemService.Instance.GetHerbSO((HerbNames)itemName);              
+                    HerbSO herbSO = ItemService.Instance.allItemSO.GetHerbSO((HerbNames)itemName);              
                     itemHerbs.InitItem(itemId, herbSO.maxInvStackSize);
                     ItemService.Instance.allItemsInGame.Add(itemHerbs);
                     return itemHerbs;
                 case ItemType.Foods:
                     Iitems itemFoods = GetNewFoodItem((FoodNames)itemName);
-                    FoodSO foodSO = ItemService.Instance.GetFoodSO((FoodNames)itemName);
+                    FoodSO foodSO = ItemService.Instance.allItemSO.GetFoodSO((FoodNames)itemName);
                     itemFoods.InitItem(itemId, foodSO.maxInvStackSize);
                     ItemService.Instance.allItemsInGame.Add(itemFoods);
                     return itemFoods;
                 case ItemType.Fruits:
                     Iitems itemFruits = GetNewFruitItem((FruitNames)itemName);
-                    FruitSO fruitSO = ItemService.Instance.GetFruitSO((FruitNames)itemName);
+                    FruitSO fruitSO = ItemService.Instance.allItemSO.GetFruitSO((FruitNames)itemName);
                     itemFruits.InitItem(itemId, fruitSO.maxInvStackSize);
                     ItemService.Instance.allItemsInGame.Add(itemFruits);
                     return itemFruits;
                 case ItemType.Ingredients:
                     Iitems itemIngred = GetNewIngredItem((IngredNames)itemName);
-                    IngredSO ingredSO = ItemService.Instance.GetIngredSO((IngredNames)itemName);
+                    IngredSO ingredSO = ItemService.Instance.allItemSO.GetIngredSO((IngredNames)itemName);
                     itemIngred.InitItem(itemId, ingredSO.maxInvStackSize);
                     ItemService.Instance.allItemsInGame.Add(itemIngred);
                     return itemIngred;
@@ -188,21 +188,21 @@ namespace Interactables
                     break;
                 case ItemType.Scrolls:
                     Iitems itemScrolls = GetNewScrollItem((ScrollNames)itemName);
-                    ScrollSO scrollSO = ItemService.Instance.GetScrollSO((ScrollNames)itemName);
+                    ScrollSO scrollSO = ItemService.Instance.allItemSO.GetScrollSO((ScrollNames)itemName);
                     itemScrolls.InitItem(itemId, scrollSO.maxInvStackSize);
                     ItemService.Instance.allItemsInGame.Add(itemScrolls);
                     return itemScrolls;
                     
                 case ItemType.TradeGoods:
                     Iitems itemTg = GetNewTgItem((TGNames)itemName);
-                    TGSO tgSO = ItemService.Instance.GetTradeGoodsSO((TGNames)itemName);
+                    TGSO tgSO = ItemService.Instance.allItemSO.GetTradeGoodsSO((TGNames)itemName);
                     itemTg.InitItem(itemId, tgSO.maxInvStackSize);
                     ItemService.Instance.allItemsInGame.Add(itemTg);
                     return itemTg; 
                   
                 case ItemType.Tools:
                     Iitems toolItem = GetNewToolItem((ToolNames)itemName);
-                    ToolsSO toolSO = ItemService.Instance.GetToolSO((ToolNames)itemName);
+                    ToolsSO toolSO = ItemService.Instance.allItemSO.GetToolSO((ToolNames)itemName);
                     toolItem.InitItem(itemId, toolSO.maxInvStackSize);
                     ItemService.Instance.allItemsInGame.Add(toolItem);
                     return toolItem;                    
@@ -212,34 +212,34 @@ namespace Interactables
                     break;
                 case ItemType.Gems:
                     Iitems itemGems = GetNewGemItem((GemNames)itemName);
-                    GemSO gemSO = ItemService.Instance.GetGemSO((GemNames)itemName);
+                    GemSO gemSO = ItemService.Instance.allItemSO.GetGemSO((GemNames)itemName);
                     itemGems.InitItem(itemId, gemSO.maxInvStackSize);
                     ItemService.Instance.allItemsInGame.Add(itemGems);
                     return itemGems;
                 case ItemType.Alcohol:// not in demo 
                     Iitems alcoholItem = GetNewAlcoholItem((AlcoholNames)itemName);
-                    AlcoholSO alcoholSO = ItemService.Instance
+                    AlcoholSO alcoholSO = ItemService.Instance.allItemSO
                                                     .GetAlcoholSO((AlcoholNames)itemName);
                     alcoholItem.InitItem(itemId, alcoholSO.maxInvStackSize);
                     ItemService.Instance.allItemsInGame.Add(alcoholItem);
                     return alcoholItem;
                 case ItemType.Meals:
                     Iitems mealItem = GetNewMealItem((MealNames)itemName);
-                    MealsSO mealSO = ItemService.Instance
+                    MealsSO mealSO = ItemService.Instance.allItemSO
                                                     .GetMealSO((MealNames)itemName);
                     mealItem.InitItem(itemId, mealSO.maxInvStackSize);
                     ItemService.Instance.allItemsInGame.Add(mealItem);
                     return mealItem;
                 case ItemType.SagaicGewgaws:
                     Iitems sagaicGewgaw = GetNewSagaicGewgaw((SagaicGewgawNames)itemName);
-                    SagaicGewgawSO sagaicGewgawSO = ItemService.Instance
+                    SagaicGewgawSO sagaicGewgawSO = ItemService.Instance.allItemSO
                                                     .GetSagaicGewgawSO((SagaicGewgawNames)itemName);
                     sagaicGewgaw.InitItem(itemId, sagaicGewgawSO.maxInvStackSize);
                     ItemService.Instance.allItemsInGame.Add(sagaicGewgaw);
                     return sagaicGewgaw;                    
                 case ItemType.PoeticGewgaws:
                     Iitems poeticGewgaw = GetNewPoeticGewgaw((PoeticGewgawNames)itemName);
-                    PoeticGewgawSO poeticGewgawSO = ItemService.Instance
+                    PoeticGewgawSO poeticGewgawSO = ItemService.Instance.allItemSO
                                                     .GetPoeticGewgawSO((PoeticGewgawNames)itemName);
                     poeticGewgaw.InitItem(itemId, poeticGewgawSO.maxInvStackSize);
                     ItemService.Instance.allItemsInGame.Add(poeticGewgaw);
@@ -248,7 +248,7 @@ namespace Interactables
                     break;
                 case ItemType.LoreBooks:
                     Iitems loreBook = GetNewLoreBookItem((LoreNames)itemName);
-                    LoreBookSO LoreBookSO = ItemService.Instance
+                    LoreBookSO LoreBookSO = ItemService.Instance.allItemSO
                                                     .GetLoreBookSO((LoreNames)itemName);
                     loreBook.InitItem(itemId, LoreBookSO.inventoryStack);
                     ItemService.Instance.allItemsInGame.Add(loreBook);
@@ -307,7 +307,7 @@ namespace Interactables
             {
                 var t = Activator.CreateInstance(genGewgaws) as GenGewgawBase;
                 
-                GenGewgawSO genGewgawSO = ItemService.Instance.GetGenGewgawSO(t.genGewgawNames);                
+                GenGewgawSO genGewgawSO = ItemService.Instance.allItemSO.GetGenGewgawSO(t.genGewgawNames);                
                 SuffixNames suffixName = genGewgawSO.suffixName;
                 PrefixNames prefixName = genGewgawSO.prefixName;
 

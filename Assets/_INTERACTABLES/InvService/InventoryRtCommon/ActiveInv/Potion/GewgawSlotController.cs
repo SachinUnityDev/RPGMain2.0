@@ -92,13 +92,13 @@ namespace Interactables
 
             if(item.itemType == ItemType.PoeticGewgaws)
             {
-                PoeticGewgawSO poeticSO = ItemService.Instance.GetPoeticGewgawSO((PoeticGewgawNames)item.itemName); 
+                PoeticGewgawSO poeticSO = ItemService.Instance.allItemSO.GetPoeticGewgawSO((PoeticGewgawNames)item.itemName); 
                 if(!poeticSO.ChkEquipRestriction(charController))
                     return false;
             }
             if (item.itemType == ItemType.SagaicGewgaws)
             {
-                SagaicGewgawSO sagaicSO = ItemService.Instance.GetSagaicGewgawSO((SagaicGewgawNames)item.itemName);
+                SagaicGewgawSO sagaicSO = ItemService.Instance.allItemSO.GetSagaicGewgawSO((SagaicGewgawNames)item.itemName);
                 if (!sagaicSO.ChkEquipRestriction(charController))
                     return false;
             }

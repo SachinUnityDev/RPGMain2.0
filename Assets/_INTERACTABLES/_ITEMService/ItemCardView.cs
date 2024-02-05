@@ -99,13 +99,13 @@ namespace Interactables
             if (isRightClickDspled)
                 return;
             tailTrans.gameObject.SetActive(false);   
-            itemViewSO = ItemService.Instance.itemViewSO; 
+            itemViewSO = ItemService.Instance.allItemSO.itemViewSO; 
             switch (item.itemType)
             {
                 case ItemType.None:
                     break;
                 case ItemType.Potions:
-                    PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionNames)item.itemName);
+                    PotionSO potionSO = ItemService.Instance.allItemSO.GetPotionSO((PotionNames)item.itemName);
                     if (potionSO != null)
                     {
                         transform.GetComponent<Image>().sprite = itemViewSO.lyricBG;
@@ -125,7 +125,7 @@ namespace Interactables
                     }
                     break;
                 case ItemType.GenGewgaws:
-                    GenGewgawSO genGewgawSO = ItemService.Instance.GetGenGewgawSO((GenGewgawNames)item.itemName);
+                    GenGewgawSO genGewgawSO = ItemService.Instance.allItemSO.GetGenGewgawSO((GenGewgawNames)item.itemName);
                     if (genGewgawSO != null)
                     {  
                         crownTrans.gameObject.SetActive(true);
@@ -169,7 +169,7 @@ namespace Interactables
                     // subtypes 
                     break;
                 case ItemType.Herbs:
-                    HerbSO herbSO = ItemService.Instance.GetHerbSO((HerbNames)item.itemName);
+                    HerbSO herbSO = ItemService.Instance.allItemSO.GetHerbSO((HerbNames)item.itemName);
                     if (herbSO != null)
                     {
                         transform.GetComponent<Image>().sprite = itemViewSO.lyricBG;
@@ -188,7 +188,7 @@ namespace Interactables
                     }
                     break;
                 case ItemType.Foods:
-                    FoodSO foodSO = ItemService.Instance.GetFoodSO((FoodNames)item.itemName);
+                    FoodSO foodSO = ItemService.Instance.allItemSO.GetFoodSO((FoodNames)item.itemName);
                     if (foodSO != null)
                     {
                         transform.GetComponent<Image>().sprite = itemViewSO.lyricBG;
@@ -207,7 +207,7 @@ namespace Interactables
                     }
                     break;
                 case ItemType.Fruits:
-                    FruitSO fruitSO = ItemService.Instance.GetFruitSO((FruitNames)item.itemName);
+                    FruitSO fruitSO = ItemService.Instance.allItemSO.GetFruitSO((FruitNames)item.itemName);
                     if (fruitSO != null)
                     {
                         transform.GetComponent<Image>().sprite = itemViewSO.lyricBG;
@@ -227,7 +227,7 @@ namespace Interactables
                     }
                     break;
                 case ItemType.Ingredients:
-                    IngredSO ingredSO = ItemService.Instance.GetIngredSO((IngredNames)item.itemName);
+                    IngredSO ingredSO = ItemService.Instance.allItemSO.GetIngredSO((IngredNames)item.itemName);
                     if (ingredSO != null)
                     {
                         transform.GetComponent<Image>().sprite = itemViewSO.lyricBG;
@@ -248,7 +248,7 @@ namespace Interactables
                 case ItemType.XXX:
                     break;
                 case ItemType.Scrolls:
-                    ScrollSO scrollSO = ItemService.Instance.GetScrollSO((ScrollNames)item.itemName);
+                    ScrollSO scrollSO = ItemService.Instance.allItemSO.GetScrollSO((ScrollNames)item.itemName);
                     if (scrollSO != null)
                     {
                         transform.GetComponent<Image>().sprite = itemViewSO.lyricBG;
@@ -267,7 +267,7 @@ namespace Interactables
                     }
                     break;
                 case ItemType.TradeGoods:  // start from here
-                    TGSO tgSO = ItemService.Instance.GetTradeGoodsSO((TGNames)item.itemName);
+                    TGSO tgSO = ItemService.Instance.allItemSO.GetTradeGoodsSO((TGNames)item.itemName);
                     if (tgSO != null)
                     {
                         transform.GetComponent<Image>().sprite = itemViewSO.lyricBG;
@@ -287,7 +287,7 @@ namespace Interactables
                     }
                     break;
                 case ItemType.Tools:
-                    ToolsSO toolSO = ItemService.Instance.GetToolSO((ToolNames)item.itemName);
+                    ToolsSO toolSO = ItemService.Instance.allItemSO.GetToolSO((ToolNames)item.itemName);
                     if (toolSO != null)
                     {
                         transform.GetComponent<Image>().sprite = itemViewSO.lyricBG;
@@ -311,7 +311,7 @@ namespace Interactables
                 case ItemType.Soups:
                     break;
                 case ItemType.Gems:
-                    GemSO gemSO = ItemService.Instance.GetGemSO((GemNames)item.itemName);
+                    GemSO gemSO = ItemService.Instance.allItemSO.GetGemSO((GemNames)item.itemName);
                     if (gemSO != null)
                     {
                         crownTrans.gameObject.SetActive(false);   
@@ -340,7 +340,7 @@ namespace Interactables
                 case ItemType.Meals:
                     break;
                 case ItemType.SagaicGewgaws:
-                    SagaicGewgawSO sagaicGewgawSO = ItemService.Instance.GetSagaicGewgawSO((SagaicGewgawNames)item.itemName);
+                    SagaicGewgawSO sagaicGewgawSO = ItemService.Instance.allItemSO.GetSagaicGewgawSO((SagaicGewgawNames)item.itemName);
                     if (sagaicGewgawSO != null)
                     {
                         crownTrans.gameObject.SetActive(true);
@@ -368,7 +368,7 @@ namespace Interactables
                     }
                     break;
                 case ItemType.PoeticGewgaws:
-                    PoeticGewgawSO poeticGewgawSO = ItemService.Instance.GetPoeticGewgawSO((PoeticGewgawNames)item.itemName);
+                    PoeticGewgawSO poeticGewgawSO = ItemService.Instance.allItemSO.GetPoeticGewgawSO((PoeticGewgawNames)item.itemName);
                     if (poeticGewgawSO != null)
                     {
                         crownTrans.gameObject.SetActive(true);
@@ -398,7 +398,7 @@ namespace Interactables
                         tailTrans.GetChild(0).GetComponent<TextMeshProUGUI>().text
                                                 = poeticGewgawSO.poeticSetName.ToString().CreateSpace();
                         // get poetic SO Set and get strings 
-                        PoeticSetSO poeticSetSO = ItemService.Instance.GetPoeticSetSO(poeticGewgawSO.poeticSetName);
+                        PoeticSetSO poeticSetSO = ItemService.Instance.allItemSO.GetPoeticSetSO(poeticGewgawSO.poeticSetName);
                          
                         for (int i = 0; i < poeticSetSO.bonusBuffStr.Count; i++)
                         {                        
@@ -432,7 +432,7 @@ namespace Interactables
                     break;
                 case ItemType.LoreBooks:
 
-                    LoreBookSO loreBookSO = ItemService.Instance.GetLoreBookSO((LoreNames)item.itemName);
+                    LoreBookSO loreBookSO = ItemService.Instance.allItemSO.GetLoreBookSO((LoreNames)item.itemName);
                     if (loreBookSO != null)
                     {
                         transform.GetComponent<Image>().sprite = itemViewSO.lyricBG;

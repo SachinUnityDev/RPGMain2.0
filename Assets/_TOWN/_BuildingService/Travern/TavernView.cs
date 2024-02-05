@@ -56,7 +56,7 @@ namespace Town
             if (tavernModel.trophyOnWall!= null)
             {
                 TGSO tgSO = 
-                ItemService.Instance.GetTradeGoodsSO((TGNames)tavernModel.trophyOnWall.itemName);
+                ItemService.Instance.allItemSO.GetTradeGoodsSO((TGNames)tavernModel.trophyOnWall.itemName);
                 trophyNPeltContainer.GetChild(0).gameObject.SetActive(true);
                 if(timeState == TimeState.Night)
                    trophyTrans.GetComponent<Image>().sprite = tgSO.trophyOrPeltImg_Night;
@@ -70,7 +70,7 @@ namespace Town
             if (tavernModel.peltOnWall != null)
             {
                 TGSO tgSO =
-                ItemService.Instance.GetTradeGoodsSO((TGNames)tavernModel.peltOnWall.itemName);
+                ItemService.Instance.allItemSO.GetTradeGoodsSO((TGNames)tavernModel.peltOnWall.itemName);
                 peltTrans.gameObject.SetActive(true);
                 if (timeState == TimeState.Night)
                     peltTrans.GetComponent<Image>().sprite = tgSO.trophyOrPeltImg_Night;

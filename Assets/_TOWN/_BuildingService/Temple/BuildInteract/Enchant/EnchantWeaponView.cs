@@ -39,7 +39,7 @@ namespace Town
            if( weaponModel.weaponState == WeaponState.Enchanted || weaponModel.weaponState == WeaponState.Rechargeable)
            {
                 weaponSlotTrans.GetChild(0).gameObject.SetActive(true);
-                GemSO gemSO = ItemService.Instance.GetGemSO(weaponModel.gemName); 
+                GemSO gemSO = ItemService.Instance.allItemSO.GetGemSO(weaponModel.gemName); 
                 weaponSlotTrans.GetChild(0).GetComponent<Image>().sprite = gemSO.iconSprite;
            }else
            {

@@ -29,7 +29,7 @@ namespace Interactables
         public override void PotionApplyFX()
         {          
             
-            PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionNames)itemName);
+            PotionSO potionSO = ItemService.Instance.allItemSO.GetPotionSO((PotionNames)itemName);
             int castTime = (int)UnityEngine.Random.Range(potionSO.minCastTime, potionSO.maxCastTime);
             
            charController.GetComponent<CharStateController>().ApplyImmunityBuff(CauseType.Potions, (int)potionName, charID

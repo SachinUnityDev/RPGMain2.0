@@ -126,7 +126,7 @@ namespace Town
             {
                 int count = itemQty.quantity;                 
                 CostData costData =
-                    ItemService.Instance.GetCostData(itemQty.itemData.itemType, itemQty.itemData.itemName);
+                    ItemService.Instance.allItemSO.GetCostData(itemQty.itemData.itemType, itemQty.itemData.itemName);
                 // add to play Eco and dispose item
                 int silver = (costData.baseCost.silver / 3) * count;
                 int bronze = (costData.baseCost.bronze / 3) * count;

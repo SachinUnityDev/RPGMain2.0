@@ -53,7 +53,7 @@ namespace Town
 
                     gemImg.gameObject.SetActive(true);
                     gemNameTxt.gameObject.SetActive(true);
-                    gemSO = ItemService.Instance.GetGemSO(weaponModel.gemName);
+                    gemSO = ItemService.Instance.allItemSO.GetGemSO(weaponModel.gemName);
                     gemNameTxt.text = gemSO.gemName.ToString();
                     gemImg.sprite = gemSO.iconSprite;
                     break;
@@ -63,7 +63,7 @@ namespace Town
 
                     gemImg.gameObject.SetActive(true);
                     gemNameTxt.gameObject.SetActive(true);
-                    gemSO = ItemService.Instance.GetGemSO(weaponModel.gemName);
+                    gemSO = ItemService.Instance.allItemSO.GetGemSO(weaponModel.gemName);
                     gemNameTxt.text = gemSO.gemName.ToString();
                     gemImg.sprite = gemSO.iconSprite;
                     break;
@@ -73,7 +73,7 @@ namespace Town
 
                     gemImg.gameObject.SetActive(true);
                     gemNameTxt.gameObject.SetActive(true);
-                    gemSO = ItemService.Instance.GetGemSO(weaponModel.gemName);
+                    gemSO = ItemService.Instance.allItemSO.GetGemSO(weaponModel.gemName);
                     gemNameTxt.text = gemSO.gemName.ToString();
                     gemImg.sprite = gemSO.iconSprite;
                     break;

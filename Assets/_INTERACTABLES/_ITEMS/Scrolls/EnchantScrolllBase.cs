@@ -14,7 +14,7 @@ namespace Interactables
         public ScrollSO scrollSO { get; set; }
         public virtual void ApplyScrollReadFX()
         {
-            scrollSO = ItemService.Instance.GetScrollSO(scrollName);
+            scrollSO = ItemService.Instance.allItemSO.GetScrollSO(scrollName);
             charController = InvService.Instance.charSelectController;
 
             ScrollReadData scrollReadData = new ScrollReadData(scrollName, scrollSO.castTime);
@@ -31,7 +31,7 @@ namespace Interactables
         public virtual void ApplyBookReadFx()
         {
            CharController charController = InvService.Instance.charSelectController;
-            LoreBookSO loreSO = ItemService.Instance.GetLoreBookSO(loreName);
+            LoreBookSO loreSO = ItemService.Instance.allItemSO.GetLoreBookSO(loreName);
             int expVal = UnityEngine.Random.Range(loreSO.expGainMin, loreSO.expGainMax + 1);
             charController.ExpPtsGain(expVal);
 

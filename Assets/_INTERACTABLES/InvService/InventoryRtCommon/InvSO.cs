@@ -84,34 +84,34 @@ namespace Interactables
             switch (itemType)
             {
                 case ItemType.Potions:
-                    sprite = ItemService.Instance.GetPotionSO((PotionNames)itemName).iconSprite;                         
+                    sprite = ItemService.Instance.allItemSO.GetPotionSO((PotionNames)itemName).iconSprite;                         
                     break;
                 case ItemType.GenGewgaws:
-                    sprite = ItemService.Instance.GetGenGewgawSO((GenGewgawNames)itemName).iconSprite;
+                    sprite = ItemService.Instance.allItemSO.GetGenGewgawSO((GenGewgawNames)itemName).iconSprite;
                     break;
                 case ItemType.Herbs:
-                    sprite = ItemService.Instance.GetHerbSO((HerbNames)itemName).iconSprite;
+                    sprite = ItemService.Instance.allItemSO.GetHerbSO((HerbNames)itemName).iconSprite;
                     break;
                 case ItemType.Foods:
-                    sprite = ItemService.Instance.GetFoodSO((FoodNames)itemName).iconSprite;
+                    sprite = ItemService.Instance.allItemSO.GetFoodSO((FoodNames)itemName).iconSprite;
                     break;
                 case ItemType.Fruits:
-                    sprite = ItemService.Instance.GetFruitSO((FruitNames)itemName).iconSprite;
+                    sprite = ItemService.Instance.allItemSO.GetFruitSO((FruitNames)itemName).iconSprite;
                     break;
                 case ItemType.Ingredients:
-                    sprite = ItemService.Instance.GetIngredSO((IngredNames)itemName).iconSprite;
+                    sprite = ItemService.Instance.allItemSO.GetIngredSO((IngredNames)itemName).iconSprite;
                     break;
                 case ItemType.XXX:
                    // sprite = ItemService.Instance.GetCookingRecipeSO(itemName).iconSprite;
                     break;
                 case ItemType.Scrolls:
-                    sprite = ItemService.Instance.GetScrollSO((ScrollNames)itemName).iconSprite;
+                    sprite = ItemService.Instance.allItemSO.GetScrollSO((ScrollNames)itemName).iconSprite;
                     break;
                 case ItemType.TradeGoods:
-                    sprite = ItemService.Instance.GetTradeGoodsSO((TGNames)itemName).iconSprite;
+                    sprite = ItemService.Instance.allItemSO.GetTradeGoodsSO((TGNames)itemName).iconSprite;
                     break;
                 case ItemType.Tools:
-                    sprite = ItemService.Instance.GetToolSO((ToolNames)itemName).iconSprite;
+                    sprite = ItemService.Instance.allItemSO.GetToolSO((ToolNames)itemName).iconSprite;
                     break;
                 case ItemType.Teas:// cannot be carried in inv
                                    // sprite = ItemService.Instance.GetPotionSO((PotionName)itemName).iconSprite;
@@ -120,22 +120,22 @@ namespace Interactables
                                      // sprite = ItemService.Instance.GetPotionSO((PotionName)itemName).iconSprite;
                     break;
                 case ItemType.Gems:
-                    sprite = ItemService.Instance.GetGemSO((GemNames)itemName).iconSprite;
+                    sprite = ItemService.Instance.allItemSO.GetGemSO((GemNames)itemName).iconSprite;
                     break;
                 case ItemType.Alcohol: // cannot be carried in inv
                                        // sprite = ItemService.Instance.GetPotionSO((PotionName)itemName).iconSprite;
                     break;
                 case ItemType.Meals:  // cannot be carried in inv
-                    sprite = ItemService.Instance.GetMealSO((MealNames)itemName).iconSprite;
+                    sprite = ItemService.Instance.allItemSO.GetMealSO((MealNames)itemName).iconSprite;
                     break;
                 case ItemType.SagaicGewgaws:
-                    sprite = ItemService.Instance.GetSagaicGewgawSO((SagaicGewgawNames)itemName).iconSprite;
+                    sprite = ItemService.Instance.allItemSO.GetSagaicGewgawSO((SagaicGewgawNames)itemName).iconSprite;
                     break;
                 case ItemType.PoeticGewgaws:
-                    sprite = ItemService.Instance.GetPoeticGewgawSO((PoeticGewgawNames)itemName).iconSprite;
+                    sprite = ItemService.Instance.allItemSO.GetPoeticGewgawSO((PoeticGewgawNames)itemName).iconSprite;
                     break;
                 case ItemType.LoreBooks:
-                    sprite = ItemService.Instance.GetLoreBookSO((LoreNames)itemName).iconSprite;
+                    sprite = ItemService.Instance.allItemSO.GetLoreBookSO((LoreNames)itemName).iconSprite;
                     break;
 
                 default:
@@ -152,53 +152,53 @@ namespace Interactables
                 case ItemType.None:
                     break;
                 case ItemType.Potions:
-                    PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionNames)itemData.itemName);
+                    PotionSO potionSO = ItemService.Instance.allItemSO.GetPotionSO((PotionNames)itemData.itemName);
                     return potionSO.desc;
 
                 case ItemType.GenGewgaws:
-                    GenGewgawSO genGewgawSO = ItemService.Instance.GetGenGewgawSO((GenGewgawNames)itemData.itemName);
+                    GenGewgawSO genGewgawSO = ItemService.Instance.allItemSO.GetGenGewgawSO((GenGewgawNames)itemData.itemName);
                     return genGewgawSO.desc;
 
                 case ItemType.Herbs:
-                    HerbSO herbSO = ItemService.Instance.GetHerbSO((HerbNames)itemData.itemName);
+                    HerbSO herbSO = ItemService.Instance.allItemSO.GetHerbSO((HerbNames)itemData.itemName);
                     return herbSO.desc;
                 case ItemType.Foods:
-                    FoodSO foodSO = ItemService.Instance.GetFoodSO((FoodNames)itemData.itemName);
+                    FoodSO foodSO = ItemService.Instance.allItemSO.GetFoodSO((FoodNames)itemData.itemName);
                     return foodSO.desc;
                 case ItemType.Fruits:
-                    FruitSO fruitSO = ItemService.Instance.GetFruitSO((FruitNames)itemData.itemName);
+                    FruitSO fruitSO = ItemService.Instance.allItemSO.GetFruitSO((FruitNames)itemData.itemName);
                     return fruitSO.desc;
                 case ItemType.Ingredients:
-                    IngredSO ingredSO = ItemService.Instance.GetIngredSO((IngredNames)itemData.itemName);
+                    IngredSO ingredSO = ItemService.Instance.allItemSO.GetIngredSO((IngredNames)itemData.itemName);
                     return ingredSO.desc;
                 case ItemType.XXX:
                     break;
                 case ItemType.Scrolls:
-                    ScrollSO scrollSO = ItemService.Instance.GetScrollSO((ScrollNames)itemData.itemName);
+                    ScrollSO scrollSO = ItemService.Instance.allItemSO.GetScrollSO((ScrollNames)itemData.itemName);
                     return scrollSO.desc;
                 case ItemType.TradeGoods:  // start from here
-                    TGSO tgSO = ItemService.Instance.GetTradeGoodsSO((TGNames)itemData.itemName);
+                    TGSO tgSO = ItemService.Instance.allItemSO.GetTradeGoodsSO((TGNames)itemData.itemName);
                     return tgSO.desc;
                 case ItemType.Tools:
-                    ToolsSO toolSO = ItemService.Instance.GetToolSO((ToolNames)itemData.itemName);
+                    ToolsSO toolSO = ItemService.Instance.allItemSO.GetToolSO((ToolNames)itemData.itemName);
                     return toolSO.desc;
                 case ItemType.Teas:
                     break;
                 case ItemType.Soups:
                     break;
                 case ItemType.Gems:
-                    GemSO gemSO = ItemService.Instance.GetGemSO((GemNames)itemData.itemName);
+                    GemSO gemSO = ItemService.Instance.allItemSO.GetGemSO((GemNames)itemData.itemName);
                     return gemSO.desc;
                 case ItemType.Alcohol:
-                    AlcoholSO alcoholSO = ItemService.Instance.GetAlcoholSO((AlcoholNames)itemData.itemName);
+                    AlcoholSO alcoholSO = ItemService.Instance.allItemSO.GetAlcoholSO((AlcoholNames)itemData.itemName);
                     return alcoholSO.desc;                    
                 case ItemType.Meals:
                     break;
                 case ItemType.SagaicGewgaws:
-                    SagaicGewgawSO sagaicGewgawSO = ItemService.Instance.GetSagaicGewgawSO((SagaicGewgawNames)itemData.itemName);
+                    SagaicGewgawSO sagaicGewgawSO = ItemService.Instance.allItemSO.GetSagaicGewgawSO((SagaicGewgawNames)itemData.itemName);
                     return sagaicGewgawSO.desc;
                 case ItemType.PoeticGewgaws:
-                    PoeticGewgawSO poeticGewgawSO = ItemService.Instance.GetPoeticGewgawSO((PoeticGewgawNames)itemData.itemName);
+                    PoeticGewgawSO poeticGewgawSO = ItemService.Instance.allItemSO.GetPoeticGewgawSO((PoeticGewgawNames)itemData.itemName);
                     return poeticGewgawSO.desc;
                 case ItemType.RelicGewgaws:
                     // write Relic 

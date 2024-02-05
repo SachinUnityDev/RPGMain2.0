@@ -75,7 +75,7 @@ namespace Interactables
             if(supportGemSocketed != null)
             {
                 gemSO =
-                ItemService.Instance.GetGemSO((GemNames)supportGemSocketed.itemName);
+                ItemService.Instance.allItemSO.GetGemSO((GemNames)supportGemSocketed.itemName);
                 socketSlots[2].GetChild(0).gameObject.SetActive(true); 
                  socketSlots[2].GetChild(0).GetComponent<Image>().sprite = gemSO.iconSprite;
             }
@@ -86,7 +86,7 @@ namespace Interactables
 
             if (itemModel.divItemsSocketed[0] != null)
             {               
-                gemSO = ItemService.Instance.GetGemSO((GemNames)itemModel.divItemsSocketed[0].itemName);
+                gemSO = ItemService.Instance.allItemSO.GetGemSO((GemNames)itemModel.divItemsSocketed[0].itemName);
                 socketSlots[0].GetChild(0).gameObject.SetActive(true);
                 socketSlots[0].GetChild(0).GetComponent<Image>().sprite = gemSO.iconSprite;
             }
@@ -97,7 +97,7 @@ namespace Interactables
 
             if (itemModel.divItemsSocketed[1] != null)
             {
-                gemSO = ItemService.Instance.GetGemSO((GemNames)itemModel.divItemsSocketed[1].itemName);
+                gemSO = ItemService.Instance.allItemSO.GetGemSO((GemNames)itemModel.divItemsSocketed[1].itemName);
                 socketSlots[1].GetChild(0).gameObject.SetActive(true);
                 socketSlots[1].GetChild(0).GetComponent<Image>().sprite = gemSO.iconSprite;
             }

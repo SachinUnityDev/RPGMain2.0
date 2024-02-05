@@ -54,7 +54,7 @@ namespace Town
             {
                 Debug.Log("Item data" + itemData.itemData.itemType+ npcName + weekSeq);
                 CostData costData = 
-                ItemService.Instance.GetCostData(itemData.itemData.itemType, itemData.itemData.itemName);
+                ItemService.Instance.allItemSO.GetCostData(itemData.itemData.itemType, itemData.itemData.itemName);
                 int minCost = (int)(costData.baseCost.BronzifyCurrency() * (100 - costData.fluctuation)/100);
                 int maxCost = (int)(costData.baseCost.BronzifyCurrency() * (100 + costData.fluctuation) / 100);
                 int bronzifiedResult = UnityEngine.Random.Range(minCost, maxCost);

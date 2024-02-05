@@ -87,12 +87,12 @@ namespace Interactables
                 case ItemType.None:
                     break;
                 case ItemType.Potions:
-                    PotionSO potionSO = ItemService.Instance.GetPotionSO((PotionNames)itemData.itemName);                   
+                    PotionSO potionSO = ItemService.Instance.allItemSO.GetPotionSO((PotionNames)itemData.itemName);                   
                     finalPdtTrans.GetComponent<Image>().sprite = potionSO.iconSprite;
                     slotTitleTxt.text = potionSO.potionName.ToString().CreateSpace();
                     break;
                 case ItemType.GenGewgaws:
-                    GenGewgawSO genSO = ItemService.Instance.GetGenGewgawSO((GenGewgawNames)itemData.itemName);
+                    GenGewgawSO genSO = ItemService.Instance.allItemSO.GetGenGewgawSO((GenGewgawNames)itemData.itemName);
                     finalPdtTrans.GetComponent<Image>().sprite = genSO.iconSprite;
                     slotTitleTxt.text = genSO.genGewgawName.ToString().CreateSpace();
                     break;
@@ -119,12 +119,12 @@ namespace Interactables
                 case ItemType.Gems:
                     break;
                 case ItemType.Alcohol:
-                    AlcoholSO alcoholSO = ItemService.Instance.GetAlcoholSO((AlcoholNames)itemData.itemName);
+                    AlcoholSO alcoholSO = ItemService.Instance.allItemSO.GetAlcoholSO((AlcoholNames)itemData.itemName);
                     finalPdtTrans.GetComponent<Image>().sprite = alcoholSO.iconSprite;
                     slotTitleTxt.text = alcoholSO.alcoholName.ToString().CreateSpace();
                     break;
                 case ItemType.Meals:
-                    MealsSO mealSO = ItemService.Instance.GetMealSO((MealNames)itemData.itemName);
+                    MealsSO mealSO = ItemService.Instance.allItemSO.GetMealSO((MealNames)itemData.itemName);
                     finalPdtTrans.GetComponent<Image>().sprite = mealSO.iconSprite;
                     slotTitleTxt.text = mealSO.mealName.ToString().CreateSpace();
                     break;

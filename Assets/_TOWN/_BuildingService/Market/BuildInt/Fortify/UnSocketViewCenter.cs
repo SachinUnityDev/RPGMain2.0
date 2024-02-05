@@ -94,7 +94,7 @@ namespace Town
             {
                 slot.GetChild(0).gameObject.SetActive(notEmpty);
                 GemBase gembase = item as GemBase;
-                GemSO gemSO = ItemService.Instance.GetGemSO(gembase.gemName);
+                GemSO gemSO = ItemService.Instance.allItemSO.GetGemSO(gembase.gemName);
                 slot.GetChild(0).GetComponent<Image>().sprite = gemSO.iconSprite;
             }
             else

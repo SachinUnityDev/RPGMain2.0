@@ -65,21 +65,21 @@ namespace Interactables
             if (item.itemType == ItemType.GenGewgaws)
             {
                 GenGewgawSO gengewgawSO =
-                    ItemService.Instance.GetGenGewgawSO((GenGewgawNames)item.itemName);
+                    ItemService.Instance.allItemSO.GetGenGewgawSO((GenGewgawNames)item.itemName);
                 GewgawSlotType slotType = gengewgawSO.gewgawSlotType;
                 return slotType;
             }
             if(item.itemType == ItemType.SagaicGewgaws)
             {
                 SagaicGewgawSO sagaicSO = 
-                    ItemService.Instance.GetSagaicGewgawSO((SagaicGewgawNames)item.itemName);
+                    ItemService.Instance.allItemSO.GetSagaicGewgawSO((SagaicGewgawNames)item.itemName);
                 GewgawSlotType slotType = sagaicSO.gewgawSlotType;
                 return slotType;
             }
             if (item.itemType == ItemType.PoeticGewgaws)
             {
                 PoeticGewgawSO poeticSO =
-                    ItemService.Instance.GetPoeticGewgawSO((PoeticGewgawNames)(item.itemName));                    
+                    ItemService.Instance.allItemSO.GetPoeticGewgawSO((PoeticGewgawNames)(item.itemName));                    
                 GewgawSlotType slotType = poeticSO.gewgawSlotType;
                 return slotType;
             }

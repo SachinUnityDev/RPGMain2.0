@@ -17,7 +17,7 @@ namespace Interactables
         {
             charController = InvService.Instance.charSelectController;
             charID = charController.charModel.charID;
-            fruitSO = ItemService.Instance.GetFruitSO(fruitName); 
+            fruitSO = ItemService.Instance.allItemSO.GetFruitSO(fruitName); 
 
             float val = fruitSO.hpRegen;
             if(val > 0) 

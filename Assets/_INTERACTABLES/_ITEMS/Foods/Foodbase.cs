@@ -21,7 +21,7 @@ namespace Interactables
         {
             charController = InvService.Instance.charSelectController;
             charID = charController.charModel.charID;
-            foodSO = ItemService.Instance.GetFoodSO(foodName);
+            foodSO = ItemService.Instance.allItemSO.GetFoodSO(foodName);
             int valHp = 0; 
             if(foodSO.hpHealMax >0 && foodSO.hpHealMin >0)  
              valHp = UnityEngine.Random.Range(foodSO.hpHealMin, foodSO.hpHealMax + 1);     

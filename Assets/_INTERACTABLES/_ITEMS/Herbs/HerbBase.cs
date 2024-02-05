@@ -33,7 +33,7 @@ namespace Interactables
         public virtual void HerbInit(HerbNames herbName, CharController charController)
         {
             Iitems item = this as Iitems;
-             herbSO = ItemService.Instance.GetHerbSO(herbName);
+             herbSO = ItemService.Instance.allItemSO.GetHerbSO(herbName);
             item.maxInvStackSize = herbSO.maxInvStackSize;
             // CONTROLLERS AND MODELS
             this.charController = charController;

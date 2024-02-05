@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c6f7933d5d2e9a4c8c137f1d0f1e469, type: 3}
-  m_Name: BracersProacherToolset
+  m_Name: BracersPoacherToolset
   m_EditorClassIdentifier: 
   poeticGewgawName: 4
   desc: Bracers
@@ -18,9 +18,10 @@ MonoBehaviour:
   gewgawMidName: 4
   gewgawSlotType: 3
   maxInvStackSize: 1
-  classRestrictions: 110000001700000007000000
+  classRestrictions: 110000001700000005000000
   cultureRestrictions: 
   raceRestrictions: 
+  lvlRestriction: 3
   cost:
     silver: 0
     bronze: 40
@@ -28,3 +29,4 @@ MonoBehaviour:
   iconSprite: {fileID: 21300000, guid: c8cefd62c1eb9a84eb7f002ee2ce48cc, type: 3}
   setNumber: 3
   verseDesc: 'Fire: Hit with your eyes closed'
+  resLs: 

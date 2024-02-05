@@ -67,7 +67,10 @@ namespace Common
 
         [Header("Hunger and Thirst")]
         public int hungerMod;
-        public int thirstMod; 
+        public int thirstMod;
+
+        [Header("Gewgaw Restrictions")]
+        public bool areGewgawRestrictBypassed = false; 
 
         [Header("Experience points")]
         public int mainExp;

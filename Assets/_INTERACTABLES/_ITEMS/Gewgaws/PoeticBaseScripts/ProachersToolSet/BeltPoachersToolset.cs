@@ -27,22 +27,16 @@ namespace Interactables
             displayStrs.Add(str);
             str = "<i>Verse 1: Ready: Withstand your voracity</i>";
             displayStrs.Add(str);
+             valHunger = UnityEngine.Random.Range(-12, -18);
         }
         public override void EquipGewgawPoetic()
         {
-            charController = InvService.Instance.charSelectController;
-
-            charController.charModel.hungerMod += valHunger;
-       
+           int statBuffId = 
+            charController.statBuffController.ApplyStatRecAltBuff(valHunger, StatName.hunger, CauseType.PoeticGewgaw
+                , (int)itemName,  charController.charModel.charID, TimeFrame.Infinity, 1, true);
+            allStatAltBuff.Add(statBuffId);          
         }
-        public override void UnEquipPoetic()
-        {
-            base.UnEquipPoetic();
-            charController.ChangeStat(CauseType.PoeticGewgaw, (int)poeticGewgawName
-                , charController.charModel.charID, StatName.hunger, valHunger, true);
-
-            charController.charModel.hungerMod -= valHunger;
-        }
+        
 
         public void InitItem(int itemId, int maxInvStackSize)
         {
@@ -65,7 +59,6 @@ namespace Interactables
         {
             UnEquipPoetic();
             charController = null;
-
         }
     }
 }

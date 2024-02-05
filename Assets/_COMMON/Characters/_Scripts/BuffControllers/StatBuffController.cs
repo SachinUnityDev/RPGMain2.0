@@ -208,9 +208,9 @@ namespace Common
         {
             allStatAltBuffData.Remove(statAltBuffData);
         }
-        public bool RemoveStatRecAltBuff(int dmgBuffID)
+        public bool RemoveStatRecAltBuff(int statBuffID)
         {
-            int index = allStatAltBuffData.FindIndex(t => t.dmgBuffID == dmgBuffID);
+            int index = allStatAltBuffData.FindIndex(t => t.dmgBuffID == statBuffID);
             if (index == -1) return false;
             StatAltBuffData statAltBuffData = allStatAltBuffData[index];
             RemoveStatRecAltBuffData(statAltBuffData);

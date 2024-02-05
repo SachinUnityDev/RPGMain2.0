@@ -33,7 +33,7 @@ namespace Interactables
         }
         public override void EquipGewgawPoetic()
         {
-            charController = InvService.Instance.charSelectController;
+          //  charController = InvService.Instance.charSelectController;
 
             int index =
                 charController.buffController.ApplyBuff(CauseType.PoeticGewgaw, (int)poeticGewgawName

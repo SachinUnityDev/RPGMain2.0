@@ -125,10 +125,12 @@ namespace Interactables
             item.invSlotType = SlotType.GewgawsActiveInv;
             ItemsInSlot.Add(item);
             InvService.Instance.invMainModel.AddItem2GewgawsActInv(item, slotID);
-
+            IEquipAble iequip  = item as IEquipAble;
+            if (iequip != null)
+                iequip.ApplyEquipableFX(InvService.Instance.charSelectController); 
             RefreshImg(item);
-            if (ItemsInSlot.Count > 1)
-                RefreshSlotTxt();
+            //if (ItemsInSlot.Count > 1)
+            //    RefreshSlotTxt();
         }
 
         public void RemoveItem()   // controller by Item DragDrop

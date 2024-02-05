@@ -16,7 +16,7 @@ namespace Interactables
         public List<int> dmgAltBuffIndex = new List<int>();
         public List<int> allSkillDmgModBuffIndex = new List<int>();
         public List<int> allCharStateBuffID = new List<int>();  
-
+        public List<int> allStatAltBuff = new List<int>();
         public List<int> expIndex = new List<int>();  
         public List<string> displayStrs { get; set; } = new List<string>(); 
         public abstract void PoeticInit();  // connect the charController and other things
@@ -27,7 +27,8 @@ namespace Interactables
             dmgAltBuffIndex.ForEach(t => charController.strikeController.RemoveDmgAltBuff(t));
             allSkillDmgModBuffIndex.ForEach(t => charController.skillController.RemoveSkillDmgModBuff(t));
             allCharStateBuffID.ForEach(t => charController.strikeController.RemoveDmgAltCharStateBuff(t));
-
+            allStatAltBuff.ForEach(t => charController.statBuffController.RemoveStatRecAltBuff(t));
+            
             allBuffIds.Clear();
             dmgAltBuffIndex.Clear();
             allSkillDmgModBuffIndex.Clear();

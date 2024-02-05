@@ -123,8 +123,10 @@ namespace Interactables
             item.invSlotType = SlotType.PotionsActiveInv;
             ItemsInSlot.Add(item);
 
-            InvService.Instance.invMainModel.EquipItem2PotionActInv(item, slotID); 
-            
+            InvService.Instance.invMainModel.EquipItem2PotionActInv(item, slotID);
+            IEquipAble iequip = item as IEquipAble;
+            if (iequip != null)
+                iequip.ApplyEquipableFX(InvService.Instance.charSelectController);
             RefreshImg(item);
             //if (ItemsInSlot.Count > 1)
             //    RefreshSlotTxt();

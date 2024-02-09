@@ -13,6 +13,7 @@ namespace Interactables
         public ItemType itemType => ItemType.Potions;
         public int itemName => (int)PotionNames.ElixirOfWillpower;
         public SlotType invSlotType { get; set; }
+        public int slotID { get; set; }
         public int maxInvStackSize { get; set; }
         public ItemController itemController { get; set; }
         public int itemId { get; set; }

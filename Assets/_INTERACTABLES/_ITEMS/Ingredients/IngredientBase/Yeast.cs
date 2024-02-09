@@ -16,9 +16,11 @@ namespace Interactables
 
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
+        public int slotID { get; set; }
         public int itemId { get; set; }
         public List<int> allBuffs { get; set; }
         public Currency currency { get; set; }
+
         public void OnHoverItem()
         {
 

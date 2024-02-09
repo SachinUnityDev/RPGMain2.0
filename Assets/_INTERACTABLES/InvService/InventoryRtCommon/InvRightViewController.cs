@@ -47,14 +47,21 @@ namespace Interactables
         [Header("Canvas Not To Be Ref")]
         [SerializeField] Canvas canvas; 
         [Header("Inv Panel Ref")]
-        [SerializeField] GameObject invContainer;                
+        public GameObject invContainer;                
 
         public Transform rightClickOpts;
 
         [Header("Active Inv")]
         public GameObject potionActiveInvPanel;
         public GameObject gewgawsActiveInvPanel;
+
+        [Header("Inv Ls Displayed/ global var")]
+        public InvSortingView invSortingView; 
+
+   
+
         
+
         void Awake()
         {
       
@@ -74,7 +81,7 @@ namespace Interactables
         }
 
         public void Init()
-        {           
+        {            
             InitCommonInv();
             InitExcessInv();           
         }
@@ -204,14 +211,17 @@ namespace Interactables
                 }
             }
         }
+   
 
         void InitCommonInv()
         {
+       
             ClearInv();           
-            foreach (Iitems item in InvService.Instance.invMainModel.commonInvItems.ToList())
+            foreach (Iitems item in InvService.Instance.invMainModel.commonInvItems)
             {
                 AddItem2InVView(item, false);
             }
+            invSortingView.InvSortingGrpInit(this); 
         }
         void InitExcessInv()
         {

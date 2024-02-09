@@ -11,15 +11,12 @@ namespace Interactables
     public class BrassHandProtectors : SagaicGewgawBase, Iitems
     {
         public override SagaicGewgawNames sagaicGewgawName => SagaicGewgawNames.BrassHandProtectors;
-
         public int itemId { get; set; }
-
         public ItemType itemType => ItemType.SagaicGewgaws;
-
         public int itemName => (int)SagaicGewgawNames.BrassHandProtectors;
-
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
+        public int slotID { get; set; }
         public List<int> allBuffs { get; set; } = new List<int>();
         public Currency currency { get; set; }
         //-6-10 Air Res +8-12 Earth Res

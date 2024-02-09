@@ -2686,6 +2686,7 @@ MonoBehaviour:
   rightClickOpts: {fileID: 7459391207154187928}
   potionActiveInvPanel: {fileID: 6065883214481837701}
   gewgawsActiveInvPanel: {fileID: 7459391208122121768}
+  invSortingView: {fileID: 1079573398}
 --- !u!1 &6065883213887152999
 GameObject:
   m_ObjectHideFlags: 0
@@ -3112,6 +3113,7 @@ MonoBehaviour:
     currCharLoc: 0
     hungerMod: 0
     thirstMod: 0
+    extraSlotTypeAllowed: 
     mainExp: 0
     jobExp: 0
     skillPts: 0
@@ -3435,6 +3437,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &6065883213953918383
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -3913,6 +3916,7 @@ GameObject:
   - component: {fileID: 6065883214057143096}
   - component: {fileID: 6065883214057143097}
   - component: {fileID: 6065883214057143098}
+  - component: {fileID: 1079573394}
   m_Layer: 5
   m_Name: Herb
   m_TagString: Untagged
@@ -4023,6 +4027,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1079573394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6065883214057143092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1065fc97212bd84d9c8c3e848572322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteN: {fileID: 21300000, guid: b01747fce3b45e84c991cc08378cfb10, type: 3}
+  spriteHL: {fileID: 21300000, guid: 5e5bfca99c3e0394897d949621b4ca7b, type: 3}
+  isClicked: 0
+  index: 0
 --- !u!1 &6065883214057952436
 GameObject:
   m_ObjectHideFlags: 0
@@ -4293,6 +4313,7 @@ MonoBehaviour:
     currCharLoc: 0
     hungerMod: 0
     thirstMod: 0
+    extraSlotTypeAllowed: 
     mainExp: 0
     jobExp: 0
     skillPts: 0
@@ -5926,7 +5947,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6065883215943615624}
   m_HandleRect: {fileID: 6065883215943615625}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 1.0000024
   m_Size: 0.95584065
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -6912,6 +6933,7 @@ MonoBehaviour:
     currCharLoc: 0
     hungerMod: 0
     thirstMod: 0
+    extraSlotTypeAllowed: 
     mainExp: 0
     jobExp: 0
     skillPts: 0
@@ -7298,6 +7320,7 @@ MonoBehaviour:
     currCharLoc: 0
     hungerMod: 0
     thirstMod: 0
+    extraSlotTypeAllowed: 
     mainExp: 0
     jobExp: 0
     skillPts: 0
@@ -9429,6 +9452,7 @@ MonoBehaviour:
     currCharLoc: 0
     hungerMod: 0
     thirstMod: 0
+    extraSlotTypeAllowed: 
     mainExp: 0
     jobExp: 0
     skillPts: 0
@@ -11184,6 +11208,7 @@ GameObject:
   - component: {fileID: 6065883214927689338}
   - component: {fileID: 6065883214927689339}
   - component: {fileID: 6065883214927689332}
+  - component: {fileID: 974722709}
   m_Layer: 5
   m_Name: Scrolls
   m_TagString: Untagged
@@ -11294,6 +11319,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &974722709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6065883214927689334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1065fc97212bd84d9c8c3e848572322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteN: {fileID: 21300000, guid: 102b9037c0ac46c489e63d8538799add, type: 3}
+  spriteHL: {fileID: 21300000, guid: 6169eeed69a923e44b434cbbcd258413, type: 3}
+  isClicked: 0
+  index: 0
 --- !u!1 &6065883214927757684
 GameObject:
   m_ObjectHideFlags: 0
@@ -11448,6 +11489,7 @@ GameObject:
   - component: {fileID: 6065883214949468907}
   - component: {fileID: 6065883214949468900}
   - component: {fileID: 6065883214949468901}
+  - component: {fileID: 1079573396}
   m_Layer: 5
   m_Name: Gem
   m_TagString: Untagged
@@ -11558,6 +11600,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1079573396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6065883214949468903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1065fc97212bd84d9c8c3e848572322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteN: {fileID: 21300000, guid: 96398bdbeb80c084e9ed7f2f4aa4c749, type: 3}
+  spriteHL: {fileID: 21300000, guid: e31ce82e63497eb42bff4cde91e263d9, type: 3}
+  isClicked: 0
+  index: 0
 --- !u!1 &6065883214949897623
 GameObject:
   m_ObjectHideFlags: 0
@@ -12584,6 +12642,7 @@ MonoBehaviour:
     currCharLoc: 0
     hungerMod: 0
     thirstMod: 0
+    extraSlotTypeAllowed: 
     mainExp: 0
     jobExp: 0
     skillPts: 0
@@ -13217,6 +13276,7 @@ GameObject:
   - component: {fileID: 6065883215120548185}
   - component: {fileID: 6065883215120548186}
   - component: {fileID: 6065883215120548187}
+  - component: {fileID: 1868551014}
   m_Layer: 5
   m_Name: TradeGoods
   m_TagString: Untagged
@@ -13327,6 +13387,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1868551014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6065883215120548181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1065fc97212bd84d9c8c3e848572322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteN: {fileID: 21300000, guid: 83205ed5e5591434eabc061fda32757a, type: 3}
+  spriteHL: {fileID: 21300000, guid: 32719cb5876127a4e90261114b00a83a, type: 3}
+  isClicked: 0
+  index: 0
 --- !u!1 &6065883215143016222
 GameObject:
   m_ObjectHideFlags: 0
@@ -14375,6 +14451,7 @@ GameObject:
   - component: {fileID: 6065883215210969229}
   - component: {fileID: 6065883215210969230}
   - component: {fileID: 6065883215210969231}
+  - component: {fileID: 1079573398}
   m_Layer: 5
   m_Name: SortingPlank
   m_TagString: Untagged
@@ -14475,6 +14552,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1079573398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6065883215210969225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb4bec40e8b9f546b8bc71f842ac4e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6065883215228793970
 GameObject:
   m_ObjectHideFlags: 0
@@ -14593,6 +14682,7 @@ MonoBehaviour:
     currCharLoc: 0
     hungerMod: 0
     thirstMod: 0
+    extraSlotTypeAllowed: 
     mainExp: 0
     jobExp: 0
     skillPts: 0
@@ -15159,6 +15249,7 @@ GameObject:
   - component: {fileID: 6065883215308488391}
   - component: {fileID: 6065883215308488384}
   - component: {fileID: 6065883215308488385}
+  - component: {fileID: 114774925}
   m_Layer: 5
   m_Name: Food
   m_TagString: Untagged
@@ -15269,6 +15360,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &114774925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6065883215308488387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1065fc97212bd84d9c8c3e848572322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteN: {fileID: 21300000, guid: 719112ccf61d3cf4ba09e6a894452bce, type: 3}
+  spriteHL: {fileID: 21300000, guid: c27de46e47d5a534bb3cb0e4feeae502, type: 3}
+  isClicked: 0
+  index: 0
 --- !u!1 &6065883215333166551
 GameObject:
   m_ObjectHideFlags: 0
@@ -15675,6 +15782,7 @@ MonoBehaviour:
     currCharLoc: 0
     hungerMod: 0
     thirstMod: 0
+    extraSlotTypeAllowed: 
     mainExp: 0
     jobExp: 0
     skillPts: 0
@@ -16061,7 +16169,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 6065883215451372450}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.9999998
+  m_Size: 0.99999976
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -16078,6 +16186,7 @@ GameObject:
   - component: {fileID: 6065883215398968209}
   - component: {fileID: 6065883215398968210}
   - component: {fileID: 6065883215398968211}
+  - component: {fileID: 925984875}
   m_Layer: 5
   m_Name: All
   m_TagString: Untagged
@@ -16188,6 +16297,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &925984875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6065883215398968301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1065fc97212bd84d9c8c3e848572322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteN: {fileID: 21300000, guid: 609db70825093f94897c61cb49253ac5, type: 3}
+  spriteHL: {fileID: 21300000, guid: e4401b2a2149c0e4bbc4422e5b977a05, type: 3}
+  isClicked: 0
+  index: 0
 --- !u!1 &6065883215415857377
 GameObject:
   m_ObjectHideFlags: 0
@@ -16761,7 +16886,7 @@ RectTransform:
   m_Father: {fileID: 6065883214764891947}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.00000017881393, y: 0}
+  m_AnchorMin: {x: 0.00000023841858, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -17030,6 +17155,7 @@ GameObject:
   - component: {fileID: 6065883215489678300}
   - component: {fileID: 6065883215489678301}
   - component: {fileID: 6065883215489678302}
+  - component: {fileID: 1033526891}
   m_Layer: 5
   m_Name: Tools
   m_TagString: Untagged
@@ -17140,6 +17266,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1033526891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6065883215489678296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1065fc97212bd84d9c8c3e848572322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteN: {fileID: 21300000, guid: 47a104369fba3fd4ea729526441c6e05, type: 3}
+  spriteHL: {fileID: 21300000, guid: 01f272652b2be6d4f85c7f56551b6e7a, type: 3}
+  isClicked: 0
+  index: 0
 --- !u!1 &6065883215518634557
 GameObject:
   m_ObjectHideFlags: 0
@@ -17407,6 +17549,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &6065883215532640733
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -19270,6 +19413,7 @@ MonoBehaviour:
     currCharLoc: 0
     hungerMod: 0
     thirstMod: 0
+    extraSlotTypeAllowed: 
     mainExp: 0
     jobExp: 0
     skillPts: 0
@@ -19859,6 +20003,7 @@ GameObject:
   - component: {fileID: 6065883215806836454}
   - component: {fileID: 6065883215806836455}
   - component: {fileID: 6065883215806836448}
+  - component: {fileID: 1079573397}
   m_Layer: 5
   m_Name: Gewgaw
   m_TagString: Untagged
@@ -19969,6 +20114,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1079573397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6065883215806836450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1065fc97212bd84d9c8c3e848572322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteN: {fileID: 21300000, guid: f77d4e33e1cef08439a7c069982ba6cf, type: 3}
+  spriteHL: {fileID: 21300000, guid: e6b63bea692de8d40b4d2f22f527aa6d, type: 3}
+  isClicked: 0
+  index: 0
 --- !u!1 &6065883215807079873
 GameObject:
   m_ObjectHideFlags: 0
@@ -20669,6 +20830,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &6065883215835365259
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -21320,6 +21482,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &6065883215910620705
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -21482,6 +21645,7 @@ GameObject:
   - component: {fileID: 6065883215930876620}
   - component: {fileID: 6065883215930876621}
   - component: {fileID: 6065883215930876622}
+  - component: {fileID: 1079573395}
   m_Layer: 5
   m_Name: Potion
   m_TagString: Untagged
@@ -21592,6 +21756,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1079573395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6065883215930876616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1065fc97212bd84d9c8c3e848572322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteN: {fileID: 21300000, guid: d6b45bf37dd671a459a4782878130d25, type: 3}
+  spriteHL: {fileID: 21300000, guid: 6ce7377407a8af54397a2dd7d31fd8ad, type: 3}
+  isClicked: 0
+  index: 0
 --- !u!1 &6065883215931809438
 GameObject:
   m_ObjectHideFlags: 0
@@ -21762,7 +21942,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.044159353}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 0.9999999}
   m_AnchoredPosition: {x: 0.1984, y: 26.688904}
   m_SizeDelta: {x: 12.5932, y: -59.6206}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -27724,6 +27904,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391207081329840
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -29054,6 +29235,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391207100295982
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -29994,6 +30176,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391207114078453
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -30114,7 +30297,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7459391207121223797
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30132,10 +30315,10 @@ RectTransform:
   m_Father: {fileID: 6065883215809293324}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 420, y: -85}
-  m_SizeDelta: {x: 100, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7459391207121223802
 CanvasRenderer:
@@ -30528,7 +30711,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7459391207126439528
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30546,10 +30729,10 @@ RectTransform:
   m_Father: {fileID: 6065883215809293324}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 310, y: -225}
-  m_SizeDelta: {x: 100, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7459391207126439533
 CanvasRenderer:
@@ -35520,6 +35703,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391207234176137
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -36993,7 +37177,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 420, y: -225}
+  m_AnchoredPosition: {x: 90, y: -225}
   m_SizeDelta: {x: 100, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7459391207279944637
@@ -39481,6 +39665,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391207324312142
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -41749,6 +41934,7 @@ MonoBehaviour:
     currCharLoc: 0
     hungerMod: 0
     thirstMod: 0
+    extraSlotTypeAllowed: 
     mainExp: 0
     jobExp: 0
     skillPts: 0
@@ -43361,6 +43547,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391207424596033
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -43793,6 +43980,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391207433433031
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -43843,7 +44031,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 640, y: -85}
+  m_AnchoredPosition: {x: 530, y: -85}
   m_SizeDelta: {x: 100, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7459391207434901679
@@ -46177,6 +46365,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391207465429778
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -46284,6 +46473,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391207468127343
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -46690,6 +46880,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391207484083704
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -47263,7 +47454,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7459391207501173797
 RectTransform:
   m_ObjectHideFlags: 0
@@ -47281,10 +47472,10 @@ RectTransform:
   m_Father: {fileID: 6065883215809293324}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 640, y: -225}
-  m_SizeDelta: {x: 100, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7459391207501173802
 CanvasRenderer:
@@ -47379,7 +47570,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -225}
+  m_AnchoredPosition: {x: 640, y: -85}
   m_SizeDelta: {x: 100, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7459391207501650096
@@ -49436,6 +49627,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391207552287872
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -49968,6 +50160,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391207560788231
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -51045,6 +51238,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391207584235581
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -52393,7 +52587,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 420, y: -365}
+  m_AnchoredPosition: {x: 640, y: -225}
   m_SizeDelta: {x: 100, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7459391207647513892
@@ -53558,6 +53752,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391207668035200
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -55195,6 +55390,7 @@ MonoBehaviour:
     currCharLoc: 0
     hungerMod: 0
     thirstMod: 0
+    extraSlotTypeAllowed: 
     mainExp: 0
     jobExp: 0
     skillPts: 0
@@ -56612,6 +56808,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391207730211092
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -56844,7 +57041,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 530, y: -85}
+  m_AnchoredPosition: {x: 420, y: -85}
   m_SizeDelta: {x: 100, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7459391207743836407
@@ -59465,7 +59662,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 530, y: -365}
+  m_AnchoredPosition: {x: 90, y: -365}
   m_SizeDelta: {x: 100, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7459391207792869216
@@ -59696,6 +59893,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391207798015819
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -61262,6 +61460,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391207828744612
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -61688,6 +61887,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391207834916242
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -62928,7 +63128,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 530, y: -505}
+  m_AnchoredPosition: {x: 90, y: -505}
   m_SizeDelta: {x: 100, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7459391207860082513
@@ -64858,6 +65058,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391207900073056
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -67854,6 +68055,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391207977550660
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -70020,6 +70222,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208032000806
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -70127,6 +70330,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208034059617
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -71392,7 +71596,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -365}
+  m_AnchoredPosition: {x: 420, y: -225}
   m_SizeDelta: {x: 100, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7459391208058806120
@@ -74710,6 +74914,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208122400662
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -75559,6 +75764,7 @@ MonoBehaviour:
     currCharLoc: 0
     hungerMod: 0
     thirstMod: 0
+    extraSlotTypeAllowed: 
     mainExp: 0
     jobExp: 0
     skillPts: 0
@@ -75868,7 +76074,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -505}
+  m_AnchoredPosition: {x: 420, y: -365}
   m_SizeDelta: {x: 100, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7459391208142202088
@@ -77647,6 +77853,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208176353641
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -78637,7 +78844,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 310, y: -365}
+  m_AnchoredPosition: {x: 530, y: -225}
   m_SizeDelta: {x: 100, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7459391208193946080
@@ -79484,6 +79691,7 @@ MonoBehaviour:
     currCharLoc: 0
     hungerMod: 0
     thirstMod: 0
+    extraSlotTypeAllowed: 
     mainExp: 0
     jobExp: 0
     skillPts: 0
@@ -79679,6 +79887,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208206098588
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -80286,6 +80495,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208223615589
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -80820,7 +81030,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 640, y: -365}
+  m_AnchoredPosition: {x: 200, y: -365}
   m_SizeDelta: {x: 100, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7459391208242723861
@@ -82300,6 +82510,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208265238078
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -82901,7 +83112,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7459391208279962273
 RectTransform:
   m_ObjectHideFlags: 0
@@ -82919,10 +83130,10 @@ RectTransform:
   m_Father: {fileID: 6065883215809293324}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 90, y: -225}
-  m_SizeDelta: {x: 100, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7459391208279962278
 CanvasRenderer:
@@ -87858,6 +88069,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208398398721
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -90773,6 +90985,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208459335809
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -90880,6 +91093,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208460777294
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -91620,6 +91834,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208465601809
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -91863,6 +92078,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208469984266
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -93651,6 +93867,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208502825604
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -102172,6 +102389,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208660466122
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -102279,6 +102497,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208661715696
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -105136,6 +105355,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208698837458
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -105692,7 +105912,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 310, y: -505}
+  m_AnchoredPosition: {x: 530, y: -365}
   m_SizeDelta: {x: 100, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7459391208709303684
@@ -106195,6 +106415,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208716689336
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -107396,7 +107617,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 420, y: -505}
+  m_AnchoredPosition: {x: 640, y: -365}
   m_SizeDelta: {x: 100, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7459391208753237803
@@ -110080,6 +110301,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208799189007
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -112656,6 +112878,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208853150116
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -114691,6 +114914,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208889945042
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -114897,6 +115121,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208892278820
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -115960,6 +116185,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208907069927
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -116689,6 +116915,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208918371511
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -117496,6 +117723,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208934590596
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -117693,6 +117921,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208939756620
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -120144,7 +120373,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 90, y: -365}
+  m_AnchoredPosition: {x: 310, y: -225}
   m_SizeDelta: {x: 100, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7459391208974815902
@@ -120240,7 +120469,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 90, y: -505}
+  m_AnchoredPosition: {x: 310, y: -365}
   m_SizeDelta: {x: 100, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7459391208975453936
@@ -120336,7 +120565,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 640, y: -505}
+  m_AnchoredPosition: {x: 200, y: -505}
   m_SizeDelta: {x: 100, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7459391208976257175
@@ -121139,6 +121368,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208987775586
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -121246,6 +121476,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391208993533974
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -125620,7 +125851,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 530, y: -225}
+  m_AnchoredPosition: {x: 200, y: -225}
   m_SizeDelta: {x: 100, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7459391209094231770
@@ -127962,6 +128193,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391209157717072
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -128948,6 +129180,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391209172708774
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -129303,6 +129536,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &7459391209177108304
 CanvasGroup:
   m_ObjectHideFlags: 0

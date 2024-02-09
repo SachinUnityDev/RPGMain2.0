@@ -15,7 +15,8 @@ namespace Interactables
         public int itemName => (int)GemNames.Amber;
         public int itemId { get; set; }
         public int maxInvStackSize { get; set; }
-        public SlotType invSlotType { get; set; }  
+        public SlotType invSlotType { get; set; }
+        public int slotID { get; set; }
 
         public List<GemNames> divineGemsSupported =>
                                 new List<GemNames> { GemNames.Carnelian, GemNames.Meranite, GemNames.Rutele };

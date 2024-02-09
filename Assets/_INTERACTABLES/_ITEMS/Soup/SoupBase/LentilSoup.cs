@@ -14,6 +14,7 @@ namespace Interactables
         public int itemName => (int)SoupNames.LentilSoup;
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
+        public int slotID { get; set; }
         public List<int> allBuffs { get; set; }
         public ItemData toolData { get; set; }
         public List<ItemDataWithQty> allIngredData { get; set; }

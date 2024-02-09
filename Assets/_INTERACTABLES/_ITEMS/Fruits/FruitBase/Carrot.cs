@@ -12,7 +12,8 @@ namespace Interactables
         public ItemType itemType => ItemType.Fruits;
         public int itemName => (int)FruitNames.Carrot;
         public int maxInvStackSize { get; set; }
-        public SlotType invSlotType { get; set; }        
+        public SlotType invSlotType { get; set; }
+        public int slotID { get; set; }
         public int itemId { get; set; }
         public List<int> allBuffs { get; set; }
         public float OcWt { get; set; }

@@ -169,6 +169,7 @@ namespace Interactables
         void AddItemOnSlot(Iitems item, bool onDrop)
         {
             ItemsInSlot.Add(item);
+            item.slotID= slotID;
             itemCount++;
             if (onDrop)
             {

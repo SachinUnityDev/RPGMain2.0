@@ -12,6 +12,7 @@ namespace Interactables
         public ItemType itemType => ItemType.Potions;
         public int itemName => (int)PotionNames.HealthPotion;
         public SlotType invSlotType { get; set; }
+        public int slotID { get; set; }
         public int maxInvStackSize { get; set; }
         public List<int> allBuffs { get; set; } = new List<int>();
         public int itemId { get; set; }

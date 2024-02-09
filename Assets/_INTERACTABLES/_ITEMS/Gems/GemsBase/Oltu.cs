@@ -15,6 +15,7 @@ namespace Interactables
         public int itemId { get; set; }
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
+        public int slotID { get; set; }
         public List<GemNames> divineGemsSupported =>
                                 new List<GemNames> { GemNames.Ruri, GemNames.Malachite, GemNames.BlueOnyx };
 

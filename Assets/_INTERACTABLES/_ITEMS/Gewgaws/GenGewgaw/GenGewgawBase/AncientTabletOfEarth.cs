@@ -17,6 +17,7 @@ namespace Interactables
         public int itemName => (int)GenGewgawNames.AncientTabletOfEarth;
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
+        public int slotID { get; set; }
         public List<int> allBuffs { get; set; }
         public Currency currency { get; set; }
         int valLuck;

@@ -13,9 +13,9 @@ namespace Interactables
         public int itemId { get; set; }
         public ItemType itemType => ItemType.Meals;
         public int itemName => (int)MealNames.CookedFish;
-
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
+        public int slotID { get; set; }
         public List<int> allBuffs { get; set; }
         public ItemData toolData { get; set; }  
         public List<ItemDataWithQty> allIngredData { get; set; } = new List<ItemDataWithQty>();

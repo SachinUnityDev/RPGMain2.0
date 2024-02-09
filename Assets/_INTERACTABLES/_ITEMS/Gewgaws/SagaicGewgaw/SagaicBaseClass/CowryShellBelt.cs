@@ -12,15 +12,12 @@ namespace Interactables
         //-10% Thirst and +10% Hunger	
         //+3 Morale when Starving, -2 Morale when Unslakable
         public override SagaicGewgawNames sagaicGewgawName => SagaicGewgawNames.CowryShellBelt;
-
         public int itemId { get; set; }
-
         public ItemType itemType => ItemType.SagaicGewgaws;
-
         public int itemName => (int)SagaicGewgawNames.CowryShellBelt;
-
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
+        public int slotID { get; set; }
         public List<int> allBuffs { get; set; } = new List<int>();
         public Currency currency { get; set; }
 

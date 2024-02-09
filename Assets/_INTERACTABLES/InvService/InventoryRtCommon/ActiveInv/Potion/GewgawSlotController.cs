@@ -81,8 +81,6 @@ namespace Interactables
                 return true;
         }
 
-    
-
         public bool AddItem(Iitems item, bool onDrop = false)
         {
             CharController charController = InvService.Instance.charSelectController; 
@@ -129,7 +127,7 @@ namespace Interactables
             if (item == null) return;
             item.invSlotType = SlotType.GewgawsActiveInv;
             ItemsInSlot.Add(item);
-            
+            item.slotID= slotID;    
             InvService.Instance.invMainModel.AddItem2GewgawsActInv(item, slotID);
             IEquipAble iequip  = item as IEquipAble;
             if (iequip != null)

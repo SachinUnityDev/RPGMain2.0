@@ -122,7 +122,7 @@ namespace Interactables
         {
             item.invSlotType = SlotType.PotionsActiveInv;
             ItemsInSlot.Add(item);
-
+            item.slotID= slotID;
             InvService.Instance.invMainModel.EquipItem2PotionActInv(item, slotID);
             IEquipAble iequip = item as IEquipAble;
             if (iequip != null)

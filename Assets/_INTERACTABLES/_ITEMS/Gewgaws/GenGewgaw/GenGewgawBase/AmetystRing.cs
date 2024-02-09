@@ -2,7 +2,6 @@ using Common;
 using Interactables;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 
 
@@ -17,6 +16,7 @@ namespace Interactables
         public int itemName => (int)GenGewgawNames.AmetystRing;
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
+        public int slotID { get; set; }
         public List<int> allBuffs { get; set; } = new List<int>();
         public ItemData toolData { get; set; }
         public List<ItemDataWithQty> allIngredData { get; set; } = new List<ItemDataWithQty>();

@@ -12,6 +12,7 @@ namespace Interactables
         public ItemType itemType => ItemType.Potions;
         public int itemName => (int)PotionNames.FortitudePotion;
         public SlotType invSlotType { get; set; }
+        public int slotID { get; set; }
         public int maxInvStackSize { get; set; }
         public int itemId { get; set; }
         public List<int> allBuffs { get; set; } = new List<int>();

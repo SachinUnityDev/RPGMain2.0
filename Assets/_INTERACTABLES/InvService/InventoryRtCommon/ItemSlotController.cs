@@ -66,6 +66,7 @@ namespace Interactables
         [Header("FOR DROP CONTROLS")]
         [SerializeField] GameObject draggedGO;
         [SerializeField] ItemsDragDrop itemsDragDrop;
+        
 
         [Header("RIGHT CLICK CONTROLs")]
         public List<ItemActions> rightClickActions = new List<ItemActions>();
@@ -74,34 +75,68 @@ namespace Interactables
         {
             draggedGO = eventData.pointerDrag;
             itemsDragDrop = draggedGO.GetComponent<ItemsDragDrop>();
+            Iitems itemDragged = itemsDragDrop.itemDragged; 
             if (itemsDragDrop != null)
             {
-                bool isDropSuccess = AddItem(itemsDragDrop.itemDragged);
-                if (!isDropSuccess)
-                    InvService.Instance.On_DragResult(isDropSuccess, itemsDragDrop);
+                iSlotable islot = itemsDragDrop.iSlotable;
+
+                //bool isDropSuccess = AddItem(itemsDragDrop.itemDragged);
+                if (islot == null)
+                {
+                    InvService.Instance.On_DragResult(false, itemsDragDrop);
+                    return;
+                }                    
                 else
                 {
-                    iSlotable islot = itemsDragDrop.iSlotable;
-
-                    if (islot != null
-                         && (islot.slotType == SlotType.CommonInv ||
-                                    islot.slotType == SlotType.ExcessInv)
-                                            && islot.ItemsInSlot.Count > 0)
+                    if ((islot.slotType == SlotType.CommonInv ||islot.slotType == SlotType.ExcessInv))
                     {
-                        int count = islot.ItemsInSlot.Count;
-                        for (int i = 0; i < count; i++)
+                        int islotCount = ItemsInSlot.Count;
+                        if(IsEmpty() || HasSameItem(itemDragged)) // simply ADD
                         {
-                            if (AddItem(islot.ItemsInSlot[0])) // size of list changes with every item removal 
+                            for (int i = 0; i < itemDragged.maxInvStackSize; i++)
                             {
-                                islot.RemoveItem();
-                            }
-                            else
-                            {
-                                break; // as soon as you cannot add a item just break 
+                                if (AddItem(islot.ItemsInSlot[0])) // size of list changes with every item removal 
+                                {
+                                    //islot.RemoveItem();
+                                }
+                                else
+                                {
+                                    break; // as soon as you cannot add a item just break 
+                                }
                             }
                         }
+                        else  // SWAP
+                        {
+                        //    List<Iitems> allItemsInDraggedItemSlot = ;
+                            int mySlotCount = ItemsInSlot.Count;
+                        //    islot.RemoveAllItems();
+                        //    for (int i = 0; i < mySlotCount; i++)
+                        //    {
+                        //        if (islot.AddItem(ItemsInSlot[0])) // ADD item in this slot to Dragged Item inv
+                        //        {
+                        //            RemoveItem();
+                        //        }
+                        //        else
+                        //        {
+                        //            break; // as soon as you cannot add a item just break 
+                        //        }
+                        //    }
+                        //    for (int i = 0; i < islotCount ; i++)
+                        //    {
+                        //        if (AddItem(allItemsInDraggedItemSlot[0])) // size of list changes with every item removal 
+                        //        {
+                        //            Debug.Log("SWAP"); 
+                        //            //islot.RemoveItem();
+                        //        }
+                        //        else
+                        //        {
+                        //            break; // as soon as you cannot add a item just break 
+                        //        }
+                        //    }
+
+                        }                        
                     }
-                    InvService.Instance.On_DragResult(isDropSuccess, itemsDragDrop);
+                    InvService.Instance.On_DragResult(true, itemsDragDrop);
                     Destroy(draggedGO);
                 }
             }
@@ -200,9 +235,12 @@ namespace Interactables
                 }
             }
         }
+ 
+
         void AddItemOnSlot(Iitems item, bool onDrop)
         {
             ItemsInSlot.Add(item);
+            item.slotID = slotID; 
             itemCount++;
             if (onDrop)
             {
@@ -507,8 +545,6 @@ namespace Interactables
                     RemoveItem();
                 }                
             }
-
-
         }
         public void Dispose()
         {

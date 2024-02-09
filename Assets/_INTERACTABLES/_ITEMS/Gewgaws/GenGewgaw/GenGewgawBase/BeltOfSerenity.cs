@@ -11,10 +11,9 @@ namespace Interactables
         public override GenGewgawNames genGewgawNames => GenGewgawNames.BeltOfSerenity;
         public ItemType itemType => ItemType.GenGewgaws;
         public int itemName => (int)GenGewgawNames.BeltOfSerenity;
-
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
-
+        public int slotID { get; set; }
         public int itemId { get; set; }
         public List<int> allBuffs { get; set; }
         public Currency currency { get; set; }

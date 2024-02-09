@@ -12,6 +12,7 @@ namespace Interactables
         public int itemName => (int)GemNames.Emerald;
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
+        public int slotID { get; set; }
         public TGNames compatibleTg => TGNames.SimpleRing;
         public GenGewgawNames pdtGenGewgawName => GenGewgawNames.EmeraldRing;
         public NPCNames mergeManagerNPC => NPCNames.Amish;

@@ -24,6 +24,7 @@ namespace Interactables
 
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
+        public int slotID { get; set; }
         public List<int> allBuffs { get; set; } = new List<int>();
         int cdInit;
         int stmReq;

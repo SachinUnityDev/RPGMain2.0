@@ -147,7 +147,7 @@ namespace Interactables
             Transform child = transform.GetChild(slotID);
             iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
             if (iSlotable.ItemsInSlot.Count == 0)
-            {
+            {                
                 iSlotable.AddItem(item);
                 return true;
             }

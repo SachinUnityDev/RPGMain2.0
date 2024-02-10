@@ -22,16 +22,19 @@ namespace Interactables
     [System.Serializable]
     public class ActiveInvData
     {
-        public int CharID; 
-        public List<Iitems> potionActivInv = new List<Iitems>();
-        public List<Iitems> gewgawActivInv = new List<Iitems>();
+        public int CharID;
+        public Iitems[] potionActiveInv;
+        public Iitems[] gewgawActiveInv;
+
         public int potionCount; 
         public int gewgawCount;
         public ActiveInvData(int charID)
         {
             this.CharID = charID;
             potionCount = 0;
-            gewgawCount = 0;    
+            gewgawCount = 0;
+            potionActiveInv = new Iitems[3];
+            gewgawActiveInv = new Iitems[3];
         }
 
         
@@ -43,6 +46,7 @@ namespace Interactables
     public class InvMainModel 
     {
         #region DECLARATIONS
+
 
         public List<Iitems> commonInvItems = new List<Iitems>();
         // Abbas 3 X 6,  each added Companion has 2X6 (Locked)(Town, QuestPrepPhase, in camp, in MapInteraction)
@@ -63,6 +67,14 @@ namespace Interactables
         public int size_Stash = 18;
         #endregion 
 
+        public void SetCommInvSize(int size)
+        {
+            size_Comm= size;
+        }
+        public int GetCommInvSize()
+        {
+            return size_Comm;
+        }
         public bool AddItem2CommORStash(Iitems item)
         {
             if (AddItem2CommInv(item))
@@ -236,8 +248,6 @@ namespace Interactables
         }
 
         #endregion
-
-
         #region STASH
 
         public List<Iitems> GetAllItemsInStashofType(ItemType itemType)
@@ -309,13 +319,13 @@ namespace Interactables
             ActiveInvData activeInvData = allActiveInvData.Find(t => t.CharID == charID);
             if (activeInvData != null)
             {
-                activeInvData.potionActivInv.Add(item);
+                activeInvData.potionActiveInv[slotID] = item; 
                 activeInvData.potionCount++;
             }
             else
             {
-                ActiveInvData activeInvDataNew = new ActiveInvData(charID);
-                activeInvDataNew.potionActivInv.Add(item);
+                ActiveInvData activeInvDataNew = new ActiveInvData(charID);   
+                activeInvDataNew.potionActiveInv[slotID] = item;
                 activeInvDataNew.potionCount++;
                 allActiveInvData.Add(activeInvDataNew);
             }
@@ -337,7 +347,7 @@ namespace Interactables
                 equip.RemoveEquipableFX(); 
             }
         }
-        public bool RemoveItemFromPotionActInv(Iitems Item)
+        public bool RemoveItemFromPotionActInv(Iitems Item, int slotID)
         {
             CharController charController = InvService.Instance.charSelectController;
             int charID = charController.charModel.charID;
@@ -345,7 +355,7 @@ namespace Interactables
             ActiveInvData activeInvData = allActiveInvData.Find(t => t.CharID == charID);
             if (activeInvData != null)
             {
-                activeInvData.potionActivInv.Remove(Item);
+                activeInvData.potionActiveInv[slotID] = null;
                 activeInvData.potionCount--;
                 UnEquipItem(Item);
                 return true;
@@ -361,7 +371,7 @@ namespace Interactables
         #endregion
 
         #region  ACTIVE INV GEWGAWS  
-        public void AddItem2GewgawsActInv(Iitems item, int slotID) // key point of addition
+        public void EquipItem2GewgawsActInv(Iitems item, int slotID) // key point of addition
                                                                    // SAVE and LOAD Active slot here
         {
             CharController charController = InvService.Instance.charSelectController;
@@ -370,19 +380,19 @@ namespace Interactables
             int index = allActiveInvData.FindIndex(t => t.CharID == charID);
             if (index != -1)
             {
-                allActiveInvData[index].gewgawActivInv.Add(item);
+                allActiveInvData[index].gewgawActiveInv[slotID] = item;
                 allActiveInvData[index].gewgawCount++;
             }
             else
             {
                 ActiveInvData activeInvDataNew = new ActiveInvData(charID);
-                activeInvDataNew.gewgawActivInv.Add(item);
+                activeInvDataNew.gewgawActiveInv[slotID] = item;
                 activeInvDataNew.gewgawCount++;
 
                 allActiveInvData.Add(activeInvDataNew);
             }
         }
-        public bool RemoveItemFromGewgawActInv(Iitems Item)
+        public bool RemoveItemFromGewgawActInv(Iitems Item, int slotID)
         {
             CharController charController = InvService.Instance.charSelectController;
 
@@ -391,7 +401,7 @@ namespace Interactables
             ActiveInvData activeInvData = allActiveInvData.Find(t => t.CharID == charID);
             if (activeInvData != null)
             {
-                activeInvData.gewgawActivInv.Remove(Item);
+                activeInvData.gewgawActiveInv[slotID] = null;
                 activeInvData.gewgawCount--;
                 UnEquipItem(Item); 
                 return true;

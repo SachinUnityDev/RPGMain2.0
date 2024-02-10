@@ -116,13 +116,14 @@ namespace Interactables
         }
         void AddItemOnSlot(Iitems item)
         {
+            item.invSlotType = SlotType.ProvActiveInv;
             ItemsInSlot.Add(item);
-            // COUNTER = ItemsInSlot.Count;
-          
-
+            item.slotID = slotID;
+            InvService.Instance.invMainModel.EquipItem2PotionActInv(item, slotID);
+            IEquipAble iequip = item as IEquipAble;
+            if (iequip != null)
+                iequip.ApplyEquipableFX(InvService.Instance.charSelectController);
             RefreshImg(item);
-            if (ItemsInSlot.Count > 1)
-                RefreshSlotTxt();
         }
 
         public void RemoveItem()   // controller by Item DragDrop
@@ -198,14 +199,20 @@ namespace Interactables
         {
             if (eventData.button == PointerEventData.InputButton.Right)
             {
-                InvService.Instance.invMainModel.AddItem2CommInv(ItemsInSlot[0]);
-                RemoveItem();
+                if (ItemsInSlot.Count > 0)
+                {
+                    InvService.Instance.invMainModel.AddItem2CommInv(ItemsInSlot[0]);
+                    RemoveItem();
+                }
             }
         }
 
-        public void LoadSlot(Iitems item)
+        public void LoadSlot(Iitems item) // added only to View
         {
-           
+            if (item == null) return;
+            item.invSlotType = SlotType.ProvActiveInv;
+            ItemsInSlot.Add(item);
+            RefreshImg(item);
         }
 
         public void RemoveAllItems()

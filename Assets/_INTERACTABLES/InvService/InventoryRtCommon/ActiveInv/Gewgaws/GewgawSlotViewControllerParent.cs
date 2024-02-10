@@ -94,10 +94,10 @@ namespace Interactables
             ActiveInvData activeInvData = InvService.Instance.invMainModel
                                             .GetActiveInvData(charController.charModel.charID);
             if (activeInvData == null) return;
-            for (int i = 0; i < activeInvData.gewgawActivInv.Count; i++)
+            for (int i = 0; i < activeInvData.gewgawActiveInv.Length; i++)
             {
                 Transform child = transform.GetChild(i);
-                child.gameObject.GetComponent<iSlotable>().LoadSlot(activeInvData.gewgawActivInv[i]);
+                child.gameObject.GetComponent<iSlotable>().LoadSlot(activeInvData.gewgawActiveInv[i]);
             }
         }
 

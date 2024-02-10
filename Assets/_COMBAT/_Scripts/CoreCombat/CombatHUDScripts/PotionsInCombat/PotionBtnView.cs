@@ -53,9 +53,9 @@ namespace Combat
            if(activeInvData != null) 
             for (int i = 0; i < container.childCount;  i++)
             {
-                if(i < activeInvData.potionActivInv.Count)
+                if(i < activeInvData.gewgawActiveInv.Length)
                     container.GetChild(i).GetComponent<PotionSlotInCombatView>()
-                                .Init(activeInvData.potionActivInv[i]);
+                                .Init(activeInvData.potionActiveInv[i]);
                 else
                     container.GetChild(i).GetComponent<PotionSlotInCombatView>()
                                .Init(null);

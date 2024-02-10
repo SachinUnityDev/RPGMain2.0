@@ -128,7 +128,7 @@ namespace Interactables
             item.invSlotType = SlotType.GewgawsActiveInv;
             ItemsInSlot.Add(item);
             item.slotID= slotID;    
-            InvService.Instance.invMainModel.AddItem2GewgawsActInv(item, slotID);
+            InvService.Instance.invMainModel.EquipItem2GewgawsActInv(item, slotID);
             IEquipAble iequip  = item as IEquipAble;
             if (iequip != null)
                 iequip.ApplyEquipableFX(InvService.Instance.charSelectController); 
@@ -146,7 +146,7 @@ namespace Interactables
             }
             Iitems item = ItemsInSlot[0];
             ItemsInSlot.Remove(item);
-            InvService.Instance.invMainModel.RemoveItemFromGewgawActInv(item);
+            InvService.Instance.invMainModel.RemoveItemFromGewgawActInv(item, slotID);
 
             if (ItemsInSlot.Count >= 1)
             {
@@ -220,15 +220,17 @@ namespace Interactables
         {
             if (eventData.button == PointerEventData.InputButton.Right)
             {
-                InvService.Instance.invMainModel.AddItem2CommInv(ItemsInSlot[0]);
-                RemoveItem();
+                if (ItemsInSlot.Count > 0)
+                {
+                    InvService.Instance.invMainModel.AddItem2CommInv(ItemsInSlot[0]);
+                    RemoveItem();
+                }
             }
         }
 
         public void LoadSlot(Iitems item)
         {
-            if (ItemsInSlot.Count > 1)
-                return;
+            if(item == null) return;            
             item.invSlotType = SlotType.GewgawsActiveInv;
             ItemsInSlot.Add(item);
             RefreshImg(item);

@@ -66,15 +66,19 @@ public class AllItemSO : ScriptableObject
     }
     public int IsSlotRestricted(CharController charController, Iitems item)
     {
+        if (item == null)
+            return -1;
         GewgawSlotType slotType = GetSlotType(item); 
         if (!IsSlotUNRetricted(charController, slotType))
         {
             ActiveInvData activeInvData = InvService.Instance.invMainModel.GetActiveInvData(charController.charModel.charID);
             if (activeInvData == null) return -1;
 
-            for (int i = 0; i < activeInvData.gewgawActivInv.Count; i++)
+            for (int i = 0; i < activeInvData.gewgawActiveInv.Length; i++)
             {
-                if (GetSlotType(activeInvData.gewgawActivInv[i]) == slotType)// to be fixed
+                Iitems item1 = activeInvData.gewgawActiveInv[i]; 
+                if(item1 == null) continue;
+                if (GetSlotType(item1) == slotType)// to be fixed
                     return i; 
             }            
         }
@@ -88,8 +92,9 @@ public class AllItemSO : ScriptableObject
         if (activeInvData == null) return true; 
         // slot type count from current Data
         int currCount = 0; int allowedCount = 1; 
-        foreach (Iitems item in activeInvData.gewgawActivInv)
+        foreach (Iitems item in activeInvData.gewgawActiveInv)
         {
+            if(item== null) continue;
             if(GetSlotType(item) == slotType)
                 currCount++;
         }

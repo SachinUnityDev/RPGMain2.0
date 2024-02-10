@@ -81,7 +81,8 @@ public class PotionSlotInCombatView : MonoBehaviour, IPointerClickHandler, iSlot
             return;
         }
         Iitems item = ItemsInSlot[0];
-        InvService.Instance.invMainModel.RemoveItemFromPotionActInv(item);    
+
+        InvService.Instance.invMainModel.RemoveItemFromPotionActInv(item, slotID);    
         ItemsInSlot.Remove(item);
         itemCount--;
         if (ItemsInSlot.Count >= 1)

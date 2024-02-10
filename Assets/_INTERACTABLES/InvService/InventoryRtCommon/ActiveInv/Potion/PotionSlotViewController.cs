@@ -24,6 +24,12 @@ namespace Interactables
         [Header("RIGHT CLICK CONTROLs")]
         public List<ItemActions> rightClickActions = new List<ItemActions>();
         public bool isRightClicked = false;
+        private void Start()
+        {
+            slotID = transform.GetSiblingIndex();
+            isRightClicked = false;
+            InvService.Instance.commInvViewController.CloseRightClickOpts();
+        }
         public void OnDrop(PointerEventData eventData)
         {
             draggedGO = eventData.pointerDrag;
@@ -42,20 +48,14 @@ namespace Interactables
             }
         }
 
-        private void Start()
-        {
-            slotID = transform.GetSiblingIndex();
-            isRightClicked = false;
-            InvService.Instance.commInvViewController.CloseRightClickOpts();          
-        }
+     
 
         public void LoadSlot(Iitems item)
         {
-            if (ItemsInSlot.Count > 1)
-                return; 
+            if (item == null) return;
             item.invSlotType = SlotType.PotionsActiveInv;
             ItemsInSlot.Add(item);
-            RefreshImg(item);            
+            RefreshImg(item);
         }
 
 
@@ -142,7 +142,7 @@ namespace Interactables
             Iitems item = ItemsInSlot[0];
             ItemsInSlot.Remove(item);
 
-            InvService.Instance.invMainModel.RemoveItemFromPotionActInv(item); 
+            InvService.Instance.invMainModel.RemoveItemFromPotionActInv(item, slotID); 
             if (ItemsInSlot.Count >= 1)
             {
                 RefreshImg(item);
@@ -213,8 +213,11 @@ namespace Interactables
         {
             if (eventData.button == PointerEventData.InputButton.Right)
             {
-                //InvService.Instance.invMainModel.AddItem2CommInv(ItemsInSlot[0]);
-                //RemoveItem(); 
+                if (ItemsInSlot.Count > 0)
+                {
+                    InvService.Instance.invMainModel.AddItem2CommInv(ItemsInSlot[0]);
+                    RemoveItem();
+                }
             }
         }
 

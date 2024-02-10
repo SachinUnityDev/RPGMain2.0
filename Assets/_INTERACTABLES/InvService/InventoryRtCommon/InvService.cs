@@ -6,6 +6,7 @@ using Common;
 using System;
 using Town;
 using UnityEngine.SceneManagement;
+using System.ComponentModel;
 
 namespace Interactables
 {
@@ -52,18 +53,19 @@ namespace Interactables
         {
             invMainModel = new InvMainModel();
             isInvPanelOpen = false;         
-            invController = GetComponent<InvController>();  
+            invController = GetComponent<InvController>();
+            CharService.Instance.OnPartyLocked += On_PartyLocked;
         }
 
         private void OnEnable()
         {
-            SceneManager.sceneLoaded += OnSceneLoaded; 
+            SceneManager.sceneLoaded += OnSceneLoaded;
+           
         }
         private void OnDisable()
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
-
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {   
             if(invXLGO== null)
@@ -74,7 +76,6 @@ namespace Interactables
         {
             OnDragResult?.Invoke(result,itemsDragDrop); 
         }
-
         public void On_CharSelectInv(CharModel charModel)
         {
             if (!isInvPanelOpen) return; 
@@ -138,7 +139,13 @@ namespace Interactables
            
         }
 
-    
+        public void On_PartyLocked()
+        {
+            // get char locked in the party change the size of
+            int charCount =CharService.Instance.allCharsInPartyLocked.Count - 1;
+            int size = 3 + 2 * charCount; 
+            invMainModel.SetCommInvSize(size); 
+        }
 
     }
 }

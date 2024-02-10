@@ -61,6 +61,13 @@ namespace Town
         void OnAddItem2ProvisionSlot()
         {
             Debug.Log("Add to provision slot");
+            ItemData itemData = new ItemData(ItemType.Potions, (int)potionName);
+            Iitems item = ItemService.Instance.GetNewItem(itemData); 
+            if (item != null)
+            {
+                InvService.Instance.invMainModel.EquipItem2PotionActInv(item, 2); 
+            }
+            UnLoad();
         }
 
         public void Load()

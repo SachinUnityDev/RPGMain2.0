@@ -5,8 +5,6 @@ using UnityEngine.EventSystems;
 using Common;
 using UnityEngine.UI;
 using DG.Tweening;
-using UnityEngine.Rendering.Universal;
-using UnityEditor.UI;
 using System.Linq;
 
 namespace Interactables
@@ -48,7 +46,8 @@ namespace Interactables
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (iSlotable.slotType == SlotType.GewgawsActiveInv || iSlotable.slotType == SlotType.PotionsActiveInv)
+            if (iSlotable.slotType == SlotType.GewgawsActiveInv || iSlotable.slotType == SlotType.PotionsActiveInv
+                            ||iSlotable.slotType == SlotType.ProvActiveInv)
                 return;
             hovered = eventData.hovered;
             if(iSlotable.ItemsInSlot.Count != 0)
@@ -71,7 +70,8 @@ namespace Interactables
     
         public void OnPointerExit(PointerEventData eventData)
         {
-            if (iSlotable.slotType == SlotType.GewgawsActiveInv || iSlotable.slotType == SlotType.PotionsActiveInv)
+            if (iSlotable.slotType == SlotType.GewgawsActiveInv || iSlotable.slotType == SlotType.PotionsActiveInv
+                || iSlotable.slotType == SlotType.ProvActiveInv)
                 return; // eliminating drag and drop on active slot of Potion n Gewgaw
             ItemService.Instance.itemCardGO.SetActive(false);
             if (InvService.Instance.commInvViewController.rightClickOpts.GetComponent<RightClickOpts>().isHovered)

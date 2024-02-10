@@ -37,8 +37,14 @@ namespace Common
         public void OnPointerClick(PointerEventData eventData)
         {
             isClicked = !isClicked;
-            invSortingView.OnItemGrpSelected(itemGrp, isClicked); 
-
+            invSortingView.OnItemGrpSelected(itemGrp, isClicked);
+            if (isClicked)
+                OnClick();
+        }
+        void OnClick()
+        {
+            isClicked = true;
+            img.sprite = spriteHL;
         }
         public void UnClick()
         {

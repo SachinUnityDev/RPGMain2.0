@@ -66,17 +66,18 @@ namespace Interactables
 
         public void OnItemGrpSelected(ItemGrp itemGrp, bool isClicked)
         {
-            if(isClicked)
+            UnClickAll();
+            if (isClicked)
             {
                 selectItemGrp = itemGrp;
                 ShowItemGrp(itemGrp); 
             }
-            else
+        }
+        void UnClickAll()
+        {
+            foreach (Transform child in transform)
             {
-                foreach (Transform child in transform)
-                {
-                    child.GetComponent<InvSortBtnPtrEvents>().UnClick();
-                }        
+                child.GetComponent<InvSortBtnPtrEvents>().UnClick();
             }
         }
 
@@ -91,31 +92,41 @@ namespace Interactables
         {
             if (itemGrp.itemTypes[0] == ItemType.None) // case for last ItemGrp ie. show all
             {
-                ShowAll();return; 
+                ShowAll(); return;
             }
-                
 
             foreach (Transform child in slotContainer)
             {
                 child.gameObject.SetActive(false);
                 foreach (ItemType itemType in itemGrp.itemTypes)
                 {
-                    ItemSlotController itemSlotController = child.GetComponent<ItemSlotController>(); 
-                    if(itemSlotController.ItemsInSlot.Count > 0)
+                    ItemSlotController itemSlotController = child.GetComponent<ItemSlotController>();
+                    if (itemSlotController.ItemsInSlot.Count > 0)
                     {
                         Iitems item = itemSlotController.ItemsInSlot[0];
-                        if(item.itemType == itemType)
+                        if (item.itemType == itemType)
                         {
                             child.gameObject.SetActive(true);
                         }
                     }
                     else
                     {
-                        child.gameObject.SetActive(true);   
+                        child.gameObject.SetActive(true);
                     }
                 }
             }
+            foreach (Transform child in slotContainer)
+            {
+                ItemSlotController itemSlotController = child.GetComponent<ItemSlotController>();
+                if(itemSlotController.ItemsInSlot.Count != 0)
+                {
+                    child.SetAsFirstSibling();
+                }
+            }
         }
+
+    
+
     }
 
 

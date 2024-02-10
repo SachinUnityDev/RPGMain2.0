@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using System;
 using TMPro;
 using System.Linq;
-using System.ComponentModel;
 using Common;
 
 namespace Interactables
@@ -75,73 +74,74 @@ namespace Interactables
         {
             draggedGO = eventData.pointerDrag;
             itemsDragDrop = draggedGO.GetComponent<ItemsDragDrop>();
-            Iitems itemDragged = itemsDragDrop.itemDragged; 
+            Iitems itemDragged = itemsDragDrop?.itemDragged; 
             if (itemsDragDrop != null)
             {
-                iSlotable islot = itemsDragDrop.iSlotable;
-
-                //bool isDropSuccess = AddItem(itemsDragDrop.itemDragged);
-                if (islot == null)
+                iSlotable prevSlot = itemsDragDrop.iSlotable;
+                int c = prevSlot.ItemsInSlot.Count;
+                bool isDropSuccess = AddItem(itemsDragDrop.itemDragged);
+                if (!isDropSuccess)
                 {
-                    InvService.Instance.On_DragResult(false, itemsDragDrop);
-                    return;
+                    if(!IsEmpty() && !HasSameItem(itemDragged))// two reasons for drag failure 
+                    {// try swap
+                        List<Iitems> allItemsInDraggedItemSlot = new List<Iitems>(); 
+                        allItemsInDraggedItemSlot.AddRange( prevSlot.ItemsInSlot);
+                        List<Iitems> allItemsInThisSlot = new List<Iitems>();
+                         allItemsInThisSlot.AddRange(ItemsInSlot); 
+                        prevSlot.RemoveAllItems();
+                        RemoveAllItems();
+                       isDropSuccess = AddItem(itemsDragDrop.itemDragged);
+                        for (int i = 0; i < allItemsInThisSlot.Count; i++)
+                        {
+                            if (prevSlot.AddItem(allItemsInThisSlot[0])) // ADD item in this slot to Dragged Item inv
+                            {
+                                isDropSuccess = true;
+                            }
+                            else
+                            {
+                                break; // as soon as you cannot add a item just break 
+                            }
+                        }
+                        for (int i = 0; i < allItemsInDraggedItemSlot.Count; i++)
+                        {
+                            if (AddItem(allItemsInDraggedItemSlot[0])) // size of list changes with every item removal 
+                            {
+                                Debug.Log("SWAP");                          
+                                isDropSuccess = true;
+                            }
+                            else
+                            {
+                                break; // as soon as you cannot add a item just break 
+                            }
+                        }
+                    }             
                 }                    
                 else
                 {
-                    if ((islot.slotType == SlotType.CommonInv ||islot.slotType == SlotType.ExcessInv))
+                    if ((prevSlot.slotType == SlotType.CommonInv ||prevSlot.slotType == SlotType.ExcessInv))
                     {
-                        int islotCount = ItemsInSlot.Count;
+                        int islotCount = prevSlot.ItemsInSlot.Count;
                         if(IsEmpty() || HasSameItem(itemDragged)) // simply ADD
                         {
-                            for (int i = 0; i < itemDragged.maxInvStackSize; i++)
+                            for (int i = 0; i < islotCount; i++)
                             {
-                                if (AddItem(islot.ItemsInSlot[0])) // size of list changes with every item removal 
+                                if (AddItem(itemDragged)) // size of list changes with every item removal 
                                 {
-                                    //islot.RemoveItem();
+                                    prevSlot.RemoveItem();
                                 }
                                 else
                                 {
                                     break; // as soon as you cannot add a item just break 
                                 }
                             }
-                        }
-                        else  // SWAP
-                        {
-                        //    List<Iitems> allItemsInDraggedItemSlot = ;
-                            int mySlotCount = ItemsInSlot.Count;
-                        //    islot.RemoveAllItems();
-                        //    for (int i = 0; i < mySlotCount; i++)
-                        //    {
-                        //        if (islot.AddItem(ItemsInSlot[0])) // ADD item in this slot to Dragged Item inv
-                        //        {
-                        //            RemoveItem();
-                        //        }
-                        //        else
-                        //        {
-                        //            break; // as soon as you cannot add a item just break 
-                        //        }
-                        //    }
-                        //    for (int i = 0; i < islotCount ; i++)
-                        //    {
-                        //        if (AddItem(allItemsInDraggedItemSlot[0])) // size of list changes with every item removal 
-                        //        {
-                        //            Debug.Log("SWAP"); 
-                        //            //islot.RemoveItem();
-                        //        }
-                        //        else
-                        //        {
-                        //            break; // as soon as you cannot add a item just break 
-                        //        }
-                        //    }
-
-                        }                        
-                    }
-                    InvService.Instance.On_DragResult(true, itemsDragDrop);
-                    Destroy(draggedGO);
+                        }                       
+                    }            
                 }
+                InvService.Instance.On_DragResult(isDropSuccess, itemsDragDrop);
+                Destroy(draggedGO);
             }
         }
-
+        
         #endregion
 
         private void Start()

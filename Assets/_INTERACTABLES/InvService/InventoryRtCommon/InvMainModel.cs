@@ -154,7 +154,7 @@ namespace Interactables
         }
         public bool AddItem2CommInv(Iitems item)   // KEY POINT OF ADDITION OF ITEM // Add to model => view
         {          
-            if (InvService.Instance.commInvViewController.AddItem2InVView(item, false))// this adds to model list
+            if (InvService.Instance.invRightViewController.AddItem2InVView(item, false))// this adds to model list
             {
                 item.invSlotType = SlotType.CommonInv;
                 commonInvItems.Add(item);                 

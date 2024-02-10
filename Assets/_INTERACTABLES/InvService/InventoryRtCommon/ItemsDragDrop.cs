@@ -74,7 +74,7 @@ namespace Interactables
                 || iSlotable.slotType == SlotType.ProvActiveInv)
                 return; // eliminating drag and drop on active slot of Potion n Gewgaw
             ItemService.Instance.itemCardGO.SetActive(false);
-            if (InvService.Instance.commInvViewController.rightClickOpts.GetComponent<RightClickOpts>().isHovered)
+            if (InvService.Instance.invRightViewController.rightClickOpts.GetComponent<RightClickOpts>().isHovered)
                 return; 
 
             ItemSlotController itemSlotController = iSlotable as ItemSlotController;
@@ -90,7 +90,7 @@ namespace Interactables
     
         void CloseRightClickOpts(ItemSlotController itemSlotController)
         {
-            if (!InvService.Instance.commInvViewController.rightClickOpts.GetComponent<RightClickOpts>().isHovered)
+            if (!InvService.Instance.invRightViewController.rightClickOpts.GetComponent<RightClickOpts>().isHovered)
             {
                 itemSlotController.CloseRightClickOpts();
                 Debug.Log("CLOSED on ITEM DRAG"); 

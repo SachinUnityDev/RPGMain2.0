@@ -65,7 +65,7 @@ namespace Town
         {
             slotID = transform.GetSiblingIndex();
             isRightClicked = false;
-            InvService.Instance.commInvViewController.CloseRightClickOpts();
+            InvService.Instance.invRightViewController.CloseRightClickOpts();
         }
 
         #region SLOT ITEM HANDLING ..ADD/REMOVE/REFRESH

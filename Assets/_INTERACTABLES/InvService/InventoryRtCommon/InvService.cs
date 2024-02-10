@@ -33,14 +33,13 @@ namespace Interactables
         public InvController invController; 
 
         [Header("Common Inv View NTBR")]
-        public InvRightViewController commInvViewController; // ref
+        public InvRightViewController invRightViewController; // ref
       //  public GameObject invPanel;
         public bool isInvPanelOpen; // to track inv panel
         public bool isRightClickHovered= false;
 
         [Header("Stash Inv : to be ref")]
         public StashInvViewController stashInvViewController;
-        
 
         [Header("EXCESS INV Panel: to be ref")]       
         public ExcessInvViewController excessInvViewController;
@@ -135,7 +134,7 @@ namespace Interactables
 
 
             excessInvViewController = invXLGO.GetComponentInChildren<ExcessInvViewController>();
-            commInvViewController = invXLGO.GetComponentInChildren<InvRightViewController>();
+            invRightViewController = invXLGO.GetComponentInChildren<InvRightViewController>();
            
         }
 

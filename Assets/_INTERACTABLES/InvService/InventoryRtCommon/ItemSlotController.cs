@@ -148,7 +148,7 @@ namespace Interactables
         {
             slotID = transform.GetSiblingIndex();
           
-            InvService.Instance.commInvViewController.CloseRightClickOpts();
+            InvService.Instance.invRightViewController.CloseRightClickOpts();
         }
 
         #region SLOT ITEM HANDLING ..ADD/REMOVE/REFRESH
@@ -339,7 +339,7 @@ namespace Interactables
         {
             if (isRightClicked)
             {
-                InvService.Instance.commInvViewController.CloseRightClickOpts();
+                InvService.Instance.invRightViewController.CloseRightClickOpts();
                 isRightClicked= false;
                 return;
             }
@@ -347,7 +347,7 @@ namespace Interactables
         public void ShowRightClickOpts()
         {
             isRightClicked = true;
-            InvService.Instance.commInvViewController.ShowRightClickList(this);
+            InvService.Instance.invRightViewController.ShowRightClickList(this);
         }
 
         void PopulateRightClickList()
@@ -523,7 +523,7 @@ namespace Interactables
                                                 , ItemsInSlot[0].itemName);
             if (ItemsInSlot[0].itemType == ItemType.Potions)
             {
-                PotionViewControllerParent parentView =  InvService.Instance.commInvViewController
+                PotionViewControllerParent parentView =  InvService.Instance.invRightViewController
                                             .potionActiveInvPanel.GetComponent<PotionViewControllerParent>();
 
                 if (parentView.Equip2PotionSlot(ItemsInSlot[0]))
@@ -536,7 +536,7 @@ namespace Interactables
                 || ItemsInSlot[0].itemType == ItemType.SagaicGewgaws 
                 || ItemsInSlot[0].itemType == ItemType.PoeticGewgaws)
             {
-                GewgawSlotViewControllerParent parentView = InvService.Instance.commInvViewController
+                GewgawSlotViewControllerParent parentView = InvService.Instance.invRightViewController
                                             .gewgawsActiveInvPanel.GetComponent<GewgawSlotViewControllerParent>();
 
                 if (parentView.Equip2GewgawSlot(ItemsInSlot[0]))

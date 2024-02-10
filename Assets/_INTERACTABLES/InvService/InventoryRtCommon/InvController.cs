@@ -45,7 +45,7 @@ namespace Interactables
 
         public void InitSizeList()
         {            
-            InvService.Instance.commInvViewController.UpdateCommInvDB();
+            InvService.Instance.invRightViewController.UpdateCommInvDB();
             InvService.Instance.excessInvViewController.UpdateExcessInvDataBase();
             if(GameService.Instance.gameModel.gameState == GameState.InTown)
             {

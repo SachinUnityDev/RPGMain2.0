@@ -8,14 +8,18 @@ using Town;
 
 namespace Interactables
 {
-    public class InvCurrencyBtnPtrEvents : MonoBehaviour, IPanel
+    public class InvCurrencyBtnPtrEvents : MonoBehaviour, IPanel, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] bool isClicked = false;
 
         [SerializeField] Transform invCurrency;
 
-        [Header("Main Button TBR")]
-        [SerializeField] Button mainCurrBtn; 
+        [SerializeField] Sprite spriteN;
+        [SerializeField] Sprite spriteHL;
+
+        [SerializeField] Image img;
+
+
         [Header("Withdraw/Transfer to Stash")]
         [SerializeField] Button withdrawFrmStashBtn;
         [SerializeField] Button transfer2StashBtn;
@@ -28,18 +32,18 @@ namespace Interactables
         [SerializeField] CurrTransactState transactState;
         //[SerializeField] bool isWithdrawSelect = false;
         //[SerializeField] bool isTransferSelect =false;
-      
+        
         void Start()
         {
+            img= GetComponent<Image>();
             isClicked = false;          
             UnLoad();
             EcoServices.Instance.OnInvMoneyChg += FillPanel;
-
+   
             withdrawFrmStashBtn.onClick.AddListener(OnWithFrmStashPressed); 
             transfer2StashBtn.onClick.AddListener(OnTransfer2StashPressed);
             transactBtn.onClick.AddListener(OnTransferBtnPressed);
             transactState = CurrTransactState.None;
-            mainCurrBtn.onClick.AddListener(OnMainCurrButtonPressed); 
 
         }
 
@@ -79,6 +83,7 @@ namespace Interactables
             UIControlServiceGeneral.Instance.TogglePanel(transform.GetChild(0).gameObject, true);
             FillPanel(EcoServices.Instance.GetMoneyAmtInPlayerInv());
             transactPanel.gameObject.SetActive(false);
+            img.sprite = spriteN; 
         }
 
 
@@ -86,6 +91,7 @@ namespace Interactables
         {
             UIControlServiceGeneral.Instance.TogglePanel(transform.GetChild(0).gameObject, false);
             transactPanel.gameObject.SetActive(false);
+            img.sprite = spriteN;
         }
 
         void FillPanel(Currency invMoney)
@@ -94,18 +100,27 @@ namespace Interactables
             
         }
 
-        void OnMainCurrButtonPressed()
+    
+
+        public void OnPointerClick(PointerEventData eventData)
         {
             if (isClicked)
                 UnLoad();
             else
                 Load();
             isClicked = !isClicked;
+            img.sprite = spriteN;
         }
 
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            img.sprite = spriteHL;
+        }
 
-
-
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            img.sprite = spriteN;
+        }
     }
 
     public enum CurrTransactState

@@ -56,11 +56,11 @@ namespace Interactables
         public GameObject gewgawsActiveInvPanel;
 
         [Header("Inv Ls Displayed/ global var")]
-        public InvSortingView invSortingView; 
+        public InvSortingView invSortingView;
 
-   
+        [Header("stash Inv transfer Box")]
+        public StashInvTransferBox stashInvTransferBox;
 
-        
 
         void Awake()
         {

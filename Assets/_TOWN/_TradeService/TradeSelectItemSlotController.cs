@@ -69,7 +69,7 @@ namespace Common
         {
             slotID = transform.GetSiblingIndex();
             isRightClicked = false;
-            InvService.Instance.commInvViewController.CloseRightClickOpts();
+            InvService.Instance.invRightViewController.CloseRightClickOpts();
         }
 
         public void InitSelectSlot(TradeSelectView tradeSelectView)

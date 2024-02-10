@@ -25,7 +25,7 @@ public class PotionSlotInCombatView : MonoBehaviour, IPointerClickHandler, iSlot
     {
         slotID = transform.GetSiblingIndex();
         isRightClicked = false;
-        InvService.Instance.commInvViewController.CloseRightClickOpts();
+        InvService.Instance.invRightViewController.CloseRightClickOpts();
     }
 
 

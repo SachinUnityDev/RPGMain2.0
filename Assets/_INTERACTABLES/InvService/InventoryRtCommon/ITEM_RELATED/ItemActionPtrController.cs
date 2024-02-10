@@ -66,7 +66,7 @@ namespace Interactables
                 default:
                     break;
             }
-            InvService.Instance.commInvViewController.rightClickOpts.GetComponent<RightClickOpts>().isHovered = false;
+            InvService.Instance.invRightViewController.rightClickOpts.GetComponent<RightClickOpts>().isHovered = false;
             // isHovered = false;
             itemSlotController.CloseRightClickOpts();
             

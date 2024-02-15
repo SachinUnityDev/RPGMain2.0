@@ -16,10 +16,10 @@ namespace Common
 
         public override void OnApply()
         {
-            int dmgaltBuffID =
-            charController.strikeController.ApplyDmgAltBuff(20f, CauseType.TempTrait, (int)tempTraitName, charID,
-            TimeFrame.Infinity, 1, true, AttackType.None, DamageType.Physical, CultureType.None, RaceType.None);
-            allBuffDmgAltIds.Add(dmgaltBuffID);
+            //int dmgaltBuffID =
+            //charController.strikeController.ApplyDmgAltBuff(20f, CauseType.TempTrait, (int)tempTraitName, charID,
+            //TimeFrame.Infinity, 1, true, AttackType.None, DamageType.Physical, CultureType.None, RaceType.None);
+            //allBuffDmgAltIds.Add(dmgaltBuffID);
 
             allBuffIds.AddRange(charController.buffController.BuffAllRes(CauseType.TempTrait, (int)tempTraitName
                 , charID, -50, TimeFrame.Infinity, 1, false));

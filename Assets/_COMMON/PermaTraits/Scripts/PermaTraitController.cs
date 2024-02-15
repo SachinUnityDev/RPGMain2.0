@@ -43,5 +43,26 @@ namespace Common
             allPermaTraits.ForEach(t=>t.EndTrait());    
         }
 
+        public PermaTraitModel GetPermaTraitModel(PermaTraitName permaTraitName)
+        {
+            int index = allPermaModels.FindIndex(t => t.permaTraitName == permaTraitName); 
+            if(index!= -1)
+            {
+                return allPermaModels[index];   
+            }
+            Debug.Log(" PERMA trait Model not found" + permaTraitName); 
+            return null; 
+        }
+        public PermaTraitBase GetPermaTraitBase(PermaTraitName permaTraitName)
+        {
+            int index = allPermaTraits.FindIndex(t => t.permaTraitName == permaTraitName);
+            if (index != -1)
+            {
+                return allPermaTraits[index];
+            }
+            Debug.Log(" PERMA trait BASE not found" + permaTraitName);
+            return null;
+        }
+
     }
 }

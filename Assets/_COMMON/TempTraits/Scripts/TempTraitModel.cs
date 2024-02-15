@@ -12,7 +12,7 @@ namespace Common
         public TempTraitName tempTraitName;        
         public TempTraitType tempTraitType;
         public TraitBehaviour temptraitBehavior;
-
+         
         [Header("Sickness Data")]
         public SicknessData sicknessData; 
         public int castTime = -1;

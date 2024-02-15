@@ -101,12 +101,20 @@ namespace Common
             return -1; 
 
         }
+        bool IsBossTrait(TempTraitName tempTraitName)
+        {
+            if (tempTraitName == TempTraitName.Insane || tempTraitName == TempTraitName.Weakness || tempTraitName == TempTraitName.GravelyIll)
+                return true; 
+            return false;
+        }
+
 
         bool HasBossTraitOfSameType(TempTraitName tempTraitName)
         {
             TempTraitSO tempTraitSO = TempTraitService.Instance.allTempTraitSO.GetTempTraitSO(tempTraitName);
             TraitBehaviour tempTraitBehavior = tempTraitSO.temptraitBehavior;
             TempTraitType tempTraitType = tempTraitSO.tempTraitType;
+            Debug.Log("Boss Trait CHK" + tempTraitName);
 
             switch (tempTraitType)
             {
@@ -162,12 +170,16 @@ namespace Common
         {
             // check immunity list 
             if (HasTempTrait(tempTraitName) || HasImmunityFrmTrait(tempTraitName) 
-                                            || HasImmunityFrmType(tempTraitName)
-                                            || HasBossTraitOfSameType(tempTraitName)) // boss trait chk 
+                                            || HasImmunityFrmType(tempTraitName))                                            
                 return -1;
-            
-            
-            TempTraitSO tempTraitSO = TempTraitService.Instance.allTempTraitSO.GetTempTraitSO(tempTraitName);
+
+            if(!IsBossTrait(tempTraitName))
+            if (HasBossTraitOfSameType(tempTraitName))         // boss trait chk
+                return -1; 
+
+
+         
+                TempTraitSO tempTraitSO = TempTraitService.Instance.allTempTraitSO.GetTempTraitSO(tempTraitName);
             PosTrait_FIFOChk(tempTraitSO.tempTraitType);
 
             if(tempTraitName != TempTraitName.GravelyIll || tempTraitName != TempTraitName.Insane
@@ -390,19 +402,19 @@ namespace Common
             if (Input.GetKeyDown(KeyCode.V)) 
             {
                 ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
-                                                             , TempTraitName.JungleFreak);
-                ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
-                                                            , TempTraitName.SwampyCramp);
-                ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
-                                                            , TempTraitName.ForestGump);
-                ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
-                                                          , TempTraitName.Confident);
+                                                             , TempTraitName.Insane);
+                //ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
+                //                                            , TempTraitName.SwampyCramp);
+                //ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
+                //                                            , TempTraitName.ForestGump);
+                //ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
+                //                                          , TempTraitName.Frail);
 
                 ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
-                                                             , TempTraitName.Unwavering);
+                                                             , TempTraitName.Strong);
 
                 ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
-                                                             , TempTraitName.Initiator);
+                                                             , TempTraitName.Fragile);
             }
         
             if (Input.GetKeyDown(KeyCode.C))

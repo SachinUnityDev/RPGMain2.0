@@ -319,10 +319,7 @@ namespace Combat
 
         }
 
-        public int GetIncVal()
-        {
-            return incrVal; 
-        }
+    
 
         void UpdateTextHeight(TextMeshProUGUI textM)
         {

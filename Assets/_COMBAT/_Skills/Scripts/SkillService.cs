@@ -733,12 +733,3 @@ namespace Combat
     }
 }
 
-
-//public PerkBaseData GetPerkData(PerkNames _perkName)
-//{
-//   // return allSkillPerksData.Find(t => t.perkName == _perkName); 
-//}
-//public void SetPerkState(PerkNames _perkName, PerkSelectState state)
-//{
-//  //  allSkillPerksData.Find(t => t.perkName == _perkName).state = state; 
-//}

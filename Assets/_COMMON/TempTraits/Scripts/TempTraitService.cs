@@ -15,11 +15,12 @@ namespace Common
 
         public event Action<TempTraitBuffData> OnTempTraitStart;
         public event Action<TempTraitBuffData> OnTempTraitEnd;
-        public event Action<CharNames, TempTraitName> OnTempTraitHovered;
-       
+        public event Action<CharController, TempTraitModel> OnTempTraitHovered;
+
+        public GameObject tempTraitCardGO;
+        public GameObject tempTraitCardPrefab; 
+
         public List<TempTraitController> allTempTraitControllers = new List<TempTraitController>(); 
-
-
 
         public TempTraitsFactory temptraitsFactory;
 
@@ -35,6 +36,7 @@ namespace Common
         void Start()
         {
            //TownEventService.Instance.OnQuestBegin += temptraitsFactory.InitTempTraits;       // working 
+           CreateTempTraitCardGO();
         }
 
 
@@ -52,7 +54,18 @@ namespace Common
             TempTraitBase tempTraitBase = temptraitsFactory.GetNewTempTraitBase(tempTraitName);            
             return tempTraitBase;
         }
-
+        void CreateTempTraitCardGO()
+        {
+            GameObject canvasGO = GameObject.FindGameObjectWithTag("Canvas");
+            if (tempTraitCardGO == null)
+            {
+                tempTraitCardGO = Instantiate(tempTraitCardPrefab);
+            }
+            tempTraitCardGO.transform.SetParent(canvasGO.transform);
+            tempTraitCardGO.transform.SetAsLastSibling();
+            tempTraitCardGO.transform.localScale = Vector3.one;
+            tempTraitCardGO.SetActive(false);
+        }
         //public void ApplyPermTraits(GameObject go)
         //{
         //    CharController charController = go?.GetComponent<CharController>();

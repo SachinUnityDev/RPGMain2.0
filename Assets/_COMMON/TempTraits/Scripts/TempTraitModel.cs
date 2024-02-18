@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Common
 {
+    [System.Serializable]
     public class TempTraitModel
     {
         public int tempTraitID;

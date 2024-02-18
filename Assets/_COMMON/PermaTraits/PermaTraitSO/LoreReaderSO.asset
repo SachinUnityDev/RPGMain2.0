@@ -19,5 +19,4 @@ MonoBehaviour:
   raceType: 0
   traitNameStr: ' None'
   allLines:
-  - 'Upon interact Lorestone: Gain 30-60 exp'
-  - 'Upon consume books, scrolls: Gain +30% exp'
+  - "lorerader to be filled\t"

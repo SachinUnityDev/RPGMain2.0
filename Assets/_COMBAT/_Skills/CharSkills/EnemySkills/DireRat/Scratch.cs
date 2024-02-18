@@ -67,7 +67,7 @@ namespace Combat
 
         public override void ApplyVFx()
         {
-            SkillService.Instance.skillFXMoveController.MeleeStrike(PerkType.None, skillModel);
+            SkillService.Instance.skillFXMoveController.JumpStrike(PerkType.None, skillModel);
 
         }
 

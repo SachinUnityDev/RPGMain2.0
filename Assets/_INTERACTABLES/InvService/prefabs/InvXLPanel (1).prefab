@@ -1238,6 +1238,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b4c3cdeb8ea4f4fa2b6c8fa33f5466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: {x: 0, y: 5, z: 0}
+  tempTraitModel:
+    tempTraitID: 0
+    tempTraitName: 0
+    tempTraitType: 0
+    temptraitBehavior: 0
+    sicknessData:
+      herb1:
+        herbName: 0
+        qty: 0
+      herb2:
+        herbName: 0
+        qty: 0
+      restTimeInday: 0
+    castTime: 0
+    traitNameStr: 
   permaTraitModel:
     permaTraitID: 0
     permaTraitName: 0
@@ -1247,6 +1263,8 @@ MonoBehaviour:
     traitBehaviour: 0
     traitNameStr: 
   text: {fileID: 0}
+  tempTraitCardGO: {fileID: 0}
+  permaTraitCardGO: {fileID: 0}
 --- !u!1 &4435337258022243580
 GameObject:
   m_ObjectHideFlags: 0
@@ -1535,6 +1553,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b4c3cdeb8ea4f4fa2b6c8fa33f5466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: {x: 0, y: 5, z: 0}
+  tempTraitModel:
+    tempTraitID: 0
+    tempTraitName: 0
+    tempTraitType: 0
+    temptraitBehavior: 0
+    sicknessData:
+      herb1:
+        herbName: 0
+        qty: 0
+      herb2:
+        herbName: 0
+        qty: 0
+      restTimeInday: 0
+    castTime: 0
+    traitNameStr: 
   permaTraitModel:
     permaTraitID: 0
     permaTraitName: 0
@@ -1544,6 +1578,8 @@ MonoBehaviour:
     traitBehaviour: 0
     traitNameStr: 
   text: {fileID: 0}
+  tempTraitCardGO: {fileID: 0}
+  permaTraitCardGO: {fileID: 0}
 --- !u!1 &4607745720007597688
 GameObject:
   m_ObjectHideFlags: 0
@@ -1693,6 +1729,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b4c3cdeb8ea4f4fa2b6c8fa33f5466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: {x: 0, y: 5, z: 0}
+  tempTraitModel:
+    tempTraitID: 0
+    tempTraitName: 0
+    tempTraitType: 0
+    temptraitBehavior: 0
+    sicknessData:
+      herb1:
+        herbName: 0
+        qty: 0
+      herb2:
+        herbName: 0
+        qty: 0
+      restTimeInday: 0
+    castTime: 0
+    traitNameStr: 
   permaTraitModel:
     permaTraitID: 0
     permaTraitName: 0
@@ -1702,6 +1754,8 @@ MonoBehaviour:
     traitBehaviour: 0
     traitNameStr: 
   text: {fileID: 0}
+  tempTraitCardGO: {fileID: 0}
+  permaTraitCardGO: {fileID: 0}
 --- !u!1 &4695623670373257505
 GameObject:
   m_ObjectHideFlags: 0
@@ -3156,6 +3210,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b4c3cdeb8ea4f4fa2b6c8fa33f5466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: {x: 0, y: 5, z: 0}
+  tempTraitModel:
+    tempTraitID: 0
+    tempTraitName: 0
+    tempTraitType: 0
+    temptraitBehavior: 0
+    sicknessData:
+      herb1:
+        herbName: 0
+        qty: 0
+      herb2:
+        herbName: 0
+        qty: 0
+      restTimeInday: 0
+    castTime: 0
+    traitNameStr: 
   permaTraitModel:
     permaTraitID: 0
     permaTraitName: 0
@@ -3165,6 +3235,8 @@ MonoBehaviour:
     traitBehaviour: 0
     traitNameStr: 
   text: {fileID: 0}
+  tempTraitCardGO: {fileID: 0}
+  permaTraitCardGO: {fileID: 0}
 --- !u!1 &5210429604399605679
 GameObject:
   m_ObjectHideFlags: 0
@@ -3711,6 +3783,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b4c3cdeb8ea4f4fa2b6c8fa33f5466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: {x: 0, y: 5, z: 0}
+  tempTraitModel:
+    tempTraitID: 0
+    tempTraitName: 0
+    tempTraitType: 0
+    temptraitBehavior: 0
+    sicknessData:
+      herb1:
+        herbName: 0
+        qty: 0
+      herb2:
+        herbName: 0
+        qty: 0
+      restTimeInday: 0
+    castTime: 0
+    traitNameStr: 
   permaTraitModel:
     permaTraitID: 0
     permaTraitName: 0
@@ -3720,6 +3808,8 @@ MonoBehaviour:
     traitBehaviour: 0
     traitNameStr: 
   text: {fileID: 0}
+  tempTraitCardGO: {fileID: 0}
+  permaTraitCardGO: {fileID: 0}
 --- !u!1 &6065883213828989086
 GameObject:
   m_ObjectHideFlags: 0
@@ -7298,7 +7388,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6065883215943615624}
   m_HandleRect: {fileID: 6065883215943615625}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 1.0000024
   m_Size: 0.95584065
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -16749,8 +16839,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6065883215451372449}
   m_HandleRect: {fileID: 6065883215451372450}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 0.9999998
+  m_Value: 0
+  m_Size: 0.99999976
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -17391,7 +17481,7 @@ RectTransform:
   m_Father: {fileID: 6065883214764891947}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.00000017881393, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -23191,6 +23281,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b4c3cdeb8ea4f4fa2b6c8fa33f5466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: {x: 0, y: 5, z: 0}
+  tempTraitModel:
+    tempTraitID: 0
+    tempTraitName: 0
+    tempTraitType: 0
+    temptraitBehavior: 0
+    sicknessData:
+      herb1:
+        herbName: 0
+        qty: 0
+      herb2:
+        herbName: 0
+        qty: 0
+      restTimeInday: 0
+    castTime: 0
+    traitNameStr: 
   permaTraitModel:
     permaTraitID: 0
     permaTraitName: 0
@@ -23200,6 +23306,8 @@ MonoBehaviour:
     traitBehaviour: 0
     traitNameStr: 
   text: {fileID: 0}
+  tempTraitCardGO: {fileID: 0}
+  permaTraitCardGO: {fileID: 0}
 --- !u!1 &6908021542094025641
 GameObject:
   m_ObjectHideFlags: 0

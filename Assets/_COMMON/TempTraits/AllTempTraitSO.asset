@@ -61,3 +61,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9bd091bb48f94044fbec2e2f7ff87316, type: 2}
   - {fileID: 11400000, guid: 33e257c0c980f36468fd23acce769ce4, type: 2}
   - {fileID: 11400000, guid: 22c1840a214acb84d81bc03914cd9c2d, type: 2}
+  alltempTraitBehaviorSprite:
+  - tempTraitBehaviour: 1
+    iconSprite: {fileID: 21300000, guid: 697b1eba83e06794b828a4f6ddc449d2, type: 3}
+    cardBG: {fileID: 21300000, guid: ab68aa0f05c31194e8afbbca3be990ef, type: 3}
+  - tempTraitBehaviour: 2
+    iconSprite: {fileID: 21300000, guid: e7b4716e9f0edd340b5a73689975554d, type: 3}
+    cardBG: {fileID: 21300000, guid: 4157c92beeaa5074085d71152834038a, type: 3}
+  allTempTraitTypeSprite:
+  - tempTraitType: 1
+    iconSprite: {fileID: 21300000, guid: 0cd73d10409447e47b15a820ee5d168a, type: 3}
+  - tempTraitType: 2
+    iconSprite: {fileID: 21300000, guid: ee9d2e14964da1946a1bcc096e8f0318, type: 3}
+  - tempTraitType: 3
+    iconSprite: {fileID: 21300000, guid: 9cbd64a5c3bef60459b8978a87568d2c, type: 3}

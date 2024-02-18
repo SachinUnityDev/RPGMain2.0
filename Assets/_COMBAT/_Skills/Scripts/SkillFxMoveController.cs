@@ -5,6 +5,7 @@ using DG.Tweening;
 using System.Linq;
 using Common;
 using Town;
+using Ink.Runtime;
 
 namespace Combat
 {
@@ -174,6 +175,44 @@ namespace Combat
 
         }
 
+        public void JumpStrike(PerkType perkType, SkillModel skillModel)
+        {
+            SetMoveParams();
+            this.skillModel = skillModel;
+            strikeNos = skillModel.strikeNos;
+            currPerkType = perkType;
+
+            Sequence meleeSeq = DOTween.Sequence();
+            Sequence meleeRev = DOTween.Sequence();
+
+            Vector3 END = new Vector3(0, strikerTransform.position.y, strikerTransform.position.z);
+            Vector3 START = new Vector3(strikerTransform.position.x, strikerTransform.position.y
+                                    , strikerTransform.position.z);
+            //  Debug.Log("END " + END + " START POS " + startPos);
+            meleeSeq
+                .AppendCallback(() => CharService.Instance.ToggleCharColliders(targetTransform.gameObject, false))
+                //.AppendCallback(() => CharService.Instance.ToggleCharColliders(strikerTransform.gameObject, false))
+                .AppendCallback(() => ToggleSprite(strikerTransform, true))
+                .Append(strikerTransform.DOJump(END, 0.75f, 1, 0.20f))
+                //.Append(strikerTransform.DOMove(END, 0.16f * SkillService.Instance.combatSpeed))
+                .AppendCallback(() => ApplyDefensePose(true))
+                .AppendCallback(() => ApplyImpactFXTarget())
+                ;
+
+            meleeRev
+                .AppendInterval(0.5f)
+                .AppendCallback(() => ApplyDefensePose(false))
+                .AppendCallback(() => ToggleSprite(strikerTransform, false))
+                .Append(strikerTransform.DOMove(START, 0.16f * SkillService.Instance.combatSpeed))
+                ;
+
+            meleeSeq.Play().OnComplete(() => meleeRev.Play()
+                       .OnComplete(() => Destroy(ImpactFX))
+                       .OnComplete(() => meleeRev = null)
+                       .OnComplete(() => meleeSeq = null)
+                       .OnComplete(() => CharService.Instance.TurnOnAllCharColliders())
+                       );
+        }
 
         //****************TARGET FX APPLIERS *****************************************
         #region TARGET FX APPLIERS
@@ -379,8 +418,7 @@ namespace Combat
          //   if (lastStatus == Status) return;
             if (transPoseON)
             {
-                transform.GetChild(1).gameObject.SetActive(true);
-                transform.GetChild(1).DOScale(1.82f, 0.1f);
+                transform.GetChild(1).gameObject.SetActive(true);              
                 transform.GetChild(0).gameObject.SetActive(false);
             }
             else

@@ -26,6 +26,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 503e8995cc7147e4b8bcd0e0d4a47aed, type: 2}
   - {fileID: 11400000, guid: 78aec885531c1194ca0103a66758c4c7, type: 2}
   - {fileID: 11400000, guid: 3c23309acf727cc45a11d69d2d824005, type: 2}
-  classIcon: {fileID: 0}
-  cultIcon: {fileID: 0}
-  racialIcon: {fileID: 0}
+  classIcon: {fileID: 21300000, guid: 50866d9b71a60054d850e9c117fd82d7, type: 3}
+  cultureIcon: {fileID: 21300000, guid: 8be2bcd7e38799d468d9731f9ed497d1, type: 3}
+  racialIcon: {fileID: 21300000, guid: acbd10ea55f7d1643808be02066ae381, type: 3}

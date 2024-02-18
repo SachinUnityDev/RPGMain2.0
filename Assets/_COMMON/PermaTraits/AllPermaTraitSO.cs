@@ -15,7 +15,7 @@ namespace Common
 
         [Header("Icon ")]
         public Sprite classIcon;
-        public Sprite cultIcon;
+        public Sprite cultureIcon;
         public Sprite racialIcon; 
         
 

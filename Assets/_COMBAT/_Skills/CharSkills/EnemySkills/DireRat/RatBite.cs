@@ -99,7 +99,7 @@ namespace Combat
             if (targetController)
             {
                 Sequence Seq = DOTween.Sequence();
-                Seq.AppendCallback(() => SkillService.Instance.skillFXMoveController.MeleeStrike(PerkType.None, skillModel))
+                Seq.AppendCallback(() => SkillService.Instance.skillFXMoveController.JumpStrike(PerkType.None, skillModel))
                     .AppendInterval(0.5f)
                     .AppendCallback(() => GridService.Instance.gridMovement.MovebyRow(myDyna, MoveDir.Forward, 1));
 

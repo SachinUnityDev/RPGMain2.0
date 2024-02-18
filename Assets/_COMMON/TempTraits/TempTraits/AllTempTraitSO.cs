@@ -5,17 +5,18 @@ using UnityEngine;
 
 namespace Common
 {
+    [System.Serializable]
     public class TempTBehaviourSpriteData
     {
         public TraitBehaviour tempTraitBehaviour;
-        public Sprite iconSprite; 
+        public Sprite iconSprite;
+        public Sprite cardBG; 
     }
+    [System.Serializable]
     public class TempTraitTypeSpriteData
     {
         public TempTraitType tempTraitType; 
-        public Sprite iconSprite;
-        public Sprite cardBGTop; 
-        public Sprite cardBGBottom;
+        public Sprite iconSprite;        
     }
 
     [CreateAssetMenu(fileName = "AllTempTraitSO", menuName = "Common/AllTempTraitSO")]
@@ -43,7 +44,7 @@ namespace Common
             }
         }
 
-        public TempTraitTypeSpriteData GetTypeSpriteData(TempTraitType tempTraitType)
+        public TempTraitTypeSpriteData GetTraitTypeSpriteData(TempTraitType tempTraitType)
         {
             int index = allTempTraitTypeSprite.FindIndex(t => t.tempTraitType == tempTraitType);
             if (index != -1)

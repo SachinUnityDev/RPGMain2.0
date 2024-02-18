@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: DireRat
   m_EditorClassIdentifier: 
   charName: 19
-  combatPose: {fileID: 21300000, guid: 4a997d663d2d10848ba924b97138f73c, type: 3}
+  combatPose: {fileID: 21300000, guid: 33f2bc25a599408418768fd3c8b9c1a7, type: 3}
   combatFX:
     loc: 0
     skillSprite: {fileID: 0}
-  defendPose: {fileID: 21300000, guid: 18ea45f131055a04bb404dae9f311ae4, type: 3}
+  defendPose: {fileID: 21300000, guid: 02b916e6e6ed8ee46ac4b4f2fd67364c, type: 3}
   defendFX:
     loc: 0
     skillSprite: {fileID: 0}
@@ -33,7 +33,7 @@ MonoBehaviour:
     charName: 19
     skillID: 0
     skillIconSprite: {fileID: 21300000, guid: 0e9643acd212fb04cb00cf522eaf0a6c, type: 3}
-    skillPose: {fileID: 21300000, guid: 56895ed5741a33b4d87c32cea96310f5, type: 3}
+    skillPose: {fileID: 21300000, guid: 901a706ee9ff338448b2cf4212fbc176, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 1
@@ -70,7 +70,7 @@ MonoBehaviour:
     charName: 19
     skillID: 0
     skillIconSprite: {fileID: 21300000, guid: 1216be5803074f24c93afa8c333b9608, type: 3}
-    skillPose: {fileID: 21300000, guid: 1b0d302e8377f1248a1476af43fcddbd, type: 3}
+    skillPose: {fileID: 21300000, guid: 351c8716b2d6fb94c8dd495bf161af55, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 2
@@ -107,7 +107,7 @@ MonoBehaviour:
     charName: 19
     skillID: 0
     skillIconSprite: {fileID: 21300000, guid: 0016dca74096a734592eebc8dd4e4774, type: 3}
-    skillPose: {fileID: 21300000, guid: 00927cc0909e6fc478d03acdd865f2d2, type: 3}
+    skillPose: {fileID: 21300000, guid: 7b00abb7db8958148b20ff9035c6ce9e, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 3
@@ -144,7 +144,7 @@ MonoBehaviour:
     charName: 19
     skillID: 0
     skillIconSprite: {fileID: 21300000, guid: e8a75ecb5696e65499a954c256760440, type: 3}
-    skillPose: {fileID: 21300000, guid: 4a997d663d2d10848ba924b97138f73c, type: 3}
+    skillPose: {fileID: 21300000, guid: 33f2bc25a599408418768fd3c8b9c1a7, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 5
@@ -174,7 +174,7 @@ MonoBehaviour:
     charName: 19
     skillID: 144
     skillIconSprite: {fileID: 21300000, guid: 860dad25a56a6b24c9775b6497bd7f5d, type: 3}
-    skillPose: {fileID: 0}
+    skillPose: {fileID: 21300000, guid: 33f2bc25a599408418768fd3c8b9c1a7, type: 3}
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 6
@@ -193,7 +193,7 @@ MonoBehaviour:
     timeFrame: 1
     maxUsagePerCombat: -1
     skillIncli: 10
-    baseWeight: 200
+    baseWeight: 5
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000

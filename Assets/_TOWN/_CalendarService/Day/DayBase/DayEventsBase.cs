@@ -10,9 +10,16 @@ namespace Town
     {
         public abstract DayName dayName { get; }        
         public DayModel dayModel;
+
+        public virtual void OnDayInit(DayModel dayModel)
+        {
+           // dayModel = CalendarService.Instance.dayEventsController.GetDayModel(dayName);
+           this.dayModel = dayModel;
+        }
+
         public virtual void OnDayApply()
         {
-            dayModel = CalendarService.Instance.dayEventsController.GetDayModel(dayName);          
+            
         }
         public virtual void OnDayEnd() 
         {

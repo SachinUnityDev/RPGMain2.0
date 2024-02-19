@@ -33,7 +33,10 @@ namespace Town
             for (int i = 1; i < Enum.GetNames(typeof(DayName)).Length; i++)
             {
                 DayEventsBase dayBase = 
-                    GetComponent<CalendarFactory>().GetDayEvent((DayName)i);                
+                    GetComponent<CalendarFactory>().GetDayEvent((DayName)i);
+                DayModel dayModel = GetDayModel((DayName)i); 
+
+                dayBase.OnDayInit(dayModel);
                 allDayEventsBase.Add(dayBase);
             }
             ApplyDayEvents(-1);// random val 
@@ -50,7 +53,7 @@ namespace Town
             }
         }
 
-        DayEventsBase GetDayBase(DayName dayName)
+        public DayEventsBase GetDayBase(DayName dayName)
         {
             int index = allDayEventsBase.FindIndex(t=>t.dayName == dayName);
             if(index != -1)

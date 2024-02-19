@@ -5898,6 +5898,7 @@ MonoBehaviour:
     currCharLoc: 0
     hungerMod: 0
     thirstMod: 0
+    extraSlotTypeAllowed: 
     mainExp: 0
     jobExp: 0
     skillPts: 0
@@ -8197,6 +8198,7 @@ MonoBehaviour:
     currCharLoc: 0
     hungerMod: 0
     thirstMod: 0
+    extraSlotTypeAllowed: 
     mainExp: 0
     jobExp: 0
     skillPts: 0
@@ -9254,6 +9256,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!114 &410070741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14798,6 +14801,7 @@ MonoBehaviour:
     currCharLoc: 0
     hungerMod: 0
     thirstMod: 0
+    extraSlotTypeAllowed: 
     mainExp: 0
     jobExp: 0
     skillPts: 0
@@ -18598,6 +18602,7 @@ MonoBehaviour:
     currCharLoc: 0
     hungerMod: 0
     thirstMod: 0
+    extraSlotTypeAllowed: 
     mainExp: 0
     jobExp: 0
     skillPts: 0
@@ -21427,6 +21432,7 @@ MonoBehaviour:
     currCharLoc: 0
     hungerMod: 0
     thirstMod: 0
+    extraSlotTypeAllowed: 
     mainExp: 0
     jobExp: 0
     skillPts: 0
@@ -23457,6 +23463,7 @@ MonoBehaviour:
     currCharLoc: 0
     hungerMod: 0
     thirstMod: 0
+    extraSlotTypeAllowed: 
     mainExp: 0
     jobExp: 0
     skillPts: 0
@@ -27978,6 +27985,7 @@ MonoBehaviour:
     currCharLoc: 0
     hungerMod: 0
     thirstMod: 0
+    extraSlotTypeAllowed: 
     mainExp: 0
     jobExp: 0
     skillPts: 0
@@ -29721,6 +29729,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!114 &1574284813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32156,7 +32165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   descLines: []
-  pSkillCardPrefab: {fileID: 8342553628190565142, guid: 61773f6eb10f4f643b4d8fb51a8ef7f8,
+  pSkillCardPrefab: {fileID: 8342553628190565142, guid: 03a9f25c50d4b364eb05772464c46ebc,
     type: 3}
   pSkillCardGO: {fileID: 0}
   currPSkillName: 0
@@ -44848,6 +44857,7 @@ MonoBehaviour:
   slotParent: {fileID: 0}
   itemCardGO: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hovered: []
 --- !u!225 &6409427374605606933
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -46081,6 +46091,7 @@ MonoBehaviour:
     currCharLoc: 0
     hungerMod: 0
     thirstMod: 0
+    extraSlotTypeAllowed: 
     mainExp: 0
     jobExp: 0
     skillPts: 0

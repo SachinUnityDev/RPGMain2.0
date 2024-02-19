@@ -161,7 +161,7 @@ MonoBehaviour:
         fruitNames: 0
         ingredientName: 0
         scrollName: 0
-        tgName: 11
+        tgName: 2
         toolName: 0
         teaName: 0
         soupsName: 0
@@ -221,7 +221,7 @@ MonoBehaviour:
         fruitNames: 0
         ingredientName: 0
         scrollName: 0
-        tgName: 8
+        tgName: 3
         toolName: 0
         teaName: 0
         soupsName: 0

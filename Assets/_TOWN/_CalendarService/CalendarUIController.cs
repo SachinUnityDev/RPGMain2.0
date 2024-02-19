@@ -196,11 +196,11 @@ namespace Common
             dayPanel.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text
                                             = tipOftheDayList[UnityEngine.Random.Range(0, len)];
 
-            FillSpecs();
+            FillSpecs(currentDay);
         }
-        public void FillSpecs()
+        public void FillSpecs(DayName currDayName)
         {
-            DayName currDayName = CalendarService.Instance.currDayName; 
+            //DayName currDayName = CalendarService.Instance.currDayName; 
             DayModel dayModel = CalendarService.Instance.dayEventsController.GetDayModel(currDayName);
             if (dayModel == null) return;
             dayPanel.transform.GetChild(2).GetChild(4).GetComponent<TextMeshProUGUI>().text

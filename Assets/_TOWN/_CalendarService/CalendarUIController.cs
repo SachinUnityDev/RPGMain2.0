@@ -46,8 +46,8 @@ namespace Common
             townCenterPanel = FindObjectOfType<TownCenterView>(true).gameObject;
 
 
-            showMonthBtn = monthPanel.GetComponentInChildren<Button>();
-            showWeekBtn = weekPanel.GetComponentInChildren<Button>();
+            //showMonthBtn = monthPanel.GetComponentInChildren<Button>();
+            //showWeekBtn = weekPanel.GetComponentInChildren<Button>();
 
 
             townCenterPanel.SetActive(true);
@@ -56,14 +56,13 @@ namespace Common
             CloseAllPanel();
             showMonthBtn.onClick.RemoveAllListeners();// prevent double subscriptions
             showWeekBtn.onClick.RemoveAllListeners();   
-            showMonthBtn.onClick.AddListener(OnShowWeekBtnPressed);
-            showWeekBtn.onClick.AddListener(OnShowMonthBtnPressed);
+            showMonthBtn.onClick.AddListener(OnShowMonthBtnPressed);
+            showWeekBtn.onClick.AddListener(OnShowWeekBtnPressed);
 
         }
         private void OnEnable()
         {           
-            SceneManager.sceneLoaded += OnSceneLoaded;    
-            
+            SceneManager.sceneLoaded += OnSceneLoaded;   
         }
         private void OnDisable()
         {
@@ -168,12 +167,14 @@ namespace Common
             }
         }
 
+    
         public void UpdateDayPanel(int _currentdayInYr, DayName _gameStartDay)
         {
             Debug.Log(_gameStartDay + "in num " + (int)_gameStartDay);
             Debug.Log("current Day in year" + _currentdayInYr);
-            DayName currentDay = (DayName)GetDayInRange(_currentdayInYr +((int)_gameStartDay - 1));            
-            
+            DayName currentDay = CalendarService.Instance.currDayName; 
+                //(DayName)GetDayInRange(_currentdayInYr +((int)_gameStartDay - 1));            
+                                            
             Debug.Log("Current Day" + currentDay);
             
             dayPanel.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text 
@@ -200,7 +201,6 @@ namespace Common
         }
         public void FillSpecs(DayName currDayName)
         {
-            //DayName currDayName = CalendarService.Instance.currDayName; 
             DayModel dayModel = CalendarService.Instance.dayEventsController.GetDayModel(currDayName);
             if (dayModel == null) return;
             dayPanel.transform.GetChild(2).GetChild(4).GetComponent<TextMeshProUGUI>().text
@@ -284,23 +284,11 @@ namespace Common
         public int GetMonthStartDay(MonthName _currentMonth,DayName _yearStartDay)
         {           
             int daysAdded = ((((int)_currentMonth)-1)*30);
-            int monthStartDay = GetDayInRange( daysAdded+ (int)_yearStartDay);
+            int monthStartDay = CalendarService.Instance.GetDayInRange( daysAdded+ (int)_yearStartDay);
            // Debug.Log("monthStartDay" + (DayName)monthStartDay + "int "+ monthStartDay );
             return monthStartDay;      
         }
 
-        int GetDayInRange(int day)
-        {            
-            if (day > 7)
-            {
-                day = (day % 7);
-                if (day == 0) return 7;  // correction for 7th day start
-            }      
-            
-            return day; 
-        }
-
-            
        public GameObject GetPanelInScene(PanelInScene _panelInScene)
         {
             switch (_panelInScene)

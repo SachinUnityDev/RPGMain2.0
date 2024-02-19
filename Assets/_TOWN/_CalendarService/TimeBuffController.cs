@@ -62,6 +62,7 @@ namespace Common
         public int ApplyDayBuff(CauseType causeType, int causeName, int causebyCharID, DayName dayName
                                , AttribName attribName, int valChg, int timeVal, bool isBuff)
         {
+            charController = GetComponent<CharController>();
 
             CauseData causeData = new CauseData(causeType, causeName, causebyCharID, charController.charModel.charID);
 
@@ -71,7 +72,7 @@ namespace Common
 
             DayBuffData dayBuffData = new DayBuffData(causeData, buffID, dayName, attribName
                                                         , valChg, TimeFrame.EndOfDay, timeVal, isBuff);
-            dayBuffData.currTime++; 
+            
             allBuffData.Add(dayBuffData);
             return buffID;
         }

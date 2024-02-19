@@ -45,7 +45,7 @@ namespace Common
 
             if (GameService.Instance.gameModel.gameState == GameState.InTown)
             {                
-                canvasGo = GameObject.FindGameObjectWithTag("TownCanvas");                
+                canvasGo = GameObject.FindGameObjectWithTag("Canvas");                
             }
             if (GameService.Instance.gameModel.gameState == GameState.InQuestRoom)
             {
@@ -74,6 +74,6 @@ namespace Common
             }
             
 
-    }
+        }
     }
 }

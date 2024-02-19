@@ -14,14 +14,14 @@ namespace Town
         public List<DayEventsBase> allDayEventsBase = new List<DayEventsBase>();
         public List<DayModel> allDayModels = new List<DayModel>();
 
-        private void Start()
-        {
-            CalendarService.Instance.OnStartOfCalDay +=ApplyDayEvents; 
-        }
-        private void OnDisable()
-        {
-            CalendarService.Instance.OnStartOfCalDay -= ApplyDayEvents;
-        }
+        //private void Start()
+        //{
+        //    CalendarService.Instance.OnStartOfCalDay +=ApplyDayEvents; 
+        //}
+        //private void OnDisable()
+        //{
+        //    CalendarService.Instance.OnStartOfCalDay -= ApplyDayEvents;
+        //}
         public void InitDayEvent(AllDaySO allDaySO)
         {
             foreach (DaySO daySO in allDaySO.allDaySO)
@@ -38,11 +38,10 @@ namespace Town
 
                 dayBase.OnDayInit(dayModel);
                 allDayEventsBase.Add(dayBase);
-            }
-            ApplyDayEvents(-1);// random val 
+            }             
         }
 
-        public void ApplyDayEvents(int day)
+        public void ApplyDayEvents(int dayInYr)
         {
             DayName currDayName = CalendarService.Instance.currDayName;
             foreach (DayModel dayModel in allDayModels)

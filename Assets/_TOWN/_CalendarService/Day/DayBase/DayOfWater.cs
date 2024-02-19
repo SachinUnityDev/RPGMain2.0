@@ -21,7 +21,7 @@ namespace Town
                 c.timeBuffController.ApplyDayBuff(CauseType.DayEvents, (int)(dayName), c.charModel.charID, dayName
                     , AttribName.waterRes, val, 1, true);
             }
-            string str = $"{val} Water Res";
+            string str = $"+{val} Water Res";
             dayModel.daySpecs = str;
         }
     }

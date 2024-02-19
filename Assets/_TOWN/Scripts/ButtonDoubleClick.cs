@@ -18,11 +18,12 @@ namespace Common
             if (eventData.clickCount > 1)
             {
                 CalendarService.Instance.On_EndDayClick();
-            }else if (eventData.clickCount == 1)
+            }
+            else if (eventData.clickCount == 1)
             {
                 CalendarService.Instance.DisplayTimeChgPanel();
             }
-          
+
         }
 
         //public void OnPointerDown(PointerEventData data)

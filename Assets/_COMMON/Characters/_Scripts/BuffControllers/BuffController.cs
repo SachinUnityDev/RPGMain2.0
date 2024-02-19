@@ -205,7 +205,7 @@ namespace Combat
         public int ApplyBuff(CauseType causeType, int causeName, int causeByCharID
                                 , AttribName attribName, float value, TimeFrame timeFrame, int netTime, bool isBuff)
         {
-           
+            charController = GetComponent<CharController>();
             AttribModData attribModVal =  charController.ChangeAttrib( causeType,  causeName, causeByCharID
                                             ,  attribName,  value, true);
             int currRd = CombatEventService.Instance.currentRound;

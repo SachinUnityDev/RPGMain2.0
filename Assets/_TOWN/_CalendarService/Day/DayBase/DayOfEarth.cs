@@ -22,7 +22,7 @@ namespace Town
                 c.timeBuffController.ApplyDayBuff(CauseType.DayEvents, (int)(dayName), c.charModel.charID, dayName
                     , AttribName.earthRes,val, 1, true);
             }
-            string str = $"{val} Earth Res";
+            string str = $"+{val} Earth Res";
             dayModel.daySpecs = str;
         }
     }

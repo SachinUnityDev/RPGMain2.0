@@ -20,7 +20,7 @@ namespace Town
                 c.timeBuffController.ApplyDayBuff(CauseType.DayEvents, (int)(dayName), c.charModel.charID, dayName, AttribName.darkRes,
                     val, 1, true);
             }
-            string str = $"{val} Dark Res";
+            string str = $"+{val} Dark Res";
             dayModel.daySpecs =str;
         }
     }

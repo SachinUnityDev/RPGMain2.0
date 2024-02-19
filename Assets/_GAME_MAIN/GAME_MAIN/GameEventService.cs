@@ -46,13 +46,14 @@ namespace Common
                 return; 
                 LocationName locationName = LocationName.Nekkisari;
                 
-                CalendarService.Instance.Init();
+               
                 TownService.Instance.Init(locationName);
                 BuildingIntService.Instance.InitBuildIntService();
                 EncounterService.Instance.EncounterInit();
                 CharService.Instance.Init();
                 UIControlServiceGeneral.Instance.InitUIGeneral();
-             
+                CalendarService.Instance.Init();
+
                 EcoServices.Instance.InitEcoServices();
                 DialogueService.Instance.InitDialogueService();
                 BarkService.Instance.InitBarkService();

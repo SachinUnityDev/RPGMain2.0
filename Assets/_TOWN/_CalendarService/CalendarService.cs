@@ -135,13 +135,32 @@ namespace Common
             calendarUIController.OnPanelEnter(calendarUIController.dayPanel, PanelInScene.Day);
         }
 
-        public void UpdateDay()
+        public void UpdateDayWeekNMonth()
         {
-            currDayName++; dayInGame++; dayInYear++;
-
-            calendarUIController.UpdateDayPanel(dayInYear, startOfGameDayName);
+            dayInGame++; dayInYear++;
+            currDayName = GetCurrDayName();             
             UpdateWeek();
             UpdateMonth();
+        }
+        
+        void UpdateDayView()
+        {
+            calendarUIController.UpdateDayPanel(dayInYear, startOfGameDayName);
+        }
+
+        public int GetDayInRange(int day)
+        {
+            if (day > 7)
+            {
+                day = (day % 7);
+                if (day == 0) return 7;  // correction for 7th day start
+            }
+            return day;
+        }
+        DayName GetCurrDayName()
+        {  
+            DayName currentDay = (DayName)GetDayInRange(dayInYear + ((int)startOfGameDayName - 1));
+            return currentDay;
         }
         public void ScrollMonthClick(int incr)
         {
@@ -166,7 +185,6 @@ namespace Common
                 calendarUIController.UpdateWeekPanel(currentWeek);
                 currDayName = (DayName)1;
                 On_StartOfTheWeek((WeekEventsName)currentWeek); 
-
             }
 
         }
@@ -221,12 +239,14 @@ namespace Common
         public void On_StartOfDay(int day)
         {
             Debug.Log("END Day");  // day in Year .... 
-            UpdateDay();
-
+            UpdateDayWeekNMonth(); // days updated here 
+            dayEventsController.ApplyDayEvents(dayInYear);
            // Debug.Log("time state" + OnChangeTimeState.GetInvocationList().Length); 
             OnChangeTimeState?.Invoke(TimeState.Day);
-            OnStartOfCalDay?.Invoke(day);  // day in Game 
-            OnStartOfCalDate?.Invoke(new CalDate((MonthName)currentMonth, dayInYear)); 
+            OnStartOfCalDay?.Invoke(dayInGame);  // day in Game 
+            OnStartOfCalDate?.Invoke(new CalDate((MonthName)currentMonth, dayInYear));
+
+            UpdateDayView(); 
         }
         public void On_StartOfNight(int day)
         {
@@ -247,8 +267,8 @@ namespace Common
         {
             for (int i = 0; i < day; i++)
             {
-                On_StartOfDay(dayInYear);
-                On_StartOfNight(dayInYear);
+                On_StartOfDay(dayInGame);
+                On_StartOfNight(dayInGame);
             }
         }
 

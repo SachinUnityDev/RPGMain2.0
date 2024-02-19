@@ -14,175 +14,223 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charID: 201
   charName: 28
-  charPrefab: {fileID: 2074616580668071315, guid: 4140c1e021bc51e43ac57da029e1d4c9,
+  charPrefab: {fileID: 5010379146674982337, guid: 7db63061659e49441acef0f48c2995fa,
     type: 3}
   charSprite: {fileID: 21300000, guid: d51e17a9a7337634b8dbe5e1620074dd, type: 3}
+  charSpriteUnClickedFlipped: {fileID: 0}
   charHexPortrait: {fileID: 21300000, guid: b057129b93c776d458602e21c4bbba10, type: 3}
-  dialoguePortrait: {fileID: 21300000, guid: bb866aa1aef6941448c06b726a7e6d07, type: 3}
+  dialoguePortraitClicked: {fileID: 0}
+  dialoguePortraitUnClicked: {fileID: 0}
+  bpPortraitUnLocked: {fileID: 0}
+  bpPortraitUnAvail: {fileID: 0}
   charMode: 2
   orgCharMode: 2
-  expPoints: 0
+  mainExp: 0
+  jobExp: 0
+  skillPts: 0
+  charLvl: 1
+  charNameStr: Lioness
+  availOfChar: 1
+  stateOfChar: 2
+  fameBehavior: 0
+  baseCharLoc: 0
+  charRole: 0
   raceType: 1
+  raceTypeHero: 0
   cultType: 19
   classType: 0
-  heroType: 0
-  tameAnimalsStrength: 0
+  archeType: 0
   fleeBehaviour: 0
-  canBeAmbushed: 0
-  canBeCaught: 0
-  potions: 0
-  gems: 0
+  provisionItems: []
+  earningsItems: []
+  earningShare: 0
+  CompanionPreReqOpt1: []
+  CompanionPreReqOpt2: []
   startLevel: 0
-  staminaRegen: 2
-  StatsList:
-  - statsName: 1
-    currValue: 0
-    desc: 
-    minRange: 0
-    maxRange: 0
-    minLimit: 0
-    maxLimit: 0
-  - statsName: 2
-    currValue: 0
-    desc: 
-    minRange: 0
-    maxRange: 0
-    minLimit: 0
-    maxLimit: 0
-  - statsName: 3
-    currValue: 0
-    desc: 
-    minRange: 0
-    maxRange: 0
-    minLimit: 0
-    maxLimit: 0
-  - statsName: 4
-    currValue: 0
-    desc: 
-    minRange: 0
-    maxRange: 0
-    minLimit: 0
-    maxLimit: 0
-  - statsName: 5
-    currValue: 0
-    desc: 
-    minRange: 0
-    maxRange: 0
-    minLimit: 0
-    maxLimit: 0
-  - statsName: 6
-    currValue: 0
-    desc: 
-    minRange: 8
-    maxRange: 10
-    minLimit: 0
-    maxLimit: 0
-  - statsName: 7
-    currValue: 6
-    desc: 
-    minRange: 0
-    maxRange: 0
-    minLimit: 0
-    maxLimit: 0
-  - statsName: 8
-    currValue: -5
-    desc: 
-    minRange: 0
-    maxRange: 0
-    minLimit: 0
-    maxLimit: 0
-  - statsName: 9
-    currValue: 6
-    desc: 
-    minRange: 0
-    maxRange: 0
-    minLimit: 0
-    maxLimit: 0
-  - statsName: 10
-    currValue: 7
-    desc: 
-    minRange: 0
-    maxRange: 0
-    minLimit: 0
-    maxLimit: 0
-  - statsName: 11
+  permaTraitNames: 
+  AttribList:
+  - AttribName: 1
     currValue: 8
-    desc: 
-    minRange: 0
-    maxRange: 0
+    baseValue: 8
+    desc: Min value for Physical and Magical attacks.
     minLimit: 0
-    maxLimit: 0
-  - statsName: 12
-    currValue: 11
-    desc: 
-    minRange: 0
-    maxRange: 0
+    maxLimit: 30
+    isClamped: 0
+  - AttribName: 2
+    currValue: 6
+    baseValue: 6
+    desc: Chance to land Physical attack to a target.
     minLimit: 0
-    maxLimit: 0
-  - statsName: 13
-    currValue: 9
-    desc: 
-    minRange: 0
-    maxRange: 0
-    minLimit: 0
-    maxLimit: 0
-  - statsName: 14
+    maxLimit: 12
+    isClamped: 0
+  - AttribName: 3
     currValue: 0
-    desc: 
-    minRange: 1
-    maxRange: 2
+    baseValue: 0
+    desc: Determinant value for hitting correct target by Magical attacks or Misfire.
     minLimit: 0
-    maxLimit: 0
-  - statsName: 15
-    currValue: 3
-    desc: 
-    minRange: 0
-    maxRange: 0
+    maxLimit: 12
+    isClamped: 0
+  - AttribName: 4
+    currValue: 6
+    baseValue: 6
+    desc: Determinant value for Critical and Feeble hits.
     minLimit: 0
-    maxLimit: 0
-  - statsName: 16
+    maxLimit: 12
+    isClamped: 0
+  - AttribName: 5
+    currValue: 7
+    baseValue: 7
+    desc: Determinant value for gain or lose AP.
+    minLimit: 0
+    maxLimit: 12
+    isClamped: 0
+  - AttribName: 6
+    currValue: 7
+    baseValue: 7
+    desc: Main determinant for turn order. Increases chance to gain AP by using Move
+      skills.
+    minLimit: 0
+    maxLimit: 12
+    isClamped: 0
+  - AttribName: 7
+    currValue: 13
+    baseValue: 13
+    desc: Determinant value for base Health. Increases chance to withstand Hunger.
+    minLimit: 0
+    maxLimit: 100
+    isClamped: 0
+  - AttribName: 8
+    currValue: 9
+    baseValue: 9
+    desc: Determinant value for base Stamina. Increases chance to withstand Thirst.
+    minLimit: 0
+    maxLimit: 100
+    isClamped: 0
+  - AttribName: 9
+    currValue: 1
+    baseValue: 1
+    desc: Min value to mitigate incoming Physical damage.
+    minLimit: 0
+    maxLimit: 30
+    isClamped: 0
+  - AttribName: 10
+    currValue: 2
+    baseValue: 2
+    desc: Chance to evade a Physical attack.
+    minLimit: 0
+    maxLimit: 12
+    isClamped: 0
+  - AttribName: 11
     currValue: 10
-    desc: 
-    minRange: 0
-    maxRange: 0
-    minLimit: 0
-    maxLimit: 0
-  - statsName: 17
+    baseValue: 10
+    desc: Percentage value to mitigate incoming Fire damage.
+    minLimit: -30
+    maxLimit: 80
+    isClamped: 0
+  - AttribName: 12
     currValue: 10
-    desc: 
-    minRange: 0
-    maxRange: 0
-    minLimit: 0
-    maxLimit: 0
-  - statsName: 18
+    baseValue: 10
+    desc: Percentage value to mitigate incoming Earth damage.
+    minLimit: -30
+    maxLimit: 80
+    isClamped: 0
+  - AttribName: 13
     currValue: 10
-    desc: 
-    minRange: 0
-    maxRange: 0
-    minLimit: 0
-    maxLimit: 0
-  - statsName: 19
+    baseValue: 10
+    desc: Percentage value to mitigate incoming Water damage.
+    minLimit: -30
+    maxLimit: 80
+    isClamped: 0
+  - AttribName: 14
     currValue: 10
-    desc: 
-    minRange: 0
-    maxRange: 0
-    minLimit: 0
-    maxLimit: 0
-  - statsName: 20
-    currValue: 15
-    desc: 
-    minRange: 0
-    maxRange: 0
-    minLimit: 0
-    maxLimit: 0
-  - statsName: 21
+    baseValue: 10
+    desc: Percentage value to mitigate incoming Air damage.
+    minLimit: -30
+    maxLimit: 80
+    isClamped: 0
+  - AttribName: 15
+    currValue: 0
+    baseValue: 0
+    desc: Percentage value to mitigate incoming Light damage.
+    minLimit: -20
+    maxLimit: 60
+    isClamped: 0
+  - AttribName: 16
     currValue: -10
-    desc: 
-    minRange: 0
-    maxRange: 0
+    baseValue: -10
+    desc: Percentage value to mitigate incoming Dark damage.
+    minLimit: -20
+    maxLimit: 60
+    isClamped: 0
+  - AttribName: 17
+    currValue: 2
+    baseValue: 2
+    desc: Value to gain Stamina per rd.
     minLimit: 0
-    maxLimit: 0
+    maxLimit: 6
+    isClamped: 0
+  - AttribName: 18
+    currValue: 0
+    baseValue: 0
+    desc: Value to gain Health per rd.
+    minLimit: 0
+    maxLimit: 6
+    isClamped: 0
+  - AttribName: 19
+    currValue: 0
+    baseValue: 0
+    desc: Value to reset Fortitude after each combat.
+    minLimit: -24
+    maxLimit: 24
+    isClamped: 0
+  - AttribName: 20
+    currValue: 2
+    baseValue: 2
+    desc: Max value to mitigate incoming Physical damage.
+    minLimit: 0
+    maxLimit: 30
+    isClamped: 0
+  - AttribName: 21
+    currValue: 10
+    baseValue: 10
+    desc: Max value for Physical and Magical attacks.
+    minLimit: 0
+    maxLimit: 30
+    isClamped: 0
+  statList:
+  - statName: 1
+    currValue: 52
+    desc: Health is health, you know it.
+    minLimit: 0
+    maxLimit: 400
+    isClamped: 0
+  - statName: 2
+    currValue: 27
+    desc: Fuel for using skills.
+    minLimit: 0
+    maxLimit: 300
+    isClamped: 0
+  - statName: 3
+    currValue: 0
+    desc: Value that shows your fear or faith.
+    minLimit: -30
+    maxLimit: 30
+    isClamped: 0
+  - statName: 4
+    currValue: 0
+    desc: When full, get Starving status.
+    minLimit: 0
+    maxLimit: 100
+    isClamped: 0
+  - statName: 5
+    currValue: 0
+    desc: When full, get Unslakable status
+    minLimit: 0
+    maxLimit: 100
+    isClamped: 0
   charOccupies: 1
   posPriority: 010000000200000003000000
-  charLvl: 0
-  skillLvl: 0
+  armorType: 0
+  armorTypeStr: 
+  enchantableGem4Weapon: 0
+  armorSprite: {fileID: 0}

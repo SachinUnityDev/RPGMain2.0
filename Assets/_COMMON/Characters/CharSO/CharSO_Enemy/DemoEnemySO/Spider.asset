@@ -1,0 +1,236 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3108039f6456f440bbe925b6c103a06, type: 3}
+  m_Name: Spider
+  m_EditorClassIdentifier: 
+  charID: 210
+  charName: 33
+  charPrefab: {fileID: 8882643317599600544, guid: 96f99e1c7d134cf4c8e1d39f1f7f56c2,
+    type: 3}
+  charSprite: {fileID: 21300000, guid: f35d08e0df74c32478ff5c84f2b4d4c8, type: 3}
+  charSpriteUnClickedFlipped: {fileID: 0}
+  charHexPortrait: {fileID: 21300000, guid: d00468d5e00e1f84ca71192b8869967f, type: 3}
+  dialoguePortraitClicked: {fileID: 0}
+  dialoguePortraitUnClicked: {fileID: 0}
+  bpPortraitUnLocked: {fileID: 0}
+  bpPortraitUnAvail: {fileID: 0}
+  charMode: 2
+  orgCharMode: 2
+  mainExp: 0
+  jobExp: 0
+  skillPts: 0
+  charLvl: 1
+  charNameStr: Spida
+  availOfChar: 1
+  stateOfChar: 2
+  fameBehavior: 0
+  baseCharLoc: 0
+  charRole: 0
+  raceType: 1
+  raceTypeHero: 0
+  cultType: 20
+  classType: 0
+  archeType: 0
+  fleeBehaviour: 0
+  provisionItems: []
+  earningsItems: []
+  earningShare: 0
+  CompanionPreReqOpt1: []
+  CompanionPreReqOpt2: []
+  startLevel: 0
+  permaTraitNames: 
+  AttribList:
+  - AttribName: 1
+    currValue: 5
+    baseValue: 5
+    desc: Base value for Physical and Magical attacks.
+    minLimit: 0
+    maxLimit: 30
+    isClamped: 0
+  - AttribName: 2
+    currValue: 7
+    baseValue: 7
+    desc: Chance to land Physical attack to a target.
+    minLimit: 0
+    maxLimit: 12
+    isClamped: 0
+  - AttribName: 3
+    currValue: 5
+    baseValue: 5
+    desc: Determinant value for hitting correct target by Magical attacks or Misfire.
+    minLimit: 0
+    maxLimit: 12
+    isClamped: 0
+  - AttribName: 4
+    currValue: 5
+    baseValue: 5
+    desc: Determinant value for Critical and Feeble hits.
+    minLimit: 0
+    maxLimit: 12
+    isClamped: 0
+  - AttribName: 5
+    currValue: 6
+    baseValue: 6
+    desc: Determinant value for extra action or pass action.
+    minLimit: 0
+    maxLimit: 12
+    isClamped: 0
+  - AttribName: 6
+    currValue: 5
+    baseValue: 5
+    desc: Main determinant for turn order. Increases chance to keep action after
+      using Move.
+    minLimit: 0
+    maxLimit: 12
+    isClamped: 0
+  - AttribName: 7
+    currValue: 9
+    baseValue: 9
+    desc: Determinant value for base Health. Increases chance to withstand Hunger.
+    minLimit: 0
+    maxLimit: 100
+    isClamped: 0
+  - AttribName: 8
+    currValue: 9
+    baseValue: 9
+    desc: Determinant value for base Stamina. Increases chance to withstand Thirst.
+    minLimit: 0
+    maxLimit: 100
+    isClamped: 0
+  - AttribName: 9
+    currValue: 1
+    baseValue: 1
+    desc: Value to mitigate incoming Physical damage.
+    minLimit: 0
+    maxLimit: 30
+    isClamped: 0
+  - AttribName: 10
+    currValue: 2
+    baseValue: 2
+    desc: Chance to evade a Physical attack.
+    minLimit: 0
+    maxLimit: 12
+    isClamped: 0
+  - AttribName: 11
+    currValue: -20
+    baseValue: -20
+    desc: Percentage value to mitigate incoming Fire damage.
+    minLimit: -30
+    maxLimit: 80
+    isClamped: 0
+  - AttribName: 12
+    currValue: 30
+    baseValue: 30
+    desc: Percentage value to mitigate incoming Earth damage.
+    minLimit: -30
+    maxLimit: 80
+    isClamped: 0
+  - AttribName: 13
+    currValue: 10
+    baseValue: 10
+    desc: Percentage value to mitigate incoming Water damage.
+    minLimit: -30
+    maxLimit: 80
+    isClamped: 0
+  - AttribName: 14
+    currValue: 5
+    baseValue: 5
+    desc: Percentage value to mitigate incoming Air damage.
+    minLimit: -30
+    maxLimit: 80
+    isClamped: 0
+  - AttribName: 15
+    currValue: 0
+    baseValue: 0
+    desc: Percentage value to mitigate incoming Light damage.
+    minLimit: -20
+    maxLimit: 60
+    isClamped: 0
+  - AttribName: 16
+    currValue: 15
+    baseValue: 15
+    desc: Percentage value to mitigate incoming Dark damage.
+    minLimit: -20
+    maxLimit: 60
+    isClamped: 0
+  - AttribName: 17
+    currValue: 2
+    baseValue: 2
+    desc: Percentage value to mitigate incoming Dark damage.
+    minLimit: 0
+    maxLimit: 6
+    isClamped: 0
+  - AttribName: 18
+    currValue: 1
+    baseValue: 1
+    desc: Percentage value to mitigate incoming Dark damage.
+    minLimit: 0
+    maxLimit: 6
+    isClamped: 0
+  - AttribName: 19
+    currValue: 0
+    baseValue: 0
+    desc: Percentage value to mitigate incoming Dark damage.
+    minLimit: -24
+    maxLimit: 24
+    isClamped: 0
+  - AttribName: 20
+    currValue: 3
+    baseValue: 3
+    desc: Percentage value to mitigate incoming Dark damage.
+    minLimit: 0
+    maxLimit: 30
+    isClamped: 0
+  - AttribName: 21
+    currValue: 7
+    baseValue: 7
+    desc: Percentage value to mitigate incoming Dark damage.
+    minLimit: 0
+    maxLimit: 30
+    isClamped: 0
+  statList:
+  - statName: 1
+    currValue: 36
+    desc: Health is health, you know it...
+    minLimit: 0
+    maxLimit: 36
+    isClamped: 0
+  - statName: 2
+    currValue: 27
+    desc: Resource to use skills.
+    minLimit: 0
+    maxLimit: 27
+    isClamped: 0
+  - statName: 3
+    currValue: 0
+    desc: Be among those who dare to dare!
+    minLimit: -30
+    maxLimit: 30
+    isClamped: 0
+  - statName: 4
+    currValue: 0
+    desc: Start losing Health once Hunger is 100%.
+    minLimit: 0
+    maxLimit: 100
+    isClamped: 0
+  - statName: 5
+    currValue: 0
+    desc: Start losing Stamina once Thirst is 100%.
+    minLimit: 0
+    maxLimit: 100
+    isClamped: 0
+  charOccupies: 0
+  posPriority: 
+  armorType: 0
+  armorTypeStr: 
+  enchantableGem4Weapon: 0
+  armorSprite: {fileID: 0}

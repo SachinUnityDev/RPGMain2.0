@@ -17,7 +17,7 @@ MonoBehaviour:
   allEnemyDataInPack:
   - enemyName: 19
     preferredPos: 03000000
-  - enemyName: 19
+  - enemyName: 13
     preferredPos: 02000000
   - enemyName: 18
     preferredPos: 07000000

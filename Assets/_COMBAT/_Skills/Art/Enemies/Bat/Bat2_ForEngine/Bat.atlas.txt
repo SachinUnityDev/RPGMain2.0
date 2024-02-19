@@ -1,69 +1,34 @@
-
 Bat.png
-size: 3514,1085
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
+size:2100,2100
+filter:Linear,Linear
+pma:true
 Body
-  rotate: false
-  xy: 2567, 550
-  size: 580, 533
-  orig: 582, 542
-  offset: 0, 2
-  index: -1
+bounds:1141,433,582,538
+offsets:0,0,582,542
+rotate:90
 Body2
-  rotate: true
-  xy: 3149, 723
-  size: 360, 363
-  orig: 363, 377
-  offset: 1, 9
-  index: -1
+bounds:1629,71,360,363
+offsets:1,9,363,377
+rotate:90
 Foot_L
-  rotate: false
-  xy: 3264, 20
-  size: 241, 291
-  orig: 241, 291
-  offset: 0, 0
-  index: -1
+bounds:1433,1194,241,291
+rotate:90
 Foot_R
-  rotate: false
-  xy: 2968, 13
-  size: 294, 298
-  orig: 311, 325
-  offset: 17, 27
-  index: -1
+bounds:1433,1800,294,298
+offsets:17,27,311,325
 Head
-  rotate: false
-  xy: 2567, 55
-  size: 399, 486
-  orig: 406, 487
-  offset: 7, 0
-  index: -1
+bounds:1141,32,399,486
+offsets:7,0,406,487
+rotate:90
 Leg_L
-  rotate: true
-  xy: 3149, 543
-  size: 178, 361
-  orig: 178, 361
-  offset: 0, 0
-  index: -1
+bounds:1433,1437,178,361
 Leg_R
-  rotate: true
-  xy: 2968, 313
-  size: 228, 339
-  orig: 229, 339
-  offset: 0, 0
-  index: -1
+bounds:1613,1570,228,339
+offsets:0,0,229,339
+rotate:90
 Wing_L
-  rotate: false
-  xy: 2, 2
-  size: 1424, 1081
-  orig: 1430, 1081
-  offset: 6, 0
-  index: -1
+bounds:2,1017,1429,1081
+offsets:1,0,1430,1081
 Wing_R
-  rotate: true
-  xy: 1428, 71
-  size: 1012, 1137
-  orig: 1013, 1137
-  offset: 1, 0
-  index: -1
+bounds:2,2,1013,1137
+rotate:90

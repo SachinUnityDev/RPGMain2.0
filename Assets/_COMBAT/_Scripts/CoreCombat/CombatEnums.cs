@@ -194,7 +194,7 @@ namespace Combat
         CallForHunt,
         CanineClaw, // Hyena
         JawOfSteel,
-        SniffingBlood,
+        SniffBlood,
         SpearStab, // Forestaller
         SpearSweep,
         GuardLurcher,
@@ -203,10 +203,11 @@ namespace Combat
         BanditTrap, 
         SpidaScratch, // spider
         WebbySpit,
-        SelfDefense,
+        Carapace,
         Respire, // equivalent to patience
         Telekinesis,//uzu abbas       
-        Retaliate,         
+        Retaliate,       
+        
 
 
     }

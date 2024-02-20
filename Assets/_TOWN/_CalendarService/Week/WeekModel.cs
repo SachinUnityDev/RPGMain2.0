@@ -8,16 +8,14 @@ namespace Common
     [Serializable]
     public class WeekModel
     {
-        public List<int> orderInSeq = new List<int>();
         public WeekEventsName weekName;
         public int weekCount;
         public string weekNameStr;
         public string weekDesc;
         public List<string> WeekSpecs = new List<string>();
-
+        public bool isDayBonusReceived = false; 
         public WeekModel(WeekSO weekSO)
         {
-            this.orderInSeq = weekSO.orderInSeq.DeepClone();
             this.weekName = weekSO.weekName;
             this.weekCount = weekSO.weekCount;
             this.weekNameStr = weekSO.weekNameStr;

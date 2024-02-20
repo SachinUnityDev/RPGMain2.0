@@ -5,7 +5,7 @@ using Common;
 using TMPro;
 using UnityEngine.EventSystems;
 using Combat;
-
+using DG.Tweening;
 
 namespace Interactables
 {
@@ -20,24 +20,17 @@ namespace Interactables
         AttribPanelViewComp attribPanelViewComp;
         BtmCharViewController btmCharViewController; 
 
-        void Awake()
-        {
-           
-                //attribPanelViewComp =
-            //        transform.GetComponentInParent<AttribPanelViewComp>();
-
-            //btmCharViewController =
-            //    attribPanelViewComp.transform.parent.parent
-            //                    .GetChild(2).GetComponent<BtmCharViewController>();
-        }
+   
         private void Start()
         {
             CharService.Instance.allCharsInPartyLocked.ForEach(t => t.OnAttribCurrValSet
                += PopulateData);
 
             InvService.Instance.OnCharSelectInvPanel += PopulateData;
+         
             desc = transform.GetChild(3).gameObject;
             desc.SetActive(false);
+            PopulateData(InvService.Instance.charSelectController.charModel);
 
         }
         private void OnDisable()
@@ -95,10 +88,24 @@ namespace Interactables
 
         void PopulateDesc()
         {
-            desc.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text
-                            = attribData.AttribName.ToString().CreateSpace();
-            desc.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text
-                            = attribData.desc;
+            if(attribData.AttribName != AttribName.dmgMin && attribData.AttribName != AttribName.armorMin)
+            {
+                desc.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text
+                             = attribData.AttribName.ToString().CreateSpace();
+                desc.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text
+                                = attribData.desc;
+            }
+            else
+            {
+                if (attribData.AttribName == AttribName.armorMin)                
+                    desc.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Armor";
+
+                if (attribData.AttribName == AttribName.dmgMin)
+                    desc.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Damage";
+            }
+            TextMeshProUGUI descTxt = desc.transform.GetChild(1).GetComponent<TextMeshProUGUI>(); 
+            descTxt.text = attribData.desc;
+            descTxt.DOColor(Color.white, 0.1f); 
         }
 
         public void OnPointerEnter(PointerEventData eventData)

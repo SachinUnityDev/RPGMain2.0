@@ -1,6 +1,7 @@
 using Common;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -14,7 +15,7 @@ namespace Interactables
 
         [SerializeField] bool isClicked = false;
         [SerializeField] Image img;
-
+        [SerializeField] TextMeshProUGUI text;
 
         InvTraitsView invTraitsView;
 
@@ -49,14 +50,14 @@ namespace Interactables
             img.sprite = spriteN;
             isClicked = false;
             invTraitsView.sicknessBtnView.HideBtns();
-
+            text.gameObject.SetActive(false);
         }
         public void OnClick()
         {
             img.sprite = spriteOnClick;
             isClicked = true;
             invTraitsView.sicknessBtnView.ShowBtns(); 
-
+            text.gameObject.SetActive(true);
         }
 
 

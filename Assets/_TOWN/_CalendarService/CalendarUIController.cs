@@ -46,9 +46,6 @@ namespace Common
             townCenterPanel = FindObjectOfType<TownCenterView>(true).gameObject;
 
 
-            //showMonthBtn = monthPanel.GetComponentInChildren<Button>();
-            //showWeekBtn = weekPanel.GetComponentInChildren<Button>();
-
 
             townCenterPanel.SetActive(true);
             allPanels.Clear();

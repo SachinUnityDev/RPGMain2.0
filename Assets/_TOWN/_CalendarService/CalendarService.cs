@@ -45,8 +45,7 @@ namespace Common
         public int dayInGame;
         public int dayInYear; 
         public int weekCounter;
-
-
+        public WeekCycles currWeekCycle;
 
         // does not reset with week / Month
         [Header("CURRENT DAY WEEK AND MONTH")]
@@ -106,11 +105,11 @@ namespace Common
             weekEventsController = GetComponent<WeekEventsController>();
             weekEventsController.InitWeekController(allWeekSO);
             calendarUIController.Init();
-            calendarUIController.UpdateMonthPanel(currentMonth, startOfGameDayName, dayInYear);
-            calendarUIController.UpdateWeekPanel(currentWeek);
+
+            SelectWeekCycle();
             currtimeState = TimeState.Day;
             startOfGameDayName = DayName.DayOfLight;// saturday
-            currentWeek = WeekEventsName.WeekOfRejuvenation;
+            currentWeek = currWeekCycle.allWeekNames[0];
             dayInGame = 0;
             dayInYear = 24;
             currentMonth = MonthName.FeatherOfThePeafowl; 
@@ -118,9 +117,31 @@ namespace Common
             currtimeState = TimeState.Day;
             dayEventsController = GetComponent<DayEventsController>();
             dayEventsController.InitDayEvent(allDaySO);
-          
-          
+            calendarUIController.UpdateMonthPanel(currentMonth, startOfGameDayName, dayInYear);
+            calendarUIController.UpdateWeekPanel(currentWeek);
+
             isNewGInitDone = true;
+            
+        }
+
+        void SelectWeekCycle()
+        {
+            int netWeekCyles = allWeekSO.AllCycles.Count;
+            int ran = UnityEngine.Random.Range(0, netWeekCyles); 
+            currWeekCycle = allWeekSO.AllCycles[ran];
+        }
+
+        public WeekEventsName GetNextWeek(WeekEventsName weekEventsName)
+        {
+            int index  = currWeekCycle.allWeekNames.FindIndex(t=>t ==weekEventsName);
+            if (index == -1)
+            {
+                Debug.Log("week Name NOT FOUND"); 
+                return 0; 
+            }
+            int next = index + 1;
+            next = (next >= currWeekCycle.allWeekNames.Count) ? 0 : next;  
+            return currWeekCycle.allWeekNames[next];
 
         }
         public MonthSO GetMonthSO(MonthName _monthName)
@@ -177,7 +198,8 @@ namespace Common
         {
             if ((int)currDayName % 7 == 1)
             {
-                currentWeek++; weekCounter++;
+                currentWeek = GetNextWeek(currentWeek); 
+                weekCounter++;
 
                 var noOfWeeks = Enum.GetNames(typeof(WeekEventsName)).Length;
                 if ((int)currentWeek >= noOfWeeks) currentWeek = (WeekEventsName)1;

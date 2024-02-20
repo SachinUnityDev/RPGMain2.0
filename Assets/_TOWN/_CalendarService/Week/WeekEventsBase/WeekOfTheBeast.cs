@@ -14,5 +14,8 @@ namespace Common
         {
             
         }
+        public override void OnWeekBonusClicked()
+        {
+        }
     }
 }

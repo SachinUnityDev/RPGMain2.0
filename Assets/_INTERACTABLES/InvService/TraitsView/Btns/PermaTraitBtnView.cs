@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Common;
 using UnityEngine.EventSystems;
-using UnityEngine.UI; 
+using UnityEngine.UI;
+using TMPro;
 
 namespace Interactables
 {
@@ -16,8 +17,22 @@ namespace Interactables
         [SerializeField] bool isClicked = false;
         [SerializeField] Image img;
 
+        [SerializeField] TextMeshProUGUI text;
+
         InvTraitsView invTraitsView;
 
+        private void Start()
+        {
+            img = GetComponent<Image>();
+            img.sprite = spriteN;
+
+            InvService.Instance.OnCharSelectInvPanel += (CharModel c) => OnClick(); 
+            OnClick(); 
+        }
+        private void OnDisable()
+        {
+            InvService.Instance.OnCharSelectInvPanel -= (CharModel c) => OnClick();
+        }
 
         public void Init(InvTraitsView invTraitsView)
         {
@@ -49,6 +64,7 @@ namespace Interactables
         {
             img.sprite = spriteN;
             isClicked= false;
+            text.gameObject.SetActive(false);
             
         }
         public void OnClick()
@@ -56,15 +72,12 @@ namespace Interactables
             img.sprite = spriteOnClick;
             isClicked= true;
             CharModel charModel = InvService.Instance.charSelectController.charModel;
-            invTraitsView.ShowPermaTrait(charModel); 
+            invTraitsView.ShowPermaTrait(charModel);
+            text.gameObject.SetActive(true);
         }
 
 
-        void Start()
-        {
-            img= GetComponent<Image>();
-            img.sprite = spriteN;
-        }
+     
 
         
     }

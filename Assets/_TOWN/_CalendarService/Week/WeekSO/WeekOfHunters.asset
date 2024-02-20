@@ -23,3 +23,4 @@ MonoBehaviour:
   - 'On Trade Pelts&Trophies: Cost doubled'
   - 'Hunter type heroes: +1 morale'
   - 'Hunter type heroes: Ranged skills: +20% Dmg'
+  weekIcon: {fileID: 21300000, guid: 8e883befd93e33643a7470c8d98ef9ce, type: 3}

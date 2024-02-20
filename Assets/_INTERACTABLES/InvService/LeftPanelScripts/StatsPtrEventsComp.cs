@@ -1,4 +1,5 @@
 using Common;
+using DG.Tweening;
 using Interactables;
 using System;
 using System.Collections;
@@ -117,6 +118,7 @@ namespace Interactables
                 desc.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text
                                 = statData.desc;
             }
+            desc.transform.GetChild(1).GetComponent<TextMeshProUGUI>().DOColor(Color.white, 0.1f);
         }
 
         public void OnPointerEnter(PointerEventData eventData)

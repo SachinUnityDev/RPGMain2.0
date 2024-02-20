@@ -12,14 +12,14 @@ namespace Interactables
         void Start()
         {
             nametxt = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-            InvService.Instance.OnCharSelectInvPanel += PrintName; 
-           
+            InvService.Instance.OnCharSelectInvPanel += PrintName;
+            PrintName(InvService.Instance.charSelectController.charModel); 
         }
 
         void PrintName(CharModel charModel)
         {
-            nametxt.text = charModel.charNameStr;
-
+            nametxt.text 
+            = $"{charModel.charNameStr} the {charModel.cultType.ToString().CreateSpace()} {charModel.classType.ToString().CreateSpace()} [<b>{charModel.raceType.ToString().CreateSpace()}</b>]";
         }
 
       

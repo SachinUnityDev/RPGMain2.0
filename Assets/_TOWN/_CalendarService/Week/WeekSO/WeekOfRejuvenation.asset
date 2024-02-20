@@ -23,3 +23,4 @@ MonoBehaviour:
   - 'On Trade Potion: Cost tripled'
   - 'On Trade Herb: Cost halved'
   - 'Mage type heroes: +1 Hp Regen at day'
+  weekIcon: {fileID: 21300000, guid: 6f70a29cfcec66141ae03a8746490c73, type: 3}

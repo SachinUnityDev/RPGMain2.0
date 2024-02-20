@@ -22,3 +22,4 @@ MonoBehaviour:
   WeekSpecs:
   - 'Quest Rewards: +60% exp'
   - 'On Consume Scroll: +60% exp'
+  weekIcon: {fileID: 21300000, guid: 51374e6c972522b4b9805b817afe26e6, type: 3}

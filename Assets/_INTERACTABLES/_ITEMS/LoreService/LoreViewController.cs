@@ -46,7 +46,7 @@ namespace Interactables
             refreshBtn.onClick.AddListener(OnRefreshBtnPressed); 
             pageTurnBtn.onClick.AddListener(OnPageTurnBtnPressed);  
         }
-        public void OnLoreSelectBtnPressed(LoreNames loreName)
+        public void OnLoreSelectBtnPressed(LoreBookNames loreName)
         {
             if (LoreService.Instance.IsLoreLocked(loreName)) return; 
             loreSelectPanel.SetActive(false);
@@ -58,7 +58,7 @@ namespace Interactables
             PopulateLoreSelection();
         }
      
-        void PopulateLoreScroll(LoreNames loreName)
+        void PopulateLoreScroll(LoreBookNames loreName)
         {
             currLoredata = LoreService.Instance.GetLoreData(loreName);
             LoreNameTxt.text = LoreService.Instance.GetLoreString(loreName);  
@@ -74,7 +74,7 @@ namespace Interactables
             if (currLoredata == null) return;
             if (currLoredata.allSubLore.Count == 0) return; 
 
-            LoreNames currLoreName = currLoredata.loreName;
+            LoreBookNames currLoreName = currLoredata.loreName;
             SubLores currSubLoreName = currUnLockedSubLore[index].subLoreNames;
             subLoreNametxt.text = currSubLoreName.ToString();
             currLoreSprites = LoreService.Instance.GetLoreSprite(currLoreName, currSubLoreName);
@@ -138,7 +138,7 @@ namespace Interactables
             int i = 1; 
             foreach (Transform child in loreBtnParent.transform)
             {
-                LoreNames loreName = (LoreNames)i; 
+                LoreBookNames loreName = (LoreBookNames)i; 
                 child.GetComponent<LoreBtnEvents>().Init(loreName);
                 i++; 
             }

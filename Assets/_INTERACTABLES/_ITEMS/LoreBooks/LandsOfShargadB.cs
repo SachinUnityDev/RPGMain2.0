@@ -9,19 +9,17 @@ namespace Interactables
 {
     public class LandsOfShargadB : LoreBookBase, Iitems
     {
-        public override LoreNames loreName => LoreNames.LandsOfShargad;
+        public override LoreBookNames loreName => LoreBookNames.LandsOfShargad;
 
         public CharController charController;
         public ItemType itemType => ItemType.LoreBooks;
-        public int itemName => (int)LoreNames.LandsOfShargad;
+        public int itemName => (int)LoreBookNames.LandsOfShargad;
         public int maxInvStackSize { get; set; }
         public SlotType invSlotType { get; set; }
         public int slotID { get; set; }
         public List<int> allBuffs { get; set; }
         public int itemId { get; set; }
         public Currency currency { get; set; }
-
-        
 
         public void OnHoverItem()
         {

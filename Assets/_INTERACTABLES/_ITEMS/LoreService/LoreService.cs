@@ -33,7 +33,7 @@ namespace Interactables
 
         }
 
-        public void UnLockTheCompleteLore(LoreNames loreName) // is done on reading "LORE BOOK 
+        public void UnLockTheCompleteLore(LoreBookNames loreName) // is done on reading "LORE BOOK 
         {
             LoreData loreData = GetLoreData(loreName);
             if (IsLoreLocked(loreName))
@@ -41,7 +41,7 @@ namespace Interactables
                 loreData.isLocked = false;
             }
         }
-        public void UnLockRandomSubLore(LoreNames _loreName)
+        public void UnLockRandomSubLore(LoreBookNames _loreName)
         {
             LoreData loreData = GetLoreData(_loreName);
             if (IsLoreLocked(_loreName))
@@ -64,7 +64,7 @@ namespace Interactables
         }
 
 
-        public List<LoreSubData> GetUnLockedSubLores(LoreNames loreName)
+        public List<LoreSubData> GetUnLockedSubLores(LoreBookNames loreName)
         {
             LoreData loreData = GetLoreData(loreName);
             List<LoreSubData> unlockedSubLore 
@@ -76,14 +76,14 @@ namespace Interactables
                 Debug.Log("Nothing Unlocked inside this lore"); 
             return null;
         }
-        public LoreData GetLoreData(LoreNames loreName)
+        public LoreData GetLoreData(LoreBookNames loreName)
         {
             LoreData loreData = 
                     loreModel.allLoreData.Find(t => t.loreName == loreName);
             return loreData ;
         }
 
-        public List<Sprite> GetLoreSprite(LoreNames _loreName, SubLores subloreName)
+        public List<Sprite> GetLoreSprite(LoreBookNames _loreName, SubLores subloreName)
         {
 
             LoreData loreData = loreSO.allLoreData.Find(t => (t.loreName ==_loreName) && (t.isLocked == false));
@@ -102,7 +102,7 @@ namespace Interactables
             }
         }
 
-        public bool IsLoreLocked(LoreNames loreName)
+        public bool IsLoreLocked(LoreBookNames loreName)
         {
             bool status = loreModel.allLoreData
                            .Find(t => t.loreName == loreName).isLocked;
@@ -110,7 +110,7 @@ namespace Interactables
             return status;
         }
 
-        public string GetLoreString(LoreNames loreName)
+        public string GetLoreString(LoreBookNames loreName)
         {
             string str = loreModel.allLoreStrData.Find(t => t.loreName == loreName).loreNameStr; 
             return str; 
@@ -141,7 +141,7 @@ namespace Interactables
         {
             if (Input.GetKeyDown(KeyCode.M))
             {
-                UnLockRandomSubLore(LoreNames.LandsOfShargad);
+                UnLockRandomSubLore(LoreBookNames.LandsOfShargad);
             }
         }
 

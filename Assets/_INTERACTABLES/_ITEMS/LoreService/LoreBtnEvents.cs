@@ -8,7 +8,7 @@ namespace Interactables
 {
     public class LoreBtnEvents : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        [SerializeField] LoreNames loreName;
+        [SerializeField] LoreBookNames loreName;
         [SerializeField] Sprite loreHL;
         [SerializeField] Sprite loreN;
         [SerializeField] Sprite loreLocked;
@@ -28,7 +28,7 @@ namespace Interactables
             
         }
 
-        void SetSpriteInit(LoreNames loreName)
+        void SetSpriteInit(LoreBookNames loreName)
         {
             loreHL = LoreService.Instance.loreSO.loreUnLockedHL;
             loreN = LoreService.Instance.loreSO.loreUnLockedN;
@@ -36,7 +36,7 @@ namespace Interactables
             LoreData loreData = LoreService.Instance.GetLoreData(loreName);
             isLocked = loreData.isLocked; 
         }
-        public void Init(LoreNames _loreName)
+        public void Init(LoreBookNames _loreName)
         {
             loreName = _loreName;
          

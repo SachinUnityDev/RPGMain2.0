@@ -27,7 +27,7 @@ namespace Interactables
 
     public abstract class LoreBookBase
     {
-        public abstract LoreNames loreName { get; }
+        public abstract LoreBookNames loreName { get; }
         public virtual void ApplyBookReadFx()
         {
            CharController charController = InvService.Instance.charSelectController;

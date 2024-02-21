@@ -366,7 +366,7 @@ public enum CultureType
     IndigenElf,
     All, 
 }
-public enum ArcheType
+public enum Archetype
 {
     None,
     Warrior,

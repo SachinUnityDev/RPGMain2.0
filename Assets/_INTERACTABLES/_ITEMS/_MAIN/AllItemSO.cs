@@ -177,6 +177,9 @@ public class AllItemSO : ScriptableObject
     [Header(" ALl Lore Book SO")]
     public List<LoreBookSO> allLoreBooksSO = new List<LoreBookSO>();
 
+
+
+
     #endregion
 
     #region ITEM SO GETTERS
@@ -325,7 +328,7 @@ public class AllItemSO : ScriptableObject
             Debug.Log("alcohol SO  not found" + alcoholName);
         return null;
     }
-    public LoreBookSO GetLoreBookSO(LoreNames loreName)
+    public LoreBookSO GetLoreBookSO(LoreBookNames loreName)
     {
         LoreBookSO loreBookSO = allLoreBooksSO.Find(t => t.loreName == loreName);
         if (loreBookSO != null)
@@ -336,6 +339,88 @@ public class AllItemSO : ScriptableObject
     }
 
     #endregion
+    
+    public List<PoeticGewgawSO> GetAllInAToolSet(PoeticSetName poeticSetName)
+    {
+        List<PoeticGewgawSO> allPoeticSO = new List<PoeticGewgawSO>(); 
+        foreach (PoeticGewgawSO poeticSO in allPoeticGewgawSO)
+        {
+            if(poeticSO.poeticSetName == poeticSetName)
+            {
+                allPoeticSO.Add(poeticSO);
+            }
+        }
+        return allPoeticSO;
+    }
+
+
+    public int GetRandomItem(ItemType itemtype)
+    {
+        int max = 0; 
+        switch (itemtype)
+        {
+            case ItemType.None:
+                max = 0;
+                break;
+            case ItemType.Potions:
+                max = allPotionSO.Count; 
+                break;
+            case ItemType.GenGewgaws:
+                max = allGenGewgawSO.Count;
+                break;
+            case ItemType.Herbs:
+                max  = allHerbSO.Count;
+                break;
+            case ItemType.Foods:
+                max = allFoodSO.Count;  
+                break;
+            case ItemType.Fruits:
+                max = allFruitSO.Count; 
+                break;
+            case ItemType.Ingredients:
+                max = allIngredSO.Count;
+                break;
+            case ItemType.XXX:
+                break;
+            case ItemType.Scrolls:
+                max = allScrollSO.Count;
+                break;
+            case ItemType.TradeGoods:
+                max = allTGSO.Count;
+                break;
+            case ItemType.Tools:
+                max = allToolsSO.Count;
+                break;
+            case ItemType.Gems:
+                max = allGemsSO.Count;
+                break;
+            case ItemType.Alcohol:
+                max= allAlcoholSO.Count;
+                break;
+            case ItemType.Meals:
+                max = allMealsSO.Count;
+                break;
+            case ItemType.SagaicGewgaws:
+                max = sagaicGewgawSOs.Count;
+                break;
+            case ItemType.PoeticGewgaws:
+                max = allPoeticSetSO.Count;
+                break;
+            case ItemType.RelicGewgaws:
+                break;
+            case ItemType.Pouches:
+                break;
+            case ItemType.LoreBooks:
+                max = allLoreBooksSO.Count;
+                break;
+            default:
+                max=  0; 
+                break;         
+        }
+        int random = UnityEngine.Random.Range(0, max);
+        return random;
+    }
+
 
     #region PRICE GETTERS  
     public CostData GetCostData(ItemType itemType, int itemName)

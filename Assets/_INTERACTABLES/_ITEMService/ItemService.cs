@@ -528,7 +528,7 @@ namespace Interactables
                                     CauseType.Items, 2);
                 InitItemToInv(SlotType.CommonInv, ItemType.Fruits, (int)FruitNames.Kiwi,
                                     CauseType.Items, 2);
-                InitItemToInv(SlotType.CommonInv, ItemType.LoreBooks, (int)LoreNames.LandsOfShargad,
+                InitItemToInv(SlotType.CommonInv, ItemType.LoreBooks, (int)LoreBookNames.LandsOfShargad,
                                CauseType.Items, 2);
             }
             if (Input.GetKeyDown(KeyCode.J))

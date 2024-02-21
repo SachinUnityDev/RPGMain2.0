@@ -477,21 +477,15 @@ namespace Interactables
         Socketable,
     }
 
-    public enum PotionState  // To be discussed with Semih
-    {
-        None, 
-        Equiped, 
-        Consumed, 
-        Disposed, 
-    }
+    //public enum PotionState  // To be discussed with Semih
+    //{
+    //    None, 
+    //    Equiped, 
+    //    Consumed, 
+    //    Disposed, 
+    //}
 
-    public enum PoeticSetNames
-    {
-        None, 
-        LegacyOfTheSpida,
-        PoachersToolset, 
-        FirstHuntersArsenal, 
-    }
+ 
     public enum PoeticGewgawNames
     {
         None,
@@ -579,22 +573,7 @@ namespace Interactables
         Mortar,
     }
 
-    //public enum LoreBooksNames
-    //{
-    //    None,
-    //    LandsOfShargad_Book,
-    //    ElementsOfShargad_Book,
-    //    GodsOfShargad_Book,
-    //    HeroesOfShargad_Book,
-    //    GuildsOfShargad_Book,
-    //    HistoryOfShargad_Book,
-    //    RacesOfShargad_Book,
-    //    UniverseOfShargad_Book,
-    //}
-
-
-
-    public enum LoreNames
+    public enum LoreBookNames
     {
         None,
         ElementsOfShargad, 

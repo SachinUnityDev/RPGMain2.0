@@ -135,7 +135,7 @@ namespace Interactables
                     sprite = ItemService.Instance.allItemSO.GetPoeticGewgawSO((PoeticGewgawNames)itemName).iconSprite;
                     break;
                 case ItemType.LoreBooks:
-                    sprite = ItemService.Instance.allItemSO.GetLoreBookSO((LoreNames)itemName).iconSprite;
+                    sprite = ItemService.Instance.allItemSO.GetLoreBookSO((LoreBookNames)itemName).iconSprite;
                     break;
 
                 default:

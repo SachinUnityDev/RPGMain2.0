@@ -432,7 +432,7 @@ namespace Interactables
                     break;
                 case ItemType.LoreBooks:
 
-                    LoreBookSO loreBookSO = ItemService.Instance.allItemSO.GetLoreBookSO((LoreNames)item.itemName);
+                    LoreBookSO loreBookSO = ItemService.Instance.allItemSO.GetLoreBookSO((LoreBookNames)item.itemName);
                     if (loreBookSO != null)
                     {
                         transform.GetComponent<Image>().sprite = itemViewSO.lyricBG;

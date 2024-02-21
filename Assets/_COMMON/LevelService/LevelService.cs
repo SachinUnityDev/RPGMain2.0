@@ -82,7 +82,7 @@ namespace Common
 
         void AutoLvlUpByOne(Levels finalLvl)
         {
-            ArcheType heroType = charModel.heroType;
+            Archetype heroType = charModel.archeType;
             LvlDataComp lvlDataComp = lvlUpCompSO.GetLvlData(heroType, finalLvl);
             Add2ManPendingStack(finalLvl);
            
@@ -105,7 +105,7 @@ namespace Common
         void Add2ManPendingStack(Levels finalLvl)
         {
             CharNames charName = charModel.charName;
-            LvlDataComp lvlDataComp = lvlUpCompSO.GetLvlData(charModel.heroType, finalLvl);
+            LvlDataComp lvlDataComp = lvlUpCompSO.GetLvlData(charModel.archeType, finalLvl);
             List<LvlData> option1 = lvlDataComp.allStatDataOption1;
             List<LvlData> option2 = lvlDataComp.allStatDataOption2;
 

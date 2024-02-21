@@ -81,7 +81,7 @@ namespace Interactables
         [Header("Tea")]
         Dictionary<TeaNames, Type> allTea = new Dictionary<TeaNames, Type>();
         [Header("Lore Books")]
-        Dictionary<LoreNames, Type> allLoreBooks = new Dictionary<LoreNames, Type>();
+        Dictionary<LoreBookNames, Type> allLoreBooks = new Dictionary<LoreBookNames, Type>();
 
         [SerializeField] int itemId = -1; 
 
@@ -247,9 +247,9 @@ namespace Interactables
                 case ItemType.RelicGewgaws: // not in demo 
                     break;
                 case ItemType.LoreBooks:
-                    Iitems loreBook = GetNewLoreBookItem((LoreNames)itemName);
+                    Iitems loreBook = GetNewLoreBookItem((LoreBookNames)itemName);
                     LoreBookSO LoreBookSO = ItemService.Instance.allItemSO
-                                                    .GetLoreBookSO((LoreNames)itemName);
+                                                    .GetLoreBookSO((LoreBookNames)itemName);
                     loreBook.InitItem(itemId, LoreBookSO.inventoryStack);
                     ItemService.Instance.allItemsInGame.Add(loreBook);
                     return loreBook;
@@ -809,7 +809,7 @@ namespace Interactables
             loreBookCount = allLoreBooks.Count;
         }
 
-        Iitems GetNewLoreBookItem(LoreNames loreName)
+        Iitems GetNewLoreBookItem(LoreBookNames loreName)
         {
             foreach (var lb in allLoreBooks)
             {

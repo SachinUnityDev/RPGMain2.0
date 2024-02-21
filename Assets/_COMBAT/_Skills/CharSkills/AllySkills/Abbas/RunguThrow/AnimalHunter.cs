@@ -27,14 +27,13 @@ namespace Combat
 
         public override void ApplyFX1()
         {
-            if(targetController)
-                charController.strikeController.ApplyDmgAltBuff(-12f, CauseType.CharSkill, (int)skillName
-                 , charController.charModel.charID, TimeFrame.EndOfCombat, 1, false, skillModel.attackType, skillModel.dmgType[0],
-                    CultureType.None, RaceType.Animal);
+            if (targetController.charModel.raceType == RaceType.Animal)
+                targetController.strikeController.ApplyDmgAltBuff(-12f, CauseType.CharSkill, (int)skillName
+                 , charController.charModel.charID, TimeFrame.EndOfCombat, 1, false, AttackType.None, skillModel.dmgType[0]);
             else
-                charController.strikeController.ApplyDmgAltBuff(-6f, CauseType.CharSkill, (int)skillName
-                , charController.charModel.charID, TimeFrame.EndOfCombat, 1, false, skillModel.attackType, skillModel.dmgType[0],
-                CultureType.None, RaceType.None);
+                targetController.strikeController.ApplyDmgAltBuff(-6f, CauseType.CharSkill, (int)skillName
+                , charController.charModel.charID, TimeFrame.EndOfCombat, 1, false, AttackType.None, skillModel.dmgType[0]);
+               
         }
 
         public override void ApplyFX2()

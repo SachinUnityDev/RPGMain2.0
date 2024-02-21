@@ -52,7 +52,7 @@ namespace Common
         [Header("Specific Sub list of Chars/ Allies")]
         public List<CharController> allyInPlayControllers = new List<CharController>();
         public List<CharModel> allyUnLockedCompModels= new List<CharModel>();// char Unlocked in the game
-        public List<CharModel> allAvailCompModels = new List<CharModel>();
+        public List<CharController> allAvailComp = new List<CharController>();
 
 
         [Header("Char List Related to Combat")]
@@ -201,7 +201,7 @@ namespace Common
             {
                 if (charModel.availOfChar == AvailOfChar.Available)
                 {
-                    allAvailCompModels.Add(charModel);
+                    allAvailComp.Add(charController);
                 }
                 if (charModel.stateOfChar == StateOfChar.UnLocked)
                 {

@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 112cb87555371bf4c8cb331b516809b9, type: 3}
-  m_Name: BelalTheGamblerSO
+  m_Name: OmbTheFruiterer_Barks
   m_EditorClassIdentifier: 
-  nPCName: 5
+  nPCName: 15
   NPCBarkData:
-  - FameType: 7
+  - FameType: 0
     interactType: 0
     barkLineData:
-    - barkline: "Come, let's gamble!\r"
+    - barkline: "What do you need?\r"
       barkAudio: {fileID: 0}
-    - barkline: Mayhaps it's your lucky day!
+    - barkline: Hi.
       barkAudio: {fileID: 0}
   allNPCInteractBarkData: []

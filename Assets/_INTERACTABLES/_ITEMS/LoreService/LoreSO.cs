@@ -22,11 +22,11 @@ namespace Interactables
     [System.Serializable]
     public class LoreData
     {
-        public LoreNames loreName;
+        public LoreBookNames loreName;
         public bool isLocked = true;     
         public List<LoreSubData> allSubLore = new List<LoreSubData>();
 
-        public LoreData(LoreNames loreName, bool isLocked)
+        public LoreData(LoreBookNames loreName, bool isLocked)
         {
             this.loreName = loreName;
             this.isLocked = isLocked;            
@@ -35,10 +35,10 @@ namespace Interactables
     [System.Serializable]
     public class LoreStrData
     {
-        public LoreNames loreName; 
+        public LoreBookNames loreName; 
         public string loreNameStr;
 
-        public LoreStrData(LoreNames loreName, string loreNameStr)
+        public LoreStrData(LoreBookNames loreName, string loreNameStr)
         {
             this.loreName = loreName;
             this.loreNameStr = loreNameStr;
@@ -60,9 +60,9 @@ namespace Interactables
         {
             if (allLoreStrData.Count < 1)
             {
-                for (int i = 1; i < Enum.GetNames(typeof(LoreNames)).Length; i++)
+                for (int i = 1; i < Enum.GetNames(typeof(LoreBookNames)).Length; i++)
                 {
-                    LoreStrData loreStrData = new LoreStrData((LoreNames)i, "");
+                    LoreStrData loreStrData = new LoreStrData((LoreBookNames)i, "");
                     allLoreStrData.Add(loreStrData);
                 }
             }

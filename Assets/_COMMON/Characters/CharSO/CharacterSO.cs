@@ -55,7 +55,7 @@ namespace Common
         public RaceTypeHero raceTypeHero; 
         public CultureType cultType;     // play part in trails only 
         public ClassType classType;
-        public ArcheType archeType;
+        public Archetype archeType;
         [Header("MISC STATS")]
         public FleeBehaviour fleeBehaviour;
         //public CharFleeState charFleeState;

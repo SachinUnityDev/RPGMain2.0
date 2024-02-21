@@ -10,14 +10,16 @@ namespace Town
     public abstract class WeekEventBase
     {      
             public WeekModel weekModel { get; set;  }
-            public abstract WeekEventsName weekName { get; }
-            public abstract void OnWeekBonusClicked();
-            
+
+            public string resultStr = "";            
+            public abstract WeekEventsName weekName { get; }            
             public virtual void OnWeekInit(WeekModel weekModel)
             {
                 this.weekModel= weekModel;
             }
             public abstract void OnWeekApply();
             public virtual void OnWeekEnd() { }
+            public abstract void OnWeekBonusClicked();
+
     }
 }

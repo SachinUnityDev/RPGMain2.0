@@ -113,7 +113,7 @@ namespace Quest
             itemDataLoot = new ItemLootData(ItemType.Gems, (int)GemNames.Oltu, 1, 6);
             itemDataLs.Add(itemDataLoot);
 
-            itemDataLoot = new ItemLootData(ItemType.LoreBooks, (int)LoreNames.LandsOfShargad, 1, 1);
+            itemDataLoot = new ItemLootData(ItemType.LoreBooks, (int)LoreBookNames.LandsOfShargad, 1, 1);
             itemDataLs.Add(itemDataLoot);
 
             //SCROLLS

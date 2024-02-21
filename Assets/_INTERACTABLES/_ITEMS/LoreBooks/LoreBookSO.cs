@@ -10,7 +10,7 @@ namespace Interactables
     [CreateAssetMenu(fileName = "LoreBookSO", menuName = "Item Service/LoreBookSO")]
     public class LoreBookSO :ScriptableObject
     {
-        public LoreNames loreName;        
+        public LoreBookNames loreName;        
 
         public int inventoryStack;
         public Currency cost;

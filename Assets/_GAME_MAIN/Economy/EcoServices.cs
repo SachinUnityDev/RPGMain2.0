@@ -12,7 +12,7 @@ namespace Common
     public enum PocketType
     {     
         Stash, 
-        Inv, 
+        Inv,         
     }
 
     public class EcoServices : MonoSingletonGeneric<EcoServices>, ISaveableService
@@ -63,6 +63,7 @@ namespace Common
                     break;
             }
             return hasMoney;
+           
         }
 
         //public Currency GetMoneyInAct(NPCNames npcName)

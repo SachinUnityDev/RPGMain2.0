@@ -76,7 +76,9 @@ namespace Town
         {
             if(isBuyBtnPressed)
             {               
-                EcoServices.Instance.DebitPlayerInv(tradeSelectView.netVal);    
+                if(tradeModel.allSelectItems.Count > 0)
+                EcoServices.Instance.DebitPlayerInv(tradeSelectView.netVal);
+             
             }
             else
             {
@@ -85,6 +87,7 @@ namespace Town
             tradeSelectView.InitInvMoney();
             tradeSelectView.InitTransactCurrViews();
             tradeSelectView.OnTradePressed();
+            tradeBtnPtrEvents.InitTradeBtnEvents(this, tradeSelectView); 
         }
 
         #endregion

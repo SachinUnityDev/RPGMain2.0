@@ -110,8 +110,8 @@ Transform:
   m_GameObject: {fileID: 3887115471004653356}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 334.6247, y: 123.68897, z: -1.6956544}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.66, y: 0.66, z: 0.66}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3887115471092431281}
   - {fileID: 3887115472833941409}
@@ -276,7 +276,7 @@ MonoBehaviour:
     randomFlip: 0
     dragX: 1
     dragY: 1.5
-    gravity: 0
+    gravity: -0.05
   enableShaking: 0
   shakeSettings:
     offset: {x: 0.005, y: 0.005}

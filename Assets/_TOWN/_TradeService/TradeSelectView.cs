@@ -91,7 +91,7 @@ namespace Common
             item.invSlotType = SlotType.TradeScrollSlot;
             OnItemDeSelected(item);
             tradeModel.allSelectItems.Remove(item);
-           
+            
         }
         public void ClearSlotView()
         {
@@ -168,10 +168,12 @@ namespace Common
             if(tradeView.isBuyBtnPressed)
             {
                 Add2BuyValue();
+               
             }
             else
             {
                 Add2SellValue();
+
             }
             tradeView.tradeBtnPtrEvents.OnItemSelectORUnSelect(); 
         }
@@ -194,7 +196,8 @@ namespace Common
        void Add2BuyValue()
         {
             netVal = new Currency(0,0);
-            Currency currency = null; 
+            Currency currency = null;
+            if (tradeModel.allSelectItems.Count == 0) return;
             foreach (Iitems item in tradeModel.allSelectItems)
             {
                 currency = tradeModel.GetCurrPrice(new ItemData(item.itemType, item.itemName));
@@ -211,7 +214,7 @@ namespace Common
             invMoney = EcoServices.Instance.GetMoneyAmtInPlayerInv();
             moneyInInv.Display(invMoney);
         }
-       public bool IsTradeClickable()
+       public bool IsTradeClickableMoneyChK()
         {
             int invBronzify = invMoney.BronzifyCurrency();
             int netvalBronzify = netVal.BronzifyCurrency();
@@ -224,8 +227,12 @@ namespace Common
        {
             
             if(tradeView.isBuyBtnPressed)
-            {                
-                tradeModel.OnSoldFrmStock();              
+            {
+                tradeModel.allSelectItems.ForEach(t => InvService.Instance.invMainModel.AddItem2CommORStash(t));
+                tradeModel.allSelectItems.Clear();
+                netVal = new Currency(0, 0);
+                tradeModel.OnSoldFrmStock();
+              
             }
             else
             {

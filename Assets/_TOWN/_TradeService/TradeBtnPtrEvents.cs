@@ -25,11 +25,21 @@ namespace Town
         {
             this.tradeView = tradeView;
             this.tradeSelectView = tradeSelectView;
+            if(tradeView.tradeModel.allSelectItems.Count > 0 && tradeSelectView.IsTradeClickableMoneyChK())
+            {
+                isClickable = true;
+                img.sprite = spriteN;
+            }
+            else
+            {
+                isClickable = false;
+                img.sprite = spriteUnClickable; 
+            }
         }
 
         public void OnItemSelectORUnSelect()
         {           
-            if (tradeSelectView.IsTradeClickable())
+            if (tradeSelectView.IsTradeClickableMoneyChK())
             {
                 isClickable= true;
                 img.sprite = spriteN;
@@ -44,7 +54,7 @@ namespace Town
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (tradeSelectView.IsTradeClickable() && isClickable)
+            if (tradeSelectView.IsTradeClickableMoneyChK() && isClickable)
             {   
                 tradeView.OnTradePressed();
                 img.sprite = spriteClicked;
@@ -59,15 +69,23 @@ namespace Town
         {
             if (isClickable)
             {
-                img.sprite = spriteHovered; 
-            } 
+                img.sprite = spriteHovered;
+            }
+            else
+            {
+                img.sprite = spriteUnClickable;
+            }
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             if (isClickable)
             {
-                img.sprite = spriteN; 
+                img.sprite = spriteN;
+            }
+            else
+            {
+                img.sprite = spriteUnClickable; 
             }
         }
 

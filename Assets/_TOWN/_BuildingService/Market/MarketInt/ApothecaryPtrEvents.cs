@@ -15,6 +15,7 @@ namespace Town
             {
                 MarketView marketView = buildView as MarketView;
                 UIControlServiceGeneral.Instance.TogglePanelOnInGrp(marketView.craftPotionPanel.gameObject, true);
+              
             }
         }
 

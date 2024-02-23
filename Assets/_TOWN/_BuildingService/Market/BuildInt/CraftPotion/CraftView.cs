@@ -155,7 +155,7 @@ namespace Town
     
         public void Init()
         {
-            Load(); 
+          
         }
 
         public void Load()

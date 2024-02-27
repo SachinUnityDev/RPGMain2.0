@@ -9,21 +9,16 @@ namespace Common
     public class ButtonDoubleClick : MonoBehaviour, IPointerClickHandler
     {
         float clicked = 0;
-        float clicktime = 0;
+        float prevClickTime = 0;
         float clickdelay = 0.5f;
 
         public void OnPointerClick(PointerEventData eventData)
-        {
-            Debug.Log(eventData.clickCount);
-            if (eventData.clickCount > 1)
-            {
-                CalendarService.Instance.On_EndDayClick();
-            }
-            else if (eventData.clickCount == 1)
+        {         
+            if((eventData.clickTime- prevClickTime) > clickdelay)
             {
                 CalendarService.Instance.DisplayTimeChgPanel();
+                prevClickTime= eventData.clickTime;
             }
-
         }
 
         //public void OnPointerDown(PointerEventData data)

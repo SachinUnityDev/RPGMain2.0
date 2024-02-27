@@ -11,7 +11,7 @@ namespace Common
     {
 
         IPanel panel;
-
+       
         public void OnPointerClick(PointerEventData eventData)
         {
             panel = transform.parent.GetComponent<IPanel>();

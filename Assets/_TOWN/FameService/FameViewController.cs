@@ -59,7 +59,7 @@ namespace Common
         [SerializeField] GameObject fameBar;
         [SerializeField] Image FameImg;
         [SerializeField] TextMeshProUGUI fameVal;
-        [SerializeField] TextMeshProUGUI fameModVal; 
+        [SerializeField] TextMeshProUGUI fameYield; 
 
         //[SerializeField]CharacterController AbbasCharacterController;
         [SerializeField] GameObject plankPrefab;
@@ -78,16 +78,25 @@ namespace Common
         [SerializeField] Sprite negSprite;
 
         [SerializeField] int currPage = 0; 
-        void Start()
+        void OnEnable()
+        {   
+            DisplayFamePanel();
+        }
+        private void Start()
         {
-            // change the fame symbol with depending upon the fame
-            // fame value to be shown on the right side with modifier 
-            // scroll bar pages to be added (prefab)
-            
             leftBtn.onClick.AddListener(OnLeftPageBtnPressed);
             rightBtn.onClick.AddListener(OnRightPageBtnPressed);
+
+            FameService.Instance.OnFameChg += OnFameValChg;
+            FameService.Instance.OnFameYieldChg += OnFameYieldChg;
         }
-          
+        private void OnDisable()
+        {
+            FameService.Instance.OnFameChg -= OnFameValChg;
+            FameService.Instance.OnFameYieldChg -= OnFameYieldChg;
+            
+        }
+
         void OnLeftPageBtnPressed()
         {
             currPage--; 
@@ -114,21 +123,29 @@ namespace Common
             DisplayFamePanel();
         }
 
-    
+        void OnFameValChg(int val)
+        {
+            DisplayFamePanel();
+        }
+        void OnFameYieldChg(int val)
+        {
+            fameYield.text = FameService.Instance.GetFameYieldValue().ToString();
+        }
+
         public void DisplayFamePanel()
         {
             List<FameChgData> fameList = FameService.Instance.GetFameChgList();
             fameModel = FameService.Instance.fameController.fameModel;
-            if (fameList.Count < 1) return; 
+           
             pagetext.text = currPage.ToString(); 
-            Debug.Log("*********" + GetFameNameStr(FameService.Instance.GetFameType()));
-
-            fameName.transform.GetComponentInChildren<TextMeshProUGUI>().text 
+            
+            fameName.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text 
                                 = GetFameNameStr(FameService.Instance.GetFameType());
             ChgFameSprite();
             fameVal.text = FameService.Instance.GetFameValue().ToString();
-            fameModVal.text = FameService.Instance.GetFameYieldValue().ToString();
+            fameYield.text = FameService.Instance.GetFameYieldValue().ToString();
             int currFameVal = FameService.Instance.GetFameValue(); 
+
             if (currFameVal >= 0)
             {
                 fameBar.transform.GetChild(0).GetComponent<Slider>().value = currFameVal;
@@ -139,7 +156,7 @@ namespace Common
                 fameBar.transform.GetChild(0).GetComponent<Slider>().value = 0;
                 fameBar.transform.GetChild(1).GetComponent<Slider>().value = Mathf.Abs(currFameVal);
             }
-
+            if (fameList.Count < 1) return;
 
             foreach ( FameChgData f in fameList)
             {

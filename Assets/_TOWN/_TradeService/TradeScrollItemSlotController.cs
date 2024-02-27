@@ -65,7 +65,6 @@ namespace Common
         private void Start()
         {
             slotID = transform.GetSiblingIndex();
-          
         }
 
 

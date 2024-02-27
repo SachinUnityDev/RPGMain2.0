@@ -14,7 +14,17 @@ namespace Common
 
         public override void OnWeekApply()
         {
-            
+            foreach (CharController charController in CharService.Instance.allyInPlayControllers)
+            {
+                if (charController.charModel.raceType == RaceType.Beastmen)
+                {
+                    charController.buffController.ApplyBuff(CauseType.WeekEvents, (int)weekName,
+                          charController.charModel.charID, AttribName.willpower, +2, TimeFrame.EndOfWeek, 1, true);
+
+                    charController.buffController.ApplyBuff(CauseType.WeekEvents, (int)weekName,
+                          charController.charModel.charID, AttribName.vigor, +2, TimeFrame.EndOfWeek, 1, true);
+                }
+            }
         }
         public override void OnWeekBonusClicked()
         {

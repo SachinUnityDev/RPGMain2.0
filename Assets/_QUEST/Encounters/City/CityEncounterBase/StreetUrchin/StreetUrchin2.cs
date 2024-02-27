@@ -51,7 +51,7 @@ namespace Quest
 
             }
             int famechg = UnityEngine.Random.Range(20, 30); 
-            FameService.Instance.fameController.ApplyFameYieldChg(CauseType.CityEncounter, (int)encounterName, famechg);
+            FameService.Instance.fameController.ApplyFameChg(CauseType.CityEncounter, (int)encounterName, famechg);
             strFX += $"\n{famechg} Fame lost";
         }
 

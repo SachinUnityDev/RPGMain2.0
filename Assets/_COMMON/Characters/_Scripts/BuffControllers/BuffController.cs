@@ -128,6 +128,7 @@ namespace Combat
    
             QuestEventService.Instance.OnEOQ += EOQTick;
             CalendarService.Instance.OnChangeTimeState += ToggleBuffsOnTimeStateChg;
+            CalendarService.Instance.OnStartOfTheWeek += EOWTick; 
             SceneManager.sceneLoaded += OnSceneLoaded;
             CombatEventService.Instance.OnSOC += OnSOC;
         }
@@ -424,7 +425,16 @@ namespace Combat
                 }
             }
         }
-
+        public void EOWTick(WeekEventsName weekName, int weekCounter)
+        {
+            foreach (BuffData buffData in allBuffs.ToList())
+            {
+                if (buffData.timeFrame == TimeFrame.EndOfWeek)
+                {
+                    RemoveBuffData(buffData);
+                }
+            }
+        }
         #region POS BUFFS
 
         public int ApplyPosBuff(List<int> allPos, CauseType causeType, int causeName, int causeByCharID

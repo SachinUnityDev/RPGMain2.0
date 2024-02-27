@@ -9,8 +9,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI; 
 namespace Common
 {
-    public class TrophySelectSlotController : MonoBehaviour, IDropHandler, IPointerClickHandler,iSlotable
+    public class TrophySelectSlotController : MonoBehaviour,  IPointerClickHandler, iSlotable
     {
+        
 
         #region DECLARATIONS
         public int slotID { get; set; }
@@ -26,43 +27,7 @@ namespace Common
 
         [Header("RIGHT CLICK CONTROLs")]
         public List<ItemActions> rightClickActions = new List<ItemActions>();
-        public bool isRightClicked = false;
-        public void OnDrop(PointerEventData eventData)
-        {
-            draggedGO = eventData.pointerDrag;
-            itemsDragDrop = draggedGO.GetComponent<ItemsDragDrop>();
-            if (itemsDragDrop != null)
-            {
-                bool isDropSuccess = AddItem(itemsDragDrop.itemDragged);
-                if (!isDropSuccess)
-                    InvService.Instance.On_DragResult(isDropSuccess, itemsDragDrop);
-                else
-                {
-                    iSlotable islot = itemsDragDrop.iSlotable;
-
-                    if (islot != null
-                         && (islot.slotType == SlotType.CommonInv ||
-                                    islot.slotType == SlotType.ExcessInv)
-                                            && islot.ItemsInSlot.Count > 0)
-                    {
-                        int count = islot.ItemsInSlot.Count;
-                        for (int i = 0; i < count; i++)
-                        {
-                            if (AddItem(islot.ItemsInSlot[0])) // size of list changes with every item removal 
-                            {
-                                islot.RemoveItem();
-                            }
-                            else
-                            {
-                                break; // as soon as you cannot add a item just break 
-                            }
-                        }
-                    }
-                    InvService.Instance.On_DragResult(isDropSuccess, itemsDragDrop);
-                    Destroy(draggedGO);
-                }
-            }
-        }
+        public bool isRightClicked = false;      
 
         #endregion
 
@@ -74,7 +39,6 @@ namespace Common
         }
 
         #region SLOT ITEM HANDLING ..ADD/REMOVE/REFRESH
-
         public void ClearSlot()
         {
             ItemsInSlot.Clear();
@@ -122,11 +86,11 @@ namespace Common
         }
         public bool SplitItem2EmptySlot(Iitems item, bool onDrop = true)
         {
-            if (IsEmpty())
-            {
-                AddItemOnSlot(item, onDrop);
-                return true;
-            }
+            //if (IsEmpty())
+            //{
+            //    AddItemOnSlot(item, onDrop);
+            //    return true;
+            //}
             return false;
         }
         public bool AddItem(Iitems item, bool onDrop = true)
@@ -139,33 +103,24 @@ namespace Common
             }
             else
             {
-                // add item to the trophyable item in common inv
-                InvService.Instance.invMainModel.AddItem2CommORStash(ItemsInSlot[0]);
                 RemoveItem();
                 AddItemOnSlot(item, onDrop);
-                return true;
+                //return true;
+                //
+               // Debug.LogError("SLOT not empty" + (TGNames)ItemsInSlot[0].itemName);
+                //AddItemOnSlot(item, onDrop);
+                return false;
             }
         }
         void AddItemOnSlot(Iitems item, bool onDrop)
         {
             if (item != null)
-            {
-                ITrophyable trophyable = item as ITrophyable;
-                Iitems currentItem;
-                if (trophyable.tavernSlotType == TavernSlotType.Trophy)
-                    currentItem = BuildingIntService.Instance.tavernController.tavernModel.trophyOnWall; 
-                if (trophyable.tavernSlotType == TavernSlotType.Pelt)
-                    BuildingIntService.Instance.tavernController.tavernModel.peltOnWall = item;
-                
+            {   
                 ItemsInSlot.Add(item);
                 itemCount++;
                 if (onDrop)
                 {
-                    
-                    if (trophyable.tavernSlotType == TavernSlotType.Trophy)
-                        BuildingIntService.Instance.tavernController.tavernModel.trophyOnWall = item;
-                    if (trophyable.tavernSlotType == TavernSlotType.Pelt)
-                        BuildingIntService.Instance.tavernController.tavernModel.peltOnWall = item;
+                    BuildingIntService.Instance.tavernController.WallItem(item); 
                 }
             }
             RefreshImg(item);
@@ -174,7 +129,7 @@ namespace Common
         }
         public void LoadSlot(Iitems item)
         {
-            item.invSlotType = SlotType.CommonInv;
+            item.invSlotType = slotType;
             ItemsInSlot.Add(item);
             RefreshImg(item);
             if (ItemsInSlot.Count > 1)
@@ -182,32 +137,11 @@ namespace Common
         }
         public void RemoveItem()   // not to be used here 
         {
+            BuildingIntService.Instance.tavernController.RemoveWalledItem(ItemsInSlot[0]);
             ClearSlot();
-            ItemService.Instance.itemCardGO.SetActive(false);
-            //if (IsEmpty())
-            //{
-            //    ClearSlot();
-            //    return;
-            //}
-            //Iitems item = ItemsInSlot[0];  // remove item from the slot
-            //InvService.Instance.invMainModel.AddItem2CommORStash(item);
-            //ITrophyable trophyable = item as ITrophyable;
-            //if (trophyable.tavernSlotType == TavernSlotType.Trophy)
-            //    BuildingIntService.Instance.tavernController.tavernModel.trophyOnWall = null;
-            //if (trophyable.tavernSlotType == TavernSlotType.Pelt)
-            //    BuildingIntService.Instance.tavernController.tavernModel.peltOnWall = null;
+            if (ItemService.Instance.itemCardGO)
+                ItemService.Instance.itemCardGO.SetActive(false);
 
-            //ItemsInSlot.Remove(item);
-            //itemCount--;
-            //if (ItemsInSlot.Count >= 1)
-            //{
-            //    RefreshImg(item);
-            //}
-            //else if (IsEmpty())  // After Item is removed
-            //{
-            //    ClearSlot();
-            //}
-            //RefreshSlotTxt();
         }
         void RefreshImg(Iitems item)
         {
@@ -246,7 +180,6 @@ namespace Common
                 Debug.Log("SPRITE NOT FOUND");
             return null;
         }
-
         Sprite GetBGSprite(Iitems item)
         {
             Sprite sprite = InvService.Instance.InvSO.GetBGSprite(item);
@@ -256,12 +189,13 @@ namespace Common
                 Debug.Log("SPRITE NOT FOUND");
             return null;
         }
-
         public void OnPointerClick(PointerEventData eventData)
         {
-          
+            if (eventData.button == PointerEventData.InputButton.Right)
+            {
+                RemoveItem(); 
+            }
         }
-
         public void CloseRightClickOpts()
         {
           

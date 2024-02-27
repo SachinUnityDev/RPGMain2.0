@@ -15,12 +15,18 @@ namespace Common
 
         public override void OnWeekApply()
         {
-            
+            //  Scroll and Lore Books 4x cost  
+            EventCostMultData costData = new EventCostMultData(ItemType.Scrolls, 0.5f);
+            allEventCostMultData.Add(costData);
+            costData = new EventCostMultData(ItemType.LoreBooks, 4f);
+            allEventCostMultData.Add(costData);
+            EcoServices.Instance.ecoController.ApplyWeekEventCostMultiplier(allEventCostMultData);
         }
+
         public override void OnWeekBonusClicked()
         {
             //  "%20 Lore Book ..% 30 Abbas Gain EXP 30...% 20 Abbas Gain EXP 50...% 30 nothing happens"
-            List<float> chances = new List<float>() { 20f, 30f, 20f, 30f }; 
+            List<float> chances = new List<float>() { 30f, 30f, 20f, 20f }; 
             int res = chances.GetChanceFrmList();
             switch (res)
             {

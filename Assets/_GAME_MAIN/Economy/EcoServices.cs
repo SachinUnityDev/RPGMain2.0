@@ -35,6 +35,7 @@ namespace Common
             ecoController = transform.GetComponent<EcoController>();    
         }
      
+        
         public void InitEcoServices()
         {
             ecoController = transform.GetComponent<EcoController>();

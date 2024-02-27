@@ -15,8 +15,16 @@ namespace Common
 
         public override void OnWeekApply()
         {
+            foreach (CharController charController in CharService.Instance.allyInPlayControllers)
+            {
+                if (charController.charModel.archeType == Archetype.Hunter)
+                {
+                    charController.buffController.ApplyBuff(CauseType.WeekEvents, (int)weekName,
+                          charController.charModel.charID, AttribName.acc, +2, TimeFrame.EndOfWeek, 1, true);
+                }
+            }
         }
-
+        
         public override void OnWeekBonusClicked()
         {
             // "%30 Venison (2), Deer Skin, Deer Trophy
@@ -49,16 +57,12 @@ namespace Common
                         if (charController.charModel.archeType != Archetype.Hunter) continue; 
 
                           charController.strikeController.ApplyDmgAltBuff(+20f, CauseType.WeekEvents, (int)weekName
-                              , charController.charModel.charID, TimeFrame.EndOfDay, 3, true, AttackType.Ranged, DamageType.Physical); 
-                              
-                            charController.buffController.ApplyBuff(CauseType.WeekEvents, (int)weekName,
-                                charController.charModel.charID, AttribName.acc, +2, TimeFrame.EndOfDay, 3, true);
+                              , charController.charModel.charID, TimeFrame.EndOfDay, 3, true, AttackType.Ranged, DamageType.Physical);                               
+                         
                     }
-                    resultStr = $"Hunter Archetype: +2 Acc, +20% Physical Ranged Dmg, 3 days";
+                    resultStr = $"Hunter Archetype: +20% Physical Ranged Dmg, 3 days";
                     break;
                 case 3:
-                     
-
                     List<PoeticGewgawSO> allPoeticSO = ItemService.Instance.allItemSO.GetAllInAToolSet(PoeticSetName.PoachersToolset);
                     int ran = UnityEngine.Random.Range(0,allPoeticSO.Count);                        
                     PoeticGewgawSO poeticSelect = allPoeticSO[ran]; 

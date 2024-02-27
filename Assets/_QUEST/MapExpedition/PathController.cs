@@ -47,7 +47,8 @@ namespace Quest
 
         private void OnEnable()
         {
-            SceneManager.sceneLoaded += OnSceneLoad; 
+            SceneManager.sceneLoaded += OnSceneLoad;
+            pathView = FindObjectOfType<PathView>(true);
         }
         private void OnDisable()
         {
@@ -57,7 +58,7 @@ namespace Quest
         {
             if (scene.name == "TOWN")
             {
-                pathView = FindObjectOfType<PathView>();    
+                pathView = FindObjectOfType<PathView>(true);    
 
             }
         }

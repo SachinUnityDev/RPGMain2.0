@@ -27,8 +27,13 @@ namespace Common
         [SerializeField] Button showMonthBtn;
         [SerializeField] Button showWeekBtn;
 
-        public PanelInScene panelInScene; 
-         void Awake()
+        public PanelInScene panelInScene;
+
+        [SerializeField] bool isDayTipGiven = false;
+        [SerializeField] string dayTip = ""; 
+        [SerializeField] string nightTip = "";
+
+        void Awake()
          {
             //START OF THE GAME
            //if() 
@@ -59,11 +64,13 @@ namespace Common
         }
         private void OnEnable()
         {           
-            SceneManager.sceneLoaded += OnSceneLoaded;   
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         private void OnDisable()
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
+            CalendarService.Instance.OnStartOfCalDay -= ResetTip;
+            CalendarService.Instance.OnChangeTimeState -= FillDayPanelOnTimeStateChg;
         }
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
@@ -71,6 +78,8 @@ namespace Common
             //{
             //    Init();
             //}
+            CalendarService.Instance.OnStartOfCalDay += ResetTip;
+            CalendarService.Instance.OnChangeTimeState += FillDayPanelOnTimeStateChg; 
         }
 
         void OnShowWeekBtnPressed()
@@ -105,15 +114,15 @@ namespace Common
             }
             else
             {
-                OnPanelExit(GetPanelInScene(panelInScene));
-                panelInScene = _panelInScene;
-                panel?.GetComponent<RectTransform>().DOLocalMove(new Vector3(0,0,0), 0.4f);
+                OnPanelExit(GetPanelInScene(panelInScene));    
                 if(panel != null)
                 {
-                    HelpPanelSetUp(panel, panelInScene);
-                    panel.SetActive(true);                
-                    Image Img = panel?.transform.parent.parent.GetComponent<Image>();
-                    Img.enabled = true;
+                    panelInScene = _panelInScene;
+                    panel.SetActive(true);
+                    panel?.GetComponent<RectTransform>().DOLocalMove(new Vector3(0, 0, 0), 0.25f);
+                    HelpPanelSetUp(panel, panelInScene);                                  
+                    CenterBGClick2Close bgClose = panel?.transform.parent.parent.GetComponent<CenterBGClick2Close>();
+                    bgClose.Init(); 
                 }
             }            
         }
@@ -121,8 +130,7 @@ namespace Common
         {
             HelpName helpName = HelpName.None;
             switch (panelInScene)
-            {
-                
+            {                
                 case PanelInScene.None:
                     helpName = HelpName.None; 
                     break;
@@ -148,12 +156,12 @@ namespace Common
         {   
             if(panel != null)
             {
+                panelInScene = PanelInScene.None;
                 Image Img = panel?.transform.parent.parent.GetComponent<Image>();
                 Img.enabled = false;
                 panel.SetActive(false);
+                panel?.transform.DOLocalMoveY(1200, 0.25f).SetEase(Ease.OutQuint);                
             }
-            panel?.transform.DOLocalMoveY(1200, 1).SetEase(Ease.OutQuint);
-            panelInScene = PanelInScene.None;        
         }
 
         public void CloseAllPanel()
@@ -181,21 +189,53 @@ namespace Common
             
             ToggleBarPanel(allDayGO, (int)currentDay, 8);
 
-            List<string> tipOftheDayList = CalendarService.Instance.allDaySO.GetDaySO(currentDay).tipOfTheDayList; 
-            int len = tipOftheDayList.Count;
-            if (CalendarService.Instance.currtimeState == TimeState.Day)
-            {
-                dayPanel.transform.GetChild(2).GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text = "Tip of the Day";                
-            } else
-            {
-                dayPanel.transform.GetChild(2).GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text = "Tip of the Night";
 
-            }
-            dayPanel.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text
-                                            = tipOftheDayList[UnityEngine.Random.Range(0, len)];
+            GetTip(currentDay);           
 
             FillSpecs(currentDay);
         }
+        void GetTip(DayName currentDay)
+        {
+            if (!isDayTipGiven)
+            {
+                List<string> tipOftheDayList = CalendarService.Instance.allDaySO.GetDaySO(currentDay).tipOfTheDayList;
+                int len = tipOftheDayList.Count;
+                int daytipIndex = UnityEngine.Random.Range(0, len);
+                dayTip = tipOftheDayList[daytipIndex];
+                List<int> dayList = new List<int>();
+                for (int i = 0; i < len; i++)
+                {
+                    if (i == daytipIndex) continue; 
+                        dayList.Add(i);
+                }
+                int lsIndex = UnityEngine.Random.Range(0, dayList.Count);
+                int nightTipIndex = dayList[lsIndex];
+                nightTip = tipOftheDayList[nightTipIndex];
+                 isDayTipGiven = true; 
+            }
+
+            // above algo to ensure day tip n night tip r not same
+                        
+        }
+        void FillDayPanelOnTimeStateChg(TimeState timeState)
+        {
+            if (CalendarService.Instance.currtimeState == TimeState.Day)
+            {
+                dayPanel.transform.GetChild(2).GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text = "Tip of the Day";
+                dayPanel.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = dayTip;
+
+            }
+            else
+            {
+                dayPanel.transform.GetChild(2).GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text = "Tip of the Night";
+                dayPanel.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = nightTip;
+            }
+        }
+        void ResetTip(int day)
+        {
+            isDayTipGiven= false;
+        }
+
         public void FillSpecs(DayName currDayName)
         {
             DayModel dayModel = CalendarService.Instance.dayEventsController.GetDayModel(currDayName);

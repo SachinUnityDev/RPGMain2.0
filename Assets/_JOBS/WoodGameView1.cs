@@ -128,9 +128,9 @@ namespace Town
                 CostData costData =
                     ItemService.Instance.allItemSO.GetCostData(itemQty.itemData.itemType, itemQty.itemData.itemName);
                 // add to play Eco and dispose item
-                int silver = (costData.baseCost.silver / 3) * count;
-                int bronze = (costData.baseCost.bronze / 3) * count;
-                Currency itemSaleVal = new Currency(silver, bronze).RationaliseCurrency();
+                int bronzifiedCurr = (costData.baseCost.BronzifyCurrency() / 3) * count; 
+                
+                Currency itemSaleVal = new Currency(0, bronzifiedCurr).RationaliseCurrency();
                 EcoServices.Instance.AddMoney2PlayerInv(itemSaleVal);
             }
             OnRewardQuickSell?.Invoke();

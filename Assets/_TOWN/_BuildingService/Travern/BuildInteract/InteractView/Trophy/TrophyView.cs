@@ -12,7 +12,7 @@ namespace Town
     {
         [Header("Transform")]
         [SerializeField] Transform fameTrans;
-        public Transform selectPageTrans;
+        public SelectPageView selectPageView;
         public Transform scrollPageTrans;
 
         [Header("Exit btn")]
@@ -22,16 +22,31 @@ namespace Town
         [SerializeField] TavernModel tavernModel; 
         private void Start()
         {
-            exitBtn.onClick.AddListener(OnExitBtnPressed);
-           
+           exitBtn.onClick.AddListener(OnExitBtnPressed);           
         }
         void OnExitBtnPressed()
         {
             UnLoad();
         }
+        public void OnItemWalled(Iitems item)
+        {
+            // if filled perform a swap 
+            ITrophyable itrophy = item as ITrophyable; 
+            if (itrophy.tavernSlotType == TavernSlotType.Trophy)
+            {
+                selectPageView.trophyslot.AddItem(item); 
+            }
+            if (itrophy.tavernSlotType == TavernSlotType.Pelt)
+            {
+                selectPageView.peltSlot.AddItem(item);
+            }
+            
+            DisplaySelectPage(); 
+        }
+
         void InitOptsPage()
         {
-            selectPageTrans.GetComponent<SelectPageView>().InitSelectPage(this); 
+            selectPageView.InitSelectPage(this); 
         }
         void InitFameSelect()
         {
@@ -39,13 +54,12 @@ namespace Town
         }
         public void DisplaySelectPage()
         {
-            selectPageTrans.gameObject.SetActive(true);
+            selectPageView.gameObject.SetActive(true);
             scrollPageTrans.gameObject.SetActive(false); 
-           InitOptsPage();
         }
         public void DisplayScrollPage()
         {
-            selectPageTrans.gameObject.SetActive(false);
+            selectPageView.gameObject.SetActive(false);
             scrollPageTrans.gameObject.SetActive(true);
         }
         public void Init()
@@ -57,7 +71,7 @@ namespace Town
 
         public void Load()
         {
-
+            Init();
         }
 
         public void UnLoad()

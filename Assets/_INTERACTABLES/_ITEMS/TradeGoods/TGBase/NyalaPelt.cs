@@ -51,7 +51,7 @@ namespace Interactables
 
         public void OnTrophyRemoved()
         {
-          
+            FameService.Instance.fameController.ApplyFameYieldChg(CauseType.TradeGoods, (int)tgName, -fameYield);
         }
     }
 }

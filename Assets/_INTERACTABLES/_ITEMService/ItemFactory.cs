@@ -484,8 +484,6 @@ namespace Interactables
 
         #endregion 
 
-
-
         #region POTIONS 
 
          void PotionInit()
@@ -788,7 +786,6 @@ namespace Interactables
         }
 
 
-
         #endregion
 
         #region LORE BOOKS
@@ -841,6 +838,10 @@ namespace Interactables
             }
             TgCount = allTradeGoods.Count;  
         }
+       //// public Dictionary<TGNames, Type> GetAllTradeGoodsLs()
+       // {
+       //     return allTradeGoods;
+       // }
 
         Iitems GetNewTgItem(TGNames tgName)
         {

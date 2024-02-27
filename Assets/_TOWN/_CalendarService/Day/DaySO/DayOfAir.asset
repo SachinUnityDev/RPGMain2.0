@@ -15,9 +15,12 @@ MonoBehaviour:
   orderInSeq: 4
   dayName: 4
   dayName2: 4
-  dayNameStr: Day Of Air
+  dayNameStr: Day of Air
   dayDescription: 
   tipOfTheDayList:
+  - 'Meranite is the most commonly found stone in Safrima as it has mines in Merania
+    region. They say Anzu the Bird God rewards people who submits this divine gem
+    to the Temple of Impundulu located in Hawkwing Mountains. '
   - 'Meranite is the most commonly found stone in Safrima as it has mines in Merania
     region. They say Anzu the Bird God rewards people who submits this divine gem
     to the Temple of Impundulu located in Hawkwing Mountains. '

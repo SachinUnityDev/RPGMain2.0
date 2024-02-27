@@ -133,7 +133,6 @@ namespace Town
             index = 0;
             PopulateSlots();
         }
-
         public void ClearSlotView()
         {
             foreach (Transform child in transform)
@@ -142,7 +141,6 @@ namespace Town
             }
             index = 0; 
         }
-
         void OnLeftBtnPressed()
         {
             if (Time.time - prevLeftClick < 0.3f) return;
@@ -173,7 +171,6 @@ namespace Town
             }
             prevRightClick = Time.time;
         }
-
         void PopulateSlots()
         {
             for (int i = 0; i < transform.childCount; i++)
@@ -190,7 +187,6 @@ namespace Town
                 }
             }
         }
-
         public void OnDragResult2TradeScroll(bool result, ItemsDragDrop itemsDragDrop)
         {
             if (!result && itemsDragDrop.itemDragged.invSlotType == SlotType.TradeScrollSlot)
@@ -241,7 +237,6 @@ namespace Town
             }
             return slotFound;
         }
-
         public int FilledSlotCount()
         {
             int count = 0;

@@ -47,7 +47,8 @@ namespace Interactables
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (iSlotable.slotType == SlotType.GewgawsActiveInv || iSlotable.slotType == SlotType.PotionsActiveInv
-                            ||iSlotable.slotType == SlotType.ProvActiveInv)
+            || iSlotable.slotType == SlotType.ProvActiveInv 
+            || iSlotable.slotType == SlotType.TrophySelectSlot || iSlotable.slotType == SlotType.TrophyScrollSlot)
                 return;
             hovered = eventData.hovered;
             if(iSlotable.ItemsInSlot.Count != 0)
@@ -71,7 +72,8 @@ namespace Interactables
         public void OnPointerExit(PointerEventData eventData)
         {
             if (iSlotable.slotType == SlotType.GewgawsActiveInv || iSlotable.slotType == SlotType.PotionsActiveInv
-                || iSlotable.slotType == SlotType.ProvActiveInv)
+                || iSlotable.slotType == SlotType.ProvActiveInv || iSlotable.slotType == SlotType.TrophySelectSlot
+            || iSlotable.slotType == SlotType.TrophyScrollSlot)
                 return; // eliminating drag and drop on active slot of Potion n Gewgaw
             ItemService.Instance.itemCardGO.SetActive(false);
             if (InvService.Instance.invRightViewController.rightClickOpts.GetComponent<RightClickOpts>().isHovered)
@@ -224,7 +226,10 @@ namespace Interactables
         #region DRAG N DROP POINTER METHODS 
         
         public void OnBeginDrag(PointerEventData eventData)
-        {          
+        {
+            if (iSlotable.slotType == SlotType.ProvActiveInv || iSlotable.slotType == SlotType.TrophySelectSlot
+                || iSlotable.slotType == SlotType.TrophyScrollSlot)
+                return;
             iSlotable.CloseRightClickOpts();
             rectTransform = GetComponent<RectTransform>();
             slotParent = transform.parent;
@@ -267,11 +272,17 @@ namespace Interactables
        
         public void OnDrag(PointerEventData eventData)
         {
+            if (iSlotable.slotType == SlotType.ProvActiveInv || iSlotable.slotType == SlotType.TrophySelectSlot
+                || iSlotable.slotType == SlotType.TrophyScrollSlot)
+                return;
             rectTransform.anchoredPosition += eventData.delta/canvas.scaleFactor;           
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
+            if (iSlotable.slotType == SlotType.ProvActiveInv || iSlotable.slotType == SlotType.TrophySelectSlot
+            || iSlotable.slotType == SlotType.TrophyScrollSlot)
+                return;
             canvasGroup.blocksRaycasts = true;            
             GameObject draggedGO = eventData.pointerDrag;
 

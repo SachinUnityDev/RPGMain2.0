@@ -26,7 +26,16 @@ namespace Town
             BuildingIntService.Instance.OnItemWalled +=
                         (Iitems item , TavernSlotType t) => FillTrophyNPeltOnWall();
             CalendarService.Instance.OnChangeTimeState += (TimeState timeState) => FillTrophyNPeltOnWall();
+            BuildingIntService.Instance.OnItemWalledRemoved +=
+                        (Iitems item, TavernSlotType t) => FillTrophyNPeltOnWall();
+
             FillTrophyNPeltOnWall();
+        }
+        private void OnDisable()
+        {
+            BuildingIntService.Instance.OnItemWalled -= (Iitems item, TavernSlotType t) => FillTrophyNPeltOnWall();
+            CalendarService.Instance.OnChangeTimeState -= (TimeState timeState) => FillTrophyNPeltOnWall();
+            BuildingIntService.Instance.OnItemWalledRemoved -= (Iitems item, TavernSlotType t) => FillTrophyNPeltOnWall();
         }
         public override Transform GetBuildInteractPanel(BuildInteractType buildInteract)
         {

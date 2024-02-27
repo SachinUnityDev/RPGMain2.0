@@ -15,6 +15,7 @@ namespace Town
     public class BuildingIntService : MonoSingletonGeneric<BuildingIntService>
     {
         public event Action<Iitems, TavernSlotType> OnItemWalled;
+        public event Action<Iitems, TavernSlotType> OnItemWalledRemoved; 
         public event Action<BuildingModel, BuildView> OnBuildInit;
         public event Action<BuildingModel, BuildView> OnBuildUnload;
 
@@ -225,17 +226,12 @@ namespace Town
         }
 
         #region  BUILD INT ACTIONS
-
+        public void On_ItemWalledRemoved(Iitems item, TavernSlotType tavernSlotType)
+        {
+            OnItemWalledRemoved?.Invoke(item, tavernSlotType);
+        }
         public void On_ItemWalled(Iitems item, TavernSlotType tavernSlotType)
-        {   
-            if (tavernSlotType == TavernSlotType.Trophy)
-            {
-               tavernController.tavernModel.trophyOnWall = item; 
-            }
-            if (tavernSlotType == TavernSlotType.Pelt)
-            {
-                tavernController.tavernModel.peltOnWall = item;
-            }
+        {               
             OnItemWalled?.Invoke(item, tavernSlotType);
         }
 

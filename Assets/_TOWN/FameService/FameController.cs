@@ -25,11 +25,13 @@ namespace Common
             fameModel.fameVal += val;
             fameModel.fameType = FameService.Instance.GetFameType(); 
             fameModel.allFameData.Add(fameChgData);
+            FameService.Instance.On_FameChg(val); 
         }
         public void ApplyFameYieldChg(CauseType causeType, int causeName, int val)
         {
             FameChgData fameChgData = new FameChgData(causeType, causeName, val);
-            fameModel.fameYield += fameChgData.fameAdded;          
+            fameModel.fameYield += fameChgData.fameAdded;
+            FameService.Instance.On_FameYieldChg(val);
         }
         void FameValueChgOnEndDay()
         {

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Town
 {
@@ -40,10 +41,12 @@ namespace Town
         }
         public void InitScrollPage(TrophyView trophyView, TavernSlotType tavernSlotType
                                                                         , List<Iitems> slotItems)
-        {   
+        {
+            this.slotItems.Clear();
+            index = 0; 
             this.trophyView= trophyView;
             this.tavernSlotType = tavernSlotType;
-            this.slotItems = slotItems;
+            this.slotItems.AddRange(slotItems.Distinct().ToList());
             FillItemsinSlots();
         }
         void FillItemsinSlots()
@@ -63,7 +66,7 @@ namespace Town
                 maxIndex = (slotItems.Count/3)-1; // 0 factor in list    
             else
                 maxIndex = (slotItems.Count/3) ;
-            if(maxIndex <= 1)
+            if(maxIndex < 1) // range 0..n
             {
                 leftBtn.gameObject.SetActive(false);
                 rightBtn.gameObject.SetActive(false);
@@ -82,10 +85,12 @@ namespace Town
             {
                 TrophyScrollSlotController slotController
                         = selectContainer.GetChild(j).GetComponent<TrophyScrollSlotController>();
-                            slotController.InitSlotView(trophyView);
 
+                slotController.InitSlotView(trophyView);
                 if (i < slotItems.Count)
-                    slotController.AddItem(slotItems[startIndex]);                
+                    slotController.AddItem(slotItems[i]);                
+                else
+                    slotController.ClearSlot();
                 j++; 
             }
         }
@@ -123,11 +128,7 @@ namespace Town
             trophyView.DisplaySelectPage();
         }
 
-        public void OnScrollSlotClicked(Iitems item)
-        {
-            // subscribe to onslotselect
-            //   BuildingIntService.Instance.On_TrophyableTavern(item); 
-        }
+   
     }
 }
 

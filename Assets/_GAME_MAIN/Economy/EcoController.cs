@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Quest;
 using Interactables;
+using System;
 using Town;
 
 namespace Common
@@ -40,7 +41,48 @@ namespace Common
             }
 
         }
+        //public void ApplyTrophyNPelt(float mult)
+        //{// find all pelt and trophy.. generate a list .... applyweekEvent
+        //    Dictionary<TGNames, Type> allTG = ItemService.Instance.itemFactory.GetAllTradeGoodsLs();
+        //    foreach (var tg in allTG)
+        //    {
+        //        ITrophyable itrophy = tg.Value as ITrophyable; 
+        //        if(itrophy != null)
+        //        {
 
-        
+        //        }
+        //    }
+        //}
+       
+        public void ApplyWeekEventCostMultiplier(List<EventCostMultData> allEventCostMultData)
+        {
+            econoModel.allWeekEventCostData.Clear();
+            foreach (var eventCostMultData in allEventCostMultData)
+            {
+                econoModel.allWeekEventCostData.Add(eventCostMultData);
+            }            
+        }
+        public float GetEventModifier(ItemType itemType)
+        {
+            foreach (EventCostMultData multData in econoModel.allWeekEventCostData)
+            {
+                if (multData.itemType == itemType)
+                    return multData.multiplier; 
+            }
+            return 1f;
+        }
+
+    }
+
+    public class EventCostMultData
+    {
+        public ItemType itemType;
+        public float multiplier;
+
+        public EventCostMultData(ItemType itemType, float multiplier)
+        {
+            this.itemType = itemType;
+            this.multiplier = multiplier;
+        }
     }
 }

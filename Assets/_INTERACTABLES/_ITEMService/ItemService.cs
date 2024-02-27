@@ -13,6 +13,7 @@ namespace Interactables
         //public event Action<CharController> OnGemEnchanted;
         public event Action<CharController, Iitems> OnItemConsumed;
         public event Action<CharController, Iitems> OnItemEnchanted;
+        public event Action<CharController, Iitems> OnItemRead;
 
 
         public List<ItemController> allItemControllers = new List<ItemController>();        
@@ -121,10 +122,12 @@ namespace Interactables
         {
             OnItemEnchanted?.Invoke(charController, iitem);
         }
+        public void On_ItemRead(CharController charController, Iitems iitem)
+        {
+            OnItemRead?.Invoke(charController, iitem);
+        }
 
         #endregion
-
-
 
         #region ITEM BASE
 
@@ -578,10 +581,15 @@ namespace Interactables
                 //    CauseType.Items, 2);
 
                 InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.LionessPelt,
-                   CauseType.Items, 2); InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.NyalaTrophy,
-                    CauseType.Items, 2);
-                InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.LionessPelt,
-                   CauseType.Items, 2);
+                   CauseType.Items, 1);
+                InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.NyalaTrophy,
+                    CauseType.Items, 1);
+                InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.LionPelt,
+                   CauseType.Items, 1);
+                InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.DeerSkin,
+                   CauseType.Items, 1);
+                InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.NyalaPelt,
+                   CauseType.Items, 1);
                 InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.ScarfOfCourage,
                         CauseType.Items, 2, GenGewgawQ.Folkloric);
                 InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.RubyRing,
@@ -632,28 +640,4 @@ namespace Interactables
         }
     }
 }
-//create  item
-//add to inv with slot type
 
-
-// get items form item factory                
-// iitems init=> give slot type, inv location ,  
-// add to common, excess , potion slot , stash .. excess 
-
-//PotionSO potionSO = GetPotionModelSO(_potionName);
-//PotionModel potionModel = potionBase.PotionInit(potionSO);
-//allPotionModel.Add(potionModel);
-
-//Iitems item = potionBase as Iitems;
-//item.invType = SlotType.CommonInv;
-
-//CharModel charModel = CharService.Instance.GetAllyCharModel(charName);
-//if (charModel != null)
-//{
-//    InvData invData = new InvData(charModel.charName, item);
-//    InvService.Instance.invMainModel.AddItem2CommInv(invData);
-//}
-//else
-//{
-//    Debug.Log("CharModel is null" + charName);
-//}

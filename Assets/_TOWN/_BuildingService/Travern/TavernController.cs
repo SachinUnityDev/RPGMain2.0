@@ -82,6 +82,36 @@ namespace Town
             }
         }
 
+        public void WallItem(Iitems item)
+        {
+            ITrophyable iTrophy = item as ITrophyable;
+            if (iTrophy.tavernSlotType == TavernSlotType.Trophy)
+            {
+                BuildingIntService.Instance.tavernController.tavernModel.trophyOnWall = item;
+                BuildingIntService.Instance.On_ItemWalled(item, TavernSlotType.Trophy);
+            }
+            if (iTrophy.tavernSlotType == TavernSlotType.Pelt)
+            {
+                BuildingIntService.Instance.tavernController.tavernModel.peltOnWall = item;
+                BuildingIntService.Instance.On_ItemWalled(item, TavernSlotType.Pelt);
+            }
+            InvService.Instance.invMainModel.RemoveItemFrmCommInv(item);
+        }
+        public void RemoveWalledItem(Iitems item)
+        {
+            ITrophyable iTrophy = item as ITrophyable;
+            if (iTrophy.tavernSlotType == TavernSlotType.Trophy)
+            {
+                BuildingIntService.Instance.tavernController.tavernModel.trophyOnWall = null;
+                BuildingIntService.Instance.On_ItemWalledRemoved(item, TavernSlotType.Trophy);
+            }
+            if (iTrophy.tavernSlotType == TavernSlotType.Pelt)
+            {
+                BuildingIntService.Instance.tavernController.tavernModel.peltOnWall = null;
+                BuildingIntService.Instance.On_ItemWalledRemoved(item, TavernSlotType.Pelt);
+            }
+            InvService.Instance.invMainModel.AddItem2CommInv(item);
+        }
     }
 
     [Serializable]

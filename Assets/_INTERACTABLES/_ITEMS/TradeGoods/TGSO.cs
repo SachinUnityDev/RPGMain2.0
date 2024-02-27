@@ -40,18 +40,19 @@ namespace Interactables
         [Header("if Trophy / Pelt wall images")]
         public Sprite trophyOrPeltImg_Day;
         public Sprite trophyOrPeltImg_Night;
-        public Currency GetNPCSalePriceWithoutFluctuation(NPCNames nPCName)
+        public NPCModData GetNPCModData(NPCNames nPCName)
         {
-            NPCModData nPCModData = 
-                            allNPCModData.Find(t=>t.npcName == nPCName);
-            if(nPCModData == null) return null;
-            
-            Currency SPCurrency = new Currency((int)nPCModData.modVal * cost.silver, (int)nPCModData.modVal * cost.bronze);
-
-            return SPCurrency;
-            // fluctuation to be a number between say
-            //  30 +20%*30, -20%*30
-
+                int index = 
+                            allNPCModData.FindIndex(t=>t.npcName == nPCName);
+            if(index != -1)
+            {
+                return allNPCModData[index];
+            }
+            else
+            {
+                Debug.Log(" npcName MOD Data not found" + nPCName);
+                return null;
+            }
         }
 
     }

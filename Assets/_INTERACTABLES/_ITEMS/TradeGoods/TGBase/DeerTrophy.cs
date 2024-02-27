@@ -46,13 +46,12 @@ namespace Interactables
                      , LandscapeNames.Field, AttribName.acc, 1);
             allLandscapeIndex.Add(index);
 
-            FameService.Instance.fameController.ApplyFameYieldChg(CauseType.TradeGoods, (int)tgName, fameYield);
-            
+            FameService.Instance.fameController.ApplyFameYieldChg(CauseType.TradeGoods, (int)tgName, fameYield);            
         }
-
         public void OnTrophyRemoved()
         {
-         
+            FameService.Instance.fameController.ApplyFameYieldChg(CauseType.TradeGoods, (int)tgName, -fameYield);
+
         }
     }
 }

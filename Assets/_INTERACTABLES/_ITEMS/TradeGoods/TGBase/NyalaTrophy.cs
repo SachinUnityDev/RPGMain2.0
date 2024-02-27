@@ -50,14 +50,12 @@ namespace Interactables
                 , AttribName.willpower, 2);
             allLandscapeIndex.Add(index);
 
-            FameService.Instance.fameController
-                .ApplyFameYieldChg(CauseType.TradeGoods, (int)tgName, fameYield);
-
+            FameService.Instance.fameController.ApplyFameYieldChg(CauseType.TradeGoods, (int)tgName, fameYield);
         }
 
         public void OnTrophyRemoved()
         {
-           
+            FameService.Instance.fameController.ApplyFameYieldChg(CauseType.TradeGoods, (int)tgName, -fameYield);
         }
     }
 }

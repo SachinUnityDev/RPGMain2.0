@@ -112,6 +112,7 @@ namespace Common
         EndOfNight,       
         EndOfQuest,
         Infinity,
+        EndOfWeek, 
     }
     public enum StateFor   // char States
     {

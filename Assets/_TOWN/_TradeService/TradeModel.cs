@@ -57,8 +57,20 @@ namespace Town
                 ItemService.Instance.allItemSO.GetCostData(itemData.itemData.itemType, itemData.itemData.itemName);
                 int minCost = (int)(costData.baseCost.BronzifyCurrency() * (100 - costData.fluctuation)/100);
                 int maxCost = (int)(costData.baseCost.BronzifyCurrency() * (100 + costData.fluctuation) / 100);
-                int bronzifiedResult = UnityEngine.Random.Range(minCost, maxCost);
-                itemData.currPrice = (new Currency(0, bronzifiedResult)).RationaliseCurrency(); 
+                float bronzifiedResult = UnityEngine.Random.Range(minCost, maxCost);
+                // npc factor only for TG
+                if(itemData.itemData.itemType == ItemType.TradeGoods)
+                {
+                    TGSO tgSO = ItemService.Instance.allItemSO.GetTradeGoodsSO((TGNames)itemData.itemData.itemName);
+                    NPCModData nPCModData = tgSO.GetNPCModData(npcName); 
+                    if (nPCModData != null)
+                    {
+                        bronzifiedResult *= nPCModData.modVal; 
+                    }
+                }
+                float eventMod = EcoServices.Instance.ecoController.GetEventModifier(itemData.itemData.itemType);
+                bronzifiedResult *= eventMod;
+                itemData.currPrice = (new Currency(0, (int)bronzifiedResult)).RationaliseCurrency();                
             }
         }
 

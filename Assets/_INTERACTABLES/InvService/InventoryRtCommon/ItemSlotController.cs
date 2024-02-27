@@ -623,12 +623,16 @@ namespace Interactables
             LoreBookBase loreBookBase = ItemsInSlot[0] as LoreBookBase;
             if (enchantScrollBase != null)
             {                
-                enchantScrollBase.ApplyScrollReadFX(); 
+                enchantScrollBase.ApplyScrollReadFX();
+                CharController charController = InvService.Instance.charSelectController;
+                ItemService.Instance.On_ItemRead(charController, ItemsInSlot[0]);
                 RemoveItem();
             }
             else if(loreBookBase != null)
             {
-                loreBookBase.ApplyBookReadFx();                 
+                loreBookBase.ApplyBookReadFx();
+                CharController charController = InvService.Instance.charSelectController;
+                ItemService.Instance.On_ItemRead(charController, ItemsInSlot[0]);
                 RemoveItem();
             }
             

@@ -2,8 +2,8 @@ using Quest;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; 
-
+using UnityEngine.SceneManagement;
+using System; 
 
 namespace Common
 {
@@ -12,6 +12,9 @@ namespace Common
         public FameSO fameSO;
         public FameController fameController;
         public FameViewController fameViewController;
+
+        public event Action <int> OnFameYieldChg;
+        public event Action<int> OnFameChg; 
 
         [Header("Game Init")]
         public bool isNewGInitDone = false;
@@ -54,6 +57,14 @@ namespace Common
             return (int)fameController.fameModel.fameYield;          
         }
 
+        public void On_FameChg(int val)
+        {
+            OnFameChg?.Invoke(val); 
+        }
+        public void On_FameYieldChg(int val)
+        {
+            OnFameYieldChg?.Invoke(val);
+        }
         public List<FameChgData> GetFameChgList()
         {
             return fameController.fameModel.allFameData;        

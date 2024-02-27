@@ -18,9 +18,11 @@ namespace Common
         {
             //  Potion costs are tripled
             //  Herbs are half cost
-            //  +1 hp regen to Mage type heroes at day
-
-
+            EventCostMultData costData = new EventCostMultData(ItemType.Potions, 3); 
+            allEventCostMultData.Add(costData);
+            costData = new EventCostMultData(ItemType.Herbs, 0.5f);
+            allEventCostMultData.Add(costData);
+            EcoServices.Instance.ecoController.ApplyWeekEventCostMultiplier(allEventCostMultData); 
 
         }
         public override void OnWeekBonusClicked()

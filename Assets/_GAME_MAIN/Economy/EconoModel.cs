@@ -42,7 +42,7 @@ namespace Common
 
 
         public List<NPCMoneyData> allNPCMoneyData = new List<NPCMoneyData>(); 
-
+        public List<EventCostMultData> allWeekEventCostData = new List<EventCostMultData>(); 
         public EconoModel(EcoSO ecoSO)
         {
             // PLAYER MONEY 

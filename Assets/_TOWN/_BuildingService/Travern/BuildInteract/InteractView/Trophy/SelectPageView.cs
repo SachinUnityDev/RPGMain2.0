@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Common;
 using Interactables;
+using TMPro;
 
 namespace Town
 {
@@ -20,17 +21,30 @@ namespace Town
         List<Iitems> allTGs = new List<Iitems>();   
         TrophyView trophyView;
         public TrophySelectSlotController trophyslot;
-        public TrophySelectSlotController peltSlot; 
+        public TrophySelectSlotController peltSlot;
+
+        [Header("Fame yield Txt")]
+        [SerializeField] TextMeshProUGUI fameYieldTxt;
+
+        [Header("Trophy and Pelt yield Txt")]
+        [SerializeField] TextMeshProUGUI trophyBuffTxt;
+        [SerializeField] TextMeshProUGUI peltBuffTxt;
+        
+        [SerializeField] int netFameYield;
+        [SerializeField] string trophyStr ="";
+        [SerializeField] string peltStr=""; 
 
         void Start()
         {
             trophyBtn.onClick.AddListener(OnTrophyBtnPressed);
-            peltBtn.onClick.AddListener(OnPeltBtnPressed);
-            //BuildingIntService.Instance.OnItemWalled += (Iitems item, TavernSlotType tavernSlotType)
-            //                            => FillSelectSlot(tavernSlotType);
+            peltBtn.onClick.AddListener(OnPeltBtnPressed);        
             peltSlot = peltBtn.GetComponent<TrophySelectSlotController>();
             trophyslot = trophyBtn.GetComponent<TrophySelectSlotController>();
-
+            BuildingIntService.Instance.OnItemWalled +=
+                        (Iitems item, TavernSlotType t) => DsplyBuffNYield();
+            
+            BuildingIntService.Instance.OnItemWalledRemoved +=
+                        (Iitems item, TavernSlotType t) => DsplyBuffNYield();
         }
 
         void OnTrophyBtnPressed()
@@ -96,65 +110,38 @@ namespace Town
             this.trophyView = trophyView;
             FillTrophySlot();
             FillPeltSlot();
+            DsplyBuffNYield(); 
+        }      
+        void DsplyBuffNYield()
+        {
+            netFameYield = 0; peltStr = string.Empty; trophyStr = string.Empty;
+            DsplyPeltBuff();
+            DsplyTrophyBuff();
+            DsplyFameYield();
+
         }
-        //void FillSelectSlot(TavernSlotType tavernSlotType)
-        //{
-        //    if(tavernSlotType == TavernSlotType.Trophy)
-        //    {
-        //        FillTrophySlot(); 
-        //    }
-        //    if(tavernSlotType == TavernSlotType.Pelt)
-        //    {
-        //        FillPeltSlot();
-        //    }
-        //}
-
-        //void LoadTrophySlot()
-        //{
-        //    Iitems itemTrophy =
-        //           BuildingIntService.Instance.tavernController.tavernModel.trophyOnWall;
-        //    trophyslot = trophyBtn.GetComponent<TrophySelectSlotController>();
-
-        //    if (itemTrophy != null)
-        //    {
-        //        trophyslot.AddItem(itemTrophy, true);
-        //    }
-        //    else
-        //    {
-        //        trophyslot.ClearSlot();
-        //    }
-        //}
-        //void LoadPeltSlot()
-        //{
-        //    Iitems itemTrophy =
-        //           BuildingIntService.Instance.tavernController.tavernModel.peltOnWall;
-        //    trophyslot = peltBtn.GetComponent<TrophySelectSlotController>();
-
-        //    if (itemTrophy != null)
-        //    {
-        //        trophyslot.AddItem(itemTrophy, true);
-        //    }
-        //    else
-        //    {
-        //        trophyslot.ClearSlot();
-        //    }
-        //}
         void FillTrophySlot()
         {
             Iitems itemTrophy =
                     BuildingIntService.Instance.tavernController.tavernModel.trophyOnWall;
             trophyslot = trophyBtn.GetComponent<TrophySelectSlotController>();
-
+            ITrophyable itrophy = itemTrophy as ITrophyable;
+            TGBase tgBase = itemTrophy as TGBase; 
             if (itemTrophy != null)
             {
                 if (trophyslot.ItemsInSlot.Count == 0)
                 {
                     trophyslot.AddItem(itemTrophy, true);
+                    netFameYield += itrophy.fameYield;
+                    trophyStr = tgBase.allDisplayStr[0]; 
                 }
                 else if (trophyslot.ItemsInSlot[0].itemName != itemTrophy.itemName)
                 {
                     trophyslot.AddItem(itemTrophy, true);
+                    netFameYield += itrophy.fameYield;
+                    trophyStr = tgBase.allDisplayStr[0];
                 }
+
             }
             else if (itemTrophy == null)// trophy slot is empty
             {
@@ -166,22 +153,72 @@ namespace Town
             Iitems itemPelt =
                      BuildingIntService.Instance.tavernController.tavernModel.peltOnWall;          
             peltSlot = peltBtn.GetComponent<TrophySelectSlotController>();
-            
+            ITrophyable itrophy = itemPelt as ITrophyable;
+            TGBase tgBase = itemPelt as TGBase;
             if (itemPelt != null)
             {
                 if (peltSlot.ItemsInSlot.Count == 0)
                 {
                     peltSlot.AddItem(itemPelt, true);
+                    netFameYield += itrophy.fameYield;
+                    peltStr = tgBase.allDisplayStr[0];
                 }
                 else if (peltSlot.ItemsInSlot[0].itemName != itemPelt.itemName)
                 {
                     peltSlot.AddItem(itemPelt, true);
+                    netFameYield += itrophy.fameYield;
+                    peltStr = tgBase.allDisplayStr[0];
                 }
             }
             else if (itemPelt == null)
             {
                 peltSlot.ClearSlot();
             }
+        }
+
+        void DsplyFameYield()
+        {
+            if(netFameYield != 0)
+                fameYieldTxt.text = netFameYield.ToString();
+            else
+                fameYieldTxt.text = 0.ToString();
+        }
+        void DsplyTrophyBuff()
+        {
+            Iitems itemTrophy =
+                 BuildingIntService.Instance.tavernController.tavernModel.trophyOnWall;
+            ITrophyable itrophy = itemTrophy as ITrophyable;
+            TGBase tgBase = itemTrophy as TGBase;
+
+            if (itemTrophy != null)
+            {  
+                netFameYield += itrophy.fameYield;
+                trophyStr = tgBase.allDisplayStr[0];               
+            }
+            else if (itemTrophy == null)
+            {
+                trophyStr = "";
+            }            
+            trophyBuffTxt.text = trophyStr.ToString();  
+        }
+
+        void DsplyPeltBuff()
+        {
+            Iitems itemPelt =
+                 BuildingIntService.Instance.tavernController.tavernModel.peltOnWall;
+            ITrophyable itrophy = itemPelt as ITrophyable;
+            TGBase tgBase = itemPelt as TGBase;
+
+            if (itemPelt != null)
+            { 
+                netFameYield += itrophy.fameYield;
+                peltStr = tgBase.allDisplayStr[0];                
+            }
+            else if (itemPelt == null)
+            {
+                peltStr = "";
+            }
+            peltBuffTxt.text = peltStr.ToString();
         }
     }
 }

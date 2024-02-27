@@ -19,6 +19,8 @@ namespace Town
         [Header("trophy N PeltContainer")]
         [SerializeField] Transform trophyNPeltContainer;
 
+
+        [Header(" global Var")]
         [SerializeField] TavernModel tavernModel;
 
         private void Start()
@@ -90,6 +92,14 @@ namespace Town
             {
                 peltTrans.gameObject.SetActive(false);
             }
+        }
+
+        void DsplyFameYield()
+        {
+
+        }
+        void DsplyPeltNTrophyBuffs()
+        {
 
         }
       

@@ -30,7 +30,6 @@ namespace Town
         }
         public void OnItemWalled(Iitems item)
         {
-            // if filled perform a swap 
             ITrophyable itrophy = item as ITrophyable; 
             if (itrophy.tavernSlotType == TavernSlotType.Trophy)
             {
@@ -39,8 +38,7 @@ namespace Town
             if (itrophy.tavernSlotType == TavernSlotType.Pelt)
             {
                 selectPageView.peltSlot.AddItem(item);
-            }
-            
+            }            
             DisplaySelectPage(); 
         }
 

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 
 namespace Town
 {
@@ -25,14 +26,19 @@ namespace Town
         [SerializeField] float prevRightClick = 0f;
 
         [Header("return btn")]
-        [SerializeField] Button returnBtn; 
+        [SerializeField] Button returnBtn;
+
+        [Header("Fame Yield transform")]
+        [SerializeField] Transform fameYieldTrans;
+        [SerializeField] Transform buffTxtTrans;
 
         [Header("Global var")]
         [SerializeField] int index;
         [SerializeField] int maxIndex;
         TrophyView trophyView;
-        [SerializeField] TavernSlotType tavernSlotType; 
-   
+        [SerializeField] TavernSlotType tavernSlotType;
+        [SerializeField] string trophyStr = ""; 
+
         void Start()
         {
             leftBtn.onClick.AddListener(OnLeftBtnPressed);
@@ -42,11 +48,18 @@ namespace Town
         public void InitScrollPage(TrophyView trophyView, TavernSlotType tavernSlotType
                                                                         , List<Iitems> slotItems)
         {
+            HideFameNBuff(); 
             this.slotItems.Clear();
             index = 0; 
             this.trophyView= trophyView;
             this.tavernSlotType = tavernSlotType;
-            this.slotItems.AddRange(slotItems.Distinct().ToList());
+            foreach (Iitems item in slotItems)
+            {
+                if(!this.slotItems.Any(t=>t.itemName ==item.itemName && t.itemType == item.itemType))
+                {
+                    this.slotItems.Add(item);
+                }
+            }
             FillItemsinSlots();
         }
         void FillItemsinSlots()
@@ -86,7 +99,7 @@ namespace Town
                 TrophyScrollSlotController slotController
                         = selectContainer.GetChild(j).GetComponent<TrophyScrollSlotController>();
 
-                slotController.InitSlotView(trophyView);
+                slotController.InitSlotView(trophyView, this);
                 if (i < slotItems.Count)
                     slotController.AddItem(slotItems[i]);                
                 else
@@ -128,21 +141,31 @@ namespace Town
             trophyView.DisplaySelectPage();
         }
 
-   
+
+        public void ShowFameNBuff(Iitems item)
+        {
+            int fameYield = 0; 
+            ITrophyable itrophy = item as ITrophyable;
+            TGBase tgBase = item as TGBase;
+            fameYieldTrans.gameObject.SetActive(true);
+            buffTxtTrans.gameObject.SetActive(true);
+            if (item != null)
+            {
+                fameYield += itrophy.fameYield;
+                trophyStr = tgBase.allDisplayStr[0];
+            }
+            else if (item == null)
+            {
+                trophyStr = "";
+                fameYield = 0;
+            }
+            buffTxtTrans.GetComponentInChildren<TextMeshProUGUI>().text = trophyStr.ToString();
+            fameYieldTrans.GetChild(1).GetComponent<TextMeshProUGUI>().text = fameYield.ToString();
+        }
+        public void HideFameNBuff()
+        {
+            fameYieldTrans.gameObject.SetActive(false);
+            buffTxtTrans.gameObject.SetActive(false);
+        }
     }
 }
-
-//allItems.Clear();   
-//allItems.AddRange(InvService.Instance.invMainModel.GetItemsFrmCommonInv(ItemType.TradeGoods));
-//allItems.AddRange(InvService.Instance.invMainModel.GetItemsFrmStashInv(ItemType.TradeGoods));
-
-//foreach (Iitems item in allItems) 
-//{
-
-//    ITrophyable iTrophy = item as ITrophyable;
-//    if(iTrophy.tavernSlotType == tavernSlotType)
-//    {
-//        allSelect.Add(item);    
-//    }
-//}
-//if(allItems.Count > 0)       

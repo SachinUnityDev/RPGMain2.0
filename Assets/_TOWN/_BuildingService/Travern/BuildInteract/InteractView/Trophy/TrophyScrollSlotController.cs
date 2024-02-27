@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 namespace Common
 {
-    public class TrophyScrollSlotController : MonoBehaviour, IPointerClickHandler, iSlotable
+    public class TrophyScrollSlotController : MonoBehaviour, IPointerClickHandler, iSlotable, IPointerEnterHandler, IPointerExitHandler
     {
         #region DECLARATIONS
         public int slotID { get; set; }
@@ -26,8 +26,10 @@ namespace Common
         [Header("RIGHT CLICK CONTROLs")]
         public List<ItemActions> rightClickActions = new List<ItemActions>();
         public bool isRightClicked = false;
-   
+
         #endregion
+
+        TrophyScrollView trophyScrollView; 
 
         private void Start()
         {
@@ -38,9 +40,10 @@ namespace Common
 
         #region SLOT ITEM HANDLING ..ADD/REMOVE/REFRESH
 
-        public void InitSlotView(TrophyView trophyView)
+        public void InitSlotView(TrophyView trophyView, TrophyScrollView trophyScrollView)
         {
             this.trophyView= trophyView;
+            this.trophyScrollView = trophyScrollView; 
             ClearSlot();
         }
         public void ClearSlot()
@@ -224,6 +227,23 @@ namespace Common
         {
 
         }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if (ItemsInSlot.Count> 0)
+            {
+                trophyScrollView.ShowFameNBuff(ItemsInSlot[0]);
+            }
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            if (ItemsInSlot.Count > 0)
+            {
+                trophyScrollView.HideFameNBuff();
+            }
+        }
+
         #endregion
     }
 } 

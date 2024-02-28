@@ -18,8 +18,8 @@ MonoBehaviour:
   buildExtDayHL: {fileID: 21300000, guid: cbdc362e1fc01da4da2017b10f4df19e, type: 3}
   buildExtNight: {fileID: 21300000, guid: 1f044cb1a200a9f469737fab13e432a9, type: 3}
   buildExtNightHL: {fileID: 21300000, guid: 2c45c9378beab3b429b26e1a991884fc, type: 3}
-  buildIntDay: {fileID: 21300000, guid: f41bb8e1699f93d4ba2d20f97e77ca10, type: 3}
-  buildIntNight: {fileID: 21300000, guid: b1e8ba239e451594a9d363725ce78568, type: 3}
+  buildIntDay: {fileID: 21300000, guid: a73af9a90a453f44eafdb0daf7b54ee1, type: 3}
+  buildIntNight: {fileID: 21300000, guid: 57d849173d1233d46800a71f5083893b, type: 3}
   charInteractData: []
   CharInteractPrefab: []
   npcInteractData:

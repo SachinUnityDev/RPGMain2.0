@@ -50,8 +50,7 @@ namespace Town
     }
     
     public enum HousePurchaseOpts
-    {        
-        
+    {      
         UpgradeBed,
         UpgradeStash,
         Fermentor,

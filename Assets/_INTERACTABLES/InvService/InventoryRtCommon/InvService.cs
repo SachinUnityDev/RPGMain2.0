@@ -73,8 +73,11 @@ namespace Interactables
         }
         public void On_DragResult(bool result, ItemsDragDrop itemsDragDrop)
         {
-            OnDragResult?.Invoke(result,itemsDragDrop); 
+            OnDragResult?.Invoke(result, itemsDragDrop);
+               
         }
+       
+
         public void On_CharSelectInv(CharModel charModel)
         {
             if (!isInvPanelOpen) return; 

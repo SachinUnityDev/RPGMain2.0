@@ -9,11 +9,18 @@ namespace Town
 {
     public class BuildBaseEvents : MonoBehaviour
     {
-        [Header("To be ref")]
+        [Header("To be ref Base")]
         [SerializeField] Sprite dayN;
         [SerializeField] Sprite dayHL;
         [SerializeField] Sprite nightN;
         [SerializeField] Sprite nightHL;
+
+        [Header("To be ref Base")]
+        [SerializeField] Sprite dayNUp;
+        [SerializeField] Sprite dayHLUp;
+        [SerializeField] Sprite nightNUp;
+        [SerializeField] Sprite nightHLUp;
+
 
         [Header("Not be ref")]
         Image btnImg;

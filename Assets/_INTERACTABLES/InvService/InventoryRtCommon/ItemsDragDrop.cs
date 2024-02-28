@@ -257,7 +257,20 @@ namespace Interactables
             cloneRect.anchoredPosition = Vector3.zero;
             cloneRect.localScale = Vector3.one;
             //clone.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            SetAnchorsMaxStretch(cloneRect);
+        }
+        private void SetAnchorsMaxStretch(RectTransform rectTransformClone)
+        {
+            // Set anchors to cover the entire parent container (0, 0, 1, 1)
+            rectTransformClone.anchorMin = Vector2.zero;
+            rectTransformClone.anchorMax = Vector2.one;
 
+            // Reset the size to zero (optional, depending on your requirements)
+            rectTransformClone.sizeDelta = Vector2.zero;
+            rectTransformClone.anchoredPosition = Vector2.zero;
+
+            // Optional: Set the pivot to control the reference point during scaling
+            rectTransformClone.pivot = new Vector2(0.5f, 0.5f);
         }
         void CreateClone() // clone should have raycast block while transfer
         {
@@ -268,13 +281,17 @@ namespace Interactables
             cloneRect.anchoredPosition = Vector3.zero;
             cloneRect.localScale = Vector3.one;
             //clone.GetComponent<CanvasGroup>().blocksRaycasts = false; 
+            SetAnchorsMaxStretch(cloneRect);
+
         }
-       
+
         public void OnDrag(PointerEventData eventData)
         {
             if (iSlotable.slotType == SlotType.ProvActiveInv || iSlotable.slotType == SlotType.TrophySelectSlot
                 || iSlotable.slotType == SlotType.TrophyScrollSlot)
                 return;
+            if (GameService.Instance.gameModel.gameState == GameState.InTown)
+                canvas = FindObjectOfType<Canvas>();
             rectTransform.anchoredPosition += eventData.delta/canvas.scaleFactor;           
         }
 
@@ -288,16 +305,18 @@ namespace Interactables
 
             if (draggedGO.transform.parent?.GetComponent<IDropHandler>() == null
                 && draggedGO.transform.parent.parent?.GetComponent<IDropHandler>() == null)
-            {
-               // Debug.Log("I drop handler NOT FOUND" + draggedGO.transform.parent.parent.name);
+            {               
                 InvService.Instance.On_DragResult(false, this);
             }
             else
             {
-                if(clone.GetComponent<CanvasGroup>() != null)  // check for empty slot 
+                if (clone.GetComponent<CanvasGroup>() != null)
+                {
                     clone.GetComponent<CanvasGroup>().blocksRaycasts = true;
+                }
             }
         }
+    
         #endregion
     }
 

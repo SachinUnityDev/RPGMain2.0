@@ -36,7 +36,7 @@ namespace Town
             CalendarService.Instance.On_EndDayClick();                
             FillHouseView();
             // for upgraded bed ..chance and upgrade chk encapsulated 
-            BuildingIntService.Instance.houseController.UpgradedBedBuff();
+            BuildingIntService.Instance.houseController.ChkNApplyUpgradeBedBuff();
             UnLoad();
         }
       
@@ -77,19 +77,17 @@ namespace Town
             {
                 buffTxt.text = buffStrBase;
             }
-        }    
+        }  
 
         public void Load()
         {
             FillHouseView();
             FillTheBuffStr();
         }
-
         public void UnLoad()
         {
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
         }
-
         void OnClosePressed()
         {
             UIControlServiceGeneral.Instance.TogglePanel(gameObject,false);

@@ -80,10 +80,10 @@ namespace Town
 
         void OnBedUpgraded()
         {
-            houseModel.isBedUpgraded= true;
+            houseModel.isBedUpgraded = true;
         }
 
-        public void UpgradedBedBuff()
+        public void ChkNApplyUpgradeBedBuff()
         {
             if (!houseModel.isBedUpgraded) return; 
             if (houseModel.restChanceOnUpgrade.GetChance())

@@ -4,16 +4,22 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using DG.Tweening;
-using Common; 
+using Common;
+using TMPro;
 
 namespace Town
 {
-    public class EndDayBtnEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+    public class EndDayBtnEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] TimeState timeState;
 
         [SerializeField] Image btnImg;
-        CalendarSO calendarSO; 
+        CalendarSO calendarSO;
+
+        [SerializeField]Image img;
+   
+
+
         public void OnPointerEnter(PointerEventData eventData)
         {
             btnImg = GetComponent<Image>();
@@ -36,11 +42,12 @@ namespace Town
         { 
             calendarSO = CalendarService.Instance.calendarSO;
             timeState = CalendarService.Instance.currtimeState;
-            CalendarService.Instance.OnChangeTimeState += ChgBtnBg; 
         }
         private void OnEnable()
         {
             btnImg = GetComponent<Image>();
+            CalendarService.Instance.OnChangeTimeState += ChgBtnBg;
+
         }
         private void OnDisable()
         {
@@ -48,18 +55,20 @@ namespace Town
         }
         void ChgBtnBg(TimeState timeState)
         {
-            
             this.timeState = timeState; 
             if (timeState == TimeState.Day)
+            {   
                 btnImg.sprite = calendarSO.endDayBtnN;
+                btnImg.GetComponentInChildren<TextMeshProUGUI>().text = "End day";
+            }                
             else if (timeState == TimeState.Night)
+            {
                 btnImg.sprite = calendarSO.endNightBtnN;
+                btnImg.GetComponentInChildren<TextMeshProUGUI>().text = "End night";
+            }
+                
         }
-
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            CalendarService.Instance.On_EndDayClick(); 
-        }
+      
     }
 
 

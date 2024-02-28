@@ -41,7 +41,6 @@ namespace Common
         [Header("CURRENT TIME STATE ")]
         public TimeState currtimeState;
 
-        [SerializeField] Button endday; 
         public int dayInGame;
         public int dayInYear; 
         public int weekCounter;
@@ -77,13 +76,11 @@ namespace Common
             calendarFactory = gameObject.GetComponent<CalendarFactory>();
             calendarUIController = GetComponent<CalendarUIController>();
             
-           // endday.onClick.AddListener(On_EndDayClick);
             SceneManager.sceneLoaded += OnSceneLoaded;
 
         }
         private void OnDisable()
         {
-            //  endday.onClick.RemoveAllListeners();
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
@@ -91,7 +88,6 @@ namespace Common
         {
             if (scene.name == "TOWN")
             {
-                endday = FindObjectOfType<EndDayBtnEvents>(true).GetComponent<Button>();
 
                 calendarUIController.Init();
                 calendarUIController.UpdateMonthPanel(currentMonth, startOfGameDayName, dayInYear);
@@ -230,13 +226,11 @@ namespace Common
             if (currtimeState == TimeState.Night)
             {
                 // start of the day
-                currtimeState = TimeState.Day;
-                endday.GetComponentInChildren<TextMeshProUGUI>().text = "End the Day?";
+                currtimeState = TimeState.Day;               
                 On_StartOfDay(dayInGame);
             }
-            else
+            else if (currtimeState == TimeState.Day)
             {
-                endday.GetComponentInChildren<TextMeshProUGUI>().text = "End the Night?";
                 currtimeState = TimeState.Night;
                 On_StartOfNight(dayInGame);
             }

@@ -8,7 +8,7 @@ namespace Common
 {
     public class ButtonDoubleClick : MonoBehaviour, IPointerClickHandler
     {
-        float clicked = 0;
+       
         float prevClickTime = 0;
         float clickdelay = 0.5f;
 

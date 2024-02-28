@@ -98,6 +98,7 @@ namespace Town
         [Header("Building Interactions")]
         public List<BuildIntTypeData> buildIntTypes = new List<BuildIntTypeData>();
 
+
         public bool IsBuildIntUnLocked(BuildInteractType buildIntType)
         {
             foreach (BuildIntTypeData buildInt in buildIntTypes)

@@ -33,7 +33,7 @@ namespace Interactables
             {
                    charController.charStateController.ApplyImmunityBuff(CauseType.Food
                                 , (int)fruitName, charController.charModel.charID, CharStateName.Poisoned
-                                , TimeFrame.EndOfRound, 6);
+                                , TimeFrame.EndOfRound, 8);
             }
         }
 

@@ -81,15 +81,15 @@ namespace Town
 
         public void FillCharPlanks()
         {
-            CharNames selectChar = CharService.Instance.allCharModels[index].charName;
-            BuildingIntService.Instance.selectChar = selectChar;
+            CharModel selectCharModel = CharService.Instance.allCharModels[index];
+            BuildingIntService.Instance.selectChar = selectCharModel.charName;
 
-            CharController charController = CharService.Instance.GetAbbasController(selectChar);
+            CharController charController = CharService.Instance.GetCharCtrlWithCharID(selectCharModel.charID);
             ArmorController armorController = charController.armorController;
             ArmorModel armorModel = armorController.armorModel;
 
-            centerTrans.GetComponent<UnSocketViewCenter>().InitUnSocketCenter(selectChar, armorModel, this);
-            statusBtn.GetComponent<UnSocketBtnPtrEvents>().InitUnSocketBtnPtrEvents(selectChar, armorModel, this);
+            centerTrans.GetComponent<UnSocketViewCenter>().InitUnSocketCenter(charController, armorModel, this);
+            statusBtn.GetComponent<UnSocketBtnPtrEvents>().InitUnSocketBtnPtrEvents(charController, armorModel, this);
 
             CurrTrans.GetComponent<DisplayCurrencyWithToggle>().InitCurrencyToggle();
         }
@@ -101,7 +101,6 @@ namespace Town
         {
             this.fortifyMainView = fortifyMainView;
             CurrTrans.GetComponent<DisplayCurrencyWithToggle>().InitCurrencyToggle();
-
         }
 
         public void StatusUpdate(UnsocketStatus unsocketStatus)

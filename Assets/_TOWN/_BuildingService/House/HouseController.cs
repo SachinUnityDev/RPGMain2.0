@@ -1,8 +1,5 @@
 using Common;
 using System.Collections;
-using System.Collections.Generic;
-using System.Security.Policy;
-using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -50,42 +47,41 @@ namespace Town
             }
         }
 
-
         public void OnPurchase(HousePurchaseOptsData houseData)
         {
             switch (houseData.houseOpts)
             {
                 case HousePurchaseOpts.UpgradeBed:
-                    OnBedUpgraded(); 
+                    UpgradeBuildInt(BuildInteractType.EndDay); 
                     break;
                 case HousePurchaseOpts.UpgradeStash:
-                    OnStashUpgraded();
+                    UpgradeBuildInt(BuildInteractType.Chest);
                     break;
                 case HousePurchaseOpts.Fermentor:
                     OnFermentorPurchased();
                     break;
                 case HousePurchaseOpts.Dryer:
-                    OnDryerPurhase();
+                    OnDryerPurhased();
                     break;
                 case HousePurchaseOpts.Cora:
-                    OnCoraPurchase();   
+                    OnCoraPurchased();
                     break;
                 case HousePurchaseOpts.Drums:
-                    OnDrumPurchase();   
+                    OnDrumPurchased(); 
                     break;
                 default:
                     break;
             }
         }
-
-        void OnBedUpgraded()
+        void UpgradeBuildInt(BuildInteractType buildIntType)
         {
-            houseModel.isBedUpgraded = true;
+            houseModel.BuildIntChg(buildIntType, true); 
+            BuildingIntService.Instance.On_BuildIntUpgraded(houseModel, buildIntType, true);
         }
 
         public void ChkNApplyUpgradeBedBuff()
         {
-            if (!houseModel.isBedUpgraded) return; 
+            if (!houseModel.IsBuildIntUpgraded(BuildInteractType.EndDay)) return; 
             if (houseModel.restChanceOnUpgrade.GetChance())
             {
                 CharController charController =
@@ -98,24 +94,28 @@ namespace Town
         }
         void OnStashUpgraded()
         {
-
+            // add new rows to stash 
         }
         
         void OnFermentorPurchased()
         {
-
+            houseModel.UnLockBuildIntType(BuildInteractType.Fermentation);
+            BuildingIntService.Instance.On_BuildIntUnLocked(houseModel, BuildInteractType.Fermentation, true);
         }
-        void OnDryerPurhase()
+        void OnDryerPurhased()
         {
             // not in demo 
-        }
-        void OnCoraPurchase()
-        {
+            houseModel.UnLockBuildIntType(BuildInteractType.DryFood);
+            BuildingIntService.Instance.On_BuildIntUnLocked(houseModel, BuildInteractType.DryFood, true);
 
         }
-        void OnDrumPurchase()
+        void OnCoraPurchased()
         {
-
+          //  houseModel.UnLockBuildIntType(BuildInteractType.Music);
+        }
+        void OnDrumPurchased()
+        {
+          //  houseModel.UnLockBuildIntType(BuildInteractType.Music);
         }
 
 

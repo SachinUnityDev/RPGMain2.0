@@ -74,7 +74,9 @@ namespace Interactables
         {
             draggedGO = eventData.pointerDrag;
             itemsDragDrop = draggedGO.GetComponent<ItemsDragDrop>();
-            Iitems itemDragged = itemsDragDrop?.itemDragged; 
+            Iitems itemDragged = itemsDragDrop?.itemDragged;
+            iSlotable islot = itemsDragDrop.iSlotable;
+            if (islot.slotType == SlotType.ProvActiveInv) return;
             if (itemsDragDrop != null)
             {
                 iSlotable prevSlot = itemsDragDrop.iSlotable;
@@ -239,6 +241,7 @@ namespace Interactables
 
         void AddItemOnSlot(Iitems item, bool onDrop)
         {
+            item.invSlotType = SlotType.CommonInv;
             ItemsInSlot.Add(item);
             item.slotID = slotID; 
             itemCount++;

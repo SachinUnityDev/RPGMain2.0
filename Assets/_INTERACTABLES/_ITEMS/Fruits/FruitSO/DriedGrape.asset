@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae6fc83d4875c1047b798c5bc0b9a9ac, type: 3}
+  m_Name: DriedGrape
+  m_EditorClassIdentifier: 
+  fruitName: 13
+  desc: Dried Grape
+  shelfLife: 60
+  hpRegen: 1
+  staminaRegen: 0
+  timeFrameRegen: 1
+  regenCastTime: 5
+  hungerReliefMin: 5
+  hungerReliefMax: 10
+  thirstReliefMin: 0
+  thirstReliefMax: 0
+  tempTraitName: 0
+  weightOfSickeness: 0
+  maxInvStackSize: 12
+  cost:
+    silver: 0
+    bronze: 8
+  fluctuation: 20
+  maxWorldInstance: 100
+  timeFrame: 1
+  castTime: 0
+  iconSprite: {fileID: 21300000, guid: dda0c5a102e3b054d983856a4ce5fe3b, type: 3}
+  allLines:
+  - 1 Hp Regen, 5 rds
+  - Slight Hunger relief
+  - May cure Constipation
+  - High shelf life

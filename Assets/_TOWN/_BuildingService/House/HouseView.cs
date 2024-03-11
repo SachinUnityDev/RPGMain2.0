@@ -17,6 +17,7 @@ namespace Town
         public Transform restPanel;
         public Transform stashPanel;
         public Transform brewingPanel;
+        public Transform dryerPanel; 
 
         public override Transform GetBuildInteractPanel(BuildInteractType buildInteract)
         {
@@ -38,6 +39,8 @@ namespace Town
                     return provisionPanel;
                 case BuildInteractType.CureSickness:
                     return healingPanel;
+                case BuildInteractType.DryFood:
+                    return dryerPanel;
                 default:
                     return null;                    
             }

@@ -53,7 +53,7 @@ namespace Town
             // open talk panel in build view
             if (interactData.allInteract.Count > 0)
             {
-                buildView.OnPortSelect(interactData, null);
+                buildView.OnPortSelect(interactData, null, transform.position.y);
             }
 
             if (interactData.allInteract.Any(t => t.nPCIntType == IntType.Talk))

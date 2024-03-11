@@ -46,7 +46,14 @@ You can get through my vault. Let me know whenever you want, I will open the way
 #speaker:1:	Abbas	
 Alright then. I will come by when I am ready.
 
+#speaker:2:	Greybrow
 
+By the way, there is one more adventurer in the Tavern. A Macalaki he is. You might wanna talk to him. Two hands are stronger than one hand.
+#speaker:1:	Abbas	
+Though, keep in mind, one hand with a weapon is stronger than ten bare hands!
+		
+#speaker:1:	Greybrow	
+Now leave me be, I got customers to tend to. See you around!
 	
 
 -> END

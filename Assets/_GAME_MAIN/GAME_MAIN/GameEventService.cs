@@ -63,10 +63,12 @@ namespace Common
                 TradeService.Instance.InitTradeService();
                 FameService.Instance.Init();
                 LevelService.Instance.Init();
-                
+                WeaponService.Instance.Init();
+                ArmorService.Instance.Init(); 
+
                 OnTownEnter?.Invoke(locationName);
                 QuestMissionService.Instance.InitQuestMission();
-            LandscapeService.Instance.InitLandscape(); 
+                LandscapeService.Instance.InitLandscape(); 
                 MapService.Instance.InitMapService(); // to be put below questmission
                 LootService.Instance.InitLootService();
             if (WelcomeService.Instance.isQuickStart)

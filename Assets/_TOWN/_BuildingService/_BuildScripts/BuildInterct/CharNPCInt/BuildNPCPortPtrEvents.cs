@@ -51,13 +51,12 @@ namespace Town
            // open talk panel in build view
             if (interactData.allInteract.Count>0)
             {
-                buildView.OnPortSelect(null,interactData); 
+                buildView.OnPortSelect(null,interactData, transform.position.y); 
             }
 
             if (interactData.allInteract.Any(t=>t.nPCIntType == IntType.Talk))
             {
-                Transform talkPanel =
-                    buildView.GetNPCInteractPanel(IntType.Talk);
+                Transform talkPanel = buildView.GetNPCInteractPanel(IntType.Talk);
                 talkPanel.gameObject.SetActive(true);
                 if(interactData != null)
                 {   

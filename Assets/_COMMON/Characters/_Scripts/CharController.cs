@@ -122,7 +122,7 @@ namespace Common
                 weaponController = gameObject.AddComponent<WeaponController>();
                 landscapeController = gameObject.AddComponent<LandscapeController>();
                 permaTraitController = gameObject.GetComponent<PermaTraitController>();
-                armorController = gameObject.AddComponent<ArmorController>();
+               // armorController = gameObject.AddComponent<ArmorController>();
                 
                 // CombatEventService.Instance.OnSOT += ()=> PopulateOverCharBars(false); 
                 //CombatEventService.Instance.OnEOC -= FortitudeReset2FortOrg;

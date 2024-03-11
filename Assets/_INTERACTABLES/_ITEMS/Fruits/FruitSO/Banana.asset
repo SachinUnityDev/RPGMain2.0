@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fruitName: 6
   desc: Banana
-  shelfLife: 5
+  shelfLife: 3
   hpRegen: 0
   staminaRegen: 2
   timeFrameRegen: 1

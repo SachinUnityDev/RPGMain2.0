@@ -19,7 +19,7 @@ namespace Town
 
         FortifyView fortifyView;
         [SerializeField] ArmorModel armorModel;
-        [SerializeField] CharNames selectChar;
+        [SerializeField] CharController selectCharCtrl;
 
 
         [SerializeField] Transform leftCharPanel;
@@ -36,24 +36,24 @@ namespace Town
         {
             armorImg = transform.GetChild(0).GetComponent<Image>();
         }
-        public void InitUnSocketCenter(CharNames selectChar, ArmorModel armorModel, UnSocketView UnSocketView)
+        public void InitUnSocketCenter(CharController charController, ArmorModel armorModel, UnSocketView UnSocketView)
         {
             this.UnSocketView= UnSocketView;    
             this.armorModel = armorModel;
-            this.selectChar = selectChar;
+            this.selectCharCtrl = charController;
 
-            ArmorSO armorSO = ArmorService.Instance.allArmorSO.GetArmorSOWithCharName(selectChar);
-            armorImg.sprite = armorSO.GetArmorSprite(selectChar);
+            ArmorSO armorSO = ArmorService.Instance.allArmorSO.GetArmorSOWithCharName(charController.charModel.charName);
+            armorImg.sprite = armorSO.GetArmorSprite(charController.charModel.charName);
             FillGemSlots();      
         }
         void FillGemSlots()
         {
-            CharController charController = CharService.Instance.GetAbbasController(selectChar);
+            CharController charController = selectCharCtrl; 
             ItemController itemController = charController.itemController;
             itemModel = itemController.itemModel;
             for (int i = 0; i < 2; i++)
             {
-                Iitems item = itemModel.divItemsSocketed[i]; 
+                Iitems item = itemModel?.divItemsSocketed[i]; 
                 if(item != null)
                 {                   
                     if (i == 0)

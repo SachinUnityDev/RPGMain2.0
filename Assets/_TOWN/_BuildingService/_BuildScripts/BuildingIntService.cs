@@ -15,7 +15,9 @@ namespace Town
     public class BuildingIntService : MonoSingletonGeneric<BuildingIntService>
     {
         public event Action<Iitems, TavernSlotType> OnItemWalled;
-        public event Action<Iitems, TavernSlotType> OnItemWalledRemoved; 
+        public event Action<Iitems, TavernSlotType> OnItemWalledRemoved;
+        public event Action<BuildingModel, BuildInteractType, bool> OnBuildIntUpgraded;
+        public event Action<BuildingModel, BuildInteractType, bool> OnBuildIntUnLocked; 
         public event Action<BuildingModel, BuildView> OnBuildInit;
         public event Action<BuildingModel, BuildView> OnBuildUnload;
 
@@ -234,7 +236,14 @@ namespace Town
         {               
             OnItemWalled?.Invoke(item, tavernSlotType);
         }
-
+        public void On_BuildIntUpgraded(BuildingModel buildModel, BuildInteractType buildIntType, bool isUpgrade)
+        {
+            OnBuildIntUpgraded?.Invoke(buildModel, buildIntType, isUpgrade);
+        }
+        public void On_BuildIntUnLocked(BuildingModel buildModel, BuildInteractType buildIntType, bool isUnLocked)
+        {
+            OnBuildIntUnLocked?.Invoke(buildModel, buildIntType, isUnLocked);
+        }
         #endregion 
 
         public BuildView GetBuildView(BuildingNames buildingNames)

@@ -34,13 +34,24 @@ namespace Town
             quantityTxt.text = readyQuantity.ToString();            
         }
         
-        public void OnConsume(Iitems item)
+        public bool OnConsume(Iitems item)
         {
-
-            // remove from slot 
-            // apply consume effect 
-
-
+            AlcoholBase alcoholBase = item as AlcoholBase;
+            if (alcoholBase != null)
+            {
+                alcoholBase.OnDrink(); 
+            }
+            readyQuantity--;
+            if(readyQuantity == 0)
+            {
+                EmptySlot();
+                return false;
+            }
+            else
+            {
+                quantityTxt.text = readyQuantity.ToString();                
+                return true;
+            }            
         }
         void SlotEnable()
         {
@@ -51,7 +62,7 @@ namespace Town
 
         void EmptySlot()
         {
-            imgIngred.gameObject.SetActive(false);  
+            imgIngred.gameObject.SetActive(false);
             imgTxtBG.gameObject.SetActive(false);
             quantityTxt.gameObject.SetActive(false);
         }

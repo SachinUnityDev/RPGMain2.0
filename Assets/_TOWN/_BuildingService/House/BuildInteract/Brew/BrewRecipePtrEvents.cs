@@ -16,30 +16,59 @@ namespace Town
         [SerializeField] Image imgIngred;
         [SerializeField] TextMeshProUGUI txtTrans;
 
-        public bool hasSufficientIngred; 
+        public bool hasSufficientIngred;
 
-      
-        public void InitBrewRecipe(ItemDataWithQty ingredReq, int quantity)
+        [Header("Color")]
+        [SerializeField] Color colorN;
+        [SerializeField] Color colorNA;
+        void Start()
+        {
+            InvService.Instance.OnItemRemovedFrmComm += OnItemRemoved;
+        }
+
+        void OnItemRemoved(Iitems item)
+        {
+            ChkIngredQtyNupdate();
+        }
+        public void InitBrewRecipe(ItemDataWithQty ingredReq)
         {
             this.ingredReq = ingredReq;  
-            this.quantity = quantity;
             FillSlot(); 
+            ChkIngredQtyNupdate();
         }
         
-        void SetQuantityStatus()
+ 
+        public bool ChkIngredQtyNupdate()
         {
-            if(quantity > ingredReq.quantity)
+            int quantity =
+                   InvService.Instance.invMainModel.GetItemNosInCommInv(ingredReq.itemData);
+            quantity +=
+                InvService.Instance.invMainModel.GetItemNosInStashInv(ingredReq.itemData);
+
+            if (quantity >= ingredReq.quantity)
             {
-                hasSufficientIngred= true;
+                hasSufficientIngred = true;
+                imgIngred.color = colorN;
             }
             else
             {
-                hasSufficientIngred= false;
+                hasSufficientIngred = false;
+                imgIngred.color = colorNA;
             }
-        }
-        public void SubtractIngredFrmSlot(ItemDataWithQty subIngred)
-        {
 
+            return hasSufficientIngred; 
+        }
+
+        public void UpdateIngredSlotStatus()
+        {
+            // subtract
+            // set color etc 
+            for (int i = 0; i < ingredReq.quantity; i++)
+            {
+                InvService.Instance.invMainModel.RemoveItemFrmCommInv(ingredReq.itemData);
+            }
+            ChkIngredQtyNupdate();
+               // InvService.Instance.invMainModel.RemoveItemFrmStashInv(ingredReq.itemData);
         }
 
         public void DisableSlot()

@@ -18,7 +18,7 @@ namespace Town
         Image btnImg; 
 
         [Header("Global Var")]
-        [SerializeField] CharNames charSelect;
+        [SerializeField] CharController charSelectCtrl;
         [SerializeField] ArmorModel armorModel;
         [SerializeField] ItemModel itemModel;
         [SerializeField] UnSocketView unSocketView;
@@ -31,12 +31,14 @@ namespace Town
         int supportGemCount = 0;
         Currency currReq; 
 
-        public void InitUnSocketBtnPtrEvents(CharNames charSelect
+        public void InitUnSocketBtnPtrEvents(CharController charSelectCtrl
                         , ArmorModel armorModel, UnSocketView unSocketView)
         {
-            this.charSelect = charSelect;
+             divGemCount = 0;
+             supportGemCount = 0;
+            this.charSelectCtrl = charSelectCtrl;
             this.armorModel = armorModel;
-            CharController charController = CharService.Instance.GetAbbasController(charSelect); 
+            CharController charController = charSelectCtrl; 
             ItemController itemController = charController.itemController;
             itemModel = itemController.itemModel;
             this.unSocketView = unSocketView;
@@ -80,7 +82,7 @@ namespace Town
         }
         void UnSocketGems()
         {  
-            EcoServices.Instance.DebitPlayerInvThenStash(currReq);
+            EcoServices.Instance.DebitMoneyFrmCurrentPocket(currReq);
             
             itemModel.divItemsSocketed[0] = null;
             itemModel.divItemsSocketed[1] = null;

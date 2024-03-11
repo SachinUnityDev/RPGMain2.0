@@ -99,7 +99,8 @@ namespace Interactables
         {
             itemFactory = GetComponent<ItemFactory>();
             itemFactory.ItemInit();
-            foreach (CharController charController in CharService.Instance.allCharsInPartyLocked)
+            
+            foreach (CharController charController in CharService.Instance.allyInPlayControllers)
             {
                 ItemController itemController = 
                             charController.gameObject.AddComponent<ItemController>();
@@ -580,20 +581,51 @@ namespace Interactables
                 //InitItemToInv(SlotType.CommonInv, ItemType.Herbs, (int)HerbNames.Echinacea,
                 //    CauseType.Items, 2);
 
-                InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.LionessPelt,
-                   CauseType.Items, 1);
-                InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.NyalaTrophy,
-                    CauseType.Items, 1);
-                InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.LionPelt,
-                   CauseType.Items, 1);
-                InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.DeerSkin,
-                   CauseType.Items, 1);
-                InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.NyalaPelt,
-                   CauseType.Items, 1);
-                InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.ScarfOfCourage,
-                        CauseType.Items, 2, GenGewgawQ.Folkloric);
-                InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.RubyRing,
-                        CauseType.Items, 2, GenGewgawQ.Folkloric);
+                InitItemToInv(SlotType.CommonInv, ItemType.Foods, (int)FoodNames.Venison, CauseType.Items, 1);
+                InitItemToInv(SlotType.CommonInv, ItemType.Foods, (int)FoodNames.Venison, CauseType.Items, 1);
+
+                InitItemToInv(SlotType.CommonInv, ItemType.Foods, (int)FoodNames.Mutton, CauseType.Items, 1);
+                InitItemToInv(SlotType.CommonInv, ItemType.Foods, (int)FoodNames.Beef, CauseType.Items, 1);
+
+                InitItemToInv(SlotType.CommonInv, ItemType.Foods, (int)FoodNames.Fish, CauseType.Items, 1);
+                InitItemToInv(SlotType.CommonInv, ItemType.Fruits, (int)FruitNames.Grape, CauseType.Items, 1);
+
+                InitItemToInv(SlotType.CommonInv, ItemType.Fruits, (int)FruitNames.Apple, CauseType.Items, 1);
+                InitItemToInv(SlotType.CommonInv, ItemType.Fruits, (int)FruitNames.Apple, CauseType.Items, 1);
+                InitItemToInv(SlotType.CommonInv, ItemType.Fruits, (int)FruitNames.Apple, CauseType.Items, 1);
+                InitItemToInv(SlotType.CommonInv, ItemType.Fruits, (int)FruitNames.Apple, CauseType.Items, 1);
+                InitItemToInv(SlotType.CommonInv, ItemType.Fruits, (int)FruitNames.Apple, CauseType.Items, 1);
+
+                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.Wheat, CauseType.Items, 1);
+                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.Wheat, CauseType.Items, 1);
+                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.Wheat, CauseType.Items, 1);
+                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.Wheat, CauseType.Items, 1);
+
+                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.Yeast, CauseType.Items, 1);
+                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.Yeast, CauseType.Items, 1);
+                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.Yeast, CauseType.Items, 1);
+                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.Yeast, CauseType.Items, 1);
+                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.Yeast, CauseType.Items, 1);
+
+
+                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.Cardamom, CauseType.Items, 1);
+
+                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.Cardamom, CauseType.Items, 1);
+
+                InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.Cardamom, CauseType.Items, 1);
+
+                //InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.NyalaTrophy,
+                //    CauseType.Items, 1);
+                //InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.LionPelt,
+                //   CauseType.Items, 1);
+                //InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.DeerSkin,
+                //   CauseType.Items, 1);
+                //InitItemToInv(SlotType.CommonInv, ItemType.TradeGoods, (int)TGNames.NyalaPelt,
+                //   CauseType.Items, 1);
+                //InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.ScarfOfCourage,
+                //        CauseType.Items, 2, GenGewgawQ.Folkloric);
+                //InitItemToInv(SlotType.CommonInv, ItemType.GenGewgaws, (int)GenGewgawNames.RubyRing,
+                //  CauseType.Items, 2, GenGewgawQ.Folkloric);
                 InitItemToInv(SlotType.CommonInv, ItemType.PoeticGewgaws, (int)PoeticGewgawNames.NecklaceFirstHuntersArsenal,
                         CauseType.Items, 2);
                 InitItemToInv(SlotType.CommonInv, ItemType.PoeticGewgaws, (int)PoeticGewgawNames.BeltPoachersToolset,

@@ -2,7 +2,6 @@ using Common;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Policy;
 using Town;
 using UnityEngine;
 
@@ -22,6 +21,7 @@ namespace Interactables
         public int maxArmor;
         public int minArmorUp;
         public int maxArmorUp;
+        public ArmorState armorState; 
    
         // Armor Data contains state, currency cost for fortify Etc. 
         public List<ArmorDataVsLoc> allArmorDataVsLoc = new List<ArmorDataVsLoc>();
@@ -34,24 +34,24 @@ namespace Interactables
             minArmorUp = armorSO.minArmorUp; 
             maxArmorUp =armorSO.maxArmorUp;
             armorTypeStr= armorSO.armorTypeStr;
-            
-            allArmorDataVsLoc = armorSO.allArmorDataVsLoc;           
+            allArmorDataVsLoc = armorSO.allArmorDataVsLoc;
+            LocationName locName = TownService.Instance.townModel.currTown;  // on loc chg update this on Murabo creation
+            armorState = GetArmorDataVsLoc(locName).armorState;          
         }
 
         public Currency GetFortifyCost(LocationName locName)
         {
             ArmorDataVsLoc armorData = GetArmorDataVsLoc(locName);
-            return armorData.currFortify;
-            
+            return armorData.priceFortify;
         }
 
         public Currency GetUnSocketCostDiv(LocationName locName)         
         {
             ArmorDataVsLoc armorData = GetArmorDataVsLoc(locName);           
-            return armorData.currSocketDiv;
+            return armorData.priceUnSocketDiv;
             
         }
-
+        
         public ArmorDataVsLoc GetArmorDataVsLoc(LocationName locName)
         {
             int index = allArmorDataVsLoc.FindIndex(t=>t.locationName==locName); 

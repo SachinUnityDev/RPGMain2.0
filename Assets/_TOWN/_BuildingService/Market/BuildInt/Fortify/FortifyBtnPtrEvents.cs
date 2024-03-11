@@ -20,7 +20,7 @@ namespace Town
 
 
 
-        [SerializeField] CharNames charSelect;
+        [SerializeField] CharController charController;
         [SerializeField] ArmorModel armorModel;
         [SerializeField] FortifyView fortifyView;
         Currency fortifyCost;
@@ -28,32 +28,33 @@ namespace Town
         [SerializeField] Image img;
         private void Start()
         {
-            EcoServices.Instance.OnPocketSelected += btnStateOnPocketChg; 
+            EcoServices.Instance.OnPocketSelected -= (PocketType p) => BtnStateUpdate();
+            EcoServices.Instance.OnPocketSelected +=(PocketType p)=> BtnStateUpdate(); 
         }
-        public void InitFortifyBtn(CharNames charSelect, ArmorModel armorModel, FortifyView fortifyView)
+        public void InitFortifyBtn(CharController charController, ArmorModel armorModel, FortifyView fortifyView)
         {
-            img = GetComponent<Image>();
-            this.charSelect = charSelect;
+            img = transform.GetChild(0).GetComponent<Image>();
+            this.charController = charController;
             this.armorModel = armorModel;   
             this.fortifyView= fortifyView;
             LocationName locName = TownService.Instance.townModel.currTown;
             fortifyCost = armorModel.GetFortifyCost(locName).DeepClone(); // get build upgrading
-            costDisplay.GetChild(1).GetComponent<DisplayCurrency>().Display(fortifyCost); 
+            costDisplay.GetChild(1).GetComponent<DisplayCurrency>().Display(fortifyCost);
+            BtnStateUpdate();
+           
         }
         // pocket change 
 
-        void btnStateOnPocketChg(PocketType pocketType)
+        void BtnStateUpdate()
         {
-            Currency amt = EcoServices.Instance.GetMoneyFrmCurrentPocket(); 
-            if(amt.BronzifyCurrency() >= fortifyCost.BronzifyCurrency())
-            {
-                SetState(true);
-            }
+            Currency amt = EcoServices.Instance.GetMoneyFrmCurrentPocket();
+            if (armorModel.armorState == ArmorState.Fortifiable && amt.BronzifyCurrency() >= fortifyCost.BronzifyCurrency()) 
+                SetState(true); 
             else
-            {
                 SetState(false);
-            }
         }
+
+  
         public void SetState(bool isClickable)
         {
             this.isClickable = isClickable;
@@ -71,23 +72,33 @@ namespace Town
                 img.sprite = btnNA;
             }
         }
+ 
+
         public void OnPointerClick(PointerEventData eventData)
         {
-            ArmorService.Instance.OnArmorFortifyPressed(charSelect, armorModel); 
+            if(isClickable)
+            {
+                fortifyView.OnFortifyBtnPressed(charController, armorModel);            
+                BtnStateUpdate();
+            }
         }
 
         public void OnPointerEnter(PointerEventData eventData)
-        {
-            costDisplay.gameObject.SetActive(true);
+        {            
             if (isClickable)
-                img.sprite = btnHL; 
+            {
+                costDisplay.gameObject.SetActive(true);
+                img.sprite = btnHL;
+            }                
         }
 
         public void OnPointerExit(PointerEventData eventData)
-        {
-            costDisplay.gameObject.SetActive(false);
+        {            
             if (isClickable)
-                img.sprite = btnNA; 
+            {
+                costDisplay.gameObject.SetActive(false);
+                img.sprite = btnN;
+            }                
         }
     }
 }

@@ -132,14 +132,21 @@ namespace Interactables
                 return true; 
             return false; 
         }
+
         public List<Iitems> GetAllItemsInCommOrStash(ItemType itemType)
         {
             List<Iitems> allItems = new List<Iitems>();
-            allItems.AddRange(commonInvItems);
-            allItems.AddRange(stashInvIntItems);
+            List<Iitems> allItemsINComm = new List<Iitems>();
+            List<Iitems> allItemsINStash = new List<Iitems>();
+            allItemsINComm = GetAllItemsInCommOfType(itemType);
+            allItemsINStash = GetAllItemsInStashofType(itemType);
+            if(allItemsINComm.Count > 0)
+                allItems.AddRange(allItemsINComm);
+            if (allItemsINStash.Count > 0)
+                allItems.AddRange(allItemsINStash);
             return allItems;
         }
-
+   
         #region COMMON INV
         public List<Iitems> GetAllItemsInCommOfType(ItemType itemType)
         {
@@ -158,7 +165,8 @@ namespace Interactables
             {
                 item.invSlotType = SlotType.CommonInv;
                 commonInvItems.Add(item);                 
-                commonInvCount++; 
+                commonInvCount++;
+                InvService.Instance.On_ItemAdded2Comm(item); 
                 return true;
             }
             else
@@ -170,6 +178,7 @@ namespace Interactables
         public bool RemoveItemFrmCommInv(Iitems item) // view=> model 
         {
             commonInvItems.Remove(item);
+            InvService.Instance.On_ItemRemovedFrmComm(item);
             commonInvCount--; 
             return true;
         }
@@ -208,12 +217,15 @@ namespace Interactables
 
             return item; 
         }
-        public List<Iitems> GetItemsFrmCommonInv(ItemType itemType)
+        
+        public ItemDataWithQty GetItemDataWithQtyFrmCommInv(ItemType itemType, int itemName)
         {
-            List<Iitems> allItems = new List<Iitems>();
-            allItems = commonInvItems.Where(t => t.itemType == itemType).ToList();
-            return allItems;
+            List<Iitems> allItems = commonInvItems.Where(t => t.itemType == itemType && t.itemName == itemName).ToList();
+            ItemData itemData = new ItemData(itemType, itemName); 
+            ItemDataWithQty itemDataWithQty = new ItemDataWithQty(itemData, allItems.Count);
+            return itemDataWithQty;
         }
+
         #endregion
 
 
@@ -259,7 +271,7 @@ namespace Interactables
                 return allItems;
             }
             Debug.Log("no Items of type found in Stash inv" + itemType);
-            return null;
+            return allItems;
         }
         public List<Iitems> GetItemsFrmStashInv(ItemType itemType)
         {

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI; 
 using Common;
 using System;
+using DG.Tweening;
 
 namespace Town
 {
@@ -62,10 +63,30 @@ namespace Town
             DialogueService.Instance.OnDialogueEnd -= HideBtnContainer;
             DialogueService.Instance.OnDialogueEnd += HideBtnContainer;
 
+            BuildingIntService.Instance.OnBuildIntUpgraded -= FillOnIntChg;
+            BuildingIntService.Instance.OnBuildIntUpgraded += FillOnIntChg;
+
+            BuildingIntService.Instance.OnBuildIntUnLocked -= FillOnIntUnLocked;
+            BuildingIntService.Instance.OnBuildIntUnLocked += FillOnIntUnLocked;
 
             btnContainer.gameObject.SetActive(true);
         }
-
+        void FillOnIntUnLocked(BuildingModel buildModel, BuildInteractType buildIntType, bool isUnlocked)
+        {
+            if (buildModel.buildingName == this.buildModel.buildingName)
+            {
+                InitBuildIntBtns(buildModel);
+                FillBuildBG();
+                InitBuildIntPanels();
+            }
+        }
+        void FillOnIntChg(BuildingModel buildModel,BuildInteractType buildIntType, bool isUpgrade)
+        {
+            if(buildModel.buildingName == this.buildModel.buildingName)
+            {
+                FillBuildBG();
+            }
+        }
         void ShowBtnContainer(DialogueNames dialogueName)
         {
             btnContainer.gameObject.SetActive(false);
@@ -82,7 +103,7 @@ namespace Town
         public void FillBuildBG()
         {
             if (CalendarService.Instance.currtimeState == TimeState.Night)
-            {
+            {                
                 BGSpriteContainer.GetComponent<Image>().sprite = nightBG;
             }
             else
@@ -139,14 +160,16 @@ namespace Town
             return null;
         }
 
-        public void OnPortSelect(CharIntData charIntData, NPCIntData nPCIntData)
+        public void OnPortSelect(CharIntData charIntData, NPCIntData nPCIntData, float yPos)
         {
             if(charIntData != null)
             {
+                talkNTradeBtns.DOMoveY(yPos, 0.25f);
                 talkNTradeBtns.GetComponent<TalkNTradeBtnView>().InitTalkNTrade(charIntData, this); 
             }
             if (nPCIntData != null)
             {
+                talkNTradeBtns.DOMoveY(yPos, 0.25f);
                 talkNTradeBtns.GetComponent<TalkNTradeBtnView>().InitTalkNTrade(nPCIntData, this);
             }
         }

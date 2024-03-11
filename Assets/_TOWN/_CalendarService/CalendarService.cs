@@ -234,23 +234,12 @@ namespace Common
                 currtimeState = TimeState.Night;
                 On_StartOfNight(dayInGame);
             }
-            OnEndInHouseBuff();
-        }
-        void OnEndInHouseBuff()
-        {
-            HouseModel houseModel = BuildingIntService.Instance.houseController.houseModel; 
-            if (!houseModel.isBedUpgraded) return;
-            if (houseModel.restChanceOnUpgrade.GetChance())
+            if(GameService.Instance.gameModel.gameState == GameState.InTown)
             {
-                CharController charController =
-                        CharService.Instance.GetAbbasController(CharNames.Abbas);
-                TempTraitController tempTraitController = charController.tempTraitController;
-                tempTraitController
-                        .ApplyTempTrait(CauseType.BuildingInterct, (int)BuildInteractType.Purchase
-                        , charController.charModel.charID, TempTraitName.WellRested);
-            }
+                BuildingIntService.Instance.houseController.ChkNApplyUpgradeBedBuff();
+            }            
         }
-
+        
         #region DAY WEEK AND MONTH EVENT TRIGGERS
         public void On_StartOfDay(int day)
         {

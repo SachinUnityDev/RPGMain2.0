@@ -1,4 +1,5 @@
 using Common;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,7 @@ namespace Town
             transform.GetComponent<Image>().sprite = spriteData.spriteN;
             buildInteractType = buildData.BuildIntType;
             panel = buildView.GetBuildInteractPanel(buildInteractType);
+            transform.DOScale(1.0f, 0.25f); 
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -28,12 +30,12 @@ namespace Town
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-
+            transform.DOScale(1.15f, 0.25f);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-
+            transform.DOScale(1.0f, 0.25f);
         }
 
         void Start()

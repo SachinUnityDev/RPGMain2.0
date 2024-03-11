@@ -52,8 +52,6 @@ namespace Interactables
                 InvService.Instance.stashInvViewController.UpdateStashInvDatabase();
                 size_Stash = InvService.Instance.invMainModel.size_Stash;
             }
-            
-
             size_Comm = InvService.Instance.invMainModel.size_Comm;
             size_excess = InvService.Instance.invMainModel.size_excess;
             

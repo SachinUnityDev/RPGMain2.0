@@ -18,7 +18,7 @@ namespace Town
         [SerializeField] Transform rechargeCurrTrans;
 
 
-        [SerializeField] CharNames charName;
+        [SerializeField] CharController charController;
 
         [Header("Armor State")]
         [SerializeField] ArmorState armorState;
@@ -31,10 +31,10 @@ namespace Town
             descTxt = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
             portImg = transform.GetChild(3).GetComponent<Image>();
         }
-        public void InitLeftPanel(CharNames charName, ArmorModel armorModel)
+        public void InitLeftPanel(CharController charController, ArmorModel armorModel)
         {
-            this.charName = charName;
-            CharacterSO charSO = CharService.Instance.GetCharSO(charName);
+            this.charController = charController;
+            CharacterSO charSO = CharService.Instance.GetCharSO(charController.charModel.charName);
 
             portImg.sprite = charSO.charSprite;
             charNameTxt.text = charSO.charNameStr;

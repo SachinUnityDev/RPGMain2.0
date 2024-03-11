@@ -9,6 +9,9 @@ namespace Town
 {
     public class BuildBaseEvents : MonoBehaviour
     {
+        [Header("to be filled")]
+        [SerializeField] BuildInteractType buildIntType; 
+
         [Header("To be ref Base")]
         [SerializeField] Sprite dayN;
         [SerializeField] Sprite dayHL;
@@ -27,6 +30,7 @@ namespace Town
         public BuildView buildView;
         public BuildingModel buildModel;
         TimeState timeState;
+        [SerializeField] bool isBuildIntUpgraded = false; 
 
         void Awake()
         {
@@ -39,21 +43,43 @@ namespace Town
             this.buildView = buildView;
             this.buildModel = buildModel;
             timeState = CalendarService.Instance.currtimeState;
+            isBuildIntUpgraded = buildModel.IsBuildIntUpgraded(buildIntType); 
             SetSpriteN();
         }
         protected void SetSpriteN()
         {
             if (timeState == TimeState.Day)
-                btnImg.sprite = dayN;
+            {
+                if (isBuildIntUpgraded)
+                    btnImg.sprite = dayNUp;
+                else
+                    btnImg.sprite = dayN;
+            }
             else
-                btnImg.sprite = nightN;
+            {
+                if (isBuildIntUpgraded) 
+                    btnImg.sprite = nightNUp;
+                else
+                    btnImg.sprite = nightN;
+            }
+                
         }
         protected void SetSpriteHL()
         {
             if (timeState == TimeState.Day)
-                btnImg.sprite = dayHL;
+            {
+                if (isBuildIntUpgraded)
+                    btnImg.sprite = dayHLUp;
+                else
+                    btnImg.sprite = dayHL;
+            }
             else
-                btnImg.sprite = nightHL;
+            {
+                if (isBuildIntUpgraded)
+                    btnImg.sprite = nightHLUp;
+                else
+                    btnImg.sprite = nightHL;
+            }               
         }
 
 

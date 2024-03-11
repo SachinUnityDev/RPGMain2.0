@@ -17,33 +17,38 @@ namespace Interactables
         public List<ArmorModel> allArmorModels = new List<ArmorModel>();
         public List<ArmorController> allArmorController = new List<ArmorController>();
         public List<ArmorBase> allArmorBases = new List<ArmorBase>();
-       // public GameObject armorPanel;
-
+        // public GameObject armorPanel;
+        ArmorFactory armorFactory; 
         public ArmorViewController armorViewController;
+
         public void Init()
         {
-                        
+            // Add armor to all allies 
+            armorFactory = GetComponent<ArmorFactory>();
+            foreach (CharController charController in CharService.Instance.allyInPlayControllers)
+            {
+                ArmorController armorController =  charController.gameObject.AddComponent<ArmorController>(); 
+                armorController.Init(); 
+                allArmorController.Add(armorController);    
+            }
         }
-        public void OnArmorFortifyPressed(CharNames charSelect,ArmorModel armorModel)
+        public ArmorBase GetNewArmorBase(ArmorModel armorModel)
         {
-            //ArmorBase armorBase = Get
-
-
-            // check if it can be fortified
-            // create armor base if not already there
-            // 
-
-
+            ArmorType armorType = armorModel.armorType;
+            ArmorBase armorBase = armorFactory.GetArmorBase(armorType);         
+            return armorBase;
         }
-        public bool CanArmorBeFortified(CharNames charSelect, ArmorModel armorModel)
+
+        public void OnArmorFortifyPressed(CharController charController,ArmorModel armorModel)
         {
-
-
-            return false; 
+            ArmorBase armorBase = charController.armorController.armorBase;
+            armorBase.OnArmorFortify(); 
+            
         }
+   
         private void Start()
         {
-          //  armorViewController = armorPanel.GetComponent<ArmorViewController>();      
+            
 
         }
 

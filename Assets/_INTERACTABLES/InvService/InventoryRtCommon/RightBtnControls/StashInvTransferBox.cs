@@ -31,6 +31,9 @@ namespace Interactables
         {
             draggedGO = eventData.pointerDrag;
             itemsDragDrop = draggedGO.GetComponent<ItemsDragDrop>();
+
+            iSlotable islot = itemsDragDrop.iSlotable;
+            if (islot.slotType == SlotType.ProvActiveInv) return;
             if (itemsDragDrop != null)
             {
                 bool isDropSuccess = false; 
@@ -49,7 +52,7 @@ namespace Interactables
                 }
                 else  // success
                 {
-                    iSlotable islot = itemsDragDrop.iSlotable;
+          
                     if (islot != null && 
                         (islot.slotType == SlotType.CommonInv || islot.slotType == SlotType.ExcessInv)
                                                                          && islot.ItemsInSlot.Count > 0)

@@ -257,6 +257,8 @@ namespace Interactables
         RottenFood,
         Ham, 
         Mutton,
+        DriedMeat, 
+        DriedFish, 
     }
 
     public enum ScrollNames
@@ -287,6 +289,8 @@ namespace Interactables
         Cucumber,
         Mangosteen,
         Citrus,
+        Grape, 
+        DriedGrape,
     }
 
     public enum IngredNames  // Can only be ingredient in receipe and cannot be food pr fruits

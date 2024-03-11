@@ -22,7 +22,7 @@ namespace Town
                 child.GetComponent<BrewWIPPtrEvents>().InitBrewWIP();
             }
         }
-        public bool AllotBrewSlot()
+        public bool AlotBrewSlot()
         {
             foreach (Transform child in transform)
             {

@@ -130,6 +130,8 @@ MonoBehaviour:
   allFoodSO:
   - {fileID: 11400000, guid: e4f92a8216cc532478d5493a92de25b4, type: 2}
   - {fileID: 11400000, guid: 372e99fe661bf524897eaf334af7716b, type: 2}
+  - {fileID: 11400000, guid: 99c20ec3cabf95940a4bccc713b27358, type: 2}
+  - {fileID: 11400000, guid: e9f1a27171531624a9d6b3b48042f0f1, type: 2}
   - {fileID: 11400000, guid: 70cae83774f427a4eaf32406cf332305, type: 2}
   - {fileID: 11400000, guid: e077f694f4de3774d98a4edadb612faf, type: 2}
   - {fileID: 11400000, guid: f75de0ce832ce4844808db00369ba4c6, type: 2}
@@ -144,6 +146,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3ed3d262e32df5546959af061f528354, type: 2}
   - {fileID: 11400000, guid: 03e50502fa700cc438b1e890488b09eb, type: 2}
   - {fileID: 11400000, guid: 2d2109929d3cd2a4d8259a7dfae6c58d, type: 2}
+  - {fileID: 11400000, guid: b33be5cbc8e154a49a4d34ce0bd681c1, type: 2}
+  - {fileID: 11400000, guid: 0beac8eab13e3984dba1184cccbc1067, type: 2}
   - {fileID: 11400000, guid: c85305d0b0b760448b70995ee1c9794c, type: 2}
   - {fileID: 11400000, guid: 2ca5e2bcc89a31b43b8b7deb45d60e35, type: 2}
   - {fileID: 11400000, guid: f95d03c437ca47b4eb7b1f999f2dd0fa, type: 2}

@@ -13,7 +13,7 @@ namespace Interactables
         [Header("ArmorBase")]
         Dictionary<ArmorType, Type> allArmor = new Dictionary<ArmorType, Type>();
         [SerializeField] int armorCount = 0;
-        private void Start()
+        private void OnEnable()
         {
             ArmorInit();
         }
@@ -34,7 +34,7 @@ namespace Interactables
             armorCount = allArmor.Count;
         }
 
-        ArmorBase GetArmorBase(ArmorType _armorType)
+       public ArmorBase GetArmorBase(ArmorType _armorType)
         {
             foreach (var armor in allArmor)
             {
@@ -49,12 +49,6 @@ namespace Interactables
             return null;
         }
 
-        //public ArmorBase GetNewArmorBase(CharController charController, ArmorType armorType)
-        //{
-        //    ArmorBase armorBase = GetArmorBase(armorType);
-        //    armorBase.InitArmor(charController);
-        //    ArmorService.Instance.allArmorBases.Add(armorBase); 
-        //    return armorBase;
-        //}
+    
     }
 }

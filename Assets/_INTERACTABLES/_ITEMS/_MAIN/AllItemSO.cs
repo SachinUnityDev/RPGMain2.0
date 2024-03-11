@@ -493,7 +493,10 @@ public class AllItemSO : ScriptableObject
             case ItemType.Pouches:
 
                 break;
-
+            case ItemType.LoreBooks:
+                LoreBookSO loreBookSO = GetLoreBookSO((LoreBookNames)itemName);
+                costData = new CostData(loreBookSO.cost, loreBookSO.fluctuation);
+                break;
             default:
                 break;
 

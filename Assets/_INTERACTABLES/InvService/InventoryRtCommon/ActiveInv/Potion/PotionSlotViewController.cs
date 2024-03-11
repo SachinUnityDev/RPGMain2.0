@@ -34,6 +34,9 @@ namespace Interactables
         {
             draggedGO = eventData.pointerDrag;
             itemsDragDrop = draggedGO.GetComponent<ItemsDragDrop>();
+            iSlotable islot = itemsDragDrop.iSlotable;
+
+            if (islot.slotType == SlotType.ProvActiveInv) return;
             if (itemsDragDrop != null)
             {
                 bool isDropSuccess = AddItem(itemsDragDrop.itemDragged);
@@ -41,7 +44,6 @@ namespace Interactables
                     InvService.Instance.On_DragResult(isDropSuccess, itemsDragDrop);
                 else
                 {
-                    //Add2Service(itemsDragDrop.itemDragged);                    
                     InvService.Instance.On_DragResult(isDropSuccess, itemsDragDrop);
                     Destroy(draggedGO);
                 }

@@ -24,16 +24,16 @@ MonoBehaviour:
     armorSprite: {fileID: 21300000, guid: 9a1c0612a5ba10245951e521f5933676, type: 3}
   allArmorDataVsLoc:
   - locationName: 1
-    currFortify:
+    priceFortify:
       silver: 0
       bronze: 0
-    currFortifyOnUpgrade:
+    priceFortifyOnUpgrade:
       silver: 0
       bronze: 9
-    currSocketDiv:
+    priceUnSocketDiv:
       silver: 1
       bronze: 0
-    currSocketSupport:
+    priceUnSocketSupport:
       silver: 0
       bronze: 10
     armorState: 3

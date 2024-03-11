@@ -18,7 +18,7 @@ MonoBehaviour:
   hpRegen: 1
   staminaRegen: 0
   timeFrameRegen: 1
-  regenCastTime: 5
+  regenCastTime: 6
   hungerReliefMin: 1
   hungerReliefMax: 2
   thirstReliefMin: 6

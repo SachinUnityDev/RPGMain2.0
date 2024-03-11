@@ -41,13 +41,15 @@ namespace Town
         public void Load()
         {
             FillSlots();
-            FillStashMoney();   
+            FillStashMoney();
+            DisappearTxtnBtns();
         }
 
         public void UnLoad()
         {
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
         }
+     
         public void OnSlotSelect(int index)
         {
             selectInt = index;
@@ -108,18 +110,14 @@ namespace Town
             DisappearTxtnBtns();
      
         }
-        //void CompleteSale()
-        //{
-        //    HousePurchaseOpts opts = (HousePurchaseOpts)selectInt;
-         
-
-        //}
+     
 
         void OnNoPressed()
         {
             if(selectInt == -1) return;
             plankContainer.GetChild(selectInt).GetComponent<HousePlankBtnEvents>().OnCancelPurchase();
             selectInt = -1;
+            DisappearTxtnBtns();
         }
     }
 }

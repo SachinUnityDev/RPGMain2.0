@@ -59,12 +59,12 @@ namespace Town
             if (timeState == TimeState.Day)
             {   
                 btnImg.sprite = calendarSO.endDayBtnN;
-                btnImg.GetComponentInChildren<TextMeshProUGUI>().text = "End day";
+                btnImg.GetComponentInChildren<TextMeshProUGUI>().text = "End Day";
             }                
             else if (timeState == TimeState.Night)
             {
                 btnImg.sprite = calendarSO.endNightBtnN;
-                btnImg.GetComponentInChildren<TextMeshProUGUI>().text = "End night";
+                btnImg.GetComponentInChildren<TextMeshProUGUI>().text = "End Night";
             }
                 
         }

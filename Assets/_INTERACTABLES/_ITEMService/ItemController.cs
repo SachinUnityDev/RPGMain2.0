@@ -37,7 +37,7 @@ namespace Interactables
         void Start()
         {
             displayStrs = new List<string>();
-            Init(); 
+          //  Init(); 
         }
         #region GEM, ENCHANT AND REMOVE
         public bool EnchantTheWeaponThruScroll(GemBase gemBase)
@@ -70,7 +70,6 @@ namespace Interactables
         #region  SOCKET RELATED 
         public void OnSocketSupportGem(GemBase gemBase)
         {
-      
             UpdateMultValue();
                 
                ISupportGem supportGem = gemBase as ISupportGem;                

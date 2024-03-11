@@ -13,11 +13,9 @@ namespace Town
         [Header("slot container: to be ref")]
         [SerializeField] Transform slotContainer;
 
-      
-        private void Awake()
+        private void OnEnable()
         {
-            slotContainer = transform.GetChild(0).GetChild(1);
-            gameObject.SetActive(false);
+            slotContainer = transform.GetChild(1).GetChild(1);
         }
         public void Init()
         {
@@ -26,12 +24,15 @@ namespace Town
 
         public void Load()
         {
+            InitSlotContainer();
+        }
+        public void InitSlotContainer()
+        {
             for (int i = 0; i < slotContainer.childCount; i++)
             {
                 slotContainer.GetChild(i).GetComponent<BrewSlotView>().InitBrewSlot((AlcoholNames)(i + 1), this);
             }
         }
-
         public void UnLoad()
         {
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);

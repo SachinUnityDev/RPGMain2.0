@@ -11,7 +11,7 @@ using System.Linq;
 namespace Interactables
 {
 
-    public class ProvisionSlotController : MonoBehaviour, IDropHandler, IPointerClickHandler, iSlotable
+    public class ProvisionSlotController : MonoBehaviour, IPointerClickHandler, iSlotable
     {
         public int slotID { get; set; }
         public List<Iitems> ItemsInSlot { get; set; } = new List<Iitems>();
@@ -24,17 +24,22 @@ namespace Interactables
         [Header("RIGHT CLICK CONTROLs")]
         public List<ItemActions> rightClickActions = new List<ItemActions>();
         public bool isRightClicked = false;
-        public void OnDrop(PointerEventData eventData)
-        {
-            // cannot drag and drop an item on provision slot
-            draggedGO = eventData.pointerDrag;
-            itemsDragDrop = draggedGO.GetComponent<ItemsDragDrop>();
-            if (itemsDragDrop != null)
-            {
-                InvService.Instance.On_DragResult(false, itemsDragDrop);
-                //Destroy(draggedGO);
-            }
-        }
+        //public void OnDrop(PointerEventData eventData)
+        //{
+        //    draggedGO = eventData.pointerDrag;
+        //    itemsDragDrop = draggedGO.GetComponent<ItemsDragDrop>();
+        //    iSlotable islot = itemsDragDrop.iSlotable; 
+        //    // cannot drag and drop an item on provision slot
+        //    if (islot.slotType == SlotType.ProvActiveInv || islot.slotType == SlotType.TrophySelectSlot
+        //             || islot.slotType == SlotType.TrophyScrollSlot)
+        //        return; 
+           
+        //    if (itemsDragDrop != null)
+        //    {
+        //        InvService.Instance.On_DragResult(false, itemsDragDrop);
+        //        //Destroy(draggedGO);
+        //    }
+        //}
 
         private void Start()
         {
@@ -80,8 +85,6 @@ namespace Interactables
 
         public bool AddItem(Iitems item, bool add2Model = false)
         {
-            //CharNames charName = InvService.Instance.charSelect;
-            //InvData invData = new InvData(charName, item);
 
             if (item.itemType != ItemType.Potions || ItemsInSlot.Count > 0)
             {

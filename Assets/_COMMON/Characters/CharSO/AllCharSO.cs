@@ -27,12 +27,25 @@ namespace Common
         public Sprite bgPortClicked;
         public Sprite bgPortUnClicked;
         public Sprite bgPortUnAvail;
+
+        public List<ArchetypeData> allArchetypeData = new List<ArchetypeData>();  
+
         private void Awake()
         {
             charList.Clear();
             charList.AddRange(allAllySO);
             charList.AddRange(allEnemySO);
             FillCommonDetails(); 
+        }
+
+        public ArchetypeData GetArchTypeData(Archetype archeType)
+        {
+            int index = allArchetypeData.FindIndex(t=>t.archetype== archeType);
+            if(index != -1)
+            {
+                return allArchetypeData[index];
+            }
+            return null; 
         }
         public CharacterSO GetAllySO(CharNames charName)
         {
@@ -383,5 +396,13 @@ namespace Common
                 }
             }
         }
+    }
+
+    [Serializable]
+    public class ArchetypeData
+    {
+        public Archetype archetype;
+        public Sprite spriteN;
+        public Sprite spriteHL;
     }
 }

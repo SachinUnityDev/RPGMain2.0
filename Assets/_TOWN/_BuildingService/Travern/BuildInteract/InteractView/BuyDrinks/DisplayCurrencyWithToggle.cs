@@ -37,7 +37,7 @@ namespace Town
         }
         public void InitCurrencyToggle()
         {
-            pocketType = PocketType.Inv;
+            pocketType = EcoServices.Instance.currPocket; 
             EcoServices.Instance.On_PocketSelected(pocketType);             
             FillMoney();
         }

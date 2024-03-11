@@ -16,8 +16,10 @@ namespace Interactables
 
         public event Action<bool, ItemsDragDrop> OnDragResult;
         public event Action<CharModel> OnCharSelectInvPanel;       // int here is charID 
-        public event Action<bool> OnToggleInvXLView; 
+        public event Action<bool> OnToggleInvXLView;
 
+        public event Action<Iitems> OnItemAdded2Comm;
+        public event Action<Iitems> OnItemRemovedFrmComm;
 
         //public CharNames charSelect;
         public CharController charSelectController;
@@ -148,7 +150,14 @@ namespace Interactables
             int size = 3 + 2 * charCount; 
             invMainModel.SetCommInvSize(size); 
         }
-
+        public void On_ItemAdded2Comm(Iitems item)
+        {
+            OnItemAdded2Comm?.Invoke(item);
+        }
+        public void On_ItemRemovedFrmComm(Iitems item)
+        {
+            OnItemRemovedFrmComm?.Invoke(item);
+        }
     }
 }
 

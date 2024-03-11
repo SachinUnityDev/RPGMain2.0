@@ -85,20 +85,43 @@ namespace Town
 
         public void FillCharPlanks()
         {
-            CharNames selectChar = CharService.Instance.allCharModels[index].charName;
-            BuildingIntService.Instance.selectChar = selectChar;
+           int  selectCharID = CharService.Instance.allCharModels[index].charID;
+            CharController charController = CharService.Instance.GetCharCtrlWithCharID(selectCharID);
+            BuildingIntService.Instance.selectChar = charController.charModel.charName;
 
-            CharController charController = CharService.Instance.GetAbbasController(selectChar);
             ArmorController armorController = charController.armorController;
             ArmorModel armorModel = armorController.armorModel;
 
-            centerTrans.GetComponent<FortifyViewCenter>().InitFortifyPanel(selectChar, armorModel, this);
-            statusBtn.GetComponent<FortifyBtnPtrEvents>().InitFortifyBtn(selectChar, armorModel, this);
+            centerTrans.GetComponent<FortifyViewCenter>().InitFortifyPanel(charController, armorModel, this);
+            statusBtn.GetComponent<FortifyBtnPtrEvents>().InitFortifyBtn(charController, armorModel, this);
 
             currTrans.GetComponent<DisplayCurrencyWithToggle>().InitCurrencyToggle();
-            LocationName locName = TownService.Instance.townModel.currTown; 
-            statustxt.text = armorModel.GetArmorDataVsLoc(locName).armorState.ToString(); 
-
+            statustxt.text = armorModel.armorState.ToString();
+            FillBuffStr(armorModel, charController);
+        }
+        void FillBuffStr(ArmorModel armorModel, CharController charController)
+        {
+            switch (armorModel.armorState)
+            {
+                case ArmorState.None:
+                    buffTxt.text = ""; 
+                    break;
+                case ArmorState.Fortifiable:
+                    ArmorSO armorSO = ArmorService.Instance.allArmorSO.GetArmorSOWithType(armorModel.armorType); 
+                    buffTxt.text = armorSO.allLines[0].ToString();
+                    break;
+                case ArmorState.Fortified:
+                    ArmorBase armorBase = charController.armorController.armorBase;
+                    buffTxt.text = armorBase.allLines[0].ToString();
+                    break;
+                case ArmorState.Unfortifiable:
+                    buffTxt.text = "";
+                    break;
+                default:
+                    buffTxt.text = "";
+                    break;
+            }
+      
         }
         void OnReverseBtnPressed()
         {
@@ -110,10 +133,14 @@ namespace Town
             currTrans.GetComponent<DisplayCurrencyWithToggle>().InitCurrencyToggle();
         }
 
+        public void OnFortifyBtnPressed(CharController charController,ArmorModel armorModel)
+        {
+            ArmorService.Instance.OnArmorFortifyPressed(charController, armorModel);
+            FillCharPlanks();
+        }
         public void Init()
         {
             index = 0;
-
         }
 
         public void Load()

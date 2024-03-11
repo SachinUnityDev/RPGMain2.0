@@ -45,3 +45,13 @@ MonoBehaviour:
   bgPortClicked: {fileID: 21300000, guid: afcabb4e61446574cae55b07cca2b3fa, type: 3}
   bgPortUnClicked: {fileID: 21300000, guid: a44b434c0e2bd68489fbda4f8a7770a8, type: 3}
   bgPortUnAvail: {fileID: 21300000, guid: 448213c107e26064381a3f533440ad0e, type: 3}
+  allArchetypeData:
+  - archetype: 1
+    spriteN: {fileID: 21300000, guid: 9d0d7eb802b0a204088247593f3c4872, type: 3}
+    spriteHL: {fileID: 21300000, guid: 05b96ba5187f21a49af40566a98add06, type: 3}
+  - archetype: 2
+    spriteN: {fileID: 21300000, guid: 0a8d7608951e6e849a5c24a5c776aecf, type: 3}
+    spriteHL: {fileID: 21300000, guid: d700c80287045e34f9d7b2eb408672d2, type: 3}
+  - archetype: 3
+    spriteN: {fileID: 21300000, guid: a21f871c1bf2fc34f946caa1bb46a90f, type: 3}
+    spriteHL: {fileID: 21300000, guid: a65845f12a3a5c046b669dd77f30fc9e, type: 3}

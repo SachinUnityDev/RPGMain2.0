@@ -17,14 +17,14 @@ namespace Interactables
         public List<string> allLines = new List<string>();
 
         int dayCount = 0;
-        public ArmorState armorState;
-
-        public virtual void InitArmor(CharController charController)
+        public ArmorModel armorModel;
+        public virtual void InitArmor(CharController charController, ArmorModel armorModel)
         {
             this.charController = charController;
             armorSO = ArmorService.Instance.allArmorSO.GetArmorSOWithType(armorType);
-            CalendarService.Instance.OnStartOfCalDay += (int gameDay)=>DayTick(); 
-
+            CalendarService.Instance.OnStartOfCalDay += (int gameDay)=>DayTick();
+          
+            this.armorModel = armorModel;
 
         }
         public virtual void OnArmorFortify()
@@ -42,7 +42,9 @@ namespace Interactables
 
             string str = $"{armorSO.minArmor}-{armorSO.maxArmor} Armor for 3 days";
             allLines.Add(str);
-            armorState = ArmorState.Unfortifiable; 
+
+            armorModel.armorState = ArmorState.Fortified; 
+           
         }         
         public abstract void OnArmorFortifyUpgraded();
 
@@ -54,7 +56,7 @@ namespace Interactables
         } 
         public virtual void OnArmorFortifyEnd()
         {
-            armorState = ArmorState.Fortifiable; 
+            armorModel.armorState = ArmorState.Fortifiable; 
         } 
 
     

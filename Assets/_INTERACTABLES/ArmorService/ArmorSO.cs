@@ -11,10 +11,10 @@ namespace Interactables
     public class ArmorDataVsLoc
     {
         public LocationName locationName;
-        public Currency currFortify;
-        public Currency currFortifyOnUpgrade; 
-        public Currency currSocketDiv;
-        public Currency currSocketSupport;
+        public Currency priceFortify;
+        public Currency priceFortifyOnUpgrade; 
+        public Currency priceUnSocketDiv;
+        public Currency priceUnSocketSupport;
         public ArmorState armorState; 
     }
 

@@ -1,3 +1,4 @@
+using Common;
 using Interactables;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,7 +17,8 @@ namespace Town
 
         FortifyView fortifyView;
         [SerializeField] ArmorModel armorModel;
-        [SerializeField] CharNames selectChar;
+        [SerializeField] CharController charController;
+
 
 
         [SerializeField] Transform leftCharPanel;
@@ -28,14 +30,14 @@ namespace Town
         {
             armorImg = transform.GetChild(0).GetComponent<Image>();
         }
-        public void InitFortifyPanel(CharNames selectChar, ArmorModel armorModel, FortifyView fortifyView)
+        public void InitFortifyPanel(CharController charController, ArmorModel armorModel, FortifyView fortifyView)
         {
             this.fortifyView = fortifyView;
             this.armorModel = armorModel;
-            this.selectChar = selectChar;
+            this.charController = charController;
 
-            ArmorSO armorSO = ArmorService.Instance.allArmorSO.GetArmorSOWithCharName(selectChar);
-            armorImg.sprite = armorSO.GetArmorSprite(selectChar);
+            ArmorSO armorSO = ArmorService.Instance.allArmorSO.GetArmorSOWithCharName(charController.charModel.charName);
+            armorImg.sprite = armorSO.GetArmorSprite(charController.charModel.charName);
 
             //if (armorModel.weaponState == WeaponState.Enchanted || armorModel.weaponState == WeaponState.Rechargeable)
             //{
@@ -53,7 +55,7 @@ namespace Town
         {
             //rightGemPanel.gameObject.SetActive(true);
             leftCharPanel.gameObject.SetActive(true);
-            leftCharPanel.GetComponent<LeftPanelArmorView>().InitLeftPanel(selectChar, armorModel);
+            leftCharPanel.GetComponent<LeftPanelArmorView>().InitLeftPanel(charController, armorModel);
             //rightGemPanel.GetComponent<RightEnchantPanelView>().InitRightPanel(selectChar, armorModel);
         }
         void HideRightLeftPanel()

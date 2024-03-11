@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Common;
-using System.Diagnostics.Contracts;
 
 namespace Interactables
 {
@@ -15,6 +14,23 @@ namespace Interactables
 
         [Header("Not TBR")]
         public WeaponViewController weaponViewController;
+       // WeaponFactory weaponFactory; 
+        public void Init()
+        {
+            //itemFactory = GetComponent<ItemFactory>();
+            //itemFactory.ItemInit();
+
+            //foreach (CharController charController in CharService.Instance.allyInPlayControllers)
+            //{
+            //    ItemController itemController =
+            //                charController.gameObject.AddComponent<ItemController>();
+            //    itemController.Init();
+            //    allItemControllers.Add(itemController);
+            //}
+            //CalendarService.Instance.OnStartOfCalDay += (int day) => OnDayTickOnScroll();
+            //isNewGInitDone = true;
+        }
+
 
         public WeaponModel GetWeaponModel(CharNames charName)
         {

@@ -18,19 +18,19 @@ namespace Town
     public enum NPCState
     {
         Locked,
-        UnLockedNAvail,        
+        UnLockedNAvail,
         UnAvailable,
     }
     [Serializable]
     public class DialogueData
     {
         public DialogueNames dialogueName;
-        public bool isUnLocked; 
+        public bool isUnLocked;
     }
     [Serializable]
     public class CharIntData
     {
-        public CharNames compName;      
+        public CharNames compName;
         public NPCState compState;
         public List<IntTypeData> allInteract = new List<IntTypeData>();
     }
@@ -38,7 +38,7 @@ namespace Town
     public class CharInteractPrefabData
     {
         public CharNames compName;
-        public IntType nPCIntType;        
+        public IntType nPCIntType;
         public GameObject interactPrefab;
     }
 
@@ -48,7 +48,7 @@ namespace Town
         public NPCNames nPCNames;
         public NPCState npcState;
         public List<IntTypeData> allInteract = new List<IntTypeData>();
-        
+
     }
     [Serializable]
     public class IntTypeData
@@ -61,14 +61,15 @@ namespace Town
     public class NPCInteractPrefabData
     {
         public NPCNames nPCNames;
-        public IntType nPCIntType;        
+        public IntType nPCIntType;
         public GameObject interactPrefab;
     }
     [Serializable]
     public class BuildIntTypeData
     {
-        public BuildInteractType BuildIntType;        
-        public bool isUnLocked = false; 
+        public BuildInteractType BuildIntType;
+        public bool isUnLocked = false;
+        public bool isUpgraded = false;
     }
     [Serializable]
     public class BuildIntTypePrefabData
@@ -80,7 +81,7 @@ namespace Town
     public class InteractionSpriteData
     {
         public BuildInteractType intType;
-        public string intTypeStr =""; 
+        public string intTypeStr = "";
         public Sprite spriteN;
     }
 
@@ -99,6 +100,19 @@ namespace Town
         public List<BuildIntTypeData> buildIntTypes = new List<BuildIntTypeData>();
 
 
+        public void UnLockBuildIntType(BuildInteractType buildIntType)
+        {
+            foreach (BuildIntTypeData buildInt in buildIntTypes)
+            {
+                if (buildInt.BuildIntType == buildIntType)
+                {
+                    buildInt.isUnLocked = true; break; 
+                }
+            }
+        }
+       
+
+
         public bool IsBuildIntUnLocked(BuildInteractType buildIntType)
         {
             foreach (BuildIntTypeData buildInt in buildIntTypes)
@@ -111,6 +125,23 @@ namespace Town
             return false; 
         }
 
+        public bool IsBuildIntUpgraded(BuildInteractType buildIntType)
+        {
+            int index = buildIntTypes.FindIndex(t=>t.BuildIntType == buildIntType);
+            if(index != -1)
+            {
+                return buildIntTypes[index].isUpgraded; 
+            }
+            return false; 
+        }
+        public void BuildIntChg(BuildInteractType buildIntType, bool isUpgrade)
+        {
+            int index = buildIntTypes.FindIndex(t => t.BuildIntType == buildIntType);
+            if (index != -1)
+            {
+                buildIntTypes[index].isUpgraded = isUpgrade;
+            }
+        }
 
     }
 

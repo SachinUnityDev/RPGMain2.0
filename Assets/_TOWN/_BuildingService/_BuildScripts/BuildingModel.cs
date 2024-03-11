@@ -99,7 +99,6 @@ namespace Town
         [Header("Building Interactions")]
         public List<BuildIntTypeData> buildIntTypes = new List<BuildIntTypeData>();
 
-
         public void UnLockBuildIntType(BuildInteractType buildIntType)
         {
             foreach (BuildIntTypeData buildInt in buildIntTypes)

@@ -37,7 +37,7 @@ namespace Town
         }
         void UpdateState()
         {
-            if(itemSelect == null)
+            if(itemSelect == null || BuildingIntService.Instance.houseController.houseModel.slotSeq >= dryerView.MAX_SLOT_SIZE)
             {
                 isClickable= false;
                 btnImg.sprite = btnNA;

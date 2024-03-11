@@ -40,6 +40,9 @@ namespace Town
         [Header("Interact: Provision")]
         public Iitems item;
 
+        [Header("Interact: Dryer")]
+        public int slotSeq =0; 
+
         public HousePurchaseOptsData GetHouseOptsInteractData(HousePurchaseOpts houseOpts)
         {
             int index = purchaseOpts.FindIndex(t=>t.houseOpts== houseOpts); 

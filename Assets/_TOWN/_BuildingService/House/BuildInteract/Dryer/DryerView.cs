@@ -15,16 +15,21 @@ namespace Town
 
     public class DryerView : MonoBehaviour, IPanel
     {
+        public  int MAX_SLOT_SIZE = 3; 
+
         [SerializeField] DryerOptsBtnView dryerOptsBtnView;
         [SerializeField] DryerSlotView dryerSlotView;
         [SerializeField] Button exitBtn;
         [SerializeField] DryerBtnPtrEvents dryerBtnPtrEvents;
+        
+        [Header(" Slot txt TBR")]
+        [SerializeField] TextMeshProUGUI slotTxt;
 
         [Header(" Select INDEX")]
         [SerializeField] int index = -1;
-        [SerializeField] int slotSeq =0;
-        [SerializeField] List<Iitems> itemDrying = new List<Iitems>();  
-
+       
+        [SerializeField] List<Iitems> itemDrying = new List<Iitems>();
+        
         private void Awake()
         {
             exitBtn.onClick.AddListener(OnExitBtnPressed);
@@ -91,7 +96,8 @@ namespace Town
         {
             dryerOptsBtnView.InitDryerPtrEvents(this);
             dryerOptsBtnView.OnDriedMeatBtnPressed();// default
-           
+            int slotSeq = BuildingIntService.Instance.houseController.houseModel.slotSeq;   
+            slotTxt.text = $"{slotSeq}/{MAX_SLOT_SIZE}";
         }
 
         public void DryerItemSelect(int index)
@@ -103,9 +109,8 @@ namespace Town
 
         public void OnDryerPressed()
         {
-            if (slotSeq > 4) return;
-                slotSeq++; 
-
+            BuildingIntService.Instance.houseController.houseModel.slotSeq++;
+            slotTxt.text = $"{BuildingIntService.Instance.houseController.houseModel.slotSeq}/{MAX_SLOT_SIZE}"; 
             if(dryerSlotView.itemSelect != null)
             {
                 if (!InvService.Instance.invMainModel.RemoveItemFrmCommInv(dryerSlotView.itemSelect))

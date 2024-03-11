@@ -35,7 +35,7 @@ namespace Town
 
         [SerializeField] Transform OnHoverTrans;
         
-        private void Start()
+        private void OnEnable()
         {
             frameImg = transform.GetChild(3).GetComponent<Image>();
             frameImg.gameObject.SetActive(false);

@@ -118,7 +118,7 @@ namespace Interactables
             Transform slotTrans = itemSlotController.gameObject.transform;
             Vector3 offset = new Vector3(100/2f, 130/2f, 0f)* canvas.scaleFactor;  
 
-            rightClickOpts.DOMove(slotTrans.position+offset, 0.01f);
+            rightClickOpts.DOMove(slotTrans.position+offset, 0.00f);
             rightClickOpts.gameObject.SetActive(true);
 
         }
@@ -153,6 +153,12 @@ namespace Interactables
                 child.GetComponent<ItemActionPtrController>().ResetItemAction();
             }
         }
+
+        public void ResizeInv(int size)
+        {
+            // each slot to be prefab add n remove slots here
+        }
+
 
         #region TO_INV_FILL
        

@@ -362,15 +362,6 @@ namespace Interactables
             }
             
             Iitems item = ItemsInSlot[0];
-            //if (isRightClicked)
-            //{
-            //    CloseRightClickOpts();                 
-            //}
-            //else
-            //{
-            //    InvService.Instance.commInvViewController.OpenRightClickOpts();               
-            //}
-           // isRightClicked = !isRightClicked; 
 
             rightClickActions.Clear();
             if (IsEquipable())

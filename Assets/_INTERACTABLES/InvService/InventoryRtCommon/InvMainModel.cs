@@ -116,7 +116,6 @@ namespace Interactables
             return false;
         }
 
-
         public bool HasItemInQtyCommOrStash(ItemDataWithQty itemDataWithQty)
         {
             int count = 0; 
@@ -160,7 +159,7 @@ namespace Interactables
             return allItems; 
         }
         public bool AddItem2CommInv(Iitems item)   // KEY POINT OF ADDITION OF ITEM // Add to model => view
-        {          
+        {                     
             if (InvService.Instance.invRightViewController.AddItem2InVView(item, false))// this adds to model list
             {
                 item.invSlotType = SlotType.CommonInv;

@@ -17,7 +17,8 @@ namespace Town
         [SerializeField] Transform currencyTrans;
         [SerializeField] Transform costCurrtrans;
         [SerializeField] Button exitBtn;
-        [SerializeField] CraftBtnPtrEvents craftBtnPtrEvents; 
+        [SerializeField] CraftBtnPtrEvents craftBtnPtrEvents;
+        [SerializeField] TextMeshProUGUI OnPotionCraftedTxt; 
 
         [Header("Current potion Select")]
         [SerializeField] PotionNames potionSelect;
@@ -53,7 +54,7 @@ namespace Town
                       BuildingIntService.Instance.marketController.marketModel.costOfCraftInBronze.ToString();
             currencyTrans.GetComponent<DisplayCurrencyWithToggle>().InitCurrencyToggle(); 
             craftBtnPtrEvents.InitCraftBtnPtrEvents(this);
-            
+            OnPotionCraftedTxt.gameObject.SetActive(false);
         }
 
         public void PotionSelect(int i)
@@ -108,26 +109,32 @@ namespace Town
         public void OnCraftPressed()
         {
             // add item to common Inv 
+            bool InvHasSpace = false; 
             switch (potionSelect)
             {
                 case PotionNames.None:
                     break;
                 case PotionNames.HealthPotion:
-                    InvService.Instance.invMainModel.AddItem2CommORExcess(healthPotion);
-                    craftRecipeView.RemoveIngredients(healthPotion);
+                    InvHasSpace= InvService.Instance.invMainModel.AddItem2CommORStash(healthPotion);
+                    craftRecipeView.RemoveIngredients(healthPotion);                    
                     break;
-                case PotionNames.StaminaPotion:                    
-                    InvService.Instance.invMainModel.AddItem2CommORExcess(staminaPotion);
+                case PotionNames.StaminaPotion:
+                    InvHasSpace= InvService.Instance.invMainModel.AddItem2CommORStash(staminaPotion);
                     craftRecipeView.RemoveIngredients(staminaPotion);
                     break;
                 case PotionNames.FortitudePotion:
-                    InvService.Instance.invMainModel.AddItem2CommORExcess(fortPotion);
+                    InvHasSpace = InvService.Instance.invMainModel.AddItem2CommORStash(fortPotion);
                     craftRecipeView.RemoveIngredients(fortPotion);
                     break;                
                 default:
                     break;
             }
             EcoServices.Instance.DebitMoneyFrmCurrentPocket(currForCraft); 
+            OnPotionCraftedTxt.gameObject.SetActive(true);
+            if(InvHasSpace)
+            OnPotionCraftedTxt.text = $"{potionSelect.ToString().CreateSpace()} added to Inventory"; 
+            else
+                OnPotionCraftedTxt.text = $"Inventory is full";
 
         }
         void CreatePotion()

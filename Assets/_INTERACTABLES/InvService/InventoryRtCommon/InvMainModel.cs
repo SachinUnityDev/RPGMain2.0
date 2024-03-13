@@ -23,8 +23,8 @@ namespace Interactables
     public class ActiveInvData
     {
         public int CharID;
-        public Iitems[] potionActiveInv;
-        public Iitems[] gewgawActiveInv;
+        public Iitems[] potionActiveInv = new Iitems[3];
+        public Iitems[] gewgawActiveInv = new Iitems[3];
 
         public int potionCount; 
         public int gewgawCount;

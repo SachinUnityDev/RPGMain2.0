@@ -308,7 +308,12 @@ namespace Common
             itemQty1 = GetItemDataWithQty(fameType, CompanionPreReqOpt1);
             itemQty2 = GetItemDataWithQty(fameType, CompanionPreReqOpt2);
 
-            List<ItemDataWithQty> allPreReqs = new List<ItemDataWithQty>() {itemQty1, itemQty2};
+
+            List<ItemDataWithQty> allPreReqs = new List<ItemDataWithQty>(); 
+            if(itemQty1!= null)
+                allPreReqs.Add(itemQty1);
+            if(itemQty2!= null)
+                allPreReqs.Add(itemQty2);
    
             return allPreReqs;
         }

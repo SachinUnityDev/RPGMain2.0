@@ -164,12 +164,12 @@ namespace Town
         {
             if(charIntData != null)
             {
-                talkNTradeBtns.DOMoveY(yPos, 0.25f);
+                talkNTradeBtns.DOMoveY(yPos, 0f);
                 talkNTradeBtns.GetComponent<TalkNTradeBtnView>().InitTalkNTrade(charIntData, this); 
             }
             if (nPCIntData != null)
             {
-                talkNTradeBtns.DOMoveY(yPos, 0.25f);
+                talkNTradeBtns.DOMoveY(yPos, 0.0f);
                 talkNTradeBtns.GetComponent<TalkNTradeBtnView>().InitTalkNTrade(nPCIntData, this);
             }
         }

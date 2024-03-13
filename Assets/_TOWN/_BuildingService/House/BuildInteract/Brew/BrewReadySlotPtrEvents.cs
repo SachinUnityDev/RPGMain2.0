@@ -9,7 +9,7 @@ namespace Town
 {
     public class BrewReadySlotPtrEvents : MonoBehaviour
     {
-        [SerializeField] int readyQuantity;
+        public int readyQuantity;
 
         [Header("Slot images and txt")]
         [SerializeField] Image imgIngred;

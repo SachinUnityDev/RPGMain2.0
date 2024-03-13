@@ -39,6 +39,7 @@ namespace Town
         {
             frameImg = transform.GetChild(3).GetComponent<Image>();
             frameImg.gameObject.SetActive(false);
+           // OnHoverTrans.gameObject.SetActive(false);
         }
         public void InitSlot(DryerView dryerView, DryerSlotView dryerSlotView, int index)
         {
@@ -125,11 +126,13 @@ namespace Town
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            OnHoverTrans.gameObject.SetActive(true);
+            //if (ItemsInSlot.Count == 0) return; 
+            //OnHoverTrans.GetComponentInChildren<TextMeshProUGUI>().text = ItemsInSlot[0].itemName
+            //OnHoverTrans.gameObject.SetActive(true);
         }
         public void OnPointerExit(PointerEventData eventData)
         {
-            OnHoverTrans.gameObject.SetActive(false);
+            //OnHoverTrans.gameObject.SetActive(false);
         }
         void AddItemOnSlot(Iitems item)
         {
@@ -186,7 +189,7 @@ namespace Town
                 Debug.Log("SPRITE NOT FOUND");
             return null;
 
-        }
+        }   
         public void ClearSlot()
         {
             ItemsInSlot.Clear();

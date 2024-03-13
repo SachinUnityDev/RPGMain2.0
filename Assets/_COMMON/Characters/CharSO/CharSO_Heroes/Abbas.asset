@@ -37,6 +37,7 @@ MonoBehaviour:
   stateOfChar: 2
   fameBehavior: 0
   baseCharLoc: 1
+  currLoc: 1
   charRole: 1
   raceType: 5
   raceTypeHero: 1

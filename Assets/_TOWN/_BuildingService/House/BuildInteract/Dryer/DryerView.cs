@@ -25,67 +25,83 @@ namespace Town
         [Header(" Slot txt TBR")]
         [SerializeField] TextMeshProUGUI slotTxt;
 
+        [Header(" Transfer to Inv")]
+        [SerializeField] Dryer2InvTransferBtn dryerToInvTransferBtn;
+
         [Header(" Select INDEX")]
         [SerializeField] int index = -1;
        
-        [SerializeField] List<Iitems> itemDrying = new List<Iitems>();
-        
+      
         private void Awake()
         {
             exitBtn.onClick.AddListener(OnExitBtnPressed);
-
         }
         private void Start()
         {
             CalendarService.Instance.OnStartOfCalDay -= ChurnOutDriedItems;
-            CalendarService.Instance.OnStartOfCalDay += ChurnOutDriedItems; 
+            CalendarService.Instance.OnStartOfCalDay += ChurnOutDriedItems;
         }
 
         void ChurnOutDriedItems(int day)
         {
-
-            foreach (Iitems item in itemDrying)
+            int  prevDay = day - 1;
+            HouseModel houseModel = BuildingIntService.Instance.houseController.houseModel; 
+            foreach (DryingData dryingData in houseModel.allDryingData)
             {
-                if(item.itemType == ItemType.Foods)
+                if (dryingData.dayInGame != prevDay) continue;
+                foreach (Iitems item in dryingData.allItems)
                 {
-                    if((FoodNames)item.itemName == FoodNames.Venison)
+                    if (item.itemType == ItemType.Foods)
                     {
-                        Iitems itemNew = 
-                        ItemService.Instance.GetNewItem(new ItemData(ItemType.Foods, (int)FoodNames.DriedMeat));
-                        InvService.Instance.invMainModel.AddItem2CommORStash(itemNew);
+                        if ((FoodNames)item.itemName == FoodNames.Venison)
+                        {
+                            Iitems itemNew =
+                            ItemService.Instance.GetNewItem(new ItemData(ItemType.Foods, (int)FoodNames.DriedMeat));
+                            houseModel.AddToDriedList(itemNew);
+                        }
+                        if ((FoodNames)item.itemName == FoodNames.Mutton)
+                        {
+                            Iitems itemNew =
+                            ItemService.Instance.GetNewItem(new ItemData(ItemType.Foods, (int)FoodNames.DriedMeat));
+                            houseModel.AddToDriedList(itemNew);
+                        }
+                        if ((FoodNames)item.itemName == FoodNames.Beef)
+                        {
+                            Iitems itemNew =
+                            ItemService.Instance.GetNewItem(new ItemData(ItemType.Foods, (int)FoodNames.DriedMeat));
+                            houseModel.AddToDriedList(itemNew);
+                        }
+                        if ((FoodNames)item.itemName == FoodNames.Fish)
+                        {
+                            Iitems itemNew =
+                            ItemService.Instance.GetNewItem(new ItemData(ItemType.Foods, (int)FoodNames.DriedFish));
+                            houseModel.AddToDriedList(itemNew);
+                        }
                     }
-                    if ((FoodNames)item.itemName == FoodNames.Mutton)
+                    if (item.itemType == ItemType.Fruits)
                     {
-                        Iitems itemNew =
-                        ItemService.Instance.GetNewItem(new ItemData(ItemType.Foods, (int)FoodNames.DriedMeat));
-                        InvService.Instance.invMainModel.AddItem2CommORStash(itemNew);
-                    }
-                    if ((FoodNames)item.itemName == FoodNames.Beef)
-                    {
-                        Iitems itemNew =
-                        ItemService.Instance.GetNewItem(new ItemData(ItemType.Foods, (int)FoodNames.DriedMeat));
-                        InvService.Instance.invMainModel.AddItem2CommORStash(itemNew);
-                    }
-                    if ((FoodNames)item.itemName == FoodNames.Fish)
-                    {
-                        Iitems itemNew =
-                        ItemService.Instance.GetNewItem(new ItemData(ItemType.Foods, (int)FoodNames.DriedFish));
-                        InvService.Instance.invMainModel.AddItem2CommORStash(itemNew);
-                    }
-                }
-                if (item.itemType == ItemType.Fruits)
-                {
-                    if ((FruitNames)item.itemName == FruitNames.Grape)
-                    {
-                        Iitems itemNew =
-                        ItemService.Instance.GetNewItem(new ItemData(ItemType.Fruits, (int)FruitNames.DriedGrape));
-                        InvService.Instance.invMainModel.AddItem2CommORStash(itemNew);
+                        if ((FruitNames)item.itemName == FruitNames.Grape)
+                        {
+                            Iitems itemNew =
+                            ItemService.Instance.GetNewItem(new ItemData(ItemType.Fruits, (int)FruitNames.DriedGrape));
+                            houseModel.AddToDriedList(itemNew);
+                        }
                     }
                 }
             }
-            itemDrying.Clear();
+            houseModel.RemoveDayInDryingList(prevDay);             
         }
-
+        public void OnTransfer2InvPressed()
+        {
+            HouseModel houseModel = BuildingIntService.Instance.houseController.houseModel; 
+            foreach (Iitems item in houseModel.itemDried)
+            {
+                InvService.Instance.invMainModel.AddItem2CommORStash(item);
+            }
+            houseModel.ClearDriedList();
+            slotTxt.text = $"{houseModel.slotSeq}/{MAX_SLOT_SIZE}";
+          
+        }
         
         void OnExitBtnPressed()
         {
@@ -98,6 +114,7 @@ namespace Town
             dryerOptsBtnView.OnDriedMeatBtnPressed();// default
             int slotSeq = BuildingIntService.Instance.houseController.houseModel.slotSeq;   
             slotTxt.text = $"{slotSeq}/{MAX_SLOT_SIZE}";
+            dryerToInvTransferBtn.Init(this);
         }
 
         public void DryerItemSelect(int index)
@@ -109,16 +126,16 @@ namespace Town
 
         public void OnDryerPressed()
         {
-            BuildingIntService.Instance.houseController.houseModel.slotSeq++;
-            slotTxt.text = $"{BuildingIntService.Instance.houseController.houseModel.slotSeq}/{MAX_SLOT_SIZE}"; 
             if(dryerSlotView.itemSelect != null)
             {
                 if (!InvService.Instance.invMainModel.RemoveItemFrmCommInv(dryerSlotView.itemSelect))
                     InvService.Instance.invMainModel.RemoveItemFrmStashInv(dryerSlotView.itemSelect);
-                
-                itemDrying.Add(dryerSlotView.itemSelect);
+
+                int day = CalendarService.Instance.dayInGame; 
+                BuildingIntService.Instance.houseController.houseModel.AddToDryingList(day,dryerSlotView.itemSelect);
                 DryerItemSelect(index); // resets the slots 
             }
+            slotTxt.text = $"{BuildingIntService.Instance.houseController.houseModel.slotSeq}/{MAX_SLOT_SIZE}";
         }
      
         public void Init()

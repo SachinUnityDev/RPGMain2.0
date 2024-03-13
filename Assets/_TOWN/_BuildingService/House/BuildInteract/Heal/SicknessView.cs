@@ -8,18 +8,17 @@ namespace Town
 {
     public class SicknessView : MonoBehaviour
     {   
-        public List<Image> ptrImgs = new List<Image>();
       
         [SerializeField] List<TempTraitBuffData> sickLs = new List<TempTraitBuffData>();  
         HealView healView;
         public void SelectPtr(int select)
         {
-            for (int i = 0; i < ptrImgs.Count; i++)
+            for (int i = 0; i < transform.childCount; i++)
             {
-                if(i != select)
-                     ptrImgs[i].gameObject.SetActive(false);
+                if(i == select)
+                    transform.GetChild(i).GetComponent<SicknessBtnPtrEvents>().ShowPtr(); 
                 else
-                    ptrImgs[i].gameObject.SetActive(true);
+                    transform.GetChild(i).GetComponent<SicknessBtnPtrEvents>().HidePtr();
             }
         }
         public void InitSicknessNames(HealView healView, List<TempTraitBuffData> sickLs)

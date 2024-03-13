@@ -18,7 +18,6 @@ MonoBehaviour:
   minCastTime: 6
   maxCastTime: 6
   traitNameStr: ' Tapeworm'
-  iconSprite: {fileID: 0}
   allLines:
   - 'Upon consume Food: Half Hunger and Thirst relief'
   - -2 Vigor and Wp

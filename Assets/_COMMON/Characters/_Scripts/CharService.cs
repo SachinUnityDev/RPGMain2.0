@@ -124,6 +124,15 @@ namespace Common
             CharacterSO charSO = allAllySO.Find(x => x.charName == _charName);
             return charSO;
         }      
+        public List<CharController> GetAllAvailChars()
+        {
+            List<CharController> availChars = new List<CharController>();
+            availChars = allyInPlayControllers.Where(t=>t.charModel.availOfChar == AvailOfChar.Available ||
+                                   t.charModel.availOfChar == AvailOfChar.UnAvailable_Fame  ||
+                                   t.charModel.availOfChar == AvailOfChar.UnAvailable_InParty ||
+                                   t.charModel.availOfChar == AvailOfChar.UnAvailable_Prereq).ToList();
+            return availChars;
+        }
         public CharController GetCharCtrlWithCharID(int  _charID)
         {
             CharController charCtrl = charsInPlayControllers.Find(x => x.charModel.charID == _charID ); 

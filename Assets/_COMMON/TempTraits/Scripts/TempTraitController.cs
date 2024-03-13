@@ -21,10 +21,15 @@ namespace Common
 
         public List<TempTraitModel> allTempTraitModels = new List<TempTraitModel>();
 
+        [Header(" Resting")]
+        [SerializeField] int restingDay = 0;
+        [SerializeField] AvailOfChar preRestingAvailofChar; 
 
         public CharController charController;
         int traitID =-1;
         [SerializeField] List<int> allBuffIds = new List<int>();
+
+
 
         /// <summary>
         ///  You can have 3 sickness.If you trigger 1 more sickness when already have 3
@@ -286,8 +291,10 @@ namespace Common
 
         public void OnHealBtnPressed(TempTraitBuffData tempTraitBuffData)
         {
-            RemoveTraitByName(tempTraitBuffData.tempTraitName);
+            TempTraitBase tempTraitBase = GetTempTraitBase(tempTraitBuffData.tempTraitName); 
+            tempTraitBase.OnHealApplied();
         }
+ 
 
         #endregion
 

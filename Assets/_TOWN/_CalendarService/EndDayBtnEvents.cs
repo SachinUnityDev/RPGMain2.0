@@ -9,7 +9,7 @@ using TMPro;
 
 namespace Town
 {
-    public class EndDayBtnEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class EndDayBtnEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
         [SerializeField] TimeState timeState;
 
@@ -68,7 +68,13 @@ namespace Town
             }
                 
         }
-      
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+
+            CalendarService.Instance.On_EndDayClick(); 
+
+        }
     }
 
 

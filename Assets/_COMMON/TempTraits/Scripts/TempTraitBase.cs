@@ -14,6 +14,10 @@ namespace Common
         public TempTraitModel tempTraitModel;
         protected int startDay; // day in the game 
 
+        // resting
+        protected int startDayForResting;
+        protected int restTime = -1;
+        protected AvailOfChar preRestAvailOfChar; 
         public CharController charController { get; set; } // set this  base apply 
         public int charID { get; set; }
         public int traitID { get; set; }
@@ -64,6 +68,8 @@ namespace Common
         public virtual void EndTrait()
         {
             CalendarService.Instance.OnStartOfCalDay -= DayTick;
+            CalendarService.Instance.OnStartOfCalDay -= DayTickResting;
+
             ClearBuffs();
             charController.tempTraitController.RemoveTraitByName(tempTraitName); 
         }
@@ -71,6 +77,29 @@ namespace Common
         {
             
         }
+
+        public virtual void OnHealApplied()
+        {
+            CalendarService.Instance.OnStartOfCalDay += DayTickResting;
+            startDayForResting= CalendarService.Instance.dayInGame;
+            restTime = tempTraitModel.sicknessData.restTimeInday;
+            preRestAvailOfChar = charController.charModel.availOfChar; 
+            charController.charModel.availOfChar = AvailOfChar.UnAvailable_Resting;
+            DayTickResting(CalendarService.Instance.dayInGame); 
+        }
+
+        void DayTickResting(int day)
+        {            
+            int dayCounter = day - startDayForResting;
+            
+            if (dayCounter >= restTime)
+            {
+                charController.charModel.availOfChar = preRestAvailOfChar; 
+                OnEndConvert();
+                EndTrait();
+            }
+        }
+
         public virtual void ClearBuffs()
         {
             foreach (int buffID in allBuffIds)

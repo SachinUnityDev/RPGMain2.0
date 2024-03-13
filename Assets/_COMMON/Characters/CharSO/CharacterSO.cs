@@ -48,6 +48,7 @@ namespace Common
 
         [Header("Location")]
         public LocationName baseCharLoc;
+        public LocationName currLoc; 
 
         [Header("THE TYPES")]
         public CharRole charRole;
@@ -58,7 +59,6 @@ namespace Common
         public Archetype archeType;
         [Header("MISC STATS")]
         public FleeBehaviour fleeBehaviour;
-        //public CharFleeState charFleeState;
 
         [Header("DEFAULT PROVISION")]
         public List<ItemDataWithQtyNFameType> provisionItems = new List<ItemDataWithQtyNFameType>();

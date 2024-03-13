@@ -2,6 +2,7 @@ using Interactables;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -22,10 +23,22 @@ namespace Town
             this.isUpgraded = isUpgraded;
             this.isPurchaseAbleInDemo = isPurchaseAbleInDemo;
         }
+    }
+    [Serializable]
+    public class DryingData
+    {
+        public int dayInGame;
+        public List<Iitems> allItems;
+
+        public DryingData(int dayInGame, List<Iitems> allItems)
+        {
+            this.dayInGame = dayInGame;
+            this.allItems = allItems;
+        }
 
    
-
     }
+
 
     [Serializable]
     public class HouseModel : BuildingModel
@@ -41,8 +54,47 @@ namespace Town
         public Iitems item;
 
         [Header("Interact: Dryer")]
-        public int slotSeq =0; 
+        public int slotSeq =0;
+        public List<DryingData> allDryingData = new List<DryingData>();   
 
+        public List<Iitems> itemDried = new List<Iitems>();
+
+        public void AddToDryingList(int day, Iitems item)
+        {
+            if(allDryingData.Any(t=>t.dayInGame == day))
+            {
+                int index = allDryingData.FindIndex(t=>t.dayInGame==day);
+                DryingData dryingData = allDryingData[index];
+                dryingData.allItems.Add(item);
+                slotSeq++;
+            }
+            else
+            {
+                DryingData dryingData = new DryingData(day, new List<Iitems>() { item } );
+                allDryingData.Add(dryingData);
+                slotSeq++;
+            }
+        }
+        public void RemoveDayInDryingList(int day)
+        {
+            int index = allDryingData.FindIndex(t => t.dayInGame == day);
+            if(index != -1)
+            {
+                allDryingData.RemoveAt(index);
+            }
+             
+        }
+
+        public void AddToDriedList(Iitems item)
+        {           
+            itemDried.Add(item);
+        }
+    
+        public void ClearDriedList()
+        {
+            slotSeq -= itemDried.Count;
+            itemDried.Clear();     
+        }
         public HousePurchaseOptsData GetHouseOptsInteractData(HousePurchaseOpts houseOpts)
         {
             int index = purchaseOpts.FindIndex(t=>t.houseOpts== houseOpts); 

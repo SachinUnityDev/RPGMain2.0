@@ -13,7 +13,6 @@ namespace Common
         RosterSlotType slotType { get;  }
         bool isSlotFull();
         CharNames charInSlot { get; set; }
-
         bool AddChar2UnlockedList(GameObject go);        
         void RemoveCharFrmUnlockedList();
         void RightClickOpts(); 
@@ -35,7 +34,6 @@ namespace Common
         public int slotID => -1;
         public RosterSlotType slotType => RosterSlotType.CharScrollSlot;
         public CharNames charInSlot { get; set; }
-        void start() { }
         public void OnDrop(PointerEventData eventData)
         {
             GameObject draggedGO = eventData.pointerDrag;
@@ -135,9 +133,7 @@ namespace Common
             
             SetIPortraitValues();
             charSlotPlankContainer.InitPlankView(charModel);
-        }
-
-      
+        }      
         public bool isSlotFull()
         {
             if (charInSlot != CharNames.None)
@@ -145,7 +141,6 @@ namespace Common
             else
                 return false;
         }
-
         public void RemoveCharFrmUnlockedList()
         {
 

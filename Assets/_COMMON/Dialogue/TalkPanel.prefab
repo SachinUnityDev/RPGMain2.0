@@ -3489,16 +3489,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   diaModel:
     DiaID: 0
-    dialogueName: 5
-    dialogueTitle: "Hey old man\u2026"
-    npcName: 10
-    charName: 0
+    dialogueName: 28
+    dialogueTitle: Hey, are you the Water Mage?
+    npcName: 0
+    charName: 7
     isUnLocked: 1
     isRepeatable: 0
     isSkippable: 1
     isPlayedOnce: 1
     gameState: 1
-    charInDialogue: 01000000
+    charInDialogue: 07000000
     NPCinDialogue: 
     locationName: 1
   colorN: {r: 0.047058824, g: 0.007843138, b: 0.007843138, a: 1}

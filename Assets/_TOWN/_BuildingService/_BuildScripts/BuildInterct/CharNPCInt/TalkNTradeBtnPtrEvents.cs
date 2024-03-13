@@ -69,7 +69,7 @@ namespace Town
 
         public void OnSelect()
         {
-            transform.DOScale(1.25f, 0.4f);
+            transform.DOScale(1.25f, 0.25f);
             if (intType == IntType.Talk)
             {
                 Transform buildViewTrans = talkNTradeBtnView.buildView.transform;
@@ -88,7 +88,7 @@ namespace Town
 
         public void OnDeSelect()
         {
-            transform.DOScale(1f, 0.4f);
+            transform.DOScale(1f, 0.25f);
         }
     }
 }

@@ -17,6 +17,7 @@ MonoBehaviour:
   charPrefab: {fileID: 6114580909890694877, guid: 9bc421af9d7de054dac399de1cfd5fbb,
     type: 3}
   charSprite: {fileID: 0}
+  charSpriteUnClickedFlipped: {fileID: 0}
   charHexPortrait: {fileID: 0}
   dialoguePortraitClicked: {fileID: 0}
   dialoguePortraitUnClicked: {fileID: 0}
@@ -24,7 +25,7 @@ MonoBehaviour:
   bpPortraitUnAvail: {fileID: 0}
   charMode: 1
   orgCharMode: 1
-  expPoints: 0
+  mainExp: 0
   jobExp: 0
   skillPts: 0
   charLvl: 1
@@ -33,16 +34,14 @@ MonoBehaviour:
   stateOfChar: 2
   fameBehavior: 1
   baseCharLoc: 1
+  currLoc: 1
   charRole: 2
   raceType: 5
   raceTypeHero: 1
   cultType: 7
   classType: 2
   archeType: 2
-  tameAnimalsStrength: 1
   fleeBehaviour: 1
-  canBeAmbushed: 0
-  canBeCaught: 1
   provisionItems: []
   earningsItems: []
   earningShare: 0
@@ -55,8 +54,6 @@ MonoBehaviour:
     currValue: 0
     baseValue: 0
     desc: Base value for Physical and Magical attacks.
-    minRange: 0
-    maxRange: 0
     minLimit: 0
     maxLimit: 100
     isClamped: 0
@@ -64,8 +61,6 @@ MonoBehaviour:
     currValue: 0
     baseValue: 0
     desc: Chance to land Physical attack to a target.
-    minRange: 0
-    maxRange: 0
     minLimit: 0
     maxLimit: 15
     isClamped: 0
@@ -73,8 +68,6 @@ MonoBehaviour:
     currValue: 0
     baseValue: 0
     desc: Determinant value for hitting correct target by Magical attacks or Misfire.
-    minRange: 0
-    maxRange: 0
     minLimit: 12
     maxLimit: 96
     isClamped: 0
@@ -82,8 +75,6 @@ MonoBehaviour:
     currValue: 0
     baseValue: 0
     desc: Determinant value for Critical and Feeble hits.
-    minRange: 0
-    maxRange: 0
     minLimit: 0
     maxLimit: 12
     isClamped: 0
@@ -91,8 +82,6 @@ MonoBehaviour:
     currValue: 0
     baseValue: 0
     desc: Determinant value for extra action or pass action.
-    minRange: 0
-    maxRange: 0
     minLimit: 0
     maxLimit: 12
     isClamped: 0
@@ -101,8 +90,6 @@ MonoBehaviour:
     baseValue: 0
     desc: Main determinant for turn order. Increases chance to keep action after
       using Move.
-    minRange: 0
-    maxRange: 0
     minLimit: 0
     maxLimit: 12
     isClamped: 0
@@ -110,8 +97,6 @@ MonoBehaviour:
     currValue: 0
     baseValue: 0
     desc: Determinant value for base Health. Increases chance to withstand Hunger.
-    minRange: 0
-    maxRange: 0
     minLimit: 0
     maxLimit: 100
     isClamped: 0
@@ -119,8 +104,6 @@ MonoBehaviour:
     currValue: 0
     baseValue: 0
     desc: Determinant value for base Stamina. Increases chance to withstand Thirst.
-    minRange: 0
-    maxRange: 0
     minLimit: 0
     maxLimit: 100
     isClamped: 0
@@ -128,8 +111,6 @@ MonoBehaviour:
     currValue: 0
     baseValue: 0
     desc: Value to mitigate incoming Physical damage.
-    minRange: 0
-    maxRange: 0
     minLimit: 0
     maxLimit: 100
     isClamped: 0
@@ -137,8 +118,6 @@ MonoBehaviour:
     currValue: 0
     baseValue: 0
     desc: Chance to evade a Physical attack.
-    minRange: 0
-    maxRange: 0
     minLimit: 0
     maxLimit: 100
     isClamped: 0
@@ -146,8 +125,6 @@ MonoBehaviour:
     currValue: 0
     baseValue: 0
     desc: Percentage value to mitigate incoming Fire damage.
-    minRange: 0
-    maxRange: 0
     minLimit: -60
     maxLimit: 90
     isClamped: 0
@@ -155,8 +132,6 @@ MonoBehaviour:
     currValue: 0
     baseValue: 0
     desc: Percentage value to mitigate incoming Earth damage.
-    minRange: 0
-    maxRange: 0
     minLimit: -60
     maxLimit: 90
     isClamped: 0
@@ -164,8 +139,6 @@ MonoBehaviour:
     currValue: 0
     baseValue: 0
     desc: Percentage value to mitigate incoming Water damage.
-    minRange: 0
-    maxRange: 0
     minLimit: -60
     maxLimit: 90
     isClamped: 0
@@ -173,8 +146,6 @@ MonoBehaviour:
     currValue: 0
     baseValue: 0
     desc: Percentage value to mitigate incoming Air damage.
-    minRange: 0
-    maxRange: 0
     minLimit: -60
     maxLimit: 90
     isClamped: 0
@@ -182,8 +153,6 @@ MonoBehaviour:
     currValue: 0
     baseValue: 0
     desc: Percentage value to mitigate incoming Light damage.
-    minRange: 0
-    maxRange: 0
     minLimit: -30
     maxLimit: 60
     isClamped: 0
@@ -191,8 +160,6 @@ MonoBehaviour:
     currValue: 0
     baseValue: 0
     desc: Percentage value to mitigate incoming Dark damage.
-    minRange: 0
-    maxRange: 0
     minLimit: -30
     maxLimit: 60
     isClamped: 0
@@ -200,8 +167,6 @@ MonoBehaviour:
     currValue: 0
     baseValue: 0
     desc: Percentage value to mitigate incoming Dark damage.
-    minRange: 0
-    maxRange: 0
     minLimit: 0
     maxLimit: 0
     isClamped: 0
@@ -209,8 +174,6 @@ MonoBehaviour:
     currValue: 0
     baseValue: 0
     desc: Percentage value to mitigate incoming Dark damage.
-    minRange: 0
-    maxRange: 0
     minLimit: 0
     maxLimit: 0
     isClamped: 0
@@ -218,8 +181,6 @@ MonoBehaviour:
     currValue: 0
     baseValue: 0
     desc: Percentage value to mitigate incoming Dark damage.
-    minRange: 0
-    maxRange: 0
     minLimit: -24
     maxLimit: 24
     isClamped: 0
@@ -228,13 +189,13 @@ MonoBehaviour:
     currValue: 0
     desc: Health is health, you know it...
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 0
     isClamped: 0
   - statName: 2
     currValue: 0
     desc: Resource to use skills.
     minLimit: 0
-    maxLimit: 100
+    maxLimit: 0
     isClamped: 0
   - statName: 3
     currValue: 0

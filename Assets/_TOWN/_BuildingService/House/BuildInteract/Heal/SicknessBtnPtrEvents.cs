@@ -10,20 +10,34 @@ namespace Town
     {
         [SerializeField] HealView healView;
         [SerializeField] SicknessView sicknessView;
-        [SerializeField] TempTraitBuffData tempTraitBuffData;   
+        [SerializeField] TempTraitBuffData tempTraitBuffData;
+        [SerializeField] GameObject ptr;
+        private void OnEnable()
+        {
+            ptr = transform.GetChild(0).gameObject;
+            HidePtr();
+        }
         public void InitPtrEvents(HealView healView, SicknessView sicknessView, TempTraitBuffData tempTraitBuffData)
         {
             this.healView = healView;
             this.sicknessView = sicknessView;   
             this.tempTraitBuffData= tempTraitBuffData;
-            Image ptrImg = transform.GetChild(0).GetComponent<Image>(); 
-            sicknessView.ptrImgs.Add(ptrImg); 
+           
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
             healView.OnSicknessSelect(tempTraitBuffData.tempTraitName);
             sicknessView.SelectPtr(transform.GetSiblingIndex()); 
+        }
+
+        public void ShowPtr()
+        {
+            ptr.SetActive(true);
+        }
+        public void HidePtr()
+        {
+            ptr.SetActive(false);
         }
     }
 }

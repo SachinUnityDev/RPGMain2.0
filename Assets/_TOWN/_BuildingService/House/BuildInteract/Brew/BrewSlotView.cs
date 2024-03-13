@@ -14,10 +14,12 @@ namespace Town
         [SerializeField] Transform recipeSlotTrans;
         public Transform brewSlotContainer;
         public Transform readySlotContainer;
-        [Header("Buttons Brew and Drink")]
+        [Header("Buttons Brew TBR")]
         [SerializeField] BrewBtnPtrEvents brewBtn;
-        [SerializeField] DrinkBtnPtrEvents drinkBtn;
 
+        [Header("Ready and Drink TBR")]
+        [SerializeField] BrewReadySlotPtrEvents brewReadySlotPtrEvents; 
+        [SerializeField] DrinkBtnPtrEvents drinkBtnPtrEvents;
 
         public AlcoholNames alcoholName;
         [SerializeField] Iitems item;
@@ -29,11 +31,7 @@ namespace Town
 
         public bool isIngredAvail = false;
 
-        void Awake()
-        {
-            //brewBtn.onClick.AddListener(OnBrewBtnPressed);
-            //drinkBtn.onClick.AddListener(OnDrinkBtnPressed);
-        }
+   
 
         public void InitBrewSlot(AlcoholNames alcoholName, BrewView brewView)
         {
@@ -45,8 +43,8 @@ namespace Town
             FillRecipeSlots();
             brewSlotContainer.GetComponent<BrewWIPContainerView>().InitBrewWIP(this); // container view 
             // btns 
-            brewBtn.Init(this); 
-
+            brewBtn.Init(this);
+            drinkBtnPtrEvents.Init(this, brewReadySlotPtrEvents); 
 
 
         }
@@ -107,8 +105,7 @@ namespace Town
 
         public void OnDrinkBtnPressed()
         {
-
-           bool hasStock =  readySlotContainer.GetChild(0).GetComponent<BrewReadySlotPtrEvents>().OnConsume(item);
+          brewReadySlotPtrEvents.OnConsume(item);
         }
     }
 }

@@ -61,13 +61,19 @@ namespace Town
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (isClickable)
+            {
                 btnImg.sprite = btnHL;
+                onHoverTxt.gameObject.SetActive(true);
+            }                
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             if (isClickable)
+            {
                 btnImg.sprite = btnN;
+            }
+            onHoverTxt.gameObject.SetActive(false);
         }
     }
 }

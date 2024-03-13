@@ -170,9 +170,7 @@ namespace Common
             {
                 OnPanelExit(panel);
             }
-        }
-
-    
+        }    
         public void UpdateDayPanel(int _currentdayInYr, DayName _gameStartDay)
         {
             Debug.Log(_gameStartDay + "in num " + (int)_gameStartDay);

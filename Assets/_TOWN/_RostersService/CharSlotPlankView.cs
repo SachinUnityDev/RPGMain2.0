@@ -55,7 +55,7 @@ public class CharSlotPlankView : MonoBehaviour, IPointerEnterHandler, IPointerEx
     void FillPreReq()
     {
         List<ItemDataWithQty> preReqItems = charModel.GetPrereqsItem();
-
+              
 
         if(preReqItems.Count == 2)
         {
@@ -120,15 +120,25 @@ public class CharSlotPlankView : MonoBehaviour, IPointerEnterHandler, IPointerEx
     void FillEarning()
     {
         ItemDataWithQty itemQty = charModel.GetEarningItem();
-        string itemNameStr = InvService.Instance.InvSO.GetItemName(itemQty.itemData);
-        string charNameStr = charModel.charNameStr; 
-        str = $"Every <style=States>{itemNameStr}</style> and 50 % of money found in quest will go to {charNameStr}.";
+        if(itemQty == null)
+        {
+            str = "";
+            FillItemCell(itemQty, img1);
+            earningShareTxt.text = ""; 
+            img2.gameObject.SetActive(false);   
+        }
+        else
+        {
+            img2.gameObject.SetActive(true);
+            string itemNameStr = InvService.Instance.InvSO.GetItemName(itemQty.itemData);
+            string charNameStr = charModel.charNameStr;
+            str = $"Every <style=States>{itemNameStr}</style> and 50 % of money found in quest will go to {charNameStr}.";
 
-        itemQty.quantity = 0;
-        FillItemCell(itemQty, img1);
-        // fill earning share
-        earningShareTxt.text = charModel.earningsShare.ToString() + " %";  
-
+            itemQty.quantity = 0;
+            FillItemCell(itemQty, img1);
+            // fill earning share
+            earningShareTxt.text = charModel.earningsShare.ToString() + " %";
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -155,8 +165,36 @@ public class CharSlotPlankView : MonoBehaviour, IPointerEnterHandler, IPointerEx
     void FillProvision()
     {
         ItemDataWithQty provItem = charModel.GetProvisionItem();
-        string itemNameStr = InvService.Instance.InvSO.GetItemName(provItem.itemData); 
-        str = $"Provision slot: <style=States>{itemNameStr}</style>. Replenishes upon completing quest.";
-        FillItemCell(provItem, img1);
+        if(provItem != null )
+        {
+            string itemNameStr = InvService.Instance.InvSO.GetItemName(provItem.itemData);
+            str = $"Provision slot: <style=States>{itemNameStr}</style>. Replenishes upon completing quest.";
+            FillItemCell(provItem, img1);
+        }
+        else
+        {
+            str = "";
+            CharController charController = CharService.Instance.GetAbbasController(CharNames.Abbas); 
+            int charID = charController.charModel.charID;
+            ActiveInvData activeInvData = InvService.Instance.invMainModel.allActiveInvData.Find(t => t.CharID == charID);
+
+            Iitems item = activeInvData?.potionActiveInv[2];
+
+            
+            if (item != null)
+            {
+                ItemData itemdata = new ItemData(item.itemType, item.itemName);
+                ItemDataWithQty itemDataWithQty = new ItemDataWithQty(itemdata, 1);
+                string itemNameStr = InvService.Instance.InvSO.GetItemName(itemdata);
+                str = $"Provision slot: <style=States>{itemNameStr}</style>. Replenishes upon completing quest.";
+                FillItemCell(itemDataWithQty, img1);
+            }
+            else
+            {
+                str = $"";
+                FillItemCell(null, img1);
+            }
+        }
+        
     }
 }

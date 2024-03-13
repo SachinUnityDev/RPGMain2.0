@@ -31,7 +31,7 @@ namespace Common
     public class CalendarService : MonoSingletonGeneric<CalendarService>
     {
        // public event Action<DayName> OnCalendarDayStart;  // to be remove and incorported
-        public event Action<int> OnStartOfCalDay;// broadcasts day inthe Game 
+        public event Action<int> OnStartOfCalDay;// broadcasts day in the Game 
         public event Action<int> OnStartOfNight;
         public event Action<WeekEventsName, int> OnStartOfTheWeek;
         public event Action<MonthName> OnStartOfTheMonth;

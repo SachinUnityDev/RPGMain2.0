@@ -159,8 +159,13 @@ namespace Common
         }
         void PopulateCharScroll()
         {
-           // if(unLockedChars.Count == 0) return;
-            AbbasChk(1);
+            if(unLockedChars.Count == 0) return;
+            //AbbasChk(1);
+            if(index>= unLockedChars.Count) 
+            {
+
+            }
+
             RosterService.Instance.On_ScrollSelectCharModel(unLockedChars[index].charModel);
             
             Debug.Log("RosterService" + RosterService.Instance.scrollSelectCharModel.charName);

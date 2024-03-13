@@ -50,6 +50,8 @@ namespace Town
         TempTraitController tempTraitController;
         TempTraitBuffData selectTrait;
 
+        [Header("List of Avail char")]
+        List<CharController>availChars = new List<CharController>();
         private void Start()
         {
             leftBtn.onClick.AddListener(OnLeftBtnPressed);
@@ -60,7 +62,7 @@ namespace Town
             if (Time.time - prevLeftClick < 0.3f) return;
             if (index == 0)
             {
-                index = CharService.Instance.allCharModels.Count - 1;
+                index = availChars.Count - 1;
                 FillCharTraits();
             }
             else if (index > 0)
@@ -72,7 +74,7 @@ namespace Town
         void OnRightBtnPressed()
         {
             if (Time.time - prevRightClick < 0.3f) return;
-            if (index == CharService.Instance.allCharModels.Count - 1)
+            if (index == availChars.Count - 1)
             {
                 index = 0;
                 FillCharTraits();
@@ -84,14 +86,29 @@ namespace Town
             prevRightClick = Time.time;
         }
 
-
+     
         // Init for this view 
         public void FillCharTraits()
         {
-            charSelect = CharService.Instance.allCharModels[index].charName;
+            // To be modified after discussion
+            availChars.Clear(); 
+            availChars = CharService.Instance.GetAllAvailChars();
+            if(availChars.Count == 0)
+            {
+                ToggleNoOneSick();
+                return;
+            }
+
+            if(index >= availChars.Count) 
+            {
+                index = 0;         
+                //OnRightBtnPressed();               
+            }
+            Debug.Log("index val" + availChars.Count + index);  
+            charSelect = availChars[index].charModel.charName;
             BuildingIntService.Instance.selectChar = charSelect;
 
-            CharController charController = CharService.Instance.GetAbbasController(charSelect);
+            CharController charController = availChars[index]; 
 
             tempTraitController = charController.GetComponent<TempTraitController>();
             if(GetSicknessTraits() > 0)
@@ -135,14 +152,18 @@ namespace Town
         public void OnHealBtnPressed()
         {
             tempTraitController.OnHealBtnPressed(selectTrait);
-        
+            
             // remove items from inv too 
             for (int i = 0; i < herbNQuantitySelect.qty; i++)
             {
                 ItemData itemData = new ItemData(ItemType.Herbs, (int)herbNQuantitySelect.herbName);
                 InvService.Instance.invMainModel.RemoveItemFrmCommInv(itemData); 
             }
-            FillCharTraits();
+
+            if (ChkIsAnyOneSick())
+            {
+                OnRightBtnPressed();
+            }
         }
         public void SetStateHealBtn(bool isClickable)
         {
@@ -209,10 +230,17 @@ namespace Town
         }
         public void Load()
         {
+            UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
             index = 0;
+            availChars = CharService.Instance.GetAllAvailChars();
+            if (availChars.Count == 0)
+            {
+                ToggleNoOneSick();
+                return;
+            }
             FillCharTraits();
             ChkIsAnyOneSick(); 
-            UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
+            
         }
         public void UnLoad()
         {

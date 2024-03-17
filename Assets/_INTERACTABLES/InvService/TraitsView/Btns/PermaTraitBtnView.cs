@@ -21,7 +21,7 @@ namespace Interactables
 
         InvTraitsView invTraitsView;
 
-        private void Start()
+        private void OnEnable()
         {
             img = GetComponent<Image>();
             img.sprite = spriteN;

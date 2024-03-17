@@ -34,7 +34,7 @@ MonoBehaviour:
   charLvl: 3
   charNameStr: Cahyo
   availOfChar: 1
-  stateOfChar: 1
+  stateOfChar: 2
   fameBehavior: 6
   baseCharLoc: 1
   currLoc: 1

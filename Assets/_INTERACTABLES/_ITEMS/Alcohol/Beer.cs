@@ -37,22 +37,26 @@ namespace Interactables
             RecipeInit(); 
             this.itemId= itemId;    
             this.maxInvStackSize = maxInvStackSize;
-            string str = $"+1 Morale for one day ";
-            Debug.Log("Beer  init" + str);
+            string str = $"Chance to gain Morale buff";            
             allDisplayStr.Add(str);
          
         }
         public void OnHoverItem()
         {
         }
-        public override void OnDrink()
+        public override string OnDrink()
         {
             // +1 morale for one day 
+            onDrinkBuffStr = "Keep Drinking..."; 
             float chance = 30f;
             charController = CharService.Instance.GetAbbasController(CharNames.Abbas);
             if (chance.GetChance())
+            {
                 charController.buffController.ApplyBuff(CauseType.Items, (int)itemName, charController.charModel.charID
-                    , AttribName.morale, 1, TimeFrame.EndOfDay, 1, true); 
+                    , AttribName.morale, 1, TimeFrame.EndOfDay, 1, true);
+                onDrinkBuffStr = "+1 Morale gained for a day";                
+            }
+            return onDrinkBuffStr;
 
         }
     }

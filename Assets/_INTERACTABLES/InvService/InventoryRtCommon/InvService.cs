@@ -6,7 +6,7 @@ using Common;
 using System;
 using Town;
 using UnityEngine.SceneManagement;
-using System.ComponentModel;
+
 
 namespace Interactables
 {
@@ -71,14 +71,24 @@ namespace Interactables
         {   
             if(invXLGO== null)
                     InitInvXLView();
-            charSelectController = CharService.Instance.GetAbbasController(CharNames.Abbas);
+            AbbasStatusSet(); 
         }
         public void On_DragResult(bool result, ItemsDragDrop itemsDragDrop)
         {
             OnDragResult?.Invoke(result, itemsDragDrop);
                
         }
-       
+       void AbbasStatusSet()  // try to connec t to on lock 
+        {
+            charSelectController = CharService.Instance.GetAbbasController(CharNames.Abbas);
+            ActiveInvData activeInvData = invMainModel.GetActiveInvData(charSelectController.charModel.charID);
+            ItemData itemData = new ItemData(ItemType.Potions, (int)PotionNames.HealthPotion);
+            Iitems item = ItemService.Instance.GetNewItem(itemData);
+            if(activeInvData == null)
+                invMainModel.EquipItem2PotionActInv(item, 2);
+            else if (activeInvData.potionActiveInv[2] == null)            
+                invMainModel.EquipItem2PotionActInv(item, 2);
+        }
 
         public void On_CharSelectInv(CharModel charModel)
         {

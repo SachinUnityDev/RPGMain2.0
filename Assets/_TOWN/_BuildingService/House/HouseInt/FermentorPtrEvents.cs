@@ -8,6 +8,19 @@ namespace Town
 {
     public class FermentorPtrEvents : HouseBaseEvents, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
+        public override void Init(BuildView buildView, BuildingModel buildModel)
+        {
+            base.Init(buildView, buildModel);
+            if (buildModel.IsBuildIntUnLocked(BuildInteractType.Fermentation))
+            {
+                gameObject.SetActive(true);
+
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
+        }
         public void OnPointerClick(PointerEventData eventData)
         {
             if (buildModel.IsBuildIntUnLocked(BuildInteractType.Fermentation))

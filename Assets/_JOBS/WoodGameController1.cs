@@ -107,7 +107,7 @@ namespace Town
             // reset params
             isGameInitDone= false;  
             isLocked= true;
-            CalendarService.Instance.On_EndDayClick();
+            CalendarService.Instance.On_EndDayClick(BuildingNames.None);
             
         }
         void UnLockOnDayChg()

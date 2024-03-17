@@ -71,9 +71,7 @@ namespace Town
 
         public void OnPointerClick(PointerEventData eventData)
         {
-
-            CalendarService.Instance.On_EndDayClick(); 
-
+            CalendarService.Instance.On_EndDayClick(BuildingNames.House); 
         }
     }
 

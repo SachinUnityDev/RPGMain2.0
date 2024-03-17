@@ -408,14 +408,14 @@ namespace Common
         {        // Jungle Freak.....//Swampy Cramp.....//Forest Gump
             if (Input.GetKeyDown(KeyCode.V)) 
             {
+            //    ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
+            //                                                 , TempTraitName.);
+            //    ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
+            //                                                , TempTraitName.);
                 ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
-                                                             , TempTraitName.Insane);
-                //ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
-                //                                            , TempTraitName.SwampyCramp);
-                //ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
-                //                                            , TempTraitName.ForestGump);
-                //ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
-                //                                          , TempTraitName.Frail);
+                                                            , TempTraitName.ForestGump);
+                ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
+                                                          , TempTraitName.Frail);
 
                 ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
                                                              , TempTraitName.Strong);

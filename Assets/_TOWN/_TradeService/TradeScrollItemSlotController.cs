@@ -37,7 +37,7 @@ namespace Common
                 }
                 else
                 {
-                    iSlotable islot = itemsDragDrop.iSlotable;
+                    iSlotable islot = itemsDragDrop.iSlotable;                   
 
                     if (islot != null
                          && (islot.slotType == SlotType.TrophyScrollSlot                                

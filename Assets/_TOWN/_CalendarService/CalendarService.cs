@@ -221,7 +221,7 @@ namespace Common
             scrollMonth = currentMonth; // TIE IN POINT
                                          
         }
-        public void On_EndDayClick()
+        public void On_EndDayClick(BuildingNames FrmbuildName)
         {
             if (currtimeState == TimeState.Night)
             {
@@ -236,7 +236,18 @@ namespace Common
             }
             if(GameService.Instance.gameModel.gameState == GameState.InTown)
             {
-                BuildingIntService.Instance.houseController.ChkNApplyUpgradeBedBuff();
+                if(FrmbuildName == BuildingNames.House)
+                     BuildingIntService.Instance.houseController.ChkNApplyUpgradeBedBuff();
+                else if (FrmbuildName == BuildingNames.Tavern)
+                {
+                    if (80f.GetChance())
+                    {
+                        CharController charController = CharService.Instance.GetAbbasController(CharNames.Abbas);
+                        TempTraitController tempTraitController = charController.tempTraitController;
+                        tempTraitController.ApplyTempTrait(CauseType.BuildingInterct, (int)BuildInteractType.Purchase
+                                                        , charController.charModel.charID, TempTraitName.WellRested);
+                    }
+                }
             }            
         }
         

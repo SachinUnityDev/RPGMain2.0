@@ -22,6 +22,7 @@ MonoBehaviour:
   questMode: 2
   expBase: 0
   expMultiplier: 0
+  isUnBoxed: 0
   calDate:
     monthName: 1
     day: 26

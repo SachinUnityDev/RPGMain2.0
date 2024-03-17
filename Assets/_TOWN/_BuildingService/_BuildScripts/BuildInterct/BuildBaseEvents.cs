@@ -38,12 +38,12 @@ namespace Town
             btnImg.alphaHitTestMinimumThreshold = 0.1f;
         }
 
-        public void Init(BuildView buildView, BuildingModel buildModel)
+        public virtual void Init(BuildView buildView, BuildingModel buildModel)
         {
             this.buildView = buildView;
             this.buildModel = buildModel;
             timeState = CalendarService.Instance.currtimeState;
-            isBuildIntUpgraded = buildModel.IsBuildIntUpgraded(buildIntType); 
+            isBuildIntUpgraded = buildModel.IsBuildIntUpgraded(buildIntType);
             SetSpriteN();
         }
         protected void SetSpriteN()

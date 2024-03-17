@@ -1,19 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using Town;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI; 
 
 namespace Common
 {
-    public class ToggleRosterLockDisbandBtn : MonoBehaviour, IPointerClickHandler, INotify
+    public class ToggleRosterLockDisbandBtn : MonoBehaviour, IPointerClickHandler, INotify, IPointerEnterHandler, IPointerExitHandler
     {
+        [SerializeField] Color colorN;
+        [SerializeField] Color colorHL;
+        [SerializeField] Color colorNA;
+
+        [SerializeField] bool isClickable;
         public bool isDontShowItAgainTicked { get ; set ; }
         public NotifyName notifyName { get; set; }
         Image img;
-        private void Start()
+        RosterViewController rosterView; 
+        private void OnEnable()
         {
             img = GetComponent<Image>();    
+        }
+        public void Init(RosterViewController rosterView)
+        {
+            this.rosterView = rosterView;
+            SetState(); 
         }
         void ShowNotifyBox()
         {
@@ -33,7 +45,19 @@ namespace Common
 
             }
         }
-    
+        void SetState()
+        {
+            if (AbbasAvailChk())
+            {
+                isClickable = true;
+                img.color = colorN;
+            }
+            else
+            {
+                isClickable = false;
+                img.color = colorNA;
+            }
+        }
         public void OnNotifyAnsPressed()
         {
            // CharService.Instance.isPartyLocked = !CharService.Instance.isPartyLocked;
@@ -50,14 +74,38 @@ namespace Common
             }
         }
 
-       
+        bool AbbasAvailChk()
+        {
+            CharController charController = CharService.Instance.GetAbbasController(CharNames.Abbas);
+            AvailOfChar availOfChar = charController.charModel.availOfChar; 
+            if(availOfChar == AvailOfChar.UnAvailable_InParty)
+            {
+                return true;
+            }
+            return false;            
+        }
+   
         public void OnPointerClick(PointerEventData eventData)
         {
-            ShowNotifyBox();
-
+            if (isClickable)
+            {
+                ShowNotifyBox();
+                SetState();
+            }
         }
 
-    
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if (isClickable)
+                img.color = colorHL;
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            if (isClickable)
+                img.color = colorN;
+        }
+
     }
 }
 

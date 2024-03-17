@@ -57,7 +57,7 @@ namespace Common
         UnAvailable_WhereAboutsUnKnown, //is actually travelling 
         UnAvailable_Resting,
         UnAvailable_InPartyLocked, 
-        UnAvailable_PartyLeader, 
+       // UnAvailable_PartyLeader, 
     }
 
     public enum LandscapeNames

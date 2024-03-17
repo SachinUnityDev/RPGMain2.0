@@ -30,7 +30,7 @@ namespace Town
         {
             timeState = CalendarService.Instance.currtimeState;
             int day = CalendarService.Instance.dayInYear;
-            CalendarService.Instance.On_EndDayClick();
+            CalendarService.Instance.On_EndDayClick(BuildingNames.Tavern);
             FillTavernView();
             BuildingIntService.Instance.tavernController.OnEndDayInTavern();
 

@@ -7940,7 +7940,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 6065883215943615625}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.95584065
+  m_Size: 0.9558405
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -22895,7 +22895,7 @@ RectTransform:
   m_Father: {fileID: 6065883214516726636}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.044159353}
+  m_AnchorMin: {x: 0, y: 0.044159472}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0.1984, y: 26.688904}
   m_SizeDelta: {x: 12.5932, y: -59.6206}
@@ -24294,6 +24294,7 @@ GameObject:
   - component: {fileID: 6908021542261969098}
   - component: {fileID: 6908021542261969099}
   - component: {fileID: 6908021542261969103}
+  - component: {fileID: -4957807681499424218}
   m_Layer: 5
   m_Name: InvXLPanel (1)
   m_TagString: Untagged
@@ -24384,6 +24385,19 @@ MonoBehaviour:
   loreBtn: {fileID: 0}
   invBtn: {fileID: 0}
   invXLClose: {fileID: 6908021542659164161}
+--- !u!114 &-4957807681499424218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6908021542261969096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cb570f90077e014885d475abcb5eb61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objID: 
 --- !u!1 &6908021542302047372
 GameObject:
   m_ObjectHideFlags: 0
@@ -32692,9 +32706,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 13f3ffa21186e2b4a8a4b4abf7df760b, type: 2}
-  m_sharedMaterial: {fileID: -5577768806547497733, guid: 13f3ffa21186e2b4a8a4b4abf7df760b,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -118422,6 +118435,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7459391208924480077}
   - component: {fileID: 7459391208924480076}
+  - component: {fileID: 3825219157113735540}
   m_Layer: 5
   m_Name: SkillScroll
   m_TagString: Untagged
@@ -118460,6 +118474,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7459391208924480078}
   m_CullTransparentMesh: 1
+--- !u!114 &3825219157113735540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7459391208924480078}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &7459391208924849637
 GameObject:
   m_ObjectHideFlags: 0

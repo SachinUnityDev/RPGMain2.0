@@ -35,8 +35,8 @@ namespace Town
             exitBtn.onClick.AddListener(OnExitBtnPressed);
           
             silver = UnityEngine.Random.Range(5, 10);
-            displayStr = $"Wanna spend {silver} silver denari to buy everyone beer?";
-            displayTxt.text = displayStr;
+            //displayStr = $"Wanna spend {silver} silver denari to buy everyone beer?";
+            //displayTxt.text = displayStr;
         }
         public void InitBuyEveryOne(BuyDrinksTavernView buyDrinksView)
         {
@@ -45,23 +45,29 @@ namespace Town
             currDsply.InitCurrencyToggle();
             Currency availAmt = EcoServices.Instance.GetMoneyFrmCurrentPocket().DeepClone();
             TimeState timeState = CalendarService.Instance.currtimeState; 
-            if(timeState == TimeState.Day)
-            {
-                displayTxt.text = "Not many people around to buy drink to..."; 
-            }
-            else if(timeState == TimeState.Night)
-            {
-                displayTxt.text = $"Wanna spend {silver} silver denari to buy everyone beer?";
-            }
+            UpdateDsplyTxt(timeState);
             tickBtnPtrEvents.InitTickPtrEvents(this, availAmt, silver); 
             
         }
+        void UpdateDsplyTxt(TimeState timeState)
+        {
+            if (timeState == TimeState.Day)
+            {
+                displayTxt.text = "Not many people around to buy drink to...";
+            }
+            else if (timeState == TimeState.Night)
+            {
+                displayTxt.text = $"Wanna spend {silver} silver denari to buy everyone beer?";
+            }
+        }
+
         void ResetOnTimeStateChg(TimeState timeState)
         {
             if(tavernModel!= null)
             {
                 tavernModel.canOfferDrink = CanOfferDrink();
                 tickBtnPtrEvents.ChgTickState(CanOfferDrink());
+                UpdateDsplyTxt(timeState);
             }                
         }
    

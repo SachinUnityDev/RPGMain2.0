@@ -74,7 +74,7 @@ namespace Common
              
             skillDataSO =
                     SkillService.Instance.GetSkillSO(charController.charModel.charName);
-
+            if (CharBGImg == null) return;
             CharBGImg.sprite = skillDataSO.rightInvSkillPanelBG;
             scrollList.Clear();
             if(selectSkillController.allSkillModels.Count == 0) // to ctrl bug inv view 
@@ -132,10 +132,13 @@ namespace Common
 
         public void FillSkillScroll(SkillModel skillModel)
         {
+            if (skillModel == null && skillScrollTrans == null) return; 
             if(skillModel != null)
             {
-                skillScrollTrans.GetChild(0).GetComponent<TextMeshProUGUI>().text
-                                            = skillModel.skillName.ToString();
+                Transform skilltxtTrans = skillScrollTrans?.GetChild(0); 
+                TextMeshProUGUI skillTxt= skilltxtTrans?.GetComponent<TextMeshProUGUI>(); 
+                if(skillTxt != null) 
+                    skillTxt.text =  skillModel.skillName.ToString();
             }
             // get skillPerkData and Print PerkPanel 
             List<PerkData> allPerkData = selectSkillController.GetSkillPerkData(skillModel.skillName);
@@ -154,8 +157,11 @@ namespace Common
             {
                 PerkType perkType = perkData.perkType;
                 i = (int)perkType - 1;
-                perkBtnContainer.GetChild(i).gameObject.SetActive(true);    
-                perkBtnContainer.GetChild(i).GetComponent<PerkBtnPtrEvents>().Init(perkData, skillViewMain, skillModel);               
+                if(perkBtnContainer != null)
+                {
+                    perkBtnContainer.GetChild(i).gameObject.SetActive(true);
+                    perkBtnContainer.GetChild(i).GetComponent<PerkBtnPtrEvents>().Init(perkData, skillViewMain, skillModel);
+                }
             }
             if(allPerkData.Count <= 2)
             {

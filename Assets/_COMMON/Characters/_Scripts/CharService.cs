@@ -197,7 +197,7 @@ namespace Common
              CharModel charModel = charController.InitiatizeController(charSO);
 
             if (charController.charModel.charName == CharNames.Abbas)
-                On_CharAddToParty(charController); 
+                AbbasStatusUpdate(charController); 
 
             charsInPlayControllers.Add(charController);
             allyInPlayControllers.Add(charController);
@@ -219,6 +219,10 @@ namespace Common
             }
             On_CharSpawn(charController); 
             return charController; 
+        }
+        void AbbasStatusUpdate(CharController charController)
+        {
+            On_CharAddToParty(charController);            
         }
         public void On_CharSpawn(CharController charController)
         {

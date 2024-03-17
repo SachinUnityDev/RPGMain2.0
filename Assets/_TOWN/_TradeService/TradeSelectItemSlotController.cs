@@ -41,7 +41,8 @@ namespace Common
                 }
                 else
                 {
-                    iSlotable islot = itemsDragDrop.iSlotable;
+
+                    iSlotable islot = itemsDragDrop.iSlotable;                   
                     if (islot != null
                          && (islot.slotType == SlotType.TrophyScrollSlot // dropped from trade Scroll
                                                 && islot.ItemsInSlot.Count > 0))
@@ -178,7 +179,7 @@ namespace Common
             }
         }
         void AddItemOnSlot(Iitems item, bool onDrop)
-        {
+        {            
             ItemsInSlot.Add(item);
             itemCount++;
             if (onDrop)  // can only be added here by drop 

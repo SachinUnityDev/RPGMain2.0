@@ -18,7 +18,7 @@ namespace Interactables
         [SerializeField] TempTraitBtnView tempTraitBtnView; 
         public SicknessBtnView sicknessBtnView;
 
-        private void Start()
+        private void OnEnable()
         {
            Init();
             InvService.Instance.OnCharSelectInvPanel += (CharModel c) => Init();
@@ -30,6 +30,13 @@ namespace Interactables
 
         public void Init()
         {
+            posTraitView = GetComponentInChildren<PosTraitsView>();
+            negTraitsView= GetComponentInChildren<NegTraitsView>();
+            permaTraitBtnView = GetComponentInChildren<PermaTraitBtnView>();
+            tempTraitBtnView = GetComponentInChildren<TempTraitBtnView>();
+            sicknessBtnView = FindObjectOfType<SicknessBtnView>();
+
+
             tempTraitBtnView.Init(this);
             sicknessBtnView.Init(this);
             permaTraitBtnView.Init(this);     

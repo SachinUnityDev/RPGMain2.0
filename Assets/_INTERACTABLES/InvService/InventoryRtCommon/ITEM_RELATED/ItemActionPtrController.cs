@@ -77,12 +77,12 @@ namespace Interactables
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-         //   transform.parent.gameObject.SetActive(true);
-        //    isHovered = true;// this will prevent itemdragNDrop from closing it 
-          //  if(isClickable)
+            //   transform.parent.gameObject.SetActive(true);
+            //    isHovered = true;// this will prevent itemdragNDrop from closing it 
+            //  if(isClickable)
                 transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = colorHL; 
-         //   else
-              //  transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = colorUnClickable;
+             //   else
+                  //  transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = colorUnClickable;
         }
     
         public void OnPointerExit(PointerEventData eventData)

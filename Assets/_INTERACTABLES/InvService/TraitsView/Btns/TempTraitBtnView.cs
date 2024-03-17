@@ -46,32 +46,30 @@ namespace Interactables
         }
 
         public void OnUnClick()
-        {
+        {   
             img.sprite = spriteN;
-            isClicked = false;
+            if (invTraitsView.sicknessBtnView == null) return;
+            isClicked = false;            
             invTraitsView.sicknessBtnView.HideBtns();
             text.gameObject.SetActive(false);
         }
         public void OnClick()
-        {
+        {            
             img.sprite = spriteOnClick;
+            if (invTraitsView.sicknessBtnView == null) return;
             isClicked = true;
+            if(invTraitsView.sicknessBtnView)
             invTraitsView.sicknessBtnView.ShowBtns(); 
             text.gameObject.SetActive(true);
         }
 
 
-        void Start()
+        void OnEnable()
         {
             img = GetComponent<Image>();
             img.sprite = spriteN;
-
         }
 
-        private void OnDisable()
-        {
-
-
-        }
+ 
     }
 }

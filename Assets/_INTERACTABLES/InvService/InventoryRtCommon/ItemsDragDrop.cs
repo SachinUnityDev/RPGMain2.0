@@ -31,6 +31,12 @@ namespace Interactables
         [SerializeField] List<GameObject> hovered = new List<GameObject>();
         #endregion
 
+        private void OnEnable()
+        {
+            canvas = GetComponentInParent<Canvas>();
+            itemCardGO = ItemService.Instance.itemCardGO;
+        }
+
         void Start()
         {
             iSlotable = transform.parent.parent.GetComponent<iSlotable>();
@@ -41,8 +47,6 @@ namespace Interactables
             else
                 canvasGroup = gameObject.GetComponent<CanvasGroup>();
 
-            canvas = GetComponentInParent<Canvas>();
-            itemCardGO = ItemService.Instance.itemCardGO; 
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
@@ -118,9 +122,9 @@ namespace Interactables
             invXLRect.pivot = new Vector2(0.5f, 0.5f);
             invXLRect.localScale = Vector3.one;
 
-            if (iSlotable.slotType == SlotType.TradeScrollSlot)
-                PosTradeScrollSlot();
-            else if (iSlotable.slotType == SlotType.PotionActInCombat)
+            //if (iSlotable.slotType == SlotType.TradeScrollSlot)
+            //    PosTradeScrollSlot();
+             if (iSlotable.slotType == SlotType.PotionActInCombat)
                 PosItemCardInCombat();
             else
                 PosItemCardInInv();
@@ -154,26 +158,15 @@ namespace Interactables
         {
             float width = itemCardGO.GetComponent<RectTransform>().rect.width;
             float height = itemCardGO.GetComponent<RectTransform>().rect.height;
-            GameObject canvas = null;
-            if (GameService.Instance.gameModel.gameState == GameState.InTown)
-                canvas = GameObject.FindWithTag("TownCanvas");
 
             Canvas canvasObj = canvas.GetComponent<Canvas>();
             // get slot index based on slot index adjust the offset
             Transform slotTrans = transform.parent.parent;
-            if (slotTrans == null) return; 
-            int slotIndex = slotTrans.GetSiblingIndex() % 6;
+
             Vector3 offsetFinal;
-            if (slotIndex <= 2)
-            {
-                offset = new Vector3(100, 160, 0);
-                offsetFinal = (offset + new Vector3(width / 2, -height / 2, 0)) * canvasObj.scaleFactor;
-            }
-            else
-            {
-                offset = new Vector3(-100, 160, 0);
-                offsetFinal = (offset + new Vector3(-width / 2, -height / 2, 0)) * canvasObj.scaleFactor;
-            }
+
+            offset = new Vector3(150, (height / 2), 0);
+            offsetFinal = (offset) * canvasObj.scaleFactor;
 
             Vector3 pos = transform.position + offsetFinal;
 

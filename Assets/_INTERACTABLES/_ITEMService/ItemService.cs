@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using UnityEngine.SceneManagement;
 
 namespace Interactables
 {
@@ -95,6 +96,20 @@ namespace Interactables
         {
             itemFactory = gameObject.GetComponent<ItemFactory>();
         }
+        private void OnEnable()
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;
+
+        }
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+         
+        }
+
         public void Init()
         {
             itemFactory = GetComponent<ItemFactory>();
@@ -589,8 +604,8 @@ namespace Interactables
 
                 InitItemToInv(SlotType.CommonInv, ItemType.Foods, (int)FoodNames.Fish, CauseType.Items, 1);
                 InitItemToInv(SlotType.CommonInv, ItemType.Fruits, (int)FruitNames.Grape, CauseType.Items, 1);
-
-                InitItemToInv(SlotType.CommonInv, ItemType.Fruits, (int)FruitNames.Apple, CauseType.Items, 1);
+                InitItemToInv(SlotType.CommonInv, ItemType.Fruits, (int)FruitNames.Kiwi, CauseType.Items, 2);
+                InitItemToInv(SlotType.CommonInv, ItemType.Fruits, (int)FruitNames.Kiwi, CauseType.Items, 2);
                 InitItemToInv(SlotType.CommonInv, ItemType.Fruits, (int)FruitNames.Apple, CauseType.Items, 1);
                 InitItemToInv(SlotType.CommonInv, ItemType.Fruits, (int)FruitNames.Apple, CauseType.Items, 1);
                 InitItemToInv(SlotType.CommonInv, ItemType.Fruits, (int)FruitNames.Apple, CauseType.Items, 1);

@@ -36,7 +36,7 @@ namespace Interactables
             RecipeInit();
             this.itemId = itemId;
             this.maxInvStackSize = maxInvStackSize;
-            string str = $"+1 Luck for one day ";
+            string str = $"Chance to gain Luck buff ";
             Debug.Log("Rum  init" + str);
             allDisplayStr.Add(str);
         }
@@ -51,15 +51,19 @@ namespace Interactables
             this.castTime = castTime;
         }
 
-        public override void OnDrink()
+        public override string OnDrink()
         {
             // +1 morale for one day 
+            onDrinkBuffStr = "Keep Drinking..."; 
             float chance = 60f;
             charController = CharService.Instance.GetAbbasController(CharNames.Abbas);
             if (chance.GetChance())
+            {
+                onDrinkBuffStr = "+1 Luck gained for one day"; 
                 charController.buffController.ApplyBuff(CauseType.Items, (int)itemName, charController.charModel.charID
                 , AttribName.luck, 1, TimeFrame.EndOfDay, 1, true);
-
+            }
+            return onDrinkBuffStr;
         }
     }
 }

@@ -39,21 +39,26 @@ namespace Interactables
             RecipeInit();
             this.itemId = itemId;
             this.maxInvStackSize = maxInvStackSize;
-            string str = $"+1 Focus for one day ";
-            Debug.Log("Cider init" + str);
+            string str = $"Chance to gain Focus buff";
             allDisplayStr.Add(str);
         }
         public void OnHoverItem()
         {
         }
 
-        public override void OnDrink()
+        public override string OnDrink()
         {
+            onDrinkBuffStr = "Keep Drinking..."; 
             float chance = 36f;
             charController = CharService.Instance.GetAbbasController(CharNames.Abbas);
             if (chance.GetChance())
+            {
                 charController.buffController.ApplyBuff(CauseType.Items, (int)itemName, charController.charModel.charID
                     , AttribName.focus, 1, TimeFrame.EndOfDay, 1, true);
+                onDrinkBuffStr = "+1 Focus gained for one day"; 
+            }
+            return onDrinkBuffStr; 
+
         }
     }
 }

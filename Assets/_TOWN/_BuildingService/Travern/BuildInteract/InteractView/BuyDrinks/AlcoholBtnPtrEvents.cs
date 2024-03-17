@@ -16,6 +16,7 @@ namespace Common
         [Header("TBR")]
         [SerializeField] TextMeshProUGUI buffTxt;
         [SerializeField] int MAX_DRINK_PER_TIMESTATE = 6;
+        [SerializeField] TextMeshProUGUI onDrinkBuffTxt;
 
         Iitems item; // ref to buydrinksView
         
@@ -113,9 +114,16 @@ namespace Common
 
             AlcoholBase alcoholBase = item as AlcoholBase;
             alcoholBase.charController= abbasCharController;
-            alcoholBase.OnDrink();
-            
+            string str=  alcoholBase.OnDrink();
+            onDrinkBuffTxt.text= str;
 
+            Sequence seq = DOTween.Sequence();
+            seq
+               .AppendCallback(() => onDrinkBuffTxt.GetComponent<TextRevealer>().Reveal())
+               .AppendInterval(2.0f)
+               .AppendCallback(() => onDrinkBuffTxt.GetComponent<TextRevealer>().Unreveal())
+               ; 
+             seq.Play();
 
             if (alcoholName == AlcoholNames.Beer)
             { 

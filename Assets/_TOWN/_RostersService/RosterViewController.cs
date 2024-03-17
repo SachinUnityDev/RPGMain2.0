@@ -17,7 +17,7 @@ namespace Common
         [SerializeField] Button closeBtn; 
         [SerializeField] GameObject charScrollGO;
         public GameObject CharPortraitGO;
-      
+        [SerializeField] ToggleRosterLockDisbandBtn toggleRosterLockDisbandBtn; 
 
         [Header("Btm Char List")]
         [SerializeField] Transform btmCharTrans;
@@ -207,6 +207,7 @@ namespace Common
             unLockedChars.Clear();
             unLockedChars = RosterService.Instance.rosterController.GetCharUnlockedWithStatusUpdated(); 
             PopulateCharScroll();
+            toggleRosterLockDisbandBtn.Init(this); 
         }
 
         public void UnLoad()

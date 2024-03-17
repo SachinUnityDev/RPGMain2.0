@@ -11,9 +11,10 @@ namespace Interactables
         public abstract AlcoholNames alcoholName { get; }
 
         public CharController charController; 
-        public abstract void OnDrink();
+        public abstract string OnDrink();
 
         public List<string> allDisplayStr = new List<string>();
+        public string onDrinkBuffStr; 
 
     }
 }

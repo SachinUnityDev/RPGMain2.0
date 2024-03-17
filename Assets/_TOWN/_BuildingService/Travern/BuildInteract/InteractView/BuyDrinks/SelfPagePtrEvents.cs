@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using Common;
 using DG.Tweening;
+using TMPro;
 
 namespace Town
 {
@@ -14,7 +15,7 @@ namespace Town
         [SerializeField] Transform beerTrans;
         [SerializeField] Transform ciderTrans;
         [SerializeField] Button exitBtn;
-        public DisplayCurrencyWithToggle currDsply; 
+        public DisplayCurrencyWithToggle currDsply;
 
         [Header("Global Var")]
         [SerializeField] BuyDrinksTavernView buyDrinksView;

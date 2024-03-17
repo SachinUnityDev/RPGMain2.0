@@ -1,6 +1,6 @@
 using Common;
 using Interactables;
-using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -34,14 +34,17 @@ namespace Town
         [SerializeField] Image charImg;
         [SerializeField] TextMeshProUGUI nameTxt;
 
-        //[Header("Money requrired")]
-        //[SerializeField] Transform currTrans; 
+ 
 
         [Header("Global var")]
         public List<TempTraitBuffData> posMentalTraits= new List<TempTraitBuffData>();
         public List<TempTraitBuffData> negMentalTraits = new List<TempTraitBuffData>();
 
-        TempTraitController tempTraitController;         
+        TempTraitController tempTraitController;
+
+        [Header("List of Avail char")]
+        List<CharController> availChars = new List<CharController>();
+
         private void Start()
         {
             leftBtn.onClick.AddListener(OnLeftBtnPressed);
@@ -53,7 +56,7 @@ namespace Town
             if (Time.time - prevLeftClick < 0.3f) return;
             if (index == 0)
             {
-                index = CharService.Instance.allCharModels.Count - 1;
+                index = availChars.Count - 1;
                 FillCharTraits();
             }
             else if (index > 0)
@@ -65,7 +68,7 @@ namespace Town
         void OnRightBtnPressed()
         {
             if (Time.time - prevRightClick < 0.3f) return;
-            if (index == CharService.Instance.allCharModels.Count - 1)
+            if (index == availChars.Count - 1)
             {
                 index = 0;
                 FillCharTraits();
@@ -87,11 +90,28 @@ namespace Town
         }
         public void FillCharTraits()
         {
-             charSelect = CharService.Instance.allCharModels[index].charName;
+            availChars.Clear();
+            availChars = CharService.Instance.allyInPlayControllers.Where(t => t.charModel.availOfChar == AvailOfChar.Available ||
+                                   t.charModel.availOfChar == AvailOfChar.UnAvailable_Fame ||
+                                   t.charModel.availOfChar == AvailOfChar.UnAvailable_InParty ||
+                                   t.charModel.availOfChar == AvailOfChar.UnAvailable_Prereq ||
+                                   t.charModel.availOfChar == AvailOfChar.UnAvailable_Resting
+                                   ).ToList();
+            if (availChars.Count == 0)
+            {                
+                return;
+            }
+
+            if (index >= availChars.Count)
+            {
+                index = 0;
+            }
+
+            charSelect = availChars[index].charModel.charName;
             BuildingIntService.Instance.selectChar = charSelect;
 
-            CharController charController = CharService.Instance.GetAbbasController(charSelect);
-          
+            CharController charController = availChars[index];
+
             tempTraitController = charController.GetComponent<TempTraitController>();
          
             FillStashMoney();

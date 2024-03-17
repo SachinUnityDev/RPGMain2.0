@@ -327,7 +327,7 @@ namespace Interactables
             CharController charController = InvService.Instance.charSelectController;
             int charID = charController.charModel.charID;
 
-            ActiveInvData activeInvData = allActiveInvData.Find(t => t.CharID == charID);
+            ActiveInvData activeInvData = GetActiveInvData(charID);
             if (activeInvData != null)
             {
                 activeInvData.potionActiveInv[slotID] = item; 

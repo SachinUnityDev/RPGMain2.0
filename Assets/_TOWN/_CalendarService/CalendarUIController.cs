@@ -13,7 +13,7 @@ using DG.Tweening.Core;
 namespace Common
 {
     public class CalendarUIController : MonoBehaviour
-    {
+        {
         [SerializeField] GameObject townCenterPanel;
 
         public GameObject famePanel;
@@ -33,13 +33,7 @@ namespace Common
         [SerializeField] string dayTip = ""; 
         [SerializeField] string nightTip = "";
 
-        void Awake()
-         {
-            //START OF THE GAME
-           //if() 
-           // GetMonthStartDay(MonthName.WingOfTheLocust, DayName.DayOfLight);
-           
-        }
+  
        
         public void Init()
         {
@@ -50,21 +44,20 @@ namespace Common
             weekPanel = FindObjectOfType<WeekView>(true).gameObject;
             townCenterPanel = FindObjectOfType<TownCenterView>(true).gameObject;
 
-
-
             townCenterPanel.SetActive(true);
             allPanels.Clear();
             allPanels.AddRange(new List<GameObject>(){ famePanel, monthPanel, weekPanel, dayPanel });
             CloseAllPanel();
-            showMonthBtn.onClick.RemoveAllListeners();// prevent double subscriptions
-            showWeekBtn.onClick.RemoveAllListeners();   
-            showMonthBtn.onClick.AddListener(OnShowMonthBtnPressed);
-            showWeekBtn.onClick.AddListener(OnShowWeekBtnPressed);
+ 
 
         }
         private void OnEnable()
         {           
             SceneManager.sceneLoaded += OnSceneLoaded;
+            showMonthBtn.onClick.RemoveAllListeners();// prevent double subscriptions
+            showWeekBtn.onClick.RemoveAllListeners();
+            showMonthBtn.onClick.AddListener(OnShowMonthBtnPressed);
+            showWeekBtn.onClick.AddListener(OnShowWeekBtnPressed);
         }
         private void OnDisable()
         {
@@ -85,11 +78,11 @@ namespace Common
         void OnShowWeekBtnPressed()
         {
             UpdateWeekPanel(CalendarService.Instance.currentWeek);
-            OnPanelEnter(weekPanel, PanelInScene.Week);
+            OnPanelEnter(weekPanel, PanelInScene.Week);                            
         }
         void OnShowMonthBtnPressed()
         {   
-            OnPanelEnter(monthPanel, PanelInScene.Month);
+             OnPanelEnter(monthPanel, PanelInScene.Month);
         }
         public void OnTownBannerClicked()
         {         

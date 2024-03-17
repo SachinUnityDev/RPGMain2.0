@@ -78,6 +78,7 @@ namespace Town
                         int index = UnityEngine.Random.Range(0, count);
                         displayStr = allBuildSO.allTipStrs[index];
                         tipBtnImg.sprite = allBuildSO.OnUnTipable;
+                        //tipState = TipState.UnTipable;
                     }
                     else
                     {

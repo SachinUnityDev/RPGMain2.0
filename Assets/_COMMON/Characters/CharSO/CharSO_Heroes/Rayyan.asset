@@ -34,7 +34,7 @@ MonoBehaviour:
   charLvl: 1
   charNameStr: Rayyan
   availOfChar: 1
-  stateOfChar: 1
+  stateOfChar: 2
   fameBehavior: 4
   baseCharLoc: 1
   currLoc: 1

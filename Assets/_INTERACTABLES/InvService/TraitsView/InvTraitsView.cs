@@ -30,11 +30,11 @@ namespace Interactables
 
         public void Init()
         {
-            posTraitView = GetComponentInChildren<PosTraitsView>();
-            negTraitsView= GetComponentInChildren<NegTraitsView>();
-            permaTraitBtnView = GetComponentInChildren<PermaTraitBtnView>();
-            tempTraitBtnView = GetComponentInChildren<TempTraitBtnView>();
-            sicknessBtnView = FindObjectOfType<SicknessBtnView>();
+            //posTraitView = GetComponentInChildren<PosTraitsView>();
+            //negTraitsView= GetComponentInChildren<NegTraitsView>();
+            //permaTraitBtnView = GetComponentInChildren<PermaTraitBtnView>();
+            //tempTraitBtnView = GetComponentInChildren<TempTraitBtnView>();
+            //sicknessBtnView = FindObjectOfType<SicknessBtnView>();
 
 
             tempTraitBtnView.Init(this);

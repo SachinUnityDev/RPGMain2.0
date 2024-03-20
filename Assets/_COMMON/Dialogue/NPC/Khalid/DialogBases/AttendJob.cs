@@ -26,9 +26,9 @@ namespace Common
         public void OnDialogueEnd()
         {
             Sequence seq = DOTween.Sequence();
-            seq.AppendCallback(() => QuestMissionService.Instance.On_QuestEnd(QuestNames.LostMemory))
+            seq.AppendCallback(() => QuestMissionService.Instance.On_ObjEnd(QuestNames.LostMemory, ObjNames.AttendToJob)) 
                .AppendInterval(4f)
-               .AppendCallback(()=> QuestMissionService.Instance.On_QuestStart(QuestNames.ThePowerWithin))
+               .AppendCallback(() => QuestMissionService.Instance.On_QuestStart(QuestNames.ThePowerWithin))
                .AppendInterval(4f)
                .AppendCallback(() => ShowWelcomeBoxN(QuestNames.LostMemory))
                 ;
@@ -37,7 +37,7 @@ namespace Common
         }
         void ShowWelcomeBoxN(QuestNames questName)
         {
-            WelcomeService.Instance.InitWelcomeComplete();            
+            WelcomeService.Instance.InitWelcomeComplete();
         }
     }
 }

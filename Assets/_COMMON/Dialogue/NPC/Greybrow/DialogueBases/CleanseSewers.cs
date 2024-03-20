@@ -20,7 +20,7 @@ namespace Common
 
         public void OnDialogueEnd()
         {
-            
+            CharService.Instance.UnLockChar(CharNames.Cahyo);
         }
     }
 }

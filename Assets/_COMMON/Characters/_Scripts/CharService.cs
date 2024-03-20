@@ -127,10 +127,12 @@ namespace Common
         public List<CharController> GetAllAvailChars()
         {
             List<CharController> availChars = new List<CharController>();
-            availChars = allyInPlayControllers.Where(t=>t.charModel.availOfChar == AvailOfChar.Available ||
+            availChars = allyInPlayControllers.Where(t=>(t.charModel.availOfChar == AvailOfChar.Available ||
                                    t.charModel.availOfChar == AvailOfChar.UnAvailable_Fame  ||
                                    t.charModel.availOfChar == AvailOfChar.UnAvailable_InParty ||
-                                   t.charModel.availOfChar == AvailOfChar.UnAvailable_Prereq).ToList();
+                                   t.charModel.availOfChar == AvailOfChar.UnAvailable_Prereq) 
+                                    && t.charModel.stateOfChar == StateOfChar.UnLocked
+                                   ).ToList();
             return availChars;
         }
         public CharController GetCharCtrlWithCharID(int  _charID)
@@ -220,6 +222,14 @@ namespace Common
             On_CharSpawn(charController); 
             return charController; 
         }
+
+        public void UnLockChar(CharNames charName)
+        {
+            CharController charController  = allyInPlayControllers.Find(t=>t.charModel.charName == charName);
+            charController.charModel.stateOfChar = StateOfChar.UnLocked;
+            RosterService.Instance.rosterController.GetCharUnlockedWithStatusUpdated(); // updates the availofChar
+        }
+
         void AbbasStatusUpdate(CharController charController)
         {
             On_CharAddToParty(charController);            

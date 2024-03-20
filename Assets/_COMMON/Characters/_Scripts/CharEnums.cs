@@ -55,6 +55,7 @@ public enum CauseType
     StatMinMaxLimit,
     PassiveSkillName, 
     ActionsPts, 
+
     
 }
 

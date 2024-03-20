@@ -15,7 +15,6 @@ namespace Town
         public SeqBarkView seqBarkView;
         SeqBarkNames seqBarkName;
 
-
         void Start()
         {
             seqBarkView.gameObject.SetActive(false);
@@ -87,12 +86,5 @@ namespace Town
             }
         }
 
-        private void Update()
-        {
-            //if(Input.GetKeyDown(KeyCode.S))
-            //{
-            //    ShowSeqbark(SeqBarkNames.KhalidHouse);
-            //}
-        }
     }
 }

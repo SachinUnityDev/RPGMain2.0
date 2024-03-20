@@ -20,6 +20,10 @@ namespace Quest
            objNameStr = objSO.objNameStr;         
            objState = objSO.objState; 
         }
+        public void OnObjStart()
+        {
+            objState = QuestState.UnLocked; 
+        }
         public void OnObjCompleted()
         {
             objState = QuestState.Completed; 

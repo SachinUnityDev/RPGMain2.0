@@ -2,6 +2,7 @@ using Common;
 using Interactables;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -44,8 +45,10 @@ namespace Town
         [SerializeField] float prevLeftClick;
         [SerializeField] float prevRightClick;
 
-
-
+        [Header("List of Avail char")]
+        List<CharController> availChars = new List<CharController>();
+        [Header("Fortify Cost")]
+        [SerializeField] Currency fortifyCost; 
         private void Start()
         {
             leftBtn.onClick.AddListener(OnLeftBtnPressed);
@@ -82,18 +85,48 @@ namespace Town
             }
             prevRightClick = Time.time;
         }
+        void ToggleDsply(bool isNotEmpty)
+        {
 
+            
+        }
         public void FillCharPlanks()
         {
-           int  selectCharID = CharService.Instance.allCharModels[index].charID;
-            CharController charController = CharService.Instance.GetCharCtrlWithCharID(selectCharID);
+            availChars.Clear();
+            availChars = CharService.Instance.allyInPlayControllers.Where(t => (t.charModel.availOfChar == AvailOfChar.Available ||
+                                   t.charModel.availOfChar == AvailOfChar.UnAvailable_InParty ||
+                                   t.charModel.availOfChar == AvailOfChar.UnAvailable_Prereq)
+                                   && t.charModel.charLvl > 1 && t.charModel.stateOfChar == StateOfChar.UnLocked
+                                   ).ToList();
+
+            if (availChars.Count == 0)
+            {
+                ToggleDsply(false);
+                return;
+            }
+            else
+            {
+                ToggleDsply(true);
+            }
+
+            if (index >= availChars.Count)
+            {
+                index = 0;
+            }
+
+
+            int  selectCharID = availChars[index].charModel.charID;
+            CharController charController = availChars[index]; 
             BuildingIntService.Instance.selectChar = charController.charModel.charName;
 
             ArmorController armorController = charController.armorController;
             ArmorModel armorModel = armorController.armorModel;
 
+            LocationName locName = TownService.Instance.townModel.currTown;
+             fortifyCost = armorModel.GetFortifyCost(locName).DeepClone(); // get build upgrading
+          
             centerTrans.GetComponent<FortifyViewCenter>().InitFortifyPanel(charController, armorModel, this);
-            statusBtn.GetComponent<FortifyBtnPtrEvents>().InitFortifyBtn(charController, armorModel, this);
+            statusBtn.GetComponent<FortifyBtnPtrEvents>().InitFortifyBtn(fortifyCost, charController, armorModel, this);
 
             currTrans.GetComponent<DisplayCurrencyWithToggle>().InitCurrencyToggle();
             statustxt.text = armorModel.armorState.ToString();
@@ -136,6 +169,8 @@ namespace Town
         public void OnFortifyBtnPressed(CharController charController,ArmorModel armorModel)
         {
             ArmorService.Instance.OnArmorFortifyPressed(charController, armorModel);
+            EcoServices.Instance.DebitMoneyFrmCurrentPocket(fortifyCost);
+
             FillCharPlanks();
         }
         public void Init()

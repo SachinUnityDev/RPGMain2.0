@@ -11,9 +11,12 @@ namespace Town
 {
     public class ClearmindView : MonoBehaviour, IPanel
     {
+        [Header("TBR")]
         [SerializeField] Transform posTraitTrans;
         [SerializeField] Transform negTraitTrans;
-        [SerializeField] TextMeshProUGUI clearMindtxt; 
+        [SerializeField] TextMeshProUGUI clearMindtxt;
+        [SerializeField] TextMeshProUGUI lvlTxt;
+        [SerializeField] TextMeshProUGUI lsEmptyTxt; 
 
         [SerializeField] Transform charLvl;
     
@@ -31,6 +34,7 @@ namespace Town
         [SerializeField] int index;
         [SerializeField] float prevLeftClick;
         [SerializeField] float prevRightClick;
+        [SerializeField] float prevCMClick; 
         [SerializeField] Image charImg;
         [SerializeField] TextMeshProUGUI nameTxt;
 
@@ -85,21 +89,47 @@ namespace Town
         }
         public void OnClearMindPressed()
         {
-            GetMentalTraits();
-            FillMentalTraits();          
+            if(Time.time - prevCMClick > 0.3f)
+            {
+                GetMentalTraits();
+                FillMentalTraits();
+                FilllvlTxt();
+            }
         }
+
+       void ToggleDsply(bool isNotEmpty)
+        {            
+            posTraitTrans.gameObject.SetActive(isNotEmpty);
+            negTraitTrans.gameObject.SetActive(isNotEmpty);
+            clearMindtxt.gameObject.SetActive(isNotEmpty); 
+            lvlTxt.gameObject.SetActive(isNotEmpty);            
+            leftBtn.gameObject.SetActive(isNotEmpty);
+            rightBtn.gameObject.SetActive(isNotEmpty);
+            closeBtn.gameObject.SetActive(isNotEmpty);
+            clearMindBtn.gameObject.SetActive(isNotEmpty);                
+            charImg.gameObject.SetActive(isNotEmpty);
+            nameTxt.gameObject.SetActive(isNotEmpty);
+            lsEmptyTxt.gameObject.SetActive(!isNotEmpty);
+           
+        }
+
         public void FillCharTraits()
         {
             availChars.Clear();
-            availChars = CharService.Instance.allyInPlayControllers.Where(t => t.charModel.availOfChar == AvailOfChar.Available ||
-                                   t.charModel.availOfChar == AvailOfChar.UnAvailable_Fame ||
+            availChars = CharService.Instance.allyInPlayControllers.Where(t => (t.charModel.availOfChar == AvailOfChar.Available ||                                  
                                    t.charModel.availOfChar == AvailOfChar.UnAvailable_InParty ||
-                                   t.charModel.availOfChar == AvailOfChar.UnAvailable_Prereq ||
-                                   t.charModel.availOfChar == AvailOfChar.UnAvailable_Resting
+                                   t.charModel.availOfChar == AvailOfChar.UnAvailable_Prereq) 
+                                   && t.charModel.charLvl > 1 && t.charModel.stateOfChar == StateOfChar.UnLocked
                                    ).ToList();
+
             if (availChars.Count == 0)
-            {                
+            {
+                ToggleDsply(false);
                 return;
+            }
+            else
+            {
+                ToggleDsply(true);
             }
 
             if (index >= availChars.Count)
@@ -126,7 +156,14 @@ namespace Town
         {
             CharacterSO charSO = CharService.Instance.allCharSO.GetAllySO(charSelect);
             charImg.sprite = charSO.charSprite;
-            nameTxt.text = charSO.charNameStr; 
+            nameTxt.text = charSO.charNameStr;
+            FilllvlTxt(); 
+        }
+        void FilllvlTxt()
+        {
+            CharController charController = availChars[index];
+            int currentLvl = charController.charModel.charLvl;
+            lvlTxt.text = $"Level{currentLvl} -> Level{currentLvl-1}"; 
         }
         void GetMentalTraits()
         {
@@ -178,24 +215,41 @@ namespace Town
                     negTraitTrans.GetChild(i).gameObject.SetActive(false);
                 }
             }
-            if(negMentalTraits.Count ==0 && posMentalTraits.Count == 0)
-            {
+            if (negMentalTraits.Count == 0 && posMentalTraits.Count == 0)
                 clearMindtxt.gameObject.SetActive(true);
-                clearMindBtn.GetComponent<ClearmindBtnPtrEvents>().SetState(false);
+            else
+                clearMindtxt.gameObject.SetActive(false);
+
+            if (negMentalTraits.Count ==0 && posMentalTraits.Count == 0)
+            {
+                if(ChklvlAboveOne())
+                clearMindBtn.GetComponent<ClearmindBtnPtrEvents>().SetState(true);
             }
             else
             {
-                clearMindtxt.gameObject.SetActive(false);
-                clearMindBtn.GetComponent<ClearmindBtnPtrEvents>().SetState(true);
+                if (tempTraitController.HasTempTrait(TempTraitName.FastLearner))
+                    clearMindBtn.GetComponent<ClearmindBtnPtrEvents>().SetState(false);
+                else
+                    clearMindBtn.GetComponent<ClearmindBtnPtrEvents>().SetState(true);
             }
+        }
+
+        bool ChklvlAboveOne()
+        {
+            CharController charController = availChars[index];
+            if(charController.charModel.charLvl == 1)
+            {
+                availChars.RemoveAt(index);
+                FillCharTraits();
+                return false; 
+            }
+            return true; 
         }
         void FillStashMoney()
         {
             LvlNExpSO lvlExpSO = CharService.Instance.lvlNExpSO;
             Currency amtReq = lvlExpSO
                     .ClearMindMoneyNeeded(tempTraitController.charController.charModel.charLvl);
-
-           // currTrans.GetChild(0).GetComponent<DisplayCurrency>().Display(amtReq);
         }
         public void Init()
         {

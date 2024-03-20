@@ -52,7 +52,7 @@ namespace Interactables
         // Abbas 3 X 6,  each added Companion has 2X6 (Locked)(Town, QuestPrepPhase, in camp, in MapInteraction)
         //public List<Iitems> persCommInvItems = new List<Iitems>(); 
         public int commonInvCount = 0;
-        public List<Iitems> stashInvIntItems = new List<Iitems>();
+        public List<Iitems> stashInvItems = new List<Iitems>();
         // 6 X 6 behaves like a common Inventory (Open Town/House) 
         public int stashInvCount = 0;   
         public List<Iitems> excessInvItems = new List<Iitems>();
@@ -264,7 +264,7 @@ namespace Interactables
         public List<Iitems> GetAllItemsInStashofType(ItemType itemType)
         {
             List<Iitems> allItems = new List<Iitems>();
-            allItems = stashInvIntItems.Where(t => t.itemType == itemType).ToList();
+            allItems = stashInvItems.Where(t => t.itemType == itemType).ToList();
             if (allItems.Count > 0)
             {
                 return allItems;
@@ -275,7 +275,7 @@ namespace Interactables
         public List<Iitems> GetItemsFrmStashInv(ItemType itemType)
         {
             List<Iitems> allItems = new List<Iitems>();
-            allItems = stashInvIntItems.Where(t => t.itemType == itemType).ToList();
+            allItems = stashInvItems.Where(t => t.itemType == itemType).ToList();
             return allItems;
         }
 
@@ -284,7 +284,7 @@ namespace Interactables
             if (InvService.Instance.stashInvViewController.AddItem2InVView(item, false)) // adds to model 
             {
                 item.invSlotType = SlotType.StashInv;
-                stashInvIntItems.Add(item);                
+                stashInvItems.Add(item);                
                 stashInvCount++;
                 return true;
             }
@@ -297,14 +297,30 @@ namespace Interactables
 
         public bool RemoveItemFrmStashInv(Iitems item) // view=> model 
         {
-            stashInvIntItems.Remove(item);
+            stashInvItems.Remove(item);
             return true;
         }
+        public bool RemoveItemFrmStashInv(ItemData itemData)
+        {
+            foreach (Iitems item in stashInvItems.ToList())
+            {
+                GenGewgawBase gbase = item as GenGewgawBase;
+                if (gbase != null && item.itemName == itemData.itemName && item.itemType == itemData.itemType)
+                {
+                    return RemoveItemFrmStashInv(item);
 
+                }
+                else if (item.itemName == itemData.itemName && item.itemType == itemData.itemType)
+                {
+                    return RemoveItemFrmStashInv(item);
+                }
+            }
+            return false;
+        }
         public int GetItemNosInStashInv(ItemData itemData)
         {
            // stash inv Items
-            int quantity = stashInvIntItems.Count(t => t.itemName == itemData.itemName && t.itemType == itemData.itemType);
+            int quantity = stashInvItems.Count(t => t.itemName == itemData.itemName && t.itemType == itemData.itemType);
             return quantity;
         }
         #endregion

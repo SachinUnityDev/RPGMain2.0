@@ -1,3 +1,4 @@
+using Quest;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -49,6 +50,8 @@ namespace Common
         public void OnDialogueEnd()
         {
             Debug.Log("DIALOGUES END");
+            QuestMissionService.Instance.On_ObjEnd(QuestNames.LostMemory, ObjNames.TalkToKhalid);
+            
 
             WelcomeService.Instance.welcomeView.RevealWelcomeTxt("End Day by clicking the button on bottom right");
             BuildingIntService.Instance.houseController.UnLockBuildIntType(BuildInteractType.EndDay, true);

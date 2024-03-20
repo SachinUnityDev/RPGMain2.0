@@ -16,6 +16,7 @@ namespace Interactables
             weaponModel = new WeaponModel(WeaponService.Instance.allWeaponSO
                             .GetWeaponSO(charController.charModel.charName)); 
         }
+
         public bool IsGemEnchantable(GemNames gemName)
         {
            GemNames charGemName = weaponModel.gemName; 

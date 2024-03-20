@@ -85,7 +85,20 @@ namespace Quest
                 return null; 
             }
         }
-
+        public QuestModel ChgStateOfQuest(QuestNames questName, QuestState questState)
+        {
+            int index = allQuestModels.FindIndex(t => t.questName == questName);
+            if (index != -1)
+            {
+                allQuestModels[index].questState= questState;
+                return allQuestModels[index];
+            }
+            else
+            {
+                Debug.Log("Quest model not found" + questName);
+            }
+            return null;
+        }
         public QuestModel GetQuestModel(QuestNames questName)
         {
             int index = allQuestModels.FindIndex(t=>t.questName == questName);
@@ -186,11 +199,9 @@ namespace Quest
 
         public void On_QuestStart(QuestNames questName)
         {   
-            questController.questModel = GetQuestModel(questName);          
-            ObjModel objModel = questController.questModel.allObjModel[0];
-            objModel.objState = QuestState.UnLocked; 
-            questController.objModel = objModel; 
-            On_ObjStart(questName, questController.objModel.objName);
+            questController.questModel = ChgStateOfQuest(questName, QuestState.UnLocked);
+            ObjModel objModel  = questController.questModel.allObjModel[0];     ;
+            On_ObjStart(questName, objModel.objName);
             OnQuestStart?.Invoke(questName);
         }
         public void On_QuestEnd(QuestNames questNames)
@@ -205,15 +216,19 @@ namespace Quest
         public void On_ObjStart(QuestNames questName, ObjNames objName)
         {       
             ObjModel objModel = questController.questModel.GetObjModel(objName);
-            
+            objModel.OnObjStart(); 
             questController.objModel = objModel;
+            if(MapService.Instance.pathController.HasPath(questName, objName)) // if obj has path as ? in map it unlocks here
+            {
+                MapService.Instance.pathController.On_PathUnLock(questName, objName);
+            }
             OnObjStart?.Invoke(questName, objName);
         }
         public void On_ObjEnd(QuestNames  questName, ObjNames objName)
         {
             ObjModel objModel = questController.questModel.GetObjModel(objName);
             objModel.OnObjCompleted();
-
+            questController.Move2NextObj(objModel); // seq thru all obj and mark end of QUEST in case it's the last Obj
             OnObjEnd?.Invoke(questName, objName);
         }
 

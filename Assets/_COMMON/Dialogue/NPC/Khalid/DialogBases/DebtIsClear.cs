@@ -30,7 +30,7 @@ namespace Common
             BuildingIntService.Instance.OnBuildUnload -= StartJob;
             BuildingIntService.Instance.OnBuildUnload += StartJob;
             BuildingIntService.Instance.ChgNPCState(BuildingNames.Tavern, NPCNames.Tahir, NPCState.Locked, false);
-            QuestMissionService.Instance.On_ObjStart(QuestNames.LostMemory, ObjNames.AttendToJob);
+            QuestMissionService.Instance.On_ObjEnd(QuestNames.LostMemory, ObjNames.GoBackToKhalid);
             WelcomeService.Instance.welcomeView.RevealWelcomeTxt("End Day by clicking the button on bottom right");
         }
 

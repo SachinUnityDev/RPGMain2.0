@@ -22,7 +22,7 @@ namespace Town
         public bool isWelcomeRun = false;
         public bool isQuickStart = false; 
         [SerializeField] int welcomeStartDay;
-
+        [SerializeField] int welcomeSeqEndDay; 
         private void OnEnable()
         {
             SceneManager.sceneLoaded += OnSceneLoad;
@@ -50,7 +50,7 @@ namespace Town
             welcomeController = GetComponent<WelcomeController>();
             cornerBtns = GameObject.FindGameObjectWithTag("TownBtns");
             cornerBtns.SetActive(false);
-          //  welcomeStartDay = CalendarService.Instance.dayInGame;
+            welcomeStartDay = CalendarService.Instance.dayInYear; 
             welcomeView.InitWelcomeView();           
         }
         public void InitWelcomeComplete()
@@ -58,6 +58,7 @@ namespace Town
            
             isWelcomeRun = false;
             welcomeController = GetComponent<WelcomeController>();
+            welcomeSeqEndDay = CalendarService.Instance.dayInYear;
 
             // town btns unlocked
             cornerBtns = GameObject.FindGameObjectWithTag("TownBtns");
@@ -76,7 +77,6 @@ namespace Town
 
             CalendarService.Instance.OnStartOfCalDate -= GoVisitTemple2dayGap;
             CalendarService.Instance.OnStartOfCalDate += GoVisitTemple2dayGap;
-
 
             //            Interactions unlocked:
             //House
@@ -99,7 +99,7 @@ namespace Town
 
         void GoVisitTemple2dayGap(CalDate calDate)
         {
-            if(calDate.day >= 28)
+            if(calDate.day > welcomeSeqEndDay+2)
             {
                 BuildingIntService.Instance
                     .UnLockDiaInBuildNPC(BuildingNames.House, NPCNames.Khalid, DialogueNames.GoVisitTemple, true);

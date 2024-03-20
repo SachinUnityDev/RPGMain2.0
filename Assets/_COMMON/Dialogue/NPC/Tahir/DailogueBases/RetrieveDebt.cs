@@ -18,13 +18,13 @@ namespace Common
 
         public void ApplyInteraction(int interactionNum, float value)
         {
-        
+            
         }
 
         public void OnDialogueEnd()
         {
             BuildingIntService.Instance.UnLockDiaInBuildNPC(BuildingNames.House, NPCNames.Khalid, DialogueNames.DebtIsClear, true);
-            QuestMissionService.Instance.On_ObjStart(QuestNames.LostMemory, ObjNames.GoBackToKhalid);
+            QuestMissionService.Instance.On_ObjEnd(QuestNames.LostMemory, ObjNames.RetrieveTheDebt); 
         }
     }
 }

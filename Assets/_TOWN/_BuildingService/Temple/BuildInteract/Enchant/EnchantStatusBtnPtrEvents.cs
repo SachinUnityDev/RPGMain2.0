@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Interactables;
 using System.Collections;
 using System.Collections.Generic;
@@ -34,11 +35,14 @@ namespace Common
         [SerializeField] WeaponModel weaponModel;
         [SerializeField] Currency rechargeCost;
 
+        [SerializeField] TextMeshProUGUI statusDsplyText;
+        [SerializeField] bool hasGem; 
+
         private void Awake()
         {
             btnImg = transform.GetChild(0).GetComponent<Image>();
             weaponStateTxt = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-            rechargeCostTrans = transform.GetChild(2); 
+            rechargeCostTrans = transform.GetChild(3); 
             rechargeCostTxt =  rechargeCostTrans.GetChild(0).GetComponent<TextMeshProUGUI>();
         }
      
@@ -54,6 +58,7 @@ namespace Common
             btnImg.sprite = weaponStateImgNColor.stateImg;
             weaponStateTxt.text = weaponState.ToString();
             weaponStateTxt.color = weaponStateImgNColor.stateColor;
+            statusDsplyText.gameObject.SetActive(false);
 
             FillRechargeCost(); 
         }
@@ -66,7 +71,7 @@ namespace Common
                 rechargeCost = new Currency(0, 0);
             }else if (weaponState == WeaponState.Identified)
             {
-                rechargeCostTxt.text = "Enchanted Cost";
+                rechargeCostTxt.text = "Enchantment Cost";
                 rechargeCost = WeaponService.Instance.allWeaponSO.enchantValue.DeepClone();
             }
             else if (weaponState == WeaponState.Rechargeable)
@@ -90,41 +95,88 @@ namespace Common
             switch (weaponState)
             {
                 case WeaponState.Unenchantable:
+                    statusDsplyText.text = $"{charName} has no magic tendency"; 
+                    
                     return; 
                 case WeaponState.Unidentified:
                     if(currency >= rechargeCost.BronzifyCurrency())
                     {
+                        statusDsplyText.text = $"Now you can Enchant the weapon";
                         weaponModel.weaponState = WeaponState.Identified;
                         enchantView.FillCharPlanks(); // check stack overflow here               
+                    }
+                    else
+                    {
+                        statusDsplyText.text = $"Not enough money";
                     }
                     break;
                 case WeaponState.Identified:
                     if (currency > rechargeCost.BronzifyCurrency())
                     {
+                        weaponModel.SetRechargeValue();
                         weaponModel.weaponState = WeaponState.Enchanted;
                         EcoServices.Instance.DebitMoneyFrmCurrentPocket(rechargeCost);
                         enchantView.FillCharPlanks();
+                        statusDsplyText.text = $"Weapon Enchanted with {weaponModel.gemName}";
+                    }
+                    else
+                    {
+                        statusDsplyText.text = $"Not enough money";
                     }
                     break;
                 case WeaponState.Enchanted:
                     break;
                     
                 case WeaponState.Rechargeable:
-                    if (currency > rechargeCost.BronzifyCurrency() && weaponModel.IsChargeZero())
+                    if (currency > rechargeCost.BronzifyCurrency())
                     {
-                        weaponModel.weaponState = WeaponState.Enchanted;
-                        EcoServices.Instance.DebitMoneyFrmCurrentPocket(rechargeCost);
-                        enchantView.FillCharPlanks();
+                        if (weaponModel.IsChargeZero())
+                        {
+                            if(weaponModel.noOfTimesRecharged < 4)
+                            {
+                                weaponModel.SetRechargeValue();
+                                EcoServices.Instance.DebitMoneyFrmCurrentPocket(rechargeCost);
+                                enchantView.FillCharPlanks();
+                                statusDsplyText.text = $"Weapon Recharged";
+                            }
+                            else // >=4
+                            {
+                               hasGem = weaponModel.ExhaustedGem();
+                                if (hasGem)
+                                {
+                                    statusDsplyText.text = $"Weapon Enchanted with {weaponModel.gemName}";
+                                }
+                                else
+                                {
+                                    statusDsplyText.text = $"{weaponModel.gemName} not found in Inventory";
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        statusDsplyText.text = $"Not enough money";
                     }
                     break;
+                
                 default:
                     break;                    
             }
+            statusDsplyText.gameObject.SetActive(true);
+            Sequence seq = DOTween.Sequence();
+            seq
+               .AppendCallback(() => statusDsplyText.GetComponent<TextRevealer>().Reveal())
+               .AppendInterval(3.0f)
+               .AppendCallback(() => statusDsplyText.GetComponent<TextRevealer>().Unreveal())
+               ;
+            seq.Play();
+
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            OnEnchantBtnPressed();
+            if(weaponModel.weaponState != WeaponState.Enchanted)
+                OnEnchantBtnPressed();
         }
         public void OnPointerEnter(PointerEventData eventData)
         {

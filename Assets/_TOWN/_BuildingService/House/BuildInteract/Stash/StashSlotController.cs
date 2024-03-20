@@ -238,7 +238,7 @@ namespace Town
             itemCount++;
             if (onDrop)
             {
-                InvService.Instance.invMainModel.stashInvIntItems.Add(item); // directly added to prevent stackoverflow
+                InvService.Instance.invMainModel.stashInvItems.Add(item); // directly added to prevent stackoverflow
                 InvService.Instance.invMainModel.stashInvCount++;
             }
             RefreshImg(item);

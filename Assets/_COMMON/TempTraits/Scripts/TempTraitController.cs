@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Configuration;
+using Town;
 using UnityEngine;
 
 
@@ -287,7 +288,13 @@ namespace Common
                         RemoveTraitByName(model.tempTraitName);                   
                 }
             }
+            ApplyTempTrait(CauseType.BuildingInterct, (int)BuildInteractType.ClearMind
+                                        , charController.charModel.charID, TempTraitName.FastLearner);
+            // level down the char and remove delta exp 
+            LevelService.Instance.OnClearMindLvlNExpUpdate(charController); 
         }
+
+
 
         public void OnHealBtnPressed(TempTraitBuffData tempTraitBuffData)
         {
@@ -418,10 +425,10 @@ namespace Common
                                                           , TempTraitName.Frail);
 
                 ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
-                                                             , TempTraitName.Strong);
+                                                             , TempTraitName.Resilient);
 
                 ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
-                                                             , TempTraitName.Fragile);
+                                                             , TempTraitName.Unwavering);
             }
         
             if (Input.GetKeyDown(KeyCode.C))

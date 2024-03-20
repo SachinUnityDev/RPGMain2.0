@@ -36,7 +36,7 @@ namespace Common
         public event Action<WeekEventsName, int> OnStartOfTheWeek;
         public event Action<MonthName> OnStartOfTheMonth;
         public event Action<TimeState> OnChangeTimeState;
-        public event Action<CalDate> OnStartOfCalDate;
+        public event Action<CalDate> OnStartOfCalDate; // broadcast day in yr
 
         [Header("CURRENT TIME STATE ")]
         public TimeState currtimeState;

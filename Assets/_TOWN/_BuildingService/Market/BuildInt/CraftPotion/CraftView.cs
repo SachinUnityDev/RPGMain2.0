@@ -1,4 +1,5 @@
 using Common;
+using DG.Tweening;
 using Interactables;
 using System.Collections;
 using System.Collections.Generic;
@@ -131,7 +132,16 @@ namespace Town
             }
             EcoServices.Instance.DebitMoneyFrmCurrentPocket(currForCraft); 
             OnPotionCraftedTxt.gameObject.SetActive(true);
-            if(InvHasSpace)
+            Sequence seq = DOTween.Sequence();
+            seq
+               .AppendCallback(() => OnPotionCraftedTxt.GetComponent<TextRevealer>().Reveal())
+               .AppendInterval(3.0f)
+               .AppendCallback(() => OnPotionCraftedTxt.GetComponent<TextRevealer>().Unreveal())
+               ;
+            seq.Play();
+
+
+            if (InvHasSpace)
             OnPotionCraftedTxt.text = $"{potionSelect.ToString().CreateSpace()} added to Inventory"; 
             else
                 OnPotionCraftedTxt.text = $"Inventory is full";

@@ -71,8 +71,6 @@ namespace Common
         [SerializeField] bool isCharHovered = false;
         [SerializeField] float prevTime = 0f;
 
-     
-
         private void OnEnable()
         {
             shaderN = Shader.Find("Spine/Skeleton");

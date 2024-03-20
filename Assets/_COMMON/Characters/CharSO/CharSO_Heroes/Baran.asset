@@ -34,7 +34,7 @@ MonoBehaviour:
   charLvl: 2
   charNameStr: Baran
   availOfChar: 1
-  stateOfChar: 2
+  stateOfChar: 1
   fameBehavior: 1
   baseCharLoc: 1
   currLoc: 1

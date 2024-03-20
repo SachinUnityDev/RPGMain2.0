@@ -21,19 +21,25 @@ namespace Quest
 
         void FillJurnoTxt()
         {
-            TextMeshProUGUI txt = transform.GetComponent<TextMeshProUGUI>();           
-            if(questModel!= null ) 
+            TextMeshProUGUI txt = transform.GetComponent<TextMeshProUGUI>();
+            txt.gameObject.SetActive(true);
+            if (questModel!= null ) 
             {
                 txt.gameObject.SetActive(true);
                 if (questModel.questState == QuestState.UnLocked)
+                {
                     txt.text = questModel.questNameStr;
+                    txt.fontStyle = FontStyles.Normal; 
+                }                   
                 else if (questModel.questState == QuestState.Completed)
                 {
                     txt.text = questModel.questNameStr;
                     txt.fontStyle = FontStyles.Strikethrough;
-                }                    
+                }
                 else
+                {
                     txt.text = "";
+                }                    
             }
             else
             {

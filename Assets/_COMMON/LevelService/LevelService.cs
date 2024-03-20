@@ -2,7 +2,7 @@ using Ink.Parsed;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.PlayerLoop;
 
 namespace Common
 {
@@ -159,6 +159,24 @@ namespace Common
             charModel.charLvl++;
 
         }
+        #endregion
+
+
+        #region LVL DOWN ON CLEAR MIND 
+
+        public void OnClearMindLvlNExpUpdate(CharController charController)
+        {
+            int lvl = charController.charModel.charLvl;
+            int deltaExp = lvlNExpSO.GetdeltaExpPts4Lvl(lvl);
+            int currentExp = charController.charModel.mainExp; 
+            charController.charModel.mainExp -= deltaExp;// update exp
+            lvl--;
+            charController.charModel.charLvl = lvl<1? 1 : lvl;   // update lvl
+
+            
+        }
+
+
         #endregion
 
     }

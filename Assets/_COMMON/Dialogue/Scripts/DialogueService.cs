@@ -210,17 +210,10 @@ namespace Common
             if (!dialogueModel.isRepeatable)
                 dialogueModel.isUnLocked = true; 
         }
-
         public void On_DialogueLsDsply()
         {
-            
             OnDialogueLsDsply?.Invoke(); 
         }
-        //public void SetCurrDiaBase(DialogueNames dialogueNames)
-        //{
-        //    diaBase = dialogueFactory.GetDialogBase(dialogueNames);
-        //}
-
         void InitDiaView(Transform parent)
         {
             if (isDiaViewInitDone) return; // return multiple clicks

@@ -16,6 +16,7 @@ MonoBehaviour:
   questNameStr: Lost Memory
   questState: 1
   allObjSO:
+  - {fileID: 11400000, guid: 1a008d75849dc9a4f90611bdae5a79d0, type: 2}
   - {fileID: 11400000, guid: ee638308e9c00524dad61402622bc393, type: 2}
   - {fileID: 11400000, guid: 77a924fcd4f7d014ca65c1597810f57c, type: 2}
   - {fileID: 11400000, guid: 2881d2498347550468912da8f5a562b8, type: 2}
@@ -24,3 +25,8 @@ MonoBehaviour:
   questMode: 2
   expBase: 30
   expMultiplier: 10
+  isUnBoxed: 0
+  calDate:
+    monthName: 0
+    day: 0
+  days2Respawn: 0

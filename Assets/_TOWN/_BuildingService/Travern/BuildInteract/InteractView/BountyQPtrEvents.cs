@@ -57,13 +57,16 @@ namespace Town
             Debug.Log("Bounty Notify pressed");
             questModel.questState = QuestState.UnLocked;
             bountyBoardView.InitBountyBoardLs();
+            bountyBoardView.UnLoad(); 
+            QuestMissionService.Instance.On_QuestStart(questModel.questName);
+
         }
         void PosNotify()
         {
             float width = notifyBoxView.GetComponent<RectTransform>().rect.width;
             float height = notifyBoxView.GetComponent<RectTransform>().rect.height;
 
-            GameObject canvas = GameObject.FindWithTag("TownCanvas");
+            GameObject canvas = GameObject.FindWithTag("Canvas");
             Canvas canvasObj = canvas.GetComponent<Canvas>();
 
 
@@ -79,8 +82,8 @@ namespace Town
 
             Sequence seq = DOTween.Sequence();
             seq
-                .Append(notifyBoxView.transform.DOMove(pos, 0.1f))
-                .Append(notifyBoxView.transform.GetComponent<Image>().DOFade(1.0f, 0.3f))
+                .Append(notifyBoxView.transform.DOMove(pos, 0.0f))
+                .Append(notifyBoxView.transform.GetComponent<Image>().DOFade(1.0f, 0.1f))
                 ;
            notifyBoxView.gameObject.SetActive(true);
             seq.Play();

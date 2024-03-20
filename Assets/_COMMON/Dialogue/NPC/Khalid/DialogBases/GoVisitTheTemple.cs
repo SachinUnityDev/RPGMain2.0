@@ -26,12 +26,13 @@ namespace Common
         public void OnDialogueEnd()
         {
             BuildingIntService.Instance.UnLockABuild(BuildingNames.Temple, true);
-            QuestMissionService.Instance.On_ObjStart(QuestNames.ThePowerWithin, ObjNames.VisitTemple);
+            QuestMissionService.Instance.On_ObjEnd(QuestNames.ThePowerWithin, ObjNames.VisitKhalid); 
             BuildingIntService.Instance
                    .UnLockDiaInBuildNPC(BuildingNames.Temple, NPCNames.Minami, DialogueNames.MeetMinami, true);
 
-            MapService.Instance.pathController
-                .On_PathUnLock(QuestNames.HuntInTheWilderness, ObjNames.TravelIntoTheWilderness);
+
+            QuestMissionService.Instance.questController.UnBoxBountyQuest(QuestNames.HuntInTheWilderness); 
+         
         }
     }
 }

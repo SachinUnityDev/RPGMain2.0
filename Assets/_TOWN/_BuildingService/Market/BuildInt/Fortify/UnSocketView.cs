@@ -2,6 +2,7 @@ using Common;
 using Interactables;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI; 
@@ -42,6 +43,8 @@ namespace Town
         [SerializeField] int index;
         [SerializeField] float prevLeftClick;
         [SerializeField] float prevRightClick;
+        List<CharController> availChars = new List<CharController>();
+
         private void Start()
         {
             leftBtn.onClick.AddListener(OnLeftBtnPressed);
@@ -78,13 +81,37 @@ namespace Town
             }
             prevRightClick = Time.time;
         }
+        void ToggleDsply(bool isNotEmpty)
+        {
 
+
+        }
         public void FillCharPlanks()
         {
-            CharModel selectCharModel = CharService.Instance.allCharModels[index];
-            BuildingIntService.Instance.selectChar = selectCharModel.charName;
+            availChars.Clear();
+            availChars = CharService.Instance.allyInPlayControllers.Where(t => (t.charModel.availOfChar == AvailOfChar.Available ||
+                                   t.charModel.availOfChar == AvailOfChar.UnAvailable_InParty ||
+                                   t.charModel.availOfChar == AvailOfChar.UnAvailable_Prereq)
+                                   && t.charModel.charLvl > 1 && t.charModel.stateOfChar == StateOfChar.UnLocked
+                                   ).ToList();
 
-            CharController charController = CharService.Instance.GetCharCtrlWithCharID(selectCharModel.charID);
+            if (availChars.Count == 0)
+            {
+                ToggleDsply(false);
+                return;
+            }
+            else
+            {
+                ToggleDsply(true);
+            }
+
+            if (index >= availChars.Count)
+            {
+                index = 0;
+            }
+
+            CharController charController = availChars[index];
+            BuildingIntService.Instance.selectChar = charController.charModel.charName; 
             ArmorController armorController = charController.armorController;
             ArmorModel armorModel = armorController.armorModel;
 

@@ -35,11 +35,11 @@ namespace Town
         {
             this.isClickable = isClickable;
             // change sprite 
-            if(isClickable) 
+            if(isClickable)            
                 btnImg.sprite = btnN;
             else            
-                btnImg.sprite = btnNA;            
-
+                btnImg.sprite = btnNA;
+            onHoverTxt.gameObject.SetActive(false);
         }
         public void OnPointerClick(PointerEventData eventData)
         {           
@@ -51,14 +51,20 @@ namespace Town
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-           if(isClickable)
-                btnImg.sprite = btnHL;   
+            if (isClickable)
+            {
+                btnImg.sprite = btnHL;
+                onHoverTxt.gameObject.SetActive(true);
+            }                
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             if (isClickable)
+            {
                 btnImg.sprite = btnN;
+                onHoverTxt.gameObject.SetActive(false);
+            }                
         }
     }
 }

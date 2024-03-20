@@ -1,3 +1,4 @@
+using Quest;
 using System.Collections;
 using System.Collections.Generic;
 using Town;
@@ -22,6 +23,8 @@ namespace Common
 
         public void OnDialogueEnd()
         {
+            CharService.Instance.UnLockChar(CharNames.Rayyan);
+            QuestMissionService.Instance.On_ObjEnd(QuestNames.ThePowerWithin, ObjNames.VisitTemple);
             BuildingIntService.Instance.ChgCharState(BuildingNames.Temple, CharNames.Rayyan
                                                                         , NPCState.UnLockedNAvail, true);
             BuildingIntService.Instance

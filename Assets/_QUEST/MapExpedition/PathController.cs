@@ -116,6 +116,13 @@ namespace Quest
 
         #region LOCK AND UNLOCK A PATH   
 
+        public bool HasPath(QuestNames questName, ObjNames objName)
+        {
+            PathSO pathSO = MapService.Instance.allPathSO?.GetPathSO(questName, objName);
+            if(pathSO != null) return true;
+            return false; 
+        }
+
         // Check if it has the limit
         public void On_PathUnLock(QuestNames questName, ObjNames objName)
         {

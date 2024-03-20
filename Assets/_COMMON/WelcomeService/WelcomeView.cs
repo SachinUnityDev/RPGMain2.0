@@ -23,7 +23,7 @@ namespace Town
         void Start()
         {
             continueBtn.onClick.AddListener(OnContinueBtnPressed);
-            canvas = GameObject.FindGameObjectWithTag("TownCanvas");
+            canvas = GameObject.FindGameObjectWithTag("Canvas");
         }
 
         public void InitWelcomeView()

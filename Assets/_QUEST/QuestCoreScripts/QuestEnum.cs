@@ -81,6 +81,7 @@ namespace Quest
         DiscoverTheDeepdark,// side
         BeatTheMngwaNightclaw,// side
         TravelIntoTheWilderness,// Bounty
+        TalkToKhalid, // Main
     }
     public enum QuestState
     {

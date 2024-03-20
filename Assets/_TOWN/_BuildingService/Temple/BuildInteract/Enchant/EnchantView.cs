@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Town;
 using System.Linq;
+using TMPro;
 
 public class EnchantView : MonoBehaviour, IPanel
 {
@@ -30,7 +31,12 @@ public class EnchantView : MonoBehaviour, IPanel
     [SerializeField] int index;
     [SerializeField] float prevLeftClick;
     [SerializeField] float prevRightClick;
-    [SerializeField] List<CharModel> charModelInTown = new List<CharModel>();
+
+    [Header("List of Avail char")]
+    List<CharController> availChars = new List<CharController>();
+
+    [Header("Enchantment txt")]
+    [SerializeField] TextMeshProUGUI noCharAvailTxt; 
     private void Start()
     {
         leftBtn.onClick.AddListener(OnLeftBtnPressed); 
@@ -66,14 +72,49 @@ public class EnchantView : MonoBehaviour, IPanel
         }
         prevRightClick = Time.time;
     }
+    void ToggleDsply(bool isNotEmpty)
+    {
+    
+        leftBtn.gameObject.SetActive(isNotEmpty);
+        rightBtn.gameObject.SetActive(isNotEmpty);
+        closeBtn.gameObject.SetActive(!isNotEmpty);
 
+        centerTrans.gameObject.SetActive(isNotEmpty);
+        enchantSlot.gameObject.SetActive(isNotEmpty); 
+        statusBtn.gameObject.SetActive(isNotEmpty);
+        currency.gameObject.SetActive (isNotEmpty);
+
+        noCharAvailTxt.gameObject.SetActive(!isNotEmpty);
+    }
     public void FillCharPlanks()
     {
-        if(charModelInTown.Count == 0) return;    
-        CharNames selectChar = charModelInTown[index].charName;
-        BuildingIntService.Instance.selectChar = selectChar; 
+        availChars.Clear();
+        availChars = CharService.Instance.allyInPlayControllers.Where(t => (t.charModel.availOfChar == AvailOfChar.Available ||
+                               t.charModel.availOfChar == AvailOfChar.UnAvailable_InParty ||
+                               t.charModel.availOfChar == AvailOfChar.UnAvailable_Prereq)
+                               && t.charModel.charLvl > 1 && t.charModel.stateOfChar == StateOfChar.UnLocked 
+                               ).ToList();
 
-        CharController charController = CharService.Instance.GetAbbasController(selectChar);
+        if (availChars.Count == 0)
+        {
+            ToggleDsply(false);
+            return;
+        }
+        else
+        {
+            ToggleDsply(true);
+        }
+
+        if (index >= availChars.Count)
+        {
+            index = 0;
+        }
+
+
+        CharNames selectChar = availChars[index].charModel.charName;
+        BuildingIntService.Instance.selectChar = selectChar;
+
+        CharController charController = availChars[index]; 
         WeaponController weaponController = charController.weaponController;
         WeaponModel weaponModel = weaponController.weaponModel;
 
@@ -96,8 +137,7 @@ public class EnchantView : MonoBehaviour, IPanel
     public void Load()
     {
         index = 0;
-        charModelInTown = CharService.Instance.allCharModels
-                        .Where(t=>t.currCharLoc  == LocationName.Nekkisari).ToList();
+      
         currency.InitCurrencyToggle();
         FillCharPlanks();
     }
@@ -111,21 +151,4 @@ public class EnchantView : MonoBehaviour, IPanel
     {
         UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);    
     }
-
-
-
-
-    //void Populate()
-    //{
-
-    //    charSelect = BuildingIntService.Instance.selectChar;
-    //    weaponSO = WeaponService.Instance.allWeaponSO.GetWeaponSO(charSelect);
-    //    weaponModel = WeaponService.Instance.GetWeaponModel(charSelect);
-    //    // get char sprite
-    //    // get weapon state
-
-
-    //}
-
-    
 }

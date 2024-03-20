@@ -31,17 +31,15 @@ namespace Town
             EcoServices.Instance.OnPocketSelected -= (PocketType p) => BtnStateUpdate();
             EcoServices.Instance.OnPocketSelected +=(PocketType p)=> BtnStateUpdate(); 
         }
-        public void InitFortifyBtn(CharController charController, ArmorModel armorModel, FortifyView fortifyView)
+        public void  InitFortifyBtn(Currency fortifyCost, CharController charController, ArmorModel armorModel, FortifyView fortifyView)
         {
             img = transform.GetChild(0).GetComponent<Image>();
             this.charController = charController;
             this.armorModel = armorModel;   
             this.fortifyView= fortifyView;
-            LocationName locName = TownService.Instance.townModel.currTown;
-            fortifyCost = armorModel.GetFortifyCost(locName).DeepClone(); // get build upgrading
+            this.fortifyCost = fortifyCost; 
             costDisplay.GetChild(1).GetComponent<DisplayCurrency>().Display(fortifyCost);
             BtnStateUpdate();
-           
         }
         // pocket change 
 

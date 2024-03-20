@@ -23,8 +23,7 @@ namespace Common
 
         public void OnDialogueEnd()
         {
-            QuestMissionService.Instance.On_ObjStart(QuestNames.ThePowerWithin, ObjNames.CheckoutTheShips); 
-            MapService.Instance.pathController.On_PathUnLock(QuestNames.ThePowerWithin, ObjNames.CheckoutTheShips); 
+            QuestMissionService.Instance.On_ObjEnd(QuestNames.ThePowerWithin, ObjNames.RequestRayyan);            
         }
     }
 }

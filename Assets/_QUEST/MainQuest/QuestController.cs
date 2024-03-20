@@ -20,6 +20,27 @@ namespace Quest
             CalendarService.Instance.OnStartOfCalDate += (CalDate calDate)=> UpdateBountyQRespawn();
         }
 
+
+        public void Move2NextObj(ObjModel objModel)
+        {
+            int index = questModel.allObjModel.FindIndex(t=> t == objModel);
+            if(index != -1)
+            {
+                if(index < questModel.allObjModel.Count-1)
+                {
+                    QuestMissionService.Instance.On_ObjStart(questModel.questName, questModel.allObjModel[index + 1].objName);
+                }
+                else
+                {
+                    QuestMissionService.Instance.On_QuestEnd(questModel.questName); 
+                }
+            }
+            else
+            {
+                Debug.LogError(" Obj not found" + objModel.objName); 
+            }
+        }
+
         public void ShowQuestEmbarkView(QuestNames questName, ObjNames objName, PathNodeView pathNodeView)
         {
             questModel = QuestMissionService.Instance.GetQuestModel(questName);
@@ -34,19 +55,21 @@ namespace Quest
         
         public void UnBoxBountyQuest(CalDate calDate)
         {
-            foreach (QuestModel model in QuestMissionService.Instance
-                .GetQModelsOfType(QuestType.Bounty))
+            foreach (QuestModel model in QuestMissionService.Instance.GetQModelsOfType(QuestType.Bounty))
             {
                 if(model.questType == QuestType.Bounty)
-                if(model.calDate.monthName == calDate.monthName
-                    && model.calDate.day == calDate.day)
+                if(model.calDate.monthName == calDate.monthName && model.calDate.day == calDate.day)
                 {
                     model.isUnBoxed = true; 
                     QuestMissionService.Instance.On_BountyQUnboxed(model);
                 }
             }
         }
-
+        public void UnBoxBountyQuest(QuestNames questName)
+        {
+            QuestModel questModel = QuestMissionService.Instance.GetQuestModel(questName);
+            questModel.isUnBoxed = true; 
+        }
         public void UpdateBountyQRespawn()
         {
             foreach (QuestModel model in QuestMissionService.Instance

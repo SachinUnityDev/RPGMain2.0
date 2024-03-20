@@ -7,7 +7,7 @@ namespace Quest
 {
     public class VisitKhalid : QuestObjBase
     {
-        public override QuestNames qMainNames => QuestNames.LostMemory; 
+        public override QuestNames qMainNames => QuestNames.ThePowerWithin; 
         public override ObjNames QObjNames => ObjNames.VisitKhalid;
         public override void Action1()
         {

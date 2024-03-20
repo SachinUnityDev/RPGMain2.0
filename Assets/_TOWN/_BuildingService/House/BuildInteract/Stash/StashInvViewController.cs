@@ -162,7 +162,7 @@ namespace Town
         public void InitStashInv()
         {
             ClearInv();
-            foreach (var item in InvService.Instance.invMainModel.stashInvIntItems.ToList())
+            foreach (var item in InvService.Instance.invMainModel.stashInvItems.ToList())
             {
                 AddItem2InVView(item, false);
             }

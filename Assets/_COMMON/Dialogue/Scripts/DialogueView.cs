@@ -143,7 +143,7 @@ namespace Common
                     textRevealer.Reveal();
                     dialogueTxt.text = "";
                     
-                    Debug.Log("INSIDE PRINT DIALOGUE");
+                    //Debug.Log("INSIDE PRINT DIALOGUE");
                 }
                 else
                 {

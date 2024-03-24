@@ -13,6 +13,7 @@ namespace Town
     {
         #region DECLARATIONS
         public int slotID { get; set; }
+        public SlotState slotState { get; set; }
         public List<Iitems> ItemsInSlot { get; set; } = new List<Iitems>();
         [SerializeField] int itemCount = 0;
         public SlotType slotType => SlotType.StashInv;

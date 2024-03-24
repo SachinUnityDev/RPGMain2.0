@@ -48,22 +48,16 @@ namespace Town
             CalendarSO calSO = CalendarService.Instance.calendarSO; 
             if (CalendarService.Instance.currtimeState == TimeState.Day)
             {// BG
-                transform.GetChild(0).GetComponent<Image>().sprite =
-                         calSO.restPanelDay;
+                transform.GetChild(0).GetComponent<Image>().sprite = calSO.restPanelDay;
                 // hour Glass
-                hourGlass.sprite =
-                    calSO.hourGlassDay;
-                endDayBtn.GetComponent<Image>().sprite
-                    = calSO.endDayBtnN;
+                hourGlass.sprite = calSO.hourGlassDay;
+                endDayBtn.GetComponent<Image>().sprite = calSO.endDayBtnN;
             }
             else
             {
-                transform.GetChild(0).GetComponent<Image>().sprite =
-                    calSO.restPanelNight; ;
-                hourGlass.sprite =
-                    calSO.hourGlassNight;
-                endDayBtn.GetComponent<Image>().sprite
-                    = calSO.endNightBtnN; 
+                transform.GetChild(0).GetComponent<Image>().sprite = calSO.restPanelNight; ;
+                hourGlass.sprite = calSO.hourGlassNight;
+                endDayBtn.GetComponent<Image>().sprite = calSO.endNightBtnN; 
             }
 
         }

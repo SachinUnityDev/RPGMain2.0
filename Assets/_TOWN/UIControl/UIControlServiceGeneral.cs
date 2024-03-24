@@ -205,9 +205,9 @@ namespace Common
             }
             TogglePanel(go, turnON);         
             go.transform.SetAsLastSibling();
-            IPanel panel = go.GetComponentInChildren<IPanel>();
-            if (panel != null)
-                panel.Load();
+            //IPanel panel = go.GetComponentInChildren<IPanel>();
+            //if (panel != null)
+            //    panel.Load();
 
         }
         

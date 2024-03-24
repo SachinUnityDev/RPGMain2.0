@@ -10,8 +10,7 @@ namespace Quest
 {
     public class LootService : MonoSingletonGeneric<LootService>
     {
-        public Action<bool> OnLootDsplyToggle;
-        
+        public Action<bool> OnLootDsplyToggle;        
 
         public LootController lootController;
         public LootFactory lootFactory;
@@ -19,8 +18,6 @@ namespace Quest
 
         [Header("Global Var")]
         public bool isLootDsplyed = false;
-
-        
         public void InitLootService()
         {
             lootController = GetComponent<LootController>();
@@ -35,18 +32,15 @@ namespace Quest
         public void On_LootDsplyToggle(bool isDsplyed)
         {
             OnLootDsplyToggle?.Invoke(isDsplyed);
-            isLootDsplyed= isDsplyed;
-            
+            isLootDsplyed= isDsplyed;            
         }
-
-
         private void Update()
         {
             if(Input.GetKeyDown(KeyCode.L))
             {
                 lootController.ShowLootTableInLandscape(new List<ItemType>()
                 {ItemType.Potions, ItemType.GenGewgaws, ItemType.PoeticGewgaws, ItemType.Gems, ItemType.SagaicGewgaws,
-                ItemType.Fruits, ItemType.Foods, ItemType.TradeGoods}, FindObjectOfType<Canvas>().transform);
+                 ItemType.Fruits, ItemType.Foods, ItemType.TradeGoods}, FindObjectOfType<Canvas>().transform);
 
             }
         }

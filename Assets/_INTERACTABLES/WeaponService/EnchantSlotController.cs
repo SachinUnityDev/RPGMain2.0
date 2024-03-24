@@ -14,6 +14,7 @@ namespace Interactables
     public class EnchantSlotController : MonoBehaviour, IDropHandler, IPointerClickHandler, iSlotable
     {
         public int slotID { get; set; }
+        public SlotState slotState { get; set; }
         public List<Iitems> ItemsInSlot { get; set; } = new List<Iitems>();
         public SlotType slotType => SlotType.EnchantSlot;
 

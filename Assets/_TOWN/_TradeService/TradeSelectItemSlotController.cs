@@ -13,6 +13,7 @@ namespace Common
     public class TradeSelectItemSlotController : MonoBehaviour, IDropHandler, IPointerClickHandler, iSlotable
     {
         public int slotID { get; set; }
+        public SlotState slotState { get; set; }
         public List<Iitems> ItemsInSlot { get; set; } = new List<Iitems>();
         [SerializeField] int itemCount = 0;
         public SlotType slotType => SlotType.TradeSelectSlot;
@@ -76,14 +77,13 @@ namespace Common
         public void InitSelectSlot(TradeSelectView tradeSelectView)
         {
             this.tradeSelectView = tradeSelectView;
-            
-           
         }
 
         #region I-SLOTABLE 
         public void ClearSlot()
         {
             ItemsInSlot.Clear();
+            ChgSlotState(SlotState.ActiveNEmpty);
             itemCount = 0;
             if (IsEmpty())
             {
@@ -120,6 +120,7 @@ namespace Common
                 return;
             }
             Iitems item = ItemsInSlot[0];
+
             tradeSelectView.RemoveItemFrmSelectLs(item);           
             ItemsInSlot.Remove(item);
             itemCount--;
@@ -130,6 +131,14 @@ namespace Common
             else if (IsEmpty())  // After Item is removed
             {
                 ClearSlot();
+            }
+            if (item.maxInvStackSize <= itemCount)
+            {
+                ChgSlotState(SlotState.ActiveNHasSpace);
+            }
+            else
+            {
+                ChgSlotState(SlotState.ActiveNFull);
             }
             RefreshSlotTxt();
         }
@@ -178,10 +187,23 @@ namespace Common
                 }
             }
         }
+        void ChgSlotState(SlotState slotState)
+        {
+            this.slotState = slotState; 
+        }
         void AddItemOnSlot(Iitems item, bool onDrop)
         {            
             ItemsInSlot.Add(item);
             itemCount++;
+            if(item.maxInvStackSize <= itemCount)
+            {
+                ChgSlotState(SlotState.ActiveNHasSpace);
+            }
+            else
+            {
+                ChgSlotState(SlotState.ActiveNFull);
+            }
+            
             if (onDrop)  // can only be added here by drop 
             {
                 tradeSelectView.AddItem2SelectLs(item);

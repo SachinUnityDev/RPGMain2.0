@@ -8,11 +8,23 @@ using TMPro;
 using System.Linq;
 using Common;
 
+
+public enum SlotState
+{
+    None, 
+    ActiveNEmpty,
+    ActiveNHasSpace, 
+    ActiveNFull,
+    InActive,
+    Overloaded, 
+}
+
 namespace Interactables
 {
     public interface iSlotable
     {
         int slotID { get; set; }
+        SlotState slotState { get; set;}
         SlotType slotType { get; }
         bool isSlotFull(Iitems item, int qty);
         bool IsEmpty();
@@ -58,6 +70,7 @@ namespace Interactables
     {
         #region DECLARATIONS
         public int slotID { get; set; }
+        public SlotState slotState { get; set; }        
         public List<Iitems> ItemsInSlot { get; set; } = new List<Iitems>();
         [SerializeField] int itemCount = 0;
         public SlotType slotType => SlotType.CommonInv;

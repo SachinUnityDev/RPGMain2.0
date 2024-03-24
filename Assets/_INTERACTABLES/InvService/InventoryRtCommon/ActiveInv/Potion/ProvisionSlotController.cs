@@ -14,6 +14,7 @@ namespace Interactables
     public class ProvisionSlotController : MonoBehaviour, IPointerClickHandler, iSlotable
     {
         public int slotID { get; set; }
+        public SlotState slotState { get; set; }
         public List<Iitems> ItemsInSlot { get; set; } = new List<Iitems>();
         public SlotType slotType => SlotType.ProvActiveInv;
 

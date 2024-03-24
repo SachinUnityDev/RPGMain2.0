@@ -34,8 +34,8 @@ namespace Town
             timeState = CalendarService.Instance.currtimeState;
             int day = CalendarService.Instance.dayInYear;
             CalendarService.Instance.On_EndDayClick(BuildingNames.House);                
-            FillHouseView();            
-            UnLoad();
+            FillHouseView();    
+            
         }
       
         void FillHouseView()
@@ -45,23 +45,41 @@ namespace Town
         }
         void FillPanelBg()
         {
+            CalendarSO calSO = CalendarService.Instance.calendarSO;
             if (CalendarService.Instance.currtimeState == TimeState.Day)
             {// BG
-                transform.GetChild(0).GetComponent<Image>().sprite =
-                         CalendarService.Instance.calendarSO.restPanelDay;
+                transform.GetChild(0).GetComponent<Image>().sprite = calSO.restPanelDay;
                 // hour Glass
-                hourGlass.sprite =
-                    CalendarService.Instance.calendarSO.hourGlassDay;
-
+                hourGlass.sprite = calSO.hourGlassDay;
+                endDayBtn.GetComponent<Image>().sprite = calSO.endDayBtnN;
             }
             else
             {
-                transform.GetChild(0).GetComponent<Image>().sprite =
-                    CalendarService.Instance.calendarSO.restPanelNight; ;
-                hourGlass.sprite =
-                    CalendarService.Instance.calendarSO.hourGlassNight;
+                transform.GetChild(0).GetComponent<Image>().sprite = calSO.restPanelNight; ;
+                hourGlass.sprite = calSO.hourGlassNight;
+                endDayBtn.GetComponent<Image>().sprite = calSO.endNightBtnN;
             }
+
         }
+        //void FillPanelBg()
+        //{
+        //    CalendarSO
+        //    if (CalendarService.Instance.currtimeState == TimeState.Day)
+        //    {// BG
+        //        transform.GetChild(0).GetComponent<Image>().sprite = CalendarService.Instance.calendarSO.restPanelDay;
+        //        // hour Glass
+        //        hourGlass.sprite =
+        //            CalendarService.Instance.calendarSO.hourGlassDay;
+
+        //    }
+        //    else
+        //    {
+        //        transform.GetChild(0).GetComponent<Image>().sprite =
+        //            CalendarService.Instance.calendarSO.restPanelNight; ;
+        //        hourGlass.sprite =
+        //            CalendarService.Instance.calendarSO.hourGlassNight;
+        //    }
+        //}
         void FillTheBuffStr()
         {
            houseData = BuildingIntService.Instance.houseController

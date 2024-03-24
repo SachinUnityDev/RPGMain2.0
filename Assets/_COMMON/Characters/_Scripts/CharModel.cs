@@ -32,10 +32,6 @@ namespace Common
         public bool isClamped = false;
     }
     
-
-
-
-
     [System.Serializable]
     public class CharModel
     {

@@ -8,9 +8,12 @@ using UnityEngine.UI;
 public class PotionSlotInCombatView : MonoBehaviour, IPointerClickHandler, iSlotable
 {
     public int slotID { get; set; }
+    public SlotState slotState { get; set; }
     public List<Iitems> ItemsInSlot { get; set; } = new List<Iitems>();
     [SerializeField] int itemCount = 0;
     public SlotType slotType => SlotType.PotionActInCombat;
+
+    public bool isActive { get ; set; }
 
     [Header("FOR DROP CONTROLS")]
     [SerializeField] GameObject draggedGO;
@@ -38,6 +41,7 @@ public class PotionSlotInCombatView : MonoBehaviour, IPointerClickHandler, iSlot
         item.invSlotType = SlotType.PotionsActiveInv;
         ItemsInSlot.Add(item);
         RefreshImg(item);
+        isActive = true; 
     }
 
     #region I-SLOTABLE 

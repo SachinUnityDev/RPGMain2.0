@@ -234,21 +234,21 @@ namespace Common
                 currtimeState = TimeState.Night;
                 On_StartOfNight(dayInGame);
             }
-            if(GameService.Instance.gameModel.gameState == GameState.InTown)
-            {
-                if(FrmbuildName == BuildingNames.House)
-                     BuildingIntService.Instance.houseController.ChkNApplyUpgradeBedBuff();
-                else if (FrmbuildName == BuildingNames.Tavern)
-                {
-                    if (80f.GetChance())
-                    {
-                        CharController charController = CharService.Instance.GetAbbasController(CharNames.Abbas);
-                        TempTraitController tempTraitController = charController.tempTraitController;
-                        tempTraitController.ApplyTempTrait(CauseType.BuildingInterct, (int)BuildInteractType.Purchase
-                                                        , charController.charModel.charID, TempTraitName.WellRested);
-                    }
-                }
-            }            
+            //if(GameService.Instance.gameModel.gameState == GameState.InTown)
+            //{
+            //    if(FrmbuildName == BuildingNames.House)
+            //         BuildingIntService.Instance.houseController.ChkNApplyUpgradeBedBuff();
+            //    else if (FrmbuildName == BuildingNames.Tavern)
+            //    {
+            //        if (80f.GetChance())
+            //        {
+            //            CharController charController = CharService.Instance.GetAbbasController(CharNames.Abbas);
+            //            TempTraitController tempTraitController = charController.tempTraitController;
+            //            tempTraitController.ApplyTempTrait(CauseType.BuildingInterct, (int)BuildInteractType.Purchase
+            //                                            , charController.charModel.charID, TempTraitName.WellRested);
+            //        }
+            //    }
+            //}            
         }
         
         #region DAY WEEK AND MONTH EVENT TRIGGERS

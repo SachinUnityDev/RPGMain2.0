@@ -1,3 +1,4 @@
+using Common;
 using Quest;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace Quest
 
         public override void OnNode0Exit()
         {
+
+
         }
 
         public override void OnNode1Enter()
@@ -28,6 +31,10 @@ namespace Quest
                 if (10f.GetChance())
                 {
                     EncounterService.Instance.mapEController.ShowMapE(MapENames.BandOfBanditsOne); 
+                   
+                    //CalendarService.Instance....chgg time by half a day X3 
+
+
                 }else if (60f.GetChance())
                 {
                     EncounterService.Instance.mapEController.ShowMapE(MapENames.MigratoryBirds);

@@ -70,6 +70,9 @@ namespace Interactables
         public void SetCommInvSize(int size)
         {
             size_Comm= size;
+            // set slot controller of Islotable
+
+
         }
         public int GetCommInvSize()
         {

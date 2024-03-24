@@ -157,7 +157,7 @@ namespace Interactables
         {
             // get char locked in the party change the size of
             int charCount =CharService.Instance.allCharsInPartyLocked.Count - 1;
-            int size = 3 + 2 * charCount; 
+            int size = 3 + 3 * charCount; 
             invMainModel.SetCommInvSize(size); 
         }
         public void On_ItemAdded2Comm(Iitems item)

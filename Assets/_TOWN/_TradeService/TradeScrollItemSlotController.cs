@@ -13,6 +13,7 @@ namespace Common
     public class TradeScrollItemSlotController : MonoBehaviour, IDropHandler, IPointerClickHandler, iSlotable
     {
         public int slotID { get; set; }
+        public SlotState slotState { get; set; }
         public List<Iitems> ItemsInSlot { get; set; } = new List<Iitems>();
         [SerializeField] int itemCount = 0;
         public SlotType slotType => SlotType.TradeScrollSlot;

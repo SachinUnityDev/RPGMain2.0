@@ -25,9 +25,8 @@ namespace Interactables
         {
             img = GetComponent<Image>();
             img.sprite = spriteN;
-
+            text = GetComponentInChildren<TextMeshProUGUI>();   
             InvService.Instance.OnCharSelectInvPanel += (CharModel c) => OnClick(); 
-            OnClick(); 
         }
         private void OnDisable()
         {
@@ -37,6 +36,7 @@ namespace Interactables
         public void Init(InvTraitsView invTraitsView)
         {
             this.invTraitsView = invTraitsView;
+            
             OnClick(); 
         }
         

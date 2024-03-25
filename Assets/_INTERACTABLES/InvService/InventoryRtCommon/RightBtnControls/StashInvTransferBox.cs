@@ -1,6 +1,7 @@
 using Common;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -32,7 +33,8 @@ namespace Interactables
             draggedGO = eventData.pointerDrag;
             itemsDragDrop = draggedGO.GetComponent<ItemsDragDrop>();
 
-            iSlotable islot = itemsDragDrop.iSlotable;
+            iSlotable islot = itemsDragDrop?.iSlotable;
+            if (islot == null) return; 
             if (islot.slotType == SlotType.ProvActiveInv) return;
             if (itemsDragDrop != null)
             {

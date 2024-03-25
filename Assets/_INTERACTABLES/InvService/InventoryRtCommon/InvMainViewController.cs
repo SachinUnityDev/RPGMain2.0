@@ -17,7 +17,10 @@ namespace Interactables
         [Header("Level view ")]
         public LevelView levelView;
 
-        public CharNames selectchar;
+        [Header("Level view ")]
+        public InvTraitsView invTraitsView;
+
+        //public CharNames selectchar;
 
         private void OnEnable()
         {
@@ -27,34 +30,19 @@ namespace Interactables
             btmCharViewController =
                 transform.parent.GetComponentInChildren<BtmCharViewController>(true);
 
-            InvService.Instance.OnCharSelectInvPanel += OnCharSelected;
+          //  InvService.Instance.OnCharSelectInvPanel += OnCharSelected;
         }
         void OnDisable()
         {
-            InvService.Instance.OnCharSelectInvPanel += OnCharSelected;
+           // InvService.Instance.OnCharSelectInvPanel += OnCharSelected;
         }
 
-        public void OnCharSelected(CharModel charModel)
-        {
+        //public void OnCharSelected(CharModel charModel)
+        //{
 
 
-        }
-        void PopulateStatsPanel()
-        {
+        //}
 
-
-
-        }
-
-        void PopulateAttributePanel()
-        {
-
-        }
-
-        void PopulateTraitsPanel()
-        {
-
-        }
 
         public void Load()
         {
@@ -81,6 +69,7 @@ namespace Interactables
             btmCharViewController.Init();
             btmCharViewController.gameObject.transform.SetParent(transform);
             levelView.LevelViewInit();
+            invTraitsView.Init(); 
 
         }
         public HelpName GetHelpName()

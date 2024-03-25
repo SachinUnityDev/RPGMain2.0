@@ -20,12 +20,12 @@ namespace Interactables
 
         private void OnEnable()
         {
-           Init();
-            InvService.Instance.OnCharSelectInvPanel += (CharModel c) => Init();
+            InvService.Instance.OnCharSelectInvPanel += (CharModel charModel) => Init();
         }
+       
         private void OnDisable()
         {
-            InvService.Instance.OnCharSelectInvPanel -= (CharModel c) => Init();
+            InvService.Instance.OnCharSelectInvPanel -= (CharModel charModel) =>Init();
         }
 
         public void Init()

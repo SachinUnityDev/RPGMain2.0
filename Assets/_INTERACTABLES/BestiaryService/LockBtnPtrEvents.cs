@@ -18,6 +18,14 @@ namespace Interactables
         [SerializeField] TextMeshProUGUI raceTxt;
         [SerializeField] bool isClicked;
 
+
+        private void OnEnable()
+        {
+            img = transform.GetChild(0).GetComponent<Image>();
+            img.sprite = spriteN;
+            raceTxt = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+            
+        }
         public void Init(CompanionViewController companionViewController)
         {
             this.companionViewController = companionViewController;

@@ -16,11 +16,8 @@ namespace Interactables
 
         void OnEnable()
         {
-            btmCharViewController =
-               transform.parent.parent
-                               .GetChild(2).GetComponent<BtmCharViewController>();
-
-
+            btmCharViewController = transform.parent.parent
+                .GetChild(2).GetComponent<BtmCharViewController>();
         }
         
         public void ToggleLRPanel(bool isONLeft)

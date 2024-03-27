@@ -87,7 +87,7 @@ namespace Interactables
 
         [Header("Item card")]
         public GameObject itemCardGO;
-        public GameObject itemCardPrefab; 
+       // public GameObject itemCardPrefab; 
 
         [Header("Game Init")]
         public bool isNewGInitDone = false;
@@ -99,16 +99,30 @@ namespace Interactables
         private void OnEnable()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
-
+            
         }
+
         private void OnDisable()
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-         
+            FindItemCardGO();
         }
+        void FindItemCardGO()
+        {
+            GameObject canvasGO = GameObject.FindGameObjectWithTag("Canvas");
+            if (itemCardGO == null)
+            {
+                itemCardGO = canvasGO.transform.GetComponentInChildren<ItemCardView>(true).gameObject;
+            }
+            itemCardGO.transform.SetParent(canvasGO.transform);
+            itemCardGO.transform.SetAsLastSibling();
+            itemCardGO.transform.localScale = Vector3.one;
+            itemCardGO.SetActive(false);
+        }
+
 
         public void Init()
         {

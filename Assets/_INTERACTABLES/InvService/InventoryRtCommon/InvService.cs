@@ -48,7 +48,7 @@ namespace Interactables
 
         [Header("Global Var NTBR")]
         public GameObject invXLGO;// lore + beastiary+ skills+ invPanel..parent
-        public GameObject invXLPrefab; 
+       // public GameObject invXLPrefab; 
 
         private void Start()
         {
@@ -61,22 +61,21 @@ namespace Interactables
         private void OnEnable()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
-           
+            
         }
         private void OnDisable()
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
+
         }
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-        {   
-            if(invXLGO== null)
-                    InitInvXLView();
+        {  
+             InitInvXLView();
             AbbasStatusSet(); 
         }
         public void On_DragResult(bool result, ItemsDragDrop itemsDragDrop)
         {
-            OnDragResult?.Invoke(result, itemsDragDrop);
-               
+            OnDragResult?.Invoke(result, itemsDragDrop);               
         }
        void AbbasStatusSet()  // try to connec t to on lock 
         {
@@ -117,10 +116,7 @@ namespace Interactables
         }
 
         public void ShowInvXLView(bool toOpen)
-        {
-            if(invXLGO== null)           
-                InitInvXLView();
-           
+        {   
             UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(invXLGO, toOpen);
             if(toOpen)
                 invXLGO.GetComponent<IPanel>().Init();
@@ -128,11 +124,13 @@ namespace Interactables
         public void InitInvXLView()
         {
             if (isInvPanelOpen) return; // return multiple clicks
-            if(invXLGO == null)
-                invXLGO = Instantiate(invXLPrefab);
+            
             Canvas canvas = GameObject.FindWithTag("Canvas").GetComponent<Canvas>();
+            //  if (invXLGO == null)
+            invXLGO = canvas.GetComponentInChildren<InvXLViewController>(true).gameObject; 
 
-            invXLGO.transform.SetParent(canvas.transform);
+
+           // invXLGO.transform.SetParent(canvas.transform);
 
             //UIControlServiceGeneral.Instance.SetMaxSiblingIndex(diaGO);
             int index = invXLGO.transform.parent.childCount - 5;

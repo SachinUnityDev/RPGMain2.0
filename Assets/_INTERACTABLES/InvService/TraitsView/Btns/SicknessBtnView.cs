@@ -17,6 +17,7 @@ namespace Interactables
         public void Init(InvTraitsView invTraitsView)
         {
             this.invTraitsView = invTraitsView;
+            if (invTraitsView == null) return; 
             foreach (Transform child in transform)
             {
                 child.GetComponent<SicknessTypeBtnView>().Init(invTraitsView, this); 

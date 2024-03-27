@@ -83,7 +83,7 @@ namespace Interactables
         public void Init()
         {            
             InitCommonInv();
-            InitExcessInv();           
+           // InitExcessInv();           
         }
 
         public void ShowRightClickList(ItemSlotController itemSlotController)

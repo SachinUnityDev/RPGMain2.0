@@ -57,10 +57,10 @@ namespace Interactables
             hovered = eventData.hovered;
             if(iSlotable.ItemsInSlot.Count != 0)
             {
-                if (ItemService.Instance.itemCardGO == null)
-                {
-                    ItemService.Instance.itemCardGO = Instantiate(ItemService.Instance.itemCardPrefab);
-                }
+                //if (ItemService.Instance.itemCardGO == null)
+                //{
+                //   // ItemService.Instance.itemCardGO = Instantiate(ItemService.Instance.itemCardPrefab);
+                //}
 
                 Sequence seq = DOTween.Sequence();
                 seq

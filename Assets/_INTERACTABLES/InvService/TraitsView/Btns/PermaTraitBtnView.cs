@@ -27,6 +27,7 @@ namespace Interactables
             img.sprite = spriteN;
             text = GetComponentInChildren<TextMeshProUGUI>();   
             InvService.Instance.OnCharSelectInvPanel += (CharModel c) => OnClick(); 
+           
         }
         private void OnDisable()
         {
@@ -69,9 +70,11 @@ namespace Interactables
         }
         public void OnClick()
         {
+            if (invTraitsView == null) return;
             img.sprite = spriteOnClick;
             isClicked= true;
             CharModel charModel = InvService.Instance.charSelectController.charModel;
+    
             invTraitsView.ShowPermaTrait(charModel);
             text.gameObject.SetActive(true);
         }

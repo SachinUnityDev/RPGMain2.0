@@ -12,6 +12,7 @@ TagManager:
   - Canvas
   - CharFillBar
   - CharOrangeBar
+  - MainInv
   layers:
   - Default
   - TransparentFX

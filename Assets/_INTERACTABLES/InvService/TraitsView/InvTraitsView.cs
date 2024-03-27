@@ -35,8 +35,6 @@ namespace Interactables
             //permaTraitBtnView = GetComponentInChildren<PermaTraitBtnView>();
             //tempTraitBtnView = GetComponentInChildren<TempTraitBtnView>();
             //sicknessBtnView = FindObjectOfType<SicknessBtnView>();
-
-
             tempTraitBtnView.Init(this);
             sicknessBtnView.Init(this);
             permaTraitBtnView.Init(this);     

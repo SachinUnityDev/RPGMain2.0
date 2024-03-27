@@ -39,11 +39,14 @@ namespace Interactables
         [Header("Tail")]
         [SerializeField] Transform tailTrans;
 
-        [SerializeField] bool isRightClickDspled; 
-   
-        void OnEnable()
+        [SerializeField] bool isRightClickDspled;
+
+        private void Awake()
         {
-           // gameObject.SetActive(false);
+            gameObject.SetActive(false);
+        }
+        void OnEnable()
+        {           
            isRightClickDspled= false;
             crownTrans = transform.GetChild(0);
             topTrans = transform.GetChild(1);
@@ -66,7 +69,12 @@ namespace Interactables
             currTrans = btmTrans.GetChild(0);   
             itemSlotTrans = btmTrans.GetChild(1);
             InvService.Instance.OnToggleInvXLView -= CloseItemCardView;
-            InvService.Instance.OnToggleInvXLView += CloseItemCardView; 
+            InvService.Instance.OnToggleInvXLView += CloseItemCardView;
+
+        }
+        private void OnDisable()
+        {
+            InvService.Instance.OnToggleInvXLView -= CloseItemCardView;
         }
         void CloseItemCardView(bool isOpen)
         {
@@ -97,7 +105,8 @@ namespace Interactables
         public void ShowItemCard(Iitems item)
         {
             if (isRightClickDspled)
-                return;
+                return;            
+            gameObject.SetActive(true); 
             tailTrans.gameObject.SetActive(false);   
             itemViewSO = ItemService.Instance.allItemSO.itemViewSO; 
             switch (item.itemType)

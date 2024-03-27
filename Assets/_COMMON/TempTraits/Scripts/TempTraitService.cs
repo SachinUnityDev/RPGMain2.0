@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 namespace Common
 {
@@ -24,19 +25,32 @@ namespace Common
 
         public TempTraitsFactory temptraitsFactory;
 
-        public AllTempTraitSO allTempTraitSO; 
+        public AllTempTraitSO allTempTraitSO;
         // Start is called before the first frame update
         /// <summary>
         /// get all temp trait controllers => temp traits controller to act as buff controller for temp traits
         /// get all models here
         /// 
         /// </summary>
+        /// 
 
+        void OnEnable()
+        {   
+            SceneManager.sceneLoaded += OnSceneLoad;
+        }
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoad;
+        }
+        void OnSceneLoad(Scene scene, LoadSceneMode loadMode)
+        {
+            FindTempTraitCardGO();
+        }
 
         void Start()
         {
            //TownEventService.Instance.OnQuestBegin += temptraitsFactory.InitTempTraits;       // working 
-           CreateTempTraitCardGO();
+           FindTempTraitCardGO();
         }
 
 
@@ -54,12 +68,12 @@ namespace Common
             TempTraitBase tempTraitBase = temptraitsFactory.GetNewTempTraitBase(tempTraitName);            
             return tempTraitBase;
         }
-        void CreateTempTraitCardGO()
+        void FindTempTraitCardGO()
         {
             GameObject canvasGO = GameObject.FindGameObjectWithTag("Canvas");
             if (tempTraitCardGO == null)
             {
-                tempTraitCardGO = Instantiate(tempTraitCardPrefab);
+                tempTraitCardGO = canvasGO.transform.GetComponentInChildren<TraitCardView>(true).gameObject;
             }
             tempTraitCardGO.transform.SetParent(canvasGO.transform);
             tempTraitCardGO.transform.SetAsLastSibling();

@@ -147,6 +147,7 @@ namespace Common
 
         public void TogglePanelNCloseOthers(GameObject go, bool turnOn)
         {
+            if (go == null) return; 
             if (turnOn)
                 if (currOpenPanels.Any(t => t.gameObject.name == go.name)) return;
             CloseAllPanels();

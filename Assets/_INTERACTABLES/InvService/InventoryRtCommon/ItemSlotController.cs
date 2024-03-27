@@ -249,9 +249,7 @@ namespace Interactables
                     return false;
                 }
             }
-        }
- 
-
+        } 
         void AddItemOnSlot(Iitems item, bool onDrop)
         {
             item.invSlotType = SlotType.CommonInv;
@@ -299,7 +297,6 @@ namespace Interactables
             }
             RefreshSlotTxt();
         }
-
         void RefreshImg(Iitems item)
         {
             for (int i = 0; i < gameObject.transform.GetChild(0).childCount - 1; i++)
@@ -337,7 +334,6 @@ namespace Interactables
                 Debug.Log("SPRITE NOT FOUND");
             return null;
         }
-
         Sprite GetBGSprite(Iitems item)
         {
             Sprite sprite = InvService.Instance.InvSO.GetBGSprite(item);

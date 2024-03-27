@@ -30,7 +30,6 @@ namespace Interactables
             btmCharViewController =
                 transform.parent.GetComponentInChildren<BtmCharViewController>(true);
 
-          //  InvService.Instance.OnCharSelectInvPanel += OnCharSelected;
         }
         void OnDisable()
         {

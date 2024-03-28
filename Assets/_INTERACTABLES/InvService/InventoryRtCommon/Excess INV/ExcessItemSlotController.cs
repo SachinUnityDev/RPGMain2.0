@@ -149,6 +149,7 @@ namespace Interactables
             InvService.Instance.invMainModel.RemoveItemFrmExcessInv(item);  // ITEM REMOVED FROM INV MAIN MODEL HERE
             ItemsInSlot.Remove(item);
             itemCount--;
+            UpdateSlotState(item); 
             if (ItemsInSlot.Count >= 1)
             {
                 RefreshImg(item);
@@ -208,6 +209,7 @@ namespace Interactables
             ItemsInSlot.Add(item);
             item.slotID= slotID;
             itemCount++;
+            UpdateSlotState(item);
             if (onDrop)
             {
                 InvService.Instance.invMainModel.excessInvItems.Add(item); // directly added to prevent stackoverflow
@@ -264,6 +266,23 @@ namespace Interactables
             return null;
 
         }
+
+        void UpdateSlotState(Iitems item)
+        {
+            if (item.maxInvStackSize <= itemCount)
+            {
+                slotState = SlotState.ActiveNHasSpace;
+            }
+            else if (itemCount == 0)
+            {
+                slotState = SlotState.ActiveNEmpty;
+            }
+            else
+            {
+                slotState = SlotState.ActiveNFull;
+            }
+        }
+
         #endregion
 
         #region RIGHT CLICK ACTIONS ON INV RELATED

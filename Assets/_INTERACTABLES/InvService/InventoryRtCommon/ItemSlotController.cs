@@ -256,13 +256,12 @@ namespace Interactables
             ItemsInSlot.Add(item);
             item.slotID = slotID; 
             itemCount++;
+            UpdateSlotState(item);
             if (onDrop)
             {
                 InvService.Instance.invMainModel.commonInvItems.Add(item); // directly added to prevent stackoverflow
                 InvService.Instance.invMainModel.commonInvCount++;
             }
-
-
             RefreshImg(item);
             // if (ItemsInSlot.Count > 1 || onDrop)
             RefreshSlotTxt();
@@ -282,11 +281,12 @@ namespace Interactables
             {
                 ClearSlot();
                 return;
-            }
+            }            
             Iitems item = ItemsInSlot[0];
             InvService.Instance.invMainModel.RemoveItemFrmCommInv(item);  // ITEM REMOVED FROM INV MAIN MODEL HERE
             ItemsInSlot.Remove(item);
             itemCount--;
+            UpdateSlotState(item);
             if (ItemsInSlot.Count >= 1)
             {
                 RefreshImg(item);
@@ -343,6 +343,22 @@ namespace Interactables
                 Debug.Log("SPRITE NOT FOUND");
             return null;
         }
+        void UpdateSlotState(Iitems item)
+        {
+            if (item.maxInvStackSize <= itemCount)
+            {
+                slotState = SlotState.ActiveNHasSpace;
+            }
+            else if (itemCount == 0)
+            {
+                slotState = SlotState.ActiveNEmpty;
+            }
+            else
+            {
+                slotState = SlotState.ActiveNFull;
+            }
+        }
+
         #endregion
 
         #region RIGHT CLICK ACTIONS ON INV RELATED

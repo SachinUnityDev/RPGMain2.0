@@ -9,9 +9,6 @@ namespace Common
 {
     public class InvSkillViewMain : MonoBehaviour, IPanel, iHelp
     {
-
-        // get reference to all skill SO 
-        // get ref to skill service
         public event Action<SkillModel> OnSkillSelectedInPanel;
 
         public bool isPerkClickAvail = false;
@@ -19,15 +16,11 @@ namespace Common
         [Header("help")]
         [SerializeField] HelpName helpName;
 
-
         [Header("To be ref")] 
         public AllSkillSO allSkillSO; 
         public SkillViewSO skillViewSO;
         public LeftSkillView leftSkillView;
         public RightSkillView rightSkillView;
-
-
-
 
         public BtmCharViewController BtmCharViewController;
         [Header("Not to be ref")]

@@ -42,7 +42,7 @@ namespace Interactables
         public int MAX_CHAR_INVSLOT_SIZE = 12;
         public int currCommonInvSize;
 
-
+        
 
         [Header("Canvas Not To Be Ref")]
         [SerializeField] Canvas canvas; 
@@ -61,11 +61,6 @@ namespace Interactables
         [Header("stash Inv transfer Box")]
         public StashInvTransferBox stashInvTransferBox;
 
-
-        void Awake()
-        {
-      
-        }
         private void OnEnable()
         {
             invContainer = gameObject.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
@@ -76,14 +71,89 @@ namespace Interactables
         private void OnDisable()
         {
             invContainer = gameObject.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
-            InvService.Instance.OnDragResult -= OnDragResult;
-            
+            InvService.Instance.OnDragResult -= OnDragResult;            
         }
 
         public void Init()
-        {            
+        {
             InitCommonInv();
-           // InitExcessInv();           
+            ChkOverloadCount();
+            // InitExcessInv();           
+        }
+        public void ChkOverloadCount()
+        {
+            
+            if (GameService.Instance.gameModel.gameState == GameState.InTown)
+            {
+                int charLocked = CharService.Instance.allCharsInPartyLocked.Count;
+                int maxSlotCount = (charLocked - 1) * 12 + 18;
+                int activeCount = GetActiveSlotCount();
+                if (maxSlotCount < activeCount)
+                {
+                    InvService.Instance.overLoadCount = activeCount - maxSlotCount;
+                    RemoveEmptySlots();
+                    // open and lock inv 
+                }
+                else
+                { // set to max count
+                    SetInv2MaxCount(maxSlotCount); 
+                }                           
+            }           
+        }
+        void SetInv2MaxCount(int maxCount)
+        {
+            for (int i = 0; i < invContainer.transform.childCount; i++)
+            {
+                Transform child = invContainer.transform.GetChild(i);
+                iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
+                if(child.GetSiblingIndex() < maxCount)
+                {
+                    if (iSlotable.slotState == SlotState.ActiveNEmpty || iSlotable.slotState == SlotState.ActiveNFull
+                        || iSlotable.slotState == SlotState.ActiveNHasSpace)
+                    {                        
+                        child.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        iSlotable.slotState = SlotState.ActiveNEmpty;
+                        child.gameObject.SetActive(true);
+                    }
+                }                    
+                else // greater than max count
+                {
+                    iSlotable.slotState = SlotState.InActive;
+                    child.gameObject.SetActive(false);
+                }
+            }
+        }
+        void RemoveEmptySlots()
+        {            
+            for (int i = 0; i < invContainer.transform.childCount; i++)
+            {
+                Transform child = invContainer.transform.GetChild(i);
+                iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
+
+                if (iSlotable.slotState == SlotState.ActiveNEmpty || iSlotable.slotState == SlotState.None)
+                {
+                    iSlotable.slotState = SlotState.InActive; 
+                    child.gameObject.SetActive(false);
+                }                    
+            }            
+        }
+        int GetActiveSlotCount()
+        {
+            int count = 0; 
+            for (int i = 0; i < invContainer.transform.childCount; i++)
+            {
+                Transform child = invContainer.transform.GetChild(i);
+                iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
+
+                if(iSlotable.slotState== SlotState.ActiveNFull ||
+                    iSlotable.slotState == SlotState.ActiveNHasSpace
+                    || iSlotable.slotState == SlotState.ActiveNEmpty)
+                    count++;
+            }
+            return count; 
         }
 
         public void ShowRightClickList(ItemSlotController itemSlotController)
@@ -154,10 +224,7 @@ namespace Interactables
             }
         }
 
-        public void ResizeInv(int size)
-        {
-            // each slot to be prefab add n remove slots here
-        }
+
 
 
         #region TO_INV_FILL
@@ -220,8 +287,7 @@ namespace Interactables
    
 
         void InitCommonInv()
-        {
-       
+        {       
             ClearInv();           
             foreach (Iitems item in InvService.Instance.invMainModel.commonInvItems)
             {

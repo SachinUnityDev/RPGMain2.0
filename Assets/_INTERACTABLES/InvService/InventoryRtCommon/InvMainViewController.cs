@@ -20,8 +20,6 @@ namespace Interactables
         [Header("Level view ")]
         public InvTraitsView invTraitsView;
 
-        //public CharNames selectchar;
-
         private void OnEnable()
         {
             invCommViewController =
@@ -35,14 +33,6 @@ namespace Interactables
         {
            // InvService.Instance.OnCharSelectInvPanel += OnCharSelected;
         }
-
-        //public void OnCharSelected(CharModel charModel)
-        //{
-
-
-        //}
-
-
         public void Load()
         {
             btmCharViewController =
@@ -51,7 +41,6 @@ namespace Interactables
             transform.parent.gameObject.SetActive(true);
             InvService.Instance.isInvPanelOpen = true;
         }
-
         public void UnLoad()
         {
             transform.parent.gameObject.SetActive(false);

@@ -25,40 +25,6 @@ namespace Town
         [Header("RIGHT CLICK CONTROLs")]
         public List<ItemActions> rightClickActions = new List<ItemActions>();
         public bool isRightClicked = false;
-        //public void OnDrop(PointerEventData eventData)
-        //{
-        //    draggedGO = eventData.pointerDrag;
-        //    itemsDragDrop = draggedGO.GetComponent<ItemsDragDrop>();
-        //    if (itemsDragDrop != null)
-        //    {
-        //        bool isDropSuccess = AddItem(itemsDragDrop.itemDragged);
-        //        if (!isDropSuccess)
-        //            InvService.Instance.On_DragResult(isDropSuccess, itemsDragDrop);
-        //        else
-        //        {
-        //            iSlotable islot = itemsDragDrop.iSlotable;
-        //            if (islot != null
-        //                 && (islot.slotType == SlotType.StashInv)                                    
-        //                                    && islot.ItemsInSlot.Count > 0)
-        //            {
-        //                int count = islot.ItemsInSlot.Count;
-        //                for (int i = 0; i < count; i++)
-        //                {
-        //                    if (AddItem(islot.ItemsInSlot[0])) // size of list changes with every item removal 
-        //                    {
-        //                        islot.RemoveItem();
-        //                    }
-        //                    else
-        //                    {
-        //                        break; // as soon as you cannot add a item just break 
-        //                    }
-        //                }
-        //            }
-        //            InvService.Instance.On_DragResult(isDropSuccess, itemsDragDrop);
-        //            Destroy(draggedGO);
-        //        }
-        //    }
-        //}
         public void OnDrop(PointerEventData eventData)
         {
             draggedGO = eventData.pointerDrag;
@@ -237,6 +203,7 @@ namespace Town
         {
             ItemsInSlot.Add(item);
             itemCount++;
+            UpdateSlotState(item);
             if (onDrop)
             {
                 InvService.Instance.invMainModel.stashInvItems.Add(item); // directly added to prevent stackoverflow
@@ -266,6 +233,7 @@ namespace Town
             InvService.Instance.invMainModel.RemoveItemFrmStashInv(item);  // ITEM REMOVED FROM INV MAIN MODEL HERE
             ItemsInSlot.Remove(item);
             itemCount--;
+            UpdateSlotState(item);
             if (ItemsInSlot.Count >= 1)
             {
                 RefreshImg(item);
@@ -324,7 +292,21 @@ namespace Town
                 Debug.Log("SPRITE NOT FOUND");
             return null;
         }
-
+        void UpdateSlotState(Iitems item)
+        {
+            if (item.maxInvStackSize <= itemCount)
+            {
+                slotState = SlotState.ActiveNHasSpace;
+            }
+            else if (itemCount == 0)
+            {
+                slotState = SlotState.ActiveNEmpty;
+            }
+            else
+            {
+                slotState = SlotState.ActiveNFull;
+            }
+        }
         public void CloseRightClickOpts()
         {
             

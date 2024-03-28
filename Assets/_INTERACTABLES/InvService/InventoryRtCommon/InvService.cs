@@ -6,7 +6,7 @@ using Common;
 using System;
 using Town;
 using UnityEngine.SceneManagement;
-
+using System.Threading;
 
 namespace Interactables
 {
@@ -21,7 +21,10 @@ namespace Interactables
         public event Action<Iitems> OnItemAdded2Comm;
         public event Action<Iitems> OnItemRemovedFrmComm;
 
-        //public CharNames charSelect;
+        [Header("OverLoaded State")]      
+        public int overLoadCount = 0;  //>0
+
+        [Header("Char Select Controller")]
         public CharController charSelectController;
         [Header("Char SKILLS RELATED")]
 
@@ -165,6 +168,7 @@ namespace Interactables
         public void On_ItemRemovedFrmComm(Iitems item)
         {
             OnItemRemovedFrmComm?.Invoke(item);
+            invRightViewController.ChkOverloadCount(); 
         }
     }
 }

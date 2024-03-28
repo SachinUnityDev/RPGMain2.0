@@ -82,8 +82,7 @@ namespace Common
         #region I-SLOTABLE 
         public void ClearSlot()
         {
-            ItemsInSlot.Clear();
-            ChgSlotState(SlotState.ActiveNEmpty);
+            ItemsInSlot.Clear();            
             itemCount = 0;
             if (IsEmpty())
             {
@@ -124,6 +123,7 @@ namespace Common
             tradeSelectView.RemoveItemFrmSelectLs(item);           
             ItemsInSlot.Remove(item);
             itemCount--;
+            UpdateSlotState(item);
             if (ItemsInSlot.Count >= 1)
             {
                 RefreshImg(item);
@@ -132,14 +132,7 @@ namespace Common
             {
                 ClearSlot();
             }
-            if (item.maxInvStackSize <= itemCount)
-            {
-                ChgSlotState(SlotState.ActiveNHasSpace);
-            }
-            else
-            {
-                ChgSlotState(SlotState.ActiveNFull);
-            }
+    
             RefreshSlotTxt();
         }
         public void RemoveAllItems()
@@ -187,23 +180,28 @@ namespace Common
                 }
             }
         }
-        void ChgSlotState(SlotState slotState)
+        void UpdateSlotState(Iitems item)
         {
-            this.slotState = slotState; 
+            if (item.maxInvStackSize <= itemCount)
+            {
+                slotState = SlotState.ActiveNHasSpace; 
+            }
+            else if(itemCount ==0)
+            {
+                slotState = SlotState.ActiveNEmpty;
+            }
+            else
+            {
+                slotState = SlotState.ActiveNFull;
+            }         
         }
         void AddItemOnSlot(Iitems item, bool onDrop)
         {            
             ItemsInSlot.Add(item);
             itemCount++;
-            if(item.maxInvStackSize <= itemCount)
-            {
-                ChgSlotState(SlotState.ActiveNHasSpace);
-            }
-            else
-            {
-                ChgSlotState(SlotState.ActiveNFull);
-            }
-            
+            UpdateSlotState(item); 
+
+
             if (onDrop)  // can only be added here by drop 
             {
                 tradeSelectView.AddItem2SelectLs(item);

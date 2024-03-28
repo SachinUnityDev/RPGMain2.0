@@ -82,10 +82,15 @@ namespace Interactables
         }
 
         public void ShowAll()
-        {
+        {            
             foreach (Transform child in slotContainer)
             {
-                child.gameObject.SetActive(true);
+
+               iSlotable iSlotable = child.GetComponent<iSlotable>();
+                if (iSlotable.slotState != SlotState.InActive)
+                    child.gameObject.SetActive(true);
+                else
+                    child.gameObject.SetActive(false);
             }
         }
         void ShowItemGrp(ItemGrp itemGrp)

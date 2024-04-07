@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: StreetUrchin1
   m_EditorClassIdentifier: 
   cityEName: 1
-  cityENameStr: 
+  cityENameStr: Street Urchin
   encounterSeq: 1
-  state: 0
+  state: 1
   locationName: 1
   descTxt: The same kid you have seen the other day approached you again. This time
     he has two friends with him, asking for more coins.

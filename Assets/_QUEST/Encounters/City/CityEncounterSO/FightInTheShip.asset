@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f415af01e424194282aaab1f072bbda, type: 3}
+  m_Name: FightInTheShip
+  m_EditorClassIdentifier: 
+  cityEName: 4
+  cityENameStr: Fight in the ship
+  encounterSeq: 0
+  state: 1
+  locationName: 1
+  descTxt: 'When you pass by the docks, you hear some sounds - from a quarrel undoubtedly.
+
+    As
+    you approach the ship, you witness the fight between an Abzazulu and the crew.
+    Then you dart into the fray - with good intentions of course. But the sides don''t
+    seem to be settling down easily. You have to choose a side.'
+  choiceAStr: Side with Abzazulu Axeman
+  choiceBStr: Side with Idikummian Buccaneer

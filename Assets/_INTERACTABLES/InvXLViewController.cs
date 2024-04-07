@@ -57,6 +57,8 @@ namespace Interactables
 
         public void UnLoad()
         {
+            if (InvService.Instance.overLoadCount > 0)
+                return;
             InvService.Instance.On_ToggleInvXLView(false);
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
             InvService.Instance.isInvPanelOpen= false;  

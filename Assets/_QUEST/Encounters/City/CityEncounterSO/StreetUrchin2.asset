@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: StreetUrchin2
   m_EditorClassIdentifier: 
   cityEName: 1
-  cityENameStr: 
+  cityENameStr: Street Urchin
   encounterSeq: 2
-  state: 0
+  state: 1
   locationName: 1
   descTxt: Street urchin appeared by his gang and all of a sudden you are surrounded
     by many kids. They opened their hands as if each of them request some favor from

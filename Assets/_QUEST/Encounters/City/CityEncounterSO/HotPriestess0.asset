@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HotPriestess0
   m_EditorClassIdentifier: 
   cityEName: 2
-  cityENameStr: 
+  cityENameStr: Hot Priestess
   encounterSeq: 0
   state: 2
   locationName: 1

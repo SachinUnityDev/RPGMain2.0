@@ -7,6 +7,7 @@ using System;
 using Town;
 using UnityEngine.SceneManagement;
 using System.Threading;
+using System.Security.Policy;
 
 namespace Interactables
 {
@@ -20,6 +21,8 @@ namespace Interactables
 
         public event Action<Iitems> OnItemAdded2Comm;
         public event Action<Iitems> OnItemRemovedFrmComm;
+
+        public event Action<int> OnInvOverload; 
 
         [Header("OverLoaded State")]      
         public int overLoadCount = 0;  //>0
@@ -160,6 +163,11 @@ namespace Interactables
             int charCount =CharService.Instance.allCharsInPartyLocked.Count - 1;
             int size = 3 + 3 * charCount; 
             invMainModel.SetCommInvSize(size); 
+        }
+
+        public void On_InvOverLoad(int slotOverload)
+        {
+            OnInvOverload?.Invoke(slotOverload);
         }
         public void On_ItemAdded2Comm(Iitems item)
         {

@@ -43,6 +43,8 @@ namespace Interactables
         }
         public void UnLoad()
         {
+            if (InvService.Instance.overLoadCount > 0)
+                return;
             transform.parent.gameObject.SetActive(false);
             //InvService.Instance.isInvPanelOpen = false; 
         }

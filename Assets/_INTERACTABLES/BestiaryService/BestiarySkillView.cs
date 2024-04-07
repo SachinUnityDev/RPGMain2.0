@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Combat;
 using System.Linq;
+using Common;
 
 namespace Interactables
 {
@@ -16,8 +17,9 @@ namespace Interactables
 
         }
 
-        public void PopulateSkillIcons()
+        public void InitSkillIcons(CharModel charModel)
         {
+            SkillService.Instance.
             // get skills fro SKillSO 
             // fill up one by one the either the icons or darta 
 

@@ -83,7 +83,7 @@ namespace Quest
                 allCityEModels.Where(t => t.cityEName == encounterName &&
                                             t.encounterSeq > startSeq).ToList();
 
-            cityEModelOfTree.ForEach(t => t.state = CityEState.Locked); 
+            cityEModelOfTree.ForEach(t => t.state = CityEState.Completed); 
         }
 
         public void UnLockNext(CityENames encounterName, int currSeq)

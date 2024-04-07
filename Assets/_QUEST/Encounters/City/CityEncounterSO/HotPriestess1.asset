@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: HotPriestess1
   m_EditorClassIdentifier: 
   cityEName: 2
-  cityENameStr: 
+  cityENameStr: Hot Priestess
   encounterSeq: 1
-  state: 0
+  state: 1
   locationName: 1
   descTxt: The priestess from the other day appeared in the marketplace and dragged
     you into an isolated street. As she draw close to you, the heat of her body surrounds

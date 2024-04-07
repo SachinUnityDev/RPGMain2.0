@@ -15,7 +15,7 @@ namespace Quest
         {
             onChoiceASelect= true;
             EncounterService.Instance.cityEController.UnLockNext(encounterName, seq);
-            resultStr = "Her voice is tempting. You can't resist but talk to such a nice and delicate lady.";
+            resultStr = "Her voice is tempting. You can't resist but talk to such a nice and delicate lady. She invited you to see her temple and left shortly.";
             strFX = ""; 
         }
 

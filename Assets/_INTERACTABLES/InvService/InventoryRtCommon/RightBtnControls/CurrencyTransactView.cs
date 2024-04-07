@@ -95,7 +95,7 @@ namespace Common
         }
         void OnBronzeBtmBtnPressed()
         {
-            if (currTransactBox.bronze > 0)
+            if (currTransactBox.bronze > 0 || currTransactBox.silver > 0)
             {
                 currTransactBox.SubMoney(new Currency(0, 1));
             }

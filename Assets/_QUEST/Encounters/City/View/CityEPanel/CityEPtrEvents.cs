@@ -44,7 +44,7 @@ namespace Quest
             if (cityEModel == null) return;
             if(cityEModel.state == CityEState.UnAvailable)
             {
-                gameObject.GetComponent<TextMod>().enabled = false;
+              //  gameObject.GetComponent<TextMod>().enabled = false;
                 transform.GetChild(0).gameObject.SetActive(true);                 
             }
         }
@@ -53,7 +53,7 @@ namespace Quest
         {
             if (cityEModel == null) return;
             transform.GetChild(0).gameObject.SetActive(false);
-            gameObject.GetComponent<TextMod>().enabled = true;
+          //  gameObject.GetComponent<TextMod>().enabled = true;
         }
     }
 }

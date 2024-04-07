@@ -50,6 +50,8 @@ namespace Interactables
         public GameObject invContainer;                
 
         public Transform rightClickOpts;
+        [Header("Active Inv")]
+        [SerializeField] OverloadedView overloadedView; 
 
         [Header("Active Inv")]
         public GameObject potionActiveInvPanel;
@@ -88,17 +90,23 @@ namespace Interactables
                 int charLocked = CharService.Instance.allCharsInPartyLocked.Count;
                 int maxSlotCount = (charLocked - 1) * 12 + 18;
                 int activeCount = GetActiveSlotCount();
-                if (maxSlotCount < activeCount)
+                if (maxSlotCount < activeCount) // this will work fine as activeCount is updated on removal later in this block
                 {
-                    InvService.Instance.overLoadCount = activeCount - maxSlotCount;
-                    RemoveEmptySlots();
+                    RemoveNMake_InActive_EmptySlots();
+                    activeCount = GetActiveSlotCount();
                     // open and lock inv 
+                    SetInv2MaxCount(activeCount);
                 }
                 else
-                { // set to max count
-                    SetInv2MaxCount(maxSlotCount); 
-                }                           
-            }           
+                {
+                    SetInv2MaxCount(maxSlotCount);
+                }
+                InvService.Instance.overLoadCount = activeCount - maxSlotCount;
+                if (InvService.Instance.overLoadCount > 0)
+                {
+                    overloadedView.Init(); 
+                }
+            }
         }
         void SetInv2MaxCount(int maxCount)
         {
@@ -126,7 +134,7 @@ namespace Interactables
                 }
             }
         }
-        void RemoveEmptySlots()
+        void RemoveNMake_InActive_EmptySlots()
         {            
             for (int i = 0; i < invContainer.transform.childCount; i++)
             {
@@ -224,11 +232,7 @@ namespace Interactables
             }
         }
 
-
-
-
-        #region TO_INV_FILL
-       
+        #region TO_INV_FILL       
         public bool AddItem2InVView(Iitems item, bool onDrop = true) 
          {
             bool slotFound = false;
@@ -264,9 +268,6 @@ namespace Interactables
             }       
             return slotFound; 
          }
-
-  
-
         public void UpdateCommInvDB()
         {
             InvService.Instance.invController.itemlsComm.Clear();
@@ -283,8 +284,7 @@ namespace Interactables
 
                 }
             }
-        }
-   
+        }   
 
         void InitCommonInv()
         {       
@@ -293,7 +293,8 @@ namespace Interactables
             {
                 AddItem2InVView(item, false);
             }
-            invSortingView.InvSortingGrpInit(this); 
+            invSortingView.InvSortingGrpInit(this);
+            overloadedView.Init(); 
         }
         void InitExcessInv()
         {

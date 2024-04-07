@@ -64,9 +64,13 @@ namespace Quest
       
             lootRect.pivot = new Vector2(0.5f, 0.5f);
             lootRect.localScale = Vector3.one;
+            if (GameService.Instance.gameModel.gameState == GameState.InMapInteraction)
+            {
+                //  float offset =  parent.GetComponent<RectTransform>().rect.width / 2 + 50f; 
+                lootRect.localPosition = new Vector3(0, 0);
+            }
 
-
-            if(GameService.Instance.gameModel.gameState == GameState.InQuestRoom)
+            if (GameService.Instance.gameModel.gameState == GameState.InQuestRoom)
             {
               //  float offset =  parent.GetComponent<RectTransform>().rect.width / 2 + 50f; 
                 lootRect.localPosition = new Vector3(-400,-150);

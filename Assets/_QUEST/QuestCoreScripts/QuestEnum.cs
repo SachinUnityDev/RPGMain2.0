@@ -103,6 +103,7 @@ namespace Quest
         StreetUrchin,
         HotPriestess,
         Woodstocker,
+        FightInTheShip, 
     }
 
     public enum CityEState

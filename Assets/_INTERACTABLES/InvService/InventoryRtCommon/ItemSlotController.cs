@@ -224,6 +224,10 @@ namespace Interactables
         }
         public bool AddItem(Iitems item, bool onDrop = true)
         {
+            if(slotState == SlotState.InActive)
+            {
+                return false; 
+            }
             if (IsEmpty())
             {
                 AddItemOnSlot(item, onDrop);
@@ -283,10 +287,11 @@ namespace Interactables
                 return;
             }            
             Iitems item = ItemsInSlot[0];
-            InvService.Instance.invMainModel.RemoveItemFrmCommInv(item);  // ITEM REMOVED FROM INV MAIN MODEL HERE
             ItemsInSlot.Remove(item);
             itemCount--;
             UpdateSlotState(item);
+            InvService.Instance.invMainModel.RemoveItemFrmCommInv(item);  // ITEM REMOVED FROM INV MAIN MODEL HERE
+        
             if (ItemsInSlot.Count >= 1)
             {
                 RefreshImg(item);
@@ -345,18 +350,25 @@ namespace Interactables
         }
         void UpdateSlotState(Iitems item)
         {
-            if (item.maxInvStackSize <= itemCount)
+            if (item.maxInvStackSize < itemCount)
             {
                 slotState = SlotState.ActiveNHasSpace;
             }
             else if (itemCount == 0)
-            {
-                slotState = SlotState.ActiveNEmpty;
+            {            
+                if(InvService.Instance.overLoadCount > 0)
+                {
+                    slotState = SlotState.InActive; 
+                }
+                else
+                {
+                    slotState = SlotState.ActiveNEmpty;
+                }
             }
-            else
+            else 
             {
                 slotState = SlotState.ActiveNFull;
-            }
+            }            
         }
 
         #endregion

@@ -5,6 +5,9 @@ using UnityEngine.UI;
 using System;
 using TMPro;
 using Common;
+using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
+
 namespace Interactables
 {
     public class CultDropDownEvents : MonoBehaviour
@@ -28,12 +31,10 @@ namespace Interactables
 
         void DropdownValueChanged(TMP_Dropdown dropDown)
         {
-           // Debug.Log("drop down + " + cultList[dropdown.value].cultType);
-
-            CultureType cultTyp = cultList[dropdown.value].cultType;
-            bestiaryViewController.Move2Index(cultTyp);
+            string str = allCultTypeStr[dropDown.value];
+            CultureType cultType = (CultureType)Enum.Parse(typeof(CultureType), str);
+            bestiaryViewController.Move2Index(cultType);
         }
-
         public void PopulateOptions(List<CharModel> cultList, BestiaryViewController bestiaryViewController)
         {
             this.bestiaryViewController = bestiaryViewController;
@@ -49,10 +50,19 @@ namespace Interactables
                 foreach (CharModel c in cultList)
                 {
                     string str = c.cultType.ToString();
-                    allCultTypeStr.Add(str);
+                    if (!allCultTypeStr.Any(t => t == str))
+                        allCultTypeStr.Add(str);
                 }
             }
             dropdown.AddOptions(allCultTypeStr);
+        }
+        public void UpdateDropDownVal(CultureType cultType)
+        {
+            int indexF = allCultTypeStr.FindIndex(t=>t == cultType.ToString());
+            if(indexF != -1)
+            {
+                dropdown.value = indexF; 
+            }
         }
         void AddOptions()
         {

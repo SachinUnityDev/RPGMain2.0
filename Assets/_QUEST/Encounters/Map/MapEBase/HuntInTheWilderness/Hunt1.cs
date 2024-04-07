@@ -29,7 +29,7 @@ namespace Quest
 
             Transform parentTrans = EncounterService.Instance.mapEController.mapEView.transform;
 
-            if (20f.GetChance())
+            if (00f.GetChance())
             {
                 // trigger combat vs Hyena pack
                 resultStr = " You encountered a Hyena pack, get ready to fight!";
@@ -52,7 +52,9 @@ namespace Quest
                     = new ItemDataWithQty(new ItemData(ItemType.TradeGoods, (int)TGNames.DeerSkin), qty);
                 allItemDataWithQty.Add(itemDataWithQty);
 
-                LootService.Instance.lootView.InitLootList(allItemDataWithQty, parentTrans);
+                //LootService.Instance.lootView.InitLootList(allItemDataWithQty, parentTrans);
+                LootService.Instance.lootController.ShowLootTable4MapE(allItemDataWithQty, parentTrans);
+
                 resultStr = "You gained loot!";
             }
             else
@@ -74,7 +76,7 @@ namespace Quest
                 allItemDataWithQty.Add(itemDataWithQty);
 
                 LootService.Instance.lootController.ShowLootTable4MapE(allItemDataWithQty, parentTrans);
-                resultStr = "You gained loot!"; 
+                resultStr = "You gained loot!";
             }
         }
 

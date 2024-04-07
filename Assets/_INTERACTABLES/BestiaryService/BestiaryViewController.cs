@@ -108,6 +108,11 @@ namespace Interactables
             index = i;
             PopulateScollName();
         }
+        void ChgCultTypeInDropDown()
+        {
+            CultureType cultType = selectBestiary[index].cultType;
+            dropDown.GetComponent<CultDropDownEvents>().UpdateDropDownVal(cultType);
+        }
         void OnRightBtnPressed()
         {
             if (index == -1) return;
@@ -119,6 +124,7 @@ namespace Interactables
             {
                 index++; 
                 PopulateScollName();
+                ChgCultTypeInDropDown(); 
             }
         }
         void OnLeftBtnPressed()
@@ -132,6 +138,7 @@ namespace Interactables
             else
             {
                 index--; PopulateScollName();
+                ChgCultTypeInDropDown();
             }
         }
 

@@ -10,7 +10,6 @@ using DG.Tweening;
 
 namespace Interactables
 {
-
     public class CompanionViewController : MonoBehaviour
     {
         [Header("TO BE REF")]

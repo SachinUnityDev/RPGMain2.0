@@ -71,7 +71,7 @@ namespace Combat
         public List<string> perkDescOnHover= new List<string>();
 
         [Header("ALL SO")]
-        public List<SkillDataSO> allCharSkillSO = new List<SkillDataSO>();
+        public List<SkillDataSO> allSkillDataSO = new List<SkillDataSO>();
         public SkillViewSO skillViewSO; 
         public SkillHexSO skillHexSO;   
         public GameObject skillCardGO;
@@ -578,7 +578,7 @@ namespace Combat
         }
         public SkillDataSO GetSkillSO(CharNames _charName)
         {
-            SkillDataSO skillDataSO = allCharSkillSO.Find(x => x.charName == _charName);
+            SkillDataSO skillDataSO = allSkillDataSO.Find(x => x.charName == _charName);
             if (skillDataSO != null)
             {
                 return skillDataSO;
@@ -591,7 +591,7 @@ namespace Combat
         }
         public CharNames GetChar4Skill(SkillNames _skillName)
         {
-            foreach (SkillDataSO skillDataSO in allCharSkillSO)
+            foreach (SkillDataSO skillDataSO in allSkillDataSO)
             {
                 if (skillDataSO.allSkills.Any(t => t.skillName == _skillName))
                 {

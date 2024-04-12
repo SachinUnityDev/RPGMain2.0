@@ -18,6 +18,8 @@ namespace Interactables
         [SerializeField] Transform scrollNameGO;
         [SerializeField] Transform dropDown;
         [SerializeField] Transform attributePanel;
+        [SerializeField] BestiarySkillView bestiarySkillView; 
+
 
         [Header("Drop Down related")]
 
@@ -95,13 +97,18 @@ namespace Interactables
             {
                 nameTxt.text = selectBestiary[index].charName.ToString();
                 currBeastOnDisplay = selectBestiary[index];
+                BestiaryService.Instance.currbestiaryModel= currBeastOnDisplay;
+                bestiarySkillView.InitSkillBtns(selectBestiary[index], this);
             }                  
             if (index == -1)
                 currBeastOnDisplay = null;
 
+          
+
             attributePanel.GetComponent<AttributeViewController>().PopulateAttribPanel();
 
         }
+        
         public void Move2Index(CultureType cultType)
         {
             int i = selectBestiary.FindIndex(t => t.cultType == cultType);

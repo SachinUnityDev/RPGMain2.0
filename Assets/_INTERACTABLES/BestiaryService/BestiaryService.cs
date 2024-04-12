@@ -20,7 +20,7 @@ namespace Common
 
         [Header("CURRENT SELECTS")]
         public BestiaryViewController bestiaryViewController;
-        public CharModel bestiaryModel;
+        public CharModel currbestiaryModel;
         public BestiaryController bestiaryController;
         public RaceType currSelectRace;
 
@@ -30,7 +30,7 @@ namespace Common
 
         [Header("UNLOCKED Bestiary")]
         public List<CharController> allRegBestiaryCtrl = new List<CharController>();
-        public List<CharModel> allRegBestiaryModels = new List<CharModel>(); // Unlocks here when u meet them 
+       // public List<CharModel> allRegBestiaryModels = new List<CharModel>(); // Unlocks here when u meet them 
 
         // UNLOCKS => REGISTER after u meet a enemy in combat they register in scroll list
         [Header("Game Init")]
@@ -57,8 +57,8 @@ namespace Common
         {
             foreach (CharacterSO charSO in allBestiarySO)
             {
-                bestiaryModel = new CharModel(charSO);
-                allModel4BestiaryInGame.Add(bestiaryModel);
+               CharModel charModel = new CharModel(charSO);
+                allModel4BestiaryInGame.Add(charModel);
                 // init all char controllers here
             }
            // CreateAllBestiaryCtrls();
@@ -91,14 +91,16 @@ namespace Common
             CharService.Instance.allCharInCombat.Add(charController);
 
             CharService.Instance.charsInPlay.Add(go);
-
+        
             allRegBestiaryCtrl.Add(charController);
 
             // update char Level too here depending on ally levels FORMULA
             // find the model and update  its level here 
-            allRegBestiaryModels.Add(charModel);
+           // allRegBestiaryModels.Add(charModel);
+            
             charModel.availOfChar = AvailOfChar.Available;
-            charModel.charID = allRegBestiaryModels.Count + start_INT_FOR_BESTIARY_CHARID + 1;
+            charModel.stateOfChar = StateOfChar.UnLocked; 
+            charModel.charID = allRegBestiaryCtrl.Count + start_INT_FOR_BESTIARY_CHARID + 1;
             //go.name += charModel.charID.ToString(); 
             
             return charController;
@@ -109,7 +111,7 @@ namespace Common
             if (index != -1)
                 return allBestiaryInGame[index];
             else
-                Debug.LogError("Enemy Controller not found !");
+                Debug.LogError("Enemy Controller not found !" + enemyName);
             return null;
         }
 

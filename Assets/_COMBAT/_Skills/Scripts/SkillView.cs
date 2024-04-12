@@ -131,7 +131,7 @@ namespace Combat
           
             CharNames currCharName = CombatService.Instance.currCharClicked.charModel.charName;
             int currClickedCharID = CombatService.Instance.currCharClicked.charModel.charID;
-            foreach (SkillDataSO skillSO in SkillService.Instance.allCharSkillSO)
+            foreach (SkillDataSO skillSO in SkillService.Instance.allSkillDataSO)
             {
                 if (skillSO.charName == currCharName)
                 {
@@ -178,7 +178,6 @@ namespace Combat
            // skillBtnTransform.GetChild(1).GetComponent<RectTransform>().localScale = Vector3.one * 1.25f;  
         }
 
-     
         public void SetSkillsPanel(CharController charController)
         {
             if (charController == null) return; 

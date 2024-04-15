@@ -13,7 +13,7 @@ namespace Intro
 
         public void Init()
         {
-            InitQuickStart();
+           // InitQuickStart();
         }
 
         public void InitQuickStart()
@@ -25,6 +25,7 @@ namespace Intro
         public void Load()
         {
             gameObject.SetActive(true);
+            InitQuickStart();
             UIControlServiceGeneral.Instance.ToggleInteractionsOnUI(this.gameObject, true);
 
             IntroServices.Instance.Fade(gameObject, 1.0f);

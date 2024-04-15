@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 namespace Common
 {
-
-
     public class SceneMgmtController : MonoBehaviour
     {
        

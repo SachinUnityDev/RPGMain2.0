@@ -37,38 +37,47 @@ namespace Intro
             UIControlServiceGeneral.Instance.ToggleInteractionsOnUI(this.gameObject, true);
             IntroServices.Instance.Fade(gameObject, 1.0f);
             UIControlServiceGeneral.Instance.SetMaxSiblingIndex(gameObject);
-            GameService.Instance.sceneController.LoadScene(GameScene.Town);
-          //  LoadSceneSeq();
+           // GameService.Instance.sceneController.LoadScene(GameScene.Town);
+            LoadSceneSeq();
            
         }
 
         void LoadSceneSeq()
-        {   
+        {
+
             Sequence loadSeq = DOTween.Sequence();
             loadSeq
-                   .AppendCallback(()=>ShowDots())
-                   .AppendInterval(0.2f)               
+                   .AppendCallback(()=> ShowDots())
+                   .AppendInterval(1f)               
                     ;
             loadSeq.Play().SetLoops(-1);
-
         }
+
+        //void StartLoadingAnimation()
+        //{
+        //    // Scale the image back and forth using DoTween
+        //    dotsParent.(1, 1f)
+        //        .SetEase(Ease.InOutQuad)
+        //        .SetLoops(-1, LoopType.Yoyo);
+        //}
+
         void ShowDots()
         {
             if (count > 3) // clear all 
             {
-                for (int i = 0;i < 3; i++)
+                for (int i = 0; i < 3; i++)
                 {
                     dotsParent.GetChild(i).gameObject.SetActive(false);
                 }
                 count = 1;
-                return; 
-            } 
-                
+                return;
+            }
+
             for (int i = 0; i < count; i++)
             {
-                dotsParent.GetChild(i).gameObject.SetActive(true); 
+                dotsParent.GetChild(i).gameObject.SetActive(true);
             }
-            count++; 
+            count++;
         }
         public void UnLoad()
         {
@@ -121,14 +130,6 @@ namespace Intro
             }
         }
 
-        void StartAnims()
-        {
-            //circularArrow.transform.DORotate(new Vector3(0f, 0f, -360f), 2f, RotateMode.LocalAxisAdd)
-            //  .SetLoops(-1, LoopType.Restart)
-            //  .SetRelative()
-            //  .SetEase(Ease.Linear)
-            //  ;
-        }
     }
     
 

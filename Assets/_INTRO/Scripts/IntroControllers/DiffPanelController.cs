@@ -9,10 +9,17 @@ namespace Intro
 {
     public class DiffPanelController : MonoBehaviour, IPanel
     {
-        [SerializeField] Button diffContinueBtn; 
+        [SerializeField] Button diffContinueBtn;
+
+        [SerializeField] Toggle mortalBloodToggle;
+        [SerializeField] Toggle quickViewToggle;
+
         void Start()
         {
-            diffContinueBtn.onClick.AddListener(OnContinueBtnPressed); 
+            diffContinueBtn.onClick.AddListener(OnContinueBtnPressed);
+            mortalBloodToggle.onValueChanged.AddListener(OnMortalBloodSelect);
+            quickViewToggle.onValueChanged.AddListener(OnQuickStartSelect);
+
         }
         public void Init()
         {
@@ -28,7 +35,6 @@ namespace Intro
             UIControlServiceGeneral.Instance.SetMaxSiblingIndex(gameObject);
 
         }
-
         public void UnLoad()
         {
             UIControlServiceGeneral.Instance.ToggleInteractionsOnUI(this.gameObject, false);
@@ -41,8 +47,14 @@ namespace Intro
             UnLoad(); 
         }
 
+        void OnMortalBloodSelect(bool isMB)
+        {
+            GameService.Instance.gameController.SetMortalBlood(isMB);
+        }
+        void OnQuickStartSelect(bool isQuickStart)
+        {
+            GameService.Instance.gameController.SetQuickStart(isQuickStart);
+        }
     }
-
-
 }
 

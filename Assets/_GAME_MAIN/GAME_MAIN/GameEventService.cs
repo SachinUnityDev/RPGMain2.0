@@ -10,14 +10,18 @@ namespace Common
 {
     public class GameEventService : MonoSingletonGeneric<GameEventService>
     {
-        public Action OnGameStart;
-        public Action OnGameEnd;
+        public Action OnMainGameStart;
+        public Action OnMainGameEnd;
 
         public bool hasGameStarted = false; 
 
 
         public Action<LocationName> OnTownEnter;
         public Action<LocationName> OnTownExit;
+
+        public Action OnIntroStart;
+        public Action OnIntroEnd; 
+
 
         public Action<GameState> OnGameStateChg; 
         public event Action<QuestMode> OnQuestModeChg;
@@ -55,7 +59,6 @@ namespace Common
                 CalendarService.Instance.Init();
 
                 EcoServices.Instance.InitEcoServices();
-                DialogueService.Instance.InitDialogueService();
                 BarkService.Instance.InitBarkService();
                 JobService.Instance.JobServiceInit();
                 BestiaryService.Instance.Init();
@@ -75,28 +78,35 @@ namespace Common
                 WelcomeService.Instance.On_QuickStart();
             else
                 WelcomeService.Instance.InitWelcome();
-            On_GameStart();
+            On_MainGameStart();
             GameService.Instance.isNewGInitDone = true; 
 
         }
-       
-
-
         public void On_TownExit(LocationName locationName)
         {
             OnTownExit?.Invoke(locationName);
         }
 
-        public void On_GameStart()
+        public void On_MainGameStart()
         {
             hasGameStarted = true; 
-            OnGameStart?.Invoke();
+            OnMainGameStart?.Invoke();
         }
-        public void On_GameEnd()
+        public void On_MainGameEnd()
         {
             hasGameStarted= false;
-            OnGameEnd?.Invoke(); 
+            OnMainGameEnd?.Invoke(); 
         }
+        public void On_IntroStart()
+        {
+            DialogueService.Instance.InitDialogueService();
+            OnIntroStart?.Invoke();
+        }
+        public void On_IntroEnd()
+        {            
+            OnIntroEnd?.Invoke();
+        }
+
     }
 
 

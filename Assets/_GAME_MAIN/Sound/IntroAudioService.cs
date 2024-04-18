@@ -56,12 +56,12 @@ namespace Common
         {
             if (musicSource.isPlaying)
             {
-                musicSource.DOFade(1.0f, fadeDuration).OnComplete(() => musicSource.Stop());
+                musicSource.DOFade(1.0f, fadeTime).OnComplete(() => musicSource.Stop());
             }
                 
             if (ambienceSource.isPlaying)
             {
-                ambienceSource.DOFade(1.0f, fadeDuration).OnComplete(() => ambienceSource.Stop());
+                ambienceSource.DOFade(1.0f, fadeTime).OnComplete(() => ambienceSource.Stop());
             }                
         }
 

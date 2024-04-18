@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI; 
 namespace Intro
 {
@@ -13,22 +14,21 @@ namespace Intro
         [SerializeField] Transform imgContainer; 
 
         [Header("Global Var")]
-        QuickStartController quickStartView;
+        QuickStartView quickStartView;
         DialogueSO dialogueSO;
-        DialogueModel dialogueModel; 
-
-        public void QuickStartPg1Init(QuickStartController quickStartView)
+        DialogueModel dialogueModel;
+        public void QuickStartPg1Init(QuickStartView quickStartView)
         {
             this.quickStartView = quickStartView;
             dialogueSO = DialogueService.Instance.GetDialogueSO(DialogueNames.MeetKhalid);
             dialogueModel = DialogueService.Instance.GetDialogueModel(DialogueNames.MeetKhalid);
             dialogueModel.isPlayedOnce = true;
-
             InteractionSpriteData InteractSprites = dialogueSO.interactSprites[0];
             int i = 0; 
             foreach (Transform child in imgContainer)
-            {
-                child.GetComponent<Pg1OptsPtrEvents>().Init(InteractSprites.allSprites[i], this);                 
+            {          
+                child.GetComponent<Pg1OptsPtrEvents>().Init(InteractSprites.allSprites[i], this, quickStartView);
+                i++; 
             }
         }
 

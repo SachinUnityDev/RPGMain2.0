@@ -11,6 +11,10 @@ namespace Common
 {
     public class GameController : MonoBehaviour
     {
+
+        public bool isMortalBlood = false;
+        public bool isQuickStart = false;
+     
         [Header("Game Diff")]
         public AllGameDiffSO allGameDiffSO; 
         public List<GameDiffModel> allGameDiffModel = new List<GameDiffModel>();
@@ -38,9 +42,15 @@ namespace Common
                 return currGameDiffModel.maxRoundLimitBoss;
             else
                 return currGameDiffModel.maxRoundLimit; 
-
         }
-
+        public void SetMortalBlood(bool isMortalBlood)
+        {
+            this.isMortalBlood = isMortalBlood;
+        }
+        public void SetQuickStart(bool isQuickStart)
+        {
+            this.isQuickStart= isQuickStart;    
+        }
     }
 
 

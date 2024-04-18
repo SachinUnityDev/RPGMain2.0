@@ -10,16 +10,18 @@ namespace Intro
     public class Pg2OptsPtrEvents : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         QuickStartPg2View pg2View;
+        QuickStartView quickStartView; 
 
         SpriteOpts spriteOpts;
 
         [Header(" To be filled")]
         [SerializeField] string unLockedTxt;      
         Image img;
-        public void Init(SpriteOpts spriteOpts, QuickStartPg2View pg2View)
+        public void Init(SpriteOpts spriteOpts, QuickStartPg2View pg2View, QuickStartView quickStartView)
         {
             this.spriteOpts = spriteOpts;
             this.pg2View = pg2View;
+            this.quickStartView = quickStartView;
 
             img = GetComponent<Image>();
             this.spriteOpts = spriteOpts;
@@ -37,7 +39,7 @@ namespace Intro
         {
             if (spriteOpts.isUnlocked)
             {
-             
+                IntroServices.Instance.LoadNext(); 
             }
             else
             {

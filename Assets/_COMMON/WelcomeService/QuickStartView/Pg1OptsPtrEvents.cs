@@ -9,19 +9,19 @@ namespace Intro
 {
     public class Pg1OptsPtrEvents : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        QuickStartPg1View pg1View; 
-
+        QuickStartPg1View pg1View;
+        QuickStartView quickStartView; 
         SpriteOpts spriteOpts;
 
         [Header(" To be filled")]
         [SerializeField] string unLockedTxt;
         [SerializeField] int quickStartOpt; 
         Image img; 
-        public void Init( SpriteOpts spriteOpts, QuickStartPg1View pg1View)
+        public void Init( SpriteOpts spriteOpts, QuickStartPg1View pg1View, QuickStartView quickStartView)
         {
             this.spriteOpts= spriteOpts;
             this.pg1View= pg1View;  
-            
+            this.quickStartView= quickStartView;
             img = GetComponent<Image>();
             this.spriteOpts = spriteOpts;
             if (spriteOpts.isUnlocked)
@@ -40,8 +40,10 @@ namespace Intro
             {
                 if(quickStartOpt == 1)
                 {
-                    CharController charController = CharService.Instance.GetAbbasController(CharNames.Abbas);
-                    charController.charModel.classType = ClassType.Skirmisher;
+
+                    quickStartView.ShowPg2(); 
+                    //CharController charController = CharService.Instance.GetAbbasController(CharNames.Abbas);
+                    //charController.charModel.classType = ClassType.Skirmisher;
                 }
             }
             else

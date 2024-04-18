@@ -25,7 +25,7 @@ namespace Common
         
         IEnumerator LoadNewScene(GameScene newScene)
         {         
-            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync((int)newScene, LoadSceneMode.Single);          
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync((int)newScene, LoadSceneMode.Additive);          
             asyncLoad.allowSceneActivation = false;
             
             while (!asyncLoad.isDone)
@@ -43,6 +43,13 @@ namespace Common
                 //    GameServiceInit(GameState.InTown, GameDifficulty.Easy, LocationName.Nekkisari);
             }                
         }      
+
+        public void UnLoadSceneAsync()
+        {
+            // check on the conflicts....
+            // 
+
+        }
     }
 
     public enum GameScene

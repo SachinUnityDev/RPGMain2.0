@@ -14,11 +14,11 @@ namespace Intro
         [SerializeField] Transform imgContainer;
 
         [Header("Global Var")]
-        QuickStartController quickStartView;
+        QuickStartView quickStartView;
         DialogueSO dialogueSO;
         DialogueModel dialogueModel;
 
-        public void QuickStartPg2Init(QuickStartController quickStartView)
+        public void QuickStartPg2Init(QuickStartView quickStartView)
         {
             this.quickStartView = quickStartView;
             dialogueSO = DialogueService.Instance.GetDialogueSO(DialogueNames.DebtIsClear);
@@ -28,7 +28,8 @@ namespace Intro
             int i = 0;
             foreach (Transform child in imgContainer)
             {
-                child.GetComponent<Pg2OptsPtrEvents>().Init(InteractSprites.allSprites[i], this);
+                child.GetComponent<Pg2OptsPtrEvents>().Init(InteractSprites.allSprites[i], this, quickStartView);
+                i++; 
             }
         }
 

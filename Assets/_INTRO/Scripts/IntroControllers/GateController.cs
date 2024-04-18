@@ -16,6 +16,21 @@ namespace Common
         void UnLoad();
         void Init();
     }
+
+    public enum PanelName
+    {
+        None, 
+        Gate, 
+        MainMenu, 
+        NewGameMode, 
+        Diff, 
+        Story, 
+        QuickStart, 
+        CutScene, 
+        Loading, 
+    }
+
+
 }
 
 
@@ -25,8 +40,7 @@ namespace Intro
     {
 
         [SerializeField] TextMeshProUGUI GateTxtObj;
-        //[SerializeField] SkeletonAnimation nightSkeleton;
-        //[SerializeField] SkeletonAnimation Night2daySkeleton;
+
         public Animator gatesAnim;
         public Image GateImg;
 
@@ -35,8 +49,7 @@ namespace Intro
         public void Init()
         {
             GateTxtObj.GetComponent<TextRevealer>().enabled = false;
-           // Night2daySkeleton.gameObject.SetActive(false);
-          
+           // Night2daySkeleton.gameObject.SetActive(false);         
           
         }
 
@@ -107,7 +120,6 @@ namespace Intro
         {
             if (Input.GetMouseButtonDown(0) && IntroServices.Instance.currPanel ==0)
             {
-                
                 UnLoad();     
             }
         }

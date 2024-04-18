@@ -13,6 +13,9 @@ namespace Intro
 {
     public class IntroServices : MonoSingletonGeneric<IntroServices>
     {
+
+        public IntroController introController; 
+        
         public List<GameObject> allPanels = new List<GameObject>();
         public int currPanel;
 
@@ -23,6 +26,7 @@ namespace Intro
         
         void Start()
         {
+            introController = GetComponent<IntroController>();
            StartIntro();        
         }
 
@@ -35,9 +39,6 @@ namespace Intro
         {            
             Enten.gameObject.transform.DOLocalMoveX(5, 0.4f);
             Emesh.gameObject.transform.DOLocalMoveX(-5, 0.4f);
-
-
-
         }
         public void FadeOutEntenNEmesh(float alpha, float animSpeed)
         {
@@ -70,7 +71,18 @@ namespace Intro
         }
         public void LoadNext()
         {
-            currPanel++;
+            if (currPanel >= allPanels.Count) return;
+            if (allPanels[currPanel].name == "StoryPanel")
+            {
+                if(GameService.Instance.gameController.isQuickStart)                
+                    currPanel++;                
+                else                
+                    currPanel +=2;                
+            }
+            else            
+                currPanel++;
+            
+
             if (currPanel < allPanels.Count)
             {
                 Debug.Log("Load next played" + currPanel);
@@ -83,6 +95,9 @@ namespace Intro
 
         public void StartIntro()
         {           
+            GameEventService.Instance.On_IntroStart();
+
+
             FadeOutEntenNEmesh(0.0f, 1f);
             allPanels.ForEach(t => t.GetComponent<IPanel>().Init());
             allPanels.ForEach(t => t.SetActive(false));
@@ -164,8 +179,6 @@ namespace Intro
 
            // Debug.Log("Alpha in fade " + GO.name + "alpha " + alpha);
         }
-
-
 
         public void FadeTxt(GameObject GO, float alpha, float animSpeed)
         {           

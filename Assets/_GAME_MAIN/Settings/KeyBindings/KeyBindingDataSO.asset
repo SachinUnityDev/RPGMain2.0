@@ -16,132 +16,176 @@ MonoBehaviour:
   - gameState: 1
     keyfunc: 9
     keyPressed: 102
+    keyDefault: 102
   - gameState: 1
     keyfunc: 6
     keyPressed: 101
+    keyDefault: 101
   - gameState: 1
     keyfunc: 15
     keyPressed: 105
+    keyDefault: 105
   - gameState: 1
     keyfunc: 16
     keyPressed: 106
+    keyDefault: 106
   - gameState: 1
     keyfunc: 21
     keyPressed: 112
+    keyDefault: 112
   - gameState: 1
     keyfunc: 26
     keyPressed: 114
+    keyDefault: 114
   - gameState: 1
     keyfunc: 18
     keyPressed: 109
+    keyDefault: 109
   - gameState: 1
     keyfunc: 7
     keyPressed: 118
+    keyDefault: 118
   - gameState: 1
     keyfunc: 4
     keyPressed: 116
+    keyDefault: 116
   - gameState: 1
     keyfunc: 12
     keyPressed: 103
+    keyDefault: 103
   - gameState: 1
     keyfunc: 35
     keyPressed: 115
+    keyDefault: 115
   - gameState: 1
     keyfunc: 3
     keyPressed: 98
+    keyDefault: 98
   - gameState: 1
     keyfunc: 17
     keyPressed: 108
+    keyDefault: 108
   - gameState: 3
     keyfunc: 5
     keyPressed: 111
+    keyDefault: 111
   - gameState: 3
     keyfunc: 39
     keyPressed: 9
+    keyDefault: 9
   - gameState: 3
     keyfunc: 40
     keyPressed: 32
+    keyDefault: 32
   - gameState: 3
     keyfunc: 38
     keyPressed: 104
+    keyDefault: 104
   - gameState: 3
     keyfunc: 19
     keyPressed: 116
+    keyDefault: 116
   - gameState: 3
     keyfunc: 2
     keyPressed: 8
+    keyDefault: 8
   - gameState: 3
     keyfunc: 10
     keyPressed: 102
+    keyDefault: 102
   - gameState: 3
     keyfunc: 27
     keyPressed: 49
+    keyDefault: 49
   - gameState: 3
     keyfunc: 28
     keyPressed: 50
+    keyDefault: 50
   - gameState: 3
     keyfunc: 29
     keyPressed: 51
+    keyDefault: 51
   - gameState: 3
     keyfunc: 30
     keyPressed: 52
+    keyDefault: 52
   - gameState: 3
     keyfunc: 31
     keyPressed: 53
+    keyDefault: 53
   - gameState: 3
     keyfunc: 32
     keyPressed: 54
+    keyDefault: 54
   - gameState: 3
     keyfunc: 33
     keyPressed: 55
+    keyDefault: 55
   - gameState: 3
     keyfunc: 34
     keyPressed: 56
+    keyDefault: 56
   - gameState: 3
     keyfunc: 42
     keyPressed: 113
+    keyDefault: 113
   - gameState: 2
     keyfunc: 23
     keyPressed: 111
+    keyDefault: 111
   - gameState: 2
     keyfunc: 22
     keyPressed: 113
+    keyDefault: 113
   - gameState: 2
     keyfunc: 15
     keyPressed: 105
+    keyDefault: 105
   - gameState: 2
     keyfunc: 18
     keyPressed: 109
+    keyDefault: 109
   - gameState: 2
     keyfunc: 37
     keyPressed: 97
+    keyDefault: 97
   - gameState: 2
     keyfunc: 41
     keyPressed: 100
+    keyDefault: 100
   - gameState: 2
     keyfunc: 41
     keyPressed: 275
+    keyDefault: 275
   - gameState: 2
     keyfunc: 1
     keyPressed: 110
+    keyDefault: 110
   - gameState: 2
     keyfunc: 14
     keyPressed: 32
+    keyDefault: 32
   - gameState: 0
     keyfunc: 8
     keyPressed: 27
+    keyDefault: 27
   - gameState: 0
     keyfunc: 13
     keyPressed: 282
+    keyDefault: 282
   - gameState: 0
     keyfunc: 25
     keyPressed: 286
+    keyDefault: 286
   - gameState: 0
     keyfunc: 24
     keyPressed: 290
+    keyDefault: 290
   - gameState: 0
     keyfunc: 20
     keyPressed: 284
+    keyDefault: 284
   - gameState: 0
     keyfunc: 11
     keyPressed: 99
+    keyDefault: 99

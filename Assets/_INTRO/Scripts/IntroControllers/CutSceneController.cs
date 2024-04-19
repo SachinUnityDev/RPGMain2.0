@@ -115,13 +115,14 @@ namespace Intro
                         EndReached(video);
                     }
                 }
+                onEscAnim.gameObject.SetActive(animPlaying);
             }
             if (Input.GetKeyUp(KeyCode.Escape))
             {               
                 animPlaying= false;                
                onEscAnim.ResetAnim();
-            }
-            onEscAnim.gameObject.SetActive(animPlaying);
+                onEscAnim.gameObject.SetActive(animPlaying);
+            }            
         }
     }
 }

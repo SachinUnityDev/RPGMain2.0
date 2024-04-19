@@ -1,3 +1,4 @@
+using Intro;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +29,7 @@ namespace Common
             GamePlayBtn.onClick.AddListener(OnGamePlayBtnPressed);
             SoundBtn.onClick.AddListener(SoundBtnPressed);
             ControlBtn.onClick.AddListener(ControlBtnPressed);
+            ControlBtnPressed(); // start with control panel on top 
         }
 
         void OnDisplayBtnPressed()
@@ -46,7 +48,7 @@ namespace Common
         void ControlBtnPressed()
         {
             TogglePanel(ControlPanel);
-            ControlPanel.GetComponent<KeyBindingsController>().SetDefaultKeys();
+            ControlPanel.GetComponent<KeyBindingsController>().FillCurrentKeys();
 
         }
 
@@ -73,12 +75,15 @@ namespace Common
 
         public void Load()
         {
-            UIControlServiceGeneral.Instance.TogglePanel(this.gameObject, true); 
+            UIControlServiceGeneral.Instance.TogglePanel(this.gameObject, true);
+            UIControlServiceGeneral.Instance.SetMaxSiblingIndex(gameObject);
+            IntroServices.Instance.EntenNEmeshToggleActive(false); 
         }
 
         public void UnLoad()
         {
             UIControlServiceGeneral.Instance.TogglePanel(this.gameObject, false);
+            IntroServices.Instance.EntenNEmeshToggleActive(true);
         }
 
         public void Init()

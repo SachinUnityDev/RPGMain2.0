@@ -14,7 +14,8 @@ namespace Intro
     public class IntroServices : MonoSingletonGeneric<IntroServices>
     {
 
-        public IntroController introController; 
+        public IntroController introController;
+        public IntroViewController introViewController; 
         
         public List<GameObject> allPanels = new List<GameObject>();
         public int currPanel;
@@ -51,7 +52,7 @@ namespace Intro
         public void EntenNEmeshToggleActive(bool val)
         {
             Enten.gameObject.SetActive(val);
-            Emesh.gameObject.SetActive(val);
+            Emesh.gameObject.SetActive(val);    
 
         }
         public void FadeInEntenNEmesh( float alpha, float animSpeed)

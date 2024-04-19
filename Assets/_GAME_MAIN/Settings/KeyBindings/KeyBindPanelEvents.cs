@@ -25,18 +25,13 @@ namespace Common
         [SerializeField] KeyBindingsController keyBindingController;
 
 
-        void Awake()
+        void Start()
         {
             isPlankClicked = false;
             plusButton = transform.GetChild(1).GetComponent<Button>();
             plusButton.onClick.AddListener(OnButtonPressed);
             clickedStatestr = "Press any key";  
-            DisplayKeyBindingTxt(); 
-        }
-
-        private void Start()
-        {
-        
+           // DisplayKeyBindingTxt(); 
         }
 
 
@@ -53,10 +48,97 @@ namespace Common
         {
             this.keyBindingData = keyBindingData;
             nametxt.text = keyBindingData.keyfunc.ToString();
-            keyBindingTxt.text = keyBindingData.keyPressed.ToString();
+            keyBindingTxt.text = GetKeyBindingStr(keyBindingData.keyPressed); 
             keyBindingController = keyController; 
            
         }
+
+        string GetKeyBindingStr(KeyCode key)
+        {
+            string str = ""; 
+            switch (key)
+            {                            
+                case KeyCode.Keypad0:
+                    str = "num 0"; 
+                    break;
+                case KeyCode.Keypad1:
+                    str = "num 1";
+                    break;
+                case KeyCode.Keypad2:
+                    str = "num 2";
+                    break;
+                case KeyCode.Keypad3:
+                    str = "num 3"; break;
+                case KeyCode.Keypad4:
+                    str = "num 4";
+                    break;
+                case KeyCode.Keypad5:
+                    str = "num 5";
+                    break;
+                case KeyCode.Keypad6:
+                    str = "num 6";
+                    break;
+                case KeyCode.Keypad7:
+                    str = "num 7";
+                    break;
+                case KeyCode.Keypad8:
+                    str = "num 8";
+                    break;
+                case KeyCode.Keypad9:
+                    str = "num 9";
+                    break;
+                case KeyCode.KeypadPeriod:
+                    str = "num Period";
+                    break;
+                case KeyCode.KeypadDivide:
+                    str = "num Divide";
+                    break;
+                case KeyCode.KeypadMultiply:
+                    str = "num Multiply";
+                    break;
+                case KeyCode.KeypadMinus:
+                    str = "num Minus";
+                    break;
+                case KeyCode.KeypadPlus:
+                    str = "num Plus";
+                    break;                
+                case KeyCode.Alpha0:
+                    str = "0";
+                    break;
+                case KeyCode.Alpha1:
+                    str = "1";
+                    break;
+                case KeyCode.Alpha2:
+                    str = "2";
+                    break;
+                case KeyCode.Alpha3:
+                    str = "3";
+                    break;
+                case KeyCode.Alpha4:
+                    str = "4";
+                    break;
+                case KeyCode.Alpha5:
+                    str = "5";
+                    break;
+                case KeyCode.Alpha6:
+                    str = "6";
+                    break;
+                case KeyCode.Alpha7:
+                    str = "7";
+                    break;
+                case KeyCode.Alpha8:
+                    str = "8";
+                    break;
+                case KeyCode.Alpha9:
+                    str = "9";
+                    break;
+                default:
+                    str = key.ToString();
+                    break;
+            }
+            return str; 
+        }
+
 
         void DisplayAssignmentTxt()
         {          
@@ -71,7 +153,7 @@ namespace Common
 
         void DisplayKeyBindingTxt()
         {
-            keyBindingTxt.text = keyBindingData.keyPressed.ToString();
+            keyBindingTxt.text = GetKeyBindingStr(keyBindingData.keyPressed);
             keyBindingTxt.DOPause();
             keyBindingTxt.DOFade(1f, 0.1f); 
            
@@ -99,7 +181,7 @@ namespace Common
                 {
                     KeyCode key = Event.current.keyCode;
                     KeyBindingData keyData =
-                            keyBindingController.keyBindingModel
+                            keyBindingController.keyBindingSO
                                  .allKeyBindingData.FirstOrDefault(t => t.keyfunc == keyBindingData.keyfunc);
 
                         keyData.keyPressed = key; // Assignment

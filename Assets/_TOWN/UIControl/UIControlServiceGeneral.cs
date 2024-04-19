@@ -70,22 +70,24 @@ namespace Common
             }
             else
             {
-                CalendarUIController calendarUIController = CalendarService.Instance.calendarUIController; 
-                if (GameService.Instance.gameModel.gameState == GameState.InTown
-                    && CalendarService.Instance.calendarUIController.panelInScene != PanelInScene.None)
+                if (GameService.Instance.gameModel.gameState == GameState.InTown)
                 {
-                    CalendarService.Instance.calendarUIController
-                        .OnPanelExit(calendarUIController.GetPanelInScene(calendarUIController.panelInScene));
-                }
+                    CalendarUIController calendarUIController = CalendarService.Instance.calendarUIController;
+
+                    if(CalendarService.Instance.calendarUIController.panelInScene != PanelInScene.None)
+                    {
+                        CalendarService.Instance.calendarUIController
+                            .OnPanelExit(calendarUIController.GetPanelInScene(calendarUIController.panelInScene));
+                    }
                 else
-                {
-                    if (!isEscOpen)
-                        TogglePanel(escPanel, true);
-                    else
-                        TogglePanel(escPanel, false);
-                    isEscOpen = !isEscOpen;
+                    {
+                        if (!isEscOpen)
+                            TogglePanel(escPanel, true);
+                        else
+                            TogglePanel(escPanel, false);
+                        isEscOpen = !isEscOpen;
+                    }
                 }
-              
             }
         }
         
@@ -97,14 +99,14 @@ namespace Common
             }
             currOpenPanels.Clear();
         }
-        public void TogglePanels(GameObject go, List<GameObject> allPanels)
-        {
-            foreach (GameObject panel in allPanels)
-            {
-                panel.SetActive(false); // use toggle panel here
-            }
-            go.SetActive(true);// use toggle panel here          
-        }
+        //public void TogglePanels(GameObject go, List<GameObject> allPanels)
+        //{
+        //    foreach (GameObject panel in allPanels)
+        //    {
+        //        panel.SetActive(false); // use toggle panel here
+        //    }
+        //    go.SetActive(true);// use toggle panel here          
+        //}
         public void AddAnchorsToMaxExpansion(GameObject go)
         {
             RectTransform rect = go.GetComponent<RectTransform>();
@@ -184,7 +186,11 @@ namespace Common
             if (panel != null)
             {
                 if (turnON)                
-                    panel.Load();               
+                    panel.Load();
+            }
+            else
+            {
+                currOpenPanels.Remove(go); // as only iPanel needs to have this func 
             }
                 
         }
@@ -250,13 +256,13 @@ namespace Common
             if(isEscBlocked) return;
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                GameState gameState = GameService.Instance.gameModel.gameState; 
-                if(gameState == GameState.InTown)
-                {
+                //GameState gameState = GameService.Instance.gameModel.gameState; 
+                //if(gameState == GameState.InTown)
+                //{
                     if ((Time.time - lastEscClick) < 0.5f) return;                    
                     CloselastPanel();
                     lastEscClick = Time.time;
-                }
+               // }
                 
             }
         }

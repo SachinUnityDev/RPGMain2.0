@@ -21,7 +21,7 @@ namespace Intro
 
         [Header("EXTRA PANEL")]      
         [SerializeField] GameObject extrasMenuPanel;
-        [SerializeField] Button Settings;
+        public SettingsBtnPtrEvents settings;
         [SerializeField] Button CutScene;
         [SerializeField] Button Credits;
         [SerializeField] Button GameManual;
@@ -56,7 +56,8 @@ namespace Intro
             IntroServices.Instance.FadeInEntenNEmesh(1.0f, 1f);
             IntroServices.Instance.AnimateEntenNEmesh();
             IntroAudioService.Instance.PlayBGSound(BGAudioClipNames.ShargadMusic);
-        
+            settings.Init(this); 
+                
         }
         public IEnumerator Wait(float time)
         {

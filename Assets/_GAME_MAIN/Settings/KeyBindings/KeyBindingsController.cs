@@ -13,7 +13,7 @@ namespace Common
     public class KeyBindingsController : MonoBehaviour
     {
         public KeyBindingSO keyBindingSO;
-        public KeyBindingModel keyBindingModel;
+      //  public KeyBindingModel keyBindingModel;
 
         [Header("IS CLIKED")]
         public bool isCLICKED_STATE = false; 
@@ -34,17 +34,24 @@ namespace Common
         [SerializeField] Button nextPageBtn;
         [SerializeField] Button prevPageBtn;
 
-        [SerializeField] int currPageBtn = 0;
+        [SerializeField] int currPageIndex = 0;
 
         [Header("INTERNAL")]
         List<KeyBindingData> townBinds = new List<KeyBindingData>();
         List<KeyBindingData> combatBinds = new List<KeyBindingData>();
         List<KeyBindingData> questBinds = new List<KeyBindingData>();
         List<KeyBindingData> generalBinds = new List<KeyBindingData>();
+
+        [Header("Timings")]
+        [SerializeField] float nextBtnLastClickTime = 0f;
+        [SerializeField] float prevBtnLastClickTime = 0f;
         void OnNextPagePressed()
-        {            
-            
-            if(currPageBtn >= Pages.Count-2)
+        {
+
+            if (Time.time - nextBtnLastClickTime < 0.25f) return; 
+            nextBtnLastClickTime= Time.time;
+
+            if(currPageIndex >= Pages.Count-2)
             {
                 nextPageBtn.gameObject.SetActive(false);                
             }
@@ -52,47 +59,52 @@ namespace Common
             {
                 prevPageBtn.gameObject.SetActive(true);
             }
-            currPageBtn++;
-            ShowPage(currPageBtn); 
+            currPageIndex++;
+            ShowPage(currPageIndex); 
         }
         void OnPrevPagePressed()
-        {           
-            if (currPageBtn <= 1)
+        {
+            if (Time.time - prevBtnLastClickTime < 0.25f) return;
+            prevBtnLastClickTime = Time.time;
+
+            if (currPageIndex <= 1)
             {
-                prevPageBtn.gameObject.SetActive(false);
-                
+                prevPageBtn.gameObject.SetActive(false);                
             }
             else
             {
                 nextPageBtn.gameObject.SetActive(true);
             }
-            currPageBtn--;
-            ShowPage(currPageBtn);
+            currPageIndex--;
+            ShowPage(currPageIndex);
         }
 
-        public void SetDefaultKeys()
+        public void FillCurrentKeys()
         {
            if(keyBindingSO != null)
             {
-                keyBindingModel = new KeyBindingModel(keyBindingSO);
+                // keyBindingModel = new KeyBindingModel(keyBindingSO);
+                nextPageBtn.onClick.RemoveAllListeners();
+                prevPageBtn.onClick.RemoveAllListeners();
                 nextPageBtn.onClick.AddListener(OnNextPagePressed);
                 prevPageBtn.onClick.AddListener(OnPrevPagePressed);
-                PopulatePages();
+                currPageIndex = 0;
+                prevPageBtn.gameObject.SetActive(false);
+                PopulatePages();            
                 ShowPage(0);
             }
         }
         void ChkBindings(KeyCode key)
-        {
-           
-            foreach (KeyBindingData keyData in keyBindingModel.allKeyBindingData)
+        {           
+            foreach (KeyBindingData keyData in keyBindingSO.allKeyBindingData)
             {
-                //if(keyData.gameState == GameService.Instance.gameState)
-                //{
+                if (keyData.gameState == GameService.Instance.gameModel.gameState)
+                {
                     if (keyData.keyPressed == key)
                     {
                         OnKeyBindFound(keyData);
                     }
-                //}               
+                }               
             }
         }
 
@@ -226,6 +238,7 @@ namespace Common
                 textTitle.text = "GENERAL";
             }
             TogglePage(num); 
+
         }
 
         void TogglePage(int num)
@@ -261,7 +274,7 @@ namespace Common
         {
             int i = 0;
             
-            townBinds  = keyBindingModel.allKeyBindingData
+            townBinds  = keyBindingSO.allKeyBindingData
                             .Where(t => t.gameState == GameState.InTown).ToList(); 
             
             foreach (Transform Child in townPage1.transform)
@@ -288,7 +301,7 @@ namespace Common
         void PopulateCombatPages()
         {
             int i = 0;
-            combatBinds = keyBindingModel.allKeyBindingData
+            combatBinds = keyBindingSO.allKeyBindingData
                                 .Where(t => t.gameState == GameState.InCombat).ToList();
 
             foreach (Transform Child in combatPage1.transform)
@@ -311,13 +324,11 @@ namespace Common
                     i++;
                 }
             }
-
-
         }
         void PopulateQuestPages()
         {
             int i = 0;
-            questBinds = keyBindingModel.allKeyBindingData
+            questBinds = keyBindingSO.allKeyBindingData
                                 .Where(t => t.gameState == GameState.InQuestRoom).ToList();
             foreach (Transform Child in questPage.transform)
             {
@@ -333,7 +344,7 @@ namespace Common
         void PopulateGeneralPages()
         {
             int i = 0;
-            generalBinds = keyBindingModel.allKeyBindingData
+            generalBinds = keyBindingSO.allKeyBindingData
                                 .Where(t => t.gameState == GameState.None).ToList();
             foreach (Transform Child in generalpage.transform)
             {

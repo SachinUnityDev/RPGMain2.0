@@ -79,8 +79,17 @@ namespace Common
             else
                 WelcomeService.Instance.InitWelcome();
             On_MainGameStart();
-            GameService.Instance.isNewGInitDone = true; 
+            if (!GameService.Instance.isNewGInitDone)
+            {
+                if (GameService.Instance.gameController.isQuickStart)
+                {
+                    CharService.Instance.GetAbbasController(CharNames.Abbas).charModel.classType
+                        = GameService.Instance.gameModel.abbasClassType;
 
+                    // Set job NAME SELECT HERE 
+                }               
+                GameService.Instance.isNewGInitDone = true;
+            }
         }
         public void On_TownExit(LocationName locationName)
         {
@@ -106,7 +115,6 @@ namespace Common
         {            
             OnIntroEnd?.Invoke();
         }
-
     }
 
 

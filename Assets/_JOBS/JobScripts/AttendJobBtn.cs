@@ -39,7 +39,7 @@ namespace Town
         public void OnPointerClick(PointerEventData eventData)
         {
             img.sprite = spriteClicked;
-            JobService.Instance.StartJob(JobNames.WoodCutting);
+            JobService.Instance.StartJob(JobNames.Woodcutter);
             jobView.GetComponent<IPanel>().UnLoad();
         }
 

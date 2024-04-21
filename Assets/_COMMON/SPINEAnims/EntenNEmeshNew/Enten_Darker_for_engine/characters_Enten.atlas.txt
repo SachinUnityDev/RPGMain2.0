@@ -1,0 +1,26 @@
+characters_Enten.png
+size:1892,555
+filter:Linear,Linear
+pma:true
+ARM1
+bounds:1491,356,399,197
+offsets:7,2,407,200
+ARM2
+bounds:1491,81,361,273
+offsets:9,1,371,275
+BODY
+bounds:1276,141,213,412
+offsets:1,3,216,416
+Capa 31
+bounds:388,10,595,543
+offsets:1,4,598,696
+Capa 31 copy
+bounds:2,7,384,546
+offsets:1,1,386,696
+Capa 8
+bounds:985,107,289,446
+offsets:1,2,291,449
+HEAD
+bounds:1276,2,137,182
+offsets:1,15,139,199
+rotate:90

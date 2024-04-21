@@ -1,6 +1,7 @@
 using Common;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -13,12 +14,16 @@ namespace Intro
         QuickStartView quickStartView; 
         SpriteOpts spriteOpts;
 
+        [Header(" Title txt")]
+        [SerializeField] TextMeshProUGUI titleTxt; 
+
         [Header(" To be filled")]
         [SerializeField] string unLockedTxt;
         [SerializeField] int quickStartOpt; 
         Image img; 
         public void Init( SpriteOpts spriteOpts, QuickStartPg1View pg1View, QuickStartView quickStartView)
         {
+            titleTxt = GetComponentInChildren<TextMeshProUGUI>();
             this.spriteOpts= spriteOpts;
             this.pg1View= pg1View;  
             this.quickStartView= quickStartView;
@@ -40,7 +45,6 @@ namespace Intro
             {
                 if(quickStartOpt == 1)
                 {
-
                     quickStartView.ShowPg2(); 
                     //CharController charController = CharService.Instance.GetAbbasController(CharNames.Abbas);
                     //charController.charModel.classType = ClassType.Skirmisher;

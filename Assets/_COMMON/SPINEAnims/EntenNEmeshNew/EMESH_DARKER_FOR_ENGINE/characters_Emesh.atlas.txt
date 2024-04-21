@@ -1,0 +1,35 @@
+characters_Emesh.png
+size:1494,565
+filter:Linear,Linear
+pma:true
+Capa 18
+bounds:1140,84,143,138
+offsets:1,1,146,140
+rotate:90
+Layer 1
+bounds:1004,334,229,488
+offsets:1,1,231,490
+rotate:90
+Layer 2
+bounds:685,173,317,390
+offsets:12,1,330,410
+arm
+bounds:1004,229,275,103
+offsets:1,16,279,121
+arm_2
+bounds:1280,19,181,151
+offsets:1,1,183,153
+arm_3
+bounds:1281,172,184,160
+offsets:1,1,187,162
+arm_4
+bounds:685,43,268,128
+offsets:7,1,282,143
+head
+bounds:955,5,166,183
+offsets:1,1,168,186
+rotate:90
+leg1
+bounds:2,2,561,681
+offsets:1,2,587,684
+rotate:90

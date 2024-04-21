@@ -13,8 +13,8 @@ namespace Common
     public class KeyBindingsController : MonoBehaviour
     {
         public KeyBindingSO keyBindingSO;
-      //  public KeyBindingModel keyBindingModel;
 
+        [SerializeField] Reset2defaultPtrEvents reset2DefaultPtrEvents; 
         [Header("IS CLIKED")]
         public bool isCLICKED_STATE = false; 
 
@@ -190,7 +190,7 @@ namespace Common
                     break;
                 case KeyBindFuncs.ToggleHex:
                     break;
-                case KeyBindFuncs.ToggleLog_stats:
+                case KeyBindFuncs.ToggleLogAttributes:
                     break;
                 case KeyBindFuncs.ToggleSpeed:
                     break;
@@ -268,6 +268,7 @@ namespace Common
             Pages.Add(combatPage2);
             Pages.Add(questPage);
             Pages.Add(generalpage);
+            reset2DefaultPtrEvents.Init(this); 
         }
 
         void PopulateTownPages()
@@ -401,7 +402,7 @@ namespace Common
         Toggle,
         ToggleAutowalk,
         ToggleHex,
-        ToggleLog_stats,
+        ToggleLogAttributes,
         ToggleSpeed,
         Walk,
         Potions,

@@ -47,7 +47,7 @@ namespace Common
                                                 , KeyBindingsController keyController)
         {
             this.keyBindingData = keyBindingData;
-            nametxt.text = keyBindingData.keyfunc.ToString();
+            nametxt.text = keyBindingData.keyfunc.ToString().CreateSpace();
             keyBindingTxt.text = GetKeyBindingStr(keyBindingData.keyPressed); 
             keyBindingController = keyController; 
            

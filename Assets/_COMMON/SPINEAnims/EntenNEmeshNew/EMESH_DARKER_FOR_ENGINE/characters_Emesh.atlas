@@ -1,0 +1,69 @@
+
+characters_Emesh.png
+size: 1494,565
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Capa 18
+  rotate: true
+  xy: 1140, 84
+  size: 143, 138
+  orig: 146, 140
+  offset: 1, 1
+  index: -1
+Layer 1
+  rotate: true
+  xy: 1004, 334
+  size: 229, 488
+  orig: 231, 490
+  offset: 1, 1
+  index: -1
+Layer 2
+  rotate: false
+  xy: 685, 173
+  size: 317, 390
+  orig: 330, 410
+  offset: 12, 1
+  index: -1
+arm
+  rotate: false
+  xy: 1004, 229
+  size: 275, 103
+  orig: 279, 121
+  offset: 1, 16
+  index: -1
+arm_2
+  rotate: false
+  xy: 1280, 19
+  size: 181, 151
+  orig: 183, 153
+  offset: 1, 1
+  index: -1
+arm_3
+  rotate: false
+  xy: 1281, 172
+  size: 184, 160
+  orig: 187, 162
+  offset: 1, 1
+  index: -1
+arm_4
+  rotate: false
+  xy: 685, 43
+  size: 268, 128
+  orig: 282, 143
+  offset: 7, 1
+  index: -1
+head
+  rotate: true
+  xy: 955, 5
+  size: 166, 183
+  orig: 168, 186
+  offset: 1, 1
+  index: -1
+leg1
+  rotate: true
+  xy: 2, 2
+  size: 561, 681
+  orig: 587, 684
+  offset: 1, 2
+  index: -1

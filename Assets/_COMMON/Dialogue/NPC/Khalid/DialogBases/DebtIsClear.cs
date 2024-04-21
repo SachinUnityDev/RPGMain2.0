@@ -38,7 +38,7 @@ namespace Common
         {
             if(buildModel.buildingName == BuildingNames.House)
             {
-                JobService.Instance.StartJob(JobNames.WoodCutting); 
+                JobService.Instance.StartJob(JobNames.Woodcutter); 
                 BuildingIntService.Instance.OnBuildUnload-= StartJob;   
             }
         }

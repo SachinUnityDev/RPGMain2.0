@@ -57,10 +57,10 @@ namespace Town
             {
                 case JobNames.None:
                     break;
-                case JobNames.WoodCutting:
+                case JobNames.Woodcutter:
                     woodGameController.StartGame(); 
                     break;
-                case JobNames.Hunting:
+                case JobNames.Poacher:
                     break;
                 default:
                     break;
@@ -81,8 +81,8 @@ namespace Town
     public enum JobNames
     {
         None, 
-        WoodCutting, 
-        Hunting, 
+        Woodcutter, 
+        Poacher, 
     }
 
 

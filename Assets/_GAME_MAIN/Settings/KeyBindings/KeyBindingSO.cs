@@ -60,6 +60,22 @@ namespace Common
             }
         }
 
+        public KeyBindingData HasSimilarBinding(KeyBindingData keyBindingData)
+        {
+            int index = 
+            allKeyBindingData.FindIndex(t=>t.gameState == keyBindingData.gameState && t.keyPressed==keyBindingData.keyPressed); 
+            if(index!=-1) 
+                return allKeyBindingData[index];
+
+            return null; 
+        }
+
+        public List<KeyBindingData> AreKeysDiffFrmDefault()
+        {
+            List<KeyBindingData> misMatchLs =
+            allKeyBindingData.Where(t=>t.keyPressed != t.keyDefault).ToList();
+            return misMatchLs;  
+        }
         public void CopyDefault2Profile() // new game Start 
         {
             foreach (KeyBindingData bindData in allKeyBindingData)

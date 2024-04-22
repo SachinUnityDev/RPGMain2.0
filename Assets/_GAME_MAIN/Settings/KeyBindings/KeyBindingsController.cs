@@ -45,6 +45,10 @@ namespace Common
         [Header("Timings")]
         [SerializeField] float nextBtnLastClickTime = 0f;
         [SerializeField] float prevBtnLastClickTime = 0f;
+
+
+        [SerializeField] KeyBindingData currkeyBindingData; 
+
         void OnNextPagePressed()
         {
 
@@ -98,13 +102,13 @@ namespace Common
         {           
             foreach (KeyBindingData keyData in keyBindingSO.allKeyBindingData)
             {
-                if (keyData.gameState == GameService.Instance.gameModel.gameState)
+                if (keyData.gameState == currkeyBindingData.gameState)
                 {
                     if (keyData.keyPressed == key)
                     {
                         OnKeyBindFound(keyData);
                     }
-                }               
+                }
             }
         }
 
@@ -218,7 +222,6 @@ namespace Common
                 }
             }
         }
-
         void ShowPage(int num)
         {
             if (num == 1 || num == 0)
@@ -240,7 +243,6 @@ namespace Common
             TogglePage(num); 
 
         }
-
         void TogglePage(int num)
         {
             for (int i = 0; i < Pages.Count; i++)
@@ -252,6 +254,7 @@ namespace Common
                 else
                 {
                     Pages[i].SetActive(true);
+                    currkeyBindingData = Pages[i].GetComponentInChildren<KeyBindPanelEvents>().GetKeyBindingData(); 
                 }
             }
         }
@@ -270,7 +273,6 @@ namespace Common
             Pages.Add(generalpage);
             reset2DefaultPtrEvents.Init(this); 
         }
-
         void PopulateTownPages()
         {
             int i = 0;
@@ -359,8 +361,6 @@ namespace Common
             }
         }
     }
-
-
     public enum KeyBindFuncs
     {
         None,
@@ -408,7 +408,5 @@ namespace Common
         Potions,
 
     }
-
-
 
 }

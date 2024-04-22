@@ -18,7 +18,7 @@ namespace Intro
         [SerializeField] OnEscAnim onEscAnim;
         [SerializeField] bool animPlaying = false; 
         [SerializeField] float startTime =0f;
-        [SerializeField] float playTime = 3f; 
+        [SerializeField] float playTime = 0.5f; 
 
         public void Init()
         {

@@ -107,8 +107,7 @@ namespace Interactables
 
             attributePanel.GetComponent<AttributeViewController>().PopulateAttribPanel();
 
-        }
-        
+        }        
         public void Move2Index(CultureType cultType)
         {
             int i = selectBestiary.FindIndex(t => t.cultType == cultType);

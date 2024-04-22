@@ -10,12 +10,11 @@ namespace Common
         public List<NotifyModel> allNotifyModel = new List<NotifyModel>();  
         public NotifyBoxView notifyBoxView;
 
-        void Start()
-        {
-
-        }
-        public void InitController(AllNotifySO allNotifySO)
+    
+        public void InitController(AllNotifySO allNotifySO)  
         {   
+            Canvas canvas =  FindObjectOfType<Canvas>();
+            notifyBoxView = canvas.GetComponentInChildren<NotifyBoxView>(true);
             foreach (var notifySO in allNotifySO.allNotifySO)
             {
                 NotifyModel notifyModel = new NotifyModel(notifySO);

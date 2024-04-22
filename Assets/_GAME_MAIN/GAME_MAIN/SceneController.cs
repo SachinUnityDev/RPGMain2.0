@@ -17,18 +17,29 @@ namespace Common
         }
         public void LoadScene(GameScene newScene)
         {
-            this.currGameScene= newScene;
-           // lastScene = SceneManager.GetActiveScene();  
-           StartCoroutine(LoadNewScene(newScene));    
+
+            SceneMgmtController sceneMgmtController = FindObjectOfType<SceneMgmtController>();
+            sceneMgmtController.StartSceneTransit();
+
+            SceneManager.LoadSceneAsync((int)newScene);
+
+            //lastScene = currScene; 
+            //currGameScene= newScene;
+            //lastScene = SceneManager.GetActiveScene();
+            //AsyncOperation asyncLoad = SceneManager.LoadSceneAsync((int)newScene, LoadSceneMode.Additive);
+            //asyncLoad.allowSceneActivation = false;
+            //StartCoroutine(LoadNewScene(newScene, asyncLoad));    
         }
-        
-        
-        IEnumerator LoadNewScene(GameScene newScene)
+
+
+
+
+
+        IEnumerator LoadNewScene(GameScene newScene, AsyncOperation asyncLoad)
         {         
-            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync((int)newScene, LoadSceneMode.Additive);          
-            asyncLoad.allowSceneActivation = false;
+   
             
-            while (!asyncLoad.isDone)
+            while (asyncLoad.progress < 0.9)
             {
                 Debug.Log("Progress" + asyncLoad.progress); 
                 yield return null;
@@ -41,14 +52,18 @@ namespace Common
                 //GameEventService.Instance.On_TownEnter(LocationName.Nekkisari);
                 //GameService.Instance.
                 //    GameServiceInit(GameState.InTown, GameDifficulty.Easy, LocationName.Nekkisari);
-            }                
-        }      
+                StartCoroutine(UnloadAsyncOperation());
+            }
+        }
 
-        public void UnLoadSceneAsync()
+        IEnumerator UnloadAsyncOperation()
         {
-            // check on the conflicts....
-            // 
+            AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(lastScene);
 
+            while (!asyncUnload.isDone)
+            {
+                yield return null;
+            }
         }
     }
 

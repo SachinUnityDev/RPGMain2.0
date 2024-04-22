@@ -13,10 +13,10 @@ namespace Intro
         [SerializeField] Color HLColor;
         [SerializeField] Color startColor;
         
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            gameObject.GetComponentInParent<IPanel>().UnLoad();
-        }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        gameObject.GetComponentInParent<IPanel>().UnLoad();
+    }
 
         public void OnPointerEnter(PointerEventData eventData)
         {

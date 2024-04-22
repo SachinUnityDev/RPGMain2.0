@@ -26,7 +26,10 @@ namespace Common
         public void Init(KeyBindingsController keyBindingController)
         {
             this.keyBindingsController = keyBindingController;
-
+            if (keyBindingController.keyBindingSO.AreKeysDiffFrmDefault())            
+                gameObject.SetActive(true);
+            else
+                gameObject.SetActive(false);
         }
         public void OnPointerEnter(PointerEventData eventData)
         {

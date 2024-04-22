@@ -27,30 +27,15 @@ namespace Common
     public class KeyBindingSO : ScriptableObject
     {
         public List<KeyBindingData> allKeyBindingData = new List<KeyBindingData>();
-        private void Awake()
-        {
-            CopyDefault2Profile(); 
+        //private void Awake()
+        //{
+        //    CopyDefault2Profile(); 
         
-        }
+        //}
 
-        public KeyBindingData GetKeyBindingData(GameState gameState, KeyCode keyPressed)
-        {
-            // game stateNone == game State all
-            List<KeyBindingData> allbind = allKeyBindingData.Where(t=>(t.gameState== gameState || t.gameState == GameState.None) 
-                                        && t.keyPressed == keyPressed).ToList();
-            
-            if(allbind.Count>0)
-            return  allKeyBindingData[0]; 
-            return null;
-        }
+       
 
-        public bool ChgKeyBindingData(GameState gameState, KeyCode keyPressed)
-        {
-            KeyBindingData keyBindingData = GetKeyBindingData(gameState, keyPressed);
-            if (keyBindingData == null) return false; 
-            keyBindingData.keyPressed = keyPressed;
-            return true; 
-        }
+     
 
         public void ResetTodefault()
         {
@@ -60,23 +45,24 @@ namespace Common
             }
         }
 
-        public KeyBindingData HasSimilarBinding(KeyBindingData keyBindingData)
+        public KeyBindingData GetKeyBindingData(GameState gameState, KeyCode keyCode)
         {
-            int index = 
-            allKeyBindingData.FindIndex(t=>t.gameState == keyBindingData.gameState && t.keyPressed==keyBindingData.keyPressed); 
-            if(index!=-1) 
+            int index = allKeyBindingData.FindIndex(t => t.gameState == gameState && t.keyPressed == keyCode);
+            if (index != -1)
                 return allKeyBindingData[index];
 
-            return null; 
+            return null;
         }
-
-        public List<KeyBindingData> AreKeysDiffFrmDefault()
+   
+        public bool  AreKeysDiffFrmDefault()
         {
             List<KeyBindingData> misMatchLs =
-            allKeyBindingData.Where(t=>t.keyPressed != t.keyDefault).ToList();
-            return misMatchLs;  
+                        allKeyBindingData.Where(t=>t.keyPressed != t.keyDefault).ToList();
+            if(misMatchLs.Count > 0) 
+                return true;
+            return false; 
         }
-        public void CopyDefault2Profile() // new game Start 
+        public void ResetDefault2Profile() // new game Start 
         {
             foreach (KeyBindingData bindData in allKeyBindingData)
             {

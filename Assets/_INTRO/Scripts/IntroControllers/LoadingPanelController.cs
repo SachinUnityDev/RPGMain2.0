@@ -37,7 +37,7 @@ namespace Intro
             UIControlServiceGeneral.Instance.ToggleInteractionsOnUI(this.gameObject, true);
             IntroServices.Instance.Fade(gameObject, 1.0f);
             UIControlServiceGeneral.Instance.SetMaxSiblingIndex(gameObject);
-           // GameService.Instance.sceneController.LoadScene(GameScene.Town);
+            GameService.Instance.sceneController.LoadScene(GameScene.Town);
             LoadSceneSeq();
            
         }

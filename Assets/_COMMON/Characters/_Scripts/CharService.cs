@@ -542,31 +542,3 @@ namespace Common
 }
 
 
-
-//Debug.Log("CHAR DIED " + charCtrl.charModel.charID);
-//CharMode charMode = charCtrl.charModel.charMode;
-//GameObject charGO = charCtrl.gameObject;
-//if (charMode == CharMode.Ally)
-//{
-//    //    allyInPlay.Remove(charGO);
-//    //    allyInPlayControllers.Remove(charCtrl);
-
-//    //if (allyInPlayControllers.Count <= 0) // COMBAT END CONDITION   
-//    //{
-//    //    CombatEventService.Instance.On_CombatLoot(false);
-//    //}
-//}
-//else if (charMode == CharMode.Enemy)   // COMBAT END CONDITION.. ALL ENEMY KILLED
-//{
-//    // enemyInCombatPlay.Remove(charGO);
-
-//    //enemyInPlayControllers.Remove(charCtrl);
-//    //if (enemyInPlayControllers.Count <= 0)  // end of combat
-//    //{
-//    //    CombatEventService.Instance.On_CombatLoot(true);
-//    //}
-//}
-////charsInPlay.Remove(charGO);
-////charsInPlayControllers.Remove(charCtrl);
-
-

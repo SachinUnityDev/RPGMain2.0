@@ -9,7 +9,7 @@ namespace Common
     {
         public KeyBindingSO keyBindingSO; 
         [SerializeField] GameObject settingsPanel;
-       
+        public GameState gameStateInScroll; 
         private void Start()
         {
             

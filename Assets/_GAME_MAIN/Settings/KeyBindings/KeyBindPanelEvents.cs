@@ -52,7 +52,10 @@ namespace Common
             keyBindingController = keyController; 
            
         }
-
+        public KeyBindingData GetKeyBindingData()
+        {
+            return keyBindingData;
+        }
         string GetKeyBindingStr(KeyCode key)
         {
             string str = ""; 
@@ -176,17 +179,21 @@ namespace Common
         {
 
             if (Event.current.isKey && Event.current.type == EventType.KeyDown
-                            && isPlankClicked)
+                                                               && isPlankClicked)
             {
                 {
                     KeyCode key = Event.current.keyCode;
-                    KeyBindingData keyData =
-                            keyBindingController.keyBindingSO
-                                 .allKeyBindingData.FirstOrDefault(t => t.keyfunc == keyBindingData.keyfunc);
-
-                        keyData.keyPressed = key; // Assignment
-                        SetUnclickedState(); 
-                        Debug.Log("Key Assigned" + key);
+                    
+                    KeyBindingData keyBindingData1  = keyBindingController.keyBindingSO.GetKeyBindingData(keyBindingData.gameState, key);
+                    if (keyBindingData1 != null)
+                    {
+                        keyBindingData1.keyPressed = KeyCode.None;
+                        Debug.Log("previous key erased" + keyBindingData1.keyPressed);
+                    }               
+                    keyBindingData.keyPressed = key; // Assignment
+                    SetUnclickedState();
+                    Debug.Log("Key Assigned" + key);
+                    keyBindingController.FillCurrentKeys();
                 }
             }
         }

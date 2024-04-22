@@ -109,3 +109,10 @@ MonoBehaviour:
       barkLineData:
         barkline: "Let the Tavernkeeper rest for a day!\r"
         barkAudio: {fileID: 0}
+  - BuildingName: 6
+    BuildStates:
+    - buildState: 0
+      timeState: 0
+      barkLineData:
+        barkline: Horses are not ready!
+        barkAudio: {fileID: 0}

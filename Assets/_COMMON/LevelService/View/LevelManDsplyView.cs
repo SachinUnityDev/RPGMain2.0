@@ -9,14 +9,31 @@ namespace Common
     public class LevelManDsplyView : MonoBehaviour
     {
         [SerializeField] LevelModel lvlModel;
-
+        [SerializeField]LevelView levelView;
         CharModel charModel;
-        public void Init()
+
+        [SerializeField] Transform container; 
+        public void Init(LevelView levelView)
         {
+            this.levelView = levelView;
+            container = transform.GetChild(0);
             InvService.Instance.OnCharSelectInvPanel -= OnCharSelectInInv;
             InvService.Instance.OnCharSelectInvPanel += OnCharSelectInInv;
-        }
+            levelView.OnLevelDsplyChg -= ToggleDsply;
+            levelView.OnLevelDsplyChg += ToggleDsply;
 
+        }
+        void ToggleDsply(LvlDspyType lvlDspyType)
+        {
+            if (lvlDspyType == LvlDspyType.SelectPanel)
+            {
+                CharModel charModel = InvService.Instance.charSelectController.charModel;
+                OnCharSelectInInv(charModel);
+                gameObject.SetActive(true);
+            }
+            else
+                gameObject.SetActive(false);
+        }
         void OnCharSelectInInv(CharModel charModel)
         {
             this.charModel = charModel;
@@ -35,7 +52,7 @@ namespace Common
             }
 
             int j = 0;
-            int i = 0;
+            int i = 0; 
             for (i = 0; i < lvlStackData.allOptionsChosen.Count; i++)
             {
                 ManualOptData manOpts = lvlStackData.allOptionsChosen[i];
@@ -44,18 +61,18 @@ namespace Common
                     LvlData lvldata = manOpts.allOptions[k];    
                     if (lvldata.val != 0)
                     {
-                        transform.GetChild(0).GetChild(i).gameObject.SetActive(true);
+                        container.GetChild(i).gameObject.SetActive(true);
                         string sign = (lvldata.val < 0) ? "-" : "+";
                         string str = sign + $"{lvldata.val} {lvldata.attribName}";
-                        transform.GetChild(0).GetChild(i).GetComponent<TextMeshProUGUI>().text
+                        container.GetChild(i).GetComponent<TextMeshProUGUI>().text
                                                                         = str;
-                        j++;
+                       // j++;
                     }
                 }
             }
-            for (j = i; j < transform.GetChild(0).childCount; j++)
+            for (j = i; j < container.childCount; j++)
             {
-                transform.GetChild(0).GetChild(j).gameObject.SetActive(false);
+                container.GetChild(j).gameObject.SetActive(false);
             }
         }
 

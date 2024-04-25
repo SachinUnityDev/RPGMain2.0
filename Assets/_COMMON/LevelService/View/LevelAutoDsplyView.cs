@@ -10,12 +10,28 @@ namespace Common
     public class LevelAutoDsplyView : MonoBehaviour
     {
         [SerializeField] LevelModel lvlModel;
+        [SerializeField] LevelView levelView; 
 
         CharModel charModel; 
-        public void Init()
+        public void Init(LevelView levelView)
         {
+            this.levelView = levelView;
             InvService.Instance.OnCharSelectInvPanel -= OnCharSelectInInv;
-            InvService.Instance.OnCharSelectInvPanel += OnCharSelectInInv; 
+            InvService.Instance.OnCharSelectInvPanel += OnCharSelectInInv;
+            levelView.OnLevelDsplyChg -= ToggleDsply;
+            levelView.OnLevelDsplyChg += ToggleDsply; 
+        }
+
+        void ToggleDsply(LvlDspyType lvlDspyType)
+        {
+            if (lvlDspyType == LvlDspyType.SelectPanel)
+            {
+                CharModel charModel = InvService.Instance.charSelectController.charModel; 
+                OnCharSelectInInv(charModel);
+                gameObject.SetActive(true);
+            }                
+            else
+                gameObject.SetActive(false);
         }
 
         void OnCharSelectInInv(CharModel charModel)

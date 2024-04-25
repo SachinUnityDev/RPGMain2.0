@@ -126,24 +126,21 @@ MonoBehaviour:
   allCharStoryPara:
   - charName: 3
     allParastr:
-    - "Safrima\r CAHYO\nPreviously called Idikum. The peninsula that lies in the
-      south of Shargad. Rainforests, jungles, deserts and savannahs are some common
-      landscapes to be found in the land. In addition to those, there is some part
-      of the large Hawkwing Mountain Range. \r\n"
+    - "He was ostracized by his people because of being an albino, thus exiled by
+      the commander, ruler of Macanegheri out of his lands. Now he is in Nekkisari
+      to start a new chapter in his life.\r"
     unLockedIndex: 0
   - charName: 2
     allParastr:
-    - "Safrima\r BARAN\nPreviously called Idikum. The peninsula that lies in the
-      south of Shargad. Rainforests, jungles, deserts and savannahs are some common
-      landscapes to be found in the land. In addition to those, there is some part
-      of the large Hawkwing Mountain Range. \r\n"
+    - "After his lover Kedje and her family left their hometown for Safrima, Baran
+      decided to pursue them, hoping to find her. He believes she is somewhere near
+      Nekkisari.\r"
     unLockedIndex: 0
   - charName: 7
     allParastr:
-    - "Safrima\r  RAYYAN\nPreviously called Idikum. The peninsula that lies in the
-      south of Shargad. Rainforests, jungles, deserts and savannahs are some common
-      landscapes to be found in the land. In addition to those, there is some part
-      of the large Hawkwing Mountain Range. \r\n"
+    - He was just an idle kid in Nekkisari until one day, Minami the Soothsayer approached
+      and proposed to make him her apprentice. He started as an errand boy in the
+      temple, but now he is climbing the ranks to become an expert Water Mage.
     unLockedIndex: 0
   - charName: 4
     allParastr:

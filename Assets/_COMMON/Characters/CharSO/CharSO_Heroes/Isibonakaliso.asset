@@ -28,7 +28,8 @@ MonoBehaviour:
   mainExp: 0
   jobExp: 0
   skillPts: 0
-  charLvl: 1
+  spawnlvl: 1
+  charLvl: 0
   charNameStr: Isibonakaliso
   availOfChar: 0
   stateOfChar: 0

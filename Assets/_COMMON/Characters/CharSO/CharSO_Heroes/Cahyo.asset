@@ -31,7 +31,8 @@ MonoBehaviour:
   mainExp: 0
   jobExp: 0
   skillPts: 0
-  charLvl: 3
+  spawnlvl: 3
+  charLvl: 0
   charNameStr: Cahyo
   availOfChar: 1
   stateOfChar: 2

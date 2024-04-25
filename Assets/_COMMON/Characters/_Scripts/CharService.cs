@@ -203,7 +203,7 @@ namespace Common
 
             charsInPlayControllers.Add(charController);
             allyInPlayControllers.Add(charController);
-           
+            LevelService.Instance.LevelUpInitAlly(charController); 
             charsInPlay.Add(go);
             allyInPlay.Add(go);
             allCharModels.Add(charModel);

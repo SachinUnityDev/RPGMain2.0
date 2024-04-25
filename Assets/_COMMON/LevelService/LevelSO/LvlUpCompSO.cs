@@ -63,7 +63,7 @@ namespace Common
                 }
 
             }
-            Debug.Log("LEVEL DATA NOT Recieved ");
+            Debug.LogError("LEVEL DATA NOT Recieved " + lvl);
             return null;
         }
 

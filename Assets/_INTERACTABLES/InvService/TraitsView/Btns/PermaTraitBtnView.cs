@@ -37,7 +37,7 @@ namespace Interactables
         public void Init(InvTraitsView invTraitsView)
         {
             this.invTraitsView = invTraitsView;
-            
+            text = GetComponentInChildren<TextMeshProUGUI>();
             OnClick(); 
         }
         

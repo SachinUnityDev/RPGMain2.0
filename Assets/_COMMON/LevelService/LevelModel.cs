@@ -31,16 +31,16 @@ namespace Common
         public LvlStackData(CharNames charName)
         {
             this.charName = charName;
-            for (int i = 1; i <= 12; i++)
-            {
-                ManualOptData manualOptData = new ManualOptData((Levels)i);
-                allOptionsChosen.Add(manualOptData); 
-            }
-            for (int i = 1; i <= 12; i++)
-            {
-                LvlDataComp lvlDataComp = new LvlDataComp((Levels)i);
-                allOptionsPending.Add(lvlDataComp);
-            }
+            //for (int i = 1; i <= 12; i++)
+            //{
+            //    ManualOptData manualOptData = new ManualOptData((Levels)i);
+            //    allOptionsChosen.Add(manualOptData); 
+            //}
+            //for (int i = 1; i <= 12; i++)
+            //{
+            //    LvlDataComp lvlDataComp = new LvlDataComp((Levels)i);
+            //    allOptionsPending.Add(lvlDataComp);
+            //}
         }
     }
     [System.Serializable]
@@ -72,7 +72,11 @@ namespace Common
         public void AddOptions2ChosenStack(CharNames charName, List<LvlData> allStatData, Levels lvl)
         {
             int i = allCharLvlUpData.FindIndex(t => t.charName == charName);
-            int j = allCharLvlUpData[i].allOptionsChosen.FindIndex(t => t.lvl == lvl);
+            int j = allCharLvlUpData[i].allOptionsChosen.FindIndex(t => t.lvl == lvl); 
+            if(j ==-1)
+            {
+                Debug.LogError("man opts not found"+ lvl); 
+            }
             if (allCharLvlUpData[i].allOptionsChosen[j].allOptions.Count > 0)
             {
                 allCharLvlUpData[i].allOptionsChosen[j].allOptions.Clear(); 
@@ -107,7 +111,13 @@ namespace Common
             }
 
             int j = allCharLvlUpData[i].allOptionsPending.FindIndex(t => t.level == lvl);
-            
+            if (j == -1)
+            {
+                LvlDataComp lvlDataComp = new LvlDataComp(lvl); 
+                allCharLvlUpData[i].allOptionsPending.Add(lvlDataComp);
+                j = 0; 
+            }
+
             if (allCharLvlUpData[i].allOptionsPending[j].allStatDataOption1.Count > 0)
             {
                 allCharLvlUpData[i].allOptionsPending[j].allStatDataOption1.Clear();

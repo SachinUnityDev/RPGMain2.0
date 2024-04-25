@@ -9,7 +9,6 @@ using System.Linq;
 using UnityEngine.UI;
 using Interactables;
 using System;
-using System.Security.Policy;
 
 namespace Common
 {
@@ -17,8 +16,7 @@ namespace Common
     {
         None, 
         ManSelect, 
-        ManDsply, 
-        AutoDsply,
+        SelectPanel,         
     }
 
     public class LevelView : MonoBehaviour
@@ -39,12 +37,13 @@ namespace Common
         public void LevelViewInit()
         {
             levelBtn.InitLvlBtn(this, lvlManSelectView, lvlAutoDsply);
-            lvlManSelectView.LevelManSelectInit();
-            lvlManDsply.Init();
-            lvlAutoDsply.Init(); 
+            lvlManSelectView.LevelManSelectInit(this);
+            lvlManDsply.Init(this);
+            lvlAutoDsply.Init(this);
           
-        }
+          
 
+        }        
 
         public void On_LvlDsplyChg(LvlDspyType lvlDsplytype)
         {

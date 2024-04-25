@@ -12,8 +12,6 @@ namespace Common
         public LvlUpCompSO lvlUpCompSO;
         public LvlNExpSO lvlNExpSO;
 
-             
-
         [Header("Game Init")]
         public bool isNewGInitDone = false;
 
@@ -38,13 +36,11 @@ namespace Common
         {
             charModel = charController.charModel;
             CharacterSO charSO = CharService.Instance.GetCharSO(charModel); 
-
-
-            Levels initLvl = (Levels)charModel.charLvl;
-            Levels finalLvl = (Levels)charSO.charLvl;
+            int initLvl = charModel.charLvl;
+            int finalLvl = charSO.spawnlvl;
             if (charModel.orgCharMode == CharMode.Ally)
             {
-                AutoLvlUpAlly(charController, initLvl, finalLvl);
+                charController.ChgLevelUp(finalLvl, initLvl);                  
             }
         }
 
@@ -67,24 +63,27 @@ namespace Common
             this.charModel= charController.charModel;
 
             int lvlDiff = finalLvl - initLvl;
-            if ((lvlDiff) == 1)  // can be removed
+            if(lvlDiff > 0) 
+            for (int i = (int)initLvl; i < (int)finalLvl; i++)
             {
-                AutoLvlUpByOne(finalLvl);
+                AutoLvlUpByOne((Levels)(i + 1), (Levels)i); // && adds manual pending stack
             }
-            else
-            {
-                for (int i = (int)initLvl; i <= (int)finalLvl; i++)
-                {
-                    AutoLvlUpByOne((Levels)(i + 1));
-                }
-            }
+
+            //if ((lvlDiff) == 1)  // can be removed
+            //{
+            //    AutoLvlUpByOne(finalLvl);
+            //}
+            //else
+            //{
+               
+            //}
         }
 
-        void AutoLvlUpByOne(Levels finalLvl)
+        void AutoLvlUpByOne(Levels finalLvl, Levels initLvl)
         {
             Archetype heroType = charModel.archeType;
             LvlDataComp lvlDataComp = lvlUpCompSO.GetLvlData(heroType, finalLvl);
-            Add2ManPendingStack(finalLvl);
+            Add2ManPendingStack(finalLvl, lvlDataComp);
            
 
 
@@ -102,10 +101,10 @@ namespace Common
         }
       
 
-        void Add2ManPendingStack(Levels finalLvl)
+        void Add2ManPendingStack(Levels finalLvl, LvlDataComp lvlDataComp)
         {
             CharNames charName = charModel.charName;
-            LvlDataComp lvlDataComp = lvlUpCompSO.GetLvlData(charModel.archeType, finalLvl);
+            //LvlDataComp lvlDataComp = lvlUpCompSO.GetLvlData(charModel.archeType, finalLvl);
             List<LvlData> option1 = lvlDataComp.allStatDataOption1;
             List<LvlData> option2 = lvlDataComp.allStatDataOption2;
 

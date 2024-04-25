@@ -70,6 +70,7 @@ namespace Common
         [SerializeField] Shader shaderOnHover;
         [SerializeField] bool isCharHovered = false;
         [SerializeField] float prevTime = 0f;
+        [SerializeField] CharacterSO charSO; 
 
         private void OnEnable()
         {
@@ -92,6 +93,7 @@ namespace Common
         }
         public CharModel InitiatizeController(CharacterSO _charSO)
         {
+            charSO = _charSO;
             if (SaveService.Instance.slotSelect == SaveSlot.New)
             {
                 charModel = new CharModel(_charSO);
@@ -624,12 +626,11 @@ namespace Common
         }
 
         #region   LVL AND EXPERIENCE CONTROLS
-        public void ChgLevelUp(int finalLvl)
+        public void ChgLevelUp(int finalLvl, int initlvl)
         {
             charModel.skillPts++;
-            int initLvl = charModel.charLvl;
             if(charModel.orgCharMode == CharMode.Ally)  // ensure pets or beeastiary don t level up
-                LevelService.Instance.AutoLvlUpAlly(this, (Levels)initLvl, (Levels)finalLvl);            
+                LevelService.Instance.AutoLvlUpAlly(this, (Levels)initlvl, (Levels)finalLvl);            
         }
         public void ChgLevelDown()
         {
@@ -659,9 +660,19 @@ namespace Common
             int totalExpPts = CharService.Instance.lvlNExpSO.GetThresholdExpPts4Lvl(nextlvl); 
             if(charModel.mainExp > totalExpPts)
             {
-                ChgLevelUp(nextlvl); 
+                int initlvl = charModel.charLvl; 
+                ChgLevelUp(nextlvl, initlvl); 
             }
         }
+
+        public void LvlUpOnCharSpawn()
+        {
+            // get final lvl , and spawn lvl from the so 
+            int initLvl = charSO.charLvl;
+            int finalLvl = charSO.spawnlvl;
+            ChgLevelUp(finalLvl, initLvl); 
+        }
+
         #endregion
 
         #region HUNGER AND THRIST

@@ -55,12 +55,12 @@ namespace Common
                     spritePlus =
                         LevelService.Instance.lvlUpCompSO.lvlMinusSprite;
                     break;
-                case LvlDspyType.ManDsply:
+                case LvlDspyType.SelectPanel:
                     lvlBtnImg.sprite = LevelService.Instance.lvlUpCompSO.spriteN;
                     break;
-                case LvlDspyType.AutoDsply:
-                    lvlBtnImg.sprite = LevelService.Instance.lvlUpCompSO.spriteN;
-                    break;
+                //case LvlDspyType.AutoDsply:
+                ////    lvlBtnImg.sprite = LevelService.Instance.lvlUpCompSO.spriteN;
+                //    break;
                 default:
                     break;
             }
@@ -70,16 +70,16 @@ namespace Common
         {
             if (levelManSelectView.allPendingOptions.Count > 0)
             {
-                if(lvlDspyType != LvlDspyType.ManDsply)
-                    levelView.On_LvlDsplyChg(LvlDspyType.ManDsply);
+                if(lvlDspyType != LvlDspyType.ManSelect)
+                    levelView.On_LvlDsplyChg(LvlDspyType.ManSelect);
                 else
                     levelView.On_LvlDsplyChg(LvlDspyType.None); // lvl Dsply already Open
             }
             else
             {
                 // show auto dsply
-                if (lvlDspyType != LvlDspyType.AutoDsply)
-                    levelView.On_LvlDsplyChg(LvlDspyType.AutoDsply);
+                if (lvlDspyType != LvlDspyType.SelectPanel)
+                    levelView.On_LvlDsplyChg(LvlDspyType.SelectPanel);                
                 else
                     levelView.On_LvlDsplyChg(LvlDspyType.None); // Auto Dsply already Open                
             }

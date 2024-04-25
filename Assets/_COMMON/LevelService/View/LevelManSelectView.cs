@@ -39,7 +39,7 @@ namespace Common
         [SerializeField] CharNames charName;
         [SerializeField] Levels currLvl = Levels.Level0;
         [SerializeField] CharModel charModel;
-
+        [SerializeField] LevelView levelView; 
    
         void Start()
         {
@@ -49,18 +49,31 @@ namespace Common
             opt2Btn.onClick.AddListener(OnOptBtn2Pressed);
             UnLoad();
         }
-
-        public void LevelManSelectInit()
+ 
+        public void LevelManSelectInit(LevelView levelView)
         {
-            // get abbas charModel on inv open
-            // make it work only for allies first
-            CharModel charModel =
-             CharService.Instance.GetAbbasController(CharNames.Abbas).charModel;
-            FillOptionPendingList(charModel);
+            this.levelView = levelView;
+            InvService.Instance.OnCharSelectInvPanel -= FillOptionPendingList;
+            InvService.Instance.OnCharSelectInvPanel += FillOptionPendingList;
+            levelView.OnLevelDsplyChg -= ToggleDsply;
+            levelView.OnLevelDsplyChg += ToggleDsply;
+        }
+        void ToggleDsply(LvlDspyType lvlDspyType)
+        {
+            if (lvlDspyType == LvlDspyType.ManSelect)
+            {
+                CharModel charModel = InvService.Instance.charSelectController.charModel;
+                FillOptionPendingList(charModel);
+
+                gameObject.SetActive(true);
+            }
+            else
+                gameObject.SetActive(false);
         }
         void FillOptionPendingList(CharModel charModel)
         {
             if (charModel == null) return;
+
             charName = charModel.charName;
             this.charModel = charModel;
             LvlStackData lvlStackData =

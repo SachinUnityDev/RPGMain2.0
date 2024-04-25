@@ -35,6 +35,7 @@ namespace Common
         public int skillPts;
 
         [Header("LEVELS")]
+        public int spawnlvl; 
         public int charLvl;
 
         public string charNameStr = "";

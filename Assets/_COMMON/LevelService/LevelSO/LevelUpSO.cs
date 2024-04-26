@@ -17,7 +17,7 @@ namespace Common
     [System.Serializable]
     public class LvlUpData
     {
-        public Levels lvl;
+        public int lvl;
         public List<AttribData> statChg = new List<AttribData>(); 
     }
 
@@ -38,7 +38,7 @@ namespace Common
 
         public List<LvlGrpMap> allLvlGrpMap = new List<LvlGrpMap>();
 
-        public List<AttribData> GetLvlUpIncr4Stats(CharModel charModel, Levels finallvl)
+        public List<AttribData> GetLvlUpIncr4Stats(CharModel charModel, int finallvl)
         {
             RaceType raceType = charModel.raceType;
             LvlUpGroup grp = GetCharGroupNo(raceType);
@@ -50,7 +50,7 @@ namespace Common
                     foreach (var statChges in grpData.allLvlsInGrp)
                     {
                         Debug.Log("stat changes Lvl list" + statChges.lvl);
-                        if (statChges.lvl == (Levels)targetLvl)
+                        if (statChges.lvl == (int)targetLvl)
                         {                            
                             List<AttribData> lst = new List<AttribData>();
                             lst = statChges.statChg; 

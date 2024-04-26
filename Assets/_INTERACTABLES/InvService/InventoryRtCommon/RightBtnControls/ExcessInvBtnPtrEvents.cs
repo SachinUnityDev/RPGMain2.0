@@ -42,6 +42,7 @@ namespace Interactables
             else
             {
                 Load(); 
+                InvService.Instance.invMainViewController.ToggleViewFwd(true);
             }
             isClicked = !isClicked;
         }

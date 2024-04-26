@@ -630,7 +630,7 @@ namespace Common
         {
             charModel.skillPts++;
             if(charModel.orgCharMode == CharMode.Ally)  // ensure pets or beeastiary don t level up
-                LevelService.Instance.AutoLvlUpAlly(this, (Levels)initlvl, (Levels)finalLvl);            
+                LevelService.Instance.AutoLvlUpAlly(this, (int)initlvl, (int)finalLvl);            
         }
         public void ChgLevelDown()
         {

@@ -62,8 +62,8 @@ namespace Common
                    string sign = (lvlData.val < 0) ? "-" : "+";
                     string str = sign + $"{lvlData.val} {lvlData.attribName}";
                     transform.GetChild(0).GetChild(i).GetComponent<TextMeshProUGUI>().text
-                                                                    = str;
-                    j++; 
+                                                                    = str.ToTitleCase();
+                   // j++; 
                 }
             }
             for (j = i; j < transform.GetChild(0).childCount; j++)

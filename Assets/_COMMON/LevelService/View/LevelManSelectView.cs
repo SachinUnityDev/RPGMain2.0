@@ -37,9 +37,13 @@ namespace Common
 
         [Header("CURR CHAR")]
         [SerializeField] CharNames charName;
-        [SerializeField] Levels currLvl = Levels.Level0;
+        [SerializeField] int currLvl = 0;
         [SerializeField] CharModel charModel;
-        [SerializeField] LevelView levelView; 
+        [SerializeField] LevelView levelView;
+
+        [SerializeField] float prevPress = 0f; 
+
+
    
         void Start()
         {
@@ -47,7 +51,7 @@ namespace Common
 
             opt1Btn.onClick.AddListener(OnOptBtn1Pressed);
             opt2Btn.onClick.AddListener(OnOptBtn2Pressed);
-            UnLoad();
+          
         }
  
         public void LevelManSelectInit(LevelView levelView)
@@ -64,11 +68,14 @@ namespace Common
             {
                 CharModel charModel = InvService.Instance.charSelectController.charModel;
                 FillOptionPendingList(charModel);
-
-                gameObject.SetActive(true);
+                Load(); 
+                //gameObject.SetActive(true);
             }
             else
-                gameObject.SetActive(false);
+            {
+                UnLoad();
+            }
+                //gameObject.SetActive(false);
         }
         void FillOptionPendingList(CharModel charModel)
         {
@@ -80,7 +87,7 @@ namespace Common
                     LevelService.Instance.lvlModel.GetLvlStackData(charModel.charName);
             if (lvlStackData == null) return;
 
-            if (lvlStackData.allOptionsPending.Count <= 0)
+            if (!levelView.ChkIfManSelectPending())
             {
                 Debug.Log("No options are available");
                 isButtonActive = false;
@@ -110,6 +117,8 @@ namespace Common
         {
             if (index >= allPendingOptions.Count)
             {
+                levelView.On_LvlDsplyChg(LvlDspyType.SelectPanel); 
+                UnLoad(); 
                 return;
             }
             string str1 = "";
@@ -129,19 +138,24 @@ namespace Common
 
         void OnOptBtn1Pressed()
         {
-            currLvl = allPendingOptions[index].level;
-            LevelService.Instance.lvlModel.RemoveOptions2PendingStack(charName, currLvl, 1);
+            if((Time.time- prevPress) < 0.5f)
+                return; prevPress = Time.time;
+
+            currLvl = allPendingOptions[index].level;           
             LevelService.Instance.lvlModel.AddOptions2ChosenStack(charName
                             , allPendingOptions[index].allStatDataOption1, currLvl);
+            LevelService.Instance.lvlModel.RemoveOptions2PendingStack(charName, currLvl, 1);
             index++;
             FillOptionsPanel();
         }
         void OnOptBtn2Pressed()
         {
-            currLvl = allPendingOptions[index].level;
-            LevelService.Instance.lvlModel.RemoveOptions2PendingStack(charName, currLvl, 2);
+            if ((Time.time - prevPress) < 0.5f)
+                return; prevPress = Time.time;
+            currLvl = allPendingOptions[index].level;      
             LevelService.Instance.lvlModel.AddOptions2ChosenStack(charName
-                            , allPendingOptions[index].allStatDataOption2, currLvl);
+                                        ,allPendingOptions[index].allStatDataOption2, currLvl);
+            LevelService.Instance.lvlModel.RemoveOptions2PendingStack(charName, currLvl, 2);
             index++;
             FillOptionsPanel();
         }
@@ -152,14 +166,14 @@ namespace Common
         }
 
         public void UnLoad()
-        {
+        {       
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
             isPanelOpen = false;
         }
 
         public void Init()
         {           
-            UnLoad();
+           
         }
 
     }

@@ -9,10 +9,10 @@ namespace Common
     [Serializable]
     public class ManualOptData
     {
-        public Levels lvl;
+        public int lvl;
         public List<LvlData> allOptions = new List<LvlData>();
 
-        public ManualOptData(Levels lvl)
+        public ManualOptData(int lvl)
         {
             this.lvl = lvl;
         }
@@ -30,17 +30,7 @@ namespace Common
 
         public LvlStackData(CharNames charName)
         {
-            this.charName = charName;
-            //for (int i = 1; i <= 12; i++)
-            //{
-            //    ManualOptData manualOptData = new ManualOptData((Levels)i);
-            //    allOptionsChosen.Add(manualOptData); 
-            //}
-            //for (int i = 1; i <= 12; i++)
-            //{
-            //    LvlDataComp lvlDataComp = new LvlDataComp((Levels)i);
-            //    allOptionsPending.Add(lvlDataComp);
-            //}
+            this.charName = charName;           
         }
     }
     [System.Serializable]
@@ -69,38 +59,26 @@ namespace Common
                 Debug.Log(" Lvl Stack not found"); 
             }
         }
-        public void AddOptions2ChosenStack(CharNames charName, List<LvlData> allStatData, Levels lvl)
+        public void AddOptions2ChosenStack(CharNames charName, List<LvlData> allStatData, int lvl)
         {
             int i = allCharLvlUpData.FindIndex(t => t.charName == charName);
-            int j = allCharLvlUpData[i].allOptionsChosen.FindIndex(t => t.lvl == lvl); 
-            if(j ==-1)
+            int j = allCharLvlUpData[i].allOptionsChosen.FindIndex(t => t.lvl == lvl);           
+            if (j ==-1)
             {
-                Debug.LogError("man opts not found"+ lvl); 
+                ManualOptData manualOptData = new ManualOptData(lvl);
+                allCharLvlUpData[i].allOptionsChosen.Add(manualOptData);
+                j = allCharLvlUpData[i].allOptionsChosen.FindIndex(t => t.lvl == lvl);
             }
-            if (allCharLvlUpData[i].allOptionsChosen[j].allOptions.Count > 0)
+            else if (allCharLvlUpData[i].allOptionsChosen[j].allOptions.Count > 0)
             {
-                allCharLvlUpData[i].allOptionsChosen[j].allOptions.Clear(); 
+                allCharLvlUpData[i].allOptionsChosen[j].allOptions.Clear();
+            }
 
-            }
             allCharLvlUpData[i].allOptionsChosen[j].allOptions.AddRange(allStatData); 
 
         }
-
-        //public void RemoveOptions2ChosenStack(CharNames charName, Levels lvl)
-        //{
-        //    int i = allCharLvlUpData.FindIndex(t => t.charName == charName);
-        //    int j = allCharLvlUpData[i].allOptionsChosen.FindIndex(t => t.lvl == lvl);
-        //    if (allCharLvlUpData[i].allOptionsChosen[j].allOptions.Count > 0)
-        //    {
-        //        allCharLvlUpData[i].allOptionsChosen[j].allOptions.Clear();
-        //    }
-        //    //foreach (var stat in allStatData)
-        //    //{
-        //    //    allCharLvlUpData[i].allOptionsChosen[j].allOptions.Remove(stat);
-        //    //}
-        //}
         public void AddOptions2PendingStack(CharNames charName, List<LvlData> allStatData1
-            ,List<LvlData> allStatData2, Levels lvl)
+            ,List<LvlData> allStatData2, int lvl)
         {
             int i = allCharLvlUpData.FindIndex(t => t.charName == charName);
             if (i == -1)
@@ -115,7 +93,7 @@ namespace Common
             {
                 LvlDataComp lvlDataComp = new LvlDataComp(lvl); 
                 allCharLvlUpData[i].allOptionsPending.Add(lvlDataComp);
-                j = 0; 
+                j = allCharLvlUpData[i].allOptionsPending.FindIndex(t => t.level == lvl); 
             }
 
             if (allCharLvlUpData[i].allOptionsPending[j].allStatDataOption1.Count > 0)
@@ -128,20 +106,12 @@ namespace Common
 
         }
 
-        public void RemoveOptions2PendingStack(CharNames charName, Levels lvl, int opt)
+        public void RemoveOptions2PendingStack(CharNames charName, int lvl, int opt)
         {
             int i = allCharLvlUpData.FindIndex(t => t.charName == charName);
             int j = allCharLvlUpData[i].allOptionsPending.FindIndex(t => t.level == lvl);
             if (allCharLvlUpData[i].allOptionsPending[j].allStatDataOption1.Count > 0)
-            {
-                if(opt == 1)
-                {
-                    LevelService.Instance.ManLvlUp(charName, allCharLvlUpData[i].allOptionsPending[j].allStatDataOption1); 
-                }
-                if (opt == 2)
-                {
-                    LevelService.Instance.ManLvlUp(charName, allCharLvlUpData[i].allOptionsPending[j].allStatDataOption2);
-                }
+            {            
                 allCharLvlUpData[i].allOptionsPending[j].allStatDataOption1.Clear();
                 allCharLvlUpData[i].allOptionsPending[j].allStatDataOption2.Clear();
             }

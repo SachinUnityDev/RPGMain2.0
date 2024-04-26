@@ -15,7 +15,7 @@ namespace Common
     [Serializable]
     public class LvlDataComp
     {
-        public Levels level;      
+        public int level;      
         public List<LvlData> allStatDataAuto = new List<LvlData>();
         public List<LvlData> allStatDataOption1 = new List<LvlData>();
         public List<LvlData> allStatDataOption2 = new List<LvlData>();
@@ -24,7 +24,7 @@ namespace Common
         {
 
         }
-        public LvlDataComp(Levels level)
+        public LvlDataComp(int level)
         {
             this.level = level;
         }
@@ -47,7 +47,7 @@ namespace Common
         public Sprite lvlMinusSprite;
         public Sprite spriteN; 
 
-        public LvlDataComp GetLvlData(Archetype heroType, Levels lvl)
+        public LvlDataComp GetLvlData(Archetype heroType, int lvl)
         {
             foreach (CharLvlUpdata lvlUpData in allCharLvlUpData)
             {

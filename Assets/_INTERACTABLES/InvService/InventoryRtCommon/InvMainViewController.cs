@@ -12,8 +12,10 @@ namespace Interactables
         [SerializeField] HelpName helpName;
 
         [Header("PARENT VIEW CONTROLLER")]
-        public InvRightViewController invCommViewController;
+        public LeftView leftView;
+        public InvRightViewController invCommViewController;        
         public BtmCharViewController btmCharViewController;
+
         [Header("Level view ")]
         public LevelView levelView;
 
@@ -58,13 +60,21 @@ namespace Interactables
             invCommViewController.Init();
             btmCharViewController.Init();
             btmCharViewController.gameObject.transform.SetParent(transform);
-            levelView.LevelViewInit();
+            levelView.LevelViewInit(this);
             invTraitsView.Init(); 
 
         }
         public HelpName GetHelpName()
         {
             return helpName;
+        }
+
+        public void ToggleViewFwd(bool fwdRight)
+        {
+            if(fwdRight)
+                leftView.transform.SetAsFirstSibling();            
+            else
+                invCommViewController.transform.SetAsFirstSibling();
         }
 
     }

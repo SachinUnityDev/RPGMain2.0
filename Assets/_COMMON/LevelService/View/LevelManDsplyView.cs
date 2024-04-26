@@ -65,9 +65,11 @@ namespace Common
                         string sign = (lvldata.val < 0) ? "-" : "+";
                         string str = sign + $"{lvldata.val} {lvldata.attribName}";
                         container.GetChild(i).GetComponent<TextMeshProUGUI>().text
-                                                                        = str;
-                       // j++;
-                    }
+                                                                        = str.ToTitleCase(); 
+                                                                        
+                        // j++;
+                        
+                    }                
                 }
             }
             for (j = i; j < container.childCount; j++)

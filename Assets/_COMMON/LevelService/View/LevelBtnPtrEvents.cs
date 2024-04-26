@@ -34,7 +34,7 @@ namespace Common
             FillImg(); 
         }
 
-        void OnDsplyChg(LvlDspyType lvlDspyType)
+         void OnDsplyChg(LvlDspyType lvlDspyType)
         {
             this.lvlDspyType= lvlDspyType;
             FillImg(); 
@@ -46,10 +46,15 @@ namespace Common
             switch (lvlDspyType)
             {
                 case LvlDspyType.None:
-                    if(levelManSelectView.allPendingOptions.Count > 0)
-                        lvlBtnImg.sprite = LevelService.Instance.lvlUpCompSO.lvlPlusSprite; 
+                    //if(levelManSelectView.allPendingOptions.Count > 0)
+                    if (levelView.ChkIfManSelectPending())
+                    {
+                        lvlBtnImg.sprite = LevelService.Instance.lvlUpCompSO.lvlPlusSprite;                       
+                    }
                     else
-                        lvlBtnImg.sprite = LevelService.Instance.lvlUpCompSO.spriteN;
+                    {
+                        lvlBtnImg.sprite = LevelService.Instance.lvlUpCompSO.spriteN;                      
+                    }                        
                     break;
                 case LvlDspyType.ManSelect:
                     spritePlus =
@@ -57,10 +62,7 @@ namespace Common
                     break;
                 case LvlDspyType.SelectPanel:
                     lvlBtnImg.sprite = LevelService.Instance.lvlUpCompSO.spriteN;
-                    break;
-                //case LvlDspyType.AutoDsply:
-                ////    lvlBtnImg.sprite = LevelService.Instance.lvlUpCompSO.spriteN;
-                //    break;
+                    break;             
                 default:
                     break;
             }
@@ -68,7 +70,8 @@ namespace Common
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (levelManSelectView.allPendingOptions.Count > 0)
+            //if (levelManSelectView.allPendingOptions.Count > 0)
+            if(levelView.ChkIfManSelectPending())
             {
                 if(lvlDspyType != LvlDspyType.ManSelect)
                     levelView.On_LvlDsplyChg(LvlDspyType.ManSelect);
@@ -83,6 +86,7 @@ namespace Common
                 else
                     levelView.On_LvlDsplyChg(LvlDspyType.None); // Auto Dsply already Open                
             }
+            levelView.invMainViewController.ToggleViewFwd(false); 
         }
 
 

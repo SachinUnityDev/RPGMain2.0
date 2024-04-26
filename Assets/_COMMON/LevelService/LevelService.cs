@@ -47,17 +47,17 @@ namespace Common
         // Called from the view controller
         public void ManLvlUp(CharNames charName, List<LvlData> optionChosen)
         {
-            charController = CharService.Instance.GetAbbasController(charName);
+            charController = CharService.Instance.charsInPlayControllers.Find(t=>t.charModel.charName == charName);  
             // apply to char Controller
             foreach (LvlData attrib in optionChosen)
             {
                 charController.ChangeAttrib(CauseType.LevelUp, 1, 1, attrib.attribName
                     , attrib.val, true);
             }
-            lvlModel.AddOptions2ChosenStack(charName, optionChosen, (Levels)charModel.charLvl);
+            lvlModel.AddOptions2ChosenStack(charName, optionChosen, (int)charModel.charLvl);
         }
 
-        public void AutoLvlUpAlly(CharController charController, Levels initLvl, Levels finalLvl)
+        public void AutoLvlUpAlly(CharController charController, int initLvl, int finalLvl)
         {
             this.charController= charController;    
             this.charModel= charController.charModel;
@@ -66,7 +66,7 @@ namespace Common
             if(lvlDiff > 0) 
             for (int i = (int)initLvl; i < (int)finalLvl; i++)
             {
-                AutoLvlUpByOne((Levels)(i + 1), (Levels)i); // && adds manual pending stack
+                AutoLvlUpByOne((i + 1), (int)i); // && adds manual pending stack
             }
 
             //if ((lvlDiff) == 1)  // can be removed
@@ -79,7 +79,7 @@ namespace Common
             //}
         }
 
-        void AutoLvlUpByOne(Levels finalLvl, Levels initLvl)
+        void AutoLvlUpByOne(int finalLvl, int initLvl)
         {
             Archetype heroType = charModel.archeType;
             LvlDataComp lvlDataComp = lvlUpCompSO.GetLvlData(heroType, finalLvl);
@@ -101,7 +101,7 @@ namespace Common
         }
       
 
-        void Add2ManPendingStack(Levels finalLvl, LvlDataComp lvlDataComp)
+        void Add2ManPendingStack(int finalLvl, LvlDataComp lvlDataComp)
         {
             CharNames charName = charModel.charName;
             //LvlDataComp lvlDataComp = lvlUpCompSO.GetLvlData(charModel.archeType, finalLvl);
@@ -120,22 +120,22 @@ namespace Common
             this.charController = charController;
             CharacterSO charSO = BestiaryService.Instance.GetEnemySO(charController.charModel.charName);
 
-            Levels initLvl = (Levels)charModel.charLvl;
-            Levels finalLvl = (Levels)charSO.charLvl;
+            int initLvl = charModel.charLvl;
+            int finalLvl = charSO.charLvl;
             AutoLvlUpEnemies(initLvl, finalLvl);  // enemies should not level up untill spawned
         }
 
 
-        void AutoLvlUpEnemies(Levels initLvl, Levels finalLvl)
+        void AutoLvlUpEnemies(int initLvl, int finalLvl)
         {
            
             for (int i = (int)initLvl; i <= (int)finalLvl; i++)
             {
-                AutoLvlUpByOneEnemy((Levels)(i + 1));
+                AutoLvlUpByOneEnemy((int)(i + 1));
             }
         }
    
-        void AutoLvlUpByOneEnemy(Levels finalLvl)
+        void AutoLvlUpByOneEnemy(int finalLvl)
         {
             if (charModel == null)
             {

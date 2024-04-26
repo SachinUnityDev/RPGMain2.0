@@ -29,8 +29,12 @@ public static class ExtensionMethodsCombat
             return split;         
 
         }
-        
-        public static string CreateSpace(this string str)
+        public static string ToTitleCase(this string input)
+        {
+            return System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(input.ToLower());
+        }
+
+    public static string CreateSpace(this string str)
         {
             // Converts "AbbasTheSkirmisher" to "Abbas The Skirmisher"    
             string[] split = Regex.Split(str, @"(?<!^)(?=[A-Z])");

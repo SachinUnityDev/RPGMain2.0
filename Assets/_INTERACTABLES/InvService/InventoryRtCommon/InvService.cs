@@ -42,6 +42,7 @@ namespace Interactables
 
         [Header("Common Inv View NTBR")]
         public InvRightViewController invRightViewController; // ref
+        public InvMainViewController invMainViewController; 
       //  public GameObject invPanel;
         public bool isInvPanelOpen; // to track inv panel
         public bool isRightClickHovered= false;
@@ -154,7 +155,7 @@ namespace Interactables
 
             excessInvViewController = invXLGO.GetComponentInChildren<ExcessInvViewController>();
             invRightViewController = invXLGO.GetComponentInChildren<InvRightViewController>();
-           
+           invMainViewController = invXLGO.GetComponentInChildren<InvMainViewController>();
         }
 
         public void On_PartyLocked()

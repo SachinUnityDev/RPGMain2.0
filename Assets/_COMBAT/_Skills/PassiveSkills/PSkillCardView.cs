@@ -51,7 +51,7 @@ namespace Combat
         void PassiveSkillCardInit()
         {
 
-            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            if (GameService.Instance.currGameModel.gameState == GameState.InCombat)
             {
                 charController = CombatService.Instance?.currCharClicked;
                 if (charController == null) return;

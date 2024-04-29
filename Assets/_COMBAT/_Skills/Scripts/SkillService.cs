@@ -148,7 +148,7 @@ namespace Combat
         }
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            if (GameService.Instance.currGameModel.gameState == GameState.InCombat)
             {
                 skillView = FindObjectOfType<SkillView>();
                 _OnSkillApply += SkillEventtest;
@@ -392,7 +392,7 @@ namespace Combat
         }
         public void On_SkillSelected(CharNames _charName, SkillNames skillName)  // Ally Skill and perk "Skill Select" 
         {
-            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            if (GameService.Instance.currGameModel.gameState == GameState.InCombat)
             {
                 CombatService.Instance.combatState = CombatState.INCombat_InSkillSelected;
                 ClearPrevData();
@@ -719,7 +719,7 @@ namespace Combat
         #endregion
         private void Update()
         {
-            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            if (GameService.Instance.currGameModel.gameState == GameState.InCombat)
             {
                 if (CombatService.Instance.combatState == CombatState.INTactics)
                     return;

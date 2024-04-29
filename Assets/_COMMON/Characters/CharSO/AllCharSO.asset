@@ -55,3 +55,10 @@ MonoBehaviour:
   - archetype: 3
     spriteN: {fileID: 21300000, guid: a21f871c1bf2fc34f946caa1bb46a90f, type: 3}
     spriteHL: {fileID: 21300000, guid: a65845f12a3a5c046b669dd77f30fc9e, type: 3}
+  allAbbasClasstypeData:
+  - classType: 28
+    spriteN: {fileID: 21300000, guid: 1d5bb626aee8d4e4c9a105bbe0af6c95, type: 3}
+  - classType: 7
+    spriteN: {fileID: 21300000, guid: d6b2dd2a46abfd64899e252f3b4730f7, type: 3}
+  - classType: 18
+    spriteN: {fileID: 21300000, guid: 2aaf15589617d104c8d9c5684c32357c, type: 3}

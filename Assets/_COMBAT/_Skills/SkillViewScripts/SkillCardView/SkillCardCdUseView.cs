@@ -66,10 +66,10 @@ namespace Common
         {
 
             int j = 0; int currRd = 0; 
-            if(GameService.Instance.gameModel.gameState == GameState.InTown ||
-                GameService.Instance.gameModel.gameState == GameState.InQuestRoom)            
+            if(GameService.Instance.currGameModel.gameState == GameState.InTown ||
+                GameService.Instance.currGameModel.gameState == GameState.InQuestRoom)            
                         currRd = skillModel.cd;                
-            else if (GameService.Instance.gameModel.gameState == GameState.InTown)
+            else if (GameService.Instance.currGameModel.gameState == GameState.InTown)
                         currRd = CombatEventService.Instance.currentRound;
 
             for (j = 0; j < skillModel.cd; j++)

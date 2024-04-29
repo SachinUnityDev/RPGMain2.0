@@ -37,17 +37,17 @@ namespace Common
             {
                 RemoveHelpView();
             }
-            if (GameService.Instance.gameModel.gameState == GameState.None)
+            if (GameService.Instance.currGameModel.gameState == GameState.None)
                 return;
 
             GameObject canvasGo = null;
             this.helpName = _helpName;
 
-            if (GameService.Instance.gameModel.gameState == GameState.InTown)
+            if (GameService.Instance.currGameModel.gameState == GameState.InTown)
             {                
                 canvasGo = GameObject.FindGameObjectWithTag("Canvas");                
             }
-            if (GameService.Instance.gameModel.gameState == GameState.InQuestRoom)
+            if (GameService.Instance.currGameModel.gameState == GameState.InQuestRoom)
             {
                 canvasGo = GameObject.FindGameObjectWithTag("QuestCanvas");
             }

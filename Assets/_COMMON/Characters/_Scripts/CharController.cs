@@ -327,7 +327,7 @@ namespace Common
             DynamicPosData dyna = null;
             StatData statData = GetStat(statName);
         
-            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            if (GameService.Instance.currGameModel.gameState == GameState.InCombat)
             {
                 turn = CombatService.Instance.currentTurn;             
                 Vector3 fwd = Vector3.zero;
@@ -386,7 +386,7 @@ namespace Common
                                                                             = (int)modCurrValue;
             statModData.modVal = (int)modCurrValue;
             
-            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            if (GameService.Instance.currGameModel.gameState == GameState.InCombat)
                 PopulateOverCharBars();
 
             if (statName == StatName.health)
@@ -407,7 +407,7 @@ namespace Common
             int turn = -1;
             DynamicPosData dyna = null; 
             AttribData attribData = GetAttrib(attribName);         
-            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            if (GameService.Instance.currGameModel.gameState == GameState.InCombat)
             {
                 turn = CombatService.Instance.currentTurn;
                 //Debug.Log("attrib Change for  " + gameObject.name);

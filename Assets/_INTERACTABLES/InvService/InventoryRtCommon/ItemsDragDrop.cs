@@ -285,7 +285,7 @@ namespace Interactables
             if (iSlotable.slotType == SlotType.ProvActiveInv || iSlotable.slotType == SlotType.TrophySelectSlot
                 || iSlotable.slotType == SlotType.TrophyScrollSlot)
                 return;
-            if (GameService.Instance.gameModel.gameState == GameState.InTown)
+            if (GameService.Instance.currGameModel.gameState == GameState.InTown)
                 canvas = FindObjectOfType<Canvas>();
             rectTransform.anchoredPosition += eventData.delta/canvas.scaleFactor;           
         }

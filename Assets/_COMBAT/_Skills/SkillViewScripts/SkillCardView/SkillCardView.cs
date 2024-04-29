@@ -87,8 +87,8 @@ namespace Combat
         void SkillCardInit()
         {
             ClearData();
-            if (GameService.Instance.gameModel.gameState == GameState.InTown ||
-               GameService.Instance.gameModel.gameState == GameState.InQuestRoom)
+            if (GameService.Instance.currGameModel.gameState == GameState.InTown ||
+               GameService.Instance.currGameModel.gameState == GameState.InQuestRoom)
             {
                 charController = InvService.Instance?.charSelectController;
                 if (charController == null) return; 
@@ -96,7 +96,7 @@ namespace Combat
                 skillModel  = SkillService.Instance.skillModelHovered;
                 skillName = skillModel.skillName;
             }
-            if (GameService.Instance.gameModel.gameState == GameState.InCombat)              
+            if (GameService.Instance.currGameModel.gameState == GameState.InCombat)              
             {
                 charController = CombatService.Instance?.currCharClicked;
                 if (charController == null) return;
@@ -119,7 +119,7 @@ namespace Combat
             FillTopTrans();
             FillMidTrans();    
             FillBtmTrans();
-            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            if (GameService.Instance.currGameModel.gameState == GameState.InCombat)
             {
                 skillStateTxt.gameObject.SetActive(true);
                 SkillStateDsply();

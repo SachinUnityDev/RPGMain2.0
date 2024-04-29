@@ -44,7 +44,7 @@ namespace Common
 
         void BuffUnClickable(CharController charController)
         {
-            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            if (GameService.Instance.currGameModel.gameState == GameState.InCombat)
             {
                 if (this.charController.charModel.charID == charController.charModel.charID)
                 {

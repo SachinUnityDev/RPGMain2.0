@@ -182,9 +182,10 @@ namespace Common
                                                                && isPlankClicked)
             {
                 {
-                    KeyCode key = Event.current.keyCode;
+                    KeyCode key = Event.current.keyCode;                    
+                    KeyBindingData keyBindingData1  
+                        = keyBindingController.keyBindingSO.GetKeyBindingData(keyBindingData.gameState, key);
                     
-                    KeyBindingData keyBindingData1  = keyBindingController.keyBindingSO.GetKeyBindingData(keyBindingData.gameState, key);
                     if (keyBindingData1 != null)
                     {
                         keyBindingData1.keyPressed = KeyCode.None;

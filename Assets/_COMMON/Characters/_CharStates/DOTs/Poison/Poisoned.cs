@@ -17,7 +17,7 @@ namespace Common
         public override void StateApplyFX()
         {
             int strikerLvl = 0;
-            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            if (GameService.Instance.currGameModel.gameState == GameState.InCombat)
             {
                 strikerController = CombatService.Instance.currCharOnTurn;
                 strikerLvl = strikerController.charModel.charLvl;

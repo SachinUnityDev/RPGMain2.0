@@ -70,7 +70,7 @@ namespace Combat
         }
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            if (GameService.Instance.currGameModel.gameState == GameState.InCombat)
             {
                 CombatService.Instance.GetAllyInCombat(); 
                 On_CombatInit(CombatState.INTactics, LandscapeNames.Sewers, EnemyPackName.RatPack3);
@@ -295,7 +295,7 @@ namespace Combat
 
         public void On_CharHovered(GameObject _charHoveredGO)
         {
-            if(GameService.Instance.gameModel.gameState == GameState.InCombat)
+            if(GameService.Instance.currGameModel.gameState == GameState.InCombat)
             {
                 CharController charController = _charHoveredGO?.GetComponent<CharController>();
                 CombatService.Instance.currCharHovered = charController;            

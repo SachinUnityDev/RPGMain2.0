@@ -2,9 +2,7 @@ using Quest;
 using System.Collections;
 using System.Collections.Generic;
 using Town;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 
 
@@ -13,6 +11,8 @@ namespace Common
     [System.Serializable]
     public class GameModel
     {
+        public int profileSlot; 
+        [SerializeField] string profileName; 
         public GameState gameState;       
         public GameDifficulty gameDifficulty;  
         public LocationName locationName;
@@ -30,7 +30,15 @@ namespace Common
             this.locationName = locationName;   
             jobSelect = JobNames.None;
             abbasClassType= ClassType.None;
-
+            profileName = ""; 
+        }
+        public void SetProfileName(string profileName)
+        {
+            this.profileName= profileName;
+        }
+        public string GetProfileName()
+        {
+            return profileName;
         }
     }
 

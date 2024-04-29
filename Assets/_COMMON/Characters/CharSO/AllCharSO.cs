@@ -28,14 +28,24 @@ namespace Common
         public Sprite bgPortUnClicked;
         public Sprite bgPortUnAvail;
 
-        public List<ArchetypeData> allArchetypeData = new List<ArchetypeData>();  
-
+        public List<ArchetypeData> allArchetypeData = new List<ArchetypeData>();
+        public List<AbbasClasstypeData> allAbbasClasstypeData = new List<AbbasClasstypeData>();
         private void Awake()
         {
             charList.Clear();
             charList.AddRange(allAllySO);
             charList.AddRange(allEnemySO);
             FillCommonDetails(); 
+        }
+
+        public AbbasClasstypeData GetAbbasClasstypeData(ClassType classType)
+        {
+            int index = allAbbasClasstypeData.FindIndex(t => t.classType == classType);
+            if (index != -1)
+            {
+                return allAbbasClasstypeData[index];
+            }
+            return null; 
         }
 
         public ArchetypeData GetArchTypeData(Archetype archeType)
@@ -396,6 +406,12 @@ namespace Common
                 }
             }
         }
+    }
+    [Serializable]
+    public class AbbasClasstypeData
+    {
+        public ClassType classType;
+        public Sprite spriteN;        
     }
 
     [Serializable]

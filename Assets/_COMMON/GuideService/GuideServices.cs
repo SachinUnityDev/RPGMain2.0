@@ -18,7 +18,7 @@ namespace Common
         }
         public HelpName GetDefaultHelp()
         {
-            GameState gameState = GameService.Instance.gameModel.gameState;
+            GameState gameState = GameService.Instance.currGameModel.gameState;
 
             HelpName helpName = HelpName.None; 
 

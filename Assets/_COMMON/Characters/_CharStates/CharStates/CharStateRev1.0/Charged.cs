@@ -35,7 +35,7 @@ namespace Common
                                             , charID, CharStateName.Shocked, timeFrame, castTime);
             allImmunityBuffs.Add(immuneBuffID);
 
-            if(GameService.Instance.gameModel.gameState == GameState.InCombat)
+            if(GameService.Instance.currGameModel.gameState == GameState.InCombat)
             thornID = charController.strikeController.AddThornsBuff(DamageType.Air, 1, 9, timeFrame, castTime);
 
         }

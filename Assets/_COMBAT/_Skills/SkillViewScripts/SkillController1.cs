@@ -83,7 +83,7 @@ namespace Combat
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (GameService.Instance.gameModel.gameState == GameState.InCombat)
+            if (GameService.Instance.currGameModel.gameState == GameState.InCombat)
             {
                 if (skillView == null)
                     skillView = FindObjectOfType<SkillView>();
@@ -829,7 +829,7 @@ namespace Combat
 
         public void UpdateAllSkillState()
         {
-            if (GameService.Instance.gameModel.gameState != GameState.InCombat) return;
+            if (GameService.Instance.currGameModel.gameState != GameState.InCombat) return;
             if (!CharService.Instance.allCharInCombat.Any(t => t.charModel.charID == charController.charModel.charID)) return;
            // Debug.Log(" CHAR SKILL UPDATE" + charController.charModel.charName);
             foreach (SkillModel skillModel in allSkillModels)

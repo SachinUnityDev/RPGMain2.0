@@ -478,7 +478,7 @@ namespace Common
         }
         public void On_CharDeath(CharController _charController, int causeByCharID)
         {
-            if (GameService.Instance.gameModel.gameState != GameState.InCombat) return;
+            if (GameService.Instance.currGameModel.gameState != GameState.InCombat) return;
             
             _charController.charModel.stateOfChar = StateOfChar.Dead; 
             _charController.gameObject.GetComponent<BoxCollider2D>().enabled= false;

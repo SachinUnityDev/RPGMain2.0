@@ -47,7 +47,7 @@ namespace Interactables
         {            
             InvService.Instance.invRightViewController.UpdateCommInvDB();
             InvService.Instance.excessInvViewController.UpdateExcessInvDataBase();
-            if(GameService.Instance.gameModel.gameState == GameState.InTown)
+            if(GameService.Instance.currGameModel.gameState == GameState.InTown)
             {
                 InvService.Instance.stashInvViewController.UpdateStashInvDatabase();
                 size_Stash = InvService.Instance.invMainModel.size_Stash;

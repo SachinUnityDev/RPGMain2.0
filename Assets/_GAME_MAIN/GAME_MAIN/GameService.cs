@@ -24,10 +24,24 @@ namespace Common
         public SceneController sceneController;
 
         [Header("Global Var")]
-        public GameModel gameModel;
+        public GameModel currGameModel;
         public bool isGameOn = false;
         [SerializeField] List<string> allGameJSONs = new List<string>();
+        [SerializeField] List<GameModel> allGameModel = new List<GameModel>();
+
+
         public bool isNewGInitDone = false;
+
+        public GameModel GetGameModel(int slot)
+        {
+            int index = allGameModel.FindIndex(t => t.profileSlot == slot); 
+            if(index != -1)
+            {
+                return allGameModel[index];
+            }
+            return null; 
+        }
+
 
         void OnEnable()
         {  
@@ -62,7 +76,7 @@ namespace Common
 
         public void GameInit(GameState gameState, GameDifficulty gameDiff, LocationName locName)
         {
-            gameModel = new GameModel(gameState,gameDiff, locName);
+            currGameModel = new GameModel(gameState,gameDiff, locName);
             gameController.InitGameController(gameDiff); 
             GameEventService.Instance.OnGameStateChg?.Invoke(gameState);             
         }

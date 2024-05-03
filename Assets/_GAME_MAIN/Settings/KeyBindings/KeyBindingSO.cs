@@ -8,11 +8,11 @@ namespace Common
     [System.Serializable]
     public class KeyBindingData
     {
-        public GameState gameState;
+        public GameScene gameState;
         public KeyBindFuncs keyfunc;
         public KeyCode keyPressed;
         public KeyCode keyDefault; 
-        public KeyBindingData(GameState gameState, KeyBindFuncs keyfunc, KeyCode keyPressed, KeyCode keyDefault)
+        public KeyBindingData(GameScene gameState, KeyBindFuncs keyfunc, KeyCode keyPressed, KeyCode keyDefault)
         {
             this.gameState = gameState;
             this.keyfunc = keyfunc;
@@ -45,7 +45,7 @@ namespace Common
             }
         }
 
-        public KeyBindingData GetKeyBindingData(GameState gameState, KeyCode keyCode)
+        public KeyBindingData GetKeyBindingData(GameScene gameState, KeyCode keyCode)
         {
             int index = allKeyBindingData.FindIndex(t => t.gameState == gameState && t.keyPressed == keyCode);
             if (index != -1)

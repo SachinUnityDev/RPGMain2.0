@@ -10,11 +10,14 @@ namespace Common
 {
     public interface ISaveableService
     {
-        void RestoreState();
+        void RestoreState(string basePath);
         void ClearState();
         void SaveState(); 
     }
 
+    // Should define and send the save path for each of the service 
+    // Each Servuice should either create the folder & File or save the data in already created file and folder
+    //
     public class SaveService : MonoSingletonGeneric<SaveService>
     {
         [Header("Scriptable Object")]
@@ -44,7 +47,7 @@ namespace Common
         {
            
            saveView.GetComponent<IPanel>().UnLoad();
-           slotSelect = SaveSlot.New; 
+           slotSelect = SaveSlot.AutoSave; 
             foreach (Transform child in saveView.gameObject.transform)
             {
                 if(child.GetComponent<Button>() != null)
@@ -77,12 +80,8 @@ namespace Common
         }
         public void ShowSavePanel()
         {
-
             savePanel.GetComponent<IPanel>().Init();
-            savePanel.GetComponent<IPanel>().Load();
-           
-
-
+            savePanel.GetComponent<IPanel>().Load();           
         }
 
         public void ShowLoadPanel()
@@ -117,49 +116,45 @@ namespace Common
       
         public void LoadFileMaster() 
         {
+            string path = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelect.ToString(); 
             foreach (GameObject service in allServices)
             {
-                service.GetComponent<ISaveableService>().RestoreState();
+                service.GetComponent<ISaveableService>().RestoreState(path);
             }
         }
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                isLoading = false; isSaving = true;                
-                UIControlServiceCombat.Instance.ToggleUIStateScale(saveView.gameObject, UITransformState.Open);                
-            }
+            //if (Input.GetKeyDown(KeyCode.G))
+            //{
+            //    isLoading = false; isSaving = true;                
+            //    UIControlServiceCombat.Instance.ToggleUIStateScale(saveView.gameObject, UITransformState.Open);                
+            //}
 
-            if (Input.GetKeyDown(KeyCode.H))
-            {
-                isLoading = true; isSaving = false;
-                UIControlServiceCombat.Instance.ToggleUIStateScale(saveView.gameObject, UITransformState.Open);
-            }
-       
+            //if (Input.GetKeyDown(KeyCode.H))
+            //{
+            //    isLoading = true; isSaving = false;
+            //    UIControlServiceCombat.Instance.ToggleUIStateScale(saveView.gameObject, UITransformState.Open);
+            //}       
 
         }
-
     }
-
 
     public enum SaveSlot
     {
-        New,
+        AutoSave,
+        QuickSave,
         Slot1,
         Slot2,
         Slot3,
-        Slot4,
-        Slot5,
-        Slot6,
-        Slot7,
+        Slot4,        
     }
     public enum SaveMode
     {
         None,
         QuickSave, // press F5
         AutoSave, // at every check point
-        AutoSaveMB, // at every chekc point in MB mode .. no manual saving 
+//        AutoSaveMB, // at every chekc point in MB mode .. no manual saving 
         ManualSave, // save
     }
 

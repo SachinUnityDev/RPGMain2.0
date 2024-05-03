@@ -22,7 +22,7 @@ namespace Quest
         }
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if(GameService.Instance.currGameModel.gameState == GameState.InQuestRoom)
+            if(GameService.Instance.currGameModel.gameState == GameScene.InQuestRoom)
             {
                 qRoomView = FindObjectOfType<QRoomView>();
                 qRoomPortView = transform.GetComponentInChildren<QRoomPortView>(true);

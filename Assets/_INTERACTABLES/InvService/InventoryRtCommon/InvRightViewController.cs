@@ -85,7 +85,7 @@ namespace Interactables
         public void ChkOverloadCount()
         {
             
-            if (GameService.Instance.currGameModel.gameState == GameState.InTown)
+            if (GameService.Instance.currGameModel.gameState == GameScene.InTown)
             {
                 int charLocked = CharService.Instance.allCharsInPartyLocked.Count;
                 int maxSlotCount = (charLocked - 1) * 12 + 18;

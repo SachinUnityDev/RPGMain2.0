@@ -7,7 +7,7 @@ namespace Common
     public class CommonEnums
     {
     }
-    public enum GameState
+    public enum GameScene
     {
         None,
         InTown,    

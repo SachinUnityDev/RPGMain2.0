@@ -105,7 +105,7 @@ namespace Town
             }
           
             if (timeState == TimeState.Day 
-                && GameService.Instance.currGameModel.gameState == GameState.InTown)
+                && GameService.Instance.currGameModel.gameState == GameScene.InTown)
                 cloudTrans.gameObject.SetActive(true);
             else
                 cloudTrans.gameObject.SetActive(false);

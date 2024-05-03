@@ -47,7 +47,6 @@ namespace Common
         {  
             sceneController = GetComponent<SceneController>();
             gameController= GetComponent<GameController>();
-            // GameInit(GameState.InIntro, GameDifficulty.Easy, LocationName.Nekkisari); 
             SceneManager.sceneLoaded += OnSceneLoad; 
         }
         private void OnDisable()
@@ -60,25 +59,34 @@ namespace Common
             int index = scene.buildIndex;
             if(index == (int)GameScene.Town)
             {
-                GameInit(GameState.InTown, GameDifficulty.Easy, LocationName.Nekkisari); 
-            }else if (index == (int)GameScene.Quest)
+                GameInit(GameScene.InTown); 
+            }
+            else if (index == (int)GameScene.Quest)
             {
-                GameInit(GameState.InQuestRoom, GameDifficulty.Easy, LocationName.Nekkisari);
-            }else if (index == (int)GameScene.Combat)
+                GameInit(GameScene.InQuestRoom);
+            }
+            else if (index == (int)GameScene.Combat)
             {
-                GameInit(GameState.InCombat, GameDifficulty.Easy, LocationName.Nekkisari);
+                GameInit(GameScene.InCombat);
             }
             else if (index == (int)GameScene.Intro)
             {
-                GameInit(GameState.InIntro, GameDifficulty.Easy, LocationName.Nekkisari);
+                GameInit(GameScene.InIntro);
             }
         }
-
-        public void GameInit(GameState gameState, GameDifficulty gameDiff, LocationName locName)
+        public void CreateNewGame(int profileId, string profileStr)  // On Set profile Continue btn
         {
-            currGameModel = new GameModel(gameState,gameDiff, locName);
-            gameController.InitGameController(gameDiff); 
-            GameEventService.Instance.OnGameStateChg?.Invoke(gameState);             
+            currGameModel = new GameModel(profileId, profileStr);
+            currGameModel.gameDifficulty = GameDifficulty.Easy;
+            currGameModel.locationName = LocationName.Nekkisari;
+            gameController.InitDiffGameController(currGameModel.gameDifficulty);
+            allGameModel.Add(currGameModel); 
+        }
+        
+        public void GameInit(GameScene gameState)
+        {
+            currGameModel.gameState= gameState;            
+            GameEventService.Instance.OnGameSceneChg?.Invoke(gameState);             
         }
 
         #region SAVE AND LOAD 
@@ -122,24 +130,24 @@ namespace Common
         }
 
      
-        bool isPressedA = false;
-        bool isPressedZ = false;
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.A) && !isPressedA)
-            {
-                //isPressedA = true;
-                //Init();
-            }
-            if (Input.GetKeyDown(KeyCode.Z) && !isPressedZ)
-            {
-                //isPressedZ = true; 
-                //List<CharNames> char2beCreated = new List<CharNames>() {CharNames.Abbas_Skirmisher
-                //    ,CharNames.Baran, CharNames.Cahyo, CharNames.Rayyan };
+        //bool isPressedA = false;
+        //bool isPressedZ = false;
+        //private void Update()
+        //{
+        //    if (Input.GetKeyDown(KeyCode.A) && !isPressedA)
+        //    {
+        //        //isPressedA = true;
+        //        //Init();
+        //    }
+        //    if (Input.GetKeyDown(KeyCode.Z) && !isPressedZ)
+        //    {
+        //        //isPressedZ = true; 
+        //        //List<CharNames> char2beCreated = new List<CharNames>() {CharNames.Abbas_Skirmisher
+        //        //    ,CharNames.Baran, CharNames.Cahyo, CharNames.Rayyan };
 
-                //char2beCreated.ForEach(t => CharService.Instance.CreateCharsCtrl(t));
-            }
-        }
+        //        //char2beCreated.ForEach(t => CharService.Instance.CreateCharsCtrl(t));
+        //    }
+        //}
 
         #endregion
     }

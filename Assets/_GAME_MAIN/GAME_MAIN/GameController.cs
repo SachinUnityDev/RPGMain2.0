@@ -4,14 +4,12 @@ using UnityEngine;
 using System;
 using Town;
 using Interactables;
-using JetBrains.Annotations;
 using Combat;
 
 namespace Common
 {
     public class GameController : MonoBehaviour
     {
-
         public bool isMortalBlood = false;
         public bool isQuickStart = false;
      
@@ -20,7 +18,7 @@ namespace Common
         public List<GameDiffModel> allGameDiffModel = new List<GameDiffModel>();
 
         public GameDiffModel currGameDiffModel; 
-        public void InitGameController(GameDifficulty gameDifficulty)
+        public void InitDiffGameController(GameDifficulty gameDifficulty)
         {
             if (allGameDiffModel.Count > 0) return; 
             foreach (GameDiffSO gameDiffSO in allGameDiffSO.allGameDiffSO) 
@@ -32,7 +30,15 @@ namespace Common
                     currGameDiffModel= gameDiffModel;
             }
         }
-
+        public void UpgradeGameDiff()  // on game completion
+        {
+            GameDifficulty diff = GameService.Instance.currGameModel.gameDifficulty;
+            if (diff != GameDifficulty.Hard)
+            {
+                diff++;
+                GameService.Instance.currGameModel.gameDifficulty = diff;
+            }
+        }
         public int GetMaxRoundLimit()
         {
             EnemyPackName enemyPack = CombatService.Instance.currEnemyPack; 

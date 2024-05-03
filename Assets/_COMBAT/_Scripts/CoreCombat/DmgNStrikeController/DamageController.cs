@@ -464,7 +464,7 @@ namespace Combat
 
             if (charController.charStateController.HasCharState(CharStateName.Burning))
             {
-                if (GameService.Instance.currGameModel.gameState != GameState.InCombat) return; 
+                if (GameService.Instance.currGameModel.gameState != GameScene.InCombat) return; 
 
                 CharController strikeCtrl = CombatService.Instance.currCharOnTurn; 
                 ApplyDamage(strikeCtrl, causeType, (int)causeName, DamageType.Earth, 40f);
@@ -483,7 +483,7 @@ namespace Combat
 
             if (charController.charStateController.HasCharState(CharStateName.Burning))
             {
-                if (GameService.Instance.currGameModel.gameState != GameState.InCombat) return;
+                if (GameService.Instance.currGameModel.gameState != GameScene.InCombat) return;
 
                 CharController strikeCtrl = CombatService.Instance.currCharOnTurn;
                 ApplyDamage(strikeCtrl, causeType, (int)causeName, DamageType.Earth, 60f);
@@ -505,7 +505,7 @@ namespace Combat
 
             if (charController.charStateController.HasCharState(CharStateName.Poisoned))
             {
-                if (GameService.Instance.currGameModel.gameState != GameState.InCombat) return;
+                if (GameService.Instance.currGameModel.gameState != GameScene.InCombat) return;
 
                 CharController strikeCtrl = CombatService.Instance.currCharOnTurn;
                 ApplyDamage(strikeCtrl, causeType, (int)causeName, DamageType.Fire, 50f);
@@ -523,7 +523,7 @@ namespace Combat
 
             if (charController.charStateController.HasCharState(CharStateName.Poisoned))
             {
-                if (GameService.Instance.currGameModel.gameState != GameState.InCombat) return;
+                if (GameService.Instance.currGameModel.gameState != GameScene.InCombat) return;
 
                 CharController strikeCtrl = CombatService.Instance.currCharOnTurn;
                 ApplyDamage(strikeCtrl, causeType, (int)causeName, DamageType.Fire, 90f);

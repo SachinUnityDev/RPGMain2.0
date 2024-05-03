@@ -133,7 +133,7 @@ namespace Combat
             skillFactory = GetComponent<SkillFactory>();
             skillView = GetComponent<SkillView>();
             SceneManager.sceneLoaded += OnSceneLoaded;
-            GameEventService.Instance.OnGameStateChg += OnStartOfCombat;
+            GameEventService.Instance.OnGameSceneChg += OnStartOfCombat;
             skillFactory =GetComponent<SkillFactory>();
             skillFactory.SkillsInit();
             passiveSkillFactory = GetComponent<PassiveSkillFactory>();
@@ -144,11 +144,11 @@ namespace Combat
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
            // OnSkillApply -= SkillEventtest;
-            GameEventService.Instance.OnGameStateChg -= OnStartOfCombat;
+            GameEventService.Instance.OnGameSceneChg -= OnStartOfCombat;
         }
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (GameService.Instance.currGameModel.gameState == GameState.InCombat)
+            if (GameService.Instance.currGameModel.gameState == GameScene.InCombat)
             {
                 skillView = FindObjectOfType<SkillView>();
                 _OnSkillApply += SkillEventtest;
@@ -171,9 +171,9 @@ namespace Combat
             skillCardGO.transform.localScale = Vector3.one;
             skillCardGO.SetActive(false);
         }
-        void OnStartOfCombat(GameState gameState)
+        void OnStartOfCombat(GameScene gameState)
         {
-            if (gameState != GameState.InCombat) return;
+            if (gameState != GameScene.InCombat) return;
             CombatEventService.Instance.OnSOT += SetDefaultSkillForChar;
             CombatEventService.Instance.OnCharOnTurnSet += InitEnemySkillSelection; 
             CombatEventService.Instance.OnTargetClicked += TargetIsSelected;
@@ -392,7 +392,7 @@ namespace Combat
         }
         public void On_SkillSelected(CharNames _charName, SkillNames skillName)  // Ally Skill and perk "Skill Select" 
         {
-            if (GameService.Instance.currGameModel.gameState == GameState.InCombat)
+            if (GameService.Instance.currGameModel.gameState == GameScene.InCombat)
             {
                 CombatService.Instance.combatState = CombatState.INCombat_InSkillSelected;
                 ClearPrevData();
@@ -719,7 +719,7 @@ namespace Combat
         #endregion
         private void Update()
         {
-            if (GameService.Instance.currGameModel.gameState == GameState.InCombat)
+            if (GameService.Instance.currGameModel.gameState == GameScene.InCombat)
             {
                 if (CombatService.Instance.combatState == CombatState.INTactics)
                     return;

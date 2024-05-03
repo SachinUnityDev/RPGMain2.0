@@ -40,7 +40,7 @@ namespace Combat
         }
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (GameService.Instance.currGameModel.gameState == GameState.InCombat)
+            if (GameService.Instance.currGameModel.gameState == GameScene.InCombat)
             {
                 skillView = FindObjectOfType<SkillView>();
                 

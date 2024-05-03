@@ -23,35 +23,35 @@ namespace Common
         public Action OnIntroEnd; 
 
 
-        public Action<GameState> OnGameStateChg; 
+        public Action<GameScene> OnGameSceneChg; 
         public event Action<QuestMode> OnQuestModeChg;
 
-        public Action<GameState> OnStateStart;
+        public Action<GameScene> OnStateStart;
        
         void OnEnable()
         {
            // OnGameStateChg += On_QuestRoomStart;
-            OnGameStateChg += On_TownEnter; 
+            OnGameSceneChg += On_TownEnter; 
         }
         private void OnDisable()
         {
            // OnGameStateChg -= On_QuestRoomStart;
-            OnGameStateChg -= On_TownEnter;
+            OnGameSceneChg -= On_TownEnter;
         }
 
-        public void On_TownEnter(GameState gameState)
+        public void On_TownEnter(GameScene gameState)
         {
             // Anything initialised by SO to be put here 
             // any initialisation during scene swap to be checked 
             // model init to be implemented after the save service connection 
             if (GameService.Instance.isNewGInitDone)
                 return;
-            if (gameState != GameState.InTown)
+            if (gameState != GameScene.InTown)
                 return; 
                 LocationName locationName = LocationName.Nekkisari;
                 
                
-                TownService.Instance.Init(locationName);
+                TownService.Instance.Init(locationName);  // new game
                 BuildingIntService.Instance.InitBuildIntService();
                 EncounterService.Instance.EncounterInit();
                 CharService.Instance.Init();
@@ -63,7 +63,7 @@ namespace Common
                 JobService.Instance.JobServiceInit();
                 BestiaryService.Instance.Init();
                 ItemService.Instance.Init();
-                TradeService.Instance.InitTradeService();
+                TradeService.Instance.InitTradeService();// new game 
                 FameService.Instance.Init();
                 LevelService.Instance.Init();
                 WeaponService.Instance.Init();

@@ -9,15 +9,11 @@ namespace Intro
 {
     public class IntroViewController : MonoBehaviour
     {
-
         public SettingViewController settingViewController; 
-
 
         void Start()
         {
             settingViewController = transform.GetComponentInChildren<SettingViewController>(true); 
         }
-
-
     }
 }

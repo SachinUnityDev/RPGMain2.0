@@ -18,31 +18,31 @@ namespace Common
         }
         public HelpName GetDefaultHelp()
         {
-            GameState gameState = GameService.Instance.currGameModel.gameState;
+            GameScene gameState = GameService.Instance.currGameModel.gameState;
 
             HelpName helpName = HelpName.None; 
 
             switch (gameState)
             {
-                case GameState.None:
+                case GameScene.None:
                     break;
-                case GameState.InTown:
+                case GameScene.InTown:
                     helpName = HelpName.TownScreen; 
                     break;
-                case GameState.InQuestRoom:
+                case GameScene.InQuestRoom:
                     helpName = HelpName.QuestPrep; // to be discussed
                     break;
-                case GameState.InCombat:
+                case GameScene.InCombat:
                     helpName = HelpName.Combat;
                     break;
-                case GameState.InCamp:
+                case GameScene.InCamp:
                     //helpName = HelpName;
                     break;
-                case GameState.InJobs:
+                case GameScene.InJobs:
                     break;
-                case GameState.InIntro:
+                case GameScene.InIntro:
                     break;
-                case GameState.InMapInteraction:
+                case GameScene.InMapInteraction:
                                        
                     break;
                 default:

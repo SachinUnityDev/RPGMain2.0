@@ -24,7 +24,7 @@ namespace Common
 
         
 
-        public GameState gameState;
+        public GameScene gameState;
         public List<CharNames> charInDialogue = new List<CharNames>();
         public List<NPCNames> NPCinDialogue = new List<NPCNames>();
         public LocationName locationName;

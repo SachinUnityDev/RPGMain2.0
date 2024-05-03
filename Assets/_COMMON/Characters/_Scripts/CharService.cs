@@ -83,7 +83,11 @@ namespace Common
             CombatEventService.Instance.OnEOT -= UpdateOnDeath;
         }
 
-        public void Init()
+
+
+        
+
+        public void Init()  // on Scene enter 
         {
             // get all so and Popyulate the list of controllers
             // if save slot is defined take from save slot other SO from here pass in charSO    
@@ -96,6 +100,7 @@ namespace Common
             {
                 SpawnCompanions(charName);
             }
+            SetAbbasClassOnQuickStart();
             //CharController abbas = charsInPlayControllers.Find(t => t.charModel.charName == CharNames.Abbas);
             //foreach (CharController charCtrl in allyInPlayControllers)
             //{
@@ -273,7 +278,11 @@ namespace Common
             return grpBuffIDs;
         }
         #region SAVE AND LOAD 
-        public void LoadCharControllers(CharModel charModel)
+
+
+
+
+        public void LoadCharServiceData(CharModel charModel)
         {
             //CharController charCtrl = null;
             //foreach (CharacterSO c in allCharSO)
@@ -303,15 +312,13 @@ namespace Common
             //}
         }
 
-        public void RestoreState()
+        public void RestoreState(string basePath)
         {
             allCharModels.Clear();
-            string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelect.ToString()
-               + "/Char/charModels.txt";
+            string mydataPath = basePath + "/Char/charModels.txt";
 
             if (File.Exists(Application.dataPath + mydataPath))
-            {
-                Debug.Log("File found!");
+            {                
                 string str = File.ReadAllText(Application.dataPath + mydataPath);
 
                  allCharsJSONs = str.Split('|').ToList();
@@ -328,7 +335,7 @@ namespace Common
             }
             else
             {
-                Debug.Log("File Does not Exist");
+                Debug.Log("Char Service SAVE FILE Does not Exist");
             }
         }
 
@@ -478,7 +485,7 @@ namespace Common
         }
         public void On_CharDeath(CharController _charController, int causeByCharID)
         {
-            if (GameService.Instance.currGameModel.gameState != GameState.InCombat) return;
+            if (GameService.Instance.currGameModel.gameState != GameScene.InCombat) return;
             
             _charController.charModel.stateOfChar = StateOfChar.Dead; 
             _charController.gameObject.GetComponent<BoxCollider2D>().enabled= false;
@@ -514,7 +521,7 @@ namespace Common
         }
         #endregion
 
-        #region
+        #region  CHKS
         public bool ChkIfSOLO(CharController charController)
         {            
             int charCount = 0;
@@ -537,6 +544,20 @@ namespace Common
 
         #endregion
 
+        #region SET ABBAS CLASS
+
+        public void SetAbbasClassOnQuickStart()
+        {
+            if (!GameService.Instance.gameController.isQuickStart) return; 
+            ClassType classType =
+                        GameService.Instance.currGameModel.abbasClassType; 
+            CharController charController = GetAbbasController(CharNames.Abbas);
+                
+            CharModel charModel = charController.charModel;
+            charModel.classType = classType;
+        }
+
+        #endregion
 
     }
 }

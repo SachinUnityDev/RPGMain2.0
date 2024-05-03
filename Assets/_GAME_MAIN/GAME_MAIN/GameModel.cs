@@ -13,7 +13,7 @@ namespace Common
     {
         public int profileSlot; 
         [SerializeField] string profileName; 
-        public GameState gameState;       
+        public GameScene gameState;       
         public GameDifficulty gameDifficulty;  
         public LocationName locationName;
         public LandscapeNames landscapeNames = LandscapeNames.None;// quest has a landscape
@@ -22,7 +22,7 @@ namespace Common
         public ClassType abbasClassType;
         public JobNames jobSelect; 
 
-        public GameModel( GameState currGameState
+        public GameModel( GameScene currGameState
                 , GameDifficulty gameDifficulty, LocationName locationName)
         {
             this.gameState = currGameState;
@@ -32,8 +32,9 @@ namespace Common
             abbasClassType= ClassType.None;
             profileName = ""; 
         }
-        public void SetProfileName(string profileName)
+        public GameModel(int profileSlot, string profileName)
         {
+            this.profileSlot = profileSlot;
             this.profileName= profileName;
         }
         public string GetProfileName()
@@ -41,6 +42,17 @@ namespace Common
             return profileName;
         }
     }
+
+    public enum GameProgress
+    {
+        None, 
+        InIntro, 
+        NewGameInit, 
+        LoadGameInit, 
+        GameInProgress, 
+        GameQuit, 
+    }
+
 
 
 }

@@ -70,7 +70,7 @@ namespace Common
             }
             else
             {
-                if (GameService.Instance.currGameModel.gameState == GameState.InTown)
+                if (GameService.Instance.currGameModel.gameState == GameScene.InTown)
                 {
                     CalendarUIController calendarUIController = CalendarService.Instance.calendarUIController;
 

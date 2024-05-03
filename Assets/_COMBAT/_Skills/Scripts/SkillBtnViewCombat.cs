@@ -197,7 +197,7 @@ namespace Combat
         }
         void ShowSkillcardInCombat()
         {
-            if (GameService.Instance.currGameModel.gameState != GameState.InCombat)
+            if (GameService.Instance.currGameModel.gameState != GameScene.InCombat)
                 return;
             if (skillCardGO == null)
                 return;

@@ -15,7 +15,9 @@ namespace Intro
         [SerializeField] Color colorClicked;
         [SerializeField] Color colorOnHover;
 
-        SetProfileView setProfileView; 
+        SetProfileView setProfileView;
+        [SerializeField] float prevTime = 0f;  
+        
 
         private void Start()
         {
@@ -28,7 +30,11 @@ namespace Intro
         }
         public void OnPointerClick(PointerEventData eventData)
         {
-            img.color = colorClicked; 
+            if(Time.time - prevTime> 0.25f)
+            {
+                img.color = colorClicked;
+                setProfileView.OnContinuePressed(); 
+            }            
         }
 
         public void OnPointerEnter(PointerEventData eventData)

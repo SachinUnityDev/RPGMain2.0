@@ -19,7 +19,13 @@ namespace Common
         InMapInteraction,         
     };
 
-
+    public enum SceneSeq
+    {
+        Intro,
+        Town, 
+        Quest, 
+        Combat, 
+    }
 
     public enum GameDifficulty
     {
@@ -90,12 +96,9 @@ namespace Common
         NeverFlees,// 0 flee Combat
         Hard, // 30% flee combat
     }
-     //public enum CharFleeState
-     //{
-     //   None,  
-     //   FledCombat, 
-     //   FledQuest, 
-     //}
+  
+
+
 
     public enum TimeState
     {
@@ -121,22 +124,7 @@ namespace Common
         Heroes, // Allies only
     }
 
-    //public enum Levels
-    //{
-    //    Level0,
-    //    Level1,
-    //    Level2,
-    //    Level3,
-    //    Level4,
-    //    Level5,
-    //    Level6,
-    //    Level7,
-    //    Level8,
-    //    Level9,
-    //    Level10,
-    //    Level11,
-    //    Level12,
-    //}
+   
 
     public enum LvlUpGroup
     {

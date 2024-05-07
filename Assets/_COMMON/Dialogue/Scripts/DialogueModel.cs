@@ -24,7 +24,7 @@ namespace Common
 
         
 
-        public GameScene gameState;
+        public GameScene gameScene;
         public List<CharNames> charInDialogue = new List<CharNames>();
         public List<NPCNames> NPCinDialogue = new List<NPCNames>();
         public LocationName locationName;
@@ -40,7 +40,7 @@ namespace Common
             isSkippable= diaSO.isSkippable;
             isPlayedOnce = false; 
 
-            gameState = diaSO.gameState;
+            gameScene = diaSO.gameScene;
             charInDialogue = diaSO.charInDialogue.DeepClone();
             NPCinDialogue = diaSO.NPCinDialogue.DeepClone(); 
             locationName =diaSO.locationName;

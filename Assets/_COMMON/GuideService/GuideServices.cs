@@ -18,11 +18,11 @@ namespace Common
         }
         public HelpName GetDefaultHelp()
         {
-            GameScene gameState = GameService.Instance.currGameModel.gameState;
+            GameScene gameScene = GameService.Instance.currGameModel.gameScene;
 
             HelpName helpName = HelpName.None; 
 
-            switch (gameState)
+            switch (gameScene)
             {
                 case GameScene.None:
                     break;

@@ -63,7 +63,7 @@ namespace Combat
                 this.skillController.allSkillModels.Add(skillModel);   // lastest skillModel for ref
                 charGO = this.skillController.gameObject;
             }
-            if(GameService.Instance.currGameModel.gameState == GameScene.InCombat)
+            if(GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
             {
                 myDyna = GridService.Instance.GetDyna4GO(charGO);       
                 PopulateTargetPos();

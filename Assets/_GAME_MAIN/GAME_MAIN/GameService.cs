@@ -14,7 +14,7 @@ using Interactables;
 namespace Common
 {
 
-    public class GameService : MonoSingletonGeneric<GameService>, ISaveableService
+    public class GameService : MonoSingletonGeneric<GameService>, ISaveable
     {
         [Header("CONTROLLERS")]
         public GameController gameController; // centralised service
@@ -25,6 +25,9 @@ namespace Common
 
         [Header("Global Var")]
         public GameModel currGameModel;
+        public GameProgress gameProgress; 
+
+
         public bool isGameOn = false;
         [SerializeField] List<string> allGameJSONs = new List<string>();
         [SerializeField] List<GameModel> allGameModel = new List<GameModel>();
@@ -57,21 +60,21 @@ namespace Common
         void OnSceneLoad(Scene scene, LoadSceneMode loadMode)
         {   
             int index = scene.buildIndex;
-            if(index == (int)GameScene.Town)
+            if(index == (int)SceneSeq.Town)
             {
-                GameInit(GameScene.InTown); 
+                GameSceneLoad(GameScene.InTown); 
             }
-            else if (index == (int)GameScene.Quest)
+            else if (index == (int)SceneSeq.Quest)
             {
-                GameInit(GameScene.InQuestRoom);
+                GameSceneLoad(GameScene.InQuestRoom);
             }
-            else if (index == (int)GameScene.Combat)
+            else if (index == (int)SceneSeq.Combat)
             {
-                GameInit(GameScene.InCombat);
+                GameSceneLoad(GameScene.InCombat);
             }
-            else if (index == (int)GameScene.Intro)
+            else if (index == (int)SceneSeq.Intro)
             {
-                GameInit(GameScene.InIntro);
+                GameSceneLoad(GameScene.InIntro);
             }
         }
         public void CreateNewGame(int profileId, string profileStr)  // On Set profile Continue btn
@@ -83,16 +86,16 @@ namespace Common
             allGameModel.Add(currGameModel); 
         }
         
-        public void GameInit(GameScene gameState)
+        public void GameSceneLoad(GameScene gameScene)
         {
-            currGameModel.gameState= gameState;            
-            GameEventService.Instance.OnGameSceneChg?.Invoke(gameState);             
+            currGameModel.gameScene= gameScene;            
+            GameEventService.Instance.OnGameSceneChg?.Invoke(gameScene);             
         }
 
         #region SAVE AND LOAD 
         public void RestoreState()
         {
-            string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelect.ToString()
+            string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelected.ToString()
                      + "/Char/gameModels.txt";
 
             if (File.Exists(Application.dataPath + mydataPath))
@@ -108,7 +111,7 @@ namespace Common
                     if (String.IsNullOrEmpty(modelStr)) continue; // eliminate blank string
                     GameModel gameModel = JsonUtility.FromJson<GameModel>(modelStr);
                    
-                    Debug.Log(gameModel.gameState);
+                    Debug.Log(gameModel.gameScene);
                 }
             }
             else
@@ -119,7 +122,7 @@ namespace Common
         }
         public void ClearState()
         {
-            string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelect.ToString()
+            string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelected.ToString()
              + "/Char/charModels.txt";
             File.WriteAllText(Application.dataPath + mydataPath, "");
 
@@ -129,7 +132,12 @@ namespace Common
             ClearState();
         }
 
-     
+        public void RestoreState(string basePath)
+        {
+            throw new NotImplementedException();
+        }
+
+
         //bool isPressedA = false;
         //bool isPressedZ = false;
         //private void Update()

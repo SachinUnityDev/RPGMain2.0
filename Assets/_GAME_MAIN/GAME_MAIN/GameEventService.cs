@@ -39,41 +39,41 @@ namespace Common
             OnGameSceneChg -= On_TownEnter;
         }
 
-        public void On_TownEnter(GameScene gameState)
+        //None, 
+        //InIntro, 
+        //NewGameInit, 
+        //LoadGameInit, 
+        //GameInProgress, 
+        //GameQuit, 
+
+        public void NewGameInit()
         {
-            // Anything initialised by SO to be put here 
-            // any initialisation during scene swap to be checked 
-            // model init to be implemented after the save service connection 
-            if (GameService.Instance.isNewGInitDone)
-                return;
-            if (gameState != GameScene.InTown)
-                return; 
-                LocationName locationName = LocationName.Nekkisari;
-                
-               
-                TownService.Instance.Init(locationName);  // new game
-                BuildingIntService.Instance.InitBuildIntService();
-                EncounterService.Instance.EncounterInit();
-                CharService.Instance.Init();
-                UIControlServiceGeneral.Instance.InitUIGeneral();
-                CalendarService.Instance.Init();
+          
+            LocationName locationName = LocationName.Nekkisari;
 
-                EcoServices.Instance.InitEcoServices();
-                BarkService.Instance.InitBarkService();
-                JobService.Instance.JobServiceInit();
-                BestiaryService.Instance.Init();
-                ItemService.Instance.Init();
-                TradeService.Instance.InitTradeService();// new game 
-                FameService.Instance.Init();
-                LevelService.Instance.Init();
-                WeaponService.Instance.Init();
-                ArmorService.Instance.Init(); 
+            TownService.Instance.Init(locationName);  // new game
+            BuildingIntService.Instance.InitNGBuildIntService();
+            EncounterService.Instance.EncounterInit();
+            CharService.Instance.Init();
+            UIControlServiceGeneral.Instance.InitUIGeneral();
+            CalendarService.Instance.Init();
 
-                OnTownEnter?.Invoke(locationName);
-                QuestMissionService.Instance.InitQuestMission();
-                LandscapeService.Instance.InitLandscape(); 
-                MapService.Instance.InitMapService(); // to be put below questmission
-                LootService.Instance.InitLootService();
+            EcoServices.Instance.InitEcoServices();
+            BarkService.Instance.InitBarkService();
+            JobService.Instance.JobServiceInit();
+            BestiaryService.Instance.Init();
+            ItemService.Instance.Init();
+            TradeService.Instance.InitTradeService();// new game 
+            FameService.Instance.Init();
+            LevelService.Instance.Init();
+            WeaponService.Instance.Init();
+            ArmorService.Instance.Init();
+
+            OnTownEnter?.Invoke(locationName);
+            QuestMissionService.Instance.InitQuestMission();
+            LandscapeService.Instance.InitLandscape();
+            MapService.Instance.InitMapService(); // to be put below questmission
+            LootService.Instance.InitLootService();
             if (WelcomeService.Instance.isQuickStart)
                 WelcomeService.Instance.On_QuickStart();
             else
@@ -87,9 +87,34 @@ namespace Common
                         = GameService.Instance.currGameModel.abbasClassType;
 
                     // Set job NAME SELECT HERE 
-                }               
+                }
                 GameService.Instance.isNewGInitDone = true;
             }
+        }
+        public void LoadGameInit(int slotId)
+        {
+
+        }
+        public void OnSceneEnterInit() // make slot0 as current save
+        {
+            // initialize service based on curr models 
+
+
+
+        }
+   
+
+        public void On_TownEnter(GameScene gameScene)
+        {
+            // Anything initialised by SO to be put here 
+            // any initialisation during scene swap to be checked 
+            // model init to be implemented after the save service connection 
+            if (gameScene != GameScene.InTown)
+                return;
+            if (GameService.Instance.isNewGInitDone)
+                return;
+            NewGameInit(); 
+
         }
         public void On_TownExit(LocationName locationName)
         {

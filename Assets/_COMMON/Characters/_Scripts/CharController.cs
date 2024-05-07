@@ -94,7 +94,7 @@ namespace Common
         public CharModel InitiatizeController(CharacterSO _charSO)
         {
             charSO = _charSO;
-            if (SaveService.Instance.slotSelect == SaveSlot.AutoSave)
+            if (SaveService.Instance.slotSelected == SaveSlot.AutoSave)
             {
                 charModel = new CharModel(_charSO);
                 if(charModel.orgCharMode == CharMode.Ally)
@@ -327,7 +327,7 @@ namespace Common
             DynamicPosData dyna = null;
             StatData statData = GetStat(statName);
         
-            if (GameService.Instance.currGameModel.gameState == GameScene.InCombat)
+            if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
             {
                 turn = CombatService.Instance.currentTurn;             
                 Vector3 fwd = Vector3.zero;
@@ -386,7 +386,7 @@ namespace Common
                                                                             = (int)modCurrValue;
             statModData.modVal = (int)modCurrValue;
             
-            if (GameService.Instance.currGameModel.gameState == GameScene.InCombat)
+            if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
                 PopulateOverCharBars();
 
             if (statName == StatName.health)
@@ -407,7 +407,7 @@ namespace Common
             int turn = -1;
             DynamicPosData dyna = null; 
             AttribData attribData = GetAttrib(attribName);         
-            if (GameService.Instance.currGameModel.gameState == GameScene.InCombat)
+            if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
             {
                 turn = CombatService.Instance.currentTurn;
                 //Debug.Log("attrib Change for  " + gameObject.name);

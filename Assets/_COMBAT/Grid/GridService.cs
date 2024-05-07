@@ -23,7 +23,7 @@ namespace Combat
         }    
     }
 
-    public class GridService : MonoSingletonGeneric<GridService>, ISaveableService
+    public class GridService : MonoSingletonGeneric<GridService>, ISaveable
     {
         public Action <DynamicPosData, int> OnPosChange; 
 
@@ -319,7 +319,7 @@ namespace Combat
 
         public void RestoreState()
         {
-            string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelect.ToString()
+            string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelected.ToString()
               + "/Grid/DynaModels.txt";
 
             if (File.Exists(Application.dataPath + mydataPath))
@@ -361,7 +361,7 @@ namespace Combat
         }
         public void ClearState()
         {
-            string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelect.ToString()
+            string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelected.ToString()
              + "/Grid/DynaModels.txt";
             File.WriteAllText(Application.dataPath + mydataPath, "");
 
@@ -812,6 +812,11 @@ namespace Combat
                 return true; 
             }
             return false; 
+        }
+
+        public void RestoreState(string basePath)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

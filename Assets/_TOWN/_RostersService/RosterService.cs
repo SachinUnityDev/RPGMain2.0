@@ -11,7 +11,7 @@ namespace Common
 {
     // money rule to pay for the chars who are not their base location
 
-    public class RosterService : MonoSingletonGeneric<RosterService>, ISaveableService
+    public class RosterService : MonoSingletonGeneric<RosterService>, ISaveable
     {
         public event Action <bool> OnPortraitDragResult;
         public event Action<CharModel> OnRosterScrollCharSelect;  // should activate on succes ful drop 
@@ -109,6 +109,11 @@ namespace Common
 
         public void SaveState()
         {
+        }
+
+        public void RestoreState(string basePath)
+        {
+            throw new NotImplementedException();
         }
         // this-> save and Load 
         // controller-> single instance attached to this, would provide algo support

@@ -156,7 +156,7 @@ namespace Common
         #region SAVE AND LOAD 
         public void SaveModel()
         {
-           string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelect.ToString()
+           string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelected.ToString()
                                                                                     + "/Char/charModels.txt";
             Debug.Log(" INSIDE SAVE MODEL ");
             if (!File.Exists(Application.dataPath + mydataPath))

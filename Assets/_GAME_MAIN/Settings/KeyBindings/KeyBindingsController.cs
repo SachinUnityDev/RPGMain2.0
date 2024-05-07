@@ -102,7 +102,7 @@ namespace Common
         {           
             foreach (KeyBindingData keyData in keyBindingSO.allKeyBindingData)
             {
-                if (keyData.gameState == currkeyBindingData.gameState)
+                if (keyData.gameScene == currkeyBindingData.gameScene)
                 {
                     if (keyData.keyPressed == key)
                     {
@@ -278,12 +278,12 @@ namespace Common
             int i = 0;
             
             townBinds  = keyBindingSO.allKeyBindingData
-                            .Where(t => t.gameState == GameScene.InTown).ToList(); 
+                            .Where(t => t.gameScene == GameScene.InTown).ToList(); 
             
             foreach (Transform Child in townPage1.transform)
             {
                 KeyBindingData keyData = townBinds[i];
-                if (keyData.gameState == GameScene.InTown)
+                if (keyData.gameScene == GameScene.InTown)
                 {
                     textTitle.text = "TOWN";
                     Child.GetComponent<KeyBindPanelEvents>().PopulateKeyBindings(keyData, this);
@@ -293,7 +293,7 @@ namespace Common
             foreach (Transform Child in townPage2.transform)
             {
                 KeyBindingData keyData = townBinds[i];
-                if (keyData.gameState == GameScene.InTown)
+                if (keyData.gameScene == GameScene.InTown)
                 {
                     textTitle.text = "TOWN";
                     Child.GetComponent<KeyBindPanelEvents>().PopulateKeyBindings(keyData, this);
@@ -305,12 +305,12 @@ namespace Common
         {
             int i = 0;
             combatBinds = keyBindingSO.allKeyBindingData
-                                .Where(t => t.gameState == GameScene.InCombat).ToList();
+                                .Where(t => t.gameScene == GameScene.InCombat).ToList();
 
             foreach (Transform Child in combatPage1.transform)
             {
                 KeyBindingData keyData = combatBinds[i];
-                if (keyData.gameState == GameScene.InCombat)
+                if (keyData.gameScene == GameScene.InCombat)
                 {
                     textTitle.text = "COMBAT"; 
                     Child.GetComponent<KeyBindPanelEvents>().PopulateKeyBindings(keyData, this);
@@ -320,7 +320,7 @@ namespace Common
             foreach (Transform Child in combatPage2.transform)
             {
                 KeyBindingData keyData = combatBinds[i];
-                if (keyData.gameState == GameScene.InCombat)
+                if (keyData.gameScene == GameScene.InCombat)
                 {
                     textTitle.text = "COMBAT";
                     Child.GetComponent<KeyBindPanelEvents>().PopulateKeyBindings(keyData, this);
@@ -332,11 +332,11 @@ namespace Common
         {
             int i = 0;
             questBinds = keyBindingSO.allKeyBindingData
-                                .Where(t => t.gameState == GameScene.InQuestRoom).ToList();
+                                .Where(t => t.gameScene == GameScene.InQuestRoom).ToList();
             foreach (Transform Child in questPage.transform)
             {
                 KeyBindingData keyData = questBinds[i];
-                if (keyData.gameState == GameScene.InQuestRoom)
+                if (keyData.gameScene == GameScene.InQuestRoom)
                 {
                     textTitle.text = "QUEST";
                     Child.GetComponent<KeyBindPanelEvents>().PopulateKeyBindings(keyData, this);
@@ -348,11 +348,11 @@ namespace Common
         {
             int i = 0;
             generalBinds = keyBindingSO.allKeyBindingData
-                                .Where(t => t.gameState == GameScene.None).ToList();
+                                .Where(t => t.gameScene == GameScene.None).ToList();
             foreach (Transform Child in generalpage.transform)
             {
                 KeyBindingData keyData = generalBinds[i];
-                if (keyData.gameState == GameScene.None)
+                if (keyData.gameScene == GameScene.None)
                 {
                     textTitle.text = "GENERAL";
                     Child.GetComponent<KeyBindPanelEvents>().PopulateKeyBindings(keyData, this);

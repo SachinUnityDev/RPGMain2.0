@@ -8,13 +8,13 @@ namespace Common
     [System.Serializable]
     public class KeyBindingData
     {
-        public GameScene gameState;
+        public GameScene gameScene;
         public KeyBindFuncs keyfunc;
         public KeyCode keyPressed;
         public KeyCode keyDefault; 
-        public KeyBindingData(GameScene gameState, KeyBindFuncs keyfunc, KeyCode keyPressed, KeyCode keyDefault)
+        public KeyBindingData(GameScene gameScene, KeyBindFuncs keyfunc, KeyCode keyPressed, KeyCode keyDefault)
         {
-            this.gameState = gameState;
+            this.gameScene = gameScene;
             this.keyfunc = keyfunc;
             this.keyPressed = keyPressed;
             this.keyDefault= keyDefault;
@@ -45,9 +45,9 @@ namespace Common
             }
         }
 
-        public KeyBindingData GetKeyBindingData(GameScene gameState, KeyCode keyCode)
+        public KeyBindingData GetKeyBindingData(GameScene gameScene, KeyCode keyCode)
         {
-            int index = allKeyBindingData.FindIndex(t => t.gameState == gameState && t.keyPressed == keyCode);
+            int index = allKeyBindingData.FindIndex(t => t.gameScene == gameScene && t.keyPressed == keyCode);
             if (index != -1)
                 return allKeyBindingData[index];
 

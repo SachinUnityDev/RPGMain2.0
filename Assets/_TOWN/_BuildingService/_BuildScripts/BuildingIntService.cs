@@ -50,7 +50,8 @@ namespace Town
 
         }
 
-        public void InitBuildIntService()
+        
+        public void InitNGBuildIntService()
         {
             houseController = GetComponent<HouseController>();
             templeController = GetComponent<TempleController>();
@@ -61,6 +62,9 @@ namespace Town
             stableController = GetComponent<StableController>();
             thieveController = GetComponent<ThievesGuildController>();
             cityHallController= GetComponent<CityHallController>();
+
+
+            // depending on slot and state get the save file
 
             houseController.InitHouseController();
             templeController.InitTempleController();            

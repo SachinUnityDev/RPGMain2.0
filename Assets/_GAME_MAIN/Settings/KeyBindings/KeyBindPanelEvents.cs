@@ -184,7 +184,7 @@ namespace Common
                 {
                     KeyCode key = Event.current.keyCode;                    
                     KeyBindingData keyBindingData1  
-                        = keyBindingController.keyBindingSO.GetKeyBindingData(keyBindingData.gameState, key);
+                        = keyBindingController.keyBindingSO.GetKeyBindingData(keyBindingData.gameScene, key);
                     
                     if (keyBindingData1 != null)
                     {

@@ -8,8 +8,64 @@ using UnityEngine.UI;
 
 namespace Common
 {
-    public interface ISaveableService
+
+    public enum SlotPath
     {
+        Main, 
+        PlayerService,
+        WoodGameService,
+        CurioService,
+        EncounterService,
+        LandscapeService,
+        LootService,
+        QuestEventService,
+        QuestMissionService,
+        QRoomService,
+        ArmorService,
+        InvService,
+        WeaponService,
+        GewgawService,
+        LoreService,
+        RecipeService,
+        ItemService,
+        GridService,
+        CombatEventService,
+        CombatService,
+        PassiveSkillService,
+        SkillService,
+        WelcomeService,
+        JobService,
+        BuildingIntService,
+        MapService,
+        TownService,
+        SceneMgmtService,
+        BarkService,
+        BuffService,
+        CharStatesService,
+        CharService,
+        DialogueService,
+        LevelService,
+        PermaTraitsService,
+        TempTraitService,
+        CodexService,
+        GameEventService,
+        GameService,
+        SettingService,
+        IntroAudioService,
+        BestiaryService,
+        MGService,
+        SaveService,
+        FameService,
+        CalendarService,
+        RosterService,
+        TownEventService,
+        TradeService,
+
+    }
+
+    public interface ISaveable
+    {
+       // SlotPath slotPath { get; }
         void RestoreState(string basePath);
         void ClearState();
         void SaveState(); 
@@ -35,9 +91,9 @@ namespace Common
 
         public string baseSavepath = "";
 
-        public SaveSlot slotSelect; 
+        public SaveSlot slotSelected; 
         public List<GameObject> allServices = new List<GameObject>();
-        public List<ISaveableService> allSaveService = new List<ISaveableService>();
+        public List<ISaveable> allSaveService = new List<ISaveable>();
 
         
         public bool isLoading = false;
@@ -47,7 +103,7 @@ namespace Common
         {
            
            saveView.GetComponent<IPanel>().UnLoad();
-           slotSelect = SaveSlot.AutoSave; 
+           slotSelected = SaveSlot.AutoSave; 
             foreach (Transform child in saveView.gameObject.transform)
             {
                 if(child.GetComponent<Button>() != null)
@@ -78,7 +134,33 @@ namespace Common
         {
 
         }
-        public void ShowSavePanel()
+
+
+
+
+        public List<ISaveable> FindAllSaveables()
+        {
+            List<ISaveable> saveables = new List<ISaveable>();
+
+            // Get all the game objects in the scene
+            GameObject[] sceneObjects = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
+
+            // Iterate through each game object
+            foreach (GameObject obj in sceneObjects)
+            {
+                // Get all the ISaveable components attached to the game object
+                ISaveable[] components = obj.GetComponentsInChildren<ISaveable>();
+
+                // Add the ISaveable components to the list
+                saveables.AddRange(components);
+            }
+
+            return saveables;
+        }
+    
+
+
+    public void ShowSavePanel()
         {
             savePanel.GetComponent<IPanel>().Init();
             savePanel.GetComponent<IPanel>().Load();           
@@ -98,7 +180,7 @@ namespace Common
             int index = child.GetSiblingIndex();
             index++;  // for new val correction
 
-            slotSelect = (SaveSlot)index;
+            slotSelected = (SaveSlot)index;
             if(isSaving)
                 SaveStateMaster();
             if(isLoading)
@@ -109,17 +191,17 @@ namespace Common
         {
             foreach (GameObject service in allServices)
             {
-                 service.GetComponent<ISaveableService>().SaveState();
+                 service.GetComponent<ISaveable>().SaveState();
             }
         }
 
       
         public void LoadFileMaster() 
         {
-            string path = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelect.ToString(); 
+            string path = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelected.ToString(); 
             foreach (GameObject service in allServices)
             {
-                service.GetComponent<ISaveableService>().RestoreState(path);
+                service.GetComponent<ISaveable>().RestoreState(path);
             }
         }
 

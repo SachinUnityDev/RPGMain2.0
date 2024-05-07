@@ -141,7 +141,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706891012819631}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -1397,7 +1397,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706890970159516}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -1466,12 +1466,11 @@ MonoBehaviour:
   spriteN: {fileID: 21300000, guid: 651e94626054bb54eb75a13ff3e84c79, type: 3}
   spriteOnHover: {fileID: 21300000, guid: 3dc1a1f311f51fa42bbea550c4d161f8, type: 3}
   spriteClicked: {fileID: 21300000, guid: 17ffb64e093416c45a20293e46baac8e, type: 3}
-  ClickedStateTxt: _
-  dsplyTxt: 
+  profileTxt: 
   gameModel:
     profileSlot: 0
     profileName: 
-    gameState: 0
+    gameScene: 0
     gameDifficulty: 0
     locationName: 0
     landscapeNames: 0
@@ -1534,7 +1533,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706890995539009}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -2519,7 +2518,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706890952144696}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -3392,7 +3391,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 11.9, y: 11.2}
+  m_AnchoredPosition: {x: 11.899994, y: 11.200001}
   m_SizeDelta: {x: 61.73001, y: 66}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &123867006
@@ -6374,6 +6373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   continueBtnSetProf: {fileID: 804235228}
   container: {fileID: 361752638}
+  slotSelect: 0
 --- !u!1 &295266994
 GameObject:
   m_ObjectHideFlags: 0
@@ -6545,7 +6545,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706890750083321}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -10109,7 +10109,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706890531996780}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -10149,7 +10149,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 11.9, y: 11.2}
+  m_AnchoredPosition: {x: 11.899994, y: 11.200001}
   m_SizeDelta: {x: 61.73001, y: 66}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &488793645
@@ -10771,7 +10771,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706890503855965}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -11549,7 +11549,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706890476295502}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -11843,7 +11843,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706890488904904}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -12346,7 +12346,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706890433559206}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -12972,7 +12972,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706890401769346}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -13039,7 +13039,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706890396222696}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -15469,7 +15469,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706890290827838}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -16400,7 +16400,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 11.9, y: 11.2}
+  m_AnchoredPosition: {x: 11.899994, y: 11.200001}
   m_SizeDelta: {x: 61.73001, y: 66}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &789552504
@@ -16503,7 +16503,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706890256566720}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -18015,7 +18015,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706890154638894}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -18166,7 +18166,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706890147438777}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -18474,7 +18474,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706890100869154}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -19304,7 +19304,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706890090805116}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -21382,7 +21382,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706889931488041}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -22692,7 +22692,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 11.9, y: 11.2}
+  m_AnchoredPosition: {x: 11.899994, y: 11.200001}
   m_SizeDelta: {x: 61.73001, y: 66}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1133793924
@@ -22894,7 +22894,7 @@ MonoBehaviour:
     isRepeatable: 0
     isSkippable: 0
     isPlayedOnce: 0
-    gameState: 0
+    gameScene: 0
     charInDialogue: 
     NPCinDialogue: 
     locationName: 0
@@ -23211,7 +23211,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706889887959846}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -25240,12 +25240,11 @@ MonoBehaviour:
   spriteN: {fileID: 21300000, guid: 651e94626054bb54eb75a13ff3e84c79, type: 3}
   spriteOnHover: {fileID: 21300000, guid: 3dc1a1f311f51fa42bbea550c4d161f8, type: 3}
   spriteClicked: {fileID: 21300000, guid: 17ffb64e093416c45a20293e46baac8e, type: 3}
-  ClickedStateTxt: _
-  dsplyTxt: 
+  profileTxt: 
   gameModel:
     profileSlot: 0
     profileName: 
-    gameState: 0
+    gameScene: 0
     gameDifficulty: 0
     locationName: 0
     landscapeNames: 0
@@ -25668,7 +25667,7 @@ MonoBehaviour:
   saveMode: 0
   currMBloodSlot: 0
   baseSavepath: 
-  slotSelect: 0
+  slotSelected: 0
   allServices:
   - {fileID: 0}
   isLoading: 0
@@ -26449,7 +26448,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706889746545226}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -26695,7 +26694,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706889717589347}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -29696,7 +29695,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 11.9, y: 11.2}
+  m_AnchoredPosition: {x: 11.899994, y: 11.200001}
   m_SizeDelta: {x: 61.73001, y: 66}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1423995431
@@ -31394,7 +31393,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706889551980092}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -31834,7 +31833,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706889470211409}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -32696,7 +32695,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706889443289971}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -33445,7 +33444,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706889413860013}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -35048,12 +35047,11 @@ MonoBehaviour:
   spriteN: {fileID: 21300000, guid: 651e94626054bb54eb75a13ff3e84c79, type: 3}
   spriteOnHover: {fileID: 21300000, guid: 3dc1a1f311f51fa42bbea550c4d161f8, type: 3}
   spriteClicked: {fileID: 21300000, guid: 17ffb64e093416c45a20293e46baac8e, type: 3}
-  ClickedStateTxt: _
-  dsplyTxt: 
+  profileTxt: 
   gameModel:
     profileSlot: 0
     profileName: 
-    gameState: 0
+    gameScene: 0
     gameDifficulty: 0
     locationName: 0
     landscapeNames: 0
@@ -35192,7 +35190,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706889350220607}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -35368,7 +35366,7 @@ MonoBehaviour:
   nextBtnLastClickTime: 0
   prevBtnLastClickTime: 0
   currkeyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -35803,7 +35801,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706889287713097}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -36154,7 +36152,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 11.9, y: 11.2}
+  m_AnchoredPosition: {x: 11.899994, y: 11.200001}
   m_SizeDelta: {x: 61.73001, y: 66}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1735082029
@@ -36851,7 +36849,7 @@ MonoBehaviour:
   nextBtnLastClickTime: 0
   prevBtnLastClickTime: 0
   currkeyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -36895,7 +36893,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 302.27222, y: -118.37333}
+  m_AnchoredPosition: {x: 302.27222, y: -118.37332}
   m_SizeDelta: {x: 433.89, y: 65.08}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1771123568
@@ -36919,12 +36917,11 @@ MonoBehaviour:
   spriteN: {fileID: 21300000, guid: 651e94626054bb54eb75a13ff3e84c79, type: 3}
   spriteOnHover: {fileID: 21300000, guid: 3dc1a1f311f51fa42bbea550c4d161f8, type: 3}
   spriteClicked: {fileID: 21300000, guid: 17ffb64e093416c45a20293e46baac8e, type: 3}
-  ClickedStateTxt: _
-  dsplyTxt: 
+  profileTxt: 
   gameModel:
     profileSlot: 0
     profileName: 
-    gameState: 0
+    gameScene: 0
     gameDifficulty: 0
     locationName: 0
     landscapeNames: 0
@@ -37493,7 +37490,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706889225711093}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -37733,7 +37730,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706889248171813}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -38078,7 +38075,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706889238844089}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -38269,12 +38266,11 @@ MonoBehaviour:
   spriteN: {fileID: 21300000, guid: 651e94626054bb54eb75a13ff3e84c79, type: 3}
   spriteOnHover: {fileID: 21300000, guid: 3dc1a1f311f51fa42bbea550c4d161f8, type: 3}
   spriteClicked: {fileID: 21300000, guid: 17ffb64e093416c45a20293e46baac8e, type: 3}
-  ClickedStateTxt: _
-  dsplyTxt: 
+  profileTxt: 
   gameModel:
     profileSlot: 0
     profileName: 
-    gameState: 0
+    gameScene: 0
     gameDifficulty: 0
     locationName: 0
     landscapeNames: 0
@@ -38508,12 +38504,13 @@ MonoBehaviour:
   currGameModel:
     profileSlot: 0
     profileName: 
-    gameState: 0
+    gameScene: 0
     gameDifficulty: 0
     locationName: 0
     landscapeNames: 0
     abbasClassType: 0
     jobSelect: 0
+  gameProgress: 0
   isGameOn: 0
   allGameJSONs: []
   allGameModel: []
@@ -38953,6 +38950,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1849247336}
   - component: {fileID: 1849247337}
+  - component: {fileID: 1849247338}
   m_Layer: 0
   m_Name: Common_INTRO
   m_TagString: Untagged
@@ -38995,6 +38993,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objID: 
+--- !u!114 &1849247338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849247335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3477a94bfdb88704c8eabe33d4f208d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1854618212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39013,7 +39023,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706889159405779}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -40343,7 +40353,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 17.03, y: 0.31000137}
+  m_AnchoredPosition: {x: 17.029999, y: 0.31000137}
   m_SizeDelta: {x: -159.08, y: -19.57}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1949240350
@@ -40500,7 +40510,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706889060235127}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -42993,7 +43003,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 17.03, y: 0.31000137}
+  m_AnchoredPosition: {x: 17.029999, y: 0.31000137}
   m_SizeDelta: {x: -159.08, y: -19.57}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2047788920
@@ -43891,12 +43901,11 @@ MonoBehaviour:
   spriteN: {fileID: 21300000, guid: 651e94626054bb54eb75a13ff3e84c79, type: 3}
   spriteOnHover: {fileID: 21300000, guid: 3dc1a1f311f51fa42bbea550c4d161f8, type: 3}
   spriteClicked: {fileID: 21300000, guid: 17ffb64e093416c45a20293e46baac8e, type: 3}
-  ClickedStateTxt: _
-  dsplyTxt: 
+  profileTxt: 
   gameModel:
     profileSlot: 0
     profileName: 
-    gameState: 0
+    gameScene: 0
     gameDifficulty: 0
     locationName: 0
     landscapeNames: 0
@@ -44139,7 +44148,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706888938272346}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -44249,7 +44258,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 2016706888891060577}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -48934,7 +48943,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 1423306544280077194}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -67777,7 +67786,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 4317013698765203592}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -74231,7 +74240,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 8339622592674367048}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -74254,7 +74263,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 8222926355810914759}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0
@@ -81372,7 +81381,7 @@ MonoBehaviour:
   keyBindingTxt: {fileID: 6967891865409201103}
   clickedStatestr: 
   keyBindingData:
-    gameState: 0
+    gameScene: 0
     keyfunc: 0
     keyPressed: 0
     keyDefault: 0

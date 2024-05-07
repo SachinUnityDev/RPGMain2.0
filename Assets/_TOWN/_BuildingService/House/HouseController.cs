@@ -33,6 +33,17 @@ namespace Town
             houseModel = new HouseModel(houseSO);
             BuildingIntService.Instance.allBuildModel.Add(houseModel);
 
+            //switch (GameService.Instance.gameProgress)
+            //{
+            //    case GameProgress.NewGameInit:
+                
+            //        break;
+            //    case GameProgress.LoadGameInit:
+                   
+            //        break;
+            //    default:
+            //        break;
+            //}   
         }
         public void UnLockBuildIntType(BuildInteractType buildIntType, bool unLock)
         {

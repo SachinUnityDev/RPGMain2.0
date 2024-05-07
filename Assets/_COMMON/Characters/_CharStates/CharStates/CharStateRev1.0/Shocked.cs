@@ -46,7 +46,7 @@ namespace Common
         }
         void CantUseMoveSkills(CharController charController)
         {
-            if(GameService.Instance.currGameModel.gameState == GameScene.InCombat)
+            if(GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
             {
                 if (this.charController.charModel.charID == charController.charModel.charID)
                 {

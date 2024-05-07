@@ -7,7 +7,7 @@ using System;
 
 namespace Common
 {
-    public class FameService : MonoSingletonGeneric<FameService>, ISaveableService
+    public class FameService : MonoSingletonGeneric<FameService>, ISaveable
     {
         public FameSO fameSO;
         public FameController fameController;
@@ -80,6 +80,11 @@ namespace Common
         public void SaveState()
         {
 
+        }
+
+        public void RestoreState(string basePath)
+        {
+            throw new NotImplementedException();
         }
     }
 

@@ -8,7 +8,7 @@ using UnityEngine;
 using Town; 
 namespace Common
 {
-    public class CharService : MonoSingletonGeneric<CharService>, ISaveableService
+    public class CharService : MonoSingletonGeneric<CharService>, ISaveable
     {
         public event Action<CharController> OnCharDeath;
         public event Action<CharController> OnCharSpawn;
@@ -351,7 +351,7 @@ namespace Common
         }
         public void ClearState()
         {
-            string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelect.ToString()
+            string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelected.ToString()
              + "/Char/charModels.txt";
             File.WriteAllText(Application.dataPath + mydataPath, "");
 
@@ -485,7 +485,7 @@ namespace Common
         }
         public void On_CharDeath(CharController _charController, int causeByCharID)
         {
-            if (GameService.Instance.currGameModel.gameState != GameScene.InCombat) return;
+            if (GameService.Instance.currGameModel.gameScene != GameScene.InCombat) return;
             
             _charController.charModel.stateOfChar = StateOfChar.Dead; 
             _charController.gameObject.GetComponent<BoxCollider2D>().enabled= false;

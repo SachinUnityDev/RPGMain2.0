@@ -15,7 +15,7 @@ namespace Common
         Inv,         
     }
 
-    public class EcoServices : MonoSingletonGeneric<EcoServices>, ISaveableService
+    public class EcoServices : MonoSingletonGeneric<EcoServices>, ISaveable
     {
         public event Action<PocketType> OnPocketSelected;
         public EconoModel econoModel;
@@ -158,7 +158,12 @@ namespace Common
             Debug.Log("ECO SERVICES SAVE .. saveState");
         }
 
-#endregion
+        public void RestoreState(string basePath)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }
 

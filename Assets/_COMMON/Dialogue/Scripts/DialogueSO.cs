@@ -45,7 +45,7 @@ namespace Common
         public bool isRepeatable;
         public bool isSkippable; 
 
-        public GameScene gameState;
+        public GameScene gameScene;
         public List<CharNames> charInDialogue = new List<CharNames>();
         public List<NPCNames> NPCinDialogue = new List<NPCNames>();
         public LocationName locationName;

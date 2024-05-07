@@ -15,13 +15,13 @@ namespace Common
         {
 
         }
-        public void LoadScene(GameScene newScene)
+        public void LoadScene(SceneSeq sceneSeq)
         {
 
             SceneMgmtController sceneMgmtController = FindObjectOfType<SceneMgmtController>();
             sceneMgmtController.StartSceneTransit();
 
-            SceneManager.LoadSceneAsync((int)newScene);
+            SceneManager.LoadSceneAsync((int)sceneSeq);
 
             //lastScene = currScene; 
             //currGameScene= newScene;
@@ -32,29 +32,26 @@ namespace Common
         }
 
 
-
-
-
-        IEnumerator LoadNewScene(GameScene newScene, AsyncOperation asyncLoad)
-        {         
+        //IEnumerator LoadNewScene(GameScene newScene, AsyncOperation asyncLoad)
+        //{         
    
             
-            while (asyncLoad.progress < 0.9)
-            {
-                Debug.Log("Progress" + asyncLoad.progress); 
-                yield return null;
-            }
-            if (asyncLoad.isDone)
-            {
-                asyncLoad.allowSceneActivation = true;
-                currScene = SceneManager.GetSceneByBuildIndex((int)newScene);
-                SceneManager.SetActiveScene(currScene);
-                //GameEventService.Instance.On_TownEnter(LocationName.Nekkisari);
-                //GameService.Instance.
-                //    GameServiceInit(GameState.InTown, GameDifficulty.Easy, LocationName.Nekkisari);
-                StartCoroutine(UnloadAsyncOperation());
-            }
-        }
+        //    while (asyncLoad.progress < 0.9)
+        //    {
+        //        Debug.Log("Progress" + asyncLoad.progress); 
+        //        yield return null;
+        //    }
+        //    if (asyncLoad.isDone)
+        //    {
+        //        asyncLoad.allowSceneActivation = true;
+        //        currScene = SceneManager.GetSceneByBuildIndex((int)newScene);
+        //        SceneManager.SetActiveScene(currScene);
+        //        //GameEventService.Instance.On_TownEnter(LocationName.Nekkisari);
+        //        //GameService.Instance.
+        //        //    GameServiceInit(GameState.InTown, GameDifficulty.Easy, LocationName.Nekkisari);
+        //        StartCoroutine(UnloadAsyncOperation());
+        //    }
+        //}
 
         IEnumerator UnloadAsyncOperation()
         {
@@ -67,12 +64,5 @@ namespace Common
         }
     }
 
-    public enum GameScene
-    {
-        Intro, 
-        Town, 
-        Quest, 
-        Combat,
-    }
 
 }

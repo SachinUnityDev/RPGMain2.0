@@ -143,7 +143,7 @@ namespace Common
 
 
 #region SAVE_LOAD SERVICES
-        public void RestoreState()
+        public void LoadState()
         {
             Debug.Log("ECO SERVICES SAVE .. restored"); 
         }

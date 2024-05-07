@@ -69,7 +69,7 @@ namespace Common
         {
             return fameController.fameModel.allFameData;        
         }
-        public void RestoreState()
+        public void LoadState()
         {
 
         }

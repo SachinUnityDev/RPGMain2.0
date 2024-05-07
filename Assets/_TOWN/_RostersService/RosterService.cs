@@ -99,7 +99,7 @@ namespace Common
             rosterViewController.GetComponent<IPanel>().UnLoad();
         }
 
-        public void RestoreState()
+        public void LoadState()
         {
         }
 

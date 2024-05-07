@@ -317,7 +317,7 @@ namespace Combat
             }            
         }
 
-        public void RestoreState()
+        public void LoadState()
         {
             string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelected.ToString()
               + "/Grid/DynaModels.txt";

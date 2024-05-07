@@ -5,6 +5,7 @@ using Combat;
 using System.IO;
 using System;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
 
 namespace Common
 {
@@ -64,11 +65,10 @@ namespace Common
     }
 
     public interface ISaveable
-    {
-       // SlotPath slotPath { get; }
-        void RestoreState(string basePath);
-        void ClearState();
-        void SaveState(); 
+    {           
+        string SaveState();
+        void LoadState();
+        void ClearState();     
     }
 
     // Should define and send the save path for each of the service 
@@ -127,7 +127,6 @@ namespace Common
         public void OnQuickSavePressed()
         {
 
-
         }
 
         public void OnManualSavePressed()
@@ -135,10 +134,26 @@ namespace Common
 
         }
 
+        public void ReadSaveFiles(string folderPath)
+        {
+            // Get all the file paths in the specified folder with the ".txt" extension
+            string[] saveFiles = Directory.GetFiles(folderPath, "*.txt");
+
+            // Iterate through each save file
+            foreach (string filePath in saveFiles)
+            {
+                // Read the contents of the file
+                string fileContents = File.ReadAllText(filePath);
+
+                // Process the file contents as needed
+                // For example, you can parse the contents into objects or display them in the console
+                Console.WriteLine(fileContents);
+            }
+        }
 
 
 
-        public List<ISaveable> FindAllSaveables()
+    public List<ISaveable> FindAllSaveables()
         {
             List<ISaveable> saveables = new List<ISaveable>();
 

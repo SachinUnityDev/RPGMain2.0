@@ -93,7 +93,7 @@ namespace Common
         }
 
         #region SAVE AND LOAD 
-        public void RestoreState()
+        public void LoadState()
         {
             string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelected.ToString()
                      + "/Char/gameModels.txt";

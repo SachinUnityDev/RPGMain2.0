@@ -236,9 +236,9 @@ namespace Combat
         
         public void InitSkillControllers()// ON SOC 
         {
-            foreach (GameObject charGO in CharService.Instance.charsInPlay)
+            foreach (CharController charCtrl in CharService.Instance.charsInPlayControllers)
             {
-                SkillController1 skillController = charGO.GetComponent<SkillController1>(); 
+                SkillController1 skillController = charCtrl.GetComponent<SkillController1>(); 
 
                 //if (skillController == null)
                 //{
@@ -259,9 +259,9 @@ namespace Combat
                 }
                 else
                 {
-                    Debug.LogError("SkillController is Null" + charGO.name); 
+                    Debug.LogError("SkillController is Null" + charCtrl.name); 
                 }
-                CharNames charName = charGO.GetComponent<CharController>().charModel.charName; 
+                CharNames charName = charCtrl.GetComponent<CharController>().charModel.charName; 
                 //   skillController.InitSkillList(charName);
             }
         }

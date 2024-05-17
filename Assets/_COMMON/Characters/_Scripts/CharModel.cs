@@ -5,7 +5,7 @@ using System.IO;
 using Combat;
 using Interactables;
 using System.Linq;
-using System.Security.Policy;
+
 
 namespace Common
 {
@@ -117,15 +117,15 @@ namespace Common
         public CharOccupies _charOccupies;
         public List<int> _posPriority; 
         
-        [Header("Permanent Traits LIST")]
-        //public List<TempTraitName> Immune2TraitsList = new List<TempTraitName>();
-        //public List<AttribName> Immune2StatChangeList = new List<AttribName>();
-        //public List<CharStateName> Immune2CharStateList = new List<CharStateName>();
+        //[Header("Permanent Traits LIST")]
+        ////public List<TempTraitName> Immune2TraitsList = new List<TempTraitName>();
+        ////public List<AttribName> Immune2StatChangeList = new List<AttribName>();
+        ////public List<CharStateName> Immune2CharStateList = new List<CharStateName>();
         
-        [Header("States & Traits _LIST")]
-        public List<PermaTraitName> PermaTraitList = new List<PermaTraitName>();
-        //public List<CharStateName> InCharStatesList = new List<CharStateName>();
-        //public List<TempTraitName> InTempTraitList = new List<TempTraitName>();
+        //[Header("States & Traits _LIST")]
+        ////public List<PermaTraitName> PermaTraitList = new List<PermaTraitName>();
+        ////public List<CharStateName> InCharStatesList = new List<CharStateName>();
+        ////public List<TempTraitName> InTempTraitList = new List<TempTraitName>();
 
         [Header("Armor Socket  and WeaponEnchantment")]
         public GemNames enchantableGem4Weapon = GemNames.None;
@@ -150,32 +150,6 @@ namespace Common
             }
             return barRatio;
         }
-
-
-
-        #region SAVE AND LOAD 
-        public void SaveModel()
-        {
-           string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelected.ToString()
-                                                                                    + "/Char/charModels.txt";
-            Debug.Log(" INSIDE SAVE MODEL ");
-            if (!File.Exists(Application.dataPath + mydataPath))
-            {
-                Debug.Log("does not exist");
-                File.CreateText(Application.dataPath + mydataPath);
-            }
-            string charData =  JsonUtility.ToJson(this); 
-            string saveStr = charData +"|"; 
-            
-            File.AppendAllText(Application.dataPath + mydataPath, saveStr);
-        }
-
-        public void LoadModel()
-        {
-            
-        }
-
-        #endregion  
 
         #region  CHARMODEL INIT FROM SO 
 
@@ -343,6 +317,7 @@ namespace Common
 
 
         #endregion
+
         #region CHAR LVL
 
         public void LvlNExpUpdate(int currExp)

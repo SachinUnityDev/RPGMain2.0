@@ -21180,6 +21180,7 @@ GameObject:
   - component: {fileID: 1072239004}
   - component: {fileID: 1072239003}
   - component: {fileID: 1072239005}
+  - component: {fileID: 1072239006}
   m_Layer: 5
   m_Name: ComeIN
   m_TagString: Untagged
@@ -21364,6 +21365,18 @@ MonoBehaviour:
   OnUnrevealCompleted:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1072239006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072239000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aa6802b507929f46bf631c04a7c6a1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1083453854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25655,6 +25668,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveSO: {fileID: 11400000, guid: 2253c5663d87c424daa5c004aeb61091, type: 2}
+  basePath: /SAVE_SYSTEM/NEWSAVE1/
   savePanel: {fileID: 7367219646476978986, guid: bfd953b40969ce54a9f476896d3e1c6e,
     type: 3}
   loadPanel: {fileID: 5933237883515793374, guid: d4ffe67304cdc9e45b69eefc9b9f9dbc,
@@ -25666,7 +25680,6 @@ MonoBehaviour:
   saveController: {fileID: 0}
   saveMode: 0
   currMBloodSlot: 0
-  baseSavepath: 
   slotSelected: 0
   allServices:
   - {fileID: 0}

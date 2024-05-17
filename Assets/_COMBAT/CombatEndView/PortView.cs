@@ -124,7 +124,7 @@ namespace Combat
         void FillPort(int sharedExp)
         {
             
-            CharacterSO charSO = CharService.Instance.GetCharSO(charModel);
+            CharacterSO charSO = CharService.Instance.allCharSO.GetCharSO(charModel.charName);
             CharComplimentarySO charCompSO = CharService.Instance.charComplimentarySO;
 
             ClassType classType = charModel.classType; 

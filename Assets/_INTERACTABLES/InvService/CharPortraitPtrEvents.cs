@@ -33,7 +33,7 @@ namespace Interactables
             raceImg = transform.GetChild(4).GetChild(0).GetComponent<Image>();
             lvlTxt = transform.GetChild(5).GetChild(0).GetComponent<TextMeshProUGUI>();
             CharacterSO charSO = 
-                        CharService.Instance.GetAllySO(charModel.charName);
+                        CharService.Instance.allCharSO.GetCharSO(charModel.charName);
 
             charPort.sprite = charSO.bpPortraitUnLocked;
             expBar.fillAmount = charModel.GetDeltaRatio();

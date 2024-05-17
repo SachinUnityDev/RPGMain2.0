@@ -5,7 +5,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
-using Town; 
+using Town;
+using System.Net.Http.Headers;
 namespace Common
 {
     public class CharService : MonoSingletonGeneric<CharService>, ISaveable
@@ -22,8 +23,7 @@ namespace Common
         public bool isPartyLocked = false; 
 
         [Header("Character SO")]
-        public AllCharSO allCharSO; 
-        public List<CharacterSO> allAllySO = new List<CharacterSO>();
+        public AllCharSO allCharSO;       
         public AllNPCSO allNpcSO;
         public FleeChancesSO fleeChancesSO;
 
@@ -39,9 +39,6 @@ namespace Common
         public List <CharModel> allCharModels = new List<CharModel>();// to be populated by charCtrl
         public CharMainModel charMainModel; 
 
-        [Header("GO list")]
-        public List<GameObject> allyInPlay;       
-        public List<GameObject> charsInPlay; // 
 
        // only for Quest  and Combat
         
@@ -68,12 +65,8 @@ namespace Common
         [Header("Character Pos")]
         public Vector3 spawnPos = new Vector3(-100, 0, 0);
 
-        [Header(" Game Init ")]
-        public bool isNewGInitDone = false;
-
         void Start()
         {
-            //lastAllyCharID = 0;       
             isPartyLocked= false;
             CombatEventService.Instance.OnEOT += UpdateOnDeath;       
             DontDestroyOnLoad(this.gameObject);
@@ -83,37 +76,94 @@ namespace Common
             CombatEventService.Instance.OnEOT -= UpdateOnDeath;
         }
 
-
-
-        
-
-        public void Init()  // on Scene enter 
+        public void Init() 
         {
-            // get all so and Popyulate the list of controllers
-            // if save slot is defined take from save slot other SO from here pass in charSO    
-
-            //  if(SaveService.Instance.)
-            List<CharNames> chars2Spawn = new List<CharNames> { CharNames.Abbas
-                                 , CharNames.Baran, CharNames.Rayyan, CharNames.Cahyo };
-            charMainModel= new CharMainModel(); 
-            foreach (CharNames charName in chars2Spawn)
+           string path = SaveService.Instance.GetCurrSlotServicePath(ServicePath.CharService);
+            if (SaveService.Instance.DirectoryExists(path))
             {
-                SpawnCompanions(charName);
+                if(IsDirectoryEmpty(path))
+                {
+                    List<CharNames> chars2Spawn = new List<CharNames> { CharNames.Abbas
+                                 , CharNames.Baran, CharNames.Rayyan, CharNames.Cahyo };
+                    charMainModel = new CharMainModel();
+                    foreach (CharNames charName in chars2Spawn)
+                    {
+                        SpawnCompNG(charName);
+                    }
+                    SetAbbasClassOnQuickStartFrmGameService();
+                }else
+                {
+                    LoadState();
+                }
             }
-            SetAbbasClassOnQuickStart();
-            //CharController abbas = charsInPlayControllers.Find(t => t.charModel.charName == CharNames.Abbas);
-            //foreach (CharController charCtrl in allyInPlayControllers)
-            //{
-            //    On_CharInit();
-            //    On_CharAddToParty(GetCharCtrlWithName(charCtrl.charModel.charName));
-            //}
-
-            isNewGInitDone = true;
-
-            //CreateAllAlliesCtrls();
+            else
+            {
+                Debug.LogError("Service Directory missing");               
+            }                   
         }
 
-        #region GETTERS
+
+
+#region SAVE LOAD CLEAR AND INIT
+        public void LoadState()
+        {
+            // browse thru all files in the folder and load them
+            // as char Models 
+            string path = SaveService.Instance.GetCurrSlotServicePath(ServicePath.CharService);
+
+            if (SaveService.Instance.DirectoryExists(path))
+            {
+                string[] fileNames = Directory.GetFiles(path);
+                foreach (string fileName in fileNames)
+                {
+                    string contents = File.ReadAllText(fileName);
+                    CharModel charModel = JsonUtility.FromJson<CharModel>(contents);
+                    SpawnComp(charModel);
+                    Debug.Log("LOADED CHAR " + charModel.charName);
+                }
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing");
+            }
+        }
+
+        public CharModel GetCharModel(CharNames charName)
+        {
+            CharModel charModel = allCharModels.Find(t => t.charName == charName);
+            if (charModel != null)
+                return charModel;
+            else
+                Debug.LogError("Char model not loaded");
+            return null;
+        }
+        public void ClearState()
+        {
+            string path = SaveService.Instance.GetCurrSlotServicePath(ServicePath.CharService);
+            DeleteAllFilesInDirectory(path); 
+        }
+        public void SaveState()
+        {
+            if (charsInPlayControllers.Count <= 0)
+            {
+                Debug.LogError("no chars in play"); return;
+            }
+            string path = SaveService.Instance.GetCurrSlotServicePath(ServicePath.CharService);
+            ClearState();
+            // save all char models
+
+
+            foreach (CharController charCtrl in charsInPlayControllers)
+            {
+                CharModel charModel = charCtrl.charModel;
+                string charModelJSON = JsonUtility.ToJson(charModel);
+                string fileName = path + charModel.charName.ToString() + ".txt";           
+                File.WriteAllText(fileName, charModelJSON);
+            }
+        }
+
+        #endregion
+        #region   GETTERS
         public CharacterSO GetCharSO( CharNames charName)
         {            
             return allCharSO.GetCharSO(charName);                
@@ -121,14 +171,10 @@ namespace Common
         public CharacterSO GetCharSO(CharModel charModel)
         {
             CharNames charName = charModel.charName;
-            CharacterSO charSO = allAllySO.Find(x => x.charName == charName);
+            CharacterSO charSO = allCharSO.GetCharSO(charName);
             return charSO;
         }
-        public CharacterSO GetAllySO(CharNames _charName)
-        {           
-            CharacterSO charSO = allAllySO.Find(x => x.charName == _charName);
-            return charSO;
-        }      
+
         public List<CharController> GetAllAvailChars()
         {
             List<CharController> availChars = new List<CharController>();
@@ -188,29 +234,42 @@ namespace Common
         #endregion
 
         #region CHAR SPWAN AND PARTY LOCK UNLOCK
-        public CharController SpawnCompanions(CharNames charName)  // character factory 
+
+        public CharController SpawnComp(CharModel charModel)  // loaded up charModel 
         {
-           // CharController charController = GetCharCtrlWithName(charName);
+            CharacterSO charSO = GetCharSO(charModel.charName);
+
+            GameObject go = Instantiate(charSO.charPrefab, spawnPos, Quaternion.identity);
+            CharController charController = go.AddComponent<CharController>();
+
+            charController.InitController(charModel);  // loaded up charModel
+            Add2List(charController, charModel, go);
+            return charController;
+        }
+
+        public CharController SpawnCompNG(CharNames charName)  // character factory 
+        {   
+            CharacterSO charSO = GetCharSO(charName); 
             
-            CharacterSO charSO = GetAllySO(charName); 
-            if(charSO == null)
-            {
-                charSO = BestiaryService.Instance.GetEnemySO(charName);// this one is pet
-            }
-           
             GameObject go = Instantiate(charSO.charPrefab, spawnPos, Quaternion.identity);
             CharController charController = go.AddComponent<CharController>();
           
-             CharModel charModel = charController.InitiatizeController(charSO);
+            CharModel charModel = charController.InitController(charSO);  // to be build up
+            Add2List(charController, charModel, go);
+            return charController;
 
+        }
+
+        void Add2List(CharController charController, CharModel charModel, GameObject go)
+        {
             if (charController.charModel.charName == CharNames.Abbas)
-                AbbasStatusUpdate(charController); 
+                AbbasStatusUpdate(charController);
 
             charsInPlayControllers.Add(charController);
             allyInPlayControllers.Add(charController);
-            LevelService.Instance.LevelUpInitAlly(charController); 
-            charsInPlay.Add(go);
-            allyInPlay.Add(go);
+            LevelService.Instance.LevelUpInitAlly(charController);
+            //charsInPlay.Add(go);
+            //allyInPlay.Add(go);
             allCharModels.Add(charModel);
 
             if (charModel.charName != CharNames.Abbas)
@@ -224,8 +283,14 @@ namespace Common
                     allyUnLockedCompModels.Add(charModel);
                 }
             }
-            On_CharSpawn(charController); 
-            return charController; 
+            On_CharSpawn(charController);
+           
+        }
+
+
+        void AddController2ls(CharController charController)
+        {
+
         }
 
         public void UnLockChar(CharNames charName)
@@ -277,99 +342,10 @@ namespace Common
             }
             return grpBuffIDs;
         }
-        #region SAVE AND LOAD 
+   
 
 
 
-
-        public void LoadCharServiceData(CharModel charModel)
-        {
-            //CharController charCtrl = null;
-            //foreach (CharacterSO c in allCharSO)
-            //{
-            //    if (charModel.charName == c.charName)
-            //    {
-            //        GameObject go = Instantiate(c.charPrefab, spawnPos, Quaternion.identity);
-            //        charCtrl = go.AddComponent<CharController>();
-
-            //       // charCtrl.InitiatizeController(c, charModel, SaveService.Instance.slotSelect);// to be build up 
-
-            //        CharMode charMode = charCtrl.charModel.charMode;
-            //        if (charMode == CharMode.Ally)
-            //        {
-            //            allyInCombatControllers.Add(charCtrl);
-            //            allyInPlay.Add(go);
-            //        }
-            //        if (charMode == CharMode.Enemy)
-            //        {
-            //            enemyInPlayControllers.Add(charCtrl);
-            //            enemyInPlay.Add(go);
-            //           // CombatService.Instance.enemyInCombat.Add(charCtrl);
-            //        }
-            //        CharsInPlayControllers.Add(charCtrl);
-            //        charsInPlay.Add(go);
-            //    }
-            //}
-        }
-
-        public void RestoreState(string basePath)
-        {
-            allCharModels.Clear();
-            string mydataPath = basePath + "/Char/charModels.txt";
-
-            if (File.Exists(Application.dataPath + mydataPath))
-            {                
-                string str = File.ReadAllText(Application.dataPath + mydataPath);
-
-                 allCharsJSONs = str.Split('|').ToList();
-
-                foreach (string modelStr in allCharsJSONs)
-                {
-                    Debug.Log($"CHAR: {modelStr}");                   
-                    if (String.IsNullOrEmpty(modelStr)) continue; // eliminate blank string
-                      CharModel charModel = JsonUtility.FromJson<CharModel>(modelStr);
-                    allCharModels.Add(charModel);
-                   // LoadCharControllers(charModel);
-                    Debug.Log(charModel.charName);    
-                }
-            }
-            else
-            {
-                Debug.Log("Char Service SAVE FILE Does not Exist");
-            }
-        }
-
-        public CharModel LoadCharModel(CharNames charName)
-        {
-            CharModel charModel = allCharModels.Find(t => t.charName == charName);
-            if (charModel != null)
-                return charModel;
-            else
-                Debug.LogError("Char model not loaded");
-            return null; 
-
-        }
-        public void ClearState()
-        {
-            string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelected.ToString()
-             + "/Char/charModels.txt";
-            File.WriteAllText(Application.dataPath + mydataPath, "");
-
-        }
-        public void SaveState()
-        {
-            if (charsInPlayControllers.Count <= 0)
-            {
-                Debug.Log("no chars in play");  return;
-            }
-            ClearState();
-            foreach (CharController charCtrl in charsInPlayControllers)
-            {
-                charCtrl.charModel.SaveModel(); 
-            }    
-        }
-
-        #endregion
 
         #region TOGGLE COLLIDERS 
 
@@ -546,7 +522,7 @@ namespace Common
 
         #region SET ABBAS CLASS
 
-        public void SetAbbasClassOnQuickStart()
+        public void SetAbbasClassOnQuickStartFrmGameService()
         {
             if (!GameService.Instance.gameController.isQuickStart) return; 
             ClassType classType =
@@ -558,6 +534,18 @@ namespace Common
         }
 
         #endregion
+
+        public void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                SaveState();
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                LoadState();
+            }   
+        }
 
     }
 }

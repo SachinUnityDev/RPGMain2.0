@@ -91,26 +91,34 @@ namespace Common
             CombatEventService.Instance.OnSOC -= FortReset2FortOrg;
             CombatEventService.Instance.OnEOC -= FortReset2FortOrg;
         }
-        public CharModel InitiatizeController(CharacterSO _charSO)
-        {
-            charSO = _charSO;
-            if (SaveService.Instance.slotSelected == SaveSlot.AutoSave)
-            {
-                charModel = new CharModel(_charSO);
-                if(charModel.orgCharMode == CharMode.Ally)
-                {
-                    charModel.charID = CharService.Instance.allCharModels.Count + 1; 
-                }    
-            }
-            else
-            {
-                charModel = CharService.Instance.LoadCharModel(_charSO.charName); 
-            }
 
+    
+
+        // creates charModel and initializes all associated controller
+
+        public void InitController(CharModel charModel)
+        {
+            this.charModel = charModel;
+            charSO = CharService.Instance.allCharSO.GetCharSO(charModel.charName); 
+            OnCharSpawned?.Invoke(charModel.charID, charModel.charName);
+            AddController_OnCharSpawn();
+        }
+
+        public CharModel InitController(CharacterSO _charSO)// used by ally and bestiary
+        {
+            charSO = _charSO;          
+            charModel = new CharModel(_charSO);
+            if (charModel.orgCharMode == CharMode.Ally)
+            {
+                charModel.charID = CharService.Instance.allCharModels.Count + 1;
+            }
+                
             OnCharSpawned?.Invoke(charModel.charID, charModel.charName);
             AddController_OnCharSpawn(); 
             return charModel; 
         }
+
+
         void AddController_OnCharSpawn()
         {
             buffController = gameObject.AddComponent<BuffController>();
@@ -121,12 +129,7 @@ namespace Common
                 itemController = gameObject.AddComponent<ItemController>();
                 weaponController = gameObject.AddComponent<WeaponController>();
                 landscapeController = gameObject.AddComponent<LandscapeController>();
-                permaTraitController = gameObject.GetComponent<PermaTraitController>();
-               // armorController = gameObject.AddComponent<ArmorController>();
-                
-                // CombatEventService.Instance.OnSOT += ()=> PopulateOverCharBars(false); 
-                //CombatEventService.Instance.OnEOC -= FortitudeReset2FortOrg;
-                //CombatEventService.Instance.OnEOC += FortitudeReset2FortOrg;
+                permaTraitController = gameObject.GetComponent<PermaTraitController>();     
 
                 fleeController = gameObject.AddComponent<FleeController>();
             }

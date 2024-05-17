@@ -124,7 +124,7 @@ namespace Town
             charSelectPanel.SetActive(true); 
             selectChar = charForClearMind[index]; 
 
-            CharacterSO charSO = CharService.Instance.GetCharSO(selectChar);
+            CharacterSO charSO = CharService.Instance.allCharSO.GetCharSO(selectChar.charName);
 
             nameTxt.text = charSO.charNameStr;
             charContent.GetChild(0).GetComponent<Image>().sprite = charSO.charSprite;

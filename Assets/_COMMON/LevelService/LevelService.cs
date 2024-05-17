@@ -35,7 +35,7 @@ namespace Common
         public void LevelUpInitAlly(CharController charController)  // ALLY
         {
             charModel = charController.charModel;
-            CharacterSO charSO = CharService.Instance.GetCharSO(charModel); 
+            CharacterSO charSO = CharService.Instance.allCharSO.GetCharSO(charModel.charName); 
             int initLvl = charModel.charLvl;
             int finalLvl = charSO.spawnlvl;
             if (charModel.orgCharMode == CharMode.Ally)

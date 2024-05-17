@@ -44,8 +44,6 @@ namespace Town
                 townViewController.TownViewInit(timeState);
             }
         }
-
-
         public void Init(LocationName location)
         {  
             townModel = new TownModel(); // to be linke d to save Panels

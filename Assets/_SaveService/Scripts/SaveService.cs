@@ -6,11 +6,12 @@ using System.IO;
 using System;
 using UnityEngine.UI;
 using UnityEngine.Rendering;
+using Quest;
 
 namespace Common
 {
 
-    public enum SlotPath
+    public enum ServicePath
     {
         Main, 
         PlayerService,
@@ -66,19 +67,19 @@ namespace Common
 
     public interface ISaveable
     {           
-        string SaveState();
+        void SaveState();
         void LoadState();
         void ClearState();     
     }
 
     // Should define and send the save path for each of the service 
-    // Each Servuice should either create the folder & File or save the data in already created file and folder
+    // Each Service should either create the folder & File or save the data in already created file and folder
     //
     public class SaveService : MonoSingletonGeneric<SaveService>
     {
         [Header("Scriptable Object")]
         public SaveSO saveSO;
-
+        public string basePath = "/SAVE_SYSTEM/NEWSAVE1/"; 
         [Header("Save and Load Panel Ref")]
         public GameObject savePanel;
         public GameObject loadPanel;
@@ -89,7 +90,7 @@ namespace Common
         public SaveMode saveMode;
         public SaveSlot currMBloodSlot; 
 
-        public string baseSavepath = "";
+
 
         public SaveSlot slotSelected; 
         public List<GameObject> allServices = new List<GameObject>();
@@ -100,8 +101,7 @@ namespace Common
         public bool isSaving = false; 
 
         private void Start()
-        {
-           
+        {           
            saveView.GetComponent<IPanel>().UnLoad();
            slotSelected = SaveSlot.AutoSave; 
             foreach (Transform child in saveView.gameObject.transform)
@@ -109,10 +109,296 @@ namespace Common
                 if(child.GetComponent<Button>() != null)
                     child.GetComponent<Button>().onClick.AddListener(()=>OnSlotBtnPressed(child));
             }
+            CreateDefaultFolders();
+        }
+        // ONLY FOR THE FILE INIT 
+        void CreateDefaultFolders()
+        {
+
+            CreateAFolder(Application.dataPath + basePath);
+            foreach (SaveSlot slot in Enum.GetValues(typeof(SaveSlot)))
+            {
+                string path = GetSlotPath(slot);
+                CreateAFolder(path);
+                CreateDefaultServiceFolder(slot);
+            }
+        }
+
+        void CreateDefaultServiceFolder(SaveSlot saveSlot)
+        {
+
+            foreach (ServicePath serviceName in Enum.GetValues(typeof(ServicePath)))
+            {
+                string path = GetServicePath(saveSlot, serviceName);
+                CreateAFolder(path);
+            }
         }
 
 
+
+
+        public string GetSlotPath(SaveSlot saveSlot)
+        {
+            string str = Application.dataPath + basePath ;
+            switch (saveSlot)
+            {
+                case SaveSlot.AutoSave:
+                    str += "AutoSave/";
+                    break;
+                case SaveSlot.QuickSave:
+                    str += "QuickSave/";
+                    break;
+                case SaveSlot.Slot1:
+                    str += "Slot1/";
+                    break;
+                case SaveSlot.Slot2:
+                    str += "Slot2/";
+                    break;
+                case SaveSlot.Slot3:
+                    str += "Slot3/";
+                    break;
+                case SaveSlot.Slot4:
+                    str += "Slot4/";
+                    break;
+                default:
+                    break;
+            }
+            return str; 
+        }
 #region 
+        
+        public string GetCurrSlotServicePath(ServicePath servicePath)
+        {
+             return GetServicePath(slotSelected, servicePath);
+        }
+        public string GetServicePath(SaveSlot saveSlot, ServicePath servicePath)
+        {
+            string str = GetSlotPath(saveSlot);
+            switch (servicePath)
+            {
+                case ServicePath.Main:
+                    str += "Main/";
+                    break;
+                case ServicePath.PlayerService:
+                    str += "PlayerService/";
+                    break;
+                case ServicePath.WoodGameService:
+                    str += "WoodGameService/";
+                    break;
+                case ServicePath.CurioService:
+                    str += "CurioService/";
+                    break;
+                case ServicePath.EncounterService:
+                    str += "EncounterService/"; 
+                    break;
+                case ServicePath.LandscapeService:
+                    str += "LandscapeService/";
+                    break;
+                case ServicePath.LootService:
+                    str += "LootService/";
+                    break;
+                case ServicePath.QuestEventService:
+                    str += "QuestEventService/";    
+                    break;
+                case ServicePath.QuestMissionService:
+                    str += "QuestMissionService/";
+                    break;
+                case ServicePath.QRoomService:
+                    str += "QRoomService/"; 
+                    break;
+                case ServicePath.ArmorService:
+                    str += "ArmorService/"; 
+                    break;
+                case ServicePath.InvService:
+                    str += "InvService/";   
+                    break;
+                case ServicePath.WeaponService:
+                    str += "WeaponService/";    
+                    break;
+                case ServicePath.GewgawService:
+                    str += "GewgawService/";    
+                    break;
+                case ServicePath.LoreService:
+                    str += "LoreService/";  
+                    break;
+                case ServicePath.RecipeService:
+                    str += "RecipeService/";
+                    break;
+                case ServicePath.ItemService:
+                    str += "ItemService/";  
+                    break;
+                case ServicePath.GridService:
+                    str += "GridService/";
+                    break;
+                case ServicePath.CombatEventService:
+                    str += "CombatEventService/";
+                    break;
+                case ServicePath.CombatService:
+                    str += "CombatService/";    
+                    break;
+                case ServicePath.PassiveSkillService:
+                    str += "PassiveSkillService/";
+                    break;
+                case ServicePath.SkillService:
+                    str += "SkillService/"; 
+                    break;
+                case ServicePath.WelcomeService:
+                    str += "WelcomeService/";
+                    break;
+                case ServicePath.JobService:
+                    str += "JobService/";
+                    break;
+                case ServicePath.BuildingIntService:
+                    str += "BuildingIntService/";
+                    break;
+                case ServicePath.MapService:
+                    str += "MapService/";   
+                    break;
+                case ServicePath.TownService:
+                    str += "TownService/";  
+                    break;
+                case ServicePath.SceneMgmtService:
+                    str += "SceneMgmtService/";
+                    break;
+                case ServicePath.BarkService:
+                    str += "BarkService/";
+                    break;
+                case ServicePath.BuffService:
+                    str += "BuffService/";
+                    break;
+                case ServicePath.CharStatesService:
+                    str += "CharStatesService/";
+                    break;
+                case ServicePath.CharService:
+                    str += "CharService/";  
+                    break;
+                case ServicePath.DialogueService:
+                    str += "DialogueService/";  
+                    break;
+                case ServicePath.LevelService:
+                    str += "LevelService/";
+                    break;
+                case ServicePath.PermaTraitsService:
+                    str += "PermaTraitsService/";
+                    break;
+                case ServicePath.TempTraitService:
+                    str += "TempTraitService/";
+                    break;
+                case ServicePath.CodexService:
+                    str += "CodexService/";
+                    break;
+                case ServicePath.GameEventService:
+                    str += "GameEventService/"; 
+                    break;
+                case ServicePath.GameService:
+                    str += "GameService/";  
+                    break;
+                case ServicePath.SettingService:
+                    str += "SettingService/";   
+                    break;
+                case ServicePath.IntroAudioService:
+                    str += "IntroAudioService/";
+                    break;
+                case ServicePath.BestiaryService:
+                    str += "BestiaryService/";
+                    break;
+                case ServicePath.MGService:
+                    str += "MGService/";
+                    break;
+                case ServicePath.SaveService:
+                    str += "SaveService/";
+                    break;
+                case ServicePath.FameService:
+                    str += "FameService/";
+                    break;
+                case ServicePath.CalendarService:
+                    str += "CalendarService/";
+                    break;
+                case ServicePath.RosterService:
+                    str += "RosterService/";
+                    break;
+                case ServicePath.TownEventService:
+                    str += "TownEventService/";
+                    break;
+                case ServicePath.TradeService:
+                    str += "TradeService/";
+                    break;
+                default:
+                    break;
+            }
+            return str;    
+        }
+
+
+        //case ServicePath.Main:
+        //   str += "Main/";
+        //    break;
+        //case ServicePath.PlayerService:
+        //    str +=  "PlayerService/";
+        //    break;
+        //case ServicePath.WoodGameService:
+        //    str += "WoodGameService/";
+        //    break;
+        //case ServicePath.CurioService:
+        //    str += "CurioService/";
+        //    break;
+        //case ServicePath.EncounterService:
+        //    str += "EncounterService/";
+        //    break;
+        //case ServicePath.LandscapeService:
+        //    str += "LandscapeService/";
+        //    break;
+        //case ServicePath.LootService:
+        //    str += "LootService/";
+        //    break;
+        //case ServicePath.QuestEventService:
+        //    str += "QuestEventService/";
+        //    break;
+        //case ServicePath.QuestMissionService:
+        //    str += "QuestMissionService/";
+        //    break;
+        //case ServicePath.QRoomService:
+        //    str += "QRoomService/";
+        //    break;
+        //case ServicePath.ArmorService:
+        //    str += "ArmorService/";
+        //    break;
+        //case ServicePath.InvService:
+        //    str += "InvService/";
+        //    break;
+        //case ServicePath.WeaponService:
+        //    str += "WeaponService/";
+        //    break;
+        //case ServicePath.GewgawService:
+        //    str += "GewgawService/";
+        //    break;
+        //case ServicePath.LoreService:
+        //    str += "LoreService/";
+        //    break;
+        //case ServicePath.RecipeService:
+        //    str += "RecipeService/";
+        //    break;
+        //case ServicePath.ItemService:
+        //    str += "ItemService/";
+        //    break;
+        //case ServicePath.GridService:
+        //    str += "GridService/";
+        //    break;
+        //case ServicePath.CombatEventService:
+        //    str += "CombatEventService/";
+        //    break;
+        //case ServicePath.CombatService:
+        //    str += "CombatService/";
+        //    break;
+        //case ServicePath.PassiveSkillService:
+        //    str += "PassiveSkillService/";
+        //    break;
+        //case ServicePath.SkillService:
+        //    str += "SkillService/";
+        //    break;
+        //case ServicePath.WelcomeService:
+        //    str += "WelcomeService/";
+        //    break; 
 
         public void OnAutoSaveTriggered()
         {
@@ -152,8 +438,7 @@ namespace Common
         }
 
 
-
-    public List<ISaveable> FindAllSaveables()
+        public List<ISaveable> FindAllSaveables()
         {
             List<ISaveable> saveables = new List<ISaveable>();
 
@@ -195,11 +480,11 @@ namespace Common
             int index = child.GetSiblingIndex();
             index++;  // for new val correction
 
-            slotSelected = (SaveSlot)index;
-            if(isSaving)
-                SaveStateMaster();
-            if(isLoading)
-                LoadFileMaster();
+        //    slotSelected = (SaveSlot)index;
+        //    if(isSaving)
+        //        SaveStateMaster();
+        //    if(isLoading)
+        //        LoadFileMaster();
         }
 
         public void SaveStateMaster()
@@ -211,14 +496,14 @@ namespace Common
         }
 
       
-        public void LoadFileMaster() 
-        {
-            string path = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelected.ToString(); 
-            foreach (GameObject service in allServices)
-            {
-                service.GetComponent<ISaveable>().RestoreState(path);
-            }
-        }
+        //public void LoadFileMaster() 
+        //{
+        //    string path = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelected.ToString(); 
+        //    foreach (GameObject service in allServices)
+        //    {
+        //        service.GetComponent<ISaveable>().LoadState(path);
+        //    }
+        //}
 
         private void Update()
         {

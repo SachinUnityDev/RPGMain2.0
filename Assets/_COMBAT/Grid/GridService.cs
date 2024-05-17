@@ -154,7 +154,6 @@ namespace Combat
             return true; 
         }
 
-
         public void UpdateGridOnCharDeath(CharController _charController)
         {
             GameObject charGO = _charController.gameObject;
@@ -210,8 +209,6 @@ namespace Combat
 
         }
      
-      
-
         void ReviseUnOccupied()
         {
             allUnOccupiedPosEnemy.Clear();
@@ -357,7 +354,7 @@ namespace Combat
             foreach (DynamicPosData dyna in allCurrPosOccupiedByDyna)
             {
                 dyna.SaveModel();
-            }
+            }           
         }
         public void ClearState()
         {
@@ -391,7 +388,6 @@ namespace Combat
 
         public void SetEnemy(EnemyPacksSO enemySO)
         {
-
             foreach (EnemyDataInPack eData in enemySO.allEnemyDataInPack)
             {
                 // CharController charCtrl = CharService.Instance.SpawnCompanions(eData.enemyName);

@@ -93,7 +93,7 @@ namespace Interactables
             nameTxt.text = selectComp[index].charName.ToString();
             compCharParaView.SetPara(selectComp[index].charName);
             CharacterSO charSO =
-                    CharService.Instance.GetAllySO(selectComp[index].charName);
+                    CharService.Instance.allCharSO.GetCharSO(selectComp[index].charName);
 
             charPortraitGO.GetComponent<Image>().sprite = charSO.charSprite;
 

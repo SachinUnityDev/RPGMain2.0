@@ -85,12 +85,12 @@ namespace Common
             GameObject go = Instantiate(charSO.charPrefab, spawnPos, Quaternion.identity);
             CharController charController = go.AddComponent<CharController>();
 
-            CharModel charModel = charController.InitiatizeController(charSO);
+            CharModel charModel = charController.InitController(charSO);
             CharService.Instance.allCharModels.Add(charModel);
             CharService.Instance.charsInPlayControllers.Add(charController);
             CharService.Instance.allCharInCombat.Add(charController);
 
-            CharService.Instance.charsInPlay.Add(go);
+          //  CharService.Instance.charsInPlay.Add(go);
         
             allRegBestiaryCtrl.Add(charController);
 

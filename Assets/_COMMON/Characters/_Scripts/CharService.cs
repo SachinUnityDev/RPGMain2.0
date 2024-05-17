@@ -116,10 +116,12 @@ namespace Common
                 string[] fileNames = Directory.GetFiles(path);
                 foreach (string fileName in fileNames)
                 {
+                    // skip meta files
+                    if (fileName.Contains(".meta")) continue;
                     string contents = File.ReadAllText(fileName);
+                    Debug.Log("  "+ contents);
                     CharModel charModel = JsonUtility.FromJson<CharModel>(contents);
-                    SpawnComp(charModel);
-                    Debug.Log("LOADED CHAR " + charModel.charName);
+                    SpawnComp(charModel);                
                 }
             }
             else
@@ -157,6 +159,7 @@ namespace Common
             {
                 CharModel charModel = charCtrl.charModel;
                 string charModelJSON = JsonUtility.ToJson(charModel);
+                Debug.Log(charModelJSON);
                 string fileName = path + charModel.charName.ToString() + ".txt";           
                 File.WriteAllText(fileName, charModelJSON);
             }

@@ -77,12 +77,12 @@ namespace Town
             if(isBuyBtnPressed)
             {               
                 if(tradeModel.allSelectItems.Count > 0)
-                EcoServices.Instance.DebitPlayerInv(tradeSelectView.netVal);
+                EcoService.Instance.DebitPlayerInv(tradeSelectView.netVal);
              
             }
             else
             {
-                EcoServices.Instance.AddMoney2PlayerInv(tradeSelectView.netVal);
+                EcoService.Instance.AddMoney2PlayerInv(tradeSelectView.netVal);
             }
             tradeSelectView.InitInvMoney();
             tradeSelectView.InitTransactCurrViews();

@@ -28,8 +28,8 @@ namespace Town
         [SerializeField] Image img;
         private void Start()
         {
-            EcoServices.Instance.OnPocketSelected -= (PocketType p) => BtnStateUpdate();
-            EcoServices.Instance.OnPocketSelected +=(PocketType p)=> BtnStateUpdate(); 
+            EcoService.Instance.OnPocketSelected -= (PocketType p) => BtnStateUpdate();
+            EcoService.Instance.OnPocketSelected +=(PocketType p)=> BtnStateUpdate(); 
         }
         public void  InitFortifyBtn(Currency fortifyCost, CharController charController, ArmorModel armorModel, FortifyView fortifyView)
         {
@@ -45,7 +45,7 @@ namespace Town
 
         void BtnStateUpdate()
         {
-            Currency amt = EcoServices.Instance.GetMoneyFrmCurrentPocket();
+            Currency amt = EcoService.Instance.GetMoneyFrmCurrentPocket();
             if (armorModel.armorState == ArmorState.Fortifiable && amt.BronzifyCurrency() >= fortifyCost.BronzifyCurrency()) 
                 SetState(true); 
             else

@@ -90,7 +90,7 @@ namespace Common
 
         void OnEnchantBtnPressed()
         {
-            int currency = EcoServices.Instance.GetMoneyFrmCurrentPocket().DeepClone().BronzifyCurrency(); 
+            int currency = EcoService.Instance.GetMoneyFrmCurrentPocket().DeepClone().BronzifyCurrency(); 
 
             switch (weaponState)
             {
@@ -115,7 +115,7 @@ namespace Common
                     {
                         weaponModel.SetRechargeValue();
                         weaponModel.weaponState = WeaponState.Enchanted;
-                        EcoServices.Instance.DebitMoneyFrmCurrentPocket(rechargeCost);
+                        EcoService.Instance.DebitMoneyFrmCurrentPocket(rechargeCost);
                         enchantView.FillCharPlanks();
                         statusDsplyText.text = $"Weapon Enchanted with {weaponModel.gemName}";
                     }
@@ -135,7 +135,7 @@ namespace Common
                             if(weaponModel.noOfTimesRecharged < 4)
                             {
                                 weaponModel.SetRechargeValue();
-                                EcoServices.Instance.DebitMoneyFrmCurrentPocket(rechargeCost);
+                                EcoService.Instance.DebitMoneyFrmCurrentPocket(rechargeCost);
                                 enchantView.FillCharPlanks();
                                 statusDsplyText.text = $"Weapon Recharged";
                             }

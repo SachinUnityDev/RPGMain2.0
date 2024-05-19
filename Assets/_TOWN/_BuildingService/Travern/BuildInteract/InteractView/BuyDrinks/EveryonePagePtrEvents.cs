@@ -43,7 +43,7 @@ namespace Town
             this.buyDrinksView = buyDrinksView;
             tavernModel = BuildingIntService.Instance.tavernController.tavernModel;
             currDsply.InitCurrencyToggle();
-            Currency availAmt = EcoServices.Instance.GetMoneyFrmCurrentPocket().DeepClone();
+            Currency availAmt = EcoService.Instance.GetMoneyFrmCurrentPocket().DeepClone();
             TimeState timeState = CalendarService.Instance.currtimeState; 
             UpdateDsplyTxt(timeState);
             tickBtnPtrEvents.InitTickPtrEvents(this, availAmt, silver); 
@@ -86,7 +86,7 @@ namespace Town
         {
             if (!CanOfferDrink()) return; 
 
-            EcoServices.Instance.DebitMoneyFrmCurrentPocket(new Currency(silver, 0));            
+            EcoService.Instance.DebitMoneyFrmCurrentPocket(new Currency(silver, 0));            
 
             int fameGained = UnityEngine.Random.Range(5, 10);
             displayStr = $"You gained {fameGained} <style=fameSyblPos> Fame";

@@ -10,13 +10,8 @@ namespace Town
     [System.Serializable]
     public class TownModel 
     {
-
         public LocationName currTown; 
-        public List<CharModel> allCharInTown = new List<CharModel>(); 
-        // start day.. 
-
-
-
+               // start day.. 
     }
 }
 

@@ -36,7 +36,11 @@ namespace Town
             marketModel = new MarketModel(marketSO);
             BuildingIntService.Instance.allBuildModel.Add(marketModel);
         }
-
+        public void InitMarketController(BuildingModel buildModel)
+        {
+            this.marketModel = new MarketModel(buildModel);
+            BuildingIntService.Instance.allBuildModel.Add(buildModel);
+        }   
         public void UpdateBuildState(TimeState timeState)
         {
             if (marketModel.buildState == BuildingState.Locked) return;

@@ -42,7 +42,7 @@ namespace Town
             this.shipDrinksView = shipDrinksView;
             shipModel = BuildingIntService.Instance.shipController.shipModel;
             currDsply.InitCurrencyToggle();
-            Currency availAmt = EcoServices.Instance.GetMoneyFrmCurrentPocket().DeepClone();
+            Currency availAmt = EcoService.Instance.GetMoneyFrmCurrentPocket().DeepClone();
             TimeState timeState = CalendarService.Instance.currtimeState;
             if (timeState == TimeState.Day)
             {
@@ -78,7 +78,7 @@ namespace Town
         {
             if (!CanOfferDrink()) return;
 
-            EcoServices.Instance.DebitMoneyFrmCurrentPocket(new Currency(silver, 0));          
+            EcoService.Instance.DebitMoneyFrmCurrentPocket(new Currency(silver, 0));          
 
             int fameLoss = UnityEngine.Random.Range(6, 15);
             displayStr = $"You lost {fameLoss} <style=fameSyblNeg> Fame";

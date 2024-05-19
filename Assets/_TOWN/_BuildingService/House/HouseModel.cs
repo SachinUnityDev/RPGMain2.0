@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using UnityEngine;
 
 
@@ -106,6 +107,24 @@ namespace Town
                 return null; 
             }
         }
+        public HouseModel(BuildingModel buildingModel)
+        {
+            buildingName = buildingModel.buildingName;
+            buildState = buildingModel.buildState;
+            buildIntTypes = buildingModel.buildIntTypes.DeepClone();
+            npcInteractData = buildingModel.npcInteractData.DeepClone();
+            charInteractData = buildingModel.charInteractData.DeepClone();
+
+            HousePurchaseOptsData purchaseOpts1 = new HousePurchaseOptsData(HousePurchaseOpts.UpgradeBed, new Currency(18, 0), false, true);
+            HousePurchaseOptsData purchaseOpts2 = new HousePurchaseOptsData(HousePurchaseOpts.UpgradeStash, new Currency(15, 0), false, true);
+            HousePurchaseOptsData purchaseOpts3 = new HousePurchaseOptsData(HousePurchaseOpts.Fermentor, new Currency(9, 10), false, true);
+            HousePurchaseOptsData purchaseOpts4 = new HousePurchaseOptsData(HousePurchaseOpts.Dryer, new Currency(6, 0), false, true);
+            HousePurchaseOptsData purchaseOpts5 = new HousePurchaseOptsData(HousePurchaseOpts.Cora, new Currency(7, 4), false, true);
+            HousePurchaseOptsData purchaseOpts6 = new HousePurchaseOptsData(HousePurchaseOpts.Drums, new Currency(3, 4), false, true);
+            purchaseOpts.AddRange(new List<HousePurchaseOptsData>()
+                            { purchaseOpts1, purchaseOpts2, purchaseOpts3, purchaseOpts4, purchaseOpts5, purchaseOpts6 });
+        }
+
         public HouseModel(BuildingSO houseSO)
         {
             buildingName= houseSO.buildingName;

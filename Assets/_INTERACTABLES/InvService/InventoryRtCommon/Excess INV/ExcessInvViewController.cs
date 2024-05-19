@@ -70,7 +70,7 @@ namespace Interactables
                         int bronze = (costData.baseCost.bronze / 3) * count;
                         Currency itemSaleVal = new Currency(silver, bronze).RationaliseCurrency();
 
-                        EcoServices.Instance.AddMoney2PlayerInv(itemSaleVal); 
+                        EcoService.Instance.AddMoney2PlayerInv(itemSaleVal); 
                         iSlot.RemoveAllItems();
                     }
                 }

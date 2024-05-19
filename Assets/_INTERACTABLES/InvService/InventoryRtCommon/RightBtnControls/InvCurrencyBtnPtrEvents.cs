@@ -38,7 +38,7 @@ namespace Interactables
             img= GetComponent<Image>();
             isClicked = false;          
             UnLoad();
-            EcoServices.Instance.OnInvMoneyChg += FillPanel;
+            EcoService.Instance.OnInvMoneyChg += FillPanel;
    
             withdrawFrmStashBtn.onClick.AddListener(OnWithFrmStashPressed); 
             transfer2StashBtn.onClick.AddListener(OnTransfer2StashPressed);
@@ -51,7 +51,7 @@ namespace Interactables
         {
             transactState = CurrTransactState.WithDrawFrmStash; 
             transactPanel.gameObject.SetActive(true);
-            Currency stashCurr = EcoServices.Instance.GetMoneyAmtInPlayerStash().DeepClone();
+            Currency stashCurr = EcoService.Instance.GetMoneyAmtInPlayerStash().DeepClone();
             transactPanel.GetComponent<CurrencyTransactView>().FillTransactBox(stashCurr, transactState);
             transfer2StashBtn.GetComponent<CurrTransactBtnPtrEvents>().OnUnClick();
         }
@@ -59,7 +59,7 @@ namespace Interactables
         {
             transactState = CurrTransactState.Transfer2Stash;
             transactPanel.gameObject.SetActive(true);
-            Currency invCurr = EcoServices.Instance.GetMoneyAmtInPlayerInv().DeepClone();
+            Currency invCurr = EcoService.Instance.GetMoneyAmtInPlayerInv().DeepClone();
             transactPanel.GetComponent<CurrencyTransactView>().FillTransactBox(invCurr, transactState);
             withdrawFrmStashBtn.GetComponent<CurrTransactBtnPtrEvents>().OnUnClick();
         }
@@ -81,7 +81,7 @@ namespace Interactables
         public void Load()
         {
             UIControlServiceGeneral.Instance.TogglePanel(transform.GetChild(0).gameObject, true);
-            FillPanel(EcoServices.Instance.GetMoneyAmtInPlayerInv());
+            FillPanel(EcoService.Instance.GetMoneyAmtInPlayerInv());
             transactPanel.gameObject.SetActive(false);
             img.sprite = spriteN; 
         }

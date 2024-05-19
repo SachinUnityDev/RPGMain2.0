@@ -36,7 +36,7 @@ namespace Common
                 float bronzeCurr = econoModel.moneyGainedInQ.BronzifyCurrency() * (float)((100 - sharePercent) / 100);
                 Currency curr = (new Currency(0,(int)bronzeCurr)).RationaliseCurrency();
 
-                EcoServices.Instance.AddMoney2PlayerInv(curr);
+                EcoService.Instance.AddMoney2PlayerInv(curr);
                 econoModel.moneyGainedInQ = new Currency(0, 0);
             }
 

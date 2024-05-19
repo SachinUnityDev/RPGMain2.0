@@ -27,5 +27,13 @@ namespace Town
             npcInteractData = templeSO.npcInteractData.DeepClone();
             charInteractData = templeSO.charInteractData.DeepClone(); 
         }
+        public TempleModel(BuildingModel buildModel)
+        {
+            buildingName = buildModel.buildingName;
+            buildState = buildModel.buildState;
+            buildIntTypes = buildModel.buildIntTypes.DeepClone();
+            npcInteractData = buildModel.npcInteractData.DeepClone();
+            charInteractData = buildModel.charInteractData.DeepClone();
+        }
     }
 }

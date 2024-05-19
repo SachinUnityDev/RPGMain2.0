@@ -34,7 +34,7 @@ namespace Common
 
 
         public bool isNewGInitDone = false;
-
+        public ServicePath servicePath => ServicePath.GameService;
         public GameModel GetGameModel(int slot)
         {
             int index = allGameModel.FindIndex(t => t.profileSlot == slot); 

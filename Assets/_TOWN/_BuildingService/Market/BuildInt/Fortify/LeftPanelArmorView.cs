@@ -40,7 +40,7 @@ namespace Town
             charNameTxt.text = charSO.charNameStr;
 
             // desc txt
-            Currency currInStash = EcoServices.Instance.GetMoneyAmtInPlayerStash().DeepClone();
+            Currency currInStash = EcoService.Instance.GetMoneyAmtInPlayerStash().DeepClone();
             int bronzifyStash = currInStash.BronzifyCurrency();
 
             descTxt.text = armorModel.armorTypeStr; 

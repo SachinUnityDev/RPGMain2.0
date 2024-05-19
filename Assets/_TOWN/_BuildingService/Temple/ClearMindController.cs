@@ -93,7 +93,7 @@ namespace Town
             int level = selectChar.charLvl;
             Currency moneyNeeded = new Currency(LEVEL_MULTIPLIER * level, 0);
             //EcoServices.Instance.PayMoney2NPC(moneyNeeded, NPCNames.MinamiTheSoothsayer);
-            EcoServices.Instance.DebitPlayerStash(moneyNeeded);
+            EcoService.Instance.DebitPlayerStash(moneyNeeded);
 
             //display updates
             moneyNeededGO.FillCurrencyUI(new Currency(0, 0));
@@ -116,7 +116,7 @@ namespace Town
 
         void DisplayPlayerMoney()
         {
-            playerMoney = EcoServices.Instance.GetMoneyAmtInPlayerStash();
+            playerMoney = EcoService.Instance.GetMoneyAmtInPlayerStash();
             playerMoneyGO.FillCurrencyUI(playerMoney);
         }
         void PopulateCharData()
@@ -165,7 +165,7 @@ namespace Town
         void GetCharList4CM()
         {
             charForClearMind.Clear(); 
-            foreach (CharModel c in TownService.Instance.townModel.allCharInTown)
+            foreach (CharModel c in TownService.Instance.townController.allCharInTown)
             {
                 if (c.charLvl > 1)
                 {

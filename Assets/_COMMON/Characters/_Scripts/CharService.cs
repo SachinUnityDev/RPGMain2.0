@@ -64,7 +64,7 @@ namespace Common
 
         [Header("Character Pos")]
         public Vector3 spawnPos = new Vector3(-100, 0, 0);
-
+        public ServicePath servicePath => ServicePath.CharService;
         void Start()
         {
             isPartyLocked= false;
@@ -101,15 +101,23 @@ namespace Common
                 Debug.LogError("Service Directory missing");               
             }                   
         }
+        public CharModel GetCharModel(CharNames charName)
+        {
+            CharModel charModel = allCharModels.Find(t => t.charName == charName);
+            if (charModel != null)
+                return charModel;
+            else
+                Debug.LogError("Char model not loaded");
+            return null;
+        }
 
 
-
-#region SAVE LOAD CLEAR AND INIT
+        #region SAVE LOAD CLEAR AND INIT
         public void LoadState()
         {
             // browse thru all files in the folder and load them
             // as char Models 
-            string path = SaveService.Instance.GetCurrSlotServicePath(ServicePath.CharService);
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
 
             if (SaveService.Instance.DirectoryExists(path))
             {
@@ -130,18 +138,10 @@ namespace Common
             }
         }
 
-        public CharModel GetCharModel(CharNames charName)
-        {
-            CharModel charModel = allCharModels.Find(t => t.charName == charName);
-            if (charModel != null)
-                return charModel;
-            else
-                Debug.LogError("Char model not loaded");
-            return null;
-        }
+       
         public void ClearState()
         {
-            string path = SaveService.Instance.GetCurrSlotServicePath(ServicePath.CharService);
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
             DeleteAllFilesInDirectory(path); 
         }
         public void SaveState()
@@ -150,7 +150,7 @@ namespace Common
             {
                 Debug.LogError("no chars in play"); return;
             }
-            string path = SaveService.Instance.GetCurrSlotServicePath(ServicePath.CharService);
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
             ClearState();
             // save all char models
 

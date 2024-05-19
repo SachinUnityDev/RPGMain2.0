@@ -32,5 +32,13 @@ namespace Town
             npcInteractData = tavernSO.npcInteractData.DeepClone();
             charInteractData = tavernSO.charInteractData.DeepClone();
         }
+        public TavernModel(BuildingModel buildModel)
+        {
+            buildingName = buildModel.buildingName;
+            buildState = buildModel.buildState;
+            buildIntTypes = buildModel.buildIntTypes.DeepClone();
+            npcInteractData = buildModel.npcInteractData.DeepClone();
+            charInteractData = buildModel.charInteractData.DeepClone();
+        }   
     }
 }

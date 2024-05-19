@@ -211,7 +211,7 @@ namespace Common
 
        public void InitInvMoney()
         {
-            invMoney = EcoServices.Instance.GetMoneyAmtInPlayerInv();
+            invMoney = EcoService.Instance.GetMoneyAmtInPlayerInv();
             moneyInInv.Display(invMoney);
         }
        public bool IsTradeClickableMoneyChK()

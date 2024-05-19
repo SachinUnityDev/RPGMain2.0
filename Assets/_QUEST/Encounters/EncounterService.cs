@@ -31,7 +31,6 @@ namespace Quest
         [Header("Quest Encounter TBR")]
         public AllQuestESO allQuestESO;
 
-        public bool isNewGInitDone = false;
 
         void Start()
         {            
@@ -55,7 +54,6 @@ namespace Quest
             mapEController.InitMapE(allMapESO);
             questEController.InitQuestE(allQuestESO);
 
-            isNewGInitDone = true;
         }
 
     }

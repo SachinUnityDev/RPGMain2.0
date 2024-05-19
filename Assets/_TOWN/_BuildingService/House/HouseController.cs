@@ -6,10 +6,11 @@ using UnityEngine.SceneManagement;
 namespace Town
 {
     public class HouseController : MonoBehaviour
+
     {
         public HouseModel houseModel;
         [Header("to be ref")]
-        public HouseView houseView; 
+        public HouseView houseView;
 
         private void OnEnable()
         {
@@ -32,19 +33,13 @@ namespace Town
             BuildingSO houseSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingNames.House);
             houseModel = new HouseModel(houseSO);
             BuildingIntService.Instance.allBuildModel.Add(houseModel);
-
-            switch (GameService.Instance.gameProgress)
-            {
-                case GameProgress.NewGameInit:
-
-                    break;
-                case GameProgress.LoadGameInit:
-
-                    break;
-                default:
-                    break;
-            }
         }
+        public void InitHouseController(BuildingModel buildModel)
+        {
+            houseModel = new HouseModel(buildModel);
+            BuildingIntService.Instance.allBuildModel.Add(buildModel);
+        }
+
         public void UnLockBuildIntType(BuildInteractType buildIntType, bool unLock)
         {
             houseView = FindObjectOfType<HouseView>(true);
@@ -128,8 +123,6 @@ namespace Town
         {
           //  houseModel.UnLockBuildIntType(BuildInteractType.Music);
         }
-
-
-
+     
     }
 }

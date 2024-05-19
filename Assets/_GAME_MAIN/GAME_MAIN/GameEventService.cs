@@ -47,18 +47,14 @@ namespace Common
         //GameQuit, 
 
         public void NewGameInit()
-        {
-          
-            LocationName locationName = LocationName.Nekkisari;
-
-            TownService.Instance.Init(locationName);  // new game
+        {   
+            TownService.Instance.Init();  // new game
             BuildingIntService.Instance.InitNGBuildIntService();
             EncounterService.Instance.EncounterInit();
             CharService.Instance.Init();
             UIControlServiceGeneral.Instance.InitUIGeneral();
             CalendarService.Instance.Init();
-
-            EcoServices.Instance.InitEcoServices();
+            EcoService.Instance.InitEcoServices();
             BarkService.Instance.InitBarkService();
             JobService.Instance.JobServiceInit();
             BestiaryService.Instance.Init();
@@ -69,7 +65,7 @@ namespace Common
             WeaponService.Instance.Init();
             ArmorService.Instance.Init();
 
-            OnTownEnter?.Invoke(locationName);
+            OnTownEnter?.Invoke(LocationName.Nekkisari);
             QuestMissionService.Instance.InitQuestMission();
             LandscapeService.Instance.InitLandscape();
             MapService.Instance.InitMapService(); // to be put below questmission

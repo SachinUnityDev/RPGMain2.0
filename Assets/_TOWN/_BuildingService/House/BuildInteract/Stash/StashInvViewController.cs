@@ -38,7 +38,7 @@ namespace Town
    
         void FillStashCurrency()
         {
-            Currency curr = EcoServices.Instance.GetMoneyAmtInPlayerStash();
+            Currency curr = EcoService.Instance.GetMoneyAmtInPlayerStash();
             currDisplay.GetComponent<DisplayCurrency>().Display(curr);
         }
 

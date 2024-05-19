@@ -37,6 +37,13 @@ namespace Town
             tavernModel = new TavernModel(tavernSO);
             BuildingIntService.Instance.allBuildModel.Add(tavernModel);
         }
+
+        public void InitTavernController(BuildingModel buildModel)
+        {
+            this.tavernModel =  new TavernModel(buildModel);
+            BuildingIntService.Instance.allBuildModel.Add(buildModel);
+        }
+
         public void OnTrophySocketed(TGNames trophyName)
         {
 

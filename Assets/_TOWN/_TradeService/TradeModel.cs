@@ -68,7 +68,7 @@ namespace Town
                         bronzifiedResult *= nPCModData.modVal; 
                     }
                 }
-                float eventMod = EcoServices.Instance.ecoController.GetEventModifier(itemData.itemData.itemType);
+                float eventMod = EcoService.Instance.ecoController.GetEventModifier(itemData.itemData.itemType);
                 bronzifiedResult *= eventMod;
                 itemData.currPrice = (new Currency(0, (int)bronzifiedResult)).RationaliseCurrency();                
             }

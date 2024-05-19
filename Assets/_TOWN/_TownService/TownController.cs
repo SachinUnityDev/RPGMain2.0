@@ -8,18 +8,8 @@ namespace Town
 {
     public class TownController : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-        
-    
-
-        public void CreateChar(CharNames charName)
-        {
-
-        }
+        public List<CharModel> allCharInTown = new List<CharModel>();
+      
     }
 
 

@@ -34,6 +34,11 @@ namespace Town
             BuildingIntService.Instance.allBuildModel.Add(templeModel);
        
         }
+        public void InitTempleController(BuildingModel buildModel)
+        {         
+            this.templeModel = new TempleModel(buildModel);
+            BuildingIntService.Instance.allBuildModel.Add(buildModel);
+        }
 
         public void UpdateBuildState()
         {

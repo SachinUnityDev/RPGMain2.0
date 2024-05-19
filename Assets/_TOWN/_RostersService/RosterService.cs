@@ -30,8 +30,8 @@ namespace Common
         public PortraitDragNDrop portraitDragNDrop;
 
         [Header("Global Var")]
-        public CharModel scrollSelectCharModel; 
-
+        public CharModel scrollSelectCharModel;
+        public ServicePath servicePath => ServicePath.EcoService;
         void Start()
         {
             RosterModel rosterModel = new RosterModel();

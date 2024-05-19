@@ -37,13 +37,13 @@ namespace Quest
 
         public override void OnChoiceBSelect()
         {
-            bool hasMoney = EcoServices.Instance.HasMoney(PocketType.Inv, new Currency(3,0));
+            bool hasMoney = EcoService.Instance.HasMoney(PocketType.Inv, new Currency(3,0));
             if (hasMoney)            
                 money2Lose = new Currency(3,0);             
             else            
-                money2Lose = EcoServices.Instance.GetMoneyAmtInPlayerInv(); 
+                money2Lose = EcoService.Instance.GetMoneyAmtInPlayerInv(); 
             
-            EcoServices.Instance.DebitPlayerInv(money2Lose); 
+            EcoService.Instance.DebitPlayerInv(money2Lose); 
             
             resultStr = "You agreed to pay a toll for free passage and Bandits seem symphatetic to your cause...";
             strFX = $"{money2Lose.silver} Silver and {money2Lose.bronze} Bronze lost";        

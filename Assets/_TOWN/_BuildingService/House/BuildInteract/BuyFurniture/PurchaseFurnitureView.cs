@@ -64,7 +64,7 @@ namespace Town
         }
         void FillStashMoney()
         {
-            stashCurr = EcoServices.Instance.GetMoneyAmtInPlayerStash();
+            stashCurr = EcoService.Instance.GetMoneyAmtInPlayerStash();
             currencyTrans.GetComponent<DisplayCurrency>().Display(stashCurr);
         }
         void FillSlots()
@@ -97,7 +97,7 @@ namespace Town
 
             purchaseValue = houseModel.purchaseOpts.Find(t => t.houseOpts == opts).currency;
             if (purchaseValue.BronzifyCurrency() < stashCurr.BronzifyCurrency())
-                EcoServices.Instance.DebitPlayerStash(purchaseValue);
+                EcoService.Instance.DebitPlayerStash(purchaseValue);
             else
             {
                 //change txt

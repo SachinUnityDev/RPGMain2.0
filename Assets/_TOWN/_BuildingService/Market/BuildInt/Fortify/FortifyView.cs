@@ -169,7 +169,7 @@ namespace Town
         public void OnFortifyBtnPressed(CharController charController,ArmorModel armorModel)
         {
             ArmorService.Instance.OnArmorFortifyPressed(charController, armorModel);
-            EcoServices.Instance.DebitMoneyFrmCurrentPocket(fortifyCost);
+            EcoService.Instance.DebitMoneyFrmCurrentPocket(fortifyCost);
 
             FillCharPlanks();
         }

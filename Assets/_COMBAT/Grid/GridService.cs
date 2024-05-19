@@ -62,7 +62,9 @@ namespace Combat
 
         #endregion
         [Header(" Global var")]
-        public CellPosData lastTileClicked; 
+        public CellPosData lastTileClicked;
+
+        public ServicePath servicePath => ServicePath.GridService;
 
         private void OnEnable()
         {

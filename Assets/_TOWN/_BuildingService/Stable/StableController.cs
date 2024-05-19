@@ -21,6 +21,13 @@ namespace Town
             stableModel = new StableModel(stableSO);
             BuildingIntService.Instance.allBuildModel.Add(stableModel);
         }
+        public void InitStableController(BuildingModel buildModel)
+        {
+            this.stableModel = new  StableModel(buildModel);
+            BuildingIntService.Instance.allBuildModel.Add(buildModel);
+        }   
+
+
         public void UnLockBuildIntType(BuildInteractType buildIntType, bool unLock)
         {
             //foreach (BuildIntTypeData buildData in houseModel.buildIntTypes)

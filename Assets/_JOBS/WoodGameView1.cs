@@ -131,7 +131,7 @@ namespace Town
                 int bronzifiedCurr = (costData.baseCost.BronzifyCurrency() / 3) * count; 
                 
                 Currency itemSaleVal = new Currency(0, bronzifiedCurr).RationaliseCurrency();
-                EcoServices.Instance.AddMoney2PlayerInv(itemSaleVal);
+                EcoService.Instance.AddMoney2PlayerInv(itemSaleVal);
             }
             OnRewardQuickSell?.Invoke();
         }

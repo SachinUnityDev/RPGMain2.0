@@ -46,7 +46,7 @@ namespace Town
             SetCurrReq();
 
             if (itemModel.IsUnSocketable() ||
-                !EcoServices.Instance.HasMoney(PocketType.Inv, currReq))
+                !EcoService.Instance.HasMoney(PocketType.Inv, currReq))
                 unSocketView.StatusUpdate(UnsocketStatus.UnSocketed); 
             else
                 unSocketView.StatusUpdate(UnsocketStatus.Socketed);
@@ -82,7 +82,7 @@ namespace Town
         }
         void UnSocketGems()
         {  
-            EcoServices.Instance.DebitMoneyFrmCurrentPocket(currReq);
+            EcoService.Instance.DebitMoneyFrmCurrentPocket(currReq);
             
             itemModel.divItemsSocketed[0] = null;
             itemModel.divItemsSocketed[1] = null;
@@ -108,7 +108,7 @@ namespace Town
         void SetBtnState(PocketType pocketType)
         {            
             if(itemModel.IsUnSocketable() || 
-                !EcoServices.Instance.HasMoney(pocketType, currReq))
+                !EcoService.Instance.HasMoney(pocketType, currReq))
             {
                 isDisabled= true;
                 btnImg.sprite = btnDisabled; 
@@ -124,7 +124,7 @@ namespace Town
             btnImg = transform.GetChild(0).GetComponent<Image>();
             btnImg.sprite = btnN;
 
-            EcoServices.Instance.OnPocketSelected += SetBtnState; 
+            EcoService.Instance.OnPocketSelected += SetBtnState; 
         }
     }
 }

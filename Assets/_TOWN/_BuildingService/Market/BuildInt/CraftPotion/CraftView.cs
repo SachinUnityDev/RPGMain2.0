@@ -36,8 +36,8 @@ namespace Town
         }
         private void Start()
         {
-            EcoServices.Instance.OnInvMoneyChg += (Currency c) => PotionBtnStateOnMoney();
-            EcoServices.Instance.OnStashMoneyChg += (Currency c) => PotionBtnStateOnMoney();
+            EcoService.Instance.OnInvMoneyChg += (Currency c) => PotionBtnStateOnMoney();
+            EcoService.Instance.OnStashMoneyChg += (Currency c) => PotionBtnStateOnMoney();
         }
 
         void OnExitBtnPressed()
@@ -79,7 +79,7 @@ namespace Town
         }
         public void PotionBtnStateOnMoney()
         {
-            Currency money = EcoServices.Instance.GetMoneyFrmCurrentPocket();
+            Currency money = EcoService.Instance.GetMoneyFrmCurrentPocket();
             if(money.BronzifyCurrency() < currForCraft.BronzifyCurrency())
             {
                 hasMoney = false; 
@@ -130,7 +130,7 @@ namespace Town
                 default:
                     break;
             }
-            EcoServices.Instance.DebitMoneyFrmCurrentPocket(currForCraft); 
+            EcoService.Instance.DebitMoneyFrmCurrentPocket(currForCraft); 
             OnPotionCraftedTxt.gameObject.SetActive(true);
             Sequence seq = DOTween.Sequence();
             seq

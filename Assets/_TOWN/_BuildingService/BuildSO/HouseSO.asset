@@ -40,19 +40,27 @@ MonoBehaviour:
   buildIntTypes:
   - BuildIntType: 11
     isUnLocked: 0
+    isUpgraded: 0
   - BuildIntType: 3
     isUnLocked: 0
+    isUpgraded: 0
   - BuildIntType: 5
     isUnLocked: 0
+    isUpgraded: 0
   - BuildIntType: 13
     isUnLocked: 0
+    isUpgraded: 0
   - BuildIntType: 12
     isUnLocked: 0
+    isUpgraded: 0
   - BuildIntType: 19
     isUnLocked: 0
+    isUpgraded: 0
   - BuildIntType: 6
     isUnLocked: 0
+    isUpgraded: 0
   - BuildIntType: 2
     isUnLocked: 0
+    isUpgraded: 0
   buildIntPrefab: []
   tipStrs: []

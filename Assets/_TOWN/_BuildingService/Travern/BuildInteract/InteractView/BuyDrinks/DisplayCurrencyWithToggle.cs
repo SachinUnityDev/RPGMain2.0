@@ -26,8 +26,8 @@ namespace Town
         }
         private void Start()
         {
-            EcoServices.Instance.OnInvMoneyChg += FillInvMoney;
-            EcoServices.Instance.OnStashMoneyChg += FillStashMoney;
+            EcoService.Instance.OnInvMoneyChg += FillInvMoney;
+            EcoService.Instance.OnStashMoneyChg += FillStashMoney;
             
             InitCurrencyToggle();
         }
@@ -37,8 +37,8 @@ namespace Town
         }
         public void InitCurrencyToggle()
         {
-            pocketType = EcoServices.Instance.currPocket; 
-            EcoServices.Instance.On_PocketSelected(pocketType);             
+            pocketType = EcoService.Instance.currPocket; 
+            EcoService.Instance.On_PocketSelected(pocketType);             
             FillMoney();
         }
         void OnToggleBtnPressed()
@@ -47,14 +47,14 @@ namespace Town
                 pocketType = PocketType.Inv; 
             else
                 pocketType= PocketType.Stash;
-            EcoServices.Instance.On_PocketSelected(pocketType);
+            EcoService.Instance.On_PocketSelected(pocketType);
 
 
             FillMoney();
         }
         public void FillMoney()
         {
-            Currency amt = EcoServices.Instance.GetMoneyFrmCurrentPocket().DeepClone();
+            Currency amt = EcoService.Instance.GetMoneyFrmCurrentPocket().DeepClone();
             if (pocketType == PocketType.Stash)
                 FillStashMoney(amt); 
             else

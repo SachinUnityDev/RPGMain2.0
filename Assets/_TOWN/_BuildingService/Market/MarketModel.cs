@@ -31,5 +31,14 @@ namespace Town
             charInteractData = marketSO.charInteractData.DeepClone();
             costOfCraftInBronze = 9;
         }
+        public MarketModel(BuildingModel buildModel )
+        {
+            buildingName = buildModel.buildingName;
+            buildState = buildModel.buildState;
+            buildIntTypes = buildModel.buildIntTypes.DeepClone();
+            npcInteractData = buildModel.npcInteractData.DeepClone();
+            charInteractData = buildModel.charInteractData.DeepClone();
+            costOfCraftInBronze = 9;
+        }
     }
 }

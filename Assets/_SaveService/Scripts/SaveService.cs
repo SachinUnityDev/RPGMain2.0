@@ -5,7 +5,6 @@ using Combat;
 using System.IO;
 using System;
 using UnityEngine.UI;
-using UnityEngine.Rendering;
 using Quest;
 
 namespace Common
@@ -62,11 +61,13 @@ namespace Common
         RosterService,
         TownEventService,
         TradeService,
+        EcoService,
 
     }
 
     public interface ISaveable
-    {           
+    {
+        ServicePath servicePath { get; }   
         void SaveState();
         void LoadState();
         void ClearState();     
@@ -130,7 +131,9 @@ namespace Common
             foreach (ServicePath serviceName in Enum.GetValues(typeof(ServicePath)))
             {
                 string path = GetServicePath(saveSlot, serviceName);
+                if(serviceName == ServicePath.EcoService)
                 CreateAFolder(path);
+
             }
         }
 
@@ -323,6 +326,9 @@ namespace Common
                 case ServicePath.TradeService:
                     str += "TradeService/";
                     break;
+                case ServicePath.EcoService:
+                    str += "EcoService/";
+                    break;
                 default:
                     break;
             }
@@ -330,75 +336,7 @@ namespace Common
         }
 
 
-        //case ServicePath.Main:
-        //   str += "Main/";
-        //    break;
-        //case ServicePath.PlayerService:
-        //    str +=  "PlayerService/";
-        //    break;
-        //case ServicePath.WoodGameService:
-        //    str += "WoodGameService/";
-        //    break;
-        //case ServicePath.CurioService:
-        //    str += "CurioService/";
-        //    break;
-        //case ServicePath.EncounterService:
-        //    str += "EncounterService/";
-        //    break;
-        //case ServicePath.LandscapeService:
-        //    str += "LandscapeService/";
-        //    break;
-        //case ServicePath.LootService:
-        //    str += "LootService/";
-        //    break;
-        //case ServicePath.QuestEventService:
-        //    str += "QuestEventService/";
-        //    break;
-        //case ServicePath.QuestMissionService:
-        //    str += "QuestMissionService/";
-        //    break;
-        //case ServicePath.QRoomService:
-        //    str += "QRoomService/";
-        //    break;
-        //case ServicePath.ArmorService:
-        //    str += "ArmorService/";
-        //    break;
-        //case ServicePath.InvService:
-        //    str += "InvService/";
-        //    break;
-        //case ServicePath.WeaponService:
-        //    str += "WeaponService/";
-        //    break;
-        //case ServicePath.GewgawService:
-        //    str += "GewgawService/";
-        //    break;
-        //case ServicePath.LoreService:
-        //    str += "LoreService/";
-        //    break;
-        //case ServicePath.RecipeService:
-        //    str += "RecipeService/";
-        //    break;
-        //case ServicePath.ItemService:
-        //    str += "ItemService/";
-        //    break;
-        //case ServicePath.GridService:
-        //    str += "GridService/";
-        //    break;
-        //case ServicePath.CombatEventService:
-        //    str += "CombatEventService/";
-        //    break;
-        //case ServicePath.CombatService:
-        //    str += "CombatService/";
-        //    break;
-        //case ServicePath.PassiveSkillService:
-        //    str += "PassiveSkillService/";
-        //    break;
-        //case ServicePath.SkillService:
-        //    str += "SkillService/";
-        //    break;
-        //case ServicePath.WelcomeService:
-        //    str += "WelcomeService/";
-        //    break; 
+     
 
         public void OnAutoSaveTriggered()
         {

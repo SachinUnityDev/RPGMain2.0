@@ -31,7 +31,11 @@ namespace Town
             shipModel = new ShipModel(shipSO);
             BuildingIntService.Instance.allBuildModel.Add(shipModel);
         }
-
+        public void InitShipController(BuildingModel buildModel)
+        {
+            this.shipModel = new ShipModel(buildModel);
+            BuildingIntService.Instance.allBuildModel.Add(buildModel);
+        }
         public void OnShipUnLock()
         {
             shipModel.buildState = BuildingState.Available;

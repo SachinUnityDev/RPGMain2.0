@@ -11,5 +11,10 @@ namespace Town
             buildingName = cityHallSO.buildingName;
             buildState = cityHallSO.buildingState;
         }
+        public CityHallModel(BuildingModel buildModel)
+        {
+            buildingName = buildModel.buildingName;
+            buildState = buildModel.buildState;
+        }
     }
 }

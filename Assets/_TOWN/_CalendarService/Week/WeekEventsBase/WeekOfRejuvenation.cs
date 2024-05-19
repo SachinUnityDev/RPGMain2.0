@@ -22,7 +22,7 @@ namespace Common
             allEventCostMultData.Add(costData);
             costData = new EventCostMultData(ItemType.Herbs, 0.5f);
             allEventCostMultData.Add(costData);
-            EcoServices.Instance.ecoController.ApplyWeekEventCostMultiplier(allEventCostMultData); 
+            EcoService.Instance.ecoController.ApplyWeekEventCostMultiplier(allEventCostMultData); 
 
         }
         public override void OnWeekBonusClicked()

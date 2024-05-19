@@ -29,7 +29,7 @@ namespace Common
             silverBtmBtn.onClick.AddListener(OnSilverBottomBtnPressed);
             bronzeTopBtn.onClick.AddListener(OnBronzeTopBtnPressed); 
             bronzeBtmBtn.onClick.AddListener(OnBronzeBtmBtnPressed);
-            EcoServices.Instance.OnInvMoneyChg += 
+            EcoService.Instance.OnInvMoneyChg += 
                 (Currency invMoney) => transform.GetComponent<DisplayCurrency>()
                 .Display(invMoney);          
         }
@@ -38,11 +38,11 @@ namespace Common
             this.transactState = transactState; 
             if(transactState == CurrTransactState.WithDrawFrmStash)
             {
-                currMax = EcoServices.Instance.GetMoneyAmtInPlayerStash().DeepClone();
+                currMax = EcoService.Instance.GetMoneyAmtInPlayerStash().DeepClone();
             }
             if(transactState == CurrTransactState.Transfer2Stash)
             {
-                currMax = EcoServices.Instance.GetMoneyAmtInPlayerInv().DeepClone();                
+                currMax = EcoService.Instance.GetMoneyAmtInPlayerInv().DeepClone();                
             }            
             this.currTransactBox = currTransactBox.DeepClone();
             transform.GetComponent<DisplayCurrency>().Display(currTransactBox); 
@@ -58,13 +58,13 @@ namespace Common
         {
             if (transactState == CurrTransactState.WithDrawFrmStash)
             {
-               EcoServices.Instance.DebitPlayerStash(this.currTransactBox);
-               EcoServices.Instance.AddMoney2PlayerInv(this.currTransactBox);
+               EcoService.Instance.DebitPlayerStash(this.currTransactBox);
+               EcoService.Instance.AddMoney2PlayerInv(this.currTransactBox);
             }
             else if(transactState == CurrTransactState.Transfer2Stash)
             {
-                EcoServices.Instance.DebitPlayerInv(this.currTransactBox);
-                EcoServices.Instance.AddMoney2PlayerStash(this.currTransactBox);
+                EcoService.Instance.DebitPlayerInv(this.currTransactBox);
+                EcoService.Instance.AddMoney2PlayerStash(this.currTransactBox);
             }
             transform.gameObject.SetActive(false);
             transactState = CurrTransactState.None; 

@@ -14,7 +14,9 @@ namespace Common
         public FameViewController fameViewController;
 
         public event Action <int> OnFameYieldChg;
-        public event Action<int> OnFameChg; 
+        public event Action<int> OnFameChg;
+
+        public ServicePath servicePath => ServicePath.FameService;
 
         [Header("Game Init")]
         public bool isNewGInitDone = false;

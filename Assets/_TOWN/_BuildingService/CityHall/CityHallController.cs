@@ -19,5 +19,10 @@ namespace Town
             cityHallModel = new CityHallModel(cityHallSO);
             BuildingIntService.Instance.allBuildModel.Add(cityHallModel);
         }
+        public void InitCityHallController(BuildingModel buildModel)
+        {
+            this.cityHallModel = new CityHallModel(buildModel); 
+            BuildingIntService.Instance.allBuildModel.Add(buildModel);
+        }   
     }
 }

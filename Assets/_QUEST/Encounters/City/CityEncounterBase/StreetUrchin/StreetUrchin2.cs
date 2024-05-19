@@ -73,7 +73,7 @@ namespace Quest
 
         public override bool PreReqChk()
         {
-            return EcoServices.Instance.HasMoney(PocketType.Inv, new Currency(6, 0));
+            return EcoService.Instance.HasMoney(PocketType.Inv, new Currency(6, 0));
         }
 
         public override bool UnLockCondChk()

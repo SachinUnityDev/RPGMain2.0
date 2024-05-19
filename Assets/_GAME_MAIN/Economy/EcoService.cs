@@ -15,7 +15,7 @@ namespace Common
         Inv,         
     }
 
-    public class EcoServices : MonoSingletonGeneric<EcoServices>, ISaveable
+    public class EcoService : MonoSingletonGeneric<EcoService>, ISaveable
     {
         public event Action<PocketType> OnPocketSelected;
         public EconoModel econoModel;
@@ -29,7 +29,7 @@ namespace Common
         [Header("Game Init")]
         public bool isNewGInitDone = false;
 
-
+        public ServicePath servicePath => ServicePath.EcoService; 
         void Start()
         {
             ecoController = transform.GetComponent<EcoController>();    
@@ -160,7 +160,6 @@ namespace Common
 
         public void RestoreState(string basePath)
         {
-            throw new NotImplementedException();
         }
 
         #endregion

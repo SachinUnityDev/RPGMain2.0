@@ -15,5 +15,11 @@ namespace Town
             buildState = stableSO.buildingState;
 
         }
+        public StableModel(BuildingModel buildModel)
+        {
+            buildingName = buildModel.buildingName;
+            buildState = buildModel.buildState;
+        }   
+
     }
 }

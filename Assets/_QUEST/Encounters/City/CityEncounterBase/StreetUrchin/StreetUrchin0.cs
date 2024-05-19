@@ -26,14 +26,14 @@ namespace Quest
 
         public override void OnChoiceBSelect()
         {
-            EcoServices.Instance.DebitPlayerInv(new Currency(0, 6));
+            EcoService.Instance.DebitPlayerInv(new Currency(0, 6));
             EncounterService.Instance.cityEController.UnLockNext(encounterName, seq);
             resultStr = "Maybe you gained nothing, but you made a poor kid happy.";
             strFX = "You lost 6 bronze coins";
         }
         public override bool PreReqChk()
         {
-            return EcoServices.Instance.HasMoney(PocketType.Inv, new Currency(0, 6)); 
+            return EcoService.Instance.HasMoney(PocketType.Inv, new Currency(0, 6)); 
         }
         public override bool UnLockCondChk()
         {

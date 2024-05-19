@@ -38,7 +38,15 @@ namespace Town
             charInteractData = shipSO.charInteractData.DeepClone();
             tipTxt = shipSO.tipStrs.DeepClone();
         }
-
+        public ShipModel(BuildingModel buildModel)
+        {
+            buildingName = buildModel.buildingName;
+            buildState = buildModel.buildState;
+            buildIntTypes = buildModel.buildIntTypes.DeepClone();
+            npcInteractData = buildModel.npcInteractData.DeepClone();
+            charInteractData = buildModel.charInteractData.DeepClone();
+            tipTxt.Clear();
+        }
         public string GetTipTxt()
         {
             if (tipTxt.Count == 0)

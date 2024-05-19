@@ -114,11 +114,11 @@ namespace Interactables
             alcoholBase.OnDrink();
             if (alcoholName == AlcoholNames.Beer)
             {
-                EcoServices.Instance.DebitMoneyFrmCurrentPocket(new Currency(0, 4));
+                EcoService.Instance.DebitMoneyFrmCurrentPocket(new Currency(0, 4));
             }
             if (alcoholName == AlcoholNames.Rum)
             {
-                EcoServices.Instance.DebitMoneyFrmCurrentPocket(new Currency(0, 11));
+                EcoService.Instance.DebitMoneyFrmCurrentPocket(new Currency(0, 11));
             }
 
             shipModel.selfDrinks++;

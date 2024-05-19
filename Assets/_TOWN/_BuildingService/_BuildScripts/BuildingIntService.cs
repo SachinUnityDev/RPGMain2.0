@@ -4,15 +4,14 @@ using UnityEngine;
 using Common;
 using System;
 using Interactables;
-using System.Net.NetworkInformation;
-
+using System.IO; 
 namespace Town
 { 
     /// <summary>
     ///  To provide a as singleton for the interior interactions of the building
     /// </summary>
 
-    public class BuildingIntService : MonoSingletonGeneric<BuildingIntService>
+    public class BuildingIntService : MonoSingletonGeneric<BuildingIntService>, ISaveable
     {
         public event Action<Iitems, TavernSlotType> OnItemWalled;
         public event Action<Iitems, TavernSlotType> OnItemWalledRemoved;
@@ -44,6 +43,9 @@ namespace Town
         public StableController stableController; 
         public ThievesGuildController thieveController;
         public CityHallController cityHallController;
+
+        public ServicePath servicePath => ServicePath.BuildingIntService; 
+
         void Start()
         {
             
@@ -65,16 +67,31 @@ namespace Town
 
 
             // depending on slot and state get the save file
+            // this NEw game Init 
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            if (SaveService.Instance.DirectoryExists(path))
+            {
+                if (IsDirectoryEmpty(path))
+                {
+                    houseController.InitHouseController();
+                    templeController.InitTempleController();
+                    tavernController.InitTavernController();
+                    marketController.InitMarketController();
+                    shipController.InitShipController();
 
-            houseController.InitHouseController();
-            templeController.InitTempleController();            
-            tavernController.InitTavernController();
-            marketController.InitMarketController();    
-            shipController.InitShipController();
-            
-            stableController.InitStableController();
-            thieveController.InitThievesGuildController() ;
-            cityHallController.InitCityHallController();
+                    stableController.InitStableController();
+                    thieveController.InitThievesGuildController();
+                    cityHallController.InitCityHallController();
+                }
+                else
+                {
+                    LoadState();
+                }
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing");
+            }
         }
 
         public void On_BuildInit(BuildingModel buildModel, BuildView buildView)
@@ -280,5 +297,103 @@ namespace Town
             return null; 
         }
 
+        public void SaveState()
+        {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            ClearState();
+            // save all char models
+
+            foreach (BuildingModel  buildModel in allBuildModel)
+            {
+                string buildJson = JsonUtility.ToJson(buildModel);
+                Debug.Log(buildJson);
+                string fileName = path + buildModel.buildingName.ToString() + ".txt";
+                File.WriteAllText(fileName, buildJson);
+            }
+
+        }
+
+        public void LoadState()
+        {
+            // get all Files and use swtich to classify all build Model into house model, tavern model etc
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+
+            if (SaveService.Instance.DirectoryExists(path))
+            {
+                string[] fileNames = Directory.GetFiles(path);
+                foreach (string fileName in fileNames)
+                {
+                    // skip meta files
+                    if (fileName.Contains(".meta")) continue;
+                    string contents = File.ReadAllText(fileName);
+                    Debug.Log("BuilsModel  " + contents);
+                    BuildingModel buildModel = JsonUtility.FromJson<BuildingModel>(contents);
+                    ClassifyAndInitBuildModel(buildModel);
+                }
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing");
+            }
+
+
+        }
+
+        void ClassifyAndInitBuildModel(BuildingModel buildingModel)
+        {
+
+            switch (buildingModel.buildingName) 
+            {
+                case BuildingNames.None:
+                    break;
+                case BuildingNames.CityHall:
+                    cityHallController.InitCityHallController(buildingModel); 
+                    break;
+                case BuildingNames.House:
+                    houseController.InitHouseController(buildingModel);
+                    break;
+                case BuildingNames.Marketplace:
+                    marketController.InitMarketController(buildingModel);
+                    break;
+                case BuildingNames.Safekeep:
+                    //safekeepController.InitSafekeepController((SafekeepModel)buildingModel);
+                    break;
+                case BuildingNames.Ship:
+                    shipController.InitShipController(buildingModel);
+                    break;  
+                case BuildingNames.Stable:
+                    stableController.InitStableController(buildingModel);
+                    break;
+                case BuildingNames.Tavern:
+                    tavernController.InitTavernController(buildingModel);
+                    break;
+                case BuildingNames.Temple:
+                    templeController.InitTempleController(buildingModel);
+                    break;
+                case BuildingNames.ThievesGuild:
+                    break;
+                default:
+                    break;
+            }
+        }
+        public void ClearState()
+        {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);            
+            DeleteAllFilesInDirectory(path);
+            
+           
+
+        }
+        public void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                SaveState();
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                LoadState();
+            }
+        }
     }
 }

@@ -113,7 +113,7 @@ namespace Common
 
         public void RestoreState(string basePath)
         {
-            throw new NotImplementedException();
+            
         }
         // this-> save and Load 
         // controller-> single instance attached to this, would provide algo support
@@ -127,7 +127,6 @@ namespace Common
         // :fame Behavior
         // prereq
         // some Trait
-
     }
 
 

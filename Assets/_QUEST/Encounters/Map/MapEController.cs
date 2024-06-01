@@ -51,7 +51,11 @@ namespace Quest
             }
             InitAllMapEBase();
         }
-
+        public void InitMapE(List<MapEModel> allMapEModels)
+        {
+            this.allMapEModels = allMapEModels.DeepClone();
+            InitAllMapEBase();
+        }
         void InitAllMapEBase()
         {
             foreach (MapEModel mapModel in allMapEModels)

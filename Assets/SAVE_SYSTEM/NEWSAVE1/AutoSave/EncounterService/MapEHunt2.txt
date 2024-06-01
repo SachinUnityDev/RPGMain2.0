@@ -1,0 +1,1 @@
+{"mapEName":6,"mapENameStr":"Hunt in the Wilderness","descTxt":"For a seasoned adventurer like you, this little bit of action isn't enough. Wouldn't you like to venture further, face more beasts, and skin their hides and sell in the market to become rich? Don't hesitate too long. Make a decision.","choiceAStr":"Continue","choiceBStr":"Go back to the Town"}

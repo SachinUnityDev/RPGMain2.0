@@ -134,9 +134,15 @@ namespace Common
                 fleeController = gameObject.AddComponent<FleeController>();
             }
             statBuffController = gameObject.AddComponent<StatBuffController>();
+            
             permaTraitController = gameObject.AddComponent<PermaTraitController>();
+            PermaTraitsService.Instance.allPermaTraitControllers.Add(permaTraitController);
+
             tempTraitController = gameObject.AddComponent<TempTraitController>();
+            TempTraitService.Instance.allTempTraitControllers.Add(tempTraitController);
+
             charStateController = gameObject.AddComponent<CharStateController>();
+            CharStatesService.Instance.allCharStateController.Add(charStateController);
 
             skillController = gameObject.AddComponent<SkillController1>();
             SkillService.Instance.allSkillControllers.Add(skillController);

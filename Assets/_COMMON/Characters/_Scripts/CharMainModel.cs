@@ -23,7 +23,5 @@ namespace Common
     public class CharMainModel
     {
         public List<CharKillsData> allCharKills = new List<CharKillsData>();
-
-
     }
 }

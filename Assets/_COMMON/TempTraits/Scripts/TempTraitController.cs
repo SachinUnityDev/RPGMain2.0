@@ -1,4 +1,5 @@
 using Combat;
+using Quest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace Common
 
         public CharController charController;
         int traitID =-1;
-        [SerializeField] List<int> allBuffIds = new List<int>();
+        [SerializeField] List<int> allTraitIds = new List<int>();
 
 
 
@@ -52,9 +53,49 @@ namespace Common
             traitID = -1;            
             CalendarService.Instance.OnStartOfCalDay +=(int day)=> DayTick();          
         }
+
+        #region SAVE & LOAD 
+
+        public void ClearOldState()
+        {
+            //allCharStateBuffs.Clear();
+            //allImmunityBuffs.Clear();
+            //allCharStateModels.Clear();
+            //allCharBases.Clear();
+            //allBuffIds.Clear();
+        }
+        public void LoadTempTraitBuffData(TempTraitBuffData tempTraitBuffData)
+        {
+            TempTraitModData modData = tempTraitBuffData.modData; 
+
+            allTraitIds.Add(tempTraitBuffData.traitID);
+            TempTraitName tempTraitName = tempTraitBuffData.tempTraitName; 
+            TempTraitBase tempTraitBase = TempTraitService.Instance
+                .temptraitsFactory.GetNewTempTraitBase(tempTraitName);  
+
+            allTempTraitBase.Add(tempTraitBase);
+            TempTraitSO tempTraitSO = TempTraitService.Instance.allTempTraitSO.GetTempTraitSO(tempTraitName);
+
+            charController = GetComponent<CharController>();
+            
+            int castTime = tempTraitBuffData.netTime - tempTraitBuffData.currentTime;
+
+            tempTraitBase.TempTraitInit(tempTraitSO, charController, tempTraitBuffData.traitID);
+            tempTraitBase.TraitBaseApply();
+            alltempTraitBuffData.Add(tempTraitBuffData);            
+        }
+        public void LoadImmunityFrmData(ImmunityFrmType immunityFrmType)
+        {
+            TempTraitModData tempTraitModData = immunityFrmType.modData;
+            allImmunitiesFrmType.Add(immunityFrmType);            
+        }
+        public void LoadImmunityBuffData(TempTraitBuffData tempTraitBuffData)
+        {
+            alltempTraitBuffData.Add(tempTraitBuffData);            
+        }
+        #endregion
+
         #region TRAIT APPLY & REMOVE
-
-
         void PosTrait_FIFOChk(TempTraitType tempTraitType)
         {
             // You can have 3 physical positive and 3 mental positive traits.first in first out 
@@ -207,8 +248,8 @@ namespace Common
                                     .temptraitsFactory.GetNewTempTraitBase(tempTraitName);
             
 
-            traitID = allBuffIds.Count+1;
-            allBuffIds.Add(traitID); 
+            traitID = allTraitIds.Count+1;
+            allTraitIds.Add(traitID); 
 
             int netTime = UnityEngine.Random.Range(tempTraitSO.minCastTime, tempTraitSO.maxCastTime+1);
             // mod data for record and string creation 
@@ -429,6 +470,13 @@ namespace Common
 
                 ApplyTempTrait(CauseType.CharState, (int)CharStateName.FlatFooted, 1
                                                              , TempTraitName.Unwavering);
+
+                ApplyTraitTypeImmunityBuff(CauseType.Curios, (int)CurioNames.Fountain,
+                    1, TempTraitType.Sickness, TimeFrame.EndOfQuest, 1);
+
+                ApplyImmunityBuff(CauseType.PermanentTrait, (int)1
+                                           , 1, TempTraitName.Flu, TimeFrame.Infinity, 1);
+
             }
         
             if (Input.GetKeyDown(KeyCode.C))
@@ -495,7 +543,7 @@ namespace Common
         public int netTime;
         public int startTime;
         public int currentTime;
-        public TempTraitModData causeData; 
+        public TempTraitModData modData; 
 
         public ImmunityFrmType(int traitID, TempTraitType traitType, TimeFrame timeFrame, int netTime
                                               , int startTime, int currentTime, TempTraitModData causeData)
@@ -506,7 +554,7 @@ namespace Common
             this.netTime = netTime;
             this.startTime = startTime;
             this.currentTime = currentTime;
-            this.causeData = causeData;
+            this.modData = causeData;
         }
     }
 

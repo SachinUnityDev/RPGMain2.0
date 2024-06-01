@@ -56,7 +56,11 @@ namespace Quest
             }
             InitAllQuestEBase();
         }
-
+        public void InitQuestE(List<QuestEModel> allQuestEModels)
+        {
+           this.allQuestEModels = allQuestEModels.DeepClone();
+            InitAllQuestEBase();
+        }
         void InitAllQuestEBase()
         {
             foreach (QuestEModel questEModel in allQuestEModels)

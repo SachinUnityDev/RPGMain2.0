@@ -54,6 +54,7 @@ namespace Common
         }
     }
 
+    [Serializable]
     public class ImmunityBuffData   
     {
         public int immunityID;
@@ -161,13 +162,12 @@ namespace Common
             charStateBase.StateApplyFX();
             charStateBase.StateApplyVFX();
 
-
             CharStateBuffData charStateBuffData = new CharStateBuffData(stateID, currRd, timeFrame, castTime
                                                                         , charStateModData); 
 
             allCharStateBuffs.Add(charStateBuffData);
            
-            CharStatesService.Instance.On_CharStateStart(charStateModData);
+            CharStatesService.Instance.On_CharStateStart(charStateBuffData);
       
             return stateID;
         }
@@ -227,9 +227,43 @@ namespace Common
             }
         }
 
+        public void ClearOldState()
+        {
+            allCharStateBuffs.Clear();
+            allImmunityBuffs.Clear();    
+            allCharStateModels.Clear();
+            allCharBases.Clear();
+            allBuffIds.Clear();
+        }
+
+        public void LoadCharStateBuffData(CharStateBuffData charStateBuffData)
+        {
+            CharStateModData charStateModData = charStateBuffData.charStateModData; 
+            
+            allBuffIds.Add(charStateBuffData.buffId);
+            CharStateName charStateName = charStateBuffData.charStateModData.charStateName; 
+            CharStatesBase charStateBase = CharStatesService.Instance
+                .GetNewCharState(charStateName);
+            allCharBases.Add(charStateBase);
+            CharStateSO1 charStateSO = CharStatesService.Instance.allCharStateSO.GetCharStateSO(charStateName);
+            charController = GetComponent<CharController>();
+            int castTime = charStateBuffData.netTime - charStateBuffData.currentTime;
+            charStateBase.StateInit(charStateSO, charController, charStateBuffData.timeFrame, castTime, charStateBuffData.buffId);
+            charStateBase.StateBaseApply();
+            
+            allCharStateBuffs.Add(charStateBuffData);
+        }
+
         #endregion
 
         #region  IMMUNITY 
+
+        public void LoadImmunityBuffData(ImmunityBuffData immunityBuffData)
+        {
+            CharStateModData charStateModData = immunityBuffData.charStateModData;             
+            allImmunityBuffs.Add(immunityBuffData);
+        }
+
         public int ApplyImmunityBuff(CauseType causeType, int causeName, int causeByCharID
                                 , CharStateName charStateName, TimeFrame timeFrame, int netTime) // immunity buff for this char State
         {
@@ -247,6 +281,7 @@ namespace Common
             ImmunityBuffData immunityBuffData = new ImmunityBuffData(stateID,  currRd, timeFrame, netTime
                                                                         , charStateModData);
             allImmunityBuffs.Add(immunityBuffData);
+            CharStatesService.Instance.On_ImmunityBuffStart(immunityBuffData);
             return stateID;
         }
         public void RemoveImmunityByCharState(CharStateName charStateName) 
@@ -256,6 +291,7 @@ namespace Common
                 if (immunityBuffData.charStateModData.charStateName == charStateName)
                 {
                     allImmunityBuffs.Remove(immunityBuffData);
+                    CharStatesService.Instance.On_ImmunityBuffEnd(immunityBuffData);
                 }
             }
         }
@@ -267,6 +303,7 @@ namespace Common
                 {
                    allImmunityBuffs.Remove(immunityBuffData);
                     RemoveBuffID(immunityID); 
+
                 }
             }
         }
@@ -628,7 +665,19 @@ namespace Common
 
         #endregion
 
+        private void Update()
+        {
+            
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                charController.charStateController.ApplyImmunityBuff(CauseType.PassiveSkillName, (int)5
+                        , charController.charModel.charID, CharStateName.Despaired, TimeFrame.Infinity, 1);
 
+                charController.charStateController.ApplyCharStateBuff(CauseType.PassiveSkillName, 1, 2
+                                                   , CharStateName.Bleeding, TimeFrame.EndOfRound, 2);
+            }
+
+       }
     }
 
 

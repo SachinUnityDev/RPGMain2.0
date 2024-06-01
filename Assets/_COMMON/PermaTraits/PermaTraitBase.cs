@@ -1,7 +1,6 @@
 using Common;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Policy;
 using UnityEngine;
 
 
@@ -25,15 +24,16 @@ namespace Common
         public List<int> allCharStateDmgAltBuffIds = new List<int>();
         public List<int> allStatAltBuff = new List<int>();
 
-        public virtual void PermaTraitInit(PermaTraitSO permaTraitSO, CharController charController, int traitID)
+        public virtual PermaTraitModel PermaTraitInit(PermaTraitSO permaTraitSO, CharController charController, int traitID)
         {
             this.permaTraitSO = permaTraitSO;
             this.charController = charController;
-            this.charID = charController.charModel.charID;
+            charID = charController.charModel.charID;
            
-            permaTraitModel = new PermaTraitModel(permaTraitSO, traitID);
+            permaTraitModel = new PermaTraitModel(permaTraitSO, traitID, charID);
             charController.permaTraitController.allPermaModels.Add(permaTraitModel);    
-            TraitBaseApply(); // chekc this out 
+            TraitBaseApply(); // check this out 
+            return permaTraitModel; 
         }
         protected virtual void TraitBaseApply()
         {   

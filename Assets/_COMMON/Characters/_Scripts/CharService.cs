@@ -78,7 +78,7 @@ namespace Common
 
         public void Init() 
         {
-           string path = SaveService.Instance.GetCurrSlotServicePath(ServicePath.CharService);
+           string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
             if (SaveService.Instance.DirectoryExists(path))
             {
                 if(IsDirectoryEmpty(path))

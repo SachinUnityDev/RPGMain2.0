@@ -52,6 +52,11 @@ namespace Common
             BuildingIntService.Instance.InitNGBuildIntService();
             EncounterService.Instance.EncounterInit();
             CharService.Instance.Init();
+
+            CharStatesService.Instance.Init(); 
+
+
+
             UIControlServiceGeneral.Instance.InitUIGeneral();
             CalendarService.Instance.Init();
             EcoService.Instance.InitEcoServices();

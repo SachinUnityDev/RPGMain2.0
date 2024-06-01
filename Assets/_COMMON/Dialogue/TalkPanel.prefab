@@ -159,7 +159,7 @@ MonoBehaviour:
     isRepeatable: 0
     isSkippable: 1
     isPlayedOnce: 0
-    gameState: 1
+    gameScene: 0
     charInDialogue: 01000000
     NPCinDialogue: 07000000
     locationName: 1
@@ -943,7 +943,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1761031931498186557
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3497,7 +3497,7 @@ MonoBehaviour:
     isRepeatable: 0
     isSkippable: 1
     isPlayedOnce: 1
-    gameState: 1
+    gameScene: 0
     charInDialogue: 01000000
     NPCinDialogue: 0d000000
     locationName: 1
@@ -3751,7 +3751,7 @@ MonoBehaviour:
     isRepeatable: 0
     isSkippable: 1
     isPlayedOnce: 0
-    gameState: 1
+    gameScene: 0
     charInDialogue: 01000000
     NPCinDialogue: 07000000
     locationName: 1
@@ -3916,7 +3916,7 @@ MonoBehaviour:
     isRepeatable: 0
     isSkippable: 1
     isPlayedOnce: 0
-    gameState: 1
+    gameScene: 0
     charInDialogue: 01000000
     NPCinDialogue: 07000000
     locationName: 1

@@ -16,7 +16,7 @@ namespace Common
         public CharStateType stateType;
         public TimeFrame timeFrame;
         public int castTime; //-5 for NA
-        public GameObject CharStateFX;
+        //  public GameObject CharStateFX; // not used
 
         public CharStateModel(CharStateSO1 charStateSO, int charStateID)
         {

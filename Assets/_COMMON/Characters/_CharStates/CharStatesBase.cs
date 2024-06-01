@@ -157,12 +157,10 @@ namespace Common
         protected virtual void QuestTick()
         {
             if (timeFrame == TimeFrame.EndOfQuest)
-                charController.charStateController.RemoveCharState(charStateName); 
-                    
+                charController.charStateController.RemoveCharState(charStateName);                     
         }
         public virtual void EndState()
         {   
-           // charController.charStateController.RemoveCharState(charStateName);
             ClearBuffs();
             CombatEventService.Instance.OnEOC -= CombatTick;
             CombatEventService.Instance.OnEOR1 -= RoundTick;
@@ -184,30 +182,9 @@ namespace Common
                     allImmunityBuffs.Remove(immuneBuffData.immunityID);
                 }
             }
-
             allBuffIds.Clear();
             allImmunityBuffs.Clear(); 
-        }
-        // CAN BE ADDED LATER
-        //public virtual void ClearBuffs()
-        //{
-        //    foreach (int buffID in allBuffIds)
-        //    {
-        //        charController.buffController.RemoveBuff(buffID);
-        //    }
-        //    foreach (int LbuffID in allLandBuffIds)
-        //    {
-        //        charController.landscapeController.RemoveBuff(LbuffID);
-        //    }
-        //    foreach (int dmgRecBuffID in allBuffDmgRecAltIds)
-        //    {
-        //        charController.damageController.RemoveDmgReceivedAltBuff(dmgRecBuffID);
-        //    }
-        //    foreach (int dmgAltBuffID in allBuffDmgAltIds)
-        //    {
-        //        charController.strikeController.RemoveDmgAltBuff(dmgAltBuffID);
-        //    }
-        //}
+        } 
     }
 
 

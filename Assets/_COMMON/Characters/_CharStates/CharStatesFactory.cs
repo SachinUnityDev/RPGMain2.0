@@ -11,7 +11,7 @@ namespace Common
     public class CharStatesFactory : MonoBehaviour
     {
         public Dictionary<CharStateName, Type> allCharStates;
-        void Start()
+        void OnEnable()
         {
             allCharStates = new Dictionary<CharStateName, Type>();
             InitCharStates();  // ON START OF QUEST 

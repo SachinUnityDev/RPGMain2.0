@@ -44,7 +44,11 @@ namespace Quest
            
             InitAllCityEBase();
         }
-
+        public void InitCityE(List<CityEModel> allCityEModels)
+        {
+            this.allCityEModels = allCityEModels.DeepClone();           
+            InitAllCityEBase();
+        }
         void InitAllCityEBase()
         {
             foreach (CityEModel cityEModel in allCityEModels)

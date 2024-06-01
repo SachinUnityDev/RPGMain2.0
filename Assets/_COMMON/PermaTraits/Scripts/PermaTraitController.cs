@@ -19,6 +19,17 @@ namespace Common
             ApplyPermaTraits();
         }
 
+        public void LoadController(PermaTraitModel model)
+        {   
+            PermaTraitBase traitBase =
+                        PermaTraitsService.Instance.permaTraitsFactory.GetNewPermaTraitBase(model.permaTraitName);
+            
+            PermaTraitSO permaTraitSO = PermaTraitsService.Instance.allPermaTraitSO.GetPermaTraitSO(model.permaTraitName);
+            allPermaTraits.Add(traitBase);
+            charController = GetComponent<CharController>();
+            traitBase.PermaTraitInit(permaTraitSO, charController, model.permaTraitID);              
+
+        }
         public void ApplyPermaTraits()
         {            
             List<PermaTraitName> allPermaTraitNames = new List<PermaTraitName>();
@@ -34,8 +45,10 @@ namespace Common
                 traitID++; 
                 PermaTraitSO permaTraitSO= PermaTraitsService.Instance.allPermaTraitSO.GetPermaTraitSO(permaTraitName);
                 allPermaTraits.Add(traitBase);
-                traitBase.PermaTraitInit(permaTraitSO,charController, traitID); 
+                PermaTraitModel permaTraitModel = 
+                        traitBase.PermaTraitInit(permaTraitSO,charController, traitID); 
                 traitBase.ApplyTrait();
+                PermaTraitsService.Instance.On_PermaTraitAdded(permaTraitModel);
             }
         }
         public void RemovePermaTraits()

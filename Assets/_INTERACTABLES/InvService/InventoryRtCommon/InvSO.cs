@@ -47,7 +47,7 @@ namespace Interactables
 
         public Sprite GetBGSprite(Iitems item)
         {
-            if(item == null) return null;   
+            if(item == null) return emptySlot;   
             if(item.itemType == ItemType.GenGewgaws)
             {
                 GenGewgawBase genGewgawbase = (GenGewgawBase)item;

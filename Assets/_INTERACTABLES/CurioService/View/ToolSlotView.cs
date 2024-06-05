@@ -25,30 +25,41 @@ namespace Quest
 
         private void OnEnable()
         {
+            GetItemRef();
+        }
+        void GetItemRef()
+        {
             slotID = transform.GetSiblingIndex();
             itemImg = transform.GetChild(0).GetComponentInChildren<Image>();
             itemBG = transform.GetComponent<Image>();
-            itemFrame = transform.GetChild(2);          
+            itemFrame = transform.GetChild(2);
             // deSelect State...
             isSelected = false;
             itemFrame.gameObject.SetActive(false);
         }
-        public void InitSlot(Iitems item, ToolView toolView)
+
+        public void InitSlot(ToolNames toolName, Iitems item, ToolView toolView)
         {
-            if (item == null)
+             GetItemRef();
+            if (toolName == ToolNames.None)
             {
-                transform.gameObject.SetActive(false);
-                return;
-            }
-            Debug.Log(item.itemName + " NAME" + item.itemType + " TYPE");
+                transform.gameObject.SetActive(false); return; 
+            }            
             this.toolView = toolView;
             this.item = item;
+
             transform.gameObject.SetActive(true);
             itemImg.gameObject.SetActive(true);
-           
-            itemImg.sprite = GetSprite(item.itemName, item.itemType);
+
+            itemImg.sprite = GetSprite(toolName);
             itemBG.sprite = GetBGSprite(item);
-            
+            if (item == null)
+            {
+                
+                 SetInactive(toolName);
+                return;
+            }      
+                   
             if (transform.GetSiblingIndex() == 0)
             {
                 isSelected = true;
@@ -61,18 +72,19 @@ namespace Quest
             }
         }
 
-        public void ClearSlot()
+        public void SetInactive(ToolNames toolName)
         {
             transform.GetComponent<Image>().sprite = InvService.Instance.InvSO.emptySlot;
             item = null;
             isSelected = false;
-            itemFrame.gameObject.SetActive(false);
+
+            //itemFrame.gameObject.SetActive(false);
         }
 
 
-        Sprite GetSprite(int itemName, ItemType itemType)
+        Sprite GetSprite(ToolNames toolName)
         {
-            Sprite sprite = InvService.Instance.InvSO.GetSprite(itemName, itemType);
+            Sprite sprite = InvService.Instance.InvSO.GetSprite((int)toolName, ItemType.Tools);
             if (sprite != null)
                 return sprite;
             else
@@ -81,6 +93,7 @@ namespace Quest
         }
         Sprite GetBGSprite(Iitems item)
         {
+            if(item == null) return InvService.Instance.InvSO.emptySlot;
             Sprite sprite = InvService.Instance.InvSO.GetBGSprite(item);
             if (sprite != null)
                 return sprite;
@@ -103,6 +116,7 @@ namespace Quest
         }
         public void OnPointerClick(PointerEventData eventData)
         {
+            if(item == null) return;
             if (!isSelected)
             {
                 OnSelected();

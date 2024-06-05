@@ -138,8 +138,6 @@ namespace Interactables
             }
             CalendarService.Instance.OnStartOfCalDay += (int day) => OnDayTickOnScroll();
             isNewGInitDone = true;
-    
-
         }
 
         #region ITEM EVENTS
@@ -555,7 +553,7 @@ namespace Interactables
                                      CauseType.Items, 1);
                 InitItemToInv(SlotType.CommonInv, ItemType.Gems, (int)GemNames.Oltu,
                                      CauseType.Items, 1);
-                InitItemToInv(SlotType.CommonInv, ItemType.Herbs, (int)HerbNames.Aloe,
+                InitItemToInv(SlotType.CommonInv, ItemType.Tools, (int)ToolNames.Key,
                                     CauseType.Items, 2);
                 //InitItemToInv(SlotType.CommonInv, ItemType.Ingredients, (int)IngredNames.Ginger,
                 //                    CauseType.Items, 2);

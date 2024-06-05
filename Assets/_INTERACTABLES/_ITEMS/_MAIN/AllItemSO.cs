@@ -307,7 +307,7 @@ public class AllItemSO : ScriptableObject
         if (toolsSO != null)
             return toolsSO;
         else
-            Debug.Log("Trade goods SO  not found");
+            Debug.Log("Tools SO  not found" + toolName);
         return null;
     }
     public MealsSO GetMealSO(MealNames mealName)

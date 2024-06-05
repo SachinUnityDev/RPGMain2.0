@@ -21,7 +21,6 @@ namespace Quest
         public Iitems toolSelect = null;
         public void InitToolList(ToolNames toolName1, ToolNames toolName2)
         {
-
             if (toolName1 != ToolNames.None)
                 toolSlot1 = InvService.Instance.invMainModel
                          .GetItemRefFrmCommInv(ItemType.Tools, (int)toolName1);
@@ -34,13 +33,13 @@ namespace Quest
             else
                 toolSlot2 = null;
             toolSelect = toolSlot1; 
-            FillSlot(); 
+            FillSlot(toolName1, toolName2); 
         }
 
-        void FillSlot()
+        void FillSlot(ToolNames toolName1, ToolNames toolName2)
         {                            
-           slot1Trans.GetComponent<ToolSlotView>().InitSlot(toolSlot1, this);
-           slot2Trans.GetComponent<ToolSlotView>().InitSlot(toolSlot2, this);
+           slot1Trans.GetComponent<ToolSlotView>().InitSlot(toolName1, toolSlot1, this);
+           slot2Trans.GetComponent<ToolSlotView>().InitSlot(toolName2, toolSlot2, this);
         }
   
         public void OnSlotSelected(Iitems item)

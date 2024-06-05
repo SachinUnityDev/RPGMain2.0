@@ -60,6 +60,7 @@ namespace Common
 
         void ApplyRoundFX()
         {
+            if(GameService.Instance.currGameModel.gameScene != GameScene.InCombat) return;
             if (CombatService.Instance.currCharOnTurn.charModel.charID != charID) return;
             AttribData statData = charController.GetAttrib(AttribName.earthRes);
 

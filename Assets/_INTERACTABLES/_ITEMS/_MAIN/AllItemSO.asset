@@ -127,6 +127,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 893c7e3350243854b99186b436abb967, type: 2}
   - {fileID: 11400000, guid: 0e1d09d2806b9eb4cbf52fbd8fe00bab, type: 2}
   - {fileID: 11400000, guid: 4bcbfe31e65129e4c8b8d12a632175e9, type: 2}
+  - {fileID: 11400000, guid: 00c43ed984181a442a60e41d49c5fb55, type: 2}
   allFoodSO:
   - {fileID: 11400000, guid: e4f92a8216cc532478d5493a92de25b4, type: 2}
   - {fileID: 11400000, guid: 372e99fe661bf524897eaf334af7716b, type: 2}

@@ -19,7 +19,10 @@ namespace Intro
 
         [Header(" To be filled")]
         [SerializeField] string unLockedTxt;
-        [SerializeField] int quickStartOpt; 
+        [SerializeField] int quickStartOpt;
+        [SerializeField] ClassType classType; 
+
+
         Image img; 
         public void Init( SpriteOpts spriteOpts, QuickStartPg1View pg1View, QuickStartView quickStartView)
         {
@@ -46,8 +49,7 @@ namespace Intro
                 if(quickStartOpt == 1)
                 {
                     quickStartView.ShowPg2(); 
-                    //CharController charController = CharService.Instance.GetAbbasController(CharNames.Abbas);
-                    //charController.charModel.classType = ClassType.Skirmisher;
+                    GameService.Instance.currGameModel.abbasClassType = classType;   
                 }
             }
             else

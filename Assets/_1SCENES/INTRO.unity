@@ -66586,6 +66586,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unLockedTxt: Proacher
+  jobName: 2
 --- !u!1 &2102687874334535000
 GameObject:
   m_ObjectHideFlags: 0
@@ -66679,6 +66680,7 @@ MonoBehaviour:
   titleTxt: {fileID: 0}
   unLockedTxt: 'Hunter archetype. Ranged and trap skills. Decent dodge, low armor. '
   quickStartOpt: 1
+  classType: 7
 --- !u!1 &2102687874405405904
 GameObject:
   m_ObjectHideFlags: 0
@@ -66847,6 +66849,7 @@ MonoBehaviour:
   titleTxt: {fileID: 0}
   unLockedTxt: Abbas Warden
   quickStartOpt: 1
+  classType: 28
 --- !u!1 &2102687874632917288
 GameObject:
   m_ObjectHideFlags: 0
@@ -67410,6 +67413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unLockedTxt: 'Woodcutting mini game. Gain Job Exp and firewood as a bonus. '
+  jobName: 1
 --- !u!1 &2102687875273562537
 GameObject:
   m_ObjectHideFlags: 0
@@ -67639,6 +67643,7 @@ MonoBehaviour:
   titleTxt: {fileID: 0}
   unLockedTxt: Abbas Herbalist
   quickStartOpt: 1
+  classType: 18
 --- !u!222 &2212223106389915296
 CanvasRenderer:
   m_ObjectHideFlags: 0

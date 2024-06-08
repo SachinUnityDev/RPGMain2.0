@@ -86,7 +86,7 @@ namespace Interactables
         }
        void AbbasStatusSet()  // try to connec t to on lock 
         {
-            charSelectController = CharService.Instance.GetAbbasController(CharNames.Abbas);
+            charSelectController = CharService.Instance.GetAllyController(CharNames.Abbas);
             ActiveInvData activeInvData = invMainModel.GetActiveInvData(charSelectController.charModel.charID);
             ItemData itemData = new ItemData(ItemType.Potions, (int)PotionNames.HealthPotion);
             Iitems item = ItemService.Instance.GetNewItem(itemData);
@@ -100,7 +100,7 @@ namespace Interactables
         {
             if (!isInvPanelOpen) return; 
           //  charSelect = charModel.charName;
-            charSelectController = CharService.Instance.GetAbbasController(charModel.charName);
+            charSelectController = CharService.Instance.GetAllyController(charModel.charName);
             OnCharSelectInvPanel?.Invoke(charModel);
         }
         public void On_ToggleInvXLView(bool isOpen)
@@ -111,7 +111,7 @@ namespace Interactables
             if (isOpen)
             {
                  
-                CharController charController = CharService.Instance.GetAbbasController(CharNames.Abbas);
+                CharController charController = CharService.Instance.GetAllyController(CharNames.Abbas);
                 On_CharSelectInv(charController.charModel); // Set Abbas stats as default 
             }
             else

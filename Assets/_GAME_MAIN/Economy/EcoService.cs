@@ -6,6 +6,8 @@ using System.Linq;
 using System;
 using Town;
 using Quest;
+using Intro;
+using System.IO;
 
 namespace Common
 {
@@ -39,9 +41,23 @@ namespace Common
         public void InitEcoServices()
         {
             ecoController = transform.GetComponent<EcoController>();
-            econoModel = new EconoModel(ecoSO);
-            ecoController.InitEcoController(econoModel);
-            isNewGInitDone = true;
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);            
+            if (SaveService.Instance.DirectoryExists(path))
+            {
+                if (IsDirectoryEmpty(path))
+                {
+                    econoModel = new EconoModel(ecoSO);
+                    ecoController.InitEcoController(econoModel);
+                }
+                else
+                {
+                    LoadState();
+                }
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing"+ path);
+            }
         }
 
         public void On_PocketSelected(PocketType pocketType)
@@ -145,21 +161,54 @@ namespace Common
 #region SAVE_LOAD SERVICES
         public void LoadState()
         {
-            Debug.Log("ECO SERVICES SAVE .. restored"); 
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+
+            if (SaveService.Instance.DirectoryExists(path))
+            {
+                string[] fileNames = Directory.GetFiles(path);                
+                foreach (string fileName in fileNames)
+                {                    
+                    if(fileName.Length > 0)
+                    {
+                        if (fileName.Contains(".meta")) continue;
+                        string contents = File.ReadAllText(fileName);
+                        econoModel =  JsonUtility.FromJson<EconoModel>(contents);
+                        ecoController.InitEcoController(econoModel);
+                        break; 
+                    }
+                }
+                
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing"+ path);
+            }
         }
 
         public void ClearState()
         {
-            Debug.Log("ECO SERVICES SAVE .. cleared");
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);           
+            DeleteAllFilesInDirectory(path);
         }
 
         public void SaveState()
         {
-            Debug.Log("ECO SERVICES SAVE .. saveState");
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);           
+            ClearState();           
+            string ecoModelJson = JsonUtility.ToJson(econoModel);                
+            string fileName = path + "EconoModel"+".txt";
+            File.WriteAllText(fileName, ecoModelJson);
         }
-
-        public void RestoreState(string basePath)
+        public void Update()
         {
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                SaveState();
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                LoadState();
+            }
         }
 
         #endregion

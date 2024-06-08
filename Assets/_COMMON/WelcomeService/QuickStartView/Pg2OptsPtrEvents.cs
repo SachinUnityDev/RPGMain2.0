@@ -1,6 +1,7 @@
 using Common;
 using System.Collections;
 using System.Collections.Generic;
+using Town;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI; 
@@ -15,7 +16,8 @@ namespace Intro
         SpriteOpts spriteOpts;
 
         [Header(" To be filled")]
-        [SerializeField] string unLockedTxt;      
+        [SerializeField] string unLockedTxt;
+        [SerializeField] JobNames jobName; 
         Image img;
         public void Init(SpriteOpts spriteOpts, QuickStartPg2View pg2View, QuickStartView quickStartView)
         {
@@ -39,6 +41,7 @@ namespace Intro
         {
             if (spriteOpts.isUnlocked)
             {
+                GameService.Instance.currGameModel.jobSelect = jobName;
                 IntroServices.Instance.LoadNext(); 
             }
             else

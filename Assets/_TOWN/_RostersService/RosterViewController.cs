@@ -77,7 +77,7 @@ namespace Common
                 PortraitDragNDrop port = btmCharTrans.GetChild(i).GetComponentInChildren<PortraitDragNDrop>(); 
                if (port != null)
                 {
-                    CharController charController = CharService.Instance.GetAbbasController(port.charDragged);
+                    CharController charController = CharService.Instance.GetAllyController(port.charDragged);
                     if (!FameService.Instance.fameController.IsFameBehaviorMatching(charController))
                     {
                         charController.charModel.availOfChar = AvailOfChar.UnAvailable_Fame;

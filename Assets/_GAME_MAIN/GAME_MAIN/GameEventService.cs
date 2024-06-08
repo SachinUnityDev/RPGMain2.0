@@ -84,7 +84,7 @@ namespace Common
             {
                 if (GameService.Instance.gameController.isQuickStart)
                 {
-                    CharService.Instance.GetAbbasController(CharNames.Abbas).charModel.classType
+                    CharService.Instance.GetAllyController(CharNames.Abbas).charModel.classType
                         = GameService.Instance.currGameModel.abbasClassType;
 
                     // Set job NAME SELECT HERE 

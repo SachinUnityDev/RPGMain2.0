@@ -174,7 +174,7 @@ public class CharSlotPlankView : MonoBehaviour, IPointerEnterHandler, IPointerEx
         else
         {
             str = "";
-            CharController charController = CharService.Instance.GetAbbasController(CharNames.Abbas); 
+            CharController charController = CharService.Instance.GetAllyController(CharNames.Abbas); 
             int charID = charController.charModel.charID;
             ActiveInvData activeInvData = InvService.Instance.invMainModel.allActiveInvData.Find(t => t.CharID == charID);
 

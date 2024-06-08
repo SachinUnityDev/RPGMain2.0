@@ -57,7 +57,7 @@ namespace Town
             if (tavernModel.restChance.GetChance())
             {
                 CharController charController =
-                        CharService.Instance.GetAbbasController(CharNames.Abbas);
+                        CharService.Instance.GetAllyController(CharNames.Abbas);
                 TempTraitController tempTraitController = charController.tempTraitController;
                 tempTraitController
                         .ApplyTempTrait(CauseType.BuildingInterct, (int)BuildInteractType.Purchase

@@ -37,7 +37,7 @@ namespace Common
         void SetAbbasClass()
         {
             CharController charController = CharService.Instance
-                                            .GetAbbasController(CharNames.Abbas);        
+                                            .GetAllyController(CharNames.Abbas);        
             CharModel charModel = charController.charModel;
             charModel.classType = ClassType.Skirmisher;
         }

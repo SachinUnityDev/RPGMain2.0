@@ -219,7 +219,7 @@ namespace Common
                 RectTransform txtRect = desc.GetChild(0).GetComponent<RectTransform>();// text ht 
                 float txtHt = txtRect.sizeDelta.y;
                 //Debug.Log("TXT HT" + txtHt);
-                incrVal += incr * ((int)(txtHt)+15);// correction factor
+                incrVal += incr * ((int)(txtHt)+25);// correction factor
                 //descTransRect.sizeDelta
                 //        = new Vector2(descTransRect.sizeDelta.x, descTransSize + incrVal);
                 descParentRect.sizeDelta

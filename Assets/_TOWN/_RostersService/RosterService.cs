@@ -54,20 +54,38 @@ namespace Common
             
         }
         public void Init()
-        {           
+        {
             //save Service implementation pending here
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            if (SaveService.Instance.DirectoryExists(path))
+            {
+                if (IsDirectoryEmpty(path))
+                {
+                    
+                    rosterModel = new RosterModel();    
+                      
+                }
+                else
+                {
+                    LoadState();
+                }
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing");
+            }
+
         }
         
-        public bool IsCharAvailable()
-        {
-            return true; 
-        }
 
         public bool AddChar2Party(CharNames charNames)
         {
             if (CharService.Instance.isPartyLocked) return false;
-            CharController charController = CharService.Instance.GetAbbasController(charNames);
+            CharController charController = CharService.Instance.GetAllyController(charNames);
             if (!FameService.Instance.fameController.IsFameBehaviorMatching(charController)) return false; 
+            if(rosterModel.charInParty.Contains(charNames)) return false;
+
+            rosterModel.charInParty.Add(charNames);
             CharService.Instance.On_CharAddToParty(charController); 
             // Apply party restrictions here 
             return true; 

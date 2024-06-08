@@ -50,7 +50,7 @@ namespace Interactables
         {
             onDrinkBuffStr = "Keep Drinking..."; 
             float chance = 36f;
-            charController = CharService.Instance.GetAbbasController(CharNames.Abbas);
+            charController = CharService.Instance.GetAllyController(CharNames.Abbas);
             if (chance.GetChance())
             {
                 charController.buffController.ApplyBuff(CauseType.Items, (int)itemName, charController.charModel.charID

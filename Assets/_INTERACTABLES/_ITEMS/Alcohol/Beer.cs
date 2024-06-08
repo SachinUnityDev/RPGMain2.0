@@ -49,7 +49,7 @@ namespace Interactables
             // +1 morale for one day 
             onDrinkBuffStr = "Keep Drinking..."; 
             float chance = 30f;
-            charController = CharService.Instance.GetAbbasController(CharNames.Abbas);
+            charController = CharService.Instance.GetAllyController(CharNames.Abbas);
             if (chance.GetChance())
             {
                 charController.buffController.ApplyBuff(CauseType.Items, (int)itemName, charController.charModel.charID

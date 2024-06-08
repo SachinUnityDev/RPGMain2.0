@@ -90,11 +90,12 @@ namespace Common
                     {
                         SpawnCompNG(charName);
                     }
-                    SetAbbasClassOnQuickStartFrmGameService();
+                    
                 }else
                 {
                     LoadState();
                 }
+                SetAbbasClassOnQuickStartFrmGameService();
             }
             else
             {
@@ -194,7 +195,7 @@ namespace Common
             CharController charCtrl = charsInPlayControllers.Find(x => x.charModel.charID == _charID ); 
             return charCtrl; 
         }
-        public CharController GetAbbasController(CharNames charName)
+        public CharController GetAllyController(CharNames charName)
         {
             CharController charCtrl = charsInPlayControllers.Find(x => x.charModel.charName == charName);
             if (charCtrl != null)
@@ -530,7 +531,7 @@ namespace Common
             if (!GameService.Instance.gameController.isQuickStart) return; 
             ClassType classType =
                         GameService.Instance.currGameModel.abbasClassType; 
-            CharController charController = GetAbbasController(CharNames.Abbas);
+            CharController charController = GetAllyController(CharNames.Abbas);
                 
             CharModel charModel = charController.charModel;
             charModel.classType = classType;

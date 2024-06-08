@@ -56,7 +56,7 @@ namespace Interactables
             // +1 morale for one day 
             onDrinkBuffStr = "Keep Drinking..."; 
             float chance = 60f;
-            charController = CharService.Instance.GetAbbasController(CharNames.Abbas);
+            charController = CharService.Instance.GetAllyController(CharNames.Abbas);
             if (chance.GetChance())
             {
                 onDrinkBuffStr = "+1 Luck gained for one day"; 

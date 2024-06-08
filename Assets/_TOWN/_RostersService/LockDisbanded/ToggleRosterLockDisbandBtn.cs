@@ -76,7 +76,7 @@ namespace Common
 
         bool AbbasAvailChk()
         {
-            CharController charController = CharService.Instance.GetAbbasController(CharNames.Abbas);
+            CharController charController = CharService.Instance.GetAllyController(CharNames.Abbas);
             AvailOfChar availOfChar = charController.charModel.availOfChar; 
             if(availOfChar == AvailOfChar.UnAvailable_InParty)
             {

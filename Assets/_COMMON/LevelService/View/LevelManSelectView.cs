@@ -18,7 +18,6 @@ namespace Common
         [SerializeField] Button opt1Btn;
         [SerializeField] Button opt2Btn;
 
-
         [SerializeField] BtmCharViewController btmCharViewController;
 
         [Header("Global Variables")]

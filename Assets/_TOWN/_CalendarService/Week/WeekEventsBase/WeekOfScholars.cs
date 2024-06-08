@@ -37,7 +37,7 @@ namespace Common
                     resultStr = $"{LoreBookNames.LandsOfShargad}"; 
                 break;
                 case 2:
-                    CharController charAbbas = CharService.Instance.GetAbbasController(CharNames.Abbas);
+                    CharController charAbbas = CharService.Instance.GetAllyController(CharNames.Abbas);
                     int exp = (int)UnityEngine.Random.Range(30f, 50f);
                     charAbbas.ExpPtsGain(exp);
                     resultStr = $"{exp} Exp";

@@ -548,7 +548,11 @@ namespace Common
             if (Input.GetKeyDown(KeyCode.F2))
             {
                 LoadState();
-            }   
+            }
+            if (Input.GetKeyDown(KeyCode.F6))
+            {
+                ClearState();
+            }
         }
 
     }

@@ -59,7 +59,7 @@ namespace Town
         }
         public void FillTrophyNPeltOnWall()
         {
-            TimeState timeState = CalendarService.Instance.currtimeState; 
+            TimeState timeState = CalendarService.Instance.calendarModel.currtimeState; 
             tavernModel = BuildingIntService.Instance.tavernController.tavernModel;
             trophyNPeltContainer = transform.GetComponentInChildren<PeltNTrophyOnWall>(true).transform;   
             Transform trophyTrans = trophyNPeltContainer.GetChild(0); 

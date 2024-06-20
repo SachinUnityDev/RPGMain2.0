@@ -50,7 +50,7 @@ namespace Town
             welcomeController = GetComponent<WelcomeController>();
             cornerBtns = GameObject.FindGameObjectWithTag("TownBtns");
             cornerBtns.SetActive(false);
-            welcomeStartDay = CalendarService.Instance.dayInYear; 
+            welcomeStartDay = CalendarService.Instance.calendarModel.dayInYear; 
             welcomeView.InitWelcomeView();           
         }
         public void InitWelcomeComplete()
@@ -58,7 +58,7 @@ namespace Town
            
             isWelcomeRun = false;
             welcomeController = GetComponent<WelcomeController>();
-            welcomeSeqEndDay = CalendarService.Instance.dayInYear;
+            welcomeSeqEndDay = CalendarService.Instance.calendarModel.dayInYear;
 
             // town btns unlocked
             cornerBtns = GameObject.FindGameObjectWithTag("TownBtns");

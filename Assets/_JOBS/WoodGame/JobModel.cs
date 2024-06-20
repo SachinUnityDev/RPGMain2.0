@@ -37,8 +37,8 @@ namespace Town
             currJobRank = woodGameSO.allWoodData[0].woodGameRank; 
             currentGameSeq = woodGameSO.allWoodData[0].gameSeq;
             currGameJobExp = woodGameSO.allWoodData[0].minJobExpAdded;
-            dayInYrPlayed = CalendarService.Instance.dayInYear;
-            monthPlayed = CalendarService.Instance.currentMonth; 
+            dayInYrPlayed = CalendarService.Instance.calendarModel.dayInYear;
+            monthPlayed = CalendarService.Instance.calendarModel.currentMonth; 
         }
         public void SaveModel(JobModel woodGameModel)
         {

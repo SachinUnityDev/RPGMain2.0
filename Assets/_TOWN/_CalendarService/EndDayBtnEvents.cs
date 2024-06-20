@@ -41,7 +41,7 @@ namespace Town
         void Start()
         { 
             calendarSO = CalendarService.Instance.calendarSO;
-            timeState = CalendarService.Instance.currtimeState;
+            timeState = CalendarService.Instance.calendarModel.currtimeState;
         }
         private void OnEnable()
         {

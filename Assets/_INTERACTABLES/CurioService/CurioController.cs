@@ -13,7 +13,7 @@ namespace Quest
 
         }
 
-        public void InitCurioController(AllCurioSO allCurioSO)
+        public void Init(AllCurioSO allCurioSO)
         {
             foreach (CurioSO curioSO in allCurioSO.allCurioSO)
             {
@@ -31,6 +31,21 @@ namespace Quest
                 allCurioBases.Add(curioBase);
             }
         }
+        public void InitModelOnLoad( List<CurioModel> allCurioModel)
+        {
+            allCurioModel = allCurioModel.DeepClone();
+            InitCurioBaseOnLoad(); 
+        }
+        void InitCurioBaseOnLoad()
+        {
+            foreach (CurioModel curioModel in allCurioModel)
+            {
+                CurioBase curioBase =
+                CurioService.Instance.curioFactory.GetNewCurio(curioModel.curioName);
+                allCurioBases.Add(curioBase);
+            }
+        }
+
 
 
         public CurioModel GetCurioModel(CurioNames curioName)

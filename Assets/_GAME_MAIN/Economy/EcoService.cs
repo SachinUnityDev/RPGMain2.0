@@ -32,7 +32,7 @@ namespace Common
         public bool isNewGInitDone = false;
 
         public ServicePath servicePath => ServicePath.EcoService; 
-        void Start()
+        void OnEnable()
         {
             ecoController = transform.GetComponent<EcoController>();    
         }
@@ -162,27 +162,16 @@ namespace Common
         public void LoadState()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-
-            if (SaveService.Instance.DirectoryExists(path))
+            path += "/EconoModel.txt";
+            if (File.Exists(path))
             {
-                string[] fileNames = Directory.GetFiles(path);                
-                foreach (string fileName in fileNames)
-                {                    
-                    if(fileName.Length > 0)
-                    {
-                        if (fileName.Contains(".meta")) continue;
-                        string contents = File.ReadAllText(fileName);
-                        econoModel =  JsonUtility.FromJson<EconoModel>(contents);
-                        ecoController.InitEcoController(econoModel);
-                        break; 
-                    }
-                }
-                
+                string contents = File.ReadAllText(path);
+                econoModel = JsonUtility.FromJson<EconoModel>(contents);
             }
             else
             {
-                Debug.LogError("Service Directory missing"+ path);
-            }
+                Debug.LogError("ECO MODEL NOT FOUND");
+            }            
         }
 
         public void ClearState()

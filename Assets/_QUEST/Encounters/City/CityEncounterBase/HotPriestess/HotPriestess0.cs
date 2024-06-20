@@ -33,7 +33,7 @@ namespace Quest
         }
         public override bool UnLockCondChk()
         {
-            int cal = CalendarService.Instance.dayInGame;
+            int cal = CalendarService.Instance.calendarModel.dayInGame;
             int proofOfPowerDoneDay = 1;  // to Be Coded 
             if (cal > proofOfPowerDoneDay + 1)
                 return true;

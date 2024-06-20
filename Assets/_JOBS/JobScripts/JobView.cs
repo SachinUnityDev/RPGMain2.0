@@ -69,10 +69,10 @@ namespace Town
         }
         void FillDate()
         {
-            MonthName monthName = CalendarService.Instance.currentMonth; 
+            MonthName monthName = CalendarService.Instance.calendarModel.currentMonth; 
             MonthSO monthSO = CalendarService.Instance.GetMonthSO(monthName);
             string monthNameShort = monthSO.GetMonthNameShort(monthName);
-            int todayInYr = CalendarService.Instance.dayInYear;
+            int todayInYr = CalendarService.Instance.calendarModel.dayInYear;
             int diff = (todayInYr) - jobModel.dayInYrPlayed; 
             if (diff == 1)
             {
@@ -85,7 +85,7 @@ namespace Town
             else
             {
                 int monthStartday = CalendarService.Instance.calendarUIController.
-                                         GetMonthStartDay(monthName, CalendarService.Instance.startOfGameDayName);
+                                         GetMonthStartDay(monthName, CalendarService.Instance.calendarModel.startOfGameDayName);
                 int dayInMonth = todayInYr- monthStartday;
                 lastAttendedDate.text = $"{dayInMonth} of" +monthNameShort;
             }

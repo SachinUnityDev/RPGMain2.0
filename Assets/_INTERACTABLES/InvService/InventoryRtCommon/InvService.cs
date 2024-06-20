@@ -6,12 +6,12 @@ using Common;
 using System;
 using Town;
 using UnityEngine.SceneManagement;
-using System.Threading;
-using System.Security.Policy;
+using System.IO;
+using Quest;
 
 namespace Interactables
 {
-    public class InvService : MonoSingletonGeneric<InvService>
+    public class InvService : MonoSingletonGeneric<InvService>, ISaveable
     {
         public int MAX_SIZE_COMM_INV = 0; 
 
@@ -55,37 +55,61 @@ namespace Interactables
 
         [Header("Global Var NTBR")]
         public GameObject invXLGO;// lore + beastiary+ skills+ invPanel..parent
-       // public GameObject invXLPrefab; 
+
+        
+        public ServicePath servicePath => ServicePath.InvService;
+
+        // public GameObject invXLPrefab; 
 
         private void Start()
         {
-            invMainModel = new InvMainModel();
-            isInvPanelOpen = false;         
-            invController = GetComponent<InvController>();
-            CharService.Instance.OnPartyLocked += On_PartyLocked;
+            Init(); 
         }
 
         private void OnEnable()
         {
-            SceneManager.sceneLoaded += OnSceneLoaded;
-            
+            SceneManager.sceneLoaded += OnSceneLoaded;            
         }
         private void OnDisable()
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
-
         }
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {  
              InitInvXLView();
-            AbbasStatusSet(); 
         }
+
+        public void Init()
+        {   
+            invController = GetComponent<InvController>();
+            CharService.Instance.OnPartyLocked -= On_PartyLocked;// prevent double subscription
+            CharService.Instance.OnPartyLocked += On_PartyLocked;
+           
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            if (SaveService.Instance.DirectoryExists(path))
+            {
+                if (IsDirectoryEmpty(path))
+                {
+                    invMainModel = new InvMainModel();
+                }
+                else
+                {
+                    LoadState();
+                }
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing");
+            }
+            AbbasStatusSet();
+        }
+
         public void On_DragResult(bool result, ItemsDragDrop itemsDragDrop)
         {
             OnDragResult?.Invoke(result, itemsDragDrop);               
         }
        void AbbasStatusSet()  // try to connec t to on lock 
-        {
+       {
             charSelectController = CharService.Instance.GetAllyController(CharNames.Abbas);
             ActiveInvData activeInvData = invMainModel.GetActiveInvData(charSelectController.charModel.charID);
             ItemData itemData = new ItemData(ItemType.Potions, (int)PotionNames.HealthPotion);
@@ -106,7 +130,6 @@ namespace Interactables
         public void On_ToggleInvXLView(bool isOpen)
         {
             isInvPanelOpen= isOpen;
-            OnToggleInvXLView?.Invoke(isOpen);
 
             if (isOpen)
             {
@@ -116,10 +139,9 @@ namespace Interactables
             }
             else
             {
-                UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(invXLGO, false);
-               // Destroy(invXLGO);
+                UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(invXLGO, false);               
             }
-            OnToggleInvXLView?.Invoke(!isOpen);
+            OnToggleInvXLView?.Invoke(isOpen);
         }
 
         public void ShowInvXLView(bool toOpen)
@@ -178,6 +200,49 @@ namespace Interactables
         {
             OnItemRemovedFrmComm?.Invoke(item);
             invRightViewController.ChkOverloadCount(); 
+        }
+
+        public void SaveState()
+        {
+                string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);            
+                ClearState();            
+                string invMainModelJSON = JsonUtility.ToJson(invMainModel);
+                Debug.Log("INV MAIN"+invMainModelJSON);
+                string fileName = path + "InvMainModel" + ".txt";
+                File.WriteAllText(fileName, invMainModelJSON);            
+        }
+
+        public void LoadState()
+        {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            path+= "/InvMainModel.txt"; 
+            if (File.Exists(path))
+            {
+                string contents = File.ReadAllText(path);
+                invMainModel = JsonUtility.FromJson<InvMainModel>(contents);
+
+            }
+            else
+            {
+                Debug.LogError("INV MAIN MODEL NOT FOUND"); 
+            }        
+        }
+
+        public void ClearState()
+        {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);            
+            DeleteAllFilesInDirectory(path);
+        }
+        public void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                SaveState();
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                LoadState();
+            }
         }
     }
 }

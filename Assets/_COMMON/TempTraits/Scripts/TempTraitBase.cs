@@ -46,7 +46,7 @@ namespace Common
         public virtual void TraitBaseApply()
         {
             CalendarService.Instance.OnStartOfCalDay += DayTick;
-            startDay = CalendarService.Instance.dayInGame;
+            startDay = CalendarService.Instance.calendarModel.dayInGame;
             allBuffIds.Clear();
             allLandBuffIds.Clear();
             allBuffDmgAltIds.Clear();
@@ -81,11 +81,11 @@ namespace Common
         public virtual void OnHealApplied()
         {
             CalendarService.Instance.OnStartOfCalDay += DayTickResting;
-            startDayForResting= CalendarService.Instance.dayInGame;
+            startDayForResting= CalendarService.Instance.calendarModel.dayInGame;
             restTime = tempTraitModel.sicknessData.restTimeInday;
             preRestAvailOfChar = charController.charModel.availOfChar; 
             charController.charModel.availOfChar = AvailOfChar.UnAvailable_Resting;
-            DayTickResting(CalendarService.Instance.dayInGame); 
+            DayTickResting(CalendarService.Instance.calendarModel.dayInGame); 
         }
 
         void DayTickResting(int day)

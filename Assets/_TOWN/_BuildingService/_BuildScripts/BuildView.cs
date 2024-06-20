@@ -50,7 +50,7 @@ namespace Town
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
             buildSO = BuildingIntService.Instance.allBuildSO.GetBuildSO(BuildingName);
 
-            timeState = CalendarService.Instance.currtimeState;
+            timeState = CalendarService.Instance.calendarModel.currtimeState;
             buildModel = BuildingIntService.Instance.GetBuildModel(BuildingName);
             InitBuildIntBtns( buildModel); 
             FillBuildBG();
@@ -102,7 +102,7 @@ namespace Town
         }
         public void FillBuildBG()
         {
-            if (CalendarService.Instance.currtimeState == TimeState.Night)
+            if (CalendarService.Instance.calendarModel.currtimeState == TimeState.Night)
             {                
                 BGSpriteContainer.GetComponent<Image>().sprite = nightBG;
             }

@@ -121,7 +121,7 @@ namespace Common
             StatModData statModData = charController.ChangeStat(causeType, causeName, causeByCharID
                                                          , statName, value, true);
 
-            if (CalendarService.Instance.currtimeState == TimeState.Night) // FOR NIGHT CORRECTION
+            if (CalendarService.Instance.calendarModel.currtimeState == TimeState.Night) // FOR NIGHT CORRECTION
             {
                 charController.ChangeStat(causeType, causeName, causeByCharID
                                                         , statName, -value, true);

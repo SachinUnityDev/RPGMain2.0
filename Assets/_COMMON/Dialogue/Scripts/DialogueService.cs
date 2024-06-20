@@ -5,6 +5,8 @@ using System.Linq;
 using System;
 using Quest;
 using Town;
+using Intro;
+using System.IO;
 
 namespace Common
 {
@@ -24,7 +26,7 @@ namespace Common
     }
 
 
-    public class DialogueService : MonoSingletonGeneric<DialogueService>
+    public class DialogueService : MonoSingletonGeneric<DialogueService>, ISaveable
     {
         public Action OnDialogueLsDsply; 
         public Action<DialogueNames> OnDialogueStart; 
@@ -32,7 +34,7 @@ namespace Common
 
         [Header(" Dialogue Model and Bases")]
         public List<IDialogue> allDiabases = new List<IDialogue>();
-        public List<DialogueModel> allDiaModel = new List<DialogueModel>();
+       // public List<DialogueModel> allDiaModel = new List<DialogueModel>();
         [SerializeField] int diaBaseCount = 0;
 
 
@@ -43,7 +45,8 @@ namespace Common
         public bool isDiaViewInitDone = false; 
 
         public AllDialogueSO allDialogueSO;
-       
+
+        [Header("Save")]
         public List<DialogueModel> allDiaLogueModels = new List<DialogueModel>();
 
         [Header("Dia View prefab TBR")]
@@ -68,6 +71,8 @@ namespace Common
         [Header("Game Init")]
         public bool isNewGInitDone = false;
 
+        public ServicePath servicePath => ServicePath.DialogueService;
+
         private void Start()
         {
             dialogueFactory = GetComponent<DialogueFactory>();
@@ -77,8 +82,25 @@ namespace Common
         {
             dialogueFactory= GetComponent<DialogueFactory>();   
             dialogueFactory.InitDialogues();
-            InitAllDiaModel();
-            InitAllDiabase(); 
+
+            // implement Here save and load
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);            
+            if (SaveService.Instance.DirectoryExists(path))
+            {
+                if (IsDirectoryEmpty(path))
+                {
+                    InitAllDiaModel();                    
+                }
+                else
+                {
+                    LoadState();
+                }
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing");
+            }
+            InitAllDiabase();
         }
         void InitAllDiaModel()
         {
@@ -88,7 +110,6 @@ namespace Common
                 DialogueModel diaModel = new DialogueModel(diaSO);
                 allDiaLogueModels.Add(diaModel);
             }
-            isNewGInitDone= true;   
         }
         void InitAllDiabase()
         {
@@ -285,16 +306,62 @@ namespace Common
             return null;
         }
 
-      
-#endregion
-        //private void Update()
-        //{
-        //    //if (Input.GetKeyDown(KeyCode.M))
-        //    //{
-        //    //    Canvas canvas = FindObjectOfType<Canvas>();
-        //    //    ShowDialogueLs(CharNames.None, NPCNames.Khalid, canvas.transform);
-        //    //}
-        //}
+        public void SaveState()
+        {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+
+            ClearState(); 
+            foreach (DialogueModel diaModels in allDiaLogueModels)
+            {
+                string diaModelsJSON = JsonUtility.ToJson(diaModels);
+                Debug.Log(diaModelsJSON);
+                string fileName = path + diaModels.dialogueName +".txt";
+                File.WriteAllText(fileName, diaModelsJSON);
+            }
+        }
+
+        public void LoadState()
+        {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            if (SaveService.Instance.DirectoryExists(path))
+            {
+                string[] fileNames = Directory.GetFiles(path);
+                allDiaLogueModels = new List<DialogueModel>();
+                foreach (string fileName in fileNames)
+                {
+                    // skip meta files
+                    if (fileName.Contains(".meta")) continue;
+
+                    string contents = File.ReadAllText(fileName);
+                    DialogueModel diaModel = JsonUtility.FromJson<DialogueModel>(contents);
+                    allDiaLogueModels.Add(diaModel);
+                }
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing");
+            }
+        }
+
+        public void ClearState()
+        {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            DeleteAllFilesInDirectory(path);
+        }
+
+
+        #endregion
+        public void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                SaveState();
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                LoadState();
+            }
+        }
 
     }
 }

@@ -35,7 +35,7 @@ namespace Quest
             {
                 Debug.Log("On continue pressed" + cityEModel.cityEName);
                 cityEModel.state = CityEState.Completed;
-                cityEModel.dayEventTaken = CalendarService.Instance.dayInGame;
+                cityEModel.dayEventTaken = CalendarService.Instance.calendarModel.dayInGame;
             }
             else
             {

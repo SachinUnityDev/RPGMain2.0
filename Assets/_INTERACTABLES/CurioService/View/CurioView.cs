@@ -33,7 +33,7 @@ namespace Quest
            this.curioModel = curioModel;         
            this.curioColEvents= curioColEvents;
 
-            curioBase = CurioService.Instance
+          curioBase = CurioService.Instance
                         .curioController.GetCurioBase(curioModel.curioName);           
             InitPage1();
             Load();

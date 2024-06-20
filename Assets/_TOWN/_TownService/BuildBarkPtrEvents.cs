@@ -20,7 +20,7 @@ namespace Town
         public void ShowBark(BuildingNames buildingName, BuildingState buildState)
         {
             BuildBarkSO buildBarkSO = BarkService.Instance.allBarkSO.buildBarkSO;
-            TimeState timeState = CalendarService.Instance.currtimeState;
+            TimeState timeState = CalendarService.Instance.calendarModel.currtimeState;
             lineData =
                 buildBarkSO.GetBarkLineData(buildingName, buildState, timeState);
             if (lineData != null)

@@ -131,7 +131,7 @@ namespace Town
                 if (!InvService.Instance.invMainModel.RemoveItemFrmCommInv(dryerSlotView.itemSelect))
                     InvService.Instance.invMainModel.RemoveItemFrmStashInv(dryerSlotView.itemSelect);
 
-                int day = CalendarService.Instance.dayInGame; 
+                int day = CalendarService.Instance.calendarModel.dayInGame; 
                 BuildingIntService.Instance.houseController.houseModel.AddToDryingList(day,dryerSlotView.itemSelect);
                 DryerItemSelect(index); // resets the slots 
             }

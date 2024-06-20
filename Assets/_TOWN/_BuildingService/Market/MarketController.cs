@@ -44,7 +44,7 @@ namespace Town
         public void UpdateBuildState(TimeState timeState)
         {
             if (marketModel.buildState == BuildingState.Locked) return;
-            DayName dayName = CalendarService.Instance.currDayName;
+            DayName dayName = CalendarService.Instance.calendarModel.currDayName;
             
 
             if (dayName == DayName.DayOfWater && dayName == DayName.DayOfDark)

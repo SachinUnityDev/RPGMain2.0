@@ -83,9 +83,9 @@ namespace Common
             if (CharService.Instance.isPartyLocked) return false;
             CharController charController = CharService.Instance.GetAllyController(charNames);
             if (!FameService.Instance.fameController.IsFameBehaviorMatching(charController)) return false; 
-            if(rosterModel.charInParty.Contains(charNames)) return false;
+           // if(rosterModel.charInParty.Contains(charNames)) return false;
 
-            rosterModel.charInParty.Add(charNames);
+            //rosterModel.charInParty.Add(charNames);
             CharService.Instance.On_CharAddToParty(charController); 
             // Apply party restrictions here 
             return true; 
@@ -119,6 +119,8 @@ namespace Common
 
         public void LoadState()
         {
+
+
         }
 
         public void ClearState()

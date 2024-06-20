@@ -31,8 +31,8 @@ namespace Town
         }
         public void OnEndDayPressed()
         {
-            timeState = CalendarService.Instance.currtimeState;
-            int day = CalendarService.Instance.dayInYear;
+            timeState = CalendarService.Instance.calendarModel.currtimeState;
+            int day = CalendarService.Instance.calendarModel.dayInYear;
             CalendarService.Instance.On_EndDayClick(BuildingNames.House);                
             FillHouseView();    
             
@@ -46,7 +46,7 @@ namespace Town
         void FillPanelBg()
         {
             CalendarSO calSO = CalendarService.Instance.calendarSO;
-            if (CalendarService.Instance.currtimeState == TimeState.Day)
+            if (CalendarService.Instance.calendarModel.currtimeState == TimeState.Day)
             {// BG
                 transform.GetChild(0).GetComponent<Image>().sprite = calSO.restPanelDay;
                 // hour Glass

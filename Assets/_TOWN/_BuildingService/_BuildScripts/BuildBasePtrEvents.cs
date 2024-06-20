@@ -44,7 +44,7 @@ namespace Common
         {
             this.townViewController = townViewController;
             buildSO = TownService.Instance.allbuildSO.GetBuildSO(buildingName);
-            timeState = CalendarService.Instance.currtimeState;
+            timeState = CalendarService.Instance.calendarModel.currtimeState;
             SetSpriteNormal();     
         }
 

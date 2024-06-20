@@ -50,7 +50,7 @@ namespace Common
             //InvService.Instance.OnCharSelectInvPanel += PopulateRightSkillPanel;
 
         }
-        private void OnEnable()
+        private void Start()
         {
             perkInfoPanelTrans = transform.GetChild(4);
 

@@ -43,7 +43,7 @@ namespace Town
 
         public void ApplyDayEvents(int dayInYr)
         {
-            DayName currDayName = CalendarService.Instance.currDayName;
+            DayName currDayName = CalendarService.Instance.calendarModel.currDayName;
             foreach (DayModel dayModel in allDayModels)
             {
                 DayEventsBase dayBase = GetDayBase(dayModel.dayName); 

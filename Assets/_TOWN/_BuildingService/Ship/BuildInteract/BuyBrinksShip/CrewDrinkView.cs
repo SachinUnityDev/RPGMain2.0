@@ -43,7 +43,7 @@ namespace Town
             shipModel = BuildingIntService.Instance.shipController.shipModel;
             currDsply.InitCurrencyToggle();
             Currency availAmt = EcoService.Instance.GetMoneyFrmCurrentPocket().DeepClone();
-            TimeState timeState = CalendarService.Instance.currtimeState;
+            TimeState timeState = CalendarService.Instance.calendarModel.currtimeState;
             if (timeState == TimeState.Day)
             {
                 displayTxt.text = "Crew members are sleeping right now...";               
@@ -65,7 +65,7 @@ namespace Town
         }
         public bool CanOfferDrink()
         {
-            if (CalendarService.Instance.currtimeState == TimeState.Night)
+            if (CalendarService.Instance.calendarModel.currtimeState == TimeState.Night)
             {
                 if (shipModel.canOfferDrink)
                     return true;

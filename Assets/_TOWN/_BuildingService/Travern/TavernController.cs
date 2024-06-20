@@ -67,8 +67,8 @@ namespace Town
 
         public void UpdateBuildState()
         {
-            DayName dayName = CalendarService.Instance.currDayName;
-            TimeState timeState = CalendarService.Instance.currtimeState;
+            DayName dayName = CalendarService.Instance.calendarModel.currDayName;
+            TimeState timeState = CalendarService.Instance.calendarModel.currtimeState;
             if (tavernModel.buildState == BuildingState.Locked) return; 
             if(dayName== DayName.DayOfAir && timeState== TimeState.Night)            
                 tavernModel.buildState = BuildingState.UnAvailable;            

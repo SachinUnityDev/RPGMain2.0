@@ -44,7 +44,7 @@ namespace Town
             tavernModel = BuildingIntService.Instance.tavernController.tavernModel;
             currDsply.InitCurrencyToggle();
             Currency availAmt = EcoService.Instance.GetMoneyFrmCurrentPocket().DeepClone();
-            TimeState timeState = CalendarService.Instance.currtimeState; 
+            TimeState timeState = CalendarService.Instance.calendarModel.currtimeState; 
             UpdateDsplyTxt(timeState);
             tickBtnPtrEvents.InitTickPtrEvents(this, availAmt, silver); 
             
@@ -73,7 +73,7 @@ namespace Town
    
         public bool CanOfferDrink()
         {
-            if(CalendarService.Instance.currtimeState == TimeState.Night)
+            if(CalendarService.Instance.calendarModel.currtimeState == TimeState.Night)
             {
                 if(tavernModel.canOfferDrink)
                     return true;

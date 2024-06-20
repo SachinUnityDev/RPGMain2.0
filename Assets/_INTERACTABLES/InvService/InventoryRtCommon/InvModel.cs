@@ -16,6 +16,7 @@ namespace Interactables
         {
             this.itemType = itemType;
             this.itemName = itemName;
+            genGewgawQ = GenGewgawQ.None;
         }
         public ItemData(ItemType itemType, int itemName, GenGewgawQ genGewgawQ)
         {

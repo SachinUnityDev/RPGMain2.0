@@ -37,7 +37,7 @@ namespace Quest
         }
         public override bool UnLockCondChk()
         {
-            int dayFromGameStart = CalendarService.Instance.dayInGame;
+            int dayFromGameStart = CalendarService.Instance.calendarModel.dayInGame;
             if (dayFromGameStart > 6)
                 return true;
             return false;

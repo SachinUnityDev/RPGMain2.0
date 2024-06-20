@@ -54,17 +54,17 @@ namespace Interactables
         {
             RaceType raceType = BestiaryService.Instance.currSelectRace; 
             //selectBestiary.Clear();           
-            if (BestiaryService.Instance.allModel4BestiaryInGame
+            if (BestiaryService.Instance.allRegBestiaryInGameModels
                     .Any(t => t.raceType == raceType))
             {
-                selectBestiary = BestiaryService.Instance.allModel4BestiaryInGame
+                selectBestiary = BestiaryService.Instance.allRegBestiaryInGameModels
                     .Where(t => t.raceType == raceType).ToList();
                 index = 0;
                
             }
             else if (raceType == RaceType.None)
             {
-                selectBestiary = BestiaryService.Instance.allModel4BestiaryInGame;
+                selectBestiary = BestiaryService.Instance.allRegBestiaryInGameModels;
                 index = -1;
                
             }

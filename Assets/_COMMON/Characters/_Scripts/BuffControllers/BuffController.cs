@@ -533,12 +533,12 @@ namespace Combat
 
             AttribModData attribModVal = new AttribModData();
 
-            if (CalendarService.Instance.currtimeState == TimeState.Day) // FOR DAY CORRECTION
+            if (CalendarService.Instance.calendarModel.currtimeState == TimeState.Day) // FOR DAY CORRECTION
             {
                 attribModVal = charController.ChangeAttrib(causeType, causeName, causeByCharID
                                                         , statName, value, true);
             }
-            if(CalendarService.Instance.currtimeState == TimeState.Night) // FOR NIGHT CORRECTION
+            if(CalendarService.Instance.calendarModel.currtimeState == TimeState.Night) // FOR NIGHT CORRECTION
             {
                 attribModVal = charController.ChangeAttrib(causeType, causeName, causeByCharID
                                                         , statName, -value, true);  

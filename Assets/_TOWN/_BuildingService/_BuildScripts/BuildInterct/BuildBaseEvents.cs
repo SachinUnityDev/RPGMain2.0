@@ -42,7 +42,7 @@ namespace Town
         {
             this.buildView = buildView;
             this.buildModel = buildModel;
-            timeState = CalendarService.Instance.currtimeState;
+            timeState = CalendarService.Instance.calendarModel.currtimeState;
             isBuildIntUpgraded = buildModel.IsBuildIntUpgraded(buildIntType);
             SetSpriteN();
         }

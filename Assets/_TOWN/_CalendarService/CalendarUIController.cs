@@ -77,7 +77,7 @@ namespace Common
 
         void OnShowWeekBtnPressed()
         {
-            UpdateWeekPanel(CalendarService.Instance.currentWeek);
+            UpdateWeekPanel(CalendarService.Instance.calendarModel.currentWeek);
             OnPanelEnter(weekPanel, PanelInScene.Week);                            
         }
         void OnShowMonthBtnPressed()
@@ -168,7 +168,7 @@ namespace Common
         {
             Debug.Log(_gameStartDay + "in num " + (int)_gameStartDay);
             Debug.Log("current Day in year" + _currentdayInYr);
-            DayName currentDay = CalendarService.Instance.currDayName; 
+            DayName currentDay = CalendarService.Instance.calendarModel.currDayName; 
                 //(DayName)GetDayInRange(_currentdayInYr +((int)_gameStartDay - 1));            
                                             
             Debug.Log("Current Day" + currentDay);
@@ -210,7 +210,7 @@ namespace Common
         }
         void FillDayPanelOnTimeStateChg(TimeState timeState)
         {
-            if (CalendarService.Instance.currtimeState == TimeState.Day)
+            if (CalendarService.Instance.calendarModel.currtimeState == TimeState.Day)
             {
                 dayPanel.transform.GetChild(2).GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text = "Tip of the Day";
                 dayPanel.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = dayTip;

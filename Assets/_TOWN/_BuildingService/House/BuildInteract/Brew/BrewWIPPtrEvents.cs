@@ -72,7 +72,7 @@ namespace Town
 
             daysRemaining.text = days_Remaining.ToString();
             netDaysTxt.text = net_Days.ToString() +" days";
-            startDay = CalendarService.Instance.dayInGame; 
+            startDay = CalendarService.Instance.calendarModel.dayInGame; 
             isFilled = true;
         }
 

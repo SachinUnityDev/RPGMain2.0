@@ -181,8 +181,8 @@ namespace Town
             
                
             jobModel = new JobModel(currWoodGameRank, currentGameSeq, netGameExp
-                                          , CalendarService.Instance.dayInYear
-                                          , CalendarService.Instance.currentMonth);
+                                          , CalendarService.Instance.calendarModel.dayInYear
+                                          , CalendarService.Instance.calendarModel.currentMonth);
             jobModel.SaveModel(jobModel); 
         }
     }

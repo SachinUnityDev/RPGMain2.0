@@ -18,7 +18,7 @@ namespace Common
         [SerializeField] Archetype archetype;
         [SerializeField] ArchetypeData archetypeData;
         [SerializeField] CharModel charModel; 
-        void OnEnable()
+        void Start()
         {
             img = GetComponent<Image>();
             InvService.Instance.OnCharSelectInvPanel += InitArcheType;
@@ -40,16 +40,12 @@ namespace Common
 
         void SetHL()
         {
-           
-
             img.sprite = archetypeData.spriteHL;
             text.text = charModel.archeType.ToString();
             text.gameObject.SetActive(true);
         }
         void SetNormal()
         {
-           
-
             img.sprite = archetypeData.spriteN;
             text.gameObject.SetActive(false);
         }

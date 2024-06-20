@@ -64,6 +64,8 @@ namespace Common
         }
         public float GetEventModifier(ItemType itemType)
         {
+            //if (econoModel.allWeekEventCostData == null)
+            //    return 1f;
             foreach (EventCostMultData multData in econoModel.allWeekEventCostData)
             {
                 if (multData.itemType == itemType)

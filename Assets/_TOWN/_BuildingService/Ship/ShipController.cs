@@ -39,7 +39,7 @@ namespace Town
         public void OnShipUnLock()
         {
             shipModel.buildState = BuildingState.Available;
-            shipModel.unLockedOnDay = CalendarService.Instance.dayInGame;
+            shipModel.unLockedOnDay = CalendarService.Instance.calendarModel.dayInGame;
             shipModel.lastAvailDay = shipModel.unLockedOnDay;
         }
 

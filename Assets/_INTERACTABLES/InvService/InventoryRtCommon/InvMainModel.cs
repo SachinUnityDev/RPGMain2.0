@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Common;
-using System.Linq; 
+using System.Linq;
+using Unity; 
 
 namespace Interactables
 {
@@ -20,12 +21,15 @@ namespace Interactables
     }
 
     [System.Serializable]
-    public class ActiveInvData
+    public class ActiveInvData: ISerializationCallbackReceiver
     {
         public int CharID;
         public Iitems[] potionActiveInv = new Iitems[3];
         public Iitems[] gewgawActiveInv = new Iitems[3];
 
+        [Header("Save")]
+        public ItemData[] potionActiveInvData = new ItemData[3];
+        public ItemData[] gewgawActiveInvData = new ItemData[3];
         public int potionCount; 
         public int gewgawCount;
         public ActiveInvData(int charID)
@@ -37,14 +41,50 @@ namespace Interactables
             gewgawActiveInv = new Iitems[3];
         }
 
-        
+        // Before saving convert all Iitems list to ItemData list
+        public void OnAfterDeserialize()
+        {
+             potionCount = 0;gewgawCount = 0;
+             potionActiveInv = new Iitems[3];
+             gewgawActiveInv = new Iitems[3];
+            foreach (ItemData item in potionActiveInvData)
+            {
+                if (item.itemType == ItemType.None) continue; 
+                potionActiveInv[potionCount] = ItemService.Instance.GetNewItem(item);
+                potionCount++;
+            }
+            foreach (ItemData item in gewgawActiveInvData)
+            {
+                if (item.itemType == ItemType.None) continue;
+                gewgawActiveInv[gewgawCount] = ItemService.Instance.GetNewItem(item);
+                gewgawCount++;
+            }
+        }
 
-
+        public void OnBeforeSerialize()
+        {
+            int i= -1;
+            foreach (Iitems item in potionActiveInv)
+            {
+                i++;
+                if (item == null) continue; 
+                ItemData itemData = new ItemData(item.itemType, item.itemName);                                  
+                potionActiveInvData[i] = itemData;                
+            }
+            i = -1; 
+            foreach (Iitems item in gewgawActiveInv)
+            {
+                i++;
+                if (item == null) continue;
+                gewgawActiveInvData[i] = new ItemData(item.itemType, item.itemName);
+                i++;
+            }
+        }
     }
 
-    [System.Serializable]
-    public class InvMainModel 
-    {
+    
+    public class InvMainModel: ISerializationCallbackReceiver
+    { 
         #region DECLARATIONS
 
 
@@ -57,9 +97,13 @@ namespace Interactables
         public int stashInvCount = 0;   
         public List<Iitems> excessInvItems = new List<Iitems>();
         // 4X6 Behaves like a Excess Inv inv ()       
-        public int excessInvCount = 0;  
-        public List<ActiveInvData> allActiveInvData = new List<ActiveInvData>();
+        public int excessInvCount = 0;
 
+        [Header("Savable data")]
+        public List<ActiveInvData> allActiveInvData = new List<ActiveInvData>();
+        public List<ItemData> commonInvItemData = new List<ItemData>();
+        public List<ItemData> stashInvItemsData = new List<ItemData>();
+        public List<ItemData> excessInvItemsData = new List<ItemData>();
 
         [Header("Inv max sizes")]
         public int size_Comm = 24;
@@ -443,6 +487,68 @@ namespace Interactables
             }
             // remove from char
           
+        }
+
+
+        // Before saving convert all Iitems list to ItemData list 
+        public void OnBeforeSerialize()
+        {
+            foreach (Iitems item in commonInvItems)
+            {
+                if(item.itemType != ItemType.GenGewgaws)
+                {
+                    commonInvItemData.Add(new ItemData(item.itemType, item.itemName));
+                }                
+                else
+                {
+                    GenGewgawBase gbase = item as GenGewgawBase;
+                    commonInvItemData.Add(new ItemData(item.itemType, item.itemName, gbase.genGewgawQ));
+                }
+            }
+            foreach (Iitems item in stashInvItems)
+            {
+                if(item.itemType != ItemType.GenGewgaws)
+                {
+                    stashInvItemsData.Add(new ItemData(item.itemType, item.itemName));
+                }
+                else
+                {
+                    GenGewgawBase gbase = item as GenGewgawBase;
+                    stashInvItemsData.Add(new ItemData(item.itemType, item.itemName, gbase.genGewgawQ));
+                }               
+            }
+            foreach (Iitems item in excessInvItems)
+            {
+                if(item.itemType != ItemType.GenGewgaws)
+                {
+                    excessInvItemsData.Add(new ItemData(item.itemType, item.itemName));
+                }
+                else
+                {
+                    GenGewgawBase gbase = item as GenGewgawBase;
+                    excessInvItemsData.Add(new ItemData(item.itemType, item.itemName, gbase.genGewgawQ));
+                }
+            }   
+        }
+
+        // After loading convert all ItemData list to Iitems list
+        public void OnAfterDeserialize()
+        {
+            foreach (ItemData itemData in commonInvItemData)
+            {
+                Iitems item = ItemService.Instance.GetNewItem(itemData);
+                commonInvItems.Add(item);
+            }
+            foreach (ItemData itemData in stashInvItemsData)
+            {
+                Iitems item = ItemService.Instance.GetNewItem(itemData);
+                stashInvItems.Add(item);
+            }
+            foreach (ItemData itemData in excessInvItemsData)
+            {
+                Iitems item = ItemService.Instance.GetNewItem(itemData);
+                excessInvItems.Add(item);
+            }
         }
 
         #endregion

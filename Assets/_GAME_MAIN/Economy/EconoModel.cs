@@ -35,27 +35,36 @@ namespace Common
     [System.Serializable]
     public class EconoModel
     {
-        public Currency moneyInStash = new Currency();
-        public Currency moneyInInv = new Currency(); 
+        public Currency moneyInStash;
+        public Currency moneyInInv; 
 
-        public Currency moneyGainedInQ= new Currency();
+        public Currency moneyGainedInQ;
 
 
-        public List<NPCMoneyData> allNPCMoneyData = new List<NPCMoneyData>(); 
-        public List<EventCostMultData> allWeekEventCostData = new List<EventCostMultData>(); 
+        public List<NPCMoneyData> allNPCMoneyData; 
+        public List<EventCostMultData> allWeekEventCostData; 
         public EconoModel(EcoSO ecoSO)
         {
+            moneyInStash = new Currency();
+            moneyInInv = new Currency();
+            moneyGainedInQ = new Currency();
+            allNPCMoneyData = new List<NPCMoneyData>();
+            allWeekEventCostData = new List<EventCostMultData>();
             // PLAYER MONEY 
             this.moneyInStash = ecoSO.moneyInStash.DeepClone();
             this.moneyInInv = ecoSO.moneyInInv.DeepClone();          
 
           //  this.allNPCMoneyData = ecoSO.allNPCMoneyData.DeepClone();
         }
-        
+        public EconoModel()
+        {
+            moneyInStash = new Currency();
+            moneyInInv = new Currency();
+            moneyGainedInQ = new Currency();
+            allNPCMoneyData = new List<NPCMoneyData>();
+            allWeekEventCostData = new List<EventCostMultData>();
+        }
     }
-
- 
-
 }
 
 

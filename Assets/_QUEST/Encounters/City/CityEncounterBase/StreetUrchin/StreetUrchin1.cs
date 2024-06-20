@@ -47,7 +47,7 @@ namespace Quest
 
         public override bool UnLockCondChk()
         {
-            int cal = CalendarService.Instance.dayInGame;
+            int cal = CalendarService.Instance.calendarModel.dayInGame;
             int urchin0Day = EncounterService.Instance.cityEController.GetPreModel(encounterName, seq).dayEventTaken;
             if (cal > urchin0Day + 4)
                 return true; 

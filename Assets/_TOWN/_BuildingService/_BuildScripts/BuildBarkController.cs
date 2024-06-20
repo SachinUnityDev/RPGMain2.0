@@ -20,7 +20,7 @@ namespace Common
         {
             // get build model and build state and get timeState 
 
-            TimeState timeState = CalendarService.Instance.currtimeState; 
+            TimeState timeState = CalendarService.Instance.calendarModel.currtimeState; 
            // BuildingModel buildModel = BuildingIntService.Instance.
 
             //CurioBarkData curioBarkData = BarkService.Instance.allBarkSO.GetCurioBarkData(curioName);

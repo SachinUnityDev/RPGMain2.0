@@ -242,7 +242,7 @@ namespace Common
             }
             int effectedCharID = charController.charModel.charID;
 
-            int startDay = CalendarService.Instance.dayInGame; 
+            int startDay = CalendarService.Instance.calendarModel.dayInGame; 
     
             TempTraitBase traitBase = TempTraitService.Instance
                                     .temptraitsFactory.GetNewTempTraitBase(tempTraitName);
@@ -353,7 +353,7 @@ namespace Common
             int effectedCharID = charController.charModel.charID;
             int currtime = 0;                
             if (timeFrame == TimeFrame.EndOfDay)
-                currtime = CalendarService.Instance.dayInGame;         
+                currtime = CalendarService.Instance.calendarModel.dayInGame;         
             traitID++;
             TempTraitModData causeData = new TempTraitModData(causeType,causeName, causeByCharID, effectedCharID, true); 
 
@@ -376,7 +376,7 @@ namespace Common
             int effectedCharID = charController.charModel.charID;
             int currtime = -1;           
             if (timeFrame == TimeFrame.EndOfDay)
-                currtime = CalendarService.Instance.dayInGame;
+                currtime = CalendarService.Instance.calendarModel.dayInGame;
 
             traitID++;
             TempTraitModData causeData = new TempTraitModData(causeType, causeName, causeByCharID, effectedCharID, true);

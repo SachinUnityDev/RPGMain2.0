@@ -28,7 +28,7 @@ namespace Common
         }
     }
 
-    public class CalendarService : MonoSingletonGeneric<CalendarService>
+    public class CalendarService : MonoSingletonGeneric<CalendarService>, ISaveable
     {
        // public event Action<DayName> OnCalendarDayStart;  // to be remove and incorported
         public event Action<int> OnStartOfCalDay;// broadcasts day in the Game 
@@ -38,23 +38,23 @@ namespace Common
         public event Action<TimeState> OnChangeTimeState;
         public event Action<CalDate> OnStartOfCalDate; // broadcast day in yr
 
-        [Header("CURRENT TIME STATE ")]
-        public TimeState currtimeState;
+        //[Header("CURRENT TIME STATE ")]
+        //public TimeState currtimeState;
 
-        public int dayInGame;
-        public int dayInYear; 
-        public int weekCounter;
-        public WeekCycles currWeekCycle;
+        //public int dayInGame;
+        //public int dayInYear; 
+        //public int weekCounter;
+        //public WeekCycles currWeekCycle;
 
-        // does not reset with week / Month
-        [Header("CURRENT DAY WEEK AND MONTH")]
-        public DayName startOfGameDayName = DayName.None; 
-        public DayName currDayName = DayName.None;
-        public WeekEventsName currentWeek = WeekEventsName.None;
-        public MonthName currentMonth = MonthName.None;
-        public MonthName scrollMonth = MonthName.None;
+        //// does not reset with week / Month
+        //[Header("CURRENT DAY WEEK AND MONTH")]
+        //public DayName startOfGameDayName = DayName.None; 
+        //public DayName currDayName = DayName.None;
+        //public WeekEventsName currentWeek = WeekEventsName.None;
+        //public MonthName currentMonth = MonthName.None;
+        //public MonthName scrollMonth = MonthName.None;
 
-
+        public CalendarModel calendarModel; 
         [SerializeField] List<MonthSO> allMonthSOs;
         public CalendarSO calendarSO; 
         public CalendarUIController calendarUIController;
@@ -70,7 +70,9 @@ namespace Common
         public DayEventsController dayEventsController; 
         public AllDaySO allDaySO;
         public bool isNewGInitDone = false;
-        
+
+        public ServicePath servicePath => ServicePath.CalendarService;
+
         void OnEnable()
         {
             calendarFactory = gameObject.GetComponent<CalendarFactory>();
@@ -90,31 +92,33 @@ namespace Common
             {
 
                 calendarUIController.Init();
-                calendarUIController.UpdateMonthPanel(currentMonth, startOfGameDayName, dayInYear);
-                calendarUIController.UpdateWeekPanel(currentWeek);
+                calendarUIController.UpdateMonthPanel(calendarModel.currentMonth, calendarModel.startOfGameDayName, calendarModel.dayInYear);
+                calendarUIController.UpdateWeekPanel(calendarModel.currentWeek);
             }
         }
 
         public void Init()
         {
+            calendarModel = new CalendarModel();
             // define what date and time the game will start by default 
             weekEventsController = GetComponent<WeekEventsController>();
             weekEventsController.InitWeekController(allWeekSO);
             calendarUIController.Init();
 
             SelectWeekCycle();
-            currtimeState = TimeState.Day;
-            startOfGameDayName = DayName.DayOfLight;// saturday
-            currentWeek = currWeekCycle.allWeekNames[0];
-            dayInGame = 0;
-            dayInYear = 24;
-            currentMonth = MonthName.FeatherOfThePeafowl; 
-            scrollMonth = currentMonth;
-            currtimeState = TimeState.Day;
+            // Calendar Model Init
+            calendarModel.currtimeState = TimeState.Day;
+            calendarModel.startOfGameDayName = DayName.DayOfLight;// saturday
+            calendarModel.currentWeek = calendarModel.currWeekCycle.allWeekNames[0];
+            calendarModel.dayInGame = 0;
+            calendarModel.dayInYear = 24;
+            calendarModel.currentMonth = MonthName.FeatherOfThePeafowl;
+            calendarModel.scrollMonth = calendarModel.currentMonth;
+            calendarModel.currtimeState = TimeState.Day;
             dayEventsController = GetComponent<DayEventsController>();
             dayEventsController.InitDayEvent(allDaySO);
-            calendarUIController.UpdateMonthPanel(currentMonth, startOfGameDayName, dayInYear);
-            calendarUIController.UpdateWeekPanel(currentWeek);
+            calendarUIController.UpdateMonthPanel(calendarModel.currentMonth, calendarModel.startOfGameDayName, calendarModel.dayInYear);
+            calendarUIController.UpdateWeekPanel(calendarModel.currentWeek);
 
             isNewGInitDone = true;
             
@@ -123,21 +127,21 @@ namespace Common
         void SelectWeekCycle()
         {
             int netWeekCyles = allWeekSO.AllCycles.Count;
-            int ran = UnityEngine.Random.Range(0, netWeekCyles); 
-            currWeekCycle = allWeekSO.AllCycles[ran];
+            int ran = UnityEngine.Random.Range(0, netWeekCyles);
+            calendarModel.currWeekCycle = allWeekSO.AllCycles[ran];
         }
 
         public WeekEventsName GetNextWeek(WeekEventsName weekEventsName)
         {
-            int index  = currWeekCycle.allWeekNames.FindIndex(t=>t ==weekEventsName);
+            int index  = calendarModel.currWeekCycle.allWeekNames.FindIndex(t=>t ==weekEventsName);
             if (index == -1)
             {
                 Debug.Log("week Name NOT FOUND"); 
                 return 0; 
             }
             int next = index + 1;
-            next = (next >= currWeekCycle.allWeekNames.Count) ? 0 : next;  
-            return currWeekCycle.allWeekNames[next];
+            next = (next >= calendarModel.currWeekCycle.allWeekNames.Count) ? 0 : next;  
+            return calendarModel.currWeekCycle.allWeekNames[next];
 
         }
         public MonthSO GetMonthSO(MonthName _monthName)
@@ -148,21 +152,21 @@ namespace Common
 
         public void DisplayTimeChgPanel()          // no change in 
         {
-            calendarUIController.UpdateDayPanel(dayInYear, startOfGameDayName);
+            calendarUIController.UpdateDayPanel(calendarModel.dayInYear, calendarModel.startOfGameDayName);
             calendarUIController.OnPanelEnter(calendarUIController.dayPanel, PanelInScene.Day);
         }
 
         public void UpdateDayWeekNMonth()
         {
-            dayInGame++; dayInYear++;
-            currDayName = GetCurrDayName();             
+            calendarModel.dayInGame++; calendarModel.dayInYear++;
+            calendarModel.currDayName = GetCurrDayName();             
             UpdateWeek();
             UpdateMonth();
         }
         
         void UpdateDayView()
         {
-            calendarUIController.UpdateDayPanel(dayInYear, startOfGameDayName);
+            calendarUIController.UpdateDayPanel(calendarModel.dayInYear, calendarModel.startOfGameDayName);
         }
 
         public int GetDayInRange(int day)
@@ -176,63 +180,63 @@ namespace Common
         }
         DayName GetCurrDayName()
         {  
-            DayName currentDay = (DayName)GetDayInRange(dayInYear + ((int)startOfGameDayName - 1));
+            DayName currentDay = (DayName)GetDayInRange(calendarModel.dayInYear + ((int)calendarModel.startOfGameDayName - 1));
             return currentDay;
         }
         public void ScrollMonthClick(int incr)
         {
-            scrollMonth = scrollMonth + incr;
-            scrollMonth = (int)scrollMonth < 1 ? (MonthName)1 : scrollMonth;
-            scrollMonth = (int)scrollMonth > 12 ? (MonthName)12 : scrollMonth;
+            calendarModel.scrollMonth = calendarModel.scrollMonth + incr;
+            calendarModel.scrollMonth = (int)calendarModel.scrollMonth < 1 ? (MonthName)1 : calendarModel.scrollMonth;
+            calendarModel.scrollMonth = (int)calendarModel.scrollMonth > 12 ? (MonthName)12 : calendarModel.scrollMonth;
 
-            Debug.Log("Scroll Month " + (int)scrollMonth);
-            if (((int)scrollMonth > 0) && ((int)scrollMonth <= 12))
-                calendarUIController.UpdateMonthPanel(scrollMonth, startOfGameDayName, dayInYear);
+            Debug.Log("Scroll Month " + (int)calendarModel.scrollMonth);
+            if (((int)calendarModel.scrollMonth > 0) && ((int)calendarModel.scrollMonth <= 12))
+                calendarUIController.UpdateMonthPanel(calendarModel.scrollMonth, calendarModel.startOfGameDayName, calendarModel.dayInYear);
         }
 
         public void UpdateWeek()
         {
-            if ((int)currDayName % 7 == 1)
+            if ((int)calendarModel.currDayName % 7 == 1)
             {
-                currentWeek = GetNextWeek(currentWeek); 
-                weekCounter++;
+                calendarModel.currentWeek = GetNextWeek(calendarModel.currentWeek);
+                calendarModel.weekCounter++;
 
                 var noOfWeeks = Enum.GetNames(typeof(WeekEventsName)).Length;
-                if ((int)currentWeek >= noOfWeeks) currentWeek = (WeekEventsName)1;
+                if ((int)calendarModel.currentWeek >= noOfWeeks) calendarModel.currentWeek = (WeekEventsName)1;
 
-                calendarUIController.UpdateWeekPanel(currentWeek);
-                currDayName = (DayName)1;
-                On_StartOfTheWeek((WeekEventsName)currentWeek); 
+                calendarUIController.UpdateWeekPanel(calendarModel.currentWeek);
+                calendarModel.currDayName = (DayName)1;
+                On_StartOfTheWeek((WeekEventsName)calendarModel.currentWeek); 
             }
 
         }
         public void UpdateMonth()
         {
-            if ((int)dayInYear % 30 == 1 && dayInGame != 0)
+            if ((int)calendarModel.dayInYear % 30 == 1 && calendarModel.dayInGame != 0)
             {
-                currentMonth++;
+                calendarModel.currentMonth++;
                 var noOfMonths = Enum.GetNames(typeof(MonthName)).Length;
-                if ((int)currentMonth >= noOfMonths) currentMonth = (MonthName)1;
+                if ((int)calendarModel.currentMonth >= noOfMonths) calendarModel.currentMonth = (MonthName)1;
 
-                calendarUIController.UpdateMonthPanel(currentMonth, startOfGameDayName, dayInYear);
+                calendarUIController.UpdateMonthPanel(calendarModel.currentMonth, calendarModel.startOfGameDayName, calendarModel.dayInYear);
             }
-            Debug.Log("Current Month" + currentMonth);
-            calendarUIController.UpdateMonthPanel(currentMonth, startOfGameDayName, dayInYear);
-            scrollMonth = currentMonth; // TIE IN POINT
+            Debug.Log("Current Month" + calendarModel.currentMonth);
+            calendarUIController.UpdateMonthPanel(calendarModel.currentMonth, calendarModel.startOfGameDayName, calendarModel.dayInYear);
+            calendarModel.scrollMonth = calendarModel.currentMonth; // TIE IN POINT
                                          
         }
         public void On_EndDayClick(BuildingNames FrmbuildName)
         {
-            if (currtimeState == TimeState.Night)
+            if (calendarModel.currtimeState == TimeState.Night)
             {
                 // start of the day
-                currtimeState = TimeState.Day;               
-                On_StartOfDay(dayInGame);
+                calendarModel.currtimeState = TimeState.Day;               
+                On_StartOfDay(calendarModel.dayInGame);
             }
-            else if (currtimeState == TimeState.Day)
+            else if (calendarModel.currtimeState == TimeState.Day)
             {
-                currtimeState = TimeState.Night;
-                On_StartOfNight(dayInGame);
+                calendarModel.currtimeState = TimeState.Night;
+                On_StartOfNight(calendarModel.dayInGame);
             }
             //if(GameService.Instance.gameModel.gameState == GameState.InTown)
             //{
@@ -256,11 +260,11 @@ namespace Common
         {
             Debug.Log("END Day");  // day in Year .... 
             UpdateDayWeekNMonth(); // days updated here 
-            dayEventsController.ApplyDayEvents(dayInYear);
+            dayEventsController.ApplyDayEvents(calendarModel.dayInYear);
            // Debug.Log("time state" + OnChangeTimeState.GetInvocationList().Length); 
             OnChangeTimeState?.Invoke(TimeState.Day);
-            OnStartOfCalDay?.Invoke(dayInGame);  // day in Game 
-            OnStartOfCalDate?.Invoke(new CalDate((MonthName)currentMonth, dayInYear));
+            OnStartOfCalDay?.Invoke(calendarModel.dayInGame);  // day in Game 
+            OnStartOfCalDate?.Invoke(new CalDate((MonthName)calendarModel.currentMonth, calendarModel.dayInYear));
 
             UpdateDayView(); 
         }
@@ -271,7 +275,7 @@ namespace Common
         }
         public void On_StartOfTheWeek(WeekEventsName weekName)
         {
-            OnStartOfTheWeek?.Invoke(weekName, weekCounter);
+            OnStartOfTheWeek?.Invoke(weekName, calendarModel.weekCounter);
         }
 
         public void On_StartOfTheMonth(MonthName monthName)
@@ -283,9 +287,25 @@ namespace Common
         {
             for (int i = 0; i < day; i++)
             {
-                On_StartOfDay(dayInGame);
-                On_StartOfNight(dayInGame);
+                On_StartOfDay(calendarModel.dayInGame);
+                On_StartOfNight(calendarModel.dayInGame);
             }
+        }
+
+        public void SaveState()
+        {
+
+
+        }
+
+        public void LoadState()
+        {
+
+        }
+
+        public void ClearState()
+        {
+
         }
 
         #endregion

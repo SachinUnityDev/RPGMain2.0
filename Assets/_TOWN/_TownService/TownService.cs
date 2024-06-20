@@ -41,7 +41,7 @@ namespace Town
             {
                 townViewController=  FindObjectOfType<TownViewController>(true);
 
-                TimeState timeState = CalendarService.Instance.currtimeState;
+                TimeState timeState = CalendarService.Instance.calendarModel.currtimeState;
                 townViewController.TownViewInit(timeState);
             }
         }

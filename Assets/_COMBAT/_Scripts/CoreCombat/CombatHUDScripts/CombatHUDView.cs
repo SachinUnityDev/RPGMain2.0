@@ -91,9 +91,9 @@ namespace Combat
         public void SetCombatBG(LandscapeNames landscape)
         {
             LandscapeSO landSO = LandscapeService.Instance.allLandSO.GetLandSO(landscape);
-            if (CalendarService.Instance.currtimeState == TimeState.Day)
+            if (CalendarService.Instance.calendarModel.currtimeState == TimeState.Day)
                 combatBG.sprite = landSO.spriteBG_C_day;
-            else if (CalendarService.Instance.currtimeState == TimeState.Night)
+            else if (CalendarService.Instance.calendarModel.currtimeState == TimeState.Night)
                 combatBG.sprite = landSO.spriteBG_C_night;
         }
         void DsplySkillName(SkillEventData skillEventData)

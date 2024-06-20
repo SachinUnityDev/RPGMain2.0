@@ -27,7 +27,7 @@ namespace Town
         private void Start()
         {
             CalendarService.Instance.OnChangeTimeState += AllowTip;
-            TimeState timeState = CalendarService.Instance.currtimeState; 
+            TimeState timeState = CalendarService.Instance.calendarModel.currtimeState; 
             AllowTip(timeState);
             allBuildSO = BuildingIntService.Instance.allBuildSO;
             tipBtnImg = GetComponent<Image>();

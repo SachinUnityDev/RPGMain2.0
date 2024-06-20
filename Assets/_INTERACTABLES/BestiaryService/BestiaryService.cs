@@ -6,14 +6,12 @@ using Town;
 
 namespace Common
 {
-    public class BestiaryService : MonoSingletonGeneric<BestiaryService>
+    public class BestiaryService : MonoSingletonGeneric<BestiaryService>, ISaveable 
     {
         [SerializeField] const int start_INT_FOR_BESTIARY_CHARID = 100; 
         
         [Header("Character Pos")]
         public Vector3 spawnPos = new Vector3(0, 0, 0);
-        
-
 
         [Header("BestiarySO")]
         public List<CharacterSO> allBestiarySO = new List<CharacterSO>();
@@ -25,18 +23,18 @@ namespace Common
         public RaceType currSelectRace;
 
         [Header("All Bestiary")]
-        public List<CharModel> allModel4BestiaryInGame = new List<CharModel>(); // on game INIT 
-        public List<CharController> allBestiaryInGame = new List<CharController>(); 
+        public List<CharModel> allRegBestiaryInGameModels = new List<CharModel>(); // on game INIT 
+       // public List<CharController> allBestiaryInGame = new List<CharController>(); 
 
         [Header("UNLOCKED Bestiary")]
-        public List<CharController> allRegBestiaryCtrl = new List<CharController>();
+        public List<CharController> allCurrBestiaryCtrl = new List<CharController>();
        // public List<CharModel> allRegBestiaryModels = new List<CharModel>(); // Unlocks here when u meet them 
 
         // UNLOCKS => REGISTER after u meet a enemy in combat they register in scroll list
         [Header("Game Init")]
         public bool isNewGInitDone = false;
 
-      
+        public ServicePath servicePath => ServicePath.BestiaryService;
 
         void OnEnable()
         {
@@ -55,14 +53,33 @@ namespace Common
         }
         public void Init()
         {
-            foreach (CharacterSO charSO in allBestiarySO)
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            if (SaveService.Instance.DirectoryExists(path))
             {
-               CharModel charModel = new CharModel(charSO);
-                allModel4BestiaryInGame.Add(charModel);
-                // init all char controllers here
+                if (IsDirectoryEmpty(path))
+                {
+                    allRegBestiaryInGameModels.Clear();
+                    allCurrBestiaryCtrl.Clear();
+                    //foreach (CharacterSO charSO in allBestiarySO)
+                    //{
+                    //    CharModel charModel = new CharModel(charSO);
+                    //    allRegBestiaryInGameModels.Add(charModel);
+                    //    // init all char controllers here
+                    //}
+                }
+                else
+                {
+                    LoadState();// save all the files in the invetory
+                }
             }
+            else
+            {
+                Debug.LogError("Service Directory missing");
+            }
+
+        
            // CreateAllBestiaryCtrls();
-            isNewGInitDone = true;
+         //   isNewGInitDone = true;
         }
         public void OnRaceSelect(RaceType raceType)
         {
@@ -90,88 +107,55 @@ namespace Common
             CharService.Instance.charsInPlayControllers.Add(charController);
             CharService.Instance.allCharInCombat.Add(charController);
 
-          //  CharService.Instance.charsInPlay.Add(go);
-        
-            allRegBestiaryCtrl.Add(charController);
-
-            // update char Level too here depending on ally levels FORMULA
-            // find the model and update  its level here 
-           // allRegBestiaryModels.Add(charModel);
+            allRegBestiaryInGameModels.Add(charModel);  // models added        
+            allCurrBestiaryCtrl.Add(charController); // ctrl added 
             
+
             charModel.availOfChar = AvailOfChar.Available;
             charModel.stateOfChar = StateOfChar.UnLocked; 
-            charModel.charID = allRegBestiaryCtrl.Count + start_INT_FOR_BESTIARY_CHARID + 1;
+            charModel.charID = allRegBestiaryInGameModels.Count + start_INT_FOR_BESTIARY_CHARID + 1;
             //go.name += charModel.charID.ToString(); 
-            
             return charController;
         }
         public CharController GetCharControllerWithName(CharNames enemyName)
         {
-            int index = allBestiaryInGame.FindIndex(t=>t.charModel.charName == enemyName);
+            int index = allCurrBestiaryCtrl.FindIndex(t=>t.charModel.charName == enemyName);
             if (index != -1)
-                return allBestiaryInGame[index];
+                return allCurrBestiaryCtrl[index];
             else
                 Debug.LogError("Enemy Controller not found !" + enemyName);
             return null;
         }
 
+        public void SaveState()
+        {
+            if (allRegBestiaryInGameModels.Count <= 0)
+            {
+                Debug.LogError("no chars in play"); return;
+            }
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            ClearState();
+            // save all char models
+
+
+            foreach (CharController charCtrl in allRegBestiaryInGameModels)
+            {
+                CharModel charModel = charCtrl.charModel;
+                string charModelJSON = JsonUtility.ToJson(charModel);
+                Debug.Log(charModelJSON);
+                string fileName = path + charModel.charName.ToString() + ".txt";
+                File.WriteAllText(fileName, charModelJSON);
+            }
+        }
+
+        public void LoadState()
+        {
+
+        }
+
+        public void ClearState()
+        {
+
+        }
     }
-
-
 }
-
-//public void CreateAllBestiaryCtrls()
-//{
-//    CharController charCtrl = new CharController();
-//    foreach (CharacterSO c in allBestiarySO)
-//    {
-//        charCtrl.InitiatizeController(c);            
-//        allBestiaryInGame.Add(charCtrl);
-//        CharService.Instance.charsInPlayControllers.Add(charCtrl);
-//       // LevelService.Instance.LevelUpInitAlly(charCtrl);
-//    }
-//}
-
-//public CharController CreateEnemyCtrl(CharNames charName)  // create for duplicate Chars 
-//{
-//    CharController charCtrl = new CharController();
-//    foreach (CharacterSO c in allBestiarySO)
-//    {
-//        if (charName == c.charName)
-//        {
-//            charCtrl.charModel =  charCtrl.InitiatizeController(c);
-//            allBestiaryInGame.Add(charCtrl);
-//            CharService.Instance.charsInPlayControllers.Add(charCtrl);
-
-//            //LevelService.Instance.LevelUpInitBeastiary(charCtrl);
-//        }
-//    }
-//    return charCtrl;
-//}
-
-
-
-//public CharController SpawnBestiary(CharNames enemyName)
-//    //, int charID)
-//{
-//    CharController charController = null;
-//    CharacterSO charSO = GetEnemySO(enemyName);
-//    if ( charSO.orgCharMode == CharMode.Enemy)
-//    {
-//        charController = CreateEnemyCtrl(enemyName);                
-//    }
-//    else
-//    {
-//        charController = GetCharControllerWithName(enemyName);
-//        CharNames charName = charController.charModel.charName;
-
-//        if (charSO == null)
-//        {
-//            charSO = GetEnemySO(charName);// this one is pet
-//        }
-//    }            
-//    GameObject go = Instantiate(charSO.charPrefab, spawnPos, Quaternion.identity);
-//    go.AddComponent<CharController>();
-//    CharService.Instance.charsInPlay.Add(go);
-//    return charController;
-//}

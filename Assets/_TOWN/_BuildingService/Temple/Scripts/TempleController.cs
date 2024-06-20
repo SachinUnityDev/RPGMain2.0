@@ -43,8 +43,8 @@ namespace Town
         public void UpdateBuildState()
         {
             if (templeModel.buildState == BuildingState.Locked) return;
-            DayName dayName = CalendarService.Instance.currDayName;
-            TimeState timeState = CalendarService.Instance.currtimeState;
+            DayName dayName = CalendarService.Instance.calendarModel.currDayName;
+            TimeState timeState = CalendarService.Instance.calendarModel.currtimeState;
 
             if (dayName == DayName.DayOfWater)
             {

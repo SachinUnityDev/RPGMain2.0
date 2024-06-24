@@ -91,8 +91,6 @@ namespace Common
         public SaveMode saveMode;
         public SaveSlot currMBloodSlot; 
 
-
-
         public SaveSlot slotSelected; 
         public List<GameObject> allServices = new List<GameObject>();
         public List<ISaveable> allSaveService = new List<ISaveable>();

@@ -7,6 +7,7 @@ using System.Linq;
 using Quest;
 using UnityEngine.SceneManagement;
 using Interactables;
+using Town;
 
 namespace Combat
 {
@@ -107,25 +108,29 @@ namespace Combat
             this.attribVal = val;
         }
     }
-    public class BuffController : MonoBehaviour
+    public class BuffController : MonoBehaviour, ISaveable
     {
-        public List<BuffData> allBuffs = new List<BuffData>();  
-        public List<BuffData> allDayNightbuffs = new List<BuffData>(); 
-        public List<PosBuffData> allPosBuffs = new List<PosBuffData>();  
+        //public List<BuffData> allBuffs = new List<BuffData>();  
+        //public List<BuffData> allDayNightbuffs = new List<BuffData>(); 
+        //public List<PosBuffData> allPosBuffs = new List<PosBuffData>();  
       
-        public List<OnSOCBuffData> allBuffOnSOC = new List<OnSOCBuffData>();
+        //public List<OnSOCBuffData> allBuffOnSOC = new List<OnSOCBuffData>();
 
+      
+        //[SerializeField]List<string> buffStrs = new List<string>();
+        //[SerializeField]List<string> deDuffStrs = new List<string>();
+       
+        //public int buffIndex = 0;
+        //[SerializeField] int SOCBuffIndex = 0;
+
+        public BuffModel buffModel; 
         CharController charController; // ref to char Controller 
-        [SerializeField]List<string> buffStrs = new List<string>();
-        [SerializeField]List<string> deDuffStrs = new List<string>();
 
-        public int buffIndex = 0;
-        [SerializeField] int SOCBuffIndex = 0; 
+        public ServicePath servicePath => throw new NotImplementedException();
 
         void Start()
         {
-            charController = GetComponent<CharController>();
-   
+            charController = GetComponent<CharController>();            
             QuestEventService.Instance.OnEOQ += EOQTick;
             CalendarService.Instance.OnChangeTimeState += ToggleBuffsOnTimeStateChg;
             CalendarService.Instance.OnStartOfTheWeek += EOWTick; 
@@ -139,6 +144,17 @@ namespace Combat
             SceneManager.sceneLoaded -= OnSceneLoaded;
             CombatEventService.Instance.OnSOC -= OnSOC;
         }
+
+        public void InitOnLoad(BuffModel buffModel)
+        {
+           this.buffModel = buffModel.DeepClone();     
+        }
+        public void Init()
+        {
+            int charID = charController.charModel.charID;   
+            buffModel = new BuffModel(charID); //pass in char Id      
+        }
+
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
@@ -156,8 +172,6 @@ namespace Combat
             {
                 CombatEventService.Instance.OnEOR1 -= RoundTick;
                 CombatEventService.Instance.OnEOC -= EOCTick;
-
-             
                 CombatEventService.Instance.OnEOR1 -= RoundPosTick;
                 CombatEventService.Instance.OnEOC -= EOCPosTick;
                 QuestEventService.Instance.OnEOQ -= EOQPosTick;
@@ -166,7 +180,7 @@ namespace Combat
         #region SOC
         void OnSOC()
         {
-            foreach (OnSOCBuffData socBuff in allBuffOnSOC)
+            foreach (OnSOCBuffData socBuff in buffModel.allBuffOnSOC)
             {  
                int index =  ApplyBuff(socBuff.causeType, socBuff.causeName, socBuff.causeByCharID, socBuff.attribName
                     , socBuff.value, socBuff.timeFrame, socBuff.netTime, socBuff.isBuff); 
@@ -179,22 +193,22 @@ namespace Combat
         {
             OnSOCBuffData socBuffData = new OnSOCBuffData(causeType, causeName, causeByCharID
                         , attribName, value, timeFrame, netTime, isBuff);
-            SOCBuffIndex++;
-            socBuffData.socBuffIndex = SOCBuffIndex; 
-            allBuffOnSOC.Add(socBuffData);  
-            return SOCBuffIndex; 
+            buffModel.SOCBuffIndex++;
+            socBuffData.socBuffIndex = buffModel.SOCBuffIndex; 
+            buffModel.allBuffOnSOC.Add(socBuffData);  
+            return buffModel.SOCBuffIndex; 
         }
         public bool RemoveBuffOnSOC(int socIndex)
         {
-            int index = allBuffOnSOC.FindIndex(t=>t.socBuffIndex == socIndex);
+            int index = buffModel.allBuffOnSOC.FindIndex(t=>t.socBuffIndex == socIndex);
             if (index == -1)
                 return false;
             else
             {
-                OnSOCBuffData socBuffData = allBuffOnSOC[index];
+                OnSOCBuffData socBuffData = buffModel.allBuffOnSOC[index];
                 int buffIndx = socBuffData.buffIndex;
                 RemoveBuff(buffIndx); 
-                allBuffOnSOC.RemoveAt(index);
+                buffModel.allBuffOnSOC.RemoveAt(index);
             }
             return true; 
         }
@@ -210,11 +224,11 @@ namespace Combat
             AttribModData attribModVal =  charController.ChangeAttrib( causeType,  causeName, causeByCharID
                                             ,  attribName,  value, true);
             int currRd = CombatEventService.Instance.currentRound;
-            buffIndex++;
-            BuffData buffData = new BuffData(buffIndex,isBuff, currRd, timeFrame, netTime,
-                                                                    attribModVal);                
-                allBuffs.Add(buffData);               
-                return buffIndex;         
+            buffModel.buffIndex++;
+            BuffData buffData = new BuffData(buffModel.buffIndex,isBuff, currRd, timeFrame, netTime,
+                                                                    attribModVal);
+            buffModel.allBuffs.Add(buffData);               
+                return buffModel.buffIndex;         
         }
 
         public int ApplyDmgArmorByPercent(CauseType causeType, int causeName, int causebyCharID, AttribName attribName, 
@@ -239,15 +253,15 @@ namespace Combat
             AttribModData attribModVal = new AttribModData(turn, causeType, causeName
                 , causebyCharID, charID, AttribName.None, val, charModel.mainExp); 
             int currRd = CombatEventService.Instance.currentRound;
-            buffIndex++;
-            BuffData buffData = new BuffData(buffIndex, isBuff, currRd, timeFrame, castTime,attribModVal);
-            allBuffs.Add(buffData);
-            return buffIndex;
+            buffModel.buffIndex++;
+            BuffData buffData = new BuffData(buffModel.buffIndex, isBuff, currRd, timeFrame, castTime,attribModVal);
+            buffModel.allBuffs.Add(buffData);
+            return buffModel.buffIndex;
         
         }
         public void IncrBuffCastTime(int buffID, int incrBy)
         {
-            foreach (BuffData buff in allBuffs)
+            foreach (BuffData buff in buffModel.allBuffs)
             {
                 if(buff.buffID == buffID)
                 {
@@ -315,32 +329,32 @@ namespace Combat
         public bool RemoveBuff(int buffID)   // to be revised
         {
             BuffData buffData = null; 
-            int index = allBuffs.FindIndex(t => t.buffID == buffID);
+            int index = buffModel.allBuffs.FindIndex(t => t.buffID == buffID);
             if (index == -1)
             {
-                index = allDayNightbuffs.FindIndex(t => t.buffID == buffID); 
+                index = buffModel.allDayNightbuffs.FindIndex(t => t.buffID == buffID); 
                 if(index == -1)
                 {
-                    index = allPosBuffs.FindIndex(t => t.buffID == buffID);
+                    index = buffModel.allPosBuffs.FindIndex(t => t.buffID == buffID);
                     if (index == -1)
                         return false;
                     else
                     {
-                        PosBuffData posBuffData= allPosBuffs[index];
-                        allPosBuffs.Remove(posBuffData);
+                        PosBuffData posBuffData= buffModel.allPosBuffs[index];
+                        buffModel.allPosBuffs.Remove(posBuffData);
                         return true;
                     }
                 }
                 else // remove day buff
                 {
-                    buffData = allDayNightbuffs[index];
-                    allDayNightbuffs.Remove(buffData);
+                    buffData = buffModel.allDayNightbuffs[index];
+                    buffModel.allDayNightbuffs.Remove(buffData);
                     return true; 
                 } 
             }
             else
             {
-                buffData = allBuffs[index];
+                buffData = buffModel.allBuffs[index];
                 RemoveBuffData(buffData);
                 return true; 
             }                
@@ -357,14 +371,14 @@ namespace Combat
             {
                 charController.charModel.mainExp = (int)buffData.attribModData.baseVal; 
             }      
-            allBuffs.Remove(buffData);
+            buffModel.allBuffs.Remove(buffData);
         }
         #endregion
 
         public List<BuffData> GetBuffDebuffData()
         {
             List<BuffData> allBufftemp=new List<BuffData>();
-            allBufftemp = allBuffs.DeepClone();
+            allBufftemp = buffModel.allBuffs.DeepClone();
             return allBufftemp; 
         }
 
@@ -380,7 +394,7 @@ namespace Combat
             //    }
             //        buffStrs.Add();
             //}
-            return buffStrs;            
+            return buffModel.buffStrs;            
         }
         public List<string> GetDeBuffList()
         {
@@ -389,11 +403,11 @@ namespace Combat
             //    if (!buffData.isBuff)
             //        deDuffStrs.Add(buffData.directString); 
             //}
-            return deDuffStrs;          
+            return buffModel.deDuffStrs;          
         }
         public void RoundTick(int roundNo)
         {
-            foreach (BuffData buffData in allBuffs.ToList())
+            foreach (BuffData buffData in buffModel.allBuffs.ToList())
             {
                 if (buffData.timeFrame == TimeFrame.EndOfRound)
                 {
@@ -407,7 +421,7 @@ namespace Combat
         }
         public void EOCTick()
         {
-            foreach (BuffData buffData in allBuffs.ToList())
+            foreach (BuffData buffData in buffModel.allBuffs.ToList())
             {
                 if (buffData.timeFrame == TimeFrame.EndOfCombat)
                 {
@@ -417,7 +431,7 @@ namespace Combat
         }
         public void EOQTick()
         {
-            foreach (BuffData buffData in allBuffs.ToList())
+            foreach (BuffData buffData in buffModel.allBuffs.ToList())
             {
                 if (buffData.timeFrame == TimeFrame.EndOfQuest)
                 {
@@ -427,7 +441,7 @@ namespace Combat
         }
         public void EOWTick(WeekEventsName weekName, int weekCounter)
         {
-            foreach (BuffData buffData in allBuffs.ToList())
+            foreach (BuffData buffData in buffModel.allBuffs.ToList())
             {
                 if (buffData.timeFrame == TimeFrame.EndOfWeek)
                 {
@@ -450,12 +464,12 @@ namespace Combat
                                                                     , attribName, value, true);
             }   
 
-            int currRd = CombatEventService.Instance.currentRound;            
-            buffIndex++;
+            int currRd = CombatEventService.Instance.currentRound;
+            buffModel.buffIndex++;
             PosBuffData posBuffData = new PosBuffData(causeType, causeName, causeByCharID ,attribName, value,
-                                        allPos, buffIndex, isBuff, currRd, timeFrame, castTime,attribModVal);
-            allPosBuffs.Add(posBuffData);
-            return buffIndex;
+                                        allPos, buffModel.buffIndex, isBuff, currRd, timeFrame, castTime,attribModVal);
+            buffModel.allPosBuffs.Add(posBuffData);
+            return buffModel.buffIndex;
         }
         #endregion
 
@@ -463,7 +477,7 @@ namespace Combat
         {
             if(charController.charModel.charID == dyna.charGO.GetComponent<CharController>().charModel.charID)
             {
-                foreach (PosBuffData posBuffData in allPosBuffs)
+                foreach (PosBuffData posBuffData in buffModel.allPosBuffs)
                 {
                     if(posBuffData.allPos.Any(t=>t == pos))
                     {
@@ -482,7 +496,7 @@ namespace Combat
 
         void EOCPosTick()
         {
-            foreach (PosBuffData buffData in allPosBuffs.ToList())
+            foreach (PosBuffData buffData in buffModel.allPosBuffs.ToList())
             {
                 if (buffData.timeFrame == TimeFrame.EndOfCombat)
                 {
@@ -492,7 +506,7 @@ namespace Combat
         }
         public void EOQPosTick()
         {
-            foreach (PosBuffData buffData in allPosBuffs.ToList())
+            foreach (PosBuffData buffData in buffModel.allPosBuffs.ToList())
             {
                 if (buffData.timeFrame == TimeFrame.EndOfQuest)
                 {
@@ -502,7 +516,7 @@ namespace Combat
         }
         public void RoundPosTick(int roundNo)
         {
-            foreach (PosBuffData buffData in allPosBuffs.ToList())
+            foreach (PosBuffData buffData in buffModel.allPosBuffs.ToList())
             {
                 if (buffData.timeFrame == TimeFrame.EndOfRound)
                 {
@@ -517,10 +531,10 @@ namespace Combat
 
         public void RemovePosBuff(int buffID) 
         {
-            foreach (PosBuffData buffData in allPosBuffs.ToList())
+            foreach (PosBuffData buffData in buffModel.allPosBuffs.ToList())
             {
                 if (buffData.buffID == buffID)
-                    allPosBuffs.Remove(buffData); 
+                    buffModel.allPosBuffs.Remove(buffData); 
             }
         }
 
@@ -544,18 +558,18 @@ namespace Combat
                                                         , statName, -value, true);  
             }
             int currRd = CombatEventService.Instance.currentRound;
-            buffIndex++;
-            BuffData buffData = new BuffData(buffIndex, isBuff, currRd, timeFrame, netTime,
+            buffModel.buffIndex++;
+            BuffData buffData = new BuffData(buffModel.buffIndex, isBuff, currRd, timeFrame, netTime,
                                                                   attribModVal, timeState);
 
-           // allBuffs.Add(buffData);
-            allDayNightbuffs.Add(buffData);
-            return buffIndex;
+            // allBuffs.Add(buffData);
+            buffModel.allDayNightbuffs.Add(buffData);
+            return buffModel.buffIndex;
         }
 
         void ToggleBuffsOnTimeStateChg(TimeState timeState) // ON start of the day
         {
-            foreach (BuffData buffData in allDayNightbuffs)
+            foreach (BuffData buffData in buffModel.allDayNightbuffs)
             {
                 if (buffData.timeState == timeState)
                 {  // APPLY temporarily
@@ -610,6 +624,27 @@ namespace Combat
             
 
             return allbuffID;   
+        }
+
+        public void SaveState()
+        {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath); 
+            string buffPath = path + charController.charModel.charName;
+            string buffJSON = JsonUtility.ToJson(buffModel);
+
+            // save buff model
+
+        }
+
+        public void LoadState()
+        {
+            // load from buff folder from given charName path
+
+        }
+
+        public void ClearState()
+        {
+          // clear only specific file in the given path
         }
         #endregion
 

@@ -22893,7 +22893,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9036cc8e44dd8d74096217a4b33c8d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allDiaModel: []
   diaBaseCount: 0
   dialogueView: {fileID: 0}
   dialogueName: 0

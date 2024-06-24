@@ -94,34 +94,62 @@ namespace Common
 
     
 
-        // creates charModel and initializes all associated controller
+        // creates charModel and initializes all associated controller used only by Ally for spawn
 
         public void InitController(CharModel charModel)
         {
             this.charModel = charModel;
             charSO = CharService.Instance.allCharSO.GetCharSO(charModel.charName); 
             OnCharSpawned?.Invoke(charModel.charID, charModel.charName);
-            AddController_OnCharSpawn();
+            AddController_OnCharSpawn_ONLoad(charModel);
         }
 
-        public CharModel InitController(CharacterSO _charSO)// used by ally and bestiary
+        public CharModel InitController(CharacterSO charSO)// used by ally and bestiary
         {
-            charSO = _charSO;          
-            charModel = new CharModel(_charSO);
-            if (charModel.orgCharMode == CharMode.Ally)
+            this.charSO = charSO;          
+            charModel = new CharModel(charSO);
+            if (charModel.orgCharMode == CharMode.Ally) // for bestiary charID is controlled by bestiary service
             {
                 charModel.charID = CharService.Instance.allCharModels.Count + 1;
-            }
-                
+            }   
             OnCharSpawned?.Invoke(charModel.charID, charModel.charName);
-            AddController_OnCharSpawn(); 
+            AddController_OnCharSpawn_OnInit(charSO); 
             return charModel; 
         }
-
-
-        void AddController_OnCharSpawn()
+        void AddController_OnCharSpawn_ONLoad(CharModel charModel)
         {
             buffController = gameObject.AddComponent<BuffController>();
+            buffController.GetComponent<ISaveable>().LoadState(); 
+            timeBuffController = gameObject.AddComponent<TimeBuffController>();
+            if (charModel.orgCharMode == CharMode.Ally)
+            {
+                charTypeBuffController = gameObject.AddComponent<CharTypeBuffController>();
+                itemController = gameObject.AddComponent<ItemController>();
+                weaponController = gameObject.AddComponent<WeaponController>();
+                landscapeController = gameObject.AddComponent<LandscapeController>();
+                permaTraitController = gameObject.GetComponent<PermaTraitController>();
+
+                fleeController = gameObject.AddComponent<FleeController>();
+            }
+            statBuffController = gameObject.AddComponent<StatBuffController>();
+
+            permaTraitController = gameObject.AddComponent<PermaTraitController>();
+            PermaTraitsService.Instance.allPermaTraitControllers.Add(permaTraitController);
+
+            tempTraitController = gameObject.AddComponent<TempTraitController>();
+            TempTraitService.Instance.allTempTraitControllers.Add(tempTraitController);
+
+            charStateController = gameObject.AddComponent<CharStateController>();
+            CharStatesService.Instance.allCharStateController.Add(charStateController);
+
+            skillController = gameObject.AddComponent<SkillController1>();
+            SkillService.Instance.allSkillControllers.Add(skillController);
+
+        }
+
+        void AddController_OnCharSpawn_OnInit(CharacterSO charSO)
+        {
+            buffController = gameObject.AddComponent<BuffController>();            
             timeBuffController = gameObject.AddComponent<TimeBuffController>();
             if (charModel.orgCharMode == CharMode.Ally)
             {

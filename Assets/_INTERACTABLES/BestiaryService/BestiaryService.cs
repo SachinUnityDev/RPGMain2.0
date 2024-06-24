@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Interactables;
-using Town;
+using System.IO;
+using System.Linq;
 
 namespace Common
 {
@@ -22,17 +23,11 @@ namespace Common
         public BestiaryController bestiaryController;
         public RaceType currSelectRace;
 
-        [Header("All Bestiary")]
+        [Header("Record of All Bestiary In the Game")]
         public List<CharModel> allRegBestiaryInGameModels = new List<CharModel>(); // on game INIT 
-       // public List<CharController> allBestiaryInGame = new List<CharController>(); 
 
-        [Header("UNLOCKED Bestiary")]
+        [Header("Bestiary Currently in Combat/ Controllers active")]
         public List<CharController> allCurrBestiaryCtrl = new List<CharController>();
-       // public List<CharModel> allRegBestiaryModels = new List<CharModel>(); // Unlocks here when u meet them 
-
-        // UNLOCKS => REGISTER after u meet a enemy in combat they register in scroll list
-        [Header("Game Init")]
-        public bool isNewGInitDone = false;
 
         public ServicePath servicePath => ServicePath.BestiaryService;
 
@@ -42,10 +37,7 @@ namespace Common
             if(GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
             {
                 bestiaryViewController = FindObjectOfType<BestiaryViewController>();
-
-
             }
-
         }
         private void OnDisable()
         {
@@ -60,6 +52,9 @@ namespace Common
                 {
                     allRegBestiaryInGameModels.Clear();
                     allCurrBestiaryCtrl.Clear();
+
+                    // only bestiary met on Combat to be registered here
+                    // Following is the code for testing purpose
                     //foreach (CharacterSO charSO in allBestiarySO)
                     //{
                     //    CharModel charModel = new CharModel(charSO);
@@ -107,7 +102,11 @@ namespace Common
             CharService.Instance.charsInPlayControllers.Add(charController);
             CharService.Instance.allCharInCombat.Add(charController);
 
-            allRegBestiaryInGameModels.Add(charModel);  // models added        
+            if(!allRegBestiaryInGameModels.Any(t=>t.charName == charName && t.charLvl == charModel.charLvl))
+            {
+                allRegBestiaryInGameModels.Add(charModel);  // models added                                        
+            }
+            // actual Spawn Control
             allCurrBestiaryCtrl.Add(charController); // ctrl added 
             
 
@@ -131,31 +130,65 @@ namespace Common
         {
             if (allRegBestiaryInGameModels.Count <= 0)
             {
-                Debug.LogError("no chars in play"); return;
+                Debug.LogError("no Bestiary Registered uptill now in play"); return;
             }
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
             ClearState();
             // save all char models
 
-
-            foreach (CharController charCtrl in allRegBestiaryInGameModels)
-            {
-                CharModel charModel = charCtrl.charModel;
-                string charModelJSON = JsonUtility.ToJson(charModel);
-                Debug.Log(charModelJSON);
+            foreach (CharModel charModel in allRegBestiaryInGameModels)
+            {   
+                string bestiaryModelJSON = JsonUtility.ToJson(charModel);                
                 string fileName = path + charModel.charName.ToString() + ".txt";
-                File.WriteAllText(fileName, charModelJSON);
+                File.WriteAllText(fileName, bestiaryModelJSON);
             }
         }
 
         public void LoadState()
         {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+
+            if (SaveService.Instance.DirectoryExists(path))
+            {
+                string[] fileNames = Directory.GetFiles(path);
+                foreach (string fileName in fileNames)
+                {
+                    // skip meta files
+                    if (fileName.Contains(".meta")) continue;
+                    string contents = File.ReadAllText(fileName);
+                    Debug.Log("  " + contents);
+                    CharModel charModel = JsonUtility.FromJson<CharModel>(contents);
+                    allRegBestiaryInGameModels.Add(charModel);
+
+                }
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing");
+            }
+
 
         }
 
         public void ClearState()
         {
-
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            DeleteAllFilesInDirectory(path);
+        }
+        public void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                SaveState();
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                LoadState();
+            }
+            if (Input.GetKeyDown(KeyCode.F6))
+            {
+                ClearState();
+            }
         }
     }
 }

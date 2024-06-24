@@ -43,7 +43,7 @@ namespace Common
        // only for Quest  and Combat
         
         [Header("represents all the chars in the game")]
-        // all Char In Game this service + bestiary 
+        // all "ACTIVE" Char In Game this service + bestiary 
         public List<CharController> charsInPlayControllers;
 
         [Header("Specific Sub list of Chars/ Allies")]
@@ -147,7 +147,7 @@ namespace Common
         }
         public void SaveState()
         {
-            if (charsInPlayControllers.Count <= 0)
+            if (allyInPlayControllers.Count <= 0)
             {
                 Debug.LogError("no chars in play"); return;
             }
@@ -156,7 +156,7 @@ namespace Common
             // save all char models
 
 
-            foreach (CharController charCtrl in charsInPlayControllers)
+            foreach (CharController charCtrl in allyInPlayControllers)
             {
                 CharModel charModel = charCtrl.charModel;
                 string charModelJSON = JsonUtility.ToJson(charModel);

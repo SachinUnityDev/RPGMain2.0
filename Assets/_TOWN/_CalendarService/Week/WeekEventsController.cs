@@ -25,6 +25,12 @@ namespace Common
                 allWeekModels.Add(weekModel);   
             }
         }
+        public void InitOnLoad(List<WeekModel> allWeekModels)
+        {
+            this.allWeekModels.Clear();
+            this.allWeekModels = allWeekModels.DeepClone(); 
+        }
+
         public WeekModel GetWeekModels(WeekEventsName weekName)
         {
             int index = allWeekModels.FindIndex(t=>t.weekName==weekName);

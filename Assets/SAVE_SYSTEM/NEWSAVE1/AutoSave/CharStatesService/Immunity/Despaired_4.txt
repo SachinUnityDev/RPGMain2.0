@@ -1,1 +1,0 @@
-{"immunityID":1,"startRoundNo":-1,"timeFrame":6,"buffedNetTime":1,"buffCurrentTime":0,"charStateModData":{"causeType":41,"causeName":5,"causeByCharID":4,"effectedCharID":4,"charStateName":16,"isImmunity":true}}

@@ -7,6 +7,8 @@ using UnityEngine.UI;
 using Combat;
 using Town;
 using UnityEngine.SceneManagement;
+using Quest;
+using System.IO;
 
 
 // apply month 
@@ -69,8 +71,7 @@ namespace Common
         [Header("Day Events Controller")]
         public DayEventsController dayEventsController; 
         public AllDaySO allDaySO;
-        public bool isNewGInitDone = false;
-
+     
         public ServicePath servicePath => ServicePath.CalendarService;
 
         void OnEnable()
@@ -90,38 +91,60 @@ namespace Common
         {
             if (scene.name == "TOWN")
             {
-
                 calendarUIController.Init();
                 calendarUIController.UpdateMonthPanel(calendarModel.currentMonth, calendarModel.startOfGameDayName, calendarModel.dayInYear);
                 calendarUIController.UpdateWeekPanel(calendarModel.currentWeek);
             }
         }
-
+        public void InitOnLoad(CalendarModel calendarModel)
+        {
+            if(this.calendarModel == null)
+                this.calendarModel = new CalendarModel();
+            this.calendarModel = calendarModel.DeepClone();  
+        }
         public void Init()
         {
-            calendarModel = new CalendarModel();
-            // define what date and time the game will start by default 
             weekEventsController = GetComponent<WeekEventsController>();
-            weekEventsController.InitWeekController(allWeekSO);
-            calendarUIController.Init();
-
-            SelectWeekCycle();
-            // Calendar Model Init
-            calendarModel.currtimeState = TimeState.Day;
-            calendarModel.startOfGameDayName = DayName.DayOfLight;// saturday
-            calendarModel.currentWeek = calendarModel.currWeekCycle.allWeekNames[0];
-            calendarModel.dayInGame = 0;
-            calendarModel.dayInYear = 24;
-            calendarModel.currentMonth = MonthName.FeatherOfThePeafowl;
-            calendarModel.scrollMonth = calendarModel.currentMonth;
-            calendarModel.currtimeState = TimeState.Day;
             dayEventsController = GetComponent<DayEventsController>();
-            dayEventsController.InitDayEvent(allDaySO);
-            calendarUIController.UpdateMonthPanel(calendarModel.currentMonth, calendarModel.startOfGameDayName, calendarModel.dayInYear);
-            calendarUIController.UpdateWeekPanel(calendarModel.currentWeek);
 
-            isNewGInitDone = true;
-            
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            if (SaveService.Instance.DirectoryExists(path))
+            {
+                if (IsDirectoryEmpty(path))
+                {
+                    calendarModel = new CalendarModel();
+                    // define what date and time the game will start by default 
+
+                    weekEventsController.InitWeekController(allWeekSO);
+                    calendarUIController.Init();
+
+                    SelectWeekCycle();
+                    // Calendar Model Init
+                    calendarModel.currtimeState = TimeState.Day;
+                    calendarModel.startOfGameDayName = DayName.DayOfLight;// saturday
+                    calendarModel.currentWeek = calendarModel.currWeekCycle.allWeekNames[0];
+                    calendarModel.dayInGame = 0;
+                    calendarModel.dayInYear = 24;
+                    calendarModel.currentMonth = MonthName.FeatherOfThePeafowl;
+                    calendarModel.scrollMonth = calendarModel.currentMonth;
+                    calendarModel.currtimeState = TimeState.Day;
+
+                    dayEventsController.InitDayEvent(allDaySO);
+                    // common
+                    calendarUIController.UpdateMonthPanel(calendarModel.currentMonth, calendarModel.startOfGameDayName, calendarModel.dayInYear);
+                    calendarUIController.UpdateWeekPanel(calendarModel.currentWeek);
+                }
+                else
+                {
+                    LoadState();                  
+                    calendarUIController.UpdateMonthPanel(calendarModel.currentMonth, calendarModel.startOfGameDayName, calendarModel.dayInYear);
+                    calendarUIController.UpdateWeekPanel(calendarModel.currentWeek);
+                }
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing");
+            }
         }
 
         void SelectWeekCycle()
@@ -130,6 +153,8 @@ namespace Common
             int ran = UnityEngine.Random.Range(0, netWeekCyles);
             calendarModel.currWeekCycle = allWeekSO.AllCycles[ran];
         }
+        
+
 
         public WeekEventsName GetNextWeek(WeekEventsName weekEventsName)
         {
@@ -292,22 +317,174 @@ namespace Common
             }
         }
 
+    #region SAVE_LOAD   
         public void SaveState()
         {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
 
+            ClearState();
+            string calJSON = JsonUtility.ToJson(calendarModel);            
+            string fileName = path + "calendarModel" + ".txt";
+            File.WriteAllText(fileName, calJSON);
 
+            SaveState_WeekE();
+            SaveState_DayE();
+        }
+
+        void SaveState_WeekE()
+        {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            path += "/WeekE/";
+            // Check if the folder does not exist and create it if necessary
+            if (!Directory.Exists(path))
+                CreateAFolder(path);
+
+            ClearState_WeekE();
+            foreach (WeekModel weekModel in weekEventsController.allWeekModels)
+            {
+                string weekEModelJson = JsonUtility.ToJson(weekModel);
+                Debug.Log(weekEModelJson);
+                string fileName = path + weekModel.weekName.ToString() + ".txt";
+                File.WriteAllText(fileName, weekEModelJson);
+            }   
+            //Note: Current week Event save in cal model
+        }
+        void ClearState_WeekE()
+        {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            path += "/WeekE/";
+            DeleteAllFilesInDirectory(path);
+        }
+        void LoadState_WeekE()
+        {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            string weekEPath = path + "/WeekE/";
+
+            if (SaveService.Instance.DirectoryExists(weekEPath))
+            {
+                string[] fileNames = Directory.GetFiles(weekEPath);
+                List<WeekModel> allWeekEModels = new List<WeekModel>();
+                foreach (string fileName in fileNames)
+                {
+                    // skip meta files
+                    if (fileName.Contains(".meta")) continue;
+
+                    string contents = File.ReadAllText(fileName);
+                    WeekModel weekModel = JsonUtility.FromJson<WeekModel>(contents);
+
+                    allWeekEModels.Add(weekModel);
+                }
+                weekEventsController.InitOnLoad(allWeekEModels);
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing");
+            }
+        }
+
+        void SaveState_DayE()
+        {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            path += "/DayE/";
+            // Check if the folder does not exist and create it if necessary
+            if (!Directory.Exists(path))
+                CreateAFolder(path);
+
+            ClearState_DayE();
+            foreach (DayModel dayModel in dayEventsController.allDayModels)
+            {
+                string dayModelJSON = JsonUtility.ToJson(dayModel);                
+                string fileName = path + dayModel.dayName.ToString() + ".txt";
+                File.WriteAllText(fileName, dayModelJSON);
+            }
+            //Note: Current day Event save in cal model
+        }
+        void ClearState_DayE()
+        {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            path += "/DayE/";
+            DeleteAllFilesInDirectory(path);
+        }
+        void LoadState_DayE()
+        {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            string dayEPath = path + "/DayE/";
+
+            if (SaveService.Instance.DirectoryExists(dayEPath))
+            {
+                string[] fileNames = Directory.GetFiles(dayEPath);
+                List<DayModel> allDayModels = new List<DayModel>();
+                foreach (string fileName in fileNames)
+                {
+                    // skip meta files
+                    if (fileName.Contains(".meta")) continue;
+                    string contents = File.ReadAllText(fileName);
+                    DayModel dayModel = JsonUtility.FromJson<DayModel>(contents);
+
+                    allDayModels.Add(dayModel);
+                }
+                dayEventsController.InitOnLoad(allDayModels);                
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing");
+            }
         }
 
         public void LoadState()
         {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            
+            if (SaveService.Instance.DirectoryExists(path))
+            {
+                string[] fileNames = Directory.GetFiles(path);
 
+                foreach (string fileName in fileNames)
+                {
+                    // skip meta files
+                    if (fileName.Contains(".meta")) continue;            
+                    string contents = File.ReadAllText(fileName);
+                    CalendarModel calModel = JsonUtility.FromJson<CalendarModel>(contents);
+                    InitOnLoad(calModel);            
+                }
+                LoadState_WeekE();
+                LoadState_DayE();
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing");
+            }
         }
 
         public void ClearState()
         {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            
+            string[] fileNames = Directory.GetFiles(path);
 
+            foreach (string fileName in fileNames)
+            {
+                if ((fileName.Contains(".meta")) || (fileName.Contains(".txt")) )                
+                    File.Delete(fileName);
+            }       
+        }
+        #endregion
+        public void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                SaveState();
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                LoadState();
+            }
+            if (Input.GetKeyDown(KeyCode.F6))
+            {
+                ClearState();
+            }
         }
 
-        #endregion
+#endregion
     }
 }

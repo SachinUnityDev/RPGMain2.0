@@ -1,10 +1,12 @@
 using Combat;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Common
 {
+ [Serializable]
     public class BuffModel
     {
         public int charID = -1; // the charID of the char this buffModel is attached to

@@ -4,9 +4,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using Town;
 using System.Linq;
+using System.IO;
 
 namespace Common
 {
+    public class TimeBuffModel
+    {
+        public int charID = -1; 
+        public List<DayBuffData> allBuffData; 
+
+        public TimeBuffModel(int charID)
+        {
+            allBuffData = new List<DayBuffData>();
+            this.charID = charID;
+        }
+    }
+
+
     [Serializable]
     public class DayBuffData
     {
@@ -49,16 +63,36 @@ namespace Common
             this.isBuff = isBuff;
         }
     }
-    public class TimeBuffController : MonoBehaviour
+    public class TimeBuffController : MonoBehaviour, ISaveable
     {
-        public List<DayBuffData> allBuffData = new List<DayBuffData>();
+
         CharController charController;
+        public TimeBuffModel timeBuffModel;
+        public ServicePath servicePath => ServicePath.BuffService;
 
         private void Start()
         {
-            CalendarService.Instance.OnStartOfCalDay += (int day) => DayTick();
+            CalendarService.Instance.OnStartOfCalDay +=  DayTickSub;
             charController = GetComponent<CharController>();
         }
+        private void OnDisable()
+        {
+            CalendarService.Instance.OnStartOfCalDay -= DayTickSub;
+        }
+        public void InitOnLoad(TimeBuffModel timeBuffModel)
+        {
+            this.timeBuffModel = timeBuffModel.DeepClone();
+        }
+        public void Init()
+        {
+            if (timeBuffModel == null)
+            {
+                charController = GetComponent<CharController>();
+                int charID = charController.charModel.charID;
+                timeBuffModel = new TimeBuffModel(charID); //pass in char Id      
+            }
+        }
+
         public int ApplyDayBuff(CauseType causeType, int causeName, int causebyCharID, DayName dayName
                                , AttribName attribName, int valChg, int timeVal, bool isBuff)
         {
@@ -72,13 +106,21 @@ namespace Common
 
             DayBuffData dayBuffData = new DayBuffData(causeData, buffID, dayName, attribName
                                                         , valChg, TimeFrame.EndOfDay, timeVal, isBuff);
-            
-            allBuffData.Add(dayBuffData);
+            if(timeBuffModel == null)
+            {
+                Init();
+            }
+            timeBuffModel.allBuffData.Add(dayBuffData);
             return buffID;
+        }
+
+        void DayTickSub(int day)
+        {
+            DayTick(); 
         }
         public void DayTick()
         {
-            foreach (DayBuffData buff in allBuffData.ToList())
+            foreach (DayBuffData buff in timeBuffModel.allBuffData.ToList())
             {
                 if (buff.timeFrame == TimeFrame.EndOfDay && buff.currTime >= buff.timeVal)
                 {                
@@ -98,11 +140,80 @@ namespace Common
         public void RemoveBuffPerma(int buffID)
         {
             RemoveBuffFX(buffID);
-            int index = allBuffData.FindIndex(t => t.buffID == buffID);
+            int index = timeBuffModel.allBuffData.FindIndex(t => t.buffID == buffID);
             if (index != -1)
-                allBuffData.RemoveAt(index);
+                timeBuffModel.allBuffData.RemoveAt(index);
             else
                 Debug.Log("buff not found" + buffID);
         }
+        #region SAVE_LOAD   
+        public void SaveState()
+        {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            string timeBuffPath = path + "/TimeBuff/";
+
+            ClearState();
+            string buffModelJSON = JsonUtility.ToJson(timeBuffModel);
+            string fileName = timeBuffPath + charController.charModel.charName + ".txt";
+            File.WriteAllText(fileName, buffModelJSON);
+        }
+
+        public void LoadState()
+        {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            string buffPath = path + "/TimeBuff/";
+            charController = GetComponent<CharController>();
+            if (SaveService.Instance.DirectoryExists(buffPath))
+            {
+                string[] fileNames = Directory.GetFiles(buffPath);
+
+                foreach (string fileName in fileNames)
+                {
+                    // skip meta files
+                    if (fileName.Contains(".meta")) continue;
+                    if (fileName.Contains(charController.charModel.charName.ToString()))
+                    {
+                        string contents = File.ReadAllText(fileName);
+                        TimeBuffModel timeBuffModel = JsonUtility.FromJson<TimeBuffModel>(contents);
+                        InitOnLoad(timeBuffModel);
+                    }
+                }
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing");
+            }
+        }
+
+        public void ClearState()
+        {
+            // clear only specific file in the given path
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            path += "/TimeBuff/";
+            string[] fileNames = Directory.GetFiles(path);
+
+            foreach (string fileName in fileNames)
+            {
+                if ((fileName.Contains(".meta")) &&
+                 (fileName.Contains(charController.charModel.charName.ToString())))
+                    File.Delete(fileName);
+            }
+        }
+        public void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                SaveState();
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                LoadState();
+            }
+            if (Input.GetKeyDown(KeyCode.F6))
+            {
+                ClearState();
+            }
+        }
+        #endregion
     }
 }

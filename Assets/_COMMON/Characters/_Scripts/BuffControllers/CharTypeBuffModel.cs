@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharTypeBuffModel : MonoBehaviour
+namespace Common
 {
-    // Start is called before the first frame update
-    void Start()
+    public class CharTypeBuffModel
     {
-        
-    }
+        public List<RaceCultClassBuffData> allBuffData = new List<RaceCultClassBuffData>();
+        public int charID = -1; 
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public CharTypeBuffModel(int charID)
+        {
+            this.charID = charID;
+        }
     }
 }

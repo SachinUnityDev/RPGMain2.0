@@ -103,9 +103,15 @@ namespace Quest
         public CityEModel GetPreModel(CityENames encounterName, int seq)
         {
             if (seq == 0) return null;
-            CityEModel cityEModel = 
-            allCityEModels.Find(t => t.cityEName== encounterName && t.encounterSeq == (seq - 1)); 
-            return cityEModel;
+            //seq--; // correction for the 0 based index
+            int index =
+            allCityEModels.FindIndex(t => t.cityEName == encounterName && t.encounterSeq == (seq));
+           if(index != -1)
+            {
+                return allCityEModels[index];
+            }
+            Debug.Log(" PreModel not found"+ encounterName + seq);
+            return null;             
         }
         public bool HasNextLvl(CityENames encounterName, int currSeq)
         {

@@ -27,7 +27,7 @@ public class MonoSingletonGeneric<T> : SaveBase where T : MonoSingletonGeneric<T
 public class SaveBase : MonoBehaviour
 {
 
-    protected void CreateAFolder(string path)
+    public void CreateAFolder(string path)
     {
         if (!Directory.Exists(path))
             Directory.CreateDirectory(path);

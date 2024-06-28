@@ -8,6 +8,7 @@ using Quest;
 using UnityEngine.SceneManagement;
 using Interactables;
 using Town;
+using System.IO;
 
 namespace Combat
 {
@@ -69,6 +70,7 @@ namespace Combat
            
         }
     }
+    [Serializable]
     public class PosBuffData
     {
         public List<int> allPos = new List<int>();
@@ -126,11 +128,12 @@ namespace Combat
         public BuffModel buffModel; 
         CharController charController; // ref to char Controller 
 
-        public ServicePath servicePath => throw new NotImplementedException();
+        public ServicePath servicePath => ServicePath.BuffService;
 
+    
         void Start()
         {
-            charController = GetComponent<CharController>();            
+            charController = GetComponent<CharController>();    
             QuestEventService.Instance.OnEOQ += EOQTick;
             CalendarService.Instance.OnChangeTimeState += ToggleBuffsOnTimeStateChg;
             CalendarService.Instance.OnStartOfTheWeek += EOWTick; 
@@ -147,15 +150,17 @@ namespace Combat
 
         public void InitOnLoad(BuffModel buffModel)
         {
-           this.buffModel = buffModel.DeepClone();     
+            this.buffModel = buffModel.DeepClone(); 
         }
         public void Init()
         {
-            int charID = charController.charModel.charID;   
-            buffModel = new BuffModel(charID); //pass in char Id      
+            if(buffModel == null)
+            {
+                charController = GetComponent<CharController>();
+                int charID = charController.charModel.charID;
+                buffModel = new BuffModel(charID); //pass in char Id      
+            }
         }
-
-
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
@@ -224,6 +229,10 @@ namespace Combat
             AttribModData attribModVal =  charController.ChangeAttrib( causeType,  causeName, causeByCharID
                                             ,  attribName,  value, true);
             int currRd = CombatEventService.Instance.currentRound;
+            if(buffModel == null)
+            {
+                Init(); 
+            }
             buffModel.buffIndex++;
             BuffData buffData = new BuffData(buffModel.buffIndex,isBuff, currRd, timeFrame, netTime,
                                                                     attribModVal);
@@ -626,27 +635,76 @@ namespace Combat
             return allbuffID;   
         }
 
+        #endregion
+
+        #region SAVE_LOAD   
         public void SaveState()
         {
-            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath); 
-            string buffPath = path + charController.charModel.charName;
-            string buffJSON = JsonUtility.ToJson(buffModel);
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            string buffPath = path + "/Buff/";
 
-            // save buff model
-
+            ClearState();
+             string buffModelJSON = JsonUtility.ToJson(buffModel);
+            string fileName = buffPath + charController.charModel.charName + ".txt";
+            File.WriteAllText(fileName, buffModelJSON);            
         }
 
         public void LoadState()
         {
-            // load from buff folder from given charName path
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            string buffPath = path + "/Buff/";
+            charController = GetComponent<CharController>();
+            if (SaveService.Instance.DirectoryExists(buffPath))
+            {
+                string[] fileNames = Directory.GetFiles(buffPath);
 
+                foreach (string fileName in fileNames)
+                {
+                    // skip meta files
+                    if (fileName.Contains(".meta")) continue;
+                    if (fileName.Contains(charController.charModel.charName.ToString()))
+                    {
+                        string contents = File.ReadAllText(fileName);
+                        BuffModel buffModel = JsonUtility.FromJson<BuffModel>(contents);
+                        InitOnLoad(buffModel);
+                    }
+                }
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing");
+            }
         }
 
         public void ClearState()
         {
-          // clear only specific file in the given path
+            // clear only specific file in the given path
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            path += "/Buff";
+            string[] fileNames = Directory.GetFiles(path);
+
+            foreach (string fileName in fileNames)
+            {
+                if ((fileName.Contains(".meta")) ||
+                 (fileName.Contains(charController.charModel.charName.ToString())))
+                    File.Delete(fileName);
+            }
         }
         #endregion
-
+        public void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                SaveState();
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                LoadState();
+            }
+            if (Input.GetKeyDown(KeyCode.F6))
+            {
+                ClearState();
+            }
+        }
     }
 }

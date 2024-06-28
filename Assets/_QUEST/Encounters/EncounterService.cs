@@ -46,7 +46,6 @@ namespace Quest
             
             questEController = gameObject.GetComponent<QuestEController>();
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-            path += "/CityE";   
             if (SaveService.Instance.DirectoryExists(path))
             {
                 if (IsDirectoryEmpty(path))
@@ -76,6 +75,10 @@ namespace Quest
             {
                 LoadState();
             }
+            if (Input.GetKeyDown(KeyCode.F6))
+            {
+                ClearState();
+            }
         }
 
         public void SaveState()
@@ -94,13 +97,17 @@ namespace Quest
         public void ClearStateQE()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-            path += "/QuestE";
+            path += "/QuestE/";
             DeleteAllFilesInDirectory(path);
         }
         public void SaveStateQE()
         {            
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-            path += "/QuestE";  
+            path += "/QuestE/";
+            // Check if the folder does not exist and create it if necessary
+            if (!Directory.Exists(path))
+                CreateAFolder(path); 
+
             ClearStateQE();
             foreach (QuestEModel questEModel in questEController.allQuestEModels)
             {                
@@ -114,7 +121,9 @@ namespace Quest
         public void SaveStateMapE()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-            path += "/MapE";
+            path += "/MapE/";
+            if (!Directory.Exists(path))
+                CreateAFolder(path);
             ClearStateMapE();
             foreach (MapEModel mapEModel in mapEController.allMapEModels)
             {
@@ -127,14 +136,17 @@ namespace Quest
         public void ClearStateMapE()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-            path += "/MapE";
+            path += "/MapE/";
+
             DeleteAllFilesInDirectory(path);
         }
 
         public void SaveStateCityE()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-            path += "/CityE";
+            path += "/CityE/";
+            if (!Directory.Exists(path))
+                CreateAFolder(path);
             ClearStateCityE();
             foreach (CityEModel cityEModel in cityEController.allCityEModels)
             {
@@ -147,14 +159,14 @@ namespace Quest
         public void ClearStateCityE()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-            path += "/CityE";
+            path += "/CityE/";
             DeleteAllFilesInDirectory(path);
         }
 
         void LoadStateQE()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-            string questEPath = path + "/QuestE";
+            string questEPath = path + "/QuestE/";
        
             if (SaveService.Instance.DirectoryExists(questEPath))
             {
@@ -180,7 +192,7 @@ namespace Quest
         void LoadStateMapE()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-            string mapEPath = path + "/MapE";
+            string mapEPath = path + "/MapE/";
             if (SaveService.Instance.DirectoryExists(mapEPath))
             {
                 string[] fileNames = Directory.GetFiles(mapEPath);
@@ -206,7 +218,7 @@ namespace Quest
         void LoadStateCityE()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-            string cityEPath = path + "/CityE";
+            string cityEPath = path + "/CityE/";
             if (SaveService.Instance.DirectoryExists(cityEPath))
             {
                 string[] fileNames = Directory.GetFiles(cityEPath);

@@ -91,17 +91,18 @@ namespace Interactables
                 if (IsDirectoryEmpty(path))
                 {
                     invMainModel = new InvMainModel();
+                    AbbasStatusSet();
                 }
                 else
                 {
                     LoadState();
+                    AbbasStatusSet();
                 }
             }
             else
             {
                 Debug.LogError("Service Directory missing");
-            }
-            AbbasStatusSet();
+            }            
         }
 
         public void On_DragResult(bool result, ItemsDragDrop itemsDragDrop)

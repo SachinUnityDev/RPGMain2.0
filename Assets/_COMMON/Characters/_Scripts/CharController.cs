@@ -120,7 +120,10 @@ namespace Common
         {
             buffController = gameObject.AddComponent<BuffController>();
             buffController.GetComponent<ISaveable>().LoadState(); 
+            
             timeBuffController = gameObject.AddComponent<TimeBuffController>();
+            timeBuffController.GetComponent<ISaveable>().LoadState();
+
             if (charModel.orgCharMode == CharMode.Ally)
             {
                 charTypeBuffController = gameObject.AddComponent<CharTypeBuffController>();
@@ -149,8 +152,11 @@ namespace Common
 
         void AddController_OnCharSpawn_OnInit(CharacterSO charSO)
         {
-            buffController = gameObject.AddComponent<BuffController>();            
+            buffController = gameObject.AddComponent<BuffController>();
+            buffController.Init(); 
+
             timeBuffController = gameObject.AddComponent<TimeBuffController>();
+            timeBuffController.Init(); 
             if (charModel.orgCharMode == CharMode.Ally)
             {
                 charTypeBuffController = gameObject.AddComponent<CharTypeBuffController>();
@@ -162,7 +168,8 @@ namespace Common
                 fleeController = gameObject.AddComponent<FleeController>();
             }
             statBuffController = gameObject.AddComponent<StatBuffController>();
-            
+            statBuffController.Init();
+
             permaTraitController = gameObject.AddComponent<PermaTraitController>();
             PermaTraitsService.Instance.allPermaTraitControllers.Add(permaTraitController);
 

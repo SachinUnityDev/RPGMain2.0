@@ -21,8 +21,6 @@ namespace Town
         public event Action<BuildingModel, BuildView> OnBuildUnload;
 
 
-
-
         [Header("Current Building")]
         public BuildingNames buildName; 
 
@@ -133,6 +131,7 @@ namespace Town
             if(index != -1)
             {
                 return allBuildModel[index];
+
             }
             else
             {
@@ -393,6 +392,10 @@ namespace Town
             if (Input.GetKeyDown(KeyCode.F2))
             {
                 LoadState();
+            }
+            if (Input.GetKeyDown(KeyCode.F6))
+            {
+                ClearState();
             }
         }
     }

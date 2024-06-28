@@ -3,6 +3,7 @@ using Quest;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 
@@ -85,16 +86,11 @@ namespace Common
         }
     }
 
-    public class StatBuffController : MonoBehaviour
+    public class StatBuffController : MonoBehaviour, ISaveable
     {
 
-        List<StatBuffData> allDayNightbuffs = new List<StatBuffData>();       
-        // use array here for the index to work 
-
+        public StatBuffModel statBuffModel; 
         CharController charController;
-        [SerializeField] List<string> buffStrs = new List<string>();
-        [SerializeField] List<string> deDuffStrs = new List<string>();
-
         public int buffIndex = 0;
 
   
@@ -111,9 +107,21 @@ namespace Common
             CombatEventService.Instance.OnEOC -= EOCTickStatAltBuff;            
             CalendarService.Instance.OnChangeTimeState -= ToggleBuffsOnTimeStateChg;
         }
-
+        public void InitOnLoad(StatBuffModel statbuffModel)
+        {
+            this.statBuffModel = statbuffModel.DeepClone();
+        }
+        public void Init()
+        {
+            if (statBuffModel == null)
+            {
+                charController = GetComponent<CharController>();
+                int charID = charController.charModel.charID;
+                statBuffModel = new StatBuffModel(charID); //pass in char Id      
+            }
+        }
         #region  APPLY_BUFFS 
-     
+
         public int ApplyNInitBuffOnDay(CauseType causeType, int causeName, int causeByCharID
                               , StatName statName, float value, TimeFrame timeFrame, int netTime, bool isBuff)
         {
@@ -131,15 +139,18 @@ namespace Common
 
             StatBuffData buffData = new StatBuffData(buffIndex, isBuff, currRd, timeFrame, netTime,
                                                                    statModData);
-
+            if (statBuffModel == null)
+            {
+                Init();
+            }
             //allBuffs.Add(buffData);
-            allDayNightbuffs.Add(buffData);
+            statBuffModel.allDayNightbuffs.Add(buffData);
             return buffIndex;
 
         }
         void ToggleBuffsOnTimeStateChg(TimeState timeState) // ON start of the day
         {  
-            foreach (StatBuffData buffData in allDayNightbuffs)
+            foreach (StatBuffData buffData in statBuffModel.allDayNightbuffs)
             {
                 if(buffData.timeState == timeState)
                 {  // APPLY temporarily
@@ -160,9 +171,10 @@ namespace Common
 
         #region STAT ALT BUFF
 
-        public List<StatAltBuffData> allStatAltBuffData = new List<StatAltBuffData>();
-
         int statBuffID = 0;
+
+        public ServicePath servicePath => ServicePath.BuffService;
+
         public int ApplyStatRecAltBuff(float valPercent, StatName statModified, CauseType causeType, int causeName, int causeByCharID,
              TimeFrame timeFrame, int netTime, bool isBuff, bool isGain = false, CharStateName charStateName = CharStateName.None
                 , TempTraitName tempTraitName = TempTraitName.None)
@@ -174,13 +186,16 @@ namespace Common
 
             StatAltBuffData statAltBuffData = new StatAltBuffData(statBuffID, causeType, causeName, causeByCharID, isBuff,true, startRoundNo
                                                                  , timeFrame, netTime, statAltData);
-            
-            allStatAltBuffData.Add(statAltBuffData);
+            if (statBuffModel == null)
+            {
+                Init();
+            }
+            statBuffModel.allStatAltBuffData.Add(statAltBuffData);
             return statBuffID;
         }
         public void EOCTickStatAltBuff()
         {
-            foreach (StatAltBuffData statAltBuffData in allStatAltBuffData.ToList())
+            foreach (StatAltBuffData statAltBuffData in statBuffModel.allStatAltBuffData.ToList())
             {
                 if (statAltBuffData.timeFrame == TimeFrame.EndOfCombat)
                 {
@@ -191,7 +206,7 @@ namespace Common
 
         public void EORTick(int roundNo)  // to be completed
         {
-            foreach (StatAltBuffData statAltBuffData in allStatAltBuffData.ToList())
+            foreach (StatAltBuffData statAltBuffData in statBuffModel.allStatAltBuffData.ToList())
             {
                 if (statAltBuffData.timeFrame == TimeFrame.EndOfRound)
                 {
@@ -206,20 +221,20 @@ namespace Common
 
         void RemoveStatRecAltBuffData(StatAltBuffData statAltBuffData)
         {
-            allStatAltBuffData.Remove(statAltBuffData);
+            statBuffModel. allStatAltBuffData.Remove(statAltBuffData);
         }
         public bool RemoveStatRecAltBuff(int statBuffID)
         {
-            int index = allStatAltBuffData.FindIndex(t => t.dmgBuffID == statBuffID);
+            int index = statBuffModel.allStatAltBuffData.FindIndex(t => t.dmgBuffID == statBuffID);
             if (index == -1) return false;
-            StatAltBuffData statAltBuffData = allStatAltBuffData[index];
+            StatAltBuffData statAltBuffData = statBuffModel.allStatAltBuffData[index];
             RemoveStatRecAltBuffData(statAltBuffData);
             return true;
         }
 
         public float GetStatRecAltData(StatName statModified, bool isGain)
         {
-            List<StatAltBuffData> statAltData_StatName = allStatAltBuffData.Where(t=>t.altData.statModified == statModified).ToList();
+            List<StatAltBuffData> statAltData_StatName = statBuffModel.allStatAltBuffData.Where(t=>t.altData.statModified == statModified).ToList();
             List<StatAltBuffData> statAltData_IsPos = statAltData_StatName.Where(t=>t.altData.isGain == isGain).ToList();         
             
             float val = 0f; 
@@ -233,6 +248,74 @@ namespace Common
 
 
         #endregion
+        #region SAVE_LOAD   
+        public void SaveState()
+        {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            string statBuffPath = path + "/StatBuff/";
 
+            ClearState();
+            string buffModelJSON = JsonUtility.ToJson(statBuffModel);
+            string fileName = statBuffPath + charController.charModel.charName + ".txt";
+            File.WriteAllText(fileName, buffModelJSON);
+        }
+
+        public void LoadState()
+        {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            string statBuffPath = path + "/StatBuff/";
+            charController = GetComponent<CharController>();
+            if (SaveService.Instance.DirectoryExists(statBuffPath))
+            {
+                string[] fileNames = Directory.GetFiles(statBuffPath);
+
+                foreach (string fileName in fileNames)
+                {
+                    // skip meta files
+                    if (fileName.Contains(".meta")) continue;
+                    if (fileName.Contains(charController.charModel.charName.ToString()))
+                    {
+                        string contents = File.ReadAllText(fileName);
+                        StatBuffModel statBuffModel = JsonUtility.FromJson<StatBuffModel>(contents);
+                        InitOnLoad(statBuffModel);
+                    }
+                }
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing");
+            }
+        }
+
+        public void ClearState()
+        {
+            // clear only specific file in the given path
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            path += "/StatBuff/";
+            string[] fileNames = Directory.GetFiles(path);
+
+            foreach (string fileName in fileNames)
+            {
+                if ((fileName.Contains(".meta")) &&
+                 (fileName.Contains(charController.charModel.charName.ToString())))
+                    File.Delete(fileName);
+            }
+        }
+        #endregion
+        public void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                SaveState();
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                LoadState();
+            }
+            if (Input.GetKeyDown(KeyCode.F6))
+            {
+                ClearState();
+            }
+        }
     }
 }

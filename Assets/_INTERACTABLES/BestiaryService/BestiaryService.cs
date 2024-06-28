@@ -130,7 +130,7 @@ namespace Common
         {
             if (allRegBestiaryInGameModels.Count <= 0)
             {
-                Debug.LogError("no Bestiary Registered uptill now in play"); return;
+                Debug.Log("no Bestiary Registered uptill now in play"); return;
             }
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
             ClearState();

@@ -40,6 +40,23 @@ namespace Town
                 allDayEventsBase.Add(dayBase);
             }             
         }
+        public void InitOnLoad(List<DayModel> allDayModels) 
+        {
+            this.allDayModels.Clear();
+            this.allDayModels = allDayModels.DeepClone();
+
+            for (int i = 1; i < Enum.GetNames(typeof(DayName)).Length; i++)
+            {
+                DayEventsBase dayBase =
+                    GetComponent<CalendarFactory>().GetDayEvent((DayName)i);
+                DayModel dayModel = GetDayModel((DayName)i);
+
+                dayBase.OnDayInit(dayModel);
+                allDayEventsBase.Add(dayBase);
+            }
+        }
+
+
 
         public void ApplyDayEvents(int dayInYr)
         {

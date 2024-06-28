@@ -1,1 +1,1 @@
-{"moneyInStash":{"silver":23,"bronze":0},"moneyInInv":{"silver":68,"bronze":7},"moneyGainedInQ":{"silver":7,"bronze":9},"allNPCMoneyData":[]}
+{"moneyInStash":{"silver":0,"bronze":0},"moneyInInv":{"silver":0,"bronze":0},"moneyGainedInQ":{"silver":0,"bronze":0},"allNPCMoneyData":[]}

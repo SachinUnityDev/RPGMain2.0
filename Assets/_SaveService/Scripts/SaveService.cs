@@ -87,7 +87,6 @@ namespace Common
 
         public EscapePanelController escapePanelController; 
         public SaveView saveView;
-        public SaveController saveController;
         public SaveMode saveMode;
         public SaveSlot currMBloodSlot; 
 

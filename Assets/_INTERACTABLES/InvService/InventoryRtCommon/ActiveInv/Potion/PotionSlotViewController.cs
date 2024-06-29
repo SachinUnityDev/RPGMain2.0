@@ -10,8 +10,7 @@ using Common;
 
 namespace Interactables
 {
-    public class PotionSlotViewController : MonoBehaviour, IDropHandler
-                                                , IPointerClickHandler, iSlotable
+    public class PotionSlotViewController : MonoBehaviour, IDropHandler, IPointerClickHandler, iSlotable
     {
         public int slotID { get; set; }
         public SlotState slotState { get; set; }
@@ -127,10 +126,8 @@ namespace Interactables
             item.invSlotType = SlotType.PotionsActiveInv;
             ItemsInSlot.Add(item);
             item.slotID= slotID;
-            InvService.Instance.invMainModel.EquipItem2PotionActInv(item, slotID);
-            IEquipAble iequip = item as IEquipAble;
-            if (iequip != null)
-                iequip.ApplyEquipableFX(InvService.Instance.charSelectController);
+            InvService.Instance.invMainModel.EquipItem2PotionActInv(item, slotID);// this has iequipable fx 
+            
             RefreshImg(item);
             //if (ItemsInSlot.Count > 1)
             //    RefreshSlotTxt();

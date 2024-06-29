@@ -8,7 +8,7 @@ namespace Common
 {
     public class RosterModel 
     {
-        // Bottom BP
+        //build from the char Model .. temp no need to load
         public List<CharNames> charInParty = new List<CharNames>();
 
         public bool IsPartyFull()

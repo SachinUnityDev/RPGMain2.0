@@ -65,7 +65,8 @@ namespace Combat
         {
             CharNames charName = charController.charModel.charName;
             CharacterSO charSO = CharService.Instance.GetCharSO(charName);
-            charImg.sprite = charController.charModel.charSprite;
+
+            charImg.sprite = charSO.charSprite; 
             charNameTxt.text = charController.charModel.charNameStr;
         }
         void FillBars()

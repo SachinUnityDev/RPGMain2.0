@@ -38,8 +38,8 @@ namespace Common
         [Header("CORE STATS")]
         public int charID;
         public CharNames charName;
-        public Sprite charSprite;
-        public Sprite charHexSprite; 
+        //public Sprite charSprite;
+        //public Sprite charHexSprite; 
         public CharMode charMode;
         public CharMode orgCharMode; 
       
@@ -87,7 +87,7 @@ namespace Common
         //public List<Iitems> activeInvItems = new List<Iitems>();
 
         [Header("DEFAULT PROVISION")]
-        public List<ItemDataWithQtyNFameType> provisionItems = new List<ItemDataWithQtyNFameType>();
+        public List<ItemDataWithQtyNFameType> provisionItems ;
 
         [Header("ITEM STATS")]
         public int netPotionAddictChance = 0; 
@@ -158,8 +158,7 @@ namespace Common
 
             charID = _charSO.charID;
             charName = _charSO.charName;
-            charSprite = _charSO.charSprite;
-            charHexSprite = _charSO.charHexPortrait; 
+    
             charMode = _charSO.charMode;
             orgCharMode = _charSO.orgCharMode;
             raceType =_charSO.raceType;
@@ -189,6 +188,7 @@ namespace Common
             fleeBehaviour = _charSO.fleeBehaviour;
 
             // "DEFAULT PROVISION
+            provisionItems = new List<ItemDataWithQtyNFameType>(); 
             provisionItems = _charSO.provisionItems.DeepClone();
 
             //"Gift"

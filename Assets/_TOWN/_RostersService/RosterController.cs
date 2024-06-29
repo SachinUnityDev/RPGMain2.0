@@ -56,6 +56,8 @@ namespace Common
            return CharService.Instance.allCharsInPartyLocked
                 .Any(t=>t.charModel.charID == charCtrl.charModel.charID);
         }
+       
+
 
         bool ChkPreReq(CharController charCtrl)
         {

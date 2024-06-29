@@ -93,17 +93,24 @@ namespace Combat
             CleanPanelGO(enemyInCombat);
             for (int i = 0; i < roundController.allyTurnOrder.Count; i++)
             {
-             
+
+                CharacterSO charSO = CharService.Instance.GetCharSO(roundController.allyTurnOrder[i].charModel.charName); 
+
                 allyInCombat[i].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite =
-                     roundController.allyTurnOrder[i].charModel.charHexSprite;
+                    charSO.charHexPortrait;
+                //     roundController.allyTurnOrder[i].charModel.charHexSprite;
                 allyInCombat[i].transform.GetComponent<TopPanelEvents>().charController
                                      = roundController.allyTurnOrder[i];
                 allyInCombat[i].SetActive(true);
             }
             for (int i = 0; i < roundController.enemyTurnOrder.Count; i++)
             {
+                CharacterSO charSO = CharService.Instance.GetCharSO(roundController.enemyTurnOrder[i].charModel.charName);
+
                 enemyInCombat[i].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite =
-                     roundController.enemyTurnOrder[i].charModel.charHexSprite;
+                    charSO.charHexPortrait;
+                //enemyInCombat[i].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite =
+                //     roundController.enemyTurnOrder[i].charModel.charHexSprite;
                 enemyInCombat[i].transform.GetComponent<TopPanelEvents>().charController
                         = roundController.enemyTurnOrder[i];
                 enemyInCombat[i].SetActive(true);

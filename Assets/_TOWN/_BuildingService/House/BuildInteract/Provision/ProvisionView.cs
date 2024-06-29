@@ -5,9 +5,11 @@ using Interactables;
 using UnityEngine.UI;
 using DG.Tweening;
 using Common;
+using System;
 
 namespace Town
 {
+    // Provision View is for the Potion Select Panel in the House
     public class ProvisionView : MonoBehaviour, IPanel
     {
         public int selectIndex;
@@ -29,7 +31,39 @@ namespace Town
         private void Start()
         {
             closeBtn.onClick.AddListener(UnLoad);
+            
         }
+        private void OnEnable()
+        {
+            SetCurrentPotionInPanel4Abbas();
+        }
+        void SetCurrentPotionInPanel4Abbas()
+        {
+            // get char Select
+            CharController charController = CharService.Instance.GetAllyController(CharNames.Abbas);
+            
+            if(charController.charModel.provisionItems.Count > 0)
+            potionName = (PotionNames)charController.charModel.provisionItems[0].itemDataQty.itemData.itemName;
+
+            int i = 0;
+            switch (potionName)
+            {
+                case PotionNames.None:
+                    i = 0;
+                    Debug.LogError("PotionNames.None"); 
+                    break;
+                case PotionNames.HealthPotion:
+                    i = 0;  break;
+                case PotionNames.StaminaPotion:
+                    i = 1; break;                    
+                case PotionNames.FortitudePotion:
+                    i = 2; break;                 
+                default:
+                    i = 0; break;
+            }
+            OnSelect(potionName, i); 
+        }
+
         public void OnSelect(PotionNames _potionName, int index)
         {
             foreach (Transform child in optContainer)
@@ -40,10 +74,15 @@ namespace Town
                     opts.OnDeSelect(true);
                 }                
             }
+            if (provisonOpts.Count == 0)
+            {
+                ProvisionPopulate();
+            }
             selectIndex = index; 
             potionName = _potionName;
             MoveArrow();
             OnAddImg2Slot(provisonOpts[selectIndex]);
+            UpdateInCharModel4Abbas();
         }
 
         void MoveArrow()
@@ -53,19 +92,26 @@ namespace Town
             arrowTrans.DOMoveY(pos.y, 0.1f); 
         }
 
-        public void OnAddImg2Slot(Iitems item)
+         void OnAddImg2Slot(Iitems item)
         {
             slotTrans.GetComponent<HouseProvSlotView>().Init(item); 
         }
 
+        void UpdateInCharModel4Abbas() // for Abbas only
+        {
+            CharController charController = CharService.Instance.GetAllyController(CharNames.Abbas);
+
+            if (charController.charModel.provisionItems.Count > 0)
+               charController.charModel.provisionItems[0].itemDataQty.itemData.itemName = (int)potionName;
+        }
         void OnAddItem2ProvisionSlot()
         {
-            Debug.Log("Add to provision slot");
+            CharController charController = CharService.Instance.GetAllyController(CharNames.Abbas);
             ItemData itemData = new ItemData(ItemType.Potions, (int)potionName);
             Iitems item = ItemService.Instance.GetNewItem(itemData); 
             if (item != null)
             {
-                InvService.Instance.invMainModel.EquipItem2PotionActInv(item, 2); 
+                InvService.Instance.invMainModel.EquipItem2PotionProvSlot(item, charController); 
             }
             UnLoad();
         }
@@ -82,19 +128,22 @@ namespace Town
 
         public void Init()
         {
+            ProvisionPopulate();
+            SetCurrentPotionInPanel4Abbas();
+        }
+        void ProvisionPopulate()
+        {
             if (provisonOpts.Count == 0)
             {
                 Iitems item1 =
-                        ItemService.Instance.itemFactory.GetNewItem(ItemType.Potions,  (int)PotionNames.HealthPotion);
+                        ItemService.Instance.itemFactory.GetNewItem(ItemType.Potions, (int)PotionNames.HealthPotion);
                 Iitems item2 =
                          ItemService.Instance.itemFactory.GetNewItem(ItemType.Potions, (int)PotionNames.StaminaPotion);
                 Iitems item3 =
                          ItemService.Instance.itemFactory.GetNewItem(ItemType.Potions, (int)PotionNames.FortitudePotion);
 
-                provisonOpts.AddRange(new List<Iitems>() { item1, item2, item3 }); 
-
+                provisonOpts.AddRange(new List<Iitems>() { item1, item2, item3 });
             }
-            OnSelect(PotionNames.HealthPotion, 0);
         }
     }
 }

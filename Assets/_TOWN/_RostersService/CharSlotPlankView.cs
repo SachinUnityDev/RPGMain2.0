@@ -178,7 +178,7 @@ public class CharSlotPlankView : MonoBehaviour, IPointerEnterHandler, IPointerEx
             int charID = charController.charModel.charID;
             ActiveInvData activeInvData = InvService.Instance.invMainModel.allActiveInvData.Find(t => t.CharID == charID);
 
-            Iitems item = activeInvData?.potionActiveInv[2];
+            Iitems item = activeInvData?.provisionSlot;
 
             
             if (item != null)

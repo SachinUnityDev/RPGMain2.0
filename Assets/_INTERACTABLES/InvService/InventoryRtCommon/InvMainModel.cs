@@ -24,11 +24,15 @@ namespace Interactables
     public class ActiveInvData: ISerializationCallbackReceiver
     {
         public int CharID;
-        public Iitems[] potionActiveInv = new Iitems[3];
+        public Iitems[] potionActiveInv = new Iitems[2];
         public Iitems[] gewgawActiveInv = new Iitems[3];
 
+        public Iitems provisionSlot; 
+
+
         [Header("Save")]
-        public ItemData[] potionActiveInvData = new ItemData[3];
+        public ItemData[] potionActiveInvData = new ItemData[2];
+        public ItemData provisionSlotData; 
         public ItemData[] gewgawActiveInvData = new ItemData[3];
         public int potionCount; 
         public int gewgawCount;
@@ -37,7 +41,7 @@ namespace Interactables
             this.CharID = charID;
             potionCount = 0;
             gewgawCount = 0;
-            potionActiveInv = new Iitems[3];
+            potionActiveInv = new Iitems[2];
             gewgawActiveInv = new Iitems[3];
         }
 
@@ -45,7 +49,7 @@ namespace Interactables
         public void OnAfterDeserialize()
         {
              potionCount = 0;gewgawCount = 0;
-             potionActiveInv = new Iitems[3];
+             potionActiveInv = new Iitems[2];
              gewgawActiveInv = new Iitems[3];
             foreach (ItemData item in potionActiveInvData)
             {
@@ -53,6 +57,8 @@ namespace Interactables
                 potionActiveInv[potionCount] = ItemService.Instance.GetNewItem(item);
                 potionCount++;
             }
+            if(provisionSlotData != null)
+                provisionSlot = ItemService.Instance.GetNewItem(provisionSlotData); 
             foreach (ItemData item in gewgawActiveInvData)
             {
                 if (item.itemType == ItemType.None) continue;
@@ -71,6 +77,8 @@ namespace Interactables
                 ItemData itemData = new ItemData(item.itemType, item.itemName);                                  
                 potionActiveInvData[i] = itemData;                
             }
+            if(provisionSlot != null)
+                provisionSlotData = new ItemData(provisionSlot.itemType, provisionSlot.itemName);
             i = -1; 
             foreach (Iitems item in gewgawActiveInv)
             {
@@ -118,6 +126,9 @@ namespace Interactables
 
 
         }
+
+
+
         public int GetCommInvSize()
         {
             return size_Comm;
@@ -245,7 +256,6 @@ namespace Interactables
             }
             return false; 
         }
-
         public int GetItemNosInCommInv(ItemData itemData)
         {
             //commonInvItems
@@ -262,8 +272,7 @@ namespace Interactables
             }
 
             return item; 
-        }
-        
+        }        
         public ItemDataWithQty GetItemDataWithQtyFrmCommInv(ItemType itemType, int itemName)
         {
             List<Iitems> allItems = commonInvItems.Where(t => t.itemType == itemType && t.itemName == itemName).ToList();
@@ -273,7 +282,6 @@ namespace Interactables
         }
 
         #endregion
-
 
         #region EXCESS INV 
         public bool AddItem2ExcessInv(Iitems item)   // KEY POINT OF ADDITION OF ITEM // Add to model => view
@@ -382,10 +390,7 @@ namespace Interactables
                 Debug.Log("Active Inv Data Not found" + charID);
             return null;
         }
-
-
-        public void EquipItem2PotionActInv(Iitems item, int slotID) // key point of addition
-                                                                  // SAVE and LOAD Active slot here
+        public void EquipItem2PotionActInv(Iitems item, int slotId) // no more than one call to be created
         {
             CharController charController = InvService.Instance.charSelectController;
             int charID = charController.charModel.charID;
@@ -393,19 +398,49 @@ namespace Interactables
             ActiveInvData activeInvData = GetActiveInvData(charID);
             if (activeInvData != null)
             {
-                activeInvData.potionActiveInv[slotID] = item; 
+                activeInvData.potionActiveInv[slotId] = item;
                 activeInvData.potionCount++;
             }
             else
             {
-                ActiveInvData activeInvDataNew = new ActiveInvData(charID);   
-                activeInvDataNew.potionActiveInv[slotID] = item;
+                ActiveInvData activeInvDataNew = new ActiveInvData(charID);
+                activeInvDataNew.potionActiveInv[slotId] = item; 
                 activeInvDataNew.potionCount++;
                 allActiveInvData.Add(activeInvDataNew);
             }
-            EquipItem(item, charController); 
+            EquipItem(item, charController);
         }
-        void EquipItem(Iitems item, CharController charController)
+
+        public void EquipItem2PotionProvSlot(Iitems item, CharController charController  ) // key point of addition
+                                                            // only for provision slot
+        {
+
+            int charID = charController.charModel.charID;
+
+            ActiveInvData activeInvData = GetActiveInvData(charID);
+            if (activeInvData != null)
+            {
+                activeInvData.provisionSlot = item; 
+            }
+            else
+            {
+                ActiveInvData activeInvDataNew = new ActiveInvData(charID);   
+                activeInvDataNew.provisionSlot = item;
+                allActiveInvData.Add(activeInvDataNew);
+            }
+            EquipItem(item, charController);
+            if (InvService.Instance.invRightViewController.Add2ProvisionSlot(item))
+            {
+                // broascast provision added 
+                Debug.Log("Potion added to provision" + (PotionNames)item.itemName);
+
+            }
+            else
+            {
+                Debug.LogError("Potion cannot be added to provision" + (PotionNames)item.itemName + charController.charModel.charName);
+            } 
+        }
+        public void EquipItem(Iitems item, CharController charController)
         {
             IEquipAble equip = item as IEquipAble;
             if (equip != null)

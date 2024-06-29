@@ -1,1 +1,0 @@
-{"mapEName":2,"mapENameStr":"Band of Bandits","descTxt":"Some bandits came out of nowhere and forestalled you in the middle of the dell. “Wher yo goin mates?” They ask in an unfriendly tone. “Maybe we can help yo go wher yo wanna go!”","choiceAStr":"Fight them","choiceBStr":"Bribe them"}

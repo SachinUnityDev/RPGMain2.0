@@ -232,7 +232,18 @@ namespace Interactables
             }
         }
 
-        #region TO_INV_FILL       
+        public bool Add2ProvisionSlot(Iitems item)
+        {
+            // find the provisionslotcontroller under this and add item
+            ProvisionSlotController provisionSlotController =
+                        potionActiveInvPanel.GetComponentInChildren<ProvisionSlotController>();
+            bool isAdded =  provisionSlotController.AddItem(item); 
+            return isAdded;
+            
+        }
+
+
+#region TO_INV_FILL       
         public bool AddItem2InVView(Iitems item, bool onDrop = true) 
          {
             bool slotFound = false;

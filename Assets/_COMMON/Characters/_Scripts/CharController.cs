@@ -118,6 +118,7 @@ namespace Common
         }
         void AddController_OnCharSpawn_ONLoad(CharModel charModel)
         {
+            this.charModel = charModel.DeepClone(); 
             buffController = gameObject.AddComponent<BuffController>();
             buffController.GetComponent<ISaveable>().LoadState(); 
             

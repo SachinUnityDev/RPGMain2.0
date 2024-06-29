@@ -18,9 +18,10 @@ namespace Interactables
         public List<Iitems> ItemsInSlot { get; set; } = new List<Iitems>();
         public SlotType slotType => SlotType.ProvActiveInv;
 
-        [Header("FOR DROP CONTROLS")]
-        [SerializeField] GameObject draggedGO;
-        [SerializeField] ItemsDragDrop itemsDragDrop;
+        // no dragf and drop available here
+        //[Header("FOR DROP CONTROLS")]
+        //[SerializeField] GameObject draggedGO;
+        //[SerializeField] ItemsDragDrop itemsDragDrop;
 
         [Header("RIGHT CLICK CONTROLs")]
         public List<ItemActions> rightClickActions = new List<ItemActions>();
@@ -86,47 +87,23 @@ namespace Interactables
 
         public bool AddItem(Iitems item, bool add2Model = false)
         {
-
-            if (item.itemType != ItemType.Potions || ItemsInSlot.Count > 0)
-            {
-                return false;
-            }
-
-            if (IsEmpty())
-            {
-                AddItemOnSlot(item);
-                return true;
-            }
-            else
-            {
-                if (HasSameItem(item))  // SAME ITEM IN SLOT 
-                {
-                    if (ItemsInSlot.Count < item.maxInvStackSize)  // SLOT STACK SIZE 
-                    {
-                        AddItemOnSlot(item);
-                        return true;
-                    }
-                    else
-                    {
-                        Debug.Log("Slot full");
-                        return false;
-                    }
-                }
-                else   // DIFF ITEM IN SLOT 
-                {
-                    return false;
-                }
-            }
+            if (item.itemType != ItemType.Potions )
+                //|| ItemsInSlot.Count > 0)            
+            return false;
+            
+            AddItemOnSlot(item);
+            return true;            
         }
         void AddItemOnSlot(Iitems item)
         {
             item.invSlotType = SlotType.ProvActiveInv;
             ItemsInSlot.Add(item);
-            item.slotID = slotID;
-            InvService.Instance.invMainModel.EquipItem2PotionActInv(item, slotID);
-            IEquipAble iequip = item as IEquipAble;
-            if (iequip != null)
-                iequip.ApplyEquipableFX(InvService.Instance.charSelectController);
+            item.slotID = transform.GetSiblingIndex();
+
+            // InvService.Instance.invMainModel.EquipItem2PotionProvSlot(item);
+            //IEquipAble iequip = item as IEquipAble;
+            //if (iequip != null)
+            //    iequip.ApplyEquipableFX(InvService.Instance.charSelectController);
             RefreshImg(item);
         }
 
@@ -158,9 +135,10 @@ namespace Interactables
             {
                 Destroy(gameObject.transform.GetChild(0).GetChild(i).gameObject);
             }
-            Transform ImgTrans = gameObject.transform.GetChild(0).GetChild(0);
+            Transform ImgTrans = transform.GetChild(0).GetChild(0);
             ImgTrans.GetComponent<Image>().sprite = GetSprite(item);
             ImgTrans.gameObject.SetActive(true);
+            
             // clear Extra GO
 
         }

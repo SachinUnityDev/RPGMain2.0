@@ -201,7 +201,7 @@ namespace Common
             if (charCtrl != null)
                 return charCtrl;
             else
-                Debug.Log("Abbas CharController not found" + charName);
+                Debug.Log("ally CharController not found" + charName);
             return null;
         }
         #endregion
@@ -211,7 +211,27 @@ namespace Common
         public void On_PartyLocked()
         {
             isPartyLocked= true;
-            OnPartyLocked?.Invoke(); 
+            OnPartyLocked?.Invoke();
+            foreach (CharController c in allCharsInPartyLocked)
+            {
+                    if (c.charModel.charName == CharNames.Abbas) continue; 
+                
+                    List<ItemDataWithQtyNFameType> qtyWithFamedata = new List<ItemDataWithQtyNFameType>();
+                    qtyWithFamedata = c.charModel.provisionItems;
+                    if(qtyWithFamedata.Count>0)
+                    foreach (ItemDataWithQtyNFameType item in qtyWithFamedata)
+                    {
+                            ItemDataWithQty itemDataWithQty = item.itemDataQty;
+                            for (int i = 0; i < itemDataWithQty.quantity; i++)
+                            {
+                                ItemData itemData = new ItemData(itemDataWithQty.itemData.itemType
+                                        , itemDataWithQty.itemData.itemName);
+                                Iitems Iitem = ItemService.Instance.GetNewItem(itemData);
+                                InvService.Instance.invMainModel.EquipItem2PotionProvSlot(Iitem, c); // refirbish the provision
+                            }
+                    }                   
+                
+            }
         }
         public void On_PartyDisbanded()
         {

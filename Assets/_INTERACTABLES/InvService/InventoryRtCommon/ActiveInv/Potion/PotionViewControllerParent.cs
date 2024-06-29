@@ -37,26 +37,30 @@ namespace Interactables
         }
         private void OnEnable()
         {
+            InvService.Instance.OnCharSelectInvPanel -= LoadActiveInvSlots;// prevent double subscription
             InvService.Instance.OnCharSelectInvPanel += LoadActiveInvSlots;
+
         }
         private void OnDisable()
         {
             InvService.Instance.OnCharSelectInvPanel -= LoadActiveInvSlots;
         }
         void LoadActiveInvSlots(CharModel charModel)
-        {
-            
+        {            
             ClearInv();
-
-            CharController charController = InvService.Instance.charSelectController;
-            if (charController == null) return;
+            if (charModel == null) return;
             ActiveInvData activeInvData = InvService.Instance.invMainModel
-                                            .GetActiveInvData(charController.charModel.charID);
+                                            .GetActiveInvData(charModel.charID);
             if (activeInvData == null) return; 
             for (int i = 0; i < activeInvData.potionActiveInv.Length; i++)
             {
                 Transform child = transform.GetChild(i);
                 child.gameObject.GetComponent<iSlotable>().LoadSlot(activeInvData.potionActiveInv[i]);
+            }
+            if(activeInvData.provisionSlot != null)
+            {
+                ProvisionSlotController provisionSlotController = transform.GetComponentInChildren<ProvisionSlotController>();
+                provisionSlotController.GetComponent<iSlotable>().LoadSlot(activeInvData.provisionSlot);
             }
         }
 

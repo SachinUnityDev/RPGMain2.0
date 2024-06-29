@@ -9,6 +9,7 @@ using Town;
 using UnityEngine.SceneManagement;
 using Quest;
 using System.IO;
+using System.Linq;
 
 
 // apply month 
@@ -91,6 +92,10 @@ namespace Common
         {
             if (scene.name == "TOWN")
             {
+                if(calendarModel == null)
+                {
+                    Init();
+                }
                 calendarUIController.Init();
                 calendarUIController.UpdateMonthPanel(calendarModel.currentMonth, calendarModel.startOfGameDayName, calendarModel.dayInYear);
                 calendarUIController.UpdateWeekPanel(calendarModel.currentWeek);
@@ -102,7 +107,7 @@ namespace Common
                 this.calendarModel = new CalendarModel();
             this.calendarModel = calendarModel.DeepClone();  
         }
-        public void Init()
+        public void Init() 
         {
             weekEventsController = GetComponent<WeekEventsController>();
             dayEventsController = GetComponent<DayEventsController>();
@@ -110,7 +115,9 @@ namespace Common
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
             if (SaveService.Instance.DirectoryExists(path))
             {
-                if (IsDirectoryEmpty(path))
+                string[] textFiles = Directory.GetFiles(path, "*.txt"); // calendar file is txt file
+
+                if (textFiles.Length == 0)
                 {
                     calendarModel = new CalendarModel();
                     // define what date and time the game will start by default 
@@ -442,7 +449,9 @@ namespace Common
                 foreach (string fileName in fileNames)
                 {
                     // skip meta files
-                    if (fileName.Contains(".meta")) continue;            
+                    if (fileName.Contains(".meta")) continue;
+                    if (!fileName.Contains(".txt")) continue;
+
                     string contents = File.ReadAllText(fileName);
                     CalendarModel calModel = JsonUtility.FromJson<CalendarModel>(contents);
                     InitOnLoad(calModel);            

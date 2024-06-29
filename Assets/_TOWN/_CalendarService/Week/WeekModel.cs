@@ -12,7 +12,7 @@ namespace Common
         public int weekCount;
         public string weekNameStr;
         public string weekDesc;
-        public List<string> WeekSpecs = new List<string>();
+        public List<string> WeekSpecs;
         public bool isDayBonusReceived = false; 
         public WeekModel(WeekSO weekSO)
         {
@@ -20,6 +20,8 @@ namespace Common
             this.weekCount = weekSO.weekCount;
             this.weekNameStr = weekSO.weekNameStr;
             this.weekDesc = weekSO.weekDesc;
+            WeekSpecs = new List<string>();
+            if(weekSO.WeekSpecs.Count>0)
             this.WeekSpecs = weekSO.WeekSpecs.DeepClone();
         }
     }

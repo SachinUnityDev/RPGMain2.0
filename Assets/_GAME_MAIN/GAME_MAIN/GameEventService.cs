@@ -51,14 +51,13 @@ namespace Common
             TownService.Instance.Init();  // new game
             BuildingIntService.Instance.InitNGBuildIntService();
             EncounterService.Instance.EncounterInit();
+            CalendarService.Instance.Init();
+            
             CharService.Instance.Init();
-
             CharStatesService.Instance.Init(); 
 
-
-
             UIControlServiceGeneral.Instance.InitUIGeneral();
-            CalendarService.Instance.Init();
+       
             EcoService.Instance.InitEcoServices();
             BarkService.Instance.InitBarkService();
             JobService.Instance.JobServiceInit();

@@ -30,7 +30,7 @@ namespace Town
         public void InitWeeek(CalendarUIController calendarUIController, WeekModel weekModel)
         {
             this.calendarUIController = calendarUIController;
-            this.weekModel = weekModel;
+            this.weekModel = weekModel.DeepClone();
             weekSO = CalendarService.Instance.allWeekSO.GetWeekSO(weekModel.weekName);
             weekEventBtnView.Init(weekModel,weekSO); 
             FillWeekPanel();

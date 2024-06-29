@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using Town;
 using System;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 namespace Common
 {
@@ -119,8 +120,14 @@ namespace Common
 
         public void LoadState()
         {
-
-
+            // get char from the charController and add to the party
+            // no need to load 
+            rosterController = rosterController.GetComponent<RosterController>();
+            rosterModel = new RosterModel();
+            foreach (CharController c in CharService.Instance.allCharsInPartyLocked)
+            {
+                rosterModel.charInParty.Add(c.charModel.charName);                
+            }
         }
 
         public void ClearState()
@@ -131,22 +138,7 @@ namespace Common
         {
         }
 
-        public void RestoreState(string basePath)
-        {
-            
-        }
-        // this-> save and Load 
-        // controller-> single instance attached to this, would provide algo support
-        // model -> single instance would hold data for the current state 
-        // view Controller -> Single Instance would control drag and drop and allocatment 
-        // support from Service and Controller 
-
-
-
-        // UNavailable : He is in a diff location -> 
-        // :fame Behavior
-        // prereq
-        // some Trait
+        
     }
 
 

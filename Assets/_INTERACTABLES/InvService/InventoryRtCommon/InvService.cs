@@ -16,7 +16,7 @@ namespace Interactables
         public int MAX_SIZE_COMM_INV = 0; 
 
         public event Action<bool, ItemsDragDrop> OnDragResult;
-        public event Action<CharModel> OnCharSelectInvPanel;       // int here is charID 
+        public event Action<CharModel> OnCharSelectInvPanel;       // charMode broadcasted
         public event Action<bool> OnToggleInvXLView;
 
         public event Action<Iitems> OnItemAdded2Comm;
@@ -115,10 +115,7 @@ namespace Interactables
             ActiveInvData activeInvData = invMainModel.GetActiveInvData(charSelectController.charModel.charID);
             ItemData itemData = new ItemData(ItemType.Potions, (int)PotionNames.HealthPotion);
             Iitems item = ItemService.Instance.GetNewItem(itemData);
-            if(activeInvData == null)
-                invMainModel.EquipItem2PotionActInv(item, 2);
-            else if (activeInvData.potionActiveInv[2] == null)            
-                invMainModel.EquipItem2PotionActInv(item, 2);
+            invMainModel.EquipItem2PotionProvSlot(item, charSelectController); // refirbish the provision
         }
 
         public void On_CharSelectInv(CharModel charModel)

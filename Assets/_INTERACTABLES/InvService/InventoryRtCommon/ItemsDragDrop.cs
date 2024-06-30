@@ -228,8 +228,13 @@ namespace Interactables
             iSlotable.CloseRightClickOpts();
             rectTransform = GetComponent<RectTransform>();
             slotParent = transform.parent;
+
+            canvas = GetComponentInParent<Canvas>();
+
+            if (canvas == null)
+                Debug.LogError(" Canva sis null"); 
             transform.SetParent(canvas.transform);  // to keep draged object on top 
-            
+            transform.SetAsLastSibling();   
             if (iSlotable.ItemsInSlot.Count <= 0)            
             {
                 CreateEmptyClone(); 

@@ -32,7 +32,9 @@ namespace Common
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            descTxt = GetComponentInChildren<TextMeshProUGUI>();
             int overloadCount = InvService.Instance.overLoadCount;
+            if (descTxt == null) return;
             descTxt.text = $" Clear last {overloadCount} slots"; 
             descTxt.gameObject.SetActive(overloadCount > 0);    
             img.sprite= spriteHL;

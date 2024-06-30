@@ -88,20 +88,32 @@ namespace Interactables
             if (GameService.Instance.currGameModel.gameScene == GameScene.InTown)
             {
                 int charLocked = CharService.Instance.allCharsInPartyLocked.Count;
-                int maxSlotCount = (charLocked - 1) * 12 + 18;
-                int activeCount = GetActiveSlotCount();
-                if (maxSlotCount < activeCount) // this will work fine as activeCount is updated on removal later in this block
+                int maxSlotCount = InvService.Instance.invMainModel.GetCommInvSize();
+                int filledSlots = GetActiveSlotCount();
+                if(filledSlots > maxSlotCount) 
                 {
+                    if(currCommonInvSize > filledSlots)                    
+                        SetInv2MaxCount(currCommonInvSize);
+                    //else
+                    //    currCommonInvSize = filledSlots;
+                                            
+                }
+                else if (maxSlotCount == filledSlots) // on inv overload
+                {                   
+                    // reset ....
+                    invSortingView.InvSortingGrpInit(this);
                     RemoveNMake_InActive_EmptySlots();
-                    activeCount = GetActiveSlotCount();
+                    filledSlots = GetActiveSlotCount();
                     // open and lock inv 
-                    SetInv2MaxCount(activeCount);
+                    SetInv2MaxCount(filledSlots);
+                    currCommonInvSize = filledSlots;
                 }
                 else
                 {
+                    currCommonInvSize = maxSlotCount; 
                     SetInv2MaxCount(maxSlotCount);
                 }
-                InvService.Instance.overLoadCount = activeCount - maxSlotCount;
+                InvService.Instance.overLoadCount = filledSlots - maxSlotCount;
                 if (InvService.Instance.overLoadCount > 0)
                 {
                     overloadedView.Init(); 
@@ -157,8 +169,8 @@ namespace Interactables
                 iSlotable iSlotable = child.gameObject.GetComponent<iSlotable>();
 
                 if(iSlotable.slotState== SlotState.ActiveNFull ||
-                    iSlotable.slotState == SlotState.ActiveNHasSpace
-                    || iSlotable.slotState == SlotState.ActiveNEmpty)
+                    iSlotable.slotState == SlotState.ActiveNHasSpace)
+                    //|| iSlotable.slotState == SlotState.ActiveNEmpty)
                     count++;
             }
             return count; 

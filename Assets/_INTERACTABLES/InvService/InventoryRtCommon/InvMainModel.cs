@@ -114,7 +114,7 @@ namespace Interactables
         public List<ItemData> excessInvItemsData = new List<ItemData>();
 
         [Header("Inv max sizes")]
-        public int size_Comm = 24;
+        public int size_Comm = 18;
         public int size_excess = 24;
         public int size_Stash = 18;
         #endregion 
@@ -131,7 +131,14 @@ namespace Interactables
 
         public int GetCommInvSize()
         {
-            return size_Comm;
+            // chk is party locked 
+            // if locked chk the chars in party
+            if(CharService.Instance.isPartyLocked)
+            {
+                int count = CharService.Instance.allCharsInPartyLocked.Count - 1;
+                return 18 + 6 *2* count;
+            }
+            return 18; 
         }
         public bool AddItem2CommORStash(Iitems item)
         {

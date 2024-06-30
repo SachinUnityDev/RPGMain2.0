@@ -92,6 +92,7 @@ namespace Interactables
                 else
                     child.gameObject.SetActive(false);
             }
+            SetFilledSlotFirst(); 
         }
         void ShowItemGrp(ItemGrp itemGrp)
         {
@@ -120,16 +121,27 @@ namespace Interactables
                     }
                 }
             }
+            SetFilledSlotFirst();
+            //foreach (Transform child in slotContainer)
+            //{
+            //    ItemSlotController itemSlotController = child.GetComponent<ItemSlotController>();
+            //    if(itemSlotController.ItemsInSlot.Count != 0)
+            //    {
+            //        child.SetAsFirstSibling();
+            //    }
+            //}
+        }
+        void SetFilledSlotFirst()
+        {
             foreach (Transform child in slotContainer)
             {
                 ItemSlotController itemSlotController = child.GetComponent<ItemSlotController>();
-                if(itemSlotController.ItemsInSlot.Count != 0)
+                if (itemSlotController.ItemsInSlot.Count != 0)
                 {
                     child.SetAsFirstSibling();
                 }
             }
         }
-
     
 
     }

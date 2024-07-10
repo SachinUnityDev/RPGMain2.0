@@ -44,7 +44,7 @@ namespace Interactables
         void OnPotionBtnPressed()
         {
             potionBtnPtrEvents.isClicked = !potionBtnPtrEvents.isClicked;
-            if (!potionBtnPtrEvents.isClicked)
+            if ( potionActivePanel.activeInHierarchy == true)
             {
                 UIControlServiceGeneral.Instance.TogglePanelOnInGrp(potionActivePanel.gameObject, false);
             }
@@ -58,7 +58,7 @@ namespace Interactables
         {
             gewgawBtnPtrEvents.isClicked = !gewgawBtnPtrEvents.isClicked;       
 
-            if (!gewgawBtnPtrEvents.isClicked)
+            if (gewgawsActivePanel.activeInHierarchy == true)
             {
                 UIControlServiceGeneral.Instance.TogglePanelOnInGrp(gewgawsActivePanel.gameObject, false);
             }
@@ -72,7 +72,7 @@ namespace Interactables
         void OnArmorBtnPressed()
         {
             armorBtnPtrEvents.isClicked = !armorBtnPtrEvents.isClicked;
-            if (!armorBtnPtrEvents.isClicked)
+            if (armorPanel.activeInHierarchy == true)
             {
                 UIControlServiceGeneral.Instance.TogglePanelOnInGrp(armorPanel.gameObject, false);             
             }
@@ -85,7 +85,7 @@ namespace Interactables
         void OnWeaponBtnPressed()
         {
             weaponBtnPtrEvents.isClicked = !weaponBtnPtrEvents.isClicked;
-            if (!weaponBtnPtrEvents.isClicked)
+            if (weaponPanel.activeInHierarchy == true)
             {
                 UIControlServiceGeneral.Instance.TogglePanelOnInGrp(weaponPanel.gameObject, false);              
             }

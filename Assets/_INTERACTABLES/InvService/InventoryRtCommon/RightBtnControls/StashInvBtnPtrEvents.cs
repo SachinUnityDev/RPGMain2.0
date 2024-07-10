@@ -33,6 +33,8 @@ namespace Interactables
                 img.sprite = spriteHL;
             }
             isClicked = !isClicked;
+            //if (stashInvTransferBox.activeInHierarchy == false)
+            //    img.sprite = spriteN;
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -42,6 +44,7 @@ namespace Interactables
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            if(stashInvTransferBox.activeInHierarchy == false)
             img.sprite = spriteN;
         }
 

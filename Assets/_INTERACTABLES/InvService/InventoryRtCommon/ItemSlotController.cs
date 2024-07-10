@@ -88,6 +88,7 @@ namespace Interactables
             draggedGO = eventData.pointerDrag;
             itemsDragDrop = draggedGO.GetComponent<ItemsDragDrop>();
             Iitems itemDragged = itemsDragDrop?.itemDragged;
+            if (itemDragged == null) return;
             iSlotable islot = itemsDragDrop.iSlotable;
             if (islot.slotType == SlotType.ProvActiveInv) return;
             if (itemsDragDrop != null)

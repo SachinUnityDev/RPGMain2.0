@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System; 
+using System;
+using System.IO;
+using Town;
 
 namespace Common
 {
@@ -17,9 +19,6 @@ namespace Common
         public event Action<int> OnFameChg;
 
         public ServicePath servicePath => ServicePath.FameService;
-
-        [Header("Game Init")]
-        public bool isNewGInitDone = false;
         void Start()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
@@ -31,12 +30,36 @@ namespace Common
                 fameViewController = FindObjectOfType<FameViewController>(true);
             }
         }
+
+
+        public void InitOnLoad(FameModel fameModel)
+        {
+            fameController = gameObject.GetComponent<FameController>();
+
+            if (fameController.fameModel == null)
+                fameController.fameModel = new FameModel();
+            fameController.fameModel = fameModel.DeepClone();
+        }
+
         public void Init()
         {
-            // save service integration here pending
-            fameController = gameObject.GetComponent<FameController>();
-            fameController.InitFameController(fameSO);
-            isNewGInitDone = true;
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            if (SaveService.Instance.DirectoryExists(path))
+            {
+                if (IsDirectoryEmpty(path))
+                {                 
+                    fameController = gameObject.GetComponent<FameController>();
+                    fameController.InitFameController(fameSO);
+                }
+                else
+                {
+                    LoadState();
+                }
+            }
+            else
+            {               
+               Debug.LogError("Service Directory missing");
+            }
         }
         public FameType GetFameType()
         {
@@ -73,20 +96,55 @@ namespace Common
         }
         public void LoadState()
         {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
 
+            if (SaveService.Instance.DirectoryExists(path))
+            {
+                string[] fileNames = Directory.GetFiles(path);
+                FameModel fameModel = new FameModel();
+                foreach (string fileName in fileNames)
+                {
+                    // skip meta files
+                    if (fileName.Contains(".meta")) continue;
+                    string contents = File.ReadAllText(fileName);
+                   fameModel = JsonUtility.FromJson<FameModel>(contents);
+
+                }
+                InitOnLoad(fameModel);
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing");
+            }
         }
         public void ClearState()
         {
-
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            DeleteAllFilesInDirectory(path);
         }
         public void SaveState()
         {
-
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            ClearState();             
+            string fameModelJSON = JsonUtility.ToJson(fameController.fameModel);
+            string fileName = path + "FameModel" + ".txt";
+            File.WriteAllText(fileName, fameModelJSON);
         }
 
-        public void RestoreState(string basePath)
+        public void Update()
         {
-            throw new NotImplementedException();
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                SaveState();
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                LoadState();
+            }
+            if (Input.GetKeyDown(KeyCode.F6))
+            {
+                ClearState();
+            }
         }
     }
 

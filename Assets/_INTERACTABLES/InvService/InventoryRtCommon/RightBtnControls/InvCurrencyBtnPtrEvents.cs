@@ -83,7 +83,7 @@ namespace Interactables
             UIControlServiceGeneral.Instance.TogglePanel(transform.GetChild(0).gameObject, true);
             FillPanel(EcoService.Instance.GetMoneyAmtInPlayerInv());
             transactPanel.gameObject.SetActive(false);
-            img.sprite = spriteN; 
+            img.sprite = spriteHL; 
         }
 
 
@@ -109,7 +109,8 @@ namespace Interactables
             else
                 Load();
             isClicked = !isClicked;
-            img.sprite = spriteN;
+            if (transform.GetChild(0).gameObject.activeInHierarchy == false)
+                img.sprite = spriteN;
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -119,6 +120,7 @@ namespace Interactables
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            if(transform.GetChild(0).gameObject.activeInHierarchy == false)
             img.sprite = spriteN;
         }
     }

@@ -16,14 +16,19 @@ namespace Common
 
         [Header("Modifier values")]
         public int fameYield = 1;
-        
+
         [Header("FAME Change")]
-        public List<FameChgData> allFameData = new List<FameChgData>();
+        public List<FameChgData> allFameData; 
         public FameModel(FameSO fameSO)
         {
             fameVal = fameSO.fameVal; 
             fameType= fameSO.fameType;
             fameYield = fameSO.FameYield; 
+            allFameData = new List<FameChgData>();
+        }
+        public FameModel()
+        {
+            allFameData = new List<FameChgData>();
         }
     }
 }

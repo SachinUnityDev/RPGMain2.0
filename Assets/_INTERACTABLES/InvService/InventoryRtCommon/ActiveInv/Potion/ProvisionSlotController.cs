@@ -138,9 +138,21 @@ namespace Interactables
             Transform ImgTrans = transform.GetChild(0).GetChild(0);
             ImgTrans.GetComponent<Image>().sprite = GetSprite(item);
             ImgTrans.gameObject.SetActive(true);
-            
-            // clear Extra GO
 
+           
+            transform.GetComponent<Image>().sprite = GetBGSprite(item);
+
+           
+
+        }
+        Sprite GetBGSprite(Iitems item)
+        {
+            Sprite sprite = InvService.Instance.InvSO.GetBGSprite(item);
+            if (sprite != null)
+                return sprite;
+            else
+                Debug.Log("SPRITE NOT FOUND");
+            return null;
         }
         void RefreshSlotTxt()
         {
@@ -179,14 +191,7 @@ namespace Interactables
         }
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (eventData.button == PointerEventData.InputButton.Right)
-            {
-                if (ItemsInSlot.Count > 0)
-                {
-                    InvService.Instance.invMainModel.AddItem2CommInv(ItemsInSlot[0]);
-                    RemoveItem();
-                }
-            }
+          
         }
 
         public void LoadSlot(Iitems item) // added only to View

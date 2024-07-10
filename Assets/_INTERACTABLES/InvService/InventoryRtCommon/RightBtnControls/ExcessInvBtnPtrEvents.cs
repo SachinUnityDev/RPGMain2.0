@@ -25,7 +25,7 @@ namespace Interactables
         {
            UIControlServiceGeneral.Instance.TogglePanel(excessInvPanel, true);
             excessInvPanel.GetComponent<IPanel>().Load();
-            img.sprite = spriteN;
+            img.sprite = spriteHL;
         }
         public void UnLoad()
         {
@@ -60,12 +60,14 @@ namespace Interactables
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            img.sprite = spriteHL; 
-         }
+            img.sprite = spriteHL;
+
+        }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            img.sprite = spriteN;
+            if(excessInvPanel.activeInHierarchy == false)
+                    img.sprite = spriteN;
         }
     }
 

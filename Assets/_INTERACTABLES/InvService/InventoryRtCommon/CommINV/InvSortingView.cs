@@ -87,7 +87,11 @@ namespace Interactables
             {
 
                iSlotable iSlotable = child.GetComponent<iSlotable>();
-                if (iSlotable.slotState != SlotState.InActive)
+                if (iSlotable.slotState != SlotState.InActive
+                    //&&
+                    //(iSlotable.slotState == SlotState.ActiveNFull || iSlotable.slotState == SlotState.ActiveNHasSpace
+                    //|| iSlotable.slotState == SlotState.ActiveNEmpty)
+                    )
                     child.gameObject.SetActive(true);
                 else
                     child.gameObject.SetActive(false);
@@ -109,15 +113,22 @@ namespace Interactables
                     ItemSlotController itemSlotController = child.GetComponent<ItemSlotController>();
                     if (itemSlotController.ItemsInSlot.Count > 0)
                     {
+
                         Iitems item = itemSlotController.ItemsInSlot[0];
                         if (item.itemType == itemType)
                         {
                             child.gameObject.SetActive(true);
                         }
+                        
+                    }
+                    else if(itemSlotController.ItemsInSlot.Count == 0)
+                    {
+                        if(itemSlotController.GetComponent<iSlotable>().slotState != SlotState.InActive)
+                            child.gameObject.SetActive(true);
                     }
                     else
                     {
-                        child.gameObject.SetActive(true);
+                        child.gameObject.SetActive(false);
                     }
                 }
             }

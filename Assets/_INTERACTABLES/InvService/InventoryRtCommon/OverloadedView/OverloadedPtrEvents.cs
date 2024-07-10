@@ -43,6 +43,8 @@ namespace Common
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            descTxt = GetComponentInChildren<TextMeshProUGUI>();
+
             descTxt.gameObject.SetActive(false);
             img.sprite = spriteN; 
         }

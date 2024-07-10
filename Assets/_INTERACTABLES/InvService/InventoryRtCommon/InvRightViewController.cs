@@ -101,7 +101,8 @@ namespace Interactables
                 else if (maxSlotCount == filledSlots) // on inv overload
                 {                   
                     // reset ....
-                    invSortingView.InvSortingGrpInit(this);
+                    if(InvService.Instance.overLoadCount > 0)
+                        invSortingView.InvSortingGrpInit(this);
                     RemoveNMake_InActive_EmptySlots();
                     filledSlots = GetActiveSlotCount();
                     // open and lock inv 

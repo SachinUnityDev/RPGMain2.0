@@ -1,0 +1,1 @@
+{"charID":4,"allStatAltBuffData":[{"dmgBuffID":1,"causeType":4,"causeName":2,"causeByCharID":4,"isPositive":true,"isBuff":true,"startRoundNo":1,"timeFrame":6,"buffedNetTime":1,"buffCurrentTime":0,"altData":{"statModified":3,"isGain":false,"valPercent":30.0}}],"buffStrs":[],"deDuffStrs":[]}

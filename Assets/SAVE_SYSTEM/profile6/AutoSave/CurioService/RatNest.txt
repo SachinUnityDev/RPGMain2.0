@@ -1,0 +1,1 @@
+{"curioName":18,"toolName":10,"toolName2":0,"openDesc":"\"Only vermin may live in this shit hole\"","interactDesc":"","lootMoneyMin":{"silver":3,"bronze":0},"lootMoneyMax":{"silver":6,"bronze":0},"curioBark":""}

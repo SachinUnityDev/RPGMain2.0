@@ -46,7 +46,8 @@ namespace Common
         //GameInProgress, 
         //GameQuit, 
 
-        public void NewGameInit()
+
+        public void OnTownEnterInit()
         {   
             TownService.Instance.Init();  // new game
             BuildingIntService.Instance.InitNGBuildIntService();
@@ -92,12 +93,14 @@ namespace Common
             }
         }
         public void LoadGameInit(int slotId)
-        {
+        { 
+
+
 
         }
         public void OnSceneEnterInit() // make slot0 as current save
         {
-            // initialize service based on curr models 
+            
 
 
 
@@ -113,7 +116,7 @@ namespace Common
                 return;
             if (GameService.Instance.isNewGInitDone)
                 return;
-            NewGameInit(); 
+            OnTownEnterInit(); 
 
         }
         public void On_TownExit(LocationName locationName)

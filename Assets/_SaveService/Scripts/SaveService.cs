@@ -10,68 +10,7 @@ using Quest;
 namespace Common
 {
 
-    public enum ServicePath
-    {
-        Main, 
-        PlayerService,
-        WoodGameService,
-        CurioService,
-        EncounterService,
-        LandscapeService,
-        LootService,
-        QuestEventService,
-        QuestMissionService,
-        QRoomService,
-        ArmorService,
-        InvService,
-        WeaponService,
-        GewgawService,
-        LoreService,
-        RecipeService,
-        ItemService,
-        GridService,
-        CombatEventService,
-        CombatService,
-        PassiveSkillService,
-        SkillService,
-        WelcomeService,
-        JobService,
-        BuildingIntService,
-        MapService,
-        TownService,
-        SceneMgmtService,
-        BarkService,
-        BuffService,
-        CharStatesService,
-        CharService,
-        DialogueService,
-        LevelService,
-        PermaTraitsService,
-        TempTraitService,
-        CodexService,
-        GameEventService,
-        GameService,
-        SettingService,
-        IntroAudioService,
-        BestiaryService,
-        MGService,
-        SaveService,
-        FameService,
-        CalendarService,
-        RosterService,
-        TownEventService,
-        TradeService,
-        EcoService,
-
-    }
-
-    public interface ISaveable
-    {
-        ServicePath servicePath { get; }   
-        void SaveState();
-        void LoadState();
-        void ClearState();     
-    }
+   
 
     // Should define and send the save path for each of the service 
     // Each Service should either create the folder & File or save the data in already created file and folder
@@ -80,7 +19,7 @@ namespace Common
     {
         [Header("Scriptable Object")]
         public SaveSO saveSO;
-        public string basePath = "/SAVE_SYSTEM/NEWSAVE1/"; 
+        public string basePath = "/SAVE_SYSTEM/"; 
         [Header("Save and Load Panel Ref")]
         public GameObject savePanel;
         public GameObject loadPanel;
@@ -94,7 +33,12 @@ namespace Common
         public List<GameObject> allServices = new List<GameObject>();
         public List<ISaveable> allSaveService = new List<ISaveable>();
 
-        
+        [Header("Profile Controller")]
+        public ProfileController profileController;
+        public ProfileView profileView; 
+        public ProfileModel profileModel;
+
+
         public bool isLoading = false;
         public bool isSaving = false; 
 
@@ -107,9 +51,15 @@ namespace Common
                 if(child.GetComponent<Button>() != null)
                     child.GetComponent<Button>().onClick.AddListener(()=>OnSlotBtnPressed(child));
             }
-            CreateDefaultFolders();
+            //CreateDefaultFolders();
         }
         // ONLY FOR THE FILE INIT 
+        // save and load profile Model to be implemented 
+        // connect profile Model and code Profile View 
+        // Profile Controller will update based on profile view 
+        
+         
+
         void CreateDefaultFolders()
         {
 
@@ -134,12 +84,10 @@ namespace Common
             }
         }
 
-
-
-
         public string GetSlotPath(SaveSlot saveSlot)
         {
-            string str = Application.dataPath + basePath ;
+            profileController = GetComponent<ProfileController>();  
+            string str = Application.dataPath + profileController.GetProfilePath();
             switch (saveSlot)
             {
                 case SaveSlot.AutoSave:
@@ -393,9 +341,7 @@ namespace Common
             return saveables;
         }
     
-
-
-    public void ShowSavePanel()
+        public void ShowSavePanel()
         {
             savePanel.GetComponent<IPanel>().Init();
             savePanel.GetComponent<IPanel>().Load();           
@@ -474,7 +420,77 @@ namespace Common
 //        AutoSaveMB, // at every chekc point in MB mode .. no manual saving 
         ManualSave, // save
     }
+    public enum ProfileSlot
+    {
+        Profile1,
+        Profile2,
+        Profile3,
+        Profile4,
+        Profile5,
+        Profile6,
+    }
+    public enum ServicePath
+    {
+        Main,
+        PlayerService,
+        WoodGameService,
+        CurioService,
+        EncounterService,
+        LandscapeService,
+        LootService,
+        QuestEventService,
+        QuestMissionService,
+        QRoomService,
+        ArmorService,
+        InvService,
+        WeaponService,
+        GewgawService,
+        LoreService,
+        RecipeService,
+        ItemService,
+        GridService,
+        CombatEventService,
+        CombatService,
+        PassiveSkillService,
+        SkillService,
+        WelcomeService,
+        JobService,
+        BuildingIntService,
+        MapService,
+        TownService,
+        SceneMgmtService,
+        BarkService,
+        BuffService,
+        CharStatesService,
+        CharService,
+        DialogueService,
+        LevelService,
+        PermaTraitsService,
+        TempTraitService,
+        CodexService,
+        GameEventService,
+        GameService,
+        SettingService,
+        IntroAudioService,
+        BestiaryService,
+        MGService,
+        SaveService,
+        FameService,
+        CalendarService,
+        RosterService,
+        TownEventService,
+        TradeService,
+        EcoService,
 
+    }
+
+    public interface ISaveable
+    {
+        ServicePath servicePath { get; }
+        void SaveState();
+        void LoadState();
+        void ClearState();
+    }
 
 }
 

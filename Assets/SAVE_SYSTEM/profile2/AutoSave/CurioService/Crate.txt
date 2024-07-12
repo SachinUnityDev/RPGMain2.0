@@ -1,0 +1,1 @@
+{"curioName":9,"toolName":0,"toolName2":0,"openDesc":"\"Seems like a perfect object to crush.\"","interactDesc":"","lootMoneyMin":{"silver":3,"bronze":0},"lootMoneyMax":{"silver":6,"bronze":0},"curioBark":""}

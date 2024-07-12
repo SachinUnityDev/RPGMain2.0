@@ -37,7 +37,7 @@ namespace Common
         public ServicePath servicePath => ServicePath.GameService;
         public GameModel GetGameModel(int slot)
         {
-            int index = allGameModel.FindIndex(t => t.profileSlot == slot); 
+            int index = allGameModel.FindIndex(t => t.profileSlot == (ProfileSlot)slot); 
             if(index != -1)
             {
                 return allGameModel[index];
@@ -89,77 +89,105 @@ namespace Common
         public void GameSceneLoad(GameScene gameScene)
         {
             currGameModel.gameScene= gameScene;            
-            GameEventService.Instance.OnGameSceneChg?.Invoke(gameScene);             
+            GameEventService.Instance.OnGameSceneChg?.Invoke(gameScene);
+            if (gameScene == GameScene.InIntro)
+                OnIntroSceneLoad(); 
         }
+
+        void OnIntroSceneLoad()
+        {
+            // game Start state
+            LoadState(); 
+
+        }
+
 
         #region SAVE AND LOAD 
         public void LoadState()
         {
-            string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelected.ToString()
-                     + "/Char/gameModels.txt";
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
 
-            if (File.Exists(Application.dataPath + mydataPath))
+            if (SaveService.Instance.DirectoryExists(path))
             {
-                Debug.Log("File found!");
-                string str = File.ReadAllText(Application.dataPath + mydataPath);
-
-                allGameJSONs = str.Split('|').ToList();
-
-                foreach (string modelStr in allGameJSONs)
+                string[] fileNames = Directory.GetFiles(path);
+                foreach (string fileName in fileNames)
                 {
-                    Debug.Log($"CHAR: {modelStr}");
-                    if (String.IsNullOrEmpty(modelStr)) continue; // eliminate blank string
-                    GameModel gameModel = JsonUtility.FromJson<GameModel>(modelStr);
-                   
-                    Debug.Log(gameModel.gameScene);
+                    // skip meta files
+                    if (fileName.Contains(".meta")) continue;
+                    string contents = File.ReadAllText(fileName);
+                    Debug.Log("  " + contents);
+                    GameModel gameModel = JsonUtility.FromJson<GameModel>(contents);
+                    allGameModel.Add(gameModel);
                 }
             }
             else
             {
-                Debug.Log("File Does not Exist");
+                Debug.LogError("Service Directory missing");
             }
-
         }
         public void ClearState()
         {
-            string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelected.ToString()
-             + "/Char/charModels.txt";
-            File.WriteAllText(Application.dataPath + mydataPath, "");
-
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            DeleteAllFilesInDirectory(path);
         }
         public void SaveState()
-        {            
-            ClearState();
-        }
-
-        public void RestoreState(string basePath)
         {
-            throw new NotImplementedException();
+            if (allGameModel.Count <= 0)
+            {
+                Debug.LogError("no GameModel created"); return;
+            }
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            ClearState();
+
+            foreach (GameModel gameModel in allGameModel)
+            {
+                string gameModelJSON = JsonUtility.ToJson(gameModel);               
+                string fileName = path + gameModel.GetProfileName() + ".txt";
+                File.WriteAllText(fileName, gameModelJSON);
+            }
         }
-
-
-        //bool isPressedA = false;
-        //bool isPressedZ = false;
-        //private void Update()
-        //{
-        //    if (Input.GetKeyDown(KeyCode.A) && !isPressedA)
-        //    {
-        //        //isPressedA = true;
-        //        //Init();
-        //    }
-        //    if (Input.GetKeyDown(KeyCode.Z) && !isPressedZ)
-        //    {
-        //        //isPressedZ = true; 
-        //        //List<CharNames> char2beCreated = new List<CharNames>() {CharNames.Abbas_Skirmisher
-        //        //    ,CharNames.Baran, CharNames.Cahyo, CharNames.Rayyan };
-
-        //        //char2beCreated.ForEach(t => CharService.Instance.CreateCharsCtrl(t));
-        //    }
-        //}
-
+        public void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                SaveState();
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                LoadState();
+            }
+            if (Input.GetKeyDown(KeyCode.F6))
+            {
+                ClearState();
+            }
+        }
         #endregion
     }
 
 
 }
 
+
+//string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelected.ToString()
+//         + "/Char/gameModels.txt";
+
+//if (File.Exists(Application.dataPath + mydataPath))
+//{
+//    Debug.Log("File found!");
+//    string str = File.ReadAllText(Application.dataPath + mydataPath);
+
+//    allGameJSONs = str.Split('|').ToList();
+
+//    foreach (string modelStr in allGameJSONs)
+//    {
+//        Debug.Log($"CHAR: {modelStr}");
+//        if (String.IsNullOrEmpty(modelStr)) continue; // eliminate blank string
+//        GameModel gameModel = JsonUtility.FromJson<GameModel>(modelStr);
+
+//        Debug.Log(gameModel.gameScene);
+//    }
+//}
+//else
+//{
+//    Debug.Log("File Does not Exist");
+//}

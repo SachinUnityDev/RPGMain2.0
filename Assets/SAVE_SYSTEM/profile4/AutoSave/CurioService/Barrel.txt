@@ -1,0 +1,1 @@
+{"curioName":3,"toolName":1,"toolName2":0,"openDesc":"\"Some liquid lurks inside. Would it satiate your thirst though?\"","interactDesc":"","lootMoneyMin":{"silver":0,"bronze":0},"lootMoneyMax":{"silver":0,"bronze":0},"curioBark":""}

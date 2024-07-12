@@ -11,7 +11,7 @@ namespace Common
     [System.Serializable]
     public class GameModel
     {
-        public int profileSlot; 
+        public ProfileSlot profileSlot; 
         [SerializeField] string profileName; 
         public GameScene gameScene;       
         public GameDifficulty gameDifficulty;  
@@ -34,8 +34,8 @@ namespace Common
         }
         public GameModel(int profileSlot, string profileName)
         {
-            this.profileSlot = profileSlot;
-            this.profileName= profileName;
+            this.profileSlot = (ProfileSlot)profileSlot;
+            this.profileName = profileName;
         }
         public string GetProfileName()
         {

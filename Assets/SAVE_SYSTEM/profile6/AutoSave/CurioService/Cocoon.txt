@@ -1,0 +1,1 @@
+{"curioName":10,"toolName":10,"toolName2":8,"openDesc":"\"They seem to be woven carefully, just break them.\"","interactDesc":"","lootMoneyMin":{"silver":1,"bronze":0},"lootMoneyMax":{"silver":3,"bronze":0},"curioBark":""}

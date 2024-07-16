@@ -37,7 +37,8 @@ namespace Intro
                     else
                     {
                         SetStateContinueBtn(false);
-                    }                   
+                    }  
+                    InitProfiles();
                 }
                 else
                 {
@@ -49,7 +50,25 @@ namespace Intro
 
         public void OnNewProfileSelected()
         {
-            SetStateContinueBtn(true); 
+            int i = 0; bool errorDsply = false; 
+            foreach (Transform child in container)
+            {
+                if (i == slotSelect) continue; 
+                SetProfilePtrEvents setProfilePtrEvents = child.GetComponent<SetProfilePtrEvents>();
+                if (setProfilePtrEvents.gameModel == null) continue; 
+                if(setProfilePtrEvents.gameModel.GetProfileName() 
+                    == container.GetChild(slotSelect).GetComponent<SetProfilePtrEvents>().profileTxt)
+                {
+                    container.GetChild(slotSelect).GetComponent<SetProfilePtrEvents>().ToggleErrorTxt(true);
+                    errorDsply = true;
+                }                   
+                 if(!errorDsply)
+                    container.GetChild(slotSelect).GetComponent<SetProfilePtrEvents>().ToggleErrorTxt(false);
+            }
+            if (!errorDsply)
+            {
+                SetStateContinueBtn(true);
+            }                
         }
         void SetStateContinueBtn(bool active)
         {

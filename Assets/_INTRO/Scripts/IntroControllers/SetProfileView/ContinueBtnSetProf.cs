@@ -14,6 +14,7 @@ namespace Intro
         [SerializeField] Color colorN;
         [SerializeField] Color colorClicked;
         [SerializeField] Color colorOnHover;
+        [SerializeField] Color Unclickable; 
 
         SetProfileView setProfileView;
         [SerializeField] float prevTime = 0f;  
@@ -46,5 +47,11 @@ namespace Intro
         {
             img.color = colorN;
         }
+
+        public void SetState(bool isClickable)
+        {
+
+        }
+
     }
 }

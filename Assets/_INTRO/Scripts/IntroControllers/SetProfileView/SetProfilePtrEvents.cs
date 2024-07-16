@@ -32,17 +32,24 @@ namespace Intro
 
         [Header(" Profile txt")]       
         public  string profileTxt = string.Empty;
-
+        [Header(" Error Txt")]
+        public TextMeshProUGUI errorTxt; 
         [Header("Game - Profile Details")]
         public GameModel gameModel;
         [SerializeField] SetProfileView setProfileView;
         private void OnEnable()
         {
             inputField.onEndEdit.AddListener(OnEndEdit);
+            errorTxt.text = "The Profile name lready in use"; 
         }
         private void OnDisable()
         {
             inputField.onEndEdit.RemoveAllListeners();
+        }
+
+        public void ToggleErrorTxt(bool setActive)
+        {
+            errorTxt.gameObject.SetActive(setActive); 
         }
 
         void OnEndEdit(string str)
@@ -57,8 +64,8 @@ namespace Intro
         {
             this.gameModel = gameModel;
             this.setProfileView = setProfileView;
+            ToggleErrorTxt(false);
             FillPlankDetails();
-            
         }
 
         void FillPlankDetails()
@@ -131,6 +138,8 @@ namespace Intro
         {
             if (!isPlankClicked)
                 setProfileView.SetClickSlot(transform.GetSiblingIndex()); 
+            else
+                SetClickedState();
         }
 
         public void OnPointerEnter(PointerEventData eventData)

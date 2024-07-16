@@ -10,8 +10,13 @@ namespace Common
 {
     public class GameEventService : MonoSingletonGeneric<GameEventService>
     {
+
+      
+        
         public Action OnMainGameStart;
         public Action OnMainGameEnd;
+
+
 
         public bool hasGameStarted = false; 
 
@@ -20,8 +25,9 @@ namespace Common
         public Action<LocationName> OnTownExit;
 
         public Action OnIntroStart;
-        public Action OnIntroEnd; 
-
+        public Action OnIntroEnd;
+        public Action OnCombatEnter;
+        public Action OnCombatExit;
 
         public Action<GameScene> OnGameSceneChg; 
         public event Action<QuestMode> OnQuestModeChg;
@@ -55,10 +61,10 @@ namespace Common
             CalendarService.Instance.Init();
             
             CharService.Instance.Init();
-            CharStatesService.Instance.Init(); 
+            CharStatesService.Instance.Init();
 
             UIControlServiceGeneral.Instance.InitUIGeneral();
-       
+
             EcoService.Instance.InitEcoServices();
             BarkService.Instance.InitBarkService();
             JobService.Instance.JobServiceInit();
@@ -105,8 +111,14 @@ namespace Common
 
 
         }
-   
-
+        public void On_CombatEnter()
+        {
+            OnCombatEnter?.Invoke();                    
+        }
+        public void On_CombatExit()
+        {
+            OnCombatExit?.Invoke();
+        }
         public void On_TownEnter(GameScene gameScene)
         {
             // Anything initialised by SO to be put here 
@@ -125,18 +137,16 @@ namespace Common
         }
 
         public void On_MainGameStart()
-        {
-            hasGameStarted = true; 
+        {            
             OnMainGameStart?.Invoke();
         }
         public void On_MainGameEnd()
-        {
-            hasGameStarted= false;
+        {            
             OnMainGameEnd?.Invoke(); 
         }
         public void On_IntroStart()
         {
-            DialogueService.Instance.InitDialogueService();
+            UIControlServiceGeneral.Instance.InitUIGeneral();
             OnIntroStart?.Invoke();
         }
         public void On_IntroEnd()

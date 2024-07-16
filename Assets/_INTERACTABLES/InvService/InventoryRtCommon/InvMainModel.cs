@@ -70,6 +70,7 @@ namespace Interactables
         public void OnBeforeSerialize()
         {
             int i= -1;
+            
             foreach (Iitems item in potionActiveInv)
             {
                 i++;

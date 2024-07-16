@@ -7,7 +7,7 @@ namespace Common
 {
     public class ProfileController : MonoBehaviour
     {
-        public ProfileView profileView;
+      
 
        
 

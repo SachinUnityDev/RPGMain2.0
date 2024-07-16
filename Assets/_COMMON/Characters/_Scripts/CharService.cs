@@ -68,13 +68,24 @@ namespace Common
         void Start()
         {
             isPartyLocked= false;
-            CombatEventService.Instance.OnEOT += UpdateOnDeath;       
+            GameEventService.Instance.OnCombatEnter += OnCombatEnter;
             DontDestroyOnLoad(this.gameObject);
         }
         private void OnDisable()
         {
+            GameEventService.Instance.OnCombatEnter -= OnCombatEnter;
+        }
+        
+        void OnCombatEnter()
+        {
+            CombatEventService.Instance.OnEOT -= UpdateOnDeath;
+            CombatEventService.Instance.OnEOT += UpdateOnDeath;
+        }
+        void OnCombatExit()
+        {
             CombatEventService.Instance.OnEOT -= UpdateOnDeath;
         }
+
 
         public void Init() 
         {

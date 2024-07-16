@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 using Spine.Unity;
-using UnityEngine.Rendering;
 using System.Linq;
 using Common;
 
@@ -42,11 +41,9 @@ namespace Intro
             Emesh.gameObject.transform.DOLocalMoveX(-5, 0.4f);
         }
         public void FadeOutEntenNEmesh(float alpha, float animSpeed)
-        {
-          
+        {          
             StartCoroutine(FadeOutSpine(Enten, alpha, animSpeed));
-            StartCoroutine(FadeOutSpine(Emesh, alpha, animSpeed));
-         
+            StartCoroutine(FadeOutSpine(Emesh, alpha, animSpeed));         
         }
 
         public void EntenNEmeshToggleActive(bool val)
@@ -94,11 +91,22 @@ namespace Intro
             }                        
         }
 
+        public void LoadPanelDirect(int currPanel)
+        {
+            // unload Current
+            UIControlServiceGeneral.Instance.ToggleInteractionsOnUI(allPanels[currPanel].gameObject, false);
+            Fade(allPanels[currPanel].gameObject, 0.0f);
+            allPanels[currPanel].gameObject.SetActive(false);
+
+            // load Direct
+            this.currPanel = currPanel;
+            allPanels[currPanel].GetComponent<CanvasGroup>().interactable = true;
+            allPanels[currPanel].GetComponent<CanvasGroup>().blocksRaycasts = true;
+            allPanels[currPanel].GetComponent<IPanel>().Load();
+        }
+
         public void StartIntro()
-        {           
-            GameEventService.Instance.On_IntroStart();
-
-
+        {  
             FadeOutEntenNEmesh(0.0f, 1f);
             allPanels.ForEach(t => t.GetComponent<IPanel>().Init());
             allPanels.ForEach(t => t.SetActive(false));
@@ -190,7 +198,18 @@ namespace Intro
             }
         }
     }
-
+    public enum AllIntroPanel
+    {
+        GatePanel, 
+        MainMenuPanel,
+        NewGameModePanel,
+        DiffPanel,
+        SetProfilePanel,
+        StoryPanel,
+        QuickStartPanel,
+        CutScenePanel,
+        LoadGamePanel,
+    }
 
 
 }

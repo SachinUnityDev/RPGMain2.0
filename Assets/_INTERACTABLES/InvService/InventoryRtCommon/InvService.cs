@@ -214,6 +214,7 @@ namespace Interactables
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
             path+= "/InvMainModel.txt"; 
+          
             if (File.Exists(path))
             {
                 string contents = File.ReadAllText(path);

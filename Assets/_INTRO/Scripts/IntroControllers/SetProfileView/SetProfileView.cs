@@ -21,22 +21,47 @@ namespace Intro
         {
            
         }
-        public void SetClickSlot(int slotId)
+        void SetState_Plank(int slotId)
         {
-            int i = 0; 
+            int i = 0;
             foreach (Transform child in container)
             {
-                if(i == slotId)
+                if (i == slotId)
                 {
-                    slotSelect= i;
+                    slotSelect = i;
                     child.GetComponent<SetProfilePtrEvents>().SetClickedState();
-                }                    
+                    if (child.GetComponent<SetProfilePtrEvents>().gameModel != null)
+                    {
+                        SetStateContinueBtn(true);
+                    }
+                    else
+                    {
+                        SetStateContinueBtn(false);
+                    }                   
+                }
                 else
                 {
                     child.GetComponent<SetProfilePtrEvents>().SetUnclickedState();
-                }                    
+                }
                 i++;
             }
+        }
+
+        public void OnNewProfileSelected()
+        {
+            SetStateContinueBtn(true); 
+        }
+        void SetStateContinueBtn(bool active)
+        {
+            continueBtnSetProf.gameObject.SetActive(active);    
+        }
+        public void SetClickSlot(int slotId)
+        {
+            SetState_Plank(slotId);
+            // chk if plank has profile 
+            // show notification if has profile on click yes clear the gameModel and create a new one
+
+          
         }
 
         public void OnContinuePressed()

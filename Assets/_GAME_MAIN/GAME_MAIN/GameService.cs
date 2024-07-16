@@ -11,6 +11,7 @@ using Combat;
 using Interactables;
 
 
+
 namespace Common
 {
 
@@ -30,7 +31,7 @@ namespace Common
 
         public bool isGameOn = false;
         [SerializeField] List<string> allGameJSONs = new List<string>();
-        [SerializeField] List<GameModel> allGameModel = new List<GameModel>();
+        public List<GameModel> allGameModel;
 
 
         public bool isNewGInitDone = false;
@@ -77,11 +78,39 @@ namespace Common
                 GameSceneLoad(GameScene.InIntro);
             }
         }
+
+        public void Init()
+        {
+            gameController = transform.GetComponent<GameController>();
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            if (SaveService.Instance.DirectoryExists(path))
+            {
+                allGameModel = new List<GameModel>();
+                if (IsDirectoryEmpty(path))
+                {
+                   // do nothing
+                }
+                else
+                {
+                    LoadState();
+                }
+                PostLoadActions(); 
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing" + path);
+            }
+        }
+
         public void CreateNewGame(int profileId, string profileStr)  // On Set profile Continue btn
         {
             currGameModel = new GameModel(profileId, profileStr);
             currGameModel.gameDifficulty = GameDifficulty.Easy;
             currGameModel.locationName = LocationName.Nekkisari;
+            if (currGameModel.abbasClassType == ClassType.None)
+            {
+                currGameModel.abbasClassType = ClassType.Skirmisher;
+            }
             gameController.InitDiffGameController(currGameModel.gameDifficulty);
             allGameModel.Add(currGameModel); 
         }
@@ -92,13 +121,15 @@ namespace Common
             GameEventService.Instance.OnGameSceneChg?.Invoke(gameScene);
             if (gameScene == GameScene.InIntro)
                 OnIntroSceneLoad(); 
+            if (gameScene == GameScene.InCombat)
+                GameEventService.Instance.On_CombatEnter(); 
         }
 
         void OnIntroSceneLoad()
-        {
-            // game Start state
-            LoadState(); 
-
+        {           
+            Init(); // game Service init
+            DialogueService.Instance.InitDialogueService();
+            GameEventService.Instance.On_IntroStart();// event
         }
 
 
@@ -125,7 +156,36 @@ namespace Common
                 Debug.LogError("Service Directory missing");
             }
         }
+        
+        //1. toggle continue Btn In Main Menu
+        
+        public void DelAGameProfile(GameModel gameModel)
+        {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            string filePath = path + gameModel.GetProfileName() + ".txt";
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+                Console.WriteLine("File deleted successfully." + filePath);
+            }
+            else
+            {
+                Console.WriteLine("File does not exist.");
+            }
+        }
+
+        void PostLoadActions() 
+        {
+            GameObject panelGO = IntroServices.Instance.GetPanel("MainMenu");
+            bool isContinueBtnOn = (allGameModel.Count > 0);
+            panelGO.GetComponent<MainMenuController>().ToggleContinueBtn(isContinueBtnOn);
+        }
+
         public void ClearState()
+        {
+            // no public clear state as vital game profile information is stored
+        }
+        void ClearState_Private()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
             DeleteAllFilesInDirectory(path);
@@ -137,7 +197,7 @@ namespace Common
                 Debug.LogError("no GameModel created"); return;
             }
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-            ClearState();
+            ClearState_Private();
 
             foreach (GameModel gameModel in allGameModel)
             {
@@ -158,7 +218,7 @@ namespace Common
             }
             if (Input.GetKeyDown(KeyCode.F6))
             {
-                ClearState();
+                // empty
             }
         }
         #endregion
@@ -167,27 +227,3 @@ namespace Common
 
 }
 
-
-//string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelected.ToString()
-//         + "/Char/gameModels.txt";
-
-//if (File.Exists(Application.dataPath + mydataPath))
-//{
-//    Debug.Log("File found!");
-//    string str = File.ReadAllText(Application.dataPath + mydataPath);
-
-//    allGameJSONs = str.Split('|').ToList();
-
-//    foreach (string modelStr in allGameJSONs)
-//    {
-//        Debug.Log($"CHAR: {modelStr}");
-//        if (String.IsNullOrEmpty(modelStr)) continue; // eliminate blank string
-//        GameModel gameModel = JsonUtility.FromJson<GameModel>(modelStr);
-
-//        Debug.Log(gameModel.gameScene);
-//    }
-//}
-//else
-//{
-//    Debug.Log("File Does not Exist");
-//}

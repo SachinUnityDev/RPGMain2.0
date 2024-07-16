@@ -93,7 +93,10 @@ namespace Intro
             UIControlServiceGeneral.Instance.TogglePanel(extrasMenuPanel, false);
             UIControlServiceGeneral.Instance.TogglePanel(mainMenuPanel, true);
         }
-
+        public void ToggleContinueBtn(bool isON)
+        {
+            Continue.gameObject.SetActive(isON);
+        }
 
     }
 

@@ -1,1 +1,1 @@
-{"orderInSeq":2,"dayName":2,"dayName2":2,"dayNameStr":"Day of Earth","dayDescription":"","tipOfTheDayList":[],"daySpecs":"+12 Earth Res"}
+{"orderInSeq":2,"dayName":2,"dayName2":2,"dayNameStr":"Day of Earth","dayDescription":"","tipOfTheDayList":[],"daySpecs":"+11 Earth Res"}

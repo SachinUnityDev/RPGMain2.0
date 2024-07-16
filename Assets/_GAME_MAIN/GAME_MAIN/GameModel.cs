@@ -30,7 +30,7 @@ namespace Common
             this.locationName = locationName;   
             jobSelect = JobNames.None;
             abbasClassType= ClassType.None;
-            profileName = ""; 
+            profileName = string.Empty; 
         }
         public GameModel(int profileSlot, string profileName)
         {

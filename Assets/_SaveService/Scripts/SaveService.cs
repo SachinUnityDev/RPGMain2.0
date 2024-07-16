@@ -21,11 +21,11 @@ namespace Common
         public SaveSO saveSO;
         public string basePath = "/SAVE_SYSTEM/"; 
         [Header("Save and Load Panel Ref")]
-        public GameObject savePanel;
-        public GameObject loadPanel;
+        public SaveView saveView;
+        public LoadView loadView;
 
         public EscapePanelController escapePanelController; 
-        public SaveView saveView;
+        
         public SaveMode saveMode;
         public SaveSlot currMBloodSlot; 
 
@@ -35,8 +35,8 @@ namespace Common
 
         [Header("Profile Controller")]
         public ProfileController profileController;
-        public ProfileView profileView; 
-        public ProfileModel profileModel;
+      
+   
 
 
         public bool isLoading = false;
@@ -58,7 +58,14 @@ namespace Common
         // connect profile Model and code Profile View 
         // Profile Controller will update based on profile view 
         
-         
+        public void Init()
+        {// no init on load bcoz it always retrieve data from the allGameModel Files
+
+
+
+        }
+       
+
 
         void CreateDefaultFolders()
         {
@@ -342,9 +349,8 @@ namespace Common
         }
     
         public void ShowSavePanel()
-        {
-            savePanel.GetComponent<IPanel>().Init();
-            savePanel.GetComponent<IPanel>().Load();           
+        {           
+            saveView.GetComponent<IPanel>().Load();           
         }
 
         public void ShowLoadPanel()

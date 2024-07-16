@@ -33,7 +33,7 @@ namespace Common
             continueBtn.onClick.AddListener(OnContinueBtnPressed); 
             exitBtn.onClick.AddListener(OnCloseBtnPressed);
             toggleUI.onValueChanged.AddListener(OnTogglePressed);
-            UnLoad();
+           // UnLoad();
         }
          
         void OnTogglePressed(bool toggle)

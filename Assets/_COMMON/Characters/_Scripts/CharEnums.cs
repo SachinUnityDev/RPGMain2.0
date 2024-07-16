@@ -392,7 +392,7 @@ public enum ClassType {
     Dartblower,
     Exile,
     Nightclaw,
-    Skirmisher,
+    Skirmisher, //7
     Thief,
     WaterMage,
     XXX,

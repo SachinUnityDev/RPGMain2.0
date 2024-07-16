@@ -31,8 +31,8 @@ public class TestSave : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("###");
-        ListAllMonoSingletonClasses();
+        //Debug.Log("###");
+        //ListAllMonoSingletonClasses();
     }
 
     // Update is called once per frame

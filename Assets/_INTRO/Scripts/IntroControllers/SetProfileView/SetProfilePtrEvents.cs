@@ -14,6 +14,8 @@ namespace Intro
         [SerializeField] bool isPlankClicked = false;
         [SerializeField] TMP_InputField inputField;
 
+        [Header("Del Btn")]
+        public DelBtnPtrEvents delBtnPtrEvents;
         [Header(" Profile Name")]
         [SerializeField] TextMeshProUGUI profileName;
 
@@ -32,7 +34,7 @@ namespace Intro
         public  string profileTxt = string.Empty;
 
         [Header("Game - Profile Details")]
-        [SerializeField] GameModel gameModel;
+        public GameModel gameModel;
         [SerializeField] SetProfileView setProfileView;
         private void OnEnable()
         {
@@ -48,13 +50,15 @@ namespace Intro
             profileTxt= str;
             DisplayProfileTxt();
             inputField.gameObject.SetActive(false);
-            profileName.gameObject.SetActive(true);           
+            profileName.gameObject.SetActive(true);            
+            setProfileView.OnNewProfileSelected();
         }
         public void Init(GameModel gameModel, SetProfileView setProfileView) // each profile mapped to one game 
         {
             this.gameModel = gameModel;
             this.setProfileView = setProfileView;
             FillPlankDetails();
+            
         }
 
         void FillPlankDetails()
@@ -94,11 +98,30 @@ namespace Intro
         public void SetClickedState()
         {
             isPlankClicked = true;
-            inputField.gameObject.SetActive(true);
-            inputField.ActivateInputField();
-            profileName.gameObject.SetActive(false);
+            if(gameModel == null)
+            {
+                inputField.gameObject.SetActive(true);
+                inputField.ActivateInputField();
+                profileName.gameObject.SetActive(false);
+            }
+            else
+            {
+                // hl the cross and show notify box 
+                delBtnPtrEvents.gameObject.SetActive(true);
+                delBtnPtrEvents.Init(gameModel, this, setProfileView); 
+            }
             bgImg.sprite = spriteClicked;      
         }
+
+        public void OnProfileClear()
+        {
+            GameService.Instance.DelAGameProfile(gameModel);         
+            gameModel = null;
+            Init(gameModel, setProfileView);          
+            delBtnPtrEvents.Init(gameModel, this, setProfileView); // remove del btn            
+        }
+
+
         public void SetUnclickedState()
         {
             isPlankClicked = false;

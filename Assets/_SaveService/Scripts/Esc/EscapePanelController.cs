@@ -54,8 +54,7 @@ namespace Common
         void OnLoadGameBtnPressed()
         {
             SaveService.Instance.ShowLoadPanel();
-            UnLoad();
-            
+            UnLoad();            
         }
 
         void OnExit2MainMenuPressed()

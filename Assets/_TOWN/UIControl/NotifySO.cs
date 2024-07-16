@@ -28,6 +28,7 @@ namespace Common
         LootTaken, 
         BountyQUnLock,
         CombatEnd, 
+        ClearProfile, 
 
 
     }

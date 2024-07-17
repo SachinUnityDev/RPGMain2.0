@@ -20,8 +20,8 @@ namespace Common
 
         [Header(" Quick Start Opts")]
         public ClassType abbasClassType;
-        public JobNames jobSelect; 
-
+        public JobNames jobSelect;
+        public bool isCurrGameModel; 
         public GameModel( GameScene currGameScene
                 , GameDifficulty gameDifficulty, LocationName locationName)
         {
@@ -30,7 +30,8 @@ namespace Common
             this.locationName = locationName;   
             jobSelect = JobNames.None;
             abbasClassType= ClassType.None;
-            profileName = string.Empty; 
+            profileName = string.Empty;
+            isCurrGameModel = false;    
         }
         public GameModel(int profileSlot, string profileName)
         {

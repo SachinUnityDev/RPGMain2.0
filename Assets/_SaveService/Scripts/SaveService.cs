@@ -36,9 +36,6 @@ namespace Common
         [Header("Profile Controller")]
         public ProfileController profileController;
       
-   
-
-
         public bool isLoading = false;
         public bool isSaving = false; 
 
@@ -64,7 +61,9 @@ namespace Common
 
 
         }
-       
+       // clear all and save all 
+
+
 
 
         void CreateDefaultFolders()
@@ -286,9 +285,6 @@ namespace Common
             }
             return str;    
         }
-
-
-     
 
         public void OnAutoSaveTriggered()
         {

@@ -9,17 +9,11 @@ using Quest;
 namespace Common
 {
     public class GameEventService : MonoSingletonGeneric<GameEventService>
-    {
-
-      
-        
+    {   
         public Action OnMainGameStart;
         public Action OnMainGameEnd;
 
-
-
         public bool hasGameStarted = false; 
-
 
         public Action<LocationName> OnTownEnter;
         public Action<LocationName> OnTownExit;
@@ -35,24 +29,19 @@ namespace Common
         public Action<GameScene> OnStateStart;
        
         void OnEnable()
-        {
-           // OnGameStateChg += On_QuestRoomStart;
+        {          
             OnGameSceneChg += On_TownEnter; 
         }
         private void OnDisable()
-        {
-           // OnGameStateChg -= On_QuestRoomStart;
+        {          
             OnGameSceneChg -= On_TownEnter;
         }
-
         //None, 
         //InIntro, 
         //NewGameInit, 
         //LoadGameInit, 
         //GameInProgress, 
         //GameQuit, 
-
-
         public void OnTownEnterInit()
         {   
             TownService.Instance.Init();  // new game

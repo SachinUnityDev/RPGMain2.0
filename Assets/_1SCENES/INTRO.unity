@@ -999,7 +999,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 172.855, y: -114.145996}
+  m_AnchoredPosition: {x: 173.425, y: -121.655}
   m_SizeDelta: {x: 345.71, y: 74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &37157311
@@ -3972,7 +3972,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 172.855, y: -303.133}
+  m_AnchoredPosition: {x: 173.425, y: -300.63}
   m_SizeDelta: {x: 345.71, y: 96.31}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &127566243
@@ -5382,6 +5382,7 @@ MonoBehaviour:
     landscapeNames: 0
     abbasClassType: 0
     jobSelect: 0
+    isCurrGameModel: 0
   setProfileView: {fileID: 0}
 --- !u!114 &166897944
 MonoBehaviour:
@@ -10874,7 +10875,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.0000076293945, y: -15.9}
+  m_AnchoredPosition: {x: -0.0000076293945, y: -15.900002}
   m_SizeDelta: {x: 496.76, y: 26.220001}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &437007248
@@ -11130,6 +11131,7 @@ MonoBehaviour:
     landscapeNames: 0
     abbasClassType: 0
     jobSelect: 0
+    isCurrGameModel: 0
   setProfileView: {fileID: 0}
 --- !u!114 &444917065
 MonoBehaviour:
@@ -13301,7 +13303,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.0000076293945, y: -15.9}
+  m_AnchoredPosition: {x: -0.0000076293945, y: -15.900002}
   m_SizeDelta: {x: 496.76, y: 26.220001}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &533193119
@@ -14719,7 +14721,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 591576818}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
   m_Name: 
@@ -14729,10 +14731,10 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 4
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
@@ -16332,7 +16334,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 172.855, y: -203.062}
+  m_AnchoredPosition: {x: 173.425, y: -205.565}
   m_SizeDelta: {x: 345.71, y: 93.82}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &697492905
@@ -18526,7 +18528,9 @@ MonoBehaviour:
   colorN: {r: 1, g: 1, b: 1, a: 1}
   colorClicked: {r: 1, g: 0.47641194, b: 0, a: 1}
   colorOnHover: {r: 0.8301887, g: 0, b: 0, a: 1}
+  colorUnclickable: {r: 1, g: 1, b: 1, a: 1}
   prevTime: 0
+  isClickable: 0
 --- !u!1 &814970475
 GameObject:
   m_ObjectHideFlags: 0
@@ -21316,7 +21320,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 172.855, y: -404.449}
+  m_AnchoredPosition: {x: 173.425, y: -396.94}
   m_SizeDelta: {x: 345.71, y: 96.31}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &920824534
@@ -23548,7 +23552,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 173.425, y: 0}
+  m_AnchoredPosition: {x: 173.425, y: -12.514999}
   m_SizeDelta: {x: 346.85, y: 72.14}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1064236524
@@ -27155,7 +27159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 302.27222, y: -32.54}
+  m_AnchoredPosition: {x: 302.27222, y: -32.54001}
   m_SizeDelta: {x: 433.89, y: 65.08}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1228428216
@@ -27229,6 +27233,7 @@ MonoBehaviour:
     landscapeNames: 0
     abbasClassType: 0
     jobSelect: 0
+    isCurrGameModel: 0
   setProfileView: {fileID: 0}
 --- !u!1 &1231435771
 GameObject:
@@ -27463,7 +27468,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.0000076293945, y: -15.9}
+  m_AnchoredPosition: {x: -0.0000076293945, y: -15.900002}
   m_SizeDelta: {x: 496.76, y: 26.220001}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1235508987
@@ -28283,6 +28288,7 @@ MonoBehaviour:
     landscapeNames: 0
     abbasClassType: 0
     jobSelect: 0
+    isCurrGameModel: 0
   setProfileView: {fileID: 0}
 --- !u!114 &1285867391
 MonoBehaviour:
@@ -28884,6 +28890,7 @@ MonoBehaviour:
     landscapeNames: 0
     abbasClassType: 0
     jobSelect: 0
+    isCurrGameModel: 0
   setProfileView: {fileID: 0}
 --- !u!114 &1307176634
 MonoBehaviour:
@@ -29045,7 +29052,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.0000076293945, y: -15.9}
+  m_AnchoredPosition: {x: -0.0000076293945, y: -15.900002}
   m_SizeDelta: {x: 496.76, y: 26.220001}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1324822143
@@ -30694,7 +30701,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.0000076293945, y: -15.9}
+  m_AnchoredPosition: {x: -0.0000076293945, y: -15.900002}
   m_SizeDelta: {x: 496.76, y: 26.220001}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1382158882
@@ -32622,7 +32629,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.0000076293945, y: -15.9}
+  m_AnchoredPosition: {x: -0.0000076293945, y: -15.900002}
   m_SizeDelta: {x: 496.76, y: 26.220001}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1469092395
@@ -33762,7 +33769,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 302.27222, y: -118.37333}
+  m_AnchoredPosition: {x: 302.27222, y: -118.37332}
   m_SizeDelta: {x: 433.89, y: 65.08}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1521930502
@@ -33798,6 +33805,7 @@ MonoBehaviour:
     landscapeNames: 0
     abbasClassType: 0
     jobSelect: 0
+    isCurrGameModel: 0
   setProfileView: {fileID: 0}
 --- !u!114 &1521930503
 MonoBehaviour:
@@ -41537,6 +41545,7 @@ MonoBehaviour:
     landscapeNames: 0
     abbasClassType: 0
     jobSelect: 0
+    isCurrGameModel: 0
   gameProgress: 0
   isGameOn: 0
   allGameJSONs: []
@@ -42276,7 +42285,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1856895349}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1856895351
 Camera:
   m_ObjectHideFlags: 0
@@ -81838,6 +81847,7 @@ MonoBehaviour:
     landscapeNames: 0
     abbasClassType: 0
     jobSelect: 0
+    isCurrGameModel: 0
 --- !u!114 &8860019514496344932
 MonoBehaviour:
   m_ObjectHideFlags: 0

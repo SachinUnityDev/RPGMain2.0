@@ -90,14 +90,13 @@ namespace Interactables
             {
                 if (IsDirectoryEmpty(path))
                 {
-                    invMainModel = new InvMainModel();
-                    AbbasStatusSet();
+                    invMainModel = new InvMainModel();                 
                 }
                 else
                 {
-                    LoadState();
-                    AbbasStatusSet();
+                    LoadState();                 
                 }
+                AbbasStatusSet();
             }
             else
             {
@@ -204,8 +203,7 @@ namespace Interactables
         {
                 string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);            
                 ClearState();            
-                string invMainModelJSON = JsonUtility.ToJson(invMainModel);
-                Debug.Log("INV MAIN"+invMainModelJSON);
+                string invMainModelJSON = JsonUtility.ToJson(invMainModel);                
                 string fileName = path + "InvMainModel" + ".txt";
                 File.WriteAllText(fileName, invMainModelJSON);            
         }
@@ -213,13 +211,12 @@ namespace Interactables
         public void LoadState()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-            path+= "/InvMainModel.txt"; 
-          
+            path+= "/InvMainModel.txt";           
             if (File.Exists(path))
             {
                 string contents = File.ReadAllText(path);
+                invMainModel = new InvMainModel();
                 invMainModel = JsonUtility.FromJson<InvMainModel>(contents);
-
             }
             else
             {

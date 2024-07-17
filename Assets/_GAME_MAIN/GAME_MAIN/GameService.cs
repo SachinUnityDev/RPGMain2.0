@@ -46,7 +46,6 @@ namespace Common
             return null; 
         }
 
-
         void OnEnable()
         {  
             sceneController = GetComponent<SceneController>();
@@ -132,7 +131,6 @@ namespace Common
             GameEventService.Instance.On_IntroStart();// event
         }
 
-
         #region SAVE AND LOAD 
         public void LoadState()
         {
@@ -155,9 +153,7 @@ namespace Common
             {
                 Debug.LogError("Service Directory missing");
             }
-        }
-        
-        //1. toggle continue Btn In Main Menu
+        }        
         
         public void DelAGameProfile(GameModel gameModel)
         {
@@ -173,14 +169,12 @@ namespace Common
                 Console.WriteLine("File does not exist.");
             }
         }
-
         void PostLoadActions() 
         {
             GameObject panelGO = IntroServices.Instance.GetPanel("MainMenu");
             bool isContinueBtnOn = (allGameModel.Count > 0);
             panelGO.GetComponent<MainMenuController>().ToggleContinueBtn(isContinueBtnOn);
         }
-
         public void ClearState()
         {
             // no public clear state as vital game profile information is stored
@@ -201,6 +195,11 @@ namespace Common
 
             foreach (GameModel gameModel in allGameModel)
             {
+                if(gameModel == GameService.Instance.currGameModel)                
+                    gameModel.isCurrGameModel = true;                
+                else                
+                    gameModel.isCurrGameModel = false;
+                
                 string gameModelJSON = JsonUtility.ToJson(gameModel);               
                 string fileName = path + gameModel.GetProfileName() + ".txt";
                 File.WriteAllText(fileName, gameModelJSON);

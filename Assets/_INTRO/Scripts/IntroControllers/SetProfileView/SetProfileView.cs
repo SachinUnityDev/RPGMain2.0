@@ -70,9 +70,14 @@ namespace Intro
                 SetStateContinueBtn(true);
             }                
         }
-        void SetStateContinueBtn(bool active)
+        void SetStateContinueBtn(bool clickable)
         {
-            continueBtnSetProf.gameObject.SetActive(active);    
+            if (slotSelect == -1) return; 
+            string profileStr = container.GetChild(slotSelect).GetComponent<SetProfilePtrEvents>().profileTxt;
+            if (profileStr == string.Empty)
+                continueBtnSetProf.SetState(!clickable);
+            else
+                continueBtnSetProf.SetState(clickable);    
         }
         public void SetClickSlot(int slotId)
         {

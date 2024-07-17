@@ -65,11 +65,6 @@ namespace Town
             {
                 Debug.LogError("Service Directory missing");
             }
-
-        
-            
-           //// townViewController.TownViewInit(CalendarService.Instance.currtimeState);
-           // isNewGInitDone = true;
         }
         void SetTownNGetChars()
         {

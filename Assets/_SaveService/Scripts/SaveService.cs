@@ -32,12 +32,10 @@ namespace Common
         public SaveSlot slotSelected; 
         public List<GameObject> allServices = new List<GameObject>();
         public List<ISaveable> allSaveService = new List<ISaveable>();
-
-        [Header("Profile Controller")]
-        public ProfileController profileController;
       
         public bool isLoading = false;
         public bool isSaving = false; 
+
 
         private void Start()
         {           
@@ -50,20 +48,37 @@ namespace Common
             }
             //CreateDefaultFolders();
         }
-        // ONLY FOR THE FILE INIT 
-        // save and load profile Model to be implemented 
-        // connect profile Model and code Profile View 
-        // Profile Controller will update based on profile view 
-        
+   
         public void Init()
-        {// no init on load bcoz it always retrieve data from the allGameModel Files
+        {       // no init on load bcoz it always retrieve data from the allGameModel Files
 
 
 
         }
        // clear all and save all 
 
+        public void ClearAllFiles(ProfileSlot profileSlot)
+        {
+            string path = Application.dataPath + GetProfilePath(profileSlot);  
+            string directoryPath = @"C:\path\to\your\directory"; // Specify the directory path here
 
+            try
+            {
+                // Get all .txt files in the directory and its subdirectories
+                string[] textFiles = Directory.GetFiles(directoryPath, "*.txt", SearchOption.AllDirectories);
+
+                Console.WriteLine("Found text files:");
+                foreach (string file in textFiles)
+                {
+                    Console.WriteLine(file);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+
+        }
 
 
         void CreateDefaultFolders()
@@ -92,8 +107,8 @@ namespace Common
 
         public string GetSlotPath(SaveSlot saveSlot)
         {
-            profileController = GetComponent<ProfileController>();  
-            string str = Application.dataPath + profileController.GetProfilePath();
+            GameModel currGameModel = GameService.Instance.currGameModel; 
+            string str = Application.dataPath + GetProfilePath(currGameModel.profileSlot);
             switch (saveSlot)
             {
                 case SaveSlot.AutoSave:
@@ -286,44 +301,7 @@ namespace Common
             return str;    
         }
 
-        public void OnAutoSaveTriggered()
-        {
-
-
-        }
-        public void OnAutoSaveMBloodTriggered()
-        {
-
-        }
-
-        public void OnQuickSavePressed()
-        {
-
-        }
-
-        public void OnManualSavePressed()
-        {
-
-        }
-
-        public void ReadSaveFiles(string folderPath)
-        {
-            // Get all the file paths in the specified folder with the ".txt" extension
-            string[] saveFiles = Directory.GetFiles(folderPath, "*.txt");
-
-            // Iterate through each save file
-            foreach (string filePath in saveFiles)
-            {
-                // Read the contents of the file
-                string fileContents = File.ReadAllText(filePath);
-
-                // Process the file contents as needed
-                // For example, you can parse the contents into objects or display them in the console
-                Console.WriteLine(fileContents);
-            }
-        }
-
-
+    
         public List<ISaveable> FindAllSaveables()
         {
             List<ISaveable> saveables = new List<ISaveable>();
@@ -344,17 +322,20 @@ namespace Common
             return saveables;
         }
     
-        public void ShowSavePanel()
+        public void ToggleSavePanel(bool load)
         {           
-            saveView.GetComponent<IPanel>().Load();           
+            if(load)
+                saveView.GetComponent<IPanel>().Load();           
+            else
+                saveView.GetComponent<IPanel>().UnLoad();
         }
 
-        public void ShowLoadPanel()
+        public void ToggleLoadPanel(bool load)
         {
-            //Update bottom txt
-
-
-
+            if (load)
+                loadView.GetComponent<IPanel>().Load();
+            else
+                loadView.GetComponent<IPanel>().UnLoad();
         }
 #endregion
         public void OnSlotBtnPressed(Transform child)
@@ -378,16 +359,27 @@ namespace Common
             }
         }
 
-      
-        //public void LoadFileMaster() 
-        //{
-        //    string path = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelected.ToString(); 
-        //    foreach (GameObject service in allServices)
-        //    {
-        //        service.GetComponent<ISaveable>().LoadState(path);
-        //    }
-        //}
-
+        public string GetProfilePath(ProfileSlot profileSlot)
+        {
+            GameModel gameModel = GameService.Instance.GetGameModel((int)profileSlot);
+            switch (profileSlot)
+            {
+                case ProfileSlot.Profile1:
+                    return basePath + "profile1/";
+                case ProfileSlot.Profile2:
+                    return basePath + "profile2/";
+                case ProfileSlot.Profile3:
+                    return basePath + "profile3/";
+                case ProfileSlot.Profile4:
+                    return basePath + "profile4/";
+                case ProfileSlot.Profile5:
+                    return basePath + "profile5/";
+                case ProfileSlot.Profile6:
+                    return basePath + "profile6/";
+                default:
+                    return basePath + "profile1/";
+            }
+        }
         private void Update()
         {
             //if (Input.GetKeyDown(KeyCode.G))
@@ -418,8 +410,7 @@ namespace Common
     {
         None,
         QuickSave, // press F5
-        AutoSave, // at every check point
-//        AutoSaveMB, // at every chekc point in MB mode .. no manual saving 
+        AutoSave, // at every check point// MB Mode has only auto save
         ManualSave, // save
     }
     public enum ProfileSlot

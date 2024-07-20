@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 
 #if UNITY_EDITOR
@@ -276,6 +277,31 @@ public class TextRevealer : MonoBehaviour {
 
         return slicedParent;
     }
+    //private IEnumerator DelayedSetParent(Transform newParent, GameObject slicedParent)
+    //{        
+    //    yield return new WaitForEndOfFrame();
+    //    transform.SetParent(newParent);
+    //    animationPart2(slicedParent);
+    //}
+    //GameObject animationPart2(GameObject slicedParent)
+    //{
+
+    //    slicedParent.transform?.SetParent(textComponent.transform.parent);
+    //    slicedParent.transform.localScale = textComponent.transform.localScale;
+
+    //    RectTransform rectTransformNew = slicedParent.GetComponent<RectTransform>();
+    //    RectTransform rectTransformOld = textComponent.GetComponent<RectTransform>();
+
+    //    Canvas.ForceUpdateCanvases();
+
+    //    CopyTransformFields(rectTransformNew, rectTransformOld);
+
+    //    List<Transform> slices = CreateSlices(slicedParent.transform);
+
+    //    m_animationReveal = CreateRevealAnimation(slicedParent, slices);
+    //    m_animationUnreveal = CreateUnrevealAnimation(slicedParent, slices);
+    //    return slicedParent;
+    //}
 
     Animation CreateRevealAnimation(GameObject slicedParent, List<Transform> slices)
     {

@@ -27,7 +27,15 @@ namespace Intro
         void Start()
         {
             introController = GetComponent<IntroController>();
-           StartIntro();        
+            //AsyncOperation async = 
+            //SceneManager.LoadSceneAsync((int)SceneName.CORE, LoadSceneMode.Additive);
+            //while (async.isDone)
+            //{
+            //    yield return null; 
+            //}
+
+           
+            StartIntro();        
         }
 
         public GameObject GetPanel(string strTag)

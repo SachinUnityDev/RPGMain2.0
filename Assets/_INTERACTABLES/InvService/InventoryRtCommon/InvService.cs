@@ -61,20 +61,22 @@ namespace Interactables
 
         // public GameObject invXLPrefab; 
 
-        private void Start()
+        protected override void Awake()
         {
+            base.Awake();
+            SceneManager.activeSceneChanged += OnSceneLoaded;
+        }
+        private void Start()
+        {            
             Init(); 
         }
 
-        private void OnEnable()
-        {
-            SceneManager.sceneLoaded += OnSceneLoaded;            
-        }
+        
         private void OnDisable()
         {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
+            SceneManager.activeSceneChanged -= OnSceneLoaded;
         }
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        void OnSceneLoaded(Scene prevScene, Scene newScene)
         {  
              InitInvXLView();
         }
@@ -102,6 +104,41 @@ namespace Interactables
             {
                 Debug.LogError("Service Directory missing");
             }            
+        }
+        public void ShowInvXLView(bool toOpen)
+        {
+            UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(invXLGO, toOpen);
+            if (toOpen)
+                invXLGO.GetComponent<IPanel>().Init();
+        }
+        public void InitInvXLView()
+        {
+            if (isInvPanelOpen) return; // return multiple clicks
+
+            Canvas canvas = GameObject.FindWithTag("Canvas").GetComponent<Canvas>();
+            //  if (invXLGO == null)
+            invXLGO = canvas.GetComponentInChildren<InvXLViewController>(true).gameObject;
+
+
+            // invXLGO.transform.SetParent(canvas.transform);
+
+            //UIControlServiceGeneral.Instance.SetMaxSiblingIndex(diaGO);
+            int index = invXLGO.transform.parent.childCount - 5;
+            invXLGO.transform.SetSiblingIndex(index);
+            RectTransform invXLRect = invXLGO.GetComponent<RectTransform>();
+
+            invXLRect.anchorMin = new Vector2(0, 0);
+            invXLRect.anchorMax = new Vector2(1, 1);
+            invXLRect.pivot = new Vector2(0.5f, 0.5f);
+            invXLRect.localScale = Vector3.one;
+            invXLRect.offsetMin = new Vector2(0, 0); // new Vector2(left, bottom);
+            invXLRect.offsetMax = new Vector2(0, 0); // new Vector2(-right, -top);
+
+
+
+            excessInvViewController = invXLGO.GetComponentInChildren<ExcessInvViewController>();
+            invRightViewController = invXLGO.GetComponentInChildren<InvRightViewController>();
+            invMainViewController = invXLGO.GetComponentInChildren<InvMainViewController>();
         }
 
         public void On_DragResult(bool result, ItemsDragDrop itemsDragDrop)
@@ -141,42 +178,7 @@ namespace Interactables
             OnToggleInvXLView?.Invoke(isOpen);
         }
 
-        public void ShowInvXLView(bool toOpen)
-        {   
-            UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(invXLGO, toOpen);
-            if(toOpen)
-                invXLGO.GetComponent<IPanel>().Init();
-        }
-        public void InitInvXLView()
-        {
-            if (isInvPanelOpen) return; // return multiple clicks
-            
-            Canvas canvas = GameObject.FindWithTag("Canvas").GetComponent<Canvas>();
-            //  if (invXLGO == null)
-            invXLGO = canvas.GetComponentInChildren<InvXLViewController>(true).gameObject; 
-
-
-           // invXLGO.transform.SetParent(canvas.transform);
-
-            //UIControlServiceGeneral.Instance.SetMaxSiblingIndex(diaGO);
-            int index = invXLGO.transform.parent.childCount - 5;
-            invXLGO.transform.SetSiblingIndex(index);
-            RectTransform invXLRect = invXLGO.GetComponent<RectTransform>();
-
-            invXLRect.anchorMin = new Vector2(0, 0);
-            invXLRect.anchorMax = new Vector2(1, 1);
-            invXLRect.pivot = new Vector2(0.5f, 0.5f);
-            invXLRect.localScale = Vector3.one;
-            invXLRect.offsetMin = new Vector2(0, 0); // new Vector2(left, bottom);
-            invXLRect.offsetMax = new Vector2(0, 0); // new Vector2(-right, -top);
-
-
-
-            excessInvViewController = invXLGO.GetComponentInChildren<ExcessInvViewController>();
-            invRightViewController = invXLGO.GetComponentInChildren<InvRightViewController>();
-           invMainViewController = invXLGO.GetComponentInChildren<InvMainViewController>();
-        }
-
+      
         public void On_PartyLocked()
         {
             // get char locked in the party change the size of

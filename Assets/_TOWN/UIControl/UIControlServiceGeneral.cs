@@ -51,7 +51,9 @@ namespace Common
         }
         void OnSceneLoad(Scene scene, LoadSceneMode loadMode)
         {
-            activeCanvas = FindObjectOfType<Canvas>().gameObject;
+            if (scene.name != "CORE")            
+                activeCanvas = FindObjectOfType<Canvas>().gameObject;
+                        
         }
 
         public void BlockEsc(bool blockEsc)

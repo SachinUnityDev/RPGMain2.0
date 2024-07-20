@@ -13,8 +13,8 @@ namespace Intro
     public class LoadingPanelController : MonoBehaviour, IPanel
     {
 
-        [SerializeField] CanvasGroup IntroPanelOut;
-        [SerializeField] CanvasGroup TownPanelIn; 
+        //[SerializeField] CanvasGroup IntroPanelOut;
+        //[SerializeField] CanvasGroup TownPanelIn; 
 
         [Header("TBR")]         
         [SerializeField] Transform dotsParent;
@@ -24,27 +24,19 @@ namespace Intro
         [SerializeField] List<string> loadingLines = new List<string>();
 
         Scene scene;
-
-        int count = 1; 
-        void Start()
-        {
-
-           
-        }
+        int count = 1;      
         public void Load()
         {
             gameObject.SetActive(true);
             UIControlServiceGeneral.Instance.ToggleInteractionsOnUI(this.gameObject, true);
             IntroServices.Instance.Fade(gameObject, 1.0f);
             UIControlServiceGeneral.Instance.SetMaxSiblingIndex(gameObject);
-            GameService.Instance.sceneController.LoadScene(SceneSeq.Town);
-            LoadSceneSeq();
-           
+            StartCoroutine(SceneMgmtService.Instance.sceneMgmtController.LoadScene(SceneName.TOWN));
+            LoadSceneSeq();           
         }
 
         void LoadSceneSeq()
         {
-
             Sequence loadSeq = DOTween.Sequence();
             loadSeq
                    .AppendCallback(()=> ShowDots())
@@ -100,48 +92,8 @@ namespace Intro
             Out.DOFade(1f, 0.4f);
             In.DOFade(0f, 0.4f);
         }
-
-        //public void UnLoadScene()
-        //{
-        //    // on text revealer complete and fade screen on do this 
-        //    SceneManager.UnloadSceneAsync(scene.name);
-        //}
-
-        IEnumerator LoadingCoroutine(SceneNames sceneName)
-        {
-            AsyncOperation operation = SceneManager.LoadSceneAsync((int)sceneName, LoadSceneMode.Additive);
-
-            operation.allowSceneActivation = false;
-            while (!operation.isDone)
-            {
-                float progress = Mathf.Clamp01(operation.progress);
-                Debug.Log("Progress" + progress);
-                yield return null;
-                operation.allowSceneActivation = true;
-                SceneManager.SetActiveScene(scene);
-            }
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.N))
-            {
-                Load();
-            }
-        }
-
+       
     }
-    
-
-    public enum SceneNames
-    {
-        Intro, 
-        Town, 
-        QuestWalk, 
-        Combat, 
-    }
-
-
 }
 
 

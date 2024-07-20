@@ -3,18 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 
 public class LoadScenePtrEvents : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] string sceneName; 
+    [SerializeField] SceneName sceneName; 
     public void OnPointerClick(PointerEventData eventData)
     {
-       SceneMgmtController sceneMgmtController = FindObjectOfType<SceneMgmtController>();
-        sceneMgmtController.StartSceneTransit(); 
-        SceneManager.LoadSceneAsync(sceneName);
-
+        SceneMgmtController sceneMgmtController = SceneMgmtService.Instance.sceneMgmtController;
+        StartCoroutine(sceneMgmtController.LoadScene(sceneName));            
     }
-
-  
 }

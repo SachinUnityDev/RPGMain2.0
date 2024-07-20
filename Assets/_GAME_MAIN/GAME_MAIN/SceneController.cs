@@ -15,21 +15,21 @@ namespace Common
         {
 
         }
-        public void LoadScene(SceneSeq sceneSeq)
-        {
+        //public void LoadScene(SceneName sceneSeq)
+        //{
 
-            SceneMgmtController sceneMgmtController = FindObjectOfType<SceneMgmtController>();
-            sceneMgmtController.StartSceneTransit();
+        //    SceneMgmtController sceneMgmtController = FindObjectOfType<SceneMgmtController>();
+        //    sceneMgmtController.StartSceneTransit();
 
-            SceneManager.LoadSceneAsync((int)sceneSeq);
+        //    SceneManager.LoadSceneAsync((int)sceneSeq);
 
-            //lastScene = currScene; 
-            //currGameScene= newScene;
-            //lastScene = SceneManager.GetActiveScene();
-            //AsyncOperation asyncLoad = SceneManager.LoadSceneAsync((int)newScene, LoadSceneMode.Additive);
-            //asyncLoad.allowSceneActivation = false;
-            //StartCoroutine(LoadNewScene(newScene, asyncLoad));    
-        }
+        //    //lastScene = currScene; 
+        //    //currGameScene= newScene;
+        //    //lastScene = SceneManager.GetActiveScene();
+        //    //AsyncOperation asyncLoad = SceneManager.LoadSceneAsync((int)newScene, LoadSceneMode.Additive);
+        //    //asyncLoad.allowSceneActivation = false;
+        //    //StartCoroutine(LoadNewScene(newScene, asyncLoad));    
+        //}
 
 
         //IEnumerator LoadNewScene(GameScene newScene, AsyncOperation asyncLoad)
@@ -53,15 +53,7 @@ namespace Common
         //    }
         //}
 
-        IEnumerator UnloadAsyncOperation()
-        {
-            AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(lastScene);
-
-            while (!asyncUnload.isDone)
-            {
-                yield return null;
-            }
-        }
+    
     }
 
 

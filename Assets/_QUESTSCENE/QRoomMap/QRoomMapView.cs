@@ -19,11 +19,11 @@ namespace Quest
         {
             UnLoad();
             bgBtn.onClick.AddListener(UnLoad);        
-            qRoomModel = QRoomService.Instance.qRoomController.qRoomModel;
-            if(qRoomModel != null )
-            {
-                OnRoomChg(qRoomModel.questNames, qRoomModel.roomNo);
-            }
+            //qRoomModel = QRoomService.Instance.qRoomController.qRoomModel;
+            //if(qRoomModel != null )
+            //{
+            //    OnRoomChg(qRoomModel.questNames, qRoomModel.roomNo);
+            //}
             
             QRoomService.Instance.OnRoomChg += OnRoomChg; 
         }
@@ -44,7 +44,11 @@ namespace Quest
         }
         public void Init()
         {
-           
+            qRoomModel = QRoomService.Instance.qRoomController.qRoomModel;
+            if (qRoomModel != null)
+            {
+                OnRoomChg(qRoomModel.questNames, qRoomModel.roomNo);
+            }
         }
 
 

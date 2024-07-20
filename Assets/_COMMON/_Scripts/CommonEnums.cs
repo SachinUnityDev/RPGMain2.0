@@ -19,12 +19,13 @@ namespace Common
         InMapInteraction,         
     };
 
-    public enum SceneSeq
+    public enum SceneName
     {
-        Intro,
-        Town, 
-        Quest, 
-        Combat, 
+        INTRO,
+        TOWN, 
+        QUEST, 
+        COMBAT, 
+        CORE,
     }
 
     public enum GameDifficulty

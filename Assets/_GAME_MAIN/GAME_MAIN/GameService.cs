@@ -36,6 +36,13 @@ namespace Common
 
         public bool isNewGInitDone = false;
         public ServicePath servicePath => ServicePath.GameService;
+
+        private void Start()
+        {
+            SceneManager.LoadScene((int)SceneName.INTRO, LoadSceneMode.Additive);  
+            SceneMgmtService.Instance.sceneMgmtController.SetAsLastScene(SceneName.INTRO);
+        }
+
         public GameModel GetGameModel(int slot)
         {
             int index = allGameModel.FindIndex(t => t.profileSlot == (ProfileSlot)slot); 
@@ -60,21 +67,21 @@ namespace Common
         void OnSceneLoad(Scene scene, LoadSceneMode loadMode)
         {   
             int index = scene.buildIndex;
-            if(index == (int)SceneSeq.Town)
+            if(index == (int)SceneName.TOWN)
             {
                 GameSceneLoad(GameScene.InTown); 
             }
-            else if (index == (int)SceneSeq.Quest)
+            else if (index == (int)SceneName.QUEST)
             {
                 GameSceneLoad(GameScene.InQuestRoom);
             }
-            else if (index == (int)SceneSeq.Combat)
+            else if (index == (int)SceneName.COMBAT)
             {
                 GameSceneLoad(GameScene.InCombat);
             }
-            else if (index == (int)SceneSeq.Intro)
+            else if (index == (int)SceneName.INTRO)
             {
-                GameSceneLoad(GameScene.InIntro);
+                GameSceneLoad(GameScene.InIntro);               
             }
         }
 

@@ -33,7 +33,7 @@ namespace Quest
         }
         public void InitModelOnLoad( List<CurioModel> allCurioModel)
         {
-            allCurioModel = allCurioModel.DeepClone();
+            this.allCurioModel = allCurioModel.DeepClone();
             InitCurioBaseOnLoad(); 
         }
         void InitCurioBaseOnLoad()

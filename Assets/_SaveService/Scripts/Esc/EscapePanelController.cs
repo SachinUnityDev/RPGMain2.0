@@ -48,12 +48,12 @@ namespace Common
 
         void OnSaveGameBtnPressed()
         {            
-            SaveService.Instance.ShowSavePanel();
+            SaveService.Instance.ToggleSavePanel(true);
             UnLoad(); 
         }
         void OnLoadGameBtnPressed()
         {
-            SaveService.Instance.ShowLoadPanel();
+            SaveService.Instance.ToggleLoadPanel(true);
             UnLoad();            
         }
 

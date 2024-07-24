@@ -1,1 +1,0 @@
-{"curioName":12,"toolName":1,"toolName2":7,"openDesc":"\"Feel free to take some sips from the... fresh looking water.\"","interactDesc":"","lootMoneyMin":{"silver":3,"bronze":0},"lootMoneyMax":{"silver":6,"bronze":0},"curioBark":""}

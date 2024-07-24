@@ -10,16 +10,14 @@ namespace Common
 {
     public class GameEventService : MonoSingletonGeneric<GameEventService>
     {   
-        public Action OnMainGameStart;
+        public Action OnMainGameInitComplete;
         public Action OnMainGameEnd;
-
-        public bool hasGameStarted = false; 
 
         public Action<LocationName> OnTownEnter;
         public Action<LocationName> OnTownExit;
 
-        public Action OnIntroStart;
-        public Action OnIntroEnd;
+        public Action OnIntroLoaded;
+        public Action OnIntroUnLoaded;
         public Action OnCombatEnter;
         public Action OnCombatExit;
 
@@ -27,22 +25,20 @@ namespace Common
         public event Action<QuestMode> OnQuestModeChg;
 
         public Action<GameScene> OnStateStart;
-       
+
+        [Header(" Game State chg")]
+        public Action<GameState> OnGameStateChg;
+
         void OnEnable()
         {          
-            OnGameSceneChg += On_TownEnter; 
+            OnGameSceneChg += On_TownLoaded; 
         }
         private void OnDisable()
         {          
-            OnGameSceneChg -= On_TownEnter;
+            OnGameSceneChg -= On_TownLoaded;            
         }
-        //None, 
-        //InIntro, 
-        //NewGameInit, 
-        //LoadGameInit, 
-        //GameInProgress, 
-        //GameQuit, 
-        public void OnTownEnterInit()
+        
+        public void OnTownLoaded()
         {   
             TownService.Instance.Init();  // new game
             BuildingIntService.Instance.InitNGBuildIntService();
@@ -74,32 +70,24 @@ namespace Common
                 WelcomeService.Instance.On_QuickStart();
             else
                 WelcomeService.Instance.InitWelcome();
-            On_MainGameStart();
-            if (!GameService.Instance.isNewGInitDone)
+            On_MainGameInitComplete();
+            if (GameService.Instance.gameState == GameState.OnNewGameStart)
             {
                 if (GameService.Instance.gameController.isQuickStart)
                 {
                     CharService.Instance.GetAllyController(CharNames.Abbas).charModel.classType
                         = GameService.Instance.currGameModel.abbasClassType;
-
+                    
                     // Set job NAME SELECT HERE 
-                }
-                GameService.Instance.isNewGInitDone = true;
+                } 
+                Set_GameState(GameState.OnNewGameStartComplete);
             }
-        }
-        public void LoadGameInit(int slotId)
-        { 
-
-
-
-        }
-        public void OnSceneEnterInit() // make slot0 as current save
-        {
-            
-
-
-
-        }
+            if(GameService.Instance.gameState == GameState.OnLoadGameStart)
+            {
+                Set_GameState(GameState.OnLoadGameStartComplete);
+            }
+        }        
+    
         public void On_CombatEnter()
         {
             OnCombatEnter?.Invoke();                    
@@ -108,40 +96,62 @@ namespace Common
         {
             OnCombatExit?.Invoke();
         }
-        public void On_TownEnter(GameScene gameScene)
+        public void On_TownLoaded(GameScene gameScene)
         {
-            // Anything initialised by SO to be put here 
-            // any initialisation during scene swap to be checked 
-            // model init to be implemented after the save service connection 
             if (gameScene != GameScene.InTown)
-                return;
-            if (GameService.Instance.isNewGInitDone)
-                return;
-            OnTownEnterInit(); 
-
+                return;          
+            OnTownLoaded(); 
         }
         public void On_TownExit(LocationName locationName)
         {
             OnTownExit?.Invoke(locationName);
         }
 
-        public void On_MainGameStart()
+        public void On_MainGameInitComplete()
         {            
-            OnMainGameStart?.Invoke();
+            OnMainGameInitComplete?.Invoke();
         }
         public void On_MainGameEnd()
         {            
             OnMainGameEnd?.Invoke(); 
         }
-        public void On_IntroStart()
+        public void On_IntroLoaded()
         {
             UIControlServiceGeneral.Instance.InitUIGeneral();
-            OnIntroStart?.Invoke();
+            OnIntroLoaded?.Invoke();
         }
-        public void On_IntroEnd()
+        public void On_IntroUnLoaded()
         {            
-            OnIntroEnd?.Invoke();
+            OnIntroUnLoaded?.Invoke();
         }
+
+        #region GAME STATE RELATED
+        public void Set_GameState(GameState gameState)
+        {
+            GameService.Instance.gameState = gameState;
+            OnGameStateChg?.Invoke(gameState);  
+            switch (gameState)
+            {
+                case GameState.OnIntroAnimStart:                   
+                    break;
+                case GameState.OnNewGameStart:
+                    break;
+                case GameState.OnNewGameStartComplete:
+                    break;
+                case GameState.OnLoadGameStart:
+                    break;
+                case GameState.OnLoadGameStartComplete:
+                    break;
+                case GameState.OnGameQuit:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        #endregion
+
+
     }
 
 

@@ -102,7 +102,7 @@ namespace Intro
             int i = 0;
             foreach (Transform child in container)
             {
-                GameModel gameModel = GameService.Instance.GetGameModel(i);
+                GameModel gameModel = GameService.Instance.GetCurrentGameModel(i);
                 child.GetComponent<SetProfilePtrEvents>().Init(gameModel, this);
                 i++;
             }

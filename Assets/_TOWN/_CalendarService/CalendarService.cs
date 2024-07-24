@@ -80,17 +80,17 @@ namespace Common
             calendarFactory = gameObject.GetComponent<CalendarFactory>();
             calendarUIController = GetComponent<CalendarUIController>();
             
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.activeSceneChanged += OnSceneLoaded;
 
         }
         private void OnDisable()
         {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
+            SceneManager.activeSceneChanged -= OnSceneLoaded;
         }
 
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        void OnSceneLoaded(Scene oldScene, Scene newScene)
         {
-            if (scene.name == "TOWN")
+            if (newScene.name == "TOWN")
             {
                 if(calendarModel == null)
                 {

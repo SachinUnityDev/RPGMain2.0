@@ -29,15 +29,15 @@ namespace Town
             townController = GetComponent<TownController>();
             fameController = GetComponent<FameViewController>();
             //templeController = buildingIntViewController.templePanel.GetComponent<TempleController>();
-            SceneManager.sceneLoaded += OnSceneLoaded; 
+            SceneManager.activeSceneChanged += OnActiveSceneLoaded; 
         }
         private void OnDisable()
         {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
+            SceneManager.activeSceneChanged -= OnActiveSceneLoaded;
         }
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        void OnActiveSceneLoaded(Scene oldScene, Scene newScene)
         {
-            if (scene.name == "TOWN")
+            if (newScene.name == "TOWN")
             {
                 townViewController=  FindObjectOfType<TownViewController>(true);
 

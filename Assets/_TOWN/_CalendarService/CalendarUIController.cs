@@ -53,7 +53,7 @@ namespace Common
         }
         private void OnEnable()
         {           
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.activeSceneChanged += OnSceneLoaded;
             showMonthBtn.onClick.RemoveAllListeners();// prevent double subscriptions
             showWeekBtn.onClick.RemoveAllListeners();
             showMonthBtn.onClick.AddListener(OnShowMonthBtnPressed);
@@ -61,11 +61,11 @@ namespace Common
         }
         private void OnDisable()
         {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
+            SceneManager.activeSceneChanged -= OnSceneLoaded;
             CalendarService.Instance.OnStartOfCalDay -= ResetTip;
             CalendarService.Instance.OnChangeTimeState -= FillDayPanelOnTimeStateChg;
         }
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        void OnSceneLoaded(Scene oldScene, Scene newScene)
         {
             //if (scene.name == "TOWN")
             //{

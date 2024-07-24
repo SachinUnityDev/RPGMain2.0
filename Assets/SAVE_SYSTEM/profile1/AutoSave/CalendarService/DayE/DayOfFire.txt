@@ -1,1 +1,1 @@
-{"orderInSeq":1,"dayName":1,"dayName2":1,"dayNameStr":"Day of Fire","dayDescription":"","tipOfTheDayList":[],"daySpecs":"+8 Fire Res"}
+{"orderInSeq":1,"dayName":1,"dayName2":1,"dayNameStr":"Day of Fire","dayDescription":"","tipOfTheDayList":[],"daySpecs":""}

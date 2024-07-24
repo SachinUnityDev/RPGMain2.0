@@ -1,4 +1,4 @@
-using Quest;
+using Interactables;
 using System.Collections;
 using System.Collections.Generic;
 using Town;
@@ -12,20 +12,22 @@ namespace Common
     public class GameModel
     {
         public ProfileSlot profileSlot; 
-        [SerializeField] string profileName; 
+        [SerializeField] string profileName;
+        public SaveSlot saveSlot; 
         public GameScene gameScene;       
         public GameDifficulty gameDifficulty;  
         public LocationName locationName;
         public LandscapeNames landscapeNames = LandscapeNames.None;// quest has a landscape
-
+        
         [Header(" Quick Start Opts")]
         public ClassType abbasClassType;
         public JobNames jobSelect;
+        /* isCurrGameModel is to mark in the save file which gameModel to load from the list*/ 
         public bool isCurrGameModel; 
-        public GameModel( GameScene currGameScene
-                , GameDifficulty gameDifficulty, LocationName locationName)
+        public GameModel(GameScene currGameScene,
+            GameDifficulty gameDifficulty, LocationName locationName)
         {
-            this.gameScene = currGameScene;
+           this.gameScene = currGameScene;
             this.gameDifficulty = gameDifficulty;
             this.locationName = locationName;   
             jobSelect = JobNames.None;
@@ -43,18 +45,6 @@ namespace Common
             return profileName;
         }
     }
-
-    public enum GameProgress
-    {
-        None, 
-        InIntro, 
-        NewGameInit, 
-        LoadGameInit, 
-        GameInProgress, 
-        GameQuit, 
-    }
-
-
 
 }
 

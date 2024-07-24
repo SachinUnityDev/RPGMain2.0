@@ -1,1 +1,0 @@
-{"curioName":8,"toolName":5,"toolName2":0,"openDesc":"\"Treasure never comes without cost, they say...\"","interactDesc":"","lootMoneyMin":{"silver":6,"bronze":0},"lootMoneyMax":{"silver":8,"bronze":0},"curioBark":""}

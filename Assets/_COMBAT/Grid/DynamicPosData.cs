@@ -78,7 +78,7 @@ namespace Combat
 
         public void SaveModel()
         {
-            string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelected.ToString()
+            string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.saveSlotSelected.ToString()
             + "/Grid/DynaModels.txt";
             Debug.Log(" INSIDE DYna save MODEL ");
             if (!File.Exists(Application.dataPath + mydataPath))

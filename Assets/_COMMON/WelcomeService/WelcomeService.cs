@@ -25,15 +25,15 @@ namespace Town
         [SerializeField] int welcomeSeqEndDay; 
         private void OnEnable()
         {
-            SceneManager.sceneLoaded += OnSceneLoad;
+            SceneManager.activeSceneChanged += OnSceneLoad;
         }
         private void OnDisable()
         {
-            SceneManager.sceneLoaded -= OnSceneLoad;
+            SceneManager.activeSceneChanged -= OnSceneLoad;
         }
-        void OnSceneLoad(Scene scene, LoadSceneMode loadSceneMode)
+        void OnSceneLoad(Scene oldScene, Scene newScene)
         {
-            if (scene.name == "TOWN")
+            if (newScene.name == "TOWN")
             {
                 welcomeView = FindObjectOfType<WelcomeView>();
                 cornerBtns = FindObjectOfType<CornerBtns>(true).gameObject;

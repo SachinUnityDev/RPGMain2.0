@@ -33,13 +33,13 @@ namespace Common
 
         void OnEnable()
         {   
-            SceneManager.sceneLoaded += OnSceneLoad;
+            SceneManager.activeSceneChanged += OnSceneLoad;
         }
         private void OnDisable()
         {
-            SceneManager.sceneLoaded -= OnSceneLoad;
+            SceneManager.activeSceneChanged -= OnSceneLoad;
         }
-        void OnSceneLoad(Scene scene, LoadSceneMode loadMode)
+        void OnSceneLoad(Scene scene, Scene newScene)
         {
             FindTempTraitCardGO();
         }

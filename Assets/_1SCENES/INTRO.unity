@@ -11158,7 +11158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 302.27222, y: -118.37333}
+  m_AnchoredPosition: {x: 302.27222, y: -118.37332}
   m_SizeDelta: {x: 433.89, y: 65.08}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &427528627
@@ -11188,6 +11188,7 @@ MonoBehaviour:
   gameModel:
     profileSlot: 0
     profileName: 
+    saveSlot: 0
     gameScene: 0
     gameDifficulty: 0
     locationName: 0
@@ -20445,6 +20446,7 @@ MonoBehaviour:
   gameModel:
     profileSlot: 0
     profileName: 
+    saveSlot: 0
     gameScene: 0
     gameDifficulty: 0
     locationName: 0
@@ -26105,6 +26107,7 @@ MonoBehaviour:
   gameModel:
     profileSlot: 0
     profileName: 
+    saveSlot: 0
     gameScene: 0
     gameDifficulty: 0
     locationName: 0
@@ -26436,6 +26439,7 @@ MonoBehaviour:
   gameModel:
     profileSlot: 0
     profileName: 
+    saveSlot: 0
     gameScene: 0
     gameDifficulty: 0
     locationName: 0
@@ -30978,8 +30982,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45e925d5455fd134b85cf12129bf691d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IntroPanelOut: {fileID: 0}
-  TownPanelIn: {fileID: 0}
   dotsParent: {fileID: 310457009}
   desc: {fileID: 1202127768}
   loadingLines:
@@ -34607,6 +34609,7 @@ MonoBehaviour:
   gameModel:
     profileSlot: 0
     profileName: 
+    saveSlot: 0
     gameScene: 0
     gameDifficulty: 0
     locationName: 0
@@ -42558,6 +42561,7 @@ MonoBehaviour:
   gameModel:
     profileSlot: 0
     profileName: 
+    saveSlot: 0
     gameScene: 0
     gameDifficulty: 0
     locationName: 0
@@ -80659,6 +80663,7 @@ MonoBehaviour:
   gameModel:
     profileSlot: 0
     profileName: 
+    saveSlot: 0
     gameScene: 0
     gameDifficulty: 0
     locationName: 0

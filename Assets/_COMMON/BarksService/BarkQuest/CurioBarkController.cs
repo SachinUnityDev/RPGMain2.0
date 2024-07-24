@@ -14,15 +14,15 @@ namespace Quest
         private void OnEnable()
         {
             
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.activeSceneChanged += OnSceneLoaded;
         }
         private void OnDisable()
         {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
+            SceneManager.activeSceneChanged -= OnSceneLoaded;
         }
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        void OnSceneLoaded(Scene oldScene, Scene newScene)
         {
-            if (scene.name == "QUEST")
+            if (newScene.name == "QUEST")
             {
                 qbarkView = FindObjectOfType<QbarkView>(true);
             }

@@ -77,6 +77,7 @@ namespace Common
         {
             dialogueFactory = GetComponent<DialogueFactory>();
             isDiaViewInitDone = false;
+            InitDialogueService(); 
         }
         public void InitDialogueService()
         {

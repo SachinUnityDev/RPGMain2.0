@@ -27,16 +27,16 @@ namespace Quest
         {
             curioFactory = GetComponent<CurioFactory>();
             curioController= GetComponent<CurioController>();
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.activeSceneChanged += OnSceneLoaded;
         }
         private void OnDisable()
         {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
+            SceneManager.activeSceneChanged -= OnSceneLoaded;
         }
 
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        void OnSceneLoaded(Scene oldScene, Scene newScene)
         {
-            if (scene.name == "QUEST")
+            if (newScene.name == "QUEST")
             {
                 curioView = FindObjectOfType<CurioView>(true);
             }

@@ -1,1 +1,0 @@
-{"curioName":17,"toolName":6,"toolName2":5,"openDesc":"\"Probably smells like a skunk or a dead cat.\"","interactDesc":"","lootMoneyMin":{"silver":1,"bronze":0},"lootMoneyMax":{"silver":3,"bronze":0},"curioBark":""}

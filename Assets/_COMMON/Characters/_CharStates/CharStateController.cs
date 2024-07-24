@@ -100,17 +100,17 @@ namespace Common
         void Start()
         {
             charController = GetComponent<CharController>();
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.activeSceneChanged += OnSceneLoaded;
             charController.OnStatChg += StatChg;
            // charController.OnAttribCurrValSet += AttribChg; 
         }
         private void OnDisable()
         {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
+            SceneManager.activeSceneChanged -= OnSceneLoaded;
             charController.OnStatChg -= StatChg;
            // charController.OnAttribCurrValSet -= AttribChg;
         }
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        void OnSceneLoaded(Scene oldScene, Scene newScene)
         {
             if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
             {

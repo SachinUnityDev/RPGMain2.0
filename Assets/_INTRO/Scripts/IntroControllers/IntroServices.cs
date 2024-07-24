@@ -7,6 +7,7 @@ using DG.Tweening;
 using Spine.Unity;
 using System.Linq;
 using Common;
+using UnityEngine.SceneManagement;
 
 namespace Intro
 {
@@ -27,17 +28,18 @@ namespace Intro
         void Start()
         {
             introController = GetComponent<IntroController>();
-            //AsyncOperation async = 
-            //SceneManager.LoadSceneAsync((int)SceneName.CORE, LoadSceneMode.Additive);
-            //while (async.isDone)
-            //{
-            //    yield return null; 
-            //}
-
-           
-            StartIntro();        
+            StartIntro();
+            SceneManager.activeSceneChanged += OnSceneLoaded;        
         }
-
+        private void OnDisable()
+        {
+            SceneManager.activeSceneChanged -= OnSceneLoaded;
+        }
+        void OnSceneLoaded(Scene oldScene, Scene newScene)
+        {
+           
+        }
+        
         public GameObject GetPanel(string strTag)
         {
             return allPanels.Find(t => t.name == strTag); 

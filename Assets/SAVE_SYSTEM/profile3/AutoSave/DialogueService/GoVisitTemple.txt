@@ -1,1 +1,0 @@
-{"DiaID":0,"dialogueName":5,"dialogueTitle":"Hey old man…","npcName":10,"charName":0,"isUnLocked":true,"isRepeatable":false,"isSkippable":true,"isPlayedOnce":false,"gameScene":0,"charInDialogue":[1],"NPCinDialogue":[],"locationName":1}

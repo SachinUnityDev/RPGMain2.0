@@ -1,1 +1,0 @@
-{"permaTraitID":3,"charID":4,"permaTraitName":8,"classType":0,"cultureType":10,"raceType":0,"traitBehaviour":1,"traitNameStr":" None"}

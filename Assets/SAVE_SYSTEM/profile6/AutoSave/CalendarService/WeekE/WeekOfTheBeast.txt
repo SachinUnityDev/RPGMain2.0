@@ -1,1 +1,0 @@
-{"weekName":2,"weekCount":0,"weekNameStr":"Week of the Beast","weekDesc":"An exhibition will be held in the center this week, fighters of Beastmen race will demonstrate their might and prowess in short displays.","WeekSpecs":["Beastmen: +2 Vigor and Wp"],"isDayBonusReceived":false}

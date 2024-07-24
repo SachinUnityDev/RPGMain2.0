@@ -23,11 +23,11 @@ namespace Combat
         SkillView skillView;
         private void OnEnable()
         {
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.activeSceneChanged += OnSceneLoaded;
         }
         private void OnDisable()
         {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
+            SceneManager.activeSceneChanged -= OnSceneLoaded;
         }
         public void On_PSkillHovered(PassiveSkillName passiveSkillName, CharController charClicked)
         {
@@ -38,7 +38,7 @@ namespace Combat
             pSkillbase.PSkillHovered(); 
             OnPSkillHovered?.Invoke(passiveSkillName);
         }
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        void OnSceneLoaded(Scene oldScene, Scene newScene)
         {
             if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
             {

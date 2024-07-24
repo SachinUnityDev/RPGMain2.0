@@ -1,1 +1,0 @@
-{"curioName":16,"toolName":10,"toolName2":0,"openDesc":"\"So many bones piled up. Even plain sight frightens a man.\"","interactDesc":"","lootMoneyMin":{"silver":1,"bronze":0},"lootMoneyMax":{"silver":3,"bronze":0},"curioBark":""}

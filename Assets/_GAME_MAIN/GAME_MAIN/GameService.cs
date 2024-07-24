@@ -8,13 +8,9 @@ using System.Linq;
 using Intro;
 using Town;
 using Combat;
-using Interactables;
-
-
 
 namespace Common
 {
-
     public class GameService : MonoSingletonGeneric<GameService>, ISaveable
     {
         [Header("CONTROLLERS")]
@@ -26,15 +22,14 @@ namespace Common
 
         [Header("Global Var")]
         public GameModel currGameModel;
-        public GameProgress gameProgress; 
+        public GameState gameState;
 
+        [Header("Select Saveslot and profile")]
+        public SaveSlot saveSlot;
+        public ProfileSlot profileSlot;
 
-        public bool isGameOn = false;
         [SerializeField] List<string> allGameJSONs = new List<string>();
         public List<GameModel> allGameModel;
-
-
-        public bool isNewGInitDone = false;
         public ServicePath servicePath => ServicePath.GameService;
 
         private void Start()
@@ -43,7 +38,7 @@ namespace Common
             SceneMgmtService.Instance.sceneMgmtController.SetAsLastScene(SceneName.INTRO);
         }
 
-        public GameModel GetGameModel(int slot)
+        public GameModel GetCurrentGameModel(int slot)
         {
             int index = allGameModel.FindIndex(t => t.profileSlot == (ProfileSlot)slot); 
             if(index != -1)
@@ -52,38 +47,70 @@ namespace Common
             }
             return null; 
         }
+        public GameModel GetCurrentGameModel()
+        {
+            int index = allGameModel.FindIndex(t => t.isCurrGameModel == true);
+            if (index != -1)
+            {
+                return allGameModel[index];
+            }
+            return null;
+        }
+        public GameModel GetGameModel(ProfileSlot profileSlot, SaveSlot saveSlot)
+        {
+            int index = allGameModel.FindIndex(t => t.profileSlot == profileSlot && t.saveSlot == saveSlot);
+            if (index != -1)
+            {
+                return allGameModel[index];
+            }
+            return null;
+        }
+        public void AddGameModel(GameModel gameModel)
+        {
+            int index = allGameModel.FindIndex(t => t.profileSlot == gameModel.profileSlot && t.saveSlot == gameModel.saveSlot);
+            if (index != -1)
+            {
+                 allGameModel.RemoveAt(index);  
+            }
+            allGameModel.Add(gameModel);
+        }
 
         void OnEnable()
         {  
             sceneController = GetComponent<SceneController>();
             gameController= GetComponent<GameController>();
-            SceneManager.sceneLoaded += OnSceneLoad; 
+            SceneManager.activeSceneChanged += UpdateGameScene; 
         }
         private void OnDisable()
         {
-            SceneManager.sceneLoaded -= OnSceneLoad;
+            SceneManager.activeSceneChanged -= UpdateGameScene;
         }
-
-        void OnSceneLoad(Scene scene, LoadSceneMode loadMode)
-        {   
-            int index = scene.buildIndex;
-            if(index == (int)SceneName.TOWN)
+        void UpdateGameScene(Scene oldScene, Scene newScene)
+        {
+            int index = newScene.buildIndex;
+            
+            if (index == (int)SceneName.TOWN)
             {
-                GameSceneLoad(GameScene.InTown); 
+                GameSceneLoad(GameScene.InTown);
+                currGameModel.gameScene = GameScene.InTown;
             }
             else if (index == (int)SceneName.QUEST)
             {
                 GameSceneLoad(GameScene.InQuestRoom);
+                currGameModel.gameScene = GameScene.InQuestRoom;
             }
             else if (index == (int)SceneName.COMBAT)
             {
                 GameSceneLoad(GameScene.InCombat);
+                currGameModel.gameScene = GameScene.InCombat;
             }
             else if (index == (int)SceneName.INTRO)
             {
-                GameSceneLoad(GameScene.InIntro);               
+                GameSceneLoad(GameScene.InIntro);
+                currGameModel.gameScene = GameScene.InIntro;
             }
         }
+       
 
         public void Init()
         {
@@ -94,7 +121,7 @@ namespace Common
                 allGameModel = new List<GameModel>();
                 if (IsDirectoryEmpty(path))
                 {
-                   // do nothing
+
                 }
                 else
                 {
@@ -107,7 +134,6 @@ namespace Common
                 Debug.LogError("Service Directory missing" + path);
             }
         }
-
         public void CreateNewGame(int profileId, string profileStr)  // On Set profile Continue btn
         {
             currGameModel = new GameModel(profileId, profileStr);
@@ -118,9 +144,20 @@ namespace Common
                 currGameModel.abbasClassType = ClassType.Skirmisher;
             }
             gameController.InitDiffGameController(currGameModel.gameDifficulty);
-            allGameModel.Add(currGameModel); 
+            allGameModel.Add(currGameModel);
+
+            GameEventService.Instance.Set_GameState(GameState.OnNewGameStart);
+        }        
+
+        // call this after profile slot and saveslot is selected    
+        public void LoadGame(GameModel gameModel)
+        {
+            currGameModel = gameModel;            
+            gameController.InitDiffGameController(currGameModel.gameDifficulty);
+            GameEventService.Instance.OnGameSceneChg?.Invoke(currGameModel.gameScene);
+            GameEventService.Instance.OnGameStateChg?.Invoke(GameState.OnLoadGameStart);
         }
-        
+
         public void GameSceneLoad(GameScene gameScene)
         {
             currGameModel.gameScene= gameScene;            
@@ -130,14 +167,12 @@ namespace Common
             if (gameScene == GameScene.InCombat)
                 GameEventService.Instance.On_CombatEnter(); 
         }
-
         void OnIntroSceneLoad()
         {           
-            Init(); // game Service init
-            DialogueService.Instance.InitDialogueService();
-            GameEventService.Instance.On_IntroStart();// event
+             Init(); // game Service init
+            //DialogueService.Instance.InitDialogueService();
+            GameEventService.Instance.On_IntroLoaded();// event
         }
-
         #region SAVE AND LOAD 
         public void LoadState()
         {
@@ -153,14 +188,17 @@ namespace Common
                     string contents = File.ReadAllText(fileName);
                     Debug.Log("  " + contents);
                     GameModel gameModel = JsonUtility.FromJson<GameModel>(contents);
-                    allGameModel.Add(gameModel);
+                    allGameModel.Add(gameModel); // load all game models   
                 }
+                // profileslot and save slot are set by loadView or Continue btn in main Menu
+                GameModel currGameModel =  GetGameModel(profileSlot, saveSlot);// this is the game Model
+               LoadGame(currGameModel);
             }
             else
             {
                 Debug.LogError("Service Directory missing");
             }
-        }        
+        }     
         
         public void DelAGameProfile(GameModel gameModel)
         {
@@ -202,8 +240,8 @@ namespace Common
 
             foreach (GameModel gameModel in allGameModel)
             {
-                if(gameModel == GameService.Instance.currGameModel)                
-                    gameModel.isCurrGameModel = true;                
+                if(gameModel.profileSlot == currGameModel.profileSlot && gameModel.saveSlot == currGameModel.saveSlot)                
+                    gameModel.isCurrGameModel = true;
                 else                
                     gameModel.isCurrGameModel = false;
                 

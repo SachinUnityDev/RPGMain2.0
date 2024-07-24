@@ -1,1 +1,0 @@
-{"buildingName":5,"buildState":0,"charInteractData":[],"npcInteractData":[{"nPCNames":1,"npcState":1,"allInteract":[{"nPCIntType":1,"allDialogueData":[{"dialogueName":6,"isUnLocked":true}]},{"nPCIntType":2,"allDialogueData":[]}]}],"buildIntTypes":[{"BuildIntType":8,"isUnLocked":true,"isUpgraded":false}]}

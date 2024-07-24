@@ -16,16 +16,17 @@ namespace Town
         void Start()
         {            
             CalendarService.Instance.OnChangeTimeState += UpdateBuildState;
-            SceneManager.sceneLoaded += OnSceneLoaded;   
+            SceneManager.activeSceneChanged -= OnSceneLoaded;
+            SceneManager.activeSceneChanged += OnSceneLoaded;   
         }
         private void OnDisable()
         {
             CalendarService.Instance.OnChangeTimeState -= UpdateBuildState;
           
         }
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        void OnSceneLoaded(Scene oldScene, Scene newScene)
         {
-            if (scene.name == "TOWN")
+            if (newScene.name == "TOWN")
             {
                 marketView = FindObjectOfType<MarketView>(true);
             }

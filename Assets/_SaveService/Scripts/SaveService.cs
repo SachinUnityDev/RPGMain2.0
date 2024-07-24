@@ -24,12 +24,11 @@ namespace Common
         public SaveView saveView;
         public LoadView loadView;
 
-        public EscapePanelController escapePanelController; 
-        
-        public SaveMode saveMode;
-        public SaveSlot currMBloodSlot; 
+        public EscapePanelController escapePanelController;
 
-        public SaveSlot slotSelected; 
+        //  public SaveMode saveMode;
+        public SaveController saveController; 
+
         public List<GameObject> allServices = new List<GameObject>();
         public List<ISaveable> allSaveService = new List<ISaveable>();
       
@@ -38,14 +37,14 @@ namespace Common
 
 
         private void Start()
-        {           
+        {          
+            saveController = GetComponent<SaveController>();    
            saveView.GetComponent<IPanel>().UnLoad();
-           slotSelected = SaveSlot.AutoSave; 
-            foreach (Transform child in saveView.gameObject.transform)
-            {
-                if(child.GetComponent<Button>() != null)
-                    child.GetComponent<Button>().onClick.AddListener(()=>OnSlotBtnPressed(child));
-            }
+            //foreach (Transform child in saveView.gameObject.transform)
+            //{
+            //    if(child.GetComponent<Button>() != null)
+            //        child.GetComponent<Button>().onClick.AddListener(()=>OnSlotBtnPressed(child));
+            //}
             //CreateDefaultFolders();
         }
    
@@ -55,22 +54,41 @@ namespace Common
 
 
         }
-       // clear all and save all 
+        // clear all and save all 
 
-        public void ClearAllFiles(ProfileSlot profileSlot)
+        public void SaveCurrentProfileNSlot()
+        {
+            GameModel currGameModel = GameService.Instance.currGameModel;   
+            ProfileSlot profileSlot = currGameModel.profileSlot;
+            SaveSlot saveSlot = saveSlotSelected;
+
+
+        }
+
+
+        public void ClearAllProfiles()
+        {
+            foreach (ProfileSlot profileSlot in Enum.GetValues(typeof(ProfileSlot)))
+            {
+                foreach (SaveSlot saveSlot in Enum.GetValues(typeof(SaveSlot)))
+                {
+                    ClearFiles4ProfileNSlot(profileSlot, saveSlot);
+                }
+            }
+        }
+
+        public void ClearFiles4ProfileNSlot(ProfileSlot profileSlot, SaveSlot saveSlot)
         {
             string path = Application.dataPath + GetProfilePath(profileSlot);  
-            string directoryPath = @"C:\path\to\your\directory"; // Specify the directory path here
-
+            
             try
             {
                 // Get all .txt files in the directory and its subdirectories
-                string[] textFiles = Directory.GetFiles(directoryPath, "*.txt", SearchOption.AllDirectories);
+                string[] textFiles = Directory.GetFiles(path, "*.txt", SearchOption.AllDirectories);
 
-                Console.WriteLine("Found text files:");
                 foreach (string file in textFiles)
                 {
-                    Console.WriteLine(file);
+                    File.Delete(file);
                 }
             }
             catch (Exception ex)
@@ -134,11 +152,15 @@ namespace Common
             }
             return str; 
         }
-#region 
-        
+#region GET AND SET
+        public void SetSlotPath(SaveSlot saveSlot)
+        {
+            saveSlotSelected = saveSlot;
+        }
+
         public string GetCurrSlotServicePath(ServicePath servicePath)
         {
-             return GetServicePath(slotSelected, servicePath);
+             return GetServicePath(saveSlotSelected, servicePath);
         }
         public string GetServicePath(SaveSlot saveSlot, ServicePath servicePath)
         {
@@ -300,8 +322,7 @@ namespace Common
             }
             return str;    
         }
-
-    
+#endregion
         public List<ISaveable> FindAllSaveables()
         {
             List<ISaveable> saveables = new List<ISaveable>();
@@ -337,7 +358,7 @@ namespace Common
             else
                 loadView.GetComponent<IPanel>().UnLoad();
         }
-#endregion
+
         public void OnSlotBtnPressed(Transform child)
         {
             GameObject btn = child.gameObject; 
@@ -351,17 +372,9 @@ namespace Common
         //        LoadFileMaster();
         }
 
-        public void SaveStateMaster()
-        {
-            foreach (GameObject service in allServices)
-            {
-                 service.GetComponent<ISaveable>().SaveState();
-            }
-        }
-
         public string GetProfilePath(ProfileSlot profileSlot)
         {
-            GameModel gameModel = GameService.Instance.GetGameModel((int)profileSlot);
+            GameModel gameModel = GameService.Instance.GetCurrentGameModel((int)profileSlot);
             switch (profileSlot)
             {
                 case ProfileSlot.Profile1:
@@ -382,19 +395,13 @@ namespace Common
         }
         private void Update()
         {
-            //if (Input.GetKeyDown(KeyCode.G))
-            //{
-            //    isLoading = false; isSaving = true;                
-            //    UIControlServiceCombat.Instance.ToggleUIStateScale(saveView.gameObject, UITransformState.Open);                
-            //}
-
-            //if (Input.GetKeyDown(KeyCode.H))
-            //{
-            //    isLoading = true; isSaving = false;
-            //    UIControlServiceCombat.Instance.ToggleUIStateScale(saveView.gameObject, UITransformState.Open);
-            //}       
-
+            if (Input.GetKeyDown(KeyCode.F9))
+            {
+                ClearAllProfiles();
+            }
         }
+
+
     }
 
     public enum SaveSlot
@@ -406,13 +413,13 @@ namespace Common
         Slot3,
         Slot4,        
     }
-    public enum SaveMode
-    {
-        None,
-        QuickSave, // press F5
-        AutoSave, // at every check point// MB Mode has only auto save
-        ManualSave, // save
-    }
+    //public enum SaveMode
+    //{
+    //    None,
+    //    QuickSave, // press F5
+    //    AutoSave, // at every check point// MB Mode has only auto save
+    //    ManualSave, // save
+    //}
     public enum ProfileSlot
     {
         Profile1,

@@ -132,7 +132,7 @@ namespace Combat
             // Cn be later Set to the start of Combat Event
             skillFactory = GetComponent<SkillFactory>();
             skillView = GetComponent<SkillView>();
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.activeSceneChanged += OnSceneLoaded;
             GameEventService.Instance.OnGameSceneChg += OnStartOfCombat;
             skillFactory =GetComponent<SkillFactory>();
             skillFactory.SkillsInit();
@@ -142,11 +142,11 @@ namespace Combat
         }
         private void OnDisable()
         {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
+            SceneManager.activeSceneChanged -= OnSceneLoaded;
            // OnSkillApply -= SkillEventtest;
             GameEventService.Instance.OnGameSceneChg -= OnStartOfCombat;
         }
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        void OnSceneLoaded(Scene scene, Scene newScene)
         {
             if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
             {

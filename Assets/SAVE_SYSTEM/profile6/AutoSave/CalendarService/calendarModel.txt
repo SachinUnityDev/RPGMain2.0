@@ -1,1 +1,0 @@
-{"currtimeState":1,"dayInGame":8,"dayInYear":32,"weekCounter":1,"currWeekCycle":{"allWeekNames":[4,3,1,2]},"startOfGameDayName":6,"currDayName":2,"currentWeek":3,"currentMonth":2,"scrollMonth":2}

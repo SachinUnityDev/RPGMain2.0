@@ -42,16 +42,16 @@ namespace Common
         }
         private void OnEnable()
         {
-            SceneManager.sceneLoaded += OnSceneLoad;
+            SceneManager.activeSceneChanged += OnSceneLoad;
             TogglePanel(escPanel, false);
         }
         private void OnDisable()
         {
-            SceneManager.sceneLoaded -= OnSceneLoad;
+            SceneManager.activeSceneChanged -= OnSceneLoad;
         }
-        void OnSceneLoad(Scene scene, LoadSceneMode loadMode)
+        void OnSceneLoad(Scene oldScene, Scene newScene)
         {
-            if (scene.name != "CORE")            
+            if (newScene.name != "CORE")            
                 activeCanvas = FindObjectOfType<Canvas>().gameObject;
                         
         }

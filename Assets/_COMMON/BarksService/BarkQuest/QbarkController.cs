@@ -18,13 +18,13 @@ namespace Quest
         [SerializeField] QbarkView qBarkViewPrefab;
         private void OnEnable()
         {
-            SceneManager.sceneLoaded += OnSceneLoaded;  
+            SceneManager.activeSceneChanged += OnSceneLoaded;  
         }
         private void OnDisable()
         {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
+            SceneManager.activeSceneChanged -= OnSceneLoaded;
         }
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        void OnSceneLoaded(Scene oldScene, Scene newScene)
         {
             if (GameService.Instance.currGameModel.gameScene == GameScene.InQuestRoom)
             {

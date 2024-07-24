@@ -30,6 +30,7 @@ namespace Intro
         }
         public void Load()
         {           
+
             gameObject.SetActive(true);
             UIControlServiceGeneral.Instance.ToggleInteractionsOnUI(this.gameObject, true);
             IntroServices.Instance.Fade(gameObject, 1.0f);
@@ -67,7 +68,6 @@ namespace Intro
         {
 
             Debug.Log("CAMPAIGN BTN PRESSED");
-
             UnLoad();
 
         }

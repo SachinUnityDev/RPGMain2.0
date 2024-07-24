@@ -318,7 +318,7 @@ namespace Combat
 
         public void LoadState()
         {
-            string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelected.ToString()
+            string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.saveSlotSelected.ToString()
               + "/Grid/DynaModels.txt";
 
             if (File.Exists(Application.dataPath + mydataPath))
@@ -360,7 +360,7 @@ namespace Combat
         }
         public void ClearState()
         {
-            string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.slotSelected.ToString()
+            string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.saveSlotSelected.ToString()
              + "/Grid/DynaModels.txt";
             File.WriteAllText(Application.dataPath + mydataPath, "");
 

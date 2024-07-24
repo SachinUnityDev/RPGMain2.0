@@ -7,7 +7,7 @@ namespace Common
     public class CommonEnums
     {
     }
-    public enum GameScene
+    public enum GameScene // Game Scene that Includes all scenes and Panels like map,job and camp 
     {
         None,
         InTown,    
@@ -19,7 +19,7 @@ namespace Common
         InMapInteraction,         
     };
 
-    public enum SceneName
+    public enum SceneName  // exact scene Name to replace the Str
     {
         INTRO,
         TOWN, 
@@ -27,7 +27,15 @@ namespace Common
         COMBAT, 
         CORE,
     }
-
+    public enum GameState
+    {
+        OnIntroAnimStart,
+        OnNewGameStart,
+        OnNewGameStartComplete, // means Game In Progress
+        OnLoadGameStart,
+        OnLoadGameStartComplete, // means Game In Progress
+        OnGameQuit,
+    }
     public enum GameDifficulty
     {
         Easy, // KIWI

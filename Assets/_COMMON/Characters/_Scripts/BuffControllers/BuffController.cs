@@ -137,14 +137,14 @@ namespace Combat
             QuestEventService.Instance.OnEOQ += EOQTick;
             CalendarService.Instance.OnChangeTimeState += ToggleBuffsOnTimeStateChg;
             CalendarService.Instance.OnStartOfTheWeek += EOWTick; 
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.activeSceneChanged += OnSceneLoaded;
             CombatEventService.Instance.OnSOC += OnSOC;
         }
         private void OnDisable()
         {
             QuestEventService.Instance.OnEOQ -= EOQTick;
             CalendarService.Instance.OnChangeTimeState -= ToggleBuffsOnTimeStateChg;
-            SceneManager.sceneLoaded -= OnSceneLoaded;
+            SceneManager.activeSceneChanged -= OnSceneLoaded;
             CombatEventService.Instance.OnSOC -= OnSOC;
         }
 
@@ -161,7 +161,7 @@ namespace Combat
                 buffModel = new BuffModel(charID); //pass in char Id      
             }
         }
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        void OnSceneLoaded(Scene oldScene, Scene newScene)
         {
             if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
             {

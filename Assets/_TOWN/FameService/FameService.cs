@@ -21,11 +21,15 @@ namespace Common
         public ServicePath servicePath => ServicePath.FameService;
         void Start()
         {
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.activeSceneChanged += OnSceneLoaded;
         }
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        private void OnDisable()
         {
-            if (scene.name == "TOWN")
+            SceneManager.activeSceneChanged += OnSceneLoaded;
+        }
+        void OnSceneLoaded(Scene oldScene, Scene newScene)
+        {
+            if (newScene.name == "TOWN")
             {
                 fameViewController = FindObjectOfType<FameViewController>(true);
             }

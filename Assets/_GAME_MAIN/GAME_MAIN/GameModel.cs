@@ -23,7 +23,11 @@ namespace Common
         public ClassType abbasClassType;
         public JobNames jobSelect;
         /* isCurrGameModel is to mark in the save file which gameModel to load from the list*/ 
-        public bool isCurrGameModel; 
+        public bool isCurrGameModel;
+
+        [Header("Date and Month")]
+        public CalDate calDate;
+        
         public GameModel(GameScene currGameScene,
             GameDifficulty gameDifficulty, LocationName locationName)
         {

@@ -23,7 +23,7 @@ namespace Combat
         }    
     }
 
-    public class GridService : MonoSingletonGeneric<GridService>, ISaveable
+    public class GridService : MonoSingletonGeneric<GridService>
     {
         public Action <DynamicPosData, int> OnPosChange; 
 
@@ -318,51 +318,50 @@ namespace Combat
 
         public void LoadState()
         {
-            string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.saveSlotSelected.ToString()
-              + "/Grid/DynaModels.txt";
+            //string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.saveSlotSelected.ToString()
+            //  + "/Grid/DynaModels.txt";
 
-            if (File.Exists(Application.dataPath + mydataPath))
-            {
-                Debug.Log("File found!");
-                string str = File.ReadAllText(Application.dataPath + mydataPath);
+            //if (File.Exists(Application.dataPath + mydataPath))
+            //{
+            //    Debug.Log("File found!");
+            //    string str = File.ReadAllText(Application.dataPath + mydataPath);
 
-                allDynaStr = str.Split('|').ToList();
-                allCurrPosOccupiedByDyna.Clear();
-                foreach (string modelStr in allDynaStr)
-                {
-                    Debug.Log($"Grid: {modelStr}");
-                    if (String.IsNullOrEmpty(modelStr)) continue; // eliminate blank string
-                    DynaModel dynaModel = JsonUtility.FromJson<DynaModel>(modelStr);
-                    DynamicPosData dyna = new DynamicPosData(dynaModel);
-                    allCurrPosOccupiedByDyna.Add(dyna);
-                    Debug.Log(dynaModel);
-                }
-                PlaceCharAsPerSaveGrid();
-            }
-            else
-            {
-                Debug.Log("File Does not Exist");
-            }
-
+            //    allDynaStr = str.Split('|').ToList();
+            //    allCurrPosOccupiedByDyna.Clear();
+            //    foreach (string modelStr in allDynaStr)
+            //    {
+            //        Debug.Log($"Grid: {modelStr}");
+            //        if (String.IsNullOrEmpty(modelStr)) continue; // eliminate blank string
+            //        DynaModel dynaModel = JsonUtility.FromJson<DynaModel>(modelStr);
+            //        DynamicPosData dyna = new DynamicPosData(dynaModel);
+            //        allCurrPosOccupiedByDyna.Add(dyna);
+            //        Debug.Log(dynaModel);
+            //    }
+            //    PlaceCharAsPerSaveGrid();
+            //}
+            //else
+            //{
+            //    Debug.Log("File Does not Exist");
+            //}
         }
 
         public void SaveState()
         {
-            if (allCurrPosOccupiedByDyna.Count <= 0)
-            {
-                Debug.Log("no chars in play"); return;
-            }
-            ClearState();
-            foreach (DynamicPosData dyna in allCurrPosOccupiedByDyna)
-            {
-                dyna.SaveModel();
-            }           
+            //if (allCurrPosOccupiedByDyna.Count <= 0)
+            //{
+            //    Debug.Log("no chars in play"); return;
+            //}
+            //ClearState();
+            //foreach (DynamicPosData dyna in allCurrPosOccupiedByDyna)
+            //{
+            //    dyna.SaveModel();
+            //}           
         }
         public void ClearState()
         {
-            string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.saveSlotSelected.ToString()
-             + "/Grid/DynaModels.txt";
-            File.WriteAllText(Application.dataPath + mydataPath, "");
+            //string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.saveSlotSelected.ToString()
+            // + "/Grid/DynaModels.txt";
+            //File.WriteAllText(Application.dataPath + mydataPath, "");
 
         }
 

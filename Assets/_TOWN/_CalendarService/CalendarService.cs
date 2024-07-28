@@ -41,21 +41,8 @@ namespace Common
         public event Action<TimeState> OnChangeTimeState;
         public event Action<CalDate> OnStartOfCalDate; // broadcast day in yr
 
-        //[Header("CURRENT TIME STATE ")]
-        //public TimeState currtimeState;
+        public AllMonthSO allMonthSO; 
 
-        //public int dayInGame;
-        //public int dayInYear; 
-        //public int weekCounter;
-        //public WeekCycles currWeekCycle;
-
-        //// does not reset with week / Month
-        //[Header("CURRENT DAY WEEK AND MONTH")]
-        //public DayName startOfGameDayName = DayName.None; 
-        //public DayName currDayName = DayName.None;
-        //public WeekEventsName currentWeek = WeekEventsName.None;
-        //public MonthName currentMonth = MonthName.None;
-        //public MonthName scrollMonth = MonthName.None;
 
         public CalendarModel calendarModel; 
         [SerializeField] List<MonthSO> allMonthSOs;
@@ -497,3 +484,18 @@ namespace Common
 #endregion
     }
 }
+//[Header("CURRENT TIME STATE ")]
+//public TimeState currtimeState;
+
+//public int dayInGame;
+//public int dayInYear; 
+//public int weekCounter;
+//public WeekCycles currWeekCycle;
+
+//// does not reset with week / Month
+//[Header("CURRENT DAY WEEK AND MONTH")]
+//public DayName startOfGameDayName = DayName.None; 
+//public DayName currDayName = DayName.None;
+//public WeekEventsName currentWeek = WeekEventsName.None;
+//public MonthName currentMonth = MonthName.None;
+//public MonthName scrollMonth = MonthName.None;

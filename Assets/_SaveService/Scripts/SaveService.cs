@@ -6,6 +6,7 @@ using System.IO;
 using System;
 using UnityEngine.UI;
 using Quest;
+using UnityEngine.SceneManagement;
 
 namespace Common
 {
@@ -17,29 +18,32 @@ namespace Common
     //
     public class SaveService : MonoSingletonGeneric<SaveService>
     {
+        [Header(" Date and Month support")]
+        public  AllMonthSO allMonthSO; 
+
         [Header("Scriptable Object")]
         public SaveSO saveSO;
         public string basePath = "/SAVE_SYSTEM/"; 
+
+
+
         [Header("Save and Load Panel Ref")]
         public SaveView saveView;
         public LoadView loadView;
 
         public EscapePanelController escapePanelController;
-
-        //  public SaveMode saveMode;
         public SaveController saveController; 
 
         public List<GameObject> allServices = new List<GameObject>();
         public List<ISaveable> allSaveService = new List<ISaveable>();
-      
-        public bool isLoading = false;
-        public bool isSaving = false; 
-
-
+        private void OnEnable()
+        {
+            SceneManager.activeSceneChanged -= OnActiveSceneLoaded;
+            SceneManager.activeSceneChanged += OnActiveSceneLoaded;
+        }
         private void Start()
         {          
-            saveController = GetComponent<SaveController>();    
-           saveView.GetComponent<IPanel>().UnLoad();
+           
             //foreach (Transform child in saveView.gameObject.transform)
             //{
             //    if(child.GetComponent<Button>() != null)
@@ -47,7 +51,30 @@ namespace Common
             //}
             //CreateDefaultFolders();
         }
-   
+        private void OnDisable()
+        {
+            SceneManager.activeSceneChanged -= OnActiveSceneLoaded;
+        }
+
+        void OnActiveSceneLoaded(Scene oldScene, Scene newScene)
+        {
+            // find save and load view 
+            Debug.Log("Active Scene just loaded" + newScene.name + "OLD Scene" + oldScene.name);
+            if (newScene.name == "CORE") return; 
+            Canvas canvas = FindObjectOfType<Canvas>();
+            if(canvas != null)
+            {
+                loadView = FindObjectOfType<LoadView>(true);
+                saveView = FindObjectOfType<SaveView>(true);
+                saveController = GetComponent<SaveController>();
+            }
+            else
+            {
+                Debug.LogError("Canvas not found"); 
+            }
+            
+        }
+
         public void Init()
         {       // no init on load bcoz it always retrieve data from the allGameModel Files
 
@@ -56,16 +83,7 @@ namespace Common
         }
         // clear all and save all 
 
-        public void SaveCurrentProfileNSlot()
-        {
-            GameModel currGameModel = GameService.Instance.currGameModel;   
-            ProfileSlot profileSlot = currGameModel.profileSlot;
-            SaveSlot saveSlot = saveSlotSelected;
-
-
-        }
-
-
+     
         public void ClearAllProfiles()
         {
             foreach (ProfileSlot profileSlot in Enum.GetValues(typeof(ProfileSlot)))
@@ -153,14 +171,10 @@ namespace Common
             return str; 
         }
 #region GET AND SET
-        public void SetSlotPath(SaveSlot saveSlot)
-        {
-            saveSlotSelected = saveSlot;
-        }
-
+  
         public string GetCurrSlotServicePath(ServicePath servicePath)
         {
-             return GetServicePath(saveSlotSelected, servicePath);
+             return GetServicePath(GameService.Instance.saveSlot, servicePath);
         }
         public string GetServicePath(SaveSlot saveSlot, ServicePath servicePath)
         {
@@ -395,10 +409,10 @@ namespace Common
         }
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.F9))
-            {
-                ClearAllProfiles();
-            }
+            //if (Input.GetKeyDown(KeyCode.F9))
+            //{
+            //    ClearAllProfiles();
+            //}
         }
 
 

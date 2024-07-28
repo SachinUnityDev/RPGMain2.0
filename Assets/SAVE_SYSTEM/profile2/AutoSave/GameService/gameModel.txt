@@ -1,0 +1,1 @@
+{"profileSlot":0,"profileName":"","saveSlot":0,"gameScene":6,"gameDifficulty":0,"locationName":1,"landscapeNames":0,"abbasClassType":0,"jobSelect":0,"isCurrGameModel":false}

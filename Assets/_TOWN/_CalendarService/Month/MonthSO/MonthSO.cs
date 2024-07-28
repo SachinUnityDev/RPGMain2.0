@@ -41,10 +41,7 @@ namespace Common
             monthNameShort = GetMonthNameShort(monthName);
             monthNameStr = GetMonthNameStr(monthName); 
 
-
         }
-
-
         public string GetMonthNameStr(MonthName _monthName)
         {
             switch (_monthName)

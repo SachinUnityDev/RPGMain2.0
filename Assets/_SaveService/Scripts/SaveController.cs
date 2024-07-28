@@ -9,9 +9,6 @@ namespace Common
         public bool ChkIfSaveSlotIsEmpty(SaveSlot saveSlot)
         {
             string slotPath = SaveService.Instance.GetSlotPath(saveSlot);
-            
-
-
             return false; 
         }
         public void ClearAllFilesInSlot(SaveSlot saveSlot)

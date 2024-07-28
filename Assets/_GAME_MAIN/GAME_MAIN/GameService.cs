@@ -28,14 +28,17 @@ namespace Common
         public SaveSlot saveSlot;
         public ProfileSlot profileSlot;
 
+
         [SerializeField] List<string> allGameJSONs = new List<string>();
         public List<GameModel> allGameModel;
         public ServicePath servicePath => ServicePath.GameService;
 
         private void Start()
         {
-            SceneManager.LoadScene((int)SceneName.INTRO, LoadSceneMode.Additive);  
-            SceneMgmtService.Instance.sceneMgmtController.SetAsLastScene(SceneName.INTRO);
+            //SceneManager.LoadScene((int)SceneName.INTRO, LoadSceneMode.Additive);  
+            Debug.Log("CORE SCENE STARTED");
+            SceneMgmtController sceneMgmtController =  SceneMgmtService.Instance.sceneMgmtController;
+            StartCoroutine(sceneMgmtController.LoadScene(SceneName.INTRO)); 
         }
 
         public GameModel GetCurrentGameModel(int slot)
@@ -231,10 +234,10 @@ namespace Common
         }
         public void SaveState()
         {
-            if (allGameModel.Count <= 0)
-            {
-                Debug.LogError("no GameModel created"); return;
-            }
+            //if (allGameModel.Count <= 0)
+            //{
+            //    Debug.LogError("no GameModel created"); return;
+            //}
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
             ClearState_Private();
 
@@ -246,7 +249,8 @@ namespace Common
                     gameModel.isCurrGameModel = false;
                 
                 string gameModelJSON = JsonUtility.ToJson(gameModel);               
-                string fileName = path + gameModel.GetProfileName() + ".txt";
+                string fileName = path + gameModel.GetProfileName() + "gameModel.txt";
+                Debug.LogError(fileName);
                 File.WriteAllText(fileName, gameModelJSON);
             }
         }

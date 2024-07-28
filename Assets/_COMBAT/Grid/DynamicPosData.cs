@@ -78,20 +78,20 @@ namespace Combat
 
         public void SaveModel()
         {
-            string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.saveSlotSelected.ToString()
-            + "/Grid/DynaModels.txt";
-            Debug.Log(" INSIDE DYna save MODEL ");
-            if (!File.Exists(Application.dataPath + mydataPath))
-            {
-                Debug.Log("does not exist");
-                File.CreateText(Application.dataPath + mydataPath);
-            }
+            //string mydataPath = "/SAVE_SYSTEM/savedFiles/" + SaveService.Instance.saveSlotSelected.ToString()
+            //+ "/Grid/DynaModels.txt";
+            //Debug.Log(" INSIDE DYna save MODEL ");
+            //if (!File.Exists(Application.dataPath + mydataPath))
+            //{
+            //    Debug.Log("does not exist");
+            //    File.CreateText(Application.dataPath + mydataPath);
+            //}
 
-            string dynaData = JsonUtility.ToJson(dynaModel);
-            // string dynaData = "hello world";
-            string saveStr = dynaData + "|";
+            //string dynaData = JsonUtility.ToJson(dynaModel);
+            //// string dynaData = "hello world";
+            //string saveStr = dynaData + "|";
 
-            File.AppendAllText(Application.dataPath + mydataPath, saveStr);
+            //File.AppendAllText(Application.dataPath + mydataPath, saveStr);
 
         }
 

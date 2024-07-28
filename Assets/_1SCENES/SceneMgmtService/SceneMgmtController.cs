@@ -26,6 +26,7 @@ namespace Common
         private void OnEnable()
         {
             SceneManager.activeSceneChanged += OnSceneLoaded; 
+            SetAsLastScene(SceneName.CORE);
         }
         private void OnDisable()
         {
@@ -41,15 +42,15 @@ namespace Common
         {
             AsyncOperation async = SceneManager.LoadSceneAsync(sceneName.ToString(), LoadSceneMode.Additive);
             StartSceneTransit();
-            while (async.isDone)
+            while (!async.isDone)
             {
                 Debug.Log("Loading Scene");
-                yield return null; 
-               
+                yield return null;
                
             }
-            StartCoroutine(UnloadAsyncOperation(sceneName));
-            
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName.ToString()));
+            if (lastScene != SceneName.CORE)
+             StartCoroutine(UnloadAsyncOperation(sceneName));            
         }
         IEnumerator UnloadAsyncOperation(SceneName sceneName)
         {
@@ -59,7 +60,7 @@ namespace Common
             {
                 yield return null;
             }
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName.ToString()));
+          //  SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName.ToString()));
             SetAsLastScene(sceneName);
 
         }

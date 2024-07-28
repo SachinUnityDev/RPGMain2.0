@@ -8,12 +8,13 @@ namespace Common
     public class LoadSlotsView : MonoBehaviour, IPointerClickHandler
     {
 
-        [SerializeField] GameModel gameModel; 
-        public void Init()
-        {
-            // fill the slot img and data 
+        [SerializeField] List<GameModel> allGameModelsInProfile = new List<GameModel>();
+        [SerializeField] SaveSlot saveSlot; 
 
-
+        public void Init(List<GameModel> allGameModelsInProfile)
+        { 
+            this.allGameModelsInProfile = allGameModelsInProfile.DeepClone(); 
+            
 
         }
 

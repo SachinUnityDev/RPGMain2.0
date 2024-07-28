@@ -1,0 +1,1 @@
+{"weekName":3,"weekCount":0,"weekNameStr":"Week of Scholars","weekDesc":"All the knowledge-hungry people visit Nekkisari this week for an event in a house near Khalid's. Philosophical discussions, lore and history courses will take place in the event. Wisdom may spread...","WeekSpecs":["Quest Rewards: +60% exp","On Consume Scroll: +60% exp"],"isDayBonusReceived":false}

@@ -1,0 +1,1 @@
+{"commonInvCount":0,"stashInvCount":0,"excessInvCount":0,"allActiveInvData":[],"commonInvItemData":[],"stashInvItemsData":[],"excessInvItemsData":[],"size_Comm":18,"size_excess":24,"size_Stash":18}

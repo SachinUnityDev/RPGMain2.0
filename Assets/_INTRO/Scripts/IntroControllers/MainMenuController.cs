@@ -41,7 +41,7 @@ namespace Intro
         {
             NewGame.onClick.AddListener(OnNewBtnPressed);
             Extras.onClick.AddListener(OnExtrasPressed);
-
+            Continue.onClick.AddListener(OnContinueBtnPressed);
             ReturnBack.onClick.AddListener(OnReturnBackPressed); 
         }
 
@@ -59,6 +59,13 @@ namespace Intro
             settings.Init(this); 
                 
         }
+        public void UnLoad()
+        {
+            IntroServices.Instance.Fade(gameObject, 0.4f);
+            UIControlServiceGeneral.Instance.ToggleInteractionsOnUI(this.gameObject, false);
+            IntroServices.Instance.LoadNext();
+
+        }
         public IEnumerator Wait(float time)
         {
             yield return new WaitForSeconds(time);
@@ -71,14 +78,11 @@ namespace Intro
         {         
             UnLoad(); 
         }
-
-        public void UnLoad()
-        {
-            IntroServices.Instance.Fade(gameObject, 0.4f);          
-            UIControlServiceGeneral.Instance.ToggleInteractionsOnUI(this.gameObject, false);
-            IntroServices.Instance.LoadNext();
-
+        void OnContinueBtnPressed()
+        {            
+           SaveService.Instance.loadView.GetComponent<IPanel>().Load();
         }
+    
 
         /************************EXTRAS ********************************/
 

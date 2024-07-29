@@ -35,16 +35,23 @@ namespace Town
         {
             if (newScene.name == "TOWN")
             {
-                welcomeView = FindObjectOfType<WelcomeView>();
-                cornerBtns = FindObjectOfType<CornerBtns>(true).gameObject;
-                cornerBtns.SetActive(true);
-
+              GetViews();
+                welcomeController = GetComponent<WelcomeController>();  
+                BuildingIntService.Instance.OnBuildInit -= welcomeController.OnEnterTavern;
+                BuildingIntService.Instance.OnBuildInit += welcomeController.OnEnterTavern;
             }
+        }
+        void GetViews()
+        {
+            welcomeView = FindObjectOfType<WelcomeView>(true);
+            cornerBtns = FindObjectOfType<CornerBtns>(true).gameObject;
+            cornerBtns.SetActive(true);
         }
 
         #region WELCOME TWO DAY GAME PLAY GUIDE
         public void InitWelcome()
         {
+            GetViews();
             isWelcomeRun = true;
 
             welcomeController = GetComponent<WelcomeController>();
@@ -70,7 +77,7 @@ namespace Town
             }
             else
             {
-              
+                DialogueService.Instance.GetDialogueModel(DialogueNames.MeetKhalid).isUnLocked = true;
                 welcomeView.InitWelcomeView();
             }
             BuildingIntService.Instance.ChgCharState(BuildingNames.Tavern, CharNames.Cahyo, NPCState.UnLockedNAvail, false);

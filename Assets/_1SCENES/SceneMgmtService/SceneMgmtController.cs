@@ -26,16 +26,16 @@ namespace Common
         private void OnEnable()
         {
             SceneManager.activeSceneChanged += OnSceneLoaded; 
-            SetAsLastScene(SceneName.CORE);
+            UpdateSceneName(SceneName.CORE);
         }
         private void OnDisable()
         {
             SceneManager.activeSceneChanged -= OnSceneLoaded;
         }
         
-        public void SetAsLastScene(SceneName lastScene)
+        public void UpdateSceneName(SceneName lastScene)
         {
-            this.lastScene = lastScene;
+            this.lastScene = lastScene;              
         }
 
         public IEnumerator LoadScene(SceneName sceneName)
@@ -45,24 +45,25 @@ namespace Common
             while (!async.isDone)
             {
                 Debug.Log("Loading Scene");
-                yield return null;
-               
+                yield return null;               
             }
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName.ToString()));
+            lastScene = newScene; 
+            newScene = sceneName;            
             if (lastScene != SceneName.CORE)
-             StartCoroutine(UnloadAsyncOperation(sceneName));            
+                StartCoroutine(UnloadAsyncOperation(lastScene)); 
+           
         }
         IEnumerator UnloadAsyncOperation(SceneName sceneName)
         {
-            AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(lastScene.ToString());
+            AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(sceneName.ToString());
 
             while (!asyncUnload.isDone)
             {
                 yield return null;
             }
           //  SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName.ToString()));
-            SetAsLastScene(sceneName);
-
+           
         }
         public void StartSceneTransit()
         {

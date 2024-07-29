@@ -40,6 +40,7 @@ namespace Common
         
         public void OnTownLoaded()
         {   
+            
             TownService.Instance.Init();  // new game
             BuildingIntService.Instance.InitNGBuildIntService();
             EncounterService.Instance.EncounterInit();
@@ -86,6 +87,7 @@ namespace Common
             {
                 Set_GameState(GameState.OnLoadGameStartComplete);
             }
+         
         }        
     
         public void On_CombatEnter()
@@ -99,7 +101,8 @@ namespace Common
         public void On_TownLoaded(GameScene gameScene)
         {
             if (gameScene != GameScene.InTown)
-                return;          
+                return;
+            Debug.Log("On_TownLoaded" + gameScene);            
             OnTownLoaded(); 
         }
         public void On_TownExit(LocationName locationName)
@@ -121,7 +124,7 @@ namespace Common
             OnIntroLoaded?.Invoke();
         }
         public void On_IntroUnLoaded()
-        {            
+        {  
             OnIntroUnLoaded?.Invoke();
         }
 

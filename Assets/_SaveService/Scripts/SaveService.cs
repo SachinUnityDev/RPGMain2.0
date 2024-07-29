@@ -97,7 +97,7 @@ namespace Common
 
         public void ClearFiles4ProfileNSlot(ProfileSlot profileSlot, SaveSlot saveSlot)
         {
-            string path = Application.dataPath + GetProfilePath(profileSlot);  
+            string path = Application.dataPath + GetCurrProfilePath(profileSlot);  
             
             try
             {
@@ -123,7 +123,7 @@ namespace Common
             CreateAFolder(Application.dataPath + basePath);
             foreach (SaveSlot slot in Enum.GetValues(typeof(SaveSlot)))
             {
-                string path = GetSlotPath(slot);
+                string path = GetCurrentSlotPath(slot);
                 CreateAFolder(path);
                 CreateDefaultServiceFolder(slot);
             }
@@ -134,17 +134,43 @@ namespace Common
 
             foreach (ServicePath serviceName in Enum.GetValues(typeof(ServicePath)))
             {
-                string path = GetServicePath(saveSlot, serviceName);
+                string path = GetCurrServicePath(saveSlot, serviceName);
                 if(serviceName == ServicePath.EcoService)
                 CreateAFolder(path);
-
             }
         }
-
-        public string GetSlotPath(SaveSlot saveSlot)
+        public string GetSlotPath(ProfileSlot profileSlot, SaveSlot saveSlot)
+        {
+            string str = GetCurrProfilePath(profileSlot);
+            switch (saveSlot)
+            {
+                case SaveSlot.AutoSave:
+                    str += "AutoSave/";
+                    break;
+                case SaveSlot.QuickSave:
+                    str += "QuickSave/";
+                    break;
+                case SaveSlot.Slot1:
+                    str += "Slot1/";
+                    break;
+                case SaveSlot.Slot2:
+                    str += "Slot2/";
+                    break;
+                case SaveSlot.Slot3:
+                    str += "Slot3/";
+                    break;
+                case SaveSlot.Slot4:
+                    str += "Slot4/";
+                    break;
+                default:
+                    break;
+            }
+            return str;
+        }
+        public string GetCurrentSlotPath(SaveSlot saveSlot)
         {
             GameModel currGameModel = GameService.Instance.currGameModel; 
-            string str = Application.dataPath + GetProfilePath(currGameModel.profileSlot);
+            string str = GetCurrProfilePath(currGameModel.profileSlot);
             switch (saveSlot)
             {
                 case SaveSlot.AutoSave:
@@ -170,15 +196,178 @@ namespace Common
             }
             return str; 
         }
-#region GET AND SET
-  
+        #region GET AND SET
+        public string GetSlotServicePath(SaveSlot saveSlot, ServicePath servicePath)
+        {
+            return GetCurrServicePath(saveSlot, servicePath);
+        }
         public string GetCurrSlotServicePath(ServicePath servicePath)
         {
-             return GetServicePath(GameService.Instance.saveSlot, servicePath);
+             return GetCurrServicePath(GameService.Instance.saveSlot, servicePath);
         }
-        public string GetServicePath(SaveSlot saveSlot, ServicePath servicePath)
+        public string GetServicePath(SaveSlot saveSlot, ServicePath servicePath, ProfileSlot profileSlot)
         {
-            string str = GetSlotPath(saveSlot);
+            string str = GetSlotPath(profileSlot, saveSlot);
+            switch (servicePath)
+            {
+                case ServicePath.Main:
+                    str += "Main/";
+                    break;
+                case ServicePath.PlayerService:
+                    str += "PlayerService/";
+                    break;
+                case ServicePath.WoodGameService:
+                    str += "WoodGameService/";
+                    break;
+                case ServicePath.CurioService:
+                    str += "CurioService/";
+                    break;
+                case ServicePath.EncounterService:
+                    str += "EncounterService/";
+                    break;
+                case ServicePath.LandscapeService:
+                    str += "LandscapeService/";
+                    break;
+                case ServicePath.LootService:
+                    str += "LootService/";
+                    break;
+                case ServicePath.QuestEventService:
+                    str += "QuestEventService/";
+                    break;
+                case ServicePath.QuestMissionService:
+                    str += "QuestMissionService/";
+                    break;
+                case ServicePath.QRoomService:
+                    str += "QRoomService/";
+                    break;
+                case ServicePath.ArmorService:
+                    str += "ArmorService/";
+                    break;
+                case ServicePath.InvService:
+                    str += "InvService/";
+                    break;
+                case ServicePath.WeaponService:
+                    str += "WeaponService/";
+                    break;
+                case ServicePath.GewgawService:
+                    str += "GewgawService/";
+                    break;
+                case ServicePath.LoreService:
+                    str += "LoreService/";
+                    break;
+                case ServicePath.RecipeService:
+                    str += "RecipeService/";
+                    break;
+                case ServicePath.ItemService:
+                    str += "ItemService/";
+                    break;
+                case ServicePath.GridService:
+                    str += "GridService/";
+                    break;
+                case ServicePath.CombatEventService:
+                    str += "CombatEventService/";
+                    break;
+                case ServicePath.CombatService:
+                    str += "CombatService/";
+                    break;
+                case ServicePath.PassiveSkillService:
+                    str += "PassiveSkillService/";
+                    break;
+                case ServicePath.SkillService:
+                    str += "SkillService/";
+                    break;
+                case ServicePath.WelcomeService:
+                    str += "WelcomeService/";
+                    break;
+                case ServicePath.JobService:
+                    str += "JobService/";
+                    break;
+                case ServicePath.BuildingIntService:
+                    str += "BuildingIntService/";
+                    break;
+                case ServicePath.MapService:
+                    str += "MapService/";
+                    break;
+                case ServicePath.TownService:
+                    str += "TownService/";
+                    break;
+                case ServicePath.SceneMgmtService:
+                    str += "SceneMgmtService/";
+                    break;
+                case ServicePath.BarkService:
+                    str += "BarkService/";
+                    break;
+                case ServicePath.BuffService:
+                    str += "BuffService/";
+                    break;
+                case ServicePath.CharStatesService:
+                    str += "CharStatesService/";
+                    break;
+                case ServicePath.CharService:
+                    str += "CharService/";
+                    break;
+                case ServicePath.DialogueService:
+                    str += "DialogueService/";
+                    break;
+                case ServicePath.LevelService:
+                    str += "LevelService/";
+                    break;
+                case ServicePath.PermaTraitsService:
+                    str += "PermaTraitsService/";
+                    break;
+                case ServicePath.TempTraitService:
+                    str += "TempTraitService/";
+                    break;
+                case ServicePath.CodexService:
+                    str += "CodexService/";
+                    break;
+                case ServicePath.GameEventService:
+                    str += "GameEventService/";
+                    break;
+                case ServicePath.GameService:
+                    str += "GameService/";
+                    break;
+                case ServicePath.SettingService:
+                    str += "SettingService/";
+                    break;
+                case ServicePath.IntroAudioService:
+                    str += "IntroAudioService/";
+                    break;
+                case ServicePath.BestiaryService:
+                    str += "BestiaryService/";
+                    break;
+                case ServicePath.MGService:
+                    str += "MGService/";
+                    break;
+                case ServicePath.SaveService:
+                    str += "SaveService/";
+                    break;
+                case ServicePath.FameService:
+                    str += "FameService/";
+                    break;
+                case ServicePath.CalendarService:
+                    str += "CalendarService/";
+                    break;
+                case ServicePath.RosterService:
+                    str += "RosterService/";
+                    break;
+                case ServicePath.TownEventService:
+                    str += "TownEventService/";
+                    break;
+                case ServicePath.TradeService:
+                    str += "TradeService/";
+                    break;
+                case ServicePath.EcoService:
+                    str += "EcoService/";
+                    break;
+                default:
+                    break;
+            }
+            return str;
+        }
+        public string GetCurrServicePath(SaveSlot saveSlot, ServicePath servicePath)
+        {   
+            string str = GetCurrentSlotPath(saveSlot);
             switch (servicePath)
             {
                 case ServicePath.Main:
@@ -386,25 +575,48 @@ namespace Common
         //        LoadFileMaster();
         }
 
-        public string GetProfilePath(ProfileSlot profileSlot)
+        public string GetCurrProfilePath(ProfileSlot profileSlot)
         {
-            GameModel gameModel = GameService.Instance.GetCurrentGameModel((int)profileSlot);
+           // GameModel gameModel = GameService.Instance.GetCurrentGameModel((int)profileSlot);
+            string basePath1 = Application.dataPath + basePath; 
             switch (profileSlot)
             {
                 case ProfileSlot.Profile1:
-                    return basePath + "profile1/";
+                    return basePath1 + "profile1/";
                 case ProfileSlot.Profile2:
-                    return basePath + "profile2/";
+                    return basePath1 + "profile2/";
                 case ProfileSlot.Profile3:
-                    return basePath + "profile3/";
+                    return basePath1 + "profile3/";
                 case ProfileSlot.Profile4:
-                    return basePath + "profile4/";
+                    return basePath1 + "profile4/";
                 case ProfileSlot.Profile5:
-                    return basePath + "profile5/";
+                    return basePath1 + "profile5/";
                 case ProfileSlot.Profile6:
-                    return basePath + "profile6/";
+                    return basePath1 + "profile6/";
                 default:
-                    return basePath + "profile1/";
+                    return basePath1 + "profile1/";
+            }
+        }
+        public string GetProfilePath(ProfileSlot profileSlot, SaveSlot saveSlot)
+        {
+            GameModel gameModel = GameService.Instance.GetCurrentGameModel((int)profileSlot);
+            string basePath1 = Application.dataPath + basePath;
+            switch (profileSlot)
+            {
+                case ProfileSlot.Profile1:
+                    return basePath1 + "profile1/";
+                case ProfileSlot.Profile2:
+                    return basePath1 + "profile2/";
+                case ProfileSlot.Profile3:
+                    return basePath1 + "profile3/";
+                case ProfileSlot.Profile4:
+                    return basePath1 + "profile4/";
+                case ProfileSlot.Profile5:
+                    return basePath1 + "profile5/";
+                case ProfileSlot.Profile6:
+                    return basePath1 + "profile6/";
+                default:
+                    return basePath1 + "profile1/";
             }
         }
         private void Update()

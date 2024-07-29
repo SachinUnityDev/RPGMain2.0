@@ -84,8 +84,6 @@ namespace Intro
             SetState_Plank(slotId);
             // chk if plank has profile 
             // show notification if has profile on click yes clear the gameModel and create a new one
-
-          
         }
 
         public void OnContinuePressed()
@@ -93,7 +91,9 @@ namespace Intro
             if (slotSelect == -1) return;
             string profileStr = container.GetChild(slotSelect).GetComponent<SetProfilePtrEvents>().profileTxt;
             if (profileStr == string.Empty)
-                profileStr = $"Profile {slotSelect+1}"; 
+                profileStr = $"Profile {slotSelect+1}";
+            GameService.Instance.OnProfileSet((ProfileSlot)slotSelect); 
+
             GameService.Instance.CreateNewGame(slotSelect, profileStr); 
             UnLoad(); 
         }

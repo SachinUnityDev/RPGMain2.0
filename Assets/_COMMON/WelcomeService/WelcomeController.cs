@@ -8,12 +8,11 @@ public class WelcomeController : MonoBehaviour
 
     private void Start()
     {
-        BuildingIntService.Instance.OnBuildInit -= OnEnterTavern;
-        BuildingIntService.Instance.OnBuildInit +=OnEnterTavern; 
+        
     }
     #region Seq Action on Welcome Run
 
-    void OnEnterTavern(BuildingModel buildModel, BuildView buildView)
+    public void OnEnterTavern(BuildingModel buildModel, BuildView buildView)
     {
         if (buildModel.buildingName != BuildingNames.Tavern) return;
         if (!WelcomeService.Instance.isWelcomeRun) return;

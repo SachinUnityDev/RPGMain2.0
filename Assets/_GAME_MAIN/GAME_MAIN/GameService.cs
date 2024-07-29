@@ -118,34 +118,22 @@ namespace Common
         public void Init()
         {
             gameController = transform.GetComponent<GameController>();
-            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-            if (SaveService.Instance.DirectoryExists(path))
-            {
-                allGameModel = new List<GameModel>();
-                if (IsDirectoryEmpty(path))
-                {
-
-                }
-                else
-                {
-                    LoadState();
-                }
-                PostLoadActions(); 
-            }
-            else
-            {
-                Debug.LogError("Service Directory missing" + path);
-            }
+           // string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            allGameModel = new List<GameModel>();
+         
+            LoadState();
+            PostLoadActions();
         }
-        public void CreateNewGame(int profileId, string profileStr)  // On Set profile Continue btn
+        public void CreateNewGame(int profileslot, string profileStr)  // On Set profile Continue btn
         {
-            currGameModel = new GameModel(profileId, profileStr);
+            currGameModel = new GameModel(profileslot, profileStr);
             currGameModel.gameDifficulty = GameDifficulty.Easy;
             currGameModel.locationName = LocationName.Nekkisari;
+            profileSlot = (ProfileSlot)profileslot; 
             if (currGameModel.abbasClassType == ClassType.None)
             {
                 currGameModel.abbasClassType = ClassType.Skirmisher;
-            }
+            }           
             gameController.InitDiffGameController(currGameModel.gameDifficulty);
             allGameModel.Add(currGameModel);
 
@@ -161,6 +149,18 @@ namespace Common
             GameEventService.Instance.OnGameStateChg?.Invoke(GameState.OnLoadGameStart);
         }
 
+        public void OnProfileSet(ProfileSlot profileSlot)
+        {
+            this.profileSlot = profileSlot;
+            // in this profile find the autosave slot
+           // 1. Chk if the profile is empty
+           // loop thru all game models and find the profile slot
+           GameModel gameModel = GetGameModel(profileSlot, SaveSlot.AutoSave);
+            if (gameModel != null)
+            {
+                saveSlot = SaveSlot.AutoSave;
+            }   
+        }
         public void GameSceneLoad(GameScene gameScene)
         {
             currGameModel.gameScene= gameScene;            
@@ -177,30 +177,42 @@ namespace Common
             GameEventService.Instance.On_IntroLoaded();// event
         }
         #region SAVE AND LOAD 
+
         public void LoadState()
         {
-            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-
-            if (SaveService.Instance.DirectoryExists(path))
+            // loop thru all save slots and load them
+            foreach (ProfileSlot profileSlot in Enum.GetValues(typeof(ProfileSlot)))
             {
-                string[] fileNames = Directory.GetFiles(path);
-                foreach (string fileName in fileNames)
+                foreach (SaveSlot saveSlot in Enum.GetValues(typeof(SaveSlot)))
                 {
-                    // skip meta files
-                    if (fileName.Contains(".meta")) continue;
-                    string contents = File.ReadAllText(fileName);
-                    Debug.Log("  " + contents);
-                    GameModel gameModel = JsonUtility.FromJson<GameModel>(contents);
-                    allGameModel.Add(gameModel); // load all game models   
+                   
+                    string path = SaveService.Instance.GetServicePath(saveSlot,servicePath, profileSlot );
+                    // game Service here too 
+                    //path = path.Substring(0, path.Length - 1);
+
+                    if (SaveService.Instance.DirectoryExists(path))
+                    { // loop thru all profiles and load them
+                        string[] fileNames = Directory.GetFiles(path);
+                        foreach (string fileName in fileNames)
+                        {
+                            // skip meta files
+                            if (fileName.Contains(".meta")) continue;
+                            string contents = File.ReadAllText(fileName);
+                            Debug.Log("  " + contents);
+                            GameModel gameModel = JsonUtility.FromJson<GameModel>(contents);
+                            allGameModel.Add(gameModel); // load all game models   
+                        }
+                        // profileslot and save slot are set by loadView or Continue btn in main Menu
+
+                    }
+                    else
+                    {
+                        Debug.LogError("Service Directory missing" + path);
+                    }
                 }
-                // profileslot and save slot are set by loadView or Continue btn in main Menu
-                GameModel currGameModel =  GetGameModel(profileSlot, saveSlot);// this is the game Model
-               LoadGame(currGameModel);
-            }
-            else
-            {
-                Debug.LogError("Service Directory missing");
-            }
+            }                
+            GameModel currGameModel = GetGameModel(profileSlot, saveSlot);// this is the game Model
+            LoadGame(currGameModel);
         }     
         
         public void DelAGameProfile(GameModel gameModel)
@@ -234,10 +246,11 @@ namespace Common
         }
         public void SaveState()
         {
-            //if (allGameModel.Count <= 0)
-            //{
-            //    Debug.LogError("no GameModel created"); return;
-            //}
+            if (allGameModel.Count <= 0)
+            {
+                Debug.LogError("no GameModel created"); return;
+            }
+            // SET SAVE SLOT before save
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
             ClearState_Private();
 
@@ -245,12 +258,16 @@ namespace Common
             {
                 if(gameModel.profileSlot == currGameModel.profileSlot && gameModel.saveSlot == currGameModel.saveSlot)                
                     gameModel.isCurrGameModel = true;
-                else                
+                else
+                {
                     gameModel.isCurrGameModel = false;
+                    continue; 
+                }                
+                    
                 
                 string gameModelJSON = JsonUtility.ToJson(gameModel);               
                 string fileName = path + gameModel.GetProfileName() + "gameModel.txt";
-                Debug.LogError(fileName);
+                
                 File.WriteAllText(fileName, gameModelJSON);
             }
         }
@@ -274,4 +291,3 @@ namespace Common
 
 
 }
-

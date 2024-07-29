@@ -85,8 +85,6 @@ namespace Common
         {
             CombatEventService.Instance.OnEOT -= UpdateOnDeath;
         }
-
-
         public void Init() 
         {
            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
@@ -94,14 +92,13 @@ namespace Common
             {
                 if(IsDirectoryEmpty(path))
                 {
-                    List<CharNames> chars2Spawn = new List<CharNames> { CharNames.Abbas
-                                 , CharNames.Baran, CharNames.Rayyan, CharNames.Cahyo };
+                    List<CharNames> chars2Spawn = new List<CharNames> { CharNames.Abbas,
+                                  CharNames.Baran, CharNames.Rayyan, CharNames.Cahyo };
                     charMainModel = new CharMainModel();
                     foreach (CharNames charName in chars2Spawn)
                     {
                         SpawnCompNG(charName);
-                    }
-                    
+                    }                    
                 }else
                 {
                     LoadState();

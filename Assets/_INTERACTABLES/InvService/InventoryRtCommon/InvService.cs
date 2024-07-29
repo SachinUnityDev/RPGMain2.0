@@ -13,6 +13,7 @@ namespace Interactables
 {
     public class InvService : MonoSingletonGeneric<InvService>, ISaveable
     {
+        #region DECLARATIONS
         public int MAX_SIZE_COMM_INV = 0; 
 
         public event Action<bool, ItemsDragDrop> OnDragResult;
@@ -55,8 +56,8 @@ namespace Interactables
 
         [Header("Global Var NTBR")]
         public GameObject invXLGO;// lore + beastiary+ skills+ invPanel..parent
+        #endregion
 
-        
         public ServicePath servicePath => ServicePath.InvService;
 
         // public GameObject invXLPrefab; 
@@ -66,9 +67,9 @@ namespace Interactables
             base.Awake();
             SceneManager.activeSceneChanged += OnSceneLoaded;
         }
-        private void Start()
+        private void OnEnable()
         {            
-            Init(); 
+           
         }
 
         
@@ -78,7 +79,12 @@ namespace Interactables
         }
         void OnSceneLoaded(Scene prevScene, Scene newScene)
         {  
-             InitInvXLView();
+            if(newScene.name == "TOWN")
+            {
+                Init();
+                InitInvXLView();
+            }
+             
         }
 
         public void Init()
@@ -133,8 +139,6 @@ namespace Interactables
             invXLRect.localScale = Vector3.one;
             invXLRect.offsetMin = new Vector2(0, 0); // new Vector2(left, bottom);
             invXLRect.offsetMax = new Vector2(0, 0); // new Vector2(-right, -top);
-
-
 
             excessInvViewController = invXLGO.GetComponentInChildren<ExcessInvViewController>();
             invRightViewController = invXLGO.GetComponentInChildren<InvRightViewController>();

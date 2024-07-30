@@ -22,8 +22,8 @@ namespace Intro
         {
             this.quickStartView = quickStartView;
             dialogueSO = DialogueService.Instance.GetDialogueSO(DialogueNames.DebtIsClear);
-            dialogueModel = DialogueService.Instance.GetDialogueModel(DialogueNames.DebtIsClear);
-            dialogueModel.isPlayedOnce = true; 
+            //dialogueModel = DialogueService.Instance.GetDialogueModel(DialogueNames.DebtIsClear);
+            //dialogueModel.isPlayedOnce = true; 
             InteractionSpriteData InteractSprites = dialogueSO.interactSprites[0];
             int i = 0;
             foreach (Transform child in imgContainer)

@@ -76,7 +76,7 @@ namespace Interactables
 
         }
 
-#region Button Controls
+        #region Button Controls
 
         public void OpenArmorPanel()
         {  

@@ -92,9 +92,8 @@ namespace Intro
             string profileStr = container.GetChild(slotSelect).GetComponent<SetProfilePtrEvents>().profileTxt;
             if (profileStr == string.Empty)
                 profileStr = $"Profile {slotSelect+1}";
-            GameService.Instance.OnProfileSet((ProfileSlot)slotSelect); 
-
-            GameService.Instance.CreateNewGame(slotSelect, profileStr); 
+           
+            GameService.Instance.CreateNewGame(slotSelect, profileStr); // set profile too 
             UnLoad(); 
         }
         void InitProfiles()

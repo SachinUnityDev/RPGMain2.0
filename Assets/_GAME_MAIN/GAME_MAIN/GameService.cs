@@ -133,10 +133,11 @@ namespace Common
             if (currGameModel.abbasClassType == ClassType.None)
             {
                 currGameModel.abbasClassType = ClassType.Skirmisher;
-            }           
+            }
             gameController.InitDiffGameController(currGameModel.gameDifficulty);
             allGameModel.Add(currGameModel);
-
+            // Init Services related to profile
+            DialogueService.Instance.InitDialogueService();             
             GameEventService.Instance.Set_GameState(GameState.OnNewGameStart);
         }        
 

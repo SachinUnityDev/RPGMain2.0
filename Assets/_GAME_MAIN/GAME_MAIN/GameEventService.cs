@@ -10,8 +10,7 @@ namespace Common
 {
     public class GameEventService : MonoSingletonGeneric<GameEventService>
     {   
-        public Action OnMainGameInitComplete;
-        public Action OnMainGameEnd;
+   
 
         public Action<LocationName> OnTownEnter;
         public Action<LocationName> OnTownExit;
@@ -40,51 +39,77 @@ namespace Common
         
         public void OnTownLoaded()
         {   
-            
-            TownService.Instance.Init();  // new game
-            BuildingIntService.Instance.InitNGBuildIntService();
-            EncounterService.Instance.EncounterInit();
-            CalendarService.Instance.Init();
-            
-            CharService.Instance.Init();
-            CharStatesService.Instance.Init();
-
-            UIControlServiceGeneral.Instance.InitUIGeneral();
-
-            EcoService.Instance.InitEcoServices();
-            BarkService.Instance.InitBarkService();
-            JobService.Instance.JobServiceInit();
-            BestiaryService.Instance.Init();
-            ItemService.Instance.Init();
-            TradeService.Instance.InitTradeService();// new game 
-            FameService.Instance.Init();
-            LevelService.Instance.Init();
-            WeaponService.Instance.Init();
-            ArmorService.Instance.Init();
-
-            OnTownEnter?.Invoke(LocationName.Nekkisari);
-            QuestMissionService.Instance.InitQuestMission();
-            LandscapeService.Instance.InitLandscape();
-            MapService.Instance.InitMapService(); // to be put below questmission
-            LootService.Instance.InitLootService();
-            if (WelcomeService.Instance.isQuickStart)
-                WelcomeService.Instance.On_QuickStart();
-            else
-                WelcomeService.Instance.InitWelcome();
-            On_MainGameInitComplete();
             if (GameService.Instance.gameState == GameState.OnNewGameStart)
             {
+                TownService.Instance.Init();  // new game
+                BuildingIntService.Instance.InitNGBuildIntService();
+                EncounterService.Instance.EncounterInit();
+                CalendarService.Instance.Init();
+
+                CharService.Instance.Init();
+                CharStatesService.Instance.Init();
+
+                UIControlServiceGeneral.Instance.InitUIGeneral();
+
+                EcoService.Instance.InitEcoServices();
+                BarkService.Instance.InitBarkService();
+                JobService.Instance.JobServiceInit();
+                BestiaryService.Instance.Init();
+                ItemService.Instance.Init();
+                TradeService.Instance.InitTradeService();// new game 
+                FameService.Instance.Init();
+                LevelService.Instance.Init();
+                WeaponService.Instance.Init();
+                ArmorService.Instance.Init();
+
+                OnTownEnter?.Invoke(LocationName.Nekkisari);
+                QuestMissionService.Instance.InitQuestMission();
+                LandscapeService.Instance.InitLandscape();
+                MapService.Instance.InitMapService(); // to be put below questmission
+                LootService.Instance.InitLootService();
+                if (WelcomeService.Instance.isQuickStart)
+                    WelcomeService.Instance.On_QuickStart();
+                else
+                    WelcomeService.Instance.InitWelcome();
+
+
                 if (GameService.Instance.gameController.isQuickStart)
                 {
                     CharService.Instance.GetAllyController(CharNames.Abbas).charModel.classType
                         = GameService.Instance.currGameModel.abbasClassType;
                     
                     // Set job NAME SELECT HERE 
-                } 
+                }              
                 Set_GameState(GameState.OnNewGameStartComplete);
             }
             if(GameService.Instance.gameState == GameState.OnLoadGameStart)
             {
+                TownService.Instance.LoadState();  // new game
+                BuildingIntService.Instance.LoadState();
+                EncounterService.Instance.LoadState();
+                CalendarService.Instance.LoadState();
+
+                CharService.Instance.LoadState();
+                CharStatesService.Instance.LoadState();
+
+                UIControlServiceGeneral.Instance.InitUIGeneral();
+
+                EcoService.Instance.LoadState();
+                BarkService.Instance.InitBarkService();
+                JobService.Instance.JobServiceInit();
+                BestiaryService.Instance.LoadState();
+                ItemService.Instance.Init();
+                TradeService.Instance.InitTradeService();// new game 
+                FameService.Instance.LoadState();
+                LevelService.Instance.Init();
+                WeaponService.Instance.Init();
+                ArmorService.Instance.LoadState();
+
+                OnTownEnter?.Invoke(LocationName.Nekkisari);
+                QuestMissionService.Instance.InitQuestMission();  // build a load state
+                LandscapeService.Instance.InitLandscape();  // build a load State
+                MapService.Instance.InitMapService(); // To be Put below Quest Mission ..../// build a load state
+                LootService.Instance.InitLootService();
                 Set_GameState(GameState.OnLoadGameStartComplete);
             }
          
@@ -109,15 +134,7 @@ namespace Common
         {
             OnTownExit?.Invoke(locationName);
         }
-
-        public void On_MainGameInitComplete()
-        {            
-            OnMainGameInitComplete?.Invoke();
-        }
-        public void On_MainGameEnd()
-        {            
-            OnMainGameEnd?.Invoke(); 
-        }
+                
         public void On_IntroLoaded()
         {
             UIControlServiceGeneral.Instance.InitUIGeneral();

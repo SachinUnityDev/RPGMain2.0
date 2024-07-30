@@ -37,13 +37,8 @@ namespace Common
        
         public void Init()
         {
-            dayBGPanel = FindObjectOfType<TownViewController>(false).gameObject;
-            famePanel = FindObjectOfType<FameViewController>(true).gameObject;
-            monthPanel = FindObjectOfType<HelpMonth>(true).gameObject;// script attached to month
-            dayPanel = FindObjectOfType<HelpDay>(true).gameObject;// script attached to Day 
-            weekPanel = FindObjectOfType<WeekView>(true).gameObject;
-            townCenterPanel = FindObjectOfType<TownCenterView>(true).gameObject;
-
+         
+            GetViews();
             townCenterPanel.SetActive(true);
             allPanels.Clear();
             allPanels.AddRange(new List<GameObject>(){ famePanel, monthPanel, weekPanel, dayPanel });
@@ -58,12 +53,22 @@ namespace Common
             showWeekBtn.onClick.RemoveAllListeners();
             showMonthBtn.onClick.AddListener(OnShowMonthBtnPressed);
             showWeekBtn.onClick.AddListener(OnShowWeekBtnPressed);
+            GetViews();
         }
         private void OnDisable()
         {
             SceneManager.activeSceneChanged -= OnSceneLoaded;
             CalendarService.Instance.OnStartOfCalDay -= ResetTip;
             CalendarService.Instance.OnChangeTimeState -= FillDayPanelOnTimeStateChg;
+        }
+        void GetViews()
+        {
+            dayBGPanel = FindObjectOfType<TownViewController>(false).gameObject;
+            famePanel = FindObjectOfType<FameViewController>(true).gameObject;
+            monthPanel = FindObjectOfType<HelpMonth>(true).gameObject;// script attached to month
+            dayPanel = FindObjectOfType<HelpDay>(true).gameObject;// script attached to Day 
+            weekPanel = FindObjectOfType<WeekView>(true).gameObject;
+            townCenterPanel = FindObjectOfType<TownCenterView>(true).gameObject;
         }
         void OnSceneLoaded(Scene oldScene, Scene newScene)
         {

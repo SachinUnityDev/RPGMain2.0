@@ -82,8 +82,8 @@ namespace Town
             }
             BuildingIntService.Instance.ChgCharState(BuildingNames.Tavern, CharNames.Cahyo, NPCState.UnLockedNAvail, false);
 
-            CalendarService.Instance.OnStartOfCalDate -= GoVisitTemple2dayGap;
-            CalendarService.Instance.OnStartOfCalDate += GoVisitTemple2dayGap;
+            //CalendarService.Instance.OnStartOfCalDate -= GoVisitTemple2dayGap;
+            //CalendarService.Instance.OnStartOfCalDate += GoVisitTemple2dayGap;
 
             //            Interactions unlocked:
             //House
@@ -110,7 +110,7 @@ namespace Town
             {
                 BuildingIntService.Instance
                     .UnLockDiaInBuildNPC(BuildingNames.House, NPCNames.Khalid, DialogueNames.GoVisitTemple, true);
-                CalendarService.Instance.OnStartOfCalDate -= GoVisitTemple2dayGap;
+               // CalendarService.Instance.OnStartOfCalDate -= GoVisitTemple2dayGap;
             }
         }
         #endregion

@@ -185,12 +185,8 @@ namespace Common
             foreach (ProfileSlot profileSlot in Enum.GetValues(typeof(ProfileSlot)))
             {
                 foreach (SaveSlot saveSlot in Enum.GetValues(typeof(SaveSlot)))
-                {
-                   
-                    string path = SaveService.Instance.GetServicePath(saveSlot,servicePath, profileSlot );
-                    // game Service here too 
-                    //path = path.Substring(0, path.Length - 1);
-
+                {                   
+                    string path = SaveService.Instance.GetServicePath(saveSlot,servicePath, profileSlot );                   
                     if (SaveService.Instance.DirectoryExists(path))
                     { // loop thru all profiles and load them
                         string[] fileNames = Directory.GetFiles(path);

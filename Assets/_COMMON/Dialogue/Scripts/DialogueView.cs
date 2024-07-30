@@ -20,6 +20,7 @@ namespace Common
         const string TEXTBOX_TAG = "textbox";
         const string DEFINE_TAG = "define";
 
+        #region  declarations
         [Header(" Tags")]
         [SerializeField] List<string> tags; 
 
@@ -69,7 +70,7 @@ namespace Common
         [SerializeField] Button skipBtn;
         [SerializeField] bool IsSkipStory;
         [SerializeField] int intCount = 0;
-
+        #endregion
         private void OnEnable()
         {
             dialogueTxt = dialogueParent.GetComponentInChildren<TextMeshProUGUI>();
@@ -169,6 +170,11 @@ namespace Common
             isDialoguePlaying = false;
             DialogueService.Instance.dialogueModel.isPlayedOnce = true;
             DialogueService.Instance.dialogueModel.isUnLocked = false;
+            if (story != null)
+            {
+                story.ResetState();
+                story = null;
+            }
             UnLoad();
         }
         void DisplayChoices()

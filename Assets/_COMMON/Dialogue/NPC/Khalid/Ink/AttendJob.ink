@@ -1,3 +1,5 @@
+->main
+=== main === 
 #speaker:2:	Khalid
 So how was your first day at work?
 		
@@ -161,4 +163,5 @@ Let's make it two days shall we? You know i am not always home. I got many kids 
 		
 #speaker:1:	Abbas
 You win old bastard. You win.
+->END
 

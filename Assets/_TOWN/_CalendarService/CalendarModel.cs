@@ -24,7 +24,19 @@ namespace Common
         public MonthName currentMonth = MonthName.None;
         public MonthName scrollMonth = MonthName.None;
 
-
+        public CalendarModel()
+        {
+            dayInGame = 0;
+            dayInYear = 0;
+            weekCounter = 0;
+            currWeekCycle = new WeekCycles();
+            currtimeState = TimeState.None;
+            startOfGameDayName = DayName.None;
+            currDayName = DayName.None;
+            currentWeek = WeekEventsName.None;
+            currentMonth = MonthName.None;
+            scrollMonth = MonthName.None;
+        }
 
     }
 }

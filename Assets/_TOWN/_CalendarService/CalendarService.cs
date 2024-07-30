@@ -90,8 +90,9 @@ namespace Common
         }
         public void InitOnLoad(CalendarModel calendarModel)
         {
-            if(this.calendarModel == null)
-                this.calendarModel = new CalendarModel();
+            if (this.calendarModel == null)
+                Debug.LogError(" calendar Model is null"); 
+                //this.calendarModel = new CalendarModel();
             this.calendarModel = calendarModel.DeepClone();  
         }
         public void Init() 
@@ -122,7 +123,7 @@ namespace Common
                     calendarModel.currentMonth = MonthName.FeatherOfThePeafowl;
                     calendarModel.scrollMonth = calendarModel.currentMonth;
                     calendarModel.currtimeState = TimeState.Day;
-
+                    calendarModel.currDayName = GetCurrDayName();
                     dayEventsController.InitDayEvent(allDaySO);
                     // common
                     calendarUIController.UpdateMonthPanel(calendarModel.currentMonth, calendarModel.startOfGameDayName, calendarModel.dayInYear);

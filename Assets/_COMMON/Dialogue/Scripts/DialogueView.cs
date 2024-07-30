@@ -67,6 +67,7 @@ namespace Common
         [SerializeField] Button fastFwdBtn;
 
         [Header("Skip Btn")]
+        [SerializeField] DiaSkipBtnPtrEvents diaSkipBtnPtrEvents;
         [SerializeField] Button skipBtn;
         [SerializeField] bool IsSkipStory;
         [SerializeField] int intCount = 0;
@@ -78,15 +79,21 @@ namespace Common
             textRevealer = dialogueTxt.GetComponent<TextRevealer>();
             isDialoguePlaying = false;
             IsSkipStory = false;
+            diaSkipBtnPtrEvents.Init(this); 
             //fastFwdBtn.onClick.AddListener(FastFwdPressed);
-            skipBtn.onClick.AddListener(OnSkipBtnPressed); 
-        }       
-        void OnSkipBtnPressed()
-        {
-            EndDialogue();  
-            
-            Debug.Log("The ENd "); 
+            //skipBtn.onClick.AddListener(OnSkipBtnPressed); 
         }
+        private void OnDisable()
+        {
+            
+
+        }
+        //void OnSkipBtnPressed()
+        //{
+        //    EndDialogue();  
+            
+        //    Debug.Log("The ENd "); 
+        //}
         public void StartStory(DialogueSO _dialogueSO, DialogueModel diaModel)
         {
             dialogueList.SetActive(false);
@@ -165,7 +172,7 @@ namespace Common
                 }
             }
         }      
-        void EndDialogue()
+        public void EndDialogue()
         {
             isDialoguePlaying = false;
             DialogueService.Instance.dialogueModel.isPlayedOnce = true;

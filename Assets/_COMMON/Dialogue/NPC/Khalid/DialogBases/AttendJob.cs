@@ -26,7 +26,8 @@ namespace Common
         public void OnDialogueEnd()
         {
             Sequence seq = DOTween.Sequence();
-            seq.AppendCallback(() => QuestMissionService.Instance.On_ObjEnd(QuestNames.LostMemory, ObjNames.AttendToJob)) 
+            seq
+                .AppendCallback(() => QuestMissionService.Instance.On_ObjEnd(QuestNames.LostMemory, ObjNames.AttendToJob))
                .AppendInterval(4f)
                .AppendCallback(() => QuestMissionService.Instance.On_QuestStart(QuestNames.ThePowerWithin))
                .AppendInterval(4f)

@@ -209,7 +209,7 @@ namespace Quest
             Debug.Log("QuestEnd");
             QuestModel questModel = GetQuestModel(questNames);
             questModel.OnQuestCompleted();
-            On_ObjEnd(questNames, questController.objModel.objName);
+           // On_ObjEnd(questNames, questController.objModel.objName);
             OnQuestEnd?.Invoke(questNames); 
         }
 

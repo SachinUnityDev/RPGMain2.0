@@ -1,0 +1,1 @@
+{"DiaID":0,"dialogueName":3,"dialogueTitle":"So, how much did you say he owed you?","npcName":10,"charName":0,"isUnLocked":true,"isRepeatable":false,"isSkippable":false,"isPlayedOnce":true,"gameScene":0,"charInDialogue":[0],"NPCinDialogue":[],"locationName":0}

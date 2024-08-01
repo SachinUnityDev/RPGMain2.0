@@ -1,0 +1,1 @@
+{"DiaID":0,"dialogueName":28,"dialogueTitle":"Hey, are you the Water Mage?","npcName":0,"charName":7,"isUnLocked":false,"isRepeatable":false,"isSkippable":true,"isPlayedOnce":false,"gameScene":0,"charInDialogue":[7],"NPCinDialogue":[],"locationName":1}

@@ -1,0 +1,1 @@
+{"permaTraitID":1,"charID":2,"permaTraitName":1,"classType":0,"cultureType":1,"raceType":0,"traitBehaviour":1,"traitNameStr":"Attention Seeker"}

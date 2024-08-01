@@ -35,7 +35,7 @@ namespace Intro
             UIControlServiceGeneral.Instance.ToggleInteractionsOnUI(this.gameObject, true);
             IntroServices.Instance.Fade(gameObject, 1.0f);
             UIControlServiceGeneral.Instance.SetMaxSiblingIndex(gameObject);
-            IntroServices.Instance.ChangeSortingLayer();
+            IntroServices.Instance.ChangeSortingLayer("Default");
             //IntroServices.Instance.FadeOutEntenNEmesh(0.8f, 0.008f);
             IntroServices.Instance.AnimateEntenNEmesh();
             MoveUI(finalPosLeft, CampaignBtn.gameObject);
@@ -58,7 +58,27 @@ namespace Intro
             UIControlServiceGeneral.Instance.ToggleInteractionsOnUI(this.gameObject, false);
 
         }
+        public void Unload2Main()
+        {
+            IntroServices.Instance.Fade(gameObject, 0.0f);
+            IntroServices.Instance.AnimateEntenNEmesh();
+            IntroServices.Instance.FadeInEntenNEmesh(1,1);
+            GameObject mainPanel = IntroServices.Instance.GetPanel("MainMenu");           
+            Sequence seq = DOTween.Sequence();
+            seq.AppendCallback(() => MoveUI(initPos, CampaignBtn.gameObject)); 
+            seq.AppendCallback(() => MoveUI(initPos, UpHillBtn.gameObject));
+            seq.AppendCallback(() => IntroServices.Instance.Fade(gameObject, 0.0f));
+            seq.AppendCallback(() => IntroServices.Instance.Fade(mainPanel, 1.0f));
+            seq.AppendCallback(() => gameObject.SetActive(false));
+            seq.AppendCallback(() => mainPanel.SetActive(true));
+            seq.AppendCallback(() => IntroServices.Instance.LoadMainMenu());
+            seq.Play();
+            UIControlServiceGeneral.Instance.ToggleInteractionsOnUI(this.gameObject, false);
+            IntroServices.Instance.AnimateEntenNEmesh();
+            IntroServices.Instance.FadeInEntenNEmesh(1, 1);
+            IntroServices.Instance.ChangeSortingLayer("FrontEnvironment");
 
+        }
         void MoveUI(Vector3 pos, GameObject GO)
         {
             GO.transform.DOLocalMove(pos, 0.8f);

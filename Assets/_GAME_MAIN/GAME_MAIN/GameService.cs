@@ -236,36 +236,41 @@ namespace Common
         {
             // no public clear state as vital game profile information is stored
         }
-        void ClearState_Private()
+        void ClearState_Private(string dirPath)
+        {            
+            DeleteAllFilesInDirectory(dirPath);
+        }
+        void UpdateCurrentGame()
         {
-            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-            DeleteAllFilesInDirectory(path);
+            foreach (GameModel gameModel in allGameModel)
+            {
+                if (gameModel.profileSlot == currGameModel.profileSlot && gameModel.saveSlot == currGameModel.saveSlot)
+                {
+                    gameModel.isCurrGameModel = true;
+                }
+                else
+                {
+                    gameModel.isCurrGameModel = false;
+                }                
+            }
         }
         public void SaveState()
         {
             if (allGameModel.Count <= 0)
             {
                 Debug.LogError("no GameModel created"); return;
-            }
-            // SET SAVE SLOT before save
-            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-            ClearState_Private();
-
+            }           
+            UpdateCurrentGame();
             foreach (GameModel gameModel in allGameModel)
             {
-                if(gameModel.profileSlot == currGameModel.profileSlot && gameModel.saveSlot == currGameModel.saveSlot)                
-                    gameModel.isCurrGameModel = true;
-                else
+                string gameModelJSON = JsonUtility.ToJson(gameModel);
+                string path = SaveService.Instance.GetServicePath(gameModel.saveSlot, servicePath, gameModel.profileSlot);
+                if(Directory.Exists(path))
                 {
-                    gameModel.isCurrGameModel = false;
-                    continue; 
-                }                
-                    
-                
-                string gameModelJSON = JsonUtility.ToJson(gameModel);               
-                string fileName = path + gameModel.GetProfileName() + "gameModel.txt";
-                
-                File.WriteAllText(fileName, gameModelJSON);
+                    ClearState_Private(path);
+                    string fileName =  path + gameModel.GetProfileName() + ".txt";                   
+                    File.WriteAllText(fileName, gameModelJSON);
+                }
             }
         }
         public void Update()

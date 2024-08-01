@@ -1,0 +1,1 @@
+{"moneyInStash":{"silver":50,"bronze":10},"moneyInInv":{"silver":40,"bronze":9},"moneyGainedInQ":{"silver":0,"bronze":0},"allNPCMoneyData":[]}

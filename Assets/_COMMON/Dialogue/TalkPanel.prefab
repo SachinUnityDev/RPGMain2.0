@@ -3510,7 +3510,7 @@ MonoBehaviour:
     isUnLocked: 1
     isRepeatable: 0
     isSkippable: 0
-    isPlayedOnce: 0
+    isPlayedOnce: 1
     gameScene: 0
     charInDialogue: 01000000
     NPCinDialogue: 

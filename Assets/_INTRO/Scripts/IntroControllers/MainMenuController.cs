@@ -9,7 +9,7 @@ namespace Intro
 {
     public class MainMenuController : MonoBehaviour, IPanel
     {
-
+        #region Declarations    
         [Header("MAIN MENU PANEL ")]
         [SerializeField] GameObject mainMenuPanel;
         [SerializeField] Button Continue;
@@ -29,7 +29,7 @@ namespace Intro
 
         [SerializeField] Image abbasSocial;
         [SerializeField] Image demonSocial;
-
+        #endregion
         public void Init()
         {
             foreach (Transform child in NewGame.transform.parent)
@@ -79,8 +79,10 @@ namespace Intro
             UnLoad(); 
         }
         void OnContinueBtnPressed()
-        {            
-           SaveService.Instance.loadView.GetComponent<IPanel>().Load();
+        {
+            // load the last gamemodel marked as currGameModel
+
+
         }
     
 

@@ -17,8 +17,7 @@ namespace Interactables
         [Header("Not TBR")]
         public WeaponViewController weaponViewController;
 
-        public ServicePath servicePath => throw new System.NotImplementedException();
-
+        public ServicePath servicePath => ServicePath.WeaponService; 
         // WeaponFactory weaponFactory; 
         public void Init()
         {
@@ -85,7 +84,7 @@ namespace Interactables
         {
             if (allWeaponModel.Count <= 0)
             {
-                Debug.LogError("NO Q MISSION IN LIST"); return;
+                Debug.Log("NO weapon Model IN LIST"); return;
             }
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
             ClearState();

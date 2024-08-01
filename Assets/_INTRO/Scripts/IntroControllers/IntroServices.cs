@@ -14,7 +14,6 @@ namespace Intro
     public class IntroServices : MonoSingletonGeneric<IntroServices>
     {
 
-        public IntroController introController;
         public IntroViewController introViewController; 
         
         public List<GameObject> allPanels = new List<GameObject>();
@@ -27,7 +26,7 @@ namespace Intro
         
         void Start()
         {
-            introController = GetComponent<IntroController>();
+
             StartIntro();
             SceneManager.activeSceneChanged += OnSceneLoaded;        
         }
@@ -100,15 +99,12 @@ namespace Intro
                 allPanels[currPanel].GetComponent<IPanel>().Load();
             }                        
         }
-
+        public void LoadMainMenu()
+        {
+            LoadPanelDirect(1);          
+        }
         public void LoadPanelDirect(int currPanel)
         {
-            // unload Current
-            UIControlServiceGeneral.Instance.ToggleInteractionsOnUI(allPanels[currPanel].gameObject, false);
-            Fade(allPanels[currPanel].gameObject, 0.0f);
-            allPanels[currPanel].gameObject.SetActive(false);
-
-            // load Direct
             this.currPanel = currPanel;
             allPanels[currPanel].GetComponent<CanvasGroup>().interactable = true;
             allPanels[currPanel].GetComponent<CanvasGroup>().blocksRaycasts = true;
@@ -142,10 +138,10 @@ namespace Intro
          //   PostProcessingVol vol = PostProcessingGO.GetComponent<PostProcessingVol>()
 
         }
-        public void ChangeSortingLayer()
+        public void ChangeSortingLayer(string layer)
         {
-            Enten.GetComponent<MeshRenderer>().sortingLayerName = "Default";
-            Emesh.GetComponent<MeshRenderer>().sortingLayerName = "Default";
+            Enten.GetComponent<MeshRenderer>().sortingLayerName = layer;
+            Emesh.GetComponent<MeshRenderer>().sortingLayerName = layer;
         }
 
         IEnumerator FadeOutSpine (SkeletonAnimation skeleton, float endValue, float animSpeed)

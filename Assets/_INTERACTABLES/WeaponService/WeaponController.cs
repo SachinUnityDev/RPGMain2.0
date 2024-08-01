@@ -13,8 +13,12 @@ namespace Interactables
         private void Start()
         {
             charController= GetComponent<CharController>();
-            weaponModel = new WeaponModel(WeaponService.Instance.allWeaponSO
-                            .GetWeaponSO(charController.charModel.charName)); 
+            
+        }
+
+        public void InitWeaponController(WeaponModel weaponModel)
+        {
+            this.weaponModel = weaponModel;
         }
 
         public bool IsGemEnchantable(GemNames gemName)

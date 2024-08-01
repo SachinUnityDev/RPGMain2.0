@@ -129,7 +129,10 @@ namespace Common
             {
                 charTypeBuffController = gameObject.AddComponent<CharTypeBuffController>();
                 itemController = gameObject.AddComponent<ItemController>();
+
                 weaponController = gameObject.AddComponent<WeaponController>();
+                
+
                 landscapeController = gameObject.AddComponent<LandscapeController>();
                 permaTraitController = gameObject.GetComponent<PermaTraitController>();
 
@@ -162,7 +165,12 @@ namespace Common
             {
                 charTypeBuffController = gameObject.AddComponent<CharTypeBuffController>();
                 itemController = gameObject.AddComponent<ItemController>();
+                
                 weaponController = gameObject.AddComponent<WeaponController>();
+                WeaponModel weaponModel = new WeaponModel(WeaponService.Instance.allWeaponSO
+                                            .GetWeaponSO(charModel.charName));
+                weaponController.InitWeaponController(weaponModel);
+
                 landscapeController = gameObject.AddComponent<LandscapeController>();
                 permaTraitController = gameObject.GetComponent<PermaTraitController>();     
 

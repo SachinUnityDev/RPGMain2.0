@@ -2,6 +2,7 @@ using Common;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Town;
 using UnityEngine;
@@ -9,7 +10,8 @@ using UnityEngine.SceneManagement;
 
 namespace Quest
 {
-    public class QuestMissionService : MonoSingletonGeneric<QuestMissionService>
+    public class QuestMissionService : MonoSingletonGeneric<QuestMissionService>, ISaveable
+
     {
         public Action<QuestNames> OnQuestStart; 
         public Action<QuestNames> OnQuestEnd;
@@ -39,9 +41,9 @@ namespace Quest
 
         public List<QuestModel> allQuestModels = new List<QuestModel>();
         public List<QuestBase> allQuestBase = new List<QuestBase>();
-        [SerializeField] int questBaseCount = 0; 
-        
+        [SerializeField] int questBaseCount = 0;
 
+        public ServicePath servicePath => ServicePath.QuestMissionService; 
         void Start()
         {
           SceneManager.sceneLoaded += OnSceneLoaded;    
@@ -62,9 +64,24 @@ namespace Quest
             questFactory = GetComponent<QuestFactory>();
             questFactory.InitQuest();
             On_QuestModeChg(QuestMode.Exploration);
-            InitAllQuestModel();
-            InitAllQuestbase();
-
+            
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            if (SaveService.Instance.DirectoryExists(path))
+            {
+                if (IsDirectoryEmpty(path))
+                {
+                    InitAllQuestModel();
+                    InitAllQuestbase();
+                }
+                else
+                {
+                    LoadState();
+                }
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing");
+            }
         }
         public void On_QuestModeChg(QuestMode questMode)
         {
@@ -231,10 +248,82 @@ namespace Quest
             questController.Move2NextObj(objModel); // seq thru all obj and mark end of QUEST in case it's the last Obj
             OnObjEnd?.Invoke(questName, objName);
         }
+        #region SAVE and LOAD
+        public void SaveState()
+        {
+            if (allQuestModels.Count <= 0)
+            {
+                Debug.LogError("NO Q MISSION IN LIST"); return;
+            }
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            ClearState();
+            
+            foreach (QuestModel questModel in allQuestModels)
+            {
+                string questModelJSON = JsonUtility.ToJson(questModel);                
+                string fileName = path + questModel.questName.ToString() + ".txt";
+                File.WriteAllText(fileName, questModelJSON);
+            }
+        }
 
-    
+        public void LoadState()
+        {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
 
-        #endregion 
+            if (SaveService.Instance.DirectoryExists(path))
+            {
+                string[] fileNames = Directory.GetFiles(path);
+                allQuestModels = new List<QuestModel>();
+                foreach (string fileName in fileNames)
+                {
+                    // skip meta files
+                    if (fileName.Contains(".meta")) continue;
+                    string contents = File.ReadAllText(fileName);                   
+                    QuestModel questModel = JsonUtility.FromJson<QuestModel>(contents);
+                    allQuestModels.Add(questModel);
+                }
+                if(allQuestBase.Count == 0)
+                {
+                    InitAllQuestbase();
+                }
+                else
+                { // align base and Models
+                    foreach (QuestModel questModel in allQuestModels)
+                    {
+                        QuestBase qBase = GetQuestBase(questModel.questName);
+                        qBase.questState = questModel.questState;
+                    }
+                }
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing");
+            }
+        }
 
+        public void ClearState()
+        {           
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            DeleteAllFilesInDirectory(path);            
+        }
+
+        #endregion
+
+        #endregion
+        public void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                SaveState();
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                LoadState();
+            }
+            if (Input.GetKeyDown(KeyCode.F6))
+            {
+                ClearState();
+            }
+        }
     }
 }

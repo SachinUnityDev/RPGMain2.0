@@ -133,9 +133,9 @@ namespace Intro
                 currPanel = 1;
                 allPanels[currPanel].GetComponent<IPanel>().Load();
             }
-                
-
         }
+
+
 
         public void ApplyVignette(float value)
         {

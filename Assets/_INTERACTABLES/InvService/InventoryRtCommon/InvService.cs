@@ -8,6 +8,7 @@ using Town;
 using UnityEngine.SceneManagement;
 using System.IO;
 using Quest;
+using DG.Tweening;
 
 namespace Interactables
 {
@@ -68,8 +69,8 @@ namespace Interactables
             SceneManager.activeSceneChanged += OnSceneLoaded;
         }
         private void OnEnable()
-        {            
-           
+        {
+            
         }
 
         
@@ -81,8 +82,15 @@ namespace Interactables
         {  
             if(newScene.name == "TOWN")
             {
-                Init();
-                InitInvXLView();
+                Sequence seq = DOTween.Sequence();  
+                seq.AppendInterval(1.0f)
+                    .AppendCallback(() => Init())
+                    .AppendInterval(0.1f)
+                    .AppendCallback(() => InitInvXLView());
+                seq.Play();
+                  
+                //Init();
+                //InitInvXLView();
             }
              
         }

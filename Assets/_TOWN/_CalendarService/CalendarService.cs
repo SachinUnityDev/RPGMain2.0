@@ -119,8 +119,8 @@ namespace Common
                     calendarModel.startOfGameDayName = DayName.DayOfLight;// saturday
                     calendarModel.currentWeek = calendarModel.currWeekCycle.allWeekNames[0];
                     calendarModel.dayInGame = 0;
-                    calendarModel.dayInYear = 24;
-                    calendarModel.currentMonth = MonthName.FeatherOfThePeafowl;
+                    calendarModel.dayInYear = GameService.Instance.START_DAY_OF_GAME;
+                    calendarModel.currentMonth = GameService.Instance.START_MONTH_OF_THE_GAME;
                     calendarModel.scrollMonth = calendarModel.currentMonth;
                     calendarModel.currtimeState = TimeState.Day;
                     calendarModel.currDayName = GetCurrDayName();

@@ -24,7 +24,6 @@ namespace Interactables
 
     public class ItemFactory : MonoBehaviour
     {
-    
         Dictionary<Iitems, Type> allItems = new Dictionary<Iitems, Type>();
        
         [Header("GEMS")]

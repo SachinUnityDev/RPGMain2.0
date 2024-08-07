@@ -11,15 +11,15 @@ namespace Common
 {
     public class SceneMgmtService : MonoSingletonGeneric<SceneMgmtService>
     {
-    //    private CancellationTokenSource cts;
+        //    private CancellationTokenSource cts;
 
         //public Scene currScene;
         //public Scene newScene;
-        public SceneMgmtController   sceneMgmtController;
+        public SceneMgmtController sceneMgmtController;
 
         private void OnEnable()
         {
-            sceneMgmtController = GetComponent<SceneMgmtController>();      
+            sceneMgmtController = GetComponent<SceneMgmtController>();
         }
 
 
@@ -37,35 +37,35 @@ namespace Common
 
 
 
-            //if (cts == null)
-            //{
-            //    currentScene = SceneManager.GetActiveScene();
-            //    newScene= SceneManager.GetSceneByName(sceneName);
-            //    cts = new CancellationTokenSource();
-            //    try
-            //    {
-            //        await PerformSceneLoading(cts.Token, sceneName);
-            //    }
-            //    catch (OperationCanceledException ex)
-            //    {
-            //        if (ex.CancellationToken == cts.Token)
-            //        {
-            //            //Perform operation after cancelling
-            //            Debug.Log("Task cancelled");
-            //        }
-            //    }
-            //    finally
-            //    {
-            //        cts.Cancel();
-            //        cts = null;
-            //    }
-            //}
-            //else
-            //{
-            //    //Cancel Previous token
-            //    cts.Cancel();
-            //    cts = null;
-            //}
+        //if (cts == null)
+        //{
+        //    currentScene = SceneManager.GetActiveScene();
+        //    newScene= SceneManager.GetSceneByName(sceneName);
+        //    cts = new CancellationTokenSource();
+        //    try
+        //    {
+        //        await PerformSceneLoading(cts.Token, sceneName);
+        //    }
+        //    catch (OperationCanceledException ex)
+        //    {
+        //        if (ex.CancellationToken == cts.Token)
+        //        {
+        //            //Perform operation after cancelling
+        //            Debug.Log("Task cancelled");
+        //        }
+        //    }
+        //    finally
+        //    {
+        //        cts.Cancel();
+        //        cts = null;
+        //    }
+        //}
+        //else
+        //{
+        //    //Cancel Previous token
+        //    cts.Cancel();
+        //    cts = null;
+        //}
         //}
         //Actual Scene loading
         //private async Task PerformSceneLoading(CancellationToken token, string sceneName)
@@ -89,8 +89,8 @@ namespace Common
         //        Debug.Log(" scene load completed" + sceneName); 
 
         //    //}); 
-            
-            
+
+
         //    asyncOperation.allowSceneActivation = true;
         //    cts.Cancel();
         //    token.ThrowIfCancellationRequested();

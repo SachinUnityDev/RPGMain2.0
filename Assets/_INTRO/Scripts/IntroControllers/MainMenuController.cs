@@ -81,8 +81,17 @@ namespace Intro
         void OnContinueBtnPressed()
         {
             // load the last gamemodel marked as currGameModel
-
-
+            int index = GameService.Instance.allGameModel.FindIndex(t=>t.isCurrGameModel == true);
+            if(index != -1)
+            {
+                GameService.Instance.LoadGame(GameService.Instance.allGameModel[index]);
+                UnLoad(); 
+                IntroServices.Instance.LoadLoadingPanel();
+            }
+            else
+            {
+                Debug.LogError("No game model found");
+            }
         }
     
 

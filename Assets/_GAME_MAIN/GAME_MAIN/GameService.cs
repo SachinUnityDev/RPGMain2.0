@@ -13,6 +13,10 @@ namespace Common
 {
     public class GameService : MonoSingletonGeneric<GameService>, ISaveable
     {
+        [Header(" START DAY OF NEW GAME")]
+        public int START_DAY_OF_GAME = 24;
+        public  MonthName START_MONTH_OF_THE_GAME = MonthName.FeatherOfThePeafowl;
+
         [Header("CONTROLLERS")]
         public GameController gameController; // centralised service
         public GameModeController gameModeController; // centralised service
@@ -120,7 +124,7 @@ namespace Common
             gameController = transform.GetComponent<GameController>();
            // string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
             allGameModel = new List<GameModel>();
-         
+            
             LoadState();
             PostLoadActions();
         }
@@ -139,12 +143,16 @@ namespace Common
             // Init Services related to profile
             DialogueService.Instance.InitDialogueService();             
             GameEventService.Instance.Set_GameState(GameState.OnNewGameStart);
+
+
         }        
 
         // call this after profile slot and saveslot is selected    
         public void LoadGame(GameModel gameModel)
         {
-            currGameModel = gameModel;            
+            currGameModel = gameModel;     
+            saveSlot = gameModel.saveSlot;
+            profileSlot = gameModel.profileSlot;
             gameController.InitDiffGameController(currGameModel.gameDifficulty);
             GameEventService.Instance.OnGameSceneChg?.Invoke(currGameModel.gameScene);
             GameEventService.Instance.OnGameStateChg?.Invoke(GameState.OnLoadGameStart);
@@ -162,6 +170,13 @@ namespace Common
                 saveSlot = SaveSlot.AutoSave;
             }   
         }
+
+        public void SetProfileNSaveSlot(ProfileSlot profileSlot, SaveSlot saveSlot)
+        {
+            this.saveSlot = saveSlot;
+            this.profileSlot = profileSlot;
+        }
+
         public void GameSceneLoad(GameScene gameScene)
         {
             currGameModel.gameScene= gameScene;            
@@ -199,7 +214,7 @@ namespace Common
                             GameModel gameModel = JsonUtility.FromJson<GameModel>(contents);
                             allGameModel.Add(gameModel); // load all game models   
                         }
-                        // profileslot and save slot are set by loadView or Continue btn in main Menu
+                        // profileslot and save slot are set by LoadGame()
 
                     }
                     else
@@ -209,7 +224,7 @@ namespace Common
                 }
             }                
             GameModel currGameModel = GetGameModel(profileSlot, saveSlot);// this is the game Model
-            LoadGame(currGameModel);
+           //  LoadGame(currGameModel);
         }     
         
         public void DelAGameProfile(GameModel gameModel)
@@ -235,6 +250,7 @@ namespace Common
         public void ClearState()
         {
             // no public clear state as vital game profile information is stored
+            ClearState_Private(SaveService.Instance.GetCurrSlotServicePath(servicePath));   
         }
         void ClearState_Private(string dirPath)
         {            

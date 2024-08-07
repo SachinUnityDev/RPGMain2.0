@@ -149,7 +149,12 @@ namespace Common
 
         }
         void ToggleBuffsOnTimeStateChg(TimeState timeState) // ON start of the day
-        {  
+        {
+            if (statBuffModel == null)
+            {
+                Init();
+            }
+            if (statBuffModel.allDayNightbuffs.Count>0)
             foreach (StatBuffData buffData in statBuffModel.allDayNightbuffs)
             {
                 if(buffData.timeState == timeState)

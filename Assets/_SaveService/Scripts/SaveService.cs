@@ -90,29 +90,43 @@ namespace Common
             {
                 foreach (SaveSlot saveSlot in Enum.GetValues(typeof(SaveSlot)))
                 {
-                    ClearFiles4ProfileNSlot(profileSlot, saveSlot);
+                    GameService.Instance.SetProfileNSaveSlot(profileSlot, saveSlot);
+                    List<ISaveable> saveables = FindAllSaveables();
+                    foreach (ISaveable saveable in saveables)
+                    {
+                        saveable.ClearState();
+                    }
                 }
             }
+
+
+
         }
 
         public void ClearFiles4ProfileNSlot(ProfileSlot profileSlot, SaveSlot saveSlot)
         {
-            string path = Application.dataPath + GetCurrProfilePath(profileSlot);  
+            string path = Application.dataPath + GetCurrProfilePath(profileSlot);
             
-            try
-            {
-                // Get all .txt files in the directory and its subdirectories
-                string[] textFiles = Directory.GetFiles(path, "*.txt", SearchOption.AllDirectories);
 
-                foreach (string file in textFiles)
-                {
-                    File.Delete(file);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred: {ex.Message}");
-            }
+
+            //{
+            //    // Get all .txt files in the directory and its subdirectories
+            //    string[] textFiles = Directory.GetFiles(path, "*.txt", SearchOption.AllDirectories);
+            //    string[] metaFiles = Directory.GetFiles(path, "*.meta", SearchOption.AllDirectories);
+
+            //    foreach (string file in metaFiles)
+            //    {
+            //        File.Delete(file); 
+            //    }
+            //    foreach (string file in textFiles)
+            //    {
+            //        File.Delete(file);
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine($"An error occurred: {ex.Message}");
+            //}
 
         }
 
@@ -530,22 +544,35 @@ namespace Common
         {
             List<ISaveable> saveables = new List<ISaveable>();
 
-            // Get all the game objects in the scene
-            GameObject[] sceneObjects = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
-
-            // Iterate through each game object
-            foreach (GameObject obj in sceneObjects)
+            string[] allScenes = GetAllScenes();
+            foreach (string scene in allScenes)
             {
-                // Get all the ISaveable components attached to the game object
-                ISaveable[] components = obj.GetComponentsInChildren<ISaveable>();
+                GameObject[] sceneObjects = SceneManager.GetActiveScene().GetRootGameObjects();
+                
+                // Iterate through each game object
+                foreach (GameObject obj in sceneObjects)
+                {
+                    // Get all the ISaveable components attached to the game object
+                    ISaveable[] components = obj.GetComponentsInChildren<ISaveable>();
 
-                // Add the ISaveable components to the list
-                saveables.AddRange(components);
+                    // Add the ISaveable components to the list
+                    saveables.AddRange(components);
+                }
             }
-
             return saveables;
         }
-    
+        public string[] GetAllScenes()
+        {
+            int sceneCount = SceneManager.sceneCountInBuildSettings;
+            string[] scenes = new string[sceneCount];
+
+            for (int i = 0; i < sceneCount; i++)
+            {
+                scenes[i] = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
+            }
+
+            return scenes;
+        }
         public void ToggleSavePanel(bool load)
         {           
             if(load)
@@ -621,10 +648,10 @@ namespace Common
         }
         private void Update()
         {
-            //if (Input.GetKeyDown(KeyCode.F9))
-            //{
-            //    ClearAllProfiles();
-            //}
+            if (Input.GetKeyDown(KeyCode.F10))
+            {
+                ClearAllProfiles();
+            }
         }
 
 

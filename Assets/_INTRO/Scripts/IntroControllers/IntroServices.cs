@@ -103,7 +103,11 @@ namespace Intro
         {
             LoadPanelDirect(1);          
         }
-        public void LoadPanelDirect(int currPanel)
+        public void LoadLoadingPanel()
+        {
+            LoadPanelDirect(8);
+        }
+        void LoadPanelDirect(int currPanel)
         {
             this.currPanel = currPanel;
             allPanels[currPanel].GetComponent<CanvasGroup>().interactable = true;

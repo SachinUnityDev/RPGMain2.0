@@ -39932,7 +39932,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1711342351}
   - component: {fileID: 1711342350}
-  - component: {fileID: 1711342352}
   m_Layer: 0
   m_Name: IntroService
   m_TagString: Untagged
@@ -39952,7 +39951,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d657ec434d3fcb48a1a220559cbd48b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  introController: {fileID: 0}
   introViewController: {fileID: 1420304127}
   allPanels:
   - {fileID: 100143159}
@@ -39983,18 +39981,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1711342352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1711342349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b3c000f390cfc245a8a04d156d71e3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1715706792
 GameObject:
   m_ObjectHideFlags: 0

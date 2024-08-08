@@ -74,14 +74,68 @@ namespace Common
             }
             
         }
+        public string[] GetAllDirectories(string path)
+        {
+            try
+            {
+                // Get all directories in the specified path
+                return Directory.GetDirectories(path);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"An error occurred while getting directories: {e.Message}");
+                return new string[0];
+            }
+        }
 
-        public void Init()
-        {       // no init on load bcoz it always retrieve data from the allGameModel Files
-
-
+        // Example usage within the class
+        public void PrintAllDirectories(string path)
+        {
+            string[] directories = GetAllDirectories(path);
+            foreach (string directory in directories)
+            { 
+                PrintAllDirectories(directory);
+               // Debug.Log("DIR"+directory);
+                string [] files = GetAllTxtFiles(directory);    
+                foreach (string file in files)
+                {
+                    Debug.Log("FILE" + file);
+                }
+                string[] filesMeta = GetAllMetaFiles(directory);
+                foreach (string file in filesMeta)
+                {
+                    Debug.Log("FILE" + file);
+                }
+            }
 
         }
-        // clear all and save all 
+        string[] GetAllMetaFiles(string path)
+        {
+            try
+            {
+                return Directory.GetFiles(path, "*.meta");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"An error occurred while getting .txt files: {e.Message}");
+                return new string[0];
+            }
+        }
+        string[] GetAllTxtFiles(string path)
+        {
+            try
+            {
+                return Directory.GetFiles(path, "*.txt");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"An error occurred while getting .txt files: {e.Message}");
+                return new string[0];
+            }
+        }
+        public void Init()
+        {     
+        }
 
      
         public void ClearAllProfiles()
@@ -98,38 +152,7 @@ namespace Common
                     }
                 }
             }
-
-
-
         }
-
-        public void ClearFiles4ProfileNSlot(ProfileSlot profileSlot, SaveSlot saveSlot)
-        {
-            string path = Application.dataPath + GetCurrProfilePath(profileSlot);
-            
-
-
-            //{
-            //    // Get all .txt files in the directory and its subdirectories
-            //    string[] textFiles = Directory.GetFiles(path, "*.txt", SearchOption.AllDirectories);
-            //    string[] metaFiles = Directory.GetFiles(path, "*.meta", SearchOption.AllDirectories);
-
-            //    foreach (string file in metaFiles)
-            //    {
-            //        File.Delete(file); 
-            //    }
-            //    foreach (string file in textFiles)
-            //    {
-            //        File.Delete(file);
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine($"An error occurred: {ex.Message}");
-            //}
-
-        }
-
 
         void CreateDefaultFolders()
         {
@@ -650,7 +673,7 @@ namespace Common
         {
             if (Input.GetKeyDown(KeyCode.F10))
             {
-                ClearAllProfiles();
+                PrintAllDirectories(Application.dataPath + basePath);
             }
         }
 
@@ -794,3 +817,31 @@ namespace Common
 //    //{
 //    //    Debug.Log("Error during saving"); 
 //    //}
+
+
+//public void ClearFiles4ProfileNSlot(ProfileSlot profileSlot, SaveSlot saveSlot)
+//{
+//    string path = Application.dataPath + GetCurrProfilePath(profileSlot);
+
+
+
+//    //{
+//    //    // Get all .txt files in the directory and its subdirectories
+//    //    string[] textFiles = Directory.GetFiles(path, "*.txt", SearchOption.AllDirectories);
+//    //    string[] metaFiles = Directory.GetFiles(path, "*.meta", SearchOption.AllDirectories);
+
+//    //    foreach (string file in metaFiles)
+//    //    {
+//    //        File.Delete(file); 
+//    //    }
+//    //    foreach (string file in textFiles)
+//    //    {
+//    //        File.Delete(file);
+//    //    }
+//    //}
+//    //catch (Exception ex)
+//    //{
+//    //    Console.WriteLine($"An error occurred: {ex.Message}");
+//    //}
+
+//}

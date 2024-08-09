@@ -68,6 +68,7 @@ namespace Town
             
             // depending on slot and state get the save file
             // this NEw game Init 
+            GetControllerRef();
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
             if (SaveService.Instance.DirectoryExists(path))
             {

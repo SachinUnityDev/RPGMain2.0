@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Common;
 using System.Linq;
-using Unity; 
+using Unity;
+using System;
 
 namespace Interactables
 {
@@ -91,7 +92,7 @@ namespace Interactables
         }
     }
 
-    
+    [Serializable]
     public class InvMainModel: ISerializationCallbackReceiver
     { 
         #region DECLARATIONS
@@ -536,6 +537,7 @@ namespace Interactables
         // Before saving convert all Iitems list to ItemData list 
         public void OnBeforeSerialize()
         {
+            commonInvItemData.Clear();
             foreach (Iitems item in commonInvItems)
             {
                 if(item.itemType != ItemType.GenGewgaws)
@@ -548,6 +550,7 @@ namespace Interactables
                     commonInvItemData.Add(new ItemData(item.itemType, item.itemName, gbase.genGewgawQ));
                 }
             }
+            stashInvItemsData.Clear();
             foreach (Iitems item in stashInvItems)
             {
                 if(item.itemType != ItemType.GenGewgaws)
@@ -560,6 +563,7 @@ namespace Interactables
                     stashInvItemsData.Add(new ItemData(item.itemType, item.itemName, gbase.genGewgawQ));
                 }               
             }
+            excessInvItemsData.Clear();
             foreach (Iitems item in excessInvItems)
             {
                 if(item.itemType != ItemType.GenGewgaws)
@@ -577,16 +581,19 @@ namespace Interactables
         // After loading convert all ItemData list to Iitems list
         public void OnAfterDeserialize()
         {
+            commonInvItems.Clear();
             foreach (ItemData itemData in commonInvItemData)
             {
                 Iitems item = ItemService.Instance.GetNewItem(itemData);
                 commonInvItems.Add(item);
             }
+            stashInvItems.Clear();
             foreach (ItemData itemData in stashInvItemsData)
             {
                 Iitems item = ItemService.Instance.GetNewItem(itemData);
                 stashInvItems.Add(item);
             }
+            excessInvItems.Clear(); 
             foreach (ItemData itemData in excessInvItemsData)
             {
                 Iitems item = ItemService.Instance.GetNewItem(itemData);

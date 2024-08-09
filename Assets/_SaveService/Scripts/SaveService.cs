@@ -106,8 +106,7 @@ namespace Common
                 string[] filesMeta = GetAllMetaFiles(directory);
                 foreach (string file in filesMeta)
                 {
-                    if (file.Contains("meta"))
-                        File.Delete(file);
+             
                     Debug.Log("FILE" + file);
                 }
             }

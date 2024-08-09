@@ -95,36 +95,49 @@ namespace Common
         void UpdateGameScene(Scene oldScene, Scene newScene)
         {
             int index = newScene.buildIndex;
-            
-            if (index == (int)SceneName.TOWN)
-            {
-                GameSceneLoad(GameScene.InTown);
-                currGameModel.gameScene = GameScene.InTown;
-            }
-            else if (index == (int)SceneName.QUEST)
-            {
-                GameSceneLoad(GameScene.InQuestRoom);
-                currGameModel.gameScene = GameScene.InQuestRoom;
-            }
-            else if (index == (int)SceneName.COMBAT)
-            {
-                GameSceneLoad(GameScene.InCombat);
-                currGameModel.gameScene = GameScene.InCombat;
-            }
-            else if (index == (int)SceneName.INTRO)
-            {
-                GameSceneLoad(GameScene.InIntro);
-                currGameModel.gameScene = GameScene.InIntro;
-            }
-        }
-       
+            SceneName sceneName = (SceneName)index;
+            // covert scene name to game scene
+            GameScene gameScene = GameScene.None;
 
+            switch (sceneName)
+            {
+                case SceneName.INTRO:
+                    gameScene = GameScene.InIntro;
+                    break;
+                case SceneName.TOWN:
+                    gameScene = GameScene.InTown; 
+                    break;
+                case SceneName.QUEST:
+                    gameScene = GameScene.InQuestRoom;
+                    break;
+                case SceneName.COMBAT:
+                    gameScene = GameScene.InCombat;
+                    break;
+                case SceneName.CORE:
+                    gameScene = GameScene.InCore;
+                    break;
+                default:
+                    gameScene = GameScene.None;
+                    break;
+            }
+            //if (sceneName== (int)SceneName.TOWN)
+            //    gameScene = GameScene.InTown;
+            //if ((GameScene)index == GameScene.InCombat)
+            //    gameScene = GameScene.InCombat;
+            //if ((GameScene)index == GameScene.InQuestRoom)
+            //    gameScene = GameScene.InQuestRoom;
+            //if ((GameScene)index == GameScene.InIntro)
+            //    gameScene = GameScene.InIntro;
+            //if ((GameScene)index == GameScene.InCore)
+            //    gameScene = GameScene.InCore;
+
+            currGameModel.gameScene = gameScene;
+            GameSceneLoad(gameScene);
+        }
         public void Init()
         {
             gameController = transform.GetComponent<GameController>();
-           // string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-            allGameModel = new List<GameModel>();
-            
+            allGameModel = new List<GameModel>();            
             LoadState();
             PostLoadActions();
         }
@@ -177,21 +190,18 @@ namespace Common
 
         public void GameSceneLoad(GameScene gameScene)
         {
-            currGameModel.gameScene= gameScene;            
-            GameEventService.Instance.OnGameSceneChg?.Invoke(gameScene);
+            if (gameScene == GameScene.InCore)
+                GameEventService.Instance.On_CoreSceneLoaded();
             if (gameScene == GameScene.InIntro)
-                OnIntroSceneLoad(); 
+                GameEventService.Instance.On_IntroLoaded(); 
             if (gameScene == GameScene.InCombat)
                 GameEventService.Instance.On_CombatEnter();
             if (gameScene == GameScene.InTown)
-                GameEventService.Instance.On_TownLoaded(gameScene);
+                GameEventService.Instance.OnTownLoaded();
+            currGameModel.gameScene = gameScene;
+            GameEventService.Instance.OnGameSceneChg?.Invoke(gameScene);
         }
-        void OnIntroSceneLoad()
-        {           
-             Init(); // game Service init
-            //DialogueService.Instance.InitDialogueService();
-            GameEventService.Instance.On_IntroLoaded();// event
-        }
+
         #region SAVE AND LOAD 
 
         public void LoadState()

@@ -10,13 +10,14 @@ namespace Common
     public enum GameScene // Game Scene that Includes all scenes and Panels like map,job and camp 
     {
         None,
+        InIntro,
         InTown,    
         InQuestRoom,
         InCombat,
+        InCore,
         InCamp,
-        InJobs,
-        InIntro,
-        InMapInteraction,         
+        InJobs,       
+        InMapInteraction,            
     };
 
     public enum SceneName  // exact scene Name to replace the Str

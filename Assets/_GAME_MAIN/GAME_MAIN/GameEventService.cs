@@ -28,15 +28,6 @@ namespace Common
         [Header(" Game State chg")]
         public Action<GameState> OnGameStateChg;
 
-        void OnEnable()
-        {          
-          //  OnGameSceneChg += On_TownLoaded; 
-        }
-        private void OnDisable()
-        {          
-           // OnGameSceneChg -= On_TownLoaded;            
-        }
-        
         public void OnTownLoaded()
         {   
             if (GameService.Instance.gameState == GameState.OnNewGameStart)
@@ -123,20 +114,19 @@ namespace Common
         {
             OnCombatExit?.Invoke();
         }
-        public void On_TownLoaded(GameScene gameScene)
-        {
-            if (gameScene != GameScene.InTown)
-                return;
-            Debug.Log("On_TownLoaded" + gameScene);            
-            OnTownLoaded(); 
-        }
+   
         public void On_TownExit(LocationName locationName)
         {
             OnTownExit?.Invoke(locationName);
         }
                 
+        public void On_CoreSceneLoaded()
+        {
+            
+        }
         public void On_IntroLoaded()
         {
+            GameService.Instance.Init();
             UIControlServiceGeneral.Instance.InitUIGeneral();
             OnIntroLoaded?.Invoke();
         }

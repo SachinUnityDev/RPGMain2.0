@@ -30,11 +30,11 @@ namespace Common
 
         void OnEnable()
         {          
-            OnGameSceneChg += On_TownLoaded; 
+          //  OnGameSceneChg += On_TownLoaded; 
         }
         private void OnDisable()
         {          
-            OnGameSceneChg -= On_TownLoaded;            
+           // OnGameSceneChg -= On_TownLoaded;            
         }
         
         public void OnTownLoaded()

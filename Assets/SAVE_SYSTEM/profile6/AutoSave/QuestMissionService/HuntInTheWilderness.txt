@@ -1,1 +1,0 @@
-{"questName":6,"questNameStr":"Hunt in the wilderness","questState":1,"allObjModel":[{"objName":14,"objNameStr":"Travel into the wilderness","objState":1}],"questType":3,"questMode":2,"isUnBoxed":false,"calDate":{"monthName":1,"day":26},"days2Respawn":4,"dayAfterQComplete":0}

@@ -27,7 +27,7 @@ namespace Town
             return helpName; 
         }
 
-        public void InitWeeek(CalendarUIController calendarUIController, WeekModel weekModel)
+        public void InitWeek(CalendarUIController calendarUIController, WeekModel weekModel)
         {
             this.calendarUIController = calendarUIController;
             this.weekModel = weekModel.DeepClone();

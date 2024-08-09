@@ -1,1 +1,0 @@
-{"questName":4,"questNameStr":"Rat Infestation","questState":1,"allObjModel":[{"objName":9,"objNameStr":"Cleanse the sewers","objState":1},{"objName":10,"objNameStr":"Return back to Tavernkeeper","objState":1}],"questType":2,"questMode":2,"isUnBoxed":false,"calDate":{"monthName":0,"day":0},"days2Respawn":0,"dayAfterQComplete":0}

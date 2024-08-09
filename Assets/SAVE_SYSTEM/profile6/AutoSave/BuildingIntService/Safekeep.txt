@@ -1,1 +1,0 @@
-{"buildingName":4,"buildState":0,"charInteractData":[],"npcInteractData":[],"buildIntTypes":[]}

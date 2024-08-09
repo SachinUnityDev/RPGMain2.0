@@ -1,1 +1,0 @@
-{"charID":1,"allBuffs":[],"allDayNightbuffs":[],"allPosBuffs":[],"allBuffOnSOC":[],"buffStrs":[],"deDuffStrs":[],"buffIndex":0,"SOCBuffIndex":0}

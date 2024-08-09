@@ -49,9 +49,7 @@ namespace Town
             
 
         }
-
-        
-        public void InitNGBuildIntService()
+        void GetControllerRef()
         {
             houseController = GetComponent<HouseController>();
             templeController = GetComponent<TempleController>();
@@ -61,9 +59,13 @@ namespace Town
             safekeepController = GetComponent<SafekeepController>();
             stableController = GetComponent<StableController>();
             thieveController = GetComponent<ThievesGuildController>();
-            cityHallController= GetComponent<CityHallController>();
+            cityHallController = GetComponent<CityHallController>();
 
+        }
 
+        public void InitNGBuildIntService()
+        {
+            
             // depending on slot and state get the save file
             // this NEw game Init 
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
@@ -316,7 +318,7 @@ namespace Town
         {
             // get all Files and use swtich to classify all build Model into house model, tavern model etc
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-
+            GetControllerRef();  // controller references
             if (SaveService.Instance.DirectoryExists(path))
             {
                 string[] fileNames = Directory.GetFiles(path);

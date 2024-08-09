@@ -1,1 +1,1 @@
-{"orderInSeq":4,"dayName":4,"dayName2":4,"dayNameStr":"Day of Air","dayDescription":"","tipOfTheDayList":[],"daySpecs":"+9 Air Res"}
+{"orderInSeq":4,"dayName":4,"dayName2":4,"dayNameStr":"Day of Air","dayDescription":"","tipOfTheDayList":[],"daySpecs":"+11 Air Res"}

@@ -1,1 +1,1 @@
-{"orderInSeq":3,"dayName":3,"dayName2":3,"dayNameStr":"Day of Water","dayDescription":"","tipOfTheDayList":[],"daySpecs":"+10 Water Res"}
+{"orderInSeq":3,"dayName":3,"dayName2":3,"dayNameStr":"Day of Water","dayDescription":"","tipOfTheDayList":[],"daySpecs":""}

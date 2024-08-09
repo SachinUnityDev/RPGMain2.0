@@ -1,1 +1,0 @@
-{"charID":1,"allBuffData":[{"causeData":{"causeType":36,"causeName":3,"causeByCharID":1,"effectedCharNameID":1},"buffID":2,"dayName":3,"attribName":13,"valChg":12,"minValChg":0,"maxValChg":0,"timeFrame":3,"timeVal":1,"currTime":1,"isBuff":true}]}

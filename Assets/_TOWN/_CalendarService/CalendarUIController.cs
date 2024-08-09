@@ -259,7 +259,7 @@ namespace Common
             WeekModel weekModel = CalendarService.Instance.weekEventsController.GetWeekModels(currentWeek);
 
             // week panel get week btn
-            weekPanel.GetComponent<WeekView>().InitWeeek(this, weekModel);
+            weekPanel.GetComponent<WeekView>().InitWeek(this, weekModel);
         }
 
         public void UpdateMonthPanel(MonthName _currentMonth, DayName _gameStartDay, int _currentdayInYr)

@@ -143,9 +143,8 @@ namespace Common
             // Init Services related to profile
             DialogueService.Instance.InitDialogueService();             
             GameEventService.Instance.Set_GameState(GameState.OnNewGameStart);
-
-
-        }        
+            
+        }
 
         // call this after profile slot and saveslot is selected    
         public void LoadGame(GameModel gameModel)
@@ -154,8 +153,7 @@ namespace Common
             saveSlot = gameModel.saveSlot;
             profileSlot = gameModel.profileSlot;
             gameController.InitDiffGameController(currGameModel.gameDifficulty);
-            GameEventService.Instance.OnGameSceneChg?.Invoke(currGameModel.gameScene);
-            GameEventService.Instance.OnGameStateChg?.Invoke(GameState.OnLoadGameStart);
+            GameEventService.Instance.Set_GameState(GameState.OnLoadGameStart);            
         }
 
         public void OnProfileSet(ProfileSlot profileSlot)
@@ -184,7 +182,9 @@ namespace Common
             if (gameScene == GameScene.InIntro)
                 OnIntroSceneLoad(); 
             if (gameScene == GameScene.InCombat)
-                GameEventService.Instance.On_CombatEnter(); 
+                GameEventService.Instance.On_CombatEnter();
+            if (gameScene == GameScene.InTown)
+                GameEventService.Instance.On_TownLoaded(gameScene);
         }
         void OnIntroSceneLoad()
         {           

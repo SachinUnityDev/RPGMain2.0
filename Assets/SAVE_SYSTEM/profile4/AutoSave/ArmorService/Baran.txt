@@ -1,1 +1,0 @@
-{"charName":2,"armorType":1,"armorTypeStr":"Leather","minArmor":1,"maxArmor":2,"minArmorUp":2,"maxArmorUp":3,"armorState":1,"allArmorDataVsLoc":[{"locationName":1,"priceFortify":{"silver":2,"bronze":2},"priceFortifyOnUpgrade":{"silver":1,"bronze":3},"priceUnSocketDiv":{"silver":0,"bronze":10},"priceUnSocketSupport":{"silver":0,"bronze":8},"armorState":1}]}

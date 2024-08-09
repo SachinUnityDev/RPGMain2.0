@@ -27,6 +27,7 @@ namespace Intro
         int count = 1;      
         public void Load()
         {
+            IntroAudioService.Instance.StopAllBGSound(0.01f);
             gameObject.SetActive(true);
             UIControlServiceGeneral.Instance.ToggleInteractionsOnUI(this.gameObject, true);
             IntroServices.Instance.Fade(gameObject, 1.0f);

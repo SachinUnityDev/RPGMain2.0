@@ -1,1 +1,1 @@
-{"DiaID":0,"dialogueName":1,"dialogueTitle":"Nice house...","npcName":10,"charName":0,"isUnLocked":true,"isRepeatable":false,"isSkippable":false,"isPlayedOnce":true,"gameScene":0,"charInDialogue":[1],"NPCinDialogue":[],"locationName":1}
+{"DiaID":0,"dialogueName":1,"dialogueTitle":"Nice house...","npcName":10,"charName":0,"isUnLocked":false,"isRepeatable":false,"isSkippable":false,"isPlayedOnce":false,"gameScene":0,"charInDialogue":[1],"NPCinDialogue":[],"locationName":1}

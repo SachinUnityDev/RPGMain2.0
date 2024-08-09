@@ -81,19 +81,19 @@ namespace Intro
             {
                 profileTxt = gameModel.GetProfileName();
                 profileName.text = profileTxt;
-
-                Sprite spriteAbbas =
-                    CharService.Instance.allCharSO.GetAbbasClasstypeData(gameModel.abbasClassType).spriteN;
-                AbbasImg.sprite = spriteAbbas;
+                AbbasImg.gameObject.SetActive(true);
+                LODImg.gameObject.SetActive(true);
+                AbbasClasstypeData abbasClasstypeData 
+                    = CharService.Instance.allCharSO.GetAbbasClasstypeData(gameModel.abbasClassType);
+                AbbasImg.sprite = abbasClasstypeData.spriteN;                
 
                 Sprite spriteLOD =
                     GameService.Instance.gameController.allGameDiffSO.GetGameDiffSO(gameModel.gameDifficulty).spriteN;
                 LODImg.sprite = spriteLOD;
 
-                AbbasImg.gameObject.SetActive(true);
-                LODImg.gameObject.SetActive(true);
+           
             }
-            AbbasImg.sprite = spriteN; 
+            
         }
         void DisplayProfileTxt()
         {          

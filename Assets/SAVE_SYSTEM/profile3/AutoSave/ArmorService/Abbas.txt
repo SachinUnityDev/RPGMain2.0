@@ -1,1 +1,0 @@
-{"charName":1,"armorType":2,"armorTypeStr":"Hide","minArmor":1,"maxArmor":1,"minArmorUp":1,"maxArmorUp":3,"armorState":1,"allArmorDataVsLoc":[{"locationName":1,"priceFortify":{"silver":1,"bronze":4},"priceFortifyOnUpgrade":{"silver":0,"bronze":0},"priceUnSocketDiv":{"silver":0,"bronze":10},"priceUnSocketSupport":{"silver":0,"bronze":8},"armorState":1}]}

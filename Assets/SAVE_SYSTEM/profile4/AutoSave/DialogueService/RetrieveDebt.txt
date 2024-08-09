@@ -1,1 +1,0 @@
-{"DiaID":0,"dialogueName":36,"dialogueTitle":"Hey, you!","npcName":18,"charName":0,"isUnLocked":false,"isRepeatable":false,"isSkippable":false,"isPlayedOnce":false,"gameScene":0,"charInDialogue":[1],"NPCinDialogue":[18],"locationName":1}

@@ -49,7 +49,6 @@ namespace Intro
         {
             gameObject.SetActive(true);
             UIControlServiceGeneral.Instance.ToggleInteractionsOnUI(this.gameObject, true);
-
             IntroServices.Instance.Fade(gameObject, 1.0f);
             StartCoroutine(Wait(1f));
             UIControlServiceGeneral.Instance.SetMaxSiblingIndex(gameObject);
@@ -84,6 +83,7 @@ namespace Intro
             int index = GameService.Instance.allGameModel.FindIndex(t=>t.isCurrGameModel == true);
             if(index != -1)
             {
+               
                 GameService.Instance.LoadGame(GameService.Instance.allGameModel[index]);
                 UnLoad(); 
                 IntroServices.Instance.LoadLoadingPanel();

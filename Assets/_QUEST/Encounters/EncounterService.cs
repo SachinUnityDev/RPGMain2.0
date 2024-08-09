@@ -36,15 +36,19 @@ namespace Quest
             questEController= gameObject.GetComponent<QuestEController>();
             questEFactory= gameObject.GetComponent<QuestEFactory>();    
         }
+        void GetRef()
+        {
+            cityEController = gameObject.GetComponent<CityEController>();
+            mapEController = gameObject.GetComponent<MapEController>();
+            questEController = gameObject.GetComponent<QuestEController>();
+        }
         public void EncounterInit()
         {
-            cityEFactory = gameObject.GetComponent<CityEncounterFactory>();
-            cityEController = gameObject.GetComponent<CityEController>();
+            GetRef(); 
+            cityEFactory = gameObject.GetComponent<CityEncounterFactory>();            
 
             mapEFactory = gameObject.GetComponent<MapEFactory>();
-            mapEController = gameObject.GetComponent<MapEController>();
             
-            questEController = gameObject.GetComponent<QuestEController>();
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
             if (SaveService.Instance.DirectoryExists(path))
             {
@@ -90,6 +94,7 @@ namespace Quest
 
         public void LoadState()
         {
+            GetRef(); 
             LoadStateQE();
             LoadStateMapE();
             LoadStateCityE();

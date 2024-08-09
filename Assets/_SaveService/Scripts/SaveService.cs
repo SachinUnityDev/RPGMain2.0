@@ -99,11 +99,15 @@ namespace Common
                 string [] files = GetAllTxtFiles(directory);    
                 foreach (string file in files)
                 {
+                    if(file.Contains("txt"))
+                        File.Delete(file);
                     Debug.Log("FILE" + file);
                 }
                 string[] filesMeta = GetAllMetaFiles(directory);
                 foreach (string file in filesMeta)
                 {
+                    if (file.Contains("meta"))
+                        File.Delete(file);
                     Debug.Log("FILE" + file);
                 }
             }

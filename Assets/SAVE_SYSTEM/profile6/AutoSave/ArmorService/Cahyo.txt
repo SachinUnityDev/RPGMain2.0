@@ -1,1 +1,0 @@
-{"charName":3,"armorType":3,"armorTypeStr":"Brass","minArmor":0,"maxArmor":2,"minArmorUp":1,"maxArmorUp":3,"armorState":3,"allArmorDataVsLoc":[{"locationName":1,"priceFortify":{"silver":0,"bronze":0},"priceFortifyOnUpgrade":{"silver":1,"bronze":9},"priceUnSocketDiv":{"silver":0,"bronze":10},"priceUnSocketSupport":{"silver":0,"bronze":8},"armorState":3}]}

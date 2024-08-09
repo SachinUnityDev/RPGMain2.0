@@ -1,0 +1,1 @@
+{"profileSlot":0,"profileName":"SACHIN","saveSlot":0,"gameScene":1,"gameDifficulty":0,"locationName":1,"landscapeNames":0,"abbasClassType":7,"jobSelect":0,"isCurrGameModel":false,"calDate":{"monthName":0,"day":0}}

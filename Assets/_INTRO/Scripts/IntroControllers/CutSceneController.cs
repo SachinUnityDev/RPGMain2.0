@@ -52,7 +52,7 @@ namespace Intro
             UIControlServiceGeneral.Instance.ToggleInteractionsOnUI(this.gameObject, false);
 
             video.gameObject.SetActive(false);
-            IntroAudioService.Instance.StopAllBGSound(0.01f);
+     
             IntroServices.Instance.Fade(gameObject, 0.4f);
             IntroServices.Instance.LoadNext();
         }

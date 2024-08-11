@@ -42,6 +42,8 @@ namespace Common
                     draggedGO.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
                     CharModel charModel = RosterService.Instance.scrollSelectCharModel;
                     charModel.availOfChar = AvailOfChar.UnAvailable_InParty;
+                    
+                    
                     RosterService.Instance.rosterViewController.PopulatePortrait();
                     RosterService.Instance.On_ScrollSelectCharModel(charModel);
                     draggedGO.transform.SetParent(gameObject.transform);
@@ -133,6 +135,15 @@ namespace Common
             PopulateOnLoad(charInSlot);
             portraitDragNDrop.parentTransform = transform;
         }
+        public void ClearSlot()
+        {
+            PortraitDragNDrop portraitDragNDrop1 = transform?.GetComponentInChildren<PortraitDragNDrop>();
+            if (portraitDragNDrop1 != null)
+            {
+                Destroy(portraitDragNDrop1.gameObject);
+            }
+        }
+
         void PopulateOnLoad(CharNames charName)
         {
             CharModel charModel = CharService.Instance.GetCharModel(charName);

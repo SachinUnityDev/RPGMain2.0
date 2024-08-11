@@ -1,8 +1,6 @@
 using UnityEngine;
-using Interactables;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using Combat;
 using System;
 using TMPro;
 
@@ -83,31 +81,55 @@ namespace Common
             rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
         }
         public void OnEndDrag(PointerEventData eventData)
-        {
-           
+        {           
             Debug.Log("Hello end drag" + eventData.pointerEnter.name);
             GameObject droppedOn = eventData.pointerEnter;
-            if (CharService.Instance.isPartyLocked
-                || !FameService.Instance.fameController
-                .IsFameBehaviorMatching(CharService.Instance.GetAllyController(charDragged)))
-            { 
-                RosterService.Instance.rosterViewController.ReverseBack(this);
-                RosterService.Instance.On_PortraitDragResult(false);
-                
-            }else if (droppedOn.GetComponent<IDropHandler>() == null
-                && droppedOn.transform.parent.GetComponent<IDropHandler>() == null )                            
-             {
-                Debug.Log("I drop handler NOT FOUND" + droppedOn.transform.name);
-                RosterService.Instance.rosterViewController.ReverseBack(this); 
-                RosterService.Instance.On_PortraitDragResult(false);
-             }
-            else
+            if (droppedOn.GetComponent<IDropHandler>() == null
+               && droppedOn.transform.parent.GetComponent<IDropHandler>() == null)
+            { // reverse back in case no appropriate slot is found
+               
+                if(IRosterSlot.slotType == RosterSlotType.CharScrollSlot)
+                {
+                    RosterService.Instance.rosterViewController.ReverseBack(this);
+                    RosterService.Instance.On_PortraitDragResult(false);
+                }
+                else if (IRosterSlot.slotType == RosterSlotType.PartySetSlot)
+                {
+                    RosterService.Instance.rosterViewController.ReverseBack2PartySlot(this);
+                    RosterService.Instance.On_PortraitDragResult(false);
+                }              
+            }
+            else if (IRosterSlot.slotType == RosterSlotType.CharScrollSlot)
             {
-                clone.transform.GetChild(1).gameObject.SetActive(true);
-                clone.transform.GetChild(2).gameObject.SetActive(true);
-                RosterService.Instance.rosterViewController.PopulatePortrait();
-            } 
+                // either party is locked or fame is not matching it will be rejected
+                if (CharService.Instance.isPartyLocked
+                    || !FameService.Instance.fameController
+                    .IsFameBehaviorMatching(CharService.Instance.GetAllyController(charDragged)))
+                {
+                    RosterService.Instance.rosterViewController.ReverseBack(this);
+                    RosterService.Instance.On_PortraitDragResult(false);
+                }
+                else
+                { // add to party
+                    clone.transform.GetChild(1).gameObject.SetActive(true);
+                    clone.transform.GetChild(2).gameObject.SetActive(true);
+                    RosterService.Instance.rosterViewController.PopulatePortrait();
+                }
+            }
+            else if (IRosterSlot.slotType == RosterSlotType.PartySetSlot)
+            {             
+                RosterService.Instance.rosterViewController.ReverseBack2PartySlot(this);
+                RosterService.Instance.On_PortraitDragResult(false);
+               
+                if(clone != null)// this displays the charScrollSLot .. greyed clone portrait
+                {
+                    clone.transform.GetChild(1).gameObject.SetActive(true);
+                    clone.transform.GetChild(2).gameObject.SetActive(true);
+                }   
+                 RosterService.Instance.rosterViewController.PopulatePortrait();
+            }
             canvasGroup.blocksRaycasts = true;
+        
         }
     }
 

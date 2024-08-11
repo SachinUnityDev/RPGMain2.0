@@ -10,7 +10,7 @@ namespace Common
     public interface iRosterSlot
     {
         int slotID { get; }
-        RosterSlotType slotType { get;  }
+        RosterSlotType slotType { get; }
         bool isSlotFull();
         CharNames charInSlot { get; set; }
         bool AddChar2UnlockedList(GameObject go);        
@@ -34,6 +34,8 @@ namespace Common
         public int slotID => -1;
         public RosterSlotType slotType => RosterSlotType.CharScrollSlot;
         public CharNames charInSlot { get; set; }
+        RosterSlotType iRosterSlot.slotType => RosterSlotType.CharScrollSlot;
+
         public void OnDrop(PointerEventData eventData)
         {
             GameObject draggedGO = eventData.pointerDrag;
@@ -47,8 +49,8 @@ namespace Common
                 draggedGO.transform.SetParent(gameObject.transform);
                 draggedGO.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
                 iPortrait IPortrait = draggedGO.GetComponent<iPortrait>();
-                CharNames draggedChar = IPortrait.IRosterSlot.charInSlot; 
-
+                CharNames draggedChar = IPortrait.IRosterSlot.charInSlot;
+                IPortrait.IRosterSlot = this; // slot updated
                 portraitDragNDrop.parentTransform = transform;
 
                 CharController charController = CharService.Instance.GetAllyController(draggedChar);                
@@ -56,8 +58,8 @@ namespace Common
                 CharModel charModel = charController.charModel;
                 charModel.availOfChar = AvailOfChar.Available;
                 RosterViewController rosterViewController = RosterService.Instance.rosterViewController;
-                rosterViewController.PopulatePortrait2_Char(draggedChar);
-              
+
+                rosterViewController.PopulatePortrait2_Char(draggedChar);              
                 RosterService.Instance.RemoveCharFromParty(draggedChar);
                 Destroy(draggedGO.gameObject);
 

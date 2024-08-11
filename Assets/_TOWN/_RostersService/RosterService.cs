@@ -82,6 +82,7 @@ namespace Common
         
         public bool AddChar2Party(CharNames charNames)
         {
+            if (charNames == CharNames.None) return false; 
             if (CharService.Instance.isPartyLocked) return false;
                 CharController charController = CharService.Instance.GetAllyController(charNames);
             if(charNames != CharNames.Abbas) // test fame behaviour for non abbas chars 

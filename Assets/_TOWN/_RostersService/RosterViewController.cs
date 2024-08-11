@@ -98,6 +98,30 @@ namespace Common
             }
         }
 
+
+        public void ReverseBack2PartySlot(PortraitDragNDrop portraitDragNDrop)
+        {
+            Transform slotParent = portraitDragNDrop.parentTransform;
+            RectTransform draggedGORect = portraitDragNDrop.GetComponent<RectTransform>();
+
+            portraitDragNDrop.transform.SetParent(slotParent);
+
+            draggedGORect.localScale = Vector3.one;
+            draggedGORect.anchoredPosition = new Vector3(0, 0, 0);
+            // if slot parent ==
+            if (slotParent.GetComponent<PartyPortraitSlotController>() != null)
+            {
+                slotParent.GetComponent<PartyPortraitSlotController>()
+                    .AddChar2SlotOnLoad(portraitDragNDrop.gameObject, portraitDragNDrop.IRosterSlot.charInSlot);
+            }
+            else
+            {
+                btmCharSlot.Init(this);
+                Destroy(portraitDragNDrop.gameObject);
+            }
+           
+        }
+
         public void ReverseBack(PortraitDragNDrop portraitDragNDrop)
         {
             Transform slotParent = portraitDragNDrop.parentTransform;
@@ -165,7 +189,7 @@ namespace Common
                 index+=incr;
             }
         }
-        void PopulateCharScroll()
+        public void PopulateCharScroll()
         {
             if(unLockedChars.Count == 0) return;
             //AbbasChk(1);

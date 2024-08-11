@@ -57,23 +57,35 @@ namespace Town
             this.rosterViewController = rosterViewController;
             // loop through all the slots and add the char to the slot
             RosterModel rosterModel = RosterService.Instance.rosterModel;
-            int i = 0; 
-            foreach (CharNames charName in rosterModel.charInParty)
+            int i = 0;
+
+            foreach (Transform child in transform)
             {
-                i++;
-                if (charName == CharNames.Abbas) continue;
-                PartyPortraitSlotController partyPortraitSlotController = 
-                        transform.GetChild(i)?.GetComponent<PartyPortraitSlotController>();
-                if (partyPortraitSlotController == null) continue; 
-                PortraitDragNDrop portraitDragNDrop1 =
-                        transform.GetChild(i)?.GetComponentInChildren<PortraitDragNDrop>();
-                GameObject portTransGO;
-                if (portraitDragNDrop1 == null)                
-                    portTransGO = Instantiate(portraitDragNDrop.gameObject);                
-                else                
-                    portTransGO = portraitDragNDrop1.gameObject;
-                
-                partyPortraitSlotController.AddChar2SlotOnLoad(portTransGO, charName);                
+                PartyPortraitSlotController partyPortraitSlotController =
+                                        child?.GetComponent<PartyPortraitSlotController>();
+                if(partyPortraitSlotController == null) continue;   
+                if (i < rosterModel.charInParty.Count)
+                {
+                    CharNames charName = rosterModel.charInParty[i];
+                    if (charName == CharNames.Abbas)
+                    {
+                        i++;
+                        charName = rosterModel.charInParty[i];
+                    }
+                    PortraitDragNDrop portraitDragNDrop1 = child?.GetComponentInChildren<PortraitDragNDrop>();
+                    GameObject portTransGO;
+                    if (portraitDragNDrop1 == null)
+                        portTransGO = Instantiate(portraitDragNDrop.gameObject);
+                    else
+                        portTransGO = portraitDragNDrop1.gameObject;
+                    partyPortraitSlotController.AddChar2SlotOnLoad(portTransGO, charName);
+
+                }
+                else
+                {
+                    partyPortraitSlotController.ClearSlot();
+                }
+                i++; 
             }
         }
     }

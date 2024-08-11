@@ -104,6 +104,7 @@ namespace Common
             this.leftSkillView = leftSkillView;
 
             skillCardGO = SkillService.Instance.skillCardGO;
+            skillCardGO.transform.SetAsLastSibling(); 
 
             if (haslvl)
             {

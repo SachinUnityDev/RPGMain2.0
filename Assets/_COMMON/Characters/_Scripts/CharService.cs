@@ -11,9 +11,11 @@ namespace Common
 {
     public class CharService : MonoSingletonGeneric<CharService>, ISaveable
     {
+        #region DECLARATIONS
         public event Action<CharController> OnCharDeath;
         public event Action<CharController> OnCharSpawn;
         public event Action<CharController> OnCharAddedToParty;
+        public event Action<CharController> OnCharRemovedFrmParty;
         public event Action OnPartyLocked; 
         public event Action OnPartyDisbanded;
 
@@ -65,6 +67,7 @@ namespace Common
         [Header("Character Pos")]
         public Vector3 spawnPos = new Vector3(-100, 0, 0);
         public ServicePath servicePath => ServicePath.CharService;
+        #endregion
         void Start()
         {
             isPartyLocked= false;
@@ -257,7 +260,7 @@ namespace Common
         public void On_CharFleeQuest(CharController charController)
         {
             ToggleViewForChar(charController, false);
-            allCharsInPartyLocked.Remove(charController);
+            RosterService.Instance.RemoveCharFromParty(charController.charModel.charName);
             charController.charModel.stateOfChar = StateOfChar.Fled;
             charController.fleeController.InitOnDayFledQ(2); // fled for 2 days 
             allCharfledQ.Add(charController);
@@ -334,7 +337,7 @@ namespace Common
 
         void AbbasStatusUpdate(CharController charController)
         {
-            On_CharAddToParty(charController);            
+           On_CharAddToParty(charController); // exception for abbas others are added only thru roster
         }
         public void On_CharSpawn(CharController charController)
         {
@@ -354,6 +357,13 @@ namespace Common
             Debug.Log("On Char Added" + charController.charModel.charName);                    
             allCharsInPartyLocked.Add(charController);    
             OnCharAddedToParty?.Invoke(charController);
+        }
+
+        public void On_CharRemovedFrmParty(CharController charController)
+        {
+            if (allCharsInPartyLocked.Any(t => t.charModel.charID == charController.charModel.charID)) return;
+            allCharsInPartyLocked.Remove(charController);
+            OnCharRemovedFrmParty?.Invoke(charController);
         }
 
         #endregion

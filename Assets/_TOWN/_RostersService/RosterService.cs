@@ -7,6 +7,7 @@ using Town;
 using System;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using System.IO;
 
 namespace Common
 {
@@ -32,7 +33,7 @@ namespace Common
 
         [Header("Global Var")]
         public CharModel scrollSelectCharModel;
-        public ServicePath servicePath => ServicePath.EcoService;
+        public ServicePath servicePath => ServicePath.RosterService;
         void Start()
         {
             RosterModel rosterModel = new RosterModel();
@@ -78,22 +79,31 @@ namespace Common
 
         }
         
-
+        
         public bool AddChar2Party(CharNames charNames)
         {
             if (CharService.Instance.isPartyLocked) return false;
-            CharController charController = CharService.Instance.GetAllyController(charNames);
-            if (!FameService.Instance.fameController.IsFameBehaviorMatching(charController)) return false; 
-           // if(rosterModel.charInParty.Contains(charNames)) return false;
+                CharController charController = CharService.Instance.GetAllyController(charNames);
+            if(charNames != CharNames.Abbas) // test fame behaviour for non abbas chars 
+                if (!FameService.Instance.fameController.IsFameBehaviorMatching(charController)) return false; 
 
-            //rosterModel.charInParty.Add(charNames);
-            CharService.Instance.On_CharAddToParty(charController); 
-            // Apply party restrictions here 
+            if(rosterModel.charInParty.Contains(charNames)) return false;   
+           rosterModel.charInParty.Add(charNames);
+            CharService.Instance.On_CharAddToParty(charController);             
             return true; 
+        }
+        public bool RemoveCharFromParty(CharNames charNames)
+        {
+            if (CharService.Instance.isPartyLocked) return false;
+            CharController charController = CharService.Instance.GetAllyController(charNames);
+           rosterModel.charInParty.Remove(charNames);
+            CharService.Instance.On_CharRemovedFrmParty(charController);
+            return true;
         }
         public void On_PortraitDragResult(bool result)// connect this to doMove and
         {
             OnPortraitDragResult?.Invoke(result);
+            Debug.Log("DRAGGGGG" + result); 
            // On_SelectCharModel(selectCharModel);
         }
         public void OpenRosterView()
@@ -118,27 +128,63 @@ namespace Common
             rosterViewController.GetComponent<IPanel>().UnLoad();
         }
 
+        #region SAVE_LOAD SERVICES
         public void LoadState()
         {
-            // get char from the charController and add to the party
-            // no need to load 
-            rosterController = rosterController.GetComponent<RosterController>();
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
             rosterModel = new RosterModel();
-            foreach (CharController c in CharService.Instance.allCharsInPartyLocked)
+            if (SaveService.Instance.DirectoryExists(path))
             {
-                rosterModel.charInParty.Add(c.charModel.charName);                
+                string[] fileNames = Directory.GetFiles(path);
+                foreach (string fileName in fileNames)
+                {
+                    // skip meta files
+                    if (fileName.Contains(".meta")) continue;
+                    string contents = File.ReadAllText(fileName);
+                    Debug.Log("  " + contents);
+                    rosterModel = JsonUtility.FromJson<RosterModel>(contents);                    
+                }
+                foreach (CharNames charName in rosterModel.charInParty)
+                {
+                    CharController charController = CharService.Instance.GetAllyController(charName);
+                    CharService.Instance.On_CharAddToParty(charController);
+                }
+
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing");
             }
         }
 
         public void ClearState()
         {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            DeleteAllFilesInDirectory(path);
         }
 
         public void SaveState()
         {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            ClearState();
+            string rosterModelJSON = JsonUtility.ToJson(rosterModel);
+            string fileName = path + "RosterModel" + ".txt";
+            File.WriteAllText(fileName, rosterModelJSON);
+        }
+        public void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                SaveState();
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                LoadState();
+            }
         }
 
-        
+        #endregion
+
     }
 
 

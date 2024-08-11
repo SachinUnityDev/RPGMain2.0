@@ -113,16 +113,7 @@ namespace Quest
             {
                 On_QuestSceneStart(QuestNames.RatInfestation);
             }
-            //if (Input.GetKeyDown(KeyCode.A))
-            //{
-            //    foreach (CharController charCtrl in CharService.Instance.charsInPlayControllers)
-            //    {
-            //        if (charCtrl.charModel.charName != CharNames.Abbas_Skirmisher)
-            //        {
-            //            CharService.Instance.allCharsInPartyLocked.Add(charCtrl);
-            //        }
-            //    }
-            //}
+      
         }
 
     }

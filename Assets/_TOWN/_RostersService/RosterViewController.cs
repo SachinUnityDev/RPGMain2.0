@@ -7,11 +7,14 @@ using Intro;
 using Combat;
 using DG.Tweening;
 using System;
+using Interactables;
+using Town;
 
 namespace Common
 {
     public class RosterViewController : MonoBehaviour, IPanel, iHelp
     {
+        #region DECLARATIONS
         [SerializeField] HelpName helpName;
         [Header("TO BE REF")]
         [SerializeField] Button closeBtn; 
@@ -26,7 +29,11 @@ namespace Common
         [Header("TO BE REF IN SIDE PANEL")]
         [SerializeField] Transform SidePlankTrans;
         [SerializeField] Button inviteBtn; 
-        [SerializeField] TextMeshProUGUI descOnHover; 
+        [SerializeField] TextMeshProUGUI descOnHover;
+
+        [Header("BTM CHAR PANEL TO BE REF")]
+        [SerializeField] BtmSlotContainer btmCharSlot;
+
 
         [Header("Not to be ref")]
         [SerializeField] Transform nameContainer; 
@@ -45,6 +52,7 @@ namespace Common
       
         CharacterSO charSO;
         CharComplimentarySO charCompSO;
+        #endregion
 
         private void Start()
         {
@@ -75,14 +83,14 @@ namespace Common
             for (int i = 1; i < btmCharTrans.childCount; i++)
             {
                 PortraitDragNDrop port = btmCharTrans.GetChild(i).GetComponentInChildren<PortraitDragNDrop>(); 
-               if (port != null)
+               if (port != null && port.charDragged != CharNames.None)
                 {
                     CharController charController = CharService.Instance.GetAllyController(port.charDragged);
                     if (!FameService.Instance.fameController.IsFameBehaviorMatching(charController))
                     {
                         charController.charModel.availOfChar = AvailOfChar.UnAvailable_Fame;
                        // CharService.Instance.allAvailCompModels.Add(charController.charModel);
-                        CharService.Instance.allCharsInPartyLocked.Remove(charController);
+                       RosterService.Instance.RemoveCharFromParty(charController.charModel.charName);
                         Destroy(port.gameObject);       
                         Load();
                     }
@@ -170,7 +178,7 @@ namespace Common
             
             Debug.Log("RosterService" + RosterService.Instance.scrollSelectCharModel.charName);
             PopulatePortrait();
-            PopulateSidePlank();
+            PopulateSidePlank();            
         }
         public void PopulatePortrait2_Char(CharNames charName)
         {
@@ -208,6 +216,7 @@ namespace Common
             unLockedChars = RosterService.Instance.rosterController.GetCharUnlockedWithStatusUpdated(); 
             PopulateCharScroll();
             toggleRosterLockDisbandBtn.Init(this); 
+           btmCharSlot.Init(this);  
         }
 
         public void UnLoad()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ using UnityEngine;
 
 namespace Common
 {
+    [Serializable]
     public class RosterModel 
     {
         //build from the char Model .. temp no need to load

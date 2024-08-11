@@ -65,7 +65,7 @@ namespace Common
         }
         #endregion
 
-        void CreateCharPortClone(CharNames charName) // used to replace the empty state
+       public GameObject CreateCharPortClone(CharNames charName) // used to replace the empty state
         {
             // here is the end 
             GameObject cloneGO = RosterService.Instance.rosterSO.charPortPreFab;
@@ -76,6 +76,7 @@ namespace Common
             cloneRect.anchoredPosition = Vector3.zero;
             cloneRect.localScale = Vector3.one;
             clone.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            return cloneGO; 
         }
         public void OnDrag(PointerEventData eventData)
         {

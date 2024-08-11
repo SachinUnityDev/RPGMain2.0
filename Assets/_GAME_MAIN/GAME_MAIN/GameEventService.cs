@@ -39,7 +39,7 @@ namespace Common
 
                 CharService.Instance.Init();
                 CharStatesService.Instance.Init();
-
+                RosterService.Instance.Init();
                 UIControlServiceGeneral.Instance.InitUIGeneral();
 
                 EcoService.Instance.InitEcoServices();
@@ -82,7 +82,7 @@ namespace Common
 
                 CharService.Instance.LoadState();
                 CharStatesService.Instance.LoadState();
-
+                RosterService.Instance.LoadState();
                 UIControlServiceGeneral.Instance.InitUIGeneral();
 
                 EcoService.Instance.LoadState();

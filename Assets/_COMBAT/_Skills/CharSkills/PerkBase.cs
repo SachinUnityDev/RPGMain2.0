@@ -40,7 +40,7 @@ namespace Combat
 
         #region APPLY and HOVER
 
-        public virtual void SkillInit(SkillController1 skillController) 
+        public virtual void PerkInit(SkillController1 skillController) 
         {
             this.skillController = skillController;
             skillModel = skillController?.allSkillModels.Find(t => t.skillName == skillName);
@@ -60,7 +60,7 @@ namespace Combat
                 AddTargetPos();
             }
         }
-        public virtual void SkillSelected()
+        public virtual void PerkSelected()
         {
 
             if (!skillModel.castPos.Any(t => t == currDyna.currentPos))

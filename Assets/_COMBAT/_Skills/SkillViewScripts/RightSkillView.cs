@@ -44,12 +44,7 @@ namespace Common
         [SerializeField] Transform perkBtnContainer;
 
         [SerializeField] List<SkillModel> scrollList = new List<SkillModel>();  
-        private void Awake()
-        {
-            //SkillService.Instance.OnSkillSelectInInv += FillSkillScroll;
-            //InvService.Instance.OnCharSelectInvPanel += PopulateRightSkillPanel;
-
-        }
+    
         private void Start()
         {
             perkInfoPanelTrans = transform.GetChild(4);
@@ -81,6 +76,10 @@ namespace Common
             {
                 charController.skillController.InitSkillList(charController);
             }
+            else
+            {
+                charController.skillController.LoadSkillList(charController);
+            }
 
             for (int i = 0; i < selectSkillController.allSkillModels.Count; i++)
             {
@@ -99,37 +98,6 @@ namespace Common
 
         }
 
-        void OnLeftBtnPressed()
-        {
-            if (Time.time - prevLeftClick < 0.3f) return;
-    
-            if (index <= 0)
-            {
-                index = 0;
-            }
-            else
-            {
-                --index;
-                FillSkillScroll(scrollList[index]);
-            }
-            prevLeftClick = Time.time;
-        }
-        void OnRightBtnPressed()
-        {
-            if (Time.time - prevRightClick < 0.3f) return;  
-   
-            if (index >= scrollList.Count-1)
-            {                
-                index = scrollList.Count-1;
-            }
-            else
-            {
-                ++index;
-               FillSkillScroll(scrollList[index]);          
-            }
-            prevRightClick = Time.time;
-        }
-
         public void FillSkillScroll(SkillModel skillModel)
         {
             if (skillModel == null && skillScrollTrans == null) return; 
@@ -141,7 +109,8 @@ namespace Common
                     skillTxt.text =  skillModel.skillName.ToString();
             }
             // get skillPerkData and Print PerkPanel 
-            List<PerkData> allPerkData = selectSkillController.GetSkillPerkData(skillModel.skillName);
+            List<PerkData> allPerkData = new List<PerkData>(); 
+              allPerkData =   selectSkillController.GetSkillPerkData(skillModel.skillName);
             int i = 0;
             if (allPerkData == null)
             {
@@ -181,6 +150,36 @@ namespace Common
             {
                 perkBtnContainer.GetChild(j).gameObject.SetActive(false);
             }
+        }
+        void OnLeftBtnPressed()
+        {
+            if (Time.time - prevLeftClick < 0.3f) return;
+
+            if (index <= 0)
+            {
+                index = 0;
+            }
+            else
+            {
+                --index;
+                FillSkillScroll(scrollList[index]);
+            }
+            prevLeftClick = Time.time;
+        }
+        void OnRightBtnPressed()
+        {
+            if (Time.time - prevRightClick < 0.3f) return;
+
+            if (index >= scrollList.Count - 1)
+            {
+                index = scrollList.Count - 1;
+            }
+            else
+            {
+                ++index;
+                FillSkillScroll(scrollList[index]);
+            }
+            prevRightClick = Time.time;
         }
 
     }

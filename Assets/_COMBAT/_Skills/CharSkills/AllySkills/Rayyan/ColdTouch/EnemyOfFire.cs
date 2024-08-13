@@ -28,9 +28,9 @@ namespace Combat
                        .Find(t => t.skillName == skillName && t.skillLvl == SkillLvl.Level1).WipeFX1;
         }
 
-        public override void SkillSelected()
+        public override void PerkSelected()
         {
-            base.SkillSelected();
+            base.PerkSelected();
             SkillService.Instance.SkillFXRemove += skillController.allPerkBases
                         .Find(t => t.skillName == skillName && t.skillLvl == SkillLvl.Level1).RemoveFX1;
         }

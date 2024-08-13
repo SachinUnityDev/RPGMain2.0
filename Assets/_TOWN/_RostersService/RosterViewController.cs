@@ -118,8 +118,7 @@ namespace Common
             {
                 btmCharSlot.Init(this);
                 Destroy(portraitDragNDrop.gameObject);
-            }
-           
+            }           
         }
 
         public void ReverseBack(PortraitDragNDrop portraitDragNDrop)

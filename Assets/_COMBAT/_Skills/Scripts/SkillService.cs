@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Town;
+using System.IO;
 
 namespace Combat
 {
@@ -30,7 +31,7 @@ namespace Combat
         }
     }
 
-    public class SkillService : MonoSingletonGeneric<SkillService>
+    public class SkillService : MonoSingletonGeneric<SkillService>, ISaveable
     {
         public event Action<PerkData> OnPerkStateChg;
         public event Action<SkillModel> OnSkillSelectInInv; 
@@ -58,7 +59,7 @@ namespace Combat
             }
         }
 
-        #region Initializers
+        #region DECLARATIONS
 
         [Header("SKill Factory NTBR")]
         public SkillFactory skillFactory;
@@ -125,7 +126,8 @@ namespace Combat
         public int currSkillPts =10;
 
         public float combatSpeed = 1f;
-     
+
+        public ServicePath servicePath => ServicePath.SkillService; 
         void Start()
         {
             // InitSkillControllers();
@@ -520,6 +522,7 @@ namespace Combat
            
         }
         #endregion
+
         #region GETTERS and SETTERS
 
         public SkillController1 GetSkillController(CharController _charController)
@@ -645,7 +648,6 @@ namespace Combat
             return null; 
         }
 
-
         #endregion
 
         #region APPLY REMOTE SKILLS
@@ -728,7 +730,100 @@ namespace Combat
                     DeSelectSkill();
                 }
             }
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                SaveState();
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                LoadState();
+            }
+            if (Input.GetKeyDown(KeyCode.F6))
+            {
+                ClearState();
+            }
         }
+
+        #region SAVE and LOAD
+        public void LoadState()
+        {
+            // browse thru all files in the folder and load them
+            // as char Models 
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            List<SkillModel> allSkillModels = new List<SkillModel>();   
+            if (SaveService.Instance.DirectoryExists(path))
+            {
+                string[] fileNames = Directory.GetFiles(path);
+                foreach (string fileName in fileNames)
+                {
+                    // skip meta files
+                    if (fileName.Contains(".meta")) continue;
+                    string contents = File.ReadAllText(fileName);                    
+                    SkillModel skillModel = JsonUtility.FromJson<SkillModel>(contents);                    
+                    allSkillModels.Add(skillModel);
+                }
+                foreach (CharController charCtrl in CharService.Instance.charsInPlayControllers)
+                {
+                    SkillController1 skillController = charCtrl.skillController;
+                    List<SkillModel> allCharSkillModel = allSkillModels.FindAll(t => t.charID == charCtrl.charModel.charID);
+                    skillController.allSkillModels = allCharSkillModel.DeepClone();
+                    skillController.LoadSkillList(charCtrl);// also init perk list
+                }
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing");
+            }
+        }
+        public void ClearState()
+        {
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            string pathSkillModel = path + "SkillModels/";
+            string pathPerkModel = path + "PerkModels/";    
+            DeleteAllFilesInDirectory(pathSkillModel);
+            DeleteAllFilesInDirectory(pathPerkModel);
+
+        }
+        public void SaveState()
+        {
+            if (CharService.Instance.charsInPlayControllers.Count <= 0)
+            {
+                Debug.LogError("no chars in play"); return;
+            }
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            string pathSkillModel = path + "SkillModels/";
+            string pathPerkModel = path + "PerkModels/";
+            if (!Directory.Exists(pathSkillModel))
+            {
+                Directory.CreateDirectory(pathSkillModel);
+            }
+            if (!Directory.Exists(pathPerkModel))
+            {
+                Directory.CreateDirectory(pathPerkModel);
+            }
+            ClearState();
+
+            foreach (CharController charCtrl in CharService.Instance.charsInPlayControllers)
+            {
+                SkillController1 skillController = charCtrl.skillController;
+                foreach (SkillModel skillModel in skillController.allSkillModels)
+                {
+                    string skillModelJSON = JsonUtility.ToJson(skillModel);
+                    string fileName = pathSkillModel + skillModel.charName.ToString() 
+                                        + "_" + skillModel.skillName.ToString()+ ".txt";
+                    File.WriteAllText(fileName, skillModelJSON);
+                }
+                foreach (PerkData perkData in skillController.allSkillPerkData)
+                {
+                    string perkDataJSON = JsonUtility.ToJson(perkData);
+                    string fileName = pathSkillModel + perkData.perkName.ToString()
+                                        + "_" + perkData.skillName.ToString() + ".txt";
+                    File.WriteAllText(fileName, perkDataJSON);
+                }
+
+            }
+        }
+        #endregion   
 
     }
 }

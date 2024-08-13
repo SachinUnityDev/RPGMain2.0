@@ -96,7 +96,8 @@ namespace Combat
                 CombatEventService.Instance.OnEOC += EOCTick;
             }
         }
-  
+
+        #region INIT SKILL AND PERK LIST    
 
         public void InitAllSkill_OnCombat()
         {
@@ -108,10 +109,10 @@ namespace Combat
             {
                 InitSkillList(charController);
             }
-            AllSkillInit();
+            InitAllSkillBase();
         }
 
-        void AllSkillInit()
+        void InitAllSkillBase()
         {
             foreach (SkillBase skillBase in allSkillBases)
             {
@@ -124,6 +125,7 @@ namespace Combat
             // stop double run// overrides 
             if (allSkillModels.Count > 0) return; 
             skillDataSO = SkillService.Instance.GetSkillSO(this.charName);
+            unLockedSkills.Clear(); 
             foreach (SkillData skill in skillDataSO.allSkills)
             {
                 
@@ -147,6 +149,7 @@ namespace Combat
         }
         public void InitPerkDataList()
         {
+            allSkillPerkData.Clear(); 
             foreach (SkillNames _skillName in unLockedSkills)
             {
                 List<PerkBaseData> skillPerkData =   
@@ -160,7 +163,7 @@ namespace Combat
 
                         Debug.Log("PERKANME..." + P1.perkName);
                         allPerkBases.Add(P1);// perk bases
-                        P1.SkillInit(this);
+                        P1.PerkInit(this);
 
                         PerkData perkModel = new PerkData(P1.skillName, P1.perkName, P1.state,
                             P1.perkType, P1.skillLvl, P1.preReqList);
@@ -173,7 +176,65 @@ namespace Combat
             perkBaseCount = allPerkBases.Count;
         }
 
-  
+        #endregion
+
+        #region LOAD
+
+        public void LoadSkillList(CharController charController)
+        {
+            if (this.charController.charModel.charID != charController.charModel.charID) return;
+            // stop double run// overrides 
+            unLockedSkills.Clear();
+            skillDataSO = SkillService.Instance.GetSkillSO(this.charName);
+            foreach (SkillModel skillModel in allSkillModels)
+            {
+                if (skillModel.skillUnLockStatus == 1) // 1 = unlock, 0 locked, -1 NA
+                {
+                    unLockedSkills.Add(skillModel.skillName);
+                }
+            }
+            foreach (SkillModel skillModel in allSkillModels)
+            {
+                SkillBase skillbase = SkillService.Instance.skillFactory.GetSkill(skillModel.skillName);
+                skillbase.charName = skillDataSO.charName;
+                allSkillBases.Add(skillbase);
+                skillbase.SkillInit(this); // pass in all the params when all skills are coded
+            }
+            skillbaseCount = allSkillBases.Count;
+            LoadPerkDataList();
+        }
+
+        void LoadPerkDataList()
+        {            
+            foreach (SkillNames _skillName in unLockedSkills)
+            {
+                List<PerkBaseData> skillPerkData =
+                         SkillService.Instance.skillFactory.GetSkillPerkData(_skillName);
+                
+                if (skillPerkData != null)
+                {
+                    foreach (PerkBaseData perkData in skillPerkData)
+                    {
+                        //PerkBase P1 = SkillService.Instance.skillFactory
+                        //                    .GetPerkBase(perkData.skillName, perkData.perkName);
+
+                        //Debug.Log("PERKANME..." + P1.perkName);
+                        //allPerkBases.Add(P1);// perk bases
+                        //P1.PerkInit(this); // find the loaded skill model and set it to perkbase
+
+                        //PerkData perkModel = new PerkData(P1.skillName, P1.perkName, P1.state,
+                        //    P1.perkType, P1.skillLvl, P1.preReqList);
+                        //allSkillPerkData.Add(perkModel);  // model data captures state and lvl
+                                                          //  SetPerkState(perkModel);
+                    }
+                }
+            }
+
+            perkBaseCount = allPerkBases.Count;
+        }
+
+        #endregion
+
         #region On_Hover, On_SkillSelect and Check coolDown
 
         public void SkillHovered(SkillNames _skillName)
@@ -191,7 +252,7 @@ namespace Combat
 
             clickedPerkList.ForEach(t => SkillService.Instance.skillModelHovered.perkChain.Add(t.perkType));
 
-            clickedPerkList.ForEach(t => allPerkBases.Find(x => x.perkName == t.perkName).SkillInit(this));
+            clickedPerkList.ForEach(t => allPerkBases.Find(x => x.perkName == t.perkName).PerkInit(this));
             clickedPerkList.ForEach(t => allPerkBases.Find(x => x.perkName == t.perkName).SkillHovered());
         }
         public void SkillSelect(SkillNames _skillName)
@@ -211,7 +272,7 @@ namespace Combat
                         if (perkbase.perkName == skillPerkdata.perkName)
                         {
                             clickedPerkList.ForEach(t => Debug.Log(t.perkName + "PERK BASE CLICKED"));                            
-                            perkbase.SkillSelected();
+                            perkbase.PerkSelected();
                         }
                     }
                 }
@@ -219,6 +280,7 @@ namespace Combat
         }
 
         #endregion
+
 
         #region GETTERS skillmodel, skillbase, skillPerkData, perkBase
         public List<PerkData> GetSkillPerkData(SkillNames _skillName)
@@ -396,10 +458,6 @@ namespace Combat
 
         #endregion 
 
-
-
-
-   
         public bool IsPerkClickable(SkillNames skillName, PerkNames perkName)
         {
             int lvl = 0; 
@@ -607,7 +665,7 @@ namespace Combat
         }
 
 
-        #region GET PerkData, clickedPerksList, isPreLvlClickedCheck, 
+        #region GET PERKDATA, clickedPerksList, isPreLvlClickedCheck, 
 
         public PerkData GetPerkData(PerkNames _perkName)
         {
@@ -921,6 +979,14 @@ namespace Combat
                 return false;
             
             return true;
+        }
+
+        public void LevelUpByOneSkill(SkillModel skillModel)
+        {
+            skillModel.skillLvl++;
+            // reduce skill points
+            CharModel charModel = CharService.Instance.GetCharCtrlWithCharID(skillModel.charID).charModel; 
+            charModel.skillPts--;
         }
 
         public bool HasNoStamina(SkillModel _skillModel)

@@ -110,8 +110,7 @@ namespace Common
             {
                 skillPtsTrans = transform.GetChild(1).GetChild(0); 
                 skillPtsTrans.GetComponent<TextMeshProUGUI>().text = skilllvlInt.ToString();
-            }
-                
+            } 
         }
 
         void HideSkillCard()

@@ -26,9 +26,7 @@ namespace Common
 
 
         private void Start()
-        {
-            //charNameTrans = transform.GetChild(0); 
-            
+        { 
             InvService.Instance.OnCharSelectInvPanel += FillLeftSkillPanel;
             // Get ABBAS
             CharModel charModel = CharService.Instance.GetAllyController(CharNames.Abbas).charModel;
@@ -115,24 +113,11 @@ namespace Common
                 campSkillTrans.parent.GetChild(0).GetChild(1).gameObject.SetActive(false);// Uzu heading 
                 campSkillTrans.GetChild(2).gameObject.SetActive(false);
             }
-      
-            //SkillData skillData = skillDataSO.allSkills.Find(t => t.skillType == SkillTypeCombat.Uzu);
-            //if(skillData != null)
-            //{
-            //    campSkillTrans.GetChild(2).gameObject.SetActive(true);
-            //    campSkillTrans.GetChild(2).GetComponent<Image>().sprite = skillData.skillIconSprite;
-            //}
-            //else
-            //{
-            //    campSkillTrans.GetChild(2).gameObject.SetActive(false);
-            //}
         }
 
         #endregion
 
         #region CLICKED UNSKILLED STATE
-
-        // if one is clicked .. unclick all others
         public void UnClickAllSkillState()
         {
             foreach(var child in transform.GetComponentsInChildren<InvSkillBtnPtrEvents>())
@@ -140,12 +125,10 @@ namespace Common
                 child.SetUnClick(); 
             }
         }
-
-
         #endregion 
         void PopulateTheSkillPoints()
         {
-
+            // get the text component
         }
     }
 }

@@ -29,9 +29,9 @@ namespace Combat
 
         float dmgMod = 0;
 
-        public override void SkillInit(SkillController1 skillController)
+        public override void PerkInit(SkillController1 skillController)
         {
-            base.SkillInit(skillController);
+            base.PerkInit(skillController);
             initialdmg = skillModel.damageMod;
             dmgMod = initialdmg; 
         }

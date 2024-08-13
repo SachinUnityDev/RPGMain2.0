@@ -31,9 +31,9 @@ namespace Combat
             SkillService.Instance.SkillWipe += skillController.allSkillBases.Find(t => t.skillName == skillName).WipeFX2;
         }
 
-        public override void SkillSelected()
+        public override void PerkSelected()
         {
-            base.SkillSelected();
+            base.PerkSelected();
             SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).RemoveFX2;
 
         }

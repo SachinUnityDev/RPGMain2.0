@@ -47,28 +47,27 @@ namespace Combat
             charController = skillController.GetComponent<CharController>();
             charID = charController.charModel.charID; 
             skillData = skillDataSO.allSkills.Find(t => t.skillName == skillName);
+
+            skillModel = skillController.allSkillModels?.Find(t => t.skillName == skillName && t.charID == charID);
+
             if(skillModel== null)
             {
-                skillModel = new SkillModel(skillData);
-                //skillModel.skillID = skillController.skillID;
+                skillModel = new SkillModel(skillData);        
                 skillModel.charID = charID;
-                //SkillService.Instance.allSkillModels.Add(skillModel);
-
                 if (this.skillController.allSkillModels.Any(t => t.skillName == skillName))
                 {
                     int index =
                     this.skillController.allSkillModels.FindIndex(t => t.skillName == skillName);
                     this.skillController.allSkillModels.RemoveAt(index);
                 }
-                this.skillController.allSkillModels.Add(skillModel);   // lastest skillModel for ref
-                charGO = this.skillController.gameObject;
+                this.skillController.allSkillModels.Add(skillModel);   // lastest skillModel for ref      
             }
-            if(GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
+            charGO = this.skillController.gameObject;
+            if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
             {
                 myDyna = GridService.Instance.GetDyna4GO(charGO);       
                 PopulateTargetPos();
-            }
-            
+            }            
         }
         //void OnCharClicked(CharController charController)
         //{

@@ -1,1 +1,1 @@
-{"charInParty":[]}
+{"charInParty":[7,3]}

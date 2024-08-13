@@ -32,9 +32,9 @@ namespace Combat
             skillModel.castPos.Clear();
             skillModel.castPos = new List<int> { 1,2,3,4,5,6,7 };
         }
-        public override void SkillSelected()
+        public override void PerkSelected()
         {
-            base.SkillSelected();
+            base.PerkSelected();
             SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).RemoveFX3;
         }
 

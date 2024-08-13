@@ -1,1 +1,1 @@
-{"charInParty":[3]}
+{"charInParty":[7]}

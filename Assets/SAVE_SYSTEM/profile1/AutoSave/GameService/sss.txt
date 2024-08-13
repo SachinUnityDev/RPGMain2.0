@@ -1,0 +1,1 @@
+{"profileSlot":0,"profileName":"sss","saveSlot":0,"gameScene":2,"gameDifficulty":0,"locationName":1,"landscapeNames":0,"abbasClassType":7,"jobSelect":0,"isCurrGameModel":true,"calDate":{"monthName":0,"day":0}}

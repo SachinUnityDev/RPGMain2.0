@@ -1,0 +1,1 @@
+{"skillName":28,"perkName":166,"state":2,"perkType":4,"perkLvl":2,"preReqList":[44],"pipeRel":[3,3]}

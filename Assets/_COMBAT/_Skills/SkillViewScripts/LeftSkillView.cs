@@ -14,8 +14,6 @@ namespace Common
         SkillController1 selectSkillController;
         SkillDataSO skillDataSO;
 
-     
-
         [Header("Inv Skill Main Panel")]
         public InvSkillViewMain skillViewMain;
 

@@ -750,10 +750,12 @@ namespace Combat
             // browse thru all files in the folder and load them
             // as char Models 
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            string pathSkillModel = path + "SkillModels/";
+            string pathPerkModel = path + "PerkModels/";
             List<SkillModel> allSkillModels = new List<SkillModel>();   
-            if (SaveService.Instance.DirectoryExists(path))
+            if (SaveService.Instance.DirectoryExists(pathSkillModel))
             {
-                string[] fileNames = Directory.GetFiles(path);
+                string[] fileNames = Directory.GetFiles(pathSkillModel);
                 foreach (string fileName in fileNames)
                 {
                     // skip meta files
@@ -774,6 +776,31 @@ namespace Combat
             {
                 Debug.LogError("Service Directory missing");
             }
+            List<PerkData> allPerkData = new List<PerkData>();  
+            if (SaveService.Instance.DirectoryExists(pathPerkModel))
+            {
+                string[] fileNames = Directory.GetFiles(pathPerkModel);
+                foreach (string fileName in fileNames)
+                {
+                    // skip meta files
+                    if (fileName.Contains(".meta")) continue;
+                    string contents = File.ReadAllText(fileName);
+                    PerkData perkData = JsonUtility.FromJson<PerkData>(contents);
+                    allPerkData.Add(perkData);
+                }
+                foreach (CharController charCtrl in CharService.Instance.charsInPlayControllers)
+                {
+                    //SkillController1 skillController = charCtrl.skillController;
+                    //List<SkillModel> allCharSkillModel = allPerkData.FindAll(t => t.charID == charCtrl.charModel.charID); 
+                    //skillController.allSkillModels = allCharSkillModel.DeepClone();
+                    //skillController.LoadSkillList(charCtrl);// also init perk list
+                }
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing");
+            }
+
         }
         public void ClearState()
         {
@@ -816,7 +843,7 @@ namespace Combat
                 foreach (PerkData perkData in skillController.allSkillPerkData)
                 {
                     string perkDataJSON = JsonUtility.ToJson(perkData);
-                    string fileName = pathSkillModel + perkData.perkName.ToString()
+                    string fileName = pathPerkModel + perkData.perkName.ToString()
                                         + "_" + perkData.skillName.ToString() + ".txt";
                     File.WriteAllText(fileName, perkDataJSON);
                 }

@@ -89,12 +89,12 @@ namespace Common
         }
 
         // Example usage within the class
-        public void PrintAllDirectories(string path)
+        public void ClearAllDirectories(string path)
         {
             string[] directories = GetAllDirectories(path);
             foreach (string directory in directories)
             { 
-                PrintAllDirectories(directory);
+                ClearAllDirectories(directory);
                // Debug.Log("DIR"+directory);
                 string [] files = GetAllTxtFiles(directory);    
                 foreach (string file in files)
@@ -676,7 +676,7 @@ namespace Common
         {
             if (Input.GetKeyDown(KeyCode.F10))
             {
-                PrintAllDirectories(Application.dataPath + basePath);
+                ClearAllDirectories(Application.dataPath + basePath);
             }
         }
 
@@ -692,13 +692,6 @@ namespace Common
         Slot3,
         Slot4,        
     }
-    //public enum SaveMode
-    //{
-    //    None,
-    //    QuickSave, // press F5
-    //    AutoSave, // at every check point// MB Mode has only auto save
-    //    ManualSave, // save
-    //}
     public enum ProfileSlot
     {
         Profile1,

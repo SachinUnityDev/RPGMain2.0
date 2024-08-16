@@ -51,7 +51,7 @@ namespace Combat
 
         public override void DisplayFX1()
         {
-          
+        
         }
 
         public override void DisplayFX2()

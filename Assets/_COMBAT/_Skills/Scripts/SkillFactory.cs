@@ -24,22 +24,6 @@ namespace Combat
         }
 
 
-        //public PerkType perkType;
-        //public SkillLvl perkLvl;
-        //public List<PerkNames> preReqList = new List<PerkNames>();
-
-        //public PerkModelData(Type _perkBase, SkillNames _skillName, PerkNames _perkName,
-        //    PerkType _perkType, SkillLvl _perkLvl, List<PerkNames> _preReqList, PerkSelectState _state)
-        //{
-        //   // state = _state;
-        //    skillName = _skillName;
-        //    perkName = _perkName;
-        //    //perkType = _perkType;
-        //    //perkLvl = _perkLvl;
-        //    //perkBase = _perkBase;
-        //    //preReqList = _preReqList;
-        //}
-
     }
     public class SkillFactory : MonoBehaviour
     {
@@ -136,7 +120,7 @@ namespace Combat
             return null; 
         }
        
-        public List<PerkBaseData> GetSkillPerkData(SkillNames _skillName)
+        public List<PerkBaseData> GetSkillPerkBaseData(SkillNames _skillName)
         {
             List<PerkBaseData> skillPerkData = SkillService.Instance.skillFactory.allPerksBaseData
                                                   .Where(t => t.skillName == _skillName).ToList();

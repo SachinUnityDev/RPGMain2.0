@@ -14,7 +14,6 @@ namespace Combat
         public int skillID;
         public int charID;
         public string skillDesc;
-        public Sprite skillSprite;
         public SkillTypeCombat skillType;
         public StrikeNos strikeNos;
         [Tooltip("-1 for NA , 0 for Locked and 1 for Unlocked.")]
@@ -39,8 +38,8 @@ namespace Combat
         // // EXTRA Parameters
         public List<PerkHexData> allPerkHexes = new List<PerkHexData>();
         public List<PerkType> perkChain = new List<PerkType>();
-        List<string> descLines = new List<string>();
-        List<string> perkDescLines = new List<string>();
+        public List<string> descLines = new List<string>();
+        [SerializeField] List<string> perkDescLines = new List<string>();
 
         [Header("Use Limit")]
         public int noOfTimesUsed;
@@ -98,7 +97,6 @@ namespace Combat
             charName = _skillDataSO.charName;
             skillID = (int)skillName;
             skillDesc = _skillDataSO.skillDesc;
-            skillSprite = _skillDataSO.skillIconSprite;
             skillType = _skillDataSO.skillType;
             strikeNos = _skillDataSO.strikeNos;
             skillUnLockStatus = _skillDataSO.skillUnLockStatus;

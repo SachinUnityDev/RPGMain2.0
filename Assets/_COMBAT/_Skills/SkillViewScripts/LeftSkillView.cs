@@ -20,7 +20,7 @@ namespace Common
         [Header("NTBR")]
         [SerializeField] Transform charNameTrans;
         [SerializeField] Transform iconContainerTrans;
-        [SerializeField] Transform skillPtsTrans; 
+        [SerializeField] SkillPtsView skillPtsView; 
 
 
         private void Start()
@@ -29,14 +29,20 @@ namespace Common
             // Get ABBAS
             CharModel charModel = CharService.Instance.GetAllyController(CharNames.Abbas).charModel;
             FillLeftSkillPanel(charModel);
+            CharService.Instance.OnSkillPtsChg += On_SkillPtsChg;
         }
         private void OnDisable()
         {
             InvService.Instance.OnCharSelectInvPanel -= FillLeftSkillPanel;
+            CharService.Instance.OnSkillPtsChg -= On_SkillPtsChg;
         }
 
 
-
+        void On_SkillPtsChg(CharController charController, int skillval)
+        {
+            if(charController != InvService.Instance.charSelectController) return;
+            skillPtsView.Init(this);    
+        }
         #region POPULATE SKILL BTNS and Panel Content
         void FillLeftSkillPanel(CharModel charModel)
         {
@@ -52,6 +58,7 @@ namespace Common
             PopulateTheMainSkills();
             PopulateTheUtilitySkills();
             PopulateTheCampingSkillsAndUzu();    
+            skillPtsView.Init(this);
         }
         void PopulateTheMainSkills()
         {
@@ -90,8 +97,7 @@ namespace Common
             {
                 utilitySkillTrans.parent.GetChild(0).GetChild(1).gameObject.SetActive(false); // weapon heading
                 utilitySkillTrans.GetChild(2).gameObject.SetActive(false);
-            }
-                
+            }                
         }
         void PopulateTheCampingSkillsAndUzu()
         {
@@ -124,9 +130,6 @@ namespace Common
             }
         }
         #endregion 
-        void PopulateTheSkillPoints()
-        {
-            // get the text component
-        }
+    
     }
 }

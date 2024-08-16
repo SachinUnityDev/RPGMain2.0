@@ -70,7 +70,8 @@ namespace Common
                         = GameService.Instance.currGameModel.abbasClassType;
                     
                     // Set job NAME SELECT HERE 
-                }              
+                }         
+               SkillService.Instance.Init();
                 Set_GameState(GameState.OnNewGameStartComplete);
             }
             if(GameService.Instance.gameState == GameState.OnLoadGameStart)
@@ -101,6 +102,7 @@ namespace Common
                 LandscapeService.Instance.InitLandscape();  // build a load State
                 MapService.Instance.InitMapService(); // To be Put below Quest Mission ..../// build a load state
                 LootService.Instance.InitLootService();
+                SkillService.Instance.LoadState(); 
                 Set_GameState(GameState.OnLoadGameStartComplete);
             }
          

@@ -186,7 +186,7 @@ namespace Combat
             SkillController1 skillController = charController.skillController;
             SkillDataSO skillSO = SkillService.Instance.GetSkillSO(charName);
             int j = 0; 
-            foreach ( SkillModel skillModel in skillController.allSkillModels)
+            foreach ( SkillModel skillModel in skillController.charSkillModel.allSkillModels)
             {
                 if (skillModel.skillType == SkillTypeCombat.Retaliate) // Skipping retaliate skill from 
                     continue;

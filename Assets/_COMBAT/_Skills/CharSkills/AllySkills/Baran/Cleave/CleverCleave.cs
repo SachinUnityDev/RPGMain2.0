@@ -34,7 +34,7 @@ namespace Combat
         bool isPusherSelect = false; 
         public override void SkillHovered()
         {
-            foreach (PerkData perkData in skillController.allSkillPerkData)
+            foreach (PerkData perkData in skillController.charSkillModel.allSkillPerkData)
             {
                 if (perkData.state == PerkSelectState.Clicked && perkData.perkName == PerkNames.EdgyAxe)
                 {
@@ -68,7 +68,7 @@ namespace Combat
         {
             base.BaseApply();
 
-            foreach (PerkData skillModelData in skillController.allSkillPerkData)
+            foreach (PerkData skillModelData in skillController.charSkillModel.allSkillPerkData)
             {
                 if (isEdgyAxeSelect)
                 {

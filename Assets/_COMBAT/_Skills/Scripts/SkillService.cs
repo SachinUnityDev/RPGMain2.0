@@ -101,7 +101,7 @@ namespace Combat
        // public event Action SkillApply;
         public event Action OnSkillApplyMoveFx; 
         public event Action PostSkillApply; 
-        public event Action SkillHovered;
+        public event Action OnSkillHovered;
         public event Action SkillWipe;
         public event Action SkillFXRemove; 
         public event Action SkillTick;// no use for now... 
@@ -120,7 +120,8 @@ namespace Combat
         public SkillView skillView;
 
         [Header(" PASSIVE SKILLS")]    
-        public PassiveSkillFactory passiveSkillFactory; 
+        public PassiveSkillFactory passiveSkillFactory;
+        public List<CharSkillModel> allCharSkillModel = new List<CharSkillModel>();
 
 
         public int currSkillPts =10;
@@ -198,15 +199,11 @@ namespace Combat
         #region SKILL_INIT related
         public void SetDefaultSkillForChar()
         {
-            // get skillmodel and skillcontroller 
-            // loop thru all the skills set default skill to first clickable skill
-            // if no skills in the loop => pass the turn 
-
             CharController charOnTurn = CombatService.Instance.currCharOnTurn; 
             SkillController1 skillController = charOnTurn.GetComponent<SkillController1>();
 
             SkillModel defaultSkillModel = null; 
-            foreach (SkillModel skillModel in skillController.allSkillModels)
+            foreach (SkillModel skillModel in skillController.charSkillModel.allSkillModels)
             {
                 if(skillModel.GetSkillState() == SkillSelectState.Clickable)
                 {
@@ -214,14 +211,7 @@ namespace Combat
                     defaultSkillName = defaultSkillModel.skillName; 
                     break; 
                 }
-            }
-            //if(defaultSkillModel == null)
-            //{
-            //    if(charOnTurn.charModel.charMode == CharMode.Ally)
-            //     On_PostSkill(defaultSkillModel); // pass the turn
-            //}
-            //SkillDataSO skillDataSo = GetSkillSO(CombatService.Instance.currCharOnTurn.charModel.charName);
-            // defaultSkillName =  skillDataSo.allSkills[0].skillName; 
+            }           
         }
         public void PopulateSkillTargets(CharController charController)
         {
@@ -242,15 +232,6 @@ namespace Combat
             {
                 SkillController1 skillController = charCtrl.GetComponent<SkillController1>(); 
 
-                //if (skillController == null)
-                //{
-                //    skillController = charGO.gameObject.AddComponent<SkillController1>();
-                //    allSkillControllers.Add(skillController);                    
-                //   skillController.InitSkillList(skillController.charController); 
-
-                //    //SkillAIController skillAIController = character.gameObject.AddComponent<SkillAIController>();
-                //    //allSKillAIControllers.Add(skillAIController);
-                //}
                 if(skillController!= null)
                 {
                     if (skillController.charController.charModel.orgCharMode == CharMode.Enemy)
@@ -437,11 +418,10 @@ namespace Combat
         }
         public void On_SkillHovered(CharNames _charName, SkillNames skillName)
         {
-            SkillHovered = null; SkillWipe = null;
+            OnSkillHovered = null; SkillWipe = null;
             currSkillHovered = skillName; 
             currSkillController = allSkillControllers.FirstOrDefault(t => t.charName == _charName);
-            currSkillController.SkillHovered(currSkillHovered);
-            
+            currSkillController.SkillHovered(currSkillHovered);            
 
             if(SkillWipe != null)
             {
@@ -455,7 +435,7 @@ namespace Combat
                 // Debug.Log("SkillWipe is null"); 
             }            
             SkillWipe?.Invoke(); 
-            SkillHovered?.Invoke(); 
+            OnSkillHovered?.Invoke(); 
         }
         bool HasteChk(CharController charController)
         {
@@ -615,7 +595,7 @@ namespace Combat
             if (charController == null) return null; 
             SkillController1 skillController = charController.GetComponent<SkillController1>(); 
           //  Debug.Log("skillcontroller found" + skillController.allSkillBases.Count);
-            foreach (SkillModel skillModel in skillController.allSkillModels)
+            foreach (SkillModel skillModel in skillController.charSkillModel.allSkillModels)
             {
                 if (skillModel.skillName == _skillName)
                 {
@@ -745,71 +725,65 @@ namespace Combat
         }
 
         #region SAVE and LOAD
-        public void LoadState()
+
+        public void Init()
         {
-            // browse thru all files in the folder and load them
-            // as char Models 
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-            string pathSkillModel = path + "SkillModels/";
-            string pathPerkModel = path + "PerkModels/";
-            List<SkillModel> allSkillModels = new List<SkillModel>();   
-            if (SaveService.Instance.DirectoryExists(pathSkillModel))
+            if (SaveService.Instance.DirectoryExists(path))
             {
-                string[] fileNames = Directory.GetFiles(pathSkillModel);
+                if (IsDirectoryEmpty(path))
+                {
+                    allCharSkillModel.Clear(); 
+                }
+                else
+                {
+                    LoadState();
+                }
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing" + path);
+            }
+        }
+        public void LoadState()
+        {    
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+
+            // SKILL DATA LOAD
+            allCharSkillModel.Clear(); 
+            if (SaveService.Instance.DirectoryExists(path))
+            {
+                string[] fileNames = Directory.GetFiles(path);
                 foreach (string fileName in fileNames)
                 {
                     // skip meta files
                     if (fileName.Contains(".meta")) continue;
-                    string contents = File.ReadAllText(fileName);                    
-                    SkillModel skillModel = JsonUtility.FromJson<SkillModel>(contents);                    
-                    allSkillModels.Add(skillModel);
+                    string contents = File.ReadAllText(fileName);  
+                    CharSkillModel charSkillModel = JsonUtility.FromJson<CharSkillModel>(contents);
+                    
+                    allCharSkillModel.Add(charSkillModel);
                 }
                 foreach (CharController charCtrl in CharService.Instance.charsInPlayControllers)
                 {
                     SkillController1 skillController = charCtrl.skillController;
-                    List<SkillModel> allCharSkillModel = allSkillModels.FindAll(t => t.charID == charCtrl.charModel.charID);
-                    skillController.allSkillModels = allCharSkillModel.DeepClone();
-                    skillController.LoadSkillList(charCtrl);// also init perk list
+                    
+                    CharSkillModel charSkillModel = allCharSkillModel
+                                .Find(t => t.allSkillModels[0].charID == charCtrl.charModel.charID);
+                    skillController.charSkillModel = charSkillModel.DeepClone();  // inits the models 
+                    skillController.LoadSkillList(charCtrl);// also Loads perk list                 
                 }
+               
             }
             else
             {
                 Debug.LogError("Service Directory missing");
             }
-            List<PerkData> allPerkData = new List<PerkData>();  
-            if (SaveService.Instance.DirectoryExists(pathPerkModel))
-            {
-                string[] fileNames = Directory.GetFiles(pathPerkModel);
-                foreach (string fileName in fileNames)
-                {
-                    // skip meta files
-                    if (fileName.Contains(".meta")) continue;
-                    string contents = File.ReadAllText(fileName);
-                    PerkData perkData = JsonUtility.FromJson<PerkData>(contents);
-                    allPerkData.Add(perkData);
-                }
-                foreach (CharController charCtrl in CharService.Instance.charsInPlayControllers)
-                {
-                    //SkillController1 skillController = charCtrl.skillController;
-                    //List<SkillModel> allCharSkillModel = allPerkData.FindAll(t => t.charID == charCtrl.charModel.charID); 
-                    //skillController.allSkillModels = allCharSkillModel.DeepClone();
-                    //skillController.LoadSkillList(charCtrl);// also init perk list
-                }
-            }
-            else
-            {
-                Debug.LogError("Service Directory missing");
-            }
-
         }
         public void ClearState()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-            string pathSkillModel = path + "SkillModels/";
-            string pathPerkModel = path + "PerkModels/";    
-            DeleteAllFilesInDirectory(pathSkillModel);
-            DeleteAllFilesInDirectory(pathPerkModel);
-
+           
+            DeleteAllFilesInDirectory(path);
         }
         public void SaveState()
         {
@@ -818,36 +792,17 @@ namespace Combat
                 Debug.LogError("no chars in play"); return;
             }
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-            string pathSkillModel = path + "SkillModels/";
-            string pathPerkModel = path + "PerkModels/";
-            if (!Directory.Exists(pathSkillModel))
-            {
-                Directory.CreateDirectory(pathSkillModel);
-            }
-            if (!Directory.Exists(pathPerkModel))
-            {
-                Directory.CreateDirectory(pathPerkModel);
-            }
+         
             ClearState();
 
             foreach (CharController charCtrl in CharService.Instance.charsInPlayControllers)
             {
                 SkillController1 skillController = charCtrl.skillController;
-                foreach (SkillModel skillModel in skillController.allSkillModels)
-                {
-                    string skillModelJSON = JsonUtility.ToJson(skillModel);
-                    string fileName = pathSkillModel + skillModel.charName.ToString() 
-                                        + "_" + skillModel.skillName.ToString()+ ".txt";
-                    File.WriteAllText(fileName, skillModelJSON);
-                }
-                foreach (PerkData perkData in skillController.allSkillPerkData)
-                {
-                    string perkDataJSON = JsonUtility.ToJson(perkData);
-                    string fileName = pathPerkModel + perkData.perkName.ToString()
-                                        + "_" + perkData.skillName.ToString() + ".txt";
-                    File.WriteAllText(fileName, perkDataJSON);
-                }
-
+                CharSkillModel charSkillModel = skillController.charSkillModel; 
+                string charSkillModelJSON = JsonUtility.ToJson(charSkillModel);
+                string fileName = path 
+                    + charCtrl.charModel.charName.ToString()+ ".txt";
+                File.WriteAllText(fileName, charSkillModelJSON);                          
             }
         }
         #endregion   

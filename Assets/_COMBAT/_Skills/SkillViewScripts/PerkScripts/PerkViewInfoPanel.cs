@@ -33,7 +33,6 @@ namespace Interactables
             Fillheader();
             FillMidDesc();
             FillBtmPerkType();
-
         }
 
         void Fillheader()
@@ -42,7 +41,7 @@ namespace Interactables
                 = perkData.perkName.ToString().CreateSpace();
 
             List<PerkNames> preReqName = perkBase.preReqList;
-            List<PerkData> allPerkData = skillController.allSkillPerkData;
+            List<PerkData> allPerkData = skillController.charSkillModel.allSkillPerkData;
 
             string prereqStr = "";
             foreach (PerkNames perk in preReqName)
@@ -63,21 +62,21 @@ namespace Interactables
         void FillMidDesc()
         {
             List<string> descStr = SkillService.Instance.perkDescOnHover;
-            foreach (Transform child in descTrans)
-            {
-                int index = child.GetSiblingIndex(); 
-                if(descStr.Count < 0)
+            int i = 0; 
+            foreach (string str in descStr)
+            { //  child count contraint
+                if (string.IsNullOrWhiteSpace(str)) continue;
+                if (i < descTrans.childCount)
                 {
-                    child.gameObject.SetActive(true);
-                    child.GetComponent<TextMeshProUGUI>().text = descStr[index].ToString();
+                    descTrans.GetChild(i).gameObject.SetActive(true);
+                    descTrans.GetChild(i).GetComponent<TextMeshProUGUI>().text = str;
+                    i++;
                 }
                 else
                 {
-                    child.gameObject.SetActive(false);
+                    break;
                 }
-            }
-
-
+            }   
         }
         void FillBtmPerkType()
         {

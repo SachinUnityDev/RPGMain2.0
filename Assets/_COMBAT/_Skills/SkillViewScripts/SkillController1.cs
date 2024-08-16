@@ -1,5 +1,6 @@
 
 using Common;
+using Interactables;
 using Quest;
 using System;
 using System.Collections;
@@ -18,20 +19,12 @@ namespace Combat
         [SerializeField] CharMode charMode;
         public CharController charController;
         public CharNames charName;
-        
-        public int currSkillID;        
-
-        [Header("Skill Perk Data")]
-        public List<PerkData> allSkillPerkData = new List<PerkData>();
- 
+        public CharSkillModel charSkillModel;
+        public int currSkillID;
 
         [Header("All Skill and UnLocked Skill list")]
         public List<SkillNames> unLockedSkills = new List<SkillNames>();
-
-        [Header("Skill Model")]
-        public List<SkillModel> allSkillModels = new List<SkillModel>();
         public List<SkillModel> ClickableSkills = new List<SkillModel>();
-
         [Header("Skill and Perk Bases")]
         public List<SkillBase> allSkillBases = new List<SkillBase>();
         public List<PerkBase> allPerkBases = new List<PerkBase>();
@@ -125,8 +118,12 @@ namespace Combat
         public void InitSkillList(CharController charController) 
         { 
             if (this.charController.charModel.charID != charController.charModel.charID) return;
-            // stop double run// overrides 
-            if (allSkillModels.Count > 0) return; 
+          
+            if(charSkillModel == null)
+            {
+                charSkillModel = new CharSkillModel();
+            }
+            if (charSkillModel.allSkillModels.Count > 0) return;   // stop double run// overrides 
             skillDataSO = SkillService.Instance.GetSkillSO(this.charName);
             unLockedSkills.Clear(); 
             foreach (SkillData skill in skillDataSO.allSkills)
@@ -152,30 +149,28 @@ namespace Combat
         }
         public void InitPerkDataList()
         {
-            allSkillPerkData.Clear(); 
+            charSkillModel.allSkillPerkData.Clear();
             foreach (SkillNames _skillName in unLockedSkills)
             {
-                List<PerkBaseData> skillPerkData =   
-                         SkillService.Instance.skillFactory.GetSkillPerkData(_skillName);
+                List<PerkBaseData> skillPerkData =
+                         SkillService.Instance.skillFactory.GetSkillPerkBaseData(_skillName);
+                CharModel charModel = charController.charModel;
+
                 if (skillPerkData != null)
                 {
                     foreach (PerkBaseData perkData in skillPerkData)
                     {
                         PerkBase P1 = SkillService.Instance.skillFactory
                                             .GetPerkBase(perkData.skillName, perkData.perkName);
-
-                        Debug.Log("PERKANME..." + P1.perkName);
                         allPerkBases.Add(P1);// perk bases
                         P1.PerkInit(this);
-
-                        PerkData perkModel = new PerkData(P1.skillName, P1.perkName, P1.state,
+                        PerkData perkModel = new PerkData(charModel.charID, P1.skillName, P1.perkName, P1.state,
                             P1.perkType, P1.skillLvl, P1.preReqList);
-                        allSkillPerkData.Add(perkModel);  // model data captures state and lvl
-                      //  SetPerkState(perkModel);
+                        charSkillModel.allSkillPerkData.Add(perkModel);  // model data captures state and lvl
+                                                                         //  SetPerkState(perkModel);
                     }
                 }
-            }
-           
+            }           
             perkBaseCount = allPerkBases.Count;
         }
 
@@ -189,50 +184,54 @@ namespace Combat
             // stop double run// overrides 
             unLockedSkills.Clear();
             skillDataSO = SkillService.Instance.GetSkillSO(this.charName);
-            foreach (SkillModel skillModel in allSkillModels)
+            foreach (SkillModel skillModel in charSkillModel.allSkillModels)
             {
                 if (skillModel.skillUnLockStatus == 1) // 1 = unlock, 0 locked, -1 NA
                 {
                     unLockedSkills.Add(skillModel.skillName);
                 }
             }
-            foreach (SkillModel skillModel in allSkillModels)
+            foreach (SkillModel skillModel in charSkillModel.allSkillModels)
             {
                 SkillBase skillbase = SkillService.Instance.skillFactory.GetSkill(skillModel.skillName);
                 skillbase.charName = skillDataSO.charName;
                 allSkillBases.Add(skillbase);
                 skillbase.SkillInit(this); // pass in all the params when all skills are coded
             }
-            skillbaseCount = allSkillBases.Count;
+            skillbaseCount = allSkillBases.Count;    
             LoadPerkDataList();
         }
 
-        void LoadPerkDataList()
-        {            
+        public void LoadPerkDataList()
+        {
+            if (allPerkBases.Count > 0) return; 
             foreach (SkillNames _skillName in unLockedSkills)
             {
-                List<PerkBaseData> skillPerkData =
-                         SkillService.Instance.skillFactory.GetSkillPerkData(_skillName);
-                
-                if (skillPerkData != null)
+                // this check whether the skill has perks or not and gets the list
+                List<PerkBaseData> skillPerkBaseData =
+                         SkillService.Instance.skillFactory.GetSkillPerkBaseData(_skillName);
+
+                if (skillPerkBaseData != null)
                 {
-                    foreach (PerkBaseData perkData in skillPerkData)
+                    foreach (PerkBaseData perkData in skillPerkBaseData)
                     {
-                        //PerkBase P1 = SkillService.Instance.skillFactory
-                        //                    .GetPerkBase(perkData.skillName, perkData.perkName);
-
-                        //Debug.Log("PERKANME..." + P1.perkName);
-                        //allPerkBases.Add(P1);// perk bases
-                        //P1.PerkInit(this); // find the loaded skill model and set it to perkbase
-
-                        //PerkData perkModel = new PerkData(P1.skillName, P1.perkName, P1.state,
-                        //    P1.perkType, P1.skillLvl, P1.preReqList);
-                        //allSkillPerkData.Add(perkModel);  // model data captures state and lvl
-                                                          //  SetPerkState(perkModel);
+                        PerkBase P1 = SkillService.Instance.skillFactory
+                                            .GetPerkBase(perkData.skillName, perkData.perkName);
+                        allPerkBases.Add(P1);// perk bases
+                        P1.PerkInit(this); // find the loaded skill model and set it to perkbase
+                            
+                        if(!charSkillModel.allSkillPerkData.Any(t=>t.perkName == perkData.perkName))
+                        {
+                            int charID = charController.charModel.charID;
+                            PerkData perkModel = new PerkData(charID, P1.skillName, P1.perkName, P1.state,
+                                P1.perkType, P1.skillLvl, P1.preReqList);
+                            charSkillModel.allSkillPerkData.Add(perkModel);  // model data captures state and lvl
+                            SetPerkState(perkModel);
+                        }
+                            
                     }
                 }
             }
-
             perkBaseCount = allPerkBases.Count;
         }
 
@@ -244,13 +243,11 @@ namespace Combat
         {
             if (_skillName == SkillNames.None) return;
             SkillService.Instance.skillModelHovered.perkChain.Clear();
-            //  SkillService.Instance.skillModelHovered.descLines.Clear();
-            Debug.Log(" all Skill bases count" + allSkillBases.Count +
-                            "all perk bases count" + allPerkBases + " SKillname" + _skillName);
+            SkillService.Instance.skillModelHovered.descLines.Clear();  // clear lines before repopulation           
 
             allSkillBases.Find(t => t.skillName == _skillName).SkillHovered();
 
-            List<PerkData> clickedPerkList = allSkillPerkData
+            List<PerkData> clickedPerkList = charSkillModel.allSkillPerkData
                 .Where(t => t.skillName == _skillName && t.state == PerkSelectState.Clicked).ToList();
 
             clickedPerkList.ForEach(t => SkillService.Instance.skillModelHovered.perkChain.Add(t.perkType));
@@ -262,11 +259,11 @@ namespace Combat
         {
             allSkillBases.Find(t => t.skillName == _skillName).SkillSelected();
 
-            List<PerkData> clickedPerkList = allSkillPerkData
+            List<PerkData> clickedPerkList = charSkillModel.allSkillPerkData
                 .Where(t => t.skillName == _skillName && t.state == PerkSelectState.Clicked).ToList();
 
 
-            foreach (var skillPerkdata in allSkillPerkData)
+            foreach (var skillPerkdata in charSkillModel.allSkillPerkData)
             {
                 if ((skillPerkdata.skillName == _skillName) && (skillPerkdata.state == PerkSelectState.Clicked))
                 {
@@ -288,8 +285,8 @@ namespace Combat
         #region GETTERS skillmodel, skillbase, skillPerkData, perkBase
         public List<PerkData> GetSkillPerkData(SkillNames _skillName)
         {
-            List<PerkData> allPerkData = 
-                    allSkillPerkData.Where(t => t.skillName == _skillName).ToList();
+            List<PerkData> allPerkData =
+                    charSkillModel.allSkillPerkData.Where(t => t.skillName == _skillName).ToList();
             if(allPerkData.Count >  0)
                 return allPerkData;
             else
@@ -300,7 +297,7 @@ namespace Combat
         }
         public SkillModel GetSkillModel(SkillNames skillName)
         {
-            SkillModel skillModel = allSkillModels.Find(t => t.skillName == skillName); 
+            SkillModel skillModel = charSkillModel.allSkillModels.Find(t => t.skillName == skillName); 
             if(skillModel != null)
             {
                 return skillModel;
@@ -351,21 +348,19 @@ namespace Combat
                         UpdateDataPerkState(ClickedPerkData.perkName, PerkSelectState.Clicked);
                     else return;
 
-                    //if (charController.charModel.skillPts > 0)
-                    //    charController.charModel.skillPts--;
-                    //else return;
+                    if (charController.charModel.skillPts > 0)
+                        CharService.Instance.On_SkillPtsChg(charController, -1); 
+                        
+                    else return;
                     SetPerkState(ClickedPerkData);
                     
                 }
             }
-            //SkillViewService.. Update skillBtn State.. skill points in view 
-         
-
         }        
         void SetSameLvlPerkUnClickable(PerkData perkData)
         {
             SkillNames skillName = perkData.skillName;
-            foreach (PerkData perk in allSkillPerkData)
+            foreach (PerkData perk in charSkillModel.allSkillPerkData)
             {
                 if (perk.skillName != skillName) continue;
                 if(perk.perkName != perkData.perkName)
@@ -386,7 +381,7 @@ namespace Combat
                 SetSameLvlPerkUnClickable(clickedPerkData);
             }
             
-            foreach (PerkData perk in allSkillPerkData)
+            foreach (PerkData perk in charSkillModel.allSkillPerkData)
             {
                 if (perk.skillName != skillName) continue; 
                 SkillLvl nextlvl = clickedPerkData.perkLvl + 1;
@@ -408,7 +403,7 @@ namespace Combat
                     }
                 }
             }
-            foreach (PerkData perk in allSkillPerkData)
+            foreach (PerkData perk in charSkillModel.allSkillPerkData)
             {
                 if (perk.skillName != skillName) continue;
                 SkillLvl nextlvl = clickedPerkData.perkLvl + 2;
@@ -437,7 +432,7 @@ namespace Combat
                     }
                 }
             }
-            foreach (PerkData perk in allSkillPerkData)
+            foreach (PerkData perk in charSkillModel.allSkillPerkData)
             {
                 UpdatePerkRel(perk);
             }
@@ -446,14 +441,14 @@ namespace Combat
         void UpdateDataPerkState(PerkNames _perkName, PerkSelectState _state)
         {
             if (_perkName == PerkNames.None) return;
-            foreach (var perkbase in allPerkBases)
+            foreach (var perkbase in allPerkBases)  // base update 
             {
                 if (perkbase.perkName == _perkName)
                 {
                     perkbase.state = _state;
                 }
             }
-            PerkData perkData = GetPerkData(_perkName);
+            PerkData perkData = GetPerkData(_perkName);// perkData update
             perkData.state = _state;
          
             SkillService.Instance.On_PerkStateChg(perkData);
@@ -464,7 +459,7 @@ namespace Combat
         public bool IsPerkClickable(SkillNames skillName, PerkNames perkName)
         {
             int lvl = 0; 
-            foreach (PerkData pData in allSkillPerkData)
+            foreach (PerkData pData in charSkillModel.allSkillPerkData)
             {
                 if(pData.state == PerkSelectState.Clicked && pData.skillName == skillName)
                 {
@@ -485,7 +480,7 @@ namespace Combat
         public void UpdatePerkRel(PerkData clickedPerkData)
         {
             SkillNames skillName = clickedPerkData.skillName;
-            foreach (PerkData perk in allSkillPerkData)
+            foreach (PerkData perk in charSkillModel.allSkillPerkData)
             {
                 if (perk.skillName != skillName) continue;
                
@@ -674,7 +669,7 @@ namespace Combat
         {
             if (_perkName == PerkNames.None) return null;   
             PerkData perkData = 
-                    allSkillPerkData.Find(t => t.perkName == _perkName);
+                    charSkillModel.allSkillPerkData.Find(t => t.perkName == _perkName);
             if (perkData != null)
                 return perkData;
             else
@@ -685,7 +680,7 @@ namespace Combat
         {
             List<PerkBaseData> perks = new List<PerkBaseData>(); 
               
-            List<PerkData> allPerks = allSkillPerkData.Where(t => t.skillName == _skillName 
+            List<PerkData> allPerks = charSkillModel.allSkillPerkData.Where(t => t.skillName == _skillName 
                                                         && t.state ==PerkSelectState.Clicked).ToList();
             
             return allPerks;
@@ -739,7 +734,7 @@ namespace Combat
         public SkillModel SkillSelectByAI()
         {
             float netBaseWt = 0f; ClickableSkills.Clear();
-            foreach (SkillModel skillModel in allSkillModels)
+            foreach (SkillModel skillModel in charSkillModel.allSkillModels)
             {   
                 UpdateSkillState(skillModel);
                 if (skillModel.GetSkillState() == SkillSelectState.Clickable)
@@ -778,7 +773,7 @@ namespace Combat
             int currRd = CombatEventService.Instance.currentRound;
             SkillDmgModData skillBuffModVal = new SkillDmgModData(skillModId, causeType, causeName, skillInclination
                                                                                     , dmgVal, timeFrame, castTime, currRd);
-            foreach (SkillModel skillModel in allSkillModels)
+            foreach (SkillModel skillModel in charSkillModel.allSkillModels)
             {
                 if(skillModel.skillInclination == skillInclination)
                         skillModel.damageMod += dmgVal; 
@@ -791,7 +786,7 @@ namespace Combat
             int index = allSkillDmgMod.FindIndex(t=>t.skillModID== skillModId);
             if (index != -1)
             {
-                foreach (SkillModel skillModel in allSkillModels)
+                foreach (SkillModel skillModel in charSkillModel.allSkillModels)
                 {
                     if (skillModel.skillInclination == allSkillDmgMod[index].skillInclination)
                             skillModel.damageMod -= allSkillDmgMod[index].dmgVal;
@@ -838,7 +833,7 @@ namespace Combat
 
         void ResetNoOfTimeUsedOnEOC()
         {
-            foreach (SkillModel skillModel in allSkillModels)
+            foreach (SkillModel skillModel in charSkillModel.allSkillModels)
             {
                 skillModel.noOfTimesUsed = 0; 
             }
@@ -893,7 +888,7 @@ namespace Combat
             if (GameService.Instance.currGameModel.gameScene != GameScene.InCombat) return;
             if (!CharService.Instance.allCharInCombat.Any(t => t.charModel.charID == charController.charModel.charID)) return;
            // Debug.Log(" CHAR SKILL UPDATE" + charController.charModel.charName);
-            foreach (SkillModel skillModel in allSkillModels)
+            foreach (SkillModel skillModel in charSkillModel.allSkillModels)
             {
                 UpdateSkillState(skillModel);
             }
@@ -1077,7 +1072,7 @@ namespace Combat
 
         void OnEOCReset()
         {
-            foreach (SkillModel skillModel  in allSkillModels)
+            foreach (SkillModel skillModel  in charSkillModel.allSkillModels)
             {
                 skillModel.lastUsedInRound = 0; 
             }

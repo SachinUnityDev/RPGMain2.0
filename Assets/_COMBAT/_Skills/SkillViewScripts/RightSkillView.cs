@@ -72,7 +72,7 @@ namespace Common
             if (CharBGImg == null) return;
             CharBGImg.sprite = skillDataSO.rightInvSkillPanelBG;
             scrollList.Clear();
-            if(selectSkillController.allSkillModels.Count == 0) // to ctrl bug inv view 
+            if(selectSkillController.charSkillModel.allSkillModels.Count == 0) // to ctrl bug inv view 
             {
                 charController.skillController.InitSkillList(charController);
             }
@@ -81,18 +81,13 @@ namespace Common
                 charController.skillController.LoadSkillList(charController);
             }
 
-            for (int i = 0; i < selectSkillController.allSkillModels.Count; i++)
+            for (int i = 0; i < selectSkillController.charSkillModel.allSkillModels.Count; i++)
             {
-                if (selectSkillController.allSkillModels[i].skillType == SkillTypeCombat.Retaliate)
+                if (selectSkillController.charSkillModel.allSkillModels[i].skillType == SkillTypeCombat.Retaliate)
                     continue; 
-                scrollList.Add(selectSkillController.allSkillModels[i]); 
+                scrollList.Add(selectSkillController.charSkillModel.allSkillModels[i]); 
             }
-            //if(charController.charModel.charName == CharNames.Abbas)
-            //{
-            //    SkillModel skillModel = selectSkillController.allSkillModels
-            //                            .Find(t => t.skillType == SkillTypeCombat.Uzu); 
-            //    scrollList.Add(skillModel);
-            //}
+       
 
             FillSkillScroll(scrollList[0]); 
 

@@ -211,7 +211,7 @@ namespace Common
             {
                 foreach (SaveSlot saveSlot in Enum.GetValues(typeof(SaveSlot)))
                 {                   
-                    string path = SaveService.Instance.GetServicePath(saveSlot,servicePath, profileSlot );                   
+                    string path = SaveService.Instance.GetServicePath(saveSlot,servicePath, profileSlot);                   
                     if (SaveService.Instance.DirectoryExists(path))
                     { // loop thru all profiles and load them
                         string[] fileNames = Directory.GetFiles(path);

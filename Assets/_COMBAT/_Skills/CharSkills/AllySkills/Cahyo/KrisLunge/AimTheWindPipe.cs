@@ -27,7 +27,7 @@ namespace Combat
         {
             base.SkillHovered();
             
-            SkillService.Instance.SkillHovered += 
+            SkillService.Instance.OnSkillHovered += 
                 skillController.allPerkBases
                 .Find(t => t.skillName == skillName && t.skillLvl == SkillLvl.Level2).WipeFX2; // stm drain
 

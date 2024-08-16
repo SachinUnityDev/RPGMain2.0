@@ -48,19 +48,19 @@ namespace Combat
             charID = charController.charModel.charID; 
             skillData = skillDataSO.allSkills.Find(t => t.skillName == skillName);
 
-            skillModel = skillController.allSkillModels?.Find(t => t.skillName == skillName && t.charID == charID);
+            skillModel = skillController.charSkillModel.allSkillModels?.Find(t => t.skillName == skillName && t.charID == charID);
 
             if(skillModel== null)
             {
                 skillModel = new SkillModel(skillData);        
                 skillModel.charID = charID;
-                if (this.skillController.allSkillModels.Any(t => t.skillName == skillName))
+                if (this.skillController.charSkillModel.allSkillModels.Any(t => t.skillName == skillName))
                 {
                     int index =
-                    this.skillController.allSkillModels.FindIndex(t => t.skillName == skillName);
-                    this.skillController.allSkillModels.RemoveAt(index);
+                    this.skillController.charSkillModel.allSkillModels.FindIndex(t => t.skillName == skillName);
+                    this.skillController.charSkillModel.allSkillModels.RemoveAt(index);
                 }
-                this.skillController.allSkillModels.Add(skillModel);   // lastest skillModel for ref      
+                this.skillController.charSkillModel.allSkillModels.Add(skillModel);   // lastest skillModel for ref      
             }
             charGO = this.skillController.gameObject;
             if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
@@ -97,10 +97,10 @@ namespace Combat
         {
 
             SkillService.Instance.skillModelHovered = skillModel;
-            SkillService.Instance.SkillHovered += DisplayFX1;
-            SkillService.Instance.SkillHovered += DisplayFX2;
-            SkillService.Instance.SkillHovered += DisplayFX3;
-            SkillService.Instance.SkillHovered += DisplayFX4;
+            SkillService.Instance.OnSkillHovered += DisplayFX1;
+            SkillService.Instance.OnSkillHovered += DisplayFX2;
+            SkillService.Instance.OnSkillHovered += DisplayFX3;
+            SkillService.Instance.OnSkillHovered += DisplayFX4;
         }
 
         public virtual void BaseApply() 
@@ -142,10 +142,10 @@ namespace Combat
         public abstract void DisplayFX3();
         public abstract void DisplayFX4();
 
-        public virtual void WipeFX1() => SkillService.Instance.SkillHovered -= DisplayFX1;
-        public virtual void WipeFX2() => SkillService.Instance.SkillHovered -= DisplayFX2;
-        public virtual void WipeFX3() => SkillService.Instance.SkillHovered -= DisplayFX3;
-        public virtual void WipeFX4() => SkillService.Instance.SkillHovered -= DisplayFX4;
+        public virtual void WipeFX1() => SkillService.Instance.OnSkillHovered -= DisplayFX1;
+        public virtual void WipeFX2() => SkillService.Instance.OnSkillHovered -= DisplayFX2;
+        public virtual void WipeFX3() => SkillService.Instance.OnSkillHovered -= DisplayFX3;
+        public virtual void WipeFX4() => SkillService.Instance.OnSkillHovered -= DisplayFX4;
         public virtual void RemoveFX1() => SkillService.Instance.OnSkillApply -= ApplyFX1;
         public virtual void RemoveFX2() => SkillService.Instance.OnSkillApply -= ApplyFX2;
         public virtual void RemoveFX3() => SkillService.Instance.OnSkillApply -= ApplyFX3;

@@ -34,12 +34,21 @@ namespace Common
 
         public void Init()
         {
+            SkillService.Instance.OnSkillHovered += SkillHovered;  
             Load();
+
         }
 
         public void Load()
         {
             BtmCharViewController.gameObject.transform.SetParent(transform);
+
+        }
+
+        void SkillHovered()
+        {
+
+
         }
 
         public void UnLoad()
@@ -51,6 +60,7 @@ namespace Common
         {
             OnSkillSelectedInPanel.Invoke(skillModel);
         }
+
 
         public HelpName GetHelpName()
         {

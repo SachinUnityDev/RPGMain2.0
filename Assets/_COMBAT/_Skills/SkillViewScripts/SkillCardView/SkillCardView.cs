@@ -2,6 +2,7 @@ using Common;
 using Interactables;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -215,8 +216,12 @@ namespace Combat
             // for three hexes get 
             List<PerkType> perkChain = skillModel.perkChain; 
             PerkHexData perkHexData = skillDataSO.GetPerkHexData(perkChain, skillName);
-
+            if(perkHexData == null)
+            {               
+                return;
+            }
             int i = 0;
+            if(perkHexData.hexNames.Count() > 0)
             foreach (HexNames perkHex in perkHexData.hexNames)
             {
                 topTrans.GetChild(3).GetChild(i).GetComponent<Image>().sprite =

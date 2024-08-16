@@ -55,6 +55,8 @@ namespace Combat
             skillViewMain = _skillViewMain;
             this.skillModel = skillModel; 
             skillViewSO = skillViewMain.skillViewSO;
+            SetPerkBtnState(perkData.state);
+          
             OnCharSelect();
 
             // fill in name and btn image

@@ -12,6 +12,9 @@ namespace Common
     public class CharService : MonoSingletonGeneric<CharService>, ISaveable
     {
         #region DECLARATIONS
+
+
+        public event Action<CharController, int> OnSkillPtsChg;
         public event Action<CharController> OnCharDeath;
         public event Action<CharController> OnCharSpawn;
         public event Action<CharController> OnCharAddedToParty;
@@ -323,11 +326,6 @@ namespace Common
         }
 
 
-        void AddController2ls(CharController charController)
-        {
-
-        }
-
         public void UnLockChar(CharNames charName)
         {
             CharController charController  = allyInPlayControllers.Find(t=>t.charModel.charName == charName);
@@ -576,7 +574,12 @@ namespace Common
         }
 
         #endregion
-
+        public void On_SkillPtsChg(CharController charController, int chgVal)
+        {
+            CharModel charModel = charController.charModel;
+            charModel.skillPts += chgVal;
+            OnSkillPtsChg?.Invoke(charController, charModel.skillPts);  
+        }
         public void Update()
         {
             if (Input.GetKeyDown(KeyCode.F5))

@@ -20,6 +20,9 @@ namespace Common
     {
         public event Action<int,CharNames> OnCharSpawned;  // charID only to be broadcasted
 
+        // skill pts 
+        public event Action<int> OnSkillPtsChg; // broadcast skill pts after chg
+
         public event Action<StatModData> OnStatChg; 
         public event Action<AttribModData> OnAttribChg; // return the current modified value 
         public event Action<AttribModData> OnAttribCurrValSet;  // curr values 
@@ -751,14 +754,12 @@ namespace Common
             return null; 
         }
 
-
         public void HealingAsPercentOfMaxHP(CauseType causeType, int causeName, float val)
         {
             StatData statData = GetStat(StatName.health);
             float healVal = ((val / 100) * statData.maxLimit);
             ChangeStat(causeType, (int)causeName, charModel.charID,  StatName.health, healVal);
         }
-
 
         #endregion
 
@@ -767,6 +768,17 @@ namespace Common
             transform.GetChild(2).GetComponent<HPBarView>().FillHPBar(this);
         }
 
-    
+
+        #region SKILL PTS
+
+        public void On_SkillPtsChg(int chgVal)
+        {
+            charModel.skillPts -= chgVal; 
+            OnSkillPtsChg?.Invoke(charModel.skillPts);
+        }
+
+        #endregion
+
+
     }
 }

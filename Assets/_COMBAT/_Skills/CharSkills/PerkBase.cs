@@ -43,7 +43,7 @@ namespace Combat
         public virtual void PerkInit(SkillController1 skillController) 
         {
             this.skillController = skillController;
-            skillModel = skillController?.allSkillModels.Find(t => t.skillName == skillName);
+            skillModel = skillController?.charSkillModel.allSkillModels.Find(t => t.skillName == skillName);
 
             charController = this.skillController.gameObject.GetComponent<CharController>();
             charID = charController.charModel.charID;
@@ -97,11 +97,10 @@ namespace Combat
         public virtual void SkillHovered()
         {
             SkillService.Instance.skillModelHovered = skillModel;
-            SkillService.Instance.SkillHovered += DisplayFX1;
-            SkillService.Instance.SkillHovered += DisplayFX2;
-            SkillService.Instance.SkillHovered += DisplayFX3;
-            SkillService.Instance.SkillHovered += DisplayFX4;
-
+            SkillService.Instance.OnSkillHovered += DisplayFX1;
+            SkillService.Instance.OnSkillHovered += DisplayFX2;
+            SkillService.Instance.OnSkillHovered += DisplayFX3;
+            SkillService.Instance.OnSkillHovered += DisplayFX4;
         }
         public virtual void BaseApply()
         {
@@ -140,10 +139,11 @@ namespace Combat
         
         public virtual void PreApplyFX() { }
         public virtual void PostApplyFX() { }
-        public virtual void WipeFX1() => SkillService.Instance.SkillHovered -= DisplayFX1;
-        public virtual void WipeFX2() => SkillService.Instance.SkillHovered -= DisplayFX2;
-        public virtual void WipeFX3() => SkillService.Instance.SkillHovered -= DisplayFX3;
-        public virtual void WipeFX4() => SkillService.Instance.SkillHovered -= DisplayFX4;
+        public virtual void WipeFX1() => SkillService.Instance.OnSkillHovered -= DisplayFX1;
+        public virtual void WipeFX2() => SkillService.Instance.OnSkillHovered -= DisplayFX2;
+        public virtual void WipeFX3() => SkillService.Instance.OnSkillHovered -= DisplayFX3;
+        public virtual void WipeFX4() => SkillService.Instance.OnSkillHovered -= DisplayFX4;
+
         public virtual void RemoveFX1() => SkillService.Instance.OnSkillApply -= ApplyFX1;
         public virtual void RemoveFX2() => SkillService.Instance.OnSkillApply -= ApplyFX2;
         public virtual void RemoveFX3() => SkillService.Instance.OnSkillApply -= ApplyFX3;

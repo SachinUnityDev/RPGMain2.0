@@ -23,28 +23,23 @@ namespace Common
         {
             
         }
-
         public void Init()
         {
             if (lvlModel == null)
                 lvlModel = new LevelModel();
-
             isNewGInitDone = true;
         }
-        // When Ally/char is created 
         public void LevelUpInitAlly(CharController charController)  // ALLY
         {
             charModel = charController.charModel;
             CharacterSO charSO = CharService.Instance.allCharSO.GetCharSO(charModel.charName); 
-            int initLvl = charModel.charLvl;
+            int initLvl = charSO.charLvl;
             int finalLvl = charSO.spawnlvl;
             if (charModel.orgCharMode == CharMode.Ally)
             {
                 charController.ChgLevelUp(finalLvl, initLvl);                  
             }
         }
-
-        // Called from the view controller
         public void ManLvlUp(CharNames charName, List<LvlData> optionChosen)
         {
             charController = CharService.Instance.charsInPlayControllers.Find(t=>t.charModel.charName == charName);  

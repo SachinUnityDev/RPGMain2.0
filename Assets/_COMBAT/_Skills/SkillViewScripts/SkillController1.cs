@@ -349,11 +349,12 @@ namespace Combat
                     else return;
 
                     if (charController.charModel.skillPts > 0)
-                        CharService.Instance.On_SkillPtsChg(charController, -1); 
-                        
+                    {
+                        charController.charModel.skillPts--;   
+                        CharService.Instance.On_SkillPtsChg(charController, charController.charModel.skillPts);
+                    } 
                     else return;
                     SetPerkState(ClickedPerkData);
-                    
                 }
             }
         }        

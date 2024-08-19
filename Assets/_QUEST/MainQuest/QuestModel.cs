@@ -41,6 +41,10 @@ namespace Quest
 
         }
 
+        public List<ObjModel> GetAllObjModel()
+        {
+            return allObjModel; 
+        }
         public ObjModel GetObjModel(ObjNames objName)
         {
             int index = allObjModel.FindIndex(t=>t.objName== objName);

@@ -14,7 +14,7 @@ namespace Common
         #region DECLARATIONS
 
 
-        public event Action<CharController, int> OnSkillPtsChg;
+        public event Action<CharController, int> OnSkillPtsChg;  // charController, SkillPts    
         public event Action<CharController> OnCharDeath;
         public event Action<CharController> OnCharSpawn;
         public event Action<CharController> OnCharAddedToParty;
@@ -574,11 +574,9 @@ namespace Common
         }
 
         #endregion
-        public void On_SkillPtsChg(CharController charController, int chgVal)
-        {
-            CharModel charModel = charController.charModel;
-            charModel.skillPts += chgVal;
-            OnSkillPtsChg?.Invoke(charController, charModel.skillPts);  
+        public void On_SkillPtsChg(CharController charController, int pts)
+        {   
+            OnSkillPtsChg?.Invoke(charController, pts);  
         }
         public void Update()
         {

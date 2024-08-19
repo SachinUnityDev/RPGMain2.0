@@ -64,6 +64,7 @@ namespace Common
         }
         void PopulateRightSkillPanel()
         {
+            index = 0; 
             charController = InvService.Instance.charSelectController;
             selectSkillController = charController.skillController;
              

@@ -187,7 +187,6 @@ namespace Common
             this.saveSlot = saveSlot;
             this.profileSlot = profileSlot;
         }
-
         public void GameSceneLoad(GameScene gameScene)
         {
             if (gameScene == GameScene.InCore)

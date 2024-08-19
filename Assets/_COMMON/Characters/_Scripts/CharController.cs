@@ -684,9 +684,19 @@ namespace Common
         #region   LVL AND EXPERIENCE CONTROLS
         public void ChgLevelUp(int finalLvl, int initlvl)
         {
-            charModel.skillPts++;
-            if(charModel.orgCharMode == CharMode.Ally)  // ensure pets or beeastiary don t level up
-                LevelService.Instance.AutoLvlUpAlly(this, (int)initlvl, (int)finalLvl);            
+            if(finalLvl - initlvl <= 0)
+            {
+                Debug.Log("No level change");
+                return; 
+            }
+            Debug.Log("LEVEL UP" + charModel.charName);
+            for (int i = 0; i < (finalLvl -initlvl); i++)
+            {
+                charModel.skillPts++;
+                CharService.Instance.On_SkillPtsChg(this, charModel.skillPts);         
+            }
+            if (charModel.orgCharMode == CharMode.Ally)  // ensure pets or beeastiary don t level up
+                LevelService.Instance.AutoLvlUpAlly(this, (int)initlvl, (int)finalLvl);  // this take care of looping
         }
         public void ChgLevelDown()
         {
@@ -720,15 +730,6 @@ namespace Common
                 ChgLevelUp(nextlvl, initlvl); 
             }
         }
-
-        public void LvlUpOnCharSpawn()
-        {
-            // get final lvl , and spawn lvl from the so 
-            int initLvl = charSO.charLvl;
-            int finalLvl = charSO.spawnlvl;
-            ChgLevelUp(finalLvl, initLvl); 
-        }
-
         #endregion
 
         #region HUNGER AND THRIST
@@ -767,18 +768,6 @@ namespace Common
         {
             transform.GetChild(2).GetComponent<HPBarView>().FillHPBar(this);
         }
-
-
-        #region SKILL PTS
-
-        public void On_SkillPtsChg(int chgVal)
-        {
-            charModel.skillPts -= chgVal; 
-            OnSkillPtsChg?.Invoke(charModel.skillPts);
-        }
-
-        #endregion
-
 
     }
 }

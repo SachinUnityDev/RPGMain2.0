@@ -20,7 +20,6 @@ namespace Town
         [SerializeField]GameObject cornerBtns;
 
         public bool isWelcomeRun = false;
-        public bool isQuickStart = false; 
         [SerializeField] int welcomeStartDay;
         [SerializeField] int welcomeSeqEndDay; 
         private void OnEnable()
@@ -71,9 +70,9 @@ namespace Town
             cornerBtns = GameObject.FindGameObjectWithTag("TownBtns");
 
             cornerBtns.SetActive(true);
-            if (isQuickStart)
+            if (GameService.Instance.gameController.isQuickStart)
             {
-
+             
             }
             else
             {
@@ -85,12 +84,7 @@ namespace Town
             CalendarService.Instance.OnStartOfCalDate -= GoVisitTemple2dayGap;
             CalendarService.Instance.OnStartOfCalDate += GoVisitTemple2dayGap;
 
-            //            Interactions unlocked:
-            //House
-            //endday, provision, chest, cure sickness
-
-            //Tavern
-            //trophy, buy service, bounties, endday
+       
 
             BuildingIntService.Instance.houseController.UnLockBuildIntType(BuildInteractType.EndDay, true);
             BuildingIntService.Instance.houseController.UnLockBuildIntType(BuildInteractType.Provision, true);
@@ -143,7 +137,13 @@ namespace Town
 
             // Quest model update the first quest completed
             QuestModel questModel = 
-                 QuestMissionService.Instance.GetQuestModel(QuestNames.LostMemory);            
+                 QuestMissionService.Instance.GetQuestModel(QuestNames.LostMemory);   
+            
+            
+            foreach (ObjModel obj in questModel.GetAllObjModel())
+            {
+                obj.objState = QuestState.Completed;                
+            }
             questModel.OnQuestCompleted();
 
             QuestMissionService.Instance.On_QuestStart(QuestNames.ThePowerWithin);

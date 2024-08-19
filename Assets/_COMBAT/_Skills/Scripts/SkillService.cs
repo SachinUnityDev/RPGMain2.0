@@ -772,7 +772,6 @@ namespace Combat
                     skillController.charSkillModel = charSkillModel.DeepClone();  // inits the models 
                     skillController.LoadSkillList(charCtrl);// also Loads perk list                 
                 }
-               
             }
             else
             {

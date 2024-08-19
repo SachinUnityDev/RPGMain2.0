@@ -1,0 +1,1 @@
+{"DiaID":0,"dialogueName":34,"dialogueTitle":"Hey Greybrow!","npcName":7,"charName":0,"isUnLocked":false,"isRepeatable":false,"isSkippable":false,"isPlayedOnce":false,"gameScene":0,"charInDialogue":[1],"NPCinDialogue":[7],"locationName":1}

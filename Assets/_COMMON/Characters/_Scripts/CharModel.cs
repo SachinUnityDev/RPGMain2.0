@@ -143,8 +143,15 @@ namespace Common
             float barRatio = 0f;
             if (charLvl > 0)
             {
-                int delta =
-                 allLvlExpData.Find(t => t.charLvl == (charLvl + 1)).deltaExpPts;
+                int index = allLvlExpData.FindIndex(t => t.charLvl == (charLvl+1));
+                             
+                if(index == -1)
+                {
+                    Debug.LogError("Index not found for charLvl " + charLvl );
+                    return 0f; 
+                }
+                int delta = allLvlExpData[index].deltaExpPts; 
+
                 int expPts = allLvlExpData.Find(t => t.charLvl == charLvl).totalExpPts;
                 barRatio = (float)Mathf.Abs(mainExp - expPts) / delta;
             }

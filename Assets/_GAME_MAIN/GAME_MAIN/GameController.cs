@@ -56,6 +56,8 @@ namespace Common
         public void SetQuickStart(bool isQuickStart)
         {
             this.isQuickStart= isQuickStart;    
+
+
         }
     }
 

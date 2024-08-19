@@ -50,6 +50,7 @@ namespace Quest
             mapEFactory = gameObject.GetComponent<MapEFactory>();
             
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            path = path + "/QuestE/";
             if (SaveService.Instance.DirectoryExists(path))
             {
                 if (IsDirectoryEmpty(path))

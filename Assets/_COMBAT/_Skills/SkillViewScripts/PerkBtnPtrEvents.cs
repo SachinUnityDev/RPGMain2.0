@@ -180,15 +180,16 @@ namespace Combat
         #endregion
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (skillViewMain.isPerkClickAvail)// chks whether the skill pts + btn is pressed 
-            {
-                if(skillController.IsPerkClickable(skillModel.skillName, perkData.perkName))
-                    if(perkData.state== PerkSelectState.Clickable)
-                    {
-                        skillController.OnPerkClicked(perkData);                   
-                        skillViewMain.rightSkillView.FillSkillScroll(skillModel);
-                    }
-            }
+            if(skillController.charController.charModel.skillPts > 0)
+                if (skillViewMain.isPerkClickAvail)// chks whether the skill pts + btn is pressed 
+                {
+                    if(skillController.IsPerkClickable(skillModel.skillName, perkData.perkName))
+                        if(perkData.state== PerkSelectState.Clickable)
+                        {
+                            skillController.OnPerkClicked(perkData);                   
+                            skillViewMain.rightSkillView.FillSkillScroll(skillModel);
+                        }
+                }
         }
         public void OnPointerEnter(PointerEventData eventData)
         {

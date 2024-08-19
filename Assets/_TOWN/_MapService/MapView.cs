@@ -60,6 +60,7 @@ namespace Town
         }
         public void Load()
         {
+            GameService.Instance.currGameModel.gameScene = GameScene.InMapInteraction; 
             UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(this.gameObject, true); 
             worldView.gameObject.SetActive(false);
             nekkiView.gameObject.SetActive(true);   
@@ -68,6 +69,7 @@ namespace Town
         public void UnLoad()
         {
             UIControlServiceGeneral.Instance.TogglePanel(this.gameObject, false);
+            GameService.Instance.currGameModel.gameScene = GameScene.InTown;
         }
 
         public void Init()

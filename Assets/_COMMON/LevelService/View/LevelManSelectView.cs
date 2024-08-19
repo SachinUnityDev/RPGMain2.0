@@ -67,14 +67,12 @@ namespace Common
             {
                 CharModel charModel = InvService.Instance.charSelectController.charModel;
                 FillOptionPendingList(charModel);
-                Load(); 
-                //gameObject.SetActive(true);
+                Load();               
             }
             else
             {
                 UnLoad();
             }
-                //gameObject.SetActive(false);
         }
         void FillOptionPendingList(CharModel charModel)
         {

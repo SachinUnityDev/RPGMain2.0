@@ -15,13 +15,10 @@ namespace Combat
         [SerializeField] const float skillCardHt = 308f;
         [SerializeField] const float midTransHt = 111f;
 
-       
-
         [SerializeField] SkillController1 skillController;
         [SerializeField] CharController charController;
         [SerializeField] SkillModel skillModel;
         [SerializeField] SkillNames skillName;
-
 
         [Header("Transform ref NTBR")]
         [SerializeField] Transform topTrans;

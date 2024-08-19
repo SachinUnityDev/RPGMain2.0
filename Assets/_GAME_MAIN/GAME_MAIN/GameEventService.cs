@@ -58,7 +58,7 @@ namespace Common
                 LandscapeService.Instance.InitLandscape();
                 MapService.Instance.InitMapService(); // to be put below questmission
                 LootService.Instance.InitLootService();
-                if (WelcomeService.Instance.isQuickStart)
+                if (GameService.Instance.gameController.isQuickStart)
                     WelcomeService.Instance.On_QuickStart();
                 else
                     WelcomeService.Instance.InitWelcome();

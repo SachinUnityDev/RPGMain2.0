@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2393769167575966629}
   - component: {fileID: 2393769167575966634}
   - component: {fileID: 2393769167575966635}
+  - component: {fileID: 8517738626542486218}
   m_Layer: 5
   m_Name: Node2
   m_TagString: Untagged
@@ -37,7 +38,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -136, y: -406}
+  m_AnchoredPosition: {x: -168, y: -418}
   m_SizeDelta: {x: 48.186, y: 88.959}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &2393769167575966628
@@ -93,6 +94,18 @@ MonoBehaviour:
   questName: 0
   objName: 0
   nodeSeq: 0
+  pathModel:
+    questName: 0
+    objName: 0
+    questState: 0
+    objState: 0
+    currNode:
+      nodeSeq: 0
+      isChecked: 0
+      isSuccess: 0
+      noOfHalfDaysChgOnEnter: 0
+      noOfHalfDaysChgOnExit: 0
+    nodes: []
 --- !u!61 &2393769167575966635
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -106,7 +119,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -41.209625, y: 44.338783}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -117,8 +130,24 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 130.01892, y: 99.999985}
   m_EdgeRadius: 0
+--- !u!70 &8517738626542486218
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2393769167575966633}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -27.000504, y: 45.29117}
+  m_Size: {x: 118.66101, y: 118.66101}
+  m_Direction: 0
 --- !u!1 &2393769168329564488
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,6 +160,7 @@ GameObject:
   - component: {fileID: 2393769168329564487}
   - component: {fileID: 2393769168329564485}
   - component: {fileID: 2393769168329564490}
+  - component: {fileID: 7020926346081368305}
   m_Layer: 5
   m_Name: Node1
   m_TagString: Untagged
@@ -155,8 +185,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -36, y: -386}
-  m_SizeDelta: {x: 108.192, y: 105.556}
+  m_AnchoredPosition: {x: -67.239, y: -371.8922}
+  m_SizeDelta: {x: 45.715, y: 91.448}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &2393769168329564487
 CanvasRenderer:
@@ -181,6 +211,18 @@ MonoBehaviour:
   questName: 0
   objName: 0
   nodeSeq: 0
+  pathModel:
+    questName: 0
+    objName: 0
+    questState: 0
+    objState: 0
+    currNode:
+      nodeSeq: 0
+      isChecked: 0
+      isSuccess: 0
+      noOfHalfDaysChgOnEnter: 0
+      noOfHalfDaysChgOnExit: 0
+    nodes: []
 --- !u!61 &2393769168329564490
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -194,7 +236,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 41.315693}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -205,8 +247,24 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 45, y: 92.01537}
   m_EdgeRadius: 0
+--- !u!70 &7020926346081368305
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2393769168329564488}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 7.8388577, y: 42.67821}
+  m_Size: {x: 40.612286, y: 96.35526}
+  m_Direction: 0
 --- !u!1 &5883672084844912971
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,6 +334,7 @@ GameObject:
   - component: {fileID: 5883672085026186949}
   - component: {fileID: 5883672085026186946}
   - component: {fileID: 5883672085026186947}
+  - component: {fileID: 4305141292342600825}
   m_Layer: 5
   m_Name: Node3
   m_TagString: Untagged
@@ -300,7 +359,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -36, y: -389}
+  m_AnchoredPosition: {x: -36, y: -457}
   m_SizeDelta: {x: 108.19, y: 108.56}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &5883672085026186949
@@ -326,6 +385,18 @@ MonoBehaviour:
   questName: 0
   objName: 0
   nodeSeq: 0
+  pathModel:
+    questName: 0
+    objName: 0
+    questState: 0
+    objState: 0
+    currNode:
+      nodeSeq: 0
+      isChecked: 0
+      isSuccess: 0
+      noOfHalfDaysChgOnEnter: 0
+      noOfHalfDaysChgOnExit: 0
+    nodes: []
 --- !u!61 &5883672085026186947
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -339,7 +410,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 46.35419}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -350,8 +421,24 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 100, y: 95.969215}
   m_EdgeRadius: 0
+--- !u!70 &4305141292342600825
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5883672085026187001}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 41.04}
+  m_Size: {x: 101.92, y: 1}
+  m_Direction: 0
 --- !u!1 &5883672086214615559
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,6 +450,7 @@ GameObject:
   - component: {fileID: 5883672086214615556}
   - component: {fileID: 5883672086214615557}
   - component: {fileID: 5883672086214615554}
+  - component: {fileID: 1787952910073111761}
   m_Layer: 5
   m_Name: Node0
   m_TagString: Untagged
@@ -405,6 +493,18 @@ MonoBehaviour:
   questName: 0
   objName: 0
   nodeSeq: 0
+  pathModel:
+    questName: 0
+    objName: 0
+    questState: 0
+    objState: 0
+    currNode:
+      nodeSeq: 0
+      isChecked: 0
+      isSuccess: 0
+      noOfHalfDaysChgOnEnter: 0
+      noOfHalfDaysChgOnExit: 0
+    nodes: []
 --- !u!61 &5883672086214615554
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -429,5 +529,21 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 100, y: 100}
   m_EdgeRadius: 0
+--- !u!70 &1787952910073111761
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5883672086214615559}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 110.95, y: 1}
+  m_Direction: 0

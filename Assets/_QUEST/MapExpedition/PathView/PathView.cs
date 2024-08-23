@@ -40,13 +40,13 @@ namespace Quest
             if (pathModel != null)
                 pawnMove.PawnMoveInit(this, pathQView, pathModel);
         }
-        #region PAWN MOVEMENT CONTROL
-        public void MovePawnStone(Vector3 pos, float time)
-        {
-            pawnStone.DOMove(pos, time); 
-        }
+        //#region PAWN MOVEMENT CONTROL
+        //public void MovePawnStone(Vector3 pos, float time)
+        //{
+        //    pawnStone.DOMove(pos, time); 
+        //}
         
-        #endregion
+        //#endregion
 
 
         public void OnPathExit()

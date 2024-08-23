@@ -14,14 +14,14 @@ namespace Quest
 
         [TextArea(5, 10)]
         public string descTxt;
-       
+        public bool isCompleted;
 
         public QuestEModel(QuestESO questESO)
         { 
             this.questEName = questESO.questEName;
             this.questENameStr = questESO.questENameStr;
             this.descTxt = questESO.descTxt;
-         
+            isCompleted = false;
         }
     }
 }

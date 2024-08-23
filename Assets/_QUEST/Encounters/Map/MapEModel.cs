@@ -16,7 +16,7 @@ namespace Quest
         public string descTxt;
         public string choiceAStr;
         public string choiceBStr;
-
+        public bool isCompleted; 
         public MapEModel(MapESO mapESO)
         {
             mapEName =mapESO.mapEName;
@@ -25,6 +25,7 @@ namespace Quest
             descTxt = mapESO.descTxt;   
             choiceAStr= mapESO.choiceAStr;
             choiceBStr= mapESO.choiceBStr;
+            isCompleted = false;
         }
 
     }

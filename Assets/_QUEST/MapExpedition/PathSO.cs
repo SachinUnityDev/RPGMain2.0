@@ -20,12 +20,12 @@ namespace Quest
         [Header(" TimeChg On Node Exit")]
         public int noOfHalfDaysChgOnExit;
     }
-    public enum PathState
-    {
-        Locked, 
-        UnLocked, 
-        Completed, 
-    }
+    //public enum PathState
+    //{
+    //    Locked, 
+    //    UnLocked, 
+    //    Completed, 
+    //}
     [CreateAssetMenu(fileName = "PathSO", menuName = "Quest/PathSO")]
     public class PathSO : ScriptableObject
     {

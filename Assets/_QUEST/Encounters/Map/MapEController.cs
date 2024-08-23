@@ -31,6 +31,8 @@ namespace Quest
 
         public void ShowMapE(MapENames mapEName)
         {
+            if(mapEOnDsply)
+                return;
             MapEModel mapEModel = GetMapEModel(mapEName); 
             mapEView.GetComponent<MapEView>().InitEncounter(mapEModel);
             mapEOnDsply= true;

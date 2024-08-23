@@ -19,7 +19,7 @@ namespace Quest
         public string choiceAStr;
         public string choiceBStr;
         public int dayEventTaken = 0;
-        
+        public bool isCompleted; 
         
 
         public CityEModel(CityEncounterSO cityEncounterSO)
@@ -32,6 +32,7 @@ namespace Quest
             descTxt= cityEncounterSO.descTxt;
             choiceAStr= cityEncounterSO.choiceAStr;
             choiceBStr= cityEncounterSO.choiceBStr; 
+            isCompleted = false;
         }
     }
 }

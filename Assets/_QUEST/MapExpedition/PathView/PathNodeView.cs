@@ -22,7 +22,7 @@ namespace Quest
         PathQView pathQView;
 
         PathBase pathBase;
-        PathModel pathModel; 
+        [SerializeField] PathModel pathModel; 
         int index; 
         public void InitPathNodeView(PathView pathView, PathQView pathQView)
         {
@@ -133,7 +133,41 @@ namespace Quest
         void OnNodeExit()
         {
             int index = transform.GetSiblingIndex();
+            switch (nodeSeq)
+            {
+                case 0:
+                    pathBase.OnNode0Exit();
+                    break;
+                case 1:
+                    pathBase.OnNode1Exit();
+                    break;
+                case 2:
+                    pathBase.OnNode2Exit();
+                    break;
+                case 3:
+                    pathBase.OnNode3Exit();
+                    break;
+                case 4:
+                    pathBase.OnNode4Exit();
+                    break;
+                case 5:
+                    pathBase.OnNode5Exit();
+                    break;
 
+                default:
+                    break;
+            }
+            for (int i = 0; i < pathQView.transform.childCount; i++)
+            {
+                if(i == nodeSeq + 1)
+                {
+                    pathQView.transform.GetChild(i).gameObject.SetActive(true);
+                }
+                else
+                {
+                    pathQView.transform.GetChild(i).gameObject.SetActive(false);
+                }
+            }
             pathModel = MapService.Instance.pathController.GetPathModel(questName, objName);
             if (pathModel != null)
                 pathModel.nodes[index].isChecked = true; 

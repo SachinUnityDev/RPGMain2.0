@@ -22,7 +22,6 @@ namespace Town
         {
             nameTxt.gameObject.SetActive(true);
             nameTxt.text = nameStr; 
-            Debug.Log("Enter a side btn");
             rightBtnsController.isOpen = true;
             transform.DOScale(1.25f, 0.1f); 
             rightBtnsController.OpenBtns();
@@ -30,9 +29,7 @@ namespace Town
 
         public void OnPointerExit(PointerEventData eventData)
         {
-
             nameTxt.gameObject.SetActive(false);
-            Debug.Log("Exit a side btn");
             rightBtnsController.isOpen = false;
             transform.DOScale(1f, 0.1f);
             rightBtnsController.CloseBtns();

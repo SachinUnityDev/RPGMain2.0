@@ -65,8 +65,7 @@ namespace Quest
             lootRect.pivot = new Vector2(0.5f, 0.5f);
             lootRect.localScale = Vector3.one;
             if (GameService.Instance.currGameModel.gameScene == GameScene.InMapInteraction)
-            {
-                //  float offset =  parent.GetComponent<RectTransform>().rect.width / 2 + 50f; 
+            {   
                 lootRect.localPosition = new Vector3(-250, -55);
                 //lootRect.anchorMin = new Vector2(0, 0);
                 //lootRect.anchorMax = new Vector2(1, 1);

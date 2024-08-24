@@ -41,7 +41,7 @@ namespace Quest
             }
         }
 
-        public void ShowQuestEmbarkView(QuestNames questName, ObjNames objName, PathNodeView pathNodeView)
+        public void ShowQuestEmbarkView(QuestNames questName, ObjNames objName, QMarkView qMarkView)
         {
             questModel = QuestMissionService.Instance.GetQuestModel(questName);
             questBase = QuestMissionService.Instance.GetQuestBase(questName);   
@@ -49,7 +49,7 @@ namespace Quest
             objModel = questModel.GetObjModel(objName);
             
             QuestEmbarkView qEView = QuestMissionService.Instance.questEmbarkView; 
-            qEView.ShowQuestEmbarkView(questModel, questSO, questBase, objModel, pathNodeView); 
+            qEView.ShowQuestEmbarkView(questModel, questSO, questBase, objModel, qMarkView); 
         }
 
         

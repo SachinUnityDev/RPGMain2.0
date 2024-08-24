@@ -15,12 +15,13 @@ namespace Quest
         public MapEModel mapEModel;
 
         public string resultStr;
-
+        public CombatResult combatResult;
         public string strFX;
         public bool mapEResult= false;
         public virtual void MapEInit(MapEModel mapEModel)
         {
            this.mapEModel= mapEModel;
+
         }
         public abstract void OnChoiceASelect();
         public abstract void OnChoiceBSelect();    

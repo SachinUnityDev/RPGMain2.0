@@ -19,17 +19,20 @@ namespace Quest
         [SerializeField] Transform pawnStone;
         [SerializeField] PathModel pathModel;
 
-        public bool isQInProgress = false; 
+        public bool isQInProgress = false;
+        PathController PathController; 
         
-        public void PathViewInit()
+        public void PathViewInit(PathController pathController)
         {
+            this.PathController = pathController;
             MapPathContainer = FindObjectOfType<MapPathContainer>(true).transform;
             foreach (Transform node in MapPathContainer)
             {
                 PathQView pathQView =  node.GetComponent<PathQView>();  
+                
                 if (pathQView != null)
                 {
-                    pathQView.InitPathQ(this);
+                    pathQView.InitPathQ(this, pathController);
                 }
             }
         }

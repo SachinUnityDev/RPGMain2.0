@@ -14,10 +14,38 @@ namespace Quest
     public class BandOfBandits2 : MapEbase
     {
         public override MapENames mapEName => MapENames.BandOfBanditsTwo;
-        [SerializeField] Currency money2Lose; 
+        [SerializeField] Currency money2Lose;
+
         public override void MapEContinuePressed()
         {
-            EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
+            switch (combatResult)
+            {
+                case CombatResult.None:
+                    //start combat with bandits
+                    //save game 
+                    //transition to next combat Scene
+                    // start combat with Bandits
+
+                    break;
+                case CombatResult.Victory:
+                    resultStr = "You managed to defeat the bandits and continue your journey.";
+                    mapEModel.isCompleted = true;
+                    EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
+                    MapService.Instance.pathController.pathQView.Move2NextNode();
+                    break;
+                case CombatResult.Draw:
+                    resultStr = "You couldn't manage to defeat the bandits and had to retreat.";
+                    mapEModel.isCompleted = false;
+                    MapService.Instance.pathController.pathQView.SpawnInTown();
+                    break;
+                case CombatResult.Defeat:
+                    resultStr = "You were defeated by the bandits and had to retreat.";
+                    mapEModel.isCompleted = false;
+                    MapService.Instance.pathController.pathQView.SpawnInTown();
+                    break;
+                default:
+                    break;
+            }
             MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move();
         }
 

@@ -11,7 +11,7 @@ using UnityEngine.EventSystems;
 namespace Quest
 {
 
-    public class PathNodeView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class PathNodeView : MonoBehaviour
     {
         public QuestNames questName;
         public ObjNames objName;
@@ -33,54 +33,46 @@ namespace Quest
             nodeSeq = transform.GetSiblingIndex();
         }
 
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            if(!pathView.isQInProgress)
-            {
-                QuestMarkDown();
-                ShowNodeClick();
-                pathView.isQInProgress = true; 
-            }   
-        }
-        void QuestMarkDown()
-        {
-            transform.DORotate(new Vector3(0, 0, 181), 0.2f)
-                .OnComplete(() => transform.DOShakeRotation(1.5f, new Vector3(0, 0, 40), 4, 20, true));
-        }
-        void QuestMarkUp()
-        {
-            transform.DORotate(new Vector3(0, 0, 0), 0.2f);
-        }
-        void ShowNodeClick()
-        {
-            QuestMissionService.Instance
-                                   .questController.ShowQuestEmbarkView(questName, objName, this);
-        }
-        public void OnNodeInteractCancel()
-        {
-            // reset PathModel and pathbase .. Set PAth Q select to None
+        //public void OnPointerClick(PointerEventData eventData)
+        //{
+        //    if(!pathView.isQInProgress)
+        //    {
+        //        QuestMarkDown();
+        //        ShowNodeClick();
+        //        pathView.isQInProgress = true; 
+        //    }   
+        //}
+        //void QuestMarkDown()
+        //{
+        //    transform.DORotate(new Vector3(0, 0, 181), 0.2f)
+        //        .OnComplete(() => transform.DOShakeRotation(1.5f, new Vector3(0, 0, 40), 4, 20, true));
+        //}
+        //void QuestMarkUp()
+        //{
+        //    transform.DORotate(new Vector3(0, 0, 0), 0.2f);
+        //}
+        //void ShowNodeClick()
+        //{
+        //    QuestMissionService.Instance
+        //                           .questController.ShowQuestEmbarkView(questName, objName, this);
+        //}
+        //public void OnNodeInteractCancel()
+        //{
+        //    // reset PathModel and pathbase .. Set PAth Q select to None
 
-            QuestMarkUp();
-        }
+        //    QuestMarkUp();
+        //}
 
-        public void OnPathEmbark()
-        {
-            pathView.OnPathEmbark(questName, objName, pathQView);
-          // move pawn
-          // set path Model and base as the ? mark selected 
-          // Pawn scripts to control the node enter...
-          // exit to be defined by the completion of external event
-        }
+        //public void OnPathEmbark()
+        //{
+        //    pathView.OnPathEmbark(questName, objName, pathQView);
+        //  // move pawn
+        //  // set path Model and base as the ? mark selected 
+        //  // Pawn scripts to control the node enter...
+        //  // exit to be defined by the completion of external event
+        //}
 
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            
-        }
-
-        public void OnPointerExit(PointerEventData eventData)
-        {
-          
-        }
+      
 
         public void OnTriggerEnter2D(Collider2D collision)
         {
@@ -95,8 +87,8 @@ namespace Quest
         }
         public void OnTriggerExit2D(Collider2D collision)
         {
-            if (collision.gameObject.name == "PawnStone" 
-                && EncounterService.Instance.mapEController.mapEOnDsply)
+            if (collision.gameObject.name == "PawnStone"
+                && !EncounterService.Instance.mapEController.mapEOnDsply)
             {
                 OnNodeExit();
             }
@@ -109,6 +101,7 @@ namespace Quest
             {
                     case 0:
                     pathBase.OnNode0Enter(); 
+                   
                     break;
                     case 1:
                     pathBase.OnNode1Enter(); 
@@ -129,6 +122,8 @@ namespace Quest
                 default:
                     break;
             }
+            pathQView.OnNodeEnter(0);
+
         }
         void OnNodeExit()
         {
@@ -136,7 +131,7 @@ namespace Quest
             switch (nodeSeq)
             {
                 case 0:
-                    pathBase.OnNode0Exit();
+                    pathBase.OnNode0Exit();                    
                     break;
                 case 1:
                     pathBase.OnNode1Exit();
@@ -157,17 +152,7 @@ namespace Quest
                 default:
                     break;
             }
-            for (int i = 0; i < pathQView.transform.childCount; i++)
-            {
-                if(i == nodeSeq + 1)
-                {
-                    pathQView.transform.GetChild(i).gameObject.SetActive(true);
-                }
-                else
-                {
-                    pathQView.transform.GetChild(i).gameObject.SetActive(false);
-                }
-            }
+            pathQView.OnNodeExit(index);
             pathModel = MapService.Instance.pathController.GetPathModel(questName, objName);
             if (pathModel != null)
                 pathModel.nodes[index].isChecked = true; 

@@ -12,6 +12,7 @@ namespace Quest
         public MapENames mapEName;
         public string mapENameStr = "";
 
+
         [TextArea(5, 10)]
         public string descTxt;
         public string choiceAStr;

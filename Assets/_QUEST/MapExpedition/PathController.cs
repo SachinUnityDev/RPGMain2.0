@@ -40,6 +40,8 @@ namespace Quest
         public PathModel currPathModel;
         public Transform pawnTrans;
 
+        [Header(" Current Views")]         
+        public PathQView pathQView;
 
         public GameObject pathGO;
         public GameObject pathPrefab;
@@ -143,7 +145,7 @@ namespace Quest
             Transform parent = pathView.MapPathContainer.transform;
             pathGO = Instantiate(pathPrefab);
             pathGO.transform.SetParent(parent);
-            pathView.PathViewInit();
+            pathView.PathViewInit(this);
             RectTransform pathRect = pathGO.GetComponent<RectTransform>();
             pathRect.anchorMin = new Vector2(0, 0);
             pathRect.anchorMax = new Vector2(1, 1);

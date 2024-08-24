@@ -184,7 +184,6 @@ MonoBehaviour:
   welcomeView: {fileID: 0}
   cornerBtns: {fileID: 0}
   isWelcomeRun: 0
-  isQuickStart: 0
   welcomeStartDay: 0
   welcomeSeqEndDay: 0
 --- !u!1 &323839053
@@ -1331,6 +1330,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aca24d31d5ca2949b878eded2cb1895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  START_DAY_OF_GAME: 24
+  START_MONTH_OF_THE_GAME: 1
   gameController: {fileID: 0}
   gameModeController: {fileID: 0}
   sceneController: {fileID: 0}

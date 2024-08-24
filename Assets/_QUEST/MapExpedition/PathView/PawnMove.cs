@@ -14,15 +14,15 @@ namespace Quest
         PathQView pathQView;
         PathModel pathModel;
 
-        [SerializeField] int nodeSeq; 
-
+        [SerializeField] int nodeSeq;
+        [SerializeField] int targetNodeSeq = -1;
         public void PawnMoveInit(PathView pathView, PathQView pathQView, PathModel pathModel)
         {
             this.pathQView = pathQView;
             this.pathView = pathView;
             this.pathModel = pathModel;
             pathModel.currNode= pathModel.nodes[0];
-
+            targetNodeSeq = -1; 
             Move(); 
         }
         
@@ -31,14 +31,19 @@ namespace Quest
         {
             // pathModel.. check current node index 
             // move to next node in the 
+           
+            //nodeSeq....is a local counter has no track of actual node index
+            // get Node seq from PathQView and control the movement of pawn
+
+
             transform.GetComponent<BoxCollider2D>().enabled = true;
             Sequence seq = DOTween.Sequence();
             seq
             .Append(transform.GetComponent<Image>().DOFade(1.0f, 0.4f))
             .Append(transform.DOLocalMove(GetNextPos().localPosition, 2.0f));
             ;
-          //  if(EncounterService.Instance.mapEController.mapEOnDsply)
-                    seq.Play().OnComplete(CheckTownArrival);
+            //  if(EncounterService.Instance.mapEController.mapEOnDsply)
+            seq.Play().OnComplete(CheckTownArrival).OnComplete(() => { nodeSeq = targetNodeSeq; });
 
         }
         public void Move2TownOnFail()
@@ -71,36 +76,36 @@ namespace Quest
                 MapService.Instance.mapController.mapView.GetComponent<IPanel>().UnLoad();
             }
         }
-        Transform GetCurrPos()
-        {
-            for (int i = 0; i < pathModel.nodes.Count; i++)
-            {
-                if (!pathModel.nodes[i].isChecked)
-                {
-                    nodeSeq = i; 
-                    return pathQView.transform.GetChild(i);
-                }
-                if (pathModel.nodes[i].isChecked && i == 0)
-                {
-                    nodeSeq = 0; 
-                }
-            }
-            Debug.Log("node seq not MATCHED");
-            return null; 
-        }
+        //Transform GetCurrPos()
+        //{
+        //    for (int i = 0; i < pathModel.nodes.Count; i++)
+        //    {
+        //        if (!pathModel.nodes[i].isChecked)
+        //        {
+        //            nodeSeq = i; 
+        //            return pathQView.transform.GetChild(i);
+        //        }
+        //        if (pathModel.nodes[i].isChecked && i == 0)
+        //        {
+        //            nodeSeq = 0; 
+        //        }
+        //    }
+        //    Debug.Log("node seq not MATCHED");
+        //    return null; 
+        //}
+
         Transform GetNextPos()
         {
             if(nodeSeq < pathModel.nodes.Count-1)
             {
-                nodeSeq++;
-                return pathQView.transform.GetChild(nodeSeq);
+                targetNodeSeq =  nodeSeq+1;
+                return pathQView.transform.GetChild(targetNodeSeq);
             }
             else
             {
-                nodeSeq = 0; 
+                targetNodeSeq = 0; 
                 return pathQView.transform.GetChild(0);
-            }
-            
+            }            
         }
 
     }

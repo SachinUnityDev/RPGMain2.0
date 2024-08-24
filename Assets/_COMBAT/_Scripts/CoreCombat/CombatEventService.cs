@@ -19,7 +19,7 @@ namespace Combat
         public event Action OnEOT;
         public event Action <int> OnSOR1;// round no
         public event Action <int> OnEOR1;
-        public event Action OnSOC;  
+        public event Action <EnemyPackName, LandscapeNames> OnSOC;  
         public event Action<CombatState, LandscapeNames, EnemyPackName> OnCombatInit;       
         public event Action OnEOC;      
         public event Action<CharController> OnCombatFlee;
@@ -128,7 +128,7 @@ namespace Combat
 
             OnSOTactics?.Invoke(); 
         }
-        public void On_SOC()
+        public void On_SOC(EnemyPackName enemyPackName, LandscapeNames landScapeName)
         {
             currCombatResult = CombatResult.None; 
             roundController = CombatService.Instance.roundController; 
@@ -141,7 +141,7 @@ namespace Combat
             LandscapeNames landscapeName = LandscapeService.Instance.currLandscape;
             combatModel = new CombatModel(questController.questModel.questName
                                         , questController.objModel.objName, landscapeName);
-            OnSOC?.Invoke();         
+            OnSOC?.Invoke(enemyPackName, landscapeName);         
             Sequence seq = DOTween.Sequence(); 
             seq.AppendInterval(2.5f)
                 .AppendCallback(()=> On_SOR(1))

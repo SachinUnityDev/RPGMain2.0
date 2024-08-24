@@ -25,7 +25,7 @@ namespace Quest
         [SerializeField] QuestBase questBase;
         [SerializeField] ObjModel objModel;
         [SerializeField] ObjSO objSO;
-        PathNodeView pathNodeView;
+        QMarkView qMarkView;
 
        // [Header("Start Node")]
         //[SerializeField] NodeData startNode; 
@@ -37,14 +37,14 @@ namespace Quest
 
         // to be called only from QuestController
         public void ShowQuestEmbarkView(QuestModel questModel, QuestSO questSO
-                    , QuestBase questBase, ObjModel objModel, PathNodeView pathNodeView)           
+                    , QuestBase questBase, ObjModel objModel, QMarkView qMarkView)           
         {
             this.questModel = questModel;
             this.questSO = questSO;
             this.questBase= questBase;
             this.objModel = objModel;
             this.objSO = questSO.GetObjSO(objModel.objName);
-            this.pathNodeView = pathNodeView;           
+            this.qMarkView = qMarkView;           
             Load();
             FillQuestPanel(); 
         }
@@ -57,7 +57,7 @@ namespace Quest
         {
             UnLoad();
                 
-            pathNodeView.OnPathEmbark();
+            qMarkView.OnPathEmbark();
         }
         void FillQuestPanel()
         {

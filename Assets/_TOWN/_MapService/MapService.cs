@@ -43,7 +43,7 @@ namespace Town
             mapController = GetComponent<MapController>();
 
             pathController.InitPath(allPathSO);
-            pathView.PathViewInit();
+            pathView.PathViewInit(pathController);
             mapController.InitMapController();
 
             isNewGInitDone = true;

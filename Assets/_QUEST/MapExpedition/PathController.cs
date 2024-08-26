@@ -101,6 +101,7 @@ namespace Quest
             {
                 return allPathModel[index];
             }
+            Debug.LogError("Path Model not found" + questName + objName);
             return null;
         }
 

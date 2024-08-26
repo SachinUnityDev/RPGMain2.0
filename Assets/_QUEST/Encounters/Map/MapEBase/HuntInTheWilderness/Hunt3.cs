@@ -18,7 +18,9 @@ namespace Quest
         public override void MapEContinuePressed()
         {
             EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
-            MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move();
+            MapService.Instance.pathController.pathQView.Move2NextNode();
+
+            // MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move();
             // move the pawn 
         }
         //        "50% COMBAT xx 

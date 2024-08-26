@@ -115,7 +115,9 @@ namespace Quest
                 }
                 else
                 {
-                    MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move();
+                    MapService.Instance.pathController.pathQView.Move2NextNode();
+
+                    //MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move();
                 }
             }
             else if (questMode == QuestMode.Taunt)
@@ -126,7 +128,9 @@ namespace Quest
                 }
                 else
                 {
-                    MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move();
+                    MapService.Instance.pathController.pathQView.Move2NextNode();
+
+                   // MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move();
                 }
             }
         }

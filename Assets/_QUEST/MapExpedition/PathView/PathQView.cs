@@ -1,5 +1,7 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Town;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -23,6 +25,7 @@ namespace Quest
             this.pathView = pathView;
             this.pathController = pathController; 
             pathController.pathQView = this; // adding pathQView reference to pathController
+            currentNode = 0;
 
             foreach (Transform node in transform)
             {
@@ -30,15 +33,15 @@ namespace Quest
                 QMarkView qMarkView = node.GetComponent<QMarkView>();   
                 if (pathNodeView != null)
                 {
-                    pathNodeView.InitPathNodeView(pathView, this);
-                    currentNode = 0;
-                    OnNodeExit(0); 
+                    pathNodeView.InitPathNodeView(pathView, this);                   
                 }
                 if(qMarkView != null)
                 {
                     qMarkView.InitPathNodeView(pathView, this);
                 }
             }
+           // MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move(0);// set at first node
+
         }
         public void OnNodeEnter(int node)
         {
@@ -46,8 +49,42 @@ namespace Quest
         }
         public void Move2NextNode()
         {
-            
-        }        
+            MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move(currentNode);
+            OnNodeExit(currentNode);
+            OnNodeExit4Base(currentNode);     
+        }
+        void OnNodeExit4Base(int node)
+        {
+
+            PathModel pathModel = MapService.Instance.pathController.GetPathModel(questName, objName);
+            if (pathModel != null)
+                pathModel.nodes[node].isChecked = true;
+            PathBase pathBase = MapService.Instance.pathController.GetPathBase(questName, objName);
+            switch (node)
+            {
+                case 0:
+                    pathBase.OnNode0Exit();
+                    break;
+                case 1:
+                    pathBase.OnNode1Exit();
+                    break;
+                case 2:
+                    pathBase.OnNode2Exit();
+                    break;
+                case 3:
+                    pathBase.OnNode3Exit();
+                    break;
+                case 4:
+                    pathBase.OnNode4Exit();
+                    break;
+                case 5:
+                    pathBase.OnNode5Exit();
+                    break;
+                default:
+                    break;
+            }
+
+        }
         public void SpawnInTown()
         {
 
@@ -72,11 +109,12 @@ namespace Quest
                 {
                     transform.GetChild(i).gameObject.SetActive(false);
                 }
+                if ((nodeExit == transform.childCount - 2)) // -2 bcoz of q Mark // on exit of Node final 
+                {
+                    transform.GetChild(0).gameObject.SetActive(true);
+                }
             }
-            if ((nodeExit == transform.childCount - 2)) // -2 bcoz of q Mark // on exit of Node final 
-            {
-                transform.GetChild(0).gameObject.SetActive(true);
-            }
+          
         }
     }
 }

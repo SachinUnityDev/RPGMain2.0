@@ -56,7 +56,6 @@ namespace Quest
         void OnEmbarkBtnPressed()
         {
             UnLoad();
-                
             qMarkView.OnPathEmbark();
         }
         void FillQuestPanel()
@@ -92,12 +91,14 @@ namespace Quest
 
         public void Load()
         {
-            UIControlServiceGeneral.Instance.TogglePanel(gameObject,  true); 
+            UIControlServiceGeneral.Instance.TogglePanel(gameObject,  true);
+            
         }
 
         public void UnLoad()
         {
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
+            
         }
 
         public void Init()

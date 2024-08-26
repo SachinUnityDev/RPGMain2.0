@@ -23,7 +23,6 @@ namespace Quest
             this.pathQView = pathQView;
             questName = pathQView.questName;
             objName = pathQView.objName;
-
         }
 
         void QuestMarkDown()

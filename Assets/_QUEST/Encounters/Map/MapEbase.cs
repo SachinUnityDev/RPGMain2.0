@@ -18,9 +18,11 @@ namespace Quest
         public CombatResult combatResult;
         public string strFX;
         public bool mapEResult= false;
+        public bool isCombatToBePlayed = false; 
         public virtual void MapEInit(MapEModel mapEModel)
         {
            this.mapEModel= mapEModel;
+            isCombatToBePlayed = false;
 
         }
         public abstract void OnChoiceASelect();

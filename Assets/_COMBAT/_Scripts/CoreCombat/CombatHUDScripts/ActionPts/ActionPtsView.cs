@@ -39,7 +39,7 @@ namespace Combat
             endTurnBtn.SetActive(true);
         }
 
-        void HideActionPtsDOTs(CombatState startState, LandscapeNames landscape, EnemyPackName enemyPackName)
+        void HideActionPtsDOTs(CombatState startState, LandscapeNames landscapeName, EnemyPackName enemyPackName)
         {
           //  actionPtsPtrEvents.Init(this);
             foreach (Transform child in actionPtsDOT)

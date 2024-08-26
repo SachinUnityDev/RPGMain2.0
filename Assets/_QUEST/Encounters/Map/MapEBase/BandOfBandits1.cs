@@ -5,6 +5,7 @@ using UnityEngine;
 using Common;
 using Interactables;
 using Town;
+using Combat;
 
 namespace Quest
 {
@@ -16,10 +17,43 @@ namespace Quest
         Currency money2Lose; 
         public override void MapEContinuePressed()
         {
+            //if(isCombatToBePlayed)
+            //{
+            //    CombatEventService.Instance.StartCombat(CombatState.INTactics, LandscapeNames.Sewers, EnemyPackName.RatPack3); 
+
+            //    //if (combatResult == CombatResult.Victory)
+            //    //{
+            //    //    resultStr = "You defeated the bandits!";
+            //    //    strFX = "Party buff: +1 to all stats, 3 rds";
+            //    //}
+            //    //else if(combatResult == CombatResult.Defeat)
+            //    //{
+            //    //    resultStr = "You were defeated by the bandits!";
+            //    //    strFX = "Party debuff: -1 to all stats, 3 rds";
+            //    //}else if(combatResult == CombatResult.Draw)
+            //    //{
+            //    //    resultStr = "You were defeated by the bandits!";
+            //    //    strFX = "Party debuff: -1 to all stats, 3 rds";
+            //    //}                
+            //}
+            //else
+            //{
+            //    //EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
+            //    //MapService.Instance.pathController.pathQView.Move2NextNode();
+            //    //if (mapEResult)
+            //    //{
+            //    //    resultStr = "You passed through the bandits without any trouble!";
+            //    //    strFX = "";
+            //    //}
+            //    //else
+            //    //{
+            //    //    resultStr = "You were ambushed by the bandits!";
+            //    //    strFX = "Party debuff: Flat Footed, 3 rds";
+            //    //}
+            //}
             EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
             MapService.Instance.pathController.pathQView.Move2NextNode();
 
-           // MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move();
         }
 
         public override void OnChoiceASelect()
@@ -29,11 +63,13 @@ namespace Quest
             {
                 resultStr = "Bandits ambushed you. Watch out!";
                 strFX = "Party debuff: Flat Footed, 3 rds";
+                isCombatToBePlayed = true;
             }
             else
             {
                 resultStr = "Time to fight!";
                 strFX = "";
+                isCombatToBePlayed = false;
             }
         }
 
@@ -48,6 +84,7 @@ namespace Quest
             {
                  money2Lose = EcoService.Instance.GetMoneyAmtInPlayerInv(); 
             }
+            isCombatToBePlayed = false;
             EcoService.Instance.DebitPlayerInv(money2Lose);
 
             resultStr = "You agreed to pay a toll for free passage and Bandits seem symphatetic to your cause...";

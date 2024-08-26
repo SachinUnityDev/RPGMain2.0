@@ -45,7 +45,7 @@ namespace Combat
             CombatEventService.Instance.OnCharClicked += (CharController c)=> FillSkillClickedState(-1);
             CombatEventService.Instance.OnEOT += () => FillSkillClickedState(-1);
             CombatEventService.Instance.OnCombatInit += 
-            (CombatState startState, LandscapeNames landscape, EnemyPackName enemyPackName) =>InitSkillBtns();
+            (CombatState startState, LandscapeNames landscapeName, EnemyPackName enemyPackName) =>InitSkillBtns();
             InitSkillBtns();
         }
 
@@ -55,7 +55,7 @@ namespace Combat
             CombatEventService.Instance.OnCharClicked -= (CharController c) => FillSkillClickedState(-1);
             CombatEventService.Instance.OnEOT -= () => FillSkillClickedState(-1);
             CombatEventService.Instance.OnCombatInit -= 
-                (CombatState startState, LandscapeNames landscape, EnemyPackName enemyPackName) => InitSkillBtns();            
+                (CombatState startState, LandscapeNames landscapeName, EnemyPackName enemyPackName) => InitSkillBtns();            
         }
         void InitSkillBtns()
         {

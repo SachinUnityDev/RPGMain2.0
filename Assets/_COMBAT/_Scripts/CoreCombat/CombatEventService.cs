@@ -19,7 +19,7 @@ namespace Combat
         public event Action OnEOT;
         public event Action <int> OnSOR1;// round no
         public event Action <int> OnEOR1;
-        public event Action <EnemyPackName, LandscapeNames> OnSOC;  
+        public event Action OnSOC;  
         public event Action<CombatState, LandscapeNames, EnemyPackName> OnCombatInit;       
         public event Action OnEOC;      
         public event Action<CharController> OnCombatFlee;
@@ -59,6 +59,10 @@ namespace Combat
         
         RoundController roundController;
 
+        [SerializeField] EnemyPackName enemyPackName;
+        [SerializeField] CombatState combatState;
+        [SerializeField] LandscapeNames landscapeName;
+
         void Start()
         {         
             SceneManager.activeSceneChanged += OnSceneLoaded;
@@ -73,7 +77,8 @@ namespace Combat
             if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
             {
                 CombatService.Instance.GetAllyInCombat(); 
-                On_CombatInit(CombatState.INTactics, LandscapeNames.Sewers, EnemyPackName.RatPack3);
+                // dummy start
+                 On_CombatInit(combatState, landscapeName, enemyPackName);
             }
         }
 
@@ -82,11 +87,26 @@ namespace Combat
             OnStrikeFired?.Invoke(strikeData); 
 
         }
+
+
+        public void StartCombat(CombatState combatState, LandscapeNames landscapeName, EnemyPackName enemyPackName)
+        {
+            this.enemyPackName = enemyPackName;
+            this.landscapeName = landscapeName;
+            this.combatState = combatState; 
+
+            StartCoroutine(SceneMgmtService.Instance.sceneMgmtController.LoadScene(SceneName.COMBAT)); 
+        }
+
+        // Only entry point for all the combat
         public void On_CombatInit(CombatState startState, LandscapeNames landscape, EnemyPackName enemyPackName)
         {
-            OnCombatInit?.Invoke(startState, landscape,enemyPackName);
-            CombatService.Instance.combatHUDView.SetCombatBG(landscape); 
-            LandscapeService.Instance.On_LandscapeEnter(landscape);
+            this.enemyPackName = enemyPackName;
+            OnCombatInit?.Invoke(startState, landscape , enemyPackName);
+
+            LandscapeService.Instance.On_LandscapeEnter(landscape);// update landscape
+            CombatService.Instance.combatHUDView.SetCombatBG(landscape);             
+
             Sequence seq = DOTween.Sequence();
             if (startState== CombatState.INTactics) 
             {
@@ -128,20 +148,21 @@ namespace Combat
 
             OnSOTactics?.Invoke(); 
         }
-        public void On_SOC(EnemyPackName enemyPackName, LandscapeNames landScapeName)
+        public void On_SOC()
         {
             currCombatResult = CombatResult.None; 
             roundController = CombatService.Instance.roundController; 
             CombatService.Instance.combatState = CombatState.INCombat_normal;
-            CombatService.Instance.SetEnemyInCombat(EnemyPackName.RatPack3);
+            CombatService.Instance.SetEnemyInCombat(enemyPackName);
             CombatService.Instance.AddCombatControllers();
             SkillService.Instance.InitSkillControllers();// For enemies 
             CombatService.Instance.currCharOnTurn = CharService.Instance.allCharInCombat[0]; 
+            
             QuestController questController = QuestMissionService.Instance.questController;
             LandscapeNames landscapeName = LandscapeService.Instance.currLandscape;
             combatModel = new CombatModel(questController.questModel.questName
                                         , questController.objModel.objName, landscapeName);
-            OnSOC?.Invoke(enemyPackName, landscapeName);         
+            OnSOC?.Invoke();         
             Sequence seq = DOTween.Sequence(); 
             seq.AppendInterval(2.5f)
                 .AppendCallback(()=> On_SOR(1))

@@ -1,0 +1,1 @@
+{"mapEName":4,"mapENameStr":"Buffalo Stampede","descTxt":"You encountered buffalo stampede right across the hills. Who knows what they are running from? There is a chance to take a few of them down, in case that you need...","choiceAStr":"Hunt them","choiceBStr":"Just wait","isCompleted":false}

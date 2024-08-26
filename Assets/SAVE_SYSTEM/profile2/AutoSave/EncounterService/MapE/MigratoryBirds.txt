@@ -1,0 +1,1 @@
+{"mapEName":1,"mapENameStr":"Migratory Birds","descTxt":"When you step foot onto the Sliced Dell, you realized migratory birds are flying across the sky. Maybe it’s a sign to lead you to destination or just a feast for birdmeat.","choiceAStr":"Shoot them","choiceBStr":"Follow their lead","isCompleted":false}

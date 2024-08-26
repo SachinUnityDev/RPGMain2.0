@@ -18,35 +18,36 @@ namespace Quest
 
         public override void MapEContinuePressed()
         {
-            switch (combatResult)
-            {
-                case CombatResult.None:
-                    //start combat with bandits
-                    //save game 
-                    //transition to next combat Scene
-                    // start combat with Bandits
+            //switch (combatResult)
+            //{
+            //    case CombatResult.None:
+            //        //start combat with bandits
+            //        //save game 
+            //        //transition to next combat Scene
+            //        // start combat with Bandits
 
-                    break;
-                case CombatResult.Victory:
-                    resultStr = "You managed to defeat the bandits and continue your journey.";
-                    mapEModel.isCompleted = true;
-                    EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
-                    MapService.Instance.pathController.pathQView.Move2NextNode();
-                    break;
-                case CombatResult.Draw:
-                    resultStr = "You couldn't manage to defeat the bandits and had to retreat.";
-                    mapEModel.isCompleted = false;
-                    MapService.Instance.pathController.pathQView.SpawnInTown();
-                    break;
-                case CombatResult.Defeat:
-                    resultStr = "You were defeated by the bandits and had to retreat.";
-                    mapEModel.isCompleted = false;
-                    MapService.Instance.pathController.pathQView.SpawnInTown();
-                    break;
-                default:
-                    break;
-            }
-            MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move();
+            //        break;
+            //    case CombatResult.Victory:
+            //        resultStr = "You managed to defeat the bandits and continue your journey.";
+            //        mapEModel.isCompleted = true;
+            //        EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
+            //        MapService.Instance.pathController.pathQView.Move2NextNode();
+            //        break;
+            //    case CombatResult.Draw:
+            //        resultStr = "You couldn't manage to defeat the bandits and had to retreat.";
+            //        mapEModel.isCompleted = false;
+            //        MapService.Instance.pathController.pathQView.SpawnInTown();
+            //        break;
+            //    case CombatResult.Defeat:
+            //        resultStr = "You were defeated by the bandits and had to retreat.";
+            //        mapEModel.isCompleted = false;
+            //        MapService.Instance.pathController.pathQView.SpawnInTown();
+            //        break;
+            //    default:
+            //        break;
+            //}
+            EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
+            MapService.Instance.pathController.pathQView.Move2NextNode();
         }
 
         public override void OnChoiceASelect()

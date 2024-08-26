@@ -44,5 +44,9 @@ namespace Quest
             currLandscape = landName;
             OnLandscapeExit?.Invoke(landName);
         }
+        public LandscapeNames GetLandscapeNames()
+        {
+            return currLandscape;
+        }   
     }
 }

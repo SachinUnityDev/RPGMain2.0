@@ -8,7 +8,7 @@ using System;
 
 namespace Quest
 {
-
+    // static path view .. pathQ View is the dynamic path view attached with current quest /obj prefab 
     public class PathView : MonoBehaviour
     {
         [Header("TBR")]

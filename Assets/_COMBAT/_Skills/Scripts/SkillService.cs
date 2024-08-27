@@ -33,6 +33,7 @@ namespace Combat
 
     public class SkillService : MonoSingletonGeneric<SkillService>, ISaveable
     {
+        #region All ACTION 
         public event Action<PerkData> OnPerkStateChg;
         public event Action<SkillModel> OnSkillSelectInInv; 
         public event Action<PerkNames> OnPerkHovered;
@@ -59,6 +60,22 @@ namespace Combat
             }
         }
 
+        public event Action SkillInit;
+        public event Action<CharNames, SkillNames> SkillSelect;
+        public event Action SkillDeSelect;
+        public event Action PreSkillApply; // target is selected and but dodge acc etc to be chked N fixed 
+                                           // public event Action SkillApply;
+        public event Action OnSkillApplyMoveFx;
+        public event Action PostSkillApply;
+        public event Action OnSkillHovered;
+        public event Action SkillWipe;
+        public event Action SkillFXRemove;
+        public event Action SkillTick;// no use for now... 
+        public event Action SkillEnd;// no use for now...
+        public event Action<SkillEventData> OnSkillUsed;
+
+        # endregion
+
         #region DECLARATIONS
 
         [Header("SKill Factory NTBR")]
@@ -74,7 +91,9 @@ namespace Combat
         [Header("ALL SO")]
         public List<SkillDataSO> allSkillDataSO = new List<SkillDataSO>();
         public SkillViewSO skillViewSO; 
-        public SkillHexSO skillHexSO;   
+        public SkillHexSO skillHexSO;
+
+        [Header("Skill Card")]
         public GameObject skillCardGO;
         [SerializeField] GameObject skillCardPrefab; 
 
@@ -94,19 +113,7 @@ namespace Combat
         public bool ignoreHasteChk = false; 
 
         // ALL ACTIONS// 
-        public event Action SkillInit;
-        public event Action <CharNames, SkillNames>SkillSelect;
-        public event Action SkillDeSelect; 
-        public event Action PreSkillApply; // target is selected and but dodge acc etc to be chked N fixed 
-       // public event Action SkillApply;
-        public event Action OnSkillApplyMoveFx; 
-        public event Action PostSkillApply; 
-        public event Action OnSkillHovered;
-        public event Action SkillWipe;
-        public event Action SkillFXRemove; 
-        public event Action SkillTick;// no use for now... 
-        public event Action SkillEnd;// no use for now...
-        public event Action<SkillEventData> OnSkillUsed; 
+
         [Header("curr Char UPDATES")]
         public CharMode currCharMode;
 
@@ -128,7 +135,9 @@ namespace Combat
 
         public float combatSpeed = 1f;
 
-        public ServicePath servicePath => ServicePath.SkillService; 
+        public ServicePath servicePath => ServicePath.SkillService;
+
+        public Scene currentScene; 
         void Start()
         {
             // InitSkillControllers();
@@ -150,7 +159,9 @@ namespace Combat
             GameEventService.Instance.OnGameSceneChg -= OnStartOfCombat;
         }
         void OnSceneLoaded(Scene scene, Scene newScene)
-        {
+        {   
+            CreateSkillCardGO(); // set the skill card to the skill Service
+
             if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
             {
                 skillView = FindObjectOfType<SkillView>();
@@ -159,17 +170,25 @@ namespace Combat
                 if(skillFXMoveController == null)
                     skillFXMoveController = gameObject.AddComponent<SkillFxMoveController>();
 
-                CreateSkillCardGO(); 
             }           
         }
         void CreateSkillCardGO()
         {
-            GameObject canvasGO = GameObject.FindGameObjectWithTag("Canvas");
+            GameObject canvasGo = null; 
+            currentScene = SceneManager.GetActiveScene();   
+            GameObject[] rootObjects = currentScene.GetRootGameObjects();
+            foreach (GameObject obj in rootObjects)
+            {
+                if (obj.name == "Canvas")
+                {
+                    canvasGo = obj;
+                }
+            }
             if (skillCardGO == null)
             {
                 skillCardGO = Instantiate(skillCardPrefab);
             }
-            skillCardGO.transform.SetParent(canvasGO.transform);
+            skillCardGO.transform.SetParent(canvasGo.transform);
             skillCardGO.transform.SetAsLastSibling();
             skillCardGO.transform.localScale = Vector3.one;
             skillCardGO.SetActive(false);

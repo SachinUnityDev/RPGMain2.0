@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 using Common;
 using Interactables;
@@ -17,9 +16,10 @@ namespace Quest
         Currency money2Lose; 
         public override void MapEContinuePressed()
         {
-            //if(isCombatToBePlayed)
+            CombatEventService.Instance.StartCombat(CombatState.INTactics, LandscapeNames.Sewers, EnemyPackName.RatPack3);
+            //if (isCombatToBePlayed)
             //{
-            //    CombatEventService.Instance.StartCombat(CombatState.INTactics, LandscapeNames.Sewers, EnemyPackName.RatPack3); 
+               
 
             //    //if (combatResult == CombatResult.Victory)
             //    //{
@@ -38,21 +38,20 @@ namespace Quest
             //}
             //else
             //{
-            //    //EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
-            //    //MapService.Instance.pathController.pathQView.Move2NextNode();
-            //    //if (mapEResult)
-            //    //{
-            //    //    resultStr = "You passed through the bandits without any trouble!";
-            //    //    strFX = "";
-            //    //}
-            //    //else
-            //    //{
-            //    //    resultStr = "You were ambushed by the bandits!";
-            //    //    strFX = "Party debuff: Flat Footed, 3 rds";
-            //    //}
+
+            //    if (mapEResult)
+            //    {
+            //        resultStr = "You passed through the bandits without any trouble!";
+            //        strFX = "";
+            //    }
+            //    else
+            //    {
+            //        resultStr = "You were ambushed by the bandits!";
+            //        strFX = "Party debuff: Flat Footed, 3 rds";
+            //    }
             //}
-            EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
-            MapService.Instance.pathController.pathQView.Move2NextNode();
+            //EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
+            //MapService.Instance.pathController.pathQView.Move2NextNode();
 
         }
 

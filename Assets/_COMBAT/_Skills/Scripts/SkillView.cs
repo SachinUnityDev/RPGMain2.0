@@ -46,7 +46,7 @@ namespace Combat
             CombatEventService.Instance.OnEOT += () => FillSkillClickedState(-1);
             CombatEventService.Instance.OnCombatInit += 
             (CombatState startState, LandscapeNames landscapeName, EnemyPackName enemyPackName) =>InitSkillBtns();
-            InitSkillBtns();
+           // InitSkillBtns();
         }
 
         private void OnDisable()

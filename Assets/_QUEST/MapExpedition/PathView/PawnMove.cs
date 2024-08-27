@@ -38,7 +38,7 @@ namespace Quest
             ;
             //  if(EncounterService.Instance.mapEController.mapEOnDsply)
             seq.Play()
-                //.OnComplete(CheckTownArrival)
+                .OnComplete(CheckTownArrival)
                 ;
 
         }
@@ -67,7 +67,7 @@ namespace Quest
 
         void CheckTownArrival()
         {
-            if (pathModel.nodes[nodeSeq].isChecked && nodeSeq == 0)
+            if (pathModel.nodes[0].isChecked && pathQView.currentNode ==0)
             {
                 MapService.Instance.mapController.mapView.GetComponent<IPanel>().UnLoad();
             }

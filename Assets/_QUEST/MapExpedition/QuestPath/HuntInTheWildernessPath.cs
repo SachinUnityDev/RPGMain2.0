@@ -25,55 +25,53 @@ namespace Quest
 
         public override void OnNode1Enter()
         {
-            QuestMode questMode = QuestMissionService.Instance.currQuestMode; 
-            if(questMode == QuestMode.Stealth)
-            {
-                if (10f.GetChance())
-                {
-                    EncounterService.Instance.mapEController.ShowMapE(MapENames.BandOfBanditsOne); 
-                   
-                    //CalendarService.Instance....chgg time by half a day X3 
+            EncounterService.Instance.mapEController.ShowMapE(MapENames.BandOfBanditsOne);
+            Debug.Log("Entered node 1");   
+            //QuestMode questMode = QuestMissionService.Instance.currQuestMode; 
+            //if(questMode == QuestMode.Stealth)
+            //{
+            //    if (10f.GetChance())
+            //    {
+            //        EncounterService.Instance.mapEController.ShowMapE(MapENames.BandOfBanditsOne);                    
+            //    }else if (60f.GetChance())
+            //    {
+            //        EncounterService.Instance.mapEController.ShowMapE(MapENames.MigratoryBirds);
+            //    }
+            //    else
+            //    {
+            //        EncounterService.Instance.mapEController.ShowMapE(MapENames.BuffaloStampede);
+            //    }
 
-
-                }else if (60f.GetChance())
-                {
-                    EncounterService.Instance.mapEController.ShowMapE(MapENames.MigratoryBirds);
-                }
-                else
-                {
-                    EncounterService.Instance.mapEController.ShowMapE(MapENames.BuffaloStampede);
-                }
-
-            }else if(questMode == QuestMode.Exploration)
-            {
-                if (30f.GetChance())
-                {
-                    EncounterService.Instance.mapEController.ShowMapE(MapENames.BandOfBanditsOne);
-                }
-                else if (30f.GetChance())
-                {
-                    EncounterService.Instance.mapEController.ShowMapE(MapENames.MigratoryBirds);
-                }
-                else
-                {
-                    EncounterService.Instance.mapEController.ShowMapE(MapENames.BuffaloStampede);
-                }
-            }
-            else if(questMode== QuestMode.Taunt)
-            {
-                if (60f.GetChance())
-                {
-                    EncounterService.Instance.mapEController.ShowMapE(MapENames.BandOfBanditsOne);
-                }
-                else if (10f.GetChance())
-                {
-                    EncounterService.Instance.mapEController.ShowMapE(MapENames.MigratoryBirds);
-                }
-                else
-                {
-                    EncounterService.Instance.mapEController.ShowMapE(MapENames.BuffaloStampede);
-                }
-            }
+            //}else if(questMode == QuestMode.Exploration)
+            //{
+            //    if (30f.GetChance())
+            //    {
+            //        EncounterService.Instance.mapEController.ShowMapE(MapENames.BandOfBanditsOne);
+            //    }
+            //    else if (30f.GetChance())
+            //    {
+            //        EncounterService.Instance.mapEController.ShowMapE(MapENames.MigratoryBirds);
+            //    }
+            //    else
+            //    {
+            //        EncounterService.Instance.mapEController.ShowMapE(MapENames.BuffaloStampede);
+            //    }
+            //}
+            //else if(questMode== QuestMode.Taunt)
+            //{
+            //    if (60f.GetChance())
+            //    {
+            //        EncounterService.Instance.mapEController.ShowMapE(MapENames.BandOfBanditsOne);
+            //    }
+            //    else if (10f.GetChance())
+            //    {
+            //        EncounterService.Instance.mapEController.ShowMapE(MapENames.MigratoryBirds);
+            //    }
+            //    else
+            //    {
+            //        EncounterService.Instance.mapEController.ShowMapE(MapENames.BuffaloStampede);
+            //    }
+            //}
         }
 
         public override void OnNode1Exit()
@@ -103,9 +101,9 @@ namespace Quest
                 }
                 else
                 {
-                    EncounterService.Instance.mapEController.ShowMapE(MapENames.MigratoryBirds);
+                    MapService.Instance.pathController.pathQView.Move2NextNode();
                 }
-                
+
             }
             else if (questMode == QuestMode.Exploration)
             {
@@ -116,21 +114,17 @@ namespace Quest
                 else
                 {
                     MapService.Instance.pathController.pathQView.Move2NextNode();
-
-                    //MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move();
                 }
             }
             else if (questMode == QuestMode.Taunt)
             {
-                if (80f.GetChance())
+                if (90f.GetChance())
                 {
                     EncounterService.Instance.mapEController.ShowMapE(MapENames.BandOfBanditsTwo);
                 }
                 else
                 {
                     MapService.Instance.pathController.pathQView.Move2NextNode();
-
-                   // MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move();
                 }
             }
         }

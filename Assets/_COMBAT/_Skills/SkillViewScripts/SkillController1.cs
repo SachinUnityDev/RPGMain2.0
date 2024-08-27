@@ -1033,10 +1033,10 @@ namespace Combat
         bool IsNotOnCastPos(SkillModel _skillModel)
         {
             GameObject charGO = CharService.Instance.GetCharCtrlWithCharID(_skillModel.charID).gameObject;
-           // Debug.Log("charName"+ _skillModel.charName + _skillModel.charID);    
-            int pos = GridService.Instance.GetDyna4GO(charGO).currentPos;
-            // Debug.Log("Position in" + pos);
+             Debug.Log("Position"+ charGO.name);
 
+            int pos = GridService.Instance.GetDyna4GO(charGO).currentPos;
+           
             return !(_skillModel.castPos.Any(t => t == pos));
         }
         bool IfNoUseLeft(SkillModel _skillModel)

@@ -56,7 +56,8 @@ namespace Quest
         //}
 
         void OnNodeEnter()
-        {           
+        {
+            pathQView.OnNodeEnter(nodeSeq);
             switch (nodeSeq)
             {
                     case 0:
@@ -81,7 +82,6 @@ namespace Quest
                 default:
                     break;
             }
-            pathQView.OnNodeEnter(nodeSeq);
         }
        
     }

@@ -50,7 +50,7 @@ namespace Common
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName.ToString()));
             lastScene = newScene; 
             newScene = sceneName;            
-            if (lastScene != SceneName.CORE)
+            if (!(lastScene == SceneName.CORE))
                 StartCoroutine(UnloadAsyncOperation(lastScene)); 
            
         }

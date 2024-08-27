@@ -600,7 +600,9 @@ namespace Combat
         }
         public DynamicPosData GetDyna4GO(GameObject _charGO)
         {
-            int index = allCurrPosOccupiedByDyna.FindIndex(d => d.charGO == _charGO);
+            CharModel charModel = _charGO.GetComponent<CharController>().charModel;
+            int index = allCurrPosOccupiedByDyna.FindIndex(d => d.dynaModel.charID == charModel.charID &&
+                                                          d.dynaModel.charName == charModel.charName);
             if (index != -1)
                 return allCurrPosOccupiedByDyna[index]; 
             Debug.Log("DYNA NOT FOUND "+ _charGO.name);

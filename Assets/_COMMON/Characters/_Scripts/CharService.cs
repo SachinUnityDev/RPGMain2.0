@@ -206,8 +206,16 @@ namespace Common
         }
         public CharController GetCharCtrlWithCharID(int  _charID)
         {
-            CharController charCtrl = charsInPlayControllers.Find(x => x.charModel.charID == _charID ); 
-            return charCtrl; 
+            int index = charsInPlayControllers.FindIndex(x => x.charModel.charID == _charID ); 
+            if(index != -1)
+            {
+                return charsInPlayControllers[index];
+            }
+            else
+            {
+                Debug.LogError("CharController not found with ID" + _charID);
+                return null;
+            }   
         }
         public CharController GetAllyController(CharNames charName)
         {

@@ -14,6 +14,8 @@ namespace Combat
 {
     public class CombatEventService : MonoSingletonGeneric<CombatEventService>
     {
+
+        #region EVENTS
         public event Action OnSOTactics; 
         public event Action OnSOT;
         public event Action OnEOT;
@@ -49,6 +51,8 @@ namespace Combat
 
         public event Action<CharController, PotionNames> OnPotionConsumedInCombat;
 
+        #endregion
+
         [Header(" Common round Counter")]
         public int currentRound = 1;
         public int currentTurn = 0; 
@@ -62,11 +66,15 @@ namespace Combat
         [SerializeField] EnemyPackName enemyPackName;
         [SerializeField] CombatState combatState;
         [SerializeField] LandscapeNames landscapeName;
+        CharController charCtrl;
 
+        public event Action Event;
         void Start()
         {         
             SceneManager.activeSceneChanged += OnSceneLoaded;
         }
+
+
         private void OnDisable()
         {
             SceneManager.activeSceneChanged -= OnSceneLoaded;
@@ -96,6 +104,7 @@ namespace Combat
             this.combatState = combatState; 
 
             StartCoroutine(SceneMgmtService.Instance.sceneMgmtController.LoadScene(SceneName.COMBAT)); 
+            
         }
 
         // Only entry point for all the combat
@@ -132,10 +141,18 @@ namespace Combat
             GridService.Instance.gridView.CharOnTurnHL(dynaOnTurn);
             charCtrl.RegenStamina();
             charCtrl.HPRegen();
-            Debug.Log("CHAR SET ON TURN >>>>" + charCtrl.charModel.charName + charCtrl.charModel.charID);
-         
-            OnCharOnTurnSet?.Invoke(charCtrl);
-            On_CharClicked(charCtrl.gameObject);
+            
+            try { OnCharOnTurnSet?.Invoke(charCtrl); }
+            catch (Exception e)
+            {
+                Debug.Log("EXCEPTION OCCURED222!!!!" + e.Message);
+            }
+            finally
+            {
+                On_CharClicked(charCtrl.gameObject);
+            }
+           
+            
         }
      
         public void On_SOTactics()

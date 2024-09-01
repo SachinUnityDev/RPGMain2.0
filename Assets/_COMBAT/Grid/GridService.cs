@@ -71,19 +71,19 @@ namespace Combat
             gridController = GetComponent<GridController>();
             gridView = GetComponent<GridView>();
             gridMovement = GetComponent<GridMovement>();
-            GridInit();
+            //GridInit();
         }
 
         void Start()
         {
-          //  CombatEventService.Instance.OnCombatInit += GridInit;
+            CombatEventService.Instance.OnCombatInit += GridInit;
            // CombatEventService.Instance.OnTargetClicked += GridUpdateOnTargetSelected;
            // CombatEventService.Instance.OnCharDeath += UpdateGridOnCharDeath;
             CombatEventService.Instance.OnEOT +=  ClearOldTargetsOnGrid;
         }
         private void OnDisable()
         {
-            //CombatEventService.Instance.OnCombatInit -= GridInit;
+            CombatEventService.Instance.OnCombatInit -= GridInit;
             CombatEventService.Instance.OnEOT -= ClearOldTargetsOnGrid;
         }
         public void GridPosInit()
@@ -137,8 +137,6 @@ namespace Combat
                         break;
                 }
             }
-            // check if pos is empty.. using 
-           
         }
 
         public bool IsPosVacant(CellPosData cellPos)
@@ -234,7 +232,7 @@ namespace Combat
       
 
         #region Actions
-        public void GridInit()
+        public void GridInit(CombatState c, LandscapeNames l, EnemyPackName e)
         {
             allOccupiedPosAlly = new List<int>();
             allOccupiedPosEnemy = new List<int>();
@@ -404,12 +402,15 @@ namespace Combat
 
                     if (gridController.IsValidSpace(charModel, pos))// chks if cell is empty
                     {
-                        DynamicPosData dyna = new DynamicPosData(new DynaModel(charModel.charMode, charModel.charID
+                        DynamicPosData dyna
+                            //= new DynamicPosData(CharMode.Enemy, charCtrl.gameObject, pos, new List<int>() { pos });
+                            = new DynamicPosData(new DynaModel(charModel.charMode, charModel.charID
                                                                                 , charModel.charName, pos));
 
                         Add2CharDynaList(dyna);
                         PlaceCharOnGrid(dyna);
-                        // PlaceEnemyOnSpot(charCtrl,pos);
+                        UpdateCellsOccupiedList();
+                        //PlaceEnemyOnSpot(charCtrl,pos);
                         break;
                     }
                     else

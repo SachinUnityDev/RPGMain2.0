@@ -198,7 +198,7 @@ namespace Common
             if (gameScene == GameScene.InTown)
                 GameEventService.Instance.OnTownLoaded();
             currGameModel.gameScene = gameScene;
-            GameEventService.Instance.OnGameSceneChg?.Invoke(gameScene);
+            GameEventService.Instance.On_GameSceneChg(gameScene);
         }
 
         #region SAVE AND LOAD 

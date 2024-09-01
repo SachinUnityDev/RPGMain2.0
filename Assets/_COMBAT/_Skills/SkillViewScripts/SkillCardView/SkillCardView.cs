@@ -247,7 +247,7 @@ namespace Combat
                     if (textM!= null || textM.text != null)
                     {
                         UpdateTextHeight(textM);
-                        Debug.Log(" j val" + j);
+                      //  Debug.Log(" j val" + j);
                     }                     
                     else
                     {
@@ -328,7 +328,7 @@ namespace Combat
             // Get the current text from the TextMeshPro component
             string text = textM.text;
             incr = 0; incrVal= 0;
-            Debug.Log("The Desc" + textM.text);
+          //  Debug.Log("The Desc" + textM.text);
             
             // Check if the text length exceeds the maximum length
             if (text.Length > 30)

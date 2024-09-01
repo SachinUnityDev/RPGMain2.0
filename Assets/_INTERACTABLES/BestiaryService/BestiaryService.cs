@@ -112,7 +112,7 @@ namespace Common
 
             charModel.availOfChar = AvailOfChar.Available;
             charModel.stateOfChar = StateOfChar.UnLocked; 
-            charModel.charID = allRegBestiaryInGameModels.Count + start_INT_FOR_BESTIARY_CHARID + 1;
+            charModel.charID = allCurrBestiaryCtrl.Count + start_INT_FOR_BESTIARY_CHARID + 1;
             //go.name += charModel.charID.ToString(); 
             return charController;
         }

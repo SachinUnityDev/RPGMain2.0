@@ -28,12 +28,14 @@ MonoBehaviour:
   mainExp: 0
   jobExp: 0
   skillPts: 0
+  spawnlvl: 0
   charLvl: 1
   charNameStr: Dire Rat
   availOfChar: 1
   stateOfChar: 2
   fameBehavior: 0
   baseCharLoc: 0
+  currLoc: 0
   charRole: 0
   raceType: 1
   raceTypeHero: 0
@@ -52,7 +54,7 @@ MonoBehaviour:
   - AttribName: 1
     currValue: 4
     baseValue: 4
-    desc: Min value for Physical and Magical attacks.
+    desc: Base value for Physical and Magical attacks.
     minLimit: 0
     maxLimit: 30
     isClamped: 0
@@ -80,15 +82,15 @@ MonoBehaviour:
   - AttribName: 5
     currValue: 12
     baseValue: 6
-    desc: Determinant value for gain or lose AP.
+    desc: Determinant value for extra action or pass action.
     minLimit: 0
     maxLimit: 12
     isClamped: 0
   - AttribName: 6
     currValue: 4
     baseValue: 4
-    desc: Main determinant for turn order. Increases chance to gain AP by using Move
-      skills.
+    desc: Main determinant for turn order. Increases chance to keep action after
+      using Move.
     minLimit: 0
     maxLimit: 12
     isClamped: 0
@@ -109,7 +111,7 @@ MonoBehaviour:
   - AttribName: 9
     currValue: 1
     baseValue: 1
-    desc: Min value to mitigate incoming Physical damage.
+    desc: Value to mitigate incoming Physical damage.
     minLimit: 0
     maxLimit: 30
     isClamped: 0
@@ -165,71 +167,71 @@ MonoBehaviour:
   - AttribName: 17
     currValue: 2
     baseValue: 2
-    desc: Value to gain Stamina per rd.
+    desc: Percentage value to mitigate incoming Dark damage.
     minLimit: 0
     maxLimit: 6
     isClamped: 0
   - AttribName: 18
     currValue: 0
     baseValue: 0
-    desc: Value to gain Health per rd.
+    desc: Percentage value to mitigate incoming Dark damage.
     minLimit: 0
     maxLimit: 6
     isClamped: 0
   - AttribName: 19
     currValue: 0
     baseValue: 0
-    desc: Value to reset Fortitude after each combat.
+    desc: Percentage value to mitigate incoming Dark damage.
     minLimit: -24
     maxLimit: 24
     isClamped: 0
   - AttribName: 20
     currValue: 3
     baseValue: 3
-    desc: Max value to mitigate incoming Physical damage.
+    desc: Percentage value to mitigate incoming Dark damage.
     minLimit: 0
     maxLimit: 30
     isClamped: 0
   - AttribName: 21
     currValue: 6
     baseValue: 6
-    desc: Max value for Physical and Magical attacks.
+    desc: Percentage value to mitigate incoming Dark damage.
     minLimit: 0
     maxLimit: 30
     isClamped: 0
   statList:
   - statName: 1
     currValue: 32
-    desc: Health is health, you know it.
+    desc: Health is health, you know it...
     minLimit: 0
-    maxLimit: 400
+    maxLimit: 32
     isClamped: 0
   - statName: 2
     currValue: 24
-    desc: Fuel for using skills.
+    desc: Resource to use skills.
     minLimit: 0
-    maxLimit: 300
+    maxLimit: 24
     isClamped: 0
   - statName: 3
     currValue: 0
-    desc: Value that shows your fear or faith.
+    desc: Be among those who dare to dare!
     minLimit: -30
     maxLimit: 30
     isClamped: 0
   - statName: 4
     currValue: 0
-    desc: When full, get Starving status.
+    desc: Start losing Health once Hunger is 100%.
     minLimit: 0
     maxLimit: 100
     isClamped: 0
   - statName: 5
     currValue: 0
-    desc: When full, get Unslakable status
+    desc: Start losing Stamina once Thirst is 100%.
     minLimit: 0
     maxLimit: 100
     isClamped: 0
   charOccupies: 0
-  posPriority: 
+  posPriority: 01000000020000000300000004000000050000000600000007000000
   armorType: 0
   armorTypeStr: 
   enchantableGem4Weapon: 0

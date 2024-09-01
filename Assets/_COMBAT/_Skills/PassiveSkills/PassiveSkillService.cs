@@ -24,10 +24,13 @@ namespace Combat
         private void OnEnable()
         {
             SceneManager.activeSceneChanged += OnSceneLoaded;
+            SceneManager.sceneUnloaded += InitPassiVeSkillCards; 
         }
         private void OnDisable()
         {
             SceneManager.activeSceneChanged -= OnSceneLoaded;
+            SceneManager.sceneUnloaded -= InitPassiVeSkillCards;
+
         }
         public void On_PSkillHovered(PassiveSkillName passiveSkillName, CharController charClicked)
         {
@@ -42,9 +45,15 @@ namespace Combat
         {
             if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
             {
-                skillView = FindObjectOfType<SkillView>();
-                
+                skillView = FindObjectOfType<SkillView>();                
             }
+
+            
+        }
+
+       void InitPassiVeSkillCards(Scene scene)
+        {
+            // find canvas once previous scene is unloaded
             GameObject canvasGO = GameObject.FindGameObjectWithTag("Canvas");
             if (pSkillCardGO == null)
             {
@@ -55,6 +64,7 @@ namespace Combat
             pSkillCardGO.transform.localScale = Vector3.one;
             pSkillCardGO.SetActive(false);
         }
+
 
     }
 }

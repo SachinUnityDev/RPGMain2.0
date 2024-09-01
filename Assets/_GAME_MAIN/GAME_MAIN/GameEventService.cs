@@ -161,11 +161,12 @@ namespace Common
             }
         }
 
-        #endregion
-
-
+        public void On_GameSceneChg(GameScene gameScene)
+        {
+           OnGameSceneChg?.Invoke(gameScene);
+        }
     }
-
+    #endregion
 
 }
 

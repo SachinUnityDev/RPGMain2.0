@@ -35,12 +35,16 @@ namespace Combat
         private void OnDisable()
         {
             ClearData();
-            
+            CombatEventService.Instance.OnCharOnTurnSet -= OnEOT;
         }
-  
+        private void OnDestroy()
+        {
+            ClearData();
+            CombatEventService.Instance.OnCharOnTurnSet -= OnEOT;
+        }
         void OnEOT(CharController charController)
         {
-            gameObject.SetActive(false);                
+            gameObject?.SetActive(false);                
         }
 
         void ClearData()

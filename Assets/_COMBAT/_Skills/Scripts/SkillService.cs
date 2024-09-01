@@ -81,11 +81,9 @@ namespace Combat
         [Header("SKill Factory NTBR")]
         public SkillFactory skillFactory;
 
-        //[Header("SkillCard Data")]
-        //public SkillCardData skillCardData;
         [Header("CURR SKILLMODEL")]
         public SkillModel skillModelHovered;
-      //  public SkillModel skillModelSelect; 
+        
         public List<string> perkDescOnHover= new List<string>();
 
         [Header("ALL SO")]
@@ -138,19 +136,29 @@ namespace Combat
         public ServicePath servicePath => ServicePath.SkillService;
 
         public Scene currentScene; 
-        void Start()
+        protected override void Awake()
         {
+
+            base.Awake();
             // InitSkillControllers();
             // Cn be later Set to the start of Combat Event
+            
+           
+        }
+        private void OnEnable()
+        {
             skillFactory = GetComponent<SkillFactory>();
             skillView = GetComponent<SkillView>();
             SceneManager.activeSceneChanged += OnSceneLoaded;
             GameEventService.Instance.OnGameSceneChg += OnStartOfCombat;
-            skillFactory =GetComponent<SkillFactory>();
+            skillFactory = GetComponent<SkillFactory>();
             skillFactory.SkillsInit();
             passiveSkillFactory = GetComponent<PassiveSkillFactory>();
             passiveSkillFactory.PassiveSkillsInit();
             CreateSkillCardGO();
+        }
+        private void Start()
+        {
         }
         private void OnDisable()
         {
@@ -169,8 +177,8 @@ namespace Combat
                 skillFXMoveController = gameObject.GetComponent<SkillFxMoveController>();
                 if(skillFXMoveController == null)
                     skillFXMoveController = gameObject.AddComponent<SkillFxMoveController>();
-
-            }           
+                OnSOC();
+            }             
         }
         void CreateSkillCardGO()
         {
@@ -193,14 +201,24 @@ namespace Combat
             skillCardGO.transform.localScale = Vector3.one;
             skillCardGO.SetActive(false);
         }
-        void OnStartOfCombat(GameScene gameScene)
+
+        void OnSOC()
         {
-            if (gameScene != GameScene.InCombat) return;
             CombatEventService.Instance.OnSOT += SetDefaultSkillForChar;
-            CombatEventService.Instance.OnCharOnTurnSet += InitEnemySkillSelection; 
+            CombatEventService.Instance.OnCharOnTurnSet += InitEnemySkillSelection;
             CombatEventService.Instance.OnTargetClicked += TargetIsSelected;
             PostSkillApply += GridService.Instance.ClearOldTargetsOnGrid;// to be decided later to DEL or MOVE 
             CombatEventService.Instance.OnCharOnTurnSet += PopulateSkillTargets;
+        }
+
+        void OnStartOfCombat(GameScene gameScene)
+        {
+            //if (gameScene != GameScene.InCombat) return;
+            //CombatEventService.Instance.OnSOT += SetDefaultSkillForChar;
+            //CombatEventService.Instance.OnCharOnTurnSet += InitEnemySkillSelection; 
+            //CombatEventService.Instance.OnTargetClicked += TargetIsSelected;
+            //PostSkillApply += GridService.Instance.ClearOldTargetsOnGrid;// to be decided later to DEL or MOVE 
+            //CombatEventService.Instance.OnCharOnTurnSet += PopulateSkillTargets;
 
         }
         public void On_PerkStateChg(PerkData perkData)
@@ -220,7 +238,6 @@ namespace Combat
         {
             CharController charOnTurn = CombatService.Instance.currCharOnTurn; 
             SkillController1 skillController = charOnTurn.GetComponent<SkillController1>();
-
             SkillModel defaultSkillModel = null; 
             foreach (SkillModel skillModel in skillController.charSkillModel.allSkillModels)
             {

@@ -9,6 +9,7 @@ using DG.Tweening;
 using UnityEngine.SceneManagement;
 using Quest;
 using Spine.Unity;
+using System.Linq.Expressions;
 
 namespace Combat
 {
@@ -151,8 +152,6 @@ namespace Combat
             {
                 On_CharClicked(charCtrl.gameObject);
             }
-           
-            
         }
      
         public void On_SOTactics()
@@ -161,9 +160,14 @@ namespace Combat
             // combat Services
             CharController charController = CharService.Instance.allCharsInPartyLocked[0];
             CombatService.Instance.currCharOnTurn = charController;
-            On_CharClicked(charController.gameObject); 
+            On_CharClicked(charController.gameObject);
 
-            OnSOTactics?.Invoke(); 
+            try { OnSOTactics?.Invoke();}          
+            catch(Exception ex)
+            {
+                Debug.Log("EXCEPTION OCCURED STACTICS!!!!" + ex.Message);
+
+            }
         }
         public void On_SOC()
         {

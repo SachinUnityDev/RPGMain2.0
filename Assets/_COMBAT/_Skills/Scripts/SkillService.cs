@@ -136,15 +136,7 @@ namespace Combat
         public ServicePath servicePath => ServicePath.SkillService;
 
         public Scene currentScene; 
-        protected override void Awake()
-        {
-
-            base.Awake();
-            // InitSkillControllers();
-            // Cn be later Set to the start of Combat Event
-            
-           
-        }
+    
         private void OnEnable()
         {
             skillFactory = GetComponent<SkillFactory>();
@@ -157,9 +149,7 @@ namespace Combat
             passiveSkillFactory.PassiveSkillsInit();
             CreateSkillCardGO();
         }
-        private void Start()
-        {
-        }
+
         private void OnDisable()
         {
             SceneManager.activeSceneChanged -= OnSceneLoaded;

@@ -1,1 +1,0 @@
-{"questEName":2,"questENameStr":"Rat Army","descTxt":"All of a sudden an army of rats emerged out of their nest and cornered you. They have the most unfriendly faces you can imagine. There are all kinds of them. Teeth chattering, eyes flashing red, emitting poisonous gas...\\nYou should act, and act fast!","isCompleted":false}

@@ -47,21 +47,22 @@ namespace Combat
             charController.skillController = this; 
             charName = charController.charModel.charName;
            
+           
         }
 
         private void Start()
         {
-            
+
             charController = GetComponent<CharController>();
-            InitSkillList(charController); 
+            InitSkillList(charController);
             //CombatEventService.Instance.OnSOC1 += InitAllSkill_OnCombat;
 
-         //   CombatEventService.Instance.OnCombatInit += () => InitAllSkill_OnCombat(CombatState.INCombat_normal);
+            //   CombatEventService.Instance.OnCombatInit += () => InitAllSkill_OnCombat(CombatState.INCombat_normal);
 
             CombatEventService.Instance.OnEOC += OnEOCReset;
            // CombatEventService.Instance.OnCharOnTurnSet += UpdateAllSkillState;            
             // CharService.Instance.OnCharAddedToParty += InitSkillList;
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.sceneUnloaded += OnSceneUnLoaded;
             QuestEventService.Instance.OnEOQ += EOQTick;
             CombatEventService.Instance.OnEOC -= OnEOCReset;
             if (skillView == null)
@@ -69,7 +70,7 @@ namespace Combat
         }
         private void OnDisable()
         {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
+            SceneManager.sceneUnloaded -= OnSceneUnLoaded;
             CharService.Instance.OnCharSpawn -= InitSkillList;
             
             CombatEventService.Instance.OnEOR1 -= RoundTick;
@@ -77,7 +78,7 @@ namespace Combat
             QuestEventService.Instance.OnEOQ -= EOQTick;
         }
 
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        void OnSceneUnLoaded(Scene scene)
         {
             if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
             {
@@ -87,6 +88,7 @@ namespace Combat
                 //  InitAllSkill_OnCombat(CombatState.INCombat_normal);
                 CombatEventService.Instance.OnSOTactics += InitAllSkill_OnCombat;
                 CombatEventService.Instance.OnSOC += InitAllSkill_OnCombat;
+               
 
                 CombatEventService.Instance.OnEOR1 += RoundTick;
                 CombatEventService.Instance.OnEOC += EOCTick;
@@ -100,11 +102,12 @@ namespace Combat
             if (!CharService.Instance.allCharInCombat.Any(t => t.charModel.charID == charController.charModel.charID))
                 return; // if not in combat List return
             CharMode charMode = charController.charModel.charMode;
-            Debug.Log("COMBAT STATE" + charController.charModel.charID);
-            if (charMode == CharMode.Enemy)
+            Debug.Log("SKILL INIT" + charController.charModel.charID);
+            if (charMode == CharMode.Enemy) 
             {
                 InitSkillList(charController);
             }
+
             InitAllSkillBase();
         }
 
@@ -137,7 +140,7 @@ namespace Combat
             foreach (SkillData skillSO in skillDataSO.allSkills)
             {
                 SkillBase skillbase = SkillService.Instance.skillFactory.GetSkill(skillSO.skillName);
-               // Debug.Log("skill base" + skillSO.skillName);
+                Debug.Log("skill base" + skillSO.skillName);
                 skillbase.charName = skillDataSO.charName;
               
                 allSkillBases.Add(skillbase);

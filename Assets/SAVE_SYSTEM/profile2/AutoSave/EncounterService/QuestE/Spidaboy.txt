@@ -1,1 +1,0 @@
-{"questEName":1,"questENameStr":"Spidaboy","descTxt":"Couple of rats are ganging up against a poor little blue spider in a dark corner of the sewers. Do you wanna get involved at all?","isCompleted":false}

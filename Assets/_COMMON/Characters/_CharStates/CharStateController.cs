@@ -137,8 +137,6 @@ namespace Common
             if (HasCharState(charStateName))
                 return -1;
 
-
-
             int effectedCharID = charController.charModel.charID;
 
             int currRd = -1;

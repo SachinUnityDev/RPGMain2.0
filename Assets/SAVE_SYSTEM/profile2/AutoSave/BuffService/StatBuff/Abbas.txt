@@ -1,1 +1,0 @@
-{"charID":1,"allStatAltBuffData":[],"buffStrs":[],"deDuffStrs":[]}

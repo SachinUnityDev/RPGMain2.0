@@ -95,8 +95,8 @@ MonoBehaviour:
     maxLimit: 12
     isClamped: 0
   - AttribName: 7
-    currValue: 8
-    baseValue: 8
+    currValue: 2
+    baseValue: 2
     desc: Determinant value for base Health. Increases chance to withstand Hunger.
     minLimit: 0
     maxLimit: 100

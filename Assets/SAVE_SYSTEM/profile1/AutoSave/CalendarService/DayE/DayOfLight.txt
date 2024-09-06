@@ -1,1 +1,0 @@
-{"orderInSeq":6,"dayName":6,"dayName2":6,"dayNameStr":"Day of Light","dayDescription":"","tipOfTheDayList":[],"daySpecs":"+10 Light Res"}

@@ -65,7 +65,9 @@ namespace Combat
             charGO = this.skillController.gameObject;
             if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
             {
-                myDyna = GridService.Instance.GetDyna4GO(charGO);       
+                myDyna = GridService.Instance.GetDyna4GO(charGO);      
+                if(myDyna == null)
+                    Debug.LogError("My dyna missing" +skillModel.charName);
                 PopulateTargetPos();
             }            
         }
@@ -77,7 +79,8 @@ namespace Combat
         public virtual void SkillSelected() 
         {
 
-            if (!skillModel.castPos.Any(t => t == myDyna.currentPos))
+
+             if (!skillModel.castPos.Any(t => t == myDyna.currentPos))
                 return;
             PopulateTargetPos(); 
             

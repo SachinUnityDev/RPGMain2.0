@@ -1,1 +1,0 @@
-{"mapEName":3,"mapENameStr":"Band of Bandits","descTxt":"You are ambushed by a group of bandits. They clearly have no good intentions towards you. That leaves you only two choices:","choiceAStr":"Stand and Fight!","choiceBStr":"Run away!","isCompleted":false}

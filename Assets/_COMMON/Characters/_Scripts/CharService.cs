@@ -501,7 +501,6 @@ namespace Common
             if (charDiedinLastTurn.Count < 1) return;
             foreach (CharController charCtrl in charDiedinLastTurn.ToList())
             {
-                GridService.Instance.UpdateGridOnCharDeath(charCtrl);
                 CombatService.Instance.roundController.ReorderAfterCharDeathOnEOT(charCtrl);
             }
             charInGraveyard.AddRange(charDiedinLastTurn);
@@ -510,14 +509,23 @@ namespace Common
         public void On_CharDeath(CharController _charController, int causeByCharID)
         {
             if (GameService.Instance.currGameModel.gameScene != GameScene.InCombat) return;
-            
-            _charController.charModel.stateOfChar = StateOfChar.Dead; 
-            _charController.gameObject.GetComponent<BoxCollider2D>().enabled= false;
-            // grid service Unoccupied to be added
-           // allCharInCombat.Remove(_charController); // rest of the list are update on EOT
-            OnCharDeath?.Invoke(_charController);
+            GridService.Instance.UpdateGridOnCharDeath(_charController);
 
+            _charController.charModel.stateOfChar = StateOfChar.Dead; 
+           // _charController.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            // grid service Unoccupied to be added
+            // allCharInCombat.Remove(_charController); // rest of the list are update on EOT
             charDiedinLastTurn.Add(_charController);
+            try
+            {                
+                OnCharDeath?.Invoke(_charController);              
+            }
+            catch(Exception e)
+            {
+                Debug.Log("OnCharDeath not found" + e.Message);
+            }
+
+            //charDiedinLastTurn.Add(_charController);
             if (_charController.charModel.charName == CharNames.Abbas)
             {
                 CombatService.Instance.OnCombatResult(CombatResult.Defeat, CombatEndCondition.Defeat_AbbasDied); 

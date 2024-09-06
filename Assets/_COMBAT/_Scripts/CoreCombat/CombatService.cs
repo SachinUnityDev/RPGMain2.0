@@ -115,7 +115,9 @@ namespace Combat
             {
                 if (currCharOnTurn.charModel.charID != charCtrl.charModel.charID && !turnOn)
                 {
-                    charCtrl.GetComponentInChildren<Collider>().enabled = turnOn;
+                    Collider col = charCtrl.GetComponentInChildren<Collider>(); 
+                    if(col != null)
+                        col.enabled = turnOn;                    
                 }   
             }
         }

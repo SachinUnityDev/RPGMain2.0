@@ -24,21 +24,11 @@ namespace Combat
         public List<CharController> charTurnOrder = new List<CharController>();
         
         
-        
-
         private void Start()
         {
-            index = -1;          
-           // CombatEventService.Instance.OnSOT += SetNextCharOnTurn;
-          //  CombatEventService.Instance.OnSOR1 += OnRoundStart;
-
+            index = -1;   
         }
-        private void OnDisable()
-        {
-        //    CombatEventService.Instance.OnSOT -= SetNextCharOnTurn;
-         //   CombatEventService.Instance.OnSOR1 -= OnRoundStart;
-
-        }
+       
         public void SetSameCharOnTurn()
         {
             Debug.Log("SAME CHAR ON TURN SET" + index);

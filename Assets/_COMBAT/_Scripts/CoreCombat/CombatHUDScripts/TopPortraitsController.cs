@@ -89,6 +89,7 @@ namespace Combat
 
         public void SetDefaultTurnOrder()
         {
+
             CleanPanelGO(allyInCombat);
             CleanPanelGO(enemyInCombat);
             for (int i = 0; i < roundController.allyTurnOrder.Count; i++)

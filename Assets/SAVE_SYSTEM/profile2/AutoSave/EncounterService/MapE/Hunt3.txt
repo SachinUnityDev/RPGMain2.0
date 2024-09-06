@@ -1,1 +1,0 @@
-{"mapEName":7,"mapENameStr":"Hunt in the Wilderness","descTxt":"You got more fight in you, don't you? You're a warrior - not the type to step back. You like to confront your fears. Don't let the terror of the Savannah overcome you. For greater gains, you can go a bit further....","choiceAStr":"Continue","choiceBStr":"Go back to the Town","isCompleted":false}

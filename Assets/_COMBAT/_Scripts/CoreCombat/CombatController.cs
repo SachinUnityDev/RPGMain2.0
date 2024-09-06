@@ -12,8 +12,8 @@ namespace Combat
     public class CombatController : MonoBehaviour
     {
 
-        int MAX_VAL_FOR_ACTION_PTS = 1; 
-
+        int MAX_VAL_FOR_ACTION_PTS = 4; 
+        int BASE_VAL_FOR_ACTION_PTS = 0;
         public DynamicPosData selectedLoc;
         public DynamicPosData TargetLoc;
 
@@ -21,7 +21,7 @@ namespace Combat
         public int actionPts = 0;
         CharController charController;
 
-        [SerializeField] Canvas canvas;
+        [SerializeField] GameObject canvasGO;
         [SerializeField] ActionPtsView actionPtsView;
 
 
@@ -67,10 +67,10 @@ namespace Combat
 
         public void SetActionPts()  // SOT ONLY 
         {
-            actionPts= 0;
+            actionPts = BASE_VAL_FOR_ACTION_PTS; 
             MoraleChk(charController);
             if (charController.charModel.charMode == CharMode.Ally)
-                actionPts ++;
+                actionPts +=+2;
             else
                 ++actionPts;
             if (actionPts > MAX_VAL_FOR_ACTION_PTS)
@@ -132,8 +132,10 @@ namespace Combat
         void FillActionPtsView(CharMode charMode)
         {
             if (charMode != CharMode.Ally) return; // no action pts view for the enemy
-            canvas = FindObjectOfType<Canvas>();
-            actionPtsView = canvas.GetComponentInChildren<ActionPtsView>(true);
+            canvasGO = GameObject.FindGameObjectWithTag("Canvas"); 
+            actionPtsView = canvasGO.GetComponentInChildren<ActionPtsView>(true);
+            if(actionPtsView == null)
+                Debug.LogError(" Action pts view not found");   
             actionPtsView.UpDateActionsPtsView(actionPts);
         }
   

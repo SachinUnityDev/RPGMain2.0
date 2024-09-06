@@ -393,16 +393,16 @@ namespace Common
                     Debug.Log("ATTEMPTED change in stat" + causeType + "Name" + causeByCharID + "StatName" + statName);
                     return null;
                 }
-                if(statName == StatName.health)  
-                {
-                    float belowZero = GetHealthValBelow0(value);
-                    if (belowZero <= 0)
-                    {
-                        StatModData statModDataFort = ChangeStat(CauseType.StatMinMaxLimit, 0, charModel.charID
-                                     , StatName.fortitude, belowZero);
-                        return statModDataFort;
-                    }
-                }               
+                //if(statName == StatName.health)  
+                //{
+                //    float belowZero = GetHealthValBelow0(value);
+                //    if (belowZero <= 0)
+                //    {
+                //        StatModData statModDataFort = ChangeStat(CauseType.StatMinMaxLimit, 0, charModel.charID
+                //                     , StatName.fortitude, belowZero);
+                //        return statModDataFort;
+                //    }
+                //}               
                 if(statName == StatName.health  
                             && charStateController.HasCharState(CharStateName.LastDropOfBlood)
                             && causeType == CauseType.CharSkill)

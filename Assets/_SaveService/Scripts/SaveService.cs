@@ -94,7 +94,7 @@ namespace Common
             string[] directories = GetAllDirectories(path);
             foreach (string directory in directories)
             { 
-                ClearAllDirectories(directory);
+                ClearAllDirectories(directory); // Recursive call  to ensure all the directories are cleared
                // Debug.Log("DIR"+directory);
                 string [] files = GetAllTxtFiles(directory);    
                 foreach (string file in files)

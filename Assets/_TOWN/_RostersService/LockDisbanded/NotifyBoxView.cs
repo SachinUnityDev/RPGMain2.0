@@ -28,12 +28,16 @@ namespace Common
         [SerializeField] NotifyModel notifyModel;
         [SerializeField] NotifyName notifyName;
         INotify notify;
+
+        public void Awake()
+        {
+            UnLoad();
+        }
         void Start()
         {
             continueBtn.onClick.AddListener(OnContinueBtnPressed); 
             exitBtn.onClick.AddListener(OnCloseBtnPressed);
-            toggleUI.onValueChanged.AddListener(OnTogglePressed);
-           // UnLoad();
+            toggleUI.onValueChanged.AddListener(OnTogglePressed);           
         }
          
         void OnTogglePressed(bool toggle)

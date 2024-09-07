@@ -533,6 +533,11 @@ namespace Common
         }
         #endregion 
 
+        public bool HasCharDiedInCombat(CharController charController)
+        {
+            return charInGraveyard.Contains(charController);
+        }
+
         #region GET NAME STRINTGS
         public string GetCharName(CharNames charName)
         {

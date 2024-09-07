@@ -293,12 +293,17 @@ namespace Combat
                     int guardingCharID = charStateBuffData.charStateModData.causeByCharID; 
                     CharController charController = CharService.Instance
                                                         .GetCharCtrlWithCharID(guardingCharID);
-                    DynamicPosData newTargetDyna = GridService.Instance.GetDyna4GO(charController.gameObject);
 
-                    _targetDyna = newTargetDyna;
-                    CombatService.Instance.currTargetClicked = newTargetDyna.charGO.GetComponent<CharController>();
-                    skillModel.targetPos.Clear();
-                    skillModel.targetPos.Add(new CellPosData(newTargetDyna.charMode,newTargetDyna.currentPos)); 
+                    // check if char has not died 
+                    if (!CharService.Instance.HasCharDiedInCombat(charController))
+                    {
+                        DynamicPosData newTargetDyna = GridService.Instance.GetDyna4GO(charController.gameObject);
+
+                        _targetDyna = newTargetDyna;
+                        CombatService.Instance.currTargetClicked = newTargetDyna.charGO.GetComponent<CharController>();
+                        skillModel.targetPos.Clear();
+                        skillModel.targetPos.Add(new CellPosData(newTargetDyna.charMode, newTargetDyna.currentPos));
+                    }
                 }
                 OnTargetClicked?.Invoke(_targetDyna, null);
             }

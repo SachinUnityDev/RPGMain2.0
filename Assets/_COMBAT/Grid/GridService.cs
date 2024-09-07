@@ -159,6 +159,8 @@ namespace Combat
             GameObject charGO = _charController.gameObject;
             DynamicPosData dyna = GetDyna4GO(charGO);
             allCurrPosOccupiedByDyna.Remove(dyna);
+            UpdateCellsOccupiedList();
+
         }
 
         public void UpdateNewPosInDyna(DynamicPosData dynamicPosData, int newPos)
@@ -595,10 +597,7 @@ namespace Combat
         }
 
 
-        public void UpdateDynaListOnDeath(DynamicPosData dyna)
-        {
-            allCurrPosOccupiedByDyna.Remove(dyna);
-        }
+     
         public DynamicPosData GetDyna4GO(GameObject _charGO)
         {
             CharModel charModel = _charGO.GetComponent<CharController>().charModel;

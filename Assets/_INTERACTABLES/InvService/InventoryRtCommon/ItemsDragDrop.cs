@@ -77,7 +77,7 @@ namespace Interactables
         {
             if (iSlotable.slotType == SlotType.GewgawsActiveInv || iSlotable.slotType == SlotType.PotionsActiveInv
                 || iSlotable.slotType == SlotType.ProvActiveInv || iSlotable.slotType == SlotType.TrophySelectSlot
-            || iSlotable.slotType == SlotType.TrophyScrollSlot)
+            || iSlotable.slotType == SlotType.TrophyScrollSlot || iSlotable.slotType == SlotType.PotionActInCombat)
                 return; // eliminating drag and drop on active slot of Potion n Gewgaw
 
             if(ItemService.Instance.itemCardGO != null)

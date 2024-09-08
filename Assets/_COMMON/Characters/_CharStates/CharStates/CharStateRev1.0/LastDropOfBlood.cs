@@ -23,18 +23,24 @@ namespace Common
         public override void StateApplyFX()
         {
             if (charController.charModel.orgCharMode == CharMode.Enemy) return;
+            charController.OnStatChg -= SkillAttackChks;
             charController.OnStatChg += SkillAttackChks; 
         }
         void SkillAttackChks(StatModData statModData)
         {
             if (statModData.statModified != StatName.health) return;
-            if (statModData.causeType != CauseType.CharSkill) return; 
+            if (statModData.causeType != CauseType.CharSkill) return;
+            if (statModData.modVal > 0) return; 
             LastDropChks();
         }
         void LastDropChks()
         {
             chances = new List<float>() { 60f, chance, 100 - (chance + 60) };
             
+            if(charController.charStateController.HasCharState(CharStateName.CheatedDeath))
+            {
+                chances[1] = 0;  // once you cheat death you can't cheat death again other chances to be applied    
+            }   
             switch (chances.GetChanceFrmList())
             {
                 case 0:

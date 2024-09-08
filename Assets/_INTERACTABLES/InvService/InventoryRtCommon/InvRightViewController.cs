@@ -12,24 +12,7 @@ using Quest;
 
 namespace Interactables
 {
-    //public class ItemSlotData
-    //{
-    //    public Iitems item;
-    //    public int currentStackSize;
-    //    public int slotNum;
-    //    //public ItemSlotData(Iitems item, int currentStackSize, int slotNum)
-    //    //{
-    //    //    this.item = item;
-    //    //    this.currentStackSize = currentStackSize;
-    //    //    this.slotNum = slotNum;
-    //    //}
-    //}
-
-    //public class InvModelView
-    //{
-    //    public List<ItemSlotData> allItemSlotData = new List<ItemSlotData>();
-    //    public int currInvSize; 
-    //}
+    
 
     // to be attached to inventory Panel... 
     public class InvRightViewController : MonoBehaviour
@@ -220,6 +203,11 @@ namespace Interactables
         }
         public void CloseRightClickOpts()
         {
+            if(GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
+            {
+                return; 
+            }
+
             if (rightClickOpts.GetComponent<RightClickOpts>().isHovered)
                 return; 
 

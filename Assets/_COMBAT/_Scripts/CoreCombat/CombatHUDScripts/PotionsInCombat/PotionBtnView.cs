@@ -53,20 +53,21 @@ namespace Combat
            if(activeInvData != null) 
             for (int i = 0; i < container.childCount;  i++)
             {
-                if(i < activeInvData.gewgawActiveInv.Length)
+                if(i < activeInvData.potionActiveInv.Length)
                     container.GetChild(i).GetComponent<PotionSlotInCombatView>()
                                 .Init(activeInvData.potionActiveInv[i]);
-                else
+                if(i == 2)
                     container.GetChild(i).GetComponent<PotionSlotInCombatView>()
-                               .Init(null);
+                               .Init(activeInvData.provisionSlot);
             }
-           else
-            for (int i = 0; i < container.childCount; i++)
+            else
             {
-                container.GetChild(i).GetComponent<PotionSlotInCombatView>()
-                            .Init(null);
-            }
-                
+                for (int i = 0; i < container.childCount; i++)
+                {
+                    container.GetChild(i).GetComponent<PotionSlotInCombatView>()
+                                .Init(null);
+                }
+            }   
         }
 
         public void OnPointerClick(PointerEventData eventData)

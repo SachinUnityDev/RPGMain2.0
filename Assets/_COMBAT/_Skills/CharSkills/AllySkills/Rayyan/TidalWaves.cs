@@ -50,8 +50,9 @@ namespace Combat
 
         public override void ApplyMoveFx()
         {
+            
             foreach (DynamicPosData targetDyna in CombatService.Instance.mainTargetDynas)
-            {
+            {   
                 GridService.Instance.gridMovement.MovebyRow(targetDyna, MoveDir.Backward, 1);
             }
         }

@@ -39,16 +39,7 @@ namespace Combat
             deathGoddessGO.GetComponent<DeathGodessFX>().PlayDeathAnim(charController); 
         }
  
-        //private void Update()
-        //{
-        //    //if (Input.GetKeyDown(KeyCode.B))
-        //    //{
-        //    //    CharController charController = CharacterService.Instance.CharsInPlayControllers[1];
-        //    //    CombatService.Instance.roundController.ReorderAfterCharDeath(charController); 
-
-        //    //    PlayDeathAnim(charController);
-        //    //}
-        //}
+       
 
 
 

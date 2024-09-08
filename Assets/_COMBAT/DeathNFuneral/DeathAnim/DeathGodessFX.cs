@@ -73,6 +73,8 @@ namespace Combat
                 color.b = i;
                 skeleton.Skeleton.SetColor(color);
                 yield return null;
+                skeleton.Skeleton.SetColor(new Color(0,0,0));
+                skeleton.gameObject.SetActive(false);
             }
         }
     }

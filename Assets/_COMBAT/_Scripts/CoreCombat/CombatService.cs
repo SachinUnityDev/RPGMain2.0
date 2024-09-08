@@ -51,6 +51,7 @@ namespace Combat
         {            
           //  CombatEventService.Instance.OnEOR1 += EORActions;
             CombatEventService.Instance.OnCharOnTurnSet += SetAllCurrCharValues;
+          
             SkillService.Instance.SkillSelect
                             += (CharNames _charName, SkillNames _skillName)
                             =>combatState = CombatState.INCombat_InSkillSelected;
@@ -73,6 +74,8 @@ namespace Combat
         {  
             CombatEventService.Instance.OnEOR1 -= EORActions;
             CombatEventService.Instance.OnCharOnTurnSet -= SetAllCurrCharValues;
+          
+
             CharService.Instance.OnCharDeath -= OnCharDeathCombatChk;
             SkillService.Instance.SkillSelect
                                        -= (CharNames _charName, SkillNames _skillName)
@@ -84,6 +87,9 @@ namespace Combat
             currCharHovered = currCharOnTurn;
             combatHUDView.UpdateTurnBtn(charController); 
         }
+
+    
+
         public void GetAllyInCombat()
         {
             foreach (CharController charCtrl in CharService.Instance.allCharsInPartyLocked)

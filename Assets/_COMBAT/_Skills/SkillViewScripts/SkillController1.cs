@@ -102,7 +102,7 @@ namespace Combat
             if (!CharService.Instance.allCharInCombat.Any(t => t.charModel.charID == charController.charModel.charID))
                 return; // if not in combat List return
             CharMode charMode = charController.charModel.charMode;
-            Debug.Log("SKILL INIT" + charController.charModel.charID);
+           // Debug.Log("SKILL INIT" + charController.charModel.charID);
             if (charMode == CharMode.Enemy) 
             {
                 InitSkillList(charController);
@@ -140,7 +140,7 @@ namespace Combat
             foreach (SkillData skillSO in skillDataSO.allSkills)
             {
                 SkillBase skillbase = SkillService.Instance.skillFactory.GetSkill(skillSO.skillName);
-                Debug.Log("skill base" + skillSO.skillName);
+               // Debug.Log("skill base" + skillSO.skillName);
                 skillbase.charName = skillDataSO.charName;
               
                 allSkillBases.Add(skillbase);
@@ -1036,7 +1036,7 @@ namespace Combat
         bool IsNotOnCastPos(SkillModel _skillModel)
         {
             GameObject charGO = CharService.Instance.GetCharCtrlWithCharID(_skillModel.charID).gameObject;
-             Debug.Log("Position"+ charGO.name);
+           //  Debug.Log("Position"+ charGO.name);
 
             int pos = GridService.Instance.GetDyna4GO(charGO).currentPos;
            

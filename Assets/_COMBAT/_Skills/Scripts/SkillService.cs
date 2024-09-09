@@ -478,7 +478,7 @@ namespace Combat
         public void On_PostSkill(SkillModel skillModel)
         {
             // ClearPrevData();  // redundant safety .. causing only one FX to play as it clears mainTargetDyna
-
+            Debug.Log("ON POST SKILL>>>>" + skillModel.skillName);  
             CharController charController = CombatService.Instance.currCharOnTurn;  
             CombatController combatController = charController.GetComponent<CombatController>();
             // if ally reduce action pts

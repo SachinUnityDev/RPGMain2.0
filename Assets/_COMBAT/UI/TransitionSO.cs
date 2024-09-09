@@ -99,7 +99,7 @@ namespace Combat
         void MoveLeft2Right()
         {            
             crossTxtTrans.DOLocalMoveX(centerTransWidth*1/3 , 1.0f);         
-            Debug.Log("WIDTH" + centerTransWidth); 
+          //  Debug.Log("WIDTH" + centerTransWidth); 
         }
         void ScaleTopNBottomPanel(float fadeVal)
         {

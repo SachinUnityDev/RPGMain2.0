@@ -512,9 +512,7 @@ namespace Common
             GridService.Instance.UpdateGridOnCharDeath(_charController);
 
             _charController.charModel.stateOfChar = StateOfChar.Dead; 
-           // _charController.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-            // grid service Unoccupied to be added
-            // allCharInCombat.Remove(_charController); // rest of the list are update on EOT
+       
             charDiedinLastTurn.Add(_charController);
             try
             {                

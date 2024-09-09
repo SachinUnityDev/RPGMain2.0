@@ -383,8 +383,9 @@ namespace Common
             DynamicPosData dyna = null;
             StatData statData = GetStat(statName);
         
-            if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
+            if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat && charModel.charMode != CharMode.Enemy)
             {
+                
                 turn = CombatService.Instance.currentTurn;             
                 Vector3 fwd = Vector3.zero;
                 dyna = GridService.Instance.GetDyna4GO(gameObject);
@@ -393,17 +394,17 @@ namespace Common
                     Debug.Log("ATTEMPTED change in stat" + causeType + "Name" + causeByCharID + "StatName" + statName);
                     return null;
                 }
-                //if(statName == StatName.health)  
-                //{
-                //    float belowZero = GetHealthValBelow0(value);
-                //    if (belowZero <= 0)
-                //    {
-                //        StatModData statModDataFort = ChangeStat(CauseType.StatMinMaxLimit, 0, charModel.charID
-                //                     , StatName.fortitude, belowZero);
-                //        return statModDataFort;
-                //    }
-                //}               
-                if(statName == StatName.health  
+                    if (statName == StatName.health)
+                    {// lose fort instead of health 
+                        float belowZero = GetHealthValBelow0(value);
+                        if (belowZero <= 0)
+                        {
+                            StatModData statModDataFort = ChangeStat(CauseType.StatMinMaxLimit, 0, charModel.charID
+                                         , StatName.fortitude, belowZero);
+                            return statModDataFort;
+                        }
+                    }
+                    if (statName == StatName.health  
                             && charStateController.HasCharState(CharStateName.LastDropOfBlood)
                             && causeType == CauseType.CharSkill)
                 {// saves chck 

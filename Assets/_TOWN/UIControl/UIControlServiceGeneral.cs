@@ -160,7 +160,12 @@ namespace Common
         public void TogglePanel(GameObject go, bool turnON)
         {
             if(turnON)
-                if (currOpenPanels.Any(t => t.gameObject.name == go.name)) return;
+                foreach (GameObject currGo in currOpenPanels)
+                {
+                    if(currGo != null)
+                        if (currGo.name == go.name)
+                            return;
+                }                   
             iHelp help = go?.GetComponent<iHelp>();
             if (turnON)
             {
@@ -200,7 +205,7 @@ namespace Common
         {
            // TogglePanel(go, turnOn);
             int index =
-            currOpenPanels.FindIndex(t => t.GetComponent<NotifyBoxView>() != null);
+            currOpenPanels.FindIndex(t => t?.GetComponent<NotifyBoxView>() != null);
             if (index != -1)
                 currOpenPanels[index].GetComponent<NotifyBoxView>().UnLoad();
         }

@@ -87,6 +87,8 @@ namespace Common
         void OnSceneLoaded(Scene current, Scene next)
         {
             // end here 
+            UIControlServiceGeneral.Instance.CloseAllPanels();
+
             if(sceneTransitGO!= null)
             {
                 if(next.isLoaded)

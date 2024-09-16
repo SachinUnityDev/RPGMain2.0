@@ -4,6 +4,8 @@ using UnityEngine;
 using Common;
 using System.Linq;
 using Quest;
+using DG.Tweening;
+using UnityEngine.Rendering.Universal;
 
 namespace Combat
 {
@@ -167,25 +169,41 @@ namespace Combat
             //(If Abbas fled combat you can still win Combat with remaining heroes)"	
             //Combat didnt finish before the round limit	
             //Abbas dies / Manually Flee / No Hero left on battlefield (die or flee)  // Combat DEFEAT on all flee
+            CheckCombatResultWithWait(charController);
+            //StartCoroutine(WaitUnTillDeathEvent(charController));
+        }
+        IEnumerator WaitUnTillDeathEvent(CharController charController)
+        {
+            while (!CharService.Instance.isProcessingDeath)
+            {
+                yield return null;                 
+            }         
+            
+        }
 
-            if(charController.charModel.charMode == CharMode.Enemy)
+        void CheckCombatResultWithWait(CharController charController)
+        {
+            if (charController.charModel.charMode == CharMode.Enemy)
             {// chk if all enemies have died // victory case here
                 if (!CharService.Instance.allCharInCombat.Any(t => t.charModel.charMode == CharMode.Enemy))
                 {
-                    OnCombatResult(CombatResult.Victory, CombatEndCondition.Victory_AllEnemiesDied); 
-                }                     
-            }else if(charController.charModel.charName == CharNames.Abbas)
+                    OnCombatResult(CombatResult.Victory, CombatEndCondition.Victory_AllEnemiesDied);
+                }
+            }
+            else if (charController.charModel.charName == CharNames.Abbas)
             { // combat lost .. Abbas Died
-                    OnCombatResult(CombatResult.Defeat, CombatEndCondition.Defeat_AbbasDied);
+                OnCombatResult(CombatResult.Defeat, CombatEndCondition.Defeat_AbbasDied);
             }
             else // ally other than abbas Died
             {
-                if(!CharService.Instance.allCharInCombat.Any(t=>t.charModel.charMode == CharMode.Ally))
+                if (!CharService.Instance.allCharInCombat.Any(t => t.charModel.charMode == CharMode.Ally))
                 {
-                     OnCombatResult(CombatResult.Defeat, CombatEndCondition.Defeat_AllInCombatDiedNFled); 
-                }              
-            }            
+                    OnCombatResult(CombatResult.Defeat, CombatEndCondition.Defeat_AllInCombatDiedNFled);
+                }
+            }
         }
+       
+
         public void OnCombatResult(CombatResult combatResult, CombatEndCondition combatEndCondition)
         {
             CombatEventService.Instance.On_EOC(combatResult);

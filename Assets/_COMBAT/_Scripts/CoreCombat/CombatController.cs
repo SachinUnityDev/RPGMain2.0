@@ -128,7 +128,11 @@ namespace Combat
             --actionPts;
             FillActionPtsView(charMode); 
         }
-
+        public void SubAPOnPotionConsume()
+        {
+            --actionPts;
+            FillActionPtsView(CharMode.Ally);
+        }
         void FillActionPtsView(CharMode charMode)
         {
             if (charMode != CharMode.Ally) return; // no action pts view for the enemy

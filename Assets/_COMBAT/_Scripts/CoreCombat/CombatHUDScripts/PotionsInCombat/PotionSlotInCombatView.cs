@@ -1,3 +1,4 @@
+using Combat;
 using Interactables;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ public class PotionSlotInCombatView : MonoBehaviour, IPointerClickHandler, iSlot
     public List<ItemActions> rightClickActions = new List<ItemActions>();
     public bool isRightClicked = false;
 
-
+    PotionBtnView potionBtnView;
     private void Start()
     {
         slotID = transform.GetSiblingIndex();
@@ -32,8 +33,9 @@ public class PotionSlotInCombatView : MonoBehaviour, IPointerClickHandler, iSlot
     }
 
 
-    public void Init(Iitems item)
+    public void Init(Iitems item, PotionBtnView potionBtnView)
     {
+        this.potionBtnView = potionBtnView;
         if(item == null) 
         {
             ClearSlot(); return;
@@ -207,6 +209,12 @@ public class PotionSlotInCombatView : MonoBehaviour, IPointerClickHandler, iSlot
     #region RIGHT CLICK ACTIONS ON INV RELATED
     public void OnPointerClick(PointerEventData eventData)
     {
+        CombatController combatController = CombatService.Instance.currCharClicked.combatController;
+        if (combatController.actionPts <= 0)
+        {
+            potionBtnView.ToggleNoApWarningTxt(true);
+        }
+        potionBtnView.ToggleNoApWarningTxt(false);
         if (ItemsInSlot.Count == 0) return;
         Iitems item = ItemsInSlot[0];
       
@@ -220,8 +228,8 @@ public class PotionSlotInCombatView : MonoBehaviour, IPointerClickHandler, iSlot
                 IConsumable iconsume = item as IConsumable;
                 if (iconsume != null)
                     iconsume.ApplyConsumableFX();
-                
 
+                combatController.SubAPOnPotionConsume();
                 RemoveItem();
             }
                

@@ -19497,8 +19497,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.9, y: 42.3}
-  m_SizeDelta: {x: 417.0411, y: 785.7328}
+  m_AnchoredPosition: {x: -0.0000035762787, y: 30.21}
+  m_SizeDelta: {x: 488.21, y: 846.15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &777931070
 MonoBehaviour:
@@ -19520,15 +19520,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Game difficulty is not optional but progressive upon completion. You will
-    now play on the initial difficulty mode which we call Kiwi. It is sweet but a
-    little sour at times.
+  m_text: 'Game difficulty is progressive and not optional. Upon completion, you
+    will unlock new levels. For now, you will start on the initial difficulty, which
+    we call "Kiwi." It''s sweet, but with a bit of a sour twist at times.
 
 
-    Shargad: First Blood is not about not making mistakes
-    but learning from them. Don''t be afraid of trying whatever you feel like to
-    try. Though, you''ll surely meet the consequences of your choices...
-
+    Shargad:
+    First Blood isn''t about avoiding mistakes, but about learning from them. Don''t
+    hesitate to try whatever you feel like. Just be ready to face the consequences
+    of your choices.
 
 
     Enjoy!'
@@ -19541,8 +19541,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4292208383
-  m_fontColor: {r: 1, g: 0.9005166, b: 0.8349056, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -19559,8 +19559,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31
-  m_fontSizeBase: 31
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -38841,7 +38841,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 285.55, y: 210.9}
+  m_SizeDelta: {x: 345.97, y: 219.94}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1680514126
 MonoBehaviour:
@@ -38863,7 +38863,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f16385c2f9ad08b469a06599e05918e5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3b4ebf34c428d1344bc96db089320bd1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -38894,7 +38894,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconPanel: {fileID: 492354142}
-  img: {fileID: 0}
+  img: {fileID: 1680514126}
   twitterBtn: {fileID: 630935521}
   youtubeBtn: {fileID: 347951755}
   discordBtn: {fileID: 20907659}

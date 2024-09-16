@@ -146,7 +146,8 @@ namespace Combat
             try { OnCharOnTurnSet?.Invoke(charCtrl); }
             catch (Exception e)
             {
-                Debug.Log("EXCEPTION OCCURED222!!!!" + e.Message);
+                Debug.Log("EXCEPTION OCCURED222!!!!" + e.Message + "CHAR" + charCtrl.charModel.charID + charCtrl.charModel.charName);
+                Debug.Log(e.StackTrace); // Log the stack trace of the exception
             }
             finally
             {
@@ -166,7 +167,6 @@ namespace Combat
             catch(Exception ex)
             {
                 Debug.Log("EXCEPTION OCCURED STACTICS!!!!" + ex.Message);
-
             }
         }
         public void On_SOC()
@@ -281,6 +281,7 @@ namespace Combat
                 if (targetController.charStateController.HasCharState(CharStateName.Cloaked)
                   && CombatService.Instance.mainTargetDynas.Count == 1)
                 {
+                    SkillService.Instance.DeSelectSkill(); 
                     return;
                 }
 

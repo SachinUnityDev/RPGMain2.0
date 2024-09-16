@@ -29,17 +29,15 @@ namespace Common
         [SerializeField] NotifyName notifyName;
         INotify notify;
 
-        public void Awake()
-        {
-            UnLoad();
-        }
+        
         void Start()
         {
             continueBtn.onClick.AddListener(OnContinueBtnPressed); 
             exitBtn.onClick.AddListener(OnCloseBtnPressed);
-            toggleUI.onValueChanged.AddListener(OnTogglePressed);           
+            toggleUI.onValueChanged.AddListener(OnTogglePressed);
+
         }
-         
+
         void OnTogglePressed(bool toggle)
         {
             notifyModel.isDontShowAgainTicked = toggle;
@@ -87,6 +85,7 @@ namespace Common
 
         public void Init()
         {
+            gameObject.SetActive(false);
         }
     }
 }

@@ -473,8 +473,15 @@ namespace Interactables
             ActiveInvData activeInvData = allActiveInvData.Find(t => t.CharID == charID);
             if (activeInvData != null)
             {
-                activeInvData.potionActiveInv[slotID] = null;
-                activeInvData.potionCount--;
+                if (slotID < 2) // provision slot is
+                {
+                    activeInvData.potionActiveInv[slotID] = null;
+                    activeInvData.potionCount--;
+                }
+                else
+                {
+                    activeInvData.provisionSlot = null;
+                }                
                 UnEquipItem(Item);
                 return true;
             }

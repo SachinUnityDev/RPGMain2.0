@@ -18,8 +18,8 @@ namespace Intro
         [SerializeField] OnEscAnim onEscAnim;
         [SerializeField] bool animPlaying = false; 
         [SerializeField] float startTime =0f;
-        [SerializeField] float playTime = 0.5f; 
-
+        [SerializeField] float playTime = 0.5f;
+        [SerializeField] bool endReached = false;
         public void Init()
         {
             InitVideo();
@@ -91,14 +91,15 @@ namespace Intro
 
         void EndReached(VideoPlayer vp)
         {
-            animPlaying= false;
+            animPlaying= false; endReached = true; 
             vp.Stop();
             UnLoad();
         }
         private void Update()
         {
             if (Input.GetKey(KeyCode.Escape))
-            {
+            {  
+                if(endReached) return;
                 if (!animPlaying)
                 {
                     startTime = Time.time;                  
@@ -110,9 +111,9 @@ namespace Intro
                     float val = ((Time.time - startTime)/playTime);
                     Debug.Log("VALUE" + val);
                     onEscAnim.PlayAnim(val);
-                    if (Time.time - startTime >= playTime)
+                    if (val >= 0.9f)
                     {
-                        EndReached(video);
+                        EndReached(video);                        
                     }
                 }
                 onEscAnim.gameObject.SetActive(animPlaying);
@@ -120,7 +121,7 @@ namespace Intro
             if (Input.GetKeyUp(KeyCode.Escape))
             {               
                 animPlaying= false;                
-               onEscAnim.ResetAnim();
+                onEscAnim.ResetAnim();
                 onEscAnim.gameObject.SetActive(animPlaying);
             }            
         }

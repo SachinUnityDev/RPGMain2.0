@@ -34,7 +34,8 @@ namespace Intro
             this.setProfilePtrEvents = setProfilePtrEvents;
             if(gameModel == null)
             SetState(false);
-            else SetState(true);    
+            else SetState(true);   
+            notifyBoxView.Init();
         }
 
         public void SetState(bool isActive)

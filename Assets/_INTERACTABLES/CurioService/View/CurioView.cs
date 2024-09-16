@@ -45,6 +45,7 @@ namespace Quest
             curioPg1.gameObject.SetActive(true);
             curioPg2.gameObject.SetActive(false);
             notifyBoxView = transform.GetComponentInChildren<NotifyBoxView>(true);
+            notifyBoxView.Init();
         }
         public void ShowPage2(Iitems item)
         {

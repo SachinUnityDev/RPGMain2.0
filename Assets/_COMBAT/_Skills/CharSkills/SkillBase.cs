@@ -168,7 +168,8 @@ namespace Combat
         }
 
         public virtual void PostApplyFX()
-        {  
+        {
+            PopulateTargetPos(); 
             SkillService.Instance.On_PostSkill(skillModel);          
         }
 
@@ -300,8 +301,9 @@ namespace Combat
 
             skillModel.targetPos.Clear(); CombatService.Instance.mainTargetDynas.Clear();
 
-            List<DynamicPosData> sameLaneOccupiedPos = GridService.Instance.GetInSameLaneOppParty
-                         (new CellPosData(charController.charModel.charMode, GridService.Instance.GetDyna4GO(charGO).currentPos));
+            List<DynamicPosData> sameLaneOccupiedPos = new List<DynamicPosData>(); 
+            sameLaneOccupiedPos = GridService.Instance.GetInSameLaneOppParty
+                                    (new CellPosData(charController.charModel.charMode, GridService.Instance.GetDyna4GO(charGO).currentPos));
             if (sameLaneOccupiedPos.Count > 0)
             {
                 CellPosData Pos = new CellPosData(sameLaneOccupiedPos[0].charMode, sameLaneOccupiedPos[0].currentPos);

@@ -28,21 +28,21 @@ namespace Combat
         private void OnEnable()
         {
             PassiveSkillCardInit();
-            CombatEventService.Instance.OnCharOnTurnSet -= OnEOT;
-            CombatEventService.Instance.OnCharOnTurnSet += OnEOT; 
+            CombatEventService.Instance.OnCharOnTurnSet -= OnCharOnTurnSet;
+            CombatEventService.Instance.OnCharOnTurnSet += OnCharOnTurnSet; 
         }
 
         private void OnDisable()
         {
             ClearData();
-            CombatEventService.Instance.OnCharOnTurnSet -= OnEOT;
+            CombatEventService.Instance.OnCharOnTurnSet -= OnCharOnTurnSet;
         }
         private void OnDestroy()
         {
             ClearData();
-            CombatEventService.Instance.OnCharOnTurnSet -= OnEOT;
+            CombatEventService.Instance.OnCharOnTurnSet -= OnCharOnTurnSet;
         }
-        void OnEOT(CharController charController)
+        void OnCharOnTurnSet(CharController charController)
         {
             gameObject?.SetActive(false);                
         }

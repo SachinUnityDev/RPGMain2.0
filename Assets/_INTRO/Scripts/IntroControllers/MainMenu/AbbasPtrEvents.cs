@@ -33,11 +33,15 @@ namespace Intro
    
         public void ShowBtn()
         {
+            DOTween.KillAll();
+
             iconPanel.transform.DOScale(1, 0.25f);
             img.DOFade(1, 0.25f);
         }
         public void HideBtn()
         {
+            DOTween.KillAll();
+
             Sequence waitSeq = DOTween.Sequence();
             waitSeq
                 .AppendInterval(1f)

@@ -131,53 +131,54 @@ namespace Combat
         {  
             if (skillModel == null) return;
             SkillSelectState skillState = skillModel.GetSkillState();
-            
-            switch (skillState)
-            {
-                case SkillSelectState.None:
-                    break;
-                case SkillSelectState.Clickable:
-                    skillStateTxt.text = "Clickable";
-                    break;
-                case SkillSelectState.UnHoverable:
-                    skillStateTxt.text = "UnHoverable";
-                    break;
-                case SkillSelectState.Unclickable_passiveSkills:
-                    skillStateTxt.text = "PassiveSkills";
-                    break;
-                case SkillSelectState.UnClickable_InCd:
-                    skillStateTxt.text = "In CD";
-                    break;
-                case SkillSelectState.Unclickable_notCharsTurn:
-                    skillStateTxt.text = "Not Char Turn";
-                    break;
-                case SkillSelectState.Unclickable_notOnCastPos:
-                    skillStateTxt.text = "not on castPos";
-                    break;
-                case SkillSelectState.UnClickable_NoTargets:
-                    skillStateTxt.text = "No targets";
-                    break;
-                case SkillSelectState.UnClickable_NoStamina:
-                    skillStateTxt.text = "No stamina";
-                    break;
-                case SkillSelectState.UnClickable_InTactics:
-                    skillStateTxt.text = "In Tactics";
-                    break;
-                case SkillSelectState.Clicked:
-                    skillStateTxt.text = "Clicked";
-                    break;
-                case SkillSelectState.UnClickable_NoActionPts:
-                    skillStateTxt.text = "No action pts";
-                    break;
-                case SkillSelectState.UnClickable_Locked:
-                    skillStateTxt.text = "Locked";
-                    break;
-                case SkillSelectState.UnClickable_Misc:
-                    skillStateTxt.text = "Misc";
-                    break;
-                default:
-                    break;
-            }
+            skillStateTxt.text = skillState.ToString(); 
+            //switch (skillState)
+            //{
+            //    case SkillSelectState.None:
+            //        break;
+            //    case SkillSelectState.Clickable:
+            //        skillStateTxt.text = "Clickable";
+            //        break;
+            //    case SkillSelectState.UnHoverable:
+            //        skillStateTxt.text = "UnHoverable";
+            //        break;
+            //    case SkillSelectState.Unclickable_passiveSkills:
+            //        skillStateTxt.text = "PassiveSkills";
+            //        break;
+            //    case SkillSelectState.UnClickable_InCd:
+            //        skillStateTxt.text = "In CD";
+            //        break;
+            //    case SkillSelectState.Unclickable_notCharsTurn:
+            //        skillStateTxt.text = "Not Char Turn";
+            //        break;
+            //    case SkillSelectState.Unclickable_notOnCastPos:
+            //        skillStateTxt.text = "not on castPos";
+            //        break;
+            //    case SkillSelectState.UnClickable_NoTargets:
+            //        skillStateTxt.text = "No targets";
+            //        break;
+            //    case SkillSelectState.UnClickable_NoStamina:
+            //        skillStateTxt.text = "No stamina";
+            //        break;
+            //    case SkillSelectState.UnClickable_InTactics:
+            //        skillStateTxt.text = "In Tactics";
+            //        break;
+            //    case SkillSelectState.Clicked:
+            //        skillStateTxt.text = "Clicked";
+            //        break;
+            //    case SkillSelectState.UnClickable_NoActionPts:
+            //        skillStateTxt.text = "No action pts";
+            //        break;
+            //    case SkillSelectState.UnClickable_Locked:
+            //        skillStateTxt.text = "Locked";
+            //        break;
+            //    case SkillSelectState.UnClickable_Misc:
+            //        skillStateTxt.text = "Misc";
+            //        break;
+
+            //    default:
+            //        break;
+            //}
         }      
         void FillTopTrans()
         {

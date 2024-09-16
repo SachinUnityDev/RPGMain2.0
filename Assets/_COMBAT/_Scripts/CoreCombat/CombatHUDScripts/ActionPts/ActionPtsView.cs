@@ -49,7 +49,8 @@ namespace Combat
         }
 
        public void ShowActionPtsDsply(CharController charController)
-       {    
+       {
+            Debug.Log(" all action pts display"); 
             if(charController.charModel.charMode == CharMode.Ally)
             {
                 actionPts = charController.GetComponent<CombatController>().actionPts;

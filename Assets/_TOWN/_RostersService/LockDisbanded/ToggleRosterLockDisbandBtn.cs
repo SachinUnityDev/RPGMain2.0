@@ -25,7 +25,9 @@ namespace Common
         public void Init(RosterViewController rosterView)
         {
             this.rosterView = rosterView;
-            SetState(); 
+            SetState();
+            transform.GetChild(0)
+                    .GetComponent<NotifyBoxView>().Init();
         }
         void ShowNotifyBox()
         {

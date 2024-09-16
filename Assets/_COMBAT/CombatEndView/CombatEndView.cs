@@ -61,6 +61,7 @@ namespace Combat
                 endTrans = transform.GetChild(0);
                 endTrans.gameObject.SetActive(true);                
             }
+            notifyBoxView.Init();
         }
         public void SetCharAsFirstBlood(CharController charController)
         {

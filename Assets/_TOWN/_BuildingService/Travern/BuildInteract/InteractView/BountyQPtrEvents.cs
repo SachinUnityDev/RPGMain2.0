@@ -32,6 +32,7 @@ namespace Town
             this.bountyBoardView= bountyBoardView;  
             this.questModel = questModel;
             FillBountyTxt();
+            notifyBoxView.Init();
         }
         void FillBountyTxt()
         {

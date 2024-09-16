@@ -7,6 +7,7 @@ using System.Linq;
 using UnityEngine;
 using Town;
 using System.Net.Http.Headers;
+using System.Collections;
 namespace Common
 {
     public class CharService : MonoSingletonGeneric<CharService>, ISaveable
@@ -70,6 +71,9 @@ namespace Common
         [Header("Character Pos")]
         public Vector3 spawnPos = new Vector3(-100, 0, 0);
         public ServicePath servicePath => ServicePath.CharService;
+
+        Queue<CharController> charDeath = new Queue<CharController>();
+        public bool isProcessingDeath = false; 
         #endregion
         void Start()
         {
@@ -509,31 +513,53 @@ namespace Common
         public void On_CharDeath(CharController _charController, int causeByCharID)
         {
             if (GameService.Instance.currGameModel.gameScene != GameScene.InCombat) return;
+            allCharInCombat.Remove(_charController);
             GridService.Instance.UpdateGridOnCharDeath(_charController);
 
             _charController.charModel.stateOfChar = StateOfChar.Dead; 
        
             charDiedinLastTurn.Add(_charController);
             try
-            {                
-                OnCharDeath?.Invoke(_charController);              
+            {
+              //  CharController charController = charDeath.Dequeue();
+                OnCharDeath?.Invoke(_charController);
+                Debug.Log("DEATH EVENT" + Time.time + "  :" + _charController.charModel.charName);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.Log("OnCharDeath not found" + e.Message);
             }
-
-            //charDiedinLastTurn.Add(_charController);
-            if (_charController.charModel.charName == CharNames.Abbas)
-            {
-                CombatService.Instance.OnCombatResult(CombatResult.Defeat, CombatEndCondition.Defeat_AbbasDied); 
-            }
+            //charDeath.Enqueue(_charController);
+            //if (!isProcessingDeath)
+            //{
+            //    StartCoroutine(OneCharDeathPerFrame());
+            //}
         }
         #endregion 
 
+        IEnumerator OneCharDeathPerFrame()
+        {
+            isProcessingDeath = true;
+            while(charDeath.Count > 0)
+            {
+                try
+                {
+                   CharController charController = charDeath.Dequeue();
+                    OnCharDeath?.Invoke(charController);
+                    Debug.Log("DEATH EVENT" + Time.time + "  :"+charController.charModel.charName); 
+                }
+                catch (Exception e)
+                {
+                    Debug.Log("OnCharDeath not found" + e.Message);
+                }
+                yield return new WaitForSeconds(1);
+            }
+            isProcessingDeath = false;
+        }
+
         public bool HasCharDiedInCombat(CharController charController)
         {
-            return charInGraveyard.Contains(charController);
+            return (charInGraveyard.Contains(charController) || charDiedinLastTurn.Contains(charController));
         }
 
         #region GET NAME STRINTGS
@@ -615,5 +641,17 @@ namespace Common
 
     }
 }
+//charDiedinLastTurn.Add(_charController);
+//if (_charController.charModel.charName == CharNames.Abbas)
+//{
+//    CombatService.Instance.OnCombatResult(CombatResult.Defeat, CombatEndCondition.Defeat_AbbasDied); 
+//}
 
-
+//try
+//{                
+//    OnCharDeath?.Invoke(_charController);              
+//}
+//catch(Exception e)
+//{
+//    Debug.Log("OnCharDeath not found" + e.Message);
+//}

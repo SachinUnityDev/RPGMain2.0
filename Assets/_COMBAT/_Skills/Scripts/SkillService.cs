@@ -245,7 +245,11 @@ namespace Combat
            SkillController1 skillController = charController.gameObject.GetComponent<SkillController1>();
             //skillController.allSkillBases.ForEach(t => Debug.Log("SKILL BASES ARE HEALTHY" +t.charName + t.skillName));
             //skillController.allSkillModels.ForEach(t => Debug.Log(t.skillName +"SkillBase" + t.targetPos.Count));
-            
+            if (skillController == null)
+            {
+                Debug.LogError("SkillController is NULL" + charController.name);
+                return; 
+            }
              skillController.allSkillBases.ForEach(t => t.PopulateTargetPos());
             if(currCharMode == CharMode.Ally)
              skillController.allPerkBases.ForEach(t => t.AddTargetPos());
@@ -280,7 +284,7 @@ namespace Combat
 
         public void InitEnemySkillSelection(CharController charController)
         {
-
+            Debug.Log("ENEMY SKILL SELECTION");
             if (charController.charModel.charMode == CharMode.Ally)
             {
                 Debug.Log("ALLY TURN");
@@ -478,7 +482,8 @@ namespace Combat
         public void On_PostSkill(SkillModel skillModel)
         {
             // ClearPrevData();  // redundant safety .. causing only one FX to play as it clears mainTargetDyna
-            Debug.Log("ON POST SKILL>>>>" + skillModel.skillName);  
+           if(skillModel == null)
+                Debug.Log("ON SKILLMODEL NULL>>>>");  
             CharController charController = CombatService.Instance.currCharOnTurn;  
             CombatController combatController = charController.GetComponent<CombatController>();
             // if ally reduce action pts
@@ -505,8 +510,8 @@ namespace Combat
             if (combatController.actionPts > 0)// allies 
             {
                 CombatService.Instance.roundController.SetSameCharOnTurn();
-                if (charController.charModel.charMode == CharMode.Enemy)
-                    InitEnemySkillSelection(CombatService.Instance.currCharOnTurn);   // to be called 
+                //if (charController.charModel.charMode == CharMode.Enemy)
+                //    InitEnemySkillSelection(CombatService.Instance.currCharOnTurn);   // to be called 
             }
             else
             {

@@ -44,7 +44,7 @@ namespace Interactables
         }
         public void ApplyConsumableFX()
         {
-            Debug.Log(" char" + charController.charModel.charName + "Potion" + potionName.ToString()); 
+           // Debug.Log(" char" + charController.charModel.charName + "Potion" + potionName.ToString());  
                  
             PotionApplyFX();
         }

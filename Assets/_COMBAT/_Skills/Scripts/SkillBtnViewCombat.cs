@@ -67,6 +67,7 @@ namespace Combat
                 if (CombatService.Instance.combatState == CombatState.INTactics) return;
                 if (skillModel == null) return;
                 if (skillModel.skillUnLockStatus == 0 || skillModel.skillUnLockStatus == -1) return;
+
                 if (skillModel.GetSkillState() == SkillSelectState.Clickable ||
                     skillModel.GetSkillState() == SkillSelectState.Clicked)
                 {
@@ -74,7 +75,11 @@ namespace Combat
                     {
                         SetClicked();
                         skillView.SkillBtnPressed(transform.GetSiblingIndex());
-                    }                
+                    }
+                }
+                else
+                {
+                    SetUnClick();
                 }
             }
             if ((int)eventData.button == 1)

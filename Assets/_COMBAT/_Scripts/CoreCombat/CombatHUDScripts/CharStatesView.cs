@@ -44,7 +44,8 @@ namespace Combat
         }
         void OnCharSet(CharController charController)
         {
-            gameObject.SetActive(true);
+            Debug.Log("Char Set view" + charController.charModel.charName);
+            gameObject?.SetActive(true);
 
         }
         public void InitCharStatesView()
@@ -79,7 +80,11 @@ namespace Combat
 
             List<CharStatesBase> allCharStateBases = charController.charStateController.allCharBases;
             CharStatesPanelIconsClear();
-
+            if(allCharStateBases.Count == 0)
+            {
+                Debug.Log("All charStates bases count ZERO"); 
+                return; 
+            }
             for (int i = 0; i < allCharStateBases.Count; i++)
             {
                 CharStateName charStateName = allCharStateBases[i].charStateName; 

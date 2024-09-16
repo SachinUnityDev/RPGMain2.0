@@ -80,7 +80,7 @@ namespace Interactables
         }
         void OnSceneLoaded(Scene prevScene, Scene newScene)
         {  
-            if(newScene.name == "TOWN")
+            if(newScene.name == "TOWN" || newScene.name == "QUEST" || newScene.name == "COMBAT")
             {
                 Sequence seq = DOTween.Sequence();  
                 seq.AppendInterval(1.0f)

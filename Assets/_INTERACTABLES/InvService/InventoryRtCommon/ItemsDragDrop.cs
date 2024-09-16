@@ -15,7 +15,7 @@ namespace Interactables
         #region Drag and Drop Decalaration 
         [Header("Pointer related")]
         RectTransform rectTransform;
-        [SerializeField] Canvas canvas;
+        [SerializeField] GameObject canvasGO;
         [SerializeField] CanvasGroup canvasGroup;
 
         [Header("Reference for the Public")]
@@ -33,7 +33,7 @@ namespace Interactables
 
         private void OnEnable()
         {
-            canvas = GetComponentInParent<Canvas>();
+            canvasGO = ItemService.Instance.canvasGO;
             itemCardGO = ItemService.Instance.itemCardGO;
         }
 
@@ -112,10 +112,10 @@ namespace Interactables
         }
         void PosItemCard()
         {
-            Canvas canvas = FindObjectOfType<Canvas>();
+             canvasGO = GameObject.FindGameObjectWithTag("Canvas");
 
             itemCardGO = ItemService.Instance.itemCardGO;
-            itemCardGO.transform.SetParent(canvas.transform);
+            itemCardGO.transform.SetParent(canvasGO.transform);
 
             int index = itemCardGO.transform.parent.childCount - 1;
             itemCardGO.transform.SetSiblingIndex(index);
@@ -137,7 +137,7 @@ namespace Interactables
             float width = itemCardGO.GetComponent<RectTransform>().rect.width;
             float height = itemCardGO.GetComponent<RectTransform>().rect.height;
 
-            Canvas canvasObj = canvas.GetComponent<Canvas>();
+            Canvas canvasObj = canvasGO.GetComponent<Canvas>();
             // get slot index based on slot index adjust the offset
             Transform slotTrans = transform.parent.parent;
             
@@ -153,7 +153,7 @@ namespace Interactables
                 .Append(itemCardGO.transform.DOMove(pos, 0.1f))
                 .Append(itemCardGO.transform.GetComponent<Image>().DOFade(1.0f, 0.3f))
                 ;
-            itemCardGO.SetActive(true);
+            //itemCardGO.SetActive(true);
             seq.Play();
         }
         void PosTradeScrollSlot()
@@ -161,7 +161,7 @@ namespace Interactables
             float width = itemCardGO.GetComponent<RectTransform>().rect.width;
             float height = itemCardGO.GetComponent<RectTransform>().rect.height;
 
-            Canvas canvasObj = canvas.GetComponent<Canvas>();
+            Canvas canvasObj = canvasGO.GetComponent<Canvas>();
             // get slot index based on slot index adjust the offset
             Transform slotTrans = transform.parent.parent;
 
@@ -190,7 +190,7 @@ namespace Interactables
             //if (GameService.Instance.gameModel.gameState == GameState.InQuest)
             //    canvas = GameObject.FindWithTag("QuestCanvas");
 
-            Canvas canvasObj = canvas.GetComponent<Canvas>();
+            Canvas canvasObj = canvasGO.GetComponent<Canvas>();
             // get slot index based on slot index adjust the offset
            Transform slotTrans = transform.parent.parent;
             int slotIndex = slotTrans.GetSiblingIndex() % 6;
@@ -229,11 +229,11 @@ namespace Interactables
             rectTransform = GetComponent<RectTransform>();
             slotParent = transform.parent;
 
-            canvas = GetComponentInParent<Canvas>();
+            canvasGO = GetComponentInParent<Canvas>().gameObject;
 
-            if (canvas == null)
+            if (canvasGO == null)
                 Debug.LogError(" Canva sis null"); 
-            transform.SetParent(canvas.transform);  // to keep draged object on top 
+            transform.SetParent(canvasGO.transform);  // to keep draged object on top 
             transform.SetAsLastSibling();   
             if (iSlotable.ItemsInSlot.Count <= 0)            
             {
@@ -290,9 +290,11 @@ namespace Interactables
             if (iSlotable.slotType == SlotType.ProvActiveInv || iSlotable.slotType == SlotType.TrophySelectSlot
                 || iSlotable.slotType == SlotType.TrophyScrollSlot)
                 return;
-            if (GameService.Instance.currGameModel.gameScene == GameScene.InTown)
-                canvas = FindObjectOfType<Canvas>();
-            rectTransform.anchoredPosition += eventData.delta/canvas.scaleFactor;           
+            if (GameService.Instance.currGameModel.gameScene == GameScene.InTown
+                || GameService.Instance.currGameModel.gameScene == GameScene.InQuestRoom)
+                canvasGO = GameObject.FindGameObjectWithTag("Canvas");
+             
+            rectTransform.anchoredPosition += eventData.delta/canvasGO.GetComponent<Canvas>().scaleFactor;           
         }
 
         public void OnEndDrag(PointerEventData eventData)

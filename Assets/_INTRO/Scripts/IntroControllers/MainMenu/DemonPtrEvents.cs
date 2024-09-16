@@ -18,7 +18,7 @@ namespace Intro
         [SerializeField] Button discordBtn;
         void Start()
         {
-            img = gameObject.GetComponent<Image>();
+           // img = gameObject.GetComponent<Image>();
             iconPanel.transform.DOScale(0, 0.25f);
            
             twitterBtn.onClick.AddListener(OnTwitterBtnPressed);
@@ -39,11 +39,13 @@ namespace Intro
 
         public void ShowBtn()
         {
+            DOTween.KillAll();
             iconPanel.transform.DOScale(1, 0.25f);
             img.DOFade(1, 0.25f);
         }
         public void HideBtn()
         {
+            DOTween.KillAll();
             Sequence waitSeq = DOTween.Sequence();
             waitSeq
                 .AppendInterval(1f)

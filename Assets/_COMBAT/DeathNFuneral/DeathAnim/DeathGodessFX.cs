@@ -18,21 +18,23 @@ namespace Combat
             SkeletonAnimation skeletonAnim = charController.gameObject.GetComponentInChildren<SkeletonAnimation>(); 
             Sequence deathSeq = DOTween.Sequence();
             deathSeq
-                
-               .AppendCallback(() => StartCoroutine(BlackOutSpine(skeletonAnim, 0.01f)))
-               .AppendCallback(() => StartCoroutine(FadeOutSpine(skeletonAnim, 0.005f)))
+
+               .AppendCallback(() => StartCoroutine(BlackOutSpine(skeletonAnim, 0.5f)))
+               .AppendCallback(() => StartCoroutine(FadeOutSpine(skeletonAnim, 0.5f)))               
                .Append(transform.DOPunchScale(new Vector3(2f, 2f, 2f), 0.2f, 1, 0.1f))
-                .AppendInterval(0.5f)
-                .AppendCallback(() => fadeOut(gameObject, 0.25f))                
-                .AppendCallback(() => GOAnimCompletion(charController.gameObject))                
-                .AppendCallback(() => Destroy(gameObject, 0.1f))
+                .AppendCallback(() => GOAnimCompletion(charController.gameObject))
+                .AppendInterval(0.25f)
+                .AppendCallback(() => fadeOut(gameObject, 0.05f))                
+                .AppendCallback(() => Destroy(gameObject, 0.5f))
                 ;
-            deathSeq.Play().OnComplete(() => OnAnimComplete());
+            deathSeq.Play()
+                //.OnComplete(() => OnAnimComplete())
+                ;
         }
 
         void OnAnimComplete()
         {
-            Destroy(gameObject);
+            Destroy(gameObject, 0.5f);
             
         }
         void GOAnimCompletion(GameObject charGO)
@@ -48,9 +50,9 @@ namespace Combat
                 c.enabled = false;
             }
         }
-        void fadeOut(GameObject toFade, float animSpeed)
+        void fadeOut(GameObject toFade, float duration)
         {
-            toFade.transform.GetComponentInChildren<SpriteRenderer>().DOFade(0, animSpeed);
+            toFade.transform.GetComponentInChildren<SpriteRenderer>().DOFade(0, duration);
         }
         IEnumerator FadeOutSpine(SkeletonAnimation skeleton, float animSpeed)
         {

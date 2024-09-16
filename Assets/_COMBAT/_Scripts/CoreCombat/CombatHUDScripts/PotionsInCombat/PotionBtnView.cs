@@ -2,6 +2,7 @@ using Common;
 using Interactables;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -19,7 +20,9 @@ namespace Combat
         [SerializeField] Transform container; 
         CharController charController;
         Image img;
-       
+
+        [SerializeField] TextMeshProUGUI apWarningTxt; 
+
 
         private void Start()
         {
@@ -45,6 +48,7 @@ namespace Combat
             {
                 img.sprite = spriteN;
             }
+            ToggleNoApWarningTxt(false);
         }
         void FillPotions()
         {
@@ -55,21 +59,24 @@ namespace Combat
             {
                 if(i < activeInvData.potionActiveInv.Length)
                     container.GetChild(i).GetComponent<PotionSlotInCombatView>()
-                                .Init(activeInvData.potionActiveInv[i]);
+                                .Init(activeInvData.potionActiveInv[i], this);
                 if(i == 2)
                     container.GetChild(i).GetComponent<PotionSlotInCombatView>()
-                               .Init(activeInvData.provisionSlot);
+                               .Init(activeInvData.provisionSlot, this);
             }
             else
             {
                 for (int i = 0; i < container.childCount; i++)
                 {
                     container.GetChild(i).GetComponent<PotionSlotInCombatView>()
-                                .Init(null);
+                                .Init(null, this);
                 }
             }   
         }
-
+        public void ToggleNoApWarningTxt(bool show)
+        {
+            apWarningTxt.gameObject.SetActive(show);
+        }
         public void OnPointerClick(PointerEventData eventData)
         {
             if (charController.charModel.orgCharMode == CharMode.Enemy)

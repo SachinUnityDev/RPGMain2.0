@@ -39,7 +39,7 @@ namespace Combat
         [SerializeField] GameObject logPanelGO;
         [SerializeField] string strPrev = "";
 
-        
+        CharController charController; 
         public bool InitBuffView(BuffBtnView buffBtnView, CharController charController, bool isBuffView)
         {
           container = transform.GetChild(0);    
@@ -54,8 +54,8 @@ namespace Combat
         {
             if(allBuffStrs.Count > 0)
             {
+                UpdateBuffList(); 
                 gameObject.SetActive(true);
-                PrintBuffList();
             }
         }
 
@@ -67,35 +67,42 @@ namespace Combat
 
         bool OnCharClicked(CharController charController)
         {
-            BuffController buffController = charController.buffController; 
+            this.charController = charController;
+            BuffController buffController = charController.buffController;
+            UpdateBuffList();
+            if (allBuffStrs.Count > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        void UpdateBuffList()
+        {
             allBuffData.Clear();
+            BuffController buffController = charController.buffController;
             allBuffData = buffController.GetBuffDebuffData();
             allBuffStrs.Clear();
-            string charNameStr = charController.charModel.charNameStr; 
+            string charNameStr = charController.charModel.charNameStr;
             foreach (BuffData buffData in allBuffData)
             {
                 //+1 Morale from Skills, 2 rds
-                if(buffData.isBuff != isBuffView) continue; 
+                if (buffData.isBuff != isBuffView) continue;
                 if (buffData.attribModData.chgVal == 0) continue;
-                if(buffData.timeFrame == TimeFrame.Infinity) continue;                
+                if (buffData.timeFrame == TimeFrame.Infinity) continue;
 
                 string sign = buffData.attribModData.chgVal > 0 ? "+" : "-";
                 string str2 = buffData.attribModData.chgVal > 0 ? "gains" : "suffers";
 
                 string str = sign + Mathf.Abs(buffData.attribModData.chgVal) + " " + buffData.attribModData.attribModified.ToString() + " " +
                         buffData.attribModData.causeType.ToString() + ", " + buffData.buffedNetTime.ToString() + " "
-                        + GetTimeFrameStr(buffData.timeFrame); 
-                          
+                        + GetTimeFrameStr(buffData.timeFrame);
+
                 allBuffStrs.Add(str);
-                
+
             }
             PrintBuffList();
-            if(allBuffStrs.Count > 0)
-            {
-                return true; 
-            }
-            return false; 
-
+         
         }
 
         void IncrHt()

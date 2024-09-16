@@ -13,15 +13,13 @@ namespace Combat
     {
         private void Start()
         {
-            CombatEventService.Instance.OnCharOnTurnSet
-                                          += AttributeViewInit;
+            CombatEventService.Instance.OnCharOnTurnSet += AttributeViewInit;
 
             CombatEventService.Instance.OnCharClicked += AttributeViewInit;
         }
         private void OnDisable()
         {
-            CombatEventService.Instance.OnCharOnTurnSet
-                                      -= AttributeViewInit;
+            CombatEventService.Instance.OnCharOnTurnSet -= AttributeViewInit;
 
             CombatEventService.Instance.OnCharClicked -= AttributeViewInit;
         }

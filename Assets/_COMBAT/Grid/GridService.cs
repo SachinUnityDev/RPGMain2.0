@@ -605,7 +605,7 @@ namespace Combat
                                                           d.dynaModel.charName == charModel.charName);
             if (index != -1)
                 return allCurrPosOccupiedByDyna[index]; 
-            Debug.Log("DYNA NOT FOUND "+ _charGO.name);
+            Debug.Log("DYNA NOT FOUND "+ _charGO.name + charModel.charID);
             return null;
         }
 

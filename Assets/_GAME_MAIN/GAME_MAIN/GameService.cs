@@ -19,10 +19,7 @@ namespace Common
 
         [Header("CONTROLLERS")]
         public GameController gameController; // centralised service
-        public GameModeController gameModeController; // centralised service
-
-        [Header("Scene Controller")]
-        public SceneController sceneController;
+        public GameModeController gameModeController; // centralised service       
 
         [Header("Global Var")]
         public GameModel currGameModel;
@@ -84,7 +81,7 @@ namespace Common
 
         void OnEnable()
         {  
-            sceneController = GetComponent<SceneController>();
+           
             gameController= GetComponent<GameController>();
             SceneManager.activeSceneChanged += UpdateGameScene; 
         }

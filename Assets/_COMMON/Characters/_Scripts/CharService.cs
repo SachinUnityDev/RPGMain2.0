@@ -72,8 +72,6 @@ namespace Common
         public Vector3 spawnPos = new Vector3(-100, 0, 0);
         public ServicePath servicePath => ServicePath.CharService;
 
-        Queue<CharController> charDeath = new Queue<CharController>();
-        public bool isProcessingDeath = false; 
         #endregion
         void Start()
         {
@@ -351,14 +349,8 @@ namespace Common
         }
         public void On_CharSpawn(CharController charController)
         {
-            //foreach (var charController in charsInPlayControllers.ToList()) 
-            //{
-            //    if(charController != null)
-                    OnCharSpawn?.Invoke(charController);
-                //else
-                //    charsInPlayControllers.Remove(charController);
-          //  }
-        
+             OnCharSpawn?.Invoke(charController);
+         
         }
     
         public void On_CharAddToParty(CharController charController)
@@ -521,41 +513,17 @@ namespace Common
             charDiedinLastTurn.Add(_charController);
             try
             {
-              //  CharController charController = charDeath.Dequeue();
                 OnCharDeath?.Invoke(_charController);
                 Debug.Log("DEATH EVENT" + Time.time + "  :" + _charController.charModel.charName);
             }
             catch (Exception e)
             {
                 Debug.Log("OnCharDeath not found" + e.Message);
-            }
-            //charDeath.Enqueue(_charController);
-            //if (!isProcessingDeath)
-            //{
-            //    StartCoroutine(OneCharDeathPerFrame());
-            //}
+            }        
         }
         #endregion 
 
-        IEnumerator OneCharDeathPerFrame()
-        {
-            isProcessingDeath = true;
-            while(charDeath.Count > 0)
-            {
-                try
-                {
-                   CharController charController = charDeath.Dequeue();
-                    OnCharDeath?.Invoke(charController);
-                    Debug.Log("DEATH EVENT" + Time.time + "  :"+charController.charModel.charName); 
-                }
-                catch (Exception e)
-                {
-                    Debug.Log("OnCharDeath not found" + e.Message);
-                }
-                yield return new WaitForSeconds(1);
-            }
-            isProcessingDeath = false;
-        }
+      
 
         public bool HasCharDiedInCombat(CharController charController)
         {

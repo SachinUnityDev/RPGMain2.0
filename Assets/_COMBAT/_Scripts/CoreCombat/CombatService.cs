@@ -170,16 +170,8 @@ namespace Combat
             //Combat didnt finish before the round limit	
             //Abbas dies / Manually Flee / No Hero left on battlefield (die or flee)  // Combat DEFEAT on all flee
             CheckCombatResultWithWait(charController);
-            //StartCoroutine(WaitUnTillDeathEvent(charController));
         }
-        IEnumerator WaitUnTillDeathEvent(CharController charController)
-        {
-            while (!CharService.Instance.isProcessingDeath)
-            {
-                yield return null;                 
-            }         
-            
-        }
+       
 
         void CheckCombatResultWithWait(CharController charController)
         {

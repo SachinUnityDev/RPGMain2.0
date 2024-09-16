@@ -11,29 +11,29 @@ namespace Combat
 
     public class DeathGodessFX : MonoBehaviour
     {
- 
-        
+
+        Sequence deathSeq;
         public void PlayDeathAnim(CharController charController)
         {
             SkeletonAnimation skeletonAnim = charController.gameObject.GetComponentInChildren<SkeletonAnimation>(); 
-            Sequence deathSeq = DOTween.Sequence();
+            deathSeq = DOTween.Sequence();
             deathSeq
 
-               .AppendCallback(() => StartCoroutine(BlackOutSpine(skeletonAnim, 0.5f)))
+               //.AppendCallback(() => StartCoroutine(BlackOutSpine(skeletonAnim, 0.5f)))
                .AppendCallback(() => StartCoroutine(FadeOutSpine(skeletonAnim, 0.5f)))               
                .Append(transform.DOPunchScale(new Vector3(2f, 2f, 2f), 0.2f, 1, 0.1f))
                 .AppendCallback(() => GOAnimCompletion(charController.gameObject))
                 .AppendInterval(0.25f)
                 .AppendCallback(() => fadeOut(gameObject, 0.05f))                
-                .AppendCallback(() => Destroy(gameObject, 0.5f))
                 ;
             deathSeq.Play()
-                //.OnComplete(() => OnAnimComplete())
+                .OnComplete(() => OnAnimComplete())
                 ;
         }
 
         void OnAnimComplete()
         {
+            deathSeq.Kill();
             Destroy(gameObject, 0.5f);
             
         }
@@ -61,8 +61,9 @@ namespace Combat
             {
                 color.a = alpha;
                 skeleton.Skeleton.SetColor(color);
-                yield return null;
+                yield return null;               
             }
+            skeleton.gameObject.SetActive(false);
         }
         IEnumerator BlackOutSpine(SkeletonAnimation skeleton, float animSpeed)
         {
@@ -76,7 +77,6 @@ namespace Combat
                 skeleton.Skeleton.SetColor(color);
                 yield return null;
                 skeleton.Skeleton.SetColor(new Color(0,0,0));
-                skeleton.gameObject.SetActive(false);
             }
         }
     }

@@ -23,7 +23,6 @@ namespace Quest
             this.item = item;
             this.qty = qty;
         }
-
     }
 
     public class LootView : MonoBehaviour, IPanel

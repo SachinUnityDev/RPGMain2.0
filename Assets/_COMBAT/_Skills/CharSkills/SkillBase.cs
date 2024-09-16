@@ -312,7 +312,22 @@ namespace Combat
                     .Add(GridService.Instance.GetDynaAtCellPos(sameLaneOccupiedPos[0].charMode, sameLaneOccupiedPos[0].currentPos));
             }
         }
+        protected void FirstRow(CharMode charMode)
+        {
+            if (skillModel == null) return;
+            skillModel.targetPos.Clear();
+             CombatService.Instance.mainTargetDynas.Clear();
 
+            List<DynamicPosData> firstRowChar = GridService.Instance.GetFirstRowChar(charMode);
+            if (firstRowChar != null)
+            {
+                foreach (var dynaChar in firstRowChar)
+                {
+                    skillModel.targetPos.Add(new CellPosData(dynaChar.charMode, dynaChar.currentPos));
+                    CombatService.Instance.mainTargetDynas.Add(dynaChar);
+                }
+            }
+        }
         protected void AllinCharModeExceptSelf(CharMode charMode)
         {
             skillModel.targetPos.Clear();
@@ -331,7 +346,20 @@ namespace Combat
                 }
             }
         }
-
+        protected void Target1234(CharMode charMode)
+        {
+            skillModel.targetPos.Clear();
+            for (int i = 1; i <= 4; i++)
+            {
+                CellPosData cellPosData = new CellPosData(charMode, i); // Allies
+                DynamicPosData dyna = GridService.Instance.gridView
+                                       .GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
+                if (dyna != null)
+                {
+                    skillModel.targetPos.Add(cellPosData);
+                }
+            }
+        }
         public bool IsDodged()
         {
             if (targetController.damageController.strikeType == StrikeType.Dodged)

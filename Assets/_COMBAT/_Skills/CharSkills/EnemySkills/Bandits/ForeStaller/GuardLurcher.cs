@@ -1,43 +1,44 @@
-﻿using Common;
+using Combat;
+using Common;
 using System.Collections;
 using System.Collections.Generic;
+using Town;
 using UnityEngine;
-
-
 
 namespace Combat
 {
-    public class GuardWeak : SkillBase
-    {
 
+
+    public class GuardLurcher : SkillBase
+    {
         private CharNames _charName;
         public override CharNames charName { get => _charName; set => _charName = value; }
-        public override SkillNames skillName => SkillNames.GuardWeak;
+        public override SkillNames skillName => SkillNames.GuardLurcher;
         public override SkillLvl skillLvl => SkillLvl.Level0;
 
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        public override string desc => "guard weak";
- 
+        public override string desc => "guard Lurcher";
+
         public override void PopulateTargetPos()
         {
             //skillModel.targetPos.Clear();
             //for (int i = 1; i < 8; i++)
-            //{              
+            //{
             //    CellPosData cellPosData = new CellPosData(charController.charModel.charMode, i); // Allies
             //    DynamicPosData dyna = GridService.Instance.gridView
             //        .GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
             //    if (dyna != null)
             //    {
-            //        if(dyna.charGO.GetComponent<CharController>().charModel.charName
+            //        if (dyna.charGO.GetComponent<CharController>().charModel.charName
             //                                                == CharNames.CrestedRat)
-            //          skillModel.targetPos.Add(cellPosData);
-            //    }                
+            //            skillModel.targetPos.Add(cellPosData);
+            //    }
             //}
             AnyWithCharMode(CharMode.Enemy);
         }
-   
+
         public override void ApplyFX1()
         {
             if (IsTargetMyAlly())
@@ -45,8 +46,8 @@ namespace Combat
                 AttribData attribDataMin = charController.GetAttrib(AttribName.armorMin);
                 AttribData attribDataMax = charController.GetAttrib(AttribName.armorMax);
 
-              float minArmorChg = attribDataMin.currValue * 0.6f;
-               float maxArmorChg = attribDataMax.currValue * 0.6f;
+                float minArmorChg = attribDataMin.currValue * 0.6f;
+                float maxArmorChg = attribDataMax.currValue * 0.6f;
 
                 charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
                   , AttribName.armorMin, minArmorChg, skillModel.timeFrame, skillModel.castTime, true);
@@ -63,12 +64,9 @@ namespace Combat
         public override void ApplyFX2()
         {
             if (IsTargetMyAlly())
-            {   
+            {
                 charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                    , AttribName.waterRes, 20, skillModel.timeFrame, skillModel.castTime, true);
-
-                charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID
-                   , AttribName.earthRes, 20, skillModel.timeFrame, skillModel.castTime, true);
+                    , AttribName.morale, 2, skillModel.timeFrame, skillModel.castTime, true);
             }
         }
 
@@ -76,19 +74,19 @@ namespace Combat
         {
         }
 
- 
+
         public override void DisplayFX1()
         {
-            str0 = $"Guard Crested Rat";
+            str0 = $"Guard Lurcher";
             SkillService.Instance.skillModelHovered.AddDescLines(str0);
-            str1 = $"Gain +60% Armor";
+            str1 = $"+60% Armor on ally";
             SkillService.Instance.skillModelHovered.AddDescLines(str1);
-  
+
         }
 
         public override void DisplayFX2()
         {
-            str2 = $"Gain +20 <style=Water>Water</style> and <style=Earth>Earth</style> Res";
+            str2 = $"Gain +2 Morale";
             SkillService.Instance.skillModelHovered.AddDescLines(str2);
         }
 
@@ -101,7 +99,7 @@ namespace Combat
         }
 
 
-  
+
         public override void ApplyVFx()
         {
             SkillService.Instance.skillFXMoveController.RangedStrike(PerkType.None, skillModel);
@@ -111,7 +109,7 @@ namespace Combat
         {
 
             base.PopulateAITarget();
-            if (SkillService.Instance.currentTargetDyna != null) return; 
+            if (SkillService.Instance.currentTargetDyna != null) return;
             foreach (CellPosData cell in skillModel.targetPos)
             {
                 DynamicPosData dyna = GridService.Instance.GetDynaAtCellPos(cell.charMode, cell.pos);
@@ -133,9 +131,9 @@ namespace Combat
                         randomDyna = dyna;
                     }
                 }
-                      
+
             }
-            if(SkillService.Instance.currentTargetDyna == null)
+            if (SkillService.Instance.currentTargetDyna == null)
             {
                 SkillService.Instance.currentTargetDyna = randomDyna;
             }
@@ -146,3 +144,4 @@ namespace Combat
         }
     }
 }
+

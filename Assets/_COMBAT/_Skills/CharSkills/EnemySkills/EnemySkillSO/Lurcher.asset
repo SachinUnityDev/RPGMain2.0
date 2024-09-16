@@ -21,6 +21,8 @@ MonoBehaviour:
   defendFX:
     loc: 0
     skillSprite: {fileID: 0}
+  leftInvSkillPanelBG: {fileID: 0}
+  rightInvSkillPanelBG: {fileID: 0}
   passiveSkills:
   - passiveSkillName: 26
     passiveSprite: {fileID: 21300000, guid: d05af21a7fab56040a6b5e567172aaaa, type: 3}
@@ -29,18 +31,19 @@ MonoBehaviour:
   - passiveSkillName: 63
     passiveSprite: {fileID: 21300000, guid: fffa4753b7698454094d92e7cd2220a1, type: 3}
   allSkills:
-  - skillName: 122
+  - skillName: 50
     charName: 29
     skillID: 0
     skillIconSprite: {fileID: 21300000, guid: 08acd0affdac7ed41bca4ffb7be05f50, type: 3}
     skillPose: {fileID: 21300000, guid: fcef415fb666a6e4282bfcfcd7c4aa65, type: 3}
     skillTransitionPose: {fileID: 0}
+    skillTransitionPose2: {fileID: 0}
     skillType: 1
+    strikeNos: 0
     skillUnLockStatus: 1
     skillDesc: 
     damageMod: 100
     skillLvl: 0
-    skillSelState: 1
     cd: -5
     attackType: 2
     dmgType: 010000000f000000
@@ -55,20 +58,22 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexName: 0a0000000c0000000b000000
+      hexNames: 000000000000000000000000
     allSkillFXs: []
-  - skillName: 123
+    allLines: []
+  - skillName: 51
     charName: 29
     skillID: 0
     skillIconSprite: {fileID: 21300000, guid: f6081514e73cdda4d9815bed4b09e1ff, type: 3}
     skillPose: {fileID: 21300000, guid: 206acf0d591a54548942407cbf43614b, type: 3}
     skillTransitionPose: {fileID: 0}
+    skillTransitionPose2: {fileID: 0}
     skillType: 2
+    strikeNos: 0
     skillUnLockStatus: 1
     skillDesc: 
     damageMod: 120
     skillLvl: 0
-    skillSelState: 1
     cd: 2
     attackType: 2
     dmgType: 010000000f0000000b000000
@@ -83,20 +88,22 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexName: 25000000100000000b000000
+      hexNames: 000000000000000000000000
     allSkillFXs: []
-  - skillName: 124
+    allLines: []
+  - skillName: 52
     charName: 29
     skillID: 0
     skillIconSprite: {fileID: 21300000, guid: b8634882d3d86d94c838cef04d0833c0, type: 3}
     skillPose: {fileID: 21300000, guid: 8e2bc4c9e0318534cadac0a9b4cf494f, type: 3}
     skillTransitionPose: {fileID: 0}
+    skillTransitionPose2: {fileID: 0}
     skillType: 3
+    strikeNos: 0
     skillUnLockStatus: 1
     skillDesc: 
     damageMod: 0
     skillLvl: 0
-    skillSelState: 1
     cd: -5
     attackType: 3
     dmgType: 0e000000020000000b000000
@@ -111,5 +118,6 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexName: 02000000260000000b000000
+      hexNames: 000000000000000000000000
     allSkillFXs: []
+    allLines: []

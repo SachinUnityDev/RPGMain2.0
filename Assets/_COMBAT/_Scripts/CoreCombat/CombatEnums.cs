@@ -207,9 +207,7 @@ namespace Combat
         Respire, // equivalent to patience
         Telekinesis,//uzu abbas       
         Retaliate,       
-        
-
-
+        HailTheQueen, // Lioness
     }
 
 

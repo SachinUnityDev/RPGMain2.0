@@ -59,7 +59,10 @@ namespace Combat
             yield return new WaitForEndOfFrame();
             foreach (DeathObjData deathObjData in deathGOs)
             {
-              deathObjData.deathGO.GetComponent<DeathGodessFX>().PlayDeathAnim(deathObjData.charController);
+                if(deathObjData.deathGO != null)
+                {
+                    deathObjData.deathGO.GetComponent<DeathGodessFX>().PlayDeathAnim(deathObjData.charController);
+                }              
             }
             isAnimPlaying = false;
         }

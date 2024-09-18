@@ -39,14 +39,14 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 1
-    strikeNos: 0
+    strikeNos: 1
     skillUnLockStatus: 1
     skillDesc: 
     damageMod: 100
     skillLvl: 0
     cd: -5
     attackType: 1
-    dmgType: 010000000f000000
+    dmgType: 01000000
     castPos: 01000000020000000300000004000000
     targetPos: []
     staminareq: 5
@@ -58,7 +58,7 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexNames: 000000000000000000000000
+      hexNames: 060000000c0000000b000000
     allSkillFXs: []
     allLines: []
   - skillName: 48
@@ -69,14 +69,14 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 2
-    strikeNos: 0
+    strikeNos: 2
     skillUnLockStatus: 1
     skillDesc: 
     damageMod: 120
     skillLvl: 0
     cd: 2
     attackType: 1
-    dmgType: 010000000f000000
+    dmgType: 01000000
     castPos: 01000000020000000300000004000000050000000600000007000000
     targetPos: []
     staminareq: 8
@@ -84,11 +84,11 @@ MonoBehaviour:
     timeFrame: 0
     maxUsagePerCombat: 0
     skillIncli: 1
-    baseWeight: 20
+    baseWeight: 30
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexNames: 000000000000000000000000
+      hexNames: 02000000110000000b000000
     allSkillFXs: []
     allLines: []
   - skillName: 49
@@ -99,17 +99,17 @@ MonoBehaviour:
     skillTransitionPose: {fileID: 0}
     skillTransitionPose2: {fileID: 0}
     skillType: 3
-    strikeNos: 0
+    strikeNos: 1
     skillUnLockStatus: 1
     skillDesc: 
     damageMod: 0
     skillLvl: 0
     cd: 3
     attackType: 0
-    dmgType: 0c0000000a000000
+    dmgType: 
     castPos: 01000000020000000300000004000000050000000600000007000000
     targetPos: []
-    staminareq: 7
+    staminareq: 6
     castTime: 2
     timeFrame: 1
     maxUsagePerCombat: 0
@@ -118,6 +118,6 @@ MonoBehaviour:
     isActive: 0
     allPerkHexes:
     - perkChain: 00000000
-      hexNames: 000000000000000000000000
+      hexNames: 190000000b00000002000000
     allSkillFXs: []
     allLines: []

@@ -118,7 +118,7 @@ namespace Intro
                 }
                 onEscAnim.gameObject.SetActive(animPlaying);
             }
-            if (Input.GetKeyUp(KeyCode.Escape))
+            if (Input.GetKeyUp(KeyCode.Escape) ||endReached)
             {               
                 animPlaying= false;                
                 onEscAnim.ResetAnim();

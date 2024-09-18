@@ -22,7 +22,12 @@ namespace Town
         [Header("World")]
         [SerializeField] WorldView worldView;
         [SerializeField] int index = 0;
-        [SerializeField] int maxIndex = 2; 
+        [SerializeField] int maxIndex = 2;
+
+        [Header(" Ui clic k ctrl")]
+        [SerializeField] float prevClick; 
+
+
         void OnEnable()
         {
             toggleMapBtn.onClick.AddListener(OnToggleMapBtnPressed);           
@@ -36,23 +41,43 @@ namespace Town
             worldView= FindObjectOfType<WorldView>(true);
             nekkiView.InitTown(this);
             worldView.InitTown(this); 
+            prevClick = Time.time;
         }
        
         void OnToggleMapBtnPressed()
         {
-            if (index < maxIndex - 1)
+            if (Time.time - prevClick < 0.25f)
             {
-                index++;
+                return;
             }
             else
             {
-                index = 0;
+                prevClick = Time.time;
             }
-            for (int i = 0; i < maxIndex; i++)
+
+            //if (index < maxIndex - 1)
+            //{
+            //    index++;
+            //}
+            //else
+            //{
+            //    index = 0;
+            //}
+            //for (int i = 0; i < maxIndex; i++)
+            //{
+            //    transform.GetChild(i).gameObject.SetActive(false);
+            //}
+            //transform.GetChild(index).gameObject.SetActive(true);
+            if (worldView.gameObject.activeInHierarchy)
             {
-                transform.GetChild(i).gameObject.SetActive(false);
+                worldView.gameObject.SetActive(false);
+                nekkiView.gameObject.SetActive(true);
             }
-            transform.GetChild(index).gameObject.SetActive(true);
+            else
+            {
+                worldView.gameObject.SetActive(true);
+                nekkiView.gameObject.SetActive(false);
+            }
         }
         void OnCloseBtnPressed()
         {
@@ -79,27 +104,34 @@ namespace Town
 
         public void LoadLocation(LocationName locationName)
         {
-            for (int i = 0; i < maxIndex; i++)
-            {
-              ILocation iloc =    transform.GetChild(i).GetComponent<ILocation>();
-                if (iloc != null)
-                {
-                    if(iloc.locationName== locationName)
-                    {
-                        transform.GetChild(i).gameObject.SetActive(true);
-                        index = i; 
-                    }
-                    else
-                    {
-                        transform.GetChild(i).gameObject.SetActive(false); // name not matching 
-                    }
-                }
-                else
-                {
-                    transform.GetChild(i).gameObject.SetActive(false); // not a iloc
-                }
-            }
-
+            // MIgrate to CONTAINER WITH CITY MAPS AFTER DEMO 
+            //for (int i = 0; i < maxIndex; i++)
+            //{
+            //  ILocation iloc =    transform.GetChild(i).GetComponent<ILocation>();
+            //    if (iloc != null)
+            //    {
+            //        if(iloc.locationName== locationName)
+            //        {
+            //            transform.GetChild(i).gameObject.SetActive(true);
+            //            index = i; 
+            //        }
+            //        else
+            //        {
+            //            transform.GetChild(i).gameObject.SetActive(false); // name not matching 
+            //            Debug.Log(" town Name not matching "+ locationName);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        transform.GetChild(i).gameObject.SetActive(false); // not a iloc
+            //        UnLoad();
+            //    }
+            //}
+            if (locationName == LocationName.None)
+                return;
+            if (locationName == LocationName.Nekkisari)
+                OnToggleMapBtnPressed();  // nekkisari click
+           
 
         }
 

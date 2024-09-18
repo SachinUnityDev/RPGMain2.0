@@ -22,20 +22,20 @@ namespace Combat
  
         public override void PopulateTargetPos()
         {
-            //skillModel.targetPos.Clear();
-            //for (int i = 1; i < 8; i++)
-            //{              
-            //    CellPosData cellPosData = new CellPosData(charController.charModel.charMode, i); // Allies
-            //    DynamicPosData dyna = GridService.Instance.gridView
-            //        .GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
-            //    if (dyna != null)
-            //    {
-            //        if(dyna.charGO.GetComponent<CharController>().charModel.charName
-            //                                                == CharNames.CrestedRat)
-            //          skillModel.targetPos.Add(cellPosData);
-            //    }                
-            //}
-            AnyWithCharMode(CharMode.Enemy);
+            skillModel.targetPos.Clear();
+            for (int i = 1; i < 8; i++)
+            {
+                CellPosData cellPosData = new CellPosData(charController.charModel.charMode, i); // Allies
+                DynamicPosData dyna = GridService.Instance.gridView
+                    .GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
+                if (dyna != null)
+                {
+                    if (dyna.charGO.GetComponent<CharController>().charModel.charName
+                                                            == CharNames.CrestedRat)
+                        skillModel.targetPos.Add(cellPosData);
+                }
+            }
+
         }
    
         public override void ApplyFX1()

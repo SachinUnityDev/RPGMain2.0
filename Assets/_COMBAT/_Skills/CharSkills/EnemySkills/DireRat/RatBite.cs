@@ -112,7 +112,7 @@ namespace Combat
         public override void PopulateAITarget()
         {
             base.PopulateAITarget();
-            if (SkillService.Instance.currentTargetDyna == null)
+            if (SkillService.Instance.currentTargetDyna == null && skillModel.targetPos.Count >0)
             {
                 CellPosData cell = skillModel.targetPos[0];
                 DynamicPosData dyna = GridService.Instance.GetDynaAtCellPos(cell.charMode, cell.pos);

@@ -47,7 +47,7 @@ namespace Combat
         public bool MovebyRow(DynamicPosData dynamicPos, MoveDir moveDir, int steps)
         {
             // Debug.Log("DYNA " + dynamicPos.currentPos + dynamicPos.charMode);
-            if (dynamicPos.charGO.GetComponent<CharController>().charModel.stateOfChar != StateOfChar.Dead)
+            if (dynamicPos.charGO.GetComponent<CharController>().charModel.stateOfChar == StateOfChar.Dead)
                 return false; 
                 int targetCell = 0; 
             if(dynamicPos.charMode == CharMode.Enemy)

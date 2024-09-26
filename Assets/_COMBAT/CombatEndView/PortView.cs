@@ -39,7 +39,7 @@ namespace Combat
         [Header("Global var")]
         [SerializeField] CharModel charModel;
         [SerializeField]int sharedExp;
-        [SerializeField] int manualExp;
+        [SerializeField] int highMeritExp;
         [SerializeField] int firstBloodExp;
         [SerializeField] int killsNSavesExp; 
         public void InitPortView(CharModel charModel, int sharedExp, CombatEndView combatEndView)
@@ -161,31 +161,31 @@ namespace Combat
         }
         public void AddManualExp()
         {
-            manualExp = CombatService.Instance.GetManualExp();
-            expDetailedView.AddManualExpDsply(manualExp);
+            highMeritExp = CombatService.Instance.GetHighMeritExp();
+            expDetailedView.AddManualExpDsply(highMeritExp);
             combatEndView.OnManualExpAwarded();
-            FillLvlExpBar(manualExp);
+            FillLvlExpBar(highMeritExp);
         }
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (CanAwardManualExp())
+            if (CanAwardHighMeritExp())
             {
                 AddManualExp();
-                combatEndView.manualExpRewarded = true;
+                combatEndView.highMeritExpRewarded = true;
             }
         }
-        bool CanAwardManualExp()
+        bool CanAwardHighMeritExp()
         {
             if (charModel.charName == CharNames.Abbas) return false;            
-            if (!combatEndView.manualExpBtnPressed) return false;
-            if (combatEndView.manualExpRewarded) return false;
+            if (!combatEndView.highMeritExpBtnPressed) return false;
+            if (combatEndView.highMeritExpRewarded) return false;
             return true; 
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
             if(charModel.stateOfChar == StateOfChar.UnLocked)
-            if (CanAwardManualExp())
+            if (CanAwardHighMeritExp())
             {
                 bgPortImg.sprite = allCharSO.bgPortClicked;
             }

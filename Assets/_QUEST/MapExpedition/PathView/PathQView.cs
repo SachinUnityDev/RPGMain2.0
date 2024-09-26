@@ -43,6 +43,32 @@ namespace Quest
            // MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move(0);// set at first node
 
         }
+        public void LoadPathQ(PathView pathView, PathController pathController)
+        {
+            this.pathView = pathView;
+            this.pathController = pathController;
+            pathController.pathQView = this; // adding pathQView reference to pathController
+            
+
+
+            foreach (Transform node in transform)
+            {
+                PathNodeView pathNodeView = node.GetComponent<PathNodeView>();
+                QMarkView qMarkView = node.GetComponent<QMarkView>();
+                if (pathNodeView != null)
+                {
+                    pathNodeView.LoadPathNodeView(pathView, this);
+                }
+                if (qMarkView != null)
+                {
+                    qMarkView.LoadPathNodeView(pathView, this);
+                }
+            }
+            // MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move(0);// set at first node
+
+        }
+
+
         public void OnNodeEnter(int node)
         {
             currentNode = node; // track which node is currently active 

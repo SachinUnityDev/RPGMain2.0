@@ -105,14 +105,14 @@ namespace Combat
         public override void PopulateAITarget()
         {
             base.PopulateAITarget();
-            if (SkillService.Instance.currentTargetDyna == null)
+            if (SkillService.Instance.currentTargetDyna == null && skillModel.targetPos.Count >0)
             {
                 CellPosData cell = skillModel.targetPos[0];
                 DynamicPosData dyna = GridService.Instance.GetDynaAtCellPos(cell.charMode, cell.pos);
                 if (dyna != null)
                     SkillService.Instance.currentTargetDyna = dyna;
                 else
-                    Debug.Log("target DYNA found null ");
+                    Debug.Log("target DYNA found null ");  // case taken care off in skillController
             } 
         }
 

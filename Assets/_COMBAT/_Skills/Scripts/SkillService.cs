@@ -483,7 +483,10 @@ namespace Combat
         {
             // ClearPrevData();  // redundant safety .. causing only one FX to play as it clears mainTargetDyna
            if(skillModel == null)
-                Debug.Log("ON SKILLMODEL NULL>>>>");  
+            {
+                Move2Nextturn();return; 
+            }
+                Debug.Log("ON SKILLMODEL >>>>"+ skillModel.skillName);  
             CharController charController = CombatService.Instance.currCharOnTurn;  
             CombatController combatController = charController.GetComponent<CombatController>();
             // if ally reduce action pts
@@ -511,7 +514,7 @@ namespace Combat
             {
                 CombatService.Instance.roundController.SetSameCharOnTurn();
                 //if (charController.charModel.charMode == CharMode.Enemy)
-                //    InitEnemySkillSelection(CombatService.Instance.currCharOnTurn);   // to be called 
+                //    InitEnemySkillSelection(CombatService.Instance.currCharOnTurn);   // to be called
             }
             else
             {
@@ -521,6 +524,7 @@ namespace Combat
         }        
         public void Move2Nextturn()
         {
+            Debug.Log("Move to next turn" + Time.time); 
             CombatEventService.Instance.On_EOT();
             Sequence PauseSeq = DOTween.Sequence();
 

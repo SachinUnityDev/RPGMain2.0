@@ -708,6 +708,26 @@ namespace Combat
         #endregion
 
         #region  SKILL SELECTION AI 
+
+        public void SkillAIAlpha()
+        {
+            // loop thru clickable skills // get skills who can target alpha lvl targets 
+
+
+            //1 - Ally HP < 12 %
+            //Force Guard or Heal skill
+
+            //2 - Self Stamina < 20 %
+            //Force Patience(or Wait) skill
+            //3 - No target for Melee Attack skill:
+            //Force Move into preffered spot(or X spot - we can discuss that)
+            //4 - Enemy Target < 12 %
+            //Force Physical or Magical skill on that target
+        }
+        public void SkillAIBeta()
+        {
+
+        }
         public void StartAISkillInController()
         {
 
@@ -727,17 +747,26 @@ namespace Combat
 
                 allSkillBases.Find(t => t.skillName == selectedSkillModel.skillName).PopulateAITarget();
                 // Set the target ..i.e currTargetDyna .. etc 
+                if(SkillService.Instance.currentTargetDyna == null)  // if the target is not set then restart the search
+                {
+                    Debug.Log(" current Dyna Null"); 
+                    selectedSkillModel.SetSkillState(SkillSelectState.UnClickable_NoTargets);
+                    StartAISkillInController(); return; 
+                }
+
               //  Debug.Log("TARGETS" + SkillService.Instance.currentTargetDyna.charGO.name);
                 SkillService.Instance.OnAITargetSelected(selectedSkillModel);
             }
             else
             {
-                  SkillService.Instance.On_PostSkill(selectedSkillModel); // model is null here             
+                Debug.Log("SELECTED SKILLS: NONE" + CombatService.Instance.currCharOnTurn.charModel.charName);                 
+                SkillService.Instance.On_PostSkill(selectedSkillModel); // model is null here             
             }
         }
         public SkillModel SkillSelectByAI()
         {
             float netBaseWt = 0f; ClickableSkills.Clear();
+            Debug.Log(" SKILL SELECTED START"); 
             foreach (SkillModel skillModel in charSkillModel.allSkillModels)
             {   
                 UpdateSkillState(skillModel);
@@ -756,8 +785,8 @@ namespace Combat
                 return ClickableSkills[i];
             }
             int random = UnityEngine.Random.Range(0, ClickableSkills.Count);
-          
-            return ClickableSkills[random];// to remove error 
+
+            return ClickableSkills[random]; 
         }
         bool GetSkillModelByBaseWtChance(float netBaseWt, int i)
         {
@@ -765,6 +794,25 @@ namespace Combat
 
             return skillchance.GetChance();
         }
+
+
+        SkillModel SkillSelectBasedOnDireConditions()
+        {
+            //1 - Ally HP < 12 %
+            //Force Guard or Heal skill
+            //2 - Self Stamina < 20 %
+            //Force Patience skill
+            //3 - No target for Melee Attack skill:
+            //Force Move into preffered spot(or X spot - we can discuss that)
+            //4 - Enemy Target < 12 %
+            //Force Physical or Magical skill on that target
+
+
+
+
+            return null;
+        }
+
 
         #endregion
 

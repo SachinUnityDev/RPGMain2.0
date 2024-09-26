@@ -22,18 +22,18 @@ namespace Combat
         //public SenseTheWeak senseTheWeak;
         public override void PopulateTargetPos()
         {
-            //skillModel.targetPos.Clear();
-            //for (int i = 1; i <= 4; i++)
-            //{
-            //        CellPosData cellPosData = new CellPosData(CharMode.Ally, i); // Allies
-            //        DynamicPosData dyna = GridService.Instance.gridView
-            //                               .GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
-            //        if (dyna != null)
-            //        {
-            //            skillModel.targetPos.Add(cellPosData);
-            //        }                
-            //}
-            Target1234(CharMode.Ally);
+            skillModel.targetPos.Clear();
+            for (int i = 1; i <= 4; i++)
+            {
+                CellPosData cellPosData = new CellPosData(CharMode.Ally, i); // Allies
+                DynamicPosData dyna = GridService.Instance.gridView
+                                       .GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
+                if (dyna != null)
+                {
+                    skillModel.targetPos.Add(cellPosData);
+                }
+            }
+            // FirstOnSamelane();
         }
         public override void ApplyFX1()
         {

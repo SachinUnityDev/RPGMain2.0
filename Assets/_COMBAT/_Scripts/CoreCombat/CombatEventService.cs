@@ -226,8 +226,16 @@ namespace Combat
         {
             if(CombatService.Instance.combatState == CombatState.INCombat_normal)
             {
-                Debug.Log("EOR triggered" + roundNo);                 
-                OnEOR1?.Invoke(roundNo);
+                Debug.Log("EOR triggered" + roundNo +" time" + Time.time);
+                try
+                {
+                    OnEOR1?.Invoke(roundNo);
+                }
+                catch(Exception e)
+                {
+                    Debug.Log("EXCEPTION EOR!!!" + e.Message);
+                    Debug.Log("EXCEPTION EOR!!! STACK" + e.StackTrace);
+                }
             }       
         }
         public void On_EOT()
@@ -246,7 +254,7 @@ namespace Combat
             int roundNo = currentRound;
             Debug.Log(roundNo + "Check end of round.........................");
             On_EOR(roundNo);
-            Debug.Log("Check end of round" + roundNo);
+            Debug.Log("Check end of round" + roundNo + "time" + Time.time);
             int MAX_RD_LIMIT = GameService.Instance.gameController.GetMaxRoundLimit();
             if (roundNo >= MAX_RD_LIMIT)
             {

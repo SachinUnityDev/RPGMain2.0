@@ -41,13 +41,14 @@ namespace Common
         }
         public int GetMaxRoundLimit()
         {
-            EnemyPackName enemyPack = CombatService.Instance.currEnemyPack; 
-            EnemyPacksSO enemyPackSO = CombatService.Instance.allEnemyPackSO.GetEnemyPackSO(enemyPack);
+            return 10; 
+            //EnemyPackName enemyPack = CombatService.Instance.currEnemyPack; 
+            //EnemyPacksSO enemyPackSO = CombatService.Instance.allEnemyPackSO.GetEnemyPackSO(enemyPack);
 
-            if (enemyPackSO.isBossPack)
-                return currGameDiffModel.maxRoundLimitBoss;
-            else
-                return currGameDiffModel.maxRoundLimit; 
+            //if (enemyPackSO.isBossPack)
+            //    return currGameDiffModel.maxRoundLimitBoss;
+            //else
+            //    return currGameDiffModel.maxRoundLimit; 
         }
         public void SetMortalBlood(bool isMortalBlood)
         {

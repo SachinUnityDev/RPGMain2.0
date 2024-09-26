@@ -47,7 +47,9 @@ namespace Combat
 
         [Header("Who drew the first blood")]
         public bool IsFirstBloodChkDone;
-        
+
+        [Header("Combat Result")]
+        public CombatResult combatResult; 
 
         void OnEnable()
         {            
@@ -89,8 +91,6 @@ namespace Combat
             currCharHovered = currCharOnTurn;
             combatHUDView.UpdateTurnBtn(charController); 
         }
-
-    
 
         public void GetAllyInCombat()
         {
@@ -200,7 +200,7 @@ namespace Combat
         {
             CombatEventService.Instance.On_EOC(combatResult);
   
-
+            this.combatResult = combatResult;
             EnemyPackBase enemyPackBase = enemyPackController.GetEnemyPackBase(currEnemyPack); 
 
             switch (combatResult)
@@ -220,8 +220,9 @@ namespace Combat
         }
         #endregion
 
-        public int GetSharedExp()
+        public float GetSharedExp()
         {
+            
             int sharedExp = currEnemyPackSO.sharedExp;
             int allyExceptDeadNFledCount = 0;
             List<CharController> allAllyInclDeadNFled 
@@ -230,16 +231,31 @@ namespace Combat
             
             foreach (CharController charCtrl in allAllyInclDeadNFled)
             {
-                if (charCtrl.charModel.stateOfChar == StateOfChar.UnLocked)
+                if (charCtrl.charModel.stateOfChar == StateOfChar.UnLocked) // means !not dead and fled state 
                 {
                     allyExceptDeadNFledCount++;
                 }
             }
             if (allyExceptDeadNFledCount > 0)
-                return sharedExp / allyExceptDeadNFledCount;
-            else return 0;
+            {
+                switch (combatResult)
+                {
+                    case CombatResult.None:
+                        return 0;                         
+                    case CombatResult.Victory:
+                       return sharedExp / allyExceptDeadNFledCount;                       
+                    case CombatResult.Draw:
+                        return (sharedExp /allyExceptDeadNFledCount)*0.6f;
+                    case CombatResult.Defeat:
+                        return 0;                        
+                    default:
+                        return 0;                        
+                }
+            }              
+           return 0;
         }
-        public int GetManualExp()
+       
+        public int GetHighMeritExp()
         {
             int manualExp = currEnemyPackSO.sharedExp / 6; 
             return manualExp;   

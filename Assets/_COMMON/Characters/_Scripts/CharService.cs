@@ -511,6 +511,8 @@ namespace Common
             _charController.charModel.stateOfChar = StateOfChar.Dead; 
        
             charDiedinLastTurn.Add(_charController);
+            if (CombatService.Instance.currCharOnTurn == _charController)
+                CombatEventService.Instance.On_EOT(); 
             try
             {
                 OnCharDeath?.Invoke(_charController);

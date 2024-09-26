@@ -1334,7 +1334,6 @@ MonoBehaviour:
   START_MONTH_OF_THE_GAME: 1
   gameController: {fileID: 0}
   gameModeController: {fileID: 0}
-  sceneController: {fileID: 0}
   currGameModel:
     profileSlot: 0
     profileName: 

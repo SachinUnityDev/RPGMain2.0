@@ -5,6 +5,7 @@ using DG.Tweening;
 using Common;
 using Town;
 using System;
+using UnityEngine.Rendering;
 
 namespace Quest
 {
@@ -17,14 +18,14 @@ namespace Quest
 
         [Header("Global Var")]
         [SerializeField] Transform pawnStone;
-        [SerializeField] PathModel pathModel;
+        [SerializeField] PathModel currPathModel;
 
         public bool isQInProgress = false;
-        PathController PathController; 
+        public PathController pathController; 
         
         public void PathViewInit(PathController pathController)
         {
-            this.PathController = pathController;
+            this.pathController = pathController;
             MapPathContainer = FindObjectOfType<MapPathContainer>(true).transform;
             foreach (Transform node in MapPathContainer)
             {
@@ -37,11 +38,21 @@ namespace Quest
             }
         }
 
+        public void LoadPathView(PathController pathController, List<PathModel> allPathModels)
+        {
+            this.pathController = pathController;
+            MapPathContainer = FindObjectOfType<MapPathContainer>(true).transform;
+            
+            
+
+        }
+
+
         public void OnPathEmbark(QuestNames questName, ObjNames objName, PathQView pathQView)
         {
-            pathModel = MapService.Instance.pathController.GetPathModel(questName, objName);            
-            if (pathModel != null)
-                pawnMove.PawnMoveInit(this, pathQView, pathModel);
+            currPathModel = MapService.Instance.pathController.GetPathModel(questName, objName);            
+            if (currPathModel != null)
+                pawnMove.PawnMoveInit(this, pathQView, currPathModel);
         }
         //#region PAWN MOVEMENT CONTROL
         //public void MovePawnStone(Vector3 pos, float time)

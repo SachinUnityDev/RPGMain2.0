@@ -214,10 +214,11 @@ namespace Combat
                         if (targetCtrl.charStateController.HasCharState(CharStateName.Hexed))
                         {
                             SkillService.Instance.currentTargetDyna = dyna; 
+                            
                         }
                     }
                 }
-            }
+            }            
         }
         #endregion 
 

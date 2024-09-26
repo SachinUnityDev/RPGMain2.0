@@ -35,17 +35,6 @@ namespace Quest
         public QuestState objState;
         public List<NodeInfo> nodes = new List<NodeInfo>();
         public GameObject pathPrefab; 
-        
-        //public NodeData endNode;
-        //public float timeInCalday;
-
-        //[Header(" Intermittant Node")]
-        //public List<InterNodeData> allInterNodes = new List<InterNodeData>();  
-
-        //public bool IsAnyInterNode()
-        //{
-        //    if (allInterNodes.Count > 0) return true;
-        //    else return false; 
-        //}
+       
     }
 }

@@ -25,8 +25,8 @@ namespace Combat
 
 
         [Header(" Global var")]
-        public bool manualExpBtnPressed = false; 
-        public bool manualExpRewarded = false;
+        public bool highMeritExpBtnPressed = false; 
+        public bool highMeritExpRewarded = false;
 
         CombatEndCondition combatEndCondition;
         CombatResult combatResult;
@@ -70,7 +70,7 @@ namespace Combat
         public void OnManualExpAwarded()
         {
             manualExpBtn.StateNA(); 
-            manualExpRewarded = true; 
+            highMeritExpRewarded = true; 
         }
       
         void FillHeading()
@@ -94,14 +94,14 @@ namespace Combat
         }
         void FillCharPort()
         {
-            int charSharedExp = CombatService.Instance.GetSharedExp();
+            float charSharedExp = CombatService.Instance.GetSharedExp();
             for (int i = 0; i < charPortContainer.childCount; i++)
             {
                 if (i < allAllyInclDeadNFled.Count)
                 {
                     charPortContainer.GetChild(i).gameObject.SetActive(true);
                     charPortContainer.GetChild(i).GetComponent<PortView>()
-                                    .InitPortView(allAllyInclDeadNFled[i].charModel, charSharedExp, this); 
+                                    .InitPortView(allAllyInclDeadNFled[i].charModel, (int)charSharedExp, this); 
                 }
                 else
                 {

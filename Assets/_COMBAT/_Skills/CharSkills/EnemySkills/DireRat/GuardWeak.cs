@@ -109,7 +109,6 @@ namespace Combat
 
         public override void PopulateAITarget()
         {
-
             base.PopulateAITarget();
             if (SkillService.Instance.currentTargetDyna != null) return; 
             foreach (CellPosData cell in skillModel.targetPos)
@@ -121,24 +120,23 @@ namespace Combat
 
                     StatData hp = targetCharCtrl.GetStat(StatName.health);
                     if (!targetCharCtrl.charStateController.HasCharState(CharStateName.Guarded))
-                    {
+                    {                      
                         SkillService.Instance.currentTargetDyna = dyna; break;
                     }
                     else if (hp.currValue / hp.maxLimit < 0.4f)
                     {
                         SkillService.Instance.currentTargetDyna = dyna; break;
                     }
-                    else
-                    {
-                        randomDyna = dyna;
-                    }
-                }
-                      
+                    //else
+                    //{
+                    //    randomDyna = dyna;
+                    //}
+                }                      
             }
-            if(SkillService.Instance.currentTargetDyna == null)
-            {
-                SkillService.Instance.currentTargetDyna = randomDyna;
-            }
+            //if (SkillService.Instance.currentTargetDyna == null)
+            //{             
+            //    SkillService.Instance.currentTargetDyna = randomDyna;
+            //}
         }
 
         public override void ApplyMoveFx()

@@ -25,6 +25,11 @@ namespace Quest
             objName = pathQView.objName;
         }
 
+        public void LoadPathNodeView(PathView pathView, PathQView pathQView)
+        {
+           InitPathNodeView(pathView, pathQView);
+        }
+
         void QuestMarkDown()
         {
             transform.DORotate(new Vector3(0, 0, 181), 0.2f)

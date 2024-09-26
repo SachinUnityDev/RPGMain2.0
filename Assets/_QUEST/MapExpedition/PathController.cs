@@ -77,7 +77,11 @@ namespace Quest
             }
             InitPathBases();
         }
-       
+       public void LoadPaths(List<PathModel> allPathModels)
+        {
+            allPathModel = allPathModels.DeepClone();
+            InitPathBases();
+        }
         void InitPathBases()
         {
             pathFactory = GetComponent<PathFactory>();
@@ -92,7 +96,6 @@ namespace Quest
                 allPathBase.Add(pathbaseNew);
             }
         }
-
         public PathModel GetPathModel(QuestNames questName, ObjNames objName)
         {
             int index = allPathModel.FindIndex(t => t.questName == questName && t.objName == objName); 
@@ -130,17 +133,26 @@ namespace Quest
         {
             PathSO pathSO = MapService.Instance.allPathSO.GetPathSO(questName, objName);
             PathOnDsply pathOnDsply = new PathOnDsply(questName, objName, pathSO.pathPrefab); 
-            allPathOnDsply.Add(pathOnDsply);
-           
+            allPathOnDsply.Add(pathOnDsply);           
             pathPrefab = pathSO.pathPrefab;
-            ShowPath();
+            PathModel pathModel = GetPathModel(questName, objName);
+            if(pathModel != null)
+            {
+                pathModel.isDsplyed = true;
+                currPathModel = pathModel;
+            }
+            AddPath2View();
         }
-        public void On_PathComplete()
+        public void On_PathComplete()  
         {
+            // remove prefab using pathView
+            // update in PathModel
 
         }
 
-        void ShowPath()
+
+
+        void AddPath2View()
         {
             //if (isDiaViewInitDone) return; // return multiple clicks
             Transform parent = pathView.MapPathContainer.transform;
@@ -161,25 +173,3 @@ namespace Quest
 
     }
 }
-//public void OnPathEndNodeSelect( MapExpBasePtrEvents mapExpBasePtrEvents, NodeData endNode)
-//{
-//    //this.endNode= endNode;
-
-//    //this.mapExpBasePtrEvents = mapExpBasePtrEvents;
-//    //pathSO = MapService.Instance.allPathSO.GetPathSO(startNode, endNode);
-
-//    //pathModel= GetPathModel(startNode, endNode);
-//    //pathBase = GetPathBase(startNode, endNode);
-
-//    //if (pathModel.IsAnyUnCrossedInterNode())
-//    //{
-//    //    InterNodeData interNodeData = pathModel.GetNextUnCrossedInterNode();
-//    //    MapENames mapEName = pathModel.GetMapENameFromInterNodeBasedOnChance(interNodeData);
-//    //    //seq
-
-
-//    ////    EncounterService.Instance.mapEController.ShowMapE(mapEName); 
-
-//    //}
-
-//}

@@ -43,25 +43,25 @@ namespace Combat
         {
             img.sprite = spriteNA;
             manualExpState = ManualExpState.NA;
-            combatEndView.manualExpRewarded = true;
+            combatEndView.highMeritExpRewarded = true;
         }
         void StateClicked()
         {
             img.sprite = spriteHL;
             manualExpState = ManualExpState.Clicked;
-            combatEndView.manualExpBtnPressed = true;
+            combatEndView.highMeritExpBtnPressed = true;
         }
         void StateUnClicked()
         {
             img.sprite = spriteN;
             manualExpState = ManualExpState.UnClicked; 
-            combatEndView.manualExpBtnPressed = false;
+            combatEndView.highMeritExpBtnPressed = false;
         }
 
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (combatEndView.manualExpRewarded) return;
+            if (combatEndView.highMeritExpRewarded) return;
             if (manualExpState == ManualExpState.NA) return;
 
             if (manualExpState == ManualExpState.Clicked) 

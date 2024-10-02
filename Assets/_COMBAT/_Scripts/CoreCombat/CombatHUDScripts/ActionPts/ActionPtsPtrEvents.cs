@@ -24,7 +24,7 @@ namespace Combat
                 return;
             CharController charController = CombatService.Instance.currCharOnTurn;
 
-            int actionPts = charController.combatController.actionPts; 
+            int actionPts = charController.combatController.GetAP(); 
             if(actionPts > 0)
             {
                 actionsPtsTxt.gameObject.SetActive(true); 

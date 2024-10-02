@@ -171,7 +171,7 @@ namespace Combat
             CombatController combatController =
                     charController.GetComponent<CombatController>();
             if(combatController!= null ) 
-            combatController.actionPts++; 
+            combatController.IncrementAP(); 
         }
         protected void TargetAnyEnemy()
         {

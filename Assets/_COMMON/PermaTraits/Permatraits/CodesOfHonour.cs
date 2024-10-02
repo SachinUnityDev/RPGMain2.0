@@ -27,7 +27,7 @@ namespace Common
             if (charController.charModel.charID != charID) return;
             if (CharService.Instance.ChkIfSOLO(charController))
             {
-                charController.combatController.actionPts++;
+                charController.combatController.IncrementAP();
             }
         }
     }

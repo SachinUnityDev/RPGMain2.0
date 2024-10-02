@@ -498,7 +498,7 @@ namespace Combat
 
                 // AP UPDATES 
                 if (hasteChk) // if haste check /Enemies get a extra AP
-                    combatController.actionPts++;
+                    combatController.IncrementAP();
 
                 combatController.SubtractActionPtOnSkilluse(skillModel, charController.charModel.charMode);
 
@@ -510,7 +510,7 @@ namespace Combat
                 return; 
             }
 
-            if (combatController.actionPts > 0)// allies 
+            if (combatController.GetAP() > 0)// allies 
             {
                 CombatService.Instance.roundController.SetSameCharOnTurn();
                 //if (charController.charModel.charMode == CharMode.Enemy)
@@ -671,7 +671,7 @@ namespace Combat
         {
             
             CharController charController = CombatService.Instance.currCharOnTurn; 
-            if(charController.combatController.actionPts > 0)
+            if(charController.combatController.GetAP() > 0)
             {
                 SkillBase skillBase = currSkillController.GetSkillBase(skillModel.skillName);
                 IRemoteSkill iRemote = skillBase as IRemoteSkill; 
@@ -686,7 +686,13 @@ namespace Combat
             Cleartargets(); // move to the next turn
             DeSelectSkill();
         }
+        public bool ChkIfARemoteSkillIsAlreadyPlacedOnTheTile(CellPosData cellPosData)
+        {
+            RemoteView[] allRemoteView = FindObjectsOfType<RemoteView>();
 
+            return (allRemoteView.Any(t => t.cellPosData.charMode == cellPosData.charMode
+                                        && t.cellPosData.pos == cellPosData.pos));
+        }
         #endregion
 
         #region Helpers
@@ -695,7 +701,7 @@ namespace Combat
             SkillModel skillModel = currSkillController.GetSkillModel(skillName);
             if (skillModel != null)
                 return skillModel.attackType; 
-            Debug.Log("SKILLMODEL Not found!!" + skillName);
+            Debug.LogError("SKILLMODEL Not found!!" + skillName  + "Char" + currSkillController.charController.charModel.charName);
             return AttackType.None; 
         }
         void ClearPrevData()

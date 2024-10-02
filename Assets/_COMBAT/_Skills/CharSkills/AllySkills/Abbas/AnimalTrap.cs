@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace Combat
 {
     public class AnimalTrap : SkillBase, IRemoteSkill
@@ -24,7 +26,10 @@ namespace Combat
                                         .GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
                 if (dyna == null)  // null pos targetted 
                 {
-                    skillModel.targetPos.Add(cellPosData);                    
+                    if (!SkillService.Instance.ChkIfARemoteSkillIsAlreadyPlacedOnTheTile(cellPosData))
+                    {
+                        skillModel.targetPos.Add(cellPosData); 
+                    }       
                 }
             }
         }

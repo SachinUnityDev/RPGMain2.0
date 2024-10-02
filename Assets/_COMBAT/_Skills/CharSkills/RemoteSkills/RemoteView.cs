@@ -10,7 +10,7 @@ namespace Combat
     public class RemoteView : MonoBehaviour
     {
         [SerializeField] SkillModel skillModel;         
-        [SerializeField]CellPosData cellPosData;
+        public CellPosData cellPosData;
         [SerializeField]CharController charController;
         SkillBase skillbase;
         SkillPerkFXData skillPerkFXData; 

@@ -198,6 +198,9 @@ namespace Combat
 
         public void OnCombatResult(CombatResult combatResult, CombatEndCondition combatEndCondition)
         {
+            // chk combat state here
+
+          Debug.Log(" ComBAT STATE " + combatState);    
             CombatEventService.Instance.On_EOC(combatResult);
   
             this.combatResult = combatResult;

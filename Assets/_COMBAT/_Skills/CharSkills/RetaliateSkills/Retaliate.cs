@@ -24,6 +24,8 @@ namespace Combat
 
         public override void ApplyFX1()
         {
+            Debug.Log("Retaliate FX1:" + skillModel + "  Target NAME:"+targetController.name);
+
             targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
                              , skillModel.dmgType[0], skillModel.damageMod);
         }

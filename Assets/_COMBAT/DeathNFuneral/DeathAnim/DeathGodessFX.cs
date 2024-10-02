@@ -16,6 +16,9 @@ namespace Combat
         public void PlayDeathAnim(CharController charController)
         {
             SkeletonAnimation skeletonAnim = charController.gameObject.GetComponentInChildren<SkeletonAnimation>(); 
+            charController.GetComponent<BoxCollider2D>().enabled = false;  
+
+
             deathSeq = DOTween.Sequence();
             deathSeq
 

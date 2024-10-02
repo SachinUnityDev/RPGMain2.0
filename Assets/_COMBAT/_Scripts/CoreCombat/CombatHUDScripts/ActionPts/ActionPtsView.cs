@@ -10,7 +10,7 @@ namespace Combat
         [Header(" TBR")]
         [SerializeField] ActionPtsPtrEvents actionPtsPtrEvents;
         [SerializeField] GameObject endTurnBtn; 
-        public int actionPts;
+        [SerializeField] int actionPts;
         [SerializeField] Transform actionPtsDOT; 
 
 
@@ -53,7 +53,7 @@ namespace Combat
             Debug.Log(" all action pts display"); 
             if(charController.charModel.charMode == CharMode.Ally)
             {
-                actionPts = charController.GetComponent<CombatController>().actionPts;
+                actionPts = charController.GetComponent<CombatController>().GetAP();
                 gameObject.SetActive(true);
 
                 UpDateActionsPtsView(actionPts); 
@@ -66,6 +66,7 @@ namespace Combat
         
         public void UpDateActionsPtsView(int actionPts)
         {
+            Debug.Log("Action PTS UPDATED>>>>>" + actionPts); 
             actionPtsPtrEvents.Init(this); 
             for (int i = 0; i < actionPtsPtrEvents.transform.childCount; i++)
             {
@@ -84,5 +85,8 @@ namespace Combat
         {
             gameObject.SetActive(false);    
         }
+
+   
+
     }
 }

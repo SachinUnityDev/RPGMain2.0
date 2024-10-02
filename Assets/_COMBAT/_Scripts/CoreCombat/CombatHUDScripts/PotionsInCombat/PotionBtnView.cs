@@ -21,9 +21,9 @@ namespace Combat
         CharController charController;
         Image img;
 
-        [SerializeField] TextMeshProUGUI apWarningTxt; 
-
-
+        [SerializeField] TextMeshProUGUI apWarningTxt;
+        [Header(" Item card")]
+        [SerializeField] GameObject itemCardRef; 
         private void Start()
         {
             CombatEventService.Instance.OnCharClicked -= InitPotionSlot;
@@ -38,6 +38,7 @@ namespace Combat
         }
         void InitPotionSlot(CharController charController)
         {
+           itemCardRef = ItemService.Instance.itemCardGO;
             container.gameObject.SetActive(false);  
             this.charController = charController;
             if (charController.charModel.orgCharMode == CharMode.Enemy)
@@ -95,6 +96,7 @@ namespace Combat
                 container.gameObject.SetActive(false);
                 img.sprite = spriteN;
             }
+            itemCardRef.SetActive(false);   
         }
 
         public void OnPointerEnter(PointerEventData eventData)

@@ -133,8 +133,8 @@ namespace Combat
                                 , bool ignoreArmorNRes = false, bool isTrueStrike = false)
         {
             this.striker = striker;
-            AttackType attackType =
-                            SkillService.Instance.GetSkillAttackType((SkillNames)causeName);
+            AttackType attackType = SkillService.Instance.GetSkillAttackType((SkillNames)causeName);
+                     
             isMisFire = false; 
             if (dmgModel.allImmune2Skills.Any(t => t == skillInclination))
                 return; 
@@ -270,7 +270,8 @@ namespace Combat
             {
                 CombatEventService.Instance.On_Misfire(dmgAppliedData);
             }
-            CombatEventService.Instance.On_DmgApplied(dmgAppliedData);
+            if ((SkillNames)causeName != SkillNames.Retaliate)  // to prevent infinite loop
+                CombatEventService.Instance.On_DmgApplied(dmgAppliedData);
 
         }
    

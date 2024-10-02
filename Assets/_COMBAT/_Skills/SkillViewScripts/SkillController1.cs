@@ -5,6 +5,7 @@ using Quest;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -24,7 +25,7 @@ namespace Combat
 
         [Header("All Skill and UnLocked Skill list")]
         public List<SkillNames> unLockedSkills = new List<SkillNames>();
-        public List<SkillModel> ClickableSkills = new List<SkillModel>();
+        public List<SkillModel> clickableSkills = new List<SkillModel>();
         [Header("Skill and Perk Bases")]
         public List<SkillBase> allSkillBases = new List<SkillBase>();
         public List<PerkBase> allPerkBases = new List<PerkBase>();
@@ -40,6 +41,12 @@ namespace Combat
         [Header(" Passive Skill controller")]
         public PassiveSkillsController passiveSkillcontroller;
 
+
+        [Header("SkillModel")]
+        [SerializeField] SkillNames prevSkillName;
+
+        [Header(" Multiple clicks")]
+        float prevClickTime = 0;  
 
         private void OnEnable()
         {
@@ -260,6 +267,11 @@ namespace Combat
         }
         public void SkillSelect(SkillNames _skillName)
         {
+            if (Time.time - prevClickTime < 0.10f)
+                return;
+            
+            prevClickTime = Time.time;
+
             allSkillBases.Find(t => t.skillName == _skillName).SkillSelected();
 
             List<PerkData> clickedPerkList = charSkillModel.allSkillPerkData
@@ -708,64 +720,204 @@ namespace Combat
         #endregion
 
         #region  SKILL SELECTION AI 
-
-        public void SkillAIAlpha()
+        SkillModel NoTargetForMeleeAttack()
+        {
+            // get all skills if a skillselect state is no_targets or not on cast pos 
+            // move to cast Pos or to a preffered spot   
+            foreach (SkillModel skillModel in charSkillModel.allSkillModels)
+            {
+                
+                if (skillModel.GetSkillState() == SkillSelectState.Unclickable_notOnCastPos)
+                {
+                    // find move // check adj pos for myDyna if cast pos is not reachable
+                    // then check adj pos for the targetPos(That isthe desired cast pos) find adjacent cells to this cast pos and check overlap with the prev list 
+                    // move to that pos 
+                    if(skillModel.skillInclination == SkillInclination.Physical || skillModel.skillInclination == SkillInclination.Magical)
+                    {
+                        SkillModel skillModelMove = charSkillModel.allSkillModels.Find(t => t.skillType == SkillTypeCombat.Move);
+                        if (skillModelMove.GetSkillState() == SkillSelectState.Clickable)
+                        {
+                            return skillModelMove;
+                        }
+                    }                                        
+                }
+              
+            }
+            return null;
+        }
+        public SkillModel SkillAIAlpha()
         {
             // loop thru clickable skills // get skills who can target alpha lvl targets 
+            PopulateClickableSkillList();
+            PopulateSkillModelTargetPos();
 
+            SkillModel skill = null;
 
-            //1 - Ally HP < 12 %
-            //Force Guard or Heal skill
+            skill = Ally2HealbasedOnHP(); 
+            if ( skill != null)            
+                    return skill;
 
-            //2 - Self Stamina < 20 %
-            //Force Patience(or Wait) skill
-            //3 - No target for Melee Attack skill:
-            //Force Move into preffered spot(or X spot - we can discuss that)
-            //4 - Enemy Target < 12 %
-            //Force Physical or Magical skill on that target
+            skill = SelectPatienceIfStaminaLow();
+            if (skill != null)
+                return skill;
+            
+            skill = EnemyTargetLowHP();
+            if (skill != null)
+                return skill;
+
+            skill = NoTargetForMeleeAttack();
+            if (skill != null)
+                return skill;
+
+            return null;           
         }
-        public void SkillAIBeta()
-        {
 
+        SkillModel Ally2HealbasedOnHP()
+        {   
+           if(!clickableSkills.Any(t => t.skillInclination == SkillInclination.Heal))
+                return null;    
+            for (int i = 1; i <= 7; i++)
+            {
+                CellPosData cellPosData = new CellPosData(CharMode.Enemy, i); // Enemies
+                DynamicPosData dyna = GridService.Instance.gridView
+                                       .GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
+                if (dyna != null)
+                {
+                    if(dyna.charGO.GetComponent<CharController>().charModel.charID != charController.charModel.charID)
+                    {                        
+                        CharController charCtrl = dyna.charGO.GetComponent<CharController>(); 
+                        if (charCtrl.GetStat(StatName.health).currValue/ charCtrl.GetStat(StatName.health).maxLimit < 0.12f)
+                        {
+                            SkillModel skillModel =
+                            clickableSkills.Find(t => t.skillInclination == SkillInclination.Heal);
+                            if(skillModel != null)
+                            {
+                                skillModel = clickableSkills.Find(t => t.skillInclination == SkillInclination.Guard);
+                                return skillModel;
+                            }                     
+                        }
+                    }
+                }
+            }
+            return null; 
+        }
+
+        SkillModel SelectPatienceIfStaminaLow()
+        {
+            if (!clickableSkills.Any(t => t.skillInclination == SkillInclination.Patience))
+                return null;
+            SkillModel skillModelPat = clickableSkills.Find(t => t.skillInclination == SkillInclination.Patience);
+
+            if (charController.GetStat(StatName.stamina).currValue / charController.GetStat(StatName.stamina).maxLimit < 0.20f)
+            {
+                if (skillModelPat.GetSkillState() == SkillSelectState.Clickable)
+                {
+                    return skillModelPat;
+                }                
+            }
+            return null;
+        }
+        
+        SkillModel EnemyTargetLowHP()
+        {
+            // find all enemy targets with low HP
+            for (int i = 1; i < 8; i++)
+            {                
+                {
+                    CellPosData cellPosData = new CellPosData(CharMode.Ally, i);
+                    DynamicPosData targetDyna = GridService.Instance.gridView.GetDynaFromPos(cellPosData.pos, cellPosData.charMode);
+                    if (targetDyna != null)
+                    {
+                        CharController charCtrl = targetDyna.charGO.GetComponent<CharController>();
+                        if(charCtrl.GetStat(StatName.health).currValue / charCtrl.GetStat(StatName.health).maxLimit < 0.12f)
+                        {                             
+                            foreach (SkillModel skillModel in clickableSkills)
+                            {
+                                foreach (CellPosData cell in skillModel.targetPos)
+                                {
+                                    if(cell.pos == targetDyna.currentPos)
+                                    {
+                                        return skillModel;
+                                    }
+                                }
+                            }                         
+                        }
+                    }
+                }
+            }
+            return null; 
+        }
+
+
+        void PopulateSkillModelTargetPos()
+        {
+            if (clickableSkills.Count < 1) return ;
+            foreach (SkillModel skillModel in clickableSkills)
+            {
+                // get skill base and check if it can target alpha lvl targets
+                SkillBase skillBase = allSkillBases.Find(t => t.skillName == skillModel.skillName);
+                // populat etargets 
+                skillBase.PopulateTargetPos();
+                // skillModel.targetPos get dyna on this target pos and check in charController whether the conditions belwo are satisfied
+
+            }
+        }
+        void PopulateClickableSkillList()
+        {
+            clickableSkills.Clear();            
+            foreach (SkillModel skillModel in charSkillModel.allSkillModels)
+            {
+                UpdateSkillState(skillModel);
+                clickableSkills.Add(skillModel);
+            }
+        }
+
+        public SkillModel SkillAIBeta()
+        {
+            return null; 
         }
         public void StartAISkillInController()
         {
-
-            SkillModel selectedSkillModel = SkillSelectByAI();
-            if (selectedSkillModel != null)
+            SkillModel skillModelAI = SkillAIAlpha();
+            if(skillModelAI == null)
+                skillModelAI = SkillSelectByAI();
+            if (skillModelAI != null)
             {
-                SkillService.Instance.currSkillName = selectedSkillModel.skillName;
-                //SkillService.Instance.On_SkillSelected(selectedSkillModel.charName);// dependencies skillName
-                // fixes skill select call  and currSKill controller to skill Service
-
-
-                allSkillBases.Find(t => t.skillName == selectedSkillModel.skillName).SkillSelected();
-                // SkillSelect?.Invoke(selectedSkillModel.skillName);  // message broadcaster 
-
-                Debug.Log("SELECTED SKILLS: " + selectedSkillModel.skillName +"Enemy Skillbases: " + 
-                    selectedSkillModel.charID);                 
-
-                allSkillBases.Find(t => t.skillName == selectedSkillModel.skillName).PopulateAITarget();
-                // Set the target ..i.e currTargetDyna .. etc 
-                if(SkillService.Instance.currentTargetDyna == null)  // if the target is not set then restart the search
+                if(prevSkillName != skillModelAI.skillName)
                 {
-                    Debug.Log(" current Dyna Null"); 
-                    selectedSkillModel.SetSkillState(SkillSelectState.UnClickable_NoTargets);
-                    StartAISkillInController(); return; 
-                }
+                    SkillService.Instance.currSkillName = skillModelAI.skillName;                 
+                    prevSkillName = skillModelAI.skillName;
+                    allSkillBases.Find(t => t.skillName == skillModelAI.skillName).SkillSelected();                    
 
-              //  Debug.Log("TARGETS" + SkillService.Instance.currentTargetDyna.charGO.name);
-                SkillService.Instance.OnAITargetSelected(selectedSkillModel);
+                    Debug.Log("SELECTED SKILLS: " + skillModelAI.skillName + "Enemy Skillbases: " +
+                        skillModelAI.charID);
+
+                    allSkillBases.Find(t => t.skillName == skillModelAI.skillName).PopulateAITarget();
+                    // Set the target ..i.e currTargetDyna .. etc 
+                    if (SkillService.Instance.currentTargetDyna == null)  // if the target is not set then restart the search
+                    {
+                        Debug.Log(" current Dyna Null");
+                        skillModelAI.SetSkillState(SkillSelectState.UnClickable_NoTargets);
+                        StartAISkillInController(); return;
+                    }
+                    SkillService.Instance.OnAITargetSelected(skillModelAI);
+                    prevSkillName = SkillNames.None;
+                }
+                else
+                {
+                    Debug.Log("SELECTED SKILLS: NONE RECURRING" + CombatService.Instance.currCharOnTurn.charModel.charName);
+                    SkillService.Instance.On_PostSkill(skillModelAI); // model can be null here             
+                }              
             }
             else
             {
-                Debug.Log("SELECTED SKILLS: NONE" + CombatService.Instance.currCharOnTurn.charModel.charName);                 
-                SkillService.Instance.On_PostSkill(selectedSkillModel); // model is null here             
+                Debug.Log("SELECTED SKILLS: NONE" + CombatService.Instance.currCharOnTurn.charModel.charName);
+                SkillService.Instance.On_PostSkill(skillModelAI); // model can be null here             
             }
         }
         public SkillModel SkillSelectByAI()
         {
-            float netBaseWt = 0f; ClickableSkills.Clear();
+            float netBaseWt = 0f; clickableSkills.Clear();
             Debug.Log(" SKILL SELECTED START"); 
             foreach (SkillModel skillModel in charSkillModel.allSkillModels)
             {   
@@ -773,46 +925,27 @@ namespace Combat
                 if (skillModel.GetSkillState() == SkillSelectState.Clickable)
                 {                    
                     netBaseWt += skillModel.baseWeight;
-                    ClickableSkills.Add(skillModel);
+                    clickableSkills.Add(skillModel);
                 }
             }
-            if (ClickableSkills.Count < 1) 
+            if (clickableSkills.Count < 1) 
                 return null;
             //int index = UnityEngine.Random.Range(0, ClickableSkills.Count);
-            for (int i = 0; i < ClickableSkills.Count; i++)
+            for (int i = 0; i < clickableSkills.Count; i++)
             {
                 if (GetSkillModelByBaseWtChance(netBaseWt, i))                 
-                return ClickableSkills[i];
+                return clickableSkills[i];
             }
-            int random = UnityEngine.Random.Range(0, ClickableSkills.Count);
+            int random = UnityEngine.Random.Range(0, clickableSkills.Count);
 
-            return ClickableSkills[random]; 
+            return clickableSkills[random]; 
         }
         bool GetSkillModelByBaseWtChance(float netBaseWt, int i)
         {
-            float skillchance = (ClickableSkills[i].baseWeight / netBaseWt) * 100f;
+            float skillchance = (clickableSkills[i].baseWeight / netBaseWt) * 100f;
 
             return skillchance.GetChance();
         }
-
-
-        SkillModel SkillSelectBasedOnDireConditions()
-        {
-            //1 - Ally HP < 12 %
-            //Force Guard or Heal skill
-            //2 - Self Stamina < 20 %
-            //Force Patience skill
-            //3 - No target for Melee Attack skill:
-            //Force Move into preffered spot(or X spot - we can discuss that)
-            //4 - Enemy Target < 12 %
-            //Force Physical or Magical skill on that target
-
-
-
-
-            return null;
-        }
-
 
         #endregion
 
@@ -1025,7 +1158,7 @@ namespace Combat
             if (combatController == null)
                 return false; // case: Combat controller is null in tactics and therefore
           //  Debug.Log("Checked on action pts" + combatController.actionPts + " charName"+ charController.gameObject.name);
-            if (combatController.actionPts > 0)
+            if (combatController.GetAP() > 0)
                 return false;
             
             return true;
@@ -1117,6 +1250,10 @@ namespace Combat
                 return false;
             }
         }
+
+       
+
+
 
         #endregion
 

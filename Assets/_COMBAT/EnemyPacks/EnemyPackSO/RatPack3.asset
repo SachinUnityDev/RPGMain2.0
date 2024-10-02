@@ -16,7 +16,7 @@ MonoBehaviour:
   isBossPack: 0
   allEnemyDataInPack:
   - enemyName: 19
-    preferredPos: 03000000
+    preferredPos: 06000000
   - enemyName: 18
     preferredPos: 07000000
   - enemyName: 19

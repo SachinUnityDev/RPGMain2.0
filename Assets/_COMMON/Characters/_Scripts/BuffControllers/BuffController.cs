@@ -380,6 +380,7 @@ namespace Combat
             {
                 charController.charModel.mainExp = (int)buffData.attribModData.baseVal; 
             }      
+            Debug.Log("Buff Removed" + buffModel.allBuffs.Count +"ddd"+ buffData.buffID);
             buffModel.allBuffs.Remove(buffData);
         }
         #endregion

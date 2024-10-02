@@ -26,23 +26,23 @@ namespace Combat
         public override void BaseApply()
         {
             base.BaseApply();
-            SkillService.Instance.OnSkillUsed -= AnimalTrapRegainAP;
+            //SkillService.Instance.OnSkillUsed -= AnimalTrapRegainAP;
+            //SkillService.Instance.OnSkillUsed += AnimalTrapRegainAP;
             CombatEventService.Instance.OnEOT -= OnEOT;
-
-            SkillService.Instance.OnSkillUsed += AnimalTrapRegainAP;
             CombatEventService.Instance.OnEOT += OnEOT;
         }
         void AnimalTrapRegainAP(SkillEventData skillEventData)
         {
-            if (skillEventData.strikerController.charModel.charID != charID) return;
-            if (50f.GetChance())
-            {
-                if (skillEventData.skillName == SkillNames.AnimalTrap)
-                {
-                    RegainAP();
-                }
-            }
-            return;
+            //if (skillEventData.strikerController.charModel.charID != charID) return;
+            //if (50f.GetChance())
+            //{
+            //    if (skillEventData.skillName == SkillNames.AnimalTrap)
+            //    {
+            //        RegainAP();
+            //    }
+            //}
+            //SkillService.Instance.OnSkillUsed -= AnimalTrapRegainAP;
+            //return;
         }
         void OnEOT()
         {

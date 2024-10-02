@@ -44,7 +44,7 @@ namespace Common
             DynamicPosData dyna = GridService.Instance.GetDyna4GO(charController.gameObject); 
             if(dyna.currentPos == 5 || dyna.currentPos == 6|| dyna.currentPos == 7)
             {
-                charController.combatController.actionPts++; 
+                charController.combatController.IncrementAP(); 
             }
         }
         public override void EndState()

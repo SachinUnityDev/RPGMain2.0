@@ -18,7 +18,7 @@ namespace Combat
         public DynamicPosData TargetLoc;
 
         public bool isMoraleChk = false;
-        public int actionPts = 0;
+        [SerializeField] int actionPts = 0;
         CharController charController;
 
         [SerializeField] GameObject canvasGO;
@@ -70,7 +70,7 @@ namespace Combat
             actionPts = BASE_VAL_FOR_ACTION_PTS; 
             MoraleChk(charController);
             if (charController.charModel.charMode == CharMode.Ally)
-                actionPts +=+2;
+                actionPts +=2;
             else
                 ++actionPts;
             if (actionPts > MAX_VAL_FOR_ACTION_PTS)
@@ -142,7 +142,48 @@ namespace Combat
                 Debug.LogError(" Action pts view not found");   
             actionPtsView.UpDateActionsPtsView(actionPts);
         }
-  
+
+        #region ACTION PTS
+
+        public void SetAP(int ap)
+        {
+            Debug.Log("Set AP");
+            actionPts = ap;
+            if (charController == CombatService.Instance.currCharClicked)
+            {
+                actionPtsView.UpDateActionsPtsView(actionPts);
+            }
+        }
+        public int GetAP()
+        {
+            Debug.Log("GetAP");
+            return actionPts;
+        }
+
+        public int IncrementAP()
+        {
+            Debug.Log("AP INCREMENTED");
+            ++actionPts;
+            if (charController == CombatService.Instance.currCharClicked)
+            {
+                actionPtsView.UpDateActionsPtsView(actionPts);
+            }
+            return actionPts;
+        }
+        public int LoseAP()
+        {
+            Debug.Log("AP LOST");
+            --actionPts;
+            if(charController == CombatService.Instance.currCharClicked)
+            {
+                actionPtsView.UpDateActionsPtsView(actionPts);
+            }
+            return actionPts;
+        }
+
+        #endregion
+
+
     }
 }
 

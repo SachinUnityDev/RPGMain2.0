@@ -31,6 +31,7 @@ namespace Combat
         private void OnEnable()
         {
             CombatEventService.Instance.OnCharClicked += FillPort; 
+            
         }
 
         private void OnDisable()
@@ -41,8 +42,16 @@ namespace Combat
         void FillPort(CharController charController)
         {
             this.charController = charController;
-            RectTransform portAlly = portView.GetComponent<RectTransform>();
 
+            charController.OnStatChg -=(StatModData statModData)=> DoFills(); // check double subscription
+            charController.OnStatChg += (StatModData statModData) => DoFills();
+            RectTransform portAlly = portView.GetComponent<RectTransform>();
+            DoFills();
+               
+        }
+
+        void DoFills()
+        {
             if (charController.charModel.charMode == CharMode.Ally)
             {
                 portView.transform.DOScaleY(1.0f, 0.4f);
@@ -51,11 +60,12 @@ namespace Combat
             {
                 portView.transform.DOScaleY(0.0f, 0.4f);
             }
-            InitOnHover(); 
+            InitOnHover();
             FillNameNTxt();
             FillBars();
-            FillHpNStmRegen(); 
+            FillHpNStmRegen();
         }
+
         void InitOnHover()
         {
             onHoverHpBar.InitOnHoverTxt(charController);

@@ -29,22 +29,55 @@ namespace Combat
             {
 
                 CellPosData cellPosData = new CellPosData(charController.charModel.charMode, i);
-                DynamicPosData dyna = GridService.Instance.GetDynaAtCellPos(cellPosData.charMode,i); 
-                if(dyna == null)
+                DynamicPosData dyna = GridService.Instance.GetDynaAtCellPos(cellPosData.charMode, i);
+                if (dyna == null)
                 {
                     skillModel.targetPos.Add(cellPosData);
-                }                
+                }
             }
         }
 
         public override void ApplyFX1()
         {
-            if(charController.charModel.charMode == CharMode.Enemy)
+            if (charController.charModel.charMode == CharMode.Enemy)
             {
-                int pos = Random.Range(0, skillModel.targetPos.Count);
-              //  Debug.Log("Move2" + pos + " myDyna" + myDyna.charGO.name + myDyna.currentPos); 
-                GridService.Instance.gridController.Move2Pos(myDyna, skillModel.targetPos[pos].pos);
-                GridService.Instance.gridView.CharOnTurnHL(myDyna);
+                int pos = -1;
+                SkillModel skillModel = FindIfSkillIsClickableAndCharIsNotOnCastPos();
+                if (skillModel != null)  // has clickable skill and char is not on cast pos
+                {
+                    List<int> allAdjPos = GridService.Instance.gridController.GetAllAdjCell(myDyna.currentPos);
+                    List<int> emptyAdjCell = new List<int>();
+
+                    emptyAdjCell = GetEmptyAdjCell(allAdjPos);
+                    List<int> overlapPos = new List<int>();
+                    if (emptyAdjCell.Count > 0)
+                    {
+                        foreach (int pos1 in skillModel.castPos)
+                        {
+                            if (emptyAdjCell.Contains(pos1))
+                            {
+                                overlapPos.Add(pos1);
+                            }
+                        }
+                        if (overlapPos.Count > 0)
+                        {
+                           int index = Random.Range(0, overlapPos.Count);
+                            pos = overlapPos[index];    
+                        }
+                        
+                    }
+                    else
+                    {
+                        pos = -1;    // skip move 
+                    }
+
+                    Debug.Log("Move2" + pos + " myDyna" + myDyna.charGO.name + myDyna.currentPos);
+                    if (pos != -1)
+                    {
+                        GridService.Instance.gridController.Move2Pos(myDyna, pos);
+                        GridService.Instance.gridView.CharOnTurnHL(myDyna);
+                    }
+                }
             }
             else
             {   // if clicked on target pos... 
@@ -53,20 +86,54 @@ namespace Combat
                 if (cellPosData == null)
                 {
                     return;
-                } 
+                }
                 foreach (CellPosData cellPos in skillModel.targetPos)
                 {
-                    if(cellPos.charMode == cellPosData.charMode)
+                    if (cellPos.charMode == cellPosData.charMode)
                     {
-                        if(cellPos.pos== cellPosData.pos)
+                        if (cellPos.pos == cellPosData.pos)
                         {
                             GridService.Instance.gridController.Move2Pos(myDyna, cellPosData.pos);
                             GridService.Instance.gridView.CharOnTurnHL(myDyna);
                         }
                     }
-                }     
+                }
             }
         }
+        
+
+
+        List<int> GetEmptyAdjCell(List<int> cellList)
+        {
+            List<int> emptyCells = new List<int>(); 
+            foreach (int i in cellList)
+            {
+                CellPosData cellPosData = new CellPosData(charController.charModel.charMode, i);
+                DynamicPosData dyna = GridService.Instance.GetDynaAtCellPos(cellPosData.charMode, i);
+                if (dyna == null)
+                {
+                    emptyCells.Add(i);
+                }
+            }
+            return emptyCells; 
+        }
+
+
+        SkillModel FindIfSkillIsClickableAndCharIsNotOnCastPos() 
+        {
+            foreach (SkillModel skillModel in skillController.charSkillModel.allSkillModels)                
+            {
+                if (skillModel.GetSkillState() == SkillSelectState.Unclickable_notOnCastPos)
+                {                    
+                    if (skillModel.skillInclination == SkillInclination.Physical || skillModel.skillInclination == SkillInclination.Magical)
+                    {                        
+                        return skillModel;
+                    }
+                }
+            }
+            return null; 
+        }
+    
 
         public override void ApplyFX2()
         {

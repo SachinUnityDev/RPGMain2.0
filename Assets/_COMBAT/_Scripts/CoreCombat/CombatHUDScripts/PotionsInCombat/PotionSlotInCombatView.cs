@@ -210,7 +210,7 @@ public class PotionSlotInCombatView : MonoBehaviour, IPointerClickHandler, iSlot
     public void OnPointerClick(PointerEventData eventData)
     {
         CombatController combatController = CombatService.Instance.currCharClicked.combatController;
-        if (combatController.actionPts <= 0)
+        if (combatController.GetAP() <= 0)
         {
             potionBtnView.ToggleNoApWarningTxt(true);
         }

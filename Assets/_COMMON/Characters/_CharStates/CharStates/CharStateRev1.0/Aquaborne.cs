@@ -45,7 +45,7 @@ namespace Common
             if(skillEventData.skillModel.skillInclination == SkillInclination.Patience)
             {
                 if (50f.GetChance())
-                    charController.combatController.actionPts++; 
+                    charController.combatController.IncrementAP(); 
             }
             return;
         }

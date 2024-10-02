@@ -67,7 +67,7 @@ namespace Common
         void LoseAP(CharController charController)
         {
             if (charController.charModel.charID == charID)
-                charController.combatController.actionPts--;
+                charController.combatController.LoseAP();
         }
         public override void StateApplyVFX()
         {

@@ -51,7 +51,7 @@ namespace Common
         void GainAP(CharController charController)
         {
             if(charController.charModel.charID== charID) 
-                charController.combatController.actionPts++; 
+                charController.combatController.IncrementAP(); 
         }
         public override void EndState()
         {

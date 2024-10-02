@@ -65,7 +65,7 @@ namespace Combat
         RoundController roundController;
 
         [SerializeField] EnemyPackName enemyPackName;
-        [SerializeField] CombatState combatState;
+        public CombatState combatState;
         [SerializeField] LandscapeNames landscapeName;
         CharController charCtrl;
 
@@ -136,7 +136,8 @@ namespace Combat
             }
         }
         public void On_CharOnTurnSet()
-        {       
+        {
+           // if (combatState != CombatState.INCombat_normal) return; 
             CharController charCtrl = CombatService.Instance.currCharOnTurn;
             DynamicPosData dynaOnTurn = GridService.Instance.GetDyna4GO(charCtrl.gameObject);
             GridService.Instance.gridView.CharOnTurnHL(dynaOnTurn);
@@ -193,7 +194,8 @@ namespace Combat
 
         public void On_EOC(CombatResult combatResult)
         {
-            Debug.Log(" ON EOC TRIGGER"); 
+            Debug.Log(" ON EOC TRIGGER");
+            combatState = CombatState.INCombat_End; 
             FortReset2FortOrg();
             currCombatResult = combatResult; 
             OnEOC?.Invoke();
@@ -333,6 +335,9 @@ namespace Combat
                 {
                     if (!skillModel.targetPos.Any(t => t.pos == cellPosData.pos && t.charMode == cellPosData.charMode))
                         return;
+                   
+                        // find all remote view check the cell pos data 
+                 
                     SkillService.Instance.SetRemoteSkills(skillModel, cellPosData);
                 }
             }

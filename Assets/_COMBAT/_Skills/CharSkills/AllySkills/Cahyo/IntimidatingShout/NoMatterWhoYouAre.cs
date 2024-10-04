@@ -17,6 +17,19 @@ namespace Combat
         public override List<PerkNames> preReqList => new List<PerkNames>() { PerkNames.None };
         public override string desc => "No matter who you are !";        
         public override float chance { get; set; }
+        bool isAPRewardGained = false;  
+        public override void BaseApply()
+        {
+            base.BaseApply();
+            CombatEventService.Instance.OnEOR1 -= ResetReward;
+            CombatEventService.Instance.OnEOR1 += ResetReward;
+        }
+
+        void ResetReward(int rd)
+        {
+            isAPRewardGained = false;
+        }
+
         public override void ApplyFX1()
         {
             charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID, AttribName.acc, +3
@@ -35,9 +48,10 @@ namespace Combat
         public override void ApplyFX3()
         {
             AttribData moraleAttrib = charController.GetAttrib(AttribName.morale);
-            if (moraleAttrib.currValue == 12)        
+            if (moraleAttrib.currValue == 12 && !isAPRewardGained)        
             {
-                RegainAP();
+               charController.combatController.IncrementAP();
+                isAPRewardGained = true;
             }
         }
         public override void DisplayFX1()

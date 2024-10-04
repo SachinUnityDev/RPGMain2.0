@@ -13,6 +13,17 @@ namespace Common
         public override StateFor stateFor => StateFor.Mutual;
         public override int castTime { get; protected set; }
         public override float chance { get; set; }
+        bool isAPRewardGained = false;
+        public override void StateBaseApply()
+        {
+            base.StateBaseApply();
+            CombatEventService.Instance.OnEOR1 -= ResetReward;
+            CombatEventService.Instance.OnEOR1 += ResetReward;
+        }
+        void ResetReward(int rd)
+        {
+            isAPRewardGained = false;
+        }
         public override void StateApplyFX()
         {
             // +3 Luck and -2 Haste
@@ -44,8 +55,12 @@ namespace Common
             if (skillEventData.strikerController.charModel.charID != charID) return;
             if(skillEventData.skillModel.skillInclination == SkillInclination.Patience)
             {
-                if (50f.GetChance())
-                    charController.combatController.IncrementAP(); 
+                if (50f.GetChance() && !isAPRewardGained)
+                {
+                    charController.combatController.IncrementAP();
+                    isAPRewardGained = true;
+                }
+                    
             }
             return;
         }
@@ -72,6 +87,7 @@ namespace Common
             base.EndState();
             SkillService.Instance.OnSkillUsed -= OnPatienceSkill;
             CombatEventService.Instance.OnPotionConsumedInCombat -= OnPotionConsumed;
+            CombatEventService.Instance.OnEOR1 -= ResetReward;
         }
         public override void StateApplyVFX()
         {

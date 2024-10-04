@@ -19,6 +19,7 @@ namespace Combat
         public override float chance { get => _chance; set => _chance = value; }
 
         float  StackAmt = 0; 
+        bool isAPRewardGained = false;    
         public override void PopulateTargetPos()
         {          
             SelfTarget(); 
@@ -26,27 +27,31 @@ namespace Combat
         public override void BaseApply()
         {
             base.BaseApply();
+            SkillService.Instance.OnSkillUsed -= HeadTossRegainAP;
             SkillService.Instance.OnSkillUsed += HeadTossRegainAP;
-            CombatEventService.Instance.OnEOT += OnEOT;
+            CombatEventService.Instance.OnEOR1 -= ResetReward;
+            CombatEventService.Instance.OnEOR1 += ResetReward;
+
         }
+        void ResetReward(int rd)
+        {
+            isAPRewardGained = false;
+        }
+
         void HeadTossRegainAP(SkillEventData skilleventData)
         {
             if (70f.GetChance())
             {
-                if (skilleventData.skillName == SkillNames.HeadToss)
+                if (skilleventData.skillName == SkillNames.HeadToss && !isAPRewardGained)
                 {
-                    RegainAP();
+                    charController.combatController.IncrementAP();
+                    isAPRewardGained = true;
+                    SkillService.Instance.OnSkillUsed -= HeadTossRegainAP;
                 }
             }
-            SkillService.Instance.OnSkillUsed -= HeadTossRegainAP;
-             
         }
 
-        void OnEOT()
-        {
-            SkillService.Instance.OnSkillUsed -= HeadTossRegainAP;
-            CombatEventService.Instance.OnEOT -= OnEOT;
-        }
+    
         public override void ApplyFX1()
         {         
             charController.ChangeStat(CauseType.CharSkill, (int)skillName, charID, StatName.fortitude, +5, false);

@@ -142,7 +142,11 @@ namespace Combat
                 Debug.LogError(" Action pts view not found");   
             actionPtsView.UpDateActionsPtsView(actionPts);
         }
-
+        public void IncrementBaseAP()
+        {
+            Debug.Log("Base AP incremented");
+            BASE_VAL_FOR_ACTION_PTS++;  
+        }
         #region ACTION PTS
 
         public void SetAP(int ap)
@@ -170,6 +174,8 @@ namespace Combat
             }
             return actionPts;
         }
+
+
         public int LoseAP()
         {
             Debug.Log("AP LOST");

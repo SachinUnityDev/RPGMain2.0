@@ -22,7 +22,21 @@ namespace Combat
 
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
-    
+        bool isAPRewardGained = false;
+        
+        public override void BaseApply()
+        {
+            base.BaseApply();
+            CombatEventService.Instance.OnEOR1 -= ResetReward;
+            CombatEventService.Instance.OnEOR1 += ResetReward;
+        }
+
+        void ResetReward(int rd)
+        {
+            isAPRewardGained = false;
+        }
+
+
         public override void ApplyFX1()
         {
             if(targetController && IsTargetAlly())
@@ -35,9 +49,11 @@ namespace Combat
 
         public override void ApplyFX2()
         {
-            if(50f.GetChance())
-                RegainAP();
-
+            if (50f.GetChance() && !isAPRewardGained)
+            {
+                charController.combatController.IncrementAP();
+                isAPRewardGained = true;
+            }
         }
 
         public override void ApplyFX3()

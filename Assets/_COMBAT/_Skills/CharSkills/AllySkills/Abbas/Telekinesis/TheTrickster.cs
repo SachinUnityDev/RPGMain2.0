@@ -28,6 +28,17 @@ namespace Combat
 
         public override float chance { get; set; }
 
+        bool isAPRewardGained = false;
+        public override void BaseApply()
+        {
+            base.BaseApply();
+            CombatEventService.Instance.OnEOR1 -= ResetReward;
+            CombatEventService.Instance.OnEOR1 += ResetReward;
+        }
+        void ResetReward(int rd)
+        {
+            isAPRewardGained = false;
+        }
         public override void ApplyFX1()
         {
             chance = 50f; 
@@ -38,8 +49,11 @@ namespace Combat
 
         public override void ApplyFX2()
         {
-            if(targetController)
-                RegainAP();
+            if (targetController && !isAPRewardGained)
+            {
+                charController.combatController.IncrementAP();
+                isAPRewardGained = true;
+            }               
         }
 
         public override void ApplyFX3()

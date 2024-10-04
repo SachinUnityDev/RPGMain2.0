@@ -9,6 +9,7 @@ namespace Common
     public class CodesOfHonour : PermaTraitBase
     {
         public override PermaTraitName permaTraitName => PermaTraitName.CodesOfHonor;
+        bool baseAPRewardGiven = false;
         public override void ApplyTrait()
         {
 
@@ -17,6 +18,7 @@ namespace Common
                                                     , (int)permaTraitName, charID, TimeFrame.Infinity,1 , true);
             allStatAltBuff.Add(buffID); 
             NeverFleesEvenFearFul();
+            baseAPRewardGiven = false;
         }
         void NeverFleesEvenFearFul()
         {
@@ -25,9 +27,10 @@ namespace Common
         void ExtraAPWhenSOLO(CharController charController)
         {
             if (charController.charModel.charID != charID) return;
-            if (CharService.Instance.ChkIfSOLO(charController))
+            if (CharService.Instance.ChkIfSOLO(charController) && !baseAPRewardGiven)
             {
-                charController.combatController.IncrementAP();
+                charController.combatController.IncrementBaseAP();
+                baseAPRewardGiven = true;
             }
         }
     }

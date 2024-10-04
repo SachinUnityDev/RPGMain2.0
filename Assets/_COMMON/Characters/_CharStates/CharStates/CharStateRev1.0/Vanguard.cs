@@ -12,6 +12,19 @@ namespace Common
         public override StateFor stateFor => StateFor.Mutual;
         public override int castTime { get; protected set; }
         public override float chance { get; set; }
+
+        bool isAPRewardGained = false;
+        public override void StateBaseApply()
+        {
+            base.StateBaseApply();
+            CombatEventService.Instance.OnEOR1 -= ResetReward;
+            CombatEventService.Instance.OnEOR1 += ResetReward;
+        }
+        void ResetReward(int rd)
+        {
+            isAPRewardGained = false;
+        }
+
         public override void StateApplyFX()
         {
             //+1 AP if starts turn on pos 1,2,3,
@@ -37,7 +50,11 @@ namespace Common
             DynamicPosData dyna = GridService.Instance.GetDyna4GO(charController.gameObject);
             if (dyna.currentPos == 1 || dyna.currentPos == 2 || dyna.currentPos == 3)
             {
-                charController.combatController.IncrementAP();
+                if(!isAPRewardGained)
+                {
+                    charController.combatController.IncrementAP();
+                    isAPRewardGained = true;
+                }
             }
             List<int> allPos = new List<int>() { 1, 2, 3 };
 
@@ -51,6 +68,7 @@ namespace Common
             base.EndState();
             CombatEventService.Instance.OnCharOnTurnSet -= ExtraAPFor123;
             SkillService.Instance.OnSkillUsed -= OnGuardSkill;
+            CombatEventService.Instance.OnEOR1 -= ResetReward;
         }
         public override void StateApplyVFX()
         {

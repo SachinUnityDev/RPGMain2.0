@@ -25,7 +25,7 @@ namespace Combat
         public override SkillLvl skillLvl => SkillLvl.Level1; 
 
         public override float chance { get;set; }
-
+        bool isAPRewardGained = false;
         public override void AddTargetPos()
         {
             TargetAnyEnemy();
@@ -36,9 +36,24 @@ namespace Combat
             skillModel.cd = 1; 
         }
 
+        public override void BaseApply()
+        {
+            base.BaseApply();
+            CombatEventService.Instance.OnEOR1 -= ResetReward;
+            CombatEventService.Instance.OnEOR1 += ResetReward;      
+        }
+
+        void ResetReward(int rd)
+        {
+            isAPRewardGained = false;
+        }
         public override void ApplyFX1()
         {
-            RegainAP();
+            if(!isAPRewardGained)
+            {
+                charController.combatController.IncrementAP();
+                isAPRewardGained = true;
+            }           
         }
 
         public override void ApplyFX2()

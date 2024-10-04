@@ -19,6 +19,7 @@ namespace Combat
 
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
+        bool isAPRewardGained = false;    
         public override void PopulateTargetPos()
         {
             SelfTarget(); 
@@ -26,29 +27,38 @@ namespace Combat
         public override void BaseApply()
         {
             base.BaseApply();
-            //SkillService.Instance.OnSkillUsed -= AnimalTrapRegainAP;
-            //SkillService.Instance.OnSkillUsed += AnimalTrapRegainAP;
-            CombatEventService.Instance.OnEOT -= OnEOT;
-            CombatEventService.Instance.OnEOT += OnEOT;
+            SkillService.Instance.OnSkillUsed -= AnimalTrapRegainAP;
+            SkillService.Instance.OnSkillUsed += AnimalTrapRegainAP;
+            //CombatEventService.Instance.OnEOT -= OnEOT;
+            //CombatEventService.Instance.OnEOT += OnEOT;
+            CombatEventService.Instance.OnEOR1 -= ResetReward;
+            CombatEventService.Instance.OnEOR1 += ResetReward;
         }
+
+        void ResetReward(int rd)
+        {
+            isAPRewardGained = false;
+        }
+
         void AnimalTrapRegainAP(SkillEventData skillEventData)
         {
-            //if (skillEventData.strikerController.charModel.charID != charID) return;
-            //if (50f.GetChance())
-            //{
-            //    if (skillEventData.skillName == SkillNames.AnimalTrap)
-            //    {
-            //        RegainAP();
-            //    }
-            //}
-            //SkillService.Instance.OnSkillUsed -= AnimalTrapRegainAP;
-            //return;
+            if (skillEventData.strikerController.charModel.charID != charID) return;
+            if (50f.GetChance())
+            {
+                if (skillEventData.skillName == SkillNames.AnimalTrap && !isAPRewardGained)
+                {
+                   charController.combatController.IncrementAP();
+                    SkillService.Instance.OnSkillUsed -= AnimalTrapRegainAP;
+                    isAPRewardGained = true;
+                }
+            }
+            return;
         }
-        void OnEOT()
-        {
-            SkillService.Instance.OnSkillUsed -= AnimalTrapRegainAP;
-            CombatEventService.Instance.OnEOT -= OnEOT;
-        }
+        //void OnEOT()
+        //{
+        //    SkillService.Instance.OnSkillUsed -= AnimalTrapRegainAP;
+        //    CombatEventService.Instance.OnEOT -= OnEOT;
+        //}
         public override void ApplyFX1()
         {
             charController.buffController.ApplyBuff(CauseType.CharSkill, (int)skillName, charID

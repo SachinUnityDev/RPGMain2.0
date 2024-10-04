@@ -21,17 +21,16 @@ namespace Combat
         private float _chance = 50f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        //public override void SkillHovered()
-        //{
-        //    //base.SkillHovered();
-        //    //skillController.allSkillBases.Find(t => t.skillName == skillName).chance = 60f;
-        //}
+        bool isAPRewardGained = false;
         public override void BaseApply()
         {
-            base.BaseApply();
-            if (targetController.charStateController.HasCharState(CharStateName.Bleeding))
-                if (chance.GetChance())
-                    RegainAP();
+            base.BaseApply();     
+            CombatEventService.Instance.OnEOR1 -= ResetReward;
+            CombatEventService.Instance.OnEOR1 += ResetReward;
+        }
+        void ResetReward(int rd)
+        {
+            isAPRewardGained = false;
         }
         public override void ApplyFX1()
         {
@@ -43,7 +42,13 @@ namespace Combat
 
         public override void ApplyFX2()
         {
-          
+            if (targetController.charStateController.HasCharState(CharStateName.Bleeding))
+                if (chance.GetChance() && !isAPRewardGained)
+                {
+                    charController.combatController.IncrementAP();
+                    isAPRewardGained = true; 
+                }
+                    
         }
         public override void DisplayFX1()
         {

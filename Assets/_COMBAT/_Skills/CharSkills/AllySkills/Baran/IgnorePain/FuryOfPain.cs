@@ -28,7 +28,7 @@ namespace Combat
 
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
-        
+        bool isAPRewardGained = false;
         public override void SkillHovered()
         {
             base.SkillHovered();
@@ -40,7 +40,17 @@ namespace Combat
             base.PerkSelected();
             SkillService.Instance.SkillFXRemove += skillController.allSkillBases.Find(t => t.skillName == skillName).RemoveFX1;
         }
+        public override void BaseApply()
+        {
+            base.BaseApply();
+            CombatEventService.Instance.OnEOR1 -= ResetReward;
+            CombatEventService.Instance.OnEOR1 += ResetReward;
+        }
 
+        void ResetReward(int rd)
+        {
+            isAPRewardGained = false;
+        }
 
         public override void ApplyFX1()
         {
@@ -59,8 +69,11 @@ namespace Combat
         {
             AttribData luckAttrib = charController.GetAttrib(AttribName.luck);
 
-            if (luckAttrib.currValue == 12)          
-                 RegainAP(); 
+            if (luckAttrib.currValue == 12 && !isAPRewardGained)
+            {
+                charController.combatController.IncrementAP();
+                isAPRewardGained = true;
+            }    
         }
         public override void ApplyFX3()
         {

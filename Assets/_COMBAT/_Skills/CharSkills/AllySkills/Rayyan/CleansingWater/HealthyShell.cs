@@ -22,37 +22,42 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-      //  public override List<DynamicPosData> targetDynas => new List<DynamicPosData>();  
-
         float stackAmt=0;
-
         float chgMin;
         float chgMax;
+
+        bool isAPRewardGained = false;  
         public override void SkillHovered()
         {
             base.SkillHovered();
-            skillModel.cd = 2;
-            
+            skillModel.cd = 2;            
         }
+        void RemoveReward(int rd)
+        {
+            //SkillService.Instance.OnSkillUsed -= WaterShellRegainAP;
+          //  CombatEventService.Instance.OnEOR1 -= RemoveReward;
+            isAPRewardGained = false;
+        }
+
         public override void BaseApply()
         {
             base.BaseApply();
+            SkillService.Instance.OnSkillUsed -= WaterShellRegainAP;
             SkillService.Instance.OnSkillUsed += WaterShellRegainAP;
-            CombatEventService.Instance.OnEOT += OnEOT;
+            CombatEventService.Instance.OnEOR1 -= RemoveReward;
+            CombatEventService.Instance.OnEOR1 += RemoveReward;
         }
         void WaterShellRegainAP(SkillEventData skilleventData)
         {
             if (50f.GetChance()) return; 
-            if (skilleventData.skillName == SkillNames.WaterShell)
+            if (skilleventData.skillName == SkillNames.WaterShell && !isAPRewardGained)
             {
-                RegainAP();
+                charController.combatController.IncrementAP();
+                isAPRewardGained = true;
+                SkillService.Instance.OnSkillUsed -= WaterShellRegainAP;
             }
         }
-        void OnEOT()
-        {
-            SkillService.Instance.OnSkillUsed -= WaterShellRegainAP;
-            CombatEventService.Instance.OnEOT -= OnEOT;
-        }
+    
         public override void ApplyFX1()
         {
             if (IsTargetAlly())

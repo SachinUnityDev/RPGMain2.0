@@ -26,7 +26,8 @@ namespace Combat
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
 
-        int charStruckCount = 0; 
+        int charStruckCount = 0;
+        bool isAPRewardGained = false; 
         public override void AddTargetPos()
         {
             if (skillModel == null) return;
@@ -44,6 +45,19 @@ namespace Combat
                                                         && t.skillLvl == SkillLvl.Level1
                                                         && t.state == PerkSelectState.Clicked).RemoveMoveFX;
         }
+        public override void BaseApply()
+        {
+            base.BaseApply();
+            CombatEventService.Instance.OnEOR1 -= ResetReward;
+            CombatEventService.Instance.OnEOR1 += ResetReward;
+        }
+
+        void ResetReward(int rd)
+        {
+            isAPRewardGained = false;
+
+        }
+
         public override void ApplyFX1()
         {
             foreach (var dyna in CombatService.Instance.mainTargetDynas)
@@ -59,7 +73,11 @@ namespace Combat
 
             if(charStruckCount == 3)
             {
-                RegainAP(); 
+                if(!isAPRewardGained)
+                {
+                    charController.combatController.IncrementAP();
+                    isAPRewardGained = true;
+                }
             }
 
         }

@@ -18,20 +18,36 @@ namespace Combat
 
         private float _chance = 0f;
         public override float chance { get => _chance; set => _chance = value; }
-
+        bool isAPRewardGained = false;
         public override void PopulateTargetPos()
         {
             SelfTarget(); 
-        }
+        }        
         public override void BaseApply()
         {
             base.BaseApply();
+            CombatEventService.Instance.OnEOR1 -= ResetReward;
+            CombatEventService.Instance.OnEOR1 += ResetReward;
+
             SkillService.Instance.OnSkillUsed -= KrisLungeRegainAP;
-            CombatEventService.Instance.OnEOT -= OnEOT;
+            //CombatEventService.Instance.OnEOT -= OnEOT;
 
             SkillService.Instance.OnSkillUsed += KrisLungeRegainAP;
-            CombatEventService.Instance.OnEOT += OnEOT;
+            //CombatEventService.Instance.OnEOT += OnEOT;
         }
+        void ResetReward(int rd)
+        {
+            isAPRewardGained = false;
+        }
+        //public override void BaseApply()
+        //{
+        //    base.BaseApply();
+        //    SkillService.Instance.OnSkillUsed -= KrisLungeRegainAP;
+        //    CombatEventService.Instance.OnEOT -= OnEOT;
+
+        //    SkillService.Instance.OnSkillUsed += KrisLungeRegainAP;
+        //    CombatEventService.Instance.OnEOT += OnEOT;
+        //}
         public override void ApplyFX1()
         {
             int stmRegen = UnityEngine.Random.Range(3, 5);
@@ -46,17 +62,19 @@ namespace Combat
         {
             if (80f.GetChance())
             {
-                if (skilleventData.skillName == SkillNames.KrisLunge)
+                if (skilleventData.skillName == SkillNames.KrisLunge && !isAPRewardGained)
                 {
-                    RegainAP();
+                    charController.combatController.IncrementAP();
+                    isAPRewardGained = true;
+                    SkillService.Instance.OnSkillUsed -= KrisLungeRegainAP;
                 }
             }          
         }
-        void OnEOT()
-        {
-            SkillService.Instance.OnSkillUsed -= KrisLungeRegainAP;
-            CombatEventService.Instance.OnEOT -= OnEOT;
-        }
+        //void OnEOT()
+        //{
+        //    SkillService.Instance.OnSkillUsed -= KrisLungeRegainAP;
+        //    CombatEventService.Instance.OnEOT -= OnEOT;
+        //}
         public override void ApplyFX2()
         {
            

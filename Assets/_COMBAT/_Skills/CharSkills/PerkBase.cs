@@ -166,13 +166,13 @@ namespace Combat
 
         #region COMMONLY USED METHODS
 
-        protected void RegainAP()
-        {
-            CombatController combatController =
-                    charController.GetComponent<CombatController>();
-            if(combatController!= null ) 
-            combatController.IncrementAP(); 
-        }
+        //protected void RegainAP()
+        //{
+        //    CombatController combatController =
+        //            charController.GetComponent<CombatController>();
+        //    if(combatController!= null ) 
+        //    combatController.IncrementAP(); 
+        //}
         protected void TargetAnyEnemy()
         {
             if (skillModel == null) return;

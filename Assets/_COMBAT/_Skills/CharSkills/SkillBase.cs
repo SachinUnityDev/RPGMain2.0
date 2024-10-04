@@ -266,16 +266,16 @@ namespace Combat
         }
         #endregion
 
-        protected void RegainAP()
-        {
-            CombatController combatController =
-                    charController.GetComponent<CombatController>();
-            if (combatController != null)
-            {
-                combatController.IncrementAP();
+        //protected void RegainAP()
+        //{
+        //    CombatController combatController =
+        //            charController.GetComponent<CombatController>();
+        //    if (combatController != null)
+        //    {
+        //        combatController.IncrementAP();
 
-            }
-        }
+        //    }
+        //}
 
         protected void AnyWithCharMode(CharMode charMode)
         {

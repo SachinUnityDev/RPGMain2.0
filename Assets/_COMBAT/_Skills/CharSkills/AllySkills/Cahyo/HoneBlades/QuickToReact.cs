@@ -18,18 +18,33 @@ namespace Combat
         public override string desc => "Quick To react";
         private float _chance = 20f;
         public override float chance { get => _chance; set => _chance = value; }
-
+        bool isAPRewardGained = false;
         public override void SkillHovered()
         {
             base.SkillHovered();
             skillModel.cd = 2;           
         }
+        public override void BaseApply()
+        {
+            base.BaseApply();
+            CombatEventService.Instance.OnEOR1 -= ResetReward;
+            CombatEventService.Instance.OnEOR1 += ResetReward;
+            
+        }
+
+        void ResetReward(int rd)
+        {
+            isAPRewardGained = false;
+        }
 
 
         public override void ApplyFX1()
         {
-            if (chance.GetChance())
-                RegainAP(); 
+            if (chance.GetChance() && !isAPRewardGained)
+            {
+                charController.combatController.IncrementAP();  
+                isAPRewardGained = true;
+            }                
         }
 
         public override void ApplyFX2()

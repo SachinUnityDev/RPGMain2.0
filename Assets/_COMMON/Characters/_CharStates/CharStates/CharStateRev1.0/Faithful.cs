@@ -16,6 +16,17 @@ namespace Common
         //Immune to Fortitude attacks for 3 rds
         //after 3 rds go back to origin	
         //+2 Focus, haste, Luck, Morale, Dodge and +(2-2) Armor + 20 resistances once per combat
+        bool isAPRewardGained = false;
+        public override void StateBaseApply()
+        {
+            base.StateBaseApply();
+            CombatEventService.Instance.OnEOR1 -= ResetReward;
+            CombatEventService.Instance.OnEOR1 += ResetReward;
+        }
+        void ResetReward(int rd)
+        {
+            isAPRewardGained = false;
+        }
         public override void StateApplyFX()
         {
             castTime = 2;
@@ -50,15 +61,18 @@ namespace Common
         }
         void GainAP(CharController charController)
         {
-            if(charController.charModel.charID== charID) 
-                charController.combatController.IncrementAP(); 
+            if(charController.charModel.charID== charID && !isAPRewardGained)
+            {
+                charController.combatController.IncrementAP();
+                isAPRewardGained = true;
+            }
         }
         public override void EndState()
         {
             base.EndState();
             charController.ClampStatToggle(StatName.fortitude, false);
             CombatEventService.Instance.OnCharOnTurnSet -= GainAP;
-
+            CombatEventService.Instance.OnEOR1 -= ResetReward;
         }
         public override void StateApplyVFX()
         {

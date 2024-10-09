@@ -2,6 +2,7 @@ using Common;
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -25,14 +26,18 @@ namespace Combat
             skillModel = skillBase.skillModel;
         }
 
-        public void OnTriggerEnter(Collider collision)
-        {
-            Debug.Log("remote Skill here TRIGGER");
-            CharController targetController = collision.transform.parent?.GetComponent<CharController>(); 
+        public void OnTriggerEnter2D(Collider2D collision)
+        {            
+            CharController targetController = collision.transform?.GetComponent<CharController>();
+            Debug.Log("remote Skill here TRIGGER" + targetController.name + collision.name);
             if (targetController != null)
             {
                 DynamicPosData dyna = GridService.Instance.GetDyna4GO(targetController.gameObject);
-               
+                bool cellOccMatch = dyna.cellsOccupied.Any(t => t == cellPosData.pos);
+                bool charModeMatch = (cellPosData.charMode == targetController.charModel.charMode); 
+                if (!cellOccMatch && !charModeMatch)
+                    return; 
+
                 if (dyna != null)
                 {
                     skillbase.targetGO = targetController.gameObject; 

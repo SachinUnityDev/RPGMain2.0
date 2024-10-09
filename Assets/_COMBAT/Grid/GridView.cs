@@ -250,7 +250,7 @@ namespace Combat
             }
             return null; 
         }
-
+        
 
         void cleanSelectDyna()
         {

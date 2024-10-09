@@ -38,10 +38,9 @@ namespace Combat
         public override void ApplyFX1()
         {
             if (targetController == null) return;
-            targetController.damageController.ApplyDamage(charController, CauseType.CharSkill
+                targetController.damageController.ApplyDamage(charController, CauseType.CharSkill
                                             , (int)skillName, skillModel.dmgType[0]
-                                                , skillModel.damageMod,skillModel.skillInclination, false, true); 
-
+                                                , skillModel.damageMod,skillModel.skillInclination, false, true);
         }
 
         public override void ApplyFX2()

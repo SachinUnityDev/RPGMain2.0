@@ -29,7 +29,7 @@ namespace Combat
         public override void SkillHovered()
         {
             base.SkillHovered();
-            skillModel.staminaReq = 7;  
+            skillModel.staminaReq = 7;
         }
 
         public override void ApplyFX1()
@@ -44,7 +44,9 @@ namespace Combat
 
                 allColTargets.ForEach(t => t.charGO.GetComponent<CharController>()
                         .damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
-                        , DamageType.Water, 80f));
+                        , DamageType.Water, 80f, skillModel.skillInclination)); // skillInclination is magical
+
+                Debug.Log("INCLI><><><"+ skillModel.skillInclination);
 
                 targetHit = allColTargets.Count +1;
             }

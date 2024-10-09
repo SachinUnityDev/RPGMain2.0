@@ -4591,6 +4591,7 @@ MonoBehaviour:
   spriteNA: {fileID: 21300000, guid: a044fa182b9857a419ff4a592d168ea3, type: 3}
   container: {fileID: 642730954}
   apWarningTxt: {fileID: 1584114896}
+  itemCardRef: {fileID: 0}
 --- !u!114 &230977820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43505,6 +43506,7 @@ GameObject:
   - component: {fileID: 815396887316839041}
   - component: {fileID: 815396887316839042}
   - component: {fileID: 2536752527768317675}
+  - component: {fileID: 2536752527768317676}
   m_Layer: 5
   m_Name: Neg_StateCard
   m_TagString: Untagged
@@ -44342,6 +44344,7 @@ GameObject:
   - component: {fileID: 815396888265089050}
   - component: {fileID: 815396888265089049}
   - component: {fileID: 2536752526820193392}
+  - component: {fileID: 2536752526820193393}
   m_Layer: 5
   m_Name: Pos_StateCard
   m_TagString: Untagged
@@ -45189,6 +45192,18 @@ MonoBehaviour:
   lines: []
   lvl: 0
   initPos: {x: 0, y: 0, z: 0}
+--- !u!225 &2536752526820193393
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815396888265089055}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!114 &2536752527768317675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45205,6 +45220,18 @@ MonoBehaviour:
   lines: []
   lvl: 0
   initPos: {x: 0, y: 0, z: 0}
+--- !u!225 &2536752527768317676
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815396887316839044}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!224 &2753826071597384632
 RectTransform:
   m_ObjectHideFlags: 0

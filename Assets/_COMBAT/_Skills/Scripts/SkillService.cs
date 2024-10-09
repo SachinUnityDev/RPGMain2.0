@@ -292,7 +292,7 @@ namespace Combat
             }
             ClearPrevData();
 
-            //Debug.Log("INIT SKILL CONTROLLER >>>>>>>>>>>>");
+            Debug.Log("INIT SKILL CONTROLLER >>>>>>>>>>>>");
             currSkillController = CombatService.Instance.currCharOnTurn
                                     .gameObject.GetComponent<SkillController1>();
      
@@ -512,6 +512,9 @@ namespace Combat
 
             if (combatController.GetAP() > 0)// allies 
             {
+                if (charController.charModel.charMode == CharMode.Enemy)
+                    Debug.Log("ENEMY TURN");
+
                 CombatService.Instance.roundController.SetSameCharOnTurn();
                 //if (charController.charModel.charMode == CharMode.Enemy)
                 //    InitEnemySkillSelection(CombatService.Instance.currCharOnTurn);   // to be called
@@ -690,15 +693,17 @@ namespace Combat
         {
             RemoteView[] allRemoteView = FindObjectsOfType<RemoteView>();
 
-            return (allRemoteView.Any(t => t.cellPosData.charMode == cellPosData.charMode
-                                        && t.cellPosData.pos == cellPosData.pos));
+            bool hasRemote = allRemoteView.Any(t => t.cellPosData.charMode == cellPosData.charMode
+                                        && t.cellPosData.pos == cellPosData.pos);
+            
+            return hasRemote; 
         }
         #endregion
 
         #region Helpers
-        public AttackType GetSkillAttackType(SkillNames skillName)
+        public AttackType GetSkillAttackType(CharController charController, SkillNames skillName)
         {
-            SkillModel skillModel = currSkillController.GetSkillModel(skillName);
+            SkillModel skillModel = charController.skillController.GetSkillModel(skillName);
             if (skillModel != null)
                 return skillModel.attackType; 
             Debug.LogError("SKILLMODEL Not found!!" + skillName  + "Char" + currSkillController.charController.charModel.charName);

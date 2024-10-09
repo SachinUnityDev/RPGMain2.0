@@ -44,10 +44,10 @@ namespace Combat
             {
                 if (targetController.tempTraitController.HasTempTrait(TempTraitName.RatBiteFever))
                     targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
-                                                                                            , DamageType.Physical, skillModel.damageMod + 40f);
+                                                                                            , DamageType.Physical, skillModel.damageMod + 40f, skillModel.skillInclination);
                 else
                     targetController.damageController.ApplyDamage(charController, CauseType.CharSkill, (int)skillName
-                                                                                             , DamageType.Physical, skillModel.damageMod);
+                                                                                             , DamageType.Physical, skillModel.damageMod, skillModel.skillInclination);
             }
         }
 

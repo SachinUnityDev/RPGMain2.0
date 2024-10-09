@@ -183,12 +183,12 @@ namespace Combat
         void FillTopTrans()
         {
             skillDataSO = SkillService.Instance.GetSkillSO(charController.charModel.charName);
-            skillData = skillDataSO.GetSkillData(skillName); 
-            if(skillData == null)
+            skillData = skillDataSO.GetSkillData(skillName);
+            if (skillData == null)
             {
                 Debug.LogError("skilldata missing" + skillName);
             }
-            SkillInclination skillIncli = skillData.skillIncli;
+            SkillInclination skillIncli = skillModel.skillInclination;
             
             skillHexSO = SkillService.Instance.skillHexSO;
             skillViewSO = SkillService.Instance.skillViewSO; 
@@ -199,7 +199,7 @@ namespace Combat
             topTrans.GetChild(0).GetComponent<Image>().sprite
                     = skillHexSO.GetSkillIncliSpriteBG(skillIncli);
             // attack type...
-            AttackType attackType = skillData.attackType;
+            AttackType attackType = skillModel.attackType;
             topTrans.GetChild(1).GetChild(0).GetComponent<Image>().sprite
                              = skillHexSO.GetSkillAttackType(attackType);
             topTrans.GetChild(1).GetComponent<Image>().sprite

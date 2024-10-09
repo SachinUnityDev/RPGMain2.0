@@ -765,9 +765,9 @@ namespace Combat
             if (skill != null)
                 return skill;
 
-            skill = NoTargetForMeleeAttack();
-            if (skill != null)
-                return skill;
+            //skill = NoTargetForMeleeAttack();
+            //if (skill != null)
+            //    return skill;
 
             return null;           
         }
@@ -821,6 +821,9 @@ namespace Combat
         SkillModel EnemyTargetLowHP()
         {
             // find all enemy targets with low HP
+            List<SkillModel> selectableSkills = new List<SkillModel>();
+
+
             for (int i = 1; i < 8; i++)
             {                
                 {
@@ -837,13 +840,18 @@ namespace Combat
                                 {
                                     if(cell.pos == targetDyna.currentPos)
                                     {
-                                        return skillModel;
+                                        selectableSkills.Add(skillModel);
                                     }
                                 }
                             }                         
                         }
                     }
                 }
+            }
+            if(selectableSkills.Count > 0)
+            {
+                int index = UnityEngine.Random.Range(0, selectableSkills.Count);
+                return selectableSkills[index];
             }
             return null; 
         }
@@ -878,6 +886,7 @@ namespace Combat
         }
         public void StartAISkillInController()
         {
+           
             SkillModel skillModelAI = SkillAIAlpha();
             if(skillModelAI == null)
                 skillModelAI = SkillSelectByAI();
@@ -887,8 +896,11 @@ namespace Combat
                 {
                     SkillService.Instance.currSkillName = skillModelAI.skillName;                 
                     prevSkillName = skillModelAI.skillName;
-                    allSkillBases.Find(t => t.skillName == skillModelAI.skillName).SkillSelected();                    
-
+                    allSkillBases.Find(t => t.skillName == skillModelAI.skillName).SkillSelected();
+                    if (skillModelAI.skillName == SkillNames.DefaultMove)
+                    {
+                        Debug.Log(" Default move test");
+                    }
                     Debug.Log("SELECTED SKILLS: " + skillModelAI.skillName + "Enemy Skillbases: " +
                         skillModelAI.charID);
 

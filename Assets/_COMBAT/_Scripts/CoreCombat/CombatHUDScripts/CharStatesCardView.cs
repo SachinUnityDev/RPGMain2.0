@@ -70,7 +70,7 @@ namespace Combat
         public void FillCard() // Max 5 lines of strings 
         {
 
-            transform.DOLocalMoveY(initPos.y + lvl * 60, 0.1f); 
+            transform.DOLocalMoveY(initPos.y + lvl * 90, 0.1f); 
 
             transform.GetChild(0).GetComponent<Image>().sprite
                                             = charStateSO.iconSprite;

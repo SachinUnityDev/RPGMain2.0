@@ -78,30 +78,38 @@ namespace Combat
                         GridService.Instance.gridView.CharOnTurnHL(myDyna);
                     }
                 }
+                else
+                {
+                    Move2NearbyPos();
+                    Debug.LogError("No skill to click");    
+                }
             }
             else
             {   // if clicked on target pos... 
-                Vector3Int tilePos = GridService.Instance.gridView.currTilePos;
-                CellPosData cellPosData = GridService.Instance.gridView.GetPos4TilePos(tilePos);
-                if (cellPosData == null)
+                Move2NearbyPos();
+            }
+        }
+        
+        void Move2NearbyPos()
+        {
+            Vector3Int tilePos = GridService.Instance.gridView.currTilePos;
+            CellPosData cellPosData = GridService.Instance.gridView.GetPos4TilePos(tilePos);
+            if (cellPosData == null)
+            {
+                return;
+            }
+            foreach (CellPosData cellPos in skillModel.targetPos)
+            {
+                if (cellPos.charMode == cellPosData.charMode)
                 {
-                    return;
-                }
-                foreach (CellPosData cellPos in skillModel.targetPos)
-                {
-                    if (cellPos.charMode == cellPosData.charMode)
+                    if (cellPos.pos == cellPosData.pos)
                     {
-                        if (cellPos.pos == cellPosData.pos)
-                        {
-                            GridService.Instance.gridController.Move2Pos(myDyna, cellPosData.pos);
-                            GridService.Instance.gridView.CharOnTurnHL(myDyna);
-                        }
+                        GridService.Instance.gridController.Move2Pos(myDyna, cellPosData.pos);
+                        GridService.Instance.gridView.CharOnTurnHL(myDyna);
                     }
                 }
             }
         }
-        
-
 
         List<int> GetEmptyAdjCell(List<int> cellList)
         {

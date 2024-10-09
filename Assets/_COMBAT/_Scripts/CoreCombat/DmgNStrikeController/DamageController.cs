@@ -129,11 +129,10 @@ namespace Combat
             return dmgNew;
         }
         public void ApplyDamage(CharController striker, CauseType causeType, int causeName, DamageType _dmgType
-                                , float dmgPercent, SkillInclination skillInclination = SkillInclination.None
-                                , bool ignoreArmorNRes = false, bool isTrueStrike = false)
+                                , float dmgPercent, SkillInclination  skillInclination = SkillInclination.None, bool ignoreArmorNRes = false, bool isTrueStrike = false)
         {
             this.striker = striker;
-            AttackType attackType = SkillService.Instance.GetSkillAttackType((SkillNames)causeName);
+            AttackType attackType = SkillService.Instance.GetSkillAttackType(striker,(SkillNames)causeName);
                      
             isMisFire = false; 
             if (dmgModel.allImmune2Skills.Any(t => t == skillInclination))
@@ -152,7 +151,6 @@ namespace Combat
                         CombatEventService.Instance.On_Dodge(dmgApplied);
                         return;
                     }
-
                 if (skillInclination == SkillInclination.Magical)
                 {
                     if (FocusCheck())

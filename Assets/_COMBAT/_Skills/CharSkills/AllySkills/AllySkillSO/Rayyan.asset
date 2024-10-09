@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Rayyan
   m_EditorClassIdentifier: 
   charName: 7
-  combatPose: {fileID: 21300000, guid: 00d8675f53ad0b245b265c5e23242b0f, type: 3}
+  combatPose: {fileID: 21300000, guid: a59e9a43168ca504ca423555d3e99e4e, type: 3}
   combatFX:
     loc: 0
     skillSprite: {fileID: 0}
-  defendPose: {fileID: 21300000, guid: ebe29f5bd1d912b4e9ddffed19829894, type: 3}
+  defendPose: {fileID: 21300000, guid: 7eed1db423a6cf84dbbac3efadaec493, type: 3}
   defendFX:
     loc: 0
     skillSprite: {fileID: 0}

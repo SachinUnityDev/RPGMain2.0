@@ -181,14 +181,13 @@ namespace Combat
             }
             else
             {
+                Destroy(FxCursor);
                 if (dyna.charMode == CharMode.Ally)
-                {
-                    DestroyImmediate(FxCursor);
+                {                
                     FxCursor = Instantiate(FxAlly, worldPos, quat);
                 }
                 if (dyna.charMode == CharMode.Enemy)
-                {
-                    DestroyImmediate(FxCursor);
+                {                 
                     FxCursor = Instantiate(FxEnemy, worldPos, quat);
                 }
             }

@@ -81,7 +81,7 @@ namespace Combat
                 else
                 {
                     Move2NearbyPos();
-                    Debug.LogError("No skill to click");    
+                    Debug.LogError("No skill to click" + charController.name);    
                 }
             }
             else

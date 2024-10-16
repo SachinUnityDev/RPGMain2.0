@@ -23,9 +23,10 @@ namespace Common
         [SerializeField] SkillPtsView skillPtsView; 
 
 
-        private void Start()
+        private void OnEnable()
         { 
             InvService.Instance.OnCharSelectInvPanel += FillLeftSkillPanel;
+            InvService.Instance.OnCharSelectInvPanel += (charModel) => skillPtsView.Init(this);
             // Get ABBAS
             CharModel charModel = CharService.Instance.GetAllyController(CharNames.Abbas).charModel;
             FillLeftSkillPanel(charModel);
@@ -35,6 +36,7 @@ namespace Common
         {
             InvService.Instance.OnCharSelectInvPanel -= FillLeftSkillPanel;
             CharService.Instance.OnSkillPtsChg -= On_SkillPtsChg;
+            InvService.Instance.OnCharSelectInvPanel -= (charModel) => skillPtsView.Init(this);
         }
 
 

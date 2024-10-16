@@ -44,6 +44,12 @@ namespace Combat
         void SpawnDeathGodess(CharController charController)
         {
             GameObject charGO = charController.gameObject;
+            if(charGO == null)
+            {
+                Debug.LogError("charGO NULL"); 
+            }
+
+
             GameObject deathGoddessGO = Instantiate(deathGoddess, charController.gameObject.transform.position, Quaternion.identity);       
             DeathObjData deathObjData = new DeathObjData(deathGoddessGO, charController);
             deathGoddessGO.transform.SetParent(charGO.transform);

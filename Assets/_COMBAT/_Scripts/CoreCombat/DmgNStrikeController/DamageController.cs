@@ -147,7 +147,7 @@ namespace Combat
                     if (skillInclination == SkillInclination.Physical && !HitChance())
                     {
                         strikeType = StrikeType.Dodged;                   
-                        CombatEventService.Instance.On_DmgApplied(dmgApplied);
+                       // CombatEventService.Instance.On_DmgApplied(dmgApplied);
                         CombatEventService.Instance.On_Dodge(dmgApplied);
                         return;
                     }

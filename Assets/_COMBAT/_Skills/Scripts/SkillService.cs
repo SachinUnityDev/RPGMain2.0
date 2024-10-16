@@ -392,6 +392,16 @@ namespace Combat
                                     , targetController, currSkillName, skillModel));
 
             if (_OnSkillApply == null) return;
+            //if (PreSkillApply != null)
+            //{
+            //    Delegate[] subscribers = PreSkillApply.GetInvocationList();
+            //    Debug.Log("Subscribers to PreSkillApply:");
+            //    foreach (Delegate subscriber in subscribers)
+            //    {
+            //        Debug.Log(subscriber.Method.Name + " in " + subscriber.Target);
+            //    }
+            //}
+
             PreSkillApply?.Invoke();
             SkillFXRemove?.Invoke();
 
@@ -501,9 +511,8 @@ namespace Combat
                     combatController.IncrementAP();
 
                 combatController.SubtractActionPtOnSkilluse(skillModel, charController.charModel.charMode);
-
                currSkillController.UpdateAllSkillState();
-            }else if (charController.charModel.charMode == CharMode.Enemy) // no SkillAvailable
+            } else if (charController.charModel.charMode == CharMode.Enemy) // no SkillAvailable
             {
                // Debug.LogError("TURN MISSED" + charController.charModel.charName); 
                 Move2Nextturn();

@@ -8,8 +8,6 @@ using Interactables;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 using Quest;
-using Spine.Unity;
-using System.Linq.Expressions;
 
 namespace Combat
 {
@@ -236,7 +234,8 @@ namespace Combat
                 catch(Exception e)
                 {
                     Debug.Log("EXCEPTION EOR!!!" + e.Message);
-                    Debug.Log("EXCEPTION EOR!!! STACK" + e.StackTrace);
+                    Debug.LogError("EXCEPTION EOR!!! STACK" + e.StackTrace);
+                    Debug.LogError("EXCEPTION EOR!!! Method" + e.TargetSite);
                 }
             }       
         }
@@ -287,13 +286,6 @@ namespace Combat
                 Debug.Log("Target Dyna " + _targetDyna.charGO.GetComponent<CharController>().charModel.charName);
                 CharController targetController = _targetDyna.charGO.GetComponent<CharController>();
                 CombatService.Instance.currTargetClicked = targetController;
-
-                if (targetController.charStateController.HasCharState(CharStateName.Cloaked)
-                  && CombatService.Instance.mainTargetDynas.Count == 1)
-                {
-                    SkillService.Instance.DeSelectSkill(); 
-                    return;
-                }
 
                 if (targetController.charStateController.HasCharState(CharStateName.Guarded)
                    && CombatService.Instance.mainTargetDynas.Count ==1)

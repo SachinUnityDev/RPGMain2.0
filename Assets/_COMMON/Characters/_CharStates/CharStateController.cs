@@ -156,6 +156,9 @@ namespace Common
 
             // char State init only when its applied 
             charStateBase.StateInit(charStateSO, charController, timeFrame, castTime, stateID);
+            Debug.Log("STATE INIT" + charStateBase.charStateName + "CHAR : " + charController + "TIME FRAME" + timeFrame); 
+
+
             charStateBase.StateBaseApply();
             charStateBase.StateApplyFX();
             charStateBase.StateApplyVFX();

@@ -29,7 +29,7 @@ namespace Combat
             if (statData != null)
             {
                 float hpPercent = statData.currValue / statData.maxLimit;
-                if (hpPercent > 0.4f)
+                if (hpPercent > 0.8f)
                     skillModel.SetSkillState(SkillSelectState.UnClickable_Misc);
             }
         }

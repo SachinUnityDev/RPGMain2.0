@@ -12,9 +12,6 @@ using UnityEngine.SceneManagement;
 
 namespace Combat
 {
-    
-
-
     public class SkillController1 : MonoBehaviour
     {
         [SerializeField] CharMode charMode;
@@ -117,7 +114,6 @@ namespace Combat
 
             InitAllSkillBase();
         }
-
         void InitAllSkillBase()
         {
             foreach (SkillBase skillBase in allSkillBases)
@@ -187,7 +183,6 @@ namespace Combat
         #endregion
 
         #region LOAD
-
         public void LoadSkillList(CharController charController)
         {
             if (this.charController.charModel.charID != charController.charModel.charID) return;
@@ -211,7 +206,6 @@ namespace Combat
             skillbaseCount = allSkillBases.Count;    
             LoadPerkDataList();
         }
-
         public void LoadPerkDataList()
         {
             if (allPerkBases.Count > 0) return; 
@@ -487,12 +481,10 @@ namespace Combat
             if ((int)perkData.perkLvl == (lvl + 1)) return true; 
             return false; 
         }
-
         public void OnPerkHovered(PerkNames perkName)
         {
 
-        }
-   
+        }   
         public void UpdatePerkRel(PerkData clickedPerkData)
         {
             SkillNames skillName = clickedPerkData.skillName;
@@ -701,7 +693,6 @@ namespace Combat
             
             return allPerks;
         }
-
         public bool IsPerkClicked(SkillNames skillName, PerkNames perkName)
         {
             List<PerkData> perks = GetClickedPerks(skillName); 

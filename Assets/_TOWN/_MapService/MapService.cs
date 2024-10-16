@@ -38,11 +38,26 @@ namespace Town
         
         public void InitMapService()
         {
-            GetControllerRef(); 
-
-            pathController.InitPath(allPathSO);
-            pathView.PathViewInit(pathController);
+            GetControllerRef();
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            if (SaveService.Instance.DirectoryExists(path))
+            {
+                if (IsDirectoryEmpty(path))
+                {
+                    pathController.InitPath(allPathSO);
+                }
+                else
+                {
+                    LoadState();
+                }
+            }
+            else
+            {
+                Debug.LogError("Service Directory missing");
+            }
             mapController.InitMapController();
+            pathView.PathViewInit(pathController);
+            
 
         }
         void GetControllerRef() {
@@ -78,10 +93,9 @@ namespace Town
                     string contents = File.ReadAllText(fileName);
                     Debug.Log("pathModel" + contents);
                     PathModel pathModel = JsonUtility.FromJson<PathModel>(contents);
-                    //ClassifyAndInitBuildModel(pathModel);
                     allpathModel.Add(pathModel);
                 }
-              //  pathController.Load(allpathModel); 
+                pathController.LoadPaths(allpathModel); 
             }
             else
             {
@@ -91,7 +105,8 @@ namespace Town
 
         public void ClearState()
         {
-
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            DeleteAllFilesInDirectory(path);
         }
     }
 }

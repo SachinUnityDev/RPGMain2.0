@@ -520,7 +520,7 @@ namespace Common
             }
             catch (Exception e)
             {
-                Debug.Log("OnCharDeath not found" + e.Message);
+                Debug.Log("OnCharDeath not found" + e.Message + "Source " + e.Source + "Source trace" +e.StackTrace + "");
             }        
         }
         #endregion 

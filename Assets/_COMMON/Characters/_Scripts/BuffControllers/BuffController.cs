@@ -228,6 +228,13 @@ namespace Combat
             charController = GetComponent<CharController>();
             AttribModData attribModVal =  charController.ChangeAttrib( causeType,  causeName, causeByCharID
                                             ,  attribName,  value, true);
+
+            if(attribModVal == null)
+            {
+                Debug.Log("AttribModVal NULL<><><><><><><><");
+                return -1; 
+            }
+
             int currRd = CombatEventService.Instance.currentRound;
             if(buffModel == null)
             {
@@ -236,6 +243,9 @@ namespace Combat
             buffModel.buffIndex++;
             BuffData buffData = new BuffData(buffModel.buffIndex,isBuff, currRd, timeFrame, netTime,
                                                                     attribModVal);
+
+            Debug.Log("BUFF DATA" + buffData.buffID + "Attrib" + buffData.attribModData.attribModified);    
+
             buffModel.allBuffs.Add(buffData);               
                 return buffModel.buffIndex;         
         }
@@ -346,7 +356,9 @@ namespace Combat
                 {
                     index = buffModel.allPosBuffs.FindIndex(t => t.buffID == buffID);
                     if (index == -1)
+                    {
                         return false;
+                    }                        
                     else
                     {
                         PosBuffData posBuffData= buffModel.allPosBuffs[index];
@@ -369,9 +381,22 @@ namespace Combat
             }                
         }
         public void RemoveBuffData(BuffData buffData)
-        {        
+        {
+
+            Debug.Log("CharController" + charController.charModel.charName + "BuffData" + buffData.buffID + "Attrib" + buffData.attribModData.attribModified); 
+            if(buffData == null)
+                            {
+                Debug.LogError("BuffData NULL");
+                return; 
+            }
+
             if(buffData.attribModData.attribModified != AttribName.None)
             {
+                if(charController == null)
+                {
+                    Debug.LogError("CharController NULL");
+                    return; 
+                }
                 charController.ChangeAttrib(buffData.attribModData.causeType,
                                         buffData.attribModData.causeName, buffData.attribModData.causeByCharID
                                         , buffData.attribModData.attribModified, -buffData.attribModData.chgVal, true);
@@ -381,7 +406,13 @@ namespace Combat
                 charController.charModel.mainExp = (int)buffData.attribModData.baseVal; 
             }      
             Debug.Log("Buff Removed" + buffModel.allBuffs.Count +"ddd"+ buffData.buffID);
+            int index = buffModel.allBuffs.FindIndex(t => t.buffID == buffData.buffID); 
+            if(index != 0)
             buffModel.allBuffs.Remove(buffData);
+            else
+            {
+                Debug.LogError("Buff not removed" + buffData.buffID); 
+            }
         }
         #endregion
 
@@ -423,7 +454,7 @@ namespace Combat
                 {
                     if (buffData.buffCurrentTime >= buffData.buffedNetTime)
                     {
-                        RemoveBuffData(buffData);
+                        RemoveBuff(buffData.buffID);
                     }
                     buffData.buffCurrentTime++;
                 }
@@ -435,7 +466,7 @@ namespace Combat
             {
                 if (buffData.timeFrame == TimeFrame.EndOfCombat)
                 {
-                    RemoveBuffData(buffData);
+                    RemoveBuff(buffData.buffID);
                 }
             }
         }
@@ -445,7 +476,7 @@ namespace Combat
             {
                 if (buffData.timeFrame == TimeFrame.EndOfQuest)
                 {
-                    RemoveBuffData(buffData);
+                    RemoveBuff(buffData.buffID);
                 }
             }
         }
@@ -455,7 +486,7 @@ namespace Combat
             {
                 if (buffData.timeFrame == TimeFrame.EndOfWeek)
                 {
-                    RemoveBuffData(buffData);
+                    RemoveBuff(buffData.buffID);
                 }
             }
         }

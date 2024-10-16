@@ -122,7 +122,7 @@ namespace Combat
 
         public void SubtractActionPtOnSkilluse(SkillModel skillModel, CharMode charMode)
         {
-          //  Debug.Log(" ACTION PTS SUBTRACT" + skillModel.charID + skillModel.skillName); 
+            Debug.Log(" ACTION PTS SUBTRACT" + skillModel.charID + skillModel.skillName); 
             if (skillModel.skillType == SkillTypeCombat.Retaliate)
                 return;
             --actionPts;
@@ -160,7 +160,7 @@ namespace Combat
         }
         public int GetAP()
         {
-            Debug.Log("GetAP");
+           // Debug.Log("GetAP");
             return actionPts;
         }
 
@@ -168,10 +168,10 @@ namespace Combat
         {
             Debug.Log("AP INCREMENTED");
             ++actionPts;
-            if (charController == CombatService.Instance.currCharClicked)
-            {
-                actionPtsView.UpDateActionsPtsView(actionPts);
-            }
+            //if (charController == CombatService.Instance.currCharClicked)
+            //{
+            //    actionPtsView.UpDateActionsPtsView(actionPts);
+            //}
             return actionPts;
         }
 

@@ -35,7 +35,7 @@ namespace Combat
                 DynamicPosData dyna = GridService.Instance.GetDyna4GO(targetController.gameObject);
                 bool cellOccMatch = dyna.cellsOccupied.Any(t => t == cellPosData.pos);
                 bool charModeMatch = (cellPosData.charMode == targetController.charModel.charMode); 
-                if (!cellOccMatch && !charModeMatch)
+                if (!cellOccMatch || !charModeMatch)
                     return; 
 
                 if (dyna != null)

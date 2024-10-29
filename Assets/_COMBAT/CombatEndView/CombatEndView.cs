@@ -29,7 +29,7 @@ namespace Combat
         public bool highMeritExpRewarded = false;
 
         CombatEndCondition combatEndCondition;
-        CombatResult combatResult;
+        Result combatResult;
         public CharController firstBloodChar;
 
         public NotifyName notifyName { get; set; }
@@ -47,7 +47,7 @@ namespace Combat
             FillCharPort();
             FillHeading();
             
-            if (combatResult == CombatResult.Victory)
+            if (combatResult == Result.Victory)
             {
                 endTrans = transform.GetChild(1);
                 Transform lootTrans = transform.GetChild(0); 
@@ -56,7 +56,7 @@ namespace Combat
                 lootTrans.gameObject.SetActive(true);
                 endTrans.gameObject.SetActive(true);
             }
-            else if(combatResult == CombatResult.Draw || combatResult == CombatResult.Defeat)
+            else if(combatResult == Result.Draw || combatResult == Result.Defeat)
             {
                 endTrans = transform.GetChild(0);
                 endTrans.gameObject.SetActive(true);                
@@ -77,15 +77,15 @@ namespace Combat
         {
             switch (combatResult)
             {
-                case CombatResult.None:
+                case Result.None:
                     break;
-                case CombatResult.Victory:
+                case Result.Victory:
                     headingTxt.text = "VICTORY"; 
                     break;
-                case CombatResult.Draw:
+                case Result.Draw:
                     headingTxt.text = "DRAW";
                     break;
-                case CombatResult.Defeat:
+                case Result.Defeat:
                     headingTxt.text = "DEFEAT";
                     break;
                 default:

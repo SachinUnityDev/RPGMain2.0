@@ -1,14 +1,17 @@
+using Common;
 using System.Collections;
 using System.Collections.Generic;
+using Town;
 using UnityEngine;
 
 
 namespace Quest
 {
-    public class RatInfestation : QuestBase
+    public class RatInfestation : QuestBase, iResult
     {
-        public override QuestNames questName => QuestNames.RatInfestation;  
+        public override QuestNames questName => QuestNames.RatInfestation;
 
+        public GameScene gameScene => GameScene.InMapInteraction;
         public override void EndQuest()
         {
             
@@ -21,6 +24,13 @@ namespace Quest
         {
             
         }
+
+        public void OnResult(Result result)
+        {
+            
+
+        }
+
         public override void StartObj(ObjNames objName)
         {
             

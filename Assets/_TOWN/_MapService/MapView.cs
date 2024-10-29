@@ -85,14 +85,17 @@ namespace Town
         }
         public void Load()
         {
-            GameService.Instance.currGameModel.gameScene = GameScene.InMapInteraction; 
+            GameService.Instance.currGameModel.gameScene = GameScene.InMapInteraction;
+            MapService.Instance.InitMapService();
             UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(this.gameObject, true); 
             worldView.gameObject.SetActive(false);
             nekkiView.gameObject.SetActive(true);   
+            
         }
 
         public void UnLoad()
         {
+           // MapService.Instance.SaveState();
             UIControlServiceGeneral.Instance.TogglePanel(this.gameObject, false);
             GameService.Instance.currGameModel.gameScene = GameScene.InTown;
         }

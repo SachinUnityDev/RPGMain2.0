@@ -2,13 +2,12 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using Town;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 
 namespace Quest
 {
-    public class PathQView : MonoBehaviour
+    public class PathQView : MonoBehaviour // component for all path nodes
     {
         [Header(" TBR")]
         public QuestNames questName;
@@ -16,40 +15,22 @@ namespace Quest
 
         [Header(" Global Var")]
         public PathView pathView; 
-        public List<PathNodeView> allPathNodes = new List<PathNodeView>();
+        //public List<PathNodeView> allPathNodes = new List<PathNodeView>();
 
         PathController pathController;
-        public int currentNode = -1; 
+        [SerializeField] PathModel pathModel;    
+        public NodeInfo currentNode = new NodeInfo(0, false, false);
         public void InitPathQ(PathView pathView, PathController pathController)
         {
             this.pathView = pathView;
-            this.pathController = pathController; 
-            pathController.pathQView = this; // adding pathQView reference to pathController
-            currentNode = 0;
-
-            foreach (Transform node in transform)
-            {
-                PathNodeView pathNodeView = node.GetComponent<PathNodeView>();
-                QMarkView qMarkView = node.GetComponent<QMarkView>();   
-                if (pathNodeView != null)
-                {
-                    pathNodeView.InitPathNodeView(pathView, this);                   
-                }
-                if(qMarkView != null)
-                {
-                    qMarkView.InitPathNodeView(pathView, this);
-                }
-            }
-           // MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move(0);// set at first node
-
-        }
-        public void LoadPathQ(PathView pathView, PathController pathController)
-        {
-            this.pathView = pathView;
             this.pathController = pathController;
-            pathController.pathQView = this; // adding pathQView reference to pathController
-            
-
+            pathController.pathQView = this; // adding pathQView reference to pathController            
+            pathModel = pathController.GetPathModel(questName, objName);
+            //if(pathModel.currNode == null)
+            //{
+            //    pathModel.currNode = new NodeInfo(0, false, false); 
+            //}
+            currentNode = pathModel.currNode;
 
             foreach (Transform node in transform)
             {
@@ -57,27 +38,29 @@ namespace Quest
                 QMarkView qMarkView = node.GetComponent<QMarkView>();
                 if (pathNodeView != null)
                 {
-                    pathNodeView.LoadPathNodeView(pathView, this);
+                    pathNodeView.InitPathNodeView(pathView, this, pathModel);
                 }
                 if (qMarkView != null)
                 {
-                    qMarkView.LoadPathNodeView(pathView, this);
+                    qMarkView.InitPathNodeView(pathView, this, pathModel);
                 }
             }
-            // MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move(0);// set at first node
-
+            // init Pawn move here too
+            if (pathModel.currNode.nodeSeq != 0)
+            {
+                MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().PawnMoveLoad(pathView, this, pathModel);
+            }
         }
-
 
         public void OnNodeEnter(int node)
         {
-            currentNode = node; // track which node is currently active 
+            currentNode.nodeSeq = node; // track which node is currently active 
         }
         public void Move2NextNode()
         {
-            MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move(currentNode);
-            OnNodeExit(currentNode);
-            OnNodeExit4Base(currentNode);     
+            MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move(currentNode.nodeSeq);
+            OnNodeExit(currentNode.nodeSeq);
+            OnNodeExit4Base(currentNode.nodeSeq);     
         }
         void OnNodeExit4Base(int node)
         {

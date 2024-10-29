@@ -24,6 +24,14 @@ namespace Quest
             pathQView.Move2NextNode();
         }
         
+        public void PawnMoveLoad(PathView pathView, PathQView pathQView, PathModel pathModel)
+        {
+            this.pathQView = pathQView;
+            this.pathView = pathView;
+            this.pathModel = pathModel;         
+            pathQView.Move2NextNode();
+        }    
+
     
         public void Move(int currentNode)
         {
@@ -67,7 +75,7 @@ namespace Quest
 
         void CheckTownArrival()
         {
-            if (pathModel.nodes[0].isChecked && pathQView.currentNode ==0)
+            if (pathModel.nodes[0].isChecked && pathQView.currentNode.nodeSeq ==0)
             {
                 MapService.Instance.mapController.mapView.GetComponent<IPanel>().UnLoad();
             }

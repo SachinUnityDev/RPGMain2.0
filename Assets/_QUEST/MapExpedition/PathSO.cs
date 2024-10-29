@@ -19,6 +19,13 @@ namespace Quest
 
         [Header(" TimeChg On Node Exit")]
         public int noOfHalfDaysChgOnExit;
+
+        public NodeInfo(int nodeSeq, bool isChecked, bool isSuccess)
+        {
+            this.nodeSeq = nodeSeq;
+            this.isChecked = isChecked;
+            this.isSuccess = isSuccess;
+        }
     }
     //public enum PathState
     //{

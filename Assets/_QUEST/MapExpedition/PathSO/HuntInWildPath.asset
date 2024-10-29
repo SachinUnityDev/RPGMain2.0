@@ -18,12 +18,24 @@ MonoBehaviour:
   objState: 0
   nodes:
   - nodeSeq: 0
-    isChecked: 1
+    isChecked: 0
+    isSuccess: 0
+    noOfHalfDaysChgOnEnter: 0
+    noOfHalfDaysChgOnExit: 0
   - nodeSeq: 1
     isChecked: 0
+    isSuccess: 0
+    noOfHalfDaysChgOnEnter: 0
+    noOfHalfDaysChgOnExit: 0
   - nodeSeq: 2
     isChecked: 0
+    isSuccess: 0
+    noOfHalfDaysChgOnEnter: 0
+    noOfHalfDaysChgOnExit: 0
   - nodeSeq: 3
     isChecked: 0
+    isSuccess: 0
+    noOfHalfDaysChgOnEnter: 0
+    noOfHalfDaysChgOnExit: 0
   pathPrefab: {fileID: 5883672084844912971, guid: bc65e21eda7c82643a91e6eb931e7f0c,
     type: 3}

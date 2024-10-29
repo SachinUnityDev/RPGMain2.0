@@ -23,25 +23,25 @@ namespace Quest
         PathBase pathBase;
         [SerializeField] PathModel pathModel; 
         int index; 
-        public void InitPathNodeView(PathView pathView, PathQView pathQView)
+        public void InitPathNodeView(PathView pathView, PathQView pathQView, PathModel pathModel)
         {
             this.pathView = pathView;
             this.pathQView= pathQView;
+            this.pathModel = pathModel; 
             questName = pathQView.questName;
             objName = pathQView.objName;
             nodeSeq = transform.GetSiblingIndex();
-            pathModel = pathView.pathController.GetPathModel(questName, objName);   
         }
 
-        public void LoadPathNodeView(PathView pathView, PathQView pathQView)
-        {
-            InitPathNodeView(pathView, pathQView); 
-        }
+        //public void LoadPathNodeView(PathView pathView, PathQView pathQView)
+        //{
+        //    InitPathNodeView(pathView, pathQView); 
+        //}
         public void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.gameObject.name == "PawnStone")
             {
-                if (pathQView.currentNode == nodeSeq)
+                if (pathQView.currentNode.nodeSeq == nodeSeq)
                 {
                     return;
                 }

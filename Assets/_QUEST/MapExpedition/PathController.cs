@@ -1,12 +1,15 @@
 using Common;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Town;
 using UnityEngine;
 using UnityEngine.SceneManagement; 
 
 namespace Quest
 {
+    [Serializable]
     public class PathOnDsply
     {
         public QuestNames questNames;
@@ -76,12 +79,35 @@ namespace Quest
                 allPathModel.Add(pathModel);
             }
             InitPathBases();
+            UpdatePathDsplyed(false);
         }
-       public void LoadPaths(List<PathModel> allPathModels)
+        public void LoadPaths(List<PathModel> allPathModels)
         {
             allPathModel = allPathModels.DeepClone();
             InitPathBases();
+            // check if all pathDsplyed in allPathModels have been addedToview ...MAPCONTAINER
+            UpdatePathDsplyed(true); 
         }
+
+        void ResetAllInCompletePaths()
+        {
+            foreach (PathModel pathModel in allPathModel)
+            {
+                if(pathModel.isDsplyed)
+                {
+                    ResetModel(pathModel);        
+                }
+            }
+        }
+        void ResetModel(PathModel pathModel)
+        {
+            foreach (NodeInfo node in pathModel.nodes)
+            {
+                node.isChecked = false;
+                node.isSuccess = false;
+            }
+        }
+
         void InitPathBases()
         {
             pathFactory = GetComponent<PathFactory>();
@@ -96,6 +122,7 @@ namespace Quest
                 allPathBase.Add(pathbaseNew);
             }
         }
+        
         public PathModel GetPathModel(QuestNames questName, ObjNames objName)
         {
             int index = allPathModel.FindIndex(t => t.questName == questName && t.objName == objName); 
@@ -129,19 +156,36 @@ namespace Quest
         }
 
         // Check if it has the limit
-        public void On_PathUnLock(QuestNames questName, ObjNames objName)
+        private void UpdatePathDsplyed(bool is2BeAddedInView)
         {
-            PathSO pathSO = MapService.Instance.allPathSO.GetPathSO(questName, objName);
-            PathOnDsply pathOnDsply = new PathOnDsply(questName, objName, pathSO.pathPrefab); 
-            allPathOnDsply.Add(pathOnDsply);           
-            pathPrefab = pathSO.pathPrefab;
+            foreach (PathModel pathModel in allPathModel)
+            {
+                if (pathModel.isDsplyed)
+                {
+                    if (allPathOnDsply.Any(t => t.questNames == pathModel.questName && t.objName == pathModel.objName))
+                        continue;
+
+                    PathSO pathSO = MapService.Instance.allPathSO.GetPathSO(pathModel.questName, pathModel.objName);
+                    PathOnDsply pathOnDsply = new PathOnDsply(pathModel.questName, pathModel.objName, pathSO.pathPrefab);
+                    allPathOnDsply.Add(pathOnDsply);
+                    pathPrefab = pathSO.pathPrefab;
+
+                    //On_PathUnLock(pathModel.questName, pathModel.objName);
+                    AddPath2View(is2BeAddedInView);
+                }
+            }
+
+        }       
+        public void On_PathUnLock(QuestNames questName, ObjNames objName)
+        {           
             PathModel pathModel = GetPathModel(questName, objName);
             if(pathModel != null)
             {
                 pathModel.isDsplyed = true;
+                ResetModel(pathModel);
                 currPathModel = pathModel;
-            }
-            AddPath2View();
+            }            
+            UpdatePathDsplyed(true);           
         }
         public void On_PathComplete()  
         {
@@ -149,16 +193,17 @@ namespace Quest
             // update in PathModel
 
         }
-
-
-
-        void AddPath2View()
+        void AddPath2View(bool isLoaded)
         {
             //if (isDiaViewInitDone) return; // return multiple clicks
             Transform parent = pathView.MapPathContainer.transform;
             pathGO = Instantiate(pathPrefab);
             pathGO.transform.SetParent(parent);
-            pathView.PathViewInit(this);
+            //if (isLoaded)
+                pathView.PathViewInit(this);    //Load for this path
+            //else
+            //    pathView.PathViewLoaded(this); 
+
             RectTransform pathRect = pathGO.GetComponent<RectTransform>();
             pathRect.anchorMin = new Vector2(0, 0);
             pathRect.anchorMax = new Vector2(1, 1);

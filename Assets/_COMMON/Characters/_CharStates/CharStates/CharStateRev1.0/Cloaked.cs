@@ -46,7 +46,7 @@ namespace Common
             foreach (DynamicPosData dyna in inFrontSameParty)
             {
               int buffID =   charController.buffController.ApplyBuff(CauseType.CharSkill, (int)charStateName,
-                                   charController.charModel.charID, AttribName.dodge, +1, TimeFrame.EndOfCombat, 1, true);
+                                   charController.charModel.charID, AttribName.dodge, +2, TimeFrame.Infinity, 1, true);
                 allBuffIds.Add(buffID);
             }
         }   
@@ -77,7 +77,7 @@ namespace Common
 
         public override void StateDisplay()
         {
-            str0 = "+1 Dodge until eoc, if ally in front in sot";
+            str0 = "+2 Dodge if ally in front at sot";
             allStateFxStrs.Add(str0);
 
             str1 = "+14 Dark Res";
@@ -88,8 +88,6 @@ namespace Common
 
             str3 = "Lost upon attacking";
             allStateFxStrs.Add(str3);
-
-
         }
     }
 }

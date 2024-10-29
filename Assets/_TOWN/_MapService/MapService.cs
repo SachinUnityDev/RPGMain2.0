@@ -8,6 +8,13 @@ using UnityEngine;
 
 namespace Town
 {
+    public interface iResult
+    {
+        GameScene gameScene { get; }    
+        void OnResult(Result result);    
+    }
+
+
     public class MapService : MonoSingletonGeneric<MapService>, ISaveable 
     {
         [Header("view")]
@@ -49,13 +56,16 @@ namespace Town
                 else
                 {
                     LoadState();
+                   // LoadState ==>
+                   //loads from all path models  pathController.LoadPaths(allPathModel);
+
                 }
             }
             else
             {
                 Debug.LogError("Service Directory missing");
             }
-            mapController.InitMapController();
+            mapController.InitMapController();// no load needed
             pathView.PathViewInit(pathController);
             
 

@@ -426,14 +426,13 @@ public enum CharOccupies
     FullHex, 
 
 }
-public enum CombatResult
+public enum Result
 {
     None,
     Victory,
     Draw,
     Defeat,
 }
-
 
 
 

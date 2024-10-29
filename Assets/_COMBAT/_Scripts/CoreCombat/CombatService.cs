@@ -49,7 +49,7 @@ namespace Combat
         public bool IsFirstBloodChkDone;
 
         [Header("Combat Result")]
-        public CombatResult combatResult; 
+        public Result combatResult; 
 
         void OnEnable()
         {            
@@ -179,24 +179,24 @@ namespace Combat
             {// chk if all enemies have died // victory case here
                 if (!CharService.Instance.allCharInCombat.Any(t => t.charModel.charMode == CharMode.Enemy))
                 {
-                    OnCombatResult(CombatResult.Victory, CombatEndCondition.Victory_AllEnemiesDied);
+                    OnCombatResult(Result.Victory, CombatEndCondition.Victory_AllEnemiesDied);
                 }
             }
             else if (charController.charModel.charName == CharNames.Abbas)
             { // combat lost .. Abbas Died
-                OnCombatResult(CombatResult.Defeat, CombatEndCondition.Defeat_AbbasDied);
+                OnCombatResult(Result.Defeat, CombatEndCondition.Defeat_AbbasDied);
             }
             else // ally other than abbas Died
             {
                 if (!CharService.Instance.allCharInCombat.Any(t => t.charModel.charMode == CharMode.Ally))
                 {
-                    OnCombatResult(CombatResult.Defeat, CombatEndCondition.Defeat_AllInCombatDiedNFled);
+                    OnCombatResult(Result.Defeat, CombatEndCondition.Defeat_AllInCombatDiedNFled);
                 }
             }
         }
        
 
-        public void OnCombatResult(CombatResult combatResult, CombatEndCondition combatEndCondition)
+        public void OnCombatResult(Result combatResult, CombatEndCondition combatEndCondition)
         {
             // chk combat state here
 
@@ -208,15 +208,15 @@ namespace Combat
 
             switch (combatResult)
             {
-                case CombatResult.None:
+                case Result.None:
                     break;
-                case CombatResult.Victory: // loot and Exp
+                case Result.Victory: // loot and Exp
                     enemyPackBase.EnemyPackShowLoot(); 
                     break;
-                case CombatResult.Draw: // on max Round Limit reached 
+                case Result.Draw: // on max Round Limit reached 
                     combatEndView.InitCombatEndView();
                     break;
-                case CombatResult.Defeat: // On Abbas Dead, All companions in Combat Dead,   
+                case Result.Defeat: // On Abbas Dead, All companions in Combat Dead,   
                     combatEndView.InitCombatEndView();
                     break;
             }
@@ -243,13 +243,13 @@ namespace Combat
             {
                 switch (combatResult)
                 {
-                    case CombatResult.None:
+                    case Result.None:
                         return 0;                         
-                    case CombatResult.Victory:
+                    case Result.Victory:
                        return sharedExp / allyExceptDeadNFledCount;                       
-                    case CombatResult.Draw:
+                    case Result.Draw:
                         return (sharedExp /allyExceptDeadNFledCount)*0.6f;
-                    case CombatResult.Defeat:
+                    case Result.Defeat:
                         return 0;                        
                     default:
                         return 0;                        

@@ -16,19 +16,26 @@ namespace Quest
         [Header("Global Var")]
         PathView pathView;
         PathQView pathQView;
-
-        public void InitPathNodeView(PathView pathView, PathQView pathQView)
+        [SerializeField] PathModel pathModel;
+        public void InitPathNodeView(PathView pathView, PathQView pathQView, PathModel pathModel)
         {
             this.pathView = pathView;
             this.pathQView = pathQView;
             questName = pathQView.questName;
             objName = pathQView.objName;
+            // check if quest completed.. if not then show the ? mark
+           this.pathModel = pathModel;
+
+            if (pathModel.isDsplyed && !pathModel.isCompleted)
+            {
+                QuestMarkUp();  
+            }
         }
 
-        public void LoadPathNodeView(PathView pathView, PathQView pathQView)
-        {
-           InitPathNodeView(pathView, pathQView);
-        }
+        //public void LoadPathNodeView(PathView pathView, PathQView pathQView)
+        //{
+        //   InitPathNodeView(pathView, pathQView);
+        //}
 
         void QuestMarkDown()
         {

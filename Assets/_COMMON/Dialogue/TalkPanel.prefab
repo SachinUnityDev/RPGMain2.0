@@ -3503,8 +3503,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   diaModel:
     DiaID: 0
-    dialogueName: 4
-    dialogueTitle: I am back!
+    dialogueName: 5
+    dialogueTitle: "Hey old man\u2026"
     npcName: 10
     charName: 0
     isUnLocked: 1
@@ -3512,8 +3512,8 @@ MonoBehaviour:
     isSkippable: 1
     isPlayedOnce: 1
     gameScene: 0
-    charInDialogue: 
-    NPCinDialogue: 0a000000
+    charInDialogue: 01000000
+    NPCinDialogue: 
     locationName: 1
   colorN: {r: 0.047058824, g: 0.007843138, b: 0.007843138, a: 1}
   colorHL: {r: 0.46226418, g: 0.291561, b: 0.09332503, a: 1}

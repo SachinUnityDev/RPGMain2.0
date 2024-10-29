@@ -38,30 +38,13 @@ namespace Quest
             }
         }
 
-        public void LoadPathView(PathController pathController, List<PathModel> allPathModels)
-        {
-            this.pathController = pathController;
-            MapPathContainer = FindObjectOfType<MapPathContainer>(true).transform;
-            
-            
-
-        }
-
-
         public void OnPathEmbark(QuestNames questName, ObjNames objName, PathQView pathQView)
         {
             currPathModel = MapService.Instance.pathController.GetPathModel(questName, objName);            
             if (currPathModel != null)
                 pawnMove.PawnMoveInit(this, pathQView, currPathModel);
         }
-        //#region PAWN MOVEMENT CONTROL
-        //public void MovePawnStone(Vector3 pos, float time)
-        //{
-        //    pawnStone.DOMove(pos, time); 
-        //}
-        
-        //#endregion
-
+     
 
         public void OnPathExit()
         {

@@ -43,7 +43,7 @@ namespace Combat
 
 
         public EnemyPackName enemyPackName;
-        public CombatResult combatResult;
+        public Result combatResult;
         public CombatEndCondition combatEndCondition; 
 
         [Header(" Kills and Saves")]
@@ -57,7 +57,7 @@ namespace Combat
             this.landscapeName = landscapeName;  
         }
 
-        public void OnCombatEnd(CombatResult combatResult, CombatEndCondition combatEndCondition)
+        public void OnCombatEnd(Result combatResult, CombatEndCondition combatEndCondition)
         {
             enemyPackName = CombatService.Instance.currEnemyPack;
             this.combatResult = combatResult;

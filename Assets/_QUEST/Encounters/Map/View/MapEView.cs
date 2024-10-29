@@ -1,6 +1,7 @@
 using Common;
 using System.Collections;
 using System.Collections.Generic;
+using Town;
 using UnityEngine;
 
 
@@ -25,6 +26,7 @@ namespace Quest
         public void Load()
         {
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
+            
         }
         public void ShowMainPage()
         {
@@ -49,7 +51,9 @@ namespace Quest
 
         public void UnLoad()
         {
+            MapService.Instance.SaveState();
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
+
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Quest
         public MapEModel mapEModel;
 
         public string resultStr;
-        public CombatResult combatResult;
+        public Result combatResult;
         public string strFX;
         public bool mapEResult= false;
         public bool isCombatToBePlayed = false; 

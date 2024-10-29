@@ -7,11 +7,12 @@ using UnityEngine;
 
 namespace Quest
 {
-    public class HuntInTheWildernessPath : PathBase
+    public class HuntInTheWildernessPath : PathBase 
     {
         public override QuestNames questName => QuestNames.HuntInTheWilderness; 
 
         public override ObjNames objName => ObjNames.TravelIntoTheWilderness;
+
 
         public override void OnNode0Enter()
         {
@@ -153,5 +154,6 @@ namespace Quest
         {
             
         }
+
     }
 }

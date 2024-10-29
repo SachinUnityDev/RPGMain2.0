@@ -58,7 +58,7 @@ namespace Combat
 
         [Header(" Combat result")]  // every time a combat end add here 
         public CombatModel combatModel = null; 
-        public CombatResult currCombatResult; 
+        public Result currCombatResult; 
         
         RoundController roundController;
 
@@ -170,7 +170,7 @@ namespace Combat
         }
         public void On_SOC()
         {
-            currCombatResult = CombatResult.None; 
+            currCombatResult = Result.None; 
             roundController = CombatService.Instance.roundController; 
             CombatService.Instance.combatState = CombatState.INCombat_normal;
             CombatService.Instance.SetEnemyInCombat(enemyPackName);
@@ -190,7 +190,7 @@ namespace Combat
             seq.Play();
         }
 
-        public void On_EOC(CombatResult combatResult)
+        public void On_EOC(Result combatResult)
         {
             Debug.Log(" ON EOC TRIGGER");
             combatState = CombatState.INCombat_End; 
@@ -259,7 +259,7 @@ namespace Combat
             int MAX_RD_LIMIT = GameService.Instance.gameController.GetMaxRoundLimit();
             if (roundNo >= MAX_RD_LIMIT)
             {
-                CombatService.Instance.OnCombatResult(CombatResult.Draw, CombatEndCondition.Draw_MaxRdsLmt); 
+                CombatService.Instance.OnCombatResult(Result.Draw, CombatEndCondition.Draw_MaxRdsLmt); 
             }   
             else
             {

@@ -40,8 +40,8 @@ namespace Quest
         [Header(" Current data")]
         public PathSO pathSO;
         public PathBase pathBase;
-        public PathModel currPathModel;
         public Transform pawnTrans;
+        public PathModel currPathModel; 
 
         [Header(" Current Views")]         
         public PathQView pathQView;
@@ -73,10 +73,17 @@ namespace Quest
         }
         public void InitPath(AllPathSO allPathSO)
         {
-            foreach (PathSO pathSO in allPathSO.allPathSO)
+            if(allPathModel.Count > 0)
             {
-                PathModel pathModel = new PathModel(pathSO);
-                allPathModel.Add(pathModel);
+                ResetAllInCompletePaths();
+            }
+            else
+            {
+                foreach (PathSO pathSO in allPathSO.allPathSO)
+                {
+                    PathModel pathModel = new PathModel(pathSO);
+                    allPathModel.Add(pathModel);
+                }
             }
             InitPathBases();
             UpdatePathDsplyed(false);
@@ -110,7 +117,7 @@ namespace Quest
 
         void InitPathBases()
         {
-            pathFactory = GetComponent<PathFactory>();
+            pathFactory = GetComponent<PathFactory>(); allPathBase.Clear(); 
             foreach (PathModel pathModel in allPathModel)
             {
                 PathBase pathbaseNew =
@@ -129,10 +136,10 @@ namespace Quest
                                          
             if (index != -1)
             {
-                return allPathModel[index];
+                PathModel pathModel =  allPathModel[index];
+                return pathModel;
             }
-            Debug.LogError("Path Model not found" + questName + objName);
-            return null;
+            return null;            
         }
 
         public PathBase GetPathBase(QuestNames questName, ObjNames objName)
@@ -169,13 +176,17 @@ namespace Quest
                     PathOnDsply pathOnDsply = new PathOnDsply(pathModel.questName, pathModel.objName, pathSO.pathPrefab);
                     allPathOnDsply.Add(pathOnDsply);
                     pathPrefab = pathSO.pathPrefab;
-
-                    //On_PathUnLock(pathModel.questName, pathModel.objName);
+                    
                     AddPath2View(is2BeAddedInView);
                 }
             }
 
         }       
+        public void UpdatePathNode(bool isSuccess)
+        {
+            currPathModel.currNode.isSuccess = isSuccess;
+            currPathModel.nodes.Find(t => t.nodeSeq == currPathModel.currNode.nodeSeq).isSuccess = isSuccess;
+        }
         public void On_PathUnLock(QuestNames questName, ObjNames objName)
         {           
             PathModel pathModel = GetPathModel(questName, objName);
@@ -183,7 +194,8 @@ namespace Quest
             {
                 pathModel.isDsplyed = true;
                 ResetModel(pathModel);
-                currPathModel = pathModel;
+                pathModel.questState = QuestState.UnLocked;
+                pathModel.objState = QuestState.UnLocked;
             }            
             UpdatePathDsplyed(true);           
         }

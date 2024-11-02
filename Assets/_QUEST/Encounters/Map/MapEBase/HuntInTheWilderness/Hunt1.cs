@@ -8,9 +8,11 @@ using UnityEngine;
 
 namespace Quest
 {
-    public class Hunt1 : MapEbase
+    public class Hunt1 : MapEbase, iResult
     {
-        public override MapENames mapEName => MapENames.Hunt1; 
+        public override MapENames mapEName => MapENames.Hunt1;
+
+        public GameScene gameScene => GameScene.InMapInteraction; 
 
         CharNames charJoined;
         Currency money2Lose;
@@ -56,6 +58,7 @@ namespace Quest
                 LootService.Instance.lootController.ShowLootTable4MapE(allItemDataWithQty, parentTrans);
 
                 resultStr = "You gained loot!";
+                mapEResult = true;
             }
             else
             {
@@ -77,13 +80,21 @@ namespace Quest
 
                 LootService.Instance.lootController.ShowLootTable4MapE(allItemDataWithQty, parentTrans);
                 resultStr = "You gained loot!";
+                mapEResult = true;
             }
         }
 
         public override void OnChoiceBSelect()
         {
-            MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move2TownOnFail();
+            mapEResult = true; 
+            MapService.Instance.pathController.pathQView.Move2TownFail(); 
             EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
+        }
+
+        public void OnResult(Result result)
+        {
+            
+
         }
     }
 }

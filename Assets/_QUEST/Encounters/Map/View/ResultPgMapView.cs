@@ -26,11 +26,8 @@ namespace Quest
 
         public void OnContinueBtnPressed()
         {
-          //  EncounterService.Instance.mapEController.mapENodePtrEvents.OnMapEExit();
             mapEView.GetComponent<IPanel>().UnLoad();
             mapEBase.MapEContinuePressed();
-            //MapService.Instance.pathController.GetPawnStone()
-            //    .GetComponent<PawnStonePtrEvents>().UnPause(); 
         }
 
         public void InitResultPage(MapEView mapEView, MapEbase mapEBase, MapEModel mapEModel)

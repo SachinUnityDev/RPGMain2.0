@@ -8,68 +8,61 @@ using Combat;
 
 namespace Quest
 {
-    public class BandOfBandits1 : MapEbase
+    public class BandOfBandits1 : MapEbase, iResult
     {
         public override MapENames mapEName => MapENames.BandOfBanditsOne;
+
+        public GameScene gameScene => GameScene.InMapInteraction; 
 
         CharNames charJoined;
         Currency money2Lose; 
         public override void MapEContinuePressed()
         {
-          //  CombatEventService.Instance.StartCombat(CombatState.INTactics, LandscapeNames.Sewers, EnemyPackName.RatPack3);
-            if (isCombatToBePlayed)
+            if (isCombatToBePlayed )
             {
-                CombatEventService.Instance.StartCombat(CombatState.INTactics, LandscapeNames.Sewers, EnemyPackName.RatPack3);
-                // to be update on combat complete  
-                if (combatResult == Result.Victory)
+                if (!isCombatResult)
                 {
-                    resultStr = "You defeated the bandits!";
-                    strFX = "Party buff: +1 to all stats, 3 rds";
+                    CombatEventService.Instance.StartCombat(CombatState.INTactics, LandscapeNames.Sewers, EnemyPackName.RatPack3, this);
                 }
-                else if (combatResult == Result.Defeat)
+                else
                 {
-                    resultStr = "You were defeated by the bandits!";
-                    strFX = "Party debuff: -1 to all stats, 3 rds";
-                }
-                else if (combatResult == Result.Draw)
-                {
-                    resultStr = "You were defeated by the bandits!";
-                    strFX = "Party debuff: -1 to all stats, 3 rds";
-                }
+                    if (mapEResult)
+                    {
+                        MapService.Instance.pathController.pathQView.Move2NextNode(mapEResult);
+                    }
+                    else
+                    {
+                        MapService.Instance.pathController.pathQView.Move2TownFail();
+                    }
+                    EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);                    
+                }                 
             }
             else
             {
 
-                if (mapEResult)
-                {
-                    resultStr = "You passed through the bandits without any trouble!";
-                    strFX = "";
-                }
-                else
-                {
-                    resultStr = "You were ambushed by the bandits!";
-                    strFX = "Party debuff: Flat Footed, 3 rds";
-                }
+                mapEResult = true;    
+                EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
+                MapService.Instance.pathController.pathQView.Move2NextNode(mapEResult);
             }
-            EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
-            MapService.Instance.pathController.pathQView.Move2NextNode();
+
+        
 
         }
 
         public override void OnChoiceASelect()
         {
-            float chance = 50f;
+            float chance = 100f;
             if (chance.GetChance())
             {
                 resultStr = "Bandits ambushed you. Watch out!";
                 strFX = "Party debuff: Flat Footed, 3 rds";
-                isCombatToBePlayed = true;
+                isCombatToBePlayed = false;
             }
             else
             {
                 resultStr = "Time to fight!";
                 strFX = "";
-                isCombatToBePlayed = false;
+                isCombatToBePlayed = true;
             }
         }
 
@@ -89,6 +82,33 @@ namespace Quest
 
             resultStr = "You agreed to pay a toll for free passage and Bandits seem symphatetic to your cause...";
             strFX = $"{money2Lose.silver} Silver and {money2Lose.bronze} Bronze lost";        
+        }
+
+        public void OnResult(Result result)
+        {
+            if (result == Result.Victory)
+            {
+                resultStr = "You defeated the bandits!";
+                strFX = "Party buff: +1 to all stats, 3 rds";
+                mapEResult = true;
+            }
+            else if (result == Result.Defeat)
+            {
+                resultStr = "You were defeated by the bandits!";
+                strFX = "Party debuff: -1 to all stats, 3 rds";
+                mapEResult = false;
+            }
+            else if (result == Result.Draw)
+            {
+                resultStr = "You were defeated by the bandits!";
+                strFX = $"<b>Party debuff:</b> -1 to all stats, 3 rds";
+                mapEResult = false;
+            }
+            EncounterService.Instance.mapEController.ShowMapEResult2(mapEModel.mapEName); 
+
+
+
+
         }
     }
 }

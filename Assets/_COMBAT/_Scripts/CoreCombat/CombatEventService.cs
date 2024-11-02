@@ -8,6 +8,7 @@ using Interactables;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 using Quest;
+using Town;
 
 namespace Combat
 {
@@ -59,6 +60,7 @@ namespace Combat
         [Header(" Combat result")]  // every time a combat end add here 
         public CombatModel combatModel = null; 
         public Result currCombatResult; 
+        public iResult iResult;
         
         RoundController roundController;
 
@@ -96,12 +98,12 @@ namespace Combat
         }
 
 
-        public void StartCombat(CombatState combatState, LandscapeNames landscapeName, EnemyPackName enemyPackName)
+        public void StartCombat(CombatState combatState, LandscapeNames landscapeName, EnemyPackName enemyPackName, iResult iResult)
         {
             this.enemyPackName = enemyPackName;
             this.landscapeName = landscapeName;
-            this.combatState = combatState; 
-
+            this.combatState = combatState;
+            this.iResult = iResult; 
             StartCoroutine(SceneMgmtService.Instance.sceneMgmtController.LoadScene(SceneName.COMBAT)); 
             
         }
@@ -192,11 +194,15 @@ namespace Combat
 
         public void On_EOC(Result combatResult)
         {
-            Debug.Log(" ON EOC TRIGGER");
-            combatState = CombatState.INCombat_End; 
+            Debug.Log(" ON EOC TRIGGER");            
             FortReset2FortOrg();
-            currCombatResult = combatResult; 
+            currCombatResult = combatResult;
+            
+            iResult.OnResult(combatResult);
+
+
             OnEOC?.Invoke();
+            combatState = CombatState.INCombat_End;
         }
         public void On_CombatFlee(CharController charController)
         {

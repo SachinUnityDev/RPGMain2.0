@@ -2,6 +2,7 @@ using DG.Tweening;
 using Quest;
 using System.Collections;
 using System.Collections.Generic;
+using Town;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -26,7 +27,7 @@ namespace Quest
             // check if quest completed.. if not then show the ? mark
            this.pathModel = pathModel;
 
-            if (pathModel.isDsplyed && !pathModel.isCompleted)
+            if (!pathModel.isCompleted)
             {
                 QuestMarkUp();  
             }
@@ -41,6 +42,8 @@ namespace Quest
         {
             transform.DORotate(new Vector3(0, 0, 181), 0.2f)
                 .OnComplete(() => transform.DOShakeRotation(1.5f, new Vector3(0, 0, 40), 4, 20, true));
+
+            MapService.Instance.pathController.currPathModel  = pathModel;            
         }
         void QuestMarkUp()
         {
@@ -68,7 +71,7 @@ namespace Quest
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (!pathView.isQInProgress)
+            if (!pathModel.isCompleted)
             {
                 QuestMarkDown();
                 ShowNodeClick();

@@ -41,7 +41,7 @@ namespace Quest
         {
             if (collision.gameObject.name == "PawnStone")
             {
-                if (pathQView.currentNode.nodeSeq == nodeSeq)
+                if (pathQView.pathModel.currNode.nodeSeq == nodeSeq)
                 {
                     return;
                 }

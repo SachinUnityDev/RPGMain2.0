@@ -194,6 +194,7 @@ namespace Common
                 GameEventService.Instance.On_CombatEnter();
             if (gameScene == GameScene.InTown)
                 GameEventService.Instance.OnTownLoaded();
+            
             currGameModel.gameScene = gameScene;
             GameEventService.Instance.On_GameSceneChg(gameScene);
         }

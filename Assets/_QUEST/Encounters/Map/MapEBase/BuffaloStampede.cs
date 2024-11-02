@@ -12,10 +12,10 @@ namespace Quest
     {
         public override MapENames mapEName => MapENames.BuffaloStampede; 
 
-        public override void MapEContinuePressed()
+        public override void MapEContinuePressed() // this is map E result
         {
             EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
-            MapService.Instance.pathController.pathQView.Move2NextNode();
+            MapService.Instance.pathController.pathQView.Move2NextNode(mapEResult);
 
             //  MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move();
         }

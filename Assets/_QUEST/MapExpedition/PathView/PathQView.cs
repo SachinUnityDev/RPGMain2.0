@@ -18,20 +18,17 @@ namespace Quest
         //public List<PathNodeView> allPathNodes = new List<PathNodeView>();
 
         PathController pathController;
-        [SerializeField] PathModel pathModel;    
-        public NodeInfo currentNode = new NodeInfo(0, false, false);
+        public PathModel pathModel;    
         public void InitPathQ(PathView pathView, PathController pathController)
         {
             this.pathView = pathView;
             this.pathController = pathController;
             pathController.pathQView = this; // adding pathQView reference to pathController            
             pathModel = pathController.GetPathModel(questName, objName);
-            //if(pathModel.currNode == null)
-            //{
-            //    pathModel.currNode = new NodeInfo(0, false, false); 
-            //}
-            currentNode = pathModel.currNode;
-
+            if (pathModel.currNode == null)
+            {
+                pathModel.currNode = new NodeInfo(0, false, false);
+            }
             foreach (Transform node in transform)
             {
                 PathNodeView pathNodeView = node.GetComponent<PathNodeView>();
@@ -54,13 +51,27 @@ namespace Quest
 
         public void OnNodeEnter(int node)
         {
-            currentNode.nodeSeq = node; // track which node is currently active 
+            pathModel.currNode = pathModel.nodes[node];
         }
-        public void Move2NextNode()
+        public void Move2NextNode(bool isSuccess)
         {
-            MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move(currentNode.nodeSeq);
-            OnNodeExit(currentNode.nodeSeq);
-            OnNodeExit4Base(currentNode.nodeSeq);     
+            MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move(pathModel.currNode.nodeSeq);
+            MapService.Instance.pathController.UpdatePathNode(isSuccess); 
+            OnNodeExit(pathModel.currNode.nodeSeq);
+            OnNodeExit4Base(pathModel.currNode.nodeSeq);     
+        }
+        public void Move2TownFail()
+        {
+            MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move2TownOnFail();
+            UpdatePathModelOnQFail();
+        }
+        void UpdatePathModelOnQFail()
+        {
+            for (int i = 1; i < pathModel.nodes.Count; i++)
+            {
+                pathModel.nodes[i].isChecked = false;
+            }
+            pathModel.nodes[0].isChecked = true;
         }
         void OnNodeExit4Base(int node)
         {

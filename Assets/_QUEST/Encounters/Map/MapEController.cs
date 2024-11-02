@@ -37,10 +37,17 @@ namespace Quest
             mapEView.GetComponent<MapEView>().InitEncounter(mapEModel);
             mapEOnDsply= true;
         }
+        public void ShowMapEResult2(MapENames mapEName) // called from the result MAPEBase
+        {   
+            MapEModel mapEModel = GetMapEModel(mapEName);
+            mapEView.GetComponent<MapEView>().ShowResult2Page();
+            mapEOnDsply = true;
+        }
+
 
         public void On_MapEComplete(MapENames mapEName, bool isSuccess)
         {
-            mapEOnDsply = false; 
+            mapEOnDsply = false;            
             mapEView.GetComponent<IPanel>().UnLoad();    
             OnMapEComplete?.Invoke(mapEName, isSuccess);
         }

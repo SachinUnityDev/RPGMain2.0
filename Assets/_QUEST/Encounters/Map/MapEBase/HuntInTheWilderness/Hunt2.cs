@@ -23,6 +23,7 @@ namespace Quest
 
         public override void OnChoiceASelect()
         {
+            mapEResult = true; // to be corrected
             if (20f.GetChance())
             {
                 // combat with Hyena pack
@@ -46,7 +47,8 @@ namespace Quest
 
         public override void OnChoiceBSelect()
         {
-            MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move2TownOnFail();
+            mapEResult = false;
+            MapService.Instance.pathController.pathQView.Move2TownFail();
             EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
         }
     }

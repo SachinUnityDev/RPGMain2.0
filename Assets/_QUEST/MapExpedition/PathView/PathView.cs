@@ -45,9 +45,12 @@ namespace Quest
                 pawnMove.PawnMoveInit(this, pathQView, currPathModel);
         }
      
-
         public void OnPathExit()
         {
+            // chk whether quest/obj is successful or not
+            // of completed mark it as completed 
+
+
 
         }
     }

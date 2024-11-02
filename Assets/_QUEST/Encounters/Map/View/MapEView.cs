@@ -39,6 +39,13 @@ namespace Quest
             resultPage.gameObject.SetActive(true);
             resultPage.GetComponent<ResultPgMapView>().InitResultPage(this, mapEBase, mapEModel);
         }
+        public void ShowResult2Page()
+        {
+            mainPage.gameObject.SetActive(false);
+            resultPage.gameObject.SetActive(true);
+            resultPage.GetComponent<ResultPgMapView>().InitResultPage(this, mapEBase, mapEModel);
+        }
+
         public void InitEncounter(MapEModel mapEModel)
         {
             this.mapEModel = mapEModel;
@@ -50,8 +57,7 @@ namespace Quest
         }
 
         public void UnLoad()
-        {
-            MapService.Instance.SaveState();
+        {   
             UIControlServiceGeneral.Instance.TogglePanel(gameObject, false);
 
         }

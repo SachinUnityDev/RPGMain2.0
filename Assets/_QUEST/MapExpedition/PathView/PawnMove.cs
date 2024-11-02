@@ -21,7 +21,7 @@ namespace Quest
             this.pathView = pathView;
             this.pathModel = pathModel;
             pathModel.currNode= pathModel.nodes[0];
-            pathQView.Move2NextNode();
+            pathQView.Move2NextNode(true); // move from 0 Node 
         }
         
         public void PawnMoveLoad(PathView pathView, PathQView pathQView, PathModel pathModel)
@@ -29,7 +29,7 @@ namespace Quest
             this.pathQView = pathQView;
             this.pathView = pathView;
             this.pathModel = pathModel;         
-            pathQView.Move2NextNode();
+            pathQView.Move2NextNode(true);
         }    
 
     
@@ -55,27 +55,19 @@ namespace Quest
             transform.GetComponent<BoxCollider2D>().enabled= false; 
             Sequence unSuccessSeq = DOTween.Sequence();
             unSuccessSeq
-           .Append(transform.GetComponent<Image>().DOFade(1.0f, 0.4f))
-           .Append(transform.DOLocalMove(pathQView.transform.GetChild(0).localPosition, 2.0f))
-            .AppendCallback(()=>transform.GetComponent<BoxCollider2D>().enabled= true);
-            ;
+               .Append(transform.GetComponent<Image>().DOFade(1.0f, 0.4f))
+               .Append(transform.DOLocalMove(pathQView.transform.GetChild(0).localPosition, 2.0f))
+               .AppendCallback(()=>transform.GetComponent<BoxCollider2D>().enabled= true);
+                ;
             unSuccessSeq.Play().OnComplete(()=>MapService.Instance.mapController.mapView.GetComponent<IPanel>().UnLoad());
-            UpdatePathModelOnQFail();
         }
 
-        void UpdatePathModelOnQFail()
-        {
-            for (int i = 1; i < pathModel.nodes.Count; i++)
-            {
-                pathModel.nodes[i].isChecked = false; 
-            }
-            pathModel.nodes[0].isChecked = true;
-        }
+      
 
 
         void CheckTownArrival()
         {
-            if (pathModel.nodes[0].isChecked && pathQView.currentNode.nodeSeq ==0)
+            if (pathModel.nodes[0].isChecked && pathQView.pathModel.currNode.nodeSeq ==0)
             {
                 MapService.Instance.mapController.mapView.GetComponent<IPanel>().UnLoad();
             }
@@ -98,31 +90,3 @@ namespace Quest
 
     }
 }
-
-//if(nodeSeq < pathModel.nodes.Count-1)
-//{
-//    targetNodeSeq =  nodeSeq+1;
-//    return pathQView.transform.GetChild(targetNodeSeq);
-//}
-//else
-//{
-//    targetNodeSeq = 0; 
-//    return pathQView.transform.GetChild(0);
-//}   
-//Transform GetCurrPos()
-//{
-//    for (int i = 0; i < pathModel.nodes.Count; i++)
-//    {
-//        if (!pathModel.nodes[i].isChecked)
-//        {
-//            nodeSeq = i; 
-//            return pathQView.transform.GetChild(i);
-//        }
-//        if (pathModel.nodes[i].isChecked && i == 0)
-//        {
-//            nodeSeq = 0; 
-//        }
-//    }
-//    Debug.Log("node seq not MATCHED");
-//    return null; 
-//}

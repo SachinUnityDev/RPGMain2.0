@@ -18,7 +18,7 @@ namespace Quest
         public override void MapEContinuePressed()
         {
             EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
-            MapService.Instance.pathController.pathQView.Move2NextNode();
+            MapService.Instance.pathController.pathQView.Move2NextNode(mapEResult);
 
             // MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move();
             // move the pawn 
@@ -41,11 +41,13 @@ namespace Quest
                 // start a combat with lion Pack
                 resultStr = "You encountered a Lion pack, get ready to be killed!";
             }
+            mapEResult = true; 
         }
 
         public override void OnChoiceBSelect()
         {
-            MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move2TownOnFail();
+            mapEResult = false; 
+            MapService.Instance.pathController.pathQView.Move2TownFail();
             EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
         }
     }

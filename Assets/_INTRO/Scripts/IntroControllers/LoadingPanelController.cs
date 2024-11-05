@@ -27,13 +27,21 @@ namespace Intro
         int count = 1;      
         public void Load()
         {
+            if (gameObject.activeInHierarchy)
+                return; 
             LoadSceneSeq();
             IntroAudioService.Instance.StopAllBGSound(0.01f);
             gameObject.SetActive(true);
             UIControlServiceGeneral.Instance.ToggleInteractionsOnUI(this.gameObject, true);
             IntroServices.Instance.Fade(gameObject, 1.0f);
             UIControlServiceGeneral.Instance.SetMaxSiblingIndex(gameObject);
-            StartCoroutine(SceneMgmtService.Instance.sceneMgmtController.LoadScene(SceneName.TOWN));
+            
+            Sequence townLoad = DOTween.Sequence();
+            townLoad
+                .AppendInterval(3f)
+                .AppendCallback(() => SceneMgmtService.Instance.LoadGameScene(GameScene.InTown)); 
+                ; 
+            townLoad.Play();    
         }
 
         void LoadSceneSeq()

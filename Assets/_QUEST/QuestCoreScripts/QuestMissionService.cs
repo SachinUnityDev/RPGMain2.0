@@ -56,8 +56,6 @@ namespace Quest
                 questEmbarkView = FindObjectOfType<QuestEmbarkView>(true); 
             }
         }
-
-
         public void InitQuestMission()
         {
             questController= GetComponent<QuestController>();   
@@ -216,8 +214,10 @@ namespace Quest
 
         public void On_QuestStart(QuestNames questName)
         {   
-            questController.questModel = ChgStateOfQuest(questName, QuestState.UnLocked);
-            ObjModel objModel  = questController.questModel.allObjModel[0];     ;
+            ChgStateOfQuest(questName, QuestState.UnLocked);
+            QuestModel questModel = GetQuestModel(questName);
+
+            ObjModel objModel  = questModel.allObjModel[0];     ;
             On_ObjStart(questName, objModel.objName);
             OnQuestStart?.Invoke(questName);
         }
@@ -232,7 +232,7 @@ namespace Quest
 
         public void On_ObjStart(QuestNames questName, ObjNames objName)
         {       
-            ObjModel objModel = questController.questModel.GetObjModel(objName);
+            ObjModel objModel = GetObjModel(questName, objName);
             objModel.OnObjStart(); 
             questController.objModel = objModel;
             if(MapService.Instance.pathController.HasPath(questName, objName)) // if obj has path as ? in map it unlocks here
@@ -243,10 +243,32 @@ namespace Quest
         }
         public void On_ObjEnd(QuestNames  questName, ObjNames objName)
         {
-            ObjModel objModel = questController.questModel.GetObjModel(objName);
+            Debug.Log(questName + " " + objName + " ");
+            ObjModel objModel = GetObjModel(questName, objName);
+            if(objModel != null)
             objModel.OnObjCompleted();
-            questController.Move2NextObj(objModel); // seq thru all obj and mark end of QUEST in case it's the last Obj
-            OnObjEnd?.Invoke(questName, objName);
+            else
+            {
+                Debug.LogError("ObjModel is nullc" + objName + questName);
+            }
+            questController.Move2NextObj(questName, objName); // seq thru all obj and mark end of QUEST in case it's the last Obj
+
+            try
+            {
+                OnObjEnd?.Invoke(questName, objName);
+            }
+            catch(Exception e)
+            {
+                Debug.LogError("OnObjEnd!!!" + e.Message);
+                Debug.LogError("OnObjEnd" + e.StackTrace);
+            }
+            
+        }
+        public ObjModel GetObjModel(QuestNames questName, ObjNames objName)
+        {
+            QuestModel questModel = allQuestModels.Find(t => t.questName == questName);
+            ObjModel objModel = questModel.allObjModel.Find(t => t.objName == objName);
+            return objModel; 
         }
         #region SAVE and LOAD
         public void SaveState()

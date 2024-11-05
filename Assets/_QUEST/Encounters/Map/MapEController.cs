@@ -29,19 +29,20 @@ namespace Quest
         }
 
 
-        public void ShowMapE(MapENames mapEName)
+        public void ShowMapE(MapENames mapEName, PathModel pathModel)
         {
             if(mapEOnDsply)
                 return;
             MapEModel mapEModel = GetMapEModel(mapEName); 
-            mapEView.GetComponent<MapEView>().InitEncounter(mapEModel);
+            mapEView.GetComponent<MapEView>().InitEncounter(mapEModel, pathModel);
             mapEOnDsply= true;
         }
-        public void ShowMapEResult2(MapENames mapEName) // called from the result MAPEBase
+        public void ShowMapEResult2(MapEbase mapEBase) // called from the result MAPEBase
         {   
-            MapEModel mapEModel = GetMapEModel(mapEName);
-            mapEView.GetComponent<MapEView>().ShowResult2Page();
+            mapEView.GetComponent<MapEView>().LoadEncounter(mapEBase);
             mapEOnDsply = true;
+            // set pathModel loadPathView
+
         }
 
 

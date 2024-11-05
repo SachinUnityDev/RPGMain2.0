@@ -19,5 +19,13 @@ MonoBehaviour:
   nodes:
   - nodeSeq: 1
     isChecked: 0
+    isSuccess: 0
+    noOfHalfDaysChgOnEnter: 0
+    noOfHalfDaysChgOnExit: 0
   - nodeSeq: 2
     isChecked: 0
+    isSuccess: 0
+    noOfHalfDaysChgOnEnter: 0
+    noOfHalfDaysChgOnExit: 0
+  pathPrefab: {fileID: 7972596753412367374, guid: c5d13a2530fd8c745be507f1ab934de9,
+    type: 3}

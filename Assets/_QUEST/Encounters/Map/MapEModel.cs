@@ -12,12 +12,14 @@ namespace Quest
         public MapENames mapEName;
         public string mapENameStr = "";
 
-
         [TextArea(5, 10)]
         public string descTxt;
         public string choiceAStr;
         public string choiceBStr;
-        public bool isCompleted; 
+        public bool isCompleted;
+
+        public PathModel pathModel; 
+
         public MapEModel(MapESO mapESO)
         {
             mapEName =mapESO.mapEName;

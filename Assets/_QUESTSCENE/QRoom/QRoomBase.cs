@@ -15,6 +15,5 @@ namespace Quest
         public abstract void Trigger2();
         public abstract void Trigger3();
 
-
     }
 }

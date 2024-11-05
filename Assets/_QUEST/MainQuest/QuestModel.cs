@@ -45,15 +45,15 @@ namespace Quest
         {
             return allObjModel; 
         }
-        public ObjModel GetObjModel(ObjNames objName)
-        {
-            int index = allObjModel.FindIndex(t=>t.objName== objName);
-            if (index != -1)
-                return allObjModel[index];
-            else
-                Debug.Log("Obj model not found" + objName);
-            return null; 
-        }
+        //public ObjModel GetObjModel(ObjNames objName)
+        //{
+        //    int index = allObjModel.FindIndex(t=>t.objName== objName);
+        //    if (index != -1)
+        //        return allObjModel[index];
+        //    else
+        //        Debug.Log("Obj model not found" + objName);
+        //    return null; 
+        //}
 
         public void OnQuestCompleted()
         {

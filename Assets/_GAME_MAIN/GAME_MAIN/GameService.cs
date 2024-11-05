@@ -36,10 +36,7 @@ namespace Common
 
         private void Start()
         {
-            //SceneManager.LoadScene((int)SceneName.INTRO, LoadSceneMode.Additive);  
-            Debug.Log("CORE SCENE STARTED");
-            SceneMgmtController sceneMgmtController =  SceneMgmtService.Instance.sceneMgmtController;
-            StartCoroutine(sceneMgmtController.LoadScene(SceneName.INTRO)); 
+            SceneMgmtService.Instance.LoadGameScene(GameScene.InIntro);
         }
 
         public GameModel GetCurrentGameModel(int slot)

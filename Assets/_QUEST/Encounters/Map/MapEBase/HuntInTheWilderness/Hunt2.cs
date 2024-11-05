@@ -18,7 +18,9 @@ namespace Quest
         public override void MapEContinuePressed()
         {
             EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
-            EncounterService.Instance.mapEController.ShowMapE(MapENames.Hunt3);
+            PathModel pathModel = MapService.Instance.pathController.currPathModel;
+
+            EncounterService.Instance.mapEController.ShowMapE(MapENames.Hunt3, pathModel);
         }
 
         public override void OnChoiceASelect()

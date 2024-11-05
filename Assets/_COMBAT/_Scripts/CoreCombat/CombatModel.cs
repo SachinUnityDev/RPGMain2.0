@@ -3,6 +3,7 @@ using Quest;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Town;
 using UnityEngine;
 
 namespace Combat
@@ -39,8 +40,9 @@ namespace Combat
     {
         public QuestNames questName; 
         public ObjNames objName;
-        public LandscapeNames landscapeName; 
-
+        public LandscapeNames landscapeName;
+        public MapEModel mapEModel; 
+        public QRoomModel qRoomModel;
 
         public EnemyPackName enemyPackName;
         public Result combatResult;
@@ -50,10 +52,19 @@ namespace Combat
         public List<KilledData> allKills = new List<KilledData>();  
         public List<CompSavedData> allSaved = new List<CompSavedData>();
 
-        public CombatModel(QuestNames questName, ObjNames objName, LandscapeNames landscapeName)
+        public CombatModel(iResult iResult, LandscapeNames landscapeName)
         {
-            this.questName = questName;
-            this.objName = objName; 
+             MapEbase mapEbase = iResult as MapEbase;
+            if (mapEbase != null)
+            {
+                mapEbase.mapEModel = mapEModel; 
+            }
+            //QRoomBase qRoomBase = iResult as QRoomBase;
+            //if (qRoomBase != null)
+            //{
+            //    qRoomModel = qRoomBase.qRoomModel; 
+            //}
+
             this.landscapeName = landscapeName;  
         }
 

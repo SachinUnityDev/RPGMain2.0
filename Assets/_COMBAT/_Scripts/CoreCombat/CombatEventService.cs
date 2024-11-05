@@ -98,14 +98,15 @@ namespace Combat
         }
 
 
-        public void StartCombat(CombatState combatState, LandscapeNames landscapeName, EnemyPackName enemyPackName, iResult iResult)
+        public void StartCombat(CombatState combatState, LandscapeNames landscapeName
+                    , EnemyPackName enemyPackName, iResult iResult)
         {
             this.enemyPackName = enemyPackName;
             this.landscapeName = landscapeName;
             this.combatState = combatState;
-            this.iResult = iResult; 
-            StartCoroutine(SceneMgmtService.Instance.sceneMgmtController.LoadScene(SceneName.COMBAT)); 
-            
+            this.iResult = iResult;
+
+            SceneMgmtService.Instance.LoadGameScene(GameScene.InCombat);             
         }
 
         // Only entry point for all the combat
@@ -182,8 +183,7 @@ namespace Combat
             
             QuestController questController = QuestMissionService.Instance.questController;
             LandscapeNames landscapeName = LandscapeService.Instance.currLandscape;
-            combatModel = new CombatModel(questController.questModel.questName
-                                        , questController.objModel.objName, landscapeName);
+            combatModel = new CombatModel(iResult,landscapeName);
             OnSOC?.Invoke();         
             Sequence seq = DOTween.Sequence(); 
             seq.AppendInterval(2.5f)
@@ -196,9 +196,10 @@ namespace Combat
         {
             Debug.Log(" ON EOC TRIGGER");            
             FortReset2FortOrg();
-            currCombatResult = combatResult;
-            
+            currCombatResult = combatResult;            
             iResult.OnResult(combatResult);
+            // change scene as per Iresult source
+
 
 
             OnEOC?.Invoke();

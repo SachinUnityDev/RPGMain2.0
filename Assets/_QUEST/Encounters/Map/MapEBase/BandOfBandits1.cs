@@ -12,7 +12,9 @@ namespace Quest
     {
         public override MapENames mapEName => MapENames.BandOfBanditsOne;
 
-        public GameScene gameScene => GameScene.InMapInteraction; 
+        public GameScene gameScene => GameScene.InMapInteraction;
+
+       
 
         CharNames charJoined;
         Currency money2Lose; 
@@ -51,7 +53,7 @@ namespace Quest
 
         public override void OnChoiceASelect()
         {
-            float chance = 100f;
+            float chance = 0f;
             if (chance.GetChance())
             {
                 resultStr = "Bandits ambushed you. Watch out!";
@@ -104,7 +106,7 @@ namespace Quest
                 strFX = $"<b>Party debuff:</b> -1 to all stats, 3 rds";
                 mapEResult = false;
             }
-            EncounterService.Instance.mapEController.ShowMapEResult2(mapEModel.mapEName); 
+            EncounterService.Instance.mapEController.ShowMapEResult2(this); 
 
 
 

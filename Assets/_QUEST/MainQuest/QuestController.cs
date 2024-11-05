@@ -8,7 +8,7 @@ namespace Quest
 {
     public class QuestController : MonoBehaviour
     {
-        public QuestModel questModel;
+        //public QuestModel currQuestModel;
         public QuestSO questSO;
         public QuestBase questBase;
         public ObjModel objModel;
@@ -21,8 +21,9 @@ namespace Quest
         }
 
 
-        public void Move2NextObj(ObjModel objModel)
+        public void Move2NextObj(QuestNames questName, ObjNames objName)
         {
+            QuestModel questModel = QuestMissionService.Instance.GetQuestModel(questName);
             int index = questModel.allObjModel.FindIndex(t=> t == objModel);
             if(index != -1)
             {
@@ -43,10 +44,10 @@ namespace Quest
 
         public void ShowQuestEmbarkView(QuestNames questName, ObjNames objName, QMarkView qMarkView)
         {
-            questModel = QuestMissionService.Instance.GetQuestModel(questName);
+           QuestModel questModel = QuestMissionService.Instance.GetQuestModel(questName);
             questBase = QuestMissionService.Instance.GetQuestBase(questName);   
             questSO= QuestMissionService.Instance.allQuestSO.GetQuestSO(questName);
-            objModel = questModel.GetObjModel(objName);
+            objModel = QuestMissionService.Instance.GetObjModel(questName, objName);
             
             QuestEmbarkView qEView = QuestMissionService.Instance.questEmbarkView; 
             qEView.ShowQuestEmbarkView(questModel, questSO, questBase, objModel, qMarkView); 

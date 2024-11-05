@@ -4,13 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 namespace Town
 {
     public interface iResult
     {
-        GameScene gameScene { get; }    
+        GameScene gameScene { get; }       
         void OnResult(Result result);    
     }
 
@@ -38,11 +39,22 @@ namespace Town
 
         public ServicePath servicePath => ServicePath.MapService; 
 
-        void Start()
+        void OnEnable()
         {
             GetControllerRef();
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
-        
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name == "TOWN")
+            {
+                pathView = FindObjectOfType<PathView>(true);
+            }
+        }
         public void InitMapService()
         {
             GetControllerRef();

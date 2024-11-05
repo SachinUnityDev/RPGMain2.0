@@ -1,3 +1,4 @@
+using Common;
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
@@ -52,6 +53,7 @@ namespace Quest
         public void OnNodeEnter(int node)
         {
             pathModel.currNode = pathModel.nodes[node];
+            CheckTownArrival(); // check if town is reached
         }
         public void Move2NextNode(bool isSuccess)
         {
@@ -65,6 +67,20 @@ namespace Quest
             MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move2TownOnFail();
             UpdatePathModelOnQFail();
         }
+
+        void CheckTownArrival()
+        {
+            if (pathModel.nodes[0].isChecked && pathModel.currNode.nodeSeq == 0)
+            {
+                MapService.Instance.pathController.currPathModel.currNode = pathModel.nodes[0];
+                bool isComplete =
+                MapService.Instance.pathController.ChkNMarkPathCompletion();
+                Debug.Log("IS COMPLETE: " + isComplete);
+                pathController.pawnTrans.GetComponent<PawnMove>().FadeOut();    
+                MapService.Instance.mapController.mapView.GetComponent<IPanel>().UnLoad();
+            }
+        }
+
         void UpdatePathModelOnQFail()
         {
             for (int i = 1; i < pathModel.nodes.Count; i++)
@@ -117,7 +133,7 @@ namespace Quest
         public void OnNodeExit(int nodeExit)
         {
             
-            for (int i = 0; i < transform.childCount ; i++)
+            for (int i = 1; i < transform.childCount ; i++)
             {
                 if (transform.GetChild(i).GetComponent<QMarkView>() != null) continue;  
                 

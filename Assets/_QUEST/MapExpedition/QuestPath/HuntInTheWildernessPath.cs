@@ -26,7 +26,7 @@ namespace Quest
 
         public override void OnNode1Enter()
         {
-            EncounterService.Instance.mapEController.ShowMapE(MapENames.BandOfBanditsOne);
+            EncounterService.Instance.mapEController.ShowMapE(MapENames.BandOfBanditsOne, pathModel);
             Debug.Log("Entered node 1");   
             //QuestMode questMode = QuestMissionService.Instance.currQuestMode; 
             //if(questMode == QuestMode.Stealth)
@@ -82,7 +82,7 @@ namespace Quest
 
         public override void OnNode2Enter()
         {
-            EncounterService.Instance.mapEController.ShowMapE(MapENames.Hunt1);
+            EncounterService.Instance.mapEController.ShowMapE(MapENames.Hunt1, pathModel);
         }
 
         public override void OnNode2Exit()
@@ -98,7 +98,7 @@ namespace Quest
             {
                 if (30f.GetChance())
                 {
-                    EncounterService.Instance.mapEController.ShowMapE(MapENames.BandOfBanditsTwo);
+                    EncounterService.Instance.mapEController.ShowMapE(MapENames.BandOfBanditsTwo,pathModel);
                 }
                 else
                 {
@@ -110,7 +110,7 @@ namespace Quest
             {
                 if (60f.GetChance())
                 {
-                    EncounterService.Instance.mapEController.ShowMapE(MapENames.BandOfBanditsTwo);
+                    EncounterService.Instance.mapEController.ShowMapE(MapENames.BandOfBanditsTwo, pathModel);
                 }
                 else
                 {
@@ -121,7 +121,7 @@ namespace Quest
             {
                 if (90f.GetChance())
                 {
-                    EncounterService.Instance.mapEController.ShowMapE(MapENames.BandOfBanditsTwo);
+                    EncounterService.Instance.mapEController.ShowMapE(MapENames.BandOfBanditsTwo, pathModel);
                 }
                 else
                 {

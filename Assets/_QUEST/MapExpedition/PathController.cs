@@ -114,7 +114,19 @@ namespace Quest
                 node.isSuccess = false;
             }
         }
-
+        public bool ChkNMarkPathCompletion()
+        {
+            foreach (NodeInfo node in currPathModel.nodes)
+            {
+                if (!node.isSuccess)
+                    return false;
+            }
+            currPathModel.isCompleted = true;
+            currPathModel.isDsplyed = false;
+            UpdatePathDsplyed(false);
+            QuestMissionService.Instance.On_ObjEnd(currPathModel.questName, currPathModel.objName); 
+            return true; 
+        }
         void InitPathBases()
         {
             pathFactory = GetComponent<PathFactory>(); allPathBase.Clear(); 
@@ -170,7 +182,7 @@ namespace Quest
                 if (pathModel.isDsplyed)
                 {
                     if (allPathOnDsply.Any(t => t.questNames == pathModel.questName && t.objName == pathModel.objName))
-                        continue;
+                        continue; // already added in view
 
                     PathSO pathSO = MapService.Instance.allPathSO.GetPathSO(pathModel.questName, pathModel.objName);
                     PathOnDsply pathOnDsply = new PathOnDsply(pathModel.questName, pathModel.objName, pathSO.pathPrefab);
@@ -179,9 +191,30 @@ namespace Quest
                     
                     AddPath2View(is2BeAddedInView);
                 }
+                else
+                {
+                    RemovePathFrmView(pathModel);
+                }
             }
 
-        }       
+        }    
+        void RemovePathFrmView(PathModel pathModel)
+        {
+            foreach (Transform child in pathView.MapPathContainer.transform)
+            {
+                PathQView pathQView = child.GetComponent<PathQView>();
+                if(pathQView != null)
+                {
+                    if(pathQView.questName == pathModel.questName && pathQView.objName == pathModel.objName)
+                    {
+                        allPathOnDsply.Remove(allPathOnDsply.Find(t => t.questNames == pathModel.questName && t.objName == pathModel.objName));
+                        Destroy(child.gameObject, 0.1f);
+                        break; 
+                    }
+                }
+            }
+        }
+
         public void UpdatePathNode(bool isSuccess)
         {
             currPathModel.currNode.isSuccess = isSuccess;

@@ -46,13 +46,25 @@ namespace Quest
             resultPage.GetComponent<ResultPgMapView>().InitResultPage(this, mapEBase, mapEModel);
         }
 
-        public void InitEncounter(MapEModel mapEModel)
+        public void InitEncounter(MapEModel mapEModel, PathModel pathModel)
         {
             this.mapEModel = mapEModel;
-            mapEBase = EncounterService.Instance.mapEController
-                        .GetMapEBase(mapEModel.mapEName);
+            this.mapEModel.pathModel = pathModel;  
+            mapEBase = EncounterService.Instance.mapEController.GetMapEBase(mapEModel.mapEName);
+
             mainPage.GetComponent<MainPgMapView>().InitMainPage(this, mapEBase, mapEModel);
             ShowMainPage();
+            Load();
+        }
+
+        public void LoadEncounter(MapEbase mapEBase)  // to be called from iResult
+        {
+            // check on pathModel which node was checked and then load the result page of MapEbase
+            mapEModel = mapEBase.mapEModel; 
+            this.mapEBase = mapEBase;
+            mainPage.gameObject.SetActive(false);
+            resultPage.gameObject.SetActive(true);
+            resultPage.GetComponent<ResultPgMapView>().InitResultPage(this, mapEBase, mapEModel);
             Load();
         }
 

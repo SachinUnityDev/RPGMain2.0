@@ -20,7 +20,7 @@ namespace Quest
             this.pathQView = pathQView;
             this.pathView = pathView;
             this.pathModel = pathModel;
-            pathModel.currNode= pathModel.nodes[0];
+            pathModel.currNode = pathModel.nodes[0];
             pathQView.Move2NextNode(true); // move from 0 Node 
         }
         
@@ -31,8 +31,6 @@ namespace Quest
             this.pathModel = pathModel;         
             pathQView.Move2NextNode(true);
         }    
-
-    
         public void Move(int currentNode)
         {
             // pathModel.. check current node index 
@@ -46,7 +44,7 @@ namespace Quest
             ;
             //  if(EncounterService.Instance.mapEController.mapEOnDsply)
             seq.Play()
-                .OnComplete(CheckTownArrival)
+                //.OnComplete(CheckTownArrival)
                 ;
 
         }
@@ -59,20 +57,16 @@ namespace Quest
                .Append(transform.DOLocalMove(pathQView.transform.GetChild(0).localPosition, 2.0f))
                .AppendCallback(()=>transform.GetComponent<BoxCollider2D>().enabled= true);
                 ;
-            unSuccessSeq.Play().OnComplete(()=>MapService.Instance.mapController.mapView.GetComponent<IPanel>().UnLoad());
+            unSuccessSeq.Play()
+                //.OnComplete(()=>MapService.Instance.mapController.mapView.GetComponent<IPanel>().UnLoad())
+                  //              .OnComplete(CheckTownArrival)
+                                ;
         }
 
-      
-
-
-        void CheckTownArrival()
+        public void FadeOut()
         {
-            if (pathModel.nodes[0].isChecked && pathQView.pathModel.currNode.nodeSeq ==0)
-            {
-                MapService.Instance.mapController.mapView.GetComponent<IPanel>().UnLoad();
-            }
-        }
-       
+            transform.GetComponent<Image>().DOFade(0.0f, 0.4f); 
+        }    
 
         Transform GetNextPos(int currentNode)
         {

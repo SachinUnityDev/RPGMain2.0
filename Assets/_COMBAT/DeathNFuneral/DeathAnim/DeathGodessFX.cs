@@ -15,9 +15,11 @@ namespace Combat
         Sequence deathSeq;
         public void PlayDeathAnim(CharController charController)
         {
-            SkeletonAnimation skeletonAnim = charController.gameObject.GetComponentInChildren<SkeletonAnimation>(); 
-            charController.GetComponent<BoxCollider2D>().enabled = false;  
-
+            SkeletonAnimation skeletonAnim = charController.gameObject.GetComponentInChildren<SkeletonAnimation>(true); 
+            charController.GetComponent<BoxCollider2D>().enabled = false;
+            if (skeletonAnim == null) return;
+            if (!skeletonAnim.gameObject.activeInHierarchy)
+                return; 
 
             deathSeq = DOTween.Sequence();
             deathSeq

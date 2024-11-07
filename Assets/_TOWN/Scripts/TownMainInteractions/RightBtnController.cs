@@ -90,7 +90,7 @@ namespace Town
         }
         void OnMapBtnClick()
         {
-          MapService.Instance.mapIntViewPanel.GetComponent<IPanel>().Load();  
+          MapService.Instance.mapView.GetComponent<IPanel>().Load();  
           
         }
         void OnEventBtnClick()

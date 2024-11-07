@@ -27,6 +27,7 @@ namespace Quest
 
         public void InitMapController()
         {
+            mapView = FindObjectOfType<MapView>(true);
             mapView.InitMapView();
         }
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)

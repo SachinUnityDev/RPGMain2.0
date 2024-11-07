@@ -52,18 +52,24 @@ namespace Quest
 
         private void OnEnable()
         {
-            SceneManager.activeSceneChanged += OnSceneLoad;
+            SceneManager.sceneLoaded += OnSceneLoad;
             pathView = FindObjectOfType<PathView>(true);
         }
         private void OnDisable()
         {
-            SceneManager.activeSceneChanged -= OnSceneLoad;
+           // SceneManager.sceneLoaded -= OnSceneLoad;
         }
-        void OnSceneLoad(Scene oldScene, Scene newScene)
+        void OnSceneLoad(Scene newScene, LoadSceneMode loadSceneMode)
         {
             if (newScene.name == "TOWN")
             {
-                pathView = FindObjectOfType<PathView>(true);    
+                pathView = FindObjectOfType<PathView>(true);
+                pathView.MapPathContainer = FindObjectOfType<MapPathContainer>(true).transform;
+                pawnTrans = FindObjectOfType<PawnMove>(true).transform;
+            }
+            else
+            {
+              //  allPathOnDsply.Clear();
             }
         }
 
@@ -88,19 +94,21 @@ namespace Quest
             InitPathBases();
             UpdatePathDsplyed(false);
         }
-        public void LoadPaths(List<PathModel> allPathModels)
+        public void LoadPaths()
         {
-            allPathModel = allPathModels.DeepClone();
-            InitPathBases();
+            allPathOnDsply.Clear();
+          //  allPathModel = allPathModels.DeepClone();
+            //InitPathBases();
             // check if all pathDsplyed in allPathModels have been addedToview ...MAPCONTAINER
             UpdatePathDsplyed(true); 
+            
         }
 
         void ResetAllInCompletePaths()
         {
             foreach (PathModel pathModel in allPathModel)
             {
-                if(pathModel.isDsplyed)
+                if(pathModel.isDsplyed && pathModel.isCompleted)
                 {
                     ResetModel(pathModel);        
                 }
@@ -218,7 +226,7 @@ namespace Quest
         public void UpdatePathNode(bool isSuccess)
         {
             currPathModel.currNode.isSuccess = isSuccess;
-            currPathModel.nodes.Find(t => t.nodeSeq == currPathModel.currNode.nodeSeq).isSuccess = isSuccess;
+           // currPathModel.nodes.Find(t => t.nodeSeq == currPathModel.currNode.nodeSeq).isSuccess = isSuccess; // should work without this
         }
         public void On_PathUnLock(QuestNames questName, ObjNames objName)
         {           

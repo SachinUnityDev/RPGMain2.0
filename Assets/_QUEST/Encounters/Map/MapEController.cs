@@ -2,8 +2,10 @@ using Common;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using Town;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 namespace Quest
@@ -27,7 +29,22 @@ namespace Quest
         {
             mapEFactory= GetComponent<MapEFactory>();   
         }
+        private void OnEnable()
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
 
+        void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+        {
+            if (scene.name == "TOWN")
+            {
+                mapEView = FindObjectOfType<MapEView>(true);                
+            }
+        }
 
         public void ShowMapE(MapENames mapEName, PathModel pathModel)
         {
@@ -42,7 +59,7 @@ namespace Quest
             mapEView.GetComponent<MapEView>().LoadEncounter(mapEBase);
             mapEOnDsply = true;
             // set pathModel loadPathView
-
+            Debug.Log("ShowMapEResult2");
         }
 
 

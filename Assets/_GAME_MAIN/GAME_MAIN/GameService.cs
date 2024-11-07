@@ -78,7 +78,6 @@ namespace Common
 
         void OnEnable()
         {  
-           
             gameController= GetComponent<GameController>();
             SceneManager.activeSceneChanged += UpdateGameScene; 
         }

@@ -21,8 +21,14 @@ namespace Quest
         [SerializeField] PathModel currPathModel;
 
         public bool isQInProgress = false;
-        public PathController pathController; 
-        
+        public PathController pathController;
+
+
+        private void OnEnable()
+        {
+            MapPathContainer = FindObjectOfType<MapPathContainer>(true).transform;
+        }
+
         public void PathViewInit(PathController pathController)
         {
             this.pathController = pathController;
@@ -37,6 +43,7 @@ namespace Quest
                 }
             }
         }
+        
 
         public void OnPathEmbark(QuestNames questName, ObjNames objName, PathQView pathQView)
         {

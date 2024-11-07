@@ -20,13 +20,13 @@ namespace Quest
         }
         public void Init()
         {
-            Load();
+           // Load();
         }
 
         public void Load()
         {
-            UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
-            
+          //  UIControlServiceGeneral.Instance.TogglePanel(gameObject, true);
+            gameObject.SetActive(true);
         }
         public void ShowMainPage()
         {

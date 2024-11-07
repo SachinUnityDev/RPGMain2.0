@@ -194,13 +194,9 @@ namespace Combat
 
         public void On_EOC(Result combatResult)
         {
-            Debug.Log(" ON EOC TRIGGER");            
             FortReset2FortOrg();
             currCombatResult = combatResult;            
             iResult.OnResult(combatResult);
-            // change scene as per Iresult source
-
-
 
             OnEOC?.Invoke();
             combatState = CombatState.INCombat_End;

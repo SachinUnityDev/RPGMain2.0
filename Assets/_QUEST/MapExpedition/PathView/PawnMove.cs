@@ -31,6 +31,8 @@ namespace Quest
             this.pathModel = pathModel;         
             pathQView.Move2NextNode(true);
         }    
+
+
         public void Move(int currentNode)
         {
             // pathModel.. check current node index 

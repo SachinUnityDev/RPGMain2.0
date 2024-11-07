@@ -5,6 +5,7 @@ using Common;
 using Interactables;
 using Town;
 using Combat;
+using UnityEngine.SceneManagement;
 
 namespace Quest
 {
@@ -41,7 +42,6 @@ namespace Quest
             }
             else
             {
-
                 mapEResult = true;    
                 EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
                 MapService.Instance.pathController.pathQView.Move2NextNode(mapEResult);
@@ -88,6 +88,8 @@ namespace Quest
 
         public void OnResult(Result result)
         {
+            isCombatToBePlayed = false;
+
             if (result == Result.Victory)
             {
                 resultStr = "You defeated the bandits!";
@@ -106,11 +108,20 @@ namespace Quest
                 strFX = $"<b>Party debuff:</b> -1 to all stats, 3 rds";
                 mapEResult = false;
             }
-            EncounterService.Instance.mapEController.ShowMapEResult2(this); 
-
-
-
+            // TownScene Once it is loaded, Open Map Encounter view 
+            // then load the Map Encounter view with the current Map Encounter  
+            SceneMgmtService.Instance.LoadGameScene(GameScene.InMapInteraction);
+            SceneManager.activeSceneChanged += ShowResult;
 
         }
+
+        void ShowResult(Scene NewScene, Scene old)
+        {
+            Debug.Log("SCENE LOADED");
+            MapService.Instance.LoadView(); 
+          //  EncounterService.Instance.mapEController.ShowMapEResult2(this);
+            SceneManager.activeSceneChanged += ShowResult;
+        }
+
     }
 }

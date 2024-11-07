@@ -1,5 +1,6 @@
 using Intro;
 using Quest;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Town;
@@ -10,7 +11,8 @@ namespace Common
 {
     public class SceneMgmtController : MonoBehaviour
     {
-       
+        
+
         [SerializeField] GameObject SceneTransitPrefab;
         [SerializeField] GameObject sceneTransitGO;
 
@@ -47,6 +49,7 @@ namespace Common
                 Debug.Log("Loading Scene");
                 yield return null;               
             }
+            SceneMgmtService.Instance.On_GameSceneLoaded(SceneName2GameScene(sceneName));
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName.ToString()));
             lastScene = newScene; 
             newScene = sceneName;            
@@ -62,7 +65,6 @@ namespace Common
             {
                 yield return null;
             }
-          //  SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName.ToString()));
            
         }
         public void StartSceneTransit()
@@ -84,10 +86,12 @@ namespace Common
             sceneTransitStarted = true;
             sceneTransitView.StartAnim();
         }
+
+        // Method to be removed evenually
         void OnSceneLoaded(Scene current, Scene next)
         {
             // end here 
-            UIControlServiceGeneral.Instance.CloseAllPanels();
+           // UIControlServiceGeneral.Instance.CloseAllPanels();
 
             if(sceneTransitGO!= null)
             {
@@ -103,28 +107,30 @@ namespace Common
             }
         }
 
-        void OnCombatLoadPressed()
+        GameScene SceneName2GameScene(SceneName sceneName)
         {
-
-
-        }
-
-        SceneName GetSceneName(Scene scene)
-        {
-            switch (scene.name)
+            switch (sceneName)
             {
-                case "Intro":
-                    return SceneName.TOWN;
-                case "Town":
-                    return SceneName.TOWN;
-                case "Quest":
-                    return SceneName.QUEST;
-                case "Combat":
-                    return SceneName.COMBAT;
+                case SceneName.INTRO:
+                    return GameScene.InIntro;
+                case SceneName.TOWN:
+                    return GameScene.InTown;    
+
+                case SceneName.QUEST:
+                    return GameScene.InQuestRoom;
+
+                case SceneName.COMBAT:
+                    return GameScene.InCombat;
+
+                case SceneName.CORE:
+                    return GameScene.InCore;
+
                 default:
-                    return SceneName.INTRO;
+                    return GameScene.None;  
             }
         }
+
+      
 
     }
 }

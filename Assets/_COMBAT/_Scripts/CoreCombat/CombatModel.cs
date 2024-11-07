@@ -57,7 +57,7 @@ namespace Combat
              MapEbase mapEbase = iResult as MapEbase;
             if (mapEbase != null)
             {
-                mapEbase.mapEModel = mapEModel; 
+                mapEModel= mapEbase.mapEModel; 
             }
             //QRoomBase qRoomBase = iResult as QRoomBase;
             //if (qRoomBase != null)

@@ -16,10 +16,11 @@ namespace Quest
 
         [Header(" Global Var")]
         public PathView pathView; 
-        //public List<PathNodeView> allPathNodes = new List<PathNodeView>();
 
         PathController pathController;
-        public PathModel pathModel;    
+        public PathModel pathModel;   
+        
+
         public void InitPathQ(PathView pathView, PathController pathController)
         {
             this.pathView = pathView;
@@ -48,6 +49,12 @@ namespace Quest
             {
                 MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().PawnMoveLoad(pathView, this, pathModel);
             }
+        }
+
+        void SpawnPawnOnLastPos()
+        {
+            PawnMove pawnMove = MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>(); 
+
         }
 
         public void OnNodeEnter(int node)
@@ -131,8 +138,7 @@ namespace Quest
         }
 
         public void OnNodeExit(int nodeExit)
-        {
-            
+        { 
             for (int i = 1; i < transform.childCount ; i++)
             {
                 if (transform.GetChild(i).GetComponent<QMarkView>() != null) continue;  

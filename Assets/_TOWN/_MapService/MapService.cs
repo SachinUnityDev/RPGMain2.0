@@ -19,24 +19,18 @@ namespace Town
     public class MapService : MonoSingletonGeneric<MapService>, ISaveable 
     {
         [Header("view")]
-        public GameObject mapIntViewPanel;
+        public MapView mapView;
         public PathView pathView;
 
         [Header("Controllers")]
-        public PathController pathController;
-       // public PathFactory pathFactory;
+        public PathController pathController;       
         public AllPathSO allPathSO; 
-
-
 
         [Header("Map Controllers")]
         public MapController mapController;
 
-
         [Header(" All Path Nodes")]      
         public PathSO currPathSO;
-
-
         public ServicePath servicePath => ServicePath.MapService; 
 
         void OnEnable()
@@ -53,9 +47,10 @@ namespace Town
             if (scene.name == "TOWN")
             {
                 pathView = FindObjectOfType<PathView>(true);
+                mapView = FindObjectOfType<MapView>(true);
             }
         }
-        public void InitMapService()
+        public void Init()
         {
             GetControllerRef();
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
@@ -79,13 +74,18 @@ namespace Town
             }
             mapController.InitMapController();// no load needed
             pathView.PathViewInit(pathController);
-            
-
         }
         void GetControllerRef() {
             pathController = GetComponent<PathController>();
             mapController = GetComponent<MapController>();
         }   
+
+        public void LoadView()
+        {
+            Debug.Log("LoadView CALLED"); 
+            pathController.LoadPaths(); 
+            pathView.PathViewInit(pathController);
+        }
         public void SaveState()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
@@ -117,7 +117,8 @@ namespace Town
                     PathModel pathModel = JsonUtility.FromJson<PathModel>(contents);
                     allpathModel.Add(pathModel);
                 }
-                pathController.LoadPaths(allpathModel); 
+                pathController.allPathModel = allpathModel.DeepClone();
+                pathController.LoadPaths(); 
             }
             else
             {

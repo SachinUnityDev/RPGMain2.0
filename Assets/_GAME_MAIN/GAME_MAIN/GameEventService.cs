@@ -56,7 +56,7 @@ namespace Common
                 OnTownEnter?.Invoke(LocationName.Nekkisari);
                 QuestMissionService.Instance.InitQuestMission();
                 LandscapeService.Instance.InitLandscape();
-                MapService.Instance.InitMapService(); // to be put below questmission
+                MapService.Instance.Init(); // to be put below questmission
                 LootService.Instance.InitLootService();
                 if (GameService.Instance.gameController.isQuickStart)
                     WelcomeService.Instance.On_QuickStart();
@@ -100,7 +100,7 @@ namespace Common
                 OnTownEnter?.Invoke(LocationName.Nekkisari);
                 QuestMissionService.Instance.InitQuestMission();  // build a load state
                 LandscapeService.Instance.InitLandscape();  // build a load State
-                MapService.Instance.InitMapService(); // To be Put below Quest Mission ..../// build a load state
+                MapService.Instance.LoadState(); // To be Put below Quest Mission ..../// build a load state
                 LootService.Instance.InitLootService();
                 SkillService.Instance.LoadState(); 
                 Set_GameState(GameState.OnLoadGameStartComplete);

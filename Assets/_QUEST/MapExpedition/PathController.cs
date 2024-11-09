@@ -79,18 +79,18 @@ namespace Quest
         }
         public void InitPath(AllPathSO allPathSO)
         {
-            if(allPathModel.Count > 0)
-            {
-                ResetAllInCompletePaths();
-            }
-            else
-            {
+            //if(allPathModel.Count > 0)
+            //{
+            //    ResetAllInCompletePaths();  // no do this on town reached
+            //}
+            //else
+            //{
                 foreach (PathSO pathSO in allPathSO.allPathSO)
                 {
                     PathModel pathModel = new PathModel(pathSO);
                     allPathModel.Add(pathModel);
                 }
-            }
+            //}
             InitPathBases();
             UpdatePathDsplyed(false);
         }
@@ -103,6 +103,8 @@ namespace Quest
             UpdatePathDsplyed(true); 
             
         }
+
+
 
         void ResetAllInCompletePaths()
         {

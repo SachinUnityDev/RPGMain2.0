@@ -20,10 +20,6 @@ namespace Common
         {
             sceneMgmtController = GetComponent<SceneMgmtController>();
         }
-        public void On_GameSceneLoaded(GameScene gameScene)
-        {
-            OnGameSceneLoaded?.Invoke(gameScene);
-        }
         public void LoadGameScene(GameScene gameScene)
         {
             UIControlServiceGeneral.Instance.CloseAllPanels();// clears Panel list
@@ -52,7 +48,7 @@ namespace Common
                     break;
                 case GameScene.InMapInteraction:                    
                     StartCoroutine(sceneMgmtController.LoadScene(SceneName.TOWN));
-                    OnGameSceneLoaded += OpenMapE; 
+                    SceneManager.activeSceneChanged += OpenMapE; 
                     break;
                 default:
                     break;
@@ -60,13 +56,15 @@ namespace Common
 
         }
 
-        void OpenMapE(GameScene gameScene)
+        void OpenMapE(Scene oldScene, Scene newScene)
         {
-            if(gameScene != GameScene.InTown)
-            {
-                return;
-            }
+            GameScene gameScene = sceneMgmtController.GetGameSceneNameFrmSceneName(newScene); 
+            if (gameScene != GameScene.InTown)            
+                return;             
             MapService.Instance.mapView.GetComponent<IPanel>().Load();
+            SceneManager.activeSceneChanged -= OpenMapE;
+
+            // GameService.Instance.currGameModel.gameScene = GameScene.InMapInteraction;
         }
 
 

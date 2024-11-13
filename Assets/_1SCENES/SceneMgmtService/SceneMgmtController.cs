@@ -48,8 +48,7 @@ namespace Common
             {
                 Debug.Log("Loading Scene");
                 yield return null;               
-            }
-            SceneMgmtService.Instance.On_GameSceneLoaded(SceneName2GameScene(sceneName));
+            }           
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName.ToString()));
             lastScene = newScene; 
             newScene = sceneName;            
@@ -107,24 +106,20 @@ namespace Common
             }
         }
 
-        GameScene SceneName2GameScene(SceneName sceneName)
+        public GameScene GetGameSceneNameFrmSceneName(Scene scene)
         {
-            switch (sceneName)
+            switch (scene.name)
             {
-                case SceneName.INTRO:
+                case "INTRO":
                     return GameScene.InIntro;
-                case SceneName.TOWN:
+                case "TOWN":
                     return GameScene.InTown;    
-
-                case SceneName.QUEST:
+                case "QUEST":
                     return GameScene.InQuestRoom;
-
-                case SceneName.COMBAT:
+                case "COMBAT":
                     return GameScene.InCombat;
-
-                case SceneName.CORE:
+                case "CORE":
                     return GameScene.InCore;
-
                 default:
                     return GameScene.None;  
             }

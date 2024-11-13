@@ -19,8 +19,6 @@ namespace Quest
 
         PathController pathController;
         public PathModel pathModel;   
-        
-
         public void InitPathQ(PathView pathView, PathController pathController)
         {
             this.pathView = pathView;
@@ -47,14 +45,19 @@ namespace Quest
             // init Pawn move here too
             if (pathModel.currNode.nodeSeq != 0)
             {
-                MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().PawnMoveLoad(pathView, this, pathModel);
+
+                MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().PawnSpawn(pathView, this, pathModel);
+                OpenCurrInteract();
             }
         }
 
-        void SpawnPawnOnLastPos()
+        void OpenCurrInteract()
         {
-            PawnMove pawnMove = MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>(); 
-
+            // Open the result page
+            //if(pathModel.currNode.isChecked) // last node
+            //{
+            EncounterService.Instance.mapEController.DsplyResults();            //}
+            // this will contain checks and balances for the current node
         }
 
         public void OnNodeEnter(int node)
@@ -62,17 +65,17 @@ namespace Quest
             pathModel.currNode = pathModel.nodes[node];
             CheckTownArrival(); // check if town is reached
         }
-        public void Move2NextNode(bool isSuccess)
+        public void Move2NextNode()
         {
-            MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move(pathModel.currNode.nodeSeq);
-            MapService.Instance.pathController.UpdatePathNode(isSuccess); 
+            MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move(pathModel.currNode.nodeSeq);            
             OnNodeExit(pathModel.currNode.nodeSeq);
             OnNodeExit4Base(pathModel.currNode.nodeSeq);     
         }
         public void Move2TownFail()
         {
             MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().Move2TownOnFail();
-            UpdatePathModelOnQFail();
+            //UpdatePathModelOnQFail();// was same as reset
+            pathController.ResetModel(pathController.currPathModel); 
         }
 
         void CheckTownArrival()
@@ -88,14 +91,14 @@ namespace Quest
             }
         }
 
-        void UpdatePathModelOnQFail()
-        {
-            for (int i = 1; i < pathModel.nodes.Count; i++)
-            {
-                pathModel.nodes[i].isChecked = false;
-            }
-            pathModel.nodes[0].isChecked = true;
-        }
+        //void UpdatePathModelOnQFail()
+        //{
+        //    for (int i = 1; i < pathModel.nodes.Count; i++)
+        //    {
+        //        pathModel.nodes[i].isChecked = false;
+        //    }
+        //    pathModel.nodes[0].isChecked = true;
+        //}
         void OnNodeExit4Base(int node)
         {
 
@@ -128,14 +131,7 @@ namespace Quest
             }
 
         }
-        public void SpawnInTown()
-        {
-
-        }
-        public void MovetoOrgNode()
-        {
-
-        }
+      
 
         public void OnNodeExit(int nodeExit)
         { 

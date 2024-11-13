@@ -48,6 +48,12 @@ namespace Common
         {
             return profileName;
         }
+        public void SetGameScene(GameScene gameScene)
+        {
+            this.gameScene = gameScene;
+        }
+
+
     }
 
 }

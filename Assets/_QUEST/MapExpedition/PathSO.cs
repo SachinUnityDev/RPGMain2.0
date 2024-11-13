@@ -27,12 +27,7 @@ namespace Quest
             this.isSuccess = isSuccess;
         }
     }
-    //public enum PathState
-    //{
-    //    Locked, 
-    //    UnLocked, 
-    //    Completed, 
-    //}
+
     [CreateAssetMenu(fileName = "PathSO", menuName = "Quest/PathSO")]
     public class PathSO : ScriptableObject
     {

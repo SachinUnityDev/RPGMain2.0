@@ -85,9 +85,9 @@ namespace Town
         }
         public void Load()
         {
-            GameService.Instance.currGameModel.gameScene = GameScene.InMapInteraction;
-            MapService.Instance.Init();
-            UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(this.gameObject, true); 
+            GameService.Instance.currGameModel.SetGameScene(GameScene.InMapInteraction);
+            UIControlServiceGeneral.Instance.TogglePanelNCloseOthers(this.gameObject, true);
+            MapService.Instance.pathController.LoadPathOnMapOpen();
             worldView.gameObject.SetActive(false);
             nekkiView.gameObject.SetActive(true);   
             
@@ -97,7 +97,7 @@ namespace Town
         {
              //MapService.Instance.SaveState();
             UIControlServiceGeneral.Instance.TogglePanel(this.gameObject, false);
-            GameService.Instance.currGameModel.gameScene = GameScene.InTown;
+            GameService.Instance.currGameModel.SetGameScene(GameScene.InTown);
         }
 
         public void Init()

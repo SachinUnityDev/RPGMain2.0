@@ -14,7 +14,7 @@ namespace Quest
         public override void MapEContinuePressed()
         {
             EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
-            MapService.Instance.pathController.pathQView.Move2NextNode(mapEResult);
+            MapService.Instance.pathController.NodeResult(mapEResult);
         }
 
         public override void OnChoiceASelect()

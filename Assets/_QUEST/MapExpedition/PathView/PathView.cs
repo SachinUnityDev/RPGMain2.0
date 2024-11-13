@@ -49,7 +49,7 @@ namespace Quest
         {
             currPathModel = MapService.Instance.pathController.GetPathModel(questName, objName);            
             if (currPathModel != null)
-                pawnMove.PawnMoveInit(this, pathQView, currPathModel);
+                pawnMove.PawnMoveEmbark(this, pathQView, currPathModel);
         }
      
         public void OnPathExit()

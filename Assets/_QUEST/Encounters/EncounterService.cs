@@ -27,7 +27,7 @@ namespace Quest
         public QuestEController questEController;
 
         [Header("Quest Encounter TBR")]
-        public AllQuestESO allQuestESO;
+        public AllQuestESO allQuestESO; 
 
         public ServicePath servicePath => ServicePath.EncounterService;
 

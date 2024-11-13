@@ -102,7 +102,7 @@ namespace Quest
                 }
                 else
                 {
-                    MapService.Instance.pathController.pathQView.Move2NextNode(true);
+                    MapService.Instance.pathController.NodeResult(true);
                 }
 
             }
@@ -114,7 +114,7 @@ namespace Quest
                 }
                 else
                 {
-                    MapService.Instance.pathController.pathQView.Move2NextNode(true);
+                    MapService.Instance.pathController.NodeResult(true);
                 }
             }
             else if (questMode == QuestMode.Taunt)
@@ -125,7 +125,7 @@ namespace Quest
                 }
                 else
                 {
-                    MapService.Instance.pathController.pathQView.Move2NextNode(true);
+                    MapService.Instance.pathController.NodeResult(true);
                 }
             }
         }

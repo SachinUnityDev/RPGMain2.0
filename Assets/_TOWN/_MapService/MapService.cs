@@ -80,12 +80,12 @@ namespace Town
             mapController = GetComponent<MapController>();
         }   
 
-        public void LoadView()
-        {
-            Debug.Log("LoadView CALLED"); 
-            pathController.LoadPaths(); 
-            pathView.PathViewInit(pathController);
-        }
+        //public void LoadView()
+        //{
+        //    Debug.Log("LoadView CALLED"); 
+        //    pathController.LoadPaths(); 
+        //  //  pathView.PathViewInit(pathController); mpt needed
+        //}
         public void SaveState()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
@@ -125,6 +125,8 @@ namespace Town
                 Debug.LogError("Service Directory missing");
             }
         }
+
+
 
         public void ClearState()
         {

@@ -11,7 +11,7 @@ namespace Quest
     {
         public MapENames mapEName;
         public string mapENameStr = "";
-
+        public bool isDsplyed = false; 
         [TextArea(5, 10)]
         public string descTxt;
         public string choiceAStr;

@@ -1,4 +1,5 @@
 using Common;
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,13 +18,16 @@ namespace Quest
         public bool mapEOnDsply = false; 
         [Header("Map E view")]
         public MapEView mapEView;
-       // public MapENodePtrEvents mapENodePtrEvents; // ref to node on map that triggered the MapE 
 
         public List<MapEModel> allMapEModels = new List<MapEModel>();
         public List<MapEbase> allMapEBases= new List<MapEbase>();
         [SerializeField] int mapBaseCount = 0;
 
-        MapEFactory mapEFactory; 
+        MapEFactory mapEFactory;
+
+        [Header("Inter Scene ref for Current mapEbase")]
+        public MapEbase currMapEBase;  
+
 
         void Awake()
         {
@@ -51,15 +55,20 @@ namespace Quest
             if(mapEOnDsply)
                 return;
             MapEModel mapEModel = GetMapEModel(mapEName); 
+            mapEModel.isDsplyed = true; 
             mapEView.GetComponent<MapEView>().InitEncounter(mapEModel, pathModel);
             mapEOnDsply= true;
         }
-        public void ShowMapEResult2(MapEbase mapEBase) // called from the result MAPEBase
-        {   
-            mapEView.GetComponent<MapEView>().LoadEncounter(mapEBase);
+        public MapEbase GetCurrentDsplyedMapEBase()
+        {
+           return allMapEBases.Find(t => t.mapEModel.isDsplyed);
+        }
+        public void DsplyResults() // called from the result MAPEBase
+        {
+            MapEModel mapEModel = currMapEBase.mapEModel; 
+            mapEModel.isDsplyed = true;
+            mapEView.GetComponent<MapEView>().LoadEncounterResult(currMapEBase);
             mapEOnDsply = true;
-            // set pathModel loadPathView
-            Debug.Log("ShowMapEResult2");
         }
 
 
@@ -114,6 +123,10 @@ namespace Quest
             return null;
         }
 
+        public void SetMapEBaseAsCurrent(MapEbase mapEbase)
+        {
+            currMapEBase = mapEbase;
+        }
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.C))

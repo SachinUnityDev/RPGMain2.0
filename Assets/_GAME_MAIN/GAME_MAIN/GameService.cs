@@ -113,20 +113,23 @@ namespace Common
                     gameScene = GameScene.None;
                     break;
             }
-            //if (sceneName== (int)SceneName.TOWN)
-            //    gameScene = GameScene.InTown;
-            //if ((GameScene)index == GameScene.InCombat)
-            //    gameScene = GameScene.InCombat;
-            //if ((GameScene)index == GameScene.InQuestRoom)
-            //    gameScene = GameScene.InQuestRoom;
-            //if ((GameScene)index == GameScene.InIntro)
-            //    gameScene = GameScene.InIntro;
-            //if ((GameScene)index == GameScene.InCore)
-            //    gameScene = GameScene.InCore;
-
-            currGameModel.gameScene = gameScene;
             GameSceneLoad(gameScene);
         }
+        public void GameSceneLoad(GameScene gameScene)
+        {
+            if (gameScene == GameScene.InCore)
+                GameEventService.Instance.On_CoreSceneLoaded();
+            if (gameScene == GameScene.InIntro)
+                GameEventService.Instance.On_IntroLoaded();
+            if (gameScene == GameScene.InCombat)
+                GameEventService.Instance.On_CombatEnter();
+            if (gameScene == GameScene.InTown)
+                GameEventService.Instance.OnTownLoaded();
+            currGameModel.SetGameScene(gameScene);
+            GameEventService.Instance.On_GameSceneChg(gameScene);
+        }
+
+
         public void Init()
         {
             gameController = transform.GetComponent<GameController>();
@@ -151,7 +154,6 @@ namespace Common
             GameEventService.Instance.Set_GameState(GameState.OnNewGameStart);
             
         }
-
         // call this after profile slot and saveslot is selected    
         public void LoadGame(GameModel gameModel)
         {
@@ -180,20 +182,7 @@ namespace Common
             this.saveSlot = saveSlot;
             this.profileSlot = profileSlot;
         }
-        public void GameSceneLoad(GameScene gameScene)
-        {
-            if (gameScene == GameScene.InCore)
-                GameEventService.Instance.On_CoreSceneLoaded();
-            if (gameScene == GameScene.InIntro)
-                GameEventService.Instance.On_IntroLoaded(); 
-            if (gameScene == GameScene.InCombat)
-                GameEventService.Instance.On_CombatEnter();
-            if (gameScene == GameScene.InTown)
-                GameEventService.Instance.OnTownLoaded();
-            
-            currGameModel.gameScene = gameScene;
-            GameEventService.Instance.On_GameSceneChg(gameScene);
-        }
+   
 
         #region SAVE AND LOAD 
 

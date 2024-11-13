@@ -92,31 +92,63 @@ namespace Quest
                 }
             //}
             InitPathBases();
-            UpdatePathDsplyed(false);
+            UpdatePathDsplyed();
         }
         public void LoadPaths()
         {
-            allPathOnDsply.Clear();
-          //  allPathModel = allPathModels.DeepClone();
-            //InitPathBases();
-            // check if all pathDsplyed in allPathModels have been addedToview ...MAPCONTAINER
-            UpdatePathDsplyed(true); 
-            
+            allPathOnDsply.Clear();          
+            UpdatePathDsplyed();   // will update the pathOnDsply and set the pawn in place
+            //if (currPathModel != null)
+            //{
+            //    if(currPathModel.isDsplyed)
+            //    {   
+            //       MapEbase mapEBase = EncounterService.Instance.mapEController.GetCurrentDsplyedMapEBase();
+            //       EncounterService.Instance.mapEController.ShowMapEResult2(mapEBase); 
+            //    }
+            //}
+            //else
+            //{
+            //    Debug.Log("!!!!! CURRENT PATH MODEL IS NULL ");  
+            //}
         }
-
-
-
-        void ResetAllInCompletePaths()
+        public void LoadPathOnMapOpen()
+        {
+            UpdatePathDsplyed();   // will update the pathOnDsply and set the pawn in place
+        }
+        public void NodeResult(bool isSuccess)
+        {
+            MapService.Instance.pathController.UpdatePathNode(isSuccess);
+            if(isSuccess)
+            {
+                MapService.Instance.pathController.pathQView.Move2NextNode();  
+            }
+            else
+            {
+                pathQView.Move2TownFail();
+            }
+        }
+        public PathModel Load2CurrPath()
+        {
+            PathModel pathModel = GetCurrentPath();
+            if (pathModel.currNode.isChecked)
+            {
+                return pathModel; 
+            }
+            return null; 
+        }
+        PathModel GetCurrentPath()
         {
             foreach (PathModel pathModel in allPathModel)
             {
-                if(pathModel.isDsplyed && pathModel.isCompleted)
+                if (pathModel.isDsplyed && !pathModel.isCompleted)
                 {
-                    ResetModel(pathModel);        
+                    if(pathModel.currNode != pathModel.nodes[0])
+                        return pathModel;                      
                 }
             }
+            return null; 
         }
-        void ResetModel(PathModel pathModel)
+        public void ResetModel(PathModel pathModel)
         {
             foreach (NodeInfo node in pathModel.nodes)
             {
@@ -133,7 +165,7 @@ namespace Quest
             }
             currPathModel.isCompleted = true;
             currPathModel.isDsplyed = false;
-            UpdatePathDsplyed(false);
+            UpdatePathDsplyed();
             QuestMissionService.Instance.On_ObjEnd(currPathModel.questName, currPathModel.objName); 
             return true; 
         }
@@ -185,21 +217,23 @@ namespace Quest
         }
 
         // Check if it has the limit
-        private void UpdatePathDsplyed(bool is2BeAddedInView)
+        private void UpdatePathDsplyed()
         {
             foreach (PathModel pathModel in allPathModel)
             {
                 if (pathModel.isDsplyed)
                 {
-                    if (allPathOnDsply.Any(t => t.questNames == pathModel.questName && t.objName == pathModel.objName))
+                    if(ChkIfPathAlreadyDsplyed(pathModel.questName, pathModel.objName))
                         continue; // already added in view
+                    //if (allPathOnDsply.Any(t => t.questNames == pathModel.questName && t.objName == pathModel.objName))
+                    //    continue; // already added in view
 
                     PathSO pathSO = MapService.Instance.allPathSO.GetPathSO(pathModel.questName, pathModel.objName);
                     PathOnDsply pathOnDsply = new PathOnDsply(pathModel.questName, pathModel.objName, pathSO.pathPrefab);
                     allPathOnDsply.Add(pathOnDsply);
                     pathPrefab = pathSO.pathPrefab;
                     
-                    AddPath2View(is2BeAddedInView);
+                    AddPath2View();
                 }
                 else
                 {
@@ -240,7 +274,7 @@ namespace Quest
                 pathModel.questState = QuestState.UnLocked;
                 pathModel.objState = QuestState.UnLocked;
             }            
-            UpdatePathDsplyed(true);           
+            UpdatePathDsplyed();           
         }
         public void On_PathComplete()  
         {
@@ -248,7 +282,7 @@ namespace Quest
             // update in PathModel
 
         }
-        void AddPath2View(bool isLoaded)
+        void AddPath2View()
         {
             //if (isDiaViewInitDone) return; // return multiple clicks
             Transform parent = pathView.MapPathContainer.transform;
@@ -268,7 +302,21 @@ namespace Quest
             pathRect.offsetMax = new Vector2(0, 0); // new Vector2(-right, -top);
                                                     // 
         }
-
+        bool ChkIfPathAlreadyDsplyed(QuestNames questName, ObjNames objName)
+        {
+            foreach (Transform child in pathView.MapPathContainer.transform)
+            {
+              PathQView pathQView = child.GetComponent<PathQView>();    
+                if(pathQView != null)
+                {
+                    if(pathQView.questName == questName && pathQView.objName == objName)
+                    {
+                        return true; 
+                    }
+                }
+            }
+            return false; 
+        }
         # endregion 
 
     }

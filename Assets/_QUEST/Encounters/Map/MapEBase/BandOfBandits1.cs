@@ -12,10 +12,7 @@ namespace Quest
     public class BandOfBandits1 : MapEbase, iResult
     {
         public override MapENames mapEName => MapENames.BandOfBanditsOne;
-
         public GameScene gameScene => GameScene.InMapInteraction;
-
-       
 
         CharNames charJoined;
         Currency money2Lose; 
@@ -31,7 +28,7 @@ namespace Quest
                 {
                     if (mapEResult)
                     {
-                        MapService.Instance.pathController.pathQView.Move2NextNode(mapEResult);
+                        MapService.Instance.pathController.NodeResult(mapEResult);
                     }
                     else
                     {
@@ -44,11 +41,8 @@ namespace Quest
             {
                 mapEResult = true;    
                 EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
-                MapService.Instance.pathController.pathQView.Move2NextNode(mapEResult);
+                MapService.Instance.pathController.NodeResult(mapEResult);
             }
-
-        
-
         }
 
         public override void OnChoiceASelect()
@@ -65,6 +59,7 @@ namespace Quest
                 resultStr = "Time to fight!";
                 strFX = "";
                 isCombatToBePlayed = true;
+                isCombatResult = false; 
             }
         }
 
@@ -89,12 +84,13 @@ namespace Quest
         public void OnResult(Result result)
         {
             isCombatToBePlayed = false;
-
+            isCombatResult = true;
             if (result == Result.Victory)
             {
                 resultStr = "You defeated the bandits!";
                 strFX = "Party buff: +1 to all stats, 3 rds";
                 mapEResult = true;
+               
             }
             else if (result == Result.Defeat)
             {
@@ -108,20 +104,11 @@ namespace Quest
                 strFX = $"<b>Party debuff:</b> -1 to all stats, 3 rds";
                 mapEResult = false;
             }
-            // TownScene Once it is loaded, Open Map Encounter view 
-            // then load the Map Encounter view with the current Map Encounter  
             SceneMgmtService.Instance.LoadGameScene(GameScene.InMapInteraction);
-            SceneManager.activeSceneChanged += ShowResult;
-
+            MapService.Instance.pathController.NodeResult(mapEResult);
         }
 
-        void ShowResult(Scene NewScene, Scene old)
-        {
-            Debug.Log("SCENE LOADED");
-            MapService.Instance.LoadView(); 
-          //  EncounterService.Instance.mapEController.ShowMapEResult2(this);
-            SceneManager.activeSceneChanged += ShowResult;
-        }
+
 
     }
 }

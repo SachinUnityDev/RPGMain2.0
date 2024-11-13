@@ -47,7 +47,7 @@ namespace Quest
             //        break;
             //}
             EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
-            MapService.Instance.pathController.pathQView.Move2NextNode(true);  // UPDATE WITH COMBAT INCLUSION
+            MapService.Instance.pathController.NodeResult(true);  // UPDATE WITH COMBAT INCLUSION
         }
 
         public override void OnChoiceASelect()

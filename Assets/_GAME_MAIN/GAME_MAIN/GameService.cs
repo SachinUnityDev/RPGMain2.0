@@ -36,7 +36,7 @@ namespace Common
 
         private void Start()
         {
-            SceneMgmtService.Instance.LoadGameScene(GameScene.InIntro);
+            SceneMgmtService.Instance.LoadGameScene(GameScene.INTRO);
         }
 
         public GameModel GetCurrentGameModel(int slot)
@@ -95,7 +95,7 @@ namespace Common
             switch (sceneName)
             {
                 case SceneName.INTRO:
-                    gameScene = GameScene.InIntro;
+                    gameScene = GameScene.INTRO;
                     break;
                 case SceneName.TOWN:
                     gameScene = GameScene.InTown; 
@@ -119,7 +119,7 @@ namespace Common
         {
             if (gameScene == GameScene.InCore)
                 GameEventService.Instance.On_CoreSceneLoaded();
-            if (gameScene == GameScene.InIntro)
+            if (gameScene == GameScene.INTRO)
                 GameEventService.Instance.On_IntroLoaded();
             if (gameScene == GameScene.InCombat)
                 GameEventService.Instance.On_CombatEnter();

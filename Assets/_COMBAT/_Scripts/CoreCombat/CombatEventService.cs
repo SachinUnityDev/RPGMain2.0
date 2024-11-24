@@ -70,7 +70,7 @@ namespace Combat
         CharController charCtrl;
 
         public event Action Event;
-        void Start()
+        void OnEnable()
         {         
             SceneManager.activeSceneChanged += OnSceneLoaded;
         }
@@ -79,7 +79,7 @@ namespace Combat
         private void OnDisable()
         {
             SceneManager.activeSceneChanged -= OnSceneLoaded;
-
+            SceneManager.activeSceneChanged -= SceneChg;
         }
         void OnSceneLoaded(Scene oldScene, Scene newScene)
         {
@@ -144,11 +144,11 @@ namespace Combat
             GridService.Instance.gridView.CharOnTurnHL(dynaOnTurn);
             charCtrl.RegenStamina();
             charCtrl.HPRegen();
-            
+            Debug.Log("A char on turn" + charCtrl.charModel.charName + "ID" + charCtrl.charModel.charID);  
             try { OnCharOnTurnSet?.Invoke(charCtrl); }
             catch (Exception e)
             {
-                Debug.Log("EXCEPTION OCCURED222!!!!" + e.Message + "CHAR" + charCtrl.charModel.charID + charCtrl.charModel.charName);
+                Debug.Log("EXCEPTION OCCURED222   ONCHAR_SET!!!!" + e.Message + "CHAR" + charCtrl.charModel.charID + charCtrl.charModel.charName);
                 Debug.Log(e.StackTrace); // Log the stack trace of the exception
             }
             finally
@@ -195,12 +195,65 @@ namespace Combat
         public void On_EOC(Result combatResult)
         {
             FortReset2FortOrg();
-            currCombatResult = combatResult;            
-            iResult.OnResult(combatResult);
-
+            currCombatResult = combatResult;
+            CharService.Instance.allCharInCombat.Clear();
+            foreach (CharController c in CharService.Instance.charsInPlayControllers.ToList())
+            {
+                if(c == null)
+                {
+                    CharService.Instance.charsInPlayControllers.Remove(c);continue; 
+                }
+                if (c.charModel.orgCharMode == CharMode.Enemy)
+                {   
+                    CharService.Instance.charsInPlayControllers.Remove(c);
+                }
+            }
             OnEOC?.Invoke();
             combatState = CombatState.INCombat_End;
+          //  
         }
+        public void OnCombatEndClicked()
+        {
+            SceneMgmtService.Instance.LoadGameScene(iResult.gameScene);
+            SceneManager.activeSceneChanged += SceneChg; 
+        }
+        void SceneChg(Scene oldScene, Scene newScene)
+        {
+            if (newScene.name == iResult.gameScene.GetMainGameScene().ToString())
+            {
+                iResult.OnResult(currCombatResult);
+                SceneManager.activeSceneChanged -= SceneChg;
+            }
+        }
+
+        void OnEOC_ClearSubs()
+        {
+                OnSOTactics = null;
+                OnSOT = null;
+                OnEOT = null;
+                OnSOR1 = null;// round no
+                OnEOR1 =null;
+                OnSOC = null;
+                OnCombatInit = null;
+                OnEOC = null;
+                OnCombatFlee = null;
+                OnDeathInCombat = null;
+                OnCombatRejoin = null;
+                OnStrikeFired = null;        
+                OnDamageApplied = null;
+                OnCharRightClicked =null;
+                OnCharOnTurnSet =null;
+                OnCombatEnd =null;
+                OnDodge = null; 
+                OnMisfire = null; 
+                OnHasteCheck = null;
+                OnMoraleCheck = null;
+                OnCharClicked = null;
+                OnCharHovered = null;
+                OnTargetClicked = null;
+                OnPotionConsumedInCombat = null;
+        }
+
         public void On_CombatFlee(CharController charController)
         {
             OnCombatFlee?.Invoke(charController); 
@@ -220,9 +273,17 @@ namespace Combat
         }
         public void On_SOR(int roundNo)
         {
+            roundController.OnRoundStart(roundNo);
             Debug.Log("SOR Triggered" + roundNo);
-            roundController.OnRoundStart(roundNo);            
-            OnSOR1?.Invoke(roundNo);
+            try
+            {
+                OnSOR1?.Invoke(roundNo); 
+            }
+            catch (Exception e)
+            {
+                Debug.Log("EXCEPTION OCCURED111   ON CHAR CLICKED!!!!" + e.Message + "CHAR" + charCtrl.charModel.charID + charCtrl.charModel.charName);
+                Debug.Log(e.StackTrace); // Log the stack trace of the exception
+            }
             On_SOT();
         }
         public void On_EOR(int roundNo)
@@ -245,13 +306,27 @@ namespace Combat
         public void On_EOT()
         {
             Debug.Log("EOT CALLED");
-            OnEOT?.Invoke();
+           // OnEOT?.Invoke();
+            try { OnEOT?.Invoke();}
+            catch (Exception e)
+            {
+                Debug.Log("EXCEPTION OCCURED111   ON CHAR CLICKED!!!!" + e.Message + "CHAR" + charCtrl.charModel.charID + charCtrl.charModel.charName);
+                Debug.Log(e.StackTrace); // Log the stack trace of the exception
+            }
         }
         public void On_SOT()
         {
             Debug.Log("SOT CALLED");
-            roundController.SetNextCharOnTurn(); 
-            OnSOT?.Invoke(); 
+            roundController.SetNextCharOnTurn();
+            try
+            {
+                OnSOT?.Invoke();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Exception occurred during OnSOT invocation: " + e.Message);
+                Debug.LogError(e.StackTrace);
+            }
         }
         public void Move2NextRds()
         {    
@@ -340,8 +415,17 @@ namespace Combat
 
         public void On_CharClicked(GameObject _charClickedGO)
         {
-            CombatService.Instance.currCharClicked = _charClickedGO?.GetComponent<CharController>();  
-            OnCharClicked?.Invoke(CombatService.Instance.currCharClicked); 
+            CombatService.Instance.currCharClicked = _charClickedGO?.GetComponent<CharController>();
+            try { OnCharClicked?.Invoke(CombatService.Instance.currCharClicked); }
+            catch (Exception e)
+            {
+                Debug.Log("EXCEPTION OCCURED111   ON CHAR CLICKED!!!!" + e.Message + "CHAR" + charCtrl.charModel.charID + charCtrl.charModel.charName);
+                Debug.Log(e.StackTrace); // Log the stack trace of the exception
+            }
+            finally
+            {
+               // On_CharClicked(charCtrl.gameObject);
+            }
         }
 
         public void On_CharRightClicked(GameObject _charRightClickedGO)

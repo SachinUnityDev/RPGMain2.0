@@ -172,6 +172,11 @@ namespace Combat
 
         public void TurnOnOff(GameObject ImgGO, bool status)
         {
+            if(ImgGO == null)
+            {
+                Debug.LogError("ImgGO is null" );
+                return;
+            }
             Image Img = ImgGO.GetComponentInChildren<Image>();
             Img.enabled = status;          
         } 

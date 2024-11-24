@@ -12,7 +12,7 @@ namespace Town
     public interface iResult
     {
         GameScene gameScene { get; }       
-        void OnResult(Result result);    
+        void OnResult(Result result);
     }
 
 
@@ -102,7 +102,7 @@ namespace Town
 
         public void LoadState()
         {
-            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);            
             GetControllerRef();  // controller references
             List<PathModel> allpathModel = new List<PathModel>();
             if (SaveService.Instance.DirectoryExists(path))

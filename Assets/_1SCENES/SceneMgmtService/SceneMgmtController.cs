@@ -46,7 +46,7 @@ namespace Common
             StartSceneTransit();
             while (!async.isDone)
             {
-                Debug.Log("Loading Scene");
+                Debug.Log("Loading Scene" + sceneName.ToString());
                 yield return null;               
             }           
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName.ToString()));
@@ -111,7 +111,7 @@ namespace Common
             switch (scene.name)
             {
                 case "INTRO":
-                    return GameScene.InIntro;
+                    return GameScene.INTRO;
                 case "TOWN":
                     return GameScene.InTown;    
                 case "QUEST":

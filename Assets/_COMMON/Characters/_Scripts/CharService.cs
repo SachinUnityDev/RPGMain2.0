@@ -64,7 +64,7 @@ namespace Common
         public List<CharController> charDiedinLastTurn = new List<CharController>();
 
         [Header(" Char in Graveyard")]
-        public List<CharController> charInGraveyard = new List<CharController>();   
+        public List<CharModel> charInGraveyard = new List<CharModel>();   
         [Header(" Fled list")]
         public List<CharController> allCharfledQ = new List<CharController>();
 
@@ -495,12 +495,15 @@ namespace Common
         public void UpdateOnDeath()
         {
             if (charDiedinLastTurn.Count < 1) return;
+            allCharInCombat.RemoveAll(t => charDiedinLastTurn.Contains(t));
             foreach (CharController charCtrl in charDiedinLastTurn.ToList())
             {
+                charsInPlayControllers.Remove(charCtrl);    
                 CombatService.Instance.roundController.ReorderAfterCharDeathOnEOT(charCtrl);
+                charInGraveyard.Add(charCtrl.charModel);
             }
-            charInGraveyard.AddRange(charDiedinLastTurn);
             charDiedinLastTurn.Clear();
+            
         }
         public void On_CharDeath(CharController _charController, int causeByCharID)
         {
@@ -529,7 +532,7 @@ namespace Common
 
         public bool HasCharDiedInCombat(CharController charController)
         {
-            return (charInGraveyard.Contains(charController) || charDiedinLastTurn.Contains(charController));
+            return (charInGraveyard.Contains(charController.charModel) || charDiedinLastTurn.Contains(charController));
         }
 
         #region GET NAME STRINTGS

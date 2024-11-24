@@ -104,11 +104,18 @@ namespace Quest
                 strFX = $"<b>Party debuff:</b> -1 to all stats, 3 rds";
                 mapEResult = false;
             }
-            SceneMgmtService.Instance.LoadGameScene(GameScene.InMapInteraction);
             MapService.Instance.pathController.NodeResult(mapEResult);
+
+//            SceneManager.activeSceneChanged += OnSceneChg;
         }
 
-
+        //void OnSceneChg(Scene curr, Scene next)
+        //{
+        //    if(curr.name == "COMBAT")
+        //    {
+        //        SceneManager.activeSceneChanged -= OnSceneChg;
+        //    }
+        //}
 
     }
 }

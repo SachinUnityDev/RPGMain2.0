@@ -4,7 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Common;
-using DG.Tweening; 
+using DG.Tweening;
+using UnityEngine.SceneManagement;
 namespace Combat
 {
 
@@ -30,26 +31,60 @@ namespace Combat
         CharController charController; 
         private void OnEnable()
         {
-            CombatEventService.Instance.OnCharClicked += FillPort; 
-            
+            CombatEventService.Instance.OnCharClicked += InitCombatView;
+
+            SceneManager.activeSceneChanged -= OnActiveSceneChg;
+            SceneManager.activeSceneChanged += OnActiveSceneChg;
         }
 
         private void OnDisable()
         {
-            CombatEventService.Instance.OnCharClicked -= FillPort;
+            CombatEventService.Instance.OnCharClicked -= InitCombatView;
+            SceneManager.activeSceneChanged -= OnActiveSceneChg;
+            if (charController != null)
+            {
+                charController.OnStatChg -= UpdateStat; // check double subscription    
+            }
         }
 
-        void FillPort(CharController charController)
+        void OnActiveSceneChg(Scene curr, Scene next)
         {
-            this.charController = charController;
+            if (next.name == "COMBAT")
+            {
+                portView = FindObjectOfType<CharPortView>(true).transform;
+                charImg = portView.transform.GetChild(0).GetComponent<Image>();
+                charNameTxt = portView.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
 
-            charController.OnStatChg -=(StatModData statModData)=> DoFills(); // check double subscription
-            charController.OnStatChg += (StatModData statModData) => DoFills();
+                charOnTurnBtn = FindObjectOfType<CharOnTurnBtn>(true);
+                hpRegenView = FindObjectOfType<HpRegenView>(true);
+                stmRegenView = FindObjectOfType<StmRegenView>(true);
+                onHoverHpBar = FindObjectOfType<OnHoverHpBar>(true);
+            }
+        }
+
+        void InitCombatView(CharController _charController)
+        {
+            
+            if(_charController != null)
+            {
+                this.charController = _charController;
+                this.charController.OnStatChg -= UpdateStat; // check double subscription
+                this.charController.OnStatChg += UpdateStat;
+                FillPort();
+            }
+        }
+
+
+        void FillPort()
+        {
             RectTransform portAlly = portView.GetComponent<RectTransform>();
             DoFills();
-               
         }
 
+        void UpdateStat(StatModData statModData)
+        {
+            DoFills();
+        }
         void DoFills()
         {
             if (charController.charModel.charMode == CharMode.Ally)

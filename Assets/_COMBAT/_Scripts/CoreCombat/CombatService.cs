@@ -6,6 +6,7 @@ using System.Linq;
 using Quest;
 using DG.Tweening;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 namespace Combat
 {
@@ -52,27 +53,27 @@ namespace Combat
         public Result combatResult; 
 
         void OnEnable()
-        {            
-          //  CombatEventService.Instance.OnEOR1 += EORActions;
+        {
+            CombatEventService.Instance.OnEOR1 += EORActions;
             CombatEventService.Instance.OnCharOnTurnSet += SetAllCurrCharValues;
-          
-            SkillService.Instance.SkillSelect
-                            += (CharNames _charName, SkillNames _skillName)
-                            =>combatState = CombatState.INCombat_InSkillSelected;
-            CharService.Instance.OnCharDeath += OnCharDeathCombatChk; 
-           
-            deathAnimView = GetComponent<DeathAnimView>();
-            roundController = GetComponent<RoundController>();
-            combatHUDView = gameObject.GetComponent<CombatHUDView>();
-            // ENEMY PACK 
 
-            enemyPackController= GetComponent<EnemyPackController>();   
-            enemyPackFactory = GetComponent<EnemypackFactory>();
+            SkillService.Instance.SkillSelect += (CharNames _charName, SkillNames _skillName)
+                            => combatState = CombatState.INCombat_InSkillSelected;
+            CharService.Instance.OnCharDeath += OnCharDeathCombatChk;
+            GetRef();
+            //deathAnimView = GetComponent<DeathAnimView>();
+            //roundController = GetComponent<RoundController>();
+            //combatHUDView = gameObject.GetComponent<CombatHUDView>();
+            //// ENEMY PACK 
 
-            // Set Abbas as main Char
-            // currCharOnTurn = CharService.Instance.allCharInCombat[0]; 
-           
+            //enemyPackController= GetComponent<EnemyPackController>();   
+            //enemyPackFactory = GetComponent<EnemypackFactory>();
+
+            //// Set Abbas as main Char
+            //// currCharOnTurn = CharService.Instance.allCharInCombat[0]; 
+
             SetAllCurrCharValues(currCharOnTurn);    
+            SceneManager.activeSceneChanged += OnActiveSceneChg;
         }
         private void OnDisable()
         {  
@@ -83,7 +84,38 @@ namespace Combat
             CharService.Instance.OnCharDeath -= OnCharDeathCombatChk;
             SkillService.Instance.SkillSelect
                                        -= (CharNames _charName, SkillNames _skillName)
-                                       => combatState = CombatState.INCombat_InSkillSelected; 
+                                       => combatState = CombatState.INCombat_InSkillSelected;
+            SceneManager.activeSceneChanged -= OnActiveSceneChg;
+
+        }
+
+        void OnActiveSceneChg(Scene curr, Scene next)
+        {
+            if(next.name == "COMBAT")
+            {
+                //CombatEventService.Instance.OnCharOnTurnSet += SetAllCurrCharValues;
+
+                //SkillService.Instance.SkillSelect += (CharNames _charName, SkillNames _skillName)
+                //                => combatState = CombatState.INCombat_InSkillSelected;
+                //CharService.Instance.OnCharDeath += OnCharDeathCombatChk;
+
+            GetRef();
+
+                // Set Abbas as main Char
+                // currCharOnTurn = CharService.Instance.allCharInCombat[0]; 
+
+                SetAllCurrCharValues(currCharOnTurn);
+            }
+        }
+        void GetRef()
+        {
+            deathAnimView = GetComponent<DeathAnimView>();
+            roundController = GetComponent<RoundController>();
+            combatHUDView = gameObject.GetComponent<CombatHUDView>();
+            // ENEMY PACK 
+
+            enemyPackController = GetComponent<EnemyPackController>();
+            enemyPackFactory = GetComponent<EnemypackFactory>();
         }
         public void SetAllCurrCharValues(CharController charController)  // Inits 
         {      
@@ -157,8 +189,9 @@ namespace Combat
         {
             // all fortitude values reset to zero
             // call all combatr controller and change fortitude to zero 
-            
-
+            currCharClicked = null;
+            currCharHovered = null; 
+            currCharOnTurn = null;
         }
 
         #region COMBAT RESULT 
@@ -200,8 +233,8 @@ namespace Combat
         {
             // chk combat state here
 
-          Debug.Log(" ComBAT STATE " + combatState);    
-            CombatEventService.Instance.On_EOC(combatResult);
+          Debug.Log("COMBAT STATE ???? " + combatState);    
+           CombatEventService.Instance.On_EOC(combatResult);
   
             this.combatResult = combatResult;
             EnemyPackBase enemyPackBase = enemyPackController.GetEnemyPackBase(currEnemyPack); 

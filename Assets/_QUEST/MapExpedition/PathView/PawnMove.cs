@@ -65,7 +65,7 @@ namespace Quest
                .AppendCallback(()=>transform.GetComponent<BoxCollider2D>().enabled= true);
                 ;
             unSuccessSeq.Play()
-                //.OnComplete(()=>MapService.Instance.mapController.mapView.GetComponent<IPanel>().UnLoad())
+                .OnComplete(()=>MapService.Instance.mapController.mapView.GetComponent<IPanel>().UnLoad())
                   //              .OnComplete(CheckTownArrival)
                                 ;
         }

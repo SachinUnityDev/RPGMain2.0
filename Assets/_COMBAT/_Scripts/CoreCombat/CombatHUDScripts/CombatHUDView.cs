@@ -7,6 +7,7 @@ using Common;
 using System;
 using DG.Tweening;
 using Quest;
+using UnityEngine.SceneManagement;
 
 namespace Combat
 {
@@ -59,35 +60,67 @@ namespace Combat
         public List<StatDisplayData> statDisplay = new List<StatDisplayData>();
         public GameObject CharStatesPanel;
         public List<GameObject> allcharStatesDisplay = new List<GameObject>();
-        public Image charImg;
-        public TextMeshProUGUI charName; 
+        //public Image charImg;
+        //public TextMeshProUGUI charName; 
 
-        public GameObject StatesPanel;
+       // public GameObject StatesPanel;
         public StatPanelToggleState portraitToggleState;
         #endregion
 
         void OnEnable()
-        {  
+        {
+            GetRef(); 
             portraitToggleState = StatPanelToggleState.None;
-            CombatEventService.Instance.OnSOTactics += () => PlayTransitAnim("TACTICS");
-            CombatEventService.Instance.OnSOC += () => PlayTransitAnim("COMBAT");
-            CombatEventService.Instance.OnSOR1 += (int rd) => PlayTransitAnim($"ROUND {rd}");
+            CombatEventService.Instance.OnSOTactics += PlaySOTacticsAnim;
+            CombatEventService.Instance.OnSOC += PlayCombatStartAnim;
+            CombatEventService.Instance.OnSOR1 += PlaySORAnim;
 
-            CombatEventService.Instance.OnEOC += OnCombatEnd;             
+            CombatEventService.Instance.OnEOC += OnCombatEnd;
             SkillService.Instance.OnSkillUsed += DsplySkillName;
-            CombatEventService.Instance.OnCharClicked += (CharController c) => ToggleCombatOpts(); 
+            CombatEventService.Instance.OnCharClicked += ToggleCombatOpts;
+            SceneManager.activeSceneChanged -= OnActiveSceneChg;
+            SceneManager.activeSceneChanged += OnActiveSceneChg;
+
         }
 
         private void OnDisable()
         {
-            CombatEventService.Instance.OnSOTactics -= () => PlayTransitAnim("TACTICS");
-            CombatEventService.Instance.OnSOC -= () => PlayTransitAnim("COMBAT");
-            CombatEventService.Instance.OnSOR1 -= (int rd) => PlayTransitAnim($"ROUND {rd}");
+            CombatEventService.Instance.OnSOTactics -= PlaySOTacticsAnim;
+            CombatEventService.Instance.OnSOC -= PlayCombatStartAnim; 
+            CombatEventService.Instance.OnSOR1 -= PlaySORAnim; 
             CombatEventService.Instance.OnEOC -= OnCombatEnd;
             SkillService.Instance.OnSkillUsed -= DsplySkillName;
-            CombatEventService.Instance.OnCharClicked -= (CharController c) => ToggleCombatOpts();
+            CombatEventService.Instance.OnCharClicked -= ToggleCombatOpts;
+            SceneManager.activeSceneChanged -= OnActiveSceneChg;
+
         }
 
+        void OnActiveSceneChg(Scene curr, Scene next)
+        {
+            if(next.name =="COMBAT")
+            {
+                GetRef();
+          
+            }
+        }
+
+
+        void GetRef()
+        {
+            Canvas canvas = FindObjectOfType<Canvas>();
+
+            combatEndView = FindObjectOfType<CombatEndView>();
+            combatOpts = FindObjectOfType<CombatOptsParent>(true).transform;
+            
+            combatBG= FindObjectOfType<CombatBgSprite>().transform.GetComponent<SpriteRenderer>();
+            animPanel = FindObjectOfType<AnimPanelView>().gameObject;    
+            charOnTurn = FindObjectOfType<CharOnTurnBtn>(true).gameObject;
+            
+            CharStatesView charStates = FindObjectOfType<CharStatesView>();
+            CharStatesPanel = charStates.gameObject;
+            charStates.CharStatesPanelIconsClear(); 
+
+        }
         public void SetCombatBG(LandscapeNames landscape)
         {
             LandscapeSO landSO = LandscapeService.Instance.allLandSO.GetLandSO(landscape);
@@ -100,6 +133,20 @@ namespace Combat
         {
             skillNameTxt.text = skillEventData.skillName.ToString().CreateSpace();   
         }
+
+        void PlaySOTacticsAnim()
+        {
+            PlayTransitAnim("TACTICS");
+        }
+        void PlayCombatStartAnim()
+        {
+            PlayTransitAnim("COMBAT");
+        }
+        void PlaySORAnim(int rd)
+        {    
+            PlayTransitAnim($"ROUND {rd}");
+        }
+
         void PlayTransitAnim(string  str)
         {
             transitionSO.PlayAnims(str, animPanel);
@@ -200,7 +247,7 @@ namespace Combat
 
 #region COMBAT OPTIONS
 
-        void ToggleCombatOpts()
+        void ToggleCombatOpts(CharController c)
         {
             if(CombatService.Instance.combatState == CombatState.INTactics)
             {

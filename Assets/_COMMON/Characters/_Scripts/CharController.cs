@@ -95,7 +95,17 @@ namespace Common
             CombatEventService.Instance.OnEOC -= FortReset2FortOrg;
         }
 
-    
+        private void OnDestroy()
+        {
+              OnCharSpawned = null;  // charID only to be broadcasted
+            // skill pts 
+             OnSkillPtsChg = null; // broadcast skill pts after chg
+             OnStatChg = null;
+             OnAttribChg = null; // return the current modified value 
+             OnAttribCurrValSet = null;  // curr values 
+             OnAttribBaseValChg = null;
+             OnExpGainedOrLoss = null;
+        }
 
         // creates charModel and initializes all associated controller used only by Ally for spawn
 
@@ -453,7 +463,16 @@ namespace Common
             }
             if (toInvoke)
             {   // IF NO CHANGE IN VALUE HAS HAPPENED DUE TO CLAMPING THIS NEEDS TO BE KEPT HERE
-                OnStatChg?.Invoke(statModData);
+                try
+                {
+                    OnStatChg?.Invoke(statModData);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log("Error in stat change" + e.Message);
+                    Debug.Log("STACK TRACE "+e.StackTrace); 
+                }
+                
             }
             return statModData;
         }

@@ -64,9 +64,10 @@ namespace Combat
             //   CombatEventService.Instance.OnCombatInit += () => InitAllSkill_OnCombat(CombatState.INCombat_normal);
 
             CombatEventService.Instance.OnEOC += OnEOCReset;
-           // CombatEventService.Instance.OnCharOnTurnSet += UpdateAllSkillState;            
+            // CombatEventService.Instance.OnCharOnTurnSet += UpdateAllSkillState;            
             // CharService.Instance.OnCharAddedToParty += InitSkillList;
-            SceneManager.sceneUnloaded += OnSceneUnLoaded;
+            SceneManager.activeSceneChanged -= OnSceneLoaded;
+            SceneManager.activeSceneChanged += OnSceneLoaded;
             QuestEventService.Instance.OnEOQ += EOQTick;
             CombatEventService.Instance.OnEOC -= OnEOCReset;
             if (skillView == null)
@@ -74,7 +75,7 @@ namespace Combat
         }
         private void OnDisable()
         {
-            SceneManager.sceneUnloaded -= OnSceneUnLoaded;
+            //SceneManager.activeSceneChanged -= OnSceneUnLoaded;
             CharService.Instance.OnCharSpawn -= InitSkillList;
             
             CombatEventService.Instance.OnEOR1 -= RoundTick;
@@ -82,9 +83,9 @@ namespace Combat
             QuestEventService.Instance.OnEOQ -= EOQTick;
         }
 
-        void OnSceneUnLoaded(Scene scene)
+        void OnSceneLoaded(Scene oldScne, Scene newScene)
         {
-            if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
+            if (newScene.name == "COMBAT")
             {
                 if (skillView == null)
                     skillView = FindObjectOfType<SkillView>();

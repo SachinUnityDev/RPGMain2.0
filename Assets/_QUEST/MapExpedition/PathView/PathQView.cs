@@ -45,7 +45,6 @@ namespace Quest
             // init Pawn move here too
             if (pathModel.currNode.nodeSeq != 0)
             {
-
                 MapService.Instance.pathController.pawnTrans.GetComponent<PawnMove>().PawnSpawn(pathView, this, pathModel);
                 OpenCurrInteract();
             }
@@ -90,21 +89,12 @@ namespace Quest
                 MapService.Instance.mapController.mapView.GetComponent<IPanel>().UnLoad();
             }
         }
-
-        //void UpdatePathModelOnQFail()
-        //{
-        //    for (int i = 1; i < pathModel.nodes.Count; i++)
-        //    {
-        //        pathModel.nodes[i].isChecked = false;
-        //    }
-        //    pathModel.nodes[0].isChecked = true;
-        //}
         void OnNodeExit4Base(int node)
         {
 
-            PathModel pathModel = MapService.Instance.pathController.GetPathModel(questName, objName);
-            if (pathModel != null)
-                pathModel.nodes[node].isChecked = true;
+            //PathModel pathModel = MapService.Instance.pathController.GetPathModel(questName, objName);
+            //if (pathModel != null)
+            //    pathModel.nodes[node].isChecked = true;
             PathBase pathBase = MapService.Instance.pathController.GetPathBase(questName, objName);
             switch (node)
             {

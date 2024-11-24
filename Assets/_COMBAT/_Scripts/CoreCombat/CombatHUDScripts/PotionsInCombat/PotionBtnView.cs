@@ -24,7 +24,7 @@ namespace Combat
         [SerializeField] TextMeshProUGUI apWarningTxt;
         [Header(" Item card")]
         [SerializeField] GameObject itemCardRef; 
-        private void Start()
+        private void OnEnable()
         {
             CombatEventService.Instance.OnCharClicked -= InitPotionSlot;
             CombatEventService.Instance.OnCharClicked += InitPotionSlot;

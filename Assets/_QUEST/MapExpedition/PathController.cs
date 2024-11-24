@@ -127,15 +127,6 @@ namespace Quest
                 pathQView.Move2TownFail();
             }
         }
-        public PathModel Load2CurrPath()
-        {
-            PathModel pathModel = GetCurrentPath();
-            if (pathModel.currNode.isChecked)
-            {
-                return pathModel; 
-            }
-            return null; 
-        }
         PathModel GetCurrentPath()
         {
             foreach (PathModel pathModel in allPathModel)

@@ -136,8 +136,8 @@ namespace Combat
         void FillActionPtsView(CharMode charMode)
         {
             if (charMode != CharMode.Ally) return; // no action pts view for the enemy
-            canvasGO = GameObject.FindGameObjectWithTag("Canvas"); 
-            actionPtsView = canvasGO.GetComponentInChildren<ActionPtsView>(true);
+           // canvasGO = GameObject.FindGameObjectWithTag("Canvas"); 
+            actionPtsView = FindObjectOfType<ActionPtsView>(true);
             if(actionPtsView == null)
                 Debug.LogError(" Action pts view not found");   
             actionPtsView.UpDateActionsPtsView(actionPts);

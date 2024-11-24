@@ -22,7 +22,9 @@ namespace Town
         private void OnDisable()
         {
             CalendarService.Instance.OnChangeTimeState -= UpdateBuildState;
-          
+            SceneManager.activeSceneChanged -= OnSceneLoaded;
+
+
         }
         void OnSceneLoaded(Scene oldScene, Scene newScene)
         {

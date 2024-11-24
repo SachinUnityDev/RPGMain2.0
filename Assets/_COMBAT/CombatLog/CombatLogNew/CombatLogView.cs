@@ -29,7 +29,7 @@ namespace Combat
         [SerializeField] string strPrev = "";
 
        
-        void Start()
+        void OnEnable()
         {
 
             // TEMP TRAITS 

@@ -69,7 +69,8 @@ namespace Combat
        {
             Debug.Log("Round Start Triggerd" + roundNo); 
             SetTurnOrder();
-       }
+            Debug.Log("Round Start After" + roundNo);
+        }
 
         void UpdateCharList()
         {

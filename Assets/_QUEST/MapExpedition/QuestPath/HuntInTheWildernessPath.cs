@@ -77,7 +77,7 @@ namespace Quest
 
         public override void OnNode1Exit()
         {
-            Debug.Log(" ON NODE ! EXIT"); 
+            
         }
 
         public override void OnNode2Enter()

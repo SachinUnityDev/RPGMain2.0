@@ -19,13 +19,13 @@ namespace Common
         public event Action<int> OnFameChg;
 
         public ServicePath servicePath => ServicePath.FameService;
-        void Start()
+        void OnEnable()
         {
             SceneManager.activeSceneChanged += OnSceneLoaded;
         }
         private void OnDisable()
         {
-            SceneManager.activeSceneChanged += OnSceneLoaded;
+            SceneManager.activeSceneChanged -= OnSceneLoaded;
         }
         void OnSceneLoaded(Scene oldScene, Scene newScene)
         {

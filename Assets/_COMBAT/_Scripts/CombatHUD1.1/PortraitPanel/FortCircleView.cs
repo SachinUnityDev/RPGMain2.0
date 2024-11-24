@@ -18,8 +18,9 @@ namespace Combat
         [SerializeField] Color colorFort;
         [SerializeField] Color colorFortOrg;
         CharController charController; 
-        void Start()
+        void OnEnable()
         {
+            CombatEventService.Instance.OnCharClicked -= FillFort;
             CombatEventService.Instance.OnCharClicked += FillFort;
            
         }
@@ -30,6 +31,11 @@ namespace Combat
 
         public void FillFort(CharController charController)
         {   
+            if(charController == null)
+            {
+                Debug.LogError(" CharController IS NULL"); 
+            }
+
             this.charController= charController;
             StatData fortData = charController.GetStat(StatName.fortitude);
             string sign = fortData.currValue > 0 ? "+" : "-"; 

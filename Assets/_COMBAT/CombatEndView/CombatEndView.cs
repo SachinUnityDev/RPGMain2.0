@@ -133,6 +133,8 @@ namespace Combat
             }
             else
             {
+
+                CombatEventService.Instance.OnCombatEndClicked(); 
                 UnLoad();
             }
         }

@@ -20,7 +20,6 @@ namespace Quest
         [SerializeField] Transform pawnStone;
         [SerializeField] PathModel currPathModel;
 
-        public bool isQInProgress = false;
         public PathController pathController;
 
 

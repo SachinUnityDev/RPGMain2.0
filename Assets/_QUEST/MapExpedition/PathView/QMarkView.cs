@@ -18,6 +18,16 @@ namespace Quest
         PathView pathView;
         PathQView pathQView;
         [SerializeField] PathModel pathModel;
+
+        [SerializeField] bool isClickable;
+
+        private void OnEnable()
+        {
+            ChkState();
+        }
+
+
+
         public void InitPathNodeView(PathView pathView, PathQView pathQView, PathModel pathModel)
         {
             this.pathView = pathView;
@@ -29,25 +39,45 @@ namespace Quest
 
             if (!pathModel.isCompleted)
             {
-                QuestMarkUp();  
-            }
+                QuestMarkUp();            
+                SetClickableState();
+            }            
         }
 
-        //public void LoadPathNodeView(PathView pathView, PathQView pathQView)
-        //{
-        //   InitPathNodeView(pathView, pathQView);
-        //}
-
-        void QuestMarkDown()
+        void ChkState()
         {
+            if (pathModel.nodes.Count >0) // it will not be dsplyed in this case
+            {
+                if (!pathModel.nodes[0].isSuccess) 
+                {
+                    SetClickableState();
+                }
+                else
+                {
+                    SetUnClickableState();// has moved on from 1 node and quest is in progress
+                }
+            }
+        }
+        public void SetClickableState()
+        {
+            QuestMarkUp(); 
+            isClickable = true;
+        }
+        public void SetUnClickableState()
+        {
+            QuestMarkDownAnim();
+            isClickable = false;
+        }
+        void QuestMarkDownAnim()
+        {              
             transform.DORotate(new Vector3(0, 0, 181), 0.2f)
                 .OnComplete(() => transform.DOShakeRotation(1.5f, new Vector3(0, 0, 40), 4, 20, true));
 
-            MapService.Instance.pathController.currPathModel  = pathModel;            
+            MapService.Instance.pathController.currPathModel  = pathModel;                        
         }
         void QuestMarkUp()
         {
-            transform.DORotate(new Vector3(0, 0, 0), 0.2f);
+             transform.DORotate(new Vector3(0, 0, 0), 0.2f);            
         }
         void ShowNodeClick()
         {
@@ -68,14 +98,13 @@ namespace Quest
             // reset PathModel and pathbase .. Set PAth Q select to None
             QuestMarkUp();
         }
-
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (!pathModel.isCompleted)
+            Debug.Log(" Q mark Click"); 
+            if (isClickable)
             {
-                QuestMarkDown();
+                SetUnClickableState();
                 ShowNodeClick();
-                pathView.isQInProgress = true;
             }
         }
     }

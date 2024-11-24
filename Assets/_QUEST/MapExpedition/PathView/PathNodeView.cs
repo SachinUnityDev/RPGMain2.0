@@ -33,10 +33,6 @@ namespace Quest
             nodeSeq = transform.GetSiblingIndex();
         }
 
-        //public void LoadPathNodeView(PathView pathView, PathQView pathQView)
-        //{
-        //    InitPathNodeView(pathView, pathQView); 
-        //}
         public void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.gameObject.name == "PawnStone")
@@ -54,6 +50,9 @@ namespace Quest
         }
         void OnNodeEnter()
         {
+            PathModel pathModel = MapService.Instance.pathController.GetPathModel(questName, objName);
+            if (pathModel != null)
+                pathModel.nodes[nodeSeq].isChecked = true;
             pathQView.OnNodeEnter(nodeSeq);
             switch (nodeSeq)
             {

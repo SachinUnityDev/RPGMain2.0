@@ -54,20 +54,6 @@ namespace Town
             {
                 prevClick = Time.time;
             }
-
-            //if (index < maxIndex - 1)
-            //{
-            //    index++;
-            //}
-            //else
-            //{
-            //    index = 0;
-            //}
-            //for (int i = 0; i < maxIndex; i++)
-            //{
-            //    transform.GetChild(i).gameObject.SetActive(false);
-            //}
-            //transform.GetChild(index).gameObject.SetActive(true);
             if (worldView.gameObject.activeInHierarchy)
             {
                 worldView.gameObject.SetActive(false);

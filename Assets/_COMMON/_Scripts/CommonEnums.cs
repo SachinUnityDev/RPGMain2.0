@@ -10,7 +10,7 @@ namespace Common
     public enum GameScene // Game Scene that Includes all scenes and Panels like map,job and camp 
     {
         None,
-        InIntro,
+        INTRO,
         InTown,    
         InQuestRoom,
         InCombat,

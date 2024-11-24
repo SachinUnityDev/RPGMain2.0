@@ -23,7 +23,7 @@ namespace Quest
 
         public override void OnNode1Enter()
         {
-            
+            // COMBAT Rat pack one in coast landscapes
         }
 
         public override void OnNode1Exit()

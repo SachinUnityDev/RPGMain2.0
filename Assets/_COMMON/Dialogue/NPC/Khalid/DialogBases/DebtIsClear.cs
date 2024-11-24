@@ -23,7 +23,10 @@ namespace Common
 
         public void OnDialogueEnd()
         {
-          
+
+            BuildingIntService.Instance
+                  .UnLockDiaInBuildNPC(BuildingNames.Tavern, NPCNames.Greybrow, DialogueNames.CleanseSewers, true);
+
             BuildingIntService.Instance.houseController.UnLockBuildIntType(BuildInteractType.EndDay, true);
             CalendarService.Instance.OnChangeTimeState -= LockAgainOnDayEnd_Debt;
             CalendarService.Instance.OnChangeTimeState += LockAgainOnDayEnd_Debt;
@@ -32,6 +35,9 @@ namespace Common
             BuildingIntService.Instance.ChgNPCState(BuildingNames.Tavern, NPCNames.Tahir, NPCState.Locked, false);
             QuestMissionService.Instance.On_ObjEnd(QuestNames.LostMemory, ObjNames.GoBackToKhalid);
             WelcomeService.Instance.welcomeView.RevealWelcomeTxt("End Day by clicking the button on bottom right");
+
+
+
         }
 
         void StartJob(BuildingModel buildModel, BuildView buildView)

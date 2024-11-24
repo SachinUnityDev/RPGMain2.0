@@ -40,6 +40,11 @@ namespace Combat
         }
         public void PlayAnims(string Centertxt, GameObject _centerPanel)
         {
+            if(_centerPanel == null)
+             {
+                _centerPanel = FindObjectOfType<AnimPanelView>().gameObject;
+            }
+
             TimeState _timeState = TimeState.Day; 
             if (_timeState == TimeState.Day)
             {               

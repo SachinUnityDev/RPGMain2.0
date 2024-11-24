@@ -28,7 +28,7 @@ namespace Common
                 case GameScene.None:
                     Debug.LogError(" None Scene request Send"); 
                     break;
-                case GameScene.InIntro:
+                case GameScene.INTRO:
                     StartCoroutine(sceneMgmtController.LoadScene(SceneName.INTRO));
                     break;
                 case GameScene.InTown: 
@@ -63,8 +63,6 @@ namespace Common
                 return;             
             MapService.Instance.mapView.GetComponent<IPanel>().Load();
             SceneManager.activeSceneChanged -= OpenMapE;
-
-            // GameService.Instance.currGameModel.gameScene = GameScene.InMapInteraction;
         }
 
 

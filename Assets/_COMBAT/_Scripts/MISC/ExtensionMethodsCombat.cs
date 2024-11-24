@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Policy;
 using Quest;
 using Combat;
+using Common;
 
 public static class ExtensionMethodsCombat
     {
@@ -171,6 +172,34 @@ public static class ExtensionMethodsCombat
             else return false; 
 
         }
+
+        public static GameScene GetMainGameScene(this GameScene gameScene)
+        {
+            switch (gameScene)
+            {
+                case GameScene.None:
+                    return GameScene.None;
+                case GameScene.INTRO:
+                    return GameScene.INTRO;
+                case GameScene.InTown:
+                    return GameScene.InTown;
+                case GameScene.InQuestRoom:
+                    return GameScene.InQuestRoom;                
+                case GameScene.InCombat:
+                    return GameScene.InCombat;
+                case GameScene.InCore:
+                    return GameScene.InCore;
+                case GameScene.InCamp:
+                    return GameScene.InTown;
+                case GameScene.InJobs:
+                    return GameScene.InTown;
+                case GameScene.InMapInteraction:
+                    return GameScene.InTown;
+                default:
+                    return GameScene.None;
+            }
+        }
+
         public static int GetChanceFrmList(this List<float> chances)
         {
             chances.Insert(0, 0f);

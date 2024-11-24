@@ -1,3 +1,4 @@
+using Quest;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,8 @@ namespace Common
         public void OnDialogueEnd()
         {
             CharService.Instance.UnLockChar(CharNames.Cahyo);
+            QuestMissionService.Instance.On_QuestStart(QuestNames.RatInfestation);
+
         }
     }
 }

@@ -32,14 +32,14 @@ namespace Combat
         private void OnEnable()
         {  
             CombatEventService.Instance.OnSOR1 += RoundDsply;
-            CombatEventService.Instance.OnCharClicked += (CharController c)=>ToggleRdDsply();
+            CombatEventService.Instance.OnCharClicked +=ToggleRdDsply;
              
             Reset(0);
         }
         private void OnDisable()
         {
-            //CombatEventService.Instance.OnSOT -= ChgPort;
-            CombatEventService.Instance.OnCharClicked += (CharController c) => ToggleRdDsply();
+            CombatEventService.Instance.OnSOR1 -= RoundDsply;
+            CombatEventService.Instance.OnCharClicked -= ToggleRdDsply;
 
         }
 
@@ -137,7 +137,7 @@ namespace Combat
         {
             rdDsplyTxt.text = rd.ToString();
         }
-        void ToggleRdDsply()
+        void ToggleRdDsply(CharController c)
         {
             if(CombatService.Instance.combatState == CombatState.INCombat_InSkillSelected ||
                 CombatService.Instance.combatState == CombatState.INCombat_normal)

@@ -17,7 +17,7 @@ namespace Combat
 
         private void OnEnable() 
         {
-            CharStatesPanelIconsClear();
+           // CharStatesPanelIconsClear();
             CombatEventService.Instance.OnSOTactics += CharStatesPanelIconsClear;
             CombatEventService.Instance.OnSOC += CharStatesPanelIconsClear;
             CharStatesService.Instance.OnCharStateStart += UpdateCharStateChg;
@@ -25,6 +25,7 @@ namespace Combat
             CombatEventService.Instance.OnCharClicked += SetCombatStatesDisplay;
             CombatEventService.Instance.OnCharOnTurnSet += OnCharSet;
             CombatEventService.Instance.OnEOT += OnEOT;
+            SceneManager.activeSceneChanged += OnActiveSceneChg;
         }
 
         private void OnDisable()
@@ -33,10 +34,22 @@ namespace Combat
             CombatEventService.Instance.OnSOC -= CharStatesPanelIconsClear;
             CharStatesService.Instance.OnCharStateStart -= UpdateCharStateChg;
             CombatEventService.Instance.OnCharOnTurnSet -= SetCombatStatesDisplay;
+            CombatEventService.Instance.OnCharClicked -= SetCombatStatesDisplay;
             CombatEventService.Instance.OnCharOnTurnSet -= OnCharSet;
             CombatEventService.Instance.OnEOT -= OnEOT;
+            SceneManager.activeSceneChanged -= OnActiveSceneChg;
+
         }
-      
+        void OnActiveSceneChg(Scene curr, Scene next)
+        {
+            if (next.name == "COMBAT")
+            {
+             
+            }
+        }   
+
+
+
         void OnEOT()
         {
             posStatesCard.SetActive(false); 
@@ -48,10 +61,10 @@ namespace Combat
             gameObject?.SetActive(true);
 
         }
-        public void InitCharStatesView()
-        {
-            CharStatesPanelIconsClear();
-        }
+        //public void InitCharStatesView()
+        //{
+        //    CharStatesPanelIconsClear();
+        //}
         public GameObject GetCharStateCard(CharStateBehavior statesBehaviour)
         {
             if(statesBehaviour == CharStateBehavior.Positive)
@@ -120,7 +133,7 @@ namespace Combat
 
             }
         }
-        void CharStatesPanelIconsClear()
+       public void CharStatesPanelIconsClear()
         {
             for (int j = 0; j < 2; j++) // first two are pos negative icons
             {

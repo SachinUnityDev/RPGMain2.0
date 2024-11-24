@@ -37,30 +37,37 @@ namespace Combat
 
 #endregion
 
-        void Start()
+        void OnEnable()
         {
             index = -1; 
      
             CombatEventService.Instance.OnCharClicked += SetSkillsPanel;
-            CombatEventService.Instance.OnCharClicked += (CharController c)=> FillSkillClickedState(-1);
-            CombatEventService.Instance.OnEOT += () => FillSkillClickedState(-1);
-            CombatEventService.Instance.OnCombatInit += 
-            (CombatState startState, LandscapeNames landscapeName, EnemyPackName enemyPackName) =>InitSkillBtns();
+            CombatEventService.Instance.OnCharClicked += OnCharClicked_FillSkill;
+            CombatEventService.Instance.OnEOT += OnEOT_FillSkill;
+            CombatEventService.Instance.OnCombatInit += OnCombatInit_InitSkillBtn;
            // InitSkillBtns();
         }
 
         private void OnDisable()
         {
             CombatEventService.Instance.OnCharClicked -= SetSkillsPanel;
-            CombatEventService.Instance.OnCharClicked -= (CharController c) => FillSkillClickedState(-1);
-            CombatEventService.Instance.OnEOT -= () => FillSkillClickedState(-1);
-            CombatEventService.Instance.OnCombatInit -= 
-                (CombatState startState, LandscapeNames landscapeName, EnemyPackName enemyPackName) => InitSkillBtns();            
+            CombatEventService.Instance.OnCharClicked -= OnCharClicked_FillSkill;
+            CombatEventService.Instance.OnEOT -= OnEOT_FillSkill; 
+            CombatEventService.Instance.OnCombatInit -= OnCombatInit_InitSkillBtn;
+
+        }
+
+        void OnCombatInit_InitSkillBtn(CombatState startState, LandscapeNames landscapeName, EnemyPackName enemyPackName)
+        {
+            InitSkillBtns();
         }
         void InitSkillBtns()
         {
             // first ally in party set
-            SetSkillsPanel(CharService.Instance.allCharsInPartyLocked[0]); 
+            if (this != null && CharService.Instance.allCharsInPartyLocked.Count > 0)
+            {
+                SetSkillsPanel(CharService.Instance.allCharsInPartyLocked[0]);
+            }
         } 
 
         public void SkillBtnPressed(int index)
@@ -121,6 +128,15 @@ namespace Combat
             //    displayTxt = cdGap.ToString();
             //skillPanel.transform.GetChild(posOnSkillPanel).GetChild(0).GetComponent<TextMeshProUGUI>().text
             //    = displayTxt;
+        }
+        void OnCharClicked_FillSkill(CharController c)
+        {
+            FillSkillClickedState(-1);
+        }
+        void OnEOT_FillSkill()
+        {
+
+           FillSkillClickedState(-1);
         }
 
         public void FillSkillClickedState(int index)  // -1 index => all skills frames are cleared

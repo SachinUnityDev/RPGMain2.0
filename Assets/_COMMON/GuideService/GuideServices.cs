@@ -40,7 +40,7 @@ namespace Common
                     break;
                 case GameScene.InJobs:
                     break;
-                case GameScene.InIntro:
+                case GameScene.INTRO:
                     break;
                 case GameScene.InMapInteraction:
                                        

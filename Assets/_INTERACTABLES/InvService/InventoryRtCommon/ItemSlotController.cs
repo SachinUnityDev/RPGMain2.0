@@ -504,7 +504,7 @@ namespace Interactables
         /// </summary>
         public bool IsConsumable()
         {
-            if (GameService.Instance.currGameModel.gameScene == GameScene.InTown)
+            if (GameService.Instance.currGameModel.gameScene == GameScene.TOWN)
                 return false; 
                 IConsumable iConsumable = ItemsInSlot[0] as IConsumable;
             if (iConsumable == null)

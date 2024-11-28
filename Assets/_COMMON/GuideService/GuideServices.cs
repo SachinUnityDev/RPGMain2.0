@@ -23,26 +23,24 @@ namespace Common
             HelpName helpName = HelpName.None; 
 
             switch (gameScene)
-            {
-                case GameScene.None:
-                    break;
-                case GameScene.InTown:
+            {        
+                case GameScene.TOWN:
                     helpName = HelpName.TownScreen; 
                     break;
-                case GameScene.InQuestRoom:
+                case GameScene.QUEST:
                     helpName = HelpName.QuestPrep; // to be discussed
                     break;
-                case GameScene.InCombat:
+                case GameScene.COMBAT:
                     helpName = HelpName.Combat;
                     break;
-                case GameScene.InCamp:
+                case GameScene.CAMP:
                     //helpName = HelpName;
                     break;
-                case GameScene.InJobs:
+                case GameScene.JOBS:
                     break;
                 case GameScene.INTRO:
                     break;
-                case GameScene.InMapInteraction:
+                case GameScene.MAPINTERACT:
                                        
                     break;
                 default:

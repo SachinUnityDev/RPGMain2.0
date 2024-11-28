@@ -6,36 +6,15 @@ using UnityEngine;
 
 namespace Quest
 {
-    public class RetrieveTheDebt : QuestObjBase
+    public class RetrieveTheDebt : ObjBase
     {
-        public override QuestNames qMainNames => QuestNames.LostMemory; 
+        public override QuestNames questName => QuestNames.LostMemory; 
 
-        public override ObjNames QObjNames => ObjNames.RetrieveTheDebt;
+        public override ObjNames objName => ObjNames.RetrieveTheDebt;
 //        "Trigger:  meetKhalid dialogue (choose CharClass)
 //Action 1: Unlock Tavern
 //Action 2: Talk to Greybrow: meetGreybrow
 //Action 3: retrieveDebt "
-        public override void Action1()
-        {
-            // unlock tavern
-
-        }
-
-        public override void Action2()
-        {
-            // talk to greybrow: unlock Meet Abbas and GreyBrow(Dialogue)
-
-        }
-
-        public override void Action3()
-        {
-            // retrieve Debt : Abbas and Tahir
-
-        }
-
-        public override void Action4()
-        {
-            
-        }
+    
     }
 }

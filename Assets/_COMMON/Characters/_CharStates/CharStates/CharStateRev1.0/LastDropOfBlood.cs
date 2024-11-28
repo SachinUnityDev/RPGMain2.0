@@ -48,11 +48,11 @@ namespace Common
                                                                                , StatName.fortitude, -6f);
                     break;
                 case 1:
-                    if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
+                    if (GameService.Instance.currGameModel.gameScene == GameScene.COMBAT)
                         charController.damageController.CheatDeath();
                     break;
                 case 2:
-                    if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
+                    if (GameService.Instance.currGameModel.gameScene == GameScene.COMBAT)
                         CharService.Instance.On_CharDeath(charController, -1);
                     break;
                 default:

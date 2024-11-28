@@ -81,6 +81,8 @@ namespace Combat
             CombatEventService.Instance.OnEOR1 -= RoundTick;
             CombatEventService.Instance.OnEOC -= EOCTick;
             QuestEventService.Instance.OnEOQ -= EOQTick;
+            SceneManager.activeSceneChanged -= OnSceneLoaded;
+
         }
 
         void OnSceneLoaded(Scene oldScne, Scene newScene)
@@ -1074,7 +1076,7 @@ namespace Combat
 
         public void UpdateAllSkillState()
         {
-            if (GameService.Instance.currGameModel.gameScene != GameScene.InCombat) return;
+            if (GameService.Instance.currGameModel.gameScene != GameScene.COMBAT) return;
             if (!CharService.Instance.allCharInCombat.Any(t => t.charModel.charID == charController.charModel.charID)) return;
            // Debug.Log(" CHAR SKILL UPDATE" + charController.charModel.charName);
             foreach (SkillModel skillModel in charSkillModel.allSkillModels)

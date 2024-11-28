@@ -34,7 +34,7 @@ namespace Common
         void OnEnable()
         {
           currSelectRace = RaceType.None;
-            if(GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
+            if(GameService.Instance.currGameModel.gameScene == GameScene.COMBAT)
             {
                 bestiaryViewController = FindObjectOfType<BestiaryViewController>();
             }

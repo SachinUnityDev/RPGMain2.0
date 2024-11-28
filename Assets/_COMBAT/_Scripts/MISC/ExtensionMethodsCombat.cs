@@ -176,27 +176,25 @@ public static class ExtensionMethodsCombat
         public static GameScene GetMainGameScene(this GameScene gameScene)
         {
             switch (gameScene)
-            {
-                case GameScene.None:
-                    return GameScene.None;
+            {              
                 case GameScene.INTRO:
                     return GameScene.INTRO;
-                case GameScene.InTown:
-                    return GameScene.InTown;
-                case GameScene.InQuestRoom:
-                    return GameScene.InQuestRoom;                
-                case GameScene.InCombat:
-                    return GameScene.InCombat;
-                case GameScene.InCore:
-                    return GameScene.InCore;
-                case GameScene.InCamp:
-                    return GameScene.InTown;
-                case GameScene.InJobs:
-                    return GameScene.InTown;
-                case GameScene.InMapInteraction:
-                    return GameScene.InTown;
+                case GameScene.TOWN:
+                    return GameScene.TOWN;
+                case GameScene.QUEST:
+                    return GameScene.QUEST;                
+                case GameScene.COMBAT:
+                    return GameScene.COMBAT;
+                case GameScene.CORE:
+                    return GameScene.CORE;
+                case GameScene.CAMP:
+                    return GameScene.TOWN;
+                case GameScene.JOBS:
+                    return GameScene.TOWN;
+                case GameScene.MAPINTERACT:
+                    return GameScene.TOWN;
                 default:
-                    return GameScene.None;
+                    return GameScene.TOWN;
             }
         }
 

@@ -72,7 +72,7 @@ namespace Common
             }
             else
             {
-                if (GameService.Instance.currGameModel.gameScene == GameScene.InTown)
+                if (GameService.Instance.currGameModel.gameScene == GameScene.TOWN)
                 {
                     CalendarUIController calendarUIController = CalendarService.Instance.calendarUIController;
 

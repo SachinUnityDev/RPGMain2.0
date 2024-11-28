@@ -39,7 +39,7 @@ namespace Intro
             Sequence townLoad = DOTween.Sequence();
             townLoad
                 .AppendInterval(3f)
-                .AppendCallback(() => SceneMgmtService.Instance.LoadGameScene(GameScene.InTown)); 
+                .AppendCallback(() => SceneMgmtService.Instance.LoadGameScene(GameScene.TOWN)); 
                 ; 
             townLoad.Play();    
         }

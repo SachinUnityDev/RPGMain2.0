@@ -1,4 +1,6 @@
+using Combat;
 using Common;
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,8 +12,8 @@ namespace Quest
     public class QRoomService : MonoSingletonGeneric<QRoomService>
     {
         public event Action<QRoomState> OnQRoomStateChg;
-        public event Action<QuestNames> OnQSceneStart;
-        public event Action<QuestNames> OnEndOfQScene;
+        public event Action<QuestNames> OnQRoomStart;
+        public event Action<QuestNames> OnQRoomEnd;
         public event Action<QuestNames, int> OnRoomChg;
         public event Action OnInteractComplete; 
 
@@ -41,7 +43,10 @@ namespace Quest
         public bool canAbbasMove = true;
 
         [Header(" Quest Name")]
-        public QuestNames questName; 
+        public QuestNames questName;
+        public LandscapeNames landscapeName;
+        public Nodes nodes; 
+
         private void Start()
         {
             qRoomController = GetComponent<QRoomController>();          
@@ -54,16 +59,34 @@ namespace Quest
         }
         public void On_QuestSceneStart(QuestNames questName)
         {
-            this.questName = questName;
-            CurioService.Instance.InitCurioService();
-            InitQRooms(questName);
-           
-            OnQSceneStart?.Invoke(questName);
+
+            if(qRoomController.roomNo != -1)
+            {
+                this.questName = questName;
+                CurioService.Instance.InitCurioService();
+                InitQRooms(questName);
+            }
+            else
+            {
+
+            }
+            OnQRoomStart?.Invoke(questName);
         }
+
+
+
         public void On_QuestSceneEnd(QuestNames questName)
         {
-            OnEndOfQScene?.Invoke(questName);
+            OnQRoomEnd?.Invoke(questName);
         }
+
+        public void QRoomLoad(LandscapeNames landscapeName, Nodes nodes)
+        {
+            this.landscapeName = landscapeName; 
+            this.nodes = nodes;
+
+        }
+       
         void InitQRooms(QuestNames questName)   // On 1st room Enter 
         {
             qNodeAllRoomSO = 
@@ -74,6 +97,8 @@ namespace Quest
             qRoomController.InitQRoomController(qNodeAllRoomSO);
             On_QuestStateChg(QRoomState.Prep);
         }
+
+        
 
         public void On_RoomChg(QuestNames questName, int roomNo)
         {

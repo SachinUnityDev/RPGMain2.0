@@ -11,29 +11,23 @@ namespace Quest
     {
         public override QuestNames questName => QuestNames.RatInfestation;
 
-        public GameScene gameScene => GameScene.InMapInteraction;
-        public override void EndQuest()
-        {
-            
-        }   
-        public override void OnObj_Completed(ObjNames objNames)
-        {
-            
-        }
-        public override void OnObj_Failed(ObjNames objNames)
-        {
-            
-        }
+        public GameScene gameScene => GameScene.MAPINTERACT;
+    
 
         public void OnResult(Result result)
         {
-            
 
         }
 
-        public override void StartObj(ObjNames objName)
+        public void OnResultClicked(Result result)
         {
-            
+        }
+        public override void QuestStarted()
+        {
+        }
+
+        public override void Quest_Completed()
+        {
         }
     }
 }

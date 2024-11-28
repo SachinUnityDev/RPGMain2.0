@@ -25,29 +25,26 @@ namespace Common
             UIControlServiceGeneral.Instance.CloseAllPanels();// clears Panel list
             switch (gameScene)
             {
-                case GameScene.None:
-                    Debug.LogError(" None Scene request Send"); 
-                    break;
                 case GameScene.INTRO:
-                    StartCoroutine(sceneMgmtController.LoadScene(SceneName.INTRO));
+                    StartCoroutine(sceneMgmtController.LoadScene(GameScene.INTRO));
                     break;
-                case GameScene.InTown: 
-                    StartCoroutine(sceneMgmtController.LoadScene(SceneName.TOWN));
+                case GameScene.TOWN: 
+                    StartCoroutine(sceneMgmtController.LoadScene(GameScene.TOWN));
                     break;
-                case GameScene.InQuestRoom:
-                    StartCoroutine(sceneMgmtController.LoadScene(SceneName.QUEST));
+                case GameScene.QUEST:
+                    StartCoroutine(sceneMgmtController.LoadScene(GameScene.QUEST));
+                    break;    
+                case GameScene.COMBAT:
+                    StartCoroutine(sceneMgmtController.LoadScene(GameScene.COMBAT));
                     break;
-                case GameScene.InCombat:
-                    StartCoroutine(sceneMgmtController.LoadScene(SceneName.COMBAT));
+                case GameScene.CORE:
                     break;
-                case GameScene.InCore:
+                case GameScene.CAMP:
                     break;
-                case GameScene.InCamp:
+                case GameScene.JOBS:
                     break;
-                case GameScene.InJobs:
-                    break;
-                case GameScene.InMapInteraction:                    
-                    StartCoroutine(sceneMgmtController.LoadScene(SceneName.TOWN));
+                case GameScene.MAPINTERACT:                    
+                    StartCoroutine(sceneMgmtController.LoadScene(GameScene.TOWN));
                     SceneManager.activeSceneChanged += OpenMapE; 
                     break;
                 default:
@@ -59,13 +56,11 @@ namespace Common
         void OpenMapE(Scene oldScene, Scene newScene)
         {
             GameScene gameScene = sceneMgmtController.GetGameSceneNameFrmSceneName(newScene); 
-            if (gameScene != GameScene.InTown)            
+            if (gameScene != GameScene.TOWN)            
                 return;             
             MapService.Instance.mapView.GetComponent<IPanel>().Load();
             SceneManager.activeSceneChanged -= OpenMapE;
         }
-
-
     }
 }
 

@@ -5,29 +5,11 @@ using UnityEngine;
 
 namespace Quest
 {
-    public class CleanseTheSewers : QuestObjBase
+    public class CleanseTheSewers : ObjBase
     {
-        public override QuestNames qMainNames => QuestNames.RatInfestation;
+        public override QuestNames questName => QuestNames.RatInfestation;
 
-        public override ObjNames QObjNames => ObjNames.CleanseTheSewers; 
-        public override void Action1()
-        {
-            
-        }
-
-        public override void Action2()
-        {
-            
-        }
-
-        public override void Action3()
-        {
-            
-        }
-
-        public override void Action4()
-        {
-            
-        }
+        public override ObjNames objName => ObjNames.CleanseTheSewers; 
+    
     }
 }

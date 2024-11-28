@@ -36,6 +36,7 @@ namespace Common
 
         private void Start()
         {
+            SceneMgmtService.Instance.sceneMgmtController.UpdateSceneName(GameScene.CORE);
             SceneMgmtService.Instance.LoadGameScene(GameScene.INTRO);
         }
 
@@ -88,48 +89,22 @@ namespace Common
         void UpdateGameScene(Scene oldScene, Scene newScene)
         {
             int index = newScene.buildIndex;
-            SceneName sceneName = (SceneName)index;
-            // covert scene name to game scene
-            GameScene gameScene = GameScene.None;
-
-            switch (sceneName)
-            {
-                case SceneName.INTRO:
-                    gameScene = GameScene.INTRO;
-                    break;
-                case SceneName.TOWN:
-                    gameScene = GameScene.InTown; 
-                    break;
-                case SceneName.QUEST:
-                    gameScene = GameScene.InQuestRoom;
-                    break;
-                case SceneName.COMBAT:
-                    gameScene = GameScene.InCombat;
-                    break;
-                case SceneName.CORE:
-                    gameScene = GameScene.InCore;
-                    break;
-                default:
-                    gameScene = GameScene.None;
-                    break;
-            }
+            GameScene gameScene = SceneMgmtService.Instance.sceneMgmtController.GetGameSceneNameFrmSceneName(newScene); 
             GameSceneLoad(gameScene);
         }
         public void GameSceneLoad(GameScene gameScene)
         {
-            if (gameScene == GameScene.InCore)
+            if (gameScene == GameScene.CORE)
                 GameEventService.Instance.On_CoreSceneLoaded();
             if (gameScene == GameScene.INTRO)
                 GameEventService.Instance.On_IntroLoaded();
-            if (gameScene == GameScene.InCombat)
+            if (gameScene == GameScene.COMBAT)
                 GameEventService.Instance.On_CombatEnter();
-            if (gameScene == GameScene.InTown)
-                GameEventService.Instance.OnTownLoaded();
+            if (gameScene == GameScene.TOWN)
+                GameEventService.Instance.On_TownLoaded();
             currGameModel.SetGameScene(gameScene);
             GameEventService.Instance.On_GameSceneChg(gameScene);
         }
-
-
         public void Init()
         {
             gameController = transform.GetComponent<GameController>();

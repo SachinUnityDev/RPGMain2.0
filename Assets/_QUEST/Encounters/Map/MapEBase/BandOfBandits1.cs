@@ -12,7 +12,7 @@ namespace Quest
     public class BandOfBandits1 : MapEbase, iResult
     {
         public override MapENames mapEName => MapENames.BandOfBanditsOne;
-        public GameScene gameScene => GameScene.InMapInteraction;
+        public GameScene gameScene => GameScene.MAPINTERACT;
 
         CharNames charJoined;
         Currency money2Lose; 
@@ -81,7 +81,7 @@ namespace Quest
             strFX = $"{money2Lose.silver} Silver and {money2Lose.bronze} Bronze lost";        
         }
 
-        public void OnResult(Result result)
+        public void OnResultClicked(Result result)
         {
             isCombatToBePlayed = false;
             isCombatResult = true;
@@ -104,18 +104,12 @@ namespace Quest
                 strFX = $"<b>Party debuff:</b> -1 to all stats, 3 rds";
                 mapEResult = false;
             }
-            MapService.Instance.pathController.NodeResult(mapEResult);
 
-//            SceneManager.activeSceneChanged += OnSceneChg;
         }
 
-        //void OnSceneChg(Scene curr, Scene next)
-        //{
-        //    if(curr.name == "COMBAT")
-        //    {
-        //        SceneManager.activeSceneChanged -= OnSceneChg;
-        //    }
-        //}
-
+        public void OnResult(Result result)
+        {
+            MapService.Instance.pathController.UpdatePathNode(mapEResult);
+        }
     }
 }

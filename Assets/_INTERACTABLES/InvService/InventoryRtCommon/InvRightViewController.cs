@@ -68,7 +68,7 @@ namespace Interactables
         public void ChkOverloadCount()
         {
             
-            if (GameService.Instance.currGameModel.gameScene == GameScene.InTown)
+            if (GameService.Instance.currGameModel.gameScene == GameScene.TOWN)
             {
                 int charLocked = CharService.Instance.allCharsInPartyLocked.Count;
                 int maxSlotCount = InvService.Instance.invMainModel.GetCommInvSize();
@@ -203,7 +203,7 @@ namespace Interactables
         }
         public void CloseRightClickOpts()
         {
-            if(GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
+            if(GameService.Instance.currGameModel.gameScene == GameScene.COMBAT)
             {
                 return; 
             }

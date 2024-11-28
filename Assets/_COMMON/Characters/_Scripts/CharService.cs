@@ -507,7 +507,7 @@ namespace Common
         }
         public void On_CharDeath(CharController _charController, int causeByCharID)
         {
-            if (GameService.Instance.currGameModel.gameScene != GameScene.InCombat) return;
+            if (GameService.Instance.currGameModel.gameScene != GameScene.COMBAT) return;
             allCharInCombat.Remove(_charController);
             GridService.Instance.UpdateGridOnCharDeath(_charController);
 

@@ -68,7 +68,7 @@ namespace Quest
             {
                 if (IsDirectoryEmpty(path))
                 {
-                    InitAllQuestModel();
+                    InitAllQuestModelFrmSO();
                     InitAllQuestbase();
                 }
                 else
@@ -128,21 +128,24 @@ namespace Quest
             return null; 
         }
 
-        void InitAllQuestModel()
+        void InitAllQuestModelFrmSO()
         {
+            allQuestModels.Clear();
             foreach (QuestSO questSO in allQuestSO.allQuestSO)
             {
                 QuestModel questModel = new QuestModel(questSO);
                 allQuestModels.Add(questModel);
             }
         }
+    
         void InitAllQuestbase()
         {
-            foreach (QuestModel quest in allQuestModels)
+            foreach (QuestModel questModel in allQuestModels)
             {
-                Debug.Log("Questbase name" + quest.questName);
-                QuestBase qBase = questFactory.GetQuestBase(quest.questName); 
+                Debug.Log("Questbase name" + questModel.questName);
+                QuestBase qBase = questFactory.GetQuestBase(questModel.questName); 
                 allQuestBase.Add(qBase);
+                qBase.InitQuest(questModel);
             }
             questBaseCount = allQuestBase.Count; 
         }
@@ -208,17 +211,19 @@ namespace Quest
             // in town view for Quest failed return 
         }
 
-
-
         #region START and END OF the Quest
 
         public void On_QuestStart(QuestNames questName)
         {   
             ChgStateOfQuest(questName, QuestState.UnLocked);
             QuestModel questModel = GetQuestModel(questName);
-
+           
+            QuestBase qBase = GetQuestBase(questName);
+            qBase.QuestStarted();
+            
             ObjModel objModel  = questModel.allObjModel[0];     ;
             On_ObjStart(questName, objModel.objName);
+
             OnQuestStart?.Invoke(questName);
         }
         public void On_QuestEnd(QuestNames questNames)
@@ -226,6 +231,9 @@ namespace Quest
             Debug.Log("QuestEnd");
             QuestModel questModel = GetQuestModel(questNames);
             questModel.OnQuestCompleted();
+            QuestBase qBase = GetQuestBase(questNames);
+            qBase.Quest_Completed(); 
+
            // On_ObjEnd(questNames, questController.objModel.objName);
             OnQuestEnd?.Invoke(questNames); 
         }
@@ -233,8 +241,12 @@ namespace Quest
         public void On_ObjStart(QuestNames questName, ObjNames objName)
         {       
             ObjModel objModel = GetObjModel(questName, objName);
-            objModel.OnObjStart(); 
+            //objModel.OnObjStart(); 
+            ObjBase objBase = GetObjBase(questName, objName);   
+            objBase.ObjStart();   
             questController.objModel = objModel;
+     
+
             if(MapService.Instance.pathController.HasPath(questName, objName)) // if obj has path as ? in map it unlocks here
             {
                 MapService.Instance.pathController.On_PathUnLock(questName, objName);
@@ -244,13 +256,16 @@ namespace Quest
         public void On_ObjEnd(QuestNames  questName, ObjNames objName)
         {
             Debug.Log(questName + " " + objName + " ");
+            
+            ObjBase objBase = GetObjBase(questName, objName);            
+            objBase.ObjComplete();
             ObjModel objModel = GetObjModel(questName, objName);
-            if(objModel != null)
-            objModel.OnObjCompleted();
-            else
-            {
-                Debug.LogError("ObjModel is nullc" + objName + questName);
-            }
+            //if(objModel != null)
+            //objModel.OnObjCompleted();
+            //else
+            //{
+            //    Debug.LogError("ObjModel is nullc" + objName + questName);
+            //}
             questController.Move2NextObj(questName, objName); // seq thru all obj and mark end of QUEST in case it's the last Obj
 
             try
@@ -270,6 +285,14 @@ namespace Quest
             ObjModel objModel = questModel.allObjModel.Find(t => t.objName == objName);
             return objModel; 
         }
+
+        public ObjBase GetObjBase(QuestNames questName, ObjNames objName)
+        {
+            QuestBase questBase = GetQuestBase(questName);
+            ObjBase objBase = questBase.allObjBases.Find(t => t.objName == objName);
+            return objBase; 
+        }
+
         #region SAVE and LOAD
         public void SaveState()
         {
@@ -332,6 +355,7 @@ namespace Quest
         #endregion
 
         #endregion
+
         public void Update()
         {
             if (Input.GetKeyDown(KeyCode.F5))

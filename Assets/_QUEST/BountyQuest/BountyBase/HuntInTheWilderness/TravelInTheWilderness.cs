@@ -7,27 +7,12 @@ namespace Quest
 {
 
 
-    public class TravelInTheWilderness : QuestObjBase
+    public class TravelInTheWilderness : ObjBase
     {
-        public override QuestNames qMainNames => QuestNames.HuntInTheWilderness; 
+        public override QuestNames questName => QuestNames.HuntInTheWilderness; 
 
-        public override ObjNames QObjNames => ObjNames.TravelIntoTheWilderness;
+        public override ObjNames objName => ObjNames.TravelIntoTheWilderness;
 
-        public override void Action1()
-        {
-            
-        }
-        public override void Action2()
-        {
-            
-        }
-        public override void Action3()
-        {
-            
-        }
-        public override void Action4()
-        {
-            
-        }
+     
     }
 }

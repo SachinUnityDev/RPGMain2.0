@@ -127,6 +127,9 @@ namespace Quest
                 pathQView.Move2TownFail();
             }
         }
+
+
+
         PathModel GetCurrentPath()
         {
             foreach (PathModel pathModel in allPathModel)

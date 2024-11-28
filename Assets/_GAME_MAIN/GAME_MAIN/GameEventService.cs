@@ -28,7 +28,7 @@ namespace Common
         [Header(" Game State chg")]
         public Action<GameState> OnGameStateChg;
 
-        public void OnTownLoaded()
+        public void On_TownLoaded()
         {   
             if (GameService.Instance.gameState == GameState.OnNewGameStart)
             {

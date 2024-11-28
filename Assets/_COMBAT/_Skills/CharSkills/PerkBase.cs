@@ -54,7 +54,7 @@ namespace Combat
 
             }
             charGO = this.skillController.gameObject;
-            if(GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
+            if(GameService.Instance.currGameModel.gameScene == GameScene.COMBAT)
             {
                 currDyna = GridService.Instance.GetDyna4GO(charGO);
                 AddTargetPos();

@@ -8,21 +8,42 @@ namespace Quest
 {
     public class QRoomController : MonoBehaviour
     {
-        [Header("Quest Room Model")]
+        [Header("ALL Q NODES Quest Room Model")]
         public List<QNodeAllRoomModel> allQNodeAllRoomModel = new List<QNodeAllRoomModel>();
-        public int roomNo;
-        public QRoomModel qRoomModel;
+        
+        [Header("Current Q NODES ALL Room Model")]
         public QNodeAllRoomModel allQNodeRoomModel;
-       
-        public void InitQRoomController(QNodeAllRoomSO qNodeAllRoomSO)
+
+        [Header("Current Room Model")]
+        public QRoomModel qRoomModel;
+        public int roomNo;
+        public void InitQRoomController(QNodeAllRoomSO qNodeAllRoomSO)  // On Q Room Init
         {
-            allQNodeRoomModel = new QNodeAllRoomModel(qNodeAllRoomSO);
-            allQNodeAllRoomModel.Add(allQNodeRoomModel);
-            roomNo = 1;
-            qRoomModel = allQNodeRoomModel.GetQRoomModel(roomNo);
-            CurioInit(qRoomModel);
-            InteractInit(qRoomModel); 
+            if (allQNodeAllRoomModel.Count > 0)
+            {
+                roomNo = qRoomModel.roomNo;
+                Move2Room(roomNo);  
+                Debug.Log("QRoomController:InitQRoomController: roomNo: " + roomNo);
+            }
+            else
+            {
+                allQNodeRoomModel = new QNodeAllRoomModel(qNodeAllRoomSO);
+                allQNodeAllRoomModel.Add(allQNodeRoomModel);
+                roomNo = 1;
+                qRoomModel = allQNodeRoomModel.GetQRoomModel(roomNo);
+                CurioInit(qRoomModel);
+                InteractInit(qRoomModel);
+                Debug.Log("QRoomController:INIT: roomNo: " + roomNo);
+
+            }
         }
+        public void LoadQRoomController(QNodeAllRoomSO qNodeAllRoomSO)
+        {   
+            CurioInit(qRoomModel);
+            InteractInit(qRoomModel);
+        }
+
+
         public void Move2Room(int roomNo)
         {
             this.roomNo = roomNo;

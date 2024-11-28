@@ -160,7 +160,7 @@ namespace Combat
         {   
             CreateSkillCardGO(); // set the skill card to the skill Service
 
-            if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
+            if (GameService.Instance.currGameModel.gameScene == GameScene.COMBAT)
             {
                 skillView = FindObjectOfType<SkillView>();
                 _OnSkillApply += SkillEventtest;
@@ -415,7 +415,7 @@ namespace Combat
         }
         public void On_SkillSelected(CharNames _charName, SkillNames skillName)  // Ally Skill and perk "Skill Select" 
         {
-            if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
+            if (GameService.Instance.currGameModel.gameScene == GameScene.COMBAT)
             {
                 CombatService.Instance.combatState = CombatState.INCombat_InSkillSelected;
                 ClearPrevData();
@@ -756,7 +756,7 @@ namespace Combat
         #endregion
         private void Update()
         {
-            if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
+            if (GameService.Instance.currGameModel.gameScene == GameScene.COMBAT)
             {
                 if (CombatService.Instance.combatState == CombatState.INTactics)
                     return;

@@ -17,7 +17,7 @@ namespace Common
         public override void StateApplyFX()
         {
             int strikerLvl = 0;
-            if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
+            if (GameService.Instance.currGameModel.gameScene == GameScene.COMBAT)
             {
                 strikerController = CombatService.Instance.currCharOnTurn;
                 strikerLvl = strikerController.charModel.charLvl;
@@ -60,7 +60,7 @@ namespace Common
 
         void ApplyRoundFX()
         {
-            if(GameService.Instance.currGameModel.gameScene != GameScene.InCombat) return;
+            if(GameService.Instance.currGameModel.gameScene != GameScene.COMBAT) return;
             if (CombatService.Instance.currCharOnTurn.charModel.charID != charID) return;
             AttribData statData = charController.GetAttrib(AttribName.earthRes);
 

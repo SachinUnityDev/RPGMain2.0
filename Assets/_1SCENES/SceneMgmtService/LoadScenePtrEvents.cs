@@ -6,10 +6,9 @@ using UnityEngine.EventSystems;
 
 public class LoadScenePtrEvents : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] SceneName sceneName; 
+    [SerializeField] GameScene sceneName; 
     public void OnPointerClick(PointerEventData eventData)
     {
-        SceneMgmtController sceneMgmtController = SceneMgmtService.Instance.sceneMgmtController;
-        StartCoroutine(sceneMgmtController.LoadScene(sceneName));            
+       SceneMgmtService.Instance.LoadGameScene(sceneName);
     }
 }

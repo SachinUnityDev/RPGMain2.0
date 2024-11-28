@@ -163,7 +163,7 @@ namespace Combat
         }
         void OnSceneLoaded(Scene oldScene, Scene newScene)
         {
-            if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
+            if (GameService.Instance.currGameModel.gameScene == GameScene.COMBAT)
             {
                 CombatEventService.Instance.OnEOR1 += RoundTick;
                 CombatEventService.Instance.OnEOC += EOCTick;
@@ -266,7 +266,7 @@ namespace Combat
             int charID = charModel.charID; 
             float val = charModel.mainExp * (1 + (percentVal / 100));
             int turn = -1; 
-            if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)            
+            if (GameService.Instance.currGameModel.gameScene == GameScene.COMBAT)            
                 turn = CombatService.Instance.currentTurn;
 
             AttribModData attribModVal = new AttribModData(turn, causeType, causeName
@@ -496,7 +496,7 @@ namespace Combat
                                 , AttribName attribName, float value, TimeFrame timeFrame, int castTime, bool isBuff)
         {
             AttribModData attribModVal = null;
-            if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
+            if (GameService.Instance.currGameModel.gameScene == GameScene.COMBAT)
             {
                 DynamicPosData dyna = GridService.Instance.GetDyna4GO(gameObject);            
 

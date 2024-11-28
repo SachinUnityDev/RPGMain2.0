@@ -112,7 +112,7 @@ namespace Common
         }
         void OnSceneLoaded(Scene oldScene, Scene newScene)
         {
-            if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
+            if (GameService.Instance.currGameModel.gameScene == GameScene.COMBAT)
             {
                 CombatEventService.Instance.OnEOR1 += RoundTick;
                 CombatEventService.Instance.OnEOC += EOCTick;               
@@ -140,7 +140,7 @@ namespace Common
             int effectedCharID = charController.charModel.charID;
 
             int currRd = -1;
-            if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
+            if (GameService.Instance.currGameModel.gameScene == GameScene.COMBAT)
             {
                 currRd = CombatEventService.Instance.currentRound;
             }
@@ -272,7 +272,7 @@ namespace Common
 
             int effectedCharID = charController.charModel.charID;
             int currRd = -1;
-            if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
+            if (GameService.Instance.currGameModel.gameScene == GameScene.COMBAT)
             {
                 currRd = CombatEventService.Instance.currentRound;
             }

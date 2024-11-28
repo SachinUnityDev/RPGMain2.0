@@ -26,7 +26,7 @@ namespace Quest
         }
         void OnSceneLoaded(Scene oldScene, Scene newScene)
         {
-            if (GameService.Instance.currGameModel.gameScene == GameScene.InQuestRoom)
+            if (GameService.Instance.currGameModel.gameScene == GameScene.QUEST)
             {
                 GameObject canvasGO = FindObjectOfType<Canvas>().gameObject; 
                 qbarkViewGO = FindObjectOfType<QbarkView>(true);

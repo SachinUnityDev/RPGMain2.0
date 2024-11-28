@@ -6,29 +6,14 @@ using UnityEngine;
 
 namespace Quest
 {
-    public class GoBackToKhalid : QuestObjBase
+    public class GoBackToKhalid : ObjBase
     {
-        public override QuestNames qMainNames => QuestNames.LostMemory;
+        public override QuestNames questName => QuestNames.LostMemory;
 
-        public override ObjNames QObjNames => ObjNames.GoBackToKhalid; 
+        public override ObjNames objName => ObjNames.GoBackToKhalid; 
         // "Action 1:  (choose Profession.)debtisClear dialogue
         // Action 2: Unlock Marketplace
         // forcedAction -> End day"
-        public override void Action1()
-        {
-            // debt is clear Dialogue
-        }
-        public override void Action2()
-        {
-           // UnLock MarketPlace
-        }
-        public override void Action3()
-        {
-            // Forced action -> End Day
-        }
-        public override void Action4()
-        {
-            
-        }
+        
     }
 }

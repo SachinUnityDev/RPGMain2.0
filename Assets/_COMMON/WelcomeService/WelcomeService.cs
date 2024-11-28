@@ -83,9 +83,6 @@ namespace Town
 
             CalendarService.Instance.OnStartOfCalDate -= GoVisitTemple2dayGap;
             CalendarService.Instance.OnStartOfCalDate += GoVisitTemple2dayGap;
-
-       
-
             BuildingIntService.Instance.houseController.UnLockBuildIntType(BuildInteractType.EndDay, true);
             BuildingIntService.Instance.houseController.UnLockBuildIntType(BuildInteractType.Provision, true);
             BuildingIntService.Instance.houseController.UnLockBuildIntType(BuildInteractType.Chest, true);

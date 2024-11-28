@@ -46,7 +46,7 @@ namespace Quest
         private void Start()
         {
             qAbbasMove = abbasGO.GetComponent<QAbbasMovementController>();
-            QRoomService.Instance.OnQSceneStart += OnStartQRoomView;
+            QRoomService.Instance.OnQRoomStart += OnStartQRoomView;
             QRoomService.Instance.OnQRoomStateChg += OnQRoomStateChgView;
             QRoomService.Instance.OnRoomChg += OnRoomChg;
 
@@ -54,7 +54,7 @@ namespace Quest
         }
         private void OnDisable()
         {
-            QRoomService.Instance.OnQSceneStart -= OnStartQRoomView;
+            QRoomService.Instance.OnQRoomStart -= OnStartQRoomView;
             QRoomService.Instance.OnQRoomStateChg -= OnQRoomStateChgView;
             QRoomService.Instance.OnRoomChg -= OnRoomChg;
         }

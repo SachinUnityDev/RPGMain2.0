@@ -52,9 +52,9 @@ namespace Interactables
         }
         void OnSceneUnLoaded(Scene scene)
         {
-            if (GameService.Instance.currGameModel.gameScene == GameScene.InTown
-                || GameService.Instance.currGameModel.gameScene == GameScene.InCombat
-                || GameService.Instance.currGameModel.gameScene == GameScene.InQuestRoom)
+            if (GameService.Instance.currGameModel.gameScene == GameScene.TOWN
+                || GameService.Instance.currGameModel.gameScene == GameScene.COMBAT
+                || GameService.Instance.currGameModel.gameScene == GameScene.QUEST)
             {
                 FindItemCardGO();
             }

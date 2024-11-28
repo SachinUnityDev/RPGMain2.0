@@ -6,27 +6,21 @@ using UnityEngine;
 namespace Quest
 {
 
-    public class TalkToKhalid : QuestObjBase
+    public class TalkToKhalid : ObjBase
     {
-        public override QuestNames qMainNames => QuestNames.LostMemory;
-        public override ObjNames QObjNames => ObjNames.TalkToKhalid;
-        public override void Action1()
-        {
+        public override QuestNames questName => QuestNames.LostMemory;
+        public override ObjNames objName => ObjNames.TalkToKhalid;
 
-        }
-        public override void Action2()
+        public override void ObjStart()
         {
-
+            base.ObjStart();  
         }
 
-        public override void Action3()
+        public override void ObjComplete()
         {
-
+            
+            
         }
 
-        public override void Action4()
-        {
-
-        }
     }
 }

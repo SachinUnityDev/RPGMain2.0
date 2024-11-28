@@ -7,23 +7,15 @@ namespace Quest
 {
     public class HuntInTheWilderness : QuestBase
     {
-        public override QuestNames questName => QuestNames.HuntInTheWilderness; 
+        public override QuestNames questName => QuestNames.HuntInTheWilderness;
 
-        public override void EndQuest()
+        public override void QuestStarted()
         {
-            
-        }     
-        public override void OnObj_Completed(ObjNames objNames)
-        {
-            
         }
-        public override void OnObj_Failed(ObjNames objNames)
+
+        public override void Quest_Completed()
         {
-            
-        }
-        public override void StartObj(ObjNames objName)
-        {
-            
+
         }
     }
 }

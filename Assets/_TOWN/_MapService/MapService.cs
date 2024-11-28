@@ -12,6 +12,7 @@ namespace Town
     public interface iResult
     {
         GameScene gameScene { get; }       
+        void OnResultClicked(Result result);
         void OnResult(Result result);
     }
 

@@ -7,30 +7,13 @@ namespace Quest
 {
 
 
-    public class VisitTemple : QuestObjBase
+    public class VisitTemple : ObjBase
     {
-        public override QuestNames qMainNames => QuestNames.ThePowerWithin; 
-        public override ObjNames QObjNames => ObjNames.VisitTemple;
+        public override QuestNames questName => QuestNames.ThePowerWithin; 
+        public override ObjNames objName => ObjNames.VisitTemple;
         //  "Action 1: Visit temple, talk to Minami
         //  meetMinami Dialogue
         //  Action 2: UnlockRayyan"
-        public override void Action1()
-        {
-            // meetMinami Dialogue
-        }
-
-        public override void Action2()
-        {
-            // UnLocking Rayyan // scroll roster 
-        }
-        public override void Action3()
-        {
-
-        }
-
-        public override void Action4()
-        {
-
-        }
+   
     }
 }

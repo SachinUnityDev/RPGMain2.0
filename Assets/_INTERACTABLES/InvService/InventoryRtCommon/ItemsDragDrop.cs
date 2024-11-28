@@ -290,8 +290,8 @@ namespace Interactables
             if (iSlotable.slotType == SlotType.ProvActiveInv || iSlotable.slotType == SlotType.TrophySelectSlot
                 || iSlotable.slotType == SlotType.TrophyScrollSlot)
                 return;
-            if (GameService.Instance.currGameModel.gameScene == GameScene.InTown
-                || GameService.Instance.currGameModel.gameScene == GameScene.InQuestRoom)
+            if (GameService.Instance.currGameModel.gameScene == GameScene.TOWN
+                || GameService.Instance.currGameModel.gameScene == GameScene.QUEST)
                 canvasGO = GameObject.FindGameObjectWithTag("Canvas");
              
             rectTransform.anchoredPosition += eventData.delta/canvasGO.GetComponent<Canvas>().scaleFactor;           

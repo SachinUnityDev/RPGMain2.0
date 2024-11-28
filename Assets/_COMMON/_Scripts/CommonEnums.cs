@@ -8,16 +8,15 @@ namespace Common
     {
     }
     public enum GameScene // Game Scene that Includes all scenes and Panels like map,job and camp 
-    {
-        None,
+    {       
         INTRO,
-        InTown,    
-        InQuestRoom,
-        InCombat,
-        InCore,
-        InCamp,
-        InJobs,       
-        InMapInteraction,            
+        TOWN,    
+        QUEST,
+        COMBAT,
+        CORE,
+        CAMP,
+        JOBS,       
+        MAPINTERACT,            
     };
 
     public enum SceneName  // exact scene Name to replace the Str

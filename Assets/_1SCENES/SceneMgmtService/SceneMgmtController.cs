@@ -22,41 +22,42 @@ namespace Common
 
 
         [Header(" Scene ref")]
-        [SerializeField] SceneName newScene;
-        [SerializeField] SceneName lastScene; 
+        [SerializeField] GameScene newScene;
+        [SerializeField] GameScene lastScene; 
 
         private void OnEnable()
         {
             SceneManager.activeSceneChanged += OnSceneLoaded; 
-            UpdateSceneName(SceneName.CORE);
+        
         }
         private void OnDisable()
         {
             SceneManager.activeSceneChanged -= OnSceneLoaded;
         }
         
-        public void UpdateSceneName(SceneName lastScene)
+        public void UpdateSceneName(GameScene lastScene)
         {
             this.lastScene = lastScene;              
         }
 
-        public IEnumerator LoadScene(SceneName sceneName)
+        public IEnumerator LoadScene(GameScene gameScene)
         {
-            AsyncOperation async = SceneManager.LoadSceneAsync(sceneName.ToString(), LoadSceneMode.Additive);
+
+            AsyncOperation async = SceneManager.LoadSceneAsync(gameScene.ToString(), LoadSceneMode.Additive);
             StartSceneTransit();
             while (!async.isDone)
             {
-                Debug.Log("Loading Scene" + sceneName.ToString());
+                Debug.Log("Loading Scene" + gameScene.ToString());
                 yield return null;               
             }           
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName.ToString()));
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(gameScene.ToString()));
             lastScene = newScene; 
-            newScene = sceneName;            
-            if (!(lastScene == SceneName.CORE))
+            newScene = gameScene;            
+            if (!(lastScene == GameScene.CORE))
                 StartCoroutine(UnloadAsyncOperation(lastScene)); 
            
         }
-        IEnumerator UnloadAsyncOperation(SceneName sceneName)
+        IEnumerator UnloadAsyncOperation(GameScene sceneName)
         {
             AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(sceneName.ToString());
 
@@ -64,7 +65,6 @@ namespace Common
             {
                 yield return null;
             }
-           
         }
         public void StartSceneTransit()
         {
@@ -113,19 +113,19 @@ namespace Common
                 case "INTRO":
                     return GameScene.INTRO;
                 case "TOWN":
-                    return GameScene.InTown;    
+                    return GameScene.TOWN;
                 case "QUEST":
-                    return GameScene.InQuestRoom;
+                    return GameScene.QUEST;
                 case "COMBAT":
-                    return GameScene.InCombat;
+                    return GameScene.COMBAT;
                 case "CORE":
-                    return GameScene.InCore;
+                    return GameScene.CORE;
                 default:
-                    return GameScene.None;  
+                    return GameScene.TOWN;
             }
         }
 
-      
+
 
     }
 }

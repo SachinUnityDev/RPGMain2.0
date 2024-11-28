@@ -12,7 +12,7 @@ namespace Quest
     {
         public override MapENames mapEName => MapENames.Hunt1;
 
-        public GameScene gameScene => GameScene.InMapInteraction; 
+        public GameScene gameScene => GameScene.MAPINTERACT; 
 
         CharNames charJoined;
         Currency money2Lose;
@@ -92,10 +92,14 @@ namespace Quest
             EncounterService.Instance.mapEController.On_MapEComplete(mapEName, mapEResult);
         }
 
-        public void OnResult(Result result)
+        public void OnResultClicked(Result result)
         {
             
 
+        }
+
+        public void OnResult(Result result)
+        {
         }
     }
 }

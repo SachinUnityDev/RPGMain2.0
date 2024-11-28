@@ -83,7 +83,7 @@ namespace Combat
         }
         void OnSceneLoaded(Scene oldScene, Scene newScene)
         {
-            if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
+            if (GameService.Instance.currGameModel.gameScene == GameScene.COMBAT)
             {
                 CombatService.Instance.GetAllyInCombat(); 
                 // dummy start
@@ -106,7 +106,7 @@ namespace Combat
             this.combatState = combatState;
             this.iResult = iResult;
 
-            SceneMgmtService.Instance.LoadGameScene(GameScene.InCombat);             
+            SceneMgmtService.Instance.LoadGameScene(GameScene.COMBAT);             
         }
 
         // Only entry point for all the combat
@@ -215,13 +215,15 @@ namespace Combat
         public void OnCombatEndClicked()
         {
             SceneMgmtService.Instance.LoadGameScene(iResult.gameScene);
+            iResult.OnResultClicked(currCombatResult);
+
             SceneManager.activeSceneChanged += SceneChg; 
         }
         void SceneChg(Scene oldScene, Scene newScene)
         {
             if (newScene.name == iResult.gameScene.GetMainGameScene().ToString())
             {
-                iResult.OnResult(currCombatResult);
+                iResult.OnResult(currCombatResult);     
                 SceneManager.activeSceneChanged -= SceneChg;
             }
         }
@@ -435,7 +437,7 @@ namespace Combat
 
         public void On_CharHovered(GameObject _charHoveredGO)
         {
-            if(GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
+            if(GameService.Instance.currGameModel.gameScene == GameScene.COMBAT)
             {
                 CharController charController = _charHoveredGO?.GetComponent<CharController>();
                 CombatService.Instance.currCharHovered = charController;            

@@ -36,7 +36,7 @@ namespace Common
         }
         void MoveUnClickable(CharController charController)
         {
-            if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
+            if (GameService.Instance.currGameModel.gameScene == GameScene.COMBAT)
             {
                 if (this.charController.charModel.charID == charController.charModel.charID)
                 {
@@ -47,7 +47,7 @@ namespace Common
 
         void NoMeleeAttackExceptOn1(CharController charController)
         {
-            if (GameService.Instance.currGameModel.gameScene == GameScene.InCombat)
+            if (GameService.Instance.currGameModel.gameScene == GameScene.COMBAT)
             {
                 if (this.charController.charModel.charID == charController.charModel.charID)
                 {

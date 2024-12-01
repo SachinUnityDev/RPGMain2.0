@@ -738,5 +738,15 @@ namespace Combat
                 ClearState();
             }
         }
+
+        public bool ChkSceneReLoad()
+        {
+            return buffModel != null; 
+        }
+
+        public void OnSceneReLoad()
+        {
+            Debug.Log("Scene Reloaded buff Controller");    
+        }
     }
 }

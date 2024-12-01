@@ -34,7 +34,6 @@ namespace Quest
                 CurioInit(qRoomModel);
                 InteractInit(qRoomModel);
                 Debug.Log("QRoomController:INIT: roomNo: " + roomNo);
-
             }
         }
         public void LoadQRoomController(QNodeAllRoomSO qNodeAllRoomSO)
@@ -54,7 +53,7 @@ namespace Quest
             else
                 QRoomService.Instance.On_QuestStateChg(QRoomState.Walk);
 
-            QRoomService.Instance.On_RoomChg(qRoomModel.questNames, roomNo);
+            QRoomService.Instance.On_RoomChg(qRoomModel.questName, roomNo);
 
             CurioInit(qRoomModel);
             InteractInit(qRoomModel);

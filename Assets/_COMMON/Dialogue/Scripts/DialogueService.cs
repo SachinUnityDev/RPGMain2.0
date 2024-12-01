@@ -7,6 +7,7 @@ using Quest;
 using Town;
 using Intro;
 using System.IO;
+using Interactables;
 
 namespace Common
 {
@@ -324,6 +325,10 @@ namespace Common
         public void LoadState()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            if (ChkSceneReLoad())
+            {
+                OnSceneReLoad();return;
+            }
             if (SaveService.Instance.DirectoryExists(path))
             {
                 string[] fileNames = Directory.GetFiles(path);
@@ -364,5 +369,14 @@ namespace Common
             }
         }
 
+        public bool ChkSceneReLoad()
+        {
+            return allDiaLogueModels.Count > 0; 
+        }
+
+        public void OnSceneReLoad()
+        {
+            Debug.Log("Dialogue Service Scene Reload"); 
+        }
     }
 }

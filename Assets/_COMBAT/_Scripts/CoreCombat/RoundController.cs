@@ -11,7 +11,7 @@ namespace Combat
     {
      
         [Header("global var")]
-        [SerializeField] int index;
+        public int index;
         [SerializeField] int newIndex = 0;
 
         [SerializeField] int charCount = 0; 
@@ -46,7 +46,7 @@ namespace Combat
                 charCount = charTurnOrder.Count;
                 if (index < charCount && index > -1)
                 {
-                    Debug.Log("TURN " + index + "Char ID" + charTurnOrder[index].charModel.charID); 
+                    Debug.Log("TURN + Char ID" + index + "+" + charTurnOrder[index].charModel.charID); 
                     CombatService.Instance.currCharOnTurn = charTurnOrder[index];                  
                     SetAP(charTurnOrder[index]);
                     CombatService.Instance.currentTurn = index;

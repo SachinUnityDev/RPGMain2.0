@@ -150,6 +150,16 @@ namespace Common
                 ClearState();
             }
         }
+
+        public bool ChkSceneReLoad()
+        {
+            return fameController.fameModel != null;
+        }
+
+        public void OnSceneReLoad()
+        {
+            Debug.Log("OnSceneReLoad FameController");
+        }
     }
 
 

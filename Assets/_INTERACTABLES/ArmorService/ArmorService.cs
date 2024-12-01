@@ -148,7 +148,10 @@ namespace Interactables
         public void LoadState()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-
+            if (ChkSceneReLoad())
+            {
+                OnSceneReLoad();return;
+            }
             if (SaveService.Instance.DirectoryExists(path))
             {
                 string[] fileNames = Directory.GetFiles(path);
@@ -190,6 +193,16 @@ namespace Interactables
             {
                 ClearState();
             }
+        }
+
+        public bool ChkSceneReLoad()
+        {
+            return allArmorModels.Count > 0;    
+        }
+
+        public void OnSceneReLoad()
+        {
+            Debug.Log("Scene Reload Armor"); 
         }
     }
 

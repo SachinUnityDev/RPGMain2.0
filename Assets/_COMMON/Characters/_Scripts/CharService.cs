@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 using Town;
-using System.Net.Http.Headers;
 using System.Collections;
 namespace Common
 {
@@ -96,6 +95,10 @@ namespace Common
         public void Init() 
         {
            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            if (ChkSceneReLoad())
+            {
+                OnSceneReLoad();return; 
+            }
             if (SaveService.Instance.DirectoryExists(path))
             {
                 if(IsDirectoryEmpty(path))
@@ -612,6 +615,16 @@ namespace Common
             }
         }
 
+        public bool ChkSceneReLoad()
+        {
+            return allCharModels.Count > 0; 
+
+        }
+
+        public void OnSceneReLoad()
+        {
+            Debug.Log("Scene Reload CharService");
+        }
     }
 }
 //charDiedinLastTurn.Add(_charController);

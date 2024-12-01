@@ -78,6 +78,11 @@ namespace Town
             // browse thru all files in the folder and load them
             // as char Models 
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            if (ChkSceneReLoad())
+            {
+                OnSceneReLoad();
+                return; 
+            }
 
             if (SaveService.Instance.DirectoryExists(path))
             {
@@ -132,6 +137,15 @@ namespace Town
             }
         }
 
+        public bool ChkSceneReLoad()
+        {
+            return townModel != null;
+        }
+
+        public void OnSceneReLoad()
+        {
+            Debug.Log("OnSceneReLoad TownController");
+        }
     }
 
 

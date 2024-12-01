@@ -310,10 +310,27 @@ namespace Quest
                 File.WriteAllText(fileName, questModelJSON);
             }
         }
+        public bool ChkSceneReLoad()
+        {
+            return allQuestModels.Count > 0; // if model list is pre populated then scene is reloaded  
+        }
 
+        public void OnSceneReLoad()
+        {
+            if (allQuestBase.Count == 0)
+            {
+                InitAllQuestbase();
+            }
+        }
         public void LoadState()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+
+            if (ChkSceneReLoad())
+            {
+                OnSceneReLoad(); return; 
+            }
+
 
             if (SaveService.Instance.DirectoryExists(path))
             {
@@ -331,14 +348,14 @@ namespace Quest
                 {
                     InitAllQuestbase();
                 }
-                else
-                { // align base and Models
-                    foreach (QuestModel questModel in allQuestModels)
-                    {
-                        QuestBase qBase = GetQuestBase(questModel.questName);
-                        qBase.questState = questModel.questState;
-                    }
-                }
+                //else
+                //{ // align base and Models
+                //    foreach (QuestModel questModel in allQuestModels)
+                //    {
+                //        QuestBase qBase = GetQuestBase(questModel.questName);
+                //        qBase.questState = questModel.questState;
+                //    }
+                //}
             }
             else
             {
@@ -371,5 +388,7 @@ namespace Quest
                 ClearState();
             }
         }
+
+    
     }
 }

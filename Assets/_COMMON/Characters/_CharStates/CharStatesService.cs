@@ -195,6 +195,12 @@ namespace Common
         public void LoadState()
         {
             // loop thru all charStateController and clear
+            if (ChkSceneReLoad())
+            {
+                OnSceneReLoad();
+                return;
+            }
+
             foreach (CharStateController charStateController in allCharStateController)
             {
                 charStateController.ClearOldState();
@@ -230,6 +236,16 @@ namespace Common
             {
                 LoadState();
             }
+        }
+
+        public bool ChkSceneReLoad()
+        {
+            return allCharStateModel.Count > 0;
+        }
+
+        public void OnSceneReLoad()
+        {
+            Debug.Log("scene reloaded CharStatesService"); 
         }
     }
 

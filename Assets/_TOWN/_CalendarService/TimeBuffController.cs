@@ -67,7 +67,7 @@ namespace Common
     {
 
         CharController charController;
-        public TimeBuffModel timeBuffModel;
+        public TimeBuffModel timeBuffModel =null;
         public ServicePath servicePath => ServicePath.BuffService;
 
         private void Start()
@@ -163,6 +163,12 @@ namespace Common
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
             string buffPath = path + "/TimeBuff/";
             charController = GetComponent<CharController>();
+
+            if (ChkSceneReLoad())
+            {
+                OnSceneReLoad();
+                return;
+            }
             if (SaveService.Instance.DirectoryExists(buffPath))
             {
                 string[] fileNames = Directory.GetFiles(buffPath);
@@ -213,6 +219,16 @@ namespace Common
             {
                 ClearState();
             }
+        }
+
+        public bool ChkSceneReLoad()
+        {
+            return timeBuffModel != null; 
+        }
+
+        public void OnSceneReLoad()
+        {
+            Debug.Log("scene reloaded TimeBuffController"); 
         }
         #endregion
     }

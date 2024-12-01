@@ -225,7 +225,11 @@ namespace Interactables
         public void LoadState()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-            path+= "/InvMainModel.txt";           
+            path+= "/InvMainModel.txt";
+            if(ChkSceneReLoad())
+            {
+                OnSceneReLoad();return;
+            }
             if (File.Exists(path))
             {
                 string contents = File.ReadAllText(path);
@@ -253,6 +257,16 @@ namespace Interactables
             {
                 LoadState();
             }
+        }
+
+        public bool ChkSceneReLoad()
+        {
+            return invMainModel != null;
+        }
+
+        public void OnSceneReLoad()
+        {
+            Debug.Log(" Scene Reload inventory Services"); 
         }
     }
 }

@@ -105,6 +105,12 @@ namespace Town
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);            
             GetControllerRef();  // controller references
+            if (ChkSceneReLoad())
+            {
+                OnSceneReLoad();
+                return;
+            }
+
             List<PathModel> allpathModel = new List<PathModel>();
             if (SaveService.Instance.DirectoryExists(path))
             {
@@ -133,6 +139,16 @@ namespace Town
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
             DeleteAllFilesInDirectory(path);
+        }
+
+        public bool ChkSceneReLoad()
+        {
+            return pathController.allPathModel.Count > 0; 
+        }
+
+        public void OnSceneReLoad()
+        {
+            Debug.Log("OnSceneReLoad Path Controller");
         }
     }
 }

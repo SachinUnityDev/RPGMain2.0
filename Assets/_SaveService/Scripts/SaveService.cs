@@ -762,6 +762,8 @@ namespace Common
         void SaveState();
         void LoadState();
         void ClearState();
+        bool ChkSceneReLoad(); // check the key list i.e. Models
+        void OnSceneReLoad(); 
     }
 
 }

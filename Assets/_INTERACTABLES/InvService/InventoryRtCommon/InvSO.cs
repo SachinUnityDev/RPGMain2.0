@@ -112,7 +112,14 @@ namespace Interactables
                     sprite = ItemService.Instance.allItemSO.GetTradeGoodsSO((TGNames)itemName).iconSprite;
                     break;
                 case ItemType.Tools:
-                    sprite = ItemService.Instance.allItemSO.GetToolSO((ToolNames)itemName).iconSprite;
+                    try
+                    {
+                        sprite = ItemService.Instance.allItemSO.GetToolSO((ToolNames)itemName).iconSprite;
+                    }catch(Exception e)
+                    {
+                        Debug.Log("Tool not found in SO" +((ToolNames)itemName).ToString());
+                    }
+                    
                     break;
                 case ItemType.Teas:// cannot be carried in inv
                                    // sprite = ItemService.Instance.GetPotionSO((PotionName)itemName).iconSprite;

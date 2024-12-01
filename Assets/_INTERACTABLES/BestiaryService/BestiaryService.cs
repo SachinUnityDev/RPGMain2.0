@@ -147,7 +147,10 @@ namespace Common
         public void LoadState()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-
+            if (ChkSceneReLoad())
+            {
+                OnSceneReLoad(); return; 
+            }
             if (SaveService.Instance.DirectoryExists(path))
             {
                 string[] fileNames = Directory.GetFiles(path);
@@ -159,15 +162,12 @@ namespace Common
                     Debug.Log("  " + contents);
                     CharModel charModel = JsonUtility.FromJson<CharModel>(contents);
                     allRegBestiaryInGameModels.Add(charModel);
-
                 }
             }
             else
             {
                 Debug.LogError("Service Directory missing");
             }
-
-
         }
 
         public void ClearState()
@@ -189,6 +189,16 @@ namespace Common
             {
                 ClearState();
             }
+        }
+
+        public bool ChkSceneReLoad()
+        {
+            return allRegBestiaryInGameModels.Count > 0;
+        }
+
+        public void OnSceneReLoad()
+        {
+            Debug.Log("Scene Reload Bestiary"); 
         }
     }
 }

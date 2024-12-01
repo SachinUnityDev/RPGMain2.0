@@ -20,7 +20,7 @@ namespace Common
     public class EcoService : MonoSingletonGeneric<EcoService>, ISaveable
     {
         public event Action<PocketType> OnPocketSelected;
-        public EconoModel econoModel;
+        public EconoModel econoModel =null;
         public EcoSO ecoSO;
         public event Action<Currency> OnInvMoneyChg;
         public event Action<Currency> OnStashMoneyChg;
@@ -163,6 +163,12 @@ namespace Common
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
             path += "/EconoModel.txt";
+            if (ChkSceneReLoad())
+            {
+                OnSceneReLoad();
+                return;
+            }
+
             if (File.Exists(path))
             {
                 string contents = File.ReadAllText(path);
@@ -198,6 +204,16 @@ namespace Common
             {
                 LoadState();
             }
+        }
+
+        public bool ChkSceneReLoad()
+        {
+            return econoModel != null;     
+        }
+
+        public void OnSceneReLoad()
+        {
+            Debug.Log("scene reloaded EcoService");
         }
 
         #endregion

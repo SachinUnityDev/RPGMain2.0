@@ -7,7 +7,7 @@ namespace Quest
     public abstract class QuestBase 
     {
         public abstract QuestNames questName { get; }
-        public QuestState questState { get; set; }
+        //public QuestState questState { get; set; } // not needed
         public QuestModel questModel; 
 
         public List<ObjBase> allObjBases = new List<ObjBase>(); 

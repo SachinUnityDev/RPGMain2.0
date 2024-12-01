@@ -44,7 +44,7 @@ namespace Common
         public AllMonthSO allMonthSO; 
 
 
-        public CalendarModel calendarModel; 
+        public CalendarModel calendarModel =null; 
         [SerializeField] List<MonthSO> allMonthSOs;
         public CalendarSO calendarSO; 
         public CalendarUIController calendarUIController;
@@ -429,7 +429,10 @@ namespace Common
         public void LoadState()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-            
+            if (ChkSceneReLoad())
+            {
+                OnSceneReLoad(); return;
+            }
             if (SaveService.Instance.DirectoryExists(path))
             {
                 string[] fileNames = Directory.GetFiles(path);
@@ -482,7 +485,17 @@ namespace Common
             }
         }
 
-#endregion
+        public bool ChkSceneReLoad()
+        {
+            return calendarModel != null; 
+        }
+
+        public void OnSceneReLoad()
+        {
+            Debug.Log(" Calendar Service OnSceneReLoad");   
+        }
+
+        #endregion
     }
 }
 //[Header("CURRENT TIME STATE ")]

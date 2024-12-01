@@ -157,11 +157,11 @@ namespace Combat
             Sequence endSeq = DOTween.Sequence();
             endSeq
                 .AppendCallback(() => PlayTransitAnim("COMBAT ENDS"))
-                .AppendInterval(1.5f)
-                .AppendCallback(()=>combatEndView.InitCombatEndView())
+                .AppendInterval(2.0f)
+                //.AppendCallback(()=>combatEndView.InitCombatEndView())
                 ;
 
-            endSeq.Play(); 
+            endSeq.Play().OnComplete(() => combatEndView.InitCombatEndView());  
         }
 
         public void CleanPanelGO(List<GameObject> toBeCleanList)

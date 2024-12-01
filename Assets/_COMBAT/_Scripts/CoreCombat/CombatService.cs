@@ -230,35 +230,21 @@ namespace Combat
        
 
         public void OnCombatResult(Result combatResult, CombatEndCondition combatEndCondition)
-        {
-            // chk combat state here
-
-          Debug.Log("COMBAT STATE ???? " + combatState);    
+        {         
            CombatEventService.Instance.On_EOC(combatResult);
-  
+            Debug.Log("COMBAT STATE ????  + combat result" + combatState +"+"+ combatResult);
             this.combatResult = combatResult;
             EnemyPackBase enemyPackBase = enemyPackController.GetEnemyPackBase(currEnemyPack); 
 
-            switch (combatResult)
+            if(combatResult == Result.Victory)
             {
-                case Result.None:
-                    break;
-                case Result.Victory: // loot and Exp
-                    enemyPackBase.EnemyPackShowLoot(); 
-                    break;
-                case Result.Draw: // on max Round Limit reached 
-                    combatEndView.InitCombatEndView();
-                    break;
-                case Result.Defeat: // On Abbas Dead, All companions in Combat Dead,   
-                    combatEndView.InitCombatEndView();
-                    break;
+                enemyPackBase.EnemyPackShowLoot();
             }
         }
         #endregion
 
         public float GetSharedExp()
-        {
-            
+        {            
             int sharedExp = currEnemyPackSO.sharedExp;
             int allyExceptDeadNFledCount = 0;
             List<CharController> allAllyInclDeadNFled 

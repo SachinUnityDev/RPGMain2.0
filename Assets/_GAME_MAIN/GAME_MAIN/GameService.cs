@@ -271,6 +271,16 @@ namespace Common
                 // empty
             }
         }
+
+        public bool ChkSceneReLoad()
+        {
+            return allGameModel.Count > 0; 
+        }
+
+        public void OnSceneReLoad()
+        {
+            Debug.Log("OnSceneReLoad GameService");
+        }
         #endregion
     }
 

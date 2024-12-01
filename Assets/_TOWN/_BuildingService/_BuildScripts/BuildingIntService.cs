@@ -320,6 +320,12 @@ namespace Town
             // get all Files and use swtich to classify all build Model into house model, tavern model etc
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
             GetControllerRef();  // controller references
+            if (ChkSceneReLoad())
+            {
+                OnSceneReLoad();
+                return;
+            }
+
             if (SaveService.Instance.DirectoryExists(path))
             {
                 string[] fileNames = Directory.GetFiles(path);
@@ -400,6 +406,16 @@ namespace Town
             {
                 ClearState();
             }
+        }
+
+        public bool ChkSceneReLoad()
+        {
+            return allBuildModel.Count > 0;
+        }
+
+        public void OnSceneReLoad()
+        {
+            Debug.Log("scene reloaded BuildingIntService"); 
         }
     }
 }

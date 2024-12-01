@@ -203,6 +203,12 @@ namespace Common
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
             string charTypeBuff = path + "/CharTypeBuff/";
             charController = GetComponent<CharController>();
+            if (ChkSceneReLoad())
+            {
+                OnSceneReLoad();
+                return;
+            }
+
             if (SaveService.Instance.DirectoryExists(charTypeBuff))
             {
                 string[] fileNames = Directory.GetFiles(charTypeBuff);
@@ -253,6 +259,16 @@ namespace Common
             {
                 ClearState();
             }
+        }
+
+        public bool ChkSceneReLoad()
+        {
+            return charTypeBuffModel != null;
+        }
+
+        public void OnSceneReLoad()
+        {
+            Debug.Log("Scene Reloaded Char Type Buff Controller");    
         }
         #endregion
     }

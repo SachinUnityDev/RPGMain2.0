@@ -270,6 +270,11 @@ namespace Common
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
             string statBuffPath = path + "/StatBuff/";
             charController = GetComponent<CharController>();
+
+            if (ChkSceneReLoad())
+            {
+                OnSceneReLoad();return;
+            }
             if (SaveService.Instance.DirectoryExists(statBuffPath))
             {
                 string[] fileNames = Directory.GetFiles(statBuffPath);
@@ -321,6 +326,16 @@ namespace Common
             {
                 ClearState();
             }
+        }
+
+        public bool ChkSceneReLoad()
+        {
+            return statBuffModel != null;
+        }
+
+        public void OnSceneReLoad()
+        {
+            Debug.Log("scene reloaded StatBuffController"); 
         }
     }
 }

@@ -536,17 +536,19 @@ namespace Combat
         }        
         public void Move2Nextturn()
         {
-            Debug.Log("Move to next turn" + Time.time); 
-            CombatEventService.Instance.On_EOT();
-            Sequence PauseSeq = DOTween.Sequence();
+            if(CombatService.Instance.combatState == CombatState.INCombat_normal)
+            {
+                Debug.Log("Move to next turn" + Time.time);
+                CombatEventService.Instance.On_EOT();
+                Sequence PauseSeq = DOTween.Sequence();
 
-            PauseSeq.AppendInterval(1f)
-                 .AppendCallback(ClearPrevData)
-                .AppendCallback(CombatEventService.Instance.On_SOT)
-                .AppendInterval(1f)
-                ;
-            PauseSeq.Play();
-           
+                PauseSeq.AppendInterval(1f)
+                     .AppendCallback(ClearPrevData)
+                    .AppendCallback(CombatEventService.Instance.On_SOT)
+                    .AppendInterval(1f)
+                    ;
+                PauseSeq.Play();
+            }
         }
         #endregion
 
@@ -804,6 +806,11 @@ namespace Combat
         {    
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
 
+            if (ChkSceneReLoad())
+            {
+                OnSceneReLoad();
+                return;
+            }
             // SKILL DATA LOAD
             allCharSkillModel.Clear(); 
             if (SaveService.Instance.DirectoryExists(path))
@@ -859,7 +866,17 @@ namespace Combat
                 File.WriteAllText(fileName, charSkillModelJSON);                          
             }
         }
-        #endregion   
+
+        public bool ChkSceneReLoad()
+        {   
+            return allCharSkillModel.Count > 0; 
+        }
+
+        public void OnSceneReLoad()
+        {
+            Debug.Log("Scene Reloaded for SkillController");
+        }
+        #endregion
 
     }
 }

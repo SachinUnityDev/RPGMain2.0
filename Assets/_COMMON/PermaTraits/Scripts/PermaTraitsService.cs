@@ -67,7 +67,10 @@ namespace Common
         public void LoadState()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-
+            if (ChkSceneReLoad())
+            {
+                OnSceneReLoad(); return;
+            }
             if (SaveService.Instance.DirectoryExists(path))
             {
                 string[] fileNames = Directory.GetFiles(path);
@@ -114,6 +117,16 @@ namespace Common
             {
                 LoadState();
             }
+        }
+
+        public bool ChkSceneReLoad()
+        {
+            return allPermaTraitControllers.Count > 0; 
+        }
+
+        public void OnSceneReLoad()
+        {
+            Debug.Log(" On Scene Reload PermaTraitsService");     
         }
     }
 

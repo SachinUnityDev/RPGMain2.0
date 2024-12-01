@@ -47,7 +47,7 @@ namespace Quest
             qRoomModel = QRoomService.Instance.qRoomController.qRoomModel;
             if (qRoomModel != null)
             {
-                OnRoomChg(qRoomModel.questNames, qRoomModel.roomNo);
+                OnRoomChg(qRoomModel.questName, qRoomModel.roomNo);
             }
         }
 

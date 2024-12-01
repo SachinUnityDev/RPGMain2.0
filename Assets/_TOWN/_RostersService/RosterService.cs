@@ -17,7 +17,7 @@ namespace Common
     {
         public event Action <bool> OnPortraitDragResult;
         public event Action<CharModel> OnRosterScrollCharSelect;  // should activate on succes ful drop 
-        public RosterModel rosterModel; 
+        public RosterModel rosterModel = null; 
         public RosterController rosterController;
         public RosterViewController rosterViewController;
 
@@ -36,7 +36,7 @@ namespace Common
         public ServicePath servicePath => ServicePath.RosterService;
         void Start()
         {
-            RosterModel rosterModel = new RosterModel();
+           // RosterModel rosterModel = new RosterModel();
             SceneManager.sceneLoaded += OnSceneLoaded; 
         }
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -133,6 +133,11 @@ namespace Common
         public void LoadState()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
+            if (ChkSceneReLoad())
+            {
+                OnSceneReLoad();
+                return;
+            }
             rosterModel = new RosterModel();
             if (SaveService.Instance.DirectoryExists(path))
             {
@@ -182,6 +187,16 @@ namespace Common
             {
                 LoadState();
             }
+        }
+
+        public bool ChkSceneReLoad()
+        {
+            return rosterModel != null; 
+        }
+
+        public void OnSceneReLoad()
+        {
+            Debug.Log("OnSceneReLoad Roster Controller");
         }
 
         #endregion

@@ -55,7 +55,7 @@ namespace Combat
 
         [Header(" Common round Counter")]
         public int currentRound = 1;
-        public int currentTurn = 0; 
+      
 
         [Header(" Combat result")]  // every time a combat end add here 
         public CombatModel combatModel = null; 
@@ -194,6 +194,7 @@ namespace Combat
 
         public void On_EOC(Result combatResult)
         {
+            CombatEventService.Instance.combatState = CombatState.INCombat_End; 
             FortReset2FortOrg();
             currCombatResult = combatResult;
             CharService.Instance.allCharInCombat.Clear();
@@ -208,9 +209,13 @@ namespace Combat
                     CharService.Instance.charsInPlayControllers.Remove(c);
                 }
             }
-            OnEOC?.Invoke();
             combatState = CombatState.INCombat_End;
-          //  
+            try { OnEOC?.Invoke(); }
+            catch (Exception e)
+            {
+                Debug.Log("EXCEPTION OCCURED111   COMBAT ENDS!!!!" + e.Message + "CHAR" + charCtrl.charModel.charID + charCtrl.charModel.charName);
+                Debug.Log(e.StackTrace); // Log the stack trace of the exception
+            }
         }
         public void OnCombatEndClicked()
         {
@@ -318,7 +323,7 @@ namespace Combat
         }
         public void On_SOT()
         {
-            Debug.Log("SOT CALLED");
+            Debug.Log("SOT CALLED" + roundController.index);
             roundController.SetNextCharOnTurn();
             try
             {
@@ -332,6 +337,9 @@ namespace Combat
         }
         public void Move2NextRds()
         {    
+
+            if(CombatService.Instance.combatState == CombatState.INCombat_End) return;  
+
             int roundNo = currentRound;
             Debug.Log(roundNo + "Check end of round.........................");
             On_EOR(roundNo);

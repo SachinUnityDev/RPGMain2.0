@@ -11,7 +11,7 @@ namespace Quest
     [Serializable]
     public class QRoomModel
     {
-        public QuestNames questNames;
+        public QuestNames questName;
         public ObjNames objName;
         public Nodes node;
 
@@ -42,7 +42,7 @@ namespace Quest
 
         public QRoomModel(QRoomSO qRoomSO)
         {
-            questNames = qRoomSO.questNames;
+            questName = qRoomSO.questNames;
             objName = qRoomSO.objName;
             node = qRoomSO.node;
             roomNo = qRoomSO.roomNo;

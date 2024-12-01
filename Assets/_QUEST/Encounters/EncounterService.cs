@@ -95,7 +95,11 @@ namespace Quest
 
         public void LoadState()
         {
-            GetRef(); 
+            GetRef();
+            if (ChkSceneReLoad())
+            {
+                OnSceneReLoad(); return;
+            }
             LoadStateQE();
             LoadStateMapE();
             LoadStateCityE();
@@ -251,6 +255,18 @@ namespace Quest
             ClearStateCityE();
             ClearStateMapE();
             ClearStateQE();
+        }
+
+        public bool ChkSceneReLoad()
+        {
+            return questEController.allQuestEModels.Count > 0 ||
+                   mapEController.allMapEModels.Count > 0 ||
+                   cityEController.allCityEModels.Count > 0;
+        }
+
+        public void OnSceneReLoad()
+        {
+            Debug.Log(" OnSceneReLoad EncounterService");   
         }
     }
 }

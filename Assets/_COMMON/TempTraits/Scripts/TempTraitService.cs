@@ -245,6 +245,11 @@ namespace Common
         public void LoadState()
         {
             // loop thru all ontroller and clear
+            if (ChkSceneReLoad())
+            {
+                OnSceneReLoad();
+                return;
+            }
             foreach (TempTraitController tempTraitController in allTempTraitControllers)
             {
                 tempTraitController.ClearOldState();
@@ -304,6 +309,20 @@ namespace Common
             {
                 LoadState();
             }
+        }
+
+        public bool ChkSceneReLoad()
+        {
+            if(allTempTraitControllers.Count>0)
+            {
+                return allTempTraitControllers[0].allTempTraitModels.Count > 0;
+            }
+            return false;            
+        }
+
+        public void OnSceneReLoad()
+        {
+            Debug.Log("Scene Reload TempTraitService"); 
         }
     }
 }

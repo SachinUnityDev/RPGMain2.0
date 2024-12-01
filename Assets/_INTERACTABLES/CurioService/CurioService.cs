@@ -80,7 +80,11 @@ namespace Quest
         public void LoadState()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-            
+            if (ChkSceneReLoad())
+            {
+                OnSceneReLoad();
+                return;
+            }
             if (SaveService.Instance.DirectoryExists(path))
             {
                 string[] fileNames = Directory.GetFiles(path);
@@ -118,6 +122,16 @@ namespace Quest
             {
                 LoadState();
             }
+        }
+
+        public bool ChkSceneReLoad()
+        {
+            return curioController.allCurioModel.Count > 0;
+        }
+
+        public void OnSceneReLoad()
+        {
+            Debug.Log(" Scene Reloaded Curio "); 
         }
     }
 

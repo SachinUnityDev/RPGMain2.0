@@ -45,49 +45,60 @@ namespace Combat
         [Header(" Multiple clicks")]
         float prevClickTime = 0;  
 
-        private void OnEnable()
-        {
-            charController = gameObject.GetComponent<CharController>();
-            charController.skillController = this; 
-            charName = charController.charModel.charName;
-           
-           
-        }
+  
 
         private void Start()
         {
-
-            charController = GetComponent<CharController>();
+            charController = gameObject.GetComponent<CharController>();
+            charController.skillController = this;
+            charName = charController.charModel.charName;
             InitSkillList(charController);
+
+        }
+
+        void OnEnable()
+        {
+
+            charController = gameObject.GetComponent<CharController>();
+            charController.skillController = this;
+            charName = charController.charModel.charName;
+            charController = GetComponent<CharController>();
+         //   InitSkillList(charController);
             //CombatEventService.Instance.OnSOC1 += InitAllSkill_OnCombat;
 
             //   CombatEventService.Instance.OnCombatInit += () => InitAllSkill_OnCombat(CombatState.INCombat_normal);
-
+            CombatEventService.Instance.OnEOC -= OnEOCReset;
             CombatEventService.Instance.OnEOC += OnEOCReset;
             // CombatEventService.Instance.OnCharOnTurnSet += UpdateAllSkillState;            
             // CharService.Instance.OnCharAddedToParty += InitSkillList;
-            SceneManager.activeSceneChanged -= OnSceneLoaded;
-            SceneManager.activeSceneChanged += OnSceneLoaded;
+            SceneManager.sceneUnloaded -= OnSceneUnLoaded;
+            SceneManager.sceneUnloaded += OnSceneUnLoaded;
+            QuestEventService.Instance.OnEOQ -= EOQTick;
             QuestEventService.Instance.OnEOQ += EOQTick;
-            CombatEventService.Instance.OnEOC -= OnEOCReset;
             if (skillView == null)
                 skillView = FindObjectOfType<SkillView>();
         }
+
         private void OnDisable()
         {
             //SceneManager.activeSceneChanged -= OnSceneUnLoaded;
-            CharService.Instance.OnCharSpawn -= InitSkillList;
-            
+            CharService.Instance.OnCharSpawn -= InitSkillList;            
             CombatEventService.Instance.OnEOR1 -= RoundTick;
             CombatEventService.Instance.OnEOC -= EOCTick;
             QuestEventService.Instance.OnEOQ -= EOQTick;
-            SceneManager.activeSceneChanged -= OnSceneLoaded;
+            SceneManager.sceneUnloaded -= OnSceneUnLoaded;
+
+            CombatEventService.Instance.OnSOTactics -= InitAllSkill_OnCombat;
+            CombatEventService.Instance.OnSOC -= InitAllSkill_OnCombat;
+            CombatEventService.Instance.OnEOR1 -= RoundTick;
+            CombatEventService.Instance.OnEOC -= EOCTick;
+
 
         }
 
-        void OnSceneLoaded(Scene oldScne, Scene newScene)
+        void OnSceneUnLoaded(Scene oldScne)
         {
-            if (newScene.name == "COMBAT")
+            if (oldScne.name == "QUEST" || oldScne.name == "TOWN")
             {
                 if (skillView == null)
                     skillView = FindObjectOfType<SkillView>();

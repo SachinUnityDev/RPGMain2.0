@@ -411,7 +411,8 @@ namespace Combat
             buffModel.allBuffs.Remove(buffData);
             else
             {
-                Debug.LogError("Buff not removed" + buffData.buffID); 
+                Debug.LogError("Buff not removed" + buffData.buffID + "causeBYChar" + buffData.attribModData.causeByCharID 
+                            + " EffectedChar" + buffData.attribModData.effectedCharNameID); 
             }
         }
         #endregion

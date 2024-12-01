@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI; 
 
 namespace Combat
@@ -69,6 +70,14 @@ namespace Combat
             CombatEventService.Instance.OnSOR1 -= StartOfRound;
             CombatEventService.Instance.OnSOT -= StartOfTurn;
             SkillService.Instance.OnSkillUsed -= SkillUsed;
+        }
+
+        void OnActiveSceneChg(Scene curr, Scene next)
+        {
+            if (next.name == "COMBAT")
+            {
+                containerCombatLog = FindObjectOfType<CombatLogContentsRef>(true).gameObject;    
+            }
         }
 
         void StartOfCombat()

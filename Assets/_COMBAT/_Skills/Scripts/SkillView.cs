@@ -141,7 +141,9 @@ namespace Combat
 
         public void FillSkillClickedState(int index)  // -1 index => all skills frames are cleared
         {
-            //SkillService.Instance.ClearPrevSkillData();
+            Debug.Log(" COMBAT STATE!!!" + CombatService.Instance.combatState); 
+
+
             GridService.Instance.ClearOldTargetsOnGrid();
             UnClickAllSkills();
           

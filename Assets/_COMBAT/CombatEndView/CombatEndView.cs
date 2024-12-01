@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 namespace Combat
@@ -35,7 +36,26 @@ namespace Combat
         public NotifyName notifyName { get; set; }
         public bool isDontShowItAgainTicked { get ; set; }
 
-        [SerializeField] Transform endTrans; 
+        [SerializeField] Transform endTrans;
+
+        private void OnEnable()
+        {
+            SceneManager.activeSceneChanged -= OnActiveSceneChg;
+            SceneManager.activeSceneChanged += OnActiveSceneChg;
+        }
+        private void OnDisable()
+        {
+            SceneManager.activeSceneChanged -= OnActiveSceneChg;
+        }
+
+        void OnActiveSceneChg(Scene curr, Scene next)
+        {
+            if (next.name == "COMBAT")
+            {
+                charPortContainer = FindObjectOfType<CombatEndPort>(true).transform;                
+            }
+        }
+
         public void InitCombatEndView()
         {
             this.combatResult= CombatEventService.Instance.currCombatResult;    

@@ -24,7 +24,7 @@ namespace Combat
         public List<CharController> charTurnOrder = new List<CharController>();
         
         
-        private void Start()
+        private void OnEnable()
         {
             index = -1;   
         }
@@ -42,7 +42,7 @@ namespace Combat
                     CombatService.Instance.combatState == CombatState.INCombat_InSkillSelected)
             {
                 index++;
-               
+                Debug.Log("INDEX VALUE" + index + "CHAR COUNT" + charTurnOrder.Count);  
                 charCount = charTurnOrder.Count;
                 if (index < charCount && index > -1)
                 {

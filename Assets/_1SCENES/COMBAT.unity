@@ -1608,6 +1608,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpTxt: {fileID: 574102353}
   stmTxt: {fileID: 1518709768}
+  hpStatData:
+    statName: 0
+    currValue: 0
+    desc: 
+    minLimit: 0
+    maxLimit: 0
+    isClamped: 0
+  vigorData:
+    AttribName: 0
+    currValue: 0
+    baseValue: 0
+    desc: 
+    minLimit: 0
+    maxLimit: 0
+    isClamped: 0
+  stmStatData:
+    statName: 0
+    currValue: 0
+    desc: 
+    minLimit: 0
+    maxLimit: 0
+    isClamped: 0
+  wpData:
+    AttribName: 0
+    currValue: 0
+    baseValue: 0
+    desc: 
+    minLimit: 0
+    maxLimit: 0
+    isClamped: 0
 --- !u!1 &52642532
 GameObject:
   m_ObjectHideFlags: 0
@@ -5353,6 +5383,7 @@ GameObject:
   m_Component:
   - component: {fileID: 258777516}
   - component: {fileID: 258777517}
+  - component: {fileID: 258777518}
   m_Layer: 5
   m_Name: PortContainer
   m_TagString: Untagged
@@ -5410,6 +5441,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &258777518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258777515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96465d7927a6bd5499bf3c9a2959fba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &260670274
 GameObject:
   m_ObjectHideFlags: 0
@@ -6622,6 +6665,7 @@ GameObject:
   - component: {fileID: 298632962}
   - component: {fileID: 298632964}
   - component: {fileID: 298632963}
+  - component: {fileID: 298632965}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -6690,6 +6734,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &298632965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298632961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9602e48eeb61b7419d4109e260b6947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &307088954
 GameObject:
   m_ObjectHideFlags: 0
@@ -9839,9 +9895,6 @@ MonoBehaviour:
   statDisplay: []
   CharStatesPanel: {fileID: 371153546}
   allcharStatesDisplay: []
-  charImg: {fileID: 0}
-  charName: {fileID: 0}
-  StatesPanel: {fileID: 0}
   portraitToggleState: 0
 --- !u!1 &436498677
 GameObject:
@@ -20493,9 +20546,6 @@ MonoBehaviour:
   statDisplay: []
   CharStatesPanel: {fileID: 371153546}
   allcharStatesDisplay: []
-  charImg: {fileID: 0}
-  charName: {fileID: 0}
-  StatesPanel: {fileID: 0}
   portraitToggleState: 0
 --- !u!114 &1044210486
 MonoBehaviour:
@@ -45668,9 +45718,9 @@ RectTransform:
   m_Father: {fileID: 298632962}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 191.147, y: 0}
   m_SizeDelta: {x: 354.4555, y: 26}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2964748277860470759

@@ -89,6 +89,10 @@ namespace Combat
                 // dummy start
                  On_CombatInit(combatState, landscapeName, enemyPackName);
             }
+            else
+            {
+                OnEOC_ClearSubs();
+            }
         }
 
         public void On_StrikeFired(StrikeData strikeData)
@@ -145,16 +149,13 @@ namespace Combat
             charCtrl.RegenStamina();
             charCtrl.HPRegen();
             Debug.Log("A char on turn" + charCtrl.charModel.charName + "ID" + charCtrl.charModel.charID);  
-            try { OnCharOnTurnSet?.Invoke(charCtrl); }
+            try { OnCharOnTurnSet?.Invoke(charCtrl); On_CharClicked(charCtrl.gameObject); }
             catch (Exception e)
             {
                 Debug.Log("EXCEPTION OCCURED222   ONCHAR_SET!!!!" + e.Message + "CHAR" + charCtrl.charModel.charID + charCtrl.charModel.charName);
                 Debug.Log(e.StackTrace); // Log the stack trace of the exception
-            }
-            finally
-            {
-                On_CharClicked(charCtrl.gameObject);
-            }
+                
+            }          
         }
      
         public void On_SOTactics()
@@ -194,7 +195,7 @@ namespace Combat
 
         public void On_EOC(Result combatResult)
         {
-            CombatEventService.Instance.combatState = CombatState.INCombat_End; 
+            combatState = CombatState.INCombat_End; 
             FortReset2FortOrg();
             currCombatResult = combatResult;
             CharService.Instance.allCharInCombat.Clear();
@@ -323,7 +324,7 @@ namespace Combat
         }
         public void On_SOT()
         {
-            Debug.Log("SOT CALLED" + roundController.index);
+            Debug.LogError("SOT CALLED" + roundController.index);
             roundController.SetNextCharOnTurn();
             try
             {
@@ -341,9 +342,16 @@ namespace Combat
             if(CombatService.Instance.combatState == CombatState.INCombat_End) return;  
 
             int roundNo = currentRound;
-            Debug.Log(roundNo + "Check end of round.........................");
-            On_EOR(roundNo);
-            Debug.Log("Check end of round" + roundNo + "time" + Time.time);
+            try
+            {
+                On_EOR(roundNo);
+            }catch(Exception e)
+            {
+                Debug.Log("EXCEPTION EOR!!!" + e.Message);
+                Debug.LogError("EXCEPTION EOR!!! STACK" + e.StackTrace);
+                Debug.LogError("EXCEPTION EOR!!! Method" + e.TargetSite);
+            }
+            Debug.Log("Move2NextRds" + roundNo);    
             int MAX_RD_LIMIT = GameService.Instance.gameController.GetMaxRoundLimit();
             if (roundNo >= MAX_RD_LIMIT)
             {

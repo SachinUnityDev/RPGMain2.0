@@ -499,14 +499,14 @@ namespace Common
         {
             if (charDiedinLastTurn.Count < 1) return;
             allCharInCombat.RemoveAll(t => charDiedinLastTurn.Contains(t));
+
             foreach (CharController charCtrl in charDiedinLastTurn.ToList())
             {
                 charsInPlayControllers.Remove(charCtrl);    
                 CombatService.Instance.roundController.ReorderAfterCharDeathOnEOT(charCtrl);
-                charInGraveyard.Add(charCtrl.charModel);
+                charInGraveyard.Add(charCtrl.charModel);                
             }
-            charDiedinLastTurn.Clear();
-            
+            charDiedinLastTurn.Clear();            
         }
         public void On_CharDeath(CharController _charController, int causeByCharID)
         {

@@ -39,8 +39,16 @@ namespace Quest
 
             if (!pathModel.isCompleted)
             {
-                QuestMarkUp();            
-                SetClickableState();
+                if(pathModel.currNode.nodeSeq == 0)
+                {
+                    QuestMarkUp();
+                    SetClickableState();
+                }
+                else
+                {
+                    QuestMarkDownAnim();
+                    SetUnClickableState(); 
+                }
             }            
         }
 

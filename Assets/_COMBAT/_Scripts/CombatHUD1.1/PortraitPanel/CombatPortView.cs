@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using Common;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using System;
 namespace Combat
 {
 
@@ -51,7 +52,7 @@ namespace Combat
         {
             if (next.name == "COMBAT")
             {
-                portView = FindObjectOfType<CharPortView>(true).transform;
+                portView = FindObjectOfType<CharPortView>().transform;
                 charImg = portView.transform.GetChild(0).GetComponent<Image>();
                 charNameTxt = portView.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
 
@@ -72,6 +73,10 @@ namespace Combat
                 this.charController.OnStatChg += UpdateStat;
                 FillPort();
             }
+            else
+            {
+                Debug.LogError("CharController is null");   
+            }
         }
 
 
@@ -83,10 +88,22 @@ namespace Combat
 
         void UpdateStat(StatModData statModData)
         {
-            DoFills();
+            try 
+            { 
+                DoFills();
+            }
+            catch(Exception e)
+            {
+                Debug.Log("Error in UpdateStat" + e.Message);
+                Debug.LogError("StatModData" + statModData.effectedCharNameID);
+            }            
         }
         void DoFills()
         {
+            if(charController == null)
+            {                
+                return;
+            }
             if (charController.charModel.charMode == CharMode.Ally)
             {
                 portView.transform.DOScaleY(1.0f, 0.4f);

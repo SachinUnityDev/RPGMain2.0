@@ -73,6 +73,8 @@ namespace Common
             rightBtn.onClick.AddListener(OnRightBtnPressed);
 
             inviteBtn.onClick.AddListener(OnInviteBtnPressed); 
+            charSlot = FindObjectOfType<CharScrollSlotController>(true);
+            
         }
         void OnPartyDisbandedFameBehMisMatchChk()
         {

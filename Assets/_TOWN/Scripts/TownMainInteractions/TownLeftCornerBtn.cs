@@ -39,7 +39,6 @@ namespace Town
 
         void Start()
         {
-
             centerBtn = transform.parent.GetChild(2).gameObject;
             leftBtnsController = centerBtn.GetComponent<LeftBtnsController>();
             nametxt = transform.parent.GetChild(3).GetComponent<TextMeshProUGUI>();         

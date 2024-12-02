@@ -34,14 +34,20 @@ namespace Common
         [Header("Global Var")]
         public CharModel scrollSelectCharModel;
         public ServicePath servicePath => ServicePath.RosterService;
-        void Start()
+        void OnEnable()
         {
-           // RosterModel rosterModel = new RosterModel();
-            SceneManager.sceneLoaded += OnSceneLoaded; 
+            // RosterModel rosterModel = new RosterModel();
+            SceneManager.activeSceneChanged += OnActiveSceneLoaded;
+            SceneManager.activeSceneChanged += OnActiveSceneLoaded; 
         }
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+
+        private void OnDisable()
         {
-            if (scene.name == "TOWN")
+            SceneManager.activeSceneChanged -= OnActiveSceneLoaded;
+        }
+        void OnActiveSceneLoaded(Scene scene, Scene newScene)
+        {
+            if (newScene.name == "TOWN")
             {
                 rosterViewController = FindObjectOfType<RosterViewController>(true);
 

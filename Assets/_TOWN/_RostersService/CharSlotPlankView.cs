@@ -101,6 +101,11 @@ public class CharSlotPlankView : MonoBehaviour, IPointerEnterHandler, IPointerEx
     void FillItemCell(ItemDataWithQty itemDataQty,  Transform cellTran)
     {
        // 0,1,2
+       if(cellTran == null)
+       {
+           return;
+       }
+
        if(itemDataQty == null)
        {
            cellTran.gameObject.SetActive(false);          

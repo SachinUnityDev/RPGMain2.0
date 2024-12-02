@@ -192,8 +192,8 @@ namespace Common
             IPanel panel = go.GetComponentInChildren<IPanel>();
             if (panel != null)
             {
-                //if (turnON)                
-                //    panel.Load();// can cause a stack over flow loop 
+                if (turnON)
+                    panel.Load();// can cause a stack over flow loop 
             }
             else
             {

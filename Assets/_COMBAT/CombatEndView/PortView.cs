@@ -62,14 +62,15 @@ namespace Combat
         }
         void CalcFirstBloodExp()
         {
-            if(charModel.charID == combatEndView.firstBloodChar.charModel.charID)
-            {
-                firstBloodExp = 6 * charModel.charLvl;
-            }
-            else
-            {
-                firstBloodExp = 0;
-            }
+            if(combatEndView.firstBloodChar != null)
+                if (charModel.charID == combatEndView.firstBloodChar.charModel.charID)
+                {
+                    firstBloodExp = 6 * charModel.charLvl;
+                }
+                else
+                {
+                    firstBloodExp = 0;
+                }
         }
         void ResetLvlUpBirds()
         {

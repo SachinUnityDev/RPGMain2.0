@@ -324,7 +324,7 @@ namespace Combat
         }
         public void On_SOT()
         {
-            Debug.LogError("SOT CALLED" + roundController.index);
+            Debug.Log("SOT CALLED" + roundController.index);
             roundController.SetNextCharOnTurn();
             try
             {

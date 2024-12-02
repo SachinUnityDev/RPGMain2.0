@@ -64,7 +64,16 @@ namespace Combat
                                  .allCharsInPartyLocked.Where(t => t.charModel.orgCharMode == CharMode.Ally).ToList();
             combatEndContinueBtn.InitContinueBtn(this); 
             manualExpBtn.ManualExpBtnInit(this);
-            FillCharPort();
+            try
+            {
+                FillCharPort();
+            }catch(System.Exception e)
+            {
+                Debug.Log("EXCEPTION!!1" +e.Message); 
+                Debug.Log("EXCEPTION!!1" + e.StackTrace);
+                Debug.Log("EXCEPTION!!1" + e.TargetSite);
+            }
+            
             FillHeading();
             
             if (combatResult == Result.Victory)

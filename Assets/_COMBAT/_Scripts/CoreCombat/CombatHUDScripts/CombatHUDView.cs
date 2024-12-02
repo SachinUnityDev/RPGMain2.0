@@ -153,17 +153,22 @@ namespace Combat
         }
 
         void OnCombatEnd()
-        {
+        {   
             Sequence endSeq = DOTween.Sequence();
             endSeq
                 .AppendCallback(() => PlayTransitAnim("COMBAT ENDS"))
-                .AppendInterval(2.0f)
+                .AppendInterval(2.5f)
                 //.AppendCallback(()=>combatEndView.InitCombatEndView())
                 ;
 
-            endSeq.Play().OnComplete(() => combatEndView.InitCombatEndView());  
+            endSeq.Play().OnComplete(() => ShowCombatEndView());  
         }
 
+        void ShowCombatEndView()
+        {
+            DOTween.KillAll();
+            combatEndView.InitCombatEndView(); 
+        }
         public void CleanPanelGO(List<GameObject> toBeCleanList)
         {
             for (int i = 0; i < toBeCleanList.Count; i++)

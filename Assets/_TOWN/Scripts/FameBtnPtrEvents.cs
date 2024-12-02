@@ -1,11 +1,25 @@
+using Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class FameBtnPtrEvents : MonoBehaviour, IPointerClickHandler
+
+namespace Town
 {
-    public void OnPointerClick(PointerEventData eventData)
+    public class FameBtnPtrEvents : MonoBehaviour, IPointerClickHandler
     {
+        [SerializeField] float prevClickTime = 0f;  
+
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if(Time.time- prevClickTime < 0.5f)            
+                return;
+            
+            CalendarService.Instance.calendarUIController.OnFameBtnClick();
+            prevClickTime = Time.time; 
+
+        }
     }
 }

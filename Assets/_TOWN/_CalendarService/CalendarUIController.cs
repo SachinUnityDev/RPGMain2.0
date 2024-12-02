@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using Combat;
 using UnityEngine.SceneManagement;
 using DG.Tweening.Core;
+using System.Diagnostics.Eventing.Reader;
 
 namespace Common
 {
@@ -101,8 +102,11 @@ namespace Common
         }
 
         public void OnFameBtnClick()
-        {          
-            OnPanelEnter(famePanel, PanelInScene.Fame);
+        {
+            if (panelInScene == PanelInScene.Fame)
+                OnPanelExit(famePanel); 
+            else
+                OnPanelEnter(famePanel, PanelInScene.Fame);
         }
         public void OnPanelEnter(GameObject panel, PanelInScene _panelInScene)
         {

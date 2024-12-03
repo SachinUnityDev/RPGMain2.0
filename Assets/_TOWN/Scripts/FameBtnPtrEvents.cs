@@ -14,11 +14,11 @@ namespace Town
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if(Time.time - prevClickTime > 0.5f)
+            if(Time.time - prevClickTime > 2.5f)
             {
                 CalendarService.Instance.calendarUIController.OnFameBtnClick();
                 prevClickTime = Time.time;
-            }            
+            } 
         }
     }
 }

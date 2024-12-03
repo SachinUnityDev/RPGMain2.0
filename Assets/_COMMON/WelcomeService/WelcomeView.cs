@@ -58,9 +58,10 @@ namespace Town
             }
         }
         public void RevealWelcomeTxt(string str)
-        {   
-           
-            if(!isRevealing) 
+        {
+            revealer = welcomeTxt.GetComponentInChildren<TextRevealer>();
+
+            if (!isRevealing) 
             {
                 Sequence seqreveal = DOTween.Sequence();
                 seqreveal

@@ -55,6 +55,7 @@ namespace Quest
         }
         void OnEmbarkBtnPressed()
         {
+            CharService.Instance.On_PartyLocked(); 
             UnLoad();
             qMarkView.OnPathEmbark();
         }

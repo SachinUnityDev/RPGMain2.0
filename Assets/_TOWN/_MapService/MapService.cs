@@ -133,8 +133,6 @@ namespace Town
             }
         }
 
-
-
         public void ClearState()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);

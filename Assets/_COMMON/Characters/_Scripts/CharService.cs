@@ -237,7 +237,11 @@ namespace Common
 
         public void On_PartyLocked()
         {
-            isPartyLocked= true;
+            if (!isPartyLocked)
+            {
+                WelcomeService.Instance.welcomeView.RevealWelcomeTxt("Party Locked!");
+            }
+            isPartyLocked = true;
             OnPartyLocked?.Invoke();
             foreach (CharController c in allCharsInPartyLocked)
             {

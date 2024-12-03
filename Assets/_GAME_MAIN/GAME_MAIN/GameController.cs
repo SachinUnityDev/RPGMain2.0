@@ -41,7 +41,7 @@ namespace Common
         }
         public int GetMaxRoundLimit()
         {
-            return 1; 
+            return 3; 
             //EnemyPackName enemyPack = CombatService.Instance.currEnemyPack; 
             //EnemyPacksSO enemyPackSO = CombatService.Instance.allEnemyPackSO.GetEnemyPackSO(enemyPack);
 

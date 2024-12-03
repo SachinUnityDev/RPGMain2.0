@@ -22,7 +22,7 @@ namespace Quest
 
         public void OnPointerClick(PointerEventData eventData)
         {          
-            QRoomService.Instance.On_QuestStateChg(QRoomState.AutoWalk); 
+            QRoomService.Instance.On_QRoomStateChg(QRoomState.AutoWalk); 
             transform.gameObject.SetActive(false);
             
         }

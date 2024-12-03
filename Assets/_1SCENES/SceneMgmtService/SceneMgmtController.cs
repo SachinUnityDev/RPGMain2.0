@@ -97,7 +97,7 @@ namespace Common
                 if(next.isLoaded)
                 {   
                     if (next.name == "QUEST")
-                        QRoomService.Instance.On_QuestSceneStart(QuestNames.RatInfestation);
+                        QRoomService.Instance.On_QRoomSceneStart(QuestNames.RatInfestation);
 
                     sceneTransitView = sceneTransitGO.GetComponent<SceneTransitView>();                
                     sceneTransitView.EndAnim();

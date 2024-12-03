@@ -74,7 +74,7 @@ namespace Common
 
             inviteBtn.onClick.AddListener(OnInviteBtnPressed); 
             charSlot = FindObjectOfType<CharScrollSlotController>(true);
-            
+            btmCharTrans = FindObjectOfType<BtmSlotContainer>().transform;
         }
         void OnPartyDisbandedFameBehMisMatchChk()
         {

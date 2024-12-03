@@ -104,7 +104,7 @@ namespace Quest
                 SetCharacterState(AnimState.Idle);
                 virtualCam.enabled = true;
                 entryCollider?.gameObject.SetActive(false);
-                QRoomService.Instance.On_QuestStateChg(QRoomState.Walk);
+                QRoomService.Instance.On_QRoomStateChg(QRoomState.Walk);
                 QRoomService.Instance.canAbbasMove = true;
             }
             if (name == "ArrowTrigger")

@@ -1,3 +1,4 @@
+using Common;
 using System.Collections;
 using System.Collections.Generic;
 using System.ServiceModel.Dispatcher;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace Quest
 {
-    public class QRoomController : MonoBehaviour
+    public class QRoomController : MonoBehaviour 
     {
         [Header("ALL Q NODES Quest Room Model")]
         public List<QNodeAllRoomModel> allQNodeAllRoomModel = new List<QNodeAllRoomModel>();
@@ -36,8 +37,13 @@ namespace Quest
                 Debug.Log("QRoomController:INIT: roomNo: " + roomNo);
             }
         }
-        public void LoadQRoomController(QNodeAllRoomSO qNodeAllRoomSO)
+
+        public void LoadQRoomController()
         {   
+            // set up three list 
+           // Set up QRoomModel
+           // Chg to give room
+
             CurioInit(qRoomModel);
             InteractInit(qRoomModel);
         }
@@ -49,9 +55,9 @@ namespace Quest
             qRoomModel = allQNodeRoomModel.GetQRoomModel(roomNo);
             //>>>qRoomModel state set and Invoke QRoom State and then Room Check 
             if (qRoomModel.hasQPrep)
-                QRoomService.Instance.On_QuestStateChg(QRoomState.Prep);
+                QRoomService.Instance.On_QRoomStateChg(QRoomState.Prep);
             else
-                QRoomService.Instance.On_QuestStateChg(QRoomState.Walk);
+                QRoomService.Instance.On_QRoomStateChg(QRoomState.Walk);
 
             QRoomService.Instance.On_RoomChg(qRoomModel.questName, roomNo);
 

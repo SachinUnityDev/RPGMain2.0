@@ -101,11 +101,12 @@ namespace Combat
             SkillData skillData = GetSkillData(skillName);
             if(perkChain.Count == 0)
             {
-                PerkHexData perkHexData = 
-                 skillData.allPerkHexes.Find(t => t.perkChain[0] == PerkType.None);
-                if (perkHexData != null)
-                    return perkHexData;
+                int index = 
+                 skillData.allPerkHexes.FindIndex(t => t.perkChain[0] == PerkType.None);
+                if (index != -1)
+                    return skillData.allPerkHexes[index];
                 else
+                    Debug.LogError("Perk Hex data not found" + skillName + perkChain[0]);    
                     return null; 
             }
             foreach (PerkHexData perk in skillData.allPerkHexes)

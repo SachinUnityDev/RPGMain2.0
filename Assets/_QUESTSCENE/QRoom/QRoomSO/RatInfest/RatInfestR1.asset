@@ -27,7 +27,7 @@ MonoBehaviour:
     tauntChance: 90
     questEName: 0
     allBarks: 
-    enemyPack: 0
+    enemyPack: 3
     trapNames: 0
   interact2:
     stealthChance: 30

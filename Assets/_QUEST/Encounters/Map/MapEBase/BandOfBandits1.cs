@@ -22,7 +22,8 @@ namespace Quest
             {
                 if (!isCombatResult)
                 {
-                    CombatEventService.Instance.StartCombat(CombatState.INTactics, LandscapeNames.Sewers, EnemyPackName.RatPack3, this);
+                    // CombatEventService.Instance.StartCombat(CombatState.INTactics, LandscapeNames.Sewers, EnemyPackName.RatPack3, this);
+                    QRoomEventService.Instance.OnQRoomStart(QuestMissionService.Instance.questModel.questName, this);
                 }
                 else
                 {
@@ -107,7 +108,7 @@ namespace Quest
 
         }
 
-        public void OnResult(Result result)
+        public void OnResult_AfterSceneLoad(Result result)
         {
             MapService.Instance.pathController.UpdatePathNode(mapEResult);
         }

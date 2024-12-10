@@ -229,7 +229,7 @@ namespace Combat
         {
             if (newScene.name == iResult.gameScene.GetMainGameScene().ToString())
             {
-                iResult.OnResult(currCombatResult);     
+                iResult.OnResult_AfterSceneLoad(currCombatResult);     
                 SceneManager.activeSceneChanged -= SceneChg;
             }
         }

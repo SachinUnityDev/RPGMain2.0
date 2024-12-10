@@ -202,7 +202,7 @@ namespace Interactables
 
         public void OnSceneReLoad()
         {
-            Debug.Log("Scene Reload Armor"); 
+            Debug.Log("Scene Reload Armor" + allArmorModels.Count); 
         }
     }
 

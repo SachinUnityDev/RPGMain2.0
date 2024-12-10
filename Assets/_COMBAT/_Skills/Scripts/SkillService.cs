@@ -538,7 +538,7 @@ namespace Combat
         {
             if(CombatService.Instance.combatState == CombatState.INCombat_normal)
             {
-                Debug.LogError("Move to next turn" + Time.time);
+                Debug.Log("Move to next turn" + Time.time);
                 CombatEventService.Instance.On_EOT();
                 Sequence PauseSeq = DOTween.Sequence();
 

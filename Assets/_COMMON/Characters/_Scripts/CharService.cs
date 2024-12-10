@@ -7,6 +7,7 @@ using System.Linq;
 using UnityEngine;
 using Town;
 using System.Collections;
+using UnityEngine.SceneManagement;
 namespace Common
 {
     public class CharService : MonoSingletonGeneric<CharService>, ISaveable
@@ -78,9 +79,15 @@ namespace Common
             GameEventService.Instance.OnCombatEnter += OnCombatEnter;
             DontDestroyOnLoad(this.gameObject);
         }
+        private void OnEnable()
+        {
+            SceneManager.activeSceneChanged -= CharSpriteToggle;
+            SceneManager.activeSceneChanged += CharSpriteToggle;
+        }
         private void OnDisable()
         {
             GameEventService.Instance.OnCombatEnter -= OnCombatEnter;
+            SceneManager.activeSceneChanged -= CharSpriteToggle;
         }
         
         void OnCombatEnter()
@@ -131,7 +138,6 @@ namespace Common
             return null;
         }
 
-
         #region SAVE LOAD CLEAR AND INIT
         public void LoadState()
         {
@@ -156,9 +162,7 @@ namespace Common
             {
                 Debug.LogError("Service Directory missing");
             }
-        }
-
-       
+        }              
         public void ClearState()
         {
             string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
@@ -618,7 +622,6 @@ namespace Common
                 ClearState();
             }
         }
-
         public bool ChkSceneReLoad()
         {
             return allCharModels.Count > 0; 
@@ -629,6 +632,31 @@ namespace Common
         {
             Debug.Log("Scene Reload CharService");
         }
+
+        public void CharSpriteToggle(Scene oldScene, Scene newScene)
+        {
+            // display char Sprites only in combat Scene
+            if (newScene.name == "COMBAT")
+            {
+                foreach (CharController charController in charsInPlayControllers)
+                {
+                    charController.GetComponent<BoxCollider2D>().enabled = true;
+                    charController.transform.GetChild(0).gameObject.SetActive(true);
+                    charController.transform.GetChild(2).gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+                foreach (CharController charController in charsInPlayControllers)
+                {
+                    charController.GetComponent<BoxCollider2D>().enabled = false;
+                    charController.transform.GetChild(0).gameObject.SetActive(false);
+                    charController.transform.GetChild(2).gameObject.SetActive(false);
+                }
+            }
+         
+        }
+
     }
 }
 //charDiedinLastTurn.Add(_charController);

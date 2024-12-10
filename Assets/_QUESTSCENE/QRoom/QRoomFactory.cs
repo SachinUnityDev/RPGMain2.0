@@ -8,6 +8,7 @@ using System.Linq;
 
 namespace Quest
 {
+    [Serializable]
     public class QRoomData
     {
         public int roomNo;
@@ -49,21 +50,19 @@ namespace Quest
             qRoomModelCount = allQRoomBases.Count;
         }
 
-
-
-
-        public QRoomBase GetQRoomBase(int roomNo, QuestNames questName, ObjNames objName)
+        public QRoomBase GetQRoomBase(QRoomModel qRoomModel)
         {
-            QRoomData qRoomData = new QRoomData(roomNo, questName, objName);
+            QRoomData qRoomData = new QRoomData(qRoomModel.roomNo, qRoomModel.questName, qRoomModel.objName);
             foreach (var qRoomBases in allQRoomBases)
             {
-                if (qRoomBases.Key == qRoomData)
+                if (qRoomBases.Key.roomNo == qRoomData.roomNo && qRoomBases.Key.questName == qRoomData.questName &&
+                    qRoomBases.Key.objName == qRoomData.objName)
                 {
                     var t = Activator.CreateInstance(qRoomBases.Value) as QRoomBase;
                     return t;
                 }
             }
-            Debug.LogError("Q Room base Not found" + roomNo+ "QuestNames"+ questName + "ObjNames" + objName);
+            Debug.LogError("Q Room base Not found" + qRoomModel.roomNo + "QuestNames"+ qRoomModel.questName + "ObjNames" + qRoomModel.objName);
             return null;
         }
 

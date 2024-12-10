@@ -14,7 +14,7 @@ namespace Common
         public EconoModel econoModel;
         void Start()
         {
-            QuestEventService.Instance.OnEOQ += ShareLoot2Companions;
+            QuestEventService.Instance.OnEndOfQuest += ShareLoot2Companions;
         }
 
         public void InitEcoController(EconoModel econoModel)

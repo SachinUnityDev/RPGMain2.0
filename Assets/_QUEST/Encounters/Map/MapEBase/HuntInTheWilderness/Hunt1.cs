@@ -98,7 +98,7 @@ namespace Quest
 
         }
 
-        public void OnResult(Result result)
+        public void OnResult_AfterSceneLoad(Result result)
         {
         }
     }

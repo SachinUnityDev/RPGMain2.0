@@ -13,7 +13,7 @@ namespace Town
     {
         GameScene gameScene { get; }       
         void OnResultClicked(Result result);
-        void OnResult(Result result);
+        void OnResult_AfterSceneLoad(Result result);
     }
 
 

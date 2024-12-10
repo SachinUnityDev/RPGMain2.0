@@ -103,7 +103,7 @@ namespace Common
             }
             if (timeFrame == TimeFrame.EndOfQuest)
             {
-                QuestEventService.Instance.OnEOQ += QuestTick;
+                QuestEventService.Instance.OnEndOfQuest += QuestTick;
             }
 
             CombatEventService.Instance.OnEOC += EndCharStateOnEOC; 
@@ -164,7 +164,7 @@ namespace Common
             ClearBuffs();
             CombatEventService.Instance.OnEOC -= CombatTick;
             CombatEventService.Instance.OnEOR1 -= RoundTick;
-            QuestEventService.Instance.OnEOQ -= QuestTick;
+            QuestEventService.Instance.OnEndOfQuest -= QuestTick;
             CombatEventService.Instance.OnEOC -= EndCharStateOnEOC;
         }
         public virtual void ClearBuffs()

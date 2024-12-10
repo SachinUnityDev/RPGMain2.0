@@ -73,8 +73,8 @@ namespace Combat
             // CharService.Instance.OnCharAddedToParty += InitSkillList;
             SceneManager.sceneUnloaded -= OnSceneUnLoaded;
             SceneManager.sceneUnloaded += OnSceneUnLoaded;
-            QuestEventService.Instance.OnEOQ -= EOQTick;
-            QuestEventService.Instance.OnEOQ += EOQTick;
+            QuestEventService.Instance.OnEndOfQuest -= EOQTick;
+            QuestEventService.Instance.OnEndOfQuest += EOQTick;
             if (skillView == null)
                 skillView = FindObjectOfType<SkillView>();
         }
@@ -85,7 +85,7 @@ namespace Combat
             CharService.Instance.OnCharSpawn -= InitSkillList;            
             CombatEventService.Instance.OnEOR1 -= RoundTick;
             CombatEventService.Instance.OnEOC -= EOCTick;
-            QuestEventService.Instance.OnEOQ -= EOQTick;
+            QuestEventService.Instance.OnEndOfQuest -= EOQTick;
             SceneManager.sceneUnloaded -= OnSceneUnLoaded;
 
             CombatEventService.Instance.OnSOTactics -= InitAllSkill_OnCombat;

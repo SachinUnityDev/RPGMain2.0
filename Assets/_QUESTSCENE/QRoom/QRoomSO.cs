@@ -30,6 +30,13 @@ namespace Quest
                 return true;             
             return false; 
         }
+        public bool HasCombat() 
+        {
+            if (enemyPack != EnemyPackName.None)
+                return true;
+            return false; 
+        }
+
 
     }
 

@@ -23,6 +23,7 @@ namespace Common
         public void LoadGameScene(GameScene gameScene)
         {
             UIControlServiceGeneral.Instance.CloseAllPanels();// clears Panel list
+            sceneMgmtController.UpdateSceneCount(gameScene);
             switch (gameScene)
             {
                 case GameScene.INTRO:
@@ -50,7 +51,7 @@ namespace Common
                 default:
                     break;
             }
-
+            
         }
 
         void OpenMapE(Scene oldScene, Scene newScene)

@@ -18,7 +18,7 @@ namespace Quest
 
         public override void Trigger1()
         {
-
+            
         }
 
         public override void Trigger2()

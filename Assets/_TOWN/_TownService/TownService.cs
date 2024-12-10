@@ -144,7 +144,7 @@ namespace Town
 
         public void OnSceneReLoad()
         {
-            Debug.Log("OnSceneReLoad TownController");
+            Debug.Log("OnSceneReLoad TownController" + townModel.currTown);
         }
     }
 

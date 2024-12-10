@@ -69,41 +69,29 @@ namespace Quest
         }
         public void On_QRoomSceneStart(QuestNames questName)
         {
-
-            if(qRoomController.roomNo != -1)
-            {
+            GetRef(); 
+            //if(qRoomController.allQNodeAllRoomModel.Count == 0)
+            //{
                 this.questName = questName;
                 CurioService.Instance.InitCurioService();
                 InitQRooms(questName);
-            }
-            else
-            {
-
-            }
+            // }         
             OnQRoomStart?.Invoke(questName);
         }
-
 
         public void On_QuestSceneEnd(QuestNames questName)
         {
             OnQRoomEnd?.Invoke(questName);
         }
 
-        public void QRoomLoad(LandscapeNames landscapeName, Nodes nodes)
-        {
-            this.landscapeName = landscapeName; 
-            this.nodes = nodes;
-
-        }
-       
-        void InitQRooms(QuestNames questName)   // On 1st room Enter 
+        public void InitQRooms(QuestNames questName)   // On 1st room Enter 
         {
             qNodeAllRoomSO = 
                       allQNodeSO.GetQuestSceneSO(questName);
             LandscapeService.Instance.On_LandscapeEnter(qNodeAllRoomSO.landscape); 
             ChangeRoomSprites(questName, 1);
             qRoomController= GetComponent<QRoomController>();   
-            qRoomController.InitQRoomController(qNodeAllRoomSO);
+            qRoomController.InitQRoom(qNodeAllRoomSO);
             On_QRoomStateChg(QRoomState.Prep);
         }
         public void On_RoomChg(QuestNames questName, int roomNo)
@@ -119,8 +107,6 @@ namespace Quest
                              allQNodeSO.GetQuestSceneSO(questName);
 
             bgSprite.sprite = allRoomSO.bGSprite;
-            
-
             bgSprite.sortingOrder = 0;
             fgSprite.sortingOrder = 5;
             QRoomSO qRoomSO = 
@@ -201,13 +187,13 @@ namespace Quest
 
 
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                On_QRoomSceneStart(QuestNames.RatInfestation);
-            }
+        //private void Update()
+        //{
+        //    if (Input.GetKeyDown(KeyCode.E))
+        //    {
+        //        On_QRoomSceneStart(QuestNames.RatInfestation);
+        //    }
 
-        }
+        //}
     }
 }

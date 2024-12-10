@@ -410,11 +410,12 @@ namespace Town
 
         public bool ChkSceneReLoad()
         {
-            return allBuildModel.Count > 0;
+            return SceneMgmtService.Instance.sceneMgmtController.townLoadedCount > 0;
         }
 
         public void OnSceneReLoad()
         {
+            InitNGBuildIntService(); 
             Debug.Log("scene reloaded BuildingIntService"); 
         }
     }

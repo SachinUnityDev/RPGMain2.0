@@ -198,7 +198,7 @@ namespace Common
 
         public void OnSceneReLoad()
         {
-            Debug.Log("Scene Reload Bestiary"); 
+            Debug.Log("Scene Reload Bestiary" + allRegBestiaryInGameModels.Count); 
         }
     }
 }

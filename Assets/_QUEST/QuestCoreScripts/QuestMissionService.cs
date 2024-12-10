@@ -43,6 +43,8 @@ namespace Quest
         public List<QuestBase> allQuestBase = new List<QuestBase>();
         [SerializeField] int questBaseCount = 0;
 
+        [Header(" Current Quest")]
+        public QuestModel questModel; 
         public ServicePath servicePath => ServicePath.QuestMissionService; 
         void Start()
         {
@@ -216,7 +218,7 @@ namespace Quest
         public void On_QuestStart(QuestNames questName)
         {   
             ChgStateOfQuest(questName, QuestState.UnLocked);
-            QuestModel questModel = GetQuestModel(questName);
+            questModel = GetQuestModel(questName);
            
             QuestBase qBase = GetQuestBase(questName);
             qBase.QuestStarted();

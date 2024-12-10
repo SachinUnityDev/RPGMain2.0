@@ -17,7 +17,8 @@ namespace Quest
 
         public int roomNo;
         public bool hasQPrep = false;
-
+        public bool isCurrentRoom = false;  
+        public int currentInteract = 0; 
 
         public int upRoomNo = -1;
         public int downRoomNo = -1;

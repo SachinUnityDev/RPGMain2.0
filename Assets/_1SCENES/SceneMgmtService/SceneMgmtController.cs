@@ -23,7 +23,14 @@ namespace Common
 
         [Header(" Scene ref")]
         [SerializeField] GameScene newScene;
-        [SerializeField] GameScene lastScene; 
+        [SerializeField] GameScene lastScene;
+
+        [Header(" SCENE COUNT")]
+        public int townLoadedCount =0;
+        public int questLoadedCount = 0;
+        public int combatLoadedCount = 0;
+        public int jobsLoadedCount = 0;
+        public int mapLoadedCount =0 ;
 
         private void OnEnable()
         {
@@ -96,13 +103,43 @@ namespace Common
             {
                 if(next.isLoaded)
                 {   
-                    if (next.name == "QUEST")
-                        QRoomService.Instance.On_QRoomSceneStart(QuestNames.RatInfestation);
+                    //if (next.name == "QUEST")
+                    //    QRoomService.Instance.On_QRoomSceneStart(QuestNames.RatInfestation);
 
                     sceneTransitView = sceneTransitGO.GetComponent<SceneTransitView>();                
                     sceneTransitView.EndAnim();
                     sceneTransitStarted = false;
                 }
+            }
+        }
+
+
+       public void UpdateSceneCount(GameScene gameScene)
+        {
+            switch (gameScene)
+            {
+                case GameScene.INTRO:
+                    townLoadedCount++; 
+                    break;
+                case GameScene.TOWN:
+                    townLoadedCount++;
+                    break;
+                case GameScene.QUEST:
+                    questLoadedCount++;
+                    break;
+                case GameScene.COMBAT:
+                    combatLoadedCount++;
+                    break;
+                case GameScene.CORE:
+                    break;
+                case GameScene.CAMP:
+                    break;
+                case GameScene.JOBS:
+                    jobsLoadedCount++;
+                    break;
+                case GameScene.MAPINTERACT:
+                    mapLoadedCount++; 
+                    break;
             }
         }
 

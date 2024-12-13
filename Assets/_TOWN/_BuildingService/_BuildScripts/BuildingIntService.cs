@@ -60,7 +60,6 @@ namespace Town
             stableController = GetComponent<StableController>();
             thieveController = GetComponent<ThievesGuildController>();
             cityHallController = GetComponent<CityHallController>();
-
         }
 
         public void InitNGBuildIntService()

@@ -58,7 +58,8 @@ namespace Town
                 }
                 else
                 {
-                    LoadState();
+                    Debug.LogError("Town Model already saved");    
+                   // LoadState();
                 }
             }
             else
@@ -77,12 +78,7 @@ namespace Town
         {
             // browse thru all files in the folder and load them
             // as char Models 
-            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);
-            if (ChkSceneReLoad())
-            {
-                OnSceneReLoad();
-                return; 
-            }
+            string path = SaveService.Instance.GetCurrSlotServicePath(servicePath);         
 
             if (SaveService.Instance.DirectoryExists(path))
             {
@@ -102,7 +98,6 @@ namespace Town
                 Debug.LogError("Service Directory missing");
             }
         }
-
 
         public void ClearState()
         {
@@ -137,14 +132,20 @@ namespace Town
             }
         }
 
-        public bool ChkSceneReLoad()
-        {
-            return townModel != null;
-        }
+        //public bool ChkSceneReLoad()
+        //{
+        //    return townModel != null;
+        //}
 
         public void OnSceneReLoad()
-        {
-            Debug.Log("OnSceneReLoad TownController" + townModel.currTown);
+        {// DDOL
+
+            if(townModel == null)
+                            {
+                Debug.LogError("Town Model is null");
+                return;
+            }
+            SetTownNGetChars(); 
         }
     }
 

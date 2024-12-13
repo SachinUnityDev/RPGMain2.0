@@ -32,47 +32,96 @@ namespace Common
         {   
             if (GameService.Instance.gameState == GameState.OnNewGameStart)
             {
-                TownService.Instance.Init();  // new game
-                BuildingIntService.Instance.InitNGBuildIntService();
-                EncounterService.Instance.EncounterInit();
-                CalendarService.Instance.Init();
-
-                CharService.Instance.Init();
-                CharStatesService.Instance.Init();
-                RosterService.Instance.Init();
-                UIControlServiceGeneral.Instance.InitUIGeneral();
-
-                EcoService.Instance.InitEcoServices();
-                BarkService.Instance.InitBarkService();
-                JobService.Instance.JobServiceInit();
-                BestiaryService.Instance.Init();
-                ItemService.Instance.Init();
-                TradeService.Instance.InitTradeService();// new game 
-                FameService.Instance.Init();
-                LevelService.Instance.Init();
-                WeaponService.Instance.Init();
-                ArmorService.Instance.Init();
-
-                OnTownEnter?.Invoke(LocationName.Nekkisari);
-                QuestMissionService.Instance.InitQuestMission();
-                LandscapeService.Instance.InitLandscape();
-                MapService.Instance.Init(); // to be put below questmission
-                LootService.Instance.InitLootService();
-                if (GameService.Instance.gameController.isQuickStart)
-                    WelcomeService.Instance.On_QuickStart();
-                else
-                    WelcomeService.Instance.InitWelcome();
-
-
-                if (GameService.Instance.gameController.isQuickStart)
+                if(SceneMgmtService.Instance.sceneMgmtController.townLoadedCount <= 1)
                 {
-                    CharService.Instance.GetAllyController(CharNames.Abbas).charModel.classType
-                        = GameService.Instance.currGameModel.abbasClassType;
+
+                    TownService.Instance.Init();  // new game
+                    BuildingIntService.Instance.InitNGBuildIntService();
+                    EncounterService.Instance.EncounterInit();
+                    CalendarService.Instance.Init();
+
+                    CharService.Instance.Init();
+                    CharStatesService.Instance.Init();
+                    RosterService.Instance.Init();
+                    UIControlServiceGeneral.Instance.InitUIGeneral();
+
+                    EcoService.Instance.InitEcoServices();
+                    BarkService.Instance.InitBarkService();
+                    JobService.Instance.JobServiceInit();
+                    BestiaryService.Instance.Init();
+                    ItemService.Instance.Init();
+                    TradeService.Instance.InitTradeService();// new game 
+                    FameService.Instance.Init();
+                    LevelService.Instance.Init();
+                    WeaponService.Instance.Init();
+                    ArmorService.Instance.Init();
+
+                    OnTownEnter?.Invoke(LocationName.Nekkisari);
+                    QuestMissionService.Instance.InitQuestMission();
+                    LandscapeService.Instance.InitLandscape();
+                    MapService.Instance.Init(); // to be put below questmission
+                    LootService.Instance.InitLootService();
+                    if (GameService.Instance.gameController.isQuickStart)
+                        WelcomeService.Instance.On_QuickStart();
+                    else
+                        WelcomeService.Instance.InitWelcome();
+
+
+                    if (GameService.Instance.gameController.isQuickStart)
+                    {
+                        CharService.Instance.GetAllyController(CharNames.Abbas).charModel.classType
+                            = GameService.Instance.currGameModel.abbasClassType;
+
+                        // Set job NAME SELECT HERE 
+                    }
+                    SkillService.Instance.Init();
+                    Set_GameState(GameState.OnNewGameStartComplete);
+                }
+                if (SceneMgmtService.Instance.sceneMgmtController.townLoadedCount <= 1)
+                {
+                    TownService.Instance.Init();  // new game
+                    BuildingIntService.Instance.InitNGBuildIntService();
+                    EncounterService.Instance.EncounterInit();
+                    CalendarService.Instance.Init();
+
+                    CharService.Instance.Init();
+                    CharStatesService.Instance.Init();
+                    RosterService.Instance.Init();
+                    UIControlServiceGeneral.Instance.InitUIGeneral();
+
+                    EcoService.Instance.InitEcoServices();
+                    BarkService.Instance.InitBarkService();
+                    JobService.Instance.JobServiceInit();
+                    BestiaryService.Instance.Init();
+                    ItemService.Instance.Init();
+                    TradeService.Instance.InitTradeService();// new game 
+                    FameService.Instance.Init();
+                    LevelService.Instance.Init();
+                    WeaponService.Instance.Init();
+                    ArmorService.Instance.Init();
+
+                    OnTownEnter?.Invoke(LocationName.Nekkisari);
+                    QuestMissionService.Instance.InitQuestMission();
+                    LandscapeService.Instance.InitLandscape();
+                    MapService.Instance.Init(); // to be put below questmission
+                    LootService.Instance.InitLootService();
+                    //if (GameService.Instance.gameController.isQuickStart)
+                    //    WelcomeService.Instance.On_QuickStart();
+                    //else
+                    //    WelcomeService.Instance.InitWelcome();
+
+
+                    //if (GameService.Instance.gameController.isQuickStart)
+                    //{
+                    //    CharService.Instance.GetAllyController(CharNames.Abbas).charModel.classType
+                    //        = GameService.Instance.currGameModel.abbasClassType;
+
+                    //    // Set job NAME SELECT HERE 
+                    //}
+                    SkillService.Instance.Init();
                     
-                    // Set job NAME SELECT HERE 
-                }         
-               SkillService.Instance.Init();
-                Set_GameState(GameState.OnNewGameStartComplete);
+                }
+
             }
             if(GameService.Instance.gameState == GameState.OnLoadGameStart)
             {
